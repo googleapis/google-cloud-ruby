@@ -101,7 +101,7 @@ module Gcloud
         ##
         # View the access rules as an array of hashes.
         def to_a
-          @gapi.access.map &:to_h
+          @gapi.access.map(&:to_h)
         end
 
         ##
@@ -488,7 +488,8 @@ module Gcloud
           # If scope is view, make sure value is in the right format
           value = validate_view(value) if scope == :view
           # Remove any rules of this role, scope, and value
-          @gapi.access.reject!(&find_by_role_and_scope_and_value(role, scope, value))
+          @gapi.access.reject!(
+            &find_by_role_and_scope_and_value(role, scope, value))
         end
 
         # @private
@@ -500,24 +501,37 @@ module Gcloud
           # If scope is view, make sure value is in the right format
           value = validate_view(value) if scope == :view
           # Detect any rules of this role, scope, and value
-          !(!@gapi.access.detect(&find_by_role_and_scope_and_value(role, scope, value)))
+          !(!@gapi.access.detect(
+            &find_by_role_and_scope_and_value(role, scope, value)))
         end
 
         # @private
         def find_by_role_and_scope_and_value role, scope, value
           if scope == :view
-            ->(a) { h = a.to_h; h[:role] == role && h[scope].to_h == value.to_h }
+            lambda do |a|
+              h = a.to_h
+              h[:role] == role && h[scope].to_h == value.to_h
+            end
           else
-            ->(a) { h = a.to_h; h[:role] == role && h[scope] == value }
+            lambda do |a|
+              h = a.to_h
+              h[:role] == role && h[scope] == value
+            end
           end
         end
 
         # @private
         def find_by_scope_and_value scope, value
           if scope == :view
-            ->(a) { h = a.to_h; h[scope].to_h == value.to_h }
+            lambda do |a|
+              h = a.to_h
+              h[scope].to_h == value.to_h
+            end
           else
-            ->(a) { h = a.to_h; h[scope] == value }
+            lambda do |a|
+              h = a.to_h
+              h[scope] == value
+            end
           end
         end
       end

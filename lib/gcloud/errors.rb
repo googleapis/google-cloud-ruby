@@ -20,12 +20,12 @@ module Gcloud
     # @private Create a new error object from a client error
     def self.from_error error
       klass = if error.respond_to? :code
-        grpc_error_class_for error.code
-      elsif error.respond_to? :status_code
-        gapi_error_class_for error.status_code
-      else
-        self.class
-      end
+                grpc_error_class_for error.code
+              elsif error.respond_to? :status_code
+                gapi_error_class_for error.status_code
+              else
+                self.class
+              end
       klass.new error.message
     end
 
@@ -44,14 +44,14 @@ module Gcloud
     # @private Identify the subclass for a Google API Client error
     def self.gapi_error_class_for http_status_code
       # The http status codes mapped to their error classes.
-      { 400 => InvalidArgumentError, #FailedPreconditionError/OutOfRangeError
+      { 400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
         401 => UnauthenticatedError,
         403 => PermissionDeniedError,
         404 => NotFoundError,
-        409 => AlreadyExistsError, #AbortedError
+        409 => AlreadyExistsError, # AbortedError
         429 => ResourceExhaustedError,
         499 => CanceledError,
-        500 => InternalError, #UnknownError/DataLossError
+        500 => InternalError, # UnknownError/DataLossError
         501 => UnimplementedError,
         503 => UnavailableError,
         504 => DeadlineExceededError

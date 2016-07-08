@@ -709,9 +709,8 @@ module Gcloud
         # Make sure any access changes are saved
         def check_for_mutated_access!
           return if @original_access_hashes.nil?
-          if @original_access_hashes != @gapi.access.map(&:to_h)
-            patch_gapi! :access
-          end
+          return if @original_access_hashes == @gapi.access.map(&:to_h)
+          patch_gapi! :access
         end
 
         def to_gapi

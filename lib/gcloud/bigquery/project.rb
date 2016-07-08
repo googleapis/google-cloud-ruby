@@ -329,7 +329,7 @@ module Gcloud
           updater.check_for_mutated_access!
         end
 
-        gapi = service.insert_dataset dataset_id, new_ds
+        gapi = service.insert_dataset new_ds
         Dataset.from_gapi gapi, service
       end
 

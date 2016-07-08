@@ -145,7 +145,8 @@ module Gcloud
         ##
         # @private New Job::List from a Google API Client
         # Google::Apis::BigqueryV2::JobList object.
-        def self.from_gapi gapi_list, service, hidden = nil, max = nil, filter = nil
+        def self.from_gapi gapi_list, service, hidden = nil, max = nil,
+                           filter = nil
           jobs = List.new(Array(gapi_list.jobs).map do |gapi_object|
             Job.from_gapi gapi_object, service
           end)

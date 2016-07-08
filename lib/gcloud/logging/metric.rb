@@ -104,7 +104,7 @@ module Gcloud
       def save
         ensure_service!
         @grpc = service.update_metric name, description, filter
-        return true
+        true
       end
 
       ##
@@ -124,7 +124,7 @@ module Gcloud
       def reload!
         ensure_service!
         @grpc = service.get_metric name
-        return true
+        true
       end
       alias_method :refresh!, :reload!
 
@@ -144,7 +144,7 @@ module Gcloud
       def delete
         ensure_service!
         service.delete_metric name
-        return true
+        true
       end
 
       ##

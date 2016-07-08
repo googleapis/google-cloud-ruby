@@ -383,7 +383,7 @@ module Gcloud
       #
       def delete
         ensure_service!
-        gapi = service.delete_table dataset_id, table_id
+        service.delete_table dataset_id, table_id
         true
       end
 

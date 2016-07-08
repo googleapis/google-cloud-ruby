@@ -47,7 +47,7 @@ module Gcloud
       end
 
       def fields= new_fields
-        @gapi.fields = Array(new_fields).map { |f| f.to_gapi }
+        @gapi.fields = Array(new_fields).map(&:to_gapi)
         @fields = @gapi.fields.map { |f| Field.from_gapi f }
       end
 
@@ -76,10 +76,9 @@ module Gcloud
       def check_for_mutated_schema!
         return if frozen?
         return if @gapi.frozen?
-        if @fields
-          gapi_fields = Array(@fields).map { |f| f.to_gapi }
-          @gapi.update! fields: gapi_fields
-        end
+        return if @fields.nil?
+        gapi_fields = Array(@fields).map(&:to_gapi)
+        @gapi.update! fields: gapi_fields
       end
 
       # @private
@@ -230,9 +229,9 @@ module Gcloud
       def add_field name, type, nested_fields, description: nil,
                     mode: :nullable
         # Remove any existing field of this name
-        self.fields.reject! { |f| f.name == name }
-        self.fields << Field.new(name, type, description: description,
-                                 mode: mode, fields: nested_fields)
+        fields.reject! { |f| f.name == name }
+        fields << Field.new(name, type, description: description,
+                                        mode: mode, fields: nested_fields)
       end
 
       class Field
@@ -259,6 +258,7 @@ module Gcloud
         def name
           @gapi.name
         end
+
         def name= new_name
           @gapi.update! name: new_name
         end
@@ -266,6 +266,7 @@ module Gcloud
         def type
           @gapi.type
         end
+
         def type= new_type
           @gapi.update! type: verify_type(new_type)
         end
@@ -273,6 +274,7 @@ module Gcloud
         def description
           @gapi.description
         end
+
         def description= new_description
           @gapi.update! description: new_description
         end
@@ -280,6 +282,7 @@ module Gcloud
         def mode
           @gapi.mode
         end
+
         def mode= new_mode
           @gapi.update! mode: verify_mode(new_mode)
         end
@@ -287,6 +290,7 @@ module Gcloud
         def fields
           @fields ||= Array(@gapi.fields).map { |f| Field.from_gapi f }
         end
+
         def fields= new_fields
           @fields = new_fields
         end
@@ -295,8 +299,8 @@ module Gcloud
         # @private Make sure any fields are saved.
         def check_for_changed_fields!
           return if frozen?
-          fields.each { |f| f.check_for_changed_fields! }
-          gapi_fields = Array(fields).map { |f| f.to_gapi }
+          fields.each(&:check_for_changed_fields!)
+          gapi_fields = Array(fields).map(&:to_gapi)
           gapi_fields = nil if gapi_fields.empty?
           @gapi.update! fields: gapi_fields
         end

@@ -175,7 +175,7 @@ module Gcloud
       def delete
         ensure_service!
         service.delete_subscription name
-        return true
+        true
       end
 
       ##
@@ -384,7 +384,7 @@ module Gcloud
         ack_ids = coerce_ack_ids messages
         ensure_service!
         service.modify_ack_deadline name, ack_ids, new_deadline
-        return true
+        true
       end
 
       ##

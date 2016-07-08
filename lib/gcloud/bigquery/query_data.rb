@@ -66,7 +66,7 @@ module Gcloud
       ##
       # The name of the columns in the data.
       def headers
-        fields.map { |f| f.name }
+        fields.map(&:name)
       end
 
       ##

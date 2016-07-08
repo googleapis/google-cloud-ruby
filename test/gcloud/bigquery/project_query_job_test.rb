@@ -100,6 +100,7 @@ describe Gcloud::Bigquery::Project, :query_job, :mock_bigquery do
 
     job_gapi = query_job_gapi(query)
     job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: dataset.project_id,
       dataset_id: dataset.dataset_id
     )
     mock.expect :insert_job, job_gapi, [project, job_gapi]

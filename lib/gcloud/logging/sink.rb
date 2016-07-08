@@ -193,7 +193,7 @@ module Gcloud
       def delete
         ensure_service!
         service.delete_sink name
-        return true
+        true
       end
 
       ##

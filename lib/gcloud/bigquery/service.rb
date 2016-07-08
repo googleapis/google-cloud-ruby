@@ -58,8 +58,8 @@ module Gcloud
       # been granted the READER dataset role.
       def list_datasets options = {}
         service.list_datasets \
-        @project, all: options[:all], max_results: options[:max],
-                  page_token: options[:token]
+          @project, all: options[:all], max_results: options[:max],
+                    page_token: options[:token]
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
       end
@@ -74,7 +74,7 @@ module Gcloud
 
       ##
       # Creates a new empty dataset.
-      def insert_dataset dataset_id, new_dataset_gapi
+      def insert_dataset new_dataset_gapi
         service.insert_dataset @project, new_dataset_gapi
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
@@ -105,7 +105,8 @@ module Gcloud
       # Lists all tables in the specified dataset.
       # Requires the READER dataset role.
       def list_tables dataset_id, options = {}
-        service.list_tables @project, dataset_id, max_results: options[:max], page_token: options[:token]
+        service.list_tables @project, dataset_id, max_results: options[:max],
+                                                  page_token: options[:token]
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
       end
@@ -168,13 +169,14 @@ module Gcloud
         insert_rows = Array(rows).map do |row|
           Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
             insert_id: Digest::MD5.base64digest(row.inspect),
-            json: row # Hash[my_hash.map{|(k,v)| [k.to_s,v]}] for Hash<String,Object>
+            # Hash[row.map{|(k,v)| [k.to_s,v]}] for Hash<String,Object>
+            json: row
           )
         end
         insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
           rows: insert_rows,
           ignore_unknown_values: options[:ignore_unknown],
-          skip_invalid_rows: options[:skip_invalid],
+          skip_invalid_rows: options[:skip_invalid]
         )
 
         service.insert_all_table_data @project, dataset_id, table_id, insert_req
@@ -244,74 +246,23 @@ module Gcloud
       end
 
       def extract_table table, storage_files, options = {}
-        service.insert_job @project, extract_table_config(table, storage_files, options)
+        service.insert_job \
+          @project, extract_table_config(table, storage_files, options)
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
       end
 
-      def load_table_gs_url dataset_id, table_id, storage_url, options = {}
-        #insert_job(project_id, job_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil) {|result, err| ... } ⇒ Google::Apis::BigqueryV2::Job
-        load_opts = {
-          destination_table: Google::Apis::BigqueryV2::TableReference.new(
-            project_id: @project, dataset_id: dataset_id, table_id: table_id),
-          source_uris: Array(storage_url),
-          create_disposition: create_disposition(options[:create]),
-          write_disposition: write_disposition(options[:write]),
-          source_format: source_format(storage_url, options[:format]),
-          projection_fields: projection_fields(options[:projection_fields]),
-          allow_jagged_rows: options[:jagged_rows],
-          allow_quoted_newlines: options[:quoted_newlines],
-          encoding: options[:encoding],
-          field_delimiter: options[:delimiter],
-          ignore_unknown_values: options[:ignore_unknown],
-          max_bad_records: options[:max_bad_records],
-          quote: options[:quote],
-          schema: options[:schema],
-          skip_leading_rows: options[:skip_leading]
-        }.delete_if { |_, v| v.nil? }
-        insert_job = API::Job.new(
-          configuration: API::JobConfiguration.new(
-            load: API::JobConfigurationLoad.new(load_opts),
-            dry_run: options[:dryrun]
-          )
-        )
-
-        service.insert_job @project, insert_job
+      def load_table_gs_url dataset_id, table_id, url, options = {}
+        service.insert_job \
+          @project, load_table_url_config(dataset_id, table_id, url, options)
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
       end
 
       def load_table_file dataset_id, table_id, file, options = {}
-        #insert_job(project_id, job_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil) {|result, err| ... } ⇒ Google::Apis::BigqueryV2::Job
-
-        path = Pathname(file).to_path
-        load_opts = {
-          destination_table: Google::Apis::BigqueryV2::TableReference.new(
-            project_id: @project, dataset_id: dataset_id, table_id: table_id),
-          create_disposition: create_disposition(options[:create]),
-          write_disposition: write_disposition(options[:write]),
-          source_format: source_format(path, options[:format]),
-          projection_fields: projection_fields(options[:projection_fields]),
-          allow_jagged_rows: options[:jagged_rows],
-          allow_quoted_newlines: options[:quoted_newlines],
-          encoding: options[:encoding],
-          field_delimiter: options[:delimiter],
-          ignore_unknown_values: options[:ignore_unknown],
-          max_bad_records: options[:max_bad_records],
-          quote: options[:quote],
-          schema: options[:schema],
-          skip_leading_rows: options[:skip_leading]
-        }.delete_if { |_, v| v.nil? }
-        insert_job = API::Job.new(
-          configuration: API::JobConfiguration.new(
-            load: API::JobConfigurationLoad.new(load_opts),
-            dry_run: options[:dryrun]
-          )
-        )
-
         service.insert_job \
-          @project, insert_job, upload_source: file,
-                                content_type: mime_type_for(file)
+          @project, load_table_file_config(dataset_id, table_id, file, options),
+          upload_source: file, content_type: mime_type_for(file)
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)
       end
@@ -327,9 +278,11 @@ module Gcloud
         unless m
           fail ArgumentError, "unable to identify table from #{str.inspect}"
         end
-        str_table_ref_hash = { project_id: m["prj"],
-                               dataset_id: m["dts"],
-                               table_id:   m["tbl"] }.delete_if { |_, v| v.nil? }
+        str_table_ref_hash = {
+          project_id: m["prj"],
+          dataset_id: m["dts"],
+          table_id:   m["tbl"]
+        }.delete_if { |_, v| v.nil? }
         new_table_ref_hash = default_table_ref.to_h.merge str_table_ref_hash
         Google::Apis::BigqueryV2::TableReference.new new_table_ref_hash
       end
@@ -340,28 +293,91 @@ module Gcloud
 
       protected
 
+      def table_ref_from tbl
+        return nil if tbl.nil?
+        API::TableReference.new(
+          project_id: tbl.project_id,
+          dataset_id: tbl.dataset_id,
+          table_id: tbl.table_id
+        )
+      end
+
+      def dataset_ref_from dts, pjt = nil
+        return nil if dts.nil?
+        if dts.respond_to? :dataset_id
+          API::DatasetReference.new(
+            project_id: (pjt || dts.project_id || @project),
+            dataset_id: dts.dataset_id
+          )
+        else
+          API::DatasetReference.new(
+            project_id: (pjt || @project),
+            dataset_id: dts
+          )
+        end
+      end
+
+      def load_table_file_opts dataset_id, table_id, file, options = {}
+        path = Pathname(file).to_path
+        {
+          destination_table: Google::Apis::BigqueryV2::TableReference.new(
+            project_id: @project, dataset_id: dataset_id, table_id: table_id),
+          create_disposition: create_disposition(options[:create]),
+          write_disposition: write_disposition(options[:write]),
+          source_format: source_format(path, options[:format]),
+          projection_fields: projection_fields(options[:projection_fields]),
+          allow_jagged_rows: options[:jagged_rows],
+          allow_quoted_newlines: options[:quoted_newlines],
+          encoding: options[:encoding], field_delimiter: options[:delimiter],
+          ignore_unknown_values: options[:ignore_unknown],
+          max_bad_records: options[:max_bad_records], quote: options[:quote],
+          schema: options[:schema], skip_leading_rows: options[:skip_leading]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def load_table_file_config dataset_id, table_id, file, options = {}
+        load_opts = load_table_file_opts dataset_id, table_id, file, options
+        API::Job.new(
+          configuration: API::JobConfiguration.new(
+            load: API::JobConfigurationLoad.new(load_opts),
+            dry_run: options[:dryrun]
+          )
+        )
+      end
+
+      def load_table_url_opts dataset_id, table_id, url, options = {}
+        {
+          destination_table: Google::Apis::BigqueryV2::TableReference.new(
+            project_id: @project, dataset_id: dataset_id, table_id: table_id),
+          source_uris: Array(url),
+          create_disposition: create_disposition(options[:create]),
+          write_disposition: write_disposition(options[:write]),
+          source_format: source_format(url, options[:format]),
+          projection_fields: projection_fields(options[:projection_fields]),
+          allow_jagged_rows: options[:jagged_rows],
+          allow_quoted_newlines: options[:quoted_newlines],
+          encoding: options[:encoding], field_delimiter: options[:delimiter],
+          ignore_unknown_values: options[:ignore_unknown],
+          max_bad_records: options[:max_bad_records], quote: options[:quote],
+          schema: options[:schema], skip_leading_rows: options[:skip_leading]
+        }.delete_if { |_, v| v.nil? }
+      end
+
+      def load_table_url_config dataset_id, table_id, url, options = {}
+        load_opts = load_table_url_opts dataset_id, table_id, url, options
+        API::Job.new(
+          configuration: API::JobConfiguration.new(
+            load: API::JobConfigurationLoad.new(load_opts),
+            dry_run: options[:dryrun]
+          )
+        )
+      end
+
       ##
       # Job description for query job
       def query_table_config query, options
-        dest_table = nil
-        if options[:table]
-          dest_table = API::TableReference.new(
-            project_id: options[:table].project_id,
-            dataset_id: options[:table].dataset_id,
-            table_id: options[:table].table_id
-          )
-        end
-        default_dataset = nil
-        if dataset = options[:dataset]
-          if dataset.respond_to? :dataset_id
-            default_dataset = API::DatasetReference.new(
-              project_id: dataset.project_id,
-              dataset_id: dataset.dataset_id
-            )
-          else
-            default_dataset = API::DatasetReference.new dataset_id: dataset
-          end
-        end
+        dest_table = table_ref_from options[:table]
+        default_dataset = dataset_ref_from options[:dataset]
         API::Job.new(
           configuration: API::JobConfiguration.new(
             query: API::JobConfigurationQuery.new(
@@ -381,11 +397,7 @@ module Gcloud
       end
 
       def query_config query, options = {}
-        dataset_config = nil
-        dataset_config = API::DatasetReference.new(
-          dataset_id: options[:dataset],
-          project_id: options[:project] || @project
-        ) if options[:dataset]
+        dataset_config = dataset_ref_from options[:dataset], options[:project]
 
         API::QueryRequest.new(
           query: query,
@@ -466,7 +478,7 @@ module Gcloud
                 "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
                 "avro" => "AVRO",
                 "datastore" => "DATASTORE_BACKUP",
-                "datastore_backup" => "DATASTORE_BACKUP"}[format.to_s.downcase]
+                "datastore_backup" => "DATASTORE_BACKUP" }[format.to_s.downcase]
         return val unless val.nil?
         return nil if path.nil?
         return "CSV" if path.end_with? ".csv"

@@ -175,7 +175,7 @@ module Gcloud
       # Represents Table Data as a list of positional values (array of arrays).
       # No type conversion is made, e.g. numbers are formatted as strings.
       def raw
-        Array(gapi.rows).map { |row| row.f.map { |f| f.v } }
+        Array(gapi.rows).map { |row| row.f.map(&:v) }
       end
 
       ##

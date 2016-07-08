@@ -265,7 +265,7 @@ module Gcloud
         service.write_entries Array(entries).map(&:to_grpc),
                               log_name: log_name, resource: resource,
                               labels: labels
-        return true
+        true
       end
 
       ##
@@ -322,7 +322,7 @@ module Gcloud
       def delete_log name
         ensure_service!
         service.delete_log name
-        return true
+        true
       end
 
       ##

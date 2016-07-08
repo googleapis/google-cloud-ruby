@@ -888,8 +888,8 @@ module Gcloud
           @schema ||= Schema.from_gapi @gapi.schema
           if block_given?
             if replace
-              empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
-              @schema = Schema.from_gapi empty_schema
+              @schema = Schema.from_gapi \
+                Google::Apis::BigqueryV2::TableSchema.new(fields: [])
             end
             yield @schema
             check_for_mutated_schema!
@@ -903,10 +903,9 @@ module Gcloud
         def check_for_mutated_schema!
           return if @schema.nil?
           @schema.check_for_mutated_schema!
-          if @schema.changed?
-            @gapi.schema = @schema.to_gapi
-            patch_gapi! :schema
-          end
+          return unless @schema.changed?
+          @gapi.schema = @schema.to_gapi
+          patch_gapi! :schema
         end
 
         def to_gapi
