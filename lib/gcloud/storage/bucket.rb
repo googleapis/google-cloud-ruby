@@ -17,7 +17,6 @@ require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
 require "gcloud/storage/bucket/cors"
 require "gcloud/storage/file"
-require "gcloud/upload"
 require "pathname"
 
 module Gcloud

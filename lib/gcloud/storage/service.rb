@@ -15,7 +15,6 @@
 
 require "gcloud/version"
 require "gcloud/backoff"
-require "gcloud/upload"
 require "google/apis/storage_v1"
 require "digest"
 require "mime/types"
