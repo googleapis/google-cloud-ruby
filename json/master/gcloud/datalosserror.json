@@ -1,1 +1,1 @@
-{"id":"gcloud/datalosserror","name":"DataLossError","title":["Gcloud","DataLossError"],"description":"<p>DataLoss indicates unrecoverable data loss or corruption.</p>","source":"lib/gcloud/errors.rb#L192","resources":[],"examples":[],"methods":[]}
+{"id":"gcloud/datalosserror","name":"DataLossError","title":["Gcloud","DataLossError"],"description":"<p>DataLoss indicates unrecoverable data loss or corruption.</p>","source":"lib/gcloud/errors.rb#L204","resources":[],"examples":[],"methods":[]}

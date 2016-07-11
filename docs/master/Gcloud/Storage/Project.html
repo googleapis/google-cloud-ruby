@@ -436,7 +436,7 @@ exist</p>
                 <div class="method">
                   <a name="create_bucket-instance_method"></a>
                   <h4>
-                    <code>create_bucket(bucket_name, acl: nil, default_acl: nil, cors: nil, location: nil, logging_bucket: nil, logging_prefix: nil, storage_class: nil, versioning: nil, website_main: nil, website_404: nil)</code>
+                    <code>create_bucket(bucket_name, acl: nil, default_acl: nil, location: nil, storage_class: nil, logging_bucket: nil, logging_prefix: nil, website_main: nil, website_404: nil, versioning: nil)</code>
                     <span>
                       <a href="#create_bucket-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -543,22 +543,6 @@ and project team members get access according to their roles.</li>
   <li><code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">public_read</code>, <code class="highlighter-rouge">publicRead</code> - File owner gets OWNER
 access, and allUsers get READER access.</li>
 </ul>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>cors</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The CORS rules for the bucket. Accepts an array of
-hashes containing the attributes specified for the <a href="https://cloud.google.com/storage/docs/json_api/v1/buckets#cors">resource
-description of
-cors</a>.</p>
 </div>
                               
                               (<tt>String</tt>)
@@ -713,24 +697,22 @@ Website
 <span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>Add CORS rules in a block:</p>
+                          <p class="example_title"><div class='inline'><p>Configure the bucket in a block:</p>
 </div></p>
                         
-                        <pre class="code"><code>require &quot;gcloud&quot;
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
 
-gcloud = Gcloud.new
-storage = gcloud.storage
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
 
-options = {
-  website_main: &quot;index.html&quot;
-  website_404: &quot;not_found.html&quot;
-}
-bucket = storage.create_bucket &quot;my-bucket&quot;, options do |c|
-  c.add_rule [&quot;http://example.org&quot;, &quot;https://example.org&quot;],
-             &quot;*&quot;,
-             response_headers: [&quot;X-My-Custom-Header&quot;],
-             max_age: 300
-end</code></pre>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_website_main'>website_main</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>index.html</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_website_404'>website_404</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>not_found.html</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_cors'>cors</span><span class='period'>.</span><span class='id identifier rubyid_add_rule'>add_rule</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.org</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://example.org</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>*</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='label'>response_headers:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X-My-Custom-Header</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                   <span class='label'>max_age:</span> <span class='int'>300</span>
+<span class='kw'>end</span></code></pre>
                       
                     
 
@@ -745,7 +727,7 @@ end</code></pre>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 29, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal current' href=''>Project</a></li><li class='toc-l1'><a class='reference internal' href='Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

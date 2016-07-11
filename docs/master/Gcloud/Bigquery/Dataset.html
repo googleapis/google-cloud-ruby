@@ -125,8 +125,6 @@ specific project.</p>
               
                 <span class='object_link'><a href="#access-instance_method" title="Gcloud::Bigquery::Dataset#access (method)">#access</a></span>
               
-                <span class='object_link'><a href="#access%3D-instance_method" title="Gcloud::Bigquery::Dataset#access= (method)">#access=</a></span>
-              
             </div>
           
             <div>
@@ -564,8 +562,7 @@ values include EU and US. The default value is US.</p>
 
                   <div class="method-description">
 
-                    <p>Retrieves the access rules for a Dataset using the Google Cloud
-Datastore API data structure of an array of hashes. The rules can be
+                    <p>Retrieves the access rules for a Dataset. The rules can be
 updated when passing a block, see <span class='object_link'><a href="Dataset/Access.html" title="Gcloud::Bigquery::Dataset::Access (class)">Access</a></span> for all the methods
 available.</p>
 
@@ -581,6 +578,15 @@ available.</p>
 
                     
 
+                    
+                      <h3 id="method-i-access-label-Returns">
+                        Returns
+                        <span><a href="#method-i-access-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Dataset/Access.html" title="Gcloud::Bigquery::Dataset::Access (class)">Gcloud::Bigquery::Dataset::Access</a></span></tt>)
+                        
+                      </p>
                     
 
                     
@@ -622,64 +628,6 @@ available.</p>
   <span class='id identifier rubyid_access'>access</span><span class='period'>.</span><span class='id identifier rubyid_add_reader_special'>add_reader_special</span> <span class='symbol'>:all</span>
   <span class='id identifier rubyid_access'>access</span><span class='period'>.</span><span class='id identifier rubyid_add_reader_view'>add_reader_view</span> <span class='id identifier rubyid_other_dataset_view_object'>other_dataset_view_object</span>
 <span class='kw'>end</span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="access=-instance_method"></a>
-                  <h4>
-                    <code>access=(new_access)</code>
-                    <span>
-                      <a href="#access=-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Sets the access rules for a Dataset using the Google Cloud Datastore API
-data structure of an array of hashes. See <a href="https://cloud.google.com/bigquery/access-control">BigQuery Access
-Control</a> for more
-information.</p>
-
-<p>This method is provided for advanced usage of managing the access rules.
-Calling <span class='object_link'><a href="#access-instance_method" title="Gcloud::Bigquery::Dataset#access (method)">#access</a></span> with a block is the preferred way to manage access
-rules.</p>
-
-
-                    
-
-                    
-
-                    
-
-                    
-                      <h3 id="method-i-access=-label-Examples">
-                        Example
-                        <span><a href="#method-i-access=-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
-<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_access'>access</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>OWNER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>specialGroup</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projectOwners</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span>
-                  <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WRITER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>specialGroup</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projectWriters</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span>
-                  <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>READER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>specialGroup</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projectReaders</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span>
-                  <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>OWNER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>userByEmail</span><span class='tstring_end'>&quot;</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>123456789-...com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rbracket'>]</span></code></pre>
                       
                     
 
@@ -788,7 +736,7 @@ Default is <code class="highlighter-rouge">false</code>.</p>
                 <div class="method">
                   <a name="create_table-instance_method"></a>
                   <h4>
-                    <code>create_table(table_id, name: nil, description: nil, schema: nil)</code>
+                    <code>create_table(table_id, name: nil, description: nil, fields: nil)</code>
                     <span>
                       <a href="#create_table-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -854,19 +802,17 @@ length is 1,024 characters.</p>
                           </dd>
                         
                           <dt>
-                            <code>schema</code>
+                            <code>fields</code>
                           </dt>
                           <dd>
                             <p>
                               
-                                <div class='inline'><p>A hash specifying fields and data types for the
-table. A block may be passed instead (see examples.) For the format of
-this hash, see the <a href="https://cloud.google.com/bigquery/docs/reference/v2/tables#resource">Tables resource
-</a>
-.</p>
+                                <div class='inline'><p>An array of Schema::Field objects
+specifying the schema’s data types for the table. The schema may also
+be configured when passing a block.</p>
 </div>
                               
-                              (<tt>Hash</tt>)
+                              (<tt>Array&lt;<span class='object_link'><a href="Schema/Field.html" title="Gcloud::Bigquery::Schema::Field (class)">Schema::Field</a></span>&gt;</tt>)
                             </p>
                           </dd>
                         
@@ -912,7 +858,31 @@ table = dataset.create_table &quot;my_table&quot;
                              description: &quot;A description of my table.&quot;</code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>You can define the table’s schema using a block.</p>
+                          <p class="example_title"><div class='inline'><p>The table’s schema fields can be passed as an argument.</p>
+</div></p>
+                        
+                        <pre class="code"><code>require &quot;gcloud&quot;
+
+gcloud = Gcloud.new
+bigquery = gcloud.bigquery
+dataset = bigquery.dataset &quot;my_dataset&quot;
+
+schema_fields = [
+  Gcloud::Bigquery::Schema::Field.new(
+    &quot;first_name&quot;, :string, mode: :required),
+  Gcloud::Bigquery::Schema::Field.new(
+    &quot;cities_lived&quot;, :record, mode: :repeated
+    fields: [
+      Gcloud::Bigquery::Schema::Field.new(
+        &quot;place&quot;, :string, mode: :required),
+      Gcloud::Bigquery::Schema::Field.new(
+        &quot;number_of_years&quot;, :integer, mode: :required),
+      ])
+]
+table = dataset.create_table &quot;my_table&quot;, fields: schema_fields</code></pre>
+                      
+                        
+                          <p class="example_title"><div class='inline'><p>Or the table’s schema can be configured with the block.</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -920,16 +890,17 @@ table = dataset.create_table &quot;my_table&quot;
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_schema'>schema</span><span class='op'>|</span>
-  <span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
-  <span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_record'>record</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities_lived</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:repeated</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_nested_schema'>nested_schema</span><span class='op'>|</span>
-    <span class='id identifier rubyid_nested_schema'>nested_schema</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>place</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
-    <span class='id identifier rubyid_nested_schema'>nested_schema</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number_of_years</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_record'>record</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities_lived</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>place</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number_of_years</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></code></pre>
                       
                         
-                          <p class="example_title"><div class='inline'><p>You can pass the table’s schema as a hash.</p>
+                          <p class="example_title"><div class='inline'><p>You can define the schema using a nested block.</p>
 </div></p>
                         
                         <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
@@ -937,34 +908,17 @@ table = dataset.create_table &quot;my_table&quot;
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_schema'>schema</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fields</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
-    <span class='lbrace'>{</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>STRING</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mode</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>REQUIRED</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rbrace'>}</span><span class='comma'>,</span>
-    <span class='lbrace'>{</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities_lived</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>RECORD</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mode</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>REPEATED</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fields</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span>
-        <span class='lbrace'>{</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>place</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>STRING</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mode</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>REQUIRED</span><span class='tstring_end'>&quot;</span></span>
-        <span class='rbrace'>}</span><span class='comma'>,</span>
-        <span class='lbrace'>{</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number_of_years</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTEGER</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mode</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>REQUIRED</span><span class='tstring_end'>&quot;</span></span>
-        <span class='rbrace'>}</span>
-      <span class='rbracket'>]</span>
-    <span class='rbrace'>}</span>
-  <span class='rbracket'>]</span>
-<span class='rbrace'>}</span>
-<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>schema:</span> <span class='id identifier rubyid_schema'>schema</span></code></pre>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A description of my table.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_record'>record</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities_lived</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:repeated</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+      <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>place</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+      <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number_of_years</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
                       
                     
 
@@ -1662,7 +1616,7 @@ caching</a>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 29, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../Bigquery.html'>BigQuery</a></li><li class='toc-l1'><a class='reference internal' href='Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal current' href=''>Dataset</a></li><li class='toc-l1'><a class='reference internal' href='Job.html'>Job</a></li><li class='toc-l1'><a class='reference internal' href='Table.html'>Table</a></li><li class='toc-l0'><a class='reference internal' href='../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

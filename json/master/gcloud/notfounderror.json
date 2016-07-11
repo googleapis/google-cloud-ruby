@@ -1,1 +1,1 @@
-{"id":"gcloud/notfounderror","name":"NotFoundError","title":["Gcloud","NotFoundError"],"description":"<p>NotFound means some requested entity (e.g., file or directory) was\nnot found.</p>","source":"lib/gcloud/errors.rb#L84","resources":[],"examples":[],"methods":[]}
+{"id":"gcloud/notfounderror","name":"NotFoundError","title":["Gcloud","NotFoundError"],"description":"<p>NotFound means some requested entity (e.g., file or directory) was\nnot found.</p>","source":"lib/gcloud/errors.rb#L96","resources":[],"examples":[],"methods":[]}

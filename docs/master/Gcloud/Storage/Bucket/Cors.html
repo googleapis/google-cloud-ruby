@@ -78,8 +78,7 @@
           <h1 id="bucket-cors">Bucket Cors</h1>
 
 <p>A special-case Array for managing the website CORS rules for a bucket.
-Accessed via a block argument to <span class='object_link'><a href="../Project.html#create_bucket-instance_method" title="Gcloud::Storage::Project#create_bucket (method)">Project#create_bucket</a></span>, <span class='object_link'><a href="../Bucket.html#cors-instance_method" title="Gcloud::Storage::Bucket#cors (method)">#cors</a></span>,
-or <span class='object_link'><a href="../Bucket.html#update-instance_method" title="Gcloud::Storage::Bucket#update (method)">#update</a></span>.</p>
+Accessed via <span class='object_link'><a href="../Bucket.html#cors-instance_method" title="Gcloud::Storage::Bucket#cors (method)">#cors</a></span>.</p>
 
         </div>
 
@@ -93,15 +92,64 @@ or <span class='object_link'><a href="../Bucket.html#update-instance_method" tit
 
           
             <div>
+              Class Methods
+
+              
+                <span class='object_link'><a href="#from_gapi-class_method" title="Gcloud::Storage::Bucket::Cors.from_gapi (method)">Cors.from_gapi</a></span>
+              
+            </div>
+          
+            <div>
               Instance Methods
 
               
                 <span class='object_link'><a href="#add_rule-instance_method" title="Gcloud::Storage::Bucket::Cors#add_rule (method)">#add_rule</a></span>
               
+                <span class='object_link'><a href="#to_gapi-instance_method" title="Gcloud::Storage::Bucket::Cors#to_gapi (method)">#to_gapi</a></span>
+              
+                <span class='object_link'><a href="#freeze-instance_method" title="Gcloud::Storage::Bucket::Cors#freeze (method)">#freeze</a></span>
+              
             </div>
           
         </div>
 
+        
+          <div id="Class Methods-methods" class="section">
+            <h3 class="section-header">Class Methods</h3>
+          </div>
+
+          <div class="methods">
+            
+              
+                <div class="method">
+                  <a name="from_gapi-class_method"></a>
+                  <h4>
+                    <code>from_gapi(gapi_list)</code>
+                    <span>
+                      <a href="#from_gapi-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+          </div>
         
           <div id="Instance Methods-methods" class="section">
             <h3 class="section-header">Instance Methods</h3>
@@ -233,13 +281,71 @@ a preflight result cache. The default value is <code class="highlighter-rouge">1
                 </div>
               
             
+              
+                <div class="method">
+                  <a name="to_gapi-instance_method"></a>
+                  <h4>
+                    <code>to_gapi</code>
+                    <span>
+                      <a href="#to_gapi-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="freeze-instance_method"></a>
+                  <h4>
+                    <code>freeze</code>
+                    <span>
+                      <a href="#freeze-instance_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
           </div>
         
       </section>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jun 29, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='../Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='../Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='../File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='../Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='../Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='../File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>

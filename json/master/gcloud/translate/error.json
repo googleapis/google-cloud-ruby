@@ -1,1 +1,0 @@
-{"id":"gcloud/translate/error","name":"Error","title":["Gcloud","Translate","Error"],"description":"<p>Base Translate exception class.</p>","source":"lib/gcloud/translate/errors.rb#L22","resources":[],"examples":[],"methods":[]}
