@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/gce"
-require "gcloud/dns/connection"
+require "gcloud/dns/service"
 require "gcloud/dns/credentials"
 require "gcloud/dns/zone"
-require "gcloud/dns/errors"
 
 module Gcloud
   module Dns
@@ -41,21 +41,21 @@ module Gcloud
     # See {Gcloud#dns}
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
       attr_accessor :gapi
 
       ##
-      # @private Creates a new Connection instance.
+      # @private Creates a new Service instance.
       #
       # See {Gcloud.dns}
       def initialize project, credentials
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
-        @connection = Connection.new project, credentials
+        @service = Service.new project, credentials
         @gapi = nil
       end
 
@@ -71,7 +71,7 @@ module Gcloud
       #   dns.project #=> "my-todo-project"
       #
       def project
-        connection.project
+        service.project
       end
       alias_method :id, :project
 
@@ -79,49 +79,49 @@ module Gcloud
       # The project number.
       def number
         reload! if @gapi.nil?
-        @gapi["number"]
+        @gapi.number
       end
 
       ##
       # Maximum allowed number of zones in the project.
       def zones_quota
         reload! if @gapi.nil?
-        @gapi["quota"]["managedZones"] if @gapi["quota"]
+        @gapi.quota.managed_zones if @gapi.quota
       end
 
       ##
       # Maximum allowed number of data entries per record.
       def data_per_record
         reload! if @gapi.nil?
-        @gapi["quota"]["resourceRecordsPerRrset"] if @gapi["quota"]
+        @gapi.quota.resource_records_per_rrset if @gapi.quota
       end
 
       ##
       # Maximum allowed number of records to add per change.
       def additions_per_change
         reload! if @gapi.nil?
-        @gapi["quota"]["rrsetAdditionsPerChange"] if @gapi["quota"]
+        @gapi.quota.rrset_additions_per_change if @gapi.quota
       end
 
       ##
       # Maximum allowed number of records to delete per change.
       def deletions_per_change
         reload! if @gapi.nil?
-        @gapi["quota"]["rrsetDeletionsPerChange"] if @gapi["quota"]
+        @gapi.quota.rrset_deletions_per_change if @gapi.quota
       end
 
       ##
       # Maximum allowed number of records per zone in the project.
       def records_per_zone
         reload! if @gapi.nil?
-        @gapi["quota"]["rrsetsPerManagedZone"] if @gapi["quota"]
+        @gapi.quota.rrsets_per_managed_zone if @gapi.quota
       end
 
       ##
       # Maximum allowed total bytes size for all the data in one change.
       def total_data_per_change
         reload! if @gapi.nil?
-        @gapi["quota"]["totalRrdataSizePerChange"] if @gapi["quota"]
+        @gapi.quota.total_rrdata_size_per_change if @gapi.quota
       end
 
       ##
@@ -150,13 +150,11 @@ module Gcloud
       #   puts zone.name
       #
       def zone zone_id
-        ensure_connection!
-        resp = connection.get_zone zone_id
-        if resp.success?
-          Zone.from_gapi resp.data, connection
-        else
-          nil
-        end
+        ensure_service!
+        gapi = service.get_zone zone_id
+        Zone.from_gapi gapi, service
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :find_zone, :zone
       alias_method :get_zone, :zone
@@ -191,13 +189,9 @@ module Gcloud
       #   end
       #
       def zones token: nil, max: nil
-        ensure_connection!
-        resp = connection.list_zones token: token, max: max
-        if resp.success?
-          Zone::List.from_response resp, connection, max
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.list_zones token: token, max: max
+        Zone::List.from_gapi gapi, service, max
       end
       alias_method :find_zones, :zones
 
@@ -228,27 +222,18 @@ module Gcloud
       #
       def create_zone zone_name, zone_dns, description: nil,
                       name_server_set: nil
-        ensure_connection!
-        resp = connection.create_zone zone_name, zone_dns,
-                                      description: description,
-                                      name_server_set: name_server_set
-        if resp.success?
-          Zone.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.create_zone zone_name, zone_dns,
+                                   description: description,
+                                   name_server_set: name_server_set
+        Zone.from_gapi gapi, service
       end
 
       ##
       # Reloads the change with updated status from the DNS service.
       def reload!
-        ensure_connection!
-        resp = connection.get_project
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = service.get_project
       end
       alias_method :refresh!, :reload!
 
@@ -256,8 +241,8 @@ module Gcloud
 
       ##
       # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
     end
   end

@@ -18,50 +18,10 @@ require "gcloud/errors"
 module Gcloud
   module Storage
     ##
-    # # Storage Error
-    #
-    # Base Storage exception class.
-    class Error < Gcloud::Error
-    end
-
-    ##
-    # # ApiError
-    #
-    # Raised when an API call is not successful.
-    class ApiError < Error
-      ##
-      # The code of the error.
-      attr_reader :code
-
-      ##
-      # The errors encountered.
-      attr_reader :errors
-
-      def initialize message, code, errors
-        super message
-        @code   = code
-        @errors = errors
-      end
-
-      # @private
-      def self.from_response resp
-        if resp.data && resp.data["error"]
-          new resp.data["error"]["message"],
-              resp.data["error"]["code"],
-              resp.data["error"]["errors"]
-        else
-          new resp.error_message,
-              resp.status,
-              nil
-        end
-      end
-    end
-
-    ##
     # # FileVerificationError
     #
     # Raised when a File download fails the verification.
-    class FileVerificationError < Error
+    class FileVerificationError < Gcloud::Error
       ##
       # The type of digest that failed verification,
       # :md5 or :crc32c.
@@ -99,7 +59,7 @@ module Gcloud
     #
     # This is raised when File#signed_url is unable to generate a URL due to
     # missing credentials needed to create the URL.
-    class SignedUrlUnavailable < Error
+    class SignedUrlUnavailable < Gcloud::Error
     end
   end
 end

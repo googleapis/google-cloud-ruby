@@ -70,13 +70,9 @@ module Gcloud
         #
         def next
           return nil unless next?
-          ensure_connection!
-          resp = @connection.list_zones token: token, max: @max
-          if resp.success?
-            Zone::List.from_response resp, @connection, @max
-          else
-            fail ApiError.from_response(resp)
-          end
+          ensure_service!
+          gapi = @service.list_zones token: token, max: @max
+          Zone::List.from_gapi gapi, @service, @max
         end
 
         ##
@@ -148,14 +144,14 @@ module Gcloud
         end
 
         ##
-        # @private New Zones::List from a response object.
-        def self.from_response resp, conn, max = nil
-          zones = new(Array(resp.data["managedZones"]).map do |gapi_object|
-            Zone.from_gapi gapi_object, conn
+        # @private New Zones::List from a ListManagedZonesResponse object.
+        def self.from_gapi gapi, conn, max = nil
+          zones = new(Array(gapi.managed_zones).map do |g|
+            Zone.from_gapi g, conn
           end)
-          zones.instance_variable_set "@token",      resp.data["nextPageToken"]
-          zones.instance_variable_set "@connection", conn
-          zones.instance_variable_set "@max",        max
+          zones.instance_variable_set "@token",   gapi.next_page_token
+          zones.instance_variable_set "@service", conn
+          zones.instance_variable_set "@max",     max
           zones
         end
 
@@ -163,8 +159,8 @@ module Gcloud
 
         ##
         # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        def ensure_service!
+          fail "Must have active connection" unless @service
         end
       end
     end

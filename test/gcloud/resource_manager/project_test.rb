@@ -16,9 +16,9 @@ require "helper"
 
 describe Gcloud::ResourceManager::Project, :mock_res_man do
   let(:seed) { 123 }
-  let(:project_hash) { random_project_hash(seed) }
-  let(:project) { Gcloud::ResourceManager::Project.from_gapi project_hash,
-                                                             resource_manager.connection }
+  let(:project_gapi) { random_project_gapi seed }
+  let(:project) { Gcloud::ResourceManager::Project.from_gapi project_gapi,
+                                                             resource_manager.service }
 
   it "knows its attributes" do
     project.project_id.must_equal "example-project-123"
@@ -29,14 +29,16 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
   end
 
   it "updates the name" do
-    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
-      json = JSON.parse(env.body)
-      json["name"].must_equal "Updated Project 123"
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123, "Updated Project 123").to_json]
-    end
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, "Updated Project 123"
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
+    project.name.must_equal "Example Project 123"
+
+    resource_manager.service.mocked_service = mock
     project.name = "Updated Project 123"
+    mock.verify
+
     project.name.must_equal "Updated Project 123"
   end
 
@@ -47,108 +49,162 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
   end
 
   it "can update labels by setting a new hash" do
-    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
-      json = JSON.parse(env.body)
-      json["labels"].must_equal( "env" => "testing" )
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123, nil, "env" => "testing").to_json]
-    end
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
     project.labels = { "env" => "testing" }
+    mock.verify
+
+    project.labels["env"].must_equal "testing"
   end
 
   it "can update labels by using a block" do
-    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
-      json = JSON.parse(env.body)
-      json["labels"].must_equal( "env" => "testing" )
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123, nil, "env" => "testing").to_json]
-    end
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
     project.labels do |labels|
       labels["env"] = "testing"
     end
+    mock.verify
+
+    project.labels["env"].must_equal "testing"
+  end
+
+  it "does not update labels if they are not changed" do
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, nil, { "env" => "testing" }
+    # No expect, will fail if a call is actually made.
+
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
+    project.labels do |labels|
+      labels["env"] = "production"
+    end
+    mock.verify
+
+    project.labels["env"].must_equal "production"
   end
 
   it "can update name and labels in a single API call" do
-    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
-      json = JSON.parse(env.body)
-      json["name"].must_equal "Updated Project 123"
-      json["labels"].must_equal( "env" => "testing" )
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123, "Updated Project 123", "env" => "testing").to_json]
-    end
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
+    project.name.must_equal "Example Project 123"
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
     project.update do |tx|
       tx.name = "Updated Project 123"
       tx.labels["env"] = "testing"
     end
+    mock.verify
+
+    project.name.must_equal "Updated Project 123"
+    project.labels["env"].must_equal "testing"
   end
 
   it "can update name and override labels in a single API call" do
-    mock_connection.put "/v1beta1/projects/#{project.project_id}" do |env|
-      json = JSON.parse(env.body)
-      json["name"].must_equal "Updated Project 123"
-      json["labels"].must_equal( "env" => "testing" )
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(123, "Updated Project 123", "env" => "testing").to_json]
-    end
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
+    project.name.must_equal "Example Project 123"
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
     project.update do |tx|
       tx.name = "Updated Project 123"
       tx.labels = { "env" => "testing" }
     end
+    mock.verify
+
+    project.name.must_equal "Updated Project 123"
+    project.labels["env"].must_equal "testing"
+  end
+
+  it "does not update name and labels if they are not changed" do
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
+    # No expect, will fail if a call is actually made.
+
+    project.name.must_equal "Example Project 123"
+    project.labels["env"].must_equal "production"
+
+    resource_manager.service.mocked_service = mock
+    project.update do |tx|
+      tx.name = "Example Project 123"
+      tx.labels["env"] = "production"
+    end
+    mock.verify
+
+    project.name.must_equal "Example Project 123"
+    project.labels["env"].must_equal "production"
   end
 
   it "reloads itself" do
-    unspecified_hash = random_project_hash 123
-    unspecified_hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
-
-    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       unspecified_hash.to_json]
-    end
+    mock = Minitest::Mock.new
+    unspecified_project = random_project_gapi seed
+    unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
+    mock.expect :get_project, unspecified_project, [project.project_id]
 
     project.must_be :active?
+
+    resource_manager.service.mocked_service = mock
     project.reload!
+    mock.verify
+
     project.must_be :unspecified?
   end
 
   it "deletes itself" do
+    mock = Minitest::Mock.new
+    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    deleted_project = random_project_gapi seed
+    deleted_project.lifecycle_state = "DELETE_REQUESTED"
     # The delete request
-    mock_connection.delete "/v1beta1/projects/#{project.project_id}" do |env|
-      [200, {}, ""]
-    end
-
+    mock.expect :delete_project, empty_response,  [project.project_id]
     # The reload request
-    unspecified_hash = random_project_hash 123
-    unspecified_hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
+    mock.expect :get_project,    deleted_project, [project.project_id]
 
-    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       unspecified_hash.to_json]
-    end
+    project.must_be :active?
 
+    resource_manager.service.mocked_service = mock
     project.delete
+    mock.verify
+
+    project.must_be :delete_requested?
   end
 
   it "undeletes itself" do
+    active_project = project.gapi.dup
     # Set project to delete_requested?
-    project.gapi["lifecycleState"] = "DELETE_REQUESTED"
+    project.gapi.lifecycle_state = "DELETE_REQUESTED"
 
-    # The undelete request
-    mock_connection.post "/v1beta1/projects/#{project.project_id}:undelete" do |env|
-      [200, {}, ""]
-    end
-
+    mock = Minitest::Mock.new
+    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    unspecified_project = random_project_gapi seed
+    unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
+    # The delete request
+    mock.expect :undelete_project, empty_response, [project.project_id]
     # The reload request
-    mock_connection.get "/v1beta1/projects/#{project.project_id}" do |env|
-      [200, {"Content-Type" => "application/json"},
-       random_project_hash(seed).to_json]
-    end
+    mock.expect :get_project,      active_project, [project.project_id]
 
-    project.wont_be :unspecified?
+    project.must_be :delete_requested?
+
+    resource_manager.service.mocked_service = mock
     project.undelete
+    mock.verify
+
     project.must_be :active?
   end
 
@@ -162,10 +218,10 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :unspecified do
-      let(:project_hash) do
-        hash = random_project_hash(seed)
-        hash["lifecycleState"] = "LIFECYCLE_STATE_UNSPECIFIED"
-        hash
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
+        gapi
       end
 
       it "can be unspecified" do
@@ -178,10 +234,10 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :delete_requested do
-      let(:project_hash) do
-        hash = random_project_hash(seed)
-        hash["lifecycleState"] = "DELETE_REQUESTED"
-        hash
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "DELETE_REQUESTED"
+        gapi
       end
 
       it "can be delete_requested" do
@@ -194,10 +250,10 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     end
 
     describe :delete_in_progress do
-      let(:project_hash) do
-        hash = random_project_hash(seed)
-        hash["lifecycleState"] = "DELETE_IN_PROGRESS"
-        hash
+      let(:project_gapi) do
+        gapi = random_project_gapi seed
+        gapi.lifecycle_state = "DELETE_IN_PROGRESS"
+        gapi
       end
 
       it "can be DELETE_IN_PROGRESS" do

@@ -14,9 +14,9 @@
 
 
 require "time"
-require "gcloud/resource_manager/errors"
 require "gcloud/resource_manager/project/list"
 require "gcloud/resource_manager/project/updater"
+require "gcloud/resource_manager/policy"
 
 module Gcloud
   module ResourceManager
@@ -40,8 +40,8 @@ module Gcloud
     #
     class Project
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -50,8 +50,8 @@ module Gcloud
       ##
       # @private Create an empty Project object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @gapi = Gcloud::ResourceManager::Service::API::Project.new
       end
 
       ##
@@ -60,21 +60,21 @@ module Gcloud
       # Trailing hyphens are prohibited. e.g. tokyo-rain-123
       #
       def project_id
-        @gapi["projectId"]
+        @gapi.project_id
       end
 
       ##
       # The number uniquely identifying the project. e.g. 415104041262
       #
       def project_number
-        @gapi["projectNumber"]
+        @gapi.project_number
       end
 
       ##
       # The user-assigned name of the project.
       #
       def name
-        @gapi["name"]
+        @gapi.name
       end
 
       ##
@@ -93,14 +93,9 @@ module Gcloud
       #   project.name = "My Project"
       #
       def name= new_name
-        ensure_connection!
-        @gapi["name"] = new_name
-        resp = connection.update_project @gapi
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi.name = new_name
+        @gapi = service.update_project @gapi
       end
 
       ##
@@ -138,8 +133,7 @@ module Gcloud
       #   end
       #
       def labels
-        labels = @gapi["labels"]
-        labels = labels.to_hash if labels.respond_to? :to_hash
+        labels = @gapi.labels.to_h
         if block_given?
           yielded_labels = labels.dup
           yield yielded_labels
@@ -170,21 +164,16 @@ module Gcloud
       #   project.labels = { "env" => "production" }
       #
       def labels= new_labels
-        ensure_connection!
-        @gapi["labels"] = new_labels
-        resp = connection.update_project @gapi
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi.labels = new_labels
+        @gapi = service.update_project @gapi
       end
 
       ##
       # The time that this project was created.
       #
       def created_at
-        Time.parse @gapi["createTime"]
+        Time.parse @gapi.create_time
       rescue
         nil
       end
@@ -194,16 +183,16 @@ module Gcloud
       #
       # Possible values are:
       # * `ACTIVE` - The normal and active state.
-      # * `LIFECYCLE_STATE_UNSPECIFIED` - Unspecified state. This is only
-      #   used/useful for distinguishing unset values.
       # * `DELETE_REQUESTED` - The project has been marked for deletion by the
-      #   user (by invoking DeleteProject) or by the system (Google Cloud
-      #   Platform). This can generally be reversed by invoking UndeleteProject.
+      #   user (by invoking ##delete) or by the system (Google Cloud
+      #   Platform). This can generally be reversed by invoking {#undelete}.
       # * `DELETE_IN_PROGRESS` - The process of deleting the project has begun.
       #   Reversing the deletion is no longer possible.
+      # * `LIFECYCLE_STATE_UNSPECIFIED` - Unspecified state. This is only
+      #   used/useful for distinguishing unset values.
       #
       def state
-        @gapi["lifecycleState"]
+        @gapi.lifecycle_state
       end
 
       ##
@@ -255,12 +244,10 @@ module Gcloud
       def update
         updater = Updater.from_project self
         yield updater
-        resp = connection.update_project updater.gapi
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
+        if updater.gapi.to_h != @gapi.to_h # changed
+          @gapi = service.update_project updater.gapi
         end
+        self
       end
 
       ##
@@ -276,12 +263,7 @@ module Gcloud
       #   project.reload!
       #
       def reload!
-        resp = connection.get_project project_id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        @gapi = service.get_project project_id
       end
       alias_method :refresh!, :reload!
 
@@ -317,13 +299,9 @@ module Gcloud
       #   project.delete_requested? #=> true
       #
       def delete
-        resp = connection.delete_project project_id
-        if resp.success?
-          reload!
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        service.delete_project project_id
+        reload!
+        true
       end
 
       ##
@@ -346,85 +324,92 @@ module Gcloud
       #   project.active? #=> true
       #
       def undelete
-        resp = connection.undelete_project project_id
-        if resp.success?
-          reload!
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        service.undelete_project project_id
+        reload!
+        true
       end
 
       ##
-      # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
-      # policy. Returns a hash that conforms to the following structure:
-      #
-      #   {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }],
-      #     "version" => 0,
-      #     "etag" => "CAE="
-      #   }
+      # Gets and updates the [Cloud IAM](https://cloud.google.com/iam/) access
+      # control policy for this project.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
+      # @see https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/setIamPolicy
+      #   projects.setIamPolicy
       #
       # @param [Boolean] force Force load the latest policy when `true`.
       #   Otherwise the policy will be memoized to reduce the number of API
       #   calls made. The default is `false`.
       #
-      # @return [Hash] See description
+      # @yield [policy] A block for updating the policy. The latest policy will
+      #   be read from the service and passed to the block. After the block
+      #   completes, the modified policy will be written to the service.
+      # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+      #   project
       #
-      # @example Policy values are memoized by default:
+      # @return [Policy] the current Cloud IAM Policy for this project
+      #
+      # @example Policy values are memoized to reduce the number of API calls:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
-      #   policy = project.policy
       #
-      #   puts policy["bindings"]
-      #   puts policy["version"]
-      #   puts policy["etag"]
+      #   policy = project.policy # API call
+      #   policy_2 = project.policy # No API call
       #
-      # @example Use the `force` option to retrieve the latest policy:
+      # @example Use `force` to retrieve the latest policy from the service:
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
-      #   policy = project.policy force: true
+      #
+      #   policy = project.policy force: true # API call
+      #   policy_2 = project.policy force: true # API call
+      #
+      # @example Update the policy by passing a block:
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   resource_manager = gcloud.resource_manager
+      #   project = resource_manager.project "tokyo-rain-123"
+      #
+      #   policy = project.policy do |p|
+      #     p.add "roles/owner", "user:owner@example.com"
+      #   end # 2 API calls
       #
       def policy force: false
-        @policy = nil if force
+        @policy = nil if force || block_given?
         @policy ||= begin
-          ensure_connection!
-          resp = connection.get_policy project_id
-          fail ApiError.from_response(resp) unless resp.success?
-          policy = resp.data
-          policy = policy.to_hash if policy.respond_to? :to_hash
-          policy
+          ensure_service!
+          gapi = service.get_policy project_id
+          Policy.from_gapi gapi
         end
+        return @policy unless block_given?
+        p = @policy.deep_dup
+        yield p
+        self.policy = p
       end
 
       ##
-      # Sets the [Cloud IAM](https://cloud.google.com/iam/) access control
-      # policy.
+      # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+      # policy for this project. The policy should be read from {#policy}.
+      # See {Gcloud::ResourceManager::Policy} for an explanation of the policy
+      # `etag` property and how to modify policies.
+      #
+      # You can also update the policy by passing a block to {#policy}, which
+      # will call this method internally after the block completes.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   Policies
+      # @see https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/setIamPolicy
+      #   projects.setIamPolicy
       #
-      # @param [String] new_policy A hash that conforms to the following
-      #   structure:
-      #
-      #     {
-      #       "bindings" => [{
-      #         "role" => "roles/viewer",
-      #         "members" => ["serviceAccount:your-service-account"]
-      #       }]
-      #     }
+      # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+      #   project
       #
       # @example
       #   require "gcloud"
@@ -433,23 +418,18 @@ module Gcloud
       #   resource_manager = gcloud.resource_manager
       #   project = resource_manager.project "tokyo-rain-123"
       #
-      #   viewer_policy = {
-      #     "bindings" => [{
-      #       "role" => "roles/viewer",
-      #       "members" => ["serviceAccount:your-service-account"]
-      #     }]
-      #   }
-      #   project.policy = viewer_policy
+      #   policy = project.policy # API call
+      #
+      #   policy.add "roles/owner", "user:owner@example.com"
+      #
+      #   project.policy = policy # API call
       #
       def policy= new_policy
-        ensure_connection!
-        resp = connection.set_policy project_id, new_policy
-        if resp.success?
-          @policy = resp.data
-          @policy = @policy.to_hash if @policy.respond_to? :to_hash
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.set_policy project_id, new_policy.to_gapi
+        # Convert symbols to strings for backwards compatibility.
+        # This will go away when we add a ResourceManager::Policy class.
+        @policy = Policy.from_gapi gapi
       end
 
       ##
@@ -478,30 +458,26 @@ module Gcloud
       #
       def test_permissions *permissions
         permissions = Array(permissions).flatten
-        ensure_connection!
-        resp = connection.test_permissions project_id, permissions
-        if resp.success?
-          Array(resp.data["permissions"])
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.test_permissions project_id, permissions
+        gapi.permissions
       end
 
       ##
       # @private New Change from a Google API Client object.
-      def self.from_gapi gapi, connection
+      def self.from_gapi gapi, service
         new.tap do |p|
           p.gapi = gapi
-          p.connection = connection
+          p.service = service
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
     end
   end

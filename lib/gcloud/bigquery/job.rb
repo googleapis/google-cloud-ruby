@@ -13,9 +13,10 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/bigquery/query_data"
 require "gcloud/bigquery/job/list"
-require "gcloud/bigquery/errors"
+require "json"
 
 module Gcloud
   module Bigquery
@@ -55,8 +56,8 @@ module Gcloud
     #
     class Job
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -65,20 +66,20 @@ module Gcloud
       ##
       # @private Create an empty Job object.
       def initialize
-        @connection = nil
+        @service = nil
         @gapi = {}
       end
 
       ##
       # The ID of the job.
       def job_id
-        @gapi["jobReference"]["jobId"]
+        @gapi.job_reference.job_id
       end
 
       ##
       # The ID of the project containing the job.
       def project_id
-        @gapi["jobReference"]["projectId"]
+        @gapi.job_reference.project_id
       end
 
       ##
@@ -87,8 +88,8 @@ module Gcloud
       # completed successfully. Use {#failed?} to discover if an error occurred
       # or if the job was successful.
       def state
-        return nil if @gapi["status"].nil?
-        @gapi["status"]["state"]
+        return nil if @gapi.status.nil?
+        @gapi.status.state
       end
 
       ##
@@ -124,9 +125,9 @@ module Gcloud
       ##
       # The time when the job was created.
       def created_at
-        return nil if @gapi["statistics"].nil?
-        return nil if @gapi["statistics"]["creationTime"].nil?
-        Time.at(@gapi["statistics"]["creationTime"] / 1000.0)
+        return nil if @gapi.statistics.nil?
+        return nil if @gapi.statistics.creation_time.nil?
+        Time.at(@gapi.statistics.creation_time / 1000.0)
       end
 
       ##
@@ -134,18 +135,18 @@ module Gcloud
       # This field is present after the job's state changes from `PENDING`
       # to either `RUNNING` or `DONE`.
       def started_at
-        return nil if @gapi["statistics"].nil?
-        return nil if @gapi["statistics"]["startTime"].nil?
-        Time.at(@gapi["statistics"]["startTime"] / 1000.0)
+        return nil if @gapi.statistics.nil?
+        return nil if @gapi.statistics.start_time.nil?
+        Time.at(@gapi.statistics.start_time / 1000.0)
       end
 
       ##
       # The time when the job ended.
       # This field is present when the job's state is `DONE`.
       def ended_at
-        return nil if @gapi["statistics"].nil?
-        return nil if @gapi["statistics"]["endTime"].nil?
-        Time.at(@gapi["statistics"]["endTime"] / 1000.0)
+        return nil if @gapi.statistics.nil?
+        return nil if @gapi.statistics.end_time.nil?
+        Time.at(@gapi.statistics.end_time / 1000.0)
       end
 
       ##
@@ -154,9 +155,7 @@ module Gcloud
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       def configuration
-        hash = @gapi["configuration"] || {}
-        hash = hash.to_hash if hash.respond_to? :to_hash
-        hash
+        JSON.parse @gapi.configuration.to_json
       end
       alias_method :config, :configuration
 
@@ -166,9 +165,7 @@ module Gcloud
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       def statistics
-        hash = @gapi["statistics"] || {}
-        hash = hash.to_hash if hash.respond_to? :to_hash
-        hash
+        JSON.parse @gapi.statistics.to_json
       end
       alias_method :stats, :statistics
 
@@ -176,9 +173,7 @@ module Gcloud
       # The job's status. Returns a hash. The values contained in the hash are
       # also exposed by {#state}, {#error}, and {#errors}.
       def status
-        hash = @gapi["status"] || {}
-        hash = hash.to_hash if hash.respond_to? :to_hash
-        hash
+        JSON.parse @gapi.status.to_json
       end
 
       ##
@@ -196,38 +191,33 @@ module Gcloud
       #   }
       #
       def error
-        status["errorResult"]
+        return nil if @gapi.status.nil?
+        return nil if @gapi.status.error_result.nil?
+        JSON.parse @gapi.status.error_result.to_json
       end
 
       ##
       # The errors for the job, if any errors have occurred. Returns an array
       # of hash objects. See {#error}.
       def errors
-        Array status["errors"]
+        return [] if @gapi.status.nil?
+        Array(@gapi.status.errors).map { |e| JSON.parse e.to_json }
       end
 
       ##
       # Created a new job with the current configuration.
       def rerun!
-        ensure_connection!
-        resp = connection.insert_job configuration
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.insert_job configuration
+        Job.from_gapi gapi, service
       end
 
       ##
       # Reloads the job with current data from the BigQuery service.
       def reload!
-        ensure_connection!
-        resp = connection.get_job job_id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_job job_id
+        @gapi = gapi
       end
       alias_method :refresh!, :reload!
 
@@ -263,7 +253,7 @@ module Gcloud
         klass = klass_for gapi
         klass.new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = conn
         end
       end
 
@@ -271,34 +261,31 @@ module Gcloud
 
       ##
       # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
       ##
       # Get the subclass for a job type
       def self.klass_for gapi
-        if gapi["configuration"]["copy"]
+        if gapi.configuration.copy
           return CopyJob
-        elsif gapi["configuration"]["extract"]
+        elsif gapi.configuration.extract
           return ExtractJob
-        elsif gapi["configuration"]["load"]
+        elsif gapi.configuration.load
           return LoadJob
-        elsif gapi["configuration"]["query"]
+        elsif gapi.configuration.query
           return QueryJob
         end
         Job
       end
 
       def retrieve_table project_id, dataset_id, table_id
-        ensure_connection!
-        resp = connection.get_project_table project_id, dataset_id, table_id
-        if resp.success?
-          Table.from_gapi resp.data, connection
-        else
-          return nil if resp.status == 404
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_project_table project_id, dataset_id, table_id
+        Table.from_gapi gapi, service
+      rescue Gcloud::NotFoundError
+        nil
       end
     end
   end

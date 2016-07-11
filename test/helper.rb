@@ -28,27 +28,28 @@ require "gcloud/logging"
 require "gcloud/translate"
 require "gcloud/vision"
 
+##
+# Monkey-Patch Google API Client to support Mocks
+module Google::Apis::Core::Hashable
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, the Google API Client objects do not match with ===.
+  # Therefore, we must add this capability.
+  # This module seems like as good a place as any...
+  def === other
+    return(to_h === other.to_h) if other.respond_to? :to_h
+    super
+  end
+end
+
 class MockStorage < Minitest::Spec
-  let(:project) { storage.connection.project }
-  let(:credentials) { storage.connection.credentials }
-  let(:storage) { $gcloud_storage_global ||= Gcloud::Storage::Project.new("test", OpenStruct.new) }
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:storage) { Gcloud::Storage::Project.new(project, credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = storage.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
+  # Register this spec type for when :mock_storage is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_storage
   end
 
   def random_bucket_hash(name=random_bucket_name,
@@ -74,17 +75,15 @@ class MockStorage < Minitest::Spec
   end
 
   def logging_hash(bucket, prefix)
-    {
-      "logBucket" => bucket,
+    { "logBucket"       => bucket,
       "logObjectPrefix" => prefix,
-    }.delete_if { |_, v| v.nil? }  if bucket || prefix
+    }.delete_if { |_, v| v.nil? } if bucket || prefix
   end
 
   def website_hash(website_main, website_404)
-    {
-      "mainPageSuffix" => website_main,
-      "notFoundPage" => website_404,
-    }.delete_if { |_, v| v.nil? }  if website_main || website_404
+    { "mainPageSuffix" => website_main,
+      "notFoundPage"   => website_404,
+    }.delete_if { |_, v| v.nil? } if website_main || website_404
   end
 
   def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
@@ -121,33 +120,12 @@ class MockStorage < Minitest::Spec
      (0...10).map { ("a".."z").to_a[rand(26)] }.join,
      (0...10).map { ("a".."z").to_a[rand(26)] }.join + ".txt"].join "/"
   end
-
-  def invalid_bucket_name_error_json bucket_name
-    {
-      "error" => {
-        "code" => 400,
-        "message" => "Invalid bucket name: '#{bucket_name}'.",
-        "errors" => [
-          {
-            "message" => "Invalid bucket name: '#{bucket_name}'.",
-            "domain" => "global",
-            "reason" => "invalidParameter"
-          }
-        ]
-      }
-    }.to_json
-  end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_storage
-  end
 end
 
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:pubsub) { $gcloud_pubsub_global ||= Gcloud::Pubsub::Project.new(project, credentials) }
+  let(:pubsub) { Gcloud::Pubsub::Project.new(project, credentials) }
 
   def topics_json num_topics, token = nil
     topics = num_topics.times.map do
@@ -209,40 +187,6 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
-  def already_exists_error_json resource_name
-    {
-      "error" => {
-        "code" => 409,
-        "message" => "Resource already exists in the project (resource=#{resource_name}).",
-        "errors" => [
-          {
-            "message" => "Resource already exists in the project (resource=#{resource_name}).",
-            "domain" => "global",
-            "reason" => "alreadyExists"
-          }
-        ],
-        "status" => "ALREADY_EXISTS"
-      }
-    }.to_json
-  end
-
-  def not_found_error_json resource_name
-    {
-      "error" => {
-        "code" => 404,
-        "message" => "Resource not found (resource=#{resource_name}).",
-        "errors" => [
-          {
-            "message" => "Resource not found (resource=#{resource_name}).",
-            "domain" => "global",
-            "reason" => "notFound"
-          }
-        ],
-        "status" => "NOT_FOUND"
-      }
-    }.to_json
-  end
-
   def project_path
     "projects/#{project}"
   end
@@ -262,26 +206,18 @@ class MockPubsub < Minitest::Spec
 end
 
 class MockBigquery < Minitest::Spec
-  let(:project) { bigquery.connection.project }
-  let(:credentials) { bigquery.connection.credentials }
-  let(:bigquery) { $gcloud_bigquery_global ||= Gcloud::Bigquery::Project.new("test-project", OpenStruct.new) }
+  let(:project) { bigquery.service.project }
+  let(:credentials) { bigquery.service.credentials }
+  let(:bigquery) { Gcloud::Bigquery::Project.new("test-project", OpenStruct.new) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = bigquery.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
+  # Register this spec type for when :mock_bigquery is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_bigquery
   end
 
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
+  def random_dataset_gapi id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
+    json = random_dataset_hash(id, name, description, default_expiration, location).to_json
+    Google::Apis::BigqueryV2::Dataset.from_json json
   end
 
   def random_dataset_hash id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
@@ -324,20 +260,9 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def invalid_dataset_id_error_json id
-    {
-      "error" => {
-        "code" => 400,
-        "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
-        "errors" => [
-          {
-            "message" => "Invalid dataset ID \"#{id}\". Dataset IDs must be alphanumeric (plus underscores, dashes, and colons) and must be at most 1024 characters long.",
-            "domain" => "global",
-            "reason" => "invalid"
-          }
-        ]
-      }
-    }.to_json
+  def random_table_gapi dataset, id = nil, name = nil, description = nil, project_id = nil
+    json = random_table_hash(dataset, id, name, description, project_id).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
   end
 
   def random_table_hash dataset, id = nil, name = nil, description = nil, project_id = nil
@@ -403,6 +328,39 @@ class MockBigquery < Minitest::Spec
       "friendlyName" => name,
       "type" => "TABLE"
     }
+  end
+
+  def source_table_gapi
+    Google::Apis::BigqueryV2::Table.from_json source_table_json
+  end
+
+  def source_table_json
+    hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "tableId"   => "source_table_id"
+    }
+    hash.to_json
+  end
+
+  def destination_table_gapi
+    Google::Apis::BigqueryV2::Table.from_json destination_table_json
+  end
+
+  def destination_table_json
+    hash = random_table_hash "getting_replaced_dataset_id"
+    hash["tableReference"] = {
+      "projectId" => "target_project_id",
+      "datasetId" => "target_dataset_id",
+      "tableId"   => "target_table_id"
+    }
+    hash.to_json
+  end
+
+  def random_view_gapi dataset, id = nil, name = nil, description = nil
+    json = random_view_hash(dataset, id, name, description).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
   end
 
   def random_view_hash dataset, id = nil, name = nil, description = nil
@@ -488,9 +446,7 @@ class MockBigquery < Minitest::Spec
         "dryRun" => false
       },
       "status" => {
-        "state" => state,
-        "errorResult" => nil,
-        "errors" => nil
+        "state" => state
       },
       "statistics" => {
         "creationTime" => (Time.now.to_f * 1000).floor,
@@ -501,11 +457,46 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def query_data_json
-    query_data_hash.to_json
+  def query_job_gapi query
+    Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
   end
 
-  def query_data_hash
+  def query_job_json query
+    {
+      "configuration" => {
+        "query" => {
+          "query" => query,
+          "defaultDataset" => nil,
+          "destinationTable" => nil,
+          "createDisposition" => nil,
+          "writeDisposition" => nil,
+          "priority" => "INTERACTIVE",
+          "allowLargeResults" => nil,
+          "useQueryCache" => true,
+          "flattenResults" => nil
+        }
+      }
+    }.to_json
+  end
+
+  def query_request_gapi
+    Google::Apis::BigqueryV2::QueryRequest.new(
+      default_dataset: Google::Apis::BigqueryV2::DatasetReference.new(
+        dataset_id: "my_dataset", project_id: "test-project"
+      ),
+      dry_run: nil,
+      max_results: nil,
+      query: "SELECT name, age, score, active FROM [some_project:some_dataset.users]",
+      timeout_ms: 10000,
+      use_query_cache: true
+    )
+  end
+
+  def query_data_gapi token: "token1234567890"
+    Google::Apis::BigqueryV2::QueryResponse.from_json query_data_hash(token: token).to_json
+  end
+
+  def query_data_hash token: "token1234567890"
     {
       "kind" => "bigquery#getQueryResultsResponse",
       "etag" => "etag1234567890",
@@ -587,170 +578,132 @@ class MockBigquery < Minitest::Spec
           ]
         }
       ],
-      "pageToken" => "token1234567890",
+      "pageToken" => token,
       "totalRows" => 3,
       "totalBytesProcessed" => 456789,
       "jobComplete" => true,
       "cacheHit" => false
     }
   end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_bigquery
-  end
 end
 
 class MockDns < Minitest::Spec
-  let(:project) { dns.connection.project }
-  let(:credentials) { dns.connection.credentials }
-  let(:dns) { $gcloud_dns_global ||= Gcloud::Dns::Project.new("test", OpenStruct.new) }
+  let(:project) { dns.service.project }
+  let(:credentials) { dns.service.credentials }
+  let(:dns) { Gcloud::Dns::Project.new("test", OpenStruct.new) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = dns.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
+  def random_project_gapi
+    Google::Apis::DnsV1::Project.new(
+      kind: "dns#project",
+      number: 123456789,
+      id: project,
+      quota: Google::Apis::DnsV1::Quota.new(
+        kind: "dns#quota",
+        managed_zones: 101,
+        rrsets_per_managed_zone: 1002,
+        rrset_additions_per_change: 103,
+        rrset_deletions_per_change: 104,
+        total_rrdata_size_per_change: 8000,
+        resource_records_per_rrset: 105
+      )
+    )
   end
 
-  def teardown
-    @connection.verify_stubbed_calls
+  def random_zone_gapi zone_name, zone_dns
+    Google::Apis::DnsV1::ManagedZone.new(
+      kind: "dns#managedZone",
+      name: zone_name,
+      dns_name: zone_dns,
+      description: "",
+      id: 123456789,
+      name_servers: [ "virtual-dns-1.google.example",
+                     "virtual-dns-2.google.example" ],
+      creation_time: "2015-01-01T00:00:00-00:00"
+    )
   end
 
-  def mock_connection
-    @connection
+  def random_change_gapi
+    Google::Apis::DnsV1::Change.new(
+      kind: "dns#change",
+      id: "dns-change-1234567890",
+      additions: [],
+      deletions: [],
+      start_time: "2015-01-01T00:00:00-00:00",
+      status: "done"
+    )
   end
 
-  def random_project_hash
-    {
-      "kind" => "dns#project",
-      "number" => 123456789,
-      "id" => project,
-      "quota" => {
-        "kind" => "dns#quota",
-        "managedZones" => 101,
-        "rrsetsPerManagedZone" => 1002,
-        "rrsetAdditionsPerChange" => 103,
-        "rrsetDeletionsPerChange" => 104,
-        "totalRrdataSizePerChange" => 8000,
-        "resourceRecordsPerRrset" => 105
-      }
-    }
+  def random_record_gapi name, type, ttl, data
+    Google::Apis::DnsV1::ResourceRecordSet.new(
+      kind: "dns#resourceRecordSet",
+      name: name,
+      rrdatas: data,
+      ttl: ttl,
+      type: type
+    )
   end
 
-  def random_zone_hash zone_name, zone_dns
-    {
-      "kind" => "dns#managedZone",
-      "name" => zone_name,
-      "dnsName" => zone_dns,
-      "description" => "",
-      "id" => 123456789,
-      "nameServers" => [ "virtual-dns-1.google.example",
-                         "virtual-dns-2.google.example" ],
-      "creationTime" => "2015-01-01T00:00:00-00:00"
-    }
+  def done_change_gapi change_id = nil
+    change = random_change_gapi
+    change.id = change_id if change_id
+    change.additions = [ random_record_gapi("example.net.", "A", 18600, ["example.com."]) ]
+    change.deletions = [ random_record_gapi("example.net.", "A", 18600, ["example.org."]) ]
+    change
   end
 
-  def random_change_hash
-    {
-      "kind" => "dns#change",
-      "id" => "dns-change-1234567890",
-      "additions" => [],
-      "deletions" => [],
-      "startTime" => "2015-01-01T00:00:00-00:00",
-      "status" => "done"
-    }
+  def pending_change_gapi change_id = nil
+    change = done_change_gapi change_id
+    change.status = "pending"
+    change
   end
 
-  def random_record_hash name, type, ttl, data
-    {
-      "kind" => "dns#resourceRecordSet",
-      "name" => name,
-      "rrdatas" => data,
-      "ttl" => ttl,
-      "type" => type
-    }
+  def create_change_gapi to_add, to_remove
+    change = random_change_gapi
+    change.id = "dns-change-created"
+    change.additions = Array(to_add).map(&:to_gapi)
+    change.deletions = Array(to_remove).map(&:to_gapi)
+    change
   end
 
-  def done_change_hash change_id = nil
-    hash = random_change_hash
-    hash["id"] = change_id if change_id
-    hash["additions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.com."] }]
-    hash["deletions"] = [{ "name" => "example.net.", "ttl" => 18600, "type" => "A", "rrdatas" => ["example.org."] }]
-    hash
+  def lookup_records_gapi record
+    Google::Apis::DnsV1::ListResourceRecordSetsResponse.new rrsets: [record.to_gapi]
   end
 
-  def pending_change_hash change_id = nil
-    hash = done_change_hash change_id
-    hash["status"] = "pending"
-    hash
-  end
-
-  def done_change_json change_id = nil
-    done_change_hash(change_id).to_json
-  end
-
-  def pending_change_json change_id = nil
-    pending_change_hash(change_id).to_json
-  end
-
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :dns is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_dns
   end
 end
 
 class MockResourceManager < Minitest::Spec
-  let(:credentials) { OpenStruct.new }
-  let(:resource_manager) { $gcloud_resource_manager_global ||= Gcloud::ResourceManager::Manager.new(OpenStruct.new) }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:resource_manager) { Gcloud::ResourceManager::Manager.new(credentials) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = resource_manager.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
+  # Register this spec type for when :mock_res_man is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :mock_res_man
   end
 
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
-  def random_project_hash seed = nil, name = nil, labels = nil
+  def random_project_gapi seed = nil, name = nil, labels = nil
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?
-    {
-      "projectNumber" => "123456789#{seed}",
-      "projectId" => "example-project-#{seed}",
-      "name" => name,
-      "createTime" => "2015-09-01T12:00:00.00Z",
-      "labels" => labels,
-      "lifecycleState" => "ACTIVE"
-    }
-  end
-
-  # Register this spec type for when :storage is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_res_man
+    Google::Apis::CloudresourcemanagerV1beta1::Project.new(
+      project_number: "123456789#{seed}",
+      project_id:     "example-project-#{seed}",
+      name:           name,
+      labels:         labels,
+      create_time:    "2015-09-01T12:00:00.00Z",
+      lifecycle_state: "ACTIVE")
   end
 end
 
 class MockLogging < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:logging) { $gcloud_logging_global ||= Gcloud::Logging::Project.new(project, credentials) }
+  let(:logging) { Gcloud::Logging::Project.new(project, credentials) }
 
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :mock_logging is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
   end
@@ -863,286 +816,215 @@ end
 
 class MockTranslate < Minitest::Spec
   let(:key) { "test-api-key" }
-  let(:translate) { $gcloud_translate_global ||= Gcloud::Translate::Api.new(key) }
+  let(:translate) { Gcloud::Translate::Api.new(key) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    translate.connection.client.connection = Faraday.new "https://www.googleapis.com" do |builder|
-      builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
-  def translate_json *pairs
-    pairs = Array(pairs).flatten.each_slice(2).to_a
-    translations = pairs.map do |text, language|
-      { translatedText: text, detectedSourceLanguage: language }
-    end
-    { translations: translations }.to_json
-  end
-
-  def detect_json *languages
-    detections = languages.map do |lang|
-      [{ confidence: 0.123, language: lang, isReliable: false }] # isReliable is deprecated
-    end
-    { detections: detections }.to_json
-  end
-
-  def language_json lang = nil
-    if lang == "en"
-      {"languages"=>[{"language"=>"af", "name"=>"Afrikaans"}, {"language"=>"sq", "name"=>"Albanian"}, {"language"=>"am", "name"=>"Amharic"}, {"language"=>"ar", "name"=>"Arabic"}, {"language"=>"hy", "name"=>"Armenian"}, {"language"=>"az", "name"=>"Azerbaijani"}, {"language"=>"eu", "name"=>"Basque"}, {"language"=>"be", "name"=>"Belarusian"}, {"language"=>"bn", "name"=>"Bengali"}, {"language"=>"bs", "name"=>"Bosnian"}, {"language"=>"bg", "name"=>"Bulgarian"}, {"language"=>"ca", "name"=>"Catalan"}, {"language"=>"ceb", "name"=>"Cebuano"}, {"language"=>"ny", "name"=>"Chichewa"}, {"language"=>"zh", "name"=>"Chinese (Simplified)"}, {"language"=>"zh-TW", "name"=>"Chinese (Traditional)"}, {"language"=>"co", "name"=>"Corsican"}, {"language"=>"hr", "name"=>"Croatian"}, {"language"=>"cs", "name"=>"Czech"}, {"language"=>"da", "name"=>"Danish"}, {"language"=>"nl", "name"=>"Dutch"}, {"language"=>"en", "name"=>"English"}, {"language"=>"eo", "name"=>"Esperanto"}, {"language"=>"et", "name"=>"Estonian"}, {"language"=>"tl", "name"=>"Filipino"}, {"language"=>"fi", "name"=>"Finnish"}, {"language"=>"fr", "name"=>"French"}, {"language"=>"fy", "name"=>"Frisian"}, {"language"=>"gl", "name"=>"Galician"}, {"language"=>"ka", "name"=>"Georgian"}, {"language"=>"de", "name"=>"German"}, {"language"=>"el", "name"=>"Greek"}, {"language"=>"gu", "name"=>"Gujarati"}, {"language"=>"ht", "name"=>"Haitian Creole"}, {"language"=>"ha", "name"=>"Hausa"}, {"language"=>"haw", "name"=>"Hawaiian"}, {"language"=>"iw", "name"=>"Hebrew"}, {"language"=>"hi", "name"=>"Hindi"}, {"language"=>"hmn", "name"=>"Hmong"}, {"language"=>"hu", "name"=>"Hungarian"}, {"language"=>"is", "name"=>"Icelandic"}, {"language"=>"ig", "name"=>"Igbo"}, {"language"=>"id", "name"=>"Indonesian"}, {"language"=>"ga", "name"=>"Irish"}, {"language"=>"it", "name"=>"Italian"}, {"language"=>"ja", "name"=>"Japanese"}, {"language"=>"jw", "name"=>"Javanese"}, {"language"=>"kn", "name"=>"Kannada"}, {"language"=>"kk", "name"=>"Kazakh"}, {"language"=>"km", "name"=>"Khmer"}, {"language"=>"ko", "name"=>"Korean"}, {"language"=>"ku", "name"=>"Kurdish (Kurmanji)"}, {"language"=>"ky", "name"=>"Kyrgyz"}, {"language"=>"lo", "name"=>"Lao"}, {"language"=>"la", "name"=>"Latin"}, {"language"=>"lv", "name"=>"Latvian"}, {"language"=>"lt", "name"=>"Lithuanian"}, {"language"=>"lb", "name"=>"Luxembourgish"}, {"language"=>"mk", "name"=>"Macedonian"}, {"language"=>"mg", "name"=>"Malagasy"}, {"language"=>"ms", "name"=>"Malay"}, {"language"=>"ml", "name"=>"Malayalam"}, {"language"=>"mt", "name"=>"Maltese"}, {"language"=>"mi", "name"=>"Maori"}, {"language"=>"mr", "name"=>"Marathi"}, {"language"=>"mn", "name"=>"Mongolian"}, {"language"=>"my", "name"=>"Myanmar (Burmese)"}, {"language"=>"ne", "name"=>"Nepali"}, {"language"=>"no", "name"=>"Norwegian"}, {"language"=>"ps", "name"=>"Pashto"}, {"language"=>"fa", "name"=>"Persian"}, {"language"=>"pl", "name"=>"Polish"}, {"language"=>"pt", "name"=>"Portuguese"}, {"language"=>"pa", "name"=>"Punjabi"}, {"language"=>"ro", "name"=>"Romanian"}, {"language"=>"ru", "name"=>"Russian"}, {"language"=>"sm", "name"=>"Samoan"}, {"language"=>"gd", "name"=>"Scots Gaelic"}, {"language"=>"sr", "name"=>"Serbian"}, {"language"=>"st", "name"=>"Sesotho"}, {"language"=>"sn", "name"=>"Shona"}, {"language"=>"sd", "name"=>"Sindhi"}, {"language"=>"si", "name"=>"Sinhala"}, {"language"=>"sk", "name"=>"Slovak"}, {"language"=>"sl", "name"=>"Slovenian"}, {"language"=>"so", "name"=>"Somali"}, {"language"=>"es", "name"=>"Spanish"}, {"language"=>"su", "name"=>"Sundanese"}, {"language"=>"sw", "name"=>"Swahili"}, {"language"=>"sv", "name"=>"Swedish"}, {"language"=>"tg", "name"=>"Tajik"}, {"language"=>"ta", "name"=>"Tamil"}, {"language"=>"te", "name"=>"Telugu"}, {"language"=>"th", "name"=>"Thai"}, {"language"=>"tr", "name"=>"Turkish"}, {"language"=>"uk", "name"=>"Ukrainian"}, {"language"=>"ur", "name"=>"Urdu"}, {"language"=>"uz", "name"=>"Uzbek"}, {"language"=>"vi", "name"=>"Vietnamese"}, {"language"=>"cy", "name"=>"Welsh"}, {"language"=>"xh", "name"=>"Xhosa"}, {"language"=>"yi", "name"=>"Yiddish"}, {"language"=>"yo", "name"=>"Yoruba"}, {"language"=>"zu", "name"=>"Zulu"}]}.to_json
-    else
-      {"languages"=>[{"language"=>"af"}, {"language"=>"am"}, {"language"=>"ar"}, {"language"=>"az"}, {"language"=>"be"}, {"language"=>"bg"}, {"language"=>"bn"}, {"language"=>"bs"}, {"language"=>"ca"}, {"language"=>"ceb"}, {"language"=>"co"}, {"language"=>"cs"}, {"language"=>"cy"}, {"language"=>"da"}, {"language"=>"de"}, {"language"=>"el"}, {"language"=>"en"}, {"language"=>"eo"}, {"language"=>"es"}, {"language"=>"et"}, {"language"=>"eu"}, {"language"=>"fa"}, {"language"=>"fi"}, {"language"=>"fr"}, {"language"=>"fy"}, {"language"=>"ga"}, {"language"=>"gd"}, {"language"=>"gl"}, {"language"=>"gu"}, {"language"=>"ha"}, {"language"=>"haw"}, {"language"=>"hi"}, {"language"=>"hmn"}, {"language"=>"hr"}, {"language"=>"ht"}, {"language"=>"hu"}, {"language"=>"hy"}, {"language"=>"id"}, {"language"=>"ig"}, {"language"=>"is"}, {"language"=>"it"}, {"language"=>"iw"}, {"language"=>"ja"}, {"language"=>"jw"}, {"language"=>"ka"}, {"language"=>"kk"}, {"language"=>"km"}, {"language"=>"kn"}, {"language"=>"ko"}, {"language"=>"ku"}, {"language"=>"ky"}, {"language"=>"la"}, {"language"=>"lb"}, {"language"=>"lo"}, {"language"=>"lt"}, {"language"=>"lv"}, {"language"=>"mg"}, {"language"=>"mi"}, {"language"=>"mk"}, {"language"=>"ml"}, {"language"=>"mn"}, {"language"=>"mr"}, {"language"=>"ms"}, {"language"=>"mt"}, {"language"=>"my"}, {"language"=>"ne"}, {"language"=>"nl"}, {"language"=>"no"}, {"language"=>"ny"}, {"language"=>"pa"}, {"language"=>"pl"}, {"language"=>"ps"}, {"language"=>"pt"}, {"language"=>"ro"}, {"language"=>"ru"}, {"language"=>"sd"}, {"language"=>"si"}, {"language"=>"sk"}, {"language"=>"sl"}, {"language"=>"sm"}, {"language"=>"sn"}, {"language"=>"so"}, {"language"=>"sq"}, {"language"=>"sr"}, {"language"=>"st"}, {"language"=>"su"}, {"language"=>"sv"}, {"language"=>"sw"}, {"language"=>"ta"}, {"language"=>"te"}, {"language"=>"tg"}, {"language"=>"th"}, {"language"=>"tl"}, {"language"=>"tr"}, {"language"=>"uk"}, {"language"=>"ur"}, {"language"=>"uz"}, {"language"=>"vi"}, {"language"=>"xh"}, {"language"=>"yi"}, {"language"=>"yo"}, {"language"=>"zh"}, {"language"=>"zh-TW"}, {"language"=>"zu"}]}.to_json
-    end
-  end
-
-  # Register this spec type for when :storage is used.
+  # Register this spec type for when :mock_translate is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_translate
   end
 end
 
 class MockVision < Minitest::Spec
-  let(:project) { vision.connection.project }
-  let(:credentials) { vision.connection.credentials }
-  let(:vision) { $gcloud_vision_global ||= Gcloud::Vision::Project.new("test", OpenStruct.new) }
+  API = Google::Apis::VisionV1
+  let(:project) { vision.service.project }
+  let(:credentials) { vision.service.credentials }
+  let(:vision) { Gcloud::Vision::Project.new("test", OpenStruct.new) }
 
-  def setup
-    @connection = Faraday::Adapter::Test::Stubs.new
-    connection = vision.instance_variable_get "@connection"
-    client = connection.instance_variable_get "@client"
-    client.connection = Faraday.new do |builder|
-      # builder.options.params_encoder = Faraday::FlatParamsEncoder
-      builder.adapter :test, @connection
-    end
-  end
-
-  def teardown
-    @connection.verify_stubbed_calls
-  end
-
-  def mock_connection
-    @connection
-  end
-
-  # Register this spec type for when :vision is used.
+  # Register this spec type for when :mock_vision is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_vision
   end
 
+  def bounding_poly
+    API::BoundingPoly.new(
+      vertices: [
+        API::Vertex.new(x: 1, y: 0),
+        API::Vertex.new(x: 295, y: 0),
+        API::Vertex.new(x: 295, y: 301),
+        API::Vertex.new(x: 1, y: 301)
+      ]
+    )
+  end
+
   def face_annotation_response
-    {
-      boundingPoly: {
+    API::FaceAnnotation.new(
+      bounding_poly: bounding_poly,
+      fd_bounding_poly: API::BoundingPoly.new(
         vertices: [
-          { x: 1, y: 0 },
-          { x: 295, y: 0 },
-          { x: 295, y: 301 },
-          { x: 1, y: 301 }
+          API::Vertex.new(x: 28, y: 40),
+          API::Vertex.new(x: 250, y: 40),
+          API::Vertex.new(x: 250, y: 262),
+          API::Vertex.new(x: 28, y: 262)
         ]
-      },
-      fdBoundingPoly: {
-        vertices: [
-          { x: 28, y: 40 },
-          { x: 250, y: 40 },
-          { x: 250, y: 262 },
-          { x: 28, y: 262 }
-        ]
-      },
+      ),
       landmarks: [
-        { type: :LEFT_EYE, position: { x: 83.707092, y: 128.34, z: -0.00013388535 } },
-        { type: :RIGHT_EYE, position: { x: 181.17694, y: 115.16437, z: -12.82961 } },
-        { type: :LEFT_OF_LEFT_EYEBROW, position: { x: 58.790176, y: 113.28249, z: 17.89735 } },
-        { type: :RIGHT_OF_LEFT_EYEBROW, position: { x: 106.14151, y: 98.593758, z: -13.116687 } },
-        { type: :LEFT_OF_RIGHT_EYEBROW, position: { x: 148.61565, y: 92.294594, z: -18.804882 } },
-        { type: :RIGHT_OF_RIGHT_EYEBROW, position: { x: 204.40808, y: 94.300117, z: -2.0009689 } },
-        { type: :MIDPOINT_BETWEEN_EYES, position: { x: 127.83745, y: 110.17557, z: -22.650913 } },
-        { type: :NOSE_TIP, position: { x: 128.14919, y: 153.68129, z: -63.198204 } },
-        { type: :UPPER_LIP, position: { x: 134.74164, y: 192.50438, z: -53.876408 } },
-        { type: :LOWER_LIP, position: { x: 137.28528, y: 219.23564, z: -56.663128 } },
-        { type: :MOUTH_LEFT, position: { x: 104.53558, y: 214.05037, z: -30.056231 } },
-        { type: :MOUTH_RIGHT, position: { x: 173.79134, y: 204.99333, z: -39.725758 } },
-        { type: :MOUTH_CENTER, position: { x: 136.43481, y: 204.37952, z: -51.620205 } },
-        { type: :NOSE_BOTTOM_RIGHT, position: { x: 161.31354, y: 168.24527, z: -36.1628 } },
-        { type: :NOSE_BOTTOM_LEFT, position: { x: 110.98372, y: 173.61331, z: -29.7784 } },
-        { type: :NOSE_BOTTOM_CENTER, position: { x: 133.81947, y: 173.16437, z: -48.287724 } },
-        { type: :LEFT_EYE_TOP_BOUNDARY, position: { x: 86.706947, y: 119.47144, z: -4.1606765 } },
-        { type: :LEFT_EYE_RIGHT_CORNER, position: { x: 105.28892, y: 125.57655, z: -2.51554 } },
-        { type: :LEFT_EYE_BOTTOM_BOUNDARY, position: { x: 84.883934, y: 134.59479, z: -2.8677137 } },
-        { type: :LEFT_EYE_LEFT_CORNER, position: { x: 72.213913, y: 132.04138, z: 9.6985674 } },
-        { type: :RIGHT_EYE_TOP_BOUNDARY, position: { x: 173.99446, y: 107.94287, z: -16.050705 } },
-        { type: :RIGHT_EYE_RIGHT_CORNER, position: { x: 194.59413, y: 115.91954, z: -6.952745 } },
-        { type: :RIGHT_EYE_BOTTOM_BOUNDARY, position: { x: 179.30353, y: 121.03307, z: -14.843414 } },
-        { type: :RIGHT_EYE_LEFT_CORNER, position: { x: 158.2863, y: 118.491, z: -9.723031 } },
-        { type: :LEFT_EYEBROW_UPPER_MIDPOINT, position: { x: 80.248711, y: 94.04303, z: 0.21131183 } },
-        { type: :RIGHT_EYEBROW_UPPER_MIDPOINT, position: { x: 174.70135, y: 81.580917, z: -12.702137 } },
-        { type: :LEFT_EAR_TRAGION, position: { x: 54.872219, y: 207.23712, z: 97.030685 } },
-        { type: :RIGHT_EAR_TRAGION, position: { x: 252.67567, y: 180.43124, z: 70.15992 } },
-        { type: :LEFT_EYE_PUPIL, position: { x: 86.531624, y: 126.49807, z: -2.2496929 } },
-        { type: :RIGHT_EYE_PUPIL, position: { x: 175.99976, y: 114.64407, z: -14.53744 } },
-        { type: :FOREHEAD_GLABELLA, position: { x: 126.53813, y: 93.812057, z: -18.863352 } },
-        { type: :CHIN_GNATHION, position: { x: 143.34183, y: 262.22998, z: -57.388493 } },
-        { type: :CHIN_LEFT_GONION, position: { x: 63.102425, y: 248.99081, z: 44.207638 } },
-        { type: :CHIN_RIGHT_GONION, position: { x: 241.72728, y: 225.53488, z: 19.758242 } }
+        API::Landmark.new(type: "LEFT_EYE", position: API::Position.new(x: 83.707092, y: 128.34, z: -0.00013388535)),
+        API::Landmark.new(type: "RIGHT_EYE", position: API::Position.new(x: 181.17694, y: 115.16437, z: -12.82961)),
+        API::Landmark.new(type: "LEFT_OF_LEFT_EYEBROW", position: API::Position.new(x: 58.790176, y: 113.28249, z: 17.89735)),
+        API::Landmark.new(type: "RIGHT_OF_LEFT_EYEBROW", position: API::Position.new(x: 106.14151, y: 98.593758, z: -13.116687)),
+        API::Landmark.new(type: 'LEFT_OF_RIGHT_EYEBROW', position: API::Position.new(x: 148.61565, y: 92.294594, z: -18.804882)),
+        API::Landmark.new(type: "RIGHT_OF_RIGHT_EYEBROW", position: API::Position.new(x: 204.40808, y: 94.300117, z: -2.0009689)),
+        API::Landmark.new(type: "MIDPOINT_BETWEEN_EYES", position: API::Position.new(x: 127.83745, y: 110.17557, z: -22.650913)),
+        API::Landmark.new(type: "NOSE_TIP", position: API::Position.new(x: 128.14919, y: 153.68129, z: -63.198204)),
+        API::Landmark.new(type: "UPPER_LIP", position: API::Position.new(x: 134.74164, y: 192.50438, z: -53.876408)),
+        API::Landmark.new(type: "LOWER_LIP", position: API::Position.new(x: 137.28528, y: 219.23564, z: -56.663128)),
+        API::Landmark.new(type: "MOUTH_LEFT", position: API::Position.new(x: 104.53558, y: 214.05037, z: -30.056231)),
+        API::Landmark.new(type: "MOUTH_RIGHT", position: API::Position.new(x: 173.79134, y: 204.99333, z: -39.725758)),
+        API::Landmark.new(type: "MOUTH_CENTER", position: API::Position.new(x: 136.43481, y: 204.37952, z: -51.620205)),
+        API::Landmark.new(type: "NOSE_BOTTOM_RIGHT", position: API::Position.new(x: 161.31354, y: 168.24527, z: -36.1628)),
+        API::Landmark.new(type: "NOSE_BOTTOM_LEFT", position: API::Position.new(x: 110.98372, y: 173.61331, z: -29.7784)),
+        API::Landmark.new(type: "NOSE_BOTTOM_CENTER", position: API::Position.new(x: 133.81947, y: 173.16437, z: -48.287724)),
+        API::Landmark.new(type: "LEFT_EYE_TOP_BOUNDARY", position: API::Position.new(x: 86.706947, y: 119.47144, z: -4.1606765)),
+        API::Landmark.new(type: "LEFT_EYE_RIGHT_CORNER", position: API::Position.new(x: 105.28892, y: 125.57655, z: -2.51554)),
+        API::Landmark.new(type: "LEFT_EYE_BOTTOM_BOUNDARY", position: API::Position.new(x: 84.883934, y: 134.59479, z: -2.8677137)),
+        API::Landmark.new(type: "LEFT_EYE_LEFT_CORNER", position: API::Position.new(x: 72.213913, y: 132.04138, z: 9.6985674)),
+        API::Landmark.new(type: "RIGHT_EYE_TOP_BOUNDARY", position: API::Position.new(x: 173.99446, y: 107.94287, z: -16.050705)),
+        API::Landmark.new(type: "RIGHT_EYE_RIGHT_CORNER", position: API::Position.new(x: 194.59413, y: 115.91954, z: -6.952745)),
+        API::Landmark.new(type: "RIGHT_EYE_BOTTOM_BOUNDARY", position: API::Position.new(x: 179.30353, y: 121.03307, z: -14.843414)),
+        API::Landmark.new(type: "RIGHT_EYE_LEFT_CORNER", position: API::Position.new(x: 158.2863, y: 118.491, z: -9.723031)),
+        API::Landmark.new(type: "LEFT_EYEBROW_UPPER_MIDPOINT", position: API::Position.new(x: 80.248711, y: 94.04303, z: 0.21131183)),
+        API::Landmark.new(type: "RIGHT_EYEBROW_UPPER_MIDPOINT", position: API::Position.new(x: 174.70135, y: 81.580917, z: -12.702137)),
+        API::Landmark.new(type: "LEFT_EAR_TRAGION", position: API::Position.new(x: 54.872219, y: 207.23712, z: 97.030685)),
+        API::Landmark.new(type: "RIGHT_EAR_TRAGION", position: API::Position.new(x: 252.67567, y: 180.43124, z: 70.15992)),
+        API::Landmark.new(type: "LEFT_EYE_PUPIL", position: API::Position.new(x: 86.531624, y: 126.49807, z: -2.2496929)),
+        API::Landmark.new(type: "RIGHT_EYE_PUPIL", position: API::Position.new(x: 175.99976, y: 114.64407, z: -14.53744)),
+        API::Landmark.new(type: "FOREHEAD_GLABELLA", position: API::Position.new(x: 126.53813, y: 93.812057, z: -18.863352)),
+        API::Landmark.new(type: "CHIN_GNATHION", position: API::Position.new(x: 143.34183, y: 262.22998, z: -57.388493)),
+        API::Landmark.new(type: "CHIN_LEFT_GONION", position: API::Position.new(x: 63.102425, y: 248.99081, z: 44.207638)),
+        API::Landmark.new(type: "CHIN_RIGHT_GONION", position: API::Position.new(x: 241.72728, y: 225.53488, z: 19.758242))
       ],
-      rollAngle: -0.050002542,
-      panAngle: -0.081090336,
-      tiltAngle: 0.18012161,
-      detectionConfidence: 0.56748849,
-      landmarkingConfidence: 34.489909,
-      joyLikelihood: :LIKELY,
-      sorrowLikelihood: :UNLIKELY,
-      angerLikelihood: :VERY_UNLIKELY,
-      surpriseLikelihood: :UNLIKELY,
-      underExposedLikelihood: :VERY_UNLIKELY,
-      blurredLikelihood: :VERY_UNLIKELY,
-      headwearLikelihood: :VERY_UNLIKELY,
-    }
+      roll_angle: -0.050002542,
+      pan_angle: -0.081090336,
+      tilt_angle: 0.18012161,
+      detection_confidence: 0.56748849,
+      landmarking_confidence: 34.489909,
+      joy_likelihood:          "LIKELY",
+      sorrow_likelihood:       "UNLIKELY",
+      anger_likelihood:        "VERY_UNLIKELY",
+      surprise_likelihood:     "UNLIKELY",
+      under_exposed_likelihood: "VERY_UNLIKELY",
+      blurred_likelihood:      "VERY_UNLIKELY",
+      headwear_likelihood:     "VERY_UNLIKELY",
+    )
   end
 
   def landmark_annotation_response
-    {
+    API::EntityAnnotation.new(
       mid: "/m/019dvv",
       description: "Mount Rushmore",
       score: 0.91912264,
-      boundingPoly: {
-        vertices: [
-          { x: 9,   y: 35 },
-          { x: 492, y: 35 },
-          { x: 492, y: 325 },
-          { x: 9,   y: 325 }
-        ]
-      },
-     locations: [
-       { latLng: { latitude: 43.878264, longitude: -103.45700740814209 } }
+      bounding_poly: bounding_poly,
+      locations: [
+        API::LocationInfo.new(
+          lat_lng: API::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)
+        )
      ]
-    }
+    )
   end
 
   def logo_annotation_response
-    {
+    API::EntityAnnotation.new(
       mid: "/m/045c7b",
       description: "Google",
       score: 0.6435439,
-      boundingPoly: {
-        vertices: [
-          { x: 11,  y: 11 },
-          { x: 330, y: 11 },
-          { x: 330, y: 72 },
-          { x: 11,  y: 72 }
-        ]
-      }
-    }
+      bounding_poly: bounding_poly
+    )
   end
 
   def label_annotation_response
-    {
+    API::EntityAnnotation.new(
       mid: "/m/02wtjj",
       description: "stone carving",
       score: 0.9859733
-    }
+    )
   end
 
   def text_annotation_response
-    {
+    API::EntityAnnotation.new(
       locale: "en",
       description: "Google Cloud Client Library for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
-      boundingPoly: {
-        vertices: [
-          { x: 13,  y: 8 },
-          { x: 385, y: 8 },
-          { x: 385, y: 74 },
-          { x: 13,  y: 74 }
-        ]
-      }
-    }
+      bounding_poly: bounding_poly
+    )
   end
 
   def text_annotation_responses
     [ text_annotation_response,
-      {"description"=>"Google", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>8}, {"x"=>53, "y"=>8}, {"x"=>53, "y"=>23}, {"x"=>13, "y"=>23}]}},
-      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>59, "y"=>8}, {"x"=>89, "y"=>8}, {"x"=>89, "y"=>23}, {"x"=>59, "y"=>23}]}},
-      {"description"=>"Client", "boundingPoly"=>{"vertices"=>[{"x"=>96, "y"=>8}, {"x"=>128, "y"=>8}, {"x"=>128, "y"=>23}, {"x"=>96, "y"=>23}]}},
-      {"description"=>"Library", "boundingPoly"=>{"vertices"=>[{"x"=>132, "y"=>8}, {"x"=>170, "y"=>8}, {"x"=>170, "y"=>23}, {"x"=>132, "y"=>23}]}},
-      {"description"=>"for", "boundingPoly"=>{"vertices"=>[{"x"=>175, "y"=>8}, {"x"=>191, "y"=>8}, {"x"=>191, "y"=>23}, {"x"=>175, "y"=>23}]}},
-      {"description"=>"Ruby", "boundingPoly"=>{"vertices"=>[{"x"=>195, "y"=>8}, {"x"=>221, "y"=>8}, {"x"=>221, "y"=>23}, {"x"=>195, "y"=>23}]}},
-      {"description"=>"an", "boundingPoly"=>{"vertices"=>[{"x"=>236, "y"=>8}, {"x"=>245, "y"=>8}, {"x"=>245, "y"=>23}, {"x"=>236, "y"=>23}]}},
-      {"description"=>"idiomatic,", "boundingPoly"=>{"vertices"=>[{"x"=>250, "y"=>8}, {"x"=>307, "y"=>8}, {"x"=>307, "y"=>23}, {"x"=>250, "y"=>23}]}},
-      {"description"=>"intuitive,", "boundingPoly"=>{"vertices"=>[{"x"=>311, "y"=>8}, {"x"=>360, "y"=>8}, {"x"=>360, "y"=>23}, {"x"=>311, "y"=>23}]}},
-      {"description"=>"and", "boundingPoly"=>{"vertices"=>[{"x"=>363, "y"=>8}, {"x"=>385, "y"=>8}, {"x"=>385, "y"=>23}, {"x"=>363, "y"=>23}]}},
-      {"description"=>"natural", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>33}, {"x"=>52, "y"=>33}, {"x"=>52, "y"=>49}, {"x"=>13, "y"=>49}]}},
-      {"description"=>"way", "boundingPoly"=>{"vertices"=>[{"x"=>56, "y"=>33}, {"x"=>77, "y"=>33}, {"x"=>77, "y"=>49}, {"x"=>56, "y"=>49}]}},
-      {"description"=>"for", "boundingPoly"=>{"vertices"=>[{"x"=>82, "y"=>33}, {"x"=>98, "y"=>33}, {"x"=>98, "y"=>49}, {"x"=>82, "y"=>49}]}},
-      {"description"=>"Ruby", "boundingPoly"=>{"vertices"=>[{"x"=>102, "y"=>33}, {"x"=>130, "y"=>33}, {"x"=>130, "y"=>49}, {"x"=>102, "y"=>49}]}},
-      {"description"=>"developers", "boundingPoly"=>{"vertices"=>[{"x"=>135, "y"=>33}, {"x"=>196, "y"=>33}, {"x"=>196, "y"=>49}, {"x"=>135, "y"=>49}]}},
-      {"description"=>"to", "boundingPoly"=>{"vertices"=>[{"x"=>201, "y"=>33}, {"x"=>212, "y"=>33}, {"x"=>212, "y"=>49}, {"x"=>201, "y"=>49}]}},
-      {"description"=>"integrate", "boundingPoly"=>{"vertices"=>[{"x"=>215, "y"=>33}, {"x"=>265, "y"=>33}, {"x"=>265, "y"=>49}, {"x"=>215, "y"=>49}]}},
-      {"description"=>"with", "boundingPoly"=>{"vertices"=>[{"x"=>270, "y"=>33}, {"x"=>293, "y"=>33}, {"x"=>293, "y"=>49}, {"x"=>270, "y"=>49}]}},
-      {"description"=>"Google", "boundingPoly"=>{"vertices"=>[{"x"=>299, "y"=>33}, {"x"=>339, "y"=>33}, {"x"=>339, "y"=>49}, {"x"=>299, "y"=>49}]}},
-      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>345, "y"=>33}, {"x"=>376, "y"=>33}, {"x"=>376, "y"=>49}, {"x"=>345, "y"=>49}]}},
-      {"description"=>"Platform", "boundingPoly"=>{"vertices"=>[{"x"=>13, "y"=>59}, {"x"=>59, "y"=>59}, {"x"=>59, "y"=>74}, {"x"=>13, "y"=>74}]}},
-      {"description"=>"services,", "boundingPoly"=>{"vertices"=>[{"x"=>67, "y"=>59}, {"x"=>117, "y"=>59}, {"x"=>117, "y"=>74}, {"x"=>67, "y"=>74}]}},
-      {"description"=>"like", "boundingPoly"=>{"vertices"=>[{"x"=>121, "y"=>59}, {"x"=>138, "y"=>59}, {"x"=>138, "y"=>74}, {"x"=>121, "y"=>74}]}},
-      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>145, "y"=>59}, {"x"=>177, "y"=>59}, {"x"=>177, "y"=>74}, {"x"=>145, "y"=>74}]}},
-      {"description"=>"Datastore", "boundingPoly"=>{"vertices"=>[{"x"=>181, "y"=>59}, {"x"=>236, "y"=>59}, {"x"=>236, "y"=>74}, {"x"=>181, "y"=>74}]}},
-      {"description"=>"and", "boundingPoly"=>{"vertices"=>[{"x"=>242, "y"=>59}, {"x"=>260, "y"=>59}, {"x"=>260, "y"=>74}, {"x"=>242, "y"=>74}]}},
-      {"description"=>"Cloud", "boundingPoly"=>{"vertices"=>[{"x"=>267, "y"=>59}, {"x"=>298, "y"=>59}, {"x"=>298, "y"=>74}, {"x"=>267, "y"=>74}]}},
-      {"description"=>"Storage.", "boundingPoly"=>{"vertices"=>[{"x"=>304, "y"=>59}, {"x"=>351, "y"=>59}, {"x"=>351, "y"=>74}, {"x"=>304, "y"=>74}]}}
+      API::EntityAnnotation.new(description: "Google", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 13, y: 8), API::Vertex.new(x: 53, y: 8), API::Vertex.new(x: 53, y: 23), API::Vertex.new(x: 13, y: 23)])),
+      API::EntityAnnotation.new(description: "Cloud", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 59, y: 8), API::Vertex.new(x: 89, y: 8), API::Vertex.new(x: 89, y: 23), API::Vertex.new(x: 59, y: 23)])),
+      API::EntityAnnotation.new(description: "Client", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 96, y: 8), API::Vertex.new(x: 128, y: 8), API::Vertex.new(x: 128, y: 23), API::Vertex.new(x: 96, y: 23)])),
+      API::EntityAnnotation.new(description: "Library", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 132, y: 8), API::Vertex.new(x: 170, y: 8), API::Vertex.new(x: 170, y: 23), API::Vertex.new(x: 132, y: 23)])),
+      API::EntityAnnotation.new(description: "for", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 175, y: 8), API::Vertex.new(x: 191, y: 8), API::Vertex.new(x: 191, y: 23), API::Vertex.new(x: 175, y: 23)])),
+      API::EntityAnnotation.new(description: "Ruby", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 195, y: 8), API::Vertex.new(x: 221, y: 8), API::Vertex.new(x: 221, y: 23), API::Vertex.new(x: 195, y: 23)])),
+      API::EntityAnnotation.new(description: "an", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 236, y: 8), API::Vertex.new(x: 245, y: 8), API::Vertex.new(x: 245, y: 23), API::Vertex.new(x: 236, y: 23)])),
+      API::EntityAnnotation.new(description: "idiomatic,", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 250, y: 8), API::Vertex.new(x: 307, y: 8), API::Vertex.new(x: 307, y: 23), API::Vertex.new(x: 250, y: 23)])),
+      API::EntityAnnotation.new(description: "intuitive,", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 311, y: 8), API::Vertex.new(x: 360, y: 8), API::Vertex.new(x: 360, y: 23), API::Vertex.new(x: 311, y: 23)])),
+      API::EntityAnnotation.new(description: "and", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 363, y: 8), API::Vertex.new(x: 385, y: 8), API::Vertex.new(x: 385, y: 23), API::Vertex.new(x: 363, y: 23)])),
+      API::EntityAnnotation.new(description: "natural", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 13, y: 33), API::Vertex.new(x: 52, y: 33), API::Vertex.new(x: 52, y: 49), API::Vertex.new(x: 13, y: 49)])),
+      API::EntityAnnotation.new(description: "way", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 56, y: 33), API::Vertex.new(x: 77, y: 33), API::Vertex.new(x: 77, y: 49), API::Vertex.new(x: 56, y: 49)])),
+      API::EntityAnnotation.new(description: "for", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 82, y: 33), API::Vertex.new(x: 98, y: 33), API::Vertex.new(x: 98, y: 49), API::Vertex.new(x: 82, y: 49)])),
+      API::EntityAnnotation.new(description: "Ruby", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 102, y: 33), API::Vertex.new(x: 130, y: 33), API::Vertex.new(x: 130, y: 49), API::Vertex.new(x: 102, y: 49)])),
+      API::EntityAnnotation.new(description: "developers", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 135, y: 33), API::Vertex.new(x: 196, y: 33), API::Vertex.new(x: 196, y: 49), API::Vertex.new(x: 135, y: 49)])),
+      API::EntityAnnotation.new(description: "to", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 201, y: 33), API::Vertex.new(x: 212, y: 33), API::Vertex.new(x: 212, y: 49), API::Vertex.new(x: 201, y: 49)])),
+      API::EntityAnnotation.new(description: "integrate", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 215, y: 33), API::Vertex.new(x: 265, y: 33), API::Vertex.new(x: 265, y: 49), API::Vertex.new(x: 215, y: 49)])),
+      API::EntityAnnotation.new(description: "with", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 270, y: 33), API::Vertex.new(x: 293, y: 33), API::Vertex.new(x: 293, y: 49), API::Vertex.new(x: 270, y: 49)])),
+      API::EntityAnnotation.new(description: "Google", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 299, y: 33), API::Vertex.new(x: 339, y: 33), API::Vertex.new(x: 339, y: 49), API::Vertex.new(x: 299, y: 49)])),
+      API::EntityAnnotation.new(description: "Cloud", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 345, y: 33), API::Vertex.new(x: 376, y: 33), API::Vertex.new(x: 376, y: 49), API::Vertex.new(x: 345, y: 49)])),
+      API::EntityAnnotation.new(description: "Platform", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 13, y: 59), API::Vertex.new(x: 59, y: 59), API::Vertex.new(x: 59, y: 74), API::Vertex.new(x: 13, y: 74)])),
+      API::EntityAnnotation.new(description: "services,", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 67, y: 59), API::Vertex.new(x: 117, y: 59), API::Vertex.new(x: 117, y: 74), API::Vertex.new(x: 67, y: 74)])),
+      API::EntityAnnotation.new(description: "like", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 121, y: 59), API::Vertex.new(x: 138, y: 59), API::Vertex.new(x: 138, y: 74), API::Vertex.new(x: 121, y: 74)])),
+      API::EntityAnnotation.new(description: "Cloud", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 145, y: 59), API::Vertex.new(x: 177, y: 59), API::Vertex.new(x: 177, y: 74), API::Vertex.new(x: 145, y: 74)])),
+      API::EntityAnnotation.new(description: "Datastore", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 181, y: 59), API::Vertex.new(x: 236, y: 59), API::Vertex.new(x: 236, y: 74), API::Vertex.new(x: 181, y: 74)])),
+      API::EntityAnnotation.new(description: "and", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 242, y: 59), API::Vertex.new(x: 260, y: 59), API::Vertex.new(x: 260, y: 74), API::Vertex.new(x: 242, y: 74)])),
+      API::EntityAnnotation.new(description: "Cloud", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 267, y: 59), API::Vertex.new(x: 298, y: 59), API::Vertex.new(x: 298, y: 74), API::Vertex.new(x: 267, y: 74)])),
+      API::EntityAnnotation.new(description: "Storage.", bounding_poly: API::BoundingPoly.new(vertices: [API::Vertex.new(x: 304, y: 59), API::Vertex.new(x: 351, y: 59), API::Vertex.new(x: 351, y: 74), API::Vertex.new(x: 304, y: 74)]))
     ]
   end
 
   def safe_search_annotation_response
-    {
-      adult:    :VERY_UNLIKELY,
-      spoof:    :UNLIKELY,
-      medical:  :POSSIBLE,
-      violence: :LIKELY
-    }
+    API::SafeSearchAnnotation.new(
+      adult:    "VERY_UNLIKELY",
+      spoof:    "UNLIKELY",
+      medical:  "POSSIBLE",
+      violence: "LIKELY"
+    )
   end
 
   def properties_annotation_response
-    {
-      dominantColors: {
+    API::ImageProperties.new(
+      dominant_colors: API::DominantColorsAnnotation.new(
         colors: [
-          { color: { red: 145, green: 193, blue: 254 },
-            score: 0.65757853,
-            pixelFraction: 0.16903226 },
-          { color: { red: 0, green: 0, blue: 0 },
-            score: 0.09256918,
-            pixelFraction: 0.19258064 },
-          { color: { red: 255, green: 255, blue: 255 },
-            score: 0.1002003,
-            pixelFraction: 0.022258064 },
-          { color: { red: 3, green: 4, blue: 254},
-            score: 0.089072376,
-            pixelFraction: 0.054516129 },
-          { color: { red: 168, green: 215, blue: 255 },
-            score: 0.019252902,
-            pixelFraction: 0.0070967744 },
-          { color: { red: 127, green: 177, blue: 255 },
-            score: 0.017626688,
-            pixelFraction: 0.0045161289 },
-          { color: { red: 178, green: 223, blue: 255 },
-            score: 0.015010362,
-            pixelFraction: 0.0022580645 },
-          { color: { red: 172, green: 224, blue: 255 },
-            score: 0.0049617039,
-            pixelFraction: 0.0012903226 },
-          { color: { red: 160, green: 218, blue: 255 },
-            score: 0.0027604031,
-            pixelFraction: 0.0022580645 },
-          { color: { red: 156, green: 214, blue: 255 },
-            score: 0.00096750073,
-            pixelFraction: 0.00064516132 }
+          API::ColorInfo.new(color: API::Color.new(red: 145, green: 193, blue: 254),
+                             score: 0.65757853,
+                             pixel_fraction: 0.16903226),
+          API::ColorInfo.new(color: API::Color.new(red: 0, green: 0, blue: 0),
+                             score: 0.09256918,
+                             pixel_fraction: 0.19258064),
+          API::ColorInfo.new(color: API::Color.new(red: 255, green: 255, blue: 255),
+                             score: 0.1002003,
+                             pixel_fraction: 0.022258064),
+          API::ColorInfo.new(color: API::Color.new(red: 3, green: 4, blue: 254),
+                             score: 0.089072376,
+                             pixel_fraction: 0.054516129),
+          API::ColorInfo.new(color: API::Color.new(red: 168, green: 215, blue: 255),
+                             score: 0.019252902,
+                             pixel_fraction: 0.0070967744),
+          API::ColorInfo.new(color: API::Color.new(red: 127, green: 177, blue: 255),
+                             score: 0.017626688,
+                             pixel_fraction: 0.0045161289),
+          API::ColorInfo.new(color: API::Color.new(red: 178, green: 223, blue: 255),
+                             score: 0.015010362,
+                             pixel_fraction: 0.0022580645),
+          API::ColorInfo.new(color: API::Color.new(red: 172, green: 224, blue: 255),
+                             score: 0.0049617039,
+                             pixel_fraction: 0.0012903226),
+          API::ColorInfo.new(color: API::Color.new(red: 160, green: 218, blue: 255),
+                             score: 0.0027604031,
+                             pixel_fraction: 0.0022580645),
+          API::ColorInfo.new(color: API::Color.new(red: 156, green: 214, blue: 255),
+                             score: 0.00096750073,
+                             pixel_fraction: 0.00064516132)
         ]
-      }
-    }
+      )
+    )
   end
 end

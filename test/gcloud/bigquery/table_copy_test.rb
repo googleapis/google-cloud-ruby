@@ -19,205 +19,169 @@ describe Gcloud::Bigquery::Table, :copy, :mock_bigquery do
   let(:source_table_id) { "source_table_id" }
   let(:source_table_name) { "Source Table" }
   let(:source_description) { "This is the source table" }
-  let(:source_table_hash) { random_table_hash source_dataset,
+  let(:source_table_gapi) { random_table_gapi source_dataset,
                                               source_table_id,
                                               source_table_name,
                                               source_description }
-  let(:source_table) { Gcloud::Bigquery::Table.from_gapi source_table_hash,
-                                                         bigquery.connection }
+  let(:source_table) { Gcloud::Bigquery::Table.from_gapi source_table_gapi,
+                                                         bigquery.service }
   let(:target_dataset) { "target_dataset" }
   let(:target_table_id) { "target_table_id" }
   let(:target_table_name) { "Target Table" }
   let(:target_description) { "This is the target table" }
-  let(:target_table_hash) { random_table_hash target_dataset,
+  let(:target_table_gapi) { random_table_gapi target_dataset,
                                               target_table_id,
                                               target_table_name,
                                               target_description }
-  let(:target_table) { Gcloud::Bigquery::Table.from_gapi target_table_hash,
-                                                         bigquery.connection }
-  let(:target_table_other_proj_hash) { random_table_hash target_dataset,
+  let(:target_table) { Gcloud::Bigquery::Table.from_gapi target_table_gapi,
+                                                         bigquery.service }
+  let(:target_table_other_proj_gapi) { random_table_gapi target_dataset,
                                               target_table_id,
                                               target_table_name,
                                               target_description,
                                               "target-project" }
-  let(:target_table_other_proj) { Gcloud::Bigquery::Table.from_gapi target_table_other_proj_hash,
-                                                         bigquery.connection }
+  let(:target_table_other_proj) { Gcloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
+                                                         bigquery.service }
 
   it "can copy itself" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].wont_include "createDisposition"
-      json["configuration"]["copy"].wont_include "writeDisposition"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table)
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy to a table identified by a string" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal   source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table_other_proj.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table_other_proj.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal   target_table_other_proj.table_id
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table_other_proj)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table_other_proj)
+    mock.expect :insert_job, job_gapi, ["test-project", job_gapi]
 
     job = source_table.copy "target-project:target_dataset.target_table_id"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy to a table name string only" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal   source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal   "new_target_table_id"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table_other_proj)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    new_target_table = Gcloud::Bigquery::Table.from_gapi(
+      random_table_gapi(source_dataset,
+                        "new_target_table_id",
+                        target_table_name,
+                        target_description),
+      bigquery.service
+    )
+
+    job_gapi = copy_job_gapi(source_table, new_target_table)
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy "new_target_table_id"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself as a dryrun" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].wont_include "createDisposition"
-      json["configuration"]["copy"].wont_include "writeDisposition"
-      json["configuration"].must_include "dryRun"
-      json["configuration"]["dryRun"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.dry_run = true
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table, dryrun: true
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].must_include "createDisposition"
-      json["configuration"]["copy"]["createDisposition"].must_equal "CREATE_NEVER"
-      json["configuration"]["copy"].wont_include "writeDisposition"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table, create: "CREATE_NEVER"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition symbol" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].must_include "createDisposition"
-      json["configuration"]["copy"]["createDisposition"].must_equal "CREATE_NEVER"
-      json["configuration"]["copy"].wont_include "writeDisposition"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table, create: :never
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
+
   it "can copy itself with write disposition" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].wont_include "createDisposition"
-      json["configuration"]["copy"].must_include "writeDisposition"
-      json["configuration"]["copy"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table, write: "WRITE_TRUNCATE"
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
   it "can copy itself with write disposition symbol" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      json = JSON.parse(env.body)
-      json["configuration"]["copy"]["sourceTable"]["projectId"].must_equal source_table.project_id
-      json["configuration"]["copy"]["sourceTable"]["datasetId"].must_equal source_table.dataset_id
-      json["configuration"]["copy"]["sourceTable"]["tableId"].must_equal source_table.table_id
-      json["configuration"]["copy"]["destinationTable"]["projectId"].must_equal target_table.project_id
-      json["configuration"]["copy"]["destinationTable"]["datasetId"].must_equal target_table.dataset_id
-      json["configuration"]["copy"]["destinationTable"]["tableId"].must_equal target_table.table_id
-      json["configuration"]["copy"].wont_include "createDisposition"
-      json["configuration"]["copy"].must_include "writeDisposition"
-      json["configuration"]["copy"]["writeDisposition"].must_equal "WRITE_TRUNCATE"
-      json["configuration"].wont_include "dryRun"
-      [200, {"Content-Type"=>"application/json"},
-       copy_job_json(source_table, target_table)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy target_table, write: :truncate
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::CopyJob
   end
 
+  def copy_job_gapi source, target
+    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target)
+  end
+
   def copy_job_json source, target
-    hash = random_job_hash
-    hash["configuration"]["copy"] = {
-      "sourceTable" => {
-        "projectId" => source.project_id,
-        "datasetId" => source.dataset_id,
-        "tableId" => source.table_id
-      },
-      "destinationTable" => {
-        "projectId" => target.project_id,
-        "datasetId" => target.dataset_id,
-        "tableId" => target.table_id
-      },
-      "createDisposition" => "CREATE_IF_NEEDED",
-      "writeDisposition" => "WRITE_EMPTY"
-    }
-    hash.to_json
+    {
+      "configuration" => {
+        "copy" => {
+          "sourceTable" => {
+            "projectId" => source.project_id,
+            "datasetId" => source.dataset_id,
+            "tableId" => source.table_id
+          },
+          "destinationTable" => {
+            "projectId" => target.project_id,
+            "datasetId" => target.dataset_id,
+            "tableId" => target.table_id
+          },
+          "createDisposition" => nil,
+          "writeDisposition" => nil
+        },
+        "dryRun" => nil
+      }
+    }.to_json
   end
 end

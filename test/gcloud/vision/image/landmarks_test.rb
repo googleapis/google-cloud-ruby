@@ -20,73 +20,90 @@ describe Gcloud::Vision::Image, :landmarks, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects multiple landmarks" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      landmark["features"].count.must_equal 1
-      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
-      landmark["features"].first["maxResults"].must_equal 10
-      [200, {"Content-Type" => "application/json"},
-       landmarks_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 10)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, landmarks_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     landmarks = image.landmarks 10
+    mock.verify
+
     landmarks.count.must_equal 5
   end
 
   it "detects multiple landmarks without specifying a count" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      landmark["features"].count.must_equal 1
-      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
-      landmark["features"].first["maxResults"].must_equal 100
-      [200, {"Content-Type" => "application/json"},
-       landmarks_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 100)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, landmarks_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     landmarks = image.landmarks
+    mock.verify
+
     landmarks.count.must_equal 5
   end
 
   it "detects a landmark" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      landmark = requests.first
-      landmark["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      landmark["features"].count.must_equal 1
-      landmark["features"].first["type"].must_equal "LANDMARK_DETECTION"
-      landmark["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       landmark_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, landmark_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     landmark = image.landmark
+    mock.verify
+
     landmark.wont_be :nil?
   end
 
-  def landmark_response_json
-    {
-      responses: [{
-        landmarkAnnotations: [landmark_annotation_response]
-      }]
-    }.to_json
+  def landmark_response_gapi
+    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Apis::VisionV1::AnnotateImageResponse.new(
+          landmark_annotations: [
+            landmark_annotation_response
+          ]
+        )
+      ]
+    )
   end
 
-  def landmarks_response_json
-    {
-      responses: [{
-        landmarkAnnotations: [landmark_annotation_response,
-                          landmark_annotation_response,
-                          landmark_annotation_response,
-                          landmark_annotation_response,
-                          landmark_annotation_response]
-      }]
-    }.to_json
+  def landmarks_response_gapi
+    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Apis::VisionV1::AnnotateImageResponse.new(
+          landmark_annotations: [
+            landmark_annotation_response,
+            landmark_annotation_response,
+            landmark_annotation_response,
+            landmark_annotation_response,
+            landmark_annotation_response
+          ]
+        )
+      ]
+    )
   end
 end

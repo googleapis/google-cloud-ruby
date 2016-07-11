@@ -17,7 +17,6 @@ require "json"
 require "uri"
 
 describe Gcloud::Bigquery::Table, :mock_bigquery do
-  # Create a table object with the project's mocked connection object
   let(:dataset) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
@@ -26,8 +25,8 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
   let(:location_code) { "US" }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "knows its attributes" do
     table.name.must_equal table_name
@@ -51,44 +50,54 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
 
   it "knows its creation and modification and expiration times" do
     now = Time.now
+    table_hash["creationTime"] = (now.to_f * 1000).floor
+    table_hash["lastModifiedTime"] = (now.to_f * 1000).floor
+    table_hash["expirationTime"] = (now.to_f * 1000).floor
 
-    table.gapi["creationTime"] = (now.to_f * 1000).floor
+
     table.created_at.must_be_close_to now
-
-    table.gapi["lastModifiedTime"] = (now.to_f * 1000).floor
     table.modified_at.must_be_close_to now
-
-    table.gapi["expirationTime"] = nil
-    table.expires_at.must_be :nil?
-
-    table.gapi["expirationTime"] = (now.to_f * 1000).floor
     table.expires_at.must_be_close_to now
   end
 
+  it "can have an empty expiration times" do
+    table_hash["expirationTime"] = nil
+
+    table.expires_at.must_be :nil?
+  end
+
   it "knows schema, fields, and headers" do
-    table.schema.must_be_kind_of Hash
-    table.schema.keys.must_include "fields"
-    table.fields.must_equal table.schema["fields"]
+    table.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    table.schema.must_be :frozen?
+    table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
     table.headers.must_equal ["name", "age", "score", "active"]
   end
 
   it "can delete itself" do
-    mock_connection.delete "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_table, nil,
+      [project, dataset, table_id]
+    table.service.mocked_service = mock
 
     table.delete
+
+    mock.verify
   end
 
   it "can reload itself" do
     new_description = "New description of the table."
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{table.dataset_id}/tables/#{table.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_table_hash(dataset, table_id, table_name, new_description).to_json]
-    end
+
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset, table_id, table_name, new_description
+    mock.expect :get_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
+      [project, dataset, table_id]
+    table.service.mocked_service = mock
 
     table.description.must_equal description
     table.reload!
+
+    mock.verify
+
     table.description.must_equal new_description
   end
 end

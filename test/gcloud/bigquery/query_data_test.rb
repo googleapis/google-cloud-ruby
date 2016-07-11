@@ -15,8 +15,8 @@
 require "helper"
 
 describe Gcloud::Bigquery::QueryData, :mock_bigquery do
-  let(:query_data) { Gcloud::Bigquery::QueryData.from_gapi query_data_hash,
-                                                           bigquery.connection }
+  let(:query_data) { Gcloud::Bigquery::QueryData.from_gapi query_data_gapi,
+                                                           bigquery.service }
 
   it "returns data as a list of hashes" do
     query_data.count.must_equal 3
@@ -39,7 +39,6 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
 
   it "knows the data metadata" do
     query_data.kind.must_equal "bigquery#getQueryResultsResponse"
-    query_data.etag.must_equal "etag1234567890"
     query_data.token.must_equal "token1234567890"
     query_data.total.must_equal 3
     query_data.total_bytes.must_equal 456789
@@ -69,30 +68,34 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
   end
 
   it "knows schema, fields, and headers" do
-    query_data.schema.must_be_kind_of Hash
-    query_data.schema.keys.must_include "fields"
-    query_data.fields.must_equal query_data.schema["fields"]
+    query_data.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    query_data.fields.must_equal query_data.schema.fields
     query_data.headers.must_equal ["name", "age", "score", "active"]
   end
 
   it "can get the job associated with the data" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/job9876543210" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash("job9876543210").to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash("job9876543210", "done").to_json),
+                [project, "job9876543210"]
 
     job = query_data.job
+    mock.verify
+
     job.must_be_kind_of Gcloud::Bigquery::Job
     job.job_id.must_equal "job9876543210"
   end
 
   it "memoizes the job associated with the data" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/job9876543210" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash("job9876543210").to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash("job9876543210", "done").to_json),
+                [project, "job9876543210"]
 
     job = query_data.job
+
     job.must_be_kind_of Gcloud::Bigquery::Job
     job.job_id.must_equal "job9876543210"
 
@@ -101,6 +104,7 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
     job2.must_equal job
     job3 = query_data.job
     job3.must_equal job
+    mock.verify
   end
 
   it "can hold a job object and not make HTTP API calls to return it" do
@@ -110,33 +114,32 @@ describe Gcloud::Bigquery::QueryData, :mock_bigquery do
     job.must_equal "I AM A STUBBED JOB"
   end
 
-  it "handles missing rows and fields" do
-    nil_query_data = Gcloud::Bigquery::QueryData.from_gapi nil_query_data_hash,
-                                                           bigquery.connection
+  it "handles missing schema" do
+    nil_query_data = Gcloud::Bigquery::QueryData.from_gapi nil_query_data_gapi,
+                                                           bigquery.service
 
     nil_query_data.class.must_equal Gcloud::Bigquery::QueryData
     nil_query_data.count.must_equal 0
   end
 
   it "handles empty rows and fields" do
-    empty_query_data = Gcloud::Bigquery::QueryData.from_gapi empty_query_data_hash,
-                                                             bigquery.connection
+    empty_query_data = Gcloud::Bigquery::QueryData.from_gapi empty_query_data_gapi,
+                                                             bigquery.service
 
     empty_query_data.class.must_equal Gcloud::Bigquery::QueryData
     empty_query_data.count.must_equal 0
   end
 
-  def nil_query_data_hash
-    h = query_data_hash
-    h.delete "rows"
-    h.delete "schema"
-    h
+  def nil_query_data_gapi
+    gapi = query_data_gapi
+    gapi.schema = nil
+    gapi
   end
 
-  def empty_query_data_hash
-    h = query_data_hash
-    h["rows"] = []
-    h["schema"]["fields"] = []
-    h
+  def empty_query_data_gapi
+    gapi = query_data_gapi
+    gapi.rows = []
+    gapi.schema.fields = []
+    gapi
   end
 end

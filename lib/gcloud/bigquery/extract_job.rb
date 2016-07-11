@@ -32,25 +32,25 @@ module Gcloud
       # The URI or URIs representing the Google Cloud Storage files to which
       # the data is exported.
       def destinations
-        Array config["extract"]["destinationUris"]
+        Array @gapi.configuration.extract.destination_uris
       end
 
       ##
       # The table from which the data is exported. This is the table upon
       # which {Table#extract} was called. Returns a {Table} instance.
       def source
-        table = config["extract"]["sourceTable"]
+        table = @gapi.configuration.extract.source_table
         return nil unless table
-        retrieve_table table["projectId"],
-                       table["datasetId"],
-                       table["tableId"]
+        retrieve_table table.project_id,
+                       table.dataset_id,
+                       table.table_id
       end
 
       ##
       # Checks if the export operation compresses the data using gzip. The
       # default is `false`.
       def compression?
-        val = config["extract"]["compression"]
+        val = @gapi.configuration.extract.compression
         val == "GZIP"
       end
 
@@ -58,7 +58,7 @@ module Gcloud
       # Checks if the destination format for the data is [newline-delimited
       # JSON](http://jsonlines.org/). The default is `false`.
       def json?
-        val = config["extract"]["destinationFormat"]
+        val = @gapi.configuration.extract.destination_format
         val == "NEWLINE_DELIMITED_JSON"
       end
 
@@ -66,7 +66,7 @@ module Gcloud
       # Checks if the destination format for the data is CSV. Tables with nested
       # or repeated fields cannot be exported as CSV. The default is `true`.
       def csv?
-        val = config["extract"]["destinationFormat"]
+        val = @gapi.configuration.extract.destination_format
         return true if val.nil?
         val == "CSV"
       end
@@ -75,7 +75,7 @@ module Gcloud
       # Checks if the destination format for the data is
       # [Avro](http://avro.apache.org/). The default is `false`.
       def avro?
-        val = config["extract"]["destinationFormat"]
+        val = @gapi.configuration.extract.destination_format
         val == "AVRO"
       end
 
@@ -83,7 +83,7 @@ module Gcloud
       # The symbol the operation uses to delimit fields in the exported data.
       # The default is a comma (,).
       def delimiter
-        val = config["extract"]["fieldDelimiter"]
+        val = @gapi.configuration.extract.field_delimiter
         val = "," if val.nil?
         val
       end
@@ -92,7 +92,7 @@ module Gcloud
       # Checks if the exported data contains a header row. The default is
       # `true`.
       def print_header?
-        val = config["extract"]["printHeader"]
+        val = @gapi.configuration.extract.print_header
         val = true if val.nil?
         val
       end
@@ -102,7 +102,7 @@ module Gcloud
       # {#destinations}. Returns an Array of values in the same order as the URI
       # patterns.
       def destinations_file_counts
-        Array stats["extract"]["destinationUriFileCounts"]
+        Array @gapi.statistics.extract.destination_uri_file_counts
       end
 
       ##

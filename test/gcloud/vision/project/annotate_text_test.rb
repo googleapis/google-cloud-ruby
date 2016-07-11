@@ -18,19 +18,22 @@ describe Gcloud::Vision::Project, :annotate, :text, :mock_vision do
   let(:filepath) { "acceptance/data/text.png" }
 
   it "detects text detection" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      text = requests.first
-      text["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      text["features"].count.must_equal 1
-      text["features"].first["type"].must_equal "TEXT_DETECTION"
-      text["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       text_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, text_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, text: true
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
     annotation.text.text.must_include "Google Cloud Client Library for Ruby"
@@ -43,77 +46,90 @@ describe Gcloud::Vision::Project, :annotate, :text, :mock_vision do
   end
 
   it "detects text detection using mark alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      text = requests.first
-      text["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      text["features"].count.must_equal 1
-      text["features"].first["type"].must_equal "TEXT_DETECTION"
-      text["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       text_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, text_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.mark filepath, text: true
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
   end
 
   it "detects text detection using detect alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      text = requests.first
-      text["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      text["features"].count.must_equal 1
-      text["features"].first["type"].must_equal "TEXT_DETECTION"
-      text["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       text_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, text_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.detect filepath, text: true
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
   end
 
   it "detects text detection on multiple images" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.first["features"].count.must_equal 1
-      requests.first["features"].first["type"].must_equal "TEXT_DETECTION"
-      requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "TEXT_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       texts_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        ),
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, texts_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, text: true
+    mock.verify
+
     annotations.count.must_equal 2
     annotations.first.text.wont_be :nil?
     annotations.last.text.wont_be :nil?
   end
 
   it "uses the default configuration when given a truthy value" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      text = requests.first
-      text["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      text["features"].count.must_equal 1
-      text["features"].first["type"].must_equal "TEXT_DETECTION"
-      text["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       text_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, text_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, text: "totes"
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
     annotation.text.text.must_include "Google Cloud Client Library for Ruby"
@@ -125,21 +141,28 @@ describe Gcloud::Vision::Project, :annotate, :text, :mock_vision do
     annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 
-  def text_response_json
-    {
-      responses: [{
-        textAnnotations: text_annotation_responses
-      }]
-    }.to_json
+
+
+  def text_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses
+        )
+      ]
+    )
   end
 
-  def texts_response_json
-    {
-      responses: [{
-        textAnnotations: text_annotation_responses
-      }, {
-        textAnnotations: text_annotation_responses
-      }]
-    }.to_json
+  def texts_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses
+        ),
+        MockVision::API::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses
+        )
+      ]
+    )
   end
 end

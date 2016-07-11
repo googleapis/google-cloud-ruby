@@ -17,16 +17,17 @@ require "json"
 require "uri"
 
 describe Gcloud::Storage::Bucket, :mock_storage do
-  # Create a bucket object with the project's mocked connection object
   let(:bucket_hash) { random_bucket_hash }
-  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_hash, storage.connection }
+  let(:bucket_json) { bucket_hash.to_json }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
+  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
   let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
   let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
   let(:bucket_cors) { [{ "maxAgeSeconds" => 300,
-                         "origin" => ["http://example.org", "https://example.org"],
                          "method" => ["*"],
+                         "origin" => ["http://example.org", "https://example.org"],
                          "responseHeader" => ["X-My-Custom-Header"] }] }
   let(:bucket_location) { "US" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
@@ -35,19 +36,27 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   let(:bucket_versioning) { true }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
-  let(:bucket_hash_complete) { random_bucket_hash bucket_name, bucket_url_root,
+  let(:bucket_complete_hash) { random_bucket_hash bucket_name, bucket_url_root,
                                                   bucket_location, bucket_storage_class, bucket_versioning,
                                                   bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
                                                   bucket_website_404, bucket_cors }
-  let(:bucket_complete) { Gcloud::Storage::Bucket.from_gapi bucket_hash_complete, storage.connection }
+  let(:bucket_complete_json) { bucket_complete_hash.to_json }
+  let(:bucket_complete_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_complete_json }
+  let(:bucket_complete) { Gcloud::Storage::Bucket.from_gapi bucket_complete_gapi, storage.service }
 
   let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
+  let(:key_options) do { header: {
+      "x-goog-encryption-algorithm"  => "AES256",
+      "x-goog-encryption-key"        => Base64.encode64(encryption_key),
+      "x-goog-encryption-key-sha256" => Base64.encode64(encryption_key_sha256)
+    } }
+  end
 
   it "knows its attributes" do
-    bucket_complete.id.must_equal bucket_hash_complete["id"]
+    bucket_complete.id.must_equal bucket_complete_hash["id"]
     bucket_complete.name.must_equal bucket_name
-    bucket_complete.created_at.must_equal bucket_hash_complete["timeCreated"]
+    bucket_complete.created_at.must_be_within_delta bucket_complete_hash["timeCreated"].to_datetime
     bucket_complete.api_url.must_equal bucket_url
     bucket_complete.location.must_equal bucket_location
     bucket_complete.logging_bucket.must_equal bucket_logging_bucket
@@ -59,291 +68,243 @@ describe Gcloud::Storage::Bucket, :mock_storage do
   end
 
   it "return frozen cors" do
-    bucket_complete.cors.must_equal bucket_hash_complete["cors"]
+    bucket_complete.cors.each do |cors|
+      cors.must_be_kind_of Gcloud::Storage::Bucket::Cors::Rule
+      cors.frozen?.must_equal true
+    end
     bucket_complete.cors.frozen?.must_equal true
-    bucket_complete.cors.first.frozen?.must_equal true
   end
 
   it "can delete itself" do
-    mock_connection.delete "/storage/v1/b/#{bucket.name}" do |env|
-      [200, { "Content-Type" => "application/json" }, ""]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_bucket, nil, [bucket.name]
+
+    bucket.service.mocked_service = mock
 
     bucket.delete
+
+    mock.verify
   end
 
   it "creates a file" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "predefinedAcl"
-
-      multipart_params = parse_multipart env
-      multipart_params.first[:headers]["Content-Disposition"].must_equal "form-data; name=\"\"; filename=\"file.json\""
-      multipart_params.first[:headers]["Content-Length"].must_equal "28"
-      multipart_params.first[:headers]["Content-Type"].must_equal "application/json"
-      multipart_params.first[:headers]["Content-Transfer-Encoding"].must_equal "binary"
-      multipart_params.first[:body].must_equal "{\"contentType\":\"text/plain\"}"
-      multipart_params.last[:headers]["Content-Disposition"].must_include "form-data; name=\"\"; filename=\"gcloud-ruby"
-      multipart_params.last[:headers]["Content-Length"].must_equal "11"
-      multipart_params.last[:headers]["Content-Type"].must_equal "text/plain"
-      multipart_params.last[:headers]["Content-Transfer-Encoding"].must_equal "binary"
-      multipart_params.last[:body].must_equal "Hello world"
-
-
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
-
     Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
       tmpfile.rewind
 
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name
+
+      mock.verify
     end
   end
 
   it "creates a file with upload_file alias" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "predefinedAcl"
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.upload_file tmpfile, new_file_name
+
+      mock.verify
     end
   end
 
   it "creates a file with new_file alias" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "predefinedAcl"
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.new_file tmpfile, new_file_name
+
+      mock.verify
     end
   end
 
   it "creates a file with predefined acl" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "predefinedAcl"
-      env.params["predefinedAcl"].must_equal "private"
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: "private", upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, acl: "private"
+
+      mock.verify
     end
   end
 
   it "creates a file with predefined acl alias" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "predefinedAcl"
-      env.params["predefinedAcl"].must_equal "publicRead"
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: "publicRead", upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, acl: :public
-    end
-  end
 
-  it "creates with resumable" do
-    # Mock the upload
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
-       create_file_json(bucket.name, "resumable.ext")]
-    end
-
-    Tempfile.open "gcloud-ruby" do |tmpfile|
-      tmpfile.write "The quick brown fox jumps over the lazy dog."
-      Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
-        bucket.create_file tmpfile, "resumable.ext"
-      end
+      mock.verify
     end
   end
 
   it "creates a file with md5" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      multipart_params = parse_multipart env
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-      json = JSON.parse multipart_params.first[:body]
-      json["md5Hash"].must_equal "HXB937GQDFxDFqUGi//weQ=="
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(md5: "HXB937GQDFxDFqUGi//weQ=="), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, md5: "HXB937GQDFxDFqUGi//weQ=="
+
+      mock.verify
     end
   end
 
   it "creates a file with crc32c" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      multipart_params = parse_multipart env
-      json = JSON.parse multipart_params.first[:body]
-      json["crc32c"].must_equal "Lm1F3g=="
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(crc32c: "Lm1F3g=="), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, crc32c: "Lm1F3g=="
+
+      mock.verify
     end
   end
 
   it "creates a file with attributes" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      multipart_params = parse_multipart env
-      json = JSON.parse multipart_params.first[:body]
-      json["cacheControl"].must_equal "public, max-age=3600"
-      json["contentDisposition"].must_equal "attachment; filename=filename.ext"
-      json["contentEncoding"].must_equal "gzip"
-      json["contentLanguage"].must_equal "en"
-      json["contentType"].must_equal "image/png"
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
-    options = {
-      cache_control: "public, max-age=3600",
-      content_disposition: "attachment; filename=filename.ext",
-      content_encoding: "gzip",
-      content_language: "en",
-      content_type: "image/png"
-    }
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      options = {
+        cache_control: "public, max-age=3600",
+        content_disposition: "attachment; filename=filename.ext",
+        content_encoding: "gzip",
+        content_language: "en",
+        content_type: "image/png"
+      }
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(options), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: options[:content_encoding], content_type: options[:content_type], options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, options
+
+      mock.verify
     end
   end
 
   it "creates a file with metadata" do
     new_file_name = random_file_path
-    metadata = {
-      "player" => "Bob",
-      score: 10
-    }
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      multipart_params = parse_multipart env
 
-      json = JSON.parse multipart_params.first[:body]
-      json["metadata"].must_be_kind_of Hash
-      json["metadata"].size.must_equal 2
-      json["metadata"]["player"].must_equal "Bob"
-      json["metadata"]["score"].must_equal 10
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      metadata = {
+        "player" => "Bob",
+        score: 10
+      }
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(metadata: metadata), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: {}]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, metadata: metadata
+
+      mock.verify
     end
   end
 
   it "creates a file with customer-supplied encryption key" do
     new_file_name = random_file_path
 
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
-      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
-      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
-      [200, { "Content-Type" => "application/json" },
-       create_file_json(bucket.name, new_file_name)]
-    end
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
 
-    Tempfile.open "gcloud-ruby" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: key_options]
+
+      bucket.service.mocked_service = mock
+
+      bucket.create_file tmpfile, new_file_name, encryption_key: encryption_key
+
+      mock.verify
+    end
+  end
+
+  it "creates a file with customer-supplied encryption key and sha" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["gcloud-ruby", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: key_options]
+
+      bucket.service.mocked_service = mock
+
       bucket.create_file tmpfile, new_file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
-    end
-  end
 
-  it "uses the default chunk_size" do
-    # Mock the upload
-    Gcloud::Upload.stub :default_chunk_size, 256*1024 do
-      upload_request = false
-      mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-        if upload_request
-          # The content length is sent on the second request
-          env.request_headers["Content-length"].to_i.must_equal Gcloud::Upload.default_chunk_size
-        end
-        upload_request = true
-        [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
-         create_file_json(bucket.name, "resumable.ext")]
-      end
-      Tempfile.open "gcloud-ruby" do |tmpfile|
-        10000.times do # write enough to be larger than the chunk_size
-          tmpfile.write "The quick brown fox jumps over the lazy dog."
-        end
-        Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
-          bucket.create_file tmpfile, "resumable.ext"
-        end
-      end
-    end
-  end
-
-  it "uses a valid chunk_size" do
-    # Mock the upload
-    valid_chunk_size = 256 * 1024 # 256KB
-    Gcloud::Upload.stub :default_chunk_size, 256*1024 do
-      upload_request = false
-      mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-        if upload_request
-          # The content length is sent on the second request
-          env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
-        end
-        upload_request = true
-        [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
-         create_file_json(bucket.name, "resumable.ext")]
-      end
-      Tempfile.open "gcloud-ruby" do |tmpfile|
-        10000.times do # write enough to be larger than the chunk_size
-          tmpfile.write "The quick brown fox jumps over the lazy dog."
-        end
-        Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
-          bucket.create_file tmpfile, "resumable.ext", chunk_size: valid_chunk_size
-        end
-      end
-    end
-  end
-
-  it "does not error on an invalid chunk_size" do
-    # Mock the upload
-    valid_chunk_size = 256 * 1024 # 256KB
-    invalid_chunk_size = valid_chunk_size + 1
-    upload_request = false
-    mock_connection.post "/upload/storage/v1/b/#{bucket.name}/o" do |env|
-      if upload_request
-        # The content length is sent on the second request
-        env.request_headers["Content-length"].to_i.must_equal valid_chunk_size
-      end
-      upload_request = true
-      [200, { "Content-Type" => "application/json", Location: "/upload/resumable-uri" },
-       create_file_json(bucket.name, "resumable.ext")]
-    end
-    Tempfile.open "gcloud-ruby" do |tmpfile|
-      10000.times do # write enough to be larger than the chunk_size
-        tmpfile.write "The quick brown fox jumps over the lazy dog."
-      end
-      Gcloud::Upload.stub :resumable_threshold, tmpfile.size/2 do
-        bucket.create_file tmpfile, "resumable.ext", chunk_size: invalid_chunk_size
-      end
+      mock.verify
     end
   end
 
@@ -360,428 +321,368 @@ describe Gcloud::Storage::Bucket, :mock_storage do
 
   it "lists files" do
     num_files = 3
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(num_files)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(num_files),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files
+
+    mock.verify
+
     files.size.must_equal num_files
   end
 
   it "lists files with find_files alias" do
     num_files = 3
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(num_files)]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(num_files),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.find_files
+
+    mock.verify
+
     files.size.must_equal num_files
   end
 
+  it "lists files with prefix set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, nil, ["/prefix/path1/", "/prefix/path2/"]),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil]
+
+    bucket.service.mocked_service = mock
+
+    files = bucket.files prefix: "/prefix/"
+
+    mock.verify
+
+    files.count.must_equal 3
+    files.prefixes.wont_be :empty?
+    files.prefixes.must_include "/prefix/path1/"
+    files.prefixes.must_include "/prefix/path2/"
+  end
+
+  it "lists files with delimiter set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, nil, ["/prefix/path1/", "/prefix/path2/"]),
+      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
+
+    files = bucket.files delimiter: "/"
+
+    mock.verify
+
+    files.count.must_equal 3
+    files.prefixes.wont_be :empty?
+    files.prefixes.must_include "/prefix/path1/"
+    files.prefixes.must_include "/prefix/path2/"
+  end
+
+  it "lists files with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
+
+    files = bucket.files max: 3
+
+    mock.verify
+
+    files.count.must_equal 3
+    files.token.wont_be :nil?
+    files.token.must_equal "next_page_token"
+  end
+
+  it "lists files with versions set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true]
+
+    bucket.service.mocked_service = mock
+
+    files = bucket.files versions: true
+
+    mock.verify
+
+    files.count.must_equal 3
+  end
+
   it "paginates files" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files
+    second_files = bucket.files token: first_files.token
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.token.wont_be :nil?
     first_files.token.must_equal "next_page_token"
 
-    second_files = bucket.files token: first_files.token
     second_files.count.must_equal 2
     second_files.token.must_be :nil?
   end
 
-  it "paginates files with prefix set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "prefix"
-      env.params["prefix"].must_equal "/prefix/"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
-    end
-
-    files = bucket.files prefix: "/prefix/"
-    files.count.must_equal 3
-    files.prefixes.wont_be :empty?
-    files.prefixes.must_include "/prefix/path1/"
-    files.prefixes.must_include "/prefix/path2/"
-  end
-
-  it "paginates files without prefix set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "prefix"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, nil, ["/prefix/path1/", "/prefix/path2/"])]
-    end
-
-    files = bucket.files
-    files.count.must_equal 3
-    files.prefixes.wont_be :empty?
-    files.prefixes.must_include "/prefix/path1/"
-    files.prefixes.must_include "/prefix/path2/"
-  end
-
-  it "paginates files with delimiter set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "delimiter"
-      env.params["delimiter"].must_equal "/"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, nil, ["/prefix/path1/","/prefix/path2/"])]
-    end
-
-    files = bucket.files delimiter: "/"
-
-    files.count.must_equal 3
-    files.prefixes.count.must_equal 2
-    files.prefixes.wont_be :empty?
-    files.prefixes.must_include "/prefix/path1/"
-  end
-
-  it "paginates files with max set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-
-    files = bucket.files max: 3
-    files.count.must_equal 3
-    files.token.wont_be :nil?
-    files.token.must_equal "next_page_token"
-  end
-
-  it "paginates files without max set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "maxResults"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-
-    files = bucket.files
-    files.count.must_equal 3
-    files.token.wont_be :nil?
-    files.token.must_equal "next_page_token"
-  end
-
-  it "paginates files with versions set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "versions"
-      env.params["versions"].must_equal "true"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(8)]
-    end
-
-    files = bucket.files versions: true
-    files.count.must_equal 8
-  end
-
-  it "paginates files without versions set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "versions"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3)]
-    end
-
-    files = bucket.files
-    files.count.must_equal 3
-  end
-
   it "paginates files with next? and next" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files
+    second_files = first_files.next
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.next?.must_equal true
 
-    second_files = first_files.next
     second_files.count.must_equal 2
     second_files.next?.must_equal false
   end
 
   it "paginates files with next? and next and prefix set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "prefix"
-      env.params["prefix"].must_equal "/prefix/"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "prefix"
-      env.params["prefix"].must_equal "/prefix/"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files prefix: "/prefix/"
+    second_files = first_files.next
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.next?.must_equal true
 
-    second_files = first_files.next
     second_files.count.must_equal 2
     second_files.next?.must_equal false
   end
 
   it "paginates files with next? and next and delimiter set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "delimiter"
-      env.params["delimiter"].must_equal "/"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "delimiter"
-      env.params["delimiter"].must_equal "/"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files delimiter: "/"
+    second_files = first_files.next
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.next?.must_equal true
 
-    second_files = first_files.next
     second_files.count.must_equal 2
     second_files.next?.must_equal false
   end
 
   it "paginates files with next? and next and max set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files max: 3
+    second_files = first_files.next
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.next?.must_equal true
 
-    second_files = first_files.next
     second_files.count.must_equal 2
     second_files.next?.must_equal false
   end
 
   it "paginates files with next? and next and versions set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "versions"
-      env.params["versions"].must_equal "true"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "versions"
-      env.params["versions"].must_equal "true"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true]
+
+    bucket.service.mocked_service = mock
 
     first_files = bucket.files versions: true
+    second_files = first_files.next
+
+    mock.verify
+
     first_files.count.must_equal 3
     first_files.next?.must_equal true
 
-    second_files = first_files.next
     second_files.count.must_equal 2
     second_files.next?.must_equal false
   end
 
   it "paginates files with all" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files.all.to_a
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all and prefix set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "prefix"
-      env.params["prefix"].must_equal "/prefix/"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "prefix"
-      env.params["prefix"].must_equal "/prefix/"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files(prefix: "/prefix/").all.to_a
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all and delimiter set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "delimiter"
-      env.params["delimiter"].must_equal "/"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "delimiter"
-      env.params["delimiter"].must_equal "/"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files(delimiter: "/").all.to_a
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all and max set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files(max: 3).all.to_a
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all and versions set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "versions"
-      env.params["versions"].must_equal "true"
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "versions"
-      env.params["versions"].must_equal "true"
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(2)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files(versions: true).all.to_a
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all using Enumerator" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files.all.take(5)
+
+    mock.verify
+
     files.count.must_equal 5
   end
 
   it "paginates files with all and request_limit set" do
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.wont_include "pageToken"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "next_page_token")]
-    end
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "next_page_token"
-      [200, { "Content-Type" => "application/json" },
-       list_files_json(3, "second_page_token")]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil]
+    mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil]
+
+    bucket.service.mocked_service = mock
 
     files = bucket.files.all(request_limit: 1).to_a
+
+    mock.verify
+
     files.count.must_equal 6
   end
 
-  it "finds a file without generation" do
+  it "finds a file" do
     file_name = "file.ext"
 
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
-      URI(env.url).query.must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       find_file_json(bucket.name, file_name)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      [bucket.name, file_name, generation: nil, options: {}]
+
+    bucket.service.mocked_service = mock
 
     file = bucket.file file_name
+
+    mock.verify
+
     file.name.must_equal file_name
   end
 
   it "finds a file with find_file alias" do
     file_name = "file.ext"
 
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
-      URI(env.url).query.must_be :nil?
-      [200, { "Content-Type" => "application/json" },
-       find_file_json(bucket.name, file_name)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      [bucket.name, file_name, generation: nil, options: {}]
+
+    bucket.service.mocked_service = mock
 
     file = bucket.find_file file_name
+
+    mock.verify
+
     file.name.must_equal file_name
   end
 
@@ -789,44 +690,62 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     file_name = "file.ext"
     generation = 123
 
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
-      URI(env.url).query.must_equal "generation=#{generation}"
-      [200, { "Content-Type" => "application/json" },
-       find_file_json(bucket.name, file_name)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      [bucket.name, file_name, generation: generation, options: {}]
+
+    bucket.service.mocked_service = mock
 
     file = bucket.file file_name, generation: generation
+
+    mock.verify
+
     file.name.must_equal file_name
   end
 
   it "finds a file with customer-supplied encryption key" do
     file_name = "file.ext"
 
-    mock_connection.get "/storage/v1/b/#{bucket.name}/o/#{file_name}" do |env|
-      env.request_headers["x-goog-encryption-algorithm"].must_equal "AES256"
-      env.request_headers["x-goog-encryption-key"].must_equal Base64.encode64(encryption_key)
-      env.request_headers["x-goog-encryption-key-sha256"].must_equal Base64.encode64(encryption_key_sha256)
-      [200, { "Content-Type" => "application/json" },
-       find_file_json(bucket.name, file_name)]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      [bucket.name, file_name, generation: nil, options: key_options]
+
+    bucket.service.mocked_service = mock
+
+    file = bucket.file file_name, encryption_key: encryption_key
+
+    mock.verify
+
+    file.name.must_equal file_name
+  end
+
+  it "finds a file with customer-supplied encryption key and sha" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      [bucket.name, file_name, generation: nil, options: key_options]
+
+    bucket.service.mocked_service = mock
 
     file = bucket.file file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
+
+    mock.verify
+
     file.name.must_equal file_name
   end
 
   it "can reload itself" do
     bucket_name = "found-bucket"
-
-    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, { "Content-Type" => "application/json" },
-       random_bucket_hash(bucket_name).to_json]
-    end
-
     new_url_root = "https://www.googleapis.com/storage/v2"
-    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, { "Content-Type" => "application/json" },
-       random_bucket_hash(bucket_name, new_url_root).to_json]
-    end
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+      [bucket_name]
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
+      [bucket_name]
+
+    bucket.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
     bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
@@ -834,37 +753,29 @@ describe Gcloud::Storage::Bucket, :mock_storage do
     bucket.reload!
 
     bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    mock.verify
   end
 
-  def create_file_json bucket=nil, name = nil
-    random_file_hash(bucket, name).to_json
+  def create_file_gapi bucket=nil, name = nil
+    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-  def find_file_json bucket=nil, name = nil
-    random_file_hash(bucket, name).to_json
+  def empty_file_gapi cache_control: nil, content_disposition: nil,
+                      content_encoding: nil, content_language: nil,
+                      content_type: nil, crc32c: nil, md5: nil, metadata: nil
+    Google::Apis::StorageV1::Object.new(
+      cache_control: cache_control, content_type: content_type,
+      content_disposition: content_disposition, md5_hash: md5,
+      content_encoding: content_encoding, crc32c: crc32c,
+      content_language: content_language, metadata: metadata)
   end
 
-  def list_files_json count = 2, token = nil, prefixes = nil
-    files = count.times.map { random_file_hash }
-    hash = { "kind" => "storage#objects", "items" => files }
-    hash["nextPageToken"] = token unless token.nil?
-    hash["prefixes"] = prefixes unless prefixes.nil?
-    hash.to_json
+  def find_file_gapi bucket=nil, name = nil
+    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-  def parse_multipart multipart_env
-    data = multipart_env.body.read(8000)
-    # hardcoded boundry because I can't figure out how to ask the object
-    # for the boundary, and its always the same...
-    boundary = "-------------RubyApiMultipartPost"
-    params = data.split(boundary).map(&:strip)
-    params.pop # remove empty last element
-    params.shift # remove empty first element
-    params.map! do |p|
-      raw = p.split "\r\n\r\n";
-      headers = Hash[raw.first.split("\r\n").map {|h| h.split(": ")}]
-      {headers: headers, body: raw.last}
-    end
-    params
+  def list_files_gapi count = 2, token = nil, prefixes = nil
+    files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash.to_json }
+    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes
   end
 end

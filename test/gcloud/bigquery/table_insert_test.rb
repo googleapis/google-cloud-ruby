@@ -18,51 +18,63 @@ describe Gcloud::Bigquery::Table, :insert, :mock_bigquery do
   let(:rows) { [{"name"=>"Heidi", "age"=>"36", "score"=>"7.65", "active"=>"true"},
                 {"name"=>"Aaron", "age"=>"42", "score"=>"8.15", "active"=>"false"},
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
+  let(:insert_rows) { rows.map do |row|
+                        Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
+                          insert_id: Digest::MD5.base64digest(row.inspect),
+                          json: row
+                        )
+                      end }
   let(:dataset_id) { "dataset" }
   let(:table_hash) { random_table_hash dataset_id }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "can insert one row" do
-    mock_connection.post "/bigquery/v2/projects/#{table.project_id}/datasets/#{table.dataset_id}/tables/#{table.table_id}/insertAll" do |env|
-      json = JSON.parse(env.body)
-      json.wont_include "skipInvalidRows"
-      json.wont_include "ignoreUnknownValues"
-      [200, {"Content-Type"=>"application/json"},
-       success_table_insert_json]
-    end
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
 
     result = table.insert rows.first
+
+    mock.verify
+
     result.must_be :success?
     result.insert_count.must_equal 1
     result.error_count.must_equal 0
   end
 
   it "can insert multiple rows" do
-    mock_connection.post "/bigquery/v2/projects/#{table.project_id}/datasets/#{table.dataset_id}/tables/#{table.table_id}/insertAll" do |env|
-      json = JSON.parse(env.body)
-      json.wont_include "skipInvalidRows"
-      json.wont_include "ignoreUnknownValues"
-      [200, {"Content-Type"=>"application/json"},
-       success_table_insert_json]
-    end
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
 
     result = table.insert rows
+
+    mock.verify
+
     result.must_be :success?
     result.insert_count.must_equal 3
     result.error_count.must_equal 0
   end
 
   it "will indicate there was a problem with the data" do
-    mock_connection.post "/bigquery/v2/projects/#{table.project_id}/datasets/#{table.dataset_id}/tables/#{table.table_id}/insertAll" do |env|
-      json = JSON.parse(env.body)
-      json.wont_include "skipInvalidRows"
-      json.wont_include "ignoreUnknownValues"
-      [200, {"Content-Type"=>"application/json"},
-       failure_table_insert_json]
-    end
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    mock.expect :insert_all_table_data, failure_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
 
     result = table.insert rows
+
+    mock.verify
+
     result.wont_be :success?
     result.insert_count.must_equal 2
     result.error_count.must_equal 1
@@ -87,60 +99,59 @@ describe Gcloud::Bigquery::Table, :insert, :mock_bigquery do
   end
 
   it "can specify skipping invalid rows" do
-    mock_connection.post "/bigquery/v2/projects/#{table.project_id}/datasets/#{table.dataset_id}/tables/#{table.table_id}/insertAll" do |env|
-      json = JSON.parse(env.body)
-      json.must_include "skipInvalidRows"
-      json["skipInvalidRows"].must_equal true
-      json.wont_include "ignoreUnknownValues"
-      [200, {"Content-Type"=>"application/json"},
-       success_table_insert_json]
-    end
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: true)
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
 
     result = table.insert rows, skip_invalid: true
+
+    mock.verify
+
     result.must_be :success?
     result.insert_count.must_equal 3
     result.error_count.must_equal 0
   end
 
   it "can specify ignoring unknown values" do
-    mock_connection.post "/bigquery/v2/projects/#{table.project_id}/datasets/#{table.dataset_id}/tables/#{table.table_id}/insertAll" do |env|
-      json = JSON.parse(env.body)
-      json.wont_include "skipInvalidRows"
-      json.must_include "ignoreUnknownValues"
-      json["ignoreUnknownValues"].must_equal true
-      [200, {"Content-Type"=>"application/json"},
-       success_table_insert_json]
-    end
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: insert_rows, ignore_unknown_values: true, skip_invalid_rows: nil)
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
 
     result = table.insert rows, ignore_unknown: true
+
+    mock.verify
+
     result.must_be :success?
     result.insert_count.must_equal 3
     result.error_count.must_equal 0
   end
 
-  def success_table_insert_json
-    {
-      "kind" => "bigquery#tableDataInsertAllResponse",
-      "insertErrors" => []
-    }.to_json
+  def success_table_insert_gapi
+    Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(
+      insert_errors: []
+    )
   end
 
-  def failure_table_insert_json
-    {
-      "kind" => "bigquery#tableDataInsertAllResponse",
-      "insertErrors" => [
-        {
-          "index" => 0,
-          "errors" => [
-            {
-              "reason"    => "r34s0n",
-              "location"  => "l0c4t10n",
-              "debugInfo" => "d3bugInf0",
-              "message"   => "m3ss4g3"
-            }
+  def failure_table_insert_gapi
+    Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(
+      insert_errors: [
+        Google::Apis::BigqueryV2::InsertAllTableDataResponse::InsertError.new(
+          index: 0,
+          errors: [
+            Google::Apis::BigqueryV2::ErrorProto.new(
+              reason:     "r34s0n",
+              location:   "l0c4t10n",
+              debug_info: "d3bugInf0",
+              message:     "m3ss4g3")
           ]
-        }
+        )
       ]
-    }.to_json
+    )
   end
 end

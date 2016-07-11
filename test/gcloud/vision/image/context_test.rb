@@ -17,8 +17,7 @@ require "helper"
 describe Gcloud::Vision::Image::Context, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
-  let(:area_gapi) { {minLatLng: { latitude: 37.4220041, longitude: -122.0862462},
-                     maxLatLng: { latitude: 37.4320041, longitude: -122.0762462}} }
+  let(:language_hints) { ["en", "es"] }
 
   it "is empty by default" do
     image.context.must_be :empty?
@@ -34,7 +33,8 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({latLongRect: area_gapi})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
   end
 
   it "is can set the location object" do
@@ -43,7 +43,8 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({latLongRect: area_gapi})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
   end
 
   it "is can set a location with a hash" do
@@ -52,7 +53,8 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({latLongRect: area_gapi})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
   end
 
   it "is can populate language hints" do
@@ -61,7 +63,8 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({languageHints: ["en", "es"]})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    image.context.to_gapi.language_hints.must_equal language_hints
   end
 
   it "is can set a language hints" do
@@ -69,7 +72,8 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({languageHints: ["en", "es"]})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    image.context.to_gapi.language_hints.must_equal language_hints
   end
 
   it "is can set all the things" do
@@ -79,6 +83,18 @@ describe Gcloud::Vision::Image::Context, :mock_vision do
     image.context.wont_be :empty?
 
     image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_equal({latLongRect: area_gapi, languageHints: ["en", "es"]})
+    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
+    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
+    image.context.to_gapi.language_hints.must_equal language_hints
+  end
+
+  def lat_long_rect_must_equal lat_long_rect_gapi
+    lat_long_rect_gapi.must_be_kind_of Google::Apis::VisionV1::LatLongRect
+    lat_long_rect_gapi.min_lat_lng.must_be_kind_of Google::Apis::VisionV1::LatLng
+    lat_long_rect_gapi.min_lat_lng.latitude.must_equal 37.4220041
+    lat_long_rect_gapi.min_lat_lng.longitude.must_equal -122.0862462
+    lat_long_rect_gapi.max_lat_lng.must_be_kind_of Google::Apis::VisionV1::LatLng
+    lat_long_rect_gapi.max_lat_lng.latitude.must_equal 37.4320041
+    lat_long_rect_gapi.max_lat_lng.longitude.must_equal -122.0762462
   end
 end

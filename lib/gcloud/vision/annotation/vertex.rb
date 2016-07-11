@@ -100,7 +100,7 @@ module Gcloud
         # @private New Annotation::Entity::Bounds::Vertex from a Google API
         # Client object.
         def self.from_gapi gapi
-          new gapi["x"], gapi["y"]
+          new gapi.x, gapi.y
         end
       end
     end

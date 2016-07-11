@@ -59,7 +59,7 @@ module Gcloud
           keys: incomplete_keys
         )
 
-        backoff { datastore.allocate_ids allocate_req }
+        execute { datastore.allocate_ids allocate_req }
       end
 
       ##
@@ -71,7 +71,7 @@ module Gcloud
         )
         lookup_req.read_options = generate_read_options consistency, transaction
 
-        backoff { datastore.lookup lookup_req }
+        execute { datastore.lookup lookup_req }
       end
 
       # Query for entities.
@@ -90,7 +90,7 @@ module Gcloud
         run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
           namespace_id: namespace) if namespace
 
-        backoff { datastore.run_query run_req }
+        execute { datastore.run_query run_req }
       end
 
       ##
@@ -100,7 +100,7 @@ module Gcloud
           project_id: project
         )
 
-        backoff { datastore.begin_transaction tx_req }
+        execute { datastore.begin_transaction tx_req }
       end
 
       ##
@@ -117,7 +117,7 @@ module Gcloud
           commit_req.transaction = transaction
         end
 
-        backoff { datastore.commit commit_req }
+        execute { datastore.commit commit_req }
       end
 
       ##
@@ -128,17 +128,21 @@ module Gcloud
           transaction: transaction
         )
 
-        backoff { datastore.rollback rb_req }
+        execute { datastore.rollback rb_req }
       end
 
       def inspect
         "#{self.class}(#{@project})"
       end
 
-      def backoff options = {}
-        Gcloud::Backoff.new(options).execute_grpc do
+      ##
+      # Performs backoff and error handling
+      def execute
+        Gcloud::Backoff.new.execute_grpc do
           yield
         end
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
 
       protected

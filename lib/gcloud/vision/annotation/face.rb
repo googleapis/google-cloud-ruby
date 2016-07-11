@@ -91,7 +91,7 @@ module Gcloud
         # @return [Float] A value in the range [0, 1].
         #
         def confidence
-          @gapi["detectionConfidence"]
+          @gapi.detection_confidence
         end
 
         ##
@@ -169,7 +169,7 @@ module Gcloud
           # @return [Float] A value in the range [-180,180].
           #
           def roll
-            @gapi["rollAngle"]
+            @gapi.roll_angle
           end
 
           ##
@@ -180,7 +180,7 @@ module Gcloud
           # @return [Float] A value in the range [-180,180].
           #
           def yaw
-            @gapi["panAngle"]
+            @gapi.pan_angle
           end
           alias_method :pan, :yaw
 
@@ -191,7 +191,7 @@ module Gcloud
           # @return [Float] A value in the range [-180,180].
           #
           def pitch
-            @gapi["tiltAngle"]
+            @gapi.tilt_angle
           end
           alias_method :tilt, :pitch
 
@@ -289,8 +289,8 @@ module Gcloud
           # generated in the BoundingPoly (the polygon will be unbounded) if
           # only a partial face appears in the image to be annotated.
           def head
-            return [] unless @gapi["boundingPoly"]
-            @head ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
+            return [] unless @gapi.bounding_poly
+            @head ||= Array(@gapi.bounding_poly.vertices).map do |v|
               Vertex.from_gapi v
             end
           end
@@ -302,8 +302,8 @@ module Gcloud
           # visible in an image. It is not based on the landmarks, only on the
           # initial face detection.
           def face
-            return [] unless @gapi["fdBoundingPoly"]
-            @face ||= Array(@gapi["fdBoundingPoly"]["vertices"]).map do |v|
+            return [] unless @gapi.fd_bounding_poly
+            @face ||= Array(@gapi.fd_bounding_poly.vertices).map do |v|
               Vertex.from_gapi v
             end
           end
@@ -407,7 +407,7 @@ module Gcloud
           # @return [Float] A value in the range [0,1].
           #
           def confidence
-            @gapi["landmarkingConfidence"]
+            @gapi.landmarking_confidence
           end
 
           ##
@@ -435,8 +435,8 @@ module Gcloud
           #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
           #
           def [] landmark_type
-            landmark = Array(@gapi["landmarks"]).detect do |l|
-              l["type"] == landmark_type
+            landmark = Array(@gapi.landmarks).detect do |l|
+              l.type == landmark_type
             end
             return nil if landmark.nil?
             Landmark.from_gapi landmark
@@ -635,7 +635,7 @@ module Gcloud
             #   face.features.forehead.type #=> "FOREHEAD_GLABELLA"
             #
             def type
-              @gapi["type"]
+              @gapi.type
             end
 
             ##
@@ -644,8 +644,8 @@ module Gcloud
             # @return [Float]
             #
             def x
-              return nil unless @gapi["position"]
-              @gapi["position"]["x"]
+              return nil unless @gapi.position
+              @gapi.position.x
             end
 
             ##
@@ -654,8 +654,8 @@ module Gcloud
             # @return [Float]
             #
             def y
-              return nil unless @gapi["position"]
-              @gapi["position"]["y"]
+              return nil unless @gapi.position
+              @gapi.position.y
             end
 
             ##
@@ -664,8 +664,8 @@ module Gcloud
             # @return [Float]
             #
             def z
-              return nil unless @gapi["position"]
-              @gapi["position"]["z"]
+              return nil unless @gapi.position
+              @gapi.position.z
             end
 
             ##
@@ -1586,7 +1586,7 @@ module Gcloud
           # Joy likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def joy
-            @gapi["joyLikelihood"]
+            @gapi.joy_likelihood
           end
 
           ##
@@ -1603,7 +1603,7 @@ module Gcloud
           # Sorrow likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def sorrow
-            @gapi["sorrowLikelihood"]
+            @gapi.sorrow_likelihood
           end
 
           ##
@@ -1620,7 +1620,7 @@ module Gcloud
           # Joy likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def anger
-            @gapi["angerLikelihood"]
+            @gapi.anger_likelihood
           end
 
           ##
@@ -1637,7 +1637,7 @@ module Gcloud
           # Surprise likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def surprise
-            @gapi["surpriseLikelihood"]
+            @gapi.surprise_likelihood
           end
 
           ##
@@ -1655,7 +1655,7 @@ module Gcloud
           # `VERY_UNLIKELY`, `UNLIKELY`, `POSSIBLE`, `LIKELY`, and
           # `VERY_LIKELY`.
           def under_exposed
-            @gapi["underExposedLikelihood"]
+            @gapi.under_exposed_likelihood
           end
 
           ##
@@ -1672,7 +1672,7 @@ module Gcloud
           # Blurred likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def blurred
-            @gapi["blurredLikelihood"]
+            @gapi.blurred_likelihood
           end
 
           ##
@@ -1689,7 +1689,7 @@ module Gcloud
           # Headwear likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def headwear
-            @gapi["headwearLikelihood"]
+            @gapi.headwear_likelihood
           end
 
           ##

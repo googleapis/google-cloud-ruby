@@ -17,8 +17,8 @@ require "json"
 require "uri"
 
 describe Gcloud::Bigquery::ExtractJob, :mock_bigquery do
-  let(:job) { Gcloud::Bigquery::Job.from_gapi extract_job_hash,
-                                              bigquery.connection }
+  let(:job) { Gcloud::Bigquery::Job.from_gapi extract_job_gapi,
+                                              bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is extract job" do
@@ -32,15 +32,17 @@ describe Gcloud::Bigquery::ExtractJob, :mock_bigquery do
   end
 
   it "knows its source table" do
-    mock_connection.get "/bigquery/v2/projects/source_project_id/datasets/source_dataset_id/tables/source_table_id" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       source_table_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
 
-    job.source.must_be_kind_of Gcloud::Bigquery::Table
-    job.source.project_id.must_equal "source_project_id"
-    job.source.dataset_id.must_equal "source_dataset_id"
-    job.source.table_id.must_equal   "source_table_id"
+    mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
+
+    source = job.source
+    source.must_be_kind_of Gcloud::Bigquery::Table
+    source.project_id.must_equal "source_project_id"
+    source.dataset_id.must_equal "source_dataset_id"
+    source.table_id.must_equal   "source_table_id"
+    mock.verify
   end
 
   it "knows its attributes" do
@@ -71,6 +73,10 @@ describe Gcloud::Bigquery::ExtractJob, :mock_bigquery do
     job.destinations_counts["gs://bucket/file-*.ext"].must_equal 123
   end
 
+  def extract_job_gapi
+    Google::Apis::BigqueryV2::Job.from_json extract_job_hash.to_json
+  end
+
   def extract_job_hash
     hash = random_job_hash
     hash["configuration"]["extract"] = {
@@ -89,15 +95,5 @@ describe Gcloud::Bigquery::ExtractJob, :mock_bigquery do
       "destinationUriFileCounts" => [123]
     }
     hash
-  end
-
-  def source_table_json
-    hash = random_table_hash "getting_replaced_dataset_id"
-    hash["tableReference"] = {
-      "projectId" => "source_project_id",
-      "datasetId" => "source_dataset_id",
-      "tableId"   => "source_table_id"
-    }
-    hash.to_json
   end
 end

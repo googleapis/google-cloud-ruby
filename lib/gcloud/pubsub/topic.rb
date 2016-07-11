@@ -87,9 +87,7 @@ module Gcloud
       def delete
         ensure_service!
         service.delete_topic name
-        return true
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
+        true
       end
 
       ##
@@ -144,8 +142,6 @@ module Gcloud
         options = { deadline: deadline, endpoint: endpoint }
         grpc = service.create_subscription name, subscription_name, options
         Subscription.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :create_subscription, :subscribe
       alias_method :new_subscription, :subscribe
@@ -187,9 +183,8 @@ module Gcloud
         return Subscription.new_lazy subscription_name, service if skip_lookup
         grpc = service.get_subscription subscription_name
         Subscription.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        return nil if e.code == 5
-        raise Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :get_subscription, :subscription
       alias_method :find_subscription, :subscription
@@ -233,8 +228,6 @@ module Gcloud
         options = { token: token, max: max }
         grpc = service.list_topics_subscriptions name, options
         Subscription::List.from_topic_grpc grpc, service, name, max
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
       alias_method :find_subscriptions, :subscriptions
       alias_method :list_subscriptions, :subscriptions
@@ -357,8 +350,6 @@ module Gcloud
           ensure_service!
           grpc = service.get_topic_policy name
           Policy.from_grpc grpc
-        rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
         end
         return @policy unless block_given?
         p = @policy.deep_dup
@@ -398,8 +389,6 @@ module Gcloud
         ensure_service!
         grpc = service.set_topic_policy name, new_policy.to_grpc
         @policy = Policy.from_grpc grpc
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -442,8 +431,6 @@ module Gcloud
         ensure_service!
         grpc = service.test_topic_permissions name, permissions
         grpc.permissions
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
 
       ##
@@ -508,9 +495,8 @@ module Gcloud
         ensure_service!
         return @grpc if @grpc
         @grpc = service.get_topic @name
-      rescue GRPC::BadStatus => e
-        return nil if e.code == 5
-        raise Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        nil
       end
 
       ##
@@ -518,8 +504,6 @@ module Gcloud
       def publish_batch_messages batch
         grpc = service.publish name, batch.messages
         batch.to_gcloud_messages Array(grpc.message_ids)
-      rescue GRPC::BadStatus => e
-        raise Error.from_error(e)
       end
     end
   end

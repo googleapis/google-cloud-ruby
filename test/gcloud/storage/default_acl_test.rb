@@ -17,54 +17,36 @@ require "json"
 require "uri"
 
 describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
-  # Create a bucket object with the project's mocked connection object
-  let(:bucket) { Gcloud::Storage::Bucket.from_gapi random_bucket_hash,
-                                                   storage.connection }
+  let(:bucket_name) { "found-bucket" }
+  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_json) { bucket_hash.to_json }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
+  let(:bucket) { Gcloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
   it "retrieves the default ACL" do
-    bucket_name = "found-bucket"
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::BucketAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name]
 
-    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_bucket_hash(bucket_name).to_json]
-    end
-
-    mock_connection.get "/storage/v1/b/#{bucket_name}/defaultObjectAcl" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_default_acl_hash(bucket_name).to_json]
-    end
+    storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
     bucket.name.must_equal bucket_name
     bucket.default_acl.owners.wont_be  :empty?
     bucket.default_acl.writers.must_be :empty?
     bucket.default_acl.readers.wont_be :empty?
+
+    mock.verify
   end
 
   it "adds to the default ACL" do
-    bucket_name = "found-bucket"
-
-    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_bucket_hash(bucket_name).to_json]
-    end
-
-    mock_connection.get "/storage/v1/b/#{bucket_name}/defaultObjectAcl" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_default_acl_hash(bucket_name).to_json]
-    end
-
-    bucket = storage.bucket bucket_name
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.writers.must_be :empty?
-    bucket.default_acl.readers.wont_be :empty?
-
     writer_entity = "user-user@example.net"
     writer_acl = {
        "kind" => "storage#bucketAccessControl",
        "id" => "#{bucket_name}-UUID/#{writer_entity}",
-       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/defaultObjectAcl/#{writer_entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{writer_entity}",
        "bucket" => "#{bucket_name}-UUID",
        "entity" => writer_entity,
        "email" => "user@example.net",
@@ -72,30 +54,44 @@ describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
        "etag" => "CAE="
       }
 
-    mock_connection.post "/storage/v1/b/#{bucket_name}/defaultObjectAcl" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       writer_acl.to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::BucketAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name]
+    mock.expect :insert_default_object_access_control,
+      Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: writer_entity, role: "WRITER")]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name
+    bucket.name.must_equal bucket_name
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.writers.must_be :empty?
+    bucket.default_acl.readers.wont_be :empty?
 
     bucket.default_acl.add_writer writer_entity
     bucket.default_acl.owners.wont_be  :empty?
     bucket.default_acl.writers.wont_be :empty?
     bucket.default_acl.readers.wont_be :empty?
     bucket.default_acl.writers.must_include writer_entity
+
+    mock.verify
   end
 
   it "removes from the default ACL" do
-    bucket_name = "found-bucket"
+    existing_reader_entity = "project-viewers-1234567890"
 
-    mock_connection.get "/storage/v1/b/#{bucket_name}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_bucket_hash(bucket_name).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::BucketAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name]
+    mock.expect :delete_default_object_access_control, nil,
+      [bucket_name, existing_reader_entity]
 
-    mock_connection.get "/storage/v1/b/#{bucket_name}/defaultObjectAcl" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_default_acl_hash(bucket_name).to_json]
-    end
+    storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
     bucket.name.must_equal bucket_name
@@ -104,16 +100,12 @@ describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
     bucket.default_acl.readers.wont_be :empty?
 
     reader_entity = bucket.default_acl.readers.first
-
-    mock_connection.delete "/storage/v1/b/#{bucket_name}/defaultObjectAcl/#{reader_entity}" do |env|
-      [200, {"Content-Type"=>"application/json"}, ""]
-    end
-
     bucket.default_acl.delete reader_entity
-
     bucket.default_acl.owners.wont_be  :empty?
     bucket.default_acl.writers.must_be :empty?
     bucket.default_acl.readers.must_be :empty?
+
+    mock.verify
   end
 
   it "sets the predefined ACL rule authenticatedRead" do
@@ -297,24 +289,26 @@ describe Gcloud::Storage::Bucket, :default_acl, :mock_storage do
   end
 
   def predefined_default_acl_update acl_role
-    mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
-      env.params["predefinedDefaultObjectAcl"].must_equal acl_role
-      JSON.parse(env.body)["defaultObjectAcl"].must_equal []
-      [200, {"Content-Type"=>"application/json"},
-       random_bucket_hash(bucket.name).to_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :patch_bucket,
+      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
+      [bucket_name, Google::Apis::StorageV1::Bucket.new, predefined_acl: nil, predefined_default_object_acl: acl_role]
+
+    storage.service.mocked_service = mock
 
     yield bucket.default_acl
+
+    mock.verify
   end
 
   def predefined_default_acl_update_with_error acl_role
-    mock_connection.patch "/storage/v1/b/#{bucket.name}" do |env|
-      env.params["predefinedDefaultObjectAcl"].must_equal acl_role
-      [409, {"Content-Type"=>"application/json"},
-       acl_error_json]
+    stub = Object.new
+    def stub.patch_bucket *args
+      raise Google::Apis::ClientError.new("already exists", status_code: 409)
     end
+    storage.service.mocked_service = stub
 
-    expect { yield bucket.default_acl }.must_raise Gcloud::Storage::ApiError
+    expect { yield bucket.default_acl }.must_raise Gcloud::AlreadyExistsError
   end
 
   def random_default_acl_hash bucket_name

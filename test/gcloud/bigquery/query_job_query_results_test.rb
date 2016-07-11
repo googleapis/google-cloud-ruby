@@ -15,15 +15,22 @@
 require "helper"
 
 describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
-  let(:job) { Gcloud::Bigquery::Job.from_gapi query_job_hash,
-                                              bigquery.connection }
+  let(:query_request) {
+    qrg = query_request_gapi
+    qrg.default_dataset = nil
+    qrg.query = "SELECT * FROM test-project:my_dataset.my_view"
+    qrg
+  }
+  let(:job) { Gcloud::Bigquery::Job.from_gapi query_job_gapi,
+                                              bigquery.service }
   let(:job_id) { job.job_id }
 
   it "can retrieve query results" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
 
     data = job.query_results
     data.class.must_equal Gcloud::Bigquery::QueryData
@@ -43,20 +50,18 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data[2]["age"].must_equal nil
     data[2]["score"].must_equal nil
     data[2]["active"].must_equal nil
+    mock.verify
   end
 
   it "paginates data" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data1 = job.query_results
     data1.class.must_equal Gcloud::Bigquery::QueryData
@@ -64,20 +69,18 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data1.token.must_equal "token1234567890"
     data2 = job.query_results token: data1.token
     data2.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 
   it "paginates data using next? and next" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json(token: nil)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :get_job_query_results,
+                query_data_gapi(token: nil),
+                [project, job.job_id, {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data1 = job.query_results
     data1.class.must_equal Gcloud::Bigquery::QueryData
@@ -87,129 +90,95 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data2.token.must_be :nil?
     data2.next?.must_equal false
     data2.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 
   it "paginates data using all" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json(token: nil)]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :get_job_query_results,
+                query_data_gapi(token: nil),
+                [project, job.job_id, {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data = job.query_results.all.to_a
     data.count.must_equal 6
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "paginates data using all using Enumerator" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data = job.query_results.all.take(5)
     data.count.must_equal 5
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "iterates data using all with request_limit set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "pageToken"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "pageToken"
-      env.params["pageToken"].must_equal "token1234567890"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
 
     data = job.query_results.all(request_limit: 1).to_a
     data.count.must_equal 6
     data.each { |d| d.class.must_equal Hash }
+    mock.verify
   end
 
   it "paginates data with max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "maxResults"
-      env.params["maxResults"].must_equal "3"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: 3, page_token: nil, start_index: nil, timeout_ms: nil}]
 
     data = job.query_results max: 3
     data.class.must_equal Gcloud::Bigquery::QueryData
-  end
-
-  it "paginates data without max set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "maxResults"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-
-    data = job.query_results
-    data.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 
   it "paginates data with start set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "startIndex"
-      env.params["startIndex"].must_equal "25"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: 25, timeout_ms: nil}]
 
     data = job.query_results start: 25
     data.class.must_equal Gcloud::Bigquery::QueryData
-  end
-
-  it "paginates data without start set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "startIndex"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-
-    data = job.query_results
-    data.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 
   it "paginates data with timeout set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.must_include "timeoutMs"
-      env.params["timeoutMs"].must_equal "1000"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job.job_id, {max_results: nil, page_token: nil, start_index: nil, timeout_ms: 1000}]
 
     data = job.query_results timeout: 1000
     data.class.must_equal Gcloud::Bigquery::QueryData
+    mock.verify
   end
 
-  it "paginates data without timeout set" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/queries/#{job_id}" do |env|
-      env.params.wont_include "timeoutMs"
-      [200, {"Content-Type"=>"application/json"},
-       query_data_json]
-    end
-
-    data = job.query_results
-    data.class.must_equal Gcloud::Bigquery::QueryData
+  def query_job_gapi
+    Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
   end
 
   def query_job_hash
@@ -234,99 +203,5 @@ describe Gcloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       "flattenResults" => true
     }
     hash
-  end
-
-  def query_data_json token: "token1234567890"
-    query_data_hash(token: token).to_json
-  end
-
-  def query_data_hash token: "token1234567890"
-    {
-      "kind" => "bigquery#getQueryResultsResponse",
-      "etag" => "etag1234567890",
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => "job9876543210"
-      },
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          }
-        ]
-      },
-      "rows" => [
-        {
-          "f" => [
-            {
-              "v" => "Heidi"
-            },
-            {
-              "v" => "36"
-            },
-            {
-              "v" => "7.65"
-            },
-            {
-              "v" => "true"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Aaron"
-            },
-            {
-              "v" => "42"
-            },
-            {
-              "v" => "8.15"
-            },
-            {
-              "v" => "false"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Sally"
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            }
-          ]
-        }
-      ],
-      "pageToken" => token,
-      "totalRows" => 3,
-      "totalBytesProcessed" => 456789,
-      "jobComplete" => true,
-      "cacheHit" => false
-    }
   end
 end

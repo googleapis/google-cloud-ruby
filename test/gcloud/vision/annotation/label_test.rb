@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Vision::Annotation::Entity, :label, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(label_annotation_response.to_json) }
+  let(:gapi) { label_annotation_response }
   let(:label) { Gcloud::Vision::Annotation::Entity.from_gapi gapi }
 
   it "knows the given attributes" do

@@ -14,7 +14,6 @@
 
 
 require "time"
-require "gcloud/resource_manager/errors"
 
 module Gcloud
   module ResourceManager
@@ -61,7 +60,7 @@ module Gcloud
         #   end
         #
         def name= new_name
-          gapi["name"] = new_name
+          gapi.name = new_name
         end
 
         ##
@@ -88,7 +87,7 @@ module Gcloud
         #   end
         #
         def labels
-          gapi["labels"]
+          gapi.labels
         end
 
         ##
@@ -115,17 +114,13 @@ module Gcloud
         #   end
         #
         def labels= new_labels
-          gapi["labels"] = new_labels
+          gapi.labels = new_labels
         end
 
         ##
         # @private Create an Updater object.
         def self.from_project project
-          dupe_gapi = project.gapi.dup
-          dupe_gapi = dupe_gapi.to_hash if dupe_gapi.respond_to? :to_hash
-          if dupe_gapi["labels"].respond_to? :to_hash
-            dupe_gapi["labels"] = dupe_gapi["labels"].to_hash
-          end
+          dupe_gapi = project.gapi.class.new project.gapi.to_h
           dupe_project = Project.from_gapi dupe_gapi, nil # no way to update
           Updater.new dupe_project
         end

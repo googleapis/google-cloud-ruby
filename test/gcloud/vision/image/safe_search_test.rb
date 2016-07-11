@@ -20,19 +20,22 @@ describe Gcloud::Vision::Image, :safe_search, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects safe_search" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      safe_search = requests.first
-      safe_search["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      safe_search["features"].count.must_equal 1
-      safe_search["features"].first["type"].must_equal "SAFE_SEARCH_DETECTION"
-      safe_search["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       safe_search_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, safe_search_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     safe_search = image.safe_search
+    mock.verify
+
     safe_search.wont_be :nil?
     safe_search.wont_be :adult?
     safe_search.wont_be :spoof?
@@ -40,11 +43,13 @@ describe Gcloud::Vision::Image, :safe_search, :mock_vision do
     safe_search.must_be :violence?
   end
 
-  def safe_search_response_json
-    {
-      responses: [{
-        safeSearchAnnotation: safe_search_annotation_response
-      }]
-    }.to_json
+  def safe_search_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          safe_search_annotation: safe_search_annotation_response
+        )
+      ]
+    )
   end
 end

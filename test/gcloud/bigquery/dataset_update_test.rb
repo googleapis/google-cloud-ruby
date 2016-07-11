@@ -20,19 +20,19 @@ describe Gcloud::Bigquery::Dataset, :update, :mock_bigquery do
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { 999 }
-  let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, description, default_expiration }
-  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_hash,
-                                                      bigquery.connection }
+  let(:dataset_gapi) { random_dataset_gapi dataset_id, dataset_name, description, default_expiration }
+  let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_gapi,
+                                                      bigquery.service }
 
   it "updates its name" do
     new_dataset_name = "My Updated Dataset"
 
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
-      json = JSON.parse env.body
-      json["friendlyName"].must_equal new_dataset_name
-      [200, {"Content-Type"=>"application/json"},
-       random_dataset_hash(dataset_id, new_dataset_name, description, default_expiration).to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.friendly_name = new_dataset_name
+    patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -43,17 +43,18 @@ describe Gcloud::Bigquery::Dataset, :update, :mock_bigquery do
     dataset.name.must_equal new_dataset_name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
+    mock.verify
   end
 
   it "updates its description" do
     new_description = "This is my updated dataset"
 
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
-      json = JSON.parse env.body
-      json["description"].must_equal new_description
-      [200, {"Content-Type"=>"application/json"},
-       random_dataset_hash(dataset_id, dataset_name, new_description, default_expiration).to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.description = new_description
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -64,17 +65,18 @@ describe Gcloud::Bigquery::Dataset, :update, :mock_bigquery do
     dataset.name.must_equal dataset_name
     dataset.description.must_equal new_description
     dataset.default_expiration.must_equal default_expiration
+    mock.verify
   end
 
   it "updates its default_expiration" do
     new_default_expiration = 888
 
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" do |env|
-      json = JSON.parse env.body
-      json["defaultTableExpirationMs"].must_equal new_default_expiration
-      [200, {"Content-Type"=>"application/json"},
-       random_dataset_hash(dataset_id, dataset_name, description, new_default_expiration).to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.default_table_expiration_ms = new_default_expiration
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -85,5 +87,6 @@ describe Gcloud::Bigquery::Dataset, :update, :mock_bigquery do
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal new_default_expiration
+    mock.verify
   end
 end

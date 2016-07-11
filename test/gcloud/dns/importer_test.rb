@@ -17,8 +17,8 @@ require "helper"
 describe Gcloud::Dns::Importer, :mock_dns do
   let(:zone_name) { "example-zone" }
   let(:zone_dns) { "example.com." }
-  let(:zone_hash) { random_zone_hash zone_name, zone_dns }
-  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_hash, dns.connection }
+  let(:zone_gapi) { random_zone_gapi zone_name, zone_dns }
+  let(:zone) { Gcloud::Dns::Zone.from_gapi zone_gapi, dns.service }
   # Zone file example from https://en.wikipedia.org/wiki/Zone_file
   let(:zonefile_path) { "acceptance/data/db.example.com" }
 

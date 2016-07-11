@@ -106,15 +106,14 @@ module Gcloud
       #
       def allocate_ids incomplete_key, count = 1
         if incomplete_key.complete?
-          fail Gcloud::Datastore::Error, "An incomplete key must be provided."
+          fail Gcloud::Datastore::KeyError,
+               "An incomplete key must be provided."
         end
 
         ensure_service!
         incomplete_keys = count.times.map { incomplete_key.to_grpc }
         allocate_res = service.allocate_ids(*incomplete_keys)
         allocate_res.keys.map { |key| Key.from_grpc key }
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -275,8 +274,6 @@ module Gcloud
         end
         entities.each { |e| e.key.freeze unless e.persisted? }
         entities
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
 
       ##
@@ -342,8 +339,6 @@ module Gcloud
         lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                     consistency: consistency)
         LookupResults.from_grpc lookup_res, service, consistency
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :lookup, :find_all
 
@@ -399,8 +394,6 @@ module Gcloud
         query_res = service.run_query query.to_grpc, namespace,
                                       consistency: consistency
         QueryResults.from_grpc query_res, service, namespace, query.to_grpc.dup
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :run_query, :run
 
@@ -459,15 +452,13 @@ module Gcloud
         begin
           yield tx
           tx.commit
-        rescue => e
+        rescue
           begin
             tx.rollback
-          rescue => re
-            msg = "Transaction failed to commit and rollback."
-            raise TransactionError.new(msg, commit_error: e, rollback_error: re)
+          rescue
+            raise TransactionError, "Transaction failed to commit and rollback."
           end
-          raise TransactionError.new("Transaction failed to commit.",
-                                     commit_error: e)
+          raise TransactionError, "Transaction failed to commit."
         end
       end
 

@@ -46,17 +46,17 @@ module Gcloud
                   "owner"  => "OWNER" }
 
         # @private
-        SCOPES = { "user"           => "userByEmail",
-                   "user_by_email"  => "userByEmail",
-                   "userByEmail"    => "userByEmail",
-                   "group"          => "groupByEmail",
-                   "group_by_email" => "groupByEmail",
-                   "groupByEmail"   => "groupByEmail",
-                   "domain"         => "domain",
-                   "special"        => "specialGroup",
-                   "special_group"  => "specialGroup",
-                   "specialGroup"   => "specialGroup",
-                   "view"           => "view" }
+        SCOPES = { "user"           => :user_by_email,
+                   "user_by_email"  => :user_by_email,
+                   "userByEmail"    => :user_by_email,
+                   "group"          => :group_by_email,
+                   "group_by_email" => :group_by_email,
+                   "groupByEmail"   => :group_by_email,
+                   "domain"         => :domain,
+                   "special"        => :special_group,
+                   "special_group"  => :special_group,
+                   "specialGroup"   => :special_group,
+                   "view"           => :view }
 
         # @private
         GROUPS = { "owners"                  => "projectOwners",
@@ -72,22 +72,36 @@ module Gcloud
                    "all_authenticated_users" => "allAuthenticatedUsers",
                    "allAuthenticatedUsers"   => "allAuthenticatedUsers" }
 
-        # @private
-        attr_reader :access
-
         ##
         # @private
         # Initialized a new Access object.
-        # Must provide a valid Dataset object.
-        def initialize access, context
-          @original   = access.dup
-          @access     = access.dup
-          @context    = context
+        # Must provide a valid Google::Apis::BigqueryV2::Dataset object.
+        # Access will mutate the gapi object.
+        def initialize gapi
+          @gapi = gapi
+          @gapi.access ||= [] # easiest to do this in the constructor
+          @original_access_hashes = @gapi.access.map(&:to_h)
         end
 
         # @private
         def changed?
-          @original != @access
+          @original_access_hashes != @gapi.access.map(&:to_h)
+        end
+
+        def empty?
+          @gapi.access.empty?
+        end
+
+        def freeze
+          @gapi = @gapi.dup.freeze
+          @gapi.access.freeze
+          super
+        end
+
+        ##
+        # View the access rules as an array of hashes.
+        def to_a
+          @gapi.access.map(&:to_h)
         end
 
         ##
@@ -446,7 +460,7 @@ module Gcloud
           if view.respond_to? :table_ref
             view.table_ref
           else
-            Connection.table_ref_from_s view, @context
+            Service.table_ref_from_s view, @gapi.dataset_reference
           end
         end
 
@@ -455,13 +469,14 @@ module Gcloud
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
-          value = validate_special_group(value) if scope == "specialGroup"
+          value = validate_special_group(value) if scope == :special_group
           # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == "view"
+          value = validate_view(value) if scope == :view
           # Remove any rules of this scope and value
-          access.reject! { |h| h[scope] == value }
+          @gapi.access.reject!(&find_by_scope_and_value(scope, value))
           # Add new rule for this role, scope, and value
-          access << { "role" => role, scope => value }
+          opts = { role: role, scope => value }
+          @gapi.access << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
         end
 
         # @private
@@ -469,11 +484,12 @@ module Gcloud
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
-          value = validate_special_group(value) if scope == "specialGroup"
+          value = validate_special_group(value) if scope == :special_group
           # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == "view"
+          value = validate_view(value) if scope == :view
           # Remove any rules of this role, scope, and value
-          access.reject! { |h| h["role"] == role && h[scope] == value }
+          @gapi.access.reject!(
+            &find_by_role_and_scope_and_value(role, scope, value))
         end
 
         # @private
@@ -481,11 +497,42 @@ module Gcloud
           role = validate_role role
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
-          value = validate_special_group(value) if scope == "specialGroup"
+          value = validate_special_group(value) if scope == :special_group
           # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == "view"
+          value = validate_view(value) if scope == :view
           # Detect any rules of this role, scope, and value
-          !(!access.detect { |h| h["role"] == role && h[scope] == value })
+          !(!@gapi.access.detect(
+            &find_by_role_and_scope_and_value(role, scope, value)))
+        end
+
+        # @private
+        def find_by_role_and_scope_and_value role, scope, value
+          if scope == :view
+            lambda do |a|
+              h = a.to_h
+              h[:role] == role && h[scope].to_h == value.to_h
+            end
+          else
+            lambda do |a|
+              h = a.to_h
+              h[:role] == role && h[scope] == value
+            end
+          end
+        end
+
+        # @private
+        def find_by_scope_and_value scope, value
+          if scope == :view
+            lambda do |a|
+              h = a.to_h
+              h[scope].to_h == value.to_h
+            end
+          else
+            lambda do |a|
+              h = a.to_h
+              h[scope] == value
+            end
+          end
         end
       end
     end

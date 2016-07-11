@@ -91,9 +91,9 @@ module Gcloud
       ##
       # @private New Translation from a TranslationsListResponse object as
       # defined by the Google API Client object.
-      def self.from_response resp, text, to, from
-        res = text.zip(Array(resp.data["translations"])).map do |origin, gapi|
-          from_gapi gapi, to, origin, from
+      def self.from_gapi_list gapi, text, to, from
+        res = text.zip(Array(gapi.translations)).map do |origin, g|
+          from_gapi g, to, origin, from
         end
         return res.first if res.size == 1
         res
@@ -103,9 +103,9 @@ module Gcloud
       # @private New Translation from a TranslationsResource object as defined
       # by the Google API Client object.
       def self.from_gapi gapi, to, origin, from
-        from ||= gapi["detectedSourceLanguage"]
-        detected = !gapi["detectedSourceLanguage"].nil?
-        new gapi["translatedText"], to, origin, from, detected
+        from ||= gapi.detected_source_language
+        detected = !gapi.detected_source_language.nil?
+        new gapi.translated_text, to, origin, from, detected
       end
     end
   end

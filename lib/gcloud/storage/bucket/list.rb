@@ -71,11 +71,10 @@ module Gcloud
         #
         def next
           return nil unless next?
-          ensure_connection!
+          ensure_service!
           options = { prefix: @prefix, token: @token, max: @max }
-          resp = @connection.list_buckets options
-          fail ApiError.from_response(resp) unless resp.success?
-          Bucket::List.from_response resp, @connection, @prefix, @max
+          gapi = @service.list_buckets options
+          Bucket::List.from_gapi gapi, @service, @prefix, @max
         end
 
         ##
@@ -147,15 +146,16 @@ module Gcloud
         end
 
         ##
-        # @private New Bucket::List from a response object.
-        def self.from_response resp, conn, prefix = nil, max = nil
-          buckets = new(Array(resp.data["items"]).map do |gapi_object|
-            Bucket.from_gapi gapi_object, conn
+        # @private New Bucket::List from a Google API Client
+        # Google::Apis::StorageV1::Buckets object.
+        def self.from_gapi gapi_list, service, prefix = nil, max = nil
+          buckets = new(Array(gapi_list.items).map do |gapi_object|
+            Bucket.from_gapi gapi_object, service
           end)
-          buckets.instance_variable_set "@token", resp.data["nextPageToken"]
-          buckets.instance_variable_set "@connection", conn
-          buckets.instance_variable_set "@prefix", prefix
-          buckets.instance_variable_set "@max", max
+          buckets.instance_variable_set :@token, gapi_list.next_page_token
+          buckets.instance_variable_set :@service, service
+          buckets.instance_variable_set :@prefix, prefix
+          buckets.instance_variable_set :@max, max
           buckets
         end
 
@@ -163,8 +163,8 @@ module Gcloud
 
         ##
         # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        def ensure_service!
+          fail "Must have active connection" unless @service
         end
       end
     end

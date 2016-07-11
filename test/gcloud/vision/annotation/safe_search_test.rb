@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Vision::Annotation::SafeSearch, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(safe_search_annotation_response.to_json) }
+  let(:gapi) { safe_search_annotation_response }
   let(:safe_search) { Gcloud::Vision::Annotation::SafeSearch.from_gapi gapi }
 
   it "knows the given attributes" do

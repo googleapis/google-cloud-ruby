@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
+require "gcloud/errors"
 require "gcloud/resource_manager/credentials"
-require "gcloud/resource_manager/connection"
-require "gcloud/resource_manager/errors"
+require "gcloud/resource_manager/service"
 require "gcloud/resource_manager/project"
 
 module Gcloud
@@ -37,15 +37,15 @@ module Gcloud
     # See {Gcloud#resource_manager}
     class Manager
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
-      # @private Creates a new Connection instance.
+      # @private Creates a new Service instance.
       #
       # See {Gcloud.resource_manager}
       def initialize credentials
-        @connection = Connection.new credentials
+        @service = Service.new credentials
       end
 
       ##
@@ -113,12 +113,8 @@ module Gcloud
       #   end
       #
       def projects filter: nil, token: nil, max: nil
-        resp = connection.list_project filter: filter, token: token, max: max
-        if resp.success?
-          Project::List.from_response resp, self, filter, max
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_project filter: filter, token: token, max: max
+        Project::List.from_gapi gapi, self, filter, max
       end
 
       ##
@@ -138,12 +134,10 @@ module Gcloud
       #   project.project_id #=> "tokyo-rain-123"
       #
       def project project_id
-        resp = connection.get_project project_id
-        if resp.success?
-          Project.from_gapi resp.data, connection
-        else
-          nil
-        end
+        gapi = service.get_project project_id
+        Project.from_gapi gapi, service
+      rescue NotFoundError
+        nil
       end
 
       ##
@@ -194,14 +188,8 @@ module Gcloud
       #                                             labels: {env: :development}
       #
       def create_project project_id, name: nil, labels: nil
-        resp = connection.create_project project_id,
-                                         name,
-                                         labels
-        if resp.success?
-          Project.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.create_project project_id, name, labels
+        Project.from_gapi gapi, service
       end
 
       ##
@@ -233,12 +221,8 @@ module Gcloud
       #   resource_manager.delete "tokyo-rain-123"
       #
       def delete project_id
-        resp = connection.delete_project project_id
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        service.delete_project project_id
+        true
       end
 
       ##
@@ -259,12 +243,8 @@ module Gcloud
       #   resource_manager.undelete "tokyo-rain-123"
       #
       def undelete project_id
-        resp = connection.undelete_project project_id
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        service.undelete_project project_id
+        true
       end
 
       protected

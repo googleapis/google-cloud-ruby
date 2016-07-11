@@ -14,49 +14,50 @@
 
 
 require "gcloud/version"
-require "gcloud/backoff"
-require "google/api_client"
+require "gcloud/errors"
+require "google/apis/vision_v1"
 
 module Gcloud
   module Vision
     ##
-    # @private Represents the connection to Vision,
-    # as well as expose the API calls.
-    class Connection
+    # @private
+    # Represents the service to Vision, exposing the API calls.
+    class Service
+      ##
+      # Alias to the Google Client API module
+      API = Google::Apis::VisionV1
+
       attr_accessor :project
       attr_accessor :credentials
 
       ##
-      # Creates a new Connection instance.
+      # Creates a new Service instance.
       def initialize project, credentials
         @project = project
         @credentials = credentials
-        @client = Google::APIClient.new application_name:    "gcloud-ruby",
-                                        application_version: Gcloud::VERSION
-        @client.authorization = @credentials.client
-        custom_discovery_url = Addressable::URI.parse(
-          "https://vision.googleapis.com/$discovery/rest?version=v1")
-        @client.register_discovery_uri "vision", "v1", custom_discovery_url
-        @vision = @client.discovered_api "vision", "v1"
+        @service = API::VisionService.new
+        @service.client_options.application_name    = "gcloud-ruby"
+        @service.client_options.application_version = Gcloud::VERSION
+        @service.authorization = @credentials.client
       end
 
+      def service
+        return mocked_service if mocked_service
+        @service
+      end
+      attr_accessor :mocked_service
+
+      ##
+      # Returns API::BatchAnnotateImagesResponse
       def annotate requests
-        execute(
-          api_method: @vision.images.annotate,
-          body_object: { requests: requests }
-        )
+        request = API::BatchAnnotateImagesRequest.new(requests: requests)
+        service.annotate_image request
+      rescue Google::Apis::Error => e
+        raise Gcloud::Error.from_error(e)
       end
 
       def inspect
         "#{self.class}(#{@project})"
-      end
-
-      protected
-
-      def execute options
-        Gcloud::Backoff.new.execute_gapi do
-          @client.execute options
-        end
       end
     end
   end

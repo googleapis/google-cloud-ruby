@@ -68,7 +68,7 @@ module Gcloud
       #   face = annotation.faces.first
       #
       def faces
-        @faces ||= Array(@gapi["faceAnnotations"]).map do |fa|
+        @faces ||= Array(@gapi.face_annotations).map do |fa|
           Face.from_gapi fa
         end
       end
@@ -128,7 +128,7 @@ module Gcloud
       #   landmark = annotation.landmarks.first
       #
       def landmarks
-        @landmarks ||= Array(@gapi["landmarkAnnotations"]).map do |lm|
+        @landmarks ||= Array(@gapi.landmark_annotations).map do |lm|
           Entity.from_gapi lm
         end
       end
@@ -189,7 +189,7 @@ module Gcloud
       #   logo = annotation.logos.first
       #
       def logos
-        @logos ||= Array(@gapi["logoAnnotations"]).map do |lg|
+        @logos ||= Array(@gapi.logo_annotations).map do |lg|
           Entity.from_gapi lg
         end
       end
@@ -250,7 +250,7 @@ module Gcloud
       #   label = annotation.labels.first
       #
       def labels
-        @labels ||= Array(@gapi["labelAnnotations"]).map do |lb|
+        @labels ||= Array(@gapi.label_annotations).map do |lb|
           Entity.from_gapi lb
         end
       end
@@ -310,7 +310,7 @@ module Gcloud
       #   text = annotation.text
       #
       def text
-        @text ||= Text.from_gapi(@gapi["textAnnotations"])
+        @text ||= Text.from_gapi(@gapi.text_annotations)
       end
 
       ##
@@ -348,8 +348,8 @@ module Gcloud
       #   safe_search = annotation.safe_search
       #
       def safe_search
-        return nil unless @gapi["safeSearchAnnotation"]
-        @safe_search ||= SafeSearch.from_gapi(@gapi["safeSearchAnnotation"])
+        return nil unless @gapi.safe_search_annotation
+        @safe_search ||= SafeSearch.from_gapi(@gapi.safe_search_annotation)
       end
 
       ##
@@ -388,8 +388,8 @@ module Gcloud
       #   properties = annotation.properties
       #
       def properties
-        return nil unless @gapi["imagePropertiesAnnotation"]
-        @properties ||= Properties.from_gapi(@gapi["imagePropertiesAnnotation"])
+        return nil unless @gapi.image_properties_annotation
+        @properties ||= Properties.from_gapi(@gapi.image_properties_annotation)
       end
 
       ##

@@ -19,8 +19,9 @@ require "uri"
 describe Gcloud::Bigquery::Job, :mock_bigquery do
   # Create a job object with the project's mocked connection object
   let(:job_hash) { random_job_hash }
-  let(:job) { Gcloud::Bigquery::Job.from_gapi job_hash,
-                                              bigquery.connection }
+  let(:job_gapi) { Google::Apis::BigqueryV2::Job.from_json random_job_hash.to_json }
+  let(:job) { Gcloud::Bigquery::Job.from_gapi job_gapi,
+                                              bigquery.service }
   let(:job_id) { job.job_id }
 
   let(:failed_job_hash) do
@@ -39,12 +40,13 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     }]
     hash
   end
-  let(:failed_job) { Gcloud::Bigquery::Job.from_gapi failed_job_hash,
-                                              bigquery.connection }
+  let(:failed_job_gapi) { Google::Apis::BigqueryV2::Job.from_json failed_job_hash.to_json }
+  let(:failed_job) { Gcloud::Bigquery::Job.from_gapi failed_job_gapi,
+                                              bigquery.service }
   let(:failed_job_id) { failed_job.job_id }
 
   it "knows its attributes" do
-    job.job_id.must_equal job_hash["jobReference"]["jobId"]
+    job.job_id.must_equal job_gapi.job_reference.job_id
   end
 
   it "knows its state" do
@@ -54,42 +56,42 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.wont_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = "RUNNING"
+    job.gapi.status.state = "RUNNING"
     job.state.must_equal "RUNNING"
     job.must_be :running?
     job.wont_be :pending?
     job.wont_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = "pending"
+    job.gapi.status.state = "pending"
     job.state.must_equal "pending"
     job.wont_be :running?
     job.must_be :pending?
     job.wont_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = "PENDING"
+    job.gapi.status.state = "PENDING"
     job.state.must_equal "PENDING"
     job.wont_be :running?
     job.must_be :pending?
     job.wont_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = "done"
+    job.gapi.status.state = "done"
     job.state.must_equal "done"
     job.wont_be :running?
     job.wont_be :pending?
     job.must_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = "DONE"
+    job.gapi.status.state = "DONE"
     job.state.must_equal "DONE"
     job.wont_be :running?
     job.wont_be :pending?
     job.must_be :done?
     job.wont_be :failed?
 
-    job.gapi["status"]["state"] = nil
+    job.gapi.status.state = nil
     job.state.must_equal nil
     job.wont_be :running?
     job.wont_be :pending?
@@ -98,9 +100,9 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
   end
 
   it "knows its creation and modification times" do
-    job.gapi["statistics"]["creationTime"] = nil
-    job.gapi["statistics"]["startTime"] = nil
-    job.gapi["statistics"]["endTime"] = nil
+    job.gapi.statistics.creation_time = nil
+    job.gapi.statistics.start_time = nil
+    job.gapi.statistics.end_time = nil
 
     job.created_at.must_be :nil?
     job.started_at.must_be :nil?
@@ -109,9 +111,9 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     nowish = Time.now
     timestamp = (nowish.to_f * 1000).floor
 
-    job.gapi["statistics"]["creationTime"] = timestamp
-    job.gapi["statistics"]["startTime"] = timestamp
-    job.gapi["statistics"]["endTime"] = timestamp
+    job.gapi.statistics.creation_time = timestamp
+    job.gapi.statistics.start_time = timestamp
+    job.gapi.statistics.end_time = timestamp
 
     job.created_at.must_be_close_to nowish
     job.started_at.must_be_close_to nowish
@@ -155,37 +157,37 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
   end
 
   it "can reload itself" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "done").to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
+                [project, job_id]
 
     job.must_be :running?
     job.reload!
     job.must_be :done?
+    mock.verify
   end
 
   it "can wait until done" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "pending").to_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "pending").to_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "running").to_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "running").to_json]
-    end
-    mock_connection.get "/bigquery/v2/projects/#{project}/jobs/#{job_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id, "done").to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "pending").to_json),
+                [project, job_id]
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "pending").to_json),
+                [project, job_id]
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "running").to_json),
+                [project, job_id]
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "running").to_json),
+                [project, job_id]
+    mock.expect :get_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
+                [project, job_id]
+
 
     # mock out the sleep method so the test doesn't actually block
     def job.sleep *args
@@ -194,16 +196,23 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.must_be :running?
     job.wait_until_done!
     job.must_be :done?
+    mock.verify
   end
 
   it "can re-run itself" do
-    mock_connection.post "/bigquery/v2/projects/#{project}/jobs" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       random_job_hash(job_id + "-rerun").to_json]
-    end
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    generic_job_gapi = Google::Apis::BigqueryV2::Job.new(
+      configuration: job.configuration
+    )
+    mock.expect :insert_job,
+                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id + "-rerun").to_json),
+                [project, generic_job_gapi]
 
     new_job = job.rerun!
-    new_job.configuration.must_equal job.configuration
+    new_job.config["dryRun"].must_equal job.config["dryRun"]
     new_job.job_id.wont_equal job.job_id
+    mock.verify
   end
 end

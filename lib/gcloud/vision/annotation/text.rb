@@ -55,7 +55,7 @@ module Gcloud
         # @return [String] The entire text including newline characters.
         #
         def text
-          @gapi["description"]
+          @gapi.description
         end
 
         ##
@@ -66,7 +66,7 @@ module Gcloud
         #   language code.
         #
         def locale
-          @gapi["locale"]
+          @gapi.locale
         end
 
         ##
@@ -75,8 +75,8 @@ module Gcloud
         # @return [Array<Vertex>]
         #
         def bounds
-          return [] unless @gapi["boundingPoly"]
-          @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
+          return [] unless @gapi.bounding_poly
+          @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
             Vertex.from_gapi v
           end
         end
@@ -176,7 +176,7 @@ module Gcloud
           # @return [String]
           #
           def text
-            @gapi["description"]
+            @gapi.description
           end
 
           ##
@@ -185,8 +185,8 @@ module Gcloud
           # @return [Array<Vertex>]
           #
           def bounds
-            return [] unless @gapi["boundingPoly"]
-            @bounds ||= Array(@gapi["boundingPoly"]["vertices"]).map do |v|
+            return [] unless @gapi.bounding_poly
+            @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
               Vertex.from_gapi v
             end
           end

@@ -17,7 +17,7 @@ require "gcloud/storage/bucket/acl"
 require "gcloud/storage/bucket/list"
 require "gcloud/storage/bucket/cors"
 require "gcloud/storage/file"
-require "gcloud/upload"
+require "pathname"
 
 module Gcloud
   module Storage
@@ -37,8 +37,8 @@ module Gcloud
     #
     class Bucket
       ##
-      # @private The Connection object.
-      attr_accessor :connection
+      # @private The Service object.
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -47,39 +47,39 @@ module Gcloud
       ##
       # @private Create an empty Bucket object.
       def initialize
-        @connection = nil
-        @gapi = {}
+        @service = nil
+        @gapi = Google::Apis::StorageV1::Bucket.new
       end
 
       ##
       # The kind of item this is.
       # For buckets, this is always `storage#bucket`.
       def kind
-        @gapi["kind"]
+        @gapi.kind
       end
 
       ##
       # The ID of the bucket.
       def id
-        @gapi["id"]
+        @gapi.id
       end
 
       ##
       # The name of the bucket.
       def name
-        @gapi["name"]
+        @gapi.name
       end
 
       ##
       # A URL that can be used to access the bucket using the REST API.
       def api_url
-        @gapi["selfLink"]
+        @gapi.self_link
       end
 
       ##
       # Creation time of the bucket.
       def created_at
-        @gapi["timeCreated"]
+        @gapi.time_created
       end
 
       ##
@@ -128,26 +128,14 @@ module Gcloud
       #   end
       #
       def cors
+        cors_builder = Bucket::Cors.from_gapi @gapi.cors_configurations
         if block_given?
-          cors_builder = Bucket::Cors.new @gapi["cors"]
           yield cors_builder
-          self.cors = cors_builder if cors_builder.changed?
+          if cors_builder.changed?
+            patch_gapi! cors_configurations: cors_builder.to_gapi
+          end
         end
-        deep_dup_and_freeze @gapi["cors"]
-      end
-
-      ##
-      # Updates the CORS configuration for a static website served from the
-      # bucket.
-      #
-      # Accepts an array of hashes containing the attributes specified for the
-      # [resource description of
-      # cors](https://cloud.google.com/storage/docs/json_api/v1/buckets#cors).
-      #
-      # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
-      #   Resource Sharing (CORS)
-      def cors= new_cors
-        patch_gapi! cors: new_cors
+        cors_builder.freeze # always return frozen objects
       end
 
       ##
@@ -158,7 +146,7 @@ module Gcloud
       #
       # @see https://cloud.google.com/storage/docs/concepts-techniques
       def location
-        @gapi["location"]
+        @gapi.location
       end
 
       ##
@@ -167,7 +155,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-logs Access Logs
       #
       def logging_bucket
-        @gapi["logging"]["logBucket"] if @gapi["logging"]
+        @gapi.logging.log_bucket if @gapi.logging
       end
 
       ##
@@ -178,7 +166,9 @@ module Gcloud
       # @param [String] logging_bucket The bucket to hold the logging output
       #
       def logging_bucket= logging_bucket
-        patch_gapi! logging_bucket: logging_bucket
+        @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
+        @gapi.logging.log_bucket = logging_bucket
+        patch_gapi! logging: @gapi.logging
       end
 
       ##
@@ -187,7 +177,7 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-logs Access Logs
       #
       def logging_prefix
-        @gapi["logging"]["logObjectPrefix"] if @gapi["logging"]
+        @gapi.logging.log_object_prefix if @gapi.logging
       end
 
       ##
@@ -201,7 +191,9 @@ module Gcloud
       # @see https://cloud.google.com/storage/docs/access-logs Access Logs
       #
       def logging_prefix= logging_prefix
-        patch_gapi! logging_prefix: logging_prefix
+        @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
+        @gapi.logging.log_object_prefix = logging_prefix
+        patch_gapi! logging: @gapi.logging
       end
 
       ##
@@ -209,7 +201,7 @@ module Gcloud
       # stored and determines the SLA and the cost of storage. Values include
       # `STANDARD`, `NEARLINE`, and `DURABLE_REDUCED_AVAILABILITY`.
       def storage_class
-        @gapi["storageClass"]
+        @gapi.storage_class
       end
 
       ##
@@ -217,7 +209,7 @@ module Gcloud
       # Versioning](https://cloud.google.com/storage/docs/object-versioning) is
       # enabled for the bucket.
       def versioning?
-        !@gapi["versioning"].nil? && @gapi["versioning"]["enabled"]
+        @gapi.versioning.enabled? unless @gapi.versioning.nil?
       end
 
       ##
@@ -228,6 +220,8 @@ module Gcloud
       # @return [Boolean]
       #
       def versioning= new_versioning
+        @gapi.versioning ||= Google::Apis::StorageV1::Bucket::Versioning.new
+        @gapi.versioning.enabled = new_versioning
         patch_gapi! versioning: new_versioning
       end
 
@@ -239,7 +233,7 @@ module Gcloud
       #   How to Host a Static Website
       #
       def website_main
-        @gapi["website"]["mainPageSuffix"] if @gapi["website"]
+        @gapi.website.main_page_suffix if @gapi.website
       end
 
       ##
@@ -250,7 +244,9 @@ module Gcloud
       #   How to Host a Static Website
       #
       def website_main= website_main
-        patch_gapi! website_main: website_main
+        @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
+        @gapi.website.main_page_suffix = website_main
+        patch_gapi! website: @gapi.website
       end
 
       ##
@@ -261,7 +257,7 @@ module Gcloud
       #   How to Host a Static Website
       #
       def website_404
-        @gapi["website"]["notFoundPage"] if @gapi["website"]
+        @gapi.website.not_found_page if @gapi.website
       end
 
       ##
@@ -272,7 +268,9 @@ module Gcloud
       #   How to Host a Static Website
       #
       def website_404= website_404
-        patch_gapi! website_404: website_404
+        @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
+        @gapi.website.not_found_page = website_404
+        patch_gapi! website: @gapi.website
       end
 
       ##
@@ -316,8 +314,10 @@ module Gcloud
       #   end
       #
       def update
-        updater = Updater.new @gapi["cors"]
+        updater = Updater.new gapi
         yield updater
+        # Add check for mutable cors
+        updater.check_for_mutable_cors!
         patch_gapi! updater.updates unless updater.updates.empty?
       end
 
@@ -340,13 +340,9 @@ module Gcloud
       #   bucket.delete
       #
       def delete
-        ensure_connection!
-        resp = connection.delete_bucket name
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_bucket name
+        true
       end
 
       ##
@@ -398,7 +394,7 @@ module Gcloud
       #   end
       #
       def files prefix: nil, delimiter: nil, token: nil, max: nil, versions: nil
-        ensure_connection!
+        ensure_service!
         options = {
           prefix:    prefix,
           delimiter: delimiter,
@@ -406,10 +402,9 @@ module Gcloud
           max:       max,
           versions:  versions
         }
-        resp = connection.list_files name, options
-        fail ApiError.from_response(resp) unless resp.success?
-        File::List.from_response resp, connection, name, prefix, delimiter, max,
-                                 versions
+        gapi = service.list_files name, options
+        File::List.from_gapi gapi, service, name, prefix, delimiter, max,
+                             versions
       end
       alias_method :find_files, :files
 
@@ -449,27 +444,20 @@ module Gcloud
       #
       def file path, generation: nil, encryption_key: nil,
                encryption_key_sha256: nil
-        ensure_connection!
-        options = { generation: generation, encryption_key: encryption_key,
-                    encryption_key_sha256: encryption_key_sha256 }
-        resp = connection.get_file name, path, options
-        if resp.success?
-          File.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        options = { generation: generation, key: encryption_key,
+                    key_sha256: encryption_key_sha256 }
+        gapi = service.get_file name, path, options
+        File.from_gapi gapi, service
+      rescue Google::Apis::ClientError => e
+        return nil if e.status_code == 404
+        raise e
       end
       alias_method :find_file, :file
 
       ##
       # Creates a new {File} object by providing a path to a local file to
       # upload and the path to store it with in the bucket.
-      #
-      # A `chunk_size` value can be provided in the options to be used
-      # in resumable uploads. This value is the number of bytes per
-      # chunk and must be divisible by 256KB. If it is not divisible
-      # by 256KB then it will be lowered to the nearest acceptable
-      # value.
       #
       # #### Customer-supplied encryption keys
       #
@@ -484,29 +472,6 @@ module Gcloud
       # with the exception of the CRC32C checksum and MD5 hash. The names of
       # files and buckets are also not encrypted, and you can read or update the
       # metadata of an encrypted file without providing the encryption key.
-      #
-      # #### Troubleshooting large uploads
-      #
-      # You may encounter errors while attempting to upload large files. Below
-      # are a couple of common cases and their solutions.
-      #
-      # ##### Handling memory errors
-      #
-      # If you encounter a memory error such as `NoMemoryError`, try performing
-      # a resumable upload and setting the `chunk_size` option to a value that
-      # works for your environment, as explained in the final example above.
-      #
-      # ##### Handling broken pipe errors
-      #
-      # To avoid broken pipe (`Errno::EPIPE`) errors when uploading, add the
-      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
-      # and the configuration shown below. These lines must execute after
-      # `require "gcloud"` but before you make your first connection. The
-      # first statement configures [Faraday](https://rubygems.org/gems/faraday)
-      # to use httpclient. The second statement, which should only be added if
-      # you are using a version of Faraday at or above 0.9.2, is a workaround
-      # for [this gzip
-      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
       #
       # @param [String] file Path of the file on the filesystem to upload.
       # @param [String] path Path to store the file in Google Cloud Storage.
@@ -542,10 +507,6 @@ module Gcloud
       # @param [String] content_type The
       #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
       #   response header to be returned when the file is downloaded.
-      # @param [Integer] chunk_size The number of bytes per chunk in a resumable
-      #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
-      #   then it will be lowered to the nearest acceptable value. If no value
-      #   is provided it will use {Gcloud::Upload.default_chunk_size}. Optional.
       # @param [String] crc32c The CRC32c checksum of the file data, as
       #   described in [RFC 4960, Appendix
       #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
@@ -591,18 +552,6 @@ module Gcloud
       #   bucket.create_file "path/to/local.file.ext",
       #                      "destination/path/file.ext"
       #
-      # @example Specifying the chunk size as a number of bytes:
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   storage = gcloud.storage
-      #
-      #   bucket = storage.bucket "my-bucket"
-      #
-      #   bucket.create_file "path/to/local.file.ext",
-      #                      "destination/path/file.ext",
-      #                      chunk_size: 1024*1024 # 1 MB chunk
-      #
       # @example Providing a customer-supplied encryption key:
       #   require "gcloud"
       #   require "digest/sha2"
@@ -643,23 +592,21 @@ module Gcloud
       #
       def create_file file, path = nil, acl: nil, cache_control: nil,
                       content_disposition: nil, content_encoding: nil,
-                      content_language: nil, content_type: nil, chunk_size: nil,
+                      content_language: nil, content_type: nil,
                       crc32c: nil, md5: nil, metadata: nil, encryption_key: nil,
                       encryption_key_sha256: nil
-        ensure_connection!
+        ensure_service!
         options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                     cache_control: cache_control, content_type: content_type,
                     content_disposition: content_disposition, crc32c: crc32c,
-                    content_encoding: content_encoding, chunk_size: chunk_size,
+                    content_encoding: content_encoding,
                     content_language: content_language, metadata: metadata,
-                    encryption_key: encryption_key,
-                    encryption_key_sha256: encryption_key_sha256 }
+                    key: encryption_key, key_sha256: encryption_key_sha256 }
         ensure_file_exists! file
-        resumable = resumable_upload?(file)
-        resp = @connection.upload_file resumable, name, file, path, options
-
-        return File.from_gapi(resp.data, connection) if resp.success?
-        fail ApiError.from_response(resp)
+        # TODO: Handle file as an IO and path is missing more gracefully
+        path ||= Pathname(file).to_path
+        gapi = service.insert_file name, file, path, options
+        File.from_gapi gapi, service
       end
       alias_method :upload_file, :create_file
       alias_method :new_file, :create_file
@@ -760,13 +707,8 @@ module Gcloud
       ##
       # Reloads the bucket with current data from the Storage service.
       def reload!
-        ensure_connection!
-        resp = connection.get_bucket name
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = service.get_bucket name
       end
       alias_method :refresh!, :reload!
 
@@ -775,26 +717,21 @@ module Gcloud
       def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = conn
         end
       end
 
       protected
 
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
       def patch_gapi! options = {}
-        ensure_connection!
-        resp = connection.patch_bucket name, options
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        @gapi = service.patch_bucket name, options
       end
 
       ##
@@ -811,51 +748,44 @@ module Gcloud
       end
 
       ##
-      # Given nil, empty array, a gapi array of hashes, or any value, returns a
-      # deeply dup'd and frozen array of simple hashes or values (not gapi
-      # objects.)
-      def deep_dup_and_freeze array
-        return [].freeze if array.nil? || array.empty?
-        array = Array(array.dup)
-        array = array.map do |h|
-          h = h.to_hash if h.respond_to? :to_hash
-          h.dup.freeze
-        end
-        array.freeze
-      end
-
-      ##
       # Yielded to a block to accumulate changes for a patch request.
-      class Updater
+      class Updater < Bucket
         attr_reader :updates
         ##
         # Create an Updater object.
-        def initialize cors
-          @cors = cors ? Array(cors.dup) : []
-          @cors = @cors.map { |x| x.to_hash if x.respond_to? :to_hash }
+        def initialize gapi
           @updates = {}
+          @gapi = gapi.dup
+          @cors_builder = nil
         end
 
-        ATTRS = [:cors, :logging_bucket, :logging_prefix, :versioning,
-                 :website_main, :website_404]
-
-        ATTRS.each do |attr|
-          define_method "#{attr}=" do |arg|
-            updates[attr] = arg
-          end
+        def cors
+          # Same as Bucket#cors, but not frozen
+          @cors_builder ||= Bucket::Cors.from_gapi @gapi.cors_configurations
+          yield @cors_builder if block_given?
+          @cors_builder
         end
 
         ##
-        # Return CORS for mutation. Also adds CORS to @updates so that it
-        # is included in the patch request.
-        def cors
-          updates[:cors] ||= @cors
-          if block_given?
-            cors_builder = Bucket::Cors.new updates[:cors]
-            yield cors_builder
-            updates[:cors] = cors_builder if cors_builder.changed?
-          end
-          updates[:cors]
+        # Make sure any cors changes are saved
+        def check_for_mutable_cors!
+          return if @cors_builder.nil?
+          return unless @cors_builder.changed?
+          @gapi.cors_configurations = @cors_builder.to_gapi
+          patch_gapi! cors_configurations: @cors_builder.to_gapi
+        end
+
+        def to_gapi
+          check_for_mutable_cors!
+          @gapi
+        end
+
+        protected
+
+        ##
+        # Queue up all the updates instead of making them.
+        def patch_gapi! options = {}
+          @updates.merge! options
         end
       end
     end

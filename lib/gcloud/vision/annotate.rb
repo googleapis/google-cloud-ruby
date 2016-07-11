@@ -14,6 +14,7 @@
 
 
 require "gcloud/vision/image"
+require "google/apis/vision_v1"
 
 module Gcloud
   module Vision
@@ -154,8 +155,11 @@ module Gcloud
 
         Array(images).flatten.each do |img|
           i = image(img)
-          @requests << { image: i.to_gapi, features: features,
-                         imageContext: i.context.to_gapi }
+          @requests << Google::Apis::VisionV1::AnnotateImageRequest.new(
+            image: i.to_gapi,
+            features: features,
+            imageContext: i.context.to_gapi
+          )
         end
       end
 
@@ -168,15 +172,18 @@ module Gcloud
           faces, landmarks, logos, labels)
 
         f = []
-        f << { type: :FACE_DETECTION, maxResults: faces } unless faces.zero?
-        f << { type: :LANDMARK_DETECTION,
-               maxResults: landmarks } unless landmarks.zero?
-        f << { type: :LOGO_DETECTION, maxResults: logos } unless logos.zero?
-        f << { type: :LABEL_DETECTION, maxResults: labels } unless labels.zero?
-        f << { type: :TEXT_DETECTION, maxResults: 1 } if text
-        f << { type: :SAFE_SEARCH_DETECTION, maxResults: 1 } if safe_search
-        f << { type: :IMAGE_PROPERTIES, maxResults: 1 } if properties
+        f << feature("FACE_DETECTION", faces) unless faces.zero?
+        f << feature("LANDMARK_DETECTION", landmarks) unless landmarks.zero?
+        f << feature("LOGO_DETECTION", logos) unless logos.zero?
+        f << feature("LABEL_DETECTION", labels) unless labels.zero?
+        f << feature("TEXT_DETECTION", 1) if text
+        f << feature("SAFE_SEARCH_DETECTION", 1) if safe_search
+        f << feature("IMAGE_PROPERTIES", 1) if properties
         f
+      end
+
+      def feature type, max_results
+        Google::Apis::VisionV1::Feature.new type: type, max_results: max_results
       end
 
       def default_features? faces, landmarks, logos, labels, text,
@@ -188,17 +195,13 @@ module Gcloud
 
       def default_features
         [
-          { type: :FACE_DETECTION,
-            maxResults: Gcloud::Vision.default_max_faces },
-          { type: :LANDMARK_DETECTION,
-            maxResults: Gcloud::Vision.default_max_landmarks },
-          { type: :LOGO_DETECTION,
-            maxResults: Gcloud::Vision.default_max_logos },
-          { type: :LABEL_DETECTION,
-            maxResults: Gcloud::Vision.default_max_labels },
-          { type: :TEXT_DETECTION, maxResults: 1 },
-          { type: :SAFE_SEARCH_DETECTION, maxResults: 1 },
-          { type: :IMAGE_PROPERTIES, maxResults: 1 }
+          feature("FACE_DETECTION", Gcloud::Vision.default_max_faces),
+          feature("LANDMARK_DETECTION", Gcloud::Vision.default_max_landmarks),
+          feature("LOGO_DETECTION", Gcloud::Vision.default_max_logos),
+          feature("LABEL_DETECTION", Gcloud::Vision.default_max_labels),
+          feature("TEXT_DETECTION", 1),
+          feature("SAFE_SEARCH_DETECTION", 1),
+          feature("IMAGE_PROPERTIES", 1)
         ]
       end
 

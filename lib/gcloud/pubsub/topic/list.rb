@@ -75,8 +75,6 @@ module Gcloud
           options = { token: token, max: @max }
           grpc = @service.list_topics options
           self.class.from_grpc grpc, @service, @max
-        rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
         end
 
         ##

@@ -14,11 +14,11 @@
 
 
 require "json"
-require "gcloud/bigquery/errors"
+require "gcloud/errors"
 require "gcloud/bigquery/table"
-require "gcloud/bigquery/table/schema"
 require "gcloud/bigquery/dataset/list"
 require "gcloud/bigquery/dataset/access"
+require "google/apis/bigquery_v2"
 
 module Gcloud
   module Bigquery
@@ -43,7 +43,7 @@ module Gcloud
     class Dataset
       ##
       # @private The Connection object.
-      attr_accessor :connection
+      attr_accessor :service
 
       ##
       # @private The Google API Client object.
@@ -52,7 +52,7 @@ module Gcloud
       ##
       # @private Create an empty Dataset object.
       def initialize
-        @connection = nil
+        @service = nil
         @gapi = {}
       end
 
@@ -64,7 +64,7 @@ module Gcloud
       # @!group Attributes
       #
       def dataset_id
-        @gapi["datasetReference"]["datasetId"]
+        @gapi.dataset_reference.dataset_id
       end
 
       ##
@@ -73,7 +73,7 @@ module Gcloud
       # @!group Attributes
       #
       def project_id
-        @gapi["datasetReference"]["projectId"]
+        @gapi.dataset_reference.project_id
       end
 
       ##
@@ -81,8 +81,8 @@ module Gcloud
       # The gapi fragment containing the Project ID and Dataset ID as a
       # camel-cased hash.
       def dataset_ref
-        dataset_ref = @gapi["datasetReference"]
-        dataset_ref = dataset_ref.to_hash if dataset_ref.respond_to? :to_hash
+        dataset_ref = @gapi.dataset_reference
+        dataset_ref = dataset_ref.to_h if dataset_ref.respond_to? :to_h
         dataset_ref
       end
 
@@ -92,7 +92,7 @@ module Gcloud
       # @!group Attributes
       #
       def name
-        @gapi["friendlyName"]
+        @gapi.friendly_name
       end
 
       ##
@@ -101,7 +101,8 @@ module Gcloud
       # @!group Attributes
       #
       def name= new_name
-        patch_gapi! name: new_name
+        @gapi.update! friendly_name: new_name
+        patch_gapi! :friendly_name
       end
 
       ##
@@ -111,7 +112,7 @@ module Gcloud
       #
       def etag
         ensure_full_data!
-        @gapi["etag"]
+        @gapi.etag
       end
 
       ##
@@ -121,7 +122,7 @@ module Gcloud
       #
       def api_url
         ensure_full_data!
-        @gapi["selfLink"]
+        @gapi.self_link
       end
 
       ##
@@ -131,7 +132,7 @@ module Gcloud
       #
       def description
         ensure_full_data!
-        @gapi["description"]
+        @gapi.description
       end
 
       ##
@@ -140,7 +141,8 @@ module Gcloud
       # @!group Attributes
       #
       def description= new_description
-        patch_gapi! description: new_description
+        @gapi.update! description: new_description
+        patch_gapi! :description
       end
 
       ##
@@ -150,7 +152,7 @@ module Gcloud
       #
       def default_expiration
         ensure_full_data!
-        @gapi["defaultTableExpirationMs"]
+        @gapi.default_table_expiration_ms
       end
 
       ##
@@ -160,7 +162,8 @@ module Gcloud
       # @!group Attributes
       #
       def default_expiration= new_default_expiration
-        patch_gapi! default_expiration: new_default_expiration
+        @gapi.update! default_table_expiration_ms: new_default_expiration
+        patch_gapi! :default_table_expiration_ms
       end
 
       ##
@@ -170,7 +173,7 @@ module Gcloud
       #
       def created_at
         ensure_full_data!
-        Time.at(@gapi["creationTime"] / 1000.0)
+        Time.at(@gapi.creation_time / 1000.0)
       end
 
       ##
@@ -180,7 +183,7 @@ module Gcloud
       #
       def modified_at
         ensure_full_data!
-        Time.at(@gapi["lastModifiedTime"] / 1000.0)
+        Time.at(@gapi.last_modified_time / 1000.0)
       end
 
       ##
@@ -191,12 +194,11 @@ module Gcloud
       #
       def location
         ensure_full_data!
-        @gapi["location"]
+        @gapi.location
       end
 
       ##
-      # Retrieves the access rules for a Dataset using the Google Cloud
-      # Datastore API data structure of an array of hashes. The rules can be
+      # Retrieves the access rules for a Dataset. The rules can be
       # updated when passing a block, see {Dataset::Access} for all the methods
       # available.
       #
@@ -205,6 +207,8 @@ module Gcloud
       #
       # @yield [access] a block for setting rules
       # @yieldparam [Dataset::Access] access the object accepting rules
+      #
+      # @return [Gcloud::Bigquery::Dataset::Access]
       #
       # @example
       #   require "gcloud"
@@ -239,43 +243,12 @@ module Gcloud
       #
       def access
         ensure_full_data!
-        g = @gapi
-        g = g.to_hash if g.respond_to? :to_hash
-        a = g["access"] ||= []
-        return a unless block_given?
-        a2 = Access.new a, dataset_ref
-        yield a2
-        self.access = a2.access if a2.changed?
-      end
-
-      ##
-      # Sets the access rules for a Dataset using the Google Cloud Datastore API
-      # data structure of an array of hashes. See [BigQuery Access
-      # Control](https://cloud.google.com/bigquery/access-control) for more
-      # information.
-      #
-      # This method is provided for advanced usage of managing the access rules.
-      # Calling {#access} with a block is the preferred way to manage access
-      # rules.
-      #
-      # @example
-      #   require "gcloud"
-      #
-      #   gcloud = Gcloud.new
-      #   bigquery = gcloud.bigquery
-      #   dataset = bigquery.dataset "my_dataset"
-      #
-      #   dataset.access = [{"role"=>"OWNER",
-      #                      "specialGroup"=>"projectOwners"},
-      #                     {"role"=>"WRITER",
-      #                      "specialGroup"=>"projectWriters"},
-      #                     {"role"=>"READER",
-      #                      "specialGroup"=>"projectReaders"},
-      #                     {"role"=>"OWNER",
-      #                      "userByEmail"=>"123456789-...com"}]
-      #
-      def access= new_access
-        patch_gapi! access: new_access
+        access_builder = Access.new @gapi
+        if block_given?
+          yield access_builder
+          patch_gapi! :access if access_builder.changed?
+        end
+        access_builder.freeze
       end
 
       ##
@@ -300,13 +273,9 @@ module Gcloud
       # @!group Lifecycle
       #
       def delete force: nil
-        ensure_connection!
-        resp = connection.delete_dataset dataset_id, force
-        if resp.success?
-          true
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        service.delete_dataset dataset_id, force
+        true
       end
 
       ##
@@ -320,13 +289,11 @@ module Gcloud
       #   length is 1,024 characters.
       # @param [String] name A descriptive name for the table.
       # @param [String] description A user-friendly description of the table.
-      # @param [Hash] schema A hash specifying fields and data types for the
-      #   table. A block may be passed instead (see examples.) For the format of
-      #   this hash, see the [Tables resource
-      #   ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource)
-      #   .
-      # @yield [schema] a block for setting the schema
-      # @yieldparam [Table::Schema] schema the object accepting the schema
+      # @param [Array<Schema::Field>] fields An array of Schema::Field objects
+      #   specifying the schema's data types for the table. The schema may also
+      #   be configured when passing a block.
+      # @yield [table] a block for setting the table
+      # @yieldparam [Table] table the table object to be updated
       #
       # @return [Gcloud::Bigquery::Table]
       #
@@ -348,69 +315,77 @@ module Gcloud
       #                                name: "My Table",
       #                                description: "A description of my table."
       #
-      # @example You can define the table's schema using a block.
+      # @example The table's schema fields can be passed as an argument.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.create_table "my_table" do |schema|
-      #     schema.string "first_name", mode: :required
-      #     schema.record "cities_lived", mode: :repeated do |nested_schema|
-      #       nested_schema.string "place", mode: :required
-      #       nested_schema.integer "number_of_years", mode: :required
+      #
+      #   schema_fields = [
+      #     Gcloud::Bigquery::Schema::Field.new(
+      #       "first_name", :string, mode: :required),
+      #     Gcloud::Bigquery::Schema::Field.new(
+      #       "cities_lived", :record, mode: :repeated
+      #       fields: [
+      #         Gcloud::Bigquery::Schema::Field.new(
+      #           "place", :string, mode: :required),
+      #         Gcloud::Bigquery::Schema::Field.new(
+      #           "number_of_years", :integer, mode: :required),
+      #         ])
+      #   ]
+      #   table = dataset.create_table "my_table", fields: schema_fields
+      #
+      # @example Or the table's schema can be configured with the block.
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   bigquery = gcloud.bigquery
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   table = dataset.create_table "my_table" do |t|
+      #     t.schema.string "first_name", mode: :required
+      #     t.schema.record "cities_lived", mode: :required do |s|
+      #       s.string "place", mode: :required
+      #       s.integer "number_of_years", mode: :required
       #     end
       #   end
       #
-      # @example You can pass the table's schema as a hash.
+      # @example You can define the schema using a nested block.
       #   require "gcloud"
       #
       #   gcloud = Gcloud.new
       #   bigquery = gcloud.bigquery
       #   dataset = bigquery.dataset "my_dataset"
-      #
-      #   schema = {
-      #     "fields" => [
-      #       {
-      #         "name" => "first_name",
-      #         "type" => "STRING",
-      #         "mode" => "REQUIRED"
-      #       },
-      #       {
-      #         "name" => "cities_lived",
-      #         "type" => "RECORD",
-      #         "mode" => "REPEATED",
-      #         "fields" => [
-      #           {
-      #             "name" => "place",
-      #             "type" => "STRING",
-      #             "mode" => "REQUIRED"
-      #           },
-      #           {
-      #             "name" => "number_of_years",
-      #             "type" => "INTEGER",
-      #             "mode" => "REQUIRED"
-      #           }
-      #         ]
-      #       }
-      #     ]
-      #   }
-      #   table = dataset.create_table "my_table", schema: schema
+      #   table = dataset.create_table "my_table" do |t|
+      #     t.name = "My Table",
+      #     t.description = "A description of my table."
+      #     t.schema do |s|
+      #       s.string "first_name", mode: :required
+      #       s.record "cities_lived", mode: :repeated do |r|
+      #         r.string "place", mode: :required
+      #         r.integer "number_of_years", mode: :required
+      #       end
+      #     end
+      #   end
       #
       # @!group Table
       #
-      def create_table table_id, name: nil, description: nil, schema: nil
-        ensure_connection!
-        if block_given?
-          if schema
-            fail ArgumentError, "only schema block or schema option is allowed"
-          end
-          schema_builder = Table::Schema.new nil
-          yield schema_builder
-          schema = schema_builder.schema if schema_builder.changed?
+      def create_table table_id, name: nil, description: nil, fields: nil
+        ensure_service!
+        new_tb = Google::Apis::BigqueryV2::Table.new(
+          table_reference: Google::Apis::BigqueryV2::TableReference.new(
+            project_id: project_id, dataset_id: dataset_id, table_id: table_id))
+        updater = Table::Updater.new(new_tb).tap do |tb|
+          tb.name = name unless name.nil?
+          tb.description = description unless description.nil?
+          tb.schema.fields = fields unless fields.nil?
         end
-        options = { name: name, description: description, schema: schema }
-        insert_table table_id, options
+
+        yield updater if block_given?
+
+        gapi = service.insert_table dataset_id, updater.to_gapi
+        Table.from_gapi gapi, service
       end
 
       ##
@@ -448,8 +423,15 @@ module Gcloud
       # @!group Table
       #
       def create_view table_id, query, name: nil, description: nil
-        options = { query: query, name: name, description: description }
-        insert_table table_id, options
+        new_view_opts = {
+          table_reference: Google::Apis::BigqueryV2::TableReference.new(
+            project_id: project_id, dataset_id: dataset_id, table_id: table_id),
+          friendly_name: name, description: description, query: query
+        }.delete_if { |_, v| v.nil? }
+        new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
+
+        gapi = service.insert_table dataset_id, new_view
+        Table.from_gapi gapi, service
       end
 
       ##
@@ -472,13 +454,11 @@ module Gcloud
       # @!group Table
       #
       def table table_id
-        ensure_connection!
-        resp = connection.get_table dataset_id, table_id
-        if resp.success?
-          Table.from_gapi resp.data, connection
-        else
-          nil
-        end
+        ensure_service!
+        gapi = service.get_table dataset_id, table_id
+        Table.from_gapi gapi, service
+      rescue Gcloud::NotFoundError
+        nil
       end
 
       ##
@@ -516,14 +496,10 @@ module Gcloud
       # @!group Table
       #
       def tables token: nil, max: nil
-        ensure_connection!
+        ensure_service!
         options = { token: token, max: max }
-        resp = connection.list_tables dataset_id, options
-        if resp.success?
-          Table::List.from_response resp, connection, dataset_id, max
-        else
-          fail ApiError.from_response(resp)
-        end
+        gapi = service.list_tables dataset_id, options
+        Table::List.from_gapi gapi, service, dataset_id, max
       end
 
       ##
@@ -597,13 +573,9 @@ module Gcloud
                     create: create, write: write, large_results: large_results,
                     flatten: flatten }
         options[:dataset] ||= self
-        ensure_connection!
-        resp = connection.query_job query, options
-        if resp.success?
-          Job.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.query_job query, options
+        Job.from_gapi gapi, service
       end
 
       ##
@@ -658,13 +630,9 @@ module Gcloud
         options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache }
         options[:dataset] ||= dataset_id
         options[:project] ||= project_id
-        ensure_connection!
-        resp = connection.query query, options
-        if resp.success?
-          QueryData.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.query query, options
+        QueryData.from_gapi gapi, service
       end
 
       ##
@@ -672,35 +640,26 @@ module Gcloud
       def self.from_gapi gapi, conn
         new.tap do |f|
           f.gapi = gapi
-          f.connection = conn
+          f.service = conn
         end
       end
 
       protected
 
-      def insert_table table_id, options
-        resp = connection.insert_table dataset_id, table_id, options
-        if resp.success?
-          Table.from_gapi resp.data, connection
-        else
-          fail ApiError.from_response(resp)
-        end
-      end
-
       ##
-      # Raise an error unless an active connection is available.
-      def ensure_connection!
-        fail "Must have active connection" unless connection
+      # Raise an error unless an active service is available.
+      def ensure_service!
+        fail "Must have active connection" unless service
       end
 
-      def patch_gapi! options = {}
-        ensure_connection!
-        resp = connection.patch_dataset dataset_id, options
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+      def patch_gapi! *attributes
+        return if attributes.empty?
+        ensure_service!
+        patch_args = Hash[attributes.map do |attr|
+          [attr, @gapi.send(attr)]
+        end]
+        patch_gapi = Google::Apis::BigqueryV2::Dataset.new patch_args
+        @gapi = service.patch_dataset dataset_id, patch_gapi
       end
 
       ##
@@ -711,17 +670,62 @@ module Gcloud
       end
 
       def reload_gapi!
-        ensure_connection!
-        resp = connection.get_dataset dataset_id
-        if resp.success?
-          @gapi = resp.data
-        else
-          fail ApiError.from_response(resp)
-        end
+        ensure_service!
+        gapi = service.get_dataset dataset_id
+        @gapi = gapi
       end
 
       def data_complete?
-        !@gapi["creationTime"].nil?
+        !@gapi.creation_time.nil?
+      end
+
+      ##
+      # Yielded to a block to accumulate changes for a patch request.
+      class Updater < Dataset
+        ##
+        # A list of attributes that were updated.
+        attr_reader :updates
+
+        ##
+        # Create an Updater object.
+        def initialize gapi
+          @updates = []
+          @gapi = gapi
+        end
+
+        def access
+          # Same as Dataset#access, but not frozen
+          @original_access_hashes = Array(@gapi.access).map(&:to_h)
+          # TODO: make sure to call ensure_full_data! on Dataset#update
+          access_builder = Access.new @gapi
+          if block_given?
+            yield access_builder
+            patch_gapi! :access if access_builder.changed?
+          end
+          access_builder
+        end
+
+        ##
+        # Make sure any access changes are saved
+        def check_for_mutated_access!
+          return if @original_access_hashes.nil?
+          return if @original_access_hashes == @gapi.access.map(&:to_h)
+          patch_gapi! :access
+        end
+
+        def to_gapi
+          check_for_mutable_cors!
+          @gapi
+        end
+
+        protected
+
+        ##
+        # Queue up all the updates instead of making them.
+        def patch_gapi! attribute
+          @updates << attribute
+          @updates.uniq!
+        end
       end
     end
   end

@@ -127,13 +127,19 @@ module Gcloud
       ##
       # @private New Record from a Google API Client object.
       def self.from_gapi gapi
-        new gapi["name"], gapi["type"], gapi["ttl"], gapi["rrdatas"]
+        new gapi.name, gapi.type, gapi.ttl, gapi.rrdatas
       end
 
       ##
       # @private Convert the record object to a Google API hash.
       def to_gapi
-        { "name" => name, "type" => type, "ttl" => ttl, "rrdatas" => data }
+        Google::Apis::DnsV1::ResourceRecordSet.new(
+          kind: "dns#resourceRecordSet",
+          name: name,
+          rrdatas: data,
+          ttl: ttl,
+          type: type
+        )
       end
 
       # @private

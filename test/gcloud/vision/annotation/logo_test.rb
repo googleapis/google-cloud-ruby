@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Vision::Annotation::Entity, :logo, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(logo_annotation_response.to_json) }
+  let(:gapi) { logo_annotation_response }
   let(:logo) { Gcloud::Vision::Annotation::Entity.from_gapi gapi }
 
   it "knows the given attributes" do
@@ -26,10 +26,10 @@ describe Gcloud::Vision::Annotation::Entity, :logo, :mock_vision do
     logo.score.must_equal 0.6435439
     logo.confidence.must_be :nil?
     logo.topicality.must_be :nil?
-    logo.bounds[0].to_a.must_equal [11,  11]
-    logo.bounds[1].to_a.must_equal [330, 11]
-    logo.bounds[2].to_a.must_equal [330, 72]
-    logo.bounds[3].to_a.must_equal [11,  72]
+    logo.bounds[0].to_a.must_equal [1,  0]
+    logo.bounds[1].to_a.must_equal [295, 0]
+    logo.bounds[2].to_a.must_equal [295, 301]
+    logo.bounds[3].to_a.must_equal [1,  301]
     logo.locations.must_be :empty?
     logo.properties.must_be :empty?
   end

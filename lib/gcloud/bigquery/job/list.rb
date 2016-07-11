@@ -29,9 +29,6 @@ module Gcloud
         # A hash of this page of results.
         attr_accessor :etag
 
-        # Total number of jobs in this collection.
-        attr_accessor :total
-
         ##
         # @private Create a new Job::List with an array of jobs.
         def initialize arr = []
@@ -74,14 +71,10 @@ module Gcloud
         #   end
         def next
           return nil unless next?
-          ensure_connection!
+          ensure_service!
           options = { all: @hidden, token: token, max: @max, filter: @filter }
-          resp = @connection.list_jobs options
-          if resp.success?
-            self.class.from_response resp, @connection, @hidden, @max, @filter
-          else
-            fail ApiError.from_response(resp)
-          end
+          gapi = @service.list_jobs options
+          self.class.from_gapi gapi, @service, @hidden, @max, @filter
         end
 
         ##
@@ -150,27 +143,28 @@ module Gcloud
         end
 
         ##
-        # @private New Job::List from a response object.
-        def self.from_response resp, conn, hidden = nil, max = nil, filter = nil
-          jobs = List.new(Array(resp.data["jobs"]).map do |gapi_object|
-            Job.from_gapi gapi_object, conn
+        # @private New Job::List from a Google API Client
+        # Google::Apis::BigqueryV2::JobList object.
+        def self.from_gapi gapi_list, service, hidden = nil, max = nil,
+                           filter = nil
+          jobs = List.new(Array(gapi_list.jobs).map do |gapi_object|
+            Job.from_gapi gapi_object, service
           end)
-          jobs.instance_variable_set "@token", resp.data["nextPageToken"]
-          jobs.instance_variable_set "@etag",  resp.data["etag"]
-          jobs.instance_variable_set "@total", resp.data["totalItems"]
-          jobs.instance_variable_set "@connection", conn
-          jobs.instance_variable_set "@hidden",     hidden
-          jobs.instance_variable_set "@max",        max
-          jobs.instance_variable_set "@filter",     filter
+          jobs.instance_variable_set :@token,   gapi_list.next_page_token
+          jobs.instance_variable_set :@etag,    gapi_list.etag
+          jobs.instance_variable_set :@service, service
+          jobs.instance_variable_set :@hidden,  hidden
+          jobs.instance_variable_set :@max,     max
+          jobs.instance_variable_set :@filter,  filter
           jobs
         end
 
         protected
 
         ##
-        # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          fail "Must have active connection" unless @service
         end
       end
     end

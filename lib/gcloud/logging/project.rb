@@ -149,8 +149,6 @@ module Gcloud
                                          order: order, token: token, max: max
         Entry::List.from_grpc list_grpc, service, projects: projects, max: max,
                                                   filter: filter, order: order
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_entries, :entries
 
@@ -267,9 +265,7 @@ module Gcloud
         service.write_entries Array(entries).map(&:to_grpc),
                               log_name: log_name, resource: resource,
                               labels: labels
-        return true
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
+        true
       end
 
       ##
@@ -326,9 +322,7 @@ module Gcloud
       def delete_log name
         ensure_service!
         service.delete_log name
-        return true
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
+        true
       end
 
       ##
@@ -371,8 +365,6 @@ module Gcloud
         ensure_service!
         list_grpc = service.list_resource_descriptors token: token, max: max
         ResourceDescriptor::List.from_grpc list_grpc, service, max
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_resource_descriptors, :resource_descriptors
 
@@ -434,8 +426,6 @@ module Gcloud
         ensure_service!
         list_grpc = service.list_sinks token: token, max: max
         Sink::List.from_grpc list_grpc, service, max
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_sinks, :sinks
 
@@ -502,8 +492,6 @@ module Gcloud
         ensure_service!
         grpc = service.create_sink name, destination, filter, version
         Sink.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :new_sink, :create_sink
 
@@ -533,9 +521,8 @@ module Gcloud
         ensure_service!
         grpc = service.get_sink sink_name
         Sink.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        return nil if e.code == 5
-        raise Gcloud::Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :get_sink, :sink
       alias_method :find_sink, :sink
@@ -575,8 +562,6 @@ module Gcloud
         ensure_service!
         grpc = service.list_metrics token: token, max: max
         Metric::List.from_grpc grpc, service, max
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :find_metrics, :metrics
 
@@ -611,8 +596,6 @@ module Gcloud
         ensure_service!
         grpc = service.create_metric name, filter, description
         Metric.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        raise Gcloud::Error.from_error(e)
       end
       alias_method :new_metric, :create_metric
 
@@ -642,9 +625,8 @@ module Gcloud
         ensure_service!
         grpc = service.get_metric name
         Metric.from_grpc grpc, service
-      rescue GRPC::BadStatus => e
-        return nil if e.code == 5
-        raise Gcloud::Error.from_error(e)
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :get_metric, :metric
       alias_method :find_metric, :metric

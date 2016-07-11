@@ -17,25 +17,20 @@ module Gcloud
   ##
   # Base gcloud-ruby exception class.
   class Error < StandardError
-    ##
-    # The inner error object.
-    attr_reader :inner
-
-    ##
-    # Create a new error object.
-    def initialize message = nil, error = nil
-      super message
-      @inner = error
-    end
-
-    # @private Create a new error object.
+    # @private Create a new error object from a client error
     def self.from_error error
-      klass_for(error).new error.message, error
+      klass = if error.respond_to? :code
+                grpc_error_class_for error.code
+              elsif error.respond_to? :status_code
+                gapi_error_class_for error.status_code
+              else
+                self.class
+              end
+      klass.new error.message
     end
 
-    # @private Identify the subclass for an error
-    def self.klass_for error
-      return self.class unless error.is_a? GRPC::BadStatus
+    # @private Identify the subclass for a gRPC error
+    def self.grpc_error_class_for grpc_error_code
       # The gRPC status code 0 is for a successful response.
       # So there is no error subclass for a 0 status code, use current class.
       [self.class, CanceledError, UnknownError, InvalidArgumentError,
@@ -43,7 +38,24 @@ module Gcloud
        PermissionDeniedError, ResourceExhaustedError, FailedPreconditionError,
        AbortedError, OutOfRangeError, UnimplementedError, InternalError,
        UnavailableError, DataLossError, UnauthenticatedError
-      ][error.code] || self.class
+      ][grpc_error_code] || self.class
+    end
+
+    # @private Identify the subclass for a Google API Client error
+    def self.gapi_error_class_for http_status_code
+      # The http status codes mapped to their error classes.
+      { 400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
+        401 => UnauthenticatedError,
+        403 => PermissionDeniedError,
+        404 => NotFoundError,
+        409 => AlreadyExistsError, # AbortedError
+        429 => ResourceExhaustedError,
+        499 => CanceledError,
+        500 => InternalError, # UnknownError/DataLossError
+        501 => UnimplementedError,
+        503 => UnavailableError,
+        504 => DeadlineExceededError
+      }[http_status_code] || self.class
     end
   end
 

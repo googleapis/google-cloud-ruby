@@ -31,39 +31,39 @@ module Gcloud
       # The URI or URIs representing the Google Cloud Storage files from which
       # the operation loads data.
       def sources
-        Array config["load"]["sourceUris"]
+        Array @gapi.configuration.load.source_uris
       end
 
       ##
       # The table into which the operation loads data. This is the table on
       # which {Table#load} was invoked. Returns a {Table} instance.
       def destination
-        table = config["load"]["destinationTable"]
+        table = @gapi.configuration.load.destination_table
         return nil unless table
-        retrieve_table table["projectId"],
-                       table["datasetId"],
-                       table["tableId"]
+        retrieve_table table.project_id,
+                       table.dataset_id,
+                       table.table_id
       end
 
       ##
       # The delimiter used between fields in the source data. The default is a
       # comma (,).
       def delimiter
-        config["load"]["fieldDelimiter"] || ","
+        @gapi.configuration.load.field_delimiter || ","
       end
 
       ##
       # The number of header rows at the top of a CSV file to skip. The default
       # value is `0`.
       def skip_leading_rows
-        config["load"]["skipLeadingRows"] || 0
+        @gapi.configuration.load.skip_leading_rows || 0
       end
 
       ##
       # Checks if the character encoding of the data is UTF-8. This is the
       # default.
       def utf8?
-        val = config["load"]["encoding"]
+        val = @gapi.configuration.load.encoding
         return true if val.nil?
         val == "UTF-8"
       end
@@ -71,7 +71,7 @@ module Gcloud
       ##
       # Checks if the character encoding of the data is ISO-8859-1.
       def iso8859_1?
-        val = config["load"]["encoding"]
+        val = @gapi.configuration.load.encoding
         val == "ISO-8859-1"
       end
 
@@ -82,7 +82,7 @@ module Gcloud
       # contains quoted newline characters, {#quoted_newlines?} should return
       # `true`.
       def quote
-        val = config["load"]["quote"]
+        val = @gapi.configuration.load.quote
         val = "\"" if val.nil?
         val
       end
@@ -93,7 +93,7 @@ module Gcloud
       # returned. The default value is `0`, which requires that all records be
       # valid.
       def max_bad_records
-        val = config["load"]["maxBadRecords"]
+        val = @gapi.configuration.load.max_bad_records
         val = 0 if val.nil?
         val
       end
@@ -102,7 +102,7 @@ module Gcloud
       # Checks if quoted data sections may contain newline characters in a CSV
       # file. The default is `false`.
       def quoted_newlines?
-        val = config["load"]["allowQuotedNewlines"]
+        val = @gapi.configuration.load.allow_quoted_newlines
         val = true if val.nil?
         val
       end
@@ -111,14 +111,14 @@ module Gcloud
       # Checks if the format of the source data is
       # [newline-delimited JSON](http://jsonlines.org/). The default is `false`.
       def json?
-        val = config["load"]["sourceFormat"]
+        val = @gapi.configuration.load.source_format
         val == "NEWLINE_DELIMITED_JSON"
       end
 
       ##
       # Checks if the format of the source data is CSV. The default is `true`.
       def csv?
-        val = config["load"]["sourceFormat"]
+        val = @gapi.configuration.load.source_format
         return true if val.nil?
         val == "CSV"
       end
@@ -126,7 +126,7 @@ module Gcloud
       ##
       # Checks if the source data is a Google Cloud Datastore backup.
       def backup?
-        val = config["load"]["sourceFormat"]
+        val = @gapi.configuration.load.source_format
         val == "DATASTORE_BACKUP"
       end
 
@@ -137,7 +137,7 @@ module Gcloud
       # if there are too many bad records, an error is returned. The default
       # value is `false`. Only applicable to CSV, ignored for other formats.
       def allow_jagged_rows?
-        val = config["load"]["allowJaggedRows"]
+        val = @gapi.configuration.load.allow_jagged_rows
         val = false if val.nil?
         val
       end
@@ -149,7 +149,7 @@ module Gcloud
       # records, and if there are too many bad records, an invalid error is
       # returned. The default is `false`.
       def ignore_unknown_values?
-        val = config["load"]["ignoreUnknownValues"]
+        val = @gapi.configuration.load.ignore_unknown_values
         val = false if val.nil?
         val
       end
@@ -159,35 +159,33 @@ module Gcloud
       # has already has the correct schema (see {Table#schema=} and
       # {Table#schema}), or if the schema can be inferred from the loaded data.
       def schema
-        val = config["load"]["schema"]
-        val = {} if val.nil?
-        val
+        Schema.from_gapi(@gapi.configuration.load.schema).freeze
       end
 
       ##
       # The number of source files.
       def input_files
-        stats["load"]["inputFiles"]
+        @gapi.statistics.load.input_files
       end
 
       ##
       # The number of bytes of source data.
       def input_file_bytes
-        stats["load"]["inputFileBytes"]
+        @gapi.statistics.load.input_file_bytes
       end
 
       ##
       # The number of rows that have been loaded into the table. While an
       # import job is in the running state, this value may change.
       def output_rows
-        stats["load"]["outputRows"]
+        @gapi.statistics.load.output_rows
       end
 
       ##
       # The number of bytes that have been loaded into the table. While an
       # import job is in the running state, this value may change.
       def output_bytes
-        stats["load"]["outputBytes"]
+        @gapi.statistics.load.output_bytes
       end
     end
   end

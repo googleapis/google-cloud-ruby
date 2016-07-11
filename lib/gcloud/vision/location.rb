@@ -99,13 +99,16 @@ module Gcloud
       ##
       # @private New Google API Client LatLng object.
       def to_gapi
-        to_hash
+        Google::Apis::VisionV1::LatLng.new(
+          latitude: latitude,
+          longitude: longitude
+        )
       end
 
       ##
       # @private New Location from a Google API Client LatLng object.
       def self.from_gapi gapi
-        new gapi["latitude"], gapi["longitude"]
+        new gapi.latitude, gapi.longitude
       end
     end
   end

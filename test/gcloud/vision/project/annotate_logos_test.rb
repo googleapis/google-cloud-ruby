@@ -18,153 +18,185 @@ describe Gcloud::Vision::Project, :annotate, :logos, :mock_vision do
   let(:filepath) { "acceptance/data/logo.jpg" }
 
   it "detects logo detection" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, logos: 1
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection using mark alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.mark filepath, logos: 1
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection using detect alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.detect filepath, logos: 1
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.logo.wont_be :nil?
   end
 
   it "detects logo detection on multiple images" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.first["features"].count.must_equal 1
-      requests.first["features"].first["type"].must_equal "LOGO_DETECTION"
-      requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "LOGO_DETECTION"
-      requests.last["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       logos_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        ),
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logos_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, logos: 1
+    mock.verify
+
     annotations.count.must_equal 2
     annotations.first.logo.wont_be :nil?
     annotations.last.logo.wont_be :nil?
   end
 
   it "uses the default configuration" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal Gcloud::Vision.default_max_logos
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: Gcloud::Vision.default_max_logos)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, logos: true
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.logo.wont_be :nil?
   end
 
   it "uses the default configuration when given a truthy value" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal Gcloud::Vision.default_max_logos
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: Gcloud::Vision.default_max_logos)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, logos: "9999"
+    mock.verify
+
     annotation.wont_be :nil?
     annotation.logo.wont_be :nil?
   end
 
   it "uses the updated configuration" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      logo = requests.first
-      logo["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      logo["features"].count.must_equal 1
-      logo["features"].first["type"].must_equal "LOGO_DETECTION"
-      logo["features"].first["maxResults"].must_equal 25
-      [200, {"Content-Type" => "application/json"},
-       logo_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 25)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, logo_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     Gcloud::Vision.stub :default_max_logos, 25 do
       annotation = vision.annotate filepath, logos: true
       annotation.wont_be :nil?
       annotation.logo.wont_be :nil?
     end
+    mock.verify
   end
 
-  def logo_response_json
-    {
-      responses: [{
-        logoAnnotations: [logo_annotation_response]
-      }]
-    }.to_json
+  def logo_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          logo_annotations: [
+            logo_annotation_response
+          ]
+        )
+      ]
+    )
   end
 
-  def logos_response_json
-    {
-      responses: [{
-        logoAnnotations: [logo_annotation_response]
-      }, {
-        logoAnnotations: [logo_annotation_response]
-      }]
-    }.to_json
+  def logos_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          logo_annotations: [
+            logo_annotation_response
+          ]
+        ),
+        MockVision::API::AnnotateImageResponse.new(
+          logo_annotations: [
+            logo_annotation_response
+          ]
+        )
+      ]
+    )
   end
 
 end

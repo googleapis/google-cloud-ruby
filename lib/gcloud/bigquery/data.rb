@@ -41,23 +41,24 @@ module Gcloud
       ##
       # The resource type of the API response.
       def kind
-        @gapi["kind"]
+        @gapi.kind
+      end
+
+      ##
+      # The etag.
+      def etag
+        @gapi.etag
       end
 
       ##
       # A token used for paging results.
       def token
-        @gapi["pageToken"]
-      end
-
-      # A hash of this page of results.
-      def etag
-        @gapi["etag"]
+        @gapi.page_token
       end
 
       # The total number of rows in the complete table.
       def total
-        @gapi["totalRows"]
+        @gapi.total_rows
       end
 
       ##
@@ -174,17 +175,17 @@ module Gcloud
       # Represents Table Data as a list of positional values (array of arrays).
       # No type conversion is made, e.g. numbers are formatted as strings.
       def raw
-        Array(gapi["rows"]).map { |row| row["f"].map { |f| f["v"] } }
+        Array(gapi.rows).map { |row| row.f.map(&:v) }
       end
 
       ##
       # @private New Data from a response object.
-      def self.from_response resp, table
-        formatted_rows = format_rows resp.data["rows"], table.fields
+      def self.from_gapi gapi, table
+        formatted_rows = format_rows gapi.rows, table.fields
 
         data = new formatted_rows
         data.table = table
-        data.gapi = resp.data
+        data.gapi = gapi
         data
       end
 
@@ -192,11 +193,11 @@ module Gcloud
       # Disabled rubocop because this implementation will not last.
 
       def self.format_rows rows, fields
-        headers = Array(fields).map { |f| f["name"] }
-        field_types = Array(fields).map { |f| f["type"] }
+        headers = Array(fields).map { |f| f.name }
+        field_types = Array(fields).map { |f| f.type }
 
         Array(rows).map do |row|
-          values = row["f"].map { |f| f["v"] }
+          values = row.f.map { |f| f.v }
           formatted_values = format_values field_types, values
           Hash[headers.zip formatted_values]
         end
@@ -226,7 +227,7 @@ module Gcloud
       protected
 
       ##
-      # Raise an error unless an active connection is available.
+      # Raise an error unless an active service is available.
       def ensure_table!
         fail "Must have active connection" unless table
       end

@@ -56,7 +56,7 @@ module Gcloud
         def initialize file
           @bucket = file.bucket
           @file = file.name
-          @connection = file.connection
+          @service = file.service
           @owners  = nil
           @writers = nil
           @readers = nil
@@ -77,8 +77,8 @@ module Gcloud
         #   file.acl.reload!
         #
         def reload!
-          resp = @connection.list_file_acls @bucket, @file
-          acls = resp.data["items"]
+          gapi = @service.list_file_acls @bucket, @file
+          acls = gapi.items
           @owners  = entities_from_acls acls, "OWNER"
           @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
@@ -192,14 +192,11 @@ module Gcloud
         #
         def add_owner entity, generation: nil
           options = { generation: generation }
-          resp = @connection.insert_file_acl @bucket, @file, entity,
-                                             "OWNER", options
-          if resp.success?
-            entity = resp.data["entity"]
-            @owners.push entity unless @owners.nil?
-            return entity
-          end
-          nil
+          gapi = @service.insert_file_acl @bucket, @file, entity, "OWNER",
+                                          options
+          entity = gapi.entity
+          @owners.push entity unless @owners.nil?
+          entity
         end
 
         ##
@@ -246,14 +243,11 @@ module Gcloud
         #
         def add_writer entity, generation: nil
           options = { generation: generation }
-          resp = @connection.insert_file_acl @bucket, @file, entity,
-                                             "WRITER", options
-          if resp.success?
-            entity = resp.data["entity"]
-            @writers.push entity unless @writers.nil?
-            return entity
-          end
-          nil
+          gapi = @service.insert_file_acl @bucket, @file, entity, "WRITER",
+                                          options
+          entity = gapi.entity
+          @writers.push entity unless @writers.nil?
+          entity
         end
 
         ##
@@ -300,14 +294,11 @@ module Gcloud
         #
         def add_reader entity, generation: nil
           options = { generation: generation }
-          resp = @connection.insert_file_acl @bucket, @file, entity,
-                                             "READER", options
-          if resp.success?
-            entity = resp.data["entity"]
-            @readers.push entity unless @readers.nil?
-            return entity
-          end
-          nil
+          gapi = @service.insert_file_acl @bucket, @file, entity, "READER",
+                                          options
+          entity = gapi.entity
+          @readers.push entity unless @readers.nil?
+          entity
         end
 
         ##
@@ -342,14 +333,11 @@ module Gcloud
         #
         def delete entity, generation: nil
           options = { generation: generation }
-          resp = @connection.delete_file_acl @bucket, @file, entity, options
-          if resp.success?
-            @owners.delete entity  unless @owners.nil?
-            @writers.delete entity unless @writers.nil?
-            @readers.delete entity unless @readers.nil?
-            return true
-          end
-          false
+          @service.delete_file_acl @bucket, @file, entity, options
+          @owners.delete entity  unless @owners.nil?
+          @writers.delete entity unless @writers.nil?
+          @readers.delete entity unless @readers.nil?
+          true
         end
 
         # @private
@@ -492,17 +480,13 @@ module Gcloud
         end
 
         def update_predefined_acl! acl_role
-          resp = @connection.patch_file @bucket, @file,
-                                        predefined_acl: acl_role,
-                                        acl: []
-
-          return clear! if resp.success?
-          fail Gcloud::Storage::ApiError.from_response(resp)
+          @service.patch_file @bucket, @file, predefined_acl: acl_role, acl: []
+          clear!
         end
 
         def entities_from_acls acls, role
-          selected = acls.select { |acl| acl["role"] == role }
-          entities = selected.map { |acl| acl["entity"] }
+          selected = acls.select { |acl| acl.role == role }
+          entities = selected.map(&:entity)
           entities
         end
       end

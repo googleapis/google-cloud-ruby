@@ -19,51 +19,55 @@ describe Gcloud::Bigquery::Table, :update, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) { random_table_hash dataset_id, table_id, table_name, description }
-  let(:table) { Gcloud::Bigquery::Table.from_gapi table_hash,
-                                                  bigquery.connection }
+  let(:table_gapi) { random_table_gapi dataset_id, table_id, table_name, description }
+  let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi,
+                                                  bigquery.service }
 
   let(:schema) { table.schema.dup }
 
   it "updates its name" do
-    new_table_name = "My Updated Dataset"
+    new_table_name = "My Updated Table"
 
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["friendlyName"].must_equal new_table_name
-      [200, {"Content-Type"=>"application/json"},
-       random_table_hash(dataset_id, table_id, new_table_name, description).to_json]
-    end
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, new_table_name, description
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new friendly_name: "My Updated Table"
+    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
+      [project, dataset_id, table_id, request_table_gapi]
+    table.service.mocked_service = mock
 
     table.name.must_equal table_name
     table.description.must_equal description
-    table.schema.must_equal schema
+    table.schema.fields.count.must_equal schema.fields.count
 
     table.name = new_table_name
 
     table.name.must_equal new_table_name
     table.description.must_equal description
-    table.schema.must_equal schema
+    table.schema.fields.count.must_equal schema.fields.count
+
+    mock.verify
   end
 
   it "updates its description" do
     new_description = "This is my updated table"
 
-    mock_connection.patch "/bigquery/v2/projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}" do |env|
-      json = JSON.parse env.body
-      json["description"].must_equal new_description
-      [200, {"Content-Type"=>"application/json"},
-       random_table_hash(dataset_id, table_id, table_name, new_description).to_json]
-    end
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, new_description
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new description: "This is my updated table"
+    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
+      [project, dataset_id, table_id, request_table_gapi]
+    table.service.mocked_service = mock
 
     table.name.must_equal table_name
     table.description.must_equal description
-    table.schema.must_equal schema
+    table.schema.fields.count.must_equal schema.fields.count
 
     table.description = new_description
 
     table.name.must_equal table_name
     table.description.must_equal new_description
-    table.schema.must_equal schema
+    table.schema.fields.count.must_equal schema.fields.count
+
+    mock.verify
   end
 end

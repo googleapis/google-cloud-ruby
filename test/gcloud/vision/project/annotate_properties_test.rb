@@ -18,19 +18,22 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
 
   it "detects properties detection" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      properties = requests.first
-      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      properties["features"].count.must_equal 1
-      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      properties["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       properties_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, properties: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.properties.colors.count.must_equal 10
@@ -53,19 +56,22 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
   end
 
   it "detects properties detection using mark alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      properties = requests.first
-      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      properties["features"].count.must_equal 1
-      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      properties["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       properties_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.mark filepath, properties: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.properties.colors.count.must_equal 10
@@ -88,19 +94,22 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
   end
 
   it "detects properties detection using detect alias" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      properties = requests.first
-      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      properties["features"].count.must_equal 1
-      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      properties["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       properties_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.detect filepath, properties: true
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.properties.colors.count.must_equal 10
@@ -123,22 +132,26 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
   end
 
   it "detects properties detection on multiple images" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 2
-      requests.first["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.first["features"].count.must_equal 1
-      requests.first["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      requests.first["features"].first["maxResults"].must_equal 1
-      requests.last["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      requests.last["features"].count.must_equal 1
-      requests.last["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      requests.last["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       propertiess_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        ),
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, plural_properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, properties: true
+    mock.verify
+
     annotations.count.must_equal 2
 
     annotations[0].properties.colors.count.must_equal 10
@@ -179,19 +192,22 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    mock_connection.post "/v1/images:annotate" do |env|
-      requests = JSON.parse(env.body)["requests"]
-      requests.count.must_equal 1
-      properties = requests.first
-      properties["image"]["content"].must_equal Base64.strict_encode64(File.read(filepath, mode: "rb"))
-      properties["features"].count.must_equal 1
-      properties["features"].first["type"].must_equal "IMAGE_PROPERTIES"
-      properties["features"].first["maxResults"].must_equal 1
-      [200, {"Content-Type" => "application/json"},
-       properties_response_json]
-    end
+    feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
+    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
+      requests: [
+        Google::Apis::VisionV1::AnnotateImageRequest.new(
+          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [feature]
+        )
+      ]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :annotate_image, properties_response_gapi, [req]
 
+    vision.service.mocked_service = mock
     annotation = vision.annotate filepath, properties: "please"
+    mock.verify
+
     annotation.wont_be :nil?
 
     annotation.properties.colors.count.must_equal 10
@@ -213,21 +229,26 @@ describe Gcloud::Vision::Project, :annotate, :properties, :mock_vision do
     annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
 
-  def properties_response_json
-    {
-      responses: [{
-        imagePropertiesAnnotation: properties_annotation_response
-      }]
-    }.to_json
+  def properties_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          image_properties_annotation: properties_annotation_response
+        )
+      ]
+    )
   end
 
-  def propertiess_response_json
-    {
-      responses: [{
-        imagePropertiesAnnotation: properties_annotation_response
-      }, {
-        imagePropertiesAnnotation: properties_annotation_response
-      }]
-    }.to_json
+  def plural_properties_response_gapi
+    MockVision::API::BatchAnnotateImagesResponse.new(
+      responses: [
+        MockVision::API::AnnotateImageResponse.new(
+          image_properties_annotation: properties_annotation_response
+        ),
+        MockVision::API::AnnotateImageResponse.new(
+          image_properties_annotation: properties_annotation_response
+        )
+      ]
+    )
   end
 end

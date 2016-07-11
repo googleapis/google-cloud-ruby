@@ -73,8 +73,6 @@ module Gcloud
           ensure_service!
           grpc = @service.list_metrics token: token, max: @max
           self.class.from_grpc grpc, @service
-        rescue GRPC::BadStatus => e
-          raise Gcloud::Error.from_error(e)
         end
 
         ##

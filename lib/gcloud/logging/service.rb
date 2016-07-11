@@ -13,10 +13,12 @@
 # limitations under the License.
 
 
+require "gcloud/backoff"
+require "gcloud/errors"
 require "google/logging/v2/logging_services"
 require "google/logging/v2/logging_config_services"
 require "google/logging/v2/logging_metrics_services"
-require "gcloud/backoff"
+
 
 module Gcloud
   module Logging
@@ -68,7 +70,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListLogEntriesRequest.new(list_params)
 
-        backoff { logging.list_log_entries list_req }
+        execute { logging.list_log_entries list_req }
       end
 
       def write_entries entries, log_name: nil, resource: nil, labels: nil
@@ -86,7 +88,7 @@ module Gcloud
 
         write_req = Google::Logging::V2::WriteLogEntriesRequest.new write_params
 
-        backoff { logging.write_log_entries write_req }
+        execute { logging.write_log_entries write_req }
       end
 
       def delete_log name
@@ -94,7 +96,7 @@ module Gcloud
           log_name: log_path(name)
         )
 
-        backoff { logging.delete_log delete_req }
+        execute { logging.delete_log delete_req }
       end
 
       def list_resource_descriptors token: nil, max: nil
@@ -106,7 +108,7 @@ module Gcloud
           Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(
             list_params)
 
-        backoff { logging.list_monitored_resource_descriptors list_req }
+        execute { logging.list_monitored_resource_descriptors list_req }
       end
 
       def list_sinks token: nil, max: nil
@@ -117,7 +119,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListSinksRequest.new(list_params)
 
-        backoff { sinks.list_sinks list_req }
+        execute { sinks.list_sinks list_req }
       end
 
       def create_sink name, destination, filter, version
@@ -131,7 +133,7 @@ module Gcloud
           sink: Google::Logging::V2::LogSink.new(sink_params)
         )
 
-        backoff { sinks.create_sink create_req }
+        execute { sinks.create_sink create_req }
       end
 
       def get_sink name
@@ -139,7 +141,7 @@ module Gcloud
           sink_name: sink_path(name)
         )
 
-        backoff { sinks.get_sink get_req }
+        execute { sinks.get_sink get_req }
       end
 
       def update_sink name, destination, filter, version
@@ -153,7 +155,7 @@ module Gcloud
           sink: Google::Logging::V2::LogSink.new(sink_params)
         )
 
-        backoff { sinks.update_sink update_req }
+        execute { sinks.update_sink update_req }
       end
 
       def delete_sink name
@@ -161,7 +163,7 @@ module Gcloud
           sink_name: sink_path(name)
         )
 
-        backoff { sinks.delete_sink delete_req }
+        execute { sinks.delete_sink delete_req }
       end
 
       def list_metrics token: nil, max: nil
@@ -172,7 +174,7 @@ module Gcloud
 
         list_req = Google::Logging::V2::ListLogMetricsRequest.new(list_params)
 
-        backoff { metrics.list_log_metrics list_req }
+        execute { metrics.list_log_metrics list_req }
       end
 
       def create_metric name, filter, description
@@ -187,7 +189,7 @@ module Gcloud
           metric: Google::Logging::V2::LogMetric.new(metric_params)
         )
 
-        backoff { metrics.create_log_metric create_req }
+        execute { metrics.create_log_metric create_req }
       end
 
       def get_metric name
@@ -195,7 +197,7 @@ module Gcloud
           metric_name: metric_path(name)
         )
 
-        backoff { metrics.get_log_metric get_req }
+        execute { metrics.get_log_metric get_req }
       end
 
       def update_metric name, description, filter
@@ -210,7 +212,7 @@ module Gcloud
           metric: Google::Logging::V2::LogMetric.new(metric_params)
         )
 
-        backoff { metrics.update_log_metric update_req }
+        execute { metrics.update_log_metric update_req }
       end
 
       def delete_metric name
@@ -218,7 +220,7 @@ module Gcloud
           metric_name: metric_path(name)
         )
 
-        backoff { metrics.delete_log_metric delete_req }
+        execute { metrics.delete_log_metric delete_req }
       end
 
       def inspect
@@ -248,10 +250,12 @@ module Gcloud
         "#{project_path}/metrics/#{metric_name}"
       end
 
-      def backoff options = {}
-        Gcloud::Backoff.new(options).execute_grpc do
+      def execute
+        Gcloud::Backoff.new.execute_grpc do
           yield
         end
+      rescue GRPC::BadStatus => e
+        raise Gcloud::Error.from_error(e)
       end
     end
   end

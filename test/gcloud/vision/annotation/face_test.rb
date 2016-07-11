@@ -16,9 +16,8 @@ require "helper"
 
 describe Gcloud::Vision::Annotation::Face, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { JSON.parse(face_annotation_response.to_json) }
+  let(:gapi) { face_annotation_response }
   let(:face) { Gcloud::Vision::Annotation::Face.from_gapi gapi }
-
   it "knows the angles" do
     face.angles.wont_be :nil?
 
@@ -49,7 +48,6 @@ describe Gcloud::Vision::Annotation::Face, :mock_vision do
     face.features.wont_be :nil?
 
     face.features.confidence.must_equal 34.489909
-
     face.features.chin.center.to_a.must_equal [143.34183, 262.22998, -57.388493]
     face.features.chin.left.to_a.must_equal   [63.102425, 248.99081, 44.207638]
     face.features.chin.right.to_a.must_equal  [241.72728, 225.53488, 19.758242]
@@ -99,7 +97,6 @@ describe Gcloud::Vision::Annotation::Face, :mock_vision do
 
   it "knows the likelihood" do
     face.likelihood.wont_be :nil?
-
     face.likelihood.joy?.must_equal true
     face.likelihood.sorrow?.must_equal false
     face.likelihood.anger?.must_equal false

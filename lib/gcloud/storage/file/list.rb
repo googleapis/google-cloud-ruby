@@ -77,15 +77,14 @@ module Gcloud
         #
         def next
           return nil unless next?
-          ensure_connection!
+          ensure_service!
           options = {
             prefix: @prefix, delimiter: @delimiter, token: @token, max: @max,
             versions: @versions
           }
-          resp = @connection.list_files @bucket, options
-          fail ApiError.from_response(resp) unless resp.success?
-          File::List.from_response resp, @connection, @bucket, @prefix,
-                                   @delimiter, @max, @versions
+          gapi = @service.list_files @bucket, options
+          File::List.from_gapi gapi, @service, @bucket, @prefix,
+                               @delimiter, @max, @versions
         end
 
         ##
@@ -161,29 +160,30 @@ module Gcloud
         end
 
         ##
-        # @private New File::List from a response object.
-        def self.from_response resp, conn, bucket = nil, prefix = nil,
-                               delimiter = nil, max = nil, versions = nil
-          files = new(Array(resp.data["items"]).map do |gapi_object|
-            File.from_gapi gapi_object, conn
+        # @private New File::List from a Google API Client
+        # Google::Apis::StorageV1::Objects object.
+        def self.from_gapi gapi_list, service, bucket = nil, prefix = nil,
+                           delimiter = nil, max = nil, versions = nil
+          files = new(Array(gapi_list.items).map do |gapi_object|
+            File.from_gapi gapi_object, service
           end)
-          files.instance_variable_set "@token", resp.data["nextPageToken"]
-          files.instance_variable_set "@prefixes", Array(resp.data["prefixes"])
-          files.instance_variable_set "@connection", conn
-          files.instance_variable_set "@bucket", bucket
-          files.instance_variable_set "@prefix", prefix
-          files.instance_variable_set "@delimiter", delimiter
-          files.instance_variable_set "@max", max
-          files.instance_variable_set "@versions", versions
+          files.instance_variable_set :@token, gapi_list.next_page_token
+          files.instance_variable_set :@prefixes, Array(gapi_list.prefixes)
+          files.instance_variable_set :@service, service
+          files.instance_variable_set :@bucket, bucket
+          files.instance_variable_set :@prefix, prefix
+          files.instance_variable_set :@delimiter, delimiter
+          files.instance_variable_set :@max, max
+          files.instance_variable_set :@versions, versions
           files
         end
 
         protected
 
         ##
-        # Raise an error unless an active connection is available.
-        def ensure_connection!
-          fail "Must have active connection" unless @connection
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          fail "Must have active connection" unless @service
         end
       end
     end

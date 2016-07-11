@@ -22,56 +22,66 @@ describe Gcloud::Bigquery::View, :attributes, :mock_bigquery do
   let(:table_name) { "My View" }
   let(:description) { "This is my view" }
   let(:view_hash) { random_view_small_hash "my_view", table_id, table_name }
-  let(:view_full_json) { random_view_hash("my_view", table_id, table_name, description).to_json }
-  let(:view) { Gcloud::Bigquery::View.from_gapi view_hash,
-                                                bigquery.connection }
+  let(:view_full_hash) { random_view_hash "my_view", table_id, table_name, description }
+  let(:view_gapi) { Google::Apis::BigqueryV2::Table.from_json view_hash.to_json }
+  let(:view_full_gapi) { Google::Apis::BigqueryV2::Table.from_json view_full_hash.to_json }
+  let(:view) { Gcloud::Bigquery::Table.from_gapi view_gapi, bigquery.service }
 
   it "gets full data for created_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       view_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, view_full_gapi,
+      [view.project_id, view.dataset_id, view.table_id]
+    view.service.mocked_service = mock
 
     view.created_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     view.created_at
   end
 
   it "gets full data for expires_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       view_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, view_full_gapi,
+      [view.project_id, view.dataset_id, view.table_id]
+    view.service.mocked_service = mock
 
     view.expires_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     view.expires_at
   end
 
   it "gets full data for modified_at" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       view_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, view_full_gapi,
+      [view.project_id, view.dataset_id, view.table_id]
+    view.service.mocked_service = mock
 
     view.modified_at.must_be_close_to Time.now, 10
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     view.modified_at
   end
 
   it "gets full data for schema" do
-    mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-      [200, {"Content-Type"=>"application/json"},
-       view_full_json]
-    end
+    mock = Minitest::Mock.new
+    mock.expect :get_table, view_full_gapi,
+      [view.project_id, view.dataset_id, view.table_id]
+    view.service.mocked_service = mock
 
-    view.schema.must_be_kind_of Hash
-    view.schema.keys.must_include "fields"
-    view.fields.must_equal view.schema["fields"]
+    view.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    view.schema.must_be :frozen?
+    view.schema.fields.wont_be :empty?
+    view.fields.wont_be :empty?
     view.headers.must_equal ["name", "age", "score", "active"]
+
+    mock.verify
 
     # A second call to attribute does not make a second HTTP API call
     view.schema
@@ -79,12 +89,14 @@ describe Gcloud::Bigquery::View, :attributes, :mock_bigquery do
 
   def self.attr_test attr, val
     define_method "test_#{attr}" do
-      mock_connection.get "/bigquery/v2/projects/#{project}/datasets/#{view.dataset_id}/tables/#{view.table_id}" do |env|
-        [200, {"Content-Type"=>"application/json"},
-         view_full_json]
-      end
+      mock = Minitest::Mock.new
+      mock.expect :get_table, view_full_gapi,
+        [view.project_id, view.dataset_id, view.table_id]
+      view.service.mocked_service = mock
 
       view.send(attr).must_equal val
+
+      mock.verify
 
       # A second call to attribute does not make a second HTTP API call
       view.send(attr)

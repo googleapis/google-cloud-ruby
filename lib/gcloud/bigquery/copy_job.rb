@@ -31,21 +31,21 @@ module Gcloud
       # The table from which data is copied. This is the table on
       # which {Table#copy} was called. Returns a {Table} instance.
       def source
-        table = config["copy"]["sourceTable"]
+        table = @gapi.configuration.copy.source_table
         return nil unless table
-        retrieve_table table["projectId"],
-                       table["datasetId"],
-                       table["tableId"]
+        retrieve_table table.project_id,
+                       table.dataset_id,
+                       table.table_id
       end
 
       ##
       # The table to which data is copied. Returns a {Table} instance.
       def destination
-        table = config["copy"]["destinationTable"]
+        table = @gapi.configuration.copy.destination_table
         return nil unless table
-        retrieve_table table["projectId"],
-                       table["datasetId"],
-                       table["tableId"]
+        retrieve_table table.project_id,
+                       table.dataset_id,
+                       table.table_id
       end
 
       ##
@@ -53,7 +53,7 @@ module Gcloud
       # which provides the following behavior: If the table does not exist,
       # the copy operation creates the table. This is the default.
       def create_if_needed?
-        disp = config["copy"]["createDisposition"]
+        disp = @gapi.configuration.copy.create_disposition
         disp == "CREATE_IF_NEEDED"
       end
 
@@ -62,7 +62,7 @@ module Gcloud
       # provides the following behavior: The table must already exist; if it
       # does not, an error is returned in the job result.
       def create_never?
-        disp = config["copy"]["createDisposition"]
+        disp = @gapi.configuration.copy.create_disposition
         disp == "CREATE_NEVER"
       end
 
@@ -71,7 +71,7 @@ module Gcloud
       # provides the following behavior: If the table already exists, the copy
       # operation overwrites the table data.
       def write_truncate?
-        disp = config["copy"]["writeDisposition"]
+        disp = @gapi.configuration.copy.write_disposition
         disp == "WRITE_TRUNCATE"
       end
 
@@ -80,7 +80,7 @@ module Gcloud
       # provides the following behavior: If the table already exists, the copy
       # operation appends the data to the table.
       def write_append?
-        disp = config["copy"]["writeDisposition"]
+        disp = @gapi.configuration.copy.write_disposition
         disp == "WRITE_APPEND"
       end
 
@@ -89,7 +89,7 @@ module Gcloud
       # provides the following behavior: If the table already exists and
       # contains data, the job will have an error. This is the default.
       def write_empty?
-        disp = config["copy"]["writeDisposition"]
+        disp = @gapi.configuration.copy.write_disposition
         disp == "WRITE_EMPTY"
       end
     end

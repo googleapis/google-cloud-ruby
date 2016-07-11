@@ -149,11 +149,11 @@ module Gcloud
 
         ##
         # @private New Changes::List from a response object.
-        def self.from_response resp, zone, max = nil, order = nil
-          changes = new(Array(resp.data["changes"]).map do |gapi_object|
-            Change.from_gapi gapi_object, zone
+        def self.from_gapi gapi, zone, max = nil, order = nil
+          changes = new(Array(gapi.changes).map do |g|
+            Change.from_gapi g, zone
           end)
-          changes.instance_variable_set "@token", resp.data["nextPageToken"]
+          changes.instance_variable_set "@token", gapi.next_page_token
           changes.instance_variable_set "@zone",  zone
           changes.instance_variable_set "@max",   max
           changes.instance_variable_set "@order", order
