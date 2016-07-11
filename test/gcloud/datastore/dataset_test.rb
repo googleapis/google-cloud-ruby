@@ -1291,8 +1291,10 @@ describe Gcloud::Datastore::Dataset do
 
     error.wont_be :nil?
     error.message.must_equal "Transaction failed to commit."
-    error.cause.wont_be :nil?
-    error.cause.message.must_equal "This error should be wrapped by TransactionError."
+    if error.respond_to? :cause
+      error.cause.wont_be :nil?
+      error.cause.message.must_equal "This error should be wrapped by TransactionError."
+    end
   end
 
   it "transaction will wrap errors for both commit and rollback" do
@@ -1329,10 +1331,12 @@ describe Gcloud::Datastore::Dataset do
 
       error.wont_be :nil?
       error.message.must_equal "Transaction failed to commit and rollback."
-      error.cause.wont_be :nil?
-      error.cause.message.must_equal "rollback error"
-      error.cause.cause.wont_be :nil?
-      error.cause.cause.message.must_equal "commit error"
+      if error.respond_to? :cause # ruby 2.0 doesn't have cause
+        error.cause.wont_be :nil?
+        error.cause.message.must_equal "rollback error"
+        error.cause.cause.wont_be :nil?
+        error.cause.cause.message.must_equal "commit error"
+      end
     ensure
       # Reset mocked service so the call to verify works.
       dataset.service = mocked_service
