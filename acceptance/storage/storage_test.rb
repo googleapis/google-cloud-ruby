@@ -38,6 +38,93 @@ describe "Storage", :storage do
     bucket.files.map &:delete
   end
 
+  describe "bucket acl" do
+    it "adds a reader" do
+      bucket.acl.private!
+      user_val = "user-blowmage@gmail.com"
+      bucket.acl.readers.wont_include user_val
+      bucket.acl.add_reader user_val
+      bucket.acl.readers.must_include user_val
+      bucket.acl.refresh!
+      bucket.acl.readers.must_include user_val
+      bucket.refresh!
+      bucket.acl.readers.must_include user_val
+    end
+
+    it "adds a writer" do
+      bucket.acl.private!
+      user_val = "user-blowmage@gmail.com"
+      bucket.acl.writers.wont_include user_val
+      bucket.acl.add_writer user_val
+      bucket.acl.writers.must_include user_val
+      bucket.acl.refresh!
+      bucket.acl.writers.must_include user_val
+      bucket.refresh!
+      bucket.acl.writers.must_include user_val
+    end
+
+    it "adds an owner" do
+      bucket.acl.private!
+      user_val = "user-blowmage@gmail.com"
+      bucket.acl.owners.wont_include user_val
+      bucket.acl.add_owner user_val
+      bucket.acl.owners.must_include user_val
+      bucket.acl.refresh!
+      bucket.acl.owners.must_include user_val
+      bucket.refresh!
+      bucket.acl.owners.must_include user_val
+    end
+
+    it "updates predefined rules" do
+      bucket.acl.private!
+      bucket.acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.acl.auth!
+      bucket.acl.readers.must_include "allAuthenticatedUsers"
+      bucket.acl.refresh!
+      bucket.acl.readers.must_include "allAuthenticatedUsers"
+      bucket.refresh!
+      bucket.acl.readers.must_include "allAuthenticatedUsers"
+    end
+  end
+
+
+  describe "bucket default acl" do
+    it "adds a reader" do
+      bucket.default_acl.private!
+      user_val = "user-blowmage@gmail.com"
+      bucket.default_acl.readers.wont_include user_val
+      bucket.default_acl.add_reader user_val
+      bucket.default_acl.readers.must_include user_val
+      bucket.default_acl.refresh!
+      bucket.default_acl.readers.must_include user_val
+      bucket.refresh!
+      bucket.default_acl.readers.must_include user_val
+    end
+
+    it "adds an owner" do
+      bucket.default_acl.private!
+      user_val = "user-blowmage@gmail.com"
+      bucket.default_acl.owners.wont_include user_val
+      bucket.default_acl.add_owner user_val
+      bucket.default_acl.owners.must_include user_val
+      bucket.default_acl.refresh!
+      bucket.default_acl.owners.must_include user_val
+      bucket.refresh!
+      bucket.default_acl.owners.must_include user_val
+    end
+
+    it "updates predefined rules" do
+      bucket.default_acl.private!
+      bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.default_acl.auth!
+      bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+      bucket.default_acl.refresh!
+      bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+      bucket.refresh!
+      bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+    end
+  end
+
   describe "getting buckets" do
     let(:new_buckets) do
       new_bucket_names.map do |b|
@@ -189,6 +276,48 @@ describe "Storage", :storage do
       resp = http.delete uri.request_uri
 
       resp.code.must_equal "204"
+    end
+  end
+
+  describe "file acl" do
+    let(:local_file) { File.new files[:logo][:path] }
+
+    it "adds a reader" do
+      bucket.default_acl.auth!
+      file = bucket.create_file local_file, "ReaderTest.jpg"
+      user_val = "user-blowmage@gmail.com"
+      file.acl.readers.wont_include user_val
+      file.acl.add_reader user_val
+      file.acl.readers.must_include user_val
+      file.acl.refresh!
+      file.acl.readers.must_include user_val
+      file.refresh!
+      file.acl.readers.must_include user_val
+    end
+
+    it "adds an owner" do
+      bucket.default_acl.auth!
+      file = bucket.create_file local_file, "OwnerTest.jpg"
+      user_val = "user-blowmage@gmail.com"
+      file.acl.owners.wont_include user_val
+      file.acl.add_owner user_val
+      file.acl.owners.must_include user_val
+      file.acl.refresh!
+      file.acl.owners.must_include user_val
+      file.refresh!
+      file.acl.owners.must_include user_val
+    end
+
+    it "updates predefined rules" do
+      bucket.default_acl.auth!
+      file = bucket.create_file local_file, "AclTest.jpg"
+      file.acl.readers.must_include "allAuthenticatedUsers"
+      file.acl.private!
+      file.acl.readers.must_be :empty?
+      file.acl.refresh!
+      file.acl.readers.must_be :empty?
+      file.refresh!
+      file.acl.readers.must_be :empty?
     end
   end
 end

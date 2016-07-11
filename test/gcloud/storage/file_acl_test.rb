@@ -30,7 +30,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, options: {}]
     mock.expect :list_object_access_controls,
-      Google::Apis::StorageV1::BucketAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name]
 
     storage.service.mocked_service = mock
@@ -38,87 +38,82 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.wont_be :empty?
 
     mock.verify
   end
 
   it "adds to the ACL without generation" do
-    writer_entity = "user-user@example.net"
-    writer_acl = {
+    reader_entity = "user-user@example.net"
+    reader_acl = {
        "kind" => "storage#bucketAccessControl",
-       "id" => "#{bucket_name}-UUID/#{writer_entity}",
-       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{writer_entity}",
+       "id" => "#{bucket_name}-UUID/#{reader_entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{reader_entity}",
        "bucket" => "#{bucket_name}-UUID",
-       "entity" => writer_entity,
+       "entity" => reader_entity,
        "email" => "user@example.net",
-       "role" => "WRITER",
+       "role" => "READER",
        "etag" => "CAE="
       }
 
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, options: {}]
     mock.expect :list_object_access_controls,
-      Google::Apis::StorageV1::BucketAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name]
     mock.expect :insert_object_access_control,
-      Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: writer_entity, role: "WRITER"), generation: nil]
+      Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER"), generation: nil]
 
     storage.service.mocked_service = mock
 
     file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.wont_be :empty?
 
-    file.acl.add_writer writer_entity
+    file.acl.add_reader reader_entity
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.wont_be :empty?
     file.acl.readers.wont_be :empty?
-    file.acl.writers.must_include writer_entity
+    file.acl.readers.must_include reader_entity
 
     mock.verify
   end
 
   it "adds to the ACL with generation" do
     generation = "123"
-    writer_entity = "user-user@example.net"
-    writer_acl = {
+    reader_entity = "user-user@example.net"
+    reader_acl = {
        "kind" => "storage#bucketAccessControl",
-       "id" => "#{bucket_name}-UUID/#{writer_entity}",
-       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{writer_entity}",
+       "id" => "#{bucket_name}-UUID/#{reader_entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{reader_entity}",
        "bucket" => "#{bucket_name}-UUID",
-       "entity" => writer_entity,
+       "entity" => reader_entity,
        "email" => "user@example.net",
-       "role" => "WRITER",
+       "role" => "READER",
        "etag" => "CAE="
       }
 
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, options: {}]
     mock.expect :list_object_access_controls,
-      Google::Apis::StorageV1::BucketAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name]
     mock.expect :insert_object_access_control,
-      Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: writer_entity, role: "WRITER"), generation: generation]
+      Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER"), generation: generation]
 
     storage.service.mocked_service = mock
 
     file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.wont_be :empty?
 
-    file.acl.add_writer writer_entity, generation: generation
+    file.acl.add_reader reader_entity, generation: generation
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.wont_be :empty?
     file.acl.readers.wont_be :empty?
-    file.acl.writers.must_include writer_entity
+    file.acl.readers.must_include reader_entity
 
     mock.verify
   end
@@ -129,7 +124,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, options: {}]
     mock.expect :list_object_access_controls,
-      Google::Apis::StorageV1::BucketAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name]
     mock.expect :delete_object_access_control, nil,
       [bucket_name, file_name, existing_reader_entity, generation: nil]
@@ -139,13 +134,11 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.wont_be :empty?
 
     reader_entity = file.acl.readers.first
     file.acl.delete reader_entity
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.must_be :empty?
 
     mock.verify
@@ -158,7 +151,7 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, options: {}]
     mock.expect :list_object_access_controls,
-      Google::Apis::StorageV1::BucketAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name]
     mock.expect :delete_object_access_control, nil,
       [bucket_name, file_name, existing_reader_entity, generation: generation]
@@ -168,13 +161,11 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
     file = bucket.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.wont_be :empty?
 
     reader_entity = file.acl.readers.first
     file.acl.delete reader_entity, generation: generation
     file.acl.owners.wont_be  :empty?
-    file.acl.writers.must_be :empty?
     file.acl.readers.must_be :empty?
 
     mock.verify
@@ -446,19 +437,5 @@ describe Gcloud::Storage::File, :acl, :mock_storage do
       }
      ]
     }
-  end
-
-  def acl_error_json
-    {
-      "error" => {
-        "errors" => [ {
-          "domain" => "global",
-          "reason" => "conflict",
-          "message" => "Cannot provide both a predefinedAcl and access controls."
-        } ],
-        "code" => 409,
-        "message" => "Cannot provide both a predefinedAcl and access controls."
-      }
-    }.to_json
   end
 end

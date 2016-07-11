@@ -91,6 +91,8 @@ module Gcloud
         predefined_default_acl = options.delete :predefined_default_acl
         patched_bucket = Google::Apis::StorageV1::Bucket.new options
 
+        patched_bucket.default_object_acl = nil if predefined_default_acl
+
         service.patch_bucket \
           bucket_name, patched_bucket,
           predefined_acl: predefined_acl,

@@ -58,7 +58,6 @@ module Gcloud
           @file = file.name
           @service = file.service
           @owners  = nil
-          @writers = nil
           @readers = nil
         end
 
@@ -80,7 +79,6 @@ module Gcloud
           gapi = @service.list_file_acls @bucket, @file
           acls = gapi.items
           @owners  = entities_from_acls acls, "OWNER"
-          @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
         end
         alias_method :refresh!, :reload!
@@ -104,27 +102,6 @@ module Gcloud
         def owners
           reload! if @owners.nil?
           @owners
-        end
-
-        ##
-        # Lists the owners of the file.
-        #
-        # @return [Array<String>]
-        #
-        # @example
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   file = bucket.file "path/to/my-file.ext"
-        #   file.acl.writers.each { |writer| puts writer }
-        #
-        def writers
-          reload! if @writers.nil?
-          @writers
         end
 
         ##
@@ -196,57 +173,6 @@ module Gcloud
                                           options
           entity = gapi.entity
           @owners.push entity unless @owners.nil?
-          entity
-        end
-
-        ##
-        # Grants writer permission to the file.
-        #
-        # @param [String] entity The entity holding the permission, in one of
-        #   the following forms:
-        #
-        #   * user-userId
-        #   * user-email
-        #   * group-groupId
-        #   * group-email
-        #   * domain-domain
-        #   * project-team-projectId
-        #   * allUsers
-        #   * allAuthenticatedUsers
-        #
-        # @param [Integer] generation When present, selects a specific revision
-        #   of this object. Default is the latest version.
-        #
-        # @example Grant access to a user by pre-pending `"user-"` to an email:
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   file = bucket.file "path/to/my-file.ext"
-        #   email = "heidi@example.net"
-        #   file.acl.add_writer "user-#{email}"
-        #
-        # @example Grant access to a group by pre-pending `"group-"` to an email
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   file = bucket.file "path/to/my-file.ext"
-        #   email = "authors@example.net"
-        #   file.acl.add_writer "group-#{email}"
-        #
-        def add_writer entity, generation: nil
-          options = { generation: generation }
-          gapi = @service.insert_file_acl @bucket, @file, entity, "WRITER",
-                                          options
-          entity = gapi.entity
-          @writers.push entity unless @writers.nil?
           entity
         end
 
@@ -335,7 +261,6 @@ module Gcloud
           options = { generation: generation }
           @service.delete_file_acl @bucket, @file, entity, options
           @owners.delete entity  unless @owners.nil?
-          @writers.delete entity unless @writers.nil?
           @readers.delete entity unless @readers.nil?
           true
         end
@@ -474,7 +399,6 @@ module Gcloud
 
         def clear!
           @owners  = nil
-          @writers = nil
           @readers = nil
           self
         end
