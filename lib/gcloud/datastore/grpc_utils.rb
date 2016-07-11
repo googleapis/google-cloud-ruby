@@ -102,7 +102,7 @@ module Gcloud
         v.string_value = value
       elsif Array === value
         v.array_value = Google::Datastore::V1beta3::ArrayValue.new(
-          values: value.map { |v| to_value v }
+          values: value.map { |val| to_value val }
         )
       elsif value.respond_to? :to_time
         v.timestamp_value = Google::Protobuf::Timestamp.new(

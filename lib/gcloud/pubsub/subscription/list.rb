@@ -30,6 +30,10 @@ module Gcloud
         ##
         # @private Create a new Subscription::List with an array of values.
         def initialize arr = []
+          @topic = nil
+          @prefix = nil
+          @token = nil
+          @max = nil
           super arr
         end
 

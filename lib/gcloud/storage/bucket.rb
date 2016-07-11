@@ -756,6 +756,7 @@ module Gcloud
         def initialize gapi
           @updates = {}
           @gapi = gapi.dup
+          @cors_builder = nil
         end
 
         def cors

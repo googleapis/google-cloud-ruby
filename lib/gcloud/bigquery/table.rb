@@ -880,6 +880,7 @@ module Gcloud
         def initialize gapi
           @updates = []
           @gapi = gapi
+          @schema = nil
         end
 
         def schema replace: false

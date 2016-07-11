@@ -42,6 +42,10 @@ module Gcloud
     #   end
     #
     class Schema
+      def initialize
+        @nested = nil
+      end
+
       def fields
         @fields ||= @gapi.fields.map { |f| Field.from_gapi f }
       end
@@ -252,7 +256,7 @@ module Gcloud
             @fields = fields
             check_for_changed_fields!
           end
-          @original_json == @gapi.to_json
+          @original_json = @gapi.to_json
         end
 
         def name

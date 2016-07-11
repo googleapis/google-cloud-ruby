@@ -421,7 +421,7 @@ module Gcloud
           next if value.nil?
           @_exclude_indexes[name] = value.exclude_from_indexes
           unless value.array_value.nil?
-            exclude = value.array_value.values.map &:exclude_from_indexes
+            exclude = value.array_value.values.map(&:exclude_from_indexes)
             @_exclude_indexes[name] = exclude
           end
         end

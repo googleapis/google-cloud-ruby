@@ -111,7 +111,6 @@ describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
           encoding: "ISO-8859-1",
           max_bad_records: 42,
           quote: "'",
-          source_format: "CSV",
           allow_jagged_rows: true,
           allow_quoted_newlines: true,
           field_delimiter: "\t",
