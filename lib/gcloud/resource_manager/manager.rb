@@ -44,8 +44,8 @@ module Gcloud
       # @private Creates a new Service instance.
       #
       # See {Gcloud.resource_manager}
-      def initialize credentials
-        @service = Service.new credentials
+      def initialize service
+        @service = service
       end
 
       ##

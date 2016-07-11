@@ -18,7 +18,7 @@ require "gcloud/datastore"
 describe Gcloud::Datastore::Dataset, :find_all do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
+  let(:dataset)     { Gcloud::Datastore::Dataset.new(Gcloud::Datastore::Service.new(project, credentials)) }
   # let(:query_cursor) { Gcloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
 
   let(:key1) { Gcloud::Datastore::Key.new "ds-test", "thingie1" }

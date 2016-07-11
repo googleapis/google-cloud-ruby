@@ -36,6 +36,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::Dns::Project]
   #
@@ -47,14 +49,19 @@ module Gcloud
   #
   #   zone = dns.zone "example-com"
   #
-  def self.dns project = nil, keyfile = nil, scope: nil
+  def self.dns project = nil, keyfile = nil, scope: nil, retries: nil
     project ||= Gcloud::Dns::Project.default_project
+    project = project.to_s # Always cast to a string
+    fail ArgumentError, "project is missing" if project.empty?
+
     if keyfile.nil?
       credentials = Gcloud::Dns::Credentials.default scope: scope
     else
       credentials = Gcloud::Dns::Credentials.new keyfile, scope: scope
     end
-    Gcloud::Dns::Project.new project, credentials
+
+    Gcloud::Dns::Project.new(
+      Gcloud::Dns::Service.new(project, credentials, retries: retries))
   end
 
   ##

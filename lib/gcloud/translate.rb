@@ -30,6 +30,8 @@ module Gcloud
   # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
   #
   # @param [String] key a public API access key (not an OAuth 2.0 token)
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -51,8 +53,15 @@ module Gcloud
   #   translation = translate.translate "Hello world!", to: "la"
   #   translation.text #=> "Salve mundi!"
   #
-  def self.translate key = nil
-    Gcloud::Translate::Api.new key
+  def self.translate key = nil, retries: nil
+    key ||= ENV["TRANSLATE_KEY"]
+    if key.nil?
+      key_missing_msg = "An API key is required to use the Translate API."
+      fail ArgumentError, key_missing_msg
+    end
+
+    Gcloud::Translate::Api.new(
+      Gcloud::Translate::Service.new(key, retries: retries))
   end
 
   ##

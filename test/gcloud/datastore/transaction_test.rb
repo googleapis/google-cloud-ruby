@@ -18,7 +18,7 @@ require "gcloud/datastore"
 describe Gcloud::Datastore::Transaction do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
+  let(:dataset)     { Gcloud::Datastore::Dataset.new(Gcloud::Datastore::Service.new(project, credentials)) }
   let(:service) do
     s = dataset.service
     s.mocked_datastore = Minitest::Mock.new

@@ -37,13 +37,14 @@ module Gcloud
 
       ##
       # Creates a new Service instance.
-      def initialize project, credentials
+      def initialize project, credentials, retries: nil
         @project = project
         @credentials = credentials
         @credentials = credentials
         @service = API::BigqueryService.new
         @service.client_options.application_name    = "gcloud-ruby"
         @service.client_options.application_version = Gcloud::VERSION
+        @service.request_options.retries = retries || 3
         @service.authorization = @credentials.client
       end
 

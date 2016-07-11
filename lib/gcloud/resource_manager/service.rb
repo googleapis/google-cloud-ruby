@@ -32,11 +32,12 @@ module Gcloud
 
       ##
       # Creates a new Service instance.
-      def initialize credentials
+      def initialize credentials, retries: nil
         @credentials = credentials
         @service = API::CloudResourceManagerService.new
         @service.client_options.application_name    = "gcloud-ruby"
         @service.client_options.application_version = Gcloud::VERSION
+        @service.request_options.retries = retries || 3
         @service.authorization = @credentials.client
       end
 

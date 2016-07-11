@@ -18,7 +18,7 @@ require "gcloud/datastore"
 describe Gcloud::Datastore::Dataset::QueryResults do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
+  let(:dataset)     { Gcloud::Datastore::Dataset.new(Gcloud::Datastore::Service.new(project, credentials)) }
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do |i|
       Google::Datastore::V1beta3::EntityResult.new(

@@ -18,7 +18,7 @@ require "gcloud/datastore"
 describe Gcloud::Datastore::Dataset, :all_with_more do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
-  let(:dataset)     { Gcloud::Datastore::Dataset.new project, credentials }
+  let(:dataset)     { Gcloud::Datastore::Dataset.new(Gcloud::Datastore::Service.new(project, credentials)) }
   let(:first_run_query_req) do
     Google::Datastore::V1beta3::RunQueryRequest.new(
       project_id: project,
