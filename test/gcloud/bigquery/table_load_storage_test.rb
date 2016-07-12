@@ -16,7 +16,7 @@ require "helper"
 
 describe Gcloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
-  let(:storage) { Gcloud::Storage::Project.new project, credentials }
+  let(:storage) { Gcloud::Storage::Project.new(Gcloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
   let(:load_bucket) { Gcloud::Storage::Bucket.from_gapi load_bucket_gapi, storage.service }
   let(:load_file) { storage_file }

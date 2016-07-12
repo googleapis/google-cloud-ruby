@@ -36,6 +36,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/logging.admin`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::Logging::Project]
   #
@@ -46,14 +48,19 @@ module Gcloud
   #   logging = gcloud.logging
   #   # ...
   #
-  def self.logging project = nil, keyfile = nil, scope: nil
+  def self.logging project = nil, keyfile = nil, scope: nil, retries: nil
     project ||= Gcloud::Logging::Project.default_project
+    project = project.to_s # Always cast to a string
+    fail ArgumentError, "project is missing" if project.empty?
+
     if keyfile.nil?
       credentials = Gcloud::Logging::Credentials.default scope: scope
     else
       credentials = Gcloud::Logging::Credentials.new keyfile, scope: scope
     end
-    Gcloud::Logging::Project.new project, credentials
+
+    Gcloud::Logging::Project.new(
+      Gcloud::Logging::Service.new(project, credentials, retries: retries))
   end
 
   ##

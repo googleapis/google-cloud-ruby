@@ -49,10 +49,8 @@ module Gcloud
 
       ##
       # @private Creates a new Connection instance.
-      def initialize project, credentials
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
-        @service = Service.new project, credentials
+      def initialize service
+        @service = service
       end
 
       ##

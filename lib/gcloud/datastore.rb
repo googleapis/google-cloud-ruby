@@ -39,6 +39,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/datastore`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::Datastore::Dataset]
   #
@@ -57,19 +59,26 @@ module Gcloud
   #
   #   datastore.save task
   #
-  def self.datastore project = nil, keyfile = nil, scope: nil
+  def self.datastore project = nil, keyfile = nil, scope: nil, retries: nil
     project ||= Gcloud::Datastore::Dataset.default_project
+    project = project.to_s # Always cast to a string
+    fail ArgumentError, "project is missing" if project.empty?
+
     if ENV["DATASTORE_EMULATOR_HOST"]
-      ds = Gcloud::Datastore::Dataset.new project, :this_channel_is_insecure
-      ds.service.host = ENV["DATASTORE_EMULATOR_HOST"]
-      return ds
+      return Gcloud::Datastore::Dataset.new(
+        Gcloud::Datastore::Service.new(
+          project, :this_channel_is_insecure,
+          host: ENV["DATASTORE_EMULATOR_HOST"], retries: retries))
     end
+
     if keyfile.nil?
       credentials = Gcloud::Datastore::Credentials.default scope: scope
     else
       credentials = Gcloud::Datastore::Credentials.new keyfile, scope: scope
     end
-    Gcloud::Datastore::Dataset.new project, credentials
+
+    Gcloud::Datastore::Dataset.new(
+      Gcloud::Datastore::Service.new(project, credentials, retries: retries))
   end
 
   ##

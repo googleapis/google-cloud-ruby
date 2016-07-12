@@ -58,13 +58,8 @@ module Gcloud
       # @private Creates a new Translate Api instance.
       #
       # See {Gcloud.translate}
-      def initialize key
-        key ||= ENV["TRANSLATE_KEY"]
-        if key.nil?
-          key_missing_msg = "An API key is required to use the Translate API."
-          fail ArgumentError, key_missing_msg
-        end
-        @service = Service.new key
+      def initialize service
+        @service = service
       end
 
       ##

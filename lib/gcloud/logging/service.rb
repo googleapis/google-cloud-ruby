@@ -26,14 +26,15 @@ module Gcloud
     # @private Represents the gRPC Logging service, including all the API
     # methods.
     class Service
-      attr_accessor :project, :credentials, :host
+      attr_accessor :project, :credentials, :host, :retries
 
       ##
       # Creates a new Service instance.
-      def initialize project, credentials
+      def initialize project, credentials, host: nil, retries: nil
         @project = project
         @credentials = credentials
-        @host = "logging.googleapis.com"
+        @host = host || "logging.googleapis.com"
+        @retries = retries
       end
 
       def creds
@@ -251,7 +252,7 @@ module Gcloud
       end
 
       def execute
-        Gcloud::Backoff.new.execute_grpc do
+        Gcloud::Backoff.new(retries: retries).execute_grpc do
           yield
         end
       rescue GRPC::BadStatus => e

@@ -13,10 +13,9 @@
 # limitations under the License.
 
 
-require "google/apis/options"
-
 module Gcloud
   ##
+  # @private
   # Backoff allows users to control how Google API calls are retried.
   # If an API call fails the response will be checked to see if the
   # call can be retried. If the response matches the criteria, then it
@@ -38,8 +37,6 @@ module Gcloud
       # The default value is `3`.
       attr_reader :retries
       def retries= new_retries
-        # Set Google API Client
-        Google::Apis::RequestOptions.default.retries = new_retries
         @retries = new_retries
       end
 

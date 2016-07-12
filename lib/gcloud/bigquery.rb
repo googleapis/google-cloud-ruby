@@ -36,6 +36,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/bigquery`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional., retries: nil
   #
   # @return [Gcloud::Bigquery::Project]
   #
@@ -46,14 +48,19 @@ module Gcloud
   #   dataset = bigquery.dataset "my_dataset"
   #   table = dataset.table "my_table"
   #
-  def self.bigquery project = nil, keyfile = nil, scope: nil
+  def self.bigquery project = nil, keyfile = nil, scope: nil, retries: nil
     project ||= Gcloud::Bigquery::Project.default_project
+    project = project.to_s # Always cast to a string
+    fail ArgumentError, "project is missing" if project.empty?
+
     if keyfile.nil?
       credentials = Gcloud::Bigquery::Credentials.default scope: scope
     else
       credentials = Gcloud::Bigquery::Credentials.new keyfile, scope: scope
     end
-    Gcloud::Bigquery::Project.new project, credentials
+
+    Gcloud::Bigquery::Project.new(
+      Gcloud::Bigquery::Service.new(project, credentials, retries: retries))
   end
 
   ##

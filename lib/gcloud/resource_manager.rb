@@ -34,6 +34,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/cloud-platform`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::ResourceManager::Manager]
   #
@@ -45,14 +47,15 @@ module Gcloud
   #     puts projects.project_id
   #   end
   #
-  def self.resource_manager keyfile = nil, scope: nil
+  def self.resource_manager keyfile = nil, scope: nil, retries: nil
     if keyfile.nil?
       credentials = Gcloud::ResourceManager::Credentials.default scope: scope
     else
       credentials = Gcloud::ResourceManager::Credentials.new keyfile,
                                                              scope: scope
     end
-    Gcloud::ResourceManager::Manager.new credentials
+    Gcloud::ResourceManager::Manager.new(
+      Gcloud::ResourceManager::Service.new(credentials, retries: retries))
   end
 
   ##

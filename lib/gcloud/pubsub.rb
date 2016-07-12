@@ -36,6 +36,8 @@ module Gcloud
   #   The default scope is:
   #
   #   * `https://www.googleapis.com/auth/pubsub`
+  # @param [Integer] retries Number of times to retry requests on server error.
+  #   The default value is `3`. Optional.
   #
   # @return [Gcloud::Pubsub::Project]
   #
@@ -47,7 +49,7 @@ module Gcloud
   #   topic = pubsub.topic "my-topic"
   #   topic.publish "task completed"
   #
-  def self.pubsub project = nil, keyfile = nil, scope: nil
+  def self.pubsub project = nil, keyfile = nil, scope: nil, retries: nil
     project ||= Gcloud::Pubsub::Project.default_project
     if ENV["PUBSUB_EMULATOR_HOST"]
       ps = Gcloud::Pubsub::Project.new project, :this_channel_is_insecure
@@ -59,7 +61,8 @@ module Gcloud
     else
       credentials = Gcloud::Pubsub::Credentials.new keyfile, scope: scope
     end
-    Gcloud::Pubsub::Project.new project, credentials
+    Gcloud::Pubsub::Project.new(
+      Gcloud::Pubsub::Service.new(project, credentials, retries: retries))
   end
 
   ##
