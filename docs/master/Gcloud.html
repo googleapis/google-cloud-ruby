@@ -162,7 +162,7 @@ Guide</a>.</p>
                 <div class="method">
                   <a name="new-class_method"></a>
                   <h4>
-                    <code>new(project = nil, keyfile = nil)</code>
+                    <code>new(project = nil, keyfile = nil, retries: nil)</code>
                     <span>
                       <a href="#new-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -214,6 +214,20 @@ path the file must be readable.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -253,7 +267,7 @@ path the file must be readable.</p>
                 <div class="method">
                   <a name="dns-class_method"></a>
                   <h4>
-                    <code>dns(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>dns(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#dns-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -328,6 +342,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -367,7 +395,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="pubsub-class_method"></a>
                   <h4>
-                    <code>pubsub(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>pubsub(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#pubsub-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -442,6 +470,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -481,7 +523,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="vision-class_method"></a>
                   <h4>
-                    <code>vision(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>vision(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#vision-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -553,6 +595,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -595,7 +651,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="logging-class_method"></a>
                   <h4>
-                    <code>logging(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>logging(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#logging-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -670,6 +726,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -708,7 +778,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="storage-class_method"></a>
                   <h4>
-                    <code>storage(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>storage(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#storage-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -783,6 +853,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -823,7 +907,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="bigquery-class_method"></a>
                   <h4>
-                    <code>bigquery(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>bigquery(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#bigquery-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -898,6 +982,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional., retries: nil</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -936,7 +1034,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="datastore-class_method"></a>
                   <h4>
-                    <code>datastore(project = nil, keyfile = nil, scope: nil)</code>
+                    <code>datastore(project = nil, keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#datastore-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1011,6 +1109,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -1057,7 +1169,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="translate-class_method"></a>
                   <h4>
-                    <code>translate(key = nil)</code>
+                    <code>translate(key = nil, retries: nil)</code>
                     <span>
                       <a href="#translate-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1097,6 +1209,20 @@ keys</a>.</p>
 </div>
                               
                               (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1152,7 +1278,7 @@ keys</a>.</p>
                 <div class="method">
                   <a name="resource_manager-class_method"></a>
                   <h4>
-                    <code>resource_manager(keyfile = nil, scope: nil)</code>
+                    <code>resource_manager(keyfile = nil, scope: nil, retries: nil)</code>
                     <span>
                       <a href="#resource_manager-class_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1213,6 +1339,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -1260,7 +1400,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="datastore-instance_method"></a>
                   <h4>
-                    <code>datastore(scope: nil)</code>
+                    <code>datastore(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#datastore-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1304,6 +1444,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1363,7 +1517,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="storage-instance_method"></a>
                   <h4>
-                    <code>storage(scope: nil)</code>
+                    <code>storage(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#storage-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1417,6 +1571,20 @@ APIs</a>.</p>
                             </p>
                           </dd>
                         
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
                       </dl>
                     
 
@@ -1466,7 +1634,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="pubsub-instance_method"></a>
                   <h4>
-                    <code>pubsub(scope: nil)</code>
+                    <code>pubsub(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#pubsub-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1510,6 +1678,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1562,7 +1744,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="bigquery-instance_method"></a>
                   <h4>
-                    <code>bigquery(scope: nil)</code>
+                    <code>bigquery(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#bigquery-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1606,6 +1788,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1661,7 +1857,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="dns-instance_method"></a>
                   <h4>
-                    <code>dns(scope: nil)</code>
+                    <code>dns(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#dns-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1705,6 +1901,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1759,7 +1969,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="resource_manager-instance_method"></a>
                   <h4>
-                    <code>resource_manager(scope: nil)</code>
+                    <code>resource_manager(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#resource_manager-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1803,6 +2013,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1856,7 +2080,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="logging-instance_method"></a>
                   <h4>
-                    <code>logging(scope: nil)</code>
+                    <code>logging(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#logging-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1900,6 +2124,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -1951,7 +2189,7 @@ APIs</a>.</p>
                 <div class="method">
                   <a name="translate-instance_method"></a>
                   <h4>
-                    <code>translate(key = nil)</code>
+                    <code>translate(key = nil, retries: nil)</code>
                     <span>
                       <a href="#translate-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -1991,6 +2229,20 @@ keys</a>.</p>
 </div>
                               
                               (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -2048,7 +2300,7 @@ keys</a>.</p>
                 <div class="method">
                   <a name="vision-instance_method"></a>
                   <h4>
-                    <code>vision(scope: nil)</code>
+                    <code>vision(scope: nil, retries: nil)</code>
                     <span>
                       <a href="#vision-instance_method">&para;</a>
                       <a href="#top">&uarr;</a>
@@ -2089,6 +2341,20 @@ APIs</a>.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
                             </p>
                           </dd>
                         
@@ -2146,7 +2412,7 @@ APIs</a>.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 11, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 12, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal current' href=''>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Storage.html'>Storage</a></li><li class='toc-l0'><a class='reference internal' href='Gcloud/Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
