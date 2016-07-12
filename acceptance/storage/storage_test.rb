@@ -35,7 +35,31 @@ describe "Storage", :storage do
   end
 
   after do
-    bucket.files.map &:delete
+    bucket.files.each &:delete
+  end
+
+  it "creates and gets and updates and deletes a bucket" do
+    one_off_bucket_name = "#{bucket_name}_one_off"
+
+    storage.bucket(one_off_bucket_name).must_be :nil?
+
+    one_off_bucket = storage.create_bucket(one_off_bucket_name)
+
+    storage.bucket(one_off_bucket_name).wont_be :nil?
+
+    one_off_bucket.website_main.must_be :nil?
+    one_off_bucket.website_404.must_be :nil?
+    one_off_bucket.update do |b|
+      b.website_main = "index.html"
+      b.website_404 = "not_found.html"
+    end
+    one_off_bucket.website_main.wont_be :nil?
+    one_off_bucket.website_404.wont_be :nil?
+
+    one_off_bucket.files.all &:delete
+    one_off_bucket.delete
+
+    storage.bucket(one_off_bucket_name).must_be :nil?
   end
 
   describe "bucket acl" do
@@ -85,6 +109,17 @@ describe "Storage", :storage do
       bucket.refresh!
       bucket.acl.readers.must_include "allAuthenticatedUsers"
     end
+
+    it "deletes rules" do
+      bucket.acl.auth!
+      bucket.acl.readers.must_include "allAuthenticatedUsers"
+      bucket.acl.delete "allAuthenticatedUsers"
+      bucket.acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.acl.refresh!
+      bucket.acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.refresh!
+      bucket.acl.readers.wont_include "allAuthenticatedUsers"
+    end
   end
 
 
@@ -123,6 +158,17 @@ describe "Storage", :storage do
       bucket.refresh!
       bucket.default_acl.readers.must_include "allAuthenticatedUsers"
     end
+
+    it "deletes rules" do
+      bucket.default_acl.auth!
+      bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+      bucket.default_acl.delete "allAuthenticatedUsers"
+      bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.default_acl.refresh!
+      bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+      bucket.refresh!
+      bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+    end
   end
 
   describe "getting buckets" do
@@ -144,7 +190,7 @@ describe "Storage", :storage do
     end
 
     it "should get buckets" do
-      all_bucket_names = storage.buckets.map(&:name)
+      all_bucket_names = storage.buckets.all.map(&:name)
       all_bucket_names.must_include bucket_name
       new_bucket_names.each do |new_bucket_name|
         all_bucket_names.must_include new_bucket_name
@@ -153,6 +199,33 @@ describe "Storage", :storage do
   end
 
   describe "write, read, and remove files" do
+    it "creates and gets and updates and deletes a file" do
+      bucket.file("CRUDLogo").must_be :nil?
+
+      original = File.new files[:logo][:path]
+      uploaded = bucket.create_file original, "CRUDLogo"
+
+      bucket.file("CRUDLogo").wont_be :nil?
+
+      uploaded.cache_control.must_be :nil?
+      uploaded.content_language.must_be :nil?
+      uploaded.metadata.must_be :empty?
+      uploaded.update do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_language = "en"
+        f.metadata["test_type"] = "acceptance"
+      end
+      uploaded.cache_control.wont_be :nil?
+      uploaded.content_language.wont_be :nil?
+      uploaded.metadata.wont_be :empty?
+
+      bucket.file("CRUDLogo").wont_be :nil?
+
+      uploaded.delete
+
+      bucket.file("CRUDLogo").must_be :nil?
+    end
+
     it "should upload and download a file without specifying path" do
       original = File.new files[:logo][:path]
       uploaded = bucket.create_file original
@@ -188,7 +261,7 @@ describe "Storage", :storage do
       original = File.new files[:big][:path]
       uploaded = bucket.create_file original, "BigLogo"
       Tempfile.open "gcloud-ruby" do |tmpfile|
-        downloaded = uploaded.download tmpfile
+        downloaded = uploaded.download tmpfile, verify: :all
 
         downloaded.size.must_equal original.size
         downloaded.size.must_equal uploaded.size
@@ -226,7 +299,7 @@ describe "Storage", :storage do
 
     before do
       # delete all files just in case
-      bucket.files.map { |file| file.delete }
+      bucket.files.all.each { |file| file.delete }
 
       uploaded = bucket.create_file files[:logo][:path], filenames[0]
       uploaded.copy filenames[1]
@@ -239,8 +312,8 @@ describe "Storage", :storage do
     end
 
     it "should paginate the list" do
-      files = bucket.files.all.to_a
-      files.size.must_be :>=, filenames.size
+      files = bucket.files(max: 2).all.to_a
+      assert_equal filenames.size, files.size
     end
   end
 
@@ -313,6 +386,18 @@ describe "Storage", :storage do
       file = bucket.create_file local_file, "AclTest.jpg"
       file.acl.readers.must_include "allAuthenticatedUsers"
       file.acl.private!
+      file.acl.readers.must_be :empty?
+      file.acl.refresh!
+      file.acl.readers.must_be :empty?
+      file.refresh!
+      file.acl.readers.must_be :empty?
+    end
+
+    it "deletes rules" do
+      bucket.default_acl.auth!
+      file = bucket.create_file local_file, "AclTest.jpg"
+      file.acl.readers.must_include "allAuthenticatedUsers"
+      file.acl.delete "allAuthenticatedUsers"
       file.acl.readers.must_be :empty?
       file.acl.refresh!
       file.acl.readers.must_be :empty?

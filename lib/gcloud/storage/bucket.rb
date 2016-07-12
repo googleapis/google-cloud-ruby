@@ -449,9 +449,8 @@ module Gcloud
                     key_sha256: encryption_key_sha256 }
         gapi = service.get_file name, path, options
         File.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        return nil if e.status_code == 404
-        raise e
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :find_file, :file
 
