@@ -490,7 +490,11 @@ module Gcloud
         #
         def reload!
           gapi = @service.list_default_acls @bucket
-          acls = gapi.items
+          acls = Array(gapi.items).map do |acl|
+            return acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
+            fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
+            Google::Apis::StorageV1::ObjectAccessControl.from_json acl.to_json
+          end
           @owners  = entities_from_acls acls, "OWNER"
           @readers = entities_from_acls acls, "READER"
         end
