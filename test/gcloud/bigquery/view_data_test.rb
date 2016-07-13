@@ -18,7 +18,7 @@ describe Gcloud::Bigquery::View, :data, :mock_bigquery do
   let(:query_request) {
     qrg = query_request_gapi
     qrg.default_dataset = nil
-    qrg.query = "SELECT * FROM test-project:my_dataset.my_view"
+    qrg.query = "SELECT * FROM [test-project:my_dataset.my_view]"
     qrg
   }
   let(:dataset_id) { "my_dataset" }

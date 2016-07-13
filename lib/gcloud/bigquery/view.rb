@@ -251,7 +251,7 @@ module Gcloud
       end
 
       ##
-      # The schema of the table.
+      # The schema of the view.
       #
       # @!group Attributes
       #
@@ -261,7 +261,7 @@ module Gcloud
       end
 
       ##
-      # The fields of the table.
+      # The fields of the view.
       #
       # @!group Attributes
       #
@@ -270,7 +270,7 @@ module Gcloud
       end
 
       ##
-      # The names of the columns in the table.
+      # The names of the columns in the view.
       #
       # @!group Attributes
       #
@@ -357,7 +357,7 @@ module Gcloud
       # @!group Data
       #
       def data max: nil, timeout: 10000, cache: true, dryrun: nil
-        sql = "SELECT * FROM #{@gapi.id}"
+        sql = "SELECT * FROM #{query_id}"
         ensure_service!
         options = { max: max, timeout: timeout, cache: cache, dryrun: dryrun }
         gapi = service.query sql, options
