@@ -428,8 +428,13 @@ module Gcloud
       def create_view table_id, query, name: nil, description: nil
         new_view_opts = {
           table_reference: Google::Apis::BigqueryV2::TableReference.new(
-            project_id: project_id, dataset_id: dataset_id, table_id: table_id),
-          friendly_name: name, description: description, query: query
+            project_id: project_id, dataset_id: dataset_id, table_id: table_id
+          ),
+          friendly_name: name,
+          description: description,
+          view: Google::Apis::BigqueryV2::ViewDefinition.new(
+            query: query
+          )
         }.delete_if { |_, v| v.nil? }
         new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
 
