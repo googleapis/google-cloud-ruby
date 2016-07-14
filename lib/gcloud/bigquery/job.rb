@@ -14,6 +14,7 @@
 
 
 require "gcloud/errors"
+require "gcloud/bigquery/service"
 require "gcloud/bigquery/query_data"
 require "gcloud/bigquery/job/list"
 require "json"
@@ -125,9 +126,9 @@ module Gcloud
       ##
       # The time when the job was created.
       def created_at
-        return nil if @gapi.statistics.nil?
-        return nil if @gapi.statistics.creation_time.nil?
-        Time.at(@gapi.statistics.creation_time / 1000.0)
+        Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
+      rescue
+        nil
       end
 
       ##
@@ -135,18 +136,18 @@ module Gcloud
       # This field is present after the job's state changes from `PENDING`
       # to either `RUNNING` or `DONE`.
       def started_at
-        return nil if @gapi.statistics.nil?
-        return nil if @gapi.statistics.start_time.nil?
-        Time.at(@gapi.statistics.start_time / 1000.0)
+        Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
+      rescue
+        nil
       end
 
       ##
       # The time when the job ended.
       # This field is present when the job's state is `DONE`.
       def ended_at
-        return nil if @gapi.statistics.nil?
-        return nil if @gapi.statistics.end_time.nil?
-        Time.at(@gapi.statistics.end_time / 1000.0)
+        Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
+      rescue
+        nil
       end
 
       ##

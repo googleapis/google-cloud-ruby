@@ -42,9 +42,9 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
 
   it "knows its creation and modification and expiration times" do
     now = Time.now
-    view_hash["creationTime"] = (now.to_f * 1000).floor
-    view_hash["lastModifiedTime"] = (now.to_f * 1000).floor
-    view_hash["expirationTime"] = (now.to_f * 1000).floor
+    view_hash["creationTime"] = time_millis
+    view_hash["lastModifiedTime"] = time_millis
+    view_hash["expirationTime"] = time_millis
 
 
     view.created_at.must_be_close_to now

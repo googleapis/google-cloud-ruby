@@ -109,7 +109,7 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.ended_at.must_be :nil?
 
     nowish = Time.now
-    timestamp = (nowish.to_f * 1000).floor
+    timestamp = time_millis
 
     job.gapi.statistics.creation_time = timestamp
     job.gapi.statistics.start_time = timestamp

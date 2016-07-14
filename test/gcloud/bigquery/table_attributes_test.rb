@@ -55,6 +55,22 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
     table.expires_at
   end
 
+  it "handles nil for optional expires_at" do
+    mock = Minitest::Mock.new
+    g = table_full_gapi
+    g.expiration_time = nil
+    mock.expect :get_table, g,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+
+    table.expires_at.must_be :nil?
+
+    mock.verify
+
+    # A second call to attribute does not make a second HTTP API call
+    table.expires_at
+  end
+
   it "gets full data for modified_at" do
     mock = Minitest::Mock.new
     mock.expect :get_table, table_full_gapi,

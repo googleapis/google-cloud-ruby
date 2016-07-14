@@ -65,10 +65,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "knows its creation and modification times" do
     now = Time.now
 
-    dataset.gapi.creation_time = (now.to_f * 1000).floor
+    dataset.gapi.creation_time = time_millis
     dataset.created_at.must_be_close_to now
 
-    dataset.gapi.last_modified_time = (now.to_f * 1000).floor
+    dataset.gapi.last_modified_time = time_millis
     dataset.modified_at.must_be_close_to now
   end
 

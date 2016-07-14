@@ -14,6 +14,7 @@
 
 
 require "gcloud/errors"
+require "gcloud/bigquery/service"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
 
@@ -195,7 +196,11 @@ module Gcloud
       #
       def created_at
         ensure_full_data!
-        Time.at(@gapi.creation_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.creation_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -207,8 +212,11 @@ module Gcloud
       #
       def expires_at
         ensure_full_data!
-        return nil if @gapi.expiration_time.nil?
-        Time.at(@gapi.expiration_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.expiration_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -218,7 +226,11 @@ module Gcloud
       #
       def modified_at
         ensure_full_data!
-        Time.at(@gapi.last_modified_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##

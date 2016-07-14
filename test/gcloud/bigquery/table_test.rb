@@ -50,9 +50,9 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
 
   it "knows its creation and modification and expiration times" do
     now = Time.now
-    table_hash["creationTime"] = (now.to_f * 1000).floor
-    table_hash["lastModifiedTime"] = (now.to_f * 1000).floor
-    table_hash["expirationTime"] = (now.to_f * 1000).floor
+    table_hash["creationTime"] = time_millis
+    table_hash["lastModifiedTime"] = time_millis
+    table_hash["expirationTime"] = time_millis
 
 
     table.created_at.must_be_close_to now
