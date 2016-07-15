@@ -13,11 +13,12 @@
 # limitations under the License.
 
 require "helper"
+require "base64"
 
 describe Gcloud::Pubsub::Message, :attributes do
   let(:message_hash) do
     {
-      "data" => ["hello world"].pack("m"),
+      "data" => Base64.strict_encode64("hello world"),
       "attributes" => { "foo" => "FOO", "bar" => "BAR" }
     }
   end

@@ -24,7 +24,7 @@ module Gcloud
               elsif error.respond_to? :status_code
                 gapi_error_class_for error.status_code
               else
-                self.class
+                self
               end
       klass.new error.message
     end
@@ -33,12 +33,12 @@ module Gcloud
     def self.grpc_error_class_for grpc_error_code
       # The gRPC status code 0 is for a successful response.
       # So there is no error subclass for a 0 status code, use current class.
-      [self.class, CanceledError, UnknownError, InvalidArgumentError,
+      [self, CanceledError, UnknownError, InvalidArgumentError,
        DeadlineExceededError, NotFoundError, AlreadyExistsError,
        PermissionDeniedError, ResourceExhaustedError, FailedPreconditionError,
        AbortedError, OutOfRangeError, UnimplementedError, InternalError,
        UnavailableError, DataLossError, UnauthenticatedError
-      ][grpc_error_code] || self.class
+      ][grpc_error_code] || self
     end
 
     # @private Identify the subclass for a Google API Client error
@@ -55,7 +55,7 @@ module Gcloud
         501 => UnimplementedError,
         503 => UnavailableError,
         504 => DeadlineExceededError
-      }[http_status_code] || self.class
+      }[http_status_code] || self
     end
   end
 

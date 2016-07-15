@@ -52,12 +52,12 @@ module Gcloud
         # Initialize a new CORS rules builder with existing CORS rules, if any.
         def initialize rules = []
           super rules
-          @original = rules.dup
+          @original = to_gapi.map(&:to_json)
         end
 
         # @private
         def changed?
-          @original.to_json != to_json
+          @original != to_gapi.map(&:to_json)
         end
 
         ##
@@ -116,56 +116,31 @@ module Gcloud
         end
 
         class Rule
+          attr_accessor :origin, :methods, :headers, :max_age
+
           def initialize origin, methods, headers: nil, max_age: nil
-            @gapi = Google::Apis::StorageV1::Bucket::CorsConfiguration.new(
-              origin: Array(origin), http_method: Array(methods),
-              response_header: Array(headers), max_age_seconds: (max_age||1800)
-            )
-          end
-
-          def origin
-            @gapi.origin
-          end
-
-          def origin= new_origin
-            @gapi.origin = Array(new_origin)
-          end
-
-          def methods
-            @gapi.http_method
-          end
-
-          def methods= new_methods
-            @gapi.http_method = Array(new_methods)
-          end
-
-          def headers
-            @gapi.response_header
-          end
-
-          def headers= new_headers
-            @gapi.response_header = Array(new_headers)
-          end
-
-          def max_age
-            @gapi.max_age_seconds
-          end
-
-          def max_age= new_max_age
-            @gapi.max_age_seconds = (new_max_age || 1800)
+            @origin = Array(origin)
+            @methods = Array(methods)
+            @headers = Array(headers)
+            @max_age = (max_age||1800)
           end
 
           def to_gapi
-            @gapi
+            Google::Apis::StorageV1::Bucket::CorsConfiguration.new(
+              origin: Array(origin).dup, http_method: Array(methods).dup,
+              response_header: Array(headers).dup, max_age_seconds: max_age
+            )
           end
 
           def self.from_gapi gapi
-            new gapi.origin, gapi.http_method, \
-                headers: gapi.response_header, max_age: gapi.max_age_seconds
+            new gapi.origin.dup, gapi.http_method.dup, \
+                headers: gapi.response_header.dup, max_age: gapi.max_age_seconds
           end
 
           def freeze
-            @gapi.freeze
+            @origin.freeze
+            @methods.freeze
+            @headers.freeze
             super
           end
         end

@@ -35,7 +35,7 @@ describe Gcloud::Storage::File, :signed_url, :mock_storage do
 
     signed_url_params = CGI::parse(URI(signed_url).query)
     signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
-    signed_url_params["Signature"].must_equal [Base64.encode64("native-signature").delete("\n")]
+    signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
 
     signing_key_mock.verify
   end
@@ -52,7 +52,7 @@ describe Gcloud::Storage::File, :signed_url, :mock_storage do
 
     signed_url_params = CGI::parse(URI(signed_url).query)
     signed_url_params["GoogleAccessId"].must_equal ["option_issuer"]
-    signed_url_params["Signature"].must_equal [Base64.encode64("option-signature").delete("\n")]
+    signed_url_params["Signature"].must_equal [Base64.strict_encode64("option-signature").delete("\n")]
 
     signing_key_mock.verify
   end
@@ -71,7 +71,7 @@ describe Gcloud::Storage::File, :signed_url, :mock_storage do
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["option_client_email"]
-      signed_url_params["Signature"].must_equal [Base64.encode64("option-signature").delete("\n")]
+      signed_url_params["Signature"].must_equal [Base64.strict_encode64("option-signature").delete("\n")]
 
     end
 

@@ -132,7 +132,8 @@ module Gcloud
         if block_given?
           yield cors_builder
           if cors_builder.changed?
-            patch_gapi! cors_configurations: cors_builder.to_gapi
+            @gapi.cors_configurations = cors_builder.to_gapi
+            patch_gapi! :cors_configurations
           end
         end
         cors_builder.freeze # always return frozen objects
@@ -168,7 +169,7 @@ module Gcloud
       def logging_bucket= logging_bucket
         @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
         @gapi.logging.log_bucket = logging_bucket
-        patch_gapi! logging: @gapi.logging
+        patch_gapi! :logging
       end
 
       ##
@@ -193,7 +194,7 @@ module Gcloud
       def logging_prefix= logging_prefix
         @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
         @gapi.logging.log_object_prefix = logging_prefix
-        patch_gapi! logging: @gapi.logging
+        patch_gapi! :logging
       end
 
       ##
@@ -222,7 +223,7 @@ module Gcloud
       def versioning= new_versioning
         @gapi.versioning ||= Google::Apis::StorageV1::Bucket::Versioning.new
         @gapi.versioning.enabled = new_versioning
-        patch_gapi! versioning: new_versioning
+        patch_gapi! :versioning
       end
 
       ##
@@ -246,7 +247,7 @@ module Gcloud
       def website_main= website_main
         @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
         @gapi.website.main_page_suffix = website_main
-        patch_gapi! website: @gapi.website
+        patch_gapi! :website
       end
 
       ##
@@ -270,7 +271,7 @@ module Gcloud
       def website_404= website_404
         @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
         @gapi.website.not_found_page = website_404
-        patch_gapi! website: @gapi.website
+        patch_gapi! :website
       end
 
       ##
@@ -314,7 +315,7 @@ module Gcloud
       #   end
       #
       def update
-        updater = Updater.new gapi
+        updater = Updater.new @gapi
         yield updater
         # Add check for mutable cors
         updater.check_for_mutable_cors!
@@ -449,9 +450,8 @@ module Gcloud
                     key_sha256: encryption_key_sha256 }
         gapi = service.get_file name, path, options
         File.from_gapi gapi, service
-      rescue Google::Apis::ClientError => e
-        return nil if e.status_code == 404
-        raise e
+      rescue Gcloud::NotFoundError
+        nil
       end
       alias_method :find_file, :file
 
@@ -729,9 +729,15 @@ module Gcloud
         fail "Must have active connection" unless service
       end
 
-      def patch_gapi! options = {}
+      def patch_gapi! *attributes
+        attributes.flatten!
+        return if attributes.empty?
         ensure_service!
-        @gapi = service.patch_bucket name, options
+        patch_args = Hash[attributes.map do |attr|
+          [attr, @gapi.send(attr)]
+        end]
+        patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
+        @gapi = service.patch_bucket name, patch_gapi
       end
 
       ##
@@ -754,8 +760,8 @@ module Gcloud
         ##
         # Create an Updater object.
         def initialize gapi
-          @updates = {}
-          @gapi = gapi.dup
+          @updates = []
+          @gapi = gapi
           @cors_builder = nil
         end
 
@@ -772,20 +778,16 @@ module Gcloud
           return if @cors_builder.nil?
           return unless @cors_builder.changed?
           @gapi.cors_configurations = @cors_builder.to_gapi
-          patch_gapi! cors_configurations: @cors_builder.to_gapi
-        end
-
-        def to_gapi
-          check_for_mutable_cors!
-          @gapi
+          patch_gapi! :cors_configurations
         end
 
         protected
 
         ##
         # Queue up all the updates instead of making them.
-        def patch_gapi! options = {}
-          @updates.merge! options
+        def patch_gapi! attribute
+          @updates << attribute
+          @updates.uniq!
         end
       end
     end

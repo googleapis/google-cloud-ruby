@@ -421,7 +421,7 @@ module Gcloud
         end
 
         def update_predefined_acl! acl_role
-          @service.patch_bucket @bucket, predefined_acl: acl_role, acl: []
+          @service.patch_bucket @bucket, predefined_acl: acl_role
           clear!
         end
 

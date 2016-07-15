@@ -44,7 +44,8 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
 
   it "updates its versioning" do
     mock = Minitest::Mock.new
-    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: true
+    patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json
     mock.expect :patch_bucket, returned_bucket_gapi,
@@ -183,9 +184,10 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
 
   it "updates multiple attributes in a block" do
     mock = Minitest::Mock.new
+    patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_bucket: bucket_logging_bucket, log_object_prefix: bucket_logging_prefix
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main, not_found_page: bucket_website_404
-    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: true, logging: patch_logging_gapi, website: patch_website_gapi
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi, logging: patch_logging_gapi, website: patch_website_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
       random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404).to_json
     mock.expect :patch_bucket, returned_bucket_gapi,
@@ -259,9 +261,12 @@ describe Gcloud::Storage::Bucket, :update, :mock_storage do
       [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil]
     bucket_with_cors.service.mocked_service = mock
 
+    bucket_with_cors.cors.must_be :frozen?
     bucket_with_cors.cors.class.must_equal Gcloud::Storage::Bucket::Cors
     bucket_with_cors.update do |b|
+      b.cors.wont_be :frozen?
       b.cors.first.class.must_equal Gcloud::Storage::Bucket::Cors::Rule
+      b.cors.first.wont_be :frozen?
       b.cors.first.max_age = 600
       b.cors.first.origin << "https://example.com"
       b.cors.first.methods = ["PUT"]

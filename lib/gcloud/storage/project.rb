@@ -279,7 +279,6 @@ module Gcloud
                         location: nil, storage_class: nil, logging_bucket: nil,
                         logging_prefix: nil, website_main: nil,
                         website_404: nil, versioning: nil
-        opts = { acl: acl_rule(acl), default_acl: acl_rule(default_acl) }
         new_bucket = Google::Apis::StorageV1::Bucket.new({
           name: bucket_name,
           location: location,
@@ -293,7 +292,9 @@ module Gcloud
           b.versioning = versioning unless versioning.nil?
         end
         yield updater if block_given?
-        gapi = service.insert_bucket updater.to_gapi, opts
+        updater.check_for_mutable_cors!
+        gapi = service.insert_bucket \
+          new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl)
         Bucket.from_gapi gapi, service
       end
 
