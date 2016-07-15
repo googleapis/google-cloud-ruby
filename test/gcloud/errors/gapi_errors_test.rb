@@ -64,6 +64,12 @@ describe Gcloud::Error, :gapi do
     mapped_error.must_be_kind_of Gcloud::AbortedError
   end
 
+  it "identifies invalid (411) error" do
+    # We don't know what to map this error case to
+    mapped_error = Gcloud::Error.from_error gapi_error("invalid", 411)
+    mapped_error.must_be_kind_of Gcloud::Error
+  end
+
   it "identifies ResourceExhaustedError" do
     mapped_error = Gcloud::Error.from_error gapi_error("exhausted", 429)
     mapped_error.must_be_kind_of Gcloud::ResourceExhaustedError
@@ -104,5 +110,10 @@ describe Gcloud::Error, :gapi do
   it "identifies DeadlineExceededError" do
     mapped_error = Gcloud::Error.from_error gapi_error("exceeded", 504)
     mapped_error.must_be_kind_of Gcloud::DeadlineExceededError
+  end
+
+  it "identifies unknown error" do
+    mapped_error = Gcloud::Error.from_error gapi_error("unknown", 999)
+    mapped_error.must_be_kind_of Gcloud::Error
   end
 end

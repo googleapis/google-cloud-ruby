@@ -96,4 +96,13 @@ describe Gcloud::Error, :grpc do
     mapped_error = Gcloud::Error.from_error GRPC::BadStatus.new(16, "unauthenticated")
     mapped_error.must_be_kind_of Gcloud::UnauthenticatedError
   end
+
+  it "identifies unknown error" do
+    # We don't know what to map this error case to
+    mapped_error = Gcloud::Error.from_error GRPC::BadStatus.new(0, "unknown")
+    mapped_error.must_be_kind_of Gcloud::Error
+
+    mapped_error = Gcloud::Error.from_error GRPC::BadStatus.new(17, "unknown")
+    mapped_error.must_be_kind_of Gcloud::Error
+  end
 end
