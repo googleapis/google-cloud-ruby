@@ -408,7 +408,9 @@ module Gcloud
         end
 
         def update_predefined_acl! acl_role
-          @service.patch_file @bucket, @file, predefined_acl: acl_role, acl: []
+          patched_file = Google::Apis::StorageV1::Object.new acl: nil
+          @service.patch_file \
+            @bucket, @file, patched_file, predefined_acl: acl_role
           clear!
         end
 

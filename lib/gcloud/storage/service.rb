@@ -87,15 +87,14 @@ module Gcloud
 
       ##
       # Updates a bucket, including its ACL metadata.
-      def patch_bucket bucket_name, options = {}
-        predefined_acl = options.delete :predefined_acl
-        predefined_default_acl = options.delete :predefined_default_acl
-        patched_bucket = Google::Apis::StorageV1::Bucket.new options
-
-        patched_bucket.default_object_acl = nil if predefined_default_acl
+      def patch_bucket bucket_name, bucket_gapi = nil, predefined_acl: nil,
+                       predefined_default_acl: nil
+        bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
+        bucket_gapi.acl = nil if predefined_acl
+        bucket_gapi.default_object_acl = nil if predefined_default_acl
 
         service.patch_bucket \
-          bucket_name, patched_bucket,
+          bucket_name, bucket_gapi,
           predefined_acl: predefined_acl,
           predefined_default_object_acl: predefined_default_acl
       rescue Google::Apis::Error => e
@@ -236,11 +235,11 @@ module Gcloud
 
       ##
       # Updates a file's metadata.
-      def patch_file bucket_name, file_path, options = {}
-        predefined_acl = options.delete :predefined_acl
-        patched_file = Google::Apis::StorageV1::Object.new options
+      def patch_file bucket_name, file_path, file_gapi = nil,
+                     predefined_acl: nil
+        file_gapi ||= Google::Apis::StorageV1::Object.new
         service.patch_object \
-          bucket_name, file_path, patched_file,
+          bucket_name, file_path, file_gapi,
           predefined_acl: predefined_acl
       rescue Google::Apis::Error => e
         raise Gcloud::Error.from_error(e)

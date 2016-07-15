@@ -167,7 +167,8 @@ module Gcloud
       # [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
       # directive for the file data.
       def cache_control= cache_control
-        patch_gapi! cache_control: cache_control
+        @gapi.cache_control = cache_control
+        patch_gapi! :cache_control
       end
 
       ##
@@ -181,7 +182,8 @@ module Gcloud
       # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
       # of the file data.
       def content_disposition= content_disposition
-        patch_gapi! content_disposition: content_disposition
+        @gapi.content_disposition = content_disposition
+        patch_gapi! :content_disposition
       end
 
       ##
@@ -195,7 +197,8 @@ module Gcloud
       # Updates the [Content-Encoding
       # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file data.
       def content_encoding= content_encoding
-        patch_gapi! content_encoding: content_encoding
+        @gapi.content_encoding = content_encoding
+        patch_gapi! :content_encoding
       end
 
       ##
@@ -209,7 +212,8 @@ module Gcloud
       # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of the
       # file data.
       def content_language= content_language
-        patch_gapi! content_language: content_language
+        @gapi.content_language = content_language
+        patch_gapi! :content_language
       end
 
       ##
@@ -224,7 +228,8 @@ module Gcloud
       # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of the
       # file data.
       def content_type= content_type
-        patch_gapi! content_type: content_type
+        @gapi.content_type = content_type
+        patch_gapi! :content_type
       end
 
       ##
@@ -242,7 +247,8 @@ module Gcloud
       # string values that will returned with requests for the file as
       # "x-goog-meta-" response headers.
       def metadata= metadata
-        patch_gapi! metadata: metadata
+        @gapi.metadata = metadata
+        patch_gapi! :metadata
       end
 
       ##
@@ -286,8 +292,9 @@ module Gcloud
       #   end
       #
       def update
-        updater = Updater.new metadata
+        updater = Updater.new gapi
         yield updater
+        updater.check_for_changed_metadata!
         patch_gapi! updater.updates unless updater.updates.empty?
       end
 
@@ -681,9 +688,15 @@ module Gcloud
         fail "Must have active connection" unless service
       end
 
-      def patch_gapi! options = {}
+      def patch_gapi! *attributes
+        attributes.flatten!
+        return if attributes.empty?
         ensure_service!
-        @gapi = service.patch_file bucket, name, options
+        patch_args = Hash[attributes.map do |attr|
+          [attr, @gapi.send(attr)]
+        end]
+        patch_gapi = Google::Apis::StorageV1::Object.new patch_args
+        @gapi = service.patch_file bucket, name, patch_gapi
       end
 
       def fix_copy_args dest_bucket, dest_path, options = {}
@@ -779,33 +792,49 @@ module Gcloud
 
       ##
       # Yielded to a block to accumulate changes for a patch request.
-      class Updater
+      class Updater < File
         attr_reader :updates
         ##
         # Create an Updater object.
-        def initialize metadata
-          @metadata = if metadata.nil?
-                        {}
-                      else
-                        metadata.dup
-                      end
-          @updates = {}
-        end
-
-        ATTRS = [:cache_control, :content_disposition, :content_encoding,
-                 :content_language, :content_type, :metadata]
-
-        ATTRS.each do |attr|
-          define_method "#{attr}=" do |arg|
-            updates[attr] = arg
-          end
+        def initialize gapi
+          @updates = []
+          @gapi = gapi
         end
 
         ##
-        # Return metadata for mutation. Also adds metadata to @updates so that
-        # it is included in the patch request.
+        # A hash of custom, user-provided web-safe keys and arbitrary string
+        # values that will returned with requests for the file as "x-goog-meta-"
+        # response headers.
         def metadata
-          updates[:metadata] ||= @metadata
+          # do not freeze metadata
+          @metadata ||= @gapi.metadata.to_h.dup
+        end
+
+        ##
+        # Updates the hash of custom, user-provided web-safe keys and arbitrary
+        # string values that will returned with requests for the file as
+        # "x-goog-meta-" response headers.
+        def metadata= metadata
+          @metadata = metadata
+          @gapi.metadata = @metadata
+          patch_gapi! :metadata
+        end
+
+        ##
+        # Make sure any metadata changes are saved
+        def check_for_changed_metadata!
+          return if @metadata == @gapi.metadata
+          @gapi.metadata = @metadata
+          patch_gapi! :metadata
+        end
+
+        protected
+
+        ##
+        # Queue up all the updates instead of making them.
+        def patch_gapi! attribute
+          @updates << attribute
+          @updates.uniq!
         end
       end
     end
