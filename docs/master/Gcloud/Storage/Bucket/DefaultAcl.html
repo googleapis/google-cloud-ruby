@@ -100,13 +100,9 @@
               
                 <span class='object_link'><a href="#owners-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#owners (method)">#owners</a></span>
               
-                <span class='object_link'><a href="#writers-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#writers (method)">#writers</a></span>
-              
                 <span class='object_link'><a href="#readers-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#readers (method)">#readers</a></span>
               
                 <span class='object_link'><a href="#add_owner-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#add_owner (method)">#add_owner</a></span>
-              
-                <span class='object_link'><a href="#add_writer-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#add_writer (method)">#add_writer</a></span>
               
                 <span class='object_link'><a href="#add_reader-instance_method" title="Gcloud::Storage::Bucket::DefaultAcl#add_reader (method)">#add_reader</a></span>
               
@@ -278,60 +274,6 @@
             
               
                 <div class="method">
-                  <a name="writers-instance_method"></a>
-                  <h4>
-                    <code>writers</code>
-                    <span>
-                      <a href="#writers-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Lists the default writers for files in the bucket.</p>
-
-
-                    
-
-                    
-
-                    
-                      <h3 id="method-i-writers-label-Returns">
-                        Returns
-                        <span><a href="#method-i-writers-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt>Array&lt;String&gt;</tt>)
-                        
-                      </p>
-                    
-
-                    
-                      <h3 id="method-i-writers-label-Examples">
-                        Example
-                        <span><a href="#method-i-writers-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
-
-<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_default_acl'>default_acl</span><span class='period'>.</span><span class='id identifier rubyid_writers'>writers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_writer'>writer</span><span class='op'>|</span> <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_writer'>writer</span> <span class='rbrace'>}</span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
                   <a name="readers-instance_method"></a>
                   <h4>
                     <code>readers</code>
@@ -472,102 +414,6 @@ the following forms:</p>
 
 <span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors@example.net</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_default_acl'>default_acl</span><span class='period'>.</span><span class='id identifier rubyid_add_owner'>add_owner</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
-                  <a name="add_writer-instance_method"></a>
-                  <h4>
-                    <code>add_writer(entity)</code>
-                    <span>
-                      <a href="#add_writer-instance_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Grants default writer permission to files in the bucket.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-add_writer-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-add_writer-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>entity</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The entity holding the permission, in one of
-the following forms:</p>
-
-<ul>
-  <li>user-userId</li>
-  <li>user-email</li>
-  <li>group-groupId</li>
-  <li>group-email</li>
-  <li>domain-domain</li>
-  <li>project-team-projectId</li>
-  <li>allUsers</li>
-  <li>allAuthenticatedUsers</li>
-</ul>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-
-                    
-                      <h3 id="method-i-add_writer-label-Examples">
-                        Examples
-                        <span><a href="#method-i-add_writer-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                          <p class="example_title"><div class='inline'><p>Grant access to a user by pre-pending <code class="highlighter-rouge">"user-"</code> to an email:</p>
-</div></p>
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
-
-<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_default_acl'>default_acl</span><span class='period'>.</span><span class='id identifier rubyid_add_writer'>add_writer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span></code></pre>
-                      
-                        
-                          <p class="example_title"><div class='inline'><p>Grant access to a group by pre-pending <code class="highlighter-rouge">"group-"</code> to an email</p>
-</div></p>
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_storage'>storage</span>
-
-<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors@example.net</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_default_acl'>default_acl</span><span class='period'>.</span><span class='id identifier rubyid_add_writer'>add_writer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span></code></pre>
                       
                     
 
@@ -1230,7 +1076,7 @@ predefined ACL rule to files in the bucket.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 12, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='../Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='../Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='../File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 15, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../../../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../../../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../../../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='../../Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='../../Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='../../Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='../../Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='../../Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='../../ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal' href='../../Storage.html'>Storage</a></li><li class='toc-l1'><a class='reference internal' href='../Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='../Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='../File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='../../Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../../../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
