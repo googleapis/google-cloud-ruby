@@ -74,7 +74,7 @@ module Gcloud
         #
         def reload!
           gapi = @service.list_bucket_acls @bucket
-          acls = gapi.items
+          acls = Array(gapi.items)
           @owners  = entities_from_acls acls, "OWNER"
           @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
@@ -472,7 +472,6 @@ module Gcloud
           @bucket = bucket.name
           @service = bucket.service
           @owners  = nil
-          @writers = nil
           @readers = nil
         end
 
@@ -491,9 +490,12 @@ module Gcloud
         #
         def reload!
           gapi = @service.list_default_acls @bucket
-          acls = gapi.items
+          acls = Array(gapi.items).map do |acl|
+            return acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
+            fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
+            Google::Apis::StorageV1::ObjectAccessControl.from_json acl.to_json
+          end
           @owners  = entities_from_acls acls, "OWNER"
-          @writers = entities_from_acls acls, "WRITER"
           @readers = entities_from_acls acls, "READER"
         end
         alias_method :refresh!, :reload!
@@ -516,26 +518,6 @@ module Gcloud
         def owners
           reload! if @owners.nil?
           @owners
-        end
-
-        ##
-        # Lists the default writers for files in the bucket.
-        #
-        # @return [Array<String>]
-        #
-        # @example
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   bucket.default_acl.writers.each { |writer| puts writer }
-        #
-        def writers
-          reload! if @writers.nil?
-          @writers
         end
 
         ##
@@ -599,50 +581,6 @@ module Gcloud
           gapi = @service.insert_default_acl @bucket, entity, "OWNER"
           entity = gapi.entity
           @owners.push entity unless @owners.nil?
-          entity
-        end
-
-        ##
-        # Grants default writer permission to files in the bucket.
-        #
-        # @param [String] entity The entity holding the permission, in one of
-        #   the following forms:
-        #
-        #   * user-userId
-        #   * user-email
-        #   * group-groupId
-        #   * group-email
-        #   * domain-domain
-        #   * project-team-projectId
-        #   * allUsers
-        #   * allAuthenticatedUsers
-        #
-        # @example Grant access to a user by pre-pending `"user-"` to an email:
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   email = "heidi@example.net"
-        #   bucket.default_acl.add_writer "user-#{email}"
-        #
-        # @example Grant access to a group by pre-pending `"group-"` to an email
-        #   require "gcloud"
-        #
-        #   gcloud = Gcloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "my-bucket"
-        #
-        #   email = "authors@example.net"
-        #   bucket.default_acl.add_writer "group-#{email}"
-        #
-        def add_writer entity
-          gapi = @service.insert_default_acl @bucket, entity, "WRITER"
-          entity = gapi.entity
-          @writers.push entity unless @writers.nil?
           entity
         end
 
@@ -720,7 +658,6 @@ module Gcloud
         def delete entity
           @service.delete_default_acl @bucket, entity
           @owners.delete entity  unless @owners.nil?
-          @writers.delete entity unless @writers.nil?
           @readers.delete entity unless @readers.nil?
           true
         end
@@ -853,14 +790,12 @@ module Gcloud
 
         def clear!
           @owners  = nil
-          @writers = nil
           @readers = nil
           self
         end
 
         def update_predefined_default_acl! acl_role
-          @service.patch_bucket @bucket, predefined_default_acl: acl_role,
-                                         default_acl: []
+          @service.patch_bucket @bucket, predefined_default_acl: acl_role
           clear!
         end
 
