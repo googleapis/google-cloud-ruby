@@ -19,6 +19,7 @@ require "minitest/focus"
 require "minitest/rg"
 require "ostruct"
 require "json"
+require "base64"
 require "gcloud/storage"
 require "gcloud/pubsub"
 require "gcloud/bigquery"
@@ -172,7 +173,7 @@ class MockPubsub < Minitest::Spec
     {
       "ack_id" => "ack-id-#{id}",
       "message" => {
-        "data" => [message].pack("m"),
+        "data" => Base64.strict_encode64(message),
         "attributes" => {},
         "message_id" => "msg-id-#{id}",
       }

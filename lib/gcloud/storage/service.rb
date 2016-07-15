@@ -300,9 +300,10 @@ module Gcloud
         if key
           headers = {}
           headers["x-goog-encryption-algorithm"] = "AES256"
-          headers["x-goog-encryption-key"] = Base64.encode64 key
+          headers["x-goog-encryption-key"] = Base64.strict_encode64 key
           key_sha256 ||= Digest::SHA256.digest key
-          headers["x-goog-encryption-key-sha256"] = Base64.encode64 key_sha256
+          headers["x-goog-encryption-key-sha256"] = \
+            Base64.strict_encode64 key_sha256
           options[:header] = headers
         end
         options

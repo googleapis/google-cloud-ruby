@@ -16,6 +16,7 @@
 require "gcloud/grpc_utils"
 require "gcloud/datastore/errors"
 require "stringio"
+require "base64"
 
 module Gcloud
   ##
@@ -120,11 +121,11 @@ module Gcloud
     end
 
     def self.encode_bytes bytes
-      Array(bytes.to_s).pack("m").chomp.encode("ASCII-8BIT")
+      Base64.strict_encode64(bytes.to_s).encode("ASCII-8BIT")
     end
 
     def self.decode_bytes bytes
-      bytes.to_s.unpack("m").first.force_encoding Encoding::ASCII_8BIT
+      Base64.decode64(bytes.to_s).force_encoding Encoding::ASCII_8BIT
     end
     # rubocop:enable all
   end

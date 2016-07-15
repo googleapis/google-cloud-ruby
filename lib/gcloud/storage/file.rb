@@ -783,7 +783,7 @@ module Gcloud
         end
 
         def generate_signed_url issuer, signed_string, expires
-          signature = Base64.encode64(signed_string).delete("\n")
+          signature = Base64.strict_encode64(signed_string).delete("\n")
           "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
                     "&Expires=#{expires}" \
                     "&Signature=#{CGI.escape signature}"

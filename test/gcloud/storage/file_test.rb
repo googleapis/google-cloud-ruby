@@ -28,8 +28,8 @@ describe Gcloud::Storage::File, :mock_storage do
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
   let(:key_options) do { header: {
       "x-goog-encryption-algorithm"  => "AES256",
-      "x-goog-encryption-key"        => Base64.encode64(encryption_key),
-      "x-goog-encryption-key-sha256" => Base64.encode64(encryption_key_sha256)
+      "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
+      "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
     } }
   end
 
