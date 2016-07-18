@@ -47,6 +47,12 @@ describe Gcloud::Dns, :dns do
     zone.clear!
   end
 
+  it "lists all zones" do
+    all_zones = dns.zones.all.to_a
+    # all_zones.must_include zone
+    all_zones.map(&:name).must_include zone.name
+  end
+
   it "creates and deletes a zone" do
     create_zone_name = "#{zone_name}-crtst1"
     create_zone_dns  = "crtst1.#{zone_dns}"
@@ -59,8 +65,20 @@ describe Gcloud::Dns, :dns do
     dns.zone(create_zone_name).must_be :nil?
   end
 
+  it "knows its attributes" do
+    zone.name.must_equal zone_name
+    zone.dns.must_equal zone.dns
+    zone.description.must_equal ""
+    zone.id.wont_be :nil?
+    zone.name_servers.each do |name_server|
+      name_server.must_include ".googledomains.com."
+    end
+    zone.name_server_set.must_be :nil?
+    zone.created_at.must_be_kind_of Time
+  end
+
   it "return 0 or more zones" do
-    zone.records.count.must_be :>=, 0
+    zone.records.all.count.must_be :>=, 0
   end
 
   describe "Zones" do
@@ -159,32 +177,39 @@ describe Gcloud::Dns, :dns do
     it "gets a list of changes" do
       zone.changes.count.must_be :>=, 0
     end
+
+    it "gets a single change" do
+      all_changes = zone.changes.all
+      all_changes.count.must_be :>=, 0
+      change = zone.change all_changes.first.id
+      change.must_be_kind_of Gcloud::Dns::Change
+    end
   end
 
   describe "Records" do
     it "returns 0 or more records" do
-      zone.records.count.must_be :>=, 0
+      zone.records.all.count.must_be :>=, 0
     end
 
     it "retrieve records by name and type" do
       change = zone.add "retrieve.#{zone.dns}", "A", 86400, "9.10.11.12"
       change.wait_until_done!
 
-      zone.records("retrieve.#{zone.dns}", "A").count.must_be :>=, 1
+      zone.records("retrieve.#{zone.dns}", "A").all.count.must_be :>=, 1
     end
 
     it "replaces records" do
-      zone.records("replace.#{zone.dns}", "A").count.must_be :zero?
+      zone.records("replace.#{zone.dns}", "A").all.count.must_be :zero?
 
       change = zone.add "replace.#{zone.dns}", "A", 86400, "1.2.3.4"
       change.wait_until_done!
 
-      zone.records("replace.#{zone.dns}", "A").count.wont_be :zero?
+      zone.records("replace.#{zone.dns}", "A").all.count.wont_be :zero?
 
       change = zone.replace "replace.#{zone.dns}", "A", 86400, "5.6.7.8"
       change.wait_until_done!
 
-      zone.records("replace.#{zone.dns}", "A").count.wont_be :zero?
+      zone.records("replace.#{zone.dns}", "A").all.count.wont_be :zero?
     end
   end
 
