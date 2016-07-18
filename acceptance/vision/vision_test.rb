@@ -23,6 +23,20 @@ describe "Vision", :vision do
   let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
 
+  describe "default" do
+    it "runs all annotations if none are specified" do
+      annotation = vision.annotate face_image
+
+      annotation.must_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.must_be :label?
+      annotation.wont_be :text?
+      annotation.must_be :safe_search?
+      annotation.must_be :properties?
+    end
+  end
+
   describe "faces" do
     it "detects faces from an image" do
       annotation = vision.annotate face_image, faces: true
@@ -34,6 +48,102 @@ describe "Vision", :vision do
       annotation = vision.annotate face_image, faces: 1
 
       annotation.faces.count.must_equal 1
+      annotation.faces.each { |f| f.must_be_kind_of Gcloud::Vision::Annotation::Face }
+
+      annotation.must_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+
+      face = annotation.face
+      annotation.face.must_be_kind_of Gcloud::Vision::Annotation::Face
+
+      face.bounds.head.must_be_kind_of Array
+      face.bounds.head[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      face.bounds.head[0].x.must_equal 122
+      face.bounds.head[0].y.must_equal nil
+      face.bounds.head[0].to_a.must_equal [122, nil]
+      face.bounds.head[1].to_a.must_equal [336, nil]
+      face.bounds.head[2].to_a.must_equal [336, 203]
+      face.bounds.head[3].to_a.must_equal [122, 203]
+
+      face.bounds.face.must_be_kind_of Array
+      face.bounds.face[0].to_a.must_equal [153, 34]
+      face.bounds.face[1].to_a.must_equal [299, 34]
+      face.bounds.face[2].to_a.must_equal [299, 180]
+      face.bounds.face[3].to_a.must_equal [153, 180]
+
+      face.features.wont_be :nil?
+
+      face.features.confidence.must_equal 0.42813218
+      face.features.chin.center.must_be_kind_of Gcloud::Vision::Annotation::Face::Features::Landmark
+      face.features.chin.center.x.must_equal 233.21977
+      face.features.chin.center.y.must_equal 189.47475
+      face.features.chin.center.z.must_equal 19.487228
+      face.features.chin.left.to_a.must_equal   [166.70468, 145.37173, 71.187653]
+      face.features.chin.right.to_a.must_equal  [299.02509, 135.58951, 61.98719]
+
+      face.features.ears.left.to_a.must_equal  [157.35168, 99.431313, 87.90876]
+      face.features.ears.right.to_a.must_equal [303.81198, 88.5782, 77.719193]
+
+      face.features.eyebrows.left.left.to_a.must_equal  [168.85481, 69.338295, 3.9220245]
+      face.features.eyebrows.left.right.to_a.must_equal [206.07896, 70.761108, -16.882086]
+      face.features.eyebrows.left.top.to_a.must_equal   [186.34938, 63.386711, -12.43734]
+
+      face.features.eyebrows.right.left.to_a.must_equal  [237.42259, 68.241989, -19.10948]
+      face.features.eyebrows.right.right.to_a.must_equal [276.57953, 61.42263, -3.5625641]
+      face.features.eyebrows.right.top.to_a.must_equal   [256.3194, 58.222664, -17.299419]
+
+      face.features.eyes.left.bottom.to_a.must_equal [192.65559, 87.8156, 0.42953849]
+      face.features.eyes.left.center.to_a.must_equal [189.72849, 82.965874, -0.00075325265]
+      face.features.eyes.left.left.to_a.must_equal   [179.03802, 83.742157, 6.790463]
+      face.features.eyes.left.pupil.to_a.must_equal  [190.41544, 84.4557, -1.3682901]
+      face.features.eyes.left.right.to_a.must_equal  [201.79512, 83.127563, -0.33577749]
+      face.features.eyes.left.top.to_a.must_equal    [190.90974, 80.660713, -5.1845775]
+
+      face.features.eyes.right.bottom.to_a.must_equal [257.98438, 83.214119, -3.9316273]
+      face.features.eyes.right.center.to_a.must_equal [258.15857, 78.317787, -4.6232729]
+      face.features.eyes.right.left.to_a.must_equal   [244.01581, 81.332283, -3.0447886]
+      face.features.eyes.right.pupil.to_a.must_equal  [256.63464, 79.641411, -6.0731235]
+      face.features.eyes.right.right.to_a.must_equal  [268.5871, 77.159126, 0.41419673]
+      face.features.eyes.right.top.to_a.must_equal    [255.46104, 75.925194, -9.6693773]
+
+      face.features.forehead.to_a.must_equal [221.5365, 69.323875, -20.554575]
+
+      face.features.lips.bottom.to_a.must_equal [230.27597, 163.10367, 3.8628895]
+      face.features.lips.lower.to_a.must_equal  [230.27597, 163.10367, 3.8628895]
+      face.features.lips.top.to_a.must_equal    [228.54768, 143.2952, -5.6550336]
+      face.features.lips.upper.to_a.must_equal  [228.54768, 143.2952, -5.6550336]
+
+      face.features.mouth.center.to_a.must_equal [228.53499, 150.29066, 1.1069832]
+      face.features.mouth.left.to_a.must_equal   [204.32407, 149.64627, 15.126297]
+      face.features.mouth.right.to_a.must_equal  [255.67624, 145.21121, 11.706608]
+
+      face.features.nose.bottom.to_a.must_equal [226.5867, 130.57584, -8.9499149]
+      face.features.nose.left.to_a.must_equal   [209.35193, 126.05315, 1.0702859]
+      face.features.nose.right.to_a.must_equal  [244.11844, 123.26714, -1.5220336]
+      face.features.nose.tip.to_a.must_equal    [225.23511, 122.47372, -25.817825]
+      face.features.nose.top.to_a.must_equal    [222.40179, 83.179443, -15.773396]
+
+      face.likelihood.wont_be :nil?
+      face.likelihood.joy?.must_equal false
+      face.likelihood.sorrow?.must_equal false
+      face.likelihood.anger?.must_equal false
+      face.likelihood.surprise?.must_equal false
+      face.likelihood.under_exposed?.must_equal false
+      face.likelihood.blurred?.must_equal false
+      face.likelihood.headwear?.must_equal false
+
+      face.likelihood.joy.must_equal "VERY_UNLIKELY"
+      face.likelihood.sorrow.must_equal "VERY_UNLIKELY"
+      face.likelihood.anger.must_equal "VERY_UNLIKELY"
+      face.likelihood.surprise.must_equal "VERY_UNLIKELY"
+      face.likelihood.under_exposed.must_equal "VERY_UNLIKELY"
+      face.likelihood.blurred.must_equal "VERY_UNLIKELY"
+      face.likelihood.headwear.must_equal "VERY_UNLIKELY"
     end
 
     it "detects faces from an image with location context" do
@@ -65,6 +175,35 @@ describe "Vision", :vision do
       annotation = vision.annotate landmark_image, landmarks: true
 
       annotation.landmarks.count.must_equal 1
+      annotation.landmarks.each { |f| f.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+
+      annotation.wont_be :face?
+      annotation.must_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+
+      landmark = annotation.landmark
+      landmark.must_be_kind_of Gcloud::Vision::Annotation::Entity
+
+      landmark.mid.must_equal "/m/019dvv"
+      landmark.locale.must_be :nil?
+      landmark.description.must_equal "Mount Rushmore"
+      landmark.score.must_equal 0.91912264
+      landmark.confidence.must_be :nil?
+      landmark.topicality.must_be :nil?
+      landmark.bounds[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      landmark.bounds[0].x.must_equal 9
+      landmark.bounds[0].y.must_equal 35
+      landmark.bounds[1].to_a.must_equal [492, 35]
+      landmark.bounds[2].to_a.must_equal [492, 325]
+      landmark.bounds[3].to_a.must_equal [9, 325]
+      landmark.locations[0].must_be_kind_of Gcloud::Vision::Location
+      landmark.locations[0].latitude.must_equal 43.878264
+      landmark.locations[0].longitude.must_equal -103.45700740814209
+      landmark.properties.must_be :empty?
     end
 
     it "detects landmarks from an image with custom max value" do
@@ -89,6 +228,33 @@ describe "Vision", :vision do
       annotation = vision.annotate logo_image, logos: true
 
       annotation.logos.count.must_equal 1
+      annotation.logos.each { |l| l.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.must_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+
+      logo = annotation.logo
+      logo.must_be_kind_of Gcloud::Vision::Annotation::Entity
+
+      logo.mid.must_equal "/m/0b34hf"
+      logo.locale.must_be :nil?
+      logo.description.must_equal "Google"
+      logo.score.must_equal 0.70057315
+      logo.confidence.must_be :nil?
+      logo.topicality.must_be :nil?
+      logo.bounds[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      logo.bounds[0].x.must_equal 14
+      logo.bounds[0].y.must_equal 16
+      logo.bounds[1].to_a.must_equal [335, 16]
+      logo.bounds[2].to_a.must_equal [335, 86]
+      logo.bounds[3].to_a.must_equal [14,  86]
+      logo.locations.must_be :empty?
+      logo.properties.must_be :empty?
     end
 
     it "detects logos from an image with custom max value" do
@@ -113,6 +279,28 @@ describe "Vision", :vision do
       annotation = vision.annotate landmark_image, labels: true
 
       annotation.labels.count.must_equal 6
+      annotation.logos.each { |l| l.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.must_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+
+      label = annotation.label
+      label.must_be_kind_of Gcloud::Vision::Annotation::Entity
+
+      label.mid.must_equal "/m/02wtjj"
+      label.locale.must_be :nil?
+      label.description.must_equal "stone carving"
+      label.score.must_equal 0.9859733
+      label.confidence.must_be :nil?
+      label.topicality.must_be :nil?
+      label.bounds.must_be :empty?
+      label.locations.must_be :empty?
+      label.properties.must_be :empty?
     end
 
     it "detects labels from an image with custom max value" do
@@ -136,13 +324,27 @@ describe "Vision", :vision do
     it "detects text from an image" do
       annotation = vision.annotate text_image, text: true
 
-      annotation.text.text.must_include "Google Cloud Client Library for Ruby"
-      annotation.text.locale.must_equal "en"
-      annotation.text.words.count.must_equal 28
-      annotation.text.words[0].text.must_equal "Google"
-      annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
-      annotation.text.words[27].text.must_equal "Storage."
-      annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.must_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+
+      text = annotation.text
+      text.must_be_kind_of Gcloud::Vision::Annotation::Text
+
+      text.text.must_include "Google Cloud Client Library for Ruby"
+      text.locale.must_equal "en"
+      text.words.count.must_equal 28
+      text.words[0].must_be_kind_of Gcloud::Vision::Annotation::Text::Word
+      text.words[0].text.must_be_kind_of String
+      text.words[0].bounds.first.must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      text.words[0].text.must_equal "Google"
+      text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+      text.words[27].text.must_equal "Storage."
+      text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
     end
 
     it "detects text from multiple images" do
@@ -175,6 +377,14 @@ describe "Vision", :vision do
   describe "safe_search" do
     it "detects safe_search from an image" do
       annotation = vision.annotate face_image, safe_search: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.must_be :safe_search?
+      annotation.wont_be :properties?
 
       annotation.safe_search.wont_be :nil?
       annotation.safe_search.wont_be :adult?
@@ -212,9 +422,18 @@ describe "Vision", :vision do
     it "detects properties from an image" do
       annotation = vision.annotate text_image, properties: true
 
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.must_be :properties?
+
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
 
+      annotation.properties.colors[0].must_be_kind_of Gcloud::Vision::Annotation::Properties::Color
       annotation.properties.colors[0].red.must_equal 145
       annotation.properties.colors[0].green.must_equal 193
       annotation.properties.colors[0].blue.must_equal 254
