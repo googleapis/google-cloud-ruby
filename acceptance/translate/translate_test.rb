@@ -23,7 +23,14 @@ describe Gcloud::Translate, :translate do
 
     detections = translate.detect "Hello", "Hola"
     detections.count.must_equal 2
+    detections.each { |d| d.must_be_kind_of Gcloud::Translate::Detection }
+
+    detections.first.results.each { |d| d.must_be_kind_of Gcloud::Translate::Detection::Result }
+    detections.first.language.must_equal detections.first.results.first.language
     detections.first.results.first.language.must_equal "en"
+    detections.first.confidence.must_equal detections.first.results.first.confidence
+    detections.first.results.first.confidence.must_equal 1.0
+
     detections.last.results.first.language.must_equal "es"
   end
 
