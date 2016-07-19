@@ -22,7 +22,7 @@ describe Gcloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { "999" } # String per google/google-api-ruby-client#439
-  let(:dataset_gapi) {  Google::Apis::BigqueryV2::Dataset.from_json random_dataset_small_hash(dataset_id, dataset_name).to_json }
+  let(:dataset_gapi) {  Google::Apis::BigqueryV2::DatasetList::Dataset.from_json random_dataset_small_hash(dataset_id, dataset_name).to_json }
   let(:dataset_full_json) { random_dataset_hash(dataset_id, dataset_name, description, default_expiration).to_json }
   let(:dataset_full_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_full_json }
   let(:dataset) { Gcloud::Bigquery::Dataset.from_gapi dataset_gapi,

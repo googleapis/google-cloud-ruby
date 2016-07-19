@@ -17,6 +17,7 @@ require "gcloud/errors"
 require "gcloud/bigquery/service"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
+require "google/apis/bigquery_v2"
 
 module Gcloud
   module Bigquery
@@ -467,7 +468,7 @@ module Gcloud
       end
 
       def data_complete?
-        !@gapi.creation_time.nil?
+        @gapi.is_a? Google::Apis::BigqueryV2::Table
       end
     end
   end

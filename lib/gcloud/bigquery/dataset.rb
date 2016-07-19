@@ -697,7 +697,7 @@ module Gcloud
       end
 
       def data_complete?
-        !@gapi.creation_time.nil?
+        @gapi.is_a? Google::Apis::BigqueryV2::Dataset
       end
 
       ##
