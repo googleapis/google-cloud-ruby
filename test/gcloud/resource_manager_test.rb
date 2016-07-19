@@ -18,10 +18,11 @@ require "gcloud/resource_manager"
 describe Gcloud do
   it "calls out to Gcloud.resource_manager" do
     gcloud = Gcloud.new
-    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil) {
+    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "resource_manager-manager-object-empty"
     }
     Gcloud.stub :resource_manager, stubbed_resource_manager do
@@ -32,10 +33,11 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.resource_manager" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil) {
+    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "resource_manager-manager-object"
     }
     Gcloud.stub :resource_manager, stubbed_resource_manager do
@@ -46,14 +48,15 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.resource_manager" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil) {
+    stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "resource_manager-manager-object-scoped"
     }
     Gcloud.stub :resource_manager, stubbed_resource_manager do
-      manager = gcloud.resource_manager scope: "http://example.com/scope", retries: 5
+      manager = gcloud.resource_manager scope: "http://example.com/scope", retries: 5, timeout: 60
       manager.must_equal "resource_manager-manager-object-scoped"
     end
   end

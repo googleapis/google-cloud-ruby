@@ -18,11 +18,12 @@ require "gcloud/pubsub"
 describe Gcloud do
   it "calls out to Gcloud.pubsub" do
     gcloud = Gcloud.new
-    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "pubsub-project-object-empty"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.pubsub" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "pubsub-project-object"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.pubsub" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "pubsub-project-object-scoped"
     }
     Gcloud.stub :pubsub, stubbed_pubsub do
-      project = gcloud.pubsub scope: "http://example.com/scope", retries: 5
+      project = gcloud.pubsub scope: "http://example.com/scope", retries: 5, timeout: 60
       project.must_equal "pubsub-project-object-scoped"
     end
   end

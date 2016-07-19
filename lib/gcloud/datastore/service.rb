@@ -23,15 +23,16 @@ module Gcloud
     # @private Represents the gRPC Datastore service, including all the API
     # methods.
     class Service
-      attr_accessor :project, :credentials, :host, :retries
+      attr_accessor :project, :credentials, :host, :retries, :timeout
 
       ##
       # Creates a new Service instance.
-      def initialize project, credentials, host: nil, retries: nil
+      def initialize project, credentials, host: nil, retries: nil, timeout: nil
         @project = project
         @credentials = credentials
         @host = host || "datastore.googleapis.com"
         @retries = retries
+        @timeout = timeout
       end
 
       def creds
@@ -43,7 +44,7 @@ module Gcloud
       def datastore
         return mocked_datastore if mocked_datastore
         @datastore ||= Google::Datastore::V1beta3::Datastore::Stub.new(
-          host, creds)
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_datastore
 

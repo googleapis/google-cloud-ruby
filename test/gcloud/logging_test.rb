@@ -18,11 +18,12 @@ require "gcloud/logging"
 describe Gcloud do
   it "calls out to Gcloud.logging" do
     gcloud = Gcloud.new
-    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "logging-project-object-empty"
     }
     Gcloud.stub :logging, stubbed_logging do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.logging" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "logging-project-object"
     }
     Gcloud.stub :logging, stubbed_logging do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.logging" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_logging = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "logging-project-object-scoped"
     }
     Gcloud.stub :logging, stubbed_logging do
-      project = gcloud.logging scope: "http://example.com/scope", retries: 5
+      project = gcloud.logging scope: "http://example.com/scope", retries: 5, timeout: 60
       project.must_equal "logging-project-object-scoped"
     end
   end

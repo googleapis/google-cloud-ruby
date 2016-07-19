@@ -18,11 +18,12 @@ require "gcloud/dns"
 describe Gcloud do
   it "calls out to Gcloud.dns" do
     gcloud = Gcloud.new
-    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "dns-project-object-empty"
     }
     Gcloud.stub :dns, stubbed_dns do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.dns" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "dns-project-object"
     }
     Gcloud.stub :dns, stubbed_dns do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.dns" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "dns-project-object-scoped"
     }
     Gcloud.stub :dns, stubbed_dns do
-      project = gcloud.dns scope: "http://example.com/scope", retries: 5
+      project = gcloud.dns scope: "http://example.com/scope", retries: 5, timeout: 60
       project.must_equal "dns-project-object-scoped"
     end
   end

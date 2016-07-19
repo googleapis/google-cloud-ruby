@@ -32,6 +32,7 @@ module Gcloud
   # @param [String] key a public API access key (not an OAuth 2.0 token)
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -53,7 +54,7 @@ module Gcloud
   #   translation = translate.translate "Hello world!", to: "la"
   #   translation.text #=> "Salve mundi!"
   #
-  def self.translate key = nil, retries: nil
+  def self.translate key = nil, retries: nil, timeout: nil
     key ||= ENV["TRANSLATE_KEY"]
     if key.nil?
       key_missing_msg = "An API key is required to use the Translate API."
@@ -61,7 +62,8 @@ module Gcloud
     end
 
     Gcloud::Translate::Api.new(
-      Gcloud::Translate::Service.new(key, retries: retries))
+      Gcloud::Translate::Service.new(
+        key, retries: retries, timeout: timeout))
   end
 
   ##

@@ -18,11 +18,12 @@ require "gcloud/storage"
 describe Gcloud do
   it "calls out to Gcloud.storage" do
     gcloud = Gcloud.new
-    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "storage-project-object-empty"
     }
     Gcloud.stub :storage, stubbed_storage do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.storage" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "storage-project-object"
     }
     Gcloud.stub :storage, stubbed_storage do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.storage" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "storage-project-object-scoped"
     }
     Gcloud.stub :storage, stubbed_storage do
-      project = gcloud.storage scope: "http://example.com/scope", retries: 5
+      project = gcloud.storage scope: "http://example.com/scope", retries: 5, timeout: 60
       project.must_equal "storage-project-object-scoped"
     end
   end

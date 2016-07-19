@@ -38,6 +38,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Dns::Project]
   #
@@ -49,7 +50,8 @@ module Gcloud
   #
   #   zone = dns.zone "example-com"
   #
-  def self.dns project = nil, keyfile = nil, scope: nil, retries: nil
+  def self.dns project = nil, keyfile = nil, scope: nil, retries: nil,
+               timeout: nil
     project ||= Gcloud::Dns::Project.default_project
     project = project.to_s # Always cast to a string
     fail ArgumentError, "project is missing" if project.empty?
@@ -61,7 +63,8 @@ module Gcloud
     end
 
     Gcloud::Dns::Project.new(
-      Gcloud::Dns::Service.new(project, credentials, retries: retries))
+      Gcloud::Dns::Service.new(
+        project, credentials, retries: retries, timeout: timeout))
   end
 
   ##

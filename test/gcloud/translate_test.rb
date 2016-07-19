@@ -18,9 +18,10 @@ require "gcloud/translate"
 describe Gcloud do
   it "calls out to Gcloud.translate" do
     gcloud = Gcloud.new
-    stubbed_translate = ->(key, retries: nil) {
+    stubbed_translate = ->(key, retries: nil, timeout: nil) {
       key.must_equal "this-is-the-api-key"
       retries.must_be :nil?
+      timeout.must_be :nil?
       "translate-api-object-empty"
     }
     Gcloud.stub :translate, stubbed_translate do
@@ -31,9 +32,10 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.translate" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_translate = ->(key, retries: nil) {
+    stubbed_translate = ->(key, retries: nil, timeout: nil) {
       key.must_equal "this-is-the-api-key"
       retries.must_be :nil?
+      timeout.must_be :nil?
       "translate-api-object"
     }
     Gcloud.stub :translate, stubbed_translate do
@@ -44,13 +46,14 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.translate" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_translate = ->(key, retries: nil) {
+    stubbed_translate = ->(key, retries: nil, timeout: nil) {
       key.must_equal "this-is-the-api-key"
       retries.must_equal 5
+      timeout.must_equal 60
       "translate-api-object-scoped"
     }
     Gcloud.stub :translate, stubbed_translate do
-      api = gcloud.translate "this-is-the-api-key", retries: 5
+      api = gcloud.translate "this-is-the-api-key", retries: 5, timeout: 60
       api.must_equal "translate-api-object-scoped"
     end
   end

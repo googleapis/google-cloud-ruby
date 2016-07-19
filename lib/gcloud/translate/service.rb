@@ -31,11 +31,12 @@ module Gcloud
 
       ##
       # Creates a new Service instance.
-      def initialize key, retries: nil
+      def initialize key, retries: nil, timeout: nil
         @service = API::TranslateService.new
         @service.client_options.application_name    = "gcloud-ruby"
         @service.client_options.application_version = Gcloud::VERSION
         @service.request_options.retries = retries || 3
+        @service.request_options.timeout_sec = timeout if timeout
         @service.authorization = nil
         @service.key = key
       end
