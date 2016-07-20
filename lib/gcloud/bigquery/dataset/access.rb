@@ -77,31 +77,30 @@ module Gcloud
         # Initialized a new Access object.
         # Must provide a valid Google::Apis::BigqueryV2::Dataset object.
         # Access will mutate the gapi object.
-        def initialize gapi
-          @gapi = gapi
-          @gapi.access ||= [] # easiest to do this in the constructor
-          @original_access_hashes = @gapi.access.map(&:to_h)
+        def initialize
+          @rules = [] # easiest to do this in the constructor
+          @original_rules_hashes = @rules.map(&:to_h)
         end
 
         # @private
         def changed?
-          @original_access_hashes != @gapi.access.map(&:to_h)
+          @original_rules_hashes != @rules.map(&:to_h)
         end
 
         def empty?
-          @gapi.access.empty?
+          @rules.empty?
         end
 
         def freeze
-          @gapi = @gapi.dup.freeze
-          @gapi.access.freeze
+          @rules = @rules.map(&:dup).map(&:freeze)
+          @rules.freeze
           super
         end
 
         ##
         # View the access rules as an array of hashes.
         def to_a
-          @gapi.access.map(&:to_h)
+          @rules.map(&:to_h)
         end
 
         ##
@@ -428,6 +427,23 @@ module Gcloud
           lookup_access_role_scope_value :owner, :view, view
         end
 
+        # @private
+        def self.from_gapi gapi
+          rules = Array gapi.access
+          new.tap do |s|
+            s.instance_variable_set :@rules, rules
+            s.instance_variable_set :@original_rules_hashes,
+                                    rules.map(&:to_h)
+            s.instance_variable_set :@dataset_reference,
+                                    gapi.dataset_reference
+          end
+        end
+
+        # @private
+        def to_gapi
+          @rules
+        end
+
         protected
 
         # @private
@@ -460,7 +476,7 @@ module Gcloud
           if view.respond_to? :table_ref
             view.table_ref
           else
-            Service.table_ref_from_s view, @gapi.dataset_reference
+            Service.table_ref_from_s view, @dataset_reference
           end
         end
 
@@ -473,10 +489,10 @@ module Gcloud
           # If scope is view, make sure value is in the right format
           value = validate_view(value) if scope == :view
           # Remove any rules of this scope and value
-          @gapi.access.reject!(&find_by_scope_and_value(scope, value))
+          @rules.reject!(&find_by_scope_and_value(scope, value))
           # Add new rule for this role, scope, and value
           opts = { role: role, scope => value }
-          @gapi.access << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+          @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
         end
 
         # @private
@@ -488,7 +504,7 @@ module Gcloud
           # If scope is view, make sure value is in the right format
           value = validate_view(value) if scope == :view
           # Remove any rules of this role, scope, and value
-          @gapi.access.reject!(
+          @rules.reject!(
             &find_by_role_and_scope_and_value(role, scope, value))
         end
 
@@ -501,7 +517,7 @@ module Gcloud
           # If scope is view, make sure value is in the right format
           value = validate_view(value) if scope == :view
           # Detect any rules of this role, scope, and value
-          !(!@gapi.access.detect(
+          !(!@rules.detect(
             &find_by_role_and_scope_and_value(role, scope, value)))
         end
 

@@ -243,10 +243,13 @@ module Gcloud
       #
       def access
         ensure_full_data!
-        access_builder = Access.new @gapi
+        access_builder = Access.from_gapi @gapi
         if block_given?
           yield access_builder
-          patch_gapi! :access if access_builder.changed?
+          if access_builder.changed?
+            @gapi.update! access: access_builder.to_gapi
+            patch_gapi! :access
+          end
         end
         access_builder.freeze
       end
@@ -694,27 +697,27 @@ module Gcloud
         end
 
         def access
-          # Same as Dataset#access, but not frozen
-          @original_access_hashes = Array(@gapi.access).map(&:to_h)
           # TODO: make sure to call ensure_full_data! on Dataset#update
-          access_builder = Access.new @gapi
+          @access ||= Access.from_gapi @gapi
           if block_given?
-            yield access_builder
-            patch_gapi! :access if access_builder.changed?
+            yield @access
+            check_for_mutated_access!
           end
-          access_builder
+          # Same as Dataset#access, but not frozen
+          @access
         end
 
         ##
         # Make sure any access changes are saved
         def check_for_mutated_access!
-          return if @original_access_hashes.nil?
-          return if @original_access_hashes == @gapi.access.map(&:to_h)
+          return if @access.nil?
+          return unless @access.changed?
+          @gapi.update! access: @access.to_gapi
           patch_gapi! :access
         end
 
         def to_gapi
-          check_for_mutable_cors!
+          check_for_mutated_access!
           @gapi
         end
 
