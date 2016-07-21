@@ -18,6 +18,7 @@ require "gcloud/storage"
 # This test is a ruby version of gcloud-node's bigquery test.
 
 describe Gcloud::Bigquery, :bigquery do
+  let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -26,38 +27,61 @@ describe Gcloud::Bigquery, :bigquery do
     end
     d
   end
-  let(:table_id) { "kittens" }
-  let(:schema) do
-    { "fields" => [
-        { "name" => "id",    "type" => "INTEGER" },
-        { "name" => "breed", "type" => "STRING" },
-        { "name" => "name",  "type" => "STRING" },
-        { "name" => "dob",   "type" => "TIMESTAMP" }
-      ] }
+  let(:dataset_2_id) { "#{prefix}_dataset_2" }
+  let(:dataset_2) do
+    d = bigquery.dataset dataset_2_id
+    if d.nil?
+      d = bigquery.create_dataset dataset_2_id
+    end
+    d
   end
+  let(:table_id) { "bigquery_table" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?
-      t = dataset.create_table table_id do |tbl|
-        tbl.schema.integer "id"
-        tbl.schema.string "breed"
-        tbl.schema.string "name"
-        tbl.schema.timestamp "dob"
-      end
+      t = dataset.create_table table_id
     end
     t
   end
-  let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
+  let(:view_id) { "bigquery_view" }
+  let(:view) do
+    t = dataset.table view_id
+    if t.nil?
+      t = dataset.create_view view_id, publicdata_query
+    end
+    t
+  end
+  let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
 
   before do
+    dataset_2
     table
+    view
   end
 
   it "should get a list of datasets" do
-    datasets = bigquery.datasets
+    datasets = bigquery.datasets max: 1
     # The code in before ensures we have at least one dataset
     datasets.count.wont_be :zero?
-    datasets.each { |ds| ds.must_be_kind_of Gcloud::Bigquery::Dataset }
+    datasets.all(request_limit: 1).each do |ds|
+      ds.must_be_kind_of Gcloud::Bigquery::Dataset
+      ds.created_at.must_be_kind_of Time # Loads full representation
+    end
+    more_datasets = datasets.next
+    more_datasets.wont_be :nil?
+  end
+
+  it "create a dataset with access rules" do
+    bigquery.create_dataset dataset_with_access_id do |ds|
+      ds.access do |acl|
+        acl.add_writer_special :all
+      end
+    end
+    fresh = bigquery.dataset dataset_with_access_id
+    fresh.wont_be :nil?
+    fresh.access.wont_be :empty?
+    fresh.access.to_a.must_be_kind_of Array
+    assert fresh.access.writer_special? :all
   end
 
   it "should run an query" do
@@ -75,122 +99,7 @@ describe Gcloud::Bigquery, :bigquery do
   end
 
   it "should get a list of jobs" do
-    jobs = bigquery.jobs
+    jobs = bigquery.jobs.all
     jobs.each { |job| job.must_be_kind_of Gcloud::Bigquery::Job }
-  end
-
-  describe "BigQuery/Dataset" do
-    it "should set & get metadata" do
-      new_desc = "New description!"
-      dataset.description = new_desc
-
-      fresh = bigquery.dataset dataset.dataset_id
-      fresh.wont_be :nil?
-      fresh.must_be_kind_of Gcloud::Bigquery::Dataset
-      fresh.dataset_id.must_equal dataset.dataset_id
-      fresh.description.must_equal new_desc
-    end
-  end
-
-  describe "BigQuery/Table" do
-    let(:local_file) { "acceptance/data/kitten-test-data.json" }
-
-    it "has the correct schema" do
-      table.schema.fields.map(&:name).must_equal ["id", "breed", "name", "dob"]
-    end
-
-    it "gets and sets metadata" do
-      new_desc = "New description!"
-      table.description = new_desc
-
-      fresh = dataset.table table.table_id
-      fresh.wont_be :nil?
-      fresh.must_be_kind_of Gcloud::Bigquery::Table
-      fresh.table_id.must_equal table.table_id
-      fresh.description.must_equal new_desc
-    end
-
-    it "inserts rows directly" do
-      rows = [
-        { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
-        { name: "ryan",    breed: "golden retriever?", id: 5, dob: Time.now.utc },
-        { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
-      ]
-      result = table.insert rows
-      result.must_be :success?
-    end
-
-    it "imports data from a local files" do
-      job = table.load local_file
-      job.wait_until_done!
-      job.output_rows.must_equal "3"
-    end
-
-    it "imports data from a file in your bucket" do
-      begin
-        bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
-        file = bucket.create_file local_file
-
-        job = table.load file
-        job.wait_until_done!
-        job.wont_be :failed?
-      ensure
-        post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
-        if post_bucket
-          post_bucket.files.map &:delete
-          post_bucket.delete
-        end
-      end
-    end
-
-    it "extracts data to a url in your bucket" do
-      begin
-        # Make sure there is data to extract...
-        load_job = table.load(local_file)
-        load_job.wait_until_done!
-        Tempfile.open "empty_extract_file.json" do |tmp|
-          bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
-          extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-          extract_job = table.extract extract_url
-          extract_job.wait_until_done!
-          extract_job.wont_be :failed?
-          extract_file = bucket.file "kitten-test-data-backup.json"
-          downloaded_file = extract_file.download tmp.path
-          downloaded_file.size.must_be :>, 0
-        end
-      ensure
-        post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
-        if post_bucket
-          post_bucket.files.map &:delete
-          post_bucket.delete
-        end
-      end
-    end
-
-    it "extracts data to a file in your bucket" do
-      begin
-        # Make sure there is data to extract...
-        load_job = table.load(local_file)
-        load_job.wait_until_done!
-        Tempfile.open "empty_extract_file.json" do |tmp|
-          tmp.size.must_equal 0
-          bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
-          extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
-          extract_job = table.extract extract_file
-          extract_job.wait_until_done!
-          extract_job.wont_be :failed?
-          # Refresh to get the latest file data
-          extract_file = bucket.file "kitten-test-data-backup.json"
-          downloaded_file = extract_file.download tmp.path
-          downloaded_file.size.must_be :>, 0
-        end
-      ensure
-        post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
-        if post_bucket
-          post_bucket.files.map &:delete
-          post_bucket.delete
-        end
-      end
-    end
   end
 end
