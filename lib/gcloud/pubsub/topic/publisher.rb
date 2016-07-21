@@ -17,8 +17,21 @@ module Gcloud
   module Pubsub
     class Topic
       ##
-      # Batch object used to publish multiple messages at once.
-      class Batch
+      # Topic Publisher object used to publish multiple messages at once.
+      #
+      # @example
+      #   require "gcloud"
+      #
+      #   gcloud = Gcloud.new
+      #   pubsub = gcloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   msgs = topic.publish do |t|
+      #     t.publish "new-message-1", foo: :bar
+      #     t.publish "new-message-2", foo: :baz
+      #     t.publish "new-message-3", foo: :bif
+      #   end
+      class Publisher
         ##
         # @private The messages to publish
         attr_reader :messages

@@ -223,8 +223,9 @@ module Gcloud
       # @param [Hash] attributes Optional attributes for the message.
       # @option attributes [Boolean] :autocreate Flag to control whether the
       #   provided topic will be created if it does not exist.
-      # @yield [batch] a block for publishing multiple messages in one request
-      # @yieldparam [Topic::Batch] batch the batch object
+      # @yield [publisher] a block for publishing multiple messages in one
+      #   request
+      # @yieldparam [Topic::Publisher] publisher the topic publisher object
       #
       # @return [Message, Array<Message>] Returns the published message when
       #   called without a block, or an array of messages when called with a
@@ -261,10 +262,10 @@ module Gcloud
       #   gcloud = Gcloud.new
       #   pubsub = gcloud.pubsub
       #
-      #   msgs = pubsub.publish "my-topic" do |batch|
-      #     batch.publish "new-message-1", foo: :bar
-      #     batch.publish "new-message-2", foo: :baz
-      #     batch.publish "new-message-3", foo: :bif
+      #   msgs = pubsub.publish "my-topic" do |p|
+      #     p.publish "new-message-1", foo: :bar
+      #     p.publish "new-message-2", foo: :baz
+      #     p.publish "new-message-3", foo: :bif
       #   end
       #
       # @example With `autocreate`:
@@ -284,10 +285,10 @@ module Gcloud
         # extract autocreate option
         autocreate = attributes.delete :autocreate
         ensure_service!
-        batch = Topic::Batch.new data, attributes
-        yield batch if block_given?
-        return nil if batch.messages.count.zero?
-        publish_batch_messages topic_name, batch, autocreate
+        publisher = Topic::Publisher.new data, attributes
+        yield publisher if block_given?
+        return nil if publisher.messages.count.zero?
+        publish_batch_messages topic_name, publisher, autocreate
       end
 
       ##

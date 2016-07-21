@@ -14,7 +14,7 @@
 
 
 require "gcloud/errors"
-require "gcloud/pubsub/topic/batch"
+require "gcloud/pubsub/topic/publisher"
 require "gcloud/pubsub/topic/list"
 require "gcloud/pubsub/subscription"
 require "gcloud/pubsub/policy"
@@ -237,8 +237,9 @@ module Gcloud
       #
       # @param [String, File] data The message data.
       # @param [Hash] attributes Optional attributes for the message.
-      # @yield [batch] a block for publishing multiple messages in one request
-      # @yieldparam [Topic::Batch] batch the batch object
+      # @yield [publisher] a block for publishing multiple messages in one
+      #   request
+      # @yieldparam [Topic::Publisher] publisher the topic publisher object
       #
       # @return [Message, Array<Message>] Returns the published message when
       #   called without a block, or an array of messages when called with a
@@ -280,18 +281,18 @@ module Gcloud
       #   pubsub = gcloud.pubsub
       #
       #   topic = pubsub.topic "my-topic"
-      #   msgs = topic.publish do |batch|
-      #     batch.publish "new-message-1", foo: :bar
-      #     batch.publish "new-message-2", foo: :baz
-      #     batch.publish "new-message-3", foo: :bif
+      #   msgs = topic.publish do |t|
+      #     t.publish "new-message-1", foo: :bar
+      #     t.publish "new-message-2", foo: :baz
+      #     t.publish "new-message-3", foo: :bif
       #   end
       #
       def publish data = nil, attributes = {}
         ensure_service!
-        batch = Batch.new data, attributes
-        yield batch if block_given?
-        return nil if batch.messages.count.zero?
-        publish_batch_messages batch
+        publisher = Publisher.new data, attributes
+        yield publisher if block_given?
+        return nil if publisher.messages.count.zero?
+        publish_batch_messages publisher
       end
 
       ##
