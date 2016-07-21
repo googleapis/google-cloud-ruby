@@ -62,12 +62,27 @@ describe Gcloud::Bigquery::CopyJob, :mock_bigquery do
     job.config["copy"]["createDisposition"].must_equal "CREATE_IF_NEEDED"
   end
 
-  def copy_job_gapi
-    Google::Apis::BigqueryV2::Job.from_json copy_job_hash.to_json
+  it "can re-run itself" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    rerun_job_gapi = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.from_json(job.configuration.to_json)
+    )
+    mock.expect :insert_job, copy_job_gapi(job.job_id + "-rerun"), [project, rerun_job_gapi]
+
+    new_job = job.rerun!
+    new_job.config["dryRun"].must_equal job.config["dryRun"]
+    new_job.job_id.wont_equal job.job_id
+    mock.verify
   end
 
-  def copy_job_hash
-    hash = random_job_hash
+  def copy_job_gapi id = "1234567890"
+    Google::Apis::BigqueryV2::Job.from_json copy_job_hash(id).to_json
+  end
+
+  def copy_job_hash id
+    hash = random_job_hash id
     hash["configuration"]["copy"] = {
       "sourceTable" => {
         "projectId" => "source_project_id",

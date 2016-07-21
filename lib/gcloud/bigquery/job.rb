@@ -209,7 +209,7 @@ module Gcloud
       # Created a new job with the current configuration.
       def rerun!
         ensure_service!
-        gapi = service.insert_job configuration
+        gapi = service.insert_job @gapi.configuration
         Job.from_gapi gapi, service
       end
 
