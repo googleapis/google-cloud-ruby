@@ -38,6 +38,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/devstorage.full_control`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Storage::Project]
   #
@@ -50,7 +51,8 @@ module Gcloud
   #   bucket = storage.bucket "my-bucket"
   #   file = bucket.file "path/to/my-file.ext"
   #
-  def self.storage project = nil, keyfile = nil, scope: nil, retries: nil
+  def self.storage project = nil, keyfile = nil, scope: nil, retries: nil,
+                   timeout: nil
     project ||= Gcloud::Storage::Project.default_project
     project = project.to_s # Always cast to a string
     fail ArgumentError, "project is missing" if project.empty?
@@ -62,7 +64,8 @@ module Gcloud
     end
 
     Gcloud::Storage::Project.new(
-      Gcloud::Storage::Service.new(project, credentials, retries: retries))
+      Gcloud::Storage::Service.new(
+        project, credentials, retries: retries, timeout: timeout))
   end
 
   ##

@@ -18,11 +18,12 @@ require "gcloud/datastore"
 describe Gcloud do
   it "calls out to Gcloud.datastore" do
     gcloud = Gcloud.new
-    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "datastore-dataset-object-empty"
     }
     Gcloud.stub :datastore, stubbed_datastore do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.datastore" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "datastore-dataset-object"
     }
     Gcloud.stub :datastore, stubbed_datastore do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.datastore" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "datastore-dataset-object-scoped"
     }
     Gcloud.stub :datastore, stubbed_datastore do
-      dataset = gcloud.datastore scope: "http://example.com/scope", retries: 5
+      dataset = gcloud.datastore scope: "http://example.com/scope", retries: 5, timeout: 60
       dataset.must_equal "datastore-dataset-object-scoped"
     end
   end

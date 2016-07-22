@@ -26,15 +26,16 @@ module Gcloud
     # @private Represents the gRPC Logging service, including all the API
     # methods.
     class Service
-      attr_accessor :project, :credentials, :host, :retries
+      attr_accessor :project, :credentials, :host, :retries, :timeout
 
       ##
       # Creates a new Service instance.
-      def initialize project, credentials, host: nil, retries: nil
+      def initialize project, credentials, host: nil, retries: nil, timeout: nil
         @project = project
         @credentials = credentials
         @host = host || "logging.googleapis.com"
         @retries = retries
+        @timeout = timeout
       end
 
       def creds
@@ -44,19 +45,22 @@ module Gcloud
 
       def logging
         return mocked_logging if mocked_logging
-        @logging ||= Google::Logging::V2::LoggingServiceV2::Stub.new host, creds
+        @logging ||= Google::Logging::V2::LoggingServiceV2::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_logging
 
       def sinks
         return mocked_sinks if mocked_sinks
-        @sinks ||= Google::Logging::V2::ConfigServiceV2::Stub.new host, creds
+        @sinks ||= Google::Logging::V2::ConfigServiceV2::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_sinks
 
       def metrics
         return mocked_metrics if mocked_metrics
-        @metrics ||= Google::Logging::V2::MetricsServiceV2::Stub.new host, creds
+        @metrics ||= Google::Logging::V2::MetricsServiceV2::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_metrics
 

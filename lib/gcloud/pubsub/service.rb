@@ -26,15 +26,16 @@ module Gcloud
     # @private Represents the gRPC Pub/Sub service, including all the API
     # methods.
     class Service
-      attr_accessor :project, :credentials, :host, :retries
+      attr_accessor :project, :credentials, :host, :retries, :timeout
 
       ##
       # Creates a new Service instance.
-      def initialize project, credentials, host: nil, retries: nil
+      def initialize project, credentials, host: nil, retries: nil, timeout: nil
         @project = project
         @credentials = credentials
         @host = host || "pubsub.googleapis.com"
         @retries = retries
+        @timeout = timeout
       end
 
       def creds
@@ -45,19 +46,22 @@ module Gcloud
 
       def subscriber
         return mocked_subscriber if mocked_subscriber
-        @subscriber ||= Google::Pubsub::V1::Subscriber::Stub.new host, creds
+        @subscriber ||= Google::Pubsub::V1::Subscriber::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_subscriber
 
       def publisher
         return mocked_publisher if mocked_publisher
-        @publisher ||= Google::Pubsub::V1::Publisher::Stub.new host, creds
+        @publisher ||= Google::Pubsub::V1::Publisher::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_publisher
 
       def iam
         return mocked_iam if mocked_iam
-        @iam ||= Google::Iam::V1::IAMPolicy::Stub.new host, creds
+        @iam ||= Google::Iam::V1::IAMPolicy::Stub.new(
+          host, creds, timeout: timeout)
       end
       attr_accessor :mocked_iam
 

@@ -38,6 +38,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/logging.admin`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Logging::Project]
   #
@@ -48,7 +49,8 @@ module Gcloud
   #   logging = gcloud.logging
   #   # ...
   #
-  def self.logging project = nil, keyfile = nil, scope: nil, retries: nil
+  def self.logging project = nil, keyfile = nil, scope: nil, retries: nil,
+                   timeout: nil
     project ||= Gcloud::Logging::Project.default_project
     project = project.to_s # Always cast to a string
     fail ArgumentError, "project is missing" if project.empty?
@@ -60,7 +62,8 @@ module Gcloud
     end
 
     Gcloud::Logging::Project.new(
-      Gcloud::Logging::Service.new(project, credentials, retries: retries))
+      Gcloud::Logging::Service.new(
+        project, credentials, retries: retries, timeout: timeout))
   end
 
   ##

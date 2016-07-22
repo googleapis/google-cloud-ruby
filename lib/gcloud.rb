@@ -44,6 +44,7 @@ module Gcloud
   #   path the file must be readable.
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud]
   #
@@ -55,11 +56,12 @@ module Gcloud
   #   pubsub  = gcloud.pubsub
   #   storage = gcloud.storage
   #
-  def self.new project = nil, keyfile = nil, retries: nil
+  def self.new project = nil, keyfile = nil, retries: nil, timeout: nil
     gcloud = Object.new
     gcloud.instance_variable_set "@project", project
     gcloud.instance_variable_set "@keyfile", keyfile
     gcloud.instance_variable_set "@retries", retries
+    gcloud.instance_variable_set "@timeout", timeout
     gcloud.extend Gcloud
     gcloud
   end
@@ -81,6 +83,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/datastore`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Datastore::Dataset]
   #
@@ -106,10 +109,11 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   datastore = gcloud.datastore scope: platform_scope
   #
-  def datastore scope: nil, retries: nil
+  def datastore scope: nil, retries: nil, timeout: nil
     require "gcloud/datastore"
     Gcloud.datastore @project, @keyfile, scope: scope,
-                                         retries: (retries || @retries)
+                                         retries: (retries || @retries),
+                                         timeout: (timeout || @timeout)
   end
 
   ##
@@ -132,6 +136,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/devstorage.full_control`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Storage::Project]
   #
@@ -150,10 +155,11 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
   #   readonly_storage = gcloud.storage scope: readonly_scope
   #
-  def storage scope: nil, retries: nil
+  def storage scope: nil, retries: nil, timeout: nil
     require "gcloud/storage"
     Gcloud.storage @project, @keyfile, scope: scope,
-                                       retries: (retries || @retries)
+                                       retries: (retries || @retries),
+                                       timeout: (timeout || @timeout)
   end
 
   ##
@@ -173,6 +179,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/pubsub`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Pubsub::Project]
   #
@@ -191,10 +198,11 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   pubsub = gcloud.pubsub scope: platform_scope
   #
-  def pubsub scope: nil, retries: nil
+  def pubsub scope: nil, retries: nil, timeout: nil
     require "gcloud/pubsub"
     Gcloud.pubsub @project, @keyfile, scope: scope,
-                                      retries: (retries || @retries)
+                                      retries: (retries || @retries),
+                                      timeout: (timeout || @timeout)
   end
 
   ##
@@ -214,6 +222,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/bigquery`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Bigquery::Project]
   #
@@ -235,10 +244,11 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   bigquery = gcloud.bigquery scope: platform_scope
   #
-  def bigquery scope: nil, retries: nil
+  def bigquery scope: nil, retries: nil, timeout: nil
     require "gcloud/bigquery"
     Gcloud.bigquery @project, @keyfile, scope: scope,
-                                        retries: (retries || @retries)
+                                        retries: (retries || @retries),
+                                        timeout: (timeout || @timeout)
   end
 
   ##
@@ -258,6 +268,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Dns::Project]
   #
@@ -278,10 +289,11 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/ndev.clouddns.readonly"
   #   dns = gcloud.dns scope: readonly_scope
   #
-  def dns scope: nil, retries: nil
+  def dns scope: nil, retries: nil, timeout: nil
     require "gcloud/dns"
     Gcloud.dns @project, @keyfile, scope: scope,
-                                   retries: (retries || @retries)
+                                   retries: (retries || @retries),
+                                   timeout: (timeout || @timeout)
   end
 
   # rubocop:disable Metrics/LineLength
@@ -305,6 +317,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/cloud-platform`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::ResourceManager::Manager]
   #
@@ -324,10 +337,11 @@ module Gcloud
   #   readonly_scope = "https://www.googleapis.com/auth/cloudresourcemanager.readonly"
   #   resource_manager = gcloud.resource_manager scope: readonly_scope
   #
-  def resource_manager scope: nil, retries: nil
+  def resource_manager scope: nil, retries: nil, timeout: nil
     require "gcloud/resource_manager"
     Gcloud.resource_manager @keyfile, scope: scope,
-                                      retries: (retries || @retries)
+                                      retries: (retries || @retries),
+                                      timeout: (timeout || @timeout)
   end
 
   # rubocop:enable Metrics/LineLength
@@ -349,6 +363,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/logging.admin`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Logging::Project]
   #
@@ -366,10 +381,11 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   logging = gcloud.logging scope: platform_scope
   #
-  def logging scope: nil, retries: nil
+  def logging scope: nil, retries: nil, timeout: nil
     require "gcloud/logging"
     Gcloud.logging @project, @keyfile, scope: scope,
-                                       retries: (retries || @retries)
+                                       retries: (retries || @retries),
+                                       timeout: (timeout || @timeout)
   end
 
   ##
@@ -387,6 +403,7 @@ module Gcloud
   # @param [String] key a public API access key (not an OAuth 2.0 token)
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Translate::Api]
   #
@@ -410,9 +427,10 @@ module Gcloud
   #   translation = translate.translate "Hello world!", to: "la"
   #   translation.text #=> "Salve mundi!"
   #
-  def translate key = nil, retries: nil
+  def translate key = nil, retries: nil, timeout: nil
     require "gcloud/translate"
-    Gcloud.translate key, retries: (retries || @retries)
+    Gcloud.translate key, retries: (retries || @retries),
+                          timeout: (timeout || @timeout)
   end
 
   ##
@@ -429,6 +447,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/cloud-platform`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
+  # @param [Integer] timeout Default timeout to use in requests. Optional.
   #
   # @return [Gcloud::Vision::Project]
   #
@@ -450,9 +469,10 @@ module Gcloud
   #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
   #   vision = gcloud.vision scope: platform_scope
   #
-  def vision scope: nil, retries: nil
+  def vision scope: nil, retries: nil, timeout: nil
     require "gcloud/vision"
     Gcloud.vision @project, @keyfile, scope: scope,
-                                      retries: (retries || @retries)
+                                      retries: (retries || @retries),
+                                      timeout: (timeout || @timeout)
   end
 end

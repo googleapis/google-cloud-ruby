@@ -18,11 +18,12 @@ require "gcloud/vision"
 describe Gcloud do
   it "calls out to Gcloud.vision" do
     gcloud = Gcloud.new
-    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal nil
       keyfile.must_equal nil
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "vision-project-object-empty"
     }
     Gcloud.stub :vision, stubbed_vision do
@@ -33,11 +34,12 @@ describe Gcloud do
 
   it "passes project and keyfile to Gcloud.vision" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_be :nil?
       retries.must_be :nil?
+      timeout.must_be :nil?
       "vision-project-object"
     }
     Gcloud.stub :vision, stubbed_vision do
@@ -48,15 +50,16 @@ describe Gcloud do
 
   it "passes project and keyfile and options to Gcloud.vision" do
     gcloud = Gcloud.new "project-id", "keyfile-path"
-    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil) {
+    stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
       project.must_equal "project-id"
       keyfile.must_equal "keyfile-path"
       scope.must_equal "http://example.com/scope"
       retries.must_equal 5
+      timeout.must_equal 60
       "vision-project-object-scoped"
     }
     Gcloud.stub :vision, stubbed_vision do
-      project = gcloud.vision scope: "http://example.com/scope", retries: 5
+      project = gcloud.vision scope: "http://example.com/scope", retries: 5, timeout: 60
       project.must_equal "vision-project-object-scoped"
     end
   end
