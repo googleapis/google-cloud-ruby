@@ -168,7 +168,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    empty_response      = Google::Apis::CloudresourcemanagerV1::Empty.new
     deleted_project = random_project_gapi seed
     deleted_project.lifecycle_state = "DELETE_REQUESTED"
     # The delete request
@@ -191,7 +191,7 @@ describe Gcloud::ResourceManager::Project, :mock_res_man do
     project.gapi.lifecycle_state = "DELETE_REQUESTED"
 
     mock = Minitest::Mock.new
-    empty_response      = Google::Apis::CloudresourcemanagerV1beta1::Empty.new
+    empty_response      = Google::Apis::CloudresourcemanagerV1::Empty.new
     unspecified_project = random_project_gapi seed
     unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
     # The delete request

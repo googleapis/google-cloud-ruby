@@ -15,7 +15,7 @@
 
 require "gcloud/version"
 require "gcloud/errors"
-require "google/apis/cloudresourcemanager_v1beta1"
+require "google/apis/cloudresourcemanager_v1"
 
 module Gcloud
   module ResourceManager
@@ -26,7 +26,7 @@ module Gcloud
     class Service
       ##
       # Alias to the Google Client API module
-      API = Google::Apis::CloudresourcemanagerV1beta1
+      API = Google::Apis::CloudresourcemanagerV1
 
       attr_accessor :credentials
 

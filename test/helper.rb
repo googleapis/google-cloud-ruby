@@ -695,7 +695,7 @@ class MockResourceManager < Minitest::Spec
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?
-    Google::Apis::CloudresourcemanagerV1beta1::Project.new(
+    Google::Apis::CloudresourcemanagerV1::Project.new(
       project_number: "123456789#{seed}",
       project_id:     "example-project-#{seed}",
       name:           name,
