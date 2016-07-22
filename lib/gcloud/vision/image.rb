@@ -71,16 +71,12 @@ module Gcloud
       ##
       # @private Whether the Image has content.
       #
-      # @see {#url?}
-      #
       def io?
         !@io.nil?
       end
 
       ##
       # @private Whether the Image is a URL.
-      #
-      # @see {#io?}
       #
       def url?
         !@url.nil?

@@ -276,7 +276,7 @@ module Gcloud
 
       ##
       # Updates the bucket with changes made in the given block in a single
-      # PATCH request. The following attributes may be set: {#cors=},
+      # PATCH request. The following attributes may be set: {#cors},
       # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
       # {#website_main=}, and {#website_404=}. In addition, the #cors
       # configuration accessible in the block is completely mutable and will be

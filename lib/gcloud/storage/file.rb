@@ -305,7 +305,7 @@ module Gcloud
       #
       # If a [customer-supplied encryption
       # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-      # was used with {#create_file}, the `encryption_key` and
+      # was used with {Bucket#create_file}, the `encryption_key` and
       # `encryption_key_sha256` options must be provided.
       #
       # @param [String] path The path on the local file system to write the data
@@ -322,11 +322,11 @@ module Gcloud
       #
       # @param [String] encryption_key Optional. The customer-supplied, AES-256
       #   encryption key used to encrypt the file, if one was provided to
-      #   {#create_file}. Must be provided if `encryption_key_sha256` is
+      #   {Bucket#create_file}. Must be provided if `encryption_key_sha256` is
       #   provided.
       # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
       #   customer-supplied, AES-256 encryption key used to encrypt the file, if
-      #   one was provided to {#create_file}. Must be provided if
+      #   one was provided to {Bucket#create_file}. Must be provided if
       #   `encryption_key` is provided.
       #
       # @return [File] Returns a `::File` object on the local file system
@@ -389,7 +389,7 @@ module Gcloud
       #
       # If a [customer-supplied encryption
       # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-      # was used with {#create_file}, the `encryption_key` and
+      # was used with {Bucket#create_file}, the `encryption_key` and
       # `encryption_key_sha256` options must be provided.
       #
       # @param [String] dest_bucket_or_path Either the bucket to copy the file
@@ -418,11 +418,11 @@ module Gcloud
       #   copy. The default is the latest version.
       # @param [String] encryption_key Optional. The customer-supplied, AES-256
       #   encryption key used to encrypt the file, if one was provided to
-      #   {#create_file}. Must be provided if `encryption_key_sha256` is
+      #   {Bucket#create_file}. Must be provided if `encryption_key_sha256` is
       #   provided.
       # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
       #   customer-supplied, AES-256 encryption key used to encrypt the file, if
-      #   one was provided to {#create_file}. Must be provided if
+      #   one was provided to {Bucket#create_file}. Must be provided if
       #   `encryption_key` is provided.
       #
       # @return [Gcloud::Storage::File]

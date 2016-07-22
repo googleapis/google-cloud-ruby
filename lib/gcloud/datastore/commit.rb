@@ -29,8 +29,8 @@ module Gcloud
     #     c.delete entity1, entity2
     #   end
     #
-    # @see {Gcloud::Datastore::Dataset#commit}
-    # @see {Gcloud::Datastore::Transaction#commit}
+    # See {Gcloud::Datastore::Dataset#commit} and
+    # {Gcloud::Datastore::Transaction#commit}.
     class Commit
       ##
       # @private Create a new Commit object.
