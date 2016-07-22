@@ -327,7 +327,7 @@ module Gcloud
       # The bucket must be empty before it can be deleted.
       #
       # The API call to delete the bucket may be retried under certain
-      # conditions. See {Gcloud::Backoff} to control this behavior.
+      # conditions. See {Gcloud#storage} to control this behavior.
       #
       # @return [Boolean] Returns `true` if the bucket was deleted.
       #

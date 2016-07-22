@@ -222,7 +222,7 @@ module Gcloud
   #   * `https://www.googleapis.com/auth/bigquery`
   # @param [Integer] retries Number of times to retry requests on server error.
   #   The default value is `3`. Optional.
-  # @param [Integer] timeout Default timeout to use in requests. Optional.
+  # @param [Integer] timeout Default request timeout in seconds. Optional.
   #
   # @return [Gcloud::Bigquery::Project]
   #

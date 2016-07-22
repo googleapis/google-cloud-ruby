@@ -167,7 +167,7 @@ module Gcloud
       # bucket. See {Bucket::Cors} for details.
       #
       # The API call to create the bucket may be retried under certain
-      # conditions. See {Gcloud::Backoff} to control this behavior.
+      # conditions. See {Gcloud#storage} to control this behavior.
       #
       # You can pass [website
       # settings](https://cloud.google.com/storage/docs/website-configuration)
