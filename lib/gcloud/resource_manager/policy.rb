@@ -72,7 +72,7 @@ module Gcloud
     class Policy
       ##
       # Alias to the Google Client API module
-      API = Google::Apis::CloudresourcemanagerV1beta1
+      API = Google::Apis::CloudresourcemanagerV1
 
       attr_reader :etag, :roles
 
@@ -183,7 +183,7 @@ module Gcloud
 
       ##
       # @private Convert the Policy to a
-      # Google::Apis::CloudresourcemanagerV1beta1::Policy.
+      # Google::Apis::CloudresourcemanagerV1::Policy.
       def to_gapi
         API::Policy.new(
           etag: etag,
@@ -199,7 +199,7 @@ module Gcloud
 
       ##
       # @private New Policy from a
-      # Google::Apis::CloudresourcemanagerV1beta1::Policy object.
+      # Google::Apis::CloudresourcemanagerV1::Policy object.
       def self.from_gapi gapi
         roles = gapi.bindings.each_with_object({}) do |binding, memo|
           memo[binding.role] = binding.members.to_a
