@@ -612,10 +612,6 @@ module Gcloud
       #   file that BigQuery will skip when loading the data. The default value
       #   is `0`. This property is useful if you have header rows in the file
       #   that should be skipped.
-      # @param [Integer] chunk_size The number of bytes per chunk in a resumable
-      #   upload. Must be divisible by 256KB. If it is not divisible by 265KB
-      #   then it will be lowered to the nearest acceptable value. If no value
-      #   is provided it will use {Gcloud::Upload.default_chunk_size}. Optional.
       #
       # @return [Gcloud::Bigquery::LoadJob]
       #
@@ -686,14 +682,13 @@ module Gcloud
       def load file, format: nil, create: nil, write: nil,
                projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                encoding: nil, delimiter: nil, ignore_unknown: nil,
-               max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil,
-               chunk_size: nil
+               max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil
         ensure_service!
         options = { format: format, create: create, write: write,
                     projection_fields: projection_fields,
                     jagged_rows: jagged_rows, quoted_newlines: quoted_newlines,
                     encoding: encoding, delimiter: delimiter,
-                    ignore_unknown: ignore_unknown, chunk_size: chunk_size,
+                    ignore_unknown: ignore_unknown,
                     max_bad_records: max_bad_records, quote: quote,
                     skip_leading: skip_leading, dryrun: dryrun }
         return load_storage(file, options) if storage_url? file
