@@ -134,7 +134,7 @@ end
 ### Logging
 
 - [gcloud-ruby Logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Logging.html)
-- [Google Cloud Logging Documentation](https://cloud.google.com/logging/docs/)
+- [Stackdriver Logging Documentation](https://cloud.google.com/logging/docs/)
 
 #### Preview
 

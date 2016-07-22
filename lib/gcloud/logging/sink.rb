@@ -20,8 +20,8 @@ module Gcloud
     ##
     # # Sink
     #
-    # Used to export log entries outside Cloud Logging. When you create a sink,
-    # new log entries are exported. Cloud Logging does not send
+    # Used to export log entries outside Stackdriver Logging. When you create a
+    # sink, new log entries are exported. Stackdriver Logging does not send
     # previously-ingested log entries to the sink's destination.
     #
     # Before creating the sink, ensure that you have granted
@@ -48,7 +48,7 @@ module Gcloud
     #
     #   bucket = storage.create_bucket "my-logs-bucket"
     #
-    #   # Grant owner permission to Cloud Logging service
+    #   # Grant owner permission to Stackdriver Logging service
     #   email = "cloud-logs@google.com"
     #   bucket.acl.add_owner "group-#{email}"
     #
@@ -99,7 +99,7 @@ module Gcloud
       # that defines the log entries to be exported. The filter must be
       # consistent with the log entry format designed by the `version`
       # parameter, regardless of the format of the log entry that was originally
-      # written to Cloud Logging.
+      # written to Stackdriver Logging.
       def filter
         @grpc.filter
       end
@@ -110,7 +110,7 @@ module Gcloud
       # that defines the log entries to be exported. The filter must be
       # consistent with the log entry format designed by the `version`
       # parameter, regardless of the format of the log entry that was originally
-      # written to Cloud Logging.
+      # written to Stackdriver Logging.
       def filter= filter
         @grpc.filter = filter
       end
@@ -118,7 +118,7 @@ module Gcloud
       ##
       # The log entry version used when exporting log entries from this sink.
       # This version does not have to correspond to the version of the log entry
-      # when it was written to Cloud Logging.
+      # when it was written to Stackdriver Logging.
       def version
         @grpc.output_version_format
       end
@@ -126,7 +126,7 @@ module Gcloud
       ##
       # Updates the log entry version used when exporting log entries from this
       # sink. This version does not have to correspond to the version of the log
-      # entry when it was written to Cloud Logging. Accepted values are
+      # entry when it was written to Stackdriver Logging. Accepted values are
       # `:VERSION_FORMAT_UNSPECIFIED`, `:V2`, and `:V1`.
       def version= version
         @grpc.output_version_format = self.class.resolve_version(version)

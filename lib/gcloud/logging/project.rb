@@ -30,7 +30,7 @@ module Gcloud
     #
     # Projects are top-level containers in Google Cloud Platform. They store
     # information about billing and authorized users, and they control access to
-    # Google Cloud Logging resources. Each project has a friendly name and a
+    # Stackdriver Logging resources. Each project has a friendly name and a
     # unique ID. Projects can be created only in the [Google Developers
     # Console](https://console.developers.google.com). See {Gcloud#logging}.
     #
@@ -152,24 +152,24 @@ module Gcloud
 
       ##
       # Creates an new Entry instance that may be populated and written to the
-      # Cloud Logging service. The {Entry#resource} attribute is pre-populated
-      # with a new {Gcloud::Logging::Resource} instance. Equivalent to calling
-      # `Gcloud::Logging::Entry.new`.
+      # Stackdriver Logging service. The {Entry#resource} attribute is
+      # pre-populated with a new {Gcloud::Logging::Resource} instance.
+      # Equivalent to calling `Gcloud::Logging::Entry.new`.
       #
       # @param [String] log_name The resource name of the log to which this log
       #   entry belongs. See also {Entry#log_name=}.
       # @param [Resource] resource The monitored resource associated with this
       #   log entry. See also {Entry#resource}.
       # @param [Time] timestamp The time the event described by the log entry
-      #   occurred. If omitted, Cloud Logging will use the time the log entry is
-      #   written. See also {Entry#timestamp}.
+      #   occurred. If omitted, Stackdriver Logging will use the time the log
+      #   entry is written. See also {Entry#timestamp}.
       # @param [Symbol] severity The severity level of the log entry. The
       #   default value is `DEFAULT`. See also {Entry#severity}.
       # @param [String] insert_id A unique ID for the log entry. If you provide
       #   this field, the logging service considers other log entries in the
       #   same log with the same ID as duplicates which can be removed. If
-      #   omitted, Cloud Logging will generate a unique ID for this log entry.
-      #   See also {Entry#insert_id}.
+      #   omitted, Stackdriver Logging will generate a unique ID for this log
+      #   entry. See also {Entry#insert_id}.
       # @param [Hash{Symbol,String => String}] labels A hash of user-defined
       #   `key:value` pairs that provide additional information about the log
       #   entry. See also {Entry#labels=}.
@@ -204,7 +204,7 @@ module Gcloud
       alias_method :new_entry, :entry
 
       ##
-      # Writes log entries to the Cloud Logging service.
+      # Writes log entries to the Stackdriver Logging service.
       #
       # If you write a collection of log entries, you can provide the log name,
       # resource, and/or labels hash to be used for all of the entries, and omit
@@ -325,7 +325,7 @@ module Gcloud
 
       ##
       # Retrieves the list of monitored resource descriptors that are used by
-      # Google Cloud Logging.
+      # Stackdriver Logging.
       #
       # @see https://cloud.google.com/logging/docs/api/introduction_v2#monitored_resources
       #   Monitored Resources
@@ -429,8 +429,8 @@ module Gcloud
 
       ##
       # Creates a new project sink. When you create a sink, only new log entries
-      # that match the sink's filter are exported. Cloud Logging does not send
-      # previously-ingested log entries to the sink's destination.
+      # that match the sink's filter are exported. Stackdriver Logging does not
+      # send previously-ingested log entries to the sink's destination.
       #
       # Before creating the sink, ensure that you have granted
       # `cloud-logs@google.com` permission to write logs to the destination. See
@@ -458,12 +458,12 @@ module Gcloud
       #  that defines the log entries to be exported. The filter must be
       #  consistent with the log entry format designed by the `version`
       #  parameter, regardless of the format of the log entry that was
-      #  originally written to Cloud Logging.
+      #  originally written to Stackdriver Logging.
       # @param [Symbol] version The log entry version used when exporting log
       #   entries from this sink. This version does not have to correspond to
-      #   the version of the log entry when it was written to Cloud Logging.
-      #   Accepted values are `:unspecified`, `:v2`, and `:v1`. Version 2 is
-      #   currently the preferred format. An unspecified version format
+      #   the version of the log entry when it was written to Stackdriver
+      #   Logging. Accepted values are `:unspecified`, `:v2`, and `:v1`. Version
+      #   2 is currently the preferred format. An unspecified version format
       #   currently defaults to V2 in the service. The default value is
       #   `:unspecified`.
       #
@@ -478,7 +478,7 @@ module Gcloud
       #
       #   bucket = storage.create_bucket "my-logs-bucket"
       #
-      #   # Grant owner permission to Cloud Logging service
+      #   # Grant owner permission to Stackdriver Logging service
       #   email = "cloud-logs@google.com"
       #   bucket.acl.add_owner "group-#{email}"
       #
