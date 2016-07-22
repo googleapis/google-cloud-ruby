@@ -7,7 +7,7 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 [![Gem Version](https://badge.fury.io/rb/gcloud.svg)](http://badge.fury.io/rb/gcloud)
 
 * [Homepage](http://googlecloudplatform.github.io/gcloud-ruby/)
-* [API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/)
+* [API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs)
 
 ## Ruby API Client library for Google Cloud
 
@@ -39,7 +39,7 @@ Instructions and configuration options are covered in the [Authentication guide]
 
 ### BigQuery
 
-- [gcloud-ruby BigQuery API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Bigquery.html)
+- [gcloud-ruby BigQuery API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/bigquery)
 - [Google Cloud BigQuery Documentation](https://cloud.google.com/bigquery/docs)
 
 #### Preview
@@ -71,7 +71,7 @@ end
 
 ### Datastore
 
-- [gcloud-ruby Datastore API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Datastore.html)
+- [gcloud-ruby Datastore API Documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/datastore)
 - [Google Cloud Datastore Documentation](https://cloud.google.com/datastore/docs)
 
 *Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.*
@@ -104,7 +104,7 @@ tasks = datastore.run query
 
 ### DNS
 
-- [gcloud-ruby DNS API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Dns.html)
+- [gcloud-ruby DNS API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/dns)
 - [Google Cloud DNS Documentation](https://cloud.google.com/dns/docs)
 
 #### Preview
@@ -133,7 +133,7 @@ end
 
 ### Logging
 
-- [gcloud-ruby Logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Logging.html)
+- [gcloud-ruby Logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/logging)
 - [Stackdriver Logging Documentation](https://cloud.google.com/logging/docs/)
 
 #### Preview
@@ -165,7 +165,7 @@ logging.write_entries entry
 
 ### Pub/Sub
 
-- [gcloud-ruby Pub/Sub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Pubsub.html)
+- [gcloud-ruby Pub/Sub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/pubsub)
 - [Google Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs)
 
 #### Preview
@@ -192,7 +192,7 @@ msgs = sub.pull
 
 ### Resource Manager
 
-- [gcloud-ruby Resource Manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/ResourceManager.html)
+- [gcloud-ruby Resource Manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/resourcemanager)
 - [Google Cloud Resource Manager Documentation](https://cloud.google.com/resource-manager/)
 
 #### Preview
@@ -220,7 +220,7 @@ projects = resource_manager.projects filter: "labels.env:production"
 
 ### Storage
 
-- [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Storage.html)
+- [gcloud-ruby Storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/storage)
 - [Google Cloud Storage Documentation](https://cloud.google.com/storage/docs)
 
 #### Preview
@@ -246,7 +246,7 @@ file.copy backup, file.name
 
 ### Translate
 
-- [gcloud-ruby Translate API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Translate.html)
+- [gcloud-ruby Translate API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/translate)
 - [Google Translate Documentation](https://cloud.google.com/translate/docs)
 
 #### Preview
@@ -269,7 +269,7 @@ translation.text #=> "Salve mundi!"
 
 ### Vision
 
-- [gcloud-ruby Vision API documentation](http://googlecloudplatform.github.io/gcloud-ruby/docs/master/Gcloud/Vision.html)
+- [gcloud-ruby Vision API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud/vision)
 - [Google Cloud Vision Documentation](https://cloud.google.com/vision/docs)
 
 #### Preview
