@@ -748,12 +748,6 @@ module Gcloud
       end
 
       ##
-      # @private Determines if a resumable upload should be used.
-      def resumable_upload? file
-        ::File.size?(file).to_i > Upload.resumable_threshold
-      end
-
-      ##
       # Yielded to a block to accumulate changes for a patch request.
       class Updater < Bucket
         attr_reader :updates
