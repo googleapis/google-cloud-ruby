@@ -87,10 +87,12 @@ module Gcloud
           @original_rules_hashes != @rules.map(&:to_h)
         end
 
+        # @private
         def empty?
           @rules.empty?
         end
 
+        # @private
         def freeze
           @rules = @rules.map(&:dup).map(&:freeze)
           @rules.freeze
@@ -98,7 +100,7 @@ module Gcloud
         end
 
         ##
-        # View the access rules as an array of hashes.
+        # @private View the access rules as an array of hashes.
         def to_a
           @rules.map(&:to_h)
         end
