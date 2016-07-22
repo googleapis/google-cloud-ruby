@@ -101,15 +101,18 @@ module Gcloud
           push Rule.new(origin, methods, headers: headers, max_age: max_age)
         end
 
+        # @private
         def to_gapi
           map(&:to_gapi)
         end
 
+        # @private
         def self.from_gapi gapi_list
           rules = Array(gapi_list).map { |gapi| Rule.from_gapi gapi }
           new rules
         end
 
+        # @private
         def freeze
           each(&:freeze)
           super
