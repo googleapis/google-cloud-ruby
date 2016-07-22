@@ -315,8 +315,8 @@ module Gcloud
       end
 
       ##
-      # Returns the table's schema as hash containing the keys and values
-      # returned by the Google Cloud BigQuery [Rest API
+      # Returns the table's schema containing the keys and values returned by
+      # the Google Cloud BigQuery [Rest API
       # ](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource).
       # This method can also be used to set, replace, or add to the schema by
       # passing a block. See {Schema} for available methods.
@@ -328,6 +328,8 @@ module Gcloud
       #   default value is `false`.
       # @yield [schema] a block for setting the schema
       # @yieldparam [Table::Schema] schema the object accepting the schema
+      #
+      # @return [Gcloud::Bigquery::Schema]
       #
       # @example
       #   require "gcloud"
