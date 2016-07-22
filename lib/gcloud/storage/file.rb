@@ -821,7 +821,7 @@ module Gcloud
         end
 
         ##
-        # Make sure any metadata changes are saved
+        # @private Make sure any metadata changes are saved
         def check_for_changed_metadata!
           return if @metadata == @gapi.metadata
           @gapi.metadata = @metadata

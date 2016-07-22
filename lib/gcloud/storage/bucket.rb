@@ -773,7 +773,7 @@ module Gcloud
         end
 
         ##
-        # Make sure any cors changes are saved
+        # @private Make sure any cors changes are saved
         def check_for_mutable_cors!
           return if @cors_builder.nil?
           return unless @cors_builder.changed?
