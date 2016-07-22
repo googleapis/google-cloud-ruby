@@ -39,7 +39,9 @@ module Gcloud
       end
 
       def build!
-        modules = @registry.all(:module)
+        modules = @registry.all(:module).select do |c|
+          c.visibility == :public && !c.has_tag?(:private)
+        end
         modules.each do |object|
           @docs += Doc.new(object).subtree
         end
