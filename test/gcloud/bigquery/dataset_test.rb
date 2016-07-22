@@ -66,10 +66,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     now = Time.now
 
     dataset.gapi.creation_time = time_millis
-    dataset.created_at.must_be_close_to now
+    dataset.created_at.must_be_close_to now, 0.1
 
     dataset.gapi.last_modified_time = time_millis
-    dataset.modified_at.must_be_close_to now
+    dataset.modified_at.must_be_close_to now, 0.1
   end
 
   it "can delete itself" do
