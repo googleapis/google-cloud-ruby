@@ -111,9 +111,9 @@ Guide</a>.</p>
               
                 <span class='object_link'><a href="#vision-class_method" title="Gcloud.vision (method)">Gcloud.vision</a></span>
               
-                <span class='object_link'><a href="#logging-class_method" title="Gcloud.logging (method)">Gcloud.logging</a></span>
-              
                 <span class='object_link'><a href="#storage-class_method" title="Gcloud.storage (method)">Gcloud.storage</a></span>
+              
+                <span class='object_link'><a href="#logging-class_method" title="Gcloud.logging (method)">Gcloud.logging</a></span>
               
                 <span class='object_link'><a href="#bigquery-class_method" title="Gcloud.bigquery (method)">Gcloud.bigquery</a></span>
               
@@ -701,146 +701,6 @@ The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
             
               
                 <div class="method">
-                  <a name="logging-class_method"></a>
-                  <h4>
-                    <code>logging(project = nil, keyfile = nil, scope: nil, retries: nil, timeout: nil)</code>
-                    <span>
-                      <a href="#logging-class_method">&para;</a>
-                      <a href="#top">&uarr;</a>
-                    </span>
-                  </h4>
-
-                  <div class="method-description">
-
-                    <p>Creates a new object for connecting to the Logging service.
-Each call creates a new connection.</p>
-
-<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
-
-
-                    
-
-                    
-                      <h3 id="method-i-logging-label-Parameters">
-                        Parameters
-                        <span><a href="#method-i-logging-label-Parameters">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <dl class="rdoc-list note-list">
-                        
-                          <dt>
-                            <code>project</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Project identifier for the Logging service you are
-connecting to.</p>
-</div>
-                              
-                              (<tt>String</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>keyfile</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
-path the file must be readable.</p>
-</div>
-                              
-                              (<tt>String</tt>, <tt>Hash</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>scope</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
-set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
-OAuth 2.0 to Access Google
-APIs</a>.</p>
-
-<p>The default scope is:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/logging.admin</code></li>
-</ul>
-</div>
-                              
-                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>retries</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Number of times to retry requests on server error.
-The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
-</div>
-                              
-                              (<tt>Integer</tt>)
-                            </p>
-                          </dd>
-                        
-                          <dt>
-                            <code>timeout</code>
-                          </dt>
-                          <dd>
-                            <p>
-                              
-                                <div class='inline'><p>Default timeout to use in requests. Optional.</p>
-</div>
-                              
-                              (<tt>Integer</tt>)
-                            </p>
-                          </dd>
-                        
-                      </dl>
-                    
-
-                    
-                      <h3 id="method-i-logging-label-Returns">
-                        Returns
-                        <span><a href="#method-i-logging-label-Returns">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      <p>
-                        (<tt><span class='object_link'><a href="Gcloud/Logging/Project.html" title="Gcloud::Logging::Project (class)">Gcloud::Logging::Project</a></span></tt>)
-                        
-                      </p>
-                    
-
-                    
-                      <h3 id="method-i-logging-label-Examples">
-                        Example
-                        <span><a href="#method-i-logging-label-Examples">¶</a> <a href="#top">↑</a></span>
-                      </h3>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/logging</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
-<span class='comment'># ...</span></code></pre>
-                      
-                    
-
-                  </div>
-                  
-                </div>
-              
-            
-              
-                <div class="method">
                   <a name="storage-class_method"></a>
                   <h4>
                     <code>storage(project = nil, keyfile = nil, scope: nil, retries: nil, timeout: nil)</code>
@@ -973,6 +833,146 @@ The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
 
 <span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
+                      
+                    
+
+                  </div>
+                  
+                </div>
+              
+            
+              
+                <div class="method">
+                  <a name="logging-class_method"></a>
+                  <h4>
+                    <code>logging(project = nil, keyfile = nil, scope: nil, retries: nil, timeout: nil)</code>
+                    <span>
+                      <a href="#logging-class_method">&para;</a>
+                      <a href="#top">&uarr;</a>
+                    </span>
+                  </h4>
+
+                  <div class="method-description">
+
+                    <p>Creates a new object for connecting to the Logging service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Parameters">
+                        Parameters
+                        <span><a href="#method-i-logging-label-Parameters">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <dl class="rdoc-list note-list">
+                        
+                          <dt>
+                            <code>project</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Project identifier for the Logging service you are
+connecting to.</p>
+</div>
+                              
+                              (<tt>String</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>keyfile</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Keyfile downloaded from Google Cloud. If file
+path the file must be readable.</p>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Hash</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>scope</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See <a href="https://developers.google.com/identity/protocols/OAuth2">Using
+OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://www.googleapis.com/auth/logging.admin</code></li>
+</ul>
+</div>
+                              
+                              (<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>retries</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Number of times to retry requests on server error.
+The default value is <code class="highlighter-rouge">3</code>. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                          <dt>
+                            <code>timeout</code>
+                          </dt>
+                          <dd>
+                            <p>
+                              
+                                <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+                              
+                              (<tt>Integer</tt>)
+                            </p>
+                          </dd>
+                        
+                      </dl>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Returns">
+                        Returns
+                        <span><a href="#method-i-logging-label-Returns">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      <p>
+                        (<tt><span class='object_link'><a href="Gcloud/Logging/Project.html" title="Gcloud::Logging::Project (class)">Gcloud::Logging::Project</a></span></tt>)
+                        
+                      </p>
+                    
+
+                    
+                      <h3 id="method-i-logging-label-Examples">
+                        Example
+                        <span><a href="#method-i-logging-label-Examples">¶</a> <a href="#top">↑</a></span>
+                      </h3>
+                      
+                        
+                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span>
+<span class='comment'># ...</span></code></pre>
                       
                     
 

@@ -329,33 +329,6 @@ in order to demonstrate how to handle such situations. Because CSV is the
 default format for load operations, the option is not actually necessary.
 For JSON saved with a <code class="highlighter-rouge">.txt</code> extension, however, it would be.</p>
 
-<h3 id="a-note-about-large-uploads">A note about large uploads</h3>
-
-<p>You may encounter a Broken pipe (<code class="highlighter-rouge">Errno::EPIPE</code>) error when attempting to
-upload large files. To avoid this problem, add the
-<a href="https://rubygems.org/gems/httpclient">httpclient</a> gem to your project, and
-the line (or lines) of configuration shown below. These lines must execute
-after <code class="highlighter-rouge">require "gcloud"</code> but before you make your first connection.
-The first statement configures <a href="https://rubygems.org/gems/faraday">Faraday</a>
-to use httpclient. The second statement, which should only be added if you
-are using a version of Faraday at or above 0.9.2, is a workaround for <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367">this
-gzip issue</a>.</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
-
-<span class="c1"># Use httpclient to avoid broken pipe errors with large uploads</span>
-<span class="no">Faraday</span><span class="p">.</span><span class="nf">default_adapter</span> <span class="o">=</span> <span class="ss">:httpclient</span>
-
-<span class="c1"># Only add the following statement if using Faraday &gt;= 0.9.2</span>
-<span class="c1"># Override gzip middleware with no-op for httpclient</span>
-<span class="no">Faraday</span><span class="o">::</span><span class="no">Response</span><span class="p">.</span><span class="nf">register_middleware</span> <span class="ss">:gzip</span> <span class="o">=&gt;</span>
-                                        <span class="no">Faraday</span><span class="o">::</span><span class="no">Response</span><span class="o">::</span><span class="no">Middleware</span>
-
-<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">bigquery</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">bigquery</span>
-</code></pre>
-</div>
-
 <h2 id="exporting-query-results-to-google-cloud-storage">Exporting query results to Google Cloud Storage</h2>
 
 <p>The example below shows how to pass the <code class="highlighter-rouge">table</code> option with a query in order

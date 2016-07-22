@@ -1546,19 +1546,6 @@ resumable uploads. This value is the number of bytes per chunk and must
 be divisible by 256KB. If it is not divisible by 256KB then it will be
 lowered to the nearest acceptable value.</p>
 
-<h3 id="a-note-about-large-direct-uploads">A note about large direct uploads</h3>
-
-<p>You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
-upload large files. To avoid this problem, add the
-<a href="https://rubygems.org/gems/httpclient">httpclient</a> gem to your project,
-and the line (or lines) of configuration shown below. These lines must
-execute after <code class="highlighter-rouge">require "gcloud"</code> but before you make your first
-connection. The first statement configures
-<a href="https://rubygems.org/gems/faraday">Faraday</a> to use httpclient. The
-second statement, which should only be added if you are using a version
-of Faraday at or above 0.9.2, is a workaround for <a href="https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367">this gzip
-issue</a>.</p>
-
 
                     
 
@@ -1871,20 +1858,6 @@ that should be skipped.</p>
 
 <span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_data.csv</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_load_job'>load_job</span> <span class='op'>=</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span> <span class='id identifier rubyid_file'>file</span></code></pre>
-                      
-                        
-                        <pre class="code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='comment'># Use httpclient to avoid broken pipe errors with large uploads
-</span><span class='const'>Faraday</span><span class='period'>.</span><span class='id identifier rubyid_default_adapter'>default_adapter</span> <span class='op'>=</span> <span class='symbol'>:httpclient</span>
-
-<span class='comment'># Only add the following statement if using Faraday &gt;= 0.9.2
-</span><span class='comment'># Override gzip middleware with no-op for httpclient
-</span><span class='const'>Faraday</span><span class='op'>::</span><span class='const'>Response</span><span class='period'>.</span><span class='id identifier rubyid_register_middleware'>register_middleware</span> <span class='symbol'>:gzip</span> <span class='op'>=&gt;</span>
-                                        <span class='const'>Faraday</span><span class='op'>::</span><span class='const'>Response</span><span class='op'>::</span><span class='const'>Middleware</span>
-
-<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Gcloud</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span></code></pre>
                       
                     
 
