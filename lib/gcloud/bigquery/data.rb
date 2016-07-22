@@ -14,6 +14,7 @@
 
 
 require "delegate"
+require "gcloud/bigquery/service"
 
 module Gcloud
   module Bigquery
@@ -58,7 +59,9 @@ module Gcloud
 
       # The total number of rows in the complete table.
       def total
-        @gapi.total_rows
+        Integer @gapi.total_rows
+      rescue
+        nil
       end
 
       ##

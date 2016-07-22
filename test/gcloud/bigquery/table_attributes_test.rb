@@ -23,7 +23,7 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
   let(:description) { "This is my table" }
   let(:table_hash) { random_table_small_hash "my_table", table_id, table_name }
   let(:table_full_hash) { random_table_hash "my_table", table_id, table_name, description }
-  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table_gapi) { Google::Apis::BigqueryV2::TableList::Table.from_json table_hash.to_json }
   let(:table_full_gapi) { Google::Apis::BigqueryV2::Table.from_json table_full_hash.to_json }
   let(:table) { Gcloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
@@ -48,6 +48,22 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.expires_at.must_be_close_to Time.now, 10
+
+    mock.verify
+
+    # A second call to attribute does not make a second HTTP API call
+    table.expires_at
+  end
+
+  it "handles nil for optional expires_at" do
+    mock = Minitest::Mock.new
+    g = table_full_gapi
+    g.expiration_time = nil
+    mock.expect :get_table, g,
+      [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+
+    table.expires_at.must_be :nil?
 
     mock.verify
 

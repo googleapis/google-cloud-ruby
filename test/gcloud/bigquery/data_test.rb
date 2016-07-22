@@ -322,7 +322,7 @@ describe Gcloud::Bigquery::Data, :mock_bigquery do
         }
       ],
       "pageToken" => token,
-      "totalRows" => 3
+      "totalRows" => "3" # String per google/google-api-ruby-client#439
     }
   end
 

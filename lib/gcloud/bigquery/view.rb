@@ -14,8 +14,10 @@
 
 
 require "gcloud/errors"
+require "gcloud/bigquery/service"
 require "gcloud/bigquery/data"
 require "gcloud/bigquery/table/list"
+require "google/apis/bigquery_v2"
 
 module Gcloud
   module Bigquery
@@ -195,7 +197,11 @@ module Gcloud
       #
       def created_at
         ensure_full_data!
-        Time.at(@gapi.creation_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.creation_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -207,8 +213,11 @@ module Gcloud
       #
       def expires_at
         ensure_full_data!
-        return nil if @gapi.expiration_time.nil?
-        Time.at(@gapi.expiration_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.expiration_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -218,7 +227,11 @@ module Gcloud
       #
       def modified_at
         ensure_full_data!
-        Time.at(@gapi.last_modified_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -251,7 +264,7 @@ module Gcloud
       end
 
       ##
-      # The schema of the table.
+      # The schema of the view.
       #
       # @!group Attributes
       #
@@ -261,7 +274,7 @@ module Gcloud
       end
 
       ##
-      # The fields of the table.
+      # The fields of the view.
       #
       # @!group Attributes
       #
@@ -270,7 +283,7 @@ module Gcloud
       end
 
       ##
-      # The names of the columns in the table.
+      # The names of the columns in the view.
       #
       # @!group Attributes
       #
@@ -357,7 +370,7 @@ module Gcloud
       # @!group Data
       #
       def data max: nil, timeout: 10000, cache: true, dryrun: nil
-        sql = "SELECT * FROM #{@gapi.id}"
+        sql = "SELECT * FROM #{query_id}"
         ensure_service!
         options = { max: max, timeout: timeout, cache: cache, dryrun: dryrun }
         gapi = service.query sql, options
@@ -455,7 +468,7 @@ module Gcloud
       end
 
       def data_complete?
-        !@gapi.creation_time.nil?
+        @gapi.is_a? Google::Apis::BigqueryV2::Table
       end
     end
   end

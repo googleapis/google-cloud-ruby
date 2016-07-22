@@ -65,10 +65,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
   it "knows its creation and modification times" do
     now = Time.now
 
-    dataset.gapi.creation_time = (now.to_f * 1000).floor
+    dataset.gapi.creation_time = time_millis
     dataset.created_at.must_be_close_to now
 
-    dataset.gapi.last_modified_time = (now.to_f * 1000).floor
+    dataset.gapi.last_modified_time = time_millis
     dataset.modified_at.must_be_close_to now
   end
 
@@ -286,8 +286,12 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
     mock = Minitest::Mock.new
     insert_view = Google::Apis::BigqueryV2::Table.new(
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
-        project_id: project, dataset_id: dataset_id, table_id: view_id),
-      query: query)
+        project_id: project, dataset_id: dataset_id, table_id: view_id
+      ),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query
+      )
+    )
     return_view = create_view_gapi view_id, query
     mock.expect :insert_table, return_view,
       [project, dataset_id, insert_view]
@@ -311,7 +315,10 @@ describe Gcloud::Bigquery::Dataset, :mock_bigquery do
         project_id: project, dataset_id: dataset_id, table_id: view_id),
       friendly_name: view_name,
       description: view_description,
-      query: query)
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query
+      )
+    )
     return_view = create_view_gapi view_id, query, view_name, view_description
     mock.expect :insert_table, return_view,
       [project, dataset_id, insert_view]

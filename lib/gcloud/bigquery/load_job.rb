@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "gcloud/bigquery/service"
+
 module Gcloud
   module Bigquery
     ##
@@ -165,27 +167,35 @@ module Gcloud
       ##
       # The number of source files.
       def input_files
-        @gapi.statistics.load.input_files
+        Integer @gapi.statistics.load.input_files
+      rescue
+        nil
       end
 
       ##
       # The number of bytes of source data.
       def input_file_bytes
-        @gapi.statistics.load.input_file_bytes
+        Integer @gapi.statistics.load.input_file_bytes
+      rescue
+        nil
       end
 
       ##
       # The number of rows that have been loaded into the table. While an
       # import job is in the running state, this value may change.
       def output_rows
-        @gapi.statistics.load.output_rows
+        Integer @gapi.statistics.load.output_rows
+      rescue
+        nil
       end
 
       ##
       # The number of bytes that have been loaded into the table. While an
       # import job is in the running state, this value may change.
       def output_bytes
-        @gapi.statistics.load.output_bytes
+        Integer @gapi.statistics.load.output_bytes
+      rescue
+        nil
       end
     end
   end

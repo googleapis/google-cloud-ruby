@@ -136,7 +136,7 @@ module Gcloud
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # +project_name:datasetId.tableId+.
         def add_reader_view view
-          add_access_role_scope_value :reader, :view, view
+          add_access_view view
         end
 
         ##
@@ -165,17 +165,6 @@ module Gcloud
         end
 
         ##
-        # Add writer access to a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def add_writer_view view
-          add_access_role_scope_value :writer, :view, view
-        end
-
-        ##
         # Add owner access to a user.
         def add_owner_user email
           add_access_role_scope_value :owner, :user, email
@@ -198,17 +187,6 @@ module Gcloud
         # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def add_owner_special group
           add_access_role_scope_value :owner, :special, group
-        end
-
-        ##
-        # Add owner access to a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def add_owner_view view
-          add_access_role_scope_value :owner, :view, view
         end
 
         ##
@@ -244,7 +222,7 @@ module Gcloud
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # +project_name:datasetId.tableId+.
         def remove_reader_view view
-          remove_access_role_scope_value :reader, :view, view
+          remove_access_view view
         end
 
         ##
@@ -273,17 +251,6 @@ module Gcloud
         end
 
         ##
-        # Remove writer access from a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def remove_writer_view view
-          remove_access_role_scope_value :writer, :view, view
-        end
-
-        ##
         # Remove owner access from a user.
         def remove_owner_user email
           remove_access_role_scope_value :owner, :user, email
@@ -306,17 +273,6 @@ module Gcloud
         # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def remove_owner_special group
           remove_access_role_scope_value :owner, :special, group
-        end
-
-        ##
-        # Remove owner access from a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def remove_owner_view view
-          remove_access_role_scope_value :owner, :view, view
         end
 
         ##
@@ -352,7 +308,7 @@ module Gcloud
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # +project_name:datasetId.tableId+.
         def reader_view? view
-          lookup_access_role_scope_value :reader, :view, view
+          lookup_access_view view
         end
 
         ##
@@ -381,17 +337,6 @@ module Gcloud
         end
 
         ##
-        # Checks writer access for a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def writer_view? view
-          lookup_access_role_scope_value :writer, :view, view
-        end
-
-        ##
         # Checks owner access for a user.
         def owner_user? email
           lookup_access_role_scope_value :owner, :user, email
@@ -414,17 +359,6 @@ module Gcloud
         # Accepted values are `owners`, `writers`, `readers`, and `all`.
         def owner_special? group
           lookup_access_role_scope_value :owner, :special, group
-        end
-
-        ##
-        # Checks owner access for a view.
-        # The view can be a Gcloud::Bigquery::View object,
-        # or a string identifier as specified by the
-        # [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # +project_name:datasetId.tableId+.
-        def owner_view? view
-          lookup_access_role_scope_value :owner, :view, view
         end
 
         # @private
@@ -482,12 +416,10 @@ module Gcloud
 
         # @private
         def add_access_role_scope_value role, scope, value
-          role = validate_role role
+          role = validate_role(role)
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
           value = validate_special_group(value) if scope == :special_group
-          # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == :view
           # Remove any rules of this scope and value
           @rules.reject!(&find_by_scope_and_value(scope, value))
           # Add new rule for this role, scope, and value
@@ -496,58 +428,75 @@ module Gcloud
         end
 
         # @private
+        def add_access_view value
+          # scope is view, make sure value is in the right format
+          value = validate_view(value)
+          # Remove existing view rule, if any
+          @rules.reject!(&find_view(value))
+          # Add new rule for this role, scope, and value
+          opts = { view: value }
+          @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+        end
+
+        # @private
         def remove_access_role_scope_value role, scope, value
-          role = validate_role role
+          role = validate_role(role)
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
           value = validate_special_group(value) if scope == :special_group
-          # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == :view
           # Remove any rules of this role, scope, and value
           @rules.reject!(
             &find_by_role_and_scope_and_value(role, scope, value))
         end
 
         # @private
+        def remove_access_view value
+          # scope is view, make sure value is in the right format
+          value = validate_view(value)
+          # Remove existing view rule, if any
+          @rules.reject!(&find_view(value))
+        end
+
+        # @private
         def lookup_access_role_scope_value role, scope, value
-          role = validate_role role
+          role = validate_role(role)
           scope = validate_scope scope
           # If scope is special group, make sure value is in the list
           value = validate_special_group(value) if scope == :special_group
-          # If scope is view, make sure value is in the right format
-          value = validate_view(value) if scope == :view
           # Detect any rules of this role, scope, and value
           !(!@rules.detect(
             &find_by_role_and_scope_and_value(role, scope, value)))
         end
 
         # @private
+        def lookup_access_view value
+          # scope is view, make sure value is in the right format
+          value = validate_view(value)
+          # Detect view rule, if any
+          !(!@rules.detect(&find_view(value)))
+        end
+
+        # @private
         def find_by_role_and_scope_and_value role, scope, value
-          if scope == :view
-            lambda do |a|
-              h = a.to_h
-              h[:role] == role && h[scope].to_h == value.to_h
-            end
-          else
-            lambda do |a|
-              h = a.to_h
-              h[:role] == role && h[scope] == value
-            end
+          lambda do |a|
+            h = a.to_h
+            h[:role] == role && h[scope] == value
           end
         end
 
         # @private
         def find_by_scope_and_value scope, value
-          if scope == :view
-            lambda do |a|
-              h = a.to_h
-              h[scope].to_h == value.to_h
-            end
-          else
-            lambda do |a|
-              h = a.to_h
-              h[scope] == value
-            end
+          lambda do |a|
+            h = a.to_h
+            h[scope] == value
+          end
+        end
+
+        # @private
+        def find_view value
+          lambda do |a|
+            h = a.to_h
+            h[:view].to_h == value.to_h
           end
         end
       end

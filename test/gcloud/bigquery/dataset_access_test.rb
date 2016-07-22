@@ -117,7 +117,7 @@ describe Gcloud::Bigquery::Dataset, :access, :mock_bigquery do
       mock = Minitest::Mock.new
       bigquery.service.mocked_service = mock
       updated_gapi = dataset_gapi.dup
-      new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "READER", view: view_gapi.table_reference
+      new_access = Google::Apis::BigqueryV2::Dataset::Access.new view: view_gapi.table_reference
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access]
       mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
@@ -135,7 +135,7 @@ describe Gcloud::Bigquery::Dataset, :access, :mock_bigquery do
       view_reference = Google::Apis::BigqueryV2::TableReference.new project_id: "test-project_id",
                                                                      dataset_id: "test-dataset_id",
                                                                      table_id: "test-view_id"
-      new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "READER", view: view_reference
+      new_access = Google::Apis::BigqueryV2::Dataset::Access.new view: view_reference
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access]
       mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]

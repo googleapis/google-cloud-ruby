@@ -15,6 +15,7 @@
 
 require "json"
 require "gcloud/errors"
+require "gcloud/bigquery/service"
 require "gcloud/bigquery/table"
 require "gcloud/bigquery/dataset/list"
 require "gcloud/bigquery/dataset/access"
@@ -152,7 +153,11 @@ module Gcloud
       #
       def default_expiration
         ensure_full_data!
-        @gapi.default_table_expiration_ms
+        begin
+          Integer @gapi.default_table_expiration_ms
+        rescue
+          nil
+        end
       end
 
       ##
@@ -173,7 +178,11 @@ module Gcloud
       #
       def created_at
         ensure_full_data!
-        Time.at(@gapi.creation_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.creation_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -183,7 +192,11 @@ module Gcloud
       #
       def modified_at
         ensure_full_data!
-        Time.at(@gapi.last_modified_time / 1000.0)
+        begin
+          Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+        rescue
+          nil
+        end
       end
 
       ##
@@ -428,8 +441,13 @@ module Gcloud
       def create_view table_id, query, name: nil, description: nil
         new_view_opts = {
           table_reference: Google::Apis::BigqueryV2::TableReference.new(
-            project_id: project_id, dataset_id: dataset_id, table_id: table_id),
-          friendly_name: name, description: description, query: query
+            project_id: project_id, dataset_id: dataset_id, table_id: table_id
+          ),
+          friendly_name: name,
+          description: description,
+          view: Google::Apis::BigqueryV2::ViewDefinition.new(
+            query: query
+          )
         }.delete_if { |_, v| v.nil? }
         new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
 
@@ -679,7 +697,7 @@ module Gcloud
       end
 
       def data_complete?
-        !@gapi.creation_time.nil?
+        @gapi.is_a? Google::Apis::BigqueryV2::Dataset
       end
 
       ##

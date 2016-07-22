@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "gcloud/bigquery/service"
+
 module Gcloud
   module Bigquery
     ##
@@ -80,7 +82,9 @@ module Gcloud
       ##
       # The number of bytes processed by the query.
       def bytes_processed
-        @gapi.statistics.query.total_bytes_processed
+        Integer @gapi.statistics.query.total_bytes_processed
+      rescue
+        nil
       end
 
       ##

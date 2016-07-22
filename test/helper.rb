@@ -216,6 +216,12 @@ class MockBigquery < Minitest::Spec
     addl.include? :mock_bigquery
   end
 
+  ##
+  # Time in milliseconds as a string, per google/google-api-ruby-client#439
+  def time_millis
+    (Time.now.to_f * 1000).floor.to_s
+  end
+
   def random_dataset_gapi id = nil, name = nil, description = nil, default_expiration = nil, location = "US"
     json = random_dataset_hash(id, name, description, default_expiration, location).to_json
     Google::Apis::BigqueryV2::Dataset.from_json json
@@ -225,7 +231,7 @@ class MockBigquery < Minitest::Spec
     id ||= "my_dataset"
     name ||= "My Dataset"
     description ||= "This is my dataset"
-    default_expiration ||= 100
+    default_expiration ||= "100" # String per google/google-api-ruby-client#439
 
     {
       "kind" => "bigquery#dataset",
@@ -240,8 +246,8 @@ class MockBigquery < Minitest::Spec
       "description" => description,
       "defaultTableExpirationMs" => default_expiration,
       "access" => [],
-      "creationTime" => Time.now.to_i*1000,
-      "lastModifiedTime" => Time.now.to_i*1000,
+      "creationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
       "location" => location
     }
   end
@@ -304,11 +310,11 @@ class MockBigquery < Minitest::Spec
           }
         ]
       },
-      "numBytes" => 1000,
-      "numRows" => 100,
-      "creationTime" => (Time.now.to_f * 1000).floor,
-      "expirationTime" => (Time.now.to_f * 1000).floor,
-      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "numBytes" => "1000", # String per google/google-api-ruby-client#439
+      "numRows" => "100",   # String per google/google-api-ruby-client#439
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
       "type" => "TABLE",
       "location" => "US"
     }
@@ -404,9 +410,9 @@ class MockBigquery < Minitest::Spec
           }
         ]
       },
-      "creationTime" => (Time.now.to_f * 1000).floor,
-      "expirationTime" => (Time.now.to_f * 1000).floor,
-      "lastModifiedTime" => (Time.now.to_f * 1000).floor,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
       "type" => "VIEW",
       "view" => {
         "query" => "SELECT name, age, score, active FROM [external:publicdata.users]"
@@ -450,9 +456,9 @@ class MockBigquery < Minitest::Spec
         "state" => state
       },
       "statistics" => {
-        "creationTime" => (Time.now.to_f * 1000).floor,
-        "startTime" => (Time.now.to_f * 1000).floor,
-        "endTime" => (Time.now.to_f * 1000).floor
+        "creationTime" => time_millis,
+        "startTime" => time_millis,
+        "endTime" => time_millis
       },
       "user_email" => "user@example.com"
     }
@@ -581,7 +587,7 @@ class MockBigquery < Minitest::Spec
       ],
       "pageToken" => token,
       "totalRows" => 3,
-      "totalBytesProcessed" => 456789,
+      "totalBytesProcessed" => "456789", # String per google/google-api-ruby-client#439
       "jobComplete" => true,
       "cacheHit" => false
     }

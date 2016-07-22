@@ -120,10 +120,10 @@ describe Gcloud::Bigquery::LoadJob, :mock_bigquery do
       "ignoreUnknownValues" => true
     }
     hash["statistics"]["load"] = {
-      "inputFiles" => 3,
-      "inputFileBytes" => 456,
-      "outputRows" => 5,
-      "outputBytes" => 789
+      "inputFiles" => "3", # String per google/google-api-ruby-client#439
+      "inputFileBytes" => "456", # String per google/google-api-ruby-client#439
+      "outputRows" => "5", # String per google/google-api-ruby-client#439
+      "outputBytes" => "789" # String per google/google-api-ruby-client#439
     }
     hash
   end

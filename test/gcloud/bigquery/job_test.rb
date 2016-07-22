@@ -46,6 +46,7 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
   let(:failed_job_id) { failed_job.job_id }
 
   it "knows its attributes" do
+    job.job_id.wont_be :nil?
     job.job_id.must_equal job_gapi.job_reference.job_id
   end
 
@@ -109,7 +110,7 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.ended_at.must_be :nil?
 
     nowish = Time.now
-    timestamp = (nowish.to_f * 1000).floor
+    timestamp = time_millis
 
     job.gapi.statistics.creation_time = timestamp
     job.gapi.statistics.start_time = timestamp
@@ -196,23 +197,6 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.must_be :running?
     job.wait_until_done!
     job.must_be :done?
-    mock.verify
-  end
-
-  it "can re-run itself" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    generic_job_gapi = Google::Apis::BigqueryV2::Job.new(
-      configuration: job.configuration
-    )
-    mock.expect :insert_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id + "-rerun").to_json),
-                [project, generic_job_gapi]
-
-    new_job = job.rerun!
-    new_job.config["dryRun"].must_equal job.config["dryRun"]
-    new_job.job_id.wont_equal job.job_id
     mock.verify
   end
 end
