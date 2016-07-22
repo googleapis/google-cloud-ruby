@@ -20,8 +20,8 @@ module Gcloud
     ##
     # # ResourceDescriptor
     #
-    # Describes a type of monitored resource supported by Cloud Logging. Each
-    # ResourceDescriptor has a type name, such as `cloudsql_database`,
+    # Describes a type of monitored resource supported by Stackdriver Logging.
+    # Each ResourceDescriptor has a type name, such as `cloudsql_database`,
     # `gae_app`, or `gce_instance`. It also specifies a set of labels that must
     # all be given values in a {Resource} instance to represent an actual
     # instance of the type.

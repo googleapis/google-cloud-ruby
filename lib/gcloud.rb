@@ -347,7 +347,7 @@ module Gcloud
   # rubocop:enable Metrics/LineLength
 
   ##
-  # Creates a new object for connecting to the Logging service.
+  # Creates a new object for connecting to the Stackdriver Logging service.
   # Each call creates a new connection.
   #
   # For more information on connecting to Google Cloud see the [Authentication

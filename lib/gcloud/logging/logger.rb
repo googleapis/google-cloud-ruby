@@ -266,7 +266,7 @@ module Gcloud
       protected
 
       ##
-      # @private Write a log entry to Google Cloud Logging service.
+      # @private Write a log entry to the Stackdriver Logging service.
       def write_entry severity, message
         entry = logging.entry.tap do |e|
           e.severity = gcloud_severity(severity)

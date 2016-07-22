@@ -99,7 +99,7 @@ end
 
 # Logging
 
-[Google Cloud Logging](https://cloud.google.com/logging/) collects and stores logs from applications and services on the Google Cloud Platform, giving you fine-grained, programmatic control over your projects' logs. With this API you can do the following:
+[Stackdriver Logging](https://cloud.google.com/logging/) collects and stores logs from applications and services on the Google Cloud Platform, giving you fine-grained, programmatic control over your projects' logs. With this API you can do the following:
 
 * Read and filter log entries
 * Export your log entries to Cloud Storage,

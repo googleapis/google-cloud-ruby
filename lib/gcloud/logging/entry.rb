@@ -27,11 +27,11 @@ module Gcloud
     # An individual entry in a log.
     #
     # Each log entry is composed of metadata and a payload. The metadata
-    # includes standard information used by Cloud Logging, such as when the
-    # entry was created and where it came from. The payload is the event record.
-    # Traditionally this is a message string, but in Cloud Logging it can also
-    # be a JSON or protocol buffer object. A single log can have entries with
-    # different payload types.
+    # includes standard information used by Stackdriver Logging, such as when
+    # the entry was created and where it came from. The payload is the event
+    # record. Traditionally this is a message string, but in Stackdriver Logging
+    # it can also be a JSON or protocol buffer object. A single log can have
+    # entries with different payload types.
     #
     # A log is a named collection of entries. Logs can be produced by Google
     # Cloud Platform services, by third-party services, or by your applications.
@@ -92,7 +92,7 @@ module Gcloud
 
       ##
       # The time the event described by the log entry occurred. If omitted,
-      # Cloud Logging will use the time the log entry is written.
+      # Stackdriver Logging will use the time the log entry is written.
       # @return [Time]
       attr_accessor :timestamp
 
@@ -329,8 +329,8 @@ module Gcloud
       ##
       # A unique ID for the log entry. If you provide this field, the logging
       # service considers other log entries in the same log with the same ID as
-      # duplicates which can be removed. If omitted, Cloud Logging will generate
-      # a unique ID for this log entry.
+      # duplicates which can be removed. If omitted, Stackdriver Logging will
+      # generate a unique ID for this log entry.
       # @return [String]
       attr_accessor :insert_id
 
