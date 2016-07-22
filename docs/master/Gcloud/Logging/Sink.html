@@ -77,8 +77,8 @@
         <div id="description" class="description">
           <h1 id="sink">Sink</h1>
 
-<p>Used to export log entries outside Cloud Logging. When you create a sink,
-new log entries are exported. Cloud Logging does not send
+<p>Used to export log entries outside Stackdriver Logging. When you create a
+sink, new log entries are exported. Stackdriver Logging does not send
 previously-ingested log entries to the sink’s destination.</p>
 
 <p>Before creating the sink, ensure that you have granted
@@ -251,7 +251,7 @@ filter</a>
 that defines the log entries to be exported. The filter must be
 consistent with the log entry format designed by the <code class="highlighter-rouge">version</code>
 parameter, regardless of the format of the log entry that was originally
-written to Cloud Logging.</p>
+written to Stackdriver Logging.</p>
 
 
                     
@@ -285,7 +285,7 @@ filter</a>
 that defines the log entries to be exported. The filter must be
 consistent with the log entry format designed by the <code class="highlighter-rouge">version</code>
 parameter, regardless of the format of the log entry that was originally
-written to Cloud Logging.</p>
+written to Stackdriver Logging.</p>
 
 
                     
@@ -316,7 +316,7 @@ written to Cloud Logging.</p>
 
                     <p>The log entry version used when exporting log entries from this sink.
 This version does not have to correspond to the version of the log entry
-when it was written to Cloud Logging.</p>
+when it was written to Stackdriver Logging.</p>
 
 
                     
@@ -347,7 +347,7 @@ when it was written to Cloud Logging.</p>
 
                     <p>Updates the log entry version used when exporting log entries from this
 sink. This version does not have to correspond to the version of the log
-entry when it was written to Cloud Logging. Accepted values are
+entry when it was written to Stackdriver Logging. Accepted values are
 <code class="highlighter-rouge">:VERSION_FORMAT_UNSPECIFIED</code>, <code class="highlighter-rouge">:V2</code>, and <code class="highlighter-rouge">:V1</code>.</p>
 
 

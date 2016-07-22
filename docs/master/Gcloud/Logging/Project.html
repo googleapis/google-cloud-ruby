@@ -79,7 +79,7 @@
 
 <p>Projects are top-level containers in Google Cloud Platform. They store
 information about billing and authorized users, and they control access to
-Google Cloud Logging resources. Each project has a friendly name and a
+Stackdriver Logging resources. Each project has a friendly name and a
 unique ID. Projects can be created only in the <a href="https://console.developers.google.com">Google Developers
 Console</a>. See <span class='object_link'><a href="../../Gcloud.html#logging-instance_method" title="Gcloud#logging (method)">Gcloud#logging</a></span>.</p>
 
@@ -436,9 +436,9 @@ of the larger set of results to view.</p>
                   <div class="method-description">
 
                     <p>Creates an new Entry instance that may be populated and written to the
-Cloud Logging service. The <span class='object_link'><a href="Entry.html#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">Entry#resource</a></span> attribute is pre-populated
-with a new <span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Resource</a></span> instance. Equivalent to calling
-<code class="highlighter-rouge">Gcloud::Logging::Entry.new</code>.</p>
+Stackdriver Logging service. The <span class='object_link'><a href="Entry.html#resource-instance_method" title="Gcloud::Logging::Entry#resource (method)">Entry#resource</a></span> attribute is
+pre-populated with a new <span class='object_link'><a href="Resource.html" title="Gcloud::Logging::Resource (class)">Resource</a></span> instance.
+Equivalent to calling <code class="highlighter-rouge">Gcloud::Logging::Entry.new</code>.</p>
 
 
                     
@@ -485,8 +485,8 @@ log entry. See also <span class='object_link'><a href="Entry.html#resource-insta
                             <p>
                               
                                 <div class='inline'><p>The time the event described by the log entry
-occurred. If omitted, Cloud Logging will use the time the log entry is
-written. See also <span class='object_link'><a href="Entry.html#timestamp-instance_method" title="Gcloud::Logging::Entry#timestamp (method)">Entry#timestamp</a></span>.</p>
+occurred. If omitted, Stackdriver Logging will use the time the log
+entry is written. See also <span class='object_link'><a href="Entry.html#timestamp-instance_method" title="Gcloud::Logging::Entry#timestamp (method)">Entry#timestamp</a></span>.</p>
 </div>
                               
                               (<tt>Time</tt>)
@@ -516,8 +516,8 @@ default value is <code class="highlighter-rouge">DEFAULT</code>. See also <span 
                                 <div class='inline'><p>A unique ID for the log entry. If you provide
 this field, the logging service considers other log entries in the
 same log with the same ID as duplicates which can be removed. If
-omitted, Cloud Logging will generate a unique ID for this log entry.
-See also <span class='object_link'><a href="Entry.html#insert_id-instance_method" title="Gcloud::Logging::Entry#insert_id (method)">Entry#insert_id</a></span>.</p>
+omitted, Stackdriver Logging will generate a unique ID for this log
+entry. See also <span class='object_link'><a href="Entry.html#insert_id-instance_method" title="Gcloud::Logging::Entry#insert_id (method)">Entry#insert_id</a></span>.</p>
 </div>
                               
                               (<tt>String</tt>)
@@ -631,7 +631,7 @@ either a string, a hash (JSON), or a hash (protocol buffer). See also
 
                   <div class="method-description">
 
-                    <p>Writes log entries to the Cloud Logging service.</p>
+                    <p>Writes log entries to the Stackdriver Logging service.</p>
 
 <p>If you write a collection of log entries, you can provide the log name,
 resource, and/or labels hash to be used for all of the entries, and omit
@@ -979,7 +979,7 @@ deleted.</p>
                   <div class="method-description">
 
                     <p>Retrieves the list of monitored resource descriptors that are used by
-Google Cloud Logging.</p>
+Stackdriver Logging.</p>
 
 
                     
@@ -1328,8 +1328,8 @@ of the larger set of results to view.</p>
                   <div class="method-description">
 
                     <p>Creates a new project sink. When you create a sink, only new log entries
-that match the sink’s filter are exported. Cloud Logging does not send
-previously-ingested log entries to the sink’s destination.</p>
+that match the sink’s filter are exported. Stackdriver Logging does not
+send previously-ingested log entries to the sink’s destination.</p>
 
 <p>Before creating the sink, ensure that you have granted
 <code class="highlighter-rouge">cloud-logs@google.com</code> permission to write logs to the destination. See
@@ -1402,7 +1402,7 @@ filter</a>
 that defines the log entries to be exported. The filter must be
 consistent with the log entry format designed by the <code class="highlighter-rouge">version</code>
 parameter, regardless of the format of the log entry that was
-originally written to Cloud Logging.</p>
+originally written to Stackdriver Logging.</p>
 </div>
                               
                               (<tt>String</tt>, <tt>nil</tt>)
@@ -1417,9 +1417,9 @@ originally written to Cloud Logging.</p>
                               
                                 <div class='inline'><p>The log entry version used when exporting log
 entries from this sink. This version does not have to correspond to
-the version of the log entry when it was written to Cloud Logging.
-Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code class="highlighter-rouge">:v2</code>, and <code class="highlighter-rouge">:v1</code>. Version 2 is
-currently the preferred format. An unspecified version format
+the version of the log entry when it was written to Stackdriver
+Logging. Accepted values are <code class="highlighter-rouge">:unspecified</code>, <code class="highlighter-rouge">:v2</code>, and <code class="highlighter-rouge">:v1</code>. Version
+2 is currently the preferred format. An unspecified version format
 currently defaults to V2 in the service. The default value is
 <code class="highlighter-rouge">:unspecified</code>.</p>
 </div>
@@ -1460,7 +1460,7 @@ currently defaults to V2 in the service. The default value is
 
 <span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-logs-bucket</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='comment'># Grant owner permission to Cloud Logging service
+<span class='comment'># Grant owner permission to Stackdriver Logging service
 </span><span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloud-logs@google.com</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_owner'>add_owner</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 

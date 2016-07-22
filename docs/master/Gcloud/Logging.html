@@ -75,12 +75,12 @@
       <section class="content">
 
         <div id="description" class="description">
-          <h1 id="google-cloud-logging">Google Cloud Logging</h1>
+          <h1 id="stackdriver-logging">Stackdriver Logging</h1>
 
-<p>The Google Cloud Logging service collects and stores logs from applications
+<p>The Stackdriver Logging service collects and stores logs from applications
 and services on the Google Cloud Platform, giving you fine-grained,
-programmatic control over your projects’ logs. You can use the Cloud Logging
-API to:</p>
+programmatic control over your projects’ logs. You can use the Stackdriver
+Logging API to:</p>
 
 <ul>
   <li><a href="#listing-log-entries">Read and filter log entries</a></li>
@@ -91,21 +91,21 @@ Monitoring</li>
   <li><a href="#writing-log-entries">Write log entries</a></li>
 </ul>
 
-<p>For general information about Cloud Logging, read <a href="https://cloud.google.com/logging/docs/">What is Google Cloud
-Logging?</a>.</p>
+<p>For general information about Stackdriver Logging, read <a href="https://cloud.google.com/logging/docs/">Stackdriver Logging
+Documentation</a>.</p>
 
 <p>The goal of gcloud-ruby is to provide an API that is comfortable to
 Rubyists. Authentication is handled by <span class='object_link'><a href="../Gcloud.html#logging-instance_method" title="Gcloud#logging (method)">#logging</a></span>. You can provide the
-project and credential information to connect to the Cloud Logging service,
-or if you are running on Google Compute Engine this configuration is taken
-care of for you. You can read more about the options for connecting in the
-<a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
+project and credential information to connect to the Stackdriver Logging
+service, or if you are running on Google Compute Engine this configuration
+is taken care of for you. You can read more about the options for connecting
+in the <a href="https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication">Authentication
 Guide</a>.</p>
 
 <h2 id="listing-log-entries">Listing log entries</h2>
 
-<p>Cloud Logging gathers log entries from many services, including Google App
-Engine and Google Compute Engine. (See the <a href="https://cloud.google.com/logging/docs/view/logs_index">List of Log
+<p>Stackdriver Logging gathers log entries from many services, including Google
+App Engine and Google Compute Engine. (See the <a href="https://cloud.google.com/logging/docs/view/logs_index">List of Log
 Types</a>.) In addition,
 you can write your own log entries to the service.</p>
 
@@ -129,7 +129,8 @@ log is a named collection of entries. Logs can be produced by Google Cloud
 Platform services, by third-party services, or by your applications. For
 example, the log <code class="highlighter-rouge">compute.googleapis.com/activity_log</code> is produced by Google
 Compute Engine. Logs are simply referenced by name in gcloud-ruby. There is
-no <code class="highlighter-rouge">Log</code> type in gcloud-ruby or <code class="highlighter-rouge">Log</code> resource in the Cloud Logging API.</p>
+no <code class="highlighter-rouge">Log</code> type in gcloud-ruby or <code class="highlighter-rouge">Log</code> resource in the Stackdriver Logging
+API.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
 
@@ -157,9 +158,9 @@ no <code class="highlighter-rouge">Log</code> type in gcloud-ruby or <code class
 
 <h2 id="exporting-log-entries">Exporting log entries</h2>
 
-<p>Cloud Logging lets you export log entries to destinations including Google
-Cloud Storage buckets (for long term log storage), Google BigQuery datasets
-(for log analysis), and Google Pub/Sub (for streaming to other
+<p>Stackdriver Logging lets you export log entries to destinations including
+Google Cloud Storage buckets (for long term log storage), Google BigQuery
+datasets (for log analysis), and Google Pub/Sub (for streaming to other
 applications).</p>
 
 <h3 id="creating-sinks">Creating sinks</h3>
@@ -185,7 +186,7 @@ logs</a>.</p>
 
 <span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">create_bucket</span> <span class="s2">"my-logs-bucket"</span>
 
-<span class="c1"># Grant owner permission to Cloud Logging service</span>
+<span class="c1"># Grant owner permission to Stackdriver Logging service</span>
 <span class="n">email</span> <span class="o">=</span> <span class="s2">"cloud-logs@google.com"</span>
 <span class="n">bucket</span><span class="p">.</span><span class="nf">acl</span><span class="p">.</span><span class="nf">add_owner</span> <span class="s2">"group-</span><span class="si">#{</span><span class="n">email</span><span class="si">}</span><span class="s2">"</span>
 
@@ -193,8 +194,9 @@ logs</a>.</p>
 </code></pre>
 </div>
 
-<p>When you create a sink, only new log entries are exported. Cloud Logging
-does not send previously-ingested log entries to the sink’s destination.</p>
+<p>When you create a sink, only new log entries are exported. Stackdriver
+Logging does not send previously-ingested log entries to the sink’s
+destination.</p>
 
 <h3 id="listing-sinks">Listing sinks</h3>
 
@@ -253,7 +255,7 @@ logs filter</a>.</p>
 <h2 id="writing-log-entries">Writing log entries</h2>
 
 <p>An <span class='object_link'><a href="Logging/Entry.html" title="Gcloud::Logging::Entry (class)">Entry</a></span> is composed of metadata and a payload. The
-payload is traditionally a message string, but in Cloud Logging it can
+payload is traditionally a message string, but in Stackdriver Logging it can
 also be a JSON or protocol buffer object. A single log can have entries with
 different payload types. In addition to the payload, your argument(s) to
 <span class='object_link'><a href="Logging/Project.html#write_entries-instance_method" title="Gcloud::Logging::Project#write_entries (method)">Project#write_entries</a></span> must also contain a log name and a
