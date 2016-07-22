@@ -249,24 +249,23 @@ module Gcloud
   # annotation = vision.annotate image, faces: 5
   # ```
   #
-  # ## Configuring Backoff
+  # ## Configuring retries and timeout
   #
-  # The {Gcloud::Backoff} class allows users to globally configure how Cloud API
-  # requests are automatically retried in the case of some errors, such as a
-  # `500` or `503` status code, or a specific internal error code such as
-  # `rateLimitExceeded`.
+  # You can configure how many times API requests may be automatically retried.
+  # When an API request fails, the response will be inspected to see if the
+  # request meets criteria indicating that it may succeed on retry, such as
+  # `500` and `503` status codes or a specific internal error code such as
+  # `rateLimitExceeded`. If it meets the criteria, the request will be retried
+  # after a delay. If another error occurs, the delay will be increased before a
+  # subsequent attempt, until the `retries` limit is reached.
   #
-  # If an API call fails, the response will be inspected to see if the call
-  # should be retried. If the response matches the criteria, then the request
-  # will be retried after a delay. If another error occurs, the delay will be
-  # increased incrementally before a subsequent attempt. The first retry will be
-  # delayed one second, the second retry two seconds, and so on.
+  # You can also set the request `timeout` value in seconds.
   #
   # ```ruby
   # require "gcloud"
-  # require "gcloud/backoff"
   #
-  # Gcloud::Backoff.retries = 5 # Raise the maximum number of retries from 3
+  # gcloud = Gcloud.new
+  # vision = gcloud.vision retries: 10, timeout: 120
   # ```
   #
   module Vision
