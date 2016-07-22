@@ -576,20 +576,6 @@ module Gcloud
       #                      encryption_key: key,
       #                      encryption_key_sha256: key_hash
       #
-      # @example Avoiding broken pipe errors with large uploads:
-      #   require "gcloud"
-      #
-      #   # Use httpclient to avoid broken pipe errors with large uploads
-      #   Faraday.default_adapter = :httpclient
-      #
-      #   # Only add the following statement if using Faraday >= 0.9.2
-      #   # Override gzip middleware with no-op for httpclient
-      #   Faraday::Response.register_middleware :gzip =>
-      #                                           Faraday::Response::Middleware
-      #
-      #   gcloud = Gcloud.new
-      #   storage = gcloud.storage
-      #
       def create_file file, path = nil, acl: nil, cache_control: nil,
                       content_disposition: nil, content_encoding: nil,
                       content_language: nil, content_type: nil,
@@ -745,12 +731,6 @@ module Gcloud
       def ensure_file_exists! file
         return if ::File.file? file
         fail ArgumentError, "cannot find file #{file}"
-      end
-
-      ##
-      # @private Determines if a resumable upload should be used.
-      def resumable_upload? file
-        ::File.size?(file).to_i > Upload.resumable_threshold
       end
 
       ##

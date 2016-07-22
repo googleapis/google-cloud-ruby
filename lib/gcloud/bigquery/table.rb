@@ -671,33 +671,6 @@ module Gcloud
       #   file = File.open "my_data.csv"
       #   load_job = table.load file
       #
-      # ### A note about large direct uploads
-      #
-      # You may encounter a Broken pipe (Errno::EPIPE) error when attempting to
-      # upload large files. To avoid this problem, add the
-      # [httpclient](https://rubygems.org/gems/httpclient) gem to your project,
-      # and the line (or lines) of configuration shown below. These lines must
-      # execute after `require "gcloud"` but before you make your first
-      # connection. The first statement configures
-      # [Faraday](https://rubygems.org/gems/faraday) to use httpclient. The
-      # second statement, which should only be added if you are using a version
-      # of Faraday at or above 0.9.2, is a workaround for [this gzip
-      # issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/367).
-      #
-      # @example
-      #   require "gcloud"
-      #
-      #   # Use httpclient to avoid broken pipe errors with large uploads
-      #   Faraday.default_adapter = :httpclient
-      #
-      #   # Only add the following statement if using Faraday >= 0.9.2
-      #   # Override gzip middleware with no-op for httpclient
-      #   Faraday::Response.register_middleware :gzip =>
-      #                                           Faraday::Response::Middleware
-      #
-      #   gcloud = Gcloud.new
-      #   bigquery = gcloud.bigquery
-      #
       # @!group Data
       #
       def load file, format: nil, create: nil, write: nil,
