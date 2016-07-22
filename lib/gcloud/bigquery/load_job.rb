@@ -155,9 +155,9 @@ module Gcloud
       end
 
       ##
-      # The schema for the data. Returns a hash. Can be empty if the table
-      # has already has the correct schema (see {Table#schema=} and
-      # {Table#schema}), or if the schema can be inferred from the loaded data.
+      # The schema for the data. Returns a hash. Can be empty if the table has
+      # already has the correct schema (see {Table#schema}), or if the schema
+      # can be inferred from the loaded data.
       def schema
         Schema.from_gapi(@gapi.configuration.load.schema).freeze
       end
