@@ -55,9 +55,9 @@ describe Gcloud::Bigquery::Table, :mock_bigquery do
     table_hash["expirationTime"] = time_millis
 
 
-    table.created_at.must_be_close_to now
-    table.modified_at.must_be_close_to now
-    table.expires_at.must_be_close_to now
+    table.created_at.must_be_close_to now, 1
+    table.modified_at.must_be_close_to now, 1
+    table.expires_at.must_be_close_to now, 1
   end
 
   it "can have an empty expiration times" do

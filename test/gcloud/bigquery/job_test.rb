@@ -116,9 +116,9 @@ describe Gcloud::Bigquery::Job, :mock_bigquery do
     job.gapi.statistics.start_time = timestamp
     job.gapi.statistics.end_time = timestamp
 
-    job.created_at.must_be_close_to nowish
-    job.started_at.must_be_close_to nowish
-    job.ended_at.must_be_close_to nowish
+    job.created_at.must_be_close_to nowish, 1
+    job.started_at.must_be_close_to nowish, 1
+    job.ended_at.must_be_close_to nowish, 1
   end
 
   it "knows its configuration" do

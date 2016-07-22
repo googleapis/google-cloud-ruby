@@ -47,9 +47,9 @@ describe Gcloud::Bigquery::View, :mock_bigquery do
     view_hash["expirationTime"] = time_millis
 
 
-    view.created_at.must_be_close_to now
-    view.modified_at.must_be_close_to now
-    view.expires_at.must_be_close_to now
+    view.created_at.must_be_close_to now, 1
+    view.modified_at.must_be_close_to now, 1
+    view.expires_at.must_be_close_to now, 1
   end
 
   it "knows schema, fields, and headers" do
