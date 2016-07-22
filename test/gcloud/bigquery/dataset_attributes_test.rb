@@ -33,10 +33,10 @@ describe Gcloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-    dataset.created_at.must_be_close_to Time.now, 10
+    dataset.created_at.must_be_close_to Time.now, 1
 
     # A second call to attribute does not make a second HTTP API call
-    dataset.created_at.must_be_close_to Time.now, 10
+    dataset.created_at.must_be_close_to Time.now, 1
     mock.verify
   end
 
@@ -45,10 +45,10 @@ describe Gcloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-    dataset.modified_at.must_be_close_to Time.now, 10
+    dataset.modified_at.must_be_close_to Time.now, 1
 
     # A second call to attribute does not make a second HTTP API call
-    dataset.modified_at.must_be_close_to Time.now, 10
+    dataset.modified_at.must_be_close_to Time.now, 1
     mock.verify
   end
 

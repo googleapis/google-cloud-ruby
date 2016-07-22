@@ -33,7 +33,7 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.created_at.must_be_close_to Time.now, 10
+    table.created_at.must_be_close_to Time.now, 1
 
     mock.verify
 
@@ -47,7 +47,7 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.expires_at.must_be_close_to Time.now, 10
+    table.expires_at.must_be_close_to Time.now, 1
 
     mock.verify
 
@@ -77,7 +77,7 @@ describe Gcloud::Bigquery::Table, :attributes, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.modified_at.must_be_close_to Time.now, 10
+    table.modified_at.must_be_close_to Time.now, 1
 
     mock.verify
 
