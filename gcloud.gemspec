@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
   gem.rdoc_options     = ["--main", "OVERVIEW.md",
                           "--exclude", "lib/google/"]
 
-  gem.add_dependency                  "grpc", "~> 0.13.1"
+  gem.add_dependency                  "grpc", "= 1.0.0.pre1"
   gem.add_dependency                  "google-protobuf", "= 3.0.0.alpha.5.0.5.1"
   gem.add_dependency                  "google-api-client", "~> 0.9.9"
   gem.add_dependency                  "mime-types", [">= 2.4", "< 4.0"]
