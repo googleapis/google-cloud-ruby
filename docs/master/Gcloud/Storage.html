@@ -433,23 +433,22 @@ email address:</p>
 </code></pre>
 </div>
 
-<h2 id="configuring-backoff">Configuring Backoff</h2>
+<h2 id="configuring-retries-and-timeout">Configuring retries and timeout</h2>
 
-<p>The <span class='object_link'>Backoff</span> class allows users to globally configure how Cloud API
-requests are automatically retried in the case of some errors, such as a
-<code class="highlighter-rouge">500</code> or <code class="highlighter-rouge">503</code> status code, or a specific internal error code such as
-<code class="highlighter-rouge">rateLimitExceeded</code>.</p>
+<p>You can configure how many times API requests may be automatically retried.
+When an API request fails, the response will be inspected to see if the
+request meets criteria indicating that it may succeed on retry, such as
+<code class="highlighter-rouge">500</code> and <code class="highlighter-rouge">503</code> status codes or a specific internal error code such as
+<code class="highlighter-rouge">rateLimitExceeded</code>. If it meets the criteria, the request will be retried
+after a delay. If another error occurs, the delay will be increased before a
+subsequent attempt, until the <code class="highlighter-rouge">retries</code> limit is reached.</p>
 
-<p>If an API call fails, the response will be inspected to see if the call
-should be retried. If the response matches the criteria, then the request
-will be retried after a delay. If another error occurs, the delay will be
-increased incrementally before a subsequent attempt. The first retry will be
-delayed one second, the second retry two seconds, and so on.</p>
+<p>You can also set the request <code class="highlighter-rouge">timeout</code> value in seconds.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="ruby"><code><span class="nb">require</span> <span class="s2">"gcloud"</span>
-<span class="nb">require</span> <span class="s2">"gcloud/backoff"</span>
 
-<span class="no">Gcloud</span><span class="o">::</span><span class="no">Backoff</span><span class="p">.</span><span class="nf">retries</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># Raise the maximum number of retries from 3</span>
+<span class="n">gcloud</span> <span class="o">=</span> <span class="no">Gcloud</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">storage</span> <span class="o">=</span> <span class="n">gcloud</span><span class="p">.</span><span class="nf">storage</span> <span class="ss">retries: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">timeout: </span><span class="mi">120</span>
 </code></pre>
 </div>
 
@@ -473,7 +472,7 @@ for a list of error conditions.</p>
 
       <nav class="side-nav">
 
-        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 22, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
+        <div class="side-nav--meta"><div id="doc-build-date">Docs built on Jul 23, 2016.</div></div><ul><h4 class="list-item--heading">Getting Started</h4><li class='toc-l0'><a class='reference internal' href='../index.html'>Overview</a></li><li class='toc-l0'><a class='reference internal' href='../AUTHENTICATION.html'>Authentication Guide</a></li></ul><ul><h4 class="list-item--heading">API</h4><li class='toc-l0'><a class='reference internal' href='../Gcloud.html'>Gcloud</a></li><li class='toc-l0'><a class='reference internal' href='Bigquery.html'>BigQuery</a></li><li class='toc-l0'><a class='reference internal' href='Datastore.html'>Datastore</a></li><li class='toc-l0'><a class='reference internal' href='Dns.html'>DNS</a></li><li class='toc-l0'><a class='reference internal' href='Logging.html'>Logging</a></li><li class='toc-l0'><a class='reference internal' href='Pubsub.html'>Pub/Sub</a></li><li class='toc-l0'><a class='reference internal' href='ResourceManager.html'>Resource Manager</a></li><li class='toc-l0'><a class='reference internal current' href=''>Storage</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Project.html'>Project</a></li><li class='toc-l1'><a class='reference internal' href='Storage/Bucket.html'>Bucket</a></li><li class='toc-l1'><a class='reference internal' href='Storage/File.html'>File</a></li><li class='toc-l0'><a class='reference internal' href='Translate.html'>Translate</a></li><li class='toc-l0'><a class='reference internal' href='../reference.html'>API Reference</a></li></ul>
 
         <ul class="external-links">
           <li>
