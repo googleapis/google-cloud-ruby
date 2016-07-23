@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency                  "grpc", "= 1.0.0.pre1"
   gem.add_dependency                  "google-protobuf", "= 3.0.0.alpha.5.0.5.1"
-  gem.add_dependency                  "google-api-client", "~> 0.9.9"
+  gem.add_dependency                  "google-api-client", "~> 0.9.11"
   gem.add_dependency                  "mime-types", [">= 2.4", "< 4.0"]
   gem.add_dependency                  "digest-crc", "~> 0.4"
   gem.add_dependency                  "zonefile", "~> 1.04"
