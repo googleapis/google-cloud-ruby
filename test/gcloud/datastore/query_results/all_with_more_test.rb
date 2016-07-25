@@ -38,7 +38,7 @@ describe Gcloud::Datastore::Dataset, :all_with_more do
     Google::Datastore::V1beta3::RunQueryResponse.new(
       batch: Google::Datastore::V1beta3::QueryResultBatch.new(
         entity_results: run_query_res_entities,
-        more_results: :MORE_RESULTS_AFTER_CURSOR,
+        more_results: :NOT_FINISHED,
         end_cursor: "second-page-cursor".force_encoding("ASCII-8BIT")
       )
     )
@@ -64,7 +64,7 @@ describe Gcloud::Datastore::Dataset, :all_with_more do
     Google::Datastore::V1beta3::RunQueryResponse.new(
       batch: Google::Datastore::V1beta3::QueryResultBatch.new(
         entity_results: run_query_res_entities,
-        more_results: :MORE_RESULTS_AFTER_CURSOR,
+        more_results: :NOT_FINISHED,
         end_cursor: "third-page-cursor".force_encoding("ASCII-8BIT")
       )
     )

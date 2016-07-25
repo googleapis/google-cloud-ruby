@@ -133,7 +133,7 @@ module Gcloud
         #   end
         #
         def next?
-          !no_more?
+          not_finished?
         end
 
         ##
