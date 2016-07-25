@@ -1,5 +1,97 @@
 # Release History
 
+### 0.12.0 / 2016-07-25
+
+In addition to upgrading the `google-api-client` dependency to the latest version (a significant change in the HTTP stack), this release makes a number of small, breaking changes in anticipation of gcloud-ruby `1.0`.
+
+#### Changes
+
+* Core
+  * Upgrade Google API Client dependency to `0.9`
+  * Upgrade gRPC dependency to `1.0.0.pre1`
+  * Add optional arguments `retries` and `timeout` to service factories
+  * Remove `Gcloud::Error#inner`, use `#cause` instead
+  * Remove `Gcloud::Backoff`
+  * Remove `Gcloud::Upload`
+* BigQuery
+  * Replace `Bigquery::Error` and `Bigquery::ApiError` classes with `Gcloud::Error` classes
+  * Update `Dataset#access` to return a frozen `Dataset::Access` object (was array of hashes)
+  * Remove `Dataset#access=`, use `Dataset#access` with a block to make changes
+  * Update `Dataset#create_table` method
+    * Remove `schema` optional argument
+    * Add `fields` optional argument
+    * Yield `Table::Updater` instead of `Table::Schema`
+  * Remove erroneous `Dataset::Access` methods
+    * `Dataset::Access#add_owner_view`
+    * `Dataset::Access#add_writer_view`
+    * `Dataset::Access#remove_writer_view`
+    * `Dataset::Access#remove_owner_view`
+    * `Dataset::Access#writer_view?`
+    * `Dataset::Access#owner_view?`
+  * Remove erroneous `Job::List#total` accessor
+  * Remove erroneous `Project#access` method
+  * Move `Table::Schema` to `Schema`
+  * Update `Table#schema` to return a frozen `Schema` object (was hash)
+  * Remove `Table#schema=`, use `Table#schema` with a block to make changes
+  * Add `Schema::Field`
+  * Add `View#id` and `#query_id` methods, to match `Table`
+  * Add `Dataset::Updater` class
+  * Add `Table::Updater` class
+  * Remove `Table#load` optional argument `chunk_size`
+* Datastore
+  * Replace `Datastore::Error` and `Datastore::KeyfileError` classes with `Gcloud::Error` classes
+  * Add `KeyError` class
+  * Remove `TransactionError#commit_error` and `#transaction_error` methods, use `#cause` instead
+  * Add `Entity#serialized_size` method
+  * Add `Key#serialized_size` method
+  * Update documentation for emulator (pcostell)
+* DNS
+  * Replace `Dns::Error` and `Dns::ApiError` classes with `Gcloud::Error` classes
+* Logging
+  * Update `Project#entry` with convenient optional arguments
+  * Add `Entry#resource=` method
+  * Add `Entry` severity convenience methods
+    * `Entry#default!`
+    * `Entry#debug!`
+    * `Entry#info!`
+    * `Entry#notice!`
+    * `Entry#warning!`
+    * `Entry#error!`
+    * `Entry#critical!`
+    * `Entry#alert!`
+    * `Entry#emergency!`
+* Pub/Sub
+  * Add `Policy` class
+  * Update `Topic#policy` to yield a `Policy` object to be updated
+  * Update `Topic#policy`/`#policy=` to return/receive `Policy` object (was hash)
+  * Update `Subscription#policy` to yield a `Policy` object to be updated
+  * Update `Subscription#policy`/`#policy=` to return/receive `Policy` object (was hash)
+  * Rename `Topic::Batch` to `Topic::Publisher`
+* Resource Manager
+  * Upgrade to `V1` API
+  * Add `Policy` class
+  * Update `Project#policy` to yield a `Policy` object to be updated
+  * Update `Project#policy`/`#policy=` to return/receive `Policy` object (was hash)
+* Storage
+  * Replace `Storage::Error` and `Storage::ApiError` classes with `Gcloud::Error` classes
+  * Update `Project#create_bucket`
+    * Yield `Bucket::Updater` object instead of a `Bucket::Cors` object
+    * Remove `cors` optional argument
+  * Remove `Bucket#create_file` optional argument `chunk_size`
+  * Remove `Bucket#cors=`, use `Bucket#cors` with a block to make changes
+  * Add `Bucket::Cors::Rule` class
+  * Remove erroneous `Bucket::DefaultAcl` methods
+    * `Bucket::DefaultAcl#writers`
+    * `Bucket::DefaultAcl#add_writer`
+  * Remove erroneous `File::Acl` methods
+    * `File::Acl#writers`
+    * `File::Acl#add_writer`
+* Translate
+  * Replace `Translate::Error` and `Translate::ApiError` classes with `Gcloud::Error` classes
+* Vision
+  * Replace `Vision::Error` and `Vision::ApiError` classes with `Gcloud::Error` classes
+
+
 ### 0.11.0 / 2016-06-13
 
 #### Changes
