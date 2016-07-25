@@ -1,7 +1,16 @@
 --no-private
---title=Gcloud
---exclude lib/gcloud/proto/
---exclude lib/google
+--title=Google Cloud
+--exclude lib/api
+--exclude lib/datastore
+--exclude lib/devtools
+--exclude lib/example
+--exclude lib/iam
+--exclude lib/logging
+--exclude lib/longrunning
+--exclude lib/protobuf
+--exclude lib/pubsub
+--exclude lib/rpc
+--exclude lib/type
 --markup markdown
 
 ./lib/**/*.rb

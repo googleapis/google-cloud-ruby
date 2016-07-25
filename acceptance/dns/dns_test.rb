@@ -16,7 +16,7 @@ require "dns_helper"
 require "tempfile"
 
 # This test is a ruby version of gcloud-node's dns test.
-describe Gcloud::Dns, :dns do
+describe Google::Cloud::Dns, :dns do
   let(:dns) { $dns }
   let(:zone_dns) { $dns_domain }
   let(:zone_name) { $dns_prefix }
@@ -59,7 +59,7 @@ describe Gcloud::Dns, :dns do
     dns.zone(create_zone_name).must_be :nil?
     create_zone = dns.create_zone create_zone_name, create_zone_dns
     create_zone.wont_be :nil?
-    create_zone.must_be_kind_of Gcloud::Dns::Zone
+    create_zone.must_be_kind_of Google::Cloud::Dns::Zone
     dns.zone(create_zone_name).wont_be :nil?
     create_zone.delete force: true
     dns.zone(create_zone_name).must_be :nil?
@@ -163,7 +163,7 @@ describe Gcloud::Dns, :dns do
   describe "Changes" do
     it "creates a change" do
       change = zone.replace zone.dns, "A", 86400, "5.6.7.8"
-      change.must_be_kind_of Gcloud::Dns::Change
+      change.must_be_kind_of Google::Cloud::Dns::Change
       change.wait_until_done!
       change.must_be :done?
       change.status.must_equal "done"
@@ -182,7 +182,7 @@ describe Gcloud::Dns, :dns do
       all_changes = zone.changes.all
       all_changes.count.must_be :>=, 0
       change = zone.change all_changes.first.id
-      change.must_be_kind_of Gcloud::Dns::Change
+      change.must_be_kind_of Google::Cloud::Dns::Change
     end
   end
 

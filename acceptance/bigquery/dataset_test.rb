@@ -13,11 +13,11 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "gcloud/storage"
+require "google/cloud/storage"
 
 # This test is a ruby version of gcloud-node's bigquery test.
 
-describe Gcloud::Bigquery::Dataset, :bigquery do
+describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
@@ -52,7 +52,7 @@ describe Gcloud::Bigquery::Dataset, :bigquery do
 
   it "has the attributes of a dataset" do
     fresh = bigquery.dataset dataset_id
-    fresh.must_be_kind_of Gcloud::Bigquery::Dataset
+    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
 
     fresh.project_id.must_equal bigquery.project
     fresh.dataset_id.must_equal dataset.dataset_id
@@ -76,7 +76,7 @@ describe Gcloud::Bigquery::Dataset, :bigquery do
 
     fresh = bigquery.dataset dataset.dataset_id
     fresh.wont_be :nil?
-    fresh.must_be_kind_of Gcloud::Bigquery::Dataset
+    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
     fresh.dataset_id.must_equal dataset.dataset_id
     fresh.name.must_equal new_name
     fresh.description.must_equal new_desc

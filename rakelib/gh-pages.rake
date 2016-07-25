@@ -261,9 +261,9 @@ namespace :pages do
     require "rubygems"
     spec = Gem::Specification::load("gcloud.gemspec")
 
-    require "gcloud/jsondoc"
+    require "google/cloud/jsondoc"
     registry = YARD::Registry.load! ".yardoc"
-    generator = Gcloud::Jsondoc::Generator.new registry
+    generator = Google::Cloud::Jsondoc::Generator.new registry
     generator.write_to "jsondoc"
   end
 end

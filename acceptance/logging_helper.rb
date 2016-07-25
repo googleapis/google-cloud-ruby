@@ -13,10 +13,10 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/logging"
+require "google/cloud/logging"
 
 # Create shared logging object so we don't create new for each test
-$logging = Gcloud.logging
+$logging = Google::Cloud.logging
 
 # create prefix for names of datasets and tables
 require "time"

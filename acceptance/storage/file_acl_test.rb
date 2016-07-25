@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Gcloud::Storage::File, :acl, :storage do
+describe Google::Cloud::Storage::File, :acl, :storage do
   let :bucket do
     storage.bucket(bucket_name) ||
     storage.create_bucket(bucket_name)

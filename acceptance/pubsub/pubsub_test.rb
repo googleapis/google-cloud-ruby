@@ -16,7 +16,7 @@ require "pubsub_helper"
 
 # This test is a ruby version of gcloud-node's pubsub test.
 
-describe Gcloud::Pubsub, :pubsub do
+describe Google::Cloud::Pubsub, :pubsub do
   def retrieve_topic topic_name
     pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
   end
@@ -41,7 +41,7 @@ describe Gcloud::Pubsub, :pubsub do
     it "should be listed" do
       topics = pubsub.topics
       topics.each do |topic|
-        topic.must_be_kind_of Gcloud::Pubsub::Topic
+        topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       end
       topics.token.must_be :nil?
     end
@@ -51,20 +51,20 @@ describe Gcloud::Pubsub, :pubsub do
       topics = pubsub.topics max: (topic_count - 1)
       topics.count.must_equal (topic_count - 1)
       topics.each do |topic|
-        topic.must_be_kind_of Gcloud::Pubsub::Topic
+        topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       end
       topics.token.wont_be :nil?
 
       # retrieve the next list of topics
       next_topics = pubsub.topics token: topics.token
       next_topics.count.must_equal 1
-      next_topics.first.must_be_kind_of Gcloud::Pubsub::Topic
+      next_topics.first.must_be_kind_of Google::Cloud::Pubsub::Topic
       next_topics.token.must_be :nil?
     end
 
     it "should be created and deleted" do
       topic = pubsub.create_topic new_topic_name
-      topic.must_be_kind_of Gcloud::Pubsub::Topic
+      topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       pubsub.topic(topic.name).wont_be :nil?
       topic.delete
       pubsub.topic(topic.name).must_be :nil?
@@ -75,7 +75,7 @@ describe Gcloud::Pubsub, :pubsub do
       msg = pubsub.topic(topic_names.first).publish data, foo: :bar
 
       msg.wont_be :nil?
-      msg.must_be_kind_of Gcloud::Pubsub::Message
+      msg.must_be_kind_of Google::Cloud::Pubsub::Message
       msg.data.must_equal data
       msg.attributes["foo"].must_equal "bar"
     end
@@ -89,7 +89,7 @@ describe Gcloud::Pubsub, :pubsub do
 
       msgs.wont_be :nil?
       msgs.count.must_equal 3
-      msgs.each { |msg| msg.must_be_kind_of Gcloud::Pubsub::Message }
+      msgs.each { |msg| msg.must_be_kind_of Google::Cloud::Pubsub::Message }
     end
   end
 
@@ -106,7 +106,7 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions = pubsub.subscriptions
       subscriptions.each do |subscription|
         # subscriptions on project are objects...
-        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -116,14 +116,14 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions = pubsub.subscriptions max: (sub_count - 1)
       subscriptions.count.must_equal (sub_count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = pubsub.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
+      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Subscription
       next_subs.token.must_be :nil?
     end
   end
@@ -147,7 +147,7 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions.count.must_equal subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
-        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -156,21 +156,21 @@ describe Gcloud::Pubsub, :pubsub do
       subscriptions = topic.subscriptions max: (subs.count - 1)
       subscriptions.count.must_equal (subs.count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = topic.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Gcloud::Pubsub::Subscription
+      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Subscription
       next_subs.token.must_be :nil?
     end
 
     it "should allow creation of a subscription" do
       subscription = topic.subscribe "#{$topic_prefix}-sub3"
       subscription.wont_be :nil?
-      subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       subscription.delete
     end
 
@@ -182,7 +182,7 @@ describe Gcloud::Pubsub, :pubsub do
     it "should be able to pull and ack" do
       subscription = topic.subscribe "#{$topic_prefix}-sub4"
       subscription.wont_be :nil?
-      subscription.must_be_kind_of Gcloud::Pubsub::Subscription
+      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       # No messages, should be empty
       events = subscription.pull
       events.must_be :empty?
@@ -227,7 +227,7 @@ describe Gcloud::Pubsub, :pubsub do
       permissions = topic.test_permissions roles
       skip "Don't have permissions to get/set topic's policy" unless permissions == roles
 
-      topic.policy.must_be_kind_of Gcloud::Pubsub::Policy
+      topic.policy.must_be_kind_of Google::Cloud::Pubsub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?
@@ -246,7 +246,7 @@ describe Gcloud::Pubsub, :pubsub do
       permissions = subscription.test_permissions roles
       skip "Don't have permissions to get/set subscription's policy" unless permissions == roles
 
-      subscription.policy.must_be_kind_of Gcloud::Pubsub::Policy
+      subscription.policy.must_be_kind_of Google::Cloud::Pubsub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?

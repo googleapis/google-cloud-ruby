@@ -12,12 +12,12 @@ The gcloud-ruby library aims to make authentication as simple as possible. Googl
 
 [Google Cloud BigQuery](https://cloud.google.com/bigquery/) ([docs](https://cloud.google.com/bigquery/docs)) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google's infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.
 
-See the {Gcloud::Bigquery gcloud-ruby BigQuery API documentation} to learn how to connect to Cloud BigQuery using this library.
+See the {Google::Cloud::Bigquery gcloud-ruby BigQuery API documentation} to learn how to connect to Cloud BigQuery using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 bigquery = gcloud.bigquery
 
 # Create a new table to archive todos
@@ -44,12 +44,12 @@ end
 
 Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
 
-See the {Gcloud::Bigquery gcloud-ruby Datastore API documentation} to learn how to interact with the Cloud Datastore using this library.
+See the {Google::Cloud::Bigquery gcloud-ruby Datastore API documentation} to learn how to interact with the Cloud Datastore using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 datastore = gcloud.datastore
 
 # Create a new task to demo datastore
@@ -73,12 +73,12 @@ tasks = datastore.run query
 
 [Google Cloud DNS](https://cloud.google.com/dns/) ([docs](https://cloud.google.com/dns/docs)) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read [What is Google Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
 
-See the {Gcloud::Dns gcloud-ruby DNS API documentation} to learn how to connect to Cloud DNS using this library.
+See the {Google::Cloud::Dns gcloud-ruby DNS API documentation} to learn how to connect to Cloud DNS using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 dns = gcloud.dns
 
 # Retrieve a zone
@@ -108,12 +108,12 @@ end
   Monitoring
 * Write log entries
 
-See the {Gcloud::Logging gcloud-ruby Logging API documentation} to learn how to connect to Cloud Loging using this library.
+See the {Google::Cloud::Logging gcloud-ruby Logging API documentation} to learn how to connect to Cloud Loging using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 logging = gcloud.logging
 
 # List all log entries
@@ -139,12 +139,12 @@ logging.write_entries entry
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
 
-See the {Gcloud::Pubsub gcloud-ruby Pub/Sub API documentation} to learn how to connect to Cloud Pub/Sub using this library.
+See the {Google::Cloud::Pubsub gcloud-ruby Pub/Sub API documentation} to learn how to connect to Cloud Pub/Sub using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 pubsub = gcloud.pubsub
 
 # Retrieve a topic
@@ -170,12 +170,12 @@ msgs = sub.pull
 * Delete projects
 * Undelete, or recover, projects that you don't want to delete
 
-See the {Gcloud::ResourceManager gcloud-ruby Resource Manager API documentation} to learn how to connect to Cloud Resource Manager using this library.
+See the {Google::Cloud::ResourceManager gcloud-ruby Resource Manager API documentation} to learn how to connect to Cloud Resource Manager using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 resource_manager = gcloud.resource_manager
 
 # List all projects
@@ -197,12 +197,12 @@ projects = resource_manager.projects filter: "labels.env:production"
 
 [Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
-See the {Gcloud::Storage gcloud-ruby Storage API documentation} to learn how to connect to Cloud Storage using this library.
+See the {Google::Cloud::Storage gcloud-ruby Storage API documentation} to learn how to connect to Cloud Storage using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 storage = gcloud.storage
 
 bucket = storage.bucket "task-attachments"
@@ -221,12 +221,12 @@ file.copy backup, file.name
 
 [Google Translate](https://cloud.google.com/translate/) ([docs](https://cloud.google.com/translate/docs)) provides a simple, programmatic interface for translating an arbitrary string into any supported language. It is highly responsive, so websites and applications can integrate with Translate API for fast, dynamic translation of source text. Language detection is also available in cases where the source language is unknown.
 
-See the {Gcloud::Translate gcloud-ruby Translate API documentation} to learn how to connect to Google Translate using this library.
+See the {Google::Cloud::Translate gcloud-ruby Translate API documentation} to learn how to connect to Google Translate using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 translate = gcloud.translate
 
 translation = translate.translate "Hello world!", to: "la"
@@ -243,12 +243,12 @@ translation.text #=> "Salve mundi!"
 
 [Google Cloud Vision](https://cloud.google.com/vision/) ([docs](https://cloud.google.com/vision/docs)) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
-See the {Gcloud::Vision gcloud-ruby Cloud Vision API documentation} to learn how to connect to Google Cloud Vision using this library.
+See the {Google::Cloud::Vision gcloud-ruby Cloud Vision API documentation} to learn how to connect to Google Cloud Vision using this library.
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 vision = gcloud.vision
 
 image = vision.image "path/to/landmark.jpg"

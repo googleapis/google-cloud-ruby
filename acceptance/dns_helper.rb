@@ -13,9 +13,9 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/dns"
+require "google/cloud/dns"
 
-Gcloud::Backoff.retries = 10
+Google::Cloud::Backoff.retries = 10
 
 if ENV["GCLOUD_TEST_DNS_DOMAIN"]
   # Create prefix for zone names
@@ -24,7 +24,7 @@ if ENV["GCLOUD_TEST_DNS_DOMAIN"]
   $dns_prefix = "gcloud-#{$dns_nonce}".downcase.gsub "_", "-"
 
   # Create shared dns object so we don't create new for each test
-  $dns = Gcloud.dns
+  $dns = Google::Cloud.dns
   # Create random subdomain to use in tests
   # We do this so we can run multiple build concurrently
   $dns_domain = "#{$dns_nonce}.#{ENV["GCLOUD_TEST_DNS_DOMAIN"]}"

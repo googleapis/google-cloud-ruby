@@ -13,10 +13,10 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/vision"
+require "google/cloud/vision"
 
 # Create shared vision object so we don't create new for each test
-$vision = Gcloud.vision
+$vision = Google::Cloud.vision
 
 module Acceptance
   ##

@@ -48,7 +48,7 @@ describe "Vision", :vision do
       annotation = vision.annotate face_image, faces: 1
 
       annotation.faces.count.must_equal 1
-      annotation.faces.each { |f| f.must_be_kind_of Gcloud::Vision::Annotation::Face }
+      annotation.faces.each { |f| f.must_be_kind_of Google::Cloud::Vision::Annotation::Face }
 
       annotation.must_be :face?
       annotation.wont_be :landmark?
@@ -59,10 +59,10 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
 
       face = annotation.face
-      annotation.face.must_be_kind_of Gcloud::Vision::Annotation::Face
+      annotation.face.must_be_kind_of Google::Cloud::Vision::Annotation::Face
 
       face.bounds.head.must_be_kind_of Array
-      face.bounds.head[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      face.bounds.head[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       face.bounds.head[0].x.must_equal 122
       face.bounds.head[0].y.must_equal nil
       face.bounds.head[0].to_a.must_equal [122, nil]
@@ -79,7 +79,7 @@ describe "Vision", :vision do
       face.features.wont_be :nil?
 
       face.features.confidence.must_equal 0.42813218
-      face.features.chin.center.must_be_kind_of Gcloud::Vision::Annotation::Face::Features::Landmark
+      face.features.chin.center.must_be_kind_of Google::Cloud::Vision::Annotation::Face::Features::Landmark
       face.features.chin.center.x.must_equal 233.21977
       face.features.chin.center.y.must_equal 189.47475
       face.features.chin.center.z.must_equal 19.487228
@@ -175,7 +175,7 @@ describe "Vision", :vision do
       annotation = vision.annotate landmark_image, landmarks: true
 
       annotation.landmarks.count.must_equal 1
-      annotation.landmarks.each { |f| f.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+      annotation.landmarks.each { |f| f.must_be_kind_of Google::Cloud::Vision::Annotation::Entity }
 
       annotation.wont_be :face?
       annotation.must_be :landmark?
@@ -186,7 +186,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
 
       landmark = annotation.landmark
-      landmark.must_be_kind_of Gcloud::Vision::Annotation::Entity
+      landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       landmark.mid.must_equal "/m/019dvv"
       landmark.locale.must_be :nil?
@@ -194,13 +194,13 @@ describe "Vision", :vision do
       landmark.score.must_equal 0.91912264
       landmark.confidence.must_be :nil?
       landmark.topicality.must_be :nil?
-      landmark.bounds[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      landmark.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       landmark.bounds[0].x.must_equal 9
       landmark.bounds[0].y.must_equal 35
       landmark.bounds[1].to_a.must_equal [492, 35]
       landmark.bounds[2].to_a.must_equal [492, 325]
       landmark.bounds[3].to_a.must_equal [9, 325]
-      landmark.locations[0].must_be_kind_of Gcloud::Vision::Location
+      landmark.locations[0].must_be_kind_of Google::Cloud::Vision::Location
       landmark.locations[0].latitude.must_equal 43.878264
       landmark.locations[0].longitude.must_equal -103.45700740814209
       landmark.properties.must_be :empty?
@@ -228,7 +228,7 @@ describe "Vision", :vision do
       annotation = vision.annotate logo_image, logos: true
 
       annotation.logos.count.must_equal 1
-      annotation.logos.each { |l| l.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+      annotation.logos.each { |l| l.must_be_kind_of Google::Cloud::Vision::Annotation::Entity }
 
       annotation.wont_be :face?
       annotation.wont_be :landmark?
@@ -239,7 +239,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
 
       logo = annotation.logo
-      logo.must_be_kind_of Gcloud::Vision::Annotation::Entity
+      logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       logo.mid.must_equal "/m/0b34hf"
       logo.locale.must_be :nil?
@@ -247,7 +247,7 @@ describe "Vision", :vision do
       logo.score.must_equal 0.70057315
       logo.confidence.must_be :nil?
       logo.topicality.must_be :nil?
-      logo.bounds[0].must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      logo.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       logo.bounds[0].x.must_equal 14
       logo.bounds[0].y.must_equal 16
       logo.bounds[1].to_a.must_equal [335, 16]
@@ -279,7 +279,7 @@ describe "Vision", :vision do
       annotation = vision.annotate landmark_image, labels: true
 
       annotation.labels.count.must_equal 6
-      annotation.logos.each { |l| l.must_be_kind_of Gcloud::Vision::Annotation::Entity }
+      annotation.logos.each { |l| l.must_be_kind_of Google::Cloud::Vision::Annotation::Entity }
 
       annotation.wont_be :face?
       annotation.wont_be :landmark?
@@ -290,7 +290,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
 
       label = annotation.label
-      label.must_be_kind_of Gcloud::Vision::Annotation::Entity
+      label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       label.mid.must_equal "/m/02wtjj"
       label.locale.must_be :nil?
@@ -333,14 +333,14 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
 
       text = annotation.text
-      text.must_be_kind_of Gcloud::Vision::Annotation::Text
+      text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
 
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
       text.words.count.must_equal 28
-      text.words[0].must_be_kind_of Gcloud::Vision::Annotation::Text::Word
+      text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
       text.words[0].text.must_be_kind_of String
-      text.words[0].bounds.first.must_be_kind_of Gcloud::Vision::Annotation::Vertex
+      text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       text.words[0].text.must_equal "Google"
       text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
       text.words[27].text.must_equal "Storage."
@@ -433,7 +433,7 @@ describe "Vision", :vision do
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
 
-      annotation.properties.colors[0].must_be_kind_of Gcloud::Vision::Annotation::Properties::Color
+      annotation.properties.colors[0].must_be_kind_of Google::Cloud::Vision::Annotation::Properties::Color
       annotation.properties.colors[0].red.must_equal 145
       annotation.properties.colors[0].green.must_equal 193
       annotation.properties.colors[0].blue.must_equal 254

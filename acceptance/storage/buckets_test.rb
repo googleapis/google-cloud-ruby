@@ -29,21 +29,21 @@ describe "Storage", :buckets, :storage do
 
   it "gets all buckets" do
     storage.buckets.all do |bucket|
-      bucket.must_be_kind_of Gcloud::Storage::Bucket
+      bucket.must_be_kind_of Google::Cloud::Storage::Bucket
     end
   end
 
   it "gets pages of buckets" do
     first_buckets = storage.buckets max: 2
     first_buckets.next?.must_equal true
-    first_buckets.each { |b| b.must_be_kind_of Gcloud::Storage::Bucket }
+    first_buckets.each { |b| b.must_be_kind_of Google::Cloud::Storage::Bucket }
     second_buckets = first_buckets.next
-    second_buckets.each { |b| b.must_be_kind_of Gcloud::Storage::Bucket }
+    second_buckets.each { |b| b.must_be_kind_of Google::Cloud::Storage::Bucket }
   end
 
   it "gets all buckets with request_limit" do
     storage.buckets(max: 2).all(request_limit: 1) do |bucket|
-      bucket.must_be_kind_of Gcloud::Storage::Bucket
+      bucket.must_be_kind_of Google::Cloud::Storage::Bucket
     end
   end
 end

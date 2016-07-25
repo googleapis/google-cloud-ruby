@@ -16,7 +16,7 @@ require "storage_helper"
 require "net/http"
 require "digest/sha2"
 
-describe Gcloud::Storage::File, :storage do
+describe Google::Cloud::Storage::File, :storage do
   let :bucket do
     storage.bucket(bucket_name) ||
     storage.create_bucket(bucket_name)
@@ -53,7 +53,7 @@ describe Gcloud::Storage::File, :storage do
       content_type: "text/plain",
       metadata: { player: "Alice", score: 101 }
 
-    Tempfile.open ["gcloud-ruby", ".png"] do |tmpfile|
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       downloaded = uploaded.download tmpfile
 
       downloaded.size.must_equal original.size
@@ -91,7 +91,7 @@ describe Gcloud::Storage::File, :storage do
   it "should upload and download a larger file" do
     original = File.new files[:big][:path]
     uploaded = bucket.create_file original, "BigLogo.png"
-    Tempfile.open ["gcloud-ruby", ".png"] do |tmpfile|
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       downloaded = uploaded.download tmpfile, verify: :all
 
       downloaded.size.must_equal original.size
@@ -197,7 +197,7 @@ describe Gcloud::Storage::File, :storage do
     uploaded = bucket.create_file original
     uploaded.name.must_equal original.path
 
-    Tempfile.open ["gcloud-ruby", ".png"] do |tmpfile|
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       downloaded = uploaded.download tmpfile
 
       downloaded.size.must_equal original.size
@@ -299,7 +299,7 @@ describe Gcloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     resp = http.get uri.request_uri
-    Tempfile.open ["gcloud-ruby", ".png"] do |tmpfile|
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body
       tmpfile.size.must_equal local_file.size

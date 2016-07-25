@@ -45,9 +45,9 @@ Instructions and configuration options are covered in the [Authentication guide]
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new "my-todo-project-id",
+gcloud = Google::Cloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
 bigquery = gcloud.bigquery
 
@@ -79,9 +79,9 @@ end
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new "my-todo-project-id",
+gcloud = Google::Cloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
 datastore = gcloud.datastore
 
@@ -110,9 +110,9 @@ tasks = datastore.run query
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 dns = gcloud.dns
 
 # Retrieve a zone
@@ -139,9 +139,9 @@ end
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 logging = gcloud.logging
 
 # List all log entries
@@ -171,9 +171,9 @@ logging.write_entries entry
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new "my-todo-project-id",
+gcloud = Google::Cloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
 pubsub = gcloud.pubsub
 
@@ -198,9 +198,9 @@ msgs = sub.pull
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 resource_manager = gcloud.resource_manager
 
 # List all projects
@@ -226,9 +226,9 @@ projects = resource_manager.projects filter: "labels.env:production"
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new "my-todo-project-id",
+gcloud = Google::Cloud.new "my-todo-project-id",
                     "/path/to/keyfile.json"
 storage = gcloud.storage
 
@@ -252,9 +252,9 @@ file.copy backup, file.name
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 translate = gcloud.translate
 
 translation = translate.translate "Hello world!", to: "la"
@@ -275,9 +275,9 @@ translation.text #=> "Salve mundi!"
 #### Preview
 
 ```ruby
-require "gcloud"
+require "google/cloud"
 
-gcloud = Gcloud.new
+gcloud = Google::Cloud.new
 vision = gcloud.vision
 
 image = vision.image "path/to/landmark.jpg"

@@ -13,11 +13,11 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "gcloud/storage"
+require "google/cloud/storage"
 
 # This test is a ruby version of gcloud-node's bigquery test.
 
-describe Gcloud::Bigquery, :bigquery do
+describe Google::Cloud::Bigquery, :bigquery do
   let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
@@ -64,7 +64,7 @@ describe Gcloud::Bigquery, :bigquery do
     # The code in before ensures we have at least one dataset
     datasets.count.wont_be :zero?
     datasets.all(request_limit: 1).each do |ds|
-      ds.must_be_kind_of Gcloud::Bigquery::Dataset
+      ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
       ds.created_at.must_be_kind_of Time # Loads full representation
     end
     more_datasets = datasets.next
@@ -86,13 +86,13 @@ describe Gcloud::Bigquery, :bigquery do
 
   it "should run an query" do
     rows = bigquery.query publicdata_query
-    rows.class.must_equal Gcloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 100
   end
 
   it "should run an query job" do
     job = bigquery.query_job publicdata_query
-    job.must_be_kind_of Gcloud::Bigquery::Job
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
 
     rows = job.query_results
     rows.count.must_equal 100
@@ -100,6 +100,6 @@ describe Gcloud::Bigquery, :bigquery do
 
   it "should get a list of jobs" do
     jobs = bigquery.jobs.all
-    jobs.each { |job| job.must_be_kind_of Gcloud::Bigquery::Job }
+    jobs.each { |job| job.must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 end

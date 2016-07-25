@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Gcloud::Storage::Bucket, :default_acl, :storage do
+describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||

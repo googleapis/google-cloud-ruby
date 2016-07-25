@@ -13,12 +13,12 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/bigquery"
+require "google/cloud/bigquery"
 
-Gcloud::Backoff.retries = 10
+Google::Cloud::Backoff.retries = 10
 
 # Create shared bigquery object so we don't create new for each test
-$bigquery = Gcloud.bigquery
+$bigquery = Google::Cloud.bigquery
 
 # create prefix for names of datasets and tables
 require "time"

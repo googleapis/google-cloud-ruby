@@ -1,5 +1,5 @@
 require "helper"
-require "gcloud/datastore"
+require "google/cloud/datastore"
 
 module Acceptance
   ##
@@ -21,7 +21,7 @@ module Acceptance
     ##
     # Setup project based on available ENV variables
     def setup
-      @dataset = Gcloud.datastore
+      @dataset = Google::Cloud.datastore
 
       refute_nil @dataset, "You do not have an active dataset to run the tests."
 

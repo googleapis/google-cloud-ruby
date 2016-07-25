@@ -19,7 +19,7 @@ require "datastore_helper"
 describe "Datastore", :datastore do
 
   it "should allocate IDs" do
-    incomplete_key = Gcloud::Datastore::Key.new "Kind"
+    incomplete_key = Google::Cloud::Datastore::Key.new "Kind"
     incomplete_key.wont_be :complete?
 
     keys = dataset.allocate_ids incomplete_key, 10
@@ -31,7 +31,7 @@ describe "Datastore", :datastore do
   describe "create, retrieve and delete" do
 
     let(:post) do
-      Gcloud::Datastore::Entity.new.tap do |e|
+      Google::Cloud::Datastore::Entity.new.tap do |e|
         e["title"]       = "How to make the perfect pizza in your grill"
         e["tags"]        = ["pizza", "grill"]
         e["publishedAt"] = Time.new 2001, 1, 1
@@ -43,7 +43,7 @@ describe "Datastore", :datastore do
     end
 
     let(:post2) do
-      Gcloud::Datastore::Entity.new.tap do |e|
+      Google::Cloud::Datastore::Entity.new.tap do |e|
         e["title"]       = "How to make the perfect homemade pasta"
         e["tags"]        = ["pasta", "homemade"]
         e["publishedAt"] = Time.parse "2001-01-01T00:00:00.000Z"
@@ -55,7 +55,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete with a key name" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post1"
       post.exclude_from_indexes! "author", true
       # Verify the index excludes are set properly
       post.exclude_from_indexes?("title").must_equal false
@@ -78,7 +78,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find with a key name and delete with a key" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post2"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post2"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -93,7 +93,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete with a numeric key id" do
-      post.key = Gcloud::Datastore::Key.new "Post", 123456789
+      post.key = Google::Cloud::Datastore::Key.new "Post", 123456789
       dataset.save post
 
       refresh = dataset.find post.key
@@ -108,7 +108,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete with a generated key id" do
-      post.key = Gcloud::Datastore::Key.new "Post"
+      post.key = Google::Cloud::Datastore::Key.new "Post"
 
       post.key.id.must_be :nil?
 
@@ -128,8 +128,8 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete multiple entities at once" do
-      post.key  = Gcloud::Datastore::Key.new "Post"
-      post2.key = Gcloud::Datastore::Key.new "Post"
+      post.key  = Google::Cloud::Datastore::Key.new "Post"
+      post2.key = Google::Cloud::Datastore::Key.new "Post"
 
       post.key.must_be :incomplete?
       post2.key.must_be :incomplete?
@@ -149,8 +149,8 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete multiple entities with commit" do
-      post.key  = Gcloud::Datastore::Key.new "Post"
-      post2.key = Gcloud::Datastore::Key.new "Post"
+      post.key  = Google::Cloud::Datastore::Key.new "Post"
+      post2.key = Google::Cloud::Datastore::Key.new "Post"
 
       post.key.must_be :incomplete?
       post2.key.must_be :incomplete?
@@ -175,7 +175,7 @@ describe "Datastore", :datastore do
     end
 
     it "entities retrieved from datastore have immutable keys" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post3"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post3"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -183,7 +183,7 @@ describe "Datastore", :datastore do
       refresh.key.must_be :frozen?
 
       assert_raises RuntimeError do
-        refresh.key = Gcloud::Datastore::Key.new "User", 456789
+        refresh.key = Google::Cloud::Datastore::Key.new "User", 456789
       end
 
       assert_raises RuntimeError do
@@ -195,7 +195,7 @@ describe "Datastore", :datastore do
 
     it "should save and read blob values" do
       avatar = File.open("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")
-      post.key  = Gcloud::Datastore::Key.new "Post", "blob_support"
+      post.key  = Google::Cloud::Datastore::Key.new "Post", "blob_support"
       post["avatar"] = avatar
       post.exclude_from_indexes! "avatar", true
 
@@ -224,7 +224,7 @@ describe "Datastore", :datastore do
     end
 
     it "should find with specifying consistency" do
-      post.key = Gcloud::Datastore::Key.new "Post", "post1"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post1"
       dataset.save post
 
       refresh = dataset.find post.key, consistency: :eventual
@@ -240,13 +240,13 @@ describe "Datastore", :datastore do
   end
 
   it "should be able to save keys as a part of entity and query by key" do
-    person = Gcloud::Datastore::Entity.new
-    person.key = Gcloud::Datastore::Key.new "Person", "name"
+    person = Google::Cloud::Datastore::Entity.new
+    person.key = Google::Cloud::Datastore::Key.new "Person", "name"
     person["fullName"] = "Full name"
     person["linkedTo"] = person.key # itself
     dataset.save person
 
-    query = Gcloud::Datastore::Query.new.kind("Person").
+    query = Google::Cloud::Datastore::Query.new.kind("Person").
       where("linkedTo", "=", person.key)
 
     entities = dataset.run query
@@ -262,105 +262,105 @@ describe "Datastore", :datastore do
   describe "querying the datastore" do
 
     let(:book) do
-      book = Gcloud::Datastore::Entity.new.tap do |e|
+      book = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["title"] = "Game of Thrones"
       end
-      book.key = Gcloud::Datastore::Key.new "Book", "GoT"
+      book.key = Google::Cloud::Datastore::Key.new "Book", "GoT"
       book
     end
 
     let(:rickard) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Rickard"
         e["family"]      = "Stark"
         e["appearances"] = 0
         e["alive"]       = false
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Rickard"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Rickard"
       character.key.parent = book
       character
     end
 
     let(:eddard) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Eddard"
         e["family"]      = "Stark"
         e["appearances"] = 9
         e["alive"]       = false
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Eddard"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Eddard"
       character.key.parent = rickard
       character
     end
 
     let(:catelyn) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Catelyn"
         e["family"]      = "Stark"
         e["appearances"] = 26
         e["alive"]       = false
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Catelyn"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Catelyn"
       character.key.parent = book
       character
     end
 
     let(:arya) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Arya"
         e["family"]      = "Stark"
         e["appearances"] = 33
         e["alive"]       = true
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Arya"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Arya"
       character.key.parent = eddard
       character
     end
 
     let(:sansa) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Sansa"
         e["family"]      = "Stark"
         e["appearances"] = 31
         e["alive"]       = true
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Sansa"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Sansa"
       character.key.parent = eddard
       character
     end
 
     let(:robb) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Robb"
         e["family"]      = "Stark"
         e["appearances"] = 22
         e["alive"]       = false
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Robb"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Robb"
       character.key.parent = eddard
       character
     end
 
     let(:bran) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Bran"
         e["family"]      = "Stark"
         e["appearances"] = 25
         e["alive"]       = true
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Bran"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Bran"
       character.key.parent = eddard
       character
     end
 
     let(:jonsnow) do
-      character = Gcloud::Datastore::Entity.new.tap do |e|
+      character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Jon Snow"
         e["family"]      = "Stark"
         e["appearances"] = 32
         e["alive"]       = true
       end
-      character.key = Gcloud::Datastore::Key.new "Character", "Jon Snow"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Jon Snow"
       character.key.parent = eddard
       character
     end
@@ -375,7 +375,7 @@ describe "Datastore", :datastore do
 
     it "should limit queries" do
       # first page
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).limit(5)
       entities = dataset.run query
       entities.count.must_equal 5
@@ -392,7 +392,7 @@ describe "Datastore", :datastore do
     end
 
     it "should filter queries with simple indexes" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("appearances", ">=", 20)
       entities = dataset.run query
@@ -400,7 +400,7 @@ describe "Datastore", :datastore do
     end
 
     it "should filter queries with defined indexes" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
@@ -409,21 +409,21 @@ describe "Datastore", :datastore do
     end
 
     it "should filter by ancestor key" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book.key)
       entities = dataset.run query
       entities.count.must_equal 8
     end
 
     it "should filter by ancestor entity" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book)
       entities = dataset.run query
       entities.count.must_equal 8
     end
 
     it "should filter by key" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("__key__", "=", rickard.key)
       entities = dataset.run query
@@ -431,7 +431,7 @@ describe "Datastore", :datastore do
     end
 
     it "should order queries" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         order("appearances")
       entities = dataset.run query
@@ -441,7 +441,7 @@ describe "Datastore", :datastore do
     end
 
     it "should select projections" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         select("name", "family")
       entities = dataset.run query
@@ -453,7 +453,7 @@ describe "Datastore", :datastore do
     end
 
     it "should paginate with offset and limit" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).offset(2).order("appearances")
       entities = dataset.run query
@@ -470,7 +470,7 @@ describe "Datastore", :datastore do
     end
 
     it "should paginate with all" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         order("appearances")
       entities = dataset.run(query).all.to_a
@@ -480,7 +480,7 @@ describe "Datastore", :datastore do
     end
 
     it "should resume from a start cursor" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).order("appearances")
       entities = dataset.run query
@@ -490,7 +490,7 @@ describe "Datastore", :datastore do
 
       next_cursor = entities.cursor
       next_cursor.wont_be :nil?
-      next_query = Gcloud::Datastore::Query.new.
+      next_query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).order("appearances").
         cursor(next_cursor)
@@ -501,7 +501,7 @@ describe "Datastore", :datastore do
 
       last_cursor = next_entities.cursor
       last_cursor.wont_be :nil?
-      last_query = Gcloud::Datastore::Query.new.
+      last_query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         limit(3).order("appearances").
         cursor(last_cursor)
@@ -512,7 +512,7 @@ describe "Datastore", :datastore do
     end
 
     it "should group queries" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         group_by("alive")
       entities = dataset.run query
@@ -555,7 +555,7 @@ describe "Datastore", :datastore do
     end
 
     it "should specify consistency" do
-      query = Gcloud::Datastore::Query.new.
+      query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
@@ -571,8 +571,8 @@ describe "Datastore", :datastore do
   describe "transactions" do
 
     it "should run in a transaction block" do
-      obj = Gcloud::Datastore::Entity.new
-      obj.key = Gcloud::Datastore::Key.new "Company", "Google"
+      obj = Google::Cloud::Datastore::Entity.new
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
       dataset.transaction do |t|
@@ -592,8 +592,8 @@ describe "Datastore", :datastore do
     end
 
     it "should run in an explicit transaction" do
-      obj = Gcloud::Datastore::Entity.new
-      obj.key = Gcloud::Datastore::Key.new "Company", "Google"
+      obj = Google::Cloud::Datastore::Entity.new
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "Google"
       obj["url"] = "www.google.com"
 
       tx = dataset.transaction
