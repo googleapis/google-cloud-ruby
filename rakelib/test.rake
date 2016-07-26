@@ -19,55 +19,55 @@ namespace :test do
   desc "Runs datastore tests."
   task :datastore do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs storage tests."
   task :storage do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs pubsub tests."
   task :pubsub do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs bigquery tests."
   task :bigquery do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs dns tests."
   task :dns do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs resource_manager tests."
   task :resource_manager do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs logging tests."
   task :logging do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs translate tests."
   task :translate do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
     desc "Runs vision tests."
     task :vision do
       $LOAD_PATH.unshift "lib", "test"
-      Dir.glob("test/gcloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("test/google/cloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
   desc "Runs tests with coverage."
