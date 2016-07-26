@@ -1,16 +1,16 @@
 --no-private
 --title=Google Cloud
---exclude lib/api
---exclude lib/datastore
---exclude lib/devtools
---exclude lib/example
---exclude lib/iam
---exclude lib/logging
---exclude lib/longrunning
---exclude lib/protobuf
---exclude lib/pubsub
---exclude lib/rpc
---exclude lib/type
+--exclude lib/google/api
+--exclude lib/google/datastore
+--exclude lib/google/devtools
+--exclude lib/google/example
+--exclude lib/google/iam
+--exclude lib/google/logging
+--exclude lib/google/longrunning
+--exclude lib/google/protobuf
+--exclude lib/google/pubsub
+--exclude lib/google/rpc
+--exclude lib/google/type
 --markup markdown
 
 ./lib/**/*.rb
