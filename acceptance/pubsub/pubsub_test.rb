@@ -62,11 +62,12 @@ describe Gcloud::Pubsub, :pubsub do
       next_topics.token.must_be :nil?
     end
 
-    it "should be created" do
+    it "should be created and deleted" do
       topic = pubsub.create_topic new_topic_name
       topic.must_be_kind_of Gcloud::Pubsub::Topic
-      topic.wont_be :nil?
+      pubsub.topic(topic.name).wont_be :nil?
       topic.delete
+      pubsub.topic(topic.name).must_be :nil?
     end
 
     it "should publish a message" do
@@ -89,12 +90,6 @@ describe Gcloud::Pubsub, :pubsub do
       msgs.wont_be :nil?
       msgs.count.must_equal 3
       msgs.each { |msg| msg.must_be_kind_of Gcloud::Pubsub::Message }
-    end
-
-    it "should be deleted" do
-      old_topics_count = pubsub.topics.count
-      pubsub.topics.first.delete
-      pubsub.topics.count.must_equal (old_topics_count - 1)
     end
   end
 
