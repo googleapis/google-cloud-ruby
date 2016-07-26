@@ -14,7 +14,7 @@
 
 
 require "gcloud/errors"
-require "google/apis/cloudresourcemanager_v1beta1"
+require "google/apis/cloudresourcemanager_v1"
 
 module Gcloud
   module ResourceManager
