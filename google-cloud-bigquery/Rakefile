@@ -1,0 +1,85 @@
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+
+  desc "Runs tests with coveralls."
+  task :coveralls do
+    require "simplecov"
+    require "coveralls"
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Runs the bigquery acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake test:acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance"
+  end
+  # always overwrite when running tests
+  ENV["BIGQUERY_PROJECT"] = project
+  ENV["BIGQUERY_KEYFILE"] = keyfile
+
+  $LOAD_PATH.unshift "lib", "test", "acceptance"
+  Dir.glob("acceptance/bigquery/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :acceptance do
+  desc "Runs tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["acceptance"].invoke
+  end
+
+  desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
+  task :cleanup, :project, :keyfile do |t, args|
+    project = args[:project]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake test:acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:cleanup"
+    end
+    # always overwrite when running tests
+    ENV["BIGQUERY_PROJECT"] = project
+    ENV["BIGQUERY_KEYFILE"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/bigquery"
+    puts "Cleaning up BigQuery datasets and tables"
+    Google::Cloud.bigquery.datasets.each do |ds|
+      begin
+        ds.tables.map &:delete
+        ds.delete
+      rescue Google::Cloud::Bigquery::ApiError => e
+        puts e.message
+      end
+    end
+  end
+end
+
+task :default => :test

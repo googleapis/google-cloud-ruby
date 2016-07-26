@@ -295,51 +295,6 @@ namespace :test do
       end
     end
 
-    desc "Runs the bigquery acceptance tests."
-    task :bigquery, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:bigquery"
-      end
-      # always overwrite when running tests
-      ENV["BIGQUERY_PROJECT"] = project
-      ENV["BIGQUERY_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :bigquery do
-      desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:bigquery:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:bigquery:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["BIGQUERY_PROJECT"] = project
-        ENV["BIGQUERY_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "google/cloud/bigquery"
-        puts "Cleaning up BigQuery datasets and tables"
-        Google::Cloud.bigquery.datasets.each do |ds|
-          begin
-            ds.tables.map &:delete
-            ds.delete
-          rescue Google::Cloud::Bigquery::ApiError => e
-            puts e.message
-          end
-        end
-      end
-    end
-
     desc "Runs the dns acceptance tests."
     task :dns, :project, :keyfile do |t, args|
       project = args[:project]

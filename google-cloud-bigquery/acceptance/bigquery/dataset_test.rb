@@ -13,9 +13,6 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "google/cloud/storage"
-
-# This test is a ruby version of gcloud-node's bigquery test.
 
 describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }

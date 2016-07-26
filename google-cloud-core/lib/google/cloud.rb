@@ -207,52 +207,6 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the BigQuery service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/bigquery`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default request timeout in seconds. Optional.
-    #
-    # @return [Google::Cloud::Bigquery::Project]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud = Google::Cloud.new
-    #   bigquery = gcloud.bigquery
-    #   dataset = bigquery.dataset "my-dataset"
-    #   table = dataset.table "my-table"
-    #   table.data.each do |row|
-    #     puts row
-    #   end
-    #
-    # @example The default scope can be overridden with the `scope` option:
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
-    #   bigquery = gcloud.bigquery scope: platform_scope
-    #
-    def bigquery scope: nil, retries: nil, timeout: nil
-      require "google/cloud/bigquery"
-      Google::Cloud.bigquery @project, @keyfile, scope: scope,
-                                                 retries: (retries || @retries),
-                                                 timeout: (timeout || @timeout)
-    end
-
-    ##
     # Creates a new object for connecting to the DNS service.
     # Each call creates a new connection.
     #

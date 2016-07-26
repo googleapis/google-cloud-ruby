@@ -3,7 +3,7 @@ require File.expand_path("../lib/google/cloud/core/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-core"
-  gem.version       = Gcloud::GCLOUD_VERSION
+  gem.version       = Google::Cloud::Core::VERSION
 
   gem.authors       = ["Mike Moore", "Chris Smith"]
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]

@@ -15,10 +15,8 @@
 require "helper"
 require "google/cloud/bigquery"
 
-Google::Cloud::Backoff.retries = 10
-
 # Create shared bigquery object so we don't create new for each test
-$bigquery = Google::Cloud.bigquery
+$bigquery = Google::Cloud.new.bigquery retries: 10
 
 # create prefix for names of datasets and tables
 require "time"

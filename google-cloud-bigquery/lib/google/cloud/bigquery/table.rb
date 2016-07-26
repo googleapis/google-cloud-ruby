@@ -685,7 +685,7 @@ module Google
                       skip_leading: skip_leading, dryrun: dryrun }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
-          fail Google::Cloud::Bigquery::Error, "Don't know how to load #{file}"
+          fail Google::Cloud::Error, "Don't know how to load #{file}"
         end
 
         ##

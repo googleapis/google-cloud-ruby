@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/version"
+require "google/cloud/bigquery/version"
 require "google/cloud/errors"
 require "google/apis/bigquery_v2"
 require "pathname"
@@ -43,8 +43,9 @@ module Google
           @credentials = credentials
           @credentials = credentials
           @service = API::BigqueryService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = Google::Cloud::VERSION
+          @service.client_options.application_name    = "google-cloud-bigquery"
+          @service.client_options.application_version = \
+            Google::Cloud::Bigquery::VERSION
           @service.request_options.retries = retries || 3
           @service.request_options.timeout_sec = timeout if timeout
           @service.authorization = @credentials.client

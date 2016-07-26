@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "google/cloud/storage"
+# require "google/cloud/storage"
 
 describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
-  let(:local_file) { "acceptance/data/kitten-test-data.json" }
+  let(:local_file) { "../acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
 
   it "has the attributes of a table" do
@@ -191,6 +191,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "imports data from a file in your bucket" do
+    skip "Skipping because google-cloud-storage isn't available yet"
     begin
       bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
       file = bucket.create_file local_file
@@ -224,6 +225,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "extracts data to a url in your bucket" do
+    skip "Skipping because google-cloud-storage isn't available yet"
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file
@@ -284,6 +286,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "extracts data to a file in your bucket" do
+    skip "Skipping because google-cloud-storage isn't available yet"
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file

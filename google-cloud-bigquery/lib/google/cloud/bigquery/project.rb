@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/gce"
+require "google/cloud/core/gce"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/credentials"
@@ -78,9 +78,9 @@ module Google
         # @private Default project.
         def self.default_project
           ENV["BIGQUERY_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
-            Google::Cloud::GCE.project_id
+            ENV["GCLOUD_PROJECT"] ||
+            Google::Cloud::Core::GCE.project_id
         end
 
         ##
