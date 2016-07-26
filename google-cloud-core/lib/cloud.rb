@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/version"
+require "google/cloud/core/version"
 
 ##
 # # Google Cloud
