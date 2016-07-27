@@ -32,18 +32,18 @@ end
 desc "Runs the storage acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake test:acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance"
+    fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
   end
   # always overwrite when running tests
-  ENV["BIGQUERY_PROJECT"] = project
-  ENV["BIGQUERY_KEYFILE"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "test", "acceptance"
-  Dir.glob("acceptance/storage/**/*_test.rb").each { |file| require_relative file }
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
@@ -55,30 +55,23 @@ namespace :acceptance do
     Rake::Task["acceptance"].invoke
   end
 
-  desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
-  task :cleanup, :project, :keyfile do |t, args|
+  desc "Removes *ALL* buckets and files. Use with caution."
+  task :cleanup do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:cleanup"
+      fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage:cleanup[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage:cleanup"
     end
     # always overwrite when running tests
-    ENV["BIGQUERY_PROJECT"] = project
-    ENV["BIGQUERY_KEYFILE"] = keyfile
+    ENV["STORAGE_PROJECT"] = project
+    ENV["STORAGE_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib"
     require "google/cloud/storage"
-    puts "Cleaning up BigQuery datasets and tables"
-    Google::Cloud.storage.datasets.each do |ds|
-      begin
-        ds.tables.map &:delete
-        ds.delete
-      rescue Google::Cloud::Bigquery::ApiError => e
-        puts e.message
-      end
-    end
+    puts "Cleaning up Storage buckets and files"
+    Google::Cloud.storage.buckets.all { |b| b.files.all(&:delete); b.delete }
   end
 end
 

@@ -42,7 +42,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["BIGQUERY_PROJECT"] = project
   ENV["BIGQUERY_KEYFILE"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "test", "acceptance"
+  $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/bigquery/**/*_test.rb").each { |file| require_relative file }
 end
 
@@ -71,9 +71,9 @@ namespace :acceptance do
     $LOAD_PATH.unshift "lib"
     require "google/cloud/bigquery"
     puts "Cleaning up BigQuery datasets and tables"
-    Google::Cloud.bigquery.datasets.each do |ds|
+    Google::Cloud.bigquery.datasets.all do |ds|
       begin
-        ds.tables.map &:delete
+        ds.tables.all &:delete
         ds.delete
       rescue Google::Cloud::Bigquery::ApiError => e
         puts e.message

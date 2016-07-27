@@ -68,56 +68,6 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Datastore service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/datastore`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Datastore::Dataset]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   datastore = gcloud.datastore
-    #
-    #   task = datastore.entity "Task" do |t|
-    #     t["type"] = "Personal"
-    #     t["done"] = false
-    #     t["priority"] = 4
-    #     t["description"] = "Learn Cloud Datastore"
-    #   end
-    #
-    #   datastore.save task
-    #
-    # @example You shouldn't need to override the default scope, but you can:
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
-    #   datastore = gcloud.datastore scope: platform_scope
-    #
-    def datastore scope: nil, retries: nil, timeout: nil
-      require "google/cloud/datastore"
-      Google::Cloud.datastore @project, @keyfile,
-                              scope: scope, retries: (retries || @retries),
-                              timeout: (timeout || @timeout)
-    end
-
-    ##
     # Creates a new object for connecting to the Pub/Sub service.
     # Each call creates a new connection.
     #

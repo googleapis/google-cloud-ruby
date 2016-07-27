@@ -16,28 +16,10 @@ require "rake/testtask"
 
 namespace :test do
 
-  desc "Runs datastore tests."
-  task :datastore do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
-  desc "Runs storage tests."
-  task :storage do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs pubsub tests."
   task :pubsub do
     $LOAD_PATH.unshift "lib", "test"
     Dir.glob("test/google/cloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
-  desc "Runs bigquery tests."
-  task :bigquery do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs dns tests."
@@ -199,61 +181,6 @@ namespace :test do
       # Rake::Task["test"].execute
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the datastore acceptance tests."
-    task :datastore, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:datastore"
-      end
-      # always overwrite when running tests
-      ENV["DATASTORE_PROJECT"] = project
-      ENV["DATASTORE_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the storage acceptance tests."
-    task :storage, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage"
-      end
-      # always overwrite when running tests
-      ENV["STORAGE_PROJECT"] = project
-      ENV["STORAGE_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :storage do
-      desc "Removes *ALL* buckets and files. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:storage:cleanup[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:storage:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["STORAGE_PROJECT"] = project
-        ENV["STORAGE_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "google/cloud/storage"
-        puts "Cleaning up Storage buckets and files"
-        Google::Cloud.storage.buckets.each { |b| b.files.map(&:delete); b.delete }
-      end
     end
 
     desc "Runs the pubsub acceptance tests."

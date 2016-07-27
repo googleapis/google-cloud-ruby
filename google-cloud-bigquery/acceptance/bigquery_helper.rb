@@ -12,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/bigquery"
+require "google/cloud/storage"
 
 # Create shared bigquery object so we don't create new for each test
 $bigquery = Google::Cloud.new.bigquery retries: 10

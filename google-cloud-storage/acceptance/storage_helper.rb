@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/storage"
 
 # Create shared storage object so we don't create new for each test

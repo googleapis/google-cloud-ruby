@@ -1,0 +1,61 @@
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+
+  desc "Runs tests with coveralls."
+  task :coveralls do
+    require "simplecov"
+    require "coveralls"
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Runs the datastore acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATASTORE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake test:acceptance:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:datastore"
+  end
+  # always overwrite when running tests
+  ENV["DATASTORE_PROJECT"] = project
+  ENV["DATASTORE_KEYFILE"] = keyfile
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :acceptance do
+  desc "Runs tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["acceptance"].invoke
+  end
+
+  # TODO: Add a setup task to create indexes for the datastore
+end
+
+task :default => :test
