@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/version"
-require "google/cloud/backoff"
+require "google/cloud/storage/version"
+require "google/cloud/core/backoff"
 require "google/apis/storage_v1"
 require "digest"
 require "mime/types"
@@ -44,8 +44,9 @@ module Google
           @credentials = credentials
           @credentials = credentials
           @service = API::StorageService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = Google::Cloud::VERSION
+          @service.client_options.application_name    = "google-cloud-storage"
+          @service.client_options.application_version = \
+            Google::Cloud::Storage::VERSION
           @service.request_options.retries = retries || 3
           @service.request_options.timeout_sec = timeout if timeout
           @service.authorization = @credentials.client

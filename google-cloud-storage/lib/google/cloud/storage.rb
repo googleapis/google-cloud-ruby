@@ -13,63 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud"
+require "google-cloud-storage"
 require "google/cloud/storage/project"
 
 module Google
   module Cloud
-    ##
-    # Creates a new object for connecting to the Storage service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String] project Project identifier for the Storage service you are
-    #   connecting to.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/devstorage.full_control`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Storage::Project]
-    #
-    # @example
-    #   require "google/cloud/storage"
-    #
-    #   storage = Google::Cloud.storage "my-todo-project",
-    #                            "/path/to/keyfile.json"
-    #
-    #   bucket = storage.bucket "my-bucket"
-    #   file = bucket.file "path/to/my-file.ext"
-    #
-    def self.storage project = nil, keyfile = nil, scope: nil, retries: nil,
-                     timeout: nil
-      project ||= Google::Cloud::Storage::Project.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Storage::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Storage::Credentials.new(
-          keyfile, scope: scope)
-      end
-
-      Google::Cloud::Storage::Project.new(
-        Google::Cloud::Storage::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
-    end
-
     ##
     # # Google Cloud Storage
     #

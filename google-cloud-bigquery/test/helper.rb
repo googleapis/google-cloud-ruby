@@ -20,7 +20,7 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/bigquery"
-require "google/apis/storage_v1"
+require "google/cloud/storage"
 
 ##
 # Monkey-Patch Google API Client to support Mocks

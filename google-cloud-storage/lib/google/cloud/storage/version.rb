@@ -1,4 +1,4 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,19 +13,10 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
-
 module Google
   module Cloud
     module Storage
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Storage.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"]
-        PATH_ENV_VARS = %w(STORAGE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(STORAGE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
-      end
+      VERSION = "0.20.0"
     end
   end
 end

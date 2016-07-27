@@ -118,52 +118,6 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Storage service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @see https://cloud.google.com/storage/docs/authentication#oauth Storage
-    #   OAuth 2.0 Authentication
-    #
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/devstorage.full_control`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Storage::Project]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   storage = gcloud.storage
-    #   bucket = storage.bucket "my-bucket"
-    #   file = bucket.file "path/to/my-file.ext"
-    #
-    # @example The default scope can be overridden with the `scope` option:
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
-    #   readonly_storage = gcloud.storage scope: readonly_scope
-    #
-    def storage scope: nil, retries: nil, timeout: nil
-      require "google/cloud/storage"
-      Google::Cloud.storage @project, @keyfile, scope: scope,
-                                                retries: (retries || @retries),
-                                                timeout: (timeout || @timeout)
-    end
-
-    ##
     # Creates a new object for connecting to the Pub/Sub service.
     # Each call creates a new connection.
     #

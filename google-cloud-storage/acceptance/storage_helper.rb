@@ -15,14 +15,8 @@
 require "helper"
 require "google/cloud/storage"
 
-# Increase the number of retries because we run so many tests in parallel
-require "google/cloud/backoff"
-
-Google::Cloud::Backoff.retries = 10
-Google::Cloud::Backoff.backoff = ->(retries) { puts "Backoff #{retries}"; sleep retries.to_i }
-
 # Create shared storage object so we don't create new for each test
-$storage = Google::Cloud.storage
+$storage = Google::Cloud.new.storage retries: 10
 
 module Acceptance
   ##
