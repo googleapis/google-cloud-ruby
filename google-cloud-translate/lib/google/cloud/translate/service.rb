@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/version"
 require "google/cloud/errors"
+require "google/cloud/translate/version"
 require "google/apis/translate_v2"
 
 module Google
@@ -34,8 +34,9 @@ module Google
         # Creates a new Service instance.
         def initialize key, retries: nil, timeout: nil
           @service = API::TranslateService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = Google::Cloud::VERSION
+          @service.client_options.application_name    = "google-cloud-translate"
+          @service.client_options.application_version = \
+            Google::Cloud::Translate::VERSION
           @service.request_options.retries = retries || 3
           @service.request_options.timeout_sec = timeout if timeout
           @service.authorization = nil

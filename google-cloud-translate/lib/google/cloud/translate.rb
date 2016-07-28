@@ -13,60 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud"
+require "google-cloud-translate"
 require "google/cloud/translate/api"
 
 module Google
   module Cloud
-    ##
-    # Creates a new object for connecting to the Translate service.
-    # Each call creates a new connection.
-    #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
-    #
-    # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Translate::Api]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   translate = Google::Cloud.translate "api-key-abc123XYZ789"
-    #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    # @example Using API Key from the environment variable.
-    #   require "google/cloud"
-    #
-    #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
-    #
-    #   translate = Google::Cloud.translate
-    #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    def self.translate key = nil, retries: nil, timeout: nil
-      key ||= ENV["TRANSLATE_KEY"]
-      if key.nil?
-        key_missing_msg = "An API key is required to use the Translate API."
-        fail ArgumentError, key_missing_msg
-      end
-
-      Google::Cloud::Translate::Api.new(
-        Google::Cloud::Translate::Service.new(
-          key, retries: retries, timeout: timeout))
-    end
-
     ##
     # # Google Translate API
     #

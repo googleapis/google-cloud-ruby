@@ -12,17 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/translate"
 
-Google::Cloud::Backoff.retries = 10
-
-if ENV["GCLOUD_TEST_TRANSLATE_KEY"]
-  # Create shared translate object so we don't create new for each test
-  $translate = Google::Cloud.translate ENV["GCLOUD_TEST_TRANSLATE_KEY"]
-else
-  puts "No API Key found for the Translate acceptance tests."
-end
+# Create shared translate object so we don't create new for each test
+$translate = Google::Cloud.new.translate retries: 10
 
 module Acceptance
   ##

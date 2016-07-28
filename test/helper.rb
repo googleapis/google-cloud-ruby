@@ -429,16 +429,6 @@ class MockBigquery < Minitest::Spec
   end
 end
 
-class MockTranslate < Minitest::Spec
-  let(:key) { "test-api-key" }
-  let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(key)) }
-
-  # Register this spec type for when :mock_translate is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_translate
-  end
-end
-
 class MockVision < Minitest::Spec
   API = Google::Apis::VisionV1
   let(:project) { vision.service.project }

@@ -1,0 +1,56 @@
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+
+  desc "Runs tests with coveralls."
+  task :coveralls do
+    require "simplecov"
+    require "coveralls"
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Runs the translate acceptance tests."
+task :acceptance, :key do |t, args|
+  key = args[:key]
+  key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
+  if key.nil?
+    fail "You must provide a key. e.g. rake acceptance[api_key] or TRANSLATE_TEST_KEY=api_key rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["TRANSLATE_KEY"] = key
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :acceptance do
+  desc "Runs tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start("test_frameworks") { command_name "Minitest" }
+
+    Rake::Task["acceptance"].invoke
+  end
+end
+
+task :default => :test

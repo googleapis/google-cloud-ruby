@@ -16,12 +16,6 @@ require "rake/testtask"
 
 namespace :test do
 
-  desc "Runs translate tests."
-  task :translate do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
     desc "Runs vision tests."
     task :vision do
       $LOAD_PATH.unshift "lib", "test"
@@ -157,12 +151,6 @@ namespace :test do
       # Rake::Task["test"].execute
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the translate acceptance tests."
-    task :translate do |t, args|
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     desc "Runs the vision acceptance tests."

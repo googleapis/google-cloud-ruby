@@ -68,51 +68,6 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Translate service.
-    # Each call creates a new connection.
-    #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
-    #
-    # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Translate::Api]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud = Google::Cloud.new
-    #   translate = gcloud.translate "api-key-abc123XYZ789"
-    #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    # @example Using API Key from the environment variable.
-    #   require "google/cloud"
-    #
-    #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
-    #
-    #   gcloud = Google::Cloud.new
-    #   translate = gcloud.translate
-    #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    def translate key = nil, retries: nil, timeout: nil
-      require "google/cloud/translate"
-      Google::Cloud.translate key, retries: (retries || @retries),
-                                   timeout: (timeout || @timeout)
-    end
-
-    ##
     # Creates a new object for connecting to the Vision service.
     # Each call creates a new connection.
     #
