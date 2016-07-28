@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
-  let(:filepath) { "../acceptance/data/landmark.jpg" }
+  let(:filepath) { "acceptance/data/landmark.jpg" }
 
   it "detects landmark detection" do
     feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 1)

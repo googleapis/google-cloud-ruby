@@ -2,15 +2,8 @@ source "http://rubygems.org"
 
 gemspec
 
-# TODO: unpin rake after YARD (and other tasks) no longer depend on last_comment
-gem "rake", "~> 10.0"
-
-gem "gcloud-rdoc",
-    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
-    branch: "gcloud-rdoc"
-gem "yard-gcloud",
-    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
-    branch: "yard-gcloud"
-gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
-    branch: "gcloud-jsondoc"
+gem "rake"
+gem "google-api-client", "~> 0.9.11"
+gem "grpc", "= 1.0.0.pre1"
+gem "google-protobuf", "= 3.0.0.alpha.5.0.5.1"
+gem "googleapis-common-protos", "~> 1.1"

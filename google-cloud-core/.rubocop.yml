@@ -37,3 +37,5 @@ Style/ClassVars:
   Enabled: false
 Style/TrivialAccessors:
   Enabled: false
+Style/FileName:
+  Enabled: false # for lib/google-cloud-core.rb file

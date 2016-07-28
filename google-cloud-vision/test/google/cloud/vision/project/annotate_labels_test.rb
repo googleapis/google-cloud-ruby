@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :labels, :mock_vision do
-  let(:filepath) { "../acceptance/data/landmark.jpg" }
+  let(:filepath) { "acceptance/data/landmark.jpg" }
 
   it "detects label detection" do
     feature = Google::Apis::VisionV1::Feature.new(type: "LABEL_DETECTION", max_results: 1)

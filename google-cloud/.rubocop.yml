@@ -1,22 +1,8 @@
 AllCops:
   Exclude:
-    - "gcloud.gemspec"
+    - "google-cloud.gemspec"
     - "Rakefile"
-    - "lib/google/api/**/*"
-    - "lib/google/datastore/**/*"
-    - "lib/google/devtools/**/*"
-    - "lib/google/example/**/*"
-    - "lib/google/iam/**/*"
-    - "lib/google/logging/**/*"
-    - "lib/google/longrunning/**/*"
-    - "lib/google/protobuf/**/*"
-    - "lib/google/pubsub/**/*"
-    - "lib/google/rpc/**/*"
-    - "lib/google/type/**/*"
-    - "rakelib/**/*"
-    - "acceptance/**/*"
     - "test/**/*"
-    - "Vagrantfile"
 
 Documentation:
   Enabled: false
@@ -51,3 +37,5 @@ Style/ClassVars:
   Enabled: false
 Style/TrivialAccessors:
   Enabled: false
+Style/FileName:
+  Enabled: false # for lib/google-cloud.rb file

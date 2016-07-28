@@ -1,4 +1,4 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
-
-describe Google::Cloud, :version do
-  it "has a version" do
-    Google::Cloud::VERSION.wont_be :nil?
-  end
-end
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
+require "ostruct"
+require "json"
+require "base64"
+require "gcloud"

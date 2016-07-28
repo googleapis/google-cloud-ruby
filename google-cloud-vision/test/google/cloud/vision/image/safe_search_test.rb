@@ -16,7 +16,7 @@ require "helper"
 require "pathname"
 
 describe Google::Cloud::Vision::Image, :safe_search, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
 
   it "detects safe_search" do

@@ -1,10 +1,25 @@
 require "bundler/gem_tasks"
 
-require "rake/testtask"
-Rake::TestTask.new(:test) do |test|
-  test.warning = true
-  test.libs << "test"
-  test.pattern = "test/**/*_test.rb"
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-core"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
 end
 
 task :console do

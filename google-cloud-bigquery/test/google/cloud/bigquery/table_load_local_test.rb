@@ -113,10 +113,10 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
         ),
         dry_run: nil))
     mock.expect :insert_job, load_job_gapi(table, "some/file/path.json"),
-      [project, insert_job, upload_source: "../acceptance/data/kitten-test-data.json", content_type: "application/json"]
+      [project, insert_job, upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"]
     table.service.mocked_service = mock
 
-    local_json = "../acceptance/data/kitten-test-data.json"
+    local_json = "acceptance/data/kitten-test-data.json"
     job = table.load local_json
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 

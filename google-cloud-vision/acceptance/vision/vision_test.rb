@@ -18,10 +18,10 @@ require "pathname"
 # This test is a ruby version of gcloud-node's vision test.
 
 describe "Vision", :vision do
-  let(:face_image)     { "../acceptance/data/face.jpg" }
-  let(:logo_image)     { "../acceptance/data/logo.jpg" }
-  let(:landmark_image) { "../acceptance/data/landmark.jpg" }
-  let(:text_image)     { "../acceptance/data/text.png" }
+  let(:face_image)     { "acceptance/data/face.jpg" }
+  let(:logo_image)     { "acceptance/data/logo.jpg" }
+  let(:landmark_image) { "acceptance/data/landmark.jpg" }
+  let(:text_image)     { "acceptance/data/text.png" }
 
   describe "default" do
     it "runs all annotations if none are specified" do

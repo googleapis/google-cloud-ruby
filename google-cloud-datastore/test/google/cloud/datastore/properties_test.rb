@@ -314,10 +314,10 @@ describe Google::Cloud::Datastore::Properties do
   end
 
   it "encodes IO as blob" do
-    raw = File.open "../acceptance/data/CloudPlatform_128px_Retina.png"
+    raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
-    value.blob_value.must_equal File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -330,10 +330,10 @@ describe Google::Cloud::Datastore::Properties do
   end
 
   it "encodes StringIO as blob" do
-    raw = StringIO.new(File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    raw = StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
-    value.blob_value.must_equal File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -347,11 +347,11 @@ describe Google::Cloud::Datastore::Properties do
 
   it "encodes Temfile as blob" do
     raw = Tempfile.new "raw"
-    raw.write(File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
+    raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw.rewind
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
-    value.blob_value.must_equal File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
+    value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
@@ -365,10 +365,10 @@ describe Google::Cloud::Datastore::Properties do
 
   it "decodes blob to StringIO" do
     value = Google::Datastore::V1beta3::Value.new
-    value.blob_value = File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
+    value.blob_value = File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     raw = Google::Cloud::Core::GRPCUtils.from_value value
     raw.must_be_kind_of StringIO
-    raw.read.must_equal StringIO.new(File.read("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
+    raw.read.must_equal StringIO.new(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")).read
   end
 
   it "encodes location hash" do

@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
 
   it "detects properties detection" do
     feature = Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)

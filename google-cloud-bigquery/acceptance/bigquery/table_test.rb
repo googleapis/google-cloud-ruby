@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
-  let(:local_file) { "../acceptance/data/kitten-test-data.json" }
+  let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
 
   it "has the attributes of a table" do

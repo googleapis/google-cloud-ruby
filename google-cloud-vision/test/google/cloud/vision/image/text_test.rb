@@ -16,7 +16,7 @@ require "helper"
 require "pathname"
 
 describe Google::Cloud::Vision::Image, :text, :mock_vision do
-  let(:filepath) { "../acceptance/data/text.png" }
+  let(:filepath) { "acceptance/data/text.png" }
   let(:image)    { vision.image filepath }
 
   it "detects text" do

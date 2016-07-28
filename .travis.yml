@@ -6,20 +6,10 @@ rvm:
 - 2.0.0-p648
 script:
 - bundle exec rake travis
-after_success:
-- bundle exec rake travis:pages
 matrix:
   include:
   - rvm: 2.3.1
     env: GCLOUD_BUILD_DOCS=true
-deploy:
-  provider: rubygems
-  api_key:
-    secure: CTbGzuCCZt4Zf3QrUjc3USK8ac205pfc81oZlTEiNnIWVexKxUuCk8JJZnTBhDFylLgKD+hoIbBii4iq1El1quUqk3VAwohUotUFKAVgle4IGSmO71beUj63x2GyY39SGK0r9ZGHVE6WC0oVu3i5wSklgxhMsREAYt872m0xDNE=
-  gem: gcloud
-  on:
-    tags: true
-    repo: GoogleCloudPlatform/gcloud-ruby
 notifications:
   slack:
     secure: Ksji5MDNOWnuzuyu9Hblbxse6kGLdH4kXyYkF98C+wawIGLSONWWkuA65wpdqSLtBN/79RCLMWoBzKAGX4xy9BL6Rxb3rLjAMT+FVur6II2yaApzyJ0dmTVeTXnkchPcrO27FK5taPb0Ghr86DUiG3OViY/q1N0AVALDYce5tfE=

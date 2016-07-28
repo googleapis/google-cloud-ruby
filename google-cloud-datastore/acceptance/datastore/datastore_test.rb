@@ -194,7 +194,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save and read blob values" do
-      avatar = File.open("../acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")
+      avatar = File.open("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")
       post.key  = Google::Cloud::Datastore::Key.new "Post", "blob_support"
       post["avatar"] = avatar
       post.exclude_from_indexes! "avatar", true

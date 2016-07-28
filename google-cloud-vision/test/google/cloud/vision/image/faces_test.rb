@@ -15,7 +15,7 @@
 require "helper"
 require "pathname"
 describe Google::Cloud::Vision::Image, :faces, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
 
   it "detects multiple faces" do

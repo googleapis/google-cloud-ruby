@@ -1,0 +1,9 @@
+--no-private
+--title=Google Cloud Core
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
+OVERVIEW.md
+AUTHENTICATION.md

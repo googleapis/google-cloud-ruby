@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "google/cloud/credentials"
 
 ##
 # This test is testing the private class Google::Cloud::Credentials. We want to make

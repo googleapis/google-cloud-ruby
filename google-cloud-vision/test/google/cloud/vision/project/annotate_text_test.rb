@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
-  let(:filepath) { "../acceptance/data/text.png" }
+  let(:filepath) { "acceptance/data/text.png" }
 
   it "detects text detection" do
     feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)

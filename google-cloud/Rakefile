@@ -1,0 +1,39 @@
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google/cloud"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+task :default => :test

@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Image::Context, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
   let(:language_hints) { ["en", "es"] }
 

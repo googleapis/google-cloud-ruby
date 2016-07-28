@@ -24,8 +24,8 @@ describe Google::Cloud::Storage::File, :storage do
   let(:bucket_name) { $bucket_names.first }
 
   let(:files) do
-    { logo: { path: "../acceptance/data/CloudPlatform_128px_Retina.png" },
-      big:  { path: "../acceptance/data/three-mb-file.tif" } }
+    { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
+      big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
   let(:encryption_key) do

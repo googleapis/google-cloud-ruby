@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :logos, :mock_vision do
-  let(:filepath) { "../acceptance/data/logo.jpg" }
+  let(:filepath) { "acceptance/data/logo.jpg" }
 
   it "detects logo detection" do
     feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)

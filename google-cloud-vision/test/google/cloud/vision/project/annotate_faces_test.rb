@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
 
   it "detects face detection using mark alias" do
     feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)

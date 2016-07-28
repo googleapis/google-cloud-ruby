@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Vision::Project, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
   let(:area_json) { {"min_lat_lng"=>{"latitude"=>37.4220041, "longitude"=>-122.0862462},
                      "max_lat_lng"=>{"latitude"=>37.4320041, "longitude"=>-122.0762462}} }
 

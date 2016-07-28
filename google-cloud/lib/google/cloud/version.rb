@@ -1,4 +1,4 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-task :console do
-  require "irb"
-  require "irb/completion"
-  require "pp"
 
-  lib = File.expand_path("../../lib/", __FILE__)
-  $:.unshift lib unless $:.include?(lib)
-
-  require "google/cloud"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
-
-  ARGV.clear
-  IRB.start
+module Google
+  module Cloud
+    VERSION = "0.20.0"
+  end
 end

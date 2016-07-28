@@ -30,6 +30,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "rubocop", "<= 0.35.1"
   gem.add_development_dependency "simplecov", "~> 0.9"
-  gem.add_development_dependency "coveralls", "~> 0.7"
   gem.add_development_dependency "yard", "~> 0.9"
 end

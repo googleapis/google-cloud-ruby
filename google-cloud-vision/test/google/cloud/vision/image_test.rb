@@ -16,7 +16,7 @@ require "helper"
 require "pathname"
 
 describe Google::Cloud::Vision::Image, :mock_vision do
-  let(:filepath) { "../acceptance/data/face.jpg" }
+  let(:filepath) { "acceptance/data/face.jpg" }
 
   it "can create from an existing file path" do
     image = vision.image filepath
