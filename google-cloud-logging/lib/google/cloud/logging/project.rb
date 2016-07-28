@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/gce"
+require "google/cloud/core/gce"
 require "google/cloud/logging/service"
 require "google/cloud/logging/credentials"
 require "google/cloud/logging/entry"
@@ -76,8 +76,8 @@ module Google
         # @private Default project.
         def self.default_project
           ENV["LOGGING_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::GCE.project_id
         end
 

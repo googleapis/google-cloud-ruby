@@ -13,19 +13,10 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
-
 module Google
   module Cloud
     module Logging
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Logging.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/logging.admin"]
-        PATH_ENV_VARS = %w(LOGGING_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LOGGING_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
-      end
+      VERSION = "0.20.0"
     end
   end
 end

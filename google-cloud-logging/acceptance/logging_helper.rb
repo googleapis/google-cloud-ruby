@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/logging"
 
 # Create shared logging object so we don't create new for each test
-$logging = Google::Cloud.logging
+$logging = Google::Cloud.new.logging retries: 10
 
 # create prefix for names of datasets and tables
 require "time"

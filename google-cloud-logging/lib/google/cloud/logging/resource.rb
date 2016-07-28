@@ -77,7 +77,7 @@ module Google
           return new if grpc.nil?
           new.tap do |r|
             r.type = grpc.type
-            r.labels = GRPCUtils.map_to_hash(grpc.labels)
+            r.labels = Core::GRPCUtils.map_to_hash(grpc.labels)
           end
         end
       end

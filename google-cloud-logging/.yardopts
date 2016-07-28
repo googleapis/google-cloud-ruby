@@ -1,0 +1,10 @@
+--no-private
+--title=Google Cloud Logging
+--exclude lib/google/logging
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
+OVERVIEW.md
+AUTHENTICATION.md

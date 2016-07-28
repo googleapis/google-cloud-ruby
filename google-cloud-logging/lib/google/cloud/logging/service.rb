@@ -13,12 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud/backoff"
 require "google/cloud/errors"
+require "google/cloud/core/backoff"
 require "google/logging/v2/logging_services"
 require "google/logging/v2/logging_config_services"
 require "google/logging/v2/logging_metrics_services"
-
 
 module Google
   module Cloud
@@ -259,7 +258,7 @@ module Google
         end
 
         def execute
-          Google::Cloud::Backoff.new(retries: retries).execute_grpc do
+          Google::Cloud::Core::Backoff.new(retries: retries).execute_grpc do
             yield
           end
         rescue GRPC::BadStatus => e

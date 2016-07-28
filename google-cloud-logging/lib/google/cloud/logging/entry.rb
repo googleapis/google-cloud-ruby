@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
+require "google/cloud/core/grpc_utils"
 require "google/cloud/logging/resource"
 require "google/cloud/logging/entry/http_request"
 require "google/cloud/logging/entry/operation"
 require "google/cloud/logging/entry/list"
-require "google/cloud/grpc_utils"
 
 module Google
   module Cloud
@@ -400,7 +400,7 @@ module Google
             e.timestamp = extract_timestamp(grpc)
             e.severity = grpc.severity
             e.insert_id = grpc.insert_id
-            e.labels = GRPCUtils.map_to_hash(grpc.labels)
+            e.labels = Core::GRPCUtils.map_to_hash(grpc.labels)
             e.payload = extract_payload(grpc)
             e.instance_variable_set "@resource",
                                     Resource.from_grpc(grpc.resource)
@@ -445,7 +445,7 @@ module Google
           if payload.is_a? Google::Protobuf::Any
             grpc.proto_payload = payload
           elsif payload.respond_to? :to_hash
-            grpc.json_payload = GRPCUtils.hash_to_struct payload.to_hash
+            grpc.json_payload = Core::GRPCUtils.hash_to_struct payload.to_hash
           else
             grpc.text_payload = payload.to_s
           end

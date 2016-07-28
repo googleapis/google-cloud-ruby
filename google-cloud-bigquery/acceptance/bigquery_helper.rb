@@ -79,9 +79,9 @@ end
 
 def clean_up_bigquery_datasets
   puts "Cleaning up bigquery datasets after tests."
-  $bigquery.datasets.each do |dataset|
+  $bigquery.datasets.all do |dataset|
     if dataset.dataset_id.start_with? $prefix
-      dataset.tables.map { |f| f.delete }
+      dataset.tables.all(&:delete)
       dataset.delete
     end
   end

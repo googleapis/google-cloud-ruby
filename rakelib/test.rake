@@ -28,12 +28,6 @@ namespace :test do
     Dir.glob("test/google/cloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
-  desc "Runs logging tests."
-  task :logging do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs translate tests."
   task :translate do
     $LOAD_PATH.unshift "lib", "test"
@@ -213,49 +207,6 @@ namespace :test do
         puts "Cleaning up Pub/Sub topics and subscriptions"
         Google::Cloud.pubsub.topics.map &:delete
         Google::Cloud.pubsub.subscriptions.map &:delete
-      end
-    end
-
-    desc "Runs the logging acceptance tests."
-    task :logging, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:logging[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:logging"
-      end
-      # always overwrite when running tests
-      ENV["LOGGING_PROJECT"] = project
-      ENV["LOGGING_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :logging do
-      desc "Removes *ALL* LOGGING sinks and metrics. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:logging:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:logging:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["LOGGING_PROJECT"] = project
-        ENV["LOGGING_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "google/cloud/logging"
-        puts "Cleaning up LOGGING sinks and metrics"
-        begin
-          # Google::Cloud.logging.sinks.each.map &:delete
-          Google::Cloud.logging.metrics.each.map &:delete
-        rescue Google::Cloud::Error => e
-          puts e.message
-        end
       end
     end
 

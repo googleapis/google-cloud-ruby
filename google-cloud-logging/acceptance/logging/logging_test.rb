@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "logging_helper"
+require "logger"
 
 # This test is a ruby version of gcloud-node's logging test.
 

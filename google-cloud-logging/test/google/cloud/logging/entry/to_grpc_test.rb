@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.severity.must_equal :DEFAULT
     grpc.timestamp.must_be :nil?
     grpc.insert_id.must_be :empty?
-    Google::Cloud::GRPCUtils.map_to_hash(grpc.labels).must_be :empty?
+    Google::Cloud::Core::GRPCUtils.map_to_hash(grpc.labels).must_be :empty?
     grpc.text_payload.must_be :empty?
     grpc.json_payload.must_be :nil?
     grpc.proto_payload.must_be :nil?
@@ -71,14 +71,14 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.log_name.must_equal "projects/test/logs/testlog"
 
     grpc.resource.type.must_equal        "webapp_server"
-    Google::Cloud::GRPCUtils.map_to_hash(grpc.resource.labels).must_equal({ "description" => "The server is running in test",
+    Google::Cloud::Core::GRPCUtils.map_to_hash(grpc.resource.labels).must_equal({ "description" => "The server is running in test",
                                                                      "env"         => "test",
                                                                      "valueType"   => "STRING" })
 
     grpc.severity.must_equal :ERROR
     grpc.timestamp.must_equal Google::Protobuf::Timestamp.new(seconds: Time.parse("2016-01-02T03:04:05Z").to_i)
     grpc.insert_id.must_equal "insert123"
-    Google::Cloud::GRPCUtils.map_to_hash(grpc.labels).must_equal("env" => "test", "fizz" => "buzz")
+    Google::Cloud::Core::GRPCUtils.map_to_hash(grpc.labels).must_equal("env" => "test", "fizz" => "buzz")
     grpc.text_payload.must_equal "payload"
     grpc.json_payload.must_be :nil?
     grpc.proto_payload.must_be :nil?

@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/dns"
 
 if ENV["GCLOUD_TEST_DNS_DOMAIN"]
@@ -78,7 +81,7 @@ if ENV["GCLOUD_TEST_DNS_DOMAIN"]
 
   def clean_up_dns_zones
     puts "Cleaning up dns zones after tests."
-    $dns.zones.each do |zone|
+    $dns.zones.all do |zone|
       if zone.name.start_with? $dns_prefix
         zone.delete force: true
       end

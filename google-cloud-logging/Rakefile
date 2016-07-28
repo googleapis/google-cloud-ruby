@@ -29,21 +29,21 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Runs the dns acceptance tests."
+desc "Runs the logging acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance:dns[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:dns"
+    fail "You must provide a project and keyfile. e.g. rake acceptance:logging[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:logging"
   end
   # always overwrite when running tests
-  ENV["DNS_PROJECT"] = project
-  ENV["DNS_KEYFILE"] = keyfile
+  ENV["LOGGING_PROJECT"] = project
+  ENV["LOGGING_KEYFILE"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  Dir.glob("acceptance/logging/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
@@ -55,28 +55,27 @@ namespace :acceptance do
     Rake::Task["acceptance"].invoke
   end
 
-  desc "Removes *ALL* DNS zones and records. Use with caution."
+  desc "Removes *ALL* Logging sinks and metrics. Use with caution."
   task :cleanup do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:dns:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:dns:cleanup"
+      fail "You must provide a project and keyfile. e.g. rake acceptance:logging:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:logging:cleanup"
     end
     # always overwrite when running tests
-    ENV["DNS_PROJECT"] = project
-    ENV["DNS_KEYFILE"] = keyfile
+    ENV["LOGGING_PROJECT"] = project
+    ENV["LOGGING_KEYFILE"] = keyfile
 
     $LOAD_PATH.unshift "lib"
-    require "google/cloud/dns"
-    puts "Cleaning up DNS zones and records"
-    Google::Cloud.dns.zones.all do |zone|
-      begin
-        zone.delete force: true
-      rescue Google::Cloud::Dns::ApiError => e
-        puts e.message
-      end
+    require "google/cloud/logging"
+    puts "Cleaning up LOGGING sinks and metrics"
+    begin
+      # Google::Cloud.logging.sinks.all &:delete
+      Google::Cloud.logging.metrics.all &:delete
+    rescue Google::Cloud::Error => e
+      puts e.message
     end
   end
 end
