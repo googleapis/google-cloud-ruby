@@ -67,56 +67,6 @@ module Google
       gcloud
     end
 
-    # rubocop:disable Metrics/LineLength
-    # Disabled because the readonly scope in the example code is long and we
-    # can't shorten it.
-
-    ##
-    # Creates a new object for connecting to the Resource Manager service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::ResourceManager::Manager]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud = Google::Cloud.new
-    #   resource_manager = gcloud.resource_manager
-    #   resource_manager.projects.each do |project|
-    #     puts projects.project_id
-    #   end
-    #
-    # @example The default scope can be overridden with the `scope` option:
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   readonly_scope = "https://www.googleapis.com/auth/cloudresourcemanager.readonly"
-    #   resource_manager = gcloud.resource_manager scope: readonly_scope
-    #
-    def resource_manager scope: nil, retries: nil, timeout: nil
-      require "google/cloud/resource_manager"
-      Google::Cloud.resource_manager @keyfile, scope: scope,
-                                               retries: (retries || @retries),
-                                               timeout: (timeout || @timeout)
-    end
-
-    # rubocop:enable Metrics/LineLength
-
     ##
     # Creates a new object for connecting to the Translate service.
     # Each call creates a new connection.

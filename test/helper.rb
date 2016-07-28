@@ -429,29 +429,6 @@ class MockBigquery < Minitest::Spec
   end
 end
 
-class MockResourceManager < Minitest::Spec
-  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:resource_manager) { Google::Cloud::ResourceManager::Manager.new(Google::Cloud::ResourceManager::Service.new(credentials)) }
-
-  # Register this spec type for when :mock_res_man is used.
-  register_spec_type(self) do |desc, *addl|
-    addl.include? :mock_res_man
-  end
-
-  def random_project_gapi seed = nil, name = nil, labels = nil
-    seed ||= rand(9999)
-    name ||= "Example Project #{seed}"
-    labels = { "env" => "production" } if labels.nil?
-    Google::Apis::CloudresourcemanagerV1::Project.new(
-      project_number: "123456789#{seed}",
-      project_id:     "example-project-#{seed}",
-      name:           name,
-      labels:         labels,
-      create_time:    "2015-09-01T12:00:00.00Z",
-      lifecycle_state: "ACTIVE")
-  end
-end
-
 class MockTranslate < Minitest::Spec
   let(:key) { "test-api-key" }
   let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(key)) }

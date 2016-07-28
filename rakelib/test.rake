@@ -16,12 +16,6 @@ require "rake/testtask"
 
 namespace :test do
 
-  desc "Runs resource_manager tests."
-  task :resource_manager do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs translate tests."
   task :translate do
     $LOAD_PATH.unshift "lib", "test"

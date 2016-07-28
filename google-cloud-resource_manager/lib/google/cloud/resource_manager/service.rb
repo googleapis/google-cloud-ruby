@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/version"
 require "google/cloud/errors"
+require "google/cloud/resource_manager/version"
 require "google/apis/cloudresourcemanager_v1"
 
 module Google
@@ -36,8 +36,10 @@ module Google
         def initialize credentials, retries: nil, timeout: nil
           @credentials = credentials
           @service = API::CloudResourceManagerService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = Google::Cloud::VERSION
+          @service.client_options.application_name = \
+            "google-cloud-resource_manager"
+          @service.client_options.application_version = \
+            Google::Cloud::ResourceManager::VERSION
           @service.request_options.retries = retries || 3
           @service.request_options.timeout_sec = timeout if timeout
           @service.authorization = @credentials.client

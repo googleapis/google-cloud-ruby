@@ -13,56 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud"
+require "google-cloud-resource_manager"
 require "google/cloud/resource_manager/manager"
 
 module Google
   module Cloud
-    ##
-    # Creates a new `Project` instance connected to the Resource Manager
-    # service. Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::ResourceManager::Manager]
-    #
-    # @example
-    #   require "google/cloud/resource_manager"
-    #
-    #   resource_manager = Google::Cloud.resource_manager
-    #   resource_manager.projects.each do |project|
-    #     puts projects.project_id
-    #   end
-    #
-    def self.resource_manager keyfile = nil, scope: nil, retries: nil,
-                              timeout: nil
-      if keyfile.nil?
-        credentials = Google::Cloud::ResourceManager::Credentials.default(
-          scope: scope)
-      else
-        credentials = Google::Cloud::ResourceManager::Credentials.new(
-          keyfile, scope: scope)
-      end
-      Google::Cloud::ResourceManager::Manager.new(
-        Google::Cloud::ResourceManager::Service.new(
-          credentials, retries: retries, timeout: timeout))
-    end
-
     ##
     # # Google Cloud Resource Manager
     #
