@@ -7,4 +7,18 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = "test/**/*_test.rb"
 end
 
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google/cloud"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
 task :default => :test

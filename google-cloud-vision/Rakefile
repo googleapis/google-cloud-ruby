@@ -36,7 +36,7 @@ task :acceptance, :project, :keyfile do |t, args|
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VISION_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake test:acceptance:vision[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:vision"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VISION_TEST_PROJECT=test123 VISION_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["VISION_PROJECT"] = project
@@ -54,31 +54,20 @@ namespace :acceptance do
 
     Rake::Task["acceptance"].invoke
   end
+end
 
-  desc "Removes *ALL* DNS zones and records. Use with caution."
-  task :cleanup do |t, args|
-    project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
-    keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
-    if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:dns:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:dns:cleanup"
-    end
-    # always overwrite when running tests
-    ENV["DNS_PROJECT"] = project
-    ENV["DNS_KEYFILE"] = keyfile
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
 
-    $LOAD_PATH.unshift "lib"
-    require "google/cloud/dns"
-    puts "Cleaning up DNS zones and records"
-    Google::Cloud.dns.zones.all do |zone|
-      begin
-        zone.delete force: true
-      rescue Google::Cloud::Dns::ApiError => e
-        puts e.message
-      end
-    end
-  end
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-vision"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
 end
 
 task :default => :test
