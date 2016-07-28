@@ -36,7 +36,7 @@ task :acceptance, :project, :keyfile do |t, args|
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake test:acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["BIGQUERY_PROJECT"] = project
@@ -62,7 +62,7 @@ namespace :acceptance do
     keyfile = args[:keyfile]
     keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake test:acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:cleanup"
+      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
     # always overwrite when running tests
     ENV["BIGQUERY_PROJECT"] = project

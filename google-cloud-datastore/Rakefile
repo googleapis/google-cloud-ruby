@@ -36,7 +36,7 @@ task :acceptance, :project, :keyfile do |t, args|
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATASTORE_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake test:acceptance:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:datastore"
+    fail "You must provide a project and keyfile. e.g. rake acceptance:datastore[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:datastore"
   end
   # always overwrite when running tests
   ENV["DATASTORE_PROJECT"] = project

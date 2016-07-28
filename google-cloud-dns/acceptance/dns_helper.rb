@@ -15,8 +15,6 @@
 require "helper"
 require "google/cloud/dns"
 
-Google::Cloud::Backoff.retries = 10
-
 if ENV["GCLOUD_TEST_DNS_DOMAIN"]
   # Create prefix for zone names
   require "securerandom"
@@ -24,7 +22,7 @@ if ENV["GCLOUD_TEST_DNS_DOMAIN"]
   $dns_prefix = "gcloud-#{$dns_nonce}".downcase.gsub "_", "-"
 
   # Create shared dns object so we don't create new for each test
-  $dns = Google::Cloud.dns
+  $dns = Google::Cloud.new.dns retries: 10
   # Create random subdomain to use in tests
   # We do this so we can run multiple build concurrently
   $dns_domain = "#{$dns_nonce}.#{ENV["GCLOUD_TEST_DNS_DOMAIN"]}"

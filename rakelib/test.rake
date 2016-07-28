@@ -22,12 +22,6 @@ namespace :test do
     Dir.glob("test/google/cloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
-  desc "Runs dns tests."
-  task :dns do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs resource_manager tests."
   task :resource_manager do
     $LOAD_PATH.unshift "lib", "test"
@@ -219,50 +213,6 @@ namespace :test do
         puts "Cleaning up Pub/Sub topics and subscriptions"
         Google::Cloud.pubsub.topics.map &:delete
         Google::Cloud.pubsub.subscriptions.map &:delete
-      end
-    end
-
-    desc "Runs the dns acceptance tests."
-    task :dns, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:dns[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:dns"
-      end
-      # always overwrite when running tests
-      ENV["DNS_PROJECT"] = project
-      ENV["DNS_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :dns do
-      desc "Removes *ALL* DNS zones and records. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DNS_TEST_KEYFILE"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:dns:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:dns:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["DNS_PROJECT"] = project
-        ENV["DNS_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "google/cloud/dns"
-        puts "Cleaning up DNS zones and records"
-        Google::Cloud.dns.zones.each do |zone|
-          begin
-            zone.delete force: true
-          rescue Google::Cloud::Dns::ApiError => e
-            puts e.message
-          end
-        end
       end
     end
 

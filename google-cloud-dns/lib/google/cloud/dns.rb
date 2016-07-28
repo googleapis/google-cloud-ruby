@@ -13,61 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud"
+require "google-cloud-dns"
 require "google/cloud/dns/project"
 
 module Google
   module Cloud
-    ##
-    # Creates a new `Project` instance connected to the DNS service.
-    # Each call creates a new connection.
-    #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
-    #
-    # @param [String] project Identifier for a DNS project. If not present, the
-    #   default project for the credentials is used.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Dns::Project]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   dns = Google::Cloud.dns "my-dns-project",
-    #                    "/path/to/keyfile.json"
-    #
-    #   zone = dns.zone "example-com"
-    #
-    def self.dns project = nil, keyfile = nil, scope: nil, retries: nil,
-                 timeout: nil
-      project ||= Google::Cloud::Dns::Project.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Dns::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Dns::Credentials.new keyfile, scope: scope
-      end
-
-      Google::Cloud::Dns::Project.new(
-        Google::Cloud::Dns::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
-    end
-
     ##
     # # Google Cloud DNS
     #

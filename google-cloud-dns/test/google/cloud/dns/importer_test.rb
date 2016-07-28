@@ -20,7 +20,7 @@ describe Google::Cloud::Dns::Importer, :mock_dns do
   let(:zone_gapi) { random_zone_gapi zone_name, zone_dns }
   let(:zone) { Google::Cloud::Dns::Zone.from_gapi zone_gapi, dns.service }
   # Zone file example from https://en.wikipedia.org/wiki/Zone_file
-  let(:zonefile_path) { "acceptance/data/db.example.com" }
+  let(:zonefile_path) { "../acceptance/data/db.example.com" }
 
   # Zone file example from http://www.zytrax.com/books/dns/ch6/mydomain.html
   let(:zonefile) {

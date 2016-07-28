@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/gce"
+require "google/cloud/core/gce"
 require "google/cloud/dns/service"
 require "google/cloud/dns/credentials"
 require "google/cloud/dns/zone"
