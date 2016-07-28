@@ -22,9 +22,9 @@ module Google
       # @private Represents the OAuth 2.0 signing logic for Pub/Sub.
       class Credentials < Google::Cloud::Credentials
         SCOPE = ["https://www.googleapis.com/auth/pubsub"]
-        PATH_ENV_VARS = %w(PUBSUB_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(PUBSUB_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
+        PATH_ENV_VARS = %w(PUBSUB_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(PUBSUB_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON)
       end
     end
   end

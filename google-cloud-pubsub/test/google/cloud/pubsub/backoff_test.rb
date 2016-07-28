@@ -57,9 +57,9 @@ describe "Google Cloud Pub/Sub Backoff", :mock_pubsub do
     mock = Minitest::Mock.new
     args.each { |intv| mock.expect :sleep, nil, [intv] }
     callback = ->(retries) { mock.sleep retries }
-    backoff = Google::Cloud::Backoff.new retries: 5, backoff: callback
+    backoff = Google::Cloud::Core::Backoff.new retries: 5, backoff: callback
 
-    Google::Cloud::Backoff.stub :new, backoff do
+    Google::Cloud::Core::Backoff.stub :new, backoff do
       yield
     end
 

@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud/backoff"
 require "google/cloud/errors"
+require "google/cloud/core/backoff"
 require "google/pubsub/v1/pubsub_services"
 require "google/iam/v1/iam_policy_services"
-require "google/cloud/grpc_utils"
+require "google/cloud/core/grpc_utils"
 require "json"
 
 module Google
@@ -328,7 +328,7 @@ module Google
         protected
 
         def execute
-          Google::Cloud::Backoff.new(retries: retries).execute_grpc do
+          Google::Cloud::Core::Backoff.new(retries: retries).execute_grpc do
             yield
           end
         rescue GRPC::BadStatus => e

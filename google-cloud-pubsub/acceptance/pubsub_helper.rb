@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper"
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 require "google/cloud/pubsub"
 
-Google::Cloud::Backoff.retries = 10
-
 # Create shared pubsub object so we don't create new for each test
-$pubsub = Google::Cloud.pubsub
+$pubsub = Google::Cloud.new.pubsub retries: 10
 
 module Acceptance
   ##

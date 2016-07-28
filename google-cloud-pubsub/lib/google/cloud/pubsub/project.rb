@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/gce"
 require "google/cloud/errors"
+require "google/cloud/core/gce"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
@@ -74,8 +74,8 @@ module Google
         # @private Default project.
         def self.default_project
           ENV["PUBSUB_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::GCE.project_id
         end
 

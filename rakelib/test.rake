@@ -16,12 +16,6 @@ require "rake/testtask"
 
 namespace :test do
 
-  desc "Runs pubsub tests."
-  task :pubsub do
-    $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/google/cloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
-  end
-
   desc "Runs resource_manager tests."
   task :resource_manager do
     $LOAD_PATH.unshift "lib", "test"
@@ -169,45 +163,6 @@ namespace :test do
       # Rake::Task["test"].execute
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the pubsub acceptance tests."
-    task :pubsub, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:pubsub"
-      end
-      # always overwrite when running tests
-      ENV["PUBSUB_PROJECT"] = project
-      ENV["PUBSUB_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    namespace :pubsub do
-      desc "Removes *ALL* topics and subscriptions. Use with caution."
-      task :cleanup do |t, args|
-        project = args[:project]
-        project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
-        keyfile = args[:keyfile]
-        keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_PROJECT"]
-        if project.nil? || keyfile.nil?
-          fail "You must provide a project and keyfile. e.g. rake test:acceptance:pubsub:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:pubsub:cleanup"
-        end
-        # always overwrite when running tests
-        ENV["PUBSUB_PROJECT"] = project
-        ENV["PUBSUB_KEYFILE"] = keyfile
-
-        $LOAD_PATH.unshift "lib"
-        require "google/cloud/pubsub"
-        puts "Cleaning up Pub/Sub topics and subscriptions"
-        Google::Cloud.pubsub.topics.map &:delete
-        Google::Cloud.pubsub.subscriptions.map &:delete
-      end
     end
 
     desc "Runs the translate acceptance tests."
