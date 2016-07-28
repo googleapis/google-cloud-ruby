@@ -16,12 +16,6 @@ require "rake/testtask"
 
 namespace :test do
 
-    desc "Runs vision tests."
-    task :vision do
-      $LOAD_PATH.unshift "lib", "test"
-      Dir.glob("test/google/cloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
   desc "Runs tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     project = args[:project]
@@ -151,23 +145,6 @@ namespace :test do
       # Rake::Task["test"].execute
       $LOAD_PATH.unshift "lib", "test", "acceptance"
       Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative "../#{file}"}
-    end
-
-    desc "Runs the vision acceptance tests."
-    task :vision, :project, :keyfile do |t, args|
-      project = args[:project]
-      project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["VISION_TEST_PROJECT"]
-      keyfile = args[:keyfile]
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VISION_TEST_KEYFILE"]
-      if project.nil? || keyfile.nil?
-        fail "You must provide a project and keyfile. e.g. rake test:acceptance:vision[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake test:acceptance:vision"
-      end
-      # always overwrite when running tests
-      ENV["VISION_PROJECT"] = project
-      ENV["VISION_KEYFILE"] = keyfile
-
-      $LOAD_PATH.unshift "lib", "test", "acceptance"
-      Dir.glob("acceptance/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
     desc "Removes *ALL* acceptance test data. Use with caution."

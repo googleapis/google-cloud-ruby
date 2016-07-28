@@ -66,48 +66,5 @@ module Google
       gcloud.extend Google::Cloud
       gcloud
     end
-
-    ##
-    # Creates a new object for connecting to the Vision service.
-    # Each call creates a new connection.
-    #
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #
-    #   The default scope is:
-    #
-    #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    #
-    # @return [Google::Cloud::Vision::Project]
-    #
-    # @example
-    #   require "google/cloud"
-    #
-    #   gcloud = Google::Cloud.new
-    #   vision = gcloud.vision
-    #
-    #   image = vision.image "path/to/landmark.jpg"
-    #
-    #   landmark = image.landmark
-    #   landmark.description #=> "Mount Rushmore"
-    #
-    # @example The default scope can be overridden with the `scope` option:
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
-    #   vision = gcloud.vision scope: platform_scope
-    #
-    def vision scope: nil, retries: nil, timeout: nil
-      require "google/cloud/vision"
-      Google::Cloud.vision @project, @keyfile, scope: scope,
-                                               retries: (retries || @retries),
-                                               timeout: (timeout || @timeout)
-    end
   end
 end

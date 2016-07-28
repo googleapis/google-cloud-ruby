@@ -1,4 +1,4 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-gem "minitest"
-require "minitest/autorun"
-require "minitest/focus"
-require "minitest/rg"
+
+module Google
+  module Cloud
+    module Vision
+      VERSION = "0.20.0"
+    end
+  end
+end
