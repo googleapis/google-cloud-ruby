@@ -44,20 +44,11 @@ namespace :test do
 
   desc "Runs coveralls report for all gems."
   task :coveralls do
-    FileUtils.remove_dir "coverage", force: true
-    FileUtils.mkdir "coverage"
-
     require "simplecov"
     require "coveralls"
     SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-    SimpleCov.start do
-      command_name :coveralls
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-      gems.each { |gem| add_group gem, "#{gem}/lib" }
-    end
 
-    Rake::Task["test"].invoke
+    Rake::Task["test:coverage"].invoke
   end
 end
 
@@ -82,6 +73,22 @@ namespace :acceptance do
         end
       end
     end
+  end
+
+  desc "Runs acceptance tests with coverage for all gems."
+  task :coverage do
+    FileUtils.remove_dir "coverage", force: true
+    FileUtils.mkdir "coverage"
+
+    require "simplecov"
+    SimpleCov.start do
+      command_name :coverage
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+      gems.each { |gem| add_group gem, "#{gem}/lib" }
+    end
+
+    Rake::Task["acceptance"].invoke
   end
 
   desc "Runs acceptance:cleanup for all gems."
