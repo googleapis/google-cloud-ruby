@@ -1,9 +1,7 @@
 --no-private
---title=Google Cloud BigQuery
+--title=Google Cloud Storage
 --markup markdown
 
 ./lib/**/*.rb
 -
 README.md
-OVERVIEW.md
-AUTHENTICATION.md

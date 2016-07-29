@@ -12,8 +12,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://googlecloudplatform.github.io/gcloud-ruby/"
   gem.license       = "Apache-2.0"
 
-  gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      `git ls-files -- docs/*`.split("\n")
+  gem.files         = `git ls-files -- lib/*`.split("\n")
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.0.0"
