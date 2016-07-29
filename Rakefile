@@ -1,4 +1,4 @@
-require "bundler"
+require "bundler/setup"
 
 desc "Runs tests for all gems."
 task :test do
@@ -42,7 +42,7 @@ namespace :test do
     Rake::Task["test"].invoke
   end
 
-  desc "Runs tests with coverage for all gems."
+  desc "Runs coveralls report for all gems."
   task :coveralls do
     FileUtils.remove_dir "coverage", force: true
     FileUtils.mkdir "coverage"
@@ -61,8 +61,73 @@ namespace :test do
   end
 end
 
+desc "Runs acceptance tests for all gems."
+task :acceptance do
+  gems.each do |gem|
+    $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
+    Dir.glob("#{gem}/acceptance/**/*_test.rb").each { |file| require_relative file }
+    $LOAD_PATH.delete "#{gem}/lib"
+    $LOAD_PATH.delete "#{gem}/acceptance"
+  end
+end
+
+namespace :acceptance do
+  desc "Runs acceptance tests for all gems individually."
+  task :each do
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          header "ACCEPTANCE TESTS FOR #{gem}"
+          sh "bundle exec rake acceptance"
+        end
+      end
+    end
+  end
+
+  desc "Runs acceptance:cleanup for all gems."
+  task :cleanup do
+    gems.each do |gem|
+      cd gem do
+        Bundler.with_clean_env do
+          sh "bundle exec rake acceptance:cleanup"
+        end
+      end
+    end
+  end
+end
+
+desc "Runs rubocop report for all gems individually."
+task :rubocop do
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "RUBOCOP REPORT FOR #{gem}"
+        sh "bundle exec rake rubocop"
+      end
+    end
+  end
+end
+
+desc "Runs tests and reports for CI."
 task :travis do
+  header "Running rubocop"
+
+  Rake::Task["rubocop"].invoke
+
+  header "Running tests and coverage report"
+
   Rake::Task["test:coveralls"].invoke
+
+  if ENV["TRAVIS_BRANCH"] == "master" &&
+     ENV["TRAVIS_PULL_REQUEST"] == "false"
+    header "Preparing to run acceptance tests"
+    # Decrypt the keyfile
+    `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
+
+    Rake::Task["acceptance"].invoke
+  else
+    header "Skipping acceptance tests"
+  end
 end
 
 def gems
