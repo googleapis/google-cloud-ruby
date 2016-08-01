@@ -1,0 +1,1 @@
+{"id":"gcloud/error","name":"Error","title":["Gcloud","Error"],"description":"<p>Base gcloud-ruby exception class.</p>","source":"lib/gcloud/errors.rb#L19","resources":[],"examples":[],"methods":[]}
