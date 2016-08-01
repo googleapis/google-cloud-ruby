@@ -234,7 +234,7 @@ module Gcloud
         end
         acknowledge messages if autoack
         messages
-      rescue Hurley::Timeout
+      rescue Gcloud::DeadlineExceededError
         []
       end
 

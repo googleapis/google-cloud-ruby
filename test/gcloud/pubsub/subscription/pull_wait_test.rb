@@ -64,10 +64,10 @@ describe Gcloud::Pubsub::Subscription, :pull, :wait, :mock_pubsub do
     rec_messages.first.message.data.must_equal rec_message_msg
   end
 
-  it "will not error when a request times out with Hurley::Timeout" do
+  it "will not error when a request times out with Gcloud::DeadlineExceededError" do
     stub = Object.new
     def stub.pull *args
-      raise Hurley::Timeout
+      raise Gcloud::DeadlineExceededError
     end
     subscription.service.mocked_subscriber = stub
 
