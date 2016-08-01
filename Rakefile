@@ -1,5 +1,16 @@
 require "bundler/setup"
 
+task :bundleupdate do
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "BUNDLE UPDATE FOR #{gem}"
+        sh "bundle update"
+      end
+    end
+  end
+end
+
 desc "Runs tests for all gems."
 task :test do
   gems.each do |gem|
@@ -12,14 +23,11 @@ end
 
 namespace :test do
   desc "Runs tests for all gems individually."
-  task :each do
+  task each: :bundleupdate do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUNDLE UPDATE FOR #{gem}"
-          sh "bundle update"
-
-          header "TESTS FOR #{gem}"
+          header "RUNNING TESTS FOR #{gem}"
           sh "bundle exec rake test"
         end
       end
@@ -39,6 +47,7 @@ namespace :test do
       gems.each { |gem| add_group gem, "#{gem}/lib" }
     end
 
+    header "Running tests and coverage report"
     Rake::Task["test"].invoke
   end
 
@@ -64,7 +73,7 @@ end
 
 namespace :acceptance do
   desc "Runs acceptance tests for all gems individually."
-  task :each do
+  task each: :bundleupdate do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
@@ -88,11 +97,12 @@ namespace :acceptance do
       gems.each { |gem| add_group gem, "#{gem}/lib" }
     end
 
+    header "Running acceptance tests and coverage report"
     Rake::Task["acceptance"].invoke
   end
 
   desc "Runs acceptance:cleanup for all gems."
-  task :cleanup do
+  task cleanup: :bundleupdate do
     gems.each do |gem|
       cd gem do
         Bundler.with_clean_env do
@@ -104,7 +114,8 @@ namespace :acceptance do
 end
 
 desc "Runs rubocop report for all gems individually."
-task :rubocop do
+task rubocop: :bundleupdate do
+  header "Running rubocop reports"
   gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
@@ -115,14 +126,23 @@ task :rubocop do
   end
 end
 
+desc "Runs jsondoc report for all gems individually."
+task jsondoc: :bundleupdate do
+  header "Running jsondoc reports"
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "JSONDOC FOR #{gem}"
+        sh "bundle exec rake jsondoc"
+      end
+    end
+  end
+end
+
 desc "Runs tests and reports for CI."
-task :travis do
-  header "Running rubocop"
-
+task travis: :bundleupdate do
   Rake::Task["rubocop"].invoke
-
-  header "Running tests and coverage report"
-
+  Rake::Task["jsondoc"].invoke
   Rake::Task["test:coveralls"].invoke
 
   if ENV["TRAVIS_BRANCH"] == "master" &&

@@ -75,4 +75,20 @@ task :console do
   IRB.start
 end
 
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from gcloud-ruby .yardoc"
+task :jsondoc => :yard do
+
+  require "rubygems"
+  spec = Gem::Specification::load("gcloud.gemspec")
+
+  require "gcloud/jsondoc"
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry
+  generator.write_to "jsondoc"
+end
+
 task :default => :test
