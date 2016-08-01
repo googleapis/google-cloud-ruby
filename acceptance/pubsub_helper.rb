@@ -13,12 +13,12 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/pubsub"
+require "google/cloud/pubsub"
 
-Gcloud::Backoff.retries = 10
+Google::Cloud::Backoff.retries = 10
 
 # Create shared pubsub object so we don't create new for each test
-$pubsub = Gcloud.pubsub
+$pubsub = Google::Cloud.pubsub
 
 module Acceptance
   ##

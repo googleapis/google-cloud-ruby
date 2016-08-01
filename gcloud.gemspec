@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path("../lib/gcloud/version", __FILE__)
+require File.expand_path("../lib/google/cloud/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "gcloud"
-  gem.version       = Gcloud::VERSION
+  gem.version       = Google::Cloud::VERSION
 
   gem.authors       = ["Silvano Luciani", "Mike Moore", "Chris Smith"]
   gem.email         = ["silvano@google.com", "mike@blowmage.com", "quartzmo@gmail.com"]

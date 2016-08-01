@@ -19,55 +19,55 @@ namespace :test do
   desc "Runs datastore tests."
   task :datastore do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/datastore/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs storage tests."
   task :storage do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/storage/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs pubsub tests."
   task :pubsub do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/pubsub/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs bigquery tests."
   task :bigquery do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/bigquery/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs dns tests."
   task :dns do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/dns/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs resource_manager tests."
   task :resource_manager do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/resource_manager/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs logging tests."
   task :logging do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/logging/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
   desc "Runs translate tests."
   task :translate do
     $LOAD_PATH.unshift "lib", "test"
-    Dir.glob("test/gcloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
+    Dir.glob("test/google/cloud/translate/**/*_test.rb").each { |file| require_relative "../#{file}"}
   end
 
     desc "Runs vision tests."
     task :vision do
       $LOAD_PATH.unshift "lib", "test"
-      Dir.glob("test/gcloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
+      Dir.glob("test/google/cloud/vision/**/*_test.rb").each { |file| require_relative "../#{file}"}
     end
 
   desc "Runs tests with coverage."
@@ -250,9 +250,9 @@ namespace :test do
         ENV["STORAGE_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
-        require "gcloud/storage"
+        require "google/cloud/storage"
         puts "Cleaning up Storage buckets and files"
-        Gcloud.storage.buckets.each { |b| b.files.map(&:delete); b.delete }
+        Google::Cloud.storage.buckets.each { |b| b.files.map(&:delete); b.delete }
       end
     end
 
@@ -288,10 +288,10 @@ namespace :test do
         ENV["PUBSUB_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
-        require "gcloud/pubsub"
+        require "google/cloud/pubsub"
         puts "Cleaning up Pub/Sub topics and subscriptions"
-        Gcloud.pubsub.topics.map &:delete
-        Gcloud.pubsub.subscriptions.map &:delete
+        Google::Cloud.pubsub.topics.map &:delete
+        Google::Cloud.pubsub.subscriptions.map &:delete
       end
     end
 
@@ -327,13 +327,13 @@ namespace :test do
         ENV["BIGQUERY_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
-        require "gcloud/bigquery"
+        require "google/cloud/bigquery"
         puts "Cleaning up BigQuery datasets and tables"
-        Gcloud.bigquery.datasets.each do |ds|
+        Google::Cloud.bigquery.datasets.each do |ds|
           begin
             ds.tables.map &:delete
             ds.delete
-          rescue Gcloud::Bigquery::ApiError => e
+          rescue Google::Cloud::Bigquery::ApiError => e
             puts e.message
           end
         end
@@ -372,12 +372,12 @@ namespace :test do
         ENV["DNS_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
-        require "gcloud/dns"
+        require "google/cloud/dns"
         puts "Cleaning up DNS zones and records"
-        Gcloud.dns.zones.each do |zone|
+        Google::Cloud.dns.zones.each do |zone|
           begin
             zone.delete force: true
-          rescue Gcloud::Dns::ApiError => e
+          rescue Google::Cloud::Dns::ApiError => e
             puts e.message
           end
         end
@@ -416,12 +416,12 @@ namespace :test do
         ENV["LOGGING_KEYFILE"] = keyfile
 
         $LOAD_PATH.unshift "lib"
-        require "gcloud/logging"
+        require "google/cloud/logging"
         puts "Cleaning up LOGGING sinks and metrics"
         begin
-          # Gcloud.logging.sinks.each.map &:delete
-          Gcloud.logging.metrics.each.map &:delete
-        rescue Gcloud::Error => e
+          # Google::Cloud.logging.sinks.each.map &:delete
+          Google::Cloud.logging.metrics.each.map &:delete
+        rescue Google::Cloud::Error => e
           puts e.message
         end
       end

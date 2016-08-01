@@ -42,21 +42,21 @@ describe "Storage", :files, :storage do
 
   it "get all files" do
     bucket.files.all.each do |file|
-      file.must_be_kind_of Gcloud::Storage::File
+      file.must_be_kind_of Google::Cloud::Storage::File
     end
   end
 
   it "gets pages of files" do
     first_files = bucket.files max: 2
     first_files.next?.must_equal true
-    first_files.each { |f| f.must_be_kind_of Gcloud::Storage::File }
+    first_files.each { |f| f.must_be_kind_of Google::Cloud::Storage::File }
     second_files = first_files.next
-    second_files.each { |f| f.must_be_kind_of Gcloud::Storage::File }
+    second_files.each { |f| f.must_be_kind_of Google::Cloud::Storage::File }
   end
 
   it "gets all files with request_limit" do
     bucket.files(max: 2).all(request_limit: 1) do |file|
-      file.must_be_kind_of Gcloud::Storage::File
+      file.must_be_kind_of Google::Cloud::Storage::File
     end
   end
 end

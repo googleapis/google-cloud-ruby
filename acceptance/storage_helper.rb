@@ -13,16 +13,16 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/storage"
+require "google/cloud/storage"
 
 # Increase the number of retries because we run so many tests in parallel
-require "gcloud/backoff"
+require "google/cloud/backoff"
 
-Gcloud::Backoff.retries = 10
-Gcloud::Backoff.backoff = ->(retries) { puts "Backoff #{retries}"; sleep retries.to_i }
+Google::Cloud::Backoff.retries = 10
+Google::Cloud::Backoff.backoff = ->(retries) { puts "Backoff #{retries}"; sleep retries.to_i }
 
 # Create shared storage object so we don't create new for each test
-$storage = Gcloud.storage
+$storage = Google::Cloud.storage
 
 module Acceptance
   ##

@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Gcloud::Storage::Bucket, :storage do
+describe Google::Cloud::Storage::Bucket, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
@@ -69,7 +69,7 @@ describe Gcloud::Storage::Bucket, :storage do
     bucket.website_404.must_be :nil?
 
     bucket.cors.each do |cors|
-      cors.must_be_kind_of Gcloud::Storage::Bucket::Cors::Rule
+      cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
       cors.frozen?.must_equal true
     end
     bucket.cors.frozen?.must_equal true

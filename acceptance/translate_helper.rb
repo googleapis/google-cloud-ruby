@@ -13,13 +13,13 @@
 # limitations under the License.
 
 require "helper"
-require "gcloud/translate"
+require "google/cloud/translate"
 
-Gcloud::Backoff.retries = 10
+Google::Cloud::Backoff.retries = 10
 
 if ENV["GCLOUD_TEST_TRANSLATE_KEY"]
   # Create shared translate object so we don't create new for each test
-  $translate = Gcloud.translate ENV["GCLOUD_TEST_TRANSLATE_KEY"]
+  $translate = Google::Cloud.translate ENV["GCLOUD_TEST_TRANSLATE_KEY"]
 else
   puts "No API Key found for the Translate acceptance tests."
 end

@@ -20,14 +20,14 @@ require "minitest/rg"
 require "ostruct"
 require "json"
 require "base64"
-require "gcloud/storage"
-require "gcloud/pubsub"
-require "gcloud/bigquery"
-require "gcloud/dns"
-require "gcloud/resource_manager"
-require "gcloud/logging"
-require "gcloud/translate"
-require "gcloud/vision"
+require "google/cloud/storage"
+require "google/cloud/pubsub"
+require "google/cloud/bigquery"
+require "google/cloud/dns"
+require "google/cloud/resource_manager"
+require "google/cloud/logging"
+require "google/cloud/translate"
+require "google/cloud/vision"
 
 ##
 # Monkey-Patch Google API Client to support Mocks
@@ -46,7 +46,7 @@ end
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:storage) { Gcloud::Storage::Project.new(Gcloud::Storage::Service.new(project, credentials)) }
+  let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
 
   # Register this spec type for when :mock_storage is used.
   register_spec_type(self) do |desc, *addl|
@@ -126,7 +126,7 @@ end
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:pubsub) { Gcloud::Pubsub::Project.new(Gcloud::Pubsub::Service.new(project, credentials)) }
+  let(:pubsub) { Google::Cloud::Pubsub::Project.new(Google::Cloud::Pubsub::Service.new(project, credentials)) }
 
   def topics_json num_topics, token = nil
     topics = num_topics.times.map do
@@ -209,7 +209,7 @@ end
 class MockBigquery < Minitest::Spec
   let(:project) { bigquery.service.project }
   let(:credentials) { bigquery.service.credentials }
-  let(:bigquery) { Gcloud::Bigquery::Project.new(Gcloud::Bigquery::Service.new("test-project", OpenStruct.new)) }
+  let(:bigquery) { Google::Cloud::Bigquery::Project.new(Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new)) }
 
   # Register this spec type for when :mock_bigquery is used.
   register_spec_type(self) do |desc, *addl|
@@ -597,7 +597,7 @@ end
 class MockDns < Minitest::Spec
   let(:project) { dns.service.project }
   let(:credentials) { dns.service.credentials }
-  let(:dns) { Gcloud::Dns::Project.new(Gcloud::Dns::Service.new("test", OpenStruct.new)) }
+  let(:dns) { Google::Cloud::Dns::Project.new(Google::Cloud::Dns::Service.new("test", OpenStruct.new)) }
 
   def random_project_gapi
     Google::Apis::DnsV1::Project.new(
@@ -684,7 +684,7 @@ end
 
 class MockResourceManager < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:resource_manager) { Gcloud::ResourceManager::Manager.new(Gcloud::ResourceManager::Service.new(credentials)) }
+  let(:resource_manager) { Google::Cloud::ResourceManager::Manager.new(Google::Cloud::ResourceManager::Service.new(credentials)) }
 
   # Register this spec type for when :mock_res_man is used.
   register_spec_type(self) do |desc, *addl|
@@ -708,7 +708,7 @@ end
 class MockLogging < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:logging) { Gcloud::Logging::Project.new(Gcloud::Logging::Service.new(project, credentials)) }
+  let(:logging) { Google::Cloud::Logging::Project.new(Google::Cloud::Logging::Service.new(project, credentials)) }
 
   # Register this spec type for when :mock_logging is used.
   register_spec_type(self) do |desc, *addl|
@@ -743,7 +743,7 @@ class MockLogging < Minitest::Spec
       "request_size" => 123,
       "status" => 200,
       "response_size" => 456,
-      "user_agent" => "gcloud-ruby/1.0.0",
+      "user_agent" => "google-cloud/1.0.0",
       "remote_ip" => "127.0.0.1",
       "referer" => "http://test.local/referer",
       "cache_hit" => false,
@@ -823,7 +823,7 @@ end
 
 class MockTranslate < Minitest::Spec
   let(:key) { "test-api-key" }
-  let(:translate) { Gcloud::Translate::Api.new(Gcloud::Translate::Service.new(key)) }
+  let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(key)) }
 
   # Register this spec type for when :mock_translate is used.
   register_spec_type(self) do |desc, *addl|
@@ -835,7 +835,7 @@ class MockVision < Minitest::Spec
   API = Google::Apis::VisionV1
   let(:project) { vision.service.project }
   let(:credentials) { vision.service.credentials }
-  let(:vision) { Gcloud::Vision::Project.new(Gcloud::Vision::Service.new("test", OpenStruct.new)) }
+  let(:vision) { Google::Cloud::Vision::Project.new(Google::Cloud::Vision::Service.new("test", OpenStruct.new)) }
 
   # Register this spec type for when :mock_vision is used.
   register_spec_type(self) do |desc, *addl|
@@ -949,7 +949,7 @@ class MockVision < Minitest::Spec
   def text_annotation_response
     API::EntityAnnotation.new(
       locale: "en",
-      description: "Google Cloud Client Library for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
+      description: "Google Cloud Client for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
       bounding_poly: bounding_poly
     )
   end

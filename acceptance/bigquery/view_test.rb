@@ -13,11 +13,11 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "gcloud/storage"
+require "google/cloud/storage"
 
 # This test is a ruby version of gcloud-node's bigquery test.
 
-describe Gcloud::Bigquery, :bigquery do
+describe Google::Cloud::Bigquery, :bigquery do
   let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
   let(:publicdata_query_2) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 50" }
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -39,7 +39,7 @@ describe Gcloud::Bigquery, :bigquery do
 
   it "has the attributes of a view" do
     fresh = dataset.table view.table_id
-    fresh.must_be_kind_of Gcloud::Bigquery::View
+    fresh.must_be_kind_of Google::Cloud::Bigquery::View
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
@@ -53,7 +53,7 @@ describe Gcloud::Bigquery, :bigquery do
     fresh.table?.must_equal false
     fresh.view?.must_equal true
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
-    fresh.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.headers.must_equal ["url"]
   end
 
@@ -75,7 +75,7 @@ describe Gcloud::Bigquery, :bigquery do
   it "returns data" do
     data = view.data max: 2
 
-    data.class.name.must_equal "Gcloud::Bigquery::QueryData" # Array delegate
+    data.class.name.must_equal "Google::Cloud::Bigquery::QueryData" # Array delegate
     data.count.must_equal 2
   end
 end

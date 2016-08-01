@@ -13,9 +13,9 @@
 # limitations under the License.
 
 require "bigquery_helper"
-require "gcloud/storage"
+require "google/cloud/storage"
 
-describe Gcloud::Bigquery::Table, :bigquery do
+describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -50,7 +50,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
 
   it "has the attributes of a table" do
     fresh = dataset.table table.table_id
-    fresh.must_be_kind_of Gcloud::Bigquery::Table
+    fresh.must_be_kind_of Google::Cloud::Bigquery::Table
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{table.table_id}"
@@ -65,7 +65,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
     fresh.table?.must_equal true
     fresh.view?.must_equal false
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
-    fresh.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
     ["id", "breed", "name", "dob"].each { |k| fresh.headers.must_include k }
 
@@ -127,7 +127,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
     insert_response.error_rows.must_be :empty?
 
     query_job = dataset.query_job query
-    query_job.must_be_kind_of Gcloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     query_job.wait_until_done!
 
     # Job methods
@@ -152,12 +152,12 @@ describe Gcloud::Bigquery::Table, :bigquery do
     query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
-    query_job.query_results.class.must_equal Gcloud::Bigquery::QueryData
+    query_job.query_results.class.must_equal Google::Cloud::Bigquery::QueryData
     query_job.query_results.count.wont_be :nil?
     query_job.query_results.job.job_id.must_equal query_job.job_id
 
     data = table.data max: 1
-    data.class.must_equal Gcloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     data.total.must_be :nil?
@@ -171,10 +171,10 @@ describe Gcloud::Bigquery::Table, :bigquery do
     more_data.wont_be :nil?
 
     query_data = dataset.query query
-    query_data.class.must_equal Gcloud::Bigquery::QueryData
+    query_data.class.must_equal Google::Cloud::Bigquery::QueryData
     query_data.total_bytes.wont_be(:nil?) if query_data.complete?
     #query_data.cache_hit?.must_equal false
-    query_data.schema.must_be_kind_of Gcloud::Bigquery::Schema
+    query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     query_data.fields.count.must_equal 4
     ["id", "breed", "name", "dob"].each { |k| query_data.headers.must_include k }
     query_data.count.wont_be :nil?
@@ -192,14 +192,14 @@ describe Gcloud::Bigquery::Table, :bigquery do
 
   it "imports data from a file in your bucket" do
     begin
-      bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
       file = bucket.create_file local_file
 
       job = table.load file
       job.wait_until_done!
       job.wont_be :failed?
     ensure
-      post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
         post_bucket.delete
@@ -210,7 +210,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
   it "copies itself to another table" do
     copy_job = table.copy target_table_id, create: :needed, write: :empty
 
-    copy_job.must_be_kind_of Gcloud::Bigquery::CopyJob
+    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
@@ -228,7 +228,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
       # Make sure there is data to extract...
       load_job = table.load local_file
 
-      load_job.must_be_kind_of Gcloud::Bigquery::LoadJob
+      load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       load_job.wait_until_done!
 
       load_job.wont_be :failed?
@@ -245,7 +245,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
       load_job.backup?.must_equal false
       load_job.allow_jagged_rows?.must_equal false
       load_job.ignore_unknown_values?.must_equal false
-      load_job.schema.must_be_kind_of Gcloud::Bigquery::Schema
+      load_job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
       load_job.schema.wont_be :empty?
       load_job.input_files.must_equal 1
       load_job.input_file_bytes.must_be :>, 0
@@ -253,11 +253,11 @@ describe Gcloud::Bigquery::Table, :bigquery do
       load_job.output_bytes.must_be :>, 0
 
       Tempfile.open "empty_extract_file.json" do |tmp|
-        bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
         extract_job = table.extract extract_url
 
-        extract_job.must_be_kind_of Gcloud::Bigquery::ExtractJob
+        extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
         extract_job.wait_until_done!
 
         extract_job.wont_be :failed?
@@ -275,7 +275,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
         downloaded_file.size.must_be :>, 0
       end
     ensure
-      post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
         post_bucket.delete
@@ -290,7 +290,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
       load_job.wait_until_done!
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = Gcloud.storage.create_bucket "#{prefix}_bucket"
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         extract_job = table.extract extract_file
         extract_job.wait_until_done!
@@ -301,7 +301,7 @@ describe Gcloud::Bigquery::Table, :bigquery do
         downloaded_file.size.must_be :>, 0
       end
     ensure
-      post_bucket = Gcloud.storage.bucket "#{prefix}_bucket"
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
         post_bucket.delete

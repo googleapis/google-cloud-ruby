@@ -20,8 +20,8 @@ task :console do
   lib = File.expand_path("../../lib/", __FILE__)
   $:.unshift lib unless $:.include?(lib)
 
-  require "gcloud"
-  def gcloud; @gcloud ||= Gcloud.new; end
+  require "google/cloud"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
 
   ARGV.clear
   IRB.start
