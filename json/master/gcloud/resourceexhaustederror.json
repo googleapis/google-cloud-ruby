@@ -1,1 +1,0 @@
-{"id":"gcloud/resourceexhaustederror","name":"ResourceExhaustedError","title":["Gcloud","ResourceExhaustedError"],"description":"<p>ResourceExhausted indicates some resource has been exhausted, perhaps\na per-user quota, or perhaps the entire file system is out of space.</p>","source":"lib/gcloud/errors.rb#L124","resources":[],"examples":[],"methods":[]}

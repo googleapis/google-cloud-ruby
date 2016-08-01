@@ -1,1 +1,0 @@
-{"id":"gcloud/unimplementederror","name":"UnimplementedError","title":["Gcloud","UnimplementedError"],"description":"<p>Unimplemented indicates operation is not implemented or not\nsupported/enabled in this service.</p>","source":"lib/gcloud/errors.rb#L182","resources":[],"examples":[],"methods":[]}
