@@ -1,5 +1,15 @@
 # Release History
 
+### 0.12.1 / 2016-08-01
+
+#### Changes
+
+* Datastore
+  * Change `Datastore#next?` to use `NOT_FINISHED` (timanovsky)
+* Pub/Sub
+  * Fix bug in pull timeout (mpcm)
+* Minor code cleanup and acceptance testing changes
+
 ### 0.12.0 / 2016-07-25
 
 In addition to upgrading the `google-api-client` dependency to the latest version (a significant change in the HTTP stack), this release makes a number of small, breaking changes in anticipation of gcloud-ruby `1.0`.
