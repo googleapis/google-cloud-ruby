@@ -3,8 +3,9 @@
   "friendlyLang": "Ruby",
   "markdown": "ruby",
   "versions": [
-    "v0.12.0",
+    "v0.12.1",
     "master",
+    "v0.12.0",
     "v0.11.0",
     "v0.10.0",
     "v0.9.0",
