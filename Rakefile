@@ -11,6 +11,20 @@ task :bundleupdate do
   end
 end
 
+desc "Runs rubocop, jsodoc, and tests for all gems individually."
+task each: :bundleupdate do
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "RUBOCOP, JSONDOC, TESTS FOR #{gem}"
+        sh "bundle exec rake rubocop"
+        sh "bundle exec rake jsondoc"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+end
+
 desc "Runs tests for all gems."
 task :test do
   gems.each do |gem|
