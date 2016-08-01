@@ -469,6 +469,16 @@ describe "Datastore", :datastore do
       entities[2]["name"].must_equal arya["name"]
     end
 
+    it "should paginate with all" do
+      query = Gcloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        order("appearances")
+      entities = dataset.run(query).all.to_a
+      entities.count.must_equal 8
+      entities[0]["name"].must_equal rickard["name"]
+      entities[5]["name"].must_equal sansa["name"]
+    end
+
     it "should resume from a start cursor" do
       query = Gcloud::Datastore::Query.new.
         kind("Character").ancestor(book).

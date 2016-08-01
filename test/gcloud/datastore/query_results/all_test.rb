@@ -38,7 +38,7 @@ describe Gcloud::Datastore::Dataset, :all do
     Google::Datastore::V1beta3::RunQueryResponse.new(
       batch: Google::Datastore::V1beta3::QueryResultBatch.new(
         entity_results: run_query_res_entities,
-        more_results: :MORE_RESULTS_AFTER_CURSOR,
+        more_results: :NOT_FINISHED,
         end_cursor: "second-page-cursor".force_encoding("ASCII-8BIT")
       )
     )
@@ -101,10 +101,10 @@ describe Gcloud::Datastore::Dataset, :all do
     end
     first_entities.cursor.must_equal     Gcloud::Datastore::Cursor.from_grpc("second-page-cursor")
     first_entities.end_cursor.must_equal Gcloud::Datastore::Cursor.from_grpc("second-page-cursor")
-    first_entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
-    refute first_entities.not_finished?
+    first_entities.more_results.must_equal :NOT_FINISHED
+    assert first_entities.not_finished?
     refute first_entities.more_after_limit?
-    assert first_entities.more_after_cursor?
+    refute first_entities.more_after_cursor?
     refute first_entities.no_more?
 
     assert first_entities.next?
@@ -136,7 +136,6 @@ describe Gcloud::Datastore::Dataset, :all do
 
     refute next_entities.next?
   end
-
 
   it "run will fulfill a query and return an object that can paginate with all" do
     entities = dataset.run dataset.query("Task")
