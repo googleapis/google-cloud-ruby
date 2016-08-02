@@ -86,4 +86,10 @@ describe Google::Cloud::Vision::Image, :mock_vision do
 
     expect { vision.image obj }.must_raise ArgumentError
   end
+
+  it "can convert to a string" do
+    image = vision.image filepath
+
+    image.inspect.must_include image.to_s
+  end
 end

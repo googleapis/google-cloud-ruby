@@ -195,15 +195,6 @@ module Google
           # @return [Hash]
           #
           def to_h
-            to_hash
-          end
-
-          ##
-          # Deeply converts object to a hash. All keys will be symbolized.
-          #
-          # @return [Hash]
-          #
-          def to_hash
             { mid: mid, locale: locale, description: description,
               score: score, confidence: confidence, topicality: topicality,
               bounds: bounds.map(&:to_h), locations: locations.map(&:to_h),

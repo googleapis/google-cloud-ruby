@@ -65,4 +65,17 @@ describe Google::Cloud::Vision::Annotation::Properties, :mock_vision do
     properties.colors[9].score.must_equal 0.00096750073
     properties.colors[9].pixel_fraction.must_equal 0.00064516132
   end
+
+  it "can convert to a hash" do
+    hash = properties.to_h
+    hash.must_be_kind_of Hash
+    hash[:colors].each_with_index do |color_hash, index|
+      color_hash.must_equal properties.colors[index].to_h
+    end
+  end
+
+  it "can convert to a string" do
+    properties.to_s.must_equal "(colors: 10)"
+    properties.inspect.must_include properties.to_s
+  end
 end

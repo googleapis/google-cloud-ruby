@@ -86,15 +86,6 @@ module Google
         end
 
         ##
-        # @private The URL of the image.
-        #
-        # @return [String]
-        #
-        def url
-          @url
-        end
-
-        ##
         # Performs the `FACE_DETECTION` feature on the image.
         #
         # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
@@ -529,10 +520,10 @@ module Google
             #   conforming to the [WGS84
             #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
             def min= location
-              if location.respond_to?(:to_hash) &&
-                 location.to_hash.keys.sort == [:latitude, :longitude]
-                return @min = Location.new(location.to_hash[:latitude],
-                                           location.to_hash[:longitude])
+              if location.respond_to?(:to_h) &&
+                 location.to_h.keys.sort == [:latitude, :longitude]
+                return @min = Location.new(location.to_h[:latitude],
+                                           location.to_h[:longitude])
               end
               fail ArgumentError, "Must pass a proper location value."
             end
@@ -545,10 +536,10 @@ module Google
             #   conforming to the [WGS84
             #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
             def max= location
-              if location.respond_to?(:to_hash) &&
-                 location.to_hash.keys.sort == [:latitude, :longitude]
-                return @max = Location.new(location.to_hash[:latitude],
-                                           location.to_hash[:longitude])
+              if location.respond_to?(:to_h) &&
+                 location.to_h.keys.sort == [:latitude, :longitude]
+                return @max = Location.new(location.to_h[:latitude],
+                                           location.to_h[:longitude])
               end
               fail ArgumentError, "Must pass a proper location value."
             end
@@ -559,8 +550,8 @@ module Google
             # @return [Boolean]
             #
             def empty?
-              min.to_hash.values.reject(&:nil?).empty? ||
-                max.to_hash.values.reject(&:nil?).empty?
+              min.to_h.values.reject(&:nil?).empty? ||
+                max.to_h.values.reject(&:nil?).empty?
             end
 
             ##
@@ -569,16 +560,7 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Deeply converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
-              { min_lat_lng: min.to_hash, max_lat_lng: max.to_hash }
+              { min_lat_lng: min.to_h, max_lat_lng: max.to_h }
             end
 
             def to_gapi

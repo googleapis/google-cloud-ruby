@@ -102,15 +102,6 @@ module Google
           # @return [Hash]
           #
           def to_h
-            to_hash
-          end
-
-          ##
-          # Deeply converts object to a hash. All keys will be symbolized.
-          #
-          # @return [Hash]
-          #
-          def to_hash
             { angles: angles.to_h, bounds: bounds.to_h, features: features.to_h,
               likelihood: likelihood.to_h }
           end
@@ -203,15 +194,6 @@ module Google
             # @return [Array]
             #
             def to_a
-              to_ary
-            end
-
-            ##
-            # Returns the object's property values as an array.
-            #
-            # @return [Array]
-            #
-            def to_ary
               [roll, yaw, pitch]
             end
 
@@ -221,15 +203,6 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
               { roll: roll, yaw: yaw, pitch: pitch }
             end
 
@@ -316,15 +289,6 @@ module Google
             # @return [Array]
             #
             def to_a
-              to_ary
-            end
-
-            ##
-            # Returns the object's property values as an array.
-            #
-            # @return [Array]
-            #
-            def to_ary
               [head.map(&:to_a), face.map(&:to_a)]
             end
 
@@ -334,15 +298,6 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Deeply converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
               { head: head.map(&:to_h), face: face.map(&:to_h) }
             end
 
@@ -549,15 +504,6 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Deeply converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
               { confidence: confidence, chin: chin.to_h, ears: ears.to_h,
                 eyebrows: eyebrows.to_h, eyes: eyes.to_h,
                 forehead: forehead.to_h, lips: lips.to_h, mouth: mouth.to_h,
@@ -678,15 +624,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [x, y, z]
               end
 
@@ -696,15 +633,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { x: x, y: y, z: z }
               end
 
@@ -772,15 +700,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, center, right]
               end
 
@@ -790,15 +709,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, center: center.to_h, right: right.to_h }
               end
 
@@ -860,15 +770,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, right]
               end
 
@@ -878,15 +779,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, right: right.to_h }
               end
 
@@ -949,15 +841,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, right]
               end
 
@@ -967,15 +850,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, right: right.to_h }
               end
 
@@ -1040,15 +914,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, top, right]
               end
 
@@ -1058,15 +923,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, top: top.to_h, right: right.to_h }
               end
 
@@ -1130,15 +986,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, right]
               end
 
@@ -1148,15 +995,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, right: right.to_h }
               end
 
@@ -1226,15 +1064,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, top, right]
               end
 
@@ -1244,15 +1073,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, bottom: bottom.to_h, center: center.to_h,
                   pupil: pupil.to_h, top: top.to_h, right: right.to_h }
               end
@@ -1317,15 +1137,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [top, bottom]
               end
 
@@ -1335,15 +1146,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { top: top.to_h, bottom: bottom.to_h }
               end
 
@@ -1407,15 +1209,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, center, right]
               end
 
@@ -1425,15 +1218,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, center: center.to_h, right: right.to_h }
               end
 
@@ -1502,15 +1286,6 @@ module Google
               # @return [Array]
               #
               def to_a
-                to_ary
-              end
-
-              ##
-              # Returns the object's property values as an array.
-              #
-              # @return [Array]
-              #
-              def to_ary
                 [left, bottom, tip, top, right]
               end
 
@@ -1520,15 +1295,6 @@ module Google
               # @return [Hash]
               #
               def to_h
-                to_hash
-              end
-
-              ##
-              # Deeply converts object to a hash. All keys will be symbolized.
-              #
-              # @return [Hash]
-              #
-              def to_hash
                 { left: left.to_h, bottom: bottom.to_h, tip: tip.to_h,
                   top: top.to_h, right: right.to_h }
               end
@@ -1712,15 +1478,6 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
               { joy: joy?, sorrow: sorrow?, anger: anger?, surprise: surprise?,
                 under_exposed: under_exposed?, blurred: blurred?,
                 headwear: headwear? }

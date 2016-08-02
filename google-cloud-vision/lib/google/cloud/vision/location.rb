@@ -57,15 +57,6 @@ module Google
         # @return [Array]
         #
         def to_a
-          to_ary
-        end
-
-        ##
-        # Returns the object's property values as an array.
-        #
-        # @return [Array]
-        #
-        def to_ary
           [latitude, longitude]
         end
 
@@ -75,15 +66,6 @@ module Google
         # @return [Hash]
         #
         def to_h
-          to_hash
-        end
-
-        ##
-        # Converts object to a hash. All keys will be symbolized.
-        #
-        # @return [Hash]
-        #
-        def to_hash
           { latitude: latitude, longitude: longitude }
         end
 

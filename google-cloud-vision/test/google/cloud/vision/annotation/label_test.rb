@@ -30,4 +30,23 @@ describe Google::Cloud::Vision::Annotation::Entity, :label, :mock_vision do
     label.locations.must_be :empty?
     label.properties.must_be :empty?
   end
+
+  it "can convert to a hash" do
+    hash = label.to_h
+    hash.must_be_kind_of Hash
+    hash[:mid].must_equal "/m/02wtjj"
+    hash[:locale].must_equal nil
+    hash[:description].must_equal "stone carving"
+    hash[:score].must_equal 0.9859733
+    hash[:confidence].must_equal nil
+    hash[:topicality].must_equal nil
+    hash[:bounds].must_equal []
+    hash[:locations].must_equal []
+    hash[:properties].must_equal({})
+  end
+
+  it "can convert to a string" do
+    label.to_s.must_equal "mid: \"/m/02wtjj\", locale: nil, description: \"stone carving\", score: 0.9859733, confidence: nil, topicality: nil, bounds: 0, locations: 0, properties: {}"
+    label.inspect.must_include label.to_s
+  end
 end

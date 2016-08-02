@@ -32,6 +32,35 @@ describe Google::Cloud::Vision::Annotation::Entity, :landmark, :mock_vision do
     landmark.bounds[3].to_a.must_equal [1,  301]
     landmark.locations[0].latitude.must_equal 43.878264
     landmark.locations[0].longitude.must_equal -103.45700740814209
+    landmark.locations[0].to_a.must_equal [43.878264, -103.45700740814209]
     landmark.properties.must_be :empty?
+  end
+
+  it "can convert to a hash" do
+    hash = landmark.to_h
+    hash.must_be_kind_of Hash
+    hash[:mid].must_equal "/m/019dvv"
+    hash[:locale].must_equal nil
+    hash[:description].must_equal "Mount Rushmore"
+    hash[:score].must_equal 0.91912264
+    hash[:confidence].must_equal nil
+    hash[:topicality].must_equal nil
+    hash[:bounds].must_be_kind_of Array
+    hash[:bounds][0].must_equal({ x: 1,  y: 0 })
+    hash[:bounds][1].must_equal({ x: 295, y: 0 })
+    hash[:bounds][2].must_equal({ x: 295, y: 301 })
+    hash[:bounds][3].must_equal({ x: 1,  y: 301 })
+    hash[:locations].must_be_kind_of Array
+    hash[:locations][0].must_equal({ latitude: 43.878264, longitude: -103.45700740814209 })
+    hash[:properties].must_equal({})
+  end
+
+  it "can convert to a string" do
+    landmark.to_s.must_equal "mid: \"/m/019dvv\", locale: nil, description: \"Mount Rushmore\", score: 0.91912264, confidence: nil, topicality: nil, bounds: 4, locations: 1, properties: {}"
+    landmark.inspect.must_include landmark.to_s
+
+    landmark.locations.each do |location|
+      location.inspect.must_include location.to_s
+    end
   end
 end

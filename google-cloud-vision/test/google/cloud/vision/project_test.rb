@@ -95,10 +95,16 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.face.wont_be :nil?
     annotation.landmark.wont_be :nil?
     annotation.logo.wont_be :nil?
-    annotation.labels.wont_be :nil?
+    annotation.label.wont_be :nil?
+
+    annotation.must_be :face?
+    annotation.must_be :landmark?
+    annotation.must_be :logo?
+    annotation.must_be :label?
 
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
+    annotation.must_be :text?
     annotation.text.text.must_include "Google Cloud Client for Ruby"
     annotation.text.locale.must_equal "en"
     annotation.text.words.count.must_equal 28
@@ -108,12 +114,15 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
 
     annotation.safe_search.wont_be :nil?
+    annotation.must_be :safe_search?
+    annotation.safe_search.wont_be :nil?
     annotation.safe_search.wont_be :adult?
     annotation.safe_search.wont_be :spoof?
     annotation.safe_search.must_be :medical?
     annotation.safe_search.must_be :violence?
 
     annotation.properties.wont_be :nil?
+    annotation.must_be :properties?
     annotation.properties.colors.count.must_equal 10
 
     annotation.properties.colors[0].red.must_equal 145

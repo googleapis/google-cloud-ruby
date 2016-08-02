@@ -97,15 +97,6 @@ module Google
           # @return [Hash]
           #
           def to_h
-            to_hash
-          end
-
-          ##
-          # Deeply converts object to a hash. All keys will be symbolized.
-          #
-          # @return [Hash]
-          #
-          def to_hash
             { text: text, locale: locale, bounds: bounds.map(&:to_h),
               words: words.map(&:to_h) }
           end
@@ -199,15 +190,6 @@ module Google
             # @return [Hash]
             #
             def to_h
-              to_hash
-            end
-
-            ##
-            # Deeply converts object to a hash. All keys will be symbolized.
-            #
-            # @return [Hash]
-            #
-            def to_hash
               { text: text, bounds: bounds.map(&:to_h) }
             end
 

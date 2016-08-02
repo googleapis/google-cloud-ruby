@@ -28,4 +28,22 @@ describe Google::Cloud::Vision::Annotation::Text, :mock_vision do
     text.words[27].text.must_equal "Storage."
     text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
+
+  it "can convert to a hash" do
+    hash = text.to_h
+    hash.must_be_kind_of Hash
+    hash[:text].must_equal text.text
+    hash[:locale].must_equal text.locale
+    hash[:bounds].must_be_kind_of Array
+    hash[:bounds][0].must_equal({ x: 1,   y: 0 })
+    hash[:bounds][1].must_equal({ x: 295, y: 0 })
+    hash[:bounds][2].must_equal({ x: 295, y: 301 })
+    hash[:bounds][3].must_equal({ x: 1,   y: 301 })
+    hash[:words].count.must_equal text.words.count
+  end
+
+  it "can convert to a string" do
+    text.to_s.must_equal "Google Cloud Client for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n"
+    text.inspect.must_include text.to_s.inspect
+  end
 end

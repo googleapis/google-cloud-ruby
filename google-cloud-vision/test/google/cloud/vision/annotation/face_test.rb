@@ -113,4 +113,80 @@ describe Google::Cloud::Vision::Annotation::Face, :mock_vision do
     face.likelihood.blurred.must_equal "VERY_UNLIKELY"
     face.likelihood.headwear.must_equal "VERY_UNLIKELY"
   end
+
+  it "knows the confidence" do
+    face.confidence.must_equal 0.56748849
+  end
+
+  it "can convert to a hash" do
+    hash = face.to_h
+    hash.must_be_kind_of Hash
+    hash[:angles].must_equal face.angles.to_h
+    hash[:bounds].must_equal face.bounds.to_h
+    hash[:features].must_equal face.features.to_h
+    hash[:likelihood].must_equal face.likelihood.to_h
+  end
+
+  it "can convert to a string" do
+    face.to_s.must_equal "(angles, bounds, features, likelihood)"
+    face.inspect.must_include face.to_s
+
+    face.angles.to_s.must_equal "(roll: -0.050002542, yaw: -0.081090336, pitch: 0.18012161)"
+    face.angles.inspect.must_include face.angles.to_s
+
+    face.bounds.inspect.must_include face.bounds.to_s
+
+    face.features.to_s.must_equal "(confidence, chin, ears, eyebrows, eyes, forehead, lips, mouth, nose)"
+    face.features.inspect.must_include face.features.to_s
+    face.features.chin.inspect.must_include face.features.chin.to_s
+    face.features.chin.center.inspect.must_include face.features.chin.center.to_s
+    face.features.chin.left.inspect.must_include face.features.chin.left.to_s
+    face.features.chin.right.inspect.must_include face.features.chin.right.to_s
+    face.features.ears.inspect.must_include face.features.ears.to_s
+    face.features.ears.left.inspect.must_include face.features.ears.left.to_s
+    face.features.ears.right.inspect.must_include face.features.ears.right.to_s
+    face.features.eyebrows.inspect.must_include face.features.eyebrows.to_s
+    face.features.eyebrows.left.inspect.must_include face.features.eyebrows.left.to_s
+    face.features.eyebrows.left.left.inspect.must_include face.features.eyebrows.left.left.to_s
+    face.features.eyebrows.left.right.inspect.must_include face.features.eyebrows.left.right.to_s
+    face.features.eyebrows.left.top.inspect.must_include face.features.eyebrows.left.top.to_s
+    face.features.eyebrows.right.inspect.must_include face.features.eyebrows.right.to_s
+    face.features.eyebrows.right.left.inspect.must_include face.features.eyebrows.right.left.to_s
+    face.features.eyebrows.right.right.inspect.must_include face.features.eyebrows.right.right.to_s
+    face.features.eyebrows.right.top.inspect.must_include face.features.eyebrows.right.top.to_s
+    face.features.eyes.inspect.must_include face.features.eyes.to_s
+    face.features.eyes.left.inspect.must_include face.features.eyes.left.to_s
+    face.features.eyes.left.bottom.inspect.must_include face.features.eyes.left.bottom.to_s
+    face.features.eyes.left.center.inspect.must_include face.features.eyes.left.center.to_s
+    face.features.eyes.left.left.inspect.must_include face.features.eyes.left.left.to_s
+    face.features.eyes.left.pupil.inspect.must_include face.features.eyes.left.pupil.to_s
+    face.features.eyes.left.right.inspect.must_include face.features.eyes.left.right.to_s
+    face.features.eyes.left.top.inspect.must_include face.features.eyes.left.top.to_s
+    face.features.eyes.right.inspect.must_include face.features.eyes.right.to_s
+    face.features.eyes.right.bottom.inspect.must_include face.features.eyes.right.bottom.to_s
+    face.features.eyes.right.center.inspect.must_include face.features.eyes.right.center.to_s
+    face.features.eyes.right.left.inspect.must_include face.features.eyes.right.left.to_s
+    face.features.eyes.right.pupil.inspect.must_include face.features.eyes.right.pupil.to_s
+    face.features.eyes.right.right.inspect.must_include face.features.eyes.right.right.to_s
+    face.features.eyes.right.top.inspect.must_include face.features.eyes.right.top.to_s
+    face.features.forehead.inspect.must_include face.features.forehead.to_s
+    face.features.lips.inspect.must_include face.features.lips.to_s
+    face.features.lips.bottom.inspect.must_include face.features.lips.bottom.to_s
+    face.features.lips.lower.inspect.must_include face.features.lips.lower.to_s
+    face.features.lips.top.inspect.must_include face.features.lips.top.to_s
+    face.features.lips.upper.inspect.must_include face.features.lips.upper.to_s
+    face.features.mouth.inspect.must_include face.features.mouth.to_s
+    face.features.mouth.center.inspect.must_include face.features.mouth.center.to_s
+    face.features.mouth.left.inspect.must_include face.features.mouth.left.to_s
+    face.features.mouth.right.inspect.must_include face.features.mouth.right.to_s
+    face.features.nose.inspect.must_include face.features.nose.to_s
+    face.features.nose.bottom.inspect.must_include face.features.nose.bottom.to_s
+    face.features.nose.left.inspect.must_include face.features.nose.left.to_s
+    face.features.nose.right.inspect.must_include face.features.nose.right.to_s
+    face.features.nose.tip.inspect.must_include face.features.nose.tip.to_s
+    face.features.nose.top.inspect.must_include face.features.nose.top.to_s
+
+    face.likelihood.to_s.must_equal "(joy?: true, sorrow?: false, anger?: false, surprise?: false, under_exposed?: false, blurred?: false, headwear: false)"
+    face.likelihood.inspect.must_include face.likelihood.to_s
+  end
 end

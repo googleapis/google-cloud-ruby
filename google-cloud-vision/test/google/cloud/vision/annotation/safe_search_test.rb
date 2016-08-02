@@ -32,4 +32,18 @@ describe Google::Cloud::Vision::Annotation::SafeSearch, :mock_vision do
     safe_search.medical.must_equal "POSSIBLE"
     safe_search.violence.must_equal "LIKELY"
   end
+
+  it "can convert to a hash" do
+    hash = safe_search.to_h
+    hash.must_be_kind_of Hash
+    hash[:adult].must_equal false
+    hash[:spoof].must_equal false
+    hash[:medical].must_equal true
+    hash[:violence].must_equal true
+  end
+
+  it "can convert to a string" do
+    safe_search.to_s.must_equal "(adult?: false, spoof?: false, medical?: true, violence?: true)"
+    safe_search.inspect.must_include safe_search.to_s
+  end
 end
