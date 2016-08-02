@@ -43,6 +43,14 @@ describe Google::Cloud::Logging::Logger, :info, :mock_logging do
     logger.level = ::Logger::INFO
   end
 
+  it "knows its log level using helper methods" do
+    logger.wont_be :debug?
+    logger.must_be :info?
+    logger.must_be :warn?
+    logger.must_be :error?
+    logger.must_be :fatal?
+  end
+
   it "does not create a log entry with #debug" do
     logger.debug "Danger Will Robinson!"
   end
@@ -93,6 +101,60 @@ describe Google::Cloud::Logging::Logger, :info, :mock_logging do
     logging.service.mocked_logging = mock
 
     logger.unknown "Danger Will Robinson!"
+
+    mock.verify
+  end
+
+  it "does not create a log entry with #debug with a block" do
+    logger.debug { "Danger Will Robinson!" }
+  end
+
+  it "creates a log entry with #info with a block" do
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:INFO)]
+    logging.service.mocked_logging = mock
+
+    logger.info { "Danger Will Robinson!" }
+
+    mock.verify
+  end
+
+  it "creates a log entry with #warn with a block" do
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:WARNING)]
+    logging.service.mocked_logging = mock
+
+    logger.warn { "Danger Will Robinson!" }
+
+    mock.verify
+  end
+
+  it "creates a log entry with #error with a block" do
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:ERROR)]
+    logging.service.mocked_logging = mock
+
+    logger.error { "Danger Will Robinson!" }
+
+    mock.verify
+  end
+
+  it "creates a log entry with #fatal with a block" do
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:CRITICAL)]
+    logging.service.mocked_logging = mock
+
+    logger.fatal { "Danger Will Robinson!" }
+
+    mock.verify
+  end
+
+  it "creates a log entry with #unknown with a block" do
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
+    logging.service.mocked_logging = mock
+
+    logger.unknown { "Danger Will Robinson!" }
 
     mock.verify
   end

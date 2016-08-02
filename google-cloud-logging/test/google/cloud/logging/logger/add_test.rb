@@ -61,6 +61,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     it "creates a log entry using Logger::DEBUG" do
       logger.add ::Logger::DEBUG, "Danger Will Robinson!"
     end
+
+    it "creates a log entry using :debug with a block" do
+      logger.add :debug do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'debug' with a block" do
+      logger.add "debug" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::DEBUG with a block" do
+      logger.add ::Logger::DEBUG do
+        "Danger Will Robinson!"
+      end
+    end
   end
 
   describe :info do
@@ -76,6 +94,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
 
     it "creates a log entry using Logger::INFO" do
       logger.add ::Logger::INFO, "Danger Will Robinson!"
+    end
+
+    it "creates a log entry using :info with a block" do
+      logger.add :info do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'info' with a block" do
+      logger.add "info" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::INFO with a block" do
+      logger.add ::Logger::INFO do
+        "Danger Will Robinson!"
+      end
     end
   end
 
@@ -93,6 +129,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     it "creates a log entry using Logger::WARN" do
       logger.add ::Logger::WARN, "Danger Will Robinson!"
     end
+
+    it "creates a log entry using :warn with a block" do
+      logger.add :warn do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'warn' with a block" do
+      logger.add "warn" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::WARN with a block" do
+      logger.add ::Logger::WARN do
+        "Danger Will Robinson!"
+      end
+    end
   end
 
   describe :error do
@@ -108,6 +162,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
 
     it "creates a log entry using Logger::ERROR" do
       logger.add ::Logger::ERROR, "Danger Will Robinson!"
+    end
+
+    it "creates a log entry using :error with a block" do
+      logger.add :error do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'error' with a block" do
+      logger.add "error" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::ERROR with a block" do
+      logger.add ::Logger::ERROR do
+        "Danger Will Robinson!"
+      end
     end
   end
 
@@ -125,6 +197,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     it "creates a log entry using Logger::FATAL" do
       logger.add ::Logger::FATAL, "Danger Will Robinson!"
     end
+
+    it "creates a log entry using :fatal with a block" do
+      logger.add :fatal do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'fatal' with a block" do
+      logger.add "fatal" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::FATAL with a block" do
+      logger.add ::Logger::FATAL do
+        "Danger Will Robinson!"
+      end
+    end
   end
 
   describe :unknown do
@@ -140,6 +230,24 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
 
     it "creates a log entry using Logger::UNKNOWN" do
       logger.add ::Logger::UNKNOWN, "Danger Will Robinson!"
+    end
+
+    it "creates a log entry using :unknown with a block" do
+      logger.add :unknown do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using 'unknown' with a block" do
+      logger.add "unknown" do
+        "Danger Will Robinson!"
+      end
+    end
+
+    it "creates a log entry using Logger::UNKNOWN with a block" do
+      logger.add ::Logger::UNKNOWN do
+        "Danger Will Robinson!"
+      end
     end
   end
 end
