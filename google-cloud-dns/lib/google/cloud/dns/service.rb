@@ -54,26 +54,22 @@ module Google
         ##
         # Returns Google::Apis::DnsV1::Project
         def get_project project_id = @project
-          service.get_project project_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_project project_id }
         end
 
         ##
         # Returns Google::Apis::DnsV1::ManagedZone
         def get_zone zone_id
-          service.get_managed_zone @project, zone_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_managed_zone @project, zone_id }
         end
 
         ##
         # Returns Google::Apis::DnsV1::ListManagedZonesResponse
         def list_zones token: nil, max: nil
-          service.list_managed_zones @project, max_results: max,
-                                               page_token: token
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_managed_zones @project, max_results: max,
+                                                 page_token: token
+          end
         end
 
         ##
@@ -87,34 +83,28 @@ module Google
             description: (description || ""),
             name_server_set: name_server_set
           )
-          service.create_managed_zone @project, managed_zone
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.create_managed_zone @project, managed_zone }
         end
 
         def delete_zone zone_id
-          service.delete_managed_zone @project, zone_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_managed_zone @project, zone_id }
         end
 
         ##
         # Returns Google::Apis::DnsV1::Change
         def get_change zone_id, change_id
-          service.get_change @project, zone_id, change_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_change @project, zone_id, change_id }
         end
 
         ##
         # Returns Google::Apis::DnsV1::ListChangesResponse
         def list_changes zone_id, token: nil, max: nil, order: nil, sort: nil
-          service.list_changes @project, zone_id, max_results: max,
-                                                  page_token: token,
-                                                  sort_by: sort,
-                                                  sort_order: order
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_changes @project, zone_id, max_results: max,
+                                                    page_token: token,
+                                                    sort_by: sort,
+                                                    sort_order: order
+          end
         end
 
         ##
@@ -125,19 +115,17 @@ module Google
             additions: Array(additions),
             deletions: Array(deletions)
           )
-          service.create_change @project, zone_id, change
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.create_change @project, zone_id, change }
         end
 
         ##
         # Returns Google::Apis::DnsV1::ListResourceRecordSetsResponse
         def list_records zone_id, name = nil, type = nil, token: nil, max: nil
-          service.list_resource_record_sets @project, zone_id,
-                                            max_results: max, name: name,
-                                            page_token: token, type: type
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_resource_record_sets @project, zone_id,
+                                              max_results: max, name: name,
+                                              page_token: token, type: type
+          end
         end
 
         ##
@@ -163,6 +151,14 @@ module Google
 
         def inspect
           "#{self.class}(#{@project})"
+        end
+
+        protected
+
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

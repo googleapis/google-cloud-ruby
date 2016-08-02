@@ -61,36 +61,32 @@ module Google
         # Lists all datasets in the specified project to which you have
         # been granted the READER dataset role.
         def list_datasets options = {}
-          service.list_datasets \
-            @project, all: options[:all], max_results: options[:max],
-                      page_token: options[:token]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_datasets \
+              @project, all: options[:all], max_results: options[:max],
+                        page_token: options[:token]
+          end
         end
 
         ##
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
-          service.get_dataset @project, dataset_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_dataset @project, dataset_id }
         end
 
         ##
         # Creates a new empty dataset.
         def insert_dataset new_dataset_gapi
-          service.insert_dataset @project, new_dataset_gapi
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.insert_dataset @project, new_dataset_gapi }
         end
 
         ##
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
         def patch_dataset dataset_id, patched_dataset_gapi
-          service.patch_dataset @project, dataset_id, patched_dataset_gapi
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi
+          end
         end
 
         ##
@@ -100,25 +96,24 @@ module Google
         # Immediately after deletion, you can create another dataset with
         # the same name.
         def delete_dataset dataset_id, force = nil
-          service.delete_dataset @project, dataset_id, delete_contents: force
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.delete_dataset @project, dataset_id, delete_contents: force
+          end
         end
 
         ##
         # Lists all tables in the specified dataset.
         # Requires the READER dataset role.
         def list_tables dataset_id, options = {}
-          service.list_tables @project, dataset_id, max_results: options[:max],
-                                                    page_token: options[:token]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_tables @project, dataset_id,
+                                max_results: options[:max],
+                                page_token: options[:token]
+          end
         end
 
         def get_project_table project_id, dataset_id, table_id
-          service.get_table project_id, dataset_id, table_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_table project_id, dataset_id, table_id }
         end
 
         ##
@@ -127,46 +122,41 @@ module Google
         # it only returns the table resource,
         # which describes the structure of this table.
         def get_table dataset_id, table_id
-          get_project_table @project, dataset_id, table_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { get_project_table @project, dataset_id, table_id }
         end
 
         ##
         # Creates a new, empty table in the dataset.
         def insert_table dataset_id, new_table_gapi
-          service.insert_table @project, dataset_id, new_table_gapi
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.insert_table @project, dataset_id, new_table_gapi }
         end
 
         ##
         # Updates information in an existing table, replacing fields that
         # are provided in the submitted table resource.
         def patch_table dataset_id, table_id, patched_table_gapi
-          service.patch_table @project, dataset_id, table_id, patched_table_gapi
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.patch_table @project, dataset_id, table_id,
+                                patched_table_gapi
+          end
         end
 
         ##
         # Deletes the table specified by tableId from the dataset.
         # If the table contains data, all the data will be deleted.
         def delete_table dataset_id, table_id
-          service.delete_table @project, dataset_id, table_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_table @project, dataset_id, table_id }
         end
 
         ##
         # Retrieves data from the table.
         def list_tabledata dataset_id, table_id, options = {}
-          service.list_table_data @project, dataset_id, table_id,
-                                  max_results: options.delete(:max),
-                                  page_token: options.delete(:token),
-                                  start_index: options.delete(:start)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_table_data @project, dataset_id, table_id,
+                                    max_results: options.delete(:max),
+                                    page_token: options.delete(:token),
+                                    start_index: options.delete(:start)
+          end
         end
 
         def insert_tabledata dataset_id, table_id, rows, options = {}
@@ -183,95 +173,88 @@ module Google
             skip_invalid_rows: options[:skip_invalid]
           )
 
-          service.insert_all_table_data(
-            @project, dataset_id, table_id, insert_req)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_all_table_data(
+              @project, dataset_id, table_id, insert_req)
+          end
         end
 
         ##
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
         def list_jobs options = {}
-          service.list_jobs \
-            @project, all_users: options[:all], max_results: options[:max],
-                      page_token: options[:token], projection: "full",
-                      state_filter: options[:filter]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_jobs \
+              @project, all_users: options[:all], max_results: options[:max],
+                        page_token: options[:token], projection: "full",
+                        state_filter: options[:filter]
+          end
         end
 
         ##
         # Returns the job specified by jobID.
         def get_job job_id
-          service.get_job @project, job_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_job @project, job_id }
         end
 
         def insert_job config
           job_object = API::Job.new(
             configuration: config
           )
-          service.insert_job @project, job_object
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.insert_job @project, job_object }
         end
 
         def query_job query, options = {}
           config = query_table_config(query, options)
-          service.insert_job @project, config
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.insert_job @project, config }
         end
 
         def query query, options = {}
-          service.query_job @project, query_config(query, options)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.query_job @project, query_config(query, options) }
         end
 
         ##
         # Returns the query data for the job
         def job_query_results job_id, options = {}
-          service.get_job_query_results @project,
-                                        job_id,
-                                        max_results: options.delete(:max),
-                                        page_token: options.delete(:token),
-                                        start_index: options.delete(:start),
-                                        timeout_ms: options.delete(:timeout)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.get_job_query_results @project,
+                                          job_id,
+                                          max_results: options.delete(:max),
+                                          page_token: options.delete(:token),
+                                          start_index: options.delete(:start),
+                                          timeout_ms: options.delete(:timeout)
+          end
         end
 
         def copy_table source, target, options = {}
-          service.insert_job @project, copy_table_config(
-            source, target, options)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_job @project, copy_table_config(
+              source, target, options)
+          end
         end
 
         def extract_table table, storage_files, options = {}
-          service.insert_job \
-            @project, extract_table_config(table, storage_files, options)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_job \
+              @project, extract_table_config(table, storage_files, options)
+          end
         end
 
         def load_table_gs_url dataset_id, table_id, url, options = {}
-          service.insert_job \
-            @project, load_table_url_config(dataset_id, table_id, url, options)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_job \
+              @project, load_table_url_config(dataset_id, table_id,
+                                              url, options)
+          end
         end
 
         def load_table_file dataset_id, table_id, file, options = {}
-          service.insert_job \
-            @project, load_table_file_config(
-              dataset_id, table_id, file, options),
-            upload_source: file, content_type: mime_type_for(file)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_job \
+              @project, load_table_file_config(
+                dataset_id, table_id, file, options),
+              upload_source: file, content_type: mime_type_for(file)
+          end
         end
 
         ##
@@ -506,6 +489,12 @@ module Google
           mime_type
         rescue
           nil
+        end
+
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

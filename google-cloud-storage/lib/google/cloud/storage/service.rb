@@ -61,31 +61,29 @@ module Google
         ##
         # Retrieves a list of buckets for the given project.
         def list_buckets prefix: nil, token: nil, max: nil
-          service.list_buckets @project, prefix: prefix, page_token: token,
-                                         max_results: max
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_buckets @project, prefix: prefix, page_token: token,
+                                           max_results: max
+          end
         end
 
         ##
         # Retrieves bucket by name.
         # Returns Google::Apis::StorageV1::Bucket.
         def get_bucket bucket_name
-          service.get_bucket bucket_name
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_bucket bucket_name }
         end
 
         ##
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
         def insert_bucket bucket_gapi, options = {}
-          service.insert_bucket \
-            @project, bucket_gapi,
-            predefined_acl: options[:acl],
-            predefined_default_object_acl: options[:default_acl]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_bucket \
+              @project, bucket_gapi,
+              predefined_acl: options[:acl],
+              predefined_default_object_acl: options[:default_acl]
+          end
         end
 
         ##
@@ -96,28 +94,24 @@ module Google
           bucket_gapi.acl = nil if predefined_acl
           bucket_gapi.default_object_acl = nil if predefined_default_acl
 
-          service.patch_bucket \
-            bucket_name, bucket_gapi,
-            predefined_acl: predefined_acl,
-            predefined_default_object_acl: predefined_default_acl
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.patch_bucket \
+              bucket_name, bucket_gapi,
+              predefined_acl: predefined_acl,
+              predefined_default_object_acl: predefined_default_acl
+          end
         end
 
         ##
         # Permanently deletes an empty bucket.
         def delete_bucket bucket_name
-          service.delete_bucket bucket_name
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_bucket bucket_name }
         end
 
         ##
         # Retrieves a list of ACLs for the given bucket.
         def list_bucket_acls bucket_name
-          service.list_bucket_access_controls bucket_name
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.list_bucket_access_controls bucket_name }
         end
 
         ##
@@ -125,25 +119,19 @@ module Google
         def insert_bucket_acl bucket_name, entity, role
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new \
             entity: entity, role: role
-          service.insert_bucket_access_control bucket_name, new_acl
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.insert_bucket_access_control bucket_name, new_acl }
         end
 
         ##
         # Permanently deletes a bucket ACL.
         def delete_bucket_acl bucket_name, entity
-          service.delete_bucket_access_control bucket_name, entity
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_bucket_access_control bucket_name, entity }
         end
 
         ##
         # Retrieves a list of default ACLs for the given bucket.
         def list_default_acls bucket_name
-          service.list_default_object_access_controls bucket_name
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.list_default_object_access_controls bucket_name }
         end
 
         ##
@@ -151,29 +139,30 @@ module Google
         def insert_default_acl bucket_name, entity, role
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new \
             entity: entity, role: role
-          service.insert_default_object_access_control bucket_name, new_acl
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_default_object_access_control bucket_name, new_acl
+          end
         end
 
         ##
         # Permanently deletes a default ACL.
         def delete_default_acl bucket_name, entity
-          service.delete_default_object_access_control bucket_name, entity
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.delete_default_object_access_control bucket_name, entity
+          end
         end
 
         ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, options = {}
-          service.list_objects \
-            bucket_name, delimiter: options[:delimiter],
-                         max_results: options[:max],
-                         page_token: options[:token], prefix: options[:prefix],
-                         versions: options[:versions]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_objects \
+              bucket_name, delimiter: options[:delimiter],
+                           max_results: options[:max],
+                           page_token: options[:token],
+                           prefix: options[:prefix],
+                           versions: options[:versions]
+          end
         end
 
         ##
@@ -189,25 +178,25 @@ module Google
             content_encoding: content_encoding, crc32c: crc32c,
             content_language: content_language, metadata: metadata
           content_type ||= mime_type_for(Pathname(source).to_path)
-          service.insert_object \
-            bucket_name, file_obj,
-            name: path, predefined_acl: acl, upload_source: source,
-            content_encoding: content_encoding, content_type: content_type,
-            options: key_options(key: key, key_sha256: key_sha256)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_object \
+              bucket_name, file_obj,
+              name: path, predefined_acl: acl, upload_source: source,
+              content_encoding: content_encoding, content_type: content_type,
+              options: key_options(key: key, key_sha256: key_sha256)
+          end
         end
 
         ##
         # Retrieves an object or its metadata.
         def get_file bucket_name, file_path, generation: nil, key: nil,
                      key_sha256: nil
-          service.get_object \
-            bucket_name, file_path,
-            generation: generation,
-            options: key_options(key: key, key_sha256: key_sha256)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.get_object \
+              bucket_name, file_path,
+              generation: generation,
+              options: key_options(key: key, key_sha256: key_sha256)
+          end
         end
 
         ## Copy a file from source bucket/object to a
@@ -215,27 +204,27 @@ module Google
         def copy_file source_bucket_name, source_file_path,
                       destination_bucket_name, destination_file_path,
                       options = {}
-          service.copy_object \
-            source_bucket_name, source_file_path,
-            destination_bucket_name, destination_file_path,
-            destination_predefined_acl: options[:acl],
-            source_generation: options[:generation],
-            options: key_options(key: options[:key],
-                                 key_sha256: options[:key_sha256])
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.copy_object \
+              source_bucket_name, source_file_path,
+              destination_bucket_name, destination_file_path,
+              destination_predefined_acl: options[:acl],
+              source_generation: options[:generation],
+              options: key_options(key: options[:key],
+                                   key_sha256: options[:key_sha256])
+          end
         end
 
         ##
         # Download contents of a file.
         def download_file bucket_name, file_path, target_path, generation: nil,
                           key: nil, key_sha256: nil
-          service.get_object \
-            bucket_name, file_path,
-            download_dest: target_path, generation: generation,
-            options: key_options(key: key, key_sha256: key_sha256)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.get_object \
+              bucket_name, file_path,
+              download_dest: target_path, generation: generation,
+              options: key_options(key: key, key_sha256: key_sha256)
+          end
         end
 
         ##
@@ -243,27 +232,23 @@ module Google
         def patch_file bucket_name, file_path, file_gapi = nil,
                        predefined_acl: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
-          service.patch_object \
-            bucket_name, file_path, file_gapi,
-            predefined_acl: predefined_acl
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.patch_object \
+              bucket_name, file_path, file_gapi,
+              predefined_acl: predefined_acl
+          end
         end
 
         ##
         # Permanently deletes a file.
         def delete_file bucket_name, file_path
-          service.delete_object bucket_name, file_path
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_object bucket_name, file_path }
         end
 
         ##
         # Retrieves a list of ACLs for the given file.
         def list_file_acls bucket_name, file_name
-          service.list_object_access_controls bucket_name, file_name
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.list_object_access_controls bucket_name, file_name }
         end
 
         ##
@@ -271,19 +256,19 @@ module Google
         def insert_file_acl bucket_name, file_name, entity, role, options = {}
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new \
             entity: entity, role: role
-          service.insert_object_access_control \
-            bucket_name, file_name, new_acl, generation: options[:generation]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.insert_object_access_control \
+              bucket_name, file_name, new_acl, generation: options[:generation]
+          end
         end
 
         ##
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, options = {}
-          service.delete_object_access_control \
-            bucket_name, file_name, entity, generation: options[:generation]
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.delete_object_access_control \
+              bucket_name, file_name, entity, generation: options[:generation]
+          end
         end
 
         ##
@@ -314,37 +299,10 @@ module Google
           options
         end
 
-        def patch_bucket_request options = {}
-          {
-            "cors" => options[:cors],
-            "logging" => logging_config(options),
-            "versioning" => versioning_config(options[:versioning]),
-            "website" => website_config(options),
-            "acl" => options[:acl],
-            "defaultObjectAcl" => options[:default_acl]
-          }.delete_if { |_, v| v.nil? }
-        end
-
-        def versioning_config enabled
-          { "enabled" => enabled } unless enabled.nil?
-        end
-
-        def logging_config options
-          bucket = options[:logging_bucket]
-          prefix = options[:logging_prefix]
-          {
-            log_bucket: bucket,
-            log_object_prefix: prefix
-          }.delete_if { |_, v| v.nil? } if bucket || prefix
-        end
-
-        def website_config options
-          website_main = options[:website_main]
-          website_404 = options[:website_404]
-          {
-            main_page_suffix: website_main,
-            not_found_page: website_404
-          }.delete_if { |_, v| v.nil? } if website_main || website_404
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

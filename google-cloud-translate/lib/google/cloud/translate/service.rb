@@ -52,30 +52,34 @@ module Google
         ##
         # Returns API::ListTranslationsResponse
         def translate text, to: nil, from: nil, format: nil, cid: nil
-          service.list_translations Array(text), to, cid: cid, format: format,
-                                                     source: from
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.list_translations Array(text), to, cid: cid, format: format,
+                                                       source: from
+          end
         end
 
         ##
         # Returns API::ListDetectionsResponse
         def detect text
-          service.list_detections Array(text)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.list_detections Array(text) }
         end
 
         ##
         # Returns API::ListLanguagesResponse
         def languages language = nil
-          service.list_languages target: language
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.list_languages target: language }
         end
 
         def inspect
           "#{self.class}"
+        end
+
+        protected
+
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

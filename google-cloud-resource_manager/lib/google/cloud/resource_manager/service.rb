@@ -54,16 +54,16 @@ module Google
         ##
         # Returns API::ListProjectsResponse
         def list_project filter: nil, token: nil, max: nil
-          service.list_projects page_token: token, page_size: max,
-                                filter: filter
+          execute do
+            service.list_projects page_token: token, page_size: max,
+                                  filter: filter
+          end
         end
 
         ##
         # Returns API::Project
         def get_project project_id
-          service.get_project project_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_project project_id }
         end
 
         ##
@@ -71,60 +71,60 @@ module Google
         def create_project project_id, name, labels
           project_attrs = { projectId: project_id, name: name,
                             labels: labels }.delete_if { |_, v| v.nil? }
-          service.create_project API::Project.new(project_attrs)
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.create_project API::Project.new(project_attrs) }
         end
 
         ##
         # Updated the project, given a API::Project.
         # Returns API::Project
         def update_project project_gapi
-          service.update_project project_gapi.project_id, project_gapi
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.update_project project_gapi.project_id, project_gapi
+          end
         end
 
         def delete_project project_id
-          service.delete_project project_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.delete_project project_id }
         end
 
         def undelete_project project_id
-          service.undelete_project project_id
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.undelete_project project_id }
         end
 
         ##
         # Returns API::Policy
         def get_policy project_id
-          service.get_project_iam_policy "projects/#{project_id}"
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.get_project_iam_policy "projects/#{project_id}" }
         end
 
         ##
         # Returns API::Policy
         def set_policy project_id, new_policy
           req = API::SetIamPolicyRequest.new policy: new_policy
-          service.set_project_iam_policy "projects/#{project_id}", req
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.set_project_iam_policy "projects/#{project_id}", req
+          end
         end
 
         ##
         # Returns API::TestIamPermissionsResponse
         def test_permissions project_id, permissions
           req = API::TestIamPermissionsRequest.new permissions: permissions
-          service.test_project_iam_permissions "projects/#{project_id}", req
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute do
+            service.test_project_iam_permissions "projects/#{project_id}", req
+          end
         end
 
         def inspect
           "#{self.class}"
+        end
+
+        protected
+
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

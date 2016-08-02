@@ -55,13 +55,19 @@ module Google
         # Returns API::BatchAnnotateImagesResponse
         def annotate requests
           request = API::BatchAnnotateImagesRequest.new(requests: requests)
-          service.annotate_image request
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          execute { service.annotate_image request }
         end
 
         def inspect
           "#{self.class}(#{@project})"
+        end
+
+        protected
+
+        def execute
+          yield
+        rescue Google::Apis::Error => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end
