@@ -14,7 +14,7 @@
 
 
 require "google/cloud/storage/version"
-require "google/cloud/core/backoff"
+require "google/cloud/core/grpc_backoff"
 require "google/apis/storage_v1"
 require "digest"
 require "mime/types"

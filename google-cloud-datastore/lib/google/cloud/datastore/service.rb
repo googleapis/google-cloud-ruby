@@ -15,7 +15,7 @@
 
 require "google/cloud/datastore/credentials"
 require "google/datastore/v1beta3/datastore_services"
-require "google/cloud/core/backoff"
+require "google/cloud/core/grpc_backoff"
 
 module Google
   module Cloud
@@ -143,7 +143,7 @@ module Google
         ##
         # Performs backoff and error handling
         def execute
-          Google::Cloud::Core::Backoff.new(retries: retries).execute_grpc do
+          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
             yield
           end
         rescue GRPC::BadStatus => e

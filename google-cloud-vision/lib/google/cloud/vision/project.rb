@@ -79,7 +79,7 @@ module Google
           ENV["VISION_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::GCE.project_id
+            Google::Cloud::Core::GCE.project_id
         end
 
         ##

@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/backoff"
+require "google/cloud/core/grpc_backoff"
 require "google/logging/v2/logging_services"
 require "google/logging/v2/logging_config_services"
 require "google/logging/v2/logging_metrics_services"
@@ -258,7 +258,7 @@ module Google
         end
 
         def execute
-          Google::Cloud::Core::Backoff.new(retries: retries).execute_grpc do
+          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
             yield
           end
         rescue GRPC::BadStatus => e

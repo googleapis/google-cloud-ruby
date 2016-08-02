@@ -57,11 +57,11 @@ module Google
 
         ##
         # @private
-        # Creates a new GrpcBackoff object to catch common errors when calling
+        # Creates a new Backoff object to catch common errors when calling
         # the Google API and handle the error by retrying the call.
         #
         #   Google::Cloud::Core::GrpcBackoff.new(options).execute do
-        #     datastore.lookup lookup_req
+        #     datastore.lookup lookup_ref
         #   end
         def initialize options = {}
           @retries    = (options[:retries]    || GrpcBackoff.retries).to_i

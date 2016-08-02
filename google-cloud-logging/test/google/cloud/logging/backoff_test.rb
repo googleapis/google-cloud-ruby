@@ -56,9 +56,9 @@ describe "Google Cloud Logging Backoff", :mock_logging do
     mock = Minitest::Mock.new
     args.each { |intv| mock.expect :sleep, nil, [intv] }
     callback = ->(retries) { mock.sleep retries }
-    backoff = Google::Cloud::Core::Backoff.new retries: 5, backoff: callback
+    backoff = Google::Cloud::Core::GrpcBackoff.new retries: 5, backoff: callback
 
-    Google::Cloud::Core::Backoff.stub :new, backoff do
+    Google::Cloud::Core::GrpcBackoff.stub :new, backoff do
       yield
     end
 

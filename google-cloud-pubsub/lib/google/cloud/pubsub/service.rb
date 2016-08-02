@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/backoff"
+require "google/cloud/core/grpc_backoff"
 require "google/pubsub/v1/pubsub_services"
 require "google/iam/v1/iam_policy_services"
 require "google/cloud/core/grpc_utils"
@@ -328,7 +328,7 @@ module Google
         protected
 
         def execute
-          Google::Cloud::Core::Backoff.new(retries: retries).execute_grpc do
+          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
             yield
           end
         rescue GRPC::BadStatus => e
