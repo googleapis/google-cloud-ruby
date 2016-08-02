@@ -61,6 +61,7 @@ namespace :acceptance do
   # TODO: Add a setup task to create indexes for the datastore
 end
 
+desc "Start an interactive shell."
 task :console do
   require "irb"
   require "irb/completion"

@@ -59,6 +59,7 @@ namespace :acceptance do
   end
 end
 
+desc "Start an interactive shell."
 task :console do
   require "irb"
   require "irb/completion"

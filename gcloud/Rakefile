@@ -33,6 +33,7 @@ namespace :acceptance do
   end
 end
 
+desc "Start an interactive shell."
 task :console do
   require "irb"
   require "irb/completion"
@@ -41,6 +42,7 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "gcloud"
+  Bundler.require # load all the gems defined in the Gemfile
   def gcloud; @gcloud ||= Gcloud.new; end
 
   ARGV.clear

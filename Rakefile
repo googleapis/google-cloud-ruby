@@ -153,6 +153,17 @@ task jsondoc: :bundleupdate do
   end
 end
 
+desc "Start an interactive shell."
+task :console, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  Dir.chdir "google-cloud" do
+    Bundler.with_clean_env do
+      sh "bundle update" if bundle_update
+      sh "bundle exec rake console"
+    end
+  end
+end
+
 desc "Runs tests and reports for CI."
 task travis: :bundleupdate do
   Rake::Task["rubocop"].invoke
