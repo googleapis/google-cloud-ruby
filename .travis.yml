@@ -5,7 +5,10 @@ rvm:
 - 2.1.9
 - 2.0.0-p648
 script:
-- bundle exec rake travis
+- bundle exec rake rubocop[yes]
+- bundle exec rake jsondoc
+- bundle exec rake test:coveralls
+- bundle exec rake travis:acceptance
 matrix:
   include:
   - rvm: 2.3.1

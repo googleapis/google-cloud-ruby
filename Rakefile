@@ -191,22 +191,19 @@ task :console, :bundleupdate do |t, args|
   end
 end
 
-desc "Runs tests and reports for CI."
-task :travis do
-  Rake::Task["bundleupdate"].invoke
-  Rake::Task["rubocop"].invoke
-  Rake::Task["jsondoc"].invoke
-  Rake::Task["test:coveralls"].invoke
+namespace :travis do
+  desc "Runs acceptance tests for CI."
+  task :acceptance do
+    if ENV["TRAVIS_BRANCH"] == "master" &&
+       ENV["TRAVIS_PULL_REQUEST"] == "false"
+      header "Preparing to run acceptance tests"
+      # Decrypt the keyfile
+      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
 
-  if ENV["TRAVIS_BRANCH"] == "master" &&
-     ENV["TRAVIS_PULL_REQUEST"] == "false"
-    header "Preparing to run acceptance tests"
-    # Decrypt the keyfile
-    `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
-
-    Rake::Task["acceptance"].invoke
-  else
-    header "Skipping acceptance tests"
+      Rake::Task["acceptance"].invoke
+    else
+      header "Skipping acceptance tests"
+    end
   end
 end
 
