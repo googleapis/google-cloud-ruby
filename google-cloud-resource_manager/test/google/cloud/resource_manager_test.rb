@@ -70,13 +70,10 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Get project_id from Google Compute Engine
-        Google::Cloud::Core::GCE.stub :project_id, "project-id" do
-          Google::Cloud::ResourceManager::Credentials.stub :default, default_credentials do
-            resource_manager = Google::Cloud.resource_manager
-            resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
-            resource_manager.service.credentials.must_equal default_credentials
-          end
+        Google::Cloud::ResourceManager::Credentials.stub :default, default_credentials do
+          resource_manager = Google::Cloud.resource_manager
+          resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+          resource_manager.service.credentials.must_equal default_credentials
         end
       end
     end
