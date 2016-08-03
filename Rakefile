@@ -80,7 +80,7 @@ namespace :test do
 end
 
 desc "Runs acceptance tests for all gems."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, :project, :keyfile, :key do |t, args|
   project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
   if project.nil? || keyfile.nil?
@@ -89,6 +89,12 @@ task :acceptance, :project, :keyfile do |t, args|
   # always overwrite when running tests
   ENV["GOOGLE_CLOUD_PROJECT"] = project
   ENV["GOOGLE_CLOUD_KEYFILE"] = keyfile
+
+  key = args[:key] || ENV["GCLOUD_TEST_KEY"]
+  if key.nil?
+    fail "You must provide an API KEY for translate acceptance tests."
+  end  # always overwrite when running tests
+  ENV["GOOGLE_CLOUD_KEY"] = key
 
   gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
