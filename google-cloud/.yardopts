@@ -1,0 +1,7 @@
+--no-private
+--title=Google Cloud
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
