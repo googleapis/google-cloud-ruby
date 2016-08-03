@@ -80,7 +80,16 @@ namespace :test do
 end
 
 desc "Runs acceptance tests for all gems."
-task :acceptance do
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["GOOGLE_CLOUD_PROJECT"] = project
+  ENV["GOOGLE_CLOUD_KEYFILE"] = keyfile
+
   gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
     Dir.glob("#{gem}/acceptance/**/*_test.rb").each { |file| require_relative file }
