@@ -19,9 +19,9 @@ require "google/cloud/speech/project"
 module Google
   module Cloud
     ##
-    # # Google Cloud Language
+    # # Google Cloud Speech
     #
-    module Language
+    module Speech
     end
   end
 end
