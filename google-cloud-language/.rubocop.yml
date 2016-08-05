@@ -3,6 +3,8 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-language.gemspec"
     - "Rakefile"
+    - "lib/google/cloud/language/v1beta1/language_service_services.rb"
+    - "lib/google/cloud/language/v1beta1/language_service.rb"
     - "test/**/*"
 
 Documentation:

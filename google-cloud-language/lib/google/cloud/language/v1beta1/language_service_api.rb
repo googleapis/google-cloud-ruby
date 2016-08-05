@@ -22,11 +22,15 @@
 # The only allowed edits are to method and file documentation. A 3-way
 # merge preserves those additions if the generated source changes.
 
-require 'json'
-require 'pathname'
+require "json"
+require "pathname"
 
-require 'google/gax'
-require 'google/cloud/language/v1beta1/language_service_services'
+require "google/gax"
+require "google/cloud/language/v1beta1/language_service_services"
+
+# TODO: implement line-wrapping rules and remove this suppression.
+# rubocop:disable LineLength
+# rubocop:disable MethodLength
 
 module Google
   module Cloud
@@ -41,19 +45,19 @@ module Google
           attr_reader :stub
 
           # The default address of the service.
-          SERVICE_ADDRESS = 'language.googleapis.com'.freeze
+          SERVICE_ADDRESS = "language.googleapis.com".freeze
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
-          CODE_GEN_NAME_VERSION = 'gapic/0.1.0'.freeze
+          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
 
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            'https://www.googleapis.com/auth/cloud-platform'
+            "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
           # @param service_path [String]
@@ -75,26 +79,25 @@ module Google
           #   The codename of the calling service.
           # @param app_version [String]
           #   The version of the calling service.
-          def initialize(
-            service_path: SERVICE_ADDRESS,
-            port: DEFAULT_SERVICE_PORT,
-            channel: nil,
-            chan_creds: nil,
-            scopes: ALL_SCOPES,
-            client_config: {},
-            timeout: DEFAULT_TIMEOUT,
-            app_name: 'gax',
-            app_version: Google::Gax::VERSION
-          )
+          def initialize \
+              service_path: SERVICE_ADDRESS,
+              port: DEFAULT_SERVICE_PORT,
+              channel: nil,
+              chan_creds: nil,
+              scopes: ALL_SCOPES,
+              client_config: {},
+              timeout: DEFAULT_TIMEOUT,
+              app_name: "gax",
+              app_version: Google::Gax::VERSION
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
-            headers = { :'x-goog-api-client' => google_api_client }
+            headers = { "x-goog-api-client": google_api_client }
             client_config_file = Pathname.new(__dir__).join(
-              'language_service_client_config.json'
+              "language_service_client_config.json"
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                'google.cloud.language.v1beta1.LanguageService',
+                "google.cloud.language.v1beta1.LanguageService",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -114,15 +117,15 @@ module Google
 
             @analyze_sentiment = Google::Gax.create_api_call(
               @stub.method(:analyze_sentiment),
-              defaults['analyze_sentiment']
+              defaults["analyze_sentiment"]
             )
             @analyze_entities = Google::Gax.create_api_call(
               @stub.method(:analyze_entities),
-              defaults['analyze_entities']
+              defaults["analyze_entities"]
             )
             @annotate_text = Google::Gax.create_api_call(
               @stub.method(:annotate_text),
-              defaults['annotate_text']
+              defaults["annotate_text"]
             )
           end
 
@@ -138,10 +141,9 @@ module Google
           #   retries, etc.
           # @return [Google::Cloud::Language::V1beta1::AnalyzeSentimentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          def analyze_sentiment(
-            document,
-            options: nil
-          )
+          def analyze_sentiment \
+              document,
+              options: nil
             req = Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(
               document: document
             )
@@ -160,11 +162,10 @@ module Google
           #   retries, etc.
           # @return [Google::Cloud::Language::V1beta1::AnalyzeEntitiesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          def analyze_entities(
-            document,
-            encoding_type,
-            options: nil
-          )
+          def analyze_entities \
+              document,
+              encoding_type,
+              options: nil
             req = Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(
               document: document,
               encoding_type: encoding_type
@@ -188,12 +189,11 @@ module Google
           #   retries, etc.
           # @return [Google::Cloud::Language::V1beta1::AnnotateTextResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          def annotate_text(
-            document,
-            features,
-            encoding_type,
-            options: nil
-          )
+          def annotate_text \
+              document,
+              features,
+              encoding_type,
+              options: nil
             req = Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(
               document: document,
               features: features,
