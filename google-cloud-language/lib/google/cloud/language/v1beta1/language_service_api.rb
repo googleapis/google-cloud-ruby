@@ -31,6 +31,9 @@ require "google/cloud/language/v1beta1/language_service_services"
 # TODO: implement line-wrapping rules and remove this suppression.
 # rubocop:disable LineLength
 # rubocop:disable MethodLength
+# HashSyntax is disabled because {"foo-bar": "baz"} is not allowed before
+# Ruby-2.2.
+# rubocop:disable HashSyntax
 
 module Google
   module Cloud
@@ -91,7 +94,7 @@ module Google
               app_version: Google::Gax::VERSION
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
-            headers = { "x-goog-api-client": google_api_client }
+            headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "language_service_client_config.json"
             )
