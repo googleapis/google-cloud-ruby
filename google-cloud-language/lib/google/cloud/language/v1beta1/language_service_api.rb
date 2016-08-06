@@ -28,13 +28,6 @@ require "pathname"
 require "google/gax"
 require "google/cloud/language/v1beta1/language_service_services"
 
-# TODO: implement line-wrapping rules and remove this suppression.
-# rubocop:disable LineLength
-# rubocop:disable MethodLength
-# HashSyntax is disabled because {"foo-bar": "baz"} is not allowed before
-# Ruby-2.2.
-# rubocop:disable HashSyntax
-
 module Google
   module Cloud
     module Language
