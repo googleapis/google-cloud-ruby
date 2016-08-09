@@ -325,7 +325,7 @@ module Google
         #   When a table already contains data, schema changes must be additive.
         #   Thus, the default value is `false`.
         # @yield [schema] a block for setting the schema
-        # @yieldparam [Table::Schema] schema the object accepting the schema
+        # @yieldparam [Schema] schema the object accepting the schema
         #
         # @return [Google::Cloud::Bigquery::Schema]
         #
