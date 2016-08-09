@@ -1,0 +1,115 @@
+{
+  "lang": "ruby",
+  "friendlyLang": "Ruby",
+  "moduleName": "gcloud-ruby",
+  "markdown": "ruby",
+  "titleDelimiter": "::",
+  "defaultModule": "google-cloud",
+  "content": "json",
+  "home": "home.html",
+  "package": {
+    "title": "RubyGems",
+    "href": "http://rubygems.org/gems/gcloud"
+  },
+  "modules": [
+    {
+      "id": "google-cloud",
+      "name": "google-cloud",
+      "defaultService": "google/cloud",
+      "versions": [
+        "v0.12.2",
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-bigquery",
+      "name": "google-cloud-bigquery",
+      "defaultService": "google/cloud/bigquery",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-core",
+      "name": "google-cloud-core",
+      "defaultService": "google/cloud/error",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-datastore",
+      "name": "google-cloud-datastore",
+      "defaultService": "google/cloud/datastore",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-dns",
+      "name": "google-cloud-dns",
+      "defaultService": "google/cloud/dns",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-logging",
+      "name": "google-cloud-logging",
+      "defaultService": "google/cloud/logging",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-pubsub",
+      "name": "google-cloud-pubsub",
+      "defaultService": "google/cloud/pubsub",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-resourcemanager",
+      "name": "google-cloud-resourcemanager",
+      "defaultService": "google/cloud/resourcemanager",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-storage",
+      "name": "google-cloud-storage",
+      "defaultService": "google/cloud/storage",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-translate",
+      "name": "google-cloud-translate",
+      "defaultService": "google/cloud/translate",
+      "versions": [
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-vision",
+      "name": "google-cloud-vision",
+      "defaultService": "google/cloud/vision",
+      "versions": [
+        "master"
+      ]
+    }
+  ],
+  "methodTypeSymbols": [
+    {
+      "type": "class",
+      "symbol": "::"
+    },
+    {
+      "type": "instance",
+      "symbol": "#"
+    }
+  ]
+}

@@ -180,6 +180,56 @@ task :jsondoc, :bundleupdate do |t, args|
   end
 end
 
+namespace :jsondoc do
+  desc "Copies all jsondoc to google-cloud umbrella package."
+  task :copy, :jsondoc do
+    require "json"
+    excluded = ["gcloud", "google-cloud"]
+    all_types = []
+    google_cloud_json = JSON.parse File.read("google-cloud/jsondoc/google/cloud.json")
+    all_google_cloud_methods = [google_cloud_json["methods"]]
+
+    header "Copying all jsondoc to google-cloud umbrella package"
+    gems.each do |gem|
+      next if excluded.include? gem
+      gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
+      gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
+      gem_jsondoc_path = "#{gem}/jsondoc/google/cloud/#{gem_shortname}"
+      unless gem == "google-cloud-core" # There is no `core` subdir
+        cp_r "#{gem}/jsondoc/google/cloud/#{gem_shortname}", "google-cloud/jsondoc/google/cloud/", verbose: true
+      end
+      cp Dir["#{gem}/jsondoc/google/cloud/*.json"], "google-cloud/jsondoc/google/cloud/", verbose: true
+      all_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
+      all_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
+    end
+
+    header "Merging each gem types.json into google-cloud/jsondoc/types.json"
+    File.open("google-cloud/jsondoc/types.json", "w") do |f|
+      f.write(all_types.flatten.to_json)
+    end
+    header "Merging methods from each google/cloud.json into google-cloud/jsondoc/google/cloud.json"
+    all_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
+    google_cloud_json["methods"] = all_google_cloud_methods.flatten
+    File.open("google-cloud/jsondoc/google/cloud.json", "w") do |f|
+      f.write(google_cloud_json.to_json)
+    end
+  end
+
+  desc "Copies jsondoc to development gh-pages"
+  task :dev do
+    # target_dir = "../gcloud-common/site/src" # for development
+    target_dir = "../gcloud-ruby-gh-pages"
+    gems.each do |gem|
+      unless Dir.exist? "#{target_dir}/json/#{gem}"
+        mkdir "#{target_dir}/json/#{gem}", verbose: true
+      end
+      cp_r "#{gem}/jsondoc", "#{target_dir}/json/#{gem}/master", verbose: true
+    end
+    cp "docs/manifest.json", target_dir, verbose: true
+    cp "docs/json/home.html", "#{target_dir}/json", verbose: true
+  end
+end
+
 desc "Start an interactive shell."
 task :console, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]

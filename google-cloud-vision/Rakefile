@@ -88,6 +88,7 @@ task :jsondoc => :yard do
   registry = YARD::Registry.load! ".yardoc"
   generator = Gcloud::Jsondoc::Generator.new registry
   generator.write_to "jsondoc"
+  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
 task :default => :test

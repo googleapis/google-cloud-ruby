@@ -48,15 +48,15 @@ The **Project ID** and **Credentials JSON** can be placed in environment variabl
 
 Here are the environment variables that Datastore checks for project ID:
 
-1. DATASTORE_PROJECT
-2. GCLOUD_PROJECT
+1. `DATASTORE_PROJECT`
+2. `GOOGLE_CLOUD_PROJECT`
 
 Here are the environment variables that Datastore checks for credentials:
 
-1. DATASTORE_KEYFILE - Path to JSON file
-2. GCLOUD_KEYFILE - Path to JSON file
-3. DATASTORE_KEYFILE_JSON - JSON contents
-4. GCLOUD_KEYFILE_JSON - JSON contents
+1. `DATASTORE_KEYFILE` - Path to JSON file
+2. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file
+3. `DATASTORE_KEYFILE_JSON` - JSON contents
+4. `GOOGLE_CLOUD_KEYFILE_JSON` - JSON contents
 
 ### Cloud SDK
 
