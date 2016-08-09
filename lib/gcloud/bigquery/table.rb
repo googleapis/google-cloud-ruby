@@ -325,7 +325,7 @@ module Gcloud
       #   already contains data, schema changes must be additive. Thus, the
       #   default value is `false`.
       # @yield [schema] a block for setting the schema
-      # @yieldparam [Table::Schema] schema the object accepting the schema
+      # @yieldparam [Schema] schema the object accepting the schema
       #
       # @return [Gcloud::Bigquery::Schema]
       #
@@ -871,6 +871,41 @@ module Gcloud
           @schema = nil
         end
 
+        ##
+        # Returns the table's schema. This method can also be used to set,
+        # replace, or add to the schema by passing a block. See {Schema} for
+        # available methods.
+        #
+        # @param [Boolean] replace Whether to replace the existing schema with
+        #   the new schema. If `true`, the fields will replace the existing
+        #   schema. If `false`, the fields will be added to the existing
+        #   schema. When a table already contains data, schema changes must be
+        #   additive. Thus, the default value is `false`.
+        # @yield [schema] a block for setting the schema
+        # @yieldparam [Schema] schema the object accepting the schema
+        #
+        # @return [Gcloud::Bigquery::Schema]
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.name = "My Table",
+        #     t.description = "A description of my table."
+        #     t.schema do |s|
+        #       s.string "first_name", mode: :required
+        #       s.record "cities_lived", mode: :repeated do |r|
+        #         r.string "place", mode: :required
+        #         r.integer "number_of_years", mode: :required
+        #       end
+        #     end
+        #   end
+        #
+        # @!group Schema
+        #
         def schema replace: false
           # Same as Table#schema, but not frozen
           # TODO: make sure to call ensure_full_data! on Dataset#update
@@ -885,6 +920,190 @@ module Gcloud
           end
           # Do not freeze on updater, allow modifications
           @schema
+        end
+
+        ##
+        # Adds a string field to the schema.
+        #
+        # See {Schema#string}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.string "first_name", mode: :required
+        #   end
+        #
+        # @!group Schema
+        def string name, description: nil, mode: :nullable
+          schema.string name, description: description, mode: mode
+        end
+
+        ##
+        # Adds an integer field to the schema.
+        #
+        # See {Schema#integer}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.integer "age", mode: :required
+        #   end
+        #
+        # @!group Schema
+        def integer name, description: nil, mode: :nullable
+          schema.integer name, description: description, mode: mode
+        end
+
+        ##
+        # Adds a floating-point number field to the schema.
+        #
+        # See {Schema#float}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.float "price", mode: :required
+        #   end
+        #
+        # @!group Schema
+        def float name, description: nil, mode: :nullable
+          schema.float name, description: description, mode: mode
+        end
+
+        ##
+        # Adds a boolean field to the schema.
+        #
+        # See {Schema#boolean}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.boolean "active", mode: :required
+        #   end
+        #
+        # @!group Schema
+        def boolean name, description: nil, mode: :nullable
+          schema.boolean name, description: description, mode: mode
+        end
+
+        ##
+        # Adds a timestamp field to the schema.
+        #
+        # See {Schema#timestamp}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.timestamp "creation_date", mode: :required
+        #   end
+        #
+        # @!group Schema
+        def timestamp name, description: nil, mode: :nullable
+          schema.timestamp name, description: description, mode: mode
+        end
+
+        ##
+        # Adds a record field to the schema. A block must be passed describing
+        # the nested fields of the record. For more information about nested
+        # and repeated records, see [Preparing Data for BigQuery
+        # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+        #
+        # See {Schema#record}.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        # @yield [nested_schema] a block for setting the nested schema
+        # @yieldparam [Schema] nested_schema the object accepting the
+        #   nested schema
+        #
+        # @example
+        #   require "gcloud"
+        #
+        #   gcloud = Gcloud.new
+        #   bigquery = gcloud.bigquery
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |schema|
+        #     schema.record "cities_lived", mode: :repeated do |cities_lived|
+        #       cities_lived.string "place", mode: :required
+        #       cities_lived.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
+        # @!group Schema
+        #
+        def record name, description: nil, mode: nil, &block
+          schema.record name, description: description, mode: mode, &block
         end
 
         ##
