@@ -1,5 +1,12 @@
 # Release History
 
+### 0.12.2 / 2016-08-09
+
+#### Changes
+
+* BigQuery
+  * Allow `Dataset#create_table` syntax used prior to v0.12.0.
+
 ### 0.12.1 / 2016-08-01
 
 #### Changes
