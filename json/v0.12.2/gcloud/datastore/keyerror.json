@@ -1,0 +1,1 @@
+{"id":"gcloud/datastore/keyerror","name":"KeyError","title":["Gcloud","Datastore","KeyError"],"description":"<h1 id=\"keyerror\">KeyError</h1>\n\n<p>Raised when a key is not correct.</p>","source":"lib/gcloud/datastore/errors.rb#L24","resources":[],"examples":[],"methods":[]}
