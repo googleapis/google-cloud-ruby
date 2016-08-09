@@ -28,11 +28,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:table) do
     t = dataset.table table_id
     if t.nil?
-      t = dataset.create_table table_id do |tbl|
-        tbl.schema.integer "id", description: "id description", mode: :required
-        tbl.schema.string "breed", description: "breed description", mode: :required
-        tbl.schema.string "name", description: "name description", mode: :required
-        tbl.schema.timestamp "dob", description: "dob description", mode: :required
+      t = dataset.create_table table_id do |schema|
+        schema.integer "id", description: "id description", mode: :required
+        schema.string "breed", description: "breed description", mode: :required
+        schema.string "name", description: "name description", mode: :required
+        schema.timestamp "dob", description: "dob description", mode: :required
       end
     end
     t
