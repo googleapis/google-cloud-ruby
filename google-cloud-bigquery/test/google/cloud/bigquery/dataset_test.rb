@@ -245,6 +245,51 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.wont_be :view?
   end
 
+  it "creates a table with a old schema syntax" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", fields: [
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: nil),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: nil)])
+        ]))
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table,
+      [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |schema|
+      schema.string "name", mode: :required
+      schema.integer "age"
+      schema.float "score", description: "A score from 0.0 to 10.0"
+      schema.boolean "active"
+      schema.timestamp "creation_date"
+      schema.record "cities_lived", mode: :repeated do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.integer "number_of_years"\
+      end
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.name.must_equal table_name
+    table.description.must_equal table_description
+    table.schema.wont_be :empty?
+    table.schema.must_be :frozen?
+    table.must_be :table?
+    table.wont_be :view?
+  end
+
   it "creates a table with a schema in a block" do
     mock = Minitest::Mock.new
     insert_table = Google::Apis::BigqueryV2::Table.new(
