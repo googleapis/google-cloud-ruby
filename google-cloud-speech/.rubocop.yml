@@ -4,6 +4,7 @@ AllCops:
     - "google-cloud-speech.gemspec"
     - "Rakefile"
     - "test/**/*"
+    - "lib/google/cloud/speech/v1/*"
 
 Documentation:
   Enabled: false
