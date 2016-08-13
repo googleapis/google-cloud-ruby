@@ -53,8 +53,7 @@ module Google
           @client = init_client hash
         else
           verify_keyfile_exists! keyfile
-          local_keyfile = find_local_keyfile(keyfile)
-          json = JSON.parse local_keyfile
+          json = JSON.parse ::File.read(keyfile)
           json["scope"] ||= scope
           @client = init_client json
         end
@@ -114,14 +113,6 @@ module Google
       # returns a new Hash with string keys instead of symbol keys.
       def stringify_hash_keys hash
         Hash[hash.map { |(k, v)| [k.to_s, v] }]
-      end
-
-      def find_local_keyfile keyfile
-        if ::File.file?(keyfile)
-          ::File.read(keyfile)
-        else
-          keyfile
-        end
       end
 
       def client_options options
