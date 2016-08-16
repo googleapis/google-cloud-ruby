@@ -13,6 +13,24 @@
   },
   "modules": [
     {
+      "id": "gcloud",
+      "name": "gcloud",
+      "defaultService": "gcloud",
+      "versions": [
+        "v0.12.1",
+        "master",
+        "v0.12.0",
+        "v0.11.0",
+        "v0.10.0",
+        "v0.9.0",
+        "v0.8.2",
+        "v0.8.0",
+        "v0.7.2",
+        "v0.7.1",
+        "v0.7.0"
+      ]
+    },
+    {
       "id": "google-cloud",
       "name": "google-cloud",
       "defaultService": "google/cloud",
