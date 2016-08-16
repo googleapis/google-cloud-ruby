@@ -120,6 +120,14 @@ module Google
         end
         alias_method :doc, :document
 
+        def text content, language: nil
+          document content, format: :text, language: language
+        end
+
+        def html content, language: nil
+          document content, format: :html, language: language
+        end
+
         ##
         # TODO: Details
         #
@@ -165,6 +173,74 @@ module Google
         end
         alias_method :mark, :annotate
         alias_method :detect, :annotate
+
+        ##
+        # TODO: Details
+        #
+        # @param [String, Document] content The content to annotate. This
+        #   can be an {Document} instance, or any other type that converts to an
+        #   {Document}. See {#document} for details.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation::Entities>] The results for the entities analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello Chris and Mike!"
+        #
+        #   entities = language.entities doc
+        #   entities.count #=> 2
+        #
+        def entities content, format: :text, language: nil, encoding: nil
+          ensure_service!
+          doc = document content, language: language, format: format
+          grpc = service.entities doc.to_grpc, encoding: encoding
+          Annotation::Entities.from_grpc grpc
+        end
+
+        ##
+        # TODO: Details
+        #
+        # @param [String, Document] content The content to annotate. This
+        #   can be an {Document} instance, or any other type that converts to an
+        #   {Document}. See {#document} for details.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        #
+        # @return [Annotation::Sentiment>] The results for the sentiment
+        #   analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello Chris and Mike!"
+        #
+        #   sentiment = language.sentiment doc
+        #   sentiment.polarity #=> 1.0
+        #   sentiment.magnitude #=> 0.8999999761581421
+        #
+        def sentiment content, format: :text, language: nil
+          ensure_service!
+          doc = document content, language: language, format: format
+          grpc = service.sentiment doc.to_grpc
+          Annotation::Sentiment.from_grpc grpc
+        end
 
         protected
 
