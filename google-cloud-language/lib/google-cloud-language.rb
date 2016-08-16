@@ -37,7 +37,7 @@ module Google
     #
     #   The default scope is:
     #
-    #   * `https://www.googleapis.com/auth/language`
+    #   * `"https://www.googleapis.com/auth/cloud-platform"`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
@@ -83,7 +83,7 @@ module Google
     #
     #   The default scope is:
     #
-    #   * `https://www.googleapis.com/auth/language`
+    #   * `"https://www.googleapis.com/auth/cloud-platform"`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.

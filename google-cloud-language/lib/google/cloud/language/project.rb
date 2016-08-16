@@ -16,6 +16,8 @@
 require "google/cloud/errors"
 require "google/cloud/core/gce"
 require "google/cloud/language/service"
+require "google/cloud/language/document"
+require "google/cloud/language/annotation"
 
 module Google
   module Cloud
@@ -69,6 +71,100 @@ module Google
             ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::Core::GCE.project_id
         end
+
+        ##
+        # Returns a new document from the given content.
+        #
+        # TODO: Details
+        #
+        # @param [String, Google::Cloud::Storage::File] content A string of text
+        #   to be annotated, or a Cloud Storage URI of the form
+        #   `"gs://bucketname/path/to/document.ext"`; or an instance of
+        #   Google::Cloud::Storage::File of the text to be annotated.
+        #
+        # @return [Document] An document for the Language service.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "it was the best of times, it was..."
+        #
+        # @example With a Google Cloud Storage URI:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "gs://bucket-name/path/to/document"
+        #
+        # @example With a Google Cloud Storage File object:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "bucket-name"
+        #   file = bucket.file "path/to/document"
+        #
+        #   language = gcloud.language
+        #
+        #   doc = language.document file
+        #
+        def document content, format: nil, language: nil
+          return content if content.is_a? Document
+          Document.from_source content, @service, format: format,
+                                                  language: language
+        end
+        alias_method :doc, :document
+
+        ##
+        # TODO: Details
+        #
+        # @param [String, Document, Google::Cloud::Storage::File] content The
+        #   content to annotate. This can be an {Document} instance, or any
+        #   other type that converts to an {Document}. See {#document} for
+        #   details.
+        # @param [Boolean] text Whether to perform the textual analysis.
+        #   Optional.
+        # @param [Boolean] entities Whether to perform the entitiy analysis.
+        #   Optional.
+        # @param [Boolean] sentiment Whether to perform the sentiment analysis.
+        #   Optional.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation>] The results for the content analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello world!"
+        #
+        #   annotation = language.annotate doc
+        #   annotation.thing #=> Some Result
+        #
+        def annotate content, text: false, entities: false, sentiment: false,
+                     format: nil, language: nil, encoding: nil
+          ensure_service!
+          doc = document content, language: language, format: format
+          grpc = service.annotate doc.to_grpc, text: text, entities: entities,
+                                               sentiment: sentiment,
+                                               encoding: encoding
+          Annotation.from_grpc grpc
+        end
+        alias_method :mark, :annotate
+        alias_method :detect, :annotate
 
         protected
 
