@@ -3,9 +3,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/protobuf/empty'
-require 'google/protobuf/timestamp'
+require 'google/api/annotations_pb'
+require 'google/protobuf/empty_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.pubsub.v1.Topic" do
     optional :name, :string, 1

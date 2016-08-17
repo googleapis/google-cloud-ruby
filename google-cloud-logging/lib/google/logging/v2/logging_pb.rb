@@ -3,11 +3,13 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/api/monitored_resource'
-require 'google/logging/v2/log_entry'
-require 'google/protobuf/empty'
-require 'google/rpc/status'
+require 'google/api/annotations_pb'
+require 'google/api/monitored_resource_pb'
+require 'google/logging/v2/log_entry_pb'
+require 'google/protobuf/duration_pb'
+require 'google/protobuf/empty_pb'
+require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.DeleteLogRequest" do
     optional :log_name, :string, 1
@@ -17,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :resource, :message, 2, "google.api.MonitoredResource"
     map :labels, :string, :string, 3
     repeated :entries, :message, 4, "google.logging.v2.LogEntry"
+    optional :partial_success, :bool, 5
   end
   add_message "google.logging.v2.WriteLogEntriesResponse" do
   end

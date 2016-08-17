@@ -26,14 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/cloud/speech/v1/cloud_speech_services"
-
-# TODO: implement line-wrapping rules and remove this suppression.
-# rubocop:disable LineLength
-# rubocop:disable MethodLength
-# HashSyntax is disabled because {"foo-bar": "baz"} is not allowed before
-# Ruby-2.2.
-# rubocop:disable HashSyntax
+require "google/cloud/speech/v1/cloud_speech_services_pb"
 
 module Google
   module Cloud

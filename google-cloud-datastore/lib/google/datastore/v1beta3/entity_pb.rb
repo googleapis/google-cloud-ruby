@@ -3,10 +3,10 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/protobuf/struct'
-require 'google/protobuf/timestamp'
-require 'google/type/latlng'
+require 'google/api/annotations_pb'
+require 'google/protobuf/struct_pb'
+require 'google/protobuf/timestamp_pb'
+require 'google/type/latlng_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.datastore.v1beta3.PartitionId" do
     optional :project_id, :string, 2

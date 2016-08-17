@@ -15,9 +15,9 @@
 
 require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
-require "google/logging/v2/logging_services"
-require "google/logging/v2/logging_config_services"
-require "google/logging/v2/logging_metrics_services"
+require "google/logging/v2/logging_services_pb"
+require "google/logging/v2/logging_config_services_pb"
+require "google/logging/v2/logging_metrics_services_pb"
 
 module Google
   module Cloud

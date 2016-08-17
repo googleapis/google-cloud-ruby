@@ -3,13 +3,13 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/api/monitored_resource'
-require 'google/logging/type/http_request'
-require 'google/logging/type/log_severity'
-require 'google/protobuf/any'
-require 'google/protobuf/struct'
-require 'google/protobuf/timestamp'
+require 'google/api/annotations_pb'
+require 'google/api/monitored_resource_pb'
+require 'google/logging/type/http_request_pb'
+require 'google/logging/type/log_severity_pb'
+require 'google/protobuf/any_pb'
+require 'google/protobuf/struct_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogEntry" do
     optional :log_name, :string, 12

@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/rpc/status'
+require 'google/api/annotations_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1.RecognizeRequest" do
     optional :initial_request, :message, 1, "google.cloud.speech.v1.InitialRecognizeRequest"

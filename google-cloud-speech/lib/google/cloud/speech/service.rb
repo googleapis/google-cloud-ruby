@@ -17,7 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
 require "google/cloud/speech/credentials"
 require "google/cloud/speech/version"
-# require "google/speech/v1/speech_services"
+# require "google/speech/v1/speech_services_pb"
 
 module Google
   module Cloud
