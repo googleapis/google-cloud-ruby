@@ -88,8 +88,8 @@
       ]
     },
     {
-      "id": "google-cloud-resourcemanager",
-      "name": "google-cloud-resourcemanager",
+      "id": "google-cloud-resource_manager",
+      "name": "google-cloud-resource_manager",
       "defaultService": "google/cloud/resourcemanager",
       "versions": [
         "master"
