@@ -15,4 +15,12 @@
 
 require "google/cloud"
 
+##
+# # Gcloud
+#
+# This module exists to facilitate the transition of legacy code using the
+# `Gcloud` namespace to the current `Google::Cloud` namespace.
+#
+module Gcloud
+end
 Gcloud = Google::Cloud
