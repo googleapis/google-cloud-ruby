@@ -1,1 +1,98 @@
 # google-cloud-resource_manager
+
+The Resource Manager API provides methods that you can use to
+programmatically manage your projects in the Google Cloud Platform. You
+may be familiar with managing projects in the [Developers
+Console](https://developers.google.com/console/help/new/). With this API
+you can do the following:
+
+* Get a list of all projects associated with an account
+* Create new projects
+* Update existing projects
+* Delete projects
+* Undelete, or recover, projects that you don't want to delete
+
+The Resource Manager API is a Beta release and is not covered by any SLA
+or deprecation policy and may be subject to backward-incompatible changes.
+
+- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager/google/cloud/resourcemanager)
+- [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
+
+## Accessing the Service
+
+Currently, the full functionality of the Resource Manager API is available
+only to white-listed users. (Contact your account manager or a member of
+the Google Cloud sales team if you are interested in access.) Read-only
+methods such as {ResourceManager::Manager#projects} and
+{ResourceManager::Manager#project} are accessible to any user who enables
+the Resource Manager API in the [Developers
+Console](https://console.developers.google.com).
+
+## Authentication
+
+The Resource Manager API currently requires authentication of a [User
+Account](https://developers.google.com/identity/protocols/OAuth2), and
+cannot currently be accessed with a [Service
+Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount).
+To use a User Account install the [Google Cloud
+SDK](http://cloud.google.com/sdk) and authenticate with the following:
+
+```
+$ gcloud auth login
+```
+
+Also make sure all environment variables are cleared of any
+service account credentials. Then google-cloud-resource_manager will be able to detect the user
+authentication and connect with those credentials.
+
+Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager/guides/authentication).
+
+## Example
+
+```ruby
+require "google/cloud"
+
+gcloud = Google::Cloud.new
+resource_manager = gcloud.resource_manager
+
+# List all projects
+resource_manager.projects.each do |project|
+  puts projects.project_id
+end
+
+# Label a project as production
+project = resource_manager.project "tokyo-rain-123"
+project.update do |p|
+  p.labels["env"] = "production"
+end
+
+# List only projects with the "production" label
+projects = resource_manager.projects filter: "labels.env:production"
+```
+
+## Supported Ruby Versions
+
+This library is supported on Ruby 2.0+.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
+
+## Contributing
+
+Contributions to this library are always welcome and highly encouraged.
+
+See the [Contributing Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/contributing) for more information on how to get started.
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See [Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
+
+## License
+
+This library is licensed under Apache 2.0. Full license text is available in [LICENSE](../LICENSE).
+
+## Support
+
+Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues).
+Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
