@@ -4,7 +4,7 @@ gemspec
 
 gem "rake"
 gem "google-api-client", "~> 0.9.11"
-gem "grpc", "= 1.0.0.pre2"
+gem "grpc", "~> 1.0"
 gem "google-protobuf", "~> 3.0"
 gem "googleapis-common-protos", "~> 1.2"
 gem "gcloud-jsondoc",

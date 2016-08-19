@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.0.0"
 
   gem.add_dependency "google-cloud-core"
-  gem.add_dependency "grpc", "= 1.0.0.pre2"
+  gem.add_dependency "grpc", "~> 1.0"
   gem.add_dependency "google-protobuf", "~> 3.0"
   gem.add_dependency "googleapis-common-protos", "~> 1.2"
 
