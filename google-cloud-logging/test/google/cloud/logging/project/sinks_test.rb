@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   it "lists sinks" do
     num_sinks = 3
-    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks))
 
     mock = Minitest::Mock.new
@@ -34,7 +34,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
   it "lists sinks with find_sinks alias" do
     num_sinks = 3
-    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks))
 
     mock = Minitest::Mock.new
@@ -50,9 +50,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
 
     mock = Minitest::Mock.new
@@ -76,9 +76,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with next? and next" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
 
     mock = Minitest::Mock.new
@@ -101,9 +101,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with next? and next and max set" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_size: 3)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_size: 3)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token", page_size: 3)
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
 
     mock = Minitest::Mock.new
@@ -126,9 +126,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with all" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
 
     mock = Minitest::Mock.new
@@ -145,9 +145,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with all and max set" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_size: 3)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_size: 3)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token", page_size: 3)
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))
 
     mock = Minitest::Mock.new
@@ -164,9 +164,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with all using Enumerator" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))
 
     mock = Minitest::Mock.new
@@ -183,9 +183,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with all and request_limit set" do
-    first_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))
 
     mock = Minitest::Mock.new
@@ -202,7 +202,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks with max set" do
-    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path, page_size: 3)
+    list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path, page_size: 3)
     list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
@@ -220,7 +220,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
   end
 
   it "paginates sinks without max set" do
-    list_req = Google::Logging::V2::ListSinksRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListSinksRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
@@ -243,7 +243,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     new_sink = Google::Logging::V2::LogSink.new name: new_sink_name, destination: new_sink_destination
 
     create_req = Google::Logging::V2::CreateSinkRequest.new(
-      project_name: "projects/test",
+      parent: "projects/test",
       sink: new_sink
     )
     create_res = Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge("name" => new_sink_name,
@@ -275,7 +275,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
       output_version_format: :V2
     )
     create_req = Google::Logging::V2::CreateSinkRequest.new(
-      project_name: "projects/test",
+      parent: "projects/test",
       sink: new_sink
     )
     create_res = Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge(

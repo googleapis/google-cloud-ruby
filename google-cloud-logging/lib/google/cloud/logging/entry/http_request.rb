@@ -107,16 +107,16 @@ module Google
           def to_grpc
             return nil if empty?
             Google::Logging::Type::HttpRequest.new(
-              request_method:               method.to_s,
-              request_url:                  url.to_s,
-              request_size:                 size.to_i,
-              status:                       status.to_i,
-              response_size:                response_size.to_i,
-              user_agent:                   user_agent.to_s,
-              remote_ip:                    remote_ip.to_s,
-              referer:                      referer.to_s,
-              cache_hit:                    !(!cache_hit),
-              validated_with_origin_server: !(!validated)
+              request_method:                     method.to_s,
+              request_url:                        url.to_s,
+              request_size:                       size.to_i,
+              status:                             status.to_i,
+              response_size:                      response_size.to_i,
+              user_agent:                         user_agent.to_s,
+              remote_ip:                          remote_ip.to_s,
+              referer:                            referer.to_s,
+              cache_hit:                          !(!cache_hit),
+              cache_validated_with_origin_server: !(!validated)
             )
           end
 
@@ -135,7 +135,7 @@ module Google
               h.remote_ip     = grpc.remote_ip
               h.referer       = grpc.referer
               h.cache_hit     = grpc.cache_hit
-              h.validated     = grpc.validated_with_origin_server
+              h.validated     = grpc.cache_validated_with_origin_server
             end
           end
         end

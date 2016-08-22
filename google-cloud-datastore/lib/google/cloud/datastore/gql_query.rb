@@ -120,7 +120,7 @@ module Google
         #
         def named_bindings
           bindings = Hash[@grpc.named_bindings.map do |name, gql_query_param|
-            if gql_query_param.cursor
+            if gql_query_param.cursor && !gql_query_param.cursor.empty?
               [name, Cursor.from_grpc(gql_query_param.cursor)]
             else
               [name, Core::GRPCUtils.from_value(gql_query_param.value)]
@@ -168,7 +168,7 @@ module Google
         #
         def positional_bindings
           bindings = @grpc.positional_bindings.map do |gql_query_param|
-            if gql_query_param.cursor
+            if gql_query_param.cursor && !gql_query_param.cursor.empty?
               Cursor.from_grpc gql_query_param.cursor
             else
               Core::GRPCUtils.from_value gql_query_param.value

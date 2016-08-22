@@ -119,7 +119,7 @@ module Google
         end
 
         def list_sinks token: nil, max: nil
-          list_params = { project_name: project_path,
+          list_params = { parent: project_path,
                           page_token: token,
                           page_size: max
                         }.delete_if { |_, v| v.nil? }
@@ -136,7 +136,7 @@ module Google
           }.delete_if { |_, v| v.nil? }
 
           create_req = Google::Logging::V2::CreateSinkRequest.new(
-            project_name: project_path,
+            parent: project_path,
             sink: Google::Logging::V2::LogSink.new(sink_params)
           )
 
@@ -174,7 +174,7 @@ module Google
         end
 
         def list_metrics token: nil, max: nil
-          list_params = { project_name: project_path,
+          list_params = { parent: project_path,
                           page_token: token,
                           page_size: max
                         }.delete_if { |_, v| v.nil? }
@@ -192,7 +192,7 @@ module Google
           }.delete_if { |_, v| v.nil? }
 
           create_req = Google::Logging::V2::CreateLogMetricRequest.new(
-            project_name: project_path,
+            parent: project_path,
             metric: Google::Logging::V2::LogMetric.new(metric_params)
           )
 

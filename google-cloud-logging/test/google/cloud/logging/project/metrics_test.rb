@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   it "lists metrics" do
     num_metrics = 3
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
 
     mock = Minitest::Mock.new
@@ -34,7 +34,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
   it "lists metrics with find_metrics alias" do
     num_metrics = 3
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
 
     mock = Minitest::Mock.new
@@ -50,9 +50,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
 
     mock = Minitest::Mock.new
@@ -76,9 +76,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with next? and next" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
 
     mock = Minitest::Mock.new
@@ -101,9 +101,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with next? and next and max set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_size: 3)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token", page_size: 3)
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
 
     mock = Minitest::Mock.new
@@ -126,9 +126,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with all" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
 
     mock = Minitest::Mock.new
@@ -145,9 +145,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with all and max set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_size: 3)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token", page_size: 3)
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
 
     mock = Minitest::Mock.new
@@ -164,9 +164,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "iterates metrics with all using Enumerator" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
 
     mock = Minitest::Mock.new
@@ -183,9 +183,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "iterates metrics with all request_limit set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_token: "next_page_token")
+    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
     second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
 
     mock = Minitest::Mock.new
@@ -202,7 +202,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with max set" do
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path, page_size: 3)
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
@@ -220,7 +220,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics without max set" do
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(project_name: project_path)
+    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
     list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
 
     mock = Minitest::Mock.new
@@ -245,7 +245,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
         filter: new_metric_filter
       )
     create_req = Google::Logging::V2::CreateLogMetricRequest.new(
-      project_name: "projects/test",
+      parent: "projects/test",
       metric: new_metric
     )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
@@ -276,7 +276,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
       filter: new_metric_filter
     )
     create_req = Google::Logging::V2::CreateLogMetricRequest.new(
-      project_name: "projects/test",
+      parent: "projects/test",
       metric: new_metric
     )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,

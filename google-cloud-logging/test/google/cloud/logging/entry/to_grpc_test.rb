@@ -92,7 +92,7 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.http_request.remote_ip.must_equal "127.0.0.1"
     grpc.http_request.referer.must_equal "http://test.local/referer"
     grpc.http_request.cache_hit.must_equal true
-    grpc.http_request.validated_with_origin_server.must_equal false
+    grpc.http_request.cache_validated_with_origin_server.must_equal false
 
     grpc.operation.id.must_equal "abc123"
     grpc.operation.producer.must_equal "NewApp.NewClass#new_method"
