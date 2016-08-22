@@ -36,12 +36,12 @@ describe Google::Cloud::Translate, :translate do
 
   it "translates input" do
     translate.translate("Hello", to: "es").text.must_equal "Hola"
-    translate.translate("How are you today?", to: "es").text.must_equal "Como estas hoy?"
+    translate.translate("How are you today?", to: "es").text.must_equal "¿Cómo estás hoy?"
 
     translations = translate.translate "Hello", "How are you today?", to: "es"
     translations.count.must_equal 2
     translations.first.text.must_equal "Hola"
-    translations.last.text.must_equal "Como estas hoy?"
+    translations.last.text.must_equal "¿Cómo estás hoy?"
   end
 
   it "lists supported languages" do
