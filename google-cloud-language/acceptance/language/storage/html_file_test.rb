@@ -208,7 +208,7 @@ describe "Language (HTML/Storage File)", :language do
       annotation.tokens.must_be :empty?
     end
 
-    it "runs only the sentiment feature" do
+    it "runs only the entities feature" do
       doc = language.document file, format: :html
       doc.must_be :html?
       doc.wont_be :text?

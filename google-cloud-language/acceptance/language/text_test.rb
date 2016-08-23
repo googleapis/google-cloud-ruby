@@ -202,7 +202,7 @@ describe "Language (TEXT)", :language do
       annotation.tokens.must_be :empty?
     end
 
-    it "runs only the sentiment feature" do
+    it "runs only the entities feature" do
       doc = language.document content, format: :text
       doc.must_be :text?
       doc.wont_be :html?
