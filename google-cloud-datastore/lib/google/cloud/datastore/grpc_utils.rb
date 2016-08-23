@@ -77,7 +77,7 @@ module Google
             return grpc_value.geo_point_value.to_hash
           elsif grpc_value.value_type == :blob_value
             return StringIO.new(
-                grpc_value.blob_value).set_encoding("ASCII-8BIT")
+                grpc_value.blob_value.dup.force_encoding("ASCII-8BIT"))
           else
             nil
           end
