@@ -14,7 +14,7 @@
 
 
 require "google/cloud/datastore/credentials"
-require "google/datastore/v1beta3/datastore_services_pb"
+require "google/datastore/v1/datastore_services_pb"
 require "google/cloud/core/grpc_backoff"
 
 module Google
@@ -45,7 +45,7 @@ module Google
 
         def datastore
           return mocked_datastore if mocked_datastore
-          @datastore ||= Google::Datastore::V1beta3::Datastore::Stub.new(
+          @datastore ||= Google::Datastore::V1::Datastore::Stub.new(
             host, creds, timeout: timeout)
         end
         attr_accessor :mocked_datastore
@@ -58,7 +58,7 @@ module Google
         # Allocate IDs for incomplete keys.
         # (This is useful for referencing an entity before it is inserted.)
         def allocate_ids *incomplete_keys
-          allocate_req = Google::Datastore::V1beta3::AllocateIdsRequest.new(
+          allocate_req = Google::Datastore::V1::AllocateIdsRequest.new(
             project_id: project,
             keys: incomplete_keys
           )
@@ -69,7 +69,7 @@ module Google
         ##
         # Look up entities by keys.
         def lookup *keys, consistency: nil, transaction: nil
-          lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+          lookup_req = Google::Datastore::V1::LookupRequest.new(
             project_id: project,
             keys: keys
           )
@@ -81,18 +81,18 @@ module Google
 
         # Query for entities.
         def run_query query, namespace = nil, consistency: nil, transaction: nil
-          run_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+          run_req = Google::Datastore::V1::RunQueryRequest.new(
             project_id: project)
-          if query.is_a? Google::Datastore::V1beta3::Query
+          if query.is_a? Google::Datastore::V1::Query
             run_req["query"] = query
-          elsif query.is_a? Google::Datastore::V1beta3::GqlQuery
+          elsif query.is_a? Google::Datastore::V1::GqlQuery
             run_req["gql_query"] = query
           else
             fail ArgumentError, "Unable to query with a #{query.class} object."
           end
           run_req.read_options = generate_read_options consistency, transaction
 
-          run_req.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+          run_req.partition_id = Google::Datastore::V1::PartitionId.new(
             namespace_id: namespace) if namespace
 
           execute { datastore.run_query run_req }
@@ -101,7 +101,7 @@ module Google
         ##
         # Begin a new transaction.
         def begin_transaction
-          tx_req = Google::Datastore::V1beta3::BeginTransactionRequest.new(
+          tx_req = Google::Datastore::V1::BeginTransactionRequest.new(
             project_id: project
           )
 
@@ -112,7 +112,7 @@ module Google
         # Commit a transaction, optionally creating, deleting or modifying
         # some entities.
         def commit mutations, transaction: nil
-          commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+          commit_req = Google::Datastore::V1::CommitRequest.new(
             project_id: project,
             mode: :NON_TRANSACTIONAL,
             mutations: mutations
@@ -128,7 +128,7 @@ module Google
         ##
         # Roll back a transaction.
         def rollback transaction
-          rb_req = Google::Datastore::V1beta3::RollbackRequest.new(
+          rb_req = Google::Datastore::V1::RollbackRequest.new(
             project_id: project,
             transaction: transaction
           )
@@ -154,13 +154,13 @@ module Google
 
         def generate_read_options consistency, transaction
           if consistency == :eventual
-            return Google::Datastore::V1beta3::ReadOptions.new(
+            return Google::Datastore::V1::ReadOptions.new(
               read_consistency: :EVENTUAL)
           elsif consistency == :strong
-            return  Google::Datastore::V1beta3::ReadOptions.new(
+            return  Google::Datastore::V1::ReadOptions.new(
               read_consistency: :STRONG)
           elsif transaction
-            return  Google::Datastore::V1beta3::ReadOptions.new(
+            return  Google::Datastore::V1::ReadOptions.new(
               transaction: transaction)
           end
           nil

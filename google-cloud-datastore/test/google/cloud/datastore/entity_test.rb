@@ -47,9 +47,9 @@ describe Google::Cloud::Datastore::Entity do
   end
 
   it "can be created with a GRPC object" do
-    grpc = Google::Datastore::V1beta3::Entity.new
-    grpc.key = Google::Datastore::V1beta3::Key.new
-    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new
+    grpc = Google::Datastore::V1::Entity.new
+    grpc.key = Google::Datastore::V1::Key.new
+    grpc.key.path << Google::Datastore::V1::Key::PathElement.new
     grpc.key.path.first.kind = "User"
     grpc.key.path.first.id = 123456
     grpc.properties["name"] = Google::Cloud::Core::GRPCUtils.to_value "User McNumber"
@@ -129,9 +129,9 @@ describe Google::Cloud::Datastore::Entity do
   end
 
   it "raises when setting a key when persisted" do
-    grpc = Google::Datastore::V1beta3::Entity.new
-    grpc.key = Google::Datastore::V1beta3::Key.new
-    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc = Google::Datastore::V1::Entity.new
+    grpc.key = Google::Datastore::V1::Key.new
+    grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
     grpc.properties["name"] = Google::Cloud::Core::GRPCUtils.to_value "User McNumber"
     grpc.properties["email"] = Google::Cloud::Core::GRPCUtils.to_value "number@example.net"
 

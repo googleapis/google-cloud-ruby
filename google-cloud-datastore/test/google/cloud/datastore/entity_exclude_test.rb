@@ -25,9 +25,9 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes do
   end
 
   it "converts indexed value to not excluded from a GRPC object" do
-    grpc = Google::Datastore::V1beta3::Entity.new
-    grpc.key = Google::Datastore::V1beta3::Key.new
-    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc = Google::Datastore::V1::Entity.new
+    grpc.key = Google::Datastore::V1::Key.new
+    grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
     grpc.properties["name"] = Google::Cloud::Core::GRPCUtils.to_value "User McNumber"
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
@@ -35,9 +35,9 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes do
   end
 
   it "converts indexed list to not excluded from a GRPC object" do
-    grpc = Google::Datastore::V1beta3::Entity.new
-    grpc.key = Google::Datastore::V1beta3::Key.new
-    grpc.key.path << Google::Datastore::V1beta3::Key::PathElement.new(kind: "User", id: 123456)
+    grpc = Google::Datastore::V1::Entity.new
+    grpc.key = Google::Datastore::V1::Key.new
+    grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
     grpc.properties["tags"] = Google::Cloud::Core::GRPCUtils.to_value ["ruby", "code"]
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc

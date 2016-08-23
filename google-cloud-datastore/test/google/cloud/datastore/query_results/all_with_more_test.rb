@@ -19,14 +19,14 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
   let(:first_run_query_req) do
-    Google::Datastore::V1beta3::RunQueryRequest.new(
+    Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("Task").to_grpc
     )
   end
   let(:first_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
-      Google::Datastore::V1beta3::EntityResult.new(
+      Google::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", 1000+i
           e["name"] = "thingamajig"
@@ -34,8 +34,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
         cursor: "result-cursor-1-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1beta3::RunQueryResponse.new(
-      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+    Google::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         more_results: :NOT_FINISHED,
         end_cursor: "second-page-cursor".force_encoding("ASCII-8BIT")
@@ -43,7 +43,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
     )
   end
   let(:next_run_query_req) do
-    Google::Datastore::V1beta3::RunQueryRequest.new(
+    Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("Task").start(
         Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
@@ -52,7 +52,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
   end
   let(:next_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
-      Google::Datastore::V1beta3::EntityResult.new(
+      Google::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", 2000+i
           e["name"] = "thingamajig"
@@ -60,8 +60,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
         cursor: "result-cursor-2-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1beta3::RunQueryResponse.new(
-      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+    Google::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         more_results: :NOT_FINISHED,
         end_cursor: "third-page-cursor".force_encoding("ASCII-8BIT")

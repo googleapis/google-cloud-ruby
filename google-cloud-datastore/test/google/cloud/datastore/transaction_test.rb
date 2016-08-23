@@ -21,20 +21,20 @@ describe Google::Cloud::Datastore::Transaction do
   let(:service) do
     s = dataset.service
     s.mocked_datastore = Minitest::Mock.new
-    s.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1beta3::BeginTransactionRequest]
+    s.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1::BeginTransactionRequest]
     s
   end
   let(:transaction) { Google::Cloud::Datastore::Transaction.new service }
   let(:commit_res) do
-    Google::Datastore::V1beta3::CommitResponse.new(
-      mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
+    Google::Datastore::V1::CommitResponse.new(
+      mutation_results: [Google::Datastore::V1::MutationResult.new]
     )
   end
   let(:lookup_res) do
-    Google::Datastore::V1beta3::LookupResponse.new(
+    Google::Datastore::V1::LookupResponse.new(
       found: 2.times.map do
-        Google::Datastore::V1beta3::EntityResult.new(
-          entity: Google::Datastore::V1beta3::Entity.new(
+        Google::Datastore::V1::EntityResult.new(
+          entity: Google::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
             properties: { "name" => Google::Cloud::Core::GRPCUtils.to_value("thingamajig") }
           )
@@ -44,15 +44,15 @@ describe Google::Cloud::Datastore::Transaction do
   end
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do
-      Google::Datastore::V1beta3::EntityResult.new(
+      Google::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
         end.to_grpc
       )
     end
-    Google::Datastore::V1beta3::RunQueryResponse.new(
-      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+    Google::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         end_cursor: Google::Cloud::Core::GRPCUtils.decode_bytes(query_cursor)
       )
@@ -60,7 +60,7 @@ describe Google::Cloud::Datastore::Transaction do
   end
   let(:query_cursor) { Google::Cloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
   let(:begin_tx_res) do
-    Google::Datastore::V1beta3::BeginTransactionResponse.new(transaction: tx_id)
+    Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
   end
   let(:tx_id) { "giterdone".encode("ASCII-8BIT") }
 
@@ -283,28 +283,28 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "commit will save and delete entities" do
-    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+    commit_res = Google::Datastore::V1::CommitResponse.new(
       mutation_results: [
-        Google::Datastore::V1beta3::MutationResult.new,
-        Google::Datastore::V1beta3::MutationResult.new]
+        Google::Datastore::V1::MutationResult.new,
+        Google::Datastore::V1::MutationResult.new]
     )
-    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+    commit_req = Google::Datastore::V1::CommitRequest.new(
       project_id: project,
       mode: :TRANSACTIONAL,
       transaction: tx_id,
-      mutations: [Google::Datastore::V1beta3::Mutation.new(
+      mutations: [Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-saved"
           e["name"] = "Gonna be saved"
-        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        end.to_grpc), Google::Datastore::V1::Mutation.new(
         insert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-inserted"
           e["name"] = "Gonna be inserted"
-        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        end.to_grpc), Google::Datastore::V1::Mutation.new(
         update: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-updated"
           e["name"] = "Gonna be updated"
-        end.to_grpc), Google::Datastore::V1beta3::Mutation.new(
+        end.to_grpc), Google::Datastore::V1::Mutation.new(
           delete: Google::Cloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)]
     )
     transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
@@ -337,10 +337,10 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "find can take a key" do
-    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+    lookup_req = Google::Datastore::V1::LookupRequest.new(
       project_id: project,
       keys: [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc],
-      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     )
     transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
@@ -350,11 +350,11 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "find_all takes several keys" do
-    lookup_req = Google::Datastore::V1beta3::LookupRequest.new(
+    lookup_req = Google::Datastore::V1::LookupRequest.new(
       project_id: project,
       keys: [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
              Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
-      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     )
     transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
 
@@ -370,10 +370,10 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "run will fulfill a query" do
-    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc,
-      read_options: Google::Datastore::V1beta3::ReadOptions.new(transaction: tx_id)
+      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     )
     transaction.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
 
@@ -393,14 +393,14 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "commit persists entities with complete keys" do
-    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
-      mutation_results: [Google::Datastore::V1beta3::MutationResult.new]
+    commit_res = Google::Datastore::V1::CommitResponse.new(
+      mutation_results: [Google::Datastore::V1::MutationResult.new]
     )
-    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+    commit_req = Google::Datastore::V1::CommitRequest.new(
       project_id: project,
       mode: :TRANSACTIONAL,
       transaction: tx_id,
-      mutations: [Google::Datastore::V1beta3::Mutation.new(
+      mutations: [Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
@@ -421,17 +421,17 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "commit persists entities with incomplete keys" do
-    commit_res = Google::Datastore::V1beta3::CommitResponse.new(
+    commit_res = Google::Datastore::V1::CommitResponse.new(
       mutation_results: [
-        Google::Datastore::V1beta3::MutationResult.new(
+        Google::Datastore::V1::MutationResult.new(
           key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
         )]
     )
-    commit_req = Google::Datastore::V1beta3::CommitRequest.new(
+    commit_req = Google::Datastore::V1::CommitRequest.new(
       project_id: project,
       mode: :TRANSACTIONAL,
       transaction: tx_id,
-      mutations: [Google::Datastore::V1beta3::Mutation.new(
+      mutations: [Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test"
           e["name"] = "thingamajig"
@@ -452,8 +452,8 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "rollback does not persist entities" do
-    rollback_res = Google::Datastore::V1beta3::RollbackResponse.new
-    rollback_req = Google::Datastore::V1beta3::RollbackRequest.new(
+    rollback_res = Google::Datastore::V1::RollbackResponse.new
+    rollback_req = Google::Datastore::V1::RollbackRequest.new(
       project_id: project,
       transaction: tx_id
     )
