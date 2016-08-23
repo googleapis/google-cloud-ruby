@@ -23,9 +23,9 @@ module Google
       # @private Represents the OAuth 2.0 signing logic for Language.
       class Credentials < Google::Cloud::Credentials
         SCOPE = Google::Cloud::Language::V1beta1::LanguageServiceApi::ALL_SCOPES
-        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
+        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON)
       end
     end
   end
