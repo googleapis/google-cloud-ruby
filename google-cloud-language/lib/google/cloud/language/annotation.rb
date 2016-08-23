@@ -141,36 +141,36 @@ module Google
           end
 
           def unknown
-            select { |e| e.type == :UNKNOWN }
+            select(&:unknown?)
           end
 
           def people
-            select { |e| e.type == :PERSON }
+            select(&:person?)
           end
 
           def locations
-            select { |e| e.type == :LOCATION }
+            select(&:location?)
           end
           alias_method :places, :locations
 
           def organizations
-            select { |e| e.type == :ORGANIZATION }
+            select(&:organization?)
           end
 
           def events
-            select { |e| e.type == :EVENT }
+            select(&:event?)
           end
 
           def artwork
-            select { |e| e.type == :WORK_OF_ART }
+            select(&:artwork?)
           end
 
           def goods
-            select { |e| e.type == :CONSUMER_GOOD }
+            select(&:good?)
           end
 
           def other
-            select { |e| e.type == :OTHER }
+            select(&:other?)
           end
 
           ##
@@ -193,6 +193,39 @@ module Google
             @metadata = metadata
             @salience = salience
             @mentions = mentions
+          end
+
+          def unknown?
+            type == :UNKNOWN
+          end
+
+          def person?
+            type == :PERSON
+          end
+
+          def location?
+            type == :LOCATION
+          end
+          alias_method :place?, :location?
+
+          def organization?
+            type == :ORGANIZATION
+          end
+
+          def event?
+            type == :EVENT
+          end
+
+          def artwork?
+            type == :WORK_OF_ART
+          end
+
+          def good?
+            type == :CONSUMER_GOOD
+          end
+
+          def other?
+            type == :OTHER
           end
 
           def wikipedia_url
