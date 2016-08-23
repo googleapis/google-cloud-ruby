@@ -14,7 +14,7 @@
 
 
 require "google/cloud"
-require "google/protobuf/struct"
+require "google/protobuf/struct_pb"
 
 module Google
   module Cloud

@@ -63,7 +63,7 @@ class MockLogging < Minitest::Spec
       "remote_ip" => "127.0.0.1",
       "referer" => "http://test.local/referer",
       "cache_hit" => false,
-      "validated_with_origin_server" => false
+      "cache_validated_with_origin_server" => false
     }
   end
 

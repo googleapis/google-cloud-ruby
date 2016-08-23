@@ -40,11 +40,11 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -60,15 +60,15 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value nil
     value.value_type.must_equal :null_value
     value.null_value.must_equal :NULL_VALUE
-    value.boolean_value.must_be :nil?
+    value.boolean_value.must_equal false
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -86,11 +86,11 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -108,11 +108,11 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -131,11 +131,11 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -155,11 +155,11 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -178,12 +178,12 @@ describe Google::Cloud::Datastore::Properties do
     value.key_value.must_equal key.to_grpc
     value.timestamp_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -206,12 +206,12 @@ describe Google::Cloud::Datastore::Properties do
     value.entity_value.must_equal entity.to_grpc
     value.key_value.must_be :nil?
     value.timestamp_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -237,11 +237,11 @@ describe Google::Cloud::Datastore::Properties do
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
     value.timestamp_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -266,12 +266,12 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_equal time_grpc
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -281,12 +281,12 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_equal Google::Protobuf::Timestamp.new(seconds: date_obj.to_time.to_i)
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -297,12 +297,12 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_equal time_grpc
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
     value.geo_point_value.must_be :nil?
   end
 
@@ -321,10 +321,10 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
     value.geo_point_value.must_be :nil?
   end
@@ -337,10 +337,10 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
     value.geo_point_value.must_be :nil?
   end
@@ -355,10 +355,10 @@ describe Google::Cloud::Datastore::Properties do
     value.timestamp_value.must_be :nil?
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
     value.geo_point_value.must_be :nil?
   end
@@ -379,12 +379,12 @@ describe Google::Cloud::Datastore::Properties do
     value.key_value.must_be :nil?
     value.entity_value.must_be :nil?
     value.timestamp_value.must_be :nil?
-    value.boolean_value.must_be :nil?
-    value.double_value.must_be :nil?
-    value.integer_value.must_be :nil?
-    value.string_value.must_be :nil?
+    value.boolean_value.must_equal false
+    value.double_value.must_equal 0.0
+    value.integer_value.must_equal 0
+    value.string_value.must_equal ""
     value.array_value.must_be :nil?
-    value.blob_value.must_be :nil?
+    value.blob_value.must_equal ""
   end
 
   it "decodes geo_point" do

@@ -3,12 +3,14 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/datastore/v1beta3/entity'
-require 'google/protobuf/wrappers'
+require 'google/api/annotations_pb'
+require 'google/datastore/v1beta3/entity_pb'
+require 'google/protobuf/wrappers_pb'
+require 'google/type/latlng_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.datastore.v1beta3.EntityResult" do
     optional :entity, :message, 1, "google.datastore.v1beta3.Entity"
+    optional :version, :int64, 4
     optional :cursor, :bytes, 3
   end
   add_enum "google.datastore.v1beta3.EntityResult.ResultType" do
@@ -93,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :entity_results, :message, 2, "google.datastore.v1beta3.EntityResult"
     optional :end_cursor, :bytes, 4
     optional :more_results, :enum, 5, "google.datastore.v1beta3.QueryResultBatch.MoreResultsType"
+    optional :snapshot_version, :int64, 7
   end
   add_enum "google.datastore.v1beta3.QueryResultBatch.MoreResultsType" do
     value :MORE_RESULTS_TYPE_UNSPECIFIED, 0

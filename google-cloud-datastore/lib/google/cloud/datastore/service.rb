@@ -14,7 +14,7 @@
 
 
 require "google/cloud/datastore/credentials"
-require "google/datastore/v1beta3/datastore_services"
+require "google/datastore/v1beta3/datastore_services_pb"
 require "google/cloud/core/grpc_backoff"
 
 module Google

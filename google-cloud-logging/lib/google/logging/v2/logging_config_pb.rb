@@ -3,9 +3,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/protobuf/empty'
-require 'google/protobuf/timestamp'
+require 'google/api/annotations_pb'
+require 'google/protobuf/empty_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogSink" do
     optional :name, :string, 1
@@ -19,7 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :V1, 2
   end
   add_message "google.logging.v2.ListSinksRequest" do
-    optional :project_name, :string, 1
+    optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
   end
@@ -31,7 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :sink_name, :string, 1
   end
   add_message "google.logging.v2.CreateSinkRequest" do
-    optional :project_name, :string, 1
+    optional :parent, :string, 1
     optional :sink, :message, 2, "google.logging.v2.LogSink"
   end
   add_message "google.logging.v2.UpdateSinkRequest" do

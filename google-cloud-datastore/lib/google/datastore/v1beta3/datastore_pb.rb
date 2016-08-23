@@ -3,9 +3,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/datastore/v1beta3/entity'
-require 'google/datastore/v1beta3/query'
+require 'google/api/annotations_pb'
+require 'google/datastore/v1beta3/entity_pb'
+require 'google/datastore/v1beta3/query_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.datastore.v1beta3.LookupRequest" do
     optional :project_id, :string, 8
@@ -73,9 +73,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :upsert, :message, 6, "google.datastore.v1beta3.Entity"
       optional :delete, :message, 7, "google.datastore.v1beta3.Key"
     end
+    oneof :conflict_detection_strategy do
+      optional :base_version, :int64, 8
+    end
   end
   add_message "google.datastore.v1beta3.MutationResult" do
     optional :key, :message, 3, "google.datastore.v1beta3.Key"
+    optional :version, :int64, 4
+    optional :conflict_detected, :bool, 5
   end
   add_message "google.datastore.v1beta3.ReadOptions" do
     oneof :consistency_type do

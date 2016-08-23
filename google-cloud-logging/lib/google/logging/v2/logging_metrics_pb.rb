@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations'
-require 'google/protobuf/empty'
+require 'google/api/annotations_pb'
+require 'google/protobuf/empty_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogMetric" do
     optional :name, :string, 1
@@ -12,7 +12,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :filter, :string, 3
   end
   add_message "google.logging.v2.ListLogMetricsRequest" do
-    optional :project_name, :string, 1
+    optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
   end
@@ -24,7 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :metric_name, :string, 1
   end
   add_message "google.logging.v2.CreateLogMetricRequest" do
-    optional :project_name, :string, 1
+    optional :parent, :string, 1
     optional :metric, :message, 2, "google.logging.v2.LogMetric"
   end
   add_message "google.logging.v2.UpdateLogMetricRequest" do

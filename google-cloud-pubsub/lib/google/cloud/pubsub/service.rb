@@ -15,7 +15,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
-require "google/pubsub/v1/pubsub_services"
+require "google/pubsub/v1/pubsub_services_pb"
 require "google/iam/v1/iam_policy_services"
 require "google/cloud/core/grpc_utils"
 require "json"

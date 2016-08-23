@@ -269,7 +269,9 @@ module Google
           key = Key.new
           path_grpc = key_grpc.path.pop
           if path_grpc
-            key = Key.new path_grpc.kind, (path_grpc.id || path_grpc.name)
+            id_or_name =
+              (path_grpc.id && path_grpc.id != 0)? path_grpc.id : path_grpc.name
+            key = Key.new path_grpc.kind, id_or_name
           end
           if key_grpc.partition_id
             key.project = key_grpc.partition_id.project_id

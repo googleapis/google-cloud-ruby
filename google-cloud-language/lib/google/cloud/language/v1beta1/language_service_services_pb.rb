@@ -17,7 +17,7 @@
 #
 
 require 'grpc'
-require 'google/cloud/language/v1beta1/language_service'
+require 'google/cloud/language/v1beta1/language_service_pb'
 
 module Google
   module Cloud

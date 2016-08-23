@@ -4,9 +4,9 @@ gemspec
 
 gem "rake"
 gem "google-api-client", "~> 0.9.11"
-gem "grpc", "= 1.0.0.pre1"
-gem "google-protobuf", "= 3.0.0.alpha.5.0.5.1"
-gem "googleapis-common-protos", "~> 1.1"
+gem "grpc", "~> 1.0"
+gem "google-protobuf", "~> 3.0"
+gem "googleapis-common-protos", "~> 1.2"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
     branch: "gcloud-jsondoc"

@@ -26,7 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/cloud/language/v1beta1/language_service_services"
+require "google/cloud/language/v1beta1/language_service_services_pb"
 
 module Google
   module Cloud
