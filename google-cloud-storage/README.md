@@ -1,13 +1,16 @@
 # google-cloud-storage
 
-Google Cloud Storage is an Internet service to store data in Google's
-cloud. It allows world-wide storage and retrieval of any amount of data
-and at any time, taking advantage of Google's own reliable and fast
-networking infrastructure to perform data operations in a cost effective
-manner.
+[Google Cloud Storage](https://cloud.google.com/storage/) ([docs](https://cloud.google.com/storage/docs/json_api/)) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
 - [google-cloud-storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-storage/google/cloud/storage)
+- [google-cloud-storage on RubyGems](https://rubygems.org/gems/google-cloud-storage)
 - [Google Cloud Storage documentation](https://cloud.google.com/storage/docs)
+
+## Quick Start
+
+```sh
+$ gem install google-cloud-storage
+```
 
 ## Authentication
 

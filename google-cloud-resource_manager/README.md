@@ -1,10 +1,7 @@
 # google-cloud-resource_manager
 
-The Resource Manager API provides methods that you can use to
-programmatically manage your projects in the Google Cloud Platform. You
-may be familiar with managing projects in the [Developers
-Console](https://developers.google.com/console/help/new/). With this API
-you can do the following:
+[Google Cloud Resource Manager](https://cloud.google.com/resource-manager/) ([docs](https://cloud.google.com/resource-manager/reference/rest/)) enables you to
+programmatically manage  container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. You may be familiar with managing projects in the [Developers Console](https://developers.google.com/console/help/new/). With this API you can do the following:
 
 * Get a list of all projects associated with an account
 * Create new projects
@@ -12,10 +9,10 @@ you can do the following:
 * Delete projects
 * Undelete, or recover, projects that you don't want to delete
 
-The Resource Manager API is a Beta release and is not covered by any SLA
-or deprecation policy and may be subject to backward-incompatible changes.
+The Resource Manager API is a Beta release and is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
 - [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager/google/cloud/resourcemanager)
+- [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
 ## Accessing the Service
@@ -27,6 +24,12 @@ methods such as {ResourceManager::Manager#projects} and
 {ResourceManager::Manager#project} are accessible to any user who enables
 the Resource Manager API in the [Developers
 Console](https://console.developers.google.com).
+
+## Quick Start
+
+```sh
+$ gem install google-cloud-resource_manager
+```
 
 ## Authentication
 
