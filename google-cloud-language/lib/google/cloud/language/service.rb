@@ -14,10 +14,9 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/grpc_backoff"
 require "google/cloud/language/credentials"
 require "google/cloud/language/version"
-# require "google/language/v1/language_services"
+require "google/cloud/language/v1beta1/language_service_api"
 
 module Google
   module Cloud
@@ -34,7 +33,7 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || "language.googleapis.com"
+          @host = host || V1beta1::LanguageServiceApi::SERVICE_ADDRESS
           @retries = retries
           @timeout = timeout
         end
@@ -47,13 +46,43 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= Google::Language::V1::Subscriber::Stub.new(
-            host, creds, timeout: timeout)
+          @service ||= V1beta1::LanguageServiceApi.new(
+            service_path: host,
+            chan_creds: creds,
+            timeout: timeout,
+            app_name: "google-cloud-language",
+            app_version: Google::Cloud::Language::VERSION)
+          # TODO: Get retries configured
         end
         attr_accessor :mocked_service
 
         def insecure?
           credentials == :this_channel_is_insecure
+        end
+
+        ##
+        # Returns API::BatchAnnotateImagesResponse
+        def annotate doc_grpc, text: false, entities: false, sentiment: false,
+                     encoding: nil
+          if text == false && entities == false && sentiment == false
+            text = true
+            entities = true
+            sentiment = true
+          end
+          features = V1beta1::AnnotateTextRequest::Features.new(
+            extract_syntax: text, extract_entities: entities,
+            extract_document_sentiment: sentiment)
+          encoding = verify_encoding! encoding
+          execute { service.annotate_text doc_grpc, features, encoding }
+        end
+
+        def entities doc_grpc, encoding: nil
+          encoding = verify_encoding! encoding
+          execute { service.analyze_entities doc_grpc, encoding }
+        end
+
+        def sentiment doc_grpc
+          execute { service.analyze_sentiment doc_grpc }
         end
 
         def inspect
@@ -62,12 +91,16 @@ module Google
 
         protected
 
+        def verify_encoding! encoding
+          # TODO: verify encoding against V1beta1::EncodingType
+          return :UTF8 if encoding.nil?
+          encoding
+        end
+
         def execute
-          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
-            yield
-          end
+          yield
         rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

@@ -12,21 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "helper"
 
-require "google/cloud/credentials"
-require "google/cloud/language/v1beta1/language_service_api"
-
-module Google
-  module Cloud
-    module Language
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Language.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = Google::Cloud::Language::V1beta1::LanguageServiceApi::ALL_SCOPES
-        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
-      end
-    end
+describe Google::Cloud::Language::Project, :mock_language do
+  it "knows the project identifier" do
+    language.must_be_kind_of Google::Cloud::Language::Project
+    language.project.must_equal project
   end
 end

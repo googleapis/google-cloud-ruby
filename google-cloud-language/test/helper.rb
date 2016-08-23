@@ -26,6 +26,13 @@ class MockLanguage < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:language) { Google::Cloud::Language::Project.new(Google::Cloud::Language::Service.new(project, credentials)) }
 
+  let(:text_content)   { "Hello from Chris and Mike!  If you find yourself in Utah, come say hi! We love ruby and writing code." }
+  let(:text_sentences) { ["Hello from Chris and Mike!", "If you find yourself in Utah, come say hi!", "We love ruby and writing code."] }
+  let(:text_json)      { File.read(File.dirname(__FILE__) + "/text.json") }
+  let(:html_content)   { "<html><head><title>Hello from Chris and Mike!</title></head><body><h1>If you find yourself in <strong>Utah</strong>, come say hi!</h1><p>We <em>love</em> ruby and writing code.</p></body></html>" }
+  let(:html_sentences) { ["Hello from Chris and Mike!", "If you find yourself in <strong>Utah</strong>, come say hi!", "We <em>love</em> ruby and writing code."] }
+  let(:html_json)      { File.read(File.dirname(__FILE__) + "/html.json") }
+
   # Register this spec type for when :language is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_language
