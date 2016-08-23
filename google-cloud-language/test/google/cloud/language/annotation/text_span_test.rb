@@ -17,12 +17,12 @@ require "helper"
 describe Google::Cloud::Language::Annotation::TextSpan do
   let(:text_span_hash) do
     {
-      "content": "Hello world!",
-      "beginOffset": -1
+      content: "Hello world!",
+      beginOffset: -1
     }
   end
   let(:text_span_json) { text_span_hash.to_json }
-  let(:text_span_grpc) { Google::Cloud::Language::V1beta1::TextSpan.decode_json text_span_json }
+  let(:text_span_grpc) { Google::Cloud::Language::V1beta1::TextSpan.decode_json  text_span_json }
   let(:text_span)      { Google::Cloud::Language::Annotation::TextSpan.from_grpc text_span_grpc }
 
   it "has attributes" do

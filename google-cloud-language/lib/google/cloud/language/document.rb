@@ -40,6 +40,10 @@ module Google
       #
       class Document
         ##
+        # @private The gRPC Service object.
+        attr_accessor :service
+
+        ##
         # @private Creates a new Document instance.
         def initialize
           @grpc = nil
@@ -76,6 +80,9 @@ module Google
           return :html if html?
         end
 
+        ##
+        # Update the Document's format. Accepted values are `:text` or `:html`.
+        #
         def format= new_format
           @grpc.type = :PLAIN_TEXT if new_format.to_s == "text"
           @grpc.type = :HTML       if new_format.to_s == "html"
@@ -118,11 +125,11 @@ module Google
         end
 
         ##
-        # The Document's language.
+        # Update the Document's language.  ISO and BCP-47 language codes are
+        # accepted.
         #
         def language= new_language
-          new_language = new_language.to_s unless new_language.nil?
-          @grpc.language = new_language
+          @grpc.language = new_language.to_s
         end
 
         ##
@@ -153,9 +160,9 @@ module Google
         def annotate text: false, entities: false, sentiment: false,
                      encoding: nil
           ensure_service!
-          grpc = @service.annotate to_grpc, text: text, entities: entities,
-                                            sentiment: sentiment,
-                                            encoding: encoding
+          grpc = service.annotate to_grpc, text: text, entities: entities,
+                                           sentiment: sentiment,
+                                           encoding: encoding
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
@@ -182,7 +189,7 @@ module Google
         #
         def entities encoding: nil
           ensure_service!
-          grpc = @service.entities to_grpc, encoding: encoding
+          grpc = service.entities to_grpc, encoding: encoding
           Annotation::Entities.from_grpc grpc
         end
 
@@ -206,7 +213,7 @@ module Google
         #
         def sentiment
           ensure_service!
-          grpc = @service.sentiment to_grpc
+          grpc = service.sentiment to_grpc
           Annotation::Sentiment.from_grpc grpc
         end
 
@@ -250,7 +257,7 @@ module Google
         ##
         # Raise an error unless an active language project object is available.
         def ensure_service!
-          fail "Must have active connection" unless @service
+          fail "Must have active connection" unless service
         end
       end
     end

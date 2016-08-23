@@ -31,7 +31,7 @@ describe Google::Cloud::Language::Annotation::Token do
     }
   end
   let(:token_json) { token_hash.to_json }
-  let(:token_grpc) { Google::Cloud::Language::V1beta1::Token.decode_json token_json }
+  let(:token_grpc) { Google::Cloud::Language::V1beta1::Token.decode_json  token_json }
   let(:token)      { Google::Cloud::Language::Annotation::Token.from_grpc token_grpc }
 
   it "has attributes" do

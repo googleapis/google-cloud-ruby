@@ -24,7 +24,7 @@ describe Google::Cloud::Language::Annotation::Entity do
     }
   end
   let(:entity_json) { entity_hash.to_json }
-  let(:entity_grpc) { Google::Cloud::Language::V1beta1::Entity.decode_json entity_json }
+  let(:entity_grpc) { Google::Cloud::Language::V1beta1::Entity.decode_json  entity_json }
   let(:entity)      { Google::Cloud::Language::Annotation::Entity.from_grpc entity_grpc }
 
   it "has attributes" do
