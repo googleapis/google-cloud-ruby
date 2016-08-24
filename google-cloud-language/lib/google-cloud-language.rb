@@ -38,8 +38,9 @@ module Google
     #   The default scope is:
     #
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
-    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Language::Project]
     #
@@ -60,10 +61,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   language = gcloud.language scope: platform_scope
     #
-    def language scope: nil, retries: nil, timeout: nil
-      Google::Cloud.language @project, @keyfile, scope: scope,
-                                                 retries: (retries || @retries),
-                                                 timeout: (timeout || @timeout)
+    def language scope: nil, timeout: nil, client_config: nil
+      Google::Cloud.language @project, @keyfile,
+                             scope: scope, timeout: (timeout || @timeout),
+                             client_config: client_config
     end
 
     ##
@@ -85,8 +86,9 @@ module Google
     #   The default scope is:
     #
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
-    # @param [Integer] retries  This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Language::Project]
     #
@@ -99,8 +101,8 @@ module Google
     #   document = language.document content
     #   annotation = document.annotate
     #
-    def self.language project = nil, keyfile = nil, scope: nil, retries: nil,
-                      timeout: nil
+    def self.language project = nil, keyfile = nil, scope: nil, timeout: nil,
+                      client_config: nil
       require "google/cloud/language"
       project ||= Google::Cloud::Language::Project.default_project
       if keyfile.nil?
@@ -111,7 +113,7 @@ module Google
       end
       Google::Cloud::Language::Project.new(
         Google::Cloud::Language::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+          project, credentials, timeout: timeout, client_config: client_config))
     end
   end
 end

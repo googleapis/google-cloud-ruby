@@ -18,12 +18,12 @@ describe Google::Cloud do
   describe "#language" do
     it "calls out to Google::Cloud.language" do
       gcloud = Google::Cloud.new
-      stubbed_language = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_language = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal nil
         keyfile.must_equal nil
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "language-project-object-empty"
       }
       Google::Cloud.stub :language, stubbed_language do
@@ -34,12 +34,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.language" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_language = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_language = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "language-project-object"
       }
       Google::Cloud.stub :language, stubbed_language do
@@ -50,16 +50,16 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.language" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_language = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_language = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
         timeout.must_equal 60
+        client_config.must_equal({ "gax" => "options" })
         "language-project-object-scoped"
       }
       Google::Cloud.stub :language, stubbed_language do
-        project = gcloud.language scope: "http://example.com/scope", retries: 5, timeout: 60
+        project = gcloud.language scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
         project.must_equal "language-project-object-scoped"
       end
     end
@@ -90,11 +90,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "language-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "language-credentials"
-        retries.must_equal nil
         timeout.must_equal nil
+        client_config.must_equal nil
         OpenStruct.new project: project
       }
 
