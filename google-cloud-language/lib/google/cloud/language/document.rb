@@ -21,11 +21,17 @@ module Google
       ##
       # # Document
       #
-      # Represents an document for the Language service.
+      # Represents a document for the Language service.
+      #
+      # Cloud Natural Language API supports UTF-8, UTF-16, and UTF-32 encodings.
+      # (Ruby uses UTF-8 natively, which is the default sent to the API, so
+      # unless you're working with text processed in different platform, you
+      # should not need to set the encoding type.)
+      #
+      # Be aware that only English, Spanish, and Japanese language content are
+      # supported, and sentiment analysis only supports English text.
       #
       # See {Project#document}.
-      #
-      # TODO: Overview
       #
       # @example
       #   require "google/cloud"
@@ -33,10 +39,15 @@ module Google
       #   gcloud = Google::Cloud.new
       #   language = gcloud.language
       #
-      #   doc = language.document "Hello world!"
+      #   content = "Darth Vader is the best villain in Star Wars."
+      #   document = language.document content
+      #   annotation = document.annotate
       #
-      #   annotation = language.annotate doc
-      #   annotation.thing #=> Some Result
+      #   annotation.entities.count #=> 2
+      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.magnitude #=> 0.8999999761581421
+      #   annotation.sentences.count #=> 1
+      #   annotation.tokens.count #=> 10
       #
       class Document
         ##
@@ -44,28 +55,28 @@ module Google
         attr_accessor :service
 
         ##
-        # @private Creates a new Document instance.
+        # @private Creates a new document instance.
         def initialize
           @grpc = nil
           @service = nil
         end
 
         ##
-        # @private Whether the Document has content.
+        # @private Whether the document has content.
         #
         def content?
           @grpc.source == :content
         end
 
         ##
-        # @private Whether the Document is a URL.
+        # @private Whether the document source is a Google Cloud Storage URI.
         #
         def url?
           @grpc.source == :gcs_content_uri
         end
 
         ##
-        # @private The source of the content
+        # @private The source of the document's content.
         #
         def source
           return @grpc.content if content?
@@ -73,7 +84,9 @@ module Google
         end
 
         ##
-        # The Document's format. `:text` or `:html`
+        # The document's format.
+        #
+        # @return [Symbol] `:text` or `:html`
         #
         def format
           return :text if text?
@@ -81,7 +94,14 @@ module Google
         end
 
         ##
-        # Update the Document's format. Accepted values are `:text` or `:html`.
+        # Sets the document's format.
+        #
+        # @param [Symbol, String] new_format Accepted values are `:text` or
+        #   `:html`.
+        #
+        # @example
+        #   document = language.document "<p>The Old Man and the Sea</p>"
+        #   document.format = :html
         #
         def format= new_format
           @grpc.type = :PLAIN_TEXT if new_format.to_s == "text"
@@ -90,61 +110,80 @@ module Google
         end
 
         ##
-        # Whether the Document is the TEXT format.
+        # Whether the document is the `TEXT` format.
+        #
+        # @return [Boolean]
         #
         def text?
           @grpc.type == :PLAIN_TEXT
         end
 
         ##
-        # Sets the Document to the TEXT format.
+        # Sets the document to the `TEXT` format.
         #
         def text!
           @grpc.type = :PLAIN_TEXT
         end
 
         ##
-        # Whether the Document is the HTML format.
+        # Whether the document is the `HTML` format.
+        #
+        # @return [Boolean]
         #
         def html?
           @grpc.type == :HTML
         end
 
         ##
-        # Sets the Document to the HTML format.
+        # Sets the document to the `HTML` format.
         #
         def html!
           @grpc.type = :HTML
         end
 
         ##
-        # The Document's language.
+        # The document's language. ISO and BCP-47 language codes are supported.
+        #
+        # @return [String]
         #
         def language
           @grpc.language
         end
 
         ##
-        # Update the Document's language.  ISO and BCP-47 language codes are
-        # accepted.
+        # Sets the document's language.
+        #
+        # @param [String, Symbol] new_language ISO and BCP-47 language codes are
+        #   accepted.
+        #
+        # @example
+        #   document = language.document "<p>El viejo y el mar</p>"
+        #   document.language = "es"
         #
         def language= new_language
           @grpc.language = new_language.to_s
         end
 
         ##
-        # TODO: Details
+        # Analyzes the document and returns sentiment, entity, and syntactic
+        # feature results, depending on the option flags. Calling `annotate`
+        # with no arguments will perform **all** analysis features. Each feature
+        # is priced separately. See [Pricing](https://cloud.google.com/natural-language/pricing)
+        # for details.
         #
-        # @param [Boolean] syntax Whether to perform the textual analysis.
-        #   Optional.
-        # @param [Boolean] entities Whether to perform the entitiy analysis.
-        #   Optional.
-        # @param [Boolean] sentiment Whether to perform the sentiment analysis.
-        #   Optional.
+        # @param [Boolean] sentiment Whether to perform sentiment analysis.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
+        # @param [Boolean] entities Whether to perform the entity analysis.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
+        # @param [Boolean] syntax Whether to perform syntactic analysis.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content analysis.
+        # @return [Annotation>] The results of the content analysis.
         #
         # @example
         #   require "google/cloud"
@@ -152,16 +191,37 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello world!"
-        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
         #   annotation = doc.annotate
-        #   annotation.thing #=> Some Result
         #
-        def annotate syntax: false, entities: false, sentiment: false,
+        #   annotation.sentiment.polarity #=> 1.0
+        #   annotation.sentiment.magnitude #=> 0.8999999761581421
+        #   annotation.entities.count #=> 2
+        #   annotation.sentences.count #=> 1
+        #   annotation.tokens.count #=> 10
+        #
+        # @example With feature flags:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = doc.annotate entities: true, text: true
+        #
+        #   annotation.sentiment #=> nil
+        #   annotation.entities.count #=> 2
+        #   annotation.sentences.count #=> 1
+        #   annotation.tokens.count #=> 10
+        #
+        def annotate sentiment: false, entities: false, syntax: false,
                      encoding: nil
           ensure_service!
-          grpc = service.annotate to_grpc, syntax: syntax, entities: entities,
-                                           sentiment: sentiment,
+          grpc = service.annotate to_grpc, sentiment: sentiment,
+                                           entities: entities,
+                                           syntax: syntax,
                                            encoding: encoding
           Annotation.from_grpc grpc
         end
@@ -169,7 +229,9 @@ module Google
         alias_method :detect, :annotate
 
         ##
-        # TODO: Details
+        # Syntactic analysis extracts linguistic information, breaking up the
+        # given text into a series of sentences and tokens (generally, word
+        # boundaries), providing further analysis on those tokens.
         #
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
@@ -192,7 +254,9 @@ module Google
         end
 
         ##
-        # TODO: Details
+        # Entity analysis inspects the given text for known entities (proper
+        # nouns such as public figures, landmarks, etc.) and returns information
+        # about those entities.
         #
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
@@ -205,10 +269,15 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello Chris and Mike!"
+        # content = "Darth Vader is the best villain in Star Wars."
+        # document = language.document content
+        # entities = document.entities # API call
         #
-        #   entities = doc.entities
-        #   entities.count #=> 2
+        # entities.count #=> 2
+        # entities.first.name #=> "Darth Vader"
+        # entities.first.type #=> :PERSON
+        # entities.first.name #=> "Star Wars"
+        # entities.first.type #=> :WORK_OF_ART
         #
         def entities encoding: nil
           ensure_service!
@@ -217,7 +286,10 @@ module Google
         end
 
         ##
-        # TODO: Details
+        # Sentiment analysis inspects the given text and identifies the
+        # prevailing emotional opinion within the text, especially to determine
+        # a writer's attitude as positive, negative, or neutral. Currently, only
+        # English is supported for sentiment analysis.
         #
         # @return [Annotation::Sentiment>] The results for the sentiment
         #   analysis.
@@ -228,11 +300,12 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello Chris and Mike!"
+        # content = "Darth Vader is the best villain in Star Wars."
+        # document = language.document content
+        # sentiment = document.sentiment # API call
         #
-        #   sentiment = doc.sentiment
-        #   sentiment.polarity #=> 1.0
-        #   sentiment.magnitude #=> 0.8999999761581421
+        # sentiment.polarity #=> 1.0
+        # sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment
           ensure_service!
