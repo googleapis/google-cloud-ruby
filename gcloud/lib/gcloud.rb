@@ -18,8 +18,30 @@ require "google/cloud"
 ##
 # # Gcloud
 #
+# #### The `gcloud` gem and `Gcloud` namespace are now deprecated.
+#
+# The current `gcloud` gem exists only to facilitate the timely transition of
+# legacy code from the deprecated `Gcloud` namespace to the new `Google::Cloud`
+# namespace. Please see the top-level project [README](../README.md) for current
+# information about using the `google-cloud` umbrella gem and the individual
+# service gems.
+#
 # This module exists to facilitate the transition of legacy code using the
 # `Gcloud` namespace to the current `Google::Cloud` namespace.
+#
+# ## BigQuery Example
+#
+# ```ruby
+# require "gcloud"
+#
+# gcloud = Gcloud.new
+# bigquery = gcloud.bigquery
+# dataset = bigquery.dataset "my-dataset"
+# table = dataset.table "my-table"
+# table.data.each do |row|
+#   puts row
+# end
+# ```
 #
 module Gcloud
 end

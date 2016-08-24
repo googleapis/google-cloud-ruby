@@ -1,24 +1,14 @@
 # Authentication
 
+In general, the gcloud-ruby library uses [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments, the Service Account credentials can be specified by providing the path to the [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for the account (or the JSON itself) in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
+
+General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
+
 ## Creating a Service Account
 
-The gcloud-ruby library aims to make authentication as simple as possible. Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. To create a service account:
+Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. For detailed instructions on how to create a service account, see the [Authentication guide](docs/google-cloud/v0.12.2/guides/authentication#onyourownserver).
 
-1. Visit the [Google Developers Console Projects page](https://console.developers.google.com/project).
-1. Create a new project or click on an existing project that you wish to use.
-1. In the project's **Dashboard**, under **Explore other services**, click **Enable APIs and get credentials like keys**.
-1. Turn on one or more of the following APIs by clicking on each API name and then clicking **Enable API** (click **More** if you do not see an API; also, you may need to enable billing in order to use some services):
-  * BigQuery API
-  * Cloud Datastore API
-  * Cloud DNS API
-  * Cloud Pub/Sub API
-  * Cloud Storage Service
-  * Cloud Storage JSON API
-1. In the left nav, click **Credentials**.
-1. Under **New credentials**, select **Service account key**.
-1. If you want to create a new service account, under **Service account**, select **New service account**. Otherwise, select an existing service account. Submit the form to download a JSON type key. Save the downloaded JSON key file to authorize your requests.
-
-You will use the **Project ID** and **JSON file** to connect to services with gcloud-ruby.
+You will use the **Project ID** and **JSON key file** to connect to most services with gcloud-ruby.
 
 ## Project and Credential Lookup
 
@@ -44,7 +34,7 @@ While running on Google Compute Engine no extra work is needed. The **Project ID
 
 ### Environment Variables
 
-The **Project ID** and **Credentials JSON** can be placed in environment variables instead of declaring them directly in code. Each service has its own environment variable, allowing for different service accounts to be used for different services. The path to the **Credentials JSON** file can be stored in the environment variable, or the **Credentials JSON** itself can be stored for environments such as Docker containers where writing files is difficult or not encouraged.
+The **Project ID** and **Credentials JSON** can be placed in environment variables instead of declaring them directly in code. Each service has its own environment variable, allowing for different service accounts to be used for different services. (See the READMEs for the individual service gems for details.) The path to the **Credentials JSON** file can be stored in the environment variable, or the **Credentials JSON** itself can be stored for environments such as Docker containers where writing files is difficult or not encouraged.
 
 Here are the environment variables that Datastore checks for project ID:
 

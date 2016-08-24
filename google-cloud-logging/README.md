@@ -1,21 +1,16 @@
 # google-cloud-logging
 
-The Stackdriver Logging service collects and stores logs from applications
-and services on the Google Cloud Platform, giving you fine-grained,
-programmatic control over your projects' logs. You can use the Stackdriver
-Logging API to:
-
-* [Read and filter log entries](#listing-log-entries)
-* [Export your log entries](#exporting-log-entries) to Cloud Storage,
-  BigQuery, or Cloud Pub/Sub
-* [Create logs-based metrics](#creating-logs-based-metrics) for use in
-  Cloud Monitoring
-* [Write log entries](#writing-log-entries)
-
-## Resources
+[Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
 
 - [google-cloud-logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-logging/google/cloud/logging)
+- [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
+
+## Quick Start
+
+```sh
+$ gem install google-cloud-logging
+```
 
 ## Authentication
 

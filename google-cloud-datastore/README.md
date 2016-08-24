@@ -1,14 +1,18 @@
 # google-cloud-datastore
 
-Google Cloud Datastore is a fully managed, schemaless database for storing
-non-relational data. You should feel at home if you are familiar with
-relational databases, but there are some key differences to be aware of to
-make the most of using Datastore.
+[Google Cloud Datastore](https://cloud.google.com/datastore/) ([docs](https://cloud.google.com/datastore/docs)) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
+
+Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
 
 - [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-datastore/google/cloud/datastore)
+- [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
-*Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.*
+## Quick Start
+
+```sh
+$ gem install google-cloud-datastore
+```
 
 ## Authentication
 

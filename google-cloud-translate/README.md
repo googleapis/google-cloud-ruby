@@ -1,20 +1,18 @@
 # google-cloud-translate
 
-[Google Translate API](https://cloud.google.com/translate/) provides a
-simple, programmatic interface for translating an arbitrary string into
-any supported language. It is highly responsive, so websites and
-applications can integrate with Translate API for fast, dynamic
-translation of source text. Language detection is also available in cases
-where the source language is unknown.
+[Google Translate](https://cloud.google.com/translate/) ([docs](https://cloud.google.com/translate/docs)) provides a simple, programmatic interface for translating an arbitrary string into any supported language. It is highly responsive, so websites and applications can integrate with Translate API for fast, dynamic translation of source text. Language detection is also available in cases where the source language is unknown.
 
-Translate API supports more than ninety different languages, from
-Afrikaans to Zulu. Used in combination, this enables translation between
-thousands of language pairs. Also, you can send in HTML and receive HTML
-with translated text back. You don't need to extract your source text or
-reassemble the translated content.
+Translate API supports more than ninety different languages, from Afrikaans to Zulu. Used in combination, this enables translation between thousands of language pairs. Also, you can send in HTML and receive HTML with translated text back. You don't need to extract your source text or reassemble the translated content.
 
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-translate/google/cloud/translate)
+- [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Translate documentation](https://cloud.google.com/translate/docs)
+
+## Quick Start
+
+```sh
+$ gem install google-cloud-translate
+```
 
 ## Authentication
 
