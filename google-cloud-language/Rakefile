@@ -36,6 +36,8 @@ task :acceptance, :project, :keyfile do |t, args|
   # always overwrite when running tests
   ENV["LANGUAGE_PROJECT"] = project
   ENV["LANGUAGE_KEYFILE"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
