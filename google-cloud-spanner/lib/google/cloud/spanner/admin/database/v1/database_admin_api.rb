@@ -214,8 +214,8 @@ module Google
                   @stub.method(:drop_database),
                   defaults["drop_database"]
                 )
-                @get_database_d_d_l = Google::Gax.create_api_call(
-                  @stub.method(:get_database_d_d_l),
+                @get_database_ddl = Google::Gax.create_api_call(
+                  @stub.method(:get_database_ddl),
                   defaults["get_database_d_d_l"]
                 )
               end
@@ -359,13 +359,13 @@ module Google
               #   retries, etc.
               # @return [Google::Spanner::Admin::Database::V1::GetDatabaseDDLResponse]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              def get_database_d_d_l \
+              def get_database_ddl \
                   database,
                   options: nil
                 req = Google::Spanner::Admin::Database::V1::GetDatabaseDDLRequest.new(
                   database: database
                 )
-                @get_database_d_d_l.call(req, options)
+                @get_database_ddl.call(req, options)
               end
             end
           end
