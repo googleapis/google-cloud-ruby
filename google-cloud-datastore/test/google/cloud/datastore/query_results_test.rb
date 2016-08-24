@@ -20,7 +20,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do |i|
-      Google::Datastore::V1beta3::EntityResult.new(
+      Google::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
@@ -28,8 +28,8 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
         cursor: "result-cursor-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1beta3::RunQueryResponse.new(
-      batch: Google::Datastore::V1beta3::QueryResultBatch.new(
+    Google::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         end_cursor: Google::Cloud::Core::GRPCUtils.decode_bytes(query_cursor)
       )
@@ -66,7 +66,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results not_finished" do
-    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     )
@@ -100,7 +100,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results more_after_limit" do
-    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     )
@@ -134,7 +134,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results more_after_cursor" do
-    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     )
@@ -168,7 +168,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results no_more" do
-    run_query_req = Google::Datastore::V1beta3::RunQueryRequest.new(
+    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
       project_id: project,
       query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     )

@@ -43,7 +43,7 @@ module Google
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #
         def initialize
-          @grpc = Google::Datastore::V1beta3::GqlQuery.new
+          @grpc = Google::Datastore::V1::GqlQuery.new
         end
 
         ##
@@ -120,7 +120,7 @@ module Google
         #
         def named_bindings
           bindings = Hash[@grpc.named_bindings.map do |name, gql_query_param|
-            if gql_query_param.cursor && !gql_query_param.cursor.empty?
+            if gql_query_param.parameter_type == :cursor
               [name, Cursor.from_grpc(gql_query_param.cursor)]
             else
               [name, Core::GRPCUtils.from_value(gql_query_param.value)]
@@ -149,11 +149,11 @@ module Google
           new_named_bindings.map do |name, value|
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.named_bindings[name.to_s] = \
-                Google::Datastore::V1beta3::GqlQueryParameter.new(
+                Google::Datastore::V1::GqlQueryParameter.new(
                   cursor: value.to_grpc)
             else
               @grpc.named_bindings[name.to_s] = \
-                Google::Datastore::V1beta3::GqlQueryParameter.new(
+                Google::Datastore::V1::GqlQueryParameter.new(
                   value: Core::GRPCUtils.to_value(value))
             end
           end
@@ -168,7 +168,7 @@ module Google
         #
         def positional_bindings
           bindings = @grpc.positional_bindings.map do |gql_query_param|
-            if gql_query_param.cursor && !gql_query_param.cursor.empty?
+            if gql_query_param.parameter_type == :cursor
               Cursor.from_grpc gql_query_param.cursor
             else
               Core::GRPCUtils.from_value gql_query_param.value
@@ -196,11 +196,11 @@ module Google
           new_positional_bindings.map do |value|
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.positional_bindings << \
-                Google::Datastore::V1beta3::GqlQueryParameter.new(
+                Google::Datastore::V1::GqlQueryParameter.new(
                   cursor: value.to_grpc)
             else
               @grpc.positional_bindings << \
-                Google::Datastore::V1beta3::GqlQueryParameter.new(
+                Google::Datastore::V1::GqlQueryParameter.new(
                   value: Core::GRPCUtils.to_value(value))
             end
           end

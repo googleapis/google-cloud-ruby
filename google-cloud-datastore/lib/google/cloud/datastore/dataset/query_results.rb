@@ -356,7 +356,7 @@ module Google
 
           ##
           # @private New Dataset::QueryResults from a
-          # Google::Dataset::V1beta3::RunQueryResponse object.
+          # Google::Dataset::V1::RunQueryResponse object.
           def self.from_grpc query_res, service, namespace, query
             r, c = Array(query_res.batch.entity_results).map do |result|
               [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]

@@ -161,8 +161,8 @@ describe Google::Cloud::Datastore::Key do
     grpc = key.to_grpc
     grpc.path.count.must_equal 1
     grpc.path.last.kind.must_equal "ThisThing"
+    grpc.path.last.id_type.must_equal :id
     grpc.path.last.id.must_equal 1234
-    grpc.path.last.name.must_equal ""
     grpc.partition_id.must_be :nil?
 
     key = Google::Cloud::Datastore::Key.new "ThisThing", "charlie"
@@ -172,21 +172,21 @@ describe Google::Cloud::Datastore::Key do
     grpc = key.to_grpc
     grpc.path.count.must_equal 2
     grpc.path.first.kind.must_equal "ThatThing"
-    grpc.path.first.id.must_equal 0
+    grpc.path.first.id_type.must_equal :name
     grpc.path.first.name.must_equal "henry"
     grpc.path.last.kind.must_equal "ThisThing"
-    grpc.path.last.id.must_equal 0
+    grpc.path.last.id_type.must_equal :name
     grpc.path.last.name.must_equal "charlie"
     grpc.partition_id.project_id.must_equal "custom-ds"
     grpc.partition_id.namespace_id.must_equal "custom-ns"
   end
 
   it "can be created with a GRPC object" do
-    grpc = Google::Datastore::V1beta3::Key.new
-    grpc.path << Google::Datastore::V1beta3::Key::PathElement.new(
+    grpc = Google::Datastore::V1::Key.new
+    grpc.path << Google::Datastore::V1::Key::PathElement.new(
       kind: "AnotherThing", id: 56789
     )
-    grpc.partition_id = Google::Datastore::V1beta3::PartitionId.new(
+    grpc.partition_id = Google::Datastore::V1::PartitionId.new(
       project_id: "custom-ds", namespace_id: "custom-ns"
     )
     key = Google::Cloud::Datastore::Key.from_grpc grpc

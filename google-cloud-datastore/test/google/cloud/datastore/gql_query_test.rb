@@ -24,7 +24,7 @@ describe Google::Cloud::Datastore::GqlQuery do
     gql.named_bindings.must_equal({"completed" => true})
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
+    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
 
     grpc.query_string.must_equal gql.query_string
     grpc.named_bindings.count.must_equal 1
@@ -46,7 +46,7 @@ describe Google::Cloud::Datastore::GqlQuery do
     gql.positional_bindings.must_equal [true]
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
+    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
 
     grpc.query_string.must_equal gql.query_string
     grpc.positional_bindings.count.must_equal 1
@@ -70,7 +70,7 @@ describe Google::Cloud::Datastore::GqlQuery do
     gql.allow_literals.must_equal true
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
+    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
 
     grpc.query_string.must_equal gql.query_string
     grpc.allow_literals.must_equal true
@@ -82,7 +82,7 @@ describe Google::Cloud::Datastore::GqlQuery do
     gql.named_bindings = {startCursor: Google::Cloud::Datastore::Cursor.new("c3VwZXJhd2Vzb21lIQ==")}
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
+    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
 
     grpc.query_string.must_equal gql.query_string
     grpc.named_bindings.count.must_equal 1
@@ -95,7 +95,7 @@ describe Google::Cloud::Datastore::GqlQuery do
     gql.named_bindings = {startCursor: "c3VwZXJhd2Vzb21lIQ=="}
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1beta3::GqlQuery
+    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
 
     grpc.query_string.must_equal gql.query_string
     grpc.named_bindings.count.must_equal 1

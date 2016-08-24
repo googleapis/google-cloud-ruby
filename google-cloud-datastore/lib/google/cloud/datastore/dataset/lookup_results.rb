@@ -174,7 +174,7 @@ module Google
 
           ##
           # @private New Dataset::LookupResults from a
-          # Google::Dataset::V1beta3::LookupResponse object.
+          # Google::Dataset::V1::LookupResponse object.
           def self.from_grpc lookup_res, service, consistency = nil, tx = nil
             entities = to_gcloud_entities lookup_res.found
             deferred = to_gcloud_keys lookup_res.deferred
