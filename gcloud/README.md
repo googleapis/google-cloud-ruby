@@ -1,6 +1,43 @@
 # gcloud
 
-This library exists to facilitate the transition of legacy code using the `Gcloud` namespace to the current `Google::Cloud` namespace. Please see the top-level project [README](../README.md) for general information about the google-cloud gems.
+#### The `gcloud` gem and `Gcloud` namespace are now deprecated.
+
+The current `gcloud` gem exists only to facilitate the timely transition of legacy code from the deprecated `Gcloud` namespace to the new `Google::Cloud` namespace. Please see the top-level project [README](../README.md) for current information about using the `google-cloud` umbrella gem and the individual service gems.
+
+- [gcloud API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/gcloud)
+- [gcloud on RubyGems](https://rubygems.org/gems/gcloud)
+
+## Quick Start
+
+```sh
+$ gem install gcloud
+```
+
+## Authentication
+
+Unlike other Cloud Platform services, which authenticate using a project
+ID and OAuth 2.0 credentials, Translate API requires a public API access
+key. (This may change in future releases of Translate API.) Follow the
+general instructions at [Identifying your application to
+Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
+specific instructions for [Server
+keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+
+Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-translate/guides/authentication).
+
+## Example
+
+```ruby
+require "gcloud"
+
+gcloud = Gcloud.new
+bigquery = gcloud.bigquery
+dataset = bigquery.dataset "my-dataset"
+table = dataset.table "my-table"
+table.data.each do |row|
+  puts row
+end
+```
 
 ## Supported Ruby Versions
 
