@@ -38,7 +38,11 @@ module Google
           @timeout = timeout
         end
 
-        def creds
+        def channel
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
           return credentials if insecure?
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
@@ -48,7 +52,7 @@ module Google
           return mocked_service if mocked_service
           @service ||= V1beta1::LanguageServiceApi.new(
             service_path: host,
-            chan_creds: creds,
+            channel: channel,
             timeout: timeout,
             app_name: "google-cloud-language",
             app_version: Google::Cloud::Language::VERSION)
