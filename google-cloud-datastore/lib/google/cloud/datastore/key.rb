@@ -270,7 +270,7 @@ module Google
           path_grpc = key_grpc.path.pop
           if path_grpc
             id_or_name =
-              (path_grpc.id && path_grpc.id != 0)? path_grpc.id : path_grpc.name
+              (path_grpc.id_type == :id ? path_grpc.id : path_grpc.name)
             key = Key.new path_grpc.kind, id_or_name
           end
           if key_grpc.partition_id

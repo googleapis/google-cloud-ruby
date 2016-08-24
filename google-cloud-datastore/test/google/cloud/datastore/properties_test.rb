@@ -37,15 +37,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :string_value
     value.string_value.must_equal raw
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes a string" do
@@ -60,16 +51,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value nil
     value.value_type.must_equal :null_value
     value.null_value.must_equal :NULL_VALUE
-    value.boolean_value.must_equal false
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes NULL" do
@@ -83,15 +64,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value true
     value.value_type.must_equal :boolean_value
     value.boolean_value.must_equal true
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes true" do
@@ -105,15 +77,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value false
     value.value_type.must_equal :boolean_value
     value.boolean_value.must_equal false
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes false" do
@@ -128,15 +91,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :integer_value
     value.integer_value.must_equal raw
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes integer" do
@@ -152,15 +106,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :double_value
     value.double_value.must_equal raw
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes float" do
@@ -176,15 +121,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value key
     value.value_type.must_equal :key_value
     value.key_value.must_equal key.to_grpc
-    value.timestamp_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes Key" do
@@ -204,15 +140,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value entity
     value.value_type.must_equal :entity_value
     value.entity_value.must_equal entity.to_grpc
-    value.key_value.must_be :nil?
-    value.timestamp_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes Entity" do
@@ -233,16 +160,11 @@ describe Google::Cloud::Datastore::Properties do
     array = ["string", 123, true]
     value = Google::Cloud::Core::GRPCUtils.to_value array
     value.value_type.must_equal :array_value
-    value.array_value.wont_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.timestamp_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
+    value.array_value.must_equal Google::Datastore::V1::ArrayValue.new(
+      values: [Google::Datastore::V1::Value.new(string_value: "string"),
+               Google::Datastore::V1::Value.new(integer_value: 123),
+               Google::Datastore::V1::Value.new(boolean_value: true)]
+    )
   end
 
   it "decodes Array" do
@@ -264,30 +186,13 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value time_obj
     value.value_type.must_equal :timestamp_value
     value.timestamp_value.must_equal time_grpc
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "encodes Date" do
     date_obj = time_obj.to_date
     value = Google::Cloud::Core::GRPCUtils.to_value date_obj
+    value.value_type.must_equal :timestamp_value
     value.timestamp_value.must_equal Google::Protobuf::Timestamp.new(seconds: date_obj.to_time.to_i)
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "encodes DateTime" do
@@ -295,15 +200,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value datetime_obj
     value.value_type.must_equal :timestamp_value
     value.timestamp_value.must_equal time_grpc
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes timestamp" do
@@ -318,15 +214,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.geo_point_value.must_be :nil?
   end
 
   it "encodes StringIO as blob" do
@@ -334,15 +221,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.geo_point_value.must_be :nil?
   end
 
   it "encodes Temfile as blob" do
@@ -352,15 +230,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
-    value.timestamp_value.must_be :nil?
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.geo_point_value.must_be :nil?
   end
 
   it "decodes blob to StringIO" do
@@ -376,15 +245,6 @@ describe Google::Cloud::Datastore::Properties do
     value = Google::Cloud::Core::GRPCUtils.to_value latlng_obj
     value.value_type.must_equal :geo_point_value
     value.geo_point_value.must_equal Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462)
-    value.key_value.must_be :nil?
-    value.entity_value.must_be :nil?
-    value.timestamp_value.must_be :nil?
-    value.boolean_value.must_equal false
-    value.double_value.must_equal 0.0
-    value.integer_value.must_equal 0
-    value.string_value.must_equal ""
-    value.array_value.must_be :nil?
-    value.blob_value.must_equal ""
   end
 
   it "decodes geo_point" do

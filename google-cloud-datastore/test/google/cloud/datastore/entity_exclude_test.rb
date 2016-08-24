@@ -50,8 +50,8 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes do
 
     grpc = entity.to_grpc
 
-    assert grpc.properties["name"].exclude_from_indexes.must_equal false
-    assert grpc.properties["email"].exclude_from_indexes.must_equal false
+    grpc.properties["name"].exclude_from_indexes.must_equal false
+    grpc.properties["email"].exclude_from_indexes.must_equal false
   end
 
   it "excludes when setting a boolean" do

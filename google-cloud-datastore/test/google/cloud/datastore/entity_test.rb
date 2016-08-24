@@ -37,7 +37,7 @@ describe Google::Cloud::Datastore::Entity do
     # Key values
     grpc.key.path.count.must_equal 1
     grpc.key.path.last.kind.must_equal "User"
-    grpc.key.path.last.id.must_equal 0
+    grpc.key.path.last.id_type.must_equal :name
     grpc.key.path.last.name.must_equal "username"
 
     # Property values
@@ -116,9 +116,11 @@ describe Google::Cloud::Datastore::Entity do
 
     key_value = key_property.key_value
     key_value.wont_be :nil?
-    key_value.path.first.kind.must_equal key1.kind
-    key_value.path.first.name.must_equal (key1.name || "")
-    key_value.path.first.id.must_equal   key1.id
+    key_value.must_equal                    key1.to_grpc
+    key_value.path.first.kind.must_equal    key1.to_grpc.path.last.kind
+    key_value.path.first.id_type.must_equal key1.to_grpc.path.last.id_type
+    key_value.path.first.name.must_equal    key1.to_grpc.path.last.name
+    key_value.path.first.id.must_equal      key1.to_grpc.path.last.id
   end
 
   it "raises when setting an unsupported property type" do

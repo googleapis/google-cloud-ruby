@@ -161,8 +161,8 @@ describe Google::Cloud::Datastore::Key do
     grpc = key.to_grpc
     grpc.path.count.must_equal 1
     grpc.path.last.kind.must_equal "ThisThing"
+    grpc.path.last.id_type.must_equal :id
     grpc.path.last.id.must_equal 1234
-    grpc.path.last.name.must_equal ""
     grpc.partition_id.must_be :nil?
 
     key = Google::Cloud::Datastore::Key.new "ThisThing", "charlie"
@@ -172,10 +172,10 @@ describe Google::Cloud::Datastore::Key do
     grpc = key.to_grpc
     grpc.path.count.must_equal 2
     grpc.path.first.kind.must_equal "ThatThing"
-    grpc.path.first.id.must_equal 0
+    grpc.path.first.id_type.must_equal :name
     grpc.path.first.name.must_equal "henry"
     grpc.path.last.kind.must_equal "ThisThing"
-    grpc.path.last.id.must_equal 0
+    grpc.path.last.id_type.must_equal :name
     grpc.path.last.name.must_equal "charlie"
     grpc.partition_id.project_id.must_equal "custom-ds"
     grpc.partition_id.namespace_id.must_equal "custom-ns"

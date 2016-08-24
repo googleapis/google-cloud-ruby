@@ -37,37 +37,37 @@ describe Google::Cloud::Datastore::Query do
     query.where "completed", "=", true
 
     grpc = query.to_grpc
-    refute_nil grpc.filter
-    assert_nil grpc.filter.property_filter
-    refute_nil grpc.filter.composite_filter
-    assert_equal :AND, grpc.filter.composite_filter.op
-    assert_equal 1, grpc.filter.composite_filter.filters.count
+    grpc.filter.wont_be :nil?
+    grpc.filter.filter_type.must_equal :composite_filter
+    grpc.filter.property_filter.must_be :nil?
+    grpc.filter.composite_filter.wont_be :nil?
+    grpc.filter.composite_filter.op.must_equal :AND
+    grpc.filter.composite_filter.filters.count.must_equal 1
 
     new_filter = grpc.filter.composite_filter.filters.first
-    assert_equal "completed", new_filter.property_filter.property.name
-    assert_equal :EQUAL, new_filter.property_filter.op
-    assert_equal true, Google::Cloud::Core::GRPCUtils.from_value(new_filter.property_filter.value)
+    new_filter.property_filter.property.name.must_equal "completed"
+    new_filter.property_filter.op.must_equal :EQUAL
+    Google::Cloud::Core::GRPCUtils.from_value(new_filter.property_filter.value).must_equal true
 
     # Add a second filter and generate new grpcbuf
     # Use the filter alias to add the second filter
     query.filter "due", :>, Time.new(2014, 1, 1, 0, 0, 0, 0)
     grpc = query.to_grpc
-    assert_equal 2, grpc.filter.composite_filter.filters.count
+    grpc.filter.composite_filter.filters.count.must_equal 2
 
     first_filter = grpc.filter.composite_filter.filters.first
-    refute_nil first_filter.property_filter
-    assert_nil first_filter.composite_filter
-    assert_equal "completed", first_filter.property_filter.property.name
-    assert_equal :EQUAL, first_filter.property_filter.op
-    assert_equal true, Google::Cloud::Core::GRPCUtils.from_value(first_filter.property_filter.value)
+    first_filter.property_filter.wont_be :nil?
+    first_filter.composite_filter.must_be :nil?
+    first_filter.property_filter.property.name.must_equal "completed"
+    first_filter.property_filter.op.must_equal :EQUAL
+    Google::Cloud::Core::GRPCUtils.from_value(first_filter.property_filter.value).must_equal true
 
     second_filter = grpc.filter.composite_filter.filters.last
-    refute_nil second_filter.property_filter
-    assert_nil second_filter.composite_filter
-    assert_equal "due", second_filter.property_filter.property.name
-    assert_equal :GREATER_THAN, second_filter.property_filter.op
-    assert_equal Time.new(2014, 1, 1, 0, 0, 0, 0),
-                 Google::Cloud::Core::GRPCUtils.from_value(second_filter.property_filter.value)
+    second_filter.property_filter.wont_be :nil?
+    second_filter.composite_filter.must_be :nil?
+    second_filter.property_filter.property.name.must_equal "due"
+    second_filter.property_filter.op.must_equal :GREATER_THAN
+    Google::Cloud::Core::GRPCUtils.from_value(second_filter.property_filter.value).must_equal Time.new(2014, 1, 1, 0, 0, 0, 0)
   end
 
   it "can order results" do
@@ -205,11 +205,11 @@ describe Google::Cloud::Datastore::Query do
 
     grpc = query.to_grpc
 
-    assert_equal 1, grpc.filter.composite_filter.filters.count
+    grpc.filter.composite_filter.filters.count.must_equal 1
 
     ancestor_filter = grpc.filter.composite_filter.filters.first
-    assert_equal "__key__", ancestor_filter.property_filter.property.name
-    assert_equal :HAS_ANCESTOR, ancestor_filter.property_filter.op
+    ancestor_filter.property_filter.property.name.must_equal "__key__"
+    ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
     key = Google::Cloud::Core::GRPCUtils.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
@@ -224,11 +224,11 @@ describe Google::Cloud::Datastore::Query do
 
     grpc = query.to_grpc
 
-    assert_equal 1, grpc.filter.composite_filter.filters.count
+    grpc.filter.composite_filter.filters.count.must_equal 1
 
     ancestor_filter = grpc.filter.composite_filter.filters.first
-    assert_equal "__key__", ancestor_filter.property_filter.property.name
-    assert_equal :HAS_ANCESTOR, ancestor_filter.property_filter.op
+    ancestor_filter.property_filter.property.name.must_equal "__key__"
+    ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
     key = Google::Cloud::Core::GRPCUtils.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
