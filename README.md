@@ -205,8 +205,8 @@ logging.write_entries entry
 ### Pub/Sub
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
-- [[google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-pubsub)
-- [[google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
+- [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-pubsub)
+- [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
 #### Quick Start
