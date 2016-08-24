@@ -67,7 +67,7 @@ module Google
         ##
         # Returns API::BatchAnnotateImagesResponse
         def annotate doc_grpc, text: false, entities: false, sentiment: false,
-                     encoding: nil
+                     encoding: nil, call_options: nil
           if text == false && entities == false && sentiment == false
             text = true
             entities = true
@@ -77,16 +77,21 @@ module Google
             extract_syntax: text, extract_entities: entities,
             extract_document_sentiment: sentiment)
           encoding = verify_encoding! encoding
-          execute { service.annotate_text doc_grpc, features, encoding }
+          execute do
+            service.annotate_text doc_grpc, features, encoding,
+                                  options: call_options
+          end
         end
 
-        def entities doc_grpc, encoding: nil
+        def entities doc_grpc, encoding: nil, call_options: nil
           encoding = verify_encoding! encoding
-          execute { service.analyze_entities doc_grpc, encoding }
+          execute do
+            service.analyze_entities doc_grpc, encoding, options: call_options
+          end
         end
 
-        def sentiment doc_grpc
-          execute { service.analyze_sentiment doc_grpc }
+        def sentiment doc_grpc, call_options: nil
+          execute { service.analyze_sentiment doc_grpc, options: call_options }
         end
 
         def inspect

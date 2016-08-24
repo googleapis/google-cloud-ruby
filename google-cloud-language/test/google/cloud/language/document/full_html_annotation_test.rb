@@ -25,7 +25,7 @@ describe Google::Cloud::Language::Document, :full_html_annotation, :mock_languag
     grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
 
     mock = Minitest::Mock.new
-    mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8]
+    mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: nil]
 
     doc.service.mocked_service = mock
     annotation = doc.annotate
@@ -42,7 +42,7 @@ describe Google::Cloud::Language::Document, :full_html_annotation, :mock_languag
     grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
 
     mock = Minitest::Mock.new
-    mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8]
+    mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: nil]
 
     doc.service.mocked_service = mock
     doc.language = "en"
