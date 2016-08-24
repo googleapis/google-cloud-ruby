@@ -2,6 +2,7 @@
 --title=Google Cloud Pub/Sub
 --exclude lib/google/pubsub
 --exclude lib/google/iam
+--exclude lib/google/cloud/pubsub/v1
 --markup markdown
 
 ./lib/**/*.rb
