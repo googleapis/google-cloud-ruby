@@ -128,8 +128,8 @@ module Google
         # @private Default project.
         def self.default_project
           ENV["DNS_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::Core::GCE.project_id
         end
 

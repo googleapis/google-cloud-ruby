@@ -22,9 +22,9 @@ module Google
       # @private Represents the Oauth2 signing logic for DNS.
       class Credentials < Google::Cloud::Credentials
         SCOPE = ["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        PATH_ENV_VARS = %w(DNS_KEYFILE GCLOUD_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(DNS_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
+        PATH_ENV_VARS = %w(DNS_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(DNS_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON)
       end
     end
   end

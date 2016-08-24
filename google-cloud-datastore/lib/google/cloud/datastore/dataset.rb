@@ -87,8 +87,8 @@ module Google
         def self.default_project
           ENV["DATASTORE_DATASET"] ||
             ENV["DATASTORE_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::Core::GCE.project_id
         end
 

@@ -28,10 +28,10 @@ module Google
       # @see https://developers.google.com/accounts/docs/application-default-credentials
       class Credentials < Google::Cloud::Credentials
         SCOPE = ["https://www.googleapis.com/auth/datastore"]
-        PATH_ENV_VARS = %w(DATASTORE_KEYFILE GCLOUD_KEYFILE
-                           GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GCLOUD_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON)
+        PATH_ENV_VARS = %w(DATASTORE_KEYFILE GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(DATASTORE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON)
       end
     end
   end
