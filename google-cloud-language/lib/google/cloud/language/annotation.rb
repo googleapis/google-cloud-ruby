@@ -70,6 +70,19 @@ module Google
           @grpc.language
         end
 
+        # @private
+        def to_s
+          tmplt = "(sentences: %i, tokens: %i, entities: %i," \
+                  " sentiment: %s, language: %s)"
+          format tmplt, sentences.count, tokens.count, entities.count,
+                 !sentiment.nil?, language.inspect
+        end
+
+        # @private
+        def inspect
+          "#<#{self.class.name} #{self}>"
+        end
+
         ##
         # @private New Annotation from a V1beta1::AnnotateTextResponse object.
         def self.from_grpc grpc

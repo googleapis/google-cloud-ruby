@@ -217,6 +217,11 @@ module Google
           Annotation::Sentiment.from_grpc grpc
         end
 
+        # @private
+        def inspect
+          "#<#{self.class.name} (#{(content? ? "\"#{source[0,16]}...\"" : source)}, format: #{format.inspect}, language: #{language.inspect})>"
+        end
+
         ##
         # @private New gRPC object.
         def to_grpc
