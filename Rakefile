@@ -275,10 +275,10 @@ namespace :jsondoc do
         puts `git config --global user.email "travis@travis-ci.org"`
         puts `git config --global user.name "travis-ci"`
         puts `git commit -m "Update documentation for #{git_ref}"`
-        puts `git push #{git_repo} gh-pages:gh-pages`
+        puts `git push -q #{git_repo} gh-pages:gh-pages`
       else
         puts `git commit -m "Update documentation for #{git_ref}"`
-        puts `git push origin gh-pages`
+        puts `git push -q origin gh-pages`
       end
     end
   end
