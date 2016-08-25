@@ -66,15 +66,15 @@ module Google
 
         ##
         # Returns API::BatchAnnotateImagesResponse
-        def annotate doc_grpc, text: false, entities: false, sentiment: false,
+        def annotate doc_grpc, syntax: false, entities: false, sentiment: false,
                      encoding: nil
-          if text == false && entities == false && sentiment == false
-            text = true
+          if syntax == false && entities == false && sentiment == false
+            syntax = true
             entities = true
             sentiment = true
           end
           features = V1beta1::AnnotateTextRequest::Features.new(
-            extract_syntax: text, extract_entities: entities,
+            extract_syntax: syntax, extract_entities: entities,
             extract_document_sentiment: sentiment)
           encoding = verify_encoding! encoding
           execute { service.annotate_text doc_grpc, features, encoding }

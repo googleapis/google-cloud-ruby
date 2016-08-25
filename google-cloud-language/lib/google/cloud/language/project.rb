@@ -142,7 +142,7 @@ module Google
         #   content to annotate. This can be an {Document} instance, or any
         #   other type that converts to an {Document}. See {#document} for
         #   details.
-        # @param [Boolean] text Whether to perform the textual analysis.
+        # @param [Boolean] syntax Whether to perform the textual analysis.
         #   Optional.
         # @param [Boolean] entities Whether to perform the entitiy analysis.
         #   Optional.
@@ -169,11 +169,12 @@ module Google
         #   annotation = language.annotate doc
         #   annotation.thing #=> Some Result
         #
-        def annotate content, text: false, entities: false, sentiment: false,
+        def annotate content, syntax: false, entities: false, sentiment: false,
                      format: nil, language: nil, encoding: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.annotate doc.to_grpc, text: text, entities: entities,
+          grpc = service.annotate doc.to_grpc, syntax: syntax,
+                                               entities: entities,
                                                sentiment: sentiment,
                                                encoding: encoding
           Annotation.from_grpc grpc

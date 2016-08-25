@@ -135,7 +135,7 @@ module Google
         ##
         # TODO: Details
         #
-        # @param [Boolean] text Whether to perform the textual analysis.
+        # @param [Boolean] syntax Whether to perform the textual analysis.
         #   Optional.
         # @param [Boolean] entities Whether to perform the entitiy analysis.
         #   Optional.
@@ -157,10 +157,10 @@ module Google
         #   annotation = doc.annotate
         #   annotation.thing #=> Some Result
         #
-        def annotate text: false, entities: false, sentiment: false,
+        def annotate syntax: false, entities: false, sentiment: false,
                      encoding: nil
           ensure_service!
-          grpc = service.annotate to_grpc, text: text, entities: entities,
+          grpc = service.annotate to_grpc, syntax: syntax, entities: entities,
                                            sentiment: sentiment,
                                            encoding: encoding
           Annotation.from_grpc grpc
