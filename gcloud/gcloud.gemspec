@@ -27,4 +27,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rubocop", "<= 0.35.1"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
+
+  gem.post_install_message = "gcloud is now google-cloud, please change the gem name in your dependencies"
 end
