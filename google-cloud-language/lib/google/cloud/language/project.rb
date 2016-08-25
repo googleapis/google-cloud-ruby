@@ -155,6 +155,8 @@ module Google
         #   BCP-47 language codes are accepted. Optional.
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation>] The results for the content analysis.
         #
@@ -170,12 +172,14 @@ module Google
         #   annotation.thing #=> Some Result
         #
         def annotate content, text: false, entities: false, sentiment: false,
-                     format: nil, language: nil, encoding: nil
+                     format: nil, language: nil, encoding: nil,
+                     call_options: nil
           ensure_service!
           doc = document content, language: language, format: format
           grpc = service.annotate doc.to_grpc, text: text, entities: entities,
                                                sentiment: sentiment,
-                                               encoding: encoding
+                                               encoding: encoding,
+                                               call_options: call_options
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
@@ -194,6 +198,8 @@ module Google
         #   BCP-47 language codes are accepted. Optional.
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation::Entities>] The results for the entities analysis.
         #
@@ -208,10 +214,12 @@ module Google
         #   entities = language.entities doc
         #   entities.count #=> 2
         #
-        def entities content, format: :text, language: nil, encoding: nil
+        def entities content, format: :text, language: nil, encoding: nil,
+                     call_options: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.entities doc.to_grpc, encoding: encoding
+          grpc = service.entities doc.to_grpc, encoding: encoding,
+                                               call_options: call_options
           Annotation::Entities.from_grpc grpc
         end
 
@@ -226,6 +234,8 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation::Sentiment>] The results for the sentiment
         #   analysis.
@@ -242,10 +252,10 @@ module Google
         #   sentiment.polarity #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #
-        def sentiment content, format: :text, language: nil
+        def sentiment content, format: :text, language: nil, call_options: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.sentiment doc.to_grpc
+          grpc = service.sentiment doc.to_grpc, call_options: call_options
           Annotation::Sentiment.from_grpc grpc
         end
 

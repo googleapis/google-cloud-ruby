@@ -143,6 +143,8 @@ module Google
         #   Optional.
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation>] The results for the content analysis.
         #
@@ -158,11 +160,12 @@ module Google
         #   annotation.thing #=> Some Result
         #
         def annotate text: false, entities: false, sentiment: false,
-                     encoding: nil
+                     encoding: nil, call_options: nil
           ensure_service!
           grpc = service.annotate to_grpc, text: text, entities: entities,
                                            sentiment: sentiment,
-                                           encoding: encoding
+                                           encoding: encoding,
+                                           call_options: call_options
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
@@ -173,6 +176,8 @@ module Google
         #
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation::Entities>] The results for the entities analysis.
         #
@@ -187,14 +192,18 @@ module Google
         #   entities = doc.entities
         #   entities.count #=> 2
         #
-        def entities encoding: nil
+        def entities encoding: nil, call_options: nil
           ensure_service!
-          grpc = service.entities to_grpc, encoding: encoding
+          grpc = service.entities to_grpc, encoding: encoding,
+                                           call_options: call_options
           Annotation::Entities.from_grpc grpc
         end
 
         ##
         # TODO: Details
+        #
+        # @param [Hash] call_options A hash of values to override the default
+        #   behavior of the API call. See Google::Gax::CallOptions. Optional.
         #
         # @return [Annotation::Sentiment>] The results for the sentiment
         #   analysis.
@@ -211,9 +220,9 @@ module Google
         #   sentiment.polarity #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #
-        def sentiment
+        def sentiment call_options: nil
           ensure_service!
-          grpc = service.sentiment to_grpc
+          grpc = service.sentiment to_grpc, call_options: call_options
           Annotation::Sentiment.from_grpc grpc
         end
 
