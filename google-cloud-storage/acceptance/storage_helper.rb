@@ -71,7 +71,7 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$bucket_names = 4.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
+$bucket_names = 4.times.map { "google-cloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_storage_buckets
   puts "Cleaning up storage buckets after tests."

@@ -65,7 +65,7 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from gcloud-ruby .yardoc"
+desc "Generates JSON output from google-cloud-ruby .yardoc"
 task :jsondoc => :yard do
 
   require "rubygems"

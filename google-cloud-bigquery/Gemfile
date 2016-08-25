@@ -6,5 +6,5 @@ gem "rake"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
+    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"

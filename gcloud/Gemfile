@@ -16,5 +16,5 @@ gem "google-cloud-translate", path: "../google-cloud-translate"
 gem "google-cloud-vision", path: "../google-cloud-vision"
 
 gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/gcloud-ruby.git",
+    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"

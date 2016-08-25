@@ -1,18 +1,18 @@
 # Authentication
 
-In general, the gcloud-ruby library uses [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments, the Service Account credentials can be specified by providing the path to the [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for the account (or the JSON itself) in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
+In general, the google-cloud-ruby library uses [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments, the Service Account credentials can be specified by providing the path to the [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for the account (or the JSON itself) in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
 
-General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
+General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
 
 ## Creating a Service Account
 
 Google Cloud requires a **Project ID** and **Service Account Credentials** to connect to the APIs. For detailed instructions on how to create a service account, see the [Authentication guide](docs/google-cloud/v0.12.2/guides/authentication#onyourownserver).
 
-You will use the **Project ID** and **JSON key file** to connect to most services with gcloud-ruby.
+You will use the **Project ID** and **JSON key file** to connect to most services with google-cloud-ruby.
 
 ## Project and Credential Lookup
 
-The gcloud-ruby library aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
+The google-cloud-ruby library aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Project ID** is discovered in the following order:
 
@@ -62,4 +62,4 @@ To configure your system for this, simply:
 
 ## Troubleshooting
 
-If you're having trouble authenticating open a [Github Issue](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues/new?title=Authentication+question) to get help.  Also consider searching or asking [questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) on [StackOverflow](http://stackoverflow.com).
+If you're having trouble authenticating open a [Github Issue](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/new?title=Authentication+question) to get help.  Also consider searching or asking [questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) on [StackOverflow](http://stackoverflow.com).

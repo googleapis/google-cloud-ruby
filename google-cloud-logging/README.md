@@ -2,7 +2,7 @@
 
 [Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
 
-- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-logging/google/cloud/logging)
+- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/google/cloud/logging)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -16,7 +16,7 @@ $ gem install google-cloud-logging
 
 This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-logging/guides/authentication).
+Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/guides/authentication).
 
 ## Example
 
@@ -59,7 +59,7 @@ It is currently in major version zero (0.y.z), which means that anything may cha
 
 Contributions to this library are always welcome and highly encouraged.
 
-See the [Contributing Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/contributing) for more information on how to get started.
+See the [Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing) for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See [Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
 
@@ -69,5 +69,5 @@ This library is licensed under Apache 2.0. Full license text is available in [LI
 
 ## Support
 
-Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues).
-Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
+Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
+Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).

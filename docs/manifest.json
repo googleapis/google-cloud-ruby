@@ -1,7 +1,7 @@
 {
   "lang": "ruby",
   "friendlyLang": "Ruby",
-  "moduleName": "gcloud-ruby",
+  "moduleName": "google-cloud-ruby",
   "markdown": "ruby",
   "titleDelimiter": "::",
   "defaultModule": "google-cloud",

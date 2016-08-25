@@ -1,4 +1,4 @@
-# Contributing to gcloud-ruby
+# Contributing to google-cloud-ruby
 
 1. **Sign one of the contributor license agreements below.**
 2. Fork the repo, develop and test your code changes.
@@ -15,11 +15,11 @@ You can sign these electronically (just scroll to the bottom). After that, we'll
 
 ## Setup
 
-In order to use the gcloud-ruby console and run the project's tests, there is a
+In order to use the google-cloud-ruby console and run the project's tests, there is a
 small amount of setup:
 
 1. Install Ruby.
-    gcloud-ruby requires Ruby 2.0+. You may choose to manage your Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [chruby](https://github.com/postmodern/chruby).
+    google-cloud-ruby requires Ruby 2.0+. You may choose to manage your Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [chruby](https://github.com/postmodern/chruby).
 
 2. Install [Bundler](http://bundler.io/).
 
@@ -35,7 +35,7 @@ small amount of setup:
 
 ## Console
 
-In order to run code interactively, you can automatically load gcloud-ruby and
+In order to run code interactively, you can automatically load google-cloud-ruby and
 its dependencies in IRB with:
 
 ```sh
@@ -44,7 +44,7 @@ $ bundle exec rake console
 
 ## Tests
 
-Tests are very important part of gcloud-ruby. All contributions should include tests that ensure the contributed code behaves as expected.
+Tests are very important part of google-cloud-ruby. All contributions should include tests that ensure the contributed code behaves as expected.
 
 ### Unit Tests
 
@@ -56,7 +56,7 @@ $ rake test
 
 ### Acceptance Tests
 
-The gcloud-ruby acceptance tests interact with the following live service APIs:
+The google-cloud-ruby acceptance tests interact with the following live service APIs:
 
 * BigQuery
 * Cloud Datastore

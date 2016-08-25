@@ -1,13 +1,13 @@
-# gcloud-ruby
+# google-cloud-ruby
 
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
-[![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby/)
-[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-ruby.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-ruby?branch=master)
+[![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby.svg)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby/)
+[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/google-cloud-ruby.svg)](https://coveralls.io/r/GoogleCloudPlatform/google-cloud-ruby?branch=master)
 [![Gem Version](https://badge.fury.io/rb/gcloud.svg)](http://badge.fury.io/rb/gcloud)
 
-* [Homepage](http://googlecloudplatform.github.io/gcloud-ruby/)
-* [API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs)
+* [Homepage](http://googlecloudplatform.github.io/google-cloud-ruby/)
+* [API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs)
 * [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
 ## Ruby API Client library for Google Cloud
@@ -34,20 +34,20 @@ If you need support for other Google APIs, check out the [Google API Ruby Client
 $ gem install google-cloud
 ```
 
-The `google-cloud` gem shown above provides all of the individual service gems in the gcloud-ruby project, making it easy to explore Google Cloud Platform. To avoid unnecessary dependencies, you can also install the service gems independently.
+The `google-cloud` gem shown above provides all of the individual service gems in the google-cloud-ruby project, making it easy to explore Google Cloud Platform. To avoid unnecessary dependencies, you can also install the service gems independently.
 
 ### Authentication
 
-In general, the gcloud-ruby library uses [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments, the Service Account credentials can be specified by providing the path to the [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for the account (or the JSON itself) in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
+In general, the google-cloud-ruby library uses [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments, the Service Account credentials can be specified by providing the path to the [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for the account (or the JSON itself) in environment variables. Additionally, Cloud SDK credentials can also be discovered automatically, but this is only recommended during development.
 
-General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
+General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
 
 The preview examples below demonstrate how to provide the **Project ID** and **Credentials JSON file path** directly in code.
 
 ### BigQuery
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
-- [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-bigquery)
+- [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google Cloud BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
@@ -87,7 +87,7 @@ end
 ### Datastore
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
-- [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-datastore)
+- [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore)
 - [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
@@ -128,7 +128,7 @@ tasks = datastore.run query
 ### DNS
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
-- [google-cloud-dns API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-dns)
+- [google-cloud-dns API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dns)
 - [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
 - [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 
@@ -165,7 +165,7 @@ end
 ### Logging
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
-- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-logging)
+- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -205,7 +205,7 @@ logging.write_entries entry
 ### Pub/Sub
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
-- [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-pubsub)
+- [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub)
 - [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
@@ -240,7 +240,7 @@ msgs = sub.pull
 ### Resource Manager
 
 - [google-cloud-resource_manager README](google-cloud-resource_manager/README.md)
-- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager)
+- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
@@ -276,7 +276,7 @@ projects = resource_manager.projects filter: "labels.env:production"
 ### Storage
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
-- [google-cloud-storage API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-storage)
+- [google-cloud-storage API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-storage)
 - [google-cloud-storage on RubyGems](https://rubygems.org/gems/google-cloud-storage)
 - [Google Cloud Storage documentation](https://cloud.google.com/storage/docs)
 
@@ -310,7 +310,7 @@ file.copy backup, file.name
 ### Translate
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
-- [google-cloud-translate API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-translate)
+- [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Translate documentation](https://cloud.google.com/translate/docs)
 
@@ -341,7 +341,7 @@ translation.text #=> "Salve mundi!"
 ### Vision
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
-- [gcloud-ruby-vision API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-vision)
+- [google-cloud-ruby-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
 
@@ -367,7 +367,7 @@ landmark.description #=> "Mount Rushmore"
 
 ## Supported Ruby Versions
 
-gcloud-ruby is supported on Ruby 2.0+.
+google-cloud-ruby is supported on Ruby 2.0+.
 
 ## Versioning
 
@@ -390,5 +390,5 @@ available in [LICENSE](LICENSE).
 
 ## Support
 
-Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues).
-Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
+Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
+Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).

@@ -42,7 +42,7 @@ module Google
     # Stackdriver Logging service, or if you are running on Google Compute
     # Engine this configuration is taken care of for you. You can read more
     # about the options for connecting in the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ## Listing log entries
     #

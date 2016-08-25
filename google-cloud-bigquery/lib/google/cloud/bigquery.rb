@@ -32,7 +32,7 @@ module Google
     # service, or if you are running on Google Compute Engine this configuration
     # is taken care of for you. You can read more about the options for
     # connecting in the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # To help you get started quickly, the first few examples below use a public
     # dataset provided by Google. As soon as you have [signed

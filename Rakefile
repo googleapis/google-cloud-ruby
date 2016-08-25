@@ -194,7 +194,7 @@ namespace :jsondoc do
     FileUtils.mkdir_p gh_pages
 
     # checkout the gh-pages branch
-    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
+    git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
     if ENV["GH_OAUTH_TOKEN"]
       git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
     end
@@ -311,7 +311,7 @@ namespace :jsondoc do
       fail "Cannot find the tag '#{tag}'."
     end
 
-    git_repo = "git@github.com:GoogleCloudPlatform/gcloud-ruby.git"
+    git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
     if ENV["GH_OAUTH_TOKEN"]
       git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
     end

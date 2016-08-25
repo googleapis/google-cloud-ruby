@@ -11,7 +11,7 @@ programmatically manage  container resources such as Organizations and Projects,
 
 The Resource Manager API is a Beta release and is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
-- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager/google/cloud/resourcemanager)
+- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager/google/cloud/resourcemanager)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
@@ -48,7 +48,7 @@ Also make sure all environment variables are cleared of any
 service account credentials. Then google-cloud-resource_manager will be able to detect the user
 authentication and connect with those credentials.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/google-cloud-resource_manager/guides/authentication).
+Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager/guides/authentication).
 
 ## Example
 
@@ -87,7 +87,7 @@ It is currently in major version zero (0.y.z), which means that anything may cha
 
 Contributions to this library are always welcome and highly encouraged.
 
-See the [Contributing Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/contributing) for more information on how to get started.
+See the [Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing) for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See [Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
 
@@ -97,5 +97,5 @@ This library is licensed under Apache 2.0. Full license text is available in [LI
 
 ## Support
 
-Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/gcloud-ruby/issues).
-Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/gcloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
+Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
+Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).

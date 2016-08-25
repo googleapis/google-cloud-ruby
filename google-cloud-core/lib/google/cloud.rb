@@ -29,7 +29,7 @@ require "google/cloud/core/version"
 # is taken care of for you.
 #
 # You can learn more about various options for connection on the [Authentication
-# Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+# Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
 #
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
     # Creates a new object for connecting to Google Cloud.
     #
     # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # @param [String] project Project identifier for the Pub/Sub service you are
     #   connecting to.

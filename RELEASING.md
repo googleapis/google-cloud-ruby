@@ -1,16 +1,16 @@
-# Releasing gcloud-ruby
+# Releasing google-cloud-ruby
 
-The gcloud-ruby library uses [semantic versioning](http://semver.org). Replace the `<prev_version>` and `<version>` placeholders shown in the examples below with the appropriate numbers, e.g. `0.1.0` and `0.2.0`.
+The google-cloud-ruby library uses [semantic versioning](http://semver.org). Replace the `<prev_version>` and `<version>` placeholders shown in the examples below with the appropriate numbers, e.g. `0.1.0` and `0.2.0`.
 
-After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pulls) for a release have been merged and all [Travis CI builds](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby) are green, you may create a release as follows:
+After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ruby/pulls) for a release have been merged and all [Travis CI builds](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) are green, you may create a release as follows:
 
-1. Build the gcloud-ruby gem locally.
+1. Build the google-cloud-ruby gem locally.
 
   ```sh
   $ rake build
   ```
 
-1. Install the gcloud-ruby gem locally.
+1. Install the google-cloud-ruby gem locally.
 
   ```sh
   $ rake install
@@ -21,7 +21,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pul
 1. Open the GitHub compare view in your browser.
 
   ```sh
-  open https://github.com/GoogleCloudPlatform/gcloud-ruby/compare/v<prev_version>...master
+  open https://github.com/GoogleCloudPlatform/google-cloud-ruby/compare/v<prev_version>...master
   ```
 
 1. Review the commits in the GitHub compare view, making notes of significant changes. (For examples of what a significant change is, browse the changes in the [CHANGELOG.md](CHANGELOG.md).
@@ -68,14 +68,14 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/gcloud-ruby/pul
   $ git push --tags
   ```
 
-1. On the [gcloud-ruby releases page](https://github.com/GoogleCloudPlatform/gcloud-ruby/releases), click [Draft a new release](https://github.com/GoogleCloudPlatform/gcloud-ruby/releases/new). Complete the form. Include the bullet-point lists of the major and minor changes from [CHANGELOG.md](CHANGELOG.md). You can also add examples, fixes, thank yous, and anything else helpful or relevant. See gcloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/gcloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
+1. On the [google-cloud-ruby releases page](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases), click [Draft a new release](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/new). Complete the form. Include the bullet-point lists of the major and minor changes from [CHANGELOG.md](CHANGELOG.md). You can also add examples, fixes, thank yous, and anything else helpful or relevant. See gcloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/gcloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
 
 1. Click `Publish release`.
 
-1. Check that the [Travis CI build](https://travis-ci.org/GoogleCloudPlatform/gcloud-ruby) has passed for the version commit.
+1. Check that the [Travis CI build](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) has passed for the version commit.
 
 1. Confirm that the gem for the new version is available on [RubyGems.org](https://rubygems.org/gems/gcloud).
 
-1. Confirm that the new version is displayed after "Latest release" on the [gcloud-ruby gh-pages site](http://googlecloudplatform.github.io/gcloud-ruby/).
+1. Confirm that the new version is displayed after "Latest release" on the [google-cloud-ruby gh-pages site](http://googlecloudplatform.github.io/google-cloud-ruby/).
 
 High fives all around!

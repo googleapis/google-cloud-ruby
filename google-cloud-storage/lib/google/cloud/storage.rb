@@ -46,7 +46,7 @@ module Google
     #
     # You can learn more about various options for connection on the
     # [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # To learn more about Cloud Storage, read the
     # [Google Cloud Storage Overview

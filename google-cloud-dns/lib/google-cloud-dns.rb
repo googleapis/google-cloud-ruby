@@ -28,7 +28,7 @@ module Google
     # Each call creates a new connection.
     #
     # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
@@ -72,7 +72,7 @@ module Google
     # Each call creates a new connection.
     #
     # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # @param [String] project Identifier for a DNS project. If not present, the
     #   default project for the credentials is used.

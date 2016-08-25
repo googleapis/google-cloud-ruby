@@ -1,6 +1,6 @@
-## With `gcloud-ruby`
+## With `google-cloud-ruby`
 
-With `gcloud-ruby` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis.
+With `google-cloud-ruby` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis.
 
 ### The API access key
 
