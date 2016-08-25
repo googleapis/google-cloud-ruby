@@ -108,4 +108,9 @@ describe Google::Cloud::Language::Annotation, :mock_language do
     token.label.must_equal :ROOT
     token.lemma.must_equal "Hello"
   end
+
+  it "has a pretty #inspect" do
+    annotation = Google::Cloud::Language::Annotation.from_grpc html_annotation_grpc
+    annotation.inspect.must_equal %{#<Google::Cloud::Language::Annotation (sentences: 3, tokens: 24, entities: 2, sentiment: true, language: "en")>}
+  end
 end

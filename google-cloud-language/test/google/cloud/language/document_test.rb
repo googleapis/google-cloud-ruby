@@ -112,4 +112,12 @@ describe Google::Cloud::Language::Document, :mock_language do
     doc.language = nil
     doc.language.must_equal ""
   end
+
+  it "has a pretty #inspect" do
+    doc1 = language.document "Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal."
+    doc1.inspect.must_equal %{#<Google::Cloud::Language::Document ("Four score and s...", format: :text, language: "")>}
+
+    doc2 = language.document "gs://bucket-name/path/to/document.ext"
+    doc2.inspect.must_equal %{#<Google::Cloud::Language::Document (gs://bucket-name/path/to/document.ext, format: :text, language: "")>}
+  end
 end
