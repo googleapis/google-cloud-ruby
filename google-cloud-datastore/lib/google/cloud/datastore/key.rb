@@ -265,6 +265,7 @@ module Google
         # @private Create a new Key from a Google::Datastore::V1::Key
         # object.
         def self.from_grpc grpc
+          return nil if grpc.nil?
           key_grpc = grpc.dup
           key = Key.new
           path_grpc = key_grpc.path.pop

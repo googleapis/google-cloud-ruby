@@ -237,6 +237,31 @@ describe "Datastore", :datastore do
       refresh = dataset.find post.key
       refresh.must_be :nil?
     end
+
+    it "allows embedded entities and keys" do
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post_embedded"
+      post["embedded_entity"] = dataset.entity "EmbeddedPost", "key_will_not_be_pesisted"
+      post["embedded_entity"]["embedded_name"] = "hello!"
+      post["embedded_key"] = dataset.entity "EmbeddedKey", "will_be_pesisted"
+
+      post["embedded_entity"].wont_be :nil?
+      post["embedded_entity"].key.wont_be :nil?
+      post["embedded_entity"]["embedded_name"].must_equal "hello!"
+      post["embedded_key"].wont_be :nil?
+
+      dataset.save post
+
+      refresh = dataset.find post.key
+
+      refresh["embedded_entity"].wont_be :nil?
+      refresh["embedded_entity"].key.must_be :nil?
+      refresh["embedded_entity"]["embedded_name"].must_equal "hello!"
+      refresh["embedded_entity"].to_grpc.properties.must_equal post["embedded_entity"].to_grpc.properties
+      refresh["embedded_key"].wont_be :nil?
+      refresh["embedded_key"].to_grpc.must_equal post["embedded_key"].to_grpc
+
+      dataset.delete post
+    end
   end
 
   it "should be able to save keys as a part of entity and query by key" do
