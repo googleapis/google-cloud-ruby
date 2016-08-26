@@ -164,13 +164,13 @@ describe "Language (HTML/Storage File)", :language do
       token.lemma.must_equal "Hello"
     end
 
-    it "runs only the text feature" do
+    it "runs only the syntax feature" do
       doc = language.document file, format: :text
       doc.html!
       doc.must_be :html?
       doc.wont_be :text?
 
-      annotation = doc.annotate text: true
+      annotation = doc.annotate syntax: true
 
       annotation.language.must_equal "en"
 

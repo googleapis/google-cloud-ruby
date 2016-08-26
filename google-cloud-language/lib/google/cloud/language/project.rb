@@ -142,7 +142,7 @@ module Google
         #   content to annotate. This can be an {Document} instance, or any
         #   other type that converts to an {Document}. See {#document} for
         #   details.
-        # @param [Boolean] text Whether to perform the textual analysis.
+        # @param [Boolean] syntax Whether to perform the textual analysis.
         #   Optional.
         # @param [Boolean] entities Whether to perform the entitiy analysis.
         #   Optional.
@@ -169,17 +169,51 @@ module Google
         #   annotation = language.annotate doc
         #   annotation.thing #=> Some Result
         #
-        def annotate content, text: false, entities: false, sentiment: false,
+        def annotate content, syntax: false, entities: false, sentiment: false,
                      format: nil, language: nil, encoding: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.annotate doc.to_grpc, text: text, entities: entities,
+          grpc = service.annotate doc.to_grpc, syntax: syntax,
+                                               entities: entities,
                                                sentiment: sentiment,
                                                encoding: encoding
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
         alias_method :detect, :annotate
+
+        ##
+        # TODO: Details
+        #
+        # @param [String, Document, Google::Cloud::Storage::File] content The
+        #   content to annotate. This can be an {Document} instance, or any
+        #   other type that converts to an {Document}. See {#document} for
+        #   details.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation>] The results for the content syntax analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello world!"
+        #
+        #   annotation = language.syntax doc
+        #   annotation.thing #=> Some Result
+        #
+        def syntax content, format: nil, language: nil, encoding: nil
+          annotate content, syntax: true, format: format, language: language,
+                            encoding: encoding
+        end
 
         ##
         # TODO: Details

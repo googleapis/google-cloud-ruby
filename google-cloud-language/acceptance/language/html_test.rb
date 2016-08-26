@@ -123,13 +123,13 @@ describe "Language (HTML)", :language do
       token.lemma.must_equal "Hello"
     end
 
-    it "runs only the text feature" do
+    it "runs only the syntax feature" do
       doc = language.document content
       doc.html!
       doc.must_be :html?
       doc.wont_be :text?
 
-      annotation = doc.annotate text: true
+      annotation = doc.annotate syntax: true
 
       annotation.language.must_equal "en"
 
@@ -193,6 +193,50 @@ describe "Language (HTML)", :language do
 
       annotation.sentences.must_be :empty?
       annotation.tokens.must_be :empty?
+    end
+  end
+
+  describe "syntax" do
+    it "works without creating a document" do
+      annotation = language.syntax content, format: :html
+
+      annotation.language.must_equal "en"
+
+      annotation.sentiment.must_be :nil?
+
+      annotation.entities.must_be :empty?
+
+      annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.tokens.count.must_equal 24
+      token = annotation.tokens.first
+      token.text.must_equal "Hello"
+      token.part_of_speech.must_equal :X
+      token.head_token_index.must_equal 0
+      token.label.must_equal :ROOT
+      token.lemma.must_equal "Hello"
+    end
+
+    it "works with creating a document" do
+      doc = language.document content, format: :html
+      doc.must_be :html?
+      doc.wont_be :text?
+
+      annotation = doc.syntax
+
+      annotation.language.must_equal "en"
+
+      annotation.sentiment.must_be :nil?
+
+      annotation.entities.must_be :empty?
+
+      annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.tokens.count.must_equal 24
+      token = annotation.tokens.first
+      token.text.must_equal "Hello"
+      token.part_of_speech.must_equal :X
+      token.head_token_index.must_equal 0
+      token.label.must_equal :ROOT
+      token.lemma.must_equal "Hello"
     end
   end
 

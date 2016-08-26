@@ -135,7 +135,7 @@ module Google
         ##
         # TODO: Details
         #
-        # @param [Boolean] text Whether to perform the textual analysis.
+        # @param [Boolean] syntax Whether to perform the textual analysis.
         #   Optional.
         # @param [Boolean] entities Whether to perform the entitiy analysis.
         #   Optional.
@@ -157,16 +157,39 @@ module Google
         #   annotation = doc.annotate
         #   annotation.thing #=> Some Result
         #
-        def annotate text: false, entities: false, sentiment: false,
+        def annotate syntax: false, entities: false, sentiment: false,
                      encoding: nil
           ensure_service!
-          grpc = service.annotate to_grpc, text: text, entities: entities,
+          grpc = service.annotate to_grpc, syntax: syntax, entities: entities,
                                            sentiment: sentiment,
                                            encoding: encoding
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
         alias_method :detect, :annotate
+
+        ##
+        # TODO: Details
+        #
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation>] The results for the content analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello world!"
+        #
+        #   annotation = doc.syntax
+        #   annotation.thing #=> Some Result
+        #
+        def syntax encoding: nil
+          annotate syntax: true, encoding: nil
+        end
 
         ##
         # TODO: Details
@@ -219,7 +242,9 @@ module Google
 
         # @private
         def inspect
-          "#<#{self.class.name} (#{(content? ? "\"#{source[0,16]}...\"" : source)}, format: #{format.inspect}, language: #{language.inspect})>"
+          "#<#{self.class.name} (" \
+            "#{(content? ? "\"#{source[0,16]}...\"" : source)}, " \
+            "format: #{format.inspect}, language: #{language.inspect})>"
         end
 
         ##
