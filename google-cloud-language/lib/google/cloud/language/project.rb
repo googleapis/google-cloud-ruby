@@ -268,9 +268,9 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello world!"
+        #   document = language.document "Hello world!"
         #
-        #   annotation = language.syntax doc
+        #   annotation = language.syntax document
         #   annotation.thing #=> Some Result
         #
         def syntax content, format: nil, language: nil, encoding: nil
@@ -304,7 +304,7 @@ module Google
         #
         #   document = language.document "Hello Chris and Mike!"
         #
-        #   entities = language.entities doc
+        #   entities = language.entities document
         #   entities.count #=> 2
         #
         def entities content, format: :text, language: nil, encoding: nil
@@ -340,7 +340,7 @@ module Google
         #
         #   document = language.document "Hello Chris and Mike!"
         #
-        #   sentiment = language.sentiment doc
+        #   sentiment = language.sentiment document
         #   sentiment.polarity #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #

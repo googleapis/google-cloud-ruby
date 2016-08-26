@@ -33,7 +33,7 @@ module Google
       #
       #   content = "Darth Vader is the best villain in Star Wars."
       #   document = language.document content
-      #   annotation = doc.annotate
+      #   annotation = document.annotate
       #
       #   annotation.sentiment.polarity #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
@@ -52,25 +52,136 @@ module Google
           @grpc = nil
         end
 
+        ##
+        # The sentences returned by syntactic analysis.
+        #
+        # @return [Array<TextSpan>] an array of pieces of text including
+        #   relative location
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "I love dogs. I hate cats."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   text_span = annotation.sentences.last
+        #   text_span.text #=> "I hate cats."
+        #   text_span.offset #=> 13
+        #
         def sentences
           @sentences ||= begin
             Array(grpc.sentences).map { |g| TextSpan.from_grpc g.text }
           end
         end
 
+        ##
+        # The tokens returned by syntactic analysis.
+        #
+        # @return [Array<Token>] an array of the smallest syntactic building
+        #   blocks of the text
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.tokens.count #=> 10
+        #   token = annotation.tokens.first
+        #
+        #   token.text_span.text #=> "Darth"
+        #   token.text_span.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
         def tokens
           @tokens ||= Array(grpc.tokens).map { |g| Token.from_grpc g }
         end
 
+        ##
+        # The entities returned by entity analysis.
+        #
+        # @return [Entities]
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   entities = annotation.entities
+        #   entities.count #=> 2
+        #   entity = entities.first
+        #
+        #   entity.name #=> "Darth Vader"
+        #   entity.type #=> :PERSON
+        #   entity.salience #=> 0.8421939611434937
+        #   entity.mentions.count #=> 1
+        #   entity.mentions.first.text # => "Darth Vader"
+        #   entity.mentions.first.offset # => 0
+        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Darth_Vader"
+        #
         def entities
           @entities ||= Entities.from_grpc @grpc
         end
 
+        ##
+        # The result of sentiment analysis.
+        #
+        # @return [Sentiment]
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #   sentiment = annotation.sentiment
+        #
+        #   sentiment.polarity #=> 1.0
+        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.language #=> "en"
+        #
         def sentiment
           return nil if @grpc.document_sentiment.nil?
           @sentiment ||= Sentiment.from_grpc @grpc
         end
 
+        ##
+        # The language of the document (if not specified, the language is
+        # automatically detected). Both ISO and BCP-47 language codes are
+        # supported.
+        #
+        # @return [String] the language code
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #   annotation.language #=> "en"
+        #
         def language
           @grpc.language
         end
@@ -94,6 +205,28 @@ module Google
           new.tap { |a| a.instance_variable_set :@grpc, grpc }
         end
 
+        ##
+        # Represents a piece of text including relative location.
+        #
+        # @attr_reader [String] text The content of the output text.
+        # @attr_reader [Integer] offset The API calculates the beginning offset
+        #   of the content in the original document according to the `encoding`
+        #   specified in the API request.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "I love dogs. I hate cats."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   text_span = annotation.sentences.last
+        #   text_span.text #=> "I hate cats."
+        #   text_span.offset #=> 13
+        #
         class TextSpan
           attr_reader :text, :offset
           alias_method :content, :text
@@ -113,6 +246,42 @@ module Google
           end
         end
 
+        ##
+        # Represents the smallest syntactic building block of the text. Returned
+        # by syntactic analysis.
+        #
+        # @attr_reader [TextSpan] text_span The token text.
+        # @attr_reader [Symbol] part_of_speech Represents part of speech
+        #   information for a token.
+        # @attr_reader [Integer] head_token_index Represents the head of this
+        #   token in the dependency tree. This is the index of the token which
+        #   has an arc going to this token. The index is the position of the
+        #   token in the array of tokens returned by the API method. If this
+        #   token is a root token, then the headTokenIndex is its own index.
+        # @attr_reader [Symbol] label The parse label for the token.
+        # @attr_reader [String] lemma [Lemma](https://en.wikipedia.org/wiki/Lemma_(morphology))
+        #   of the token.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.tokens.count #=> 10
+        #   token = annotation.tokens.first
+        #
+        #   token.text_span.text #=> "Darth"
+        #   token.text_span.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
         class Token
           attr_reader :text_span, :part_of_speech, :head_token_index, :label,
                       :lemma
@@ -148,6 +317,28 @@ module Google
           end
         end
 
+        ##
+        # The entities returned by entity analysis.
+        #
+        # @attr_reader [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are supported.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   entities = annotation.entities
+        #   entities.count #=> 2
+        #   entities.people.count #=> 1
+        #   entities.artwork.count #=> 1
+        #
         class Entities < DelegateClass(::Array)
           attr_accessor :language
 
@@ -158,35 +349,75 @@ module Google
             @language = language
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:UNKNOWN`.
+          #
+          # @return [Array<Entity>]
+          #
           def unknown
             select(&:unknown?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:PERSON`.
+          #
+          # @return [Array<Entity>]
+          #
           def people
             select(&:person?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:LOCATION`.
+          #
+          # @return [Array<Entity>]
+          #
           def locations
             select(&:location?)
           end
           alias_method :places, :locations
 
+          ##
+          # Returns the entities for which {Entity#type} is `:ORGANIZATION`.
+          #
+          # @return [Array<Entity>]
+          #
           def organizations
             select(&:organization?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:EVENT`.
+          #
+          # @return [Array<Entity>]
+          #
           def events
             select(&:event?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:WORK_OF_ART`.
+          #
+          # @return [Array<Entity>]
+          #
           def artwork
             select(&:artwork?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:CONSUMER_GOOD`.
+          #
+          # @return [Array<Entity>]
+          #
           def goods
             select(&:good?)
           end
 
+          ##
+          # Returns the entities for which {Entity#type} is `:OTHER`.
+          #
+          # @return [Array<Entity>]
+          #
           def other
             select(&:other?)
           end
@@ -200,6 +431,46 @@ module Google
           end
         end
 
+        ##
+        # Represents a phrase in the text that is a known entity, such as a
+        # person, an organization, or location. The API associates information,
+        # such as salience and mentions, with entities.
+        #
+        # @attr_reader [String] name The representative name for the entity.
+        # @attr_reader [Symbol] type The type of the entity.
+        # @attr_reader [Hash<String,String>] metadata Metadata associated with
+        #   the entity. Currently, only Wikipedia URLs are provided, if
+        #   available. The associated key is "wikipedia_url".
+        # @attr_reader [Float] salience The salience score associated with the
+        #   entity in the [0, 1.0] range. The salience score for an entity
+        #   provides information about the importance or centrality of that
+        #   entity to the entire document text. Scores closer to 0 are less
+        #   salient, while scores closer to 1.0 are highly salient.
+        # @attr_reader [Array<TextSpan>] mentions The mentions of this entity in
+        #   the input document. The API currently supports proper noun mentions.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   entities = annotation.entities
+        #   entities.count #=> 2
+        #   entity = entities.first
+        #
+        #   entity.name #=> "Darth Vader"
+        #   entity.type #=> :PERSON
+        #   entity.salience #=> 0.8421939611434937
+        #   entity.mentions.count #=> 1
+        #   entity.mentions.first.text # => "Darth Vader"
+        #   entity.mentions.first.offset # => 0
+        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Darth_Vader"
+        #
         class Entity
           attr_reader :name, :type, :metadata, :salience, :mentions
 
@@ -213,39 +484,84 @@ module Google
             @mentions = mentions
           end
 
+          ##
+          # Returns `true` if {#type} is `:UNKNOWN`.
+          #
+          # @return [Boolean]
+          #
           def unknown?
             type == :UNKNOWN
           end
 
+          ##
+          # Returns `true` if {#type} is `:PERSON`.
+          #
+          # @return [Boolean]
+          #
           def person?
             type == :PERSON
           end
 
+          ##
+          # Returns `true` if {#type} is `:LOCATION`.
+          #
+          # @return [Boolean]
+          #
           def location?
             type == :LOCATION
           end
           alias_method :place?, :location?
 
+          ##
+          # Returns `true` if {#type} is `:ORGANIZATION`.
+          #
+          # @return [Boolean]
+          #
           def organization?
             type == :ORGANIZATION
           end
 
+          ##
+          # Returns `true` if {#type} is `:EVENT`.
+          #
+          # @return [Boolean]
+          #
           def event?
             type == :EVENT
           end
 
+          ##
+          # Returns `true` if {#type} is `:WORK_OF_ART`.
+          #
+          # @return [Boolean]
+          #
           def artwork?
             type == :WORK_OF_ART
           end
 
+          ##
+          # Returns `true` if {#type} is `:CONSUMER_GOOD`.
+          #
+          # @return [Boolean]
+          #
           def good?
             type == :CONSUMER_GOOD
           end
 
+          ##
+          # Returns `true` if {#type} is `:OTHER`.
+          #
+          # @return [Boolean]
+          #
           def other?
             type == :OTHER
           end
 
+          ##
+          # Returns the `wikipedia_url` property of the {#metadata}.
+          #
+          # @return [String]
+          #
           def wikipedia_url
             metadata["wikipedia_url"]
           end
@@ -261,6 +577,34 @@ module Google
           end
         end
 
+        ##
+        # Represents the result of sentiment analysis.
+        #
+        # @attr_reader [Float] polarity Polarity of the sentiment in the
+        #   [-1.0, 1.0] range. Larger numbers represent more positive
+        #   sentiments.
+        # @attr_reader [Float] magnitude A non-negative number in the [0, +inf]
+        #   range, which represents the absolute magnitude of sentiment
+        #   regardless of polarity (positive or negative).
+        # @attr_reader [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are supported.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   sentiment = annotation.sentiment
+        #   sentiment.polarity #=> 1.0
+        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.language #=> "en"
+        #
         class Sentiment
           attr_reader :polarity, :magnitude, :language
 

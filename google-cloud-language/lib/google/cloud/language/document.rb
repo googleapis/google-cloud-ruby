@@ -193,7 +193,7 @@ module Google
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
-        #   annotation = doc.annotate
+        #   annotation = document.annotate
         #
         #   annotation.sentiment.polarity #=> 1.0
         #   annotation.sentiment.magnitude #=> 0.8999999761581421
@@ -209,7 +209,7 @@ module Google
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
-        #   annotation = doc.annotate entities: true, text: true
+        #   annotation = document.annotate entities: true, text: true
         #
         #   annotation.sentiment #=> nil
         #   annotation.entities.count #=> 2
@@ -244,9 +244,9 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello world!"
+        #   document = language.document "Hello world!"
         #
-        #   annotation = doc.syntax
+        #   annotation = document.syntax
         #   annotation.thing #=> Some Result
         #
         def syntax encoding: nil
