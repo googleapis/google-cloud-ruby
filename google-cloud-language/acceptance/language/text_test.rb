@@ -230,6 +230,50 @@ describe "Language (TEXT)", :language do
     end
   end
 
+  describe "syntax" do
+    it "works without creating a document" do
+      annotation = language.syntax content, format: :text
+
+      annotation.language.must_equal "en"
+
+      annotation.sentiment.must_be :nil?
+
+      annotation.entities.must_be :empty?
+
+      annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.tokens.count.must_equal 24
+      token = annotation.tokens.first
+      token.text.must_equal "Hello"
+      token.part_of_speech.must_equal :X
+      token.head_token_index.must_equal 0
+      token.label.must_equal :ROOT
+      token.lemma.must_equal "Hello"
+    end
+
+    it "works with creating a document" do
+      doc = language.document content
+      doc.must_be :text?
+      doc.wont_be :html?
+
+      annotation = doc.syntax
+
+      annotation.language.must_equal "en"
+
+      annotation.sentiment.must_be :nil?
+
+      annotation.entities.must_be :empty?
+
+      annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.tokens.count.must_equal 24
+      token = annotation.tokens.first
+      token.text.must_equal "Hello"
+      token.part_of_speech.must_equal :X
+      token.head_token_index.must_equal 0
+      token.label.must_equal :ROOT
+      token.lemma.must_equal "Hello"
+    end
+  end
+
   describe "entities" do
     it "works without creating a document" do
       entities = language.entities content, format: :text

@@ -185,6 +185,39 @@ module Google
         ##
         # TODO: Details
         #
+        # @param [String, Document, Google::Cloud::Storage::File] content The
+        #   content to annotate. This can be an {Document} instance, or any
+        #   other type that converts to an {Document}. See {#document} for
+        #   details.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation>] The results for the content syntax analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello world!"
+        #
+        #   annotation = language.syntax doc
+        #   annotation.thing #=> Some Result
+        #
+        def syntax content, format: nil, language: nil, encoding: nil
+          annotate content, syntax: true, format: format, language: language,
+                            encoding: encoding
+        end
+
+        ##
+        # TODO: Details
+        #
         # @param [String, Document] content The content to annotate. This
         #   can be an {Document} instance, or any other type that converts to an
         #   {Document}. See {#document} for details.

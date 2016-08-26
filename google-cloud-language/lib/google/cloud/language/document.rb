@@ -174,6 +174,29 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
+        # @return [Annotation>] The results for the content analysis.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   doc = language.document "Hello world!"
+        #
+        #   annotation = doc.syntax
+        #   annotation.thing #=> Some Result
+        #
+        def syntax encoding: nil
+          annotate syntax: true, encoding: nil
+        end
+
+        ##
+        # TODO: Details
+        #
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
         # @return [Annotation::Entities>] The results for the entities analysis.
         #
         # @example
