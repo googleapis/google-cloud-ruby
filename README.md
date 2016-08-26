@@ -18,6 +18,7 @@ This project supports the following Google Cloud Platform services:
 * [Cloud Datastore](#datastore)
 * [Cloud DNS](#dns)
 * [Stackdriver Logging](#logging)
+* [Cloud Natural Language API](#natural-language)
 * [Cloud Pub/Sub](#pubsub)
 * [Cloud Resource Manager](#resource-manager)
 * [Cloud Storage](#storage)
@@ -200,6 +201,38 @@ entry.resource.labels[:module_id] = "1"
 entry.resource.labels[:version_id] = "20150925t173233"
 
 logging.write_entries entry
+```
+
+### Natural Language
+
+- [google-cloud-language README](google-cloud-language/README.md)
+- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language)
+- [google-cloud-language on RubyGems](https://rubygems.org/gems/[google-cloud-language)
+- [Google Cloud Natural Language API documentation](https://cloud.google.com/language/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-language
+```
+
+#### Preview
+
+```ruby
+require "google/cloud"
+
+gcloud = Google::Cloud.new
+language = gcloud.language
+
+content = "Darth Vader is the best villain in Star Wars."
+document = language.document content
+annotation = document.annotate
+
+annotation.sentiment.polarity #=> 1.0
+annotation.sentiment.magnitude #=> 0.8999999761581421
+annotation.entities.count #=> 2
+annotation.sentences.count #=> 1
+annotation.tokens.count #=> 10
 ```
 
 ### Pub/Sub
