@@ -1,5 +1,12 @@
 # Release History
 
+### 0.20.0 / 2016-08-26
+
+This gem is now an alias for the newly released `google-cloud` gem. Legacy code can continue to use the `Gcloud` constant, which is now an alias to `Google::Cloud`.
+
+* The old namespace `Gcloud` is an alias of `Google::Cloud`
+* The old require paths are supported and will require the new gems
+
 ### 0.12.2 / 2016-08-09
 
 #### Changes
