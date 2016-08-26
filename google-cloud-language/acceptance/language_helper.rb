@@ -21,6 +21,11 @@ require "google/cloud/language"
 # Create shared language object so we don't create new for each test
 $language = Google::Cloud.language retries: 10
 
+require "google/cloud/storage"
+
+# Create shared storage object so we don't create new for each test
+$storage = Google::Cloud.new.storage retries: 10
+
 module Acceptance
   ##
   # Test class for running against a Language instance.
@@ -44,6 +49,10 @@ module Acceptance
 
       refute_nil @language, "You do not have an active language to run the tests."
 
+      @storage = $storage
+
+      refute_nil @storage, "You do not have an active storage to run the tests."
+
       super
     end
 
@@ -65,4 +74,24 @@ module Acceptance
     end
     reporter.record result
   end
+end
+
+# Create buckets to be shared with all the tests
+require "time"
+require "securerandom"
+t = Time.now.utc.iso8601.gsub ":", "-"
+$lang_prefix = "gcloud-language-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
+
+def clean_up_language_storage_objects
+  puts "Cleaning up storage buckets after language tests."
+  if b = $storage.bucket($lang_prefix)
+    b.files.all(&:delete)
+    b.delete
+  end
+rescue => e
+  puts "Error while cleaning up storage buckets after language tests.\n\n#{e}"
+end
+
+Minitest.after_run do
+  clean_up_language_storage_objects
 end

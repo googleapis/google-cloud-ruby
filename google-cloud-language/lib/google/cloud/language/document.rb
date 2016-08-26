@@ -47,6 +47,28 @@ module Google
         end
 
         ##
+        # @private Whether the Document has content.
+        #
+        def content?
+          @grpc.source == :content
+        end
+
+        ##
+        # @private Whether the Document is a URL.
+        #
+        def url?
+          @grpc.source == :gcs_content_uri
+        end
+
+        ##
+        # @private The source of the content
+        #
+        def source
+          return @grpc.content if content?
+          @grpc.gcs_content_uri
+        end
+
+        ##
         # The Document's format. `:text` or `:html`
         #
         def format
@@ -207,9 +229,13 @@ module Google
         # @private
         def self.from_source source, service, format: nil, language: nil
           source = String source
-          grpc = Google::Cloud::Language::V1beta1::Document.new(
-            content: source
-          )
+          grpc = Google::Cloud::Language::V1beta1::Document.new
+          if source.start_with? "gs://"
+            grpc.gcs_content_uri = source
+            format ||= :html if source.end_with? ".html"
+          else
+            grpc.content = source
+          end
           if format.to_s == "html"
             grpc.type = :HTML
           else

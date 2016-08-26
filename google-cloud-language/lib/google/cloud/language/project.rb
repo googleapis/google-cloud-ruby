@@ -114,9 +114,16 @@ module Google
         #   doc = language.document file
         #
         def document content, format: nil, language: nil
-          return content if content.is_a? Document
-          Document.from_source content, @service, format: format,
-                                                  language: language
+          content = content.to_gs_url if content.respond_to? :to_gs_url
+          if content.is_a? Document
+            # Create new document with the provided format and language
+            Document.from_source content.source, @service,
+                                 format: (format || content.format),
+                                 language: (language || content.language)
+          else
+            Document.from_source content, @service, format: format,
+                                                    language: language
+          end
         end
         alias_method :doc, :document
 
