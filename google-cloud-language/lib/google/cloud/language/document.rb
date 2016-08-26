@@ -250,7 +250,7 @@ module Google
         #   annotation.thing #=> Some Result
         #
         def syntax encoding: nil
-          annotate syntax: true, encoding: nil
+          annotate syntax: true, encoding: encoding
         end
 
         ##
