@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "google-cloud-core"
+  gem.add_dependency "google-cloud-core", "~> 0.20.0"
   gem.add_dependency "google-api-client", "~> 0.9.11"
 
   gem.add_development_dependency "minitest", "~> 5.9"

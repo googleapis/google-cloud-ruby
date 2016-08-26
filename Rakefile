@@ -185,7 +185,7 @@ namespace :jsondoc do
   desc "Clones gh-pages branch to a temp dir"
   task :init, :tag do |t, args|
     tag = args[:tag]
-    fail "Missing required parameter 'tag'."if tag.nil?
+    fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
 
     header "Cloning gh-pages branch to #{gh_pages}"
@@ -205,7 +205,7 @@ namespace :jsondoc do
   desc "Copies jsondoc to gh-pages repo in temp dir."
   task :copy, [:tag] => [:jsondoc, :init] do |t, args|
     tag = args[:tag]
-    fail "Missing required parameter 'tag'."if tag.nil?
+    fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
 
     header "Copying all jsondoc for branch/tag '#{tag}' to '#{gh_pages}'"
@@ -222,7 +222,7 @@ namespace :jsondoc do
   desc "Assembles google-cloud umbrella package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
   task :umbrella, [:tag] => [:copy] do |t, args|
     tag = args[:tag]
-    fail "Missing required parameter 'tag'."if tag.nil?
+    fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
 
     require "json"
@@ -262,7 +262,7 @@ namespace :jsondoc do
   desc "Publishes assembled jsondoc to gh-pages"
   task :publish, [:tag] => [:umbrella] do |t, args|
     tag = args[:tag]
-    fail "Missing required parameter 'tag'."if tag.nil?
+    fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
 
     git_ref = tag == "master" ? `git rev-parse --short HEAD`.chomp : tag
@@ -304,7 +304,7 @@ namespace :jsondoc do
   desc "Publishes the jsondoc for the tag to the gh-pages branch"
   task :tag, :tag do |t, args|
     tag = args[:tag]
-    fail "Missing required parameter 'tag'."if tag.nil?
+    fail "Missing required parameter 'tag'." if tag.nil?
     # Verify the tag exists
     tag_check = `git show-ref --tags | grep #{tag}`.chomp
     if tag_check.empty?

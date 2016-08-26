@@ -15,6 +15,8 @@
 
 require "google/cloud"
 
+Gcloud = Google::Cloud
+
 ##
 # # Gcloud
 #
@@ -45,4 +47,3 @@ require "google/cloud"
 #
 module Gcloud
 end
-Gcloud = Google::Cloud
