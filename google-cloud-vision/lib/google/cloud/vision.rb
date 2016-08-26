@@ -39,11 +39,11 @@ module Google
     #
     # ## Creating images
     #
-    # The Cloud Vision API supports a variety of image file formats, including
-    # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
-    # Practices - Image
-    # Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
-    # for the complete list of formats. Be aware that Cloud Vision sets upper
+    # The Cloud Vision API supports UTF-8, UTF-16, and UTF-32 text encodings.
+    # (Ruby uses UTF-8 natively, which is the default sent to the API, so unless
+    # you're working with text processed in different platform, you should not
+    # need to set the encoding type.)
+    # a ). Be aware that Cloud Vision sets upper
     # limits on file size as well as on the total combined size of all images in
     # a request. Reducing your file size can significantly improve throughput;
     # however, be careful not to reduce image quality in the process. See [Best

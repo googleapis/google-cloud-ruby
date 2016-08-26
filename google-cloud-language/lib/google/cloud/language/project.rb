@@ -25,7 +25,10 @@ module Google
       ##
       # # Project
       #
-      # ...
+      # Google Cloud Natural Language API reveals the structure and meaning of
+      # text by offering powerful machine learning models in an easy to use REST
+      # API. You can analyze text uploaded in your request or integrate with
+      # your document storage on Google Cloud Storage.
       #
       # See {Google::Cloud#language}
       #
@@ -35,7 +38,14 @@ module Google
       #   gcloud = Google::Cloud.new
       #   language = gcloud.language
       #
-      #   # ...
+      #   content = "Darth Vader is the best villain in Star Wars."
+      #   annotation = language.annotate content
+      #
+      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.magnitude #=> 0.8999999761581421
+      #   annotation.entities.count #=> 2
+      #   annotation.sentences.count #=> 1
+      #   annotation.tokens.count #=> 10
       #
       class Project
         ##
@@ -73,14 +83,17 @@ module Google
         end
 
         ##
-        # Returns a new document from the given content.
-        #
-        # TODO: Details
+        # Returns a new document from the given content. No API call is made.
         #
         # @param [String, Google::Cloud::Storage::File] content A string of text
         #   to be annotated, or a Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/document.ext"`; or an instance of
         #   Google::Cloud::Storage::File of the text to be annotated.
+        # @param [String] format The format of the document (TEXT/HTML).
+        #   Optional.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
         #
         # @return [Document] An document for the Language service.
         #
@@ -90,7 +103,7 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "it was the best of times, it was..."
+        #   document = language.document "It was the best of times, it was..."
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud"
@@ -98,7 +111,7 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "gs://bucket-name/path/to/document"
+        #   document = language.document "gs://bucket-name/path/to/document"
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud"
@@ -111,7 +124,16 @@ module Google
         #
         #   language = gcloud.language
         #
-        #   doc = language.document file
+        #   document = language.document file
+        #
+        # @example With `format` and `language` options:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   language = gcloud.language
+        #
+        #   document = language.document "<p>El viejo y el mar</p>",
+        #                           format: :html, language: "es"
         #
         def document content, format: nil, language: nil
           content = content.to_gs_url if content.respond_to? :to_gs_url
@@ -127,27 +149,62 @@ module Google
         end
         alias_method :doc, :document
 
+        ##
+        # Returns a new document from the given content with the `format` value
+        # `:text`. No API call is made.
+        #
+        # @param [String, Google::Cloud::Storage::File] content A string of text
+        #   to be annotated, or a Cloud Storage URI of the form
+        #   `"gs://bucketname/path/to/document.ext"`; or an instance of
+        #   Google::Cloud::Storage::File of the text to be annotated.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        #
+        # @return [Document] An document for the Language service.
+        #
         def text content, language: nil
           document content, format: :text, language: language
         end
 
+        ##
+        # Returns a new document from the given content with the `format` value
+        # `:html`. No API call is made.
+        #
+        # @param [String, Google::Cloud::Storage::File] content A string of text
+        #   to be annotated, or a Cloud Storage URI of the form
+        #   `"gs://bucketname/path/to/document.ext"`; or an instance of
+        #   Google::Cloud::Storage::File of the text to be annotated.
+        # @param [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are accepted. Optional.
+        #
+        # @return [Document] An document for the Language service.
+        #
         def html content, language: nil
           document content, format: :html, language: language
         end
 
         ##
-        # TODO: Details
+        # Analyzes the content and returns sentiment, entity, and syntactic
+        # feature results, depending on the option flags. Calling `annotate`
+        # with no arguments will perform **all** analysis features. Each feature
+        # is priced separately. See [Pricing](https://cloud.google.com/natural-language/pricing)
+        # for details.
         #
         # @param [String, Document, Google::Cloud::Storage::File] content The
         #   content to annotate. This can be an {Document} instance, or any
         #   other type that converts to an {Document}. See {#document} for
         #   details.
-        # @param [Boolean] syntax Whether to perform the textual analysis.
-        #   Optional.
-        # @param [Boolean] entities Whether to perform the entitiy analysis.
-        #   Optional.
         # @param [Boolean] sentiment Whether to perform the sentiment analysis.
-        #   Optional.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
+        # @param [Boolean] entities Whether to perform the entity analysis.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
+        # @param [Boolean] syntax Whether to perform the syntactic analysis.
+        #   Optional. The default is `false`. If every feature option is
+        #   `false`, **all** features will be performed.
         # @param [String] format The format of the document (TEXT/HTML).
         #   Optional.
         # @param [String] language The language of the document (if not
@@ -164,18 +221,22 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello world!"
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   annotation = language.annotate content
         #
-        #   annotation = language.annotate doc
-        #   annotation.thing #=> Some Result
+        #   annotation.sentiment.polarity #=> 1.0
+        #   annotation.sentiment.magnitude #=> 0.8999999761581421
+        #   annotation.entities.count #=> 2
+        #   annotation.sentences.count #=> 1
+        #   annotation.tokens.count #=> 10
         #
-        def annotate content, syntax: false, entities: false, sentiment: false,
+        def annotate content, sentiment: false, entities: false, syntax: false,
                      format: nil, language: nil, encoding: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.annotate doc.to_grpc, syntax: syntax,
+          grpc = service.annotate doc.to_grpc, sentiment: sentiment,
                                                entities: entities,
-                                               sentiment: sentiment,
+                                               syntax: syntax,
                                                encoding: encoding
           Annotation.from_grpc grpc
         end
@@ -183,7 +244,9 @@ module Google
         alias_method :detect, :annotate
 
         ##
-        # TODO: Details
+        # Syntactic analysis extracts linguistic information, breaking up the
+        # given text into a series of sentences and tokens (generally, word
+        # boundaries), providing further analysis on those tokens.
         #
         # @param [String, Document, Google::Cloud::Storage::File] content The
         #   content to annotate. This can be an {Document} instance, or any
@@ -216,7 +279,9 @@ module Google
         end
 
         ##
-        # TODO: Details
+        # Entity analysis inspects the given text for known entities (proper
+        # nouns such as public figures, landmarks, etc.) and returns information
+        # about those entities.
         #
         # @param [String, Document] content The content to annotate. This
         #   can be an {Document} instance, or any other type that converts to an
@@ -237,7 +302,7 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello Chris and Mike!"
+        #   document = language.document "Hello Chris and Mike!"
         #
         #   entities = language.entities doc
         #   entities.count #=> 2
@@ -250,7 +315,10 @@ module Google
         end
 
         ##
-        # TODO: Details
+        # Sentiment analysis inspects the given text and identifies the
+        # prevailing emotional opinion within the text, especially to determine
+        # a writer's attitude as positive, negative, or neutral. Currently, only
+        # English is supported for sentiment analysis.
         #
         # @param [String, Document] content The content to annotate. This
         #   can be an {Document} instance, or any other type that converts to an
@@ -270,7 +338,7 @@ module Google
         #   gcloud = Google::Cloud.new
         #   language = gcloud.language
         #
-        #   doc = language.document "Hello Chris and Mike!"
+        #   document = language.document "Hello Chris and Mike!"
         #
         #   sentiment = language.sentiment doc
         #   sentiment.polarity #=> 1.0

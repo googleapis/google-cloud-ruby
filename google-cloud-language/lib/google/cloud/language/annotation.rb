@@ -21,7 +21,7 @@ module Google
       ##
       # # Annotation
       #
-      # The results of all requested document annotations.
+      # The results of all requested document analysis features.
       #
       # See {Project#annotate} and {Document#annotate}.
       #
@@ -31,10 +31,15 @@ module Google
       #   gcloud = Google::Cloud.new
       #   language = gcloud.language
       #
-      #   doc = language.document "Hello world!"
+      #   content = "Darth Vader is the best villain in Star Wars."
+      #   document = language.document content
+      #   annotation = doc.annotate
       #
-      #   annotation = language.annotate doc
-      #   annotation.thing #=> Some Result
+      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.magnitude #=> 0.8999999761581421
+      #   annotation.entities.count #=> 2
+      #   annotation.sentences.count #=> 1
+      #   annotation.tokens.count #=> 10
       #
       class Annotation
         ##
