@@ -181,7 +181,7 @@ task :jsondoc, :bundleupdate do |t, args|
 end
 
 namespace :jsondoc do
-  # @param tag [String] A valid tag, e.g. "v0.10.0", or "master".
+  # @param tag [String] A valid tag, e.g. "v0.10.0" (legacy), "google-cloud-datastore:v1.2.0", or "master".
   desc "Clones gh-pages branch to a temp dir"
   task :init, :tag do |t, args|
     tag = args[:tag]
@@ -213,7 +213,8 @@ namespace :jsondoc do
       unless Dir.exist? gh_pages + "json/#{gem}"
         mkdir_p gh_pages + "json/#{gem}", verbose: true
       end
-      cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{tag}", verbose: true
+      gem_version = tag.include?(":") ? tag.split(":").last : tag
+      cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{gem_version}", verbose: true
     end
     cp "docs/manifest.json", gh_pages, verbose: true
     cp "docs/json/home.html", gh_pages + "json", verbose: true

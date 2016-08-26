@@ -19,7 +19,7 @@ require "google/cloud/language/project"
 module Google
   module Cloud
     ##
-    # # Google Cloud Natural Language
+    # # Google Cloud Natural Language API
     #
     # Google Cloud Natural Language API reveals the structure and meaning of
     # text by offering powerful machine learning models in an easy to use REST
