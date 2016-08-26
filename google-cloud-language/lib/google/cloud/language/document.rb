@@ -242,7 +242,9 @@ module Google
 
         # @private
         def inspect
-          "#<#{self.class.name} (#{(content? ? "\"#{source[0,16]}...\"" : source)}, format: #{format.inspect}, language: #{language.inspect})>"
+          "#<#{self.class.name} (" \
+            "#{(content? ? "\"#{source[0,16]}...\"" : source)}, " \
+            "format: #{format.inspect}, language: #{language.inspect})>"
         end
 
         ##
