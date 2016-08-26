@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Mike Moore", "Chris Smith"]
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
-  gem.description   = "Gcloud is the official library for interacting with Google Cloud."
-  gem.summary       = "API Client library for Google Cloud"
+  gem.description   = "google-cloud-speech is the official library for Google Cloud Speech API."
+  gem.summary       = "API Client library for Google Cloud Speech API"
   gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
   gem.license       = "Apache-2.0"
 
