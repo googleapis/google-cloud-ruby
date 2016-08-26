@@ -102,6 +102,7 @@ module Google
           elsif Google::Cloud::Datastore::Key === value
             v.key_value = value.to_grpc
           elsif Google::Cloud::Datastore::Entity === value
+            value.key = nil # Embedded entities can't have keys
             v.entity_value = value.to_grpc
           elsif String === value
             v.string_value = value

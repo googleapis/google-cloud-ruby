@@ -200,6 +200,14 @@ describe Google::Cloud::Datastore::Key do
     key.must_be :frozen?
   end
 
+  it "returns nil when the GRPC object is nil" do
+    # This is important because embedded entities don't have a key
+    grpc = nil
+    key = Google::Cloud::Datastore::Key.from_grpc grpc
+
+    key.must_be :nil?
+  end
+
   it "knows its serialized side" do
     # Don't care about the exact value, just want a number and no error
     key = Google::Cloud::Datastore::Key.new "ThisThing", 1234

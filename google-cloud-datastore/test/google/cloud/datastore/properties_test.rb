@@ -139,7 +139,8 @@ describe Google::Cloud::Datastore::Properties do
     entity["name"] = "Thing 1"
     value = Google::Cloud::Core::GRPCUtils.to_value entity
     value.value_type.must_equal :entity_value
-    value.entity_value.must_equal entity.to_grpc
+    value.entity_value.properties.must_equal entity.to_grpc.properties
+    value.entity_value.key.must_be :nil? # embedded entities can't have keys
   end
 
   it "decodes Entity" do

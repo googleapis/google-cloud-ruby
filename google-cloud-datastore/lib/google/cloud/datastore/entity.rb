@@ -363,9 +363,9 @@ module Google
         # object.
         def to_grpc
           grpc = Google::Datastore::V1::Entity.new(
-            key: @key.to_grpc,
             properties: @properties.to_grpc
           )
+          grpc.key = @key.to_grpc unless @key.nil?
           update_properties_indexed! grpc.properties
           grpc
         end

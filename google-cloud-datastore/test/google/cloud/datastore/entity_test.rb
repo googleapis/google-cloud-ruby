@@ -46,6 +46,20 @@ describe Google::Cloud::Datastore::Entity do
     grpc.properties["email"].string_value.must_equal entity["email"]
   end
 
+  it "returns a correct GRPC object when key is nil" do
+    # This is important because embedded entities don't have a key
+    entity.key = nil
+    grpc = entity.to_grpc
+
+    # Key values
+    grpc.key.must_be :nil?
+
+    # Property values
+    grpc.properties.count.must_equal 2
+    grpc.properties["name"].string_value.must_equal entity["name"]
+    grpc.properties["email"].string_value.must_equal entity["email"]
+  end
+
   it "can be created with a GRPC object" do
     grpc = Google::Datastore::V1::Entity.new
     grpc.key = Google::Datastore::V1::Key.new
