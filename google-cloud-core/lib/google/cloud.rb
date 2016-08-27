@@ -68,3 +68,8 @@ module Google
     end
   end
 end
+
+# Auto-load all Google Cloud service gems.
+Gem.find_files("google-cloud-*.rb").each do |google_cloud_service|
+  require google_cloud_service
+end
