@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/speech/v1beta1/speech_api"
-# Load the protobufs so code can see these classes
-require "google/cloud/speech/v1beta1/cloud_speech_pb"
+require "helper"
+
+describe Google::Cloud::Speech::Project, :mock_speech do
+  it "knows the project identifier" do
+    speech.must_be_kind_of Google::Cloud::Speech::Project
+    speech.project.must_equal project
+  end
+end

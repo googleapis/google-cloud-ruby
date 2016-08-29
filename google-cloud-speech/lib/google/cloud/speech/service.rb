@@ -14,10 +14,9 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/grpc_backoff"
 require "google/cloud/speech/credentials"
 require "google/cloud/speech/version"
-# require "google/speech/v1/speech_services_pb"
+require "google/cloud/speech/v1beta1"
 
 module Google
   module Cloud
@@ -34,12 +33,16 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || "speech.googleapis.com"
+          @host = host || V1beta1::SpeechApi::SERVICE_ADDRESS
           @retries = retries
           @timeout = timeout
         end
 
-        def creds
+        def channel
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
           return credentials if insecure?
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
@@ -47,8 +50,13 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= Google::Speech::V1::Subscriber::Stub.new(
-            host, creds, timeout: timeout)
+          @service ||= \
+            V1beta1::SpeechApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              app_name: "google-cloud-speech",
+              app_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_service
 
@@ -63,11 +71,10 @@ module Google
         protected
 
         def execute
-          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
-            yield
-          end
+          require "grpc" # Ensure GRPC is loaded before rescuing exception
+          yield
         rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end
