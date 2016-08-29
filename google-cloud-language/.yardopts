@@ -1,5 +1,7 @@
 --no-private
 --title=Google Cloud Language
+--exclude lib/google/cloud/language/v1beta1
+--exclude lib/google/cloud/language/v1beta1.rb
 --markup markdown
 
 ./lib/**/*.rb

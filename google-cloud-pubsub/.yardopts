@@ -3,6 +3,7 @@
 --exclude lib/google/pubsub
 --exclude lib/google/iam
 --exclude lib/google/cloud/pubsub/v1
+--exclude lib/google/cloud/pubsub/v1.rb
 --markup markdown
 
 ./lib/**/*.rb
