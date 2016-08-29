@@ -9,7 +9,7 @@
   "home": "home.html",
   "package": {
     "title": "RubyGems",
-    "href": "http://rubygems.org/gems/gcloud"
+    "href": "http://rubygems.org/gems/google-cloud"
   },
   "modules": [
     {
@@ -17,8 +17,10 @@
       "name": "gcloud",
       "defaultService": "gcloud",
       "versions": [
-        "v0.12.1",
+        "v0.20.0",
         "master",
+        "v0.12.2",
+        "v0.12.1",
         "v0.12.0",
         "v0.11.0",
         "v0.10.0",
@@ -35,7 +37,7 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.12.2",
+        "v0.20.0",
         "master"
       ]
     },
@@ -44,6 +46,7 @@
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -52,6 +55,7 @@
       "name": "google-cloud-core",
       "defaultService": "google/cloud/error",
       "versions": [
+        "v0.20.1",
         "master"
       ]
     },
@@ -60,6 +64,7 @@
       "name": "google-cloud-datastore",
       "defaultService": "google/cloud/datastore",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -68,6 +73,16 @@
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
       "versions": [
+        "v0.20.0",
+        "master"
+      ]
+    },
+    {
+      "id": "google-cloud-language",
+      "name": "google-cloud-language",
+      "defaultService": "google/cloud/language",
+      "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -76,6 +91,7 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -84,6 +100,7 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -92,6 +109,7 @@
       "name": "google-cloud-resource_manager",
       "defaultService": "google/cloud/resourcemanager",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -100,6 +118,7 @@
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -108,6 +127,7 @@
       "name": "google-cloud-translate",
       "defaultService": "google/cloud/translate",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     },
@@ -116,6 +136,7 @@
       "name": "google-cloud-vision",
       "defaultService": "google/cloud/vision",
       "versions": [
+        "v0.20.0",
         "master"
       ]
     }

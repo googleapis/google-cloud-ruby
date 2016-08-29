@@ -35,19 +35,7 @@
       "nav": [
         {
           "title": "Project",
-          "type": "google/cloud/bigquery/project"
-        },
-        {
-          "title": "Dataset",
-          "type": "google/cloud/bigquery/dataset"
-        },
-        {
-          "title": "Job",
-          "type": "google/cloud/bigquery/job"
-        },
-        {
-          "title": "Table",
-          "type": "google/cloud/bigquery/table"
+          "type": "Gcloud"
         }
       ]
     }

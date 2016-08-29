@@ -31,7 +31,21 @@
   "services": [
     {
       "title": "Natural Language",
-      "type": "google/cloud/language"
+      "type": "google/cloud/language",
+        "nav": [
+          {
+            "title": "Project",
+            "type": "google/cloud/language/project"
+          },
+          {
+            "title": "Document",
+            "type": "google/cloud/language/document"
+          },
+          {
+            "title": "Annotation",
+            "type": "google/cloud/language/annotation"
+          }
+        ]
     }
   ]
 }
