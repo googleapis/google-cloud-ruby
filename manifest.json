@@ -82,9 +82,8 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.20.1",
-        "master",
-        "v0.20.0"
+        "v0.20.0",
+        "master"
       ]
     },
     {

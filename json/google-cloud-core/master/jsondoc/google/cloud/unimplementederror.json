@@ -1,1 +1,0 @@
-{"id":"google/cloud/unimplementederror","name":"UnimplementedError","title":["Google","Cloud","UnimplementedError"],"description":"<p>Unimplemented indicates operation is not implemented or not\nsupported/enabled in this service.</p>","source":"lib/google/cloud/errors.rb#L183","resources":[],"examples":[],"methods":[]}
