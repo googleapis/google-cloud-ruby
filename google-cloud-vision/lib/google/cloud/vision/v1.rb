@@ -13,4 +13,3 @@
 # limitations under the License.
 
 require "google/cloud/vision/v1/image_annotator_api"
-
