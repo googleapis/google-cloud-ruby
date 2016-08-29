@@ -38,8 +38,7 @@ module Google
     #   The default scope is:
     #
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Language::Project]
@@ -49,8 +48,10 @@ module Google
     #
     #   gcloud = Google::Cloud.new
     #   language = gcloud.language
-    #   topic = language.topic "my-topic"
-    #   topic.publish "task completed"
+    #
+    #   content = "Darth Vader is the best villain in Star Wars."
+    #   document = language.document content
+    #   annotation = document.annotate
     #
     # @example The default scope can be overridden with the `scope` option:
     #   require "google/cloud"
@@ -84,8 +85,7 @@ module Google
     #   The default scope is:
     #
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries  This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Language::Project]
@@ -95,8 +95,9 @@ module Google
     #
     #   language = Google::Cloud.language
     #
-    #   topic = language.topic "my-topic"
-    #   topic.publish "task completed"
+    #   content = "Darth Vader is the best villain in Star Wars."
+    #   document = language.document content
+    #   annotation = document.annotate
     #
     def self.language project = nil, keyfile = nil, scope: nil, retries: nil,
                       timeout: nil
