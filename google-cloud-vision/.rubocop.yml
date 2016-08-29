@@ -3,6 +3,7 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-vision.gemspec"
     - "Rakefile"
+    - "lib/google/cloud/vision/v1/**/*"
     - "test/**/*"
 
 Documentation:
