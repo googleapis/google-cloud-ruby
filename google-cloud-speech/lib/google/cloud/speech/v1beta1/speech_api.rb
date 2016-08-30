@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1beta1/cloud_speech.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -26,16 +26,16 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/cloud/speech/v1/cloud_speech_services_pb"
+require "google/cloud/speech/v1beta1/cloud_speech_services_pb"
 
 module Google
   module Cloud
     module Speech
-      module V1
+      module V1beta1
         # Service that implements Google Cloud Speech API.
         #
         # @!attribute [r] stub
-        #   @return [Google::Cloud::Speech::V1::Speech::Stub]
+        #   @return [Google::Cloud::Speech::V1beta1::Speech::Stub]
         class SpeechApi
           attr_reader :stub
 
@@ -92,7 +92,7 @@ module Google
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.cloud.speech.v1.Speech",
+                "google.cloud.speech.v1beta1.Speech",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -107,46 +107,92 @@ module Google
               chan_creds: chan_creds,
               channel: channel,
               scopes: scopes,
-              &Google::Cloud::Speech::V1::Speech::Stub.method(:new)
+              &Google::Cloud::Speech::V1beta1::Speech::Stub.method(:new)
             )
 
-            @non_streaming_recognize = Google::Gax.create_api_call(
-              @stub.method(:non_streaming_recognize),
-              defaults["non_streaming_recognize"]
+            @sync_recognize = Google::Gax.create_api_call(
+              @stub.method(:sync_recognize),
+              defaults["sync_recognize"]
+            )
+            @async_recognize = Google::Gax.create_api_call(
+              @stub.method(:async_recognize),
+              defaults["async_recognize"]
             )
           end
 
           # Service calls
 
-          # Perform non-streaming speech-recognition: receive results after all audio
+          # Perform synchronous speech-recognition: receive results after all audio
           # has been sent and processed.
           #
-          # @param initial_request [Google::Cloud::Speech::V1::InitialRecognizeRequest]
-          #   The +initial_request+ message provides information to the recognizer
+          # @param config [Google::Cloud::Speech::V1beta1::RecognitionConfig]
+          #   [Required] The +config+ message provides information to the recognizer
           #   that specifies how to process the request.
-          #
-          #   The first +RecognizeRequest+ message must contain an +initial_request+.
-          #   Any subsequent +RecognizeRequest+ messages must not contain an
-          #   +initial_request+.
-          # @param audio_request [Google::Cloud::Speech::V1::AudioRequest]
-          #   The audio data to be recognized. For REST or +NonStreamingRecognize+, all
-          #   audio data must be contained in the first (and only) +RecognizeRequest+
-          #   message. For gRPC streaming +Recognize+, sequential chunks of audio data
-          #   are sent in sequential +RecognizeRequest+ messages.
+          # @param audio [Google::Cloud::Speech::V1beta1::RecognitionAudio]
+          #   [Required] The audio data to be recognized.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Cloud::Speech::V1::NonStreamingRecognizeResponse]
+          # @return [Google::Cloud::Speech::V1beta1::SyncRecognizeResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          def non_streaming_recognize \
-              initial_request,
-              audio_request,
+          # @example
+          #   require "google/cloud/speech/v1beta1/speech_api"
+          #
+          #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
+          #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
+          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #
+          #   speech_api = SpeechApi.new
+          #   config = RecognitionConfig.new
+          #   audio = RecognitionAudio.new
+          #   response = speech_api.sync_recognize(config, audio)
+
+          def sync_recognize \
+              config,
+              audio,
               options: nil
-            req = Google::Cloud::Speech::V1::RecognizeRequest.new(
-              initial_request: initial_request,
-              audio_request: audio_request
+            req = Google::Cloud::Speech::V1beta1::SyncRecognizeRequest.new(
+              config: config,
+              audio: audio
             )
-            @non_streaming_recognize.call(req, options)
+            @sync_recognize.call(req, options)
+          end
+
+          # Perform asynchronous speech-recognition: receive results via the
+          # google.longrunning.Operations interface. +Operation.response+ returns
+          # +AsyncRecognizeResponse+.
+          #
+          # @param config [Google::Cloud::Speech::V1beta1::RecognitionConfig]
+          #   [Required] The +config+ message provides information to the recognizer
+          #   that specifies how to process the request.
+          # @param audio [Google::Cloud::Speech::V1beta1::RecognitionAudio]
+          #   [Required] The audio data to be recognized.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Longrunning::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/speech/v1beta1/speech_api"
+          #
+          #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
+          #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
+          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #
+          #   speech_api = SpeechApi.new
+          #   config = RecognitionConfig.new
+          #   audio = RecognitionAudio.new
+          #   response = speech_api.async_recognize(config, audio)
+
+          def async_recognize \
+              config,
+              audio,
+              options: nil
+            req = Google::Cloud::Speech::V1beta1::AsyncRecognizeRequest.new(
+              config: config,
+              audio: audio
+            )
+            @async_recognize.call(req, options)
           end
         end
       end
