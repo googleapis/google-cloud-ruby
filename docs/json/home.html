@@ -1,8 +1,8 @@
 <section class="hero-banner">
   <div class="container clearfix">
     <div class="quote-box">
-      <h1>gcloud</h1>
-      <p>Google Cloud Client Library for Ruby
+      <h1>google-cloud</h1>
+      <p>The Google Cloud client library for Ruby
       - an idiomatic, intuitive, and natural way for Ruby developers to
       integrate with Google Cloud Platform services, like Cloud Datastore
       and Cloud Storage.</p>
@@ -61,7 +61,7 @@
     <div class="quote-box">
       <h3 class="block-title">What is it?</h3>
 
-      <p><code>gcloud</code> is a client library for accessing Google
+      <p>The google-cloud library is a client for accessing Google
       Cloud Platform services that significantly reduces the boilerplate
       code you have to write. The library provides high-level API
       abstractions so they're easier to understand. It embraces
@@ -70,7 +70,7 @@
       All this means you spend more time creating code that matters
       to you.</p>
 
-      <p><code>gcloud</code> is configured to access Google Cloud Platform
+      <p>The google-cloud library is configured to access Google Cloud Platform
       services and authenticate (OAuth 2.0) automatically on your behalf.
       With a one-line install and a private key, you are up and ready
       to go. Better yet, if you are running on a Google Compute Engine
@@ -81,10 +81,11 @@
     <div class="quote-box--supplementary">
       <h4>Retrieve an entity from Cloud Datastore</h4>
       <div hljs hljs-language="ruby">
-require "gcloud/datastore"
+require "google/cloud"
 
-datastore = Gcloud.datastore "my-project",
-                             "key.json"
+gcloud = Google::Cloud.new "my-todo-project-id",
+                           "/path/to/keyfile.json"
+datastore = gcloud.datastore
 
 product = datastore.find "Product", 123</div>
 
@@ -96,12 +97,12 @@ product = datastore.find "Product", 123</div>
     <div class="container clearfix">
     <h3 class="block-title">FAQ</h3>
 
-      <h4>What is the relationship between the gcloud package and the gcloud command-line tool?</h4>
+      <h4>What is the relationship between the google-cloud library and the gcloud command-line tool?</h4>
 
-      <p>Both the gcloud command-line tool and gcloud package are a part of the Google Cloud SDK: a collection of tools and libraries that enable you to easily create and manage resources on the Google Cloud Platform. The gcloud command-line tool can be used to manage both your development workflow and your Google Cloud Platform resources while the gcloud package is the Google Cloud Client Library for Ruby.</p>
+      <p>Both the gcloud command-line tool and google-cloud library are a part of the Google Cloud SDK: a collection of tools and libraries that enable you to easily create and manage resources on the Google Cloud Platform. The gcloud command-line tool can be used to manage both your development workflow and your Google Cloud Platform resources while the google-cloud library is the Google Cloud Client Library for Ruby.</p>
 
-      <h4>What is the relationship between gcloud and the Google APIs Ruby Client?</h4>
+      <h4>What is the relationship between the google-cloud library and the Google APIs Ruby Client?</h4>
 
-      <p>The <a href="https://github.com/google/google-api-ruby-client">Google APIs Ruby Client</a> is a client library for using the broad set of Google APIs. gcloud is built specifically for the Google Cloud Platform and is the recommended way to integrate Google Cloud APIs into your Ruby applications. If your application requires both Google Cloud Platform and other Google APIs, the 2 libraries may be used by your application.</p>
+      <p>The <a href="https://github.com/google/google-api-ruby-client">Google APIs Ruby Client</a> is a client library for using the broad set of Google APIs. The google-cloud library is built specifically for the Google Cloud Platform and is the recommended way to integrate Google Cloud APIs into your Ruby applications. If your application requires both Google Cloud Platform and other Google APIs, the 2 libraries may be used by your application.</p>
     </div>
 </section> <!-- end of FAQ -->
