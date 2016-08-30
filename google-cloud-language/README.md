@@ -4,7 +4,7 @@
 
 The Google Cloud Natural Language API is currently a beta release, and might be changed in backward-incompatible ways. It is not subject to any SLA or deprecation policy and is not intended for real-time usage in critical applications.
 
-- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/google/cloud/language)
+- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/master/google/cloud/language)
 - [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
 - [Google Cloud Natural Language API documentation](https://cloud.google.com/language/docs)
 

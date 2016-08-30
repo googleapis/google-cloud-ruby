@@ -2,7 +2,7 @@
 
 This library contains shared types, such as error classes, for the google-cloud project. Please see the top-level project [README](../README.md) for general information.
 
-- [google-cloud-core API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-core/google/cloud/errors)
+- [google-cloud-core API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-core/master/google/cloud/errors)
 
 ## Supported Ruby Versions
 

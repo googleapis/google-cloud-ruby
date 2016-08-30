@@ -48,7 +48,7 @@ The preview examples below demonstrate how to provide the **Project ID** and **C
 ### BigQuery
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
-- [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery)
+- [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/master/google/cloud/bigquery)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google Cloud BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
@@ -88,7 +88,7 @@ end
 ### Datastore
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
-- [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore)
+- [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/master/google/cloud/datastore)
 - [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
@@ -129,7 +129,7 @@ tasks = datastore.run query
 ### DNS
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
-- [google-cloud-dns API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dns)
+- [google-cloud-dns API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dns/master/google/cloud/dns)
 - [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
 - [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 
@@ -166,7 +166,7 @@ end
 ### Logging
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
-- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
+- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/master/google/cloud/logging)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -206,7 +206,7 @@ logging.write_entries entry
 ### Natural Language
 
 - [google-cloud-language README](google-cloud-language/README.md)
-- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language)
+- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/master/google/cloud/language)
 - [google-cloud-language on RubyGems](https://rubygems.org/gems/[google-cloud-language)
 - [Google Cloud Natural Language API documentation](https://cloud.google.com/language/docs)
 
@@ -238,7 +238,7 @@ annotation.tokens.count #=> 10
 ### Pub/Sub
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
-- [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub)
+- [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/master/google/cloud/pubsub)
 - [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
@@ -273,7 +273,7 @@ msgs = sub.pull
 ### Resource Manager
 
 - [google-cloud-resource_manager README](google-cloud-resource_manager/README.md)
-- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager)
+- [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager/master/google/cloud/resourcemanager)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
@@ -309,7 +309,7 @@ projects = resource_manager.projects filter: "labels.env:production"
 ### Storage
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
-- [google-cloud-storage API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-storage)
+- [google-cloud-storage API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-storage/master/google/cloud/storage)
 - [google-cloud-storage on RubyGems](https://rubygems.org/gems/google-cloud-storage)
 - [Google Cloud Storage documentation](https://cloud.google.com/storage/docs)
 
@@ -343,7 +343,7 @@ file.copy backup, file.name
 ### Translate
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
-- [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate)
+- [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/master/google/cloud/translate)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Translate documentation](https://cloud.google.com/translate/docs)
 
@@ -374,7 +374,7 @@ translation.text #=> "Salve mundi!"
 ### Vision
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
-- [google-cloud-ruby-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision)
+- [google-cloud-ruby-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/master/google/cloud/vision)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
 
