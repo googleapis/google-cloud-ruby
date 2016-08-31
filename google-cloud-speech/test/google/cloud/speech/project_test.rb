@@ -15,8 +15,19 @@
 require "helper"
 
 describe Google::Cloud::Speech::Project, :mock_speech do
+  let(:filepath) { "acceptance/data/audio.raw" }
+
   it "knows the project identifier" do
     speech.must_be_kind_of Google::Cloud::Speech::Project
     speech.project.must_equal project
+  end
+
+  it "builds an audio from filepath input" do
+    audio = speech.audio filepath
+
+    audio.wont_be :nil?
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.must_be :content?
+    audio.wont_be :url?
   end
 end

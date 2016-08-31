@@ -16,6 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/core/gce"
 require "google/cloud/speech/service"
+require "google/cloud/speech/audio"
 
 module Google
   module Cloud
@@ -68,6 +69,14 @@ module Google
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
             Google::Cloud::Core::GCE.project_id
+        end
+
+        def audio source, encoding: nil, sample_rate: nil, language: nil
+          audio = Audio.from_source source
+          audio.encoding = encoding unless encoding.nil?
+          audio.sample_rate = sample_rate unless sample_rate.nil?
+          audio.language = language unless language.nil?
+          audio
         end
 
         protected
