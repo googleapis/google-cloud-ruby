@@ -14,7 +14,7 @@
 
 
 require "google/cloud/datastore/credentials"
-require "google/datastore/v1/datastore_services_pb"
+require "google/datastore/v1/datastore_pb"
 require "google/cloud/core/grpc_backoff"
 
 module Google
@@ -45,8 +45,12 @@ module Google
 
         def datastore
           return mocked_datastore if mocked_datastore
-          @datastore ||= Google::Datastore::V1::Datastore::Stub.new(
-            host, creds, timeout: timeout)
+          @datastore ||= begin
+            require "google/datastore/v1/datastore_services_pb"
+
+            Google::Datastore::V1::Datastore::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_datastore
 

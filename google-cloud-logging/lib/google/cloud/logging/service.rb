@@ -15,9 +15,9 @@
 
 require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
-require "google/logging/v2/logging_services_pb"
-require "google/logging/v2/logging_config_services_pb"
-require "google/logging/v2/logging_metrics_services_pb"
+require "google/logging/v2/logging_pb"
+require "google/logging/v2/logging_config_pb"
+require "google/logging/v2/logging_metrics_pb"
 
 module Google
   module Cloud
@@ -46,22 +46,34 @@ module Google
 
         def logging
           return mocked_logging if mocked_logging
-          @logging ||= Google::Logging::V2::LoggingServiceV2::Stub.new(
-            host, creds, timeout: timeout)
+          @logging ||= begin
+            require "google/logging/v2/logging_services_pb"
+
+            Google::Logging::V2::LoggingServiceV2::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_logging
 
         def sinks
           return mocked_sinks if mocked_sinks
-          @sinks ||= Google::Logging::V2::ConfigServiceV2::Stub.new(
-            host, creds, timeout: timeout)
+          @sinks ||= begin
+            require "google/logging/v2/logging_config_services_pb"
+
+            Google::Logging::V2::ConfigServiceV2::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_sinks
 
         def metrics
           return mocked_metrics if mocked_metrics
-          @metrics ||= Google::Logging::V2::MetricsServiceV2::Stub.new(
-            host, creds, timeout: timeout)
+          @metrics ||= begin
+            require "google/logging/v2/logging_metrics_services_pb"
+
+            Google::Logging::V2::MetricsServiceV2::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_metrics
 
