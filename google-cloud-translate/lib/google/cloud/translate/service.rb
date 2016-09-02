@@ -38,7 +38,8 @@ module Google
           @service.client_options.application_version = \
             Google::Cloud::Translate::VERSION
           @service.request_options.retries = retries || 3
-          @service.request_options.timeout_sec = timeout if timeout
+          @service.request_options.timeout_sec      = timeout
+          @service.request_options.open_timeout_sec = timeout
           @service.authorization = nil
           @service.key = key
         end
