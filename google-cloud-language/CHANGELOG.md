@@ -1,5 +1,9 @@
 # Release History
 
+### 0.20.2 / 2016-09-02
+
+* Fix an issue with the GRPC client and forked sub-processes
+
 ### 0.20.1 / 2016-08-29
 
 * Fix documentation.
