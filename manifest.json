@@ -64,8 +64,9 @@
       "name": "google-cloud-datastore",
       "defaultService": "google/cloud/datastore",
       "versions": [
-        "v0.20.0",
-        "master"
+        "v0.20.1",
+        "master",
+        "v0.20.0"
       ]
     },
     {
@@ -82,8 +83,9 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.20.1",
+        "v0.20.2",
         "master",
+        "v0.20.1",
         "v0.20.0"
       ]
     },
@@ -92,8 +94,9 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
-        "v0.20.0",
-        "master"
+        "v0.20.1",
+        "master",
+        "v0.20.0"
       ]
     },
     {
@@ -101,8 +104,9 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
-        "v0.20.0",
-        "master"
+        "v0.20.1",
+        "master",
+        "v0.20.0"
       ]
     },
     {
