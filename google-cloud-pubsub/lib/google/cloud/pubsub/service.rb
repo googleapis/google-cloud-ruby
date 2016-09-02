@@ -15,8 +15,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
-require "google/pubsub/v1/pubsub_services_pb"
-require "google/iam/v1/iam_policy_services"
+require "google/pubsub/v1/pubsub_pb"
+require "google/iam/v1/iam_policy"
 require "google/cloud/core/grpc_utils"
 require "json"
 
@@ -48,22 +48,34 @@ module Google
 
         def subscriber
           return mocked_subscriber if mocked_subscriber
-          @subscriber ||= Google::Pubsub::V1::Subscriber::Stub.new(
-            host, creds, timeout: timeout)
+          @subscriber ||= begin
+            require "google/pubsub/v1/pubsub_services_pb"
+
+            Google::Pubsub::V1::Subscriber::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_subscriber
 
         def publisher
           return mocked_publisher if mocked_publisher
-          @publisher ||= Google::Pubsub::V1::Publisher::Stub.new(
-            host, creds, timeout: timeout)
+          @publisher ||= begin
+            require "google/pubsub/v1/pubsub_services_pb"
+
+            Google::Pubsub::V1::Publisher::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_publisher
 
         def iam
           return mocked_iam if mocked_iam
-          @iam ||= Google::Iam::V1::IAMPolicy::Stub.new(
-            host, creds, timeout: timeout)
+          @iam ||= begin
+            require "google/iam/v1/iam_policy_services"
+
+            Google::Iam::V1::IAMPolicy::Stub.new(
+              host, creds, timeout: timeout)
+          end
         end
         attr_accessor :mocked_iam
 
