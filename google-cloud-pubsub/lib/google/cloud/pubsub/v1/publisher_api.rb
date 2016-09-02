@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/pubsub/v1/pubsub_services_pb"
 
 module Google
   module Cloud
@@ -163,6 +162,12 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/pubsub/v1/pubsub_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
@@ -233,6 +238,15 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::Topic]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_name = PublisherApi.topic_path("[PROJECT]", "[TOPIC]")
+          #   response = publisher_api.create_topic(formatted_name)
+
           def create_topic \
               name,
               options: nil
@@ -255,6 +269,20 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::PublishResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #   PubsubMessage = Google::Pubsub::V1::PubsubMessage
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_topic = PublisherApi.topic_path("[PROJECT]", "[TOPIC]")
+          #   data = ''
+          #   messages_element = PubsubMessage.new
+          #   messages_element.data = data
+          #   messages = [messages_element]
+          #   response = publisher_api.publish(formatted_topic, messages)
+
           def publish \
               topic,
               messages,
@@ -275,6 +303,15 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::Topic]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_topic = PublisherApi.topic_path("[PROJECT]", "[TOPIC]")
+          #   response = publisher_api.get_topic(formatted_topic)
+
           def get_topic \
               topic,
               options: nil
@@ -303,6 +340,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_project = PublisherApi.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   publisher_api.list_topics(formatted_project).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   publisher_api.list_topics(formatted_project).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_topics \
               project,
               page_size: nil,
@@ -333,6 +391,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_topic = PublisherApi.topic_path("[PROJECT]", "[TOPIC]")
+          #
+          #   # Iterate over all results.
+          #   publisher_api.list_topic_subscriptions(formatted_topic).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   publisher_api.list_topic_subscriptions(formatted_topic).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_topic_subscriptions \
               topic,
               page_size: nil,
@@ -356,6 +435,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/publisher_api"
+          #
+          #   PublisherApi = Google::Cloud::Pubsub::V1::PublisherApi
+          #
+          #   publisher_api = PublisherApi.new
+          #   formatted_topic = PublisherApi.topic_path("[PROJECT]", "[TOPIC]")
+          #   publisher_api.delete_topic(formatted_topic)
+
           def delete_topic \
               topic,
               options: nil

@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/logging/v2/logging_metrics_services_pb"
 
 module Google
   module Cloud
@@ -150,6 +149,12 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/logging/v2/logging_metrics_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
@@ -221,6 +226,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #
+          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #
+          #   metrics_service_v2_api = MetricsServiceV2Api.new
+          #   formatted_parent = MetricsServiceV2Api.parent_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   metrics_service_v2_api.list_log_metrics(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   metrics_service_v2_api.list_log_metrics(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_log_metrics \
               parent,
               page_size: nil,
@@ -242,6 +268,15 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #
+          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #
+          #   metrics_service_v2_api = MetricsServiceV2Api.new
+          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
+          #   response = metrics_service_v2_api.get_log_metric(formatted_metric_name)
+
           def get_log_metric \
               metric_name,
               options: nil
@@ -266,6 +301,17 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #
+          #   LogMetric = Google::Logging::V2::LogMetric
+          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #
+          #   metrics_service_v2_api = MetricsServiceV2Api.new
+          #   formatted_parent = MetricsServiceV2Api.parent_path("[PROJECT]")
+          #   metric = LogMetric.new
+          #   response = metrics_service_v2_api.create_log_metric(formatted_parent, metric)
+
           def create_log_metric \
               parent,
               metric,
@@ -295,6 +341,17 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #
+          #   LogMetric = Google::Logging::V2::LogMetric
+          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #
+          #   metrics_service_v2_api = MetricsServiceV2Api.new
+          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
+          #   metric = LogMetric.new
+          #   response = metrics_service_v2_api.update_log_metric(formatted_metric_name, metric)
+
           def update_log_metric \
               metric_name,
               metric,
@@ -315,6 +372,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #
+          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #
+          #   metrics_service_v2_api = MetricsServiceV2Api.new
+          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
+          #   metrics_service_v2_api.delete_log_metric(formatted_metric_name)
+
           def delete_log_metric \
               metric_name,
               options: nil
