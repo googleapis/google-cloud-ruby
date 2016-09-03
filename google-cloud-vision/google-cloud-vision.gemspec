@@ -19,10 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 0.20.0"
   gem.add_dependency "google-api-client", "~> 0.9.11"
-  gem.add_dependency "grpc", "~> 1.0"
-  gem.add_dependency "google-protobuf", "~> 3.0"
-  gem.add_dependency "googleapis-common-protos", "~> 1.2"
-  gem.add_dependency "google-gax", "~> 0.4.4"
 
   gem.add_development_dependency "minitest", "~> 5.9"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
