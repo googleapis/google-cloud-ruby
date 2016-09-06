@@ -9,6 +9,8 @@ script:
 - bundle exec rake jsondoc
 - bundle exec rake test:coveralls
 - bundle exec rake travis:acceptance
+after_success:
+- bundle exec rake travis:post
 matrix:
   include:
   - rvm: 2.3.1
