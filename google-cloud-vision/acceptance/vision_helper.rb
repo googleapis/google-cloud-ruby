@@ -21,6 +21,11 @@ require "google/cloud/vision"
 # Create shared vision object so we don't create new for each test
 $vision = Google::Cloud.vision retries: 10
 
+require "google/cloud/storage"
+
+# Create shared storage object so we don't create new for each test
+$storage = Google::Cloud.new.storage retries: 10
+
 module Acceptance
   ##
   # Test class for running against a Vision instance.
@@ -35,7 +40,7 @@ module Acceptance
   #     end
   #   end
   class VisionTest < Minitest::Test
-    attr_accessor :vision
+    attr_accessor :vision, :storage
 
     ##
     # Setup project based on available ENV variables
@@ -43,6 +48,10 @@ module Acceptance
       @vision = $vision
 
       refute_nil @vision, "You do not have an active vision to run the tests."
+
+      @storage = $storage
+
+      refute_nil @storage, "You do not have an active storage to run the tests."
 
       super
     end
@@ -65,4 +74,24 @@ module Acceptance
     end
     reporter.record result
   end
+end
+
+# Create buckets to be shared with all the tests
+require "time"
+require "securerandom"
+t = Time.now.utc.iso8601.gsub ":", "-"
+$vision_prefix = "gcloud-vision-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
+
+def clean_up_vision_storage_objects
+  puts "Cleaning up storage buckets after vision tests."
+  if b = $storage.bucket($vision_prefix)
+    b.files.all(&:delete)
+    b.delete
+  end
+rescue => e
+  puts "Error while cleaning up storage buckets after vision tests.\n\n#{e}"
+end
+
+Minitest.after_run do
+  clean_up_vision_storage_objects
 end

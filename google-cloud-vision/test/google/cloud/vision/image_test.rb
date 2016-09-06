@@ -24,6 +24,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.must_be :io?
     image.wont_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "can create from a Pathname object" do
@@ -32,6 +35,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.must_be :io?
     image.wont_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "can create from a File object" do
@@ -40,6 +46,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.must_be :io?
     image.wont_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "can create from a StringIO object" do
@@ -48,6 +57,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.must_be :io?
     image.wont_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "can create from a Tempfile object" do
@@ -57,11 +69,14 @@ describe Google::Cloud::Vision::Image, :mock_vision do
       tmpfile.write File.read(filepath, mode: "rb")
 
       image = vision.image tmpfile
-    end
 
-    image.must_be_kind_of Google::Cloud::Vision::Image
-    image.must_be :io?
-    image.wont_be :url?
+      image.must_be_kind_of Google::Cloud::Vision::Image
+      image.must_be :io?
+      image.wont_be :url?
+
+      image.inspect.must_be_kind_of String
+      image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    end
   end
 
   it "can create from a Google Storage URL" do
@@ -70,6 +85,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.wont_be :io?
     image.must_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "can create from a Storage::File object" do
@@ -79,6 +97,9 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be_kind_of Google::Cloud::Vision::Image
     image.wont_be :io?
     image.must_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
   end
 
   it "raises when giving an object that is not IO or a Google Storage URL" do

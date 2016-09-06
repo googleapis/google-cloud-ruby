@@ -40,7 +40,7 @@ module Acceptance
   #     end
   #   end
   class LanguageTest < Minitest::Test
-    attr_accessor :language
+    attr_accessor :language, :storage
 
     ##
     # Setup project based on available ENV variables

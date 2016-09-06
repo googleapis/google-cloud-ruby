@@ -334,7 +334,7 @@ module Google
               @io.rewind
               "(#{@io.read(16)}...)"
             else
-              "(#{url})"
+              "(#{@url})"
             end
           end
         end
@@ -351,7 +351,7 @@ module Google
             @io.rewind
             Google::Apis::VisionV1::Image.new content: @io.read
           elsif url?
-            Google::Apis::VisionV1::Image.new source: { gcsImageUri: @url }
+            Google::Apis::VisionV1::Image.new source: { gcs_image_uri: @url }
           else
             fail ArgumentError, "Unable to use Image with Vision service."
           end

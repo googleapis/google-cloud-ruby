@@ -23,9 +23,38 @@ describe "Vision", :vision do
   let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
 
+  let(:bucket)   { storage.bucket($vision_prefix) || storage.create_bucket($vision_prefix) }
+  let(:gcs_file) { bucket.file(face_image) || bucket.create_file(face_image) }
+  let(:gcs_url)  { gcs_file.to_gs_url }
+
   describe "default" do
     it "runs all annotations if none are specified" do
       annotation = vision.annotate face_image
+
+      annotation.must_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.must_be :label?
+      annotation.wont_be :text?
+      annotation.must_be :safe_search?
+      annotation.must_be :properties?
+    end
+
+    it "runs all annotations on a Storage File" do
+      annotation = vision.annotate gcs_file
+
+      annotation.must_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.must_be :label?
+      annotation.wont_be :text?
+      annotation.must_be :safe_search?
+      annotation.must_be :properties?
+    end
+
+    it "runs all annotations on a GCS URL" do
+      image = vision.image gcs_url
+      annotation = vision.annotate image
 
       annotation.must_be :face?
       annotation.wont_be :landmark?
