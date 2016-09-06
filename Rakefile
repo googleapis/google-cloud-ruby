@@ -368,17 +368,18 @@ namespace :travis do
   desc "Runs post-build logic"
   task :post do
     # We don't run post-build on pull requests
-    return unless ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
+    if ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
 
-    if ENV["TRAVIS_BRANCH"] == "master"
-      # TODO: Call JSONDOC task for master here
-    elsif ENV["TRAVIS_TAG"]
-      tag = ENV["TRAVIS_TAG"]
-      # Verify the tag format "PACKAGE/vVERSION"
-      m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
-      if m # We have a match!
-        Rake::Task["travis:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
-        # TODO: Call JSONDOC task for release here
+      if ENV["TRAVIS_BRANCH"] == "master"
+        # TODO: Call JSONDOC task for master here
+      elsif ENV["TRAVIS_TAG"]
+        tag = ENV["TRAVIS_TAG"]
+        # Verify the tag format "PACKAGE/vVERSION"
+        m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
+        if m # We have a match!
+          Rake::Task["travis:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
+          # TODO: Call JSONDOC task for release here
+        end
       end
     end
   end
