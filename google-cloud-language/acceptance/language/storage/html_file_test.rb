@@ -21,7 +21,6 @@ describe "Language (HTML/Storage File)", :language do
   let(:content) { "<html><head><title>#{hello}</title></head>" + \
                   "<body><h1>#{sayhi}</h1><p>#{ruby}</p></body></html>" }
 
-  let(:storage) { Google::Cloud.storage }
   let(:bucket)  { storage.bucket($lang_prefix) || storage.create_bucket($lang_prefix) }
   let(:file_io) { t = Tempfile.new(["language", ".html"]); t.write content.encode("UTF-8"); t.rewind; t }
   let(:file)    { bucket.file("language.html") || bucket.create_file(file_io, "language.html") }

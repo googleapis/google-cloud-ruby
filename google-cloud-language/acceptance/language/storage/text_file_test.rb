@@ -20,7 +20,6 @@ describe "Language (TEXT/Storage File)", :language do
   let(:ruby)    { "We love ruby and writing code." }
   let(:content) { "#{hello} #{sayhi} #{ruby}" }
 
-  let(:storage) { Google::Cloud.storage }
   let(:bucket)  { storage.bucket($lang_prefix) || storage.create_bucket($lang_prefix) }
   let(:file_io) { t = Tempfile.new(["language", ".txt"]); t.write content.encode("UTF-8"); t.rewind; t }
   let(:file)    { bucket.file("language.txt") || bucket.create_file(file_io, "language.txt") }
