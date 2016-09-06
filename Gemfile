@@ -10,6 +10,7 @@ gem "rubocop", "<= 0.35.1"
 gem "simplecov", "~> 0.9"
 gem "coveralls", "~> 0.7"
 gem "yard", "~> 0.9"
+gem "gems", "~> 0.8"
 
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
