@@ -334,7 +334,7 @@ module Google
               @io.rewind
               "(#{@io.read(16)}...)"
             else
-              "(#{url})"
+              "(#{@url})"
             end
           end
         end
