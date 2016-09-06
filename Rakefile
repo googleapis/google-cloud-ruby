@@ -405,7 +405,7 @@ namespace :travis do
       end
     end
 
-    path_to_be_pushed = "#{package}/pkg/#{package}-#{release}.gem"
+    path_to_be_pushed = "#{package}/pkg/#{package}-#{version}.gem"
     if File.file? path_to_be_pushed
       begin
         ::Gems.push(File.new path_to_be_pushed)
