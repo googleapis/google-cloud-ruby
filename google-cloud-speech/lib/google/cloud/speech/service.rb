@@ -60,8 +60,32 @@ module Google
         end
         attr_accessor :mocked_service
 
+        def ops
+          return mocked_ops if mocked_ops
+          @ops ||= begin
+            require "google/longrunning/operations_services_pb"
+
+            Google::Longrunning::Operations::Stub.new(
+              host, chan_creds, timeout: timeout)
+          end
+        end
+        attr_accessor :mocked_ops
+
         def insecure?
           credentials == :this_channel_is_insecure
+        end
+
+        def recognize_sync audio, config
+          execute { service.sync_recognize config, audio }
+        end
+
+        def recognize_async audio, config
+          execute { service.async_recognize config, audio }
+        end
+
+        def get_op name
+          req = Google::Longrunning::GetOperationRequest.new name: name
+          execute { ops.get_operation req }
         end
 
         def inspect
