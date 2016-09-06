@@ -1,5 +1,9 @@
 # Release History
 
+### 0.20.2 / 2016-09-06
+
+* Fix for using GCS URLs. (erikaxel)
+
 ### 0.20.1 / 2016-09-02
 
 * Fix for timeout on uploads.
