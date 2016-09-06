@@ -41,7 +41,7 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   after do
-    bucket.files.each &:delete
+    bucket.files.all { |f| f.delete rescue nil }
   end
 
   it "should upload and download a file" do

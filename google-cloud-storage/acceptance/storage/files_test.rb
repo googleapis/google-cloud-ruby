@@ -29,7 +29,7 @@ describe "Storage", :files, :storage do
 
   before do
     # always create the bucket and delete all files, just in case
-    bucket.files.all.each(&:delete)
+    bucket.files.all { |f| f.delete rescue nil }
 
     uploaded = bucket.create_file files[:logo][:path], filenames[0]
     uploaded.copy filenames[1]
@@ -37,7 +37,7 @@ describe "Storage", :files, :storage do
   end
 
   after do
-    bucket.files.each &:delete
+    bucket.files.all { |f| f.delete rescue nil }
   end
 
   it "get all files" do

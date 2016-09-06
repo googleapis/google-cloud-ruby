@@ -35,7 +35,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   after do
-    bucket.files.each &:delete
+    bucket.files.all { |f| f.delete rescue nil }
   end
 
   it "adds a reader" do
