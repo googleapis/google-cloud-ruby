@@ -364,6 +364,58 @@ namespace :travis do
       header "Skipping acceptance tests"
     end
   end
+
+  desc "Runs post-build logic"
+  task :post do
+    # We don't run post-build on pull requests
+    return unless ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
+
+    if ENV["TRAVIS_BRANCH"] == "master"
+      # TODO: Call JSONDOC task for master here
+    elsif ENV["TRAVIS_TAG"]
+      tag = ENV["TRAVIS_TAG"]
+      # Verify the tag format "PACKAGE/vVERSION"
+      m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
+      if m # We have a match!
+        Rake::Task["travis:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
+        # TODO: Call JSONDOC task for release here
+      end
+    end
+  end
+
+  task :release, :package, :version, :api_token do |t, args|
+    package = args[:package]
+    version = args[:version]
+    api_token = args[:api_token]
+    if package.nil? || version.nil?
+      fail "You must provide a package and version."
+    end
+
+    require "gems"
+    ::Gems.configure do |config|
+      config.key = api_token
+    end if api_token
+
+    Dir.chdir package do
+      Bundler.with_clean_env do
+        sh "rm -rf pkg"
+        sh "bundle update"
+        sh "rake build"
+      end
+    end
+
+    path_to_be_pushed = "#{package}/pkg/#{package}-#{release}.gem"
+    if File.file? path_to_be_pushed
+      begin
+        ::Gems.push(File.new path_to_be_pushed)
+        puts "Successfully built and pushed #{package} for version #{version}"
+      rescue => e
+        puts "Error while releasing #{package} version #{version}: #{e.message}"
+      end
+    else
+      fail "Cannot build #{package} for version #{version}"
+    end
+  end
 end
 
 def gems
