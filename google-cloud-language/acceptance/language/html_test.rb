@@ -28,8 +28,8 @@ describe "Language (HTML)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_close_to 1.0
-      annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
+      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.magnitude.must_be_kind_of Float
 
       annotation.entities.count.must_equal 2
       annotation.entities.language.must_equal "en"
@@ -63,8 +63,8 @@ describe "Language (HTML)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_close_to 1.0
-      annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
+      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.magnitude.must_be_kind_of Float
 
       annotation.entities.count.must_equal 2
       annotation.entities.language.must_equal "en"
@@ -98,8 +98,8 @@ describe "Language (HTML)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_close_to 1.0
-      annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
+      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.magnitude.must_be_kind_of Float
 
       annotation.entities.count.must_equal 2
       annotation.entities.language.must_equal "en"
@@ -159,8 +159,8 @@ describe "Language (HTML)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_close_to 1.0
-      annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
+      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.magnitude.must_be_kind_of Float
 
       annotation.entities.must_be :empty?
 
@@ -284,7 +284,7 @@ describe "Language (HTML)", :language do
       entities.places.first.type.must_equal :LOCATION
       entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah"})
       entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
-      entities.places.first.salience.must_be_close_to 0.06173757091164589
+      entities.places.first.salience.must_be_kind_of Float
       entities.places.first.mentions.count.must_equal 1
       entities.places.first.mentions.first.text.must_equal "Utah"
       entities.places.first.mentions.first.offset.must_equal 102
@@ -297,8 +297,8 @@ describe "Language (HTML)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_close_to 1.0
-      sentiment.magnitude.must_be_close_to 1.899999976158142
+      sentiment.polarity.must_be_kind_of Float
+      sentiment.magnitude.must_be_kind_of Float
     end
 
     it "works with creating a document" do
@@ -310,8 +310,8 @@ describe "Language (HTML)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_close_to 1.0
-      sentiment.magnitude.must_be_close_to 1.899999976158142
+      sentiment.polarity.must_be_kind_of Float
+      sentiment.magnitude.must_be_kind_of Float
     end
   end
 end
