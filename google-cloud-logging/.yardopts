@@ -1,5 +1,5 @@
 --no-private
---title=Google Cloud Logging
+--title=Stackdriver Logging
 --exclude lib/google/logging
 --exclude lib/google/cloud/logging/v2
 --exclude lib/google/cloud/logging/v2.rb
