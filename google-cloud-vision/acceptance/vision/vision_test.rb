@@ -307,7 +307,7 @@ describe "Vision", :vision do
     it "detects labels from an image" do
       annotation = vision.annotate landmark_image, labels: true
 
-      annotation.labels.count.must_equal 6
+      annotation.labels.count.must_be :>, 0
       annotation.logos.each { |l| l.must_be_kind_of Google::Cloud::Vision::Annotation::Entity }
 
       annotation.wont_be :face?
@@ -321,10 +321,10 @@ describe "Vision", :vision do
       label = annotation.label
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
-      label.mid.must_equal "/m/02wtjj"
+      label.mid.must_be_kind_of String
       label.locale.must_be :nil?
-      label.description.must_equal "stone carving"
-      label.score.must_equal 0.9859733
+      label.description.must_be_kind_of String
+      label.score.must_be_kind_of Float
       label.confidence.must_be :nil?
       label.topicality.must_be :nil?
       label.bounds.must_be :empty?
@@ -335,7 +335,7 @@ describe "Vision", :vision do
     it "detects labels from an image with custom max value" do
       annotation = vision.annotate landmark_image, labels: 10
 
-      annotation.labels.count.must_equal 6
+      annotation.labels.count.must_be :>, 0
     end
 
     it "detects labels from multiple images" do
@@ -344,8 +344,8 @@ describe "Vision", :vision do
                              labels: 10
 
       annotations.count.must_equal 2
-      annotations[0].labels.count.must_equal 6
-      annotations[1].labels.count.must_equal 4
+      annotations[0].labels.count.must_be :>, 0
+      annotations[1].labels.count.must_be :>, 0
     end
   end
 
@@ -551,7 +551,7 @@ describe "Vision", :vision do
       it "detects labels" do
         labels = vision.image(landmark_image).labels 10
 
-        labels.count.must_equal 6
+        labels.count.must_be :>, 0
       end
 
       it "detects a single label" do
