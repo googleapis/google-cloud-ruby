@@ -32,9 +32,12 @@ describe "Storage", :files, :storage do
     bucket.files.all { |f| f.delete rescue nil }
 
     uploaded = bucket.create_file files[:logo][:path], filenames[0]
-    sleep 5 # Workaround for missing file error due to eventual consistency of service
-    uploaded.copy filenames[1]
-    uploaded.copy filenames[2]
+    try_with_backoff "copying #{filenames[1]} file in setup" do
+      uploaded.copy filenames[1]
+    end
+    try_with_backoff "copying #{filenames[2]} file in setup" do
+      uploaded.copy filenames[2]
+    end
   end
 
   after do

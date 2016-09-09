@@ -54,6 +54,20 @@ module Acceptance
     register_spec_type(self) do |desc, *addl|
       addl.include? :storage
     end
+
+    def try_with_backoff msg = nil, limit: 10
+      count = 0
+      loop do
+        begin
+          return yield
+        rescue => e
+          raise e if count >= limit
+          count += 1
+          puts "Retry (#{count}): #{msg}"
+          sleep count
+        end
+      end
+    end
   end
 
   def self.run_one_method klass, method_name, reporter
