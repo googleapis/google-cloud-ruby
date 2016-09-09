@@ -240,6 +240,7 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should copy an existing file" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo"
+    sleep 5 # Workaround for missing file error due to eventual consistency of service
     copied = uploaded.copy "CloudLogoCopy"
 
     uploaded.name.must_equal "CloudLogo"
@@ -262,8 +263,8 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should copy an existing file with customer-supplied encryption key" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png", encryption_key: encryption_key
+    sleep 5 # Workaround for missing file error due to eventual consistency of service
     copied = uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
-
     uploaded.name.must_equal "CloudLogo.png"
     copied.name.must_equal "CloudLogoCopy.png"
     copied.size.must_equal uploaded.size
