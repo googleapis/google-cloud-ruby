@@ -39,7 +39,7 @@ module Google
       # applications. For example, the log `compute.googleapis.com/activity_log`
       # is produced by Google Compute Engine. Logs are simply referenced by name
       # in google-cloud. There is no `Log` type in google-cloud or `Log`
-      # resource in the Cloud Logging API.
+      # resource in the Stackdriver Logging API.
       #
       # @see https://cloud.google.com/logging/docs/view/logs_index List of Log
       #   Types

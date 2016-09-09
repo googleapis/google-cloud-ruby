@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe "Google Cloud Logging Backoff", :mock_logging do
+describe "Stackdriver Logging Backoff", :mock_logging do
   it "retries when the session times out" do
     metric_name = "session-timed-out-metric"
 
