@@ -66,16 +66,16 @@ if ENV["GCLOUD_TEST_DNS_DOMAIN"]
       register_spec_type(self) do |desc, *addl|
         addl.include? :dns
       end
-    end
 
-    def self.run_one_method klass, method_name, reporter
-      result = nil
-      (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
-        puts "Retrying #{klass}##{method_name} (#{try})"
+      def self.run_one_method klass, method_name, reporter
+        result = nil
+        (1..3).each do |try|
+          result = Minitest.run_one_method(klass, method_name)
+          break if (result.passed? || result.skipped?)
+          puts "Retrying #{klass}##{method_name} (#{try})"
+        end
+        reporter.record result
       end
-      reporter.record result
     end
   end
 
