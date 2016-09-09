@@ -211,7 +211,7 @@ describe Google::Cloud::Datastore::Properties do
   end
 
   it "encodes IO as blob" do
-    raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png"
+    raw = File.open "acceptance/data/CloudPlatform_128px_Retina.png", "rb"
     value = Google::Cloud::Core::GRPCUtils.to_value raw
     value.value_type.must_equal :blob_value
     value.blob_value.must_equal File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
@@ -226,6 +226,7 @@ describe Google::Cloud::Datastore::Properties do
 
   it "encodes Temfile as blob" do
     raw = Tempfile.new "raw"
+    raw.binmode
     raw.write(File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb"))
     raw.rewind
     value = Google::Cloud::Core::GRPCUtils.to_value raw
