@@ -239,8 +239,8 @@ module Google
         #                               format: "json"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true
-        def wait_until_done!
-          backoff = ->(retries) { sleep 2 * retries + 5 }
+        def wait_until_done!(base: 2, offset: 5)
+          backoff = ->(retries) { sleep base * retries + offset }
           retries = 0
           until done?
             backoff.call retries
