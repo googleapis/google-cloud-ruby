@@ -103,6 +103,7 @@ module Google
         end
 
         def execute
+          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
         rescue GRPC::BadStatus => e
           raise Google::Cloud::Error.from_error(e)
