@@ -9,6 +9,7 @@ rvm:
 - 2.0.0-p648
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rvm osx-ssl-certs update all; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export SSL_CERT_FILE=/usr/lib/ssl/cert.pem; fi
 script:
 - bundle exec rake rubocop[yes]
 - bundle exec rake jsondoc
