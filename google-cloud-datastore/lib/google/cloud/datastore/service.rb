@@ -147,6 +147,7 @@ module Google
         ##
         # Performs backoff and error handling
         def execute
+          require "grpc" # Ensure GRPC is loaded before rescuing exception
           Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
             yield
           end
