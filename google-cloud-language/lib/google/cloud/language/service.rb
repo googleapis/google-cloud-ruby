@@ -16,7 +16,8 @@
 require "google/cloud/errors"
 require "google/cloud/language/credentials"
 require "google/cloud/language/version"
-require "google/cloud/language/v1beta1/language_service_pb"
+require "google/cloud/language/v1beta1/language_service_services_pb"
+require "google/cloud/language/v1beta1/language_service_api"
 
 module Google
   module Cloud
@@ -50,17 +51,13 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= begin
-            require "google/cloud/language/v1beta1/language_service_api"
-
+          @service ||= \
             V1beta1::LanguageServiceApi.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
               app_name: "google-cloud-language",
               app_version: Google::Cloud::Language::VERSION)
-            # TODO: Get retries configured
-          end
         end
         attr_accessor :mocked_service
 
