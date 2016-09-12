@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/pubsub/v1/pubsub_services_pb"
 
 module Google
   module Cloud
@@ -179,6 +178,12 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/pubsub/v1/pubsub_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
@@ -288,6 +293,16 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_name = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   formatted_topic = SubscriberApi.topic_path("[PROJECT]", "[TOPIC]")
+          #   response = subscriber_api.create_subscription(formatted_name, formatted_topic)
+
           def create_subscription \
               name,
               topic,
@@ -312,6 +327,15 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   response = subscriber_api.get_subscription(formatted_subscription)
+
           def get_subscription \
               subscription,
               options: nil
@@ -340,6 +364,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_project = SubscriberApi.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   subscriber_api.list_subscriptions(formatted_project).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   subscriber_api.list_subscriptions(formatted_project).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_subscriptions \
               project,
               page_size: nil,
@@ -363,6 +408,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_api.delete_subscription(formatted_subscription)
+
           def delete_subscription \
               subscription,
               options: nil
@@ -391,6 +445,17 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   ack_ids = []
+          #   ack_deadline_seconds = 0
+          #   subscriber_api.modify_ack_deadline(formatted_subscription, ack_ids, ack_deadline_seconds)
+
           def modify_ack_deadline \
               subscription,
               ack_ids,
@@ -421,6 +486,16 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   ack_ids = []
+          #   subscriber_api.acknowledge(formatted_subscription, ack_ids)
+
           def acknowledge \
               subscription,
               ack_ids,
@@ -453,6 +528,16 @@ module Google
           #   retries, etc.
           # @return [Google::Pubsub::V1::PullResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   max_messages = 0
+          #   response = subscriber_api.pull(formatted_subscription, max_messages)
+
           def pull \
               subscription,
               max_messages,
@@ -486,6 +571,17 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   PushConfig = Google::Pubsub::V1::PushConfig
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   push_config = PushConfig.new
+          #   subscriber_api.modify_push_config(formatted_subscription, push_config)
+
           def modify_push_config \
               subscription,
               push_config,

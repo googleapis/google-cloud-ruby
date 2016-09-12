@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/logging/v2/logging_config_services_pb"
 
 module Google
   module Cloud
@@ -151,6 +150,12 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/logging/v2/logging_config_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
@@ -222,6 +227,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #
+          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #
+          #   config_service_v2_api = ConfigServiceV2Api.new
+          #   formatted_parent = ConfigServiceV2Api.parent_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   config_service_v2_api.list_sinks(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   config_service_v2_api.list_sinks(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_sinks \
               parent,
               page_size: nil,
@@ -243,6 +269,15 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #
+          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #
+          #   config_service_v2_api = ConfigServiceV2Api.new
+          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
+          #   response = config_service_v2_api.get_sink(formatted_sink_name)
+
           def get_sink \
               sink_name,
               options: nil
@@ -267,6 +302,17 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #
+          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   LogSink = Google::Logging::V2::LogSink
+          #
+          #   config_service_v2_api = ConfigServiceV2Api.new
+          #   formatted_parent = ConfigServiceV2Api.parent_path("[PROJECT]")
+          #   sink = LogSink.new
+          #   response = config_service_v2_api.create_sink(formatted_parent, sink)
+
           def create_sink \
               parent,
               sink,
@@ -296,6 +342,17 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #
+          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   LogSink = Google::Logging::V2::LogSink
+          #
+          #   config_service_v2_api = ConfigServiceV2Api.new
+          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
+          #   sink = LogSink.new
+          #   response = config_service_v2_api.update_sink(formatted_sink_name, sink)
+
           def update_sink \
               sink_name,
               sink,
@@ -316,6 +373,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #
+          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #
+          #   config_service_v2_api = ConfigServiceV2Api.new
+          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
+          #   config_service_v2_api.delete_sink(formatted_sink_name)
+
           def delete_sink \
               sink_name,
               options: nil

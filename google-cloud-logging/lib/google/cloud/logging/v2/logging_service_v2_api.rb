@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/logging/v2/logging_services_pb"
 
 module Google
   module Cloud
@@ -154,6 +153,12 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/logging/v2/logging_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
@@ -211,6 +216,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #
+          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #
+          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   formatted_log_name = LoggingServiceV2Api.log_path("[PROJECT]", "[LOG]")
+          #   logging_service_v2_api.delete_log(formatted_log_name)
+
           def delete_log \
               log_name,
               options: nil
@@ -254,6 +268,15 @@ module Google
           #   retries, etc.
           # @return [Google::Logging::V2::WriteLogEntriesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #
+          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #
+          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   entries = []
+          #   response = logging_service_v2_api.write_log_entries(entries)
+
           def write_log_entries \
               entries,
               log_name: nil,
@@ -305,6 +328,27 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #
+          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #
+          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   project_ids = []
+          #
+          #   # Iterate over all results.
+          #   logging_service_v2_api.list_log_entries(project_ids).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   logging_service_v2_api.list_log_entries(project_ids).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_log_entries \
               project_ids,
               filter: nil,
@@ -337,6 +381,26 @@ module Google
           #   operations such as per-page iteration or access to the response
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #
+          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #
+          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #
+          #   # Iterate over all results.
+          #   logging_service_v2_api.list_monitored_resource_descriptors.each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   logging_service_v2_api.list_monitored_resource_descriptors.each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
           def list_monitored_resource_descriptors \
               page_size: nil,
               options: nil
