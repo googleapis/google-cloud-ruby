@@ -78,4 +78,52 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
+
+  it "recognizes audio from Audio object" do
+    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
+    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
+
+    mock = Minitest::Mock.new
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+
+    speech.service.mocked_service = mock
+    audio = speech.audio "gs://some_bucket/audio.raw"
+    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Speech::Job
+    job.wont_be :done?
+  end
+
+  it "recognizes audio from Audio object, preserving attributes" do
+    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
+    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
+
+    mock = Minitest::Mock.new
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+
+    speech.service.mocked_service = mock
+    audio = speech.audio "gs://some_bucket/audio.raw", encoding: :raw, sample_rate: 16000, language: "en"
+    job = speech.recognize_job audio
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Speech::Job
+    job.wont_be :done?
+  end
+
+  it "recognizes audio from Audio object, overriding attributes" do
+    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
+    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
+
+    mock = Minitest::Mock.new
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+
+    speech.service.mocked_service = mock
+    audio = speech.audio "gs://some_bucket/audio.raw", encoding: :flac, sample_rate: 48000, language: "en"
+    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Speech::Job
+    job.wont_be :done?
+  end
 end

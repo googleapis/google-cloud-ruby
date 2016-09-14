@@ -30,6 +30,8 @@ module Google
       class Audio
         # @private The V1beta1::RecognitionAudio object.
         attr_reader :grpc
+        # @private The Project object.
+        attr_reader :speech
         attr_accessor :encoding
         attr_accessor :sample_rate
         attr_accessor :language
@@ -62,10 +64,12 @@ module Google
 
         ##
         # @private New Audio from a source object.
-        def self.from_source source
+        def self.from_source source, speech
           audio = new
+          audio.instance_variable_set :@speech, speech
           if source.respond_to?(:read) && source.respond_to?(:rewind)
-            audio.grpc.content = String(source.read)
+            source.rewind
+            audio.grpc.content = source.read
             return audio
           end
           # Convert Storage::File objects to the URL
@@ -82,8 +86,7 @@ module Google
             unless File.readable? source
               fail ArgumentError, "Cannot read #{source}"
             end
-            content = String(File.read(source, mode: "rb"))
-            audio.grpc.content = content
+            audio.grpc.content = File.read source, mode: "rb"
             return audio
           end
           fail ArgumentError, "Unable to convert #{source} to an Audio"
@@ -92,7 +95,7 @@ module Google
         protected
 
         ##
-        # Raise an error unless an active speech project object is available.
+        # Raise an error unless an active Speech Project object is available.
         def ensure_speech!
           fail "Must have active connection" unless @speech
         end

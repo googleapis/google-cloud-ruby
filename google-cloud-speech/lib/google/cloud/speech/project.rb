@@ -74,7 +74,11 @@ module Google
         end
 
         def audio source, encoding: nil, sample_rate: nil, language: nil
-          audio = Audio.from_source source
+          if source.is_a? Audio
+            audio = source.dup
+          else
+            audio = Audio.from_source source, self
+          end
           audio.encoding = encoding unless encoding.nil?
           audio.sample_rate = sample_rate unless sample_rate.nil?
           audio.language = language unless language.nil?
@@ -85,12 +89,15 @@ module Google
                       max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_service!
 
+          audio_obj = audio source, encoding: encoding,
+                                    sample_rate: sample_rate, language: language
+
           config = audio_config(
-            encoding: encoding, sample_rate: sample_rate, language: language,
-            max_alternatives: max_alternatives,
+            encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
+            language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases)
 
-          grpc = service.recognize_sync audio(source).to_grpc, config
+          grpc = service.recognize_sync audio_obj.to_grpc, config
           grpc.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
@@ -101,12 +108,15 @@ module Google
                           profanity_filter: nil, phrases: nil
           ensure_service!
 
+          audio_obj = audio source, encoding: encoding,
+                                    sample_rate: sample_rate, language: language
+
           config = audio_config(
-            encoding: encoding, sample_rate: sample_rate, language: language,
-            max_alternatives: max_alternatives,
+            encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
+            language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases)
 
-          grpc = service.recognize_async audio(source).to_grpc, config
+          grpc = service.recognize_async audio_obj.to_grpc, config
           Job.from_grpc grpc, service
         end
 
