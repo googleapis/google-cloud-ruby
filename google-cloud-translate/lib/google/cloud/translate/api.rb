@@ -43,7 +43,7 @@ module Google
       #
       #   translation = translate.translate "Hello world!", to: "la"
       #
-      #   puts translation #=> Salve mundi!
+      #   translation.to_s #=> "Salve mundi!"
       #
       #   translation.from #=> "en"
       #   translation.origin #=> "Hello world!"
@@ -96,7 +96,7 @@ module Google
         #
         #   translation = translate.translate "Hello world!", to: "la"
         #
-        #   puts translation #=> Salve mundi!
+        #   translation.to_s #=> "Salve mundi!"
         #
         #   translation.detected? #=> true
         #   translation.from #=> "en"
@@ -171,8 +171,8 @@ module Google
         #   translate = gcloud.translate
         #
         #   detection = translate.detect "Hello world!"
-        #   puts detection.language #=> en
-        #   puts detection.confidence #=> 0.7100697
+        #   detection.language #=> "en"
+        #   detection.confidence #=> 0.7100697
         #
         # @example Detecting multiple texts.
         #   require "google/cloud"
@@ -182,11 +182,11 @@ module Google
         #
         #   detections = translate.detect "Hello world!",
         #                                 "Bonjour le monde!"
-        #   puts detections.count #=> 2
-        #   puts detection.first.language #=> en
-        #   puts detection.first.confidence #=> 0.7100697
-        #   puts detection.last.language #=> fr
-        #   puts detection.last.confidence #=> 0.40440267
+        #   detections.count #=> 2
+        #   detections.first.language #=> "en"
+        #   detections.first.confidence #=> 0.7100697
+        #   detections.last.language #=> "fr"
+        #   detections.last.confidence #=> 0.40440267
         #
         def detect *text
           return nil if text.empty?
