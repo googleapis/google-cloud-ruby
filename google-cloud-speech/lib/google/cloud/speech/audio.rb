@@ -56,6 +56,28 @@ module Google
           @grpc.audio_source == :uri
         end
 
+        def recognize max_alternatives: nil, profanity_filter: nil, phrases: nil
+          ensure_speech!
+
+          speech.recognize self, encoding: encoding, sample_rate: sample_rate,
+                                 language: language,
+                                 max_alternatives: max_alternatives,
+                                 profanity_filter: profanity_filter,
+                                 phrases: phrases
+        end
+
+        def recognize_job max_alternatives: nil, profanity_filter: nil,
+                          phrases: nil
+          ensure_speech!
+
+          speech.recognize_job self, encoding: encoding,
+                                     sample_rate: sample_rate,
+                                     language: language,
+                                     max_alternatives: max_alternatives,
+                                     profanity_filter: profanity_filter,
+                                     phrases: phrases
+        end
+
         ##
         # @private The Google API Client object for the Audio.
         def to_grpc
