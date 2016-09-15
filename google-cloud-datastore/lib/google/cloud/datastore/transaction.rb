@@ -41,15 +41,6 @@ module Google
       #     end
       #   end
       #
-      # @example Retry logic using the transactional update example above:
-      #   (1..5).each do |i|
-      #     begin
-      #       return transfer_funds from_key, to_key, amount
-      #     rescue Google::Cloud::Error => e
-      #       raise e if i == 5
-      #     end
-      #   end
-      #
       # @example Transactional read:
       #   require "google/cloud/datastore"
       #
@@ -330,8 +321,8 @@ module Google
         #   tx = datastore.transaction
         #   begin
         #     tx.commit do |c|
-        #       c.save task1, task2
-        #       c.delete entity1, entity2
+        #     c.save task3, task4
+        #     c.delete task1, task2
         #     end
         #   rescue
         #     tx.rollback

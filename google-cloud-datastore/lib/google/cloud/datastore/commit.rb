@@ -28,8 +28,8 @@ module Google
       #   datastore = Google::Cloud::Datastore.new
       #
       #   datastore.commit do |c|
-      #     c.save task1, task2
-      #     c.delete entity1, entity2
+      #     c.save task3, task4
+      #     c.delete task1, task2
       #   end
       #
       # See {Google::Cloud::Datastore::Dataset#commit} and

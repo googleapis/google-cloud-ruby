@@ -214,7 +214,7 @@ module Google
         #   query = datastore.query("Task").
         #     ancestor(task_list)
         #   lists = datastore.run query
-        #   lists.first.key.parent #=> Key("TaskList", "default")
+        #   lists.first.key.parent # Key("TaskList", "default")
         #
         attr_reader :parent
 

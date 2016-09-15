@@ -5,6 +5,7 @@ AllCops:
     - "lib/google/datastore/**/*"
     - "lib/google/cloud/datastore/v1/**/*"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
 
 Documentation:
