@@ -202,7 +202,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.entities.must_be :empty?
 
-      annotation.sentences.must_be :empty?
+      annotation.sentences.wont_be :empty?
       annotation.tokens.must_be :empty?
     end
 
