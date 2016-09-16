@@ -32,7 +32,7 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || "datastore.googleapis.com"
+          @host = host || V1::DatastoreApi::SERVICE_ADDRESS
           @retries = retries
           @timeout = timeout
         end
@@ -43,8 +43,8 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        def datastore
-          return mocked_datastore if mocked_datastore
+        def service
+          return mocked_service if mocked_service
           @datastore ||= begin
             require "google/datastore/v1/datastore_services_pb"
 
@@ -52,7 +52,7 @@ module Google
               host, creds, timeout: timeout)
           end
         end
-        attr_accessor :mocked_datastore
+        attr_accessor :mocked_service
 
         def insecure?
           credentials == :this_channel_is_insecure
@@ -67,7 +67,7 @@ module Google
             keys: incomplete_keys
           )
 
-          execute { datastore.allocate_ids allocate_req }
+          execute { service.allocate_ids allocate_req }
         end
 
         ##
@@ -80,7 +80,7 @@ module Google
           lookup_req.read_options = generate_read_options consistency,
                                                           transaction
 
-          execute { datastore.lookup lookup_req }
+          execute { service.lookup lookup_req }
         end
 
         # Query for entities.
@@ -99,7 +99,7 @@ module Google
           run_req.partition_id = Google::Datastore::V1::PartitionId.new(
             namespace_id: namespace) if namespace
 
-          execute { datastore.run_query run_req }
+          execute { service.run_query run_req }
         end
 
         ##
@@ -109,7 +109,7 @@ module Google
             project_id: project
           )
 
-          execute { datastore.begin_transaction tx_req }
+          execute { service.begin_transaction tx_req }
         end
 
         ##
@@ -126,7 +126,7 @@ module Google
             commit_req.transaction = transaction
           end
 
-          execute { datastore.commit commit_req }
+          execute { service.commit commit_req }
         end
 
         ##
@@ -137,7 +137,7 @@ module Google
             transaction: transaction
           )
 
-          execute { datastore.rollback rb_req }
+          execute { service.rollback rb_req }
         end
 
         def inspect

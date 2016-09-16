@@ -70,13 +70,13 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
   end
 
   before do
-    dataset.service.mocked_datastore = Minitest::Mock.new
-    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
-    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+    dataset.service.mocked_service = Minitest::Mock.new
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [first_run_query_req]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [next_run_query_req]
   end
 
   after do
-    dataset.service.mocked_datastore.verify
+    dataset.service.mocked_service.verify
   end
 
   it "run will fulfill a query and can use the all and limit api calls" do
