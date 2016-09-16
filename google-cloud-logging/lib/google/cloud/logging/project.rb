@@ -21,6 +21,7 @@ require "google/cloud/logging/entry"
 require "google/cloud/logging/resource_descriptor"
 require "google/cloud/logging/sink"
 require "google/cloud/logging/metric"
+require "google/cloud/logging/async_writer"
 require "google/cloud/logging/logger"
 
 module Google
@@ -270,6 +271,43 @@ module Google
                                 log_name: log_name, resource: resource,
                                 labels: labels
           true
+        end
+
+        ##
+        # Creates an object that batches and transmits log entries
+        # asynchronously.
+        #
+        # Use this object to transmit log entries efficiently. It keeps a queue
+        # of log entries, and runs a background thread that transmits them to
+        # the logging service in batches. Generally, adding to the queue will
+        # not block.
+        #
+        # This object is thread-safe; it may accept write requests from
+        # multiple threads simultaneously, and will serialize them when
+        # executing in the background thread.
+        #
+        # @param [Integer] max_queue_size The maximum number of log entries
+        #   that may be queued before write requests will begin to block.
+        #   This provides back pressure in case the transmitting thread cannot
+        #   keep up with requests.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   logging = gcloud.logging
+        #
+        #   async = logging.async_writer
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #   logger = logging.logger "my_app_log", resource, async_writer: async
+        #   logger.info "First log entry."
+        #   logger.info "Another entry."
+        #
+        def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
+          AsyncWriter.new self, max_queue_size
         end
 
         ##
