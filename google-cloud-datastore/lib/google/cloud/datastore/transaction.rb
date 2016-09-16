@@ -59,7 +59,7 @@ module Google
 
         ##
         # @private Creates a new Transaction instance.
-        # Takes a Connection and Service instead of project and Credentials.
+        # Takes a Service instead of project and Credentials.
         def initialize service
           @service = service
           reset!
