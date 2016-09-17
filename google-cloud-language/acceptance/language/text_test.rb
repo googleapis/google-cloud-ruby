@@ -188,7 +188,7 @@ describe "Language (TEXT)", :language do
       doc.must_be :text?
       doc.wont_be :html?
 
-      annotation = doc.annotate sentiment: true
+      annotation = doc.annotate sentiment: true, syntax: false
 
       annotation.language.must_equal "en"
 
@@ -198,7 +198,7 @@ describe "Language (TEXT)", :language do
 
       annotation.entities.must_be :empty?
 
-      annotation.sentences.must_be :empty?
+      annotation.sentences.wont_be :empty?
       annotation.tokens.must_be :empty?
     end
 
