@@ -27,10 +27,10 @@ module Google
       ##
       # # Project
       #
-      # Google Cloud Vision allows easy integration of vision detection features
-      # within developer applications, including image labeling, face and
-      # landmark detection, optical character recognition (OCR), and tagging of
-      # explicit content.
+      # Google Cloud Vision allows developers to easily integrate vision
+      # detection features within applications, including image labeling, face
+      # and landmark detection, optical character recognition (OCR), and tagging
+      # of explicit content.
       #
       # @example
       #   require "google/cloud"
