@@ -27,10 +27,10 @@ module Google
       ##
       # # Project
       #
-      # Google Cloud Vision allows easy integration of vision detection features
-      # within developer applications, including image labeling, face and
-      # landmark detection, optical character recognition (OCR), and tagging of
-      # explicit content.
+      # Google Cloud Vision allows developers to easily integrate vision
+      # detection features within applications, including image labeling, face
+      # and landmark detection, optical character recognition (OCR), and tagging
+      # of explicit content.
       #
       # @example
       #   require "google/cloud"
@@ -89,7 +89,7 @@ module Google
         # combined size of all images in a request. Reducing your file size can
         # significantly improve throughput; however, be careful not to reduce
         # image quality in the process. See [Best Practices - Image
-        # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+        # Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
         # for current file size limits.
         #
         # Note that an object in Google Cloud Storage is a single entity;
@@ -97,7 +97,7 @@ module Google
         # exist (though default bucket permissions do exist). Make sure the code
         # which performs your request has access to that image.
         #
-        # @see https://cloud.google.com/vision/docs/image-best-practices Best
+        # @see https://cloud.google.com/vision/docs/best-practices Best
         #   Practices
         #
         # @param [String, IO, StringIO, Tempfile, Google::Cloud::Storage::File]
@@ -144,7 +144,7 @@ module Google
         # combined size of all images in a request. Reducing your file size can
         # significantly improve throughput; however, be careful not to reduce
         # image quality in the process. See [Best Practices - Image
-        # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+        # Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
         # for current file size limits.
         #
         # @see https://cloud.google.com/vision/docs/requests-and-responses Cloud

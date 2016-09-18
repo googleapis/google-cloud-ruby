@@ -21,10 +21,10 @@ module Google
     ##
     # # Google Cloud Vision
     #
-    # Google Cloud Vision allows easy integration of vision detection features
-    # developer applications, including image labeling, face and landmark
-    # detection, optical character recognition (OCR), and tagging of explicit
-    # content.
+    # Google Cloud Vision allows developers to easily integrate vision
+    # detection features within applications, including image labeling, face
+    # and landmark detection, optical character recognition (OCR), and tagging
+    # of explicit content.
     #
     # For more information about Cloud Vision, read the [Google Cloud Vision API
     # Documentation](https://cloud.google.com/vision/docs/).
@@ -48,7 +48,7 @@ module Google
     # a request. Reducing your file size can significantly improve throughput;
     # however, be careful not to reduce image quality in the process. See [Best
     # Practices - Image
-    # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+    # Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
     # for current file size limits.
     #
     # Use {Vision::Project#image} to create images for the Cloud Vision service.
