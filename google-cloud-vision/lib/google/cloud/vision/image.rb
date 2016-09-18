@@ -31,16 +31,16 @@ module Google
       # The Cloud Vision API supports a variety of image file formats, including
       # JPEG, PNG8, PNG24, Animated GIF (first frame only), and RAW. See [Best
       # Practices - Image
-      # Types](https://cloud.google.com/vision/docs/image-best-practices#image_types)
+      # Types](https://cloud.google.com/vision/docs/best-practices#image_types)
       # for the list of formats. Be aware that Cloud Vision sets upper limits on
       # file size as well as the total combined size of all images in a request.
       # Reducing your file size can significantly improve throughput; however,
       # be careful not to reduce image quality in the process. See [Best
       # Practices - Image
-      # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+      # Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
       # for current file size limits.
       #
-      # @see https://cloud.google.com/vision/docs/image-best-practices Best
+      # @see https://cloud.google.com/vision/docs/best-practices Best
       #   Practices
       #
       # @example

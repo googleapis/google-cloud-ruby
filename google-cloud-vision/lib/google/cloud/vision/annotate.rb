@@ -74,7 +74,7 @@ module Google
         # combined size of all images in a request. Reducing your file size can
         # significantly improve throughput; however, be careful not to reduce
         # image quality in the process. See [Best Practices - Image
-        # Sizing](https://cloud.google.com/vision/docs/image-best-practices#image_sizing)
+        # Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
         # for current file size limits.
         #
         # See {Project#annotate} for requests that do not involve multiple
