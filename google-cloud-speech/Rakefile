@@ -25,7 +25,26 @@ end
 
 # Acceptance tests
 desc "Runs the speech acceptance tests."
-task :acceptance do
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPEECH_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPEECH_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPEECH_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPEECH_TEST_PROJECT=test123 SPEECH_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["SPEECH_PROJECT"] = project
+  ENV["SPEECH_KEYFILE"] = nil
+  ENV["SPEECH_KEYFILE_JSON"] = keyfile
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
