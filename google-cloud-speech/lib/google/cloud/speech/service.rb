@@ -39,10 +39,12 @@ module Google
         end
 
         def channel
+          require "grpc"
           GRPC::Core::Channel.new host, nil, chan_creds
         end
 
         def chan_creds
+          require "grpc"
           return credentials if insecure?
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
@@ -82,6 +84,10 @@ module Google
 
         def recognize_async audio, config
           execute { service.async_recognize config, audio }
+        end
+
+        def recognize_stream request_enum
+          service.speech_stub.streaming_recognize request_enum
         end
 
         def get_op name

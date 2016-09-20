@@ -94,10 +94,10 @@ module Google
     # recognition operation.
     #
     # Use {Speech::Audio#recognize} for synchronous speech recognition that
-    # returns {Result} objects only after all audio has been processed. This
-    # method is limited to audio data of 1 minute or less in duration, and will
-    # take roughly the same amount of time to process as the duration of the
-    # supplied audio data.
+    # returns {Speech::Result} objects only after all audio has been processed.
+    # This method is limited to audio data of 1 minute or less in duration, and
+    # will take roughly the same amount of time to process as the duration of
+    # the supplied audio data.
     #
     # ```ruby
     # require "google/cloud/speech"
@@ -114,8 +114,8 @@ module Google
     # ```
     #
     # Use {Speech::Audio#recognize_job} for asynchronous speech recognition,
-    # in which a {Job} is returned immediately after the audio data has
-    # been sent. The job can be refreshed to retrieve {Result} objects
+    # in which a {Speech::Job} is returned immediately after the audio data has
+    # been sent. The job can be refreshed to retrieve {Speech::Result} objects
     # once the audio data has been processed.
     #
     # ```ruby
@@ -136,6 +136,37 @@ module Google
     # result.transcript #=> "how old is the Brooklyn Bridge"
     # result.confidence #=> 88.15
     # ```
+    #
+    # Use {Speech::Project#speech} for streaming audio data for speech
+    # recognition, in which a {Speech::Stream} is returned. The stream object
+    # can receive results while sending audio by performing bidirectional
+    # streaming speech-recognition.
+    #
+    # ```ruby
+    # require "google/cloud/speech"
+    #
+    # speech = Google::Cloud::Speech.new
+    #
+    # stream = audio.stream encoding: :raw, sample_rate: 16000
+    #
+    # # register callback for when a result is returned
+    # stream.on_result do |results|
+    #   result = results.first
+    #   result.transcript #=> "how old is the Brooklyn Bridge"
+    #   result.confidence #=> 0.8099
+    # end
+    #
+    # # Stream 5 seconds of audio from the microhone
+    # # Actual implementation of microphone input varies by platform
+    # 5.times.do
+    #   stream.send MicrophoneInput.read(32000)
+    # end
+    #
+    # stream.stop
+    # ```
+    #
+    # Obtaining audio data from input sources such as a Microphone is outside
+    # the scope of this document.
     #
     module Speech
       ##
