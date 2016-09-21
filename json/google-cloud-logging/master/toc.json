@@ -47,5 +47,6 @@
         }
       ]
     }
-  ]
+  ],
+  "tagName": "master/google-cloud-logging"
 }
