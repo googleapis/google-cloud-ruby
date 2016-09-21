@@ -33,5 +33,6 @@
       "title": "Google Cloud Core",
       "type": "google/cloud/errors"
     }
-  ]
+  ],
+  "tagName": "google-cloud-core/v0.20.1/google-cloud-core"
 }

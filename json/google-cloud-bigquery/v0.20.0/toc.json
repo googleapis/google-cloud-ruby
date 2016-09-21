@@ -51,5 +51,6 @@
         }
       ]
     }
-  ]
+  ],
+  "tagName": "google-cloud-bigquery/v0.20.0/google-cloud-bigquery"
 }

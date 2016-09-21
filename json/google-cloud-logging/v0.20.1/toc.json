@@ -47,5 +47,6 @@
         }
       ]
     }
-  ]
+  ],
+  "tagName": "google-cloud-logging/v0.20.1/google-cloud-logging"
 }

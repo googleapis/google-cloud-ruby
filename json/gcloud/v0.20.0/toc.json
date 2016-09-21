@@ -39,5 +39,6 @@
         }
       ]
     }
-  ]
+  ],
+  "tagName": "master/gcloud"
 }

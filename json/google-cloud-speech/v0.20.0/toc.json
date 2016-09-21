@@ -33,5 +33,6 @@
       "title": "Speech",
       "type": "google/cloud/speech"
     }
-  ]
+  ],
+  "tagName": "google-cloud-speech/v0.20.0/google-cloud-speech"
 }
