@@ -38,12 +38,18 @@ module Google
       #
       #   async = logging.async_writer
       #
+      #   entry1 = logging.entry payload: "Job started."
+      #   entry2 = logging.entry payload: "Job completed."
+      #
+      #   labels = { job_size: "large", job_code: "red" }
       #   resource = logging.resource "gae_app",
-      #                               module_id: "1",
-      #                               version_id: "20150925t173233"
-      #   logger = logging.logger "my_app_log", resource, async_writer: async
-      #   logger.info "First log entry."
-      #   logger.info "Another entry."
+      #                               "module_id" => "1",
+      #                               "version_id" => "20150925t173233"
+      #
+      #   async.write_entries [entry1, entry2],
+      #                       log_name: "my_app_log",
+      #                       resource: resource,
+      #                       labels: labels
       #
       class AsyncWriter
         DEFAULT_MAX_QUEUE_SIZE = 10000
@@ -85,12 +91,9 @@ module Google
         def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
           @logging = logging
           @max_queue_size = max_queue_size
-          @queue_size = 0
-          @queue = []
+          @startup_lock = Mutex.new
+          @thread = nil
           @state = :running
-          @lock = Monitor.new
-          @lock_cond = @lock.new_cond
-          @thread = Thread.new { run_backgrounder }
         end
 
         ##
@@ -135,6 +138,7 @@ module Google
         #   async.write_entries entry
         #
         def write_entries entries, log_name: nil, resource: nil, labels: nil
+          ensure_thread
           entries = Array(entries)
           @lock.synchronize do
             fail "AsyncWriter has been stopped" unless writable?
@@ -163,6 +167,7 @@ module Google
         #   if the writer had already been stopped.
         #
         def stop
+          ensure_thread
           @lock.synchronize do
             if state != :stopped
               @state = :stopping
@@ -184,6 +189,7 @@ module Google
         #   suspended, otherwise false.
         #
         def suspend
+          ensure_thread
           @lock.synchronize do
             if state == :running
               @state = :suspended
@@ -205,6 +211,7 @@ module Google
         #   is now running, otherwise false.
         #
         def resume
+          ensure_thread
           @lock.synchronize do
             if state == :suspended
               @state = :running
@@ -222,6 +229,7 @@ module Google
         # @return [Boolean] Returns true if the writer is currently running.
         #
         def running?
+          ensure_thread
           @lock.synchronize do
             state == :running
           end
@@ -233,6 +241,7 @@ module Google
         # @return [Boolean] Returns true if the writer is currently suspended.
         #
         def suspended?
+          ensure_thread
           @lock.synchronize do
             state == :suspended
           end
@@ -245,6 +254,7 @@ module Google
         # @return [Boolean] Returns true if the writer is accepting writes.
         #
         def writable?
+          ensure_thread
           @lock.synchronize do
             state == :suspended || state == :running
           end
@@ -256,6 +266,7 @@ module Google
         # @return [Boolean] Returns true if the writer is fully stopped.
         #
         def stopped?
+          ensure_thread
           @lock.synchronize do
             state == :stopped
           end
@@ -271,6 +282,7 @@ module Google
         #   if the timeout expired.
         #
         def wait_until_stopped timeout = nil
+          ensure_thread
           deadline = timeout ? ::Time.new.to_f + timeout : nil
           @lock.synchronize do
             until state == :stopped
@@ -283,6 +295,24 @@ module Google
         end
 
         protected
+
+        ##
+        # @private Ensures the background thread is running. This is called
+        # at the start of all public methods, and kicks off the thread lazily.
+        # It also ensures the thread gets restarted (with an empty queue) in
+        # case this object is forked into a child process.
+        #
+        def ensure_thread
+          @startup_lock.synchronize do
+            if (@thread.nil? || @thread.stop?) && @state != :stopped
+              @queue_size = 0
+              @queue = []
+              @lock = Monitor.new
+              @lock_cond = @lock.new_cond
+              @thread = Thread.new { run_backgrounder }
+            end
+          end
+        end
 
         ##
         # @private The background thread implementation, which continuously
