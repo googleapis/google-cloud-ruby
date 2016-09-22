@@ -246,6 +246,37 @@ module Google
     #                       labels: labels
     # ```
     #
+    # Normally, writing log entries is done synchronously; the call to
+    # {Google::Cloud::Logging::Project#write_entries} will block until it has
+    # either completed transmitting the data or encountered an error. To "fire
+    # and forget" without blocking, use {Google::Cloud::Logging::AsyncWriter};
+    # it spins up a background thread that writes log entries in batches. Calls
+    # to {Google::Cloud::Logging::AsyncWriter#write_entries} simply add entries
+    # to its work queue and return immediately.
+    #
+    # ```ruby
+    # require "google/cloud"
+    #
+    # gcloud = Google::Cloud.new
+    # logging = gcloud.logging
+    # async = logging.async_writer
+    #
+    # entry1 = logging.entry
+    # entry1.payload = "Job started."
+    # entry2 = logging.entry
+    # entry2.payload = "Job completed."
+    # labels = { job_size: "large", job_code: "red" }
+    #
+    # resource = logging.resource "gae_app",
+    #                             "module_id" => "1",
+    #                             "version_id" => "20150925t173233"
+    #
+    # async.write_entries [entry1, entry2],
+    #                     log_name: "my_app_log",
+    #                     resource: resource,
+    #                     labels: labels
+    # ```
+    #
     # ### Creating a Ruby Logger implementation
     #
     # If your environment requires a logger instance that is API-compatible with
@@ -265,6 +296,26 @@ module Google
     #
     # logger = logging.logger "my_app_log", resource, env: :production
     # logger.info "Job started."
+    # ```
+    #
+    # By default, the logger instance writes log entries asynchronously in a
+    # background thread using an {Google::Cloud::Logging::AsyncWriter}. If you
+    # want to customize or disable asynchronous writing, you may do so when
+    # creating a logger.
+    #
+    # ```ruby
+    # require "google/cloud"
+    #
+    # gcloud = Google::Cloud.new
+    # logging = gcloud.logging
+    #
+    # resource = logging.resource "gae_app",
+    #                             module_id: "1",
+    #                             version_id: "20150925t173233"
+    #
+    # logger = logging.logger "my_app_log", resource, {env: :production},
+    #                         async_writer: false
+    # logger.info "Log entry written synchronously."
     # ```
     #
     # ## Configuring retries and timeout
