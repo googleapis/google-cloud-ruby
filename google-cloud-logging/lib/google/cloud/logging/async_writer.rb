@@ -304,7 +304,7 @@ module Google
         #
         def ensure_thread
           @startup_lock.synchronize do
-            if (@thread.nil? || @thread.stop?) && @state != :stopped
+            if (@thread.nil? || !@thread.alive?) && @state != :stopped
               @queue_size = 0
               @queue = []
               @lock = Monitor.new
