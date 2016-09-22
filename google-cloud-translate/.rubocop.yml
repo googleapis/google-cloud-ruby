@@ -3,6 +3,7 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-translate.gemspec"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
 
 Documentation:

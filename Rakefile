@@ -165,6 +165,21 @@ task :rubocop, :bundleupdate do |t, args|
   end
 end
 
+desc "Runs yard-doctest example tests for all gems individually."
+task :doctest, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  Rake::Task["bundleupdate"].invoke if bundleupdate
+  header "Running yard-doctest example code tests"
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "DOCTEST FOR #{gem}"
+        sh "bundle exec rake doctest"
+      end
+    end
+  end
+end
+
 desc "Runs jsondoc report for all gems individually."
 task :jsondoc, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]

@@ -33,7 +33,7 @@ module Google
       #
       #   translation = translate.translate "Hello world!", to: "la"
       #
-      #   puts translation #=> Salve mundi!
+      #   translation.to_s #=> "Salve mundi!"
       #
       #   translation.from #=> "en"
       #   translation.origin #=> "Hello world!"
