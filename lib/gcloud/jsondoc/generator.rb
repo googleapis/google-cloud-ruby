@@ -4,16 +4,17 @@ require "gcloud/jsondoc/doc"
 module Gcloud
   module Jsondoc
     class Generator
-      attr_reader :input, :docs, :registry
+      attr_reader :input, :docs, :registry, :types
 
       ##
       # Creates a new builder to output documentation in JSON
       #
       # @param [YARD::Registry] registry The YARD registry instance containing
       #   the source code objects
-      def initialize registry
+      def initialize registry, source_path = nil
         @registry = registry
         @docs = []
+        @source_path = source_path
       end
 
       def write_to base_path
@@ -43,7 +44,7 @@ module Gcloud
           c.visibility == :public && !c.has_tag?(:private)
         end
         modules.each do |object|
-          @docs += Doc.new(object).subtree
+          @docs += Doc.new(object, @source_path).subtree
         end
         @registry.clear
       end
