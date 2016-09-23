@@ -394,7 +394,7 @@ module Google
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this subscription.
         #
-        # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+        # @see https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#iampolicy
         #   google.iam.v1.IAMPolicy
         #
         # @param [Boolean] force Force the latest policy to be retrieved from
@@ -464,7 +464,7 @@ module Google
         # You can also update the policy by passing a block to {#policy}, which
         # will call this method internally after the block completes.
         #
-        # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+        # @see https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#iampolicy
         #   google.iam.v1.IAMPolicy
         #
         # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
