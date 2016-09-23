@@ -38,12 +38,8 @@ module Google
       #
       class Logger
         ##
-        # @private The logging object.
-        attr_accessor :logging
-
-        ##
-        # @private The async writer object.
-        attr_accessor :async_writer
+        # @private The logging writer object. Either Project or AsyncWriter.
+        attr_reader :writer
 
         ##
         # @private The Google Cloud log_name to write the log entry with.
@@ -59,10 +55,8 @@ module Google
 
         ##
         # @private Creates a new Logger instance.
-        def initialize logging, log_name, resource, labels = nil,
-                       async_writer = nil
-          @logging = logging
-          @async_writer = async_writer
+        def initialize writer, log_name, resource, labels = nil
+          @writer = writer
           @log_name = log_name
           @resource = resource
           @labels = labels
@@ -279,14 +273,13 @@ module Google
         ##
         # @private Write a log entry to the Stackdriver Logging service.
         def write_entry severity, message
-          entry = logging.entry.tap do |e|
+          entry = Entry.new.tap do |e|
             e.severity = gcloud_severity(severity)
             e.payload = message
           end
 
-          (async_writer || logging).write_entries entry, log_name: log_name,
-                                                         resource: resource,
-                                                         labels: labels
+          writer.write_entries entry, log_name: log_name, resource: resource,
+                                      labels: labels
         end
 
         ##

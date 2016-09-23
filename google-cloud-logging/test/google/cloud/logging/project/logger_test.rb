@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_equal labels
-    logger.async_writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object with labels using symbols" do
@@ -42,7 +42,7 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_equal labels
-    logger.async_writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object without labels" do
@@ -70,6 +70,6 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_equal labels
-    logger.async_writer.must_be_nil
+    logger.writer.must_be_kind_of Google::Cloud::Logging::Project
   end
 end
