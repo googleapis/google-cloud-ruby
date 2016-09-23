@@ -44,6 +44,11 @@ module Google
     # about the options for connecting in the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
+    # If you just want to write your application's logs to the Stackdriver
+    # Logging service, you may find it easiest to use the [Ruby Logger
+    # implementation](#creating-a-ruby-logger-implementation) provided by this
+    # library. Otherwise, read on to learn more about the Logging API.
+    #
     # ## Listing log entries
     #
     # Stackdriver Logging gathers log entries from many services, including
