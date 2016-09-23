@@ -40,6 +40,10 @@ module Google
         attr_accessor :logging
 
         ##
+        # @private The async writer object.
+        attr_accessor :async_writer
+
+        ##
         # @private The Google Cloud log_name to write the log entry with.
         attr_reader :log_name
 
@@ -53,8 +57,10 @@ module Google
 
         ##
         # @private Creates a new Logger instance.
-        def initialize logging, log_name, resource, labels = nil
+        def initialize logging, log_name, resource, labels = nil,
+                       async_writer = nil
           @logging = logging
+          @async_writer = async_writer
           @log_name = log_name
           @resource = resource
           @labels = labels
@@ -274,9 +280,9 @@ module Google
             e.payload = message
           end
 
-          logging.write_entries entry, log_name: log_name,
-                                       resource: resource,
-                                       labels: labels
+          (async_writer || logging).write_entries entry, log_name: log_name,
+                                                         resource: resource,
+                                                         labels: labels
         end
 
         ##

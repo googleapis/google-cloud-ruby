@@ -21,6 +21,7 @@ require "google/cloud/logging/entry"
 require "google/cloud/logging/resource_descriptor"
 require "google/cloud/logging/sink"
 require "google/cloud/logging/metric"
+require "google/cloud/logging/async_writer"
 require "google/cloud/logging/logger"
 
 module Google
@@ -273,8 +274,55 @@ module Google
         end
 
         ##
+        # Creates an object that batches and transmits log entries
+        # asynchronously.
+        #
+        # Use this object to transmit log entries efficiently. It keeps a queue
+        # of log entries, and runs a background thread that transmits them to
+        # the logging service in batches. Generally, adding to the queue will
+        # not block.
+        #
+        # This object is thread-safe; it may accept write requests from
+        # multiple threads simultaneously, and will serialize them when
+        # executing in the background thread.
+        #
+        # @param [Integer] max_queue_size The maximum number of log entries
+        #   that may be queued before write requests will begin to block.
+        #   This provides back pressure in case the transmitting thread cannot
+        #   keep up with requests.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   logging = gcloud.logging
+        #
+        #   async = logging.async_writer
+        #
+        #   entry1 = logging.entry payload: "Job started."
+        #   entry2 = logging.entry payload: "Job completed."
+        #
+        #   labels = { job_size: "large", job_code: "red" }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
+        #
+        #   async.write_entries [entry1, entry2],
+        #                       log_name: "my_app_log",
+        #                       resource: resource,
+        #                       labels: labels
+        #
+        def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
+          AsyncWriter.new self, max_queue_size
+        end
+
+        ##
         # Creates a logger instance that is API-compatible with Ruby's standard
         # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
+        #
+        # By default, the logger will create an AsyncWriter to transmit log
+        # entries on a background thread. You may change this behavior using
+        # the async_writer parameter.
         #
         # @param [String] log_name A log resource name to be associated with the
         #   written log entries.
@@ -282,6 +330,11 @@ module Google
         #   resource to be associated with written log entries.
         # @param [Hash] labels A set of user-defined data to be associated with
         #   written log entries.
+        # @param [Boolean|AsyncWriter] async_writer An AsyncWriter for the
+        #   logger to transmit log entries. You may also pass true to request
+        #   a new AsyncWriter for this logger, or false to request no
+        #   AsyncWriter (which will cause the logger to make blocking calls).
+        #   Default is true.
         #
         # @return [Google::Cloud::Logging::Logger] a Logger object that can be
         #   used in place of a ruby standard library logger object.
@@ -299,8 +352,13 @@ module Google
         #   logger = logging.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels = {}
-          Logger.new self, log_name, resource, labels
+        def logger log_name, resource, labels = {}, async_writer: true
+          async_writer = case async_writer
+                         when true then self.async_writer
+                         when false then nil
+                         else async_writer
+                         end
+          Logger.new self, log_name, resource, labels, async_writer
         end
 
         ##
