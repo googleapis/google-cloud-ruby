@@ -115,15 +115,13 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-ruby .yardoc"
+desc "Generates JSON output from google-cloud-dns .yardoc"
 task :jsondoc => :yard do
-
   require "rubygems"
-  spec = Gem::Specification::load("gcloud.gemspec")
-
   require "gcloud/jsondoc"
+
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-dns"
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
