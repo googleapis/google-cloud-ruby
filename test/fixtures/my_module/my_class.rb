@@ -1,6 +1,18 @@
 module MyModule
   ##
   # You can use MyClass for almost anything.
+  #
+  # * [First subheading](#first-subheading)
+  # * [Second subheading](#second-subheading)
+  #
+  # ## First subheading
+  #
+  # First usage description
+  #
+  # ## Second subheading
+  #
+  # Second usage description
+  #
   class MyClass
     # @private This method should not appear in the output.
     def my_hidden_method
