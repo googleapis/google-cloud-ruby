@@ -349,10 +349,11 @@ module Google
         #                               module_id: "1",
         #                               version_id: "20150925t173233"
         #
-        #   logger = logging.logger "my_app_log", resource, env: :production
+        #   logger = logging.logger "my_app_log", resource,
+        #                           labels: {env: :production}
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels = {}, async_writer: true
+        def logger log_name, resource, labels: {}, async_writer: true
           async_writer = case async_writer
                          when true then self.async_writer
                          when false then nil

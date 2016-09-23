@@ -142,7 +142,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a symbol" do
-      logger = logging.logger "#{log_name}-symbol", resource, labels
+      logger = logging.logger "#{log_name}-symbol", resource, labels: labels
 
       logger.add :debug,   "Danger Will Robinson (:debug)!"
       logger.add :info,    "Danger Will Robinson (:info)!"
@@ -162,7 +162,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a string" do
-      logger = logging.logger "#{log_name}-string", resource, labels
+      logger = logging.logger "#{log_name}-string", resource, labels: labels
 
       logger.add "debug",   "Danger Will Robinson ('debug')!"
       logger.add "info",    "Danger Will Robinson ('info')!"
@@ -182,7 +182,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a constant" do
-      logger = logging.logger "#{log_name}-constant", resource, labels
+      logger = logging.logger "#{log_name}-constant", resource, labels: labels
 
       logger.add ::Logger::DEBUG,   "Danger Will Robinson (DEBUG)!"
       logger.add ::Logger::INFO,    "Danger Will Robinson (INFO)!"
@@ -202,7 +202,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with named functions" do
-      logger = logging.logger "#{log_name}-method", resource, labels
+      logger = logging.logger "#{log_name}-method", resource, labels: labels
 
       logger.debug   "Danger Will Robinson (debug)!"
       logger.info    "Danger Will Robinson (info)!"

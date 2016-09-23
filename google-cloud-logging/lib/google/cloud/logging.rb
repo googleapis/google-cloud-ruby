@@ -299,7 +299,8 @@ module Google
     #                             module_id: "1",
     #                             version_id: "20150925t173233"
     #
-    # logger = logging.logger "my_app_log", resource, env: :production
+    # logger = logging.logger "my_app_log", resource,
+    #                         labels: {env: :production}
     # logger.info "Job started."
     # ```
     #
@@ -318,7 +319,8 @@ module Google
     #                             module_id: "1",
     #                             version_id: "20150925t173233"
     #
-    # logger = logging.logger "my_app_log", resource, {env: :production},
+    # logger = logging.logger "my_app_log", resource,
+    #                         labels: {env: :production},
     #                         async_writer: false
     # logger.info "Log entry written synchronously."
     # ```
