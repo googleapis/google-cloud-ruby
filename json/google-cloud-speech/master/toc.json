@@ -34,5 +34,5 @@
       "type": "google/cloud/speech"
     }
   ],
-  "tagName": "master/google-cloud-speech"
+  "tagName": "master"
 }
