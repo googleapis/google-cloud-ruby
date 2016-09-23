@@ -121,7 +121,7 @@ describe Google::Cloud::Logging, :logging do
     let(:entry2) { logging.entry.tap { |e| e.log_name = "#{prefix}-otherlog"; e.payload = {env: :production} } }
     #let(:entry3) { logging.entry.tap { |e| e.log_name = "#{prefix}-thislog"; e.payload = proto_payload; e.severity = :WARNING } }
 
-    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
+    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
 
     it "writes and lists log entries" do
       # logging.write_entries [entry1, entry2, entry3], resource: resource
@@ -134,7 +134,7 @@ describe Google::Cloud::Logging, :logging do
 
   describe "Ruby Logger" do
     let(:log_name) { "#{prefix}-logger" }
-    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
+    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
     let(:labels) { { env: :production } }
 
     before do
