@@ -357,12 +357,12 @@ module Google
         #   logger.info "Job started."
         #
         def logger log_name, resource, labels: {}, async_writer: true
-          async_writer = case async_writer
-                         when true then self.async_writer
-                         when false then nil
-                         else async_writer
-                         end
-          Logger.new self, log_name, resource, labels, async_writer
+          writer = case async_writer
+                   when true then self.async_writer
+                   when false then self
+                   else async_writer
+                   end
+          Logger.new writer, log_name, resource, labels
         end
 
         ##
