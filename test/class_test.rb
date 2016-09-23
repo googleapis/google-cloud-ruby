@@ -18,8 +18,24 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
 
     it "must have metadata" do
       @doc["name"].must_equal "MyClass"
-      @doc["description"].must_equal "<p>You can use MyClass for almost anything.</p>"
-      @doc["source"].must_equal "test/fixtures/my_module/my_class.rb#L4"
+      expected_html = <<EOT
+<p>You can use MyClass for almost anything.</p>
+
+<ul>
+  <li><a data-anchor=\"first-subheading\" href=\"#first-subheading\">First subheading</a></li>
+  <li><a data-anchor=\"second-subheading\" href=\"#second-subheading\">Second subheading</a></li>
+</ul>
+
+<h2 id=\"first-subheading\">First subheading</h2>
+
+<p>First usage description</p>
+
+<h2 id=\"second-subheading\">Second subheading</h2>
+
+<p>Second usage description</p>
+EOT
+      @doc["description"].must_equal expected_html.sub(/\n\Z/, "") # strip heredoc newline
+      @doc["source"].must_equal "test/fixtures/my_module/my_class.rb#L16"
     end
 
     it "should exclude exclude @private and protected methods" do
@@ -34,7 +50,7 @@ describe Gcloud::Jsondoc, :jsondoc_spec, :class do
         method["name"].must_equal "example_instance_method"
         method["type"].must_equal "instance"
         method["description"].must_equal "<p>Accepts many arguments for testing this library. Has no relation to\n<a data-custom-type=\"mymodule/myclass\" data-method=\"other_instance_method-instance\">#other_instance_method</a>. Also accepts a block if a block is given.</p>\n\n<p>Do not call this method until you have read all of its documentation.</p>"
-        method["source"].must_equal "test/fixtures/my_module/my_class.rb#L50"
+        method["source"].must_equal "test/fixtures/my_module/my_class.rb#L62"
       end
 
       it "must have method examples" do

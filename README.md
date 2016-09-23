@@ -20,12 +20,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### To generate JSON docs
 
-## Development
+Run `yard` task to create `.yardoc` with content. Then run the following lines
+(probably in a Rake task) to generate JSON doc files for gcloud-common/site
+deployment.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run
-`rake test` to run the tests. You can also run `bin/console` for an interactive
-prompt that will allow you to experiment.
+```ruby
+require "gcloud/jsondoc"
 
-To install this gem onto your local machine, run `bundle exec rake install`.
+registry = YARD::Registry.load! ".yardoc"
+generator = Gcloud::Jsondoc::Generator.new registry
+generator.write_to "jsondoc"
+```
+
+Note: If the source code lives in a sub-directory of the main repo, as it
+currently does for `google-cloud-*` gems, be sure to provide the subdirectory
+name to the `Generator` initializer:
+
+```ruby
+require "gcloud/jsondoc"
+
+registry = YARD::Registry.load! ".yardoc"
+generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-bigquery"
+generator.write_to "jsondoc"
+```
+
+Without this configuration, the `source` URLs for the code on GitHub will be
+incorrect. You don't need it if `lib` is in the repo root.
+
+### To test documentation examples
+
+Run `yard` task to create `.yardoc` with content. Then run the following lines
+(probably in a Rake task) to generate JSON doc files for gcloud-common/site
+deployment.
+
+```ruby
+require "gcloud/jsondoc"
+
+registry = YARD::Registry.load! ".yardoc"
+examples = Gcloud::Jsondoc::Examples.new registry
+examples.test_all
+```
+

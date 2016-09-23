@@ -9,9 +9,16 @@ module Gcloud
 
       def md s, multi_paragraph = false
         html = Kramdown::Document.new(s.to_s, input: "GFM", hard_wrap: false).to_html.strip
+        html = add_anchor_link_directives(html)
         html = unwrap_paragraph(html) unless multi_paragraph
         html = resolve_links(html) if html # in YARD's HtmlHelper
         html
+      end
+
+      # Because the gcloud-common Angular app depends on a `data-anchor` attr
+      # to navigate to anchors, add it to anchor links now.
+      def add_anchor_link_directives html
+        html.gsub(/<a href=\"#(.+)\">/, "<a data-anchor=\"\\1\" href=\"#\\1\">")
       end
 
       def remove_line_breaks html

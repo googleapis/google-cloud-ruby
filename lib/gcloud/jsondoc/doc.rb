@@ -8,14 +8,16 @@ module Gcloud
 
       # object is API defined by YARD's HtmlHelper
       attr_reader :name, :title, :full_name, :filepath, :jbuilder, :object,
-                  :methods, :subtree, :descendants, :types, :types_subtree
+                  :methods, :subtree, :descendants, :types, :types_subtree,
+                  :source_path
 
-      def initialize object
+      def initialize object, source_path
         @object = object
         @name = object.name.to_s
         @title = object.title
         @full_name = get_full_name #JsonHelper
         @filepath = "#{@full_name}.json"
+        @source_path = source_path
         set_methods
         build!
         set_children
@@ -45,7 +47,7 @@ module Gcloud
             !c.has_tag?(:private)
             # TODO: handle aliases
         end
-        @methods = method_objects.map { |mo| Method.new mo, self }
+        @methods = method_objects.map { |mo| Method.new mo, self, source_path }
       end
 
       def set_children
@@ -60,7 +62,7 @@ module Gcloud
       def set_descendants
         @descendants = []
         @children.each do |child|
-          @descendants += Doc.new(child).subtree
+          @descendants += Doc.new(child, source_path).subtree
         end
       end
 
