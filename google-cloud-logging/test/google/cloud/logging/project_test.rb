@@ -28,9 +28,9 @@ describe Google::Cloud::Logging::Project, :mock_logging do
 
   it "creates an entry with all attributes" do
     log_name = "log_name"
-    resource = logging.resource "gae_app",
+    resource = logging.resource "gae_app", labels: {
                                 "module_id" => "1",
-                                "version_id" => "20150925t173233"
+                                "version_id" => "20150925t173233" }
     timestamp = Time.now
     severity = "DEBUG"
     insert_id = "123456"
@@ -56,9 +56,9 @@ describe Google::Cloud::Logging::Project, :mock_logging do
   end
 
   it "creates a resource instance" do
-    resource = logging.resource "gae_app",
+    resource = logging.resource "gae_app", labels: {
                                 "module_id" => "1",
-                                "version_id" => "20150925t173233"
+                                "version_id" => "20150925t173233" }
     resource.must_be_kind_of Google::Cloud::Logging::Resource
     resource.type.must_equal   "gae_app"
     resource.labels["module_id"].must_equal "1"

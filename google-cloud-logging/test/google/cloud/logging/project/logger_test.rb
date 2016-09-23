@@ -22,7 +22,22 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     end
     labels = { "env" => "production" }
 
-    logger = logging.logger log_name, resource, labels
+    logger = logging.logger log_name, resource, labels: labels
+    logger.must_be_kind_of Google::Cloud::Logging::Logger
+    logger.log_name.must_equal log_name
+    logger.resource.must_equal resource
+    logger.labels.must_equal labels
+    logger.async_writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+  end
+
+  it "creates a ruby logger object with labels using symbols" do
+    log_name = "web_app_log"
+    resource = Google::Cloud::Logging::Resource.new.tap do |r|
+      r.type = "web_app_server"
+    end
+    labels = { env: "production" }
+
+    logger = logging.logger log_name, resource, labels: labels
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
@@ -48,9 +63,9 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     resource = Google::Cloud::Logging::Resource.new.tap do |r|
       r.type = "web_app_server"
     end
-    labels = { "env" => "production" }
+    labels = { env: "production" }
 
-    logger = logging.logger log_name, resource, labels, async_writer: false
+    logger = logging.logger log_name, resource, labels: labels, async_writer: false
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
