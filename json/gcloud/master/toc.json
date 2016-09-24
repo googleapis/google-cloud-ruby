@@ -30,15 +30,14 @@
   ],
   "services": [
     {
-      "title": "Gcloud",
-      "type": "gcloud",
+      "title": "BigQuery",
+      "type": "google/cloud/bigquery",
       "nav": [
         {
-          "title": "Gcloud",
+          "title": "Project",
           "type": "Gcloud"
         }
       ]
     }
-  ],
-  "tagName": "master"
+  ]
 }

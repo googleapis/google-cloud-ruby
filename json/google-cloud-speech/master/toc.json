@@ -33,6 +33,5 @@
       "title": "Speech",
       "type": "google/cloud/speech"
     }
-  ],
-  "tagName": "master"
+  ]
 }

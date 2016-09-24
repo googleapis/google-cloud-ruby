@@ -46,7 +46,6 @@
             "type": "google/cloud/language/annotation"
           }
         ]
-      }
-    ],
-    "tagName": "master"
-  }
+    }
+  ]
+}

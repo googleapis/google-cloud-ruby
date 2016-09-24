@@ -33,6 +33,5 @@
       "title": "Google Cloud Core",
       "type": "google/cloud/errors"
     }
-  ],
-  "tagName": "master"
+  ]
 }
