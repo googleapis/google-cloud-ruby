@@ -121,7 +121,7 @@ describe Google::Cloud::Logging, :logging do
     let(:entry2) { logging.entry.tap { |e| e.log_name = "#{prefix}-otherlog"; e.payload = {env: :production} } }
     #let(:entry3) { logging.entry.tap { |e| e.log_name = "#{prefix}-thislog"; e.payload = proto_payload; e.severity = :WARNING } }
 
-    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
+    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
 
     it "writes and lists log entries" do
       # logging.write_entries [entry1, entry2, entry3], resource: resource
@@ -134,7 +134,7 @@ describe Google::Cloud::Logging, :logging do
 
   describe "Ruby Logger" do
     let(:log_name) { "#{prefix}-logger" }
-    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
+    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
     let(:labels) { { env: :production } }
 
     before do
@@ -142,7 +142,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a symbol" do
-      logger = logging.logger "#{log_name}-symbol", resource, labels: labels
+      logger = logging.logger "#{log_name}-symbol", resource, labels
 
       logger.add :debug,   "Danger Will Robinson (:debug)!"
       logger.add :info,    "Danger Will Robinson (:info)!"
@@ -162,7 +162,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a string" do
-      logger = logging.logger "#{log_name}-string", resource, labels: labels
+      logger = logging.logger "#{log_name}-string", resource, labels
 
       logger.add "debug",   "Danger Will Robinson ('debug')!"
       logger.add "info",    "Danger Will Robinson ('info')!"
@@ -182,7 +182,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a constant" do
-      logger = logging.logger "#{log_name}-constant", resource, labels: labels
+      logger = logging.logger "#{log_name}-constant", resource, labels
 
       logger.add ::Logger::DEBUG,   "Danger Will Robinson (DEBUG)!"
       logger.add ::Logger::INFO,    "Danger Will Robinson (INFO)!"
@@ -202,7 +202,7 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with named functions" do
-      logger = logging.logger "#{log_name}-method", resource, labels: labels
+      logger = logging.logger "#{log_name}-method", resource, labels
 
       logger.debug   "Danger Will Robinson (debug)!"
       logger.info    "Danger Will Robinson (info)!"
