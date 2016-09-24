@@ -22,7 +22,7 @@ describe Google::Cloud::Logging::Project, :async_logger, :mock_logging do
     end
     labels = { "env" => "production" }
 
-    logger = logging.async_logger log_name, resource, labels: labels
+    logger = logging.async_logger log_name, resource, labels
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
@@ -37,7 +37,7 @@ describe Google::Cloud::Logging::Project, :async_logger, :mock_logging do
     end
     labels = { env: "production" }
 
-    logger = logging.async_logger log_name, resource, labels: labels
+    logger = logging.async_logger log_name, resource, labels
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
