@@ -332,11 +332,6 @@ module Google
         #   resource to be associated with written log entries.
         # @param [Hash] labels A set of user-defined data to be associated with
         #   written log entries.
-        # @param [Boolean|AsyncWriter] async_writer An AsyncWriter for the
-        #   logger to transmit log entries. You may also pass true to request
-        #   a new AsyncWriter for this logger, or false to request no
-        #   AsyncWriter (which will cause the logger to make blocking calls).
-        #   Default is true.
         #
         # @return [Google::Cloud::Logging::Logger] a Logger object that can be
         #   used in place of a ruby standard library logger object.
@@ -356,13 +351,8 @@ module Google
         #                           labels: {env: :production}
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels: {}, async_writer: true
-          writer = case async_writer
-                   when true then self.async_writer
-                   when false then self
-                   else async_writer
-                   end
-          Logger.new writer, log_name, resource, labels
+        def logger log_name, resource, labels: {}
+          Logger.new async_writer, log_name, resource, labels
         end
 
         ##
