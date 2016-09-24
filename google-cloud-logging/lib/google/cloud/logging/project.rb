@@ -256,10 +256,9 @@ module Google
         #   entry2 = logging.entry payload: "Job completed."
         #
         #   labels = { job_size: "large", job_code: "red" }
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
         #   logging.write_entries [entry1, entry2],
         #                         log_name: "my_app_log",
@@ -304,10 +303,9 @@ module Google
         #   entry2 = logging.entry payload: "Job completed."
         #
         #   labels = { job_size: "large", job_code: "red" }
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
@@ -341,16 +339,14 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
         #
-        #   logger = logging.logger "my_app_log", resource,
-        #                           labels: {env: :production}
+        #   logger = logging.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels: {}
+        def logger log_name, resource, labels = {}
           Logger.new self, log_name, resource, labels
         end
 
@@ -439,12 +435,11 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
-        def resource type, labels: {}
+        def resource type, labels = {}
           Resource.new.tap do |r|
             r.type = type
             r.labels = labels

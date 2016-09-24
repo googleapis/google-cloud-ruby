@@ -27,13 +27,11 @@ module Google
       #   gcloud = Google::Cloud.new
       #   logging = gcloud.logging
       #
-      #   resource = logging.resource "gae_app", labels: {
-      #                                 "module_id" => "1",
-      #                                 "version_id" => "20150925t173233" }
-      #                               }
+      #   resource = logging.resource "gae_app",
+      #                               module_id: "1",
+      #                               version_id: "20150925t173233"
       #
-      #   logger = logging.logger "my_app_log", resource,
-      #                            labels: {env: :production}
+      #   logger = logging.logger "my_app_log", resource, env: :production
       #   logger.info "Job started."
       #
       class Logger
@@ -250,13 +248,11 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
         #
-        #   logger = logging.logger "my_app_log", resource,
-        #                           labels: {env: :production}
+        #   logger = logging.logger "my_app_log", resource, env: :production
         #
         #   logger.level = "INFO"
         #   logger.debug "Job started." # No log entry written

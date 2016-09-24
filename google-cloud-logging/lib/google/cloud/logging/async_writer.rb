@@ -42,10 +42,9 @@ module Google
       #   entry2 = logging.entry payload: "Job completed."
       #
       #   labels = { job_size: "large", job_code: "red" }
-      #   resource = logging.resource "gae_app", labels: {
-      #                                 "module_id" => "1",
-      #                                 "version_id" => "20150925t173233" }
-      #                               }
+      #   resource = logging.resource "gae_app",
+      #                               "module_id" => "1",
+      #                               "version_id" => "20150925t173233"
       #
       #   async.write_entries [entry1, entry2],
       #                       log_name: "my_app_log",
@@ -179,16 +178,15 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
         #
         #   async = logging.async_writer
         #   logger = async.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels: {}
+        def logger log_name, resource, labels = {}
           Logger.new self, log_name, resource, labels
         end
 
