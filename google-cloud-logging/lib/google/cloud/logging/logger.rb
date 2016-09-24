@@ -52,7 +52,40 @@ module Google
         attr_reader :labels
 
         ##
-        # @private Creates a new Logger instance.
+        # Create a new Logger instance.
+        #
+        # @param [#write_entries] writer The object that will transmit log
+        #   entries. Usually an instance of Project or AsyncWriter, but any
+        #   object that implements #write_entries can be provided.
+        # @param [String] log_name A log resource name to be associated with the
+        #   written log entries.
+        # @param [Google::Cloud::Logging::Resource] resource The monitored
+        #   resource to be associated with written log entries.
+        # @param [Hash] labels A set of user-defined data to be associated with
+        #   written log entries.
+        #
+        # @return [Google::Cloud::Logging::Logger] a Logger object that can be
+        #   used in place of a ruby standard library logger object.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   logging = gcloud.logging
+        #
+        #   writer = logging.async_writer max_queue_size: 1000
+        #
+        #   resource = logging.resource "gae_app", labels: {
+        #                                 "module_id" => "1",
+        #                                 "version_id" => "20150925t173233" }
+        #                               }
+        #
+        #   logger = Google::Cloud::Logging::Logger.new writer,
+        #                                               "my_app_log",
+        #                                               resource,
+        #                                               env: :production
+        #   logger.info "Job started."
+        #
         def initialize writer, log_name, resource, labels = nil
           @writer = writer
           @log_name = log_name
