@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Logging::Project, :logger, :mock_logging do
+describe Google::Cloud::Logging::AsyncWriter, :logger, :mock_logging do
   it "creates a ruby logger object" do
     log_name = "web_app_log"
     resource = Google::Cloud::Logging::Resource.new.tap do |r|
@@ -22,12 +22,13 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     end
     labels = { "env" => "production" }
 
-    logger = logging.logger log_name, resource, labels: labels
+    async = logging.async_writer
+    logger = async.logger log_name, resource, labels: labels
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_equal labels
-    logger.writer.must_be_kind_of Google::Cloud::Logging::Project
+    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object with labels using symbols" do
@@ -37,12 +38,13 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
     end
     labels = { env: "production" }
 
-    logger = logging.logger log_name, resource, labels: labels
+    async = logging.async_writer
+    logger = async.logger log_name, resource, labels: labels
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_equal labels
-    logger.writer.must_be_kind_of Google::Cloud::Logging::Project
+    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object without labels" do
@@ -51,11 +53,12 @@ describe Google::Cloud::Logging::Project, :logger, :mock_logging do
       r.type = "web_app_server"
     end
 
-    logger = logging.logger log_name, resource
+    async = logging.async_writer
+    logger = async.logger log_name, resource
     logger.must_be_kind_of Google::Cloud::Logging::Logger
     logger.log_name.must_equal log_name
     logger.resource.must_equal resource
     logger.labels.must_be :empty?
-    logger.writer.must_be_kind_of Google::Cloud::Logging::Project
+    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 end
