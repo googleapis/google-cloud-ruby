@@ -30,12 +30,18 @@ task :acceptance, :project, :keyfile do |t, args|
   project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["PUBSUB_TEST_KEYFILE_JSON"]
+  end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance:pubsub[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:pubsub"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["PUBSUB_PROJECT"] = project
-  ENV["PUBSUB_KEYFILE"] = keyfile
+  ENV["PUBSUB_KEYFILE"] = nil
+  ENV["PUBSUB_KEYFILE_JSON"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative file }
@@ -59,13 +65,19 @@ namespace :acceptance do
     project = args[:project]
     project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["PUBSUB_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_PROJECT"]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["PUBSUB_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["PUBSUB_TEST_KEYFILE_JSON"]
+    end
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:pubsub:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:pubsub:cleanup"
+      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
     # always overwrite when running tests
     ENV["PUBSUB_PROJECT"] = project
-    ENV["PUBSUB_KEYFILE"] = keyfile
+    ENV["PUBSUB_KEYFILE"] = nil
+    ENV["PUBSUB_KEYFILE_JSON"] = keyfile
 
     $LOAD_PATH.unshift "lib"
     require "google/cloud/pubsub"

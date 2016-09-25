@@ -83,12 +83,18 @@ desc "Runs acceptance tests for all gems."
 task :acceptance, :project, :keyfile, :key do |t, args|
   project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["GOOGLE_CLOUD_PROJECT"] = project
-  ENV["GOOGLE_CLOUD_KEYFILE"] = keyfile
+  ENV["GOOGLE_CLOUD_KEYFILE"] = nil
+  ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = keyfile
 
   key = args[:key] || ENV["GCLOUD_TEST_KEY"]
   if key.nil?

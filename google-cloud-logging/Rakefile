@@ -30,12 +30,18 @@ task :acceptance, :project, :keyfile do |t, args|
   project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LOGGING_TEST_KEYFILE_JSON"]
+  end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance:logging[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:logging"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["LOGGING_PROJECT"] = project
-  ENV["LOGGING_KEYFILE"] = keyfile
+  ENV["LOGGING_KEYFILE"] = nil
+  ENV["LOGGING_KEYFILE_JSON"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/logging/**/*_test.rb").each { |file| require_relative file }
@@ -60,12 +66,18 @@ namespace :acceptance do
     project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
     keyfile = args[:keyfile]
     keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LOGGING_TEST_KEYFILE_JSON"]
+    end
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:logging:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:logging:cleanup"
+      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
     # always overwrite when running tests
     ENV["LOGGING_PROJECT"] = project
-    ENV["LOGGING_KEYFILE"] = keyfile
+    ENV["LOGGING_KEYFILE"] = nil
+    ENV["LOGGING_KEYFILE_JSON"] = keyfile
 
     $LOAD_PATH.unshift "lib"
     require "google/cloud/logging"
