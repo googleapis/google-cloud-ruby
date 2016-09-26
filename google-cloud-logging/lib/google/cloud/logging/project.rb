@@ -256,10 +256,9 @@ module Google
         #   entry2 = logging.entry payload: "Job completed."
         #
         #   labels = { job_size: "large", job_code: "red" }
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
         #   logging.write_entries [entry1, entry2],
         #                         log_name: "my_app_log",
@@ -304,10 +303,9 @@ module Google
         #   entry2 = logging.entry payload: "Job completed."
         #
         #   labels = { job_size: "large", job_code: "red" }
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
@@ -322,9 +320,8 @@ module Google
         # Creates a logger instance that is API-compatible with Ruby's standard
         # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
         #
-        # By default, the logger will create an AsyncWriter to transmit log
-        # entries on a background thread. You may change this behavior using
-        # the async_writer parameter.
+        # The logger will create a new AsyncWriter object to transmit log
+        # entries on a background thread.
         #
         # @param [String] log_name A log resource name to be associated with the
         #   written log entries.
@@ -332,11 +329,6 @@ module Google
         #   resource to be associated with written log entries.
         # @param [Hash] labels A set of user-defined data to be associated with
         #   written log entries.
-        # @param [Boolean|AsyncWriter] async_writer An AsyncWriter for the
-        #   logger to transmit log entries. You may also pass true to request
-        #   a new AsyncWriter for this logger, or false to request no
-        #   AsyncWriter (which will cause the logger to make blocking calls).
-        #   Default is true.
         #
         # @return [Google::Cloud::Logging::Logger] a Logger object that can be
         #   used in place of a ruby standard library logger object.
@@ -347,22 +339,15 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
         #
-        #   logger = logging.logger "my_app_log", resource,
-        #                           labels: {env: :production}
+        #   logger = logging.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
         #
-        def logger log_name, resource, labels: {}, async_writer: true
-          async_writer = case async_writer
-                         when true then self.async_writer
-                         when false then nil
-                         else async_writer
-                         end
-          Logger.new self, log_name, resource, labels, async_writer
+        def logger log_name, resource, labels = {}
+          Logger.new async_writer, log_name, resource, labels
         end
 
         ##
@@ -450,12 +435,11 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
         #
-        def resource type, labels: {}
+        def resource type, labels = {}
           Resource.new.tap do |r|
             r.type = type
             r.labels = labels

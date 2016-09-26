@@ -27,42 +27,68 @@ module Google
       #   gcloud = Google::Cloud.new
       #   logging = gcloud.logging
       #
-      #   resource = logging.resource "gae_app", labels: {
-      #                                 "module_id" => "1",
-      #                                 "version_id" => "20150925t173233" }
-      #                               }
+      #   resource = logging.resource "gae_app",
+      #                               module_id: "1",
+      #                               version_id: "20150925t173233"
       #
-      #   logger = logging.logger "my_app_log", resource,
-      #                            labels: {env: :production}
+      #   logger = logging.logger "my_app_log", resource, env: :production
       #   logger.info "Job started."
       #
       class Logger
         ##
-        # @private The logging object.
-        attr_accessor :logging
+        # The Google Cloud writer object that calls to {#write_entries} are made
+        # on. Either an AsyncWriter or Project object.
+        attr_reader :writer
 
         ##
-        # @private The async writer object.
-        attr_accessor :async_writer
-
-        ##
-        # @private The Google Cloud log_name to write the log entry with.
+        # The Google Cloud log_name to write the log entry with.
         attr_reader :log_name
 
         ##
-        # @private The Google Cloud resource to write the log entry with.
+        # The Google Cloud resource to write the log entry with.
         attr_reader :resource
 
         ##
-        # @private The Google Cloud labels to write the log entry with.
+        # The Google Cloud labels to write the log entry with.
         attr_reader :labels
 
         ##
-        # @private Creates a new Logger instance.
-        def initialize logging, log_name, resource, labels = nil,
-                       async_writer = nil
-          @logging = logging
-          @async_writer = async_writer
+        # Create a new Logger instance.
+        #
+        # @param [#write_entries] writer The object that will transmit log
+        #   entries. Usually an instance of Project or AsyncWriter, but any
+        #   object that implements #write_entries can be provided.
+        # @param [String] log_name A log resource name to be associated with the
+        #   written log entries.
+        # @param [Google::Cloud::Logging::Resource] resource The monitored
+        #   resource to be associated with written log entries.
+        # @param [Hash] labels A set of user-defined data to be associated with
+        #   written log entries.
+        #
+        # @return [Google::Cloud::Logging::Logger] a Logger object that can be
+        #   used in place of a ruby standard library logger object.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   logging = gcloud.logging
+        #
+        #   writer = logging.async_writer max_queue_size: 1000
+        #
+        #   resource = logging.resource "gae_app", labels: {
+        #                                 "module_id" => "1",
+        #                                 "version_id" => "20150925t173233" }
+        #                               }
+        #
+        #   logger = Google::Cloud::Logging::Logger.new writer,
+        #                                               "my_app_log",
+        #                                               resource,
+        #                                               env: :production
+        #   logger.info "Job started."
+        #
+        def initialize writer, log_name, resource, labels = nil
+          @writer = writer
           @log_name = log_name
           @resource = resource
           @labels = labels
@@ -256,13 +282,11 @@ module Google
         #   gcloud = Google::Cloud.new
         #   logging = gcloud.logging
         #
-        #   resource = logging.resource "gae_app", labels: {
-        #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
-        #                               }
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
         #
-        #   logger = logging.logger "my_app_log", resource,
-        #                           labels: {env: :production}
+        #   logger = logging.logger "my_app_log", resource, env: :production
         #
         #   logger.level = "INFO"
         #   logger.debug "Job started." # No log entry written
@@ -279,14 +303,13 @@ module Google
         ##
         # @private Write a log entry to the Stackdriver Logging service.
         def write_entry severity, message
-          entry = logging.entry.tap do |e|
+          entry = Entry.new.tap do |e|
             e.severity = gcloud_severity(severity)
             e.payload = message
           end
 
-          (async_writer || logging).write_entries entry, log_name: log_name,
-                                                         resource: resource,
-                                                         labels: labels
+          writer.write_entries entry, log_name: log_name, resource: resource,
+                                      labels: labels
         end
 
         ##
