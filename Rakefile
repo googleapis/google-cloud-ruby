@@ -445,6 +445,8 @@ namespace :appveyor do
   task :acceptance do
     if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
       header "Running acceptance tests on AppVeyor"
+      # Fix for SSL certificates on AppVeyor
+      ENV["SSL_CERT_FILE"] = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
       Rake::Task["acceptance"].invoke
     else
       header "Skipping acceptance tests on AppVeyor"
