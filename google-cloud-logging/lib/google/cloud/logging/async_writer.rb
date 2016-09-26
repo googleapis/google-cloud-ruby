@@ -156,41 +156,6 @@ module Google
         end
 
         ##
-        # Creates a logger instance that is API-compatible with Ruby's standard
-        # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
-        #
-        # The logger will use AsyncWriter to transmit log entries on a
-        # background thread.
-        #
-        # @param [String] log_name A log resource name to be associated with the
-        #   written log entries.
-        # @param [Google::Cloud::Logging::Resource] resource The monitored
-        #   resource to be associated with written log entries.
-        # @param [Hash] labels A set of user-defined data to be associated with
-        #   written log entries.
-        #
-        # @return [Google::Cloud::Logging::Logger] a Logger object that can be
-        #   used in place of a ruby standard library logger object.
-        #
-        # @example
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
-        #
-        #   resource = logging.resource "gae_app",
-        #                               module_id: "1",
-        #                               version_id: "20150925t173233"
-        #
-        #   async = logging.async_writer
-        #   logger = async.logger "my_app_log", resource, env: :production
-        #   logger.info "Job started."
-        #
-        def logger log_name, resource, labels = {}
-          Logger.new self, log_name, resource, labels
-        end
-
-        ##
         # Stops this asynchronous writer.
         #
         # After this call succeeds, the state will change to :stopping, and
