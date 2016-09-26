@@ -320,8 +320,8 @@ module Google
         # Creates a logger instance that is API-compatible with Ruby's standard
         # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
         #
-        # The logger will transmit log entries synchronously, blocking for every
-        # write. An asynchronous logger can be created using #async_writer.
+        # The logger will create a new AsyncWriter object to transmit log
+        # entries on a background thread.
         #
         # @param [String] log_name A log resource name to be associated with the
         #   written log entries.
@@ -347,7 +347,7 @@ module Google
         #   logger.info "Job started."
         #
         def logger log_name, resource, labels = {}
-          Logger.new self, log_name, resource, labels
+          Logger.new async_writer, log_name, resource, labels
         end
 
         ##

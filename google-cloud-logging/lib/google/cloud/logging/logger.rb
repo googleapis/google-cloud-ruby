@@ -36,19 +36,20 @@ module Google
       #
       class Logger
         ##
-        # @private The logging writer object. Either Project or AsyncWriter.
+        # The Google Cloud writer object that calls to {#write_entries} are made
+        # on. Either an AsyncWriter or Project object.
         attr_reader :writer
 
         ##
-        # @private The Google Cloud log_name to write the log entry with.
+        # The Google Cloud log_name to write the log entry with.
         attr_reader :log_name
 
         ##
-        # @private The Google Cloud resource to write the log entry with.
+        # The Google Cloud resource to write the log entry with.
         attr_reader :resource
 
         ##
-        # @private The Google Cloud labels to write the log entry with.
+        # The Google Cloud labels to write the log entry with.
         attr_reader :labels
 
         ##
