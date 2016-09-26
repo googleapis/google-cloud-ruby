@@ -30,12 +30,18 @@ task :acceptance, :project, :keyfile do |t, args|
   project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["VISION_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VISION_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["VISION_TEST_KEYFILE_JSON"]
+  end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VISION_TEST_PROJECT=test123 VISION_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["VISION_PROJECT"] = project
-  ENV["VISION_KEYFILE"] = keyfile
+  ENV["VISION_KEYFILE"] = nil
+  ENV["VISION_KEYFILE_JSON"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }

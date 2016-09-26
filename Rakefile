@@ -83,12 +83,18 @@ desc "Runs acceptance tests for all gems."
 task :acceptance, :project, :keyfile, :key do |t, args|
   project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
   ENV["GOOGLE_CLOUD_PROJECT"] = project
-  ENV["GOOGLE_CLOUD_KEYFILE"] = keyfile
+  ENV["GOOGLE_CLOUD_KEYFILE"] = nil
+  ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = keyfile
 
   key = args[:key] || ENV["GCLOUD_TEST_KEY"]
   if key.nil?
@@ -366,7 +372,7 @@ task :console, :bundleupdate do |t, args|
 end
 
 namespace :travis do
-  desc "Runs acceptance tests for CI."
+  desc "Runs acceptance tests for Travis-CI."
   task :acceptance do
     if ENV["TRAVIS_BRANCH"] == "master" &&
        ENV["TRAVIS_PULL_REQUEST"] == "false"
@@ -380,7 +386,7 @@ namespace :travis do
     end
   end
 
-  desc "Runs post-build logic"
+  desc "Runs post-build logic on Travis-CI."
   task :post do
     # We don't run post-build on pull requests
     if ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
@@ -430,6 +436,18 @@ namespace :travis do
       end
     else
       fail "Cannot build #{package} for version #{version}"
+    end
+  end
+end
+
+namespace :appveyor do
+  desc "Runs acceptance tests for AppVeyor CI."
+  task :acceptance do
+    if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
+      header "Running acceptance tests on AppVeyor"
+      Rake::Task["acceptance"].invoke
+    else
+      header "Skipping acceptance tests on AppVeyor"
     end
   end
 end

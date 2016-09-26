@@ -20,3 +20,4 @@ test_script:
   - bundle exec rake rubocop[yes]
   - bundle exec rake jsondoc
   - bundle exec rake test
+  - bundle exec rake appveyor:acceptance
