@@ -14,6 +14,7 @@
 
 
 require "google/cloud/credentials"
+require "google/cloud/speech/v1beta1"
 
 module Google
   module Cloud
@@ -21,7 +22,7 @@ module Google
       ##
       # @private Represents the OAuth 2.0 signing logic for Speech.
       class Credentials < Google::Cloud::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/speech"]
+        SCOPE = V1beta1::SpeechApi::ALL_SCOPES
         PATH_ENV_VARS = %w(SPEECH_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
         JSON_ENV_VARS = %w(SPEECH_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)

@@ -14,10 +14,9 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/grpc_backoff"
 require "google/cloud/speech/credentials"
 require "google/cloud/speech/version"
-# require "google/speech/v1/speech_services_pb"
+require "google/cloud/speech/v1beta1"
 
 module Google
   module Cloud
@@ -34,12 +33,16 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || "speech.googleapis.com"
+          @host = host || V1beta1::SpeechApi::SERVICE_ADDRESS
           @retries = retries
           @timeout = timeout
         end
 
-        def creds
+        def channel
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
           return credentials if insecure?
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
@@ -47,13 +50,42 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= Google::Speech::V1::Subscriber::Stub.new(
-            host, creds, timeout: timeout)
+          @service ||= \
+            V1beta1::SpeechApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              app_name: "google-cloud-speech",
+              app_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_service
 
+        def ops
+          return mocked_ops if mocked_ops
+          @ops ||= begin
+            require "google/longrunning/operations_services_pb"
+
+            Google::Longrunning::Operations::Stub.new(
+              host, chan_creds, timeout: timeout)
+          end
+        end
+        attr_accessor :mocked_ops
+
         def insecure?
           credentials == :this_channel_is_insecure
+        end
+
+        def recognize_sync audio, config
+          execute { service.sync_recognize config, audio }
+        end
+
+        def recognize_async audio, config
+          execute { service.async_recognize config, audio }
+        end
+
+        def get_op name
+          req = Google::Longrunning::GetOperationRequest.new name: name
+          execute { ops.get_operation req }
         end
 
         def inspect
@@ -63,11 +95,10 @@ module Google
         protected
 
         def execute
-          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
-            yield
-          end
+          require "grpc" # Ensure GRPC is loaded before rescuing exception
+          yield
         rescue GRPC::BadStatus => e
-          raise Error.from_error(e)
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

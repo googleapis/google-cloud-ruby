@@ -16,6 +16,8 @@
 require "google/cloud/errors"
 require "google/cloud/core/gce"
 require "google/cloud/speech/service"
+require "google/cloud/speech/audio"
+require "google/cloud/speech/results"
 
 module Google
   module Cloud
@@ -70,7 +72,63 @@ module Google
             Google::Cloud::Core::GCE.project_id
         end
 
+        def audio source, encoding: nil, sample_rate: nil, language: nil
+          audio = Audio.from_source source
+          audio.encoding = encoding unless encoding.nil?
+          audio.sample_rate = sample_rate unless sample_rate.nil?
+          audio.language = language unless language.nil?
+          audio
+        end
+
+        def recognize source, encoding: nil, sample_rate: nil, language: nil,
+                      max_alternatives: nil, profanity_filter: nil, phrases: nil
+          ensure_service!
+
+          config = audio_config(
+            encoding: encoding, sample_rate: sample_rate, language: language,
+            max_alternatives: max_alternatives,
+            profanity_filter: profanity_filter, phrases: phrases)
+
+          grpc = service.recognize_sync audio(source).to_grpc, config
+          Results.from_grpc grpc
+        end
+
+        def recognize_job source, encoding: nil, sample_rate: nil,
+                          language: nil, max_alternatives: nil,
+                          profanity_filter: nil, phrases: nil
+          ensure_service!
+
+          config = audio_config(
+            encoding: encoding, sample_rate: sample_rate, language: language,
+            max_alternatives: max_alternatives,
+            profanity_filter: profanity_filter, phrases: phrases)
+
+          grpc = service.recognize_async audio(source).to_grpc, config
+          Results::Job.from_grpc grpc, service
+        end
+
         protected
+
+        def audio_config encoding: nil, sample_rate: nil, language: nil,
+                         max_alternatives: nil, profanity_filter: nil,
+                         phrases: nil
+          context = nil
+          context = V1beta1::SpeechContext.new(phrases: phrases) if phrases
+          V1beta1::RecognitionConfig.new({
+            encoding: convert_encoding(encoding),
+            sample_rate: sample_rate,
+            language_code: language,
+            max_alternatives: max_alternatives,
+            profanity_filter: profanity_filter,
+            speech_context: context
+          }.delete_if { |_, v| v.nil? })
+        end
+
+        def convert_encoding encoding
+          mapping = { raw: :LINEAR16, linear: :LINEAR16, linear16: :LINEAR16,
+                      flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB }
+          mapping[encoding] || encoding
+        end
 
         ##
         # @private Raise an error unless an active connection to the service is
