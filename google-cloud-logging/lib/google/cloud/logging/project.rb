@@ -317,6 +317,35 @@ module Google
         end
 
         ##
+        # Returns a shared AsyncWriter for this Project. If this method is
+        # called multiple times, it will return the same object.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   logging = gcloud.logging
+        #
+        #   async = logging.shared_async_writer
+        #
+        #   entry1 = logging.entry payload: "Job started."
+        #   entry2 = logging.entry payload: "Job completed."
+        #
+        #   labels = { job_size: "large", job_code: "red" }
+        #   resource = logging.resource "gae_app",
+        #                               "module_id" => "1",
+        #                               "version_id" => "20150925t173233"
+        #
+        #   async.write_entries [entry1, entry2],
+        #                       log_name: "my_app_log",
+        #                       resource: resource,
+        #                       labels: labels
+        #
+        def shared_async_writer
+          @shared_async_writer ||= async_writer
+        end
+
+        ##
         # Creates a logger instance that is API-compatible with Ruby's standard
         # library [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc).
         #
@@ -347,7 +376,7 @@ module Google
         #   logger.info "Job started."
         #
         def logger log_name, resource, labels = {}
-          Logger.new async_writer, log_name, resource, labels
+          Logger.new shared_async_writer, log_name, resource, labels
         end
 
         ##

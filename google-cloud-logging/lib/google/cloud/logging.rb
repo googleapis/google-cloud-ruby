@@ -305,8 +305,8 @@ module Google
     #
     # By default, the logger instance writes log entries asynchronously in a
     # background thread using an {Google::Cloud::Logging::AsyncWriter}. If you
-    # want to customize or disable asynchronous writing, you may do so when
-    # creating a logger.
+    # want to customize or disable asynchronous writing, you may call the
+    # Logger constructor directly.
     #
     # ```ruby
     # require "google/cloud"
@@ -318,8 +318,10 @@ module Google
     #                             module_id: "1",
     #                             version_id: "20150925t173233"
     #
-    # logger = logging.logger "my_app_log", resource, {env: :production},
-    #                         async_writer: false
+    # logger = Google::Cloud::Logging::Logger.new logging,
+    #                                             "my_app_log",
+    #                                             resource,
+    #                                             {env: :production}
     # logger.info "Log entry written synchronously."
     # ```
     #

@@ -56,8 +56,10 @@ module Google
         # Create a new Logger instance.
         #
         # @param [#write_entries] writer The object that will transmit log
-        #   entries. Usually an instance of Project or AsyncWriter, but any
-        #   object that implements #write_entries can be provided.
+        #   entries. Generally, to create a logger that blocks on transmitting
+        #   log entries, pass the Project; otherwise, to create a logger that
+        #   transmits log entries in the background, pass an AsyncWriter. You
+        #   may also pass any other object that responds to #write_entries.
         # @param [String] log_name A log resource name to be associated with the
         #   written log entries.
         # @param [Google::Cloud::Logging::Resource] resource The monitored
