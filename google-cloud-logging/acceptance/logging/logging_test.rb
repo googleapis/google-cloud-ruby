@@ -132,7 +132,7 @@ describe Google::Cloud::Logging, :logging do
     end
   end
 
-  describe "Ruby Logger" do
+  describe "Ruby Blocking Logger" do
     let(:log_name) { "#{prefix}-logger" }
     let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
     let(:labels) { { env: :production } }
@@ -142,7 +142,10 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a symbol" do
-      logger = logging.logger "#{log_name}-symbol", resource, labels
+      logger = Google::Cloud::Logging::Logger.new logging,
+                                                  "#{log_name}-symbol",
+                                                  resource,
+                                                  labels
 
       logger.add :debug,   "Danger Will Robinson (:debug)!"
       logger.add :info,    "Danger Will Robinson (:info)!"
@@ -162,7 +165,10 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a string" do
-      logger = logging.logger "#{log_name}-string", resource, labels
+      logger = Google::Cloud::Logging::Logger.new logging,
+                                                  "#{log_name}-string",
+                                                  resource,
+                                                  labels
 
       logger.add "debug",   "Danger Will Robinson ('debug')!"
       logger.add "info",    "Danger Will Robinson ('info')!"
@@ -182,7 +188,10 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a constant" do
-      logger = logging.logger "#{log_name}-constant", resource, labels
+      logger = Google::Cloud::Logging::Logger.new logging,
+                                                  "#{log_name}-constant",
+                                                  resource,
+                                                  labels
 
       logger.add ::Logger::DEBUG,   "Danger Will Robinson (DEBUG)!"
       logger.add ::Logger::INFO,    "Danger Will Robinson (INFO)!"
@@ -202,7 +211,10 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with named functions" do
-      logger = logging.logger "#{log_name}-method", resource, labels
+      logger = Google::Cloud::Logging::Logger.new logging,
+                                                  "#{log_name}-method",
+                                                  resource,
+                                                  labels
 
       logger.debug   "Danger Will Robinson (debug)!"
       logger.info    "Danger Will Robinson (info)!"
@@ -236,7 +248,7 @@ describe Google::Cloud::Logging, :logging do
 
   describe "Ruby Async Logger" do
     let(:log_name) { "#{prefix}-logger" }
-    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
+    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
     let(:labels) { { env: :production } }
 
     before do
@@ -244,7 +256,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a symbol" do
-      logger = logging.async_writer.logger "#{log_name}-symbol", resource, labels
+      async = logging.async_writer
+      logger = async.logger "#{log_name}-symbol", resource, labels
 
       logger.add :debug,   "Danger Will Robinson (:debug)!"
       logger.add :info,    "Danger Will Robinson (:info)!"
@@ -252,6 +265,9 @@ describe Google::Cloud::Logging, :logging do
       logger.add :error,   "Danger Will Robinson (:error)!"
       logger.add :fatal,   "Danger Will Robinson (:fatal)!"
       logger.add :unknown, "Danger Will Robinson (:unknown)!"
+
+      async.stop
+      async.wait_until_stopped 10
 
       written_entries = entries_via_backoff("symbol").map &:payload
 
@@ -264,7 +280,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a string" do
-      logger = logging.async_writer.logger "#{log_name}-string", resource, labels
+      async = logging.async_writer
+      logger = async.logger "#{log_name}-string", resource, labels
 
       logger.add "debug",   "Danger Will Robinson ('debug')!"
       logger.add "info",    "Danger Will Robinson ('info')!"
@@ -272,6 +289,9 @@ describe Google::Cloud::Logging, :logging do
       logger.add "error",   "Danger Will Robinson ('error')!"
       logger.add "fatal",   "Danger Will Robinson ('fatal')!"
       logger.add "unknown", "Danger Will Robinson ('unknown')!"
+
+      async.stop
+      async.wait_until_stopped 10
 
       written_entries = entries_via_backoff("string").map &:payload
 
@@ -284,7 +304,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with add and a constant" do
-      logger = logging.async_writer.logger "#{log_name}-constant", resource, labels
+      async = logging.async_writer
+      logger = async.logger "#{log_name}-constant", resource, labels
 
       logger.add ::Logger::DEBUG,   "Danger Will Robinson (DEBUG)!"
       logger.add ::Logger::INFO,    "Danger Will Robinson (INFO)!"
@@ -292,6 +313,9 @@ describe Google::Cloud::Logging, :logging do
       logger.add ::Logger::ERROR,   "Danger Will Robinson (ERROR)!"
       logger.add ::Logger::FATAL,   "Danger Will Robinson (FATAL)!"
       logger.add ::Logger::UNKNOWN, "Danger Will Robinson (UNKNOWN)!"
+
+      async.stop
+      async.wait_until_stopped 10
 
       written_entries = entries_via_backoff("constant").map &:payload
 
@@ -304,7 +328,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "writes to a log with named functions" do
-      logger = logging.async_writer.logger "#{log_name}-method", resource, labels
+      async = logging.async_writer
+      logger = async.logger "#{log_name}-method", resource, labels
 
       logger.debug   "Danger Will Robinson (debug)!"
       logger.info    "Danger Will Robinson (info)!"
@@ -312,6 +337,9 @@ describe Google::Cloud::Logging, :logging do
       logger.error   "Danger Will Robinson (error)!"
       logger.fatal   "Danger Will Robinson (fatal)!"
       logger.unknown "Danger Will Robinson (unknown)!"
+
+      async.stop
+      async.wait_until_stopped 10
 
       written_entries = entries_via_backoff("method").map &:payload
 
