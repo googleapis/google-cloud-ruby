@@ -248,7 +248,7 @@ describe Google::Cloud::Logging, :logging do
 
   describe "Ruby Async Logger" do
     let(:log_name) { "#{prefix}-logger" }
-    let(:resource) { logging.resource "gce_instance", labels: { zone: "global", instance_id: "3" } }
+    let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
     let(:labels) { { env: :production } }
 
     before do
