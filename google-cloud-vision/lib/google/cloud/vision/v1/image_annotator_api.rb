@@ -35,10 +35,10 @@ module Google
         # landmark, logo, label, and text detection, over client images, and returns
         # detected entities from the images.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] image_annotator_stub
         #   @return [Google::Cloud::Vision::V1::ImageAnnotator::Stub]
         class ImageAnnotatorApi
-          attr_reader :stub
+          attr_reader :image_annotator_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "vision.googleapis.com".freeze
@@ -92,7 +92,8 @@ module Google
             require "google/cloud/vision/v1/image_annotator_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "image_annotator_client_config.json"
@@ -108,7 +109,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @image_annotator_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -118,7 +119,7 @@ module Google
             )
 
             @batch_annotate_images = Google::Gax.create_api_call(
-              @stub.method(:batch_annotate_images),
+              @image_annotator_stub.method(:batch_annotate_images),
               defaults["batch_annotate_images"]
             )
           end
