@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1beta1.SyncRecognizeRequest" do
@@ -57,6 +58,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1beta1.AsyncRecognizeResponse" do
     repeated :results, :message, 2, "google.cloud.speech.v1beta1.SpeechRecognitionResult"
   end
+  add_message "google.cloud.speech.v1beta1.AsyncRecognizeMetadata" do
+    optional :progress_percent, :int32, 1
+    optional :start_time, :message, 2, "google.protobuf.Timestamp"
+    optional :last_update_time, :message, 3, "google.protobuf.Timestamp"
+  end
   add_message "google.cloud.speech.v1beta1.StreamingRecognizeResponse" do
     optional :error, :message, 1, "google.rpc.Status"
     repeated :results, :message, 2, "google.cloud.speech.v1beta1.StreamingRecognitionResult"
@@ -98,6 +104,7 @@ module Google
         RecognitionAudio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.RecognitionAudio").msgclass
         SyncRecognizeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.SyncRecognizeResponse").msgclass
         AsyncRecognizeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.AsyncRecognizeResponse").msgclass
+        AsyncRecognizeMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.AsyncRecognizeMetadata").msgclass
         StreamingRecognizeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.StreamingRecognizeResponse").msgclass
         StreamingRecognizeResponse::EndpointerType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.StreamingRecognizeResponse.EndpointerType").enummodule
         StreamingRecognitionResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1beta1.StreamingRecognitionResult").msgclass

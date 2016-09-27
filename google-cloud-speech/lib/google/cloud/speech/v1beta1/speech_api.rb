@@ -33,10 +33,10 @@ module Google
       module V1beta1
         # Service that implements Google Cloud Speech API.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] speech_stub
         #   @return [Google::Cloud::Speech::V1beta1::Speech::Stub]
         class SpeechApi
-          attr_reader :stub
+          attr_reader :speech_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "speech.googleapis.com".freeze
@@ -90,7 +90,8 @@ module Google
             require "google/cloud/speech/v1beta1/cloud_speech_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "speech_client_config.json"
@@ -106,7 +107,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @speech_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -116,11 +117,11 @@ module Google
             )
 
             @sync_recognize = Google::Gax.create_api_call(
-              @stub.method(:sync_recognize),
+              @speech_stub.method(:sync_recognize),
               defaults["sync_recognize"]
             )
             @async_recognize = Google::Gax.create_api_call(
-              @stub.method(:async_recognize),
+              @speech_stub.method(:async_recognize),
               defaults["async_recognize"]
             )
           end
@@ -164,8 +165,9 @@ module Google
           end
 
           # Perform asynchronous speech-recognition: receive results via the
-          # google.longrunning.Operations interface. +Operation.response+ returns
-          # +AsyncRecognizeResponse+.
+          # google.longrunning.Operations interface. Returns either an
+          # +Operation.error+ or an +Operation.response+ which contains
+          # an +AsyncRecognizeResponse+ message.
           #
           # @param config [Google::Cloud::Speech::V1beta1::RecognitionConfig]
           #   [Required] The +config+ message provides information to the recognizer
