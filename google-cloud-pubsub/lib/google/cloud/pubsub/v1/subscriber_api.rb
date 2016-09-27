@@ -34,10 +34,12 @@ module Google
         # The service that an application uses to manipulate subscriptions and to
         # consume messages from a subscription via the +Pull+ method.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] iam_policy_stub
+        #   @return [Google::Iam::V1::IAMPolicy::Stub]
+        # @!attribute [r] subscriber_stub
         #   @return [Google::Pubsub::V1::Subscriber::Stub]
         class SubscriberApi
-          attr_reader :stub
+          attr_reader :iam_policy_stub, :subscriber_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "pubsub.googleapis.com".freeze
@@ -182,10 +184,12 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
+            require "google/iam/v1/iam_policy_services_pb"
             require "google/pubsub/v1/pubsub_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "subscriber_client_config.json"
@@ -202,7 +206,15 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @iam_policy_stub = Google::Gax::Grpc.create_stub(
+              service_path,
+              port,
+              chan_creds: chan_creds,
+              channel: channel,
+              scopes: scopes,
+              &Google::Iam::V1::IAMPolicy::Stub.method(:new)
+            )
+            @subscriber_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -211,36 +223,48 @@ module Google
               &Google::Pubsub::V1::Subscriber::Stub.method(:new)
             )
 
+            @set_iam_policy = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:set_iam_policy),
+              defaults["set_iam_policy"]
+            )
+            @get_iam_policy = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:get_iam_policy),
+              defaults["get_iam_policy"]
+            )
+            @test_iam_permissions = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:test_iam_permissions),
+              defaults["test_iam_permissions"]
+            )
             @create_subscription = Google::Gax.create_api_call(
-              @stub.method(:create_subscription),
+              @subscriber_stub.method(:create_subscription),
               defaults["create_subscription"]
             )
             @get_subscription = Google::Gax.create_api_call(
-              @stub.method(:get_subscription),
+              @subscriber_stub.method(:get_subscription),
               defaults["get_subscription"]
             )
             @list_subscriptions = Google::Gax.create_api_call(
-              @stub.method(:list_subscriptions),
+              @subscriber_stub.method(:list_subscriptions),
               defaults["list_subscriptions"]
             )
             @delete_subscription = Google::Gax.create_api_call(
-              @stub.method(:delete_subscription),
+              @subscriber_stub.method(:delete_subscription),
               defaults["delete_subscription"]
             )
             @modify_ack_deadline = Google::Gax.create_api_call(
-              @stub.method(:modify_ack_deadline),
+              @subscriber_stub.method(:modify_ack_deadline),
               defaults["modify_ack_deadline"]
             )
             @acknowledge = Google::Gax.create_api_call(
-              @stub.method(:acknowledge),
+              @subscriber_stub.method(:acknowledge),
               defaults["acknowledge"]
             )
             @pull = Google::Gax.create_api_call(
-              @stub.method(:pull),
+              @subscriber_stub.method(:pull),
               defaults["pull"]
             )
             @modify_push_config = Google::Gax.create_api_call(
-              @stub.method(:modify_push_config),
+              @subscriber_stub.method(:modify_push_config),
               defaults["modify_push_config"]
             )
           end
@@ -591,6 +615,107 @@ module Google
               push_config: push_config
             )
             @modify_push_config.call(req, options)
+          end
+
+          # Sets the access control policy on the specified resource. Replaces any
+          # existing policy.
+          #
+          # @param resource [String]
+          #   REQUIRED: The resource for which policy is being specified.
+          #   Resource is usually specified as a path, such as,
+          #   projects/{project}/zones/{zone}/disks/{disk}.
+          # @param policy [Google::Iam::V1::Policy]
+          #   REQUIRED: The complete policy to be applied to the 'resource'. The size of
+          #   the policy is limited to a few 10s of KB. An empty policy is in general a
+          #   valid policy but certain services (like Projects) might reject them.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Iam::V1::Policy]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   Policy = Google::Iam::V1::Policy
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   policy = Policy.new
+          #   response = subscriber_api.set_iam_policy(formatted_resource, policy)
+
+          def set_iam_policy \
+              resource,
+              policy,
+              options: nil
+            req = Google::Iam::V1::SetIamPolicyRequest.new(
+              resource: resource,
+              policy: policy
+            )
+            @set_iam_policy.call(req, options)
+          end
+
+          # Gets the access control policy for a resource. Is empty if the
+          # policy or the resource does not exist.
+          #
+          # @param resource [String]
+          #   REQUIRED: The resource for which policy is being requested. Resource
+          #   is usually specified as a path, such as, projects/{project}.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Iam::V1::Policy]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   response = subscriber_api.get_iam_policy(formatted_resource)
+
+          def get_iam_policy \
+              resource,
+              options: nil
+            req = Google::Iam::V1::GetIamPolicyRequest.new(
+              resource: resource
+            )
+            @get_iam_policy.call(req, options)
+          end
+
+          # Returns permissions that a caller has on the specified resource.
+          #
+          # @param resource [String]
+          #   REQUIRED: The resource for which policy detail is being requested.
+          #   Resource is usually specified as a path, such as, projects/{project}.
+          # @param permissions [Array<String>]
+          #   The set of permissions to check for the 'resource'. Permissions with
+          #   wildcards (such as '*' or 'storage.*') are not allowed.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Iam::V1::TestIamPermissionsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #
+          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #
+          #   subscriber_api = SubscriberApi.new
+          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   permissions = []
+          #   response = subscriber_api.test_iam_permissions(formatted_resource, permissions)
+
+          def test_iam_permissions \
+              resource,
+              permissions,
+              options: nil
+            req = Google::Iam::V1::TestIamPermissionsRequest.new(
+              resource: resource,
+              permissions: permissions
+            )
+            @test_iam_permissions.call(req, options)
           end
         end
       end
