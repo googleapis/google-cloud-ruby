@@ -98,4 +98,28 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
     mock.verify
   end
+
+  it "catches Google::Cloud::Error exceptions" do
+    mock = Minitest::Mock.new
+    def mock.write_log_entries message 
+      raise Google::Cloud::UnavailableError.new "This mock error should be caught"
+    end
+    # mock.expect :write_log_entries, write_res, [write_req(:INFO)]
+    logging.service.mocked_logging = mock
+
+    logger.info "Danger Will Robinson!"
+
+    mock.verify
+  end
+
+  it "should raise Standard exceptions" do
+    mock = Minitest::Mock.new
+    def mock.write_log_entries message 
+      raise "This mock error should not be caught"
+    end
+
+    logging.service.mocked_logging = mock
+
+    err = ->{ logger.info "Danger Will Robinson!" }.must_raise RuntimeError
+  end
 end

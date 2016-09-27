@@ -233,7 +233,13 @@ module Google
             end
           end
 
-          write_entry severity, message
+          
+
+          begin
+            write_entry severity, message
+          rescue Google::Cloud::Error => e
+            #There was an error sending the data. 
+          end
         end
         alias_method :log, :add
 
