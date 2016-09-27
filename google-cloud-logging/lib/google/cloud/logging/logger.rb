@@ -233,8 +233,6 @@ module Google
             end
           end
 
-          
-
           begin
             write_entry severity, message
           rescue Google::Cloud::Error => e

@@ -104,12 +104,10 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
     def mock.write_log_entries message 
       raise Google::Cloud::UnavailableError.new "This mock error should be caught"
     end
-    # mock.expect :write_log_entries, write_res, [write_req(:INFO)]
+
     logging.service.mocked_logging = mock
 
     logger.info "Danger Will Robinson!"
-
-    mock.verify
   end
 
   it "should raise Standard exceptions" do
@@ -121,5 +119,6 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
     logging.service.mocked_logging = mock
 
     err = ->{ logger.info "Danger Will Robinson!" }.must_raise RuntimeError
+    err.message.must_equal "This mock error should not be caught"
   end
 end
