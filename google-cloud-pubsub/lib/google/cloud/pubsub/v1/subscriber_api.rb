@@ -271,12 +271,13 @@ module Google
 
           # Service calls
 
-          # Creates a subscription to a given topic for a given subscriber.
+          # Creates a subscription to a given topic.
           # If the subscription already exists, returns +ALREADY_EXISTS+.
           # If the corresponding topic doesn't exist, returns +NOT_FOUND+.
           #
           # If the name is not provided in the request, the server will assign a random
-          # name for this subscription on the same project as the topic.
+          # name for this subscription on the same project as the topic. Note that
+          # for REST API requests, you must specify a name.
           #
           # @param name [String]
           #   The name of the subscription. It must have the format
@@ -304,6 +305,7 @@ module Google
           #   deadline. To override this value for a given message, call
           #   +ModifyAckDeadline+ with the corresponding +ack_id+ if using
           #   pull.
+          #   The maximum custom deadline you can specify is 600 seconds (10 minutes).
           #
           #   For push delivery, this value is also used to set the request timeout for
           #   the call to the push endpoint.
@@ -311,7 +313,7 @@ module Google
           #   If the subscriber never acknowledges the message, the Pub/Sub
           #   system will eventually redeliver the message.
           #
-          #   If this parameter is not set, the default value of 10 seconds is used.
+          #   If this parameter is 0, a default value of 10 seconds is used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -453,7 +455,8 @@ module Google
           # Modifies the ack deadline for a specific message. This method is useful
           # to indicate that more time is needed to process a message by the
           # subscriber, or to make the message available for redelivery if the
-          # processing was interrupted.
+          # processing was interrupted. Note that this does not modify the
+          # subscription-level +ackDeadlineSeconds+ used for subsequent messages.
           #
           # @param subscription [String]
           #   The name of the subscription.
