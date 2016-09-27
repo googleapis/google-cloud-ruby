@@ -294,6 +294,24 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_project_hash numeric_id = 1234567890, name = "project-name",
+                          assigned_id = "project-id-12345"
+    string_id = assigned_id || numeric_id.to_s
+    {
+      "kind" => "bigquery#project",
+      "etag" => "etag",
+      "id" => string_id,
+      # TODO: remove `to_s` from next line after migrating to
+      # google-api-client 0.10 (See google/google-api-ruby-client#439)
+      "numericId" => numeric_id.to_s,
+      "selfLink" => "http://bigquery/projects/#{project}",
+      "projectReference" => {
+        "projectId" => string_id
+      },
+      "friendlyName" => name
+    }
+  end
+
   def query_job_gapi query
     Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
   end

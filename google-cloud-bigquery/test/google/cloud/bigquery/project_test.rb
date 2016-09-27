@@ -620,6 +620,134 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     job.job_id.must_equal job_id
   end
 
+  it "lists projects" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3),
+      [max_results: nil, page_token: nil]
+    bigquery.service.mocked_service = mock
+
+    projects = bigquery.projects
+
+    mock.verify
+
+    projects.size.must_equal 3
+    projects.each do |project|
+      project.must_be_kind_of Google::Cloud::Bigquery::Project
+      project.name.must_equal "project-name"
+      project.numeric_id.must_equal 1234567890
+      project.project.must_equal "project-id-12345"
+    end
+  end
+
+  it "lists projects with max set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: 3, page_token: nil]
+    bigquery.service.mocked_service = mock
+
+    projects = bigquery.projects max: 3
+
+    mock.verify
+
+    projects.count.must_equal 3
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    projects.token.wont_be :nil?
+    projects.token.must_equal "next_page_token"
+  end
+
+  it "paginates projects" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: nil, page_token: nil]
+    mock.expect :list_projects, list_projects_gapi(2),
+      [max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    first_projects = bigquery.projects
+    second_projects = bigquery.projects token: first_projects.token
+
+    mock.verify
+
+    first_projects.count.must_equal 3
+    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    first_projects.token.wont_be :nil?
+    first_projects.token.must_equal "next_page_token"
+
+    second_projects.count.must_equal 2
+    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    second_projects.token.must_be :nil?
+  end
+
+  it "paginates projects using next? and next" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: nil, page_token: nil]
+    mock.expect :list_projects, list_projects_gapi(2),
+      [max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    first_projects = bigquery.projects
+    second_projects = first_projects.next
+
+    mock.verify
+
+    first_projects.count.must_equal 3
+    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    first_projects.next?.must_equal true
+
+    second_projects.count.must_equal 2
+    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    second_projects.next?.must_equal false
+  end
+
+  it "paginates projects with all" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: nil, page_token: nil]
+    mock.expect :list_projects, list_projects_gapi(2),
+      [max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    projects = bigquery.projects.all.to_a
+
+    mock.verify
+
+    projects.count.must_equal 5
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+  end
+
+  it "iterates projects with all using Enumerator" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: nil, page_token: nil]
+    mock.expect :list_projects, list_projects_gapi(3, "second_page_token"),
+      [max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    projects = bigquery.projects.all.take(5)
+
+    mock.verify
+
+    projects.count.must_equal 5
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+  end
+
+  it "iterates projects with all with request_limit set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_projects, list_projects_gapi(3, "next_page_token"),
+      [max_results: nil, page_token: nil]
+    mock.expect :list_projects, list_projects_gapi(3, "second_page_token"),
+      [max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    projects = bigquery.projects.all(request_limit: 1).to_a
+
+    mock.verify
+
+    projects.count.must_equal 6
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+  end
+
   def create_dataset_gapi id, name = nil, description = nil, default_expiration = nil, location = "US"
     Google::Apis::BigqueryV2::Dataset.from_json \
       random_dataset_hash(id, name, description, default_expiration, location).to_json
@@ -650,5 +778,17 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     hash["nextPageToken"] = token unless token.nil?
 
     Google::Apis::BigqueryV2::JobList.from_json hash.to_json
+  end
+
+  def list_projects_gapi count = 2, token = nil
+    hash = {
+      "kind" => "bigquery#projectList",
+      "etag" => "etag",
+      "projects" => count.times.map { random_project_hash },
+      "totalItems" => count
+    }
+    hash["nextPageToken"] = token unless token.nil?
+
+    Google::Apis::BigqueryV2::ProjectList.from_json hash.to_json
   end
 end

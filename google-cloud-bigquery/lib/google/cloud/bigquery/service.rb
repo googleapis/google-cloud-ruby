@@ -36,25 +36,32 @@ module Google
         # @private
         attr_accessor :credentials
 
+        # @private
+        attr_reader :retries, :timeout
+
         ##
         # Creates a new Service instance.
         def initialize project, credentials, retries: nil, timeout: nil
           @project = project
           @credentials = credentials
           @credentials = credentials
-          @service = API::BigqueryService.new
-          @service.client_options.application_name    = "google-cloud-bigquery"
-          @service.client_options.application_version = \
-            Google::Cloud::Bigquery::VERSION
-          @service.request_options.retries = retries || 3
-          @service.request_options.timeout_sec      = timeout
-          @service.request_options.open_timeout_sec = timeout
-          @service.authorization = @credentials.client
+          @retries = retries
+          @timeout = timeout
         end
 
         def service
           return mocked_service if mocked_service
-          @service
+          @service ||= begin
+            service = API::BigqueryService.new
+            service.client_options.application_name    = "google-cloud-bigquery"
+            service.client_options.application_version = \
+              Google::Cloud::Bigquery::VERSION
+            service.request_options.retries = @retries || 3
+            service.request_options.timeout_sec      = @timeout
+            service.request_options.open_timeout_sec = @timeout
+            service.authorization = @credentials.client
+            service
+          end
         end
         attr_accessor :mocked_service
 
@@ -276,6 +283,15 @@ module Google
           }.delete_if { |_, v| v.nil? }
           new_table_ref_hash = default_table_ref.to_h.merge str_table_ref_hash
           Google::Apis::BigqueryV2::TableReference.new new_table_ref_hash
+        end
+
+        ##
+        # Lists all projects to which you have been granted any project role.
+        def list_projects options = {}
+          execute do
+            service.list_projects max_results: options[:max],
+                                  page_token: options[:token]
+          end
         end
 
         def inspect
