@@ -12,6 +12,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :destination, :string, 3
     optional :filter, :string, 5
     optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
+    optional :writer_identity, :string, 8
   end
   add_enum "google.logging.v2.LogSink.VersionFormat" do
     value :VERSION_FORMAT_UNSPECIFIED, 0

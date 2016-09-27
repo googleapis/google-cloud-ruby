@@ -33,10 +33,10 @@ module Google
       module V2
         # Service for ingesting and querying logs.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] logging_service_v2_stub
         #   @return [Google::Logging::V2::LoggingServiceV2::Stub]
         class LoggingServiceV2Api
-          attr_reader :stub
+          attr_reader :logging_service_v2_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "logging.googleapis.com".freeze
@@ -160,7 +160,8 @@ module Google
             require "google/logging/v2/logging_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "logging_service_v2_client_config.json"
@@ -177,7 +178,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @logging_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -187,19 +188,19 @@ module Google
             )
 
             @delete_log = Google::Gax.create_api_call(
-              @stub.method(:delete_log),
+              @logging_service_v2_stub.method(:delete_log),
               defaults["delete_log"]
             )
             @write_log_entries = Google::Gax.create_api_call(
-              @stub.method(:write_log_entries),
+              @logging_service_v2_stub.method(:write_log_entries),
               defaults["write_log_entries"]
             )
             @list_log_entries = Google::Gax.create_api_call(
-              @stub.method(:list_log_entries),
+              @logging_service_v2_stub.method(:list_log_entries),
               defaults["list_log_entries"]
             )
             @list_monitored_resource_descriptors = Google::Gax.create_api_call(
-              @stub.method(:list_monitored_resource_descriptors),
+              @logging_service_v2_stub.method(:list_monitored_resource_descriptors),
               defaults["list_monitored_resource_descriptors"]
             )
           end
@@ -238,25 +239,34 @@ module Google
           # written by this method.
           #
           # @param log_name [String]
-          #   Optional. A default log resource name for those log entries in +entries+
-          #   that do not specify their own +logName+.  Example:
+          #   Optional. A default log resource name that is assigned to all log entries
+          #   in +entries+ that do not specify a value for +log_name+.  Example:
           #   +"projects/my-project/logs/syslog"+.  See
           #   LogEntry.
           # @param resource [Google::Api::MonitoredResource]
-          #   Optional. A default monitored resource for those log entries in +entries+
-          #   that do not specify their own +resource+.
-          # @param labels [Hash{String => String}]
-          #   Optional. User-defined +key:value+ items that are added to
-          #   the +labels+ field of each log entry in +entries+, except when a log
-          #   entry specifies its own +key:value+ item with the same key.
-          #   Example: +{ "size": "large", "color":"red" }+
-          # @param entries [Array<Google::Logging::V2::LogEntry>]
-          #   Required. The log entries to write. The log entries must have values for
-          #   all required fields.
+          #   Optional. A default monitored resource object that is assigned to all log
+          #   entries in +entries+ that do not specify a value for +resource+. Example:
           #
-          #   To improve throughput and to avoid exceeding the quota limit for calls
-          #   to +entries.write+, use this field to write multiple log entries at once
-          #   rather than  // calling this method for each log entry.
+          #       { "type": "gce_instance",
+          #         "labels": {
+          #           "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
+          #
+          #   See LogEntry.
+          # @param labels [Hash{String => String}]
+          #   Optional. Default labels that are added to the +labels+ field of all log
+          #   entries in +entries+. If a log entry already has a label with the same key
+          #   as a label in this parameter, then the log entry's label is not changed.
+          #   See LogEntry.
+          # @param entries [Array<Google::Logging::V2::LogEntry>]
+          #   Required. The log entries to write. Values supplied for the fields
+          #   +log_name+, +resource+, and +labels+ in this +entries.write+ request are
+          #   added to those log entries that do not provide their own values for the
+          #   fields.
+          #
+          #   To improve throughput and to avoid exceeding the
+          #   {quota limit}[https://cloud.google.com/logging/quota-policy] for calls to +entries.write+,
+          #   you should write multiple log entries at once rather than
+          #   calling this method for each individual log entry.
           # @param partial_success [true, false]
           #   Optional. Whether valid entries should be written even if some other
           #   entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -299,13 +309,19 @@ module Google
           # {Exporting Logs}[https://cloud.google.com/logging/docs/export].
           #
           # @param project_ids [Array<String>]
-          #   Required. One or more project IDs or project numbers from which to retrieve
-          #   log entries.  Examples of a project ID: +"my-project-1A"+, +"1234567890"+.
+          #   Deprecated. One or more project identifiers or project numbers from which
+          #   to retrieve log entries.  Examples: +"my-project-1A"+, +"1234567890"+. If
+          #   present, these project identifiers are converted to resource format and
+          #   added to the list of resources in +resourceNames+. Callers should use
+          #   +resourceNames+ rather than this parameter.
+          # @param resource_names [Array<String>]
+          #   Optional. One or more cloud resources from which to retrieve log entries.
+          #   Example: +"projects/my-project-1A"+, +"projects/1234567890"+.  Projects
+          #   listed in +projectIds+ are added to this list.
           # @param filter [String]
-          #   Optional. An {advanced logs filter}[https://cloud.google.com/logging/docs/view/advanced_filters].
-          #   The filter is compared against all log entries in the projects specified by
-          #   +projectIds+.  Only entries that match the filter are retrieved.  An empty
-          #   filter matches all log entries.
+          #   Optional. A filter that chooses which log entries to return.  See {Advanced
+          #   Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
+          #   match the filter are returned.  An empty filter matches all log entries.
           # @param order_by [String]
           #   Optional. How the results should be sorted.  Presently, the only permitted
           #   values are +"timestamp asc"+ (default) and +"timestamp desc"+. The first
@@ -351,6 +367,7 @@ module Google
 
           def list_log_entries \
               project_ids,
+              resource_names: nil,
               filter: nil,
               order_by: nil,
               page_size: nil,
@@ -358,6 +375,7 @@ module Google
             req = Google::Logging::V2::ListLogEntriesRequest.new(
               project_ids: project_ids
             )
+            req.resource_names = resource_names unless resource_names.nil?
             req.filter = filter unless filter.nil?
             req.order_by = order_by unless order_by.nil?
             req.page_size = page_size unless page_size.nil?

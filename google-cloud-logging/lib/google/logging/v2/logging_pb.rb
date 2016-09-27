@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.logging.v2.ListLogEntriesRequest" do
     repeated :project_ids, :string, 1
+    repeated :resource_names, :string, 8
     optional :filter, :string, 2
     optional :order_by, :string, 3
     optional :page_size, :int32, 4
