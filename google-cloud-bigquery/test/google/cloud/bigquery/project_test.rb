@@ -748,6 +748,27 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
   end
 
+  it "creates a schema" do
+    schema = bigquery.schema do |s|
+      s.string "first_name", mode: :nullable
+      s.string "last_name", mode: :nullable
+      s.integer "age", mode: :nullable
+    end
+
+    schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    schema.fields[0].name.must_equal "first_name"
+    schema.fields[0].type.must_equal "STRING"
+    schema.fields[0].mode.must_equal "NULLABLE"
+
+    schema.fields[1].name.must_equal "last_name"
+    schema.fields[1].type.must_equal "STRING"
+    schema.fields[1].mode.must_equal "NULLABLE"
+
+    schema.fields[2].name.must_equal "age"
+    schema.fields[2].type.must_equal "INTEGER"
+    schema.fields[2].mode.must_equal "NULLABLE"
+  end
+
   def create_dataset_gapi id, name = nil, description = nil, default_expiration = nil, location = "US"
     Google::Apis::BigqueryV2::Dataset.from_json \
       random_dataset_hash(id, name, description, default_expiration, location).to_json

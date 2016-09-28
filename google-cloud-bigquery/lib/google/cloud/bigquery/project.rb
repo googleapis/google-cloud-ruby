@@ -21,6 +21,7 @@ require "google/cloud/bigquery/dataset"
 require "google/cloud/bigquery/job"
 require "google/cloud/bigquery/query_data"
 require "google/cloud/bigquery/project/list"
+require "google/cloud/bigquery/schema"
 
 module Google
   module Cloud
@@ -526,6 +527,34 @@ module Google
               p.instance_variable_set :@numeric_id, Integer(gapi.numeric_id)
             end
           end
+        end
+
+        ##
+        # Creates an schema that it isn't associated to a table.
+        #
+        # @yield [access] a block for setting a schema
+        #
+        # @return [Google::Cloud::Bigquery::Schema] Returns a fresh schema
+        #
+        # @example Creates a new schema
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   schema = bigquery.schema do |s|
+        #     s.string "first_name", mode: :nullable
+        #     s.string "last_name", mode: :nullable
+        #     s.integer "age", mode: :nullable
+        #   end
+        #
+        #   csv_file = File.open "test.csv", "r"
+        #
+        #   table.load csv_file, write: :truncate, schema: schema
+        def schema
+          schema = Schema.from_gapi nil
+          yield schema
+          schema
         end
 
         protected
