@@ -322,7 +322,8 @@ module Google
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
             max_bad_records: options[:max_bad_records], quote: options[:quote],
-            schema: options[:schema], skip_leading_rows: options[:skip_leading]
+            schema: options[:schema], skip_leading_rows: options[:skip_leading],
+            autodetect: options[:autodetect]
           }.delete_if { |_, v| v.nil? }
         end
 
@@ -350,7 +351,8 @@ module Google
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
             max_bad_records: options[:max_bad_records], quote: options[:quote],
-            schema: options[:schema], skip_leading_rows: options[:skip_leading]
+            schema: options[:schema], skip_leading_rows: options[:skip_leading],
+            autodetect: options[:autodetect]
           }.delete_if { |_, v| v.nil? }
         end
 

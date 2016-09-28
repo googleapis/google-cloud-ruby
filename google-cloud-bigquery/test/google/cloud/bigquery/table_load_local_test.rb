@@ -59,7 +59,8 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
           ignore_unknown_values: true,
           max_bad_records: 42,
           quote: "'",
-          skip_leading_rows: 1
+          skip_leading_rows: 1,
+          autodetect: true
         ),
         dry_run: nil))
     table.service.mocked_service = mock
@@ -70,7 +71,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
       job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
-        quote: "'", skip_leading: 1
+        quote: "'", skip_leading: 1, autodetect: true
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
