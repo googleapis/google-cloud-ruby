@@ -34,10 +34,10 @@ module Google
         # Service for configuring sinks used to export log entries outside Stackdriver
         # Logging.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] config_service_v2_stub
         #   @return [Google::Logging::V2::ConfigServiceV2::Stub]
         class ConfigServiceV2Api
-          attr_reader :stub
+          attr_reader :config_service_v2_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "logging.googleapis.com".freeze
@@ -157,7 +157,8 @@ module Google
             require "google/logging/v2/logging_config_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "config_service_v2_client_config.json"
@@ -174,7 +175,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @config_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -184,23 +185,23 @@ module Google
             )
 
             @list_sinks = Google::Gax.create_api_call(
-              @stub.method(:list_sinks),
+              @config_service_v2_stub.method(:list_sinks),
               defaults["list_sinks"]
             )
             @get_sink = Google::Gax.create_api_call(
-              @stub.method(:get_sink),
+              @config_service_v2_stub.method(:get_sink),
               defaults["get_sink"]
             )
             @create_sink = Google::Gax.create_api_call(
-              @stub.method(:create_sink),
+              @config_service_v2_stub.method(:create_sink),
               defaults["create_sink"]
             )
             @update_sink = Google::Gax.create_api_call(
-              @stub.method(:update_sink),
+              @config_service_v2_stub.method(:update_sink),
               defaults["update_sink"]
             )
             @delete_sink = Google::Gax.create_api_call(
-              @stub.method(:delete_sink),
+              @config_service_v2_stub.method(:delete_sink),
               defaults["delete_sink"]
             )
           end
@@ -210,7 +211,7 @@ module Google
           # Lists sinks.
           #
           # @param parent [String]
-          #   Required. The resource name containing the sinks.
+          #   Required. The cloud resource containing the sinks.
           #   Example: +"projects/my-logging-project"+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -262,7 +263,7 @@ module Google
           # Gets a sink.
           #
           # @param sink_name [String]
-          #   The resource name of the sink to return.
+          #   Required. The resource name of the sink to return.
           #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -290,13 +291,12 @@ module Google
           # Creates a sink.
           #
           # @param parent [String]
-          #   The resource in which to create the sink.
+          #   Required. The resource in which to create the sink.
           #   Example: +"projects/my-project-id"+.
-          #
           #   The new sink must be provided in the request.
           # @param sink [Google::Logging::V2::LogSink]
-          #   The new sink, which must not have an identifier that already
-          #   exists.
+          #   Required. The new sink, whose +name+ parameter is a sink identifier that
+          #   is not already in use.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -324,18 +324,15 @@ module Google
             @create_sink.call(req, options)
           end
 
-          # Creates or updates a sink.
+          # Updates or creates a sink.
           #
           # @param sink_name [String]
-          #   The resource name of the sink to update.
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
-          #
-          #   The updated sink must be provided in the request and have the
-          #   same name that is specified in +sinkName+.  If the sink does not
-          #   exist, it is created.
+          #   Required. The resource name of the sink to update, including the parent
+          #   resource and the sink identifier.  If the sink does not exist, this method
+          #   creates the sink.  Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink]
-          #   The updated sink, whose name must be the same as the sink
-          #   identifier in +sinkName+.  If +sinkName+ does not exist, then
+          #   Required. The updated sink, whose name is the same identifier that appears
+          #   as part of +sinkName+.  If +sinkName+ does not exist, then
           #   this method creates a new sink.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -367,8 +364,10 @@ module Google
           # Deletes a sink.
           #
           # @param sink_name [String]
-          #   The resource name of the sink to delete.
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Required. The resource name of the sink to delete, including the parent
+          #   resource and the sink identifier.  Example:
+          #   +"projects/my-project-id/sinks/my-sink-id"+.  It is an error if the sink
+          #   does not exist.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

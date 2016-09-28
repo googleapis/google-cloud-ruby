@@ -39,7 +39,7 @@ module Google
           rpc :GetSink, GetSinkRequest, LogSink
           # Creates a sink.
           rpc :CreateSink, CreateSinkRequest, LogSink
-          # Creates or updates a sink.
+          # Updates or creates a sink.
           rpc :UpdateSink, UpdateSinkRequest, LogSink
           # Deletes a sink.
           rpc :DeleteSink, DeleteSinkRequest, Google::Protobuf::Empty

@@ -10,6 +10,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :description, :string, 2
     optional :filter, :string, 3
+    optional :version, :enum, 4, "google.logging.v2.LogMetric.ApiVersion"
+  end
+  add_enum "google.logging.v2.LogMetric.ApiVersion" do
+    value :V2, 0
+    value :V1, 1
   end
   add_message "google.logging.v2.ListLogMetricsRequest" do
     optional :parent, :string, 1
@@ -40,6 +45,7 @@ module Google
   module Logging
     module V2
       LogMetric = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric").msgclass
+      LogMetric::ApiVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric.ApiVersion").enummodule
       ListLogMetricsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsRequest").msgclass
       ListLogMetricsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsResponse").msgclass
       GetLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetLogMetricRequest").msgclass

@@ -34,16 +34,13 @@ module Google
 
           # Deletes a log and all its log entries.
           # The log will reappear if it receives new entries.
-          #
           rpc :DeleteLog, DeleteLogRequest, Google::Protobuf::Empty
           # Writes log entries to Stackdriver Logging.  All log entries are
           # written by this method.
-          #
           rpc :WriteLogEntries, WriteLogEntriesRequest, WriteLogEntriesResponse
           # Lists log entries.  Use this method to retrieve log entries from Cloud
           # Logging.  For ways to export log entries, see
           # [Exporting Logs](/logging/docs/export).
-          #
           rpc :ListLogEntries, ListLogEntriesRequest, ListLogEntriesResponse
           # Lists the monitored resource descriptors used by Stackdriver Logging.
           rpc :ListMonitoredResourceDescriptors, ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse

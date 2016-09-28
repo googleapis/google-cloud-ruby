@@ -33,10 +33,10 @@ module Google
       module V2
         # Service for configuring logs-based metrics.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] metrics_service_v2_stub
         #   @return [Google::Logging::V2::MetricsServiceV2::Stub]
         class MetricsServiceV2Api
-          attr_reader :stub
+          attr_reader :metrics_service_v2_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "logging.googleapis.com".freeze
@@ -156,7 +156,8 @@ module Google
             require "google/logging/v2/logging_metrics_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "metrics_service_v2_client_config.json"
@@ -173,7 +174,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @metrics_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -183,23 +184,23 @@ module Google
             )
 
             @list_log_metrics = Google::Gax.create_api_call(
-              @stub.method(:list_log_metrics),
+              @metrics_service_v2_stub.method(:list_log_metrics),
               defaults["list_log_metrics"]
             )
             @get_log_metric = Google::Gax.create_api_call(
-              @stub.method(:get_log_metric),
+              @metrics_service_v2_stub.method(:get_log_metric),
               defaults["get_log_metric"]
             )
             @create_log_metric = Google::Gax.create_api_call(
-              @stub.method(:create_log_metric),
+              @metrics_service_v2_stub.method(:create_log_metric),
               defaults["create_log_metric"]
             )
             @update_log_metric = Google::Gax.create_api_call(
-              @stub.method(:update_log_metric),
+              @metrics_service_v2_stub.method(:update_log_metric),
               defaults["update_log_metric"]
             )
             @delete_log_metric = Google::Gax.create_api_call(
-              @stub.method(:delete_log_metric),
+              @metrics_service_v2_stub.method(:delete_log_metric),
               defaults["delete_log_metric"]
             )
           end
