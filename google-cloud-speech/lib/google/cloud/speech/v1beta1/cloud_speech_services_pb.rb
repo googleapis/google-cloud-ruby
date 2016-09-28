@@ -37,8 +37,9 @@ module Google
             # has been sent and processed.
             rpc :SyncRecognize, SyncRecognizeRequest, SyncRecognizeResponse
             # Perform asynchronous speech-recognition: receive results via the
-            # google.longrunning.Operations interface. `Operation.response` returns
-            # `AsyncRecognizeResponse`.
+            # google.longrunning.Operations interface. Returns either an
+            # `Operation.error` or an `Operation.response` which contains
+            # an `AsyncRecognizeResponse` message.
             rpc :AsyncRecognize, AsyncRecognizeRequest, Google::Longrunning::Operation
             # Perform bidirectional streaming speech-recognition: receive results while
             # sending audio. This method is only available via the gRPC API (not REST).
