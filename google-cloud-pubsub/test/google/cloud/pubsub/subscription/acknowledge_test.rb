@@ -33,14 +33,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
   it "can acknowledge an ack id" do
     ack_id = rec_message1.ack_id
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: [ack_id]
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [ack_id]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_id
@@ -50,14 +45,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
   it "can acknowledge many ack ids" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: ack_ids
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*ack_ids)
@@ -67,14 +57,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
   it "can acknowledge many ack ids in an array" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: ack_ids
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_ids
@@ -83,13 +68,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
   end
 
   it "can acknowledge a message" do
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: [rec_message1.ack_id]
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [rec_message1.ack_id]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_message1
@@ -100,14 +81,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
   it "can acknowledge many messages" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
     ack_ids = rec_messages.map(&:ack_id)
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: ack_ids
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*rec_messages)
@@ -118,14 +94,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
   it "can acknowledge many messages in an array" do
     rec_messages  = [rec_message1, rec_message3, rec_message3]
     ack_ids = rec_messages.map(&:ack_id)
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: ack_ids
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_messages
@@ -141,14 +112,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "can acknowledge an ack id" do
       ack_id = rec_message1.ack_id
-
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: [ack_id]
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [ack_id]]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_id
@@ -158,14 +124,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "can acknowledge many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
-
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: ack_ids
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*ack_ids)
@@ -175,14 +136,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "can acknowledge many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
-
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: ack_ids
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_ids
@@ -191,13 +147,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
 
     it "can acknowledge a message" do
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: [rec_message1.ack_id]
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [rec_message1.ack_id]]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_message1
@@ -208,14 +160,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     it "can acknowledge many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
-
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: ack_ids
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*rec_messages)
@@ -226,14 +173,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     it "can acknowledge many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
       ack_ids = rec_messages.map(&:ack_id)
-
-      ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-        subscription: subscription_path(sub_name),
-        ack_ids: ack_ids
-      )
       ack_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [ack_req]
+      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_messages
@@ -253,7 +195,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -267,7 +211,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -281,7 +227,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -293,7 +241,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     it "raises NotFoundError when acknowledging a message" do
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -304,11 +254,12 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "raises NotFoundError when acknowledging many messages" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map(&:ack_id)
 
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -319,11 +270,12 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
 
     it "raises NotFoundError when acknowledging many messages in an array" do
       rec_messages  = [rec_message1, rec_message3, rec_message3]
-      ack_ids = rec_messages.map(&:ack_id)
 
       stub = Object.new
       def stub.acknowledge *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 

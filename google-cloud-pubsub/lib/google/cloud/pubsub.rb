@@ -327,27 +327,15 @@ module Google
     # end
     # ```
     #
-    # ## Configuring retries and timeout
+    # ## Configuring timeout
     #
-    # You can configure how many times API requests may be automatically
-    # retried. When an API request fails, the response will be inspected to see
-    # if the request meets criteria indicating that it may succeed on retry,
-    # such as `500` and `503` status codes or a specific internal error code
-    # such as `rateLimitExceeded`. If it meets the criteria, the request will be
-    # retried after a delay. If another error occurs, the delay will be
-    # increased before a subsequent attempt, until the `retries` limit is
-    # reached.
-    #
-    # You can also set the request `timeout` value in seconds.
+    # You can configure the request `timeout` value in seconds.
     #
     # ```ruby
     # require "google/cloud/pubsub"
     #
     # pubsub = Google::Cloud::Pubsub.new retries: 10, timeout: 120
     # ```
-    #
-    # See the [Pub/Sub error codes](https://cloud.google.com/pubsub/error-codes)
-    # for a list of error conditions.
     #
     # ## Working Across Projects
     #

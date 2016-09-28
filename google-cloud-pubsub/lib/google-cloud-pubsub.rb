@@ -38,8 +38,7 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Pubsub::Project]
@@ -61,7 +60,7 @@ module Google
     #
     def pubsub scope: nil, retries: nil, timeout: nil
       Google::Cloud.pubsub @project, @keyfile, scope: scope,
-                                               retries: (retries || @retries),
+                                               retries: retries,
                                                timeout: (timeout || @timeout)
     end
 
@@ -84,8 +83,7 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Pubsub::Project]

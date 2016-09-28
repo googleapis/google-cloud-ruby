@@ -21,13 +21,9 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
-    create_req = Google::Pubsub::V1::Subscription.new(
-      name: "projects/#{project}/subscriptions/#{new_sub_name}",
-      topic: topic_path(topic_name)
-    )
     create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [create_req]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
     topic.service.mocked_subscriber = mock
 
     sub = topic.subscribe new_sub_name
@@ -44,13 +40,9 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
                                                  autocreate: false }
 
     it "creates a subscription when calling subscribe" do
-      create_req = Google::Pubsub::V1::Subscription.new(
-        name: "projects/#{project}/subscriptions/#{new_sub_name}",
-        topic: topic_path(topic_name)
-      )
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
       mock = Minitest::Mock.new
-      mock.expect :create_subscription, create_res, [create_req]
+      mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
       topic.service.mocked_subscriber = mock
 
       sub = topic.subscribe new_sub_name
@@ -70,7 +62,9 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new
       def stub.create_subscription *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       topic.service.mocked_subscriber = stub
 

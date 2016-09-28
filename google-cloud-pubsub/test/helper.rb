@@ -26,7 +26,7 @@ class MockPubsub < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:pubsub) { Google::Cloud::Pubsub::Project.new(Google::Cloud::Pubsub::Service.new(project, credentials)) }
 
-  def topics_json num_topics, token = nil
+  def topics_json num_topics, token = ""
     topics = num_topics.times.map do
       JSON.parse(topic_json("topic-#{rand 1000}"))
     end
@@ -39,7 +39,7 @@ class MockPubsub < Minitest::Spec
     { "name" => topic_path(topic_name) }.to_json
   end
 
-  def topic_subscriptions_json topic_name, num_subs, token = nil
+  def topic_subscriptions_json num_subs, token = nil
     subs = num_subs.times.map do
       subscription_path("sub-#{rand 1000}")
     end

@@ -26,11 +26,18 @@ module Google
           # If not empty, indicates that there are more topics
           # that match the request and this value should be passed to
           # the next {Google::Cloud::Pubsub::Project#topics} to continue.
-          attr_accessor :token
+          def token
+            page_token = @paged_enum.page_token
+            page_token if page_token && page_token != ""
+          end
 
           ##
           # @private Create a new Topic::List with an array of values.
           def initialize arr = []
+            @topic = nil
+            @prefix = nil
+            @token = nil
+            @max = nil
             super arr
           end
 
@@ -50,7 +57,8 @@ module Google
           #   end
           #
           def next?
-            !token.nil?
+            ensure_paged_enum!
+            @paged_enum.next_page?
           end
 
           ##
@@ -70,10 +78,8 @@ module Google
           #
           def next
             return nil unless next?
-            ensure_service!
-            options = { token: token, max: @max }
-            grpc = @service.list_topics options
-            self.class.from_grpc grpc, @service, @max
+            @paged_enum.next_page
+            self.class.from_grpc @paged_enum, @service
           end
 
           ##
@@ -143,16 +149,14 @@ module Google
 
           ##
           # @private New Topic::List from a
-          # Google::Pubsub::V1::ListTopicsResponse object.
-          def self.from_grpc grpc_list, service, max = nil
-            topics = new(Array(grpc_list.topics).map do |grpc|
-              Topic.from_grpc grpc, service
-            end)
-            token = grpc_list.next_page_token
-            token = nil if token == ""
-            topics.instance_variable_set "@token",   token
+          # Google::Gax::PagedEnumerable<Google::Pubsub::V1::Topic> object.
+          def self.from_grpc paged_enum, service
+            topics = new
+            paged_enum.page.each do |topic_grpc|
+              topics << Topic.from_grpc(topic_grpc, service)
+            end
+            topics.instance_variable_set "@paged_enum", paged_enum
             topics.instance_variable_set "@service", service
-            topics.instance_variable_set "@max",     max
             topics
           end
 
@@ -161,8 +165,8 @@ module Google
           ##
           # @private Raise an error unless an active connection to the service
           # is available.
-          def ensure_service!
-            fail "Must have active connection to service" unless @service
+          def ensure_paged_enum!
+            fail "Must have active connection to service" unless @paged_enum
           end
         end
       end

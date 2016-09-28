@@ -23,10 +23,9 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "can delete itself" do
-    del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
     del_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [del_req]
+    mock.expect :delete_subscription, del_res, [subscription_path(sub_name)]
     pubsub.service.mocked_subscriber = mock
 
     subscription.delete
@@ -41,10 +40,9 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
     end
 
     it "can delete itself" do
-      del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
       del_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :delete_subscription, del_res, [del_req]
+      mock.expect :delete_subscription, del_res, [subscription_path(sub_name)]
       pubsub.service.mocked_subscriber = mock
 
       subscription.delete
@@ -62,7 +60,9 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
     it "raises NotFoundError when deleting itself" do
       stub = Object.new
       def stub.delete_subscription *args
-        raise GRPC::BadStatus.new 5, "not found"
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 

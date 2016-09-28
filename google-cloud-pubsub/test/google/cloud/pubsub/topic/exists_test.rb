@@ -33,10 +33,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
                                                    pubsub.service }
 
       it "checks if the topic exists by making an HTTP call" do
-        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [get_req]
+        mock.expect :get_topic, get_res, [topic_path(topic_name)]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
@@ -53,10 +52,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
                                                    autocreate: true }
 
       it "checks if the topic exists by making an HTTP call" do
-        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [get_req]
+        mock.expect :get_topic, get_res, [topic_path(topic_name)]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
@@ -73,10 +71,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
                                                    autocreate: false }
 
       it "checks if the topic exists by making an HTTP call" do
-        get_req = Google::Pubsub::V1::GetTopicRequest.new topic: "projects/#{project}/topics/#{topic_name}"
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [get_req]
+        mock.expect :get_topic, get_res, [topic_path(topic_name)]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
@@ -96,7 +93,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         stub = Object.new
         def stub.get_topic *args
-          raise GRPC::BadStatus.new 5, "not found"
+          gax_error = Google::Gax::GaxError.new "not found"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+          raise gax_error
         end
         topic.service.mocked_publisher = stub
 
@@ -114,7 +113,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         stub = Object.new
         def stub.get_topic *args
-          raise GRPC::BadStatus.new 5, "not found"
+          gax_error = Google::Gax::GaxError.new "not found"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+          raise gax_error
         end
         topic.service.mocked_publisher = stub
 
@@ -132,7 +133,9 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         stub = Object.new
         def stub.get_topic *args
-          raise GRPC::BadStatus.new 5, "not found"
+          gax_error = Google::Gax::GaxError.new "not found"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+          raise gax_error
         end
         topic.service.mocked_publisher = stub
 
