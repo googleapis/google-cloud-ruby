@@ -38,10 +38,10 @@ module Google
         # input keys sets the project ID (if not already set) to the project ID from
         # the request.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] datastore_stub
         #   @return [Google::Datastore::V1::Datastore::Stub]
         class DatastoreApi
-          attr_reader :stub
+          attr_reader :datastore_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "datastore.googleapis.com".freeze
@@ -96,7 +96,8 @@ module Google
             require "google/datastore/v1/datastore_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "datastore_client_config.json"
@@ -112,7 +113,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @datastore_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -122,27 +123,27 @@ module Google
             )
 
             @lookup = Google::Gax.create_api_call(
-              @stub.method(:lookup),
+              @datastore_stub.method(:lookup),
               defaults["lookup"]
             )
             @run_query = Google::Gax.create_api_call(
-              @stub.method(:run_query),
+              @datastore_stub.method(:run_query),
               defaults["run_query"]
             )
             @begin_transaction = Google::Gax.create_api_call(
-              @stub.method(:begin_transaction),
+              @datastore_stub.method(:begin_transaction),
               defaults["begin_transaction"]
             )
             @commit = Google::Gax.create_api_call(
-              @stub.method(:commit),
+              @datastore_stub.method(:commit),
               defaults["commit"]
             )
             @rollback = Google::Gax.create_api_call(
-              @stub.method(:rollback),
+              @datastore_stub.method(:rollback),
               defaults["rollback"]
             )
             @allocate_ids = Google::Gax.create_api_call(
-              @stub.method(:allocate_ids),
+              @datastore_stub.method(:allocate_ids),
               defaults["allocate_ids"]
             )
           end
