@@ -313,7 +313,7 @@ module Google
         #                       labels: labels
         #
         def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
-          AsyncWriter.new self, max_queue_size
+          @async_writer ||= AsyncWriter.new self, max_queue_size
         end
 
         ##
