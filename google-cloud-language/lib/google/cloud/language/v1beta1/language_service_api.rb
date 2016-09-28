@@ -34,10 +34,10 @@ module Google
         # Provides text analysis operations such as sentiment analysis and entity
         # recognition.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] language_service_stub
         #   @return [Google::Cloud::Language::V1beta1::LanguageService::Stub]
         class LanguageServiceApi
-          attr_reader :stub
+          attr_reader :language_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "language.googleapis.com".freeze
@@ -91,7 +91,8 @@ module Google
             require "google/cloud/language/v1beta1/language_service_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "language_service_client_config.json"
@@ -107,7 +108,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @language_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -117,15 +118,15 @@ module Google
             )
 
             @analyze_sentiment = Google::Gax.create_api_call(
-              @stub.method(:analyze_sentiment),
+              @language_service_stub.method(:analyze_sentiment),
               defaults["analyze_sentiment"]
             )
             @analyze_entities = Google::Gax.create_api_call(
-              @stub.method(:analyze_entities),
+              @language_service_stub.method(:analyze_entities),
               defaults["analyze_entities"]
             )
             @annotate_text = Google::Gax.create_api_call(
-              @stub.method(:annotate_text),
+              @language_service_stub.method(:annotate_text),
               defaults["annotate_text"]
             )
           end
