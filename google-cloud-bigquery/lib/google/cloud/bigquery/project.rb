@@ -20,6 +20,7 @@ require "google/cloud/bigquery/credentials"
 require "google/cloud/bigquery/dataset"
 require "google/cloud/bigquery/job"
 require "google/cloud/bigquery/query_data"
+require "google/cloud/bigquery/project/list"
 
 module Google
   module Cloud
@@ -35,7 +36,12 @@ module Google
       # Google BigQuery. {Google::Cloud::Bigquery::Dataset} objects are created,
       # accessed, and deleted by Google::Cloud::Bigquery::Project.
       #
-      # See {Google::Cloud#bigquery}
+      # See {Google::Cloud#bigquery}.
+      #
+      # @attr_reader [String, nil] name The descriptive name of the project.
+      #   Can only be present if the project was retrieved with {#projects}.
+      # @attr_reader [Integer, nil] numeric_id The numeric ID of the project.
+      #   Can only be present if the project was retrieved with {#projects}.
       #
       # @example
       #   require "google/cloud"
@@ -49,6 +55,8 @@ module Google
         ##
         # @private The Service object.
         attr_accessor :service
+
+        attr_reader :name, :numeric_id
 
         ##
         # Creates a new Service instance.
@@ -466,6 +474,75 @@ module Google
           options = { all: all, token: token, max: max, filter: filter }
           gapi = service.list_jobs options
           Job::List.from_gapi gapi, service, all, max, filter
+        end
+
+        ##
+        # Retrieves the list of all projects for which the currently authorized
+        # account has been granted any project role. The returned project
+        # instances share the same credentials as the project used to retrieve
+        # them, but lazily create a new API connection for interactions with the
+        # BigQuery service.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of projects to return.
+        #
+        # @return [Array<Google::Cloud::Bigquery::Project>] (See
+        #   {Google::Cloud::Bigquery::Project::List})
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   projects = bigquery.projects
+        #   projects.each do |project|
+        #     puts project.name
+        #     project.datasets.all.each do |dataset|
+        #       puts dataset.name
+        #     end
+        #   end
+        #
+        # @example Retrieve all projects: (See {Project::List#all})
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   bigquery = gcloud.bigquery
+        #
+        #   projects = bigquery.projects
+        #
+        #   projects.all do |project|
+        #     puts project.name
+        #     project.datasets.all.each do |dataset|
+        #       puts dataset.name
+        #     end
+        #   end
+        #
+        def projects token: nil, max: nil
+          ensure_service!
+          options = { token: token, max: max }
+          gapi = service.list_projects options
+          Project::List.from_gapi gapi, service, max
+        end
+
+        ##
+        # @private New Project from a Google API Client object, using the
+        # same Credentials as this project.
+        def self.from_gapi gapi, service
+          project_service = Service.new gapi.project_reference.project_id,
+                                        service.credentials,
+                                        retries: service.retries,
+                                        timeout: service.timeout
+          new(project_service).tap do |p|
+            p.instance_variable_set :@name, gapi.friendly_name
+
+            # TODO: remove `Integer` and set normally after migrating to Gax or
+            # to google-api-client 0.10 (See google/google-api-ruby-client#439)
+            if gapi.numeric_id
+              p.instance_variable_set :@numeric_id, Integer(gapi.numeric_id)
+            end
+          end
         end
 
         protected

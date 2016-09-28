@@ -99,4 +99,18 @@ describe Google::Cloud::Bigquery, :bigquery do
     jobs = bigquery.jobs.all
     jobs.each { |job| job.must_be_kind_of Google::Cloud::Bigquery::Job }
   end
+
+  it "should get a list of projects" do
+    projects = bigquery.projects.all
+    projects.count.must_be :>, 0
+    projects.each do |project|
+      project.must_be_kind_of Google::Cloud::Bigquery::Project
+      project.name.must_be_kind_of String
+      project.service.must_be_kind_of Google::Cloud::Bigquery::Service
+      project.service.project.must_be_kind_of String
+      project.datasets.each do |ds|
+        ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      end
+    end
+  end
 end
