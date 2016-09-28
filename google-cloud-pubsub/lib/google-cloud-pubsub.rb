@@ -104,7 +104,8 @@ module Google
       project ||= Google::Cloud::Pubsub::Project.default_project
       if ENV["PUBSUB_EMULATOR_HOST"]
         ps = Google::Cloud::Pubsub::Project.new(
-          project, :this_channel_is_insecure)
+          Google::Cloud::Pubsub::Service.new(
+            project, :this_channel_is_insecure))
         ps.service.host = ENV["PUBSUB_EMULATOR_HOST"]
         return ps
       end
