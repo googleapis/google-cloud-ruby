@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "uri"
 require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
@@ -737,7 +738,7 @@ module Google
           ##
           # The external path to the file.
           def ext_path
-            "/#{@file.bucket}/#{@file.name}"
+            URI.escape "/#{@file.bucket}/#{@file.name}"
           end
 
           ##
