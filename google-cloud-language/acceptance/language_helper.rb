@@ -19,7 +19,7 @@ require "minitest/rg"
 require "google/cloud/language"
 
 # Create shared language object so we don't create new for each test
-$language = Google::Cloud.language retries: 10
+$language = Google::Cloud.language
 
 require "google/cloud/storage"
 

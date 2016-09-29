@@ -26,16 +26,16 @@ module Google
       # @private Represents the gRPC Language service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :retries, :timeout
+        attr_accessor :project, :credentials, :host, :client_config, :timeout
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, retries: nil,
+        def initialize project, credentials, host: nil, client_config: nil,
                        timeout: nil
           @project = project
           @credentials = credentials
           @host = host || V1beta1::LanguageServiceApi::SERVICE_ADDRESS
-          @retries = retries
+          @client_config = client_config || {}
           @timeout = timeout
         end
 
@@ -51,13 +51,13 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= \
-            V1beta1::LanguageServiceApi.new(
-              service_path: host,
-              channel: channel,
-              timeout: timeout,
-              app_name: "google-cloud-language",
-              app_version: Google::Cloud::Language::VERSION)
+          @service ||= V1beta1::LanguageServiceApi.new(
+            service_path: host,
+            channel: channel,
+            timeout: timeout,
+            client_config: client_config,
+            app_name: "google-cloud-language",
+            app_version: Google::Cloud::Language::VERSION)
         end
         attr_accessor :mocked_service
 
