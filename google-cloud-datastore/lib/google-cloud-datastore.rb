@@ -38,8 +38,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/datastore`
-    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Datastore::Dataset]
     #
@@ -65,10 +66,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   datastore = gcloud.datastore scope: platform_scope
     #
-    def datastore scope: nil, retries: nil, timeout: nil
+    def datastore scope: nil, timeout: nil, client_config: nil
       Google::Cloud.datastore @project, @keyfile,
-                              scope: scope, retries: retries,
-                              timeout: (timeout || @timeout)
+                              scope: scope, timeout: (timeout || @timeout),
+                              client_config: client_config
     end
 
     ##
@@ -90,8 +91,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/datastore`
-    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Datastore::Dataset]
     #
@@ -106,16 +108,16 @@ module Google
     #     t["done"] = false
     #     t["priority"] = 4
     #     t["description"] = "Learn Cloud Datastore"
-    #   end
+    #   end                                                                  ``
     #
     #   datastore.save task
     #
-    def self.datastore project = nil, keyfile = nil, scope: nil, retries: nil,
-                       timeout: nil
+    def self.datastore project = nil, keyfile = nil, scope: nil, timeout: nil,
+                       client_config: nil
       require "google/cloud/datastore"
       Google::Cloud::Datastore.new project: project, keyfile: keyfile,
-                                   scope: scope, retries: retries,
-                                   timeout: timeout
+                                   scope: scope, timeout: timeout,
+                                   client_config: client_config
     end
   end
 end

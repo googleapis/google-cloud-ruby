@@ -16,8 +16,8 @@
 require "google/cloud/errors"
 require "google/cloud/datastore/credentials"
 require "google/cloud/datastore/version"
-require "google/datastore/v1/datastore_services_pb"
-require "google/cloud/datastore/v1/datastore_api"
+require "google/cloud/datastore/v1"
+require "google/gax/errors"
 
 module Google
   module Cloud
@@ -26,38 +26,40 @@ module Google
       # @private Represents the GAX Datastore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :retries, :timeout
+        attr_accessor :project, :credentials, :host, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, retries: nil,
-                       timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project = project
           @credentials = credentials
           @host = host || V1::DatastoreApi::SERVICE_ADDRESS
-          @retries = retries
           @timeout = timeout
+          @client_config = client_config || {}
         end
 
         def channel
+          require "grpc"
           GRPC::Core::Channel.new host, nil, chan_creds
         end
 
         def chan_creds
           return credentials if insecure?
+          require "grpc"
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def service
           return mocked_service if mocked_service
-          @service ||= \
-            V1::DatastoreApi.new(
-              service_path: host,
-              channel: channel,
-              timeout: timeout,
-              app_name: "google-cloud-datastore",
-              app_version: Google::Cloud::Datastore::VERSION)
+          @service ||= V1::DatastoreApi.new(
+            service_path: host,
+            channel: channel,
+            timeout: timeout,
+            client_config: client_config,
+            app_name: "google-cloud-datastore",
+            app_version: Google::Cloud::Datastore::VERSION)
         end
         attr_accessor :mocked_service
 
@@ -143,10 +145,10 @@ module Google
         end
 
         def execute
-          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
+        rescue Google::Gax::GaxError => e
+          # GaxError wraps BadStatus, but exposes it as #cause
+          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end

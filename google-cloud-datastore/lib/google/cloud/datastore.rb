@@ -518,9 +518,9 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/datastore`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. See Google::Gax::CallSettings. Optional.
       #
       # @return [Google::Cloud::Datastore::Dataset]
       #
@@ -541,8 +541,8 @@ module Google
       #
       #   datastore.save task
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
         project ||= Google::Cloud::Datastore::Dataset.default_project
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
@@ -551,20 +551,24 @@ module Google
           return Google::Cloud::Datastore::Dataset.new(
             Google::Cloud::Datastore::Service.new(
               project, :this_channel_is_insecure,
-              host: ENV["DATASTORE_EMULATOR_HOST"], retries: retries))
+              host: ENV["DATASTORE_EMULATOR_HOST"],
+              client_config: client_config))
         end
-
-        if keyfile.nil?
-          credentials = Google::Cloud::Datastore::Credentials.default(
-            scope: scope)
-        else
-          credentials = Google::Cloud::Datastore::Credentials.new(
-            keyfile, scope: scope)
-        end
-
+        credentials = credentials_with_scope keyfile, scope
         Google::Cloud::Datastore::Dataset.new(
           Google::Cloud::Datastore::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
+      end
+
+      ##
+      # @private
+      def self.credentials_with_scope keyfile, scope
+        if keyfile.nil?
+          Google::Cloud::Datastore::Credentials.default(scope: scope)
+        else
+          Google::Cloud::Datastore::Credentials.new(keyfile, scope: scope)
+        end
       end
     end
   end
