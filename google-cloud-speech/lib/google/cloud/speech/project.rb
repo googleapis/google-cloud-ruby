@@ -17,7 +17,8 @@ require "google/cloud/errors"
 require "google/cloud/core/gce"
 require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
-require "google/cloud/speech/results"
+require "google/cloud/speech/result"
+require "google/cloud/speech/job"
 
 module Google
   module Cloud
@@ -90,7 +91,9 @@ module Google
             profanity_filter: profanity_filter, phrases: phrases)
 
           grpc = service.recognize_sync audio(source).to_grpc, config
-          Results.from_grpc grpc
+          grpc.results.map do |result_grpc|
+            Result.from_grpc result_grpc
+          end
         end
 
         def recognize_job source, encoding: nil, sample_rate: nil,
@@ -104,7 +107,7 @@ module Google
             profanity_filter: profanity_filter, phrases: phrases)
 
           grpc = service.recognize_async audio(source).to_grpc, config
-          Results::Job.from_grpc grpc, service
+          Job.from_grpc grpc, service
         end
 
         protected

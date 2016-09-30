@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
   let(:results_grpc) { Google::Cloud::Speech::V1beta1::SyncRecognizeResponse.decode_json results_json }
-  let(:results) { Google::Cloud::Speech::Results.from_grpc results_grpc }
+  let(:results) { results_grpc.results.map { |result_grpc| Google::Cloud::Speech::Result.from_grpc result_grpc } }
 
   it "recognizes audio from local file path" do
     config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)

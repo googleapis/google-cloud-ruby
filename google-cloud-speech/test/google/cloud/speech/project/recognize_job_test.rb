@@ -29,7 +29,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     job = speech.recognize_job "acceptance/data/audio.raw", encoding: :raw, sample_rate: 16000
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 
@@ -44,7 +44,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     job = speech.recognize_job File.open("acceptance/data/audio.raw", "rb"), encoding: :raw, sample_rate: 16000
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 
@@ -59,7 +59,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     job = speech.recognize_job "gs://some_bucket/audio.raw", encoding: :raw, sample_rate: 16000
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     job = speech.recognize_job gcs_fake, encoding: :raw, sample_rate: 16000
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 end
