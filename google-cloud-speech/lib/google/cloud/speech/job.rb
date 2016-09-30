@@ -21,6 +21,10 @@ module Google
       ##
       # # Job
       #
+      # A resource represents the long-running, asynchronous processing of a
+      # speech-recognition operation. The job can be refreshed to retrieve
+      # recognition results once the audio data has been processed.
+      #
       class Job
         ##
         # @private The Google::Longrunning::Operation gRPC object.
@@ -37,6 +41,11 @@ module Google
           @service = nil
         end
 
+        ##
+        # A speech recognition result corresponding to a portion of the audio.
+        #
+        # @return [Array<Result>] The transcribed text of audio recognized. If
+        #   the job is not done this will return `nil`.
         def results
           return nil unless done?
           return nil unless @grpc.result == :response
@@ -49,16 +58,40 @@ module Google
           # raise @grpc.error
         end
 
+        ##
+        # Checks if the speech-recognition processing of the audio data is
+        # complete.
+        #
+        # @return [boolean] `true` when complete, `false` otherwise.
         def done?
           @grpc.done
         end
 
+        ##
+        # Reloads the job with current data from the long-running, asynchronous
+        # processing of a speech-recognition operation.
         def reload!
           @grpc = @service.get_op @grpc.name
           self
         end
         alias_method :refresh!, :reload!
 
+        ##
+        # Reloads the job until the operation is complete. The delay between
+        # reloads will incrementally increase.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   job = speech.recognize_job "path/to/audio.raw",
+        #                              encoding: :raw, sample_rate: 16000
+        #
+        #   job.done? #=> false
+        #   job.wait_until_done!
+        #   job.done? #=> true
         def wait_until_done!
           backoff = ->(retries) { sleep 2 * retries + 5 }
           retries = 0

@@ -21,6 +21,17 @@ module Google
       ##
       # # Result
       #
+      # A speech recognition result corresponding to a portion of the audio.
+      #
+      # @attr_reader [String] transcript Transcript text representing the words
+      #   that the user spoke.
+      # @attr_reader [Float] confidence The confidence estimate between 0.0 and
+      #   1.0. A higher number means the system is more confident that the
+      #   recognition is correct. This field is typically provided only for the
+      #   top hypothesis. A value of 0.0 is a sentinel value indicating
+      #   confidence was not set.
+      # @attr_reader [<Array<Result>] alternatives Additional recognition
+      #   hypotheses (up to the value specified in `max_alternatives`).
       class Result
         attr_reader :transcript, :confidence, :alternatives
 
