@@ -16,7 +16,7 @@ require "helper"
 require "tempfile"
 require "pathname"
 
-describe Google::Cloud::Speech::Audio, :mock_speech do
+describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   let(:filepath) { "acceptance/data/audio.raw" }
 
   it "can create from an existing file path" do
@@ -25,8 +25,14 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.must_be :content?
     audio.wont_be :url?
+    audio.encoding.must_equal :raw
+    audio.sample_rate.must_equal 16000
+    audio.language.must_be :nil?
 
-    audio.to_grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc = audio.to_grpc
+    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
   end
 
   it "can create from a Pathname object" do
@@ -42,6 +48,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
     grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
   end
 
   it "can create from a File object" do
@@ -57,6 +64,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
     grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
   end
 
   it "can create from a StringIO object" do
@@ -72,6 +80,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
     grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
   end
 
   it "can create from a Tempfile object" do
@@ -79,6 +88,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     Tempfile.open ["audio", "png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write File.read(filepath, mode: "rb")
+      # tmpfile.rewind
 
       audio = speech.audio tmpfile, encoding: :raw, sample_rate: 16000
 
@@ -92,6 +102,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
       grpc = audio.to_grpc
       grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
       grpc.audio_source.must_equal :content
+      grpc.content.must_equal File.read(filepath, mode: "rb")
     end
   end
 
@@ -108,6 +119,7 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
     grpc.audio_source.must_equal :uri
+    grpc.uri.must_equal "gs://test/file.ext"
   end
 
   it "can create from a Storage::File object" do
@@ -124,6 +136,58 @@ describe Google::Cloud::Speech::Audio, :mock_speech do
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
     grpc.audio_source.must_equal :uri
+    grpc.uri.must_equal "gs://test/file.ext"
+  end
+
+  it "can take an Audio object as the source" do
+    orig_audio = speech.audio "gs://test/file.ext", encoding: :raw, sample_rate: 16000
+    audio = speech.audio orig_audio
+
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.wont_be :content?
+    audio.must_be :url?
+    audio.encoding.must_equal :raw
+    audio.sample_rate.must_equal 16000
+    audio.language.must_be :nil?
+
+    grpc = audio.to_grpc
+    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.audio_source.must_equal :uri
+    grpc.uri.must_equal "gs://test/file.ext"
+  end
+
+  it "preserves attributes from Audio object as the source" do
+    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio orig_audio
+
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.must_be :content?
+    audio.wont_be :url?
+    audio.encoding.must_equal :raw
+    audio.sample_rate.must_equal 16000
+    audio.language.must_equal "en"
+
+    grpc = audio.to_grpc
+    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
+  end
+
+  it "overrides attributes from Audio object as the source" do
+    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio orig_audio, encoding: :flac, sample_rate: 48000, language: "es"
+
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.must_be :content?
+    audio.wont_be :url?
+    audio.encoding.must_equal :flac
+    audio.sample_rate.must_equal 48000
+    audio.language.must_equal "es"
+
+    grpc = audio.to_grpc
+    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.audio_source.must_equal :content
+    grpc.content.must_equal File.read(filepath, mode: "rb")
   end
 
   it "raises when giving an object that is not IO or a Google Storage URL" do

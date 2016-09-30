@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Speech::Results::Job, :mock_speech do
+describe Google::Cloud::Speech::Job, :mock_speech do
   let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
   let(:incomplete_grpc) { Google::Longrunning::Operation.decode_json incomplete_json }
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
@@ -23,8 +23,8 @@ describe Google::Cloud::Speech::Results::Job, :mock_speech do
   let(:complete_grpc) { Google::Longrunning::Operation.decode_json complete_json }
 
   it "refreshes to get final results" do
-    job = Google::Cloud::Speech::Results::Job.from_grpc incomplete_grpc, speech.service
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
     op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
@@ -36,7 +36,7 @@ describe Google::Cloud::Speech::Results::Job, :mock_speech do
     job.refresh!
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.must_be :done?
 
     results = job.results
@@ -47,8 +47,8 @@ describe Google::Cloud::Speech::Results::Job, :mock_speech do
   end
 
   it "refreshes but is still not done" do
-    job = Google::Cloud::Speech::Results::Job.from_grpc incomplete_grpc, speech.service
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
     op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
@@ -60,13 +60,13 @@ describe Google::Cloud::Speech::Results::Job, :mock_speech do
     job.refresh!
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 
   it "waits until done" do
-    job = Google::Cloud::Speech::Results::Job.from_grpc incomplete_grpc, speech.service
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
     op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
@@ -86,7 +86,7 @@ describe Google::Cloud::Speech::Results::Job, :mock_speech do
     job.wait_until_done!
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Results::Job
+    job.must_be_kind_of Google::Cloud::Speech::Job
     job.must_be :done?
 
     results = job.results

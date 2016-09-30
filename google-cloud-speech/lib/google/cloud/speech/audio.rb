@@ -30,6 +30,8 @@ module Google
       class Audio
         # @private The V1beta1::RecognitionAudio object.
         attr_reader :grpc
+        # @private The Project object.
+        attr_reader :speech
         attr_accessor :encoding
         attr_accessor :sample_rate
         attr_accessor :language
@@ -55,6 +57,144 @@ module Google
         end
 
         ##
+        # Perform speech-recognition. Requests are processed synchronously,
+        # meaning results are recieved after all audio data has been sent and
+        # processed.
+        #
+        # @param [String] max_alternatives The Maximum number of recognition
+        #   hypotheses to be returned. Default is 1. The service may return
+        #   fewer. Valid values are 0-30. Defaults to 1. Optional.
+        # @param [Boolean] profanity_filter When `true`, the service will
+        #   attempt to filter out profanities, replacing all but the initial
+        #   character in each filtered word with asterisks, e.g. "f***". Default
+        #   is `false`.
+        # @param [Array<String>] phrases A list of strings containing words and
+        #   phrases "hints" so that the speech recognition is more likely to
+        #   recognize them. See [usage
+        #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        #
+        # @return [Array<Result>] The transcribed text of audio recognized.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #   results = audio.recognize
+        #
+        # @example With a Google Cloud Storage URI:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #   results = audio.recognize
+        #
+        # @example With a Google Cloud Storage File object:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "bucket-name"
+        #   file = bucket.file "path/to/audio.raw"
+        #
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
+        #   results = audio.recognize
+        #
+        def recognize max_alternatives: nil, profanity_filter: nil, phrases: nil
+          ensure_speech!
+
+          speech.recognize self, encoding: encoding, sample_rate: sample_rate,
+                                 language: language,
+                                 max_alternatives: max_alternatives,
+                                 profanity_filter: profanity_filter,
+                                 phrases: phrases
+        end
+
+        ##
+        # Perform speech-recognition. Requests are processed synchronously,
+        # meaning results are recieved after all audio data has been sent and
+        # processed.
+        #
+        # @param [String] max_alternatives The Maximum number of recognition
+        #   hypotheses to be returned. Default is 1. The service may return
+        #   fewer. Valid values are 0-30. Defaults to 1. Optional.
+        # @param [Boolean] profanity_filter When `true`, the service will
+        #   attempt to filter out profanities, replacing all but the initial
+        #   character in each filtered word with asterisks, e.g. "f***". Default
+        #   is `false`.
+        # @param [Array<String>] phrases A list of strings containing words and
+        #   phrases "hints" so that the speech recognition is more likely to
+        #   recognize them. See [usage
+        #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        #
+        # @return [Job] A resource represents the long-running, asynchronous
+        #   processing of a speech-recognition operation.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #   job = audio.recognize_job
+        #
+        #   job.done? #=> false
+        #   job.refresh! # Reload the job
+        #
+        # @example With a Google Cloud Storage URI:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #   job = audio.recognize_job
+        #
+        #   job.done? #=> false
+        #   job.refresh! # Reload the job
+        #
+        # @example With a Google Cloud Storage File object:
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   storage = gcloud.storage
+        #
+        #   bucket = storage.bucket "bucket-name"
+        #   file = bucket.file "path/to/audio.raw"
+        #
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
+        #   job = audio.recognize_job max_alternatives: 10
+        #
+        #   job.done? #=> false
+        #   job.refresh! # Reload the job
+        #
+        def recognize_job max_alternatives: nil, profanity_filter: nil,
+                          phrases: nil
+          ensure_speech!
+
+          speech.recognize_job self, encoding: encoding,
+                                     sample_rate: sample_rate,
+                                     language: language,
+                                     max_alternatives: max_alternatives,
+                                     profanity_filter: profanity_filter,
+                                     phrases: phrases
+        end
+
+        ##
         # @private The Google API Client object for the Audio.
         def to_grpc
           @grpc
@@ -62,10 +202,12 @@ module Google
 
         ##
         # @private New Audio from a source object.
-        def self.from_source source
+        def self.from_source source, speech
           audio = new
+          audio.instance_variable_set :@speech, speech
           if source.respond_to?(:read) && source.respond_to?(:rewind)
-            audio.grpc.content = String(source.read)
+            source.rewind
+            audio.grpc.content = source.read
             return audio
           end
           # Convert Storage::File objects to the URL
@@ -79,11 +221,9 @@ module Google
           end
           # Create an audio from a file on the filesystem
           if File.file? source
-            unless File.readable? source
-              fail ArgumentError, "Cannot read #{source}"
-            end
-            content = String(File.read(source, mode: "rb"))
-            audio.grpc.content = content
+            fail ArgumentError, "Cannot read #{source}" unless \
+              File.readable? source
+            audio.grpc.content = File.read source, mode: "rb"
             return audio
           end
           fail ArgumentError, "Unable to convert #{source} to an Audio"
@@ -92,7 +232,7 @@ module Google
         protected
 
         ##
-        # Raise an error unless an active speech project object is available.
+        # Raise an error unless an active Speech Project object is available.
         def ensure_speech!
           fail "Must have active connection" unless @speech
         end

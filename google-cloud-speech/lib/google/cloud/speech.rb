@@ -21,6 +21,14 @@ module Google
     ##
     # # Google Cloud Speech
     #
+    # Google Cloud Speech API enables developers to convert audio to text by
+    # applying powerful neural network models in an easy to use API. The API
+    # recognizes over 80 languages and variants, to support your global user
+    # base. You can transcribe the text of users dictating to an application's
+    # microphone, enable command-and-control through voice, or transcribe audio
+    # files, among many other use cases. Recognize audio uploaded in the
+    # request, and integrate with your audio storage on Google Cloud Storage, by
+    # using the same technology Google uses to power its own products.
     module Speech
     end
   end
