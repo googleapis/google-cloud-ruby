@@ -42,7 +42,7 @@ module Google
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   policies
-      # @see https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#iampolicy
+      # @see https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#iampolicy
       #   google.iam.v1.IAMPolicy
       #
       # @attr [String] etag Used to verify whether the policy has changed since
@@ -52,7 +52,7 @@ module Google
       #   roles with an array of members. See [Understanding
       #   Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
       #   listing of primitive and curated roles.
-      #   See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+      #   See [Binding](https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#binding)
       #   for a listing of values and patterns for members.
       #
       # @example
@@ -85,7 +85,7 @@ module Google
         # See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles.
-        # See [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+        # See [Binding](https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#binding)
         # for a listing of values and patterns for members.
         #
         # @param [String] role_name A Cloud IAM role, such as
@@ -115,7 +115,7 @@ module Google
         # policy. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles. See
-        # [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+        # [Binding](https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#binding)
         # for a listing of values and patterns for members.
         #
         # @param [String] role_name A Cloud IAM role, such as
@@ -146,7 +146,7 @@ module Google
         # {#roles}. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles. See
-        # [Binding](https://cloud.google.com/pubsub/reference/rpc/google.iam.v1#binding)
+        # [Binding](https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#binding)
         # for a listing of values and patterns for members.
         #
         # @return [Array<String>] The members strings, or an empty array.

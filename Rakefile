@@ -223,8 +223,8 @@ namespace :jsondoc do
     puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
   end
 
-  desc "Copies jsondoc to gh-pages repo in temp dir."
-  task :copy, [:tag] => [:jsondoc, :init] do |t, args|
+  desc "Copies all gems jsondoc to gh-pages repo in temp dir."
+  task :copy_all, [:tag] => [:init] do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
@@ -234,7 +234,8 @@ namespace :jsondoc do
       unless Dir.exist? gh_pages + "json/#{gem}"
         mkdir_p gh_pages + "json/#{gem}", verbose: true
       end
-      gem_version = tag.include?(":") ? tag.split(":").last : tag
+      gem_version = tag.include?("/") ? tag.split("/").last : tag
+      rm_rf gh_pages + "json/#{gem}/#{gem_version}", verbose: true
       cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{gem_version}", verbose: true
     end
     cp "docs/manifest.json", gh_pages, verbose: true
@@ -242,7 +243,7 @@ namespace :jsondoc do
   end
 
   desc "Assembles google-cloud umbrella package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
-  task :umbrella, [:tag] => [:copy] do |t, args|
+  task :umbrella, :tag do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
@@ -258,11 +259,17 @@ namespace :jsondoc do
     header "Copying all jsondoc to google-cloud umbrella package"
     gems.each do |gem|
       next if excluded.include? gem
+
       gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
       gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
+
       unless gem == "google-cloud-core" # There is no `core` subdir
-        cp_r "#{gem}/jsondoc/google/cloud/#{gem_shortname}", gh_pages + "json/google-cloud/master/google/cloud/", verbose: true
+        rm_rf gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}", verbose: true
+        cp_r "#{gem}/jsondoc/google/cloud/#{gem_shortname}",
+             gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}",
+             verbose: true
       end
+
       cp Dir["#{gem}/jsondoc/google/cloud/*.json"], gh_pages + "json/google-cloud/master/google/cloud/", verbose: true
       all_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
       all_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
@@ -282,7 +289,7 @@ namespace :jsondoc do
   end
 
   desc "Publishes assembled jsondoc to gh-pages"
-  task :publish, [:tag] => [:umbrella] do |t, args|
+  task :publish, [:tag] => [:init] do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
@@ -320,6 +327,9 @@ namespace :jsondoc do
         exit
       end
     end
+    Rake::Task["jsondoc"].invoke
+    Rake::Task["jsondoc:copy_all"].invoke("master")
+    Rake::Task["jsondoc:umbrella"].invoke("master")
     Rake::Task["jsondoc:publish"].invoke("master")
   end
 
@@ -327,6 +337,11 @@ namespace :jsondoc do
   task :tag, :tag do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
+
+    fail "'tag' must be in the format <gem>/<version>" unless tag.include?("/")
+    gem_name, gem_version =  tag.split("/")
+
+
     # Verify the tag exists
     tag_check = `git show-ref --tags | grep #{tag}`.chomp
     if tag_check.empty?
@@ -347,16 +362,22 @@ namespace :jsondoc do
     # checkout the tag repo
     puts "git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null"
     puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null`
-    # build the docs in the tag repo
-    Dir.chdir tag_repo do
+    # build the docs in the gem dir in the tag repo
+    Dir.chdir tag_repo + gem_name do
       Bundler.with_clean_env do
         # create the docs
         puts "bundle install --path .bundle"
         puts `bundle install --path .bundle`
-        puts "bundle exec rake jsondoc:publish[\"#{tag}\"]"
-        puts `bundle exec rake jsondoc:publish["#{tag}"]`
+        puts "bundle exec rake jsondoc"
+        puts `bundle exec rake jsondoc`
       end
     end
+
+    # TODO
+    # 1. copy the jsondoc from tag repo gem dir (above) to gh-pages dir (correct version dir) created in init
+    # 2. rebuild umbrella latest version with jsondoc from tag repo gem dir
+    # 3. publish
+
   end
 end
 
