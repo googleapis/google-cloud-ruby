@@ -25,17 +25,17 @@ module Google
       # @private Represents the gRPC Speech service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :retries, :timeout
+        attr_accessor :project, :credentials, :host, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, retries: nil,
-                       timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project = project
           @credentials = credentials
           @host = host || V1beta1::SpeechApi::SERVICE_ADDRESS
-          @retries = retries
           @timeout = timeout
+          @client_config = client_config || {}
         end
 
         def channel
@@ -55,6 +55,7 @@ module Google
               service_path: host,
               channel: channel,
               timeout: timeout,
+              client_config: client_config,
               app_name: "google-cloud-speech",
               app_version: Google::Cloud::Speech::VERSION)
         end

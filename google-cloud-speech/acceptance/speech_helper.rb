@@ -19,7 +19,7 @@ require "minitest/rg"
 require "google/cloud/speech"
 
 # Create shared speech object so we don't create new for each test
-$speech = Google::Cloud.speech retries: 10
+$speech = Google::Cloud.speech
 
 require "google/cloud/storage"
 
