@@ -96,6 +96,28 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
   end
 
+  describe "Files with spaces in them" do
+    let(:file_name) { "hello world.txt" }
+
+    it "properly escapes the path when generating signed_url" do
+      signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, String]
+      credentials.issuer = "native_client_email"
+      credentials.signing_key = signing_key_mock
+
+      signed_url = file.signed_url
+
+      signed_uri = URI signed_url
+      signed_uri.path.must_equal "/bucket/hello%20world.txt"
+
+      signed_url_params = CGI::parse signed_uri.query
+      signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
+      signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+
+      signing_key_mock.verify
+    end
+  end
+
   class PoisonSigningKey
     def sign kind, sig
       raise "The wrong signing_key was used"
