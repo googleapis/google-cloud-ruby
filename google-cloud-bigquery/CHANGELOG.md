@@ -1,5 +1,9 @@
 # Release History
 
+### 0.20.2 / 2016-09-30
+
+* Add list of projects that the current credentials can access. (remi)
+
 ### 0.20.1 / 2016-09-02
 
 * Fix for timeout on uploads.
