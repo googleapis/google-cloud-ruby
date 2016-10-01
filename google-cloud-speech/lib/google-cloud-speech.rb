@@ -38,9 +38,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/speech`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Speech::Project]
     #
@@ -59,10 +59,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   speech = gcloud.speech scope: platform_scope
     #
-    def speech scope: nil, retries: nil, timeout: nil
+    def speech scope: nil, timeout: nil, client_config: nil
       Google::Cloud.speech @project, @keyfile, scope: scope,
-                                               retries: (retries || @retries),
-                                               timeout: (timeout || @timeout)
+                                               timeout: (timeout || @timeout),
+                                               client_config: client_config
     end
 
     ##
@@ -84,9 +84,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/speech`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Speech::Project]
     #
@@ -98,8 +98,8 @@ module Google
     #   topic = speech.topic "my-topic"
     #   topic.publish "task completed"
     #
-    def self.speech project = nil, keyfile = nil, scope: nil, retries: nil,
-                    timeout: nil
+    def self.speech project = nil, keyfile = nil, scope: nil, timeout: nil,
+                    client_config: nil
       require "google/cloud/speech"
       project ||= Google::Cloud::Speech::Project.default_project
       if keyfile.nil?
@@ -110,7 +110,7 @@ module Google
       end
       Google::Cloud::Speech::Project.new(
         Google::Cloud::Speech::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+          project, credentials, timeout: timeout, client_config: client_config))
     end
   end
 end
