@@ -26,7 +26,14 @@ module Google
       ##
       # # Project
       #
-      # ...
+      # The Google Cloud Speech API enables developers to convert audio to text
+      # by applying powerful neural network models. The API recognizes over 80
+      # languages and variants, to support your global user base. You can
+      # transcribe the text of users dictating to an application's microphone,
+      # enable command-and-control through voice, or transcribe audio files,
+      # among many other use cases. Recognize audio uploaded in the request, and
+      # integrate with your audio storage on Google Cloud Storage, by using the
+      # same technology Google uses to power its own products.
       #
       # See {Google::Cloud#speech}
       #
@@ -36,7 +43,13 @@ module Google
       #   gcloud = Google::Cloud.new
       #   speech = gcloud.speech
       #
-      #   # ...
+      #   audio = speech.audio "path/to/audio.raw",
+      #                        encoding: :raw, sample_rate: 16000
+      #   results = audio.recognize
+      #
+      #   result = results.first
+      #   result.transcript #=> "how old is the Brooklyn Bridge"
+      #   result.confidence #=> 88.15
       #
       class Project
         ##
@@ -74,7 +87,15 @@ module Google
         end
 
         ##
-        # Returns a new audio from the given source. No API call is made.
+        # Returns a new Audio instance from the given source. No API call is
+        # made.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#audio-encodings
+        #   Audio Encodings
+        # @see https://cloud.google.com/speech/docs/basics#sample-rates
+        #   Sample Rates
+        # @see https://cloud.google.com/speech/docs/basics#languages
+        #   Languages
         #
         # @param [String, IO, Google::Cloud::Storage::File] source A string of
         #   the path to the audio file to be recognized, or a File or other IO
@@ -157,9 +178,21 @@ module Google
         end
 
         ##
-        # Perform speech-recognition. Requests are processed synchronously,
-        # meaning results are recieved after all audio data has been sent and
-        # processed.
+        # Performs synchronous speech recognition. Sends audio data to the
+        # Speech API, which performs recognition on that data, and returns
+        # results only after all audio has been processed. Limited to audio data
+        # of 1 minute or less in duration.
+        #
+        # The Speech API will take roughly the same amount of time to process
+        # audio data sent synchronously as the duration of the supplied audio
+        # data. That is, if you send audio data of 30 seconds in length, expect
+        # the synchronous request to take approximately 30 seconds to return
+        # results.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#synchronous-recognition
+        #   Synchronous Speech API Recognition
+        # @see https://cloud.google.com/speech/docs/basics#phrase-hints
+        #   Phrase Hints
         #
         # @param [String, IO, Google::Cloud::Storage::File] source A string of
         #   the path to the audio file to be recognized, or a File or other IO
@@ -261,10 +294,13 @@ module Google
         end
 
         ##
-        # Perform speech-recognition. Requests are processed asynchronously,
-        # meaning a Job is returned once the audio data has been sent, and can
-        # be refreshed to retrieve recognition results once the audio data has
-        # been processed.
+        # Performs asynchronous speech recognition. Requests are processed
+        # asynchronously, meaning a Job is returned once the audio data has been
+        # sent, and can be refreshed to retrieve recognition results once the
+        # audio data has been processed.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#async-responses
+        #   Asynchronous Speech API Responses
         #
         # @param [String, IO, Google::Cloud::Storage::File] source A string of
         #   the path to the audio file to be recognized, or a File or other IO
@@ -315,7 +351,7 @@ module Google
         #                              encoding: :raw, sample_rate: 16000
         #
         #   job.done? #=> false
-        #   job.refresh! # Reload the job
+        #   job.reload!
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud"
@@ -327,7 +363,7 @@ module Google
         #                              encoding: :raw, sample_rate: 16000
         #
         #   job.done? #=> false
-        #   job.refresh! # Reload the job
+        #   job.reload!
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud"
@@ -345,7 +381,7 @@ module Google
         #                              max_alternatives: 10
         #
         #   job.done? #=> false
-        #   job.refresh! # Reload the job
+        #   job.reload!
         #
         def recognize_job source, encoding: nil, sample_rate: nil,
                           language: nil, max_alternatives: nil,

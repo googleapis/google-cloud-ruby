@@ -19,13 +19,33 @@ module Google
       ##
       # # Audio
       #
+      # Represents a source of audio data, with related metadata such as the
+      # [audio encoding](https://cloud.google.com/speech/docs/basics#audio-encodings),
+      # [sample rate](https://cloud.google.com/speech/docs/basics#sample-rates),
+      # and [language](https://cloud.google.com/speech/docs/basics#languages).
+      #
+      # See {Project#audio}.
+      #
+      # @see https://cloud.google.com/speech/docs/basics#audio-encodings
+      #   Audio Encodings
+      # @see https://cloud.google.com/speech/docs/basics#sample-rates
+      #   Sample Rates
+      # @see https://cloud.google.com/speech/docs/basics#languages
+      #   Languages
+      #
       # @example
       #   require "google/cloud"
       #
       #   gcloud = Google::Cloud.new
       #   speech = gcloud.speech
       #
-      #   audio = speech.audio "path/to/text.flac", language: "en"
+      #   audio = speech.audio "path/to/audio.raw",
+      #                        encoding: :raw, sample_rate: 16000
+      #   results = audio.recognize
+      #
+      #   result = results.first
+      #   result.transcript #=> "how old is the Brooklyn Bridge"
+      #   result.confidence #=> 88.15
       #
       class Audio
         # @private The V1beta1::RecognitionAudio object.
@@ -57,9 +77,21 @@ module Google
         end
 
         ##
-        # Perform speech-recognition. Requests are processed synchronously,
-        # meaning results are recieved after all audio data has been sent and
-        # processed.
+        # Performs synchronous speech recognition. Sends audio data to the
+        # Speech API, which performs recognition on that data, and returns
+        # results only after all audio has been processed. Limited to audio data
+        # of 1 minute or less in duration.
+        #
+        # The Speech API will take roughly the same amount of time to process
+        # audio data sent synchronously as the duration of the supplied audio
+        # data. That is, if you send audio data of 30 seconds in length, expect
+        # the synchronous request to take approximately 30 seconds to return
+        # results.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#synchronous-recognition
+        #   Synchronous Speech API Recognition
+        # @see https://cloud.google.com/speech/docs/basics#phrase-hints
+        #   Phrase Hints
         #
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
@@ -85,29 +117,9 @@ module Google
         #                        encoding: :raw, sample_rate: 16000
         #   results = audio.recognize
         #
-        # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
-        #
-        #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   results = audio.recognize
-        #
-        # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "bucket-name"
-        #   file = bucket.file "path/to/audio.raw"
-        #
-        #   speech = gcloud.speech
-        #
-        #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
-        #   results = audio.recognize
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 88.15
         #
         def recognize max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_speech!
@@ -120,9 +132,13 @@ module Google
         end
 
         ##
-        # Perform speech-recognition. Requests are processed synchronously,
-        # meaning results are recieved after all audio data has been sent and
-        # processed.
+        # Performs asynchronous speech recognition. Requests are processed
+        # asynchronously, meaning a Job is returned once the audio data has been
+        # sent, and can be refreshed to retrieve recognition results once the
+        # audio data has been processed.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#async-responses
+        #   Asynchronous Speech API Responses
         #
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
@@ -150,37 +166,9 @@ module Google
         #   job = audio.recognize_job
         #
         #   job.done? #=> false
-        #   job.refresh! # Reload the job
-        #
-        # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
-        #
-        #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   job = audio.recognize_job
-        #
-        #   job.done? #=> false
-        #   job.refresh! # Reload the job
-        #
-        # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
-        #
-        #   bucket = storage.bucket "bucket-name"
-        #   file = bucket.file "path/to/audio.raw"
-        #
-        #   speech = gcloud.speech
-        #
-        #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
-        #   job = audio.recognize_job max_alternatives: 10
-        #
-        #   job.done? #=> false
-        #   job.refresh! # Reload the job
+        #   job.reload!
+        #   job.done? #=> true
+        #   results = job.results
         #
         def recognize_job max_alternatives: nil, profanity_filter: nil,
                           phrases: nil
