@@ -23,6 +23,11 @@ module Google
       #
       # A speech recognition result corresponding to a portion of the audio.
       #
+      # See {Project#recognize} and {Job#results}.
+      #
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      #   SpeechRecognitionResult
+      #
       # @attr_reader [String] transcript Transcript text representing the words
       #   that the user spoke.
       # @attr_reader [Float] confidence The confidence estimate between 0.0 and
@@ -30,8 +35,26 @@ module Google
       #   recognition is correct. This field is typically provided only for the
       #   top hypothesis. A value of 0.0 is a sentinel value indicating
       #   confidence was not set.
-      # @attr_reader [<Array<Result>] alternatives Additional recognition
+      # @attr_reader [Array<Result>] alternatives Additional recognition
       #   hypotheses (up to the value specified in `max_alternatives`).
+      #
+      # @example
+      #   require "google/cloud"
+      #
+      #   gcloud = Google::Cloud.new
+      #   speech = gcloud.speech
+      #
+      #   audio = speech.audio "path/to/audio.raw",
+      #                        encoding: :raw, sample_rate: 16000
+      #   results = audio.recognize
+      #
+      #   result = results.first
+      #   result.transcript #=> "how old is the Brooklyn Bridge"
+      #   result.confidence #=> 88.15
+      #   alternative = result.alternatives.first
+      #   alternative.transcript #=> "how old is the Brooklyn brim"
+      #   alternative.confidence #=> 22.39
+      #
       class Result
         attr_reader :transcript, :confidence, :alternatives
 

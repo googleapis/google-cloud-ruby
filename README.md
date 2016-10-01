@@ -21,6 +21,7 @@ This project supports the following Google Cloud Platform services:
 * [Cloud Natural Language API](#natural-language)
 * [Cloud Pub/Sub](#pubsub)
 * [Cloud Resource Manager](#resource-manager)
+* [Cloud Speech API](#speech)
 * [Cloud Storage](#storage)
 * [Google Translate API](#translate)
 * [Cloud Vision API](#vision)
@@ -306,6 +307,36 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
+### Speech
+
+- [google-cloud-speech README](google-cloud-speech/README.md)
+- [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/master/google/cloud/speech)
+- [google-cloud-speech on RubyGems](https://rubygems.org/gems/google-cloud-speech)
+- [Google Cloud Speech API documentation](https://cloud.google.com/speech/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-speech
+```
+
+#### Preview
+
+```ruby
+require "google/cloud"
+
+gcloud = Google::Cloud.new
+speech = gcloud.speech
+
+audio = speech.audio "path/to/audio.raw",
+                     encoding: :raw, sample_rate: 16000
+results = audio.recognize
+
+result = results.first
+result.transcript #=> "how old is the Brooklyn Bridge"
+result.confidence #=> 88.15
+```
+
 ### Storage
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
@@ -374,7 +405,7 @@ translation.text #=> "Salve mundi!"
 ### Vision
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
-- [google-cloud-ruby-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/master/google/cloud/vision)
+- [google-cloud-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/master/google/cloud/vision)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
 

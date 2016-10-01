@@ -25,6 +25,27 @@ module Google
       # speech-recognition operation. The job can be refreshed to retrieve
       # recognition results once the audio data has been processed.
       #
+      # See {Project#recognize_job} and {Audio#recognize_job}.
+      #
+      # @see https://cloud.google.com/speech/docs/basics#async-responses
+      #   Asynchronous Speech API Responses
+      # @see https://cloud.google.com/speech/reference/rpc/google.longrunning#google.longrunning.Operations
+      #   Long-running Operation
+      #
+      # @example
+      #   require "google/cloud"
+      #
+      #   gcloud = Google::Cloud.new
+      #   speech = gcloud.speech
+      #
+      #   job = speech.recognize_job "path/to/audio.raw",
+      #                              encoding: :raw, sample_rate: 16000
+      #
+      #   job.done? #=> false
+      #   job.reload! # API call
+      #   job.done? #=> true
+      #   results = job.results
+      #
       class Job
         ##
         # @private The Google::Longrunning::Operation gRPC object.
@@ -46,6 +67,19 @@ module Google
         #
         # @return [Array<Result>] The transcribed text of audio recognized. If
         #   the job is not done this will return `nil`.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   job = speech.recognize_job "path/to/audio.raw",
+        #                              encoding: :raw, sample_rate: 16000
+        #
+        #   job.done? #=> true
+        #   results = job.results
+        #
         def results
           return nil unless done?
           return nil unless @grpc.result == :response
@@ -63,6 +97,18 @@ module Google
         # complete.
         #
         # @return [boolean] `true` when complete, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   job = speech.recognize_job "path/to/audio.raw",
+        #                              encoding: :raw, sample_rate: 16000
+        #
+        #   job.done? #=> false
+        #
         def done?
           @grpc.done
         end
@@ -70,6 +116,20 @@ module Google
         ##
         # Reloads the job with current data from the long-running, asynchronous
         # processing of a speech-recognition operation.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   job = speech.recognize_job "path/to/audio.raw",
+        #                              encoding: :raw, sample_rate: 16000
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
         def reload!
           @grpc = @service.get_op @grpc.name
           self
@@ -92,6 +152,7 @@ module Google
         #   job.done? #=> false
         #   job.wait_until_done!
         #   job.done? #=> true
+        #
         def wait_until_done!
           backoff = ->(retries) { sleep 2 * retries + 5 }
           retries = 0
