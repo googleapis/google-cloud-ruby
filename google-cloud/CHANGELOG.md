@@ -1,5 +1,9 @@
 # Release History
 
+### 0.20.1 / 2016-09-30
+
+Add google-cloud-speech.
+
 ### 0.20.0 / 2016-08-26
 
 This gem is the new name for the old `gcloud` gem. Legacy code can continue to use the `gcloud` gem.
