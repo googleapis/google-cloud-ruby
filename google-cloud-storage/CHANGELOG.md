@@ -1,5 +1,9 @@
 # Release History
 
+### 0.20.2 / 2016-09-30
+
+* Fix issue with signed_url and file names with spaces (gsbucks)
+
 ### 0.20.1 / 2016-09-02
 
 * Fix for timeout on uploads.
