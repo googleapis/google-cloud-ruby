@@ -50,7 +50,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new "publicdata"
+    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
     #
     # bigquery.datasets.count #=> 1
     # bigquery.datasets.first.dataset_id #=> "samples"
@@ -70,7 +70,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new "publicdata"
+    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
     #
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
@@ -371,7 +371,7 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
-      def self.new project = nil, keyfile = nil, scope: nil, retries: nil,
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
                    timeout: nil
         project ||= Google::Cloud::Bigquery::Project.default_project
         project = project.to_s # Always cast to a string

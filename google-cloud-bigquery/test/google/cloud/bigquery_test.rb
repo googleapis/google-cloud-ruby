@@ -156,7 +156,7 @@ describe Google::Cloud do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
-                bigquery = Google::Cloud::Bigquery.new "project-id", "path/to/keyfile.json"
+                bigquery = Google::Cloud::Bigquery.new project: "project-id", keyfile: "path/to/keyfile.json"
                 bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
                 bigquery.project.must_equal "project-id"
                 bigquery.service.must_be_kind_of OpenStruct

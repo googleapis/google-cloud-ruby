@@ -71,8 +71,10 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new "my-todo-project",
-        #                                          "/path/to/keyfile.json"
+        #   bigquery = Google::Cloud::Bigquery.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   bigquery.project #=> "my-todo-project"
         #

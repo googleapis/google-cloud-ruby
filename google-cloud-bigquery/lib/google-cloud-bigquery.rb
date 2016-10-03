@@ -103,9 +103,9 @@ module Google
     def self.bigquery project = nil, keyfile = nil, scope: nil, retries: nil,
                       timeout: nil
       require "google/cloud/bigquery"
-      Google::Cloud::Bigquery.new project, keyfile, scope: scope,
-                                                    retries: retries,
-                                                    timeout: timeout
+      Google::Cloud::Bigquery.new project: project, keyfile: keyfile,
+                                  scope: scope, retries: retries,
+                                  timeout: timeout
     end
   end
 end
