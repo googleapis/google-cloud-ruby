@@ -62,4 +62,4 @@ To configure your system for this, simply:
 
 ## Troubleshooting
 
-If you're having trouble authenticating open a [Github Issue](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/new?title=Authentication+question) to get help.  Also consider searching or asking [questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) on [StackOverflow](http://stackoverflow.com).
+If you're having trouble authenticating open a [Github Issue](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/new?title=Authentication+question) to get help.  Also consider searching or asking [questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby) on [StackOverflow](http://stackoverflow.com).
