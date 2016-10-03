@@ -236,7 +236,7 @@ namespace :jsondoc do
       end
       gem_version = tag.include?("/") ? tag.split("/").last : tag
       rm_rf gh_pages + "json/#{gem}/#{gem_version}", verbose: true
-      mkdir_p gh_pages + "json/#{gem}/#{gem_version}"
+      mkdir_p gh_pages + "json/#{gem}/"
       cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{gem_version}", verbose: true
     end
     cp "docs/manifest.json", gh_pages, verbose: true
@@ -266,7 +266,7 @@ namespace :jsondoc do
 
       unless gem == "google-cloud-core" # There is no `core` subdir
         rm_rf gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}", verbose: true
-        mkdir_p gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}"
+        mkdir_p gh_pages + "json/google-cloud/master/google/cloud/"
         cp_r "#{gem}/jsondoc/google/cloud/#{gem_shortname}",
              gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}",
              verbose: true
