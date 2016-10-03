@@ -31,7 +31,25 @@
   "services": [
     {
       "title": "Speech",
-      "type": "google/cloud/speech"
+      "type": "google/cloud/speech",
+      "nav": [
+        {
+          "title": "Project",
+          "type": "google/cloud/speech/project"
+        },
+        {
+          "title": "Audio",
+          "type": "google/cloud/speech/audio"
+        },
+        {
+          "title": "Job",
+          "type": "google/cloud/speech/job"
+        },
+        {
+          "title": "Result",
+          "type": "google/cloud/speech/result"
+        }
+      ]
     }
   ]
 }
