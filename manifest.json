@@ -38,7 +38,7 @@
       "defaultService": "google/cloud",
       "versions": [
         "v0.20.1",
-        "master",
+        "master"
         "v0.20.0"
       ]
     },

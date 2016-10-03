@@ -1,0 +1,1 @@
+{"id":"google/cloud/datastore/propertyerror","name":"PropertyError","title":["Google","Cloud","Datastore","PropertyError"],"description":"<h1 id=\"propertyerror\">PropertyError</h1>\n\n<p>Raised when a property is not correct.</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/errors.rb#L32","resources":[],"examples":[],"methods":[]}
