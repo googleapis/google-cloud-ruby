@@ -48,10 +48,9 @@ module Google
     # let's connect to Google's `publicdata` project, and see what you find.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new "publicdata"
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new "publicdata"
     #
     # bigquery.datasets.count #=> 1
     # bigquery.datasets.first.dataset_id #=> "samples"
@@ -69,10 +68,9 @@ module Google
     # every play written by Shakespeare.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new "publicdata"
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new "publicdata"
     #
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
@@ -97,10 +95,9 @@ module Google
     # results.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
     #       "FROM publicdata:samples.shakespeare"
@@ -126,10 +123,9 @@ module Google
     # of {Google::Cloud::Bigquery::QueryData}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
     #       "FROM publicdata:samples.shakespeare"
@@ -172,10 +168,9 @@ module Google
     # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     #
     # table = dataset.create_table "people" do |schema|
@@ -207,10 +202,9 @@ module Google
     # application is a great approach.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.table "people"
     #
@@ -254,10 +248,9 @@ module Google
     # also contained in the archive specifies the schema used below.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.create_table "baby_names" do |schema|
     #   schema.string "name", mode: :required
@@ -284,10 +277,9 @@ module Google
     # setting up billing.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # source_table = dataset.table "baby_names"
     # result_table = dataset.create_table "baby_names_results"
@@ -337,10 +329,9 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery retries: 10, timeout: 120
+    # bigquery = Google::Cloud::Bigquery.new retries: 10, timeout: 120
     # ```
     #
     # See the [BigQuery error

@@ -43,10 +43,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   projects = bigquery.projects
           #   if projects.next?
@@ -62,10 +61,9 @@ module Google
           # @return [Project::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   projects = bigquery.projects
           #   if projects.next?
@@ -98,30 +96,27 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each result by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.projects.all do |project|
           #     puts project.name
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   all_project_ids = bigquery.projects.all.map do |project|
           #     project.name
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.projects.all(request_limit: 10) do |project|
           #     puts project.name

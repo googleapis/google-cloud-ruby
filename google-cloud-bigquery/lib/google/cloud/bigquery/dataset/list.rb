@@ -42,10 +42,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   datasets = bigquery.datasets
           #   if datasets.next?
@@ -61,10 +60,9 @@ module Google
           # @return [Dataset::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   datasets = bigquery.datasets
           #   if datasets.next?
@@ -97,30 +95,27 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each result by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.datasets.all do |dataset|
           #     puts dataset.name
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   all_names = bigquery.datasets.all.map do |dataset|
           #     dataset.name
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.datasets.all(request_limit: 10) do |dataset|
           #     puts dataset.name

@@ -112,10 +112,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryData]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   q = "SELECT word FROM publicdata:samples.shakespeare"
         #   job = bigquery.query_job q

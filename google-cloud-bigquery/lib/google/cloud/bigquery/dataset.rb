@@ -33,10 +33,9 @@ module Google
       # within a specific project.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #
       #   dataset = bigquery.create_dataset "my_dataset",
       #                                     name: "My Dataset",
@@ -225,10 +224,9 @@ module Google
         # @return [Google::Cloud::Bigquery::Dataset::Access]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.access #=> [{"role"=>"OWNER",
@@ -241,10 +239,9 @@ module Google
         #                  #     "userByEmail"=>"123456789-...com"}]
         #
         # @example Manage the access rules by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.access do |access|
@@ -279,10 +276,9 @@ module Google
         # @return [Boolean] Returns `true` if the dataset was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #   dataset.delete
@@ -315,28 +311,25 @@ module Google
         # @return [Google::Cloud::Bigquery::Table]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.create_table "my_table"
         #
         # @example You can also pass name and description options.
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.create_table "my_table"
         #                                name: "My Table",
         #                                description: "A description of table."
         #
         # @example The table's schema fields can be passed as an argument.
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   schema_fields = [
@@ -354,10 +347,9 @@ module Google
         #   table = dataset.create_table "my_table", fields: schema_fields
         #
         # @example Or the table's schema can be configured with the block.
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table" do |t|
@@ -369,10 +361,9 @@ module Google
         #   end
         #
         # @example You can define the schema using a nested block.
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.create_table "my_table" do |t|
         #     t.name = "My Table",
@@ -420,19 +411,17 @@ module Google
         # @return [Google::Cloud::Bigquery::View]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.create_view "my_view",
         #             "SELECT name, age FROM [proj:dataset.users]"
         #
         # @example A name and description can be provided:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.create_view "my_view",
         #             "SELECT name, age FROM [proj:dataset.users]",
@@ -467,10 +456,9 @@ module Google
         #   not exist
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #   puts table.name
@@ -497,10 +485,9 @@ module Google
         #   {Google::Cloud::Bigquery::Table::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   tables = dataset.tables
         #   tables.each do |table|
@@ -508,10 +495,9 @@ module Google
         #   end
         #
         # @example Retrieve all tables: (See {Table::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   tables = dataset.tables
         #   tables.all do |table|
@@ -576,10 +562,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM my_table"
         #
@@ -639,10 +624,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryData]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM my_table"
         #   data.each do |row|
