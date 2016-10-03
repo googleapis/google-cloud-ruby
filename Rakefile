@@ -415,7 +415,7 @@ namespace :travis do
     if ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
 
       if ENV["TRAVIS_BRANCH"] == "master"
-        # TODO: Call JSONDOC task for master here
+        Rake::Task["jsondoc:master"].invoke
       elsif ENV["TRAVIS_TAG"]
         tag = ENV["TRAVIS_TAG"]
         # Verify the tag format "PACKAGE/vVERSION"
