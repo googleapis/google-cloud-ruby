@@ -52,8 +52,76 @@ module Google
         attr_reader :grpc
         # @private The Project object.
         attr_reader :speech
+
+        ##
+        # Encoding of audio data to be recognized.
+        #
+        #   Acceptable values are:
+        #
+        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #     (LINEAR16)
+        #   * `flac` - The [Free Lossless Audio
+        #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
+        #     Only 16-bit samples are supported. Not all fields in STREAMINFO
+        #     are supported. (FLAC)
+        #   * `mulaw` - 8-bit samples that compand 14-bit audio samples using
+        #     G.711 PCMU/mu-law. (MULAW)
+        #   * `amr` - Adaptive Multi-Rate Narrowband codec. (`sample_rate` must
+        #     be 8000 Hz.) (AMR)
+        #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
+        #     be 16000 Hz.) (AMR_WB)
+        #
+        # @return [String,Symbol]
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #
         attr_accessor :encoding
+
+        ##
+        # Sample rate in Hertz of the audio data to be recognized. Valid values
+        # are: 8000-48000. 16000 is optimal. For best results, set the sampling
+        # rate of the audio source to 16000 Hz. If that's not possible, use the
+        # native sample rate of the audio source (instead of re-sampling).
+        #
+        # @return [Integer]
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #
         attr_accessor :sample_rate
+
+        ##
+        # The language of the supplied audio as a
+        # [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language code.
+        # If not specified, the language defaults to "en-US".  See [Language
+        # Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        # for a list of the currently supported language codes.
+        #
+        # @return [String,Symbol]
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   gcloud = Google::Cloud.new
+        #   speech = gcloud.speech
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000,
+        #                        language: :en
+        #
         attr_accessor :language
 
         ##
