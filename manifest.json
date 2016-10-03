@@ -37,8 +37,9 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.20.0",
+        "v0.20.1",
         "master"
+        "v0.20.0"
       ]
     },
     {
@@ -46,8 +47,9 @@
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
       "versions": [
-        "v0.20.1",
+        "v0.20.2",
         "master",
+        "v0.20.1",
         "v0.20.0"
       ]
     },
@@ -122,12 +124,22 @@
       ]
     },
     {
+      "id": "google-cloud-speech",
+      "name": "google-cloud-speech",
+      "defaultService": "google/cloud/speech",
+      "versions": [
+        "v0.20.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-storage",
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
-        "v0.20.1",
+        "v0.20.2",
         "master",
+        "v0.20.1",
         "v0.20.0"
       ]
     },

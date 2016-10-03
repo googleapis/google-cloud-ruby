@@ -1,1 +1,0 @@
-{"id":"google","name":"Google","title":["Google"],"description":"<p>require “google/speech/v1/speech_services_pb”</p>","source":"google-cloud-speech/lib/google/cloud/speech/service.rb#L22","resources":[],"examples":[],"methods":[]}
