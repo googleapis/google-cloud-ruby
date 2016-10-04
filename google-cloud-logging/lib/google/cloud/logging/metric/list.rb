@@ -40,10 +40,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   metrics = logging.metrics
           #   if metrics.next?
@@ -60,10 +59,9 @@ module Google
           # @return [Sink::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   metrics = dataset.metrics
           #   if metrics.next?
@@ -96,10 +94,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each metric by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   metrics = logging.metrics
           #
           #   metrics.all do |metric|
@@ -107,10 +104,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   metrics = logging.metrics
           #
           #   all_names = metrics.all.map do |metric|
@@ -118,10 +114,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   metrics = logging.metrics
           #
           #   metrics.all(request_limit: 10) do |metric|

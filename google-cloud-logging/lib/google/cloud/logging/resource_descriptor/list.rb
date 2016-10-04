@@ -41,10 +41,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   resource_descriptors = logging.resource_descriptors
           #   if resource_descriptors.next?
@@ -61,10 +60,9 @@ module Google
           # @return [Sink::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   resource_descriptors = logging.resource_descriptors
           #   if resource_descriptors.next?
@@ -100,10 +98,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each resource descriptor by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   resource_descriptors = logging.resource_descriptors
           #
           #   resource_descriptors.all do |rd|
@@ -111,10 +108,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   resource_descriptors = logging.resource_descriptors
           #
           #   all_types = resource_descriptors.all.map do |rd|
@@ -122,10 +118,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   resource_descriptors = logging.resource_descriptors
           #
           #   resource_descriptors.all(request_limit: 10) do |rd|

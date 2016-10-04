@@ -45,10 +45,9 @@ module Google
       #   Types
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #
       #   entry = logging.entry payload: "Job started.", log_name: "my_app_log"
       #   entry.resource.type = "gae_app"
@@ -112,10 +111,9 @@ module Google
         # Sets the severity level to `:DEFAULT`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity = :DEBUG
@@ -137,10 +135,9 @@ module Google
         # Sets the severity level to `:DEBUG`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -162,10 +159,9 @@ module Google
         # Sets the severity level to `:INFO`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -187,10 +183,9 @@ module Google
         # Sets the severity level to `:NOTICE`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -212,10 +207,9 @@ module Google
         # Sets the severity level to `:WARNING`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -237,10 +231,9 @@ module Google
         # Sets the severity level to `:ERROR`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -262,10 +255,9 @@ module Google
         # Sets the severity level to `:CRITICAL`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -287,10 +279,9 @@ module Google
         # Sets the severity level to `:ALERT`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT
@@ -312,10 +303,9 @@ module Google
         # Sets the severity level to `:EMERGENCY`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry
         #   entry.severity #=> :DEFAULT

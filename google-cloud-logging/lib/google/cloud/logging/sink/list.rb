@@ -39,10 +39,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   sinks = logging.sinks
           #   if sinks.next?
@@ -59,10 +58,9 @@ module Google
           # @return [Sink::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   sinks = dataset.sinks
           #   if sinks.next?
@@ -95,10 +93,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each sink by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   sinks = logging.sinks
           #
           #   sinks.all do |sink|
@@ -106,10 +103,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   sinks = logging.sinks
           #
           #   all_names = sinks.all.map do |sink|
@@ -117,10 +113,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   sinks = logging.sinks
           #
           #   sinks.all(request_limit: 10) do |sink|

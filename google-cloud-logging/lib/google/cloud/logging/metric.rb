@@ -32,10 +32,9 @@ module Google
       # @see https://cloud.google.com/monitoring/docs Google Cloud Monitoring
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #   metric = logging.create_metric "errors", "severity>=ERROR"
       #
       class Metric
@@ -95,10 +94,9 @@ module Google
         # Updates the logs-based metric.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.metric "severe_errors"
         #   metric.filter = "logName:syslog AND severity>=ERROR"
         #   metric.save
@@ -114,10 +112,9 @@ module Google
         # service.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.metric "severe_errors"
         #   metric.filter = "Unwanted value"
         #   metric.reload!
@@ -136,10 +133,9 @@ module Google
         # @return [Boolean] Returns `true` if the metric was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.metric "severe_errors"
         #   metric.delete
         #
