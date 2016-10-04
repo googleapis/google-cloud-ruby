@@ -16,7 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/core/grpc_backoff"
 require "google/pubsub/v1/pubsub_pb"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1/iam_policy_pb"
 require "google/cloud/core/grpc_utils"
 require "json"
 
@@ -71,7 +71,7 @@ module Google
         def iam
           return mocked_iam if mocked_iam
           @iam ||= begin
-            require "google/iam/v1/iam_policy_services"
+            require "google/iam/v1/iam_policy_services_pb"
 
             Google::Iam::V1::IAMPolicy::Stub.new(
               host, creds, timeout: timeout)
