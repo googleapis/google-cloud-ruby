@@ -40,7 +40,7 @@ module Google
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Language::Project]
     #
@@ -88,12 +88,12 @@ module Google
     #   * `"https://www.googleapis.com/auth/cloud-platform"`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Language::Project]
     #
     # @example
-    #   require "google/cloud/language"
+    #   require "google/cloud"
     #
     #   language = Google::Cloud.language
     #
@@ -104,16 +104,9 @@ module Google
     def self.language project = nil, keyfile = nil, scope: nil, timeout: nil,
                       client_config: nil
       require "google/cloud/language"
-      project ||= Google::Cloud::Language::Project.default_project
-      if keyfile.nil?
-        credentials = Google::Cloud::Language::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Language::Credentials.new(
-          keyfile, scope: scope)
-      end
-      Google::Cloud::Language::Project.new(
-        Google::Cloud::Language::Service.new(
-          project, credentials, timeout: timeout, client_config: client_config))
+      Google::Cloud::Language.new project: project, keyfile: keyfile,
+                                  scope: scope, timeout: timeout,
+                                  client_config: client_config
     end
   end
 end

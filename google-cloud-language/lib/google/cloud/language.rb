@@ -64,10 +64,9 @@ module Google
     # Language service. You can provide text or HTML content as a string:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # document = language.document "It was the best of times, it was..."
     # ```
@@ -75,10 +74,9 @@ module Google
     # Or, you can pass a Google Cloud Storage URI for a text or HTML file:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # document = language.document "gs://bucket-name/path/to/document"
     # ```
@@ -86,7 +84,7 @@ module Google
     # Or, you can initialize it with a Google Cloud Storage File object:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
     # gcloud = Google::Cloud.new
     # storage = gcloud.storage
@@ -102,10 +100,9 @@ module Google
     # You can specify the format and language of the content:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # document = language.document "<p>El viejo y el mar</p>",
     #                              format: :html, language: "es"
@@ -130,10 +127,9 @@ module Google
     # English is supported for sentiment analysis.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # content = "Darth Vader is the best villain in Star Wars."
     # document = language.document content
@@ -149,10 +145,9 @@ module Google
     # {Language::Document#entities} method.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # content = "Darth Vader is the best villain in Star Wars."
     # document = language.document content
@@ -171,10 +166,9 @@ module Google
     # performed with the {Language::Document#syntax} method.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # content = "Darth Vader is the best villain in Star Wars."
     # document = language.document content
@@ -188,10 +182,9 @@ module Google
     # for each desired feature to {Language::Document#annotate}:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # content = "Darth Vader is the best villain in Star Wars."
     # document = language.document content
@@ -207,10 +200,9 @@ module Google
     # the document with **all** features:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/language"
     #
-    # gcloud = Google::Cloud.new
-    # language = gcloud.language
+    # language = Google::Cloud::Language.new
     #
     # content = "Darth Vader is the best villain in Star Wars."
     # document = language.document content
@@ -224,6 +216,57 @@ module Google
     # ```
     #
     module Language
+      ##
+      # Creates a new object for connecting to the Language service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Project identifier for the Language service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.goorequire
+      #   "google/cloud"gle.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `"https://www.googleapis.com/auth/cloud-platform"`
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
+      #
+      # @return [Google::Cloud::Language::Project]
+      #
+      # @example
+      #   require "google/cloud/language"
+      #
+      #   language = Google::Cloud::Language.new
+      #
+      #   content = "Darth Vader is the best villain in Star Wars."
+      #   document = language.document content
+      #   annotation = document.annotate
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
+        project ||= Google::Cloud::Language::Project.default_project
+        if keyfile.nil?
+          credentials = Google::Cloud::Language::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Language::Credentials.new(
+            keyfile, scope: scope)
+        end
+        Google::Cloud::Language::Project.new(
+          Google::Cloud::Language::Service.new(
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
+      end
     end
   end
 end
