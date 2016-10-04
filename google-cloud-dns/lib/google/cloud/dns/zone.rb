@@ -32,10 +32,9 @@ module Google
       # have a unique name.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/dns"
       #
-      #   gcloud = Google::Cloud.new
-      #   dns = gcloud.dns
+      #   dns = Google::Cloud::Dns.new
       #   zone = dns.zone "example-com"
       #   zone.records.each do |record|
       #     puts record.name
@@ -127,18 +126,16 @@ module Google
         # @return [Boolean] Returns `true` if the zone was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   zone.delete
         #
         # @example The zone can be forcefully deleted with the `force` option:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   zone.delete force: true
         #
@@ -155,10 +152,9 @@ module Google
         # will be kept.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   zone.clear!
         #
@@ -177,10 +173,9 @@ module Google
         #   does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.change "2"
         #   if change
@@ -214,10 +209,9 @@ module Google
         #   {Google::Cloud::Dns::Change::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   changes = zone.changes
         #   changes.each do |change|
@@ -225,18 +219,16 @@ module Google
         #   end
         #
         # @example The changes can be sorted by change sequence:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   changes = zone.changes order: :desc
         #
         # @example Retrieve all changes: (See {Change::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   changes = zone.changes
         #   changes.all do |change|
@@ -274,10 +266,9 @@ module Google
         #   {Google::Cloud::Dns::Record::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   records = zone.records
         #   records.each do |record|
@@ -285,19 +276,17 @@ module Google
         #   end
         #
         # @example Records can be filtered by name and type:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   records = zone.records "www", "A"
         #   records.first.name #=> "www.example.com."
         #
         # @example Retrieve all records:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   records = zone.records "example.com."
         #
@@ -321,10 +310,9 @@ module Google
         # @return [Google::Cloud::Dns::Record]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
         #   zone.add record
@@ -344,10 +332,9 @@ module Google
         # @return [File] An object on the local file system.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #
         #   zone.export "path/to/db.example.com"
@@ -400,10 +387,9 @@ module Google
         #   Record instances.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.import "path/to/db.example.com"
         #
@@ -447,10 +433,9 @@ module Google
         # @return [Google::Cloud::Dns::Change]
         #
         # @example Using a block:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.update do |tx|
         #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
@@ -463,20 +448,18 @@ module Google
         #   end
         #
         # @example Or you can provide the record objects to add and remove:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
         #   old_record = zone.record "example.com.", "A", 18600, ["1.2.3.4"]
         #   change = zone.update [new_record], [old_record]
         #
         # @example Using a lambda or Proc to update current SOA serial number:
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   new_record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
         #   change = zone.update new_record, soa_serial: lambda { |sn| sn + 10 }
@@ -542,10 +525,9 @@ module Google
         # @return [Google::Cloud::Dns::Change]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.add "example.com.", "A", 86400, ["1.2.3.4"]
         #
@@ -577,10 +559,9 @@ module Google
         # @return [Google::Cloud::Dns::Change]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.remove "example.com.", "A"
         #
@@ -619,10 +600,9 @@ module Google
         # @return [Google::Cloud::Dns::Change]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.replace "example.com.", "A", 86400, ["5.6.7.8"]
         #
@@ -661,10 +641,9 @@ module Google
         # @return [Google::Cloud::Dns::Change]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.modify "example.com.", "MX" do |mx|
         #     mx.ttl = 3600 # change only the TTL
@@ -690,10 +669,9 @@ module Google
         # @return [String] A fully qualified domain name.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   zone.fqdn "www" #=> "www.example.com."
         #   zone.fqdn "@" #=> "example.com."

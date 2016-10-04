@@ -40,10 +40,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #
           #   changes = zone.changes
@@ -61,10 +60,9 @@ module Google
           # @return [Change::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #
           #   changes = zone.changes
@@ -97,10 +95,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each change by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   changes = zone.changes
           #
@@ -109,10 +106,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   changes = zone.changes
           #
@@ -121,10 +117,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   changes = zone.changes
           #

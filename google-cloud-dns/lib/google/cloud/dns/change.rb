@@ -28,10 +28,9 @@ module Google
       # server.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/dns"
       #
-      #   gcloud = Google::Cloud.new
-      #   dns = gcloud.dns
+      #   dns = Google::Cloud::Dns.new
       #   zone = dns.zone "example-com"
       #   zone.changes.each do |change|
       #     puts "Change includes #{change.additions.count} additions " \
@@ -118,10 +117,9 @@ module Google
         # The delay between refreshes will incrementally increase.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   change = zone.change 1234567890
         #   change.done? #=> false

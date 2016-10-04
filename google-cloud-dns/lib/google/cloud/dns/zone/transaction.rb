@@ -25,10 +25,9 @@ module Google
         # Cloud DNS API.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   zone.update do |tx|
         #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
@@ -70,10 +69,9 @@ module Google
           #   example: `192.0.2.1` or `example.com.`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   zone.update do |tx|
           #     tx.add     "example.com.", "A",  86400, "1.2.3.4"
@@ -94,10 +92,9 @@ module Google
           #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   zone.update do |tx|
           #     tx.remove  "example.com.", "TXT"
@@ -126,10 +123,9 @@ module Google
           #   example: `192.0.2.1` or `example.com.`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone = dns.zone "example-com"
           #   zone.update do |tx|
           #     tx.replace "example.com.",
@@ -156,10 +152,9 @@ module Google
           # @yieldparam [Record] record the record to be modified
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zone.update do |tx|
           #     tx.modify "www.example.com.", "CNAME" do |cname|
           #       cname.ttl = 86400 # only change the TTL

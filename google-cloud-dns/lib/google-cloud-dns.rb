@@ -103,19 +103,8 @@ module Google
     def self.dns project = nil, keyfile = nil, scope: nil, retries: nil,
                  timeout: nil
       require "google/cloud/dns"
-      project ||= Google::Cloud::Dns::Project.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Dns::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Dns::Credentials.new keyfile, scope: scope
-      end
-
-      Google::Cloud::Dns::Project.new(
-        Google::Cloud::Dns::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+      Google::Cloud::Dns.new project: project, keyfile: keyfile, scope: scope,
+                             retries: retries, timeout: timeout
     end
   end
 end

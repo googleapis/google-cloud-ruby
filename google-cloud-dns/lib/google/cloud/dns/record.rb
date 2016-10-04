@@ -31,10 +31,9 @@ module Google
       # or `Record.new` to create new records.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/dns"
       #
-      #   gcloud = Google::Cloud.new
-      #   dns = gcloud.dns
+      #   dns = Google::Cloud::Dns.new
       #   zone = dns.zone "example-com"
       #
       #   zone.records.count #=> 2

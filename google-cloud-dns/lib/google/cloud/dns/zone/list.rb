@@ -39,10 +39,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #
           #   zones = dns.zones
           #   if zones.next?
@@ -59,10 +58,9 @@ module Google
           # @return [Zone::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #
           #   zones = dns.zones
           #   if zones.next?
@@ -95,10 +93,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each zone by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zones = dns.zones
           #
           #   zones.all do |zone|
@@ -106,10 +103,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zones = dns.zones
           #
           #   all_names = zones.all.map do |zone|
@@ -117,10 +113,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/dns"
           #
-          #   gcloud = Google::Cloud.new
-          #   dns = gcloud.dns
+          #   dns = Google::Cloud::Dns.new
           #   zones = dns.zones
           #
           #   zones.all(request_limit: 10) do |zone|
