@@ -81,43 +81,38 @@ module Google
         # @return [Object, nil] Returns `nil` if the property doesn't exist
         #
         # @example Properties can be retrieved with a string name:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = datastore.find "Task", "sampleTask"
         #   task["description"] #=> "Learn Cloud Datastore"
         #
         # @example Or with a symbol name:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = datastore.find "Task", "sampleTask"
         #   task[:description] #=> "Learn Cloud Datastore"
         #
         # @example Getting a blob value returns a StringIO object:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
         #
         # @example Getting a geo point value returns a Hash:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["location"] #=> { longitude: -122.0862462,
         #                    #     latitude: 37.4220041 }
         #
         # @example Getting a blob value returns a StringIO object:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
         #
@@ -139,45 +134,40 @@ module Google
         # @param [Object] prop_value The value of the property.
         #
         # @example Properties can be set with a string name:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = datastore.find "Task", "sampleTask"
         #   task["description"] = "Learn Cloud Datastore"
         #   task["tags"] = ["fun", "programming"]
         #
         # @example Or with a symbol name:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = datastore.find "Task", "sampleTask"
         #   task[:description] = "Learn Cloud Datastore"
         #   task[:tags] = ["fun", "programming"]
         #
         # @example Setting a blob value using an IO:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
         #
         # @example Setting a geo point value using a Hash:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["location"] = { longitude: -122.0862462, latitude: 37.4220041 }
         #
         # @example Setting a blob value using an IO:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
@@ -221,19 +211,17 @@ module Google
         # set a key when immutable will raise a `RuntimeError`.
         #
         # @example The key can be set before the entity is saved:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = Google::Cloud::Datastore::Entity.new
         #   task.key = datastore.key "Task"
         #   datastore.save task
         #
         # @example Once the entity is saved, the key is frozen and immutable:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task = datastore.find "Task", "sampleTask"
         #   task.persisted? #=> true
         #   task.key = datastore.key "Task" #=> RuntimeError
@@ -249,10 +237,9 @@ module Google
         # Indicates if the record is persisted. Default is false.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task = Google::Cloud::Datastore::Entity.new
         #   task.persisted? #=> false

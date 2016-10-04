@@ -98,7 +98,7 @@ module Google
     # @return [Google::Cloud::Datastore::Dataset]
     #
     # @example
-    #   require "google/cloud/datastore"
+    #   require "google/cloud"
     #
     #   datastore = Google::Cloud.datastore "my-todo-project",
     #                              "/path/to/keyfile.json"
@@ -115,27 +115,9 @@ module Google
     def self.datastore project = nil, keyfile = nil, scope: nil, retries: nil,
                        timeout: nil
       require "google/cloud/datastore"
-      project ||= Google::Cloud::Datastore::Dataset.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if ENV["DATASTORE_EMULATOR_HOST"]
-        return Google::Cloud::Datastore::Dataset.new(
-          Google::Cloud::Datastore::Service.new(
-            project, :this_channel_is_insecure,
-            host: ENV["DATASTORE_EMULATOR_HOST"], retries: retries))
-      end
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Datastore::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Datastore::Credentials.new(
-          keyfile, scope: scope)
-      end
-
-      Google::Cloud::Datastore::Dataset.new(
-        Google::Cloud::Datastore::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+      Google::Cloud::Datastore.new project: project, keyfile: keyfile,
+                                   scope: scope, retries: retries,
+                                   timeout: timeout
     end
   end
 end

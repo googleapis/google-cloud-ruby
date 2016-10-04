@@ -65,8 +65,7 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
@@ -85,8 +84,7 @@ module Google
           # @return [LookupResults]
           #
           # @example
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
@@ -123,8 +121,7 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each result by passing a block:
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
@@ -134,8 +131,7 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
@@ -145,8 +141,7 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"

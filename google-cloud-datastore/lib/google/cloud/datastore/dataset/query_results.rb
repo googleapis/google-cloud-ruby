@@ -29,10 +29,9 @@ module Google
         # Many common Array methods will return a new Array instance.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   query = datastore.query("Task")
         #   tasks = datastore.run query
@@ -41,10 +40,9 @@ module Google
         #   tasks.cursor #=> Cursor(c3VwZXJhd2Vzb21lIQ)
         #
         # @example Caution, many Array methods will return a new Array instance:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   query = datastore.query("Task")
         #   tasks = datastore.run query
@@ -122,10 +120,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -143,10 +140,9 @@ module Google
           # @return [QueryResults]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -171,10 +167,9 @@ module Google
           # @return [Cursor]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -201,10 +196,9 @@ module Google
           # @return [Enumerator]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.each_with_cursor do |task, cursor|
@@ -235,10 +229,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each query result by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all do |task|
@@ -246,10 +239,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all.map(&:key).each do |key|
@@ -257,10 +249,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all(request_limit: 10) do |task|
@@ -306,10 +297,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating all results and cursors by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor do |task, cursor|
@@ -317,19 +307,17 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor.count #=> number of result/cursor pairs
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/datastore"
           #
-          #   gcloud = Google::Cloud.new
-          #   datastore = gcloud.datastore
+          #   datastore = Google::Cloud::Datastore.new
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor(request_limit: 10) do |task, cursor|
