@@ -71,7 +71,7 @@ module Google
         def iam
           return mocked_iam if mocked_iam
           @iam ||= begin
-            require "google/iam/v1/iam_policy_services"
+            require "google/iam/v1/iam_policy_services_pb"
 
             Google::Iam::V1::IAMPolicy::Stub.new(
               host, creds, timeout: timeout)
