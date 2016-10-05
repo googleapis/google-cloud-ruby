@@ -39,10 +39,9 @@ module Google
       #   hypotheses (up to the value specified in `max_alternatives`).
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/speech"
       #
-      #   gcloud = Google::Cloud.new
-      #   speech = gcloud.speech
+      #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
       #                        encoding: :raw, sample_rate: 16000

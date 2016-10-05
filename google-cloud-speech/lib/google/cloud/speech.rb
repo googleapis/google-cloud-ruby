@@ -51,10 +51,9 @@ module Google
     # API. You can provide a file path:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/speech"
     #
-    # gcloud = Google::Cloud.new
-    # speech = gcloud.speech
+    # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
     #                      encoding: :raw, sample_rate: 16000
@@ -63,10 +62,9 @@ module Google
     # Or, you can initialize the audio instance with a Google Cloud Storage URI:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/speech"
     #
-    # gcloud = Google::Cloud.new
-    # speech = gcloud.speech
+    # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "gs://bucket-name/path/to/audio.raw",
     #                      encoding: :raw, sample_rate: 16000
@@ -75,15 +73,16 @@ module Google
     # Or, with a Google Cloud Storage File object:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/storage"
     #
-    # gcloud = Google::Cloud.new
-    # storage = gcloud.storage
+    # storage = Google::Cloud::Storage.new
     #
     # bucket = storage.bucket "bucket-name"
     # file = bucket.file "path/to/audio.raw"
     #
-    # speech = gcloud.speech
+    # require "google/cloud/speech"
+    #
+    # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio file, encoding: :raw, sample_rate: 16000
     # ```
@@ -101,10 +100,9 @@ module Google
     # supplied audio data.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/speech"
     #
-    # gcloud = Google::Cloud.new
-    # speech = gcloud.speech
+    # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
     #                      encoding: :raw, sample_rate: 16000
@@ -121,10 +119,9 @@ module Google
     # once the audio data has been processed.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/speech"
     #
-    # gcloud = Google::Cloud.new
-    # speech = gcloud.speech
+    # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
     #                      encoding: :raw, sample_rate: 16000
@@ -141,6 +138,54 @@ module Google
     # ```
     #
     module Speech
+      ##
+      # Creates a new object for connecting to the Speech service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Project identifier for the Speech service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/speech`
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+      #
+      # @return [Google::Cloud::Speech::Project]
+      #
+      # @example
+      #   require "google/cloud/speech"
+      #
+      #   speech = Google::Cloud::Speech.new
+      #
+      #   audio = speech.audio "path/to/audio.raw",
+      #                        encoding: :raw, sample_rate: 16000
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
+        project ||= Google::Cloud::Speech::Project.default_project
+        if keyfile.nil?
+          credentials = Google::Cloud::Speech::Credentials.default scope: scope
+        else
+          credentials = Google::Cloud::Speech::Credentials.new(
+            keyfile, scope: scope)
+        end
+        Google::Cloud::Speech::Project.new(
+          Google::Cloud::Speech::Service.new(
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
+      end
     end
   end
 end

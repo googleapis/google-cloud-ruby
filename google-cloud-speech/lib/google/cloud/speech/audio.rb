@@ -34,10 +34,9 @@ module Google
       #   Languages
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/speech"
       #
-      #   gcloud = Google::Cloud.new
-      #   speech = gcloud.speech
+      #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
       #                        encoding: :raw, sample_rate: 16000
@@ -74,10 +73,9 @@ module Google
         # @return [String,Symbol]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000
@@ -93,10 +91,9 @@ module Google
         # @return [Integer]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000
@@ -113,10 +110,9 @@ module Google
         # @return [String,Symbol]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000,
@@ -176,10 +172,9 @@ module Google
         # @return [Array<Result>] The transcribed text of audio recognized.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000
@@ -224,10 +219,9 @@ module Google
         #   processing of a speech-recognition operation.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000

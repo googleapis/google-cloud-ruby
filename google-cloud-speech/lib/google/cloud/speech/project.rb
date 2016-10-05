@@ -38,10 +38,9 @@ module Google
       # See {Google::Cloud#speech}
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/speech"
       #
-      #   gcloud = Google::Cloud.new
-      #   speech = gcloud.speech
+      #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
       #                        encoding: :raw, sample_rate: 16000
@@ -65,11 +64,12 @@ module Google
         # The Speech project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new "my-project-id",
-        #                              "/path/to/keyfile.json"
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new(
+        #     project: "my-project-id",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   speech.project #=> "my-project-id"
         #
@@ -135,33 +135,32 @@ module Google
         # @return [Audio] The audio file to be recognized.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000
         #
         # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
         #                        encoding: :raw, sample_rate: 16000
         #
         # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "bucket-name"
         #   file = bucket.file "path/to/audio.raw"
         #
-        #   speech = gcloud.speech
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
         #
@@ -243,33 +242,32 @@ module Google
         # @return [Array<Result>] The transcribed text of audio recognized.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
         #
         # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "gs://bucket-name/path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
         #
         # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "bucket-name"
         #   file = bucket.file "path/to/audio.raw"
         #
-        #   speech = gcloud.speech
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize file, encoding: :raw,
         #                              sample_rate: 16000,
@@ -342,10 +340,9 @@ module Google
         #   processing of a speech-recognition operation.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
@@ -354,10 +351,9 @@ module Google
         #   job.reload!
         #
         # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "gs://bucket-name/path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
@@ -366,15 +362,16 @@ module Google
         #   job.reload!
         #
         # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "bucket-name"
         #   file = bucket.file "path/to/audio.raw"
         #
-        #   speech = gcloud.speech
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job file, encoding: :raw,
         #                              sample_rate: 16000,
