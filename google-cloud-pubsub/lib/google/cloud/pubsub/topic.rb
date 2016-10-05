@@ -28,10 +28,9 @@ module Google
       # A named resource to which messages are published.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
@@ -77,10 +76,9 @@ module Google
         # @return [Boolean] Returns `true` if the topic was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.delete
@@ -108,30 +106,27 @@ module Google
         # @return [Google::Cloud::Pubsub::Subscription]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub"
         #   puts sub.name # => "my-topic-sub"
         #
         # @example The name is optional, and will be generated if not given:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub"
         #   puts sub.name # => "generated-sub-name"
         #
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub",
@@ -160,20 +155,18 @@ module Google
         #   the subscription does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   subscription = topic.subscription "my-topic-subscription"
         #   puts subscription.name
         #
         # @example Skip the lookup against the service with `skip_lookup`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   # No API call is made to retrieve the subscription information.
         #   subscription = pubsub.subscription "my-sub", skip_lookup: true
@@ -201,10 +194,9 @@ module Google
         # @return [Array<Subscription>] (See {Subscription::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   subscription = topic.subscriptions
@@ -213,10 +205,9 @@ module Google
         #   end
         #
         # @example Retrieve all subscriptions: (See {Subscription::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   subscription = topic.subscriptions
@@ -247,28 +238,25 @@ module Google
         #   block.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msg = topic.publish "new-message"
         #
         # @example A message can be published using a File object:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msg = topic.publish File.open("message.txt")
         #
         # @example Additionally, a message can be published with attributes:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msg = topic.publish "new-message",
@@ -276,10 +264,9 @@ module Google
         #                       this: :that
         #
         # @example Multiple messages can be sent at the same time using a block:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msgs = topic.publish do |t|
@@ -318,30 +305,27 @@ module Google
         # @return [Policy] the current Cloud IAM Policy for this topic
         #
         # @example Policy values are memoized to reduce the number of API calls:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy # API call
         #   policy_2 = topic.policy # No API call
         #
         # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy force: true # API call
         #   policy_2 = topic.policy force: true # API call
         #
         # @example Update the policy by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy do |p|
@@ -377,10 +361,9 @@ module Google
         #   topic
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy # API call
@@ -419,10 +402,9 @@ module Google
         # @return [Array<Strings>] The permissions that have access.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #   perms = topic.test_permissions "pubsub.topics.get",
         #                                  "pubsub.topics.publish"
@@ -441,10 +423,9 @@ module Google
         # Determines whether the topic exists in the Pub/Sub service.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.exists? #=> true
@@ -463,10 +444,9 @@ module Google
         # Determines whether the topic object was created with an HTTP call.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.lazy? #=> false

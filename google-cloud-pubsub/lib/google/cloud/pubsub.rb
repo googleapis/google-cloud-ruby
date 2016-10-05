@@ -35,10 +35,9 @@ module Google
     # is taken care of for you.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # topic.publish "task completed"
@@ -53,10 +52,9 @@ module Google
     # A Topic is found by its name. (See {Google::Cloud::Pubsub::Project#topic})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     # topic = pubsub.topic "my-topic"
     # ```
     #
@@ -66,10 +64,9 @@ module Google
     # {Google::Cloud::Pubsub::Project#create_topic})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     # topic = pubsub.create_topic "my-topic"
     # ```
     #
@@ -81,10 +78,9 @@ module Google
     # {Google::Cloud::Pubsub::Topic#subscription})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # subscription = topic.subscription "my-topic-subscription"
@@ -98,10 +94,9 @@ module Google
     # {Google::Cloud::Pubsub::Project#subscribe})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # sub = topic.subscribe "my-topic-sub"
@@ -113,10 +108,9 @@ module Google
     # to:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # sub = topic.subscribe "my-topic-sub",
@@ -132,10 +126,9 @@ module Google
     # {Google::Cloud::Pubsub::Project#publish})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # msg = topic.publish "new-message"
@@ -144,10 +137,9 @@ module Google
     # Messages can also be published with attributes:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # msg = topic.publish "new-message",
@@ -158,10 +150,9 @@ module Google
     # Multiple messages can be published at the same time by passing a block:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
     # msgs = topic.publish do |batch|
@@ -177,10 +168,9 @@ module Google
     # {Google::Cloud::Pubsub::Subscription#pull})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # msgs = sub.pull
@@ -189,10 +179,9 @@ module Google
     # A maximum number of messages returned can also be specified:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub", max: 10
     # msgs = sub.pull
@@ -202,10 +191,9 @@ module Google
     # (See {Google::Cloud::Pubsub::Subscription#wait_for_messages})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # msgs = sub.wait_for_messages
@@ -221,10 +209,9 @@ module Google
     # (See {Google::Cloud::Pubsub::ReceivedMessage#acknowledge!})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # sub.pull.each { |msg| msg.acknowledge! }
@@ -234,10 +221,9 @@ module Google
     # (See {Google::Cloud::Pubsub::Subscription#acknowledge})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # received_messages = sub.pull
@@ -253,10 +239,9 @@ module Google
     # {Google::Cloud::Pubsub::ReceivedMessage#delay!})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # received_message = sub.pull.first
@@ -270,10 +255,9 @@ module Google
     # The message can also be made available for immediate redelivery:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # received_message = sub.pull.first
@@ -288,10 +272,9 @@ module Google
     # redelivery: (See {Google::Cloud::Pubsub::Subscription#delay})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # received_messages = sub.pull
@@ -305,10 +288,9 @@ module Google
     # {Google::Cloud::Pubsub::Subscription#listen})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # sub.listen do |msg|
@@ -320,10 +302,9 @@ module Google
     # pulled per batch can be limited with the `max` option:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # sub.listen max: 20 do |msg|
@@ -336,10 +317,9 @@ module Google
     # `autoack` option:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
     # sub.listen autoack: true do |msg|
@@ -361,10 +341,9 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new
-    # pubsub = gcloud.pubsub retries: 10, timeout: 120
+    # pubsub = Google::Cloud::Pubsub.new retries: 10, timeout: 120
     # ```
     #
     # See the [Pub/Sub error codes](https://cloud.google.com/pubsub/error-codes)
@@ -379,10 +358,9 @@ module Google
     # to the topics and subscriptions in other projects.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new # my-project-id
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new # my-project-id
     #
     # # Get a topic in the current project
     # my_topic = pubsub.topic "my-topic"
@@ -396,10 +374,9 @@ module Google
     # from a topic in another project:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
-    # gcloud = Google::Cloud.new # my-project-id
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new # my-project-id
     #
     # # Get a topic in another project
     # topic = pubsub.topic "other-topic", project: "other-project-id"
@@ -426,13 +403,12 @@ module Google
     # as shown below.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/pubsub"
     #
     # # Make Pub/Sub use the emulator
     # ENV["PUBSUB_EMULATOR_HOST"] = "localhost:8918"
     #
-    # gcloud = Google::Cloud.new "emulator-project-id"
-    # pubsub = gcloud.pubsub
+    # pubsub = Google::Cloud::Pubsub.new "emulator-project-id"
     #
     # # Get a topic in the current project
     # my_topic = pubsub.new_topic "my-topic"
@@ -440,6 +416,60 @@ module Google
     # ```
     #
     module Pubsub
+      ##
+      # Creates a new object for connecting to the Pub/Sub service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Project identifier for the Pub/Sub service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/pubsub`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Pubsub::Project]
+      #
+      # @example
+      #   require "google/cloud/pubsub"
+      #
+      #   pubsub = Google::Cloud.pubsub
+      #
+      #   topic = pubsub.topic "my-topic"
+      #   topic.publish "task completed"
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Pubsub::Project.default_project
+        if ENV["PUBSUB_EMULATOR_HOST"]
+          ps = Google::Cloud::Pubsub::Project.new(
+            Google::Cloud::Pubsub::Service.new(
+              project, :this_channel_is_insecure))
+          ps.service.host = ENV["PUBSUB_EMULATOR_HOST"]
+          return ps
+        end
+        if keyfile.nil?
+          credentials = Google::Cloud::Pubsub::Credentials.default scope: scope
+        else
+          credentials = Google::Cloud::Pubsub::Credentials.new(
+            keyfile, scope: scope)
+        end
+        Google::Cloud::Pubsub::Project.new(
+          Google::Cloud::Pubsub::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

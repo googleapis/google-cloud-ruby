@@ -56,10 +56,9 @@ module Google
       #   for a listing of values and patterns for members.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #   topic = pubsub.topic "my-topic"
       #
       #   policy = topic.policy # API call
@@ -94,10 +93,9 @@ module Google
         #   `"user:owner@example.com"`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy # API call
@@ -124,10 +122,9 @@ module Google
         #   `"user:owner@example.com"`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy # API call
@@ -152,10 +149,9 @@ module Google
         # @return [Array<String>] The members strings, or an empty array.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy

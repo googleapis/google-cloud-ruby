@@ -44,10 +44,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   if subscriptions.next?
@@ -64,10 +63,9 @@ module Google
           # @return [Subscription::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   if subscriptions.next?
@@ -103,10 +101,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each subscription by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   subscriptions.all do |subscription|
@@ -114,10 +111,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   all_names = subscriptions.all.map do |subscription|
@@ -125,10 +121,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   subscriptions.all(request_limit: 10) do |subscription|

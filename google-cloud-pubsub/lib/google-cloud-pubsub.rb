@@ -91,7 +91,7 @@ module Google
     # @return [Google::Cloud::Pubsub::Project]
     #
     # @example
-    #   require "google/cloud/pubsub"
+    #   require "google/cloud"
     #
     #   pubsub = Google::Cloud.pubsub
     #
@@ -101,23 +101,9 @@ module Google
     def self.pubsub project = nil, keyfile = nil, scope: nil, retries: nil,
                     timeout: nil
       require "google/cloud/pubsub"
-      project ||= Google::Cloud::Pubsub::Project.default_project
-      if ENV["PUBSUB_EMULATOR_HOST"]
-        ps = Google::Cloud::Pubsub::Project.new(
-          Google::Cloud::Pubsub::Service.new(
-            project, :this_channel_is_insecure))
-        ps.service.host = ENV["PUBSUB_EMULATOR_HOST"]
-        return ps
-      end
-      if keyfile.nil?
-        credentials = Google::Cloud::Pubsub::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Pubsub::Credentials.new(
-          keyfile, scope: scope)
-      end
-      Google::Cloud::Pubsub::Project.new(
-        Google::Cloud::Pubsub::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+      Google::Cloud::Pubsub.new project: project, keyfile: keyfile,
+                                scope: scope, retries: retries,
+                                timeout: timeout
     end
   end
 end
