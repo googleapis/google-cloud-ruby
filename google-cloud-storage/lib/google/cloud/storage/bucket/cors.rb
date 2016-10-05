@@ -29,10 +29,9 @@ module Google
         #   Resource Sharing (CORS)
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
         #   bucket = storage.bucket "my-bucket"
@@ -87,10 +86,9 @@ module Google
           #   minutes.)
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.create_bucket "my-bucket" do |c|
           #     c.add_rule ["http://example.org", "https://example.org"],

@@ -40,10 +40,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   buckets = storage.buckets
           #   if buckets.next?
@@ -60,10 +59,9 @@ module Google
           # @return [Bucket::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   buckets = storage.buckets
           #   if buckets.next?
@@ -97,10 +95,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each bucket by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   buckets = storage.buckets
           #   buckets.all do |bucket|
@@ -108,10 +105,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   buckets = storage.buckets
           #   all_names = buckets.all.map do |bucket|
@@ -119,10 +115,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   buckets = storage.buckets
           #   buckets.all(request_limit: 10) do |bucket|

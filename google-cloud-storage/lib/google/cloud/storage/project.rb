@@ -39,10 +39,9 @@ module Google
       # See {Google::Cloud#storage}
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/storage"
       #
-      #   gcloud = Google::Cloud.new
-      #   storage = gcloud.storage
+      #   storage = Google::Cloud::Storage.new
       #
       #   bucket = storage.bucket "my-bucket"
       #   file = bucket.file "path/to/my-file.ext"
@@ -64,11 +63,12 @@ module Google
         # The Storage project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   storage.project #=> "my-todo-project"
         #
@@ -98,10 +98,9 @@ module Google
         #   {Google::Cloud::Storage::Bucket::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   buckets = storage.buckets
         #   buckets.each do |bucket|
@@ -109,10 +108,9 @@ module Google
         #   end
         #
         # @example Retrieve buckets with names that begin with a given prefix:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   user_buckets = storage.buckets prefix: "user-"
         #   user_buckets.each do |bucket|
@@ -120,10 +118,9 @@ module Google
         #   end
         #
         # @example Retrieve all buckets: (See {Bucket::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   buckets = storage.buckets
         #   buckets.all do |bucket|
@@ -146,10 +143,9 @@ module Google
         #   does not exist
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #   puts bucket.name
@@ -257,18 +253,16 @@ module Google
         # @return [Google::Cloud::Storage::Bucket]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.create_bucket "my-bucket"
         #
         # @example Configure the bucket in a block:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.create_bucket "my-bucket" do |b|
         #     b.website_main = "index.html"
