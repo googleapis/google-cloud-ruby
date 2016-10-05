@@ -26,10 +26,9 @@ module Google
       #   Discover Supported Languages
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/translate"
       #
-      #   gcloud = Google::Cloud.new
-      #   translate = gcloud.translate
+      #   translate = Google::Cloud::Translate.new
       #
       #   languages = translate.languages "en"
       #

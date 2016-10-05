@@ -106,16 +106,7 @@ module Google
     #
     def self.translate key = nil, retries: nil, timeout: nil
       require "google/cloud/translate"
-      key ||= ENV["TRANSLATE_KEY"]
-      key ||= ENV["GOOGLE_CLOUD_KEY"]
-      if key.nil?
-        key_missing_msg = "An API key is required to use the Translate API."
-        fail ArgumentError, key_missing_msg
-      end
-
-      Google::Cloud::Translate::Api.new(
-        Google::Cloud::Translate::Service.new(
-          key, retries: retries, timeout: timeout))
+      Google::Cloud::Translate.new key: key, retries: retries, timeout: timeout
     end
   end
 end

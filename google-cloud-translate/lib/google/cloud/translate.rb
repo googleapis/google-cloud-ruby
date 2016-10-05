@@ -53,10 +53,9 @@ module Google
     # language to which you wish to translate.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # translation = translate.translate "Hello world!", to: "la"
     #
@@ -73,10 +72,9 @@ module Google
     # give Translate API much to work with.)
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # translation = translate.translate "chat", to: "en"
     #
@@ -94,10 +92,9 @@ module Google
     # You can pass multiple texts to {Google::Cloud::Translate::Api#translate}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # translations = translate.translate "chien", "chat", from: "fr", to: "en"
     #
@@ -111,10 +108,9 @@ module Google
     # By default, any HTML in your source text will be preserved.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # translation = translate.translate "<strong>Hello</strong> world!",
     #                                   to: :la
@@ -128,10 +124,9 @@ module Google
     # `confidence` score is a float value between `0` and `1`.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # detection = translate.detect "chat"
     #
@@ -143,10 +138,9 @@ module Google
     # You can pass multiple texts to {Google::Cloud::Translate::Api#detect}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # detections = translate.detect "chien", "chat"
     #
@@ -166,10 +160,9 @@ module Google
     # languages.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # languages = translate.languages
     #
@@ -183,10 +176,9 @@ module Google
     # provide the code for the language in which you wish to receive the names.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate
+    # translate = Google::Cloud::Translate.new
     #
     # languages = translate.languages "en"
     #
@@ -209,13 +201,61 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/translate"
     #
-    # gcloud = Google::Cloud.new
-    # translate = gcloud.translate retries: 10, timeout: 120
+    # translate = Google::Cloud::Translate.new retries: 10, timeout: 120
     # ```
     #
     module Translate
+      ##
+      # Creates a new object for connecting to the Translate service.
+      # Each call creates a new connection.
+      #
+      # Unlike other Cloud Platform services, which authenticate using a project
+      # ID and OAuth 2.0 credentials, Google Translate API requires a public API
+      # access key. (This may change in future releases of Google Translate
+      # API.) Follow the general instructions at [Identifying your application
+      # to Google](https://cloud.google.com/translate/v2/using_rest#auth), and
+      # the specific instructions for [Server
+      # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+      #
+      # @param [String] key a public API access key (not an OAuth 2.0 token)
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Translate::Api]
+      #
+      # @example
+      #   require "google/cloud/translate"
+      #
+      #   translate = Google::Cloud::Translate.new key: "api-key-abc123XYZ789"
+      #
+      #   translation = translate.translate "Hello world!", to: "la"
+      #   translation.text #=> "Salve mundi!"
+      #
+      # @example Using API Key from the environment variable.
+      #   require "google/cloud/translate"
+      #
+      #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
+      #
+      #   translate = Google::Cloud::Translate.new
+      #
+      #   translation = translate.translate "Hello world!", to: "la"
+      #   translation.text #=> "Salve mundi!"
+      #
+      def self.new key: nil, retries: nil, timeout: nil
+        key ||= ENV["TRANSLATE_KEY"]
+        key ||= ENV["GOOGLE_CLOUD_KEY"]
+        if key.nil?
+          key_missing_msg = "An API key is required to use the Translate API."
+          fail ArgumentError, key_missing_msg
+        end
+
+        Google::Cloud::Translate::Api.new(
+          Google::Cloud::Translate::Service.new(
+            key, retries: retries, timeout: timeout))
+      end
     end
   end
 end

@@ -26,10 +26,9 @@ module Google
       #   Detect Language
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/translate"
       #
-      #   gcloud = Google::Cloud.new
-      #   translate = gcloud.translate
+      #   translate = Google::Cloud::Translate.new
       #
       #   detections = translate.detect "chien", "chat"
       #
