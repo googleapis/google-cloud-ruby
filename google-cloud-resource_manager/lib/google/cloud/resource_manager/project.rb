@@ -29,10 +29,9 @@ module Google
       # resources.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/resource_manager"
       #
-      #   gcloud = Google::Cloud.new
-      #   resource_manager = gcloud.resource_manager
+      #   resource_manager = Google::Cloud::ResourceManager.new
       #   project = resource_manager.project "tokyo-rain-123"
       #   project.update do |p|
       #     p.name = "My Project"
@@ -86,10 +85,9 @@ module Google
         # hyphen, single-quote, double-quote, space, and exclamation point.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.name = "My Project"
         #
@@ -115,19 +113,17 @@ module Google
         # @yieldparam [Hash] labels the hash accepting labels
         #
         # @example Labels are read-only and cannot be changed:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.labels["env"] #=> "dev" # read only
         #   project.labels["env"] = "production" # raises error
         #
         # @example Labels can be updated by passing a block, or with {#labels=}:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.labels do |labels|
         #     labels["env"] = "production"
@@ -157,10 +153,9 @@ module Google
         # (`Hash`)
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.labels = { "env" => "production" }
         #
@@ -232,10 +227,9 @@ module Google
         #   updating the project
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.update do |p|
         #     p.name = "My Project"
@@ -256,10 +250,9 @@ module Google
         # Resource Manager service.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.reload!
         #
@@ -289,10 +282,9 @@ module Google
         # The caller must have modify permissions for this project.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.active? #=> true
         #   project.delete
@@ -314,10 +306,9 @@ module Google
         # The caller must have modify permissions for this project.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.delete_requested? #=> true
         #   project.undelete
@@ -352,30 +343,27 @@ module Google
         # @return [Policy] the current Cloud IAM Policy for this project
         #
         # @example Policy values are memoized to reduce the number of API calls:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy # API call
         #   policy_2 = project.policy # No API call
         #
         # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy force: true # API call
         #   policy_2 = project.policy force: true # API call
         #
         # @example Update the policy by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy do |p|
@@ -413,10 +401,9 @@ module Google
         #   project
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy # API call
@@ -447,10 +434,9 @@ module Google
         # @return [Array<String>] The permissions that have access
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   perms = project.test_permissions "resourcemanager.projects.get",
         #                                    "resourcemanager.projects.delete"

@@ -91,7 +91,7 @@ module Google
     # @return [Google::Cloud::ResourceManager::Manager]
     #
     # @example
-    #   require "google/cloud/resource_manager"
+    #   require "google/cloud"
     #
     #   resource_manager = Google::Cloud.resource_manager
     #   resource_manager.projects.each do |project|
@@ -101,16 +101,8 @@ module Google
     def self.resource_manager keyfile = nil, scope: nil, retries: nil,
                               timeout: nil
       require "google/cloud/resource_manager"
-      if keyfile.nil?
-        credentials = Google::Cloud::ResourceManager::Credentials.default(
-          scope: scope)
-      else
-        credentials = Google::Cloud::ResourceManager::Credentials.new(
-          keyfile, scope: scope)
-      end
-      Google::Cloud::ResourceManager::Manager.new(
-        Google::Cloud::ResourceManager::Service.new(
-          credentials, retries: retries, timeout: timeout))
+      Google::Cloud::ResourceManager.new keyfile: keyfile, scope: scope,
+                                         retries: retries, timeout: timeout
     end
   end
 end

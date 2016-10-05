@@ -64,10 +64,9 @@ module Google
     # authentication and connect with those credentials.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # ```
     #
     # ## Listing Projects
@@ -78,10 +77,9 @@ module Google
     # {Google::Cloud::ResourceManager::Manager#projects})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # resource_manager.projects.each do |project|
     #   puts projects.project_id
     # end
@@ -93,10 +91,9 @@ module Google
     # {Google::Cloud::ResourceManager::Project#labels})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # project = resource_manager.project "tokyo-rain-123"
     # # Label the project as production
     # project.update do |p|
@@ -108,10 +105,9 @@ module Google
     # {Google::Cloud::ResourceManager::Manager#projects})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # # Find only the productions projects
     # projects = resource_manager.projects filter: "labels.env:production"
     # projects.each do |project|
@@ -125,10 +121,9 @@ module Google
     # {Google::Cloud::ResourceManager::Manager#create_project})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # project = resource_manager.create_project "tokyo-rain-123",
     #                                           name: "Todos Development",
     #                                           labels: {env: :development}
@@ -141,10 +136,9 @@ module Google
     # {Google::Cloud::ResourceManager::Project#delete})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # resource_manager.delete "tokyo-rain-123"
     # ```
     #
@@ -157,10 +151,9 @@ module Google
     # {Google::Cloud::ResourceManager::Project#undelete})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # resource_manager.undelete "tokyo-rain-123"
     # ```
     #
@@ -178,10 +171,10 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager retries: 10, timeout: 120
+    # resource_manager = Google::Cloud::ResourceManager.new retries: 10,
+    #                                                       timeout: 120
     # ```
     #
     # See the [Resource Manager error
@@ -202,10 +195,9 @@ module Google
     # {Google::Cloud::ResourceManager::Policy}.)
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # project = resource_manager.project "tokyo-rain-123"
     # policy = project.policy
     # ```
@@ -213,10 +205,9 @@ module Google
     # A project's access control policy can also be updated:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # project = resource_manager.project "tokyo-rain-123"
     #
     # policy = project.policy do |p|
@@ -228,10 +219,9 @@ module Google
     # {Google::Cloud::ResourceManager::Project#test_permissions})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/resource_manager"
     #
-    # gcloud = Google::Cloud.new
-    # resource_manager = gcloud.resource_manager
+    # resource_manager = Google::Cloud::ResourceManager.new
     # project = resource_manager.project "tokyo-rain-123"
     # perms = project.test_permissions "resourcemanager.projects.get",
     #                                  "resourcemanager.projects.delete"
@@ -243,6 +233,50 @@ module Google
     # Policies](https://cloud.google.com/iam/docs/managing-policies).
     #
     module ResourceManager
+      ##
+      # Creates a new `Project` instance connected to the Resource Manager
+      # service. Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::ResourceManager::Manager]
+      #
+      # @example
+      #   require "google/cloud/resource_manager"
+      #
+      #   resource_manager = Google::Cloud::ResourceManager.new
+      #   resource_manager.projects.each do |project|
+      #     puts projects.project_id
+      #   end
+      #
+      def self.new keyfile: nil, scope: nil, retries: nil, timeout: nil
+        if keyfile.nil?
+          credentials = Google::Cloud::ResourceManager::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::ResourceManager::Credentials.new(
+            keyfile, scope: scope)
+        end
+        Google::Cloud::ResourceManager::Manager.new(
+          Google::Cloud::ResourceManager::Service.new(
+            credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

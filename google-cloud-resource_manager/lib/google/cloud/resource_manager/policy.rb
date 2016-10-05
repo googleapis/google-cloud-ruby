@@ -57,10 +57,9 @@ module Google
       #   for a listing of values and patterns for members.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/resource_manager"
       #
-      #   gcloud = Google::Cloud.new
-      #   resource_manager = gcloud.resource_manager
+      #   resource_manager = Google::Cloud::ResourceManager.new
       #   project = resource_manager.project "tokyo-rain-123"
       #
       #   policy = project.policy # API call
@@ -98,10 +97,9 @@ module Google
         #   `"user:owner@example.com"`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy # API call
@@ -127,10 +125,9 @@ module Google
         #   `"user:owner@example.com"`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy # API call
@@ -155,10 +152,9 @@ module Google
         # @return [Array<String>] The members strings, or an empty array.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
         #   policy = project.policy

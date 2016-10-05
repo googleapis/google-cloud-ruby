@@ -27,10 +27,9 @@ module Google
       # Provides methods for creating, retrieving, and updating projects.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/resource_manager"
       #
-      #   gcloud = Google::Cloud.new
-      #   resource_manager = gcloud.resource_manager
+      #   resource_manager = Google::Cloud::ResourceManager.new
       #   resource_manager.projects.each do |project|
       #     puts projects.project_id
       #   end
@@ -82,10 +81,9 @@ module Google
         #   {Google::Cloud::ResourceManager::Project::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   projects = resource_manager.projects
         #
         #   projects.each do |project|
@@ -93,10 +91,9 @@ module Google
         #   end
         #
         # @example Projects can be filtered using the `filter` option:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   projects = resource_manager.projects filter: "labels.env:production"
         #
         #   projects.each do |project|
@@ -104,10 +101,9 @@ module Google
         #   end
         #
         # @example Retrieve all projects: (See {Project::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   projects = resource_manager.projects
         #
         #   projects.all do |project|
@@ -128,10 +124,9 @@ module Google
         #   if the project does not exist
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.project_id #=> "tokyo-rain-123"
         #
@@ -175,17 +170,15 @@ module Google
         # @return [Google::Cloud::ResourceManager::Project]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.create_project "tokyo-rain-123"
         #
         # @example A project can also be created with a `name` and `labels`:
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.create_project "tokyo-rain-123",
         #     name: "Todos Development", labels: {env: :development}
         #
@@ -217,10 +210,9 @@ module Google
         # @param [String] project_id The ID of the project.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   resource_manager.delete "tokyo-rain-123"
         #
         def delete project_id
@@ -239,10 +231,9 @@ module Google
         # @param [String] project_id The ID of the project.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   resource_manager.undelete "tokyo-rain-123"
         #
         def undelete project_id

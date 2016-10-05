@@ -107,4 +107,49 @@ describe Google::Cloud do
       end
     end
   end
+
+  describe "ResourceManager.new" do
+    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:found_credentials) { "{}" }
+
+    it "gets defaults for project_id and keyfile" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::ResourceManager::Credentials.stub :default, default_credentials do
+          resource_manager = Google::Cloud::ResourceManager.new
+          resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+          resource_manager.service.credentials.must_equal default_credentials
+        end
+      end
+    end
+
+    it "uses provided project_id and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_equal nil
+        "resource_manager-credentials"
+      }
+      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+        credentials.must_equal "resource_manager-credentials"
+        retries.must_equal nil
+        timeout.must_equal nil
+        OpenStruct.new
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::ResourceManager::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::ResourceManager::Service.stub :new, stubbed_service do
+                resource_manager = Google::Cloud::ResourceManager.new keyfile: "path/to/keyfile.json"
+                resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+                resource_manager.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
