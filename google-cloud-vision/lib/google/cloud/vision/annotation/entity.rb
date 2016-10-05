@@ -30,10 +30,9 @@ module Google
         # @see https://developers.google.com/knowledge-graph/ Knowledge Graph
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/landmark.jpg"
         #
@@ -43,10 +42,9 @@ module Google
         #   landmark.mid #=> "/m/019dvv"
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/logo.jpg"
         #
@@ -56,10 +54,9 @@ module Google
         #   logo.mid #=> "/m/0b34hf"
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/face.jpg"
         #

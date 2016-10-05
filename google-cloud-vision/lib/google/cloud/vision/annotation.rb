@@ -30,10 +30,9 @@ module Google
       # See {Project#annotate} and {Image}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/vision"
       #
-      #   gcloud = Google::Cloud.new
-      #   vision = gcloud.vision
+      #   vision = Google::Cloud::Vision.new
       #   image = vision.image "path/to/face.jpg"
       #
       #   annotation = vision.annotate image, faces: true, labels: true
@@ -58,10 +57,9 @@ module Google
         # @return [Array<Face>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, faces: true
@@ -80,10 +78,9 @@ module Google
         # @return [Face]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, faces: 1
@@ -99,10 +96,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, faces: 1
@@ -118,10 +114,9 @@ module Google
         # @return [Array<Entity>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/landmark.jpg"
         #
         #   annotation = vision.annotate image, landmarks: 1
@@ -140,10 +135,9 @@ module Google
         # @return [Entity]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/landmark.jpg"
         #
         #   annotation = vision.annotate image, landmarks: 1
@@ -160,10 +154,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/landmark.jpg"
         #
         #   annotation = vision.annotate image, landmarks: 1
@@ -179,10 +172,9 @@ module Google
         # @return [Array<Entity>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/logo.jpg"
         #
         #   annotation = vision.annotate image, logos: 1
@@ -201,10 +193,9 @@ module Google
         # @return [Entity]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/logo.jpg"
         #
         #   annotation = vision.annotate image, logos: 1
@@ -221,10 +212,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/logo.jpg"
         #
         #   annotation = vision.annotate image, logos: 1
@@ -240,10 +230,9 @@ module Google
         # @return [Array<Entity>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, labels: 1
@@ -262,10 +251,9 @@ module Google
         # @return [Entity]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, labels: 1
@@ -282,10 +270,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, labels: 1
@@ -301,10 +288,9 @@ module Google
         # @return [Text]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/text.png"
         #
         #   annotation = vision.annotate image, text: true
@@ -320,10 +306,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/text.png"
         #
         #   annotation = vision.annotate image, text: true
@@ -339,10 +324,9 @@ module Google
         # @return [SafeSearch]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, safe_search: true
@@ -360,10 +344,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, safe_search: true
@@ -379,10 +362,9 @@ module Google
         # @return [Properties]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, properties: true
@@ -400,10 +382,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   annotation = vision.annotate image, properties: true

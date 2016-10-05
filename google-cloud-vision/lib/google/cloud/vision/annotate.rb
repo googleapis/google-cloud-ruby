@@ -31,10 +31,9 @@ module Google
       # See {Project#annotate}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/vision"
       #
-      #   gcloud = Google::Cloud.new
-      #   vision = gcloud.vision
+      #   vision = Google::Cloud::Vision.new
       #
       #   face_image = vision.image "path/to/face.jpg"
       #   landmark_image = vision.image "path/to/landmark.jpg"
@@ -118,10 +117,9 @@ module Google
         #   multiple images.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   face_image = vision.image "path/to/face.jpg"
         #   landmark_image = vision.image "path/to/landmark.jpg"

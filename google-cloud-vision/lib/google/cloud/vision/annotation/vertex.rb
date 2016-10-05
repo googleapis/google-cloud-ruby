@@ -28,10 +28,9 @@ module Google
         # @attr_reader [Integer] y The Y coordinate.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/text.png"
         #   text = image.text

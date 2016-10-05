@@ -88,10 +88,9 @@ module Google
     # @return [Google::Cloud::Vision::Project]
     #
     # @example
-    #   require "google/cloud/vision"
+    #   require "google/cloud"
     #
-    #   gcloud = Google::Cloud.new
-    #   vision = gcloud.vision
+    #   vision = Google::Cloud.vision
     #
     #   image = vision.image "path/to/landmark.jpg"
     #

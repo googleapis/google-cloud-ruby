@@ -26,10 +26,9 @@ module Google
         # See {Google::Cloud::Vision::Image#properties}.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/logo.jpg"
         #
@@ -100,10 +99,9 @@ module Google
           # image the color occupies in the image.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/logo.jpg"
           #   properties = image.properties

@@ -27,10 +27,9 @@ module Google
         # adult, spoof, medical, violence).
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/face.jpg"
         #

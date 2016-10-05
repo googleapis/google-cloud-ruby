@@ -44,10 +44,9 @@ module Google
       #   Practices
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/vision"
       #
-      #   gcloud = Google::Cloud.new
-      #   vision = gcloud.vision
+      #   vision = Google::Cloud::Vision.new
       #
       #   image = vision.image "path/to/text.png"
       #
@@ -96,10 +95,9 @@ module Google
         # @return [Array<Annotation::Face>] The results of face detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   faces = image.faces
@@ -135,10 +133,9 @@ module Google
         # @return [Array<Annotation::Entity>] The results of landmark detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/landmark.jpg"
         #
         #   landmarks = image.landmarks
@@ -175,10 +172,9 @@ module Google
         # @return [Array<Annotation::Entity>] The results of logo detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/logo.jpg"
         #
         #   logos = image.logos
@@ -215,10 +211,9 @@ module Google
         # @return [Array<Annotation::Entity>] The results of label detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   labels = image.labels
@@ -253,10 +248,9 @@ module Google
         # @return [Annotation::Text] The results of text (OCR) detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/text.png"
         #
         #   text = image.text
@@ -281,10 +275,9 @@ module Google
         # @return [Annotation::SafeSearch] The results of safe search detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/face.jpg"
         #
         #   safe_search = image.safe_search
@@ -307,10 +300,9 @@ module Google
         #   detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #   image = vision.image "path/to/logo.jpg"
         #
         #   properties = image.properties
@@ -430,10 +422,9 @@ module Google
         #   great deal if the hint is wrong).
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/landmark.jpg"
         #   image.context.area.min = { longitude: -122.0862462,
@@ -482,10 +473,9 @@ module Google
           # A Lat/long rectangle that specifies the location of the image.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/landmark.jpg"
           #

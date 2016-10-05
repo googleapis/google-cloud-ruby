@@ -33,10 +33,9 @@ module Google
       # of explicit content.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/vision"
       #
-      #   gcloud = Google::Cloud.new
-      #   vision = gcloud.vision
+      #   vision = Google::Cloud::Vision.new
       #
       #   image = vision.image "path/to/landmark.jpg"
       #
@@ -61,11 +60,12 @@ module Google
         # The Vision project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   vision.project #=> "my-todo-project"
         #
@@ -109,18 +109,16 @@ module Google
         # @return [Image] An image for the Vision service.
         #
         # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "gs://bucket-name/path_to_image_object"
         #
         # @example With a local file path:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/landmark.jpg"
         #
@@ -189,10 +187,9 @@ module Google
         #   multiple images.
         #
         # @example With a single image:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/landmark.jpg"
         #
@@ -203,10 +200,9 @@ module Google
         #   #=>  "monument", "landmark"]
         #
         # @example With multiple images:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   face_img = vision.image "path/to/face.jpg"
         #   landmark_img = vision.image "path/to/landmark.jpg"
@@ -217,10 +213,9 @@ module Google
         #   annotations[1].labels.count #=> 6
         #
         # @example With multiple images and configurations passed in a block:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   face_img = vision.image "path/to/face.jpg"
         #   landmark_img = vision.image "path/to/landmark.jpg"
@@ -238,10 +233,9 @@ module Google
         #   annotations[2].text.words.count #=> 28
         #
         # @example Maximum result values can also be provided:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/landmark.jpg"
         #
