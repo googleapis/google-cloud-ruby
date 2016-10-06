@@ -29,14 +29,14 @@ require "google/gax"
 
 module Google
   module Cloud
-    module Errorreporting
+    module ErrorReporting
       module V1beta1
         # Service for retrieving and updating individual error groups.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] error_group_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupService::Stub]
         class ErrorGroupServiceApi
-          attr_reader :stub
+          attr_reader :error_group_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "clouderrorreporting.googleapis.com".freeze
@@ -121,7 +121,8 @@ module Google
             require "google/devtools/clouderrorreporting/v1beta1/error_group_service_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "error_group_service_client_config.json"
@@ -137,7 +138,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @error_group_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -147,11 +148,11 @@ module Google
             )
 
             @get_group = Google::Gax.create_api_call(
-              @stub.method(:get_group),
+              @error_group_service_stub.method(:get_group),
               defaults["get_group"]
             )
             @update_group = Google::Gax.create_api_call(
-              @stub.method(:update_group),
+              @error_group_service_stub.method(:update_group),
               defaults["update_group"]
             )
           end
@@ -175,9 +176,9 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/error_group_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_group_service_api"
           #
-          #   ErrorGroupServiceApi = Google::Cloud::Errorreporting::V1beta1::ErrorGroupServiceApi
+          #   ErrorGroupServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceApi
           #
           #   error_group_service_api = ErrorGroupServiceApi.new
           #   formatted_group_name = ErrorGroupServiceApi.group_path("[PROJECT]", "[GROUP]")
@@ -203,10 +204,10 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/error_group_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_group_service_api"
           #
           #   ErrorGroup = Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup
-          #   ErrorGroupServiceApi = Google::Cloud::Errorreporting::V1beta1::ErrorGroupServiceApi
+          #   ErrorGroupServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceApi
           #
           #   error_group_service_api = ErrorGroupServiceApi.new
           #   group = ErrorGroup.new

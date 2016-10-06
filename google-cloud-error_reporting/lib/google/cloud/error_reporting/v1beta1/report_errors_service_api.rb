@@ -29,14 +29,14 @@ require "google/gax"
 
 module Google
   module Cloud
-    module Errorreporting
+    module ErrorReporting
       module V1beta1
         # An API for reporting error events.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] report_errors_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub]
         class ReportErrorsServiceApi
-          attr_reader :stub
+          attr_reader :report_errors_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "clouderrorreporting.googleapis.com".freeze
@@ -112,7 +112,8 @@ module Google
             require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "report_errors_service_client_config.json"
@@ -128,7 +129,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @report_errors_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -138,7 +139,7 @@ module Google
             )
 
             @report_error_event = Google::Gax.create_api_call(
-              @stub.method(:report_error_event),
+              @report_errors_service_stub.method(:report_error_event),
               defaults["report_error_event"]
             )
           end
@@ -167,9 +168,9 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/report_errors_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/report_errors_service_api"
           #
-          #   ReportErrorsServiceApi = Google::Cloud::Errorreporting::V1beta1::ReportErrorsServiceApi
+          #   ReportErrorsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi
           #   ReportedErrorEvent = Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
           #
           #   report_errors_service_api = ReportErrorsServiceApi.new

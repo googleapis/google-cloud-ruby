@@ -29,15 +29,15 @@ require "google/gax"
 
 module Google
   module Cloud
-    module Errorreporting
+    module ErrorReporting
       module V1beta1
         # An API for retrieving and managing error statistics as well as data for
         # individual events.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] error_stats_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub]
         class ErrorStatsServiceApi
-          attr_reader :stub
+          attr_reader :error_stats_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "clouderrorreporting.googleapis.com".freeze
@@ -126,7 +126,8 @@ module Google
             require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_services_pb"
 
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "error_stats_service_client_config.json"
@@ -143,7 +144,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @error_stats_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -153,15 +154,15 @@ module Google
             )
 
             @list_group_stats = Google::Gax.create_api_call(
-              @stub.method(:list_group_stats),
+              @error_stats_service_stub.method(:list_group_stats),
               defaults["list_group_stats"]
             )
             @list_events = Google::Gax.create_api_call(
-              @stub.method(:list_events),
+              @error_stats_service_stub.method(:list_events),
               defaults["list_events"]
             )
             @delete_events = Google::Gax.create_api_call(
-              @stub.method(:delete_events),
+              @error_stats_service_stub.method(:delete_events),
               defaults["delete_events"]
             )
           end
@@ -179,17 +180,16 @@ module Google
           #   Example: <code>projects/my-project-123</code>.
           # @param group_id [Array<String>]
           #   [Optional] List all <code>ErrorGroupStats</code> with these IDs.
-          #   If not specified, all error group stats with a non-zero error count
-          #   for the given selection criteria are returned.
           # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter]
           #   [Optional] List only <code>ErrorGroupStats</code> which belong to a service
           #   context that matches the filter.
           #   Data for all service contexts is returned if this field is not specified.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
           #   [Required] List data for the given time range.
-          #   The service is tuned for retrieving data up to (approximately) 'now'.
-          #   Retrieving data for arbitrary time periods in the past can result in
-          #   higher response times or in returning incomplete results.
+          #   Only <code>ErrorGroupStats</code> with a non-zero count in the given time
+          #   range are returned, unless the request contains an explicit group_id list.
+          #   If a group_id list is given, also <code>ErrorGroupStats</code> with zero
+          #   occurrences are returned.
           # @param timed_count_duration [Google::Protobuf::Duration]
           #   [Optional] The preferred duration for a single returned +TimedCount+.
           #   If not set, no timed counts are returned.
@@ -218,9 +218,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::Errorreporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
           #   QueryTimeRange = Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange
           #
           #   error_stats_service_api = ErrorStatsServiceApi.new
@@ -280,10 +280,6 @@ module Google
           #   Data for all service contexts is returned if this field is not specified.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
           #   [Optional] List only data for the given time range.
-          #   The service is tuned for retrieving data up to (approximately) 'now'.
-          #   Retrieving data for arbitrary time periods in the past can result in
-          #   higher response times or in returning incomplete results.
-          #   Data for the last hour until now is returned if not specified.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -300,9 +296,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::Errorreporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
           #
           #   error_stats_service_api = ErrorStatsServiceApi.new
           #   formatted_project_name = ErrorStatsServiceApi.project_path("[PROJECT]")
@@ -351,9 +347,9 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/errorreporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::Errorreporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
           #
           #   error_stats_service_api = ErrorStatsServiceApi.new
           #   formatted_project_name = ErrorStatsServiceApi.project_path("[PROJECT]")

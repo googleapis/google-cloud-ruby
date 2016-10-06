@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 Gem::Specification.new do |s|
-  s.name          = 'google-cloud-clouderrorreporting-v1beta1'
+  s.name          = 'google-cloud-error_reporting'
   s.version       = '0.6.8'
 
   s.authors       = ['Google Inc']
@@ -16,13 +16,12 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 2.0.0'
-  s.requirements << 'libgrpc ~> 0.9.0 needs to be installed'
-  s.summary       = 'google-cloud-clouderrorreporting-v1beta1 is the official library for Stackdriver Error Reporting API'
+  s.summary       = 'Google client library for the Stackdriver Clouderrorreporting service'
 
-  s.add_dependency 'google-gax', '~> 0.4.4'
+  s.add_dependency 'google-gax', '~> 0.5.1'
   s.add_dependency 'grpc', '~> 1.0'
   s.add_dependency 'googleauth', '~> 0.5.1'
-  s.add_dependency 'googleapis-common-protos', '~> 1.2.0'
+  s.add_dependency 'googleapis-common-protos', '~> 1.3.1'
 
   s.add_development_dependency 'bundler', '~> 1.9'
   s.add_development_dependency 'rake', '~> 10.4'
