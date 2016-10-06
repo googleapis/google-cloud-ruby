@@ -34,10 +34,9 @@ module Google
       # See {Project#document}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/language"
       #
-      #   gcloud = Google::Cloud.new
-      #   language = gcloud.language
+      #   language = Google::Cloud::Language.new
       #
       #   content = "Darth Vader is the best villain in Star Wars."
       #   document = language.document content
@@ -186,10 +185,9 @@ module Google
         # @return [Annotation>] The results of the content analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -202,10 +200,9 @@ module Google
         #   annotation.tokens.count #=> 10
         #
         # @example With feature flags:
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -239,10 +236,9 @@ module Google
         # @return [Annotation>] The results for the content analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "Hello world!"
         #
@@ -264,10 +260,9 @@ module Google
         # @return [Annotation::Entities>] The results for the entities analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         # content = "Darth Vader is the best villain in Star Wars."
         # document = language.document content
@@ -295,10 +290,9 @@ module Google
         #   analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         # content = "Darth Vader is the best villain in Star Wars."
         # document = language.document content

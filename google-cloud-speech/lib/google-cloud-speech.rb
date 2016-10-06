@@ -92,7 +92,7 @@ module Google
     # @return [Google::Cloud::Speech::Project]
     #
     # @example
-    #   require "google/cloud/speech"
+    #   require "google/cloud"
     #
     #   speech = Google::Cloud.speech
     #
@@ -102,16 +102,9 @@ module Google
     def self.speech project = nil, keyfile = nil, scope: nil, timeout: nil,
                     client_config: nil
       require "google/cloud/speech"
-      project ||= Google::Cloud::Speech::Project.default_project
-      if keyfile.nil?
-        credentials = Google::Cloud::Speech::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Speech::Credentials.new(
-          keyfile, scope: scope)
-      end
-      Google::Cloud::Speech::Project.new(
-        Google::Cloud::Speech::Service.new(
-          project, credentials, timeout: timeout, client_config: client_config))
+      Google::Cloud::Speech.new project: project, keyfile: keyfile,
+                                scope: scope, timeout: timeout,
+                                client_config: client_config
     end
   end
 end

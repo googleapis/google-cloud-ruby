@@ -31,10 +31,9 @@ module Google
       # executing in the background thread.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #
       #   async = logging.async_writer
       #
@@ -123,10 +122,9 @@ module Google
         # @return [Google::Cloud::Logging::AsyncWriter] Returns self.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   async = logging.async_writer
         #
         #   entry = logging.entry payload: "Job started.",
@@ -173,10 +171,9 @@ module Google
         #   used in place of a ruby standard library logger object.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   resource = logging.resource "gae_app",
         #                               module_id: "1",

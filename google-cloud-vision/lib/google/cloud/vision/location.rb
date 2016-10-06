@@ -28,10 +28,9 @@ module Google
       #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/vision"
       #
-      #   gcloud = Google::Cloud.new
-      #   vision = gcloud.vision
+      #   vision = Google::Cloud::Vision.new
       #
       #   image = vision.image "path/to/landmark.jpg"
       #   entity = image.landmark

@@ -36,10 +36,9 @@ module Google
       #   Getting Started
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/translate"
       #
-      #   gcloud = Google::Cloud.new
-      #   translate = gcloud.translate
+      #   translate = Google::Cloud::Translate.new
       #
       #   translation = translate.translate "Hello world!", to: "la"
       #
@@ -89,10 +88,9 @@ module Google
         #   objects if multiple texts were given.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   translation = translate.translate "Hello world!", to: "la"
         #
@@ -105,10 +103,9 @@ module Google
         #   translation.text #=> "Salve mundi!"
         #
         # @example Setting the `from` language.
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   translation = translate.translate "Hello world!",
         #                                     from: :en, to: :la
@@ -116,10 +113,9 @@ module Google
         #   translation.text #=> "Salve mundi!"
         #
         # @example Retrieving multiple translations.
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   translations = translate.translate "Hello my friend.",
         #                                      "See you soon.",
@@ -129,10 +125,9 @@ module Google
         #   translations[1].text #=> "Vide te mox."
         #
         # @example Preserving HTML tags.
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   translation = translate.translate "<strong>Hello</strong> world!",
         #                                     to: :la
@@ -165,20 +160,18 @@ module Google
         #   multiple texts were given.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   detection = translate.detect "Hello world!"
         #   detection.language #=> "en"
         #   detection.confidence #=> 0.7100697
         #
         # @example Detecting multiple texts.
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   detections = translate.detect "Hello world!",
         #                                 "Bonjour le monde!"
@@ -210,10 +203,9 @@ module Google
         #   the API.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   languages = translate.languages
         #   languages.count #=> 104
@@ -222,10 +214,9 @@ module Google
         #   english.name #=> nil
         #
         # @example Get all languages with their names in French.
-        #   require "google/cloud"
+        #   require "google/cloud/translate"
         #
-        #   gcloud = Google::Cloud.new
-        #   translate = gcloud.translate
+        #   translate = Google::Cloud::Translate.new
         #
         #   languages = translate.languages "fr"
         #   languages.count #=> 104

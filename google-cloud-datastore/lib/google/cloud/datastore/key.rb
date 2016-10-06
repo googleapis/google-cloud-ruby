@@ -46,12 +46,13 @@ module Google
         # @return [String]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
-        #   datastore = gcloud.datastore
         #   task = datastore.find "Task", "sampleTask"
         #   task.key.project #=> "my-todo-project"
         #
@@ -65,12 +66,13 @@ module Google
         # @return [String, nil]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
-        #   datastore = gcloud.datastore
         #   task = datastore.find "Task", "sampleTask"
         #   task.key.namespace #=> "ns~todo-project"
         #
@@ -186,10 +188,9 @@ module Google
         # @return [Key, nil]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task_list = datastore.find "TaskList", "default"
         #   query = datastore.query("Task").

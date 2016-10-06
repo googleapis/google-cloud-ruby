@@ -31,10 +31,9 @@ module Google
       # instances, but you can list them with {Project#resource_descriptors}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #   resource_descriptor = logging.resource_descriptors.first
       #   resource_descriptor.type #=> "cloudsql_database"
       #   resource_descriptor.name #=> "Cloud SQL Database"
@@ -93,10 +92,9 @@ module Google
         # their `database_id`. See {ResourceDescriptor#labels}.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   resource_descriptor = logging.resource_descriptors.first
         #   label_descriptor = resource_descriptor.labels.first
         #   label_descriptor.key #=> "database_id"

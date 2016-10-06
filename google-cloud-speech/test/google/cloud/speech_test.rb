@@ -115,4 +115,55 @@ describe Google::Cloud do
       end
     end
   end
+
+  describe "Speech.new" do
+    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:found_credentials) { "{}" }
+
+    it "gets defaults for project_id and keyfile" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud::Core::GCE.stub :project_id, "project-id" do
+          Google::Cloud::Speech::Credentials.stub :default, default_credentials do
+            speech = Google::Cloud::Speech.new
+            speech.must_be_kind_of Google::Cloud::Speech::Project
+            speech.project.must_equal "project-id"
+            speech.service.credentials.must_equal default_credentials
+          end
+        end
+      end
+    end
+
+    it "uses provided project_id and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_equal nil
+        "speech-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "speech-credentials"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Speech::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Speech::Service.stub :new, stubbed_service do
+                speech = Google::Cloud::Speech.new project: "project-id", keyfile: "path/to/keyfile.json"
+                speech.must_be_kind_of Google::Cloud::Speech::Project
+                speech.project.must_equal "project-id"
+                speech.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end

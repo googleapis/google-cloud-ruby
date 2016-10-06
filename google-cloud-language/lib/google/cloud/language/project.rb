@@ -33,10 +33,9 @@ module Google
       # See {Google::Cloud#language}
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/language"
       #
-      #   gcloud = Google::Cloud.new
-      #   language = gcloud.language
+      #   language = Google::Cloud::Language.new
       #
       #   content = "Darth Vader is the best villain in Star Wars."
       #   annotation = language.annotate content
@@ -61,11 +60,12 @@ module Google
         # The Language project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new "my-project-id",
-        #                              "/path/to/keyfile.json"
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new(
+        #     project: "my-project-id",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   language.project #=> "my-project-id"
         #
@@ -98,39 +98,35 @@ module Google
         # @return [Document] An document for the Language service.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "It was the best of times, it was..."
         #
         # @example With a Google Cloud Storage URI:
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "gs://bucket-name/path/to/document"
         #
         # @example With a Google Cloud Storage File object:
-        #   require "google/cloud"
-        #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "bucket-name"
         #   file = bucket.file "path/to/document"
         #
-        #   language = gcloud.language
+        #   require "google/cloud/language"
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document file
         #
         # @example With `format` and `language` options:
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "<p>El viejo y el mar</p>",
         #                           format: :html, language: "es"
@@ -216,10 +212,9 @@ module Google
         # @return [Annotation>] The results for the content analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   annotation = language.annotate content
@@ -263,10 +258,9 @@ module Google
         # @return [Annotation>] The results for the content syntax analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "Hello world!"
         #
@@ -297,10 +291,9 @@ module Google
         # @return [Annotation::Entities>] The results for the entities analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "Hello Chris and Mike!"
         #
@@ -333,10 +326,9 @@ module Google
         #   analysis.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   document = language.document "Hello Chris and Mike!"
         #

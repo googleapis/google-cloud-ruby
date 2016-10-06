@@ -36,10 +36,9 @@ module Google
       #   Preparing Data for BigQuery
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #
       #   table = dataset.create_table "my_table" do |schema|
@@ -139,10 +138,9 @@ module Google
         # Useful in queries.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -330,10 +328,9 @@ module Google
         # @return [Google::Cloud::Bigquery::Schema]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.create_table "my_table"
         #
@@ -396,10 +393,9 @@ module Google
         # @return [Google::Cloud::Bigquery::Data]
         #
         # @example Paginate rows of data: (See {Data#next})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -412,10 +408,9 @@ module Google
         #   end
         #
         # @example Retrieve all rows of data: (See {Data#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -463,10 +458,9 @@ module Google
         # @return [Google::Cloud::Bigquery::CopyJob]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #   destination_table = dataset.table "my_destination_table"
@@ -474,10 +468,9 @@ module Google
         #   copy_job = table.copy destination_table
         #
         # @example Passing a string identifier for the destination table:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -523,10 +516,9 @@ module Google
         # @return [Google::Cloud::Bigquery::ExtractJob]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -634,34 +626,31 @@ module Google
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   load_job = table.load "gs://my-bucket/file-name.csv"
         #
         # @example Pass a google-cloud storage file instance:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "file-name.csv"
         #   load_job = table.load file
         #
         # @example Upload a file directly:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -708,10 +697,9 @@ module Google
         # @return [Google::Cloud::Bigquery::InsertResponse]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -738,10 +726,9 @@ module Google
         # @return [Boolean] Returns `true` if the table was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -886,10 +873,9 @@ module Google
           # @return [Google::Cloud::Bigquery::Schema]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |t|
           #     t.name = "My Table",
@@ -936,10 +922,9 @@ module Google
           #   `:nullable`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.string "first_name", mode: :required
@@ -965,10 +950,9 @@ module Google
           #   `:nullable`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.integer "age", mode: :required
@@ -994,10 +978,9 @@ module Google
           #   `:nullable`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.float "price", mode: :required
@@ -1023,10 +1006,9 @@ module Google
           #   `:nullable`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.boolean "active", mode: :required
@@ -1052,10 +1034,9 @@ module Google
           #   `:nullable`.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.timestamp "creation_date", mode: :required
@@ -1087,10 +1068,9 @@ module Google
           #   nested schema
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
           #     schema.record "cities_lived", mode: :repeated do |cities_lived|

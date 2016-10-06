@@ -79,10 +79,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   job = bigquery.job "my_job"
         #
         #   data = job.query_results
@@ -100,10 +99,9 @@ module Google
         # @return [QueryData]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   job = bigquery.job "my_job"
         #
         #   data = job.query_results
@@ -137,10 +135,9 @@ module Google
         # @return [Enumerator]
         #
         # @example Iterating each row by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   job = bigquery.job "my_job"
         #
         #   data = job.query_results
@@ -149,10 +146,9 @@ module Google
         #   end
         #
         # @example Using the enumerator by not passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   job = bigquery.job "my_job"
         #
         #   data = job.query_results
@@ -161,10 +157,9 @@ module Google
         #   end
         #
         # @example Limit the number of API calls made:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   job = bigquery.job "my_job"
         #
         #   data = job.query_results

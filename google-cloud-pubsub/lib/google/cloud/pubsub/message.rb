@@ -29,10 +29,9 @@ module Google
       # delayed.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #
       #   # Publish a message
       #   topic = pubsub.topic "my-topic"

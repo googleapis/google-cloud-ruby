@@ -36,11 +36,12 @@ module Google
     # is taken care of for you.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new "my-todo-project",
-    #                     "/path/to/keyfile.json"
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new(
+    #   project: "my-todo-project",
+    #   keyfile: "/path/to/keyfile.json"
+    # )
     #
     # task = datastore.find "Task", "sampleTask"
     # task["priority"] = 5
@@ -65,10 +66,9 @@ module Google
     # {Google::Cloud::Datastore::Dataset#find} and passing the parts of the key:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task = datastore.find "Task", "sampleTask"
     # ```
@@ -77,10 +77,9 @@ module Google
     # object:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task_key = datastore.key "Task", 123456
     # task = datastore.find task_key
@@ -94,10 +93,9 @@ module Google
     # (See {Google::Cloud::Datastore::Query#where})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # query = datastore.query("Task").
     #   where("done", "=", false)
@@ -108,10 +106,9 @@ module Google
     # Records can also be ordered. (See {Google::Cloud::Datastore::Query#order})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # query = datastore.query("Task").
     #   order("created")
@@ -123,10 +120,9 @@ module Google
     # (See {Google::Cloud::Datastore::Query#limit})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # query = datastore.query("Task").
     #   limit(5)
@@ -138,10 +134,9 @@ module Google
     # (See {Google::Cloud::Datastore::Query#ancestor})
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task_list_key = datastore.key "TaskList", "default"
     #
@@ -160,10 +155,9 @@ module Google
     # Datastore to return them all.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # query = datastore.query("Task")
     # tasks = datastore.run query
@@ -182,10 +176,9 @@ module Google
     # saved. If the key is incomplete then it will be completed when saved.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task = datastore.entity "Task" do |t|
     #   t["type"] = "Personal"
@@ -201,10 +194,9 @@ module Google
     # Multiple new entities may be created in a batch.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task1 = datastore.entity "Task" do |t|
     #   t["type"] = "Personal"
@@ -251,10 +243,9 @@ module Google
     # {Google::Cloud::Datastore::Dataset#save}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task = datastore.find "Task", "sampleTask"
     # # Read the priority property
@@ -268,10 +259,9 @@ module Google
     # Array properties can be used to store more than one value.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task = datastore.entity "Task", "sampleTask" do |t|
     #   t["tags"] = ["fun", "programming"]
@@ -286,10 +276,9 @@ module Google
     # or the entity's key object.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task = datastore.find "Task", "sampleTask"
     # datastore.delete task
@@ -298,10 +287,9 @@ module Google
     # Multiple entities may be deleted in a batch.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task_key1 = datastore.key "Task", "sampleTask1"
     # task_key2 = datastore.key "Task", "sampleTask2"
@@ -316,10 +304,9 @@ module Google
     # block completes.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task_key = datastore.key "Task", "sampleTask"
     #
@@ -340,10 +327,9 @@ module Google
     # allowing you to commit or rollback manually.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new
     #
     # task_key = datastore.key "Task", "sampleTask"
     #
@@ -472,10 +458,9 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
-    # gcloud = Google::Cloud.new
-    # datastore = gcloud.datastore retries: 10, timeout: 120
+    # datastore = Google::Cloud::Datastore.new retries: 10, timeout: 120
     # ```
     #
     # See the [Datastore error
@@ -508,13 +493,12 @@ module Google
     # environment variable:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/datastore"
     #
     # # Make Datastore use the emulator
     # ENV["DATASTORE_EMULATOR_HOST"] = "localhost:8978"
     #
-    # gcloud = Google::Cloud.new "emulator-project-id"
-    # datastore = gcloud.datastore
+    # datastore = Google::Cloud::Datastore.new project: "emulator-project-id"
     #
     # task = datastore.entity "Task", "emulatorTask" do |t|
     #   t["type"] = "Testing"
@@ -527,6 +511,74 @@ module Google
     # ```
     #
     module Datastore
+      ##
+      # Creates a new object for connecting to the Datastore service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Dataset identifier for the Datastore you are
+      #   connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/datastore`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Datastore::Dataset]
+      #
+      # @example
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new(
+      #     project: "my-todo-project",
+      #     keyfile: "/path/to/keyfile.json"
+      #   )
+      #
+      #   task = datastore.entity "Task", "sampleTask" do |t|
+      #     t["type"] = "Personal"
+      #     t["done"] = false
+      #     t["priority"] = 4
+      #     t["description"] = "Learn Cloud Datastore"
+      #   end
+      #
+      #   datastore.save task
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Datastore::Dataset.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if ENV["DATASTORE_EMULATOR_HOST"]
+          return Google::Cloud::Datastore::Dataset.new(
+            Google::Cloud::Datastore::Service.new(
+              project, :this_channel_is_insecure,
+              host: ENV["DATASTORE_EMULATOR_HOST"], retries: retries))
+        end
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Datastore::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Datastore::Credentials.new(
+            keyfile, scope: scope)
+        end
+
+        Google::Cloud::Datastore::Dataset.new(
+          Google::Cloud::Datastore::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

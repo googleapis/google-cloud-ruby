@@ -23,10 +23,9 @@ module Google
       # QueryResults.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/datastore"
       #
-      #   gcloud = Google::Cloud.new
-      #   datastore = gcloud.datastore
+      #   datastore = Google::Cloud::Datastore.new
       #
       #   query = datastore.query("Task").
       #     where("done", "=", false)

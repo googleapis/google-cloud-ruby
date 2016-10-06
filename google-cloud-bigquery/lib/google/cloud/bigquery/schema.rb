@@ -27,10 +27,9 @@ module Google
       #   Preparing Data for BigQuery
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.create_table "my_table"
       #
@@ -202,10 +201,9 @@ module Google
         #   nested schema
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.create_table "my_table"
         #

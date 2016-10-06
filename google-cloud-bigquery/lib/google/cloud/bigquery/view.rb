@@ -35,10 +35,9 @@ module Google
       # query.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   view = dataset.create_view "my_view",
       #            "SELECT name, age FROM [proj:dataset.users]"
@@ -117,10 +116,9 @@ module Google
         # Useful in queries.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -310,10 +308,9 @@ module Google
         # @param [String] new_query The query that defines the view.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.table "my_view"
         #
@@ -356,10 +353,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryData]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.table "my_view"
         #
@@ -385,10 +381,9 @@ module Google
         # @return [Boolean] Returns `true` if the table was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #

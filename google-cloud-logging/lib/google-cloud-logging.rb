@@ -90,7 +90,7 @@ module Google
     # @return [Google::Cloud::Logging::Project]
     #
     # @example
-    #   require "google/cloud/logging"
+    #   require "google/cloud"
     #
     #   gcloud = Google::Cloud.new
     #   logging = gcloud.logging
@@ -99,21 +99,9 @@ module Google
     def self.logging project = nil, keyfile = nil, scope: nil, retries: nil,
                      timeout: nil
       require "google/cloud/logging"
-      project ||= Google::Cloud::Logging::Project.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Logging::Credentials.default(
-          scope: scope)
-      else
-        credentials = Google::Cloud::Logging::Credentials.new(
-          keyfile, scope: scope)
-      end
-
-      Google::Cloud::Logging::Project.new(
-        Google::Cloud::Logging::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+      Google::Cloud::Logging.new project: project, keyfile: keyfile,
+                                 scope: scope, retries: retries,
+                                 timeout: timeout
     end
   end
 end

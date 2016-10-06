@@ -48,10 +48,9 @@ module Google
     # let's connect to Google's `publicdata` project, and see what you find.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new "publicdata"
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
     #
     # bigquery.datasets.count #=> 1
     # bigquery.datasets.first.dataset_id #=> "samples"
@@ -69,10 +68,9 @@ module Google
     # every play written by Shakespeare.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new "publicdata"
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
     #
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
@@ -97,10 +95,9 @@ module Google
     # results.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
     #       "FROM publicdata:samples.shakespeare"
@@ -126,10 +123,9 @@ module Google
     # of {Google::Cloud::Bigquery::QueryData}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
     #       "FROM publicdata:samples.shakespeare"
@@ -159,8 +155,8 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
+    #
     # dataset = bigquery.create_dataset "my_dataset"
     # ```
     #
@@ -172,10 +168,9 @@ module Google
     # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     #
     # table = dataset.create_table "people" do |schema|
@@ -207,10 +202,9 @@ module Google
     # application is a great approach.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.table "people"
     #
@@ -254,10 +248,9 @@ module Google
     # also contained in the archive specifies the schema used below.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.create_table "baby_names" do |schema|
     #   schema.string "name", mode: :required
@@ -284,10 +277,9 @@ module Google
     # setting up billing.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # source_table = dataset.table "baby_names"
     # result_table = dataset.create_table "baby_names_results"
@@ -302,7 +294,9 @@ module Google
     #
     # if !query_job.failed?
     #
-    #   storage = gcloud.storage
+    #   require "google/cloud/bigquery"
+    #
+    #   storage = Google::Cloud::Storage.new
     #   bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
     #   bucket = storage.create_bucket bucket_id
     #   extract_url = "gs://#{bucket.id}/baby-names-sam.csv"
@@ -337,10 +331,9 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery retries: 10, timeout: 120
+    # bigquery = Google::Cloud::Bigquery.new retries: 10, timeout: 120
     # ```
     #
     # See the [BigQuery error
@@ -348,6 +341,56 @@ module Google
     # for a list of error conditions.
     #
     module Bigquery
+      # Creates a new `Project` instance connected to the BigQuery service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Identifier for a BigQuery project. If not
+      #   present, the default project for the credentials is used.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See # [Using OAuth 2.0 to Access Google #
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/bigquery`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Bigquery::Project]
+      #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Bigquery::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Bigquery::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Bigquery::Credentials.new(
+            keyfile, scope: scope)
+        end
+
+        Google::Cloud::Bigquery::Project.new(
+          Google::Cloud::Bigquery::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

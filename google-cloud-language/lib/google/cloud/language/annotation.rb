@@ -26,10 +26,9 @@ module Google
       # See {Project#annotate} and {Document#annotate}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/language"
       #
-      #   gcloud = Google::Cloud.new
-      #   language = gcloud.language
+      #   language = Google::Cloud::Language.new
       #
       #   content = "Darth Vader is the best villain in Star Wars."
       #   document = language.document content
@@ -59,10 +58,9 @@ module Google
         #   relative location
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "I love dogs. I hate cats."
         #   document = language.document content
@@ -85,10 +83,9 @@ module Google
         #   blocks of the text
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -114,10 +111,9 @@ module Google
         # @return [Entities]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -145,10 +141,9 @@ module Google
         # @return [Sentiment]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -172,10 +167,9 @@ module Google
         # @return [String] the language code
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -214,10 +208,9 @@ module Google
         #   specified in the API request.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "I love dogs. I hate cats."
         #   document = language.document content
@@ -263,10 +256,9 @@ module Google
         #   of the token.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -325,10 +317,9 @@ module Google
         #   BCP-47 language codes are supported.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -450,10 +441,9 @@ module Google
         #   the input document. The API currently supports proper noun mentions.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content
@@ -591,10 +581,9 @@ module Google
         #   BCP-47 language codes are supported.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/language"
         #
-        #   gcloud = Google::Cloud.new
-        #   language = gcloud.language
+        #   language = Google::Cloud::Language.new
         #
         #   content = "Darth Vader is the best villain in Star Wars."
         #   document = language.document content

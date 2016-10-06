@@ -191,8 +191,7 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::LookupResults]
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   task_key1 = datastore.key "Task", 123456
         #   task_key2 = datastore.key "Task", 987654
         #   tasks = datastore.find_all task_key1, task_key2
@@ -259,10 +258,9 @@ module Google
         # @yieldparam [Commit] commit The object that changes are made on
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"
@@ -282,10 +280,9 @@ module Google
         #   end
         #
         # @example Commit can be passed a block, same as {Dataset#commit}:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   tx = datastore.transaction
         #   begin
@@ -321,10 +318,9 @@ module Google
         # Rolls a transaction back.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"

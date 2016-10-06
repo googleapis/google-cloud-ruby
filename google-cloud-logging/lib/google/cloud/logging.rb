@@ -60,10 +60,9 @@ module Google
     # {Google::Cloud::Logging::Entry} records belonging to your project:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # entries = logging.entries
     # entries.each do |e|
     #   puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
@@ -80,10 +79,9 @@ module Google
     # Stackdriver Logging API.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # entries = logging.entries filter: "log:syslog"
     # entries.each do |e|
     #   puts "[#{e.timestamp}] #{e.payload.inspect}"
@@ -93,10 +91,9 @@ module Google
     # You can also order the log entries by `timestamp`.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # entries = logging.entries order: "timestamp desc"
     # entries.each do |e|
     #   puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
@@ -126,17 +123,19 @@ module Google
     # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
-    # storage = gcloud.storage
+    # storage = Google::Cloud::Storage.new
     #
     # bucket = storage.create_bucket "my-logs-bucket"
     #
     # # Grant owner permission to Stackdriver Logging service
     # email = "cloud-logs@google.com"
     # bucket.acl.add_owner "group-#{email}"
+    #
+    # require "google/cloud/logging"
+    #
+    # logging = Google::Cloud::Logging.new
     #
     # sink = logging.create_sink "my-sink",
     #                            "storage.googleapis.com/#{bucket.id}"
@@ -152,10 +151,9 @@ module Google
     # {Google::Cloud::Logging::Project#sinks}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # sinks = logging.sinks
     # sinks.each do |s|
     #   puts "#{s.name}: #{s.filter} -> #{s.destination}"
@@ -177,10 +175,9 @@ module Google
     # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # metric = logging.create_metric "errors", "severity>=ERROR"
     # ```
     #
@@ -190,10 +187,9 @@ module Google
     # {Google::Cloud::Logging::Project#metrics}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # metrics = logging.metrics
     # metrics.each do |m|
     #   puts "#{m.name}: #{m.filter}"
@@ -210,10 +206,9 @@ module Google
     # contain a log name and a resource.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     #
     # entry = logging.entry
     # entry.payload = "Job started."
@@ -230,10 +225,9 @@ module Google
     # these values from the individual entries.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     #
     # entry1 = logging.entry
     # entry1.payload = "Job started."
@@ -260,10 +254,9 @@ module Google
     # to its work queue and return immediately.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     # async = logging.async_writer
     #
     # entry1 = logging.entry
@@ -290,10 +283,9 @@ module Google
     # {Google::Cloud::Logging::Project#logger} to create one.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     #
     # resource = logging.resource "gae_app",
     #                             module_id: "1",
@@ -309,10 +301,9 @@ module Google
     # Logger constructor directly.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging
+    # logging = Google::Cloud::Logging.new
     #
     # resource = logging.resource "gae_app",
     #                             module_id: "1",
@@ -339,13 +330,62 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/logging"
     #
-    # gcloud = Google::Cloud.new
-    # logging = gcloud.logging retries: 10, timeout: 120
+    # logging = Google::Cloud::Logging.new retries: 10, timeout: 120
     # ```
     #
     module Logging
+      ##
+      # Creates a new object for connecting to the Stackdriver Logging service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Project identifier for the Stackdriver Logging
+      #   service.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/logging.admin`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Logging::Project]
+      #
+      # @example
+      #   require "google/cloud/logging"
+      #
+      #   logging = Google::Cloud::Logging.new
+      #   # ...
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Logging::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Logging::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Logging::Credentials.new(
+            keyfile, scope: scope)
+        end
+
+        Google::Cloud::Logging::Project.new(
+          Google::Cloud::Logging::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

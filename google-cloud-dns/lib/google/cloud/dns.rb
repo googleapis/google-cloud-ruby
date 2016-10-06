@@ -48,10 +48,9 @@ module Google
     # you follow along with these examples.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.create_zone "example-com", "example.com."
     # puts zone.id # unique identifier defined by the server
     # ```
@@ -64,10 +63,9 @@ module Google
     # You can retrieve all the zones in your project.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zones = dns.zones
     # zones.each do |zone|
     #   puts "#{zone.name} - #{zone.dns}"
@@ -77,10 +75,9 @@ module Google
     # You can also retrieve a single zone by either name or id.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # ```
     #
@@ -91,10 +88,9 @@ module Google
     # nameservers. Let's take a look at these records.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # records = zone.records
     # records.count #=> 2
@@ -114,10 +110,9 @@ module Google
     # {Google::Cloud::Dns::Zone#add} results in a new Cloud DNS Change instance.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.add "www", "A", 86400, ["1.2.3.4"]
     # change.additions.map &:type #=> ["A", "SOA"]
@@ -136,10 +131,9 @@ module Google
     # retrieved record's domain name is always fully-qualified.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # records = zone.records "www", "A"
     # records.first.name #=> "www.example.com."
@@ -149,10 +143,9 @@ module Google
     # `data` for a record.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.replace "www", "A", 86400, ["5.6.7.8"]
     # ```
@@ -162,10 +155,9 @@ module Google
     # to leave unchanged.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.modify "www", "A" do |r|
     #   r.ttl = 3600 # change only the TTL
@@ -175,10 +167,9 @@ module Google
     # You can also delete records by name and type.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.remove "www", "A"
     # record = change.deletions.first
@@ -190,10 +181,9 @@ module Google
     # {Google::Cloud::Dns::Zone::Transaction}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.update do |tx|
     #   tx.add     "www", "A",  86400, "1.2.3.4"
@@ -210,10 +200,9 @@ module Google
     # {Google::Cloud::Dns::Zone#update}.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # to_add = zone.record "www", "AAAA", 86400, ["2607:f8b0:400a:801::1005"]
     # to_delete = zone.records "www", "A"
@@ -226,10 +215,9 @@ module Google
     # complete immediately, you can retrieve and inspect changes.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # changes = zone.changes
     # changes.each do |change|
@@ -244,10 +232,9 @@ module Google
     # lines may be merged as needed into records with multiple `data` values.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     # change = zone.import "path/to/db.example.com"
     # ```
@@ -255,10 +242,9 @@ module Google
     # You can also export to a zone file.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns
+    # dns = Google::Cloud::Dns.new
     # zone = dns.zone "example-com"
     #
     # zone.export "path/to/db.example.com"
@@ -278,13 +264,65 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/dns"
     #
-    # gcloud = Google::Cloud.new
-    # dns = gcloud.dns retries: 10, timeout: 120
+    # dns = Google::Cloud::Dns.new retries: 10, timeout: 120
     # ```
     #
     module Dns
+      ##
+      # Creates a new `Project` instance connected to the DNS service.
+      # Each call creates a new connection.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Identifier for a DNS project. If not present,
+      #   the default project for the credentials is used.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Dns::Project]
+      #
+      # @example
+      #   require "google/cloud/dns"
+      #
+      #   dns = Google::Cloud::Dns.new(
+      #           project: "my-dns-project",
+      #           keyfile: "/path/to/keyfile.json"
+      #         )
+      #
+      #   zone = dns.zone "example-com"
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Dns::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Dns::Credentials.default scope: scope
+        else
+          credentials = Google::Cloud::Dns::Credentials.new(
+            keyfile, scope: scope)
+        end
+
+        Google::Cloud::Dns::Project.new(
+          Google::Cloud::Dns::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

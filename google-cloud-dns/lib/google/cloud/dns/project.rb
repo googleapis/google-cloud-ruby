@@ -30,10 +30,9 @@ module Google
       # Console](https://console.developers.google.com).
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/dns"
       #
-      #   gcloud = Google::Cloud.new
-      #   dns = gcloud.dns
+      #   dns = Google::Cloud::Dns.new
       #   zone = dns.zone "example-com"
       #   zone.records.each do |record|
       #     puts record.name
@@ -62,11 +61,12 @@ module Google
         # The unique ID string for the current project.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                              "/path/to/keyfile.json"
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new(
+        #           project: "my-todo-project",
+        #           keyfile: "/path/to/keyfile.json"
+        #  )
         #
         #   dns.project #=> "my-todo-project"
         #
@@ -142,10 +142,9 @@ module Google
         #   not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   puts zone.name
         #
@@ -170,20 +169,18 @@ module Google
         # {Google::Cloud::Dns::Zone::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zones = dns.zones
         #   zones.each do |zone|
         #     puts zone.name
         #   end
         #
         # @example Retrieve all zones: (See {Zone::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zones = dns.zones
         #   zones.all do |zone|
         #     puts zone.name
@@ -215,10 +212,9 @@ module Google
         # @return [Google::Cloud::Dns::Zone]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/dns"
         #
-        #   gcloud = Google::Cloud.new
-        #   dns = gcloud.dns
+        #   dns = Google::Cloud::Dns.new
         #   zone = dns.create_zone "example-com", "example.com."
         #
         def create_zone zone_name, zone_dns, description: nil,

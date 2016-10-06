@@ -41,18 +41,18 @@ module Google
       #   Permissions for writing exported logs
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/storage"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
-      #   storage = gcloud.storage
-      #
+      #   storage = Google::Cloud::Storage.new
       #   bucket = storage.create_bucket "my-logs-bucket"
       #
       #   # Grant owner permission to Stackdriver Logging service
       #   email = "cloud-logs@google.com"
       #   bucket.acl.add_owner "group-#{email}"
       #
+      #   require "google/cloud/logging"
+      #
+      #   logging = Google::Cloud::Logging.new
       #   sink = logging.create_sink "my-sink",
       #                              "storage.googleapis.com/#{bucket.id}"
       #
@@ -156,10 +156,9 @@ module Google
         # Updates the logs-based sink.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sink = logging.sink "severe_errors"
         #   sink.filter = "logName:syslog AND severity>=ERROR"
         #   sink.save
@@ -184,10 +183,9 @@ module Google
         # @return [Boolean] Returns `true` if the sink was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sink = logging.sink "severe_errors"
         #   sink.delete
         #

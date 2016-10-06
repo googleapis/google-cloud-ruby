@@ -37,10 +37,9 @@ module Google
       #   and Techniques
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/storage"
       #
-      #   gcloud = Google::Cloud.new
-      #   storage = gcloud.storage
+      #   storage = Google::Cloud::Storage.new
       #
       #   bucket = storage.bucket "my-bucket"
       #
@@ -276,10 +275,9 @@ module Google
         # @yield [file] a block yielding a delegate object for updating the file
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -336,10 +334,9 @@ module Google
         # @return [File] Returns a `::File` object on the local file system
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -347,10 +344,9 @@ module Google
         #   file.download "path/to/downloaded/file.ext"
         #
         # @example Use the CRC32c digest by passing :crc32c.
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -358,10 +354,9 @@ module Google
         #   file.download "path/to/downloaded/file.ext", verify: :crc32c
         #
         # @example Use the MD5 and CRC32c digests by passing :all.
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -369,10 +364,9 @@ module Google
         #   file.download "path/to/downloaded/file.ext", verify: :all
         #
         # @example Disable the download verification by passing :none.
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -433,10 +427,9 @@ module Google
         # @return [Google::Cloud::Storage::File]
         #
         # @example The file can be copied to a new path in the current bucket:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -444,10 +437,9 @@ module Google
         #   file.copy "path/to/destination/file.ext"
         #
         # @example The file can also be copied to a different bucket:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -479,10 +471,9 @@ module Google
         # @return [Boolean] Returns `true` if the file was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -508,20 +499,18 @@ module Google
         #   `HTTPS`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
         #   public_url = file.public_url
         #
         # @example Generate the URL with a protocol other than HTTPS:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
@@ -571,20 +560,18 @@ module Google
         #   Private Key.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
         #   shared_url = file.signed_url
         #
         # @example Any of the option parameters may be specified:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
@@ -625,10 +612,9 @@ module Google
         #   Control guide
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
@@ -637,10 +623,9 @@ module Google
         #   file.acl.add_reader "user-#{email}"
         #
         # @example Grant access to a group by prepending `"group-"` to an email:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"
@@ -649,10 +634,9 @@ module Google
         #   file.acl.add_reader "group-#{email}"
         #
         # @example Or, grant access via a predefined permissions list:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   file = bucket.file "avatars/heidi/400x400.png"

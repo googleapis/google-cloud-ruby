@@ -43,10 +43,9 @@ module Google
       # See {Google::Cloud#datastore}
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/datastore"
       #
-      #   gcloud = Google::Cloud.new
-      #   datastore = gcloud.datastore
+      #   datastore = Google::Cloud::Datastore.new
       #
       #   query = datastore.query("Task").
       #     where("done", "=", false)
@@ -70,12 +69,13 @@ module Google
         # The Datastore project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
+        #   datastore = Google::Cloud::Datastore.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
-        #   datastore = gcloud.datastore
         #   datastore.project #=> "my-todo-project"
         #
         def project
@@ -233,8 +233,7 @@ module Google
         # @return [Boolean] Returns `true` if successful
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.delete task1, task2
         #
         def delete *entities_or_keys
@@ -252,8 +251,7 @@ module Google
         #   were persisted.
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.commit do |c|
         #     c.save task3, task4
         #     c.delete task1, task2
@@ -326,8 +324,7 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::LookupResults]
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task_key1 = datastore.key "Task", "sampleTask1"
         #   task_key2 = datastore.key "Task", "sampleTask2"
@@ -405,10 +402,9 @@ module Google
         # @yieldparam [Transaction] tx the transaction object
         #
         # @example Runs the given block in a database transaction:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task = datastore.entity "Task", "sampleTask" do |t|
         #     t["type"] = "Personal"
@@ -424,10 +420,9 @@ module Google
         #   end
         #
         # @example If no block is given, a Transaction object is returned:
-        #   require "google/cloud"
+        #   require "google/cloud/datastore"
         #
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #
         #   task = datastore.entity "Task", "sampleTask" do |t|
         #     t["type"] = "Personal"

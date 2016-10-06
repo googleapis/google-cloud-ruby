@@ -23,8 +23,7 @@ module Google
       # made in a single commit.
       #
       # @example
-      #   gcloud = Google::Cloud.new
-      #   datastore = gcloud.datastore
+      #   datastore = Google::Cloud::Datastore.new
       #   datastore.commit do |c|
       #     c.save task1, task2
       #     c.delete entity1, entity2
@@ -48,8 +47,7 @@ module Google
         # @param [Entity] entities One or more Entity objects to save.
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.commit do |c|
         #     c.save task1, task2
         #   end
@@ -68,8 +66,7 @@ module Google
         # @param [Entity] entities One or more Entity objects to insert.
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.commit do |c|
         #     c.insert task1, task2
         #   end
@@ -87,8 +84,7 @@ module Google
         # @param [Entity] entities One or more Entity objects to update.
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.commit do |c|
         #     c.update task1, task2
         #   end
@@ -107,8 +103,7 @@ module Google
         #   objects to remove.
         #
         # @example
-        #   gcloud = Google::Cloud.new
-        #   datastore = gcloud.datastore
+        #   datastore = Google::Cloud::Datastore.new
         #   datastore.commit do |c|
         #     c.delete task1, task2
         #   end

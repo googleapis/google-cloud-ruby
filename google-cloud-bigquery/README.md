@@ -21,11 +21,12 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/bigquery"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-bigquery = gcloud.bigquery
+bigquery = Google::Cloud::Bigquery.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Create a new table to archive todos
 dataset = bigquery.dataset "my-todo-archive"

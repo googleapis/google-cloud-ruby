@@ -40,10 +40,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   topics = pubsub.topics
           #   if topics.next?
@@ -60,10 +59,9 @@ module Google
           # @return [Topic::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   topics = pubsub.topics
           #   if topics.next?
@@ -97,10 +95,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each topic by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   topics = pubsub.topics
           #   topics.all do |topic|
@@ -108,10 +105,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   topics = pubsub.topics
           #   all_names = topics.all.map do |topic|
@@ -119,10 +115,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/pubsub"
           #
-          #   gcloud = Google::Cloud.new
-          #   pubsub = gcloud.pubsub
+          #   pubsub = Google::Cloud::Pubsub.new
           #
           #   topics = pubsub.topics
           #   topics.all(request_limit: 10) do |topic|

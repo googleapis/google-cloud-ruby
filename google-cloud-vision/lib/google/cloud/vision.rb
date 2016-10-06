@@ -55,10 +55,9 @@ module Google
     # You can provide a file path:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # image = vision.image "path/to/landmark.jpg"
     # ```
@@ -66,10 +65,9 @@ module Google
     # Or, you can initialize the image with a Google Cloud Storage URI:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # image = vision.image "gs://bucket-name/path_to_image_object"
     # ```
@@ -84,10 +82,9 @@ module Google
     # {Vision::Project#annotate}, below.)
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # image = vision.image "path/to/face.jpg"
     #
@@ -104,10 +101,9 @@ module Google
     # (or a string file path or Storage URI) to {Vision::Project#annotate}:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # image = vision.image "path/to/face.jpg"
     #
@@ -120,10 +116,9 @@ module Google
     # request:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # face_image = vision.image "path/to/face.jpg"
     # landmark_image = vision.image "path/to/landmark.jpg"
@@ -147,10 +142,9 @@ module Google
     # request to the Cloud Vision API:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # face_image = vision.image "path/to/face.jpg"
     # landmark_image = vision.image "path/to/landmark.jpg"
@@ -177,10 +171,9 @@ module Google
     # global defaults, you can update the configuration:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # Google::Cloud::Vision.default_max_faces = 1
     #
@@ -192,10 +185,9 @@ module Google
     # integer instead of a flag:
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision
+    # vision = Google::Cloud::Vision.new
     #
     # image = vision.image "path/to/face.jpg"
     #
@@ -219,10 +211,9 @@ module Google
     # You can also set the request `timeout` value in seconds.
     #
     # ```ruby
-    # require "google/cloud"
+    # require "google/cloud/vision"
     #
-    # gcloud = Google::Cloud.new
-    # vision = gcloud.vision retries: 10, timeout: 120
+    # vision = Google::Cloud::Vision.new retries: 10, timeout: 120
     # ```
     #
     module Vision
@@ -234,10 +225,9 @@ module Google
         # The default value is `100`.
         #
         # @example Using the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_faces #=> 100
         #
@@ -246,10 +236,9 @@ module Google
         #   # annotation = vision.annotate "path/to/faces.jpg", faces: 100
         #
         # @example Updating the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_faces = 5
@@ -260,10 +249,9 @@ module Google
         #
         #
         # @example Using the default setting on {Image#faces}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_faces #=> 100
         #
@@ -272,10 +260,9 @@ module Google
         #   # faces = vision.image("path/to/faces.jpg").faces 100
         #
         # @example Updating the default setting on {Image#faces}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_faces = 5
@@ -293,10 +280,9 @@ module Google
         # The default value is 100.
         #
         # @example Using the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_landmarks #=> 100
         #
@@ -306,10 +292,9 @@ module Google
         #   # annotation = vision.annotate img, landmarks: 100
         #
         # @example Updating the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_landmarks = 5
@@ -321,10 +306,9 @@ module Google
         #
         #
         # @example Using the default setting on {Image#landmarks}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_landmarks #=> 100
         #
@@ -333,10 +317,9 @@ module Google
         #   # landmarks = vision.image("path/to/landmarks.jpg").landmarks 100
         #
         # @example Updating the default setting on {Image#landmarks}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_landmarks = 5
@@ -354,10 +337,9 @@ module Google
         # The default value is 100.
         #
         # @example Using the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_logos #=> 100
         #
@@ -366,10 +348,9 @@ module Google
         #   # annotation = vision.annotate "path/to/logos.jpg", logos: 100
         #
         # @example Updating the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_logos = 5
@@ -380,10 +361,9 @@ module Google
         #
         #
         # @example Using the default setting on {Image#logos}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_logos #=> 100
         #
@@ -392,10 +372,9 @@ module Google
         #   # logos = vision.image("path/to/logos.jpg").logos 100
         #
         # @example Updating the default setting on {Image#logos}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_logos = 5
@@ -413,10 +392,9 @@ module Google
         # The default value is 100.
         #
         # @example Using the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_labels #=> 100
         #
@@ -425,10 +403,9 @@ module Google
         #   # annotation = vision.annotate "path/to/labels.jpg", labels: 100
         #
         # @example Updating the default setting on {Project#annotate}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_labels = 5
@@ -439,10 +416,9 @@ module Google
         #
         #
         # @example Using the default setting on {Image#labels}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   Google::Cloud::Vision.default_max_labels #=> 100
         #
@@ -451,10 +427,9 @@ module Google
         #   # labels = vision.image("path/to/labels.jpg").labels 100
         #
         # @example Updating the default setting on {Image#labels}:
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   # Set a new default
         #   Google::Cloud::Vision.default_max_labels = 5
@@ -472,6 +447,56 @@ module Google
       self.default_max_landmarks = 100
       self.default_max_logos     = 100
       self.default_max_labels    = 100
+
+      ##
+      # Creates a new object for connecting to the Vision service.
+      # Each call creates a new connection.
+      #
+      # @param [String] project Project identifier for the Vision service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Vision::Project]
+      #
+      # @example
+      #   require "google/cloud/vision"
+      #
+      #   vision = Google::Cloud::Vision.new
+      #
+      #   image = vision.image "path/to/landmark.jpg"
+      #
+      #   landmark = image.landmark
+      #   landmark.description #=> "Mount Rushmore"
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
+                   timeout: nil
+        project ||= Google::Cloud::Vision::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Vision::Credentials.default scope: scope
+        else
+          credentials = Google::Cloud::Vision::Credentials.new \
+            keyfile, scope: scope
+        end
+
+        Google::Cloud::Vision::Project.new(
+          Google::Cloud::Vision::Service.new(
+            project, credentials, retries: retries, timeout: timeout))
+      end
     end
   end
 end

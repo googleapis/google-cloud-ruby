@@ -21,10 +21,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/speech"
 
-gcloud = Google::Cloud.new
-speech = gcloud.speech
+speech = Google::Cloud::Speech.new
 
 audio = speech.audio "path/to/audio.raw",
                      encoding: :raw, sample_rate: 16000
@@ -61,4 +60,3 @@ This library is licensed under Apache 2.0. Full license text is available in [LI
 
 Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
 Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
-

@@ -38,10 +38,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #
           #   projects = resource_manager.projects
           #   if projects.next?
@@ -58,10 +57,9 @@ module Google
           # @return [Project::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #
           #   projects = resource_manager.projects
           #   if projects.next?
@@ -93,10 +91,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each project by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   projects = resource_manager.projects
           #
           #   projects.all do |project|
@@ -104,10 +101,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   projects = resource_manager.projects
           #
           #   all_project_ids = projects.all.map do |project|
@@ -115,10 +111,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   projects = resource_manager.projects
           #
           #   projects.all(request_limit: 10) do |project|

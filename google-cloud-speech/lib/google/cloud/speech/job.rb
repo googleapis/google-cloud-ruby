@@ -33,10 +33,9 @@ module Google
       #   Long-running Operation
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/speech"
       #
-      #   gcloud = Google::Cloud.new
-      #   speech = gcloud.speech
+      #   speech = Google::Cloud::Speech.new
       #
       #   job = speech.recognize_job "path/to/audio.raw",
       #                              encoding: :raw, sample_rate: 16000
@@ -69,10 +68,9 @@ module Google
         #   the job is not done this will return `nil`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
@@ -99,10 +97,9 @@ module Google
         # @return [boolean] `true` when complete, `false` otherwise.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
@@ -118,10 +115,9 @@ module Google
         # processing of a speech-recognition operation.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000
@@ -141,10 +137,9 @@ module Google
         # reloads will incrementally increase.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/speech"
         #
-        #   gcloud = Google::Cloud.new
-        #   speech = gcloud.speech
+        #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
         #                              encoding: :raw, sample_rate: 16000

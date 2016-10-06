@@ -21,10 +21,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/vision"
 
-gcloud = Google::Cloud.new
-vision = gcloud.vision
+vision = Google::Cloud::Vision.new
 
 image = vision.image "path/to/landmark.jpg"
 

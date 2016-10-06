@@ -103,4 +103,48 @@ describe Google::Cloud do
       end
     end
   end
+
+  describe "Translate.new" do
+    it "gets defaults for api_key" do
+      stubbed_env = ->(name) {
+        "found-api-key" if name == "GOOGLE_CLOUD_KEY"
+      }
+      stubbed_service = ->(key, retries: nil, timeout: nil) {
+        key.must_equal "found-api-key"
+        retries.must_equal nil
+        timeout.must_equal nil
+        OpenStruct.new key: key
+      }
+
+      # Clear all environment variables
+      # ENV.stub :[], nil do
+      ENV.stub :[], stubbed_env do
+        Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          translate = Google::Cloud::Translate.new
+          translate.must_be_kind_of Google::Cloud::Translate::Api
+          translate.service.must_be_kind_of OpenStruct
+          translate.service.key.must_equal "found-api-key"
+        end
+      end
+    end
+
+    it "uses provided project_id and keyfile" do
+      stubbed_service = ->(key, retries: nil, timeout: nil) {
+        key.must_equal "my-api-key"
+        retries.must_equal nil
+        timeout.must_equal nil
+        OpenStruct.new key: key
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          translate = Google::Cloud::Translate.new key: "my-api-key"
+          translate.must_be_kind_of Google::Cloud::Translate::Api
+          translate.service.must_be_kind_of OpenStruct
+          translate.service.key.must_equal "my-api-key"
+        end
+      end
+    end
+  end
 end

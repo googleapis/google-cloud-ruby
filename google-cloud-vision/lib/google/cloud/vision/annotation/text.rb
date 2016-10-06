@@ -25,10 +25,9 @@ module Google
         # The result of text, or optical character recognition (OCR), detection.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/text.png"
         #
@@ -136,10 +135,9 @@ module Google
           # A word within a detected text (OCR). See {Text}.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/text.png"
           #   text = image.text

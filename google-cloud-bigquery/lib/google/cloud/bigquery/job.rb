@@ -40,10 +40,9 @@ module Google
       #   reference
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #
       #   q = "SELECT COUNT(word) as count FROM publicdata:samples.shakespeare"
       #   job = bigquery.query_job q
@@ -228,10 +227,9 @@ module Google
         # The delay between refreshes will incrementally increase.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #

@@ -25,10 +25,9 @@ module Google
       # Represents a Pub/Sub {Message} that can be acknowledged or delayed.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   received_message = sub.pull.first
@@ -90,10 +89,9 @@ module Google
         # Acknowledges receipt of the message.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_message = sub.pull.first
@@ -121,10 +119,9 @@ module Google
         #   the message available for another pull request.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_message = sub.pull.first

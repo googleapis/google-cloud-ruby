@@ -44,10 +44,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #   files = bucket.files
@@ -65,10 +64,9 @@ module Google
           # @return [File::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #   files = bucket.files
@@ -107,10 +105,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each file by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #   files = bucket.files
@@ -119,10 +116,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #   files = bucket.files
@@ -132,10 +128,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #   files = bucket.files

@@ -36,10 +36,9 @@ module Google
       # See {Google::Cloud#pubsub}
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
@@ -58,11 +57,12 @@ module Google
         # The Pub/Sub project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                       "/path/to/keyfile.json"
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   pubsub.project #=> "my-todo-project"
         #
@@ -103,38 +103,33 @@ module Google
         #   `autocreate` is set to `true`.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "existing-topic"
         #
         # @example By default `nil` will be returned if topic does not exist.
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "non-existing-topic" #=> nil
         #
         # @example With the `autocreate` option set to `true`.
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "non-existing-topic", autocreate: true
         #
         # @example Create topic in a different project with the `project` flag.
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", project: "another-project"
         #
         # @example Skip the lookup against the service with `skip_lookup`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
         def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
@@ -158,10 +153,9 @@ module Google
         # @return [Google::Cloud::Pubsub::Topic]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.create_topic "my-topic"
         #
         def create_topic topic_name
@@ -183,10 +177,9 @@ module Google
         #   {Google::Cloud::Pubsub::Topic::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topics = pubsub.topics
         #   topics.each do |topic|
@@ -194,10 +187,9 @@ module Google
         #   end
         #
         # @example Retrieve all topics: (See {Topic::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topics = pubsub.topics
         #   topics.all do |topic|
@@ -235,35 +227,31 @@ module Google
         #   block.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msg = pubsub.publish "my-topic", "new-message"
         #
         # @example A message can be published using a File object:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msg = pubsub.publish "my-topic", File.open("message.txt")
         #
         # @example Additionally, a message can be published with attributes:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msg = pubsub.publish "my-topic", "new-message", foo: :bar,
         #                                                   this: :that
         #
         # @example Multiple messages can be sent at the same time using a block:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msgs = pubsub.publish "my-topic" do |p|
         #     p.publish "new-message-1", foo: :bar
@@ -272,10 +260,9 @@ module Google
         #   end
         #
         # @example With `autocreate`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msg = pubsub.publish "new-topic", "new-message", autocreate: true
         #
@@ -316,38 +303,34 @@ module Google
         # @return [Google::Cloud::Pubsub::Subscription]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscribe "my-topic", "my-topic-sub"
         #   puts sub.name # => "my-topic-sub"
         #
         # @example The name is optional, and will be generated if not given.
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscribe "my-topic"
         #   puts sub.name # => "generated-sub-name"
         #
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscribe "my-topic", "my-topic-sub",
         #                          deadline: 120,
         #                          endpoint: "https://example.com/push"
         #
         # @example With `autocreate`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscribe "new-topic", "new-topic-sub",
         #                          autocreate: true
@@ -387,19 +370,17 @@ module Google
         #   the subscription does not exist
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   subscription = pubsub.subscription "my-sub"
         #   puts subscription.name
         #
         # @example Skip the lookup against the service with `skip_lookup`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   # No API call is made to retrieve the subscription information.
         #   subscription = pubsub.subscription "my-sub", skip_lookup: true
@@ -430,10 +411,9 @@ module Google
         #   {Google::Cloud::Pubsub::Subscription::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   subscriptions = pubsub.subscriptions
         #   subscriptions.each do |subscription|
@@ -441,10 +421,9 @@ module Google
         #   end
         #
         # @example Retrieve all subscriptions: (See {Subscription::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   subscriptions = pubsub.subscriptions
         #   subscriptions.all do |subscription|

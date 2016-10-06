@@ -22,10 +22,9 @@ module Google
       # A (mostly) API-compatible logger for ruby's Logger.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #
       #   resource = logging.resource "gae_app",
       #                               module_id: "1",
@@ -71,10 +70,9 @@ module Google
         #   used in place of a ruby standard library logger object.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   writer = logging.async_writer max_queue_size: 1000
         #
@@ -279,10 +277,9 @@ module Google
         #   name of the severity level
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   resource = logging.resource "gae_app",
         #                               module_id: "1",

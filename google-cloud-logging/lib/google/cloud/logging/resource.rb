@@ -30,10 +30,9 @@ module Google
       # {Google::Cloud::Logging::Project#write_entries}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #   resource = logging.resource "gae_app",
       #                               "module_id" => "1",
       #                               "version_id" => "20150925t173233"

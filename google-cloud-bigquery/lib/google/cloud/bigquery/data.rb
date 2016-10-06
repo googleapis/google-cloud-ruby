@@ -71,10 +71,9 @@ module Google
         # @return [Boolean]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   table = dataset.table "my_table"
         #
         #   data = table.data
@@ -92,10 +91,9 @@ module Google
         # @return [Data]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   table = dataset.table "my_table"
         #
         #   data = table.data
@@ -128,10 +126,9 @@ module Google
         # @return [Enumerator]
         #
         # @example Iterating each rows by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   table = dataset.table "my_table"
         #
         #   table.data.all do |row|
@@ -139,10 +136,9 @@ module Google
         #   end
         #
         # @example Using the enumerator by not passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   table = dataset.table "my_table"
         #
         #   words = table.data.all.map do |row|
@@ -150,10 +146,9 @@ module Google
         #   end
         #
         # @example Limit the number of API calls made:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #   table = dataset.table "my_table"
         #
         #   table.data.all(request_limit: 10) do |row|

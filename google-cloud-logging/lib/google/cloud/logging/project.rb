@@ -38,10 +38,9 @@ module Google
       # {Google::Cloud#logging}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/logging"
       #
-      #   gcloud = Google::Cloud.new
-      #   logging = gcloud.logging
+      #   logging = Google::Cloud::Logging.new
       #   entries = logging.entries
       #
       # See Google::Cloud#logging
@@ -62,10 +61,12 @@ module Google
         # @return [String] the Google Cloud project ID
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new "my-project", "/path/to/keyfile.json"
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new(
+        #     project: "my-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   logging.project #=> "my-project"
         #
@@ -105,40 +106,36 @@ module Google
         #   {Google::Cloud::Logging::Entry::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   entries = logging.entries
         #   entries.each do |e|
         #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
         #   end
         #
         # @example You can use a filter to narrow results to a single log.
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   entries = logging.entries filter: "log:syslog"
         #   entries.each do |e|
         #     puts "[#{e.timestamp}] #{e.payload.inspect}"
         #   end
         #
         # @example You can also order the results by timestamp.
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   entries = logging.entries order: "timestamp desc"
         #   entries.each do |e|
         #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
         #   end
         #
         # @example Retrieve all log entries: (See {Entry::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   entries = logging.entries
         #
         #   entries.all do |e|
@@ -185,10 +182,9 @@ module Google
         # @return [Google::Cloud::Logging::Entry] a new Entry instance
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry severity: :INFO, payload: "Job started."
         #
@@ -233,10 +229,9 @@ module Google
         # @return [Boolean] Returns `true` if the entries were written.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry = logging.entry payload: "Job started.",
         #                         log_name: "my_app_log"
@@ -247,10 +242,9 @@ module Google
         #   logging.write_entries entry
         #
         # @example Optionally pass log name, resource, and labels for entries.
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   entry1 = logging.entry payload: "Job started."
         #   entry2 = logging.entry payload: "Job completed."
@@ -292,10 +286,9 @@ module Google
         #   keep up with requests.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   async = logging.async_writer
         #
@@ -321,10 +314,9 @@ module Google
         # called multiple times, it will return the same object.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   async = logging.shared_async_writer
         #
@@ -363,10 +355,9 @@ module Google
         #   used in place of a ruby standard library logger object.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   resource = logging.resource "gae_app",
         #                               module_id: "1",
@@ -393,10 +384,9 @@ module Google
         #   were deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   logging.delete_log "my_app_log"
         #
         def delete_log name
@@ -420,10 +410,9 @@ module Google
         #   {Google::Cloud::Logging::ResourceDescriptor::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   resource_descriptors = logging.resource_descriptors
         #   resource_descriptors.each do |rd|
         #     label_keys = rd.labels.map(&:key).join(", ")
@@ -431,10 +420,9 @@ module Google
         #   end
         #
         # @example Pagination:
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   resource_descriptors = logging.resource_descriptors
         #
         #   resource_descriptors.all do |rd|
@@ -459,10 +447,9 @@ module Google
         # @return [Google::Cloud::Logging::Resource]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #
         #   resource = logging.resource "gae_app",
         #                               "module_id" => "1",
@@ -487,20 +474,18 @@ module Google
         #   {Google::Cloud::Logging::Sink::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sinks = logging.sinks
         #   sinks.each do |s|
         #     puts "#{s.name}: #{s.filter} -> #{s.destination}"
         #   end
         #
         # @example Retrieve all sinks: (See {Sink::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sinks = logging.sinks
         #
         #   sinks.all do |s|
@@ -558,17 +543,19 @@ module Google
         # @return [Google::Cloud::Logging::Sink] a project sink
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.create_bucket "my-logs-bucket"
         #
         #   # Grant owner permission to Stackdriver Logging service
         #   email = "cloud-logs@google.com"
         #   bucket.acl.add_owner "group-#{email}"
+        #
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
         #
         #   sink = logging.create_sink "my-sink",
         #                              "storage.googleapis.com/#{bucket.id}"
@@ -590,17 +577,15 @@ module Google
         #   does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sink = logging.sink "existing-sink"
         #
         # @example By default `nil` will be returned if the sink does not exist.
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   sink = logging.sink "non-existing-sink" #=> nil
         #
         def sink sink_name
@@ -624,20 +609,18 @@ module Google
         #   {Google::Cloud::Logging::Metric::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metrics = logging.metrics
         #   metrics.each do |m|
         #     puts "#{m.name}: #{m.filter}"
         #   end
         #
         # @example Retrieve all metrics: (See {Metric::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metrics = logging.metrics
         #
         #   metrics.all do |m|
@@ -672,10 +655,9 @@ module Google
         # @return [Google::Cloud::Logging::Metric]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.create_metric "errors", "severity>=ERROR"
         #
         def create_metric name, filter, description: nil
@@ -694,17 +676,15 @@ module Google
         #   does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.metric "existing_metric"
         #
         # @example By default `nil` will be returned if metric does not exist.
-        #   require "google/cloud"
+        #   require "google/cloud/logging"
         #
-        #   gcloud = Google::Cloud.new
-        #   logging = gcloud.logging
+        #   logging = Google::Cloud::Logging.new
         #   metric = logging.metric "non_existing_metric" #=> nil
         #
         def metric name

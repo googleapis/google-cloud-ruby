@@ -28,10 +28,9 @@ module Google
       # Represents a Storage bucket. Belongs to a Project and has many Files.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/storage"
       #
-      #   gcloud = Google::Cloud.new
-      #   storage = gcloud.storage
+      #   storage = Google::Cloud::Storage.new
       #
       #   bucket = storage.bucket "my-bucket"
       #   file = bucket.file "path/to/my-file.ext"
@@ -101,10 +100,9 @@ module Google
         # @yieldparam [Bucket::Cors] cors the object accepting CORS rules
         #
         # @example Retrieving the bucket's CORS rules.
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   bucket.cors #=> [{"origin"=>["http://example.org"],
@@ -113,10 +111,9 @@ module Google
         #               #     "maxAgeSeconds"=>3600}]
         #
         # @example Updating the bucket's CORS rules inside a block.
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
         #   bucket.update do |b|
@@ -287,10 +284,9 @@ module Google
         #   file
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #   bucket.update do |b|
@@ -301,10 +297,9 @@ module Google
         #   end
         #
         # @example New CORS rules can also be added in a nested block:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
         #   bucket.update do |b|
@@ -334,10 +329,9 @@ module Google
         # @return [Boolean] Returns `true` if the bucket was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #   bucket.delete
@@ -374,10 +368,9 @@ module Google
         #   {Google::Cloud::Storage::File::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #   files = bucket.files
@@ -386,10 +379,9 @@ module Google
         #   end
         #
         # @example Retrieve all files: (See {File::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #   files = bucket.files
@@ -438,10 +430,9 @@ module Google
         #   not exist
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -539,20 +530,18 @@ module Google
         # @return [Google::Cloud::Storage::File]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.create_file "path/to/local.file.ext"
         #
         # @example Specifying a destination path:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -560,11 +549,10 @@ module Google
         #                      "destination/path/file.ext"
         #
         # @example Providing a customer-supplied encryption key:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #   require "digest/sha2"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #
         #   # Key generation shown for example purposes only. Write your own.
@@ -615,10 +603,9 @@ module Google
         #   Control guide
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
@@ -626,10 +613,9 @@ module Google
         #   bucket.acl.add_reader "user-#{email}"
         #
         # @example Grant access to a group by prepending `"group-"` to an email:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
@@ -637,10 +623,9 @@ module Google
         #   bucket.acl.add_reader "group-#{email}"
         #
         # @example Or, grant access via a predefined permissions list:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
@@ -662,10 +647,9 @@ module Google
         #   Control guide
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
@@ -673,10 +657,9 @@ module Google
         #   bucket.default_acl.add_reader "user-#{email}"
         #
         # @example Grant access to a group by prepending `"group-"` to an email
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
@@ -684,10 +667,9 @@ module Google
         #   bucket.default_acl.add_reader "group-#{email}"
         #
         # @example Or, grant access via a predefined permissions list:
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #

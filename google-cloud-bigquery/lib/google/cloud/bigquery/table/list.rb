@@ -45,10 +45,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   tables = dataset.tables
@@ -66,10 +65,9 @@ module Google
           # @return [Table::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   tables = dataset.tables
@@ -104,10 +102,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each result by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.tables.all do |table|
@@ -115,10 +112,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   all_names = dataset.tables.all.map do |table|
@@ -126,10 +122,9 @@ module Google
           #   end
           #
           # @example Limit the number of API requests made:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.tables.all(request_limit: 10) do |table|

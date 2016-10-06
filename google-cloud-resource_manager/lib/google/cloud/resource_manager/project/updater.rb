@@ -26,10 +26,9 @@ module Google
         # methods are used to update the project data in a single API call.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/resource_manager"
         #
-        #   gcloud = Google::Cloud.new
-        #   resource_manager = gcloud.resource_manager
+        #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #   project.update do |p|
         #     p.name = "My Project"
@@ -51,10 +50,9 @@ module Google
           # hyphen, single-quote, double-quote, space, and exclamation point.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   project = resource_manager.project "tokyo-rain-123"
           #   project.update do |p|
           #     p.name = "My Project"
@@ -79,10 +77,9 @@ module Google
           # (`Hash`)
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   project = resource_manager.project "tokyo-rain-123"
           #   project.update do |p|
           #     p.labels["env"] = "production"
@@ -107,10 +104,9 @@ module Google
           # (`Hash`)
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/resource_manager"
           #
-          #   gcloud = Google::Cloud.new
-          #   resource_manager = gcloud.resource_manager
+          #   resource_manager = Google::Cloud::ResourceManager.new
           #   project = resource_manager.project "tokyo-rain-123"
           #   project.update do |p|
           #     p.labels = { "env" => "production" }

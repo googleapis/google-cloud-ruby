@@ -23,11 +23,12 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/datastore"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-datastore = gcloud.datastore
+datastore = Google::Cloud::Datastore.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Create a new task to demo datastore
 task = datastore.entity "Task", "sampleTask" do |t|

@@ -53,10 +53,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/resource_manager"
 
-gcloud = Google::Cloud.new
-resource_manager = gcloud.resource_manager
+resource_manager = Google::Cloud::ResourceManager.new
 
 # List all projects
 resource_manager.projects.each do |project|

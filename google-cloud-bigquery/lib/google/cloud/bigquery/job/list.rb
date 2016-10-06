@@ -42,10 +42,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   jobs = bigquery.jobs
           #   if jobs.next?
@@ -61,10 +60,9 @@ module Google
           # @return [Job::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   jobs = bigquery.jobs
           #   if jobs.next?
@@ -97,30 +95,27 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each job by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.jobs.all do |job|
           #     puts job.state
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   all_states = bigquery.jobs.all.map do |job|
           #     job.state
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/bigquery"
           #
-          #   gcloud = Google::Cloud.new
-          #   bigquery = gcloud.bigquery
+          #   bigquery = Google::Cloud::Bigquery.new
           #
           #   bigquery.jobs.all(request_limit: 10) do |job|
           #     puts job.state

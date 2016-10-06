@@ -39,10 +39,9 @@ module Google
           # @return [Boolean]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   entries = logging.entries
           #   if entries.next?
@@ -59,10 +58,9 @@ module Google
           # @return [Sink::List]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #
           #   entries = dataset.entries
           #   if entries.next?
@@ -97,10 +95,9 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each log entry by passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   entries = logging.entries order: "timestamp desc"
           #
           #   entries.all do |entry|
@@ -108,10 +105,9 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   entries = logging.entries order: "timestamp desc"
           #
           #   all_payloads = entries.all.map do |entry|
@@ -119,10 +115,9 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
-          #   require "google/cloud"
+          #   require "google/cloud/logging"
           #
-          #   gcloud = Google::Cloud.new
-          #   logging = gcloud.logging
+          #   logging = Google::Cloud::Logging.new
           #   entries = logging.entries order: "timestamp desc"
           #
           #   entries.all(request_limit: 10) do |entry|

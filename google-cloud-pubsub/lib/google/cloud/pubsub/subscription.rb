@@ -27,10 +27,9 @@ module Google
       # specific {Topic}, to be delivered to the subscribing application.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/pubsub"
       #
-      #   gcloud = Google::Cloud.new
-      #   pubsub = gcloud.pubsub
+      #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   msgs = sub.pull
@@ -77,10 +76,9 @@ module Google
         # @return [Topic]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.topic.name #=> "projects/my-project/topics/my-topic"
@@ -122,10 +120,9 @@ module Google
         # Determines whether the subscription exists in the Pub/Sub service.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.exists? #=> true
@@ -147,10 +144,9 @@ module Google
         # HTTP call.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.get_subscription "my-topic-sub"
         #   sub.lazy? #=> false
@@ -166,10 +162,9 @@ module Google
         # @return [Boolean] Returns `true` if the subscription was deleted.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.delete
@@ -200,28 +195,25 @@ module Google
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.pull.each { |msg| msg.acknowledge! }
         #
         # @example A maximum number of messages returned can also be specified:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub", max: 10
         #   sub.pull.each { |msg| msg.acknowledge! }
         #
         # @example The call can block until messages are available:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   msgs = sub.pull immediate: false
@@ -255,10 +247,9 @@ module Google
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   msgs = sub.wait_for_messages
@@ -285,10 +276,9 @@ module Google
         # @yieldparam [ReceivedMessage] msg the newly received message
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.listen do |msg|
@@ -296,10 +286,9 @@ module Google
         #   end
         #
         # @example Limit number of messages pulled per API request with `max`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.listen max: 20 do |msg|
@@ -307,10 +296,9 @@ module Google
         #   end
         #
         # @example Automatically acknowledge messages with `autoack`:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.listen autoack: true do |msg|
@@ -340,10 +328,9 @@ module Google
         #   {ReceivedMessage} objects or ack_id values.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   messages = sub.pull
@@ -374,10 +361,9 @@ module Google
         #   {ReceivedMessage} objects or ack_id values.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   messages = sub.pull
@@ -412,30 +398,27 @@ module Google
         # @return [Policy] the current Cloud IAM Policy for this subscription
         #
         # @example Policy values are memoized to reduce the number of API calls:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy # API call
         #   policy_2 = sub.policy # No API call
         #
         # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy force: true # API call
         #   policy_2 = sub.policy force: true # API call
         #
         # @example Update the policy by passing a block:
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy do |p|
@@ -471,10 +454,9 @@ module Google
         #   subscription
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy # API call
@@ -512,10 +494,9 @@ module Google
         # @return [Array<String>] The permissions that have access.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/pubsub"
         #
-        #   gcloud = Google::Cloud.new
-        #   pubsub = gcloud.pubsub
+        #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #   perms = sub.test_permissions "pubsub.subscriptions.get",
         #                                "pubsub.subscriptions.consume"

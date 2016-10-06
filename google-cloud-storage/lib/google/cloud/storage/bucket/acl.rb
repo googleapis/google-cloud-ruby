@@ -23,10 +23,9 @@ module Google
         # Represents a Bucket's Access Control List.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -64,10 +63,9 @@ module Google
           # Reloads all Access Control List data for the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -88,10 +86,9 @@ module Google
           # @return [Array<String>]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -108,10 +105,9 @@ module Google
           # @return [Array<String>]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -128,10 +124,9 @@ module Google
           # @return [Array<String>]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -158,10 +153,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -169,10 +163,9 @@ module Google
           #   bucket.acl.add_owner "user-#{email}"
           #
           # @example Grant access to a group by prepending `"group-"` to email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -202,10 +195,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -213,10 +205,9 @@ module Google
           #   bucket.acl.add_writer "user-#{email}"
           #
           # @example Grant access to a group by prepending `"group-"` to email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -246,10 +237,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -257,10 +247,9 @@ module Google
           #   bucket.acl.add_reader "user-#{email}"
           #
           # @example Grant access to a group by prepending `"group-"` to email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -291,10 +280,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -321,10 +309,9 @@ module Google
           # rule to the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -343,10 +330,9 @@ module Google
           # rule to the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -361,10 +347,9 @@ module Google
           # rule to the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -380,10 +365,9 @@ module Google
           # rule to the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -399,10 +383,9 @@ module Google
           # rule to the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -440,10 +423,9 @@ module Google
         # Represents a Bucket's Default Access Control List.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/storage"
         #
-        #   gcloud = Google::Cloud.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
@@ -481,10 +463,9 @@ module Google
           # Reloads all Default Access Control List data for the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -510,10 +491,9 @@ module Google
           # @return [Array<String>]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -530,10 +510,9 @@ module Google
           # @return [Array<String>]
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -560,10 +539,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -571,10 +549,9 @@ module Google
           #   bucket.default_acl.add_owner "user-#{email}"
           #
           # @example Grant access to a group by prepending `"group-"` to email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -604,10 +581,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -615,10 +591,9 @@ module Google
           #   bucket.default_acl.add_reader "user-#{email}"
           #
           # @example Grant access to a group by prepending `"group-"` to email:
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -649,10 +624,9 @@ module Google
           #   * allAuthenticatedUsers
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -678,10 +652,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -700,10 +673,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -719,10 +691,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -738,10 +709,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -756,10 +726,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #
@@ -775,10 +744,9 @@ module Google
           # predefined ACL rule to files in the bucket.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/storage"
           #
-          #   gcloud = Google::Cloud.new
-          #   storage = gcloud.storage
+          #   storage = Google::Cloud::Storage.new
           #
           #   bucket = storage.bucket "my-bucket"
           #

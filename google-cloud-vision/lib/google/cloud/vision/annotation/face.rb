@@ -27,10 +27,9 @@ module Google
         # See {Annotation#faces} and {Annotation#face}.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/vision"
         #
-        #   gcloud = Google::Cloud.new
-        #   vision = gcloud.vision
+        #   vision = Google::Cloud::Vision.new
         #
         #   image = vision.image "path/to/face.jpg"
         #
@@ -131,10 +130,9 @@ module Google
           # See {Face}.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/face.jpg"
           #   face = image.face
@@ -233,10 +231,9 @@ module Google
           # See {Face}.
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/face.jpg"
           #   face = image.face
@@ -333,10 +330,9 @@ module Google
           #   images.annotate Type
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/face.jpg"
           #   face = image.face
@@ -380,10 +376,9 @@ module Google
             # @return [Landmark]
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -540,10 +535,9 @@ module Google
             # See {Features} and {Face}.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -574,10 +568,9 @@ module Google
               # @return [String]
               #
               # @example
-              #   require "google/cloud"
+              #   require "google/cloud/vision"
               #
-              #   gcloud = Google::Cloud.new
-              #   vision = gcloud.vision
+              #   vision = Google::Cloud::Vision.new
               #
               #   image = vision.image "path/to/face.jpg"
               #   face = image.face
@@ -670,10 +663,9 @@ module Google
             # @attr_reader [Landmark] right The chin, right gonion.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -742,10 +734,9 @@ module Google
             #   images.annotate Type
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -811,10 +802,9 @@ module Google
             #   images.annotate Type
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -883,10 +873,9 @@ module Google
             # @attr_reader [Landmark] right The eyebrow, right.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -956,10 +945,9 @@ module Google
             # @attr_reader [Eye] right The right eye.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -1031,10 +1019,9 @@ module Google
             # @attr_reader [Landmark] right The eye, right corner.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -1105,10 +1092,9 @@ module Google
             # @attr_reader [Landmark] bottom The lower lip.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -1179,10 +1165,9 @@ module Google
             # @attr_reader [Landmark] right TThe mouth, right.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -1254,10 +1239,9 @@ module Google
             # @attr_reader [Landmark] right The nose, bottom right.
             #
             # @example
-            #   require "google/cloud"
+            #   require "google/cloud/vision"
             #
-            #   gcloud = Google::Cloud.new
-            #   vision = gcloud.vision
+            #   vision = Google::Cloud::Vision.new
             #
             #   image = vision.image "path/to/face.jpg"
             #   face = image.face
@@ -1327,10 +1311,9 @@ module Google
           #   images.annotate Likelihood
           #
           # @example
-          #   require "google/cloud"
+          #   require "google/cloud/vision"
           #
-          #   gcloud = Google::Cloud.new
-          #   vision = gcloud.vision
+          #   vision = Google::Cloud::Vision.new
           #
           #   image = vision.image "path/to/face.jpg"
           #   face = image.face

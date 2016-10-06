@@ -44,10 +44,9 @@ module Google
       #   Can only be present if the project was retrieved with {#projects}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigquery"
       #
-      #   gcloud = Google::Cloud.new
-      #   bigquery = gcloud.bigquery
+      #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
@@ -70,11 +69,12 @@ module Google
         # The BigQuery project connected to.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new "my-todo-project",
-        #                              "/path/to/keyfile.json"
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   bigquery.project #=> "my-todo-project"
         #
@@ -139,10 +139,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "[my_proj:my_data.my_table]"
@@ -206,10 +205,9 @@ module Google
         # @return [Google::Cloud::Bigquery::QueryData]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
         #   data.each do |row|
@@ -217,10 +215,9 @@ module Google
         #   end
         #
         # @example Retrieve all rows: (See {QueryData#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
         #   data.all do |row|
@@ -245,10 +242,9 @@ module Google
         #   dataset does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
@@ -282,37 +278,33 @@ module Google
         # @return [Google::Cloud::Bigquery::Dataset]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset"
         #
         # @example A name and description can be provided:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset",
         #                                     name: "My Dataset",
         #                                     description: "This is my Dataset"
         #
         # @example Access rules can be provided with the `access` option:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset",
         #     access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
         #
         # @example Or, configure access with a block: (See {Dataset::Access})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset" do |access|
         #     access.add_writer_user "writers@example.com"
@@ -357,10 +349,9 @@ module Google
         #   {Google::Cloud::Bigquery::Dataset::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   datasets = bigquery.datasets
         #   datasets.each do |dataset|
@@ -368,18 +359,16 @@ module Google
         #   end
         #
         # @example Retrieve hidden datasets with the `all` optional arg:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   all_datasets = bigquery.datasets all: true
         #
         # @example Retrieve all datasets: (See {Dataset::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   datasets = bigquery.datasets
         #   datasets.all do |dataset|
@@ -402,10 +391,9 @@ module Google
         #   does not exist.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.job "my_job"
         #
@@ -437,10 +425,9 @@ module Google
         #   {Google::Cloud::Bigquery::Job::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   jobs = bigquery.jobs
         #   jobs.each do |job|
@@ -448,10 +435,9 @@ module Google
         #   end
         #
         # @example Retrieve only running jobs using the `filter` optional arg:
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   running_jobs = bigquery.jobs filter: "running"
         #   running_jobs.each do |job|
@@ -459,10 +445,9 @@ module Google
         #   end
         #
         # @example Retrieve all jobs: (See {Job::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   jobs = bigquery.jobs
         #   jobs.all do |job|
@@ -491,10 +476,9 @@ module Google
         #   {Google::Cloud::Bigquery::Project::List})
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   projects = bigquery.projects
         #   projects.each do |project|
@@ -505,10 +489,9 @@ module Google
         #   end
         #
         # @example Retrieve all projects: (See {Project::List#all})
-        #   require "google/cloud"
+        #   require "google/cloud/bigquery"
         #
-        #   gcloud = Google::Cloud.new
-        #   bigquery = gcloud.bigquery
+        #   bigquery = Google::Cloud::Bigquery.new
         #
         #   projects = bigquery.projects
         #
