@@ -21,10 +21,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/dns"
 
-gcloud = Google::Cloud.new
-dns = gcloud.dns
+dns = Google::Cloud::Dns.new
 
 # Retrieve a zone
 zone = dns.zone "example-com"

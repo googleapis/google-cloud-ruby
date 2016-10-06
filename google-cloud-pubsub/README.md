@@ -21,11 +21,12 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/pubsub"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-pubsub = gcloud.pubsub
+pubsub = Google::Cloud::Pubsub.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Retrieve a topic
 topic = pubsub.topic "my-topic"

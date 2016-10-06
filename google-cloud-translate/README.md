@@ -29,10 +29,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/translate"
 
-gcloud = Google::Cloud.new
-translate = gcloud.translate
+translate = Google::Cloud::Translate.new
 
 translation = translate.translate "Hello world!", to: "la"
 

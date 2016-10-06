@@ -21,11 +21,12 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/storage"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-storage = gcloud.storage
+storage = Google::Cloud::Storage.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 bucket = storage.bucket "task-attachments"
 

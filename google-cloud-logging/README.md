@@ -21,10 +21,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/logging"
 
-gcloud = Google::Cloud.new
-logging = gcloud.logging
+logging = Google::Cloud::Logging.new
 
 # List all log entries
 logging.entries.each do |e|

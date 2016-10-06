@@ -62,11 +62,12 @@ $ gem install google-cloud-bigquery
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/bigquery"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-bigquery = gcloud.bigquery
+bigquery = Google::Cloud::Bigquery.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Create a new table to archive todos
 dataset = bigquery.dataset "my-todo-archive"
@@ -104,11 +105,12 @@ $ gem install google-cloud-datastore
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/datastore"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-datastore = gcloud.datastore
+datastore = Google::Cloud::Datastore.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Create a new task to demo datastore
 task = datastore.entity "Task", "sampleTask" do |t|
@@ -143,10 +145,9 @@ $ gem install google-cloud-dns
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/dns"
 
-gcloud = Google::Cloud.new
-dns = gcloud.dns
+dns = Google::Cloud::Dns.new
 
 # Retrieve a zone
 zone = dns.zone "example-com"
@@ -180,10 +181,9 @@ $ gem install google-cloud-logging
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/logging"
 
-gcloud = Google::Cloud.new
-logging = gcloud.logging
+logging = Google::Cloud::Logging.new
 
 # List all log entries
 logging.entries.each do |e|
@@ -220,10 +220,9 @@ $ gem install google-cloud-language
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/language"
 
-gcloud = Google::Cloud.new
-language = gcloud.language
+language = Google::Cloud::Language.new
 
 content = "Darth Vader is the best villain in Star Wars."
 document = language.document content
@@ -252,11 +251,12 @@ $ gem install google-cloud-pubsub
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/pubsub"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-pubsub = gcloud.pubsub
+pubsub = Google::Cloud::Pubsub.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 # Retrieve a topic
 topic = pubsub.topic "my-topic"
@@ -287,10 +287,9 @@ $ gem install google-cloud-resource_manager
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/resource_manager"
 
-gcloud = Google::Cloud.new
-resource_manager = gcloud.resource_manager
+resource_manager = Google::Cloud::ResourceManager.new
 
 # List all projects
 resource_manager.projects.each do |project|
@@ -323,10 +322,9 @@ $ gem install google-cloud-speech
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/speech"
 
-gcloud = Google::Cloud.new
-speech = gcloud.speech
+speech = Google::Cloud::Speech.new
 
 audio = speech.audio "path/to/audio.raw",
                      encoding: :raw, sample_rate: 16000
@@ -353,11 +351,12 @@ $ gem install google-cloud-storage
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/storage"
 
-gcloud = Google::Cloud.new "my-todo-project-id",
-                    "/path/to/keyfile.json"
-storage = gcloud.storage
+storage = Google::Cloud::Storage.new(
+  project: "my-todo-project",
+  keyfile: "/path/to/keyfile.json"
+)
 
 bucket = storage.bucket "task-attachments"
 
@@ -387,10 +386,9 @@ $ gem install google-cloud-translate
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/translate"
 
-gcloud = Google::Cloud.new
-translate = gcloud.translate
+translate = Google::Cloud::Translate.new
 
 translation = translate.translate "Hello world!", to: "la"
 
@@ -418,10 +416,9 @@ $ gem install google-cloud-vision
 #### Preview
 
 ```ruby
-require "google/cloud"
+require "google/cloud/vision"
 
-gcloud = Google::Cloud.new
-vision = gcloud.vision
+vision = Google::Cloud::Vision.new
 
 image = vision.image "path/to/landmark.jpg"
 

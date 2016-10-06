@@ -23,10 +23,9 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
-require "google/cloud"
+require "google/cloud/language"
 
-gcloud = Google::Cloud.new
-language = gcloud.language
+language = Google::Cloud::Language.new
 
 content = "Darth Vader is the best villain in Star Wars."
 document = language.document content
@@ -65,4 +64,3 @@ This library is licensed under Apache 2.0. Full license text is available in [LI
 
 Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
 Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
-
