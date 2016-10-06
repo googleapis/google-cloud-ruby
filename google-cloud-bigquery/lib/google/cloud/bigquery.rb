@@ -155,8 +155,8 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # gcloud = Google::Cloud.new
-    # bigquery = gcloud.bigquery
+    # bigquery = Google::Cloud::Bigquery.new
+    #
     # dataset = bigquery.create_dataset "my_dataset"
     # ```
     #
@@ -294,7 +294,9 @@ module Google
     #
     # if !query_job.failed?
     #
-    #   storage = gcloud.storage
+    #   require "google/cloud/bigquery"
+    #
+    #   storage = Google::Cloud::Storage.new
     #   bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
     #   bucket = storage.create_bucket bucket_id
     #   extract_url = "gs://#{bucket.id}/baby-names-sam.csv"

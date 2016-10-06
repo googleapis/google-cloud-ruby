@@ -84,15 +84,16 @@ module Google
     # Or, you can initialize it with a Google Cloud Storage File object:
     #
     # ```ruby
-    # require "google/cloud/language"
+    # require "google/cloud/storage"
     #
-    # gcloud = Google::Cloud.new
-    # storage = gcloud.storage
+    # storage = Google::Cloud::Storage.new
     #
     # bucket = storage.bucket "bucket-name"
     # file = bucket.file "path/to/document"
     #
-    # language = gcloud.language
+    # require "google/cloud/language"
+    #
+    # language = Google::Cloud::Language.new
     #
     # document = language.document file
     # ```

@@ -543,16 +543,19 @@ module Google
         # @return [Google::Cloud::Logging::Sink] a project sink
         #
         # @example
-        #   require "google/cloud/logging"
+        #   require "google/cloud/storage"
         #
-        #   logging = Google::Cloud::Logging.new
-        #   storage = gcloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.create_bucket "my-logs-bucket"
         #
         #   # Grant owner permission to Stackdriver Logging service
         #   email = "cloud-logs@google.com"
         #   bucket.acl.add_owner "group-#{email}"
+        #
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
         #
         #   sink = logging.create_sink "my-sink",
         #                              "storage.googleapis.com/#{bucket.id}"
