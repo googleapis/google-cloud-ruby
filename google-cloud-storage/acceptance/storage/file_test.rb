@@ -54,6 +54,7 @@ describe Google::Cloud::Storage::File, :storage do
       metadata: { player: "Alice", score: 101 }
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
       downloaded = uploaded.download tmpfile
 
       downloaded.size.must_equal original.size
@@ -92,6 +93,7 @@ describe Google::Cloud::Storage::File, :storage do
     original = File.new files[:big][:path]
     uploaded = bucket.create_file original, "BigLogo.png"
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
       downloaded = uploaded.download tmpfile, verify: :all
 
       downloaded.size.must_equal original.size
@@ -198,6 +200,7 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.name.must_equal original.path
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
       downloaded = uploaded.download tmpfile
 
       downloaded.size.must_equal original.size
@@ -249,7 +252,9 @@ describe Google::Cloud::Storage::File, :storage do
     copied.size.must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
       Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
         downloaded1.size.must_equal downloaded2.size
