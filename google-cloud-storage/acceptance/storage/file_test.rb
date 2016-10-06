@@ -306,6 +306,7 @@ describe Google::Cloud::Storage::File, :storage do
     uri = URI url
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
+    http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
     resp = http.get uri.request_uri
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
@@ -326,6 +327,7 @@ describe Google::Cloud::Storage::File, :storage do
     uri = URI url
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
+    http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
     resp = http.delete uri.request_uri
 
     resp.code.must_equal "204"
