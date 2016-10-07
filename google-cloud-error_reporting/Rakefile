@@ -16,26 +16,69 @@
 require "bundler/setup"
 require "bundler/gem_tasks"
 
-task :test do
-end
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
 
-task :rubocop do
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each {|file| require_relative file}
 end
 
 namespace :test do
   desc "Runs tests with coverage."
   task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-error_reporting"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
   end
 end
 
 # Acceptance tests
 desc "Runs the error_reporting acceptance tests."
 task :acceptance, :project, :keyfile do |_, args|
+  project = args[:project] ||
+            ENV["GCLOUD_TEST_PROJECT"] ||
+            ENV["ERROR_REPORTING_TEST_PROJECT"]
+  keyfile = args[:keyfile] ||
+            ENV["GCLOUD_TEST_KEYFILE"] ||
+            ENV["ERROR_REPORTING_TEST_KEYFILE"]
+  service_name = ENV["ERROR_REPORTING_TEST_SERVICE"]
+  service_version = ENV["ERROR_REPORTING_TEST_VERSION"]
+
+  if project.nil? || keyfile.nil?
+    fail "You must provide project and keyfile. e.g. rake " \
+      "acceptance[test123,/path/to/keyfile.json] or " \
+      "ERROR_REPORTING_TEST_PROJECT=test123 " \
+      "ERROR_REPORTING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["ERROR_REPORTING_PROJECT"] = project
+  ENV["ERROR_REPORTING_KEYFILE"] = keyfile
+  ENV["ERROR_REPORTING_SERVICE"] = service_name
+  ENV["ERROR_REPORTING_VERSION"] = service_version
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/error_reporting/**/*_test.rb").each do |file|
+    require_relative file
+  end
 end
 
 namespace :acceptance do
   desc "Runs acceptance tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-error_reporting"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
   end
 
 
@@ -50,10 +93,32 @@ end
 
 desc "Start an interactive shell."
 task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-error_reporting"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
 end
 
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
 desc "Generates JSON output from google-cloud-datastore .yardoc"
-task :jsondoc do
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-error_reporting"
+  generator.write_to "jsondoc"
+  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
 task :default => :test
