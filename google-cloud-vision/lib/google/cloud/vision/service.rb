@@ -39,11 +39,13 @@ module Google
         end
 
         def channel
+          require "grpc"
           GRPC::Core::Channel.new host, nil, chan_creds
         end
 
         def chan_creds
           return credentials if insecure?
+          require "grpc"
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
