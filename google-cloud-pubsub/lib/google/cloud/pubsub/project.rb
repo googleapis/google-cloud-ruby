@@ -45,7 +45,7 @@ module Google
       #
       class Project
         ##
-        # @private The gRPC Service object.
+        # @private The Service object.
         attr_accessor :service
 
         ##
@@ -200,7 +200,7 @@ module Google
           ensure_service!
           options = { token: token, max: max }
           grpc = service.list_topics options
-          Topic::List.from_grpc grpc, service, max
+          Topic::List.from_grpc grpc, service
         end
         alias_method :find_topics, :topics
         alias_method :list_topics, :topics
@@ -434,7 +434,7 @@ module Google
           ensure_service!
           options = { token: token, max: max }
           grpc = service.list_subscriptions options
-          Subscription::List.from_grpc grpc, service, max
+          Subscription::List.from_grpc grpc, service
         end
         alias_method :find_subscriptions, :subscriptions
         alias_method :list_subscriptions, :subscriptions

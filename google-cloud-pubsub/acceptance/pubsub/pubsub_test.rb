@@ -38,6 +38,7 @@ describe Google::Cloud::Pubsub, :pubsub do
   end
 
   describe "Topic", :pubsub do
+
     it "should be listed" do
       topics = pubsub.topics
       topics.each do |topic|

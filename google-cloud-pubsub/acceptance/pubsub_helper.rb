@@ -19,7 +19,7 @@ require "minitest/rg"
 require "google/cloud/pubsub"
 
 # Create shared pubsub object so we don't create new for each test
-$pubsub = Google::Cloud.new.pubsub retries: 10
+$pubsub = Google::Cloud.new.pubsub
 
 module Acceptance
   ##

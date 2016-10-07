@@ -26,15 +26,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:msg_encoded3) { message3.encode("ASCII-8BIT") }
 
   it "publishes a message" do
-    publish_req = Google::Pubsub::V1::PublishRequest.new(
-      topic: topic_path(topic_name),
-      messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
-      ]
-    )
+   messages = [
+      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+    ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [publish_req]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1
@@ -46,15 +43,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes a message with multibyte characters" do
-    publish_req = Google::Pubsub::V1::PublishRequest.new(
-      topic: topic_path(topic_name),
-      messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
-      ]
-    )
+   messages = [
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+    ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [publish_req]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish "あ"
@@ -67,15 +61,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes a message using an IO-ish object" do
-    publish_req = Google::Pubsub::V1::PublishRequest.new(
-      topic: topic_path(topic_name),
-      messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
-      ]
-    )
+   messages = [
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+    ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [publish_req]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
     topic.service.mocked_publisher = mock
 
     msg = nil
@@ -94,15 +85,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes a message with attributes" do
-    publish_req = Google::Pubsub::V1::PublishRequest.new(
-      topic: topic_path(topic_name),
-      messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
-      ]
-    )
+   messages = [
+      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
+    ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [publish_req]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1, format: :text
@@ -115,17 +103,14 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   end
 
   it "publishes multiple messages with a block" do
-    publish_req = Google::Pubsub::V1::PublishRequest.new(
-      topic: topic_path(topic_name),
-      messages: [
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
-        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
-      ]
-    )
+   messages = [
+      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
+      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
+      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
+    ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [publish_req]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|
@@ -149,15 +134,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
                                                  autocreate: false }
 
     it "publishes a message" do
-      publish_req = Google::Pubsub::V1::PublishRequest.new(
-        topic: topic_path(topic_name),
-        messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
-        ]
-      )
+     messages = [
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+      ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [publish_req]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1
@@ -169,15 +151,12 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     end
 
     it "publishes a message with attributes" do
-      publish_req = Google::Pubsub::V1::PublishRequest.new(
-        topic: topic_path(topic_name),
-        messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: { "format" => "text" })
-        ]
-      )
+     messages = [
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: { "format" => "text" })
+      ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [publish_req]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1, format: :text
@@ -190,17 +169,14 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     end
 
     it "publishes multiple messages with a block" do
-      publish_req = Google::Pubsub::V1::PublishRequest.new(
-        topic: topic_path(topic_name),
-        messages: [
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
-          Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
-        ]
-      )
+     messages = [
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
+        Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
+      ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [publish_req]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
       topic.service.mocked_publisher = mock
 
       msgs = topic.publish do |batch|
@@ -227,7 +203,9 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     it "publishes a message" do
       stub = Object.new
       def stub.publish *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       pubsub.service.mocked_publisher = stub
 
@@ -239,7 +217,9 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     it "publishes a message with attributes" do
       stub = Object.new
       def stub.publish *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       pubsub.service.mocked_publisher = stub
 
@@ -251,7 +231,9 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     it "publishes multiple messages with a block" do
       stub = Object.new
       def stub.publish *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       pubsub.service.mocked_publisher = stub
 

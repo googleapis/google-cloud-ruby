@@ -19,13 +19,9 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
 
   it "creates a subscription when calling subscribe" do
-    create_req = Google::Pubsub::V1::Subscription.new(
-      name: "projects/#{project}/subscriptions/#{new_sub_name}",
-      topic: topic_path(topic_name)
-    )
     create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [create_req]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscribe topic_name, new_sub_name
@@ -45,7 +41,11 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
     def stub_subscriber.create_subscription *args
       first_time = @called.nil?
       @called = true
-      raise GRPC::BadStatus.new(5, "not found") if first_time
+      if first_time
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
       Google::Pubsub::V1::Subscription.decode_json(
         "{\"name\":\"projects/test/subscriptions/new-sub-using-autocreate\",\"topic\":\"projects/test/topics/topic-name-goes-here\",\"push_config\":{\"push_endpoint\":\"http://example.com/callback\"},\"ack_deadline_seconds\":60}")
     end
@@ -64,13 +64,9 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
   end
 
   it "creates a subscription but not topic even when called with autocreate" do
-    create_req = Google::Pubsub::V1::Subscription.new(
-      name: "projects/#{project}/subscriptions/#{new_sub_name}",
-      topic: topic_path(topic_name)
-    )
     create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [create_req]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
@@ -87,13 +83,9 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
                                                  autocreate: false }
 
     it "creates a subscription when calling subscribe" do
-      create_req = Google::Pubsub::V1::Subscription.new(
-        name: "projects/#{project}/subscriptions/#{new_sub_name}",
-        topic: topic_path(topic_name)
-      )
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
       mock = Minitest::Mock.new
-      mock.expect :create_subscription, create_res, [create_req]
+      mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
       pubsub.service.mocked_subscriber = mock
 
       sub = pubsub.subscribe topic_name, new_sub_name
@@ -113,7 +105,9 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new
       def stub.create_subscription *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       pubsub.service.mocked_subscriber = stub
 

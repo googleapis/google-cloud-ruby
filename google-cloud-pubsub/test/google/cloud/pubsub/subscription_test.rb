@@ -40,14 +40,10 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
-
-    mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
-                subscription: "projects/#{project}/subscriptions/#{subscription_name}",
-                push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-              )
+    push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [mpc_req]
+    mock.expect :modify_push_config, mpc_res, [subscription_path(subscription_name), push_config]
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -56,10 +52,9 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can delete itself" do
-    del_req = Google::Pubsub::V1::DeleteSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{subscription_name}"
     del_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [del_req]
+    mock.expect :delete_subscription, del_res, [subscription_path(subscription_name)]
     pubsub.service.mocked_subscriber = mock
 
     subscription.delete
@@ -69,15 +64,9 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "can pull a message" do
     rec_message_msg = "pulled-message"
-
-    pull_req = Google::Pubsub::V1::PullRequest.new(
-      subscription: subscription_path(subscription_name),
-      return_immediately: true,
-      max_messages: 100
-    )
     pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [pull_req]
+    mock.expect :pull, pull_res, [subscription_path(subscription_name), 100, return_immediately: true]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull
@@ -89,13 +78,9 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge one message" do
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(subscription_name),
-      ack_ids: ["ack-id-1"]
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge "ack-id-1"
@@ -104,13 +89,9 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge many messages" do
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(subscription_name),
-      ack_ids: ["ack-id-1", "ack-id-2", "ack-id-3"]
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1", "ack-id-2", "ack-id-3"]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
@@ -119,13 +100,9 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge with ack" do
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(subscription_name),
-      ack_ids: ["ack-id-1"]
-    )
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"]]
     subscription.service.mocked_subscriber = mock
 
     subscription.ack "ack-id-1"

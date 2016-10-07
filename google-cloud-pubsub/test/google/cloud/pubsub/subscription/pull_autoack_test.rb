@@ -47,21 +47,11 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
 
   it "can auto acknowledge when pulling messages" do
     ack_ids = [rec_msg1.ack_id, rec_msg2.ack_id, rec_msg3.ack_id]
-
-    ack_req = Google::Pubsub::V1::AcknowledgeRequest.new(
-      subscription: subscription_path(sub_name),
-      ack_ids: ack_ids
-    )
     ack_res = Google::Protobuf::Empty.new
-    pull_req = Google::Pubsub::V1::PullRequest.new(
-      subscription: subscription_path(sub_name),
-      return_immediately: true,
-      max_messages: 100
-    )
     pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_msgs_json
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [ack_req]
-    mock.expect :pull, pull_res, [pull_req]
+    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids]
+    mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull autoack: true
@@ -72,14 +62,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
   end
 
   it "does not auto acknowledge when pulling messages and getting 0 results" do
-    pull_req = Google::Pubsub::V1::PullRequest.new(
-      subscription: subscription_path(sub_name),
-      return_immediately: true,
-      max_messages: 100
-    )
     pull_res = Google::Pubsub::V1::PullResponse.decode_json empty_rec_msgs_json
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [pull_req]
+    mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull autoack: true

@@ -41,14 +41,10 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
-
-    mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
-                subscription: "projects/#{project}/subscriptions/#{sub_name}",
-                push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-              )
+    push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [mpc_req]
+    mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config]
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -63,10 +59,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve topic" do
-      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [get_req]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
       subscription.service.mocked_subscriber = mock
 
       subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
@@ -78,10 +73,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve deadline" do
-      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [get_req]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
       subscription.service.mocked_subscriber = mock
 
       subscription.deadline.must_equal sub_deadline
@@ -90,10 +84,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve endpoint" do
-      get_req = Google::Pubsub::V1::GetSubscriptionRequest.new subscription: "projects/#{project}/subscriptions/#{sub_name}"
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [get_req]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
       subscription.service.mocked_subscriber = mock
 
       subscription.endpoint.must_equal sub_endpoint
@@ -103,14 +96,10 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
-
-      mpc_req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
-                  subscription: "projects/#{project}/subscriptions/#{sub_name}",
-                  push_config: Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-                )
+      push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
       mpc_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_push_config, mpc_res, [mpc_req]
+      mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config]
       pubsub.service.mocked_subscriber = mock
 
       subscription.endpoint = new_push_endpoint
@@ -128,7 +117,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when retrieving topic" do
       stub = Object.new
       def stub.get_subscription *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -140,7 +131,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when retrieving deadline" do
       stub = Object.new
       def stub.get_subscription *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -152,7 +145,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when retrieving endpoint" do
       stub = Object.new
       def stub.get_subscription *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
@@ -166,7 +161,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
       stub = Object.new
       def stub.modify_push_config *args
-        raise GRPC::BadStatus.new(5, "not found")
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
       subscription.service.mocked_subscriber = stub
 
