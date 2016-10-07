@@ -39,13 +39,13 @@ module Google
         #
         class Text
           ##
-          # @private The EntityAnnotation Google API Client object.
-          attr_accessor :gapi
+          # @private The EntityAnnotation GRPC object.
+          attr_accessor :grpc
 
           ##
           # @private Creates a new Text instance.
           def initialize
-            @gapi = {}
+            @grpc = nil
             @words = []
           end
 
@@ -55,7 +55,7 @@ module Google
           # @return [String] The entire text including newline characters.
           #
           def text
-            @gapi.description
+            @grpc.description
           end
 
           ##
@@ -66,7 +66,7 @@ module Google
           #   language code.
           #
           def locale
-            @gapi.locale
+            @grpc.locale
           end
 
           ##
@@ -75,9 +75,9 @@ module Google
           # @return [Array<Vertex>]
           #
           def bounds
-            return [] unless @gapi.bounding_poly
-            @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
-              Vertex.from_gapi v
+            return [] unless @grpc.bounding_poly
+            @bounds ||= Array(@grpc.bounding_poly.vertices).map do |v|
+              Vertex.from_grpc v
             end
           end
 
@@ -117,15 +117,15 @@ module Google
           end
 
           ##
-          # @private New Annotation::Text from an array of Google API Client
+          # @private New Annotation::Text from an array of GRPC
           # objects.
-          def self.from_gapi gapi_list
-            text, *words = Array gapi_list
+          def self.from_grpc grpc_list
+            text, *words = Array grpc_list
             return nil if text.nil?
             new.tap do |t|
-              t.instance_variable_set :@gapi, text
+              t.instance_variable_set :@grpc, text
               t.instance_variable_set :@words,
-                                      words.map { |w| Word.from_gapi w }
+                                      words.map { |w| Word.from_grpc w }
             end
           end
 
@@ -152,13 +152,13 @@ module Google
           #
           class Word
             ##
-            # @private The EntityAnnotation Google API Client object.
-            attr_accessor :gapi
+            # @private The EntityAnnotation GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Word instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
@@ -167,7 +167,7 @@ module Google
             # @return [String]
             #
             def text
-              @gapi.description
+              @grpc.description
             end
 
             ##
@@ -176,9 +176,9 @@ module Google
             # @return [Array<Vertex>]
             #
             def bounds
-              return [] unless @gapi.bounding_poly
-              @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
-                Vertex.from_gapi v
+              return [] unless @grpc.bounding_poly
+              @bounds ||= Array(@grpc.bounding_poly.vertices).map do |v|
+                Vertex.from_grpc v
               end
             end
 
@@ -207,10 +207,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Text::Word from a Google API Client
+            # @private New Annotation::Text::Word from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |w| w.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |w| w.instance_variable_set :@grpc, grpc }
             end
           end
         end

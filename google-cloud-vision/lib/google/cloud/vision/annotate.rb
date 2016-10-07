@@ -157,10 +157,10 @@ module Google
 
           Array(images).flatten.each do |img|
             i = image(img)
-            @requests << Google::Apis::VisionV1::AnnotateImageRequest.new(
-              image: i.to_gapi,
+            @requests << Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+              image: i.to_grpc,
               features: features,
-              imageContext: i.context.to_gapi
+              image_context: i.context.to_grpc
             )
           end
         end
@@ -174,18 +174,18 @@ module Google
             faces, landmarks, logos, labels)
 
           f = []
-          f << feature("FACE_DETECTION", faces) unless faces.zero?
-          f << feature("LANDMARK_DETECTION", landmarks) unless landmarks.zero?
-          f << feature("LOGO_DETECTION", logos) unless logos.zero?
-          f << feature("LABEL_DETECTION", labels) unless labels.zero?
-          f << feature("TEXT_DETECTION", 1) if text
-          f << feature("SAFE_SEARCH_DETECTION", 1) if safe_search
-          f << feature("IMAGE_PROPERTIES", 1) if properties
+          f << feature(:FACE_DETECTION, faces) unless faces.zero?
+          f << feature(:LANDMARK_DETECTION, landmarks) unless landmarks.zero?
+          f << feature(:LOGO_DETECTION, logos) unless logos.zero?
+          f << feature(:LABEL_DETECTION, labels) unless labels.zero?
+          f << feature(:TEXT_DETECTION, 1) if text
+          f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
+          f << feature(:IMAGE_PROPERTIES, 1) if properties
           f
         end
 
         def feature type, max_results
-          Google::Apis::VisionV1::Feature.new(
+          Google::Cloud::Vision::V1::Feature.new(
             type: type, max_results: max_results)
         end
 
@@ -198,15 +198,15 @@ module Google
 
         def default_features
           [
-            feature("FACE_DETECTION", Google::Cloud::Vision.default_max_faces),
-            feature("LANDMARK_DETECTION",
+            feature(:FACE_DETECTION, Google::Cloud::Vision.default_max_faces),
+            feature(:LANDMARK_DETECTION,
                     Google::Cloud::Vision.default_max_landmarks),
-            feature("LOGO_DETECTION", Google::Cloud::Vision.default_max_logos),
-            feature("LABEL_DETECTION",
+            feature(:LOGO_DETECTION, Google::Cloud::Vision.default_max_logos),
+            feature(:LABEL_DETECTION,
                     Google::Cloud::Vision.default_max_labels),
-            feature("TEXT_DETECTION", 1),
-            feature("SAFE_SEARCH_DETECTION", 1),
-            feature("IMAGE_PROPERTIES", 1)
+            feature(:TEXT_DETECTION, 1),
+            feature(:SAFE_SEARCH_DETECTION, 1),
+            feature(:IMAGE_PROPERTIES, 1)
           ]
         end
 

@@ -81,8 +81,8 @@ module Google
           ##
           # @private New Annotation::Entity::Bounds::Vertex from a Google API
           # Client object.
-          def self.from_gapi gapi
-            new gapi.x, gapi.y
+          def self.from_grpc grpc
+            new grpc.x, grpc.y
           end
         end
       end

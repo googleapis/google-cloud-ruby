@@ -19,12 +19,12 @@ require "minitest/rg"
 require "google/cloud/vision"
 
 # Create shared vision object so we don't create new for each test
-$vision = Google::Cloud.vision retries: 10
+$vision = Google::Cloud::Vision.new
 
 require "google/cloud/storage"
 
 # Create shared storage object so we don't create new for each test
-$storage = Google::Cloud.new.storage retries: 10
+$storage = Google::Cloud::Storage.new retries: 10
 
 module Acceptance
   ##
@@ -64,6 +64,15 @@ module Acceptance
       addl.include? :vision
     end
 
+    def assert_array_in_delta exp, act, msg = nil
+      assert_kind_of Array, exp
+      assert_kind_of Array, act
+      assert_equal exp.length, act.length, "Arrays being compared must be the same length"
+      exp.zip(act).each do |exp_val, act_val|
+        assert_in_delta exp_val, act_val
+      end
+    end
+
     def self.run_one_method klass, method_name, reporter
       result = nil
       (1..3).each do |try|
@@ -94,4 +103,8 @@ end
 
 Minitest.after_run do
   clean_up_vision_storage_objects
+end
+
+module MiniTest::Expectations
+  infect_an_assertion :assert_array_in_delta, :must_be_close_to_array
 end

@@ -20,17 +20,15 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects multiple landmarks" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 10)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LANDMARK_DETECTION, max_results: 10)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, landmarks_response_gapi, [req]
+    mock.expect :batch_annotate_images, landmarks_response_grpc, [req]
 
     vision.service.mocked_service = mock
     landmarks = image.landmarks 10
@@ -40,17 +38,15 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
   end
 
   it "detects multiple landmarks without specifying a count" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 100)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LANDMARK_DETECTION, max_results: 100)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, landmarks_response_gapi, [req]
+    mock.expect :batch_annotate_images, landmarks_response_grpc, [req]
 
     vision.service.mocked_service = mock
     landmarks = image.landmarks
@@ -60,17 +56,15 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
   end
 
   it "detects a landmark" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 1)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LANDMARK_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, landmark_response_gapi, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
 
     vision.service.mocked_service = mock
     landmark = image.landmark
@@ -79,10 +73,10 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
     landmark.wont_be :nil?
   end
 
-  def landmark_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def landmark_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           landmark_annotations: [
             landmark_annotation_response
           ]
@@ -91,10 +85,10 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
     )
   end
 
-  def landmarks_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def landmarks_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           landmark_annotations: [
             landmark_annotation_response,
             landmark_annotation_response,

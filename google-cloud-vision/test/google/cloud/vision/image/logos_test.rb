@@ -20,17 +20,15 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects multiple logos" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 10)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 10)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, logos_response_gapi, [req]
+    mock.expect :batch_annotate_images, logos_response_grpc, [req]
 
     vision.service.mocked_service = mock
     logos = image.logos 10
@@ -40,17 +38,15 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
   end
 
   it "detects multiple logos without specifying a count" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 100)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 100)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, logos_response_gapi, [req]
+    mock.expect :batch_annotate_images, logos_response_grpc, [req]
 
     vision.service.mocked_service = mock
     logos = image.logos
@@ -60,17 +56,15 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
   end
 
   it "detects a logo" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 1)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, logo_response_gapi, [req]
+    mock.expect :batch_annotate_images, logo_response_grpc, [req]
 
     vision.service.mocked_service = mock
     logo = image.logo
@@ -79,10 +73,10 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
     logo.wont_be :nil?
   end
 
-  def logo_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def logo_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           logo_annotations: [
             logo_annotation_response
           ]
@@ -91,10 +85,10 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
     )
   end
 
-  def logos_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def logos_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           logo_annotations: [
             logo_annotation_response,
             logo_annotation_response,

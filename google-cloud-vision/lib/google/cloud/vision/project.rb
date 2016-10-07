@@ -254,10 +254,10 @@ module Google
 
           yield a if block_given?
 
-          gapi = service.annotate a.requests
-          annotations = Array(gapi.responses).map do |g|
+          grpc = service.annotate a.requests
+          annotations = Array(grpc.responses).map do |g|
             fail Error.from_error(g.error) if g.error
-            Annotation.from_gapi g
+            Annotation.from_grpc g
           end
           return annotations.first if annotations.count == 1
           annotations

@@ -93,9 +93,9 @@ describe "Vision", :vision do
       face.bounds.head.must_be_kind_of Array
       face.bounds.head[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       face.bounds.head[0].x.must_equal 122
-      face.bounds.head[0].y.must_equal nil
-      face.bounds.head[0].to_a.must_equal [122, nil]
-      face.bounds.head[1].to_a.must_equal [336, nil]
+      face.bounds.head[0].y.must_equal 0
+      face.bounds.head[0].to_a.must_equal [122, 0]
+      face.bounds.head[1].to_a.must_equal [336, 0]
       face.bounds.head[2].to_a.must_equal [336, 203]
       face.bounds.head[3].to_a.must_equal [122, 203]
 
@@ -107,55 +107,55 @@ describe "Vision", :vision do
 
       face.features.wont_be :nil?
 
-      face.features.confidence.must_equal 0.42813218
+      face.features.confidence.must_be_close_to 0.42813218
       face.features.chin.center.must_be_kind_of Google::Cloud::Vision::Annotation::Face::Features::Landmark
-      face.features.chin.center.x.must_equal 233.21977
-      face.features.chin.center.y.must_equal 189.47475
-      face.features.chin.center.z.must_equal 19.487228
-      face.features.chin.left.to_a.must_equal   [166.70468, 145.37173, 71.187653]
-      face.features.chin.right.to_a.must_equal  [299.02509, 135.58951, 61.98719]
+      face.features.chin.center.x.must_be_close_to 233.21977
+      face.features.chin.center.y.must_be_close_to 189.47475
+      face.features.chin.center.z.must_be_close_to 19.487228
+      face.features.chin.left.to_a.must_be_close_to_array   [166.70468, 145.37173, 71.187653]
+      face.features.chin.right.to_a.must_be_close_to_array  [299.02509, 135.58951, 61.98719]
 
-      face.features.ears.left.to_a.must_equal  [157.35168, 99.431313, 87.90876]
-      face.features.ears.right.to_a.must_equal [303.81198, 88.5782, 77.719193]
+      face.features.ears.left.to_a.must_be_close_to_array  [157.35168, 99.431313, 87.90876]
+      face.features.ears.right.to_a.must_be_close_to_array [303.81198, 88.5782, 77.719193]
 
-      face.features.eyebrows.left.left.to_a.must_equal  [168.85481, 69.338295, 3.9220245]
-      face.features.eyebrows.left.right.to_a.must_equal [206.07896, 70.761108, -16.882086]
-      face.features.eyebrows.left.top.to_a.must_equal   [186.34938, 63.386711, -12.43734]
+      face.features.eyebrows.left.left.to_a.must_be_close_to_array  [168.85481, 69.338295, 3.9220245]
+      face.features.eyebrows.left.right.to_a.must_be_close_to_array [206.07896, 70.761108, -16.882086]
+      face.features.eyebrows.left.top.to_a.must_be_close_to_array   [186.34938, 63.386711, -12.43734]
 
-      face.features.eyebrows.right.left.to_a.must_equal  [237.42259, 68.241989, -19.10948]
-      face.features.eyebrows.right.right.to_a.must_equal [276.57953, 61.42263, -3.5625641]
-      face.features.eyebrows.right.top.to_a.must_equal   [256.3194, 58.222664, -17.299419]
+      face.features.eyebrows.right.left.to_a.must_be_close_to_array  [237.42259, 68.241989, -19.10948]
+      face.features.eyebrows.right.right.to_a.must_be_close_to_array [276.57953, 61.42263, -3.5625641]
+      face.features.eyebrows.right.top.to_a.must_be_close_to_array   [256.3194, 58.222664, -17.299419]
 
-      face.features.eyes.left.bottom.to_a.must_equal [192.65559, 87.8156, 0.42953849]
-      face.features.eyes.left.center.to_a.must_equal [189.72849, 82.965874, -0.00075325265]
-      face.features.eyes.left.left.to_a.must_equal   [179.03802, 83.742157, 6.790463]
-      face.features.eyes.left.pupil.to_a.must_equal  [190.41544, 84.4557, -1.3682901]
-      face.features.eyes.left.right.to_a.must_equal  [201.79512, 83.127563, -0.33577749]
-      face.features.eyes.left.top.to_a.must_equal    [190.90974, 80.660713, -5.1845775]
+      face.features.eyes.left.bottom.to_a.must_be_close_to_array [192.65559, 87.8156, 0.42953849]
+      face.features.eyes.left.center.to_a.must_be_close_to_array [189.72849, 82.965874, -0.00075325265]
+      face.features.eyes.left.left.to_a.must_be_close_to_array   [179.03802, 83.742157, 6.790463]
+      face.features.eyes.left.pupil.to_a.must_be_close_to_array  [190.41544, 84.4557, -1.3682901]
+      face.features.eyes.left.right.to_a.must_be_close_to_array  [201.79512, 83.127563, -0.33577749]
+      face.features.eyes.left.top.to_a.must_be_close_to_array    [190.90974, 80.660713, -5.1845775]
 
-      face.features.eyes.right.bottom.to_a.must_equal [257.98438, 83.214119, -3.9316273]
-      face.features.eyes.right.center.to_a.must_equal [258.15857, 78.317787, -4.6232729]
-      face.features.eyes.right.left.to_a.must_equal   [244.01581, 81.332283, -3.0447886]
-      face.features.eyes.right.pupil.to_a.must_equal  [256.63464, 79.641411, -6.0731235]
-      face.features.eyes.right.right.to_a.must_equal  [268.5871, 77.159126, 0.41419673]
-      face.features.eyes.right.top.to_a.must_equal    [255.46104, 75.925194, -9.6693773]
+      face.features.eyes.right.bottom.to_a.must_be_close_to_array [257.98438, 83.214119, -3.9316273]
+      face.features.eyes.right.center.to_a.must_be_close_to_array [258.15857, 78.317787, -4.6232729]
+      face.features.eyes.right.left.to_a.must_be_close_to_array   [244.01581, 81.332283, -3.0447886]
+      face.features.eyes.right.pupil.to_a.must_be_close_to_array  [256.63464, 79.641411, -6.0731235]
+      face.features.eyes.right.right.to_a.must_be_close_to_array  [268.5871, 77.159126, 0.41419673]
+      face.features.eyes.right.top.to_a.must_be_close_to_array    [255.46104, 75.925194, -9.6693773]
 
-      face.features.forehead.to_a.must_equal [221.5365, 69.323875, -20.554575]
+      face.features.forehead.to_a.must_be_close_to_array [221.5365, 69.323875, -20.554575]
 
-      face.features.lips.bottom.to_a.must_equal [230.27597, 163.10367, 3.8628895]
-      face.features.lips.lower.to_a.must_equal  [230.27597, 163.10367, 3.8628895]
-      face.features.lips.top.to_a.must_equal    [228.54768, 143.2952, -5.6550336]
-      face.features.lips.upper.to_a.must_equal  [228.54768, 143.2952, -5.6550336]
+      face.features.lips.bottom.to_a.must_be_close_to_array [230.27597, 163.10367, 3.8628895]
+      face.features.lips.lower.to_a.must_be_close_to_array  [230.27597, 163.10367, 3.8628895]
+      face.features.lips.top.to_a.must_be_close_to_array    [228.54768, 143.2952, -5.6550336]
+      face.features.lips.upper.to_a.must_be_close_to_array  [228.54768, 143.2952, -5.6550336]
 
-      face.features.mouth.center.to_a.must_equal [228.53499, 150.29066, 1.1069832]
-      face.features.mouth.left.to_a.must_equal   [204.32407, 149.64627, 15.126297]
-      face.features.mouth.right.to_a.must_equal  [255.67624, 145.21121, 11.706608]
+      face.features.mouth.center.to_a.must_be_close_to_array [228.53499, 150.29066, 1.1069832]
+      face.features.mouth.left.to_a.must_be_close_to_array   [204.32407, 149.64627, 15.126297]
+      face.features.mouth.right.to_a.must_be_close_to_array  [255.67624, 145.21121, 11.706608]
 
-      face.features.nose.bottom.to_a.must_equal [226.5867, 130.57584, -8.9499149]
-      face.features.nose.left.to_a.must_equal   [209.35193, 126.05315, 1.0702859]
-      face.features.nose.right.to_a.must_equal  [244.11844, 123.26714, -1.5220336]
-      face.features.nose.tip.to_a.must_equal    [225.23511, 122.47372, -25.817825]
-      face.features.nose.top.to_a.must_equal    [222.40179, 83.179443, -15.773396]
+      face.features.nose.bottom.to_a.must_be_close_to_array [226.5867, 130.57584, -8.9499149]
+      face.features.nose.left.to_a.must_be_close_to_array   [209.35193, 126.05315, 1.0702859]
+      face.features.nose.right.to_a.must_be_close_to_array  [244.11844, 123.26714, -1.5220336]
+      face.features.nose.tip.to_a.must_be_close_to_array    [225.23511, 122.47372, -25.817825]
+      face.features.nose.top.to_a.must_be_close_to_array    [222.40179, 83.179443, -15.773396]
 
       face.likelihood.wont_be :nil?
       face.likelihood.joy?.must_equal false
@@ -166,13 +166,13 @@ describe "Vision", :vision do
       face.likelihood.blurred?.must_equal false
       face.likelihood.headwear?.must_equal false
 
-      face.likelihood.joy.must_equal "VERY_UNLIKELY"
-      face.likelihood.sorrow.must_equal "VERY_UNLIKELY"
-      face.likelihood.anger.must_equal "VERY_UNLIKELY"
-      face.likelihood.surprise.must_equal "VERY_UNLIKELY"
-      face.likelihood.under_exposed.must_equal "VERY_UNLIKELY"
-      face.likelihood.blurred.must_equal "VERY_UNLIKELY"
-      face.likelihood.headwear.must_equal "VERY_UNLIKELY"
+      face.likelihood.joy.must_equal :VERY_UNLIKELY
+      face.likelihood.sorrow.must_equal :VERY_UNLIKELY
+      face.likelihood.anger.must_equal :VERY_UNLIKELY
+      face.likelihood.surprise.must_equal :VERY_UNLIKELY
+      face.likelihood.under_exposed.must_equal :VERY_UNLIKELY
+      face.likelihood.blurred.must_equal :VERY_UNLIKELY
+      face.likelihood.headwear.must_equal :VERY_UNLIKELY
     end
 
     it "detects faces from an image with location context" do
@@ -218,11 +218,11 @@ describe "Vision", :vision do
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       landmark.mid.must_equal "/m/019dvv"
-      landmark.locale.must_be :nil?
+      landmark.locale.must_be :empty?
       landmark.description.must_equal "Mount Rushmore"
-      landmark.score.must_equal 0.91912264
-      landmark.confidence.must_be :nil?
-      landmark.topicality.must_be :nil?
+      landmark.score.must_be_close_to 0.91912264
+      landmark.confidence.must_be :zero?
+      landmark.topicality.must_be :zero?
       landmark.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       landmark.bounds[0].x.must_equal 9
       landmark.bounds[0].y.must_equal 35
@@ -230,8 +230,8 @@ describe "Vision", :vision do
       landmark.bounds[2].to_a.must_equal [492, 325]
       landmark.bounds[3].to_a.must_equal [9, 325]
       landmark.locations[0].must_be_kind_of Google::Cloud::Vision::Location
-      landmark.locations[0].latitude.must_equal 43.878264
-      landmark.locations[0].longitude.must_equal -103.45700740814209
+      landmark.locations[0].latitude.must_be_close_to 43.878264
+      landmark.locations[0].longitude.must_be_close_to -103.45700740814209
       landmark.properties.must_be :empty?
     end
 
@@ -271,11 +271,11 @@ describe "Vision", :vision do
       logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       logo.mid.must_equal "/m/0b34hf"
-      logo.locale.must_be :nil?
+      logo.locale.must_be :empty?
       logo.description.must_equal "Google"
-      logo.score.must_equal 0.70057315
-      logo.confidence.must_be :nil?
-      logo.topicality.must_be :nil?
+      logo.score.must_be_close_to 0.70057315
+      logo.confidence.must_be :zero?
+      logo.topicality.must_be :zero?
       logo.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       logo.bounds[0].x.must_equal 14
       logo.bounds[0].y.must_equal 16
@@ -322,11 +322,11 @@ describe "Vision", :vision do
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
       label.mid.must_be_kind_of String
-      label.locale.must_be :nil?
+      label.locale.must_be :empty?
       label.description.must_be_kind_of String
       label.score.must_be_kind_of Float
-      label.confidence.must_be :nil?
-      label.topicality.must_be :nil?
+      label.confidence.must_be :zero?
+      label.topicality.must_be :zero?
       label.bounds.must_be :empty?
       label.locations.must_be :empty?
       label.properties.must_be :empty?
@@ -468,16 +468,16 @@ describe "Vision", :vision do
       annotation.properties.colors[0].blue.must_equal 254
       annotation.properties.colors[0].alpha.must_equal 1.0
       annotation.properties.colors[0].rgb.must_equal "91c1fe"
-      annotation.properties.colors[0].score.must_equal 0.65757853
-      annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
+      annotation.properties.colors[0].score.must_be_close_to 0.65757853
+      annotation.properties.colors[0].pixel_fraction.must_be_close_to 0.16903226
 
       annotation.properties.colors[9].red.must_equal 156
       annotation.properties.colors[9].green.must_equal 214
       annotation.properties.colors[9].blue.must_equal 255
       annotation.properties.colors[9].alpha.must_equal 1.0
       annotation.properties.colors[9].rgb.must_equal "9cd6ff"
-      annotation.properties.colors[9].score.must_equal 0.00096750073
-      annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+      annotation.properties.colors[9].score.must_be_close_to 0.00096750073
+      annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
     end
 
     it "detects properties from multiple images" do
@@ -613,16 +613,16 @@ describe "Vision", :vision do
         properties.colors[0].blue.must_equal 254
         properties.colors[0].alpha.must_equal 1.0
         properties.colors[0].rgb.must_equal "91c1fe"
-        properties.colors[0].score.must_equal 0.65757853
-        properties.colors[0].pixel_fraction.must_equal 0.16903226
+        properties.colors[0].score.must_be_close_to 0.65757853
+        properties.colors[0].pixel_fraction.must_be_close_to 0.16903226
 
         properties.colors[9].red.must_equal 156
         properties.colors[9].green.must_equal 214
         properties.colors[9].blue.must_equal 255
         properties.colors[9].alpha.must_equal 1.0
         properties.colors[9].rgb.must_equal "9cd6ff"
-        properties.colors[9].score.must_equal 0.00096750073
-        properties.colors[9].pixel_fraction.must_equal 0.00064516132
+        properties.colors[9].score.must_be_close_to 0.00096750073
+        properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
       end
     end
   end

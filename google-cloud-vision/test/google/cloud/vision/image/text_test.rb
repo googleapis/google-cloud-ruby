@@ -20,17 +20,15 @@ describe Google::Cloud::Vision::Image, :text, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects text" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, text_response_gapi, [req]
+    mock.expect :batch_annotate_images, text_response_grpc, [req]
 
     vision.service.mocked_service = mock
 
@@ -47,10 +45,10 @@ describe Google::Cloud::Vision::Image, :text, :mock_vision do
     text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
   end
 
-  def text_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def text_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           text_annotations: text_annotation_responses
         )
       ]

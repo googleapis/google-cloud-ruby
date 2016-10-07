@@ -22,7 +22,7 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
   it "is empty by default" do
     image.context.must_be :empty?
 
-    image.context.to_gapi.must_be :nil?
+    image.context.to_grpc.must_be :nil?
   end
 
   it "is can populate the location" do
@@ -32,9 +32,9 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
     image.context.area.max.latitude = 37.4320041
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    lat_long_rect_must_equal image.context.to_grpc.lat_long_rect
   end
 
   it "is can set the location object" do
@@ -42,9 +42,9 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
     image.context.area.max = Google::Cloud::Vision::Location.new 37.4320041, -122.0762462
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    lat_long_rect_must_equal image.context.to_grpc.lat_long_rect
   end
 
   it "is can set a location with a hash" do
@@ -52,9 +52,9 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
     image.context.area.max = { longitude: -122.0762462, latitude: 37.4320041 }
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    lat_long_rect_must_equal image.context.to_grpc.lat_long_rect
   end
 
   it "is can populate language hints" do
@@ -62,18 +62,18 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
     image.context.languages << "es"
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    image.context.to_gapi.language_hints.must_equal language_hints
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    image.context.to_grpc.language_hints.must_equal language_hints
   end
 
   it "is can set a language hints" do
     image.context.languages = ["en", "es"]
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    image.context.to_gapi.language_hints.must_equal language_hints
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    image.context.to_grpc.language_hints.must_equal language_hints
   end
 
   it "is can set all the things" do
@@ -82,19 +82,19 @@ describe Google::Cloud::Vision::Image::Context, :mock_vision do
     image.context.languages = ["en", "es"]
     image.context.wont_be :empty?
 
-    image.context.to_gapi.wont_be :nil?
-    image.context.to_gapi.must_be_kind_of Google::Apis::VisionV1::ImageContext
-    lat_long_rect_must_equal image.context.to_gapi.lat_long_rect
-    image.context.to_gapi.language_hints.must_equal language_hints
+    image.context.to_grpc.wont_be :nil?
+    image.context.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::ImageContext
+    lat_long_rect_must_equal image.context.to_grpc.lat_long_rect
+    image.context.to_grpc.language_hints.must_equal language_hints
   end
 
-  def lat_long_rect_must_equal lat_long_rect_gapi
-    lat_long_rect_gapi.must_be_kind_of Google::Apis::VisionV1::LatLongRect
-    lat_long_rect_gapi.min_lat_lng.must_be_kind_of Google::Apis::VisionV1::LatLng
-    lat_long_rect_gapi.min_lat_lng.latitude.must_equal 37.4220041
-    lat_long_rect_gapi.min_lat_lng.longitude.must_equal -122.0862462
-    lat_long_rect_gapi.max_lat_lng.must_be_kind_of Google::Apis::VisionV1::LatLng
-    lat_long_rect_gapi.max_lat_lng.latitude.must_equal 37.4320041
-    lat_long_rect_gapi.max_lat_lng.longitude.must_equal -122.0762462
+  def lat_long_rect_must_equal lat_long_rect_grpc
+    lat_long_rect_grpc.must_be_kind_of Google::Cloud::Vision::V1::LatLongRect
+    lat_long_rect_grpc.min_lat_lng.must_be_kind_of Google::Type::LatLng
+    lat_long_rect_grpc.min_lat_lng.latitude.must_be_close_to 37.4220041
+    lat_long_rect_grpc.min_lat_lng.longitude.must_be_close_to -122.0862462
+    lat_long_rect_grpc.max_lat_lng.must_be_kind_of Google::Type::LatLng
+    lat_long_rect_grpc.max_lat_lng.latitude.must_be_close_to 37.4320041
+    lat_long_rect_grpc.max_lat_lng.longitude.must_be_close_to -122.0762462
   end
 end

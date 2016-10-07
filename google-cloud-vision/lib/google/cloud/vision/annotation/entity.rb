@@ -70,13 +70,13 @@ module Google
         #
         class Entity
           ##
-          # @private The EntityAnnotation Google API Client object.
-          attr_accessor :gapi
+          # @private The EntityAnnotation GRPC object.
+          attr_accessor :grpc
 
           ##
           # @private Creates a new Entity instance.
           def initialize
-            @gapi = {}
+            @grpc = nil
           end
 
           ##
@@ -88,7 +88,7 @@ module Google
           # @return [String] The opaque entity ID.
           #
           def mid
-            @gapi.mid
+            @grpc.mid
           end
 
           ##
@@ -100,7 +100,7 @@ module Google
           #   language code.
           #
           def locale
-            @gapi.locale
+            @grpc.locale
           end
 
           ##
@@ -109,7 +109,7 @@ module Google
           # @return [String] A description of the entity.
           #
           def description
-            @gapi.description
+            @grpc.description
           end
 
           ##
@@ -118,7 +118,7 @@ module Google
           # @return [Float] A value in the range [0, 1].
           #
           def score
-            @gapi.score
+            @grpc.score
           end
 
           ##
@@ -129,7 +129,7 @@ module Google
           # @return [Float] A value in the range [0, 1].
           #
           def confidence
-            @gapi.confidence
+            @grpc.confidence
           end
 
           ##
@@ -142,7 +142,7 @@ module Google
           # @return [Float] A value in the range [0, 1].
           #
           def topicality
-            @gapi.topicality
+            @grpc.topicality
           end
 
           ##
@@ -152,9 +152,9 @@ module Google
           # @return [Array<Vertex>] An array of vertices.
           #
           def bounds
-            return [] unless @gapi.bounding_poly
-            @bounds ||= Array(@gapi.bounding_poly.vertices).map do |v|
-              Vertex.from_gapi v
+            return [] unless @grpc.bounding_poly
+            @bounds ||= Array(@grpc.bounding_poly.vertices).map do |v|
+              Vertex.from_grpc v
             end
           end
 
@@ -169,8 +169,8 @@ module Google
           #   and longitude.
           #
           def locations
-            @locations ||= Array(@gapi.locations).map do |l|
-              Location.from_gapi l.lat_lng
+            @locations ||= Array(@grpc.locations).map do |l|
+              Location.from_grpc l.lat_lng
             end
           end
 
@@ -183,7 +183,7 @@ module Google
           #
           def properties
             @properties ||=
-              Hash[Array(@gapi.properties).map { |p| [p.name, p.value] }]
+              Hash[Array(@grpc.properties).map { |p| [p.name, p.value] }]
           end
 
           ##
@@ -214,9 +214,9 @@ module Google
           end
 
           ##
-          # @private New Annotation::Entity from a Google API Client object.
-          def self.from_gapi gapi
-            new.tap { |f| f.instance_variable_set :@gapi, gapi }
+          # @private New Annotation::Entity from a GRPC object.
+          def self.from_grpc grpc
+            new.tap { |f| f.instance_variable_set :@grpc, grpc }
           end
         end
       end

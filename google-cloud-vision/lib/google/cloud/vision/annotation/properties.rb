@@ -37,13 +37,13 @@ module Google
         #
         class Properties
           ##
-          # @private The ImageProperties Google API Client object.
-          attr_accessor :gapi
+          # @private The ImageProperties GRPC object.
+          attr_accessor :grpc
 
           ##
           # @private Creates a new Properties instance.
           def initialize
-            @gapi = {}
+            @grpc = nil
           end
 
           ##
@@ -52,9 +52,9 @@ module Google
           # @return [Array<Color>] An array of the image's dominant colors.
           #
           def colors
-            return [] unless @gapi.dominant_colors
-            @colors ||= Array(@gapi.dominant_colors.colors).map do |c|
-              Color.from_gapi c
+            return [] unless @grpc.dominant_colors
+            @colors ||= Array(@grpc.dominant_colors.colors).map do |c|
+              Color.from_grpc c
             end
           end
 
@@ -87,9 +87,9 @@ module Google
           end
 
           ##
-          # @private New Annotation::Properties from a Google API Client object.
-          def self.from_gapi gapi
-            new.tap { |f| f.instance_variable_set :@gapi, gapi }
+          # @private New Annotation::Properties from a GRPC object.
+          def self.from_grpc grpc
+            new.tap { |f| f.instance_variable_set :@grpc, grpc }
           end
 
           ##
@@ -117,13 +117,13 @@ module Google
           #
           class Color
             ##
-            # @private The ColorInfo Google API Client object.
-            attr_accessor :gapi
+            # @private The ColorInfo GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Color instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
@@ -132,7 +132,7 @@ module Google
             # @return [Float] A value in the interval [0, 255].
             #
             def red
-              @gapi.color.red
+              @grpc.color.red
             end
 
             ##
@@ -141,7 +141,7 @@ module Google
             # @return [Float] A value in the interval [0, 255].
             #
             def green
-              @gapi.color.green
+              @grpc.color.green
             end
 
             ##
@@ -150,7 +150,7 @@ module Google
             # @return [Float] A value in the interval [0, 255].
             #
             def blue
-              @gapi.color.blue
+              @grpc.color.blue
             end
 
             ##
@@ -161,7 +161,7 @@ module Google
             # @return [Float] A value in the range [0, 1].
             #
             def alpha
-              @gapi.color.alpha || 1.0
+              @grpc.color.alpha || 1.0
             end
 
             def rgb
@@ -176,7 +176,7 @@ module Google
             # @return [Float] A value in the range [0, 1].
             #
             def score
-              @gapi.score
+              @grpc.score
             end
 
             ##
@@ -185,7 +185,7 @@ module Google
             # @return [Float] A value in the range [0, 1].
             #
             def pixel_fraction
-              @gapi.pixel_fraction
+              @grpc.pixel_fraction
             end
 
             ##
@@ -207,10 +207,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Properties from a Google API Client
+            # @private New Annotation::Properties from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |f| f.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |f| f.instance_variable_set :@grpc, grpc }
             end
           end
         end

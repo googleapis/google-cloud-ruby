@@ -20,17 +20,15 @@ describe Google::Cloud::Vision::Image, :safe_search, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects safe_search" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, safe_search_response_gapi, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
 
     vision.service.mocked_service = mock
     safe_search = image.safe_search
@@ -43,10 +41,10 @@ describe Google::Cloud::Vision::Image, :safe_search, :mock_vision do
     safe_search.must_be :violence?
   end
 
-  def safe_search_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def safe_search_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           safe_search_annotation: safe_search_annotation_response
         )
       ]

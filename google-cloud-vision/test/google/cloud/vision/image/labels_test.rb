@@ -20,17 +20,15 @@ describe Google::Cloud::Vision::Image, :labels, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects multiple labels" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LABEL_DETECTION", max_results: 10)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 10)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, labels_response_gapi, [req]
+    mock.expect :batch_annotate_images, labels_response_grpc, [req]
 
     vision.service.mocked_service = mock
     labels = image.labels 10
@@ -40,17 +38,15 @@ describe Google::Cloud::Vision::Image, :labels, :mock_vision do
   end
 
   it "detects multiple labels without specifying a count" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LABEL_DETECTION", max_results: 100)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, labels_response_gapi, [req]
+    mock.expect :batch_annotate_images, labels_response_grpc, [req]
 
     vision.service.mocked_service = mock
     labels = image.labels
@@ -60,17 +56,15 @@ describe Google::Cloud::Vision::Image, :labels, :mock_vision do
   end
 
   it "detects a label" do
-    feature = Google::Apis::VisionV1::Feature.new(type: "LABEL_DETECTION", max_results: 1)
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, label_response_gapi, [req]
+    mock.expect :batch_annotate_images, label_response_grpc, [req]
 
     vision.service.mocked_service = mock
     label = image.label
@@ -79,10 +73,10 @@ describe Google::Cloud::Vision::Image, :labels, :mock_vision do
     label.wont_be :nil?
   end
 
-  def label_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def label_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           label_annotations: [
             label_annotation_response
           ]
@@ -91,10 +85,10 @@ describe Google::Cloud::Vision::Image, :labels, :mock_vision do
     )
   end
 
-  def labels_response_gapi
-    Google::Apis::VisionV1::BatchAnnotateImagesResponse.new(
+  def labels_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        Google::Apis::VisionV1::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           label_annotations: [
             label_annotation_response,
             label_annotation_response,

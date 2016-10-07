@@ -18,17 +18,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
 
   it "detects face detection using mark alias" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, face_response_gapi, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: 1
@@ -39,17 +37,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   end
 
   it "detects face detection using detect alias" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, face_response_gapi, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, faces: 1
@@ -60,21 +56,19 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   end
 
   it "detects face detection on multiple images" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 1)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        ),
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 1)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      ),
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, faces_response_gapi, [req]
+    mock.expect :batch_annotate_images, faces_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, faces: 1
@@ -86,17 +80,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   end
 
   it "uses the default configuration" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: Google::Cloud::Vision.default_max_faces)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: Google::Cloud::Vision.default_max_faces)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, face_response_gapi, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: true
@@ -106,17 +98,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: Google::Cloud::Vision.default_max_faces)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: Google::Cloud::Vision.default_max_faces)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, face_response_gapi, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: "9999"
@@ -126,17 +116,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
   end
 
   it "uses the updated configuration" do
-    feature = MockVision::API::Feature.new(type: "FACE_DETECTION", max_results: 25)
-    req = MockVision::API::BatchAnnotateImagesRequest.new(
-      requests: [
-        MockVision::API::AnnotateImageRequest.new(
-          image: MockVision::API::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [feature]
-        )
-      ]
-    )
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 25)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, face_response_gapi, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req]
     vision.service.mocked_service = mock
 
     Google::Cloud::Vision.stub :default_max_faces, 25 do
@@ -146,10 +134,10 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
     mock.verify
   end
 
-  def face_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def face_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [
             face_annotation_response
           ]
@@ -158,15 +146,15 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
     )
   end
 
-  def faces_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def faces_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [
             face_annotation_response
           ]
         ),
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [
             face_annotation_response
           ]

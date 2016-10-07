@@ -35,9 +35,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Vision::Project]
     #
@@ -59,10 +59,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   vision = gcloud.vision scope: platform_scope
     #
-    def vision scope: nil, retries: nil, timeout: nil
+    def vision scope: nil, timeout: nil, client_config: nil
       Google::Cloud.vision @project, @keyfile, scope: scope,
-                                               retries: (retries || @retries),
-                                               timeout: (timeout || @timeout)
+                                               timeout: (timeout || @timeout),
+                                               client_config: client_config
     end
 
     ##
@@ -81,9 +81,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Vision::Project]
     #
@@ -97,8 +97,8 @@ module Google
     #   landmark = image.landmark
     #   landmark.description #=> "Mount Rushmore"
     #
-    def self.vision project = nil, keyfile = nil, scope: nil, retries: nil,
-                    timeout: nil
+    def self.vision project = nil, keyfile = nil, scope: nil, timeout: nil,
+                    client_config: nil
       require "google/cloud/vision"
       project ||= Google::Cloud::Vision::Project.default_project
       project = project.to_s # Always cast to a string
@@ -113,7 +113,7 @@ module Google
 
       Google::Cloud::Vision::Project.new(
         Google::Cloud::Vision::Service.new(
-          project, credentials, retries: retries, timeout: timeout))
+          project, credentials, timeout: timeout, client_config: client_config))
     end
   end
 end

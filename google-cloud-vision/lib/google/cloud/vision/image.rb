@@ -337,13 +337,15 @@ module Google
         end
 
         ##
-        # @private The Google API Client object for the Image.
-        def to_gapi
+        # @private The GRPC object for the Image.
+        def to_grpc
           if io?
             @io.rewind
-            Google::Apis::VisionV1::Image.new content: @io.read
+            Google::Cloud::Vision::V1::Image.new content: @io.read
           elsif url?
-            Google::Apis::VisionV1::Image.new source: { gcs_image_uri: @url }
+            Google::Cloud::Vision::V1::Image.new(
+              source: Google::Cloud::Vision::V1::ImageSource.new(
+                gcs_image_uri: @url))
           else
             fail ArgumentError, "Unable to use Image with Vision service."
           end
@@ -459,12 +461,13 @@ module Google
 
           ##
           # @private
-          def to_gapi
+          def to_grpc
             return nil if empty?
-            gapi = Google::Apis::VisionV1::ImageContext.new
-            gapi.lat_long_rect = area.to_gapi unless area.empty?
-            gapi.language_hints = languages unless languages.empty?
-            gapi
+
+            args = {}
+            args[:lat_long_rect] = area.to_grpc unless area.empty?
+            args[:language_hints] = languages unless languages.empty?
+            Google::Cloud::Vision::V1::ImageContext.new args
           end
 
           ##
@@ -553,11 +556,11 @@ module Google
               { min_lat_lng: min.to_h, max_lat_lng: max.to_h }
             end
 
-            def to_gapi
+            def to_grpc
               return nil if empty?
-              Google::Apis::VisionV1::LatLongRect.new(
-                min_lat_lng: min.to_gapi,
-                max_lat_lng: max.to_gapi
+              Google::Cloud::Vision::V1::LatLongRect.new(
+                min_lat_lng: min.to_grpc,
+                max_lat_lng: max.to_grpc
               )
             end
           end

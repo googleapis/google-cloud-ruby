@@ -13,3 +13,5 @@
 # limitations under the License.
 
 require "google/cloud/vision/v1/image_annotator_api"
+# Require the protobufs so we can create objects before GRPC is loaded.
+require "google/cloud/vision/v1/image_annotator_pb"

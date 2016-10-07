@@ -15,7 +15,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/vision/version"
-require "google/apis/vision_v1"
+require "google/cloud/vision/v1"
 
 module Google
   module Cloud
@@ -24,39 +24,50 @@ module Google
       # @private
       # Represents the service to Vision, exposing the API calls.
       class Service
-        ##
-        # Alias to the Google Client API module
-        API = Google::Apis::VisionV1
-
-        attr_accessor :project
-        attr_accessor :credentials
+        attr_accessor :project, :credentials, :host, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project = project
           @credentials = credentials
-          @service = API::VisionService.new
-          @service.client_options.application_name    = "google-cloud-vision"
-          @service.client_options.application_version = \
-            Google::Cloud::Vision::VERSION
-          @service.request_options.retries = retries || 3
-          @service.request_options.timeout_sec      = timeout
-          @service.request_options.open_timeout_sec = timeout
-          @service.authorization = @credentials.client
+          @host = host || V1::ImageAnnotatorApi::SERVICE_ADDRESS
+          @timeout = timeout
+          @client_config = client_config || {}
+        end
+
+        def channel
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
+          return credentials if insecure?
+          GRPC::Core::ChannelCredentials.new.compose \
+            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def service
           return mocked_service if mocked_service
-          @service
+          @service ||= \
+            V1::ImageAnnotatorApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              app_name: "google-cloud-vision",
+              app_version: Google::Cloud::Vision::VERSION)
         end
         attr_accessor :mocked_service
+
+        def insecure?
+          credentials == :this_channel_is_insecure
+        end
 
         ##
         # Returns API::BatchAnnotateImagesResponse
         def annotate requests
-          request = API::BatchAnnotateImagesRequest.new(requests: requests)
-          execute { service.annotate_image request }
+          execute { service.batch_annotate_images requests }
         end
 
         def inspect
@@ -66,9 +77,13 @@ module Google
         protected
 
         def execute
+          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
-        rescue Google::Apis::Error => e
+        rescue GRPC::BadStatus => e
           raise Google::Cloud::Error.from_error(e)
+        rescue Google::Gax::GaxError => e
+          # GaxError wraps BadStatus, but exposes it as #cause
+          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end

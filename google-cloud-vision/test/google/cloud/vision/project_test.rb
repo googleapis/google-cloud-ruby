@@ -34,26 +34,24 @@ describe Google::Cloud::Vision::Project, :mock_vision do
   end
 
   it "allows different annotation options for different images" do
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [
-            Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-            Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-          ]
-        ),
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [
-            Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 20),
-            Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1)
-          ]
-        )
-      ]
-    )
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [
+          Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+          Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+        ]
+      ),
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [
+          Google::Cloud::Vision::V1::Feature.new(type: :LANDMARK_DETECTION, max_results: 20),
+          Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1)
+        ]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, faces_response_gapi, [req]
+    mock.expect :batch_annotate_images, faces_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate do |a|
@@ -68,24 +66,22 @@ describe Google::Cloud::Vision::Project, :mock_vision do
   end
 
   it "runs full annotation with empty options" do
-    req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-      requests: [
-        Google::Apis::VisionV1::AnnotateImageRequest.new(
-          image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-          features: [
-            Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 100),
-            Google::Apis::VisionV1::Feature.new(type: "LANDMARK_DETECTION", max_results: 100),
-            Google::Apis::VisionV1::Feature.new(type: "LOGO_DETECTION", max_results: 100),
-            Google::Apis::VisionV1::Feature.new(type: "LABEL_DETECTION", max_results: 100),
-            Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1),
-            Google::Apis::VisionV1::Feature.new(type: "SAFE_SEARCH_DETECTION", max_results: 1),
-            Google::Apis::VisionV1::Feature.new(type: "IMAGE_PROPERTIES", max_results: 1)
-          ]
-        )
-      ]
-    )
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [
+          Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :LANDMARK_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1)
+        ]
+      )
+    ]
     mock = Minitest::Mock.new
-    mock.expect :annotate_image, full_response_gapi, [req]
+    mock.expect :batch_annotate_images, full_response_grpc, [req]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath
@@ -130,33 +126,31 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.properties.colors[0].blue.must_equal 254
     annotation.properties.colors[0].alpha.must_equal 1.0
     annotation.properties.colors[0].rgb.must_equal "91c1fe"
-    annotation.properties.colors[0].score.must_equal 0.65757853
-    annotation.properties.colors[0].pixel_fraction.must_equal 0.16903226
+    annotation.properties.colors[0].score.must_be_close_to 0.65757853
+    annotation.properties.colors[0].pixel_fraction.must_be_close_to 0.16903226
 
     annotation.properties.colors[9].red.must_equal 156
     annotation.properties.colors[9].green.must_equal 214
     annotation.properties.colors[9].blue.must_equal 255
-    annotation.properties.colors[9].alpha.must_equal 1.0
+    annotation.properties.colors[9].alpha.must_be_close_to 1.0
     annotation.properties.colors[9].rgb.must_equal "9cd6ff"
-    annotation.properties.colors[9].score.must_equal 0.00096750073
-    annotation.properties.colors[9].pixel_fraction.must_equal 0.00064516132
+    annotation.properties.colors[9].score.must_be_close_to 0.00096750073
+    annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
   end
 
   describe "ImageContext" do
     it "does not send when annotating file path" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
-          )
-        ]
-      )
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ]
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       annotation = vision.annotate filepath, faces: 10, text: true
@@ -168,19 +162,17 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
 
     it "does not send when annotating an image without context" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
-          )
-        ]
-      )
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ]
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
@@ -193,19 +185,23 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
 
     it "sends when annotating an image with location in context" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            lat_long_rect: Google::Cloud::Vision::V1::LatLongRect.new(
+              min_lat_lng: Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462),
+              max_lat_lng: Google::Type::LatLng.new(latitude: 37.4320041, longitude: -122.0762462)
+            )
           )
-        ]
-      )
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
@@ -222,19 +218,23 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
 
     it "sends when annotating an image with location hash in context" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            lat_long_rect: Google::Cloud::Vision::V1::LatLongRect.new(
+              min_lat_lng: Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462),
+              max_lat_lng: Google::Type::LatLng.new(latitude: 37.4320041, longitude: -122.0762462)
+            )
           )
-        ]
-      )
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
@@ -249,19 +249,20 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
 
     it "sends when annotating an image with language hints in context" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            language_hints: ["en", "es"]
           )
-        ]
-      )
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
@@ -275,19 +276,24 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
 
     it "sends when annotating an image with location and language hints in context" do
-      req = Google::Apis::VisionV1::BatchAnnotateImagesRequest.new(
-        requests: [
-          Google::Apis::VisionV1::AnnotateImageRequest.new(
-            image: Google::Apis::VisionV1::Image.new(content: File.read(filepath, mode: "rb")),
-            features: [
-              Google::Apis::VisionV1::Feature.new(type: "FACE_DETECTION", max_results: 10),
-              Google::Apis::VisionV1::Feature.new(type: "TEXT_DETECTION", max_results: 1)
-            ]
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :FACE_DETECTION, max_results: 10),
+            Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            lat_long_rect: Google::Cloud::Vision::V1::LatLongRect.new(
+              min_lat_lng: Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462),
+              max_lat_lng: Google::Type::LatLng.new(latitude: 37.4320041, longitude: -122.0762462)
+            ),
+            language_hints: ["en", "es"]
           )
-        ]
-      )
+        )
+      ]
       mock = Minitest::Mock.new
-      mock.expect :annotate_image, context_response_gapi, [req]
+      mock.expect :batch_annotate_images, context_response_grpc, [req]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
@@ -303,15 +309,15 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     end
   end
 
-  def faces_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def faces_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [
             face_annotation_response
           ]
         ),
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [
             face_annotation_response
           ]
@@ -320,10 +326,10 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     )
   end
 
-  def full_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def full_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [face_annotation_response],
           landmark_annotations: [landmark_annotation_response],
           logo_annotations: [logo_annotation_response],
@@ -336,10 +342,10 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     )
   end
 
-  def context_response_gapi
-    MockVision::API::BatchAnnotateImagesResponse.new(
+  def context_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
-        MockVision::API::AnnotateImageResponse.new(
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [face_annotation_response],
           text_annotations: text_annotation_responses
         )
