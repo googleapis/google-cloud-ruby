@@ -16,6 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/vision/version"
 require "google/cloud/vision/v1"
+require "google/gax/errors"
 
 module Google
   module Cloud
@@ -77,10 +78,7 @@ module Google
         protected
 
         def execute
-          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
         rescue Google::Gax::GaxError => e
           # GaxError wraps BadStatus, but exposes it as #cause
           raise Google::Cloud::Error.from_error(e.cause)
