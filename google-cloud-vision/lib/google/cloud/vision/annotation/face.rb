@@ -38,13 +38,13 @@ module Google
         #
         class Face
           ##
-          # @private The FaceAnnotation Google API Client object.
-          attr_accessor :gapi
+          # @private The FaceAnnotation GRPC object.
+          attr_accessor :grpc
 
           ##
           # @private Creates a new Face instance.
           def initialize
-            @gapi = {}
+            @grpc = nil
           end
 
           ##
@@ -53,7 +53,7 @@ module Google
           # @return [Angles]
           #
           def angles
-            @angles ||= Angles.from_gapi @gapi
+            @angles ||= Angles.from_grpc @grpc
           end
 
           ##
@@ -63,7 +63,7 @@ module Google
           # @return [Bounds]
           #
           def bounds
-            @bounds ||= Bounds.from_gapi @gapi
+            @bounds ||= Bounds.from_grpc @grpc
           end
 
           ##
@@ -73,7 +73,7 @@ module Google
           # @return [Features]
           #
           def features
-            @features ||= Features.from_gapi @gapi
+            @features ||= Features.from_grpc @grpc
           end
 
           ##
@@ -83,7 +83,7 @@ module Google
           # @return [Likelihood]
           #
           def likelihood
-            @likelihood ||= Likelihood.from_gapi @gapi
+            @likelihood ||= Likelihood.from_grpc @grpc
           end
 
           ##
@@ -92,7 +92,7 @@ module Google
           # @return [Float] A value in the range [0, 1].
           #
           def confidence
-            @gapi.detection_confidence
+            @grpc.detection_confidence
           end
 
           ##
@@ -117,9 +117,9 @@ module Google
           end
 
           ##
-          # @private New Annotation::Face from a Google API Client object.
-          def self.from_gapi gapi
-            new.tap { |f| f.instance_variable_set :@gapi, gapi }
+          # @private New Annotation::Face from a GRPC object.
+          def self.from_grpc grpc
+            new.tap { |f| f.instance_variable_set :@grpc, grpc }
           end
 
           ##
@@ -143,13 +143,13 @@ module Google
           #
           class Angles
             ##
-            # @private The FaceAnnotation Google API Client object.
-            attr_accessor :gapi
+            # @private The FaceAnnotation GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Angles instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
@@ -160,7 +160,7 @@ module Google
             # @return [Float] A value in the range [-180,180].
             #
             def roll
-              @gapi.roll_angle
+              @grpc.roll_angle
             end
 
             ##
@@ -171,7 +171,7 @@ module Google
             # @return [Float] A value in the range [-180,180].
             #
             def yaw
-              @gapi.pan_angle
+              @grpc.pan_angle
             end
             alias_method :pan, :yaw
 
@@ -182,7 +182,7 @@ module Google
             # @return [Float] A value in the range [-180,180].
             #
             def pitch
-              @gapi.tilt_angle
+              @grpc.tilt_angle
             end
             alias_method :tilt, :pitch
 
@@ -216,10 +216,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Face::Angles from a Google API Client
+            # @private New Annotation::Face::Angles from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |f| f.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |f| f.instance_variable_set :@grpc, grpc }
             end
           end
 
@@ -243,13 +243,13 @@ module Google
           #
           class Bounds
             ##
-            # @private The FaceAnnotation Google API Client object.
-            attr_accessor :gapi
+            # @private The FaceAnnotation GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Bounds instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
@@ -261,9 +261,9 @@ module Google
             # generated in the BoundingPoly (the polygon will be unbounded) if
             # only a partial face appears in the image to be annotated.
             def head
-              return [] unless @gapi.bounding_poly
-              @head ||= Array(@gapi.bounding_poly.vertices).map do |v|
-                Vertex.from_gapi v
+              return [] unless @grpc.bounding_poly
+              @head ||= Array(@grpc.bounding_poly.vertices).map do |v|
+                Vertex.from_grpc v
               end
             end
 
@@ -274,9 +274,9 @@ module Google
             # skin" visible in an image. It is not based on the landmarks, only
             # on the initial face detection.
             def face
-              return [] unless @gapi.fd_bounding_poly
-              @face ||= Array(@gapi.fd_bounding_poly.vertices).map do |v|
-                Vertex.from_gapi v
+              return [] unless @grpc.fd_bounding_poly
+              @face ||= Array(@grpc.fd_bounding_poly.vertices).map do |v|
+                Vertex.from_grpc v
               end
             end
 
@@ -309,10 +309,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Face::Angles from a Google API Client
+            # @private New Annotation::Face::Angles from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |f| f.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |f| f.instance_variable_set :@grpc, grpc }
             end
           end
 
@@ -345,13 +345,13 @@ module Google
           #
           class Features
             ##
-            # @private The FaceAnnotation Google API Client object.
-            attr_accessor :gapi
+            # @private The FaceAnnotation GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Features instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
@@ -360,7 +360,7 @@ module Google
             # @return [Float] A value in the range [0,1].
             #
             def confidence
-              @gapi.landmarking_confidence
+              @grpc.landmarking_confidence
             end
 
             ##
@@ -387,11 +387,11 @@ module Google
             #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
             #
             def [] landmark_type
-              landmark = Array(@gapi.landmarks).detect do |l|
+              landmark = Array(@grpc.landmarks).detect do |l|
                 l.type == landmark_type
               end
               return nil if landmark.nil?
-              Landmark.from_gapi landmark
+              Landmark.from_grpc landmark
             end
 
             ##
@@ -400,9 +400,9 @@ module Google
             # @return [Chin]
             #
             def chin
-              @chin ||= Chin.new self["CHIN_LEFT_GONION"],
-                                 self["CHIN_GNATHION"],
-                                 self["CHIN_RIGHT_GONION"]
+              @chin ||= Chin.new self[:CHIN_LEFT_GONION],
+                                 self[:CHIN_GNATHION],
+                                 self[:CHIN_RIGHT_GONION]
             end
 
             ##
@@ -411,8 +411,8 @@ module Google
             # @return [Ears]
             #
             def ears
-              @ears ||= Ears.new self["LEFT_EAR_TRAGION"],
-                                 self["RIGHT_EAR_TRAGION"]
+              @ears ||= Ears.new self[:LEFT_EAR_TRAGION],
+                                 self[:RIGHT_EAR_TRAGION]
             end
 
             ##
@@ -422,12 +422,12 @@ module Google
             #
             def eyebrows
               @eyebrows ||= begin
-                left = Eyebrow.new self["LEFT_OF_LEFT_EYEBROW"],
-                                   self["LEFT_EYEBROW_UPPER_MIDPOINT"],
-                                   self["RIGHT_OF_LEFT_EYEBROW"]
-                right = Eyebrow.new self["LEFT_OF_RIGHT_EYEBROW"],
-                                    self["RIGHT_EYEBROW_UPPER_MIDPOINT"],
-                                    self["RIGHT_OF_RIGHT_EYEBROW"]
+                left = Eyebrow.new self[:LEFT_OF_LEFT_EYEBROW],
+                                   self[:LEFT_EYEBROW_UPPER_MIDPOINT],
+                                   self[:RIGHT_OF_LEFT_EYEBROW]
+                right = Eyebrow.new self[:LEFT_OF_RIGHT_EYEBROW],
+                                    self[:RIGHT_EYEBROW_UPPER_MIDPOINT],
+                                    self[:RIGHT_OF_RIGHT_EYEBROW]
                 Eyebrows.new left, right
               end
             end
@@ -439,16 +439,16 @@ module Google
             #
             def eyes
               @eyes ||= begin
-                left = Eye.new self["LEFT_EYE_LEFT_CORNER"],
-                               self["LEFT_EYE_BOTTOM_BOUNDARY"],
-                               self["LEFT_EYE"], self["LEFT_EYE_PUPIL"],
-                               self["LEFT_EYE_TOP_BOUNDARY"],
-                               self["LEFT_EYE_RIGHT_CORNER"]
-                right = Eye.new self["RIGHT_EYE_LEFT_CORNER"],
-                                self["RIGHT_EYE_BOTTOM_BOUNDARY"],
-                                self["RIGHT_EYE"], self["RIGHT_EYE_PUPIL"],
-                                self["RIGHT_EYE_TOP_BOUNDARY"],
-                                self["RIGHT_EYE_RIGHT_CORNER"]
+                left = Eye.new self[:LEFT_EYE_LEFT_CORNER],
+                               self[:LEFT_EYE_BOTTOM_BOUNDARY],
+                               self[:LEFT_EYE], self[:LEFT_EYE_PUPIL],
+                               self[:LEFT_EYE_TOP_BOUNDARY],
+                               self[:LEFT_EYE_RIGHT_CORNER]
+                right = Eye.new self[:RIGHT_EYE_LEFT_CORNER],
+                                self[:RIGHT_EYE_BOTTOM_BOUNDARY],
+                                self[:RIGHT_EYE], self[:RIGHT_EYE_PUPIL],
+                                self[:RIGHT_EYE_TOP_BOUNDARY],
+                                self[:RIGHT_EYE_RIGHT_CORNER]
                 Eyes.new left, right
               end
             end
@@ -459,7 +459,7 @@ module Google
             # @return [Landmark]
             #
             def forehead
-              @forehead ||= self["FOREHEAD_GLABELLA"]
+              @forehead ||= self[:FOREHEAD_GLABELLA]
             end
 
             ##
@@ -468,7 +468,7 @@ module Google
             # @return [Lips]
             #
             def lips
-              @lips ||= Lips.new self["UPPER_LIP"], self["LOWER_LIP"]
+              @lips ||= Lips.new self[:UPPER_LIP], self[:LOWER_LIP]
             end
 
             ##
@@ -477,8 +477,8 @@ module Google
             # @return [Mouth]
             #
             def mouth
-              @mouth ||= Mouth.new self["MOUTH_LEFT"], self["MOUTH_CENTER"],
-                                   self["MOUTH_RIGHT"]
+              @mouth ||= Mouth.new self[:MOUTH_LEFT], self[:MOUTH_CENTER],
+                                   self[:MOUTH_RIGHT]
             end
 
             ##
@@ -487,10 +487,10 @@ module Google
             # @return [Nose]
             #
             def nose
-              @nose ||= Nose.new self["NOSE_BOTTOM_LEFT"],
-                                 self["NOSE_BOTTOM_CENTER"], self["NOSE_TIP"],
-                                 self["MIDPOINT_BETWEEN_EYES"],
-                                 self["NOSE_BOTTOM_RIGHT"]
+              @nose ||= Nose.new self[:NOSE_BOTTOM_LEFT],
+                                 self[:NOSE_BOTTOM_CENTER], self[:NOSE_TIP],
+                                 self[:MIDPOINT_BETWEEN_EYES],
+                                 self[:NOSE_BOTTOM_RIGHT]
             end
 
             ##
@@ -518,10 +518,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Face::Features from a Google API Client
+            # @private New Annotation::Face::Features from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |f| f.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |f| f.instance_variable_set :@grpc, grpc }
             end
 
             ##
@@ -550,13 +550,13 @@ module Google
             #
             class Landmark
               ##
-              # @private The Landmark Google API Client object.
-              attr_accessor :gapi
+              # @private The Landmark GRPC object.
+              attr_accessor :grpc
 
               ##
               # @private Creates a new Landmark instance.
               def initialize
-                @gapi = {}
+                @grpc = nil
               end
 
               ##
@@ -578,7 +578,7 @@ module Google
               #   face.features.forehead.type #=> "FOREHEAD_GLABELLA"
               #
               def type
-                @gapi.type
+                @grpc.type
               end
 
               ##
@@ -587,8 +587,8 @@ module Google
               # @return [Float]
               #
               def x
-                return nil unless @gapi.position
-                @gapi.position.x
+                return nil unless @grpc.position
+                @grpc.position.x
               end
 
               ##
@@ -597,8 +597,8 @@ module Google
               # @return [Float]
               #
               def y
-                return nil unless @gapi.position
-                @gapi.position.y
+                return nil unless @grpc.position
+                @grpc.position.y
               end
 
               ##
@@ -607,8 +607,8 @@ module Google
               # @return [Float]
               #
               def z
-                return nil unless @gapi.position
-                @gapi.position.z
+                return nil unless @grpc.position
+                @grpc.position.z
               end
 
               ##
@@ -640,10 +640,10 @@ module Google
               end
 
               ##
-              # @private New Annotation::Face::Features from a Google API Client
+              # @private New Annotation::Face::Features from a GRPC
               # object.
-              def self.from_gapi gapi
-                new.tap { |f| f.instance_variable_set :@gapi, gapi }
+              def self.from_grpc grpc
+                new.tap { |f| f.instance_variable_set :@grpc, grpc }
               end
             end
 
@@ -1323,23 +1323,23 @@ module Google
           #   face.likelihood.sorrow #=> "VERY_UNLIKELY"
           #
           class Likelihood
-            POSITIVE_RATINGS = %w(POSSIBLE LIKELY VERY_LIKELY)
+            POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)
 
             ##
-            # @private The FaceAnnotation Google API Client object.
-            attr_accessor :gapi
+            # @private The FaceAnnotation GRPC object.
+            attr_accessor :grpc
 
             ##
             # @private Creates a new Likelihood instance.
             def initialize
-              @gapi = {}
+              @grpc = nil
             end
 
             ##
             # Joy likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def joy
-              @gapi.joy_likelihood
+              @grpc.joy_likelihood
             end
 
             ##
@@ -1356,7 +1356,7 @@ module Google
             # Sorrow likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def sorrow
-              @gapi.sorrow_likelihood
+              @grpc.sorrow_likelihood
             end
 
             ##
@@ -1373,7 +1373,7 @@ module Google
             # Joy likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def anger
-              @gapi.anger_likelihood
+              @grpc.anger_likelihood
             end
 
             ##
@@ -1390,7 +1390,7 @@ module Google
             # Surprise likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def surprise
-              @gapi.surprise_likelihood
+              @grpc.surprise_likelihood
             end
 
             ##
@@ -1408,7 +1408,7 @@ module Google
             # `VERY_UNLIKELY`, `UNLIKELY`, `POSSIBLE`, `LIKELY`, and
             # `VERY_LIKELY`.
             def under_exposed
-              @gapi.under_exposed_likelihood
+              @grpc.under_exposed_likelihood
             end
 
             ##
@@ -1425,7 +1425,7 @@ module Google
             # Blurred likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def blurred
-              @gapi.blurred_likelihood
+              @grpc.blurred_likelihood
             end
 
             ##
@@ -1442,7 +1442,7 @@ module Google
             # Headwear likelihood rating. Possible values are `VERY_UNLIKELY`,
             # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
             def headwear
-              @gapi.headwear_likelihood
+              @grpc.headwear_likelihood
             end
 
             ##
@@ -1482,10 +1482,10 @@ module Google
             end
 
             ##
-            # @private New Annotation::Face::Likelihood from a Google API Client
+            # @private New Annotation::Face::Likelihood from a GRPC
             # object.
-            def self.from_gapi gapi
-              new.tap { |f| f.instance_variable_set :@gapi, gapi }
+            def self.from_grpc grpc
+              new.tap { |f| f.instance_variable_set :@grpc, grpc }
             end
           end
         end

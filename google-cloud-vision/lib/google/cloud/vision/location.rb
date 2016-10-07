@@ -79,18 +79,18 @@ module Google
         end
 
         ##
-        # @private New Google API Client LatLng object.
-        def to_gapi
-          Google::Apis::VisionV1::LatLng.new(
+        # @private New GRPC LatLng object.
+        def to_grpc
+          Google::Type::LatLng.new(
             latitude: latitude,
             longitude: longitude
           )
         end
 
         ##
-        # @private New Location from a Google API Client LatLng object.
-        def self.from_gapi gapi
-          new gapi.latitude, gapi.longitude
+        # @private New Location from a GRPC LatLng object.
+        def self.from_grpc grpc
+          new grpc.latitude, grpc.longitude
         end
       end
     end

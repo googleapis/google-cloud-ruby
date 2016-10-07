@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.wont_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "can create from a Pathname object" do
@@ -37,7 +37,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.wont_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "can create from a File object" do
@@ -48,7 +48,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.wont_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "can create from a StringIO object" do
@@ -59,7 +59,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.wont_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "can create from a Tempfile object" do
@@ -75,7 +75,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
       image.wont_be :url?
 
       image.inspect.must_be_kind_of String
-      image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+      image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
     end
   end
 
@@ -87,7 +87,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "can create from a Storage::File object" do
@@ -99,7 +99,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.must_be :url?
 
     image.inspect.must_be_kind_of String
-    image.to_gapi.must_be_kind_of Google::Apis::VisionV1::Image
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
   it "raises when giving an object that is not IO or a Google Storage URL" do

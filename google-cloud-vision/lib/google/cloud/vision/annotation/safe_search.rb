@@ -38,23 +38,23 @@ module Google
         #   safe_search.spoof #=> "VERY_UNLIKELY"
         #
         class SafeSearch
-          POSITIVE_RATINGS = %w(POSSIBLE LIKELY VERY_LIKELY)
+          POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)
 
           ##
-          # @private The SafeSearchAnnotation Google API Client object.
-          attr_accessor :gapi
+          # @private The SafeSearchAnnotation GRPC object.
+          attr_accessor :grpc
 
           ##
           # @private Creates a new SafeSearch instance.
           def initialize
-            @gapi = {}
+            @grpc = nil
           end
 
           ##
           # Adult likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def adult
-            @gapi.adult
+            @grpc.adult
           end
 
           ##
@@ -71,7 +71,7 @@ module Google
           # Spoof likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def spoof
-            @gapi.spoof
+            @grpc.spoof
           end
 
           ##
@@ -88,7 +88,7 @@ module Google
           # Medical likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def medical
-            @gapi.medical
+            @grpc.medical
           end
 
           ##
@@ -105,7 +105,7 @@ module Google
           # Violence likelihood rating. Possible values are `VERY_UNLIKELY`,
           # `UNLIKELY`, `POSSIBLE`, `LIKELY`, and `VERY_LIKELY`.
           def violence
-            @gapi.violence
+            @grpc.violence
           end
 
           ##
@@ -142,9 +142,9 @@ module Google
           end
 
           ##
-          # @private New Annotation::SafeSearch from a Google API Client object.
-          def self.from_gapi gapi
-            new.tap { |f| f.instance_variable_set :@gapi, gapi }
+          # @private New Annotation::SafeSearch from a GRPC object.
+          def self.from_grpc grpc
+            new.tap { |f| f.instance_variable_set :@grpc, grpc }
           end
         end
       end

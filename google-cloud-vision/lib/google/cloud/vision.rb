@@ -197,23 +197,14 @@ module Google
     # annotation = vision.annotate image, faces: 5
     # ```
     #
-    # ## Configuring retries and timeout
+    # ## Configuring timeout
     #
-    # You can configure how many times API requests may be automatically
-    # retried. When an API request fails, the response will be inspected to see
-    # if the request meets criteria indicating that it may succeed on retry,
-    # such as `500` and `503` status codes or a specific internal error code
-    # such as `rateLimitExceeded`. If it meets the criteria, the request will be
-    # retried after a delay. If another error occurs, the delay will be
-    # increased before a subsequent attempt, until the `retries` limit is
-    # reached.
-    #
-    # You can also set the request `timeout` value in seconds.
+    # You can configure the request `timeout` value in seconds.
     #
     # ```ruby
     # require "google/cloud/vision"
     #
-    # vision = Google::Cloud::Vision.new retries: 10, timeout: 120
+    # vision = Google::Cloud::Vision.new timeout: 120
     # ```
     #
     module Vision
@@ -464,9 +455,9 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/cloud-platform`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
       #
       # @return [Google::Cloud::Vision::Project]
       #
@@ -480,8 +471,8 @@ module Google
       #   landmark = image.landmark
       #   landmark.description #=> "Mount Rushmore"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
         project ||= Google::Cloud::Vision::Project.default_project
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
@@ -495,7 +486,8 @@ module Google
 
         Google::Cloud::Vision::Project.new(
           Google::Cloud::Vision::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
       end
     end
   end

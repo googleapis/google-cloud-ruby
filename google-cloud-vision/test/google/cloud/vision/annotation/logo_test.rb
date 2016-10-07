@@ -16,16 +16,16 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation::Entity, :logo, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { logo_annotation_response }
-  let(:logo) { Google::Cloud::Vision::Annotation::Entity.from_gapi gapi }
+  let(:grpc) { logo_annotation_response }
+  let(:logo) { Google::Cloud::Vision::Annotation::Entity.from_grpc grpc }
 
   it "knows the given attributes" do
     logo.mid.must_equal "/m/045c7b"
-    logo.locale.must_be :nil?
+    logo.locale.must_be :empty?
     logo.description.must_equal "Google"
-    logo.score.must_equal 0.6435439
-    logo.confidence.must_be :nil?
-    logo.topicality.must_be :nil?
+    logo.score.must_be_close_to 0.6435439
+    logo.confidence.must_be :zero?
+    logo.topicality.must_be :zero?
     logo.bounds[0].to_a.must_equal [1,  0]
     logo.bounds[1].to_a.must_equal [295, 0]
     logo.bounds[2].to_a.must_equal [295, 301]
@@ -38,11 +38,11 @@ describe Google::Cloud::Vision::Annotation::Entity, :logo, :mock_vision do
     hash = logo.to_h
     hash.must_be_kind_of Hash
     hash[:mid].must_equal "/m/045c7b"
-    hash[:locale].must_equal nil
+    hash[:locale].must_equal ""
     hash[:description].must_equal "Google"
-    hash[:score].must_equal 0.6435439
-    hash[:confidence].must_equal nil
-    hash[:topicality].must_equal nil
+    hash[:score].must_be_close_to 0.6435439
+    hash[:confidence].must_equal 0.0
+    hash[:topicality].must_equal 0.0
     hash[:bounds].must_be_kind_of Array
     hash[:bounds][0].must_equal({ x: 1,   y: 0 })
     hash[:bounds][1].must_equal({ x: 295, y: 0 })
@@ -53,7 +53,7 @@ describe Google::Cloud::Vision::Annotation::Entity, :logo, :mock_vision do
   end
 
   it "can convert to a string" do
-    logo.to_s.must_equal "mid: \"/m/045c7b\", locale: nil, description: \"Google\", score: 0.6435439, confidence: nil, topicality: nil, bounds: 4, locations: 0, properties: {}"
+    logo.to_s.must_equal "mid: \"/m/045c7b\", locale: \"\", description: \"Google\", score: 0.6435438990592957, confidence: 0.0, topicality: 0.0, bounds: 4, locations: 0, properties: {}"
     logo.inspect.must_include logo.to_s
   end
 end

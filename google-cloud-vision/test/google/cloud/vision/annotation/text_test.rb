@@ -16,8 +16,8 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation::Text, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi_list) { text_annotation_responses }
-  let(:text) { Google::Cloud::Vision::Annotation::Text.from_gapi gapi_list }
+  let(:grpc_list) { text_annotation_responses }
+  let(:text) { Google::Cloud::Vision::Annotation::Text.from_grpc grpc_list }
 
   it "knows the given attributes" do
     text.text.must_include "Google Cloud Client for Ruby"

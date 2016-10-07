@@ -16,8 +16,8 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation::SafeSearch, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:gapi) { safe_search_annotation_response }
-  let(:safe_search) { Google::Cloud::Vision::Annotation::SafeSearch.from_gapi gapi }
+  let(:grpc) { safe_search_annotation_response }
+  let(:safe_search) { Google::Cloud::Vision::Annotation::SafeSearch.from_grpc grpc }
 
   it "knows the given attributes" do
     safe_search.wont_be :nil?
@@ -27,10 +27,10 @@ describe Google::Cloud::Vision::Annotation::SafeSearch, :mock_vision do
     safe_search.must_be :medical?
     safe_search.must_be :violence?
 
-    safe_search.adult.must_equal "VERY_UNLIKELY"
-    safe_search.spoof.must_equal "UNLIKELY"
-    safe_search.medical.must_equal "POSSIBLE"
-    safe_search.violence.must_equal "LIKELY"
+    safe_search.adult.must_equal :VERY_UNLIKELY
+    safe_search.spoof.must_equal :UNLIKELY
+    safe_search.medical.must_equal :POSSIBLE
+    safe_search.violence.must_equal :LIKELY
   end
 
   it "can convert to a hash" do

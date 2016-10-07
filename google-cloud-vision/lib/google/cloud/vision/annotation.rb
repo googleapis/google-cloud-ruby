@@ -42,13 +42,13 @@ module Google
       #
       class Annotation
         ##
-        # @private The AnnotateImageResponse Google API Client object.
-        attr_accessor :gapi
+        # @private The AnnotateImageResponse GRPC object.
+        attr_accessor :grpc
 
         ##
         # @private Creates a new Annotation instance.
         def initialize
-          @gapi = nil
+          @grpc = nil
         end
 
         ##
@@ -67,8 +67,8 @@ module Google
         #   face = annotation.faces.first
         #
         def faces
-          @faces ||= Array(@gapi.face_annotations).map do |fa|
-            Face.from_gapi fa
+          @faces ||= Array(@grpc.face_annotations).map do |fa|
+            Face.from_grpc fa
           end
         end
 
@@ -124,8 +124,8 @@ module Google
         #   landmark = annotation.landmarks.first
         #
         def landmarks
-          @landmarks ||= Array(@gapi.landmark_annotations).map do |lm|
-            Entity.from_gapi lm
+          @landmarks ||= Array(@grpc.landmark_annotations).map do |lm|
+            Entity.from_grpc lm
           end
         end
 
@@ -182,8 +182,8 @@ module Google
         #   logo = annotation.logos.first
         #
         def logos
-          @logos ||= Array(@gapi.logo_annotations).map do |lg|
-            Entity.from_gapi lg
+          @logos ||= Array(@grpc.logo_annotations).map do |lg|
+            Entity.from_grpc lg
           end
         end
 
@@ -240,8 +240,8 @@ module Google
         #   label = annotation.labels.first
         #
         def labels
-          @labels ||= Array(@gapi.label_annotations).map do |lb|
-            Entity.from_gapi lb
+          @labels ||= Array(@grpc.label_annotations).map do |lb|
+            Entity.from_grpc lb
           end
         end
 
@@ -297,7 +297,7 @@ module Google
         #   text = annotation.text
         #
         def text
-          @text ||= Text.from_gapi(@gapi.text_annotations)
+          @text ||= Text.from_grpc(@grpc.text_annotations)
         end
 
         ##
@@ -333,8 +333,8 @@ module Google
         #   safe_search = annotation.safe_search
         #
         def safe_search
-          return nil unless @gapi.safe_search_annotation
-          @safe_search ||= SafeSearch.from_gapi(@gapi.safe_search_annotation)
+          return nil unless @grpc.safe_search_annotation
+          @safe_search ||= SafeSearch.from_grpc(@grpc.safe_search_annotation)
         end
 
         ##
@@ -371,9 +371,9 @@ module Google
         #   properties = annotation.properties
         #
         def properties
-          return nil unless @gapi.image_properties_annotation
-          @properties ||= Properties.from_gapi(
-            @gapi.image_properties_annotation)
+          return nil unless @grpc.image_properties_annotation
+          @properties ||= Properties.from_grpc(
+            @grpc.image_properties_annotation)
         end
 
         ##
@@ -420,9 +420,9 @@ module Google
         end
 
         ##
-        # @private New Annotation from a Google API Client object.
-        def self.from_gapi gapi
-          new.tap { |a| a.instance_variable_set :@gapi, gapi }
+        # @private New Annotation from a GRPC object.
+        def self.from_grpc grpc
+          new.tap { |a| a.instance_variable_set :@grpc, grpc }
         end
       end
     end

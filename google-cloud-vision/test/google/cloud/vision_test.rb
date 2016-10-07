@@ -13,19 +13,17 @@
 # limitations under the License.
 
 require "helper"
-require "google/cloud/vision"
-require "google/cloud/core/gce"
 
 describe Google::Cloud do
   describe "#vision" do
     it "calls out to Google::Cloud.vision" do
       gcloud = Google::Cloud.new
-      stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_vision = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal nil
         keyfile.must_equal nil
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "vision-project-object-empty"
       }
       Google::Cloud.stub :vision, stubbed_vision do
@@ -36,12 +34,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.vision" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_vision = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "vision-project-object"
       }
       Google::Cloud.stub :vision, stubbed_vision do
@@ -52,16 +50,16 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.vision" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_vision = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_vision = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
         timeout.must_equal 60
+        client_config.must_equal({ "gax" => "options" })
         "vision-project-object-scoped"
       }
       Google::Cloud.stub :vision, stubbed_vision do
-        project = gcloud.vision scope: "http://example.com/scope", retries: 5, timeout: 60
+        project = gcloud.vision scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
         project.must_equal "vision-project-object-scoped"
       end
     end
@@ -92,11 +90,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "vision-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "vision-credentials"
-        retries.must_equal nil
-        timeout.must_equal nil
+        timeout.must_be :nil?
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -143,11 +141,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "vision-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "vision-credentials"
-        retries.must_equal nil
-        timeout.must_equal nil
+        timeout.must_be :nil?
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 
