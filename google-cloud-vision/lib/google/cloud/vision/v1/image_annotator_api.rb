@@ -46,7 +46,7 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
-          CODE_GEN_NAME_VERSION = "grpcc/0.1.0".freeze
+          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
 
           DEFAULT_TIMEOUT = 30
 
