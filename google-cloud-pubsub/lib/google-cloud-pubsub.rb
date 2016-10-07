@@ -38,8 +38,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Pubsub::Project]
     #
@@ -58,10 +59,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   pubsub = gcloud.pubsub scope: platform_scope
     #
-    def pubsub scope: nil, retries: nil, timeout: nil
+    def pubsub scope: nil, timeout: nil, client_config: nil
       Google::Cloud.pubsub @project, @keyfile, scope: scope,
-                                               retries: retries,
-                                               timeout: (timeout || @timeout)
+                                               timeout: (timeout || @timeout),
+                                               client_config: client_config
     end
 
     ##
@@ -83,8 +84,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] retries This option is not currently supported.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Pubsub::Project]
     #
@@ -96,12 +98,12 @@ module Google
     #   topic = pubsub.topic "my-topic"
     #   topic.publish "task completed"
     #
-    def self.pubsub project = nil, keyfile = nil, scope: nil, retries: nil,
-                    timeout: nil
+    def self.pubsub project = nil, keyfile = nil, scope: nil, timeout: nil,
+                    client_config: nil
       require "google/cloud/pubsub"
       Google::Cloud::Pubsub.new project: project, keyfile: keyfile,
-                                scope: scope, retries: retries,
-                                timeout: timeout
+                                scope: scope, timeout: timeout,
+                                client_config: client_config
     end
   end
 end

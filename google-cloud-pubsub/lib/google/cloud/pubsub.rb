@@ -334,7 +334,7 @@ module Google
     # ```ruby
     # require "google/cloud/pubsub"
     #
-    # pubsub = Google::Cloud::Pubsub.new retries: 10, timeout: 120
+    # pubsub = Google::Cloud::Pubsub.new timeout: 120
     # ```
     #
     # ## Working Across Projects
@@ -424,9 +424,9 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/pubsub`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
       #
       # @return [Google::Cloud::Pubsub::Project]
       #
@@ -438,9 +438,10 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
         project ||= Google::Cloud::Pubsub::Project.default_project
+        project = project.to_s # Always cast to a string
         if ENV["PUBSUB_EMULATOR_HOST"]
           ps = Google::Cloud::Pubsub::Project.new(
             Google::Cloud::Pubsub::Service.new(
@@ -451,12 +452,13 @@ module Google
         if keyfile.nil?
           credentials = Google::Cloud::Pubsub::Credentials.default scope: scope
         else
-          credentials = Google::Cloud::Pubsub::Credentials.new(
-            keyfile, scope: scope)
+          credentials = Google::Cloud::Pubsub::Credentials.new \
+            keyfile, scope: scope
         end
         Google::Cloud::Pubsub::Project.new(
           Google::Cloud::Pubsub::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
       end
     end
   end

@@ -19,12 +19,12 @@ describe Google::Cloud do
   describe "#pubsub" do
     it "calls out to Google::Cloud.pubsub" do
       gcloud = Google::Cloud.new
-      stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_pubsub = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal nil
         keyfile.must_equal nil
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "pubsub-project-object-empty"
       }
       Google::Cloud.stub :pubsub, stubbed_pubsub do
@@ -35,12 +35,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.pubsub" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_pubsub = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "pubsub-project-object"
       }
       Google::Cloud.stub :pubsub, stubbed_pubsub do
@@ -51,16 +51,16 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.pubsub" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_pubsub = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_pubsub = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
         timeout.must_equal 60
+        client_config.must_equal 5
         "pubsub-project-object-scoped"
       }
       Google::Cloud.stub :pubsub, stubbed_pubsub do
-        project = gcloud.pubsub scope: "http://example.com/scope", retries: 5, timeout: 60
+        project = gcloud.pubsub scope: "http://example.com/scope", timeout: 60, client_config: 5
         project.must_equal "pubsub-project-object-scoped"
       end
     end
@@ -91,10 +91,10 @@ describe Google::Cloud do
         scope.must_equal nil
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
-        retries.must_equal nil
+        client_config.must_equal nil
         timeout.must_equal nil
         OpenStruct.new project: project
       }
@@ -142,11 +142,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
-        retries.must_equal nil
         timeout.must_equal nil
+        client_config.must_equal nil
         OpenStruct.new project: project
       }
 
