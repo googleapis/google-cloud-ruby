@@ -160,7 +160,7 @@ module Google
       #   * `https://www.googleapis.com/auth/speech`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+      #   behavior of the API client. Optional.
       #
       # @return [Google::Cloud::Speech::Project]
       #

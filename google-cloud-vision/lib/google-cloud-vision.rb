@@ -100,20 +100,9 @@ module Google
     def self.vision project = nil, keyfile = nil, scope: nil, timeout: nil,
                     client_config: nil
       require "google/cloud/vision"
-      project ||= Google::Cloud::Vision::Project.default_project
-      project = project.to_s # Always cast to a string
-      fail ArgumentError, "project is missing" if project.empty?
-
-      if keyfile.nil?
-        credentials = Google::Cloud::Vision::Credentials.default scope: scope
-      else
-        credentials = Google::Cloud::Vision::Credentials.new \
-          keyfile, scope: scope
-      end
-
-      Google::Cloud::Vision::Project.new(
-        Google::Cloud::Vision::Service.new(
-          project, credentials, timeout: timeout, client_config: client_config))
+      Google::Cloud::Vision.new project: project, keyfile: keyfile,
+                                scope: scope, timeout: timeout,
+                                client_config: client_config
     end
   end
 end
