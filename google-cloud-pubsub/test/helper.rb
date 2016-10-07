@@ -20,6 +20,7 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/pubsub"
+require "grpc"
 
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
