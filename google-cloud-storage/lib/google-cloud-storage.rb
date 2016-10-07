@@ -108,7 +108,6 @@ module Google
       Google::Cloud::Storage.new project: project, keyfile: keyfile,
                                  scope: scope, retries: retries,
                                  timeout: timeout
-
     end
   end
 end

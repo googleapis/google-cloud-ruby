@@ -100,7 +100,7 @@ module Google
     def self.vision project = nil, keyfile = nil, scope: nil, timeout: nil,
                     client_config: nil
       require "google/cloud/vision"
-      Google::Cloud::Vision.new project: project, keyfile: keyfile, 
+      Google::Cloud::Vision.new project: project, keyfile: keyfile,
                                 scope: scope, timeout: timeout,
                                 client_config: client_config
     end
