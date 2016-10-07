@@ -18,11 +18,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   it "lists entries" do
     num_entries = 3
 
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json list_entries_json(num_entries)
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(num_entries))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
     logging.service.mocked_logging = mock
 
     entries = logging.entries
@@ -36,11 +35,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   it "lists entries with find_entries alias" do
     num_entries = 3
 
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json list_entries_json(num_entries)
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(num_entries))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
     logging.service.mocked_logging = mock
 
     entries = logging.find_entries
@@ -52,14 +50,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     first_entries = logging.entries
@@ -78,23 +74,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with criteria" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp"
-    )
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp",
-      page_token: "next_page_token"
-    )
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     first_entries = logging.entries projects: ["project1", "project2", "project3"],
@@ -118,14 +103,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries using next? and next" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     first_entries = logging.entries
@@ -143,23 +126,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with criteria using next? and next" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp"
-    )
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp",
-      page_token: "next_page_token"
-    )
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     first_entries = logging.entries projects: ["project1", "project2", "project3"],
@@ -179,14 +151,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries using all" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     all_entries = logging.entries.all.to_a
@@ -198,23 +168,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with criteria using all" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp"
-    )
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new(
-      project_ids: ["project1", "project2", "project3"],
-      filter: 'resource.type:"gce_"',
-      order_by: "timestamp",
-      page_token: "next_page_token"
-    )
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [["project1", "project2", "project3"], filter: 'resource.type:"gce_"', order_by: "timestamp", page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     all_entries = logging.entries(projects: ["project1", "project2", "project3"],
@@ -228,14 +187,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries using all using Enumerator" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "second_page_token"))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     all_entries = logging.entries.all.take(5)
@@ -247,14 +204,12 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries using all with request_limit set" do
-    first_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    first_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_token: "next_page_token"
-    second_list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "second_page_token"))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, first_list_res, [first_list_req]
-    mock.expect :list_log_entries, second_list_res, [second_list_req]
+    mock.expect :list_log_entries, first_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+    mock.expect :list_log_entries, second_list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_logging = mock
 
     all_entries = logging.entries.all(request_limit: 1).to_a
@@ -266,11 +221,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with one project" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: ["project1"]
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [["project1"], filter: nil, order_by: nil, page_size: nil, options: {}]
     logging.service.mocked_logging = mock
 
     entries = logging.entries projects: "project1"
@@ -284,11 +238,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with multiple projects" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: ["project1", "project2", "project3"]
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [["project1", "project2", "project3"], filter: nil, order_by: nil, page_size: nil, options: {}]
     logging.service.mocked_logging = mock
 
     entries = logging.entries projects: ["project1", "project2", "project3"]
@@ -304,11 +257,11 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   it "paginates entries with a filter" do
     adv_logs_filter = 'resource.type:"gce_"'
 
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], filter: adv_logs_filter
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: adv_logs_filter, order_by: nil, page_size: nil, options: {}]
+
     logging.service.mocked_logging = mock
 
     entries = logging.entries filter: adv_logs_filter
@@ -322,11 +275,11 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with order asc" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], order_by: "timestamp"
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: "timestamp", page_size: nil, options: {}]
+
     logging.service.mocked_logging = mock
 
     entries = logging.entries order: "timestamp"
@@ -340,11 +293,11 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with order desc" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], order_by: "timestamp desc"
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: "timestamp desc", page_size: nil, options: {}]
+
     logging.service.mocked_logging = mock
 
     entries = logging.entries order: "timestamp desc"
@@ -358,11 +311,11 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries with max set" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project], page_size: 3
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: nil, page_size: 3, options: {}]
+
     logging.service.mocked_logging = mock
 
     entries = logging.entries max: 3
@@ -376,11 +329,11 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
   end
 
   it "paginates entries without max set" do
-    list_req = Google::Logging::V2::ListLogEntriesRequest.new project_ids: [project]
-    list_res = Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_entries, list_res, [list_req]
+    mock.expect :list_log_entries, list_res, [[project], filter: nil, order_by: nil, page_size: nil, options: {}]
+
     logging.service.mocked_logging = mock
 
     entries = logging.entries

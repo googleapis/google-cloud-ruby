@@ -20,6 +20,7 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/logging"
+require "grpc"
 
 class MockLogging < Minitest::Spec
   let(:project) { "test" }

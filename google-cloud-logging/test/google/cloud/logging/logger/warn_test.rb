@@ -28,15 +28,9 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
 
-  def write_req severity
-    Google::Logging::V2::WriteLogEntriesRequest.new(
-      log_name: "projects/test/logs/web_app_log",
-      resource: resource.to_grpc,
-      labels: labels,
-      entries: [Google::Logging::V2::LogEntry.new(
-        text_payload: "Danger Will Robinson!", severity: severity
-      )]
-    )
+  def write_req_args severity
+    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!", severity: severity)]
+    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels]
   end
 
   before do
@@ -61,7 +55,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #warn" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:WARNING)]
+    mock.expect :write_log_entries, write_res, write_req_args(:WARNING)
     logging.service.mocked_logging = mock
 
     logger.warn "Danger Will Robinson!"
@@ -71,7 +65,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #error" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:ERROR)]
+    mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
     logging.service.mocked_logging = mock
 
     logger.error "Danger Will Robinson!"
@@ -81,7 +75,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #fatal" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:CRITICAL)]
+    mock.expect :write_log_entries, write_res, write_req_args(:CRITICAL)
     logging.service.mocked_logging = mock
 
     logger.fatal "Danger Will Robinson!"
@@ -91,7 +85,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #unknown" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
+    mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
     logger.unknown "Danger Will Robinson!"
@@ -109,7 +103,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #warn with a block" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:WARNING)]
+    mock.expect :write_log_entries, write_res, write_req_args(:WARNING)
     logging.service.mocked_logging = mock
 
     logger.warn { "Danger Will Robinson!" }
@@ -119,7 +113,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #error with a block" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:ERROR)]
+    mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
     logging.service.mocked_logging = mock
 
     logger.error { "Danger Will Robinson!" }
@@ -129,7 +123,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #fatal with a block" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:CRITICAL)]
+    mock.expect :write_log_entries, write_res, write_req_args(:CRITICAL)
     logging.service.mocked_logging = mock
 
     logger.fatal { "Danger Will Robinson!" }
@@ -139,7 +133,7 @@ describe Google::Cloud::Logging::Logger, :warn, :mock_logging do
 
   it "creates a log entry with #unknown with a block" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req(:DEFAULT)]
+    mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
     logger.unknown { "Danger Will Robinson!" }

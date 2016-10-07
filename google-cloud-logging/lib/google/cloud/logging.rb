@@ -316,23 +316,14 @@ module Google
     # logger.info "Log entry written synchronously."
     # ```
     #
-    # ## Configuring retries and timeout
+    # ## Configuring timeout
     #
-    # You can configure how many times API requests may be automatically
-    # retried. When an API request fails, the response will be inspected to see
-    # if the request meets criteria indicating that it may succeed on retry,
-    # such as `500` and `503` status codes or a specific internal error code
-    # such as `rateLimitExceeded`. If it meets the criteria, the request will be
-    # retried after a delay. If another error occurs, the delay will be
-    # increased before a subsequent attempt, until the `retries` limit is
-    # reached.
-    #
-    # You can also set the request `timeout` value in seconds.
+    # You can configure the request `timeout` value in seconds.
     #
     # ```ruby
     # require "google/cloud/logging"
     #
-    # logging = Google::Cloud::Logging.new retries: 10, timeout: 120
+    # logging = Google::Cloud::Logging.new timeout: 120
     # ```
     #
     module Logging
@@ -356,9 +347,9 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/logging.admin`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
       #
       # @return [Google::Cloud::Logging::Project]
       #
@@ -366,10 +357,14 @@ module Google
       #   require "google/cloud/logging"
       #
       #   logging = Google::Cloud::Logging.new
-      #   # ...
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
+      #   entries = logging.entries
+      #   entries.each do |e|
+      #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+      #   end
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
         project ||= Google::Cloud::Logging::Project.default_project
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
@@ -384,7 +379,8 @@ module Google
 
         Google::Cloud::Logging::Project.new(
           Google::Cloud::Logging::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+            project, credentials, timeout: timeout,
+                                  client_config: client_config))
       end
     end
   end

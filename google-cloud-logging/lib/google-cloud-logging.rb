@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .bigquery and
-# #bigquery methods can be available, but the library and all dependencies won't
+# This file is here to be autorequired by bundler, so that the .logging and
+# #logging methods can be available, but the library and all dependencies won't
 # be loaded until required and used.
 
 
@@ -41,6 +41,8 @@ module Google
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Logging::Project]
     #
@@ -49,7 +51,11 @@ module Google
     #
     #   gcloud = Google::Cloud.new
     #   logging = gcloud.logging
-    #   # ...
+    #
+    #   entries = logging.entries
+    #   entries.each do |e|
+    #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+    #   end
     #
     # @example The default scope can be overridden with the `scope` option:
     #   require "google/cloud"
@@ -58,10 +64,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   logging = gcloud.logging scope: platform_scope
     #
-    def logging scope: nil, retries: nil, timeout: nil
+    def logging scope: nil, timeout: nil, client_config: nil
       Google::Cloud.logging @project, @keyfile, scope: scope,
-                                                retries: (retries || @retries),
-                                                timeout: (timeout || @timeout)
+                                                timeout: (timeout || @timeout),
+                                                client_config: client_config
     end
 
     ##
@@ -72,7 +78,7 @@ module Google
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # @param [String] project Project identifier for the Stackdriver Logging
-    #   service.
+    #   service you are connecting to.
     # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
     #   file path the file must be readable.
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
@@ -83,25 +89,28 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/logging.admin`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Logging::Project]
     #
     # @example
     #   require "google/cloud"
     #
-    #   gcloud = Google::Cloud.new
-    #   logging = gcloud.logging
-    #   # ...
+    #   logging = Google::Cloud.logging
     #
-    def self.logging project = nil, keyfile = nil, scope: nil, retries: nil,
-                     timeout: nil
+    #   entries = logging.entries
+    #   entries.each do |e|
+    #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+    #   end
+    #
+    def self.logging project = nil, keyfile = nil, scope: nil, timeout: nil,
+                     client_config: nil
       require "google/cloud/logging"
       Google::Cloud::Logging.new project: project, keyfile: keyfile,
-                                 scope: scope, retries: retries,
-                                 timeout: timeout
+                                 scope: scope, timeout: timeout,
+                                 client_config: client_config
     end
   end
 end

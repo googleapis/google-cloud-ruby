@@ -17,11 +17,10 @@ require "helper"
 describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   it "lists metrics" do
     num_metrics = 3
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [list_req]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics
@@ -34,11 +33,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
   it "lists metrics with find_metrics alias" do
     num_metrics = 3
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [list_req]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
     logging.service.mocked_metrics = mock
 
     metrics = logging.find_metrics
@@ -50,14 +48,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
@@ -76,14 +72,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with next? and next" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
@@ -101,14 +95,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with next? and next and max set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics max: 3
@@ -126,14 +118,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with all" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all.to_a
@@ -145,14 +135,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with all and max set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token", page_size: 3)
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics(max: 3).all.to_a
@@ -164,14 +152,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "iterates metrics with all using Enumerator" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all.take(5)
@@ -183,14 +169,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "iterates metrics with all request_limit set" do
-    first_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    first_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
-    second_list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_token: "next_page_token")
-    second_list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [first_list_req]
-    mock.expect :list_log_metrics, second_list_res, [second_list_req]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all(request_limit: 1).to_a
@@ -202,11 +186,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics with max set" do
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path, page_size: 3)
-    list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [list_req]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: 3, options: {}]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics max: 3
@@ -220,11 +203,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
   end
 
   it "paginates metrics without max set" do
-    list_req = Google::Logging::V2::ListLogMetricsRequest.new(parent: project_path)
-    list_res = Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))
+    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [list_req]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics
@@ -244,15 +226,11 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
         name: new_metric_name,
         filter: new_metric_filter
       )
-    create_req = Google::Logging::V2::CreateLogMetricRequest.new(
-      parent: "projects/test",
-      metric: new_metric
-    )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
                                                                                     "filter" => new_metric_filter).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_log_metric, create_res, [create_req]
+    mock.expect :create_log_metric, create_res, ["projects/test", new_metric]
     logging.service.mocked_metrics = mock
 
     metric = logging.create_metric new_metric_name, new_metric_filter
@@ -275,16 +253,12 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
       description: new_metric_description,
       filter: new_metric_filter
     )
-    create_req = Google::Logging::V2::CreateLogMetricRequest.new(
-      parent: "projects/test",
-      metric: new_metric
-    )
     create_res = Google::Logging::V2::LogMetric.decode_json(empty_metric_hash.merge("name" => new_metric_name,
                                                                                     "description" => new_metric_description,
                                                                                     "filter" => new_metric_filter).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_log_metric, create_res, [create_req]
+    mock.expect :create_log_metric, create_res, ["projects/test", new_metric]
     logging.service.mocked_metrics = mock
 
     metric = logging.create_metric new_metric_name, new_metric_filter, description: new_metric_description
@@ -298,11 +272,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
   it "gets a metric" do
     metric_name = "existing-metric-#{Time.now.to_i}"
-    get_req = Google::Logging::V2::GetLogMetricRequest.new metric_name: "projects/test/metrics/#{metric_name}"
     get_res = Google::Logging::V2::LogMetric.decode_json(random_metric_hash.merge("name" => metric_name).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :get_log_metric, get_res, [get_req]
+    mock.expect :get_log_metric, get_res, ["projects/test/metrics/#{metric_name}"]
     logging.service.mocked_metrics = mock
 
     metric = logging.metric metric_name
@@ -318,7 +291,9 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     stub = Object.new
     def stub.get_log_metric *args
-      raise GRPC::BadStatus.new 5, "not found"
+      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+      raise gax_error
     end
     logging.service.mocked_metrics = stub
 

@@ -19,7 +19,7 @@ require "minitest/rg"
 require "google/cloud/logging"
 
 # Create shared logging object so we don't create new for each test
-$logging = Google::Cloud.new.logging retries: 10
+$logging = Google::Cloud::Logging.new
 
 # create prefix for names of datasets and tables
 require "time"

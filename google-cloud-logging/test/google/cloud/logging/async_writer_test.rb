@@ -41,29 +41,25 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     }
   end
 
-  def write_req payload, labels = labels1
+  def write_req_args payload, labels = labels1
     full_log_name = "projects/test/logs/#{log_name}"
-    Google::Logging::V2::WriteLogEntriesRequest.new(
-      log_name: full_log_name,
-      resource: resource.to_grpc,
-      labels: labels,
-      entries: Array(payload).map { |str|
-        Google::Logging::V2::LogEntry.new(
-          text_payload: str,
-          severity: :INFO,
-          resource: resource.to_grpc,
-          log_name: full_log_name,
-          labels: labels
-        )
-      }
-    )
+    entries = Array(payload).map do |str|
+      Google::Logging::V2::LogEntry.new(
+        text_payload: str,
+        severity: :INFO,
+        resource: resource.to_grpc,
+        log_name: full_log_name,
+        labels: labels
+      )
+    end
+    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels]
   end
 
   it "writes a single entry" do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect :write_log_entries, write_res, [write_req("payload1")]
+    mock.expect :write_log_entries, write_res, write_req_args("payload1")
 
     async_writer.write_entries(
       entries("payload1"),
@@ -81,9 +77,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect(:write_log_entries, write_res,
-      [write_req(["payload1", "payload2"], labels1)]
-    )
+    mock.expect :write_log_entries, write_res, write_req_args(["payload1", "payload2"], labels1)
 
     async_writer.suspend
     async_writer.write_entries(
@@ -109,12 +103,8 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect(:write_log_entries, write_res,
-      [write_req(["payload1"], labels1)]
-    )
-    mock.expect(:write_log_entries, write_res,
-      [write_req("payload2", labels2)]
-    )
+    mock.expect :write_log_entries, write_res, write_req_args(["payload1"], labels1)
+    mock.expect :write_log_entries, write_res, write_req_args("payload2", labels2)
 
     async_writer.suspend
     async_writer.write_entries(
