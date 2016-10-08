@@ -19,12 +19,12 @@ describe Google::Cloud do
   describe "#datastore" do
     it "calls out to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new
-      stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal nil
         keyfile.must_equal nil
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "datastore-dataset-object-empty"
       }
       Google::Cloud.stub :datastore, stubbed_datastore do
@@ -35,12 +35,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
-        retries.must_be :nil?
         timeout.must_be :nil?
+        client_config.must_be :nil?
         "datastore-dataset-object"
       }
       Google::Cloud.stub :datastore, stubbed_datastore do
@@ -51,16 +51,16 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
         timeout.must_equal 60
+        client_config.must_equal({ "gax" => "options" })
         "datastore-dataset-object-scoped"
       }
       Google::Cloud.stub :datastore, stubbed_datastore do
-        dataset = gcloud.datastore scope: "http://example.com/scope", retries: 5, timeout: 60
+        dataset = gcloud.datastore scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
         dataset.must_equal "datastore-dataset-object-scoped"
       end
     end
@@ -91,11 +91,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
-        retries.must_equal nil
         timeout.must_equal nil
+        client_config.must_equal nil
         OpenStruct.new project: project
       }
 
@@ -142,11 +142,11 @@ describe Google::Cloud do
         scope.must_equal nil
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
-        retries.must_equal nil
         timeout.must_equal nil
+        client_config.must_equal nil
         OpenStruct.new project: project
       }
 

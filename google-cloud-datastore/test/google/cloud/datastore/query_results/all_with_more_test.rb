@@ -18,12 +18,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
-  let(:first_run_query_req) do
-    Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("Task").to_grpc
-    )
-  end
+  let(:first_run_query) { Google::Cloud::Datastore::Query.new.kind("Task").to_grpc }
   let(:first_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
       Google::Datastore::V1::EntityResult.new(
@@ -42,14 +37,11 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
       )
     )
   end
-  let(:next_run_query_req) do
-    Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("Task").start(
+  let(:next_run_query) do
+      Google::Cloud::Datastore::Query.new.kind("Task").start(
         Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
       ).to_grpc
-    )
-  end
+    end
   let(:next_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
       Google::Datastore::V1::EntityResult.new(
@@ -70,13 +62,13 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more do
   end
 
   before do
-    dataset.service.mocked_datastore = Minitest::Mock.new
-    dataset.service.mocked_datastore.expect :run_query, first_run_query_res, [first_run_query_req]
-    dataset.service.mocked_datastore.expect :run_query, next_run_query_res, [next_run_query_req]
+    dataset.service.mocked_service = Minitest::Mock.new
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, nil, query: first_run_query, gql_query: nil]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, nil, query: next_run_query, gql_query: nil]
   end
 
   after do
-    dataset.service.mocked_datastore.verify
+    dataset.service.mocked_service.verify
   end
 
   it "run will fulfill a query and can use the all and limit api calls" do

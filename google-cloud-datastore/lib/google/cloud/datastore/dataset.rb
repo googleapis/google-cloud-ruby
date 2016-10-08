@@ -54,7 +54,7 @@ module Google
       #
       class Dataset
         ##
-        # @private The gRPC Service object.
+        # @private The Service object.
         attr_accessor :service
 
         ##

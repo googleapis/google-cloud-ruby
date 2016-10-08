@@ -20,8 +20,8 @@ describe Google::Cloud::Datastore::Transaction do
   let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
   let(:service) do
     s = dataset.service
-    s.mocked_datastore = Minitest::Mock.new
-    s.mocked_datastore.expect :begin_transaction, begin_tx_res, [Google::Datastore::V1::BeginTransactionRequest]
+    s.mocked_service = Minitest::Mock.new
+    s.mocked_service.expect :begin_transaction, begin_tx_res, [project]
     s
   end
   let(:transaction) { Google::Cloud::Datastore::Transaction.new service }
@@ -65,7 +65,7 @@ describe Google::Cloud::Datastore::Transaction do
   let(:tx_id) { "giterdone".encode("ASCII-8BIT") }
 
   after do
-    transaction.service.mocked_datastore.verify
+    transaction.service.mocked_service.verify
   end
 
   it "save does not persist entities" do
@@ -288,26 +288,27 @@ describe Google::Cloud::Datastore::Transaction do
         Google::Datastore::V1::MutationResult.new,
         Google::Datastore::V1::MutationResult.new]
     )
-    commit_req = Google::Datastore::V1::CommitRequest.new(
-      project_id: project,
-      mode: :TRANSACTIONAL,
-      transaction: tx_id,
-      mutations: [Google::Datastore::V1::Mutation.new(
+    mode = :TRANSACTIONAL
+    mutations = [
+      Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-saved"
           e["name"] = "Gonna be saved"
-        end.to_grpc), Google::Datastore::V1::Mutation.new(
+        end.to_grpc),
+      Google::Datastore::V1::Mutation.new(
         insert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-inserted"
           e["name"] = "Gonna be inserted"
-        end.to_grpc), Google::Datastore::V1::Mutation.new(
+        end.to_grpc),
+      Google::Datastore::V1::Mutation.new(
         update: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-updated"
           e["name"] = "Gonna be updated"
-        end.to_grpc), Google::Datastore::V1::Mutation.new(
-          delete: Google::Cloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)]
-    )
-    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+        end.to_grpc),
+      Google::Datastore::V1::Mutation.new(
+        delete: Google::Cloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)
+    ]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id]
 
     entity_to_be_saved = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-saved"
@@ -337,12 +338,9 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "find can take a key" do
-    lookup_req = Google::Datastore::V1::LookupRequest.new(
-      project_id: project,
-      keys: [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc],
-      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    )
-    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+    keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
+    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys]
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
@@ -350,13 +348,10 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "find_all takes several keys" do
-    lookup_req = Google::Datastore::V1::LookupRequest.new(
-      project_id: project,
-      keys: [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
-             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc],
-      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    )
-    transaction.service.mocked_datastore.expect :lookup, lookup_res, [lookup_req]
+    keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
+             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
+    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -370,12 +365,9 @@ describe Google::Cloud::Datastore::Transaction do
   end
 
   it "run will fulfill a query" do
-    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc,
-      read_options: Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    )
-    transaction.service.mocked_datastore.expect :run_query, run_query_res, [run_query_req]
+    query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
+    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options, query: query_grpc, gql_query: nil]
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -396,17 +388,15 @@ describe Google::Cloud::Datastore::Transaction do
     commit_res = Google::Datastore::V1::CommitResponse.new(
       mutation_results: [Google::Datastore::V1::MutationResult.new]
     )
-    commit_req = Google::Datastore::V1::CommitRequest.new(
-      project_id: project,
-      mode: :TRANSACTIONAL,
-      transaction: tx_id,
-      mutations: [Google::Datastore::V1::Mutation.new(
+    mode = :TRANSACTIONAL
+    mutations = [
+      Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
-        end.to_grpc)]
-    )
-    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+        end.to_grpc)
+    ]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
@@ -427,17 +417,15 @@ describe Google::Cloud::Datastore::Transaction do
           key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
         )]
     )
-    commit_req = Google::Datastore::V1::CommitRequest.new(
-      project_id: project,
-      mode: :TRANSACTIONAL,
-      transaction: tx_id,
-      mutations: [Google::Datastore::V1::Mutation.new(
+    mode = :TRANSACTIONAL
+    mutations = [
+      Google::Datastore::V1::Mutation.new(
         upsert: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test"
           e["name"] = "thingamajig"
-        end.to_grpc)]
-    )
-    transaction.service.mocked_datastore.expect :commit, commit_res, [commit_req]
+        end.to_grpc)
+    ]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
@@ -453,11 +441,7 @@ describe Google::Cloud::Datastore::Transaction do
 
   it "rollback does not persist entities" do
     rollback_res = Google::Datastore::V1::RollbackResponse.new
-    rollback_req = Google::Datastore::V1::RollbackRequest.new(
-      project_id: project,
-      transaction: tx_id
-    )
-    transaction.service.mocked_datastore.expect :rollback, rollback_res, [rollback_req]
+    transaction.service.mocked_service.expect :rollback, rollback_res, [project, tx_id]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"

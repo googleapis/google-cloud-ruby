@@ -18,6 +18,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   let(:project)     { "my-todo-project" }
   let(:credentials) { OpenStruct.new }
   let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
+  let(:query)       { Google::Cloud::Datastore::Query.new.kind("User") }
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do |i|
       Google::Datastore::V1::EntityResult.new(
@@ -58,21 +59,17 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   before do
-    dataset.service.mocked_datastore = Minitest::Mock.new
+    dataset.service.mocked_service = Minitest::Mock.new
   end
 
   after do
-    dataset.service.mocked_datastore.verify
+    dataset.service.mocked_service.verify
   end
 
   it "has more_results not_finished" do
-    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    )
-    dataset.service.mocked_datastore.expect :run_query, run_query_res_not_finished, [run_query_req]
-
     query = Google::Cloud::Datastore::Query.new.kind("User")
+    dataset.service.mocked_service.expect :run_query, run_query_res_not_finished, [project, nil, nil, query: query.to_grpc, gql_query: nil]
+
     entities = dataset.run query
     entities.count.must_equal 2
     entities.each do |entity|
@@ -100,13 +97,8 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results more_after_limit" do
-    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    )
-    dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_limit, [run_query_req]
+    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_limit, [project, nil, nil, query: query.to_grpc, gql_query: nil]
 
-    query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
     entities.count.must_equal 2
     entities.each do |entity|
@@ -134,13 +126,8 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results more_after_cursor" do
-    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    )
-    dataset.service.mocked_datastore.expect :run_query, run_query_res_more_after_cursor, [run_query_req]
+    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_cursor, [project, nil, nil, query: query.to_grpc, gql_query: nil]
 
-    query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
     entities.count.must_equal 2
     entities.each do |entity|
@@ -168,13 +155,8 @@ describe Google::Cloud::Datastore::Dataset::QueryResults do
   end
 
   it "has more_results no_more" do
-    run_query_req = Google::Datastore::V1::RunQueryRequest.new(
-      project_id: project,
-      query: Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    )
-    dataset.service.mocked_datastore.expect :run_query, run_query_res_no_more, [run_query_req]
+    dataset.service.mocked_service.expect :run_query, run_query_res_no_more, [project, nil, nil, query: query.to_grpc, gql_query: nil]
 
-    query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = dataset.run query
     entities.count.must_equal 2
     entities.each do |entity|

@@ -15,8 +15,8 @@
 require "helper"
 
 describe Google::Cloud::Datastore::Query do
+  let(:query) { Google::Cloud::Datastore::Query.new }
   it "can query on kind" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -32,7 +32,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can filter properties" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
     query.where "completed", "=", true
 
@@ -71,7 +70,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can order results" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
     query.order "due"
 
@@ -90,7 +88,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "accepts any string that starts with 'd' for DESCENDING" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
     query.order "completed", "DOWN"
 
@@ -101,7 +98,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can limit and offset" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -124,7 +120,6 @@ describe Google::Cloud::Datastore::Query do
     raw_cursor = "\x13\xE0\x01\x00\xEB".force_encoding Encoding::ASCII_8BIT
     encoded_cursor = "E+ABAOs="
 
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -137,7 +132,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can select the properties to return" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -152,7 +146,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can select the properties using projection alias" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -168,7 +161,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can group on properties" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -183,7 +175,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can group on properties using distinct_on" do
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
 
     grpc = query.to_grpc
@@ -199,7 +190,6 @@ describe Google::Cloud::Datastore::Query do
 
   it "can query ancestor" do
     ancestor_key = Google::Cloud::Datastore::Key.new("User", "username")
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
     query.ancestor ancestor_key
 
@@ -218,7 +208,6 @@ describe Google::Cloud::Datastore::Query do
 
   it "can manually filter on ancestor" do
     ancestor_key = Google::Cloud::Datastore::Key.new("User", "username")
-    query = Google::Cloud::Datastore::Query.new
     query.kind "Task"
     query.filter "__key__", "~", ancestor_key
 
@@ -236,7 +225,6 @@ describe Google::Cloud::Datastore::Query do
   end
 
   it "can chain query methods" do
-    query = Google::Cloud::Datastore::Query.new
     q2 = query.kind("Task").select("due", "completed").
       where("completed", "=", true).group_by("completed").
       order("due", :desc).limit(10).offset(20)
