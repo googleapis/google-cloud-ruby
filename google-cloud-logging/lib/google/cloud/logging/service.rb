@@ -96,14 +96,14 @@ module Google
                          max: nil
 
           project_ids = Array(projects || @project)
-          options = { page_token: token }.delete_if { |_, v| v.nil? }
+          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
 
           execute do
             paged_enum = logging.list_log_entries project_ids,
                                                   filter: filter,
                                                   order_by: order,
                                                   page_size: max,
-                                                  options: options
+                                                  options: call_opts
             paged_enum.page.response
           end
         end
@@ -128,20 +128,20 @@ module Google
         end
 
         def list_resource_descriptors token: nil, max: nil
-          options = { page_token: token }.delete_if { |_, v| v.nil? }
+          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
 
           execute do
-            logging.list_monitored_resource_descriptors page_size: max,
-                                                        options: options
+            logging.list_monitored_resource_descriptors \
+              page_size: max, options: call_opts
           end
         end
 
         def list_sinks token: nil, max: nil
-          options = { page_token: token }.delete_if { |_, v| v.nil? }
+          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
 
           execute do
-            paged_enum = sinks.list_sinks project_path, page_size: max,
-                                                        options: options
+            paged_enum = sinks.list_sinks \
+              project_path, page_size: max, options: call_opts
             paged_enum.page.response
           end
         end
@@ -171,11 +171,11 @@ module Google
         end
 
         def list_metrics token: nil, max: nil
-          options = { page_token: token }.delete_if { |_, v| v.nil? }
+          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
 
           execute do
-            paged_enum = metrics.list_log_metrics project_path, page_size: max,
-                                                                options: options
+            paged_enum = metrics.list_log_metrics \
+              project_path, page_size: max, options: call_opts
             paged_enum.page.response
           end
         end

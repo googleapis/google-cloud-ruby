@@ -20,7 +20,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: nil]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics
@@ -36,7 +36,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(num_metrics))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: nil]
     logging.service.mocked_metrics = mock
 
     metrics = logging.find_metrics
@@ -52,8 +52,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
@@ -76,8 +76,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics
@@ -99,8 +99,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     first_metrics = logging.metrics max: 3
@@ -122,8 +122,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all.to_a
@@ -139,8 +139,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics(max: 3).all.to_a
@@ -156,8 +156,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all.take(5)
@@ -173,8 +173,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: {}]
-    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: {page_token: "next_page_token"}]
+    mock.expect :list_log_metrics, first_list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_log_metrics, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
     logging.service.mocked_metrics = mock
 
     all_metrics = logging.metrics.all(request_limit: 1).to_a
@@ -189,7 +189,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [project_path, page_size: 3, options: {}]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: 3, options: nil]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics max: 3
@@ -206,7 +206,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: {}]
+    mock.expect :list_log_metrics, list_res, [project_path, page_size: nil, options: nil]
     logging.service.mocked_metrics = mock
 
     metrics = logging.metrics

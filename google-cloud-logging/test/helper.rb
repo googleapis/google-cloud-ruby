@@ -22,6 +22,25 @@ require "base64"
 require "google/cloud/logging"
 require "grpc"
 
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    # Logging only uses page_token, so this is sufficent
+    page_token === other.page_token
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    # Logging only uses page_token, so this is sufficent
+    page_token == other.page_token
+  end
+end
+
 class MockLogging < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
