@@ -23,7 +23,7 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ```ruby
 require "google/cloud/logging"
 
-logging = Google::Cloud::Logging.new
+logging = Google::Cloud.new.logging
 
 # List all log entries
 logging.entries.each do |e|
