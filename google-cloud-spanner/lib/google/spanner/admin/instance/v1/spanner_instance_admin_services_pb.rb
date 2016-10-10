@@ -96,6 +96,9 @@ module Google
               # [response][google.longrunning.Operation.response] field type is
               # [Instance][google.spanner.admin.instance.v1.Instance], if
               # successful.
+              #
+              # Authorization requires `spanner.instances.create` permission on
+              # resource [name][google.spanner.admin.instance.v1.Instance.name].
               rpc :CreateInstance, Instance, Google::Longrunning::Operation
               # Updates an instance, and begins allocating or releasing resources
               # as requested. The returned [long-running
@@ -134,6 +137,9 @@ module Google
               # [response][google.longrunning.Operation.response] field type is
               # [Instance][google.spanner.admin.instance.v1.Instance], if
               # successful.
+              #
+              # Authorization requires `spanner.instances.update` permission on
+              # resource [name][google.spanner.admin.instance.v1.Instance.name].
               rpc :UpdateInstance, Instance, Google::Longrunning::Operation
               # Deletes an instance.
               #
@@ -147,6 +153,14 @@ module Google
               #     irrevocably disappear from the API. All data in the databases
               #     is permanently deleted.
               rpc :DeleteInstance, DeleteInstanceRequest, Google::Protobuf::Empty
+              # Sets the access control policy on an instance resource. Replaces any
+              # existing policy.
+              rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+              # Gets the access control policy for an instance resource. Returns an empty
+              # policy if an instance exists but does not have a policy set.
+              rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+              # Returns permissions that the caller has on the specified instance resource.
+              rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
             end
 
             Stub = Service.rpc_stub_class

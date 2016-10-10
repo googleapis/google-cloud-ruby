@@ -26,7 +26,6 @@ require "json"
 require "pathname"
 
 require "google/gax"
-require "google/spanner/v1/spanner_services_pb"
 
 module Google
   module Cloud
@@ -37,10 +36,10 @@ module Google
         # The Cloud Spanner API can be used to manage sessions and execute
         # transactions on data stored in Cloud Spanner databases.
         #
-        # @!attribute [r] stub
+        # @!attribute [r] spanner_stub
         #   @return [Google::Spanner::V1::Spanner::Stub]
         class SpannerApi
-          attr_reader :stub
+          attr_reader :spanner_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "wrenchworks.googleapis.com".freeze
@@ -177,8 +176,15 @@ module Google
               timeout: DEFAULT_TIMEOUT,
               app_name: "gax",
               app_version: Google::Gax::VERSION
+            # These require statements are intentionally placed here to initialize
+            # the gRPC module only when it's required.
+            # See https://github.com/googleapis/toolkit/issues/446
+            require "google/gax/grpc"
+            require "google/spanner/v1/spanner_services_pb"
+
             google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} ruby/#{RUBY_VERSION}".freeze
+              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
+              "ruby/#{RUBY_VERSION}".freeze
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "spanner_client_config.json"
@@ -194,7 +200,7 @@ module Google
                 kwargs: headers
               )
             end
-            @stub = Google::Gax::Grpc.create_stub(
+            @spanner_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -204,35 +210,35 @@ module Google
             )
 
             @create_session = Google::Gax.create_api_call(
-              @stub.method(:create_session),
+              @spanner_stub.method(:create_session),
               defaults["create_session"]
             )
             @get_session = Google::Gax.create_api_call(
-              @stub.method(:get_session),
+              @spanner_stub.method(:get_session),
               defaults["get_session"]
             )
             @delete_session = Google::Gax.create_api_call(
-              @stub.method(:delete_session),
+              @spanner_stub.method(:delete_session),
               defaults["delete_session"]
             )
             @execute_sql = Google::Gax.create_api_call(
-              @stub.method(:execute_sql),
+              @spanner_stub.method(:execute_sql),
               defaults["execute_sql"]
             )
             @read = Google::Gax.create_api_call(
-              @stub.method(:read),
+              @spanner_stub.method(:read),
               defaults["read"]
             )
             @begin_transaction = Google::Gax.create_api_call(
-              @stub.method(:begin_transaction),
+              @spanner_stub.method(:begin_transaction),
               defaults["begin_transaction"]
             )
             @commit = Google::Gax.create_api_call(
-              @stub.method(:commit),
+              @spanner_stub.method(:commit),
               defaults["commit"]
             )
             @rollback = Google::Gax.create_api_call(
-              @stub.method(:rollback),
+              @spanner_stub.method(:rollback),
               defaults["rollback"]
             )
           end
@@ -267,6 +273,15 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_database = SpannerApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+          #   response = spanner_api.create_session(formatted_database)
+
           def create_session \
               database,
               options: nil
@@ -287,6 +302,15 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_name = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   response = spanner_api.get_session(formatted_name)
+
           def get_session \
               name,
               options: nil
@@ -304,6 +328,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_name = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_api.delete_session(formatted_name)
+
           def delete_session \
               name,
               options: nil
@@ -371,24 +404,34 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_session = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   sql = ''
+          #   response = spanner_api.execute_sql(formatted_session, sql)
+
           def execute_sql \
               session,
-              transaction,
               sql,
-              params,
-              param_types,
-              resume_token,
-              query_mode,
+              transaction: nil,
+              params: nil,
+              param_types: nil,
+              resume_token: nil,
+              query_mode: nil,
               options: nil
             req = Google::Spanner::V1::ExecuteSqlRequest.new(
               session: session,
-              transaction: transaction,
-              sql: sql,
-              params: params,
-              param_types: param_types,
-              resume_token: resume_token,
-              query_mode: query_mode
+              sql: sql
             )
+            req.transaction = transaction unless transaction.nil?
+            req.params = params unless params.nil?
+            req.param_types = param_types unless param_types.nil?
+            req.resume_token = resume_token unless resume_token.nil?
+            req.query_mode = query_mode unless query_mode.nil?
             @execute_sql.call(req, options)
           end
 
@@ -452,28 +495,41 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   KeySet = Google::Spanner::V1::KeySet
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_session = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   table = ''
+          #   columns = []
+          #   key_set = KeySet.new
+          #   response = spanner_api.read(formatted_session, table, columns, key_set)
+
           def read \
               session,
-              transaction,
               table,
-              index,
               columns,
               key_set,
-              offset,
-              limit,
-              resume_token,
+              transaction: nil,
+              index: nil,
+              offset: nil,
+              limit: nil,
+              resume_token: nil,
               options: nil
             req = Google::Spanner::V1::ReadRequest.new(
               session: session,
-              transaction: transaction,
               table: table,
-              index: index,
               columns: columns,
-              key_set: key_set,
-              offset: offset,
-              limit: limit,
-              resume_token: resume_token
+              key_set: key_set
             )
+            req.transaction = transaction unless transaction.nil?
+            req.index = index unless index.nil?
+            req.offset = offset unless offset.nil?
+            req.limit = limit unless limit.nil?
+            req.resume_token = resume_token unless resume_token.nil?
             @read.call(req, options)
           end
 
@@ -491,6 +547,17 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::Transaction]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #   TransactionOptions = Google::Spanner::V1::TransactionOptions
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_session = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   options = TransactionOptions.new
+          #   response = spanner_api.begin_transaction(formatted_session, options)
+
           def begin_transaction \
               session,
               options_,
@@ -534,18 +601,28 @@ module Google
           #   retries, etc.
           # @return [Google::Spanner::V1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_session = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   mutations = []
+          #   response = spanner_api.commit(formatted_session, mutations)
+
           def commit \
               session,
-              transaction_id,
-              single_use_transaction,
               mutations,
+              transaction_id: nil,
+              single_use_transaction: nil,
               options: nil
             req = Google::Spanner::V1::CommitRequest.new(
               session: session,
-              transaction_id: transaction_id,
-              single_use_transaction: single_use_transaction,
               mutations: mutations
             )
+            req.transaction_id = transaction_id unless transaction_id.nil?
+            req.single_use_transaction = single_use_transaction unless single_use_transaction.nil?
             @commit.call(req, options)
           end
 
@@ -566,6 +643,16 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1/spanner_api"
+          #
+          #   SpannerApi = Google::Cloud::Spanner::V1::SpannerApi
+          #
+          #   spanner_api = SpannerApi.new
+          #   formatted_session = SpannerApi.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   transaction_id = ''
+          #   spanner_api.rollback(formatted_session, transaction_id)
+
           def rollback \
               session,
               transaction_id,

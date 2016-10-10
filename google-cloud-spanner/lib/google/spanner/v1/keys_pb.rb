@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/protobuf/struct_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.v1.KeyRange" do

@@ -53,6 +53,14 @@ module Google
               # DDL statements. This method does not show pending schema updates, those may
               # be queried using the [Operations][google.longrunning.Operations] API.
               rpc :GetDatabaseDDL, GetDatabaseDDLRequest, GetDatabaseDDLResponse
+              # Sets the access control policy on a database resource. Replaces any
+              # existing policy.
+              rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+              # Gets the access control policy for a database resource. Returns an empty
+              # policy if a database exists but does not have a policy set.
+              rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+              # Returns permissions that the caller has on the specified database resource.
+              rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
             end
 
             Stub = Service.rpc_stub_class

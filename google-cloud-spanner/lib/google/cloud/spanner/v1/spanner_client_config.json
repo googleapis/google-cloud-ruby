@@ -42,7 +42,17 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ExecuteStreamingSql": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Read": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StreamingRead": {
           "timeout_millis": 30000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

@@ -22,8 +22,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :BOOL, 1
     value :INT64, 2
     value :FLOAT64, 3
-    value :TIMESTAMP, 4
-    value :DATE, 5
     value :STRING, 6
     value :BYTES, 7
     value :ARRAY, 8
