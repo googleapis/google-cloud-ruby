@@ -20,13 +20,10 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
       e.log_name = "projects/test/logs/testlog"
     end
 
-    write_req = Google::Logging::V2::WriteLogEntriesRequest.new(
-      entries: [entry.to_grpc]
-    )
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: nil]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry
@@ -42,13 +39,10 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
       e.log_name = "projects/test/logs/otherlog"
     end
 
-    write_req = Google::Logging::V2::WriteLogEntriesRequest.new(
-      entries: [entry1.to_grpc, entry2.to_grpc]
-    )
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req]
+    mock.expect :write_log_entries, write_res, [[entry1.to_grpc, entry2.to_grpc], log_name: nil, resource: nil, labels: nil]
     logging.service.mocked_logging = mock
 
     logging.write_entries [entry1, entry2]
@@ -61,14 +55,10 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
       e.timestamp = Time.now
     end
 
-    write_req = Google::Logging::V2::WriteLogEntriesRequest.new(
-      entries: [entry.to_grpc],
-      log_name: "projects/test/logs/testlog"
-    )
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: "projects/test/logs/testlog", resource: nil, labels: nil]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, log_name: "testlog"
@@ -84,14 +74,10 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
       r.type = "web_app_server"
     end
 
-    write_req = Google::Logging::V2::WriteLogEntriesRequest.new(
-      entries: [entry.to_grpc],
-      resource: resource.to_grpc
-    )
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: resource.to_grpc, labels: nil]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, resource: resource
@@ -104,14 +90,10 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
       e.timestamp = Time.now
     end
 
-    write_req = Google::Logging::V2::WriteLogEntriesRequest.new(
-      entries: [entry.to_grpc],
-      labels: { "env" => "production" }
-    )
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [write_req]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: { "env" => "production" }]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, labels: {env: :production}

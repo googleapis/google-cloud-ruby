@@ -27,21 +27,16 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
   let(:labels) { { "env" => "production" } }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:severity) { :DEBUG }
-  let(:write_req) do
-    Google::Logging::V2::WriteLogEntriesRequest.new(
-      log_name: "projects/test/logs/web_app_log",
-      resource: resource.to_grpc,
-      labels: labels,
-      entries: [Google::Logging::V2::LogEntry.new(
-        text_payload: "Danger Will Robinson!", severity: severity
-      )]
-    )
-  end
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+
+  def write_req_args
+    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!", severity: severity)]
+    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels]
+  end
 
   before do
     @mock = Minitest::Mock.new
-    @mock.expect :write_log_entries, write_res, [write_req]
+    @mock.expect :write_log_entries, write_res, write_req_args
     logging.service.mocked_logging = @mock
   end
 

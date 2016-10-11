@@ -68,10 +68,8 @@ describe Google::Cloud::Logging::Project, :mock_logging do
   it "deletes a log" do
     log_name = "syslog"
 
-    delete_req = Google::Logging::V2::DeleteLogRequest.decode_json({log_name: "projects/#{project}/logs/#{log_name}"}.to_json)
-
     mock = Minitest::Mock.new
-    mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
+    mock.expect :delete_log, Google::Protobuf::Empty.new, ["projects/#{project}/logs/#{log_name}"]
     logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name
@@ -84,10 +82,8 @@ describe Google::Cloud::Logging::Project, :mock_logging do
   it "deletes a log with full path name" do
     log_name = "projects/#{project}/logs/syslog"
 
-    delete_req = Google::Logging::V2::DeleteLogRequest.decode_json({log_name: log_name}.to_json)
-
     mock = Minitest::Mock.new
-    mock.expect :delete_log, Google::Protobuf::Empty.new, [delete_req]
+    mock.expect :delete_log, Google::Protobuf::Empty.new, [log_name]
     logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name
