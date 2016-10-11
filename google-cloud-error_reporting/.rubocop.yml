@@ -3,6 +3,7 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-error_reporting.gemspec"
     - "lib/google/devtools/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1/**/*"
     - "Rakefile"
     - "test/**/*"
 
