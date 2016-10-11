@@ -38,8 +38,6 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/logging.admin`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
