@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/error_reporting"
+
 module Google
   module Cloud
     module ErrorReporting
@@ -103,7 +105,7 @@ module Google
           # Check credentialing. Returns false if AuthorizationError is rescued.
           keyfile = er_config.keyfile || gcp_config.keyfile
           begin
-            Google::Cloud::ErrorReporting.credential_with_scope keyfile
+            Google::Cloud::ErrorReporting.credentials_with_scope keyfile
           rescue Exception => e
             Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
             "activated due to authorization error: #{e.message}"

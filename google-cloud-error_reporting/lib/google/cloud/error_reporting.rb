@@ -139,7 +139,7 @@ module Google
         project = project.to_s
         raise ArgumentError, "project is missing" if project.empty?
 
-        credentials = credential_with_scope keyfile, scope
+        credentials = credentials_with_scope keyfile, scope
 
         Google::Cloud::ErrorReporting::Project.new(
           Google::Cloud::ErrorReporting::Service.new(
@@ -164,7 +164,7 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/cloud-platform`
       #
-      def self.credential_with_scope keyfile, scope = nil
+      def self.credentials_with_scope keyfile, scope = nil
         if keyfile.nil?
           Google::Cloud::ErrorReporting::Credentials.default scope: scope
         else
