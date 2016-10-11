@@ -19,7 +19,7 @@ require "minitest/rg"
 require "google/cloud/error_reporting"
 
 # Create shared error_reporting object so we don't create new for each test
-$error_reporting = Google::Cloud.new.error_reporting retries: 10
+$error_reporting = Google::Cloud.new.error_reporting
 
 # create prefix for names of datasets and tables
 require "time"

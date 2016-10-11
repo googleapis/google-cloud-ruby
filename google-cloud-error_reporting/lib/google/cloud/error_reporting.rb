@@ -88,24 +88,15 @@ module Google
     #   error_reporting.report error_event
     # ```
     #
-    # ## Configuring retries and timeout
+    # ## Configuring timeout
     #
-    # You can configure how many times API requests may be automatically
-    # retried. When an API request fails, the response will be inspected to see
-    # if the request meets criteria indicating that it may succeed on retry,
-    # such as `500` and `503` status codes or a specific internal error code
-    # such as `rateLimitExceeded`. If it meets the criteria, the request will be
-    # retried after a delay. If another error occurs, the delay will be
-    # increased before a subsequent attempt, until the `retries` limit is
-    # reached.
-    #
-    # You can also set the request `timeout` value in seconds.
+    # You can set the request `timeout` value in seconds.
     #
     # ```ruby
     # require "google/cloud/error_reporting"
     #
     # gcloud = Google::Cloud.new
-    # error_reporting = gcloud.error_reporting retries: 10, timeout: 120
+    # error_reporting = gcloud.error_reporting timeout: 120
     # ```
     #
     module ErrorReporting
@@ -129,9 +120,10 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/cloud-platform`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
+      #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
       #
       # @return [Google::Cloud::ErrorReporting::Project]
       #
@@ -141,24 +133,43 @@ module Google
       #   error_reporting = Google::Cloud::ErrorReporting.new
       #   # ...
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
         project ||= Google::Cloud::ErrorReporting::Project.default_project
         project = project.to_s
         raise ArgumentError, "project is missing" if project.empty?
 
-        credentials =
-          if keyfile.nil?
-            Google::Cloud::ErrorReporting::Credentials.default scope: scope
-          else
-            Google::Cloud::ErrorReporting::Credentials.new keyfile, scope: scope
-          end
+        credentials = credential_with_scope keyfile, scope
 
         Google::Cloud::ErrorReporting::Project.new(
           Google::Cloud::ErrorReporting::Service.new(
-            project, credentials, retries: retries, timeout: timeout
+            project, credentials, timeout: timeout, client_config: client_config
           )
         )
+      end
+
+      ##
+      # Create Google Cloud Platform credentials object depends on given keyfile
+      # and scope
+      #
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      #
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
+      #
+      def self.credential_with_scope keyfile, scope = nil
+        if keyfile.nil?
+          Google::Cloud::ErrorReporting::Credentials.default scope: scope
+        else
+          Google::Cloud::ErrorReporting::Credentials.new keyfile, scope: scope
+        end
       end
     end
   end

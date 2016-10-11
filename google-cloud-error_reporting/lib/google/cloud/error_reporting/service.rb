@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0oud
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,10 +14,8 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/grpc_backoff"
-require "google/devtools/clouderrorreporting/v1beta1/error_group_service_services"
-require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_services"
-require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services"
+require "google/cloud/error_reporting/v1beta1"
+require "google/gax/errors"
 
 module Google
   module Cloud
@@ -26,34 +24,48 @@ module Google
       # @private Represents the gRPC Error Reporting service, including all the
       #   API methods.
       class Service
-        attr_accessor :project, :credentials, :host, :retries, :timeout
+        attr_accessor :project, :credentials, :host, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
         def initialize project, credentials,
-                       host: nil, retries: nil, timeout: nil
+                       host: nil, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || "clouderrorreporting.googleapis.com"
-          @retries = retries
+          @host = host || V1beta1::ReportErrorsServiceApi::SERVICE_ADDRESS
           @timeout = timeout
+          @client_config = client_config || {}
         end
 
-        ##
-        # Generate gRPC ChannelCredentials
-        def creds
+        def channel
+          require "grpc"
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
+          require "grpc"
+          return credentials if insecure?
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        attr_accessor :mocked_error_reporting
+        def insecure?
+          credentials == :this_channel_is_insecure
+        end
+
         def error_reporting
           return mocked_error_reporting if mocked_error_reporting
-          @error_reporting ||=
-            Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub.new(
-              host, creds, timeout: timeout
+          @error_reporting ||= \
+            V1beta1::ReportErrorsServiceApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              app_name: "google-cloud-error_reporting",
+              app_version: Google::Cloud::ErrorReporting::VERSION
             )
         end
+        attr_accessor :mocked_error_reporting
 
         ##
         # Report an ErrorEvent to Stackdriver ErrorReporting
@@ -61,8 +73,7 @@ module Google
         # @example
         #   require "google/cloud/error_reporting"
         #
-        #   gcloud = Google::Cloud.new
-        #   error_reporting = gcloud.error_reporting
+        #   error_reporting = Google::Cloud::ErrorReporting.new
         #
         #   error_event = error_reporting.error_event "Error Message with Backtrace",
         #                                             timestamp: Time.now,
@@ -83,29 +94,24 @@ module Google
             raise ArgumentError, "Cannot report empty message"
           end
 
-          # Stackdriver Error Reporting API requires this extra "projects/" prefix
-          formatted_project_name = "projects/" + project
-
-          report_params = {
-            project_name: formatted_project_name,
-            event: error_event.to_grpc
-          }.delete_if { |_, v| v.nil? }
-
-          report_req = Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest.new(
-            report_params
-          )
+          error_event_grpc = error_event.to_grpc
 
           execute do
-            error_reporting.report_error_event report_req
+            error_reporting.report_error_event project_path, error_event_grpc
           end
         end
 
+        protected
+
+        def project_path
+          "projects/#{project}"
+        end
+
         def execute
-          Google::Cloud::Core::GrpcBackoff.new(retries: retries).execute do
-            yield
-          end
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
+          yield
+        rescue Google::Gax::GaxError => e
+          # GaxError wraps BadStatus, but exposes it as #cause
+          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end

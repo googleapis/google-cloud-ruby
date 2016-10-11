@@ -103,11 +103,7 @@ module Google
           # Check credentialing. Returns false if AuthorizationError is rescued.
           keyfile = er_config.keyfile || gcp_config.keyfile
           begin
-            if keyfile.nil?
-              Google::Cloud::ErrorReporting::Credentials.default
-            else
-              Google::Cloud::ErrorReporting::Credentials.new keyfile
-            end
+            Google::Cloud::ErrorReporting.credential_with_scope keyfile
           rescue Exception => e
             Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
             "activated due to authorization error: #{e.message}"

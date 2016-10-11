@@ -81,14 +81,14 @@ module Google
         end
 
         ##
-        # The gRPC Service object
+        # @private The Service object
         attr_accessor :service
 
         ##
         # Create a new Project instance
         #
         # @param [Google::Cloud::ErrorReporting::Service] service The underneath
-        #   gRPC Service object
+        #   Service object
         #
         # @return A new Project instance
         #
@@ -106,7 +106,26 @@ module Google
         end
 
         ##
-        # Wrapper for {Service#report}
+        # Report an ErrorEvent to Stackdriver ErrorReporting
+        #
+        # @example
+        #   require "google/cloud/error_reporting"
+        #
+        #   error_reporting = Google::Cloud::ErrorReporting.new
+        #
+        #   error_event = error_reporting.error_event "Error Message with Backtrace",
+        #                                             timestamp: Time.now,
+        #                                             service_name: "my_app_name",
+        #                                             service_version: "v8",
+        #                                             user: "johndoh",
+        #                                             http_method: "GET",
+        #                                             http_url: "http://mysite.com/index.html",
+        #                                             http_status: 500,
+        #                                             http_remote_ip: "127.0.0.1",
+        #                                             file_path: "app/controllers/MyController.rb",
+        #                                             line_number: 123,
+        #                                             function_name: "index"
+        #   error_reporting.report error_event
         #
         def report *args, &block
           service.report *args, &block

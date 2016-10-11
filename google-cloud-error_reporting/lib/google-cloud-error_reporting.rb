@@ -36,9 +36,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::ErrorReporting::Project]
     #
@@ -55,11 +55,11 @@ module Google
     #                                             service_version: "v8"
     #   error_reporting.report error_event
     #
-    def error_reporting scope: nil, retries: nil, timeout: nil
+    def error_reporting scope: nil, timeout: nil, client_config: nil
       Google::Cloud.error_reporting @project, @keyfile,
                                     scope: scope,
-                                    retries: (retries || @retries),
-                                    timeout: (timeout || @timeout)
+                                    timeout: (timeout || @timeout),
+                                    client_config: client_config
     end
 
 
@@ -70,8 +70,9 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
     #
-    # @param [String] project Google Cloud Platform project id.
-    #   Use Project.default_project if not given.
+    # @param [String] project Google Cloud Platform project identifier for the
+    #   Stackdriver Error Reporting service you are connecting to. Use
+    #   Project.default_project if not provided.
     # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
     #   file path the file must be readable.
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
@@ -82,9 +83,9 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::ErrorReporting::Project]
     #
@@ -101,11 +102,11 @@ module Google
     #   error_reporting.report error_event
     #
     def self.error_reporting project = nil, keyfile = nil, scope: nil,
-                             retries: nil, timeout: nil
+                             timeout: nil, client_config: nil
       require "google/cloud/error_reporting"
       Google::Cloud::ErrorReporting.new project: project, keyfile: keyfile,
-                                        scope: scope, retries: retries,
-                                        timeout: timeout
+                                        scope: scope, timeout: timeout,
+                                        client_config: client_config
     end
   end
 end

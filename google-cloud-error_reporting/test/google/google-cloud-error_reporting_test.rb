@@ -20,12 +20,12 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.error_reporting" do
       gcloud = Google::Cloud.new
       stubbed_error_reporting =
-        ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+        ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
           project.must_equal nil
           keyfile.must_equal nil
           scope.must_be :nil?
-          retries.must_be :nil?
           timeout.must_be :nil?
+          client_config.must_be :nil?
           "fake-error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
@@ -37,12 +37,12 @@ describe Google::Cloud do
     it "passes project and keyfile to Google::Cloud.error_reporting" do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_error_reporting =
-        ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+        ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
           project.must_equal "test-project-id"
           keyfile.must_equal "/path/to/a/keyfile"
           scope.must_be :nil?
-          retries.must_be :nil?
           timeout.must_be :nil?
+          client_config.must_be :nil?
           "error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
@@ -54,18 +54,18 @@ describe Google::Cloud do
     it "passes project and keyfile and options to Google::Cloud.error_reporting" do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_error_reporting =
-        ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+        ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
           project.must_equal "test-project-id"
           keyfile.must_equal "/path/to/a/keyfile"
           scope.must_equal "http://example.com/scope"
-          retries.must_equal 5
           timeout.must_equal 60
+          client_config.must_equal({ "gax" => "options" })
           "error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
         project = gcloud.error_reporting scope: "http://example.com/scope",
-                                         retries: 5,
-                                         timeout: 60
+                                         timeout: 60,
+                                         client_config: { "gax" => "options" }
         project.must_equal "error_reporting-project-object"
       end
     end
