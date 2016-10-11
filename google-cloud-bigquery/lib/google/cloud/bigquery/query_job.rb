@@ -99,6 +99,14 @@ module Google
         end
 
         ##
+        # Checks if the query job is using legacy sql.
+        def use_legacy_sql?
+          val = @gapi.configuration.query.use_legacy_sql
+          return false if val.nil?
+          val
+        end
+
+        ##
         # Retrieves the query results for the job.
         #
         # @param [String] token Page token, returned by a previous call,

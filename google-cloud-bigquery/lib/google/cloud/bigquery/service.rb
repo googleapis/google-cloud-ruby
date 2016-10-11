@@ -397,7 +397,8 @@ module Google
                 write_disposition: write_disposition(options[:write]),
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
-                default_dataset: default_dataset
+                default_dataset: default_dataset,
+                use_legacy_sql: options[:use_legacy_sql]
               )
             )
           )
@@ -412,7 +413,8 @@ module Google
             default_dataset: dataset_config,
             timeout_ms: options[:timeout],
             dry_run: options[:dryrun],
-            use_query_cache: options[:cache]
+            use_query_cache: options[:cache],
+            use_legacy_sql: options[:use_legacy_sql]
           )
         end
 
