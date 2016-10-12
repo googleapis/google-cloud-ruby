@@ -99,9 +99,11 @@ module Google
             call_options = Google::Gax::CallOptions.new page_token: token
           end
           execute do
-            publisher.list_topics project_path(options),
-                                  page_size: options[:max],
-                                  options: call_options
+            paged_enum = publisher.list_topics project_path(options),
+                                               page_size: options[:max],
+                                               options: call_options
+
+            paged_enum.page.response
           end
         end
 
@@ -148,9 +150,12 @@ module Google
             call_options = Google::Gax::CallOptions.new page_token: token
           end
           execute do
-            publisher.list_topic_subscriptions topic_path(topic, options),
-                                               page_size: options[:max],
-                                               options: call_options
+            paged_enum = publisher.list_topic_subscriptions \
+              topic_path(topic, options),
+              page_size: options[:max],
+              options: call_options
+
+            paged_enum.page.response
           end
         end
 
@@ -161,9 +166,11 @@ module Google
             call_options = Google::Gax::CallOptions.new page_token: token
           end
           execute do
-            subscriber.list_subscriptions project_path(options),
-                                          page_size: options[:max],
-                                          options: call_options
+            paged_enum = subscriber.list_subscriptions project_path(options),
+                                                       page_size: options[:max],
+                                                       options: call_options
+
+            paged_enum.page.response
           end
         end
 

@@ -219,7 +219,7 @@ module Google
           ensure_service!
           options = { token: token, max: max }
           grpc = service.list_topics_subscriptions name, options
-          Subscription::List.from_topic_grpc grpc, service, name
+          Subscription::List.from_topic_grpc grpc, service, name, max
         end
         alias_method :find_subscriptions, :subscriptions
         alias_method :list_subscriptions, :subscriptions

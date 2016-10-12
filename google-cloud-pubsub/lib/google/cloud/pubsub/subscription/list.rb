@@ -26,10 +26,7 @@ module Google
           # If not empty, indicates that there are more subscriptions
           # that match the request and this value should be passed to
           # the next {Google::Cloud::Pubsub::Topic#subscriptions} to continue.
-          def token
-            page_token = @paged_enum.page_token
-            page_token if page_token && page_token != ""
-          end
+          attr_accessor :token
 
           ##
           # @private Create a new Subscription::List with an array of values.
@@ -57,8 +54,7 @@ module Google
           #   end
           #
           def next?
-            ensure_paged_enum!
-            @paged_enum.next_page?
+            !token.nil?
           end
 
           ##
@@ -78,11 +74,11 @@ module Google
           #
           def next
             return nil unless next?
-            @paged_enum.next_page
+            ensure_service!
             if @topic
-              self.class.from_topic_grpc @paged_enum, @service, @topic
+              next_topic_subscriptions
             else
-              self.class.from_grpc @paged_enum, @service
+              next_subscriptions
             end
           end
 
@@ -154,27 +150,31 @@ module Google
           ##
           # @private New Subscriptions::List from a
           # Google::Pubsub::V1::ListSubscriptionsRequest object.
-          def self.from_grpc paged_enum, service
-            subs = new
-            paged_enum.page.each do |topic_grpc|
-              subs << Subscription.from_grpc(topic_grpc, service)
-            end
-            subs.instance_variable_set "@paged_enum", paged_enum
+          def self.from_grpc grpc_list, service, max = nil
+            subs = new(Array(grpc_list.subscriptions).map do |grpc|
+              Subscription.from_grpc grpc, service
+            end)
+            token = grpc_list.next_page_token
+            token = nil if token == ""
+            subs.instance_variable_set "@token",   token
             subs.instance_variable_set "@service", service
+            subs.instance_variable_set "@max",     max
             subs
           end
 
           ##
           # @private New Subscriptions::List from a
           # Google::Pubsub::V1::ListTopicSubscriptionsResponse object.
-          def self.from_topic_grpc paged_enum, service, topic
-            subs = new
-            paged_enum.page.each do |subscription_name|
-              subs << Subscription.new_lazy(subscription_name, service)
-            end
-            subs.instance_variable_set "@paged_enum", paged_enum
+          def self.from_topic_grpc grpc_list, service, topic, max = nil
+            subs = new(Array(grpc_list.subscriptions).map do |grpc|
+              Subscription.new_lazy grpc, service
+            end)
+            token = grpc_list.next_page_token
+            token = nil if token == ""
+            subs.instance_variable_set "@token",   token
             subs.instance_variable_set "@service", service
-            subs.instance_variable_set "@topic", topic
+            subs.instance_variable_set "@topic",   topic
+            subs.instance_variable_set "@max",     max
             subs
           end
 
@@ -183,8 +183,20 @@ module Google
           ##
           # @private Raise an error unless an active connection to the service
           # is available.
-          def ensure_paged_enum!
-            fail "Must have active connection to service" unless @paged_enum
+          def ensure_service!
+            fail "Must have active connection to service" unless @service
+          end
+
+          def next_subscriptions
+            options = { prefix: @prefix, token: @token, max: @max }
+            grpc = @service.list_subscriptions options
+            self.class.from_grpc grpc, @service, @max
+          end
+
+          def next_topic_subscriptions
+            options = { token: @token, max: @max }
+            grpc = @service.list_topics_subscriptions @topic, options
+            self.class.from_topic_grpc grpc, @service, @topic, @max
           end
         end
       end
