@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/gce"
+require "google/cloud/core/environment"
 require "google/cloud/logging/service"
 require "google/cloud/logging/credentials"
 require "google/cloud/logging/entry"
@@ -80,7 +80,7 @@ module Google
           ENV["LOGGING_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::GCE.project_id
+            Google::Cloud::Core::Environment.project_id
         end
 
         ##

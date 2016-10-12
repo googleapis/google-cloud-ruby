@@ -20,10 +20,11 @@ module Google
     module Core
       ##
       # @private
-      # Represents the Google Compute Engine environment.
-      module GCE
+      # Represents the Google Cloud Platform environments.
+      module Environment
         CHECK_URI = "http://169.254.169.254"
         PROJECT_URI = "#{CHECK_URI}/computeMetadata/v1/project/project-id"
+        INSTANCE_METADATA_URI = "#{CHECK_URI}/computeMetadata/v1/instance"
 
         def self.gce? options = {}
           conn = options[:connection] || Faraday.default_connection
