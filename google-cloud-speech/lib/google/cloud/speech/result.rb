@@ -37,7 +37,8 @@ module Google
       #   confidence was not set.
       # @attr_reader [Array<Result::Alternative>] alternatives Additional
       #   recognition hypotheses (up to the value specified in
-      #   `max_alternatives`).
+      #   `max_alternatives`). The server may return fewer than
+      #   `max_alternatives`.
       #
       # @example
       #   require "google/cloud/speech"
@@ -50,7 +51,7 @@ module Google
       #
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
-      #   result.confidence #=> 0.8099
+      #   result.confidence #=> 0.9826789498329163
       #
       class Result
         attr_reader :transcript, :confidence, :alternatives
