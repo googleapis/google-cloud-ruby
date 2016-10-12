@@ -22,6 +22,25 @@ require "base64"
 require "google/cloud/pubsub"
 require "grpc"
 
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    # only use is page_token, so this is sufficient
+    page_token === other.page_token
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    # only use is page_token, so this is sufficient
+    page_token == other.page_token
+  end
+end
+
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
@@ -97,6 +116,10 @@ class MockPubsub < Minitest::Spec
 
   def subscription_path subscription_name
     "#{project_path}/subscriptions/#{subscription_name}"
+  end
+
+  def paged_enum_struct response
+    OpenStruct.new page: OpenStruct.new(response: response)
   end
 
   # Register this spec type for when :storage is used.

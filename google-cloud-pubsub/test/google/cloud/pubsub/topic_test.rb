@@ -18,33 +18,17 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
                                                 pubsub.service }
-  let(:mock_subscriptions_with_token) do
-    first_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
-    page = Google::Gax::PagedEnumerable::Page.new first_get_res, "next_page_token", "subscriptions"
-    mock = Minitest::Mock.new
-    mock.expect :page, page, []
-    mock
+  let(:subscriptions_with_token) do
+    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    paged_enum_struct response
   end
-  let(:mock_subscriptions_without_token) do
-    second_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
-    page = Google::Gax::PagedEnumerable::Page.new second_get_res, "next_page_token", "subscriptions"
-    mock = Minitest::Mock.new
-    mock.expect :page, page, []
-    mock.expect :page_token, nil, []
-    mock
+  let(:subscriptions_without_token) do
+    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
+    paged_enum_struct response
   end
-  let(:mock_subscriptions_both_pages) do
-    first_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
-    page = Google::Gax::PagedEnumerable::Page.new first_get_res, "next_page_token", "subscriptions"
-    second_get_res = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
-    page_2 = Google::Gax::PagedEnumerable::Page.new second_get_res, "next_page_token", "subscriptions"
-    mock = Minitest::Mock.new
-    mock.expect :page, page, []
-    mock.expect :next_page?, true, []
-    mock.expect :next_page, page_2, []
-    mock.expect :page, page_2, []
-    mock.expect :next_page?, true, []
-    mock
+  let(:subscriptions_with_token_2) do
+    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    paged_enum_struct response
   end
 
   it "knows its name" do
@@ -226,24 +210,23 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions
+
+    mock.verify
 
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_with_token.verify
   end
 
   it "lists subscriptions with find_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.find_subscriptions
@@ -253,40 +236,35 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_with_token.verify
   end
 
   it "lists subscriptions with list_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.list_subscriptions
+
+    mock.verify
 
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_with_token.verify
   end
 
   it "paginates subscriptions" do
-    mock_subscriptions_with_token.expect :page_token, "next_page_token", []
-    mock_subscriptions_with_token.expect :page_token, "next_page_token", []
-
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
-    {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")} # TODO: use this instead of Hash, below
-    mock.expect :list_topic_subscriptions, mock_subscriptions_without_token, [topic_path(topic_name), Hash]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    opts = {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions
     second_subs = topic.subscriptions token: first_subs.token
+
+    mock.verify
 
     first_subs.count.must_equal 3
     token = first_subs.token
@@ -303,19 +281,16 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_with_token.verify
-    mock_subscriptions_without_token.verify
   end
 
   it "paginates subscriptions with max set" do
-    mock_subscriptions_with_token.expect :page_token, "next_page_token", []
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions max: 3
+
+    mock.verify
 
     subs.count.must_equal 3
     token = subs.token
@@ -325,21 +300,20 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_with_token.verify
   end
 
   it "paginates subscriptions with next? and next" do
-    mock_subscriptions_both_pages.expect :next_page?, false, []
-
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    opts = {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions
     second_subs = first_subs.next
 
+    mock.verify
+
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
@@ -353,21 +327,20 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "paginates subscriptions with with next? and next and max set" do
-    mock_subscriptions_both_pages.expect :next_page?, false, []
-
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: 3, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: nil]
+    opts = {page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions max: 3
     second_subs = first_subs.next
 
+    mock.verify
+
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
@@ -381,81 +354,78 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "paginates subscriptions with all" do
-    mock_subscriptions_both_pages.expect :next_page?, false, []
-
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    opts = {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all.to_a
 
+    mock.verify
+
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "paginates subscriptions with with all and max set" do
-    mock_subscriptions_both_pages.expect :next_page?, false, []
-
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: 3, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: nil]
+    opts = {page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions(max: 3).all.to_a
 
+    mock.verify
+
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "iterates subscriptions with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    opts = {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all.take(5)
 
+    mock.verify
+
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "iterates subscriptions with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, mock_subscriptions_both_pages, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    opts = {page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")}
+    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic_path(topic_name), opts]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all(request_limit: 1).to_a
 
-    subs.count.must_equal 5
+    mock.verify
+
+    subs.count.must_equal 6
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
       sub.must_be :lazy?
     end
-
-    mock.verify
-    mock_subscriptions_both_pages.verify
   end
 
   it "can publish a message" do
