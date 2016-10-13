@@ -29,22 +29,29 @@ module Google
         ##
         # Check if running from a gce vm, which actually hosts GCE, GKE, and
         # GAE environments.
-        def self.gce_vm? options = {}
-          conn = options[:connection] || Faraday.default_connection
+        def self.gce_vm? connection: nil
+          @metadata ||= {}
+          return @metadata[:gce_vm] if @metadata.key? :gce_vm
+
+          conn = connection || Faraday.default_connection
           resp = conn.get CHECK_URI do |req|
             req.options.timeout = 0.1
           end
-          return false unless resp.status == 200
-          return false unless resp.headers.key? "Metadata-Flavor"
-          return resp.headers["Metadata-Flavor"] == "Google"
+          @metadata[:gce_vm] = if resp.status != 200 ||
+                                  !resp.headers.key?("Metadata-Flavor")
+                                 false
+                               else
+                                 resp.headers["Metadata-Flavor"] == "Google"
+                               end
         rescue Faraday::TimeoutError, Faraday::ConnectionFailed
-          return false
+          @metadata ||= {}
+          @metadata[:gce_vm] = false
         end
 
         ##
         # Check if running from Google Compute Engine, and not using GAE or GKE
         #
-        # @return [Boolean] True iff running from GCE and not GAE or GKE
+        # @return [Boolean] True if running from GCE and not GAE or GKE
         def self.gce?
           gce_vm? && !gae? && !gke?
         end
@@ -53,7 +60,7 @@ module Google
         # Check if running from Google Container Engine by querying for
         # GKE cluster name and VM instance_zone
         #
-        # @return [Boolean] True iff self.gke_cluster_name() and
+        # @return [Boolean] True if self.gke_cluster_name() and
         # self.instance_zone() both return true values
         def self.gke?
           gke_cluster_name && instance_zone
@@ -122,9 +129,6 @@ module Google
           return @metadata[attr_name] if @metadata.key? attr_name
 
           conn = connection || Faraday.default_connection
-
-          puts conn.get uri
-
           conn.headers = { "Metadata-Flavor" => "Google" }
           resp = conn.get uri do |req|
             req.options.timeout = 0.1
