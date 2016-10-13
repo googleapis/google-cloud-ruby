@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/gce"
+require "google/cloud/core/environment"
 require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
 require "google/cloud/speech/result"
@@ -83,7 +83,7 @@ module Google
           ENV["SPEECH_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::GCE.project_id
+            Google::Cloud::Core::Environment.project_id
         end
 
         ##

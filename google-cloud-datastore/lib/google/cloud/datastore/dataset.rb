@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/gce"
+require "google/cloud/core/environment"
 require "google/cloud/datastore/grpc_utils"
 require "google/cloud/datastore/credentials"
 require "google/cloud/datastore/service"
@@ -89,7 +89,7 @@ module Google
             ENV["DATASTORE_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::GCE.project_id
+            Google::Cloud::Core::Environment.project_id
         end
 
         ##

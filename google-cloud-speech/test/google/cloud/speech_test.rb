@@ -73,7 +73,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::GCE.stub :project_id, "project-id" do
+        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
           Google::Cloud::Speech::Credentials.stub :default, default_credentials do
             speech = Google::Cloud.speech
             speech.must_be_kind_of Google::Cloud::Speech::Project
@@ -124,7 +124,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::GCE.stub :project_id, "project-id" do
+        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
           Google::Cloud::Speech::Credentials.stub :default, default_credentials do
             speech = Google::Cloud::Speech.new
             speech.must_be_kind_of Google::Cloud::Speech::Project
