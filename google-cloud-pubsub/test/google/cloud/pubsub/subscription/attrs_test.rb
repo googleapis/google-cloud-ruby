@@ -44,7 +44,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config]
+    mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -61,7 +61,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve topic" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
@@ -75,7 +75,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve deadline" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.deadline.must_equal sub_deadline
@@ -86,7 +86,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve endpoint" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.endpoint.must_equal sub_endpoint
@@ -99,7 +99,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
       push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
       mpc_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config]
+      mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
       pubsub.service.mocked_subscriber = mock
 
       subscription.endpoint = new_push_endpoint

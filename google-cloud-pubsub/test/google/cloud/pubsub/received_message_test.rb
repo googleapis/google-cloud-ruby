@@ -62,7 +62,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
   it "can acknowledge" do
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id]]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
     subscription.service.mocked_subscriber = mock
 
     rec_message.acknowledge!
@@ -73,7 +73,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
   it "can ack" do
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id]]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
     subscription.service.mocked_subscriber = mock
 
     rec_message.ack!
@@ -85,7 +85,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(subscription_name), [rec_message.ack_id], new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(subscription_name), [rec_message.ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     rec_message.delay! new_deadline

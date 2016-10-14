@@ -38,7 +38,7 @@ describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
     it "checks if the subscription exists by making an HTTP call" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.must_be :exists?

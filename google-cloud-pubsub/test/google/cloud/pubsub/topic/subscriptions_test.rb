@@ -22,9 +22,10 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
   end
+
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions
@@ -46,7 +47,7 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
       it "lists subscriptions" do
         mock = Minitest::Mock.new
-        mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+        mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
         topic.service.mocked_publisher = mock
 
         subs = topic.subscriptions
@@ -68,7 +69,7 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
       it "lists subscriptions" do
         mock = Minitest::Mock.new
-        mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: nil]
+        mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
         topic.service.mocked_publisher = mock
 
         subs = topic.subscriptions

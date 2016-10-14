@@ -24,7 +24,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription" do
     get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name)]
+    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
 
     sub = topic.subscription found_sub_name
@@ -38,7 +38,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription with get_subscription alias" do
     get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name)]
+    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
 
     sub = topic.get_subscription found_sub_name
@@ -52,7 +52,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription with find_subscription alias" do
     get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name)]
+    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
 
     sub = topic.find_subscription found_sub_name
@@ -91,7 +91,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     it "gets an existing subscription" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(found_sub_name)]
+      mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
       topic.service.mocked_subscriber = mock
 
       sub = topic.subscription found_sub_name

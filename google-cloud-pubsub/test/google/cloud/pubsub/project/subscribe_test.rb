@@ -21,7 +21,7 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
   it "creates a subscription when calling subscribe" do
     create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscribe topic_name, new_sub_name
@@ -66,7 +66,7 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
   it "creates a subscription but not topic even when called with autocreate" do
     create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
@@ -85,7 +85,7 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
     it "creates a subscription when calling subscribe" do
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
       mock = Minitest::Mock.new
-      mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil]
+      mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, options: default_options]
       pubsub.service.mocked_subscriber = mock
 
       sub = pubsub.subscribe topic_name, new_sub_name

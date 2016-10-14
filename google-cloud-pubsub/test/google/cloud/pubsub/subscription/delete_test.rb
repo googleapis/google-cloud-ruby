@@ -25,7 +25,7 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
   it "can delete itself" do
     del_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [subscription_path(sub_name)]
+    mock.expect :delete_subscription, del_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     subscription.delete
@@ -42,7 +42,7 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
     it "can delete itself" do
       del_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :delete_subscription, del_res, [subscription_path(sub_name)]
+      mock.expect :delete_subscription, del_res, [subscription_path(sub_name), options: default_options]
       pubsub.service.mocked_subscriber = mock
 
       subscription.delete
