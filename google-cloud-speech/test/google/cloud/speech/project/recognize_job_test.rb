@@ -23,7 +23,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read("acceptance/data/audio.raw", mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     job = speech.recognize_job "acceptance/data/audio.raw", encoding: :raw, sample_rate: 16000
@@ -38,7 +38,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read("acceptance/data/audio.raw", mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     job = speech.recognize_job File.open("acceptance/data/audio.raw", "rb"), encoding: :raw, sample_rate: 16000
@@ -53,7 +53,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     job = speech.recognize_job "gs://some_bucket/audio.raw", encoding: :raw, sample_rate: 16000
@@ -68,7 +68,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     gcs_fake = OpenStruct.new to_gs_url: "gs://some_bucket/audio.raw"
@@ -84,7 +84,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     audio = speech.audio "gs://some_bucket/audio.raw"
@@ -100,7 +100,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     audio = speech.audio "gs://some_bucket/audio.raw", encoding: :raw, sample_rate: 16000, language: "en"
@@ -116,7 +116,7 @@ describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc]
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     audio = speech.audio "gs://some_bucket/audio.raw", encoding: :flac, sample_rate: 48000, language: "en"
