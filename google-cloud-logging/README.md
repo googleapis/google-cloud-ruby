@@ -75,10 +75,9 @@ Other Rack base framework can also directly leverage the built-in Middleware.
 require "google/cloud/logging"
 
 logging = Google::Cloud::Logging.new
-resource = logging.resource "global"
-logger = Google::Cloud::Logging::Logger.new logging,
-                                            "my-rack-app",
-                                            resource
+resource = Google::Cloud::Logging::Middleware.build_monitoring_resource
+logger = logging.logger "my-log-name",
+                        resource
 use Google::Cloud::Logging::Middleware, logger: logger
 ```
 
