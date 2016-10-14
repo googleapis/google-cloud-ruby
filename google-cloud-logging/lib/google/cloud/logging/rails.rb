@@ -61,7 +61,8 @@ module Google
 
             logging = Google::Cloud::Logging.new project: project_id,
                                                  keyfile: keyfile
-            resource = self.class.build_monitoring_resource
+            resource =
+              Google::Cloud::Logging::Middleware.build_monitoring_resource
             log_name = log_config.log_name || DEFAULT_LOG_NAME
 
             app.config.logger = Google::Cloud::Logging::Logger.new logging,
@@ -113,63 +114,6 @@ module Google
           # config.stackdriver.use_logging is explicitly true
           Rails.env.production? ||
             (gcp_config.key?(:use_logging) && gcp_config.use_logging)
-        end
-
-        ##
-        # @private Extract information from current environment and construct
-        # the correct monitoring resource types and labels.
-        #
-        # If running from GAE, return resource:
-        # {
-        #   type: "gae_app", {
-        #     module_id: [GAE module name],
-        #     version_id: [GAE module version]
-        #   }
-        # }
-        # If running from GKE, return resource:
-        # {
-        #   type: "container", {
-        #     cluster_name: [GKE cluster name],
-        #     namespace_id: [GKE namespace_id]
-        #   }
-        # }
-        # If running from GCE, return resource:
-        # {
-        #   type: "gce_instance", {
-        #     instance_id: [GCE VM instance id],
-        #     zone: [GCE vm group zone]
-        #   }
-        # }
-        # Otherwise default to { type: "global" }, which means not associated
-        # with GCP.
-        #
-        # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
-        # for a full list of monitoring resources
-        #
-        # @return [Google::Cloud::Logging::Resource] An Resource object with
-        #   correct type and labels
-        def self.build_monitoring_resource
-          type, labels =
-            if Core::Environment.gae?
-              ["gae_app", {
-                module_id: Core::Environment.gae_module_id,
-                version_id: Core::Environment.gae_module_version }]
-            elsif Core::Environment.gke?
-              ["container", {
-                cluster_name: Core::Environment.gke_cluster_name,
-                namespace_id: Core::Environment.gke_namespace_id || "default" }]
-            elsif Core::Environment.gce?
-              ["gce_instance", {
-                instance_id: Core::Environment.instance_id,
-                zone: Core::Environment.instance_zone }]
-            else
-              ["global", {}]
-            end
-
-          Google::Cloud::Logging::Resource.new.tap do |r|
-            r.type = type
-            r.labels = labels
-          end
         end
       end
     end
