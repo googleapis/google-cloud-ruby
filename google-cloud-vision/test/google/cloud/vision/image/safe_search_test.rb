@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :safe_search, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     safe_search = image.safe_search

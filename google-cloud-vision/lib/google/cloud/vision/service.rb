@@ -70,7 +70,9 @@ module Google
         ##
         # Returns API::BatchAnnotateImagesResponse
         def annotate requests
-          execute { service.batch_annotate_images requests }
+          execute do
+            service.batch_annotate_images requests, options: default_options
+          end
         end
 
         def inspect
@@ -78,6 +80,14 @@ module Google
         end
 
         protected
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
+        end
 
         def execute
           yield

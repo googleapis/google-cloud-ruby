@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, properties: true
@@ -62,7 +62,7 @@ describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.mark filepath, properties: true
@@ -98,7 +98,7 @@ describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, properties: true
@@ -138,7 +138,7 @@ describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, plural_properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, plural_properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, properties: true
@@ -192,7 +192,7 @@ describe Google::Cloud::Vision::Project, :annotate, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, properties: "please"

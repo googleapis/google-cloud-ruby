@@ -27,7 +27,7 @@ describe Google::Cloud::Vision::Image, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, faces_response_grpc, [req]
+    mock.expect :batch_annotate_images, faces_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     faces = image.faces 10
@@ -45,7 +45,7 @@ describe Google::Cloud::Vision::Image, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, faces_response_grpc, [req]
+    mock.expect :batch_annotate_images, faces_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     faces = image.faces
@@ -63,7 +63,7 @@ describe Google::Cloud::Vision::Image, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     face = image.face

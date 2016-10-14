@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, landmarks: 1
@@ -45,7 +45,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.mark filepath, landmarks: 1
@@ -64,7 +64,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, landmarks: 1
@@ -87,7 +87,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmarks_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmarks_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, landmarks: 1
@@ -107,7 +107,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, landmarks: true
@@ -126,7 +126,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, landmarks: "9999"
@@ -145,7 +145,7 @@ describe Google::Cloud::Vision::Project, :annotate, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     Google::Cloud::Vision.stub :default_max_landmarks, 25 do

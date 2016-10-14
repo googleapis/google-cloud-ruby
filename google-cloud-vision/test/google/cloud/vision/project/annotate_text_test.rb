@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, text_response_grpc, [req]
+    mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, text: true
@@ -52,7 +52,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, text_response_grpc, [req]
+    mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.mark filepath, text: true
@@ -71,7 +71,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, text_response_grpc, [req]
+    mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, text: true
@@ -94,7 +94,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, texts_response_grpc, [req]
+    mock.expect :batch_annotate_images, texts_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, text: true
@@ -114,7 +114,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, text_response_grpc, [req]
+    mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, text: "totes"

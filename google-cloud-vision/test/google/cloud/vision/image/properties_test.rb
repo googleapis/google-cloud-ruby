@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :properties, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, properties_response_grpc, [req]
+    mock.expect :batch_annotate_images, properties_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     properties = image.properties
