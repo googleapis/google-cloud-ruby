@@ -16,7 +16,7 @@ require "helper"
 require "stringio"
 require "tempfile"
 
-describe Google::Cloud::Datastore::Properties do
+describe Google::Cloud::Datastore::Properties, :mock_datastore do
   let(:time_obj) { Time.new(2014, 1, 1, 0, 0, 0, 0) }
   let(:time_grpc) { Google::Protobuf::Timestamp.new(seconds: time_obj.to_i, nanos: time_obj.nsec) }
 

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::Query do
+describe Google::Cloud::Datastore::Query, :mock_datastore do
   let(:query) { Google::Cloud::Datastore::Query.new }
   it "can query on kind" do
     query.kind "Task"

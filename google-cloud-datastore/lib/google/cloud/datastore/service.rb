@@ -71,7 +71,10 @@ module Google
         # Allocate IDs for incomplete keys.
         # (This is useful for referencing an entity before it is inserted.)
         def allocate_ids *incomplete_keys
-          execute { service.allocate_ids project, incomplete_keys }
+          execute do
+            service.allocate_ids project, incomplete_keys,
+                                 options: default_options
+          end
         end
 
         ##
@@ -79,7 +82,9 @@ module Google
         def lookup *keys, consistency: nil, transaction: nil
           read_options = generate_read_options consistency, transaction
 
-          execute { service.lookup project, read_options, keys }
+          execute do
+            service.lookup project, read_options, keys, options: default_options
+          end
         end
 
         # Query for entities.
@@ -98,7 +103,8 @@ module Google
                               partition_id,
                               read_options,
                               query: query,
-                              gql_query: gql_query
+                              gql_query: gql_query,
+                              options: default_options
           end
         end
 
@@ -114,14 +120,17 @@ module Google
         def commit mutations, transaction: nil
           mode =  transaction.nil? ? :NON_TRANSACTIONAL : :TRANSACTIONAL
           execute do
-            service.commit project, mode, mutations, transaction: transaction
+            service.commit project, mode, mutations, transaction: transaction,
+                                                     options: default_options
           end
         end
 
         ##
         # Roll back a transaction.
         def rollback transaction
-          execute { service.rollback project, transaction }
+          execute do
+            service.rollback project, transaction, options: default_options
+          end
         end
 
         def inspect
@@ -142,6 +151,14 @@ module Google
               transaction: transaction)
           end
           nil
+        end
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
         end
 
         def execute

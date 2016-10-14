@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::Entity do
+describe Google::Cloud::Datastore::Entity, :mock_datastore do
 
   let(:entity) do
     Google::Cloud::Datastore::Entity.new.tap do |ent|

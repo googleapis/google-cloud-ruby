@@ -14,10 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::Dataset, :all do
-  let(:project)     { "my-todo-project" }
-  let(:credentials) { OpenStruct.new }
-  let(:dataset)     { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
+describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
   let(:first_run_query) { Google::Cloud::Datastore::Query.new.kind("Task").to_grpc }
   let(:first_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
@@ -62,8 +59,8 @@ describe Google::Cloud::Datastore::Dataset, :all do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, nil, query: first_run_query, gql_query: nil]
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, nil, query: next_run_query, gql_query: nil]
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, nil, query: first_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, nil, query: next_run_query, gql_query: nil, options: default_options]
   end
 
   after do

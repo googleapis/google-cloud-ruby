@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::Entity, :exclude_from_indexes do
+describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastore do
 
   let(:entity) do
     Google::Cloud::Datastore::Entity.new.tap do |ent|
