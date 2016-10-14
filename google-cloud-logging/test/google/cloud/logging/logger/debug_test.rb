@@ -30,7 +30,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
 
   def write_req_args severity
     entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!", severity: severity)]
-    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels]
+    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, options: default_options]
   end
 
   before do

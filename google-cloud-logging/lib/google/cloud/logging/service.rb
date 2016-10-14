@@ -96,7 +96,11 @@ module Google
                          max: nil
 
           project_ids = Array(projects || @project)
-          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
+          call_opts = default_options
+          if token
+            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
+                                                     page_token: token)
+          end
 
           execute do
             paged_enum = logging.list_log_entries project_ids,
@@ -119,16 +123,23 @@ module Google
           execute do
             logging.write_log_entries entries,
                                       log_name: log_path(log_name),
-                                      resource: resource, labels: labels
+                                      resource: resource, labels: labels,
+                                      options: default_options
           end
         end
 
         def delete_log name
-          execute { logging.delete_log log_path(name) }
+          execute do
+            logging.delete_log log_path(name), options: default_options
+          end
         end
 
         def list_resource_descriptors token: nil, max: nil
-          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
+          call_opts = default_options
+          if token
+            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
+                                                     page_token: token)
+          end
 
           execute do
             logging.list_monitored_resource_descriptors \
@@ -137,7 +148,11 @@ module Google
         end
 
         def list_sinks token: nil, max: nil
-          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
+          call_opts = default_options
+          if token
+            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
+                                                     page_token: token)
+          end
 
           execute do
             paged_enum = sinks.list_sinks \
@@ -151,11 +166,13 @@ module Google
             name: name, destination: destination, filter: filter,
             output_version_format: version }.delete_if { |_, v| v.nil? })
 
-          execute { sinks.create_sink project_path, sink }
+          execute do
+            sinks.create_sink project_path, sink, options: default_options
+          end
         end
 
         def get_sink name
-          execute { sinks.get_sink sink_path(name) }
+          execute { sinks.get_sink sink_path(name), options: default_options }
         end
 
         def update_sink name, destination, filter, version
@@ -163,15 +180,23 @@ module Google
             name: name, destination: destination, filter: filter,
             output_version_format: version }.delete_if { |_, v| v.nil? })
 
-          execute { sinks.update_sink sink_path(name), sink }
+          execute do
+            sinks.update_sink sink_path(name), sink, options: default_options
+          end
         end
 
         def delete_sink name
-          execute { sinks.delete_sink sink_path(name) }
+          execute do
+            sinks.delete_sink sink_path(name), options: default_options
+          end
         end
 
         def list_metrics token: nil, max: nil
-          call_opts = Google::Gax::CallOptions.new(page_token: token) if token
+          call_opts = default_options
+          if token
+            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
+                                                     page_token: token)
+          end
 
           execute do
             paged_enum = metrics.list_log_metrics \
@@ -185,11 +210,16 @@ module Google
             name: name, description: description,
             filter: filter }.delete_if { |_, v| v.nil? })
 
-          execute { metrics.create_log_metric project_path, metric }
+          execute do
+            metrics.create_log_metric project_path, metric,
+                                      options: default_options
+          end
         end
 
         def get_metric name
-          execute { metrics.get_log_metric metric_path(name) }
+          execute do
+            metrics.get_log_metric metric_path(name), options: default_options
+          end
         end
 
         def update_metric name, description, filter
@@ -197,11 +227,17 @@ module Google
             name: name, description: description,
             filter: filter }.delete_if { |_, v| v.nil? })
 
-          execute { metrics.update_log_metric metric_path(name), metric }
+          execute do
+            metrics.update_log_metric metric_path(name), metric,
+                                      options: default_options
+          end
         end
 
         def delete_metric name
-          execute { metrics.delete_log_metric metric_path(name) }
+          execute do
+            metrics.delete_log_metric metric_path(name),
+                                      options: default_options
+          end
         end
 
         def inspect
@@ -229,6 +265,14 @@ module Google
         def metric_path metric_name
           return metric_name if metric_name.to_s.include? "/"
           "#{project_path}/metrics/#{metric_name}"
+        end
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
         end
 
         def execute

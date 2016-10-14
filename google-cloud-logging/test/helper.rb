@@ -31,24 +31,34 @@ class Google::Gax::CallOptions
   # Therefore, we must add this capability.
   def === other
     return false unless other.is_a? Google::Gax::CallOptions
-    # Logging only uses page_token, so this is sufficent
-    page_token === other.page_token
+    timeout === other.timeout &&
+      retry_options === other.retry_options &&
+      page_token === other.page_token &&
+      kwargs === other.kwargs
   end
   def == other
     return false unless other.is_a? Google::Gax::CallOptions
-    # Logging only uses page_token, so this is sufficent
-    page_token == other.page_token
+    timeout == other.timeout &&
+      retry_options == other.retry_options &&
+      page_token == other.page_token &&
+      kwargs == other.kwargs
   end
 end
 
 class MockLogging < Minitest::Spec
   let(:project) { "test" }
+  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:logging) { Google::Cloud::Logging::Project.new(Google::Cloud::Logging::Service.new(project, credentials)) }
 
   # Register this spec type for when :mock_logging is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_logging
+  end
+
+  def token_options token
+    Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" },
+                                 page_token: token)
   end
 
   def random_entry_hash
