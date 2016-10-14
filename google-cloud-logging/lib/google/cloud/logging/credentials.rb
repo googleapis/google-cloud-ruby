@@ -25,6 +25,16 @@ module Google
         PATH_ENV_VARS = %w(LOGGING_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
         JSON_ENV_VARS = %w(LOGGING_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+
+        ##
+        # @private Create credentials with given scope and/or keyfile
+        def self.credentials_with_scope keyfile, scope = nil
+          if keyfile.nil?
+            default(scope: scope)
+          else
+            new(keyfile, scope: scope)
+          end
+        end
       end
     end
   end

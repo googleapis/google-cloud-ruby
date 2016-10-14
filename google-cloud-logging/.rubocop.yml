@@ -43,3 +43,5 @@ Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
   Enabled: false # for lib/google-cloud-logging.rb file
+Style/RescueException:
+  Enabled: false # for lib/google/cloud/logging/rails.rb file
