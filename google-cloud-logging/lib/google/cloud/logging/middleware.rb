@@ -34,7 +34,7 @@ module Google
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger:
+        def initialize app, logger: nil
           @app = app
           @logger = logger
         end

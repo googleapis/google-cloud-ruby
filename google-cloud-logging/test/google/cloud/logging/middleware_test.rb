@@ -22,13 +22,6 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   let(:trace_id) { "a-very-unique-identifier" }
   let(:trace_context) { "#{trace_id}/a-span-id/options" }
   let(:rack_env) {{
-    # "REQUEST_METHOD" => "GET",
-    # "RACK_URL_SCHEME" => "http",
-    # "HTTP_HOST" => "localhost:3000",
-    # "ORIGINAL_FULLPATH" => "test/path?abc=def",
-    # "HTTP_USER_AGENT" => "chrome-1.2.3",
-    # "HTTP_REFERER" => nil,
-    # "REMOTE_ADDR" => "127.0.0.1",
     "HTTP_X_CLOUD_TRACE_CONTEXT" => trace_context
   }}
   let(:app_exception) { StandardError.new(app_exception_msg) }
