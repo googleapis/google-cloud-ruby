@@ -77,8 +77,8 @@ require "google/cloud/logging"
 logging = Google::Cloud::Logging.new
 resource = logging.resource "global"
 logger = Google::Cloud::Logging::Logger.new logging,
-                                          "my-rack-app",
-                                          resource
+                                            "my-rack-app",
+                                            resource
 use Google::Cloud::Logging::Middleware, logger: logger
 ```
 

@@ -92,4 +92,38 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
     mock.verify
   end
+
+  describe "#add_trace_id" do
+    let(:trace_id) { "a-unique-identifier" }
+
+    it "associates given trace_id to current Thread ID" do
+      logger.add_trace_id trace_id
+      logger.trace_ids[Thread.current.object_id].must_equal trace_id
+    end
+
+    it "doesn't record more than 10_000 trace_ids" do
+      last_thread_id = first_thread_id = 1
+      stubbed_thread_object = ->(){
+        obj = Object.new
+        last_thread_id = obj.object_id
+        obj
+      }
+
+      # Stubbing Thread.current breaks minitest APIs. So record result and
+      # evaluate outside the block
+      size = first_trace_id = last_trace_id = false
+      Thread.stub :current, stubbed_thread_object do
+        10_001.times do
+          logger.add_trace_id trace_id
+        end
+        size = logger.trace_ids.size
+        first_trace_id = logger.trace_ids[first_thread_id]
+        last_trace_id = logger.trace_ids[last_thread_id]
+      end
+
+      size.must_equal 10_000
+      first_trace_id.must_be :nil?
+      last_trace_id.must_equal trace_id
+    end
+  end
 end
