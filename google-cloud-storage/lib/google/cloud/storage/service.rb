@@ -44,7 +44,7 @@ module Google
           @credentials = credentials
           @credentials = credentials
           @service = API::StorageService.new
-          @service.client_options.application_name    = "google-cloud-storage"
+          @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::Storage::VERSION
           @service.request_options.retries = retries || 3

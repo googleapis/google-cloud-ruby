@@ -57,7 +57,7 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "google-cloud-logging",
+              app_name: "gcloud-ruby",
               app_version: Google::Cloud::Logging::VERSION)
         end
         attr_accessor :mocked_logging
@@ -70,7 +70,7 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "google-cloud-logging",
+              app_name: "gcloud-ruby",
               app_version: Google::Cloud::Logging::VERSION)
         end
         attr_accessor :mocked_sinks
@@ -83,7 +83,7 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "google-cloud-logging",
+              app_name: "gcloud-ruby",
               app_version: Google::Cloud::Logging::VERSION)
         end
         attr_accessor :mocked_metrics
