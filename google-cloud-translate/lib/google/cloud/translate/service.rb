@@ -34,7 +34,7 @@ module Google
         # Creates a new Service instance.
         def initialize key, retries: nil, timeout: nil
           @service = API::TranslateService.new
-          @service.client_options.application_name    = "google-cloud-translate"
+          @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::Translate::VERSION
           @service.request_options.retries = retries || 3

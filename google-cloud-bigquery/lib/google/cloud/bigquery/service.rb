@@ -53,7 +53,7 @@ module Google
           return mocked_service if mocked_service
           @service ||= begin
             service = API::BigqueryService.new
-            service.client_options.application_name    = "google-cloud-bigquery"
+            service.client_options.application_name    = "gcloud-ruby"
             service.client_options.application_version = \
               Google::Cloud::Bigquery::VERSION
             service.request_options.retries = @retries || 3

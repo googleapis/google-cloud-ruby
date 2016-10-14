@@ -59,7 +59,7 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "google-cloud-pubsub",
+              app_name: "gcloud-ruby",
               app_version: Google::Cloud::Pubsub::VERSION)
           end
         end
@@ -72,7 +72,7 @@ module Google
               service_path: host,
               channel: channel,
               timeout: timeout,
-              app_name: "google-cloud-pubsub",
+              app_name: "gcloud-ruby",
               app_version: Google::Cloud::Pubsub::VERSION)
           end
         end
