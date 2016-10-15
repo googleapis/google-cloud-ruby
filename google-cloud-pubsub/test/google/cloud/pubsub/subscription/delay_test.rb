@@ -33,7 +33,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, ack_id
@@ -46,7 +46,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, *ack_ids
@@ -59,7 +59,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, ack_ids
@@ -71,7 +71,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, rec_message1
@@ -84,7 +84,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, *rec_messages
@@ -97,7 +97,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     new_deadline = 42
     mad_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.delay new_deadline, rec_messages
@@ -116,7 +116,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, ack_id
@@ -129,7 +129,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, *ack_ids
@@ -142,7 +142,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, ack_ids
@@ -154,7 +154,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, rec_message1
@@ -167,7 +167,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, *rec_messages
@@ -180,7 +180,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
       new_deadline = 42
       mad_res = Google::Protobuf::Empty.new
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
 
       subscription.delay new_deadline, rec_messages

@@ -35,7 +35,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }.to_json
     get_res = Google::Iam::V1::Policy.decode_json policy_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name), options: default_options]
     subscription.service.mocked_subscriber = mock
 
     policy = subscription.policy
@@ -101,7 +101,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }.to_json
     get_res = Google::Iam::V1::Policy.decode_json policy_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name), options: default_options]
     subscription.service.mocked_subscriber = mock
 
     existing_policy = Google::Cloud::Pubsub::Policy.from_grpc Google::Iam::V1::Policy.decode_json(existing_policy_json)
@@ -142,7 +142,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }.to_json
     get_res = Google::Iam::V1::Policy.decode_json policy_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name), options: default_options]
 
     new_policy = {
       "etag"=>"CAE=",
@@ -157,7 +157,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     policy = Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [subscription_path(sub_name), policy]
+    mock.expect :set_iam_policy, set_res, [subscription_path(sub_name), policy, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     policy = subscription.policy
@@ -194,7 +194,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
     }.to_json
     get_res = Google::Iam::V1::Policy.decode_json policy_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, [subscription_path(sub_name), options: default_options]
 
     new_policy = {
       "etag"=>"CAE=",
@@ -209,7 +209,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     policy = Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [subscription_path(sub_name), policy]
+    mock.expect :set_iam_policy, set_res, [subscription_path(sub_name), policy, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     policy = subscription.policy do |p|
@@ -235,7 +235,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
       permissions: ["pubsub.subscriptions.get"]
     )
     mock = Minitest::Mock.new
-    mock.expect :test_iam_permissions, test_res, [subscription_path(sub_name), permissions]
+    mock.expect :test_iam_permissions, test_res, [subscription_path(sub_name), permissions, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     permissions = subscription.test_permissions "pubsub.subscriptions.get",

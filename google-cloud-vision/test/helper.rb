@@ -21,8 +21,32 @@ require "json"
 require "base64"
 require "google/cloud/vision"
 
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout === other.timeout &&
+      retry_options === other.retry_options &&
+      page_token === other.page_token &&
+      kwargs === other.kwargs
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout == other.timeout &&
+      retry_options == other.retry_options &&
+      page_token == other.page_token &&
+      kwargs == other.kwargs
+  end
+end
+
 class MockVision < Minitest::Spec
   let(:project) { vision.service.project }
+  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { vision.service.credentials }
   let(:vision) { Google::Cloud::Vision::Project.new(Google::Cloud::Vision::Service.new("test", OpenStruct.new)) }
 

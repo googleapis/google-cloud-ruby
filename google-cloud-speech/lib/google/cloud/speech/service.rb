@@ -77,11 +77,15 @@ module Google
         end
 
         def recognize_sync audio, config
-          execute { service.sync_recognize config, audio }
+          execute do
+            service.sync_recognize config, audio, options: default_options
+          end
         end
 
         def recognize_async audio, config
-          execute { service.async_recognize config, audio }
+          execute do
+            service.async_recognize config, audio, options: default_options
+          end
         end
 
         def get_op name
@@ -94,6 +98,14 @@ module Google
         end
 
         protected
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
+        end
 
         def execute
           require "grpc" # Ensure GRPC is loaded before rescuing exception

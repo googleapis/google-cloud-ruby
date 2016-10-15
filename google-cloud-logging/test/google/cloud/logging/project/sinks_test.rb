@@ -20,7 +20,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: default_options]
     logging.service.mocked_sinks = mock
 
     sinks = logging.sinks
@@ -36,7 +36,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(num_sinks))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: default_options]
     logging.service.mocked_sinks = mock
 
     sinks = logging.find_sinks
@@ -52,8 +52,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     first_sinks = logging.sinks
@@ -76,8 +76,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     first_sinks = logging.sinks
@@ -99,8 +99,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: 3, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: 3, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: 3, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     first_sinks = logging.sinks max: 3
@@ -122,8 +122,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     all_sinks = logging.sinks.all.to_a
@@ -139,8 +139,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: 3, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: 3, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: 3, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: 3, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     all_sinks = logging.sinks(max: 3).all.to_a
@@ -156,8 +156,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     all_sinks = logging.sinks.all.take(5)
@@ -173,8 +173,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: nil]
-    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: Google::Gax::CallOptions.new(page_token: "next_page_token")]
+    mock.expect :list_sinks, first_list_res, [project_path, page_size: nil, options: default_options]
+    mock.expect :list_sinks, second_list_res, [project_path, page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_sinks = mock
 
     all_sinks = logging.sinks.all(request_limit: 1).to_a
@@ -190,7 +190,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, list_res, [project_path, page_size: 3, options: nil]
+    mock.expect :list_sinks, list_res, [project_path, page_size: 3, options: default_options]
     logging.service.mocked_sinks = mock
 
     sinks = logging.sinks max: 3
@@ -208,7 +208,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: nil]
+    mock.expect :list_sinks, list_res, [project_path, page_size: nil, options: default_options]
     logging.service.mocked_sinks = mock
 
     sinks = logging.sinks
@@ -230,7 +230,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
                                                                                 "destination" => new_sink_destination).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_sink, create_res, ["projects/test", new_sink]
+    mock.expect :create_sink, create_res, ["projects/test", new_sink, options: default_options]
     logging.service.mocked_sinks = mock
 
     sink = logging.create_sink new_sink_name, new_sink_destination
@@ -261,7 +261,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
                                                           "output_version_format" => "V2").to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :create_sink, create_res, ["projects/test", new_sink]
+    mock.expect :create_sink, create_res, ["projects/test", new_sink, options: default_options]
     logging.service.mocked_sinks = mock
 
     sink = logging.create_sink new_sink_name,
@@ -283,7 +283,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     get_res = Google::Logging::V2::LogSink.decode_json(random_sink_hash.merge("name" => sink_name).to_json)
 
     mock = Minitest::Mock.new
-    mock.expect :get_sink, get_res, ["projects/test/sinks/#{sink_name}"]
+    mock.expect :get_sink, get_res, ["projects/test/sinks/#{sink_name}", options: default_options]
     logging.service.mocked_sinks = mock
 
     sink = logging.sink sink_name

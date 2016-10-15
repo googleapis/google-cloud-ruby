@@ -78,16 +78,24 @@ module Google
             extract_syntax: syntax, extract_entities: entities,
             extract_document_sentiment: sentiment)
           encoding = verify_encoding! encoding
-          execute { service.annotate_text doc_grpc, features, encoding }
+          execute do
+            service.annotate_text doc_grpc, features, encoding,
+                                  options: default_options
+          end
         end
 
         def entities doc_grpc, encoding: nil
           encoding = verify_encoding! encoding
-          execute { service.analyze_entities doc_grpc, encoding }
+          execute do
+            service.analyze_entities doc_grpc, encoding,
+                                     options: default_options
+          end
         end
 
         def sentiment doc_grpc
-          execute { service.analyze_sentiment doc_grpc }
+          execute do
+            service.analyze_sentiment doc_grpc, options: default_options
+          end
         end
 
         def inspect
@@ -100,6 +108,14 @@ module Google
           # TODO: verify encoding against V1beta1::EncodingType
           return :UTF8 if encoding.nil?
           encoding
+        end
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
         end
 
         def execute

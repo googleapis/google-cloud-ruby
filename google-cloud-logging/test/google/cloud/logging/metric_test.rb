@@ -35,7 +35,7 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
       filter: new_metric_filter
     )
     mock = Minitest::Mock.new
-    mock.expect :update_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", new_metric]
+    mock.expect :update_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", new_metric, options: default_options]
     metric.service.mocked_metrics = mock
 
     metric.description = new_metric_description
@@ -51,7 +51,7 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
 
   it "can refresh itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}"]
+    mock.expect :get_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", options: default_options]
     metric.service.mocked_metrics = mock
 
     metric.refresh!
@@ -61,7 +61,7 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}"]
+    mock.expect :delete_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", options: default_options]
     metric.service.mocked_metrics = mock
 
     metric.delete

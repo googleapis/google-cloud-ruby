@@ -26,7 +26,7 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
     config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc]
+    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     audio.encoding = :raw
     audio.sample_rate = 16000

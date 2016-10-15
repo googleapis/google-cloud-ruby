@@ -31,7 +31,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1
@@ -48,7 +48,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish "あ"
@@ -66,7 +66,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
 
     msg = nil
@@ -90,7 +90,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1, format: :text
@@ -110,7 +110,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|
@@ -139,7 +139,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1
@@ -156,7 +156,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1, format: :text
@@ -176,7 +176,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages]
+      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
 
       msgs = topic.publish do |batch|

@@ -69,7 +69,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
     log_name = "syslog"
 
     mock = Minitest::Mock.new
-    mock.expect :delete_log, Google::Protobuf::Empty.new, ["projects/#{project}/logs/#{log_name}"]
+    mock.expect :delete_log, Google::Protobuf::Empty.new, ["projects/#{project}/logs/#{log_name}", options: default_options]
     logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name
@@ -83,7 +83,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
     log_name = "projects/#{project}/logs/syslog"
 
     mock = Minitest::Mock.new
-    mock.expect :delete_log, Google::Protobuf::Empty.new, [log_name]
+    mock.expect :delete_log, Google::Protobuf::Empty.new, [log_name, options: default_options]
     logging.service.mocked_logging = mock
 
     success = logging.delete_log log_name

@@ -35,7 +35,7 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name)]
+        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
@@ -54,7 +54,7 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name)]
+        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?
@@ -73,7 +73,7 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
       it "checks if the topic exists by making an HTTP call" do
         get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
         mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name)]
+        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
         topic.service.mocked_publisher = mock
 
         topic.must_be :exists?

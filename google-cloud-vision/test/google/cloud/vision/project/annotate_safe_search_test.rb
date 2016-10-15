@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :safe_search, :mock_vision d
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, safe_search: true
@@ -50,7 +50,7 @@ describe Google::Cloud::Vision::Project, :annotate, :safe_search, :mock_vision d
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.mark filepath, safe_search: true
@@ -74,7 +74,7 @@ describe Google::Cloud::Vision::Project, :annotate, :safe_search, :mock_vision d
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, safe_search: true
@@ -102,7 +102,7 @@ describe Google::Cloud::Vision::Project, :annotate, :safe_search, :mock_vision d
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_searches_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_searches_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, safe_search: true
@@ -132,7 +132,7 @@ describe Google::Cloud::Vision::Project, :annotate, :safe_search, :mock_vision d
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, safe_search_response_grpc, [req]
+    mock.expect :batch_annotate_images, safe_search_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, safe_search: "yep"

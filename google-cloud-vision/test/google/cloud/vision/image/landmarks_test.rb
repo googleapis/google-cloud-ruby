@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmarks_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmarks_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     landmarks = image.landmarks 10
@@ -46,7 +46,7 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmarks_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmarks_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     landmarks = image.landmarks
@@ -64,7 +64,7 @@ describe Google::Cloud::Vision::Image, :landmarks, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, landmark_response_grpc, [req]
+    mock.expect :batch_annotate_images, landmark_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     landmark = image.landmark

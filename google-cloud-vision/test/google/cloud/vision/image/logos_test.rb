@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, logos_response_grpc, [req]
+    mock.expect :batch_annotate_images, logos_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     logos = image.logos 10
@@ -46,7 +46,7 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, logos_response_grpc, [req]
+    mock.expect :batch_annotate_images, logos_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     logos = image.logos
@@ -64,7 +64,7 @@ describe Google::Cloud::Vision::Image, :logos, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, logo_response_grpc, [req]
+    mock.expect :batch_annotate_images, logo_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     logo = image.logo

@@ -43,7 +43,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [subscription_path(subscription_name), push_config]
+    mock.expect :modify_push_config, mpc_res, [subscription_path(subscription_name), push_config, options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -54,7 +54,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   it "can delete itself" do
     del_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [subscription_path(subscription_name)]
+    mock.expect :delete_subscription, del_res, [subscription_path(subscription_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
 
     subscription.delete
@@ -66,7 +66,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     rec_message_msg = "pulled-message"
     pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [subscription_path(subscription_name), 100, return_immediately: true]
+    mock.expect :pull, pull_res, [subscription_path(subscription_name), 100, return_immediately: true, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull
@@ -80,7 +80,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   it "can acknowledge one message" do
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"]]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"], options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge "ack-id-1"
@@ -91,7 +91,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   it "can acknowledge many messages" do
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1", "ack-id-2", "ack-id-3"]]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1", "ack-id-2", "ack-id-3"], options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
@@ -102,7 +102,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   it "can acknowledge with ack" do
     ack_res = Google::Protobuf::Empty.new
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"]]
+    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"], options: default_options]
     subscription.service.mocked_subscriber = mock
 
     subscription.ack "ack-id-1"

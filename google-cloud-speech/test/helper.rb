@@ -21,8 +21,32 @@ require "json"
 require "base64"
 require "google/cloud/speech"
 
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout === other.timeout &&
+      retry_options === other.retry_options &&
+      page_token === other.page_token &&
+      kwargs === other.kwargs
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout == other.timeout &&
+      retry_options == other.retry_options &&
+      page_token == other.page_token &&
+      kwargs == other.kwargs
+  end
+end
+
 class MockSpeech < Minitest::Spec
   let(:project) { "test" }
+  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:speech) { Google::Cloud::Speech::Project.new(Google::Cloud::Speech::Service.new(project, credentials)) }
 

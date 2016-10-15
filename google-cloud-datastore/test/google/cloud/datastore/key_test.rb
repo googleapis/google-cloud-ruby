@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::Key do
+describe Google::Cloud::Datastore::Key, :mock_datastore do
 
   it "behaves correctly when empty" do
     key = Google::Cloud::Datastore::Key.new

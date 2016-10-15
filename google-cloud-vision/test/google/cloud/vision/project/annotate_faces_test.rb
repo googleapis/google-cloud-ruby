@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: 1
@@ -45,7 +45,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, faces: 1
@@ -68,7 +68,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, faces_response_grpc, [req]
+    mock.expect :batch_annotate_images, faces_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, faces: 1
@@ -88,7 +88,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: true
@@ -106,7 +106,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, faces: "9999"
@@ -124,7 +124,7 @@ describe Google::Cloud::Vision::Project, :annotate, :faces, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, face_response_grpc, [req]
+    mock.expect :batch_annotate_images, face_response_grpc, [req, options: default_options]
     vision.service.mocked_service = mock
 
     Google::Cloud::Vision.stub :default_max_faces, 25 do

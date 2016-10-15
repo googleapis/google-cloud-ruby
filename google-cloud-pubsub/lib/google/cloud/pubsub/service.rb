@@ -89,15 +89,21 @@ module Google
         # If other attributes are added in the future,
         # they will be returned here.
         def get_topic topic_name, options = {}
-          execute { publisher.get_topic topic_path(topic_name, options) }
+          execute do
+            publisher.get_topic topic_path(topic_name, options),
+                                options: default_options
+          end
         end
 
         ##
         # Lists matching topics.
         def list_topics options = {}
+          call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new page_token: token
+            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
+                                                        page_token: token
           end
+
           execute do
             paged_enum = publisher.list_topics project_path(options),
                                                page_size: options[:max],
@@ -110,7 +116,10 @@ module Google
         ##
         # Creates the given topic with the given name.
         def create_topic topic_name, options = {}
-          execute { publisher.create_topic topic_path(topic_name, options) }
+          execute do
+            publisher.create_topic topic_path(topic_name, options),
+                                   options: default_options
+          end
         end
 
         ##
@@ -119,7 +128,10 @@ module Google
         # exist. After a topic is deleted, a new topic may be created with the
         # same name.
         def delete_topic topic_name
-          execute { publisher.delete_topic topic_path(topic_name) }
+          execute do
+            publisher.delete_topic topic_path(topic_name),
+                                   options: default_options
+          end
         end
 
         ##
@@ -133,22 +145,30 @@ module Google
               data: data, attributes: attributes)
           end
 
-          execute { publisher.publish topic_path(topic), messages }
+          execute do
+            publisher.publish topic_path(topic), messages,
+                              options: default_options
+          end
         end
 
         ##
         # Gets the details of a subscription.
         def get_subscription subscription_name, options = {}
           subscription = subscription_path(subscription_name, options)
-          execute { subscriber.get_subscription subscription }
+          execute do
+            subscriber.get_subscription subscription, options: default_options
+          end
         end
 
         ##
         # Lists matching subscriptions by project and topic.
         def list_topics_subscriptions topic, options = {}
+          call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new page_token: token
+            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
+                                                        page_token: token
           end
+
           execute do
             paged_enum = publisher.list_topic_subscriptions \
               topic_path(topic, options),
@@ -162,9 +182,12 @@ module Google
         ##
         # Lists matching subscriptions by project.
         def list_subscriptions options = {}
+          call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new page_token: token
+            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
+                                                        page_token: token
           end
+
           execute do
             paged_enum = subscriber.list_subscriptions project_path(options),
                                                        page_size: options[:max],
@@ -190,7 +213,8 @@ module Google
             subscriber.create_subscription name,
                                            topic,
                                            push_config: push_config,
-                                           ack_deadline_seconds: deadline
+                                           ack_deadline_seconds: deadline,
+                                           options: default_options
           end
         end
 
@@ -199,7 +223,8 @@ module Google
         # All pending messages in the subscription are immediately dropped.
         def delete_subscription subscription
           execute do
-            subscriber.delete_subscription subscription_path(subscription)
+            subscriber.delete_subscription subscription_path(subscription),
+                                           options: default_options
           end
         end
 
@@ -213,7 +238,8 @@ module Google
           execute do
             subscriber.pull subscription,
                             max_messages,
-                            return_immediately: return_immediately
+                            return_immediately: return_immediately,
+                            options: default_options
           end
         end
 
@@ -221,7 +247,8 @@ module Google
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
           execute do
-            subscriber.acknowledge subscription_path(subscription), ack_ids
+            subscriber.acknowledge subscription_path(subscription), ack_ids,
+                                   options: default_options
           end
         end
 
@@ -236,7 +263,10 @@ module Google
             attributes: attributes
           )
 
-          execute { subscriber.modify_push_config subscription, push_config }
+          execute do
+            subscriber.modify_push_config subscription, push_config,
+                                          options: default_options
+          end
         end
 
         ##
@@ -245,43 +275,60 @@ module Google
           execute do
             subscriber.modify_ack_deadline subscription_path(subscription),
                                            Array(ids),
-                                           deadline
+                                           deadline, options: default_options
           end
         end
 
         def get_topic_policy topic_name, options = {}
-          execute { publisher.get_iam_policy topic_path(topic_name, options) }
+          execute do
+            publisher.get_iam_policy topic_path(topic_name, options),
+                                     options: default_options
+          end
         end
 
         def set_topic_policy topic_name, new_policy, options = {}
           resource = topic_path(topic_name, options)
 
-          execute { publisher.set_iam_policy resource, new_policy }
+          execute do
+            publisher.set_iam_policy resource, new_policy,
+                                     options: default_options
+          end
         end
 
         def test_topic_permissions topic_name, permissions, options = {}
           resource = topic_path(topic_name, options)
 
-          execute { publisher.test_iam_permissions resource, permissions }
+          execute do
+            publisher.test_iam_permissions resource, permissions,
+                                           options: default_options
+          end
         end
 
         def get_subscription_policy subscription_name, options = {}
           resource = subscription_path(subscription_name, options)
 
-          execute { subscriber.get_iam_policy resource }
+          execute do
+            subscriber.get_iam_policy resource, options: default_options
+          end
         end
 
         def set_subscription_policy subscription_name, new_policy, options = {}
           resource = subscription_path(subscription_name, options)
 
-          execute { subscriber.set_iam_policy resource, new_policy }
+          execute do
+            subscriber.set_iam_policy resource, new_policy,
+                                      options: default_options
+          end
         end
 
         def test_subscription_permissions subscription_name,
                                           permissions, options = {}
           resource = subscription_path(subscription_name, options)
 
-          execute { subscriber.test_iam_permissions resource, permissions }
+          execute do
+            subscriber.test_iam_permissions resource, permissions,
+                                            options: default_options
+          end
         end
 
         def project_path options = {}
@@ -304,6 +351,14 @@ module Google
         end
 
         protected
+
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
+        end
 
         def execute
           yield

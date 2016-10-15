@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Datastore::GqlQuery do
+describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
   it "can set named_bindings" do
     gql = Google::Cloud::Datastore::GqlQuery.new
     gql.query_string = "SELECT * FROM Task WHERE completed = @completed"
