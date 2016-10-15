@@ -19,6 +19,7 @@ require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
 require "google/cloud/speech/result"
 require "google/cloud/speech/job"
+require "google/cloud/speech/stream"
 
 module Google
   module Cloud
@@ -395,6 +396,110 @@ module Google
 
           grpc = service.recognize_async audio_obj.to_grpc, config
           Job.from_grpc grpc, service
+        end
+
+        ##
+        # Creates a Stream object to perform bidirectional streaming
+        # speech-recognition: receive results while sending audio.
+        #
+        # @see https://cloud.google.com/speech/docs/basics#streaming-recognition
+        #   Streaming Speech API Recognition Requests
+        #
+        # @param [String, Symbol] encoding Encoding of audio data to be
+        #   recognized. Optional.
+        #
+        #   Acceptable values are:
+        #
+        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #     (LINEAR16)
+        #   * `flac` - The [Free Lossless Audio
+        #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
+        #     Only 16-bit samples are supported. Not all fields in STREAMINFO
+        #     are supported. (FLAC)
+        #   * `mulaw` - 8-bit samples that compand 14-bit audio samples using
+        #     G.711 PCMU/mu-law. (MULAW)
+        #   * `amr` - Adaptive Multi-Rate Narrowband codec. (`sample_rate` must
+        #     be 8000 Hz.) (AMR)
+        #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
+        #     be 16000 Hz.) (AMR_WB)
+        #
+        # @param [Integer] sample_rate Sample rate in Hertz of the audio data
+        #   to be recognized. Valid values are: 8000-48000. 16000 is optimal.
+        #   For best results, set the sampling rate of the audio source to 16000
+        #   Hz. If that's not possible, use the native sample rate of the audio
+        #   source (instead of re-sampling). Optional.
+        # @param [String] language The language of the supplied audio as a
+        #   [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language
+        #   code. If not specified, the language defaults to "en-US".  See
+        #   [Language
+        #   Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        #   for a list of the currently supported language codes. Optional.
+        # @param [String] max_alternatives The Maximum number of recognition
+        #   hypotheses to be returned. Default is 1. The service may return
+        #   fewer. Valid values are 0-30. Defaults to 1. Optional.
+        # @param [Boolean] profanity_filter When `true`, the service will
+        #   attempt to filter out profanities, replacing all but the initial
+        #   character in each filtered word with asterisks, e.g. "f***". Default
+        #   is `false`.
+        # @param [Array<String>] phrases A list of strings containing words and
+        #   phrases "hints" so that the speech recognition is more likely to
+        #   recognize them. See [usage
+        #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] utterance When `true`, the service will perform
+        #   continuous recognition (continuing to process audio even if the user
+        #   pauses speaking) until the client closes the output stream (gRPC
+        #   API) or when the maximum time limit has been reached. Default is
+        #   `false`.
+        # @param [Boolean] interim When `true`, interim results (tentative
+        #   hypotheses) may be returned as they become available. Default is
+        #   `false`.
+        #
+        # @return [Stream] A resource that represents the streaming requests and
+        #   responses.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #
+        #   # register callback for when a result is returned
+        #   stream.on_result do |results|
+        #     result = results.first
+        #     result.transcript #=> "how old is the Brooklyn Bridge"
+        #     result.confidence #=> 0.8099
+        #   end
+        #
+        #   # Stream 5 seconds of audio from the microhone
+        #   # Actual implementation of microphone input varies by platform
+        #   5.times.do
+        #     stream.send MicrophoneInput.read(32000)
+        #   end
+        #
+        #   stream.stop
+        #
+        def stream encoding: nil, sample_rate: nil, language: nil,
+                   max_alternatives: nil, profanity_filter: nil, phrases: nil,
+                   utterance: nil, interim: nil
+          ensure_service!
+
+          grpc_req = V1beta1::StreamingRecognizeRequest.new(
+            streaming_config: V1beta1::StreamingRecognitionConfig.new(
+              {
+                config: audio_config(encoding: convert_encoding(encoding),
+                                     sample_rate: sample_rate,
+                                     language: language,
+                                     max_alternatives: max_alternatives,
+                                     profanity_filter: profanity_filter,
+                                     phrases: phrases),
+                single_utterance: utterance,
+                interim_results: interim
+              }.delete_if { |_, v| v.nil? }
+            )
+          )
+
+          Stream.new service, grpc_req
         end
 
         protected

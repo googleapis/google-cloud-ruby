@@ -35,8 +35,9 @@ module Google
       #   recognition is correct. This field is typically provided only for the
       #   top hypothesis. A value of 0.0 is a sentinel value indicating
       #   confidence was not set.
-      # @attr_reader [Array<Result>] alternatives Additional recognition
-      #   hypotheses (up to the value specified in `max_alternatives`).
+      # @attr_reader [Array<Result::Alternative>] alternatives Additional
+      #   recognition hypotheses (up to the value specified in
+      #   `max_alternatives`).
       #
       # @example
       #   require "google/cloud/speech"
@@ -49,10 +50,7 @@ module Google
       #
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
-      #   result.confidence #=> 88.15
-      #   alternative = result.alternatives.first
-      #   alternative.transcript #=> "how old is the Brooklyn brim"
-      #   alternative.confidence #=> 22.39
+      #   result.confidence #=> 0.8099
       #
       class Result
         attr_reader :transcript, :confidence, :alternatives
@@ -71,9 +69,125 @@ module Google
           head, *tail = *grpc.alternatives
           return nil if head.nil?
           alternatives = tail.map do |alt|
-            new alt.transcript, alt.confidence
+            Alternative.new alt.transcript, alt.confidence
           end
           new head.transcript, head.confidence, alternatives
+        end
+
+        ##
+        # # Result::Alternative
+        #
+        # A speech recognition result corresponding to a portion of the audio.
+        #
+        # @attr_reader [String] transcript Transcript text representing the
+        #   words that the user spoke.
+        # @attr_reader [Float] confidence The confidence estimate between 0.0
+        #   and 1.0. A higher number means the system is more confident that the
+        #   recognition is correct. This field is typically provided only for
+        #   the top hypothesis. A value of 0.0 is a sentinel value indicating
+        #   confidence was not set.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw, sample_rate: 16000
+        #   results = audio.recognize
+        #
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 0.8099
+        #   alternative = result.alternatives.first
+        #   alternative.transcript #=> "how old is the Brooklyn brim"
+        #   alternative.confidence #=> 0.2203
+        #
+        class Alternative
+          attr_reader :transcript, :confidence
+
+          ##
+          # @private Creates a new Result::Alternative instance.
+          def initialize transcript, confidence
+            @transcript  = transcript
+            @confidence = confidence
+          end
+        end
+      end
+
+      ##
+      # # InterimResult
+      #
+      # A streaming speech recognition result corresponding to a portion of the
+      # audio that is currently being processed.
+      #
+      # See {Project#stream} and {Stream#on_interim}.
+      #
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      #   SpeechRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult
+      #   StreamingRecognitionResult
+      #
+      # @attr_reader [String] transcript Transcript text representing the words
+      #   that the user spoke.
+      # @attr_reader [Float] confidence The confidence estimate between 0.0 and
+      #   1.0. A higher number means the system is more confident that the
+      #   recognition is correct. This field is typically provided only for the
+      #   top hypothesis. A value of 0.0 is a sentinel value indicating
+      #   confidence was not set.
+      # @attr_reader [Float] stability An estimate of the probability that the
+      #   recognizer will not change its guess about this interim result. Values
+      #   range from 0.0 (completely unstable) to 1.0 (completely stable). Note
+      #   that this is not the same as confidence, which estimates the
+      #   probability that a recognition result is correct.
+      # @attr_reader [Array<Result::Alternative>] alternatives Additional
+      #   recognition hypotheses (up to the value specified in
+      #   `max_alternatives`).
+      #
+      # @example
+      #   require "google/cloud/speech"
+      #
+      #   speech = Google::Cloud::Speech.new
+      #
+      #   stream = audio.stream encoding: :raw, sample_rate: 16000
+      #
+      #   # register callback for when an interim result is returned
+      #   stream.on_interim do |final_results, interim_results|
+      #     interim_result = interim_results.first
+      #     interim_result.transcript #=> "how old is the Brooklyn Bridge"
+      #     interim_result.confidence #=> 0.8099
+      #     interim_result.stability #=> 0.8999
+      #   end
+      #
+      #   # Stream 5 seconds of audio from the microhone
+      #   # Actual implementation of microphone input varies by platform
+      #   5.times.do
+      #     stream.send MicrophoneInput.read(32000)
+      #   end
+      #
+      #   stream.stop
+      #
+      class InterimResult
+        attr_reader :transcript, :confidence, :stability, :alternatives
+
+        ##
+        # @private Creates a new InterimResult instance.
+        def initialize transcript, confidence, stability, alternatives = []
+          @transcript  = transcript
+          @confidence = confidence
+          @stability = stability
+          @alternatives = alternatives
+        end
+
+        ##
+        # @private New InterimResult from a StreamingRecognitionResult object.
+        def self.from_grpc grpc
+          head, *tail = *grpc.alternatives
+          return nil if head.nil?
+          alternatives = tail.map do |alt|
+            Result::Alternative.new alt.transcript, alt.confidence
+          end
+          new head.transcript, head.confidence, grpc.stability, alternatives
         end
       end
     end
