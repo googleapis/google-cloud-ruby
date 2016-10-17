@@ -332,7 +332,7 @@ results = audio.recognize
 
 result = results.first
 result.transcript #=> "how old is the Brooklyn Bridge"
-result.confidence #=> 88.15
+result.confidence #=> 0.9826789498329163
 ```
 
 ### Storage

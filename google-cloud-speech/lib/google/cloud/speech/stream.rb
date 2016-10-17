@@ -35,8 +35,8 @@ module Google
       #   # register callback for when a result is returned
       #   stream.on_result do |results|
       #     result = results.first
-      #     result.transcript #=> "how old is the Brooklyn Bridge"
-      #     result.confidence #=> 0.8099
+      #     puts result.transcript # "how old is the Brooklyn Bridge"
+      #     puts result.confidence # 0.9826789498329163
       #   end
       #
       #   # Stream 5 seconds of audio from the microhone
@@ -137,13 +137,13 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when a result is returned
         #   stream.on_result do |results|
         #     result = results.first
-        #     result.transcript #=> "how old is the Brooklyn Bridge"
-        #     result.confidence #=> 0.8099
+        #     puts result.transcript # "how old is the Brooklyn Bridge"
+        #     puts result.confidence # 0.9826789498329163
         #   end
         #
         #   # Stream 5 seconds of audio from the microhone
@@ -207,8 +207,8 @@ module Google
         #
         #   results = stream.results
         #   result = results.first
-        #   result.transcript #=> "how old is the Brooklyn Bridge"
-        #   result.confidence #=> 0.8099
+        #   puts result.transcript # "how old is the Brooklyn Bridge"
+        #   puts result.confidence # 0.9826789498329163
         #
         def results
           Mutex.new.synchronize do
@@ -233,9 +233,9 @@ module Google
         #   # register callback for when an interim result is returned
         #   stream.on_interim do |final_results, interim_results|
         #     interim_result = interim_results.first
-        #     interim_result.transcript #=> "how old is the Brooklyn Bridge"
-        #     interim_result.confidence #=> 0.8099
-        #     interim_result.stability #=> 0.8999
+        #     puts interim_result.transcript # "how old is the Brooklyn Bridge"
+        #     puts interim_result.confidence # 0.9826789498329163
+        #     puts interim_result.stability # 0.8999
         #   end
         #
         #   # Stream 5 seconds of audio from the microhone
@@ -272,8 +272,8 @@ module Google
         #   # register callback for when an interim result is returned
         #   stream.on_result do |results|
         #     result = results.first
-        #     result.transcript #=> "how old is the Brooklyn Bridge"
-        #     result.confidence #=> 0.8099
+        #     puts result.transcript # "how old is the Brooklyn Bridge"
+        #     puts result.confidence # 0.9826789498329163
         #   end
         #
         #   # Stream 5 seconds of audio from the microhone

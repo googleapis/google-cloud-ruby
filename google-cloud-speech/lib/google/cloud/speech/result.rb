@@ -99,10 +99,10 @@ module Google
         #
         #   result = results.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
-        #   result.confidence #=> 0.8099
+        #   result.confidence #=> 0.9826789498329163
         #   alternative = result.alternatives.first
         #   alternative.transcript #=> "how old is the Brooklyn brim"
-        #   alternative.confidence #=> 0.2203
+        #   alternative.confidence #=> 0.22030000388622284
         #
         class Alternative
           attr_reader :transcript, :confidence
@@ -155,9 +155,9 @@ module Google
       #   # register callback for when an interim result is returned
       #   stream.on_interim do |final_results, interim_results|
       #     interim_result = interim_results.first
-      #     interim_result.transcript #=> "how old is the Brooklyn Bridge"
-      #     interim_result.confidence #=> 0.8099
-      #     interim_result.stability #=> 0.8999
+      #     puts interim_result.transcript # "how old is the Brooklyn Bridge"
+      #     puts interim_result.confidence # 0.9826789498329163
+      #     puts interim_result.stability # 0.8999
       #   end
       #
       #   # Stream 5 seconds of audio from the microhone
