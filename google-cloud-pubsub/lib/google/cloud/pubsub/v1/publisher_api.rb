@@ -26,6 +26,8 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/iam/v1/iam_policy_pb"
+require "google/pubsub/v1/pubsub_pb"
 
 module Google
   module Cloud
@@ -481,13 +483,14 @@ module Google
           # existing policy.
           #
           # @param resource [String]
-          #   REQUIRED: The resource for which policy is being specified.
-          #   Resource is usually specified as a path, such as,
-          #   projects/{project}/zones/{zone}/disks/{disk}.
+          #   REQUIRED: The resource for which the policy is being specified.
+          #   +resource+ is usually specified as a path. For example, a Project
+          #   resource is specified as +projects/{project}+.
           # @param policy [Google::Iam::V1::Policy]
-          #   REQUIRED: The complete policy to be applied to the 'resource'. The size of
-          #   the policy is limited to a few 10s of KB. An empty policy is in general a
-          #   valid policy but certain services (like Projects) might reject them.
+          #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+          #   the policy is limited to a few 10s of KB. An empty policy is a
+          #   valid policy but certain Cloud Platform services (such as Projects)
+          #   might reject them.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -515,12 +518,14 @@ module Google
             @set_iam_policy.call(req, options)
           end
 
-          # Gets the access control policy for a resource. Is empty if the
-          # policy or the resource does not exist.
+          # Gets the access control policy for a resource.
+          # Returns an empty policy if the resource exists and does not have a policy
+          # set.
           #
           # @param resource [String]
-          #   REQUIRED: The resource for which policy is being requested. Resource
-          #   is usually specified as a path, such as, projects/{project}.
+          #   REQUIRED: The resource for which the policy is being requested.
+          #   +resource+ is usually specified as a path. For example, a Project
+          #   resource is specified as +projects/{project}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -547,11 +552,14 @@ module Google
           # Returns permissions that a caller has on the specified resource.
           #
           # @param resource [String]
-          #   REQUIRED: The resource for which policy detail is being requested.
-          #   Resource is usually specified as a path, such as, projects/{project}.
+          #   REQUIRED: The resource for which the policy detail is being requested.
+          #   +resource+ is usually specified as a path. For example, a Project
+          #   resource is specified as +projects/{project}+.
           # @param permissions [Array<String>]
-          #   The set of permissions to check for the 'resource'. Permissions with
-          #   wildcards (such as '*' or 'storage.*') are not allowed.
+          #   The set of permissions to check for the +resource+. Permissions with
+          #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+          #   information see
+          #   {IAM Overview}[https://cloud.google.com/iam/docs/overview#permissions].
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

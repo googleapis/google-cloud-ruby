@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/cloud/speech/v1beta1/cloud_speech_pb"
 
 module Google
   module Cloud

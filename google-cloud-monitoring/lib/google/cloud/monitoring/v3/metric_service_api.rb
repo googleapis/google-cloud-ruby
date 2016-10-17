@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/monitoring/v3/metric_service_pb"
 
 module Google
   module Cloud
@@ -77,11 +78,11 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/metricDescriptors/{metric_descriptor_path=**}"
+          METRIC_DESCRIPTOR_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/metricDescriptors/{metric_descriptor=**}"
           )
 
-          private_constant :METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE
+          private_constant :METRIC_DESCRIPTOR_PATH_TEMPLATE
 
           MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/monitoredResourceDescriptors/{monitored_resource_descriptor}"
@@ -98,14 +99,14 @@ module Google
             )
           end
 
-          # Returns a fully-qualified metric_descriptor_path resource name string.
+          # Returns a fully-qualified metric_descriptor resource name string.
           # @param project [String]
-          # @param metric_descriptor_path [String]
+          # @param metric_descriptor [String]
           # @return [String]
-          def self.metric_descriptor_path_path project, metric_descriptor_path
-            METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.render(
+          def self.metric_descriptor_path project, metric_descriptor
+            METRIC_DESCRIPTOR_PATH_TEMPLATE.render(
               :"project" => project,
-              :"metric_descriptor_path" => metric_descriptor_path
+              :"metric_descriptor" => metric_descriptor
             )
           end
 
@@ -127,18 +128,18 @@ module Google
             PROJECT_PATH_TEMPLATE.match(project_name)["project"]
           end
 
-          # Parses the project from a metric_descriptor_path resource.
-          # @param metric_descriptor_path_name [String]
+          # Parses the project from a metric_descriptor resource.
+          # @param metric_descriptor_name [String]
           # @return [String]
-          def self.match_project_from_metric_descriptor_path_name metric_descriptor_path_name
-            METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.match(metric_descriptor_path_name)["project"]
+          def self.match_project_from_metric_descriptor_name metric_descriptor_name
+            METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metric_descriptor_name)["project"]
           end
 
-          # Parses the metric_descriptor_path from a metric_descriptor_path resource.
-          # @param metric_descriptor_path_name [String]
+          # Parses the metric_descriptor from a metric_descriptor resource.
+          # @param metric_descriptor_name [String]
           # @return [String]
-          def self.match_metric_descriptor_path_from_metric_descriptor_path_name metric_descriptor_path_name
-            METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.match(metric_descriptor_path_name)["metric_descriptor_path"]
+          def self.match_metric_descriptor_from_metric_descriptor_name metric_descriptor_name
+            METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metric_descriptor_name)["metric_descriptor"]
           end
 
           # Parses the project from a monitored_resource_descriptor resource.
@@ -427,7 +428,7 @@ module Google
           #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
           #
           #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.metric_descriptor_path_path("[PROJECT]", "[METRIC_DESCRIPTOR_PATH]")
+          #   formatted_name = MetricServiceApi.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   response = metric_service_api.get_metric_descriptor(formatted_name)
 
           def get_metric_descriptor \
@@ -494,7 +495,7 @@ module Google
           #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
           #
           #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.metric_descriptor_path_path("[PROJECT]", "[METRIC_DESCRIPTOR_PATH]")
+          #   formatted_name = MetricServiceApi.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   metric_service_api.delete_metric_descriptor(formatted_name)
 
           def delete_metric_descriptor \
