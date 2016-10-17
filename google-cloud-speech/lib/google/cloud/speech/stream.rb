@@ -15,6 +15,7 @@
 
 require "google/cloud/speech/v1beta1"
 require "google/cloud/speech/result"
+require "monitor"
 require "forwardable"
 
 module Google
@@ -48,6 +49,7 @@ module Google
       #   stream.stop
       #
       class Stream
+        include MonitorMixin
         ##
         # @private Creates a new Speech Stream instance.
         # This must always be private, since it may change as the implementation
@@ -57,11 +59,8 @@ module Google
           @streaming_recognize_request = streaming_recognize_request
           @results = []
           @callbacks = Hash.new { |h, k| h[k] = [] }
+          super() # to init MonitorMixin
         end
-
-        # rubocop:disable all
-        # Disabled rubocop because start is complex and all the logic needs to
-        # happen on the thread. Please refactor this to make it nicer.
 
         ##
         # Starts the stream. The stream will be started in the first #send call.
@@ -70,58 +69,15 @@ module Google
           @request_queue = EnumeratorQueue.new(self)
           @request_queue.push @streaming_recognize_request
 
-          Thread.new do
-            @response_enum = @service.recognize_stream @request_queue.each_item
-            @response_enum.each do |response|
-              unless response.is_a? V1beta1::StreamingRecognizeResponse
-                fail ArgumentError, "Unable to handle #{response.class}"
-              end
-
-              # results are StreamingRecognitionResult
-              final_grpc, interim_grpcs = *response.results
-              if final_grpc && final_grpc.is_final
-                Mutex.new.synchronize do
-                  @results[response.result_index] = Result.from_grpc final_grpc
-                end
-                # callback for final result received
-                result!
-              else
-                # all results are interim
-                interim_grpcs = response.results
-              end
-
-              # convert to Speech object from GRPC object
-              interim_results = interim_grpcs.map do |grpc|
-                InterimResult.from_grpc grpc
-              end
-              # callback for interim results received
-              interim! interim_results if interim_results.any?
-
-              # Handle the endpointer by raising events
-              if response.endpointer_type == :START_OF_SPEECH
-                speech_start!
-              elsif response.endpointer_type == :END_OF_SPEECH
-                speech_end!
-              elsif response.endpointer_type == :END_OF_AUDIO
-                # TODO: do we automatically call stop here?
-                complete!
-              elsif response.endpointer_type == :END_OF_UTTERANCE
-                # TODO: do we automatically call stop here?
-                utterance!
-              end
-            end
-            Thread.pass
-          end
+          Thread.new { background_run }
         end
-
-        # rubocop:enable all
 
         ##
         # Checks if the stream has been started.
         #
         # @return [boolean] `true` when started, `false` otherwise.
         def started?
-          Mutex.new.synchronize do
+          synchronize do
             !(!@request_queue)
           end
         end
@@ -157,7 +113,7 @@ module Google
         def send bytes
           start # lazily call start if the stream wasn't started yet
           # TODO: do not send if stopped?
-          Mutex.new.synchronize do
+          synchronize do
             req = V1beta1::StreamingRecognizeRequest.new(
               audio_content: bytes.encode("ASCII-8BIT"))
             @request_queue.push req
@@ -168,7 +124,7 @@ module Google
         # Stops the stream. Signals to the server that no more data will be
         # sent.
         def stop
-          Mutex.new.synchronize do
+          synchronize do
             return if @request_queue.nil?
             @request_queue.push self
             @stopped = true
@@ -180,7 +136,7 @@ module Google
         #
         # @return [boolean] `true` when stopped, `false` otherwise.
         def stopped?
-          Mutex.new.synchronize do
+          synchronize do
             @stopped
           end
         end
@@ -211,7 +167,7 @@ module Google
         #   puts result.confidence # 0.9826789498329163
         #
         def results
-          Mutex.new.synchronize do
+          synchronize do
             @results
           end
         end
@@ -247,13 +203,17 @@ module Google
         #   stream.stop
         #
         def on_interim &block
-          @callbacks[:interim] << block
+          synchronize do
+            @callbacks[:interim] << block
+          end
         end
 
         # @private yields two arguments, all final results and the
         # non-final/incomplete result
         def interim! interim_results
-          @callbacks[:interim].each { |c| c.call results, interim_results }
+          synchronize do
+            @callbacks[:interim].each { |c| c.call results, interim_results }
+          end
         end
 
         ##
@@ -285,12 +245,25 @@ module Google
         #   stream.stop
         #
         def on_result &block
-          @callbacks[:result] << block
+          synchronize do
+            @callbacks[:result] << block
+          end
+        end
+
+        # @private add a result object, and call the callbacks
+        def add_result!result_index, result_grpc
+          synchronize do
+            @results[result_index] = Result.from_grpc result_grpc
+          end
+          # callback for final result received
+          result!
         end
 
         # @private yields each final results as they are recieved
         def result!
-          @callbacks[:result].each { |c| c.call results }
+          synchronize do
+            @callbacks[:result].each { |c| c.call results }
+          end
         end
 
         ##
@@ -321,13 +294,17 @@ module Google
         #   stream.stop
         #
         def on_speech_start &block
-          @callbacks[:speech_start] << block
+          synchronize do
+            @callbacks[:speech_start] << block
+          end
         end
 
         # @private returns single final result once :END_OF_UTTERANCE is
         # recieved.
         def speech_start!
-          @callbacks[:speech_start].each(&:call)
+          synchronize do
+            @callbacks[:speech_start].each(&:call)
+          end
         end
 
         ##
@@ -358,13 +335,17 @@ module Google
         #   stream.stop
         #
         def on_speech_end &block
-          @callbacks[:speech_end] << block
+          synchronize do
+            @callbacks[:speech_end] << block
+          end
         end
 
         # @private yields single final result once :END_OF_UTTERANCE is
         # recieved.
         def speech_end!
-          @callbacks[:speech_end].each(&:call)
+          synchronize do
+            @callbacks[:speech_end].each(&:call)
+          end
         end
 
         ##
@@ -395,14 +376,18 @@ module Google
         #   stream.stop
         #
         def on_complete &block
-          @callbacks[:complete] << block
+          synchronize do
+            @callbacks[:complete] << block
+          end
         end
 
         # @private yields all final results once the recognition is completed
         # depending on how the Stream is configured, this can be on the
         # reception of :END_OF_AUDIO or :END_OF_UTTERANCE.
         def complete!
-          @callbacks[:complete].each(&:call)
+          synchronize do
+            @callbacks[:complete].each(&:call)
+          end
         end
 
         ##
@@ -439,13 +424,115 @@ module Google
         #   stream.stop unless stream.stopped?
         #
         def on_utterance &block
-          @callbacks[:utterance] << block
+          synchronize do
+            @callbacks[:utterance] << block
+          end
         end
 
         # @private returns single final result once :END_OF_UTTERANCE is
         # recieved.
         def utterance!
-          @callbacks[:utterance].each(&:call)
+          synchronize do
+            @callbacks[:utterance].each(&:call)
+          end
+        end
+
+        ##
+        # Register to be notified of an error recieved during the stream.
+        #
+        # @yield [callback] The block for accessing final results.
+        # @yieldparam [Exception] error The error raised.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #
+        #   # register callback for when an error is returned
+        #   stream.on_error do |error|
+        #     puts "The following error occurred while streaming: #{error}"
+        #     stream.stop
+        #   end
+        #
+        #   # Stream 5 seconds of audio from the microhone
+        #   # Actual implementation of microphone input varies by platform
+        #   5.times.do
+        #     stream.send MicrophoneInput.read(32000)
+        #   end
+        #
+        #   stream.stop
+        #
+        def on_error &block
+          synchronize do
+            @callbacks[:error] << block
+          end
+        end
+
+        # @private returns error object from the stream thread.
+        def error! err
+          synchronize do
+            @callbacks[:error].each { |c| c.call err }
+          end
+        end
+
+        protected
+
+        def background_run
+          response_enum = @service.recognize_stream @request_queue.each_item
+          response_enum.each do |response|
+            begin
+              background_results response
+              background_endpointer response.endpointer_type
+              background_error response.error
+            rescue => e
+              error! Google::Cloud::Error.from_error(e)
+            end
+          end
+          Thread.pass
+        end
+
+        def background_results response
+          # Handle the results (StreamingRecognitionResult)
+          return unless response.results && response.results.any?
+
+          final_grpc, interim_grpcs = *response.results
+          if final_grpc && final_grpc.is_final
+            add_result! response.result_index, final_grpc
+          else
+            # all results are interim
+            interim_grpcs = response.results
+          end
+
+          # convert to Speech object from GRPC object
+          interim_results = Array(interim_grpcs).map do |grpc|
+            InterimResult.from_grpc grpc
+          end
+          # callback for interim results received
+          interim! interim_results if interim_results.any?
+        end
+
+        def background_endpointer endpointer
+          # Handle the endpointer by raising events
+          if endpointer == :START_OF_SPEECH
+            speech_start!
+          elsif endpointer == :END_OF_SPEECH
+            speech_end!
+          elsif endpointer == :END_OF_AUDIO
+            # TODO: do we automatically call stop here?
+            complete!
+          elsif endpointer == :END_OF_UTTERANCE
+            # TODO: do we automatically call stop here?
+            utterance!
+          end
+        end
+
+        def background_error error
+          return if error.nil?
+
+          require "grpc/errors"
+          fail GRPC::BadStatus.new(error.code, error.message)
         end
 
         # @private
