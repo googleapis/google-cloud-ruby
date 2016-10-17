@@ -3,6 +3,7 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-speech.gemspec"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
     - "lib/google/cloud/speech/v1beta1/*"
 

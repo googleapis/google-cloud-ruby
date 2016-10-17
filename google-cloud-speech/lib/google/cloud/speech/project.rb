@@ -49,7 +49,7 @@ module Google
       #
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
-      #   result.confidence #=> 88.15
+      #   result.confidence #=> 0.9826789498329163
       #
       class Project
         ##
@@ -467,8 +467,8 @@ module Google
         #   # register callback for when a result is returned
         #   stream.on_result do |results|
         #     result = results.first
-        #     result.transcript #=> "how old is the Brooklyn Bridge"
-        #     result.confidence #=> 0.8099
+        #     puts result.transcript # "how old is the Brooklyn Bridge"
+        #     puts result.confidence # 0.9826789498329163
         #   end
         #
         #   # Stream 5 seconds of audio from the microhone

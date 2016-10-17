@@ -44,7 +44,7 @@ module Google
       #
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
-      #   result.confidence #=> 88.15
+      #   result.confidence #=> 0.9826789498329163
       #
       class Audio
         # @private The V1beta1::RecognitionAudio object.
@@ -182,7 +182,7 @@ module Google
         #
         #   result = results.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
-        #   result.confidence #=> 88.15
+        #   result.confidence #=> 0.9826789498329163
         #
         def recognize max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_speech!

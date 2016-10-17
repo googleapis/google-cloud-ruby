@@ -110,7 +110,7 @@ module Google
     #
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"
-    # result.confidence #=> 88.15
+    # result.confidence #=> 0.9826789498329163
     # ```
     #
     # Use {Speech::Audio#recognize_job} for asynchronous speech recognition,
@@ -134,7 +134,7 @@ module Google
     #
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"
-    # result.confidence #=> 88.15
+    # result.confidence #=> 0.9826789498329163
     # ```
     #
     # Use {Speech::Project#speech} for streaming audio data for speech
@@ -147,13 +147,15 @@ module Google
     #
     # speech = Google::Cloud::Speech.new
     #
+    # audio = speech.audio "path/to/audio.raw"
+    #
     # stream = audio.stream encoding: :raw, sample_rate: 16000
     #
     # # register callback for when a result is returned
     # stream.on_result do |results|
     #   result = results.first
     #   result.transcript #=> "how old is the Brooklyn Bridge"
-    #   result.confidence #=> 0.8099
+    #   result.confidence #=> 0.9826789498329163
     # end
     #
     # # Stream 5 seconds of audio from the microhone
