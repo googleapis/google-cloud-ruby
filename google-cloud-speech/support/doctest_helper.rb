@@ -15,6 +15,29 @@
 require "google/cloud/storage"
 require "google/cloud/speech"
 
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout === other.timeout &&
+      retry_options === other.retry_options &&
+      page_token === other.page_token &&
+      kwargs === other.kwargs
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout == other.timeout &&
+      retry_options == other.retry_options &&
+      page_token == other.page_token &&
+      kwargs == other.kwargs
+  end
+end
+
 class File
   def self.file? f
     true
@@ -94,10 +117,16 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage File object:" do
     mock_storage do |mock|
       mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
-      mock.expect :get_object,  OpenStruct.new(name: "bucket-name"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
     end
     mock_speech do |mock|
-      mock.expect :async_recognize, op_done_false, recognize_args
+      mock.expect :async_recognize, op_done_false, recognize_args(recognition_config_alternatives, recognition_audio_uri)
+    end
+  end
+
+  doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage URI:" do
+    mock_speech do |mock|
+      mock.expect :async_recognize, op_done_false, recognize_args(nil, recognition_audio_uri)
     end
   end
 
@@ -132,17 +161,57 @@ YARD::Doctest.configure do |doctest|
       mock.expect :sync_recognize, sync_recognize_response, recognize_args
     end
   end
+
+  doctest.before "Google::Cloud::Speech::Result::Alternative" do
+    mock_speech do |mock|
+      mock.expect :sync_recognize, sync_recognize_response_alternatives, recognize_args
+    end
+  end
 end
 
 # Fixture helpers
 
+
+
+def default_headers
+  { "google-cloud-resource-prefix" => "projects/my-project-id" }
+end
+
+def default_options
+  Google::Gax::CallOptions.new kwargs: default_headers
+end
+
+def recognition_config
+  Google::Cloud::Speech::V1beta1::RecognitionConfig.new encoding: :LINEAR16, sample_rate: 16000
+end
+
+def recognition_config_alternatives
+  Google::Cloud::Speech::V1beta1::RecognitionConfig.new encoding: :LINEAR16, sample_rate: 16000, max_alternatives: 10
+end
+
+def recognition_audio_uri
+  recognition_audio = Google::Cloud::Speech::V1beta1::RecognitionAudio.new
+  recognition_audio.audio_source == :uri
+  recognition_audio.uri = "gs://bucket-name/path/to/audio.raw"
+  recognition_audio
+end
+
+def recognition_audio
+  Google::Cloud::Speech::V1beta1::RecognitionAudio.new content: "fake file data"
+end
+
 # TODO: Match argument values, not just types
-def recognize_args
-  [Google::Cloud::Speech::V1beta1::RecognitionConfig, Google::Cloud::Speech::V1beta1::RecognitionAudio]
+def recognize_args config = nil, audio = nil
+  [(config || recognition_config), (audio || recognition_audio), {options: default_options}]
 end
 
 def sync_recognize_response
   results_json = "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.9826789498329163}]}]}"
+  Google::Cloud::Speech::V1beta1::SyncRecognizeResponse.decode_json results_json
+end
+
+def sync_recognize_response_alternatives
+  results_json = "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.9826789498329163},{\"transcript\":\"how old is the Brooklyn brim\",\"confidence\":0.22030000388622284}]}]}"
   Google::Cloud::Speech::V1beta1::SyncRecognizeResponse.decode_json results_json
 end
 
