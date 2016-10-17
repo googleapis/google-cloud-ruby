@@ -228,11 +228,13 @@ module Google
         #   Logs](https://cloud.google.com/storage/docs/access-logs).
         # @param [Symbol, String] storage_class Defines how objects in the
         #   bucket are stored and determines the SLA and the cost of storage.
-        #   Values include `:standard`, `:nearline`, and `:dra` (Durable Reduced
+        #   Values include `:multi_regional`, `:regional`, `:nearline`, 
+        #   `:coldline`, `standard`, and `:dra` (Durable Reduced
         #   Availability), as well as the strings returned by
         #   Bucket#storage_class. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
-        #   default value is `:standard`.
+        #   default value is `:standard`, which is equivalent to `:multi_regional`
+        #   or `:regional` depending on the bucket's location settings.
         # @param [Boolean] versioning Whether [Object
         #   Versioning](https://cloud.google.com/storage/docs/object-versioning)
         #   is to be enabled for the bucket. The default value is `false`.
@@ -307,6 +309,9 @@ module Google
             "dra" => "DURABLE_REDUCED_AVAILABILITY",
             "durable" => "DURABLE_REDUCED_AVAILABILITY",
             "nearline" => "NEARLINE",
+            "coldline" => "COLDLINE",
+            "multi_regional" => "MULTI_REGIONAL",
+            "regional" => "REGIONAL",
             "standard" => "STANDARD" }[str.to_s.downcase]
         end
       end
