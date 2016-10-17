@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/spanner/admin/database/v1/spanner_database_admin_pb"
 
 module Google
   module Cloud
