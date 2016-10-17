@@ -474,9 +474,7 @@ module Google
           def reload!
             gapi = @service.list_default_acls @bucket
             acls = Array(gapi.items).map do |acl|
-              if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
-                return acl
-              end
+              next acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
               fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
               Google::Apis::StorageV1::ObjectAccessControl.from_json acl.to_json
             end
