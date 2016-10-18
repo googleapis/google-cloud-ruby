@@ -451,7 +451,7 @@ module Google
         # @private Get a Time object from a Google::Protobuf::Timestamp object.
         def self.extract_timestamp grpc
           return nil if grpc.timestamp.nil?
-          Time.at grpc.timestamp.seconds, grpc.timestamp.nanos/1000.0
+          Time.at grpc.timestamp.seconds, Rational(grpc.timestamp.nanos, 1000)
         end
       end
     end
