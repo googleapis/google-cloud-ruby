@@ -137,7 +137,7 @@ module Google
     # result.confidence #=> 0.9826789498329163
     # ```
     #
-    # Use {Speech::Project#speech} for streaming audio data for speech
+    # Use {Speech::Project#stream} for streaming audio data for speech
     # recognition, in which a {Speech::Stream} is returned. The stream object
     # can receive results while sending audio by performing bidirectional
     # streaming speech-recognition.

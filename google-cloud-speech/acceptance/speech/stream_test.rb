@@ -23,11 +23,14 @@ describe "Streaming Recognition", :speech do
     stream = speech.stream encoding: :raw, sample_rate: 16000
 
     stream.on_interim      { counters[:interim] += 1 }
-    stream.on_result        { counters[:result] += 1 }
+    stream.on_result       { counters[:result] += 1 }
     stream.on_speech_start { counters[:speech_start] += 1 }
     stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
+    stream.on_error do |error|
+      puts "The following error occurred while streaming: #{error}"
+    end
 
     stream.send File.read(filepath, mode: "rb")
 
@@ -59,11 +62,17 @@ describe "Streaming Recognition", :speech do
     stream = speech.stream encoding: :raw, sample_rate: 16000
 
     stream.on_interim      { counters[:interim] += 1 }
-    stream.on_result        { counters[:result] += 1 }
+    stream.on_result       { counters[:result] += 1 }
     stream.on_speech_start { counters[:speech_start] += 1 }
     stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
+    stream.on_error do |error|
+      puts "The following error occurred while streaming: #{error}"
+    end
+    stream.on_error do |error|
+      puts "The following error occurred while streaming: #{error}"
+    end
 
     file = File.open filepath, "rb"
 
@@ -102,11 +111,14 @@ describe "Streaming Recognition", :speech do
       stream = speech.stream encoding: :raw, sample_rate: 16000, interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
-      stream.on_result        { counters[:result] += 1 }
+      stream.on_result       { counters[:result] += 1 }
       stream.on_speech_start { counters[:speech_start] += 1 }
       stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
+      stream.on_error do |error|
+        puts "The following error occurred while streaming: #{error}"
+      end
 
       stream.send File.read(filepath, mode: "rb")
 
@@ -138,11 +150,14 @@ describe "Streaming Recognition", :speech do
       stream = speech.stream encoding: :raw, sample_rate: 16000, interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
-      stream.on_result        { counters[:result] += 1 }
+      stream.on_result       { counters[:result] += 1 }
       stream.on_speech_start { counters[:speech_start] += 1 }
       stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
+      stream.on_error do |error|
+        puts "The following error occurred while streaming: #{error}"
+      end
 
       file = File.open filepath, "rb"
 
@@ -182,11 +197,14 @@ describe "Streaming Recognition", :speech do
       stream = speech.stream encoding: :raw, sample_rate: 16000, utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
-      stream.on_result        { counters[:result] += 1 }
+      stream.on_result       { counters[:result] += 1 }
       stream.on_speech_start { counters[:speech_start] += 1 }
       stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
+      stream.on_error do |error|
+        puts "The following error occurred while streaming: #{error}"
+      end
 
       stream.send File.read(filepath, mode: "rb")
 
@@ -226,11 +244,14 @@ describe "Streaming Recognition", :speech do
       stream = speech.stream encoding: :raw, sample_rate: 16000, utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
-      stream.on_result        { counters[:result] += 1 }
+      stream.on_result       { counters[:result] += 1 }
       stream.on_speech_start { counters[:speech_start] += 1 }
       stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
+      stream.on_error do |error|
+        puts "The following error occurred while streaming: #{error}"
+      end
 
       file = File.open filepath, "rb"
 
