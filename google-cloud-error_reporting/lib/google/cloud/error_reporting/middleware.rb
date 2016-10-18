@@ -165,12 +165,12 @@ module Google
 
           # Build http_request_context hash
           rack_request = Rack::Request.new env
-          http_method = ensure_encoding rack_request.request_method
-          http_url = ensure_encoding rack_request.url
-          http_user_agent = ensure_encoding rack_request.user_agent
-          http_referrer = ensure_encoding rack_request.referrer
+          http_method = rack_request.request_method
+          http_url = rack_request.url
+          http_user_agent = rack_request.user_agent
+          http_referrer = rack_request.referrer
           http_status = get_http_status exception
-          http_remote_ip = ensure_encoding rack_request.ip
+          http_remote_ip = rack_request.ip
           http_request_context = {
                                    method: http_method,
                                    url: http_url,
@@ -235,21 +235,6 @@ module Google
           end
 
           http_status
-        end
-
-        ##
-        # Helper function to ensure String values are encoded correctly
-        def ensure_encoding value
-          return nil if value.nil?
-
-          vdup = value.dup
-
-          # Change encoding to UTF-8 if input value is a binary string
-          vdup.force_encoding("UTF-8") if vdup.is_a?(::String) &&
-                                          vdup.encoding.name == "ASCII-8BIT"
-
-          # Return the valid UTF-8 string. Otherwise just return nil.
-          vdup.is_a?(::String) && !vdup.valid_encoding? ? nil : vdup
         end
       end
     end

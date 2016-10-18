@@ -180,20 +180,6 @@ describe Google::Cloud::ErrorReporting::Middleware do
         error_event.context.user.must_equal user
       end
     end
-
-    it "changes binary string to utf-8 string" do
-      rack_env["HTTP_USER_AGENT"].force_encoding("BINARY")
-
-      error_event = middleware.build_error_event_from_exception rack_env, app_exception
-      error_event.context.http_request.user_agent.encoding.name.must_equal "UTF-8"
-    end
-
-    it "filters out invalid utf-8 string parameter" do
-      rack_env["HTTP_USER_AGENT"] = "Invalid User \xFF Agent".encode("utf-8")
-
-      error_event = middleware.build_error_event_from_exception rack_env, app_exception
-      error_event.context.http_request.user_agent.must_be :empty?
-    end
   end
 
   describe ".get_http_status" do
