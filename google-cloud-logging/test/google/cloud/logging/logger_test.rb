@@ -103,27 +103,20 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
     it "doesn't record more than 10_000 trace_ids" do
       last_thread_id = first_thread_id = 1
-      stubbed_thread_object = ->(){
-        obj = Object.new
-        last_thread_id = obj.object_id
-        obj
+      stubbed_thread_id = ->(){
+        last_thread_id += 1
       }
 
       # Stubbing Thread.current breaks minitest APIs. So record result and
       # evaluate outside the block
-      size = first_trace_id = last_trace_id = false
-      Thread.stub :current, stubbed_thread_object do
+      logger.stub :current_thread_id, stubbed_thread_id do
         10_001.times do
           logger.add_trace_id trace_id
         end
-        size = logger.trace_ids.size
-        first_trace_id = logger.trace_ids[first_thread_id]
-        last_trace_id = logger.trace_ids[last_thread_id]
+        logger.trace_ids.size.must_equal 10_000
+        logger.trace_ids[first_thread_id].must_be :nil?
+        logger.trace_ids[last_thread_id].must_equal trace_id
       end
-
-      size.must_equal 10_000
-      first_trace_id.must_be :nil?
-      last_trace_id.must_equal trace_id
     end
   end
 end

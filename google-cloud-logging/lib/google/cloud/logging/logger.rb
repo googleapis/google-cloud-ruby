@@ -313,7 +313,6 @@ module Google
         # @param [String] trace_id The HTTP_X_CLOUD_TRACE_CONTEXT HTTP request
         #   header that's shared and tracked by all Stackdriver services
         def add_trace_id trace_id
-          current_thread_id = Thread.current.object_id
           trace_ids[current_thread_id] = trace_id
 
           # Start removing old entries if hash gets too large.
@@ -327,7 +326,7 @@ module Google
         #
         # @return The trace_id that's being deleted
         def delete_trace_id
-          trace_ids.delete Thread.current.object_id
+          trace_ids.delete current_thread_id
         end
 
         protected
@@ -341,7 +340,7 @@ module Google
           end
 
           # merge input labels and trace_id
-          trace_id = trace_ids[Thread.current.object_id]
+          trace_id = trace_ids[current_thread_id]
           merged_labels = trace_id.nil? ? {} : { traceId: trace_id }
           merged_labels = labels.merge(merged_labels) unless labels.nil?
 
@@ -372,6 +371,12 @@ module Google
           %i(DEBUG INFO WARNING ERROR CRITICAL DEFAULT)[severity_int]
         rescue
           :DEFAULT
+        end
+
+        ##
+        # @private Get current thread id
+        def current_thread_id
+          Thread.current.object_id
         end
       end
     end
