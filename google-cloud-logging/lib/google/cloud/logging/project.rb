@@ -88,9 +88,9 @@ module Google
         # Lists log entries. Use this method to retrieve log entries from Cloud
         # Logging.
         #
-        # @param [String, Array] projects One or more project IDs or project
-        #   numbers from which to retrieve log entries. If `nil`, the ID of the
-        #   receiving project instance will be used.
+        # @param [String, Array<String>] resources One or more cloud resources
+        #   from which to retrieve log entries. Example:
+        #   `"projects/my-project-1A"`, `"projects/1234567890"`.
         # @param [String] filter An [advanced logs
         #   filter](https://cloud.google.com/logging/docs/view/advanced_filters).
         #   The filter is compared against all log entries in the projects
@@ -102,6 +102,10 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of entries to return.
+        # @param [String, Array<String>] projects One or more project IDs or
+        #   project numbers from which to retrieve log entries. If `nil`, the ID
+        #   of the receiving project instance will be used. This is deprecated
+        #   in favor of `resources`.
         #
         # @return [Array<Google::Cloud::Logging::Entry>] (See
         #   {Google::Cloud::Logging::Entry::List})
@@ -143,13 +147,16 @@ module Google
         #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
         #   end
         #
-        def entries projects: nil, filter: nil, order: nil, token: nil, max: nil
+        def entries resources: nil, filter: nil, order: nil, token: nil,
+                    max: nil, projects: nil
           ensure_service!
-          list_grpc = service.list_entries projects: projects, filter: filter,
-                                           order: order, token: token, max: max
+          list_grpc = service.list_entries resources: resources, filter: filter,
+                                           order: order, token: token, max: max,
+                                           projects: projects
           Entry::List.from_grpc list_grpc, service,
-                                projects: projects, max: max,
-                                filter: filter, order: order
+                                resources: resources, max: max,
+                                filter: filter, order: order,
+                                projects: projects
         end
         alias_method :find_entries, :entries
 

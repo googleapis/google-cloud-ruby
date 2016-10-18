@@ -93,10 +93,15 @@ module Google
           credentials == :this_channel_is_insecure
         end
 
-        def list_entries projects: nil, filter: nil, order: nil, token: nil,
-                         max: nil
+        def list_entries resources: nil, filter: nil, order: nil, token: nil,
+                         max: nil, projects: nil
 
-          project_ids = Array(projects || @project)
+          project_ids = Array(projects)
+          resource_names = Array(resources)
+          if project_ids.empty? && resource_names.empty?
+            resource_names = ["projects/#{@project}"]
+          end
+          resource_names = nil if resource_names.empty?
           call_opts = default_options
           if token
             call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
@@ -104,11 +109,9 @@ module Google
           end
 
           execute do
-            paged_enum = logging.list_log_entries project_ids,
-                                                  filter: filter,
-                                                  order_by: order,
-                                                  page_size: max,
-                                                  options: call_opts
+            paged_enum = logging.list_log_entries \
+              project_ids, resource_names: resource_names, filter: filter,
+                           order_by: order, page_size: max, options: call_opts
             paged_enum.page.response
           end
         end
