@@ -44,6 +44,43 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
+## Rails Integration
+
+This library also provides a built in Railtie for Ruby on Rails integration. To do this, simply add this line to config/application.rb:
+```ruby
+require "google/cloud/logging/rails"
+```
+Then the library can be configured through this set of Rails parameters in config/environments/*.rb:
+```ruby
+# Sharing authentication parameters
+config.google_cloud.project_id = "gcp-project-id"
+config.google_cloud.keyfile = "/path/to/gcp/secret.json"
+# Or more specificly for Logging
+config.google_cloud.logging.project_id = "gcp-project-id"
+config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
+ 
+# Explicitly enable or disable Logging
+config.google_cloud.use_logging = true
+ 
+# Set Stackdriver Logging log name
+config.google_cloud.logging.log_name = "my-app-log"
+```
+
+Alternatively, check out [stackdriver](../stackdriver) gem, which includes this Railtie by default.
+
+## Rack Integration
+
+Other Rack base framework can also directly leverage the built-in Middleware.
+```ruby
+require "google/cloud/logging"
+
+logging = Google::Cloud::Logging.new
+resource = Google::Cloud::Logging::Middleware.build_monitoring_resource
+logger = logging.logger "my-log-name",
+                        resource
+use Google::Cloud::Logging::Middleware, logger: logger
+```
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 2.0+.

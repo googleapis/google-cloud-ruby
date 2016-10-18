@@ -369,13 +369,9 @@ module Google
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Logging::Credentials.default(
-            scope: scope)
-        else
-          credentials = Google::Cloud::Logging::Credentials.new(
-            keyfile, scope: scope)
-        end
+        credentials =
+          Google::Cloud::Logging::Credentials.credentials_with_scope keyfile,
+                                                                     scope
 
         Google::Cloud::Logging::Project.new(
           Google::Cloud::Logging::Service.new(

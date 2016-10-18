@@ -23,6 +23,7 @@ require "google/cloud/logging/sink"
 require "google/cloud/logging/metric"
 require "google/cloud/logging/async_writer"
 require "google/cloud/logging/logger"
+require "google/cloud/logging/middleware"
 
 module Google
   module Cloud

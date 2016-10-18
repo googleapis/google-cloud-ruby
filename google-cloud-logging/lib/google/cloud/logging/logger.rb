@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "orderedhash"
+
 module Google
   module Cloud
     module Logging
@@ -50,6 +52,12 @@ module Google
         ##
         # The Google Cloud labels to write the log entry with.
         attr_reader :labels
+
+        ##
+        # A OrderedHash of Thread IDs to Stackdriver request trace ID. The
+        # Stackdriver trace ID is a shared request identifier across all
+        # Stackdriver services.
+        attr_reader :trace_ids
 
         ##
         # Create a new Logger instance.
@@ -93,6 +101,7 @@ module Google
           @resource = resource
           @labels = labels
           @level = 0 # DEBUG is the default behavior
+          @trace_ids = OrderedHash.new
         end
 
         ##
@@ -297,6 +306,30 @@ module Google
         end
         alias_method :sev_threshold=, :level=
 
+        ##
+        # Track a given trace_id by associating it with the current
+        # Thread
+        #
+        # @param [String] trace_id The HTTP_X_CLOUD_TRACE_CONTEXT HTTP request
+        #   header that's shared and tracked by all Stackdriver services
+        def add_trace_id trace_id
+          current_thread_id = Thread.current.object_id
+          trace_ids[current_thread_id] = trace_id
+
+          # Start removing old entries if hash gets too large.
+          # This should never happen, because middleware should automatically
+          # remove entries when a request is finished
+          trace_ids.shift if trace_ids.size > 10_000
+        end
+
+        ##
+        # Untrack the trace_id that's associated with current Thread
+        #
+        # @return The trace_id that's being deleted
+        def delete_trace_id
+          trace_ids.delete Thread.current.object_id
+        end
+
         protected
 
         ##
@@ -307,8 +340,13 @@ module Google
             e.payload = message
           end
 
+          # merge input labels and trace_id
+          trace_id = trace_ids[Thread.current.object_id]
+          merged_labels = trace_id.nil? ? {} : { traceId: trace_id }
+          merged_labels = labels.merge(merged_labels) unless labels.nil?
+
           writer.write_entries entry, log_name: log_name, resource: resource,
-                                      labels: labels
+                                      labels: merged_labels
         end
 
         ##
