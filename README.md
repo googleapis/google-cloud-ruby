@@ -18,7 +18,6 @@ This project supports the following Google Cloud Platform services:
 * [Cloud Datastore](#datastore)
 * [Cloud DNS](#dns)
 * [Stackdriver Logging](#logging)
-* [Stackdriver Error Reporting](#error-reporting)
 * [Cloud Natural Language API](#natural-language)
 * [Cloud Pub/Sub](#pubsub)
 * [Cloud Resource Manager](#resource-manager)
@@ -203,33 +202,6 @@ entry.resource.labels[:module_id] = "1"
 entry.resource.labels[:version_id] = "20150925t173233"
 
 logging.write_entries entry
-```
-
-#### Error Reporting
-
-- [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
-- [google-cloud-error_reporting API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/master/google/cloud/error_reporting)
-- [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
-- [Stackdriver Error Reporting documentation](https://cloud.google.com/error-reporting/docs/)
-
-#### Quick Start
-
-```sh
-$ gem install google-cloud-error_reporting
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/error_reporting"
- 
-error_reporting = Google::Cloud::ErrorReporting.new
- 
-# Report an error event
-error_event = error_reporting.error_event "Error Message with Backtrace",
-                                          service_name: "my_app_name",
-                                          service_version: "v8"
-error_reporting.report error_event
 ```
 
 ### Natural Language

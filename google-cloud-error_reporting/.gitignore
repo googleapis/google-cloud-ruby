@@ -1,9 +1,0 @@
-Gemfile.lock
-coverage/*
-doc/*
-pkg/*
-html/*
-jsondoc/*
-
-# Ignore YARD stuffs
-.yardoc

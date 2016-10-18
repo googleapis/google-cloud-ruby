@@ -17,62 +17,72 @@
 require "ostruct"
 require "minitest/focus"
 require 'google/cloud/error_reporting/middleware'
+require "action_dispatch"
 
 describe Google::Cloud::ErrorReporting::Middleware do
-  APP_EXCEPTION_MSG = "A serious error from application"
-  VALID_ERROR_EVENT = "A valid error event"
-  SERVICE_NAME = "My microservice"
-  SERVICE_VERSION = "Version testing"
+  let(:app_exception_msg) { "A serious error from application" }
+  let(:project_id) { "gcp-test-name" }
+  let(:service_name) { "my-test-service" }
+  let(:service_version) { "vTest" }
 
   class IgnoredError < ::StandardError
   end
 
-  before do
-    @env = {
-      'REQUEST_METHOD' => 'GET',
-      'RACK_URL_SCHEME' => 'http',
-      'HTTP_HOST' => 'localhost:3000',
-      'ORIGINAL_FULLPATH' => "test/path?abc=def",
-      'HTTP_USER_AGENT' => 'chrome-1.2.3',
-      'HTTP_REFERER' => nil,
-      'REMOTE_ADDR' => '127.0.0.1'
-    }
-
-    @app_exception = StandardError.new(APP_EXCEPTION_MSG)
+  let(:rack_env) {{
+    'REQUEST_METHOD' => 'GET',
+    'RACK_URL_SCHEME' => 'http',
+    'HTTP_HOST' => 'localhost:3000',
+    'ORIGINAL_FULLPATH' => "test/path?abc=def",
+    'HTTP_USER_AGENT' => 'chrome-1.2.3',
+    'HTTP_REFERER' => nil,
+    'REMOTE_ADDR' => '127.0.0.1'
+  }}
+  let(:app_exception) { StandardError.new(app_exception_msg) }
+  let(:rack_app) {
     app = OpenStruct.new
-    def app.call env
-      fail StandardError, APP_EXCEPTION_MSG
+    exception = app_exception
+    app.define_singleton_method(:call) do |_|
+      raise exception
     end
-    error_reporting = OpenStruct.new report: Proc.new {}
-    def error_reporting.error_event message, params
-      VALID_ERROR_EVENT
-    end
-
-    @middleware = Google::Cloud::ErrorReporting::Middleware.new(
-                    app,
-                    error_reporting: error_reporting,
-                    service_name: SERVICE_NAME,
-                    service_version: SERVICE_VERSION,
-                    ignore: [IgnoredError]
-                  )
-    @default_middleware = Google::Cloud::ErrorReporting::Middleware.new(
-                            app,
-                            error_reporting: error_reporting
-                          )
-  end
+    app
+  }
+  let(:error_reporting) {
+    obj = OpenStruct.new report: Proc.new {}
+    obj.define_singleton_method(:report_error_event) do end
+    obj
+  }
+  let(:middleware) {
+    Google::Cloud::ErrorReporting::Middleware.new rack_app,
+                                                  error_reporting: error_reporting,
+                                                  project_id: project_id,
+                                                  service_name: service_name,
+                                                  service_version: service_version,
+                                                  ignore_classes: [IgnoredError]
+  }
+  let(:default_middleware) {
+    Google::Cloud::ErrorReporting::Middleware.new rack_app,
+                                                  error_reporting: error_reporting,
+                                                  project_id: project_id
+  }
 
   describe "#initialize" do
     it "uses the error_reporting given" do
-      @middleware.error_reporting.error_event(nil, nil).must_equal(
-        VALID_ERROR_EVENT
-      )
+      middleware.error_reporting.must_equal error_reporting
     end
 
     it "creates a default error_reporting if not given one" do
-      Google::Cloud.stub :error_reporting, "A default error_reporting" do
-        middleware = Google::Cloud::ErrorReporting::Middleware.new nil
+      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.stub \
+        :new, "A default error_reporting" do
+        middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
+                                                                   project_id: project_id
 
         middleware.error_reporting.must_equal "A default error_reporting"
+      end
+    end
+
+    it "raises ArgumentError if empty project_id provided" do
+      assert_raises ArgumentError do
+        Google::Cloud::ErrorReporting::Middleware.new nil
       end
     end
   end
@@ -80,133 +90,116 @@ describe Google::Cloud::ErrorReporting::Middleware do
   describe "#call" do
     it "catches exception and also raise it back up" do
       stub_report_exception = ->(_, exception) {
-        exception.message.must_equal APP_EXCEPTION_MSG
+        exception.message.must_equal app_exception_msg
       }
 
-      @middleware.stub :report_exception, stub_report_exception do
+      middleware.stub :report_exception, stub_report_exception do
         exception = assert_raises StandardError do
-          @middleware.call @env
+          middleware.call rack_env
         end
 
-        exception.message.must_equal APP_EXCEPTION_MSG
+        exception.message.must_equal app_exception_msg
+      end
+    end
+
+    it "also reports env['sinatra.error'] if exists" do
+      stub_call = ->(env) {
+        env['sinatra.error'] = app_exception
+      }
+      stub_report_exception = ->(_, exception) {
+        exception.message.must_equal app_exception_msg
+      }
+
+      rack_app.stub :call, stub_call do
+        middleware.stub :report_exception, stub_report_exception do
+          middleware.call rack_env
+        end
       end
     end
   end
 
   describe "#report_exception" do
     it "doesn't call report_exception if exception's class is been ignored" do
-      stub_report = ->(_) { fail "This exception should've been ignored" }
+      stub_report = ->(_, _) { fail "This exception should've been ignored" }
       ignore_exception = IgnoredError.new "To be ignored"
 
-      @middleware.error_reporting.stub :report, stub_report do
-        @middleware.report_exception @env, ignore_exception
+      middleware.error_reporting.stub :report_error_event, stub_report do
+        middleware.report_exception rack_env, ignore_exception
       end
     end
 
-    it "calls error_reporting#report to report the error" do
-      stub_reporting = ->(error_event) {
-        error_event.is_a? Google::Cloud::ErrorReporting::ErrorEvent
+    it "calls error_reporting#report_error_event to report the error" do
+      stub_reporting = ->(_, error_event) {
+        error_event.must_be_kind_of Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
       }
 
-      @middleware.error_reporting.stub :report, stub_reporting do
-        @middleware.report_exception @env, @app_exception
+      middleware.error_reporting.stub :report_error_event, stub_reporting do
+        middleware.report_exception rack_env, app_exception
       end
     end
 
     it "doesn't report if the exception maps to a HTTP code less than 500" do
-      stub_reporting = ->(_) { fail "This exception should've been skipped" }
+      stub_reporting = ->(_, _) { fail "This exception should've been skipped" }
       stub_http_status = ->(exception) {
-        exception.message.must_equal APP_EXCEPTION_MSG
+        exception.message.must_equal app_exception_msg
         407
       }
 
-
-      @middleware.class.stub :get_http_status, stub_http_status do
-        @middleware.error_reporting.stub :report, stub_reporting do
-          @middleware.report_exception @env, @app_exception
+      middleware.stub :get_http_status, stub_http_status do
+        middleware.error_reporting.stub :report_error_event, stub_reporting do
+          middleware.report_exception rack_env, app_exception
         end
       end
     end
+  end
 
+  describe "#full_project_id" do
+    it "translates given project_id to full project path" do
+      middleware.full_project_id.must_equal "projects/#{project_id}"
+    end
+  end
+
+  describe "#build_error_event_from_exception" do
     it "injects service_name and service_version" do
-      stub_reporting = ->(error_event) {
-        error_event.service_context.service.must_equal SERVICE_NAME
-        error_event.service_context.version.must_equal SERVICE_VERSION
-      }
+      error_event = middleware.build_error_event_from_exception rack_env, app_exception
 
-      @middleware.error_reporting.stub :report, stub_reporting do
-        @middleware.report_exception @env, @app_exception
-      end
-    end
-
-    it "add default service name and version" do
-      service_name = "My other service"
-      service_version = "A different version"
-      stub_reporting = ->(error_event) {
-        error_event.service_context.service.must_equal service_name
-        error_event.service_context.version.must_equal service_version
-      }
-
-      Google::Cloud::ErrorReporting::Project.stub :default_service_name, service_name do
-        Google::Cloud::ErrorReporting::Project.stub :default_service_version, service_version do
-          @default_middleware.error_reporting.stub :report, stub_reporting do
-            @default_middleware.report_exception @env, @app_exception
-          end
-        end
-      end
+      error_event.service_context.service.must_equal service_name
+      error_event.service_context.version.must_equal service_version
     end
 
     it "injects user from ENV['USER']" do
       user = "john_doe"
-      stub_reporting = ->(error_event) {
-        error_event.error_context.user.must_equal user
-      }
 
-      @middleware.error_reporting.stub :report, stub_reporting do
-        ENV.stub :[], user do
-          @middleware.report_exception @env, @app_exception
-        end
+      ENV.stub :[], user do
+        error_event = middleware.build_error_event_from_exception rack_env, app_exception
+        error_event.context.user.must_equal user
       end
     end
 
     it "changes binary string to utf-8 string" do
-      stub_report = ->(error_event) {
-        error_event.error_context.http_request_context.user_agent.encoding.name.must_equal "UTF-8"
-      }
-      envdup = @env.dup
-      envdup["HTTP_USER_AGENT"].force_encoding("BINARY")
+      rack_env["HTTP_USER_AGENT"].force_encoding("BINARY")
 
-      @middleware.error_reporting.stub :report, stub_report do
-        @middleware.report_exception envdup, @app_exception
-      end
+      error_event = middleware.build_error_event_from_exception rack_env, app_exception
+      error_event.context.http_request.user_agent.encoding.name.must_equal "UTF-8"
     end
 
     it "filters out invalid utf-8 string parameter" do
-      stub_report = ->(error_event) {
-        error_event.error_context.http_request_context.user_agent.must_be :nil?
-      }
-      envdup = @env.dup
-      envdup['HTTP_USER_AGENT'] = "Invalid User \xFF Agent".encode("utf-8")
+      rack_env["HTTP_USER_AGENT"] = "Invalid User \xFF Agent".encode("utf-8")
 
-      @middleware.error_reporting.stub :report, stub_report do
-        @middleware.report_exception envdup, @app_exception
-      end
+      error_event = middleware.build_error_event_from_exception rack_env, app_exception
+      error_event.context.http_request.user_agent.must_be :empty?
     end
   end
 
   describe ".get_http_status" do
     it "returns right http_status code based on exception class" do
-      require "action_dispatch"
-
-      status = @middleware.class.get_http_status @app_exception
+      status = middleware.send :get_http_status, app_exception
       status.must_equal 500
     end
 
     it "returns right http_status code based on exception class #2" do
-      require "action_dispatch"
-
-      @app_exception.class.stub :name, "ActionDispatch::ParamsParser::ParseError" do
-        status = @middleware.class.get_http_status @app_exception
+      app_exception.class.stub :name, "ActionDispatch::ParamsParser::ParseError" do
+        status = middleware.send :get_http_status, app_exception
         status.must_equal 400
       end
     end

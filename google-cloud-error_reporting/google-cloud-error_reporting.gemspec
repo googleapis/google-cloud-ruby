@@ -1,40 +1,36 @@
-# -*- encoding: utf-8 -*-
+# -*- ruby -*-
+# encoding: utf-8
 
-require_relative "lib/google/cloud/error_reporting/version"
+Gem::Specification.new do |s|
+  s.name          = 'google-cloud-error_reporting'
+  s.version       = '0.20.1'
 
-Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-error_reporting"
-  gem.version       = Google::Cloud::ErrorReporting::VERSION
+  s.authors       = ['Google Inc']
+  s.description   = 'a grpc-based api'
+  s.email         = 'googleapis-packages@google.com'
+  s.files         = Dir.glob(File.join('lib', '**', '*.rb'))
+  s.files        += Dir.glob(File.join('lib', '**', '*.json'))
+  s.files        += %w(Rakefile README.md)
+  s.homepage      = 'https://github.com/googleapis/googleapis'
+  s.license       = 'Apache-2.0'
+  s.platform      = Gem::Platform::RUBY
+  s.require_paths = ['lib']
+  s.required_ruby_version = '>= 2.0.0'
+  s.summary       = 'Google client library for the Stackdriver Clouderrorreporting service'
 
-  gem.authors       = ["Google Inc", "Heng Xiong"]
-  gem.email         = ["googleapis-packages@google.com", "hxiong388@gmail.com"]
-  gem.description   = "google-cloud-error_reporting is the official library that supports Stackdriver Error Reproting API."
-  gem.summary       = "API Client library for Stackdriver Error Reporting"
-  gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
-  gem.license       = "Apache-2.0"
+  s.add_dependency 'google-gax', '~> 0.5.1'
+  s.add_dependency 'grpc', '~> 1.0'
+  s.add_dependency 'googleauth', '~> 0.5.1'
+  s.add_dependency 'googleapis-common-protos', '~> 1.3.1'
+  s.add_dependency 'google-cloud-core', '~> 0.20.0'
 
-  gem.files         = `git ls-files -- lib/*`.split("\n")
-  gem.require_paths = ["lib"]
-
-  gem.required_ruby_version = ">= 2.0.0"
-
-  gem.add_dependency "google-cloud-core", "~> 0.20.0"
-  gem.add_dependency "grpc", "~> 1.0"
-  gem.add_dependency "google-protobuf", "~> 3.0"
-  gem.add_dependency "googleapis-common-protos", "~> 1.3.1"
-  gem.add_dependency "google-gax", "~> 0.5.0"
-
-
-  gem.add_development_dependency "minitest", "~> 5.9"
-  gem.add_development_dependency "minitest-autotest", "~> 1.0"
-  gem.add_development_dependency "minitest-focus", "~> 1.1"
-  gem.add_development_dependency "minitest-rg", "~> 5.2"
-  gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "rubocop", "~> 0.43"
-  gem.add_development_dependency "simplecov", "~> 0.9"
-  gem.add_development_dependency "yard", "~> 0.9"
-  gem.add_development_dependency "yard-doctest", "~> 0.1.6"
-  gem.add_development_dependency "actionpack", "~> 4.0"
-  gem.add_development_dependency "railties", ">= 3.2"
-  gem.add_development_dependency "rack", ">= 0.1"
+  s.add_development_dependency 'bundler', '~> 1.9'
+  s.add_development_dependency 'rake', '~> 10.4'
+  s.add_development_dependency "minitest", "~> 5.9"
+  s.add_development_dependency "minitest-autotest", "~> 1.0"
+  s.add_development_dependency "minitest-focus", "~> 1.1"
+  s.add_development_dependency "minitest-rg", "~> 5.2"
+  s.add_development_dependency  "actionpack", "~> 4.0"
+  s.add_development_dependency  "railties", ">= 3.2"
+  s.add_development_dependency  "rack", ">= 0.1"
 end

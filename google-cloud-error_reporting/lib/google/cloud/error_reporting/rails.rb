@@ -13,7 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/error_reporting"
+require "google/cloud/error_reporting/v1beta1"
+require "google/cloud/credentials"
 
 module Google
   module Cloud
@@ -44,9 +45,9 @@ module Google
       #   config.google_cloud.error_reporting.service_version = "v1"
       #
       class Railtie < ::Rails::Railtie
-        config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
-          config.respond_to? :google_cloud
-        config.google_cloud.error_reporting = ::ActiveSupport::OrderedOptions.new
+        config.google_cloud = ActiveSupport::OrderedOptions.new unless
+                                config.respond_to? :google_cloud
+        config.google_cloud.error_reporting = ActiveSupport::OrderedOptions.new
 
         initializer "Google.Cloud.ErrorReporting" do |app|
           if self.class.use_error_reporting? app.config
@@ -56,12 +57,16 @@ module Google
             project_id = er_config.project_id || gcp_config.project_id
             keyfile = er_config.keyfile || gcp_config.keyfile
 
-            error_reporting = Google::Cloud.error_reporting project_id, keyfile
-
+            channel = self.class.grpc_channel keyfile
             service_name = er_config.service_name ||
-                           error_reporting.class.default_service_name
+              error_reporting.class.default_service_name
             service_version = er_config.service_version ||
-                              error_reporting.class.default_service_version
+              error_reporting.class.default_service_version
+
+            error_reporting =
+              Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.new channel: channel,
+                                                                                 app_name: service_name,
+                                                                                 app_version: service_version
 
             # In later versions of Rails, ActionDispatch::DebugExceptions is
             # responsible for catching exceptions. But it didn't exist until
@@ -75,10 +80,42 @@ module Google
 
             app.middleware.insert_after rails_exception_middleware,
                                         Google::Cloud::ErrorReporting::Middleware,
+                                        project_id: project_id,
                                         error_reporting: error_reporting,
                                         service_name: service_name,
                                         service_version: service_version
           end
+        end
+
+        ##
+        # Construct a gRPC Channel object from given keyfile
+        #
+        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+        #   file path the file must be readable.
+        #
+        # @return [GRPC::Core::Channel] gRPC Channel object based on given
+        #   keyfile
+        #
+        def self.grpc_channel keyfile = nil
+          require "grpc"
+
+          scopes = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi::ALL_SCOPES
+          credentials = if keyfile.nil?
+                          Google::Cloud::Credentials.default(
+                            scope: scopes)
+                        else
+                          Google::Cloud::Credentials.new(
+                            keyfile, scope: scopes)
+                        end
+
+          # Return nil if :this_channel_is_insecure
+          return nil if credentials == :this_channel_is_insecure
+
+          channel_cred = GRPC::Core::ChannelCredentials.new.compose \
+            GRPC::Core::CallCredentials.new credentials.client.updater_proc
+          host = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi::SERVICE_ADDRESS
+
+          GRPC::Core::Channel.new host, nil, channel_cred
         end
 
         ##
@@ -97,23 +134,27 @@ module Google
           gcp_config = config.google_cloud
           er_config = gcp_config.error_reporting
 
-          # Return false if config.google_cloud.use_error_reporting is explicitly
-          # false
+          # Return false if config.google_cloud.use_error_reporting is
+          # explicitly false
           return false if gcp_config.key?(:use_error_reporting) &&
                           !gcp_config.use_error_reporting
 
-          # Check credentialing. Returns false if AuthorizationError is rescued.
+          # Check credentialing. Returns false if authorization errors are
+          # rescued.
           keyfile = er_config.keyfile || gcp_config.keyfile
           begin
-            Google::Cloud::ErrorReporting.credentials_with_scope keyfile
+            grpc_channel keyfile
           rescue Exception => e
             Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
             "activated due to authorization error: #{e.message}"
             return false
           end
 
-          project_id = er_config.project_id || gcp_config.project_id ||
-                       Google::Cloud::ErrorReporting::Project.default_project
+          project_id = er_config.project_id ||
+                       gcp_config.project_id ||
+                       ENV["ERROR_REPORTING_PROJECT"] ||
+                       ENV["GOOGLE_CLOUD_PROJECT"] ||
+                       Google::Cloud::Core::Environment.project_id
           if project_id.to_s.empty?
             Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
             "activated due to empty project_id"

@@ -13,7 +13,7 @@ gem "yard", "~> 0.9"
 gem "yard-doctest", "~> 0.1.6"
 gem "gems", "~> 0.8"
 gem "actionpack", "~> 4.0"
-gem "railties", ">= 3.2"
+gem "railties", "~> 4.0"
 gem "rack", ">= 0.1"
 
 gem "google-cloud-core", path: "google-cloud-core"

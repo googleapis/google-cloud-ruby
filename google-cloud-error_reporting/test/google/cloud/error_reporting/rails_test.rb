@@ -13,7 +13,9 @@
 # limitations under the License.
 
 
-require "helper"
+require "minitest/autorun"
+require "minitest/rg"
+require "minitest/focus"
 require "rails"
 require "rails/railtie"
 require "active_support/ordered_options"
@@ -33,14 +35,11 @@ describe Google::Cloud::ErrorReporting::Railtie do
       Google::Cloud::ErrorReporting::Railtie.use_error_reporting?(@rails_config).must_equal false
     end
 
-    it "returns false if can't find non-empty project_id" do
-
-      Google::Cloud::ErrorReporting::Credentials.stub :default, nil do
-        Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
-          Rails.logger = Object.new
-          Rails.logger.stub :warn, nil do
-            Google::Cloud::ErrorReporting::Railtie.use_error_reporting?(@rails_config).must_equal false
-          end
+    it "returns false if empty project_id provided" do
+      Google::Cloud::ErrorReporting::Railtie.stub :grpc_channel, nil do
+        Rails.logger = Object.new
+        Rails.logger.stub :warn, nil do
+          Google::Cloud::ErrorReporting::Railtie.use_error_reporting?(@rails_config).must_equal false
         end
       end
     end
@@ -49,7 +48,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
       @rails_config.google_cloud.error_reporting.project_id = "test-project"
       @rails_config.google_cloud.use_error_reporting = true
 
-      Google::Cloud::ErrorReporting::Credentials.stub :default, nil do
+      Google::Cloud::ErrorReporting::Railtie.stub :grpc_channel, nil do
         Rails.env.stub :production?, nil do
           Google::Cloud::ErrorReporting::Railtie.use_error_reporting?(@rails_config).must_equal true
         end
