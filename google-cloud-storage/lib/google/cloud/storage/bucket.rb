@@ -580,9 +580,11 @@ module Google
                       content_encoding: content_encoding, metadata: metadata,
                       content_language: content_language, key: encryption_key,
                       storage_class: storage_class_for(storage_class) }
-          ensure_file_exists! file
-          # TODO: Handle file as an IO and path is missing more gracefully
-          path ||= Pathname(file).to_path
+          ensure_io_or_file_exists! file
+          path ||= file.path if file.respond_to? :path
+          path ||= file if file.is_a? String
+          fail ArgumentError, "must provide path" if path.nil?
+
           gapi = service.insert_file name, file, path, options
           File.from_gapi gapi, service
         end
@@ -919,7 +921,8 @@ module Google
 
         ##
         # Raise an error if the file is not found.
-        def ensure_file_exists! file
+        def ensure_io_or_file_exists! file
+          return if file.respond_to?(:read) && file.respond_to?(:rewind)
           return if ::File.file? file
           fail ArgumentError, "cannot find file #{file}"
         end

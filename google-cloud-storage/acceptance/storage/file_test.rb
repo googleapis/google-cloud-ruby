@@ -219,6 +219,27 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should upload a file using IO and path" do
+    inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
+    uploaded.name.must_equal "uploaded/with/inmemory.png"
+
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile
+
+      inmemory.rewind
+
+      downloaded.size.must_equal inmemory.size
+      downloaded.size.must_equal uploaded.size
+      downloaded.size.must_equal tmpfile.size # Same file
+
+      File.read(downloaded.path, mode: "rb").must_equal inmemory.read
+    end
+
+    uploaded.delete
+  end
+
   it "should upload and download a file with customer-supplied encryption key" do
     original = File.new files[:logo][:path], "rb"
     uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key

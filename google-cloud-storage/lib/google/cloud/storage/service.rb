@@ -178,7 +178,8 @@ module Google
             content_encoding: content_encoding, crc32c: crc32c,
             content_language: content_language, metadata: metadata,
             storage_class: storage_class }.delete_if { |_k, v| v.nil? })
-          content_type ||= mime_type_for(Pathname(source).to_path)
+          content_type ||= mime_type_for(path || Pathname(source).to_path)
+
           execute do
             service.insert_object \
               bucket_name, file_obj,

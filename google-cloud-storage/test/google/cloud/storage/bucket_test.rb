@@ -143,6 +143,28 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with a StringIO for file contents" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+
+    mock = Minitest::Mock.new
+    mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+      [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: new_file_contents, content_encoding: nil, content_type: "text/plain", options: {}]
+
+    bucket.service.mocked_service = mock
+
+    bucket.create_file new_file_contents, new_file_name
+
+    mock.verify
+  end
+
+  it "raises when creating a file with a StringIO and missing path" do
+    new_file_contents = StringIO.new "Hello world"
+
+    err = expect { bucket.create_file new_file_contents }.must_raise ArgumentError
+    err.message.must_equal "must provide path"
+  end
+
   it "creates a file with predefined acl" do
     new_file_name = random_file_path
 
