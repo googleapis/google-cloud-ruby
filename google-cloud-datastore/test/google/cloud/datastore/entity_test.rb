@@ -31,6 +31,20 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     entity.properties["email"].must_equal "user@example.net"
   end
 
+  it "allows properties to be accessed by strings or symbols" do
+    # Calling entity here creates by calling new
+    entity.wont_be :nil?
+    entity.properties["name"].must_equal "User McUser"
+    entity.properties["email"].must_equal "user@example.net"
+
+    entity.properties[:name].must_equal "User McUser"
+    entity.properties[:email].must_equal "user@example.net"
+
+    entity[:age] = 29
+    entity.properties[:age].must_equal 29
+    entity.properties["age"].must_equal 29
+  end
+
   it "returns a correct GRPC object" do
     grpc = entity.to_grpc
 
