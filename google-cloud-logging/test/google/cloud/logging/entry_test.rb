@@ -35,7 +35,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "timestamp gives the correct time when a timestamp is present" do
-    custom_timestamp = Time.parse "2016-01-02T03:04:05.06Z"
+    custom_timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     entry_grpc.timestamp.seconds = custom_timestamp.to_i
     entry_grpc.timestamp.nanos = custom_timestamp.nsec
     entry = Google::Cloud::Logging::Entry.from_grpc entry_grpc
