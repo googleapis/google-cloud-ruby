@@ -15,7 +15,3 @@
 require "google/cloud/logging/v2/config_service_v2_api"
 require "google/cloud/logging/v2/logging_service_v2_api"
 require "google/cloud/logging/v2/metrics_service_v2_api"
-# Require the protobufs so we can create objects before GRPC is loaded.
-require "google/logging/v2/logging_pb"
-require "google/logging/v2/logging_config_pb"
-require "google/logging/v2/logging_metrics_pb"

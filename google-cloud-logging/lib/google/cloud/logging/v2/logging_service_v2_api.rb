@@ -300,7 +300,13 @@ module Google
             )
             req.log_name = log_name unless log_name.nil?
             req.resource = resource unless resource.nil?
-            req.labels = labels unless labels.nil?
+            # Custom code here to work around setting a Hash where a Map is expected.
+            # If a future PR removes this code then ensure that the bug is fixed.
+            unless labels.nil?
+              labels_map = Google::Protobuf::Map.new(:string, :string)
+              labels.each { |k, v| labels_map[String(k)] = String(v) }
+              req.labels = labels_map
+            end
             req.partial_success = partial_success unless partial_success.nil?
             @write_log_entries.call(req, options)
           end
