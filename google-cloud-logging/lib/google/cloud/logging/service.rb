@@ -43,8 +43,8 @@ module Google
         end
 
         def chan_creds
-          require "grpc"
           return credentials if insecure?
+          require "grpc"
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end

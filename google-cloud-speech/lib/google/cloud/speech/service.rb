@@ -44,8 +44,8 @@ module Google
         end
 
         def chan_creds
-          require "grpc"
           return credentials if insecure?
+          require "grpc"
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
@@ -115,10 +115,10 @@ module Google
         end
 
         def execute
-          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
+        rescue Google::Gax::GaxError => e
+          # GaxError wraps BadStatus, but exposes it as #cause
+          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end
