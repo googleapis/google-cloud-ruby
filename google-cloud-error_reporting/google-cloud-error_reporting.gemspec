@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0.0'
   s.summary       = 'Google client library for the Stackdriver Clouderrorreporting service'
 
-  s.add_dependency 'google-gax', '~> 0.5.1'
+  s.add_dependency 'google-gax', '~> 0.6.0'
   s.add_dependency 'grpc', '~> 1.0'
   s.add_dependency 'googleauth', '~> 0.5.1'
   s.add_dependency 'googleapis-common-protos', '~> 1.3.1'

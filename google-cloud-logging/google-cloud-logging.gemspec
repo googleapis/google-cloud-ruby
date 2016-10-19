@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 0.20.0"
   gem.add_dependency "grpc", "~> 1.0"
-  gem.add_dependency "google-gax", "~> 0.5.0"
+  gem.add_dependency "google-gax", "~> 0.6.0"
   gem.add_dependency "google-protobuf", "~> 3.0"
   gem.add_dependency "googleapis-common-protos", "~> 1.3"
   gem.add_dependency "orderedhash", "= 0.0.6"
