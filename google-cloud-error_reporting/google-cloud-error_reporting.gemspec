@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name          = 'google-cloud-error_reporting'
-  s.version       = '0.6.8'
+  s.version       = '0.20.1'
 
   s.authors       = ['Google Inc']
   s.description   = 'a grpc-based api'
@@ -22,7 +22,15 @@ Gem::Specification.new do |s|
   s.add_dependency 'grpc', '~> 1.0'
   s.add_dependency 'googleauth', '~> 0.5.1'
   s.add_dependency 'googleapis-common-protos', '~> 1.3.1'
+  s.add_dependency 'google-cloud-core', '~> 0.20.0'
 
   s.add_development_dependency 'bundler', '~> 1.9'
   s.add_development_dependency 'rake', '~> 10.4'
+  s.add_development_dependency "minitest", "~> 5.9"
+  s.add_development_dependency "minitest-autotest", "~> 1.0"
+  s.add_development_dependency "minitest-focus", "~> 1.1"
+  s.add_development_dependency "minitest-rg", "~> 5.2"
+  s.add_development_dependency  "actionpack", "~> 4.0"
+  s.add_development_dependency  "railties", ">= 3.2"
+  s.add_development_dependency  "rack", ">= 0.1"
 end
