@@ -198,7 +198,7 @@ module Google
         ##
         # The bucket's storage class. This defines how objects in the bucket are
         # stored and determines the SLA and the cost of storage. Values include
-        # `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`, `COLDLINE`, `STANDARD`, 
+        # `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`, `COLDLINE`, `STANDARD`,
         # and `DURABLE_REDUCED_AVAILABILITY`.
         def storage_class
           @gapi.storage_class
