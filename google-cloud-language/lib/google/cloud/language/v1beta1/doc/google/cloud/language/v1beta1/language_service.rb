@@ -1,0 +1,580 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+module Google
+  module Cloud
+    module Language
+      module V1beta1
+        # ================================================================ #
+        #
+        # Represents the input to API methods.
+        # @!attribute [rw] type
+        #   @return [Google::Cloud::Language::V1beta1::Document::Type]
+        #     Required. If the type is not set or is +TYPE_UNSPECIFIED+,
+        #     returns an +INVALID_ARGUMENT+ error.
+        # @!attribute [rw] content
+        #   @return [String]
+        #     The content of the input in string format.
+        # @!attribute [rw] gcs_content_uri
+        #   @return [String]
+        #     The Google Cloud Storage URI where the file content is located.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the document (if not specified, the language is
+        #     automatically detected). Both ISO and BCP-47 language codes are
+        #     accepted.<br>
+        #     **Current Language Restrictions:**
+        #
+        #      * Only English, Spanish, and Japanese textual content
+        #        are supported, with the following additional restriction:
+        #        * +analyzeSentiment+ only supports English text.
+        #     If the language (either specified by the caller or automatically detected)
+        #     is not supported by the called API method, an +INVALID_ARGUMENT+ error
+        #     is returned.
+        class Document
+          # The document types enum.
+          module Type
+            # The content type is not specified.
+            TYPE_UNSPECIFIED = 0
+
+            # Plain text
+            PLAIN_TEXT = 1
+
+            # HTML
+            HTML = 2
+          end
+        end
+
+        # Represents a sentence in the input document.
+        # @!attribute [rw] text
+        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #     The sentence text.
+        class Sentence; end
+
+        # Represents a phrase in the text that is a known entity, such as
+        # a person, an organization, or location. The API associates information, such
+        # as salience and mentions, with entities.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The representative name for the entity.
+        # @!attribute [rw] type
+        #   @return [Google::Cloud::Language::V1beta1::Entity::Type]
+        #     The entity type.
+        # @!attribute [rw] metadata
+        #   @return [Hash{String => String}]
+        #     Metadata associated with the entity.
+        #
+        #     Currently, only Wikipedia URLs are provided, if available.
+        #     The associated key is "wikipedia_url".
+        # @!attribute [rw] salience
+        #   @return [Float]
+        #     The salience score associated with the entity in the [0, 1.0] range.
+        #
+        #     The salience score for an entity provides information about the
+        #     importance or centrality of that entity to the entire document text.
+        #     Scores closer to 0 are less salient, while scores closer to 1.0 are highly
+        #     salient.
+        # @!attribute [rw] mentions
+        #   @return [Array<Google::Cloud::Language::V1beta1::EntityMention>]
+        #     The mentions of this entity in the input document. The API currently
+        #     supports proper noun mentions.
+        class Entity
+          # The type of the entity.
+          module Type
+            # Unknown
+            UNKNOWN = 0
+
+            # Person
+            PERSON = 1
+
+            # Location
+            LOCATION = 2
+
+            # Organization
+            ORGANIZATION = 3
+
+            # Event
+            EVENT = 4
+
+            # Work of art
+            WORK_OF_ART = 5
+
+            # Consumer goods
+            CONSUMER_GOOD = 6
+
+            # Other types
+            OTHER = 7
+          end
+        end
+
+        # Represents the smallest syntactic building block of the text.
+        # @!attribute [rw] text
+        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #     The token text.
+        # @!attribute [rw] part_of_speech
+        #   @return [Google::Cloud::Language::V1beta1::PartOfSpeech]
+        #     Parts of speech tag for this token.
+        # @!attribute [rw] dependency_edge
+        #   @return [Google::Cloud::Language::V1beta1::DependencyEdge]
+        #     Dependency tree parse for this token.
+        # @!attribute [rw] lemma
+        #   @return [String]
+        #     {Lemma}[https://en.wikipedia.org/wiki/Lemma_(morphology])
+        #     of the token.
+        class Token; end
+
+        # Represents the feeling associated with the entire text or entities in
+        # the text.
+        # @!attribute [rw] polarity
+        #   @return [Float]
+        #     Polarity of the sentiment in the [-1.0, 1.0] range. Larger numbers
+        #     represent more positive sentiments.
+        # @!attribute [rw] magnitude
+        #   @return [Float]
+        #     A non-negative number in the [0, +inf) range, which represents
+        #     the absolute magnitude of sentiment regardless of polarity (positive or
+        #     negative).
+        class Sentiment; end
+
+        # Represents part of speech information for a token.
+        # @!attribute [rw] tag
+        #   @return [Google::Cloud::Language::V1beta1::PartOfSpeech::Tag]
+        #     The part of speech tag.
+        class PartOfSpeech
+          # The part of speech tags enum.
+          module Tag
+            # Unknown
+            UNKNOWN = 0
+
+            # Adjective
+            ADJ = 1
+
+            # Adposition (preposition and postposition)
+            ADP = 2
+
+            # Adverb
+            ADV = 3
+
+            # Conjunction
+            CONJ = 4
+
+            # Determiner
+            DET = 5
+
+            # Noun (common and proper)
+            NOUN = 6
+
+            # Cardinal number
+            NUM = 7
+
+            # Pronoun
+            PRON = 8
+
+            # Particle or other function word
+            PRT = 9
+
+            # Punctuation
+            PUNCT = 10
+
+            # Verb (all tenses and modes)
+            VERB = 11
+
+            # Other: foreign words, typos, abbreviations
+            X = 12
+
+            # Affix
+            AFFIX = 13
+          end
+        end
+
+        # Represents dependency parse tree information for a token.
+        # @!attribute [rw] head_token_index
+        #   @return [Integer]
+        #     Represents the head of this token in the dependency tree.
+        #     This is the index of the token which has an arc going to this token.
+        #     The index is the position of the token in the array of tokens returned
+        #     by the API method. If this token is a root token, then the
+        #     +head_token_index+ is its own index.
+        # @!attribute [rw] label
+        #   @return [Google::Cloud::Language::V1beta1::DependencyEdge::Label]
+        #     The parse label for the token.
+        class DependencyEdge
+          # The parse label enum for the token.
+          module Label
+            # Unknown
+            UNKNOWN = 0
+
+            # Abbreviation modifier
+            ABBREV = 1
+
+            # Adjectival complement
+            ACOMP = 2
+
+            # Adverbial clause modifier
+            ADVCL = 3
+
+            # Adverbial modifier
+            ADVMOD = 4
+
+            # Adjectival modifier of an NP
+            AMOD = 5
+
+            # Appositional modifier of an NP
+            APPOS = 6
+
+            # Attribute dependent of a copular verb
+            ATTR = 7
+
+            # Auxiliary (non-main) verb
+            AUX = 8
+
+            # Passive auxiliary
+            AUXPASS = 9
+
+            # Coordinating conjunction
+            CC = 10
+
+            # Clausal complement of a verb or adjective
+            CCOMP = 11
+
+            # Conjunct
+            CONJ = 12
+
+            # Clausal subject
+            CSUBJ = 13
+
+            # Clausal passive subject
+            CSUBJPASS = 14
+
+            # Dependency (unable to determine)
+            DEP = 15
+
+            # Determiner
+            DET = 16
+
+            # Discourse
+            DISCOURSE = 17
+
+            # Direct object
+            DOBJ = 18
+
+            # Expletive
+            EXPL = 19
+
+            # Goes with (part of a word in a text not well edited)
+            GOESWITH = 20
+
+            # Indirect object
+            IOBJ = 21
+
+            # Marker (word introducing a subordinate clause)
+            MARK = 22
+
+            # Multi-word expression
+            MWE = 23
+
+            # Multi-word verbal expression
+            MWV = 24
+
+            # Negation modifier
+            NEG = 25
+
+            # Noun compound modifier
+            NN = 26
+
+            # Noun phrase used as an adverbial modifier
+            NPADVMOD = 27
+
+            # Nominal subject
+            NSUBJ = 28
+
+            # Passive nominal subject
+            NSUBJPASS = 29
+
+            # Numeric modifier of a noun
+            NUM = 30
+
+            # Element of compound number
+            NUMBER = 31
+
+            # Punctuation mark
+            P = 32
+
+            # Parataxis relation
+            PARATAXIS = 33
+
+            # Participial modifier
+            PARTMOD = 34
+
+            # The complement of a preposition is a clause
+            PCOMP = 35
+
+            # Object of a preposition
+            POBJ = 36
+
+            # Possession modifier
+            POSS = 37
+
+            # Postverbal negative particle
+            POSTNEG = 38
+
+            # Predicate complement
+            PRECOMP = 39
+
+            # Preconjunt
+            PRECONJ = 40
+
+            # Predeterminer
+            PREDET = 41
+
+            # Prefix
+            PREF = 42
+
+            # Prepositional modifier
+            PREP = 43
+
+            # The relationship between a verb and verbal morpheme
+            PRONL = 44
+
+            # Particle
+            PRT = 45
+
+            # Associative or possessive marker
+            PS = 46
+
+            # Quantifier phrase modifier
+            QUANTMOD = 47
+
+            # Relative clause modifier
+            RCMOD = 48
+
+            # Complementizer in relative clause
+            RCMODREL = 49
+
+            # Ellipsis without a preceding predicate
+            RDROP = 50
+
+            # Referent
+            REF = 51
+
+            # Remnant
+            REMNANT = 52
+
+            # Reparandum
+            REPARANDUM = 53
+
+            # Root
+            ROOT = 54
+
+            # Suffix specifying a unit of number
+            SNUM = 55
+
+            # Suffix
+            SUFF = 56
+
+            # Temporal modifier
+            TMOD = 57
+
+            # Topic marker
+            TOPIC = 58
+
+            # Clause headed by an infinite form of the verb that modifies a noun
+            VMOD = 59
+
+            # Vocative
+            VOCATIVE = 60
+
+            # Open clausal complement
+            XCOMP = 61
+
+            # Name suffix
+            SUFFIX = 62
+
+            # Name title
+            TITLE = 63
+
+            # Adverbial phrase modifier
+            ADVPHMOD = 64
+
+            # Causative auxiliary
+            AUXCAUS = 65
+
+            # Helper auxiliary
+            AUXVV = 66
+
+            # Rentaishi (Prenominal modifier)
+            DTMOD = 67
+
+            # Foreign words
+            FOREIGN = 68
+
+            # Keyword
+            KW = 69
+
+            # List for chains of comparable items
+            LIST = 70
+
+            # Nominalized clause
+            NOMC = 71
+
+            # Nominalized clausal subject
+            NOMCSUBJ = 72
+
+            # Nominalized clausal passive
+            NOMCSUBJPASS = 73
+
+            # Compound of numeric modifier
+            NUMC = 74
+
+            # Copula
+            COP = 75
+
+            # Dislocated relation (for fronted/topicalized elements)
+            DISLOCATED = 76
+          end
+        end
+
+        # Represents a mention for an entity in the text. Currently, proper noun
+        # mentions are supported.
+        # @!attribute [rw] text
+        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #     The mention text.
+        class EntityMention; end
+
+        # Represents an output piece of text.
+        # @!attribute [rw] content
+        #   @return [String]
+        #     The content of the output text.
+        # @!attribute [rw] begin_offset
+        #   @return [Integer]
+        #     The API calculates the beginning offset of the content in the original
+        #     document according to the EncodingType specified in the API request.
+        class TextSpan; end
+
+        # The sentiment analysis request message.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #     Input document. Currently, +analyzeSentiment+ only supports English text
+        #     (Document#language="EN").
+        class AnalyzeSentimentRequest; end
+
+        # The sentiment analysis response message.
+        # @!attribute [rw] document_sentiment
+        #   @return [Google::Cloud::Language::V1beta1::Sentiment]
+        #     The overall sentiment of the input document.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the text, which will be the same as the language specified
+        #     in the request or, if not specified, the automatically-detected language.
+        class AnalyzeSentimentResponse; end
+
+        # The entity analysis request message.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #     Input document.
+        # @!attribute [rw] encoding_type
+        #   @return [Google::Cloud::Language::V1beta1::EncodingType]
+        #     The encoding type used by the API to calculate offsets.
+        class AnalyzeEntitiesRequest; end
+
+        # The entity analysis response message.
+        # @!attribute [rw] entities
+        #   @return [Array<Google::Cloud::Language::V1beta1::Entity>]
+        #     The recognized entities in the input document.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the text, which will be the same as the language specified
+        #     in the request or, if not specified, the automatically-detected language.
+        class AnalyzeEntitiesResponse; end
+
+        # The request message for the advanced text annotation API, which performs all
+        # the above plus syntactic analysis.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #     Input document.
+        # @!attribute [rw] features
+        #   @return [Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features]
+        #     The enabled features.
+        # @!attribute [rw] encoding_type
+        #   @return [Google::Cloud::Language::V1beta1::EncodingType]
+        #     The encoding type used by the API to calculate offsets.
+        class AnnotateTextRequest
+          # All available features for sentiment, syntax, and semantic analysis.
+          # Setting each one to true will enable that specific analysis for the input.
+          # @!attribute [rw] extract_syntax
+          #   @return [true, false]
+          #     Extract syntax information.
+          # @!attribute [rw] extract_entities
+          #   @return [true, false]
+          #     Extract entities.
+          # @!attribute [rw] extract_document_sentiment
+          #   @return [true, false]
+          #     Extract document-level sentiment.
+          class Features; end
+        end
+
+        # The text annotations response message.
+        # @!attribute [rw] sentences
+        #   @return [Array<Google::Cloud::Language::V1beta1::Sentence>]
+        #     Sentences in the input document. Populated if the user enables
+        #     AnnotateTextRequest::Features#extract_syntax.
+        # @!attribute [rw] tokens
+        #   @return [Array<Google::Cloud::Language::V1beta1::Token>]
+        #     Tokens, along with their syntactic information, in the input document.
+        #     Populated if the user enables
+        #     AnnotateTextRequest::Features#extract_syntax.
+        # @!attribute [rw] entities
+        #   @return [Array<Google::Cloud::Language::V1beta1::Entity>]
+        #     Entities, along with their semantic information, in the input document.
+        #     Populated if the user enables
+        #     AnnotateTextRequest::Features#extract_entities.
+        # @!attribute [rw] document_sentiment
+        #   @return [Google::Cloud::Language::V1beta1::Sentiment]
+        #     The overall sentiment for the document. Populated if the user enables
+        #     AnnotateTextRequest::Features#extract_document_sentiment.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the text, which will be the same as the language specified
+        #     in the request or, if not specified, the automatically-detected language.
+        class AnnotateTextResponse; end
+
+        # Represents the text encoding that the caller uses to process the output.
+        # Providing an +EncodingType+ is recommended because the API provides the
+        # beginning offsets for various outputs, such as tokens and mentions, and
+        # languages that natively use different text encodings may access offsets
+        # differently.
+        module EncodingType
+          # If +EncodingType+ is not specified, encoding-dependent information (such as
+          # +begin_offset+) will be set at +-1+.
+          NONE = 0
+
+          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # on the UTF-8 encoding of the input. C++ and Go are examples of languages
+          # that use this encoding natively.
+          UTF8 = 1
+
+          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # on the UTF-16 encoding of the input. Java and Javascript are examples of
+          # languages that use this encoding natively.
+          UTF16 = 2
+
+          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # on the UTF-32 encoding of the input. Python is an example of a language
+          # that uses this encoding natively.
+          UTF32 = 3
+        end
+      end
+    end
+  end
+end
