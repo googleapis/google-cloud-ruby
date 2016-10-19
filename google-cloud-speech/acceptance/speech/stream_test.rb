@@ -227,7 +227,7 @@ describe "Streaming Recognition", :speech do
 
       results.count.must_equal 1
       results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.98267895
+      results.first.confidence.must_be_close_to 0.9545454382896423
       results.first.alternatives.must_be :empty?
 
       counters[:interim].must_equal 0
@@ -279,7 +279,7 @@ describe "Streaming Recognition", :speech do
 
       results.count.must_equal 1
       results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.98267895
+      results.first.confidence.must_be_close_to 0.9545454382896423
       results.first.alternatives.must_be :empty?
 
       counters[:interim].must_equal 0
