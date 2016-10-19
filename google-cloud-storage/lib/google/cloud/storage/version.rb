@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Storage
-      VERSION = "0.20.2"
+      VERSION = "0.21.0"
     end
   end
 end

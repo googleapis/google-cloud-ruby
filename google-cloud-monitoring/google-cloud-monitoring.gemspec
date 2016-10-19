@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name          = 'google-cloud-monitoring'
-  s.version       = '0.6.8'
+  s.version       = '0.21.0'
 
   s.authors       = ['Google Inc']
   s.description   = 'a grpc-based api'
