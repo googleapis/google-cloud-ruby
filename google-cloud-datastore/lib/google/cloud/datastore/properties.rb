@@ -92,7 +92,7 @@ module Google
         # Ensures the key is the proper type,
         # otherwise a PropertyError is raised.
         def ensure_key_type key
-          return key.to_str if key.respond_to? :to_str
+          return key.to_s if key.respond_to? :to_s
           fail "Property key #{key} must be a String."
         end
 
