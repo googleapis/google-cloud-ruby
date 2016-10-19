@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/cloud/vision/v1/image_annotator_pb"
 
 module Google
   module Cloud

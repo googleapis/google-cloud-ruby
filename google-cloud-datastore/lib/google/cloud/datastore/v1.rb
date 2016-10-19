@@ -14,5 +14,3 @@
 
 
 require "google/cloud/datastore/v1/datastore_api"
-# Require the protobufs so we can create objects before GRPC is loaded.
-require "google/datastore/v1/datastore_pb"

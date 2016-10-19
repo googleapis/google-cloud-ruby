@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/monitoring/v3/group_service_pb"
 
 module Google
   module Cloud

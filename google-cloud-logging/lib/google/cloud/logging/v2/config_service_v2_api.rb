@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/logging/v2/logging_config_pb"
 
 module Google
   module Cloud

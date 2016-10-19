@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_pb"
 
 module Google
   module Cloud

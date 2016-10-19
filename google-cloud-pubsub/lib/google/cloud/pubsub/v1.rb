@@ -15,6 +15,3 @@
 
 require "google/cloud/pubsub/v1/publisher_api"
 require "google/cloud/pubsub/v1/subscriber_api"
-# Load the protobufs so code can see these classes
-require "google/pubsub/v1/pubsub_pb"
-require "google/iam/v1/iam_policy_pb"

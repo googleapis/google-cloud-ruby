@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/datastore/v1/datastore_pb"
 
 module Google
   module Cloud
