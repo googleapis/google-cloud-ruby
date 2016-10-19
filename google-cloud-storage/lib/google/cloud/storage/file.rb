@@ -597,7 +597,7 @@ module Google
                       content_type: content_type, content_md5: content_md5,
                       issuer: issuer, client_email: client_email,
                       signing_key: signing_key, private_key: private_key }
-          signer = File::Signer.new self
+          signer = File::Signer.from_file self
           signer.signed_url options
         end
 
@@ -715,14 +715,24 @@ module Google
         ##
         # @private Create a signed_url for a file.
         class Signer
-          def initialize file
-            @file = file
+          def initialize bucket, path, service
+            @bucket = bucket
+            @path = path
+            @service = service
+          end
+
+          def self.from_file file
+            new file.bucket, file.name, file.service
+          end
+
+          def self.from_bucket bucket, path
+            new bucket.name, path, bucket.service
           end
 
           ##
           # The external path to the file.
           def ext_path
-            URI.escape "/#{@file.bucket}/#{@file.name}"
+            URI.escape "/#{@bucket}/#{@path}"
           end
 
           ##
@@ -746,12 +756,12 @@ module Google
 
           def determine_signing_key options = {}
             options[:signing_key] || options[:private_key] ||
-              @file.service.credentials.signing_key
+              @service.credentials.signing_key
           end
 
           def determine_issuer options = {}
             options[:issuer] || options[:client_email] ||
-              @file.service.credentials.issuer
+              @service.credentials.issuer
           end
 
           def signed_url options
