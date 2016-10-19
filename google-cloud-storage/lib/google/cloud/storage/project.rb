@@ -229,7 +229,7 @@ module Google
         # @param [Symbol, String] storage_class Defines how objects in the
         #   bucket are stored and determines the SLA and the cost of storage.
         #   Values include `:multi_regional`, `:regional`, `:nearline`, 
-        #   `:coldline`, `standard`, and `:dra` (Durable Reduced
+        #   `:coldline`, `:standard`, and `:dra` (Durable Reduced
         #   Availability), as well as the strings returned by
         #   Bucket#storage_class. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
