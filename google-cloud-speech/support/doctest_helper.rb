@@ -139,14 +139,14 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Speech::Audio#recognize_job" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :async_recognize, op_done_false, recognize_args
-      mock_ops.expect :get_operation, op_done_true, [op_req]
+      mock_ops.expect :get_operation, op_done_true, [op_name]
     end
   end
 
   doctest.before "Google::Cloud::Speech::Job" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :async_recognize, op_done_false, recognize_args
-      mock_ops.expect :get_operation, op_done_true, [op_req]
+      mock_ops.expect :get_operation, op_done_true, [op_name]
     end
   end
 
@@ -215,8 +215,8 @@ def sync_recognize_response_alternatives
   Google::Cloud::Speech::V1beta1::SyncRecognizeResponse.decode_json results_json
 end
 
-def op_req
-  Google::Longrunning::GetOperationRequest.new name: "1234567890"
+def op_name
+  "1234567890"
 end
 
 def op_done_false

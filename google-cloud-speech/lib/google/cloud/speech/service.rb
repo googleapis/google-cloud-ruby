@@ -65,12 +65,14 @@ module Google
 
         def ops
           return mocked_ops if mocked_ops
-          @ops ||= begin
-            require "google/longrunning/operations_services_pb"
-
-            Google::Longrunning::Operations::Stub.new(
-              host, chan_creds, timeout: timeout)
-          end
+          @ops ||= \
+            Google::Longrunning::OperationsApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              app_name: "gcloud-ruby",
+              app_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_ops
 
@@ -95,8 +97,7 @@ module Google
         end
 
         def get_op name
-          req = Google::Longrunning::GetOperationRequest.new name: name
-          execute { ops.get_operation req }
+          execute { ops.get_operation name }
         end
 
         def inspect
