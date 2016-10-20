@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::ResourceManager.new
+
 ### 0.20.1 / 2016-09-02
 
 * Fix for timeout on uploads.
