@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::Datastore.new
+* New constructor argument client_config
+* Entity properties can now be accessed with symbols as well as strings
+
 ### 0.20.1 / 2016-09-02
 
 * Fix an issue with the GRPC client and forked sub-processes
