@@ -1,5 +1,10 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::Vision.new
+* New constructor argument client_config
+
 ### 0.20.2 / 2016-09-06
 
 * Fix for using GCS URLs. (erikaxel)
