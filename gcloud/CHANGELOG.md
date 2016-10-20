@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* Update dependency on `google-cloud` gem to 0.21.x
+
 ### 0.20.0 / 2016-08-26
 
 This gem is now an alias for the newly released `google-cloud` gem. Legacy code can continue to use the `Gcloud` constant, which is now an alias to `Google::Cloud`.
