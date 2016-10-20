@@ -2,6 +2,10 @@
 
 ### 0.20.1 / 2016-08-26
 
+* Updates to support new releases. No changes to the public API.
+
+### 0.20.1 / 2016-08-26
+
 * Fix autoloading of Google Cloud services
 
 ### 0.20.0 / 2016-08-26
