@@ -154,8 +154,9 @@
       "name": "google-cloud-speech",
       "defaultService": "google/cloud/speech",
       "versions": [
-        "v0.20.0",
-        "master"
+        "v0.21.0",
+        "master",
+        "v0.20.0"
       ]
     },
     {
