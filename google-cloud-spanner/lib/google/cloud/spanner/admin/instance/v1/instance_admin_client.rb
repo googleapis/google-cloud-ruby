@@ -27,7 +27,7 @@ require "pathname"
 
 require "google/gax"
 require "google/gax/operation"
-require "google/longrunning/operations_api"
+require "google/longrunning/operations_client"
 
 require "google/spanner/admin/instance/v1/spanner_instance_admin_pb"
 
@@ -213,7 +213,7 @@ module Google
                 require "google/gax/grpc"
                 require "google/spanner/admin/instance/v1/spanner_instance_admin_services_pb"
 
-                @operations_client = Google::Longrunning::OperationsApi.new(
+                @operations_client = Google::Longrunning::OperationsClient.new(
                   service_path: service_path,
                   port: port,
                   channel: channel,

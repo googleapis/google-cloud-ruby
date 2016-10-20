@@ -1,0 +1,144 @@
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+desc "Run tests."
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Run tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-spanner"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the spanner acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  puts "The google-cloud-spanner gem does not have acceptance tests."
+  # project = args[:project]
+  # project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPANNER_TEST_PROJECT"]
+  # keyfile = args[:keyfile]
+  # keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPANNER_TEST_KEYFILE"]
+  # if keyfile
+  #   keyfile = File.read keyfile
+  # else
+  #   keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPANNER_TEST_KEYFILE_JSON"]
+  # end
+  # if project.nil? || keyfile.nil?
+  #   fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  # end
+  # # always overwrite when running tests
+  # ENV["SPANNER_PROJECT"] = project
+  # ENV["SPANNER_KEYFILE"] = nil
+  # ENV["SPANNER_KEYFILE_JSON"] = keyfile
+  # ENV["STORAGE_PROJECT"] = project
+  # ENV["STORAGE_KEYFILE"] = nil
+  # ENV["STORAGE_KEYFILE_JSON"] = keyfile
+  #
+  # $LOAD_PATH.unshift "lib", "acceptance"
+  # Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-spanner"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup do
+  end
+end
+
+desc "Run yard-doctest example tests."
+task doctest: :yard do
+  puts "The google-cloud-spanner gem does not have doctest tests."
+  # sh "bundle exec yard config -a autoload_plugins yard-doctest"
+  # sh "bundle exec yard doctest"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-spanner"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-spanner .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-spanner"
+  generator.write_to "jsondoc"
+  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-spanner"
+  header "google-cloud-spanner rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-spanner jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-spanner doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-spanner test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-spanner acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
