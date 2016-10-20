@@ -27,10 +27,8 @@ describe Google::Cloud::Speech::Job, :mock_speech do
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
-
     mock = Minitest::Mock.new
-    mock.expect :get_operation, complete_grpc, [op_req]
+    mock.expect :get_operation, complete_grpc, ["1234567890"]
 
     speech.service.mocked_ops = mock
     job.refresh!
@@ -51,10 +49,8 @@ describe Google::Cloud::Speech::Job, :mock_speech do
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
-
     mock = Minitest::Mock.new
-    mock.expect :get_operation, incomplete_grpc, [op_req]
+    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
 
     speech.service.mocked_ops = mock
     job.refresh!
@@ -69,14 +65,12 @@ describe Google::Cloud::Speech::Job, :mock_speech do
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    op_req = Google::Longrunning::GetOperationRequest.new name: "1234567890"
-
     mock = Minitest::Mock.new
-    mock.expect :get_operation, incomplete_grpc, [op_req]
-    mock.expect :get_operation, incomplete_grpc, [op_req]
-    mock.expect :get_operation, incomplete_grpc, [op_req]
-    mock.expect :get_operation, incomplete_grpc, [op_req]
-    mock.expect :get_operation, complete_grpc, [op_req]
+    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
+    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
+    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
+    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
+    mock.expect :get_operation, complete_grpc, ["1234567890"]
 
     # fake out the sleep method so the test doesn't actually block
     def job.sleep *args

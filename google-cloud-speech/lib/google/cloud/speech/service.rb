@@ -44,8 +44,8 @@ module Google
         end
 
         def chan_creds
-          require "grpc"
           return credentials if insecure?
+          require "grpc"
           GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
@@ -65,12 +65,14 @@ module Google
 
         def ops
           return mocked_ops if mocked_ops
-          @ops ||= begin
-            require "google/longrunning/operations_services_pb"
-
-            Google::Longrunning::Operations::Stub.new(
-              host, chan_creds, timeout: timeout)
-          end
+          @ops ||= \
+            Google::Longrunning::OperationsApi.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              app_name: "gcloud-ruby",
+              app_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_ops
 
@@ -95,8 +97,7 @@ module Google
         end
 
         def get_op name
-          req = Google::Longrunning::GetOperationRequest.new name: name
-          execute { ops.get_operation req }
+          execute { ops.get_operation name }
         end
 
         def inspect
@@ -114,10 +115,10 @@ module Google
         end
 
         def execute
-          require "grpc" # Ensure GRPC is loaded before rescuing exception
           yield
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
+        rescue Google::Gax::GaxError => e
+          # GaxError wraps BadStatus, but exposes it as #cause
+          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end
