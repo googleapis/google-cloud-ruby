@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* Update all service gems to 0.21.x
+* Add Error Reporting service
+* Add Monitoring service
+
 ### 0.20.1 / 2016-09-30
 
 Add google-cloud-speech.
