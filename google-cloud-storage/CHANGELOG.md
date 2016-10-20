@@ -1,5 +1,10 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::Storage.new
+* Bucket#signed_url added to create URLs without a File object
+
 ### 0.20.2 / 2016-09-30
 
 * Fix issue with signed_url and file names with spaces (gsbucks)
