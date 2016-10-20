@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::Language.new
+
 ### 0.20.2 / 2016-09-02
 
 * Fix an issue with the GRPC client and forked sub-processes
