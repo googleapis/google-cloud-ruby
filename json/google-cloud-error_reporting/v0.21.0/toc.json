@@ -1,0 +1,17 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "ReportErrorsServiceApi",
+      "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceapi"
+    },
+    {
+      "title": "ErrorStatsServiceApi",
+      "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceapi"
+    },
+    {
+      "title": "ErrorGroupServiceApi",
+      "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceapi"
+    }
+  ]
+}

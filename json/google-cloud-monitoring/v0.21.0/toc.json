@@ -1,0 +1,13 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "GroupServiceApi",
+      "type": "google/cloud/monitoring/v3/groupserviceapi"
+    },
+    {
+      "title": "MetricServiceApi",
+      "type": "google/cloud/monitoring/v3/metricserviceapi"
+    }
+  ]
+}
