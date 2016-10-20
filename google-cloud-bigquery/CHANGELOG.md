@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.0 / 2016-10-20
+
+* New service constructor Google::Cloud::Bigquery.new
+
 ### 0.20.2 / 2016-09-30
 
 * Add list of projects that the current credentials can access. (remi)

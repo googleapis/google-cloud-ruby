@@ -1,6 +1,6 @@
 # Release History
 
-### 0.20.1 / 2016-08-26
+### 0.21.0 / 2016-10-20
 
 * Updates to support new releases. No changes to the public API.
 
