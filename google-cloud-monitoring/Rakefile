@@ -52,8 +52,19 @@ desc "Start an interactive shell."
 task :console do
 end
 
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
 desc "Generates JSON output from google-cloud-monitoring .yardoc"
-task :jsondoc do
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-monitoring"
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
 end
 
 task :default => :test

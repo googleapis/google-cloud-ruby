@@ -83,6 +83,14 @@
       ]
     },
     {
+      "id": "google-cloud-error_reporting",
+      "name": "google-cloud-error_reporting",
+      "defaultService": "google/cloud/errorreporting/v1beta1",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-language",
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
@@ -101,6 +109,14 @@
         "v0.20.1",
         "master",
         "v0.20.0"
+      ]
+    },
+    {
+      "id": "google-cloud-monitoring",
+      "name": "google-cloud-monitoring",
+      "defaultService": "google/cloud/monitoring/v3",
+      "versions": [
+        "master"
       ]
     },
     {
