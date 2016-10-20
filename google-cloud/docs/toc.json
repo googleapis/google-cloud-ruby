@@ -159,7 +159,7 @@
         },
         {
           "title": "MetricServiceApi",
-          "type": "google/cloud/monitoring/v3/metricaerviceapi"
+          "type": "google/cloud/monitoring/v3/metricserviceapi"
         }
       ]
     },
