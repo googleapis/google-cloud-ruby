@@ -1,0 +1,7 @@
+--no-private
+--title=Stackdriver
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md

@@ -44,6 +44,14 @@
         {
           "title": "Resource",
           "type": "google/cloud/logging/resource"
+        },
+        {
+          "title": "Middleware",
+          "type": "google/cloud/logging/middleware"
+        },
+        {
+          "title": "Railtie",
+          "type": "google/cloud/logging/rails"
         }
       ]
     }

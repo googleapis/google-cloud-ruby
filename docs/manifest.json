@@ -45,6 +45,14 @@
       ]
     },
     {
+      "id": "stackdriver",
+      "name": "stackdriver",
+      "defaultService": "stackdriver",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-bigquery",
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
