@@ -1,6 +1,8 @@
 # stackdriver
 
-This gem is a convenience package for loading all Stackdriver gems in the google-cloud-ruby project. 
+This gem instruments a Ruby web application for Stackdriver diagnostics. When loaded, it integrates with Rails, Sinatra, or other Rack-based web frameworks to collect application diagnostic and monitoring information for your application.
+
+Specifically, this gem is a convenience package that loads and automatically activates the instrumentation features of the following gems:
 - [google-cloud-logging](../google-cloud-logging)
 - [google-cloud-error_reporting](../google-cloud-error_reporting)
 - [google-cloud-monitoring](../google-cloud-monitoring)
@@ -14,24 +16,10 @@ $ gem install stackdriver
 ```
 
 ## Overview
-Stackdriver offers several services. Users can use the client libraries for these services directly in applications.
-```ruby
-require "google/cloud/logging"
-require "google/cloud/error_reporting/v1beta1"
-require "google/cloud/monitoring/v3"
-...
-```
-Rails applications can further benefit from the Railties from the Stackdriver libraries by explicitly requiring corresponding modules.
-```ruby
-require "google/cloud/logging/rails"
-require "google/cloud/error_reporting/rails"
-...
-```
-But instead of requiring multiple gems and explicitly load the built-in Railtie classes, now users can manage all of above through this single **stackdriver** umbrella gem.
+Instead of requiring multiple Stackdriver client library gems and explicitly load each built-in Railtie classes, now users can achieve all these through requiring this single **stackdriver** umbrella gem.
 ```ruby
 require "stackdriver"
 ```
-
 
 ## Supported Ruby Versions
 

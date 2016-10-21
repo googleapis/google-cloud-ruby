@@ -43,9 +43,10 @@ module StackDriver
 
   def self.init *args
     # Deprecation message
-    puts "This API has been deprecated by Stackdriver. For new version of " \
-      "API, please visit " \
-      " https://googlecloudplatform.github.io/google-cloud-ruby/#/"
+    puts "This usage is specific to the legacy Stackdriver service. It is " \
+      "deprecated and will be removed at some point in the future. Please " \
+      "migrate to the Google Stackdriver API documented at " \
+      "https://googlecloudplatform.github.io/google-cloud-ruby/"
 
     if args.count > 1
       puts "Customer ID is no longer needed, and will be deprecated"
