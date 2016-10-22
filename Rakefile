@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "open3"
 
 task :bundleupdate do
   gems.each do |gem|
@@ -119,7 +120,7 @@ namespace :acceptance do
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "ACCEPTANCE TESTS FOR #{gem}"
-          sh "bundle exec rake acceptance"
+          run_task_if_exists "acceptance"
         end
       end
     end
@@ -149,7 +150,7 @@ namespace :acceptance do
     gems.each do |gem|
       cd gem do
         Bundler.with_clean_env do
-          sh "bundle exec rake acceptance:cleanup"
+          run_task_if_exists "acceptance:cleanup"
         end
       end
     end
@@ -180,7 +181,7 @@ task :doctest, :bundleupdate do |t, args|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "DOCTEST FOR #{gem}"
-        sh "bundle exec rake doctest"
+        run_task_if_exists "doctest"
       end
     end
   end
@@ -502,6 +503,86 @@ namespace :appveyor do
   end
 end
 
+namespace :integration do
+  desc "Run integration:gae for all gems"
+  task :gae, :project_uri do |t, args|
+    require_relative "integration/helper"
+    require "mkmf"
+    if find_executable "gcloud"
+      project_id = gcloud_project_id
+      fail "Unabled to determine project_id from gcloud SDK. Please make " \
+        "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
+      # If project_uri not given, default to "http://[project_id].appspot.com"
+      project_uri = args[:project_uri] ||
+                    "http://#{project_id}.appspot.com"
+
+      fail "You must provide a project_uri. e.g. rake " \
+        "integration:gae[http://my-project.appspot.com]" if project_uri.nil?
+
+      deploy_gae_flex do
+        gems.each do |gem|
+          Dir.chdir gem do
+            header "Running integration:gae for gem #{gem}"
+            Bundler.with_clean_env do
+              run_task_if_exists "integration:gae", project_uri
+            end
+          end
+        end
+      end
+    else
+      header "Unable to find gcloud SDK. Skip tests. Please reference https://cloud.google.com/sdk/ on installing gcloud SDK and kubernetes CTL."
+    end
+  end
+
+  desc "Run integration:gke for all gems"
+  task :gke do
+    require_relative "integration/helper"
+    require "mkmf"
+    if find_executable("gcloud")&& find_executable("kubectl")
+      project_id = gcloud_project_id
+      fail "Unabled to determine project_id from gcloud SDK. Please make " \
+	"sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
+
+      build_docker_image project_id do |image_name, image_location|
+        header "Built docker image #{image_name}"
+        push_docker_image project_id, image_name, image_location do |image_name, image_location|
+          header "Pushed docker image #{image_location} to GCR"
+
+          deploy_gke_image image_name, image_location
+
+          header "GKE image #{image_name} successfully deployed"
+
+          # Figure out exact GKE pod_name from image_name
+          pod_name = nil
+          stdout = Open3.capture3(
+            "kubectl get pods"
+          ).first
+          pods_info = stdout.split("\n").drop(1)
+          pods_info.each do |pod_info|
+            pod_info = pod_info.split
+            if pod_info[0].match image_name
+              pod_name = pod_info[0]
+              break
+            end
+          end
+
+          # Invoke integration:gke with on each gem
+          gems.each do |gem|
+            Dir.chdir gem do
+              Bundler.with_clean_env do
+                header "Running integration:gke for gem #{gem}"
+                run_task_if_exists "integration:gke", pod_name
+              end
+            end
+          end
+        end
+      end
+    else
+      header "Unable to find gcloud SDK and Kubernetes CTL. Skip tests. Please reference https://cloud.google.com/sdk/ on installing gcloud SDK and kubernetes CTL."
+    end
+  end
+end
+
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
@@ -513,6 +594,15 @@ def header str
   puts "### #{str} ###"
   puts "#" * line_length
   puts ""
+end
+
+##
+# Run rake task if exists on commandline. Used to run rake tasks in
+# subdirectories.
+def run_task_if_exists task_name, params = ""
+  if `rake --tasks #{task_name}` =~ /#{task_name}[^:]/
+    sh "bundle exec rake #{task_name}[#{params}]"
+  end
 end
 
 task :default => :test

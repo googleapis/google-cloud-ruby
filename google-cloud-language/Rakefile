@@ -62,14 +62,6 @@ namespace :acceptance do
 
     Rake::Task["acceptance"].invoke
   end
-
-  desc "Runs acceptance cleanup."
-  task :cleanup do
-  end
-end
-
-desc "Runs yard-doctest example tests."
-task :doctest do
 end
 
 desc "Start an interactive shell."

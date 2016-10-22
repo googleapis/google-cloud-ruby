@@ -87,10 +87,6 @@ namespace :acceptance do
   end
 end
 
-desc "Runs yard-doctest example tests."
-task :doctest do
-end
-
 desc "Start an interactive shell."
 task :console do
   require "irb"

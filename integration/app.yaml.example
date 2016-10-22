@@ -1,0 +1,5 @@
+runtime: ruby
+vm: true
+entrypoint: bundle exec ruby integration/classic_sinatra_app.rb
+health_check:
+  enable_health_check: False

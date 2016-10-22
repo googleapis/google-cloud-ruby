@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "integration/**/*"
     - "google-cloud-logging.gemspec"
     - "lib/google/logging/**/*"
     - "lib/google/cloud/logging/v2.rb"
