@@ -73,6 +73,56 @@ module Google
         end
 
         ##
+        # Construct monitoring resource based on given type and label (both are
+        # present). Otherwise construct a default monitoring resource based on
+        # current environment.
+        #
+        # If not given both type and label:
+        #   If running from GAE, return resource:
+        #   {
+        #     type: "gae_app", {
+        #       module_id: [GAE module name],
+        #       version_id: [GAE module version]
+        #     }
+        #   }
+        #   If running from GKE, return resource:
+        #   {
+        #     type: "container", {
+        #       cluster_name: [GKE cluster name],
+        #       namespace_id: [GKE namespace_id]
+        #     }
+        #   }
+        #   If running from GCE, return resource:
+        #   {
+        #     type: "gce_instance", {
+        #       instance_id: [GCE VM instance id],
+        #       zone: [GCE vm group zone]
+        #     }
+        #   }
+        #   Otherwise default to { type: "global" }, which means not associated
+        #   with GCP.
+        #
+        # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
+        # for a full list of monitoring resources
+        #
+        # @param [String] type Type of Google::Cloud::Logging::Resource
+        # @param [Hash<String, String>] labels Metadata lebels of
+        #   Google::Cloud::Logging::Resource
+        #
+        # @return [Google::Cloud::Logging::Resource] An Resource object with
+        #   type and labels
+        def self.build_monitored_resource type = nil, labels = nil
+          if type && labels
+            Google::Cloud::Logging::Resource.new.tap do |r|
+              r.type = type
+              r.labels = labels
+            end
+          else
+            default_monitored_resource
+          end
+        end
+
+        ##
         # @private Extract information from current environment and construct
         # the correct monitoring resource types and labels.
         #
@@ -105,7 +155,7 @@ module Google
         #
         # @return [Google::Cloud::Logging::Resource] An Resource object with
         #   correct type and labels
-        def self.build_monitoring_resource
+        def self.default_monitored_resource
           type, labels =
             if Core::Environment.gae?
               ["gae_app", {
@@ -128,6 +178,8 @@ module Google
             r.labels = labels
           end
         end
+
+        private_class_method :default_monitored_resource
       end
     end
   end

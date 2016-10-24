@@ -46,7 +46,9 @@ logging.write_entries entry
 
 ## Rails Integration
 
-This library also provides a built in Railtie for Ruby on Rails integration. To do this, simply add this line to config/application.rb:
+This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it substitutes default Rails logger with an instance of Google::Cloud::Logging::logger. Then all consequent log entries will be submitted to Stackdriver Logging service. 
+
+To do this, simply add this line to config/application.rb:
 ```ruby
 require "google/cloud/logging/rails"
 ```
@@ -64,8 +66,12 @@ config.google_cloud.use_logging = true
  
 # Set Stackdriver Logging log name
 config.google_cloud.logging.log_name = "my-app-log"
+ 
+# Override default monitored resource if needed. E.g. used on AWS
+config.google_cloud.logging.monitored_resource.type = "aws_ec2_instance"
+config.google_cloud.logging.monitored_resource.labels.instance_id = "ec2-instance-id"
+config.google_cloud.logging.monitored_resource.labels.aws_account = "AWS account number"
 ```
-
 Alternatively, check out [stackdriver](../stackdriver) gem, which includes this Railtie by default.
 
 ## Rack Integration
@@ -75,7 +81,7 @@ Other Rack base framework can also directly leverage the built-in Middleware.
 require "google/cloud/logging"
 
 logging = Google::Cloud::Logging.new
-resource = Google::Cloud::Logging::Middleware.build_monitoring_resource
+resource = Google::Cloud::Logging::Middleware.build_monitored_resource
 logger = logging.logger "my-log-name",
                         resource
 use Google::Cloud::Logging::Middleware, logger: logger

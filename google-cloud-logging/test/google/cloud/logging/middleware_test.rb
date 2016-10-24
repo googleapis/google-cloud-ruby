@@ -87,12 +87,40 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     end
   end
 
-  describe ".build_monitoring_resource" do
+  describe ".build_monitored_resource" do
+    let(:custom_type) { "custom-monitored-resource-type" }
+    let(:custom_labels) { {label_one: 1, label_two: 2} }
+    let(:default_rc) { "Default-monitored-resource" }
+
+    it "returns resource of right type if given parameters" do
+      Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource custom_type, custom_labels
+        rc.type.must_equal custom_type
+        rc.labels.must_equal custom_labels
+      end
+    end
+
+    it "returns default monitored resource if only given type" do
+      Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource custom_type
+        rc.must_equal default_rc
+      end
+    end
+
+    it "returns default monitored resource if only given labels" do
+      Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource nil, custom_labels
+        rc.must_equal default_rc
+      end
+    end
+  end
+
+  describe ".default_monitored_resource" do
     it "returns resource of type gae_app if gae? is true" do
       Google::Cloud::Core::Environment.stub :gae?, true do
         Google::Cloud::Core::Environment.stub :gke?, false do
           Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitoring_resource
+            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
             rc.type.must_equal "gae_app"
           end
         end
@@ -103,7 +131,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       Google::Cloud::Core::Environment.stub :gae?, false do
         Google::Cloud::Core::Environment.stub :gke?, true do
           Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitoring_resource
+            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
             rc.type.must_equal "container"
           end
         end
@@ -114,7 +142,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       Google::Cloud::Core::Environment.stub :gae?, false do
         Google::Cloud::Core::Environment.stub :gke?, false do
           Google::Cloud::Core::Environment.stub :gce?, true do
-            rc = Google::Cloud::Logging::Middleware.build_monitoring_resource
+            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
             rc.type.must_equal "gce_instance"
           end
         end
@@ -125,7 +153,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       Google::Cloud::Core::Environment.stub :gae?, false do
         Google::Cloud::Core::Environment.stub :gke?, false do
           Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitoring_resource
+            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
             rc.type.must_equal "global"
           end
         end
