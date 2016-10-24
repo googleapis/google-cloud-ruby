@@ -117,8 +117,9 @@ module Google
 
           # If this exception maps to a HTTP status code less than 500, do
           # not report it.
-          return if
-            error_event.context.http_request.response_status_code.to_i < 500
+          status_code =
+            error_event.context.http_request.response_status_code.to_i
+          return if status_code > 0 && status_code < 500
 
           error_reporting.report_error_event full_project_id, error_event
         end

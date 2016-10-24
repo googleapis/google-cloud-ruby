@@ -143,6 +143,23 @@ describe Google::Cloud::ErrorReporting::Middleware do
       end
     end
 
+    it "calls error_reporting#report_error_event when no correct status found" do
+      stub_error_reporting = MiniTest::Mock.new
+      stub_error_reporting.expect :report_error_event, nil do |_, error_event|
+        error_event.must_be_kind_of Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+      end
+      stub_http_status = ->(exception) {
+        exception.message.must_equal app_exception_msg
+        nil
+      }
+
+      middleware.stub :get_http_status, stub_http_status do
+        middleware.stub :error_reporting, stub_error_reporting do
+          middleware.report_exception rack_env, app_exception
+        end
+      end
+    end
+
     it "doesn't report if the exception maps to a HTTP code less than 500" do
       stub_reporting = ->(_, _) { fail "This exception should've been skipped" }
       stub_http_status = ->(exception) {
