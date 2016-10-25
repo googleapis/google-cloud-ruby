@@ -12,6 +12,7 @@ before_install:
 script:
 - bundle exec rake rubocop[yes]
 - bundle exec rake jsondoc
+- bundle exec rake doctest
 - bundle exec rake test:coveralls
 - bundle exec rake travis:acceptance
 after_success:
