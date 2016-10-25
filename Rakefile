@@ -221,6 +221,9 @@ namespace :jsondoc do
     end
     puts "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
     puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
+
+    # Create <gh_pages>/json/stackdriver/master/google/cloud/ directory
+    mkdir_p gh_pages + "json/stackdriver/master/google/cloud/"
   end
 
   desc "Copies all gems jsondoc to gh-pages repo in temp dir."
@@ -243,21 +246,25 @@ namespace :jsondoc do
     cp "docs/json/home.html", gh_pages + "json", verbose: true
   end
 
-  desc "Assembles google-cloud umbrella package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
+  desc "Assembles google-cloud and stackdriver umbrella packages jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
   task :umbrella, :tag do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
     gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
 
     require "json"
-    excluded = ["gcloud", "google-cloud"]
+    excluded = ["gcloud", "google-cloud", "stackdriver"]
+    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
     all_types = []
+    stackdriver_types = []
     google_cloud_json = JSON.parse File.read("google-cloud/jsondoc/google/cloud.json")
+    stackdriver_json = JSON.parse File.read("stackdriver/jsondoc/stackdriver.json")
 
     # Load existing google/cloud.json methods.
     all_google_cloud_methods = [google_cloud_json["methods"]]
+    stackdriver_google_cloud_methods = [stackdriver_json["methods"]]
 
-    header "Copying all jsondoc to google-cloud umbrella package"
+    header "Copying all jsondoc to google-cloud and stackdriver umbrella package"
     gems.each do |gem|
       next if excluded.include? gem
 
@@ -275,6 +282,12 @@ namespace :jsondoc do
       cp Dir["#{gem}/jsondoc/google/cloud/*.json"], gh_pages + "json/google-cloud/master/google/cloud/", verbose: true
       all_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
       all_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
+
+      if stackdriver_gems.include? gem
+        cp Dir["#{gem}/jsondoc/google/cloud/*.json"], gh_pages + "json/stackdriver/master/google/cloud/", verbose: true
+        stackdriver_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
+        stackdriver_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
+      end
     end
 
     header "Merging each gem types.json into #{gh_pages}/json/google-cloud/jsondoc/types.json"
@@ -282,11 +295,23 @@ namespace :jsondoc do
       f.write(all_types.flatten.to_json)
     end
 
+    header "Merging each Stackdriver gem types.json into #{gh_pages}/json/stackdriver/jsondoc/types.json"
+    File.open(gh_pages + "json/stackdriver/master/types.json", "w") do |f|
+      f.write(stackdriver_types.flatten.to_json)
+    end
+
     header "Merging methods from each google/cloud.json into #{gh_pages}/json/google-cloud/jsondoc/google/cloud.json"
     all_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
     google_cloud_json["methods"] = all_google_cloud_methods.flatten
     File.open(gh_pages + "json/google-cloud/master/google/cloud.json", "w") do |f|
       f.write(google_cloud_json.to_json)
+    end
+
+    header "Merging methods from each Stackdriver google/cloud.json into #{gh_pages}/json/stackdriver/jsondoc/google/cloud.json"
+    stackdriver_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
+    stackdriver_json["methods"] = stackdriver_google_cloud_methods.flatten
+    File.open(gh_pages + "json/stackdriver/master/google/cloud.json", "w") do |f|
+      f.write(stackdriver_json.to_json)
     end
   end
 

@@ -1,0 +1,12 @@
+source "http://rubygems.org"
+
+gemspec
+
+gem "rake"
+gem "google-cloud-error_reporting", path: "../google-cloud-error_reporting"
+gem "google-cloud-logging", path: "../google-cloud-logging"
+gem "google-cloud-monitoring", path: "../google-cloud-monitoring"
+
+gem "gcloud-jsondoc",
+    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
+    branch: "gcloud-jsondoc"
