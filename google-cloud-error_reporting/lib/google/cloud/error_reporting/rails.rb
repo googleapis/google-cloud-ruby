@@ -126,9 +126,10 @@ module Google
         # config.google_cloud.use_error_reporting is explicitly true. Otherwise
         # false.
         #
-        # @param config The Rails.application.config
+        # @param [Rails::Railtie::Configuration] config The
+        #   Rails.application.config
         #
-        # @return true or false
+        # @return [Boolean] Whether to use Stackdriver Error Reporting
         #
         def self.use_error_reporting? config
           gcp_config = config.google_cloud

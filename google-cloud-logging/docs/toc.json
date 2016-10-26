@@ -51,7 +51,7 @@
         },
         {
           "title": "Railtie",
-          "type": "google/cloud/logging/rails"
+          "type": "google/cloud/logging/railtie"
         }
       ]
     }

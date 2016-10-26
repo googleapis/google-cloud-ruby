@@ -81,9 +81,10 @@ module Google
         # able to authenticate. Also either Rails needs to be in "production"
         # environment or config.stackdriver.use_logging is explicitly true.
         #
-        # @param config The Rails.application.config
+        # @param [Rails::Railtie::Configuration] config The
+        #   Rails.application.config
         #
-        # @return [Boolean]
+        # @return [Boolean] Whether to use Stackdriver Logging
         #
         def self.use_logging? config
           gcp_config = config.google_cloud

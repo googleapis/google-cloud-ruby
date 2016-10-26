@@ -24,8 +24,7 @@ module Google
         ##
         # Create a new AppEngine logging Middleware.
         #
-        # @param app Rack application
-        #
+        # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Logging::Logger] logger A logger to be used by
         #   this middleware. The middleware will be interacting with the logger
         #   to track Stackdriver request trace ID. It also properly sets
@@ -48,7 +47,7 @@ module Google
         #
         # @param [Hash] env Rack environment hash
         #
-        # @return The response from downstream Rack app
+        # @return [Rack::Response] The response from downstream Rack app
         #
         def call env
           env["rack.logger"] = logger
