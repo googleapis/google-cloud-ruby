@@ -21,34 +21,79 @@ RuboCop::RakeTask.new
 
 desc "Run tests."
 task :test do
-  puts "The google-cloud-trace gem does not have tests."
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Run tests with coverage."
+  desc "Runs tests with coverage."
   task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-trace"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
   end
 end
 
 # Acceptance tests
-desc "Run the trace acceptance tests."
-task :acceptance do
-  puts "The google-cloud-trace gem does not have acceptance tests."
+desc "Runs the trace acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["TRACE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["TRACE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["TRACE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRACE_TEST_PROJECT=test123 TRACE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["TRACE_PROJECT"] = project
+  ENV["TRACE_KEYFILE"] = nil
+  ENV["TRACE_KEYFILE_JSON"] = keyfile
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/trace/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
-  desc "Run acceptance tests with coverage."
-  task :coverage do
-  end
+  desc "Runs acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-trace"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
 
-  desc "Run acceptance cleanup."
-  task :cleanup do
+    Rake::Task["acceptance"].invoke
   end
 end
 
-desc "Run yard-doctest example tests."
+desc "Runs yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-trace gem does not have doctest tests."
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-trace"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
 end
 
 require "yard"
