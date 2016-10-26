@@ -337,12 +337,12 @@ module Google
               push_config: nil,
               ack_deadline_seconds: nil,
               options: nil
-            req = Google::Pubsub::V1::Subscription.new(
+            req = Google::Pubsub::V1::Subscription.new({
               name: name,
-              topic: topic
-            )
-            req.push_config = push_config unless push_config.nil?
-            req.ack_deadline_seconds = ack_deadline_seconds unless ack_deadline_seconds.nil?
+              topic: topic,
+              push_config: push_config,
+              ack_deadline_seconds: ack_deadline_seconds
+            }.delete_if { |_, v| v.nil? })
             @create_subscription.call(req, options)
           end
 
@@ -367,9 +367,9 @@ module Google
           def get_subscription \
               subscription,
               options: nil
-            req = Google::Pubsub::V1::GetSubscriptionRequest.new(
+            req = Google::Pubsub::V1::GetSubscriptionRequest.new({
               subscription: subscription
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_subscription.call(req, options)
           end
 
@@ -417,10 +417,10 @@ module Google
               project,
               page_size: nil,
               options: nil
-            req = Google::Pubsub::V1::ListSubscriptionsRequest.new(
-              project: project
-            )
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Pubsub::V1::ListSubscriptionsRequest.new({
+              project: project,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_subscriptions.call(req, options)
           end
 
@@ -448,9 +448,9 @@ module Google
           def delete_subscription \
               subscription,
               options: nil
-            req = Google::Pubsub::V1::DeleteSubscriptionRequest.new(
+            req = Google::Pubsub::V1::DeleteSubscriptionRequest.new({
               subscription: subscription
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_subscription.call(req, options)
           end
 
@@ -490,11 +490,11 @@ module Google
               ack_ids,
               ack_deadline_seconds,
               options: nil
-            req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+            req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new({
               subscription: subscription,
               ack_ids: ack_ids,
               ack_deadline_seconds: ack_deadline_seconds
-            )
+            }.delete_if { |_, v| v.nil? })
             @modify_ack_deadline.call(req, options)
           end
 
@@ -529,10 +529,10 @@ module Google
               subscription,
               ack_ids,
               options: nil
-            req = Google::Pubsub::V1::AcknowledgeRequest.new(
+            req = Google::Pubsub::V1::AcknowledgeRequest.new({
               subscription: subscription,
               ack_ids: ack_ids
-            )
+            }.delete_if { |_, v| v.nil? })
             @acknowledge.call(req, options)
           end
 
@@ -572,11 +572,11 @@ module Google
               max_messages,
               return_immediately: nil,
               options: nil
-            req = Google::Pubsub::V1::PullRequest.new(
+            req = Google::Pubsub::V1::PullRequest.new({
               subscription: subscription,
-              max_messages: max_messages
-            )
-            req.return_immediately = return_immediately unless return_immediately.nil?
+              max_messages: max_messages,
+              return_immediately: return_immediately
+            }.delete_if { |_, v| v.nil? })
             @pull.call(req, options)
           end
 
@@ -615,10 +615,10 @@ module Google
               subscription,
               push_config,
               options: nil
-            req = Google::Pubsub::V1::ModifyPushConfigRequest.new(
+            req = Google::Pubsub::V1::ModifyPushConfigRequest.new({
               subscription: subscription,
               push_config: push_config
-            )
+            }.delete_if { |_, v| v.nil? })
             @modify_push_config.call(req, options)
           end
 
@@ -654,10 +654,10 @@ module Google
               resource,
               policy,
               options: nil
-            req = Google::Iam::V1::SetIamPolicyRequest.new(
+            req = Google::Iam::V1::SetIamPolicyRequest.new({
               resource: resource,
               policy: policy
-            )
+            }.delete_if { |_, v| v.nil? })
             @set_iam_policy.call(req, options)
           end
 
@@ -686,9 +686,9 @@ module Google
           def get_iam_policy \
               resource,
               options: nil
-            req = Google::Iam::V1::GetIamPolicyRequest.new(
+            req = Google::Iam::V1::GetIamPolicyRequest.new({
               resource: resource
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_iam_policy.call(req, options)
           end
 
@@ -722,10 +722,10 @@ module Google
               resource,
               permissions,
               options: nil
-            req = Google::Iam::V1::TestIamPermissionsRequest.new(
+            req = Google::Iam::V1::TestIamPermissionsRequest.new({
               resource: resource,
               permissions: permissions
-            )
+            }.delete_if { |_, v| v.nil? })
             @test_iam_permissions.call(req, options)
           end
         end

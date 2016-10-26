@@ -183,10 +183,10 @@ module Google
               project_name,
               event,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest.new({
               project_name: project_name,
               event: event
-            )
+            }.delete_if { |_, v| v.nil? })
             @report_error_event.call(req, options)
           end
         end

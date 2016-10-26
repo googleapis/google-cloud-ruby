@@ -252,17 +252,17 @@ module Google
               order: nil,
               page_size: nil,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsRequest.new({
               project_name: project_name,
-              time_range: time_range
-            )
-            req.group_id = group_id unless group_id.nil?
-            req.service_filter = service_filter unless service_filter.nil?
-            req.timed_count_duration = timed_count_duration unless timed_count_duration.nil?
-            req.alignment = alignment unless alignment.nil?
-            req.alignment_time = alignment_time unless alignment_time.nil?
-            req.order = order unless order.nil?
-            req.page_size = page_size unless page_size.nil?
+              time_range: time_range,
+              group_id: group_id,
+              service_filter: service_filter,
+              timed_count_duration: timed_count_duration,
+              alignment: alignment,
+              alignment_time: alignment_time,
+              order: order,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_group_stats.call(req, options)
           end
 
@@ -325,13 +325,13 @@ module Google
               time_range: nil,
               page_size: nil,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest.new({
               project_name: project_name,
-              group_id: group_id
-            )
-            req.service_filter = service_filter unless service_filter.nil?
-            req.time_range = time_range unless time_range.nil?
-            req.page_size = page_size unless page_size.nil?
+              group_id: group_id,
+              service_filter: service_filter,
+              time_range: time_range,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_events.call(req, options)
           end
 
@@ -359,9 +359,9 @@ module Google
           def delete_events \
               project_name,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest.new({
               project_name: project_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_events.call(req, options)
           end
         end

@@ -254,10 +254,10 @@ module Google
               parent,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListSinksRequest.new(
-              parent: parent
-            )
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Logging::V2::ListSinksRequest.new({
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_sinks.call(req, options)
           end
 
@@ -283,9 +283,9 @@ module Google
           def get_sink \
               sink_name,
               options: nil
-            req = Google::Logging::V2::GetSinkRequest.new(
+            req = Google::Logging::V2::GetSinkRequest.new({
               sink_name: sink_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_sink.call(req, options)
           end
 
@@ -318,10 +318,10 @@ module Google
               parent,
               sink,
               options: nil
-            req = Google::Logging::V2::CreateSinkRequest.new(
+            req = Google::Logging::V2::CreateSinkRequest.new({
               parent: parent,
               sink: sink
-            )
+            }.delete_if { |_, v| v.nil? })
             @create_sink.call(req, options)
           end
 
@@ -355,10 +355,10 @@ module Google
               sink_name,
               sink,
               options: nil
-            req = Google::Logging::V2::UpdateSinkRequest.new(
+            req = Google::Logging::V2::UpdateSinkRequest.new({
               sink_name: sink_name,
               sink: sink
-            )
+            }.delete_if { |_, v| v.nil? })
             @update_sink.call(req, options)
           end
 
@@ -385,9 +385,9 @@ module Google
           def delete_sink \
               sink_name,
               options: nil
-            req = Google::Logging::V2::DeleteSinkRequest.new(
+            req = Google::Logging::V2::DeleteSinkRequest.new({
               sink_name: sink_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_sink.call(req, options)
           end
         end

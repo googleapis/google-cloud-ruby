@@ -253,10 +253,10 @@ module Google
               parent,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListLogMetricsRequest.new(
-              parent: parent
-            )
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Logging::V2::ListLogMetricsRequest.new({
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_log_metrics.call(req, options)
           end
 
@@ -282,9 +282,9 @@ module Google
           def get_log_metric \
               metric_name,
               options: nil
-            req = Google::Logging::V2::GetLogMetricRequest.new(
+            req = Google::Logging::V2::GetLogMetricRequest.new({
               metric_name: metric_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_log_metric.call(req, options)
           end
 
@@ -318,10 +318,10 @@ module Google
               parent,
               metric,
               options: nil
-            req = Google::Logging::V2::CreateLogMetricRequest.new(
+            req = Google::Logging::V2::CreateLogMetricRequest.new({
               parent: parent,
               metric: metric
-            )
+            }.delete_if { |_, v| v.nil? })
             @create_log_metric.call(req, options)
           end
 
@@ -358,10 +358,10 @@ module Google
               metric_name,
               metric,
               options: nil
-            req = Google::Logging::V2::UpdateLogMetricRequest.new(
+            req = Google::Logging::V2::UpdateLogMetricRequest.new({
               metric_name: metric_name,
               metric: metric
-            )
+            }.delete_if { |_, v| v.nil? })
             @update_log_metric.call(req, options)
           end
 
@@ -386,9 +386,9 @@ module Google
           def delete_log_metric \
               metric_name,
               options: nil
-            req = Google::Logging::V2::DeleteLogMetricRequest.new(
+            req = Google::Logging::V2::DeleteLogMetricRequest.new({
               metric_name: metric_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_log_metric.call(req, options)
           end
         end
