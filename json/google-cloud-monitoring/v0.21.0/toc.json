@@ -1,13 +1,1 @@
-{
-  "guides": [],
-  "services": [
-    {
-      "title": "GroupServiceApi",
-      "type": "google/cloud/monitoring/v3/groupserviceapi"
-    },
-    {
-      "title": "MetricServiceApi",
-      "type": "google/cloud/monitoring/v3/metricserviceapi"
-    }
-  ]
-}
+{"guides":[],"services":[{"title":"GroupServiceApi","type":"google/cloud/monitoring/v3/groupserviceapi"},{"title":"MetricServiceApi","type":"google/cloud/monitoring/v3/metricserviceapi"}],"tagName":"google-cloud-monitoring/v0.21.0"}
