@@ -28,7 +28,7 @@ describe "Language (TEXT)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.polarity.must_equal 1.0
-      annotation.sentiment.magnitude.must_equal 2.0999999046325684
+      annotation.sentiment.magnitude.must_equal 1.7999999523162842
 
       annotation.entities.count.must_equal 3
       annotation.entities.language.must_equal "en"
