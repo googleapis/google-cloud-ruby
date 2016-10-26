@@ -148,9 +148,9 @@ module Google
           def batch_annotate_images \
               requests,
               options: nil
-            req = Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(
+            req = Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new({
               requests: requests
-            )
+            }.delete_if { |_, v| v.nil? })
             @batch_annotate_images.call(req, options)
           end
         end

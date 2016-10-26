@@ -157,9 +157,9 @@ module Google
           def analyze_sentiment \
               document,
               options: nil
-            req = Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(
+            req = Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new({
               document: document
-            )
+            }.delete_if { |_, v| v.nil? })
             @analyze_sentiment.call(req, options)
           end
 
@@ -191,10 +191,10 @@ module Google
               document,
               encoding_type,
               options: nil
-            req = Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(
+            req = Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new({
               document: document,
               encoding_type: encoding_type
-            )
+            }.delete_if { |_, v| v.nil? })
             @analyze_entities.call(req, options)
           end
 
@@ -233,11 +233,11 @@ module Google
               features,
               encoding_type,
               options: nil
-            req = Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(
+            req = Google::Cloud::Language::V1beta1::AnnotateTextRequest.new({
               document: document,
               features: features,
               encoding_type: encoding_type
-            )
+            }.delete_if { |_, v| v.nil? })
             @annotate_text.call(req, options)
           end
         end

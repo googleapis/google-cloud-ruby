@@ -181,11 +181,11 @@ module Google
               read_options,
               keys,
               options: nil
-            req = Google::Datastore::V1::LookupRequest.new(
+            req = Google::Datastore::V1::LookupRequest.new({
               project_id: project_id,
               read_options: read_options,
               keys: keys
-            )
+            }.delete_if { |_, v| v.nil? })
             @lookup.call(req, options)
           end
 
@@ -229,13 +229,13 @@ module Google
               query: nil,
               gql_query: nil,
               options: nil
-            req = Google::Datastore::V1::RunQueryRequest.new(
+            req = Google::Datastore::V1::RunQueryRequest.new({
               project_id: project_id,
               partition_id: partition_id,
-              read_options: read_options
-            )
-            req.query = query unless query.nil?
-            req.gql_query = gql_query unless gql_query.nil?
+              read_options: read_options,
+              query: query,
+              gql_query: gql_query
+            }.delete_if { |_, v| v.nil? })
             @run_query.call(req, options)
           end
 
@@ -260,9 +260,9 @@ module Google
           def begin_transaction \
               project_id,
               options: nil
-            req = Google::Datastore::V1::BeginTransactionRequest.new(
+            req = Google::Datastore::V1::BeginTransactionRequest.new({
               project_id: project_id
-            )
+            }.delete_if { |_, v| v.nil? })
             @begin_transaction.call(req, options)
           end
 
@@ -314,12 +314,12 @@ module Google
               mutations,
               transaction: nil,
               options: nil
-            req = Google::Datastore::V1::CommitRequest.new(
+            req = Google::Datastore::V1::CommitRequest.new({
               project_id: project_id,
               mode: mode,
-              mutations: mutations
-            )
-            req.transaction = transaction unless transaction.nil?
+              mutations: mutations,
+              transaction: transaction
+            }.delete_if { |_, v| v.nil? })
             @commit.call(req, options)
           end
 
@@ -349,10 +349,10 @@ module Google
               project_id,
               transaction,
               options: nil
-            req = Google::Datastore::V1::RollbackRequest.new(
+            req = Google::Datastore::V1::RollbackRequest.new({
               project_id: project_id,
               transaction: transaction
-            )
+            }.delete_if { |_, v| v.nil? })
             @rollback.call(req, options)
           end
 
@@ -383,10 +383,10 @@ module Google
               project_id,
               keys,
               options: nil
-            req = Google::Datastore::V1::AllocateIdsRequest.new(
+            req = Google::Datastore::V1::AllocateIdsRequest.new({
               project_id: project_id,
               keys: keys
-            )
+            }.delete_if { |_, v| v.nil? })
             @allocate_ids.call(req, options)
           end
         end

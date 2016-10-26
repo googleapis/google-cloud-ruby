@@ -276,9 +276,9 @@ module Google
           def create_topic \
               name,
               options: nil
-            req = Google::Pubsub::V1::Topic.new(
+            req = Google::Pubsub::V1::Topic.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @create_topic.call(req, options)
           end
 
@@ -313,10 +313,10 @@ module Google
               topic,
               messages,
               options: nil
-            req = Google::Pubsub::V1::PublishRequest.new(
+            req = Google::Pubsub::V1::PublishRequest.new({
               topic: topic,
               messages: messages
-            )
+            }.delete_if { |_, v| v.nil? })
             @publish.call(req, options)
           end
 
@@ -341,9 +341,9 @@ module Google
           def get_topic \
               topic,
               options: nil
-            req = Google::Pubsub::V1::GetTopicRequest.new(
+            req = Google::Pubsub::V1::GetTopicRequest.new({
               topic: topic
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_topic.call(req, options)
           end
 
@@ -391,10 +391,10 @@ module Google
               project,
               page_size: nil,
               options: nil
-            req = Google::Pubsub::V1::ListTopicsRequest.new(
-              project: project
-            )
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Pubsub::V1::ListTopicsRequest.new({
+              project: project,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_topics.call(req, options)
           end
 
@@ -442,10 +442,10 @@ module Google
               topic,
               page_size: nil,
               options: nil
-            req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new(
-              topic: topic
-            )
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Pubsub::V1::ListTopicSubscriptionsRequest.new({
+              topic: topic,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_topic_subscriptions.call(req, options)
           end
 
@@ -473,9 +473,9 @@ module Google
           def delete_topic \
               topic,
               options: nil
-            req = Google::Pubsub::V1::DeleteTopicRequest.new(
+            req = Google::Pubsub::V1::DeleteTopicRequest.new({
               topic: topic
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_topic.call(req, options)
           end
 
@@ -511,10 +511,10 @@ module Google
               resource,
               policy,
               options: nil
-            req = Google::Iam::V1::SetIamPolicyRequest.new(
+            req = Google::Iam::V1::SetIamPolicyRequest.new({
               resource: resource,
               policy: policy
-            )
+            }.delete_if { |_, v| v.nil? })
             @set_iam_policy.call(req, options)
           end
 
@@ -543,9 +543,9 @@ module Google
           def get_iam_policy \
               resource,
               options: nil
-            req = Google::Iam::V1::GetIamPolicyRequest.new(
+            req = Google::Iam::V1::GetIamPolicyRequest.new({
               resource: resource
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_iam_policy.call(req, options)
           end
 
@@ -579,10 +579,10 @@ module Google
               resource,
               permissions,
               options: nil
-            req = Google::Iam::V1::TestIamPermissionsRequest.new(
+            req = Google::Iam::V1::TestIamPermissionsRequest.new({
               resource: resource,
               permissions: permissions
-            )
+            }.delete_if { |_, v| v.nil? })
             @test_iam_permissions.call(req, options)
           end
         end

@@ -230,9 +230,9 @@ module Google
           def delete_log \
               log_name,
               options: nil
-            req = Google::Logging::V2::DeleteLogRequest.new(
+            req = Google::Logging::V2::DeleteLogRequest.new({
               log_name: log_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_log.call(req, options)
           end
 
@@ -295,19 +295,13 @@ module Google
               labels: nil,
               partial_success: nil,
               options: nil
-            req = Google::Logging::V2::WriteLogEntriesRequest.new(
-              entries: entries
-            )
-            req.log_name = log_name unless log_name.nil?
-            req.resource = resource unless resource.nil?
-            # Custom code here to work around setting a Hash where a Map is expected.
-            # If a future PR removes this code then ensure that the bug is fixed.
-            unless labels.nil?
-              labels_map = Google::Protobuf::Map.new(:string, :string)
-              labels.each { |k, v| labels_map[String(k)] = String(v) }
-              req.labels = labels_map
-            end
-            req.partial_success = partial_success unless partial_success.nil?
+            req = Google::Logging::V2::WriteLogEntriesRequest.new({
+              entries: entries,
+              log_name: log_name,
+              resource: resource,
+              labels: labels,
+              partial_success: partial_success
+            }.delete_if { |_, v| v.nil? })
             @write_log_entries.call(req, options)
           end
 
@@ -379,13 +373,13 @@ module Google
               order_by: nil,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListLogEntriesRequest.new(
-              project_ids: project_ids
-            )
-            req.resource_names = resource_names unless resource_names.nil?
-            req.filter = filter unless filter.nil?
-            req.order_by = order_by unless order_by.nil?
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Logging::V2::ListLogEntriesRequest.new({
+              project_ids: project_ids,
+              resource_names: resource_names,
+              filter: filter,
+              order_by: order_by,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_log_entries.call(req, options)
           end
 
@@ -429,8 +423,9 @@ module Google
           def list_monitored_resource_descriptors \
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new({
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_monitored_resource_descriptors.call(req, options)
           end
         end

@@ -309,11 +309,11 @@ module Google
               filter: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(
-              name: name
-            )
-            req.filter = filter unless filter.nil?
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new({
+              name: name,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_monitored_resource_descriptors.call(req, options)
           end
 
@@ -341,9 +341,9 @@ module Google
           def get_monitored_resource_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(
+            req = Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_monitored_resource_descriptor.call(req, options)
           end
 
@@ -402,11 +402,11 @@ module Google
               filter: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListMetricDescriptorsRequest.new(
-              name: name
-            )
-            req.filter = filter unless filter.nil?
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Monitoring::V3::ListMetricDescriptorsRequest.new({
+              name: name,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_metric_descriptors.call(req, options)
           end
 
@@ -434,9 +434,9 @@ module Google
           def get_metric_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::GetMetricDescriptorRequest.new(
+            req = Google::Monitoring::V3::GetMetricDescriptorRequest.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_metric_descriptor.call(req, options)
           end
 
@@ -470,10 +470,10 @@ module Google
               name,
               metric_descriptor,
               options: nil
-            req = Google::Monitoring::V3::CreateMetricDescriptorRequest.new(
+            req = Google::Monitoring::V3::CreateMetricDescriptorRequest.new({
               name: name,
               metric_descriptor: metric_descriptor
-            )
+            }.delete_if { |_, v| v.nil? })
             @create_metric_descriptor.call(req, options)
           end
 
@@ -501,9 +501,9 @@ module Google
           def delete_metric_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::DeleteMetricDescriptorRequest.new(
+            req = Google::Monitoring::V3::DeleteMetricDescriptorRequest.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_metric_descriptor.call(req, options)
           end
 
@@ -584,15 +584,15 @@ module Google
               order_by: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListTimeSeriesRequest.new(
+            req = Google::Monitoring::V3::ListTimeSeriesRequest.new({
               name: name,
               filter: filter,
               interval: interval,
-              view: view
-            )
-            req.aggregation = aggregation unless aggregation.nil?
-            req.order_by = order_by unless order_by.nil?
-            req.page_size = page_size unless page_size.nil?
+              view: view,
+              aggregation: aggregation,
+              order_by: order_by,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_time_series.call(req, options)
           end
 
@@ -628,10 +628,10 @@ module Google
               name,
               time_series,
               options: nil
-            req = Google::Monitoring::V3::CreateTimeSeriesRequest.new(
+            req = Google::Monitoring::V3::CreateTimeSeriesRequest.new({
               name: name,
               time_series: time_series
-            )
+            }.delete_if { |_, v| v.nil? })
             @create_time_series.call(req, options)
           end
         end

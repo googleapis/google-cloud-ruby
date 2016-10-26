@@ -188,9 +188,9 @@ module Google
           def get_group \
               group_name,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::GetGroupRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::GetGroupRequest.new({
               group_name: group_name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_group.call(req, options)
           end
 
@@ -217,9 +217,9 @@ module Google
           def update_group \
               group,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::UpdateGroupRequest.new(
+            req = Google::Devtools::Clouderrorreporting::V1beta1::UpdateGroupRequest.new({
               group: group
-            )
+            }.delete_if { |_, v| v.nil? })
             @update_group.call(req, options)
           end
         end

@@ -158,10 +158,10 @@ module Google
               config,
               audio,
               options: nil
-            req = Google::Cloud::Speech::V1beta1::SyncRecognizeRequest.new(
+            req = Google::Cloud::Speech::V1beta1::SyncRecognizeRequest.new({
               config: config,
               audio: audio
-            )
+            }.delete_if { |_, v| v.nil? })
             @sync_recognize.call(req, options)
           end
 
@@ -196,10 +196,10 @@ module Google
               config,
               audio,
               options: nil
-            req = Google::Cloud::Speech::V1beta1::AsyncRecognizeRequest.new(
+            req = Google::Cloud::Speech::V1beta1::AsyncRecognizeRequest.new({
               config: config,
               audio: audio
-            )
+            }.delete_if { |_, v| v.nil? })
             @async_recognize.call(req, options)
           end
         end

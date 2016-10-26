@@ -285,13 +285,13 @@ module Google
               descendants_of_group: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListGroupsRequest.new(
-              name: name
-            )
-            req.children_of_group = children_of_group unless children_of_group.nil?
-            req.ancestors_of_group = ancestors_of_group unless ancestors_of_group.nil?
-            req.descendants_of_group = descendants_of_group unless descendants_of_group.nil?
-            req.page_size = page_size unless page_size.nil?
+            req = Google::Monitoring::V3::ListGroupsRequest.new({
+              name: name,
+              children_of_group: children_of_group,
+              ancestors_of_group: ancestors_of_group,
+              descendants_of_group: descendants_of_group,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
             @list_groups.call(req, options)
           end
 
@@ -317,9 +317,9 @@ module Google
           def get_group \
               name,
               options: nil
-            req = Google::Monitoring::V3::GetGroupRequest.new(
+            req = Google::Monitoring::V3::GetGroupRequest.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @get_group.call(req, options)
           end
 
@@ -354,11 +354,11 @@ module Google
               group,
               validate_only: nil,
               options: nil
-            req = Google::Monitoring::V3::CreateGroupRequest.new(
+            req = Google::Monitoring::V3::CreateGroupRequest.new({
               name: name,
-              group: group
-            )
-            req.validate_only = validate_only unless validate_only.nil?
+              group: group,
+              validate_only: validate_only
+            }.delete_if { |_, v| v.nil? })
             @create_group.call(req, options)
           end
 
@@ -389,10 +389,10 @@ module Google
               group,
               validate_only: nil,
               options: nil
-            req = Google::Monitoring::V3::UpdateGroupRequest.new(
-              group: group
-            )
-            req.validate_only = validate_only unless validate_only.nil?
+            req = Google::Monitoring::V3::UpdateGroupRequest.new({
+              group: group,
+              validate_only: validate_only
+            }.delete_if { |_, v| v.nil? })
             @update_group.call(req, options)
           end
 
@@ -417,9 +417,9 @@ module Google
           def delete_group \
               name,
               options: nil
-            req = Google::Monitoring::V3::DeleteGroupRequest.new(
+            req = Google::Monitoring::V3::DeleteGroupRequest.new({
               name: name
-            )
+            }.delete_if { |_, v| v.nil? })
             @delete_group.call(req, options)
           end
 
@@ -483,12 +483,12 @@ module Google
               filter: nil,
               interval: nil,
               options: nil
-            req = Google::Monitoring::V3::ListGroupMembersRequest.new(
-              name: name
-            )
-            req.page_size = page_size unless page_size.nil?
-            req.filter = filter unless filter.nil?
-            req.interval = interval unless interval.nil?
+            req = Google::Monitoring::V3::ListGroupMembersRequest.new({
+              name: name,
+              page_size: page_size,
+              filter: filter,
+              interval: interval
+            }.delete_if { |_, v| v.nil? })
             @list_group_members.call(req, options)
           end
         end
