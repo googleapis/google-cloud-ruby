@@ -45,6 +45,14 @@
       ]
     },
     {
+      "id": "stackdriver",
+      "name": "stackdriver",
+      "defaultService": "stackdriver",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-bigquery",
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
@@ -189,8 +197,9 @@
       "name": "google-cloud-vision",
       "defaultService": "google/cloud/vision",
       "versions": [
-        "v0.21.0",
+        "v0.21.1",
         "master",
+        "v0.21.0",
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
