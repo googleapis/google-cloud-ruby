@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.1 / 2016-10-27
+
+* Fix outdated requires (Ricowere)
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Vision.new
