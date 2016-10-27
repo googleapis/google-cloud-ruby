@@ -27,7 +27,7 @@
         },
         {
           "title": "Railtie",
-          "type": "google/cloud/errorreporting/rails"
+          "type": "google/cloud/errorreporting/railtie"
         }
       ]
     },
@@ -53,7 +53,7 @@
         },
         {
           "title": "Railtie",
-          "type": "google/cloud/logging/rails"
+          "type": "google/cloud/logging/railtie"
         }
       ]
     },

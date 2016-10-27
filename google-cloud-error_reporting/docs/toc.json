@@ -19,7 +19,7 @@
     },
     {
       "title": "Railtie",
-      "type": "google/cloud/errorreporting/rails"
+      "type": "google/cloud/errorreporting/railtie"
     }
   ]
 }

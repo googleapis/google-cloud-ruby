@@ -47,7 +47,8 @@ module Google
         # @param [Array<Class>] ignore_classes A single or an array of Exception
         #   classes to ignore
         #
-        # @return A new instance of Middleware
+        # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of
+        #   Middleware
         #
         def initialize app, error_reporting: nil, project_id: nil,
                        service_name: nil, service_version: nil,
