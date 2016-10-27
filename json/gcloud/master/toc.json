@@ -28,16 +28,5 @@
       "contents": "https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/contributing/readme.md"
     }
   ],
-  "services": [
-    {
-      "title": "BigQuery",
-      "type": "google/cloud/bigquery",
-      "nav": [
-        {
-          "title": "Project",
-          "type": "Gcloud"
-        }
-      ]
-    }
-  ]
+  "services": []
 }
