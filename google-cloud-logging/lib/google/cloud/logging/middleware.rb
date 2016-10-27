@@ -77,39 +77,35 @@ module Google
         # both are provided. Otherwise, construct a default monitored resource
         # based on the current environment.
         #
-        # @example
-        #   # If both type and labels are provided, it returns resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type=[given type],
-        #     @labels=[given labels] >
+        # @example If both type and labels are provided, it returns resource:
+        #   rc = Middleware.build_monitored_resource "aws_ec2_instance",
+        #                                            { instance_id: "ec2-id",
+        #                                              aws_account: "aws-id" }
+        #   rc.type   #=> "aws_ec2_instance"
+        #   rc.labels #=> { instance_id: "ec2-id", aws_account: "aws-id" }
         #
-        #   # Otherwise, if running from GAE, returns resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="gae_app",
-        #     @labels={
-        #       module_id: [GAE module name],
-        #       version_id: [GAE module version] }>
+        # @example If running from GAE, returns default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "gae_app"
+        #   rc.labels #=> { module_id: [GAE module name],
+        #             #     version_id: [GAE module version] }
         #
-        #   # If running from GKE, returns resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="container",
-        #     @labels={
-        #       cluster_name: [GKE cluster name],
-        #       namespace_id: [GKE namespace_id] }>
+        # @example If running from GKE, returns default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "container"
+        #   rc.labels #=> { cluster_name: [GKE cluster name],
+        #             #     namespace_id: [GKE namespace_id] }
         #
-        #   # If running from GCE, return resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="gce_instance",
-        #     @labels={
-        #       instance_id: [GCE VM instance id],
-        #       zone: [GCE vm group zone] }>
+        # @example If running from GCE, return default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "gce_instance"
+        #   rc.labels #=> { instance_id: [GCE VM instance id],
+        #             #     zone: [GCE vm group zone] }
         #
-        #   # Otherwise default to "global" type, which means not
-        #   # associated with GCP:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="global",
-        #     @labels={}>
-        #
+        # @example Otherwise default to generic "global" type:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "global"
+        #   rc.labels #=> {}
         #
         # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
         # for a full list of monitoring resources
@@ -135,33 +131,28 @@ module Google
         # @private Extract information from current environment and construct
         # the correct monitoring resource types and labels.
         #
-        # @example
-        #   # If running from GAE, returns resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="gae_app",
-        #     @labels={
-        #       module_id: [GAE module name],
-        #       version_id: [GAE module version] }>
+        # @example If running from GAE, returns default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "gae_app"
+        #   rc.labels #=> { module_id: [GAE module name],
+        #             #     version_id: [GAE module version] }
         #
-        #   # If running from GKE, returns resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="container",
-        #     @labels={
-        #       cluster_name: [GKE cluster name],
-        #       namespace_id: [GKE namespace_id] }>
+        # @example If running from GKE, returns default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "container"
+        #   rc.labels #=> { cluster_name: [GKE cluster name],
+        #             #     namespace_id: [GKE namespace_id] }
         #
-        #   # If running from GCE, return resource:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="gce_instance",
-        #     @labels={
-        #       instance_id: [GCE VM instance id],
-        #       zone: [GCE vm group zone] }>
+        # @example If running from GCE, return default resource:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "gce_instance"
+        #   rc.labels #=> { instance_id: [GCE VM instance id],
+        #             #     zone: [GCE vm group zone] }
         #
-        #   # Otherwise default to "global" type, which means not
-        #   # associated with GCP:
-        #   <Google::Cloud::Logging::Resource
-        #     @type="global",
-        #     @labels={}>
+        # @example Otherwise default to generic "global" type:
+        #   rc = Middleware.build_monitored_resource
+        #   rc.type   #=> "global"
+        #   rc.labels #=> {}
         #
         # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
         # for a full list of monitoring resources
