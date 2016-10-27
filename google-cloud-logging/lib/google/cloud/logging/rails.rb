@@ -50,6 +50,10 @@ module Google
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
           config.respond_to? :google_cloud
         config.google_cloud.logging = ::ActiveSupport::OrderedOptions.new
+        config.google_cloud.logging.monitored_resource =
+          ::ActiveSupport::OrderedOptions.new
+        config.google_cloud.logging.monitored_resource.labels =
+          ::ActiveSupport::OrderedOptions.new
 
         initializer "Stackdriver.Logging", before: :initialize_logger do |app|
           if self.class.use_logging? app.config
@@ -58,11 +62,14 @@ module Google
 
             project_id = log_config.project_id || gcp_config.project_id
             keyfile = log_config.keyfile || gcp_config.keyfile
+            resource_type = log_config.monitored_resource.type
+            resource_labels = log_config.monitored_resource.labels
 
             logging = Google::Cloud::Logging.new project: project_id,
                                                  keyfile: keyfile
             resource =
-              Google::Cloud::Logging::Middleware.build_monitoring_resource
+              Logging::Middleware.build_monitored_resource resource_type,
+                                                           resource_labels
             log_name = log_config.log_name || DEFAULT_LOG_NAME
 
             app.config.logger = Google::Cloud::Logging::Logger.new logging,
