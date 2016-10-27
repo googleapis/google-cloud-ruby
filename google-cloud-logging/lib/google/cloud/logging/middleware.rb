@@ -77,30 +77,39 @@ module Google
         # both are provided. Otherwise, construct a default monitored resource
         # based on the current environment.
         #
-        # If not given both type and label:
-        #   If running from GAE, return resource:
-        #   {
-        #     type: "gae_app", {
+        # @example
+        #   # If both type and labels are provided, it returns resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type=[given type],
+        #     @labels=[given labels] >
+        #
+        #   # Otherwise, if running from GAE, returns resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="gae_app",
+        #     @labels={
         #       module_id: [GAE module name],
-        #       version_id: [GAE module version]
-        #     }
-        #   }
-        #   If running from GKE, return resource:
-        #   {
-        #     type: "container", {
+        #       version_id: [GAE module version] }>
+        #
+        #   # If running from GKE, returns resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="container",
+        #     @labels={
         #       cluster_name: [GKE cluster name],
-        #       namespace_id: [GKE namespace_id]
-        #     }
-        #   }
-        #   If running from GCE, return resource:
-        #   {
-        #     type: "gce_instance", {
+        #       namespace_id: [GKE namespace_id] }>
+        #
+        #   # If running from GCE, return resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="gce_instance",
+        #     @labels={
         #       instance_id: [GCE VM instance id],
-        #       zone: [GCE vm group zone]
-        #     }
-        #   }
-        #   Otherwise default to { type: "global" }, which means not associated
-        #   with GCP.
+        #       zone: [GCE vm group zone] }>
+        #
+        #   # Otherwise default to "global" type, which means not
+        #   # associated with GCP:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="global",
+        #     @labels={}>
+        #
         #
         # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
         # for a full list of monitoring resources
@@ -126,29 +135,33 @@ module Google
         # @private Extract information from current environment and construct
         # the correct monitoring resource types and labels.
         #
-        # If running from GAE, return resource:
-        # {
-        #   type: "gae_app", {
-        #     module_id: [GAE module name],
-        #     version_id: [GAE module version]
-        #   }
-        # }
-        # If running from GKE, return resource:
-        # {
-        #   type: "container", {
-        #     cluster_name: [GKE cluster name],
-        #     namespace_id: [GKE namespace_id]
-        #   }
-        # }
-        # If running from GCE, return resource:
-        # {
-        #   type: "gce_instance", {
-        #     instance_id: [GCE VM instance id],
-        #     zone: [GCE vm group zone]
-        #   }
-        # }
-        # Otherwise default to { type: "global" }, which means not associated
-        # with GCP.
+        # @example
+        #   # If running from GAE, returns resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="gae_app",
+        #     @labels={
+        #       module_id: [GAE module name],
+        #       version_id: [GAE module version] }>
+        #
+        #   # If running from GKE, returns resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="container",
+        #     @labels={
+        #       cluster_name: [GKE cluster name],
+        #       namespace_id: [GKE namespace_id] }>
+        #
+        #   # If running from GCE, return resource:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="gce_instance",
+        #     @labels={
+        #       instance_id: [GCE VM instance id],
+        #       zone: [GCE vm group zone] }>
+        #
+        #   # Otherwise default to "global" type, which means not
+        #   # associated with GCP:
+        #   <Google::Cloud::Logging::Resource
+        #     @type="global",
+        #     @labels={}>
         #
         # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
         # for a full list of monitoring resources
