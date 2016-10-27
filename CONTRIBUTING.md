@@ -121,6 +121,35 @@ $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
 $ rake test:acceptance
 ```
 
+### Integration Tests
+
+The google-cloud-ruby integration tests are end-to-end tests that validate library functionality on real Google Cloud Platform hosting environments. The integration process deploys a test Rack-based application to Google Cloud Platform, then validates google-cloud-ruby code by making requests to this test application.
+
+All integration tests require [Cloud SDK](https://cloud.google.com/sdk/) for deployment. Following the instructions in [Authentication guide](AUTHENTICATION.md) for installation and authentication. Make sure a project ID is set:
+```sh
+$ gcloud config set project PROJECT_ID
+```
+
+#### Running integration tests on Google App Engine 
+
+To run the integration tests on Google App Engine:
+```sh
+$ rake integration:gae
+```
+
+#### Running integration tests on Google Container Engine 
+
+Google Container Engine requires [docker](https://www.docker.com/) for building docker images, and the [Kubernetes commandline tool](http://kubernetes.io/docs/user-guide/kubectl-overview/) for image deployment. Follow the [docker website](https://www.docker.com/products/docker) for installation instructions.
+
+The Kubernetes commandline tool can be installed through Cloud SDK:
+```sh
+$ gcloud components update kubectl
+```
+To run the integration tests on Google Container Engine:
+```sh
+$ rake integration:gke
+```
+
 ## Coding Style
 
 Please follow the established coding style in the library. The style is is largely based on [The Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on seattle-style:

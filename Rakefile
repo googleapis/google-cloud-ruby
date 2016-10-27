@@ -247,7 +247,7 @@ namespace :jsondoc do
     cp "docs/json/home.html", gh_pages + "json", verbose: true
   end
 
-  desc "Assembles google-cloud and stackdriver umbrella packages jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
+  desc "Assembles google-cloud umbrella package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
   task :umbrella, :tag do |t, args|
     tag = args[:tag]
     fail "Missing required parameter 'tag'." if tag.nil?
