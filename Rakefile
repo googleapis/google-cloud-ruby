@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "open3"
+require "json"
 
 task :bundleupdate do
   gems.each do |gem|
@@ -204,13 +205,10 @@ task :jsondoc, :bundleupdate do |t, args|
 end
 
 namespace :jsondoc do
-  # @param tag [String] A valid tag, e.g. "v0.10.0" (legacy), "google-cloud-datastore:v1.2.0", or "master".
   desc "Clones gh-pages branch to a temp dir"
-  task :init, :tag do |t, args|
-    tag = args[:tag]
-    fail "Missing required parameter 'tag'." if tag.nil?
-    gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
-
+  task :clone_gh_pages, [:gh_pages_dir] do |t, args|
+    gh_pages_dir = extract_args args, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
     header "Cloning gh-pages branch to #{gh_pages}"
 
     FileUtils.remove_dir gh_pages if Dir.exists? gh_pages
@@ -228,100 +226,145 @@ namespace :jsondoc do
     mkdir_p gh_pages + "json/stackdriver/master/google/cloud/"
   end
 
-  desc "Copies all gems jsondoc to gh-pages repo in temp dir."
-  task :copy_all, [:tag] => [:init] do |t, args|
-    tag = args[:tag]
-    fail "Missing required parameter 'tag'." if tag.nil?
-    gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
+  desc "Copies a gem's jsondoc to gh-pages repo in temp dir."
+  task :copy, [:gem, :version, :gh_pages_dir] do |t, args|
+    gem, version, gh_pages_dir = extract_args args, :gem, :version, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
 
-    header "Copying all jsondoc for branch/tag '#{tag}' to '#{gh_pages}'"
-    gems.each do |gem|
-      unless Dir.exist? gh_pages + "json/#{gem}"
-        mkdir_p gh_pages + "json/#{gem}", verbose: true
-      end
-      gem_version = tag.include?("/") ? tag.split("/").last : tag
-      rm_rf gh_pages + "json/#{gem}/#{gem_version}", verbose: true
-      mkdir_p gh_pages + "json/#{gem}/"
-      cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{gem_version}", verbose: true
+    header "Copying #{gem} jsondoc for '#{gem}/#{version}' to '#{gh_pages}'"
+
+    unless Dir.exist? gh_pages + "json/#{gem}"
+      mkdir_p gh_pages + "json/#{gem}", verbose: true
     end
+    rm_rf gh_pages + "json/#{gem}/#{version}", verbose: true
+    cp_r "#{gem}/jsondoc", gh_pages + "json/#{gem}/#{version}", verbose: true
+
     cp "docs/manifest.json", gh_pages, verbose: true
     cp "docs/json/home.html", gh_pages + "json", verbose: true
   end
 
-  desc "Assembles google-cloud umbrella package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
-  task :umbrella, :tag do |t, args|
-    tag = args[:tag]
-    fail "Missing required parameter 'tag'." if tag.nil?
-    gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
+  desc "Updates a gem's toc.json with correct tagName."
+  task :toc, [:gem, :version, :gh_pages_dir] => [:copy] do |t, args|
+    gem, version, gh_pages_dir = extract_args args, :gem, :version, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
 
-    require "json"
-    excluded = ["gcloud", "google-cloud", "stackdriver"]
-    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
+    header "Updating toc.json for '#{gem}/#{version}' in '#{gh_pages}'"
+    toc_path = gh_pages + "json/#{gem}/#{version}" + "toc.json"
+    toc_json = JSON.parse File.read(toc_path)
+    toc_json["tagName"] = "#{gem}/#{version}"
+    puts "Updating #{toc_path}"
+    File.write toc_path, JSON.generate(toc_json) + "\n"
+  end
+
+  desc "Assembles the google-cloud package gh-pages jsondoc, from gems' gh-pages jsondoc, using latest versions."
+  task :google_cloud, [:version, :gh_pages_dir] do |t, args|
+    version, gh_pages_dir = extract_args args, :version, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
+
     all_types = []
-    stackdriver_types = []
     google_cloud_json = JSON.parse File.read("google-cloud/jsondoc/google/cloud.json")
-    stackdriver_json = JSON.parse File.read("stackdriver/jsondoc/stackdriver.json")
 
     # Load existing google/cloud.json methods.
     all_google_cloud_methods = [google_cloud_json["methods"]]
-    stackdriver_google_cloud_methods = [stackdriver_json["methods"]]
 
-    header "Copying all jsondoc to google-cloud and stackdriver umbrella package"
+    header "Copying all gems' jsondoc from gh-pages to google-cloud package in gh-pages"
+
+    unless Dir.exist? gh_pages + "json/google-cloud/#{version}/google/cloud/"
+      mkdir_p gh_pages + "json/google-cloud/#{version}/google/cloud/"
+    end
+
+    excluded = ["gcloud", "google-cloud", "stackdriver"]
     gems.each do |gem|
       next if excluded.include? gem
+
+      ver = if version == "master"
+              "master" # When building master, all content should be from master
+            else
+              v = manifest_versions[gem]
+              puts "Using latest #{gem} version '#{v}' (from docs/manifest.json)"
+              v
+            end
+
+      src = gh_pages + "json/#{gem}/#{ver}"
 
       gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
       gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
 
-      unless gem == "google-cloud-core" # There is no `core` subdir
-        rm_rf gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}", verbose: true
-        mkdir_p gh_pages + "json/google-cloud/master/google/cloud/"
-        cp_r "#{gem}/jsondoc/google/cloud/#{gem_shortname}",
-             gh_pages + "json/google-cloud/master/google/cloud/#{gem_shortname}",
+      unless gem == "google-cloud-core" # There is no `core` subdir, copy files from google/cloud/
+        # Copy the contents of subdir for the gem namespace.
+        rm_rf gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}", verbose: true
+        cp_r "#{src}/google/cloud/#{gem_shortname}",
+             gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}",
              verbose: true
       end
-
-      cp Dir["#{gem}/jsondoc/google/cloud/*.json"], gh_pages + "json/google-cloud/master/google/cloud/", verbose: true
-      all_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
-      all_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
-
-      if stackdriver_gems.include? gem
-        cp Dir["#{gem}/jsondoc/google/cloud/*.json"], gh_pages + "json/stackdriver/master/google/cloud/", verbose: true
-        stackdriver_types << JSON.parse(File.read("#{gem}/jsondoc/types.json"))
-        stackdriver_google_cloud_methods << JSON.parse(File.read("#{gem}/jsondoc/google/cloud.json"))["methods"]
-      end
+      # Copy the contents of google/cloud/ for the gem. This also gets the core error files.
+      cp Dir["#{src}/google/cloud/*.json"], gh_pages + "json/google-cloud/#{version}/google/cloud/", verbose: true
+      all_types << JSON.parse(File.read("#{src}/types.json"))
+      all_google_cloud_methods << JSON.parse(File.read("#{src}/google/cloud.json"))["methods"]
     end
 
     header "Merging each gem types.json into #{gh_pages}/json/google-cloud/jsondoc/types.json"
-    File.open(gh_pages + "json/google-cloud/master/types.json", "w") do |f|
-      f.write(all_types.flatten.to_json)
-    end
-
-    header "Merging each Stackdriver gem types.json into #{gh_pages}/json/stackdriver/jsondoc/types.json"
-    File.open(gh_pages + "json/stackdriver/master/types.json", "w") do |f|
-      f.write(stackdriver_types.flatten.to_json)
-    end
+    File.write gh_pages + "json/google-cloud/#{version}/types.json", all_types.flatten.to_json
 
     header "Merging methods from each google/cloud.json into #{gh_pages}/json/google-cloud/jsondoc/google/cloud.json"
     all_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
     google_cloud_json["methods"] = all_google_cloud_methods.flatten
-    File.open(gh_pages + "json/google-cloud/master/google/cloud.json", "w") do |f|
-      f.write(google_cloud_json.to_json)
+    File.write gh_pages + "json/google-cloud/#{version}/google/cloud.json", google_cloud_json.to_json
+  end
+
+  desc "Assembles the stackdriver package jsondoc, from gems' jsondoc to gh-pages repo in temp dir."
+  task :stackdriver, [:version, :gh_pages_dir] do |t, args|
+    version, gh_pages_dir = extract_args args, :version, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
+
+    stackdriver_types = []
+    stackdriver_json = JSON.parse File.read("stackdriver/jsondoc/stackdriver.json")
+
+    stackdriver_google_cloud_methods = [stackdriver_json["methods"]]
+
+    header "Copying all jsondoc from gh-pages to stackdriver package in gh-pages"
+
+    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
+    gems.each do |gem|
+      next unless stackdriver_gems.include? gem
+
+      ver = if version == "master"
+              "master"
+            else
+              v = manifest_versions[gem]
+              puts "Using latest #{gem} version '#{v}' (from docs/manifest.json)"
+              v
+            end
+
+      src = gh_pages + "json/#{gem}/#{ver}"
+
+      gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
+      gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
+      # Copy the contents of subdir for the gem namespace.
+      rm_rf gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}", verbose: true
+      cp_r "#{src}/google/cloud/#{gem_shortname}",
+           gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}",
+           verbose: true
+
+      # Copy the contents of google/cloud/ for the gem.
+      cp Dir["#{src}/google/cloud/*.json"], gh_pages + "json/stackdriver/#{version}/google/cloud/", verbose: true
+      stackdriver_types << JSON.parse(File.read("#{src}/types.json"))
+      stackdriver_google_cloud_methods << JSON.parse(File.read("#{src}/google/cloud.json"))["methods"]
     end
+
+    header "Merging each Stackdriver gem types.json into #{gh_pages}/json/stackdriver/jsondoc/types.json"
+    File.write gh_pages + "json/stackdriver/master/types.json", stackdriver_types.flatten.to_json
 
     header "Merging methods from each Stackdriver google/cloud.json into #{gh_pages}/json/stackdriver/jsondoc/google/cloud.json"
     stackdriver_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
     stackdriver_json["methods"] = stackdriver_google_cloud_methods.flatten
-    File.open(gh_pages + "json/stackdriver/master/google/cloud.json", "w") do |f|
-      f.write(stackdriver_json.to_json)
-    end
+    File.write gh_pages + "json/stackdriver/master/google/cloud.json", stackdriver_json.to_json
   end
 
-  desc "Publishes assembled jsondoc to gh-pages"
-  task :publish, [:tag] => [:init] do |t, args|
-    tag = args[:tag]
-    fail "Missing required parameter 'tag'." if tag.nil?
-    gh_pages = Pathname.new(Dir.home) + "tmp/#{tag}-gh-pages"
+  desc "Publishes the jsondoc changes in the tmp dir cloned repo, gh-pages"
+  task :publish, [:tag, :gh_pages_dir] do |t, args|
+    tag, gh_pages_dir = extract_args args, :tag, :gh_pages_dir
+    gh_pages = gh_pages_path gh_pages_dir
 
     git_ref = tag == "master" ? `git rev-parse --short HEAD`.chomp : tag
     # Change to gh-pages
@@ -341,7 +384,7 @@ namespace :jsondoc do
     end
   end
 
-  desc "Publishes the jsondoc for master branch to the gh-pages branch"
+  desc "Generates the jsondoc for master branch for all gems, updates google-cloud with all gems' master branch, publishes."
   task :master do
     unless ENV["GH_OAUTH_TOKEN"]
       # only check this if we are not running on travis
@@ -356,20 +399,25 @@ namespace :jsondoc do
         exit
       end
     end
+
+    gh_pages_dir = "all-master-gh-pages"
+
     Rake::Task["jsondoc"].invoke
-    Rake::Task["jsondoc:copy_all"].invoke("master")
-    Rake::Task["jsondoc:umbrella"].invoke("master")
-    Rake::Task["jsondoc:publish"].invoke("master")
+    Rake::Task["jsondoc:clone_gh_pages"].invoke(gh_pages_dir)
+    gems.each do |gem|
+      Rake::Task["jsondoc:toc"].invoke(gem, "master", gh_pages_dir)
+    end
+    Rake::Task["jsondoc:google_cloud"].invoke("master", gh_pages_dir)
+    # TODO: Uncomment following line when ready to release stackdriver gem
+    # Rake::Task["jsondoc:stackdriver"].invoke("master", gh_pages_dir)
+    Rake::Task["jsondoc:publish"].invoke("master", gh_pages_dir)
   end
 
-  desc "Publishes the jsondoc for the tag to the gh-pages branch"
-  task :tag, :tag do |t, args|
-    tag = args[:tag]
-    fail "Missing required parameter 'tag'." if tag.nil?
-
-    fail "'tag' must be in the format <gem>/<version>" unless tag.include?("/")
-    gem_name, gem_version =  tag.split("/")
-
+  # Usage: rake jsondoc:package["google-cloud-vision/v0.21.1"]
+  desc "Generates the jsondoc for the gem and version in the given tag, updates google-cloud with all gems' latest versions, publishes."
+  task :package, [:tag] do |t, args|
+    tag = extract_args args, :tag
+    gem, version = split_tag tag
 
     # Verify the tag exists
     tag_check = `git show-ref --tags | grep #{tag}`.chomp
@@ -377,37 +425,81 @@ namespace :jsondoc do
       fail "Cannot find the tag '#{tag}'."
     end
 
-    git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
-    if ENV["GH_OAUTH_TOKEN"]
-      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
-    end
-
-    tag_repo  =  Pathname.new(Dir.home) + "tmp/#{tag}-repo"
-    FileUtils.remove_dir tag_repo if Dir.exists? tag_repo
-    FileUtils.mkdir_p tag_repo
-
-    header "Cloning tag #{tag} to #{tag_repo}"
-
-    # checkout the tag repo
-    puts "git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null"
-    puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null`
-    # build the docs in the gem dir in the tag repo
-    Dir.chdir tag_repo + gem_name do
+    Dir.chdir gem do
       Bundler.with_clean_env do
-        # create the docs
-        puts "bundle install --path .bundle"
-        puts `bundle install --path .bundle`
-        puts "bundle exec rake jsondoc"
-        puts `bundle exec rake jsondoc`
+        header "JSONDOC FOR #{gem}"
+        # TODO: checkout tag repo (see TODO below), and execute following command in that repo.
+        sh "bundle exec rake jsondoc"
       end
     end
 
-    # TODO
-    # 1. copy the jsondoc from tag repo gem dir (above) to gh-pages dir (correct version dir) created in init
-    # 2. rebuild umbrella latest version with jsondoc from tag repo gem dir
-    # 3. publish
+    gh_pages_dir = "#{gem}-#{version}-gh-pages"
 
+    Rake::Task["jsondoc:clone_gh_pages"].invoke(gh_pages_dir)
+    Rake::Task["jsondoc:toc"].invoke(gem, version, gh_pages_dir)
+
+    excluded_google_cloud_gems = ["gcloud", "stackdriver"]
+    unless excluded_google_cloud_gems.include? gem
+      google_cloud_version = manifest_versions["google-cloud"]
+      header "Assembling jsondoc for google-cloud package"
+      puts "Latest google-cloud package version is '#{google_cloud_version}' (from docs/manifest.json)."
+      Rake::Task["jsondoc:google_cloud"].invoke(google_cloud_version, gh_pages_dir)
+    end
+
+    # TODO: Uncomment following lines when ready to release stackdriver gem
+    # stackdriver_gems = ["stackdriver", "google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
+    # if stackdriver_gems.include? gem
+    #   stackdriver_version = manifest_versions["stackdriver"]
+    #   header "Assembling jsondoc for stackdriver package"
+    #   puts "Latest stackdriver package version is '#{stackdriver_version}' (from docs/manifest.json)"
+    #   Rake::Task["jsondoc:stackdriver"].invoke(stackdriver_version, gh_pages_dir)
+    # end
+
+    Rake::Task["jsondoc:publish"].invoke(tag, gh_pages_dir)
   end
+
+  # TODO: Use checkout of tag repo, below, in jsondoc:package, then delete.
+  # desc "[Deprecated] Publishes the jsondoc for the tag to the gh-pages branch"
+  # task :tag, :tag do |t, args|
+  #   tag = args[:tag]
+  #   fail "Missing required parameter 'tag'." if tag.nil?
+  #
+  #   fail "'tag' must be in the format <gem>/<version>" unless tag.include?("/")
+  #   gem_name, version =  tag.split("/")
+  #
+  #
+  #   # Verify the tag exists
+  #   tag_check = `git show-ref --tags | grep #{tag}`.chomp
+  #   if tag_check.empty?
+  #     fail "Cannot find the tag '#{tag}'."
+  #   end
+  #
+  #   git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
+  #   if ENV["GH_OAUTH_TOKEN"]
+  #     git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
+  #   end
+  #
+  #   tag_repo  =  Pathname.new(Dir.home) + "tmp/#{tag}-repo"
+  #   FileUtils.remove_dir tag_repo if Dir.exists? tag_repo
+  #   FileUtils.mkdir_p tag_repo
+  #
+  #   header "Cloning tag #{tag} to #{tag_repo}"
+  #
+  #   # checkout the tag repo
+  #   puts "git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null"
+  #   puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null`
+  #   # build the docs in the gem dir in the tag repo
+  #   Dir.chdir tag_repo + gem_name do
+  #     Bundler.with_clean_env do
+  #       # create the docs
+  #       puts "bundle install --path .bundle"
+  #       puts `bundle install --path .bundle`
+  #       puts "bundle exec rake jsondoc"
+  #       puts `bundle exec rake jsondoc`
+  #     end
+  #   end
+  #
+  # end
 end
 
 desc "Start an interactive shell."
@@ -483,7 +575,7 @@ namespace :travis do
         m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
         if m # We have a match!
           Rake::Task["travis:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
-          # TODO: Call JSONDOC task for release here
+          Rake::Task["jsondoc:package"].invoke tag
         end
       end
     end
@@ -663,6 +755,15 @@ def header str, token = "#"
   puts ""
 end
 
+# Returns [gem_name, gem_version]
+def split_tag str
+  return [nil, str] if str == "master" # Support use of "master" even without gem name
+  fail "'tag' must be in the format <gem>/<version> Actual: #{str}" unless str.include?("/")
+  parts = str.split("/")
+  fail "'tag' must be in the format <gem>/<version>. Actual: #{str}" unless parts.length == 2
+  parts
+end
+
 ##
 # Run rake task if exists on commandline. Used to run rake tasks in
 # subdirectories.
@@ -670,6 +771,29 @@ def run_task_if_exists task_name, params = ""
   if `bundle exec rake --tasks #{task_name}` =~ /#{task_name}[^:]/
     sh "bundle exec rake #{task_name}[#{params}]"
   end
+end
+
+def gh_pages_path gh_pages_dir
+  Pathname.new(Dir.home) + "tmp" + gh_pages_dir
+end
+
+def manifest_versions
+  @manifest_versions ||= read_docs_manifest_versions
+end
+
+def read_docs_manifest_versions
+  manifest = JSON.parse File.read("docs/manifest.json")
+  manifest["modules"].each_with_object({}) do |gem, memo|
+    memo[gem["name"]] = gem["versions"].first
+  end
+end
+
+def extract_args args, *keys
+  vals = keys.map do |key|
+    fail "Missing required parameter '#{key}'." unless args[key]
+    args[key]
+  end
+  vals.length > 1 ? vals : vals.first
 end
 
 task :default => :test
