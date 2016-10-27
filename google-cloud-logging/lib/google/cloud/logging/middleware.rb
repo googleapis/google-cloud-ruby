@@ -73,9 +73,9 @@ module Google
         end
 
         ##
-        # Construct monitoring resource based on given type and label (both are
-        # present). Otherwise construct a default monitoring resource based on
-        # current environment.
+        # Construct a monitored resource based on the given type and label if
+        # both are provided. Otherwise, construct a default monitored resource
+        # based on the current environment.
         #
         # If not given both type and label:
         #   If running from GAE, return resource:

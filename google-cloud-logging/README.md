@@ -46,7 +46,7 @@ logging.write_entries entry
 
 ## Rails Integration
 
-This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it substitutes default Rails logger with an instance of Google::Cloud::Logging::logger. Then all consequent log entries will be submitted to Stackdriver Logging service. 
+This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it sets an instance of Google::Cloud::Logging::Logger as the default Rails logger. Then all consequent log entries will be submitted to the Stackdriver Logging service. 
 
 To do this, simply add this line to config/application.rb:
 ```ruby
