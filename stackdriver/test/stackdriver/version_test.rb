@@ -17,6 +17,6 @@ require "stackdriver/version"
 
 describe Stackdriver do
   it "has a version" do
-    Stackdriver::VERSION.wont_be :nil?
+    Stackdriver::VERSION.wont_be_nil
   end
 end

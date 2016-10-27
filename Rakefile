@@ -507,8 +507,7 @@ namespace :integration do
   desc "Run integration:gae for all gems"
   task :gae, :project_uri do |t, args|
     require_relative "integration/helper"
-    require "mkmf"
-    if find_executable "gcloud"
+    if executable_exists? "gcloud"
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
         "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
@@ -537,11 +536,10 @@ namespace :integration do
   desc "Run integration:gke for all gems"
   task :gke do
     require_relative "integration/helper"
-    require "mkmf"
-    if find_executable("gcloud")&& find_executable("kubectl")
+    if executable_exists?("gcloud")&& executable_exists?("kubectl")
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
-	"sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
+        "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
 
       build_docker_image project_id do |image_name, image_location|
         header "Built docker image #{image_name}"

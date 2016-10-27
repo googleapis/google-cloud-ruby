@@ -25,7 +25,7 @@ def keep_trying_till_true timeout = 30
     if yield
       break
     elsif (Time.now - t_begin) > timeout
-      raise RuntimeError, "Timeout after trying for #{timeout} seconds"
+      fail "Timeout after trying for #{timeout} seconds"
     else
       sleep 1
     end
@@ -64,8 +64,8 @@ def build_docker_image project_id
   begin
     # Create default Dockerfile if one doesn't already exist
     if File.file? "Dockerfile"
-      fail "The Dockerfile file already exist. Please omit it and " \
-      "try again."
+      fail "The Dockerfile file already exists. Please omit it and " \
+        "try again."
     else
       FileUtils.cp "integration/Dockerfile.example", "Dockerfile"
       temp_dockerfile = true
@@ -151,4 +151,10 @@ end
 def gcloud_project_id
   stdout = Open3.capture3("gcloud config list project").first
   stdout.scan(/project = (.*)/).first.first
+end
+
+##
+# Check if an executable exists
+def executable_exists? executable
+  !`which #{executable}`.empty?
 end
