@@ -14,7 +14,6 @@
 
 
 require "google/cloud/vision/location"
-require "google/apis/vision_v1"
 require "stringio"
 require "base64"
 

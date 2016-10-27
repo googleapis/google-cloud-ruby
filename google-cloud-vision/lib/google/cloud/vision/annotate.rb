@@ -14,7 +14,6 @@
 
 
 require "google/cloud/vision/image"
-require "google/apis/vision_v1"
 
 module Google
   module Cloud
