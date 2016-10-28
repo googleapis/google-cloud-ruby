@@ -120,7 +120,7 @@ namespace :acceptance do
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "ACCEPTANCE TESTS FOR #{gem}"
-          run_task_if_exists "acceptance"
+          sh "bundle exec rake acceptance -v"
         end
       end
     end
@@ -429,7 +429,7 @@ namespace :travis do
       # Decrypt the keyfile
       `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
 
-      Rake::Task["acceptance"].invoke
+      Rake::Task["acceptance:each"].invoke
     else
       header "Skipping acceptance tests"
     end
@@ -496,7 +496,7 @@ namespace :appveyor do
       header "Running acceptance tests on AppVeyor"
       # Fix for SSL certificates on AppVeyor
       ENV["SSL_CERT_FILE"] = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
-      Rake::Task["acceptance"].invoke
+      Rake::Task["acceptance:each"].invoke
     else
       header "Skipping acceptance tests on AppVeyor"
     end

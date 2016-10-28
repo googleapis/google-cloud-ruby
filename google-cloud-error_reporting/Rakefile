@@ -21,6 +21,23 @@ task :test do
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+  end
+end
+
+desc "Runs acceptance tests."
+task :acceptance do
+  puts "The google-cloud-error_reporting gem does not have acceptance tests."
+end
+
+namespace :acceptance do
+  desc "Runs acceptance cleanup."
+  task :cleanup do
+  end
+end
+
 task :rubocop do
 end
 

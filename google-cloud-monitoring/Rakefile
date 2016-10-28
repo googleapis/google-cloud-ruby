@@ -19,13 +19,29 @@ require "bundler/gem_tasks"
 task :test do
 end
 
-task :rubocop do
-end
-
 namespace :test do
   desc "Runs tests with coverage."
   task :coverage do
   end
+end
+
+# Acceptance tests
+desc "Runs the monitoring acceptance tests."
+task :acceptance do
+  puts "The google-cloud-monitoring gem does not have acceptance tests."
+end
+
+namespace :acceptance do
+  desc "Runs acceptance tests with coverage."
+  task :coverage do
+  end
+
+  desc "Runs acceptance cleanup."
+  task :cleanup do
+  end
+end
+
+task :rubocop do
 end
 
 require "yard"
