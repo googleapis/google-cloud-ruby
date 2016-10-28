@@ -28,30 +28,6 @@ namespace :test do
   end
 end
 
-# Acceptance tests
-desc "Runs the monitoring acceptance tests."
-task :acceptance, :project, :keyfile do |_, args|
-end
-
-namespace :acceptance do
-  desc "Runs acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
-  end
-
-
-  desc "Runs acceptance cleanup."
-  task :cleanup do
-  end
-end
-
-desc "Runs yard-doctest example tests."
-task :doctest do
-end
-
-desc "Start an interactive shell."
-task :console do
-end
-
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
