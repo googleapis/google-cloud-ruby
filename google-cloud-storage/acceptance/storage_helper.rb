@@ -91,8 +91,14 @@ def clean_up_storage_buckets
   puts "Cleaning up storage buckets after tests."
   $bucket_names.each do |bucket_name|
     if b = $storage.bucket(bucket_name)
-      b.files.all(&:delete)
-      b.delete
+      begin
+        b.files.all &:delete
+        # Add one second delay between bucket deletes to avoid rate limiting errors
+        sleep 1
+        b.delete
+      rescue => e
+        puts "Error while cleaning up bucket #{b.name}\n\n#{e}"
+      end
     end
   end
 rescue => e
