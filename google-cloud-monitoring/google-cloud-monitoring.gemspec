@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'google-gax', '~> 0.6.0'
   s.add_dependency 'grpc', '~> 1.0'
-  s.add_dependency 'googleauth', '~> 0.5.1'
   s.add_dependency 'googleapis-common-protos', '~> 1.3.1'
 
   s.add_development_dependency 'bundler', '~> 1.9'
