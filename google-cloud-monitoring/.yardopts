@@ -1,0 +1,6 @@
+--no-private
+--title=Stackdriver Monitoring
+
+./lib/**/*.rb
+-
+README.md
