@@ -24,5 +24,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'googleapis-common-protos', '~> 1.3.1'
 
   s.add_development_dependency 'bundler', '~> 1.9'
-  s.add_development_dependency 'rake', '~> 10.4'
 end

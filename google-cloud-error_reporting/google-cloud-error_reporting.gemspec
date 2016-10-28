@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'google-cloud-core', '~> 0.21.0'
 
   s.add_development_dependency 'bundler', '~> 1.9'
-  s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency "minitest", "~> 5.9"
   s.add_development_dependency "minitest-autotest", "~> 1.0"
   s.add_development_dependency "minitest-focus", "~> 1.1"
