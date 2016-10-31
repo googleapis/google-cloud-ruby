@@ -96,7 +96,7 @@ module Google
         #   start with a letter, and contain only letters ([A-Za-z]), numbers
         #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
         #   (+) or percent signs (%). It must be between 3 and 255 characters in
-        #   length, and it must not start with "goog".
+        #   length, and it must not start with "goog". Required.
         # @param [Integer] deadline The maximum number of seconds after a
         #   subscriber receives a message before the subscriber should
         #   acknowledge the message.
@@ -113,15 +113,6 @@ module Google
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub"
         #   puts sub.name # => "my-topic-sub"
-        #
-        # @example The name is optional, and will be generated if not given:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   topic = pubsub.topic "my-topic"
-        #   sub = topic.subscribe "my-topic-sub"
-        #   puts sub.name # => "generated-sub-name"
         #
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
         #   require "google/cloud/pubsub"
