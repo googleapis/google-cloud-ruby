@@ -12,10 +12,13 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
   gem.license       = "Apache-2.0"
 
-  gem.files         = `git ls-files -- lib/*`.split("\n")
+  gem.files         = `git ls-files -- lib/*`.split("\n") +
+                      ["README.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.0.0"
+
+  gem.add_dependency "googleauth", "~> 0.5.1"
 
   gem.add_development_dependency "minitest", "~> 5.9"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

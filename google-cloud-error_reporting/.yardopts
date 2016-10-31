@@ -1,0 +1,6 @@
+--no-private
+--title=Stackdriver Error Reporting
+
+./lib/**/*.rb
+-
+README.md
