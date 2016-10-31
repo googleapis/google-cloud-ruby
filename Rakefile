@@ -435,6 +435,40 @@ namespace :travis do
     end
   end
 
+  desc "Build for Travis-CI"
+  task :build do
+    run_acceptance = false
+    if ENV["TRAVIS_BRANCH"] == "master" &&
+       ENV["TRAVIS_PULL_REQUEST"] == "false"
+      # Decrypt the keyfile
+      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
+      run_acceptance = true
+    end
+
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          header "BUILDING #{gem}"
+          sh "bundle update"
+          header "rubocop", "*"
+          run_task_if_exists "rubocop"
+          header "jsondoc", "*"
+          run_task_if_exists "jsondoc"
+          header "doctest", "*"
+          run_task_if_exists "doctest"
+          header "test", "*"
+          sh "bundle exec rake test"
+          if run_acceptance
+            header "acceptance", "*"
+            sh "bundle exec rake acceptance -v"
+          end
+        end
+      end
+    end
+    # Build coverage report
+    Rake::Task["test:coveralls"].invoke
+  end
+
   desc "Runs post-build logic on Travis-CI."
   task :post do
     # We don't run post-build on pull requests
@@ -499,6 +533,37 @@ namespace :appveyor do
       Rake::Task["acceptance:each"].invoke
     else
       header "Skipping acceptance tests on AppVeyor"
+    end
+  end
+
+  desc "Build for AppVeyor"
+  task :build do
+    run_acceptance = false
+    if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
+      # Fix for SSL certificates on AppVeyor
+      ENV["SSL_CERT_FILE"] = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
+      run_acceptance = true
+    end
+
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          header "BUILDING #{gem}"
+          sh "bundle update"
+          header "rubocop", "*"
+          run_task_if_exists "rubocop"
+          header "jsondoc", "*"
+          run_task_if_exists "jsondoc"
+          header "doctest", "*"
+          run_task_if_exists "doctest"
+          header "test", "*"
+          sh "bundle exec rake test"
+          if run_acceptance
+            header "acceptance", "*"
+            sh "bundle exec rake acceptance -v"
+          end
+        end
+      end
     end
   end
 end
@@ -585,12 +650,12 @@ def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
 
-def header str
+def header str, token = "#"
   line_length = str.length + 8
   puts ""
-  puts "#" * line_length
-  puts "### #{str} ###"
-  puts "#" * line_length
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
   puts ""
 end
 

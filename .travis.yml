@@ -10,11 +10,7 @@ rvm:
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" && "$TRAVIS_RUBY_VERSION" == "2.0.0-p648" ]]; then rvm reinstall 2.0.0-p643 --disable-binary; fi
 script:
-- bundle exec rake rubocop[yes]
-- bundle exec rake jsondoc
-- bundle exec rake doctest
-- bundle exec rake test:coveralls
-- bundle exec rake travis:acceptance
+- bundle exec rake travis:build
 after_success:
 - bundle exec rake travis:post
 matrix:
