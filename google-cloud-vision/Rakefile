@@ -42,6 +42,9 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["VISION_PROJECT"] = project
   ENV["VISION_KEYFILE"] = nil
   ENV["VISION_KEYFILE_JSON"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE"] = nil
+  ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }

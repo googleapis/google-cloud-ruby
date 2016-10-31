@@ -42,6 +42,9 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["SPEECH_PROJECT"] = project
   ENV["SPEECH_KEYFILE"] = nil
   ENV["SPEECH_KEYFILE_JSON"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE"] = nil
+  ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
