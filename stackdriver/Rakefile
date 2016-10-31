@@ -50,7 +50,6 @@ end
 
 desc "Runs yard-doctest example tests."
 task :doctest do
-  sh "bundle exec yard doctest"
 end
 
 desc "Start an interactive shell."

@@ -38,6 +38,10 @@ namespace :acceptance do
   end
 end
 
+desc "Runs yard-doctest example tests."
+task :doctest do
+end
+
 task :rubocop do
 end
 

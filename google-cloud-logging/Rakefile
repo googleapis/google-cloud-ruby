@@ -91,6 +91,10 @@ namespace :acceptance do
   end
 end
 
+desc "Runs yard-doctest example tests."
+task :doctest do
+end
+
 namespace :integration do
   desc "Runs integration tests against GAE"
   task :gae, :project_uri do |t, args|
