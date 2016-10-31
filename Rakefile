@@ -450,16 +450,16 @@ namespace :travis do
         Bundler.with_clean_env do
           header "BUILDING #{gem}"
           sh "bundle update"
-          header "rubocop", "*"
+          header "#{gem} rubocop", "*"
           run_task_if_exists "rubocop"
-          header "jsondoc", "*"
+          header "#{gem} jsondoc", "*"
           run_task_if_exists "jsondoc"
-          header "doctest", "*"
+          header "#{gem} doctest", "*"
           run_task_if_exists "doctest"
-          header "test", "*"
+          header "#{gem} test", "*"
           sh "bundle exec rake test"
           if run_acceptance
-            header "acceptance", "*"
+            header "#{gem} acceptance", "*"
             sh "bundle exec rake acceptance -v"
           end
         end
@@ -550,16 +550,16 @@ namespace :appveyor do
         Bundler.with_clean_env do
           header "BUILDING #{gem}"
           sh "bundle update"
-          header "rubocop", "*"
+          header "#{gem} rubocop", "*"
           run_task_if_exists "rubocop"
-          header "jsondoc", "*"
+          header "#{gem} jsondoc", "*"
           run_task_if_exists "jsondoc"
-          header "doctest", "*"
+          header "#{gem} doctest", "*"
           run_task_if_exists "doctest"
-          header "test", "*"
+          header "#{gem} test", "*"
           sh "bundle exec rake test"
           if run_acceptance
-            header "acceptance", "*"
+            header "#{gem} acceptance", "*"
             # Fix acceptance/data symlinks on windows
             sh "rm -rf acceptance\\data"
             sh "mklink /j acceptance\\data ..\\acceptance\\data"
