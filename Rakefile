@@ -550,6 +550,13 @@ namespace :appveyor do
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "BUILDING #{gem}"
+
+          # Fix acceptance/data symlinks on windows
+          require "fileutils"
+          FileUtils.mkdir_p "acceptance"
+          FileUtils.rm_f "acceptance/data"
+          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
+
           sh "bundle update"
           header "#{gem} rubocop", "*"
           run_task_if_exists "rubocop"
@@ -561,9 +568,6 @@ namespace :appveyor do
           sh "bundle exec rake test"
           if run_acceptance
             header "#{gem} acceptance", "*"
-            # Fix acceptance/data symlinks on windows
-            sh "rm -rf acceptance\\data"
-            sh "call mklink /j acceptance\\data ..\\acceptance\\data"
             sh "bundle exec rake acceptance -v"
           end
         end
