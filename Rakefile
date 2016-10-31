@@ -598,7 +598,7 @@ end
 # Run rake task if exists on commandline. Used to run rake tasks in
 # subdirectories.
 def run_task_if_exists task_name, params = ""
-  if `rake --tasks #{task_name}` =~ /#{task_name}[^:]/
+  if `bundle exec rake --tasks #{task_name}` =~ /#{task_name}[^:]/
     sh "bundle exec rake #{task_name}[#{params}]"
   end
 end
