@@ -563,7 +563,7 @@ namespace :appveyor do
             header "#{gem} acceptance", "*"
             # Fix acceptance/data symlinks on windows
             sh "rm -rf acceptance\\data"
-            sh "mklink /j acceptance\\data ..\\acceptance\\data"
+            sh "call mklink /j acceptance\\data ..\\acceptance\\data"
             sh "bundle exec rake acceptance -v"
           end
         end
