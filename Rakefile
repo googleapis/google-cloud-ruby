@@ -471,7 +471,7 @@ namespace :travis do
       Bundler.with_clean_env do
         sh "rm -rf pkg"
         sh "bundle update"
-        sh "rake build"
+        sh "bundle exec rake build"
       end
     end
 
