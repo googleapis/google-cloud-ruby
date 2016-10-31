@@ -56,6 +56,16 @@
       ]
     },
     {
+      "title": "Core",
+      "type": "google/cloud/errors",
+      "nav": [
+        {
+          "title": "Errors",
+          "type": "google/cloud/errors"
+        }
+      ]
+    },
+    {
       "title": "Datastore",
       "type": "google/cloud/datastore",
       "nav": [
