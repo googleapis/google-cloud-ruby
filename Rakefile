@@ -539,10 +539,11 @@ namespace :appveyor do
 
   desc "Build for AppVeyor"
   task :build do
+    # Retrieve the SSL certificate from google-api-client gem
+    ssl_cert_file = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
+
     run_acceptance = false
     if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
-      # Fix for SSL certificates on AppVeyor
-      ENV["SSL_CERT_FILE"] = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
       run_acceptance = true
     end
 
@@ -567,6 +568,9 @@ namespace :appveyor do
           header "#{gem} test", "*"
           sh "bundle exec rake test"
           if run_acceptance
+            # Set the SSL certificate so connections can be made
+            ENV["SSL_CERT_FILE"] = ssl_cert_file
+
             header "#{gem} acceptance", "*"
             sh "bundle exec rake acceptance -v"
           end
