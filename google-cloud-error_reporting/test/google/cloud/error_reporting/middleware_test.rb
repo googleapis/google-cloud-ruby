@@ -13,10 +13,8 @@
 # limitations under the License.
 
 
-
-require "ostruct"
-require "minitest/focus"
-require 'google/cloud/error_reporting/middleware'
+require "helper"
+require "google/cloud/error_reporting/middleware"
 require "action_dispatch"
 
 describe Google::Cloud::ErrorReporting::Middleware do

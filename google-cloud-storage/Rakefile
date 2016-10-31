@@ -82,7 +82,16 @@ namespace :acceptance do
     $LOAD_PATH.unshift "lib"
     require "google/cloud/storage"
     puts "Cleaning up Storage buckets and files"
-    Google::Cloud.storage.buckets.all { |b| b.files.all(&:delete); b.delete }
+    Google::Cloud.storage.buckets.all do |b|
+      begin
+        b.files.all &:delete
+        # Add one second delay between bucket deletes to avoid rate limiting errors
+        sleep 1
+        b.delete
+      rescue => e
+        puts "Error while cleaning up bucket #{b.name}\n\n#{e}"
+      end
+    end
   end
 end
 

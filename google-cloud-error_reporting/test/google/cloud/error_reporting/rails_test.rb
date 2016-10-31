@@ -13,9 +13,7 @@
 # limitations under the License.
 
 
-require "minitest/autorun"
-require "minitest/rg"
-require "minitest/focus"
+require "helper"
 require "rails"
 require "rails/railtie"
 require "active_support/ordered_options"

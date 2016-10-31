@@ -23,6 +23,17 @@ namespace :test do
   end
 end
 
+desc "Runs acceptance tests."
+task :acceptance do
+  puts "The gcloud gem does not have acceptance tests."
+end
+
+namespace :acceptance do
+  desc "Runs acceptance cleanup."
+  task :cleanup do
+  end
+end
+
 desc "Start an interactive shell."
 task :console do
   require "irb"

@@ -17,11 +17,7 @@ before_test:
   - bundle -v
 
 test_script:
-  - bundle exec rake rubocop[yes]
-  - bundle exec rake jsondoc
-  - bundle exec rake doctest
-  - bundle exec rake test
-  - bundle exec rake appveyor:acceptance
+  - bundle exec rake appveyor:build
 
 notifications:
   - provider: Slack
