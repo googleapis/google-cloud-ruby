@@ -30,6 +30,7 @@ end
 
 desc "Runs tests for all gems."
 task :test do
+  require "active_support/all"
   gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/test"
     Dir.glob("#{gem}/test/**/*_test.rb").each { |file| require_relative file }
