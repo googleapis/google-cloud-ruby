@@ -102,7 +102,7 @@ module Google
           #   changes = zone.changes
           #
           #   changes.all do |change|
-          #     puts change.name
+          #     puts change.id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -113,7 +113,7 @@ module Google
           #   changes = zone.changes
           #
           #   all_names = changes.all.map do |change|
-          #     change.name
+          #     change.id
           #   end
           #
           # @example Limit the number of API calls made:
@@ -124,7 +124,7 @@ module Google
           #   changes = zone.changes
           #
           #   changes.all(request_limit: 10) do |change|
-          #     puts change.name
+          #     puts change.id
           #   end
           #
           def all request_limit: nil
