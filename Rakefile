@@ -560,6 +560,9 @@ namespace :appveyor do
           sh "bundle exec rake test"
           if run_acceptance
             header "acceptance", "*"
+            # Fix acceptance/data symlinks on windows
+            sh "rm -rf acceptance\\data"
+            sh "mklink /j acceptance\\data ..\\acceptance\\data"
             sh "bundle exec rake acceptance -v"
           end
         end
