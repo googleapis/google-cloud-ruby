@@ -1,75 +1,20 @@
 {
-  "guides": [],
+  "guides": [
+    {
+      "title": "Error Reporting Instrumentation",
+      "id": "error_reporting_instrumentation",
+      "contents": "google/cloud/errorreporting/instrumentation.md"
+    },
+    {
+      "title": "Logging Instrumentation",
+      "id": "logging_instrumentation",
+      "contents": "google/cloud/logging/instrumentation.md"
+    }
+  ],
   "services": [
     {
-      "title": "stackdriver",
+      "title": "Stackdriver",
       "type": "stackdriver"
-    },
-    {
-      "title": "Error Reporting",
-      "type": "google/cloud/errorreporting/v1beta1",
-      "nav": [
-        {
-          "title": "ReportErrorsServiceApi",
-          "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceapi"
-        },
-        {
-          "title": "ErrorStatsServiceApi",
-          "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceapi"
-        },
-        {
-          "title": "ErrorGroupServiceApi",
-          "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceapi"
-        },
-        {
-          "title": "Middleware",
-          "type": "google/cloud/errorreporting/middleware"
-        },
-        {
-          "title": "Railtie",
-          "type": "google/cloud/errorreporting/railtie"
-        }
-      ]
-    },
-    {
-      "title": "Logging",
-      "type": "google/cloud/logging",
-      "nav": [
-        {
-          "title": "Project",
-          "type": "google/cloud/logging/project"
-        },
-        {
-          "title": "Entry",
-          "type": "google/cloud/logging/entry"
-        },
-        {
-          "title": "Resource",
-          "type": "google/cloud/logging/resource"
-        },
-        {
-          "title": "Middleware",
-          "type": "google/cloud/logging/middleware"
-        },
-        {
-          "title": "Railtie",
-          "type": "google/cloud/logging/railtie"
-        }
-      ]
-    },
-    {
-      "title": "Monitoring",
-      "type": "google/cloud/monitoring/v3",
-      "nav": [
-        {
-          "title": "GroupServiceApi",
-          "type": "google/cloud/monitoring/v3/groupserviceapi"
-        },
-        {
-          "title": "MetricServiceApi",
-          "type": "google/cloud/monitoring/v3/metricserviceapi"
-        }
-      ]
     }
   ]
 }

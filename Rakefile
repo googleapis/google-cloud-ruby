@@ -221,9 +221,6 @@ namespace :jsondoc do
     end
     puts "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
     puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
-
-    # Create <gh_pages>/json/stackdriver/master/google/cloud/ directory
-    mkdir_p gh_pages + "json/stackdriver/master/google/cloud/"
   end
 
   desc "Copies a gem's jsondoc to gh-pages repo in temp dir."
@@ -303,10 +300,10 @@ namespace :jsondoc do
       all_google_cloud_methods << JSON.parse(File.read("#{src}/google/cloud.json"))["methods"]
     end
 
-    header "Merging each gem types.json into #{gh_pages}/json/google-cloud/jsondoc/types.json"
+    header "Merging each gem types.json into #{gh_pages}/json/google-cloud/#{version}/types.json"
     File.write gh_pages + "json/google-cloud/#{version}/types.json", all_types.flatten.to_json
 
-    header "Merging methods from each google/cloud.json into #{gh_pages}/json/google-cloud/jsondoc/google/cloud.json"
+    header "Merging methods from each google/cloud.json into #{gh_pages}/json/google-cloud/#{version}/google/cloud.json"
     all_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
     google_cloud_json["methods"] = all_google_cloud_methods.flatten
     File.write gh_pages + "json/google-cloud/#{version}/google/cloud.json", google_cloud_json.to_json
@@ -317,12 +314,11 @@ namespace :jsondoc do
     version, gh_pages_dir = extract_args args, :version, :gh_pages_dir
     gh_pages = gh_pages_path gh_pages_dir
 
-    stackdriver_types = []
-    stackdriver_json = JSON.parse File.read("stackdriver/jsondoc/stackdriver.json")
+    header "Copying reference docs from gh-pages to stackdriver package in gh-pages"
 
-    stackdriver_google_cloud_methods = [stackdriver_json["methods"]]
-
-    header "Copying all jsondoc from gh-pages to stackdriver package in gh-pages"
+    unless Dir.exist? gh_pages + "json/stackdriver/#{version}/google/cloud"
+      mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
+    end
 
     stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
     gems.each do |gem|
@@ -340,25 +336,13 @@ namespace :jsondoc do
 
       gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
       gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
-      # Copy the contents of subdir for the gem namespace.
+      # Copy all the .md files from each gem
       rm_rf gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}", verbose: true
-      cp_r "#{src}/google/cloud/#{gem_shortname}",
-           gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}",
-           verbose: true
-
-      # Copy the contents of google/cloud/ for the gem.
-      cp Dir["#{src}/google/cloud/*.json"], gh_pages + "json/stackdriver/#{version}/google/cloud/", verbose: true
-      stackdriver_types << JSON.parse(File.read("#{src}/types.json"))
-      stackdriver_google_cloud_methods << JSON.parse(File.read("#{src}/google/cloud.json"))["methods"]
+      mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}", verbose: true
+      cp Dir.glob("#{src}/*.md"),
+         gh_pages + "json/stackdriver/#{version}/google/cloud/#{gem_shortname}",
+         verbose: true
     end
-
-    header "Merging each Stackdriver gem types.json into #{gh_pages}/json/stackdriver/jsondoc/types.json"
-    File.write gh_pages + "json/stackdriver/master/types.json", stackdriver_types.flatten.to_json
-
-    header "Merging methods from each Stackdriver google/cloud.json into #{gh_pages}/json/stackdriver/jsondoc/google/cloud.json"
-    stackdriver_google_cloud_methods.each {|x| x.each {|y| puts y["id"]}}
-    stackdriver_json["methods"] = stackdriver_google_cloud_methods.flatten
-    File.write gh_pages + "json/stackdriver/master/google/cloud.json", stackdriver_json.to_json
   end
 
   desc "Publishes the jsondoc changes in the tmp dir cloned repo, gh-pages"
@@ -406,10 +390,11 @@ namespace :jsondoc do
     Rake::Task["jsondoc:clone_gh_pages"].invoke(gh_pages_dir)
     gems.each do |gem|
       Rake::Task["jsondoc:toc"].invoke(gem, "master", gh_pages_dir)
+      Rake::Task["jsondoc:toc"].reenable
+      Rake::Task["jsondoc:copy"].reenable
     end
     Rake::Task["jsondoc:google_cloud"].invoke("master", gh_pages_dir)
-    # TODO: Uncomment following line when ready to release stackdriver gem
-    # Rake::Task["jsondoc:stackdriver"].invoke("master", gh_pages_dir)
+    Rake::Task["jsondoc:stackdriver"].invoke("master", gh_pages_dir)
     Rake::Task["jsondoc:publish"].invoke("master", gh_pages_dir)
   end
 
@@ -446,14 +431,13 @@ namespace :jsondoc do
       Rake::Task["jsondoc:google_cloud"].invoke(google_cloud_version, gh_pages_dir)
     end
 
-    # TODO: Uncomment following lines when ready to release stackdriver gem
-    # stackdriver_gems = ["stackdriver", "google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
-    # if stackdriver_gems.include? gem
-    #   stackdriver_version = manifest_versions["stackdriver"]
-    #   header "Assembling jsondoc for stackdriver package"
-    #   puts "Latest stackdriver package version is '#{stackdriver_version}' (from docs/manifest.json)"
-    #   Rake::Task["jsondoc:stackdriver"].invoke(stackdriver_version, gh_pages_dir)
-    # end
+    stackdriver_gems = ["stackdriver", "google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
+    if stackdriver_gems.include? gem
+      stackdriver_version = manifest_versions["stackdriver"]
+      header "Assembling jsondoc for stackdriver package"
+      puts "Latest stackdriver package version is '#{stackdriver_version}' (from docs/manifest.json)"
+      Rake::Task["jsondoc:stackdriver"].invoke(stackdriver_version, gh_pages_dir)
+    end
 
     Rake::Task["jsondoc:publish"].invoke(tag, gh_pages_dir)
   end
