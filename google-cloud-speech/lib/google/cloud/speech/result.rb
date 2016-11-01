@@ -150,7 +150,7 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = audio.stream encoding: :raw, sample_rate: 16000
+      #   stream = speech.stream encoding: :raw, sample_rate: 16000
       #
       #   # register callback for when an interim result is returned
       #   stream.on_interim do |final_results, interim_results|
@@ -160,9 +160,9 @@ module Google
       #     puts interim_result.stability # 0.8999
       #   end
       #
-      #   # Stream 5 seconds of audio from the microhone
+      #   # Stream 5 seconds of audio from the microphone
       #   # Actual implementation of microphone input varies by platform
-      #   5.times.do
+      #   5.times do
       #     stream.send MicrophoneInput.read(32000)
       #   end
       #

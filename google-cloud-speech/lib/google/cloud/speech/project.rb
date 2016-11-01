@@ -462,7 +462,7 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when a result is returned
         #   stream.on_result do |results|
@@ -471,9 +471,9 @@ module Google
         #     puts result.confidence # 0.9826789498329163
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #

@@ -50,6 +50,12 @@ class File
   end
 end
 
+class MicrophoneInput
+  def self.read size
+    "1,2,3"
+  end
+end
+
 module Google
   module Cloud
     module Speech
@@ -69,7 +75,9 @@ def mock_speech
 
     speech.service.mocked_service = Minitest::Mock.new
     speech.service.mocked_ops = Minitest::Mock.new
-    yield speech.service.mocked_service, speech.service.mocked_ops
+    if block_given?
+      yield speech.service.mocked_service, speech.service.mocked_ops
+    end
     speech
   end
 end
@@ -98,9 +106,17 @@ def mock_storage
 end
 
 YARD::Doctest.configure do |doctest|
+  # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
+  doctest.skip "Google::Cloud::Speech::V1beta1::SpeechApi"
+
   doctest.before "Google::Cloud#speech" do
     mock_speech
   end
+
+  doctest.before "Google::Cloud::Speech" do
+    mock_speech
+  end
+
 
   doctest.before "Google::Cloud::Speech::Project" do
     mock_speech do |mock|
@@ -108,9 +124,41 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Project#recognize_job" do
+  doctest.before "Google::Cloud::Speech::Project#audio@With a Google Cloud Storage File object:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+    end
+    mock_speech do |mock, mock_ops|
+      mock.expect :async_recognize, op_done_false, recognize_args(recognition_config_alternatives, recognition_audio_uri)
+      mock_ops.expect :get_operation, nil, ["1234567890"]
+    end
+  end
+
+
+  doctest.before "Google::Cloud::Speech::Project#recognize@With a Google Cloud Storage URI:" do
+    mock_storage do |mock|
+    end
     mock_speech do |mock|
+      mock.expect :sync_recognize, sync_recognize_response, recognize_args(nil, recognition_audio_uri)
+    end
+  end
+
+
+  doctest.before "Google::Cloud::Speech::Project#recognize@With a Google Cloud Storage File object:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+    end
+    mock_speech do |mock|
+      mock.expect :sync_recognize, sync_recognize_response, recognize_args(recognition_config_alternatives, recognition_audio_uri)
+    end
+  end
+
+  doctest.before "Google::Cloud::Speech::Project#recognize_job" do
+    mock_speech do |mock, mock_ops|
       mock.expect :async_recognize, op_done_false, recognize_args
+      mock_ops.expect :get_operation, nil, ["1234567890"]
     end
   end
 
@@ -119,14 +167,16 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
       mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
     end
-    mock_speech do |mock|
+    mock_speech do |mock, mock_ops|
       mock.expect :async_recognize, op_done_false, recognize_args(recognition_config_alternatives, recognition_audio_uri)
+      mock_ops.expect :get_operation, nil, ["1234567890"]
     end
   end
 
   doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage URI:" do
-    mock_speech do |mock|
+    mock_speech do |mock, mock_ops|
       mock.expect :async_recognize, op_done_false, recognize_args(nil, recognition_audio_uri)
+      mock_ops.expect :get_operation, nil, ["1234567890"]
     end
   end
 
@@ -165,6 +215,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Speech::Result::Alternative" do
     mock_speech do |mock|
       mock.expect :sync_recognize, sync_recognize_response_alternatives, recognize_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Speech::Stream#results" do
+    mock_speech do |mock|
     end
   end
 end
