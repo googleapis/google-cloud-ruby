@@ -28,3 +28,32 @@ end
 
 # Backward compatibility with legacy stackdriver gem
 require "legacy_stackdriver"
+
+##
+# # Stackdriver
+#
+# The stackdriver gem instruments a Ruby web application for Stackdriver
+# diagnostics. When loaded, it integrates with Rails, Sinatra, or other
+# Rack-based web frameworks to collect application diagnostic and monitoring
+# information for your application.
+#
+# Specifically, this gem is a convenience package that loads the following gems:
+# - [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
+# - [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting)
+# - [google-cloud-monitoring](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring)
+#
+# On top of that, stackdriver gem automatically activates the following
+# instrumentation features:
+# - [google-cloud-logging instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/logging_instrumentation)
+# - [google-cloud-error_reporting instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/error_reporting_instrumentation)
+#
+#
+# ## Usage
+#
+# Instead of requiring multiple Stackdriver client library gems and explicitly
+# load each built-in Railtie classes, now users can achieve all these through
+# requiring this single **stackdriver** umbrella gem.
+# @example
+#   require "stackdriver"
+module Stackdriver
+end

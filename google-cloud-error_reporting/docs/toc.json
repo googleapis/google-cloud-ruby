@@ -1,5 +1,11 @@
 {
-  "guides": [],
+  "guides": [
+    {
+      "title": "Instrumentation",
+      "id": "instrumentation",
+      "contents": "instrumentation.md"
+    }
+  ],
   "services": [
     {
       "title": "ReportErrorsServiceApi",
