@@ -411,6 +411,8 @@ namespace :jsondoc do
     Rake::Task["jsondoc:clone_gh_pages"].invoke(gh_pages_dir)
     gems.each do |gem|
       Rake::Task["jsondoc:toc"].invoke(gem, "master", gh_pages_dir)
+      Rake::Task["jsondoc:toc"].reenable
+      Rake::Task["jsondoc:copy"].reenable
     end
     Rake::Task["jsondoc:google_cloud"].invoke("master", gh_pages_dir)
     Rake::Task["jsondoc:stackdriver"].invoke("master", gh_pages_dir)
