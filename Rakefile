@@ -215,10 +215,6 @@ namespace :jsondoc do
     FileUtils.mkdir_p gh_pages
 
     # checkout the gh-pages branch
-    git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
-    if ENV["GH_OAUTH_TOKEN"]
-      git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
-    end
     puts "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
     puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
   end
@@ -767,6 +763,18 @@ end
 
 def gh_pages_path gh_pages_dir
   Pathname.new(Dir.home) + "tmp" + gh_pages_dir
+end
+
+def git_repo
+  @git_repo ||= git_repository
+end
+
+def git_repository
+  if ENV["GH_OAUTH_TOKEN"]
+    "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
+  else
+    "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
+  end
 end
 
 def manifest_versions
