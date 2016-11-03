@@ -58,10 +58,8 @@ module Google
             keyfile = er_config.keyfile || gcp_config.keyfile
 
             channel = self.class.grpc_channel keyfile
-            service_name = er_config.service_name ||
-              error_reporting.class.default_service_name
-            service_version = er_config.service_version ||
-              error_reporting.class.default_service_version
+            service_name = er_config.service_name
+            service_version = er_config.service_version
 
             error_reporting =
               Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.new channel: channel,
