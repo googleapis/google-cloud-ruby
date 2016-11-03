@@ -33,19 +33,6 @@ module Google
     # * Delete projects
     # * Undelete, or recover, projects that you don't want to delete
     #
-    # The Resource Manager API is a Beta release and is not covered by any SLA
-    # or deprecation policy and may be subject to backward-incompatible changes.
-    #
-    # ## Accessing the Service
-    #
-    # Currently, the full functionality of the Resource Manager API is available
-    # only to whitelisted users. (Contact your account manager or a member of
-    # the Google Cloud sales team if you are interested in access.) Read-only
-    # methods such as {ResourceManager::Manager#projects} and
-    # {ResourceManager::Manager#project} are accessible to any user who enables
-    # the Resource Manager API in the [Developers
-    # Console](https://console.developers.google.com).
-    #
     # ## Authentication
     #
     # The Resource Manager API currently requires authentication of a [User
