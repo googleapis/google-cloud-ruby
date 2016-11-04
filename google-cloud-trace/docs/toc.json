@@ -1,0 +1,9 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "TraceServiceApi",
+      "type": "google/cloud/trace/v1/traceserviceapi"
+    }
+  ]
+}

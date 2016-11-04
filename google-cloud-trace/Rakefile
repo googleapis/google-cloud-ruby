@@ -1,0 +1,66 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+task :test do
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+  end
+end
+
+# Acceptance tests
+desc "Runs the trace acceptance tests."
+task :acceptance do
+  puts "The google-cloud-trace gem does not have acceptance tests."
+end
+
+namespace :acceptance do
+  desc "Runs acceptance tests with coverage."
+  task :coverage do
+  end
+
+  desc "Runs acceptance cleanup."
+  task :cleanup do
+  end
+end
+
+desc "Runs yard-doctest example tests."
+task :doctest do
+end
+
+task :rubocop do
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-trace .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-trace"
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
+task :default => :test
