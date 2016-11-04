@@ -31,7 +31,7 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = audio.stream encoding: :raw, sample_rate: 16000
+      #   stream = speech.stream encoding: :raw, sample_rate: 16000
       #
       #   # register callback for when a result is returned
       #   stream.on_result do |results|
@@ -40,9 +40,9 @@ module Google
       #     puts result.confidence # 0.9826789498329163
       #   end
       #
-      #   # Stream 5 seconds of audio from the microhone
+      #   # Stream 5 seconds of audio from the microphone
       #   # Actual implementation of microphone input varies by platform
-      #   5.times.do
+      #   5.times do
       #     stream.send MicrophoneInput.read(32000)
       #   end
       #
@@ -93,6 +93,8 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
+        #   audio = speech.audio "path/to/audio.raw"
+        #
         #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when a result is returned
@@ -102,9 +104,9 @@ module Google
         #     puts result.confidence # 0.9826789498329163
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -151,20 +153,21 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
         #   stream.stop
         #
         #   results = stream.results
-        #   result = results.first
-        #   puts result.transcript # "how old is the Brooklyn Bridge"
-        #   puts result.confidence # 0.9826789498329163
+        #   results.each do |result|
+        #     puts result.transcript
+        #     puts result.confidence
+        #   end
         #
         def results
           synchronize do
@@ -184,7 +187,7 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when an interim result is returned
         #   stream.on_interim do |final_results, interim_results|
@@ -194,9 +197,9 @@ module Google
         #     puts interim_result.stability # 0.8999
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -227,7 +230,7 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when an interim result is returned
         #   stream.on_result do |results|
@@ -236,9 +239,9 @@ module Google
         #     puts result.confidence # 0.9826789498329163
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -259,7 +262,7 @@ module Google
           result!
         end
 
-        # @private yields each final results as they are recieved
+        # @private yields each final results as they are received
         def result!
           synchronize do
             @callbacks[:result].each { |c| c.call results }
@@ -278,16 +281,16 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when speech has started.
         #   stream.on_speech_start do
         #     puts "Speech has started."
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -300,7 +303,7 @@ module Google
         end
 
         # @private returns single final result once :END_OF_UTTERANCE is
-        # recieved.
+        # received.
         def speech_start!
           synchronize do
             @callbacks[:speech_start].each(&:call)
@@ -319,16 +322,16 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when speech has ended.
         #   stream.on_speech_end do
         #     puts "Speech has ended."
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -341,7 +344,7 @@ module Google
         end
 
         # @private yields single final result once :END_OF_UTTERANCE is
-        # recieved.
+        # received.
         def speech_end!
           synchronize do
             @callbacks[:speech_end].each(&:call)
@@ -360,16 +363,16 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when audio has ended.
         #   stream.on_complete do
         #     puts "Audio has ended."
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -405,9 +408,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw,
-        #                         sample_rate: 16000,
-        #                         utterance: true
+        #   stream = speech.stream encoding: :raw,
+        #                          sample_rate: 16000,
+        #                          utterance: true
         #
         #   # register callback for when utterance has occurred.
         #   stream.on_utterance do
@@ -415,9 +418,9 @@ module Google
         #     stream.stop
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
@@ -430,7 +433,7 @@ module Google
         end
 
         # @private returns single final result once :END_OF_UTTERANCE is
-        # recieved.
+        # received.
         def utterance!
           synchronize do
             @callbacks[:utterance].each(&:call)
@@ -438,7 +441,7 @@ module Google
         end
 
         ##
-        # Register to be notified of an error recieved during the stream.
+        # Register to be notified of an error received during the stream.
         #
         # @yield [callback] The block for accessing final results.
         # @yieldparam [Exception] error The error raised.
@@ -448,7 +451,7 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = audio.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
         #   # register callback for when an error is returned
         #   stream.on_error do |error|
@@ -456,9 +459,9 @@ module Google
         #     stream.stop
         #   end
         #
-        #   # Stream 5 seconds of audio from the microhone
+        #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
-        #   5.times.do
+        #   5.times do
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #

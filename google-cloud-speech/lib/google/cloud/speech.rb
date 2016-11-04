@@ -158,9 +158,9 @@ module Google
     #   result.confidence #=> 0.9826789498329163
     # end
     #
-    # # Stream 5 seconds of audio from the microhone
+    # # Stream 5 seconds of audio from the microphone
     # # Actual implementation of microphone input varies by platform
-    # 5.times.do
+    # 5.times do
     #   stream.send MicrophoneInput.read(32000)
     # end
     #
