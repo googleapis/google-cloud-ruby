@@ -72,9 +72,7 @@ module Google
                                                            resource_labels
             log_name = log_config.log_name || DEFAULT_LOG_NAME
 
-            app.config.logger = Google::Cloud::Logging::Logger.new logging,
-                                                                   log_name,
-                                                                   resource
+            app.config.logger = logging.logger log_name, resource
             app.middleware.insert_before Rails::Rack::Logger,
                                          Google::Cloud::Logging::Middleware,
                                          logger: app.config.logger
