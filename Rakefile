@@ -698,12 +698,17 @@ namespace :integration do
       fail "You must provide a project_uri. e.g. rake " \
         "integration:gae[http://my-project.appspot.com]" if project_uri.nil?
 
-      deploy_gae_flex do
-        gems.each do |gem|
-          Dir.chdir gem do
-            header "Running integration:gae for gem #{gem}"
-            Bundler.with_clean_env do
-              run_task_if_exists "integration:gae", project_uri
+      test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
+
+      test_apps.each do |test_app|
+        header "Deploying #{test_app} to GAE Flex"
+        deploy_gae_flex test_app do
+          gems.each do |gem|
+            Dir.chdir gem do
+              header "Running integration:gae for gem #{gem}"
+              Bundler.with_clean_env do
+                run_task_if_exists "integration:gae", project_uri
+              end
             end
           end
         end

@@ -49,10 +49,8 @@ use Google::Cloud::ErrorReporting::Middleware, error_reporting: error_reporting,
 #######################################
 # Setup Logging Middleware
 logging = Google::Cloud::Logging.new
-resource = logging.resource "global"
-sd_logger = Google::Cloud::Logging::Logger.new logging,
-                                               "google-cloud-ruby_integration_test",
-                                               resource
+resource = Google::Cloud::Logging::Middleware.build_monitored_resource
+sd_logger = logging.logger "google-cloud-ruby_integration_test", resource
 use Google::Cloud::Logging::Middleware, logger: sd_logger
 #######################################
 

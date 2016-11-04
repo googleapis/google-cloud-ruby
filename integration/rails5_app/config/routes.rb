@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'test#index'
+
+  get '/test_error_reporting', to: 'test#test_error_reporting'
+  get '/test_logging', to: 'test#test_logging'
 end

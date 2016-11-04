@@ -16,6 +16,7 @@
 require "fileutils"
 require "open3"
 
+
 ##
 # Keep trying a block of code until the code of block yield a true statement or
 # raise error after timeout
@@ -36,16 +37,23 @@ end
 # Setup the app.yaml file and deploy this directory to GAE. When run from repo
 # root directory, this will deploy the integration/classic_sinatra_app.rb onto
 # GAE for testing use.
-def deploy_gae_flex
+def deploy_gae_flex app_dir
   unless File.file? "app.yaml"
-    FileUtils.cp "integration/app.yaml.example", "app.yaml"
+    FileUtils.cp "#{app_dir}/app.yaml.example", "app.yaml"
     temp_app_yaml = true
   end
 
   begin
-    sh "gcloud app deploy" do |ok, res|
+    last_gae_version = get_gae_versions.last
+    sh "gcloud app deploy -q" do |ok, res|
       if ok
         yield
+
+        # Delete the last version of Google App Engine if successfully deployed
+        unless last_gae_version.empty?
+          puts "gcloud app versions delete #{last_gae_version} -q"
+          `gcloud app versions delete #{last_gae_version} -q`
+        end
       else
         fail "'gcloud app deploy' failed with status = #{res.exitstatus}"
       end
@@ -53,6 +61,13 @@ def deploy_gae_flex
   ensure
     FileUtils.rm "app.yaml" if temp_app_yaml
   end
+end
+
+##
+# Get all the Google App Engine Versions
+def get_gae_versions
+  stdout = `gcloud app versions list`
+  stdout.scan(/default\s+(\S*)\s/).flatten.sort
 end
 
 ##
