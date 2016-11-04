@@ -1,18 +1,18 @@
-Stackdriver Clouderrorreporting API for Ruby
+Stackdriver Error Reporting API for Ruby
 =================================================
 
 google-cloud-error_reporting uses [Google API extensions][google-gax] to provide an
-easy-to-use client library for the [Stackdriver Clouderrorreporting API][] (v1beta1) defined in the [googleapis][] git repository
+easy-to-use client library for the [Stackdriver Error Reporting API][] (v1beta1) defined in the [googleapis][] git repository
 
 
 [googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/devtools/clouderrorreporting/v1beta1
 [google-gax]: https://github.com/googleapis/gax-ruby
-[Stackdriver Clouderrorreporting API]: https://developers.google.com/apis-explorer/#p/clouderrorreporting/v1beta1/
+[Stackdriver Error Reporting API]: https://developers.google.com/apis-explorer/#p/clouderrorreporting/v1beta1/
 
 Getting started
 ---------------
 
-google-cloud-error_reporting will allow you to connect to the [Stackdriver Clouderrorreporting API][] and access all its methods.
+google-cloud-error_reporting will allow you to connect to the [Stackdriver Error Reporting API][] and access all its methods.
 
 In order to achieve so you need to set up authentication as well as install the library locally.
 
