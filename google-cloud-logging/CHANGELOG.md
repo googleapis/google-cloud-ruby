@@ -1,5 +1,10 @@
 # Release History
 
+### 0.21.1 / 2016-11-4
+
+* Upgraded Google::Cloud::Logging::Railtie to use AsyncWriter
+* Added Rails configuration for custom monitored resource
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Logging.new
