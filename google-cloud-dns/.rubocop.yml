@@ -3,6 +3,7 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-dns.gemspec"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
 
 Documentation:
