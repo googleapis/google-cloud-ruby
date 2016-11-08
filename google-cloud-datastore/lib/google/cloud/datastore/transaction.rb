@@ -27,6 +27,10 @@ module Google
       #   Transactions
       #
       # @example Transactional update:
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   def transfer_funds from_key, to_key, amount
       #     datastore.transaction do |tx|
       #       from = tx.find from_key
@@ -47,6 +51,10 @@ module Google
       #   end
       #
       # @example Transactional read:
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   task_list_key = datastore.key "TaskList", "default"
       #   datastore.transaction do |tx|
       #     task_list = tx.find task_list_key
@@ -70,6 +78,10 @@ module Google
         # Persist entities in a transaction.
         #
         # @example Transactional get or create:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #
         #   task = nil
@@ -98,6 +110,10 @@ module Google
         # if the entities cannot be inserted.
         #
         # @example Transactional insert:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #
         #   task = nil
@@ -125,6 +141,10 @@ module Google
         # if the entities cannot be updated.
         #
         # @example Transactional update:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #
         #   task = nil
@@ -146,6 +166,10 @@ module Google
         # Remove entities in a transaction.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   datastore.transaction do |tx|
         #     if tx.find(task_list.key).nil?
         #       tx.delete task1, task2
@@ -167,10 +191,18 @@ module Google
         # @return [Google::Cloud::Datastore::Entity, nil]
         #
         # @example Finding an entity with a key:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #   task = datastore.find task_key
         #
         # @example Finding an entity with a `kind` and `id`/`name`:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #
         def find key_or_kind, id_or_name = nil
@@ -191,7 +223,10 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::LookupResults]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key1 = datastore.key "Task", 123456
         #   task_key2 = datastore.key "Task", 987654
         #   tasks = datastore.find_all task_key1, task_key2
@@ -214,6 +249,10 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
         #   datastore.transaction do |tx|
@@ -221,6 +260,10 @@ module Google
         #   end
         #
         # @example Run the query within a namespace with the `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new.kind("Task").
         #     where("done", "=", false)
         #   datastore.transaction do |tx|

@@ -29,12 +29,20 @@ module Google
         # Many common Array methods will return a new Array instance.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   tasks = datastore.find_all task_key1, task_key2, task_key3
         #   tasks.size #=> 3
         #   tasks.deferred #=> []
         #   tasks.missing #=> []
         #
         # @example Caution, many Array methods will return a new Array instance:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   tasks = datastore.find_all task_key1, task_key2, task_key3
         #   tasks.size #=> 3
         #   tasks.deferred #=> []
@@ -65,6 +73,8 @@ module Google
           # @return [Boolean]
           #
           # @example
+          #   require "google/cloud/datastore"
+          #
           #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
@@ -84,6 +94,8 @@ module Google
           # @return [LookupResults]
           #
           # @example
+          #   require "google/cloud/datastore"
+          #
           #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
@@ -121,6 +133,8 @@ module Google
           # @return [Enumerator]
           #
           # @example Iterating each result by passing a block:
+          #   require "google/cloud/datastore"
+          #
           #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
@@ -131,6 +145,8 @@ module Google
           #   end
           #
           # @example Using the enumerator by not passing a block:
+          #   require "google/cloud/datastore"
+          #
           #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
@@ -141,6 +157,8 @@ module Google
           #   end
           #
           # @example Limit the number of API calls made:
+          #   require "google/cloud/datastore"
+          #
           #   datastore = Google::Cloud::Datastore.new
           #
           #   task_key1 = datastore.key "Task", "sampleTask1"
