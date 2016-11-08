@@ -28,8 +28,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'yard', "~> 0.8"
   s.add_dependency 'kramdown', "~> 1.9"
   s.add_dependency 'jbuilder', "~> 2.5.0"
+  # Pin activesupport version. Remove this pin once we stop supporting Ruby 2.1
+  s.add_dependency "activesupport", "~> 4.0"
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "minitest-autotest", "~> 1.0"
-  s.add_development_dependency "activesupport", "~> 4.0"
 end
