@@ -38,8 +38,7 @@ describe Google::Cloud::Logging do
     logs = []
     keep_trying_till_true do
       stdout = Open3.capture3(
-        "gcloud beta logging read \"resource.type=global AND " \
-          "logName=projects/#{project_id}/logs/google-cloud-ruby_integration_test " \
+        "gcloud beta logging read \"logName=projects/#{project_id}/logs/google-cloud-ruby_integration_test " \
           "AND textPayload:#{token}\" --limit 1 --format json"
       ).first
       logs = JSON.parse(stdout)

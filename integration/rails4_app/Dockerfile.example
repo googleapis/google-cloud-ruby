@@ -31,10 +31,8 @@ ENV RBENV_VERSION=${REQUESTED_RUBY_VERSION:-$RBENV_VERSION}
 # Copy the application files.
 COPY . /app/
 
-# Install required gems if Gemfile.lock is present.
-RUN if test -f Gemfile.lock; then \
-      bundle install --deployment && rbenv rehash; \
-    fi
+# Install required gems.
+RUN cd integration/rails4_app && bundle install && rbenv rehash;
 
 # Temporary. Will be moved to base image later.
 ENV RACK_ENV=production \
@@ -42,12 +40,13 @@ ENV RACK_ENV=production \
     RAILS_SERVE_STATIC_FILES=true
 
 # Run asset pipeline if we're in a Rails app.
-RUN if test -d app/assets -a -f config/application.rb; then \
-      bundle exec rake assets:precompile; \
+RUN if test -d integration/rails4_app/app/assets -a \
+        -f integration/rails4_app/config/application.rb; then \
+      cd integration/rails4_app && bundle exec rake assets:precompile; \
     fi
 
 # BUG: Reset entrypoint to override base image.
 ENTRYPOINT []
 
 # Start application on port $PORT.
-CMD bundle exec ruby integration/classic_sinatra_app.rb
+CMD cd integration/rails4_app && bundle exec rackup -p 8080 config.ru

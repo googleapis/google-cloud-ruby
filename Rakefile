@@ -726,35 +726,23 @@ namespace :integration do
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
         "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
 
-      build_docker_image project_id do |image_name, image_location|
-        header "Built docker image #{image_name}"
-        push_docker_image project_id, image_name, image_location do |image_name, image_location|
-          header "Pushed docker image #{image_location} to GCR"
+      test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
 
-          deploy_gke_image image_name, image_location
-
-          header "GKE image #{image_name} successfully deployed"
-
-          # Figure out exact GKE pod_name from image_name
-          pod_name = nil
-          stdout = Open3.capture3(
-            "kubectl get pods"
-          ).first
-          pods_info = stdout.split("\n").drop(1)
-          pods_info.each do |pod_info|
-            pod_info = pod_info.split
-            if pod_info[0].match image_name
-              pod_name = pod_info[0]
-              break
-            end
-          end
-
-          # Invoke integration:gke with on each gem
-          gems.each do |gem|
-            Dir.chdir gem do
-              Bundler.with_clean_env do
-                header "Running integration:gke for gem #{gem}"
-                run_task_if_exists "integration:gke", pod_name
+      test_apps.each do |test_app|
+        header "Building #{test_app} docker image"
+        build_docker_image test_app, project_id do |image_name, image_location|
+          header "Pushing docker image #{image_name} to GCR"
+          push_docker_image project_id, image_name, image_location do |image_name, image_location|
+            header "Deploying docker image #{image_location}"
+            deploy_gke_image image_name, image_location do |pod_name|
+              # Invoke integration:gke with on each gem
+              gems.each do |gem|
+                Dir.chdir gem do
+                  Bundler.with_clean_env do
+                    header "Running integration:gke for gem #{gem}"
+                    run_task_if_exists "integration:gke", pod_name
+                  end
+                end
               end
             end
           end
@@ -793,6 +781,7 @@ end
 # subdirectories.
 def run_task_if_exists task_name, params = ""
   if `bundle exec rake --tasks #{task_name}` =~ /#{task_name}[^:]/
+    puts "bundle exec rake #{task_name}[#{params}]"
     sh "bundle exec rake #{task_name}[#{params}]"
   end
 end

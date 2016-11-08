@@ -16,7 +16,6 @@
 require "fileutils"
 require "open3"
 
-
 ##
 # Keep trying a block of code until the code of block yield a true statement or
 # raise error after timeout
@@ -73,16 +72,15 @@ end
 ##
 # Setup the Dockerfile file, build the docker image, run a block of code, and
 # then clean up afterwards.
-def build_docker_image project_id
+def build_docker_image app_dir, project_id
   image_name = "google-cloud-ruby-test-%.08x" % rand(0x100000000)
   image_location = "us.gcr.io/#{project_id}/#{image_name}"
   begin
     # Create default Dockerfile if one doesn't already exist
     if File.file? "Dockerfile"
-      fail "The Dockerfile file already exists. Please omit it and " \
-        "try again."
+      fail "The Dockerfile file already exists. Please omit it and try again."
     else
-      FileUtils.cp "integration/Dockerfile.example", "Dockerfile"
+      FileUtils.cp "#{app_dir}/Dockerfile.example", "Dockerfile"
       temp_dockerfile = true
     end
 
@@ -139,9 +137,7 @@ def deploy_gke_image image_name, image_location
     pod_name = nil
     pod_status = nil
     keep_trying_till_true 300 do
-      stdout = Open3.capture3(
-                 "kubectl get pods"
-               ).first
+      stdout = `kubectl get pods`
       pods_info = stdout.split("\n").drop(1)
       pods_info.each do |pod_info|
         pod_info = pod_info.split
@@ -153,11 +149,11 @@ def deploy_gke_image image_name, image_location
       end
       pod_status
     end
+    yield pod_name
   ensure
     # Clean up GKE services
-    sh "kubectl delete rc #{image_name}"
-    sh "kubectl delete pod #{pod_name}" if pod_name
     FileUtils.rm "integration_rc.yaml" if temp_rc_yaml
+    sh "kubectl delete rc #{image_name}"
   end
 end
 
