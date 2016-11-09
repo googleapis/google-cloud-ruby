@@ -30,6 +30,10 @@ module Google
       #   Datastore Metadata
       #
       # @example
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   query = Google::Cloud::Datastore::Query.new
       #   query.kind("Task").
       #     where("done", "=", false).
@@ -43,6 +47,8 @@ module Google
         # Returns a new query object.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #
         def initialize
@@ -57,6 +63,10 @@ module Google
         # queries](https://cloud.google.com/datastore/docs/concepts/metadataqueries).
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind "Task"
         #
@@ -76,6 +86,10 @@ module Google
         # Add a property filter to the query.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("done", "=", false)
@@ -83,6 +97,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add a composite property filter:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("done", "=", false).
@@ -91,6 +109,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add an inequality filter on a **single** property only:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("created", ">=", Time.utc(1990, 1, 1)).
@@ -99,6 +121,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add a composite filter on an array property:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("tag", "=", "fun").
@@ -107,6 +133,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add an inequality filter on an array property :
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("tag", ">", "learn").
@@ -115,6 +145,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add a key filter using the special property `__key__`:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("__key__", ">", datastore.key("Task", "someTask"))
@@ -122,6 +156,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example Add a key filter to a *kindless* query:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   last_seen_key = datastore.key "Task", "a"
         #   query = Google::Cloud::Datastore::Query.new
         #   query.where("__key__", ">", last_seen_key)
@@ -152,6 +190,10 @@ module Google
         # Add a filter for entities that inherit from a key.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_list_key = datastore.key "TaskList", "default"
         #
         #   query = Google::Cloud::Datastore::Query.new
@@ -173,6 +215,10 @@ module Google
         # of a string or symbol that starts with "d".
         #
         # @example With ascending sort order:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     order("created")
@@ -180,6 +226,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example With descending sort order:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     order("created", :desc)
@@ -187,6 +237,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example With multiple sort orders:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     order("priority", :desc).
@@ -195,6 +249,10 @@ module Google
         #   tasks = datastore.run query
         #
         # @example A property used in inequality filter must be ordered first:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     where("priority", ">", 3).
@@ -217,6 +275,10 @@ module Google
         # Set a limit on the number of results to be returned.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     limit(5)
@@ -233,6 +295,10 @@ module Google
         # Set an offset for the results to be returned.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     limit(5).
@@ -250,6 +316,10 @@ module Google
         # Set the cursor to start the results at.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     limit(page_size).
@@ -274,6 +344,10 @@ module Google
         # Retrieve only select properties from the matched entities.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     select("priority", "percent_complete")
@@ -286,6 +360,10 @@ module Google
         #   end
         #
         # @example A keys-only query using the special property `__key__`:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     select("__key__")
@@ -308,6 +386,10 @@ module Google
         # Group results by a list of properties.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new
         #   query.kind("Task").
         #     distinct_on("type", "priority").

@@ -25,6 +25,8 @@ module Google
       # integer numeric ID, assigned automatically by Datastore.
       #
       # @example
+      #   require "google/cloud/datastore"
+      #
       #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
       #
       class Key
@@ -34,6 +36,8 @@ module Google
         # @return [String]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   key = Google::Cloud::Datastore::Key.new "TaskList"
         #   key.kind #=> "TaskList"
         #   key.kind = "Task"
@@ -88,6 +92,8 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::Key]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #
         def initialize kind = nil, id_or_name = nil
@@ -106,6 +112,8 @@ module Google
         # @return [Integer, nil]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task_key.id #=> nil
         #   task_key.name #=> "sampleTask"
@@ -124,6 +132,8 @@ module Google
         # @return [Integer, nil]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", 123456
         #   task_key.id #=> 123456
         #
@@ -136,6 +146,8 @@ module Google
         # @return [String, nil]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", 123456
         #   task_key.id #=> 123456
         #   task_key.name #=> nil
@@ -154,6 +166,8 @@ module Google
         # @return [String, nil]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task_key.name #=> "sampleTask"
         #
@@ -165,11 +179,15 @@ module Google
         # @return [Key, nil]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   parent_key = Google::Cloud::Datastore::Key.new "TaskList", "default"
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task_key.parent = parent_key
         #
         # @example With multiple levels:
+        #   require "google/cloud/datastore"
+        #
         #   user_key = Google::Cloud::Datastore::Key.new "User", "alice"
         #   list_key = Google::Cloud::Datastore::Key.new "TaskList", "default"
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
@@ -208,6 +226,8 @@ module Google
         # @return [Array<Array<(String, String)>>]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   parent_key = Google::Cloud::Datastore::Key.new "TaskList", "default"
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task_key.parent = parent_key

@@ -223,6 +223,10 @@ module Google
     # child of the parent entity.
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # task_key = datastore.key "Task", "sampleTask"
     # task_key.parent = datastore.key "TaskList", "default"
     #
@@ -366,6 +370,10 @@ module Google
     # namespaces used in your application entities.
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # query = datastore.query("__namespace__").
     #   select("__key__").
     #   where("__key__", ">=", datastore.key("__namespace__", "g")).
@@ -380,6 +388,10 @@ module Google
     # kinds used in your application.
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # query = datastore.query("__kind__").
     #   select("__key__")
     #
@@ -393,6 +405,10 @@ module Google
     # are not included.)
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # query = datastore.query("__property__").
     #   select("__key__")
     #
@@ -412,6 +428,10 @@ module Google
     # representations of `p`'s value in any entity of kind `k`.
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # ancestor_key = datastore.key "__kind__", "Task"
     # query = datastore.query("__property__").
     #   ancestor(ancestor_key)
@@ -429,6 +449,10 @@ module Google
     # `__property__` entities.
     #
     # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
     # start_key = datastore.key "__property__", "priority"
     # start_key.parent = datastore.key "__kind__", "Task"
     # query = datastore.query("__property__").

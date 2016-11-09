@@ -31,6 +31,10 @@ module Google
       #   Reference
       #
       # @example
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   gql_query = Google::Cloud::Datastore::GqlQuery.new
       #   gql_query.query_string = "SELECT * FROM Task ORDER BY created ASC"
       #   tasks = datastore.run gql_query
@@ -40,6 +44,8 @@ module Google
         # Returns a new GqlQuery instance.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #
         def initialize
@@ -102,6 +108,8 @@ module Google
         #   literal values
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #   gql_query.query_string = "SELECT * FROM Task " \
         #                            "WHERE completed = false AND priority = 4"
@@ -138,6 +146,8 @@ module Google
         #   names in the query string to valid GQL arguments
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #   gql_query.query_string = "SELECT * FROM Task " \
         #                            "WHERE done = @done " \
@@ -186,6 +196,8 @@ module Google
         #   of the numbered binding sites in the query string
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #   gql_query.query_string = "SELECT * FROM Task" \
         #                            "WHERE completed = @1 AND priority = @2"

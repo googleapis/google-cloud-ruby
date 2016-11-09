@@ -34,6 +34,10 @@ module Google
       #   Properties, and Keys
       #
       # @example Create a new entity using a block:
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   task = datastore.entity "Task", "sampleTask" do |t|
       #     t["type"] = "Personal"
       #     t["created"] = Time.now
@@ -44,6 +48,10 @@ module Google
       #   end
       #
       # @example Create a new entity belonging to an existing parent entity:
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
       #   task_key = datastore.key "Task", "sampleTask"
       #   task_key.parent = datastore.key "TaskList", "default"
       #
@@ -84,6 +92,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task["description"] #=> "Learn Cloud Datastore"
         #
@@ -91,6 +100,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task[:description] #=> "Learn Cloud Datastore"
         #
@@ -98,6 +108,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
         #
@@ -105,6 +116,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["location"] #=> { longitude: -122.0862462,
         #                    #     latitude: 37.4220041 }
@@ -113,6 +125,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
         #
@@ -137,6 +150,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task["description"] = "Learn Cloud Datastore"
         #   task["tags"] = ["fun", "programming"]
@@ -145,6 +159,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task[:description] = "Learn Cloud Datastore"
         #   task[:tags] = ["fun", "programming"]
@@ -153,6 +168,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
@@ -161,6 +177,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["location"] = { longitude: -122.0862462, latitude: 37.4220041 }
         #
@@ -168,6 +185,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
         #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
@@ -183,6 +201,12 @@ module Google
         # @return [Google::Cloud::Datastore::Properties]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   task.properties[:description] = "Learn Cloud Datastore"
         #   task.properties["description"] #=> "Learn Cloud Datastore"
         #
@@ -191,15 +215,33 @@ module Google
         #   end
         #
         # @example A property's existence can be determined by calling `exist?`:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   task.properties.exist? :description #=> true
         #   task.properties.exist? "description" #=> true
         #   task.properties.exist? :expiration #=> false
         #
         # @example A property can be removed from the entity:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   task.properties.delete :description
         #   task.save
         #
         # @example The properties can be converted to a hash:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   prop_hash = task.properties.to_h
         #
         attr_reader :properties
@@ -214,6 +256,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = Google::Cloud::Datastore::Entity.new
         #   task.key = datastore.key "Task"
         #   datastore.save task
@@ -222,6 +265,7 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task.persisted? #=> true
         #   task.key = datastore.key "Task" #=> RuntimeError
@@ -268,10 +312,22 @@ module Google
         #   Unindexed properties
         #
         # @example Single property values will return a single flag setting:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   task["priority"] = 4
         #   task.exclude_from_indexes? "priority" #=> false
         #
         # @example A multi-valued property will return array of flag settings:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task = datastore.find "Task", "sampleTask"
+        #
         #   task["tags"] = ["fun", "programming"]
         #   task.exclude_from_indexes! "tags", [true, false]
         #
@@ -311,18 +367,42 @@ module Google
         #   Unindexed properties
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   entity = datastore.find "Task", "sampleTask"
+        #
         #   entity["priority"] = 4
         #   entity.exclude_from_indexes! "priority", true
         #
         # @example Multi-valued properties can be given multiple exclude flags:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   entity = datastore.find "Task", "sampleTask"
+        #
         #   entity["tags"] = ["fun", "programming"]
         #   entity.exclude_from_indexes! "tags", [true, false]
         #
         # @example Or, a single flag can be applied to all values in a property:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   entity = datastore.find "Task", "sampleTask"
+        #
         #   entity["tags"] = ["fun", "programming"]
         #   entity.exclude_from_indexes! "tags", true
         #
         # @example Flags can also be set with a block:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   entity = datastore.find "Task", "sampleTask"
+        #
         #   entity["priority"] = 4
         #   entity.exclude_from_indexes! "priority" do |priority|
         #     priority > 4
