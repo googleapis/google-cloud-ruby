@@ -15,12 +15,12 @@
 module Google
   module Cloud
     module Language
-      module V1beta1
+      module V1
         # ================================================================ #
         #
         # Represents the input to API methods.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::Language::V1beta1::Document::Type]
+        #   @return [Google::Cloud::Language::V1::Document::Type]
         #     Required. If the type is not set or is +TYPE_UNSPECIFIED+,
         #     returns an +INVALID_ARGUMENT+ error.
         # @!attribute [rw] content
@@ -29,6 +29,9 @@ module Google
         # @!attribute [rw] gcs_content_uri
         #   @return [String]
         #     The Google Cloud Storage URI where the file content is located.
+        #     This URI must be of the form: gs://bucket_name/object_name. For more
+        #     details, see https://cloud.google.com/storage/docs/reference-uris.
+        #     NOTE: Cloud Storage object versioning is not supported.
         # @!attribute [rw] language
         #   @return [String]
         #     The language of the document (if not specified, the language is
@@ -58,8 +61,13 @@ module Google
 
         # Represents a sentence in the input document.
         # @!attribute [rw] text
-        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #   @return [Google::Cloud::Language::V1::TextSpan]
         #     The sentence text.
+        # @!attribute [rw] sentiment
+        #   @return [Google::Cloud::Language::V1::Sentiment]
+        #     For calls to AnalyzeSentiment or if
+        #     AnnotateTextRequest::Features#extract_document_sentiment is set to
+        #     true, this field will contain the sentiment for the sentence.
         class Sentence; end
 
         # Represents a phrase in the text that is a known entity, such as
@@ -69,7 +77,7 @@ module Google
         #   @return [String]
         #     The representative name for the entity.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::Language::V1beta1::Entity::Type]
+        #   @return [Google::Cloud::Language::V1::Entity::Type]
         #     The entity type.
         # @!attribute [rw] metadata
         #   @return [Hash{String => String}]
@@ -86,7 +94,7 @@ module Google
         #     Scores closer to 0 are less salient, while scores closer to 1.0 are highly
         #     salient.
         # @!attribute [rw] mentions
-        #   @return [Array<Google::Cloud::Language::V1beta1::EntityMention>]
+        #   @return [Array<Google::Cloud::Language::V1::EntityMention>]
         #     The mentions of this entity in the input document. The API currently
         #     supports proper noun mentions.
         class Entity
@@ -120,13 +128,13 @@ module Google
 
         # Represents the smallest syntactic building block of the text.
         # @!attribute [rw] text
-        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #   @return [Google::Cloud::Language::V1::TextSpan]
         #     The token text.
         # @!attribute [rw] part_of_speech
-        #   @return [Google::Cloud::Language::V1beta1::PartOfSpeech]
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech]
         #     Parts of speech tag for this token.
         # @!attribute [rw] dependency_edge
-        #   @return [Google::Cloud::Language::V1beta1::DependencyEdge]
+        #   @return [Google::Cloud::Language::V1::DependencyEdge]
         #     Dependency tree parse for this token.
         # @!attribute [rw] lemma
         #   @return [String]
@@ -136,21 +144,54 @@ module Google
 
         # Represents the feeling associated with the entire text or entities in
         # the text.
-        # @!attribute [rw] polarity
-        #   @return [Float]
-        #     Polarity of the sentiment in the [-1.0, 1.0] range. Larger numbers
-        #     represent more positive sentiments.
         # @!attribute [rw] magnitude
         #   @return [Float]
         #     A non-negative number in the [0, +inf) range, which represents
         #     the absolute magnitude of sentiment regardless of polarity (positive or
         #     negative).
+        # @!attribute [rw] score
+        #   @return [Float]
+        #     Sentiment score between -1.0 (negative sentiment) and 1.0
+        #     (positive sentiment.)
         class Sentiment; end
 
         # Represents part of speech information for a token.
         # @!attribute [rw] tag
-        #   @return [Google::Cloud::Language::V1beta1::PartOfSpeech::Tag]
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Tag]
         #     The part of speech tag.
+        # @!attribute [rw] aspect
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Aspect]
+        #     The grammatical aspect.
+        # @!attribute [rw] case
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Case]
+        #     The grammatical case.
+        # @!attribute [rw] form
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Form]
+        #     The grammatical form.
+        # @!attribute [rw] gender
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Gender]
+        #     The grammatical gender.
+        # @!attribute [rw] mood
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Mood]
+        #     The grammatical mood.
+        # @!attribute [rw] number
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Number]
+        #     The grammatical number.
+        # @!attribute [rw] person
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Person]
+        #     The grammatical person.
+        # @!attribute [rw] proper
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Proper]
+        #     The grammatical properness.
+        # @!attribute [rw] reciprocity
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Reciprocity]
+        #     The grammatical reciprocity.
+        # @!attribute [rw] tense
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Tense]
+        #     The grammatical tense.
+        # @!attribute [rw] voice
+        #   @return [Google::Cloud::Language::V1::PartOfSpeech::Voice]
+        #     The grammatical voice.
         class PartOfSpeech
           # The part of speech tags enum.
           module Tag
@@ -196,6 +237,250 @@ module Google
             # Affix
             AFFIX = 13
           end
+
+          # The characteristic of a verb that expresses time flow during an event.
+          module Aspect
+            # Aspect is not applicable in the analyzed language or is not predicted.
+            ASPECT_UNKNOWN = 0
+
+            # Perfective
+            PERFECTIVE = 1
+
+            # Imperfective
+            IMPERFECTIVE = 2
+
+            # Progressive
+            PROGRESSIVE = 3
+          end
+
+          # The grammatical function performed by a noun or pronoun in a phrase,
+          # clause, or sentence. In some languages, other parts of speech, such as
+          # adjective and determiner, take case inflection in agreement with the noun.
+          module Case
+            # Case is not applicable in the analyzed language or is not predicted.
+            CASE_UNKNOWN = 0
+
+            # Accusative
+            ACCUSATIVE = 1
+
+            # Adverbial
+            ADVERBIAL = 2
+
+            # Complementive
+            COMPLEMENTIVE = 3
+
+            # Dative
+            DATIVE = 4
+
+            # Genitive
+            GENITIVE = 5
+
+            # Instrumental
+            INSTRUMENTAL = 6
+
+            # Locative
+            LOCATIVE = 7
+
+            # Nominative
+            NOMINATIVE = 8
+
+            # Oblique
+            OBLIQUE = 9
+
+            # Partitive
+            PARTITIVE = 10
+
+            # Prepositional
+            PREPOSITIONAL = 11
+
+            # Reflexive
+            REFLEXIVE_CASE = 12
+
+            # Relative
+            RELATIVE_CASE = 13
+
+            # Vocative
+            VOCATIVE = 14
+          end
+
+          # Depending on the language, Form can be categorizing different forms of
+          # verbs, adjectives, adverbs, etc. For example, categorizing inflected
+          # endings of verbs and adjectives or distinguishing between short and long
+          # forms of adjectives and participles
+          module Form
+            # Form is not applicable in the analyzed language or is not predicted.
+            FORM_UNKNOWN = 0
+
+            # Adnomial
+            ADNOMIAL = 1
+
+            # Auxiliary
+            AUXILIARY = 2
+
+            # Complementizer
+            COMPLEMENTIZER = 3
+
+            # Final ending
+            FINAL_ENDING = 4
+
+            # Gerund
+            GERUND = 5
+
+            # Realis
+            REALIS = 6
+
+            # Irrealis
+            IRREALIS = 7
+
+            # Short form
+            SHORT = 8
+
+            # Long form
+            LONG = 9
+
+            # Order form
+            ORDER = 10
+
+            # Specific form
+            SPECIFIC = 11
+          end
+
+          # Gender classes of nouns reflected in the behaviour of associated words.
+          module Gender
+            # Gender is not applicable in the analyzed language or is not predicted.
+            GENDER_UNKNOWN = 0
+
+            # Feminine
+            FEMININE = 1
+
+            # Masculine
+            MASCULINE = 2
+
+            # Neuter
+            NEUTER = 3
+          end
+
+          # The grammatical feature of verbs, used for showing modality and attitude.
+          module Mood
+            # Mood is not applicable in the analyzed language or is not predicted.
+            MOOD_UNKNOWN = 0
+
+            # Conditional
+            CONDITIONAL_MOOD = 1
+
+            # Imperative
+            IMPERATIVE = 2
+
+            # Indicative
+            INDICATIVE = 3
+
+            # Interrogative
+            INTERROGATIVE = 4
+
+            # Jussive
+            JUSSIVE = 5
+
+            # Subjunctive
+            SUBJUNCTIVE = 6
+          end
+
+          # Count distinctions.
+          module Number
+            # Number is not applicable in the analyzed language or is not predicted.
+            NUMBER_UNKNOWN = 0
+
+            # Singular
+            SINGULAR = 1
+
+            # Plural
+            PLURAL = 2
+
+            # Dual
+            DUAL = 3
+          end
+
+          # The distinction between the speaker, second person, third person, etc.
+          module Person
+            # Person is not applicable in the analyzed language or is not predicted.
+            PERSON_UNKNOWN = 0
+
+            # First
+            FIRST = 1
+
+            # Second
+            SECOND = 2
+
+            # Third
+            THIRD = 3
+
+            # Reflexive
+            REFLEXIVE_PERSON = 4
+          end
+
+          # This category shows if the token is part of a proper name.
+          module Proper
+            # Proper is not applicable in the analyzed language or is not predicted.
+            PROPER_UNKNOWN = 0
+
+            # Proper
+            PROPER = 1
+
+            # Not proper
+            NOT_PROPER = 2
+          end
+
+          # Reciprocal features of a pronoun.
+          module Reciprocity
+            # Reciprocity is not applicable in the analyzed language or is not
+            # predicted.
+            RECIPROCITY_UNKNOWN = 0
+
+            # Reciprocal
+            RECIPROCAL = 1
+
+            # Non-reciprocal
+            NON_RECIPROCAL = 2
+          end
+
+          # Time reference.
+          module Tense
+            # Tense is not applicable in the analyzed language or is not predicted.
+            TENSE_UNKNOWN = 0
+
+            # Conditional
+            CONDITIONAL_TENSE = 1
+
+            # Future
+            FUTURE = 2
+
+            # Past
+            PAST = 3
+
+            # Present
+            PRESENT = 4
+
+            # Imperfect
+            IMPERFECT = 5
+
+            # Pluperfect
+            PLUPERFECT = 6
+          end
+
+          # The relationship between the action that a verb expresses and the
+          # participants identified by its arguments.
+          module Voice
+            # Voice is not applicable in the analyzed language or is not predicted.
+            VOICE_UNKNOWN = 0
+
+            # Active
+            ACTIVE = 1
+
+            # Causative
+            CAUSATIVE = 2
+
+            # Passive
+            PASSIVE = 3
+          end
         end
 
         # Represents dependency parse tree information for a token.
@@ -207,7 +492,7 @@ module Google
         #     by the API method. If this token is a root token, then the
         #     +head_token_index+ is its own index.
         # @!attribute [rw] label
-        #   @return [Google::Cloud::Language::V1beta1::DependencyEdge::Label]
+        #   @return [Google::Cloud::Language::V1::DependencyEdge::Label]
         #     The parse label for the token.
         class DependencyEdge
           # The parse label enum for the token.
@@ -448,9 +733,24 @@ module Google
         # Represents a mention for an entity in the text. Currently, proper noun
         # mentions are supported.
         # @!attribute [rw] text
-        #   @return [Google::Cloud::Language::V1beta1::TextSpan]
+        #   @return [Google::Cloud::Language::V1::TextSpan]
         #     The mention text.
-        class EntityMention; end
+        # @!attribute [rw] type
+        #   @return [Google::Cloud::Language::V1::EntityMention::Type]
+        #     The type of the entity mention.
+        class EntityMention
+          # The supported types of mentions.
+          module Type
+            # Unknown
+            TYPE_UNKNOWN = 0
+
+            # Proper name
+            PROPER = 1
+
+            # Common noun (or noun compound)
+            COMMON = 2
+          end
+        end
 
         # Represents an output piece of text.
         # @!attribute [rw] content
@@ -464,50 +764,81 @@ module Google
 
         # The sentiment analysis request message.
         # @!attribute [rw] document
-        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #   @return [Google::Cloud::Language::V1::Document]
         #     Input document. Currently, +analyzeSentiment+ only supports English text
         #     (Document#language="EN").
+        # @!attribute [rw] encoding_type
+        #   @return [Google::Cloud::Language::V1::EncodingType]
+        #     The encoding type used by the API to calculate sentence offsets.
         class AnalyzeSentimentRequest; end
 
         # The sentiment analysis response message.
         # @!attribute [rw] document_sentiment
-        #   @return [Google::Cloud::Language::V1beta1::Sentiment]
+        #   @return [Google::Cloud::Language::V1::Sentiment]
         #     The overall sentiment of the input document.
         # @!attribute [rw] language
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
+        #     See +Document.language+ field for more details.
+        # @!attribute [rw] sentences
+        #   @return [Array<Google::Cloud::Language::V1::Sentence>]
+        #     The sentiment for all the sentences in the document.
         class AnalyzeSentimentResponse; end
 
         # The entity analysis request message.
         # @!attribute [rw] document
-        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #   @return [Google::Cloud::Language::V1::Document]
         #     Input document.
         # @!attribute [rw] encoding_type
-        #   @return [Google::Cloud::Language::V1beta1::EncodingType]
+        #   @return [Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
         class AnalyzeEntitiesRequest; end
 
         # The entity analysis response message.
         # @!attribute [rw] entities
-        #   @return [Array<Google::Cloud::Language::V1beta1::Entity>]
+        #   @return [Array<Google::Cloud::Language::V1::Entity>]
         #     The recognized entities in the input document.
         # @!attribute [rw] language
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
+        #     See +Document.language+ field for more details.
         class AnalyzeEntitiesResponse; end
 
-        # The request message for the advanced text annotation API, which performs all
-        # the above plus syntactic analysis.
+        # The syntax analysis request message.
         # @!attribute [rw] document
-        #   @return [Google::Cloud::Language::V1beta1::Document]
+        #   @return [Google::Cloud::Language::V1::Document]
+        #     Input document.
+        # @!attribute [rw] encoding_type
+        #   @return [Google::Cloud::Language::V1::EncodingType]
+        #     The encoding type used by the API to calculate offsets.
+        class AnalyzeSyntaxRequest; end
+
+        # The syntax analysis response message.
+        # @!attribute [rw] sentences
+        #   @return [Array<Google::Cloud::Language::V1::Sentence>]
+        #     Sentences in the input document.
+        # @!attribute [rw] tokens
+        #   @return [Array<Google::Cloud::Language::V1::Token>]
+        #     Tokens, along with their syntactic information, in the input document.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the text, which will be the same as the language specified
+        #     in the request or, if not specified, the automatically-detected language.
+        #     See +Document.language+ field for more details.
+        class AnalyzeSyntaxResponse; end
+
+        # The request message for the text annotation API, which can perform multiple
+        # analysis types (sentiment, entities, and syntax) in one call.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1::Document]
         #     Input document.
         # @!attribute [rw] features
-        #   @return [Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features]
+        #   @return [Google::Cloud::Language::V1::AnnotateTextRequest::Features]
         #     The enabled features.
         # @!attribute [rw] encoding_type
-        #   @return [Google::Cloud::Language::V1beta1::EncodingType]
+        #   @return [Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
         class AnnotateTextRequest
           # All available features for sentiment, syntax, and semantic analysis.
@@ -526,27 +857,28 @@ module Google
 
         # The text annotations response message.
         # @!attribute [rw] sentences
-        #   @return [Array<Google::Cloud::Language::V1beta1::Sentence>]
+        #   @return [Array<Google::Cloud::Language::V1::Sentence>]
         #     Sentences in the input document. Populated if the user enables
         #     AnnotateTextRequest::Features#extract_syntax.
         # @!attribute [rw] tokens
-        #   @return [Array<Google::Cloud::Language::V1beta1::Token>]
+        #   @return [Array<Google::Cloud::Language::V1::Token>]
         #     Tokens, along with their syntactic information, in the input document.
         #     Populated if the user enables
         #     AnnotateTextRequest::Features#extract_syntax.
         # @!attribute [rw] entities
-        #   @return [Array<Google::Cloud::Language::V1beta1::Entity>]
+        #   @return [Array<Google::Cloud::Language::V1::Entity>]
         #     Entities, along with their semantic information, in the input document.
         #     Populated if the user enables
         #     AnnotateTextRequest::Features#extract_entities.
         # @!attribute [rw] document_sentiment
-        #   @return [Google::Cloud::Language::V1beta1::Sentiment]
+        #   @return [Google::Cloud::Language::V1::Sentiment]
         #     The overall sentiment for the document. Populated if the user enables
         #     AnnotateTextRequest::Features#extract_document_sentiment.
         # @!attribute [rw] language
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
+        #     See +Document.language+ field for more details.
         class AnnotateTextResponse; end
 
         # Represents the text encoding that the caller uses to process the output.
