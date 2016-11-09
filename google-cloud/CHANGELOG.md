@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.1 / 2016-11-09
+
+* No changes
+
 ### 0.21.0 / 2016-10-20
 
 * Update all service gems to 0.21.x
