@@ -33,7 +33,7 @@ er_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new er_credentials.client.updater_proc
 er_chan = GRPC::Core::Channel.new Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi::SERVICE_ADDRESS,
                                                nil, er_channel_cred
-er_service_name = "stackdriver-ruby_acceptance_test"
+er_service_name = "google-cloud-ruby_integration_test"
 er_serivce_version = ENV['USER']
 
 error_reporting = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.new channel: er_chan,
