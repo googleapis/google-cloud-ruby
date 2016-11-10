@@ -22,7 +22,18 @@ describe Google::Cloud::Language::Annotation::Token do
         beginOffset: -1
       },
       partOfSpeech: {
-        tag: "X"
+        tag: "X",
+        aspect: "PERFECTIVE",
+        case: "INSTRUMENTAL",
+        form: "GERUND",
+        gender: "NEUTER",
+        mood: "SUBJUNCTIVE",
+        number: "SINGULAR",
+        person: "FIRST",
+        proper: "NOT_PROPER",
+        reciprocity: "RECIPROCAL",
+        tense: "IMPERFECT",
+        voice: "ACTIVE"
       },
       dependencyEdge: {
         label: "ROOT"
@@ -38,7 +49,20 @@ describe Google::Cloud::Language::Annotation::Token do
     token.must_be_kind_of Google::Cloud::Language::Annotation::Token
 
     token.text.must_equal "Hello"
-    token.part_of_speech.must_equal :X
+
+    token.part_of_speech.tag.must_equal :X
+    token.part_of_speech.aspect.must_equal :PERFECTIVE
+    token.part_of_speech.case.must_equal :INSTRUMENTAL
+    token.part_of_speech.form.must_equal :GERUND
+    token.part_of_speech.gender.must_equal :NEUTER
+    token.part_of_speech.mood.must_equal :SUBJUNCTIVE
+    token.part_of_speech.number.must_equal :SINGULAR
+    token.part_of_speech.person.must_equal :FIRST
+    token.part_of_speech.proper.must_equal :NOT_PROPER
+    token.part_of_speech.reciprocity.must_equal :RECIPROCAL
+    token.part_of_speech.tense.must_equal :IMPERFECT
+    token.part_of_speech.voice.must_equal :ACTIVE
+
     token.head_token_index.must_equal 0
     token.label.must_equal :ROOT
     token.lemma.must_equal "Hello"

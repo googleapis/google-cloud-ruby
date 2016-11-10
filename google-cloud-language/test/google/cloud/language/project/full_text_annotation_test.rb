@@ -594,7 +594,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
     annotation.tokens.count.must_equal 24
     token = annotation.tokens.first
     token.text.must_equal "Hello"
-    token.part_of_speech.must_equal :X
+    token.part_of_speech.tag.must_equal :X
     token.head_token_index.must_equal 0
     token.label.must_equal :ROOT
     token.lemma.must_equal "Hello"

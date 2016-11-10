@@ -240,11 +240,47 @@ module Google
         end
 
         ##
+        # TODO: add docs
+        #
+        # @attr_reader [Symbol] part_of_speech Represents part of speech
+        #   information for a token.
+        class PartOfSpeech
+          attr_accessor :tag, :aspect, :case, :form, :gender, :mood, :number,
+                        :person, :proper, :reciprocity, :tense, :voice
+
+          ##
+          # @private Creates a new PartOfSpeech instance.
+          def initialize tag, aspect, kase, form, gender, mood, number, person,
+                         proper, reciprocity, tense, voice
+            @tag = tag
+            @aspect = aspect
+            @case = kase
+            @form = form
+            @gender = gender
+            @mood = mood
+            @number = number
+            @person = person
+            @proper = proper
+            @reciprocity = reciprocity
+            @tense = tense
+            @voice = voice
+          end
+
+          ##
+          # @private New TextSpan from a V1::PartOfSpeech object.
+          def self.from_grpc grpc
+            new grpc.tag, grpc.aspect, grpc.case, grpc.form, grpc.gender,
+                grpc.mood, grpc.number, grpc.person, grpc.proper,
+                grpc.reciprocity, grpc.tense, grpc.voice
+          end
+        end
+
+        ##
         # Represents the smallest syntactic building block of the text. Returned
         # by syntactic analysis.
         #
         # @attr_reader [TextSpan] text_span The token text.
-        # @attr_reader [Symbol] part_of_speech Represents part of speech
+        # @attr_reader [PartOfSpeech] part_of_speech Represents part of speech
         #   information for a token.
         # @attr_reader [Integer] head_token_index Represents the head of this
         #   token in the dependency tree. This is the index of the token which
@@ -269,7 +305,8 @@ module Google
         #
         #   token.text_span.text #=> "Darth"
         #   token.text_span.offset #=> 0
-        #   token.part_of_speech #=> :NOUN
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.part_of_speech.gender #=> :MASCULINE
         #   token.head_token_index #=> 1
         #   token.label #=> :NN
         #   token.lemma #=> "Darth"
@@ -303,7 +340,8 @@ module Google
           # @private New Token from a V1::Token object.
           def self.from_grpc grpc
             text_span = TextSpan.from_grpc grpc.text
-            new text_span, grpc.part_of_speech.tag,
+            part_of_speech = PartOfSpeech.from_grpc grpc.part_of_speech
+            new text_span, part_of_speech,
                 grpc.dependency_edge.head_token_index,
                 grpc.dependency_edge.label, grpc.lemma
           end
