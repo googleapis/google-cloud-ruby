@@ -34,7 +34,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.sentiment.polarity.must_equal 1.0
       annotation.sentiment.magnitude.must_equal 1.7999999523162842
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -44,7 +44,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.tokens.count.must_equal 24
@@ -69,7 +69,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.sentiment.polarity.must_be_kind_of Float
       annotation.sentiment.magnitude.must_be_kind_of Float
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -79,7 +79,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.tokens.count.must_equal 24
@@ -104,7 +104,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.sentiment.polarity.must_be_kind_of Float
       annotation.sentiment.magnitude.must_be_kind_of Float
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -114,7 +114,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.tokens.count.must_equal 24
@@ -139,7 +139,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.sentiment.polarity.must_be_kind_of Float
       annotation.sentiment.magnitude.must_be_kind_of Float
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -149,7 +149,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.tokens.count.must_equal 24
@@ -216,7 +216,7 @@ describe "Language (TEXT/Storage File)", :language do
 
       annotation.sentiment.must_be :nil?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -226,7 +226,7 @@ describe "Language (TEXT/Storage File)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.must_be :empty?
       annotation.tokens.must_be :empty?
@@ -239,7 +239,7 @@ describe "Language (TEXT/Storage File)", :language do
 
       entities.language.must_equal "en"
 
-      entities.count.must_equal 3
+      entities.count.must_equal 5
       entities.unknown.map(&:name).must_equal []
       entities.people.map(&:name).must_equal ["Chris", "Mike"]
       entities.locations.map(&:name).must_equal ["Utah"]
@@ -248,7 +248,7 @@ describe "Language (TEXT/Storage File)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal []
+      entities.other.map(&:name).must_equal ["ruby", "writing code"]
     end
 
     it "works with creating a document" do
@@ -260,7 +260,7 @@ describe "Language (TEXT/Storage File)", :language do
 
       entities.language.must_equal "en"
 
-      entities.count.must_equal 3
+      entities.count.must_equal 5
       entities.unknown.map(&:name).must_equal []
       entities.people.map(&:name).must_equal ["Chris", "Mike"]
       entities.locations.map(&:name).must_equal ["Utah"]
@@ -269,11 +269,11 @@ describe "Language (TEXT/Storage File)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal []
+      entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       entities.places.first.name.must_equal "Utah"
       entities.places.first.type.must_equal :LOCATION
-      entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah"})
+      entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
       entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
       entities.places.first.salience.must_be_kind_of Float
       entities.places.first.mentions.count.must_equal 1
