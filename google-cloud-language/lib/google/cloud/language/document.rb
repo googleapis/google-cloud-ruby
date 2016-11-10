@@ -333,7 +333,7 @@ module Google
         # @private
         def self.from_source source, service, format: nil, language: nil
           source = String source
-          grpc = Google::Cloud::Language::V1beta1::Document.new
+          grpc = Google::Cloud::Language::V1::Document.new
           if source.start_with? "gs://"
             grpc.gcs_content_uri = source
             format ||= :html if source.end_with? ".html"

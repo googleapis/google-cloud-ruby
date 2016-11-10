@@ -194,7 +194,7 @@ module Google
         end
 
         ##
-        # @private New Annotation from a V1beta1::AnnotateTextResponse object.
+        # @private New Annotation from a V1::AnnotateTextResponse object.
         def self.from_grpc grpc
           new.tap { |a| a.instance_variable_set :@grpc, grpc }
         end
@@ -233,7 +233,7 @@ module Google
           end
 
           ##
-          # @private New TextSpan from a V1beta1::TextSpan object.
+          # @private New TextSpan from a V1::TextSpan object.
           def self.from_grpc grpc
             new grpc.content, grpc.begin_offset
           end
@@ -300,7 +300,7 @@ module Google
           alias_method :begin_offset, :offset
 
           ##
-          # @private New Token from a V1beta1::Token object.
+          # @private New Token from a V1::Token object.
           def self.from_grpc grpc
             text_span = TextSpan.from_grpc grpc.text
             new text_span, grpc.part_of_speech.tag,
@@ -414,8 +414,8 @@ module Google
           end
 
           ##
-          # @private New Entities from a V1beta1::AnnotateTextResponse or
-          # V1beta1::AnalyzeEntitiesResponse object.
+          # @private New Entities from a V1::AnnotateTextResponse or
+          # V1::AnalyzeEntitiesResponse object.
           def self.from_grpc grpc
             entities = Array(grpc.entities).map { |g| Entity.from_grpc g }
             new entities, grpc.language
@@ -557,7 +557,7 @@ module Google
           end
 
           ##
-          # @private New Entity from a V1beta1::Entity object.
+          # @private New Entity from a V1::Entity object.
           def self.from_grpc grpc
             metadata = Core::GRPCUtils.map_to_hash grpc.metadata
             mentions = Array(grpc.mentions).map do |g|
@@ -606,8 +606,8 @@ module Google
           end
 
           ##
-          # @private New Sentiment from a V1beta1::AnnotateTextResponse or
-          # V1beta1::AnalyzeSentimentResponse object.
+          # @private New Sentiment from a V1::AnnotateTextResponse or
+          # V1::AnalyzeSentimentResponse object.
           def self.from_grpc grpc
             new grpc.document_sentiment.polarity,
                 grpc.document_sentiment.magnitude, grpc.language

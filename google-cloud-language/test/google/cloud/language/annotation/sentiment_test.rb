@@ -22,7 +22,7 @@ describe Google::Cloud::Language::Annotation::Sentiment do
     }
   end
   let(:sentiment_json) { sentiment_hash.to_json }
-  let(:sentiment_grpc) { Google::Cloud::Language::V1beta1::AnalyzeSentimentResponse.decode_json sentiment_json }
+  let(:sentiment_grpc) { Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_json }
   let(:sentiment)      { Google::Cloud::Language::Annotation::Sentiment.from_grpc sentiment_grpc }
 
   it "has attributes" do

@@ -58,7 +58,7 @@ describe Google::Cloud::Language::Annotation::Entities do
       }
     }
   end
-  let(:entities_grpc) { Google::Cloud::Language::V1beta1::AnalyzeEntitiesResponse.decode_json entity_json }
+  let(:entities_grpc) { Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entity_json }
   let(:entities)      { Google::Cloud::Language::Annotation::Entities.from_grpc entities_grpc }
 
   it "has attributes" do

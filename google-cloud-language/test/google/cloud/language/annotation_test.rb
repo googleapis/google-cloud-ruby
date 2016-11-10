@@ -15,8 +15,8 @@
 require "helper"
 
 describe Google::Cloud::Language::Annotation, :mock_language do
-  let(:text_annotation_grpc) { Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json text_json }
-  let(:html_annotation_grpc) { Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json }
+  let(:text_annotation_grpc) { Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json }
+  let(:html_annotation_grpc) { Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json }
   let(:annotation)      { Google::Cloud::Language::Annotation.from_grpc annotation_grpc }
 
   it "represents a plain text annotation response" do

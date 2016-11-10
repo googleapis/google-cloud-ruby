@@ -17,11 +17,11 @@ require "helper"
 describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language do
   describe "inline content" do
     it "runs full annotation with content and HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: html_content, type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -34,11 +34,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with content and HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: html_content, type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -53,11 +53,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
   describe "document object" do
     it "runs full annotation with document object using HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: html_content, type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -71,11 +71,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with document object using HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: html_content, type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -90,11 +90,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
     describe "using #html helper" do
       it "runs full annotation using empty options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           content: html_content, type: :HTML)
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -108,11 +108,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
       end
 
       it "runs full annotation using en language options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           content: html_content, type: :HTML, language: "en")
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -129,11 +129,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
   describe "inline URL" do
     it "runs full annotation with content and HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -146,11 +146,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with content and HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -163,11 +163,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with content deriving HTML format from URL" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.html", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -182,11 +182,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
   describe "document URL" do
     it "runs full annotation with document object using HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -200,11 +200,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with document object using HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -218,11 +218,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with document object deriving HTML format from URL" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.html", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -237,11 +237,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
     describe "using #html helper" do
       it "runs full annotation using empty options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -255,11 +255,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
       end
 
       it "runs full annotation using en language options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -276,11 +276,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
   describe "inline GCS object" do
     it "runs full annotation with content and HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -294,11 +294,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with content and HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -312,11 +312,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with content deriving HTML format from URL" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.html", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -332,11 +332,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
   describe "document GCS object" do
     it "runs full annotation with document object using HTML format options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -351,11 +351,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with document object using HTML format and en language options" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -370,11 +370,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
     end
 
     it "runs full annotation with document object deriving HTML format from URL" do
-      grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+      grpc_doc = Google::Cloud::Language::V1::Document.new(
         gcs_content_uri: "gs://bucket/path.html", type: :HTML)
-      features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
         extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
       mock = Minitest::Mock.new
       mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -390,11 +390,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
     describe "using #html helper" do
       it "runs full annotation using empty options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           gcs_content_uri: "gs://bucket/path.ext", type: :HTML)
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
@@ -409,11 +409,11 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
       end
 
       it "runs full annotation using en language options" do
-        grpc_doc = Google::Cloud::Language::V1beta1::Document.new(
+        grpc_doc = Google::Cloud::Language::V1::Document.new(
           gcs_content_uri: "gs://bucket/path.ext", type: :HTML, language: "en")
-        features = Google::Cloud::Language::V1beta1::AnnotateTextRequest::Features.new(
+        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
           extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json
+        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json
 
         mock = Minitest::Mock.new
         mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
