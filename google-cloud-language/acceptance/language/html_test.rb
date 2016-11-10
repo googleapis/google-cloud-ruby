@@ -29,7 +29,9 @@ describe "Language (HTML)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.polarity.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -64,7 +66,9 @@ describe "Language (HTML)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.polarity.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -99,7 +103,9 @@ describe "Language (HTML)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.polarity.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -160,7 +166,9 @@ describe "Language (HTML)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.polarity.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.must_be :empty?
 
@@ -298,7 +306,9 @@ describe "Language (HTML)", :language do
       sentiment.language.must_equal "en"
 
       sentiment.polarity.must_be_kind_of Float
+      sentiment.polarity.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
+      sentiment.magnitude.wont_be :zero?
     end
 
     it "works with creating a document" do
@@ -311,7 +321,9 @@ describe "Language (HTML)", :language do
       sentiment.language.must_equal "en"
 
       sentiment.polarity.must_be_kind_of Float
+      sentiment.polarity.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
+      sentiment.magnitude.wont_be :zero?
     end
   end
 end
