@@ -147,7 +147,7 @@ module Google
         # @!attribute [rw] magnitude
         #   @return [Float]
         #     A non-negative number in the [0, +inf) range, which represents
-        #     the absolute magnitude of sentiment regardless of polarity (positive or
+        #     the absolute magnitude of sentiment regardless of score (positive or
         #     negative).
         # @!attribute [rw] score
         #   @return [Float]

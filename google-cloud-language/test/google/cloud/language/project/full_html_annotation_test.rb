@@ -434,7 +434,7 @@ describe Google::Cloud::Language::Project, :full_html_annotation, :mock_language
 
     annotation.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_be_close_to 1.0
+    annotation.sentiment.score.must_be_close_to 1.0
     annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
 
     annotation.entities.must_be_kind_of ::Array

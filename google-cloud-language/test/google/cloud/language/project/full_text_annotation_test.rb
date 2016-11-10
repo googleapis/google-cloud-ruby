@@ -575,7 +575,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
     annotation.language.must_equal "en"
 
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_equal 1.0
+    annotation.sentiment.score.must_equal 1.0
     annotation.sentiment.magnitude.must_equal 2.0999999046325684
 
     annotation.entities.count.must_equal 3

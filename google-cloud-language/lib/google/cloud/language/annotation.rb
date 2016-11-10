@@ -34,7 +34,7 @@ module Google
       #   document = language.document content
       #   annotation = document.annotate
       #
-      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.score #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
       #   annotation.entities.count #=> 2
       #   annotation.sentences.count #=> 1
@@ -150,7 +150,7 @@ module Google
         #   annotation = document.annotate
         #   sentiment = annotation.sentiment
         #
-        #   sentiment.polarity #=> 1.0
+        #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #   sentiment.language #=> "en"
         #
@@ -570,12 +570,12 @@ module Google
         ##
         # Represents the result of sentiment analysis.
         #
-        # @attr_reader [Float] polarity Polarity of the sentiment in the
+        # @attr_reader [Float] score Polarity of the sentiment in the
         #   [-1.0, 1.0] range. Larger numbers represent more positive
         #   sentiments.
         # @attr_reader [Float] magnitude A non-negative number in the [0, +inf]
         #   range, which represents the absolute magnitude of sentiment
-        #   regardless of polarity (positive or negative).
+        #   regardless of score (positive or negative).
         # @attr_reader [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are supported.
@@ -590,17 +590,18 @@ module Google
         #   annotation = document.annotate
         #
         #   sentiment = annotation.sentiment
-        #   sentiment.polarity #=> 1.0
+        #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #   sentiment.language #=> "en"
         #
         class Sentiment
-          attr_reader :polarity, :magnitude, :language
+          attr_reader :score, :magnitude, :language
+          alias_method :polarity, :score
 
           ##
           # @private Creates a new Sentiment instance.
-          def initialize polarity, magnitude, language
-            @polarity  = polarity
+          def initialize score, magnitude, language
+            @score     = score
             @magnitude = magnitude
             @language  = language
           end
@@ -609,7 +610,7 @@ module Google
           # @private New Sentiment from a V1::AnnotateTextResponse or
           # V1::AnalyzeSentimentResponse object.
           def self.from_grpc grpc
-            new grpc.document_sentiment.polarity,
+            new grpc.document_sentiment.score,
                 grpc.document_sentiment.magnitude, grpc.language
           end
         end

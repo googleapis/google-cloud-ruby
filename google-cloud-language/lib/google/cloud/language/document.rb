@@ -43,7 +43,7 @@ module Google
       #   annotation = document.annotate
       #
       #   annotation.entities.count #=> 2
-      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.score #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
       #   annotation.sentences.count #=> 1
       #   annotation.tokens.count #=> 10
@@ -193,7 +193,7 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.sentiment.polarity #=> 1.0
+        #   annotation.sentiment.score #=> 1.0
         #   annotation.sentiment.magnitude #=> 0.8999999761581421
         #   annotation.entities.count #=> 2
         #   annotation.sentences.count #=> 1
@@ -298,7 +298,7 @@ module Google
         # document = language.document content
         # sentiment = document.sentiment # API call
         #
-        # sentiment.polarity #=> 1.0
+        # sentiment.score #=> 1.0
         # sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment

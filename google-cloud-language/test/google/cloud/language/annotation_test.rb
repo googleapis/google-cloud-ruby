@@ -27,7 +27,7 @@ describe Google::Cloud::Language::Annotation, :mock_language do
 
     annotation.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_equal 1.0
+    annotation.sentiment.score.must_equal 1.0
     annotation.sentiment.magnitude.must_equal 2.0999999046325684
 
     annotation.entities.must_be_kind_of ::Array
@@ -72,7 +72,7 @@ describe Google::Cloud::Language::Annotation, :mock_language do
 
     annotation.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_be_close_to 1.0
+    annotation.sentiment.score.must_be_close_to 1.0
     annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
 
     annotation.entities.must_be_kind_of ::Array

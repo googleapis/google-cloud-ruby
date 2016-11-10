@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Language::Annotation::Sentiment do
   let(:sentiment_hash) do
     {
-      documentSentiment: { polarity: 1, magnitude: 2.0999999 },
+      documentSentiment: { score: 1, magnitude: 2.0999999 },
       language: "en"
     }
   end
@@ -29,7 +29,8 @@ describe Google::Cloud::Language::Annotation::Sentiment do
     sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
 
     sentiment.language.must_equal "en"
-    sentiment.polarity.must_equal 1.0
+    sentiment.score.must_equal 1.0
+    sentiment.polarity.must_equal 1.0 # Backwards compatibility for v1beta1
     sentiment.magnitude.must_equal 2.0999999046325684
   end
 end

@@ -40,7 +40,7 @@ module Google
       #   content = "Darth Vader is the best villain in Star Wars."
       #   annotation = language.annotate content
       #
-      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.score #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
       #   annotation.entities.count #=> 2
       #   annotation.sentences.count #=> 1
@@ -219,7 +219,7 @@ module Google
         #   content = "Darth Vader is the best villain in Star Wars."
         #   annotation = language.annotate content
         #
-        #   annotation.sentiment.polarity #=> 1.0
+        #   annotation.sentiment.score #=> 1.0
         #   annotation.sentiment.magnitude #=> 0.8999999761581421
         #   annotation.entities.count #=> 2
         #   annotation.sentences.count #=> 1
@@ -333,7 +333,7 @@ module Google
         #   document = language.document "Hello Chris and Mike!"
         #
         #   sentiment = language.sentiment document
-        #   sentiment.polarity #=> 1.0
+        #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment content, format: :text, language: nil

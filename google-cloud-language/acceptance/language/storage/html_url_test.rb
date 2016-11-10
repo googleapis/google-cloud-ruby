@@ -33,8 +33,8 @@ describe "Language (HTML/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
-      annotation.sentiment.polarity.wont_be :zero?
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
@@ -70,8 +70,8 @@ describe "Language (HTML/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
-      annotation.sentiment.polarity.wont_be :zero?
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
@@ -107,8 +107,8 @@ describe "Language (HTML/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
-      annotation.sentiment.polarity.wont_be :zero?
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
@@ -144,8 +144,8 @@ describe "Language (HTML/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
-      annotation.sentiment.polarity.wont_be :zero?
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
@@ -206,8 +206,8 @@ describe "Language (HTML/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
-      annotation.sentiment.polarity.wont_be :zero?
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
@@ -303,8 +303,8 @@ describe "Language (HTML/Storage URL)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_kind_of Float
-      sentiment.polarity.wont_be :zero?
+      sentiment.score.must_be_kind_of Float
+      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
       sentiment.magnitude.wont_be :zero?
     end
@@ -318,8 +318,8 @@ describe "Language (HTML/Storage URL)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_kind_of Float
-      sentiment.polarity.wont_be :zero?
+      sentiment.score.must_be_kind_of Float
+      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
       sentiment.magnitude.wont_be :zero?
     end

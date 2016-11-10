@@ -362,7 +362,7 @@
     }]
   }],
   "documentSentiment": {
-    "polarity": 1,
+    "score": 1,
     "magnitude": 2.0999999
   },
   "language": "en"
