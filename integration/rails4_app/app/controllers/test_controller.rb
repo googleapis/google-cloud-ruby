@@ -1,7 +1,6 @@
 class TestController < ApplicationController
   def index
-    @outputs = ["google-cloud-ruby Rails 4 test app"]
-    render "test/test"
+    render text: "google-cloud-ruby Rails 4 test app"
   end
 
   def test_error_reporting
@@ -14,7 +13,17 @@ class TestController < ApplicationController
     logger.info "Test info log entry from Rails 4: #{log_token}"
     logger.error "Test error log entry from Rails 4: #{log_token}"
 
-    @outputs = [log_token.to_s]
-    render "test/test"
+    render text: log_token.to_s
+  end
+
+  def test_logger
+    render json: {
+      logger_class: Rails.logger.class.to_s,
+      writer_class: Rails.logger.writer.class.to_s,
+      monitored_resource: {
+        type: Rails.logger.resource.type,
+        labels: Rails.logger.resource.labels
+      }
+    }
   end
 end

@@ -123,7 +123,7 @@ $ rake test:acceptance
 
 ### Integration Tests
 
-The google-cloud-ruby integration tests are end-to-end tests that validate library functionality on real Google Cloud Platform hosting environments. The integration process deploys a test Rack-based application to Google Cloud Platform, then validates google-cloud-ruby code by making requests to this test application.
+The google-cloud-ruby integration tests are end-to-end tests that validate library functionality on real Google Cloud Platform hosting environments. The integration process deploys several Rack-based applications to Google Cloud Platform one by one, then validates google-cloud-ruby code by making requests to these test applications.
 
 All integration tests require [Cloud SDK](https://cloud.google.com/sdk/) for deployment. Following the instructions in [Authentication guide](AUTHENTICATION.md) for installation and authentication. Make sure a project ID is set:
 ```sh

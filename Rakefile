@@ -683,10 +683,19 @@ task :release, :tag do |t, args|
   end
 end
 
+desc "Run all integration tests"
+task :integration, :project_uri, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  Rake::Task["bundleupdate"].invoke if bundleupdate
+  sh "bundle exec rake integration:gae[#{args[:project_uri]}]"
+  sh "bundle exec rake integration:gke"
+end
+
 namespace :integration do
   desc "Run integration:gae for all gems"
   task :gae, :project_uri do |t, args|
-    require_relative "integration/helper"
+    require_relative "integration/deploy"
+
     if executable_exists? "gcloud"
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
@@ -720,7 +729,8 @@ namespace :integration do
 
   desc "Run integration:gke for all gems"
   task :gke do
-    require_relative "integration/helper"
+    require_relative "integration/deploy"
+
     if executable_exists?("gcloud")&& executable_exists?("kubectl")
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
@@ -781,7 +791,6 @@ end
 # subdirectories.
 def run_task_if_exists task_name, params = ""
   if `bundle exec rake --tasks #{task_name}` =~ /#{task_name}[^:]/
-    puts "bundle exec rake #{task_name}[#{params}]"
     sh "bundle exec rake #{task_name}[#{params}]"
   end
 end

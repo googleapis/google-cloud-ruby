@@ -79,3 +79,14 @@ get '/test_logging' do
   logger.info "Test log entry from classic sinatra #{log_token}"
   log_token.to_s
 end
+
+get '/test_logger' do
+  {
+    logger_class: logger.class.to_s,
+    writer_class: logger.writer.class.to_s,
+    monitored_resource: {
+      type: logger.resource.type,
+      labels: logger.resource.labels
+    }
+  }.to_json
+end

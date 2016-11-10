@@ -17,15 +17,14 @@ require "logging_helper"
 require "google/cloud/logging"
 
 describe Google::Cloud::Logging do
-  it "Uses monitored resource with 'gae_app' type" do
+  it "correctly setups logger" do
     response = JSON.parse send_request("test_logger")
 
-    response["monitored_resource"]["type"].must_equal "gae_app"
-    response["monitored_resource"]["labels"]["module_id"].wont_be_nil
-    response["monitored_resource"]["labels"]["version_id"].wont_be_nil
+    response["logger_class"].must_equal "Google::Cloud::Logging::Logger"
+    response["writer_class"].must_equal "Google::Cloud::Logging::AsyncWriter"
   end
 
-  it "injects trace_id into each log entry" do
+  it "submits logs on GAE" do
     token = Time.now.to_i
     send_request "test_logging", "token=#{token}"
 
@@ -39,6 +38,8 @@ describe Google::Cloud::Logging do
       logs.length == 1
     end
 
-    logs[0]["labels"]["traceId"].wont_be_nil
+    logs.length.must_equal 1
   end
 end
+
+

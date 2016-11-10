@@ -13,25 +13,17 @@
 # limitations under the License.
 
 
-require "minitest/autorun"
-require "minitest/rg"
-require "minitest/focus"
-require "net/http"
+require "error_reporting_helper"
 require "google/cloud/error_reporting/v1beta1"
 
 
 describe Google::Cloud::ErrorReporting do
-  let(:project_uri) { ENV['TEST_GOOGLE_CLOUD_PROJECT_URI'] }
-
   it "submits error event to Stackdriver Error Reporting service" do
-    error_token = Time.now.to_i
-    error_reporting_uri = URI(project_uri + "/test_error_reporting")
-    error_reporting_uri.query="token=#{error_token}"
-    response = Net::HTTP.get_response error_reporting_uri
+    token = Time.now.to_i
+    response = send_request "test_error_reporting", "token=#{token}"
 
     # TODO: Find a better way to verify response. Or even better, validate the
     # error event was indeed reported to ErrorReporting
-    response.code.must_equal "500"
-    response.body.must_match error_token.to_s
+    response.must_match token.to_s
   end
 end
