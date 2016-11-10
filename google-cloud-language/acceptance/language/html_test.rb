@@ -292,6 +292,7 @@ describe "Language (HTML)", :language do
       entities.places.first.type.must_equal :LOCATION
       entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
       entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
+      entities.places.first.mid.must_equal "/m/07srw"
       entities.places.first.salience.must_be_kind_of Float
       entities.places.first.mentions.count.must_equal 1
       entities.places.first.mentions.first.text.must_equal "Utah"

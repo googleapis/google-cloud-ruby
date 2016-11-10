@@ -18,7 +18,7 @@ describe Google::Cloud::Language::Annotation::Entity do
   let(:entity_hash) do
     { name: "Utah",
       type: "LOCATION",
-      metadata: { wikipedia_url: "http://en.wikipedia.org/wiki/Utah" },
+      metadata: { wikipedia_url: "http://en.wikipedia.org/wiki/Utah", mid: "/m/07srw" },
       salience: 0.069791436,
       mentions: [{ text: { content: "Utah", beginOffset: -1 } }]
     }
@@ -33,6 +33,7 @@ describe Google::Cloud::Language::Annotation::Entity do
     entity.type.must_equal :LOCATION
     entity.metadata.must_be_kind_of Hash
     entity.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
+    entity.mid.must_equal "/m/07srw"
     entity.salience.must_be_close_to 0.069791436
     entity.mentions.must_be_kind_of Array
     entity.mentions.count.must_equal 1

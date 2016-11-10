@@ -595,6 +595,15 @@ module Google
           end
 
           ##
+          # Returns the `mid` property of the {#metadata}.
+          #
+          # @return [String]
+          #
+          def mid
+            metadata["mid"]
+          end
+
+          ##
           # @private New Entity from a V1::Entity object.
           def self.from_grpc grpc
             metadata = Core::GRPCUtils.map_to_hash grpc.metadata
