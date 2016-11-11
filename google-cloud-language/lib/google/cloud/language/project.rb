@@ -209,7 +209,7 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content analysis.
+        # @return [Annotation] The results for the content analysis.
         #
         # @example
         #   require "google/cloud/language"
@@ -255,7 +255,8 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content syntax analysis.
+        # @return [Annotation::Syntax] The results for the content syntax
+        #   analysis.
         #
         # @example
         #   require "google/cloud/language"
@@ -265,11 +266,27 @@ module Google
         #   document = language.document "Hello world!"
         #
         #   annotation = language.syntax document
-        #   annotation.thing #=> Some Result
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
         #
         def syntax content, format: nil, language: nil, encoding: nil
-          annotate content, syntax: true, format: format, language: language,
-                            encoding: encoding
+          ensure_service!
+          doc = document content, language: language, format: format
+          grpc = service.syntax doc.to_grpc, encoding: encoding
+          Annotation::Syntax.from_grpc grpc
         end
 
         ##
@@ -288,7 +305,7 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation::Entities>] The results for the entities analysis.
+        # @return [Annotation::Entities] The results for the entities analysis.
         #
         # @example
         #   require "google/cloud/language"
@@ -322,7 +339,7 @@ module Google
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
         #
-        # @return [Annotation::Sentiment>] The results for the sentiment
+        # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
         #
         # @example

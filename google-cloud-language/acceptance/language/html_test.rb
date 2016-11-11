@@ -163,10 +163,6 @@ describe "Language (HTML)", :language do
 
       annotation.language.must_equal "en"
 
-      annotation.sentiment.must_be :nil?
-
-      annotation.entities.must_be :empty?
-
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
       annotation.sentences.first.offset.must_equal 19
@@ -254,10 +250,6 @@ describe "Language (HTML)", :language do
 
       annotation.language.must_equal "en"
 
-      annotation.sentiment.must_be :nil?
-
-      annotation.entities.must_be :empty?
-
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
       annotation.sentences.first.offset.must_equal 19
@@ -280,10 +272,6 @@ describe "Language (HTML)", :language do
       annotation = doc.syntax
 
       annotation.language.must_equal "en"
-
-      annotation.sentiment.must_be :nil?
-
-      annotation.entities.must_be :empty?
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello

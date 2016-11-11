@@ -85,6 +85,14 @@ module Google
           end
         end
 
+        def syntax doc_grpc, encoding: nil
+          encoding = verify_encoding! encoding
+          execute do
+            service.analyze_syntax doc_grpc, encoding,
+                                   options: default_options
+          end
+        end
+
         def entities doc_grpc, encoding: nil
           encoding = verify_encoding! encoding
           execute do

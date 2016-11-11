@@ -92,8 +92,8 @@ module Google
         #   annotation.tokens.count #=> 10
         #   token = annotation.tokens.first
         #
-        #   token.text_span.text #=> "Darth"
-        #   token.text_span.offset #=> 0
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
         #   token.part_of_speech #=> :NOUN
         #   token.head_token_index #=> 1
         #   token.label #=> :NN
@@ -101,6 +101,40 @@ module Google
         #
         def tokens
           @tokens ||= Array(grpc.tokens).map { |g| Token.from_grpc g }
+        end
+
+        ##
+        # The result of syntax analysis.
+        #
+        # @return [Syntax]
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
+        def syntax
+          return nil if @grpc.tokens.nil?
+          @syntax ||= Syntax.from_grpc @grpc
         end
 
         ##
@@ -469,6 +503,63 @@ module Google
             new text_span, part_of_speech,
                 grpc.dependency_edge.head_token_index,
                 grpc.dependency_edge.label, grpc.lemma
+          end
+        end
+
+        ##
+        # Represents the result of syntax analysis.
+        #
+        # @attr_reader [Array<Sentence>] sentences The sentences returned by
+        #   syntax analysis.
+        # @attr_reader [Array<Token>] sentences The tokens returned by
+        #   syntax analysis.
+        # @attr_reader [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are supported.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
+        class Syntax
+          attr_reader :sentences, :tokens, :language
+
+          ##
+          # @private Creates a new Syntax instance.
+          def initialize sentences, tokens, language
+            @sentences = sentences
+            @tokens    = tokens
+            @language  = language
+          end
+
+          ##
+          # @private New Syntax from a V1::AnnotateTextResponse or
+          # V1::AnalyzeSyntaxResponse object.
+          def self.from_grpc grpc
+            new Array(grpc.sentences).map { |g| Sentence.from_grpc g },
+                Array(grpc.tokens).map { |g| Token.from_grpc g },
+                grpc.language
           end
         end
 

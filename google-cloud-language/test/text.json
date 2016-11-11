@@ -33,7 +33,18 @@
       "beginOffset": -1
     },
     "partOfSpeech": {
-      "tag": "X"
+      "tag": "X",
+      "aspect": "PERFECTIVE",
+      "case": "INSTRUMENTAL",
+      "form": "GERUND",
+      "gender": "NEUTER",
+      "mood": "SUBJUNCTIVE",
+      "number": "SINGULAR",
+      "person": "FIRST",
+      "proper": "NOT_PROPER",
+      "reciprocity": "RECIPROCAL",
+      "tense": "IMPERFECT",
+      "voice": "ACTIVE"
     },
     "dependencyEdge": {
       "label": "ROOT"
