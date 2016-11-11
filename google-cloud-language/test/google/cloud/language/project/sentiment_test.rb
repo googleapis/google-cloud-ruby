@@ -24,7 +24,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment text_content
@@ -39,7 +39,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment text_content, language: :en
@@ -54,7 +54,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment text_content, format: :text
@@ -69,7 +69,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment text_content, format: :text, language: :en
@@ -84,7 +84,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment html_content, format: :html
@@ -99,7 +99,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     sentiment = language.sentiment html_content, format: :html, language: :en

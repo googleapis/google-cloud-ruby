@@ -360,7 +360,7 @@ describe "Language (HTML/Storage File)", :language do
       sentiment.magnitude.wont_be :zero?
 
       sentiment.sentences.first.text.must_equal hello
-      sentiment.sentences.first.offset.must_equal -1
+      sentiment.sentences.first.offset.must_equal 19
       sentiment.sentences.first.must_be :sentiment?
       sentiment.sentences.first.score.must_be_kind_of Float
       sentiment.sentences.first.score.wont_be :zero?
@@ -383,7 +383,7 @@ describe "Language (HTML/Storage File)", :language do
       sentiment.magnitude.wont_be :zero?
 
       sentiment.sentences.first.text.must_equal hello
-      sentiment.sentences.first.offset.must_equal -1
+      sentiment.sentences.first.offset.must_equal 19
       sentiment.sentences.first.must_be :sentiment?
       sentiment.sentences.first.score.must_be_kind_of Float
       sentiment.sentences.first.score.wont_be :zero?

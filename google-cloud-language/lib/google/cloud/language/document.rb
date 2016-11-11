@@ -302,6 +302,9 @@ module Google
         # a writer's attitude as positive, negative, or neutral. Currently, only
         # English is supported for sentiment analysis.
         #
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
         #
@@ -317,9 +320,9 @@ module Google
         # sentiment.score #=> 1.0
         # sentiment.magnitude #=> 0.8999999761581421
         #
-        def sentiment
+        def sentiment encoding: nil
           ensure_service!
-          grpc = service.sentiment to_grpc
+          grpc = service.sentiment to_grpc, encoding: encoding
           Annotation::Sentiment.from_grpc grpc
         end
 

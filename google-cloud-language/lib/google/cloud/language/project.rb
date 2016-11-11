@@ -338,6 +338,8 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
@@ -353,10 +355,10 @@ module Google
         #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #
-        def sentiment content, format: :text, language: nil
+        def sentiment content, format: :text, language: nil, encoding: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.sentiment doc.to_grpc
+          grpc = service.sentiment doc.to_grpc, encoding: encoding
           Annotation::Sentiment.from_grpc grpc
         end
 

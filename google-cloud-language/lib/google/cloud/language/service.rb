@@ -101,9 +101,11 @@ module Google
           end
         end
 
-        def sentiment doc_grpc
+        def sentiment doc_grpc, encoding: nil
+          encoding = verify_encoding! encoding
           execute do
-            service.analyze_sentiment doc_grpc, options: default_options
+            service.analyze_sentiment doc_grpc, encoding_type: encoding,
+                                                options: default_options
           end
         end
 
