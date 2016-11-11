@@ -334,7 +334,8 @@
       "text": {
         "content": "Chris",
         "beginOffset": -1
-      }
+      },
+      "type": "PROPER"
     }]
   }, {
     "name": "utah",
@@ -348,7 +349,8 @@
       "text": {
         "content": "Utah",
         "beginOffset": -1
-      }
+      },
+      "type": "PROPER"
     }]
   }],
   "documentSentiment": {

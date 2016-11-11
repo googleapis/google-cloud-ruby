@@ -475,8 +475,9 @@ module Google
         #   provides information about the importance or centrality of that
         #   entity to the entire document text. Scores closer to 0 are less
         #   salient, while scores closer to 1.0 are highly salient.
-        # @attr_reader [Array<TextSpan>] mentions The mentions of this entity in
-        #   the input document. The API currently supports proper noun mentions.
+        # @attr_reader [Array<Entity::Mention>] mentions The mentions of this
+        #   entity in the input document. The API currently supports proper noun
+        #   mentions.
         #
         # @example
         #   require "google/cloud/language"
@@ -608,9 +609,92 @@ module Google
           def self.from_grpc grpc
             metadata = Core::GRPCUtils.map_to_hash grpc.metadata
             mentions = Array(grpc.mentions).map do |g|
-              TextSpan.from_grpc g.text
+              text_span = TextSpan.from_grpc g.text
+              Mention.new text_span, g.type
             end
             new grpc.name, grpc.type, metadata, grpc.salience, mentions
+          end
+
+          ##
+          # Represents a piece of text including relative location.
+          #
+          # @attr_reader [TextSpan] text_span The entity mention text.
+          # @attr_reader [Symbol] type The type of the entity mention.
+          #
+          # @example
+          #   require "google/cloud/language"
+          #
+          #   language = Google::Cloud::Language.new
+          #
+          #   content = "Darth Vader is the best villain in Star Wars."
+          #   document = language.document content
+          #   annotation = document.annotate
+          #
+          #   entities = annotation.entities
+          #   entities.count #=> 2
+          #   entity = entities.first
+          #
+          #   entity.mentions.count #=> 1
+          #   entity.mentions.first.text # => "Darth Vader"
+          #   entity.mentions.first.offset # => 0
+          #   entity.mentions.first.proper? # => true
+          #
+          class Mention
+            attr_reader :text_span, :type
+
+            ##
+            # @private Creates a new Entity::Mention instance.
+            def initialize text_span, type
+              @text_span = text_span
+              @type      = type
+            end
+
+            ##
+            # The content of the output text. See {TextSpan#text}.
+            #
+            # @return [String]
+            #
+            def text
+              text_span.text
+            end
+            alias_method :content, :text
+
+            ##
+            # The API calculates the beginning offset of the content in the
+            # original document according to the `encoding` specified in the
+            # API request. See {TextSpan#offset}.
+            #
+            # @return [Integer]
+            #
+            # @attr_reader [Integer] offset
+            def offset
+              text_span.offset
+            end
+            alias_method :begin_offset, :offset
+
+            ##
+            # Returns `true` if {#type} is `:PROPER`.
+            #
+            # @return [Boolean]
+            #
+            def proper?
+              type == :PROPER
+            end
+
+            ##
+            # Returns `true` if {#type} is `:COMMON`.
+            #
+            # @return [Boolean]
+            #
+            def common?
+              type == :COMMON
+            end
+
+            ##
+            # @private New TextSpan from a V1::TextSpan object.
+            def self.from_grpc grpc
+              new grpc.content, grpc.begin_offset
+            end
           end
         end
 

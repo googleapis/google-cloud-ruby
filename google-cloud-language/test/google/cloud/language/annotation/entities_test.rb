@@ -27,7 +27,8 @@ describe Google::Cloud::Language::Annotation::Entities do
           "text": {
             "content": "Chris",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }, {
         "name": "Mike",
@@ -38,7 +39,8 @@ describe Google::Cloud::Language::Annotation::Entities do
           "text": {
             "content": "Mike",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }, {
         "name": "Utah",
@@ -52,7 +54,8 @@ describe Google::Cloud::Language::Annotation::Entities do
           "text": {
             "content": "Utah",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }],
       "language": "en"
@@ -88,5 +91,10 @@ describe Google::Cloud::Language::Annotation::Entities do
     entities.places.first.mentions.count.must_equal 1
     entities.places.first.mentions.first.text.must_equal "Utah"
     entities.places.first.mentions.first.offset.must_equal -1
+    entities.places.first.mentions.first.must_be :proper?
+    entities.places.first.mentions.first.wont_be :common?
+    entities.places.first.mentions.first.text_span.text.must_equal "Utah"
+    entities.places.first.mentions.first.text_span.offset.must_equal -1
+    entities.places.first.mentions.first.type.must_equal :PROPER
   end
 end
