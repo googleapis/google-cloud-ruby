@@ -50,6 +50,14 @@ describe "Language (HTML/Storage File)", :language do
       annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
@@ -86,6 +94,14 @@ describe "Language (HTML/Storage File)", :language do
       annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
@@ -122,6 +138,14 @@ describe "Language (HTML/Storage File)", :language do
       annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
@@ -158,6 +182,14 @@ describe "Language (HTML/Storage File)", :language do
       annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
@@ -182,6 +214,10 @@ describe "Language (HTML/Storage File)", :language do
       annotation.entities.must_be :empty?
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.wont_be :sentiment?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
@@ -206,9 +242,24 @@ describe "Language (HTML/Storage File)", :language do
       annotation.sentiment.magnitude.must_be_kind_of Float
       annotation.sentiment.magnitude.wont_be :zero?
 
+      annotation.sentiment.sentences.first.text.must_equal hello
+      annotation.sentiment.sentences.first.offset.must_equal 19
+      annotation.sentiment.sentences.first.must_be :sentiment?
+      annotation.sentiment.sentences.first.score.must_be_kind_of Float
+      annotation.sentiment.sentences.first.score.wont_be :zero?
+      annotation.sentiment.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentiment.sentences.first.magnitude.wont_be :zero?
+
       annotation.entities.must_be :empty?
 
       annotation.sentences.wont_be :empty?
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 19
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
       annotation.tokens.must_be :empty?
     end
 
@@ -307,6 +358,14 @@ describe "Language (HTML/Storage File)", :language do
       sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
       sentiment.magnitude.wont_be :zero?
+
+      sentiment.sentences.first.text.must_equal hello
+      sentiment.sentences.first.offset.must_equal -1
+      sentiment.sentences.first.must_be :sentiment?
+      sentiment.sentences.first.score.must_be_kind_of Float
+      sentiment.sentences.first.score.wont_be :zero?
+      sentiment.sentences.first.magnitude.must_be_kind_of Float
+      sentiment.sentences.first.magnitude.wont_be :zero?
     end
 
     it "works with creating a document" do
@@ -322,6 +381,14 @@ describe "Language (HTML/Storage File)", :language do
       sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
       sentiment.magnitude.wont_be :zero?
+
+      sentiment.sentences.first.text.must_equal hello
+      sentiment.sentences.first.offset.must_equal -1
+      sentiment.sentences.first.must_be :sentiment?
+      sentiment.sentences.first.score.must_be_kind_of Float
+      sentiment.sentences.first.score.wont_be :zero?
+      sentiment.sentences.first.magnitude.must_be_kind_of Float
+      sentiment.sentences.first.magnitude.wont_be :zero?
     end
   end
 end

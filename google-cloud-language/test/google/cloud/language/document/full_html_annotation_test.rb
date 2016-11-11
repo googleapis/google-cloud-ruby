@@ -78,9 +78,16 @@ describe Google::Cloud::Language::Document, :full_html_annotation, :mock_languag
     annotation.entities.other.map(&:name).must_equal []
 
     annotation.sentences.each do |sentence|
-      sentence.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.must_be_kind_of Google::Cloud::Language::Annotation::Sentence
+      sentence.text_span.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentence::Sentiment
     end
     annotation.sentences.map(&:text).must_equal html_sentences
+    annotation.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    annotation.sentences.first.offset.must_equal -1
+    annotation.sentences.first.must_be :sentiment?
+    annotation.sentences.first.score.must_equal 1.0
+    annotation.sentences.first.magnitude.must_equal 1.899999976158142
 
     annotation.tokens.each do |token|
       token.must_be_kind_of Google::Cloud::Language::Annotation::Token

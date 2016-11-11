@@ -66,14 +66,12 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   text_span = annotation.sentences.last
-        #   text_span.text #=> "I hate cats."
-        #   text_span.offset #=> 13
+        #   sentence = annotation.sentences.last
+        #   sentence.text #=> "I hate cats."
+        #   sentence.offset #=> 13
         #
         def sentences
-          @sentences ||= begin
-            Array(grpc.sentences).map { |g| TextSpan.from_grpc g.text }
-          end
+          @sentences ||= Array(grpc.sentences).map { |g| Sentence.from_grpc g }
         end
 
         ##
@@ -216,7 +214,8 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   text_span = annotation.sentences.last
+        #   sentence = annotation.sentences.last
+        #   text_span = sentence.text_span
         #   text_span.text #=> "I hate cats."
         #   text_span.offset #=> 13
         #
@@ -272,6 +271,132 @@ module Google
             new grpc.tag, grpc.aspect, grpc.case, grpc.form, grpc.gender,
                 grpc.mood, grpc.number, grpc.person, grpc.proper,
                 grpc.reciprocity, grpc.tense, grpc.voice
+          end
+        end
+
+        # Represents a piece of text including relative location.
+        #
+        # @attr_reader [TextSpan] text_span The sentence text.
+        # @attr_reader [Sentence::Sentiment] sentiment The sentence sentiment.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.sentences.count #=> 1
+        #
+        class Sentence
+          attr_reader :text_span, :sentiment
+
+          ##
+          # @private Creates a new Sentence instance.
+          def initialize text_span, sentiment
+            @text_span = text_span
+            @sentiment = sentiment
+          end
+
+          ##
+          # The content of the output text. See {TextSpan#text}.
+          #
+          # @return [String]
+          #
+          def text
+            text_span.text
+          end
+          alias_method :content, :text
+
+          ##
+          # The API calculates the beginning offset of the content in the
+          # original document according to the `encoding` specified in the
+          # API request. See {TextSpan#offset}.
+          #
+          # @return [Integer]
+          #
+          def offset
+            text_span.offset
+          end
+          alias_method :begin_offset, :offset
+
+          # Returns `true` if the Sentence has a Sentiment.
+          #
+          # @return [Boolean]
+          #
+          def sentiment?
+            !sentiment.nil?
+          end
+
+          ##
+          # Score. See {Sentence::Sentiment#score}.
+          #
+          # @return [Float]
+          #
+          def score
+            return nil unless sentiment?
+            sentiment.score
+          end
+
+          ##
+          # A non-negative number in the [0, +inf] range, which represents the
+          # absolute magnitude of sentiment regardless of score (positive or
+          # negative). See {Sentence::Sentiment#magnitude}.
+          #
+          # @return [Float]
+          #
+          def magnitude
+            return nil unless sentiment?
+            sentiment.magnitude
+          end
+
+          ##
+          # @private New Sentence from a V1::Sentence object.
+          def self.from_grpc grpc
+            text_span = TextSpan.from_grpc grpc.text
+            sentiment = Sentence::Sentiment.from_grpc grpc.sentiment
+            new text_span, sentiment
+          end
+
+          ##
+          # Represents the result of sentiment analysis.
+          #
+          # @attr_reader [Float] score Score.
+          # @attr_reader [Float] magnitude A non-negative number in the [0,
+          #   +inf] range, which represents the absolute magnitude of sentiment
+          #   regardless of score (positive or negative).
+          #
+          # @example
+          #   require "google/cloud/language"
+          #
+          #   language = Google::Cloud::Language.new
+          #
+          #   content = "Darth Vader is the best villain in Star Wars."
+          #   document = language.document content
+          #   annotation = document.annotate
+          #
+          #   sentiment = annotation.sentences.first
+          #   sentiment.score #=> 1.0
+          #   sentiment.magnitude #=> 0.8999999761581421
+          #
+          class Sentiment
+            attr_reader :score, :magnitude
+
+            ##
+            # @private Creates a new Sentence::Sentiment instance.
+            def initialize score, magnitude
+              @score     = score
+              @magnitude = magnitude
+            end
+
+            ##
+            # @private New Sentence::Sentiment from a V1::Sentiment object.
+            def self.from_grpc grpc
+              return nil if grpc.nil?
+              new grpc.score, grpc.magnitude
+            end
           end
         end
 
@@ -707,6 +832,8 @@ module Google
         # @attr_reader [Float] magnitude A non-negative number in the [0, +inf]
         #   range, which represents the absolute magnitude of sentiment
         #   regardless of score (positive or negative).
+        # @attr_reader [Array<Sentence>] sentences The sentences returned by
+        #   sentiment analysis.
         # @attr_reader [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are supported.
@@ -726,14 +853,14 @@ module Google
         #   sentiment.language #=> "en"
         #
         class Sentiment
-          attr_reader :score, :magnitude, :language
-          alias_method :polarity, :score
+          attr_reader :score, :magnitude, :sentences, :language
 
           ##
           # @private Creates a new Sentiment instance.
-          def initialize score, magnitude, language
+          def initialize score, magnitude, sentences, language
             @score     = score
             @magnitude = magnitude
+            @sentences = sentences
             @language  = language
           end
 
@@ -742,7 +869,9 @@ module Google
           # V1::AnalyzeSentimentResponse object.
           def self.from_grpc grpc
             new grpc.document_sentiment.score,
-                grpc.document_sentiment.magnitude, grpc.language
+                grpc.document_sentiment.magnitude,
+                Array(grpc.sentences).map { |g| Sentence.from_grpc g },
+                grpc.language
           end
         end
       end

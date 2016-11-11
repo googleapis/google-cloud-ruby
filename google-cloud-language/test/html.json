@@ -3,16 +3,28 @@
     "text": {
       "content": "Hello from Chris and Mike!",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }, {
     "text": {
       "content": "If you find yourself in <strong>Utah</strong>, come say hi!",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }, {
     "text": {
       "content": "We <em>love</em> ruby and writing code.",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }],
   "tokens": [{

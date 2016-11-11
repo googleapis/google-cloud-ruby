@@ -18,7 +18,17 @@ describe Google::Cloud::Language::Annotation::Sentiment do
   let(:sentiment_hash) do
     {
       documentSentiment: { score: 1, magnitude: 2.0999999 },
-      language: "en"
+      language: "en",
+      sentences: [{
+        text: {
+          content: "Hello from Chris and Mike!",
+          beginOffset: -1
+        },
+        sentiment: {
+          score: 1,
+          magnitude: 1.9
+        }
+      }]
     }
   end
   let(:sentiment_json) { sentiment_hash.to_json }
@@ -30,7 +40,13 @@ describe Google::Cloud::Language::Annotation::Sentiment do
 
     sentiment.language.must_equal "en"
     sentiment.score.must_equal 1.0
-    sentiment.polarity.must_equal 1.0 # Backwards compatibility for v1beta1
     sentiment.magnitude.must_equal 2.0999999046325684
+
+    sentiment.sentences.count.must_equal 1
+    sentiment.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    sentiment.sentences.first.offset.must_equal -1
+    sentiment.sentences.first.must_be :sentiment?
+    sentiment.sentences.first.score.must_equal 1.0
+    sentiment.sentences.first.magnitude.must_equal 1.899999976158142
   end
 end
