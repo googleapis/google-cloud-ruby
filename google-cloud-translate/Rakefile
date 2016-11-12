@@ -25,20 +25,63 @@ end
 
 # Acceptance tests
 desc "Runs the translate acceptance tests."
-task :acceptance, :key do |t, args|
+task :acceptance, :project, :keyfile, :key do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["TRANSLATE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["TRANSLATE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["TRANSLATE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
   key = args[:key]
   key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
-  if key.nil?
-    fail "You must provide a key. e.g. rake acceptance[api_key] or TRANSLATE_TEST_KEY=api_key rake acceptance"
+
+  # run tests with api key credentials when available
+  if key
+    puts "running acceptance tests with API key"
+    # Rake::Task["acceptance:key"].invoke key
+    puts `bundle exec rake acceptance:key[#{key}]`
   end
+
+  # always run tests with service account credentials
+  puts "running acceptance tests with service account"
+
   # always overwrite when running tests
-  ENV["TRANSLATE_KEY"] = key
+  ENV["TRANSLATE_PROJECT"] = project
+  ENV["TRANSLATE_KEYFILE"] = nil
+  ENV["TRANSLATE_KEYFILE_JSON"] = keyfile
+  ENV["TRANSLATE_KEY"] = nil
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
+  task :key, :key do |t, args|
+    key = args[:key]
+    key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
+    if key.nil?
+      fail "unable to run acceptance tests with api key credentials"
+    end
+    # always overwrite when running tests
+    ENV["TRANSLATE_PROJECT"] = nil
+    ENV["TRANSLATE_KEYFILE"] = nil
+    ENV["GOOGLE_CLOUD_KEYFILE"] = nil
+    ENV["GCLOUD_KEYFILE"] = nil
+    ENV["TRANSLATE_KEYFILE_JSON"] = nil
+    ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = nil
+    ENV["GCLOUD_KEYFILE_JSON"] = nil
+    ENV["TRANSLATE_KEY"] = key
+
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  end
+
   desc "Runs acceptance tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     require "simplecov"

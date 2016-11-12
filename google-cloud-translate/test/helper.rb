@@ -21,23 +21,10 @@ require "json"
 require "base64"
 require "google/cloud/translate"
 
-##
-# Monkey-Patch Google API Client to support Mocks
-module Google::Apis::Core::Hashable
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, the Google API Client objects do not match with ===.
-  # Therefore, we must add this capability.
-  # This module seems like as good a place as any...
-  def === other
-    return(to_h === other.to_h) if other.respond_to? :to_h
-    super
-  end
-end
-
 class MockTranslate < Minitest::Spec
-  let(:key) { "test-api-key" }
-  let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(key)) }
+  let(:project) { "test" }
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(project, credentials)) }
 
   # Register this spec type for when :mock_translate is used.
   register_spec_type(self) do |desc, *addl|

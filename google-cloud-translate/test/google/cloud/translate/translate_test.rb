@@ -25,11 +25,11 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates a single input" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
-    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: nil, format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello"], to: "es", from: nil, format: nil, cid: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translation = translate.translate "Hello", to: "es"
     mock.verify
 
@@ -45,11 +45,11 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates a single input with from" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
-    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: nil, format: nil, source: "en"}]
+    translations_resource = { translatedText: "Hola" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello"], to: "es", cid: nil, format: nil, from: "en"]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translation = translate.translate "Hello", to: "es", from: :en
     mock.verify
 
@@ -65,11 +65,11 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates a single input with format" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
-    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>"], "es", {cid: nil, format: "html", source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "<h1>Hola</h1>" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource] }.to_json)
+    mock.expect :translate, list_translations_resource, [["<h1>Hello</h1>"], to: "es", cid: nil, format: "html", from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translation = translate.translate "<h1>Hello</h1>", to: "es", format: :html
     mock.verify
 
@@ -85,11 +85,11 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates a single input with cid" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource]
-    mock.expect :list_translations, list_translations_resource, [["Hello"], "es", {cid: "user-1234567899", format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello"], to: "es", cid: "user-1234567899", format: nil, from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translation = translate.translate "Hello", to: "es", cid: "user-1234567899"
     mock.verify
 
@@ -105,12 +105,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: nil, format: nil, from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate "Hello", "How are you today?", to: "es"
     mock.verify
 
@@ -137,12 +137,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs in an array" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: nil, format: nil, from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: "es"
     mock.verify
 
@@ -169,12 +169,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs with from" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: "en"}]
+    translations_resource = { translatedText: "Hola" }
+    translations_resource_2 = { translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: nil, format: nil, from: "en"]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate "Hello", "How are you today?", to: :es, from: :en
     mock.verify
 
@@ -201,12 +201,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs in an array with from" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: nil, format: nil, source: "en"}]
+    translations_resource = { translatedText: "Hola" }
+    translations_resource_2 = { translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: nil, format: nil, from: "en"]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: :es, from: :en
     mock.verify
 
@@ -233,12 +233,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs with format" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas <em>hoy</em>?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], "es", {cid: nil, format: "html", source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "<h1>Hola</h1>" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas <em>hoy</em>?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], to: "es", cid: nil, format: "html", from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate "<h1>Hello</h1>", "How are <em>you</em> today?", to: "es", format: :html
     mock.verify
 
@@ -265,12 +265,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs in an array with format" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "<h1>Hola</h1>"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas <em>hoy</em>?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], "es", {cid: nil, format: "html", source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "<h1>Hola</h1>" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas <em>hoy</em>?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["<h1>Hello</h1>", "How are <em>you</em> today?"], to: "es", cid: nil, format: "html", from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate ["<h1>Hello</h1>", "How are <em>you</em> today?"], to: "es", format: :html
     mock.verify
 
@@ -297,12 +297,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs with cid" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: "user-1234567899", format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: "user-1234567899", format: nil, from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate "Hello", "How are you today?", to: "es", cid: "user-1234567899"
     mock.verify
 
@@ -329,12 +329,12 @@ describe Google::Cloud::Translate::Api, :translate, :mock_translate do
 
   it "translates multiple inputs in an array with cid" do
     mock = Minitest::Mock.new
-    translations_resource = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Hola"
-    translations_resource_2 = Google::Cloud::Translate::Service::API::TranslationsResource.new detected_source_language: "en", translated_text: "Como estas hoy?"
-    list_translations_resource = Google::Cloud::Translate::Service::API::ListTranslationsResponse.new translations: [translations_resource, translations_resource_2]
-    mock.expect :list_translations, list_translations_resource, [["Hello", "How are you today?"], "es", {cid: "user-1234567899", format: nil, source: nil}]
+    translations_resource = { detectedSourceLanguage: "en", translatedText: "Hola" }
+    translations_resource_2 = { detectedSourceLanguage: "en", translatedText: "Como estas hoy?" }
+    list_translations_resource = JSON.parse({ translations: [translations_resource, translations_resource_2] }.to_json)
+    mock.expect :translate, list_translations_resource, [["Hello", "How are you today?"], to: "es", cid: "user-1234567899", format: nil, from: nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     translations = translate.translate ["Hello", "How are you today?"], to: "es", cid: "user-1234567899"
     mock.verify
 

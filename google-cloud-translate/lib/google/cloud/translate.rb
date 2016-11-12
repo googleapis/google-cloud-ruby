@@ -219,6 +219,18 @@ module Google
       # the specific instructions for [Server
       # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
       #
+      # @param [String] project Project identifier for the Translate service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
       # @param [String] key a public API access key (not an OAuth 2.0 token)
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
@@ -229,7 +241,20 @@ module Google
       # @example
       #   require "google/cloud/translate"
       #
-      #   translate = Google::Cloud::Translate.new key: "api-key-abc123XYZ789"
+      #   translate = Google::Cloud::Translate.new(
+      #     project: "my-todo-project",
+      #     keyfile: "/path/to/keyfile.json"
+      #   )
+      #
+      #   translation = translate.translate "Hello world!", to: "la"
+      #   translation.text #=> "Salve mundi!"
+      #
+      # @example Using API Key.
+      #   require "google/cloud/translate"
+      #
+      #   translate = Google::Cloud::Translate.new(
+      #     key: "api-key-abc123XYZ789"
+      #   )
       #
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
@@ -244,17 +269,30 @@ module Google
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
       #
-      def self.new key: nil, retries: nil, timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, key: nil,
+                   retries: nil, timeout: nil
+        project ||= Google::Cloud::Translate::Api.default_project
+        project = project.to_s # Always cast to a string
+
         key ||= ENV["TRANSLATE_KEY"]
         key ||= ENV["GOOGLE_CLOUD_KEY"]
-        if key.nil?
-          key_missing_msg = "An API key is required to use the Translate API."
-          fail ArgumentError, key_missing_msg
+        if key
+          return Google::Cloud::Translate::Api.new(
+            Google::Cloud::Translate::Service.new(
+              project, nil, retries: retries, timeout: timeout, key: key))
+        end
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Translate::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Translate::Credentials.new(
+            keyfile, scope: scope)
         end
 
         Google::Cloud::Translate::Api.new(
           Google::Cloud::Translate::Service.new(
-            key, retries: retries, timeout: timeout))
+            project, credentials, retries: retries, timeout: timeout))
       end
     end
   end

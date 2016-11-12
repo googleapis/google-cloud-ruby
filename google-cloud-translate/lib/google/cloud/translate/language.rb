@@ -62,7 +62,7 @@ module Google
         # @private New Language from a LanguagesResource object as defined by
         # the Google API Client object.
         def self.from_gapi gapi
-          new gapi.language, gapi.name
+          new gapi["language"], gapi["name"]
         end
       end
     end

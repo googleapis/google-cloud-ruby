@@ -14,61 +14,58 @@
 
 
 require "google/cloud/errors"
+require "google/cloud/translate/credentials"
 require "google/cloud/translate/version"
-require "google/apis/translate_v2"
+require "faraday" # comes from googleauth, comes from google-cloud-core
 
 module Google
   module Cloud
     module Translate
       ##
       # @private
-      # Represents the service to Translate, exposing the API calls.
-      class Service
-        ##
-        # Alias to the Google Client API module
-        API = Google::Apis::TranslateV2
+      # Represents the Translate REST service, exposing the API calls.
+      class Service #:nodoc:
+        API_VERSION = "v2"
+        API_URL = "https://translation.googleapis.com"
 
-        attr_accessor :credentials
+        # @private
+        attr_accessor :project, :credentials, :retries, :timeout, :key
 
         ##
         # Creates a new Service instance.
-        def initialize key, retries: nil, timeout: nil
-          @service = API::TranslateService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = \
-            Google::Cloud::Translate::VERSION
-          @service.request_options.retries = retries || 3
-          @service.request_options.timeout_sec      = timeout
-          @service.request_options.open_timeout_sec = timeout
-          @service.authorization = nil
-          @service.key = key
+        def initialize project, credentials, retries: nil, timeout: nil,
+                       key: nil
+          @project = project
+          @credentials = credentials
+          @retries = retries
+          @timeout = timeout
+          @key = key
         end
-
-        def service
-          return mocked_service if mocked_service
-          @service
-        end
-        attr_accessor :mocked_service
 
         ##
-        # Returns API::ListTranslationsResponse
+        # Returns Hash of ListTranslationsResponse JSON
         def translate text, to: nil, from: nil, format: nil, cid: nil
-          execute do
-            service.list_translations Array(text), to, cid: cid, format: format,
-                                                       source: from
-          end
+          body = {
+            q: Array(text), target: to, source: from, format: format, cid: cid
+          }.delete_if { |_k, v| v.nil? }.to_json
+
+          post "/language/translate/v2", body
         end
 
         ##
         # Returns API::ListDetectionsResponse
         def detect text
-          execute { service.list_detections Array(text) }
+          body = { q: Array(text) }.to_json
+
+          post "language/translate/v2/detect", body
         end
 
         ##
         # Returns API::ListLanguagesResponse
         def languages language = nil
-          execute { service.list_languages target: language }
+          body = { target: language }.to_json
+
+          post "language/translate/v2/languages", body
         end
 
         def inspect
@@ -77,10 +74,118 @@ module Google
 
         protected
 
+        def post path, body = nil
+          response = execute do
+            http.post path do |req|
+              req.headers.merge! default_http_headers
+              req.body = body unless body.nil?
+
+              if @key
+                req.params = { key: @key }
+              else
+                @credentials.sign_http_request req
+              end
+            end
+          end
+
+          return JSON.parse(response.body)["data"] if response.success?
+
+          fail Google::Cloud::Error.gapi_error_class_for(response.status)
+        rescue Faraday::ConnectionFailed
+          raise Google::Cloud::ResourceExhaustedError
+        end
+
+        ##
+        # The HTTP object that makes calls to API.
+        # This must be a Faraday object.
+        def http
+          @http ||= Faraday.new url: API_URL, request: {
+            open_timeout: @timeout, timeout: @timeout
+          }.delete_if { |_k, v| v.nil? }
+        end
+
+        ##
+        # The default HTTP headers to be sent on all API calls.
+        def default_http_headers
+          @default_http_headers ||= {
+            "User-Agent" => "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
+            "google-cloud-resource-prefix" => "projects/#{@project}",
+            "Content-Type" => "application/json"
+          }
+        end
+
+        ##
+        # Make a request and apply incremental backoff
         def execute
-          yield
-        rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          backoff = Backoff.new retries: retries
+          backoff.execute do
+            yield
+          end
+        rescue Faraday::ConnectionFailed
+          raise Google::Cloud::ResourceExhaustedError
+        end
+
+        ##
+        # @private Backoff
+        class Backoff
+          class << self
+            attr_accessor :retries
+            attr_accessor :http_codes
+            attr_accessor :reasons
+            attr_accessor :backoff # :nodoc:
+          end
+
+          # Set the default values
+          self.retries = 3
+          self.http_codes = [500, 503]
+          self.reasons = %w(rateLimitExceeded userRateLimitExceeded)
+          self.backoff = ->(retries) { sleep retries.to_i }
+
+          def initialize options = {} #:nodoc:
+            @max_retries  = (options[:retries]    || Backoff.retries).to_i
+            @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
+            @reasons      = (options[:reasons]    || Backoff.reasons).to_a
+            @backoff      =  options[:backoff]    || Backoff.backoff
+          end
+
+          def execute #:nodoc:
+            current_retries = 0
+            loop do
+              response = yield # Expecting Faraday::Response
+              return response if response.success?
+              break response unless retry? response, current_retries
+              current_retries += 1
+              @backoff.call current_retries
+            end
+          end
+
+          protected
+
+          def retry? result, current_retries #:nodoc:
+            if current_retries < @max_retries
+              return true if retry_http_code? result
+              return true if retry_error_reason? result
+            end
+            false
+          end
+
+          def retry_http_code? response #:nodoc:
+            @http_codes.include? response.status
+          end
+
+          def retry_error_reason? response #:nodoc:
+            result = JSON.parse(response.body)["data"]
+            if result &&
+               result["error"] &&
+               result["error"]["errors"]
+              Array(result["error"]["errors"]).each do |error|
+                if error["reason"] && @reasons.include?(error["reason"])
+                  return true
+                end
+              end
+            end
+            false
+          end
         end
       end
     end

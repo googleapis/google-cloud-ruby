@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/core/environment"
 require "google/cloud/translate/service"
 require "google/cloud/translate/translation"
 require "google/cloud/translate/detection"
@@ -60,6 +61,32 @@ module Google
         # See {Google::Cloud.translate}
         def initialize service
           @service = service
+        end
+
+        ##
+        # The Translate project connected to.
+        #
+        # @example
+        #   require "google/cloud/translate"
+        #
+        #   translate = Google::Cloud::Translate.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   translate.project #=> "my-todo-project"
+        #
+        def project
+          service.project
+        end
+
+        ##
+        # @private Default project.
+        def self.default_project
+          ENV["TRANSLATE_PROJECT"] ||
+            ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
+            Google::Cloud::Core::Environment.project_id
         end
 
         ##
@@ -227,7 +254,7 @@ module Google
         def languages language = nil
           language = language.to_s if language
           gapi = service.languages language
-          Array(gapi.languages).map { |g| Language.from_gapi g }
+          Array(gapi["languages"]).map { |g| Language.from_gapi g }
         end
       end
     end
