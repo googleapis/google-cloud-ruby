@@ -107,6 +107,7 @@ module Google
         # @param [String] format The format of the text. Possible values include
         #   `:text` and `:html`. This is optional. The Translate API default is
         #   `:html`.
+        # @param [String] model The translation model.
         # @param [String] cid The customization id for translate. This is
         #   optional.
         #
@@ -160,7 +161,8 @@ module Google
         #                                     to: :la
         #   translation.text #=> "<strong>Salve</strong> mundi!"
         #
-        def translate *text, to: nil, from: nil, format: nil, cid: nil
+        def translate *text, to: nil, from: nil, format: nil, model: nil,
+                      cid: nil
           return nil if text.empty?
           fail ArgumentError, "to is required" if to.nil?
           to = to.to_s
@@ -168,7 +170,7 @@ module Google
           format = format.to_s if format
           text = Array(text).flatten
           gapi = service.translate text, to: to, from: from,
-                                         format: format, cid: cid
+                                         format: format, model: model, cid: cid
           Translation.from_gapi_list gapi, text, to, from
         end
 

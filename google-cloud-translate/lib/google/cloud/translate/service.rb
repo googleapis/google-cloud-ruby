@@ -44,9 +44,11 @@ module Google
 
         ##
         # Returns Hash of ListTranslationsResponse JSON
-        def translate text, to: nil, from: nil, format: nil, cid: nil
+        def translate text, to: nil, from: nil, format: nil, model: nil,
+                      cid: nil
           body = {
-            q: Array(text), target: to, source: from, format: format, cid: cid
+            q: Array(text), target: to, source: from, format: format,
+            model: model, cid: cid
           }.delete_if { |_k, v| v.nil? }.to_json
 
           post "/language/translate/v2", body

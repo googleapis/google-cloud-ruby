@@ -64,16 +64,25 @@ module Google
 
         ##
         # The source language from which the text was translated.
+        #
+        # @return [String]
         attr_reader :from
         alias_method :source, :from
 
         ##
+        # The translation model.
+        #
+        # @return [String]
+        attr_reader :model
+
+        ##
         # @private Create a new object.
-        def initialize text, to, origin, from, detected
+        def initialize text, to, origin, from, model, detected
           @text = text
           @to = to
           @origin = origin
           @from = from
+          @model = model
           @detected = detected
         end
 
@@ -105,7 +114,7 @@ module Google
         def self.from_gapi gapi, to, origin, from
           from ||= gapi["detectedSourceLanguage"]
           detected = !gapi["detectedSourceLanguage"].nil?
-          new gapi["translatedText"], to, origin, from, detected
+          new gapi["translatedText"], to, origin, from, gapi["model"], detected
         end
       end
     end

@@ -42,49 +42,49 @@ YARD::Doctest.configure do |doctest|
    doctest.before "Google::Cloud#translate" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud#translate@Using API Key from the environment variable." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud.translate" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud.translate@Using API Key from the environment variable." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud::Translate.new" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud::Translate.new@Using API Key from the environment variable." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud::Translate::Api" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
@@ -97,14 +97,14 @@ YARD::Doctest.configure do |doctest|
    doctest.before "Google::Cloud::Translate::Api#translate" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud::Translate::Api#translate@Setting the `from` language." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: nil, translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: "en", format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: "en", format: nil, model: nil, cid: nil]
     end
   end
 
@@ -112,14 +112,14 @@ YARD::Doctest.configure do |doctest|
     mock_translate do |mock|
       res_attrs_1 = { detectedSourceLanguage: nil, translatedText: "Salve amice." }
       res_attrs_2 = { detectedSourceLanguage: nil, translatedText: "Vide te mox." }
-      mock.expect :translate, list_translations_response([res_attrs_1, res_attrs_2]), [["Hello my friend.", "See you soon."], to: "la", from: "en", format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs_1, res_attrs_2]), [["Hello my friend.", "See you soon."], to: "la", from: "en", format: nil, model: nil, cid: nil]
     end
   end
 
    doctest.before "Google::Cloud::Translate::Api#translate@Preserving HTML tags." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: nil, translatedText: "<strong>Salve</strong> mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["<strong>Hello</strong> world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["<strong>Hello</strong> world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 
@@ -170,7 +170,7 @@ YARD::Doctest.configure do |doctest|
    doctest.before "Google::Cloud::Translate::Translation" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
     end
   end
 end
