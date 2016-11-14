@@ -349,11 +349,18 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   document = language.document "Hello Chris and Mike!"
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
         #
         #   sentiment = language.sentiment document
+        #
         #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.language #=> "en"
+        #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 1.0
+        #   sentence.sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment content, format: :text, language: nil, encoding: nil
           ensure_service!

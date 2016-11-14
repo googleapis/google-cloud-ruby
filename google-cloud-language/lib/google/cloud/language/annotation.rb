@@ -186,6 +186,10 @@ module Google
         #   sentiment.magnitude #=> 0.8999999761581421
         #   sentiment.language #=> "en"
         #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 1.0
+        #   sentence.sentiment.magnitude #=> 0.8999999761581421
+        #
         def sentiment
           return nil if @grpc.document_sentiment.nil?
           @sentiment ||= Sentiment.from_grpc @grpc
@@ -273,13 +277,44 @@ module Google
         end
 
         ##
-        # TODO: add docs
+        # Provides grammatical information, including morphological information,
+        # about a token, such as the token's tense, person, number, gender,
+        # and so on. Only some of these attributes will be applicable to any
+        # given part of speech. Parts of speech are as defined in [A Universal
+        # Part-of-Speech Tagset]http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf
         #
-        # @attr_reader [Symbol] part_of_speech Represents part of speech
-        #   information for a token.
+        # @attr_reader [Symbol] tag The part of speech tag.
+        # @attr_reader [Symbol] aspect The grammatical aspect.
+        # @attr_reader [Symbol] case The grammatical case.
+        # @attr_reader [Symbol] form The grammatical form.
+        # @attr_reader [Symbol] gender The grammatical gender.
+        # @attr_reader [Symbol] mood The grammatical mood.
+        # @attr_reader [Symbol] number The grammatical number.
+        # @attr_reader [Symbol] person The grammatical person.
+        # @attr_reader [Symbol] proper The grammatical properness.
+        # @attr_reader [Symbol] reciprocity The grammatical reciprocity.
+        # @attr_reader [Symbol] tense The grammatical tense.
+        # @attr_reader [Symbol] voice The grammatical voice.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.tokens.count #=> 10
+        #   token = annotation.tokens.first
+        #
+        #   token.text_span.text #=> "Darth"
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.part_of_speech.gender #=> :MASCULINE
+        #
         class PartOfSpeech
-          attr_accessor :tag, :aspect, :case, :form, :gender, :mood, :number,
-                        :person, :proper, :reciprocity, :tense, :voice
+          attr_reader :tag, :aspect, :case, :form, :gender, :mood, :number,
+                      :person, :proper, :reciprocity, :tense, :voice
 
           ##
           # @private Creates a new PartOfSpeech instance.
@@ -397,10 +432,15 @@ module Google
           ##
           # Represents the result of sentiment analysis.
           #
-          # @attr_reader [Float] score Score.
-          # @attr_reader [Float] magnitude A non-negative number in the [0,
-          #   +inf] range, which represents the absolute magnitude of sentiment
-          #   regardless of score (positive or negative).
+          # @attr_reader [Float] score The overall emotional leaning of the text
+          #   in the [-1.0, 1.0] range. Larger numbers represent more positive
+          #   sentiments.
+          # @attr_reader [Float] magnitude A non-negative number in the
+          #   [0, +inf] range, which represents the overall strength of emotion
+          #   regardless of score (positive or negative). Unlike score,
+          #   magnitude is not normalized; each expression of emotion within the
+          #   text (both positive and negative) contributes to the text's
+          #   magnitude (so longer text blocks may have greater magnitudes).
           #
           # @example
           #   require "google/cloud/language"
@@ -410,10 +450,15 @@ module Google
           #   content = "Darth Vader is the best villain in Star Wars."
           #   document = language.document content
           #   annotation = document.annotate
+          #   sentiment = annotation.sentiment
           #
-          #   sentiment = annotation.sentences.first
           #   sentiment.score #=> 1.0
           #   sentiment.magnitude #=> 0.8999999761581421
+          #   sentiment.language #=> "en"
+          #
+          #   sentence = sentiment.sentences.first
+          #   sentence.sentiment.score #=> 1.0
+          #   sentence.sentiment.magnitude #=> 0.8999999761581421
           #
           class Sentiment
             attr_reader :score, :magnitude
@@ -812,7 +857,14 @@ module Google
           end
 
           ##
-          # Returns the `mid` property of the {#metadata}.
+          # Returns the `mid` property of the {#metadata}. The MID
+          # (machine-generated identifier) (MID) correspods to the entity's
+          # [Google Knowledge Graph](https://www.google.com/intl/bn/insidesearch/features/search/knowledge.html)
+          # entry. Note that MID values remain unique across different
+          # languages, so you can use such values to tie entities together from
+          # different languages. For programmatically inspecting these MID
+          # values, please consult the [Google Knowledge Graph Search
+          # API](https://developers.google.com/knowledge-graph/) documentation.
           #
           # @return [String]
           #
@@ -835,7 +887,10 @@ module Google
           # Represents a piece of text including relative location.
           #
           # @attr_reader [TextSpan] text_span The entity mention text.
-          # @attr_reader [Symbol] type The type of the entity mention.
+          # @attr_reader [Symbol] type The type of the entity mention. The
+          #   possible return values are `:TYPE_UNKNOWN`, `:PROPER` (proper
+          #   name), and `:COMMON` (Common noun or noun compound).
+          #
           #
           # @example
           #   require "google/cloud/language"
@@ -917,12 +972,15 @@ module Google
         ##
         # Represents the result of sentiment analysis.
         #
-        # @attr_reader [Float] score Polarity of the sentiment in the
-        #   [-1.0, 1.0] range. Larger numbers represent more positive
+        # @attr_reader [Float] score The overall emotional leaning of the text
+        #   in the [-1.0, 1.0] range. Larger numbers represent more positive
         #   sentiments.
         # @attr_reader [Float] magnitude A non-negative number in the [0, +inf]
-        #   range, which represents the absolute magnitude of sentiment
-        #   regardless of score (positive or negative).
+        #   range, which represents the overall strength of emotion
+        #   regardless of score (positive or negative). Unlike score, magnitude
+        #   is not normalized; each expression of emotion within the text (both
+        #   positive and negative) contributes to the text's magnitude (so
+        #   longer text blocks may have greater magnitudes).
         # @attr_reader [Array<Sentence>] sentences The sentences returned by
         #   sentiment analysis.
         # @attr_reader [String] language The language of the document (if not

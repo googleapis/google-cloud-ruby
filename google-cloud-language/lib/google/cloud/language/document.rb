@@ -29,7 +29,7 @@ module Google
       # should not need to set the encoding type.)
       #
       # Be aware that only English, Spanish, and Japanese language content are
-      # supported, and sentiment analysis only supports English text.
+      # supported.
       #
       # See {Project#document}.
       #
@@ -313,12 +313,18 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        # content = "Darth Vader is the best villain in Star Wars."
-        # document = language.document content
-        # sentiment = document.sentiment # API call
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
         #
-        # sentiment.score #=> 1.0
-        # sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment = document.sentiment
+        #
+        #   sentiment.score #=> 1.0
+        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.language #=> "en"
+        #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 1.0
+        #   sentence.sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment encoding: nil
           ensure_service!

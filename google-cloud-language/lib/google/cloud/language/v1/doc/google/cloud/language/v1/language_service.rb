@@ -40,8 +40,7 @@ module Google
         #     **Current Language Restrictions:**
         #
         #      * Only English, Spanish, and Japanese textual content
-        #        are supported, with the following additional restriction:
-        #        * +analyzeSentiment+ only supports English text.
+        #        are supported.
         #     If the language (either specified by the caller or automatically detected)
         #     is not supported by the called API method, an +INVALID_ARGUMENT+ error
         #     is returned.

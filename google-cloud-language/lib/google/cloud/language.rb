@@ -57,8 +57,7 @@ module Google
     # (Ruby uses UTF-8 natively, which is the default sent to the API, so unless
     # you're working with text processed in different platform, you should not
     # need to set the encoding type.) Be aware that only English, Spanish, and
-    # Japanese language content are supported, and `sentiment` analysis only
-    # supports English text.
+    # Japanese language content are supported.
     #
     # Use {Language::Project#document} to create documents for the Cloud Natural
     # Language service. You can provide text or HTML content as a string:
