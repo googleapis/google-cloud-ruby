@@ -34,15 +34,25 @@ module Google
     # with translated text back. You don't need to extract your source text or
     # reassemble the translated content.
     #
+    # ## Premium Edition
+    #
+    # Using the `model` parameter, you can set the model used by the service to
+    # perform the translation. The neural machine translation model (`nmt`) is
+    # billed as a premium edition feature. Because neural machine translation is
+    # computationally significantly more resource intensive than the standard
+    # model, the price for the premium edition is higher than the standard
+    # edition. If the `model` parameter not set or is set to `base`, then the
+    # service will return translation using the current standard model and
+    # standard edition pricing.
+    #
     # ## Authenticating
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Translate API requires a public API access
-    # key. (This may change in future releases of Translate API.) Follow the
-    # general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # ## Translating texts
     #
@@ -211,14 +221,26 @@ module Google
       # Creates a new object for connecting to the Translate service.
       # Each call creates a new connection.
       #
-      # Unlike other Cloud Platform services, which authenticate using a project
-      # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-      # access key. (This may change in future releases of Google Translate
-      # API.) Follow the general instructions at [Identifying your application
-      # to Google](https://cloud.google.com/translate/v2/using_rest#auth), and
-      # the specific instructions for [Server
-      # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+      # Like other Cloud Platform services, Google Translate API supports
+      # authentication using a project ID and OAuth 2.0 credentials. In
+      # addition, it supports authentication using a public API access key. (If
+      # both the API key and the project and OAuth 2.0 credentials are provided,
+      # the API key will be used.) Instructions and configuration options are
+      # covered in the [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
       #
+      # @param [String] project Project identifier for the Translate service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
       # @param [String] key a public API access key (not an OAuth 2.0 token)
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
@@ -229,7 +251,20 @@ module Google
       # @example
       #   require "google/cloud/translate"
       #
-      #   translate = Google::Cloud::Translate.new key: "api-key-abc123XYZ789"
+      #   translate = Google::Cloud::Translate.new(
+      #     project: "my-todo-project",
+      #     keyfile: "/path/to/keyfile.json"
+      #   )
+      #
+      #   translation = translate.translate "Hello world!", to: "la"
+      #   translation.text #=> "Salve mundi!"
+      #
+      # @example Using API Key.
+      #   require "google/cloud/translate"
+      #
+      #   translate = Google::Cloud::Translate.new(
+      #     key: "api-key-abc123XYZ789"
+      #   )
       #
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
@@ -244,17 +279,30 @@ module Google
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
       #
-      def self.new key: nil, retries: nil, timeout: nil
+      def self.new project: nil, keyfile: nil, scope: nil, key: nil,
+                   retries: nil, timeout: nil
+        project ||= Google::Cloud::Translate::Api.default_project
+        project = project.to_s # Always cast to a string
+
         key ||= ENV["TRANSLATE_KEY"]
         key ||= ENV["GOOGLE_CLOUD_KEY"]
-        if key.nil?
-          key_missing_msg = "An API key is required to use the Translate API."
-          fail ArgumentError, key_missing_msg
+        if key
+          return Google::Cloud::Translate::Api.new(
+            Google::Cloud::Translate::Service.new(
+              project, nil, retries: retries, timeout: timeout, key: key))
+        end
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Translate::Credentials.default(
+            scope: scope)
+        else
+          credentials = Google::Cloud::Translate::Credentials.new(
+            keyfile, scope: scope)
         end
 
         Google::Cloud::Translate::Api.new(
           Google::Cloud::Translate::Service.new(
-            key, retries: retries, timeout: timeout))
+            project, credentials, retries: retries, timeout: timeout))
       end
     end
   end

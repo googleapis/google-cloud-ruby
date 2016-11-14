@@ -22,11 +22,11 @@ describe Google::Cloud::Translate::Api, :detect, :mock_translate do
 
   it "detects a single language" do
     mock = Minitest::Mock.new
-    detections_resource = Google::Cloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
-    list_detections_resource = Google::Cloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource]]
-    mock.expect :list_detections, list_detections_resource, [["Hello"]]
+    detections_resource = { confidence: 0.123, language: "en", isReliable: false }
+    list_detections_resource = JSON.parse({ detections: [[detections_resource]] }.to_json)
+    mock.expect :detect, list_detections_resource, [["Hello"]]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     detection = translate.detect "Hello"
     mock.verify
 
@@ -37,12 +37,12 @@ describe Google::Cloud::Translate::Api, :detect, :mock_translate do
 
   it "detects multiple languages" do
     mock = Minitest::Mock.new
-    detections_resource = Google::Cloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
-    detections_resource_2 = Google::Cloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "es", is_reliable: false
-    list_detections_resource = Google::Cloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource], [detections_resource_2]]
-    mock.expect :list_detections, list_detections_resource, [["Hello", "Hola"]]
+    detections_resource = { confidence: 0.123, language: "en", isReliable: false }
+    detections_resource_2 = { confidence: 0.123, language: "es", isReliable: false }
+    list_detections_resource = JSON.parse({ detections: [[detections_resource], [detections_resource_2]] }.to_json)
+    mock.expect :detect, list_detections_resource, [["Hello", "Hola"]]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     detections = translate.detect "Hello", "Hola"
     mock.verify
 
@@ -59,12 +59,12 @@ describe Google::Cloud::Translate::Api, :detect, :mock_translate do
 
   it "detects multiple languages in an array" do
     mock = Minitest::Mock.new
-    detections_resource = Google::Cloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "en", is_reliable: false
-    detections_resource_2 = Google::Cloud::Translate::Service::API::DetectionsResource.new confidence: 0.123, language: "es", is_reliable: false
-    list_detections_resource = Google::Cloud::Translate::Service::API::ListDetectionsResponse.new detections: [[detections_resource], [detections_resource_2]]
-    mock.expect :list_detections, list_detections_resource, [["Hello", "Hola"]]
+    detections_resource = { confidence: 0.123, language: "en", isReliable: false }
+    detections_resource_2 = { confidence: 0.123, language: "es", isReliable: false }
+    list_detections_resource = JSON.parse({ detections: [[detections_resource], [detections_resource_2]] }.to_json)
+    mock.expect :detect, list_detections_resource, [["Hello", "Hola"]]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     detections = translate.detect ["Hello", "Hola"]
     mock.verify
 

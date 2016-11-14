@@ -17,11 +17,11 @@ require "helper"
 describe Google::Cloud::Translate::Api, :languages, :mock_translate do
   it "lists languages without a language" do
     mock = Minitest::Mock.new
-    languages_resource = Google::Cloud::Translate::Service::API::LanguagesResource.new language: "af", name: nil
-    list_languages_resource = Google::Cloud::Translate::Service::API::ListLanguagesResponse.new languages: [languages_resource]
-    mock.expect :list_languages, list_languages_resource, [{target: nil}]
+    languages_resource = { language: "af", name: nil }
+    list_languages_resource = JSON.parse({ languages: [languages_resource] }.to_json)
+    mock.expect :languages, list_languages_resource, [nil]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     languages = translate.languages
     mock.verify
 
@@ -32,11 +32,11 @@ describe Google::Cloud::Translate::Api, :languages, :mock_translate do
 
   it "lists languages with a language" do
     mock = Minitest::Mock.new
-    languages_resource = Google::Cloud::Translate::Service::API::LanguagesResource.new language: "af", name: "Afrikaans"
-    list_languages_resource = Google::Cloud::Translate::Service::API::ListLanguagesResponse.new languages: [languages_resource]
-    mock.expect :list_languages, list_languages_resource, [{target: "en"}]
+    languages_resource = { language: "af", name: "Afrikaans" }
+    list_languages_resource = JSON.parse({ languages: [languages_resource] }.to_json)
+    mock.expect :languages, list_languages_resource, ["en"]
 
-    translate.service.mocked_service = mock
+    translate.service = mock
     languages = translate.languages "en"
     mock.verify
 

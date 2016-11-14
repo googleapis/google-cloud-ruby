@@ -27,15 +27,22 @@ module Google
     # Creates a new object for connecting to the Translate service.
     # Each call creates a new connection.
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
@@ -62,8 +69,10 @@ module Google
     #   translation = translate.translate "Hello world!", to: "la"
     #   translation.text #=> "Salve mundi!"
     #
-    def translate key = nil, retries: nil, timeout: nil
-      Google::Cloud.translate key, retries: (retries || @retries),
+    def translate key = nil, scope: nil, retries: nil, timeout: nil
+      Google::Cloud.translate key, project: @project, keyfile: @keyfile,
+                                   scope: scope,
+                                   retries: (retries || @retries),
                                    timeout: (timeout || @timeout)
     end
 
@@ -71,15 +80,26 @@ module Google
     # Creates a new object for connecting to the Translate service.
     # Each call creates a new connection.
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
+    # @param [String] project Project identifier for the Translate service you
+    #   are connecting to.
+    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+    #   file path the file must be readable.
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
@@ -104,9 +124,12 @@ module Google
     #   translation = translate.translate "Hello world!", to: "la"
     #   translation.text #=> "Salve mundi!"
     #
-    def self.translate key = nil, retries: nil, timeout: nil
+    def self.translate key = nil, project: nil, keyfile: nil, scope: nil,
+                       retries: nil, timeout: nil
       require "google/cloud/translate"
-      Google::Cloud::Translate.new key: key, retries: retries, timeout: timeout
+      Google::Cloud::Translate.new key: key, project: project, keyfile: keyfile,
+                                   scope: scope, retries: retries,
+                                   timeout: timeout
     end
   end
 end

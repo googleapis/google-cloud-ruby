@@ -88,8 +88,8 @@ module Google
         # @private New Detection from a ListDetectionsResponse object as
         # defined by the Google API Client object.
         def self.from_gapi gapi, text
-          res = text.zip(Array(gapi.detections)).map do |txt, detections_gapi|
-            results = detections_gapi.map { |g| Result.from_gapi g }
+          res = text.zip(Array(gapi["detections"])).map do |txt, detections|
+            results = detections.map { |g| Result.from_gapi g }
             new txt, results
           end
           return res.first if res.size == 1
@@ -130,7 +130,7 @@ module Google
           # @private New Detection::Result from a DetectionsResource object as
           # defined by the Google API Client object.
           def self.from_gapi gapi
-            new gapi.confidence, gapi.language
+            new gapi["confidence"], gapi["language"]
           end
         end
       end
