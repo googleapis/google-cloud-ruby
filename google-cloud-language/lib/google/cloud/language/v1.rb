@@ -12,21 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-require "google/cloud/credentials"
-require "google/cloud/language/v1"
-
-module Google
-  module Cloud
-    module Language
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Language.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = Google::Cloud::Language::V1::LanguageServiceApi::ALL_SCOPES
-        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
-      end
-    end
-  end
-end
+require "google/cloud/language/v1/language_service_api"

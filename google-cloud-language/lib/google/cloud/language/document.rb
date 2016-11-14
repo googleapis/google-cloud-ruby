@@ -29,7 +29,7 @@ module Google
       # should not need to set the encoding type.)
       #
       # Be aware that only English, Spanish, and Japanese language content are
-      # supported, and sentiment analysis only supports English text.
+      # supported.
       #
       # See {Project#document}.
       #
@@ -43,7 +43,7 @@ module Google
       #   annotation = document.annotate
       #
       #   annotation.entities.count #=> 2
-      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.score #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
       #   annotation.sentences.count #=> 1
       #   annotation.tokens.count #=> 10
@@ -182,7 +182,7 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results of the content analysis.
+        # @return [Annotation] The results of the content analysis.
         #
         # @example
         #   require "google/cloud/language"
@@ -193,7 +193,7 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.sentiment.polarity #=> 1.0
+        #   annotation.sentiment.score #=> 1.0
         #   annotation.sentiment.magnitude #=> 0.8999999761581421
         #   annotation.entities.count #=> 2
         #   annotation.sentences.count #=> 1
@@ -233,20 +233,36 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content analysis.
+        # @return [Annotation::Syntax] The results for the content analysis.
         #
         # @example
         #   require "google/cloud/language"
         #
         #   language = Google::Cloud::Language.new
         #
-        #   document = language.document "Hello world!"
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
         #
-        #   annotation = document.syntax
-        #   annotation.thing #=> Some Result
+        #   syntax = document.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
         #
         def syntax encoding: nil
-          annotate syntax: true, encoding: encoding
+          ensure_service!
+          grpc = service.syntax to_grpc, encoding: encoding
+          Annotation::Syntax.from_grpc grpc
         end
 
         ##
@@ -257,7 +273,7 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation::Entities>] The results for the entities analysis.
+        # @return [Annotation::Entities] The results for the entities analysis.
         #
         # @example
         #   require "google/cloud/language"
@@ -286,7 +302,10 @@ module Google
         # a writer's attitude as positive, negative, or neutral. Currently, only
         # English is supported for sentiment analysis.
         #
-        # @return [Annotation::Sentiment>] The results for the sentiment
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
+        #
+        # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
         #
         # @example
@@ -294,16 +313,22 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        # content = "Darth Vader is the best villain in Star Wars."
-        # document = language.document content
-        # sentiment = document.sentiment # API call
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
         #
-        # sentiment.polarity #=> 1.0
-        # sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment = document.sentiment
         #
-        def sentiment
+        #   sentiment.score #=> 1.0
+        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.language #=> "en"
+        #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 1.0
+        #   sentence.sentiment.magnitude #=> 0.8999999761581421
+        #
+        def sentiment encoding: nil
           ensure_service!
-          grpc = service.sentiment to_grpc
+          grpc = service.sentiment to_grpc, encoding: encoding
           Annotation::Sentiment.from_grpc grpc
         end
 
@@ -333,7 +358,7 @@ module Google
         # @private
         def self.from_source source, service, format: nil, language: nil
           source = String source
-          grpc = Google::Cloud::Language::V1beta1::Document.new
+          grpc = Google::Cloud::Language::V1::Document.new
           if source.start_with? "gs://"
             grpc.gcs_content_uri = source
             format ||= :html if source.end_with? ".html"

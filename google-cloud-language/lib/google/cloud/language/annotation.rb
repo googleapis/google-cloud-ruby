@@ -34,7 +34,7 @@ module Google
       #   document = language.document content
       #   annotation = document.annotate
       #
-      #   annotation.sentiment.polarity #=> 1.0
+      #   annotation.sentiment.score #=> 1.0
       #   annotation.sentiment.magnitude #=> 0.8999999761581421
       #   annotation.entities.count #=> 2
       #   annotation.sentences.count #=> 1
@@ -66,14 +66,12 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   text_span = annotation.sentences.last
-        #   text_span.text #=> "I hate cats."
-        #   text_span.offset #=> 13
+        #   sentence = annotation.sentences.last
+        #   sentence.text #=> "I hate cats."
+        #   sentence.offset #=> 13
         #
         def sentences
-          @sentences ||= begin
-            Array(grpc.sentences).map { |g| TextSpan.from_grpc g.text }
-          end
+          @sentences ||= Array(grpc.sentences).map { |g| Sentence.from_grpc g }
         end
 
         ##
@@ -94,8 +92,8 @@ module Google
         #   annotation.tokens.count #=> 10
         #   token = annotation.tokens.first
         #
-        #   token.text_span.text #=> "Darth"
-        #   token.text_span.offset #=> 0
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
         #   token.part_of_speech #=> :NOUN
         #   token.head_token_index #=> 1
         #   token.label #=> :NN
@@ -103,6 +101,40 @@ module Google
         #
         def tokens
           @tokens ||= Array(grpc.tokens).map { |g| Token.from_grpc g }
+        end
+
+        ##
+        # The result of syntax analysis.
+        #
+        # @return [Syntax]
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
+        def syntax
+          return nil if @grpc.tokens.nil?
+          @syntax ||= Syntax.from_grpc @grpc
         end
 
         ##
@@ -150,9 +182,13 @@ module Google
         #   annotation = document.annotate
         #   sentiment = annotation.sentiment
         #
-        #   sentiment.polarity #=> 1.0
+        #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #   sentiment.language #=> "en"
+        #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 1.0
+        #   sentence.sentiment.magnitude #=> 0.8999999761581421
         #
         def sentiment
           return nil if @grpc.document_sentiment.nil?
@@ -194,7 +230,7 @@ module Google
         end
 
         ##
-        # @private New Annotation from a V1beta1::AnnotateTextResponse object.
+        # @private New Annotation from a V1::AnnotateTextResponse object.
         def self.from_grpc grpc
           new.tap { |a| a.instance_variable_set :@grpc, grpc }
         end
@@ -216,7 +252,8 @@ module Google
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   text_span = annotation.sentences.last
+        #   sentence = annotation.sentences.last
+        #   text_span = sentence.text_span
         #   text_span.text #=> "I hate cats."
         #   text_span.offset #=> 13
         #
@@ -233,9 +270,212 @@ module Google
           end
 
           ##
-          # @private New TextSpan from a V1beta1::TextSpan object.
+          # @private New TextSpan from a V1::TextSpan object.
           def self.from_grpc grpc
             new grpc.content, grpc.begin_offset
+          end
+        end
+
+        ##
+        # Provides grammatical information, including morphological information,
+        # about a token, such as the token's tense, person, number, gender,
+        # and so on. Only some of these attributes will be applicable to any
+        # given part of speech. Parts of speech are as defined in [A Universal
+        # Part-of-Speech Tagset]http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf
+        #
+        # @attr_reader [Symbol] tag The part of speech tag.
+        # @attr_reader [Symbol] aspect The grammatical aspect.
+        # @attr_reader [Symbol] case The grammatical case.
+        # @attr_reader [Symbol] form The grammatical form.
+        # @attr_reader [Symbol] gender The grammatical gender.
+        # @attr_reader [Symbol] mood The grammatical mood.
+        # @attr_reader [Symbol] number The grammatical number.
+        # @attr_reader [Symbol] person The grammatical person.
+        # @attr_reader [Symbol] proper The grammatical properness.
+        # @attr_reader [Symbol] reciprocity The grammatical reciprocity.
+        # @attr_reader [Symbol] tense The grammatical tense.
+        # @attr_reader [Symbol] voice The grammatical voice.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.tokens.count #=> 10
+        #   token = annotation.tokens.first
+        #
+        #   token.text_span.text #=> "Darth"
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.part_of_speech.gender #=> :MASCULINE
+        #
+        class PartOfSpeech
+          attr_reader :tag, :aspect, :case, :form, :gender, :mood, :number,
+                      :person, :proper, :reciprocity, :tense, :voice
+
+          ##
+          # @private Creates a new PartOfSpeech instance.
+          def initialize tag, aspect, kase, form, gender, mood, number, person,
+                         proper, reciprocity, tense, voice
+            @tag = tag
+            @aspect = aspect
+            @case = kase
+            @form = form
+            @gender = gender
+            @mood = mood
+            @number = number
+            @person = person
+            @proper = proper
+            @reciprocity = reciprocity
+            @tense = tense
+            @voice = voice
+          end
+
+          ##
+          # @private New TextSpan from a V1::PartOfSpeech object.
+          def self.from_grpc grpc
+            new grpc.tag, grpc.aspect, grpc.case, grpc.form, grpc.gender,
+                grpc.mood, grpc.number, grpc.person, grpc.proper,
+                grpc.reciprocity, grpc.tense, grpc.voice
+          end
+        end
+
+        # Represents a piece of text including relative location.
+        #
+        # @attr_reader [TextSpan] text_span The sentence text.
+        # @attr_reader [Sentence::Sentiment] sentiment The sentence sentiment.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   annotation.sentences.count #=> 1
+        #
+        class Sentence
+          attr_reader :text_span, :sentiment
+
+          ##
+          # @private Creates a new Sentence instance.
+          def initialize text_span, sentiment
+            @text_span = text_span
+            @sentiment = sentiment
+          end
+
+          ##
+          # The content of the output text. See {TextSpan#text}.
+          #
+          # @return [String]
+          #
+          def text
+            text_span.text
+          end
+          alias_method :content, :text
+
+          ##
+          # The API calculates the beginning offset of the content in the
+          # original document according to the `encoding` specified in the
+          # API request. See {TextSpan#offset}.
+          #
+          # @return [Integer]
+          #
+          def offset
+            text_span.offset
+          end
+          alias_method :begin_offset, :offset
+
+          # Returns `true` if the Sentence has a Sentiment.
+          #
+          # @return [Boolean]
+          #
+          def sentiment?
+            !sentiment.nil?
+          end
+
+          ##
+          # Score. See {Sentence::Sentiment#score}.
+          #
+          # @return [Float]
+          #
+          def score
+            return nil unless sentiment?
+            sentiment.score
+          end
+
+          ##
+          # A non-negative number in the [0, +inf] range, which represents the
+          # absolute magnitude of sentiment regardless of score (positive or
+          # negative). See {Sentence::Sentiment#magnitude}.
+          #
+          # @return [Float]
+          #
+          def magnitude
+            return nil unless sentiment?
+            sentiment.magnitude
+          end
+
+          ##
+          # @private New Sentence from a V1::Sentence object.
+          def self.from_grpc grpc
+            text_span = TextSpan.from_grpc grpc.text
+            sentiment = Sentence::Sentiment.from_grpc grpc.sentiment
+            new text_span, sentiment
+          end
+
+          ##
+          # Represents the result of sentiment analysis.
+          #
+          # @attr_reader [Float] score The overall emotional leaning of the text
+          #   in the [-1.0, 1.0] range. Larger numbers represent more positive
+          #   sentiments.
+          # @attr_reader [Float] magnitude A non-negative number in the
+          #   [0, +inf] range, which represents the overall strength of emotion
+          #   regardless of score (positive or negative). Unlike score,
+          #   magnitude is not normalized; each expression of emotion within the
+          #   text (both positive and negative) contributes to the text's
+          #   magnitude (so longer text blocks may have greater magnitudes).
+          #
+          # @example
+          #   require "google/cloud/language"
+          #
+          #   language = Google::Cloud::Language.new
+          #
+          #   content = "Darth Vader is the best villain in Star Wars."
+          #   document = language.document content
+          #   annotation = document.annotate
+          #   sentiment = annotation.sentiment
+          #
+          #   sentiment.score #=> 1.0
+          #   sentiment.magnitude #=> 0.8999999761581421
+          #   sentiment.language #=> "en"
+          #
+          #   sentence = sentiment.sentences.first
+          #   sentence.sentiment.score #=> 1.0
+          #   sentence.sentiment.magnitude #=> 0.8999999761581421
+          #
+          class Sentiment
+            attr_reader :score, :magnitude
+
+            ##
+            # @private Creates a new Sentence::Sentiment instance.
+            def initialize score, magnitude
+              @score     = score
+              @magnitude = magnitude
+            end
+
+            ##
+            # @private New Sentence::Sentiment from a V1::Sentiment object.
+            def self.from_grpc grpc
+              return nil if grpc.nil?
+              new grpc.score, grpc.magnitude
+            end
           end
         end
 
@@ -244,7 +484,7 @@ module Google
         # by syntactic analysis.
         #
         # @attr_reader [TextSpan] text_span The token text.
-        # @attr_reader [Symbol] part_of_speech Represents part of speech
+        # @attr_reader [PartOfSpeech] part_of_speech Represents part of speech
         #   information for a token.
         # @attr_reader [Integer] head_token_index Represents the head of this
         #   token in the dependency tree. This is the index of the token which
@@ -269,7 +509,8 @@ module Google
         #
         #   token.text_span.text #=> "Darth"
         #   token.text_span.offset #=> 0
-        #   token.part_of_speech #=> :NOUN
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.part_of_speech.gender #=> :MASCULINE
         #   token.head_token_index #=> 1
         #   token.label #=> :NN
         #   token.lemma #=> "Darth"
@@ -300,12 +541,70 @@ module Google
           alias_method :begin_offset, :offset
 
           ##
-          # @private New Token from a V1beta1::Token object.
+          # @private New Token from a V1::Token object.
           def self.from_grpc grpc
             text_span = TextSpan.from_grpc grpc.text
-            new text_span, grpc.part_of_speech.tag,
+            part_of_speech = PartOfSpeech.from_grpc grpc.part_of_speech
+            new text_span, part_of_speech,
                 grpc.dependency_edge.head_token_index,
                 grpc.dependency_edge.label, grpc.lemma
+          end
+        end
+
+        ##
+        # Represents the result of syntax analysis.
+        #
+        # @attr_reader [Array<Sentence>] sentences The sentences returned by
+        #   syntax analysis.
+        # @attr_reader [Array<Token>] sentences The tokens returned by
+        #   syntax analysis.
+        # @attr_reader [String] language The language of the document (if not
+        #   specified, the language is automatically detected). Both ISO and
+        #   BCP-47 language codes are supported.
+        #
+        # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
+        #   content = "Darth Vader is the best villain in Star Wars."
+        #   document = language.document content
+        #   annotation = document.annotate
+        #
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
+        #   sentence.offset #=> 0
+        #
+        #   syntax.tokens.count #=> 10
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Darth"
+        #   token.offset #=> 0
+        #   token.part_of_speech #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :NN
+        #   token.lemma #=> "Darth"
+        #
+        class Syntax
+          attr_reader :sentences, :tokens, :language
+
+          ##
+          # @private Creates a new Syntax instance.
+          def initialize sentences, tokens, language
+            @sentences = sentences
+            @tokens    = tokens
+            @language  = language
+          end
+
+          ##
+          # @private New Syntax from a V1::AnnotateTextResponse or
+          # V1::AnalyzeSyntaxResponse object.
+          def self.from_grpc grpc
+            new Array(grpc.sentences).map { |g| Sentence.from_grpc g },
+                Array(grpc.tokens).map { |g| Token.from_grpc g },
+                grpc.language
           end
         end
 
@@ -414,8 +713,8 @@ module Google
           end
 
           ##
-          # @private New Entities from a V1beta1::AnnotateTextResponse or
-          # V1beta1::AnalyzeEntitiesResponse object.
+          # @private New Entities from a V1::AnnotateTextResponse or
+          # V1::AnalyzeEntitiesResponse object.
           def self.from_grpc grpc
             entities = Array(grpc.entities).map { |g| Entity.from_grpc g }
             new entities, grpc.language
@@ -437,8 +736,9 @@ module Google
         #   provides information about the importance or centrality of that
         #   entity to the entire document text. Scores closer to 0 are less
         #   salient, while scores closer to 1.0 are highly salient.
-        # @attr_reader [Array<TextSpan>] mentions The mentions of this entity in
-        #   the input document. The API currently supports proper noun mentions.
+        # @attr_reader [Array<Entity::Mention>] mentions The mentions of this
+        #   entity in the input document. The API currently supports proper noun
+        #   mentions.
         #
         # @example
         #   require "google/cloud/language"
@@ -557,25 +857,132 @@ module Google
           end
 
           ##
-          # @private New Entity from a V1beta1::Entity object.
+          # Returns the `mid` property of the {#metadata}. The MID
+          # (machine-generated identifier) (MID) correspods to the entity's
+          # [Google Knowledge Graph](https://www.google.com/intl/bn/insidesearch/features/search/knowledge.html)
+          # entry. Note that MID values remain unique across different
+          # languages, so you can use such values to tie entities together from
+          # different languages. For programmatically inspecting these MID
+          # values, please consult the [Google Knowledge Graph Search
+          # API](https://developers.google.com/knowledge-graph/) documentation.
+          #
+          # @return [String]
+          #
+          def mid
+            metadata["mid"]
+          end
+
+          ##
+          # @private New Entity from a V1::Entity object.
           def self.from_grpc grpc
             metadata = Core::GRPCUtils.map_to_hash grpc.metadata
             mentions = Array(grpc.mentions).map do |g|
-              TextSpan.from_grpc g.text
+              text_span = TextSpan.from_grpc g.text
+              Mention.new text_span, g.type
             end
             new grpc.name, grpc.type, metadata, grpc.salience, mentions
+          end
+
+          ##
+          # Represents a piece of text including relative location.
+          #
+          # @attr_reader [TextSpan] text_span The entity mention text.
+          # @attr_reader [Symbol] type The type of the entity mention. The
+          #   possible return values are `:TYPE_UNKNOWN`, `:PROPER` (proper
+          #   name), and `:COMMON` (Common noun or noun compound).
+          #
+          #
+          # @example
+          #   require "google/cloud/language"
+          #
+          #   language = Google::Cloud::Language.new
+          #
+          #   content = "Darth Vader is the best villain in Star Wars."
+          #   document = language.document content
+          #   annotation = document.annotate
+          #
+          #   entities = annotation.entities
+          #   entities.count #=> 2
+          #   entity = entities.first
+          #
+          #   entity.mentions.count #=> 1
+          #   entity.mentions.first.text # => "Darth Vader"
+          #   entity.mentions.first.offset # => 0
+          #   entity.mentions.first.proper? # => true
+          #
+          class Mention
+            attr_reader :text_span, :type
+
+            ##
+            # @private Creates a new Entity::Mention instance.
+            def initialize text_span, type
+              @text_span = text_span
+              @type      = type
+            end
+
+            ##
+            # The content of the output text. See {TextSpan#text}.
+            #
+            # @return [String]
+            #
+            def text
+              text_span.text
+            end
+            alias_method :content, :text
+
+            ##
+            # The API calculates the beginning offset of the content in the
+            # original document according to the `encoding` specified in the
+            # API request. See {TextSpan#offset}.
+            #
+            # @return [Integer]
+            #
+            # @attr_reader [Integer] offset
+            def offset
+              text_span.offset
+            end
+            alias_method :begin_offset, :offset
+
+            ##
+            # Returns `true` if {#type} is `:PROPER`.
+            #
+            # @return [Boolean]
+            #
+            def proper?
+              type == :PROPER
+            end
+
+            ##
+            # Returns `true` if {#type} is `:COMMON`.
+            #
+            # @return [Boolean]
+            #
+            def common?
+              type == :COMMON
+            end
+
+            ##
+            # @private New TextSpan from a V1::TextSpan object.
+            def self.from_grpc grpc
+              new grpc.content, grpc.begin_offset
+            end
           end
         end
 
         ##
         # Represents the result of sentiment analysis.
         #
-        # @attr_reader [Float] polarity Polarity of the sentiment in the
-        #   [-1.0, 1.0] range. Larger numbers represent more positive
+        # @attr_reader [Float] score The overall emotional leaning of the text
+        #   in the [-1.0, 1.0] range. Larger numbers represent more positive
         #   sentiments.
         # @attr_reader [Float] magnitude A non-negative number in the [0, +inf]
-        #   range, which represents the absolute magnitude of sentiment
-        #   regardless of polarity (positive or negative).
+        #   range, which represents the overall strength of emotion
+        #   regardless of score (positive or negative). Unlike score, magnitude
+        #   is not normalized; each expression of emotion within the text (both
+        #   positive and negative) contributes to the text's magnitude (so
+        #   longer text blocks may have greater magnitudes).
+        # @attr_reader [Array<Sentence>] sentences The sentences returned by
+        #   sentiment analysis.
         # @attr_reader [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are supported.
@@ -590,27 +997,30 @@ module Google
         #   annotation = document.annotate
         #
         #   sentiment = annotation.sentiment
-        #   sentiment.polarity #=> 1.0
+        #   sentiment.score #=> 1.0
         #   sentiment.magnitude #=> 0.8999999761581421
         #   sentiment.language #=> "en"
         #
         class Sentiment
-          attr_reader :polarity, :magnitude, :language
+          attr_reader :score, :magnitude, :sentences, :language
 
           ##
           # @private Creates a new Sentiment instance.
-          def initialize polarity, magnitude, language
-            @polarity  = polarity
+          def initialize score, magnitude, sentences, language
+            @score     = score
             @magnitude = magnitude
+            @sentences = sentences
             @language  = language
           end
 
           ##
-          # @private New Sentiment from a V1beta1::AnnotateTextResponse or
-          # V1beta1::AnalyzeSentimentResponse object.
+          # @private New Sentiment from a V1::AnnotateTextResponse or
+          # V1::AnalyzeSentimentResponse object.
           def self.from_grpc grpc
-            new grpc.document_sentiment.polarity,
-                grpc.document_sentiment.magnitude, grpc.language
+            new grpc.document_sentiment.score,
+                grpc.document_sentiment.magnitude,
+                Array(grpc.sentences).map { |g| Sentence.from_grpc g },
+                grpc.language
           end
         end
       end
