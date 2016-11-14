@@ -16,15 +16,12 @@ $ gem install google-cloud-translate
 
 ## Authentication
 
-Unlike other Cloud Platform services, which authenticate using a project
-ID and OAuth 2.0 credentials, Translate API requires a public API access
-key. (This may change in future releases of Translate API.) Follow the
-general instructions at [Identifying your application to
-Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-specific instructions for [Server
-keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
-
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
+Like other Cloud Platform services, Google Translate API supports
+authentication using a project ID and OAuth 2.0 credentials. In addition,
+it supports authentication using a public API access key. (If both the API
+key and the project and OAuth 2.0 credentials are provided, the API key
+will be used.) Instructions and configuration options are covered in the
+[Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
 
 ## Example
 

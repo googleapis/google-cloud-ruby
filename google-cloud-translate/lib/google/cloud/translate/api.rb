@@ -25,13 +25,12 @@ module Google
       ##
       # # Api
       #
-      # Represents top-level access to the Google Translate API. Each instance
-      # requires a public API access key. To create a key, follow the general
-      # instructions at [Identifying your application to
-      # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-      # specific instructions for [Server
-      # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
-      # See {Google::Cloud#translate}.
+      # Represents top-level access to the Google Translate API. Translate API
+      # supports more than ninety different languages, from Afrikaans to Zulu.
+      # Used in combination, this enables translation between thousands of
+      # language pairs. Also, you can send in HTML and receive HTML with
+      # translated text back. You don't need to extract your source text or
+      # reassemble the translated content.
       #
       # @see https://cloud.google.com/translate/v2/getting_started Translate API
       #   Getting Started
@@ -107,7 +106,17 @@ module Google
         # @param [String] format The format of the text. Possible values include
         #   `:text` and `:html`. This is optional. The Translate API default is
         #   `:html`.
-        # @param [String] model The translation model.
+        # @param [String] model The model used by the service to perform the
+        #   translation. The neural machine translation model (`nmt`) is billed
+        #   as a premium edition feature. If this is set to `base`, then the
+        #   service will return translation using the current standard model.
+        #   The default value is `base`.
+        #
+        #   Acceptable values are:
+        #
+        #   * `nmt` - Use the neural machine translation model
+        #   * `base` - Use the current standard model
+        #
         # @param [String] cid The customization id for translate. This is
         #   optional.
         #
@@ -129,6 +138,18 @@ module Google
         #   translation.origin #=> "Hello world!"
         #   translation.to #=> "la"
         #   translation.text #=> "Salve mundi!"
+        #   translation.model #=> "base"
+        #
+        # @example Using the neural machine translation model:
+        #   require "google/cloud/translate"
+        #
+        #   translate = Google::Cloud::Translate.new
+        #
+        #   translation = translate.translate "Hello world!",
+        #                                     to: "la", model: "nmt"
+        #
+        #   translation.to_s #=> "Salve mundi!"
+        #   translation.model #=> "nmt"
         #
         # @example Setting the `from` language.
         #   require "google/cloud/translate"

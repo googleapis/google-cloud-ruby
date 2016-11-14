@@ -27,13 +27,12 @@ module Google
     # Creates a new object for connecting to the Translate service.
     # Each call creates a new connection.
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
@@ -81,13 +80,12 @@ module Google
     # Creates a new object for connecting to the Translate service.
     # Each call creates a new connection.
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-    # access key. (This may change in future releases of Google Translate API.)
-    # Follow the general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
     # @param [String] project Project identifier for the Translate service you

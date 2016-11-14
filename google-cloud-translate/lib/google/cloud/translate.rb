@@ -34,15 +34,25 @@ module Google
     # with translated text back. You don't need to extract your source text or
     # reassemble the translated content.
     #
+    # ## Premium Edition
+    #
+    # Using the `model` parameter, you can set the model used by the service to
+    # perform the translation. The neural machine translation model (`nmt`) is
+    # billed as a premium edition feature. Because neural machine translation is
+    # computationally significantly more resource intensive than the standard
+    # model, the price for the premium edition is higher than the standard
+    # edition. If the `model` parameter not set or is set to `base`, then the
+    # service will return translation using the current standard model and
+    # standard edition pricing.
+    #
     # ## Authenticating
     #
-    # Unlike other Cloud Platform services, which authenticate using a project
-    # ID and OAuth 2.0 credentials, Translate API requires a public API access
-    # key. (This may change in future releases of Translate API.) Follow the
-    # general instructions at [Identifying your application to
-    # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-    # specific instructions for [Server
-    # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+    # Like other Cloud Platform services, Google Translate API supports
+    # authentication using a project ID and OAuth 2.0 credentials. In addition,
+    # it supports authentication using a public API access key. (If both the API
+    # key and the project and OAuth 2.0 credentials are provided, the API key
+    # will be used.) Instructions and configuration options are covered in the
+    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # ## Translating texts
     #
@@ -211,13 +221,13 @@ module Google
       # Creates a new object for connecting to the Translate service.
       # Each call creates a new connection.
       #
-      # Unlike other Cloud Platform services, which authenticate using a project
-      # ID and OAuth 2.0 credentials, Google Translate API requires a public API
-      # access key. (This may change in future releases of Google Translate
-      # API.) Follow the general instructions at [Identifying your application
-      # to Google](https://cloud.google.com/translate/v2/using_rest#auth), and
-      # the specific instructions for [Server
-      # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+      # Like other Cloud Platform services, Google Translate API supports
+      # authentication using a project ID and OAuth 2.0 credentials. In
+      # addition, it supports authentication using a public API access key. (If
+      # both the API key and the project and OAuth 2.0 credentials are provided,
+      # the API key will be used.) Instructions and configuration options are
+      # covered in the [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
       #
       # @param [String] project Project identifier for the Translate service you
       #   are connecting to.

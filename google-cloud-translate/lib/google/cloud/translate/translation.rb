@@ -70,7 +70,18 @@ module Google
         alias_method :source, :from
 
         ##
-        # The translation model.
+        # The model used by the service to perform the translation. When this is
+        # set to `nmt`, the translation was performed using premium neural
+        # machine translation model. If it is not set or model is set to `base`,
+        # then the translation was done using standard model. In almost all
+        # cases, the model type in response should match the model type
+        # requested. However, in some limited situations this might not be the
+        # case. In these cases, the request had `nmt` parameter, but the
+        # response has `base` set or model is not returned. This happens when
+        # neural translation did not give a satisfactory translation and we
+        # completed the translation using the standard model. If this happens,
+        # you will charged at the standard edition rate and not at the premium
+        # rate.
         #
         # @return [String]
         attr_reader :model
