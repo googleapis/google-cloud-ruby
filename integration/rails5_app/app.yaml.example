@@ -1,5 +1,5 @@
 runtime: ruby
-vm: true
+env: flex
 entrypoint: cd integration/rails5_app; bundle install; bundle exec rackup -p 8080 config.ru
 health_check:
   enable_health_check: False

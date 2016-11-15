@@ -702,7 +702,7 @@ namespace :integration do
         "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
       # If project_uri not given, default to "http://[project_id].appspot.com"
       project_uri = args[:project_uri] ||
-                    "http://#{project_id}.appspot.com"
+                    "http://#{project_id}.appspot-preview.com"
 
       fail "You must provide a project_uri. e.g. rake " \
         "integration:gae[http://my-project.appspot.com]" if project_uri.nil?
