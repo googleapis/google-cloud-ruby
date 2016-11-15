@@ -114,8 +114,9 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.21.0",
+        "v0.22.0",
         "master",
+        "v0.21.0",
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
