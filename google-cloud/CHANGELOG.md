@@ -1,5 +1,10 @@
 # Release History
 
+### 0.22.0 / 2016-11-14
+
+* Updating Natural Language dependency to 0.22.x
+* Updating Translate dependency to 0.22.x
+
 ### 0.21.1 / 2016-11-09
 
 * No changes
