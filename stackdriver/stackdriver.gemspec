@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["hxiong388@gmail.com"]
   gem.description   = "stackdriver is the official library for Google Stackdriver APIs."
   gem.summary       = "API Client library for Google Stackdriver"
-  gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
+  gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
