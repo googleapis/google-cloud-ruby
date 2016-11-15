@@ -17,8 +17,9 @@
       "name": "gcloud",
       "defaultService": "gcloud",
       "versions": [
-        "v0.21.0",
+        "v0.22.0",
         "master",
+        "v0.21.0",
         "v0.20.0",
         "v0.12.2",
         "v0.12.1",
