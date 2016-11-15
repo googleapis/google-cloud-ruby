@@ -17,8 +17,9 @@
       "name": "gcloud",
       "defaultService": "gcloud",
       "versions": [
-        "v0.21.0",
+        "v0.22.0",
         "master",
+        "v0.21.0",
         "v0.20.0",
         "v0.12.2",
         "v0.12.1",
@@ -38,8 +39,9 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.21.1",
+        "v0.22.0",
         "master",
+        "v0.21.1",
         "v0.21.0",
         "v0.20.1",
         "v0.20.0"
@@ -114,8 +116,9 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.21.0",
+        "v0.22.0",
         "master",
+        "v0.21.0",
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
@@ -126,8 +129,8 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
-	"v0.21.1",
-	"master",
+        "v0.21.1",
+        "master",
         "v0.21.0",
         "v0.20.1",
         "v0.20.0"
@@ -191,8 +194,9 @@
       "name": "google-cloud-translate",
       "defaultService": "google/cloud/translate",
       "versions": [
-        "v0.21.0",
+        "v0.22.0",
         "master",
+        "v0.21.0",
         "v0.20.1",
         "v0.20.0"
       ]
