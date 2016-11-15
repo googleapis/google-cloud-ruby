@@ -4,7 +4,7 @@ os:
 - osx
 osx_image: xcode7.1
 rvm:
-- 2.2.5
+- 2.2.6
 - 2.1.9
 - 2.0.0-p648
 before_install:
@@ -15,7 +15,7 @@ after_success:
 - bundle exec rake travis:post
 matrix:
   include:
-  - rvm: 2.3.1
+  - rvm: 2.3.2
     env: GCLOUD_BUILD_DOCS=true
 notifications:
   slack:
