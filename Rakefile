@@ -23,6 +23,7 @@ task :each, :bundleupdate do |t, args|
         header "RUBOCOP, JSONDOC, TESTS FOR #{gem}"
         sh "bundle exec rake rubocop"
         sh "bundle exec rake jsondoc"
+        sh "bundle exec rake doctest"
         sh "bundle exec rake test"
       end
     end
