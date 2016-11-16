@@ -14,6 +14,7 @@
 
 
 require "google/cloud/errors"
+require "google/cloud/logging/version"
 require "google/cloud/logging/v2"
 require "google/gax/errors"
 
