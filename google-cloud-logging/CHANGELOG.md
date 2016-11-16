@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.2 / 2016-11-15
+
+* Fix issue with uninitialized VERSION (remi)
+
 ### 0.21.1 / 2016-11-4
 
 * Upgraded Google::Cloud::Logging::Railtie to use AsyncWriter
