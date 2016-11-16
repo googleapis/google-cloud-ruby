@@ -30,15 +30,15 @@ module Google
       #
       #   language = Google::Cloud::Language.new
       #
-      #   content = "Darth Vader is the best villain in Star Wars."
+      #   content = "Star Wars is a great movie. The Death Star is fearsome."
       #   document = language.document content
       #   annotation = document.annotate
       #
-      #   annotation.sentiment.score #=> 1.0
-      #   annotation.sentiment.magnitude #=> 0.8999999761581421
-      #   annotation.entities.count #=> 2
-      #   annotation.sentences.count #=> 1
-      #   annotation.tokens.count #=> 10
+      #   annotation.sentiment.score #=> 0.10000000149011612
+      #   annotation.sentiment.magnitude #=> 1.100000023841858
+      #   annotation.entities.count #=> 3
+      #   annotation.sentences.count #=> 2
+      #   annotation.tokens.count #=> 13
       #
       class Annotation
         ##
@@ -62,13 +62,13 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "I love dogs. I hate cats."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   sentence = annotation.sentences.last
-        #   sentence.text #=> "I hate cats."
-        #   sentence.offset #=> 13
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
         #
         def sentences
           @sentences ||= Array(grpc.sentences).map { |g| Sentence.from_grpc g }
@@ -85,19 +85,19 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.tokens.count #=> 10
+        #   annotation.tokens.count #=> 13
         #   token = annotation.tokens.first
         #
-        #   token.text #=> "Darth"
+        #   token.text #=> "Star"
         #   token.offset #=> 0
-        #   token.part_of_speech #=> :NOUN
+        #   token.part_of_speech.tag #=> :NOUN
         #   token.head_token_index #=> 1
-        #   token.label #=> :NN
-        #   token.lemma #=> "Darth"
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         def tokens
           @tokens ||= Array(grpc.tokens).map { |g| Token.from_grpc g }
@@ -113,24 +113,24 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #   syntax = annotation.syntax
         #
         #   sentence = syntax.sentences.last
-        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
-        #   sentence.offset #=> 0
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
         #
-        #   syntax.tokens.count #=> 10
+        #   syntax.tokens.count #=> 13
         #   token = syntax.tokens.first
         #
-        #   token.text #=> "Darth"
+        #   token.text #=> "Star"
         #   token.offset #=> 0
-        #   token.part_of_speech #=> :NOUN
+        #   token.part_of_speech.tag #=> :NOUN
         #   token.head_token_index #=> 1
-        #   token.label #=> :NN
-        #   token.lemma #=> "Darth"
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         def syntax
           return nil if @grpc.tokens.nil?
@@ -147,21 +147,22 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   entities = annotation.entities
-        #   entities.count #=> 2
+        #   entities.count #=> 3
         #   entity = entities.first
         #
-        #   entity.name #=> "Darth Vader"
-        #   entity.type #=> :PERSON
-        #   entity.salience #=> 0.8421939611434937
+        #   entity.name #=> "Star Wars"
+        #   entity.type #=> :WORK_OF_ART
+        #   entity.salience #=> 0.6457656025886536
         #   entity.mentions.count #=> 1
-        #   entity.mentions.first.text # => "Darth Vader"
+        #   entity.mentions.first.text # => "Star Wars"
         #   entity.mentions.first.offset # => 0
-        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Darth_Vader"
+        #   entity.mid #=> "/m/06mmr"
+        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Star_Wars"
         #
         def entities
           @entities ||= Entities.from_grpc @grpc
@@ -177,18 +178,18 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #   sentiment = annotation.sentiment
         #
-        #   sentiment.score #=> 1.0
-        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.score #=> 0.10000000149011612
+        #   sentiment.magnitude #=> 1.100000023841858
         #   sentiment.language #=> "en"
         #
         #   sentence = sentiment.sentences.first
-        #   sentence.sentiment.score #=> 1.0
-        #   sentence.sentiment.magnitude #=> 0.8999999761581421
+        #   sentence.sentiment.score #=> 0.699999988079071
+        #   sentence.sentiment.magnitude #=> 0.699999988079071
         #
         def sentiment
           return nil if @grpc.document_sentiment.nil?
@@ -207,7 +208,7 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #   annotation.language #=> "en"
@@ -248,14 +249,14 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "I love dogs. I hate cats."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   sentence = annotation.sentences.last
         #   text_span = sentence.text_span
-        #   text_span.text #=> "I hate cats."
-        #   text_span.offset #=> 13
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
         #
         class TextSpan
           attr_reader :text, :offset
@@ -301,16 +302,16 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.tokens.count #=> 10
+        #   annotation.tokens.count #=> 13
         #   token = annotation.tokens.first
         #
-        #   token.text_span.text #=> "Darth"
+        #   token.text_span.text #=> "Star"
         #   token.part_of_speech.tag #=> :NOUN
-        #   token.part_of_speech.gender #=> :MASCULINE
+        #   token.part_of_speech.number #=> :SINGULAR
         #
         class PartOfSpeech
           attr_reader :tag, :aspect, :case, :form, :gender, :mood, :number,
@@ -353,11 +354,14 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.sentences.count #=> 1
+        #   annotation.sentences.count #=> 2
+        #   sentence = annotation.sentences.first
+        #   sentence.text #=> "Star Wars is a great movie."
+        #   sentence.offset #=> 0
         #
         class Sentence
           attr_reader :text_span, :sentiment
@@ -447,18 +451,19 @@ module Google
           #
           #   language = Google::Cloud::Language.new
           #
-          #   content = "Darth Vader is the best villain in Star Wars."
+          #   content = "Star Wars is a great movie. \
+          #              The Death Star is fearsome."
           #   document = language.document content
           #   annotation = document.annotate
           #   sentiment = annotation.sentiment
           #
-          #   sentiment.score #=> 1.0
-          #   sentiment.magnitude #=> 0.8999999761581421
+          #   sentiment.score #=> 0.10000000149011612
+          #   sentiment.magnitude #=> 1.100000023841858
           #   sentiment.language #=> "en"
           #
           #   sentence = sentiment.sentences.first
-          #   sentence.sentiment.score #=> 1.0
-          #   sentence.sentiment.magnitude #=> 0.8999999761581421
+          #   sentence.sentiment.score #=> 0.699999988079071
+          #   sentence.sentiment.magnitude #=> 0.699999988079071
           #
           class Sentiment
             attr_reader :score, :magnitude
@@ -500,20 +505,20 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.tokens.count #=> 10
+        #   annotation.tokens.count #=> 13
         #   token = annotation.tokens.first
         #
-        #   token.text_span.text #=> "Darth"
+        #   token.text_span.text #=> "Star"
         #   token.text_span.offset #=> 0
         #   token.part_of_speech.tag #=> :NOUN
-        #   token.part_of_speech.gender #=> :MASCULINE
+        #   token.part_of_speech.number #=> :SINGULAR
         #   token.head_token_index #=> 1
-        #   token.label #=> :NN
-        #   token.lemma #=> "Darth"
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         class Token
           attr_reader :text_span, :part_of_speech, :head_token_index, :label,
@@ -567,25 +572,26 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   syntax = annotation.syntax
         #
         #   sentence = syntax.sentences.last
-        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
-        #   sentence.offset #=> 0
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
         #
-        #   syntax.tokens.count #=> 10
+        #   syntax.tokens.count #=> 13
         #   token = syntax.tokens.first
         #
-        #   token.text #=> "Darth"
-        #   token.offset #=> 0
-        #   token.part_of_speech #=> :NOUN
+        #   token.text_span.text #=> "Star"
+        #   token.text_span.offset #=> 0
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.part_of_speech.number #=> :SINGULAR
         #   token.head_token_index #=> 1
-        #   token.label #=> :NN
-        #   token.lemma #=> "Darth"
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         class Syntax
           attr_reader :sentences, :tokens, :language
@@ -620,12 +626,12 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   entities = annotation.entities
-        #   entities.count #=> 2
+        #   entities.count #=> 3
         #   entities.people.count #=> 1
         #   entities.artwork.count #=> 1
         #
@@ -745,21 +751,22 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   entities = annotation.entities
-        #   entities.count #=> 2
+        #   entities.count #=> 3
         #   entity = entities.first
         #
-        #   entity.name #=> "Darth Vader"
-        #   entity.type #=> :PERSON
-        #   entity.salience #=> 0.8421939611434937
+        #   entity.name #=> "Star Wars"
+        #   entity.type #=> :WORK_OF_ART
+        #   entity.salience #=> 0.6457656025886536
         #   entity.mentions.count #=> 1
-        #   entity.mentions.first.text # => "Darth Vader"
+        #   entity.mentions.first.text # => "Star Wars"
         #   entity.mentions.first.offset # => 0
-        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Darth_Vader"
+        #   entity.mid #=> "/m/06mmr"
+        #   entity.wikipedia_url #=> "http://en.wikipedia.org/wiki/Star_Wars"
         #
         class Entity
           attr_reader :name, :type, :metadata, :salience, :mentions
@@ -897,18 +904,21 @@ module Google
           #
           #   language = Google::Cloud::Language.new
           #
-          #   content = "Darth Vader is the best villain in Star Wars."
+          #   content = "Star Wars is a great movie. \
+          #              The Death Star is fearsome."
           #   document = language.document content
           #   annotation = document.annotate
           #
           #   entities = annotation.entities
-          #   entities.count #=> 2
+          #   entities.count #=> 3
           #   entity = entities.first
           #
           #   entity.mentions.count #=> 1
-          #   entity.mentions.first.text # => "Darth Vader"
-          #   entity.mentions.first.offset # => 0
-          #   entity.mentions.first.proper? # => true
+          #   mention = entity.mentions.first
+          #   mention.text # => "Star Wars"
+          #   mention.offset # => 0
+          #   mention.proper? # => true
+          #   mention.type # => :PROPER
           #
           class Mention
             attr_reader :text_span, :type
@@ -992,13 +1002,13 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
         #   sentiment = annotation.sentiment
-        #   sentiment.score #=> 1.0
-        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.score #=> 0.10000000149011612
+        #   sentiment.magnitude #=> 1.100000023841858
         #   sentiment.language #=> "en"
         #
         class Sentiment

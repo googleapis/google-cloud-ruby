@@ -38,15 +38,15 @@ module Google
       #
       #   language = Google::Cloud::Language.new
       #
-      #   content = "Darth Vader is the best villain in Star Wars."
+      #   content = "Star Wars is a great movie. The Death Star is fearsome."
       #   document = language.document content
       #   annotation = document.annotate
       #
-      #   annotation.entities.count #=> 2
-      #   annotation.sentiment.score #=> 1.0
-      #   annotation.sentiment.magnitude #=> 0.8999999761581421
-      #   annotation.sentences.count #=> 1
-      #   annotation.tokens.count #=> 10
+      #   annotation.entities.count #=> 3
+      #   annotation.sentiment.score #=> 0.10000000149011612
+      #   annotation.sentiment.magnitude #=> 1.100000023841858
+      #   annotation.sentences.count #=> 2
+      #   annotation.tokens.count #=> 13
       #
       class Document
         ##
@@ -189,29 +189,29 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate
         #
-        #   annotation.sentiment.score #=> 1.0
-        #   annotation.sentiment.magnitude #=> 0.8999999761581421
-        #   annotation.entities.count #=> 2
-        #   annotation.sentences.count #=> 1
-        #   annotation.tokens.count #=> 10
+        #   annotation.sentiment.score #=> 0.10000000149011612
+        #   annotation.sentiment.magnitude #=> 1.100000023841858
+        #   annotation.entities.count #=> 3
+        #   annotation.sentences.count #=> 2
+        #   annotation.tokens.count #=> 13
         #
         # @example With feature flags:
         #   require "google/cloud/language"
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #   annotation = document.annotate entities: true, text: true
         #
         #   annotation.sentiment #=> nil
-        #   annotation.entities.count #=> 2
-        #   annotation.sentences.count #=> 1
-        #   annotation.tokens.count #=> 10
+        #   annotation.entities.count #=> 3
+        #   annotation.sentences.count #=> 2
+        #   annotation.tokens.count #=> 13
         #
         def annotate sentiment: false, entities: false, syntax: false,
                      encoding: nil
@@ -240,24 +240,24 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #
         #   syntax = document.syntax
         #
         #   sentence = syntax.sentences.last
-        #   sentence.text #=> "Darth Vader is the best villain in Star Wars."
-        #   sentence.offset #=> 0
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
         #
-        #   syntax.tokens.count #=> 10
+        #   syntax.tokens.count #=> 13
         #   token = syntax.tokens.first
         #
-        #   token.text #=> "Darth"
+        #   token.text #=> "Star"
         #   token.offset #=> 0
         #   token.part_of_speech.tag #=> :NOUN
         #   token.head_token_index #=> 1
-        #   token.label #=> :NN
-        #   token.lemma #=> "Darth"
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         def syntax encoding: nil
           ensure_service!
@@ -280,15 +280,14 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        # content = "Darth Vader is the best villain in Star Wars."
-        # document = language.document content
-        # entities = document.entities # API call
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
+        #   document = language.document content
+        #   entities = document.entities # API call
         #
-        # entities.count #=> 2
-        # entities.first.name #=> "Darth Vader"
-        # entities.first.type #=> :PERSON
-        # entities.first.name #=> "Star Wars"
-        # entities.first.type #=> :WORK_OF_ART
+        #   entities.count #=> 3
+        #   entities.first.name #=> "Star Wars"
+        #   entities.first.type #=> :WORK_OF_ART
+        #   entities.first.mid #=> "/m/06mmr"
         #
         def entities encoding: nil
           ensure_service!
@@ -313,18 +312,18 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #
         #   sentiment = document.sentiment
         #
-        #   sentiment.score #=> 1.0
-        #   sentiment.magnitude #=> 0.8999999761581421
+        #   sentiment.score #=> 0.10000000149011612
+        #   sentiment.magnitude #=> 1.100000023841858
         #   sentiment.language #=> "en"
         #
         #   sentence = sentiment.sentences.first
-        #   sentence.sentiment.score #=> 1.0
-        #   sentence.sentiment.magnitude #=> 0.8999999761581421
+        #   sentence.sentiment.score #=> 0.699999988079071
+        #   sentence.sentiment.magnitude #=> 0.699999988079071
         #
         def sentiment encoding: nil
           ensure_service!
