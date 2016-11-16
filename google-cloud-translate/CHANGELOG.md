@@ -1,5 +1,9 @@
 # Release History
 
+### 0.22.1 / 2016-11-16
+
+* Add missing googleauth dependency (frankyn)
+
 ### 0.22.0 / 2016-11-14
 
 * Support authentication with service accounts
