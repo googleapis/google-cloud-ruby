@@ -27,15 +27,15 @@ require "google/cloud/language"
 
 language = Google::Cloud::Language.new
 
-content = "Darth Vader is the best villain in Star Wars."
+content = "Star Wars is a great movie. The Death Star is fearsome."
 document = language.document content
 annotation = document.annotate
 
-annotation.sentiment.score #=> 1.0
-annotation.sentiment.magnitude #=> 0.8999999761581421
-annotation.entities.count #=> 2
-annotation.sentences.count #=> 1
-annotation.tokens.count #=> 10
+annotation.entities.count #=> 3
+annotation.sentiment.score #=> 0.10000000149011612
+annotation.sentiment.magnitude #=> 1.100000023841858
+annotation.sentences.count #=> 2
+annotation.tokens.count #=> 13
 ```
 
 ## Supported Ruby Versions

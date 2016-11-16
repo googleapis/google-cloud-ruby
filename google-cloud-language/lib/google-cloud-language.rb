@@ -50,7 +50,7 @@ module Google
     #   gcloud = Google::Cloud.new
     #   language = gcloud.language
     #
-    #   content = "Darth Vader is the best villain in Star Wars."
+    #   content = "Star Wars is a great movie. The Death Star is fearsome."
     #   document = language.document content
     #   annotation = document.annotate
     #
@@ -97,7 +97,7 @@ module Google
     #
     #   language = Google::Cloud.language
     #
-    #   content = "Darth Vader is the best villain in Star Wars."
+    #   content = "Star Wars is a great movie. The Death Star is fearsome."
     #   document = language.document content
     #   annotation = document.annotate
     #
