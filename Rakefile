@@ -20,10 +20,15 @@ task :each, :bundleupdate do |t, args|
   gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
-        header "RUBOCOP, JSONDOC, TESTS FOR #{gem}"
-        sh "bundle exec rake rubocop"
-        sh "bundle exec rake jsondoc"
-        sh "bundle exec rake doctest"
+        header "RUNNING #{gem}"
+        sh "bundle update" if bundleupdate
+        header "#{gem} rubocop", "*"
+        run_task_if_exists "rubocop"
+        header "#{gem} jsondoc", "*"
+        run_task_if_exists "jsondoc"
+        header "#{gem} doctest", "*"
+        run_task_if_exists "doctest"
+        header "#{gem} test", "*"
         sh "bundle exec rake test"
       end
     end
