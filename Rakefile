@@ -538,7 +538,7 @@ namespace :travis do
       end
     end
     # Build coverage report
-    Rake::Task["test:coveralls"].invoke
+    Rake::Task["test:coveralls"].invoke if ENV["GCLOUD_BUILD_DOCS"] == "true"
   end
 
   desc "Runs post-build logic on Travis-CI."
