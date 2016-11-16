@@ -527,16 +527,9 @@ namespace :travis do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+          sh "bundle exec rake ci"
+
           if run_acceptance
             header "#{gem} acceptance", "*"
             sh "bundle exec rake acceptance -v"
@@ -628,8 +621,6 @@ namespace :appveyor do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
-
           # Fix acceptance/data symlinks on windows
           require "fileutils"
           FileUtils.mkdir_p "acceptance"
@@ -637,14 +628,8 @@ namespace :appveyor do
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
 
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+          sh "bundle exec rake ci"
+
           if run_acceptance
             # Set the SSL certificate so connections can be made
             ENV["SSL_CERT_FILE"] = ssl_cert_file
@@ -653,6 +638,19 @@ namespace :appveyor do
             sh "bundle exec rake acceptance -v"
           end
         end
+      end
+    end
+  end
+end
+
+desc "Run the CI build for all gems."
+task :ci, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        sh "bundle update" if bundleupdate
+        sh "bundle exec rake ci"
       end
     end
   end
