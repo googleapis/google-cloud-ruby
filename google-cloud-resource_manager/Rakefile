@@ -4,13 +4,14 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
@@ -23,19 +24,20 @@ namespace :test do
   end
 end
 
-desc "Runs acceptance tests."
+desc "Run acceptance tests."
 task :acceptance do
   puts "The google-cloud-resource_manager gem does not have acceptance tests."
 end
 
 namespace :acceptance do
-  desc "Runs acceptance cleanup."
+  desc "Run acceptance cleanup."
   task :cleanup do
   end
 end
 
-desc "Runs yard-doctest example tests."
+desc "Run yard-doctest example tests."
 task :doctest do
+  puts "The google-cloud-resource_manager gem does not have doctest tests."
 end
 
 desc "Start an interactive shell."
@@ -68,4 +70,32 @@ task :jsondoc => :yard do
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run the CI build"
+task :ci, :acceptance do |t, args|
+  run_acceptance = args[:acceptance]
+
+  header "BUILDING google-cloud-resource_manager"
+  header "google-cloud-resource_manager rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-resource_manager jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-resource_manager doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-resource_manager test", "*"
+  sh "bundle exec rake test"
+  if run_acceptance
+    header "google-cloud-resource_manager acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+end
+
 task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
