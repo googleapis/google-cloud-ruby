@@ -528,11 +528,11 @@ namespace :travis do
       Dir.chdir gem do
         Bundler.with_clean_env do
           sh "bundle update"
-          sh "bundle exec rake ci"
 
           if run_acceptance
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
@@ -628,14 +628,14 @@ namespace :appveyor do
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
 
           sh "bundle update"
-          sh "bundle exec rake ci"
 
           if run_acceptance
             # Set the SSL certificate so connections can be made
             ENV["SSL_CERT_FILE"] = ssl_cert_file
 
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
@@ -663,7 +663,7 @@ namespace :ci do
       Dir.chdir gem do
         Bundler.with_clean_env do
           sh "bundle update" if bundleupdate
-          sh "bundle exec rake ci[yes]"
+          sh "bundle exec rake ci:acceptance"
         end
       end
     end

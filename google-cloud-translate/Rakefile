@@ -132,9 +132,7 @@ task :jsondoc => :yard do
 end
 
 desc "Run the CI build"
-task :ci, :acceptance do |t, args|
-  run_acceptance = args[:acceptance]
-
+task :ci do
   header "BUILDING google-cloud-translate"
   header "google-cloud-translate rubocop", "*"
   sh "bundle exec rake rubocop"
@@ -144,9 +142,17 @@ task :ci, :acceptance do |t, args|
   sh "bundle exec rake doctest"
   header "google-cloud-translate test", "*"
   sh "bundle exec rake test"
-  if run_acceptance
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
     header "google-cloud-translate acceptance", "*"
     sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
   end
 end
 
