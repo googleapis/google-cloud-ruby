@@ -195,8 +195,9 @@
       "name": "google-cloud-translate",
       "defaultService": "google/cloud/translate",
       "versions": [
-        "v0.22.0",
+        "v0.22.1",
         "master",
+        "v0.22.0",
         "v0.21.0",
         "v0.20.1",
         "v0.20.0"
