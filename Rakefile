@@ -655,6 +655,24 @@ task :ci, :bundleupdate do |t, args|
     end
   end
 end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests, for all gems."
+  task :acceptance, :bundleupdate do |t, args|
+    bundleupdate = args[:bundleupdate]
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          sh "bundle update" if bundleupdate
+          sh "bundle exec rake ci[yes]"
+        end
+      end
+    end
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
 
 namespace :integration do
   desc "Run integration:gae for all gems"
