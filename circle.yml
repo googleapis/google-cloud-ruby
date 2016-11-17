@@ -1,0 +1,34 @@
+machine:
+  timezone: America/Los_Angeles
+
+  # Since 2.1.9 test execution fails to locate gem dependencies when run via
+  # rvm-exec, set it to be the machine default.
+  ruby:
+    version:
+      2.1.9
+
+dependencies:
+  pre:
+    # The following three commands install 2.0.0
+    - rvm get stable
+    - rvm install 2.0.0-p648
+    - rvm-exec 2.0.0-p648 gem install bundler
+  override:
+    # The following command installs dependencies for 2.1.9
+    - bundle install
+    - rvm-exec 2.2.5 bundle install
+    - rvm-exec 2.3.1 bundle install
+    - rvm-exec 2.0.0-p648 bundle install
+
+test:
+  override:
+    # The following two commands run 2.1.9
+    - rvm rubygems current
+    - bundle exec rake circleci:build
+    - rvm-exec 2.2.5 bundle exec rake circleci:build
+    - rvm-exec 2.3.1 bundle exec rake circleci:build
+    - rvm-exec 2.0.0-p648 bundle exec rake circleci:build
+    # The following two commands run 2.1.9
+    - bundle exec rake test:coveralls
+    - bundle exec rake circleci:post
+
