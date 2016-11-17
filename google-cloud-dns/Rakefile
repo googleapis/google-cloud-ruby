@@ -4,13 +4,14 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
@@ -24,7 +25,7 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Runs the dns acceptance tests."
+desc "Run the dns acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DNS_TEST_PROJECT"]
@@ -48,7 +49,7 @@ task :acceptance, :project, :keyfile do |t, args|
 end
 
 namespace :acceptance do
-  desc "Runs acceptance tests with coverage."
+  desc "Run acceptance tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     require "simplecov"
     SimpleCov.start do
@@ -92,7 +93,7 @@ namespace :acceptance do
   end
 end
 
-desc "Runs yard-doctest example tests."
+desc "Run yard-doctest example tests."
 task :doctest do
   sh "bundle exec yard doctest"
 end
@@ -127,4 +128,38 @@ task :jsondoc => :yard do
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-dns"
+  header "google-cloud-dns rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-dns jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-dns doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-dns test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-dns acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
 task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

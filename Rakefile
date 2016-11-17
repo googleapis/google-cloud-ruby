@@ -20,9 +20,15 @@ task :each, :bundleupdate do |t, args|
   gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
-        header "RUBOCOP, JSONDOC, TESTS FOR #{gem}"
-        sh "bundle exec rake rubocop"
-        sh "bundle exec rake jsondoc"
+        header "RUNNING #{gem}"
+        sh "bundle update" if bundleupdate
+        header "#{gem} rubocop", "*"
+        run_task_if_exists "rubocop"
+        header "#{gem} jsondoc", "*"
+        run_task_if_exists "jsondoc"
+        header "#{gem} doctest", "*"
+        run_task_if_exists "doctest"
+        header "#{gem} test", "*"
         sh "bundle exec rake test"
       end
     end
@@ -521,25 +527,18 @@ namespace :travis do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+
           if run_acceptance
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
     end
     # Build coverage report
-    Rake::Task["test:coveralls"].invoke
+    Rake::Task["test:coveralls"].invoke if ENV["GCLOUD_BUILD_DOCS"] == "true"
   end
 
   desc "Runs post-build logic on Travis-CI."
@@ -622,8 +621,6 @@ namespace :appveyor do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
-
           # Fix acceptance/data symlinks on windows
           require "fileutils"
           FileUtils.mkdir_p "acceptance"
@@ -631,24 +628,49 @@ namespace :appveyor do
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
 
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+
           if run_acceptance
             # Set the SSL certificate so connections can be made
             ENV["SSL_CERT_FILE"] = ssl_cert_file
 
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
     end
+  end
+end
+
+desc "Run the CI build for all gems."
+task :ci, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        sh "bundle update" if bundleupdate
+        sh "bundle exec rake ci"
+      end
+    end
+  end
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests, for all gems."
+  task :acceptance, :bundleupdate do |t, args|
+    bundleupdate = args[:bundleupdate]
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          sh "bundle update" if bundleupdate
+          sh "bundle exec rake ci:acceptance"
+        end
+      end
+    end
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
   end
 end
 

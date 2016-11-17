@@ -16,36 +16,41 @@
 require "bundler/setup"
 require "bundler/gem_tasks"
 
+desc "Run tests."
 task :test do
+  puts "The google-cloud-monitoring gem does not have tests."
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
   end
 end
 
 # Acceptance tests
-desc "Runs the monitoring acceptance tests."
+desc "Run the monitoring acceptance tests."
 task :acceptance do
   puts "The google-cloud-monitoring gem does not have acceptance tests."
 end
 
 namespace :acceptance do
-  desc "Runs acceptance tests with coverage."
+  desc "Run acceptance tests with coverage."
   task :coverage do
   end
 
-  desc "Runs acceptance cleanup."
+  desc "Run acceptance cleanup."
   task :cleanup do
   end
 end
 
-desc "Runs yard-doctest example tests."
+desc "Run yard-doctest example tests."
 task :doctest do
+  puts "The google-cloud-monitoring gem does not have doctest tests."
 end
 
+desc "Run rubocop."
 task :rubocop do
+  puts "The google-cloud-monitoring gem does not use rubocop."
 end
 
 require "yard"
@@ -63,4 +68,38 @@ task :jsondoc => :yard do
   cp ["docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-monitoring"
+  header "google-cloud-monitoring rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-monitoring jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-monitoring doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-monitoring test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-monitoring acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
 task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
