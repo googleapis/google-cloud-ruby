@@ -9,7 +9,7 @@ machine:
 
 dependencies:
   cache_directories:
-    - '~/.rvm/rubies'
+    - "/opt/circleci/.rvm/gems"
   pre:
     # The following three commands install 2.0.0
     - rvm get stable
