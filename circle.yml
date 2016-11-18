@@ -9,12 +9,14 @@ machine:
 
 dependencies:
   cache_directories:
-    - "/opt/circleci/.rvm/gems"
+    - "/opt/circleci/.rvm"
+
   pre:
     # The following three commands install 2.0.0
     - rvm get stable
     - rvm install 2.0.0-p648
     - rvm-exec 2.0.0-p648 gem install bundler
+
   override:
     # The following command installs dependencies for 2.1.9
     - bundle update
@@ -24,13 +26,26 @@ dependencies:
 
 test:
   override:
-    # The following two commands run 2.1.9
-    - rvm rubygems current
-    - bundle exec rake circleci:build
-    - rvm-exec 2.2.5 bundle exec rake circleci:build
-    - rvm-exec 2.3.1 bundle exec rake circleci:build
-    - rvm-exec 2.0.0-p648 bundle exec rake circleci:build
-    # The following two commands run 2.1.9
-    - bundle exec rake test:coveralls
-    - bundle exec rake circleci:post
+    - ? |
+        case $CIRCLE_NODE_INDEX in
+         0)
+           rvm-exec 2.3.1 bundle exec rake circleci:build
+           ;;
+         1)
+           rvm-exec 2.2.5 bundle exec rake circleci:build
+           ;;
+         2)
+           rvm rubygems current
+           bundle exec rake circleci:build
+           ;;
+         3)
+           rvm-exec 2.0.0-p648 bundle exec rake circleci:build
+           ;;
+        esac
+      :
+        parallel: true
 
+  post:
+    # The following command runs 2.1.9
+    - rvm-exec 2.3.1 bundle exec rake circleci:post
+    - rvm-exec 2.2.5 bundle exec rake test:coveralls
