@@ -8,6 +8,8 @@ machine:
       2.1.9
 
 dependencies:
+  cache_directories:
+    - '~/.rvm/rubies'
   pre:
     # The following three commands install 2.0.0
     - rvm get stable
@@ -15,10 +17,10 @@ dependencies:
     - rvm-exec 2.0.0-p648 gem install bundler
   override:
     # The following command installs dependencies for 2.1.9
-    - bundle install
-    - rvm-exec 2.2.5 bundle install
-    - rvm-exec 2.3.1 bundle install
-    - rvm-exec 2.0.0-p648 bundle install
+    - bundle update
+    - rvm-exec 2.2.5 bundle update
+    - rvm-exec 2.3.1 bundle update
+    - rvm-exec 2.0.0-p648 bundle update
 
 test:
   override:
