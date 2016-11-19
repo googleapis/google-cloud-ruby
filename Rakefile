@@ -503,7 +503,7 @@ namespace :circleci do
   desc "Build for CircleCI"
   task :build do
     run_acceptance = false
-    if ENV["CIRCLE_BRANCH"] == "master" && ENV["CI_PULL_REQUEST"].nil?
+    if ENV["CIRCLE_BRANCH"] == "master" && ENV["CIRCLE_PR_NUMBER"].nil?
       run_acceptance = true
     end
 
@@ -525,7 +525,7 @@ namespace :circleci do
   desc "Runs post-build logic on CircleCI."
   task :post do
     # We don't run post-build on pull requests
-    if ENV["CI_PULL_REQUEST"].nil?
+    if ENV["CIRCLE_PR_NUMBER"].nil?
       if ENV["CIRCLE_BRANCH"] == "master"
         Rake::Task["jsondoc:master"].invoke
       elsif ENV["CIRCLE_TAG"]
