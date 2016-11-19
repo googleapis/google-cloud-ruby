@@ -41,4 +41,24 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
     results.first.confidence.must_be_close_to 0.98267895
     results.first.alternatives.must_be :empty?
   end
+
+  it "recognizes audio with language (Symbol)" do
+    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
+
+    mock = Minitest::Mock.new
+    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+
+    audio.encoding = :raw
+    audio.sample_rate = 16000
+    audio.language = :en
+
+    speech.service.mocked_service = mock
+    results = audio.recognize
+    mock.verify
+
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.98267895
+    results.first.alternatives.must_be :empty?
+  end
 end

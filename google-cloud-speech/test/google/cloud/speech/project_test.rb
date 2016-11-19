@@ -29,5 +29,26 @@ describe Google::Cloud::Speech::Project, :mock_speech do
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.must_be :content?
     audio.wont_be :url?
+    audio.language.must_be :nil?
+  end
+
+  it "builds an audio from filepath and language (String) input" do
+    audio = speech.audio filepath, language: "en"
+
+    audio.wont_be :nil?
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.must_be :content?
+    audio.wont_be :url?
+    audio.language.wont_be :nil?
+  end
+
+  it "builds an audio from filepath and language (Symbol) input" do
+    audio = speech.audio filepath, language: :en
+
+    audio.wont_be :nil?
+    audio.must_be_kind_of Google::Cloud::Speech::Audio
+    audio.must_be :content?
+    audio.wont_be :url?
+    audio.language.wont_be :nil?
   end
 end

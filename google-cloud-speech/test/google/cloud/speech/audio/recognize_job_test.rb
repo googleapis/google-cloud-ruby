@@ -38,4 +38,22 @@ describe Google::Cloud::Speech::Audio, :recognize_job, :mock_speech do
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
+
+  it "recognizes audio job with language (Symbol)" do
+    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
+
+    mock = Minitest::Mock.new
+    mock.expect :async_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
+
+    audio.encoding = :raw
+    audio.sample_rate = 16000
+    audio.language = :en
+
+    speech.service.mocked_service = mock
+    job = audio.recognize_job
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Speech::Job
+    job.wont_be :done?
+  end
 end
