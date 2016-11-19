@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.1 / 2016-11/19
+
+* Fix issue with language as a Symbol (frankyn)
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Speech.new
