@@ -234,6 +234,7 @@ module Google
               log_name: log_name
             }.delete_if { |_, v| v.nil? })
             @delete_log.call(req, options)
+            nil
           end
 
           # Writes log entries to Stackdriver Logging.  All log entries are

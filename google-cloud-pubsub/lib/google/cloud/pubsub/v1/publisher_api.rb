@@ -477,6 +477,7 @@ module Google
               topic: topic
             }.delete_if { |_, v| v.nil? })
             @delete_topic.call(req, options)
+            nil
           end
 
           # Sets the access control policy on the specified resource. Replaces any

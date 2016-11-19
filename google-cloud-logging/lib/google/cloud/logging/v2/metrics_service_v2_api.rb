@@ -390,6 +390,7 @@ module Google
               metric_name: metric_name
             }.delete_if { |_, v| v.nil? })
             @delete_log_metric.call(req, options)
+            nil
           end
         end
       end

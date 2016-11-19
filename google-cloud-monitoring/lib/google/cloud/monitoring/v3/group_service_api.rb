@@ -421,6 +421,7 @@ module Google
               name: name
             }.delete_if { |_, v| v.nil? })
             @delete_group.call(req, options)
+            nil
           end
 
           # Lists the monitored resources that are members of a group.
