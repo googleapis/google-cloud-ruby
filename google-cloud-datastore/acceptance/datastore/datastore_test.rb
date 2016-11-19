@@ -17,6 +17,7 @@ require "datastore_helper"
 # This test is a ruby version of gcloud-node's datastore test.
 
 describe "Datastore", :datastore do
+  let(:prefix) { "#{Time.now.utc.iso8601.gsub ":", "_"}_#{SecureRandom.hex(4)}" }
 
   it "should allocate IDs" do
     incomplete_key = Google::Cloud::Datastore::Key.new "Kind"
@@ -55,7 +56,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete with a key name" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", "post1"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post1"
       post.exclude_from_indexes! "author", true
       # Verify the index excludes are set properly
       post.exclude_from_indexes?("title").must_equal false
@@ -78,7 +79,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find with a key name and delete with a key" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", "post2"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post2"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -93,7 +94,7 @@ describe "Datastore", :datastore do
     end
 
     it "should save/find/delete with a numeric key id" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", 123456789
+      post.key = Google::Cloud::Datastore::Key.new "Post", SecureRandom.hex(4).to_i(16)
       dataset.save post
 
       refresh = dataset.find post.key
@@ -175,7 +176,7 @@ describe "Datastore", :datastore do
     end
 
     it "entities retrieved from datastore have immutable keys" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", "post3"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post3"
       dataset.save post
 
       refresh = dataset.find post.key
@@ -195,7 +196,7 @@ describe "Datastore", :datastore do
 
     it "should save and read blob values" do
       avatar = File.open("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb")
-      post.key  = Google::Cloud::Datastore::Key.new "Post", "blob_support"
+      post.key  = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_blob_support"
       post["avatar"] = avatar
       post.exclude_from_indexes! "avatar", true
 
@@ -224,10 +225,14 @@ describe "Datastore", :datastore do
     end
 
     it "should find with specifying consistency" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", "post1"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post4"
       dataset.save post
 
+      # sleep for one second to aid in the eventual consistency
+      sleep 1
+
       refresh = dataset.find post.key, consistency: :eventual
+      refresh.wont_be :nil?
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
       refresh.key.name.must_equal        post.key.name
@@ -239,10 +244,10 @@ describe "Datastore", :datastore do
     end
 
     it "allows embedded entities and keys" do
-      post.key = Google::Cloud::Datastore::Key.new "Post", "post_embedded"
+      post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post_embedded"
       post["embedded_entity"] = dataset.entity "EmbeddedPost", "key_will_not_be_pesisted"
       post["embedded_entity"]["embedded_name"] = "hello!"
-      post["embedded_key"] = dataset.entity "EmbeddedKey", "will_be_pesisted"
+      post["embedded_key"] = dataset.entity "EmbeddedKey", "#{prefix}_will_be_pesisted"
 
       post["embedded_entity"].wont_be :nil?
       post["embedded_entity"].key.wont_be :nil?
@@ -266,7 +271,7 @@ describe "Datastore", :datastore do
 
   it "should be able to save keys as a part of entity and query by key" do
     person = Google::Cloud::Datastore::Entity.new
-    person.key = Google::Cloud::Datastore::Key.new "Person", "name"
+    person.key = Google::Cloud::Datastore::Key.new "Person", "#{prefix}_name"
     person["fullName"] = "Full name"
     person["linkedTo"] = person.key # itself
     dataset.save person
@@ -290,7 +295,7 @@ describe "Datastore", :datastore do
       book = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["title"] = "Game of Thrones"
       end
-      book.key = Google::Cloud::Datastore::Key.new "Book", "GoT"
+      book.key = Google::Cloud::Datastore::Key.new "Book", "#{prefix}_GoT"
       book
     end
 
@@ -395,7 +400,7 @@ describe "Datastore", :datastore do
     end
 
     before do
-      dataset.save *characters
+      dataset.transaction { |tx| tx.save *characters }
     end
 
     it "should limit queries" do
@@ -573,7 +578,7 @@ describe "Datastore", :datastore do
     end
 
     it "should filter queries with defined indexes using GQL and literal values" do
-      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, 'GoT') AND family = 'Stark' AND appearances >= 20"
+      gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, '#{prefix}_GoT') AND family = 'Stark' AND appearances >= 20"
       gql.allow_literals = true
       entities = dataset.run gql
       entities.count.must_equal 6
@@ -597,7 +602,7 @@ describe "Datastore", :datastore do
 
     it "should run in a transaction block" do
       obj = Google::Cloud::Datastore::Entity.new
-      obj.key = Google::Cloud::Datastore::Key.new "Company", "Google"
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "#{prefix}_Google1"
       obj["url"] = "www.google.com"
 
       dataset.transaction do |t|
@@ -618,7 +623,7 @@ describe "Datastore", :datastore do
 
     it "should run in an explicit transaction" do
       obj = Google::Cloud::Datastore::Entity.new
-      obj.key = Google::Cloud::Datastore::Key.new "Company", "Google"
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "#{prefix}_Google2"
       obj["url"] = "www.google.com"
 
       tx = dataset.transaction
@@ -640,14 +645,14 @@ describe "Datastore", :datastore do
     end
 
     it "should find within the transaction" do
-      dataset.save dataset.entity("Post", "post1")
+      dataset.save dataset.entity("Post", "#{prefix}_post5")
 
       tx = dataset.transaction do |tx|
-        in_tx_refresh = tx.find tx.key("Post", "post1")
+        in_tx_refresh = tx.find tx.key("Post", "#{prefix}_post5")
         tx.delete in_tx_refresh if in_tx_refresh
       end
 
-      refresh = dataset.find "Post", "post1"
+      refresh = dataset.find "Post", "#{prefix}_post5"
       refresh.must_be :nil?
     end
   end

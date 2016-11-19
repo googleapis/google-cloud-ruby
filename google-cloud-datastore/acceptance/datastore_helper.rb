@@ -17,6 +17,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/datastore"
+require "securerandom"
 
 # Create shared dataset object so we don't create new for each test
 $dataset = Google::Cloud.new.datastore
