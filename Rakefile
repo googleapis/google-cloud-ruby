@@ -528,50 +528,17 @@ namespace :circleci do
     if ENV["CIRCLE_PR_NUMBER"].nil?
       if ENV["CIRCLE_BRANCH"] == "master"
         Rake::Task["jsondoc:master"].invoke
-      elsif ENV["CIRCLE_TAG"]
-        tag = ENV["CIRCLE_TAG"]
-        # Verify the tag format "PACKAGE/vVERSION"
-        m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
-        if m # We have a match!
-          Rake::Task["circleci:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
-          Rake::Task["jsondoc:package"].invoke tag
-        end
       end
     end
   end
 
-  task :release, :package, :version, :api_token do |t, args|
-    package = args[:package]
-    version = args[:version]
-    api_token = args[:api_token]
-    if package.nil? || version.nil?
-      fail "You must provide a package and version."
+  task :release do
+    tag = ENV["CIRCLE_TAG"]
+    if tag.nil?
+      fail "You must provide a tag to release."
     end
 
-    require "gems"
-    ::Gems.configure do |config|
-      config.key = api_token
-    end if api_token
-
-    Dir.chdir package do
-      Bundler.with_clean_env do
-        sh "rm -rf pkg"
-        sh "bundle update"
-        sh "bundle exec rake build"
-      end
-    end
-
-    path_to_be_pushed = "#{package}/pkg/#{package}-#{version}.gem"
-    if File.file? path_to_be_pushed
-      begin
-        ::Gems.push(File.new path_to_be_pushed)
-        puts "Successfully built and pushed #{package} for version #{version}"
-      rescue => e
-        puts "Error while releasing #{package} version #{version}: #{e.message}"
-      end
-    else
-      fail "Cannot build #{package} for version #{version}"
-    end
+    Rake::Task["release"].invoke tag
   end
 end
 
@@ -666,6 +633,53 @@ namespace :ci do
   task :a do
     # This is a handy shortcut to save typing
     Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :release, :tag do |t, args|
+  tag = args[:tag]
+  if tag.nil?
+    fail "You must provide a tag to release."
+  end
+  # Verify the tag format "PACKAGE/vVERSION"
+  m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
+  if m.nil? # We have a match!
+    fail "Tag #{tag} does not match the expected format."
+  end
+
+  package = m[:package]
+  version = m[:version]
+  if package.nil? || version.nil?
+    fail "You must provide a package and version."
+  end
+
+  api_token = ENV["RUBYGEMS_API_TOKEN"]
+
+  require "gems"
+  ::Gems.configure do |config|
+    config.key = api_token
+  end if api_token
+
+  Dir.chdir package do
+    Bundler.with_clean_env do
+      sh "rm -rf pkg"
+      sh "bundle update"
+      sh "bundle exec rake build"
+    end
+  end
+
+  path_to_be_pushed = "#{package}/pkg/#{package}-#{version}.gem"
+  if File.file? path_to_be_pushed
+    begin
+      ::Gems.push(File.new path_to_be_pushed)
+      puts "Successfully built and pushed #{package} for version #{version}"
+
+      Rake::Task["jsondoc:package"].invoke tag
+    rescue => e
+      puts "Error while releasing #{package} version #{version}: #{e.message}"
+    end
+  else
+    fail "Cannot build #{package} for version #{version}"
   end
 end
 
