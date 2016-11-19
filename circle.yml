@@ -1,0 +1,7 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+      - gcloud-jsondoc
+      - gcloud-rdoc
+      - yard-gcloud
