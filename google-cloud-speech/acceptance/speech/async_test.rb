@@ -113,6 +113,22 @@ describe "Asynchonous Recognition", :speech do
     results.first.alternatives.must_be :empty?
   end
 
+  it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
+    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: :en
+    job = speech.recognize_job audio
+
+    job.must_be_kind_of Google::Cloud::Speech::Job
+    job.wont_be :done?
+    job.wait_until_done!
+    job.must_be :done?
+
+    results = job.results
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.98267895
+    results.first.alternatives.must_be :empty?
+  end
+
   it "recognizes audio from Audio object, overriding attributes" do
     audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es"
     job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"

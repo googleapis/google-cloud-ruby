@@ -509,6 +509,7 @@ module Google
                          phrases: nil
           context = nil
           context = V1beta1::SpeechContext.new(phrases: phrases) if phrases
+          language = String(language) unless language.nil?
           V1beta1::RecognitionConfig.new({
             encoding: convert_encoding(encoding),
             sample_rate: sample_rate,
