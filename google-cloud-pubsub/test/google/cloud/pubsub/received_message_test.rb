@@ -60,7 +60,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
   end
 
   it "can acknowledge" do
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -71,7 +71,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
   end
 
   it "can ack" do
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -83,7 +83,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
 
   it "can delay" do
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(subscription_name), [rec_message.ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock

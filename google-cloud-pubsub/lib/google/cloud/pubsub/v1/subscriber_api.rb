@@ -452,6 +452,7 @@ module Google
               subscription: subscription
             }.delete_if { |_, v| v.nil? })
             @delete_subscription.call(req, options)
+            nil
           end
 
           # Modifies the ack deadline for a specific message. This method is useful
@@ -496,6 +497,7 @@ module Google
               ack_deadline_seconds: ack_deadline_seconds
             }.delete_if { |_, v| v.nil? })
             @modify_ack_deadline.call(req, options)
+            nil
           end
 
           # Acknowledges the messages associated with the +ack_ids+ in the
@@ -534,6 +536,7 @@ module Google
               ack_ids: ack_ids
             }.delete_if { |_, v| v.nil? })
             @acknowledge.call(req, options)
+            nil
           end
 
           # Pulls messages from the server. Returns an empty list if there are no
@@ -620,6 +623,7 @@ module Google
               push_config: push_config
             }.delete_if { |_, v| v.nil? })
             @modify_push_config.call(req, options)
+            nil
           end
 
           # Sets the access control policy on the specified resource. Replaces any

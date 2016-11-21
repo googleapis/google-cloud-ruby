@@ -389,6 +389,7 @@ module Google
               sink_name: sink_name
             }.delete_if { |_, v| v.nil? })
             @delete_sink.call(req, options)
+            nil
           end
         end
       end

@@ -36,7 +36,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   end
 
   it "can delete itself" do
-    get_res = Google::Protobuf::Empty.new
+    get_res = nil
     mock = Minitest::Mock.new
     mock.expect :delete_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock

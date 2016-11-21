@@ -505,6 +505,7 @@ module Google
               name: name
             }.delete_if { |_, v| v.nil? })
             @delete_metric_descriptor.call(req, options)
+            nil
           end
 
           # Lists time series that match a filter. This method does not require a Stackdriver account.
@@ -633,6 +634,7 @@ module Google
               time_series: time_series
             }.delete_if { |_, v| v.nil? })
             @create_time_series.call(req, options)
+            nil
           end
         end
       end
