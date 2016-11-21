@@ -42,7 +42,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
     push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-    mpc_res = Google::Protobuf::Empty.new
+    mpc_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -97,7 +97,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
       push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-      mpc_res = Google::Protobuf::Empty.new
+      mpc_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
       pubsub.service.mocked_subscriber = mock

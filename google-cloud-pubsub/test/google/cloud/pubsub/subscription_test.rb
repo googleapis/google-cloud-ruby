@@ -41,7 +41,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
     push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
-    mpc_res = Google::Protobuf::Empty.new
+    mpc_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_push_config, mpc_res, [subscription_path(subscription_name), push_config, options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -52,7 +52,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can delete itself" do
-    del_res = Google::Protobuf::Empty.new
+    del_res = nil
     mock = Minitest::Mock.new
     mock.expect :delete_subscription, del_res, [subscription_path(subscription_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -78,7 +78,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge one message" do
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"], options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -89,7 +89,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge many messages" do
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1", "ack-id-2", "ack-id-3"], options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -100,7 +100,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "can acknowledge with ack" do
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), ["ack-id-1"], options: default_options]
     subscription.service.mocked_subscriber = mock

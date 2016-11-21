@@ -47,7 +47,7 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :autoack, :mock_pubsub do
 
   it "can auto acknowledge when pulling messages" do
     ack_ids = [rec_msg1.ack_id, rec_msg2.ack_id, rec_msg3.ack_id]
-    ack_res = Google::Protobuf::Empty.new
+    ack_res = nil
     pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_msgs_json
     mock = Minitest::Mock.new
     mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]

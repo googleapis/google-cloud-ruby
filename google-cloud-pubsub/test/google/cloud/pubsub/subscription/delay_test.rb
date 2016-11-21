@@ -31,7 +31,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
   it "can delay an ack id" do
     ack_id = rec_message1.ack_id
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -44,7 +44,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
   it "can delay many ack ids" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -57,7 +57,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
   it "can delay many ack ids in an array" do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -69,7 +69,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
 
   it "can delay a message" do
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -82,7 +82,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
   it "can delay many messages" do
     rec_messages = [rec_message1, rec_message3, rec_message3]
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -95,7 +95,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
   it "can delay many messages in an array" do
     rec_messages = [rec_message1, rec_message3, rec_message3]
     new_deadline = 42
-    mad_res = Google::Protobuf::Empty.new
+    mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -114,7 +114,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     it "can delay an ack id" do
       ack_id = rec_message1.ack_id
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [ack_id], new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -127,7 +127,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     it "can delay many ack ids" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -140,7 +140,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     it "can delay many ack ids in an array" do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), ack_ids, new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -152,7 +152,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
 
     it "can delay a message" do
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), [rec_message1.ack_id], new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -165,7 +165,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     it "can delay many messages" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -178,7 +178,7 @@ describe Google::Cloud::Pubsub::Subscription, :delay, :mock_pubsub do
     it "can delay many messages in an array" do
       rec_messages = [rec_message1, rec_message3, rec_message3]
       new_deadline = 42
-      mad_res = Google::Protobuf::Empty.new
+      mad_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_ack_deadline, mad_res, [subscription_path(sub_name), rec_messages.map(&:ack_id), new_deadline, options: default_options]
       subscription.service.mocked_subscriber = mock
