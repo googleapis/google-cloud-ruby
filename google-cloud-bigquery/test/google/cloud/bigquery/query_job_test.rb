@@ -45,6 +45,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.must_be :large_results?
     job.must_be :cache?
     job.must_be :flatten?
+    job.must_be :use_legacy_sql?
   end
 
   it "knows its statistics data" do
@@ -82,7 +83,8 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "priority" => "BATCH",
       "allowLargeResults" => true,
       "useQueryCache" => true,
-      "flattenResults" => true
+      "flattenResults" => true,
+      "useLegacySql" => true
     }
     hash["statistics"]["query"] = {
       "cacheHit" => false,

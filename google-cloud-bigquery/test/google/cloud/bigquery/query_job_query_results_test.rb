@@ -200,7 +200,8 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       "priority" => "BATCH",
       "allowLargeResults" => true,
       "useQueryCache" => true,
-      "flattenResults" => true
+      "flattenResults" => true,
+      "useLegacySql" => true,
     }
     hash
   end
