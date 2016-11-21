@@ -35,13 +35,30 @@ describe Google::Cloud::Translate, :translate do
   end
 
   it "translates input" do
-    translate.translate("Hello", to: "es").text.must_equal "Hola"
+    translate.translate("Hello", to: "es").text.must_include "Hola"
     translate.translate("How are you today?", to: "es").text.must_equal "¿Cómo estás hoy?"
 
     translations = translate.translate "Hello", "How are you today?", to: "es"
     translations.count.must_equal 2
-    translations.first.text.must_equal "Hola"
+    translations.first.text.must_include "Hola"
     translations.last.text.must_equal "¿Cómo estás hoy?"
+  end
+
+  it "translates input with model attribute" do
+    translation = translate.translate "Hello", to: "es", model: ""
+    translation.text.must_include "Hola"
+    translation.model.must_be :nil?
+
+    translation = translate.translate "How are you today?", to: "es", model: "base"
+    translation.text.must_equal "¿Cómo estás hoy?"
+    translation.model.must_be :nil?
+
+    translations = translate.translate "Hello", "How are you today?", to: :es, model: :nmt
+    translations.count.must_equal 2
+    translations.first.text.must_include "Hola"
+    translations.first.model.must_equal "nmt"
+    translations.last.text.must_equal "¿Cómo estás hoy?"
+    translations.last.model.must_equal "nmt"
   end
 
   it "lists supported languages" do

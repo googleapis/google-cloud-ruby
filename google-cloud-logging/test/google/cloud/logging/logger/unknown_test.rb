@@ -27,9 +27,14 @@ describe Google::Cloud::Logging::Logger, :unknown, :mock_logging do
   let(:labels) { { "env" => "production" } }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+  let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
 
   def write_req_args severity
-    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!", severity: severity)]
+    timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
+                                                     nanos: timestamp.nsec
+    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
+                                                 severity: severity,
+                                                 timestamp: timestamp_grpc)]
     [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, options: default_options]
   end
 
@@ -70,9 +75,11 @@ describe Google::Cloud::Logging::Logger, :unknown, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
-    logger.unknown "Danger Will Robinson!"
+    Time.stub :now, timestamp do
+      logger.unknown "Danger Will Robinson!"
 
-    mock.verify
+      mock.verify
+    end
   end
 
   it "does not create a log entry with #debug with a block" do
@@ -100,8 +107,10 @@ describe Google::Cloud::Logging::Logger, :unknown, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
-    logger.unknown { "Danger Will Robinson!" }
+    Time.stub :now, timestamp do
+      logger.unknown { "Danger Will Robinson!" }
 
-    mock.verify
+      mock.verify
+    end
   end
 end

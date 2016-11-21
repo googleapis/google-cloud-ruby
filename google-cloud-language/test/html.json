@@ -3,16 +3,28 @@
     "text": {
       "content": "Hello from Chris and Mike!",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }, {
     "text": {
       "content": "If you find yourself in <strong>Utah</strong>, come say hi!",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }, {
     "text": {
       "content": "We <em>love</em> ruby and writing code.",
       "beginOffset": -1
+    },
+    "sentiment": {
+      "score": 1,
+      "magnitude": 1.9
     }
   }],
   "tokens": [{
@@ -21,7 +33,18 @@
       "beginOffset": -1
     },
     "partOfSpeech": {
-      "tag": "X"
+      "tag": "X",
+      "aspect": "PERFECTIVE",
+      "case": "INSTRUMENTAL",
+      "form": "GERUND",
+      "gender": "NEUTER",
+      "mood": "SUBJUNCTIVE",
+      "number": "SINGULAR",
+      "person": "FIRST",
+      "proper": "NOT_PROPER",
+      "reciprocity": "RECIPROCAL",
+      "tense": "IMPERFECT",
+      "voice": "ACTIVE"
     },
     "dependencyEdge": {
       "label": "ROOT"
@@ -334,24 +357,27 @@
       "text": {
         "content": "Chris",
         "beginOffset": -1
-      }
+      },
+      "type": "PROPER"
     }]
   }, {
     "name": "utah",
     "type": "LOCATION",
     "metadata": {
-      "wikipedia_url": "http://en.wikipedia.org/wiki/Utah"
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Utah",
+      "mid": "/m/07srw"
     },
     "salience": 0.061737571,
     "mentions": [{
       "text": {
         "content": "Utah",
         "beginOffset": -1
-      }
+      },
+      "type": "PROPER"
     }]
   }],
   "documentSentiment": {
-    "polarity": 1,
+    "score": 1,
     "magnitude": 1.9
   },
   "language": "en"

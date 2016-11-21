@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/core/environment"
 require "google/cloud/translate/service"
 require "google/cloud/translate/translation"
 require "google/cloud/translate/detection"
@@ -24,13 +25,12 @@ module Google
       ##
       # # Api
       #
-      # Represents top-level access to the Google Translate API. Each instance
-      # requires a public API access key. To create a key, follow the general
-      # instructions at [Identifying your application to
-      # Google](https://cloud.google.com/translate/v2/using_rest#auth), and the
-      # specific instructions for [Server
-      # keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
-      # See {Google::Cloud#translate}.
+      # Represents top-level access to the Google Translate API. Translate API
+      # supports more than ninety different languages, from Afrikaans to Zulu.
+      # Used in combination, this enables translation between thousands of
+      # language pairs. Also, you can send in HTML and receive HTML with
+      # translated text back. You don't need to extract your source text or
+      # reassemble the translated content.
       #
       # @see https://cloud.google.com/translate/v2/getting_started Translate API
       #   Getting Started
@@ -63,6 +63,32 @@ module Google
         end
 
         ##
+        # The Translate project connected to.
+        #
+        # @example
+        #   require "google/cloud/translate"
+        #
+        #   translate = Google::Cloud::Translate.new(
+        #     project: "my-todo-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   translate.project #=> "my-todo-project"
+        #
+        def project
+          service.project
+        end
+
+        ##
+        # @private Default project.
+        def self.default_project
+          ENV["TRANSLATE_PROJECT"] ||
+            ENV["GOOGLE_CLOUD_PROJECT"] ||
+            ENV["GCLOUD_PROJECT"] ||
+            Google::Cloud::Core::Environment.project_id
+        end
+
+        ##
         # Returns text translations from one language to another.
         #
         # @see https://cloud.google.com/translate/v2/using_rest#Translate
@@ -80,6 +106,17 @@ module Google
         # @param [String] format The format of the text. Possible values include
         #   `:text` and `:html`. This is optional. The Translate API default is
         #   `:html`.
+        # @param [String] model The model used by the service to perform the
+        #   translation. The neural machine translation model (`nmt`) is billed
+        #   as a premium edition feature. If this is set to `base`, then the
+        #   service will return translation using the current standard model.
+        #   The default value is `base`.
+        #
+        #   Acceptable values are:
+        #
+        #   * `nmt` - Use the neural machine translation model
+        #   * `base` - Use the current standard model
+        #
         # @param [String] cid The customization id for translate. This is
         #   optional.
         #
@@ -101,6 +138,18 @@ module Google
         #   translation.origin #=> "Hello world!"
         #   translation.to #=> "la"
         #   translation.text #=> "Salve mundi!"
+        #   translation.model #=> "base"
+        #
+        # @example Using the neural machine translation model:
+        #   require "google/cloud/translate"
+        #
+        #   translate = Google::Cloud::Translate.new
+        #
+        #   translation = translate.translate "Hello world!",
+        #                                     to: "la", model: "nmt"
+        #
+        #   translation.to_s #=> "Salve mundi!"
+        #   translation.model #=> "nmt"
         #
         # @example Setting the `from` language.
         #   require "google/cloud/translate"
@@ -133,7 +182,8 @@ module Google
         #                                     to: :la
         #   translation.text #=> "<strong>Salve</strong> mundi!"
         #
-        def translate *text, to: nil, from: nil, format: nil, cid: nil
+        def translate *text, to: nil, from: nil, format: nil, model: nil,
+                      cid: nil
           return nil if text.empty?
           fail ArgumentError, "to is required" if to.nil?
           to = to.to_s
@@ -141,7 +191,7 @@ module Google
           format = format.to_s if format
           text = Array(text).flatten
           gapi = service.translate text, to: to, from: from,
-                                         format: format, cid: cid
+                                         format: format, model: model, cid: cid
           Translation.from_gapi_list gapi, text, to, from
         end
 
@@ -227,7 +277,7 @@ module Google
         def languages language = nil
           language = language.to_s if language
           gapi = service.languages language
-          Array(gapi.languages).map { |g| Language.from_gapi g }
+          Array(gapi["languages"]).map { |g| Language.from_gapi g }
         end
       end
     end

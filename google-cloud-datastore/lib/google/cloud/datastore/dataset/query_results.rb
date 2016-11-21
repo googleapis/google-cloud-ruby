@@ -123,6 +123,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -143,6 +144,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -170,6 +172,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #
@@ -199,6 +202,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.each_with_cursor do |task, cursor|
@@ -232,6 +236,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all do |task|
@@ -242,6 +247,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all.map(&:key).each do |key|
@@ -252,6 +258,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all(request_limit: 10) do |task|
@@ -300,6 +307,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor do |task, cursor|
@@ -310,6 +318,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor.count #=> number of result/cursor pairs
@@ -318,6 +327,7 @@ module Google
           #   require "google/cloud/datastore"
           #
           #   datastore = Google::Cloud::Datastore.new
+          #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
           #   tasks.all_with_cursor(request_limit: 10) do |task, cursor|

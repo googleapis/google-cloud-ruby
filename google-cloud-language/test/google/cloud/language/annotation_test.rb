@@ -15,8 +15,8 @@
 require "helper"
 
 describe Google::Cloud::Language::Annotation, :mock_language do
-  let(:text_annotation_grpc) { Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json text_json }
-  let(:html_annotation_grpc) { Google::Cloud::Language::V1beta1::AnnotateTextResponse.decode_json html_json }
+  let(:text_annotation_grpc) { Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json }
+  let(:html_annotation_grpc) { Google::Cloud::Language::V1::AnnotateTextResponse.decode_json html_json }
   let(:annotation)      { Google::Cloud::Language::Annotation.from_grpc annotation_grpc }
 
   it "represents a plain text annotation response" do
@@ -27,7 +27,7 @@ describe Google::Cloud::Language::Annotation, :mock_language do
 
     annotation.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_equal 1.0
+    annotation.sentiment.score.must_equal 1.0
     annotation.sentiment.magnitude.must_equal 2.0999999046325684
 
     annotation.entities.must_be_kind_of ::Array
@@ -48,9 +48,16 @@ describe Google::Cloud::Language::Annotation, :mock_language do
     annotation.entities.other.map(&:name).must_equal []
 
     annotation.sentences.each do |sentence|
-      sentence.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.must_be_kind_of Google::Cloud::Language::Annotation::Sentence
+      sentence.text_span.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentence::Sentiment
     end
     annotation.sentences.map(&:text).must_equal text_sentences
+    annotation.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    annotation.sentences.first.offset.must_equal -1
+    annotation.sentences.first.must_be :sentiment?
+    annotation.sentences.first.score.must_equal 1.0
+    annotation.sentences.first.magnitude.must_equal 1.899999976158142
 
     annotation.tokens.each do |token|
       token.must_be_kind_of Google::Cloud::Language::Annotation::Token
@@ -58,7 +65,44 @@ describe Google::Cloud::Language::Annotation, :mock_language do
     annotation.tokens.count.must_equal 24
     token = annotation.tokens.first
     token.text.must_equal "Hello"
-    token.part_of_speech.must_equal :X
+    token.part_of_speech.tag.must_equal :X
+    token.head_token_index.must_equal 0
+    token.label.must_equal :ROOT
+    token.lemma.must_equal "Hello"
+
+    annotation.syntax.must_be_kind_of Google::Cloud::Language::Annotation::Syntax
+    annotation.syntax.sentences.each do |sentence|
+      sentence.must_be_kind_of Google::Cloud::Language::Annotation::Sentence
+      sentence.text_span.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentence::Sentiment
+    end
+    annotation.syntax.sentences.map(&:text).must_equal text_sentences
+    annotation.syntax.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    annotation.syntax.sentences.first.offset.must_equal -1
+    annotation.syntax.sentences.first.must_be :sentiment?
+    annotation.syntax.sentences.first.score.must_equal 1.0
+    annotation.syntax.sentences.first.magnitude.must_equal 1.899999976158142
+
+    annotation.syntax.tokens.each do |token|
+      token.must_be_kind_of Google::Cloud::Language::Annotation::Token
+    end
+    annotation.syntax.tokens.count.must_equal 24
+    token = annotation.syntax.tokens.first
+    token.text.must_equal "Hello"
+
+    token.part_of_speech.tag.must_equal :X
+    token.part_of_speech.aspect.must_equal :PERFECTIVE
+    token.part_of_speech.case.must_equal :INSTRUMENTAL
+    token.part_of_speech.form.must_equal :GERUND
+    token.part_of_speech.gender.must_equal :NEUTER
+    token.part_of_speech.mood.must_equal :SUBJUNCTIVE
+    token.part_of_speech.number.must_equal :SINGULAR
+    token.part_of_speech.person.must_equal :FIRST
+    token.part_of_speech.proper.must_equal :NOT_PROPER
+    token.part_of_speech.reciprocity.must_equal :RECIPROCAL
+    token.part_of_speech.tense.must_equal :IMPERFECT
+    token.part_of_speech.voice.must_equal :ACTIVE
+
     token.head_token_index.must_equal 0
     token.label.must_equal :ROOT
     token.lemma.must_equal "Hello"
@@ -72,7 +116,7 @@ describe Google::Cloud::Language::Annotation, :mock_language do
 
     annotation.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentiment
     annotation.sentiment.language.must_equal "en"
-    annotation.sentiment.polarity.must_be_close_to 1.0
+    annotation.sentiment.score.must_be_close_to 1.0
     annotation.sentiment.magnitude.must_be_close_to 1.899999976158142
 
     annotation.entities.must_be_kind_of ::Array
@@ -93,9 +137,16 @@ describe Google::Cloud::Language::Annotation, :mock_language do
     annotation.entities.other.map(&:name).must_equal []
 
     annotation.sentences.each do |sentence|
-      sentence.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.must_be_kind_of Google::Cloud::Language::Annotation::Sentence
+      sentence.text_span.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentence::Sentiment
     end
     annotation.sentences.map(&:text).must_equal html_sentences
+    annotation.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    annotation.sentences.first.offset.must_equal -1
+    annotation.sentences.first.must_be :sentiment?
+    annotation.sentences.first.score.must_equal 1.0
+    annotation.sentences.first.magnitude.must_equal 1.899999976158142
 
     annotation.tokens.each do |token|
       token.must_be_kind_of Google::Cloud::Language::Annotation::Token
@@ -103,7 +154,44 @@ describe Google::Cloud::Language::Annotation, :mock_language do
     annotation.tokens.count.must_equal 24
     token = annotation.tokens.first
     token.text.must_equal "Hello"
-    token.part_of_speech.must_equal :X
+    token.part_of_speech.tag.must_equal :X
+    token.head_token_index.must_equal 0
+    token.label.must_equal :ROOT
+    token.lemma.must_equal "Hello"
+
+    annotation.syntax.must_be_kind_of Google::Cloud::Language::Annotation::Syntax
+    annotation.syntax.sentences.each do |sentence|
+      sentence.must_be_kind_of Google::Cloud::Language::Annotation::Sentence
+      sentence.text_span.must_be_kind_of Google::Cloud::Language::Annotation::TextSpan
+      sentence.sentiment.must_be_kind_of Google::Cloud::Language::Annotation::Sentence::Sentiment
+    end
+    annotation.syntax.sentences.map(&:text).must_equal html_sentences
+    annotation.syntax.sentences.first.text.must_equal "Hello from Chris and Mike!"
+    annotation.syntax.sentences.first.offset.must_equal -1
+    annotation.syntax.sentences.first.must_be :sentiment?
+    annotation.syntax.sentences.first.score.must_equal 1.0
+    annotation.syntax.sentences.first.magnitude.must_equal 1.899999976158142
+
+    annotation.syntax.tokens.each do |token|
+      token.must_be_kind_of Google::Cloud::Language::Annotation::Token
+    end
+    annotation.syntax.tokens.count.must_equal 24
+    token = annotation.tokens.first
+    token.text.must_equal "Hello"
+
+    token.part_of_speech.tag.must_equal :X
+    token.part_of_speech.aspect.must_equal :PERFECTIVE
+    token.part_of_speech.case.must_equal :INSTRUMENTAL
+    token.part_of_speech.form.must_equal :GERUND
+    token.part_of_speech.gender.must_equal :NEUTER
+    token.part_of_speech.mood.must_equal :SUBJUNCTIVE
+    token.part_of_speech.number.must_equal :SINGULAR
+    token.part_of_speech.person.must_equal :FIRST
+    token.part_of_speech.proper.must_equal :NOT_PROPER
+    token.part_of_speech.reciprocity.must_equal :RECIPROCAL
+    token.part_of_speech.tense.must_equal :IMPERFECT
+    token.part_of_speech.voice.must_equal :ACTIVE
+
     token.head_token_index.must_equal 0
     token.label.must_equal :ROOT
     token.lemma.must_equal "Hello"

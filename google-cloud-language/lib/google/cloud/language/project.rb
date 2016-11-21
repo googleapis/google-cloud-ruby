@@ -37,14 +37,14 @@ module Google
       #
       #   language = Google::Cloud::Language.new
       #
-      #   content = "Darth Vader is the best villain in Star Wars."
+      #   content = "Star Wars is a great movie. The Death Star is fearsome."
       #   annotation = language.annotate content
       #
-      #   annotation.sentiment.polarity #=> 1.0
-      #   annotation.sentiment.magnitude #=> 0.8999999761581421
-      #   annotation.entities.count #=> 2
-      #   annotation.sentences.count #=> 1
-      #   annotation.tokens.count #=> 10
+      #   annotation.sentiment.score #=> 0.10000000149011612
+      #   annotation.sentiment.magnitude #=> 1.100000023841858
+      #   annotation.entities.count #=> 3
+      #   annotation.sentences.count #=> 2
+      #   annotation.tokens.count #=> 13
       #
       class Project
         ##
@@ -209,21 +209,21 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content analysis.
+        # @return [Annotation] The results for the content analysis.
         #
         # @example
         #   require "google/cloud/language"
         #
         #   language = Google::Cloud::Language.new
         #
-        #   content = "Darth Vader is the best villain in Star Wars."
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   annotation = language.annotate content
         #
-        #   annotation.sentiment.polarity #=> 1.0
-        #   annotation.sentiment.magnitude #=> 0.8999999761581421
-        #   annotation.entities.count #=> 2
-        #   annotation.sentences.count #=> 1
-        #   annotation.tokens.count #=> 10
+        #   annotation.sentiment.score #=> 0.10000000149011612
+        #   annotation.sentiment.magnitude #=> 1.100000023841858
+        #   annotation.entities.count #=> 3
+        #   annotation.sentences.count #=> 2
+        #   annotation.tokens.count #=> 13
         #
         def annotate content, sentiment: false, entities: false, syntax: false,
                      format: nil, language: nil, encoding: nil
@@ -255,21 +255,39 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation>] The results for the content syntax analysis.
+        # @return [Annotation::Syntax] The results for the content syntax
+        #   analysis.
         #
         # @example
         #   require "google/cloud/language"
         #
         #   language = Google::Cloud::Language.new
         #
-        #   document = language.document "Hello world!"
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
+        #   document = language.document content
         #
         #   annotation = language.syntax document
-        #   annotation.thing #=> Some Result
+        #   syntax = annotation.syntax
+        #
+        #   sentence = syntax.sentences.last
+        #   sentence.text #=> "The Death Star is fearsome."
+        #   sentence.offset #=> 28
+        #
+        #   syntax.tokens.count #=> 13
+        #   token = syntax.tokens.first
+        #
+        #   token.text #=> "Star"
+        #   token.offset #=> 0
+        #   token.part_of_speech.tag #=> :NOUN
+        #   token.head_token_index #=> 1
+        #   token.label #=> :TITLE
+        #   token.lemma #=> "Star"
         #
         def syntax content, format: nil, language: nil, encoding: nil
-          annotate content, syntax: true, format: format, language: language,
-                            encoding: encoding
+          ensure_service!
+          doc = document content, language: language, format: format
+          grpc = service.syntax doc.to_grpc, encoding: encoding
+          Annotation::Syntax.from_grpc grpc
         end
 
         ##
@@ -288,17 +306,18 @@ module Google
         # @param [String] encoding The encoding type used by the API to
         #   calculate offsets. Optional.
         #
-        # @return [Annotation::Entities>] The results for the entities analysis.
+        # @return [Annotation::Entities] The results for the entities analysis.
         #
         # @example
         #   require "google/cloud/language"
         #
         #   language = Google::Cloud::Language.new
         #
-        #   document = language.document "Hello Chris and Mike!"
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
+        #   document = language.document content
         #
         #   entities = language.entities document
-        #   entities.count #=> 2
+        #   entities.count #=> 3
         #
         def entities content, format: :text, language: nil, encoding: nil
           ensure_service!
@@ -321,8 +340,10 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
+        # @param [String] encoding The encoding type used by the API to
+        #   calculate offsets. Optional.
         #
-        # @return [Annotation::Sentiment>] The results for the sentiment
+        # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
         #
         # @example
@@ -330,16 +351,23 @@ module Google
         #
         #   language = Google::Cloud::Language.new
         #
-        #   document = language.document "Hello Chris and Mike!"
+        #   content = "Star Wars is a great movie. The Death Star is fearsome."
+        #   document = language.document content
         #
         #   sentiment = language.sentiment document
-        #   sentiment.polarity #=> 1.0
-        #   sentiment.magnitude #=> 0.8999999761581421
         #
-        def sentiment content, format: :text, language: nil
+        #   sentiment.score #=> 0.10000000149011612
+        #   sentiment.magnitude #=> 1.100000023841858
+        #   sentiment.language #=> "en"
+        #
+        #   sentence = sentiment.sentences.first
+        #   sentence.sentiment.score #=> 0.699999988079071
+        #   sentence.sentiment.magnitude #=> 0.699999988079071
+        #
+        def sentiment content, format: :text, language: nil, encoding: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.sentiment doc.to_grpc
+          grpc = service.sentiment doc.to_grpc, encoding: encoding
           Annotation::Sentiment.from_grpc grpc
         end
 

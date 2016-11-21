@@ -64,11 +64,12 @@ module Google
         #   require "google/cloud/dns"
         #
         #   dns = Google::Cloud::Dns.new(
-        #           project: "my-todo-project",
+        #           project: "my-project-id",
         #           keyfile: "/path/to/keyfile.json"
-        #  )
+        #   )
         #
-        #   dns.project #=> "my-todo-project"
+        #
+        #   dns.project #=> "my-project-id"
         #
         def project
           service.project

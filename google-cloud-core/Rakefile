@@ -4,13 +4,14 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
@@ -23,19 +24,20 @@ namespace :test do
   end
 end
 
-desc "Runs acceptance tests."
+desc "Run acceptance tests."
 task :acceptance do
   puts "The google-cloud-core gem does not have acceptance tests."
 end
 
 namespace :acceptance do
-  desc "Runs acceptance cleanup."
+  desc "Run acceptance cleanup."
   task :cleanup do
   end
 end
 
-desc "Runs yard-doctest example tests."
+desc "Run yard-doctest example tests."
 task :doctest do
+  puts "The google-cloud-core gem does not have doctest tests."
 end
 
 desc "Start an interactive shell."
@@ -68,4 +70,38 @@ task :jsondoc => :yard do
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-core"
+  header "google-cloud-core rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-core jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-core doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-core test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-core acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
 task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

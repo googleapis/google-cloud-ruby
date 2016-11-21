@@ -27,7 +27,8 @@ describe Google::Cloud::Language::Annotation::Entities do
           "text": {
             "content": "Chris",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }, {
         "name": "Mike",
@@ -38,27 +39,30 @@ describe Google::Cloud::Language::Annotation::Entities do
           "text": {
             "content": "Mike",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }, {
         "name": "Utah",
         "type": "LOCATION",
         "metadata": {
-          "wikipedia_url": "http://en.wikipedia.org/wiki/Utah"
+          "wikipedia_url": "http://en.wikipedia.org/wiki/Utah",
+          "mid": "/m/07srw"
         },
         "salience": 0.069791436,
         "mentions": [{
           "text": {
             "content": "Utah",
             "beginOffset": -1
-          }
+          },
+          "type": "PROPER"
         }]
       }],
       "language": "en"
       }
     }
   end
-  let(:entities_grpc) { Google::Cloud::Language::V1beta1::AnalyzeEntitiesResponse.decode_json entity_json }
+  let(:entities_grpc) { Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entity_json }
   let(:entities)      { Google::Cloud::Language::Annotation::Entities.from_grpc entities_grpc }
 
   it "has attributes" do
@@ -80,11 +84,17 @@ describe Google::Cloud::Language::Annotation::Entities do
     entities.places.first.must_be_kind_of Google::Cloud::Language::Annotation::Entity
     entities.places.first.name.must_equal "Utah"
     entities.places.first.type.must_equal :LOCATION
-    entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah"})
+    entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
     entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
+    entities.places.first.mid.must_equal "/m/07srw"
     entities.places.first.salience.must_be_close_to 0.069791436
     entities.places.first.mentions.count.must_equal 1
     entities.places.first.mentions.first.text.must_equal "Utah"
     entities.places.first.mentions.first.offset.must_equal -1
+    entities.places.first.mentions.first.must_be :proper?
+    entities.places.first.mentions.first.wont_be :common?
+    entities.places.first.mentions.first.text_span.text.must_equal "Utah"
+    entities.places.first.mentions.first.text_span.offset.must_equal -1
+    entities.places.first.mentions.first.type.must_equal :PROPER
   end
 end

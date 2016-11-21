@@ -32,10 +32,12 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_equal 1.0
-      annotation.sentiment.magnitude.must_equal 1.7999999523162842
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
+      annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -45,13 +47,21 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
-      token.part_of_speech.must_equal :X
+      token.part_of_speech.tag.must_equal :X
       token.head_token_index.must_equal 0
       token.label.must_equal :ROOT
       token.lemma.must_equal "Hello"
@@ -67,10 +77,12 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -80,13 +92,21 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
-      token.part_of_speech.must_equal :X
+      token.part_of_speech.tag.must_equal :X
       token.head_token_index.must_equal 0
       token.label.must_equal :ROOT
       token.lemma.must_equal "Hello"
@@ -102,10 +122,12 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -115,13 +137,21 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
-      token.part_of_speech.must_equal :X
+      token.part_of_speech.tag.must_equal :X
       token.head_token_index.must_equal 0
       token.label.must_equal :ROOT
       token.lemma.must_equal "Hello"
@@ -137,10 +167,12 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -150,13 +182,21 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
-      token.part_of_speech.must_equal :X
+      token.part_of_speech.tag.must_equal :X
       token.head_token_index.must_equal 0
       token.label.must_equal :ROOT
       token.lemma.must_equal "Hello"
@@ -177,10 +217,14 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.must_be :empty?
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.wont_be :sentiment?
+
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
       token.text.must_equal "Hello"
-      token.part_of_speech.must_equal :X
+      token.part_of_speech.tag.must_equal :X
       token.head_token_index.must_equal 0
       token.label.must_equal :ROOT
       token.lemma.must_equal "Hello"
@@ -197,12 +241,30 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.language.must_equal "en"
 
       annotation.sentiment.language.must_equal "en"
-      annotation.sentiment.polarity.must_be_kind_of Float
+      annotation.sentiment.score.must_be_kind_of Float
+      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
+      annotation.sentiment.magnitude.wont_be :zero?
+
+      annotation.sentiment.sentences.first.text.must_equal hello
+      annotation.sentiment.sentences.first.offset.must_equal 0
+      annotation.sentiment.sentences.first.must_be :sentiment?
+      annotation.sentiment.sentences.first.score.must_be_kind_of Float
+      annotation.sentiment.sentences.first.score.wont_be :zero?
+      annotation.sentiment.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentiment.sentences.first.magnitude.wont_be :zero?
 
       annotation.entities.must_be :empty?
 
       annotation.sentences.wont_be :empty?
+      annotation.sentences.first.text.must_equal hello
+      annotation.sentences.first.offset.must_equal 0
+      annotation.sentences.first.must_be :sentiment?
+      annotation.sentences.first.score.must_be_kind_of Float
+      annotation.sentences.first.score.wont_be :zero?
+      annotation.sentences.first.magnitude.must_be_kind_of Float
+      annotation.sentences.first.magnitude.wont_be :zero?
+
       annotation.tokens.must_be :empty?
     end
 
@@ -217,7 +279,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.must_be :nil?
 
-      annotation.entities.count.must_equal 3
+      annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []
       annotation.entities.people.map(&:name).must_equal ["Chris", "Mike"]
@@ -227,7 +289,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal []
+      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       annotation.sentences.must_be :empty?
       annotation.tokens.must_be :empty?
@@ -240,7 +302,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       entities.language.must_equal "en"
 
-      entities.count.must_equal 3
+      entities.count.must_equal 5
       entities.unknown.map(&:name).must_equal []
       entities.people.map(&:name).must_equal ["Chris", "Mike"]
       entities.locations.map(&:name).must_equal ["Utah"]
@@ -249,7 +311,7 @@ describe "Language (TEXT/Storage URL)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal []
+      entities.other.map(&:name).must_equal ["ruby", "writing code"]
     end
 
     it "works with creating a document" do
@@ -261,7 +323,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       entities.language.must_equal "en"
 
-      entities.count.must_equal 3
+      entities.count.must_equal 5
       entities.unknown.map(&:name).must_equal []
       entities.people.map(&:name).must_equal ["Chris", "Mike"]
       entities.locations.map(&:name).must_equal ["Utah"]
@@ -270,16 +332,22 @@ describe "Language (TEXT/Storage URL)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal []
+      entities.other.map(&:name).must_equal ["ruby", "writing code"]
 
       entities.places.first.name.must_equal "Utah"
       entities.places.first.type.must_equal :LOCATION
-      entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah"})
+      entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
       entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
+      entities.places.first.mid.must_equal "/m/07srw"
       entities.places.first.salience.must_be_kind_of Float
       entities.places.first.mentions.count.must_equal 1
       entities.places.first.mentions.first.text.must_equal "Utah"
       entities.places.first.mentions.first.offset.must_equal 51
+      entities.places.first.mentions.first.must_be :proper?
+      entities.places.first.mentions.first.wont_be :common?
+      entities.places.first.mentions.first.text_span.text.must_equal "Utah"
+      entities.places.first.mentions.first.text_span.offset.must_equal 51
+      entities.places.first.mentions.first.type.must_equal :PROPER
     end
   end
 
@@ -289,8 +357,19 @@ describe "Language (TEXT/Storage URL)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_kind_of Float
+      sentiment.score.must_be_kind_of Float
+      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
+      sentiment.magnitude.wont_be :zero?
+
+      sentiment.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      sentiment.sentences.first.text.must_equal hello
+      sentiment.sentences.first.offset.must_equal 0
+      sentiment.sentences.first.must_be :sentiment?
+      sentiment.sentences.first.score.must_be_kind_of Float
+      sentiment.sentences.first.score.wont_be :zero?
+      sentiment.sentences.first.magnitude.must_be_kind_of Float
+      sentiment.sentences.first.magnitude.wont_be :zero?
     end
 
     it "works with creating a document" do
@@ -302,8 +381,19 @@ describe "Language (TEXT/Storage URL)", :language do
 
       sentiment.language.must_equal "en"
 
-      sentiment.polarity.must_be_kind_of Float
+      sentiment.score.must_be_kind_of Float
+      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
+      sentiment.magnitude.wont_be :zero?
+
+      sentiment.sentences.map(&:text).must_equal [hello, sayhi, ruby]
+      sentiment.sentences.first.text.must_equal hello
+      sentiment.sentences.first.offset.must_equal 0
+      sentiment.sentences.first.must_be :sentiment?
+      sentiment.sentences.first.score.must_be_kind_of Float
+      sentiment.sentences.first.score.wont_be :zero?
+      sentiment.sentences.first.magnitude.must_be_kind_of Float
+      sentiment.sentences.first.magnitude.wont_be :zero?
     end
   end
 end

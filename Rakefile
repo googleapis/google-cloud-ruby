@@ -20,9 +20,15 @@ task :each, :bundleupdate do |t, args|
   gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
-        header "RUBOCOP, JSONDOC, TESTS FOR #{gem}"
-        sh "bundle exec rake rubocop"
-        sh "bundle exec rake jsondoc"
+        header "RUNNING #{gem}"
+        sh "bundle update" if bundleupdate
+        header "#{gem} rubocop", "*"
+        run_task_if_exists "rubocop"
+        header "#{gem} jsondoc", "*"
+        run_task_if_exists "jsondoc"
+        header "#{gem} doctest", "*"
+        run_task_if_exists "doctest"
+        header "#{gem} test", "*"
         sh "bundle exec rake test"
       end
     end
@@ -493,68 +499,41 @@ task :console, :bundleupdate do |t, args|
   end
 end
 
-namespace :travis do
-  desc "Runs acceptance tests for Travis-CI."
-  task :acceptance do
-    if ENV["TRAVIS_BRANCH"] == "master" &&
-       ENV["TRAVIS_PULL_REQUEST"] == "false"
-      header "Preparing to run acceptance tests"
-      # Decrypt the keyfile
-      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
-
-      Rake::Task["acceptance:each"].invoke
-    else
-      header "Skipping acceptance tests"
-    end
-  end
-
-  desc "Build for Travis-CI"
+namespace :circleci do
+  desc "Build for CircleCI"
   task :build do
     run_acceptance = false
-    if ENV["TRAVIS_BRANCH"] == "master" &&
-       ENV["TRAVIS_PULL_REQUEST"] == "false"
-      # Decrypt the keyfile
-      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
+    if ENV["CIRCLE_BRANCH"] == "master" && ENV["CIRCLE_PR_NUMBER"].nil?
       run_acceptance = true
     end
 
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+
           if run_acceptance
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
     end
-    # Build coverage report
-    Rake::Task["test:coveralls"].invoke
   end
 
-  desc "Runs post-build logic on Travis-CI."
+  desc "Runs post-build logic on CircleCI."
   task :post do
     # We don't run post-build on pull requests
-    if ENV["TRAVIS_PULL_REQUEST"] == "false" && ENV["GCLOUD_BUILD_DOCS"] == "true"
-
-      if ENV["TRAVIS_BRANCH"] == "master"
+    if ENV["CIRCLE_PR_NUMBER"].nil?
+      if ENV["CIRCLE_BRANCH"] == "master"
         Rake::Task["jsondoc:master"].invoke
-      elsif ENV["TRAVIS_TAG"]
-        tag = ENV["TRAVIS_TAG"]
+      elsif ENV["CIRCLE_TAG"]
+        tag = ENV["CIRCLE_TAG"]
         # Verify the tag format "PACKAGE/vVERSION"
         m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
         if m # We have a match!
-          Rake::Task["travis:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
+          Rake::Task["circleci:release"].invoke m[:package], m[:version], ENV["RUBYGEMS_API_TOKEN"]
           Rake::Task["jsondoc:package"].invoke tag
         end
       end
@@ -596,19 +575,34 @@ namespace :travis do
   end
 end
 
-namespace :appveyor do
-  desc "Runs acceptance tests for AppVeyor CI."
-  task :acceptance do
-    if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
-      header "Running acceptance tests on AppVeyor"
-      # Fix for SSL certificates on AppVeyor
-      ENV["SSL_CERT_FILE"] = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
-      Rake::Task["acceptance:each"].invoke
-    else
-      header "Skipping acceptance tests on AppVeyor"
+namespace :travis do
+  desc "Build for Travis-CI"
+  task :build do
+    run_acceptance = false
+    if ENV["TRAVIS_BRANCH"] == "master" &&
+       ENV["TRAVIS_PULL_REQUEST"] == "false"
+      # Decrypt the keyfile
+      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
+      run_acceptance = true
+    end
+
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          sh "bundle update"
+
+          if run_acceptance
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
+          end
+        end
+      end
     end
   end
+end
 
+namespace :appveyor do
   desc "Build for AppVeyor"
   task :build do
     # Retrieve the SSL certificate from google-api-client gem
@@ -622,8 +616,6 @@ namespace :appveyor do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          header "BUILDING #{gem}"
-
           # Fix acceptance/data symlinks on windows
           require "fileutils"
           FileUtils.mkdir_p "acceptance"
@@ -631,24 +623,49 @@ namespace :appveyor do
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
 
           sh "bundle update"
-          header "#{gem} rubocop", "*"
-          run_task_if_exists "rubocop"
-          header "#{gem} jsondoc", "*"
-          run_task_if_exists "jsondoc"
-          header "#{gem} doctest", "*"
-          run_task_if_exists "doctest"
-          header "#{gem} test", "*"
-          sh "bundle exec rake test"
+
           if run_acceptance
             # Set the SSL certificate so connections can be made
             ENV["SSL_CERT_FILE"] = ssl_cert_file
 
-            header "#{gem} acceptance", "*"
-            sh "bundle exec rake acceptance -v"
+            sh "bundle exec rake ci:acceptance"
+          else
+            sh "bundle exec rake ci"
           end
         end
       end
     end
+  end
+end
+
+desc "Run the CI build for all gems."
+task :ci, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        sh "bundle update" if bundleupdate
+        sh "bundle exec rake ci"
+      end
+    end
+  end
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests, for all gems."
+  task :acceptance, :bundleupdate do |t, args|
+    bundleupdate = args[:bundleupdate]
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          sh "bundle update" if bundleupdate
+          sh "bundle exec rake ci:acceptance"
+        end
+      end
+    end
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
   end
 end
 

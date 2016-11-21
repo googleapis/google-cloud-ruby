@@ -335,6 +335,7 @@ module Google
         # @private Write a log entry to the Stackdriver Logging service.
         def write_entry severity, message
           entry = Entry.new.tap do |e|
+            e.timestamp = Time.now
             e.severity = gcloud_severity(severity)
             e.payload = message
           end

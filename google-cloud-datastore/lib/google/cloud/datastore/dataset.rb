@@ -101,6 +101,10 @@ module Google
         # @return [Array<Google::Cloud::Datastore::Key>]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task"
         #   task_keys = datastore.allocate_ids task_key, 5
         #
@@ -124,6 +128,10 @@ module Google
         # @return [Array<Google::Cloud::Datastore::Entity>]
         #
         # @example Insert a new entity:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"
         #     t["done"] = false
@@ -135,6 +143,10 @@ module Google
         #   task.key.id #=> 123456
         #
         # @example Insert multiple new entities in a batch:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task1 = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"
         #     t["done"] = false
@@ -152,6 +164,10 @@ module Google
         #   task_key1, task_key2 = datastore.save(task1, task2).map(&:key)
         #
         # @example Update an existing entity:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task["priority"] = 5
         #   datastore.save task
@@ -170,6 +186,10 @@ module Google
         # @return [Array<Google::Cloud::Datastore::Entity>]
         #
         # @example Insert a new entity:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"
         #     t["done"] = false
@@ -181,6 +201,10 @@ module Google
         #   task.key.id #=> 123456
         #
         # @example Insert multiple new entities in a batch:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task1 = datastore.entity "Task" do |t|
         #     t["type"] = "Personal"
         #     t["done"] = false
@@ -210,11 +234,19 @@ module Google
         # @return [Array<Google::Cloud::Datastore::Entity>]
         #
         # @example Update an existing entity:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #   task["done"] = true
         #   datastore.save task
         #
         # @example update multiple new entities in a batch:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = datastore.query("Task").where("done", "=", false)
         #   tasks = datastore.run query
         #   tasks.each { |t| t["done"] = true }
@@ -233,7 +265,10 @@ module Google
         # @return [Boolean] Returns `true` if successful
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   datastore.delete task1, task2
         #
         def delete *entities_or_keys
@@ -251,7 +286,10 @@ module Google
         #   were persisted.
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   datastore = Google::Cloud::Datastore.new
+        #
         #   datastore.commit do |c|
         #     c.save task3, task4
         #     c.delete task1, task2
@@ -292,10 +330,18 @@ module Google
         # @return [Google::Cloud::Datastore::Entity, nil]
         #
         # @example Finding an entity with a key:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #   task = datastore.find task_key
         #
         # @example Finding an entity with a `kind` and `id`/`name`:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.find "Task", "sampleTask"
         #
         def find key_or_kind, id_or_name = nil, consistency: nil
@@ -324,6 +370,8 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::LookupResults]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
         #   datastore = Google::Cloud::Datastore.new
         #
         #   task_key1 = datastore.key "Task", "sampleTask1"
@@ -356,11 +404,19 @@ module Google
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
         #   tasks = datastore.run query
         #
         # @example Run an ancestor query with eventual consistency:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_list_key = datastore.key "TaskList", "default"
         #   query.kind("Task").
         #     ancestor(task_list_key)
@@ -368,16 +424,28 @@ module Google
         #   tasks = datastore.run query, consistency: :eventual
         #
         # @example Run the query within a namespace with the `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
         #   tasks = datastore.run query, namespace: "ns~todo-project"
         #
         # @example Run the query with a GQL string.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
         #                             done: false
         #   tasks = datastore.run gql_query
         #
         # @example Run the GQL query within a namespace with `namespace` option:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
         #                             done: false
         #   tasks = datastore.run gql_query, namespace: "ns~todo-project"
@@ -468,11 +536,19 @@ module Google
         # @return [Google::Cloud::Datastore::Query]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
         #   tasks = datastore.run query
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   query = Google::Cloud::Datastore::Query.new.
         #     kind("Task").
         #     where("done", "=", false)
@@ -497,11 +573,19 @@ module Google
         # @return [Google::Cloud::Datastore::GqlQuery]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
         #                             done: false
         #   tasks = datastore.run gql_query
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   gql_query = Google::Cloud::Datastore::GqlQuery.new
         #   gql_query.query_string = "SELECT * FROM Task WHERE done = @done"
         #   gql_query.named_bindings = {done: false}
@@ -528,23 +612,45 @@ module Google
         # @return [Google::Cloud::Datastore::Key]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #
         # @example Create an empty key:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key
         #
         # @example Create an incomplete key:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key "User"
         #
         # @example Create a key with a parent:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key [["TaskList", "default"],
         #                        ["Task", "sampleTask"]]
         #   key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
         #
         # @example Create a key with multi-level ancestry:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key([
         #     ["User", "alice"],
         #     ["TaskList", "default"],
@@ -553,10 +659,18 @@ module Google
         #   key.path #=> [["User", "alice"], ["TaskList", "default"], [ ... ]]
         #
         # @example Create an incomplete key with a parent:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key "TaskList", "default", "Task"
         #   key.path #=> [["TaskList", "default"], ["Task", nil]]
         #
         # @example Create a key with a project and namespace:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   key = datastore.key ["TaskList", "default"], ["Task", "sampleTask"],
         #                       project: "my-todo-project",
         #                       namespace: "ns~todo-project"
@@ -592,24 +706,44 @@ module Google
         # @return [Google::Cloud::Datastore::Entity]
         #
         # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.entity
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
         #   task = Google::Cloud::Datastore::Entity.new
         #
         # @example The key can also be passed in as an object:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task_key = datastore.key "Task", "sampleTask"
         #   task = datastore.entity task_key
         #
         # @example Or the key values can be passed in as parameters:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.entity "Task", "sampleTask"
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task = Google::Cloud::Datastore::Entity.new
         #   task.key = task_key
         #
         # @example The newly created entity can also be configured using block:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
         #   task = datastore.entity "Task", "sampleTask" do |t|
         #     t["type"] = "Personal"
         #     t["done"] = false
@@ -618,6 +752,8 @@ module Google
         #   end
         #
         # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
         #   task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
         #   task = Google::Cloud::Datastore::Entity.new
         #   task.key = task_key

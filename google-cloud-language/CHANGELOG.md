@@ -1,5 +1,15 @@
 # Release History
 
+### 0.22.0 / 2016-11-14
+
+* Upgrade to V1
+* Add Sentence and Entity::Mention objects
+* Add Sentence-level Sentiment
+* Updated PartOfSpeech structure
+* Add `score` and `sentences` attributes to Sentiment
+* Remove `polarity` attribute from Sentiment
+* Add `mid` attribute to Entity
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Language.new

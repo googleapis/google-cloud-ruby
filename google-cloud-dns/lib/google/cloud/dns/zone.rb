@@ -232,7 +232,7 @@ module Google
         #   zone = dns.zone "example-com"
         #   changes = zone.changes
         #   changes.all do |change|
-        #     puts "#{change.name} - #{change.status}"
+        #     puts "#{change.id} - #{change.status}"
         #   end
         #
         def changes token: nil, max: nil, order: nil
@@ -305,7 +305,8 @@ module Google
         alias_method :find_records, :records
 
         ##
-        # Creates a new, unsaved Record that can be added to a Zone.
+        # Creates a new, unsaved Record that can be added to a Zone. See
+        # {#update}.
         #
         # @return [Google::Cloud::Dns::Record]
         #
@@ -315,7 +316,7 @@ module Google
         #   dns = Google::Cloud::Dns.new
         #   zone = dns.zone "example-com"
         #   record = zone.record "example.com.", "A", 86400, ["1.2.3.4"]
-        #   zone.add record
+        #   zone.update record
         #
         def record name, type, ttl, data
           Google::Cloud::Dns::Record.new fqdn(name), type, ttl, data

@@ -155,6 +155,7 @@ module Google
           #   require "google/cloud/dns"
           #
           #   dns = Google::Cloud::Dns.new
+          #   zone = dns.zone "example-com"
           #   zone.update do |tx|
           #     tx.modify "www.example.com.", "CNAME" do |cname|
           #       cname.ttl = 86400 # only change the TTL

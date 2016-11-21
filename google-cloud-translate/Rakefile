@@ -4,13 +4,14 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
@@ -24,22 +25,65 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Runs the translate acceptance tests."
-task :acceptance, :key do |t, args|
+desc "Run the translate acceptance tests."
+task :acceptance, :project, :keyfile, :key do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["TRANSLATE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["TRANSLATE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["TRANSLATE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
   key = args[:key]
   key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
-  if key.nil?
-    fail "You must provide a key. e.g. rake acceptance[api_key] or TRANSLATE_TEST_KEY=api_key rake acceptance"
+
+  # run tests with api key credentials when available
+  if key
+    puts "running acceptance tests with API key"
+    # Rake::Task["acceptance:key"].invoke key
+    puts `bundle exec rake acceptance:key[#{key}]`
   end
+
+  # always run tests with service account credentials
+  puts "running acceptance tests with service account"
+
   # always overwrite when running tests
-  ENV["TRANSLATE_KEY"] = key
+  ENV["TRANSLATE_PROJECT"] = project
+  ENV["TRANSLATE_KEYFILE"] = nil
+  ENV["TRANSLATE_KEYFILE_JSON"] = keyfile
+  ENV["TRANSLATE_KEY"] = nil
 
   $LOAD_PATH.unshift "lib", "acceptance"
   Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
-  desc "Runs acceptance tests with coverage."
+  task :key, :key do |t, args|
+    key = args[:key]
+    key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
+    if key.nil?
+      fail "unable to run acceptance tests with api key credentials"
+    end
+    # always overwrite when running tests
+    ENV["TRANSLATE_PROJECT"] = nil
+    ENV["TRANSLATE_KEYFILE"] = nil
+    ENV["GOOGLE_CLOUD_KEYFILE"] = nil
+    ENV["GCLOUD_KEYFILE"] = nil
+    ENV["TRANSLATE_KEYFILE_JSON"] = nil
+    ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = nil
+    ENV["GCLOUD_KEYFILE_JSON"] = nil
+    ENV["TRANSLATE_KEY"] = key
+
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  end
+
+  desc "Run acceptance tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
     require "simplecov"
     SimpleCov.start do
@@ -52,7 +96,7 @@ namespace :acceptance do
   end
 end
 
-desc "Runs yard-doctest example tests."
+desc "Run yard-doctest example tests."
 task :doctest do
   sh "bundle exec yard doctest"
 end
@@ -87,4 +131,38 @@ task :jsondoc => :yard do
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-translate"
+  header "google-cloud-translate rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-translate jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-translate doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-translate test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-translate acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
 task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

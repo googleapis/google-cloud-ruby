@@ -1,9 +1,9 @@
 language: ruby
 os:
-- linux
 - osx
 osx_image: xcode7.1
 rvm:
+- 2.3.1
 - 2.2.5
 - 2.1.9
 - 2.0.0-p648
@@ -11,12 +11,6 @@ before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" && "$TRAVIS_RUBY_VERSION" == "2.0.0-p648" ]]; then rvm reinstall 2.0.0-p643 --disable-binary; fi
 script:
 - bundle exec rake travis:build
-after_success:
-- bundle exec rake travis:post
-matrix:
-  include:
-  - rvm: 2.3.1
-    env: GCLOUD_BUILD_DOCS=true
 notifications:
   slack:
     secure: Ksji5MDNOWnuzuyu9Hblbxse6kGLdH4kXyYkF98C+wawIGLSONWWkuA65wpdqSLtBN/79RCLMWoBzKAGX4xy9BL6Rxb3rLjAMT+FVur6II2yaApzyJ0dmTVeTXnkchPcrO27FK5taPb0Ghr86DUiG3OViY/q1N0AVALDYce5tfE=

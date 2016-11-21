@@ -49,7 +49,7 @@ module Google
     #
     #   gcloud = Google::Cloud.new
     #   dns = gcloud.dns
-    #   zone = dns.zone "example-zone"
+    #   zone = dns.zone "example-com"
     #   zone.records.each do |record|
     #     puts record.name
     #   end
@@ -95,8 +95,7 @@ module Google
     # @example
     #   require "google/cloud"
     #
-    #   dns = Google::Cloud.dns "my-dns-project",
-    #                    "/path/to/keyfile.json"
+    #   dns = Google::Cloud.dns "my-project-id", "/path/to/keyfile.json"
     #
     #   zone = dns.zone "example-com"
     #

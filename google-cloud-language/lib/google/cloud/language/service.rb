@@ -16,8 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/language/credentials"
 require "google/cloud/language/version"
-require "google/cloud/language/v1beta1/language_service_services_pb"
-require "google/cloud/language/v1beta1/language_service_api"
+require "google/cloud/language/v1"
 
 module Google
   module Cloud
@@ -34,7 +33,7 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || V1beta1::LanguageServiceApi::SERVICE_ADDRESS
+          @host = host || V1::LanguageServiceApi::SERVICE_ADDRESS
           @client_config = client_config || {}
           @timeout = timeout
         end
@@ -53,7 +52,7 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= V1beta1::LanguageServiceApi.new(
+          @service ||= V1::LanguageServiceApi.new(
             service_path: host,
             channel: channel,
             timeout: timeout,
@@ -76,13 +75,21 @@ module Google
             entities = true
             sentiment = true
           end
-          features = V1beta1::AnnotateTextRequest::Features.new(
+          features = V1::AnnotateTextRequest::Features.new(
             extract_syntax: syntax, extract_entities: entities,
             extract_document_sentiment: sentiment)
           encoding = verify_encoding! encoding
           execute do
             service.annotate_text doc_grpc, features, encoding,
                                   options: default_options
+          end
+        end
+
+        def syntax doc_grpc, encoding: nil
+          encoding = verify_encoding! encoding
+          execute do
+            service.analyze_syntax doc_grpc, encoding,
+                                   options: default_options
           end
         end
 
@@ -94,9 +101,11 @@ module Google
           end
         end
 
-        def sentiment doc_grpc
+        def sentiment doc_grpc, encoding: nil
+          encoding = verify_encoding! encoding
           execute do
-            service.analyze_sentiment doc_grpc, options: default_options
+            service.analyze_sentiment doc_grpc, encoding_type: encoding,
+                                                options: default_options
           end
         end
 
@@ -107,7 +116,7 @@ module Google
         protected
 
         def verify_encoding! encoding
-          # TODO: verify encoding against V1beta1::EncodingType
+          # TODO: verify encoding against V1::EncodingType
           return :UTF8 if encoding.nil?
           encoding
         end

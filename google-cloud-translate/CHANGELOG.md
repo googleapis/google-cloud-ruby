@@ -1,5 +1,15 @@
 # Release History
 
+### 0.22.1 / 2016-11-16
+
+* Add missing googleauth dependency (frankyn)
+
+### 0.22.0 / 2016-11-14
+
+* Support authentication with service accounts
+* Add `model` parameter to translate method
+* Add `model` attribute to Translation objects
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Translate.new
