@@ -66,13 +66,23 @@ end
 def build_docker_image app_dir, project_id
   image_name = "google-cloud-ruby-test-%.08x" % rand(0x100000000)
   image_location = "us.gcr.io/#{project_id}/#{image_name}"
+  temp_dockerfile = false
   begin
     # Create default Dockerfile if one doesn't already exist
     if File.file? "Dockerfile"
       fail "The Dockerfile file already exists. Please omit it and try again."
     else
-      FileUtils.cp "#{app_dir}/Dockerfile.example", "Dockerfile"
-      temp_dockerfile = true
+      # Copy example Dockerfile and update with correct content
+      File.open "#{app_dir}/Dockerfile.example" do |source_file|
+        File.open "Dockerfile", "w" do |dest_file|
+          temp_dockerfile = true
+          base_image_tag = ENV["GAE_RUBY_BASE_IMAGE_TAG"] || "latest"
+          file_content = source_file.read % {
+            base_image_tag: base_image_tag
+          }
+          dest_file.puts file_content
+        end
+      end
     end
 
     sh "docker build -t #{image_location} ."
@@ -107,6 +117,7 @@ def deploy_gke_image image_name, image_location
 
   # Create default acceptace_rc.yaml if one doesn't already exist
   rc_yaml_file_name = "integration_rc.yaml"
+  temp_rc_yaml = false
   if File.file? rc_yaml_file_name
     fail "The #{rc_yaml_file_name} file already exist. Please omit it and " \
   "try again."
@@ -114,13 +125,14 @@ def deploy_gke_image image_name, image_location
     # Copy example yaml file and update with correct content
     File.open "integration/integration_rc.yaml.example" do |source_file|
       File.open rc_yaml_file_name, "w" do |dest_file|
-        file_content = source_file.read
-        new_content = file_content.gsub(/\[\[image_location\]\]/, image_location)
-        new_content = new_content.gsub(/\[\[image_name\]\]/, image_name)
-        dest_file.puts new_content
+        temp_rc_yaml = true
+        file_content = source_file.read % {
+                         image_name: image_name,
+                         image_location: image_location
+                       }
+        dest_file.puts file_content
       end
     end
-    temp_rc_yaml = true
   end
 
   # Use kubectl to deploy GKE service and validate the GKE pods is running

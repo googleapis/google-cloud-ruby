@@ -6,7 +6,7 @@
 # * A recent version of NodeJS
 # * A recent version of the standard Ruby runtime to use by default
 # * The bundler gem
-FROM gcr.io/google_appengine/ruby
+FROM gcr.io/google_appengine/ruby:%{base_image_tag}
 
 # If your application requires a specific ruby version (compatible with rbenv),
 # set it here. Leave blank to use the currently recommended default.
