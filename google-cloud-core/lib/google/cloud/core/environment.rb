@@ -74,7 +74,8 @@ module Google
         #   defined
         def self.gae?
           # TODO: Remove ENV["GAE_VM"] when GAE Flex goes GA
-          (ENV["GAE_VM"] || ENV["GAE_INSTANCE"]) && gae_module_id && gae_module_version
+          (ENV["GAE_VM"] || ENV["GAE_INSTANCE"]) &&
+            gae_module_id && gae_module_version
         end
 
         def self.project_id
