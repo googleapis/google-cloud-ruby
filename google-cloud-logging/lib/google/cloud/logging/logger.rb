@@ -324,7 +324,7 @@ module Google
         ##
         # Untrack the trace_id that's associated with current Thread
         #
-        # @return The trace_id that's being deleted
+        # @return [String] The trace_id that's being deleted
         def delete_trace_id
           trace_ids.delete current_thread_id
         end
