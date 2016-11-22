@@ -683,10 +683,19 @@ task :release, :tag do |t, args|
   end
 end
 
+desc "Run all integration tests"
+task :integration, :project_uri, :bundleupdate do |t, args|
+  bundleupdate = args[:bundleupdate]
+  Rake::Task["bundleupdate"].invoke if bundleupdate
+  sh "bundle exec rake integration:gae[#{args[:project_uri]}]"
+  sh "bundle exec rake integration:gke"
+end
+
 namespace :integration do
   desc "Run integration:gae for all gems"
   task :gae, :project_uri do |t, args|
-    require_relative "integration/helper"
+    require_relative "integration/deploy"
+
     if executable_exists? "gcloud"
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
@@ -698,12 +707,17 @@ namespace :integration do
       fail "You must provide a project_uri. e.g. rake " \
         "integration:gae[http://my-project.appspot.com]" if project_uri.nil?
 
-      deploy_gae_flex do
-        gems.each do |gem|
-          Dir.chdir gem do
-            header "Running integration:gae for gem #{gem}"
-            Bundler.with_clean_env do
-              run_task_if_exists "integration:gae", project_uri
+      test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
+
+      test_apps.each do |test_app|
+        header "Deploying #{test_app} to GAE Flex"
+        deploy_gae_flex test_app do
+          gems.each do |gem|
+            Dir.chdir gem do
+              header "Running integration:gae for gem #{gem}"
+              Bundler.with_clean_env do
+                run_task_if_exists "integration:gae", project_uri
+              end
             end
           end
         end
@@ -715,41 +729,30 @@ namespace :integration do
 
   desc "Run integration:gke for all gems"
   task :gke do
-    require_relative "integration/helper"
+    require_relative "integration/deploy"
+
     if executable_exists?("gcloud")&& executable_exists?("kubectl")
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
         "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
 
-      build_docker_image project_id do |image_name, image_location|
-        header "Built docker image #{image_name}"
-        push_docker_image project_id, image_name, image_location do |image_name, image_location|
-          header "Pushed docker image #{image_location} to GCR"
+      test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
 
-          deploy_gke_image image_name, image_location
-
-          header "GKE image #{image_name} successfully deployed"
-
-          # Figure out exact GKE pod_name from image_name
-          pod_name = nil
-          stdout = Open3.capture3(
-            "kubectl get pods"
-          ).first
-          pods_info = stdout.split("\n").drop(1)
-          pods_info.each do |pod_info|
-            pod_info = pod_info.split
-            if pod_info[0].match image_name
-              pod_name = pod_info[0]
-              break
-            end
-          end
-
-          # Invoke integration:gke with on each gem
-          gems.each do |gem|
-            Dir.chdir gem do
-              Bundler.with_clean_env do
-                header "Running integration:gke for gem #{gem}"
-                run_task_if_exists "integration:gke", pod_name
+      test_apps.each do |test_app|
+        header "Building #{test_app} docker image"
+        build_docker_image test_app, project_id do |image_name, image_location|
+          header "Pushing docker image #{image_name} to GCR"
+          push_docker_image project_id, image_name, image_location do |image_name, image_location|
+            header "Deploying docker image #{image_location}"
+            deploy_gke_image image_name, image_location do |pod_name|
+              # Invoke integration:gke with on each gem
+              gems.each do |gem|
+                Dir.chdir gem do
+                  Bundler.with_clean_env do
+                    header "Running integration:gke for gem #{gem}"
+                    run_task_if_exists "integration:gke", pod_name
+                  end
+                end
               end
             end
           end
