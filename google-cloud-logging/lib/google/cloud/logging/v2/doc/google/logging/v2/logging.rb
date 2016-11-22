@@ -18,16 +18,31 @@ module Google
       # The parameters to DeleteLog.
       # @!attribute [rw] log_name
       #   @return [String]
-      #     Required. The resource name of the log to delete.  Example:
-      #     +"projects/my-project/logs/syslog"+.
+      #     Required. The resource name of the log to delete:
+      #
+      #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
+      #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+      #
+      #     +[LOG_ID]+ must be URL-encoded. For example,
+      #     +"projects/my-project-id/logs/syslog"+,
+      #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
+      #     For more information about log names, see
+      #     LogEntry.
       class DeleteLogRequest; end
 
       # The parameters to WriteLogEntries.
       # @!attribute [rw] log_name
       #   @return [String]
       #     Optional. A default log resource name that is assigned to all log entries
-      #     in +entries+ that do not specify a value for +log_name+.  Example:
-      #     +"projects/my-project/logs/syslog"+.  See
+      #     in +entries+ that do not specify a value for +log_name+:
+      #
+      #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
+      #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+      #
+      #     +[LOG_ID]+ must be URL-encoded. For example,
+      #     +"projects/my-project-id/logs/syslog"+ or
+      #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
+      #     For more information about log names, see
       #     LogEntry.
       # @!attribute [rw] resource
       #   @return [Google::Api::MonitoredResource]
@@ -73,20 +88,25 @@ module Google
       # @!attribute [rw] project_ids
       #   @return [Array<String>]
       #     Deprecated. One or more project identifiers or project numbers from which
-      #     to retrieve log entries.  Examples: +"my-project-1A"+, +"1234567890"+. If
+      #     to retrieve log entries.  Example: +"my-project-1A"+. If
       #     present, these project identifiers are converted to resource format and
       #     added to the list of resources in +resourceNames+. Callers should use
       #     +resourceNames+ rather than this parameter.
       # @!attribute [rw] resource_names
       #   @return [Array<String>]
-      #     Optional. One or more cloud resources from which to retrieve log entries.
-      #     Example: +"projects/my-project-1A"+, +"projects/1234567890"+.  Projects
-      #     listed in +projectIds+ are added to this list.
+      #     Required. One or more cloud resources from which to retrieve log
+      #     entries:
+      #
+      #         "projects/[PROJECT_ID]"
+      #         "organizations/[ORGANIZATION_ID]"
+      #
+      #     Projects listed in the +project_ids+ field are added to this list.
       # @!attribute [rw] filter
       #   @return [String]
       #     Optional. A filter that chooses which log entries to return.  See {Advanced
       #     Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
       #     match the filter are returned.  An empty filter matches all log entries.
+      #     The maximum length of the filter is 20000 characters.
       # @!attribute [rw] order_by
       #   @return [String]
       #     Optional. How the results should be sorted.  Presently, the only permitted

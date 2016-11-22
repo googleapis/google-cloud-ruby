@@ -13,6 +13,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :filter, :string, 5
     optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
     optional :writer_identity, :string, 8
+    optional :start_time, :message, 10, "google.protobuf.Timestamp"
+    optional :end_time, :message, 11, "google.protobuf.Timestamp"
   end
   add_enum "google.logging.v2.LogSink.VersionFormat" do
     value :VERSION_FORMAT_UNSPECIFIED, 0
@@ -34,10 +36,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.CreateSinkRequest" do
     optional :parent, :string, 1
     optional :sink, :message, 2, "google.logging.v2.LogSink"
+    optional :unique_writer_identity, :bool, 3
   end
   add_message "google.logging.v2.UpdateSinkRequest" do
     optional :sink_name, :string, 1
     optional :sink, :message, 2, "google.logging.v2.LogSink"
+    optional :unique_writer_identity, :bool, 3
   end
   add_message "google.logging.v2.DeleteSinkRequest" do
     optional :sink_name, :string, 1

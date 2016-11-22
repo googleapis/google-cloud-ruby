@@ -211,8 +211,9 @@ module Google
           # Lists logs-based metrics.
           #
           # @param parent [String]
-          #   Required. The resource name containing the metrics.
-          #   Example: +"projects/my-project-id"+.
+          #   Required. The name of the project containing the metrics:
+          #
+          #       "projects/[PROJECT_ID]"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -263,8 +264,9 @@ module Google
           # Gets a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the desired metric.
-          #   Example: +"projects/my-project-id/metrics/my-metric-id"+.
+          #   The resource name of the desired metric:
+          #
+          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -291,8 +293,9 @@ module Google
           # Creates a logs-based metric.
           #
           # @param parent [String]
-          #   The resource name of the project in which to create the metric.
-          #   Example: +"projects/my-project-id"+.
+          #   The resource name of the project in which to create the metric:
+          #
+          #       "projects/[PROJECT_ID]"
           #
           #   The new metric must be provided in the request.
           # @param metric [Google::Logging::V2::LogMetric]
@@ -328,16 +331,15 @@ module Google
           # Creates or updates a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the metric to update.
-          #   Example: +"projects/my-project-id/metrics/my-metric-id"+.
+          #   The resource name of the metric to update:
           #
-          #   The updated metric must be provided in the request and have the
-          #   same identifier that is specified in +metricName+.
-          #   If the metric does not exist, it is created.
+          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+          #
+          #   The updated metric must be provided in the request and it's
+          #   +name+ field must be the same as +[METRIC_ID]+ If the metric
+          #   does not exist in +[PROJECT_ID]+, then a new metric is created.
           # @param metric [Google::Logging::V2::LogMetric]
-          #   The updated metric, whose name must be the same as the
-          #   metric identifier in +metricName+. If +metricName+ does not
-          #   exist, then a new metric is created.
+          #   The updated metric.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -368,8 +370,9 @@ module Google
           # Deletes a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the metric to delete.
-          #   Example: +"projects/my-project-id/metrics/my-metric-id"+.
+          #   The resource name of the metric to delete:
+          #
+          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

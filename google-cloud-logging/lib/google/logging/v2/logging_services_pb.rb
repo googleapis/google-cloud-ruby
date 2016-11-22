@@ -32,8 +32,8 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.logging.v2.LoggingServiceV2'
 
-          # Deletes a log and all its log entries.
-          # The log will reappear if it receives new entries.
+          # Deletes all the log entries in a log.
+          # The log reappears if it receives new entries.
           rpc :DeleteLog, DeleteLogRequest, Google::Protobuf::Empty
           # Writes log entries to Stackdriver Logging.  All log entries are
           # written by this method.

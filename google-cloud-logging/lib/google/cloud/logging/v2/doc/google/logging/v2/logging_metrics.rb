@@ -19,21 +19,32 @@ module Google
       # number of log entries that match a logs filter.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The client-assigned metric identifier. Example:
-      #     +"severe_errors"+.  Metric identifiers are limited to 100
-      #     characters and can include only the following characters: +A-Z+,
-      #     +a-z+, +0-9+, and the special characters +_-.,+!*',()%/+.  The
-      #     forward-slash character (+/+) denotes a hierarchy of name pieces,
-      #     and it cannot be the first character of the name.  The '%' character
-      #     is used to URL encode unsafe and reserved characters and must be
-      #     followed by two hexadecimal digits according to RFC 1738.
+      #     Required. The client-assigned metric identifier.
+      #     Examples: +"error_count"+, +"nginx/requests"+.
+      #
+      #     Metric identifiers are limited to 100 characters and can include
+      #     only the following characters: +A-Z+, +a-z+, +0-9+, and the
+      #     special characters +_-.,+!*',()%/+.  The forward-slash character
+      #     (+/+) denotes a hierarchy of name pieces, and it cannot be the
+      #     first character of the name.
+      #
+      #     The metric identifier in this field must not be
+      #     {URL-encoded}[https://en.wikipedia.org/wiki/Percent-encoding].
+      #     However, when the metric identifier appears as the +[METRIC_ID]+
+      #     part of a +metric_name+ API parameter, then the metric identifier
+      #     must be URL-encoded. Example:
+      #     +"projects/my-project/metrics/nginx%2Frequests"+.
       # @!attribute [rw] description
       #   @return [String]
       #     Optional. A description of this metric, which is used in documentation.
       # @!attribute [rw] filter
       #   @return [String]
       #     Required. An {advanced logs filter}[https://cloud.google.com/logging/docs/view/advanced_filters].
-      #     Example: +"resource.type=gae_app AND severity>=ERROR"+.
+      #     Example:
+      #
+      #         "resource.type=gae_app AND severity>=ERROR"
+      #
+      #     The maximum length of the filter is 20000 characters.
       # @!attribute [rw] version
       #   @return [Google::Logging::V2::LogMetric::ApiVersion]
       #     Output only. The API version that created or updated this metric.
@@ -53,8 +64,9 @@ module Google
       # The parameters to ListLogMetrics.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. The resource name containing the metrics.
-      #     Example: +"projects/my-project-id"+.
+      #     Required. The name of the project containing the metrics:
+      #
+      #         "projects/[PROJECT_ID]"
       # @!attribute [rw] page_token
       #   @return [String]
       #     Optional. If present, then retrieve the next batch of results from the
@@ -82,15 +94,17 @@ module Google
       # The parameters to GetLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the desired metric.
-      #     Example: +"projects/my-project-id/metrics/my-metric-id"+.
+      #     The resource name of the desired metric:
+      #
+      #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
       class GetLogMetricRequest; end
 
       # The parameters to CreateLogMetric.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The resource name of the project in which to create the metric.
-      #     Example: +"projects/my-project-id"+.
+      #     The resource name of the project in which to create the metric:
+      #
+      #         "projects/[PROJECT_ID]"
       #
       #     The new metric must be provided in the request.
       # @!attribute [rw] metric
@@ -102,24 +116,24 @@ module Google
       # The parameters to UpdateLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the metric to update.
-      #     Example: +"projects/my-project-id/metrics/my-metric-id"+.
+      #     The resource name of the metric to update:
       #
-      #     The updated metric must be provided in the request and have the
-      #     same identifier that is specified in +metricName+.
-      #     If the metric does not exist, it is created.
+      #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+      #
+      #     The updated metric must be provided in the request and it's
+      #     +name+ field must be the same as +[METRIC_ID]+ If the metric
+      #     does not exist in +[PROJECT_ID]+, then a new metric is created.
       # @!attribute [rw] metric
       #   @return [Google::Logging::V2::LogMetric]
-      #     The updated metric, whose name must be the same as the
-      #     metric identifier in +metricName+. If +metricName+ does not
-      #     exist, then a new metric is created.
+      #     The updated metric.
       class UpdateLogMetricRequest; end
 
       # The parameters to DeleteLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the metric to delete.
-      #     Example: +"projects/my-project-id/metrics/my-metric-id"+.
+      #     The resource name of the metric to delete:
+      #
+      #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
       class DeleteLogMetricRequest; end
     end
   end

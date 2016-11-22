@@ -23,8 +23,8 @@ module Google
   module Logging
     module V2
       module ConfigServiceV2
-        # Service for configuring sinks used to export log entries outside Stackdriver
-        # Logging.
+        # Service for configuring sinks used to export log entries outside of
+        # Stackdriver Logging.
         class Service
 
           include GRPC::GenericService
