@@ -93,7 +93,8 @@ module Google
         end
 
         def recognize_stream request_enum
-          service.speech_stub.streaming_recognize request_enum
+          # No need to handle errors here, they are handled in the enum
+          service.streaming_recognize request_enum, options: default_options
         end
 
         def get_op name

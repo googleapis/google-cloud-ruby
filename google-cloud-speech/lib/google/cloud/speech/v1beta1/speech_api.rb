@@ -125,6 +125,10 @@ module Google
               @speech_stub.method(:async_recognize),
               defaults["async_recognize"]
             )
+            @streaming_recognize = Google::Gax.create_api_call(
+              @speech_stub.method(:streaming_recognize),
+              defaults["streaming_recognize"]
+            )
           end
 
           # Service calls
@@ -201,6 +205,41 @@ module Google
               audio: audio
             }.delete_if { |_, v| v.nil? })
             @async_recognize.call(req, options)
+          end
+
+          # Perform bidirectional streaming speech-recognition: receive results while
+          # sending audio. This method is only available via the gRPC API (not REST).
+          #
+          # @param reqs [Enumerable<Google::Cloud::Speech::V1beta1::StreamingRecognizeRequest>]
+          #   The input requests.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Enumerable<Google::Cloud::Speech::V1beta1::StreamingRecognizeResponse>]
+          #   An enumerable of Google::Cloud::Speech::V1beta1::StreamingRecognizeResponse instances.
+          #
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          #
+          # @note
+          #   EXPERIMENTAL:
+          #     Streaming requests are still undergoing review.
+          #     This method interface might change in the future.
+          #
+          # @example
+          #   require "google/cloud/speech/v1beta1/speech_api"
+          #
+          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   StreamingRecognizeRequest = Google::Cloud::Speech::V1beta1::StreamingRecognizeRequest
+          #
+          #   speech_api = SpeechApi.new
+          #   request = StreamingRecognizeRequest.new
+          #   requests = [request]
+          #   speech_api.streaming_recognize(requests).each do |element|
+          #     # Process element.
+          #   end
+
+          def streaming_recognize reqs, options: nil
+            @streaming_recognize.call(reqs, options)
           end
         end
       end

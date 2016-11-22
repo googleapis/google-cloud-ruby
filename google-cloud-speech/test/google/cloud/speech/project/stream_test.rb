@@ -21,7 +21,7 @@ class StreamingServiceStub
     @responses = responses
   end
 
-  def streaming_recognize request_enum
+  def streaming_recognize request_enum, options: nil
     @request_enum = request_enum
     # return response enumerator
     @responses.each
@@ -57,7 +57,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     ]
 
     stub = StreamingServiceStub.new(responses)
-    speech.service.mocked_service = OpenStruct.new(speech_stub: stub)
+    speech.service.mocked_service = stub
 
     stream.send File.read("acceptance/data/audio.raw", mode: "rb")
 
@@ -115,7 +115,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     ]
 
     stub = StreamingServiceStub.new(responses)
-    speech.service.mocked_service = OpenStruct.new(speech_stub: stub)
+    speech.service.mocked_service = stub
 
     file.rewind
     stream.send file.read(16000)
@@ -186,7 +186,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     ]
 
     stub = StreamingServiceStub.new(responses)
-    speech.service.mocked_service = OpenStruct.new(speech_stub: stub)
+    speech.service.mocked_service = stub
 
     stream.send File.read("acceptance/data/audio.raw", mode: "rb")
 
@@ -240,7 +240,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     ]
 
     stub = StreamingServiceStub.new(responses)
-    speech.service.mocked_service = OpenStruct.new(speech_stub: stub)
+    speech.service.mocked_service = stub
 
     stream.send File.read("acceptance/data/audio.raw", mode: "rb")
 
