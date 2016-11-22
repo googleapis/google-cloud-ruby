@@ -139,12 +139,14 @@ $ rake integration:gae
 
 #### Running integration tests on Google Container Engine 
 
-Google Container Engine requires [docker](https://www.docker.com/) for building docker images, and the [Kubernetes commandline tool](http://kubernetes.io/docs/user-guide/kubectl-overview/) for image deployment. Follow the [docker website](https://www.docker.com/products/docker) for installation instructions.
+Additinoal to Cloud SDK, Google Container Engine requires [docker](https://www.docker.com/) for building docker images, and the [Kubernetes commandline tool](http://kubernetes.io/docs/user-guide/kubectl-overview/) for image deployment. 
 
-The Kubernetes commandline tool can be installed through Cloud SDK:
+Follow the [docker website](https://www.docker.com/products/docker) for docker installation instructions. The Kubernetes commandline tool can be installed through Cloud SDK:
 ```sh
-$ gcloud components update kubectl
+$ gcloud components install kubectl
 ```
+Make sure a [Google Container Engine Cluster](https://cloud.google.com/container-engine/docs/clusters/operations) is properly setup and ready to use.
+
 To run the integration tests on Google Container Engine:
 ```sh
 $ rake integration:gke

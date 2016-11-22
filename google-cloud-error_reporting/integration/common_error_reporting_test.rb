@@ -24,6 +24,6 @@ describe Google::Cloud::ErrorReporting do
 
     # TODO: Find a better way to verify response. Or even better, validate the
     # error event was indeed reported to ErrorReporting
-    response.must_match token.to_s
+    response.must_match /Test error from .*: #{token}/
   end
 end

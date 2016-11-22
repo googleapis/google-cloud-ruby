@@ -78,8 +78,9 @@ def build_docker_image app_dir, project_id
     sh "docker build -t #{image_location} ."
     yield image_name, image_location
   ensure
-    sh "docker rmi #{image_location}"
     FileUtils.rm "Dockerfile" if temp_dockerfile
+    puts "docker rmi #{image_location}"
+    Open3.capture3 "docker rmi #{image_location}"
   end
 end
 
@@ -159,6 +160,6 @@ end
 ##
 # Ensure gcloud SDK beta component is installed
 def ensure_gcloud_beta!
-  Open3.capture3("yes | gcloud beta --help")
+  Open3.capture3 "yes | gcloud beta --help"
   nil
 end
