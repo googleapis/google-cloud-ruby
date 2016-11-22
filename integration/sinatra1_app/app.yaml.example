@@ -1,5 +1,5 @@
 runtime: ruby
-vm: true
+env: flex
 entrypoint: bundle exec ruby integration/sinatra1_app/app.rb
 health_check:
   enable_health_check: False

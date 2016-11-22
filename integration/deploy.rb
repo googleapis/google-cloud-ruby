@@ -26,9 +26,17 @@ def deploy_gae_flex app_dir
   end
 
   begin
+    ensure_gcloud_beta!
+
     last_gae_version = get_gae_versions.last
     sh "gcloud app deploy -q" do |ok, res|
       if ok
+        # GAE Flex has a bug that the service is really avaible shortly after
+        # the deployment commands returns successfully. So we explicitly sleeps
+        # for 30 seconds before accessing the GAE Flex service.
+        # TODO: Remove this sleep when GAE Flex deployment becomes smooth
+        sleep 30
+
         yield
 
         # Delete the last version of Google App Engine if successfully deployed
@@ -94,6 +102,8 @@ end
 def deploy_gke_image image_name, image_location
   return unless image_name && image_location
 
+  ensure_gcloud_beta!
+
   # Create default acceptace_rc.yaml if one doesn't already exist
   rc_yaml_file_name = "integration_rc.yaml"
   if File.file? rc_yaml_file_name
@@ -144,4 +154,11 @@ end
 # Check if an executable exists
 def executable_exists? executable
   !`which #{executable}`.empty?
+end
+
+##
+# Ensure gcloud SDK beta component is installed
+def ensure_gcloud_beta!
+  Open3.capture3("yes | gcloud beta --help")
+  nil
 end

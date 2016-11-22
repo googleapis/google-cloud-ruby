@@ -73,7 +73,9 @@ module Google
         # @return [Boolean] True if all three GAE environment variables are
         #   defined
         def self.gae?
-          ENV["GAE_VM"] && gae_module_id && gae_module_version
+          # TODO: Remove ENV["GAE_VM"] when GAE Flex goes GA
+          (ENV["GAE_VM"] || ENV["GAE_INSTANCE"]) &&
+            gae_module_id && gae_module_version
         end
 
         def self.project_id
@@ -84,13 +86,15 @@ module Google
         ##
         # Retrieve GAE module name
         def self.gae_module_id
-          ENV["GAE_MODULE_NAME"]
+          # TODO: Remove ENV["GAE_MODULE_NAME"] when GAE Flex goes GA
+          ENV["GAE_MODULE_NAME"] || ENV["GAE_SERVICE"]
         end
 
         ##
         # Retrieve GAE module version
         def self.gae_module_version
-          ENV["GAE_MODULE_VERSION"]
+          # TODO: Remove ENV["GAE_MODULE_VERSION"] when GAE Flex goes GA
+          ENV["GAE_MODULE_VERSION"] || ENV["GAE_VERSION"]
         end
 
         ##
