@@ -36,8 +36,8 @@ module Google
         # Construct a new instance of Middleware
         #
         # @param [Rack Application] app The Rack application
-        # @param [Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi]
-        #   error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceApi
+        # @param [Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi
+        #   ] error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceApi
         #   object to for reporting exceptions
         # @param [String] project_id Name of GCP project. Default to
         #   ENV["ERROR_REPORTING_PROJECT"] then ENV["GOOGLE_CLOUD_PROJECT"].
@@ -53,13 +53,14 @@ module Google
         # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of
         #   Middleware
         #
-        def initialize app, error_reporting: nil, project_id: nil,
-                       service_name: nil, service_version: nil,
+        def initialize app,
+                       error_reporting: V1beta1::ReportErrorsServiceApi.new,
+                       project_id: nil,
+                       service_name: nil,
+                       service_version: nil,
                        ignore_classes: nil
           @app = app
-          @error_reporting = error_reporting ||
-            Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.new
-
+          @error_reporting = error_reporting
           @service_name = service_name ||
                           ENV["ERROR_REPORTING_SERVICE"] ||
                           Google::Cloud::Core::Environment.gae_module_id ||
@@ -73,7 +74,7 @@ module Google
                         ENV["GOOGLE_CLOUD_PROJECT"] ||
                         Google::Cloud::Core::Environment.project_id
 
-          raise ArgumentError, "project_id is required" if @project_id.nil?
+          fail ArgumentError, "project_id is required" if @project_id.nil?
         end
 
         ##
@@ -116,16 +117,15 @@ module Google
           # Do not any exceptions that's specified by the ignore_classes list.
           return if ignore_classes.include? exception.class
 
-          error_event = build_error_event_from_exception env,
-                                                         exception
+          error_event_grpc = build_error_event_from_exception env, exception
 
           # If this exception maps to a HTTP status code less than 500, do
           # not report it.
           status_code =
-            error_event.context.http_request.response_status_code.to_i
+            error_event_grpc.context.http_request.response_status_code.to_i
           return if status_code > 0 && status_code < 500
 
-          error_reporting.report_error_event full_project_id, error_event
+          error_reporting.report_error_event full_project_id, error_event_grpc
         end
 
         ##
@@ -140,80 +140,42 @@ module Google
         # @param [Hash] env Rack environment hash
         # @param [Exception] exception Exception to convert from
         #
-        # @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
-        #   The gRPC ReportedErrorEvent object that's based on given exception
+        # @return [
+        #   Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+        #   The gRPC ReportedErrorEvent object that's based
+        #   on given exception
         #
         def build_error_event_from_exception env, exception
-          # Build service_context hash
-          service_context = {
-                              service: service_name,
-                              version: service_version
-                            }.delete_if { |k,v| v.nil? }
+          error_event = ErrorEvent.from_exception exception
 
-          # Build error message and source_location hash
-          if exception.backtrace.nil? || exception.backtrace.empty?
-            message = exception.message
-            report_location = nil
-          else
-            message = "#{exception.backtrace.first}: #{exception.message} " \
-                      "(#{exception.class})\n\t" +
-                      exception.backtrace.drop(1).join("\n\t")
-            file_path, line_number, function_name =
-              exception.backtrace.first.split(":")
-            function_name = function_name.to_s[/`(.*)'/, 1]
-            report_location = {
-                                file_path: file_path,
-                                function_name: function_name,
-                                line_number: line_number.to_i
-                              }.delete_if { |k,v| v.nil? }
-          end
+          # Inject service_context info into error_event object
+          error_event[:service_context] = {
+            service: service_name,
+            version: service_version
+          }.delete_if { |_, v| v.nil? }
 
-          # Build http_request_context hash
+          # Inject http_request_context info into error_event object
           rack_request = Rack::Request.new env
-          http_method = rack_request.request_method
-          http_url = rack_request.url
-          http_user_agent = rack_request.user_agent
-          http_referrer = rack_request.referrer
-          http_status = get_http_status exception
-          http_remote_ip = rack_request.ip
-          http_request_context = {
-                                   method: http_method,
-                                   url: http_url,
-                                   user_agent: http_user_agent,
-                                   referrer: http_referrer,
-                                   response_status_code: http_status,
-                                   remote_ip: http_remote_ip
-                                 }.delete_if { |k,v| v.nil? }
+          error_event[:context][:http_request] = {
+            method: rack_request.request_method,
+            url: rack_request.url,
+            user_agent: rack_request.user_agent,
+            referrer: rack_request.referrer,
+            response_status_code: get_http_status(exception),
+            remote_ip: rack_request.ip
+          }.delete_if { |_, v| v.nil? }
 
-          # Build error_context hash
-          error_context = {
-                            http_request: http_request_context,
-                            user: ENV["USER"],
-                            report_location: report_location,
-                          }.delete_if { |k,v| v.nil? }
-
-          # Build error_event hash
-          t = Time.now
-          error_event = {
-            event_time: {
-              seconds: t.to_i,
-              nanos: t.nsec
-            },
-            service_context: service_context,
-            message: message,
-            context: error_context
-          }.delete_if { |k,v| v.nil? }
-
-          # Finally build and return GRPC ErrorEvent
-          Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent.decode_json \
-            error_event.to_json
+          error_event.to_grpc
         end
 
         ##
         # Build full ReportErrorsServiceApi project_path from project_id, which
         # is in "projects/#{project_id}" format.
+        #
+        # @return [String] fully qualified project id in
+        #   "projects/#{project_id}" format
         def full_project_id
-          Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.project_path project_id
+          V1beta1::ReportErrorsServiceApi.project_path project_id
         end
 
         private
@@ -241,6 +203,110 @@ module Google
 
           http_status
         end
+
+        ##
+        # This class implements a hash representation of
+        # Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+        class ErrorEvent
+          # Internal data structure mirroring gRPC ReportedErrorEvent structure
+          attr_reader :hash
+
+          ##
+          # Construct a new ErrorEvent object
+          #
+          # @return [ErrorEvent] A new ErrorEvent object
+          def initialize
+            @hash = {}
+          end
+
+          ##
+          # Construct an ErrorEvent object based on a given exception
+          #
+          # @param [Exception] A Ruby exception
+          #
+          # @return [ErrorEvent] An ErrorEvent object containing information
+          #   from the given exception
+          def self.from_exception exception
+            exception_data = extract_exception exception
+
+            # Build error_context hash
+            error_context = {
+              user: ENV["USER"],
+              report_location: {
+                file_path: exception_data[:file_path],
+                function_name: exception_data[:function_name],
+                line_number: exception_data[:line_number].to_i
+              }.delete_if { |_, v| v.nil? }
+            }.delete_if { |_, v| v.nil? }
+
+            # Build error_event hash
+            error_event = ErrorEvent.new
+            t = Time.now
+            error_event.hash.merge!({
+              event_time: {
+                seconds: t.to_i,
+                nanos: t.nsec
+              },
+              message: exception_data[:message],
+              context: error_context
+            }.delete_if { |_, v| v.nil? })
+
+            error_event
+          end
+
+          ##
+          # Helper method extract data from exception
+          #
+          # @param [Exception] A Ruby Exception
+          #
+          # @return [Hash] A hash containing formatted error message with
+          # backtrace, file_path, line_number, and function_name
+          def self.extract_exception exception
+            if exception.backtrace.nil? || exception.backtrace.empty?
+              message = exception.message
+            else
+              message = "#{exception.backtrace.first}: #{exception.message} " \
+                        "(#{exception.class})\n\t" +
+                        exception.backtrace.drop(1).join("\n\t")
+              file_path, line_number, function_name =
+                exception.backtrace.first.split(":")
+              function_name = function_name.to_s[/`(.*)'/, 1]
+            end
+
+            {
+              message: message,
+              file_path: file_path,
+              line_number: line_number,
+              function_name: function_name
+            }
+          end
+          private_class_method :extract_exception
+
+          ##
+          # Get the value of the given key from internal hash
+          def [] key
+            hash[key]
+          end
+
+          ##
+          # Write new value with the key in internal hash
+          def []= key, value
+            hash[key] = value
+          end
+
+          ##
+          # Convert ErrorEvent object to gRPC struct
+          #
+          # @return [Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+          #   gRPC struct that represent an ErrorEvent
+          def to_grpc
+            grpc_module =
+              Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+            grpc_module.decode_json hash.to_json
+          end
+        end
+
+        private_constant :ErrorEvent
       end
     end
   end
