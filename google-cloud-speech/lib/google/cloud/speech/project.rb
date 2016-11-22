@@ -127,10 +127,10 @@ module Google
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
         # @param [String] language The language of the supplied audio as a
-        #   [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language
+        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
         #   code. If not specified, the language defaults to "en-US".  See
         #   [Language
-        #   Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        #   Support](https://cloud.google.com/speech/docs/languages)
         #   for a list of the currently supported language codes. Optional.
         #
         # @return [Audio] The audio file to be recognized.
@@ -223,10 +223,10 @@ module Google
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
         # @param [String] language The language of the supplied audio as a
-        #   [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language
+        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
         #   code. If not specified, the language defaults to "en-US".  See
         #   [Language
-        #   Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        #   Support](https://cloud.google.com/speech/docs/languages)
         #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
@@ -320,10 +320,10 @@ module Google
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
         # @param [String] language The language of the supplied audio as a
-        #   [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language
+        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
         #   code. If not specified, the language defaults to "en-US".  See
         #   [Language
-        #   Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        #   Support](https://cloud.google.com/speech/docs/languages)
         #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
@@ -429,10 +429,10 @@ module Google
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
         # @param [String] language The language of the supplied audio as a
-        #   [https://www.rfc-editor.org/rfc/bcp/bcp47.txt](BCP-47) language
+        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
         #   code. If not specified, the language defaults to "en-US".  See
         #   [Language
-        #   Support](https://cloud.google.com/speech/docs/best-practices#language_support)
+        #   Support](https://cloud.google.com/speech/docs/languages)
         #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
