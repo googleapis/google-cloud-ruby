@@ -70,9 +70,9 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            grpc = @service.list_entries token: token, projects: @projects,
+            grpc = @service.list_entries token: token, resources: @resources,
                                          filter: @filter, order: @order,
-                                         max: @max
+                                         max: @max, projects: @projects
             self.class.from_grpc grpc, @service
           end
 
@@ -144,8 +144,8 @@ module Google
           ##
           # @private New Entry::List from a
           # Google::Logging::V2::ListLogEntryResponse object.
-          def self.from_grpc grpc_list, service, projects: nil, filter: nil,
-                             order: nil, max: nil
+          def self.from_grpc grpc_list, service, resources: nil, filter: nil,
+                             order: nil, max: nil, projects: nil
             entries = new(Array(grpc_list.entries).map do |grpc_entry|
               Entry.from_grpc grpc_entry
             end)
@@ -154,6 +154,7 @@ module Google
             entries.instance_variable_set "@token", token
             entries.instance_variable_set "@service", service
             entries.instance_variable_set "@projects", projects
+            entries.instance_variable_set "@resources", resources
             entries.instance_variable_set "@filter", filter
             entries.instance_variable_set "@order", order
             entries.instance_variable_set "@max", max
