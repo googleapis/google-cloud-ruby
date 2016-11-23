@@ -2,13 +2,13 @@
 # encoding: utf-8
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-monitoring"
+  gem.name          = "google-cloud-trace"
   gem.version       = "0.21.0"
 
   gem.authors       = ["Google Inc"]
   gem.email         = ["googleapis-packages@google.com"]
-  gem.description   = "google-cloud-monitoring is the official library for Stackdriver Monitoring."
-  gem.summary       = "API Cient library for Stackdriver Monitoring"
+  gem.description   = "google-cloud-trace is the official library for Stackdriver Trace."
+  gem.summary       = "API Client library for Stackdriver Trace"
   gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
   gem.license       = "Apache-2.0"
 

@@ -1,18 +1,18 @@
-Stackdriver Monitoring API for Ruby
+Stackdriver Trace API for Ruby
 =================================================
 
-google-cloud-monitoring uses [Google API extensions][google-gax] to provide an
-easy-to-use client library for the [Stackdriver Monitoring API][] (v3) defined in the [googleapis][] git repository
+google-cloud-trace uses [Google API extensions][google-gax] to provide an
+easy-to-use client library for the [Stackdriver Trace API][] (v1) defined in the [googleapis][] git repository
 
 
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/monitoring/v3
+[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/devtools/cloudtrace/v1
 [google-gax]: https://github.com/googleapis/gax-ruby
-[Stackdriver Monitoring API]: https://developers.google.com/apis-explorer/#p/monitoring/v3/
+[Stackdriver Trace API]: https://developers.google.com/apis-explorer/#p/cloudtrace/v1/
 
 Getting started
 ---------------
 
-google-cloud-monitoring will allow you to connect to the [Stackdriver Monitoring API][] and access all its methods.
+google-cloud-trace will allow you to connect to the [Stackdriver Trace API][] and access all its methods.
 
 In order to achieve so you need to set up authentication as well as install the library locally.
 
@@ -40,6 +40,6 @@ Installation
 
 Install this library using gem:
 
-    $ [sudo] gem install google-cloud-monitoring
+    $ [sudo] gem install google-cloud-trace
 
 At this point you are all set to continue.

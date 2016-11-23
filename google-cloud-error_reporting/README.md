@@ -29,7 +29,7 @@ or
 
     $ gcloud auth login
 
-Please see [[gcloud beta auth application-default login][] document for the difference between these commands.
+Please see [gcloud beta auth application-default login][] document for the difference between these commands.
 
 [Google Cloud SDK]: https://cloud.google.com/sdk/
 [gcloud beta auth application-default login]: https://cloud.google.com/sdk/gcloud/reference/beta/auth/application-default/login
