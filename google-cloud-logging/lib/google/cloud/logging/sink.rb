@@ -194,6 +194,16 @@ module Google
         alias_method :end_time=, :end_at=
 
         ##
+        # An IAM identity (a service account or group) that will write exported
+        # log entries to the destination on behalf of Stackdriver Logging. You
+        # must grant this identity write-access to the destination. Consult the
+        # destination service's documentation to determine the exact role that
+        # must be granted.
+        def writer_identity
+          @grpc.writer_identity
+        end
+
+        ##
         # Updates the logs-based sink.
         #
         # @example

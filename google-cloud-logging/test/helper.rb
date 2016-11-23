@@ -151,6 +151,7 @@ class MockLogging < Minitest::Spec
       "destination"           => "storage.googleapis.com/a-bucket",
       "filter"                => "logName:syslog AND severity>=ERROR",
       "output_version_format" => :VERSION_FORMAT_UNSPECIFIED,
+      "writer_identity"       => "roles/owner",
       "start_time"            => { "seconds" => 1479920135, "nanos" => 711253000 }
     }
   end

@@ -25,6 +25,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.destination.must_equal sink_hash["destination"]
     sink.filter.must_equal      sink_hash["filter"]
     sink.version.must_equal     :VERSION_FORMAT_UNSPECIFIED
+    sink.writer_identity.must_equal  "roles/owner"
     sink.start_at.must_be_close_to   Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
     sink.start_time.must_be_close_to Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
     sink.end_at.must_equal           nil
