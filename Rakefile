@@ -731,35 +731,41 @@ namespace :integration do
   task :gke do
     require_relative "integration/deploy"
 
-    if executable_exists?("gcloud")&& executable_exists?("kubectl")
-      project_id = gcloud_project_id
-      fail "Unabled to determine project_id from gcloud SDK. Please make " \
-        "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
+    unless executable_exists? "gcloud"
+      fail "Unable to find gcloud SDK. Please reference https://cloud.google.com/sdk/ on how to install."
+    end
+    unless executable_exists? "kubectl"
+      fail "Unable to find Kubernetes CTL. You can install it through \"gcloud components install kubectl\"."
+    end
+    unless executable_exists? "docker"
+      fail "Unable to find Docker. Please reference https://docs.docker.com/engine/installation/ on how to install."
+    end
 
-      test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
+    project_id = gcloud_project_id
+    fail "Unabled to determine project_id from gcloud SDK. Please make " \
+      "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
 
-      test_apps.each do |test_app|
-        header "Building #{test_app} docker image"
-        build_docker_image test_app, project_id do |image_name, image_location|
-          header "Pushing docker image #{image_name} to GCR"
-          push_docker_image project_id, image_name, image_location do |image_name, image_location|
-            header "Deploying docker image #{image_location}"
-            deploy_gke_image image_name, image_location do |pod_name|
-              # Invoke integration:gke with on each gem
-              gems.each do |gem|
-                Dir.chdir gem do
-                  Bundler.with_clean_env do
-                    header "Running integration:gke for gem #{gem}"
-                    run_task_if_exists "integration:gke", pod_name
-                  end
+    test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
+
+    test_apps.each do |test_app|
+      header "Building #{test_app} docker image"
+      build_docker_image test_app, project_id do |image_name, image_location|
+        header "Pushing docker image #{image_name} to GCR"
+        push_docker_image project_id, image_name, image_location do |image_name, image_location|
+          header "Deploying docker image #{image_location}"
+          deploy_gke_image image_name, image_location do |pod_name|
+            # Invoke integration:gke with on each gem
+            gems.each do |gem|
+              Dir.chdir gem do
+                Bundler.with_clean_env do
+                  header "Running integration:gke for gem #{gem}"
+                  run_task_if_exists "integration:gke", pod_name
                 end
               end
             end
           end
         end
       end
-    else
-      header "Unable to find gcloud SDK and Kubernetes CTL. Skip tests. Please reference https://cloud.google.com/sdk/ on installing gcloud SDK and kubernetes CTL."
     end
   end
 end
