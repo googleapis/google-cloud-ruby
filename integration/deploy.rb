@@ -71,7 +71,16 @@ def build_docker_image app_dir, project_id
     if File.file? "Dockerfile"
       fail "The Dockerfile file already exists. Please omit it and try again."
     else
-      FileUtils.cp "#{app_dir}/Dockerfile.example", "Dockerfile"
+      # Copy example Dockerfile and update with correct content
+      File.open "#{app_dir}/Dockerfile.example" do |source_file|
+        File.open "Dockerfile", "w" do |dest_file|
+          base_image_tag = ENV["GAE_RUBY_BASE_IMAGE_TAG"] || "latest"
+          file_content = source_file.read % {
+            base_image_tag: base_image_tag
+          }
+          dest_file.write file_content
+        end
+      end
       temp_dockerfile = true
     end
 
@@ -114,10 +123,11 @@ def deploy_gke_image image_name, image_location
     # Copy example yaml file and update with correct content
     File.open "integration/integration_rc.yaml.example" do |source_file|
       File.open rc_yaml_file_name, "w" do |dest_file|
-        file_content = source_file.read
-        new_content = file_content.gsub(/\[\[image_location\]\]/, image_location)
-        new_content = new_content.gsub(/\[\[image_name\]\]/, image_name)
-        dest_file.puts new_content
+        file_content = source_file.read % {
+                         image_name: image_name,
+                         image_location: image_location
+                       }
+        dest_file.write file_content
       end
     end
     temp_rc_yaml = true
