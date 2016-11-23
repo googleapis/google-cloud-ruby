@@ -96,7 +96,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
       end_time: now_grpc
     )
     mock = Minitest::Mock.new
-    mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, options: default_options]
+    mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, unique_writer_identity: nil, options: default_options]
     sink.service.mocked_sinks = mock
 
     sink.destination = new_sink_destination
@@ -112,10 +112,47 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.destination.must_equal new_sink_destination
     sink.filter.must_equal new_sink_filter
     sink.must_be :v1?
+    sink.writer_identity.must_equal "roles/owner"
+  end
+
+  it "can save itself with unique_writer_identity" do
+    now = Time.now
+    now_grpc = Google::Protobuf::Timestamp.new(seconds: now.to_i, nanos: now.nsec)
+
+    sink_grpc.writer_identity = "serviceAccount:cloud-logs@system.gserviceaccount.com"
+
+    new_sink_destination = "storage.googleapis.com/new-sink-bucket"
+    new_sink_filter = "logName:syslog AND severity>=WARN"
+    new_sink = Google::Logging::V2::LogSink.new(
+      name: sink.name,
+      destination: new_sink_destination,
+      filter: new_sink_filter,
+      output_version_format: :V1,
+      end_time: now_grpc
+    )
+    mock = Minitest::Mock.new
+    mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, unique_writer_identity: true, options: default_options]
+    sink.service.mocked_sinks = mock
+
+    sink.destination = new_sink_destination
+    sink.filter = new_sink_filter
+    sink.version = :v1
+    sink.start_at = nil
+    sink.end_at   = now
+
+    sink.save unique_writer_identity: true
+
+    mock.verify
+
+    sink.must_be_kind_of Google::Cloud::Logging::Sink
+    sink.destination.must_equal new_sink_destination
+    sink.filter.must_equal new_sink_filter
+    sink.must_be :v1?
     sink.start_at.must_be :nil?
     sink.start_time.must_be :nil?
     sink.end_at.wont_be :nil?
     sink.end_time.wont_be :nil?
+    sink.writer_identity.must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
   end
 
   it "can refresh itself" do

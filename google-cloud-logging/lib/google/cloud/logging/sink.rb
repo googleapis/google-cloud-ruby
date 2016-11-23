@@ -206,6 +206,13 @@ module Google
         ##
         # Updates the logs-based sink.
         #
+        # @param [Boolean] unique_writer_identity Whether the sink will have a
+        #    dedicated service account returned in the sink's `writer_identity`.
+        #    Set this field to be true to export logs from one project to a
+        #    different project. This field is ignored for non-project sinks
+        #    (e.g. organization sinks) because those sinks are required to have
+        #    dedicated service accounts. Optional.
+        #
         # @example
         #   require "google/cloud/logging"
         #
@@ -214,10 +221,12 @@ module Google
         #   sink.filter = "logName:syslog AND severity>=ERROR"
         #   sink.save
         #
-        def save
+        def save unique_writer_identity: nil
           ensure_service!
-          @grpc = service.update_sink name, destination, filter, version,
-                                      start_time: start_at, end_time: end_at
+          @grpc = service.update_sink \
+            name, destination, filter, version,
+            start_time: start_at, end_time: end_at,
+            unique_writer_identity: unique_writer_identity
         end
 
         ##

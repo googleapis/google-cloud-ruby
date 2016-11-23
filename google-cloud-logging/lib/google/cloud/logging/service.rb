@@ -166,15 +166,18 @@ module Google
         end
 
         def create_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil
+                        end_time: nil, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
             output_version_format: version,
             start_time: time_to_timestamp(start_time),
-            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
+            end_time: time_to_timestamp(end_time)
+          }.delete_if { |_, v| v.nil? })
 
           execute do
-            sinks.create_sink project_path, sink, options: default_options
+            sinks.create_sink project_path, sink,
+                              unique_writer_identity: unique_writer_identity,
+                              options: default_options
           end
         end
 
@@ -183,7 +186,7 @@ module Google
         end
 
         def update_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil
+                        end_time: nil, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
             output_version_format: version,
@@ -191,7 +194,9 @@ module Google
             end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
 
           execute do
-            sinks.update_sink sink_path(name), sink, options: default_options
+            sinks.update_sink sink_path(name), sink,
+                              unique_writer_identity: unique_writer_identity,
+                              options: default_options
           end
         end
 
