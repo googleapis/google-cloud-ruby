@@ -1,5 +1,9 @@
 # Release History
 
+### 0.21.1 / 2016-11-22
+
+* Support the new GAE Flex beta environment.
+
 ### 0.21.0 / 2016-10-20
 
 * Updates to support new releases. No changes to the public API.
