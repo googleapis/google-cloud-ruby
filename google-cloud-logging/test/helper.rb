@@ -150,7 +150,8 @@ class MockLogging < Minitest::Spec
       "name"                  => "my-severe-errors-to-pubsub",
       "destination"           => "storage.googleapis.com/a-bucket",
       "filter"                => "logName:syslog AND severity>=ERROR",
-      "output_version_format" => :VERSION_FORMAT_UNSPECIFIED
+      "output_version_format" => :VERSION_FORMAT_UNSPECIFIED,
+      "start_time"            => { "seconds" => 1479920135, "nanos" => 711253000 }
     }
   end
 

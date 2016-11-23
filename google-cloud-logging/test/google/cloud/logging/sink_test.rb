@@ -25,6 +25,10 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.destination.must_equal sink_hash["destination"]
     sink.filter.must_equal      sink_hash["filter"]
     sink.version.must_equal     :VERSION_FORMAT_UNSPECIFIED
+    sink.start_at.must_be_close_to   Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
+    sink.start_time.must_be_close_to Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
+    sink.end_at.must_equal           nil
+    sink.end_time.must_equal         nil
   end
 
   it "can set different sink format versions" do
@@ -42,14 +46,53 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.must_be :v1?
   end
 
+  it "can set different start and end times" do
+    time = Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
+
+    sink.start_at.must_be_close_to   time
+    sink.start_time.must_be_close_to time
+    sink.end_at.must_equal           nil
+    sink.end_time.must_equal         nil
+
+    sink.start_time = nil
+    sink.end_time   = time
+
+    sink.start_at.must_equal     nil
+    sink.start_time.must_equal   nil
+    sink.end_at.must_be_close_to   time
+    sink.end_time.must_be_close_to time
+
+    sink.start_at = time
+    sink.end_at   = nil
+
+    sink.start_at.must_be_close_to   time
+    sink.start_time.must_be_close_to time
+    sink.end_at.must_equal           nil
+    sink.end_time.must_equal         nil
+
+    sink.start_at = nil
+    sink.end_at   = time
+
+    sink.start_at.must_equal     nil
+    sink.start_time.must_equal   nil
+    sink.end_at.must_be_close_to   time
+    sink.end_time.must_be_close_to time
+  end
+
   it "can save itself" do
+    now = Time.now
+    now_grpc = Google::Protobuf::Timestamp.new(seconds: now.to_i, nanos: now.nsec)
+    sink_grpc.start_time = nil
+    sink_grpc.end_time = now_grpc
+
     new_sink_destination = "storage.googleapis.com/new-sink-bucket"
     new_sink_filter = "logName:syslog AND severity>=WARN"
     new_sink = Google::Logging::V2::LogSink.new(
       name: sink.name,
       destination: new_sink_destination,
       filter: new_sink_filter,
-      output_version_format: :V1
+      output_version_format: :V1,
+      end_time: now_grpc
     )
     mock = Minitest::Mock.new
     mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, options: default_options]
@@ -58,6 +101,8 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.destination = new_sink_destination
     sink.filter = new_sink_filter
     sink.version = :v1
+    sink.start_at = nil
+    sink.end_at = now
     sink.save
 
     mock.verify
@@ -66,6 +111,10 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.destination.must_equal new_sink_destination
     sink.filter.must_equal new_sink_filter
     sink.must_be :v1?
+    sink.start_at.must_be :nil?
+    sink.start_time.must_be :nil?
+    sink.end_at.wont_be :nil?
+    sink.end_time.wont_be :nil?
   end
 
   it "can refresh itself" do

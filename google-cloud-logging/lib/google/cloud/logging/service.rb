@@ -165,10 +165,13 @@ module Google
           end
         end
 
-        def create_sink name, destination, filter, version
+        def create_sink name, destination, filter, version, start_time: nil,
+                        end_time: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
-            output_version_format: version }.delete_if { |_, v| v.nil? })
+            output_version_format: version,
+            start_time: time_to_timestamp(start_time),
+            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
 
           execute do
             sinks.create_sink project_path, sink, options: default_options
@@ -179,10 +182,13 @@ module Google
           execute { sinks.get_sink sink_path(name), options: default_options }
         end
 
-        def update_sink name, destination, filter, version
+        def update_sink name, destination, filter, version, start_time: nil,
+                        end_time: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
-            output_version_format: version }.delete_if { |_, v| v.nil? })
+            output_version_format: version,
+            start_time: time_to_timestamp(start_time),
+            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
 
           execute do
             sinks.update_sink sink_path(name), sink, options: default_options
@@ -277,6 +283,24 @@ module Google
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
+        end
+
+        ##
+        # @private Get a Google::Protobuf::Timestamp object from a Time object.
+        def time_to_timestamp time
+          return nil if time.nil?
+          # Make sure we have a Time object
+          return nil unless time.respond_to? :to_time
+          time = time.to_time
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
+        end
+
+        ##
+        # @private Get a Time object from a Google::Protobuf::Timestamp object.
+        def timestamp_to_time timestamp
+          return nil if timestamp.nil?
+          # Time.at takes microseconds, so convert nano seconds to microseconds
+          Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
         end
 
         def execute

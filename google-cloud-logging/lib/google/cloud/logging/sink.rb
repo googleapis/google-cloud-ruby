@@ -25,6 +25,11 @@ module Google
       # a sink, new log entries are exported. Stackdriver Logging does not send
       # previously-ingested log entries to the sink's destination.
       #
+      # A logs filter controls which log entries are exported. Sinks can have a
+      # start time and an end time; these can be used to place log entries from
+      # an exact time range into a particular destination.  If both `start_at`
+      # and `end_at` are present, then `start_at` must be less than `end_at`.
+      #
       # Before creating the sink, ensure that you have granted
       # `cloud-logs@google.com` permission to write logs to the destination. See
       # [Permissions for writing exported
@@ -153,6 +158,42 @@ module Google
         end
 
         ##
+        # The time at which this sink will begin exporting log entries. If this
+        # value is present, then log entries are exported only if `start_at`
+        # is less than the log entry's timestamp. Optional.
+        def start_at
+          timestamp_to_time @grpc.start_time
+        end
+        alias_method :start_time, :start_at
+
+        ##
+        # Sets the time at which this sink will begin exporting log entries. If
+        # this value is present, then log entries are exported only if
+        # `start_at` is less than the log entry's timestamp. Optional.
+        def start_at= new_start_at
+          @grpc.start_time = time_to_timestamp new_start_at
+        end
+        alias_method :start_time=, :start_at=
+
+        ##
+        # Time at which this sink will stop exporting log entries. If this
+        # value is present, then log entries are exported only if the log
+        # entry's timestamp is less than `end_at`. Optional.
+        def end_at
+          timestamp_to_time @grpc.end_time
+        end
+        alias_method :end_time, :end_at
+
+        ##
+        # Sets the time at which this sink will stop exporting log entries. If
+        # this value is present, then log entries are exported only if the log
+        # entry's timestamp is less than `end_at`. Optional.
+        def end_at= new_end_at
+          @grpc.end_time = time_to_timestamp new_end_at
+        end
+        alias_method :end_time=, :end_at=
+
+        ##
         # Updates the logs-based sink.
         #
         # @example
@@ -165,7 +206,8 @@ module Google
         #
         def save
           ensure_service!
-          @grpc = service.update_sink name, destination, filter, version
+          @grpc = service.update_sink name, destination, filter, version,
+                                      start_time: start_at, end_time: end_at
         end
 
         ##
@@ -221,6 +263,24 @@ module Google
         # available.
         def ensure_service!
           fail "Must have active connection to service" unless service
+        end
+
+        ##
+        # @private Get a Google::Protobuf::Timestamp object from a Time object.
+        def time_to_timestamp time
+          return nil if time.nil?
+          # Make sure we have a Time object
+          return nil unless time.respond_to? :to_time
+          time = time.to_time
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
+        end
+
+        ##
+        # @private Get a Time object from a Google::Protobuf::Timestamp object.
+        def timestamp_to_time timestamp
+          return nil if timestamp.nil?
+          # Time.at takes microseconds, so convert nano seconds to microseconds
+          Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
         end
       end
     end
