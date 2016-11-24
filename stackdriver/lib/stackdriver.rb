@@ -17,9 +17,10 @@ gem "google-cloud-error_reporting"
 gem "google-cloud-logging"
 gem "google-cloud-monitoring"
 
-require "google/cloud/error_reporting/v1beta1"
 require "google/cloud/logging"
 require "google/cloud/monitoring/v3"
+
+require "google/cloud/error_reporting/middleware" if defined? ::Rack
 
 if defined? ::Rails::Railtie
   require "google/cloud/error_reporting/rails"
