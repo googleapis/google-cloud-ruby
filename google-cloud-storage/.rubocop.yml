@@ -4,6 +4,7 @@ AllCops:
     - "google-cloud-storage.gemspec"
     - "Rakefile"
     - "test/**/*"
+    - "support/**/*"
 
 Documentation:
   Enabled: false

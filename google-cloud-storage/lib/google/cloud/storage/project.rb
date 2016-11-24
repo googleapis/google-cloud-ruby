@@ -272,7 +272,7 @@ module Google
         #     b.website_404 = "not_found.html"
         #     b.cors.add_rule ["http://example.org", "https://example.org"],
         #                      "*",
-        #                      response_headers: ["X-My-Custom-Header"],
+        #                      headers: ["X-My-Custom-Header"],
         #                      max_age: 300
         #   end
         #

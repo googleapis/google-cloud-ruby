@@ -656,7 +656,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.auth!
+          #   bucket.default_acl.auth!
           #
           def auth!
             update_predefined_default_acl! "authenticatedRead"
@@ -677,7 +677,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.owner_full!
+          #   bucket.default_acl.owner_full!
           #
           def owner_full!
             update_predefined_default_acl! "bucketOwnerFullControl"
@@ -695,7 +695,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.owner_read!
+          #   bucket.default_acl.owner_read!
           #
           def owner_read!
             update_predefined_default_acl! "bucketOwnerRead"
@@ -713,7 +713,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.private!
+          #   bucket.default_acl.private!
           #
           def private!
             update_predefined_default_acl! "private"
@@ -730,7 +730,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.project_private!
+          #   bucket.default_acl.project_private!
           #
           def project_private!
             update_predefined_default_acl! "projectPrivate"
@@ -748,7 +748,7 @@ module Google
           #
           #   bucket = storage.bucket "my-bucket"
           #
-          #   bucket.acl.public!
+          #   bucket.default_acl.public!
           #
           def public!
             update_predefined_default_acl! "publicRead"
