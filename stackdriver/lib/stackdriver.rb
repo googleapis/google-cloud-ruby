@@ -18,7 +18,6 @@ gem "google-cloud-logging"
 gem "google-cloud-monitoring"
 
 require "google/cloud/logging"
-require "google/cloud/monitoring/v3"
 
 require "google/cloud/error_reporting/middleware" if defined? ::Rack
 

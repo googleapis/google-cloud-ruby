@@ -24,10 +24,6 @@ describe Stackdriver do
     defined?(Google::Cloud::Logging).wont_be_nil
   end
 
-  it "requires google-cloud-monitoring" do
-    defined?(Google::Cloud::Monitoring).wont_be_nil
-  end
-
   it "requires google-cloud-error_reporting rails module" do
     defined?(Google::Cloud::ErrorReporting::Railtie).wont_be_nil
   end
