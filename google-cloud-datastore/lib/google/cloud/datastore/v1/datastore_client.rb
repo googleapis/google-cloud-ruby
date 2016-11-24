@@ -41,7 +41,7 @@ module Google
         #
         # @!attribute [r] datastore_stub
         #   @return [Google::Datastore::V1::Datastore::Stub]
-        class DatastoreApi
+        class DatastoreClient
           attr_reader :datastore_stub
 
           # The default address of the service.
@@ -165,16 +165,16 @@ module Google
           # @return [Google::Datastore::V1::LookupResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #   ReadOptions = Google::Datastore::V1::ReadOptions
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
           #   read_options = ReadOptions.new
           #   keys = []
-          #   response = datastore_api.lookup(project_id, read_options, keys)
+          #   response = datastore_client.lookup(project_id, read_options, keys)
 
           def lookup \
               project_id,
@@ -210,17 +210,17 @@ module Google
           # @return [Google::Datastore::V1::RunQueryResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #   PartitionId = Google::Datastore::V1::PartitionId
           #   ReadOptions = Google::Datastore::V1::ReadOptions
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
           #   partition_id = PartitionId.new
           #   read_options = ReadOptions.new
-          #   response = datastore_api.run_query(project_id, partition_id, read_options)
+          #   response = datastore_client.run_query(project_id, partition_id, read_options)
 
           def run_query \
               project_id,
@@ -249,13 +249,13 @@ module Google
           # @return [Google::Datastore::V1::BeginTransactionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
-          #   response = datastore_api.begin_transaction(project_id)
+          #   response = datastore_client.begin_transaction(project_id)
 
           def begin_transaction \
               project_id,
@@ -297,16 +297,16 @@ module Google
           # @return [Google::Datastore::V1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #   Mode = Google::Datastore::V1::CommitRequest::Mode
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
           #   mode = Mode::MODE_UNSPECIFIED
           #   mutations = []
-          #   response = datastore_api.commit(project_id, mode, mutations)
+          #   response = datastore_client.commit(project_id, mode, mutations)
 
           def commit \
               project_id,
@@ -336,14 +336,14 @@ module Google
           # @return [Google::Datastore::V1::RollbackResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
           #   transaction = ''
-          #   response = datastore_api.rollback(project_id, transaction)
+          #   response = datastore_client.rollback(project_id, transaction)
 
           def rollback \
               project_id,
@@ -370,14 +370,14 @@ module Google
           # @return [Google::Datastore::V1::AllocateIdsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1/datastore_api"
+          #   require "google/cloud/datastore/v1/datastore_client"
           #
-          #   DatastoreApi = Google::Cloud::Datastore::V1::DatastoreApi
+          #   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
           #
-          #   datastore_api = DatastoreApi.new
+          #   datastore_client = DatastoreClient.new
           #   project_id = ''
           #   keys = []
-          #   response = datastore_api.allocate_ids(project_id, keys)
+          #   response = datastore_client.allocate_ids(project_id, keys)
 
           def allocate_ids \
               project_id,
