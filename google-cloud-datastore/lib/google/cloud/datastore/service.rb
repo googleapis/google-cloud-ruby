@@ -34,7 +34,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::DatastoreApi::SERVICE_ADDRESS
+          @host = host || V1::DatastoreClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -53,7 +53,7 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= V1::DatastoreApi.new(
+          @service ||= V1::DatastoreClient.new(
             service_path: host,
             channel: channel,
             timeout: timeout,
