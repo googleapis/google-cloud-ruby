@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/core/environment"
 require "google/cloud/error_reporting/v1beta1"
 require "google/cloud/credentials"
 

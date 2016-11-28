@@ -12,23 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+##
+# This file is here to be autorequired by bundler, so that the .logging and
+# #logging methods can be available, but the library and all dependencies won't
+# be loaded until required and used.
 
-require "helper"
 
-describe Stackdriver do
-  it "requires google-cloud-error_reporting" do
-    defined?(Google::Cloud::ErrorReporting).wont_be_nil
-  end
+gem "google-cloud-core"
+require "google/cloud"
 
-  it "requires google-cloud-logging" do
-    defined?(Google::Cloud::Logging).wont_be_nil
-  end
-
-  it "requires google-cloud-error_reporting rails module" do
-    defined?(Google::Cloud::ErrorReporting::Railtie).wont_be_nil
-  end
-
-  it "requires google-cloud-logging rails module" do
-    defined?(Google::Cloud::Logging::Railtie).wont_be_nil
-  end
-end
+# There is no Google::Cloud integration to add.

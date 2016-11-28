@@ -18,24 +18,5 @@
 # be loaded until required and used.
 
 
-gem "google-cloud-bigquery"
-gem "google-cloud-datastore"
-gem "google-cloud-dns"
-gem "google-cloud-logging"
-gem "google-cloud-pubsub"
-gem "google-cloud-resource_manager"
-gem "google-cloud-storage"
-gem "google-cloud-translate"
-gem "google-cloud-vision"
-gem "google-cloud-error_reporting"
-
-require "google-cloud-bigquery"
-require "google-cloud-datastore"
-require "google-cloud-dns"
-require "google-cloud-logging"
-require "google-cloud-pubsub"
-require "google-cloud-resource_manager"
-require "google-cloud-storage"
-require "google-cloud-translate"
-require "google-cloud-vision"
-require "google/cloud/error_reporting/v1beta1"
+gem "google-cloud-core"
+require "google/cloud"

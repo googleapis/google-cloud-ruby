@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+require "google/cloud/core/environment"
+require "google/cloud/error_reporting/v1beta1"
 require "rack"
 require "rack/request"
 
