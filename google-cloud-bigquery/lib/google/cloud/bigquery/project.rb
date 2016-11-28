@@ -225,11 +225,11 @@ module Google
         #   end
         #
         def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  dataset: nil, project: nil, use_legacy_sql: true
+                  dataset: nil, project: nil, use_legacy_sql: true, params: nil
           ensure_service!
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
                       dataset: dataset, project: project,
-                      use_legacy_sql: use_legacy_sql }
+                      use_legacy_sql: use_legacy_sql, params: params }
           gapi = service.query query, options
           QueryData.from_gapi gapi, service
         end

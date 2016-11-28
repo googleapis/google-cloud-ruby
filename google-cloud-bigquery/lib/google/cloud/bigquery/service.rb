@@ -407,7 +407,7 @@ module Google
         def query_config query, options = {}
           dataset_config = dataset_ref_from options[:dataset], options[:project]
 
-          API::QueryRequest.new(
+          req = API::QueryRequest.new(
             query: query,
             max_results: options[:max],
             default_dataset: dataset_config,
@@ -416,6 +416,64 @@ module Google
             use_query_cache: options[:cache],
             use_legacy_sql: options[:use_legacy_sql]
           )
+
+          if options[:params]
+            req.use_legacy_sql = false
+            req.parameter_mode = "POSITIONAL"
+            req.query_parameters = options[:params].map do |param|
+              to_query_param param
+            end
+          end
+
+          req
+        end
+
+        def to_query_param value
+          if TrueClass === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "BOOLEAN"),
+              parameter_value: API::QueryParameterValue.new(value: true)
+            )
+          elsif FalseClass === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "BOOLEAN"),
+              parameter_value: API::QueryParameterValue.new(value: false)
+            )
+          elsif Integer === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "INT64"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif Float === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "FLOAT64"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif String === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "STRING"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif defined?(Date) && Date === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "DATE"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          # ActiveSupport adds to_time to Numeric, which is awful...
+          elsif value.respond_to? :to_time
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
+              parameter_value: API::QueryParameterValue.new(
+                value: value.to_time)
+            )
+          elsif Array === value
+            fail "Not yet implemented"
+          elsif Hash === value
+            fail "Not yet implemented"
+          else
+            fail "A query parameter of type #{value.class} is not supported."
+          end
+          v
         end
 
         ##
