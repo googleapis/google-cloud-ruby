@@ -13,4 +13,4 @@
 # limitations under the License.
 
 
-require "google/cloud/datastore/v1/datastore_api"
+require "google/cloud/datastore/v1/datastore_client"

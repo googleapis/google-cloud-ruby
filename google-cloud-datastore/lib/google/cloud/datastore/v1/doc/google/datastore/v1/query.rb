@@ -200,7 +200,7 @@ module Google
         end
       end
 
-      # A {GQL query}[https://cloud.google.com/datastore/docs/apis/gql/gql_reference$].
+      # A {GQL query}[https://cloud.google.com/datastore/docs/apis/gql/gql_reference].
       # @!attribute [rw] query_string
       #   @return [String]
       #     A string of the format described
