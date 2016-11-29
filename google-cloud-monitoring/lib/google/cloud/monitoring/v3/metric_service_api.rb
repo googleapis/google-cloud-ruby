@@ -194,7 +194,7 @@ module Google
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
               "ruby/#{RUBY_VERSION}".freeze
-            headers = { "x-goog-api-client": google_api_client }
+            headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "metric_service_client_config.json"
             )

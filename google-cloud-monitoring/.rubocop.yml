@@ -23,6 +23,9 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - "lib/google/cloud/monitoring/v3/**/*"
 Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/monitoring/v3/**/*"

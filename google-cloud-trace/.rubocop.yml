@@ -22,6 +22,9 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - "lib/google/cloud/trace/v1/**/*"
 Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/trace/v1/**/*"
