@@ -418,10 +418,22 @@ module Google
           )
 
           if options[:params]
-            req.use_legacy_sql = false
-            req.parameter_mode = "POSITIONAL"
-            req.query_parameters = options[:params].map do |param|
-              to_query_param param
+            if Array === options[:params]
+              req.use_legacy_sql = false
+              req.parameter_mode = "POSITIONAL"
+              req.query_parameters = options[:params].map do |param|
+                to_query_param param
+              end
+            elsif Hash === options[:params]
+              req.use_legacy_sql = false
+              req.parameter_mode = "NAMED"
+              req.query_parameters = options[:params].map do |name, param|
+                to_query_param(param).tap do |named_param|
+                  named_param.name = String name
+                end
+              end
+            else
+              fail "Query parameters must be an Array or a Hash."
             end
           end
 
