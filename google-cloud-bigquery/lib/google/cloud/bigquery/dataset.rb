@@ -638,9 +638,9 @@ module Google
         # @!group Data
         #
         def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  use_legacy_sql: true
+                  use_legacy_sql: true, params: nil
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
-                      use_legacy_sql: use_legacy_sql }
+                      use_legacy_sql: use_legacy_sql, params: params }
           options[:dataset] ||= dataset_id
           options[:project] ||= project_id
           ensure_service!
