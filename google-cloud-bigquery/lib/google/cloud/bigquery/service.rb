@@ -385,7 +385,7 @@ module Google
         def query_table_config query, options
           dest_table = table_ref_from options[:table]
           default_dataset = dataset_ref_from options[:dataset]
-          API::Job.new(
+          req = API::Job.new(
             configuration: API::JobConfiguration.new(
               query: API::JobConfigurationQuery.new(
                 query: query,
@@ -402,6 +402,28 @@ module Google
               )
             )
           )
+
+          if options[:params]
+            if Array === options[:params]
+              req.configuration.query.use_legacy_sql = false
+              req.configuration.query.parameter_mode = "POSITIONAL"
+              req.configuration.query.query_parameters = options[:params].map do |param|
+                to_query_param param
+              end
+            elsif Hash === options[:params]
+              req.configuration.query.use_legacy_sql = false
+              req.configuration.query.parameter_mode = "NAMED"
+              req.configuration.query.query_parameters = options[:params].map do |name, param|
+                to_query_param(param).tap do |named_param|
+                  named_param.name = String name
+                end
+              end
+            else
+              fail "Query parameters must be an Array or a Hash."
+            end
+          end
+
+          req
         end
 
         def query_config query, options = {}
