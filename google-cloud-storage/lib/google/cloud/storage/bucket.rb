@@ -105,10 +105,12 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-        #   bucket.cors #=> [{"origin"=>["http://example.org"],
-        #               #     "method"=>["GET","POST","DELETE"],
-        #               #     "responseHeader"=>["X-My-Custom-Header"],
-        #               #     "maxAgeSeconds"=>3600}]
+        #   bucket.cors.size #=> 2
+        #   rule = bucket.cors.first
+        #   rule.origin #=> ["http://example.org"]
+        #   rule.methods #=> ["GET","POST","DELETE"]
+        #   rule.headers #=> ["X-My-Custom-Header"]
+        #   rule.max_age #=> 3600
         #
         # @example Updating the bucket's CORS rules inside a block.
         #   require "google/cloud/storage"
@@ -120,7 +122,7 @@ module Google
         #     b.cors do |c|
         #       c.add_rule ["http://example.org", "https://example.org"],
         #                  "*",
-        #                  response_headers: ["X-My-Custom-Header"],
+        #                  headers: ["X-My-Custom-Header"],
         #                  max_age: 3600
         #     end
         #   end
@@ -289,12 +291,12 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-bucket"
+        #   bucket = storage.bucket "my-todo-app"
         #   bucket.update do |b|
         #     b.website_main = "index.html"
         #     b.website_404 = "not_found.html"
-        #     b.cors[0]["method"] = ["GET","POST","DELETE"]
-        #     b.cors[1]["responseHeader"] << "X-Another-Custom-Header"
+        #     b.cors[0].methods = ["GET","POST","DELETE"]
+        #     b.cors[1].headers << "X-Another-Custom-Header"
         #   end
         #
         # @example New CORS rules can also be added in a nested block:
@@ -307,7 +309,7 @@ module Google
         #     b.cors do |c|
         #       c.add_rule ["http://example.org", "https://example.org"],
         #                  "*",
-        #                  response_headers: ["X-My-Custom-Header"],
+        #                  headers: ["X-My-Custom-Header"],
         #                  max_age: 300
         #     end
         #   end
@@ -640,7 +642,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-        #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
+        #   shared_url = bucket.signed_url "avatars/heidi/400x400.png"
         #
         # @example Any of the option parameters may be specified:
         #   require "google/cloud/storage"
@@ -652,7 +654,7 @@ module Google
         #                                  method: "PUT",
         #                                  expires: 300 # 5 minutes from now
         #
-        # @example Using the `issuer` and `signing_key` options:
+        # @example Using the issuer and signing_key options:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud.storage

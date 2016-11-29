@@ -448,6 +448,13 @@ module Google
         #             "path/to/destination/file.ext"
         #
         # @example The file can also be copied by specifying a generation:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
         #   file.copy "copy/of/previous/generation/file.ext",
         #             generation: 123456
         #

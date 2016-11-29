@@ -32,9 +32,9 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
         #
         #   bucket = storage.bucket "my-bucket"
+        #
         #   bucket.cors do |c|
         #     # Remove the last CORS rule from the array
         #     c.pop
@@ -42,7 +42,7 @@ module Google
         #     c.delete_if { |r| r.origin.include? "http://example.com" }
         #     c.add_rule ["http://example.org", "https://example.org"],
         #                ["GET", "POST", "DELETE"],
-        #                response_headers: ["X-My-Custom-Header"],
+        #                headers: ["X-My-Custom-Header"],
         #                max_age: 3600
         #   end
         #
@@ -90,11 +90,11 @@ module Google
           #
           #   storage = Google::Cloud::Storage.new
           #
-          #   bucket = storage.create_bucket "my-bucket" do |c|
-          #     c.add_rule ["http://example.org", "https://example.org"],
-          #                "*",
-          #                response_headers: ["X-My-Custom-Header"],
-          #                max_age: 300
+          #   bucket = storage.create_bucket "my-bucket" do |b|
+          #     b.cors.add_rule ["http://example.org", "https://example.org"],
+          #                     "*",
+          #                     headers: ["X-My-Custom-Header"],
+          #                     max_age: 300
           #   end
           #
           def add_rule origin, methods, headers: nil, max_age: nil
