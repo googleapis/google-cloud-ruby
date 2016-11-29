@@ -95,7 +95,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+              project: project
             )
           end
 
@@ -105,8 +105,8 @@ module Google
           # @return [String]
           def self.group_path project, group
             GROUP_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"group" => group
+              project: project,
+              group: group
             )
           end
 
@@ -169,7 +169,7 @@ module Google
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
               "ruby/#{RUBY_VERSION}".freeze
-            headers = { :"x-goog-api-client" => google_api_client }
+            headers = { "x-goog-api-client": google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "group_service_client_config.json"
             )
