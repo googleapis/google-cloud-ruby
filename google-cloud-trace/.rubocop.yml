@@ -1,11 +1,7 @@
 AllCops:
   Exclude:
-    - "acceptance/**/*"
-    - "integration/**/*"
     - "google-cloud-trace.gemspec"
     - "lib/google/devtools/**/*"
-    - "lib/google/cloud/trace/v1.rb"
-    - "lib/google/cloud/trace/v1/**/*"
     - "Rakefile"
     - "test/**/*"
 
@@ -26,6 +22,9 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/trace/v1/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
@@ -34,6 +33,8 @@ Metrics/AbcSize:
   Max: 25
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - "lib/google/cloud/trace/v1/**/*"
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:
