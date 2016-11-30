@@ -540,6 +540,13 @@ module Google
         #  consistent with the log entry format designed by the `version`
         #  parameter, regardless of the format of the log entry that was
         #  originally written to Stackdriver Logging.
+        # @param [Time, nil] start_at The time at which this sink will begin
+        #   exporting log entries. If this value is present, then log entries
+        #   are exported only if `start_at` is less than the log entry's
+        #   timestamp. Optional.
+        # @param [Time, nil] end_at Time at which this sink will stop exporting
+        #   log entries. If this value is present, then log entries are exported
+        #   only if the log entry's timestamp is less than `end_at`. Optional.
         # @param [Symbol] version The log entry version used when exporting log
         #   entries from this sink. This version does not have to correspond to
         #   the version of the log entry when it was written to Stackdriver
@@ -547,6 +554,12 @@ module Google
         #   Version 2 is currently the preferred format. An unspecified version
         #   format currently defaults to V2 in the service. The default value is
         #   `:unspecified`.
+        # @param [Boolean] unique_writer_identity Whether the sink will have a
+        #    dedicated service account returned in the sink's `writer_identity`.
+        #    Set this field to be true to export logs from one project to a
+        #    different project. This field is ignored for non-project sinks
+        #    (e.g. organization sinks) because those sinks are required to have
+        #    dedicated service accounts. Optional.
         #
         # @return [Google::Cloud::Logging::Sink] a project sink
         #
@@ -568,10 +581,15 @@ module Google
         #   sink = logging.create_sink "my-sink",
         #                              "storage.googleapis.com/#{bucket.id}"
         #
-        def create_sink name, destination, filter: nil, version: :unspecified
+        def create_sink name, destination, filter: nil, start_at: nil,
+                        end_at: nil, version: :unspecified,
+                        unique_writer_identity: nil
           version = Sink.resolve_version version
           ensure_service!
-          grpc = service.create_sink name, destination, filter, version
+          grpc = service.create_sink \
+            name, destination, filter, version,
+            start_time: start_at, end_time: end_at,
+            unique_writer_identity: unique_writer_identity
           Sink.from_grpc grpc, service
         end
         alias_method :new_sink, :create_sink

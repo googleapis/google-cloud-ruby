@@ -18,17 +18,22 @@ module Google
       # An individual entry in a log.
       # @!attribute [rw] log_name
       #   @return [String]
-      #     Required. The resource name of the log to which this log entry
-      #     belongs. The format of the name is
-      #     +"projects/<project-id>/logs/<log-id>"+.  Examples:
-      #     +"projects/my-projectid/logs/syslog"+,
-      #     +"projects/my-projectid/logs/library.googleapis.com%2Fbook_log"+.
+      #     Required. The resource name of the log to which this log entry belongs:
       #
-      #     The log ID part of resource name must be less than 512 characters
-      #     long and can only include the following characters: upper and
-      #     lower case alphanumeric characters: [A-Za-z0-9]; and punctuation
-      #     characters: forward-slash, underscore, hyphen, and period.
-      #     Forward-slash (+/+) characters in the log ID must be URL-encoded.
+      #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
+      #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+      #
+      #     +[LOG_ID]+ must be URL-encoded within +log_name+. Example:
+      #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
+      #     +[LOG_ID]+ must be less than 512 characters long and can only include the
+      #     following characters: upper and lower case alphanumeric characters,
+      #     forward-slash, underscore, hyphen, and period.
+      #
+      #     For backward compatibility, if +log_name+ begins with a forward-slash, such
+      #     as +/projects/...+, then the log entry is ingested as usual but the
+      #     forward-slash is removed. Listing the log entry will not show the leading
+      #     slash and filtering for a log name with a leading slash will never return
+      #     any results.
       # @!attribute [rw] resource
       #   @return [Google::Api::MonitoredResource]
       #     Required. The monitored resource associated with this log entry.
@@ -45,8 +50,8 @@ module Google
       #     The log entry payload, represented as a Unicode string (UTF-8).
       # @!attribute [rw] json_payload
       #   @return [Google::Protobuf::Struct]
-      #     The log entry payload, represented as a structure that
-      #     is expressed as a JSON object.
+      #     The log entry payload, represented as a structure that is
+      #     expressed as a JSON object.
       # @!attribute [rw] timestamp
       #   @return [Google::Protobuf::Timestamp]
       #     Optional. The time the event described by the log entry occurred.  If

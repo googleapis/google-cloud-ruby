@@ -32,8 +32,8 @@ module Google
   module Cloud
     module Logging
       module V2
-        # Service for configuring sinks used to export log entries outside Stackdriver
-        # Logging.
+        # Service for configuring sinks used to export log entries outside of
+        # Stackdriver Logging.
         #
         # @!attribute [r] config_service_v2_stub
         #   @return [Google::Logging::V2::ConfigServiceV2::Stub]
@@ -212,8 +212,10 @@ module Google
           # Lists sinks.
           #
           # @param parent [String]
-          #   Required. The cloud resource containing the sinks.
-          #   Example: +"projects/my-logging-project"+.
+          #   Required. The resource name where this sink was created:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -264,8 +266,10 @@ module Google
           # Gets a sink.
           #
           # @param sink_name [String]
-          #   Required. The resource name of the sink to return.
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Required. The resource name of the sink to return:
+          #
+          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -292,12 +296,19 @@ module Google
           # Creates a sink.
           #
           # @param parent [String]
-          #   Required. The resource in which to create the sink.
-          #   Example: +"projects/my-project-id"+.
-          #   The new sink must be provided in the request.
+          #   Required. The resource in which to create the sink:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
           # @param sink [Google::Logging::V2::LogSink]
           #   Required. The new sink, whose +name+ parameter is a sink identifier that
           #   is not already in use.
+          # @param unique_writer_identity [true, false]
+          #   Optional. Whether the sink will have a dedicated service account returned
+          #   in the sink's writer_identity. Set this field to be true to export
+          #   logs from one project to a different project. This field is ignored for
+          #   non-project sinks (e.g. organization sinks) because those sinks are
+          #   required to have dedicated service accounts.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -317,10 +328,12 @@ module Google
           def create_sink \
               parent,
               sink,
+              unique_writer_identity: nil,
               options: nil
             req = Google::Logging::V2::CreateSinkRequest.new({
               parent: parent,
-              sink: sink
+              sink: sink,
+              unique_writer_identity: unique_writer_identity
             }.delete_if { |_, v| v.nil? })
             @create_sink.call(req, options)
           end
@@ -329,12 +342,22 @@ module Google
           #
           # @param sink_name [String]
           #   Required. The resource name of the sink to update, including the parent
-          #   resource and the sink identifier.  If the sink does not exist, this method
-          #   creates the sink.  Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   resource and the sink identifier:
+          #
+          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink]
           #   Required. The updated sink, whose name is the same identifier that appears
           #   as part of +sinkName+.  If +sinkName+ does not exist, then
           #   this method creates a new sink.
+          # @param unique_writer_identity [true, false]
+          #   Optional. Whether the sink will have a dedicated service account returned
+          #   in the sink's writer_identity. Set this field to be true to export
+          #   logs from one project to a different project. This field is ignored for
+          #   non-project sinks (e.g. organization sinks) because those sinks are
+          #   required to have dedicated service accounts.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -354,10 +377,12 @@ module Google
           def update_sink \
               sink_name,
               sink,
+              unique_writer_identity: nil,
               options: nil
             req = Google::Logging::V2::UpdateSinkRequest.new({
               sink_name: sink_name,
-              sink: sink
+              sink: sink,
+              unique_writer_identity: unique_writer_identity
             }.delete_if { |_, v| v.nil? })
             @update_sink.call(req, options)
           end
@@ -366,9 +391,12 @@ module Google
           #
           # @param sink_name [String]
           #   Required. The resource name of the sink to delete, including the parent
-          #   resource and the sink identifier.  Example:
-          #   +"projects/my-project-id/sinks/my-sink-id"+.  It is an error if the sink
-          #   does not exist.
+          #   resource and the sink identifier:
+          #
+          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #
+          #   It is an error if the sink does not exist.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

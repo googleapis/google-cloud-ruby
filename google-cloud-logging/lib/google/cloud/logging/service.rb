@@ -101,7 +101,7 @@ module Google
           if project_ids.empty? && resource_names.empty?
             resource_names = ["projects/#{@project}"]
           end
-          resource_names = nil if resource_names.empty?
+          project_ids = nil if project_ids.empty?
           call_opts = default_options
           if token
             call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
@@ -110,8 +110,8 @@ module Google
 
           execute do
             paged_enum = logging.list_log_entries \
-              project_ids, resource_names: resource_names, filter: filter,
-                           order_by: order, page_size: max, options: call_opts
+              resource_names, filter: filter, order_by: order, page_size: max,
+                              options: call_opts, project_ids: project_ids
             paged_enum.page.response
           end
         end
@@ -165,13 +165,19 @@ module Google
           end
         end
 
-        def create_sink name, destination, filter, version
+        def create_sink name, destination, filter, version, start_time: nil,
+                        end_time: nil, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
-            output_version_format: version }.delete_if { |_, v| v.nil? })
+            output_version_format: version,
+            start_time: time_to_timestamp(start_time),
+            end_time: time_to_timestamp(end_time)
+          }.delete_if { |_, v| v.nil? })
 
           execute do
-            sinks.create_sink project_path, sink, options: default_options
+            sinks.create_sink project_path, sink,
+                              unique_writer_identity: unique_writer_identity,
+                              options: default_options
           end
         end
 
@@ -179,13 +185,18 @@ module Google
           execute { sinks.get_sink sink_path(name), options: default_options }
         end
 
-        def update_sink name, destination, filter, version
+        def update_sink name, destination, filter, version, start_time: nil,
+                        end_time: nil, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
             name: name, destination: destination, filter: filter,
-            output_version_format: version }.delete_if { |_, v| v.nil? })
+            output_version_format: version,
+            start_time: time_to_timestamp(start_time),
+            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
 
           execute do
-            sinks.update_sink sink_path(name), sink, options: default_options
+            sinks.update_sink sink_path(name), sink,
+                              unique_writer_identity: unique_writer_identity,
+                              options: default_options
           end
         end
 
@@ -277,6 +288,24 @@ module Google
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
+        end
+
+        ##
+        # @private Get a Google::Protobuf::Timestamp object from a Time object.
+        def time_to_timestamp time
+          return nil if time.nil?
+          # Make sure we have a Time object
+          return nil unless time.respond_to? :to_time
+          time = time.to_time
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
+        end
+
+        ##
+        # @private Get a Time object from a Google::Protobuf::Timestamp object.
+        def timestamp_to_time timestamp
+          return nil if timestamp.nil?
+          # Time.at takes microseconds, so convert nano seconds to microseconds
+          Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
         end
 
         def execute
