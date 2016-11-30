@@ -37,7 +37,7 @@ module Google
         #
         # @!attribute [r] config_service_v2_stub
         #   @return [Google::Logging::V2::ConfigServiceV2::Stub]
-        class ConfigServiceV2Api
+        class ConfigServiceV2Client
           attr_reader :config_service_v2_stub
 
           # The default address of the service.
@@ -232,20 +232,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #   require "google/cloud/logging/v2/config_service_v2_client"
           #
-          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #
-          #   config_service_v2_api = ConfigServiceV2Api.new
-          #   formatted_parent = ConfigServiceV2Api.parent_path("[PROJECT]")
+          #   config_service_v2_client = ConfigServiceV2Client.new
+          #   formatted_parent = ConfigServiceV2Client.parent_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   config_service_v2_api.list_sinks(formatted_parent).each do |element|
+          #   config_service_v2_client.list_sinks(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   config_service_v2_api.list_sinks(formatted_parent).each_page do |page|
+          #   config_service_v2_client.list_sinks(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -276,13 +276,13 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #   require "google/cloud/logging/v2/config_service_v2_client"
           #
-          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #
-          #   config_service_v2_api = ConfigServiceV2Api.new
-          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
-          #   response = config_service_v2_api.get_sink(formatted_sink_name)
+          #   config_service_v2_client = ConfigServiceV2Client.new
+          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #   response = config_service_v2_client.get_sink(formatted_sink_name)
 
           def get_sink \
               sink_name,
@@ -315,15 +315,15 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #   require "google/cloud/logging/v2/config_service_v2_client"
           #
-          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #   LogSink = Google::Logging::V2::LogSink
           #
-          #   config_service_v2_api = ConfigServiceV2Api.new
-          #   formatted_parent = ConfigServiceV2Api.parent_path("[PROJECT]")
+          #   config_service_v2_client = ConfigServiceV2Client.new
+          #   formatted_parent = ConfigServiceV2Client.parent_path("[PROJECT]")
           #   sink = LogSink.new
-          #   response = config_service_v2_api.create_sink(formatted_parent, sink)
+          #   response = config_service_v2_client.create_sink(formatted_parent, sink)
 
           def create_sink \
               parent,
@@ -364,15 +364,15 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #   require "google/cloud/logging/v2/config_service_v2_client"
           #
-          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #   LogSink = Google::Logging::V2::LogSink
           #
-          #   config_service_v2_api = ConfigServiceV2Api.new
-          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
+          #   config_service_v2_client = ConfigServiceV2Client.new
+          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   sink = LogSink.new
-          #   response = config_service_v2_api.update_sink(formatted_sink_name, sink)
+          #   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
 
           def update_sink \
               sink_name,
@@ -402,13 +402,13 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_api"
+          #   require "google/cloud/logging/v2/config_service_v2_client"
           #
-          #   ConfigServiceV2Api = Google::Cloud::Logging::V2::ConfigServiceV2Api
+          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #
-          #   config_service_v2_api = ConfigServiceV2Api.new
-          #   formatted_sink_name = ConfigServiceV2Api.sink_path("[PROJECT]", "[SINK]")
-          #   config_service_v2_api.delete_sink(formatted_sink_name)
+          #   config_service_v2_client = ConfigServiceV2Client.new
+          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #   config_service_v2_client.delete_sink(formatted_sink_name)
 
           def delete_sink \
               sink_name,
