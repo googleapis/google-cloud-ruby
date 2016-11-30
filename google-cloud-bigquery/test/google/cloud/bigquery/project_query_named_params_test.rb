@@ -309,6 +309,38 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
+  it "queries the data with an array parameter" do
+    query_request_gapi.query = "#{query} WHERE name IN @names"
+    query_request_gapi.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "names",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "STRING"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name1"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name2"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name3")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    data = bigquery.query "#{query} WHERE name IN @names", params: { names: %w{name1 name2 name3} }
+    mock.verify
+
+    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    assert_valid_data data
+  end
+
   def assert_valid_data data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash

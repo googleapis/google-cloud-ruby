@@ -272,4 +272,34 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
+
+  it "queries the data with an array parameter" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE name IN ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+      parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+        type: "ARRAY",
+        array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRING"
+        )
+      ),
+      parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+        array_values: [
+          Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name1"),
+          Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name2"),
+          Google::Apis::BigqueryV2::QueryParameterValue.new(value: "name3")
+        ]
+      )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
 end

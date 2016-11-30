@@ -501,13 +501,47 @@ module Google
                 value: value.to_time)
             )
           elsif Array === value
-            fail "Not yet implemented"
+            array_params = value.map { |param| to_query_param param }
+            return API::QueryParameter.new(
+              parameter_type: API::QueryParameterType.new(
+                type: "ARRAY",
+                array_type: array_params.first.parameter_type
+              ),
+              parameter_value: API::QueryParameterValue.new(
+                array_values: array_params.map(&:parameter_value)
+              )
+            )
           elsif Hash === value
             fail "Not yet implemented"
           else
             fail "A query parameter of type #{value.class} is not supported."
           end
           v
+        end
+
+        def query_param_type value
+          if TrueClass === value
+            return "BOOLEAN"
+          elsif FalseClass === value
+            return "BOOLEAN"
+          elsif Integer === value
+            return "INT64"
+          elsif Float === value
+            return "FLOAT64"
+          elsif String === value
+            return "STRING"
+          elsif defined?(Date) && Date === value
+            return "DATE"
+          # ActiveSupport adds to_time to Numeric, which is awful...
+          elsif value.respond_to? :to_time
+            return "TIMESTAMP"
+          elsif Array === value
+            return "ARRAY"
+          elsif Hash === value
+            return "STRUCT"
+          else
+            fail "A query parameter of type #{value.class} is not supported."
+          end
         end
 
         ##
