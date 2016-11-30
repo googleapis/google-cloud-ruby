@@ -145,7 +145,7 @@ Follow the [docker website](https://www.docker.com/products/docker) for docker i
 ```sh
 $ gcloud components install kubectl
 ```
-Make sure a [Google Container Engine Cluster](https://cloud.google.com/container-engine/docs/clusters/operations) is properly setup and ready to use.
+Make sure a [Google Container Engine Cluster](https://cloud.google.com/container-engine/docs/clusters/operations) with permissions to access all the GCP services this library implements is properly setup and ready to use. It's easier to create the Cluster through [Cloud Platform Console](https://console.cloud.google.com/kubernetes/list). Keep in mind once the Cluster is create, the service permissions cannot be updated. 
 
 To run the integration tests on Google Container Engine:
 ```sh

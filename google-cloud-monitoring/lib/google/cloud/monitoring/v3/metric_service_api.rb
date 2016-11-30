@@ -95,7 +95,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+              project: project
             )
           end
 
@@ -105,8 +105,8 @@ module Google
           # @return [String]
           def self.metric_descriptor_path project, metric_descriptor
             METRIC_DESCRIPTOR_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"metric_descriptor" => metric_descriptor
+              project: project,
+              metric_descriptor: metric_descriptor
             )
           end
 
@@ -116,8 +116,8 @@ module Google
           # @return [String]
           def self.monitored_resource_descriptor_path project, monitored_resource_descriptor
             MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"monitored_resource_descriptor" => monitored_resource_descriptor
+              project: project,
+              monitored_resource_descriptor: monitored_resource_descriptor
             )
           end
 

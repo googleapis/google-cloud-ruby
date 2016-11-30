@@ -16,6 +16,9 @@
 require "bundler/setup"
 require "bundler/gem_tasks"
 
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
 desc "Run tests."
 task :test do
   puts "The google-cloud-trace gem does not have tests."
@@ -46,11 +49,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-trace gem does not have doctest tests."
-end
-
-desc "Run rubocop."
-task :rubocop do
-  puts "The google-cloud-trace gem does not use rubocop."
 end
 
 require "yard"

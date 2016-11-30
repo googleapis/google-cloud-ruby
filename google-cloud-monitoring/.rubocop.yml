@@ -1,7 +1,8 @@
 AllCops:
   Exclude:
-    - "google-cloud-trace.gemspec"
-    - "lib/google/devtools/**/*"
+    - "integration/**/*"
+    - "google-cloud-monitoring.gemspec"
+    - "lib/google/monitoring/**/*"
     - "Rakefile"
     - "test/**/*"
 
@@ -24,20 +25,22 @@ Style/EmptyElse:
   Enabled: false
 Style/HashSyntax:
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/monitoring/v3/**/*"
 Metrics/LineLength:
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/monitoring/v3/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+  Exclude:
+    - "lib/google/cloud/monitoring/v3/**/*"
 Metrics/MethodLength:
   Max: 20
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/monitoring/v3/**/*"
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:
@@ -47,4 +50,4 @@ Style/ClassVars:
 Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
-  Enabled: false # for lib/google-cloud-trace.rb file
+  Enabled: false # for lib/google-cloud-monitoring.rb file

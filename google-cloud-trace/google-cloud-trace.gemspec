@@ -24,4 +24,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-gax", "~> 0.6.0"
   gem.add_dependency "google-protobuf", "~> 3.0"
   gem.add_dependency "googleapis-common-protos", "~> 1.3"
+
+  gem.add_development_dependency "rubocop", "<= 0.35.1"
 end

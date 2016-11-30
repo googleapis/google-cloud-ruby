@@ -67,8 +67,8 @@ module Google
           # @return [String]
           def self.group_path project, group
             GROUP_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"group" => group
+              project: project,
+              group: group
             )
           end
 

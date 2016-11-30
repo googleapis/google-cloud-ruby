@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
-    - "google-cloud-trace.gemspec"
+    - "integration/**/*"
+    - "google-cloud-error_reporting.gemspec"
     - "lib/google/devtools/**/*"
     - "Rakefile"
     - "test/**/*"
@@ -24,10 +25,10 @@ Style/EmptyElse:
   Enabled: false
 Style/HashSyntax:
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1/**/*"
 Metrics/LineLength:
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
@@ -37,7 +38,7 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Max: 20
   Exclude:
-    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1/**/*"
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:
@@ -47,4 +48,6 @@ Style/ClassVars:
 Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
-  Enabled: false # for lib/google-cloud-trace.rb file
+  Enabled: false # for lib/google-cloud-error_reporting.rb file
+Lint/RescueException:
+  Enabled: false # for lib/google/cloud/error_reporting/middleware.rb file
