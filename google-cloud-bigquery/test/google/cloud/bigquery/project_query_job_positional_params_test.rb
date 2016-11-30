@@ -305,4 +305,46 @@ describe Google::Cloud::Bigquery::Project, :query_job, :positional_params, :mock
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
+
+  it "queries the data with a struct parameter" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE meta = ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRUCT",
+          struct_types: [
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "name",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "STRING")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "age",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "active",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOLEAN")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "score",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "FLOAT64"))
+          ]
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          struct_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 42),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: false),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 98.7)
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = bigquery.query_job "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
 end

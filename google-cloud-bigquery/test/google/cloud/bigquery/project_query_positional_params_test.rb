@@ -321,6 +321,49 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     assert_valid_data data
   end
 
+  it "queries the data with a struct parameter" do
+    query_request_gapi.query = "#{query} WHERE meta = ?"
+    query_request_gapi.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRUCT",
+          struct_types: [
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "name",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "STRING")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "age",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "active",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOLEAN")),
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "score",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "FLOAT64"))
+          ]
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          struct_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 42),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: false),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 98.7)
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    data = bigquery.query "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
+    mock.verify
+
+    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    assert_valid_data data
+  end
+
   def assert_valid_data data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash

@@ -512,7 +512,23 @@ module Google
               )
             )
           elsif Hash === value
-            fail "Not yet implemented"
+            struct_pairs = value.map do |name, param|
+              struct_param = to_query_param param
+              [API::QueryParameterType::StructType.new(
+                name: String(name),
+                type: struct_param.parameter_type
+              ), struct_param.parameter_value]
+            end
+
+            return API::QueryParameter.new(
+              parameter_type: API::QueryParameterType.new(
+                type: "STRUCT",
+                struct_types: struct_pairs.map(&:first)
+              ),
+              parameter_value: API::QueryParameterValue.new(
+                struct_values: struct_pairs.map(&:last)
+              )
+            )
           else
             fail "A query parameter of type #{value.class} is not supported."
           end
