@@ -100,10 +100,16 @@ module Google
 
         ##
         # Checks if the query job is using legacy sql.
-        def use_legacy_sql?
+        def legacy_sql?
           val = @gapi.configuration.query.use_legacy_sql
-          return false if val.nil?
+          return true if val.nil?
           val
+        end
+
+        ##
+        # Checks if the query job is using standard sql.
+        def standard_sql?
+          !legacy_sql?
         end
 
         ##

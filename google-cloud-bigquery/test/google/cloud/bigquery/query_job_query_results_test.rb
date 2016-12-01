@@ -201,7 +201,7 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true,
-      "useLegacySql" => true,
+      "useLegacySql" => nil,
     }
     hash
   end

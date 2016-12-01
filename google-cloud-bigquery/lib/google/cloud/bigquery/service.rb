@@ -400,7 +400,7 @@ module Google
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
                 default_dataset: default_dataset,
-                use_legacy_sql: options[:use_legacy_sql]
+                use_legacy_sql: options[:legacy_sql]
               )
             )
           )
@@ -438,7 +438,7 @@ module Google
             timeout_ms: options[:timeout],
             dry_run: options[:dryrun],
             use_query_cache: options[:cache],
-            use_legacy_sql: options[:use_legacy_sql]
+            use_legacy_sql: options[:legacy_sql]
           )
 
           if options[:params]
