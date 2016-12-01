@@ -537,31 +537,6 @@ module Google
           v
         end
 
-        def query_param_type value
-          if TrueClass === value
-            return "BOOLEAN"
-          elsif FalseClass === value
-            return "BOOLEAN"
-          elsif Integer === value
-            return "INT64"
-          elsif Float === value
-            return "FLOAT64"
-          elsif String === value
-            return "STRING"
-          elsif defined?(Date) && Date === value
-            return "DATE"
-          # ActiveSupport adds to_time to Numeric, which is awful...
-          elsif value.respond_to? :to_time
-            return "TIMESTAMP"
-          elsif Array === value
-            return "ARRAY"
-          elsif Hash === value
-            return "STRUCT"
-          else
-            fail "A query parameter of type #{value.class} is not supported."
-          end
-        end
-
         # rubocop:enable all
 
         ##
