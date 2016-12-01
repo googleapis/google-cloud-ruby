@@ -380,6 +380,8 @@ module Google
           )
         end
 
+        # rubocop:disable all
+
         ##
         # Job description for query job
         def query_table_config query, options
@@ -559,6 +561,8 @@ module Google
             fail "A query parameter of type #{value.class} is not supported."
           end
         end
+
+        # rubocop:enable all
 
         ##
         # Job description for copy job
