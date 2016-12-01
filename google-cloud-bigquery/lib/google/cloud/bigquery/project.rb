@@ -142,6 +142,13 @@ module Google
         #   false, the values of `large_results` and `flatten` are ignored;
         #   query will be run as if `large_results` is true and `flatten` is
         #   false. Optional. The default value is true.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   standard SQL dialect for this query. If set to true, the query will
+        #   use BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/)  When set to
+        #   true, the values of `large_results` and `flatten` are ignored;
+        #   query will be run as if `large_results` is true and `flatten` is
+        #   false. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -167,7 +174,7 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_proj.my_data.my_table`",
-        #                            legacy_sql: false
+        #                            standard_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -178,13 +185,14 @@ module Google
         #
         def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
                       create: nil, write: nil, large_results: nil, flatten: nil,
-                      dataset: nil, legacy_sql: nil, params: nil
+                      dataset: nil, legacy_sql: nil, standard_sql: nil,
+                      params: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
                       dataset: dataset, legacy_sql: legacy_sql,
-                      params: params }
+                      standard_sql: standard_sql, params: params }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end
@@ -230,6 +238,11 @@ module Google
         #   BigQuery's [standard
         #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
         #   default value is true.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   standard SQL dialect for this query. If set to true, the query will
+        #   use BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
+        #   default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -250,7 +263,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`",
-        #                         legacy_sql: false
+        #                         standard_sql: true
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -268,11 +281,13 @@ module Google
         #   end
         #
         def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  dataset: nil, project: nil, legacy_sql: nil, params: nil
+                  dataset: nil, project: nil, legacy_sql: nil,
+                  standard_sql: nil, params: nil
           ensure_service!
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
                       dataset: dataset, project: project,
-                      legacy_sql: legacy_sql, params: params }
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
           gapi = service.query query, options
           QueryData.from_gapi gapi, service
         end
