@@ -96,12 +96,9 @@ module Google
         def list_entries resources: nil, filter: nil, order: nil, token: nil,
                          max: nil, projects: nil
 
-          project_ids = Array(projects)
-          resource_names = Array(resources)
-          if project_ids.empty? && resource_names.empty?
-            resource_names = ["projects/#{@project}"]
-          end
-          project_ids = nil if project_ids.empty?
+          project_ids = Array(projects).map { |p| "projects/#{p}" }
+          resource_names = Array(resources) + project_ids
+          resource_names = ["projects/#{@project}"] if resource_names.empty?
           call_opts = default_options
           if token
             call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
@@ -111,7 +108,7 @@ module Google
           execute do
             paged_enum = logging.list_log_entries \
               resource_names, filter: filter, order_by: order, page_size: max,
-                              options: call_opts, project_ids: project_ids
+                              options: call_opts
             paged_enum.page.response
           end
         end
