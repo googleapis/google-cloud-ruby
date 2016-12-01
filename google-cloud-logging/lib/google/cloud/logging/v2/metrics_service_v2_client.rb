@@ -36,7 +36,7 @@ module Google
         #
         # @!attribute [r] metrics_service_v2_stub
         #   @return [Google::Logging::V2::MetricsServiceV2::Stub]
-        class MetricsServiceV2Api
+        class MetricsServiceV2Client
           attr_reader :metrics_service_v2_stub
 
           # The default address of the service.
@@ -230,20 +230,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #   require "google/cloud/logging/v2/metrics_service_v2_client"
           #
-          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #   MetricsServiceV2Client = Google::Cloud::Logging::V2::MetricsServiceV2Client
           #
-          #   metrics_service_v2_api = MetricsServiceV2Api.new
-          #   formatted_parent = MetricsServiceV2Api.parent_path("[PROJECT]")
+          #   metrics_service_v2_client = MetricsServiceV2Client.new
+          #   formatted_parent = MetricsServiceV2Client.parent_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   metrics_service_v2_api.list_log_metrics(formatted_parent).each do |element|
+          #   metrics_service_v2_client.list_log_metrics(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metrics_service_v2_api.list_log_metrics(formatted_parent).each_page do |page|
+          #   metrics_service_v2_client.list_log_metrics(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -273,13 +273,13 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #   require "google/cloud/logging/v2/metrics_service_v2_client"
           #
-          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #   MetricsServiceV2Client = Google::Cloud::Logging::V2::MetricsServiceV2Client
           #
-          #   metrics_service_v2_api = MetricsServiceV2Api.new
-          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
-          #   response = metrics_service_v2_api.get_log_metric(formatted_metric_name)
+          #   metrics_service_v2_client = MetricsServiceV2Client.new
+          #   formatted_metric_name = MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #   response = metrics_service_v2_client.get_log_metric(formatted_metric_name)
 
           def get_log_metric \
               metric_name,
@@ -307,15 +307,15 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #   require "google/cloud/logging/v2/metrics_service_v2_client"
           #
           #   LogMetric = Google::Logging::V2::LogMetric
-          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #   MetricsServiceV2Client = Google::Cloud::Logging::V2::MetricsServiceV2Client
           #
-          #   metrics_service_v2_api = MetricsServiceV2Api.new
-          #   formatted_parent = MetricsServiceV2Api.parent_path("[PROJECT]")
+          #   metrics_service_v2_client = MetricsServiceV2Client.new
+          #   formatted_parent = MetricsServiceV2Client.parent_path("[PROJECT]")
           #   metric = LogMetric.new
-          #   response = metrics_service_v2_api.create_log_metric(formatted_parent, metric)
+          #   response = metrics_service_v2_client.create_log_metric(formatted_parent, metric)
 
           def create_log_metric \
               parent,
@@ -346,15 +346,15 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #   require "google/cloud/logging/v2/metrics_service_v2_client"
           #
           #   LogMetric = Google::Logging::V2::LogMetric
-          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #   MetricsServiceV2Client = Google::Cloud::Logging::V2::MetricsServiceV2Client
           #
-          #   metrics_service_v2_api = MetricsServiceV2Api.new
-          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
+          #   metrics_service_v2_client = MetricsServiceV2Client.new
+          #   formatted_metric_name = MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #   metric = LogMetric.new
-          #   response = metrics_service_v2_api.update_log_metric(formatted_metric_name, metric)
+          #   response = metrics_service_v2_client.update_log_metric(formatted_metric_name, metric)
 
           def update_log_metric \
               metric_name,
@@ -378,13 +378,13 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/metrics_service_v2_api"
+          #   require "google/cloud/logging/v2/metrics_service_v2_client"
           #
-          #   MetricsServiceV2Api = Google::Cloud::Logging::V2::MetricsServiceV2Api
+          #   MetricsServiceV2Client = Google::Cloud::Logging::V2::MetricsServiceV2Client
           #
-          #   metrics_service_v2_api = MetricsServiceV2Api.new
-          #   formatted_metric_name = MetricsServiceV2Api.metric_path("[PROJECT]", "[METRIC]")
-          #   metrics_service_v2_api.delete_log_metric(formatted_metric_name)
+          #   metrics_service_v2_client = MetricsServiceV2Client.new
+          #   formatted_metric_name = MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #   metrics_service_v2_client.delete_log_metric(formatted_metric_name)
 
           def delete_log_metric \
               metric_name,

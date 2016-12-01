@@ -36,7 +36,7 @@ module Google
         #
         # @!attribute [r] logging_service_v2_stub
         #   @return [Google::Logging::V2::LoggingServiceV2::Stub]
-        class LoggingServiceV2Api
+        class LoggingServiceV2Client
           attr_reader :logging_service_v2_stub
 
           # The default address of the service.
@@ -227,13 +227,13 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #   require "google/cloud/logging/v2/logging_service_v2_client"
           #
-          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
           #
-          #   logging_service_v2_api = LoggingServiceV2Api.new
-          #   formatted_log_name = LoggingServiceV2Api.log_path("[PROJECT]", "[LOG]")
-          #   logging_service_v2_api.delete_log(formatted_log_name)
+          #   logging_service_v2_client = LoggingServiceV2Client.new
+          #   formatted_log_name = LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
+          #   logging_service_v2_client.delete_log(formatted_log_name)
 
           def delete_log \
               log_name,
@@ -296,13 +296,13 @@ module Google
           # @return [Google::Logging::V2::WriteLogEntriesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #   require "google/cloud/logging/v2/logging_service_v2_client"
           #
-          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
           #
-          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   logging_service_v2_client = LoggingServiceV2Client.new
           #   entries = []
-          #   response = logging_service_v2_api.write_log_entries(entries)
+          #   response = logging_service_v2_client.write_log_entries(entries)
 
           def write_log_entries \
               entries,
@@ -367,20 +367,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #   require "google/cloud/logging/v2/logging_service_v2_client"
           #
-          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
           #
-          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   logging_service_v2_client = LoggingServiceV2Client.new
           #   resource_names = []
           #
           #   # Iterate over all results.
-          #   logging_service_v2_api.list_log_entries(resource_names).each do |element|
+          #   logging_service_v2_client.list_log_entries(resource_names).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_api.list_log_entries(resource_names).each_page do |page|
+          #   logging_service_v2_client.list_log_entries(resource_names).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -422,19 +422,19 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_api"
+          #   require "google/cloud/logging/v2/logging_service_v2_client"
           #
-          #   LoggingServiceV2Api = Google::Cloud::Logging::V2::LoggingServiceV2Api
+          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
           #
-          #   logging_service_v2_api = LoggingServiceV2Api.new
+          #   logging_service_v2_client = LoggingServiceV2Client.new
           #
           #   # Iterate over all results.
-          #   logging_service_v2_api.list_monitored_resource_descriptors.each do |element|
+          #   logging_service_v2_client.list_monitored_resource_descriptors.each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_api.list_monitored_resource_descriptors.each_page do |page|
+          #   logging_service_v2_client.list_monitored_resource_descriptors.each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

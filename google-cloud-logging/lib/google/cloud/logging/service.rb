@@ -33,7 +33,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V2::LoggingServiceV2Api::SERVICE_ADDRESS
+          @host = host || V2::LoggingServiceV2Client::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -53,7 +53,7 @@ module Google
         def logging
           return mocked_logging if mocked_logging
           @logging ||= \
-            V2::LoggingServiceV2Api.new(
+            V2::LoggingServiceV2Client.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
@@ -66,7 +66,7 @@ module Google
         def sinks
           return mocked_sinks if mocked_sinks
           @sinks ||= \
-            V2::ConfigServiceV2Api.new(
+            V2::ConfigServiceV2Client.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
@@ -79,7 +79,7 @@ module Google
         def metrics
           return mocked_metrics if mocked_metrics
           @metrics ||= \
-            V2::MetricsServiceV2Api.new(
+            V2::MetricsServiceV2Client.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
