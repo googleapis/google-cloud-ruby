@@ -170,7 +170,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :named_params, :mock_bigquery
           type: "DATE"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: today
+          value: today.to_s
         )
       )
     ]
@@ -197,7 +197,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :named_params, :mock_bigquery
           type: "TIMESTAMP"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: now
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N%:z")
         )
       )
     ]
@@ -267,7 +267,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :named_params, :mock_bigquery
           type: "DATE"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: today
+          value: today.to_s
         )
       ),
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -276,7 +276,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :named_params, :mock_bigquery
           type: "TIMESTAMP"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: now
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N%:z")
         )
       )
     ]

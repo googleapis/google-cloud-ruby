@@ -493,14 +493,14 @@ module Google
           elsif defined?(Date) && Date === value
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "DATE"),
-              parameter_value: API::QueryParameterValue.new(value: value)
+              parameter_value: API::QueryParameterValue.new(value: value.to_s)
             )
-          # ActiveSupport adds to_time to Numeric, which is awful...
+          # ActiveSupport adds to_time to String, which is awful...
           elsif value.respond_to? :to_time
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
               parameter_value: API::QueryParameterValue.new(
-                value: value.to_time)
+                value: value.to_time.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
             )
           elsif Array === value
             array_params = value.map { |param| to_query_param param }
