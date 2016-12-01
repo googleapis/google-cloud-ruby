@@ -558,6 +558,13 @@ module Google
         # @param [Boolean] flatten Flattens all nested and repeated fields in
         #   the query results. The default value is `true`. `large_results`
         #   parameter must be `true` if this is set to `false`.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
+        #   SQL dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/)  When set to
+        #   false, the values of `large_results` and `flatten` are ignored;
+        #   query will be run as if `large_results` is true and `flatten` is
+        #   false. Optional. The default value is true.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -567,6 +574,21 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM my_table"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM my_table",
+        #                            legacy_sql: false
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -622,6 +644,11 @@ module Google
         #   whenever tables in the query are modified. The default value is
         #   true. For more information, see [query
         #   caching](https://developers.google.com/bigquery/querying-data).
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
+        #   SQL dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
+        #   default value is true.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -631,6 +658,19 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM my_table"
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM my_table",
+        #                         legacy_sql: false
+        #
         #   data.each do |row|
         #     puts row["name"]
         #   end

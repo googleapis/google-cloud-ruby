@@ -135,6 +135,13 @@ module Google
         #   parameter must be `true` if this is set to `false`.
         # @param [Dataset, String] dataset Specifies the default dataset to use
         #   for unqualified table names in the query.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
+        #   SQL dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/)  When set to
+        #   false, the values of `large_results` and `flatten` are ignored;
+        #   query will be run as if `large_results` is true and `flatten` is
+        #   false. Optional. The default value is true.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -145,6 +152,22 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "[my_proj:my_data.my_table]"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM " \
+        #                            "`my_proj.my_data.my_table`",
+        #                            legacy_sql: false
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -202,6 +225,11 @@ module Google
         # @param [String] project Specifies the default projectId to assume for
         #   any unqualified table names in the query. Only used if `dataset`
         #   option is set.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
+        #   SQL dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
+        #   default value is true.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -211,6 +239,19 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`",
+        #                         legacy_sql: false
+        #
         #   data.each do |row|
         #     puts row["name"]
         #   end
@@ -221,6 +262,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+        #
         #   data.all do |row|
         #     puts row["name"]
         #   end
