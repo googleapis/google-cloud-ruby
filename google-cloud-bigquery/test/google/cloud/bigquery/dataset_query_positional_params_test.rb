@@ -111,7 +111,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
     query_request_gapi.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
-          type: "BOOLEAN"
+          type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
           value: true
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
     query_request_gapi.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
-          type: "BOOLEAN"
+          type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
           value: false
@@ -243,7 +243,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
       ),
       Google::Apis::BigqueryV2::QueryParameter.new(
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
-          type: "BOOLEAN"
+          type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
           value: true
@@ -332,7 +332,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
               type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64")),
             Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
               name: "active",
-              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOLEAN")),
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOL")),
             Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
               name: "score",
               type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "FLOAT64"))

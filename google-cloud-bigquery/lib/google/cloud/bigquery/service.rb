@@ -467,12 +467,12 @@ module Google
         def to_query_param value
           if TrueClass === value
             return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "BOOLEAN"),
+              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
               parameter_value: API::QueryParameterValue.new(value: true)
             )
           elsif FalseClass === value
             return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "BOOLEAN"),
+              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
               parameter_value: API::QueryParameterValue.new(value: false)
             )
           elsif Integer === value
