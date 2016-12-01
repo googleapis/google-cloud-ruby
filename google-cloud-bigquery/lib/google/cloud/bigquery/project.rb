@@ -99,6 +99,11 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
+        # @param [Array, Hash] params Query parameters for Standard SQL queries.
+        #   If values are provided in an array the query will use positional
+        #   query parameters (`?`). If values are provided in a hash the query
+        #   will use named query parameters (`@myparam`). When values are
+        #   provided the query will be set to use standard SQL.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -183,10 +188,44 @@ module Google
         #     end
         #   end
         #
-        def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, large_results: nil, flatten: nil,
-                      dataset: nil, legacy_sql: nil, standard_sql: nil,
-                      params: nil
+        # @example Query using positional query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM " \
+        #                            "`my_proj.my_data.my_table`" \
+        #                            " WHERE id = ?",
+        #                            params: [1]
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        # @example Query using named query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM " \
+        #                            "`my_proj.my_data.my_table`" \
+        #                            " WHERE id = @id",
+        #                            params: { id: 1 }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
+                      table: nil, create: nil, write: nil, large_results: nil,
+                      flatten: nil, dataset: nil, legacy_sql: nil,
+                      standard_sql: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -205,6 +244,11 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
+        # @param [Array, Hash] params Query parameters for Standard SQL queries.
+        #   If values are provided in an array the query will use positional
+        #   query parameters (`?`). If values are provided in a hash the query
+        #   will use named query parameters (`@myparam`). When values are
+        #   provided the query will be set to use standard SQL.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
@@ -280,9 +324,37 @@ module Google
         #     puts row["name"]
         #   end
         #
-        def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  dataset: nil, project: nil, legacy_sql: nil,
-                  standard_sql: nil, params: nil
+        # @example Query using positional query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE id = ?",
+        #                         params: [1]
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using named query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE id = @id",
+        #                         params: { id: 1 }
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
+                  cache: true, dataset: nil, project: nil, legacy_sql: nil,
+                  standard_sql: nil
           ensure_service!
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
                       dataset: dataset, project: project,
