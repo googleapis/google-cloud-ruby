@@ -1,0 +1,28 @@
+{
+  "guides": [
+    {
+      "title": "FAQ",
+      "id": "faq",
+      "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/faq/readme.md",
+      "contents": "https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/faq/readme.md"
+    },
+    {
+      "title": "Troubleshooting",
+      "id": "troubleshooting",
+      "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/troubleshooting/readme.md",
+      "contents": "https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/troubleshooting/readme.md"
+    },
+    {
+      "title": "Contributing",
+      "id": "contributing",
+      "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/contributing/readme.md",
+      "contents": "https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/contributing/readme.md"
+    }
+  ],
+  "services": [
+    {
+      "title": "Stackdriver Core",
+      "type": "stackdriver/core"
+    }
+  ]
+}
