@@ -87,6 +87,34 @@ describe Google::Cloud::Storage::File, :storage do
 
     uploaded.delete
   end
+focus
+  it "should upload and delete a file with strange filename" do
+    original = File.new files[:logo][:path]
+# puts "#{[101, 769].pack("U*")}.png".bytes.inspect
+    uploaded = bucket.create_file original, "#{[101, 769].pack("U*")}.png",
+      cache_control: "public, max-age=3600",
+      content_disposition: "attachment; filename=filename.ext",
+      content_language: "en",
+      content_type: "text/plain",
+      metadata: { player: "Alice", score: 101 }
+
+    uploaded.wont_be :nil?
+
+puts uploaded.api_url
+# puts "#{uploaded.name} - #{uploaded.name.bytes.inspect}"
+# puts URI.decode(uploaded.api_url.split("/").last)
+# puts URI.decode(uploaded.api_url.split("/").last).bytes.inspect
+
+# puts "#{uploaded.name} - #{uploaded.name.bytes.inspect}"
+# puts "#{"#{[101, 769].pack("U*")}.png"} - #{"#{[101, 769].pack("U*")}.png".bytes.inspect}"
+# puts ""
+# bucket.files.each { |f| puts puts "#{f.name} - #{f.name.bytes.inspect}" }
+# puts ""
+# uploaded.gapi.name = "#{[101, 769].pack("U*")}.png"
+# # uploaded.gapi.name = "é.png"
+# puts "#{uploaded.name} - #{uploaded.name.bytes.inspect}"
+    uploaded.delete
+  end
 
   it "should upload and download a larger file" do
     original = File.new files[:big][:path]

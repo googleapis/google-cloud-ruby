@@ -152,7 +152,7 @@ module Google
     #
     # Notice that in standard SQL, the format for a fully-qualified table name
     # uses back-ticks instead of brackets, and a dot instead of a semi-colon:
-    # ``my-dashed-project.dataset1.tableName``.
+    # <code>`my-dashed-project.dataset1.tableName`</code>.
     #
     # #### Query parameters
     #
