@@ -84,8 +84,94 @@ module Google
     #
     # ## Running queries
     #
-    # BigQuery offers both synchronous and asynchronous methods, as explained in
-    # [Querying Data](https://cloud.google.com/bigquery/querying-data).
+    # BigQuery supports two SQL dialects: [standard
+    # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+    # and the older [legacy
+    # SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql),
+    # as discussed in the guide [Migrating from legacy
+    # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql).
+    #
+    # In addition, BigQuery offers both synchronous and asynchronous methods, as
+    # explained in [Querying
+    # Data](https://cloud.google.com/bigquery/querying-data).
+    #
+    # ### Legacy SQL (formerly BigQuery SQL)
+    #
+    # Before version 2.0, BigQuery executed queries using a non-standard SQL
+    # dialect known as BigQuery SQL. This variant is still the default, and will
+    # be used unless you pass the flag `standard_sql: true` with your query.
+    # (If you get an SQL syntax error with a query that may be written in
+    # standard SQL, be sure that you are passing this option.)
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    #
+    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
+    #       "FROM [publicdata:samples.shakespeare]"
+    # data = bigquery.query sql
+    # ```
+    #
+    # Notice that in legacy SQL, a fully-qualified table name uses the following
+    # format: `[my-dashed-project:dataset1.tableName]`.
+    #
+    # ### Standard SQL
+    #
+    # Standard SQL is the preferred SQL dialect for querying data stored in
+    # BigQuery. It is compliant with the SQL 2011 standard, and has extensions
+    # that support querying nested and repeated data. It has several advantages
+    # over legacy SQL, including:
+    #
+    # * Composability using `WITH` clauses and SQL functions
+    # * Subqueries in the `SELECT` list and `WHERE` clause
+    # * Correlated subqueries
+    # * `ARRAY` and `STRUCT` data types
+    # * Inserts, updates, and deletes
+    # * `COUNT(DISTINCT <expr>)` is exact and scalable, providing the accuracy
+    #   of `EXACT_COUNT_DISTINCT` without its limitations
+    # * Automatic predicate push-down through `JOIN`s
+    # * Complex `JOIN` predicates, including arbitrary expressions
+    #
+    # For examples that demonstrate some of these features, see [Standard SQL
+    # highlights](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights).
+    #
+    # Legacy SQL is still the default. To use standard SQL instead, pass the
+    # option `standard_sql: true` with your query.
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    #
+    # sql = "SELECT word, SUM(word_count) AS word_count " \
+    #       "FROM `bigquery-public-data.samples.shakespeare`" \
+    #       "WHERE word IN ('me', 'I', 'you') GROUP BY word"
+    # data = bigquery.query sql, standard_sql: true
+    # ```
+    #
+    # Notice that in standard SQL, the format for a fully-qualified table name
+    # uses back-ticks instead of brackets, and a dot instead of a semi-colon:
+    # ``my-dashed-project.dataset1.tableName``.
+    #
+    # #### Query parameters
+    #
+    # With standard SQL, you can use positional or named query parameters. This
+    # example shows the use of named parameters:
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    #
+    # sql = "SELECT word, SUM(word_count) AS word_count " \
+    #       "FROM `bigquery-public-data.samples.shakespeare`" \
+    #       "WHERE word IN (@words) GROUP BY word"
+    # data = bigquery.query sql, params: { words: ['me', 'I', 'you'] }
+    # ```
+    #
+    # As demonstrated above, passing the `params` option will automatically set
+    # `standard_sql` to `true`.
     #
     # ### Synchronous queries
     #
@@ -99,7 +185,7 @@ module Google
     #
     # bigquery = Google::Cloud::Bigquery.new
     #
-    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
     #       "FROM publicdata:samples.shakespeare"
     # data = bigquery.query sql
     #
@@ -127,7 +213,7 @@ module Google
     #
     # bigquery = Google::Cloud::Bigquery.new
     #
-    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " +
+    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
     #       "FROM publicdata:samples.shakespeare"
     # job = bigquery.query_job sql
     #
@@ -284,9 +370,9 @@ module Google
     # source_table = dataset.table "baby_names"
     # result_table = dataset.create_table "baby_names_results"
     #
-    # sql = "SELECT name, number as count " +
-    #       "FROM baby_names " +
-    #       "WHERE name CONTAINS 'Sam' " +
+    # sql = "SELECT name, number as count " \
+    #       "FROM baby_names " \
+    #       "WHERE name CONTAINS 'Sam' " \
     #       "ORDER BY count DESC"
     # query_job = dataset.query_job sql, table: result_table
     #

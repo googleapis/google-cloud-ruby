@@ -524,11 +524,13 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
-        # @param [Array, Hash] params Query parameters for Standard SQL queries.
-        #   If values are provided in an array the query will use positional
-        #   query parameters (`?`). If values are provided in a hash the query
-        #   will use named query parameters (`@myparam`). When values are
-        #   provided the query will be set to use standard SQL.
+        # @param [Array, Hash] params Standard SQL only. Used to pass query
+        #   arguments when the `query` string contains either positional (`?`)
+        #   or named (`@myparam`) query parameters. If value passed is an array
+        #   `["foo"]`, the query must use positional query parameters. If value
+        #   passed is a hash `{ myparam: "foo" }`, the query must use named
+        #   query parameters. When set, `legacy_sql` will automatically be set
+        #   to false and `standard_sql` to true.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -563,20 +565,25 @@ module Google
         # @param [Boolean] flatten Flattens all nested and repeated fields in
         #   the query results. The default value is `true`. `large_results`
         #   parameter must be `true` if this is set to `false`.
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
-        #   SQL dialect for this query. If set to false, the query will use
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
         #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/sql-reference/)  When set to
-        #   false, the values of `large_results` and `flatten` are ignored;
-        #   query will be run as if `large_results` is true and `flatten` is
-        #   false. Optional. The default value is true.
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
-        #   standard SQL dialect for this query. If set to true, the query will
-        #   use BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/sql-reference/)  When set to
-        #   true, the values of `large_results` and `flatten` are ignored; query
-        #   will be run as if `large_results` is true and `flatten` is false.
-        #   Optional. The default value is false.
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect for this query. If set to true, the query will use standard
+        #   SQL rather than the [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. When set to true, the values of `large_results` and
+        #   `flatten` are ignored; the query will be run as if `large_results`
+        #   is true and `flatten` is false. Optional. The default value is
+        #   false.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -666,11 +673,13 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
-        # @param [Array, Hash] params Query parameters for Standard SQL queries.
-        #   If values are provided in an array the query will use positional
-        #   query parameters (`?`). If values are provided in a hash the query
-        #   will use named query parameters (`@myparam`). When values are
-        #   provided the query will be set to use standard SQL.
+        # @param [Array, Hash] params Standard SQL only. Used to pass query
+        #   arguments when the `query` string contains either positional (`?`)
+        #   or named (`@myparam`) query parameters. If value passed is an array
+        #   `["foo"]`, the query must use positional query parameters. If value
+        #   passed is a hash `{ myparam: "foo" }`, the query must use named
+        #   query parameters. When set, `legacy_sql` will automatically be set
+        #   to false and `standard_sql` to true.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
@@ -692,16 +701,25 @@ module Google
         #   whenever tables in the query are modified. The default value is
         #   true. For more information, see [query
         #   caching](https://developers.google.com/bigquery/querying-data).
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's legacy
-        #   SQL dialect for this query. If set to false, the query will use
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
         #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
-        #   default value is true.
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
-        #   standard SQL dialect for this query. If set to true, the query will
-        #   use BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/sql-reference/) Optional. The
-        #   default value is false.
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect for this query. If set to true, the query will use standard
+        #   SQL rather than the [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. When set to true, the values of `large_results` and
+        #   `flatten` are ignored; the query will be run as if `large_results`
+        #   is true and `flatten` is false. Optional. The default value is
+        #   false.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
