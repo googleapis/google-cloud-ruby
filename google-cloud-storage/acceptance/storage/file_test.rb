@@ -95,6 +95,17 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should upload and delete a file with strange filename" do
+    original = File.new files[:logo][:path]
+    uploaded = bucket.create_file original, "#{[101, 769].pack("U*")}.png",
+      cache_control: "public, max-age=3600",
+      content_disposition: "attachment; filename=filename.ext",
+      content_language: "en",
+      content_type: "text/plain",
+      metadata: { player: "Alice", score: 101 }
+    uploaded.delete
+  end
+
   it "should upload and download a larger file" do
     original = File.new files[:big][:path]
     uploaded = bucket.create_file original, "BigLogo.png"
