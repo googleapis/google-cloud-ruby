@@ -380,12 +380,14 @@ module Google
           )
         end
 
+        # rubocop:disable all
+
         ##
         # Job description for query job
         def query_table_config query, options
           dest_table = table_ref_from options[:table]
           default_dataset = dataset_ref_from options[:dataset]
-          API::Job.new(
+          req = API::Job.new(
             configuration: API::JobConfiguration.new(
               query: API::JobConfigurationQuery.new(
                 query: query,
@@ -398,24 +400,150 @@ module Google
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
                 default_dataset: default_dataset,
-                use_legacy_sql: options[:use_legacy_sql]
+                use_legacy_sql: resolve_legacy_sql(options[:legacy_sql],
+                                                   options[:standard_sql])
               )
             )
           )
+
+          if options[:params]
+            if Array === options[:params]
+              req.configuration.query.use_legacy_sql = false
+              req.configuration.query.parameter_mode = "POSITIONAL"
+              req.configuration.query.query_parameters = options[:params].map do |param|
+                to_query_param param
+              end
+            elsif Hash === options[:params]
+              req.configuration.query.use_legacy_sql = false
+              req.configuration.query.parameter_mode = "NAMED"
+              req.configuration.query.query_parameters = options[:params].map do |name, param|
+                to_query_param(param).tap do |named_param|
+                  named_param.name = String name
+                end
+              end
+            else
+              fail "Query parameters must be an Array or a Hash."
+            end
+          end
+
+          req
         end
 
         def query_config query, options = {}
           dataset_config = dataset_ref_from options[:dataset], options[:project]
 
-          API::QueryRequest.new(
+          req = API::QueryRequest.new(
             query: query,
             max_results: options[:max],
             default_dataset: dataset_config,
             timeout_ms: options[:timeout],
             dry_run: options[:dryrun],
             use_query_cache: options[:cache],
-            use_legacy_sql: options[:use_legacy_sql]
+            use_legacy_sql: resolve_legacy_sql(options[:legacy_sql],
+                                               options[:standard_sql])
           )
+
+          if options[:params]
+            if Array === options[:params]
+              req.use_legacy_sql = false
+              req.parameter_mode = "POSITIONAL"
+              req.query_parameters = options[:params].map do |param|
+                to_query_param param
+              end
+            elsif Hash === options[:params]
+              req.use_legacy_sql = false
+              req.parameter_mode = "NAMED"
+              req.query_parameters = options[:params].map do |name, param|
+                to_query_param(param).tap do |named_param|
+                  named_param.name = String name
+                end
+              end
+            else
+              fail "Query parameters must be an Array or a Hash."
+            end
+          end
+
+          req
+        end
+
+        def to_query_param value
+          if TrueClass === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
+              parameter_value: API::QueryParameterValue.new(value: true)
+            )
+          elsif FalseClass === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
+              parameter_value: API::QueryParameterValue.new(value: false)
+            )
+          elsif Integer === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "INT64"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif Float === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "FLOAT64"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif String === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "STRING"),
+              parameter_value: API::QueryParameterValue.new(value: value)
+            )
+          elsif defined?(Date) && Date === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "DATE"),
+              parameter_value: API::QueryParameterValue.new(value: value.to_s)
+            )
+          # ActiveSupport adds to_time to String, which is awful...
+          elsif value.respond_to? :to_time
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
+              parameter_value: API::QueryParameterValue.new(
+                value: value.to_time.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
+            )
+          elsif Array === value
+            array_params = value.map { |param| to_query_param param }
+            return API::QueryParameter.new(
+              parameter_type: API::QueryParameterType.new(
+                type: "ARRAY",
+                array_type: array_params.first.parameter_type
+              ),
+              parameter_value: API::QueryParameterValue.new(
+                array_values: array_params.map(&:parameter_value)
+              )
+            )
+          elsif Hash === value
+            struct_pairs = value.map do |name, param|
+              struct_param = to_query_param param
+              [API::QueryParameterType::StructType.new(
+                name: String(name),
+                type: struct_param.parameter_type
+              ), struct_param.parameter_value]
+            end
+
+            return API::QueryParameter.new(
+              parameter_type: API::QueryParameterType.new(
+                type: "STRUCT",
+                struct_types: struct_pairs.map(&:first)
+              ),
+              parameter_value: API::QueryParameterValue.new(
+                struct_values: struct_pairs.map(&:last)
+              )
+            )
+          else
+            fail "A query parameter of type #{value.class} is not supported."
+          end
+          v
+        end
+
+        # rubocop:enable all
+
+        def resolve_legacy_sql legacy_sql, standard_sql
+          return legacy_sql unless legacy_sql.nil?
+          return !standard_sql unless standard_sql.nil?
         end
 
         ##

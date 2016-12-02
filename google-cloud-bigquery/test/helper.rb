@@ -329,7 +329,7 @@ class MockBigquery < Minitest::Spec
           "allowLargeResults" => nil,
           "useQueryCache" => true,
           "flattenResults" => nil,
-          "useLegacySql" => true
+          "useLegacySql" => nil
         }
       }
     }.to_json
@@ -345,7 +345,7 @@ class MockBigquery < Minitest::Spec
       query: "SELECT name, age, score, active FROM [some_project:some_dataset.users]",
       timeout_ms: 10000,
       use_query_cache: true,
-      use_legacy_sql: true,
+      use_legacy_sql: nil,
     )
   end
 

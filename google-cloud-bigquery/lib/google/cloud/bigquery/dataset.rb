@@ -524,6 +524,13 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
+        # @param [Array, Hash] params Standard SQL only. Used to pass query
+        #   arguments when the `query` string contains either positional (`?`)
+        #   or named (`@myparam`) query parameters. If value passed is an array
+        #   `["foo"]`, the query must use positional query parameters. If value
+        #   passed is a hash `{ myparam: "foo" }`, the query must use named
+        #   query parameters. When set, `legacy_sql` will automatically be set
+        #   to false and `standard_sql` to true.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -558,6 +565,25 @@ module Google
         # @param [Boolean] flatten Flattens all nested and repeated fields in
         #   the query results. The default value is `true`. `large_results`
         #   parameter must be `true` if this is set to `false`.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is true.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect for this query. If set to true, the query will use standard
+        #   SQL rather than the [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. When set to true, the values of `large_results` and
+        #   `flatten` are ignored; the query will be run as if `large_results`
+        #   is true and `flatten` is false. Optional. The default value is
+        #   false.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -575,15 +601,61 @@ module Google
         #     end
         #   end
         #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM my_table",
+        #                            standard_sql: true
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        # @example Query using positional query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM my_table WHERE id = ?",
+        #                            params: [1]
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
+        # @example Query using named query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM my_table WHERE id = @id",
+        #                            params: { id: 1 }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.query_results.each do |row|
+        #       puts row["name"]
+        #     end
+        #   end
+        #
         # @!group Data
         #
-        def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, large_results: nil, flatten: nil,
-                      use_legacy_sql: true
+        def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
+                      table: nil, create: nil, write: nil, large_results: nil,
+                      flatten: nil, legacy_sql: nil, standard_sql: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      use_legacy_sql: use_legacy_sql }
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
           options[:dataset] ||= self
           ensure_service!
           gapi = service.query_job query, options
@@ -601,6 +673,13 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
+        # @param [Array, Hash] params Standard SQL only. Used to pass query
+        #   arguments when the `query` string contains either positional (`?`)
+        #   or named (`@myparam`) query parameters. If value passed is an array
+        #   `["foo"]`, the query must use positional query parameters. If value
+        #   passed is a hash `{ myparam: "foo" }`, the query must use named
+        #   query parameters. When set, `legacy_sql` will automatically be set
+        #   to false and `standard_sql` to true.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
@@ -622,6 +701,25 @@ module Google
         #   whenever tables in the query are modified. The default value is
         #   true. For more information, see [query
         #   caching](https://developers.google.com/bigquery/querying-data).
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is true.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect for this query. If set to true, the query will use standard
+        #   SQL rather than the [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. When set to true, the values of `large_results` and
+        #   `flatten` are ignored; the query will be run as if `large_results`
+        #   is true and `flatten` is false. Optional. The default value is
+        #   false.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -631,16 +729,54 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM my_table"
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using standard SQL:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM my_table",
+        #                         standard_sql: true
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using positional query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM my_table WHERE id = ?",
+        #                         params: [1]
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Query using named query parameters:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM my_table WHERE id = @id",
+        #                         params: { id: 1 }
+        #
         #   data.each do |row|
         #     puts row["name"]
         #   end
         #
         # @!group Data
         #
-        def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  use_legacy_sql: true
+        def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
+                  cache: true, legacy_sql: nil, standard_sql: nil
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
-                      use_legacy_sql: use_legacy_sql }
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
           options[:dataset] ||= dataset_id
           options[:project] ||= project_id
           ensure_service!
