@@ -13,10 +13,17 @@
 # limitations under the License.
 
 
+require "stackdriver/core"
+
 module Google
   module Cloud
     module Logging
       class Middleware
+        ##
+        # A default value for the log_name_map argument. Directs health check
+        # logs to a separate log name so they don't spam the main log.
+        DEFAULT_LOG_NAME_MAP = { "/_ah/health" => "ruby_health_check_log" }
+
         ##
         # The Google::Cloud::Logging::Logger instance
         attr_reader :logger
@@ -29,13 +36,18 @@ module Google
         #   this middleware. The middleware will be interacting with the logger
         #   to track Stackdriver request trace ID. It also properly sets
         #   env["rack.logger"] to this assigned logger for accessing.
+        # @param [Hash] log_name_map A map from URI path to log name override.
+        #   The path may be a string or regex. If a request path matches an
+        #   entry in this map, the log name is set accordingly, otherwise the
+        #   logger's default log_name is used.
         #
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil
+        def initialize app, logger: nil, log_name_map: DEFAULT_LOG_NAME_MAP
           @app = app
           @logger = logger
+          @log_name_map = log_name_map
         end
 
         ##
@@ -51,25 +63,41 @@ module Google
         #
         def call env
           env["rack.logger"] = logger
-          trace_id = extract_trace_id(env)
-          logger.add_trace_id trace_id
-
+          request_info = get_request_info env
+          logger.add_request_info request_info
           begin
             @app.call env
           ensure
-            logger.delete_trace_id
+            logger.delete_request_info
           end
         end
 
         ##
-        # Extract the trace_id from HTTP request header
-        # HTTP_X_CLOUD_TRACE_CONTEXT.
+        # Extract data about this request as a RequestInfo.
         #
-        # @return [String] The trace_id or nil if trace_id is empty.
-        def extract_trace_id env
-          trace_context = env["HTTP_X_CLOUD_TRACE_CONTEXT"].to_s
-          return nil if trace_context.empty?
-          trace_context.sub(%r{/.*}, "")
+        # @param [Hash] env The Rack environment.
+        # @return [RequestInfo] The info.
+        def get_request_info env
+          trace_context = Stackdriver::Core::TraceContext.parse_rack_env env
+          trace_id = trace_context.trace_id
+          log_name = get_log_name env
+          Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
+        end
+
+        ##
+        # Determine the log name override for this request, if any.
+        #
+        # @param [Hash] env The Rack environment.
+        # @return [String, nil] The log name override or nil if there is
+        #     no override.
+        def get_log_name env
+          return nil unless @log_name_map
+          path = "#{env['SCRIPT_NAME']}#{env['PATH_INFO']}"
+          path = "/#{path}" unless path.start_with? "/"
+          @log_name_map.each do |k, v|
+            return v if k === path
+          end
+          nil
         end
 
         ##
