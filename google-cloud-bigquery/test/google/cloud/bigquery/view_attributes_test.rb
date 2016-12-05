@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::View, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.created_at.must_be_close_to Time.now, 1
+    view.created_at.must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::View, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.expires_at.must_be_close_to Time.now, 1
+    view.expires_at.must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::View, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.modified_at.must_be_close_to Time.now, 1
+    view.modified_at.must_be_close_to ::Time.now, 1
 
     mock.verify
 

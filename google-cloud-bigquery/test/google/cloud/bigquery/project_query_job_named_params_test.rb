@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
   end
 
   it "queries the data with a timestamp parameter" do
-    now = Time.now
+    now = ::Time.now
 
     query_job_gapi.configuration.query.query = "#{query} WHERE update_timestamp < @when"
     query_job_gapi.configuration.query.query_parameters = [
@@ -230,9 +230,35 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
+  it "queries the data with a time parameter" do
+    timeofday = bigquery.time 16, 0, 0
+
+    query_job_gapi.configuration.query.query = "#{query} WHERE create_time = @time"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "time",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "TIME"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: timeofday.value
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = bigquery.query_job "#{query} WHERE create_time = @time", params: { time: timeofday }
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
   it "queries the data with many parameters" do
     today = Date.today
-    now = Time.now
+    now = ::Time.now
 
     query_job_gapi.configuration.query.query = "#{query} WHERE name = @name" +
                                                        " AND age > @age" +

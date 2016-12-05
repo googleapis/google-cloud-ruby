@@ -504,11 +504,16 @@ module Google
               parameter_type:  API::QueryParameterType.new(type: "DATE"),
               parameter_value: API::QueryParameterValue.new(value: value.to_s)
             )
-          elsif Time === value
+          elsif ::Time === value
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
               parameter_value: API::QueryParameterValue.new(
                 value: value.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
+            )
+          elsif Bigquery::Time === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "TIME"),
+              parameter_value: API::QueryParameterValue.new(value: value.value)
             )
           elsif Array === value
             array_params = value.map { |param| to_query_param param }

@@ -21,6 +21,7 @@ require "google/cloud/bigquery/dataset"
 require "google/cloud/bigquery/job"
 require "google/cloud/bigquery/query_data"
 require "google/cloud/bigquery/project/list"
+require "google/cloud/bigquery/time"
 
 module Google
   module Cloud
@@ -649,6 +650,51 @@ module Google
           options = { token: token, max: max }
           gapi = service.list_projects options
           Project::List.from_gapi gapi, service, max
+        end
+
+        ##
+        # Creates a Bigquery::Time object to represent a time, independent of a
+        # specific date.
+        #
+        # @param [Integer] hour Hour, valid values from 0 to 23.
+        # @param [Integer] minute Minute, valid values from 0 to 59.
+        # @param [Integer, Float] second Second, valid values from 0 to 59. Can
+        #   contain microsecond precision.
+        #
+        # @return [Bigquery::Time]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   fourpm = bigquery.time 16, 0, 0
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE time_of_date = @time",
+        #                         params: { time: fourpm }
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Create Time with fractional seconds:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   precise_time = bigquery.time 16, 35, 15.376541
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE time_of_date >= @time",
+        #                         params: { time: precise_time }
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        def time hour, minute, second
+          Bigquery::Time.new "#{hour}:#{minute}:#{second}"
         end
 
         ##

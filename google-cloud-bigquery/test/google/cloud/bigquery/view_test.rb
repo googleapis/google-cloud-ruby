@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::View, :mock_bigquery do
   end
 
   it "knows its creation and modification and expiration times" do
-    now = Time.now
+    now = ::Time.now
     view_hash["creationTime"] = time_millis
     view_hash["lastModifiedTime"] = time_millis
     view_hash["expirationTime"] = time_millis

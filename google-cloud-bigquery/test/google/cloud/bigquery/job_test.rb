@@ -109,7 +109,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.started_at.must_be :nil?
     job.ended_at.must_be :nil?
 
-    nowish = Time.now
+    nowish = ::Time.now
     timestamp = time_millis
 
     job.gapi.statistics.creation_time = timestamp
