@@ -244,6 +244,56 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
+  it "queries the data with a File parameter" do
+    file = File.open "acceptance/data/logo.jpg", "rb"
+
+    query_job_gapi.configuration.query.query = "#{query} WHERE avatar = ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BYTES"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: File.read("acceptance/data/logo.jpg", mode: "rb")
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE avatar = ?", params: [file]
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with a StringIO parameter" do
+    file = StringIO.new File.read("acceptance/data/logo.jpg", mode: "rb")
+
+    query_job_gapi.configuration.query.query = "#{query} WHERE avatar = ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BYTES"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: File.read("acceptance/data/logo.jpg", mode: "rb")
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE avatar = ?", params: [file]
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
   it "queries the data with many parameters" do
     today = Date.today
     now = ::Time.now

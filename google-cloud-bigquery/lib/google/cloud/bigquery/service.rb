@@ -515,6 +515,13 @@ module Google
               parameter_type:  API::QueryParameterType.new(type: "TIME"),
               parameter_value: API::QueryParameterValue.new(value: value.value)
             )
+          elsif value.respond_to?(:read) && value.respond_to?(:rewind)
+            value.rewind
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "BYTES"),
+              parameter_value: API::QueryParameterValue.new(
+                value: value.read.force_encoding("ASCII-8BIT"))
+            )
           elsif Array === value
             array_params = value.map { |param| to_query_param param }
             return API::QueryParameter.new(

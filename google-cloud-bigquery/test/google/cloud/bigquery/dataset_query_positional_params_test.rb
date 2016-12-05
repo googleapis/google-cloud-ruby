@@ -258,6 +258,58 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
     assert_valid_data data
   end
 
+    it "queries the data with a File parameter" do
+      file = File.open "acceptance/data/logo.jpg", "rb"
+
+      query_request_gapi.query = "#{query} WHERE avatar = ?"
+      query_request_gapi.query_parameters = [
+        Google::Apis::BigqueryV2::QueryParameter.new(
+          parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "BYTES"
+          ),
+          parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+            value: File.read("acceptance/data/logo.jpg", mode: "rb")
+          )
+        )
+      ]
+
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+      data = dataset.query "#{query} WHERE avatar = ?", params: [file]
+      mock.verify
+
+      data.class.must_equal Google::Cloud::Bigquery::QueryData
+      assert_valid_data data
+    end
+
+    it "queries the data with a StringIO parameter" do
+      file = StringIO.new File.read("acceptance/data/logo.jpg", mode: "rb")
+
+      query_request_gapi.query = "#{query} WHERE avatar = ?"
+      query_request_gapi.query_parameters = [
+        Google::Apis::BigqueryV2::QueryParameter.new(
+          parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "BYTES"
+          ),
+          parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+            value: File.read("acceptance/data/logo.jpg", mode: "rb")
+          )
+        )
+      ]
+
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+      data = dataset.query "#{query} WHERE avatar = ?", params: [file]
+      mock.verify
+
+      data.class.must_equal Google::Cloud::Bigquery::QueryData
+      assert_valid_data data
+    end
+
   it "queries the data with many parameters" do
     today = Date.today
     now = ::Time.now
