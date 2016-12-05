@@ -497,7 +497,7 @@ module Google
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "DATETIME"),
               parameter_value: API::QueryParameterValue.new(
-                value: value.strftime("%Y-%m-%d %H:%M:%S.%3N"))
+                value: value.strftime("%Y-%m-%d %H:%M:%S.%6N"))
             )
           elsif Date === value
             return API::QueryParameter.new(
@@ -508,7 +508,7 @@ module Google
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
               parameter_value: API::QueryParameterValue.new(
-                value: value.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
+                value: value.strftime("%Y-%m-%d %H:%M:%S.%6N%:z"))
             )
           elsif Bigquery::Time === value
             return API::QueryParameter.new(

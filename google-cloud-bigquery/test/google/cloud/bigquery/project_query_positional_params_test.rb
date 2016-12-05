@@ -194,7 +194,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
           type: "DATETIME"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N")
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%6N")
         )
       )
     ]
@@ -220,7 +220,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
           type: "TIMESTAMP"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N%:z")
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%6N%:z")
         )
       )
     ]
@@ -370,7 +370,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
           type: "TIMESTAMP"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N%:z")
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%6N%:z")
         )
       )
     ]
