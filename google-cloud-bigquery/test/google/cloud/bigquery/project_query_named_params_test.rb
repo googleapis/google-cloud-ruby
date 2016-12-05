@@ -166,10 +166,10 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a date parameter" do
     today = Date.today
 
-    query_request_gapi.query = "#{query} WHERE create_date = @date"
+    query_request_gapi.query = "#{query} WHERE create_date = @day"
     query_request_gapi.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
-        name: "date",
+        name: "day",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
           type: "DATE"
         ),
@@ -183,20 +183,47 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     bigquery.service.mocked_service = mock
     mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
 
-    data = bigquery.query "#{query} WHERE create_date = @date", params: { date: today }
+    data = bigquery.query "#{query} WHERE create_date = @day", params: { day: today }
     mock.verify
 
     data.class.must_equal Google::Cloud::Bigquery::QueryData
     assert_valid_data data
   end
 
-  it "queries the data with a time parameter" do
-    now = Time.now
+  it "queries the data with a datetime parameter" do
+    now = DateTime.now
 
-    query_request_gapi.query = "#{query} WHERE update_timestamp < @time"
+    query_request_gapi.query = "#{query} WHERE update_datetime < @when"
     query_request_gapi.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
-        name: "time",
+        name: "when",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "DATETIME"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: now.strftime("%Y-%m-%d %H:%M:%S.%3N")
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    data = bigquery.query "#{query} WHERE update_datetime < @when", params: { when: now }
+    mock.verify
+
+    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    assert_valid_data data
+  end
+
+  it "queries the data with a timestamp parameter" do
+    now = Time.now
+
+    query_request_gapi.query = "#{query} WHERE update_timestamp < @when"
+    query_request_gapi.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "when",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
           type: "TIMESTAMP"
         ),
@@ -210,7 +237,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     bigquery.service.mocked_service = mock
     mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
 
-    data = bigquery.query "#{query} WHERE update_timestamp < @time", params: { time: now }
+    data = bigquery.query "#{query} WHERE update_timestamp < @when", params: { when: now }
     mock.verify
 
     data.class.must_equal Google::Cloud::Bigquery::QueryData

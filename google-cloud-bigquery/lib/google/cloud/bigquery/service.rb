@@ -19,6 +19,7 @@ require "google/apis/bigquery_v2"
 require "pathname"
 require "digest/md5"
 require "mime/types"
+require "date"
 
 module Google
   module Cloud
@@ -492,17 +493,22 @@ module Google
               parameter_type:  API::QueryParameterType.new(type: "STRING"),
               parameter_value: API::QueryParameterValue.new(value: value)
             )
-          elsif defined?(Date) && Date === value
+          elsif DateTime === value
+            return API::QueryParameter.new(
+              parameter_type:  API::QueryParameterType.new(type: "DATETIME"),
+              parameter_value: API::QueryParameterValue.new(
+                value: value.strftime("%Y-%m-%d %H:%M:%S.%3N"))
+            )
+          elsif Date === value
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "DATE"),
               parameter_value: API::QueryParameterValue.new(value: value.to_s)
             )
-          # ActiveSupport adds to_time to String, which is awful...
-          elsif value.respond_to? :to_time
+          elsif Time === value
             return API::QueryParameter.new(
               parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
               parameter_value: API::QueryParameterValue.new(
-                value: value.to_time.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
+                value: value.strftime("%Y-%m-%d %H:%M:%S.%3N%:z"))
             )
           elsif Array === value
             array_params = value.map { |param| to_query_param param }
