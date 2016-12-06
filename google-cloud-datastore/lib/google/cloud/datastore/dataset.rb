@@ -242,7 +242,7 @@ module Google
         #   task["done"] = true
         #   datastore.save task
         #
-        # @example update multiple new entities in a batch:
+        # @example Update multiple new entities in a batch:
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
@@ -418,7 +418,7 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   task_list_key = datastore.key "TaskList", "default"
-        #   query.kind("Task").
+        #   query = datastore.query.kind("Task").
         #     ancestor(task_list_key)
         #
         #   tasks = datastore.run query, consistency: :eventual
@@ -656,7 +656,10 @@ module Google
         #     ["TaskList", "default"],
         #     ["Task", "sampleTask"]
         #   ])
-        #   key.path #=> [["User", "alice"], ["TaskList", "default"], [ ... ]]
+        #   key.path.count #=> 3
+        #   key.path[0] #=> ["User", "alice"]
+        #   key.path[1] #=> ["TaskList", "default"]
+        #   key.path[2] #=> ["Task", "sampleTask"]
         #
         # @example Create an incomplete key with a parent:
         #   require "google/cloud/datastore"
@@ -675,7 +678,7 @@ module Google
         #                       project: "my-todo-project",
         #                       namespace: "ns~todo-project"
         #   key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
-        #   key.project #=> "my-todo-project",
+        #   key.project #=> "my-todo-project"
         #   key.namespace #=> "ns~todo-project"
         #
         def key *path, project: nil, namespace: nil

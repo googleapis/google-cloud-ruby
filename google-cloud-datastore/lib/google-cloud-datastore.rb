@@ -101,14 +101,14 @@ module Google
     #   require "google/cloud"
     #
     #   datastore = Google::Cloud.datastore "my-todo-project",
-    #                              "/path/to/keyfile.json"
+    #                                       "/path/to/keyfile.json"
     #
     #   task = datastore.entity "Task", "sampleTask" do |t|
     #     t["type"] = "Personal"
     #     t["done"] = false
     #     t["priority"] = 4
     #     t["description"] = "Learn Cloud Datastore"
-    #   end                                                                  ``
+    #   end
     #
     #   datastore.save task
     #

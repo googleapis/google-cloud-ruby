@@ -49,8 +49,8 @@ module Google
         #   tasks.missing #=> []
         #   descriptions = tasks.map { |task| task["description"] }
         #   descriptions.size #=> 3
-        #   descriptions.deferred #=> NoMethodError
-        #   descriptions.missing #=> NoMethodError
+        #   descriptions.deferred #=> raise NoMethodError
+        #   descriptions.missing #=> raise NoMethodError
         #
         class LookupResults < DelegateClass(::Array)
           ##
@@ -152,9 +152,7 @@ module Google
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
           #   tasks = datastore.find_all task_key1, task_key2
-          #   all_keys = tasks.all.map(&:key).each do |task|
-          #     task.key
-          #   end
+          #   all_keys = tasks.all.map(&:key)
           #
           # @example Limit the number of API calls made:
           #   require "google/cloud/datastore"
