@@ -26,6 +26,9 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_api"
+
 require "google/cloud/speech/v1beta1/cloud_speech_pb"
 
 module Google
@@ -36,7 +39,7 @@ module Google
         #
         # @!attribute [r] speech_stub
         #   @return [Google::Cloud::Speech::V1beta1::Speech::Stub]
-        class SpeechApi
+        class SpeechClient
           attr_reader :speech_stub
 
           # The default address of the service.
@@ -89,6 +92,18 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/cloud/speech/v1beta1/cloud_speech_services_pb"
+
+            @operations_client = Google::Longrunning::OperationsApi.new(
+              service_path: service_path,
+              port: port,
+              channel: channel,
+              chan_creds: chan_creds,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              app_name: app_name,
+              app_version: app_version
+            )
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -147,16 +162,16 @@ module Google
           # @return [Google::Cloud::Speech::V1beta1::SyncRecognizeResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
           #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
           #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
           #   config = RecognitionConfig.new
           #   audio = RecognitionAudio.new
-          #   response = speech_api.sync_recognize(config, audio)
+          #   response = speech_client.sync_recognize(config, audio)
 
           def sync_recognize \
               config,
@@ -182,19 +197,45 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Longrunning::Operation]
+          # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
           #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
           #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
           #   config = RecognitionConfig.new
           #   audio = RecognitionAudio.new
-          #   response = speech_api.async_recognize(config, audio)
+          #
+          #   # Register a callback during the method call.
+          #   operation = speech_client.async_recognize(config, audio) do |op|
+          #     raise op.results.message if op.error?
+          #     results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
 
           def async_recognize \
               config,
@@ -204,7 +245,15 @@ module Google
               config: config,
               audio: audio
             }.delete_if { |_, v| v.nil? })
-            @async_recognize.call(req, options)
+            operation = Google::Gax::Operation.new(
+              @async_recognize.call(req, options),
+              @operations_client,
+              Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse,
+              Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata,
+              call_options: options
+            )
+            operation.on_done { |op| yield(op) } if block_given?
+            operation
           end
 
           # Perform bidirectional streaming speech-recognition: receive results while
@@ -226,15 +275,15 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #   StreamingRecognizeRequest = Google::Cloud::Speech::V1beta1::StreamingRecognizeRequest
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
           #   request = StreamingRecognizeRequest.new
           #   requests = [request]
-          #   speech_api.streaming_recognize(requests).each do |element|
+          #   speech_client.streaming_recognize(requests).each do |element|
           #     # Process element.
           #   end
 
