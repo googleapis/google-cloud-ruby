@@ -49,8 +49,8 @@ module Google
     #
     #   gcloud = Google::Cloud.new
     #   bigquery = gcloud.bigquery
-    #   dataset = bigquery.dataset "my-dataset"
-    #   table = dataset.table "my-table"
+    #   dataset = bigquery.dataset "my_dataset"
+    #   table = dataset.table "my_table"
     #   table.data.each do |row|
     #     puts row
     #   end

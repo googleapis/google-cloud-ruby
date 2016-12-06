@@ -229,14 +229,14 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   dataset.access #=> [{"role"=>"OWNER",
-        #                  #     "specialGroup"=>"projectOwners"},
-        #                  #    {"role"=>"WRITER",
-        #                  #     "specialGroup"=>"projectWriters"},
-        #                  #    {"role"=>"READER",
-        #                  #     "specialGroup"=>"projectReaders"},
-        #                  #    {"role"=>"OWNER",
-        #                  #     "userByEmail"=>"123456789-...com"}]
+        #   dataset.access # [{"role"=>"OWNER",
+        #                  #   "specialGroup"=>"projectOwners"},
+        #                  #  {"role"=>"WRITER",
+        #                  #   "specialGroup"=>"projectWriters"},
+        #                  #  {"role"=>"READER",
+        #                  #   "specialGroup"=>"projectReaders"},
+        #                  #  {"role"=>"OWNER",
+        #                  #   "userByEmail"=>"123456789-...com"}]
         #
         # @example Manage the access rules by passing a block:
         #   require "google/cloud/bigquery"
@@ -322,7 +322,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.create_table "my_table"
+        #   table = dataset.create_table "my_table",
         #                                name: "My Table",
         #                                description: "A description of table."
         #
@@ -336,7 +336,7 @@ module Google
         #     Google::Cloud::Bigquery::Schema::Field.new(
         #       "first_name", :string, mode: :required),
         #     Google::Cloud::Bigquery::Schema::Field.new(
-        #       "cities_lived", :record, mode: :repeated
+        #       "cities_lived", :record, mode: :repeated,
         #       fields: [
         #         Google::Cloud::Bigquery::Schema::Field.new(
         #           "place", :string, mode: :required),

@@ -74,6 +74,7 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   data = table.data
@@ -94,6 +95,7 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   data = table.data
@@ -129,6 +131,7 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   table.data.all do |row|
@@ -139,6 +142,7 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   words = table.data.all.map do |row|
@@ -149,6 +153,7 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
         #   table.data.all(request_limit: 10) do |row|
