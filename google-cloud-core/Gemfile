@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake"
+gem "rake", "~> 11.0"
 gem "google-api-client", "~> 0.9.11"
 gem "grpc", "~> 1.0"
 gem "google-protobuf", "~> 3.0"
