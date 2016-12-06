@@ -62,7 +62,7 @@ module Google
           #
           #   logging = Google::Cloud::Logging.new
           #
-          #   sinks = dataset.sinks
+          #   sinks = logging.sinks
           #   if sinks.next?
           #     next_sinks = sinks.next
           #   end

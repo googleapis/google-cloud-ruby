@@ -62,7 +62,7 @@ module Google
           #
           #   logging = Google::Cloud::Logging.new
           #
-          #   entries = dataset.entries
+          #   entries = logging.entries
           #   if entries.next?
           #     next_entries = entries.next
           #   end
@@ -100,7 +100,7 @@ module Google
           #   logging = Google::Cloud::Logging.new
           #   entries = logging.entries order: "timestamp desc"
           #
-          #   entries.all do |entry|
+          #   entries.all do |e|
           #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
           #   end
           #
@@ -120,7 +120,7 @@ module Google
           #   logging = Google::Cloud::Logging.new
           #   entries = logging.entries order: "timestamp desc"
           #
-          #   entries.all(request_limit: 10) do |entry|
+          #   entries.all(request_limit: 10) do |e|
           #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
           #   end
           #
