@@ -53,7 +53,7 @@ The preview examples below demonstrate how to provide the **Project ID** and **C
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
 - [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/master/google/cloud/bigquery)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
-- [Google Cloud BigQuery documentation](https://cloud.google.com/bigquery/docs)
+- [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
 #### Quick Start
 
