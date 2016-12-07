@@ -33,7 +33,6 @@ describe Google::Cloud::Storage::File, :storage do
     cipher.encrypt
     cipher.random_key
   end
-  let(:encryption_key_sha256) { Digest::SHA256.digest encryption_key }
 
   before do
     # always create the bucket
@@ -215,7 +214,7 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should upload and download a file with customer-supplied encryption key" do
     original = File.new files[:logo][:path], "rb"
-    uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
+    uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
       downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key
@@ -270,7 +269,7 @@ describe Google::Cloud::Storage::File, :storage do
   it "should copy an existing file with customer-supplied encryption key" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png", encryption_key: encryption_key
     copied = try_with_backoff "copying existing file with encryption key" do
-      uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
+      uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key
     end
     uploaded.name.must_equal "CloudLogo.png"
     copied.name.must_equal "CloudLogoCopy.png"
@@ -278,7 +277,7 @@ describe Google::Cloud::Storage::File, :storage do
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
-        downloaded1 = uploaded.download tmpfile1.path, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
+        downloaded1 = uploaded.download tmpfile1.path, encryption_key: encryption_key
         downloaded2 = copied.download tmpfile2.path, encryption_key: encryption_key
         downloaded1.size.must_equal downloaded2.size
 

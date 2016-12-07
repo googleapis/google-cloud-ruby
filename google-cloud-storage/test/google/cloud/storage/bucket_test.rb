@@ -289,25 +289,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
-  it "creates a file with customer-supplied encryption key and sha" do
-    new_file_name = random_file_path
-
-    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write "Hello world"
-      tmpfile.rewind
-
-      mock = Minitest::Mock.new
-      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", options: key_options]
-
-      bucket.service.mocked_service = mock
-
-      bucket.create_file tmpfile, new_file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
-
-      mock.verify
-    end
-  end
-
   it "raises when given a file that does not exist" do
     bad_file_path = "/this/file/does/not/exist.ext"
 
@@ -713,22 +694,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     bucket.service.mocked_service = mock
 
     file = bucket.file file_name, encryption_key: encryption_key
-
-    mock.verify
-
-    file.name.must_equal file_name
-  end
-
-  it "finds a file with customer-supplied encryption key and sha" do
-    file_name = "file.ext"
-
-    mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, options: key_options]
-
-    bucket.service.mocked_service = mock
-
-    file = bucket.file file_name, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
 
     mock.verify
 
