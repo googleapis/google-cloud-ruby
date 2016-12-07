@@ -115,28 +115,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
-  it "can download itself with customer-supplied encryption key and sha" do
-    # Stub the md5 to match.
-    def file.md5
-      "1B2M2Y8AsgTpgAmY7PhCfg=="
-    end
-
-    Tempfile.open "google-cloud" do |tmpfile|
-      # write to the file since the mocked call won't
-      tmpfile.write "yay!"
-
-      mock = Minitest::Mock.new
-      mock.expect :get_object, file_gapi,
-        [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: key_options]
-
-      bucket.service.mocked_service = mock
-
-      file.download tmpfile, encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
-
-      mock.verify
-    end
-  end
-
   describe "verified downloads" do
     it "verifies m5d by default" do
       # Stub these values
@@ -365,18 +343,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can copy itself with customer-supplied encryption key and sha" do
-    mock = Minitest::Mock.new
-    mock.expect :copy_object, file_gapi,
-      [bucket.name, file.name, bucket.name, "new-file.ext", destination_predefined_acl: nil, source_generation: nil, options: key_options]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
-
-    mock.verify
-  end
-
   it "can copy itself to a different bucket" do
     mock = Minitest::Mock.new
     mock.expect :copy_object, file_gapi,
@@ -433,18 +399,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
     file.service.mocked_service = mock
 
     file.copy "new-bucket", "new-file.ext", encryption_key: encryption_key
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket with customer-supplied encryption key and sha" do
-    mock = Minitest::Mock.new
-    mock.expect :copy_object, file_gapi,
-      [bucket.name, file.name, "new-bucket", "new-file.ext", destination_predefined_acl: nil, source_generation: nil, options: key_options]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext", encryption_key: encryption_key, encryption_key_sha256: encryption_key_sha256
 
     mock.verify
   end

@@ -44,8 +44,7 @@ module Google
   module Cloud
     module Storage
       class File
-        def download path, verify: :md5, encryption_key: nil,
-                     encryption_key_sha256: nil
+        def download path, verify: :md5, encryption_key: nil
           # no-op stub, but ensures that calls match this copied signature
         end
         def signed_url method: nil, expires: nil, content_type: nil,

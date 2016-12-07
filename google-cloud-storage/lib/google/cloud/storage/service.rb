@@ -171,7 +171,7 @@ module Google
                         cache_control: nil, content_disposition: nil,
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                        key: nil, key_sha256: nil
+                        key: nil
           file_obj = Google::Apis::StorageV1::Object.new \
             cache_control: cache_control, content_type: content_type,
             content_disposition: content_disposition, md5_hash: md5,
@@ -183,19 +183,18 @@ module Google
               bucket_name, file_obj,
               name: path, predefined_acl: acl, upload_source: source,
               content_encoding: content_encoding, content_type: content_type,
-              options: key_options(key: key, key_sha256: key_sha256)
+              options: key_options(key)
           end
         end
 
         ##
         # Retrieves an object or its metadata.
-        def get_file bucket_name, file_path, generation: nil, key: nil,
-                     key_sha256: nil
+        def get_file bucket_name, file_path, generation: nil, key: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               generation: generation,
-              options: key_options(key: key, key_sha256: key_sha256)
+              options: key_options(key)
           end
         end
 
@@ -210,20 +209,19 @@ module Google
               destination_bucket_name, destination_file_path,
               destination_predefined_acl: options[:acl],
               source_generation: options[:generation],
-              options: key_options(key: options[:key],
-                                   key_sha256: options[:key_sha256])
+              options: key_options(options[:key])
           end
         end
 
         ##
         # Download contents of a file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, key_sha256: nil
+                          key: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               download_dest: target_path, generation: generation,
-              options: key_options(key: key, key_sha256: key_sha256)
+              options: key_options(key)
           end
         end
 
@@ -285,13 +283,13 @@ module Google
 
         protected
 
-        def key_options key: nil, key_sha256: nil
+        def key_options key
           options = {}
           if key
+            key_sha256 = Digest::SHA256.digest key
             headers = {}
             headers["x-goog-encryption-algorithm"] = "AES256"
             headers["x-goog-encryption-key"] = Base64.strict_encode64 key
-            key_sha256 ||= Digest::SHA256.digest key
             headers["x-goog-encryption-key-sha256"] = \
               Base64.strict_encode64 key_sha256
             options[:header] = headers

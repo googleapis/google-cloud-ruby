@@ -307,8 +307,8 @@ module Google
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-        # was used with {Bucket#create_file}, the `encryption_key` and
-        # `encryption_key_sha256` options must be provided.
+        # was used with {Bucket#create_file}, the `encryption_key` option must
+        # be provided.
         #
         # @param [String] path The path on the local file system to write the
         #   data to. The path provided must be writable.
@@ -324,12 +324,7 @@ module Google
         #
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
-        #   to {Bucket#create_file}. Must be provided if `encryption_key_sha256`
-        #   is provided.
-        # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
-        #   customer-supplied, AES-256 encryption key used to encrypt the file,
-        #   if one was provided to {Bucket#create_file}. Must be provided if
-        #   `encryption_key` is provided.
+        #   to {Bucket#create_file}.
         #
         # @return [File] Returns a `::File` object on the local file system
         #
@@ -373,12 +368,11 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   file.download "path/to/downloaded/file.ext", verify: :none
         #
-        def download path, verify: :md5, encryption_key: nil,
-                     encryption_key_sha256: nil
+        def download path, verify: :md5, encryption_key: nil
           ensure_service!
           service.download_file \
             bucket, name, path,
-            key: encryption_key, key_sha256: encryption_key_sha256
+            key: encryption_key
           verify_file! ::File.new(path), verify
         end
 
@@ -387,8 +381,8 @@ module Google
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-        # was used with {Bucket#create_file}, the `encryption_key` and
-        # `encryption_key_sha256` options must be provided.
+        # was used with {Bucket#create_file}, the `encryption_key` option must
+        # be provided.
         #
         # @param [String] dest_bucket_or_path Either the bucket to copy the file
         #   to, or the path to copy the file to in the current bucket.
@@ -417,12 +411,7 @@ module Google
         #   copy. The default is the latest version.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
-        #   to {Bucket#create_file}. Must be provided if `encryption_key_sha256`
-        #   is provided.
-        # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
-        #   customer-supplied, AES-256 encryption key used to encrypt the file,
-        #   if one was provided to {Bucket#create_file}. Must be provided if
-        #   `encryption_key` is provided.
+        #   to {Bucket#create_file}.
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -459,11 +448,10 @@ module Google
         #             generation: 123456
         #
         def copy dest_bucket_or_path, dest_path = nil, acl: nil,
-                 generation: nil, encryption_key: nil,
-                 encryption_key_sha256: nil
+                 generation: nil, encryption_key: nil
           ensure_service!
           options = { acl: acl, generation: generation,
-                      key: encryption_key, key_sha256: encryption_key_sha256 }
+                      key: encryption_key }
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
