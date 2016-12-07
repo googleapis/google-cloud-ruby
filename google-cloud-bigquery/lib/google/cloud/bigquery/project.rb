@@ -72,11 +72,11 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new(
-        #     project: "my-todo-project",
+        #     project: "my-project-id",
         #     keyfile: "/path/to/keyfile.json"
         #   )
         #
-        #   bigquery.project #=> "my-todo-project"
+        #   bigquery.project #=> "my-project-id"
         #
         def project
           service.project
@@ -422,7 +422,8 @@ module Google
         #   should reside. Possible values include `EU` and `US`. The default
         #   value is `US`.
         # @yield [access] a block for setting rules
-        # @yieldparam [Dataset::Access] access the object accepting rules
+        # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
+        #   accepting rules
         #
         # @return [Google::Cloud::Bigquery::Dataset]
         #
@@ -442,21 +443,13 @@ module Google
         #                                     name: "My Dataset",
         #                                     description: "This is my Dataset"
         #
-        # @example Access rules can be provided with the `access` option:
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #
-        #   dataset = bigquery.create_dataset "my_dataset",
-        #     access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
-        #
         # @example Or, configure access with a block: (See {Dataset::Access})
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   dataset = bigquery.create_dataset "my_dataset" do |access|
-        #     access.add_writer_user "writers@example.com"
+        #   dataset = bigquery.create_dataset "my_dataset" do |table|
+        #     table.access.add_writer_user "writers@example.com"
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,

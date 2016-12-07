@@ -120,9 +120,9 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
+        #   view = dataset.table "my_view"
         #
-        #   data = bigquery.query "SELECT name FROM #{table.query_id}"
+        #   data = bigquery.query "SELECT name FROM #{view.query_id}"
         #
         # @!group Attributes
         #
@@ -385,9 +385,9 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
+        #   view = dataset.table "my_view"
         #
-        #   table.delete
+        #   view.delete
         #
         # @!group Lifecycle
         #
