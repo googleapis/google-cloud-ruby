@@ -23,6 +23,33 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
+  it "can upload a file with the schema" do
+    schema = Google::Cloud::Bigquery::Schema.from_gapi(nil).tap do |schema|
+      schema.string :first_name, mode: :required
+    end
+
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_format: "CSV",
+          schema: schema.to_gapi
+        ),
+        dry_run: nil))
+    table.service.mocked_service = mock
+
+    temp_csv do |file|
+      mock.expect :insert_job, load_job_gapi(table, "some/file/path.csv"),
+        [project, insert_job, upload_source: file, content_type: "text/comma-separated-values"]
+
+      job = table.load file, format: :csv, schema: schema
+      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    end
+
+    mock.verify
+  end
+
   it "can upload a csv file" do
     mock = Minitest::Mock.new
     insert_job = Google::Apis::BigqueryV2::Job.new(

@@ -53,6 +53,29 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
+  it "can specify a storage file with the schema" do
+    schema = Google::Cloud::Bigquery::Schema.from_gapi(nil).tap do |schema|
+      schema.string :first_name, mode: :required
+    end
+
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_gapi.table_reference,
+          source_uris: [load_url],
+          schema: schema.to_gapi),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(table, load_url),
+      [project, insert_job]
+    table.service.mocked_service = mock
+
+    job = table.load load_file, schema: schema
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
   it "can specify a storage file with format" do
     special_file = storage_file "data.json"
     special_url = special_file.to_gs_url
