@@ -78,32 +78,36 @@ module Google
         # based on the current environment.
         #
         # @example If both type and labels are provided, it returns resource:
-        #   rc = Middleware.build_monitored_resource "aws_ec2_instance",
-        #                                            { instance_id: "ec2-id",
-        #                                              aws_account: "aws-id" }
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource(
+        #          "aws_ec2_instance",
+        #          {
+        #            instance_id: "ec2-id",
+        #            aws_account: "aws-id"
+        #          }
+        #        )
         #   rc.type   #=> "aws_ec2_instance"
         #   rc.labels #=> { instance_id: "ec2-id", aws_account: "aws-id" }
         #
         # @example If running from GAE, returns default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "gae_app"
-        #   rc.labels #=> { module_id: [GAE module name],
-        #             #     version_id: [GAE module version] }
+        #   rc.labels # { module_id: [GAE module name],
+        #             #   version_id: [GAE module version] }
         #
         # @example If running from GKE, returns default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "container"
-        #   rc.labels #=> { cluster_name: [GKE cluster name],
-        #             #     namespace_id: [GKE namespace_id] }
+        #   rc.labels # { cluster_name: [GKE cluster name],
+        #             #   namespace_id: [GKE namespace_id] }
         #
         # @example If running from GCE, return default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "gce_instance"
-        #   rc.labels #=> { instance_id: [GCE VM instance id],
-        #             #     zone: [GCE vm group zone] }
+        #   rc.labels # { instance_id: [GCE VM instance id],
+        #             #   zone: [GCE vm group zone] }
         #
         # @example Otherwise default to generic "global" type:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "global"
         #   rc.labels #=> {}
         #
@@ -132,25 +136,25 @@ module Google
         # the correct monitoring resource types and labels.
         #
         # @example If running from GAE, returns default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "gae_app"
-        #   rc.labels #=> { module_id: [GAE module name],
-        #             #     version_id: [GAE module version] }
+        #   rc.labels # { module_id: [GAE module name],
+        #             #   version_id: [GAE module version] }
         #
         # @example If running from GKE, returns default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "container"
-        #   rc.labels #=> { cluster_name: [GKE cluster name],
-        #             #     namespace_id: [GKE namespace_id] }
+        #   rc.labels # { cluster_name: [GKE cluster name],
+        #             #   namespace_id: [GKE namespace_id] }
         #
         # @example If running from GCE, return default resource:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "gce_instance"
-        #   rc.labels #=> { instance_id: [GCE VM instance id],
-        #             #     zone: [GCE vm group zone] }
+        #   rc.labels # { instance_id: [GCE VM instance id],
+        #             #   zone: [GCE vm group zone] }
         #
         # @example Otherwise default to generic "global" type:
-        #   rc = Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
         #   rc.type   #=> "global"
         #   rc.labels #=> {}
         #
