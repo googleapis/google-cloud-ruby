@@ -94,7 +94,7 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-logging gem does not have doctest tests."
+  sh "bundle exec yard doctest"
 end
 
 namespace :integration do

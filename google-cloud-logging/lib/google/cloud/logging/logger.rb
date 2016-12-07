@@ -86,7 +86,7 @@ module Google
         #
         #   resource = logging.resource "gae_app", labels: {
         #                                 "module_id" => "1",
-        #                                 "version_id" => "20150925t173233" }
+        #                                 "version_id" => "20150925t173233"
         #                               }
         #
         #   logger = Google::Cloud::Logging::Logger.new writer,

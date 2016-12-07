@@ -616,7 +616,7 @@ module Google
         #   require "google/cloud/logging"
         #
         #   logging = Google::Cloud::Logging.new
-        #   sink = logging.sink "non-existing-sink" #=> nil
+        #   sink = logging.sink "non-existing-sink" # nil
         #
         def sink sink_name
           ensure_service!
@@ -715,7 +715,7 @@ module Google
         #   require "google/cloud/logging"
         #
         #   logging = Google::Cloud::Logging.new
-        #   metric = logging.metric "non_existing_metric" #=> nil
+        #   metric = logging.metric "non_existing_metric" # nil
         #
         def metric name
           ensure_service!

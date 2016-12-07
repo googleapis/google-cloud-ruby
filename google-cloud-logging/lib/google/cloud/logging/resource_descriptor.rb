@@ -37,7 +37,7 @@ module Google
       #   resource_descriptor = logging.resource_descriptors.first
       #   resource_descriptor.type #=> "cloudsql_database"
       #   resource_descriptor.name #=> "Cloud SQL Database"
-      #   resource_descriptor.labels.map &:key #=> ["database_id", "region"]
+      #   resource_descriptor.labels.map &:key #=> ["database_id", "zone"]
       #
       class ResourceDescriptor
         ##

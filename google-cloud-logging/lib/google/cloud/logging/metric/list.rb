@@ -63,7 +63,7 @@ module Google
           #
           #   logging = Google::Cloud::Logging.new
           #
-          #   metrics = dataset.metrics
+          #   metrics = logging.metrics
           #   if metrics.next?
           #     next_metrics = metrics.next
           #   end
