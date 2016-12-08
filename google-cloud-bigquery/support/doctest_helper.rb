@@ -269,6 +269,13 @@ YARD::Doctest.configure do |doctest|
     skip "This creates new Service objects, and we can't easily stub them out."
   end
 
+  # Google::Cloud::Bigquery::Project#time
+  # Google::Cloud::Bigquery::Project#time@Create Time with fractional seconds:
+  doctest.before "Google::Cloud::Bigquery::Project#time" do
+    mock_bigquery do |mock|
+      mock.expect :query_job, query_data_gapi, ["my-project-id", Google::Apis::BigqueryV2::QueryRequest]
+    end
+  end
 
   # Google::Cloud::Bigquery::Project#query@Query using named query parameters:
   # Google::Cloud::Bigquery::Project#query@Query using positional query parameters:
@@ -455,6 +462,14 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+    end
+  end
+
+  # Google::Cloud::Bigquery::Time
+  # Google::Cloud::Bigquery::Time@Create Time with fractional seconds:
+  doctest.before "Google::Cloud::Bigquery::Time" do
+    mock_bigquery do |mock|
+      mock.expect :query_job, query_data_gapi, ["my-project-id", Google::Apis::BigqueryV2::QueryRequest]
     end
   end
 

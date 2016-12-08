@@ -179,7 +179,7 @@ module Google
         def created_at
           ensure_full_data!
           begin
-            Time.at(Integer(@gapi.creation_time) / 1000.0)
+            ::Time.at(Integer(@gapi.creation_time) / 1000.0)
           rescue
             nil
           end
@@ -193,7 +193,7 @@ module Google
         def modified_at
           ensure_full_data!
           begin
-            Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+            ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
           rescue
             nil
           end
@@ -520,6 +520,26 @@ module Google
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
         #
+        # When using standard SQL and passing arguments using `params`, Ruby
+        # types are mapped to BigQuery types as follows:
+        #
+        # | BigQuery    | Ruby           | Notes  |
+        # |-------------|----------------|---|
+        # | `BOOL`      | `true`/`false` | |
+        # | `INT64`     | `Integer`      | |
+        # | `FLOAT64`   | `Float`        | |
+        # | `STRING`    | `STRING`       | |
+        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
+        # | `DATE`      | `Date`         | |
+        # | `TIMESTAMP` | `Time`         | |
+        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
+        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
+        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
+        #
+        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
+        # for an overview of each BigQuery data type, including allowed values.
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -668,6 +688,26 @@ module Google
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
+        #
+        # When using standard SQL and passing arguments using `params`, Ruby
+        # types are mapped to BigQuery types as follows:
+        #
+        # | BigQuery    | Ruby           | Notes  |
+        # |-------------|----------------|---|
+        # | `BOOL`      | `true`/`false` | |
+        # | `INT64`     | `Integer`      | |
+        # | `FLOAT64`   | `Float`        | |
+        # | `STRING`    | `STRING`       | |
+        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
+        # | `DATE`      | `Date`         | |
+        # | `TIMESTAMP` | `Time`         | |
+        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
+        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
+        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
+        #
+        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
+        # for an overview of each BigQuery data type, including allowed values.
         #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the

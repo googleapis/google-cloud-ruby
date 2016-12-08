@@ -21,7 +21,7 @@ module Google
     ##
     # # Google Cloud BigQuery
     #
-    # Google Cloud BigQuery enables super-fast, SQL-like queries against massive
+    # Google BigQuery enables super-fast, SQL-like queries against massive
     # datasets, using the processing power of Google's infrastructure. To learn
     # more, read [What is
     # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
@@ -152,7 +152,7 @@ module Google
     #
     # Notice that in standard SQL, the format for a fully-qualified table name
     # uses back-ticks instead of brackets, and a dot instead of a semi-colon:
-    # ``my-dashed-project.dataset1.tableName``.
+    # <code>`my-dashed-project.dataset1.tableName`</code>.
     #
     # #### Query parameters
     #
@@ -172,6 +172,30 @@ module Google
     #
     # As demonstrated above, passing the `params` option will automatically set
     # `standard_sql` to `true`.
+    #
+    # #### Data types
+    #
+    # BigQuery standard SQL supports simple data types such as integers, as well
+    # as more complex types such as `ARRAY` and `STRUCT`.
+    #
+    # The BigQuery data types are converted to and from Ruby types as follows:
+    #
+    # | BigQuery    | Ruby           | Notes  |
+    # |-------------|----------------|---|
+    # | `BOOL`      | `true`/`false` | |
+    # | `INT64`     | `Integer`      | |
+    # | `FLOAT64`   | `Float`        | |
+    # | `STRING`    | `STRING`       | |
+    # | `DATETIME`  | `DateTime`     | `DATETIME` does not support time zone. |
+    # | `DATE`      | `Date`         | |
+    # | `TIMESTAMP` | `Time`         | |
+    # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
+    # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+    # | `ARRAY`  | `Array` | Nested arrays and `nil` values are not supported. |
+    # | `STRUCT`    | `Hash`         | Hash keys may be strings or symbols. |
+    #
+    # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
+    # for an overview of each BigQuery data type, including allowed values.
     #
     # ### Synchronous queries
     #
