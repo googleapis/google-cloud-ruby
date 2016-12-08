@@ -62,19 +62,19 @@
     },
     {
       "title": "Logging::V2",
-      "type": "google/logging/v2",
+      "type": "google/cloud/logging/v2/loggingservicev2client",
       "nav": [
         {
-          "title": "ConfigServiceV2",
-          "type": "google/logging/v2/configservicev2"
+          "title": "ConfigServiceV2Client",
+          "type": "google/cloud/logging/v2/configservicev2client"
         },
         {
-          "title": "LoggingServiceV2",
-          "type": "google/logging/v2/loggingservicev2"
+          "title": "LoggingServiceV2Client",
+          "type": "google/cloud/logging/v2/loggingservicev2client"
         },
         {
-          "title": "MetricsServiceV2",
-          "type": "google/logging/v2/metricsservicev2"
+          "title": "MetricsServiceV2Client",
+          "type": "google/cloud/logging/v2/metricsservicev2client"
         },
         {
           "title": "Any",
