@@ -204,6 +204,36 @@
       ]
     },
     {
+      "title": "Logging::V2",
+      "type": "google/logging/v2",
+      "nav": [
+        {
+          "title": "ConfigServiceV2",
+          "type": "google/logging/v2/configservicev2"
+        },
+        {
+          "title": "LoggingServiceV2",
+          "type": "google/logging/v2/loggingservicev2"
+        },
+        {
+          "title": "MetricsServiceV2",
+          "type": "google/logging/v2/metricsservicev2"
+        },
+        {
+          "title": "Any",
+          "type": "google/protobuf/any"
+        },
+        {
+          "title": "Duration",
+          "type": "google/protobuf/duration"
+        },
+        {
+          "title": "Timestamp",
+          "type": "google/protobuf/timestamp"
+        }
+      ]
+    },
+    {
       "title": "Natural Language",
       "type": "google/cloud/language",
       "nav": [
