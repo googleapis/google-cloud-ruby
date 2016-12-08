@@ -289,13 +289,34 @@ namespace :jsondoc do
       gem_shortname = gem[/\Agoogle-cloud-(.+)/, 1]
       gem_shortname = gem_shortname.gsub "_", "" # "resource_manager" -> "resourcemanager"
 
+      header_2 "Copying #{gem_shortname} jsondoc from gh-pages to google-cloud package in gh-pages"
+
       unless gem == "google-cloud-core" # There is no `core` subdir, copy files from google/cloud/
-        # Copy the contents of subdir for the gem namespace.
+        # Copy the contents of google/cloud subdir for the gem namespace.
         rm_rf gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}", verbose: true
         cp_r "#{src}/google/cloud/#{gem_shortname}",
              gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}",
              verbose: true
+
+        if Dir.exists? "#{src}/google/#{gem_shortname}"
+          header_2 "Copying  #{gem_shortname} jsondoc for GAPIC"
+          # Copy the contents of google subdir for the gem namespace for GAPIC.
+          rm_rf gh_pages + "json/google-cloud/#{version}/google/#{gem_shortname}", verbose: true
+          cp_r "#{src}/google/#{gem_shortname}",
+               gh_pages + "json/google-cloud/#{version}/google/#{gem_shortname}",
+               verbose: true
+        end
+
+        if Dir.exists? "#{src}/google/protobuf"
+          header_2 "Copying  #{gem_shortname} jsondoc for Protobuf"
+          # Copy the contents of google subdir for Protobufs, without deleting,
+          # since all gems copy to same destination.
+          # NOTE: later gems' protobuf definitions of same name will overwrite earlier!
+          mkdir_p gh_pages + "json/google-cloud/#{version}/google/protobuf", verbose: true
+          cp Dir["#{src}/google/protobuf/*.json"], gh_pages + "json/google-cloud/#{version}/google/protobuf/", verbose: true
+        end
       end
+
       # Copy the contents of google/cloud/ for the gem. This also gets the core error files.
       cp Dir["#{src}/google/cloud/*.json"], gh_pages + "json/google-cloud/#{version}/google/cloud/", verbose: true
       all_types << JSON.parse(File.read("#{src}/types.json"))
@@ -318,7 +339,7 @@ namespace :jsondoc do
 
     header "Copying reference docs from gh-pages to stackdriver package in gh-pages"
 
-    unless Dir.exist? gh_pages + "json/stackdriver/#{version}/google/cloud"
+    unless Dir.exists? gh_pages + "json/stackdriver/#{version}/google/cloud"
       mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
     end
 
@@ -781,6 +802,10 @@ def header str, token = "#"
   puts "#{token * 3} #{str} #{token * 3}"
   puts token * line_length
   puts ""
+end
+
+def header_2 str, token = "#"
+  puts "\n#{token * 3} #{str} #{token * 3}\n"
 end
 
 # Returns [gem_name, gem_version]
