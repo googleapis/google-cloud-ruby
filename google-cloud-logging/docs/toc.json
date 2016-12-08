@@ -59,6 +59,36 @@
           "type": "google/cloud/logging/railtie"
         }
       ]
+    },
+    {
+      "title": "Logging::V2",
+      "type": "google/cloud/logging/v2/loggingservicev2client",
+      "nav": [
+        {
+          "title": "ConfigServiceV2Client",
+          "type": "google/cloud/logging/v2/configservicev2client"
+        },
+        {
+          "title": "LoggingServiceV2Client",
+          "type": "google/cloud/logging/v2/loggingservicev2client"
+        },
+        {
+          "title": "MetricsServiceV2Client",
+          "type": "google/cloud/logging/v2/metricsservicev2client"
+        },
+        {
+          "title": "Any",
+          "type": "google/protobuf/any"
+        },
+        {
+          "title": "Duration",
+          "type": "google/protobuf/duration"
+        },
+        {
+          "title": "Timestamp",
+          "type": "google/protobuf/timestamp"
+        }
+      ]
     }
   ]
 }
