@@ -69,11 +69,11 @@ module Google
             "https://www.googleapis.com/auth/logging.write"
           ].freeze
 
-          PARENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
           )
 
-          private_constant :PARENT_PATH_TEMPLATE
+          private_constant :PROJECT_PATH_TEMPLATE
 
           SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/sinks/{sink}"
@@ -81,11 +81,11 @@ module Google
 
           private_constant :SINK_PATH_TEMPLATE
 
-          # Returns a fully-qualified parent resource name string.
+          # Returns a fully-qualified project resource name string.
           # @param project [String]
           # @return [String]
-          def self.parent_path project
-            PARENT_PATH_TEMPLATE.render(
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
               :"project" => project
             )
           end
@@ -101,11 +101,11 @@ module Google
             )
           end
 
-          # Parses the project from a parent resource.
-          # @param parent_name [String]
+          # Parses the project from a project resource.
+          # @param project_name [String]
           # @return [String]
-          def self.match_project_from_parent_name parent_name
-            PARENT_PATH_TEMPLATE.match(parent_name)["project"]
+          def self.match_project_from_project_name project_name
+            PROJECT_PATH_TEMPLATE.match(project_name)["project"]
           end
 
           # Parses the project from a sink resource.
@@ -156,6 +156,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/logging/v2/logging_config_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -237,7 +238,7 @@ module Google
           #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
           #
           #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_parent = ConfigServiceV2Client.parent_path("[PROJECT]")
+          #   formatted_parent = ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   config_service_v2_client.list_sinks(formatted_parent).each do |element|
@@ -321,7 +322,7 @@ module Google
           #   LogSink = Google::Logging::V2::LogSink
           #
           #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_parent = ConfigServiceV2Client.parent_path("[PROJECT]")
+          #   formatted_parent = ConfigServiceV2Client.project_path("[PROJECT]")
           #   sink = LogSink.new
           #   response = config_service_v2_client.create_sink(formatted_parent, sink)
 
