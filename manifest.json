@@ -17,9 +17,8 @@
       "name": "gcloud",
       "defaultService": "gcloud",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.22.0",
+        "master",
         "v0.21.0",
         "v0.20.0",
         "v0.12.2",
@@ -40,9 +39,8 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.22.0",
+        "master",
         "v0.21.1",
         "v0.21.0",
         "v0.20.1",
@@ -63,9 +61,8 @@
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.21.0",
+        "master",
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
@@ -87,9 +84,8 @@
       "name": "google-cloud-datastore",
       "defaultService": "google/cloud/datastore",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.21.0",
+        "master",
         "v0.20.1",
         "v0.20.0"
       ]
@@ -134,9 +130,8 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.21.2",
+        "master",
         "v0.21.1",
         "v0.21.0",
         "v0.20.1",
@@ -190,9 +185,8 @@
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
-        "v0.23.0",
-        "master",
         "v0.21.0",
+        "master",
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
