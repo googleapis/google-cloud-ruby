@@ -97,10 +97,8 @@ namespace :acceptance do
   end
 end
 
-desc "Run yard-doctest example tests."
-task :doctest do
-  sh "bundle exec yard doctest"
-end
+require "yard/doctest/rake"
+YARD::Doctest::RakeTask.new :doctest
 
 desc "Start an interactive shell."
 task :console do
