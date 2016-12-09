@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Update dependency on `google-cloud` gem to 0.23 or greater.
+
 ### 0.22.0 / 2016-11-14
 
 * Update dependency on `google-cloud` gem to 0.22.x

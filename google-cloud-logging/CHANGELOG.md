@@ -1,5 +1,15 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Add `resources` method argument to `Project#entries`
+* Deprecate `projects` method argument from `Project#entries`
+* Add `start_at`, `end_at`, and `writer_identity` attributes to `Sink`
+* Add `start_at`, `end_at`, and `unique_writer_identity` parameters to `Project#create_sink`
+* Add `unique_writer_identity` parameter to `Sink#save`
+* Many documentation improvements
+* Add documentation for Low Level API
+
 ### 0.21.2 / 2016-11-15
 
 * Fix issue with uninitialized VERSION (remi)

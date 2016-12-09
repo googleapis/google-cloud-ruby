@@ -1,5 +1,12 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Support Query Parameters using `params` method arguments to `query` and `query_job`
+* Add `standard_sql`/`legacy_sql` method arguments to to `query` and `query_job`
+* Add `standard_sql?`/`legacy_sql?` attributes to `QueryJob`
+* Many documentation improvements
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Bigquery.new

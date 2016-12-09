@@ -1,5 +1,10 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Many documentation improvements
+* Add documentation for Low Level API
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Datastore.new

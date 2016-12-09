@@ -1,5 +1,10 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Remove `encryption_key_sha256` method parameter, hash will be calculated using `encryption_key`
+* Many documentation improvements
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Storage.new
