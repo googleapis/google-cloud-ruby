@@ -15,7 +15,7 @@
 require "google/cloud/dns"
 
 class File
-  def self.read f
+  def self.read *args
     "fake file data"
   end
   def self.open f, opts
