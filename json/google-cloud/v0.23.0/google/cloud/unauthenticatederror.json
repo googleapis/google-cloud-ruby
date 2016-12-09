@@ -1,0 +1,1 @@
+{"id":"google/cloud/unauthenticatederror","name":"UnauthenticatedError","title":["Google","Cloud","UnauthenticatedError"],"description":"<p>Unauthenticated indicates the request does not have valid\nauthentication credentials for the operation.</p>","source":"google-cloud-core/lib/google/cloud/errors.rb#L119","resources":[],"examples":[],"methods":[]}
