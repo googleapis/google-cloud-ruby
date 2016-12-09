@@ -36,7 +36,7 @@ class File
   def self.readable? f
     true
   end
-  def self.read f, opts
+  def self.read *args
     "fake file data"
   end
   def self.open f, mode = "r", opts = {}
