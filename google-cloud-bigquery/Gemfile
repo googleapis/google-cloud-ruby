@@ -8,3 +8,6 @@ gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
+gem "yard-doctest",
+    git: "https://github.com/blowmage/yard-doctest.git",
+    branch: "raketask"
