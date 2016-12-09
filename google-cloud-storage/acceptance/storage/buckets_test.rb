@@ -27,12 +27,6 @@ describe "Storage", :buckets, :storage do
     buckets # always create the buckets
   end
 
-  it "gets all buckets" do
-    storage.buckets.all do |bucket|
-      bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    end
-  end
-
   it "gets pages of buckets" do
     first_buckets = storage.buckets max: 2
     first_buckets.next?.must_equal true
