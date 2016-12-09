@@ -1,0 +1,1 @@
+{"id":"google/logging/v2/loggingservicev2/service","name":"Service","title":["Google","Logging","V2","LoggingServiceV2","Service"],"description":"<p>Service for ingesting and querying logs.</p>","source":"google-cloud-logging/lib/google/logging/v2/logging_services_pb.rb#L27","resources":[],"examples":[],"methods":[]}
