@@ -596,11 +596,24 @@ module Google
         #   shared_url = file.signed_url issuer: "service-account@gcloud.com",
         #                                signing_key: key
         #
+        # @example Using the `headers` option:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   file = bucket.file "avatars/heidi/400x400.png"
+        #   shared_url = file.signed_url method: "GET",
+        #                                headers: {
+        #                                  "x-goog-acl" => "public-read",
+        #                                  "x-goog-meta-foo" => bar,baz"
+        #                                }
+        #
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, issuer: nil, client_email: nil,
-                       signing_key: nil, private_key: nil
+                       signing_key: nil, private_key: nil, headers: nil
           ensure_service!
-          options = { method: method, expires: expires,
+          options = { method: method, expires: expires, headers: headers,
                       content_type: content_type, content_md5: content_md5,
                       issuer: issuer, client_email: client_email,
                       signing_key: signing_key, private_key: private_key }
@@ -780,7 +793,7 @@ module Google
             fail SignedUrlUnavailable unless i && s
 
             sig = generate_signature s, options
-            generate_signed_url i, sig, options[:expires]
+            generate_signed_url i, sig, options[:expires], options[:headers]
           end
 
           def generate_signature signing_key, options = {}
@@ -790,11 +803,21 @@ module Google
             signing_key.sign OpenSSL::Digest::SHA256.new, signature_str(options)
           end
 
-          def generate_signed_url issuer, signed_string, expires
+          def generate_signed_url issuer, signed_string, expires, headers = nil
             signature = Base64.strict_encode64(signed_string).delete("\n")
-            "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
+            url = "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
                       "&Expires=#{expires}" \
                       "&Signature=#{CGI.escape signature}"
+            url += "&Canonicalized_Extension_Headers=#{format_extension_headers(headers)}" if headers
+            url
+          end
+
+          def format_extension_headers(headers)
+            flatten = headers.each_with_object({}) {|(key, value), obj| obj[key.to_s.strip] = value.gsub(/\s+/, ' ') }
+            flatten.delete("x-goog-encryption-key")
+            flatten.delete("x-goog-encryption-key-sha256")
+
+            flatten.map {|key, value| "#{key}:#{value}"}.join("\n")
           end
         end
 
