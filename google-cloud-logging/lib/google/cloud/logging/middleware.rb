@@ -136,25 +136,29 @@ module Google
         # the correct monitoring resource types and labels.
         #
         # @example If running from GAE, returns default resource:
-        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.send \
+        #          :default_monitored_resource
         #   rc.type   #=> "gae_app"
         #   rc.labels # { module_id: [GAE module name],
         #             #   version_id: [GAE module version] }
         #
         # @example If running from GKE, returns default resource:
-        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.send \
+        #          :default_monitored_resource
         #   rc.type   #=> "container"
         #   rc.labels # { cluster_name: [GKE cluster name],
         #             #   namespace_id: [GKE namespace_id] }
         #
         # @example If running from GCE, return default resource:
-        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.send \
+        #          :default_monitored_resource
         #   rc.type   #=> "gce_instance"
         #   rc.labels # { instance_id: [GCE VM instance id],
         #             #   zone: [GCE vm group zone] }
         #
         # @example Otherwise default to generic "global" type:
-        #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        #   rc = Google::Cloud::Logging::Middleware.send \
+        #          :default_monitored_resource
         #   rc.type   #=> "global"
         #   rc.labels #=> {}
         #
