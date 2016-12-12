@@ -1,5 +1,12 @@
 # Release History
 
+### 0.23.0 / 2016-12-8
+
+* Support Query Parameters using `params` method arguments to `query` and `query_job`
+* Add `standard_sql`/`legacy_sql` method arguments to to `query` and `query_job`
+* Add `standard_sql?`/`legacy_sql?` attributes to `QueryJob`
+* Many documentation improvements
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Bigquery.new
@@ -14,7 +21,7 @@
 
 ### 0.20.0 / 2016-08-26
 
-This gem contains the Google Cloud BigQuery service implementation for the `google-cloud` gem. The `google-cloud` gem replaces the old `gcloud` gem. Legacy code can continue to use the `gcloud` gem.
+This gem contains the Google BigQuery service implementation for the `google-cloud` gem. The `google-cloud` gem replaces the old `gcloud` gem. Legacy code can continue to use the `gcloud` gem.
 
 * Namespace is now `Google::Cloud`
 * The `google-cloud` gem is now an umbrella package for individual gems

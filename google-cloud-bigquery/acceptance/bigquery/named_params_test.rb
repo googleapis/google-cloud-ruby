@@ -47,11 +47,23 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     skip "Don't know of any sample data that uses DATE values"
   end
 
-  it "queries the data with a time parameter" do
+  it "queries the data with a datetime parameter" do
+    skip "Don't know of any sample data that uses DATETIME values"
+  end
+
+  it "queries the data with a timestamp parameter" do
     rows = bigquery.query "SELECT subject FROM `bigquery-public-data.github_repos.commits` WHERE author.name = @author AND author.date < @date LIMIT 1", params: { author: "blowmage", date: Time.now }
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
+  end
+
+  it "queries the data with a time parameter" do
+    skip "Don't know of any sample data that uses TIME values"
+  end
+
+  it "queries the data with a bytes parameter" do
+    skip "Don't know of any sample data that uses BYTES values"
   end
 
   it "queries the data with an array parameter" do

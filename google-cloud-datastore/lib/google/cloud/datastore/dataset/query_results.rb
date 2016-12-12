@@ -37,7 +37,7 @@ module Google
         #   tasks = datastore.run query
         #
         #   tasks.size #=> 3
-        #   tasks.cursor #=> Cursor(c3VwZXJhd2Vzb21lIQ)
+        #   tasks.cursor.to_s #=> "c2Vjb25kLXBhZ2UtY3Vyc29y"
         #
         # @example Caution, many Array methods will return a new Array instance:
         #   require "google/cloud/datastore"
@@ -48,10 +48,10 @@ module Google
         #   tasks = datastore.run query
         #
         #   tasks.size #=> 3
-        #   tasks.end_cursor #=> Cursor(c3VwZXJhd2Vzb21lIQ)
+        #   tasks.cursor.to_s #=> "c2Vjb25kLXBhZ2UtY3Vyc29y"
         #   descriptions = tasks.map { |task| task["description"] }
         #   descriptions.size #=> 3
-        #   descriptions.cursor #=> NoMethodError
+        #   descriptions.cursor #=> raise NoMethodError
         #
         class QueryResults < DelegateClass(::Array)
           ##
@@ -321,7 +321,7 @@ module Google
           #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
-          #   tasks.all_with_cursor.count #=> number of result/cursor pairs
+          #   tasks.all_with_cursor.count # number of result/cursor pairs
           #
           # @example Limit the number of API calls made:
           #   require "google/cloud/datastore"

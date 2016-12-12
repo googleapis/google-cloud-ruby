@@ -110,7 +110,7 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   user = datastore.find "User", "alice"
-        #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+        #   user["avatar"].class #=> StringIO
         #
         # @example Getting a geo point value returns a Hash:
         #   require "google/cloud/datastore"
@@ -118,8 +118,7 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   user = datastore.find "User", "alice"
-        #   user["location"] #=> { longitude: -122.0862462,
-        #                    #     latitude: 37.4220041 }
+        #   user["location"].keys #=> [:latitude, :longitude]
         #
         # @example Getting a blob value returns a StringIO object:
         #   require "google/cloud/datastore"
@@ -127,7 +126,7 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   user = datastore.find "User", "alice"
-        #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+        #   user["avatar"].class #=> StringIO
         #
         def [] prop_name
           properties[prop_name]
@@ -171,7 +170,7 @@ module Google
         #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
-        #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+        #   user["avatar"].class #=> StringIO
         #
         # @example Setting a geo point value using a Hash:
         #   require "google/cloud/datastore"
@@ -188,7 +187,7 @@ module Google
         #
         #   user = datastore.find "User", "alice"
         #   user["avatar"] = File.open "/avatars/alice.png"
-        #   user["avatar"] #=> StringIO("\x89PNG\r\n\x1A...")
+        #   user["avatar"].class #=> StringIO
         #
         def []= prop_name, prop_value
           properties[prop_name] = prop_value
@@ -233,7 +232,7 @@ module Google
         #   task = datastore.find "Task", "sampleTask"
         #
         #   task.properties.delete :description
-        #   task.save
+        #   datastore.update task
         #
         # @example The properties can be converted to a hash:
         #   require "google/cloud/datastore"
@@ -268,9 +267,9 @@ module Google
         #
         #   task = datastore.find "Task", "sampleTask"
         #   task.persisted? #=> true
-        #   task.key = datastore.key "Task" #=> RuntimeError
+        #   task.key = datastore.key "Task" #=> raise RuntimeError
         #   task.key.frozen? #=> true
-        #   task.key.id = 9876543221 #=> RuntimeError
+        #   task.key.id = 9876543221 #=> raise RuntimeError
         #
         def key= new_key
           fail "This entity's key is immutable." if persisted?

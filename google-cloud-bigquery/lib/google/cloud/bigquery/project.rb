@@ -21,6 +21,7 @@ require "google/cloud/bigquery/dataset"
 require "google/cloud/bigquery/job"
 require "google/cloud/bigquery/query_data"
 require "google/cloud/bigquery/project/list"
+require "google/cloud/bigquery/time"
 
 module Google
   module Cloud
@@ -72,11 +73,11 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new(
-        #     project: "my-todo-project",
+        #     project: "my-project-id",
         #     keyfile: "/path/to/keyfile.json"
         #   )
         #
-        #   bigquery.project #=> "my-todo-project"
+        #   bigquery.project #=> "my-project-id"
         #
         def project
           service.project
@@ -94,6 +95,26 @@ module Google
         ##
         # Queries data using the [asynchronous
         # method](https://cloud.google.com/bigquery/querying-data).
+        #
+        # When using standard SQL and passing arguments using `params`, Ruby
+        # types are mapped to BigQuery types as follows:
+        #
+        # | BigQuery    | Ruby           | Notes  |
+        # |-------------|----------------|---|
+        # | `BOOL`      | `true`/`false` | |
+        # | `INT64`     | `Integer`      | |
+        # | `FLOAT64`   | `Float`        | |
+        # | `STRING`    | `STRING`       | |
+        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
+        # | `DATE`      | `Date`         | |
+        # | `TIMESTAMP` | `Time`         | |
+        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
+        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
+        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
+        #
+        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
+        # for an overview of each BigQuery data type, including allowed values.
         #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
@@ -246,6 +267,26 @@ module Google
         ##
         # Queries data using the [synchronous
         # method](https://cloud.google.com/bigquery/querying-data).
+        #
+        # When using standard SQL and passing arguments using `params`, Ruby
+        # types are mapped to BigQuery types as follows:
+        #
+        # | BigQuery    | Ruby           | Notes  |
+        # |-------------|----------------|---|
+        # | `BOOL`      | `true`/`false` | |
+        # | `INT64`     | `Integer`      | |
+        # | `FLOAT64`   | `Float`        | |
+        # | `STRING`    | `STRING`       | |
+        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
+        # | `DATE`      | `Date`         | |
+        # | `TIMESTAMP` | `Time`         | |
+        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
+        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
+        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
+        #
+        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
+        # for an overview of each BigQuery data type, including allowed values.
         #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
@@ -422,7 +463,8 @@ module Google
         #   should reside. Possible values include `EU` and `US`. The default
         #   value is `US`.
         # @yield [access] a block for setting rules
-        # @yieldparam [Dataset::Access] access the object accepting rules
+        # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
+        #   accepting rules
         #
         # @return [Google::Cloud::Bigquery::Dataset]
         #
@@ -442,21 +484,13 @@ module Google
         #                                     name: "My Dataset",
         #                                     description: "This is my Dataset"
         #
-        # @example Access rules can be provided with the `access` option:
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #
-        #   dataset = bigquery.create_dataset "my_dataset",
-        #     access: [{"role"=>"WRITER", "userByEmail"=>"writers@example.com"}]
-        #
         # @example Or, configure access with a block: (See {Dataset::Access})
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   dataset = bigquery.create_dataset "my_dataset" do |access|
-        #     access.add_writer_user "writers@example.com"
+        #   dataset = bigquery.create_dataset "my_dataset" do |table|
+        #     table.access.add_writer_user "writers@example.com"
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,
@@ -656,6 +690,51 @@ module Google
           options = { token: token, max: max }
           gapi = service.list_projects options
           Project::List.from_gapi gapi, service, max
+        end
+
+        ##
+        # Creates a Bigquery::Time object to represent a time, independent of a
+        # specific date.
+        #
+        # @param [Integer] hour Hour, valid values from 0 to 23.
+        # @param [Integer] minute Minute, valid values from 0 to 59.
+        # @param [Integer, Float] second Second, valid values from 0 to 59. Can
+        #   contain microsecond precision.
+        #
+        # @return [Bigquery::Time]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   fourpm = bigquery.time 16, 0, 0
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE time_of_date = @time",
+        #                         params: { time: fourpm }
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        # @example Create Time with fractional seconds:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   precise_time = bigquery.time 16, 35, 15.376541
+        #   data = bigquery.query "SELECT name " \
+        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "WHERE time_of_date >= @time",
+        #                         params: { time: precise_time }
+        #
+        #   data.each do |row|
+        #     puts row["name"]
+        #   end
+        #
+        def time hour, minute, second
+          Bigquery::Time.new "#{hour}:#{minute}:#{second}"
         end
 
         ##

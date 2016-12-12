@@ -108,7 +108,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "should get a list of jobs" do
-    jobs = bigquery.jobs.all
+    jobs = bigquery.jobs.all request_limit: 3
     jobs.each { |job| job.must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 

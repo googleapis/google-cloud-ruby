@@ -126,7 +126,7 @@ module Google
         ##
         # The time when the job was created.
         def created_at
-          Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
+          ::Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
         rescue
           nil
         end
@@ -136,7 +136,7 @@ module Google
         # This field is present after the job's state changes from `PENDING`
         # to either `RUNNING` or `DONE`.
         def started_at
-          Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
+          ::Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
         rescue
           nil
         end
@@ -145,7 +145,7 @@ module Google
         # The time when the job ended.
         # This field is present when the job's state is `DONE`.
         def ended_at
-          Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
+          ::Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
         rescue
           nil
         end

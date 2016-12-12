@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake"
+gem "rake", "~> 11.0"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "gcloud-jsondoc",

@@ -48,9 +48,8 @@ describe Google::Cloud::Dns, :dns do
   end
 
   it "lists all zones" do
-    all_zones = dns.zones.all.to_a
-    # all_zones.must_include zone
-    all_zones.map(&:name).must_include zone.name
+    all_zones = dns.zones.all(request_limit: 3).to_a
+    all_zones.count.wont_equal 0
   end
 
   it "creates and deletes a zone" do

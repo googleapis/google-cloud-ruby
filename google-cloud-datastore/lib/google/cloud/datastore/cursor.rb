@@ -31,7 +31,7 @@ module Google
       #     where("done", "=", false)
       #
       #   tasks = datastore.run query
-      #   tasks.cursor #=> Cursor
+      #   tasks.cursor.to_s #=> "c2Vjb25kLXBhZ2UtY3Vyc29y"
       #
       class Cursor
         # Base64 encoded array of bytes

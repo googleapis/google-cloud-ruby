@@ -49,7 +49,7 @@ class MockBigquery < Minitest::Spec
   ##
   # Time in milliseconds as a string, per google/google-api-ruby-client#439
   def time_millis
-    (Time.now.to_f * 1000).floor.to_s
+    (::Time.now.to_f * 1000).floor.to_s
   end
 
   def random_dataset_gapi id = nil, name = nil, description = nil, default_expiration = nil, location = "US"

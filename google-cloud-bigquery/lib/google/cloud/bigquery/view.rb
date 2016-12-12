@@ -120,9 +120,9 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
+        #   view = dataset.table "my_view"
         #
-        #   data = bigquery.query "SELECT name FROM #{table.query_id}"
+        #   data = bigquery.query "SELECT name FROM #{view.query_id}"
         #
         # @!group Attributes
         #
@@ -197,7 +197,7 @@ module Google
         def created_at
           ensure_full_data!
           begin
-            Time.at(Integer(@gapi.creation_time) / 1000.0)
+            ::Time.at(Integer(@gapi.creation_time) / 1000.0)
           rescue
             nil
           end
@@ -213,7 +213,7 @@ module Google
         def expires_at
           ensure_full_data!
           begin
-            Time.at(Integer(@gapi.expiration_time) / 1000.0)
+            ::Time.at(Integer(@gapi.expiration_time) / 1000.0)
           rescue
             nil
           end
@@ -227,7 +227,7 @@ module Google
         def modified_at
           ensure_full_data!
           begin
-            Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+            ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
           rescue
             nil
           end
@@ -385,9 +385,9 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
+        #   view = dataset.table "my_view"
         #
-        #   table.delete
+        #   view.delete
         #
         # @!group Lifecycle
         #

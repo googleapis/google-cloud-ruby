@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   end
 
   it "knows its creation and modification times" do
-    now = Time.now
+    now = ::Time.now
 
     dataset.gapi.creation_time = time_millis
     dataset.created_at.must_be_close_to now, 0.1

@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2016-21-8
+
+* Upgrade to beta versions of BigQuery, Datastore, Logging, and Storage (0.23.x)
+
 ### 0.22.0 / 2016-11-14
 
 * Updating Natural Language dependency to 0.22.x

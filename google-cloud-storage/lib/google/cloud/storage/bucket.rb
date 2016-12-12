@@ -413,21 +413,16 @@ module Google
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-        # was used with {#create_file}, the `encryption_key` and
-        # `encryption_key_sha256` options must be provided or else the file's
-        # CRC32C checksum and MD5 hash will not be returned.
+        # was used with {#create_file}, the `encryption_key` option must be
+        # provided or else the file's CRC32C checksum and MD5 hash will not be
+        # returned.
         #
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
-        #   to {#create_file}. Must be provided if `encryption_key_sha256` is
-        #   provided.
-        # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
-        #   customer-supplied, AES-256 encryption key used to encrypt the file,
-        #   if one was provided to {#create_file}. Must be provided if
-        #   `encryption_key` is provided.
+        #   to {#create_file}.
         #
         # @return [Google::Cloud::Storage::File, nil] Returns nil if file does
         #   not exist
@@ -442,11 +437,9 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, encryption_key: nil,
-                 encryption_key_sha256: nil
+        def file path, generation: nil, encryption_key: nil
           ensure_service!
-          options = { generation: generation, key: encryption_key,
-                      key_sha256: encryption_key_sha256 }
+          options = { generation: generation, key: encryption_key }
           gapi = service.get_file name, path, options
           File.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -461,13 +454,11 @@ module Google
         # #### Customer-supplied encryption keys
         #
         # By default, Google Cloud Storage manages server-side encryption keys
-        # on your behalf. However, a [customer-supplied encryption
-        # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-        # can be provided with the `encryption_key` and `encryption_key_sha256`
-        # options. If given, the same key and SHA256 hash also must be provided
-        # to subsequently download or copy the file. If you use
-        # customer-supplied encryption keys, you must securely manage your keys
-        # and ensure that they are not lost. Also, please note that file
+        # on your behalf. However, a [customer-supplied encryption key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+        # can be provided with the `encryption_key` option. If given, the same
+        # key must be provided to subsequently download or copy the file. If you
+        # use customer-supplied encryption keys, you must securely manage your
+        # keys and ensure that they are not lost. Also, please note that file
         # metadata is not encrypted, with the exception of the CRC32C checksum
         # and MD5 hash. The names of files and buckets are also not encrypted,
         # and you can read or update the metadata of an encrypted file without
@@ -524,11 +515,7 @@ module Google
         #   and arbitrary string values that will returned with requests for the
         #   file as "x-goog-meta-" response headers.
         # @param [String] encryption_key Optional. A customer-supplied, AES-256
-        #   encryption key that will be used to encrypt the file. Must be
-        #   provided if `encryption_key_sha256` is provided.
-        # @param [String] encryption_key_sha256 Optional. The SHA256 hash of the
-        #   customer-supplied, AES-256 encryption key that will be used to
-        #   encrypt the file. Must be provided if `encryption_key` is provided.
+        #   encryption key that will be used to encrypt the file.
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -562,30 +549,27 @@ module Google
         #   cipher = OpenSSL::Cipher.new "aes-256-cfb"
         #   cipher.encrypt
         #   key = cipher.random_key
-        #   key_hash = Digest::SHA256.digest key
         #
         #   bucket.create_file "path/to/local.file.ext",
         #                      "destination/path/file.ext",
-        #                      encryption_key: key,
-        #                      encryption_key_sha256: key_hash
+        #                      encryption_key: key
         #
         #   # Store your key and hash securely for later use.
         #   file = bucket.file "destination/path/file.ext",
-        #                      encryption_key: key,
-        #                      encryption_key_sha256: key_hash
+        #                      encryption_key: key
         #
         def create_file file, path = nil, acl: nil, cache_control: nil,
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
                         crc32c: nil, md5: nil, metadata: nil,
-                        encryption_key: nil, encryption_key_sha256: nil
+                        encryption_key: nil
           ensure_service!
           options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                       cache_control: cache_control, content_type: content_type,
                       content_disposition: content_disposition, crc32c: crc32c,
                       content_encoding: content_encoding,
                       content_language: content_language, metadata: metadata,
-                      key: encryption_key, key_sha256: encryption_key_sha256 }
+                      key: encryption_key }
           ensure_file_exists! file
           # TODO: Handle file as an IO and path is missing more gracefully
           path ||= Pathname(file).to_path

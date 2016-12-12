@@ -1,4 +1,4 @@
-# google-cloud-ruby
+# Google Cloud Ruby Client
 
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
@@ -12,21 +12,22 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 * [API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs)
 * [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
-## Ruby API Client library for Google Cloud
+This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-This project supports the following Google Cloud Platform services:
+* [BigQuery](#bigquery-beta) (Beta)
+* [Cloud Datastore](#cloud-datastore-beta) (Beta)
+* [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
+* [Cloud Storage](#cloud-storage-beta) (Beta)
 
-* [BigQuery](#bigquery)
-* [Cloud Datastore](#datastore)
-* [Cloud DNS](#dns)
-* [Stackdriver Logging](#logging)
-* [Cloud Natural Language API](#natural-language)
-* [Cloud Pub/Sub](#pubsub)
-* [Cloud Resource Manager](#resource-manager)
-* [Cloud Speech API](#speech)
-* [Cloud Storage](#storage)
-* [Google Translate API](#translate)
-* [Cloud Vision API](#vision)
+This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
+
+* [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
+* [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
+* [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
+* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
+* [Translate API](#translate-api-alpha) (Alpha)
+* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -48,12 +49,12 @@ General instructions, environment variables, and configuration options are cover
 
 The preview examples below demonstrate how to provide the **Project ID** and **Credentials JSON file path** directly in code.
 
-### BigQuery
+### BigQuery (Beta)
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
 - [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/master/google/cloud/bigquery)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
-- [Google Cloud BigQuery documentation](https://cloud.google.com/bigquery/docs)
+- [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
 #### Quick Start
 
@@ -89,7 +90,7 @@ data.each do |row|
 end
 ```
 
-### Datastore
+### Cloud Datastore (Beta)
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
 - [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/master/google/cloud/datastore)
@@ -131,7 +132,7 @@ query = datastore.query("Task").
 tasks = datastore.run query
 ```
 
-### DNS
+### Cloud DNS (Alpha)
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
 - [google-cloud-dns API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dns/master/google/cloud/dns)
@@ -167,7 +168,7 @@ end
 
 ```
 
-### Logging
+### Stackdriver Logging (Beta)
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
 - [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/master/google/cloud/logging)
@@ -206,7 +207,7 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-### Natural Language
+### Cloud Natural Language API (Alpha)
 
 - [google-cloud-language README](google-cloud-language/README.md)
 - [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/master/google/cloud/language)
@@ -237,7 +238,7 @@ annotation.sentences.count #=> 2
 annotation.tokens.count #=> 13
 ```
 
-### Pub/Sub
+### Cloud Pub/Sub (Alpha)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
 - [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/master/google/cloud/pubsub)
@@ -273,7 +274,7 @@ sub = pubsub.subscription "my-topic-sub"
 msgs = sub.pull
 ```
 
-### Resource Manager
+### Cloud Resource Manager (Alpha)
 
 - [google-cloud-resource_manager README](google-cloud-resource_manager/README.md)
 - [google-cloud-resource_manager API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-resource_manager/master/google/cloud/resourcemanager)
@@ -308,7 +309,7 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-### Speech
+### Cloud Speech API (Alpha)
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
 - [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/master/google/cloud/speech)
@@ -337,7 +338,7 @@ result.transcript #=> "how old is the Brooklyn Bridge"
 result.confidence #=> 0.9826789498329163
 ```
 
-### Storage
+### Cloud Storage (Beta)
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
 - [google-cloud-storage API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-storage/master/google/cloud/storage)
@@ -372,12 +373,12 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-### Translate
+### Translate API (Alpha)
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/master/google/cloud/translate)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
-- [Google Translate documentation](https://cloud.google.com/translate/docs)
+- [Google Translate API documentation](https://cloud.google.com/translate/docs)
 
 #### Quick Start
 
@@ -402,12 +403,12 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
-### Vision
+### Cloud Vision API (Alpha)
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
 - [google-cloud-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/master/google/cloud/vision)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
-- [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
+- [Google Cloud Vision API documentation](https://cloud.google.com/vision/docs)
 
 #### Quick Start
 
@@ -436,7 +437,11 @@ google-cloud-ruby is supported on Ruby 2.0+.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
+Please note it is currently under active development. Any release versioned 0.x.y is subject to backwards incompatible changes at any time.
+
+**Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
+
+**Alpha**: Libraries defined at an Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
 
 ## Contributing
 

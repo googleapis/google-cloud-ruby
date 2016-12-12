@@ -199,14 +199,14 @@ module Google
     # By default, Google Cloud Storage manages server-side encryption keys on
     # your behalf. However, a [customer-supplied encryption
     # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-    # can be provided with the `encryption_key` and `encryption_key_sha256`
-    # options. If given, the same key and SHA256 hash also must be provided to
-    # subsequently download or copy the file. If you use customer-supplied
-    # encryption keys, you must securely manage your keys and ensure that they
-    # are not lost. Also, please note that file metadata is not encrypted, with
-    # the exception of the CRC32C checksum and MD5 hash. The names of files and
-    # buckets are also not encrypted, and you can read or update the metadata of
-    # an encrypted file without providing the encryption key.
+    # can be provided with the `encryption_key` option. If given, the same key
+    # must be provided to subsequently download or copy the file. If you use
+    # customer-supplied encryption keys, you must securely manage your keys and
+    # ensure that they are not lost. Also, please note that file metadata is not
+    # encrypted, with the exception of the CRC32C checksum and MD5 hash. The
+    # names of files and buckets are also not encrypted, and you can read or
+    # update the metadata of an encrypted file without providing the encryption
+    # key.
     #
     # ```ruby
     # require "google/cloud/storage"
@@ -219,17 +219,14 @@ module Google
     # cipher = OpenSSL::Cipher.new "aes-256-cfb"
     # cipher.encrypt
     # key = cipher.random_key
-    # key_hash = Digest::SHA256.digest key
     #
     # bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
     #                    "avatars/heidi/400x400.png",
-    #                    encryption_key: key,
-    #                    encryption_key_sha256: key_hash
+    #                    encryption_key: key
     #
     # # Store your key and hash securely for later use.
     # file = bucket.file "avatars/heidi/400x400.png",
-    #                    encryption_key: key,
-    #                    encryption_key_sha256: key_hash
+    #                    encryption_key: key
     # ```
     #
     # ## Downloading a File

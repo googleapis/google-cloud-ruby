@@ -49,7 +49,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "knows its creation and modification and expiration times" do
-    now = Time.now
+    now = ::Time.now
     table_hash["creationTime"] = time_millis
     table_hash["lastModifiedTime"] = time_millis
     table_hash["expirationTime"] = time_millis

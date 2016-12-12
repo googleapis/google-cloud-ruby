@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Datastore
-      VERSION = "0.21.0"
+      VERSION = "0.23.0"
     end
   end
 end
