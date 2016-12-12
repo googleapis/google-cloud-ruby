@@ -307,7 +307,10 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
     resp = http.get uri.request_uri
+    resp.code.must_equal "200"
+
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body
@@ -329,7 +332,10 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
     resp = http.get uri.request_uri
+    resp.code.must_equal "200"
+
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body
@@ -350,8 +356,8 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
-    resp = http.delete uri.request_uri
 
+    resp = http.delete uri.request_uri
     resp.code.must_equal "204"
   end
 
@@ -361,13 +367,18 @@ describe Google::Cloud::Storage::File, :storage do
 
     five_min_from_now = 5 * 60
     url = file.signed_url method: "GET",
-                          headers: {"x-goog-acl" => "public-read"}
+                          headers: { "X-Goog-META-Foo" => "bar,baz",
+                                     "X-Goog-ACL" => "public-read" }
 
     uri = URI url
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
-    resp = http.get uri.request_uri
+
+    resp = http.get uri.request_uri, { "X-Goog-meta-foo" => "bar,baz",
+                                       "X-Goog-ACL" => "public-read" }
+    resp.code.must_equal "200"
+
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body

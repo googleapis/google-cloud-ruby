@@ -771,7 +771,7 @@ module Google
           def signature_str options
             [options[:method], options[:content_md5],
              options[:content_type], options[:expires],
-             ext_path].join "\n"
+             format_extension_headers(options[:headers]) + ext_path].join "\n"
           end
 
           def determine_signing_key options = {}
@@ -805,19 +805,18 @@ module Google
 
           def generate_signed_url issuer, signed_string, expires, headers = nil
             signature = Base64.strict_encode64(signed_string).delete("\n")
-            url = "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
-                      "&Expires=#{expires}" \
-                      "&Signature=#{CGI.escape signature}"
-            url += "&Canonicalized_Extension_Headers=#{format_extension_headers(headers)}" if headers
-            url
+            "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
+              "&Expires=#{expires}" \
+              "&Signature=#{CGI.escape signature}"
           end
 
-          def format_extension_headers(headers)
-            flatten = headers.each_with_object({}) {|(key, value), obj| obj[key.to_s.strip] = value.gsub(/\s+/, ' ') }
-            flatten.delete("x-goog-encryption-key")
-            flatten.delete("x-goog-encryption-key-sha256")
-
-            flatten.map {|key, value| "#{key}:#{value}"}.join("\n")
+          def format_extension_headers headers
+            return "" if headers.nil?
+            raise "Headers must be given in a Hash" unless headers.is_a? Hash
+            flatten = headers.map do |key, value|
+              "#{key.to_s.downcase}:#{value.gsub /\s+/, ' '}\n"
+            end.delete_if { |h| h.start_with? "x-goog-encryption-key" }
+            flatten.sort.join
           end
         end
 
