@@ -37,6 +37,10 @@ module Google
           yield *args
         end
       end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
     end
   end
 end
