@@ -1,4 +1,4 @@
-# Contributing to google-cloud-ruby
+# Contributing to Google Cloud Ruby Client
 
 1. **Sign one of the contributor license agreements below.**
 2. Fork the repo, develop and test your code changes.
@@ -46,13 +46,37 @@ $ bundle exec rake console
 
 Tests are very important part of google-cloud-ruby. All contributions should include tests that ensure the contributed code behaves as expected.
 
+To run the unit tests, documentation tests, and code style checks together:
+
+``` sh
+$ rake ci
+```
+
 ### Unit Tests
 
-To run the unit tests, simply run:
+
+The project uses the [minitest](https://github.com/seattlerb/minitest) library, including [specs](https://github.com/seattlerb/minitest#specs), [mocks](https://github.com/seattlerb/minitest#mocks) and [minitest-autotest](https://github.com/seattlerb/minitest-autotest).
+
+To run the unit tests:
 
 ``` sh
 $ rake test
 ```
+
+### Documentation Tests
+
+The project tests the code examples in the each gem's [YARD]()-based documentation.
+
+The example testing functions in a way that is very similar to unit testing, and in fact the library providing it, [yard-doctest](https://github.com/p0deje/yard-doctest), is based on the project's unit test library, [minitest](https://github.com/seattlerb/minitest).
+
+To run the documentation tests:
+
+``` sh
+$ rake jsondoc
+$ rake doctest
+```
+
+ If you add, remove or modify documentation examples when working on a pull request, you may need to update the setup for the tests. The stubs and mocks required to run the tests are located in `support/doctest_helper.rb` for each package. Please note that much of the setup is matched by the title of the [`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag. If you alter an example's title, you may encounter breaking tests.
 
 ### Acceptance Tests
 
@@ -67,7 +91,6 @@ The google-cloud-ruby acceptance tests interact with the following live service 
 Follow the instructions in the [Authentication guide](AUTHENTICATION.md) for enabling APIs. Some of the APIs may not yet be generally available, making it difficult for some contributors to successfully run the entire acceptance test suite. However, please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
 
 To run the acceptance tests, first create and configure a project in the Google Developers Console, as described in the [Authentication guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the KEYFILE location on your system.
-
 
 #### Datastore acceptance tests
 
