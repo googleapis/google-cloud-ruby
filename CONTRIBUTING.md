@@ -72,7 +72,6 @@ The example testing functions in a way that is very similar to unit testing, and
 To run the documentation tests:
 
 ``` sh
-$ rake jsondoc
 $ rake doctest
 ```
 
