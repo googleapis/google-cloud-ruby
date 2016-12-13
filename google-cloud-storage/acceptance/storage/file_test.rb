@@ -306,7 +306,10 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
     resp = http.get uri.request_uri
+    resp.code.must_equal "200"
+
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body
@@ -328,7 +331,10 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
     resp = http.get uri.request_uri
+    resp.code.must_equal "200"
+
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       tmpfile.write resp.body
@@ -349,8 +355,35 @@ describe Google::Cloud::Storage::File, :storage do
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
-    resp = http.delete uri.request_uri
 
+    resp = http.delete uri.request_uri
     resp.code.must_equal "204"
+  end
+
+  it "should create a signed url with public-read acl" do
+    local_file = File.new files[:logo][:path]
+    file = bucket.create_file local_file, "CloudLogoSignedUrlGetFile.png"
+
+    five_min_from_now = 5 * 60
+    url = file.signed_url method: "GET",
+                          headers: { "X-Goog-META-Foo" => "bar,baz",
+                                     "X-Goog-ACL" => "public-read" }
+
+    uri = URI url
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
+    resp = http.get uri.request_uri, { "X-Goog-meta-foo" => "bar,baz",
+                                       "X-Goog-ACL" => "public-read" }
+    resp.code.must_equal "200"
+
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      tmpfile.write resp.body
+      tmpfile.size.must_equal local_file.size
+
+      File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+    end
   end
 end

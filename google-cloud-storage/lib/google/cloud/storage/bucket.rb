@@ -649,11 +649,23 @@ module Google
         #                                  issuer: "service-account@gcloud.com",
         #                                  signing_key: key
         #
+        # @example Using the headers option:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud.storage
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
+        #                                  headers: {
+        #                                    "x-goog-acl" => "private",
+        #                                    "x-goog-meta-foo" => "bar,baz"
+        #                                  }
+        #
         def signed_url path, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, issuer: nil, client_email: nil,
-                       signing_key: nil, private_key: nil
+                       signing_key: nil, private_key: nil, headers: nil
           ensure_service!
-          options = { method: method, expires: expires,
+          options = { method: method, expires: expires, headers: headers,
                       content_type: content_type, content_md5: content_md5,
                       issuer: issuer, client_email: client_email,
                       signing_key: signing_key, private_key: private_key }
