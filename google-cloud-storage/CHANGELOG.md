@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.1 / 2016-12-12
+
+* Support Google extension headers on signed URLs (calavera)
+
 ### 0.23.0 / 2016-12-8
 
 * Remove `encryption_key_sha256` method parameter, hash will be calculated using `encryption_key`
