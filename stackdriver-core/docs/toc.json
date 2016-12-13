@@ -1,12 +1,6 @@
 {
   "guides": [
     {
-      "title": "FAQ",
-      "id": "faq",
-      "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/faq/readme.md",
-      "contents": "https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/faq/readme.md"
-    },
-    {
       "title": "Troubleshooting",
       "id": "troubleshooting",
       "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/troubleshooting/readme.md",
@@ -23,6 +17,10 @@
     {
       "title": "Stackdriver Core",
       "type": "stackdriver/core"
+    },
+    {
+      "title": "TraceContext",
+      "type": "stackdriver/core/tracecontext"
     }
   ]
 }

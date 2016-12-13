@@ -272,7 +272,7 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/google-cloud/#{version}/google/cloud/"
     end
 
-    excluded = ["gcloud", "google-cloud", "stackdriver"]
+    excluded = ["gcloud", "google-cloud", "stackdriver", "stackdriver-core"]
     gems.each do |gem|
       next if excluded.include? gem
 
