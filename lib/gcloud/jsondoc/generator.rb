@@ -58,5 +58,8 @@ module Gcloud
         end
       end
     end
+
+    class YardSyntaxError < RuntimeError
+    end
   end
 end

@@ -44,6 +44,9 @@ module Gcloud
           json.description md(t.text)
         end
         json.returns object.docstring.tags(:return) do |t|
+          if !t.types.is_a?(Array) || t.types.empty?
+            fail YardSyntaxError, "The types list for #{@object.path} must be a non-empty array."
+          end
           json.types format_types(t.types)
           json.description md(t.text)
         end
@@ -64,7 +67,6 @@ module Gcloud
       #   to their respective descriptions.
       #
       def format_types(typelist, brackets = true)
-        return unless typelist.is_a?(Array)
         typelist.map do |type|
           type = type.gsub(/([<>])/) { h($1) }
           type.gsub(/([\w:]+)/) { $1 == "lt" || $1 == "gt" ? $1 : linkify($1, $1) }
