@@ -613,6 +613,9 @@ module Google
         # @param [String] content_md5 The MD5 digest value in base64. If you
         #   provide this in the string, the client (usually a browser) must
         #   provide this HTTP header with this same value in its request.
+        # @param [Hash] headers Google extension headers (custom HTTP headers
+        #   that begin with `x-goog-`) that must be included in requests that
+        #   use the signed URL.
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
         # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
@@ -662,8 +665,8 @@ module Google
         #                                  }
         #
         def signed_url path, method: nil, expires: nil, content_type: nil,
-                       content_md5: nil, issuer: nil, client_email: nil,
-                       signing_key: nil, private_key: nil, headers: nil
+                       content_md5: nil, headers: nil, issuer: nil,
+                       client_email: nil, signing_key: nil, private_key: nil
           ensure_service!
           options = { method: method, expires: expires, headers: headers,
                       content_type: content_type, content_md5: content_md5,
