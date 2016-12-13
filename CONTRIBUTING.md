@@ -52,6 +52,8 @@ To run the unit tests, documentation tests, and code style checks together:
 $ rake ci
 ```
 
+To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`.
+
 ### Unit Tests
 
 
