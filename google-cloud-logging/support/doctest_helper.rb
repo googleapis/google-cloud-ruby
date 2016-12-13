@@ -35,6 +35,32 @@ module Google
           yield *args
         end
       end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
+    end
+    module Logging
+      def self.stub_new
+        define_singleton_method :new do |*args|
+          yield *args
+        end
+      end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
+    end
+    module Core
+      module Environment
+      # Create default unmocked methods that will raise if ever called
+        def self.gce_vm? connection: nil
+          raise "This code example is not yet mocked"
+        end
+        def self.get_metadata_attribute uri, attr_name, connection: nil
+          raise "This code example is not yet mocked"
+        end
+      end
     end
   end
 end
@@ -49,18 +75,6 @@ def mock_storage
     yield storage.service.mocked_service if block_given?
 
     storage
-  end
-end
-
-module Google
-  module Cloud
-    module Logging
-      def self.stub_new
-        define_singleton_method :new do |*args|
-          yield *args
-        end
-      end
-    end
   end
 end
 

@@ -64,6 +64,21 @@ module Google
           yield *args
         end
       end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
+    end
+    module Storage
+      def self.stub_new
+        define_singleton_method :new do |*args|
+          yield *args
+        end
+      end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
     end
   end
 end
@@ -79,18 +94,6 @@ def mock_speech
       yield speech.service.mocked_service, speech.service.mocked_ops
     end
     speech
-  end
-end
-
-module Google
-  module Cloud
-    module Storage
-      def self.stub_new
-        define_singleton_method :new do |*args|
-          yield *args
-        end
-      end
-    end
   end
 end
 
