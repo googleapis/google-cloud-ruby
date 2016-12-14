@@ -122,8 +122,8 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
     }
 
     it "associates given info to current Thread ID" do
-      logger.add_request_info request_info
-      logger.request_info[Thread.current.object_id].must_equal request_info
+      logger.add_request_info info: request_info
+      logger.request_info.must_equal request_info
     end
 
     it "doesn't record more than 10_000 RequestInfo records" do
@@ -136,11 +136,12 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       # evaluate outside the block
       logger.stub :current_thread_id, stubbed_thread_id do
         10_001.times do
-          logger.add_request_info request_info
+          logger.add_request_info info: request_info
         end
-        logger.request_info.size.must_equal 10_000
-        logger.request_info[first_thread_id].must_be_nil
-        logger.request_info[last_thread_id].must_equal request_info
+        request_info_hash = logger.instance_variable_get :@request_info
+        request_info_hash.size.must_equal 10_000
+        request_info_hash[first_thread_id].must_be_nil
+        request_info_hash[last_thread_id].must_equal request_info
       end
     end
 
@@ -153,7 +154,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
       info = Google::Cloud::Logging::Logger::RequestInfo.new \
         "my_trace_id", "my_app_log"
-      logger.add_request_info info
+      logger.add_request_info info: info
 
       Time.stub :now, timestamp do
         logger.error "Danger Will Robinson!"
