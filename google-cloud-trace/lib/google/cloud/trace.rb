@@ -15,6 +15,7 @@
 
 require "stackdriver/core/trace_context"
 require "google-cloud-trace"
+require "google/cloud/trace/version"
 require "google/cloud/trace/credentials"
 require "google/cloud/trace/label_key"
 require "google/cloud/trace/middleware"
@@ -27,7 +28,6 @@ require "google/cloud/trace/span"
 require "google/cloud/trace/span_kind"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
-require "google/cloud/trace/version"
 
 module Google
   module Cloud
