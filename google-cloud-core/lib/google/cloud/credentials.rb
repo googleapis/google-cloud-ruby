@@ -68,12 +68,12 @@ module Google
         path = ->(p) { ::File.file? p }
 
         # First try to find keyfile file from environment variables.
-        self::PATH_ENV_VARS.map(&env).reject(&:nil?).select(&path)
+        self::PATH_ENV_VARS.map(&env).compact.select(&path)
           .each do |file|
             return new file, scope: scope
           end
         # Second try to find keyfile json from environment variables.
-        self::JSON_ENV_VARS.map(&json).reject(&:nil?).each do |hash|
+        self::JSON_ENV_VARS.map(&json).compact.each do |hash|
           return new hash, scope: scope
         end
         # Third try to find keyfile file from known file paths.
@@ -111,7 +111,7 @@ module Google
       ##
       # returns a new Hash with string keys instead of symbol keys.
       def stringify_hash_keys hash
-        Hash[hash.map { |(k, v)| [k.to_s, v] }]
+        Hash[hash.map { |k, v| [k.to_s, v] }]
       end
 
       def client_options options
