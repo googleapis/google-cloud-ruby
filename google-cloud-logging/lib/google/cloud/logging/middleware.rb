@@ -63,8 +63,9 @@ module Google
         #
         def call env
           env["rack.logger"] = logger
-          request_info = get_request_info env
-          logger.add_request_info request_info
+          trace_id = get_trace_id env
+          log_name = get_log_name env
+          logger.add_request_info trace_id: trace_id, log_name: log_name
           begin
             @app.call env
           ensure
@@ -73,23 +74,25 @@ module Google
         end
 
         ##
-        # Extract data about this request as a RequestInfo.
+        # Determine the trace ID for this request.
         #
+        # @private
         # @param [Hash] env The Rack environment.
-        # @return [RequestInfo] The info.
-        def get_request_info env
+        # @return [String] The trace ID.
+        #
+        def get_trace_id env
           trace_context = Stackdriver::Core::TraceContext.parse_rack_env env
-          trace_id = trace_context.trace_id
-          log_name = get_log_name env
-          Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
+          trace_context.trace_id
         end
 
         ##
         # Determine the log name override for this request, if any.
         #
+        # @private
         # @param [Hash] env The Rack environment.
-        # @return [String, nil] The log name override or nil if there is
+        # @return [String, nil] The log name override, or `nil` if there is
         #     no override.
+        #
         def get_log_name env
           return nil unless @log_name_map
           path = "#{env['SCRIPT_NAME']}#{env['PATH_INFO']}"

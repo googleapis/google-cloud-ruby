@@ -56,9 +56,9 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     end
 
     it "calls logger.add_request_info to track trace_id and log_name" do
-      stubbed_add_request_info = ->(this_request_info) {
-        this_request_info.trace_id.must_equal trace_id
-        this_request_info.log_name.must_equal "ruby_health_check_log"
+      stubbed_add_request_info = ->(args) {
+        args[:trace_id].must_equal trace_id
+        args[:log_name].must_equal "ruby_health_check_log"
       }
       logger.stub :add_request_info, stubbed_add_request_info do
         middleware.call rack_env

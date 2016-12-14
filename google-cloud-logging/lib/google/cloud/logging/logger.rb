@@ -66,9 +66,15 @@ module Google
         attr_reader :labels
 
         ##
-        # A OrderedHash of Thread IDs to RequestInfo, keeping track of data
-        # associated with the request being handled by the current thread.
-        attr_reader :request_info
+        # A OrderedHash of Thread IDs to Stackdriver request trace ID. The
+        # Stackdriver trace ID is a shared request identifier across all
+        # Stackdriver services.
+        #
+        # @deprecated Use request_info
+        #
+        def trace_ids
+          @request_info.inject({}) { |r, (k, v)| r[k] = v.trace_id }
+        end
 
         ##
         # Create a new Logger instance.
@@ -318,27 +324,64 @@ module Google
         alias_method :sev_threshold=, :level=
 
         ##
-        # Associate request data with the current Thread
+        # Track a given trace_id by associating it with the current
+        # Thread
         #
-        # @param [RequestInfo] info Info about the current request
-        def add_request_info info
-          request_info[current_thread_id] = info
+        # @deprecated Use add_request_info
+        #
+        def add_trace_id trace_id
+          add_request_id trace_id: trace_id
+        end
+
+        ##
+        # Associate request data with the current Thread. You may provide
+        # either the individual pieces of data (trace ID, log name) or a
+        # populated RequestInfo object.
+        #
+        # @param [RequestInfo] info Info about the current request. Optional.
+        #     If not present, a new RequestInfo is created using the remaining
+        #     parameters.
+        # @param [String, nil] trace_id The trace ID, or `nil` if no trace ID
+        #     should be logged.
+        # @param [String, nil] log_name The log name to use, or nil to use
+        #     this logger's default.
+        #
+        def add_request_info info: nil,
+                             trace_id: nil,
+                             log_name: nil
+          info ||= RequestInfo.new trace_id, log_name
+          @request_info[current_thread_id] = info
 
           # Start removing old entries if hash gets too large.
           # This should never happen, because middleware should automatically
           # remove entries when a request is finished
-          request_info.shift while request_info.size > 10_000
+          @request_info.shift while @request_info.size > 10_000
 
           info
+        end
+
+        ##
+        # Get the request data for the current Thread
+        #
+        # @return [RequestInfo, nil] The request data for the current thread,
+        #     or `nil` if there is no data set.
+        #
+        def request_info
+          @request_info[current_thread_id]
         end
 
         ##
         # Untrack the RequestInfo that's associated with current Thread
         #
         # @return [RequestInfo] The info that's being deleted
+        #
         def delete_request_info
-          request_info.delete current_thread_id
+          @request_info.delete current_thread_id
         end
+
+        ##
+        # @deprecated Use delete_request_info
+        alias_method :delete_trace_id, :delete_request_info
 
         protected
 
@@ -354,7 +397,7 @@ module Google
           # merge input labels and request info
           merged_labels = {}
           actual_log_name = log_name
-          info = request_info[current_thread_id]
+          info = request_info
           if info
             actual_log_name = info.log_name || actual_log_name
             merged_labels["traceId"] = info.trace_id unless info.trace_id.nil?
