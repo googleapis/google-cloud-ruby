@@ -56,6 +56,7 @@ module Google
         ##
         # The Google Cloud log_name to write the log entry with.
         attr_reader :log_name
+        alias_method :progname, :log_name
 
         ##
         # The Google Cloud resource to write the log entry with.
@@ -64,6 +65,22 @@ module Google
         ##
         # The Google Cloud labels to write the log entry with.
         attr_reader :labels
+
+        ##
+        # The logging severity threshold (e.g. `Logger::INFO`)
+        attr_reader :level
+        alias_method :sev_threshold, :level
+
+        ##
+        # This logger does not use a formatter, but it provides a default
+        # Logger::Formatter for API compatibility with the standard Logger.
+        attr_accessor :formatter
+
+        ##
+        # This logger treats progname as an alias for log_name.
+        def progname= name
+          @log_name = name
+        end
 
         ##
         # A OrderedHash of Thread IDs to Stackdriver request trace ID. The
@@ -119,6 +136,7 @@ module Google
           @labels = labels
           @level = 0 # DEBUG is the default behavior
           @request_info = OrderedHash.new
+          @formatter = ::Logger::Formatter.new
         end
 
         ##
