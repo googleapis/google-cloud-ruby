@@ -112,7 +112,7 @@ module Google
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub"
-        #   puts sub.name # => "my-topic-sub"
+        #   sub.name # => "my-topic-sub"
         #
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
         #   require "google/cloud/pubsub"
@@ -151,17 +151,20 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   subscription = topic.subscription "my-topic-subscription"
-        #   puts subscription.name
+        #
+        #   sub = topic.subscription "my-topic-sub"
+        #   sub.name #=> "projects/my-project/subscriptions/my-topic-sub"
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
+        #   topic = pubsub.topic "my-topic"
+        #
         #   # No API call is made to retrieve the subscription information.
-        #   subscription = pubsub.subscription "my-sub", skip_lookup: true
-        #   puts subscription.name
+        #   sub = topic.subscription "my-topic-sub", skip_lookup: true
+        #   sub.name #=> "projects/my-project/subscriptions/my-topic-sub"
         #
         def subscription subscription_name, skip_lookup: nil
           ensure_service!
@@ -190,7 +193,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   subscription = topic.subscriptions
+        #   subscriptions = topic.subscriptions
         #   subscriptions.each do |subscription|
         #     puts subscription.name
         #   end
@@ -201,7 +204,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   subscription = topic.subscriptions
+        #   subscriptions = topic.subscriptions
         #   subscriptions.all do |subscription|
         #     puts subscription.name
         #   end
@@ -234,7 +237,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish "new-message"
+        #   msg = topic.publish "task completed"
         #
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
@@ -250,7 +253,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish "new-message",
+        #   msg = topic.publish "task completed",
         #                       foo: :bar,
         #                       this: :that
         #
@@ -261,9 +264,9 @@ module Google
         #
         #   topic = pubsub.topic "my-topic"
         #   msgs = topic.publish do |t|
-        #     t.publish "new-message-1", foo: :bar
-        #     t.publish "new-message-2", foo: :baz
-        #     t.publish "new-message-3", foo: :bif
+        #     t.publish "task 1 completed", foo: :bar
+        #     t.publish "task 2 completed", foo: :baz
+        #     t.publish "task 3 completed", foo: :bif
         #   end
         #
         def publish data = nil, attributes = {}

@@ -24,7 +24,7 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::Pubsub.new(
-  project: "my-todo-project",
+  project: "my-project",
   keyfile: "/path/to/keyfile.json"
 )
 

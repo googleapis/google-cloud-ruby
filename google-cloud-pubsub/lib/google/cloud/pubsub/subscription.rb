@@ -207,8 +207,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub", max: 10
-        #   sub.pull.each { |msg| msg.acknowledge! }
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.pull(max: 10).each { |msg| msg.acknowledge! }
         #
         # @example The call can block until messages are available:
         #   require "google/cloud/pubsub"

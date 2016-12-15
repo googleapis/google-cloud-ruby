@@ -35,13 +35,13 @@ module Google
       #
       #   # Publish a message
       #   topic = pubsub.topic "my-topic"
-      #   message = topic.publish "new-message"
-      #   puts message.data #=>  "new-message"
+      #   message = topic.publish "task completed"
+      #   message.data #=>  "task completed"
       #
       #   # Pull a message
       #   sub = pubsub.subscription "my-topic-sub"
       #   received_message = sub.pull.first
-      #   puts received_message.message.data #=>  "new-message"
+      #   received_message.message.data #=>  "task completed"
       #
       class Message
         ##

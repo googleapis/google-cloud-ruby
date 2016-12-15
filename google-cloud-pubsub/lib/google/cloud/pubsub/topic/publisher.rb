@@ -27,9 +27,9 @@ module Google
         #
         #   topic = pubsub.topic "my-topic"
         #   msgs = topic.publish do |t|
-        #     t.publish "new-message-1", foo: :bar
-        #     t.publish "new-message-2", foo: :baz
-        #     t.publish "new-message-3", foo: :bif
+        #     t.publish "task 1 completed", foo: :bar
+        #     t.publish "task 2 completed", foo: :baz
+        #     t.publish "task 3 completed", foo: :bif
         #   end
         class Publisher
           ##

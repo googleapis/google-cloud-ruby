@@ -60,11 +60,11 @@ module Google
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new(
-        #     project: "my-todo-project",
+        #     project: "my-project",
         #     keyfile: "/path/to/keyfile.json"
         #   )
         #
-        #   pubsub.project #=> "my-todo-project"
+        #   pubsub.project #=> "my-project"
         #
         def project
           service.project
@@ -112,7 +112,7 @@ module Google
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new
-        #   topic = pubsub.topic "non-existing-topic" #=> nil
+        #   topic = pubsub.topic "non-existing-topic" # nil
         #
         # @example With the `autocreate` option set to `true`.
         #   require "google/cloud/pubsub"
@@ -231,7 +231,7 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", "new-message"
+        #   msg = pubsub.publish "my-topic", "task completed"
         #
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
@@ -245,7 +245,7 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", "new-message", foo: :bar,
+        #   msg = pubsub.publish "my-topic", "task completed", foo: :bar,
         #                                                   this: :that
         #
         # @example Multiple messages can be sent at the same time using a block:
@@ -254,9 +254,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   msgs = pubsub.publish "my-topic" do |p|
-        #     p.publish "new-message-1", foo: :bar
-        #     p.publish "new-message-2", foo: :baz
-        #     p.publish "new-message-3", foo: :bif
+        #     p.publish "task 1 completed", foo: :bar
+        #     p.publish "task 2 completed", foo: :baz
+        #     p.publish "task 3 completed", foo: :bif
         #   end
         #
         # @example With `autocreate`:
@@ -264,7 +264,7 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "new-topic", "new-message", autocreate: true
+        #   msg = pubsub.publish "new-topic", "task completed", autocreate: true
         #
         def publish topic_name, data = nil, attributes = {}
           # Fix parameters
@@ -308,15 +308,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscribe "my-topic", "my-topic-sub"
-        #   puts sub.name # => "my-topic-sub"
-        #
-        # @example The name is optional, and will be generated if not given.
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscribe "my-topic"
-        #   puts sub.name # => "generated-sub-name"
+        #   sub.name #=> "my-topic-sub"
         #
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
         #   require "google/cloud/pubsub"
@@ -374,8 +366,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   subscription = pubsub.subscription "my-sub"
-        #   puts subscription.name
+        #   sub = pubsub.subscription "my-sub"
+        #   sub.name #=> "projects/my-project/subscriptions/my-sub"
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
@@ -383,8 +375,8 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   # No API call is made to retrieve the subscription information.
-        #   subscription = pubsub.subscription "my-sub", skip_lookup: true
-        #   puts subscription.name
+        #   sub = pubsub.subscription "my-sub", skip_lookup: true
+        #   sub.name #=> "projects/my-project/subscriptions/my-sub"
         #
         def subscription subscription_name, project: nil, skip_lookup: nil
           ensure_service!
@@ -415,9 +407,9 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   subscriptions = pubsub.subscriptions
-        #   subscriptions.each do |subscription|
-        #     puts subscription.name
+        #   subs = pubsub.subscriptions
+        #   subs.each do |sub|
+        #     puts sub.name
         #   end
         #
         # @example Retrieve all subscriptions: (See {Subscription::List#all})
@@ -425,9 +417,9 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   subscriptions = pubsub.subscriptions
-        #   subscriptions.all do |subscription|
-        #     puts subscription.name
+        #   subs = pubsub.subscriptions
+        #   subs.all do |sub|
+        #     puts sub.name
         #   end
         #
         def subscriptions token: nil, max: nil
