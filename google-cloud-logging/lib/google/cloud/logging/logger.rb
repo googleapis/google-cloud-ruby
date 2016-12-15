@@ -37,6 +37,18 @@ module Google
       #
       class Logger
         ##
+        # A RequestInfo represents data about the request being handled by the
+        # current thread. It is used to configure logs coming from that thread.
+        #
+        # The trace_id is a String that controls the trace ID sent with the log
+        # entry. If it is nil, no trace ID is sent.
+        #
+        # The log_name is a String that controls the name of the Stackdriver
+        # log to write to. If it is nil, the default log_name for this Logger
+        # is used.
+        RequestInfo = ::Struct.new :trace_id, :log_name
+
+        ##
         # The Google Cloud writer object that calls to {#write_entries} are made
         # on. Either an AsyncWriter or Project object.
         attr_reader :writer
@@ -57,7 +69,12 @@ module Google
         # A OrderedHash of Thread IDs to Stackdriver request trace ID. The
         # Stackdriver trace ID is a shared request identifier across all
         # Stackdriver services.
-        attr_reader :trace_ids
+        #
+        # @deprecated Use request_info
+        #
+        def trace_ids
+          @request_info.inject({}) { |r, (k, v)| r[k] = v.trace_id }
+        end
 
         ##
         # Create a new Logger instance.
@@ -101,7 +118,7 @@ module Google
           @resource = resource
           @labels = labels
           @level = 0 # DEBUG is the default behavior
-          @trace_ids = OrderedHash.new
+          @request_info = OrderedHash.new
         end
 
         ##
@@ -310,24 +327,61 @@ module Google
         # Track a given trace_id by associating it with the current
         # Thread
         #
-        # @param [String] trace_id The HTTP_X_CLOUD_TRACE_CONTEXT HTTP request
-        #   header that's shared and tracked by all Stackdriver services
+        # @deprecated Use add_request_info
+        #
         def add_trace_id trace_id
-          trace_ids[current_thread_id] = trace_id
+          add_request_id trace_id: trace_id
+        end
+
+        ##
+        # Associate request data with the current Thread. You may provide
+        # either the individual pieces of data (trace ID, log name) or a
+        # populated RequestInfo object.
+        #
+        # @param [RequestInfo] info Info about the current request. Optional.
+        #     If not present, a new RequestInfo is created using the remaining
+        #     parameters.
+        # @param [String, nil] trace_id The trace ID, or `nil` if no trace ID
+        #     should be logged.
+        # @param [String, nil] log_name The log name to use, or nil to use
+        #     this logger's default.
+        #
+        def add_request_info info: nil,
+                             trace_id: nil,
+                             log_name: nil
+          info ||= RequestInfo.new trace_id, log_name
+          @request_info[current_thread_id] = info
 
           # Start removing old entries if hash gets too large.
           # This should never happen, because middleware should automatically
           # remove entries when a request is finished
-          trace_ids.shift if trace_ids.size > 10_000
+          @request_info.shift while @request_info.size > 10_000
+
+          info
         end
 
         ##
-        # Untrack the trace_id that's associated with current Thread
+        # Get the request data for the current Thread
         #
-        # @return [String] The trace_id that's being deleted
-        def delete_trace_id
-          trace_ids.delete current_thread_id
+        # @return [RequestInfo, nil] The request data for the current thread,
+        #     or `nil` if there is no data set.
+        #
+        def request_info
+          @request_info[current_thread_id]
         end
+
+        ##
+        # Untrack the RequestInfo that's associated with current Thread
+        #
+        # @return [RequestInfo] The info that's being deleted
+        #
+        def delete_request_info
+          @request_info.delete current_thread_id
+        end
+
+        ##
+        # @deprecated Use delete_request_info
+        alias_method :delete_trace_id, :delete_request_info
 
         protected
 
@@ -340,12 +394,18 @@ module Google
             e.payload = message
           end
 
-          # merge input labels and trace_id
-          trace_id = trace_ids[current_thread_id]
-          merged_labels = trace_id.nil? ? {} : { traceId: trace_id }
+          # merge input labels and request info
+          merged_labels = {}
+          actual_log_name = log_name
+          info = request_info
+          if info
+            actual_log_name = info.log_name || actual_log_name
+            merged_labels["traceId"] = info.trace_id unless info.trace_id.nil?
+          end
           merged_labels = labels.merge(merged_labels) unless labels.nil?
 
-          writer.write_entries entry, log_name: log_name, resource: resource,
+          writer.write_entries entry, log_name: actual_log_name,
+                                      resource: resource,
                                       labels: merged_labels
         end
 

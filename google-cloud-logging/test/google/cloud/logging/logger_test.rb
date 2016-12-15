@@ -29,13 +29,19 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
   let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
 
-  def write_req_args severity
+  def write_req_args severity, extra_labels: {}, log_name_override: nil
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
     entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
                                                  severity: severity,
                                                  timestamp: timestamp_grpc)]
-    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, options: default_options]
+    [
+      entries,
+      log_name: "projects/test/logs/#{log_name_override || log_name}",
+      resource: resource.to_grpc,
+      labels: labels.merge(extra_labels),
+      options: default_options
+    ]
   end
 
   it "creates a DEBUG log entry with #debug" do
@@ -110,15 +116,17 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
     end
   end
 
-  describe "#add_trace_id" do
-    let(:trace_id) { "a-unique-identifier" }
+  describe "#add_request_info" do
+    let(:request_info) {
+      Google::Cloud::Logging::Logger::RequestInfo.new "unique-identifier", nil
+    }
 
-    it "associates given trace_id to current Thread ID" do
-      logger.add_trace_id trace_id
-      logger.trace_ids[Thread.current.object_id].must_equal trace_id
+    it "associates given info to current Thread ID" do
+      logger.add_request_info info: request_info
+      logger.request_info.must_equal request_info
     end
 
-    it "doesn't record more than 10_000 trace_ids" do
+    it "doesn't record more than 10_000 RequestInfo records" do
       last_thread_id = first_thread_id = 1
       stubbed_thread_id = ->(){
         last_thread_id += 1
@@ -128,11 +136,29 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       # evaluate outside the block
       logger.stub :current_thread_id, stubbed_thread_id do
         10_001.times do
-          logger.add_trace_id trace_id
+          logger.add_request_info info: request_info
         end
-        logger.trace_ids.size.must_equal 10_000
-        logger.trace_ids[first_thread_id].must_be :nil?
-        logger.trace_ids[last_thread_id].must_equal trace_id
+        request_info_hash = logger.instance_variable_get :@request_info
+        request_info_hash.size.must_equal 10_000
+        request_info_hash[first_thread_id].must_be_nil
+        request_info_hash[last_thread_id].must_equal request_info
+      end
+    end
+
+    it "passes request info to log writes" do
+      mock = Minitest::Mock.new
+      args = write_req_args :ERROR, log_name_override: "my_app_log",
+                            extra_labels: { "traceId" => "my_trace_id" }
+      mock.expect :write_log_entries, write_res, args
+      logging.service.mocked_logging = mock
+
+      info = Google::Cloud::Logging::Logger::RequestInfo.new \
+        "my_trace_id", "my_app_log"
+      logger.add_request_info info: info
+
+      Time.stub :now, timestamp do
+        logger.error "Danger Will Robinson!"
+        mock.verify
       end
     end
   end
