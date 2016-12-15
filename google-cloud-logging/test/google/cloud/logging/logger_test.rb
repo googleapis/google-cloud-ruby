@@ -162,4 +162,60 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       end
     end
   end
+
+  describe "formatter attribute" do
+    it "is recognized even though this logger doesn't care" do
+      logger.formatter.wont_be_nil
+      formatter = ::Logger::Formatter.new
+      formatter.datetime_format = "blah"
+      logger.formatter = formatter
+      logger.formatter.must_equal formatter
+    end
+  end
+
+  describe "log_name attribute" do
+    it "is aliased as progname" do
+      new_log_name = "another_web_app_log"
+      logger.log_name.must_equal log_name
+      logger.progname.must_equal log_name
+      logger.progname = new_log_name
+      logger.log_name.must_equal new_log_name
+      logger.progname.must_equal new_log_name
+    end
+
+    it "is reflected in log writes" do
+      mock = Minitest::Mock.new
+      mock.expect :write_log_entries, write_res,
+        write_req_args(:ERROR, log_name_override: "my_app_log")
+      logging.service.mocked_logging = mock
+
+      logger.progname = "my_app_log"
+      Time.stub :now, timestamp do
+        logger.error "Danger Will Robinson!"
+        mock.verify
+      end
+    end
+  end
+
+  describe "level attribute" do
+    it "is aliased as sev_threshold" do
+      logger.level.must_equal ::Logger::DEBUG
+      logger.sev_threshold.must_equal ::Logger::DEBUG
+      logger.sev_threshold = ::Logger::ERROR
+      logger.level.must_equal ::Logger::ERROR
+      logger.sev_threshold.must_equal ::Logger::ERROR
+    end
+
+    it "controls log writes" do
+      logger.level = ::Logger::ERROR
+      mock = Minitest::Mock.new
+      # No expectation
+      logging.service.mocked_logging = mock
+
+      Time.stub :now, timestamp do
+        logger.debug "Danger Will Robinson!"
+        mock.verify
+      end
+    end
+  end
 end
