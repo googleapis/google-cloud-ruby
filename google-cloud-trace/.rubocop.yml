@@ -46,5 +46,11 @@ Style/ClassVars:
   Enabled: false
 Style/TrivialAccessors:
   Enabled: false
+Style/CaseEquality:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
 Style/FileName:
   Enabled: false # for lib/google-cloud-trace.rb file
+Lint/RescueException:
+  Enabled: false # for lib/google/cloud/logging/rails.rb file
