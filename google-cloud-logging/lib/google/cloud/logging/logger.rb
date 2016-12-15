@@ -21,7 +21,8 @@ module Google
       ##
       # # Logger
       #
-      # A (mostly) API-compatible logger for ruby's Logger.
+      # An API-compatible replacement for ruby's Logger that logs to the
+      # Stackdriver Logging Service.
       #
       # @example
       #   require "google/cloud/logging"
@@ -75,6 +76,11 @@ module Google
         # This logger does not use a formatter, but it provides a default
         # Logger::Formatter for API compatibility with the standard Logger.
         attr_accessor :formatter
+
+        ##
+        # This logger does not use a formatter, but it implements this
+        # attribute for API compatibility with the standard Logger.
+        attr_accessor :datetime_format
 
         ##
         # This logger treats progname as an alias for log_name.
@@ -136,7 +142,10 @@ module Google
           @labels = labels
           @level = 0 # DEBUG is the default behavior
           @request_info = OrderedHash.new
+          @closed = false
+          # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
+          @datetime_format = ""
         end
 
         ##
@@ -275,9 +284,20 @@ module Google
             end
           end
 
-          write_entry severity, message
+          write_entry severity, message unless @closed
+          true
         end
         alias_method :log, :add
+
+        ##
+        # Logs the given message at UNKNOWN severity.
+        #
+        # @param [String] msg The log entry payload as a string.
+        #
+        def << msg
+          unknown msg
+          self
+        end
 
         ##
         # Returns `true` if the current severity level allows for sending
@@ -340,6 +360,28 @@ module Google
           @level = new_level
         end
         alias_method :sev_threshold=, :level=
+
+        ##
+        # Close the logging "device". This effectively disables logging from
+        # this logger; any further log messages will be silently ignored. The
+        # logger may be re-enabled by calling #reopen.
+        #
+        def close
+          @closed = true
+          self
+        end
+
+        ##
+        # Re-enable logging if the logger has been closed.
+        #
+        # Note that this method accepts a "logdev" argument for compatibility
+        # with the standard Ruby Logger class; however, this argument is
+        # ignored because this logger does not use a log device.
+        #
+        def reopen _logdev = nil
+          @closed = false
+          self
+        end
 
         ##
         # Track a given trace_id by associating it with the current
