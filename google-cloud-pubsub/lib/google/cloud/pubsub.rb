@@ -131,7 +131,7 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
-    # msg = topic.publish "new-message"
+    # msg = topic.publish "task completed"
     # ```
     #
     # Messages can also be published with attributes:
@@ -142,7 +142,7 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # topic = pubsub.topic "my-topic"
-    # msg = topic.publish "new-message",
+    # msg = topic.publish "task completed",
     #                     foo: :bar,
     #                     this: :that
     # ```
@@ -156,9 +156,9 @@ module Google
     #
     # topic = pubsub.topic "my-topic"
     # msgs = topic.publish do |batch|
-    #   batch.publish "new-message-1", foo: :bar
-    #   batch.publish "new-message-2", foo: :baz
-    #   batch.publish "new-message-3", foo: :bif
+    #   batch.publish "task 1 completed", foo: :bar
+    #   batch.publish "task 2 completed", foo: :baz
+    #   batch.publish "task 3 completed", foo: :bif
     # end
     # ```
     #
