@@ -20,11 +20,12 @@ require "base64"
 
 module Google
   module Cloud
-    module Core
+    module Datastore
       ##
       # @private Conversion to/from Datastore GRPC objects.
       # This file adds Datastore methods to Core::GRPCUtils.
       module GRPCUtils
+        extend Google::Cloud::Core::GRPCUtils::ClassMethods
         # rubocop:disable all
 
         PROP_FILTER_OPS = { "<"            => :LESS_THAN,

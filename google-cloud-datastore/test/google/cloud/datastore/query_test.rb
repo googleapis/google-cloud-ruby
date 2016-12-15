@@ -46,7 +46,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     new_filter = grpc.filter.composite_filter.filters.first
     new_filter.property_filter.property.name.must_equal "completed"
     new_filter.property_filter.op.must_equal :EQUAL
-    Google::Cloud::Core::GRPCUtils.from_value(new_filter.property_filter.value).must_equal true
+    Google::Cloud::Datastore::GRPCUtils.from_value(new_filter.property_filter.value).must_equal true
 
     # Add a second filter and generate new grpcbuf
     # Use the filter alias to add the second filter
@@ -59,14 +59,14 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     first_filter.composite_filter.must_be :nil?
     first_filter.property_filter.property.name.must_equal "completed"
     first_filter.property_filter.op.must_equal :EQUAL
-    Google::Cloud::Core::GRPCUtils.from_value(first_filter.property_filter.value).must_equal true
+    Google::Cloud::Datastore::GRPCUtils.from_value(first_filter.property_filter.value).must_equal true
 
     second_filter = grpc.filter.composite_filter.filters.last
     second_filter.property_filter.wont_be :nil?
     second_filter.composite_filter.must_be :nil?
     second_filter.property_filter.property.name.must_equal "due"
     second_filter.property_filter.op.must_equal :GREATER_THAN
-    Google::Cloud::Core::GRPCUtils.from_value(second_filter.property_filter.value).must_equal Time.new(2014, 1, 1, 0, 0, 0, 0)
+    Google::Cloud::Datastore::GRPCUtils.from_value(second_filter.property_filter.value).must_equal Time.new(2014, 1, 1, 0, 0, 0, 0)
   end
 
   it "can order results" do
@@ -200,7 +200,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     ancestor_filter = grpc.filter.composite_filter.filters.first
     ancestor_filter.property_filter.property.name.must_equal "__key__"
     ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
-    key = Google::Cloud::Core::GRPCUtils.from_value(ancestor_filter.property_filter.value)
+    key = Google::Cloud::Datastore::GRPCUtils.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
     key.name.must_equal ancestor_key.name
@@ -218,7 +218,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     ancestor_filter = grpc.filter.composite_filter.filters.first
     ancestor_filter.property_filter.property.name.must_equal "__key__"
     ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
-    key = Google::Cloud::Core::GRPCUtils.from_value(ancestor_filter.property_filter.value)
+    key = Google::Cloud::Datastore::GRPCUtils.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
     key.id.must_equal   ancestor_key.id
     key.name.must_equal ancestor_key.name
@@ -244,7 +244,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     filter = grpc.filter.composite_filter.filters.first
     filter.property_filter.property.name.must_equal "completed"
     filter.property_filter.op.must_equal :EQUAL
-    Google::Cloud::Core::GRPCUtils.from_value(filter.property_filter.value).must_equal true
+    Google::Cloud::Datastore::GRPCUtils.from_value(filter.property_filter.value).must_equal true
 
     grpc.distinct_on.wont_be :empty?
     grpc.distinct_on.count.must_equal 1

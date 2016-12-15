@@ -73,15 +73,15 @@ module Google
         alias_method :to_hash, :to_h
 
         def to_grpc
-          Hash[@hash.map { |(k, v)| [k.to_s, Core::GRPCUtils.to_value(v)] }]
+          Hash[@hash.map { |(k, v)| [k.to_s, GRPCUtils.to_value(v)] }]
         end
 
         def self.from_grpc grpc_map
           # For some reason Google::Protobuf::Map#map isn't returning the value.
           # It returns nil every time. COnvert to Hash to get actual objects.
-          grpc_hash = Core::GRPCUtils.map_to_hash grpc_map
+          grpc_hash = GRPCUtils.map_to_hash grpc_map
           grpc_array = grpc_hash.map do |(k, v)|
-            [k.to_s, Core::GRPCUtils.from_value(v)]
+            [k.to_s, GRPCUtils.from_value(v)]
           end
           new Hash[grpc_array]
         end
@@ -97,7 +97,7 @@ module Google
         end
 
         # rubocop:disable all
-        # Disabled rubocop because this needs to match Core::GRPCUtils.to_value
+        # Disabled rubocop because this needs to match GRPCUtils.to_value
 
         ##
         # Ensures the value is a type that can be persisted,

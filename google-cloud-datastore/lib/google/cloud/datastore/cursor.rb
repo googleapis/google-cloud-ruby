@@ -63,14 +63,14 @@ module Google
 
         # @private byte array as a string
         def to_grpc
-          Core::GRPCUtils.decode_bytes(@cursor)
+          GRPCUtils.decode_bytes(@cursor)
         end
 
         # @private byte array as a string
         def self.from_grpc grpc
           grpc = String grpc
           return nil if grpc.empty?
-          new Core::GRPCUtils.encode_bytes(grpc)
+          new GRPCUtils.encode_bytes(grpc)
         end
       end
     end

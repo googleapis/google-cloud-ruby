@@ -33,7 +33,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
         Google::Datastore::V1::EntityResult.new(
           entity: Google::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
-            properties: { "name" => Google::Cloud::Core::GRPCUtils.to_value("thingamajig") }
+            properties: { "name" => Google::Cloud::Datastore::GRPCUtils.to_value("thingamajig") }
           )
         )
       end
@@ -51,7 +51,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     Google::Datastore::V1::RunQueryResponse.new(
       batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
-        end_cursor: Google::Cloud::Core::GRPCUtils.decode_bytes(query_cursor)
+        end_cursor: Google::Cloud::Datastore::GRPCUtils.decode_bytes(query_cursor)
       )
     )
   end
