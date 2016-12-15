@@ -38,7 +38,7 @@ module Google
         # @private
         #
         def self.proto_to_time proto
-          Time.at(proto.seconds, Rational(proto.nanos, 1000))
+          Time.at(proto.seconds, Rational(proto.nanos, 1000)).utc
         end
       end
     end

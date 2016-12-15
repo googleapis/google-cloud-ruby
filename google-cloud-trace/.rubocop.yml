@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - "acceptance/**/*"
     - "google-cloud-trace.gemspec"
     - "lib/google/devtools/**/*"
     - "Rakefile"
