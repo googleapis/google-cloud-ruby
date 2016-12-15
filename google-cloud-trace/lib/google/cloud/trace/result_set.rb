@@ -156,7 +156,7 @@ module Google
         # @return [Google::Cloud::Trace::ResultSet]
         #
         def next_page
-          return nil unless next_page?
+          return nil unless results_pending?
           service.list_traces \
             project, start_time, end_time,
             filter: filter,
