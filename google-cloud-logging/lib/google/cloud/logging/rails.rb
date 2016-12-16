@@ -104,15 +104,15 @@ module Google
             Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
           rescue Exception => e
             warn "Unable to initialize Google::Cloud::Logging due " \
-              "to authorization error: #{e.message}"
+              "to authorization error: #{e.message}\nFallback to default logger"
             return false
           end
 
           project_id = gcp_config.logging.project_id || gcp_config.project_id ||
                        Google::Cloud::Logging::Project.default_project
           if project_id.to_s.empty?
-            warn "Unable to initialize Google::Cloud::Logging with empty " \
-              "project_id"
+            warn "Google::Cloud::Logging is not activated due to empty " \
+              "project_id; fallback to default logger"
             return false
           end
 
