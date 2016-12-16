@@ -89,17 +89,14 @@ module Google
               #   * The instance's allocated resource levels are readable via the API.
               #   * The instance's state becomes `READY`.
               #
-              # The returned operation's
+              # The returned [long-running operation][google.longrunning.Operation] will
+              # have a name of the format `<instance_name>/operations/<operation_id>` and
+              # can be used to track creation of the instance.  The
               # [metadata][google.longrunning.Operation.metadata] field type is
-              # [CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata]
-              # The returned operation's
-              # [response][google.longrunning.Operation.response] field type is
-              # [Instance][google.spanner.admin.instance.v1.Instance], if
-              # successful.
-              #
-              # Authorization requires `spanner.instances.create` permission on
-              # resource [name][google.spanner.admin.instance.v1.Instance.name].
-              rpc :CreateInstance, Instance, Google::Longrunning::Operation
+              # [CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
+              # The [response][google.longrunning.Operation.response] field type is
+              # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
+              rpc :CreateInstance, CreateInstanceRequest, Google::Longrunning::Operation
               # Updates an instance, and begins allocating or releasing resources
               # as requested. The returned [long-running
               # operation][google.longrunning.Operation] can be used to track the
@@ -130,17 +127,17 @@ module Google
               #     tables.
               #   * The instance's new resource levels are readable via the API.
               #
-              # The returned operation's
+              # The returned [long-running operation][google.longrunning.Operation] will
+              # have a name of the format `<instance_name>/operations/<operation_id>` and
+              # can be used to track the instance modification.  The
               # [metadata][google.longrunning.Operation.metadata] field type is
-              # [UpdateInstanceMetadata][google.spanner.admin.instance.v1.UpdateInstanceMetadata]
-              # The returned operation's
-              # [response][google.longrunning.Operation.response] field type is
-              # [Instance][google.spanner.admin.instance.v1.Instance], if
-              # successful.
+              # [UpdateInstanceMetadata][google.spanner.admin.instance.v1.UpdateInstanceMetadata].
+              # The [response][google.longrunning.Operation.response] field type is
+              # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
               #
               # Authorization requires `spanner.instances.update` permission on
               # resource [name][google.spanner.admin.instance.v1.Instance.name].
-              rpc :UpdateInstance, Instance, Google::Longrunning::Operation
+              rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
               # Deletes an instance.
               #
               # Immediately upon completion of the request:
@@ -155,11 +152,22 @@ module Google
               rpc :DeleteInstance, DeleteInstanceRequest, Google::Protobuf::Empty
               # Sets the access control policy on an instance resource. Replaces any
               # existing policy.
+              #
+              # Authorization requires `spanner.instances.setIamPolicy` on
+              # [resource][google.iam.v1.SetIamPolicyRequest.resource].
               rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
               # Gets the access control policy for an instance resource. Returns an empty
               # policy if an instance exists but does not have a policy set.
+              #
+              # Authorization requires `spanner.instances.getIamPolicy` on
+              # [resource][google.iam.v1.GetIamPolicyRequest.resource].
               rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
               # Returns permissions that the caller has on the specified instance resource.
+              #
+              # Attempting this RPC on a non-existent Cloud Spanner instance resource will
+              # result in a NOT_FOUND error if the user has `spanner.instances.list`
+              # permission on the containing Google Cloud Project. Otherwise returns an
+              # empty set of permissions.
               rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
             end
 

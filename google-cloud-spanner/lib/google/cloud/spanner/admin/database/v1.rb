@@ -14,4 +14,4 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/admin/database/v1/database_admin_api"
+require "google/cloud/spanner/admin/database/v1/database_admin_client"

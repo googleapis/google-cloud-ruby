@@ -26,6 +26,9 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_api"
+
 require "google/spanner/admin/database/v1/spanner_database_admin_pb"
 
 module Google
@@ -42,7 +45,7 @@ module Google
             #
             # @!attribute [r] database_admin_stub
             #   @return [Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub]
-            class DatabaseAdminApi
+            class DatabaseAdminClient
               attr_reader :database_admin_stub
 
               # The default address of the service.
@@ -177,6 +180,18 @@ module Google
                 require "google/gax/grpc"
                 require "google/spanner/admin/database/v1/spanner_database_admin_services_pb"
 
+                @operations_client = Google::Longrunning::OperationsApi.new(
+                  service_path: service_path,
+                  port: port,
+                  channel: channel,
+                  chan_creds: chan_creds,
+                  scopes: scopes,
+                  client_config: client_config,
+                  timeout: timeout,
+                  app_name: app_name,
+                  app_version: app_version
+                )
+
                 google_api_client = "#{app_name}/#{app_version} " \
                   "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
                   "ruby/#{RUBY_VERSION}".freeze
@@ -213,9 +228,13 @@ module Google
                   @database_admin_stub.method(:create_database),
                   defaults["create_database"]
                 )
-                @update_database = Google::Gax.create_api_call(
-                  @database_admin_stub.method(:update_database),
-                  defaults["update_database"]
+                @get_database = Google::Gax.create_api_call(
+                  @database_admin_stub.method(:get_database),
+                  defaults["get_database"]
+                )
+                @update_database_ddl = Google::Gax.create_api_call(
+                  @database_admin_stub.method(:update_database_ddl),
+                  defaults["update_database_ddl"]
                 )
                 @drop_database = Google::Gax.create_api_call(
                   @database_admin_stub.method(:drop_database),
@@ -243,8 +262,8 @@ module Google
 
               # Lists Cloud Spanner databases.
               #
-              # @param name [String]
-              #   The project whose databases should be listed. Required.
+              # @param parent [String]
+              #   Required. The instance whose databases should be listed.
               #   Values are of the form +projects/<project>/instances/<instance>+.
               # @param page_size [Integer]
               #   The maximum number of resources contained in the underlying API
@@ -262,20 +281,20 @@ module Google
               #   object.
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_name = DatabaseAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_parent = DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
               #   # Iterate over all results.
-              #   database_admin_api.list_databases(formatted_name).each do |element|
+              #   database_admin_client.list_databases(formatted_parent).each do |element|
               #     # Process element.
               #   end
               #
               #   # Or iterate over results one page at a time.
-              #   database_admin_api.list_databases(formatted_name).each_page do |page|
+              #   database_admin_client.list_databases(formatted_parent).each_page do |page|
               #     # Process each page at a time.
               #     page.each do |element|
               #       # Process element.
@@ -283,25 +302,32 @@ module Google
               #   end
 
               def list_databases \
-                  name,
+                  parent,
                   page_size: nil,
                   options: nil
-                req = Google::Spanner::Admin::Database::V1::ListDatabasesRequest.new(
-                  name: name
-                )
-                req.page_size = page_size unless page_size.nil?
+                req = Google::Spanner::Admin::Database::V1::ListDatabasesRequest.new({
+                  parent: parent,
+                  page_size: page_size
+                }.delete_if { |_, v| v.nil? })
                 @list_databases.call(req, options)
               end
 
-              # Creates a new Cloud Spanner database.
+              # Creates a new Cloud Spanner database and starts to prepare it for serving.
+              # The returned Long-running operation will
+              # have a name of the format +<database_name>/operations/<operation_id>+ and
+              # can be used to track preparation of the database. The
+              # Metadata field type is
+              # CreateDatabaseMetadata. The
+              # Response field type is
+              # Database, if successful.
               #
-              # @param name [String]
-              #   The name of the instance that will serve the new database.
+              # @param parent [String]
+              #   Required. The name of the instance that will serve the new database.
               #   Values are of the form +projects/<project>/instances/<instance>+.
               # @param create_statement [String]
-              #   A +CREATE DATABASE+ statement, which specifies the name of the
-              #   new database.  The database name must conform to the regular expression
-              #   +A-z*[a-z0-9]+ and be between 2 and 30 characters in length.
+              #   Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+              #   new database.  The database ID must conform to the regular expression
+              #   +[a-z][a-z0-9_\-]*[a-z0-9]+ and be between 2 and 30 characters in length.
               # @param extra_statements [Array<String>]
               #   An optional list of DDL statements to run inside the newly created
               #   database. Statements can create tables, indexes, etc. These
@@ -310,38 +336,103 @@ module Google
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
-              # @return [Google::Spanner::Admin::Database::V1::Database]
+              # @return [Google::Gax::Operation]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_name = DatabaseAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_parent = DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #   create_statement = ''
-              #   response = database_admin_api.create_database(formatted_name, create_statement)
+              #
+              #   # Register a callback during the method call.
+              #   operation = database_admin_client.create_database(formatted_parent, create_statement) do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Or use the return value to register a callback.
+              #   operation.on_done do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Manually reload the operation.
+              #   operation.reload!
+              #
+              #   # Or block until the operation completes, triggering callbacks on
+              #   # completion.
+              #   operation.wait_until_done!
 
               def create_database \
-                  name,
+                  parent,
                   create_statement,
                   extra_statements: nil,
                   options: nil
-                req = Google::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(
-                  name: name,
-                  create_statement: create_statement
+                req = Google::Spanner::Admin::Database::V1::CreateDatabaseRequest.new({
+                  parent: parent,
+                  create_statement: create_statement,
+                  extra_statements: extra_statements
+                }.delete_if { |_, v| v.nil? })
+                operation = Google::Gax::Operation.new(
+                  @create_database.call(req, options),
+                  @operations_client,
+                  Google::Spanner::Admin::Database::V1::Database,
+                  Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata,
+                  call_options: options
                 )
-                req.extra_statements = extra_statements unless extra_statements.nil?
-                @create_database.call(req, options)
+                operation.on_done { |operation| yield(operation) } if block_given?
+                operation
+              end
+
+              # Gets the state of a Cloud Spanner database.
+              #
+              # @param name [String]
+              #   Required. The name of the requested database. Values are of the form
+              #   +projects/<project>/instances/<instance>/databases/<database>+.
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @return [Google::Spanner::Admin::Database::V1::Database]
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
+              #
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
+              #
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_name = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   response = database_admin_client.get_database(formatted_name)
+
+              def get_database \
+                  name,
+                  options: nil
+                req = Google::Spanner::Admin::Database::V1::GetDatabaseRequest.new({
+                  name: name
+                }.delete_if { |_, v| v.nil? })
+                @get_database.call(req, options)
               end
 
               # Updates the schema of a Cloud Spanner database by
-              # creating/altering/dropping tables, columns, indexes, etc.  The
-              # UpdateDatabaseMetadata message is used for operation
-              # metadata; The operation has no response.
+              # creating/altering/dropping tables, columns, indexes, etc. The returned
+              # Long-running operation will have a name of
+              # the format +<database_name>/operations/<operation_id>+ and can be used to
+              # track execution of the schema change(s). The
+              # Metadata field type is
+              # UpdateDatabaseDdlMetadata.  The operation has no response.
               #
               # @param database [String]
-              #   The database to update.
+              #   Required. The database to update.
               # @param statements [Array<String>]
               #   DDL statements to be applied to the database.
               # @param operation_id [String]
@@ -352,70 +443,105 @@ module Google
               #
               #   Specifying an explicit operation ID simplifies determining
               #   whether the statements were executed in the event that the
-              #   UpdateDatabase call is replayed,
+              #   UpdateDatabaseDdl call is replayed,
               #   or the return value is otherwise lost: the Database and
               #   +operation_id+ fields can be combined to form the
               #   Name of the resulting
               #   Longrunning::Operation: +<database>/operations/<operation_id>+.
               #
               #   +operation_id+ should be unique within the database, and must be
-              #   a valid identifier: +A-zA-Z*+. Note that
+              #   a valid identifier: +[a-zA-Z][a-zA-Z0-9_]*+. Note that
               #   automatically-generated operation IDs always begin with an
               #   underscore. If the named operation already exists,
-              #   UpdateDatabase returns
+              #   UpdateDatabaseDdl returns
               #   +ALREADY_EXISTS+.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
-              # @return [Google::Longrunning::Operation]
+              # @return [Google::Gax::Operation]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_database = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_database = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #   statements = []
-              #   response = database_admin_api.update_database(formatted_database, statements)
+              #
+              #   # Register a callback during the method call.
+              #   operation = database_admin_client.update_database_ddl(formatted_database, statements) do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Or use the return value to register a callback.
+              #   operation.on_done do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Manually reload the operation.
+              #   operation.reload!
+              #
+              #   # Or block until the operation completes, triggering callbacks on
+              #   # completion.
+              #   operation.wait_until_done!
 
-              def update_database \
+              def update_database_ddl \
                   database,
                   statements,
                   operation_id: nil,
                   options: nil
-                req = Google::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(
+                req = Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new({
                   database: database,
-                  statements: statements
+                  statements: statements,
+                  operation_id: operation_id
+                }.delete_if { |_, v| v.nil? })
+                operation = Google::Gax::Operation.new(
+                  @update_database_ddl.call(req, options),
+                  @operations_client,
+                  Google::Protobuf::Empty,
+                  Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata,
+                  call_options: options
                 )
-                req.operation_id = operation_id unless operation_id.nil?
-                @update_database.call(req, options)
+                operation.on_done { |operation| yield(operation) } if block_given?
+                operation
               end
 
               # Drops (aka deletes) a Cloud Spanner database.
               #
               # @param database [String]
-              #   The database to be dropped.
+              #   Required. The database to be dropped.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_database = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-              #   database_admin_api.drop_database(formatted_database)
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_database = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   database_admin_client.drop_database(formatted_database)
 
               def drop_database \
                   database,
                   options: nil
-                req = Google::Spanner::Admin::Database::V1::DropDatabaseRequest.new(
+                req = Google::Spanner::Admin::Database::V1::DropDatabaseRequest.new({
                   database: database
-                )
+                }.delete_if { |_, v| v.nil? })
                 @drop_database.call(req, options)
+                nil
               end
 
               # Returns the schema of a Cloud Spanner database as a list of formatted
@@ -423,32 +549,35 @@ module Google
               # be queried using the Operations API.
               #
               # @param database [String]
-              #   The database whose schema we wish to get.
+              #   Required. The database whose schema we wish to get.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
-              # @return [Google::Spanner::Admin::Database::V1::GetDatabaseDDLResponse]
+              # @return [Google::Spanner::Admin::Database::V1::GetDatabaseDdlResponse]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_database = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-              #   response = database_admin_api.get_database_ddl(formatted_database)
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_database = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   response = database_admin_client.get_database_ddl(formatted_database)
 
               def get_database_ddl \
                   database,
                   options: nil
-                req = Google::Spanner::Admin::Database::V1::GetDatabaseDDLRequest.new(
+                req = Google::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new({
                   database: database
-                )
+                }.delete_if { |_, v| v.nil? })
                 @get_database_ddl.call(req, options)
               end
 
               # Sets the access control policy on a database resource. Replaces any
               # existing policy.
+              #
+              # Authorization requires +spanner.databases.setIamPolicy+ permission on
+              # Resource.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being specified.
@@ -465,29 +594,32 @@ module Google
               # @return [Google::Iam::V1::Policy]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #   Policy = Google::Iam::V1::Policy
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_resource = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_resource = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #   policy = Policy.new
-              #   response = database_admin_api.set_iam_policy(formatted_resource, policy)
+              #   response = database_admin_client.set_iam_policy(formatted_resource, policy)
 
               def set_iam_policy \
                   resource,
                   policy,
                   options: nil
-                req = Google::Iam::V1::SetIamPolicyRequest.new(
+                req = Google::Iam::V1::SetIamPolicyRequest.new({
                   resource: resource,
                   policy: policy
-                )
+                }.delete_if { |_, v| v.nil? })
                 @set_iam_policy.call(req, options)
               end
 
               # Gets the access control policy for a database resource. Returns an empty
               # policy if a database exists but does not have a policy set.
+              #
+              # Authorization requires +spanner.databases.getIamPolicy+ permission on
+              # Resource.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being requested.
@@ -499,24 +631,29 @@ module Google
               # @return [Google::Iam::V1::Policy]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_resource = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-              #   response = database_admin_api.get_iam_policy(formatted_resource)
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_resource = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   response = database_admin_client.get_iam_policy(formatted_resource)
 
               def get_iam_policy \
                   resource,
                   options: nil
-                req = Google::Iam::V1::GetIamPolicyRequest.new(
+                req = Google::Iam::V1::GetIamPolicyRequest.new({
                   resource: resource
-                )
+                }.delete_if { |_, v| v.nil? })
                 @get_iam_policy.call(req, options)
               end
 
               # Returns permissions that the caller has on the specified database resource.
+              #
+              # Attempting this RPC on a non-existent Cloud Spanner database will result in
+              # a NOT_FOUND error if the user has +spanner.databases.list+ permission on
+              # the containing Cloud Spanner instance. Otherwise returns an empty set of
+              # permissions.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy detail is being requested.
@@ -533,23 +670,23 @@ module Google
               # @return [Google::Iam::V1::TestIamPermissionsResponse]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/database/v1/database_admin_api"
+              #   require "google/cloud/spanner/admin/database/v1/database_admin_client"
               #
-              #   DatabaseAdminApi = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminApi
+              #   DatabaseAdminClient = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient
               #
-              #   database_admin_api = DatabaseAdminApi.new
-              #   formatted_resource = DatabaseAdminApi.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   database_admin_client = DatabaseAdminClient.new
+              #   formatted_resource = DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #   permissions = []
-              #   response = database_admin_api.test_iam_permissions(formatted_resource, permissions)
+              #   response = database_admin_client.test_iam_permissions(formatted_resource, permissions)
 
               def test_iam_permissions \
                   resource,
                   permissions,
                   options: nil
-                req = Google::Iam::V1::TestIamPermissionsRequest.new(
+                req = Google::Iam::V1::TestIamPermissionsRequest.new({
                   resource: resource,
                   permissions: permissions
-                )
+                }.delete_if { |_, v| v.nil? })
                 @test_iam_permissions.call(req, options)
               end
             end

@@ -14,4 +14,4 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+require "google/cloud/spanner/admin/instance/v1/instance_admin_client"

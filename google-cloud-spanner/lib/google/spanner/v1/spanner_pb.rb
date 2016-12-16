@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/auth_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
@@ -47,7 +48,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :index, :string, 4
     repeated :columns, :string, 5
     optional :key_set, :message, 6, "google.spanner.v1.KeySet"
-    optional :offset, :int64, 7
     optional :limit, :int64, 8
     optional :resume_token, :bytes, 9
   end

@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/auth_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
@@ -12,9 +13,15 @@ require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.admin.database.v1.Database" do
     optional :name, :string, 1
+    optional :state, :enum, 2, "google.spanner.admin.database.v1.Database.State"
+  end
+  add_enum "google.spanner.admin.database.v1.Database.State" do
+    value :STATE_UNSPECIFIED, 0
+    value :CREATING, 1
+    value :READY, 2
   end
   add_message "google.spanner.admin.database.v1.ListDatabasesRequest" do
-    optional :name, :string, 1
+    optional :parent, :string, 1
     optional :page_size, :int32, 3
     optional :page_token, :string, 4
   end
@@ -23,16 +30,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :next_page_token, :string, 2
   end
   add_message "google.spanner.admin.database.v1.CreateDatabaseRequest" do
-    optional :name, :string, 1
+    optional :parent, :string, 1
     optional :create_statement, :string, 2
     repeated :extra_statements, :string, 3
   end
-  add_message "google.spanner.admin.database.v1.UpdateDatabaseRequest" do
+  add_message "google.spanner.admin.database.v1.CreateDatabaseMetadata" do
+    optional :database, :string, 1
+  end
+  add_message "google.spanner.admin.database.v1.GetDatabaseRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest" do
     optional :database, :string, 1
     repeated :statements, :string, 2
     optional :operation_id, :string, 3
   end
-  add_message "google.spanner.admin.database.v1.UpdateDatabaseMetadata" do
+  add_message "google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata" do
     optional :database, :string, 1
     repeated :statements, :string, 2
     repeated :commit_timestamps, :message, 3, "google.protobuf.Timestamp"
@@ -40,10 +53,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.admin.database.v1.DropDatabaseRequest" do
     optional :database, :string, 1
   end
-  add_message "google.spanner.admin.database.v1.GetDatabaseDDLRequest" do
+  add_message "google.spanner.admin.database.v1.GetDatabaseDdlRequest" do
     optional :database, :string, 1
   end
-  add_message "google.spanner.admin.database.v1.GetDatabaseDDLResponse" do
+  add_message "google.spanner.admin.database.v1.GetDatabaseDdlResponse" do
     repeated :statements, :string, 1
   end
 end
@@ -54,14 +67,17 @@ module Google
       module Database
         module V1
           Database = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database").msgclass
+          Database::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database.State").enummodule
           ListDatabasesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesRequest").msgclass
           ListDatabasesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesResponse").msgclass
           CreateDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseRequest").msgclass
-          UpdateDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseRequest").msgclass
-          UpdateDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseMetadata").msgclass
+          CreateDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseMetadata").msgclass
+          GetDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseRequest").msgclass
+          UpdateDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest").msgclass
+          UpdateDatabaseDdlMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata").msgclass
           DropDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DropDatabaseRequest").msgclass
-          GetDatabaseDDLRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDDLRequest").msgclass
-          GetDatabaseDDLResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDDLResponse").msgclass
+          GetDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlRequest").msgclass
+          GetDatabaseDdlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlResponse").msgclass
         end
       end
     end

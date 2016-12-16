@@ -14,4 +14,4 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/v1/spanner_api"
+require "google/cloud/spanner/v1/spanner_client"

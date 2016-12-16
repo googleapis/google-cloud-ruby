@@ -26,6 +26,9 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_api"
+
 require "google/spanner/admin/instance/v1/spanner_instance_admin_pb"
 
 module Google
@@ -58,7 +61,7 @@ module Google
             #
             # @!attribute [r] instance_admin_stub
             #   @return [Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub]
-            class InstanceAdminApi
+            class InstanceAdminClient
               attr_reader :instance_admin_stub
 
               # The default address of the service.
@@ -210,6 +213,18 @@ module Google
                 require "google/gax/grpc"
                 require "google/spanner/admin/instance/v1/spanner_instance_admin_services_pb"
 
+                @operations_client = Google::Longrunning::OperationsApi.new(
+                  service_path: service_path,
+                  port: port,
+                  channel: channel,
+                  chan_creds: chan_creds,
+                  scopes: scopes,
+                  client_config: client_config,
+                  timeout: timeout,
+                  app_name: app_name,
+                  app_version: app_version
+                )
+
                 google_api_client = "#{app_name}/#{app_version} " \
                   "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
                   "ruby/#{RUBY_VERSION}".freeze
@@ -284,8 +299,8 @@ module Google
 
               # Lists the supported instance configurations for a given project.
               #
-              # @param name [String]
-              #   The name of the project for which a list of supported instance
+              # @param parent [String]
+              #   Required. The name of the project for which a list of supported instance
               #   configurations is requested. Values are of the form
               #   +projects/<project>+.
               # @param page_size [Integer]
@@ -304,20 +319,20 @@ module Google
               #   object.
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.project_path("[PROJECT]")
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_parent = InstanceAdminClient.project_path("[PROJECT]")
               #
               #   # Iterate over all results.
-              #   instance_admin_api.list_instance_configs(formatted_name).each do |element|
+              #   instance_admin_client.list_instance_configs(formatted_parent).each do |element|
               #     # Process element.
               #   end
               #
               #   # Or iterate over results one page at a time.
-              #   instance_admin_api.list_instance_configs(formatted_name).each_page do |page|
+              #   instance_admin_client.list_instance_configs(formatted_parent).each_page do |page|
               #     # Process each page at a time.
               #     page.each do |element|
               #       # Process element.
@@ -325,48 +340,48 @@ module Google
               #   end
 
               def list_instance_configs \
-                  name,
+                  parent,
                   page_size: nil,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(
-                  name: name
-                )
-                req.page_size = page_size unless page_size.nil?
+                req = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new({
+                  parent: parent,
+                  page_size: page_size
+                }.delete_if { |_, v| v.nil? })
                 @list_instance_configs.call(req, options)
               end
 
               # Gets information about a particular instance configuration.
               #
               # @param name [String]
-              #   The name of the requested instance configuration. Values are of the form
-              #   +projects/<project>/instanceConfigs/<config>+.
+              #   Required. The name of the requested instance configuration. Values are of
+              #   the form +projects/<project>/instanceConfigs/<config>+.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
               # @return [Google::Spanner::Admin::Instance::V1::InstanceConfig]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.instance_config_path("[PROJECT]", "[INSTANCE_CONFIG]")
-              #   response = instance_admin_api.get_instance_config(formatted_name)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_name = InstanceAdminClient.instance_config_path("[PROJECT]", "[INSTANCE_CONFIG]")
+              #   response = instance_admin_client.get_instance_config(formatted_name)
 
               def get_instance_config \
                   name,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(
+                req = Google::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new({
                   name: name
-                )
+                }.delete_if { |_, v| v.nil? })
                 @get_instance_config.call(req, options)
               end
 
               # Lists all instances in the given project.
               #
-              # @param name [String]
-              #   The name of the project for which a list of instances is
+              # @param parent [String]
+              #   Required. The name of the project for which a list of instances is
               #   requested. Values are of the form +projects/<project>+.
               # @param page_size [Integer]
               #   The maximum number of resources contained in the underlying API
@@ -402,20 +417,20 @@ module Google
               #   object.
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.project_path("[PROJECT]")
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_parent = InstanceAdminClient.project_path("[PROJECT]")
               #
               #   # Iterate over all results.
-              #   instance_admin_api.list_instances(formatted_name).each do |element|
+              #   instance_admin_client.list_instances(formatted_parent).each do |element|
               #     # Process element.
               #   end
               #
               #   # Or iterate over results one page at a time.
-              #   instance_admin_api.list_instances(formatted_name).each_page do |page|
+              #   instance_admin_client.list_instances(formatted_parent).each_page do |page|
               #     # Process each page at a time.
               #     page.each do |element|
               #       # Process element.
@@ -423,22 +438,22 @@ module Google
               #   end
 
               def list_instances \
-                  name,
+                  parent,
                   page_size: nil,
                   filter: nil,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::ListInstancesRequest.new(
-                  name: name
-                )
-                req.page_size = page_size unless page_size.nil?
-                req.filter = filter unless filter.nil?
+                req = Google::Spanner::Admin::Instance::V1::ListInstancesRequest.new({
+                  parent: parent,
+                  page_size: page_size,
+                  filter: filter
+                }.delete_if { |_, v| v.nil? })
                 @list_instances.call(req, options)
               end
 
               # Gets information about a particular instance.
               #
               # @param name [String]
-              #   The name of the requested instance. Values are of the form
+              #   Required. The name of the requested instance. Values are of the form
               #   +projects/<project>/instances/<instance>+.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
@@ -446,20 +461,20 @@ module Google
               # @return [Google::Spanner::Admin::Instance::V1::Instance]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
-              #   response = instance_admin_api.get_instance(formatted_name)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_name = InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #   response = instance_admin_client.get_instance(formatted_name)
 
               def get_instance \
                   name,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::GetInstanceRequest.new(
+                req = Google::Spanner::Admin::Instance::V1::GetInstanceRequest.new({
                   name: name
-                )
+                }.delete_if { |_, v| v.nil? })
                 @get_instance.call(req, options)
               end
 
@@ -490,94 +505,86 @@ module Google
               #   * The instance's allocated resource levels are readable via the API.
               #   * The instance's state becomes +READY+.
               #
-              # The returned operation's
+              # The returned Long-running operation will
+              # have a name of the format +<instance_name>/operations/<operation_id>+ and
+              # can be used to track creation of the instance.  The
               # Metadata field type is
-              # CreateInstanceMetadata
-              # The returned operation's
-              # Response field type is
-              # Instance, if
-              # successful.
+              # CreateInstanceMetadata.
+              # The Response field type is
+              # Instance, if successful.
               #
-              # Authorization requires +spanner.instances.create+ permission on
-              # resource Name.
-              #
-              # @param name [String]
-              #   A unique identifier for the instance, which cannot be changed after
-              #   the instance is created. Values are of the form
-              #   +projects/<project>/instances/A-z*[a-z0-9]+. The final
-              #   segment of the name must be between 6 and 30 characters in length.
-              # @param config [String]
-              #   The name of the instance's configuration. Values are of the form
-              #   +projects/<project>/instanceConfigs/<configuration>+. See
-              #   also InstanceConfig and
-              #   ListInstanceConfigs.
-              # @param display_name [String]
-              #   The descriptive name for this instance as it appears in UIs.
-              #   Must be unique per project and between 4 and 30 characters in length.
-              # @param node_count [Integer]
-              #   The number of nodes allocated to this instance.
-              # @param state [Google::Spanner::Admin::Instance::V1::Instance::State]
-              #   The current instance state. For
-              #   CreateInstance, the state must be
-              #   either omitted or set to +CREATING+. For
-              #   UpdateInstance, the state must be
-              #   either omitted or set to +READY+.
-              # @param labels [Hash{String => String}]
-              #   Cloud Labels are a flexible and lightweight mechanism for organizing cloud
-              #   resources into groups that reflect a customer's organizational needs and
-              #   deployment strategies. Cloud Labels can be used to filter collections of
-              #   resources. They can be used to control how resource metrics are aggregated.
-              #   And they can be used as arguments to policy management rules (e.g. route,
-              #   firewall, load balancing, etc.).
-              #
-              #    * Label keys must be between 1 and 63 characters long and must conform to
-              #      the following regular expression: +{a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?+.
-              #    * Label values must be between 0 and 63 characters long and must conform
-              #      to the regular expression +({a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?)?+.
-              #    * No more than 64 labels can be associated with a given resource.
-              #
-              #   See https://goo.gl/xmQnxf for more information on and examples of labels.
-              #
-              #   If you plan to use labels in your own code, please note that additional
-              #   characters may be allowed in the future. And so you are advised to use an
-              #   internal label representation, such as JSON, which doesn't rely upon
-              #   specific characters being disallowed.  For example, representing labels
-              #   as the string:  name + "_" + value  would prove problematic if we were to
-              #   allow "_" in a future release.
+              # @param parent [String]
+              #   Required. The name of the project in which to create the instance. Values
+              #   are of the form +projects/<project>+.
+              # @param instance_id [String]
+              #   Required. The ID of the instance to create.  Valid identifiers are of the
+              #   form +[a-z][-a-z0-9]*[a-z0-9]+ and must be between 6 and 30 characters in
+              #   length.
+              # @param instance [Google::Spanner::Admin::Instance::V1::Instance]
+              #   Required. The instance to create.  The name may be omitted, but if
+              #   specified must be +<parent>/instances/<instance_id>+.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
-              # @return [Google::Longrunning::Operation]
+              # @return [Google::Gax::Operation]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   Instance = Google::Spanner::Admin::Instance::V1::Instance
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
-              #   config = ''
-              #   display_name = ''
-              #   node_count = 0
-              #   response = instance_admin_api.create_instance(formatted_name, config, display_name, node_count)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_parent = InstanceAdminClient.project_path("[PROJECT]")
+              #   instance_id = ''
+              #   instance = Instance.new
+              #
+              #   # Register a callback during the method call.
+              #   operation = instance_admin_client.create_instance(formatted_parent, instance_id, instance) do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Or use the return value to register a callback.
+              #   operation.on_done do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Manually reload the operation.
+              #   operation.reload!
+              #
+              #   # Or block until the operation completes, triggering callbacks on
+              #   # completion.
+              #   operation.wait_until_done!
 
               def create_instance \
-                  name,
-                  config,
-                  display_name,
-                  node_count,
-                  state: nil,
-                  labels: nil,
+                  parent,
+                  instance_id,
+                  instance,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::Instance.new(
-                  name: name,
-                  config: config,
-                  display_name: display_name,
-                  node_count: node_count
+                req = Google::Spanner::Admin::Instance::V1::CreateInstanceRequest.new({
+                  parent: parent,
+                  instance_id: instance_id,
+                  instance: instance
+                }.delete_if { |_, v| v.nil? })
+                operation = Google::Gax::Operation.new(
+                  @create_instance.call(req, options),
+                  @operations_client,
+                  Google::Spanner::Admin::Instance::V1::Instance,
+                  Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata,
+                  call_options: options
                 )
-                req.state = state unless state.nil?
-                req.labels = labels unless labels.nil?
-                @create_instance.call(req, options)
+                operation.on_done { |operation| yield(operation) } if block_given?
+                operation
               end
 
               # Updates an instance, and begins allocating or releasing resources
@@ -610,95 +617,85 @@ module Google
               #     tables.
               #   * The instance's new resource levels are readable via the API.
               #
-              # The returned operation's
+              # The returned Long-running operation will
+              # have a name of the format +<instance_name>/operations/<operation_id>+ and
+              # can be used to track the instance modification.  The
               # Metadata field type is
-              # UpdateInstanceMetadata
-              # The returned operation's
-              # Response field type is
-              # Instance, if
-              # successful.
+              # UpdateInstanceMetadata.
+              # The Response field type is
+              # Instance, if successful.
               #
               # Authorization requires +spanner.instances.update+ permission on
               # resource Name.
               #
-              # @param name [String]
-              #   A unique identifier for the instance, which cannot be changed after
-              #   the instance is created. Values are of the form
-              #   +projects/<project>/instances/A-z*[a-z0-9]+. The final
-              #   segment of the name must be between 6 and 30 characters in length.
-              # @param config [String]
-              #   The name of the instance's configuration. Values are of the form
-              #   +projects/<project>/instanceConfigs/<configuration>+. See
-              #   also InstanceConfig and
-              #   ListInstanceConfigs.
-              # @param display_name [String]
-              #   The descriptive name for this instance as it appears in UIs.
-              #   Must be unique per project and between 4 and 30 characters in length.
-              # @param node_count [Integer]
-              #   The number of nodes allocated to this instance.
-              # @param state [Google::Spanner::Admin::Instance::V1::Instance::State]
-              #   The current instance state. For
-              #   CreateInstance, the state must be
-              #   either omitted or set to +CREATING+. For
-              #   UpdateInstance, the state must be
-              #   either omitted or set to +READY+.
-              # @param labels [Hash{String => String}]
-              #   Cloud Labels are a flexible and lightweight mechanism for organizing cloud
-              #   resources into groups that reflect a customer's organizational needs and
-              #   deployment strategies. Cloud Labels can be used to filter collections of
-              #   resources. They can be used to control how resource metrics are aggregated.
-              #   And they can be used as arguments to policy management rules (e.g. route,
-              #   firewall, load balancing, etc.).
-              #
-              #    * Label keys must be between 1 and 63 characters long and must conform to
-              #      the following regular expression: +{a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?+.
-              #    * Label values must be between 0 and 63 characters long and must conform
-              #      to the regular expression +({a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?)?+.
-              #    * No more than 64 labels can be associated with a given resource.
-              #
-              #   See https://goo.gl/xmQnxf for more information on and examples of labels.
-              #
-              #   If you plan to use labels in your own code, please note that additional
-              #   characters may be allowed in the future. And so you are advised to use an
-              #   internal label representation, such as JSON, which doesn't rely upon
-              #   specific characters being disallowed.  For example, representing labels
-              #   as the string:  name + "_" + value  would prove problematic if we were to
-              #   allow "_" in a future release.
+              # @param instance [Google::Spanner::Admin::Instance::V1::Instance]
+              #   Required. The instance to update, which must always include the instance
+              #   name.  Otherwise, only fields mentioned in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need be included.
+              # @param field_mask [Google::Protobuf::FieldMask]
+              #   Required. A mask specifying which fields in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should be updated.
+              #   The field mask must always be specified; this prevents any future fields in
+              #   [][google.spanner.admin.instance.v1.Instance] from being erased accidentally by clients that do not know
+              #   about them.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
-              # @return [Google::Longrunning::Operation]
+              # @return [Google::Gax::Operation]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   FieldMask = Google::Protobuf::FieldMask
+              #   Instance = Google::Spanner::Admin::Instance::V1::Instance
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
-              #   config = ''
-              #   display_name = ''
-              #   node_count = 0
-              #   labels = {}
-              #   response = instance_admin_api.update_instance(formatted_name, config, display_name, node_count, labels)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   instance = Instance.new
+              #   field_mask = FieldMask.new
+              #
+              #   # Register a callback during the method call.
+              #   operation = instance_admin_client.update_instance(instance, field_mask) do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Or use the return value to register a callback.
+              #   operation.on_done do |op|
+              #     raise op.results.message if op.error?
+              #     results = op.results
+              #     # Process the results.
+              #
+              #     metadata = op.metadata
+              #     # Process the metadata.
+              #   end
+              #
+              #   # Manually reload the operation.
+              #   operation.reload!
+              #
+              #   # Or block until the operation completes, triggering callbacks on
+              #   # completion.
+              #   operation.wait_until_done!
 
               def update_instance \
-                  name,
-                  config,
-                  display_name,
-                  node_count,
-                  labels,
-                  state: nil,
+                  instance,
+                  field_mask,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::Instance.new(
-                  name: name,
-                  config: config,
-                  display_name: display_name,
-                  node_count: node_count,
-                  labels: labels
+                req = Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new({
+                  instance: instance,
+                  field_mask: field_mask
+                }.delete_if { |_, v| v.nil? })
+                operation = Google::Gax::Operation.new(
+                  @update_instance.call(req, options),
+                  @operations_client,
+                  Google::Spanner::Admin::Instance::V1::Instance,
+                  Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata,
+                  call_options: options
                 )
-                req.state = state unless state.nil?
-                @update_instance.call(req, options)
+                operation.on_done { |operation| yield(operation) } if block_given?
+                operation
               end
 
               # Deletes an instance.
@@ -714,32 +711,36 @@ module Google
               #     is permanently deleted.
               #
               # @param name [String]
-              #   The name of the instance to be deleted. Values are of the form
+              #   Required. The name of the instance to be deleted. Values are of the form
               #   +projects/<project>/instances/<instance>+
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_name = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
-              #   instance_admin_api.delete_instance(formatted_name)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_name = InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #   instance_admin_client.delete_instance(formatted_name)
 
               def delete_instance \
                   name,
                   options: nil
-                req = Google::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(
+                req = Google::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new({
                   name: name
-                )
+                }.delete_if { |_, v| v.nil? })
                 @delete_instance.call(req, options)
+                nil
               end
 
               # Sets the access control policy on an instance resource. Replaces any
               # existing policy.
+              #
+              # Authorization requires +spanner.instances.setIamPolicy+ on
+              # Resource.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being specified.
@@ -756,29 +757,32 @@ module Google
               # @return [Google::Iam::V1::Policy]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #   Policy = Google::Iam::V1::Policy
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_resource = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_resource = InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #   policy = Policy.new
-              #   response = instance_admin_api.set_iam_policy(formatted_resource, policy)
+              #   response = instance_admin_client.set_iam_policy(formatted_resource, policy)
 
               def set_iam_policy \
                   resource,
                   policy,
                   options: nil
-                req = Google::Iam::V1::SetIamPolicyRequest.new(
+                req = Google::Iam::V1::SetIamPolicyRequest.new({
                   resource: resource,
                   policy: policy
-                )
+                }.delete_if { |_, v| v.nil? })
                 @set_iam_policy.call(req, options)
               end
 
               # Gets the access control policy for an instance resource. Returns an empty
               # policy if an instance exists but does not have a policy set.
+              #
+              # Authorization requires +spanner.instances.getIamPolicy+ on
+              # Resource.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being requested.
@@ -790,24 +794,29 @@ module Google
               # @return [Google::Iam::V1::Policy]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_resource = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
-              #   response = instance_admin_api.get_iam_policy(formatted_resource)
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_resource = InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #   response = instance_admin_client.get_iam_policy(formatted_resource)
 
               def get_iam_policy \
                   resource,
                   options: nil
-                req = Google::Iam::V1::GetIamPolicyRequest.new(
+                req = Google::Iam::V1::GetIamPolicyRequest.new({
                   resource: resource
-                )
+                }.delete_if { |_, v| v.nil? })
                 @get_iam_policy.call(req, options)
               end
 
               # Returns permissions that the caller has on the specified instance resource.
+              #
+              # Attempting this RPC on a non-existent Cloud Spanner instance resource will
+              # result in a NOT_FOUND error if the user has +spanner.instances.list+
+              # permission on the containing Google Cloud Project. Otherwise returns an
+              # empty set of permissions.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy detail is being requested.
@@ -824,23 +833,23 @@ module Google
               # @return [Google::Iam::V1::TestIamPermissionsResponse]
               # @raise [Google::Gax::GaxError] if the RPC is aborted.
               # @example
-              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_api"
+              #   require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
               #
-              #   InstanceAdminApi = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminApi
+              #   InstanceAdminClient = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient
               #
-              #   instance_admin_api = InstanceAdminApi.new
-              #   formatted_resource = InstanceAdminApi.instance_path("[PROJECT]", "[INSTANCE]")
+              #   instance_admin_client = InstanceAdminClient.new
+              #   formatted_resource = InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #   permissions = []
-              #   response = instance_admin_api.test_iam_permissions(formatted_resource, permissions)
+              #   response = instance_admin_client.test_iam_permissions(formatted_resource, permissions)
 
               def test_iam_permissions \
                   resource,
                   permissions,
                   options: nil
-                req = Google::Iam::V1::TestIamPermissionsRequest.new(
+                req = Google::Iam::V1::TestIamPermissionsRequest.new({
                   resource: resource,
                   permissions: permissions
-                )
+                }.delete_if { |_, v| v.nil? })
                 @test_iam_permissions.call(req, options)
               end
             end

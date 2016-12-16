@@ -32,7 +32,12 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "UpdateDatabase": {
+        "GetDatabase": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateDatabaseDdl": {
           "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -42,7 +47,7 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "GetDatabaseDDL": {
+        "GetDatabaseDdl": {
           "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
