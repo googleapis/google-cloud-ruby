@@ -33,29 +33,58 @@ module Google
       # *   Sends the completed trace to the Stackdriver service.
       #
       # To use this middleware, simply install it in your middleware stack.
+      # Here is an example Sinatra application that includes the Trace
+      # middleware:
+      #
+      # ```ruby
+      # # Simple sinatra application
+      #
+      # require "sinatra"
+      # require "google/cloud/trace"
+      #
+      # use Google::Cloud::Trace::Middleware
+      #
+      # get "/" do
+      #   "Hello World!"
+      # end
+      # ```
+      #
+      # Here is an example `config.ru` file for a web application that uses
+      # the standard Rack configuration mechanism.
+      #
+      # ```ruby
+      # # config.ru for simple Rack application
+      #
+      # require "google/cloud/trace"
+      # use Google::Cloud::Trace::Middleware
+      #
+      # run MyApp
+      # ```
+      #
       # If your application uses Ruby On Rails, you may also use the provided
       # {Google::Cloud::Trace::Railtie} for close integration with Rails and
       # ActiveRecord.
       #
-      # @example
-      #   # config.ru for simple Rack application
+      # By default, this middleware creates traces that measure just the http
+      # request handling as a whole. If you want to provide more detailed
+      # measurements of smaller processes, use the classes provided in this
+      # library. Below is a Sinatra example to get you started.
       #
-      #   require "google/cloud/trace"
-      #   use Google::Cloud::Trace::Middleware
+      # ```ruby
+      # # Simple sinatra application
       #
-      #   run MyApp
+      # require "sinatra"
+      # require "google/cloud/trace"
       #
-      # @example
-      #   # Simple sinatra application
+      # use Google::Cloud::Trace::Middleware
       #
-      #   require "sinatra"
-      #   require "google/cloud/trace"
-      #
-      #   use Google::Cloud::Trace::Middleware
-      #
-      #   get "/" do
-      #     "Hello World"
+      # get "/" do
+      #   Google::Cloud::Trace.in_span "Sleeping on the job!" do
+      #     sleep rand
       #   end
+      #   "Hello World!"
+      # end
+      # ```
       #
       class Middleware
         ##

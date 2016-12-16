@@ -77,9 +77,10 @@ module Google
       # config.google_cloud.trace.notifications = ["event1", "event2"]
       # ```
       #
-      # Provide a list of ActiveSupport events that you want recorded in your
-      # traces. By default, ActiveRecord queries, rendering, mailing, and file
-      # sending tasks are recorded, but you may provide an alternate list.
+      # By default, this Railtie subscribes to ActiveSupport notifications
+      # emitted by ActiveRecord queries, rendering, and emailing functions.
+      # See {DEFAULT_NOTIFICATIONS}. If you want to customize the list of
+      # notification types, edit the notifications configuration.
       #
       # ```ruby
       # config.google_cloud.trace.max_data_length = 1024
@@ -88,6 +89,22 @@ module Google
       # The maximum length of span properties recorded with ActiveSupport
       # notification events. Any property value larger than this length is
       # truncated.
+      #
+      # ## Measuring custom functionality
+      #
+      # To add a custom measurement to a request trace, use the classes
+      # provided in this library. Below is an example to get you started.
+      #
+      # ```ruby
+      # class MyController < ApplicationController
+      #   def index
+      #     Google::Cloud::Trace.in_span "Sleeping on the job!" do
+      #       sleep rand
+      #     end
+      #     render plain: "Hello World!"
+      #   end
+      # end
+      # ```
       #
       class Railtie < ::Rails::Railtie
         ##
