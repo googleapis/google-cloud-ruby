@@ -43,7 +43,7 @@ module Acceptance
     let(:simple_span_labels) { { "foo" => "bar" } }
 
     def simple_trace
-      tc = Stackdriver::Core::TraceContext.new.with is_new: false
+      tc = Stackdriver::Core::TraceContext.new.with is_new: false, span_id: 123
       trace = tracer.new_trace trace_context: tc
       now = Time.now.utc
       trace.create_span simple_span_name,

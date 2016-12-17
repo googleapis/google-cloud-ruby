@@ -83,13 +83,17 @@ module Google
           trace_id = trace_proto.trace_id.to_s
           return nil if trace_id.empty?
 
-          tc = Stackdriver::Core::TraceContext.new trace_id: trace_id
-          trace = new trace_proto.project_id, tc
-          last_span_protos = []
           span_protos = trace_proto.spans
-          until span_protos.size == last_span_protos.size
-            last_span_protos = span_protos
-            span_protos = trace.add_span_protos span_protos
+          parent_span_ids = find_root_span_ids span_protos
+
+          span_id = parent_span_ids.size == 1 ? parent_span_ids.first : 0
+          span_id = nil if span_id == 0
+          tc = Stackdriver::Core::TraceContext.new trace_id: trace_id,
+                                                   span_id: span_id
+          trace = new trace_proto.project_id, tc
+
+          until parent_span_ids.empty?
+            parent_span_ids = trace.add_span_protos span_protos, parent_span_ids
           end
           trace
         end
@@ -161,7 +165,10 @@ module Google
         # @param [Integer] span_id The numeric ID of the span, or nil to
         #     generate a new random unique ID. Optional (defaults to nil).
         # @param [Integer] parent_span_id The span ID of the parent span, or 0
-        #     if this should be a new root span. Optional (defaults to 0).
+        #     if this should be a new root span within the context. Note that
+        #     a root span would not necessarily end up with a parent ID of 0 if
+        #     the trace context specifies a different context span ID. Optional
+        #     (defaults to 0).
         # @param [SpanKind] kind The kind of span. Optional.
         # @param [Time] start_time The starting timestamp, or nil if not yet
         #     specified. Optional (defaults to nil).
@@ -182,16 +189,18 @@ module Google
                         start_time: nil, end_time: nil,
                         labels: {}
           parent_span_id = parent_span_id.to_i
-          if parent_span_id == 0
-            internal_create_span nil, span_id, name, kind, start_time, end_time,
-                                 labels
+          parent_span_id = trace_context.span_id.to_i if parent_span_id == 0
+          parent_span = @spans_by_id[parent_span_id]
+          if parent_span
+            parent_span.create_span name,
+                                    span_id: span_id,
+                                    kind: kind,
+                                    start_time: start_time,
+                                    end_time: end_time,
+                                    labels: labels
           else
-            @spans_by_id[parent_span_id].create_span name,
-                                                     span_id: span_id,
-                                                     kind: kind,
-                                                     start_time: start_time,
-                                                     end_time: end_time,
-                                                     labels: labels
+            internal_create_span nil, span_id, parent_span_id, name, kind,
+                                 start_time, end_time, labels
           end
         end
 
@@ -228,13 +237,14 @@ module Google
         #
         # @private
         #
-        def internal_create_span parent, span_id, name, kind, start_time,
-                                 end_time, labels
+        def internal_create_span parent, span_id, parent_span_id, name, kind,
+                                 start_time, end_time, labels
           span_id = span_id.to_i
+          parent_span_id = parent_span_id.to_i
           span_id = unique_span_id if span_id == 0
-          span = Google::Cloud::Trace::Span.new self, span_id, parent, name,
-                                                kind, start_time, end_time,
-                                                labels
+          span = Google::Cloud::Trace::Span.new \
+            self, span_id, parent_span_id, parent, name, kind,
+            start_time, end_time, labels
           @root_spans << span if parent.nil?
           @spans_by_id[span_id] = span
           span
@@ -282,25 +292,39 @@ module Google
         end
 
         ##
-        # Given a list of span protobufs, for all spans whose parent is present
-        # in this trace already, convert that span to a `TraceSpan` object and
-        # add it into this trace. Returns the protos that have not yet been
-        # used. This method may be called repeatedly to populate a trace's
-        # span tree fully.
+        # Given a list of span protobufs, find the "root" span IDs, i.e. all
+        # parent span IDs that don't correspond to actual spans in the set.
         #
         # @private
         #
-        def add_span_protos span_protos
-          next_span_protos = []
+        def self.find_root_span_ids span_protos
+          span_ids = ::Set.new span_protos.map(&:span_id)
+          root_protos = span_protos.find_all do |sp|
+            !span_ids.include? sp.parent_span_id
+          end
+          ::Set.new root_protos.map(&:parent_span_id)
+        end
+
+        ##
+        # Given a list of span protobufs and a set of parent span IDs, add
+        # for all spans whose parent is in the set, convert the span to a
+        # `TraceSpan` object and add it into this trace. Returns the IDs of
+        # the spans added, which may be used in a subsequent call to this
+        # method. Effectively, repeated calls to this method perform a
+        # breadth-first walk of the span protos and populate the TraceRecord
+        # accordingly.
+        #
+        # @private
+        #
+        def add_span_protos span_protos, parent_span_ids
+          new_span_ids = ::Set.new
           span_protos.each do |span_proto|
-            parent_span_id = span_proto.parent_span_id.to_i
-            if parent_span_id == 0 || @spans_by_id.include?(parent_span_id)
+            if parent_span_ids.include? span_proto.parent_span_id
               Google::Cloud::Trace::Span.from_proto span_proto, self
-            else
-              next_span_protos << span_proto
+              new_span_ids.add span_proto.span_id
             end
           end
-          next_span_protos
+          new_span_ids
         end
       end
     end

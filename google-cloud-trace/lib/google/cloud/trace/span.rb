@@ -48,6 +48,19 @@ module Google
         attr_reader :span_id
 
         ##
+        # The ID of the parent span, as an integer that may be zero if this
+        # is a true root span.
+        #
+        # Note that it is possible for a span to be "orphaned", that is, to be
+        # a root span with a nonzero parent ID, indicating that parent has not
+        # (yet) been written. In that case, `parent` will return nil, but
+        # `parent_span_id` will have a value.
+        #
+        # @return [Integer]
+        #
+        attr_reader :parent_span_id
+
+        ##
         # The kind of this span.
         #
         # @return [Google::Cloud::Trace::SpanKind]
@@ -89,10 +102,11 @@ module Google
         #
         # @private
         #
-        def initialize trace, id, parent, name, kind, start_time, end_time,
-                       labels
+        def initialize trace, id, parent_span_id, parent, name, kind,
+                       start_time, end_time, labels
           @trace = trace
           @span_id = id
+          @parent_span_id = parent_span_id
           @parent = parent
           @children = []
           @name = name
@@ -113,7 +127,7 @@ module Google
           other.is_a?(Google::Cloud::Trace::Span) &&
             trace.trace_context == other.trace.trace_context &&
             span_id == other.span_id &&
-            same_parent?(other) &&
+            parent_span_id == other.parent_span_id &&
             same_children?(other) &&
             kind == other.kind &&
             name == other.name &&
@@ -160,7 +174,6 @@ module Google
         #     protobuf.
         #
         def to_proto default_parent_id = 0
-          parent_span_id = parent ? parent.span_id.to_i : default_parent_id
           start_proto = Google::Cloud::Trace::Utils.time_to_proto start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_proto end_time
           Google::Devtools::Cloudtrace::V1::TraceSpan.new \
@@ -169,7 +182,7 @@ module Google
             name: name,
             start_time: start_proto,
             end_time: end_proto,
-            parent_span_id: parent_span_id,
+            parent_span_id: parent_span_id || default_parent_id,
             labels: labels
         end
 
@@ -239,8 +252,8 @@ module Google
                         start_time: nil, end_time: nil,
                         labels: {}
           ensure_exists!
-          span = trace.internal_create_span self, span_id, name, kind,
-                                            start_time, end_time, labels
+          span = trace.internal_create_span self, span_id, self.span_id, name,
+                                            kind, start_time, end_time, labels
           @children << span
           span
         end
@@ -370,8 +383,10 @@ module Google
           end
           if new_parent
             new_parent.add_child self
+            @parent_span_id = new_parent.span_id
           else
             trace.add_root self
+            @parent_span_id = 0
           end
           @parent = new_parent
           self
@@ -417,17 +432,6 @@ module Google
             fail "Move would result in a cycle" if ptr.equal?(self)
             ptr = ptr.parent
           end
-        end
-
-        ##
-        # Returns true if this span has the same parent as the given other.
-        #
-        # @private
-        #
-        def same_parent? other
-          parent_id = parent ? parent.span_id : nil
-          other_parent_id = other.parent ? other.parent.span_id : nil
-          parent_id == other_parent_id
         end
 
         ##
