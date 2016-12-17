@@ -161,12 +161,6 @@ module Google
         #
         def create_trace env
           trace_context = get_trace_context env
-
-          # TEMP: Drop the context parent span because a bug is preventing
-          # such traces from appearing in Flex apps. We expect this bug to
-          # be fixed around 2016.12.16, so re-check around that time.
-          trace_context = trace_context.with span_id: nil
-
           Google::Cloud::Trace::TraceRecord.new \
             @service.project,
             trace_context,
