@@ -90,6 +90,13 @@ module Google
       # notification events. Any property value larger than this length is
       # truncated.
       #
+      # ```ruby
+      # config.google_cloud.trace.capture_stack = true | false
+      # ```
+      #
+      # Whether to capture the call stack with each trace span. Default is
+      # false.
+      #
       # ## Measuring custom functionality
       #
       # To add a custom measurement to a request trace, use the classes
