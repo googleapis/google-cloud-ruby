@@ -61,7 +61,7 @@
         {
           "title": "TraceRecord",
           "type": "google/cloud/trace/tracerecord"
-        },
+        }
       ]
     },
     {

@@ -25,16 +25,21 @@ module Google
       # information about billing and authorized users, and they control access
       # to Stackdriver Trace resources. Each project has a friendly name and a
       # unique ID. Projects can be created only in the [Google Developers
-      # Console](https://console.developers.google.com). See
-      # {Google::Cloud#trace}.
+      # Console](https://console.developers.google.com).
+      #
+      # This class is a client to make API calls for the project's trace data.
+      # Create an instance using {Google::Cloud::Trace.new} or
+      # {Google::Cloud#trace}. You may then use the `get_trace` method to
+      # retrieve a trace by ID, `list_traces` to query for a set of traces,
+      # and `patch_traces` to update trace data. You may also use `new_trace`
+      # as a convenience constructor to build a
+      # {Google::Cloud::Trace::TraceRecord} object.
       #
       # @example
       #   require "google/cloud/trace"
       #
       #   trace_client = Google::Cloud::Trace.new
       #   traces = trace_client.list_traces Time.now - 3600, Time.now
-      #
-      # See Google::Cloud#trace
       #
       class Project
         ##

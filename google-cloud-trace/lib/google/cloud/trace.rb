@@ -50,30 +50,99 @@ module Google
     #
     # ## Instrumenting Your App
     #
-    # If your application uses Ruby on Rails, the easiest way to instrument
-    # your application for all Stackdriver diagnostic and monitoring services
-    # is to install the `stackdriver` gem. Add it to your Gemfile and deploy
-    # your application to Google Cloud. Then open the Google Cloud Console in
-    # your web browser and navigate to the "Trace" section. Your application
-    # latency traces will appear there; no additional coding is required.
+    # This library integrates with Rack-based web frameworks such as Ruby On
+    # Rails to provide latency trace reports for your application.
+    # Specifcally, it:
     #
-    # You may also adopt Stackdriver diagnostic services "a la carte" by
-    # installing individual gems. To instrument your app for the Trace service,
-    # add this gem, `google-cloud-trace`, to your Gemfile. Then add the
-    # following line to your `config/application.rb` file:
+    # *   Provides a Rack middleware that automatically reports latency traces
+    #     for http requests handled by your application, and measures the
+    #     latency of each request as a whole.
+    # *   Integrates with `ActiveSupport::Notifications` to add important
+    #     latency-affecting events such as ActiveRecord queries to the trace.
+    # *   Provides a simple API for your application code to define and
+    #     measure latency-affecting processes specific to your application.
+    #
+    # When this library is installed and configured in your running
+    # application, you can view your application's latency traces in real time
+    # by opening the Google Cloud Console in your web browser and navigating
+    # to the "Trace" section. It also integrates with Google App Engine
+    # Flexible and Google Container Engine to provide additional information
+    # for applications hosted in those environments.
+    #
+    # ### Using instrumentation with Ruby on Rails
+    #
+    # To install application instrumentation in your Ruby on Rails app, add
+    # this gem, `google-cloud-trace`, to your Gemfile and update your bundle.
+    # Then add the following line to your `config/application.rb` file:
     #
     # ```ruby
     # require "google/cloud/trace/rails"
     # ```
     #
+    # This will install a Railtie that automatically integrates with the
+    # Rails framework, installing the middleware and the ActiveSupport
+    # integration for you. Your application traces, including basic request
+    # tracing, ActiveRecord query measurements, and view render measurements,
+    # should then start appearing in the Cloud Console.
+    #
     # See the {Google::Cloud::Trace::Railtie} class for more information,
     # including how to customize your application traces.
     #
-    # If your application uses a different Rack-based web framework, you may
-    # instrument your app by installing the trace middleware. See the
-    # {Google::Cloud::Trace::Middleware} documentation for more information.
+    # ### Using instrumentation with Sinatra
+    #
+    # To install application instrumentation in your Sinatra app, add this gem,
+    # `google-cloud-trace`, to your Gemfile and update your bundle. Then add
+    # the following lines to your main application Ruby file:
+    #
+    # ```ruby
+    # require "google/cloud/trace"
+    # use Google::Cloud::Trace::Middleware
+    # ```
+    #
+    # This will install the trace middleware in your application, providing
+    # basic request tracing for your application. You may measure additional
+    # processes such as database queries or calls to external services using
+    # other classes in this library. See the {Google::Cloud::Trace::Middleware}
+    # documentation for more information.
+    #
+    # ### Using instrumentation with other Rack-based frameworks
+    #
+    # To install application instrumentation in an app using another Rack-based
+    # web framework, add this gem, `google-cloud-trace`, to your Gemfile and
+    # update your bundle. Then add install the trace middleware in your
+    # middleware stack. In most cases, this means adding these lines to your
+    # `config.ru` Rack configuration file:
+    #
+    # ```ruby
+    # require "google/cloud/trace"
+    # use Google::Cloud::Trace::Middleware
+    # ```
+    #
+    # Some web frameworks have an alternate mechanism for modifying the
+    # middleware stack. Consult your web framework's documentation for more
+    # information.
+    #
+    # ### The Stackdriver diagnostics suite
+    #
+    # The trace library is part of the Stackdriver diagnostics suite, which
+    # also includes error reporting and log analysis. If you include the
+    # `stackdriver` gem in your Gemfile, this trace library will be included
+    # automatically. In addition, if you include the `stackdriver` gem in an
+    # application using Ruby On Rails, the Railtie will be installed
+    # automatically; you will not need to write any code to view latency
+    # traces for your appl. See the documentation for the "stackdriver" gem
+    # for more details.
     #
     # ## Stackdriver Trace API
+    #
+    # This library also includes an easy to use Ruby client for the
+    # Stackdriver Trace API. This API provides calls to report and modify
+    # application traces, as well as to query and analyze existing traces.
+    #
+    # For further information on the trace API, see
+    # {Google::Cloud::Trace::Project}.
+    #
+    # ### Querying traces using the API
     #
     # Using the Stackdriver Trace API, your application can query and analyze
     # its own traces and traces of other projects. Here is an example query
@@ -94,6 +163,8 @@ module Google
     # request trace. See https://cloud.google.com/trace for more information
     # on the kind of data you can capture in a trace.
     #
+    # ### Reporting traces using the API
+    #
     # Usually it is easiest to use this library's trace instrumentation
     # features to collect and record application trace information. However,
     # you may also use the trace API to update this data. Here is an example:
@@ -110,9 +181,6 @@ module Google
     #
     # trace_client.patch_traces trace
     # ```
-    #
-    # For further information on the trace API, see
-    # {Google::Cloud::Trace::Project}.
     #
     module Trace
       THREAD_KEY = :__stackdriver_trace_span__
@@ -171,14 +239,15 @@ module Google
       # trace instrumentation state for the request being handled. You may use
       # {Google::Cloud::Trace.get} to retrieve the data.
       #
-      # @param [Google::Cloud::Trace::TraceSpan, Google::Cloud::Trace::Trace,
-      #     nil] trace The current span being measured, the current trace
-      #     object, or `nil` if none.
+      # @param [Google::Cloud::Trace::TraceSpan,
+      #     Google::Cloud::Trace::TraceRecord, nil] trace The current span
+      #     being measured, the current trace object, or `nil` if none.
       #
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   # Later...
@@ -195,13 +264,15 @@ module Google
       # This data should previously have been set using
       # {Google::Cloud::Trace.set}.
       #
-      # @return [Google::Cloud::Trace::TraceSpan, Google::Cloud::Trace::Trace,
-      #     nil] The span or trace object, or `nil`.
+      # @return [Google::Cloud::Trace::TraceSpan,
+      #     Google::Cloud::Trace::TraceRecord, nil] The span or trace object,
+      #     or `nil`.
       #
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   # Later...
@@ -228,11 +299,18 @@ module Google
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   Google::Cloud::Trace.in_span "my_span" do |span|
+      #     span.labels["foo"] = "bar"
       #     # Do stuff...
+      #
+      #     Google::Cloud::Trace.in_span "my_subspan" do |subspan|
+      #       subspan.labels["foo"] = "sub-bar"
+      #       # Do other stuff...
+      #     end
       #   end
       #
       def self.in_span name, kind: Google::Cloud::Trace::SpanKind::UNSPECIFIED,
