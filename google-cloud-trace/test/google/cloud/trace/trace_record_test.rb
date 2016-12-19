@@ -245,4 +245,60 @@ describe Google::Cloud::Trace::TraceRecord do
     trace.to_proto.must_equal proto
     Google::Cloud::Trace::TraceRecord.from_proto(proto).must_equal trace
   end
+
+  it "converts to and from a protobuf with an orphaned span" do
+    span_start = Time.at 10001, 123
+    span_start_p = Google::Protobuf::Timestamp.new seconds: 10001, nanos: 123000
+    sub_start = Time.at 10002, 456
+    sub_start_p = Google::Protobuf::Timestamp.new seconds: 10002, nanos: 456000
+    sub_end = Time.at 10003, 789
+    sub_end_p = Google::Protobuf::Timestamp.new seconds: 10003, nanos: 789000
+    span_end = Time.at 10004, 321
+    span_end_p = Google::Protobuf::Timestamp.new seconds: 10004, nanos: 321000
+    context_span_id = 271828
+    span_id = 314159
+    sub_id = 265359
+    span_name = "aname"
+    sub_name = "bname"
+    span_labels = { "foo" => "bar"}
+    sub_labels = { "foo" => "baz"}
+
+    tc = my_trace_context.with span_id: context_span_id
+    trace = Google::Cloud::Trace::TraceRecord.new project_id, tc
+    span = trace.create_span span_name,
+                             span_id: span_id,
+                             kind: Google::Cloud::Trace::SpanKind::RPC_SERVER,
+                             start_time: span_start, end_time: span_end,
+                             labels: span_labels
+    span.create_span sub_name,
+                     span_id: sub_id,
+                     kind: Google::Cloud::Trace::SpanKind::RPC_CLIENT,
+                     start_time: sub_start, end_time: sub_end,
+                     labels: sub_labels
+
+    proto = Google::Devtools::Cloudtrace::V1::Trace.new \
+      project_id: project_id,
+      trace_id: my_trace_id,
+      spans: [
+        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+          span_id: span_id,
+          kind: :RPC_SERVER,
+          name: span_name,
+          start_time: span_start_p,
+          end_time: span_end_p,
+          parent_span_id: context_span_id,
+          labels: span_labels),
+        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+          span_id: sub_id,
+          kind: :RPC_CLIENT,
+          name: sub_name,
+          start_time: sub_start_p,
+          end_time: sub_end_p,
+          parent_span_id: span_id,
+          labels: sub_labels)
+      ]
+
+    trace.to_proto.must_equal proto
+    Google::Cloud::Trace::TraceRecord.from_proto(proto).must_equal trace
+  end
 end
