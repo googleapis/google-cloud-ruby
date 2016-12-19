@@ -239,14 +239,15 @@ module Google
       # trace instrumentation state for the request being handled. You may use
       # {Google::Cloud::Trace.get} to retrieve the data.
       #
-      # @param [Google::Cloud::Trace::TraceSpan, Google::Cloud::Trace::Trace,
-      #     nil] trace The current span being measured, the current trace
-      #     object, or `nil` if none.
+      # @param [Google::Cloud::Trace::TraceSpan,
+      #     Google::Cloud::Trace::TraceRecord, nil] trace The current span
+      #     being measured, the current trace object, or `nil` if none.
       #
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   # Later...
@@ -263,13 +264,15 @@ module Google
       # This data should previously have been set using
       # {Google::Cloud::Trace.set}.
       #
-      # @return [Google::Cloud::Trace::TraceSpan, Google::Cloud::Trace::Trace,
-      #     nil] The span or trace object, or `nil`.
+      # @return [Google::Cloud::Trace::TraceSpan,
+      #     Google::Cloud::Trace::TraceRecord, nil] The span or trace object,
+      #     or `nil`.
       #
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   # Later...
@@ -296,7 +299,8 @@ module Google
       # @example
       #   require "google/cloud/trace"
       #
-      #   trace = Google::Cloud::Trace::Trace.new
+      #   trace_client = Google::Cloud::Trace.new
+      #   trace = trace_client.new_trace
       #   Google::Cloud::Trace.set trace
       #
       #   Google::Cloud::Trace.in_span "my_span" do |span|
