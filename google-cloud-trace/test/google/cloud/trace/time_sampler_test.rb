@@ -16,6 +16,7 @@ require "helper"
 
 describe Google::Cloud::Trace::TimeSampler do
   let(:start_time) { ::Time.at(12345678) }
+  let(:env) { {} }
 
   def sampler
     ::Time.stub :now, start_time do
@@ -23,49 +24,55 @@ describe Google::Cloud::Trace::TimeSampler do
     end
   end
 
-  describe ".check" do
+  describe ".call" do
     it "samples the first time called" do
       sam = Google::Cloud::Trace::TimeSampler.new
-      sam.check.must_equal true
+      sam.call(env).must_equal true
+    end
+
+    it "omits the default blacklisted path" do
+      sam = Google::Cloud::Trace::TimeSampler.new
+      blacklisted_env = { "PATH_INFO" => "/_ah/health" }
+      sam.call(blacklisted_env).must_equal false
     end
 
     it "doesn't sample when called too soon" do
       sam = sampler
       ::Time.stub :now, start_time - 1 do
-        sam.check.must_equal false
+        sam.call(env).must_equal false
       end
     end
 
     it "samples when called after a suitable delay" do
       sam = sampler
       ::Time.stub :now, start_time + 1 do
-        sam.check.must_equal true
+        sam.call(env).must_equal true
       end
     end
 
     it "advances last sampling time" do
       sam = sampler
       ::Time.stub :now, start_time + 3 do
-        sam.check.must_equal true
+        sam.call(env).must_equal true
       end
       ::Time.stub :now, start_time + 9 do
-        sam.check.must_equal false
+        sam.call(env).must_equal false
       end
       ::Time.stub :now, start_time + 11 do
-        sam.check.must_equal true
+        sam.call(env).must_equal true
       end
     end
 
     it "advances last sampling time after a large gap" do
       sam = sampler
       ::Time.stub :now, start_time + 30 do
-        sam.check.must_equal true
+        sam.call(env).must_equal true
       end
       ::Time.stub :now, start_time + 31 do
-        sam.check.must_equal true
+        sam.call(env).must_equal true
       end
       ::Time.stub :now, start_time + 32 do
-        sam.check.must_equal false
+        sam.call(env).must_equal false
       end
     end
   end
