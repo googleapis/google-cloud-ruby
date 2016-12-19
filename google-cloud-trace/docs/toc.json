@@ -47,6 +47,10 @@
           "type": "google/cloud/trace/resultset"
         },
         {
+          "title": "Sampling",
+          "type": "google/cloud/trace/sampling"
+        },
+        {
           "title": "Span",
           "type": "google/cloud/trace/span"
         },

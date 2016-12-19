@@ -12,67 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/trace/time_sampler"
 
 module Google
   module Cloud
     module Trace
       ##
-      # A sampler that enforces a certain QPS by delaying a minimum time
-      # between each sample.
+      # A sampler determines whether a given request's latency trace should
+      # actually be reported. It is usually not necessary to trace every
+      # request, especially for an application serving heavy traffic. You may
+      # use a sampler to decide, for a given request, whether to report its
+      # trace. A sampler is simply a Proc that takes an optional context
+      # argument and returns a boolean indicating whether or not to sample the
+      # current request. The context argument must be a Hash, but otherwise
+      # its format is not defined at this time.
       #
-      class TimeSampler
-        ##
-        # Create a TimeSampler for the given QPS.
-        #
-        # @param [Number] qps Samples per second.
-        #
-        def initialize qps: 0.1
-          @delay_secs = 1.0 / qps
-          @last_time = ::Time.now.to_f - @delay_secs
+      # See {Google::Cloud::Trace::TimeSampler} for an example.
+      #
+      module Sampling
+        @sampler = TimeSampler.new
+
+        class << self
+          ##
+          # This attribute is a global sampler to use by default. For example,
+          # the {Google::Cloud::Trace::Middleware} calls this sampler to decide
+          # whether to report traces collected by the Rack integration.
+          #
+          attr_accessor :sampler
         end
-
-        ##
-        # Implements the sampler contract. Checks to see whether a sample
-        # should be taken at this time.
-        #
-        # @param [Hash] _data Context data (unused by this sampler).
-        # @return [Boolean] Whether to sample at this time.
-        #
-        def check _data = {}
-          time = ::Time.now.to_f
-          delays = (time - @last_time) / @delay_secs
-          if delays >= 2.0
-            @last_time = time - @delay_secs
-            true
-          elsif delays >= 1.0
-            @last_time += @delay_secs
-            true
-          else
-            false
-          end
-        end
-      end
-
-      @sampler = TimeSampler.new
-
-      ##
-      # Sets the global sampler.
-      #
-      # @param [#check] sampler The sampler, which must respond to the
-      #     `check` method, as defined for example in {TimeSampler#check}.
-      #
-      def self.sampler= sampler
-        @sampler = sampler
-      end
-
-      ##
-      # Checks whether a sample should be taken, using the global sampler.
-      #
-      # @param [Hash] data Optional context data.
-      # @return [Boolean] Whether to sample at this time.
-      #
-      def self.check_sampler data = {}
-        @sampler.check data
       end
     end
   end
