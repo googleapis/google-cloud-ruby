@@ -88,11 +88,6 @@ module Google
       #
       class Middleware
         ##
-        # Default list of paths for which to disable traces. Currently includes
-        # App Engine Flex health checks.
-        DEFAULT_PATH_BLACKLIST = ["/_ah/health"].freeze
-
-        ##
         # The name of this trace agent as reported to the Stackdriver backend.
         AGENT_NAME = "ruby #{Google::Cloud::Trace::VERSION}".freeze
 
@@ -102,22 +97,18 @@ module Google
         # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Trace::Service] service The service object.
         #     Optional if running on GCE.
-        # @param [Array{String,Regex}] path_blacklist An array of paths or
-        #     path patterns indicating URIs that should never be traced.
-        #     Default is DEFAULT_PATH_BLACKLIST.
         # @param [Boolean] capture_stack Whether to capture stack traces for
         #     each span. Default is false.
-        # @param [#check] sampler A sampler to use, or nil to use the default.
-        #     See {Google::Cloud::Trace.sampler=}
+        # @param [Proc] sampler A sampler to use, or `nil` to use the default.
+        #     See {Google::Cloud::Trace::TimeSampler}. Note that the sampler
+        #     may be any Proc that implements the sampling contract.
         #
         def initialize app,
                        service: nil,
-                       path_blacklist: nil,
                        capture_stack: false,
                        sampler: nil,
                        span_id_generator: nil
           @app = app
-          @path_blacklist = path_blacklist || DEFAULT_PATH_BLACKLIST
           @capture_stack = capture_stack
           @sampler = sampler
           @span_id_generator = span_id_generator
@@ -164,14 +155,8 @@ module Google
         def get_trace_context env
           Stackdriver::Core::TraceContext.parse_rack_env(env) do |tc|
             if tc.sampled?.nil?
-              path = get_path env
-              if @path_blacklist.find { |p| p === path }
-                sampled = false
-              elsif @sampler
-                sampled = @sampler.check {}
-              else
-                sampled = Google::Cloud::Trace.check_sampler
-              end
+              sampler = @sampler || Google::Cloud::Trace::TimeSampler.default
+              sampled = sampler.call env
               tc = Stackdriver::Core::TraceContext.new \
                 trace_id: tc.trace_id,
                 span_id: tc.span_id,
