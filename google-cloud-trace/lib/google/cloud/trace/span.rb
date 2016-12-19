@@ -147,7 +147,7 @@ module Google
         #     to contain the span.
         # @return [Google::Cloud::Trace::Span] A corresponding Span object.
         #
-        def self.from_proto span_proto, trace
+        def self.from_grpc span_proto, trace
           labels = {}
           span_proto.labels.each { |k, v| labels[k] = v }
           span_kind = SpanKind.get span_proto.kind
@@ -173,7 +173,7 @@ module Google
         # @return [Google::Devtools::Cloudtrace::V1::TraceSpan] The generated
         #     protobuf.
         #
-        def to_proto default_parent_id = 0
+        def to_grpc default_parent_id = 0
           start_proto = Google::Cloud::Trace::Utils.time_to_proto start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_proto end_time
           Google::Devtools::Cloudtrace::V1::TraceSpan.new \

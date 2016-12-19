@@ -93,7 +93,7 @@ module Google
           traces = Array(traces)
           traces_proto = Google::Devtools::Cloudtrace::V1::Traces.new
           traces.each do |trace|
-            traces_proto.traces.push trace.to_proto
+            traces_proto.traces.push trace.to_grpc
           end
           execute do
             lowlevel_client.patch_traces @project, traces_proto
@@ -107,7 +107,7 @@ module Google
           trace_proto = execute do
             lowlevel_client.get_trace @project, trace_id
           end
-          Google::Cloud::Trace::TraceRecord.from_proto trace_proto
+          Google::Cloud::Trace::TraceRecord.from_grpc trace_proto
         end
 
         ##

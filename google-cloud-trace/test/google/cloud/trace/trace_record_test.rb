@@ -242,8 +242,8 @@ describe Google::Cloud::Trace::TraceRecord do
           labels: sub_labels)
       ]
 
-    trace.to_proto.must_equal proto
-    Google::Cloud::Trace::TraceRecord.from_proto(proto).must_equal trace
+    trace.to_grpc.must_equal proto
+    Google::Cloud::Trace::TraceRecord.from_grpc(proto).must_equal trace
   end
 
   it "converts to and from a protobuf with an orphaned span" do
@@ -298,7 +298,7 @@ describe Google::Cloud::Trace::TraceRecord do
           labels: sub_labels)
       ]
 
-    trace.to_proto.must_equal proto
-    Google::Cloud::Trace::TraceRecord.from_proto(proto).must_equal trace
+    trace.to_grpc.must_equal proto
+    Google::Cloud::Trace::TraceRecord.from_grpc(proto).must_equal trace
   end
 end

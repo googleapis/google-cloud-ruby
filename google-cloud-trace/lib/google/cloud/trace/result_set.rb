@@ -182,7 +182,7 @@ module Google
           next_page_token = page.next_page_token
           next_page_token = nil unless page.next_page_token?
           results = page.map do |proto|
-            Google::Cloud::Trace::TraceRecord.from_proto proto
+            Google::Cloud::Trace::TraceRecord.from_grpc proto
           end
           new service, project_id,
               results, next_page_token,
