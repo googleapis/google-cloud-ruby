@@ -26,6 +26,7 @@ require "google/cloud/trace/sampling"
 require "google/cloud/trace/service"
 require "google/cloud/trace/span"
 require "google/cloud/trace/span_kind"
+require "google/cloud/trace/time_sampler"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
 
@@ -68,6 +69,11 @@ module Google
     # to the "Trace" section. It also integrates with Google App Engine
     # Flexible and Google Container Engine to provide additional information
     # for applications hosted in those environments.
+    #
+    # Note that not all requests will have traces. By default, the library will
+    # sample about one trace every ten seconds per Ruby process, to prevent
+    # heavily used applications from reporting too much data. See
+    # {Google::Cloud::Trace::Sampling} for more details.
     #
     # ### Using instrumentation with Ruby on Rails
     #

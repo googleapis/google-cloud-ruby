@@ -107,8 +107,8 @@ module Google
         #     Default is DEFAULT_PATH_BLACKLIST.
         # @param [Boolean] capture_stack Whether to capture stack traces for
         #     each span. Default is false.
-        # @param [#check] sampler A sampler to use, or nil to use the default.
-        #     See {Google::Cloud::Trace.sampler=}
+        # @param [Proc] sampler A sampler to use, or nil to use the default.
+        #     See {Google::Cloud::Trace::Sampling}
         #
         def initialize app,
                        service: nil,
@@ -167,10 +167,9 @@ module Google
               path = get_path env
               if @path_blacklist.find { |p| p === path }
                 sampled = false
-              elsif @sampler
-                sampled = @sampler.check {}
               else
-                sampled = Google::Cloud::Trace.check_sampler
+                sampler = @sampler || Google::Cloud::Trace::Sampling.sampler
+                sampled = sampler.call {}
               end
               tc = Stackdriver::Core::TraceContext.new \
                 trace_id: tc.trace_id,
