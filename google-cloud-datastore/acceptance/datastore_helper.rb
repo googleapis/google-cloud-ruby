@@ -66,5 +66,19 @@ module Acceptance
       end
       reporter.record result
     end
+
+    def try_with_backoff msg = nil, limit: 10
+      count = 0
+      loop do
+        begin
+          return yield
+        rescue => e
+          raise e if count >= limit
+          count += 1
+          puts "Retry (#{count}): #{msg}"
+          sleep count
+        end
+      end
+    end
   end
 end
