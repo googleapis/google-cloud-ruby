@@ -279,14 +279,17 @@ describe "Datastore", :datastore do
     query = Google::Cloud::Datastore::Query.new.kind("Person").
       where("linkedTo", "=", person.key)
 
-    entities = dataset.run query
-    entities.count.must_equal 1
+    try_with_backoff "query by key" do
+      entities = dataset.run query
+      fail "retry query by key" unless entities.count == 1
+      entities.count.must_equal 1
 
-    entity = entities.first
-    entity["fullName"].must_equal      person["fullName"]
-    entity["linkedTo"].kind.must_equal person["linkedTo"].kind
-    entity["linkedTo"].id.must_equal   person["linkedTo"].id
-    entity["linkedTo"].name.must_equal person["linkedTo"].name
+      entity = entities.first
+      entity["fullName"].must_equal      person["fullName"]
+      entity["linkedTo"].kind.must_equal person["linkedTo"].kind
+      entity["linkedTo"].id.must_equal   person["linkedTo"].id
+      entity["linkedTo"].name.must_equal person["linkedTo"].name
+    end
   end
 
   describe "querying the datastore" do
