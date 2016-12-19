@@ -36,7 +36,7 @@ module Google
       #   span = trace.create_span "root_span"
       #   subspan = span.create_span "subspan"
       #
-      #   trace_proto = trace.to_proto
+      #   trace_proto = trace.to_grpc
       #
       class TraceRecord
         ##
@@ -79,7 +79,7 @@ module Google
         # @return [Trace, nil] A corresponding Trace object, or `nil` if the
         #     proto does not represent an existing trace object.
         #
-        def self.from_proto trace_proto
+        def self.from_grpc trace_proto
           trace_id = trace_proto.trace_id.to_s
           return nil if trace_id.empty?
 
@@ -105,9 +105,9 @@ module Google
         # @return [Google::Devtools::Cloudtrace::V1::Trace] The generated
         #     protobuf.
         #
-        def to_proto
+        def to_grpc
           span_protos = @spans_by_id.values.map do |span|
-            span.to_proto trace_context.span_id.to_i
+            span.to_grpc trace_context.span_id.to_i
           end
           Google::Devtools::Cloudtrace::V1::Trace.new \
             project_id: project,
@@ -320,7 +320,7 @@ module Google
           new_span_ids = ::Set.new
           span_protos.each do |span_proto|
             if parent_span_ids.include? span_proto.parent_span_id
-              Google::Cloud::Trace::Span.from_proto span_proto, self
+              Google::Cloud::Trace::Span.from_grpc span_proto, self
               new_span_ids.add span_proto.span_id
             end
           end
