@@ -22,7 +22,11 @@ dependencies:
   pre:
     # The following three commands install 2.0.0
     - rvm get stable
+    - gem update --system
+    - rvm-exec 2.2.5 gem update --system
+    - rvm-exec 2.3.1 gem update --system
     - rvm install 2.0.0-p648
+    - rvm-exec 2.0.0-p648 gem update --system
     - rvm-exec 2.0.0-p648 gem install bundler
 
   override:
