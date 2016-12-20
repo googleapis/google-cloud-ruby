@@ -210,7 +210,6 @@ module Google
     #
     # ```ruby
     # require "google/cloud/storage"
-    # require "digest/sha2"
     #
     # storage = Google::Cloud::Storage.new
     # bucket = storage.bucket "my-todo-app"
