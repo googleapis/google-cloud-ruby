@@ -24,11 +24,11 @@ describe Google::Cloud::Trace::Utils do
     Time.at(secs, Rational(nsecs, 1000))
   }
 
-  it "converts time objects to protos" do
-    Google::Cloud::Trace::Utils.time_to_proto(time_obj).must_equal time_proto
+  it "converts time objects to proto objects" do
+    Google::Cloud::Trace::Utils.time_to_grpc(time_obj).must_equal time_proto
   end
 
-  it "converts time protos to objects" do
-    Google::Cloud::Trace::Utils.proto_to_time(time_proto).must_equal time_obj
+  it "converts proto objects to time objects" do
+    Google::Cloud::Trace::Utils.grpc_to_time(time_proto).must_equal time_obj
   end
 end

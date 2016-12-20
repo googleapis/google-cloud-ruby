@@ -152,9 +152,9 @@ module Google
           span_proto.labels.each { |k, v| labels[k] = v }
           span_kind = SpanKind.get span_proto.kind
           start_time =
-            Google::Cloud::Trace::Utils.proto_to_time span_proto.start_time
+            Google::Cloud::Trace::Utils.grpc_to_time span_proto.start_time
           end_time =
-            Google::Cloud::Trace::Utils.proto_to_time span_proto.end_time
+            Google::Cloud::Trace::Utils.grpc_to_time span_proto.end_time
           trace.create_span span_proto.name,
                             parent_span_id: span_proto.parent_span_id.to_i,
                             span_id: span_proto.span_id.to_i,
@@ -174,8 +174,8 @@ module Google
         #     protobuf.
         #
         def to_grpc default_parent_id = 0
-          start_proto = Google::Cloud::Trace::Utils.time_to_proto start_time
-          end_proto = Google::Cloud::Trace::Utils.time_to_proto end_time
+          start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
+          end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
           Google::Devtools::Cloudtrace::V1::TraceSpan.new \
             span_id: span_id.to_i,
             kind: kind.to_sym,
