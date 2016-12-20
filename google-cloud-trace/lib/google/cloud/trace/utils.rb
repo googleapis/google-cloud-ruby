@@ -23,22 +23,22 @@ module Google
       #
       module Utils
         ##
-        # Convert a Ruby Time object to a timestamp proto.
+        # Convert a Ruby Time object to a timestamp proto object.
         #
         # @private
         #
-        def self.time_to_proto time
+        def self.time_to_grpc time
           Google::Protobuf::Timestamp.new seconds: time.to_i,
                                           nanos: time.nsec
         end
 
         ##
-        # Convert a Timestamp proto to a Ruby Time object.
+        # Convert a Timestamp proto object to a Ruby Time object.
         #
         # @private
         #
-        def self.proto_to_time proto
-          Time.at(proto.seconds, Rational(proto.nanos, 1000)).utc
+        def self.grpc_to_time grpc
+          Time.at(grpc.seconds, Rational(grpc.nanos, 1000)).utc
         end
       end
     end

@@ -125,8 +125,8 @@ module Google
           else
             call_opts = Google::Gax::CallOptions.new
           end
-          start_proto = Google::Cloud::Trace::Utils.time_to_proto start_time
-          end_proto = Google::Cloud::Trace::Utils.time_to_proto end_time
+          start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
+          end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
           paged_enum = execute do
             lowlevel_client.list_traces project_id,
                                         view: view,
