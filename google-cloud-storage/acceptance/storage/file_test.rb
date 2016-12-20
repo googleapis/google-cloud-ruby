@@ -14,7 +14,6 @@
 
 require "storage_helper"
 require "net/http"
-require "digest/sha2"
 
 describe Google::Cloud::Storage::File, :storage do
   let :bucket do

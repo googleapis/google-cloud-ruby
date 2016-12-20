@@ -540,7 +540,6 @@ module Google
         #
         # @example Providing a customer-supplied encryption key:
         #   require "google/cloud/storage"
-        #   require "digest/sha2"
         #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
