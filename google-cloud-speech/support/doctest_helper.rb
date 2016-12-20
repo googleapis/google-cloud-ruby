@@ -116,6 +116,10 @@ YARD::Doctest.configure do |doctest|
     mock_speech
   end
 
+  doctest.before "Google::Cloud.speech" do
+    mock_speech
+  end
+
   doctest.before "Google::Cloud::Speech" do
     mock_speech
   end
