@@ -20,6 +20,8 @@ module Google
   module Cloud
     module Trace
       ##
+      # # Trace Middleware
+      #
       # A Rack middleware that manages trace context and captures a trace of
       # the request. Specifically, it:
       #
@@ -31,6 +33,8 @@ module Google
       # *   Makes the trace context available so downstream middlewares and the
       #     app can add further spans to the trace.
       # *   Sends the completed trace to the Stackdriver service.
+      #
+      # ## Installing
       #
       # To use this middleware, simply install it in your middleware stack.
       # Here is an example Sinatra application that includes the Trace
@@ -65,6 +69,8 @@ module Google
       # {Google::Cloud::Trace::Railtie} for close integration with Rails and
       # ActiveRecord.
       #
+      # ## Custom measurements
+      #
       # By default, this middleware creates traces that measure just the http
       # request handling as a whole. If you want to provide more detailed
       # measurements of smaller processes, use the classes provided in this
@@ -85,6 +91,17 @@ module Google
       #   "Hello World!"
       # end
       # ```
+      #
+      # ## Sampling and blacklisting
+      #
+      # A sampler makes the decision whether to record a trace for each
+      # request (if the decision was not made by the context, e.g. by providing
+      # a request header). By default, this sampler is the default
+      # {Google::Cloud::Trace::TimeSampler}, which enforces a maximum QPS per
+      # process, and blacklists a small number of request paths such as
+      # health checks sent by Google App Engine. You may adjust this behavior
+      # by providing an alternate sampler. See
+      # {Google::Cloud::Trace::TimeSampler}.
       #
       class Middleware
         ##

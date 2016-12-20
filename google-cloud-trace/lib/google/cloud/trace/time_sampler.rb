@@ -25,9 +25,14 @@ module Google
       # current request. Alternately, it could be an object that duck-types the
       # Proc interface by implementing the `call` method.
       #
-      # TimeSampler is the default sampler. It enforces a certain QPS by
-      # delaying a minimum time between each sample. It also supports
-      # blacklisting certain URI paths that should never be traced.
+      # TimeSampler is the default sampler. It bases its sampling decision on
+      # two considerations:
+      #
+      # 1.  It allows you to blacklist certain URI paths that should never be
+      #     traced. For example, the Google App Engine health check request
+      #     path `/_ah/health` is blacklisted by default.
+      # 2.  It spaces samples out by delaying a minimum time between each
+      #     sample. This enforces a maximum QPS for this Ruby process.
       #
       class TimeSampler
         ##
