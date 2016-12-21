@@ -19,11 +19,11 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.logging" do
       gcloud = Google::Cloud.new
       stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
-        project.must_equal nil
-        keyfile.must_equal nil
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        client_config.must_be :nil?
+        project.must_be_nil
+        keyfile.must_be_nil
+        scope.must_be_nil
+        timeout.must_be_nil
+        client_config.must_be_nil
         "logging-project-object-empty"
       }
       Google::Cloud.stub :logging, stubbed_logging do
@@ -37,9 +37,9 @@ describe Google::Cloud do
       stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        client_config.must_be :nil?
+        scope.must_be_nil
+        timeout.must_be_nil
+        client_config.must_be_nil
         "logging-project-object"
       }
       Google::Cloud.stub :logging, stubbed_logging do
@@ -87,14 +87,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be_nil
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "logging-credentials"
-        timeout.must_be :nil?
-        client_config.must_be :nil?
+        timeout.must_be_nil
+        client_config.must_be_nil
         OpenStruct.new project: project
       }
 
@@ -138,14 +138,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be_nil
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "logging-credentials"
-        timeout.must_be :nil?
-        client_config.must_be :nil?
+        timeout.must_be_nil
+        client_config.must_be_nil
         OpenStruct.new project: project
       }
 

@@ -103,23 +103,23 @@ module Google
           begin
             Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
           rescue Exception => e
-            warn "Unable to initialize Google::Cloud::Logging due " \
-              "to authorization error: #{e.message}"
+            warn "Google::Cloud::Logging is not activated due to " \
+              "authorization error: #{e.message}\nFalling back to default " \
+              "logger"
             return false
           end
 
           project_id = gcp_config.logging.project_id || gcp_config.project_id ||
                        Google::Cloud::Logging::Project.default_project
           if project_id.to_s.empty?
-            warn "Unable to initialize Google::Cloud::Logging with empty " \
-              "project_id"
+            warn "Google::Cloud::Logging is not activated due to empty " \
+              "project_id; falling back to default logger"
             return false
           end
 
           # Otherwise default to true if Rails is running in production or
-          # config.stackdriver.use_logging is explicitly true
-          Rails.env.production? ||
-            (gcp_config.key?(:use_logging) && gcp_config.use_logging)
+          # config.stackdriver.use_logging is true
+          Rails.env.production? || gcp_config.use_logging
         end
       end
     end

@@ -17,6 +17,7 @@ gem "google-cloud-speech", path: "../google-cloud-speech"
 gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "google-cloud-translate", path: "../google-cloud-translate"
 gem "google-cloud-vision", path: "../google-cloud-vision"
+gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",

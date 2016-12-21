@@ -19,10 +19,11 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   let(:app_exception_msg) { "A serious error from application" }
   let(:service_name) { "My microservice" }
   let(:service_version) { "Version testing" }
-  let(:trace_id) { "a-very-unique-identifier" }
-  let(:trace_context) { "#{trace_id}/a-span-id/options" }
+  let(:trace_id) { "1234567890abcdef1234567890abcdef" }
+  let(:trace_context) { "#{trace_id}/123456;o=1" }
   let(:rack_env) {{
-    "HTTP_X_CLOUD_TRACE_CONTEXT" => trace_context
+    "HTTP_X_CLOUD_TRACE_CONTEXT" => trace_context,
+    "PATH_INFO" => "/_ah/health"
   }}
   let(:app_exception) { StandardError.new(app_exception_msg) }
   let(:rack_app) {
@@ -54,23 +55,24 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       end
     end
 
-    it "calls logger.add_trace_id to track trace_id" do
-      stubbed_add_trace_id = ->(this_trace_id) {
-        this_trace_id.must_equal trace_id
+    it "calls logger.add_request_info to track trace_id and log_name" do
+      stubbed_add_request_info = ->(args) {
+        args[:trace_id].must_equal trace_id
+        args[:log_name].must_equal "ruby_health_check_log"
       }
-      logger.stub :add_trace_id, stubbed_add_trace_id do
+      logger.stub :add_request_info, stubbed_add_request_info do
         middleware.call rack_env
       end
     end
 
-    it "calls logger.delete_trace_id when exiting even app.call fails" do
+    it "calls logger.delete_request_info when exiting even app.call fails" do
       method_called = false
-      stubbed_delete_trace_id = ->() {
+      stubbed_delete_request_info = ->() {
         method_called = true
       }
       stubbed_call = ->(_) { raise "die" }
 
-      logger.stub :delete_trace_id, stubbed_delete_trace_id do
+      logger.stub :delete_request_info, stubbed_delete_request_info do
         rack_app.stub :call, stubbed_call do
           assert_raises StandardError do
             middleware.call rack_env
@@ -78,12 +80,6 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
           method_called.must_equal true
         end
       end
-    end
-  end
-
-  describe "#extract_trace_id" do
-    it "extracts trace_id from trace_context" do
-      middleware.extract_trace_id(rack_env).must_equal trace_id
     end
   end
 

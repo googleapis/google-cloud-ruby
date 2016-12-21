@@ -28,8 +28,8 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.writer_identity.must_equal  "roles/owner"
     sink.start_at.must_be_close_to   Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
     sink.start_time.must_be_close_to Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
-    sink.end_at.must_equal           nil
-    sink.end_time.must_equal         nil
+    sink.end_at.must_be_nil
+    sink.end_time.must_be_nil
   end
 
   it "can set different sink format versions" do
@@ -52,14 +52,14 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     sink.start_at.must_be_close_to   time
     sink.start_time.must_be_close_to time
-    sink.end_at.must_equal           nil
-    sink.end_time.must_equal         nil
+    sink.end_at.must_be_nil
+    sink.end_time.must_be_nil
 
     sink.start_time = nil
     sink.end_time   = time
 
-    sink.start_at.must_equal     nil
-    sink.start_time.must_equal   nil
+    sink.start_at.must_be_nil
+    sink.start_time.must_be_nil
     sink.end_at.must_be_close_to   time
     sink.end_time.must_be_close_to time
 
@@ -68,14 +68,14 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     sink.start_at.must_be_close_to   time
     sink.start_time.must_be_close_to time
-    sink.end_at.must_equal           nil
-    sink.end_time.must_equal         nil
+    sink.end_at.must_be_nil
+    sink.end_time.must_be_nil
 
     sink.start_at = nil
     sink.end_at   = time
 
-    sink.start_at.must_equal     nil
-    sink.start_time.must_equal   nil
+    sink.start_at.must_be_nil
+    sink.start_time.must_be_nil
     sink.end_at.must_be_close_to   time
     sink.end_time.must_be_close_to time
   end
