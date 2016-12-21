@@ -1,12 +1,12 @@
 # google-cloud-language
 
-[Google Cloud Natural Language API](https://cloud.google.com/language/) ([docs](https://cloud.google.com/language/docs)) reveals the structure and meaning of text by offering powerful machine learning models in an easy to use REST API. You can use it to extract information about people, places, events and much more, mentioned in text documents, news articles or blog posts. You can use it to understand sentiment about your product on social media or parse intent from customer conversations happening in a call center or a messaging app. You can analyze text uploaded in your request or integrate with your document storage on Google Cloud Storage.
+[Google Cloud Natural Language API](https://cloud.google.com/natural-language/) ([docs](https://cloud.google.com/natural-language/docs)) reveals the structure and meaning of text by offering powerful machine learning models in an easy to use REST API. You can use it to extract information about people, places, events and much more, mentioned in text documents, news articles or blog posts. You can use it to understand sentiment about your product on social media or parse intent from customer conversations happening in a call center or a messaging app. You can analyze text uploaded in your request or integrate with your document storage on Google Cloud Storage.
 
 The Google Cloud Natural Language API is currently a beta release, and might be changed in backward-incompatible ways. It is not subject to any SLA or deprecation policy and is not intended for real-time usage in critical applications.
 
 - [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/master/google/cloud/language)
 - [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
-- [Google Cloud Natural Language API documentation](https://cloud.google.com/language/docs)
+- [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
 
 ## Quick Start
 
