@@ -32,7 +32,7 @@ module Google
       # with translated text back. You don't need to extract your source text or
       # reassemble the translated content.
       #
-      # @see https://cloud.google.com/translation/docs/getting_started
+      # @see https://cloud.google.com/translation/docs/getting-started
       #   Cloud Translation API Quickstart
       #
       # @example
@@ -91,7 +91,7 @@ module Google
         ##
         # Returns text translations from one language to another.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#Translate
+        # @see https://cloud.google.com/translation/docs/translating-text#Translate
         #   Translating Text
         #
         # @param [String] text The text or texts to translate.
@@ -199,8 +199,8 @@ module Google
         # Detect the most likely language or languages of a text or multiple
         # texts.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#detect-language
-        #   Detect Language
+        # @see https://cloud.google.com/translation/docs/detecting-language
+        #   Detecting Language
         #
         # @param [String] text The text or texts upon which language detection
         #   should be performed.
@@ -242,8 +242,8 @@ module Google
         # List the languages supported by the API. These are the languages to
         # and from which text can be translated.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#supported-languages
-        #   Discover Supported Languages
+        # @see https://cloud.google.com/translation/docs/discovering-supported-languages
+        #   Discovering Supported Languages
         #
         # @param [String] language The language and collation in which the names
         #   of the languages are returned. If this is `nil` then no names are

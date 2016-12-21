@@ -22,7 +22,7 @@ module Google
       # Represents a translation query result. Returned by
       # {Google::Cloud::Translate::Api#translate}.
       #
-      # @see https://cloud.google.com/translate/v2/using_rest#Translate
+      # @see https://cloud.google.com/translation/docs/translating-text#Translate
       #   Translating Text
       #
       # @example

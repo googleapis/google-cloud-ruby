@@ -6,7 +6,7 @@ Like other Cloud Platform services, Google Cloud Translation API supports authen
 
 ### Using an API access key
 
-Follow the general instructions at [Identifying your application to Google](https://cloud.google.com/translate/v2/using_rest#auth), and the specific instructions for [Server keys](https://cloud.google.com/translate/v2/using_rest#creating-server-api-keys).
+Follow the general instructions for obtaining an authorization token using your service account at [Translation API Quickstart](https://cloud.google.com/translation/docs/getting-started).
 
 **API key** is discovered in the following order:
 

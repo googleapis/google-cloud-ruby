@@ -21,7 +21,7 @@ module Google
     ##
     # # Google Cloud Translation API
     #
-    # [Google Cloud Translation API](https://cloud.google.com/translate/)
+    # [Google Cloud Translation API](https://cloud.google.com/translation/)
     # provides a simple, programmatic interface for translating an arbitrary
     # string into any supported language. It is highly responsive, so websites
     # and applications can integrate with Translation API for fast, dynamic

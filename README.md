@@ -378,7 +378,7 @@ file.copy backup, file.name
 - [google-cloud-translate README](google-cloud-translate/README.md)
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/master/google/cloud/translate)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
-- [Google Cloud Translation API documentation](https://cloud.google.com/translate/docs)
+- [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 
 #### Quick Start
 
