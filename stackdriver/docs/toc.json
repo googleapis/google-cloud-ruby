@@ -9,6 +9,11 @@
       "title": "Logging Instrumentation",
       "id": "logging_instrumentation",
       "contents": "google/cloud/logging/instrumentation.md"
+    },
+    {
+      "title": "Trace Instrumentation",
+      "id": "trace_instrumentation",
+      "contents": "google/cloud/trace/instrumentation.md"
     }
   ],
   "services": [
