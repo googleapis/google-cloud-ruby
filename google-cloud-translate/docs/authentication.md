@@ -2,7 +2,7 @@
 
 With `google-cloud-ruby` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis.
 
-Like other Cloud Platform services, Google Translate API supports authentication using a project ID and OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key and the project and OAuth 2.0 credentials are provided, the API key will be used.)
+Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key and the project and OAuth 2.0 credentials are provided, the API key will be used.)
 
 ### Using an API access key
 

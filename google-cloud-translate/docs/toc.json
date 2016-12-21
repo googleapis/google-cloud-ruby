@@ -30,7 +30,7 @@
   ],
   "services": [
     {
-      "title": "Translate",
+      "title": "Translation",
       "type": "google/cloud/translate",
       "nav": [
         {

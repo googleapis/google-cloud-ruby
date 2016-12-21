@@ -23,13 +23,13 @@ $translate = Google::Cloud.new.translate retries: 10
 
 module Acceptance
   ##
-  # Test class for running against a Translate instance.
+  # Test class for running against a Translation API instance.
   # Ensures that there is an active connection for the tests to use.
   #
   # This class can be used with the spec DSL.
   # To do so, add :translate to describe:
   #
-  #   describe "My Translate Test", :translate do
+  #   describe "My Translation API Test", :translate do
   #     it "does a thing" do
   #       your.code.must_be :thing?
   #     end

@@ -19,16 +19,16 @@ require "google/cloud/translate/api"
 module Google
   module Cloud
     ##
-    # # Google Translate API
+    # # Google Cloud Translation API
     #
-    # [Google Translate API](https://cloud.google.com/translate/) provides a
-    # simple, programmatic interface for translating an arbitrary string into
-    # any supported language. It is highly responsive, so websites and
-    # applications can integrate with Translate API for fast, dynamic
+    # [Google Cloud Translation API](https://cloud.google.com/translate/)
+    # provides a simple, programmatic interface for translating an arbitrary
+    # string into any supported language. It is highly responsive, so websites
+    # and applications can integrate with Translation API for fast, dynamic
     # translation of source text. Language detection is also available in cases
     # where the source language is unknown.
     #
-    # Translate API supports more than ninety different languages, from
+    # Translation API supports more than one hundred different languages, from
     # Afrikaans to Zulu. Used in combination, this enables translation between
     # thousands of language pairs. Also, you can send in HTML and receive HTML
     # with translated text back. You don't need to extract your source text or
@@ -47,7 +47,7 @@ module Google
     #
     # ## Authenticating
     #
-    # Like other Cloud Platform services, Google Translate API supports
+    # Like other Cloud Platform services, Google Cloud Translation API supports
     # authentication using a project ID and OAuth 2.0 credentials. In addition,
     # it supports authentication using a public API access key. (If both the API
     # key and the project and OAuth 2.0 credentials are provided, the API key
@@ -79,7 +79,7 @@ module Google
     #
     # You may want to use the `from` option to specify the language of the
     # source text, as the following example illustrates. (Single words do not
-    # give Translate API much to work with.)
+    # give Translation API much to work with.)
     #
     # ```ruby
     # require "google/cloud/translate"
@@ -130,8 +130,8 @@ module Google
     # ## Detecting languages
     #
     # You can use {Google::Cloud::Translate::Api#detect} to see which language
-    # the Translate API ranks as the most likely source language for a text. The
-    # `confidence` score is a float value between `0` and `1`.
+    # the Translation API ranks as the most likely source language for a text.
+    # The `confidence` score is a float value between `0` and `1`.
     #
     # ```ruby
     # require "google/cloud/translate"
@@ -165,7 +165,7 @@ module Google
     #
     # ## Listing supported languages
     #
-    # Translate API adds new languages frequently. You can use
+    # Translation API adds new languages frequently. You can use
     # {Google::Cloud::Translate::Api#languages} to query the list of supported
     # languages.
     #
@@ -218,19 +218,19 @@ module Google
     #
     module Translate
       ##
-      # Creates a new object for connecting to the Translate service.
-      # Each call creates a new connection.
+      # Creates a new object for connecting to Cloud Translation API. Each call
+      # creates a new connection.
       #
-      # Like other Cloud Platform services, Google Translate API supports
-      # authentication using a project ID and OAuth 2.0 credentials. In
+      # Like other Cloud Platform services, Google Cloud Translation API
+      # supports authentication using a project ID and OAuth 2.0 credentials. In
       # addition, it supports authentication using a public API access key. (If
       # both the API key and the project and OAuth 2.0 credentials are provided,
       # the API key will be used.) Instructions and configuration options are
       # covered in the [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
       #
-      # @param [String] project Project identifier for the Translate service you
-      #   are connecting to.
+      # @param [String] project Identifier for the Cloud Translation API project
+      #   to which you are connecting.
       # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
       #   file path the file must be readable.
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling

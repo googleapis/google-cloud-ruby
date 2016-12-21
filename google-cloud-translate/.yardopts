@@ -1,5 +1,5 @@
 --no-private
---title=Google Cloud Translate
+--title=Google Cloud Translation API
 --markup markdown
 
 ./lib/**/*.rb

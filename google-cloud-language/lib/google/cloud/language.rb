@@ -32,7 +32,7 @@ module Google
     # API with the Google Cloud Speech API and extract insights from audio
     # conversations. Use with Vision API OCR to understand scanned documents.
     # Extract entities and understand sentiments in multiple languages by
-    # translating text first with Translate API.
+    # translating text first with Cloud Translation API.
     #
     # The Google Cloud Natural Language API is currently a beta release, and
     # might be changed in backward-incompatible ways. It is not subject to any

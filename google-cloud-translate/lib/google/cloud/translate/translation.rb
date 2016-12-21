@@ -23,7 +23,7 @@ module Google
       # {Google::Cloud::Translate::Api#translate}.
       #
       # @see https://cloud.google.com/translate/v2/using_rest#Translate
-      #   Translate Text
+      #   Translating Text
       #
       # @example
       #   require "google/cloud/translate"
@@ -99,11 +99,11 @@ module Google
 
         ##
         # Determines if the source language was detected by the Google Cloud
-        # Translate API.
+        # Cloud Translation API.
         #
         # @return [Boolean] `true` if the source language was detected by the
-        #   Translate service, `false` if the source language was provided in
-        #   the request
+        #   Cloud Translation API, `false` if the source language was provided
+        #   in the request
         def detected?
           @detected
         end
