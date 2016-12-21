@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-gax", "~> 0.6.0"
   gem.add_dependency "google-protobuf", "~> 3.0"
   gem.add_dependency "googleapis-common-protos", "~> 1.3"
-  gem.add_dependency "google-cloud-core", "~> 0.21.0"
+  gem.add_dependency "google-cloud-core", "~> 0.21.1"
   gem.add_dependency "stackdriver-core", "~> 0.21.0"
 
   gem.add_development_dependency "minitest", "~> 5.9"
