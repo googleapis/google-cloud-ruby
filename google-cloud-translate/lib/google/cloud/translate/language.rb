@@ -22,8 +22,8 @@ module Google
       # Represents a supported languages query result. Returned by
       # {Google::Cloud::Translate::Api#languages}.
       #
-      # @see https://cloud.google.com/translate/v2/using_rest#supported-languages
-      #   Discover Supported Languages
+      # @see https://cloud.google.com/translation/docs/discovering-supported-languages
+      #   Discovering Supported Languages
       #
       # @example
       #   require "google/cloud/translate"

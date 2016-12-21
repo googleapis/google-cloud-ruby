@@ -24,10 +24,10 @@ require "google/cloud"
 module Google
   module Cloud
     ##
-    # Creates a new object for connecting to the Translate service.
-    # Each call creates a new connection.
+    # Creates a new object for connecting to the Cloud Translation API. Each
+    # call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Translate API supports
+    # Like other Cloud Platform services, Google Cloud Translation API supports
     # authentication using a project ID and OAuth 2.0 credentials. In addition,
     # it supports authentication using a public API access key. (If both the API
     # key and the project and OAuth 2.0 credentials are provided, the API key
@@ -77,10 +77,10 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Translate service.
-    # Each call creates a new connection.
+    # Creates a new object for connecting to the Cloud Translation API. Each
+    # call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Translate API supports
+    # Like other Cloud Platform services, Google Cloud Translation API supports
     # authentication using a project ID and OAuth 2.0 credentials. In addition,
     # it supports authentication using a public API access key. (If both the API
     # key and the project and OAuth 2.0 credentials are provided, the API key
@@ -88,8 +88,8 @@ module Google
     # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [String] project Project identifier for the Translate service you
-    #   are connecting to.
+    # @param [String] project Identifier for the Cloud Translation API project
+    #   to which you are connecting.
     # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
     #   file path the file must be readable.
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the

@@ -22,8 +22,8 @@ module Google
       # Represents a detect language query result. Returned by
       # {Google::Cloud::Translate::Api#detect}.
       #
-      # @see https://cloud.google.com/translate/v2/using_rest#detect-language
-      #   Detect Language
+      # @see https://cloud.google.com/translation/docs/detecting-language
+      #   Detecting Language
       #
       # @example
       #   require "google/cloud/translate"

@@ -1,12 +1,12 @@
 # google-cloud-translate
 
-[Google Translate](https://cloud.google.com/translate/) ([docs](https://cloud.google.com/translate/docs)) provides a simple, programmatic interface for translating an arbitrary string into any supported language. It is highly responsive, so websites and applications can integrate with Translate API for fast, dynamic translation of source text. Language detection is also available in cases where the source language is unknown.
+[Google Cloud Translation API](https://cloud.google.com/translation/) ([docs](https://cloud.google.com/translation/docs)) provides a simple, programmatic interface for translating an arbitrary string into any supported language. It is highly responsive, so websites and applications can integrate with Translation API for fast, dynamic translation of source text. Language detection is also available in cases where the source language is unknown.
 
-Translate API supports more than ninety different languages, from Afrikaans to Zulu. Used in combination, this enables translation between thousands of language pairs. Also, you can send in HTML and receive HTML with translated text back. You don't need to extract your source text or reassemble the translated content.
+Translation API supports more than one hundred different languages, from Afrikaans to Zulu. Used in combination, this enables translation between thousands of language pairs. Also, you can send in HTML and receive HTML with translated text back. You don't need to extract your source text or reassemble the translated content.
 
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/master/google/cloud/translate)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
-- [Google Translate documentation](https://cloud.google.com/translate/docs)
+- [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 
 ## Quick Start
 
@@ -16,7 +16,7 @@ $ gem install google-cloud-translate
 
 ## Authentication
 
-Like other Cloud Platform services, Google Translate API supports
+Like other Cloud Platform services, Google Cloud Translation API supports
 authentication using a project ID and OAuth 2.0 credentials. In addition,
 it supports authentication using a public API access key. (If both the API
 key and the project and OAuth 2.0 credentials are provided, the API key

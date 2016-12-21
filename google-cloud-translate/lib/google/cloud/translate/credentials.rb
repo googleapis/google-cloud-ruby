@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Translate
       ##
-      # @private Represents the OAuth 2.0 signing logic for Translate.
+      # @private Represents the OAuth 2.0 signing logic for Translation API.
       class Credentials < Google::Cloud::Credentials
         SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
         PATH_ENV_VARS = %w(TRANSLATE_KEYFILE GOOGLE_CLOUD_KEYFILE

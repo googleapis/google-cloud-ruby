@@ -25,15 +25,15 @@ module Google
       ##
       # # Api
       #
-      # Represents top-level access to the Google Translate API. Translate API
-      # supports more than ninety different languages, from Afrikaans to Zulu.
-      # Used in combination, this enables translation between thousands of
-      # language pairs. Also, you can send in HTML and receive HTML with
-      # translated text back. You don't need to extract your source text or
+      # Represents top-level access to the Google Cloud Translation API.
+      # Translation API supports more than one hundred different languages, from
+      # Afrikaans to Zulu. Used in combination, this enables translation between
+      # thousands of language pairs. Also, you can send in HTML and receive HTML
+      # with translated text back. You don't need to extract your source text or
       # reassemble the translated content.
       #
-      # @see https://cloud.google.com/translate/v2/getting_started Translate API
-      #   Getting Started
+      # @see https://cloud.google.com/translation/docs/getting-started
+      #   Cloud Translation API Quickstart
       #
       # @example
       #   require "google/cloud/translate"
@@ -55,7 +55,7 @@ module Google
         attr_accessor :service
 
         ##
-        # @private Creates a new Translate Api instance.
+        # @private Creates a new Api instance.
         #
         # See {Google::Cloud.translate}
         def initialize service
@@ -63,7 +63,7 @@ module Google
         end
 
         ##
-        # The Translate project connected to.
+        # The Cloud Translation API project connected to.
         #
         # @example
         #   require "google/cloud/translate"
@@ -91,8 +91,8 @@ module Google
         ##
         # Returns text translations from one language to another.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#Translate
-        #   Translate Text
+        # @see https://cloud.google.com/translation/docs/translating-text#Translate
+        #   Translating Text
         #
         # @param [String] text The text or texts to translate.
         # @param [String] to The target language into which the text should be
@@ -104,8 +104,8 @@ module Google
         #   639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         #   language code. This is optional.
         # @param [String] format The format of the text. Possible values include
-        #   `:text` and `:html`. This is optional. The Translate API default is
-        #   `:html`.
+        #   `:text` and `:html`. This is optional. The Translation API default
+        #   is `:html`.
         # @param [String] model The model used by the service to perform the
         #   translation. The neural machine translation model (`nmt`) is billed
         #   as a premium edition feature. If this is set to `base`, then the
@@ -199,8 +199,8 @@ module Google
         # Detect the most likely language or languages of a text or multiple
         # texts.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#detect-language
-        #   Detect Language
+        # @see https://cloud.google.com/translation/docs/detecting-language
+        #   Detecting Language
         #
         # @param [String] text The text or texts upon which language detection
         #   should be performed.
@@ -242,8 +242,8 @@ module Google
         # List the languages supported by the API. These are the languages to
         # and from which text can be translated.
         #
-        # @see https://cloud.google.com/translate/v2/using_rest#supported-languages
-        #   Discover Supported Languages
+        # @see https://cloud.google.com/translation/docs/discovering-supported-languages
+        #   Discovering Supported Languages
         #
         # @param [String] language The language and collation in which the names
         #   of the languages are returned. If this is `nil` then no names are

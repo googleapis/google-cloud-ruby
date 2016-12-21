@@ -23,7 +23,7 @@ module Google
     module Translate
       ##
       # @private
-      # Represents the Translate REST service, exposing the API calls.
+      # Represents the Translation API REST service, exposing the API calls.
       class Service #:nodoc:
         API_VERSION = "v2"
         API_URL = "https://translation.googleapis.com"

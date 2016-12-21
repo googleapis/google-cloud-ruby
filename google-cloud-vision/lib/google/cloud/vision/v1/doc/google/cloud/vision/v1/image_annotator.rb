@@ -397,7 +397,7 @@ module Google
         #     significant hindrance if the hint is wrong). Text detection returns an
         #     error if one or more of the specified languages is not one of the
         #     {supported
-        #     languages}[https://cloud.google.com/translate/v2/translate-reference#supported_languages].
+        #     languages}[https://cloud.google.com/translation/docs/languages].
         class ImageContext; end
 
         # Request for performing Google Cloud Vision API tasks over a user-provided
