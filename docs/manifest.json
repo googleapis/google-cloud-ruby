@@ -231,8 +231,9 @@
       "name": "stackdriver",
       "defaultService": "stackdriver",
       "versions": [
-        "v0.3.0",
-        "master"
+        "v0.4.0",
+        "master",
+        "v0.3.0"
       ]
     },
     {
