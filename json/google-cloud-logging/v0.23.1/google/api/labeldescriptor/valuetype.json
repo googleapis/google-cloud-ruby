@@ -1,0 +1,1 @@
+{"id":"google/api/labeldescriptor/valuetype","name":"ValueType","title":["Google","Api","LabelDescriptor","ValueType"],"description":"<p>Value types that can be used as label values.</p>","source":"google-cloud-logging/lib/google/cloud/logging/v2/doc/google/api/label.rb#L29","resources":[],"examples":[],"methods":[]}
