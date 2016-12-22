@@ -1,5 +1,12 @@
 # Release History
 
+### 0.23.1 / 2016-12-22
+
+* Use the `stackdriver-core` gem to obtain Trace ID, for compatibility with the `google-cloud-trace` gem.
+* `Google::Cloud::Logging::Logger` now understands all remaining standard Logger methods.
+* Clean up `AsyncWriter` threads on VM exit, to prevent gRPC from crashing if it's still in the middle of a call.
+* Minor improvements to warning messages.
+
 ### 0.23.0 / 2016-12-8
 
 * Add `resources` method argument to `Project#entries`
