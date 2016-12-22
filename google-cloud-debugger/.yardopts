@@ -1,0 +1,6 @@
+--no-private
+--title=Stackdriver Debugger
+
+./lib/**/*.rb
+-
+README.md

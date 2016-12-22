@@ -1,0 +1,120 @@
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+require "rake/extensiontask"
+spec = Gem::Specification.load("google-cloud-debugger.gemspec")
+Rake::ExtensionTask.new("google/cloud/debugger/debugger_c", spec)
+
+desc "Run tests."
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Run tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-debugger"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the debugger acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-debugger"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
+  end
+end
+
+desc "Run yard-doctest example tests."
+task doctest: :yard do
+  sh "bundle exec yard config -a autoload_plugins yard-doctest"
+  sh "bundle exec yard doctest"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-debugger"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-debugger .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-debugger"
+  generator.write_to "jsondoc"
+  cp ["docs/authentication.md", "docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-debugger"
+  header "google-cloud-debugger rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-debugger jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-debugger doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-debugger test", "*"
+  sh "bundle exec rake test"
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-debugger acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
