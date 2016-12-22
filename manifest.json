@@ -191,6 +191,14 @@
       ]
     },
     {
+      "id": "google-cloud-trace",
+      "name": "google-cloud-trace",
+      "defaultService": "google/cloud/trace",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-translate",
       "name": "google-cloud-translate",
       "defaultService": "google/cloud/translate",
@@ -230,6 +238,7 @@
       "name": "stackdriver-core",
       "defaultService": "stackdriver/core",
       "versions": [
+        "v0.21.0",
         "master"
       ]
     }
