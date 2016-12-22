@@ -196,6 +196,7 @@
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",
       "versions": [
+        "v0.21.0",
         "master"
       ]
     },
