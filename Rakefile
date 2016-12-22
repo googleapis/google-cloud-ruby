@@ -343,7 +343,7 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
     end
 
-    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
+    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring", "google-cloud-trace"]
     gems.each do |gem|
       next unless stackdriver_gems.include? gem
 

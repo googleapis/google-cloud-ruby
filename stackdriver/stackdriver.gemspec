@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "google-cloud-error_reporting"
   gem.add_runtime_dependency "google-cloud-logging"
   gem.add_runtime_dependency "google-cloud-monitoring"
+  gem.add_runtime_dependency "google-cloud-trace"
 
   gem.add_development_dependency "minitest", "~> 5.9"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

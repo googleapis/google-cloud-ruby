@@ -16,14 +16,17 @@
 gem "google-cloud-error_reporting"
 gem "google-cloud-logging"
 gem "google-cloud-monitoring"
+gem "google-cloud-trace"
 
 require "google/cloud/logging"
+require "google/cloud/trace"
 
 require "google/cloud/error_reporting/middleware" if defined? ::Rack
 
 if defined? ::Rails::Railtie
   require "google/cloud/error_reporting/rails"
   require "google/cloud/logging/rails"
+  require "google/cloud/trace/rails"
 end
 
 # Backward compatibility with legacy stackdriver gem
@@ -41,11 +44,13 @@ require "legacy_stackdriver"
 # - [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
 # - [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting)
 # - [google-cloud-monitoring](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring)
+# - [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace)
 #
 # On top of that, stackdriver gem automatically activates the following
 # instrumentation features:
 # - [google-cloud-logging instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/logging_instrumentation)
 # - [google-cloud-error_reporting instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/error_reporting_instrumentation)
+# - [google-cloud-trace instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/trace_instrumentation)
 #
 #
 # ## Usage

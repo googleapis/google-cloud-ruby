@@ -31,4 +31,8 @@ describe Stackdriver do
   it "requires google-cloud-logging rails module" do
     defined?(Google::Cloud::Logging::Railtie).wont_be_nil
   end
+
+  it "requires google-cloud-trace rails module" do
+    defined?(Google::Cloud::Trace::Railtie).wont_be_nil
+  end
 end
