@@ -23,6 +23,7 @@ $tracer = Google::Cloud::Trace.new
 
 module Acceptance
   class TraceTest < Minitest::Test
+    MIN_DELAY = 2
     MAX_DELAY = 5
 
     attr_accessor :tracer
@@ -54,7 +55,7 @@ module Acceptance
     end
 
     def wait_until
-      delay = 0
+      delay = MIN_DELAY
       while delay <= MAX_DELAY
         sleep delay
         result = yield
