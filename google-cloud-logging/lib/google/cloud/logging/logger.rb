@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "logger"
 require "orderedhash"
 
 module Google
