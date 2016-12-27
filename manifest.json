@@ -125,8 +125,9 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
-        "v0.23.1",
+        "v0.23.2",
         "master",
+        "v0.23.1",
         "v0.23.0",
         "v0.21.2",
         "v0.21.1",
