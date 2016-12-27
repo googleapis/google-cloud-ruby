@@ -1,0 +1,1 @@
+{"id":"google/logging/v2/configservicev2/service","name":"Service","title":["Google","Logging","V2","ConfigServiceV2","Service"],"description":"<p>Service for configuring sinks used to export log entries outside of\nStackdriver Logging.</p>","source":"google-cloud-logging/lib/google/logging/v2/logging_config_services_pb.rb#L28","resources":[],"examples":[],"methods":[]}
