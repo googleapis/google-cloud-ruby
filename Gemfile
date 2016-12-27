@@ -36,3 +36,11 @@ gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
 gem "stackdriver", path: "stackdriver"
 gem "stackdriver-core", path: "stackdriver-core"
+
+# TEMP: rainbow (a dependency of rubocop) version 2.2 seems to have a problem,
+# so pinning to 2.1 for now.
+gem "rainbow", "~> 2.1.0"
+
+# TEMP: nokogiri (a dependency of rails) 1.7 requires Ruby 2.1 or later.
+# Since we're still testing on Ruby 2.0, pin nokogiri to 1.6 for now.
+gem "nokogiri", "~> 1.6.8"
