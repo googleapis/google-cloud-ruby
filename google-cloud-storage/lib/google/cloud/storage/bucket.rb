@@ -676,6 +676,94 @@ module Google
         end
 
         ##
+        # Generate a PostObject that includes the fields and url to
+        # upload objects via html forms.
+        #
+        # Generating a PostObject requires service account credentials,
+        # either by connecting with a service account when calling
+        # {Google::Cloud.storage}, or by passing in the service account
+        # `issuer` and `signing_key` values. Although the private key can
+        # be passed as a string for convenience, creating and storing
+        # an instance of # `OpenSSL::PKey::RSA` is more efficient
+        # when making multiple calls to `post_object`.
+        #
+        # A {SignedUrlUnavailable} is raised if the service account credentials
+        # are missing. Service account credentials are acquired by following the
+        # steps in [Service Account Authentication](
+        # https://cloud.google.com/storage/docs/authentication#service_accounts).
+        #
+        # @see https://cloud.google.com/storage/docs/xml-api/post-object
+        #
+        # @param [String] path Path to of the file in Google Cloud Storage.
+        # @param [Hash] policy The security policy that describes what
+        #   can and cannot be uploaded in the form. When provided,
+        #   the PostObject fields will include a Signature based on the JSON
+        #   representation of this Hash and the same policy in Base64 format.
+        #   If you do not provide a security policy, requests are considered
+        #   to be anonymous and will only work with buckets that have granted
+        #   WRITE or FULL_CONTROL permission to anonymous users.
+        #   See [Policy Document](https://cloud.google.com/storage/docs/xml-api/post-object#policydocument)
+        #   for more information.
+        # @param [String] issuer Service Account's Client Email.
+        # @param [String] client_email Service Account's Client Email.
+        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
+        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
+        #   Private Key.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   post = bucket.post_object "avatars/heidi/400x400.png"
+        #
+        # @example Using a policy to define the upload authorization
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   policy = {
+        #     expiration: (Time.now + 3600).iso8601,
+        #     conditions: [
+        #       ["starts-with", "$key", ""],
+        #       {acl: "bucket-owner-read"},
+        #       {bucket: "travel-maps"},
+        #       {success_action_redirect: "http://example.com/success.html"},
+        #       ["eq", "$Content-Type", "image/jpeg"],
+        #       ["content-length-range", 0, 1000000]
+        #     ]
+        #   }
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   post = bucket.post_object "avatars/heidi/400x400.png",
+        #                              policy: policy
+        #
+        # @example Using the issuer and signing_key options:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
+        #   post = bucket.post_object "avatars/heidi/400x400.png",
+        #                             issuer: "service-account@gcloud.com",
+        #                             signing_key: key
+        #
+        def post_object path, policy: nil, issuer: nil,
+                        client_email: nil, signing_key: nil,
+                        private_key: nil
+          ensure_service!
+          options = { issuer: issuer, client_email: client_email,
+                      signing_key: signing_key, private_key: private_key,
+                      policy: policy }
+
+          signer = File::Signer.from_bucket self, path
+          signer.post_object options
+        end
+
+        ##
         # The Bucket::Acl instance used to control access to the bucket.
         #
         # A bucket has owners, writers, and readers. Permissions can be granted
@@ -841,6 +929,14 @@ module Google
             @updates << attribute
             @updates.uniq!
           end
+        end
+      end
+
+      class PostObject
+        attr_reader :url, :fields
+        def initialize url, fields
+          @url = url
+          @fields = fields
         end
       end
     end

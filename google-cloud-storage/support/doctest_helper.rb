@@ -35,6 +35,12 @@ module Google
                        signing_key: nil, private_key: nil
           # no-op stub, but ensures that calls match this copied signature
         end
+
+        def post_object path, policy: nil, issuer: nil,
+                        client_email: nil, signing_key: nil,
+                        private_key: nil
+          # no-op stub, but ensures that calls match this copied signature
+        end
       end
     end
   end
@@ -190,6 +196,7 @@ YARD::Doctest.configure do |doctest|
 
   # Due to failing line in example: key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
   doctest.skip "Google::Cloud::Storage::Bucket#signed_url"
+  doctest.skip "Google::Cloud::Storage::Bucket#post_object"
   # doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
   #   mock_storage do |mock|
   #     mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]

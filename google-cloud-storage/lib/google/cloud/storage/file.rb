@@ -21,6 +21,8 @@ require "google/cloud/storage/file/verifier"
 module Google
   module Cloud
     module Storage
+      GOOGLEAPIS_URL = "https://storage.googleapis.com".freeze
+
       ##
       # # File
       #
@@ -749,7 +751,7 @@ module Google
           ##
           # The external url to the file.
           def ext_url
-            "https://storage.googleapis.com#{ext_path}"
+            "#{GOOGLEAPIS_URL}#{ext_path}"
           end
 
           def apply_option_defaults options
@@ -775,6 +777,35 @@ module Google
               @service.credentials.issuer
           end
 
+          def post_object options
+            options = apply_option_defaults options
+
+            fields = {
+              key: ext_path.sub("/", "")
+            }
+
+            if options[:policy]
+              p = options[:policy]
+              fail "Policy must be given in a Hash" unless p.is_a? Hash
+
+              i = determine_issuer options
+              s = determine_signing_key options
+
+              fail SignedUrlUnavailable unless i && s
+
+              policy_str = p.to_json
+              policy = Base64.strict_encode64(policy_str).delete("\n")
+
+              signature = generate_signature s, policy
+
+              fields[:GoogleAccessId] = i
+              fields[:signature] = signature
+              fields[:policy] = policy
+            end
+
+            Google::Cloud::Storage::PostObject.new GOOGLEAPIS_URL, fields
+          end
+
           def signed_url options
             options = apply_option_defaults options
 
@@ -783,22 +814,22 @@ module Google
 
             fail SignedUrlUnavailable unless i && s
 
-            sig = generate_signature s, options
+            sig = generate_signature s, signature_str(options)
             generate_signed_url i, sig, options[:expires]
           end
 
-          def generate_signature signing_key, options = {}
+          def generate_signature signing_key, secret
             unless signing_key.respond_to? :sign
               signing_key = OpenSSL::PKey::RSA.new signing_key
             end
-            signing_key.sign OpenSSL::Digest::SHA256.new, signature_str(options)
+            signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
+            Base64.strict_encode64(signature).delete("\n")
           end
 
           def generate_signed_url issuer, signed_string, expires
-            signature = Base64.strict_encode64(signed_string).delete("\n")
             "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
               "&Expires=#{expires}" \
-              "&Signature=#{CGI.escape signature}"
+              "&Signature=#{CGI.escape signed_string}"
           end
 
           def format_extension_headers headers
