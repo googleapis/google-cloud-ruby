@@ -48,52 +48,20 @@
         {
           "title": "Key",
           "type": "google/cloud/datastore/key"
-        }
-      ]
-    },
-    {
-      "title": "Datastore::V1",
-      "type": "google/cloud/datastore/v1/datastoreclient",
-      "nav": [
-        {
-          "title": "DatastoreClient",
-          "type": "google/cloud/datastore/v1/datastoreclient"
         },
         {
-          "title": "BoolValue",
-          "type": "google/protobuf/boolvalue"
-        },
-        {
-          "title": "BytesValue",
-          "type": "google/protobuf/bytesvalue"
-        },
-        {
-          "title": "DoubleValue",
-          "type": "google/protobuf/doublevalue"
-        },
-        {
-          "title": "FloatValue",
-          "type": "google/protobuf/floatvalue"
-        },
-        {
-          "title": "Int32Value",
-          "type": "google/protobuf/int32value"
-        },
-        {
-          "title": "Int64Value",
-          "type": "google/protobuf/int64value"
-        },
-        {
-          "title": "StringValue",
-          "type": "google/protobuf/stringvalue"
-        },
-        {
-          "title": "UInt32Value",
-          "type": "google/protobuf/uint32value"
-        },
-        {
-          "title": "UInt64Value",
-          "type": "google/protobuf/uint64value"
+          "title": "V1",
+          "type": "google/cloud/datastore/v1",
+          "nav": [
+            {
+              "title": "DatastoreClient",
+              "type": "google/cloud/datastore/v1/datastoreclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/datastore/v1"
+            }
+          ]
         }
       ]
     }
