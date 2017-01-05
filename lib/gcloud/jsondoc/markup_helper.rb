@@ -9,7 +9,8 @@ module Gcloud
 
       def md s, multi_paragraph = false
         html = Kramdown::Document.new(s.to_s, input: "GFM", hard_wrap: false).to_html.strip
-        html = add_anchor_link_directives(html)
+        html = add_anchor_link_directives html
+        html = add_css html
         html = unwrap_paragraph(html) unless multi_paragraph
         html = resolve_links(html) if html # in YARD's HtmlHelper
         html
@@ -27,6 +28,11 @@ module Gcloud
 
       def unwrap_paragraph html
         html.sub(/\A<p>/, "").sub(/<\/p>\z/, "")
+      end
+
+      def add_css html
+        # Add the `table` class for correct style in Angular app.
+        html.sub("<table>", "<table class=\"table\">")
       end
 
       # API expected by HtmlHelper; overrides BaseHelper#linkify (not included)

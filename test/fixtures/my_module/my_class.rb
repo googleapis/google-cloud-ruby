@@ -2,6 +2,10 @@ module MyModule
   ##
   # You can use MyClass for almost anything.
   #
+  # Class | Description
+  # ----- | -----------
+  # Integer | A numeric class.
+  #
   # * [First subheading](#first-subheading)
   # * [Second subheading](#second-subheading)
   #
