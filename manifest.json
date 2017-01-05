@@ -5,6 +5,7 @@
   "markdown": "ruby",
   "titleDelimiter": "::",
   "defaultModule": "google-cloud",
+  "matchServiceTitle": true,
   "content": "json",
   "home": "home.html",
   "package": {
