@@ -257,6 +257,7 @@
     {
       "title": "Natural Language",
       "type": "google/cloud/language",
+      "patterns": ["\/language"],
       "nav": [
         {
           "title": "Project",
