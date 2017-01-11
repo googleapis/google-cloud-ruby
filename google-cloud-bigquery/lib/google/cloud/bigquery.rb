@@ -166,7 +166,7 @@ module Google
     #
     # sql = "SELECT word, SUM(word_count) AS word_count " \
     #       "FROM `bigquery-public-data.samples.shakespeare`" \
-    #       "WHERE word IN (@words) GROUP BY word"
+    #       "WHERE word IN UNNEST(@words) GROUP BY word"
     # data = bigquery.query sql, params: { words: ['me', 'I', 'you'] }
     # ```
     #
