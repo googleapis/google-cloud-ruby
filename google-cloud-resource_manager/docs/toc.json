@@ -32,6 +32,7 @@
     {
       "title": "Resource Manager",
       "type": "google/cloud/resourcemanager",
+      "patterns": ["\/resourcemanager"],
       "nav": [
         {
           "title": "Manager",
