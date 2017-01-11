@@ -207,6 +207,7 @@
     {
       "title": "Logging",
       "type": "google/cloud/logging",
+      "patterns": ["\/logging"],
       "nav": [
         {
           "title": "Project",
@@ -231,6 +232,7 @@
         {
           "title": "V2",
           "type": "google/cloud/logging/v2",
+          "patterns": ["\/logging\/v2"],
           "nav": [
             {
               "title": "ConfigServiceV2Client",
