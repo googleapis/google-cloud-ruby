@@ -58,6 +58,7 @@
     {
       "title": "Core",
       "type": "google/cloud/error",
+      "patterns": ["google\/cloud\/\\w*error$"],
       "nav": [
         {
           "title": "AbortedError",
@@ -78,10 +79,6 @@
         {
           "title": "DeadlineExceededError",
           "type": "google/cloud/deadlineexceedederror"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
         },
         {
           "title": "FailedPreconditionError",
@@ -122,14 +119,6 @@
         {
           "title": "UnknownError",
           "type": "google/cloud/unknownerror"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
         }
       ]
     },
