@@ -98,6 +98,42 @@ module Google
       #     * +domain:{domain}+: A Google Apps domain name that represents all the
       #        users of that domain. For example, +google.com+ or +example.com+.
       class Binding; end
+
+      # The difference delta between two policies.
+      # @!attribute [rw] binding_deltas
+      #   @return [Array<Google::Iam::V1::BindingDelta>]
+      #     The delta for Bindings between two policies.
+      class PolicyDelta; end
+
+      # One delta entry for Binding. Each individual change (only one member in each
+      # entry) to a binding will be a separate entry.
+      # @!attribute [rw] action
+      #   @return [Google::Iam::V1::BindingDelta::Action]
+      #     The action that was performed on a Binding.
+      #     Required
+      # @!attribute [rw] role
+      #   @return [String]
+      #     Role that is assigned to +members+.
+      #     For example, +roles/viewer+, +roles/editor+, or +roles/owner+.
+      #     Required
+      # @!attribute [rw] member
+      #   @return [String]
+      #     A single identity requesting access for a Cloud Platform resource.
+      #     Follows the same format of Binding.members.
+      #     Required
+      class BindingDelta
+        # The type of action performed on a Binding in a policy.
+        module Action
+          # Unspecified.
+          ACTION_UNSPECIFIED = 0
+
+          # Addition of a Binding.
+          ADD = 1
+
+          # Removal of a Binding.
+          REMOVE = 2
+        end
+      end
     end
   end
 end

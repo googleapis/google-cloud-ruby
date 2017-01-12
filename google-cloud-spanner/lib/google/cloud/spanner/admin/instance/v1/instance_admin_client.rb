@@ -65,7 +65,7 @@ module Google
               attr_reader :instance_admin_stub
 
               # The default address of the service.
-              SERVICE_ADDRESS = "wrenchworks.googleapis.com".freeze
+              SERVICE_ADDRESS = "spanner.googleapis.com".freeze
 
               # The default port of the service.
               DEFAULT_SERVICE_PORT = 443
@@ -400,13 +400,15 @@ module Google
               #   Some examples of using filters are:
               #
               #     * name:* --> The instance has a name.
-              #     * name:Howl --> The instance's name is howl.
+              #     * name:Howl --> The instance's name contains the string "howl".
               #     * name:HOWL --> Equivalent to above.
               #     * NAME:howl --> Equivalent to above.
-              #     * labels.env:* --> The instance has the label env.
-              #     * labels.env:dev --> The instance's label env has the value dev.
-              #     * name:howl labels.env:dev --> The instance's name is howl and it has
-              #                                    the label env with value dev.
+              #     * labels.env:* --> The instance has the label "env".
+              #     * labels.env:dev --> The instance has the label "env" and the value of
+              #                          the label contains the string "dev".
+              #     * name:howl labels.env:dev --> The instance's name contains "howl" and
+              #                                    it has the label "env" with its value
+              #                                    containing "dev".
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -542,7 +544,7 @@ module Google
               #   # Register a callback during the method call.
               #   operation = instance_admin_client.create_instance(formatted_parent, instance_id, instance) do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -552,7 +554,7 @@ module Google
               #   # Or use the return value to register a callback.
               #   operation.on_done do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -655,7 +657,7 @@ module Google
               #   # Register a callback during the method call.
               #   operation = instance_admin_client.update_instance(instance, field_mask) do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -665,7 +667,7 @@ module Google
               #   # Or use the return value to register a callback.
               #   operation.on_done do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata

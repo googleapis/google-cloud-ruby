@@ -49,7 +49,7 @@ module Google
               attr_reader :database_admin_stub
 
               # The default address of the service.
-              SERVICE_ADDRESS = "wrenchworks.googleapis.com".freeze
+              SERVICE_ADDRESS = "spanner.googleapis.com".freeze
 
               # The default port of the service.
               DEFAULT_SERVICE_PORT = 443
@@ -350,7 +350,7 @@ module Google
               #   # Register a callback during the method call.
               #   operation = database_admin_client.create_database(formatted_parent, create_statement) do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -360,7 +360,7 @@ module Google
               #   # Or use the return value to register a callback.
               #   operation.on_done do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -472,7 +472,7 @@ module Google
               #   # Register a callback during the method call.
               #   operation = database_admin_client.update_database_ddl(formatted_database, statements) do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata
@@ -482,7 +482,7 @@ module Google
               #   # Or use the return value to register a callback.
               #   operation.on_done do |op|
               #     raise op.results.message if op.error?
-              #     results = op.results
+              #     op_results = op.results
               #     # Process the results.
               #
               #     metadata = op.metadata

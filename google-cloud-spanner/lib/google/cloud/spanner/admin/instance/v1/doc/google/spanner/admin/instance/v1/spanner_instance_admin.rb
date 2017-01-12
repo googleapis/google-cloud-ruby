@@ -181,13 +181,15 @@ module Google
           #     Some examples of using filters are:
           #
           #       * name:* --> The instance has a name.
-          #       * name:Howl --> The instance's name is howl.
+          #       * name:Howl --> The instance's name contains the string "howl".
           #       * name:HOWL --> Equivalent to above.
           #       * NAME:howl --> Equivalent to above.
-          #       * labels.env:* --> The instance has the label env.
-          #       * labels.env:dev --> The instance's label env has the value dev.
-          #       * name:howl labels.env:dev --> The instance's name is howl and it has
-          #                                      the label env with value dev.
+          #       * labels.env:* --> The instance has the label "env".
+          #       * labels.env:dev --> The instance has the label "env" and the value of
+          #                            the label contains the string "dev".
+          #       * name:howl labels.env:dev --> The instance's name contains "howl" and
+          #                                      it has the label "env" with its value
+          #                                      containing "dev".
           class ListInstancesRequest; end
 
           # The response for ListInstances.

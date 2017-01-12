@@ -43,7 +43,7 @@ module Google
           attr_reader :spanner_stub
 
           # The default address of the service.
-          SERVICE_ADDRESS = "wrenchworks.googleapis.com".freeze
+          SERVICE_ADDRESS = "spanner.googleapis.com".freeze
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
