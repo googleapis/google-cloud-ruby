@@ -290,6 +290,7 @@
     {
       "title": "PubSub",
       "type": "google/cloud/pubsub",
+      "patterns": ["\/pubsub"],
       "nav": [
         {
           "title": "Project",
@@ -302,6 +303,25 @@
         {
           "title": "Subscription",
           "type": "google/cloud/pubsub/subscription"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/pubsub/v1",
+          "patterns": ["\/pubsub\/v1"],
+          "nav": [
+            {
+              "title": "PublisherApi",
+              "type": "google/cloud/pubsub/v1/publisherapi"
+            },
+            {
+              "title": "SubscriberApi",
+              "type": "google/cloud/pubsub/v1/subscriberapi"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/pubsub/v1"
+            }
+          ]
         }
       ]
     },
