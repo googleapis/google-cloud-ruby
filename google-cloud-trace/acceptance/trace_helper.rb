@@ -24,7 +24,7 @@ $tracer = Google::Cloud::Trace.new
 module Acceptance
   class TraceTest < Minitest::Test
     MIN_DELAY = 2
-    MAX_DELAY = 5
+    MAX_DELAY = 8
 
     attr_accessor :tracer
 
