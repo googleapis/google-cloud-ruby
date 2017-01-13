@@ -58,6 +58,7 @@
     {
       "title": "Core",
       "type": "google/cloud/error",
+      "patterns": ["google\/cloud\/\\w*error$"],
       "nav": [
         {
           "title": "AbortedError",
@@ -78,10 +79,6 @@
         {
           "title": "DeadlineExceededError",
           "type": "google/cloud/deadlineexceedederror"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
         },
         {
           "title": "FailedPreconditionError",
@@ -122,20 +119,13 @@
         {
           "title": "UnknownError",
           "type": "google/cloud/unknownerror"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
-        },
-        {
-          "title": "Errors",
-          "type": "google/cloud/error"
         }
       ]
     },
     {
       "title": "Datastore",
       "type": "google/cloud/datastore",
+      "patterns": ["\/datastore"],
       "nav": [
         {
           "title": "Dataset",
@@ -156,6 +146,7 @@
         {
           "title": "V1",
           "type": "google/cloud/datastore/v1",
+          "patterns": ["\/datastore\/v1"],
           "nav": [
             {
               "title": "DatastoreClient",
@@ -216,6 +207,7 @@
     {
       "title": "Logging",
       "type": "google/cloud/logging",
+      "patterns": ["\/logging"],
       "nav": [
         {
           "title": "Project",
@@ -240,6 +232,7 @@
         {
           "title": "V2",
           "type": "google/cloud/logging/v2",
+          "patterns": ["\/logging\/v2"],
           "nav": [
             {
               "title": "ConfigServiceV2Client",
@@ -264,6 +257,7 @@
     {
       "title": "Natural Language",
       "type": "google/cloud/language",
+      "patterns": ["\/language"],
       "nav": [
         {
           "title": "Project",
@@ -296,6 +290,7 @@
     {
       "title": "PubSub",
       "type": "google/cloud/pubsub",
+      "patterns": ["\/pubsub"],
       "nav": [
         {
           "title": "Project",
@@ -308,12 +303,32 @@
         {
           "title": "Subscription",
           "type": "google/cloud/pubsub/subscription"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/pubsub/v1",
+          "patterns": ["\/pubsub\/v1"],
+          "nav": [
+            {
+              "title": "PublisherApi",
+              "type": "google/cloud/pubsub/v1/publisherapi"
+            },
+            {
+              "title": "SubscriberApi",
+              "type": "google/cloud/pubsub/v1/subscriberapi"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/pubsub/v1"
+            }
+          ]
         }
       ]
     },
     {
       "title": "Resource Manager",
       "type": "google/cloud/resourcemanager",
+      "patterns": ["\/resourcemanager"],
       "nav": [
         {
           "title": "Manager",

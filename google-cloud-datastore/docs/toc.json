@@ -32,6 +32,7 @@
     {
       "title": "Datastore",
       "type": "google/cloud/datastore",
+      "patterns": ["\/datastore"],
       "nav": [
         {
           "title": "Dataset",
@@ -52,6 +53,7 @@
         {
           "title": "V1",
           "type": "google/cloud/datastore/v1",
+          "patterns": ["\/datastore\/v1"],
           "nav": [
             {
               "title": "DatastoreClient",
