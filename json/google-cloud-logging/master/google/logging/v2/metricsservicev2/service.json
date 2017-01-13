@@ -1,1 +1,0 @@
-{"id":"google/logging/v2/metricsservicev2/service","name":"Service","title":["Google","Logging","V2","MetricsServiceV2","Service"],"description":"<p>Service for configuring logs-based metrics.</p>","source":"google-cloud-logging/lib/google/logging/v2/logging_metrics_services_pb.rb#L27","resources":[],"examples":[],"methods":[]}
