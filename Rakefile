@@ -315,6 +315,19 @@ namespace :jsondoc do
           mkdir_p gh_pages + "json/google-cloud/#{version}/google/protobuf", verbose: true
           cp Dir["#{src}/google/protobuf/*.json"], gh_pages + "json/google-cloud/#{version}/google/protobuf/", verbose: true
         end
+
+        # Copy GAPIC directories with names that do not match gem namespace
+        # google-cloud-error_reporting
+        if gem == "google-cloud-error_reporting" && Dir.exists?("#{src}/google/devtools")
+          mkdir_p gh_pages + "json/google-cloud/#{version}/google/devtools", verbose: true
+          if Dir.exists? "#{src}/google/devtools/clouderrorreporting"
+            # Copy the gem's subdir in devtools
+            header_2 "Copying  #{gem_shortname} jsondoc for devtools"
+            cp_r Dir["#{src}/google/devtools/clouderrorreporting"],
+                 gh_pages + "json/google-cloud/#{version}/google/devtools/", verbose: true
+          end
+          # TODO: copy devtools/cloudtrace for google-cloud-trace when adding it to google-cloud
+        end
       end
 
       # Copy the contents of google/cloud/ for the gem. This also gets the core error files.
