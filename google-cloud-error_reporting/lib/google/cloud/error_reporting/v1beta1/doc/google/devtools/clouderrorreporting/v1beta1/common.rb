@@ -15,6 +15,34 @@
 module Google
   module Devtools
     module Clouderrorreporting
+      ##
+      # The `Google::Devtools::Clouderrorreporting::V1beta1` module provides the following types:
+      #
+      # Class | Description
+      # ----- | -----------
+      # {Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest} | Deletes all events in the project.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse} | Response message for deleting error events.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ErrorContext} | A description of the context in which an error occurred.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent} | An error event which is returned by the Error Reporting system.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup} | Description of a group of similar error events.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder} | A sorting order of error groups.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats} | Data extracted for a specific group based on certain filter criteria.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::HttpRequestContext} | HTTP request data that is related to a reported error.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest} | Specifies a set of error events to return.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ListEventsResponse} | Contains a set of requested error events.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsRequest} | Specifies a set of {Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats} to return.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsResponse} | Contains a set of requested error group stats.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange} | Requests might be rejected or the resulting timed count durations might be adjusted for lower durations.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent} | An error event which is reported to the Error Reporting system.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest} | A request for reporting an individual error event.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse} | Response for reporting an individual error event.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ServiceContext} | Describes a running service that sends errors.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter} | Specifies criteria for filtering a subset of service contexts.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::SourceLocation} | Indicates a location in the source code of the service for which errors are reported.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::TimedCount} | The number of errors in a given time period.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment} | Specifies how the time periods of error group counts are aligned.
+      # {Google::Devtools::Clouderrorreporting::V1beta1::TrackingIssue} | Information related to tracking the progress on resolving the error.
+      #
       module V1beta1
         # Description of a group of similar error events.
         # @!attribute [rw] name
