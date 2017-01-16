@@ -289,15 +289,27 @@
     },
     {
       "title": "Monitoring",
-      "type": "google/cloud/monitoring/v3",
+      "type": "google/cloud/monitoring",
+      "patterns": ["\/monitoring"],
       "nav": [
         {
-          "title": "GroupServiceApi",
-          "type": "google/cloud/monitoring/v3/groupserviceapi"
-        },
-        {
-          "title": "MetricServiceApi",
-          "type": "google/cloud/monitoring/v3/metricserviceapi"
+          "title": "V3",
+          "type": "google/cloud/monitoring/v3",
+          "patterns": ["\/monitoring\/v3"],
+          "nav": [
+            {
+              "title": "GroupServiceApi",
+              "type": "google/cloud/monitoring/v3/groupserviceapi"
+            },
+            {
+              "title": "MetricServiceApi",
+              "type": "google/cloud/monitoring/v3/metricserviceapi"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/monitoring/v3"
+            }
+          ]
         }
       ]
     },
