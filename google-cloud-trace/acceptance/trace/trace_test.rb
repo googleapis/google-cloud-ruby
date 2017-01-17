@@ -44,11 +44,14 @@ describe Google::Cloud::Trace, :trace do
       end
       all_results.to_a.must_equal [trace1, trace2, trace3]
       all_results.results_pending?.must_equal false
-      page1 = tracer.list_traces start_time, end_time,
+      page1 = wait_until do
+        res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
                                  filter: simple_span_name,
                                  order_by: "start",
                                  page_size: 2
+        res.to_a == [trace1, trace2] ? res : nil
+      end
       page1.to_a.must_equal [trace1, trace2]
       page1.results_pending?.must_equal true
       page2 = page1.next_page
