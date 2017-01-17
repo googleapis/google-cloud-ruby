@@ -35,13 +35,14 @@
   ],
   "services": [
     {
-      "title": "Google::Cloud",
-      "type": "google/cloud"
-    },
-    {
-      "title": "Google::Cloud::Trace",
+      "title": "Trace",
       "type": "google/cloud/trace",
+      "patterns": ["\/trace", "\/cloudtrace"],
       "nav": [
+        {
+          "title": "Project",
+          "type": "google/cloud/trace/project"
+        },
         {
           "title": "LabelKey",
           "type": "google/cloud/trace/labelkey"
@@ -53,10 +54,6 @@
         {
           "title": "Notifications",
           "type": "google/cloud/trace/notifications"
-        },
-        {
-          "title": "Project",
-          "type": "google/cloud/trace/project"
         },
         {
           "title": "Railtie",
@@ -81,12 +78,24 @@
         {
           "title": "TraceRecord",
           "type": "google/cloud/trace/tracerecord"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/trace/v1",
+          "patterns": ["\/trace\/v1", "\/cloudtrace"],
+          "nav": [
+            {
+              "title": "TraceServiceApi",
+              "type": "google/cloud/trace/v1/traceserviceapi"
+            },
+            {
+              "title": "Data Types",
+              "patterns": ["\/cloudtrace\/v1"],
+              "type": "google/devtools/cloudtrace/v1"
+            }
+          ]
         }
       ]
-    },
-    {
-      "title": "Low-Level API",
-      "type": "google/cloud/trace/v1/traceserviceapi"
     }
   ]
 }

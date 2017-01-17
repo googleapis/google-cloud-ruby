@@ -8,24 +8,44 @@
   ],
   "services": [
     {
-      "title": "ReportErrorsServiceApi",
-      "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceapi"
-    },
-    {
-      "title": "ErrorStatsServiceApi",
-      "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceapi"
-    },
-    {
-      "title": "ErrorGroupServiceApi",
-      "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceapi"
-    },
-    {
-      "title": "Middleware",
-      "type": "google/cloud/errorreporting/middleware"
-    },
-    {
-      "title": "Railtie",
-      "type": "google/cloud/errorreporting/railtie"
+      "title": "Error Reporting",
+      "type": "google/cloud/errorreporting",
+      "patterns": ["\/errorreporting", "\/clouderrorreporting"],
+      "nav": [
+
+        {
+          "title": "Middleware",
+          "type": "google/cloud/errorreporting/middleware"
+        },
+        {
+          "title": "Railtie",
+          "type": "google/cloud/errorreporting/railtie"
+        },
+        {
+          "title": "V1Beta1",
+          "type": "google/cloud/errorreporting/v1beta1",
+          "patterns": ["\/errorreporting\/v1beta1", "\/clouderrorreporting"],
+          "nav": [
+            {
+              "title": "ReportErrorsServiceApi",
+              "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceapi"
+            },
+            {
+              "title": "ErrorStatsServiceApi",
+              "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceapi"
+            },
+            {
+              "title": "ErrorGroupServiceApi",
+              "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceapi"
+            },
+            {
+              "title": "Data Types",
+              "patterns": ["\/clouderrorreporting\/v1beta1"],
+              "type": "google/devtools/clouderrorreporting/v1beta1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
