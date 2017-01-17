@@ -1,1 +1,0 @@
-{"id":"google/monitoring/v3/metricservice/service","name":"Service","title":["Google","Monitoring","V3","MetricService","Service"],"description":"<p>Manages metric descriptors, monitored resource descriptors, and\ntime series data.</p>","source":"google-cloud-monitoring/lib/google/monitoring/v3/metric_service_services_pb.rb#L28","resources":[],"examples":[],"methods":[]}
