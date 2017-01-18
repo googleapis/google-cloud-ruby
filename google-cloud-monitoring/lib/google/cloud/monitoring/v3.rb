@@ -14,5 +14,5 @@
 # limitations under the License.
 
 
-require "google/cloud/monitoring/v3/group_service_api"
-require "google/cloud/monitoring/v3/metric_service_api"
+require "google/cloud/monitoring/v3/group_service_client"
+require "google/cloud/monitoring/v3/metric_service_client"

@@ -37,7 +37,7 @@ module Google
         #
         # @!attribute [r] metric_service_stub
         #   @return [Google::Monitoring::V3::MetricService::Stub]
-        class MetricServiceApi
+        class MetricServiceClient
           attr_reader :metric_service_stub
 
           # The default address of the service.
@@ -70,6 +70,10 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/monitoring",
+            "https://www.googleapis.com/auth/monitoring.read",
+            "https://www.googleapis.com/auth/monitoring.write"
           ].freeze
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -95,7 +99,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              project: project
+              :"project" => project
             )
           end
 
@@ -105,8 +109,8 @@ module Google
           # @return [String]
           def self.metric_descriptor_path project, metric_descriptor
             METRIC_DESCRIPTOR_PATH_TEMPLATE.render(
-              project: project,
-              metric_descriptor: metric_descriptor
+              :"project" => project,
+              :"metric_descriptor" => metric_descriptor
             )
           end
 
@@ -116,8 +120,8 @@ module Google
           # @return [String]
           def self.monitored_resource_descriptor_path project, monitored_resource_descriptor
             MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.render(
-              project: project,
-              monitored_resource_descriptor: monitored_resource_descriptor
+              :"project" => project,
+              :"monitored_resource_descriptor" => monitored_resource_descriptor
             )
           end
 
@@ -190,6 +194,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/monitoring/v3/metric_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -284,20 +289,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.project_path("[PROJECT]")
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   metric_service_api.list_monitored_resource_descriptors(formatted_name).each do |element|
+          #   metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_api.list_monitored_resource_descriptors(formatted_name).each_page do |page|
+          #   metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -330,13 +335,13 @@ module Google
           # @return [Google::Api::MonitoredResourceDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
-          #   response = metric_service_api.get_monitored_resource_descriptor(formatted_name)
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
+          #   response = metric_service_client.get_monitored_resource_descriptor(formatted_name)
 
           def get_monitored_resource_descriptor \
               name,
@@ -377,20 +382,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.project_path("[PROJECT]")
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   metric_service_api.list_metric_descriptors(formatted_name).each do |element|
+          #   metric_service_client.list_metric_descriptors(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_api.list_metric_descriptors(formatted_name).each_page do |page|
+          #   metric_service_client.list_metric_descriptors(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -423,13 +428,13 @@ module Google
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
-          #   response = metric_service_api.get_metric_descriptor(formatted_name)
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
+          #   response = metric_service_client.get_metric_descriptor(formatted_name)
 
           def get_metric_descriptor \
               name,
@@ -456,15 +461,15 @@ module Google
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
           #   MetricDescriptor = Google::Api::MetricDescriptor
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.project_path("[PROJECT]")
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
           #   metric_descriptor = MetricDescriptor.new
-          #   response = metric_service_api.create_metric_descriptor(formatted_name, metric_descriptor)
+          #   response = metric_service_client.create_metric_descriptor(formatted_name, metric_descriptor)
 
           def create_metric_descriptor \
               name,
@@ -490,13 +495,13 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
-          #   metric_service_api.delete_metric_descriptor(formatted_name)
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
+          #   metric_service_client.delete_metric_descriptor(formatted_name)
 
           def delete_metric_descriptor \
               name,
@@ -551,25 +556,25 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #   TimeInterval = Google::Monitoring::V3::TimeInterval
           #   TimeSeriesView = Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.project_path("[PROJECT]")
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
           #   filter = ''
           #   interval = TimeInterval.new
           #   view = TimeSeriesView::FULL
           #
           #   # Iterate over all results.
-          #   metric_service_api.list_time_series(formatted_name, filter, interval, view).each do |element|
+          #   metric_service_client.list_time_series(formatted_name, filter, interval, view).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_api.list_time_series(formatted_name, filter, interval, view).each_page do |page|
+          #   metric_service_client.list_time_series(formatted_name, filter, interval, view).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -616,14 +621,14 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_api"
+          #   require "google/cloud/monitoring/v3/metric_service_client"
           #
-          #   MetricServiceApi = Google::Cloud::Monitoring::V3::MetricServiceApi
+          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
           #
-          #   metric_service_api = MetricServiceApi.new
-          #   formatted_name = MetricServiceApi.project_path("[PROJECT]")
+          #   metric_service_client = MetricServiceClient.new
+          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
           #   time_series = []
-          #   metric_service_api.create_time_series(formatted_name, time_series)
+          #   metric_service_client.create_time_series(formatted_name, time_series)
 
           def create_time_series \
               name,

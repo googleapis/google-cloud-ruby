@@ -14,41 +14,44 @@
 
 module Google
   module Api
-    # Defines a metric type and its schema.
+    # Defines a metric type and its schema. Once a metric descriptor is created,
+    # deleting or altering it stops data collection and makes the metric type's
+    # existing data unusable.
     # @!attribute [rw] name
     #   @return [String]
-    #     Resource name. The format of the name may vary between different
-    #     implementations. For examples:
+    #     The resource name of the metric descriptor. Depending on the
+    #     implementation, the name typically includes: (1) the parent resource name
+    #     that defines the scope of the metric type or of its data; and (2) the
+    #     metric's URL-encoded type, which also appears in the +type+ field of this
+    #     descriptor. For example, following is the resource name of a custom
+    #     metric within the GCP project 123456789:
     #
-    #         projects/{project_id}/metricDescriptors/{type=**}
-    #         metricDescriptors/{type=**}
+    #         "projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
     # @!attribute [rw] type
     #   @return [String]
-    #     The metric type including a DNS name prefix, for example
-    #     +"compute.googleapis.com/instance/cpu/utilization"+. Metric types
-    #     should use a natural hierarchical grouping such as the following:
+    #     The metric type, including its DNS name prefix. The type is not
+    #     URL-encoded.  All user-defined metric types have the DNS name
+    #     +custom.googleapis.com+.  Metric types should use a natural hierarchical
+    #     grouping. For example:
     #
-    #         compute.googleapis.com/instance/cpu/utilization
-    #         compute.googleapis.com/instance/disk/read_ops_count
-    #         compute.googleapis.com/instance/network/received_bytes_count
-    #
-    #     Note that if the metric type changes, the monitoring data will be
-    #     discontinued, and anything depends on it will break, such as monitoring
-    #     dashboards, alerting rules and quota limits. Therefore, once a metric has
-    #     been published, its type should be immutable.
+    #         "custom.googleapis.com/invoice/paid/amount"
+    #         "appengine.googleapis.com/http/server/response_latencies"
     # @!attribute [rw] labels
     #   @return [Array<Google::Api::LabelDescriptor>]
-    #     The set of labels that can be used to describe a specific instance of this
-    #     metric type. For example, the
-    #     +compute.googleapis.com/instance/network/received_bytes_count+ metric type
-    #     has a label, +loadbalanced+, that specifies whether the traffic was
-    #     received through a load balanced IP address.
+    #     The set of labels that can be used to describe a specific
+    #     instance of this metric type. For example, the
+    #     +appengine.googleapis.com/http/server/response_latencies+ metric
+    #     type has a label for the HTTP response code, +response_code+, so
+    #     you can look at latencies for successful responses or just
+    #     for responses that failed.
     # @!attribute [rw] metric_kind
     #   @return [Google::Api::MetricDescriptor::MetricKind]
     #     Whether the metric records instantaneous values, changes to a value, etc.
+    #     Some combinations of +metric_kind+ and +value_type+ might not be supported.
     # @!attribute [rw] value_type
     #   @return [Google::Api::MetricDescriptor::ValueType]
     #     Whether the measurement is an integer, a floating-point number, etc.
+    #     Some combinations of +metric_kind+ and +value_type+ might not be supported.
     # @!attribute [rw] unit
     #   @return [String]
     #     The unit in which the metric value is reported. It is only applicable
@@ -169,17 +172,16 @@ module Google
       end
     end
 
-    # A specific metric identified by specifying values for all of the
+    # A specific metric, identified by specifying values for all of the
     # labels of a +MetricDescriptor+.
     # @!attribute [rw] type
     #   @return [String]
     #     An existing metric type, see Google::Api::MetricDescriptor.
-    #     For example, +compute.googleapis.com/instance/cpu/usage_time+.
+    #     For example, +custom.googleapis.com/invoice/paid/amount+.
     # @!attribute [rw] labels
     #   @return [Hash{String => String}]
-    #     The set of labels that uniquely identify a metric. To specify a
-    #     metric, all labels enumerated in the +MetricDescriptor+ must be
-    #     assigned values.
+    #     The set of label values that uniquely identify this metric. All
+    #     labels listed in the +MetricDescriptor+ must be assigned values.
     class Metric; end
   end
 end

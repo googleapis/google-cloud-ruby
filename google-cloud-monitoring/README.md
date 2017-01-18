@@ -5,7 +5,7 @@ google-cloud-monitoring uses [Google API extensions][google-gax] to provide an
 easy-to-use client library for the [Stackdriver Monitoring API][] (v3) defined in the [googleapis][] git repository
 
 
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/monitoring/v3
+[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3
 [google-gax]: https://github.com/googleapis/gax-ruby
 [Stackdriver Monitoring API]: https://developers.google.com/apis-explorer/#p/monitoring/v3/
 
