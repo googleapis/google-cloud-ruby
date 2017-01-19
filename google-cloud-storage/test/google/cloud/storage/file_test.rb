@@ -26,12 +26,23 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
-  let(:key_options) do { header: {
+  let(:key_headers) do {
       "x-goog-encryption-algorithm"  => "AES256",
       "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
       "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
-    } }
+    }
   end
+  let(:key_options) { { header: key_headers } }
+
+  let(:source_encryption_key) { "T\x80\xC2}\x91R\xD2\x05\fTo\xD4\xB3+\xAE\xBCbd\xD1\x81|\xCD\x06%\xC8|\xA2\x17\xF6\xB4^\xD0" }
+  let(:source_encryption_key_sha256) { "\x03(M#\x1D(BF\x12$T\xD4\xDCP\xE6\x98\a\xEB'\x8A\xB9\x89\xEEM)\x94\xFD\xE3VR*\x86" }
+  let(:source_key_headers) do {
+      "x-goog-copy-source-encryption-algorithm"  => "AES256",
+      "x-goog-copy-source-encryption-key"        => Base64.strict_encode64(source_encryption_key),
+      "x-goog-copy-source-encryption-key-sha256" => Base64.strict_encode64(source_encryption_key_sha256)
+    }
+  end
+
 
   it "knows its attributes" do
     file.id.must_equal file_hash["id"]
@@ -403,6 +414,74 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
+  it "can rotate its customer-supplied encryption keys" do
+    mock = Minitest::Mock.new
+    options = { header: source_key_headers.merge(key_headers) }
+    mock.expect :rewrite_object, rewrite_resp,
+                [bucket.name, file.name, bucket.name, file.name,
+                 destination_predefined_acl: nil, source_generation: nil,
+                 rewrite_token: nil, options: options ]
+
+    file.service.mocked_service = mock
+
+    updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+    updated.name.must_equal file.name
+
+    mock.verify
+  end
+
+  it "can rotate to a customer-supplied encryption key if previously unencrypted with customer key" do
+    mock = Minitest::Mock.new
+    options = { header: key_headers }
+    mock.expect :rewrite_object, rewrite_resp,
+                [bucket.name, file.name, bucket.name, file.name,
+                 destination_predefined_acl: nil, source_generation: nil,
+                 rewrite_token: nil, options: options ]
+
+    file.service.mocked_service = mock
+
+    updated = file.rotate new_encryption_key: encryption_key
+    updated.name.must_equal file.name
+
+    mock.verify
+  end
+
+  it "can rotate from a customer-supplied encryption key to default service encryption" do
+    mock = Minitest::Mock.new
+    options = { header: source_key_headers }
+    mock.expect :rewrite_object, rewrite_resp,
+                [bucket.name, file.name, bucket.name, file.name,
+                 destination_predefined_acl: nil, source_generation: nil,
+                 rewrite_token: nil, options: options ]
+
+    file.service.mocked_service = mock
+
+    updated = file.rotate encryption_key: source_encryption_key
+    updated.name.must_equal file.name
+
+    mock.verify
+  end
+
+  it "can rotate its customer-supplied encryption keys with multiple requests for large objects" do
+    mock = Minitest::Mock.new
+    options = { header: source_key_headers.merge(key_headers) }
+    mock.expect :rewrite_object, rewrite_resp(done: false),
+                [bucket.name, file.name, bucket.name, file.name,
+                 destination_predefined_acl: nil, source_generation: nil,
+                 rewrite_token: nil, options: options ]
+    mock.expect :rewrite_object, rewrite_resp,
+                [bucket.name, file.name, bucket.name, file.name,
+                 destination_predefined_acl: nil, source_generation: nil,
+                 rewrite_token: nil, options: options ]
+
+    file.service.mocked_service = mock
+
+    updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+    updated.name.must_equal file.name
+
+    mock.verify
+  end
+
   it "can reload itself" do
     file_name = "file.ext"
 
@@ -421,5 +500,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
     file.generation.must_equal 1234567892
 
     mock.verify
+  end
+
+  def rewrite_resp done: true
+    OpenStruct.new done: done, resource: file_gapi
   end
 end

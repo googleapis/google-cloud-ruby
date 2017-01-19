@@ -463,6 +463,63 @@ module Google
         end
 
         ##
+        # [Rewrites](https://cloud.google.com/storage/docs/json_api/v1/objects/rewrite)
+        # the file to the same {#bucket} and {#name} with a new
+        # [customer-supplied encryption
+        # key](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+        #
+        # If a new key is provided to this method, the new key must be used to
+        # subsequently download or copy the file. You must securely manage your
+        # keys and ensure that they are not lost. Also, please note that file
+        # metadata is not encrypted, with the exception of the CRC32C checksum
+        # and MD5 hash. The names of files and buckets are also not encrypted,
+        # and you can read or update the metadata of an encrypted file without
+        # providing the encryption key.
+        #
+        # @see https://cloud.google.com/storage/docs/encryption
+        #
+        # @param [String, nil] encryption_key Optional. The last
+        #   customer-supplied, AES-256 encryption key used to encrypt the file,
+        #   if one was used.
+        # @param [String, nil] new_encryption_key Optional. The new
+        #   customer-supplied, AES-256 encryption key with which to encrypt the
+        #   file. If `nil`, the rewritten file will be encrypted using the
+        #   default server-side encryption, not customer-supplied encryption
+        #   keys.
+        #
+        # @return [Google::Cloud::Storage::File]
+        #
+        # @example The file will be rewritten with a new encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # Old key was stored securely for later use.
+        #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: old_key
+        #
+        #   # Key generation shown for example purposes only. Write your own.
+        #   cipher = OpenSSL::Cipher.new "aes-256-cfb"
+        #   cipher.encrypt
+        #   new_key = cipher.random_key
+        #
+        #   file.rotate encryption_key: old_key, new_encryption_key: new_key
+        #
+        def rotate encryption_key: nil, new_encryption_key: nil
+          ensure_service!
+          options = { source_key: encryption_key,
+                      destination_key: new_encryption_key }
+          gapi = service.rewrite_file bucket, name, bucket, name, options
+          until gapi.done
+            options[:token] = gapi.rewrite_token
+            gapi = service.rewrite_file bucket, name, bucket, name, options
+          end
+          File.from_gapi gapi.resource, service
+        end
+
+        ##
         # Permanently deletes the file.
         #
         # @return [Boolean] Returns `true` if the file was deleted.
