@@ -59,9 +59,11 @@ module Google
       #     later than the end time.
       class TimeInterval; end
 
-      # Describes how to combine, or aggregate, multiple time series to
-      # provide different views of the data.
-      # See {Aggregation}[https://cloud.google.com/monitoring/api/learn_more#aggregation] for more details.
+      # Describes how to combine multiple time series to provide different views of
+      # the data.  Aggregation consists of an alignment step on individual time
+      # series (+per_series_aligner+) followed by an optional reduction of the data
+      # across different time series (+cross_series_reducer+).  For more details, see
+      # {Aggregation}[https://cloud.google.com/monitoring/api/learn_more#aggregation].
       # @!attribute [rw] alignment_period
       #   @return [Google::Protobuf::Duration]
       #     The alignment period for per-Time series
@@ -101,16 +103,19 @@ module Google
       # @!attribute [rw] group_by_fields
       #   @return [Array<String>]
       #     The set of fields to preserve when +crossSeriesReducer+ is
-      #     specified. The +groupByFields+ determine how the time series
-      #     are partitioned into subsets prior to applying the aggregation
+      #     specified. The +groupByFields+ determine how the time series are
+      #     partitioned into subsets prior to applying the aggregation
       #     function. Each subset contains time series that have the same
       #     value for each of the grouping fields. Each individual time
       #     series is a member of exactly one subset. The
       #     +crossSeriesReducer+ is applied to each subset of time series.
-      #     Fields not specified in +groupByFields+ are aggregated away.
-      #     If +groupByFields+ is not specified, the time series are
-      #     aggregated into a single output time series. If
-      #     +crossSeriesReducer+ is not defined, this field is ignored.
+      #     It is not possible to reduce across different resource types, so
+      #     this field implicitly contains +resource.type+.  Fields not
+      #     specified in +groupByFields+ are aggregated away.  If
+      #     +groupByFields+ is not specified and all the time series have
+      #     the same resource type, then the time series are aggregated into
+      #     a single output time series. If +crossSeriesReducer+ is not
+      #     defined, this field is ignored.
       class Aggregation
         # The Aligner describes how to bring the data points in a single
         # time series into temporal alignment.
@@ -134,7 +139,7 @@ module Google
           ALIGN_RATE = 2
 
           # Align by interpolating between adjacent points around the
-          # period boundary. This alignment is valid for gauge and delta
+          # period boundary. This alignment is valid for gauge
           # metrics with numeric values. The value type of the result is the same
           # as the value type of the input.
           ALIGN_INTERPOLATE = 3

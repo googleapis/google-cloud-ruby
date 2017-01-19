@@ -47,7 +47,7 @@ module Google
         #
         # @!attribute [r] group_service_stub
         #   @return [Google::Monitoring::V3::GroupService::Stub]
-        class GroupServiceApi
+        class GroupServiceClient
           attr_reader :group_service_stub
 
           # The default address of the service.
@@ -76,6 +76,10 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/monitoring",
+            "https://www.googleapis.com/auth/monitoring.read",
+            "https://www.googleapis.com/auth/monitoring.write"
           ].freeze
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -95,7 +99,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              project: project
+              :"project" => project
             )
           end
 
@@ -105,8 +109,8 @@ module Google
           # @return [String]
           def self.group_path project, group
             GROUP_PATH_TEMPLATE.render(
-              project: project,
-              group: group
+              :"project" => project,
+              :"group" => group
             )
           end
 
@@ -165,6 +169,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/monitoring/v3/group_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -258,20 +263,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
-          #   formatted_name = GroupServiceApi.project_path("[PROJECT]")
+          #   group_service_client = GroupServiceClient.new
+          #   formatted_name = GroupServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   group_service_api.list_groups(formatted_name).each do |element|
+          #   group_service_client.list_groups(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_api.list_groups(formatted_name).each_page do |page|
+          #   group_service_client.list_groups(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -306,13 +311,13 @@ module Google
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
-          #   formatted_name = GroupServiceApi.group_path("[PROJECT]", "[GROUP]")
-          #   response = group_service_api.get_group(formatted_name)
+          #   group_service_client = GroupServiceClient.new
+          #   formatted_name = GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
+          #   response = group_service_client.get_group(formatted_name)
 
           def get_group \
               name,
@@ -339,15 +344,15 @@ module Google
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
           #   Group = Google::Monitoring::V3::Group
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
-          #   formatted_name = GroupServiceApi.project_path("[PROJECT]")
+          #   group_service_client = GroupServiceClient.new
+          #   formatted_name = GroupServiceClient.project_path("[PROJECT]")
           #   group = Group.new
-          #   response = group_service_api.create_group(formatted_name, group)
+          #   response = group_service_client.create_group(formatted_name, group)
 
           def create_group \
               name,
@@ -376,14 +381,14 @@ module Google
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
           #   Group = Google::Monitoring::V3::Group
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
+          #   group_service_client = GroupServiceClient.new
           #   group = Group.new
-          #   response = group_service_api.update_group(group)
+          #   response = group_service_client.update_group(group)
 
           def update_group \
               group,
@@ -406,13 +411,13 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
-          #   formatted_name = GroupServiceApi.group_path("[PROJECT]", "[GROUP]")
-          #   group_service_api.delete_group(formatted_name)
+          #   group_service_client = GroupServiceClient.new
+          #   formatted_name = GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
+          #   group_service_client.delete_group(formatted_name)
 
           def delete_group \
               name,
@@ -458,20 +463,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/group_service_api"
+          #   require "google/cloud/monitoring/v3/group_service_client"
           #
-          #   GroupServiceApi = Google::Cloud::Monitoring::V3::GroupServiceApi
+          #   GroupServiceClient = Google::Cloud::Monitoring::V3::GroupServiceClient
           #
-          #   group_service_api = GroupServiceApi.new
-          #   formatted_name = GroupServiceApi.group_path("[PROJECT]", "[GROUP]")
+          #   group_service_client = GroupServiceClient.new
+          #   formatted_name = GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
           #
           #   # Iterate over all results.
-          #   group_service_api.list_group_members(formatted_name).each do |element|
+          #   group_service_client.list_group_members(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_api.list_group_members(formatted_name).each_page do |page|
+          #   group_service_client.list_group_members(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

@@ -12,12 +12,12 @@
           "patterns": ["\/monitoring\/v3"],
           "nav": [
             {
-              "title": "GroupServiceApi",
-              "type": "google/cloud/monitoring/v3/groupserviceapi"
+              "title": "GroupServiceClient",
+              "type": "google/cloud/monitoring/v3/groupserviceclient"
             },
             {
-              "title": "MetricServiceApi",
-              "type": "google/cloud/monitoring/v3/metricserviceapi"
+              "title": "MetricServiceClient",
+              "type": "google/cloud/monitoring/v3/metricserviceclient"
             },
             {
               "title": "Data Types",
