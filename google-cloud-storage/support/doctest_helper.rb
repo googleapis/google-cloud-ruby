@@ -471,6 +471,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::File#rotate" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, OpenStruct.new(done: true, resource: file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::File#delete" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]

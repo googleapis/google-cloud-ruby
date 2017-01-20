@@ -27,9 +27,17 @@ describe Google::Cloud::Storage::File, :storage do
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
-  let(:encryption_key) do
+  let(:cipher) do
     cipher = OpenSSL::Cipher.new "aes-256-cfb"
     cipher.encrypt
+    cipher
+  end
+
+  let(:encryption_key) do
+    cipher.random_key
+  end
+
+  let(:encryption_key_2) do
     cipher.random_key
   end
 
@@ -286,6 +294,40 @@ describe Google::Cloud::Storage::File, :storage do
 
     uploaded.delete
     copied.delete
+  end
+
+  it "should add, rotate, and remove customer-supplied encryption keys for an existing file" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
+
+    rewritten = try_with_backoff "add encryption key" do
+      uploaded.rotate new_encryption_key: encryption_key
+    end
+    rewritten.name.must_equal uploaded.name
+    rewritten.size.must_equal uploaded.size
+
+    rewritten2 = try_with_backoff "rotate encryption keys" do
+      uploaded.rotate encryption_key: encryption_key, new_encryption_key: encryption_key_2
+    end
+    rewritten2.name.must_equal uploaded.name
+    rewritten2.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key_2
+      downloaded.size.must_equal uploaded.size
+    end
+
+    rewritten3 = try_with_backoff "remove encryption key" do
+      uploaded.rotate encryption_key: encryption_key_2
+    end
+    rewritten3.name.must_equal uploaded.name
+    rewritten3.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      downloaded = uploaded.download tmpfile.path
+      downloaded.size.must_equal uploaded.size
+    end
+
+    rewritten3.delete
   end
 
   it "does not error when getting a file that does not exist" do

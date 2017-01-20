@@ -228,6 +228,28 @@ module Google
     #                    encryption_key: key
     # ```
     #
+    # Use {Google::Cloud::Storage::File#rotate} to rotate customer-supplied
+    # encryption keys.
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    # bucket = storage.bucket "my-todo-app"
+    #
+    # # Old key was stored securely for later use.
+    # old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+    #
+    # file = bucket.file "path/to/my-file.ext", encryption_key: old_key
+    #
+    # # Key generation shown for example purposes only. Write your own.
+    # cipher = OpenSSL::Cipher.new "aes-256-cfb"
+    # cipher.encrypt
+    # new_key = cipher.random_key
+    #
+    # file.rotate encryption_key: old_key, new_encryption_key: new_key
+    # ```
+    #
     # ## Downloading a File
     #
     # Files can be downloaded to the local file system. (See

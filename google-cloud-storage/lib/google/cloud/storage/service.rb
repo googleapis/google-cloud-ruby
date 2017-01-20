@@ -213,6 +213,24 @@ module Google
           end
         end
 
+        ## Rewrite a file from source bucket/object to a
+        # destination bucket/object.
+        def rewrite_file source_bucket_name, source_file_path,
+                         destination_bucket_name, destination_file_path,
+                         options = {}
+          options = rewrite_key_options options[:source_key],
+                                        options[:destination_key]
+          execute do
+            service.rewrite_object \
+              source_bucket_name, source_file_path,
+              destination_bucket_name, destination_file_path,
+              destination_predefined_acl: options[:acl],
+              source_generation: options[:generation],
+              rewrite_token: options[:token],
+              options: options
+          end
+        end
+
         ##
         # Download contents of a file.
         def download_file bucket_name, file_path, target_path, generation: nil,
@@ -285,15 +303,32 @@ module Google
 
         def key_options key
           options = {}
-          if key
-            key_sha256 = Digest::SHA256.digest key
-            headers = {}
-            headers["x-goog-encryption-algorithm"] = "AES256"
-            headers["x-goog-encryption-key"] = Base64.strict_encode64 key
-            headers["x-goog-encryption-key-sha256"] = \
-              Base64.strict_encode64 key_sha256
-            options[:header] = headers
+          encryption_key_headers options, key if key
+          options
+        end
+
+        def rewrite_key_options source_key, destination_key
+          options = {}
+          if source_key
+            encryption_key_headers options, source_key, copy_source: true
           end
+          encryption_key_headers options, destination_key if destination_key
+          options
+        end
+
+        # @private
+        # @param copy_source If true, header names are those for source object
+        #   in rewrite request. If false, the header names are for use with any
+        #   method supporting customer-supplied encryption keys.
+        #   See https://cloud.google.com/storage/docs/encryption#request
+        def encryption_key_headers options, key, copy_source: false
+          source = copy_source ? "copy-source-" : ""
+          key_sha256 = Digest::SHA256.digest key
+          headers = (options[:header] ||= {})
+          headers["x-goog-#{source}encryption-algorithm"] = "AES256"
+          headers["x-goog-#{source}encryption-key"] = Base64.strict_encode64 key
+          headers["x-goog-#{source}encryption-key-sha256"] = \
+            Base64.strict_encode64 key_sha256
           options
         end
 
