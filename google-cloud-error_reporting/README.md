@@ -5,7 +5,7 @@ google-cloud-error_reporting uses [Google API extensions][google-gax] to provide
 easy-to-use client library for the [Stackdriver Error Reporting API][] (v1beta1) defined in the [googleapis][] git repository
 
 
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/devtools/clouderrorreporting/v1beta1
+[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/devtools/clouderrorreporting/v1beta1
 [google-gax]: https://github.com/googleapis/gax-ruby
 [Stackdriver Error Reporting API]: https://developers.google.com/apis-explorer/#p/clouderrorreporting/v1beta1/
 

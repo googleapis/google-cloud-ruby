@@ -63,7 +63,7 @@ module Google
             service_version = er_config.service_version
 
             error_reporting =
-              V1beta1::ReportErrorsServiceApi.new channel: channel,
+              V1beta1::ReportErrorsServiceClient.new channel: channel,
                                                   app_name: service_name,
                                                   app_version: service_version
 
@@ -98,7 +98,7 @@ module Google
         def self.grpc_channel keyfile = nil
           require "grpc"
 
-          scopes = V1beta1::ReportErrorsServiceApi::ALL_SCOPES
+          scopes = V1beta1::ReportErrorsServiceClient::ALL_SCOPES
           credentials = if keyfile.nil?
                           Google::Cloud::Credentials.default(
                             scope: scopes)
@@ -112,7 +112,7 @@ module Google
 
           channel_cred = GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
-          host = V1beta1::ReportErrorsServiceApi::SERVICE_ADDRESS
+          host = V1beta1::ReportErrorsServiceClient::SERVICE_ADDRESS
 
           GRPC::Core::Channel.new host, nil, channel_cred
         end

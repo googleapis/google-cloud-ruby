@@ -14,8 +14,6 @@
 # limitations under the License.
 
 
-require "google/cloud/error_reporting/v1beta1/error_group_service_api"
-require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
-require "google/cloud/error_reporting/v1beta1/report_errors_service_api"
-# Require the protobufs so we can create objects before GRPC is loaded.
-require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_pb"
+require "google/cloud/error_reporting/v1beta1/error_group_service_client"
+require "google/cloud/error_reporting/v1beta1/error_stats_service_client"
+require "google/cloud/error_reporting/v1beta1/report_errors_service_client"

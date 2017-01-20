@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/monitored_resource_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.ErrorGroup" do
@@ -23,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.ServiceContext" do
     optional :service, :string, 2
     optional :version, :string, 3
+    optional :resource_type, :string, 4
   end
   add_message "google.devtools.clouderrorreporting.v1beta1.ErrorContext" do
     optional :http_request, :message, 1, "google.devtools.clouderrorreporting.v1beta1.HttpRequestContext"
