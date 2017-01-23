@@ -27,29 +27,25 @@ end
 # Acceptance tests
 desc "Run the spanner acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
-  puts "The google-cloud-spanner gem does not have acceptance tests."
-  # project = args[:project]
-  # project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPANNER_TEST_PROJECT"]
-  # keyfile = args[:keyfile]
-  # keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPANNER_TEST_KEYFILE"]
-  # if keyfile
-  #   keyfile = File.read keyfile
-  # else
-  #   keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPANNER_TEST_KEYFILE_JSON"]
-  # end
-  # if project.nil? || keyfile.nil?
-  #   fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
-  # end
-  # # always overwrite when running tests
-  # ENV["SPANNER_PROJECT"] = project
-  # ENV["SPANNER_KEYFILE"] = nil
-  # ENV["SPANNER_KEYFILE_JSON"] = keyfile
-  # ENV["STORAGE_PROJECT"] = project
-  # ENV["STORAGE_KEYFILE"] = nil
-  # ENV["STORAGE_KEYFILE_JSON"] = keyfile
-  #
-  # $LOAD_PATH.unshift "lib", "acceptance"
-  # Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPANNER_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPANNER_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPANNER_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["SPANNER_PROJECT"] = project
+  ENV["SPANNER_KEYFILE"] = nil
+  ENV["SPANNER_KEYFILE_JSON"] = keyfile
+
+  $LOAD_PATH.unshift "lib", "acceptance"
+  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
 end
 
 namespace :acceptance do
@@ -66,7 +62,37 @@ namespace :acceptance do
   end
 
   desc "Run acceptance cleanup."
-  task :cleanup do
+  task :cleanup, :project, :keyfile do |t, args|
+    project = args[:project]
+    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPANNER_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPANNER_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPANNER_TEST_KEYFILE_JSON"]
+    end
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    end
+    # always overwrite when running tests
+    ENV["SPANNER_PROJECT"] = project
+    ENV["SPANNER_KEYFILE"] = nil
+    ENV["SPANNER_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/spanner"
+    puts "Cleaning up Spanner instances and databases."
+    # Only remove the instances that start with gcloud-ruby since we are sharing
+    # a project with the other languages during development.
+    Google::Cloud::Spanner.new.instances.all.select { |i| i.instance_id.start_with? "gcruby" }.each do |instance|
+      begin
+        instance.databases.all.each &:drop
+        instance.delete
+      rescue => e
+        puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
+      end
+    end
   end
 end
 
