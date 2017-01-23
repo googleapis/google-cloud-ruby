@@ -20,6 +20,30 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/spanner"
+require "grpc"
+
+##
+# Monkey-Patch CallOptions to support Mocks
+class Google::Gax::CallOptions
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, CallOptions objects do not match with ===.
+  # Therefore, we must add this capability.
+  def === other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout === other.timeout &&
+      retry_options === other.retry_options &&
+      page_token === other.page_token &&
+      kwargs === other.kwargs
+  end
+  def == other
+    return false unless other.is_a? Google::Gax::CallOptions
+    timeout == other.timeout &&
+      retry_options == other.retry_options &&
+      page_token == other.page_token &&
+      kwargs == other.kwargs
+  end
+end
 
 class MockSpanner < Minitest::Spec
   let(:project) { "test" }
@@ -29,5 +53,57 @@ class MockSpanner < Minitest::Spec
   # Register this spec type for when :spanner is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_spanner
+  end
+
+  def instance_configs_hash
+    {
+      instanceConfigs: [
+        { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
+          displayName: "EU West 1"},
+        { name: "projects/#{project}/instanceConfigs/regional-us-west1",
+          displayName: "US West 1"},
+        { name: "projects/#{project}/instanceConfigs/regional-us-central1",
+          displayName: "US Central 1"}
+      ]
+    }
+  end
+
+  def instance_config_hash
+    instance_configs_hash[:instanceConfigs].last
+  end
+
+  def instances_hash
+    { instances: 3.times.map { instance_hash } }
+  end
+
+  def instance_hash name: "instance-#{rand(9999)}", nodes: 1, state: "READY", labels: {}
+    {
+      name: "projects/#{project}/instances/#{name}",
+      config: "projects/#{project}/instanceConfigs/regional-us-central1",
+      displayName: name.split("-").map(&:capitalize).join(" "),
+      nodeCount: nodes,
+      state: state,
+      labels: labels
+    }
+  end
+
+  def project_path
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path project
+  end
+
+  def instance_path name
+    return name if name.to_s.include? "/"
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path(
+      project, name)
+  end
+
+  def instance_config_path name
+    return name if name.to_s.include? "/"
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_config_path(
+      project, name)
+  end
+
+  def paged_enum_struct response
+    OpenStruct.new page: OpenStruct.new(response: response)
   end
 end

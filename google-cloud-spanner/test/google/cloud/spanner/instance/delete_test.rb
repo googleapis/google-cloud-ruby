@@ -14,9 +14,19 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Project, :mock_spanner do
-  it "knows the project identifier" do
-    spanner.must_be_kind_of Google::Cloud::Spanner::Project
-    spanner.project_id.must_equal project
+describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
+  let(:instance_id) { "my-instance-id" }
+  let(:instance_json) { instance_hash(name: instance_id).to_json }
+  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
+  let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
+
+  it "can delete itself" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_instance, nil, [instance_grpc.name]
+    spanner.service.mocked_instances = mock
+
+    instance.delete
+
+    mock.verify
   end
 end

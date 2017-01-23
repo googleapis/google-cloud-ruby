@@ -39,7 +39,7 @@ module Google
       #
       class Project
         ##
-        # @private The gRPC Service object.
+        # @private The Service object.
         attr_accessor :service
 
         ##
@@ -53,9 +53,10 @@ module Google
         # @example
         #   require "google/cloud"
         #
-        #   gcloud = Google::Cloud.new "my-project-id",
-        #                              "/path/to/keyfile.json"
-        #   spanner = gcloud.spanner
+        #   spanner = Google::Cloud::Spanner.new(
+        #     project: "my-project-id",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
         #
         #   spanner.project #=> "my-project-id"
         #
@@ -73,10 +74,196 @@ module Google
             Google::Cloud::Core::Environment.project_id
         end
 
-        def instance instance_id = nil
+        ##
+        # Retrieves the list of instances for the given project.
+        #
+        # @param [String] token The `token` value returned by the last call to
+        #   `instances`; indicates that this is a continuation of a call,
+        #   and that the system should return the next page of data.
+        # @param [Integer] max Maximum number of instances to return.
+        #
+        # @return [Array<Google::Cloud::Spanner::Instance>] (See
+        #   {Google::Cloud::Spanner::Instance::List})
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instances = spanner.instances
+        #   instances.each do |instance|
+        #     puts instance.name
+        #   end
+        #
+        # @example Retrieve all: (See {Instance::Config::List::List#all})
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instances = spanner.instances
+        #   instances.all do |instance|
+        #     puts instance.name
+        #   end
+        #
+        def instances token: nil, max: nil
           ensure_service!
-          instance_id ||= ENV["GCLOUD_INSTANCE"]
-          Instance.new instance_id, service
+          grpc = service.list_instances token: token, max: max
+          Instance::List.from_grpc grpc, service, max
+        end
+
+        ##
+        # Retrieves instance by name.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        #
+        # @return [Google::Cloud::Spanner::Instance, nil] Returns `nil`
+        #   if instance does not exist.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   instance = spanner.instance "my-instance"
+        #
+        # @example Will return `nil` if instance does not exist.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   instance = spanner.instance "non-existing" #=> nil
+        #
+        def instance instance_id
+          ensure_service!
+          grpc = service.get_instance instance_id
+          Instance.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Creates an instance and starts preparing it to begin serving.
+        #
+        # See {Instance::Job}.
+        #
+        # @param [String] instance_id The unique identifier for the instance,
+        #   which cannot be changed after the instance is created. Values are of
+        #   the form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 6 and 30
+        #   characters in length. Required.
+        # @param [String] name The descriptive name for this instance as it
+        #   appears in UIs. Must be unique per project and between 4 and 30
+        #   characters in length. Required.
+        # @param [String, Instance::Config] config The name of the instance's
+        #   configuration. Values can be the `instance_config_id`, the full
+        #   path, or an {Instance::Config} object. Required.
+        # @param [Integer] nodes The number of nodes allocated to this instance.
+        #   Required.
+        # @param [Hash] labels Cloud Labels are a flexible and lightweight
+        #   mechanism for organizing cloud resources into groups that reflect a
+        #   customer's organizational needs and deployment strategies. Cloud
+        #   Labels can be used to filter collections of resources. They can be
+        #   used to control how resource metrics are aggregated. And they can be
+        #   used as arguments to policy management rules (e.g. route, firewall,
+        #   load balancing, etc.).
+        #
+        #   * Label keys must be between 1 and 63 characters long and must
+        #     conform to the following regular expression:
+        #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
+        #   * Label values must be between 0 and 63 characters long and must
+        #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+        #   * No more than 64 labels can be associated with a given resource.
+        #
+        # @return [Instance::Job] The job representing the long-running,
+        #   asynchronous processing of an instance create operation.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   job = spanner.create_instance "my-new-instance",
+        #                                 name: "My New Instance",
+        #                                 config: "regional-us-central1",
+        #                                 nodes: 5,
+        #                                 labels: { production: :env }
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #   instance = job.instance
+        #
+        def create_instance instance_id, name: nil, config: nil, nodes: nil,
+                            labels: nil
+          config = config.path if config.respond_to? :path
+          grpc = service.create_instance \
+            instance_id, name: name, config: config, nodes: nodes,
+                         labels: labels
+          Instance::Job.from_grpc grpc, service
+        end
+
+        ##
+        # Retrieves a list of instance configuration for the given project.
+        #
+        # @param [String] token The `token` value returned by the last call to
+        #   `instance_configs`; indicates that this is a continuation of a call,
+        #   and that the system should return the next page of data.
+        # @param [Integer] max Maximum number of instance configs to return.
+        #
+        # @return [Array<Google::Cloud::Spanner::Instance::Config>] (See
+        #   {Google::Cloud::Spanner::Instance::Config::List})
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance_configs = spanner.instance_configs
+        #   instance_configs.each do |config|
+        #     puts config.name
+        #   end
+        #
+        # @example Retrieve all: (See {Instance::Config::List::List#all})
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance_configs = spanner.instance_configs
+        #   instance_configs.all do |config|
+        #     puts config.name
+        #   end
+        #
+        def instance_configs token: nil, max: nil
+          ensure_service!
+          grpc = service.list_instance_configs token: token, max: max
+          Instance::Config::List.from_grpc grpc, service, max
+        end
+
+        ##
+        # Retrieves instance configuration by name.
+        #
+        # @param [String] instance_config_id The instance configuration
+        #   identifier. Values can be the `instance_config_id`, or the full
+        #   path.
+        #
+        # @return [Google::Cloud::Spanner::Instance::Config, nil] Returns `nil`
+        #   if instance configuration does not exist.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   config = spanner.instance_config "regional-us-central1"
+        #
+        # @example Will return `nil` if instance config does not exist.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   config = spanner.instance_config "non-existing" #=> nil
+        #
+        def instance_config instance_config_id
+          ensure_service!
+          grpc = service.get_instance_config instance_config_id
+          Instance::Config.from_grpc grpc
+        rescue Google::Cloud::NotFoundError
+          nil
         end
 
         protected

@@ -14,35 +14,28 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Instance, :mock_spanner do
+describe Google::Cloud::Spanner::Instance, :config, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:instance_json) { instance_hash(name: instance_id).to_json }
   let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
+  let(:instance_config_json) { instance_config_hash.to_json }
 
-  it "knows the identifiers" do
-    instance.must_be_kind_of Google::Cloud::Spanner::Instance
-    instance.project_id.must_equal project
-    instance.instance_id.must_equal instance_id
+  it "gets an instance config object" do
+    get_res = Google::Spanner::Admin::Instance::V1::InstanceConfig.decode_json instance_config_json
+    mock = Minitest::Mock.new
+    mock.expect :get_instance_config, get_res, [instance_grpc.config]
+    spanner.service.mocked_instances = mock
 
-    instance.state.must_equal :READY
-    instance.must_be :ready?
-    instance.wont_be :creating?
-  end
+    config = instance.config
 
-  it "builds a database" do
-    database = instance.database "my-database-id"
+    mock.verify
 
-    database.must_be_kind_of Google::Cloud::Spanner::Database
-    database.database_id.must_equal "my-database-id"
-  end
-
-  it "builds a database with the default id" do
-    ENV.stub :[], "my-database-id", ["SPANNER_DATABASE"] do
-      database = instance.database
-
-      database.must_be_kind_of Google::Cloud::Spanner::Database
-      database.database_id.must_equal "my-database-id"
-    end
+    config.must_be_kind_of Google::Cloud::Spanner::Instance::Config
+    config.project_id.must_equal project
+    config.instance_config_id.must_equal instance_config_hash[:name].split("/").last
+    config.path.must_equal instance_config_hash[:name]
+    config.name.must_equal instance_config_hash[:displayName]
+    config.display_name.must_equal instance_config_hash[:displayName]
   end
 end
