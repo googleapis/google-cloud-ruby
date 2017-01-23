@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.ListGroupStatsResponse" do
     repeated :error_group_stats, :message, 1, "google.devtools.clouderrorreporting.v1beta1.ErrorGroupStats"
     optional :next_page_token, :string, 2
+    optional :time_range_begin, :message, 4, "google.protobuf.Timestamp"
   end
   add_message "google.devtools.clouderrorreporting.v1beta1.ErrorGroupStats" do
     optional :group, :message, 1, "google.devtools.clouderrorreporting.v1beta1.ErrorGroup"
@@ -51,6 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.ListEventsResponse" do
     repeated :error_events, :message, 1, "google.devtools.clouderrorreporting.v1beta1.ErrorEvent"
     optional :next_page_token, :string, 2
+    optional :time_range_begin, :message, 4, "google.protobuf.Timestamp"
   end
   add_message "google.devtools.clouderrorreporting.v1beta1.QueryTimeRange" do
     optional :period, :enum, 1, "google.devtools.clouderrorreporting.v1beta1.QueryTimeRange.Period"
@@ -66,6 +68,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.ServiceContextFilter" do
     optional :service, :string, 2
     optional :version, :string, 3
+    optional :resource_type, :string, 4
   end
   add_message "google.devtools.clouderrorreporting.v1beta1.DeleteEventsRequest" do
     optional :project_name, :string, 1

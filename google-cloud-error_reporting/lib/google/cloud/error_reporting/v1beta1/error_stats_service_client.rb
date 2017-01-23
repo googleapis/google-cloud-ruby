@@ -37,7 +37,7 @@ module Google
         #
         # @!attribute [r] error_stats_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub]
-        class ErrorStatsServiceApi
+        class ErrorStatsServiceClient
           attr_reader :error_stats_service_stub
 
           # The default address of the service.
@@ -80,7 +80,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              project: project
+              :"project" => project
             )
           end
 
@@ -125,6 +125,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -186,7 +187,9 @@ module Google
           #   context that matches the filter.
           #   Data for all service contexts is returned if this field is not specified.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
-          #   [Required] List data for the given time range.
+          #   [Optional] List data for the given time range.
+          #   If not set a default time range is used. The field time_range_begin
+          #   in the response will specify the beginning of this time range.
           #   Only <code>ErrorGroupStats</code> with a non-zero count in the given time
           #   range are returned, unless the request contains an explicit group_id list.
           #   If a group_id list is given, also <code>ErrorGroupStats</code> with zero
@@ -219,22 +222,22 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_client"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceClient = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient
           #   QueryTimeRange = Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange
           #
-          #   error_stats_service_api = ErrorStatsServiceApi.new
-          #   formatted_project_name = ErrorStatsServiceApi.project_path("[PROJECT]")
+          #   error_stats_service_client = ErrorStatsServiceClient.new
+          #   formatted_project_name = ErrorStatsServiceClient.project_path("[PROJECT]")
           #   time_range = QueryTimeRange.new
           #
           #   # Iterate over all results.
-          #   error_stats_service_api.list_group_stats(formatted_project_name, time_range).each do |element|
+          #   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   error_stats_service_api.list_group_stats(formatted_project_name, time_range).each_page do |page|
+          #   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -271,7 +274,8 @@ module Google
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
           #   as +projects/+ plus the
-          #   {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+          #   {Google Cloud Platform project
+          #   ID}[https://support.google.com/cloud/answer/6158840].
           #   Example: +projects/my-project-123+.
           # @param group_id [String]
           #   [Required] The group for which events shall be returned.
@@ -281,6 +285,8 @@ module Google
           #   Data for all service contexts is returned if this field is not specified.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
           #   [Optional] List only data for the given time range.
+          #   If not set a default time range is used. The field time_range_begin
+          #   in the response will specify the beginning of this time range.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -297,21 +303,21 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_client"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceClient = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient
           #
-          #   error_stats_service_api = ErrorStatsServiceApi.new
-          #   formatted_project_name = ErrorStatsServiceApi.project_path("[PROJECT]")
+          #   error_stats_service_client = ErrorStatsServiceClient.new
+          #   formatted_project_name = ErrorStatsServiceClient.project_path("[PROJECT]")
           #   group_id = ''
           #
           #   # Iterate over all results.
-          #   error_stats_service_api.list_events(formatted_project_name, group_id).each do |element|
+          #   error_stats_service_client.list_events(formatted_project_name, group_id).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   error_stats_service_api.list_events(formatted_project_name, group_id).each_page do |page|
+          #   error_stats_service_client.list_events(formatted_project_name, group_id).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -340,7 +346,8 @@ module Google
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
           #   as +projects/+ plus the
-          #   {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+          #   {Google Cloud Platform project
+          #   ID}[https://support.google.com/cloud/answer/6158840].
           #   Example: +projects/my-project-123+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -348,13 +355,13 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_stats_service_client"
           #
-          #   ErrorStatsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceApi
+          #   ErrorStatsServiceClient = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient
           #
-          #   error_stats_service_api = ErrorStatsServiceApi.new
-          #   formatted_project_name = ErrorStatsServiceApi.project_path("[PROJECT]")
-          #   response = error_stats_service_api.delete_events(formatted_project_name)
+          #   error_stats_service_client = ErrorStatsServiceClient.new
+          #   formatted_project_name = ErrorStatsServiceClient.project_path("[PROJECT]")
+          #   response = error_stats_service_client.delete_events(formatted_project_name)
 
           def delete_events \
               project_name,

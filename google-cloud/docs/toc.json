@@ -198,16 +198,16 @@
           "patterns": ["\/errorreporting\/v1beta1", "\/clouderrorreporting"],
           "nav": [
             {
-              "title": "ReportErrorsServiceApi",
-              "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceapi"
+              "title": "ReportErrorsServiceClient",
+              "type": "google/cloud/errorreporting/v1beta1/reporterrorsserviceclient"
             },
             {
-              "title": "ErrorStatsServiceApi",
-              "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceapi"
+              "title": "ErrorStatsServiceClient",
+              "type": "google/cloud/errorreporting/v1beta1/errorstatsserviceclient"
             },
             {
-              "title": "ErrorGroupServiceApi",
-              "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceapi"
+              "title": "ErrorGroupServiceClient",
+              "type": "google/cloud/errorreporting/v1beta1/errorgroupserviceclient"
             },
             {
               "title": "Data Types",
@@ -298,12 +298,12 @@
           "patterns": ["\/monitoring\/v3"],
           "nav": [
             {
-              "title": "GroupServiceApi",
-              "type": "google/cloud/monitoring/v3/groupserviceapi"
+              "title": "GroupServiceClient",
+              "type": "google/cloud/monitoring/v3/groupserviceclient"
             },
             {
-              "title": "MetricServiceApi",
-              "type": "google/cloud/monitoring/v3/metricserviceapi"
+              "title": "MetricServiceClient",
+              "type": "google/cloud/monitoring/v3/metricserviceclient"
             },
             {
               "title": "Data Types",

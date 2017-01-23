@@ -97,6 +97,13 @@ module Google
         #   @return [String]
         #     Represents the source code version that the developer provided,
         #     which could represent a version label or a Git SHA-1 hash, for example.
+        # @!attribute [rw] resource_type
+        #   @return [String]
+        #     Type of the MonitoredResource. List of possible values:
+        #     https://cloud.google.com/monitoring/api/resources
+        #
+        #     Value is set automatically for incoming errors and must not be set when
+        #     reporting errors.
         class ServiceContext; end
 
         # A description of the context in which an error occurred.

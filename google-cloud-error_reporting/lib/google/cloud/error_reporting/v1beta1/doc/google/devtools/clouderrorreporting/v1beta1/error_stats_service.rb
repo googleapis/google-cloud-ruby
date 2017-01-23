@@ -35,7 +35,9 @@ module Google
         #     Data for all service contexts is returned if this field is not specified.
         # @!attribute [rw] time_range
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
-        #     [Required] List data for the given time range.
+        #     [Optional] List data for the given time range.
+        #     If not set a default time range is used. The field time_range_begin
+        #     in the response will specify the beginning of this time range.
         #     Only <code>ErrorGroupStats</code> with a non-zero count in the given time
         #     range are returned, unless the request contains an explicit group_id list.
         #     If a group_id list is given, also <code>ErrorGroupStats</code> with zero
@@ -76,6 +78,12 @@ module Google
         #     If non-empty, more results are available.
         #     Pass this token, along with the same query parameters as the first
         #     request, to view the next page of results.
+        # @!attribute [rw] time_range_begin
+        #   @return [Google::Protobuf::Timestamp]
+        #     The timestamp specifies the start time to which the request was restricted.
+        #     The start time is set based on the requested time range. It may be adjusted
+        #     to a later time if a project has exceeded the storage quota and older data
+        #     has been deleted.
         class ListGroupStatsResponse; end
 
         # Data extracted for a specific group based on certain filter criteria,
@@ -156,7 +164,8 @@ module Google
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
         #     as +projects/+ plus the
-        #     {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+        #     {Google Cloud Platform project
+        #     ID}[https://support.google.com/cloud/answer/6158840].
         #     Example: +projects/my-project-123+.
         # @!attribute [rw] group_id
         #   @return [String]
@@ -169,6 +178,8 @@ module Google
         # @!attribute [rw] time_range
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
         #     [Optional] List only data for the given time range.
+        #     If not set a default time range is used. The field time_range_begin
+        #     in the response will specify the beginning of this time range.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     [Optional] The maximum number of results to return per response.
@@ -186,6 +197,9 @@ module Google
         #     If non-empty, more results are available.
         #     Pass this token, along with the same query parameters as the first
         #     request, to view the next page of results.
+        # @!attribute [rw] time_range_begin
+        #   @return [Google::Protobuf::Timestamp]
+        #     The timestamp specifies the start time to which the request was restricted.
         class ListEventsResponse; end
 
         # Requests might be rejected or the resulting timed count durations might be
@@ -233,6 +247,10 @@ module Google
         #   @return [String]
         #     [Optional] The exact value to match against
         #     {+ServiceContext.version+}[https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version].
+        # @!attribute [rw] resource_type
+        #   @return [String]
+        #     [Optional] The exact value to match against
+        #     {+ServiceContext.resource_type+}[https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type].
         class ServiceContextFilter; end
 
         # Deletes all events in the project.
@@ -240,7 +258,8 @@ module Google
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
         #     as +projects/+ plus the
-        #     {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+        #     {Google Cloud Platform project
+        #     ID}[https://support.google.com/cloud/answer/6158840].
         #     Example: +projects/my-project-123+.
         class DeleteEventsRequest; end
 

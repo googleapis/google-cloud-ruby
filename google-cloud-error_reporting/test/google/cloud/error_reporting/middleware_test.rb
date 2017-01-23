@@ -69,7 +69,7 @@ describe Google::Cloud::ErrorReporting::Middleware do
     end
 
     it "creates a default error_reporting if not given one" do
-      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.stub \
+      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
         :new, "A default error_reporting" do
         middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
                                                                    project_id: project_id
@@ -80,7 +80,7 @@ describe Google::Cloud::ErrorReporting::Middleware do
 
     it "raises ArgumentError if empty project_id provided" do
       assert_raises ArgumentError do
-        Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.stub \
+        Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
         :new, "A default error_reporting" do
           ENV.stub :[], nil do
             Google::Cloud::ErrorReporting::Middleware.new nil

@@ -36,7 +36,7 @@ module Google
         #
         # @!attribute [r] report_errors_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub]
-        class ReportErrorsServiceApi
+        class ReportErrorsServiceClient
           attr_reader :report_errors_service_stub
 
           # The default address of the service.
@@ -66,7 +66,7 @@ module Google
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
-              project: project
+              :"project" => project
             )
           end
 
@@ -111,6 +111,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -169,15 +170,15 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/report_errors_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/report_errors_service_client"
           #
-          #   ReportErrorsServiceApi = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi
+          #   ReportErrorsServiceClient = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient
           #   ReportedErrorEvent = Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
           #
-          #   report_errors_service_api = ReportErrorsServiceApi.new
-          #   formatted_project_name = ReportErrorsServiceApi.project_path("[PROJECT]")
+          #   report_errors_service_client = ReportErrorsServiceClient.new
+          #   formatted_project_name = ReportErrorsServiceClient.project_path("[PROJECT]")
           #   event = ReportedErrorEvent.new
-          #   response = report_errors_service_api.report_error_event(formatted_project_name, event)
+          #   response = report_errors_service_client.report_error_event(formatted_project_name, event)
 
           def report_error_event \
               project_name,

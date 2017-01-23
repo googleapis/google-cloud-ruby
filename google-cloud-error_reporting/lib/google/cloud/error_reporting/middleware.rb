@@ -36,8 +36,9 @@ module Google
         # Construct a new instance of Middleware
         #
         # @param [Rack Application] app The Rack application
-        # @param [Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi
-        #   ] error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceApi
+        # @param [
+        #   Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient]
+        #   error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceClient
         #   object to for reporting exceptions
         # @param [String] project_id Name of GCP project. Default to
         #   ENV["ERROR_REPORTING_PROJECT"] then ENV["GOOGLE_CLOUD_PROJECT"].
@@ -54,7 +55,7 @@ module Google
         #   Middleware
         #
         def initialize app,
-                       error_reporting: V1beta1::ReportErrorsServiceApi.new,
+                       error_reporting: V1beta1::ReportErrorsServiceClient.new,
                        project_id: nil,
                        service_name: nil,
                        service_version: nil,
@@ -169,13 +170,13 @@ module Google
         end
 
         ##
-        # Build full ReportErrorsServiceApi project_path from project_id, which
-        # is in "projects/#{project_id}" format.
+        # Build full ReportErrorsServiceClient project_path from project_id,
+        # which is in "projects/#{project_id}" format.
         #
         # @return [String] fully qualified project id in
         #   "projects/#{project_id}" format
         def full_project_id
-          V1beta1::ReportErrorsServiceApi.project_path project_id
+          V1beta1::ReportErrorsServiceClient.project_path project_id
         end
 
         private
@@ -222,7 +223,7 @@ module Google
           ##
           # Construct an ErrorEvent object based on a given exception
           #
-          # @param [Exception] A Ruby exception
+          # @param [Exception] exception A Ruby exception
           #
           # @return [ErrorEvent] An ErrorEvent object containing information
           #   from the given exception
@@ -257,7 +258,7 @@ module Google
           ##
           # Helper method extract data from exception
           #
-          # @param [Exception] A Ruby Exception
+          # @param [Exception] exception A Ruby Exception
           #
           # @return [Hash] A hash containing formatted error message with
           # backtrace, file_path, line_number, and function_name

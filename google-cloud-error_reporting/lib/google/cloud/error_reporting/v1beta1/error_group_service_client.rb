@@ -36,7 +36,7 @@ module Google
         #
         # @!attribute [r] error_group_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupService::Stub]
-        class ErrorGroupServiceApi
+        class ErrorGroupServiceClient
           attr_reader :error_group_service_stub
 
           # The default address of the service.
@@ -67,8 +67,8 @@ module Google
           # @return [String]
           def self.group_path project, group
             GROUP_PATH_TEMPLATE.render(
-              project: project,
-              group: group
+              :"project" => project,
+              :"group" => group
             )
           end
 
@@ -120,6 +120,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/devtools/clouderrorreporting/v1beta1/error_group_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -177,13 +178,13 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/error_group_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_group_service_client"
           #
-          #   ErrorGroupServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceApi
+          #   ErrorGroupServiceClient = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient
           #
-          #   error_group_service_api = ErrorGroupServiceApi.new
-          #   formatted_group_name = ErrorGroupServiceApi.group_path("[PROJECT]", "[GROUP]")
-          #   response = error_group_service_api.get_group(formatted_group_name)
+          #   error_group_service_client = ErrorGroupServiceClient.new
+          #   formatted_group_name = ErrorGroupServiceClient.group_path("[PROJECT]", "[GROUP]")
+          #   response = error_group_service_client.get_group(formatted_group_name)
 
           def get_group \
               group_name,
@@ -205,14 +206,14 @@ module Google
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/error_group_service_api"
+          #   require "google/cloud/error_reporting/v1beta1/error_group_service_client"
           #
           #   ErrorGroup = Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup
-          #   ErrorGroupServiceApi = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceApi
+          #   ErrorGroupServiceClient = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient
           #
-          #   error_group_service_api = ErrorGroupServiceApi.new
+          #   error_group_service_client = ErrorGroupServiceClient.new
           #   group = ErrorGroup.new
-          #   response = error_group_service_api.update_group(group)
+          #   response = error_group_service_client.update_group(group)
 
           def update_group \
               group,
