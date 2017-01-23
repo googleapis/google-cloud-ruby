@@ -36,8 +36,9 @@ module Google
         # Construct a new instance of Middleware
         #
         # @param [Rack Application] app The Rack application
-        # @param [Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient
-        #   ] error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceClient
+        # @param [
+        #   Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient]
+        #   error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceClient
         #   object to for reporting exceptions
         # @param [String] project_id Name of GCP project. Default to
         #   ENV["ERROR_REPORTING_PROJECT"] then ENV["GOOGLE_CLOUD_PROJECT"].
@@ -169,8 +170,8 @@ module Google
         end
 
         ##
-        # Build full ReportErrorsServiceClient project_path from project_id, which
-        # is in "projects/#{project_id}" format.
+        # Build full ReportErrorsServiceClient project_path from project_id,
+        # which is in "projects/#{project_id}" format.
         #
         # @return [String] fully qualified project id in
         #   "projects/#{project_id}" format
@@ -222,7 +223,7 @@ module Google
           ##
           # Construct an ErrorEvent object based on a given exception
           #
-          # @param [Exception] A Ruby exception
+          # @param [Exception] exception A Ruby exception
           #
           # @return [ErrorEvent] An ErrorEvent object containing information
           #   from the given exception
@@ -257,7 +258,7 @@ module Google
           ##
           # Helper method extract data from exception
           #
-          # @param [Exception] A Ruby Exception
+          # @param [Exception] exception A Ruby Exception
           #
           # @return [Hash] A hash containing formatted error message with
           # backtrace, file_path, line_number, and function_name

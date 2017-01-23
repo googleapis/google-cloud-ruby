@@ -3,7 +3,8 @@ AllCops:
     - "integration/**/*"
     - "google-cloud-error_reporting.gemspec"
     - "lib/google/devtools/**/*"
-    - "lib/google/cloud/error_reporting/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1/**/*"
+    - "lib/google/cloud/error_reporting/v1beta1.rb"
     - "Rakefile"
     - "test/**/*"
 
