@@ -97,6 +97,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :subscription, :string, 1
     repeated :ack_ids, :string, 2
   end
+  add_message "google.pubsub.v1.StreamingPullRequest" do
+    optional :subscription, :string, 1
+    repeated :ack_ids, :string, 2
+    repeated :modify_deadline_seconds, :int32, 3
+    repeated :modify_deadline_ack_ids, :string, 4
+    optional :stream_ack_deadline_seconds, :int32, 5
+  end
+  add_message "google.pubsub.v1.StreamingPullResponse" do
+    repeated :received_messages, :message, 1, "google.pubsub.v1.ReceivedMessage"
+  end
 end
 
 module Google
@@ -124,6 +134,8 @@ module Google
       PullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PullResponse").msgclass
       ModifyAckDeadlineRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ModifyAckDeadlineRequest").msgclass
       AcknowledgeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.AcknowledgeRequest").msgclass
+      StreamingPullRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullRequest").msgclass
+      StreamingPullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse").msgclass
     end
   end
 end

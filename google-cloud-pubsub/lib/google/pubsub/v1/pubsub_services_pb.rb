@@ -38,18 +38,21 @@ module Google
           # If the corresponding topic doesn't exist, returns `NOT_FOUND`.
           #
           # If the name is not provided in the request, the server will assign a random
-          # name for this subscription on the same project as the topic. Note that
-          # for REST API requests, you must specify a name.
+          # name for this subscription on the same project as the topic, conforming
+          # to the
+          # [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
+          # The generated name is populated in the returned Subscription object.
+          # Note that for REST API requests, you must specify a name in the request.
           rpc :CreateSubscription, Subscription, Subscription
           # Gets the configuration details of a subscription.
           rpc :GetSubscription, GetSubscriptionRequest, Subscription
           # Lists matching subscriptions.
           rpc :ListSubscriptions, ListSubscriptionsRequest, ListSubscriptionsResponse
-          # Deletes an existing subscription. All pending messages in the subscription
+          # Deletes an existing subscription. All messages retained in the subscription
           # are immediately dropped. Calls to `Pull` after deletion will return
           # `NOT_FOUND`. After a subscription is deleted, a new one may be created with
           # the same name, but the new one has no association with the old
-          # subscription, or its topic unless the same topic is specified.
+          # subscription or its topic unless the same topic is specified.
           rpc :DeleteSubscription, DeleteSubscriptionRequest, Google::Protobuf::Empty
           # Modifies the ack deadline for a specific message. This method is useful
           # to indicate that more time is needed to process a message by the
@@ -70,6 +73,19 @@ module Google
           # there are too many concurrent pull requests pending for the given
           # subscription.
           rpc :Pull, PullRequest, PullResponse
+          # (EXPERIMENTAL) StreamingPull is an experimental feature. This RPC will
+          # respond with UNIMPLEMENTED errors unless you have been invited to test
+          # this feature. Contact cloud-pubsub@google.com with any questions.
+          #
+          # Establishes a stream with the server, which sends messages down to the
+          # client. The client streams acknowledgements and ack deadline modifications
+          # back to the server. The server will close the stream and return the status
+          # on any error. The server may close the stream with status `OK` to reassign
+          # server-side resources, in which case, the client should re-establish the
+          # stream. `UNAVAILABLE` may also be returned in the case of a transient error
+          # (e.g., a server restart). These should also be retried by the client. Flow
+          # control can be achieved by configuring the underlying RPC channel.
+          rpc :StreamingPull, stream(StreamingPullRequest), stream(StreamingPullResponse)
           # Modifies the `PushConfig` for a specified subscription.
           #
           # This may be used to change a push subscription to a pull one (signified by

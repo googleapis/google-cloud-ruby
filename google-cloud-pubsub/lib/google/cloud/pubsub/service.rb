@@ -54,7 +54,7 @@ module Google
         def subscriber
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= begin
-            V1::SubscriberApi.new(
+            V1::SubscriberClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
@@ -68,7 +68,7 @@ module Google
         def publisher
           return mocked_publisher if mocked_publisher
           @publisher ||= begin
-            V1::PublisherApi.new(
+            V1::PublisherClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,

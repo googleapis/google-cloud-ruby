@@ -40,7 +40,7 @@ module Google
         #   @return [Google::Iam::V1::IAMPolicy::Stub]
         # @!attribute [r] subscriber_stub
         #   @return [Google::Pubsub::V1::Subscriber::Stub]
-        class SubscriberApi
+        class SubscriberClient
           attr_reader :iam_policy_stub, :subscriber_stub
 
           # The default address of the service.
@@ -189,6 +189,7 @@ module Google
             require "google/iam/v1/iam_policy_services_pb"
             require "google/pubsub/v1/pubsub_services_pb"
 
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
               "ruby/#{RUBY_VERSION}".freeze
@@ -265,6 +266,10 @@ module Google
               @subscriber_stub.method(:pull),
               defaults["pull"]
             )
+            @streaming_pull = Google::Gax.create_api_call(
+              @subscriber_stub.method(:streaming_pull),
+              defaults["streaming_pull"]
+            )
             @modify_push_config = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_push_config),
               defaults["modify_push_config"]
@@ -278,8 +283,11 @@ module Google
           # If the corresponding topic doesn't exist, returns +NOT_FOUND+.
           #
           # If the name is not provided in the request, the server will assign a random
-          # name for this subscription on the same project as the topic. Note that
-          # for REST API requests, you must specify a name.
+          # name for this subscription on the same project as the topic, conforming
+          # to the
+          # {resource name format}[https://cloud.google.com/pubsub/docs/overview#names].
+          # The generated name is populated in the returned Subscription object.
+          # Note that for REST API requests, you must specify a name in the request.
           #
           # @param name [String]
           #   The name of the subscription. It must have the format
@@ -290,6 +298,7 @@ module Google
           #   in length, and it must not start with +"goog"+.
           # @param topic [String]
           #   The name of the topic from which this subscription is receiving messages.
+          #   Format is +projects/{project}/topics/{topic}+.
           #   The value of this field will be +_deleted-topic_+ if the topic has been
           #   deleted.
           # @param push_config [Google::Pubsub::V1::PushConfig]
@@ -307,29 +316,29 @@ module Google
           #   deadline. To override this value for a given message, call
           #   +ModifyAckDeadline+ with the corresponding +ack_id+ if using
           #   pull.
+          #   The minimum custom deadline you can specify is 10 seconds.
           #   The maximum custom deadline you can specify is 600 seconds (10 minutes).
+          #   If this parameter is 0, a default value of 10 seconds is used.
           #
           #   For push delivery, this value is also used to set the request timeout for
           #   the call to the push endpoint.
           #
           #   If the subscriber never acknowledges the message, the Pub/Sub
           #   system will eventually redeliver the message.
-          #
-          #   If this parameter is 0, a default value of 10 seconds is used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_name = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
-          #   formatted_topic = SubscriberApi.topic_path("[PROJECT]", "[TOPIC]")
-          #   response = subscriber_api.create_subscription(formatted_name, formatted_topic)
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_name = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   formatted_topic = SubscriberClient.topic_path("[PROJECT]", "[TOPIC]")
+          #   response = subscriber_client.create_subscription(formatted_name, formatted_topic)
 
           def create_subscription \
               name,
@@ -350,19 +359,20 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription to get.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
-          #   response = subscriber_api.get_subscription(formatted_subscription)
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   response = subscriber_client.get_subscription(formatted_subscription)
 
           def get_subscription \
               subscription,
@@ -377,6 +387,7 @@ module Google
           #
           # @param project [String]
           #   The name of the cloud project that subscriptions belong to.
+          #   Format is +projects/{project}+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -393,20 +404,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_project = SubscriberApi.project_path("[PROJECT]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_project = SubscriberClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   subscriber_api.list_subscriptions(formatted_project).each do |element|
+          #   subscriber_client.list_subscriptions(formatted_project).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   subscriber_api.list_subscriptions(formatted_project).each_page do |page|
+          #   subscriber_client.list_subscriptions(formatted_project).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -424,26 +435,27 @@ module Google
             @list_subscriptions.call(req, options)
           end
 
-          # Deletes an existing subscription. All pending messages in the subscription
+          # Deletes an existing subscription. All messages retained in the subscription
           # are immediately dropped. Calls to +Pull+ after deletion will return
           # +NOT_FOUND+. After a subscription is deleted, a new one may be created with
           # the same name, but the new one has no association with the old
-          # subscription, or its topic unless the same topic is specified.
+          # subscription or its topic unless the same topic is specified.
           #
           # @param subscription [String]
           #   The subscription to delete.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
-          #   subscriber_api.delete_subscription(formatted_subscription)
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client.delete_subscription(formatted_subscription)
 
           def delete_subscription \
               subscription,
@@ -463,28 +475,31 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param ack_ids [Array<String>]
           #   List of acknowledgment IDs.
           # @param ack_deadline_seconds [Integer]
           #   The new ack deadline with respect to the time this request was sent to
-          #   the Pub/Sub system. Must be >= 0. For example, if the value is 10, the new
+          #   the Pub/Sub system. For example, if the value is 10, the new
           #   ack deadline will expire 10 seconds after the +ModifyAckDeadline+ call
           #   was made. Specifying zero may immediately make the message available for
           #   another pull request.
+          #   The minimum deadline you can specify is 0 seconds.
+          #   The maximum deadline you can specify is 600 seconds (10 minutes).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   ack_ids = []
           #   ack_deadline_seconds = 0
-          #   subscriber_api.modify_ack_deadline(formatted_subscription, ack_ids, ack_deadline_seconds)
+          #   subscriber_client.modify_ack_deadline(formatted_subscription, ack_ids, ack_deadline_seconds)
 
           def modify_ack_deadline \
               subscription,
@@ -510,6 +525,7 @@ module Google
           #
           # @param subscription [String]
           #   The subscription whose message is being acknowledged.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param ack_ids [Array<String>]
           #   The acknowledgment ID for the messages being acknowledged that was returned
           #   by the Pub/Sub system in the +Pull+ response. Must not be empty.
@@ -518,14 +534,14 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   ack_ids = []
-          #   subscriber_api.acknowledge(formatted_subscription, ack_ids)
+          #   subscriber_client.acknowledge(formatted_subscription, ack_ids)
 
           def acknowledge \
               subscription,
@@ -546,12 +562,14 @@ module Google
           #
           # @param subscription [String]
           #   The subscription from which messages should be pulled.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param return_immediately [true, false]
-          #   If this is specified as true the system will respond immediately even if
-          #   it is not able to return a message in the +Pull+ response. Otherwise the
-          #   system is allowed to wait until at least one message is available rather
-          #   than returning no messages. The client may cancel the request if it does
-          #   not wish to wait any longer for the response.
+          #   If this field set to true, the system will respond immediately even if
+          #   it there are no messages available to return in the +Pull+ response.
+          #   Otherwise, the system may wait (for a bounded amount of time) until at
+          #   least one message is available, rather than returning no messages. The
+          #   client may cancel the request if it does not wish to wait any longer for
+          #   the response.
           # @param max_messages [Integer]
           #   The maximum number of messages returned for this request. The Pub/Sub
           #   system may return fewer than the number specified.
@@ -561,14 +579,14 @@ module Google
           # @return [Google::Pubsub::V1::PullResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   max_messages = 0
-          #   response = subscriber_api.pull(formatted_subscription, max_messages)
+          #   response = subscriber_client.pull(formatted_subscription, max_messages)
 
           def pull \
               subscription,
@@ -583,6 +601,55 @@ module Google
             @pull.call(req, options)
           end
 
+          # (EXPERIMENTAL) StreamingPull is an experimental feature. This RPC will
+          # respond with UNIMPLEMENTED errors unless you have been invited to test
+          # this feature. Contact cloud-pubsub@google.com with any questions.
+          #
+          # Establishes a stream with the server, which sends messages down to the
+          # client. The client streams acknowledgements and ack deadline modifications
+          # back to the server. The server will close the stream and return the status
+          # on any error. The server may close the stream with status +OK+ to reassign
+          # server-side resources, in which case, the client should re-establish the
+          # stream. +UNAVAILABLE+ may also be returned in the case of a transient error
+          # (e.g., a server restart). These should also be retried by the client. Flow
+          # control can be achieved by configuring the underlying RPC channel.
+          #
+          # @param reqs [Enumerable<Google::Pubsub::V1::StreamingPullRequest>]
+          #   The input requests.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Enumerable<Google::Pubsub::V1::StreamingPullResponse>]
+          #   An enumerable of Google::Pubsub::V1::StreamingPullResponse instances.
+          #
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          #
+          # @note
+          #   EXPERIMENTAL:
+          #     Streaming requests are still undergoing review.
+          #     This method interface might change in the future.
+          #
+          # @example
+          #   require "google/cloud/pubsub/v1/subscriber_client"
+          #
+          #   StreamingPullRequest = Google::Pubsub::V1::StreamingPullRequest
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
+          #
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   stream_ack_deadline_seconds = 0
+          #   request = StreamingPullRequest.new
+          #   request.subscription = formatted_subscription
+          #   request.stream_ack_deadline_seconds = stream_ack_deadline_seconds
+          #   requests = [request]
+          #   subscriber_client.streaming_pull(requests).each do |element|
+          #     # Process element.
+          #   end
+
+          def streaming_pull reqs, options: nil
+            @streaming_pull.call(reqs, options)
+          end
+
           # Modifies the +PushConfig+ for a specified subscription.
           #
           # This may be used to change a push subscription to a pull one (signified by
@@ -592,6 +659,7 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription.
+          #   Format is +projects/{project}/subscriptions/{sub}+.
           # @param push_config [Google::Pubsub::V1::PushConfig]
           #   The push configuration for future deliveries.
           #
@@ -604,15 +672,15 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
           #   PushConfig = Google::Pubsub::V1::PushConfig
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_subscription = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_subscription = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   push_config = PushConfig.new
-          #   subscriber_api.modify_push_config(formatted_subscription, push_config)
+          #   subscriber_client.modify_push_config(formatted_subscription, push_config)
 
           def modify_push_config \
               subscription,
@@ -644,15 +712,15 @@ module Google
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
           #   Policy = Google::Iam::V1::Policy
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_resource = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   policy = Policy.new
-          #   response = subscriber_api.set_iam_policy(formatted_resource, policy)
+          #   response = subscriber_client.set_iam_policy(formatted_resource, policy)
 
           def set_iam_policy \
               resource,
@@ -679,13 +747,13 @@ module Google
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
-          #   response = subscriber_api.get_iam_policy(formatted_resource)
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_resource = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   response = subscriber_client.get_iam_policy(formatted_resource)
 
           def get_iam_policy \
               resource,
@@ -697,6 +765,8 @@ module Google
           end
 
           # Returns permissions that a caller has on the specified resource.
+          # If the resource does not exist, this will return an empty set of
+          # permissions, not a NOT_FOUND error.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
@@ -713,14 +783,14 @@ module Google
           # @return [Google::Iam::V1::TestIamPermissionsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1/subscriber_api"
+          #   require "google/cloud/pubsub/v1/subscriber_client"
           #
-          #   SubscriberApi = Google::Cloud::Pubsub::V1::SubscriberApi
+          #   SubscriberClient = Google::Cloud::Pubsub::V1::SubscriberClient
           #
-          #   subscriber_api = SubscriberApi.new
-          #   formatted_resource = SubscriberApi.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #   subscriber_client = SubscriberClient.new
+          #   formatted_resource = SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   permissions = []
-          #   response = subscriber_api.test_iam_permissions(formatted_resource, permissions)
+          #   response = subscriber_client.test_iam_permissions(formatted_resource, permissions)
 
           def test_iam_permissions \
               resource,
