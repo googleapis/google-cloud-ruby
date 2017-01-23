@@ -14,18 +14,19 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Instance, :delete, :mock_spanner do
+describe Google::Cloud::Spanner::Database, :drop, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_json) { instance_hash(name: instance_id).to_json }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
-  let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
+  let(:database_id) { "my-database-id" }
+  let(:database_json) { database_hash(instance_id: instance_id, database_id: database_id).to_json }
+  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.decode_json database_json }
+  let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_instance, nil, [instance_grpc.name]
-    spanner.service.mocked_instances = mock
+    mock.expect :drop_database, nil, [database_path(instance_id, database_id)]
+    spanner.service.mocked_databases = mock
 
-    instance.delete
+    database.drop
 
     mock.verify
   end

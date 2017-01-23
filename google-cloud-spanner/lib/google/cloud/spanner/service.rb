@@ -180,6 +180,76 @@ module Google
           end
         end
 
+        def list_databases instance_id, token: nil, max: nil
+          call_options = nil
+          call_options = Google::Gax::CallOptions.new page_token: token if token
+
+          execute do
+            paged_enum = databases.list_databases instance_path(instance_id),
+                                                  page_size: max,
+                                                  options: call_options
+
+            paged_enum.page.response
+          end
+        end
+
+        def get_database instance_id, database_id
+          execute do
+            databases.get_database database_path(instance_id, database_id)
+          end
+        end
+
+        def create_database instance_id, database_id, statements: []
+          execute do
+            databases.create_database \
+              instance_path(instance_id),
+              "CREATE DATABASE #{database_id}",
+              extra_statements: Array(statements)
+          end
+        end
+
+        def drop_database instance_id, database_id
+          execute do
+            databases.drop_database database_path(instance_id, database_id)
+          end
+        end
+
+        def get_database_ddl instance_id, database_id
+          execute do
+            databases.get_database_ddl database_path(instance_id, database_id)
+          end
+        end
+
+        def update_database_ddl instance_id, database_id, statements: [],
+                                operation_id: nil
+          execute do
+            databases.update_database_ddl \
+              database_path(instance_id, database_id),
+              Array(statements),
+              operation_id: operation_id
+          end
+        end
+
+        def get_database_policy instance_id, database_id
+          execute do
+            databases.get_iam_policy database_path(instance_id, database_id)
+          end
+        end
+
+        def set_database_policy instance_id, database_id, new_policy
+          execute do
+            databases.set_iam_policy \
+              database_path(instance_id, database_id), new_policy
+          end
+        end
+
+        def test_database_permissions instance_id, database_id, permissions
+          execute do
+            databases.test_iam_permissions \
+              database_path(instance_id, database_id), permissions
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -208,6 +278,11 @@ module Google
           return name if name.to_s.include? "/"
           Admin::Instance::V1::InstanceAdminClient.instance_config_path(
             project, name.to_s)
+        end
+
+        def database_path instance_id, dataset_id
+          Admin::Database::V1::DatabaseAdminClient.database_path(
+            project, instance_id, dataset_id)
         end
 
         def execute

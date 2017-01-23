@@ -266,6 +266,112 @@ module Google
           nil
         end
 
+        ##
+        # Retrieves the list of databases for the given project.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        # @param [String] token The `token` value returned by the last call to
+        #   `databases`; indicates that this is a continuation of a call,
+        #   and that the system should return the next page of data.
+        # @param [Integer] max Maximum number of databases to return.
+        #
+        # @return [Array<Google::Cloud::Spanner::Database>] (See
+        #   {Google::Cloud::Spanner::Database::List})
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   databases = spanner.databases "my-instance"
+        #   databases.each do |database|
+        #     puts database.name
+        #   end
+        #
+        # @example Retrieve all: (See {Instance::Config::List::List#all})
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   databases = spanner.databases "my-instance"
+        #   databases.all do |database|
+        #     puts database.name
+        #   end
+        #
+        def databases instance_id, token: nil, max: nil
+          ensure_service!
+          grpc = service.list_databases instance_id, token: token, max: max
+          Database::List.from_grpc grpc, service, instance_id, max
+        end
+
+        ##
+        # Retrieves database by name.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        # @param [String] database_id The unique identifier for the database.
+        #
+        # @return [Google::Cloud::Spanner::Database, nil] Returns `nil`
+        #   if database does not exist.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        # @example Will return `nil` if instance does not exist.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database" #=> nil
+        #
+        def database instance_id, database_id
+          ensure_service!
+          grpc = service.get_database instance_id, database_id
+          Database.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Creates a atabase and starts preparing it to begin serving.
+        #
+        # See {Database::Job}.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        #   Required.
+        # @param [String] database_id The unique identifier for the database,
+        #   which cannot be changed after the database is created. Values are of
+        #   the form `[a-z][a-z0-9_\-]*[a-z0-9]` and must be between 2 and 30
+        #   characters in length. Required.
+        # @param [Array<String>] statements DDL statements to run inside the
+        #   newly created database. Statements can create tables, indexes, etc.
+        #   These statements execute atomically with the creation of the
+        #   database: if there is an error in any statement, the database is not
+        #   created. Optional.
+        #
+        # @return [Database::Job] The job representing the long-running,
+        #   asynchronous processing of a database create operation.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   job = spanner.create_database "my-instance",
+        #                                 "my-new-database"
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #   database = job.database
+        #
+        def create_database instance_id, database_id, statements: []
+          grpc = service.create_database instance_id, database_id,
+                                         statements: statements
+          Database::Job.from_grpc grpc, service
+        end
+
         protected
 
         ##

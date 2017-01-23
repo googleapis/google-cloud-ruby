@@ -87,6 +87,17 @@ class MockSpanner < Minitest::Spec
     }
   end
 
+  def databases_hash instance_id: "my-instance-id"
+    { databases: 3.times.map { database_hash(instance_id: instance_id) } }
+  end
+
+  def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}", state: "READY"
+    {
+      name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
+      state: state
+    }
+  end
+
   def project_path
     Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path project
   end
@@ -95,6 +106,11 @@ class MockSpanner < Minitest::Spec
     return name if name.to_s.include? "/"
     Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path(
       project, name)
+  end
+
+  def database_path instance, name
+    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path(
+      project, instance, name)
   end
 
   def instance_config_path name

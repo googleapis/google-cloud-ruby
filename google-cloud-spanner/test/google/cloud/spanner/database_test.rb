@@ -17,12 +17,18 @@ require "helper"
 describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database) { Google::Cloud::Spanner::Database.new instance_id, database_id, spanner.service }
+  let(:database_json) { database_hash(instance_id: instance_id, database_id: database_id).to_json }
+  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.decode_json database_json }
+  let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "knows the identifiers" do
     database.must_be_kind_of Google::Cloud::Spanner::Database
     database.project_id.must_equal project
     database.instance_id.must_equal instance_id
     database.database_id.must_equal database_id
+
+    database.state.must_equal :READY
+    database.must_be :ready?
+    database.wont_be :creating?
   end
 end

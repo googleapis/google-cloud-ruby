@@ -29,20 +29,4 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     instance.must_be :ready?
     instance.wont_be :creating?
   end
-
-  it "builds a database" do
-    database = instance.database "my-database-id"
-
-    database.must_be_kind_of Google::Cloud::Spanner::Database
-    database.database_id.must_equal "my-database-id"
-  end
-
-  it "builds a database with the default id" do
-    ENV.stub :[], "my-database-id", ["SPANNER_DATABASE"] do
-      database = instance.database
-
-      database.must_be_kind_of Google::Cloud::Spanner::Database
-      database.database_id.must_equal "my-database-id"
-    end
-  end
 end
