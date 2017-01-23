@@ -39,6 +39,8 @@ module Google
     # {Google::Pubsub::V1::PullResponse} | Response for the Pull method.
     # {Google::Pubsub::V1::PushConfig} | Configuration for a push delivery endpoint.
     # {Google::Pubsub::V1::ReceivedMessage} | A message and its corresponding acknowledgment ID.
+    # {Google::Pubsub::V1::StreamingPullRequest} | Request for the StreamingPull streaming RPC method.
+    # {Google::Pubsub::V1::StreamingPullResponse} | Response for the StreamingPull streaming RPC method.
     # {Google::Pubsub::V1::Subscription} | A subscription resource.
     # {Google::Pubsub::V1::Topic} | A topic resource.
     #
@@ -58,8 +60,7 @@ module Google
       # it must contain either a non-empty data field, or at least one attribute.
       # @!attribute [rw] data
       #   @return [String]
-      #     The message payload. For JSON requests, the value of this field must be
-      #     {base64-encoded}[https://tools.ietf.org/html/rfc4648].
+      #     The message payload.
       # @!attribute [rw] attributes
       #   @return [Hash{String => String}]
       #     Optional attributes for this message.
@@ -80,12 +81,14 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic to get.
+      #     Format is +projects/{project}/topics/{topic}+.
       class GetTopicRequest; end
 
       # Request for the Publish method.
       # @!attribute [rw] topic
       #   @return [String]
       #     The messages in the request will be published on this topic.
+      #     Format is +projects/{project}/topics/{topic}+.
       # @!attribute [rw] messages
       #   @return [Array<Google::Pubsub::V1::PubsubMessage>]
       #     The messages to publish.
@@ -103,6 +106,7 @@ module Google
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that topics belong to.
+      #     Format is +projects/{project}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of topics to return.
@@ -127,6 +131,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic that subscriptions are attached to.
+      #     Format is +projects/{project}/topics/{topic}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of subscription names to return.
@@ -152,6 +157,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     Name of the topic to delete.
+      #     Format is +projects/{project}/topics/{topic}+.
       class DeleteTopicRequest; end
 
       # A subscription resource.
@@ -166,6 +172,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic from which this subscription is receiving messages.
+      #     Format is +projects/{project}/topics/{topic}+.
       #     The value of this field will be +_deleted-topic_+ if the topic has been
       #     deleted.
       # @!attribute [rw] push_config
@@ -185,15 +192,15 @@ module Google
       #     deadline. To override this value for a given message, call
       #     +ModifyAckDeadline+ with the corresponding +ack_id+ if using
       #     pull.
+      #     The minimum custom deadline you can specify is 10 seconds.
       #     The maximum custom deadline you can specify is 600 seconds (10 minutes).
+      #     If this parameter is 0, a default value of 10 seconds is used.
       #
       #     For push delivery, this value is also used to set the request timeout for
       #     the call to the push endpoint.
       #
       #     If the subscriber never acknowledges the message, the Pub/Sub
       #     system will eventually redeliver the message.
-      #
-      #     If this parameter is 0, a default value of 10 seconds is used.
       class Subscription; end
 
       # Configuration for a push delivery endpoint.
@@ -240,12 +247,14 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription to get.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       class GetSubscriptionRequest; end
 
       # Request for the +ListSubscriptions+ method.
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that subscriptions belong to.
+      #     Format is +projects/{project}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of subscriptions to return.
@@ -271,12 +280,14 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription to delete.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       class DeleteSubscriptionRequest; end
 
       # Request for the ModifyPushConfig method.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       # @!attribute [rw] push_config
       #   @return [Google::Pubsub::V1::PushConfig]
       #     The push configuration for future deliveries.
@@ -291,13 +302,15 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription from which messages should be pulled.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       # @!attribute [rw] return_immediately
       #   @return [true, false]
-      #     If this is specified as true the system will respond immediately even if
-      #     it is not able to return a message in the +Pull+ response. Otherwise the
-      #     system is allowed to wait until at least one message is available rather
-      #     than returning no messages. The client may cancel the request if it does
-      #     not wish to wait any longer for the response.
+      #     If this field set to true, the system will respond immediately even if
+      #     it there are no messages available to return in the +Pull+ response.
+      #     Otherwise, the system may wait (for a bounded amount of time) until at
+      #     least one message is available, rather than returning no messages. The
+      #     client may cancel the request if it does not wish to wait any longer for
+      #     the response.
       # @!attribute [rw] max_messages
       #   @return [Integer]
       #     The maximum number of messages returned for this request. The Pub/Sub
@@ -317,27 +330,82 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
       #     List of acknowledgment IDs.
       # @!attribute [rw] ack_deadline_seconds
       #   @return [Integer]
       #     The new ack deadline with respect to the time this request was sent to
-      #     the Pub/Sub system. Must be >= 0. For example, if the value is 10, the new
+      #     the Pub/Sub system. For example, if the value is 10, the new
       #     ack deadline will expire 10 seconds after the +ModifyAckDeadline+ call
       #     was made. Specifying zero may immediately make the message available for
       #     another pull request.
+      #     The minimum deadline you can specify is 0 seconds.
+      #     The maximum deadline you can specify is 600 seconds (10 minutes).
       class ModifyAckDeadlineRequest; end
 
       # Request for the Acknowledge method.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription whose message is being acknowledged.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
       #     The acknowledgment ID for the messages being acknowledged that was returned
       #     by the Pub/Sub system in the +Pull+ response. Must not be empty.
       class AcknowledgeRequest; end
+
+      # Request for the +StreamingPull+ streaming RPC method. This request is used to
+      # establish the initial stream as well as to stream acknowledgements and ack
+      # deadline modifications from the client to the server.
+      # @!attribute [rw] subscription
+      #   @return [String]
+      #     The subscription for which to initialize the new stream. This must be
+      #     provided in the first request on the stream, and must not be set in
+      #     subsequent requests from client to server.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
+      # @!attribute [rw] ack_ids
+      #   @return [Array<String>]
+      #     List of acknowledgement IDs for acknowledging previously received messages
+      #     (received on this stream or a different stream). If an ack ID has expired,
+      #     the corresponding message may be redelivered later. Acknowledging a message
+      #     more than once will not result in an error. If the acknowledgement ID is
+      #     malformed, the stream will be aborted with status +INVALID_ARGUMENT+.
+      # @!attribute [rw] modify_deadline_seconds
+      #   @return [Array<Integer>]
+      #     The list of new ack deadlines for the IDs listed in
+      #     +modify_deadline_ack_ids+. The size of this list must be the same as the
+      #     size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
+      #     with +INVALID_ARGUMENT+. Each element in this list is applied to the
+      #     element in the same position in +modify_deadline_ack_ids+. The new ack
+      #     deadline is with respect to the time this request was sent to the Pub/Sub
+      #     system. Must be >= 0. For example, if the value is 10, the new ack deadline
+      #     will expire 10 seconds after this request is received. If the value is 0,
+      #     the message is immediately made available for another streaming or
+      #     non-streaming pull request. If the value is < 0 (an error), the stream will
+      #     be aborted with status +INVALID_ARGUMENT+.
+      # @!attribute [rw] modify_deadline_ack_ids
+      #   @return [Array<String>]
+      #     List of acknowledgement IDs whose deadline will be modified based on the
+      #     corresponding element in +modify_deadline_seconds+. This field can be used
+      #     to indicate that more time is needed to process a message by the
+      #     subscriber, or to make the message available for redelivery if the
+      #     processing was interrupted.
+      # @!attribute [rw] stream_ack_deadline_seconds
+      #   @return [Integer]
+      #     The ack deadline to use for the stream. This must be provided in the
+      #     first request on the stream, but it can also be updated on subsequent
+      #     requests from client to server. The minimum deadline you can specify is 10
+      #     seconds. The maximum deadline you can specify is 600 seconds (10 minutes).
+      class StreamingPullRequest; end
+
+      # Response for the +StreamingPull+ method. This response is used to stream
+      # messages from the server to the client.
+      # @!attribute [rw] received_messages
+      #   @return [Array<Google::Pubsub::V1::ReceivedMessage>]
+      #     Received Pub/Sub messages. This will not be empty.
+      class StreamingPullResponse; end
     end
   end
 end

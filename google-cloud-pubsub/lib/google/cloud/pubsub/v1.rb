@@ -13,5 +13,5 @@
 # limitations under the License.
 
 
-require "google/cloud/pubsub/v1/publisher_api"
-require "google/cloud/pubsub/v1/subscriber_api"
+require "google/cloud/pubsub/v1/publisher_client"
+require "google/cloud/pubsub/v1/subscriber_client"

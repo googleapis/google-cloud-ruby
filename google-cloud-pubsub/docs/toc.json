@@ -52,12 +52,12 @@
           "patterns": ["\/pubsub\/v1"],
           "nav": [
             {
-              "title": "PublisherApi",
-              "type": "google/cloud/pubsub/v1/publisherapi"
+              "title": "PublisherClient",
+              "type": "google/cloud/pubsub/v1/publisherclient"
             },
             {
-              "title": "SubscriberApi",
-              "type": "google/cloud/pubsub/v1/subscriberapi"
+              "title": "SubscriberClient",
+              "type": "google/cloud/pubsub/v1/subscriberclient"
             },
             {
               "title": "Data Types",
