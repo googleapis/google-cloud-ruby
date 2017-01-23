@@ -40,7 +40,8 @@ module Google
         #     **Current Language Restrictions:**
         #
         #      * Only English, Spanish, and Japanese textual content
-        #        are supported.
+        #        are supported, with the following additional restriction:
+        #        * +analyzeSentiment+ only supports English text.
         #     If the language (either specified by the caller or automatically detected)
         #     is not supported by the called API method, an +INVALID_ARGUMENT+ error
         #     is returned.
@@ -82,8 +83,8 @@ module Google
         #   @return [Hash{String => String}]
         #     Metadata associated with the entity.
         #
-        #     Currently, only Wikipedia URLs are provided, if available.
-        #     The associated key is "wikipedia_url".
+        #     Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if
+        #     available. The associated keys are "wikipedia_url" and "mid", respectively.
         # @!attribute [rw] salience
         #   @return [Float]
         #     The salience score associated with the entity in the [0, 1.0] range.
@@ -137,8 +138,7 @@ module Google
         #     Dependency tree parse for this token.
         # @!attribute [rw] lemma
         #   @return [String]
-        #     {Lemma}[https://en.wikipedia.org/wiki/Lemma_(morphology])
-        #     of the token.
+        #     {Lemma}[https://en.wikipedia.org/wiki/Lemma_%28morphology%29] of the token.
         class Token; end
 
         # Represents the feeling associated with the entire text or entities in
@@ -154,7 +154,9 @@ module Google
         #     (positive sentiment.)
         class Sentiment; end
 
-        # Represents part of speech information for a token.
+        # Represents part of speech information for a token. Parts of speech
+        # are as defined in
+        # http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf
         # @!attribute [rw] tag
         #   @return [Google::Cloud::Language::V1::PartOfSpeech::Tag]
         #     The part of speech tag.
@@ -482,7 +484,9 @@ module Google
           end
         end
 
-        # Represents dependency parse tree information for a token.
+        # Represents dependency parse tree information for a token. (For more
+        # information on dependency labels, see
+        # http://www.aclweb.org/anthology/P13-2017
         # @!attribute [rw] head_token_index
         #   @return [Integer]
         #     Represents the head of this token in the dependency tree.
