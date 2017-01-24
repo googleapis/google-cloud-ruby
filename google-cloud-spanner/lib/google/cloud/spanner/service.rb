@@ -203,7 +203,7 @@ module Google
           execute do
             databases.create_database \
               instance_path(instance_id),
-              "CREATE DATABASE #{database_id}",
+              "CREATE DATABASE `#{database_id}`",
               extra_statements: Array(statements)
           end
         end

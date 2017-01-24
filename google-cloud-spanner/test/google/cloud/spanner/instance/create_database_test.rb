@@ -34,7 +34,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
                    Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
                  )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE #{database_id}", extra_statements: []]
+    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: []]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id
@@ -56,7 +56,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
                    Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
                  )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE #{database_id}", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
+    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id, statements: [
