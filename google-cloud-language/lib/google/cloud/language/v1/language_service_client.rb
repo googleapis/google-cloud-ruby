@@ -37,7 +37,7 @@ module Google
         #
         # @!attribute [r] language_service_stub
         #   @return [Google::Cloud::Language::V1::LanguageService::Stub]
-        class LanguageServiceApi
+        class LanguageServiceClient
           attr_reader :language_service_stub
 
           # The default address of the service.
@@ -90,6 +90,7 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/cloud/language/v1/language_service_services_pb"
+
 
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
@@ -151,14 +152,14 @@ module Google
           # @return [Google::Cloud::Language::V1::AnalyzeSentimentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1/language_service_api"
+          #   require "google/cloud/language/v1/language_service_client"
           #
           #   Document = Google::Cloud::Language::V1::Document
-          #   LanguageServiceApi = Google::Cloud::Language::V1::LanguageServiceApi
+          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
           #
-          #   language_service_api = LanguageServiceApi.new
+          #   language_service_client = LanguageServiceClient.new
           #   document = Document.new
-          #   response = language_service_api.analyze_sentiment(document)
+          #   response = language_service_client.analyze_sentiment(document)
 
           def analyze_sentiment \
               document,
@@ -184,16 +185,16 @@ module Google
           # @return [Google::Cloud::Language::V1::AnalyzeEntitiesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1/language_service_api"
+          #   require "google/cloud/language/v1/language_service_client"
           #
           #   Document = Google::Cloud::Language::V1::Document
           #   EncodingType = Google::Cloud::Language::V1::EncodingType
-          #   LanguageServiceApi = Google::Cloud::Language::V1::LanguageServiceApi
+          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
           #
-          #   language_service_api = LanguageServiceApi.new
+          #   language_service_client = LanguageServiceClient.new
           #   document = Document.new
           #   encoding_type = EncodingType::NONE
-          #   response = language_service_api.analyze_entities(document, encoding_type)
+          #   response = language_service_client.analyze_entities(document, encoding_type)
 
           def analyze_entities \
               document,
@@ -220,16 +221,16 @@ module Google
           # @return [Google::Cloud::Language::V1::AnalyzeSyntaxResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1/language_service_api"
+          #   require "google/cloud/language/v1/language_service_client"
           #
           #   Document = Google::Cloud::Language::V1::Document
           #   EncodingType = Google::Cloud::Language::V1::EncodingType
-          #   LanguageServiceApi = Google::Cloud::Language::V1::LanguageServiceApi
+          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
           #
-          #   language_service_api = LanguageServiceApi.new
+          #   language_service_client = LanguageServiceClient.new
           #   document = Document.new
           #   encoding_type = EncodingType::NONE
-          #   response = language_service_api.analyze_syntax(document, encoding_type)
+          #   response = language_service_client.analyze_syntax(document, encoding_type)
 
           def analyze_syntax \
               document,
@@ -257,18 +258,18 @@ module Google
           # @return [Google::Cloud::Language::V1::AnnotateTextResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1/language_service_api"
+          #   require "google/cloud/language/v1/language_service_client"
           #
           #   Document = Google::Cloud::Language::V1::Document
           #   EncodingType = Google::Cloud::Language::V1::EncodingType
           #   Features = Google::Cloud::Language::V1::AnnotateTextRequest::Features
-          #   LanguageServiceApi = Google::Cloud::Language::V1::LanguageServiceApi
+          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
           #
-          #   language_service_api = LanguageServiceApi.new
+          #   language_service_client = LanguageServiceClient.new
           #   document = Document.new
           #   features = Features.new
           #   encoding_type = EncodingType::NONE
-          #   response = language_service_api.annotate_text(document, features, encoding_type)
+          #   response = language_service_client.annotate_text(document, features, encoding_type)
 
           def annotate_text \
               document,

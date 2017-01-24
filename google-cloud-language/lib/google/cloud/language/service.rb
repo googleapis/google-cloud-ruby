@@ -33,7 +33,7 @@ module Google
                        timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::LanguageServiceApi::SERVICE_ADDRESS
+          @host = host || V1::LanguageServiceClient::SERVICE_ADDRESS
           @client_config = client_config || {}
           @timeout = timeout
         end
@@ -52,7 +52,7 @@ module Google
 
         def service
           return mocked_service if mocked_service
-          @service ||= V1::LanguageServiceApi.new(
+          @service ||= V1::LanguageServiceClient.new(
             service_path: host,
             channel: channel,
             timeout: timeout,
