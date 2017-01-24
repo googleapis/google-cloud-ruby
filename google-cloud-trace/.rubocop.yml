@@ -3,6 +3,8 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-trace.gemspec"
     - "lib/google/devtools/**/*"
+    - "lib/google/cloud/trace/v1/**/*"
+    - "lib/google/cloud/trace/v1.rb"
     - "Rakefile"
     - "test/**/*"
 

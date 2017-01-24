@@ -85,8 +85,8 @@
           "patterns": ["\/trace\/v1", "\/cloudtrace"],
           "nav": [
             {
-              "title": "TraceServiceApi",
-              "type": "google/cloud/trace/v1/traceserviceapi"
+              "title": "TraceServiceClient",
+              "type": "google/cloud/trace/v1/traceserviceclient"
             },
             {
               "title": "Data Types",

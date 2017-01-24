@@ -13,4 +13,4 @@
 # limitations under the License.
 
 
-require "google/cloud/trace/v1/trace_service_api"
+require "google/cloud/trace/v1/trace_service_client"

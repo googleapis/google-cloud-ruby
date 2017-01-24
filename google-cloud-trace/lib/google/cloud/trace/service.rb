@@ -53,7 +53,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::TraceServiceApi::SERVICE_ADDRESS
+          @host = host || V1::TraceServiceClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -77,7 +77,7 @@ module Google
         def lowlevel_client
           return mocked_lowlevel_client if mocked_lowlevel_client
           @lowlevel_client ||= \
-            V1::TraceServiceApi.new(
+            V1::TraceServiceClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
