@@ -38,7 +38,7 @@ module Google
         #
         # @!attribute [r] image_annotator_stub
         #   @return [Google::Cloud::Vision::V1::ImageAnnotator::Stub]
-        class ImageAnnotatorApi
+        class ImageAnnotatorClient
           attr_reader :image_annotator_stub
 
           # The default address of the service.
@@ -92,6 +92,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/vision/v1/image_annotator_services_pb"
 
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
               "ruby/#{RUBY_VERSION}".freeze
@@ -137,13 +138,13 @@ module Google
           # @return [Google::Cloud::Vision::V1::BatchAnnotateImagesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/vision/v1/image_annotator_api"
+          #   require "google/cloud/vision/v1/image_annotator_client"
           #
-          #   ImageAnnotatorApi = Google::Cloud::Vision::V1::ImageAnnotatorApi
+          #   ImageAnnotatorClient = Google::Cloud::Vision::V1::ImageAnnotatorClient
           #
-          #   image_annotator_api = ImageAnnotatorApi.new
+          #   image_annotator_client = ImageAnnotatorClient.new
           #   requests = []
-          #   response = image_annotator_api.batch_annotate_images(requests)
+          #   response = image_annotator_client.batch_annotate_images(requests)
 
           def batch_annotate_images \
               requests,
