@@ -21,7 +21,7 @@ keyfile = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
 
 #######################################
 # Setup ErrorReporting Middleware
-er_scopes = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi::ALL_SCOPES
+er_scopes = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient::ALL_SCOPES
 er_credentials = if keyfile.nil?
                 Google::Cloud::Credentials.default(
                   scope: er_scopes)
@@ -31,12 +31,12 @@ er_credentials = if keyfile.nil?
               end
 er_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
             GRPC::Core::CallCredentials.new er_credentials.client.updater_proc
-er_chan = GRPC::Core::Channel.new Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi::SERVICE_ADDRESS,
+er_chan = GRPC::Core::Channel.new Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient::SERVICE_ADDRESS,
                                                nil, er_channel_cred
 er_service_name = "google-cloud-ruby_integration_test"
 er_serivce_version = ENV['USER']
 
-error_reporting = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceApi.new channel: er_chan,
+error_reporting = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.new channel: er_chan,
                                                                                      app_name: er_service_name,
                                                                                      app_version: er_serivce_version
 
