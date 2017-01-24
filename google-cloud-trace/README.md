@@ -5,7 +5,7 @@ google-cloud-trace uses [Google API extensions][google-gax] to provide an
 easy-to-use client library for the [Stackdriver Trace API][] (v1) defined in the [googleapis][] git repository
 
 
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/devtools/cloudtrace/v1
+[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/devtools/cloudtrace/v1
 [google-gax]: https://github.com/googleapis/gax-ruby
 [Stackdriver Trace API]: https://developers.google.com/apis-explorer/#p/cloudtrace/v1/
 

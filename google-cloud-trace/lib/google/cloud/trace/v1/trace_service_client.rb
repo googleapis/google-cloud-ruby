@@ -40,7 +40,7 @@ module Google
         #
         # @!attribute [r] trace_service_stub
         #   @return [Google::Devtools::Cloudtrace::V1::TraceService::Stub]
-        class TraceServiceApi
+        class TraceServiceClient
           attr_reader :trace_service_stub
 
           # The default address of the service.
@@ -105,6 +105,7 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/cloudtrace/v1/trace_services_pb"
 
+
             google_api_client = "#{app_name}/#{app_version} " \
               "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
               "ruby/#{RUBY_VERSION}".freeze
@@ -164,15 +165,15 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1/trace_service_api"
+          #   require "google/cloud/trace/v1/trace_service_client"
           #
-          #   TraceServiceApi = Google::Cloud::Trace::V1::TraceServiceApi
+          #   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
           #   Traces = Google::Devtools::Cloudtrace::V1::Traces
           #
-          #   trace_service_api = TraceServiceApi.new
+          #   trace_service_client = TraceServiceClient.new
           #   project_id = ''
           #   traces = Traces.new
-          #   trace_service_api.patch_traces(project_id, traces)
+          #   trace_service_client.patch_traces(project_id, traces)
 
           def patch_traces \
               project_id,
@@ -183,6 +184,7 @@ module Google
               traces: traces
             }.delete_if { |_, v| v.nil? })
             @patch_traces.call(req, options)
+            nil
           end
 
           # Gets a single trace by its ID.
@@ -197,14 +199,14 @@ module Google
           # @return [Google::Devtools::Cloudtrace::V1::Trace]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1/trace_service_api"
+          #   require "google/cloud/trace/v1/trace_service_client"
           #
-          #   TraceServiceApi = Google::Cloud::Trace::V1::TraceServiceApi
+          #   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
           #
-          #   trace_service_api = TraceServiceApi.new
+          #   trace_service_client = TraceServiceClient.new
           #   project_id = ''
           #   trace_id = ''
-          #   response = trace_service_api.get_trace(project_id, trace_id)
+          #   response = trace_service_client.get_trace(project_id, trace_id)
 
           def get_trace \
               project_id,
@@ -260,20 +262,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1/trace_service_api"
+          #   require "google/cloud/trace/v1/trace_service_client"
           #
-          #   TraceServiceApi = Google::Cloud::Trace::V1::TraceServiceApi
+          #   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
           #
-          #   trace_service_api = TraceServiceApi.new
+          #   trace_service_client = TraceServiceClient.new
           #   project_id = ''
           #
           #   # Iterate over all results.
-          #   trace_service_api.list_traces(project_id).each do |element|
+          #   trace_service_client.list_traces(project_id).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   trace_service_api.list_traces(project_id).each_page do |page|
+          #   trace_service_client.list_traces(project_id).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
