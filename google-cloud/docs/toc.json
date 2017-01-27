@@ -284,6 +284,17 @@
         {
           "title": "Annotation",
           "type": "google/cloud/language/annotation"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/language/v1",
+          "patterns": ["\/language\/v1"],
+          "nav": [
+            {
+              "title": "LanguageServiceClient",
+              "type": "google/cloud/language/v1/languageserviceclient"
+            }
+          ]
         }
       ]
     },
