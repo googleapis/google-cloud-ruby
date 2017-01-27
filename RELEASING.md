@@ -44,6 +44,8 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Edit the gem's entry in `docs/manifest.json`, adding your new version number to the head of the list, and moving `"master"` to be just below it.
 
+1. If your version change is greater than the [semver](http://semver.org/) patch version, edit the requirement for the gem in `google-cloud/google-cloud.gemspec`, replacing the old version number for the gem with your new version number.
+
 1. Commit your changes. Copy and paste the significant points from your `CHANGELOG.md` edit as the description in your commit message.
 
   ```sh
@@ -87,5 +89,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 1. Confirm that the new version is displayed in the packages pulldown and the version switcher on the [google-cloud-ruby docs site](https://googlecloudplatform.github.io/google-cloud-ruby/#/). Verify that the new docs version contains the public API changes in the release.
 
 1. Some time later, after they have completed, confirm that [Travis CI (Mac OS X)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) and [Appveyor CI (Windows)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-ruby) builds are also green.
+
+1. If your version change is greater than the [semver](http://semver.org/) patch version, then when you are done releasing all individual packages, you should follow these same instructions to release the `google-cloud` umbrella package.
 
 High fives all around!
