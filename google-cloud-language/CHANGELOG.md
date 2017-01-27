@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2017-01-27
+
+* Change class names in low-level API (GAPIC)
+
 ### 0.22.0 / 2016-11-14
 
 * Upgrade to V1
