@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 / 2017-01-26
+
+* Change class names in low-level API (GAPIC)
+* Change method parameters in low-level API (GAPIC)
+* Add LICENSE to package.
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::Pubsub.new
