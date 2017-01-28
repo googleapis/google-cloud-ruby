@@ -418,6 +418,69 @@
       ]
     },
     {
+      "title": "Trace",
+      "type": "google/cloud/trace",
+      "patterns": ["\/trace", "\/cloudtrace"],
+      "nav": [
+        {
+          "title": "Project",
+          "type": "google/cloud/trace/project"
+        },
+        {
+          "title": "LabelKey",
+          "type": "google/cloud/trace/labelkey"
+        },
+        {
+          "title": "Middleware",
+          "type": "google/cloud/trace/middleware"
+        },
+        {
+          "title": "Notifications",
+          "type": "google/cloud/trace/notifications"
+        },
+        {
+          "title": "Railtie",
+          "type": "google/cloud/trace/railtie"
+        },
+        {
+          "title": "ResultSet",
+          "type": "google/cloud/trace/resultset"
+        },
+        {
+          "title": "Span",
+          "type": "google/cloud/trace/span"
+        },
+        {
+          "title": "SpanKind",
+          "type": "google/cloud/trace/spankind"
+        },
+        {
+          "title": "TimeSampler",
+          "type": "google/cloud/trace/timesampler"
+        },
+        {
+          "title": "TraceRecord",
+          "type": "google/cloud/trace/tracerecord"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/trace/v1",
+          "patterns": ["\/trace\/v1", "\/cloudtrace"],
+          "nav": [
+            {
+              "title": "TraceServiceClient",
+              "type": "google/cloud/trace/v1/traceserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "patterns": ["\/cloudtrace\/v1"],
+              "type": "google/devtools/cloudtrace/v1"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Translation",
       "type": "google/cloud/translate",
       "nav": [

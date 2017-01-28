@@ -272,7 +272,7 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/google-cloud/#{version}/google/cloud/"
     end
 
-    excluded = ["gcloud", "google-cloud", "stackdriver", "stackdriver-core", "google-cloud-trace"]
+    excluded = ["gcloud", "google-cloud", "stackdriver", "stackdriver-core"]
     gems.each do |gem|
       next if excluded.include? gem
 
@@ -317,16 +317,22 @@ namespace :jsondoc do
         end
 
         # Copy GAPIC directories with names that do not match gem namespace
-        # google-cloud-error_reporting
-        if gem == "google-cloud-error_reporting" && Dir.exists?("#{src}/google/devtools")
+        if Dir.exists?("#{src}/google/devtools")
           mkdir_p gh_pages + "json/google-cloud/#{version}/google/devtools", verbose: true
-          if Dir.exists? "#{src}/google/devtools/clouderrorreporting"
+          # google-cloud-error_reporting
+          if gem == "google-cloud-error_reporting"
             # Copy the gem's subdir in devtools
             header_2 "Copying  #{gem_shortname} jsondoc for devtools"
             cp_r Dir["#{src}/google/devtools/clouderrorreporting"],
                  gh_pages + "json/google-cloud/#{version}/google/devtools/", verbose: true
           end
-          # TODO: copy devtools/cloudtrace for google-cloud-trace when adding it to google-cloud
+          # google-cloud-trace
+          if gem == "google-cloud-trace"
+            # Copy the gem's subdir in devtools
+            header_2 "Copying  #{gem_shortname} jsondoc for devtools"
+            cp_r Dir["#{src}/google/devtools/cloudtrace"],
+                 gh_pages + "json/google-cloud/#{version}/google/devtools/", verbose: true
+          end
         end
       end
 
