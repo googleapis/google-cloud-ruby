@@ -1,5 +1,10 @@
 # Release History
 
+### 0.24.0 / 2017-01-27
+
+* Upgrade to new versions of Error Reporting, Monitoring, Natural Language, and Pub/Sub
+* Add Trace service
+
 ### 0.23.0 / 2016-21-8
 
 * Upgrade to beta versions of BigQuery, Datastore, Logging, and Storage (0.23.x)
