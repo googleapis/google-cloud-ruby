@@ -5,6 +5,8 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/cloud/vision/v1/geometry_pb'
+require 'google/cloud/vision/v1/text_annotation_pb'
+require 'google/cloud/vision/v1/web_annotation_pb'
 require 'google/rpc/status_pb'
 require 'google/type/color_pb'
 require 'google/type/latlng_pb'
@@ -20,11 +22,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :LOGO_DETECTION, 3
     value :LABEL_DETECTION, 4
     value :TEXT_DETECTION, 5
+    value :DOCUMENT_TEXT_DETECTION, 11
     value :SAFE_SEARCH_DETECTION, 6
     value :IMAGE_PROPERTIES, 7
+    value :CROP_HINTS, 9
+    value :WEB_ANNOTATION, 10
   end
   add_message "google.cloud.vision.v1.ImageSource" do
     optional :gcs_image_uri, :string, 1
+    optional :image_uri, :string, 2
   end
   add_message "google.cloud.vision.v1.Image" do
     optional :content, :bytes, 1
@@ -127,9 +133,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.ImageProperties" do
     optional :dominant_colors, :message, 1, "google.cloud.vision.v1.DominantColorsAnnotation"
   end
+  add_message "google.cloud.vision.v1.CropHint" do
+    optional :bounding_poly, :message, 1, "google.cloud.vision.v1.BoundingPoly"
+    optional :confidence, :float, 2
+    optional :importance_fraction, :float, 3
+  end
+  add_message "google.cloud.vision.v1.CropHintsAnnotation" do
+    repeated :crop_hints, :message, 1, "google.cloud.vision.v1.CropHint"
+  end
+  add_message "google.cloud.vision.v1.CropHintsParams" do
+    repeated :aspect_ratios, :float, 1
+  end
   add_message "google.cloud.vision.v1.ImageContext" do
     optional :lat_long_rect, :message, 1, "google.cloud.vision.v1.LatLongRect"
     repeated :language_hints, :string, 2
+    optional :crop_hints_params, :message, 4, "google.cloud.vision.v1.CropHintsParams"
   end
   add_message "google.cloud.vision.v1.AnnotateImageRequest" do
     optional :image, :message, 1, "google.cloud.vision.v1.Image"
@@ -142,8 +160,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :logo_annotations, :message, 3, "google.cloud.vision.v1.EntityAnnotation"
     repeated :label_annotations, :message, 4, "google.cloud.vision.v1.EntityAnnotation"
     repeated :text_annotations, :message, 5, "google.cloud.vision.v1.EntityAnnotation"
+    optional :full_text_annotation, :message, 12, "google.cloud.vision.v1.TextAnnotation"
     optional :safe_search_annotation, :message, 6, "google.cloud.vision.v1.SafeSearchAnnotation"
     optional :image_properties_annotation, :message, 8, "google.cloud.vision.v1.ImageProperties"
+    optional :crop_hints_annotation, :message, 11, "google.cloud.vision.v1.CropHintsAnnotation"
+    optional :web_annotation, :message, 13, "google.cloud.vision.v1.WebAnnotation"
     optional :error, :message, 9, "google.rpc.Status"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do
@@ -181,6 +202,9 @@ module Google
         ColorInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ColorInfo").msgclass
         DominantColorsAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.DominantColorsAnnotation").msgclass
         ImageProperties = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageProperties").msgclass
+        CropHint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHint").msgclass
+        CropHintsAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsAnnotation").msgclass
+        CropHintsParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsParams").msgclass
         ImageContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageContext").msgclass
         AnnotateImageRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageRequest").msgclass
         AnnotateImageResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageResponse").msgclass
