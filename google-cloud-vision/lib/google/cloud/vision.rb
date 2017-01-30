@@ -62,6 +62,16 @@ module Google
     # image = vision.image "path/to/landmark.jpg"
     # ```
     #
+    # Or any publicly-accessible image HTTP/HTTPS URL:
+    #
+    # ```ruby
+    # require "google/cloud/vision"
+    #
+    # vision = Google::Cloud::Vision.new
+    #
+    # image = vision.image "https://www.example.com/images/landmark.jpg"
+    # ```
+    #
     # Or, you can initialize the image with a Google Cloud Storage URI:
     #
     # ```ruby
@@ -98,7 +108,8 @@ module Google
     # ```
     #
     # To run multiple features on an image in a single request, pass the image
-    # (or a string file path or Storage URI) to {Vision::Project#annotate}:
+    # (or a string file path, publicly-accessible image HTTP/HTTPS URL, or
+    # Storage URI) to {Vision::Project#annotate}:
     #
     # ```ruby
     # require "google/cloud/vision"

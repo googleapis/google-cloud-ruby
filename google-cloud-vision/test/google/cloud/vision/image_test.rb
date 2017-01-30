@@ -79,6 +79,28 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     end
   end
 
+  it "can create from an HTTP URL" do
+    image = vision.image "http://www.example.com/images/landmark.jpg"
+
+    image.must_be_kind_of Google::Cloud::Vision::Image
+    image.wont_be :io?
+    image.must_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
+  end
+
+  it "can create from an HTTPS URL" do
+    image = vision.image "https://www.example.com/images/landmark.jpg"
+
+    image.must_be_kind_of Google::Cloud::Vision::Image
+    image.wont_be :io?
+    image.must_be :url?
+
+    image.inspect.must_be_kind_of String
+    image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
+  end
+
   it "can create from a Google Storage URL" do
     image = vision.image "gs://test/file.ext"
 
@@ -89,6 +111,11 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.inspect.must_be_kind_of String
     image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
+
+  it "raises when given a string that is not an http|https|gs URL" do
+    expect { vision.image "www.example.com/images/landmark.jpg" }.must_raise ArgumentError
+  end
+
 
   it "can create from a Storage::File object" do
     gs_img = OpenStruct.new to_gs_url: "gs://test/file.ext"
@@ -102,7 +129,7 @@ describe Google::Cloud::Vision::Image, :mock_vision do
     image.to_grpc.must_be_kind_of Google::Cloud::Vision::V1::Image
   end
 
-  it "raises when giving an object that is not IO or a Google Storage URL" do
+  it "raises when given an object that is not an IO or a Storage::File" do
     obj = OpenStruct.new hello: "world"
 
     expect { vision.image obj }.must_raise ArgumentError

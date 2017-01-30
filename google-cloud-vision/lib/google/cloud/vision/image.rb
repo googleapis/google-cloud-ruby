@@ -25,6 +25,11 @@ module Google
       #
       # Represents an image for the Vision service.
       #
+      # An Image instance can be created from a string file path, publicly-
+      # accessible image HTTP/HTTPS URL, or Cloud Storage URI of the form
+      # `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO, or
+      # Tempfile instance; or an instance of Google::Cloud::Storage::File.
+      #
       # See {Project#image}.
       #
       # The Cloud Vision API supports a variety of image file formats, including
@@ -345,7 +350,7 @@ module Google
           elsif url?
             Google::Cloud::Vision::V1::Image.new(
               source: Google::Cloud::Vision::V1::ImageSource.new(
-                gcs_image_uri: @url))
+                image_uri: @url))
           else
             fail ArgumentError, "Unable to use Image with Vision service."
           end
@@ -361,8 +366,8 @@ module Google
           source = source.to_gs_url if source.respond_to? :to_gs_url
           # Everything should be a string from now on
           source = String source
-          # Create an Image from the Google Storage URL
-          return from_url(source, vision) if source.start_with? "gs://"
+          # Create an Image from a HTTP/HTTPS URL or Google Storage URL.
+          return from_url(source, vision) if url? source
           # Create an image from a file on the filesystem
           if File.file? source
             unless File.readable? source
@@ -389,13 +394,20 @@ module Google
         # @private New Image from an IO object.
         def self.from_url url, vision
           url = String url
-          unless url.start_with? "gs://"
-            fail ArgumentError, "Cannot create an Image without a Storage URL"
+          unless url? url
+            fail ArgumentError, "Cannot create an Image without a URL"
           end
           new.tap do |i|
             i.instance_variable_set :@url, url
             i.instance_variable_set :@vision, vision
           end
+        end
+
+        ##
+        # @private
+        def self.url? url
+          regex = %r{\A(http|https|gs):\/\/}
+          !regex.match(url).nil?
         end
 
         protected

@@ -101,12 +101,20 @@ module Google
         #   Practices
         #
         # @param [String, IO, StringIO, Tempfile, Google::Cloud::Storage::File]
-        #   source A string file path or Cloud Storage URI of the form
+        #   source A string file path, publicly-accessible image HTTP/HTTPS URL,
+        #   or Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO,
         #   or Tempfile instance; or an instance of
         #   Google::Cloud::Storage::File.
         #
         # @return [Image] An image for the Vision service.
+        #
+        # @example With a publicly-accessible image HTTP/HTTPS URL:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   image = vision.image "https://www.example.com/images/landmark.jpg"
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/vision"
@@ -153,7 +161,11 @@ module Google
         #
         # @param [Image, Object] images The image or images to annotate. This
         #   can be an {Image} instance, or any other type that converts to an
-        #   {Image}. See {#image} for details.
+        #   {Image}: A string file path, publicly-accessible image HTTP/HTTPS
+        #   URL, or Cloud Storage URI of the form
+        #   `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO,
+        #   or Tempfile instance; or an instance of
+        #   Google::Cloud::Storage::File.
         # @param [Boolean, Integer] faces Whether to perform the facial
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_faces}, or may be provided here.
