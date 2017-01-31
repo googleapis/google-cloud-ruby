@@ -324,6 +324,39 @@ module Google
           annotation.properties
         end
 
+        ##
+        # Performs the `CROP_HINTS` feature on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Array<Annotation::CropHint>] The results of crop hints
+        #   detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   crop_hints = image.crop_hints
+        #   crop_hints.count #=> 1
+        #   crop_hint = crop_hints.first
+        #
+        #   crop_hint.bounds.count #=> 4
+        #   crop_hint.bounds[0] #=> (x: 0, y: 0)
+        #   crop_hint.bounds[1] #=> (x: 511, y: 0)
+        #   crop_hint.bounds[2] #=> (x: 511, y: 383)
+        #   crop_hint.bounds[3] #=> (x: 0, y: 383)
+        #
+        #   crop_hint.confidence #=> 1.0
+        #   crop_hint.importance_fraction #=> 1.0399999618530273
+        #
+        def crop_hints
+          ensure_vision!
+          annotation = @vision.mark self, crop_hints: true
+          annotation.crop_hints
+        end
+
         # @private
         def to_s
           @to_s ||= begin
@@ -391,7 +424,7 @@ module Google
         end
 
         ##
-        # @private New Image from an IO object.
+        # @private New Image from a HTTP/HTTPS URL or Google Storage URL.
         def self.from_url url, vision
           url = String url
           unless url? url
@@ -433,7 +466,14 @@ module Google
         #   latin alphabet a hint is not needed. In rare cases, when the
         #   language of the text in the image is known in advance, setting
         #   this hint will help get better results (although it will hurt a
-        #   great deal if the hint is wrong).
+        #   great deal if the hint is wrong). For use with {Image#text}.
+        # @attr [Array<Float>] aspect_ratios Aspect ratios in floats,
+        #   representing the ratio of the width to the height of the image. For
+        #   example, if the desired aspect ratio is 4/3, the corresponding float
+        #   value should be 1.33333.  If not specified, the best possible crop
+        #   is returned. The number of provided aspect ratios is limited to a
+        #   maximum of 16; any aspect ratios provided after the 16th are
+        #   ignored. For use with {Image#crop_hints}.
         #
         # @example
         #   require "google/cloud/vision"
@@ -453,13 +493,14 @@ module Google
           # @return [Area] The lat/long pairs for `latLongRect`.
           attr_reader :area
 
-          attr_accessor :languages
+          attr_accessor :languages, :aspect_ratios
 
           ##
           # @private Creates a new Context instance.
           def initialize
             @area = Area.new
             @languages = []
+            @aspect_ratios = []
           end
 
           ##
@@ -468,7 +509,7 @@ module Google
           # @return [Boolean]
           #
           def empty?
-            area.empty? && languages.empty?
+            area.empty? && languages.empty? && aspect_ratios.empty?
           end
 
           ##
@@ -479,6 +520,12 @@ module Google
             args = {}
             args[:lat_long_rect] = area.to_grpc unless area.empty?
             args[:language_hints] = languages unless languages.empty?
+            unless aspect_ratios.empty?
+              crop_params = Google::Cloud::Vision::V1::CropHintsParams.new(
+                aspect_ratios: aspect_ratios
+              )
+              args[:crop_hints_params] = crop_params
+            end
             Google::Cloud::Vision::V1::ImageContext.new args
           end
 

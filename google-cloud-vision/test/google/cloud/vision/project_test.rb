@@ -76,7 +76,8 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
-          Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1)
+          Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
         ]
       )
     ]
@@ -136,6 +137,12 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.properties.colors[9].rgb.must_equal "9cd6ff"
     annotation.properties.colors[9].score.must_be_close_to 0.00096750073
     annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+
+    annotation.crop_hints[0].bounds.count.must_equal 4
+    annotation.crop_hints[0].bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+    annotation.crop_hints[0].bounds.map(&:to_a).must_equal [[1, 0], [295, 0], [295, 301], [1, 301]]
+    annotation.crop_hints[0].confidence.must_equal 1.0
+    annotation.crop_hints[0].importance_fraction.must_equal 1.0399999618530273
   end
 
   describe "ImageContext" do
@@ -275,6 +282,33 @@ describe Google::Cloud::Vision::Project, :mock_vision do
       annotation.text.wont_be :nil?
     end
 
+    it "sends when annotating an image with crop hints aspect ratios in context" do
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            crop_hints_params: Google::Cloud::Vision::V1::CropHintsParams.new(
+              aspect_ratios: [1.0]
+            )
+          )
+        )
+      ]
+      mock = Minitest::Mock.new
+      mock.expect :batch_annotate_images, crop_hints_response_grpc, [req, options: default_options]
+
+      vision.service.mocked_service = mock
+      image = vision.image filepath
+      image.context.aspect_ratios = [1.0]
+      annotation = vision.annotate image, crop_hints: true
+      mock.verify
+
+      annotation.wont_be :nil?
+      annotation.crop_hints.wont_be :nil?
+    end
+
     it "sends when annotating an image with location and language hints in context" do
       req = [
         Google::Cloud::Vision::V1::AnnotateImageRequest.new(
@@ -321,22 +355,6 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           face_annotations: [
             face_annotation_response
           ]
-        )
-      ]
-    )
-  end
-
-  def full_response_grpc
-    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
-      responses: [
-        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
-          face_annotations: [face_annotation_response],
-          landmark_annotations: [landmark_annotation_response],
-          logo_annotations: [logo_annotation_response],
-          label_annotations: [label_annotation_response],
-          text_annotations: text_annotation_responses,
-          safe_search_annotation: safe_search_annotation_response,
-          image_properties_annotation: properties_annotation_response
         )
       ]
     )

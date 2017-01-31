@@ -256,6 +256,45 @@ class MockVision < Minitest::Spec
       )
     )
   end
+
+  def full_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          face_annotations: [face_annotation_response],
+          landmark_annotations: [landmark_annotation_response],
+          logo_annotations: [logo_annotation_response],
+          label_annotations: [label_annotation_response],
+          text_annotations: text_annotation_responses,
+          safe_search_annotation: safe_search_annotation_response,
+          image_properties_annotation: properties_annotation_response,
+          crop_hints_annotation: crop_hints_annotation_response
+        )
+      ]
+    )
+  end
+
+  def crop_hints_annotation_response
+    Google::Cloud::Vision::V1::CropHintsAnnotation.new(
+      crop_hints: [
+        Google::Cloud::Vision::V1::CropHint.new(
+          bounding_poly: bounding_poly,
+          confidence: 1.0,
+          importance_fraction: 1.0399999618530273
+        )
+      ]
+    )
+  end
+
+  def crop_hints_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          crop_hints_annotation: crop_hints_annotation_response
+        )
+      ]
+    )
+  end
 end
 
 module MiniTest::Expectations

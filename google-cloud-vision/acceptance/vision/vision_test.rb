@@ -40,6 +40,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :crop_hints?
     end
 
     it "runs all annotations on an HTTPS URL" do
@@ -101,6 +102,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       face = annotation.face
       annotation.face.must_be_kind_of Google::Cloud::Vision::Annotation::Face
@@ -228,6 +230,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       landmark = annotation.landmark
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -281,6 +284,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       logo = annotation.logo
       logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -332,6 +336,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       label = annotation.label
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -375,6 +380,7 @@ describe "Vision", :vision do
       annotation.must_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       text = annotation.text
       text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
@@ -429,6 +435,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
 
       annotation.safe_search.wont_be :nil?
       annotation.safe_search.wont_be :adult?
@@ -473,6 +480,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.must_be :properties?
+      annotation.wont_be :crop_hints?
 
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
@@ -505,6 +513,62 @@ describe "Vision", :vision do
       annotations[0].properties.wont_be :nil?
       annotations[1].properties.wont_be :nil?
       annotations[2].properties.wont_be :nil?
+    end
+  end
+
+  describe "crop_hints" do
+    it "detects crop hints from an image" do
+      annotation = vision.annotate face_image, crop_hints: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.must_be :crop_hints?
+
+      crop_hints = annotation.crop_hints
+      crop_hints.count.must_equal 1
+      crop_hint = crop_hints.first
+      crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+      crop_hint.bounds.count.must_equal 4
+      crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      crop_hint.bounds.map(&:to_a).must_equal [[0, 0], [511, 0], [511, 383], [0, 383]]
+
+      crop_hint.confidence.must_be_kind_of Float
+      crop_hint.confidence.wont_be :zero?
+      crop_hint.importance_fraction.must_be_kind_of Float
+      crop_hint.importance_fraction.wont_be :zero?
+    end
+
+    it "detects crop hints from multiple images" do
+      annotations = vision.annotate text_image,
+                             face_image,
+                             logo_image,
+                             crop_hints: true
+
+      annotations.count.must_equal 3
+      annotations[0].crop_hints.wont_be :nil?
+      annotations[1].crop_hints.wont_be :nil?
+      annotations[2].crop_hints.wont_be :nil?
+    end
+
+    it "detects crop hints from an image with context aspect ratios" do
+      image = vision.image face_image
+      image.context.aspect_ratios = [1.0] # square
+      annotation = vision.annotate image, crop_hints: true
+
+      crop_hints = annotation.crop_hints
+      crop_hints.count.must_equal 1
+      crop_hint = crop_hints.first
+      crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+      crop_hint.bounds.count.must_equal 4
+      crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
     end
   end
 
@@ -638,6 +702,39 @@ describe "Vision", :vision do
         properties.colors[9].rgb.must_equal "9cd6ff"
         properties.colors[9].score.must_be_close_to 0.00096750073
         properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+      end
+    end
+
+    describe "crop_hints" do
+      it "detects crop hints" do
+        crop_hints = vision.image(face_image).crop_hints
+
+        crop_hints.count.must_equal 1
+        crop_hint = crop_hints.first
+        crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+        crop_hint.bounds.count.must_equal 4
+        crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        crop_hint.bounds.map(&:to_a).must_equal [[0, 0], [511, 0], [511, 383], [0, 383]]
+
+        crop_hint.confidence.must_be_kind_of Float
+        crop_hint.confidence.wont_be :zero?
+        crop_hint.importance_fraction.must_be_kind_of Float
+        crop_hint.importance_fraction.wont_be :zero?
+      end
+
+      it "detects crop hints with context aspect ratios" do
+        image = vision.image face_image
+        image.context.aspect_ratios = [1.0] # square
+        crop_hints = image.crop_hints
+
+        crop_hints.count.must_equal 1
+        crop_hint = crop_hints.first
+        crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+        crop_hint.bounds.count.must_equal 4
+        crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
       end
     end
   end

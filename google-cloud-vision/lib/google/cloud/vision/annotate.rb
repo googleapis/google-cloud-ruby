@@ -109,6 +109,8 @@ module Google
         #   feature. Optional.
         # @param [Boolean] properties Whether to perform the image properties
         #   feature (currently, the image's dominant colors.) Optional.
+        # @param [Boolean] crop_hints Whether to perform the crop hints feature.
+        #   Optional.
         #
         # @return [Annotation, Array<Annotation>] The results for all image
         #   detections, returned as a single {Annotation} instance for one
@@ -137,9 +139,9 @@ module Google
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
                      labels: false, text: false, safe_search: false,
-                     properties: false
+                     properties: false, crop_hints: false
           add_requests(images, faces, landmarks, logos, labels, text,
-                       safe_search, properties)
+                       safe_search, properties, crop_hints)
         end
 
         protected
@@ -150,9 +152,9 @@ module Google
         end
 
         def add_requests images, faces, landmarks, logos, labels, text,
-                         safe_search, properties
+                         safe_search, properties, crop_hints
           features = annotate_features(faces, landmarks, logos, labels, text,
-                                       safe_search, properties)
+                                       safe_search, properties, crop_hints)
 
           Array(images).flatten.each do |img|
             i = image(img)
@@ -165,21 +167,33 @@ module Google
         end
 
         def annotate_features faces, landmarks, logos, labels, text,
-                              safe_search, properties
+                              safe_search, properties, crop_hints
           return default_features if default_features?(
-            faces, landmarks, logos, labels, text, safe_search, properties)
+            faces, landmarks, logos, labels, text, safe_search, properties,
+            crop_hints)
 
           faces, landmarks, logos, labels = validate_max_values(
             faces, landmarks, logos, labels)
 
+          f = value_features faces, landmarks, logos, labels
+          f + boolean_features(text, safe_search, properties, crop_hints)
+        end
+
+        def value_features faces, landmarks, logos, labels
           f = []
           f << feature(:FACE_DETECTION, faces) unless faces.zero?
           f << feature(:LANDMARK_DETECTION, landmarks) unless landmarks.zero?
           f << feature(:LOGO_DETECTION, logos) unless logos.zero?
           f << feature(:LABEL_DETECTION, labels) unless labels.zero?
+          f
+        end
+
+        def boolean_features text, safe_search, properties, crop_hints
+          f = []
           f << feature(:TEXT_DETECTION, 1) if text
           f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
           f << feature(:IMAGE_PROPERTIES, 1) if properties
+          f << feature(:CROP_HINTS, 1) if crop_hints
           f
         end
 
@@ -189,10 +203,10 @@ module Google
         end
 
         def default_features? faces, landmarks, logos, labels, text,
-                              safe_search, properties
+                              safe_search, properties, crop_hints
           faces == false && landmarks == false && logos == false &&
             labels == false && text == false && safe_search == false &&
-            properties == false
+            properties == false && crop_hints == false
         end
 
         def default_features
@@ -205,7 +219,8 @@ module Google
                     Google::Cloud::Vision.default_max_labels),
             feature(:TEXT_DETECTION, 1),
             feature(:SAFE_SEARCH_DETECTION, 1),
-            feature(:IMAGE_PROPERTIES, 1)
+            feature(:IMAGE_PROPERTIES, 1),
+            feature(:CROP_HINTS, 1)
           ]
         end
 

@@ -18,6 +18,7 @@ require "google/cloud/vision/annotation/entity"
 require "google/cloud/vision/annotation/text"
 require "google/cloud/vision/annotation/safe_search"
 require "google/cloud/vision/annotation/properties"
+require "google/cloud/vision/annotation/crop_hint"
 
 module Google
   module Cloud
@@ -105,7 +106,7 @@ module Google
         #   annotation.face? #=> true
         #
         def face?
-          faces.count > 0
+          faces.any?
         end
 
         ##
@@ -163,7 +164,7 @@ module Google
         #   annotation.landmark? #=> true
         #
         def landmark?
-          landmarks.count > 0
+          landmarks.any?
         end
 
         ##
@@ -221,7 +222,7 @@ module Google
         #   annotation.logo? #=> true
         #
         def logo?
-          logos.count > 0
+          logos.any?
         end
 
         ##
@@ -279,7 +280,7 @@ module Google
         #   annotation.label? #=> true
         #
         def label?
-          labels.count > 0
+          labels.any?
         end
 
         ##
@@ -321,7 +322,7 @@ module Google
         ##
         # The results of safe_search detection.
         #
-        # @return [SafeSearch]
+        # @return [SafeSearch, nil]
         #
         # @example
         #   require "google/cloud/vision"
@@ -359,7 +360,7 @@ module Google
         ##
         # The results of properties detection.
         #
-        # @return [Properties]
+        # @return [Properties, nil]
         #
         # @example
         #   require "google/cloud/vision"
@@ -395,6 +396,46 @@ module Google
         end
 
         ##
+        # The results of crop hints detection.
+        #
+        # @return [Array<CropHint>]
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   annotation = vision.annotate image, crop_hints: true
+        #   crop_hints = annotation.crop_hints
+        #
+        def crop_hints
+          return [] unless @grpc.crop_hints_annotation
+          grpc_crop_hints = @grpc.crop_hints_annotation.crop_hints
+          @crop_hints ||= Array(grpc_crop_hints).map do |ch|
+            CropHint.from_grpc ch
+          end
+        end
+
+        ##
+        # Whether there is a result for crop hints detection.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   annotation = vision.annotate image, crop_hints: true
+        #   annotation.crop_hints? #=> true
+        #
+        def crop_hints?
+          crop_hints.any?
+        end
+
+        ##
         # Deeply converts object to a hash. All keys will be symbolized.
         #
         # @return [Hash]
@@ -402,16 +443,16 @@ module Google
         def to_h
           { faces: faces.map(&:to_h), landmarks: landmarks.map(&:to_h),
             logos: logos.map(&:to_h), labels: labels.map(&:to_h),
-            text: text.map(&:to_h), safe_search: safe_search.to_h,
-            properties: properties.to_h }
+            text: text.to_h, safe_search: safe_search.to_h,
+            properties: properties.to_h, crop_hints: crop_hints.map(&:to_h) }
         end
 
         # @private
         def to_s
           tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i," \
-                  " text: %s, safe_search: %s, properties: %s)"
+                  " text: %s, safe_search: %s, properties: %s, crop_hints: %s)"
           format tmplt, faces.count, landmarks.count, logos.count, labels.count,
-                 text?, safe_search?, properties?
+                 text?, safe_search?, properties?, crop_hints?
         end
 
         # @private
