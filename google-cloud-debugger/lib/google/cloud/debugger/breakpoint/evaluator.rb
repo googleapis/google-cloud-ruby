@@ -91,6 +91,8 @@ module Google
                 end.enable do
                   begin
                     #{expression}
+                  rescue => e
+                    e.message
                   end
                 end
               """

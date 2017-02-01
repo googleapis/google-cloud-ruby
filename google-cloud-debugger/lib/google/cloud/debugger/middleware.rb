@@ -28,16 +28,16 @@ module Google
             # puts "********debugger state: #{@debugger.state}"
             # puts @debugger.last_exception
 
-            # t = Time.now
+            t = Time.now
             response = @app.call env
 
             # puts "********debugger state: #{@debugger.state}"
             # puts @debugger.last_exception
 
-            # end_t = Time.now - t
-            # f = File.open("debugger_on.txt", "a")
-            # f.puts end_t
-            # f.close
+            end_t = Time.now - t
+            f = File.open("debugger_off.txt", "a")
+            f.puts end_t
+            f.close
 
             # puts Time.now - t
 

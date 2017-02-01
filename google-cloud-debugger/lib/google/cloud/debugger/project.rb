@@ -168,8 +168,8 @@ module Google
 
         def run_agent
           while running?
+            delay = 0
             begin
-              delay = 0
 
               if debuggee.registered?
                 sync_breakpoints = true
@@ -178,7 +178,13 @@ module Google
                 delay = sync_breakpoints ? @register_backoff.succeeded :
                                            @register_backoff.failed
               end
+            rescue => e
+              @last_exception = e
+              delay = @register_backoff.failed
+              # break
+            end
 
+            begin
               if sync_breakpoints
                 sync_result = breakpoint_manager.sync_active_breakpoints
                 if sync_result
@@ -188,13 +194,14 @@ module Google
                   delay = @sync_backoff.failed
                 end
               end
-
-              # sleep delay
-              sleep 3
             rescue => e
               @last_exception = e
+              delay = @sync_backoff.failed
               # break
             end
+
+            sleep delay
+            # sleep 3
           end
         ensure
           @state = :stopped

@@ -32,7 +32,7 @@ module Google
 
         def sync_active_breakpoints
           server_breakpoints = [
-            create_breakpoint("app/controllers/test_controller.rb", 47) do |breakpoint|
+            create_breakpoint(123, "app/controllers/test_controller.rb", 13) do |breakpoint|
               # breakpoint.add_expression 'blah = "modified blah"'
               breakpoint.add_expression '"#{blah} is lame!"'
               # breakpoint.add_expression "$my_global = 'bye'"
@@ -40,11 +40,12 @@ module Google
             end
           ]
 
-          new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
-          activate_breakpoints new_breakpoints unless new_breakpoints.empty?
-          forget_breakpoints server_breakpoints
-
-          signal_tracer
+          synchronize do
+            new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
+            activate_breakpoints new_breakpoints unless new_breakpoints.empty?
+            forget_breakpoints server_breakpoints
+            signal_tracer
+          end
 
           true
         end
@@ -72,9 +73,9 @@ module Google
           end
         end
 
-        def create_breakpoint path, line
+        def create_breakpoint id, path, line
           abs_path = "#{app_root}/#{path}"
-          breakpoint = Breakpoint.new 123, abs_path, line
+          breakpoint = Breakpoint.new id, abs_path, line
 
           yield breakpoint if block_given?
 
@@ -82,13 +83,17 @@ module Google
         end
 
         def complete_breakpoint breakpoint
-          breakpoint = @active_breakpoints.delete breakpoint
-          if breakpoint.nil? || breakpoint.complete?
-            false
-          else
-            breakpoint.complete
-            @completed_breakpoints << breakpoint
-            true
+          synchronize do
+            breakpoint = @active_breakpoints.delete breakpoint
+            signal_tracer
+
+            if breakpoint.nil? || breakpoint.complete?
+              false
+            else
+              breakpoint.complete
+              @completed_breakpoints << breakpoint
+              true
+            end
           end
         end
 
@@ -124,10 +129,7 @@ module Google
         end
 
         def stop
-          synchronize do
-            tracer.stop
-            # clear_breakpoints
-          end
+          tracer.stop
         end
       end
     end
