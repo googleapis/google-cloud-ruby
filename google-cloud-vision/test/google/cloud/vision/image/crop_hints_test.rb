@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :crop_hints, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, crop_hints_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
 

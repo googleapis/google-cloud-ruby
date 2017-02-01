@@ -268,7 +268,8 @@ class MockVision < Minitest::Spec
           text_annotations: text_annotation_responses,
           safe_search_annotation: safe_search_annotation_response,
           image_properties_annotation: properties_annotation_response,
-          crop_hints_annotation: crop_hints_annotation_response
+          crop_hints_annotation: crop_hints_annotation_response,
+          web_annotation: web_annotation_response
         )
       ]
     )
@@ -286,11 +287,59 @@ class MockVision < Minitest::Spec
     )
   end
 
-  def crop_hints_response_grpc
+  def crop_hints_annotation_response_grpc
     Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
         Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           crop_hints_annotation: crop_hints_annotation_response
+        )
+      ]
+    )
+  end
+
+  def web_annotation_response
+    Google::Cloud::Vision::V1::WebAnnotation.new(
+      web_entities: [
+        Google::Cloud::Vision::V1::WebAnnotation::WebEntity.new(
+          entity_id: "/m/019dvv", score: 107.34591674804688, description: "Mount Rushmore National Memorial"
+        )
+      ],
+      full_matching_images: [
+        Google::Cloud::Vision::V1::WebAnnotation::WebImage.new(
+          url: "http://www.example.com/pds/trip_image/350", score: 0.10226666927337646
+        )
+      ],
+      partial_matching_images: [
+        Google::Cloud::Vision::V1::WebAnnotation::WebImage.new(
+          url: "http://img.example.com/img/tcs/t/pict/src/33/26/92/src_33269273.jpg", score: 0.13653333485126495
+        )
+      ],
+      pages_with_matching_images: [
+        Google::Cloud::Vision::V1::WebAnnotation::WebPage.new(
+          url: "https://www.youtube.com/watch?v=wCLdngIgofg", score: 8.114753723144531
+        )
+      ]
+    )
+  end
+
+  def web_annotation_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_annotation: web_annotation_response
+        )
+      ]
+    )
+  end
+
+  def web_annotations_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_annotation: web_annotation_response
+        ),
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_annotation: web_annotation_response
         )
       ]
     )

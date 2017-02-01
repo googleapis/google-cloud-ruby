@@ -441,6 +441,63 @@ module Google
         #   # labels = vision.image("path/to/labels.jpg").labels 5
         #
         attr_accessor :default_max_labels
+
+        ##
+        # The default max results to return for web detection requests.
+        # This is used on {Project#annotate} as well as {Image#web}.
+        #
+        # The default value is 100.
+        #
+        # @example Using the default setting on {Project#annotate}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   Google::Cloud::Vision.default_max_web #=> 100
+        #
+        #   img = "path/to/landmarks.jpg"
+        #   annotation = vision.annotate img, web: true
+        #   # This is the same as calling
+        #   # annotation = vision.annotate img, web: 100
+        #
+        # @example Updating the default setting on {Project#annotate}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   # Set a new default
+        #   Google::Cloud::Vision.default_max_web = 5
+        #
+        #   img = "path/to/landmarks.jpg"
+        #   annotation = vision.annotate img, web: true
+        #   # This is the same as calling
+        #   # annotation = vision.annotate img, web: 5
+        #
+        #
+        # @example Using the default setting on {Image#web}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   Google::Cloud::Vision.default_max_web #=> 100
+        #
+        #   web = vision.image("path/to/landmarks.jpg").web
+        #   # This is the same as calling
+        #   # web = vision.image("path/to/landmarks.jpg").web 100
+        #
+        # @example Updating the default setting on {Image#web}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   # Set a new default
+        #   Google::Cloud::Vision.default_max_web = 5
+        #
+        #   web = vision.image("path/to/landmarks.jpg").web
+        #   # This is the same as calling
+        #   # web = vision.image("path/to/landmarks.jpg").web 5
+        #
+        attr_accessor :default_max_web
       end
 
       # Set the default values.
@@ -449,6 +506,7 @@ module Google
       self.default_max_landmarks = 100
       self.default_max_logos     = 100
       self.default_max_labels    = 100
+      self.default_max_web       = 100
 
       ##
       # Creates a new object for connecting to the Vision service.

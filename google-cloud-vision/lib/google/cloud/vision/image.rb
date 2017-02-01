@@ -357,6 +357,40 @@ module Google
           annotation.crop_hints
         end
 
+        ##
+        # Performs the `WEB_ANNOTATION` feature on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Annotation::Web] The results of web detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   web = image.web
+        #
+        #   entity = web.web_entities.first
+        #   entity.entity_id #=> "/m/019dvv"
+        #   entity.score #=> 107.34591674804688
+        #   entity.description #=> "Mount Rushmore National Memorial"
+        #
+        #   full_matching_image = web.full_matching_images.first
+        #   full_matching_image.url #=> "http://example.com/images/123.jpg"
+        #   full_matching_image.score #=> 0.10226666
+        #
+        #   page_with_matching_images = web.pages_with_matching_images.first
+        #   page_with_matching_images.url #=> "http://example.com/posts/123"
+        #   page_with_matching_images.score #=> 8.114753723144531
+        #
+        def web max_results = Google::Cloud::Vision.default_max_web
+          ensure_vision!
+          annotation = @vision.mark self, web: max_results
+          annotation.web
+        end
+
         # @private
         def to_s
           @to_s ||= begin

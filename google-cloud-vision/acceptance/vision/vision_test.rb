@@ -41,6 +41,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :crop_hints?
+      annotation.must_be :web?
     end
 
     it "runs all annotations on an HTTPS URL" do
@@ -54,6 +55,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :web?
     end
 
     it "runs all annotations on a Storage File" do
@@ -66,6 +68,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :web?
     end
 
     it "runs all annotations on a GCS URL" do
@@ -79,6 +82,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :web?
     end
   end
 
@@ -103,6 +107,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       face = annotation.face
       annotation.face.must_be_kind_of Google::Cloud::Vision::Annotation::Face
@@ -231,6 +236,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       landmark = annotation.landmark
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -285,6 +291,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       logo = annotation.logo
       logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -337,6 +344,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       label = annotation.label
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -381,6 +389,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       text = annotation.text
       text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
@@ -436,6 +445,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       annotation.safe_search.wont_be :nil?
       annotation.safe_search.wont_be :adult?
@@ -481,6 +491,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.must_be :properties?
       annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
@@ -528,6 +539,7 @@ describe "Vision", :vision do
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
       annotation.must_be :crop_hints?
+      annotation.wont_be :web?
 
       crop_hints = annotation.crop_hints
       crop_hints.count.must_equal 1
@@ -569,6 +581,64 @@ describe "Vision", :vision do
       crop_hint.bounds.count.must_equal 4
       crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
+    end
+  end
+
+  describe "web" do
+    it "detects web matches from an image" do
+      annotation = vision.annotate landmark_image, web: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.must_be :web?
+
+      annotation.web.wont_be :nil?
+
+      annotation.web.web_entities.count.must_be :>, 0
+      annotation.web.web_entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+      annotation.web.web_entities[0].entity_id.must_equal "/m/019dvv"
+      annotation.web.web_entities[0].score.must_be_kind_of Float
+      annotation.web.web_entities[0].score.must_be :>, 0.0
+      annotation.web.web_entities[0].description.must_equal "Mount Rushmore National Memorial"
+
+      annotation.web.full_matching_images.count.must_be :>, 0
+      annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+      annotation.web.full_matching_images[0].url.must_be_kind_of String
+      annotation.web.full_matching_images[0].url.wont_be :empty?
+      annotation.web.full_matching_images[0].score.must_be_kind_of Float
+      annotation.web.full_matching_images[0].score.must_be :>, 0.0
+
+      annotation.web.partial_matching_images.count.must_be :>, 0
+      annotation.web.partial_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+      annotation.web.partial_matching_images[0].url.must_be_kind_of String
+      annotation.web.partial_matching_images[0].url.wont_be :empty?
+      annotation.web.partial_matching_images[0].score.must_be_kind_of Float
+      annotation.web.partial_matching_images[0].score.must_be :>, 0.0
+
+      annotation.web.pages_with_matching_images.count.must_be :>, 0
+      annotation.web.pages_with_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
+      annotation.web.pages_with_matching_images[0].url.must_be_kind_of String
+      annotation.web.pages_with_matching_images[0].url.wont_be :empty?
+      annotation.web.pages_with_matching_images[0].score.must_be_kind_of Float
+      annotation.web.pages_with_matching_images[0].score.must_be :>, 0.0
+    end
+
+    it "detects web from multiple images" do
+      annotations = vision.annotate text_image,
+                             face_image,
+                             logo_image,
+                             web: 10
+
+      annotations.count.must_equal 3
+      annotations[0].web.wont_be :nil?
+      annotations[1].web.wont_be :nil?
+      annotations[2].web.wont_be :nil?
     end
   end
 
@@ -735,6 +805,17 @@ describe "Vision", :vision do
         crop_hint.bounds.count.must_equal 4
         crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
         crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
+      end
+    end
+
+    describe "web" do
+      it "detects web matches" do
+        web = vision.image(landmark_image).web 10
+
+        web.web_entities.count.must_equal 10
+        web.full_matching_images.count.must_equal 10
+        web.partial_matching_images.count.must_equal 10
+        web.pages_with_matching_images.count.must_equal 10
       end
     end
   end

@@ -190,6 +190,8 @@ module Google
         #   feature (currently, the image's dominant colors.) Optional.
         # @param [Boolean] crop_hints Whether to perform the crop hints feature.
         #   Optional.
+        # @param [Boolean, Integer] web Whether to perform the web annotation
+        #   feature. Optional.
         #
         # @yield [annotate] A block for requests that involve multiple feature
         #   configurations. See {Annotate#annotate}.
@@ -260,12 +262,12 @@ module Google
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
                      labels: false, text: false, safe_search: false,
-                     properties: false, crop_hints: false
+                     properties: false, crop_hints: false, web: false
           a = Annotate.new self
           a.annotate(*images, faces: faces, landmarks: landmarks, logos: logos,
                               labels: labels, text: text,
                               safe_search: safe_search, properties: properties,
-                              crop_hints: crop_hints)
+                              crop_hints: crop_hints, web: web)
 
           yield a if block_given?
 

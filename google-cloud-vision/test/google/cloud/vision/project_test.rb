@@ -77,7 +77,8 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
-          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
+          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 100)
         ]
       )
     ]
@@ -143,6 +144,27 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.crop_hints[0].bounds.map(&:to_a).must_equal [[1, 0], [295, 0], [295, 301], [1, 301]]
     annotation.crop_hints[0].confidence.must_equal 1.0
     annotation.crop_hints[0].importance_fraction.must_equal 1.0399999618530273
+
+    annotation.web.web_entities.count.must_equal 1
+    annotation.web.web_entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+    annotation.web.web_entities[0].entity_id.must_equal "/m/019dvv"
+    annotation.web.web_entities[0].score.must_equal 107.34591674804688
+    annotation.web.web_entities[0].description.must_equal "Mount Rushmore National Memorial"
+
+    annotation.web.full_matching_images.count.must_equal 1
+    annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+    annotation.web.full_matching_images[0].url.must_equal "http://www.example.com/pds/trip_image/350"
+    annotation.web.full_matching_images[0].score.must_equal 0.10226666927337646
+
+    annotation.web.partial_matching_images.count.must_equal 1
+    annotation.web.partial_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+    annotation.web.partial_matching_images[0].url.must_equal "http://img.example.com/img/tcs/t/pict/src/33/26/92/src_33269273.jpg"
+    annotation.web.partial_matching_images[0].score.must_equal 0.13653333485126495
+
+    annotation.web.pages_with_matching_images.count.must_equal 1
+    annotation.web.pages_with_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
+    annotation.web.pages_with_matching_images[0].url.must_equal "https://www.youtube.com/watch?v=wCLdngIgofg"
+    annotation.web.pages_with_matching_images[0].score.must_equal 8.114753723144531
   end
 
   describe "ImageContext" do
@@ -297,7 +319,7 @@ describe Google::Cloud::Vision::Project, :mock_vision do
         )
       ]
       mock = Minitest::Mock.new
-      mock.expect :batch_annotate_images, crop_hints_response_grpc, [req, options: default_options]
+      mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
       vision.service.mocked_service = mock
       image = vision.image filepath
