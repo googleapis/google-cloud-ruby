@@ -754,12 +754,12 @@ describe "Vision", :vision do
 
       annotation.web.wont_be :nil?
 
-      annotation.web.web_entities.count.must_be :>, 0
-      annotation.web.web_entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
-      annotation.web.web_entities[0].entity_id.must_equal "/m/019dvv"
-      annotation.web.web_entities[0].score.must_be_kind_of Float
-      annotation.web.web_entities[0].score.must_be :>, 0.0
-      annotation.web.web_entities[0].description.must_equal "Mount Rushmore National Memorial"
+      annotation.web.entities.count.must_be :>, 0
+      annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+      annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
+      annotation.web.entities[0].score.must_be_kind_of Float
+      annotation.web.entities[0].score.must_be :>, 0.0
+      annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
 
       annotation.web.full_matching_images.count.must_be :>, 0
       annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
@@ -966,7 +966,7 @@ describe "Vision", :vision do
       it "detects web matches" do
         web = vision.image(landmark_image).web 10
 
-        web.web_entities.count.must_equal 10
+        web.entities.count.must_equal 10
         web.full_matching_images.count.must_equal 10
         web.partial_matching_images.count.must_equal 10
         web.pages_with_matching_images.count.must_equal 10

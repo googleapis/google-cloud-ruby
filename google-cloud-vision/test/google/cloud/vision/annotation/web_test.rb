@@ -22,11 +22,11 @@ describe Google::Cloud::Vision::Annotation::Web, :mock_vision do
   it "knows the given attributes" do
     web.must_be_kind_of Google::Cloud::Vision::Annotation::Web
 
-    web.web_entities.count.must_equal 1
-    web.web_entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
-    web.web_entities[0].entity_id.must_equal "/m/019dvv"
-    web.web_entities[0].score.must_equal 107.34591674804688
-    web.web_entities[0].description.must_equal "Mount Rushmore National Memorial"
+    web.entities.count.must_equal 1
+    web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+    web.entities[0].entity_id.must_equal "/m/019dvv"
+    web.entities[0].score.must_equal 107.34591674804688
+    web.entities[0].description.must_equal "Mount Rushmore National Memorial"
 
     web.full_matching_images.count.must_equal 1
     web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
@@ -48,11 +48,11 @@ describe Google::Cloud::Vision::Annotation::Web, :mock_vision do
     hash = web.to_h
     hash.must_be_kind_of Hash
 
-    hash[:web_entities].count.must_equal 1
-    hash[:web_entities][0].must_be_kind_of Hash
-    hash[:web_entities][0][:entity_id].must_equal "/m/019dvv"
-    hash[:web_entities][0][:score].must_equal 107.34591674804688
-    hash[:web_entities][0][:description].must_equal "Mount Rushmore National Memorial"
+    hash[:entities].count.must_equal 1
+    hash[:entities][0].must_be_kind_of Hash
+    hash[:entities][0][:entity_id].must_equal "/m/019dvv"
+    hash[:entities][0][:score].must_equal 107.34591674804688
+    hash[:entities][0][:description].must_equal "Mount Rushmore National Memorial"
 
     hash[:full_matching_images].count.must_equal 1
     hash[:full_matching_images][0].must_be_kind_of Hash
@@ -71,7 +71,7 @@ describe Google::Cloud::Vision::Annotation::Web, :mock_vision do
   end
 
   it "can convert to a string" do
-    web.to_s.must_equal "(web_entities: 1, full_matching_images: 1, partial_matching_images: 1, pages_with_matching_images: 1)"
+    web.to_s.must_equal "(entities: 1, full_matching_images: 1, partial_matching_images: 1, pages_with_matching_images: 1)"
     web.inspect.must_include web.to_s
   end
 end

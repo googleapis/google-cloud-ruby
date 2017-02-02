@@ -34,7 +34,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
     web = image.web 10
     mock.verify
 
-    web.web_entities.count.must_equal 1
+    web.entities.count.must_equal 1
     web.full_matching_images.count.must_equal 1
     web.partial_matching_images.count.must_equal 1
     web.pages_with_matching_images.count.must_equal 1
@@ -55,7 +55,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
     web = image.web
     mock.verify
 
-    web.web_entities.count.must_equal 1
+    web.entities.count.must_equal 1
     web.full_matching_images.count.must_equal 1
     web.partial_matching_images.count.must_equal 1
     web.pages_with_matching_images.count.must_equal 1

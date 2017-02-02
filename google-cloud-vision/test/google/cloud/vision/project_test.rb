@@ -162,11 +162,11 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.crop_hints[0].confidence.must_equal 1.0
     annotation.crop_hints[0].importance_fraction.must_equal 1.0399999618530273
 
-    annotation.web.web_entities.count.must_equal 1
-    annotation.web.web_entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
-    annotation.web.web_entities[0].entity_id.must_equal "/m/019dvv"
-    annotation.web.web_entities[0].score.must_equal 107.34591674804688
-    annotation.web.web_entities[0].description.must_equal "Mount Rushmore National Memorial"
+    annotation.web.entities.count.must_equal 1
+    annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+    annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
+    annotation.web.entities[0].score.must_equal 107.34591674804688
+    annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
 
     annotation.web.full_matching_images.count.must_equal 1
     annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image

@@ -35,7 +35,7 @@ module Google
         #
         #   web = image.web
         #
-        #   entity = web.web_entities.first
+        #   entity = web.entities.first
         #   entity.entity_id #=> "/m/019dvv"
         #   entity.score #=> 107.34591674804688
         #   entity.description #=> "Mount Rushmore National Memorial"
@@ -64,8 +64,8 @@ module Google
           #
           # @return [Array<Google::Cloud::Vision::Annotation::Web::Entity>]
           #
-          def web_entities
-            @web_entities ||= Array(@grpc.web_entities).map do |e|
+          def entities
+            @entities ||= Array(@grpc.web_entities).map do |e|
               Entity.from_grpc e
             end
           end
@@ -116,7 +116,7 @@ module Google
           #
           def to_h
             {
-              web_entities: web_entities.map(&:to_h),
+              entities: entities.map(&:to_h),
               full_matching_images: full_matching_images.map(&:to_h),
               partial_matching_images: partial_matching_images.map(&:to_h),
               pages_with_matching_images: pages_with_matching_images.map(&:to_h)
@@ -126,10 +126,10 @@ module Google
           # @private
           def to_s
             # Keep console output low by not showing all sub-objects.
-            format "(web_entities: %s, full_matching_images: %s," \
-                   " partial_matching_images: %s," \
-                   " pages_with_matching_images: %s)",
-                   web_entities.count, full_matching_images.count,
+            format "(entities: %i, full_matching_images: %i," \
+                   " partial_matching_images: %i," \
+                   " pages_with_matching_images: %i)",
+                   entities.count, full_matching_images.count,
                    partial_matching_images.count,
                    pages_with_matching_images.count
           end
@@ -161,7 +161,7 @@ module Google
           #
           #   web = image.web
           #
-          #   entity = web.web_entities.first
+          #   entity = web.entities.first
           #   entity.entity_id #=> "/m/019dvv"
           #   entity.score #=> 107.34591674804688
           #   entity.description #=> "Mount Rushmore National Memorial"

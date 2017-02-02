@@ -415,7 +415,7 @@ module Google
         #
         #   web = image.web
         #
-        #   entity = web.web_entities.first
+        #   entity = web.entities.first
         #   entity.entity_id #=> "/m/019dvv"
         #   entity.score #=> 107.34591674804688
         #   entity.description #=> "Mount Rushmore National Memorial"

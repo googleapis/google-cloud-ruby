@@ -86,6 +86,6 @@ describe Google::Cloud::Vision::Annotation, :mock_vision do
 
     hash[:web].wont_be :nil?
     hash[:web].must_be_kind_of Hash
-    hash[:web].keys.must_equal [:web_entities, :full_matching_images, :partial_matching_images, :pages_with_matching_images]
+    hash[:web].keys.must_equal [:entities, :full_matching_images, :partial_matching_images, :pages_with_matching_images]
   end
 end
