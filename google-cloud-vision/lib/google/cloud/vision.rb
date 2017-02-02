@@ -170,7 +170,7 @@ module Google
     # annotations[0].faces.count #=> 1
     # annotations[0].labels.count #=> 4
     # annotations[1].landmarks.count #=> 1
-    # annotations[2].text.words.count #=> 28
+    # annotations[2].text.pages.count #=> 1
     # ```
     #
     # The maximum number of results returned when performing face, landmark,

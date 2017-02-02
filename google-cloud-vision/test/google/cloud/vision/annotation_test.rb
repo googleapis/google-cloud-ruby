@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
-  let(:feature_keys) { [:faces, :landmarks, :logos, :labels, :text, :safe_search, :properties, :crop_hints, :web] }
+  let(:annotation_keys) { [:faces, :landmarks, :logos, :labels, :text, :safe_search, :properties, :crop_hints, :web] }
   let(:entity_keys) { [:mid, :locale, :description, :score, :confidence, :topicality, :bounds, :locations, :properties] }
 
   it "returns a deep hash copy of itself" do
@@ -29,6 +29,7 @@ describe Google::Cloud::Vision::Annotation, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1),
@@ -44,7 +45,7 @@ describe Google::Cloud::Vision::Annotation, :mock_vision do
     mock.verify
 
     hash = annotation.to_h
-    hash.keys.must_equal feature_keys
+    hash.keys.must_equal annotation_keys
 
     hash[:faces].wont_be :nil?
     hash[:faces].must_be_kind_of Array
@@ -68,7 +69,7 @@ describe Google::Cloud::Vision::Annotation, :mock_vision do
 
     hash[:text].wont_be :nil?
     hash[:text].must_be_kind_of Hash
-    hash[:text].keys.must_equal [:text, :locale, :bounds, :words]
+    hash[:text].keys.must_equal [:text, :locale, :bounds, :words, :pages]
 
     hash[:safe_search].wont_be :nil?
     hash[:safe_search].must_be_kind_of Hash

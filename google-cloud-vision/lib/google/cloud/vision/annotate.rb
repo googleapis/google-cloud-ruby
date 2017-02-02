@@ -103,7 +103,10 @@ module Google
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_labels}, or may be provided here.
         #   Optional.
-        # @param [Boolean] text Whether to perform the text (OCR) feature.
+        # @param [Boolean] text Whether to perform the text detection feature
+        #   (OCR for shorter documents with sparse text). Optional.
+        # @param [Boolean] document Whether to perform the document text
+        #   detection feature (OCR for longer documents with dense text).
         #   Optional.
         # @param [Boolean] safe_search Whether to perform the safe search
         #   feature. Optional.
@@ -137,12 +140,13 @@ module Google
         #   annotations[0].faces.count #=> 1
         #   annotations[0].labels.count #=> 4
         #   annotations[1].landmarks.count #=> 1
-        #   annotations[2].text.words.count #=> 28
+        #   annotations[2].text.pages.count #=> 1
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
-                     labels: false, text: false, safe_search: false,
-                     properties: false, crop_hints: false, web: false
-          add_requests(images, faces, landmarks, logos, labels, text,
+                     labels: false, text: false, document: false,
+                     safe_search: false, properties: false, crop_hints: false,
+                     web: false
+          add_requests(images, faces, landmarks, logos, labels, text, document,
                        safe_search, properties, crop_hints, web)
         end
 
@@ -154,9 +158,10 @@ module Google
         end
 
         def add_requests images, faces, landmarks, logos, labels, text,
-                         safe_search, properties, crop_hints, web
+                         document, safe_search, properties, crop_hints, web
           features = annotate_features(faces, landmarks, logos, labels, text,
-                                       safe_search, properties, crop_hints, web)
+                                       document, safe_search, properties,
+                                       crop_hints, web)
 
           Array(images).flatten.each do |img|
             i = image(img)
@@ -168,17 +173,18 @@ module Google
           end
         end
 
-        def annotate_features faces, landmarks, logos, labels, text,
+        def annotate_features faces, landmarks, logos, labels, text, document,
                               safe_search, properties, crop_hints, web
           return default_features if default_features?(
-            faces, landmarks, logos, labels, text, safe_search, properties,
-            crop_hints, web)
+            faces, landmarks, logos, labels, text, document, safe_search,
+            properties, crop_hints, web)
 
           faces, landmarks, logos, labels, web = validate_max_values(
             faces, landmarks, logos, labels, web)
 
           f = value_features faces, landmarks, logos, labels, web
-          f + boolean_features(text, safe_search, properties, crop_hints)
+          f + boolean_features(text, document, safe_search, properties,
+                               crop_hints)
         end
 
         def value_features faces, landmarks, logos, labels, web
@@ -191,9 +197,10 @@ module Google
           f
         end
 
-        def boolean_features text, safe_search, properties, crop_hints
+        def boolean_features text, document, safe_search, properties, crop_hints
           f = []
           f << feature(:TEXT_DETECTION, 1) if text
+          f << feature(:DOCUMENT_TEXT_DETECTION, 1) if document
           f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
           f << feature(:IMAGE_PROPERTIES, 1) if properties
           f << feature(:CROP_HINTS, 1) if crop_hints
@@ -205,11 +212,12 @@ module Google
             type: type, max_results: max_results)
         end
 
-        def default_features? faces, landmarks, logos, labels, text,
+        def default_features? faces, landmarks, logos, labels, text, document,
                               safe_search, properties, crop_hints, web
           faces == false && landmarks == false && logos == false &&
-            labels == false && text == false && safe_search == false &&
-            properties == false && crop_hints == false && web == false
+            labels == false && text == false && document == false &&
+            safe_search == false && properties == false &&
+            crop_hints == false && web == false
         end
 
         def default_features
@@ -221,6 +229,7 @@ module Google
             feature(:LABEL_DETECTION,
                     Google::Cloud::Vision.default_max_labels),
             feature(:TEXT_DETECTION, 1),
+            feature(:DOCUMENT_TEXT_DETECTION, 1),
             feature(:SAFE_SEARCH_DETECTION, 1),
             feature(:IMAGE_PROPERTIES, 1),
             feature(:CROP_HINTS, 1),

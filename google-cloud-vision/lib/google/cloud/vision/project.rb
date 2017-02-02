@@ -182,7 +182,10 @@ module Google
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_labels}, or may be provided here.
         #   Optional.
-        # @param [Boolean] text Whether to perform the text (OCR) feature.
+        # @param [Boolean] text Whether to perform the text detection feature
+        #   (OCR for shorter documents with sparse text). Optional.
+        # @param [Boolean] document Whether to perform the document text
+        #   detection feature (OCR for longer documents with dense text).
         #   Optional.
         # @param [Boolean] safe_search Whether to perform the safe search
         #   feature. Optional.
@@ -246,7 +249,7 @@ module Google
         #   annotations[0].faces.count #=> 1
         #   annotations[0].labels.count #=> 4
         #   annotations[1].landmarks.count #=> 1
-        #   annotations[2].text.words.count #=> 28
+        #   annotations[2].text.pages.count #=> 1
         #
         # @example Maximum result values can also be provided:
         #   require "google/cloud/vision"
@@ -261,11 +264,12 @@ module Google
         #   # ["stone carving", "ancient history", "statue"]
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
-                     labels: false, text: false, safe_search: false,
-                     properties: false, crop_hints: false, web: false
+                     labels: false, text: false, document: false,
+                     safe_search: false, properties: false, crop_hints: false,
+                     web: false
           a = Annotate.new self
           a.annotate(*images, faces: faces, landmarks: landmarks, logos: logos,
-                              labels: labels, text: text,
+                              labels: labels, text: text, document: document,
                               safe_search: safe_search, properties: properties,
                               crop_hints: crop_hints, web: web)
 

@@ -75,6 +75,7 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1),
@@ -105,11 +106,27 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.must_be :text?
     annotation.text.text.must_include "Google Cloud Client for Ruby"
     annotation.text.locale.must_equal "en"
+    # the `text_annotations` model
     annotation.text.words.count.must_equal 28
     annotation.text.words[0].text.must_equal "Google"
     annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
     annotation.text.words[27].text.must_equal "Storage."
     annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+    # the `full_text_annotation` model
+    annotation.text.pages.count.must_equal 1
+    annotation.text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+    annotation.text.pages[0].languages.count.must_equal 1
+    annotation.text.pages[0].languages[0].code.must_equal "en"
+    annotation.text.pages[0].languages[0].confidence.must_equal 0.0
+    annotation.text.pages[0].break_type.must_be :nil?
+    annotation.text.pages[0].wont_be :prefix_break?
+    annotation.text.pages[0].width.must_equal 400
+    annotation.text.pages[0].height.must_equal 80
+    annotation.text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[13, 8], [21, 8], [21, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
 
     annotation.safe_search.wont_be :nil?
     annotation.must_be :safe_search?
@@ -387,7 +404,8 @@ describe Google::Cloud::Vision::Project, :mock_vision do
       responses: [
         Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [face_annotation_response],
-          text_annotations: text_annotation_responses
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response
         )
       ]
     )

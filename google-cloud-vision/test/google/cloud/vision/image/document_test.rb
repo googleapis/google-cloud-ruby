@@ -15,12 +15,12 @@
 require "helper"
 require "pathname"
 
-describe Google::Cloud::Vision::Image, :text, :mock_vision do
+describe Google::Cloud::Vision::Image, :document, :mock_vision do
   let(:filepath) { "acceptance/data/text.png" }
   let(:image)    { vision.image filepath }
 
-  it "detects text" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+  it "detects document text" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -32,7 +32,7 @@ describe Google::Cloud::Vision::Image, :text, :mock_vision do
 
     vision.service.mocked_service = mock
 
-    text = image.text
+    text = image.document
     mock.verify
 
     text.wont_be :nil?

@@ -57,7 +57,7 @@ module Google
       #   image.context.languages = ["en"]
       #
       #   text = image.text
-      #   text.words.count #=> 28
+      #   text.pages.count #=> 1
       #
       class Image
         # Returns the image context for the image, which accepts metadata values
@@ -247,7 +247,8 @@ module Google
         end
 
         ##
-        # Performs the `TEXT_DETECTION` (OCR) feature on the image.
+        # Performs the `TEXT_DETECTION` feature (OCR for shorter documents with
+        # sparse text) on the image.
         #
         # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
         #
@@ -261,14 +262,56 @@ module Google
         #
         #   text = image.text
         #
-        #   text.locale #=> "en"
-        #   text.words.count #=> 28
         #   text.text
         #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #
+        #   text.locale #=> "en"
+        #   text.words.count #=> 28
+        #   text.words[0].text #=> "Google"
+        #   text.words[0].bounds.count #=> 4
+        #   text.words[0].bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #
+        #   # Use `pages` to access a full structural representation
+        #   text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text
+        #   #=> "G"
         #
         def text
           ensure_vision!
           annotation = @vision.mark self, text: true
+          annotation.text
+        end
+
+        ##
+        # Performs the `DOCUMENT_TEXT_DETECTION` feature (OCR for longer
+        # documents with dense text) on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Annotation::Text] The results of document text (OCR)
+        #   detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/text.png"
+        #
+        #   text = image.document
+        #
+        #   text.text
+        #   #=> "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #
+        #   text.words[0].text #=> "Google"
+        #   text.words[0].bounds.count #=> 4
+        #   text.words[0].bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #
+        #   # Use `pages` to access a full structural representation
+        #   text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text
+        #   #=> "G"
+        #
+        def document
+          ensure_vision!
+          annotation = @vision.mark self, document: true
           annotation.text
         end
 

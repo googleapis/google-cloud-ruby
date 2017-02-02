@@ -299,7 +299,8 @@ module Google
         #   text = annotation.text
         #
         def text
-          @text ||= Text.from_grpc(@grpc.text_annotations)
+          @text ||= \
+            Text.from_grpc(@grpc.text_annotations, @grpc.full_text_annotation)
         end
 
         ##
