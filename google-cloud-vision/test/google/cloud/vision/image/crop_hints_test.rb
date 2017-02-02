@@ -19,8 +19,33 @@ describe Google::Cloud::Vision::Image, :crop_hints, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
   let(:image)    { vision.image filepath }
 
-  it "detects crop hints" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
+  it "detects multiple crop hints" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 10)
+    req = [
+      Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+        image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+        features: [feature]
+      )
+    ]
+    mock = Minitest::Mock.new
+    mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
+
+    vision.service.mocked_service = mock
+
+    crop_hints = image.crop_hints 10
+    mock.verify
+
+    crop_hints.count.must_equal 1
+    crop_hint = crop_hints.first
+    crop_hint.bounds.count.must_equal 4
+    crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+    crop_hint.bounds.map(&:to_a).must_equal [[1, 0], [295, 0], [295, 301], [1, 301]]
+    crop_hint.confidence.must_equal 1.0
+    crop_hint.importance_fraction.must_equal 1.0399999618530273
+  end
+
+  it "detects multiple crop hints without specifying a count" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),

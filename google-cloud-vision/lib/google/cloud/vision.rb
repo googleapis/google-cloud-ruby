@@ -443,6 +443,63 @@ module Google
         attr_accessor :default_max_labels
 
         ##
+        # The default max results to return for crop hints detection requests.
+        # This is used on {Project#annotate} as well as {Image#crop_hints}.
+        #
+        # The default value is 100.
+        #
+        # @example Using the default setting on {Project#annotate}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   Google::Cloud::Vision.default_max_crop_hints #=> 100
+        #
+        #   img = "path/to/landmarks.jpg"
+        #   annotation = vision.annotate img, crop_hints: true
+        #   # This is the same as calling
+        #   # annotation = vision.annotate img, crop_hints: 100
+        #
+        # @example Updating the default setting on {Project#annotate}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   # Set a new default
+        #   Google::Cloud::Vision.default_max_crop_hints = 5
+        #
+        #   img = "path/to/landmarks.jpg"
+        #   annotation = vision.annotate img, crop_hints: true
+        #   # This is the same as calling
+        #   # annotation = vision.annotate img, crop_hints: 5
+        #
+        #
+        # @example Using the default setting on {Image#crop_hints}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   Google::Cloud::Vision.default_max_crop_hints #=> 100
+        #
+        #   crop_hints = vision.image("path/to/landmarks.jpg").crop_hints
+        #   # This is the same as calling
+        #   # crop_hints = vision.image("path/to/landmarks.jpg").crop_hints 100
+        #
+        # @example Updating the default setting on {Image#crop_hints}:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   # Set a new default
+        #   Google::Cloud::Vision.default_max_crop_hints = 5
+        #
+        #   crop_hints = vision.image("path/to/landmarks.jpg").crop_hints
+        #   # This is the same as calling
+        #   # crop_hints = vision.image("path/to/landmarks.jpg").crop_hints 5
+        #
+        attr_accessor :default_max_crop_hints
+
+        ##
         # The default max results to return for web detection requests.
         # This is used on {Project#annotate} as well as {Image#web}.
         #
@@ -502,11 +559,12 @@ module Google
 
       # Set the default values.
       # Update the comments documentation when these change.
-      self.default_max_faces     = 100
-      self.default_max_landmarks = 100
-      self.default_max_logos     = 100
-      self.default_max_labels    = 100
-      self.default_max_web       = 100
+      self.default_max_faces      = 100
+      self.default_max_landmarks  = 100
+      self.default_max_logos      = 100
+      self.default_max_labels     = 100
+      self.default_max_crop_hints = 100
+      self.default_max_web        = 100
 
       ##
       # Creates a new object for connecting to the Vision service.

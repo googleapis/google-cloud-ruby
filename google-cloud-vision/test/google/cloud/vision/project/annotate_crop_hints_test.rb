@@ -29,7 +29,7 @@ describe Google::Cloud::Vision::Project, :annotate, :crop_hints, :mock_vision do
     mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.annotate filepath, crop_hints: true
+    annotation = vision.annotate filepath, crop_hints: 1
     mock.verify
 
     crop_hints = annotation.crop_hints
@@ -54,7 +54,7 @@ describe Google::Cloud::Vision::Project, :annotate, :crop_hints, :mock_vision do
     mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.mark filepath, crop_hints: true
+    annotation = vision.mark filepath, crop_hints: 1
     mock.verify
 
     annotation.wont_be :nil?
@@ -73,7 +73,7 @@ describe Google::Cloud::Vision::Project, :annotate, :crop_hints, :mock_vision do
     mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.detect filepath, crop_hints: true
+    annotation = vision.detect filepath, crop_hints: 1
     mock.verify
 
     annotation.wont_be :nil?
@@ -81,7 +81,7 @@ describe Google::Cloud::Vision::Project, :annotate, :crop_hints, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: Google::Cloud::Vision.default_max_crop_hints)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -92,7 +92,7 @@ describe Google::Cloud::Vision::Project, :annotate, :crop_hints, :mock_vision do
     mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.annotate filepath, crop_hints: "totes"
+    annotation = vision.annotate filepath, crop_hints: "9999"
     mock.verify
 
     crop_hints = annotation.crop_hints

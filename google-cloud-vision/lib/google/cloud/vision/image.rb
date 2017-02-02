@@ -112,7 +112,7 @@ module Google
         #   vertex.x #=> 28
         #   vertex.y #=> 40
         #
-        def faces max_results = Google::Cloud::Vision.default_max_faces
+        def faces max_results = Vision.default_max_faces
           ensure_vision!
           annotation = @vision.mark self, faces: max_results
           annotation.faces
@@ -151,7 +151,7 @@ module Google
         #   landmark.description #=> "Mount Rushmore"
         #   landmark.mid #=> "/m/019dvv"
         #
-        def landmarks max_results = Google::Cloud::Vision.default_max_landmarks
+        def landmarks max_results = Vision.default_max_landmarks
           ensure_vision!
           annotation = @vision.mark self, landmarks: max_results
           annotation.landmarks
@@ -190,7 +190,7 @@ module Google
         #   logo.description #=> "Google"
         #   logo.mid #=> "/m/0b34hf"
         #
-        def logos max_results = Google::Cloud::Vision.default_max_logos
+        def logos max_results = Vision.default_max_logos
           ensure_vision!
           annotation = @vision.mark self, logos: max_results
           annotation.logos
@@ -230,7 +230,7 @@ module Google
         #   label.description #=> "stone carving"
         #   label.mid #=> "/m/02wtjj"
         #
-        def labels max_results = Google::Cloud::Vision.default_max_labels
+        def labels max_results = Vision.default_max_labels
           ensure_vision!
           annotation = @vision.mark self, labels: max_results
           annotation.labels
@@ -394,9 +394,9 @@ module Google
         #   crop_hint.confidence #=> 1.0
         #   crop_hint.importance_fraction #=> 1.0399999618530273
         #
-        def crop_hints
+        def crop_hints max_results = Vision.default_max_crop_hints
           ensure_vision!
-          annotation = @vision.mark self, crop_hints: true
+          annotation = @vision.mark self, crop_hints: max_results
           annotation.crop_hints
         end
 
@@ -428,7 +428,7 @@ module Google
         #   page_with_matching_images.url #=> "http://example.com/posts/123"
         #   page_with_matching_images.score #=> 8.114753723144531
         #
-        def web max_results = Google::Cloud::Vision.default_max_web
+        def web max_results = Vision.default_max_web
           ensure_vision!
           annotation = @vision.mark self, web: max_results
           annotation.web

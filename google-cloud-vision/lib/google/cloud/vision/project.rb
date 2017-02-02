@@ -191,8 +191,8 @@ module Google
         #   feature. Optional.
         # @param [Boolean] properties Whether to perform the image properties
         #   feature (currently, the image's dominant colors.) Optional.
-        # @param [Boolean] crop_hints Whether to perform the crop hints feature.
-        #   Optional.
+        # @param [Boolean, Integer] crop_hints Whether to perform the crop hints
+        #   feature. Optional.
         # @param [Boolean, Integer] web Whether to perform the web annotation
         #   feature. Optional.
         #

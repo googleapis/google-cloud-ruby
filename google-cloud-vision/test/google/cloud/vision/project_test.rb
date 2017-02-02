@@ -78,7 +78,7 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
-          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 100)
         ]
       )
@@ -326,7 +326,7 @@ describe Google::Cloud::Vision::Project, :mock_vision do
         Google::Cloud::Vision::V1::AnnotateImageRequest.new(
           image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
           features: [
-            Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 1)
+            Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100)
           ],
           image_context: Google::Cloud::Vision::V1::ImageContext.new(
             crop_hints_params: Google::Cloud::Vision::V1::CropHintsParams.new(

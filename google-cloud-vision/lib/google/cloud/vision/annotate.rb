@@ -112,8 +112,8 @@ module Google
         #   feature. Optional.
         # @param [Boolean] properties Whether to perform the image properties
         #   feature (currently, the image's dominant colors.) Optional.
-        # @param [Boolean] crop_hints Whether to perform the crop hints feature.
-        #   Optional.
+        # @param [Boolean, Integer] crop_hints Whether to perform the crop hints
+        #   feature. Optional.
         # @param [Boolean, Integer] web Whether to perform the web annotation
         #   feature. Optional.
         #
@@ -179,31 +179,30 @@ module Google
             faces, landmarks, logos, labels, text, document, safe_search,
             properties, crop_hints, web)
 
-          faces, landmarks, logos, labels, web = validate_max_values(
-            faces, landmarks, logos, labels, web)
+          faces, landmarks, logos, labels, crop_hints, web = validate_max_args(
+            faces, landmarks, logos, labels, crop_hints, web)
 
-          f = value_features faces, landmarks, logos, labels, web
-          f + boolean_features(text, document, safe_search, properties,
-                               crop_hints)
+          f = value_features faces, landmarks, logos, labels, crop_hints, web
+          f + boolean_features(text, document, safe_search, properties)
         end
 
-        def value_features faces, landmarks, logos, labels, web
+        def value_features faces, landmarks, logos, labels, crop_hints, web
           f = []
           f << feature(:FACE_DETECTION, faces) unless faces.zero?
           f << feature(:LANDMARK_DETECTION, landmarks) unless landmarks.zero?
           f << feature(:LOGO_DETECTION, logos) unless logos.zero?
           f << feature(:LABEL_DETECTION, labels) unless labels.zero?
+          f << feature(:CROP_HINTS, crop_hints) unless crop_hints.zero?
           f << feature(:WEB_ANNOTATION, web) unless web.zero?
           f
         end
 
-        def boolean_features text, document, safe_search, properties, crop_hints
+        def boolean_features text, document, safe_search, properties
           f = []
           f << feature(:TEXT_DETECTION, 1) if text
           f << feature(:DOCUMENT_TEXT_DETECTION, 1) if document
           f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
           f << feature(:IMAGE_PROPERTIES, 1) if properties
-          f << feature(:CROP_HINTS, 1) if crop_hints
           f
         end
 
@@ -232,23 +231,25 @@ module Google
             feature(:DOCUMENT_TEXT_DETECTION, 1),
             feature(:SAFE_SEARCH_DETECTION, 1),
             feature(:IMAGE_PROPERTIES, 1),
-            feature(:CROP_HINTS, 1),
+            feature(:CROP_HINTS, Google::Cloud::Vision.default_max_crop_hints),
             feature(:WEB_ANNOTATION, Google::Cloud::Vision.default_max_web)
           ]
         end
 
-        def validate_max_values faces, landmarks, logos, labels, web
-          faces     = validate_max_value(
+        def validate_max_args faces, landmarks, logos, labels, crop_hints, web
+          faces      = validate_max_value(
             faces, Google::Cloud::Vision.default_max_faces)
-          landmarks = validate_max_value(
+          landmarks  = validate_max_value(
             landmarks, Google::Cloud::Vision.default_max_landmarks)
-          logos     = validate_max_value(
+          logos      = validate_max_value(
             logos, Google::Cloud::Vision.default_max_logos)
-          labels    = validate_max_value(
+          labels     = validate_max_value(
             labels, Google::Cloud::Vision.default_max_labels)
-          web       = validate_max_value(
+          crop_hints = validate_max_value(
+            crop_hints, Google::Cloud::Vision.default_max_crop_hints)
+          web        = validate_max_value(
             web, Google::Cloud::Vision.default_max_web)
-          [faces, landmarks, logos, labels, web]
+          [faces, landmarks, logos, labels, crop_hints, web]
         end
 
         def validate_max_value value, default_value
