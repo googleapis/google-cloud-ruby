@@ -63,7 +63,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users", params: nil, param_types: nil]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users"
+    results = session.execute "SELECT * FROM users", streaming: false
 
     mock.verify
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users", params: nil, param_types: nil]
     session.service.mocked_service = mock
 
-    results = session.query "SELECT * FROM users"
+    results = session.query "SELECT * FROM users", streaming: false
 
     mock.verify
 
@@ -87,7 +87,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE active = @active", params: Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) }), param_types: { "active" => Google::Spanner::V1::Type.new(code: :BOOL) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE active = @active", params: { active: true }
+    results = session.execute "SELECT * FROM users WHERE active = @active", params: { active: true }, streaming: false
 
     mock.verify
 
@@ -99,7 +99,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE age = @age", params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Spanner::V1::Type.new(code: :INT64) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE age = @age", params: { age: 29 }
+    results = session.execute "SELECT * FROM users WHERE age = @age", params: { age: 29 }, streaming: false
 
     mock.verify
 
@@ -111,7 +111,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE score = @score", params: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9) }), param_types: { "score" => Google::Spanner::V1::Type.new(code: :FLOAT64) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE score = @score", params: { score: 0.9 }
+    results = session.execute "SELECT * FROM users WHERE score = @score", params: { score: 0.9 }, streaming: false
 
     mock.verify
 
@@ -125,7 +125,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE updated_at = @updated_at", params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE updated_at = @updated_at", params: { updated_at: timestamp }
+    results = session.execute "SELECT * FROM users WHERE updated_at = @updated_at", params: { updated_at: timestamp }, streaming: false
 
     mock.verify
 
@@ -139,7 +139,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE birthday = @birthday", params: Google::Protobuf::Struct.new(fields: { "birthday" => Google::Protobuf::Value.new(string_value: "2017-01-02") }), param_types: { "birthday" => Google::Spanner::V1::Type.new(code: :DATE) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE birthday = @birthday", params: { birthday: date }
+    results = session.execute "SELECT * FROM users WHERE birthday = @birthday", params: { birthday: date }, streaming: false
 
     mock.verify
 
@@ -151,7 +151,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE name = @name", params: Google::Protobuf::Struct.new(fields: { "name" => Google::Protobuf::Value.new(string_value: "Charlie") }), param_types: { "name" => Google::Spanner::V1::Type.new(code: :STRING) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE name = @name", params: { name: "Charlie" }
+    results = session.execute "SELECT * FROM users WHERE name = @name", params: { name: "Charlie" }, streaming: false
 
     mock.verify
 
@@ -165,7 +165,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE avatar = @avatar", params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: "contents") }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file }
+    results = session.execute "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file }, streaming: false
 
     mock.verify
 
@@ -177,7 +177,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE project_ids = @list", params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [1,2,3] }
+    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [1,2,3] }, streaming: false
 
     mock.verify
 
@@ -189,7 +189,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE project_ids = @list", params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }
+    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }, streaming: false
 
     mock.verify
 
@@ -203,7 +203,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE settings = @dict", params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"env"=>Google::Protobuf::Value.new(string_value: "production")})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: :production } }
+    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: :production } }, streaming: false
 
     mock.verify
 
@@ -217,7 +217,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE settings = @dict", params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9), "env" => Google::Protobuf::Value.new(string_value: "production"), "project_ids" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
+    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }, streaming: false
 
     mock.verify
 
@@ -231,7 +231,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_sql, results_grpc, [session.path, "SELECT * FROM users WHERE settings = @dict", params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])) }]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { } }
+    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { } }, streaming: false
 
     mock.verify
 
@@ -240,6 +240,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.wont_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

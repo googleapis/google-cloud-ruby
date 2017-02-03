@@ -150,6 +150,14 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
+        # @param [Boolean] streaming When `true`, all result are returned as a
+        #   stream. There is no limit on the size of the returned result set.
+        #   However, no individual row in the result set can exceed 100 MiB, and
+        #   no column value can exceed 10 MiB.
+        #
+        #  When `false`, all result are returned in a single reply. This method
+        #  cannot be used to return a result set larger than 10 MiB; if the
+        #  query yields more data than that, the query fails with an error.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -180,9 +188,28 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def execute sql, params: nil
+        # @example Query without streaming results:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   results = db.execute "SELECT * FROM users WHERE id = @user_id",
+        #                        params: { user_id: 1 },
+        #                        streaming: false
+        #
+        #   user_row = results.rows.first
+        #   puts "User #{user_row[:id]} is #{user_row[:name]}""
+        #
+        def execute sql, params: nil, streaming: true
           ensure_service!
-          Results.from_grpc service.execute_sql path, sql, params: params
+          if streaming
+            Results.from_enum service.streaming_execute_sql path, sql,
+                                                            params: params
+          else
+            Results.from_grpc service.execute_sql path, sql, params: params
+          end
         end
         alias_method :query, :execute
 

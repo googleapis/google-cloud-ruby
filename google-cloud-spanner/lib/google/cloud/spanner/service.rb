@@ -286,6 +286,23 @@ module Google
           end
         end
 
+        def streaming_execute_sql session_path, sql, params: nil
+          input_params = nil
+          input_param_types = nil
+          unless params.nil?
+            input_param_pairs = Convert.raw_to_params params
+            input_params = Google::Protobuf::Struct.new(
+              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
+            input_param_types = Hash[
+              input_param_pairs.map { |k, v| [k, v.last] }]
+          end
+          execute do
+            service.execute_streaming_sql \
+              session_path, sql, params: input_params,
+                                 param_types: input_param_types
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end

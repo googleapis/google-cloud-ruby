@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Results, :from_grpc, :mock_spanner do
+describe Google::Cloud::Spanner::Results, :from_enum, :single_response, :mock_spanner do
   let :results_hash do
     {
       metadata: {
@@ -33,30 +33,29 @@ describe Google::Cloud::Spanner::Results, :from_grpc, :mock_spanner do
           ]
         }
       },
-     rows: [{
-        values: [
-          { stringValue: "1" },
-          { stringValue: "Charlie" },
-          { boolValue: true},
-          { stringValue: "29" },
-          { numberValue: 0.9 },
-          { stringValue: "2017-01-29T00:00:10Z" },
-          { stringValue: "1950-01-01" },
-          { stringValue: "aW1hZ2U=" },
-          { listValue: { values: [ { stringValue: "1"},
-                                   { stringValue: "2"},
-                                   { stringValue: "3"} ]}}
-        ]
-      }
-    ]}
+      values: [
+        { stringValue: "1" },
+        { stringValue: "Charlie" },
+        { boolValue: true},
+        { stringValue: "29" },
+        { numberValue: 0.9 },
+        { stringValue: "2017-01-29T00:00:10Z" },
+        { stringValue: "1950-01-01" },
+        { stringValue: "aW1hZ2U=" },
+        { listValue: { values: [ { stringValue: "1"},
+                                 { stringValue: "2"},
+                                 { stringValue: "3"} ]}}
+      ]
+    }
   end
-  let(:results_json) { results_hash.to_json }
-  let(:results_grpc) { Google::Spanner::V1::ResultSet.decode_json results_json }
-  let(:results) { Google::Cloud::Spanner::Results.from_grpc results_grpc }
+  let(:results_enum) do
+    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash.to_json)].to_enum
+  end
+  let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum }
 
   it "exists" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.wont_be :streaming?
+    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -71,8 +70,9 @@ describe Google::Cloud::Spanner::Results, :from_grpc, :mock_spanner do
     results.types[:avatar].must_equal      :BYTES
     results.types[:project_ids].must_equal [:INT64]
 
-    results.rows.count.must_equal 1
-    row = results.rows.first
+    rows = results.rows.to_a # grab them all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
     row.must_be_kind_of Hash
     row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     row[:id].must_equal 1
