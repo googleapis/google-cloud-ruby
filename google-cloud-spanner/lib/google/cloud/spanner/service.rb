@@ -303,6 +303,37 @@ module Google
           end
         end
 
+        def read_table session_path, table_name, columns, id: nil, limit: nil
+          columns.map!(&:to_s)
+          key_set = Google::Spanner::V1::KeySet.new(all: true)
+          unless id.nil?
+            key_list = Array(id).map do |i|
+              Convert.raw_to_value(Array(i)).list_value
+            end
+            key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
+          end
+          execute do
+            service.read \
+              session_path, table_name, columns, key_set, limit: limit
+          end
+        end
+
+        def streaming_read_table session_path, table_name, columns, id: nil,
+                                 limit: nil
+          columns.map!(&:to_s)
+          key_set = Google::Spanner::V1::KeySet.new(all: true)
+          unless id.nil?
+            key_list = Array(id).map do |i|
+              Convert.raw_to_value(Array(i)).list_value
+            end
+            key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
+          end
+          execute do
+            service.streaming_read \
+              session_path, table_name, columns, key_set, limit: limit
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end

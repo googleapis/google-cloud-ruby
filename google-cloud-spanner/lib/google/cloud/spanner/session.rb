@@ -214,6 +214,63 @@ module Google
         alias_method :query, :execute
 
         ##
+        # Read rows from a database table, as a simple alternative to
+        # {#execute}.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   read.
+        # @param [Array<String>] columns The columns of table to be returned for
+        #   each row matching this request.
+        # @param [Object, Array<Object>] id A single, or list of keys to match
+        #   returned data to. Values should have exactly as many elements as
+        #   there are columns in the primary key.
+        # @param [Integer] limit If greater than zero, no more than this number
+        #   of rows will be returned. The default is no limit.
+        # @param [Boolean] streaming When `true`, all result are returned as a
+        #   stream. There is no limit on the size of the returned result set.
+        #   However, no individual row in the result set can exceed 100 MiB, and
+        #   no column value can exceed 10 MiB.
+        #
+        # @return [Google::Cloud::Spanner::Results]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   results = db.read "users", ["id, "name"]
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        # @example Read without streaming results:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   results = db.read "users", ["id, "name"], streaming: false
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        def read table, columns, id: nil, limit: nil, streaming: true
+          ensure_service!
+          if streaming
+            Results.from_enum service.streaming_read_table \
+              path, table, columns, id: id, limit: limit
+          else
+            Results.from_grpc service.read_table \
+              path, table, columns, id: id, limit: limit
+          end
+        end
+
+        ##
         # @private Creates a new Session instance from a
         # Google::Spanner::V1::Session.
         def self.from_grpc grpc, service
