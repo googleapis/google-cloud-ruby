@@ -19,6 +19,7 @@ require "google/cloud/spanner/version"
 require "google/cloud/spanner/v1"
 require "google/cloud/spanner/admin/instance/v1"
 require "google/cloud/spanner/admin/database/v1"
+require "google/cloud/spanner/convert"
 
 module Google
   module Cloud
@@ -265,6 +266,23 @@ module Google
         def delete_session session
           execute do
             service.delete_session session
+          end
+        end
+
+        def execute_sql session_path, sql, params: nil
+          input_params = nil
+          input_param_types = nil
+          unless params.nil?
+            input_param_pairs = Convert.raw_to_params params
+            input_params = Google::Protobuf::Struct.new(
+              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
+            input_param_types = Hash[
+              input_param_pairs.map { |k, v| [k, v.last] }]
+          end
+          execute do
+            service.execute_sql \
+              session_path, sql, params: input_params,
+                                 param_types: input_param_types
           end
         end
 

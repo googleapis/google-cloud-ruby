@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/spanner/results"
+
 module Google
   module Cloud
     module Spanner
@@ -115,6 +117,74 @@ module Google
           service.delete_session path
           true
         end
+
+        ##
+        # Executes a SQL query.
+        #
+        # Arguments can be passed using `params`, Ruby types are mapped to
+        # Spanner types as follows:
+        #
+        # | Spanner     | Ruby           | Notes  |
+        # |-------------|----------------|---|
+        # | `BOOL`      | `true`/`false` | |
+        # | `INT64`     | `Integer`      | |
+        # | `FLOAT64`   | `Float`        | |
+        # | `STRING`    | `String`       | |
+        # | `DATE`      | `Date`         | |
+        # | `TIMESTAMP` | `Time`, `DateTime` | |
+        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        # | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        # See [Data
+        # types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        # @param [String] sql The SQL query string. See [Query
+        #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
+        #
+        #   The SQL query string can contain parameter placeholders. A parameter
+        #   placeholder consists of "@" followed by the parameter name.
+        #   Parameter names consist of any combination of letters, numbers, and
+        #   underscores.
+        # @param [Hash] params SQL parameters for the query string. The
+        #   parameter placeholders, minus the "@", are the the hash keys, and
+        #   the literal values are the hash values. If the query string contains
+        #   something like "WHERE id > @msg_id", then the params must contain
+        #   something like `:msg_id -> 1`.
+        #
+        # @return [Google::Cloud::Spanner::Results]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   results = db.execute "SELECT * FROM users"
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        # @example Query using query parameters:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   results = db.execute "SELECT * FROM users WHERE active = @active",
+        #                        params: { active: true }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        def execute sql, params: nil
+          ensure_service!
+          Results.from_grpc service.execute_sql path, sql, params: params
+        end
+        alias_method :query, :execute
 
         ##
         # @private Creates a new Session instance from a
