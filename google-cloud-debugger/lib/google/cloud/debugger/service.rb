@@ -17,10 +17,10 @@ require "google/cloud/errors"
 require "google/cloud/debugger/version"
 require "google/gax/errors"
 
-# gem "google-api-client"
-# require "google/apis/clouddebugger_v2/classes"
-# require "google/apis/clouddebugger_v2/representations"
-# require "google/apis/clouddebugger_v2/service"
+gem "google-api-client"
+require "google/apis/clouddebugger_v2/classes"
+require "google/apis/clouddebugger_v2/representations"
+require "google/apis/clouddebugger_v2/service"
 
 module Google
   module Cloud
@@ -54,11 +54,30 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        def breakpoint_manager
-          return mocked_breakpoint_manager if mocked_breakpoint_manager
-          @breakpoint_manager ||= BreakpointManager.new
+        def cloud_debugger_service
+          return mocked_debugger_service if mocked_debugger_service
+          return @cloud_debugger_service if @cloud_debugger_service
+          @cloud_debugger_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
+          @cloud_debugger_service.authorization = Google::Auth.get_application_default(
+            'https://clouddebugger.googleapis.com/'
+          )
+          @cloud_debugger_service
         end
-        attr_accessor :mocked_debugger
+        attr_accessor :mocked_debugger_service
+
+        def register_debuggee debuggee_hash
+          request = Google::Apis::ClouddebuggerV2::RegisterDebuggeeRequest.new({
+            debuggee: Google::Apis::ClouddebuggerV2::Debuggee.new(debuggee_hash)
+          })
+          cloud_debugger_service.register_debuggee request
+        end
+
+        def list_debuggee_breakpoints debuggee_id, wait_token
+          cloud_debugger_service.list_controller_debuggee_breakpoints(debuggee_id, {
+            wait_token: wait_token,
+            success_on_timeout: true
+          })
+        end
 
         def insecure?
           credentials == :this_channel_is_insecure

@@ -71,7 +71,15 @@ module Google
 
               wrapped_expression = wrap_expression expression
 
-              binding.eval wrapped_expression
+              eval_result =
+                begin
+                  binding.eval wrapped_expression
+                rescue
+                  "Unable to evaluate expression"
+                end
+
+              eval_result
+
             end
 
             def immutable_yarv_instructions? yarv_instructions, allow_setlocal: false
@@ -87,7 +95,7 @@ module Google
             def wrap_expression expression
               return """
                 tp = TracePoint.new(:call, :c_call) do |tp|
-                  immutable_trace_callback tp
+                  # immutable_trace_callback tp
                 end.enable do
                   begin
                     #{expression}

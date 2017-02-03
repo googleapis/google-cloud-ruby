@@ -22,6 +22,17 @@ module Google
           @breakpoints_cache = breakpoint_manager.active_breakpoints.clone
         end
 
+        def eval_breakpoint breakpoint, call_stack_bindings
+          return if breakpoint.nil? || breakpoint.complete?
+
+          # TODO: move this to a unblocking thread
+          breakpoint_manager.complete_breakpoint breakpoint
+
+          breakpoint.eval_breakpoint call_stack_bindings
+          # TODO: disable tracepoints if all breakpoints complete, in a non-blocking way
+          # disable_tracepoints if breakpoint_manager.all_complete?
+        end
+
         def start
           update_breakpoints_cache
           register_tracepoints

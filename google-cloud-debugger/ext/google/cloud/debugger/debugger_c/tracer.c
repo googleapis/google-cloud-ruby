@@ -164,7 +164,6 @@ line_tracepoint_callback(VALUE tracepoint, void *data)
 {
     VALUE matching_breakpoint;
     VALUE self = (VALUE) data;
-    VALUE breakpoint_manager = rb_iv_get(self, "@breakpoint_manager");
 
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_path = rb_tracearg_path(tracepoint_arg);
@@ -175,16 +174,11 @@ line_tracepoint_callback(VALUE tracepoint, void *data)
 
     matching_breakpoint = match_breakpoints(self, tracepoint_path, tracepoint_lineno);
     if (RTEST(matching_breakpoint)) {
-        rb_funcall(breakpoint_manager, rb_intern("complete_breakpoint"), 1, matching_breakpoint);
         tracepoint_binding = rb_tracearg_binding(tracepoint_arg);
         call_stack_bindings = rb_funcall(tracepoint_binding, rb_intern("callers"), 0);
         rb_ary_pop(call_stack_bindings);
 
-        rb_funcall(matching_breakpoint, rb_intern("eval_call_stack"), 1, call_stack_bindings);
-
-        all_complete = rb_funcall(breakpoint_manager, rb_intern("all_complete?"), 0);
-        if (RTEST(all_complete))
-            rb_disable_tracepoints(self);
+        rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
     }
 
     return;

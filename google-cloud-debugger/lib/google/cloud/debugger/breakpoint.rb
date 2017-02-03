@@ -63,10 +63,11 @@ module Google
         def eval_call_stack call_stack_bindings
           result = Evaluator.eval_call_stack self, call_stack_bindings
 
-          result.each do |x|
-            puts "********************"
-            puts x
-          end
+          # result.each do |x|
+          #   puts "********************"
+          #   puts x
+          #   break
+          # end
 
           complete
         end

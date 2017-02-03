@@ -28,17 +28,41 @@ module Google
           @active_breakpoints = []
 
           @tracer = Debugger::Tracer.new self
+          @wait_token = :init
         end
 
-        def sync_active_breakpoints
-          server_breakpoints = [
-            create_breakpoint(123, "app/controllers/test_controller.rb", 13) do |breakpoint|
-              # breakpoint.add_expression 'blah = "modified blah"'
-              breakpoint.add_expression '"#{blah} is lame!"'
-              # breakpoint.add_expression "$my_global = 'bye'"
-              # breakpoint.add_expression '1/0'
-            end
-          ]
+        def sync_active_breakpoints debuggee_id
+          begin
+            response = service.list_debuggee_breakpoints debuggee_id, @wait_token
+          rescue
+            return false
+          end
+          breakpoints = response.breakpoints || []
+          @wait_token = response.next_wait_token
+          return true if response.wait_expired?
+
+          puts "************************ new breakpoints:"
+          puts breakpoints
+
+          server_breakpoints = breakpoints.map { |b|
+            create_breakpoint(b.id, b.location.path, b.location.path)
+          }
+
+          # server_breakpoints = [
+          #   create_breakpoint(Time.now.to_i, "app/controllers/test_controller.rb", 13) do |breakpoint|
+          #     # breakpoint.add_expression 'blah = "modified blah"'
+          #     # breakpoint.add_expression '"#{blah} is lame!"'
+          #     # breakpoint.add_expression "$my_global = 'bye'"
+          #     breakpoint.add_expression '1/0'
+          #   end,
+          #
+          #   create_breakpoint(Time.now.to_i + 1, "app/controllers/test_controller.rb", 7) do |breakpoint|
+          #     # breakpoint.add_expression 'blah = "modified blah"'
+          #     breakpoint.add_expression '"#{blah} is lame!"'
+          #     # breakpoint.add_expression "$my_global = 'bye'"
+          #     # breakpoint.add_expression '1/0'
+          #   end
+          # ]
 
           synchronize do
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
@@ -46,6 +70,9 @@ module Google
             forget_breakpoints server_breakpoints
             signal_tracer
           end
+
+          puts "active_breakpoints size: #{active_breakpoints.size}"
+          puts active_breakpoints
 
           true
         end

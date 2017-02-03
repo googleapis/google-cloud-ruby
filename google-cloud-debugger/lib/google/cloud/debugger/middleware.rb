@@ -17,9 +17,14 @@ module Google
   module Cloud
     module Debugger
       class Middleware
-        def initialize app, debugger: nil
+        def initialize app, debugger: nil, module_name:nil, module_version: nil,
+                            project: nil, keyfile: nil
           @app = app
-          @debugger = debugger || Debugger.new
+          @debugger = debugger ||
+                      Cloud::Debugger.new({project: project,
+                                           keyfile: keyfile,
+                                           module_name: module_name,
+                                           module_version: module_version})
           @debugger.start
         end
 
@@ -31,17 +36,20 @@ module Google
             t = Time.now
             response = @app.call env
 
-            # puts "********debugger state: #{@debugger.state}"
-            # puts @debugger.last_exception
+            if @debugger.last_exception
+              puts "*******************************************************************************"
+              puts @debugger.last_exception
+              exit @debugger.last_exception
+            end
 
-            end_t = Time.now - t
-            f = File.open("debugger_off.txt", "a")
-            f.puts end_t
-            f.close
+            # end_t = Time.now - t
+            # f = File.open("debugger_on.txt", "a")
+            # f.puts end_t
+            # f.close
 
             # puts Time.now - t
 
-            @debugger.breakpoint_manager.clear_breakpoints
+            # @debugger.breakpoint_manager.clear_breakpoints
 
             response
         end

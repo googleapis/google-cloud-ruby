@@ -20,10 +20,25 @@ module Google
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
           config.respond_to? :google_cloud
-        config.google_cloud.debugger = ::ActiveSupport::OrderedOptions.new
+        config.google_cloud[:debugger] = ::ActiveSupport::OrderedOptions.new
+        config.google_cloud.define_singleton_method :debugger do
+          self[:debugger]
+        end
 
-        debugger = Google::Cloud::Debugger.new
         initializer "Stackdriver.Debugger" do |app|
+          gcp_config = app.config.google_cloud
+          debugger_config = gcp_config[:debugger]
+
+          project_id = debugger_config.project_id || gcp_config.project_id
+          keyfile = debugger_config.keyfile || gcp_config.keyfile
+          module_name = debugger_config.module_name
+          module_version = debugger_config.module_version
+
+          debugger = Google::Cloud::Debugger.new project: project_id,
+                                                 keyfile: keyfile,
+                                                 module_name: module_name,
+                                                 module_version: module_version
+
           if self.class.use_debugger? app.config
             app.middleware.insert_after Rack::ETag,
                                         Google::Cloud::Debugger::Middleware,

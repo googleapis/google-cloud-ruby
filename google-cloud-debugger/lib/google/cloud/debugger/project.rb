@@ -28,10 +28,8 @@ module Google
   module Cloud
     module Debugger
       class Project
-
         include MonitorMixin
 
-        DEFAULT_MAX_QUEUE_SIZE = 100
         CLEANUP_TIMEOUT = 10.0
         WAIT_INTERVAL = 1.0
 
@@ -91,19 +89,27 @@ module Google
             Google::Cloud::Core::Environment.project_id
         end
 
+        def self.default_module_name
+          ENV["DEBUGGER_MODULE_NAME"] ||
+            Google::Cloud::Core::Environment.gae_module_id
+        end
+
+        def self.default_module_version
+          ENV["DEBUGGER_MODULE_VERSION"] ||
+            Google::Cloud::Core::Environment.gae_module_version
+        end
+
         def start
           synchronize do
             if (@thread.nil? || !@thread.alive?) && state == :new
               Debugger::Project.register_for_cleanup self
               @thread = Thread.new do
-                run_agent
-                Debugger::Project.unregister_for_cleanup self
+                  run_agent
+                  Debugger::Project.unregister_for_cleanup self
               end
               @state = :running
             end
           end
-          # caller_file_path = caller[0][/[^:]+/]
-          # tracer.start caller_file_path
         end
         alias_method :attach, :start
 
@@ -169,34 +175,45 @@ module Google
         def run_agent
           while running?
             delay = 0
+            sync_breakpoints = false
             begin
-
               if debuggee.registered?
                 sync_breakpoints = true
               else
                 sync_breakpoints = debuggee.register
-                delay = sync_breakpoints ? @register_backoff.succeeded :
-                                           @register_backoff.failed
+                if sync_breakpoints
+                  puts "Debuggee #{debuggee.id} successfully registered"
+                  # STDOUT.flush
+                  @register_backoff.succeeded
+                  delay = 0
+                else
+                  @register_backoff.failed
+                end
               end
             rescue => e
               @last_exception = e
               delay = @register_backoff.failed
+              puts e
+              puts e.backtrace
               # break
             end
 
             begin
               if sync_breakpoints
-                sync_result = breakpoint_manager.sync_active_breakpoints
+                sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
                 if sync_result
                   delay = 0
                   @sync_backoff.succeeded
                 else
+                  debugee.revoke_registration
                   delay = @sync_backoff.failed
                 end
               end
             rescue => e
               @last_exception = e
               delay = @sync_backoff.failed
+              puts e
+              puts e.backtrace
               # break
             end
 
@@ -207,27 +224,27 @@ module Google
           @state = :stopped
         end
 
-        def self.register_for_cleanup debugger
+        def self.register_for_cleanup actor
           @exit_lock.synchronize do
             unless @cleanup_list
               @cleanup_list = ::Set.new
               at_exit { Debugger::Project.run_cleanup }
             end
-            @cleanup_list.add debugger
+            @cleanup_list.add actor
           end
         end
 
-        def self.unregister_for_cleanup debugger
+        def self.unregister_for_cleanup actor
           @exit_lock.synchronize do
-            @cleanup_list.delete debugger if @cleanup_list
+            @cleanup_list.delete actor if @cleanup_list
           end
         end
 
         def self.run_cleanup
           @exit_lock.synchronize do
             if @cleanup_list
-              @cleanup_list.each do |debugger|
-                debugger.stop! CLEANUP_TIMEOUT, force: true
+              @cleanup_list.each do |actor|
+                actor.stop! CLEANUP_TIMEOUT, force: true
               end
             end
           end
