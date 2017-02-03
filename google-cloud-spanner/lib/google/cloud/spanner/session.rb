@@ -14,6 +14,7 @@
 
 
 require "google/cloud/spanner/results"
+require "google/cloud/spanner/commit"
 
 module Google
   module Cloud
@@ -110,9 +111,9 @@ module Google
         #
         #   db = spanner.session "my-instance", "my-database"
         #
-        #   db.delete
+        #   db.delete_session
         #
-        def delete
+        def delete_session
           ensure_service!
           service.delete_session path
           true
@@ -268,6 +269,213 @@ module Google
             Results.from_grpc service.read_table \
               path, table, columns, id: id, limit: limit
           end
+        end
+
+        # Creates changes to be applied to rows in the database.
+        #
+        # @yield [commit] The block for updating the data.
+        # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.commit do |c|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
+        def commit
+          commit = Commit.new
+          yield commit
+          service.commit path, commit.mutations
+        end
+
+        ##
+        # Inserts or updates rows in a table. If any of the rows already exist,
+        # then its column values are overwritten with the ones provided. Any
+        # column values not explicitly written are preserved.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   modified.
+        # @param [Array<Hash>] rows One or more hash objects with the hash keys
+        #   matching the table's columns, and the hash values matching the
+        #   table's values.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }]
+        #
+        def upsert table, *rows
+          commit = Commit.new
+          commit.upsert table, rows
+          service.commit path, commit.mutations
+        end
+        alias_method :save, :upsert
+
+        ##
+        # Inserts new rows in a table. If any of the rows already exist, the
+        # write or request fails with error `ALREADY_EXISTS`.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   modified.
+        # @param [Array<Hash>] rows One or more hash objects with the hash keys
+        #   matching the table's columns, and the hash values matching the
+        #   table's values.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }]
+        #
+        def insert table, *rows
+          commit = Commit.new
+          commit.insert table, rows
+          service.commit path, commit.mutations
+        end
+
+        ##
+        # Updates existing rows in a table. If any of the rows does not already
+        # exist, the request fails with error `NOT_FOUND`.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   modified.
+        # @param [Array<Hash>] rows One or more hash objects with the hash keys
+        #   matching the table's columns, and the hash values matching the
+        #   table's values.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.update "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }]
+        #
+        def update table, *rows
+          commit = Commit.new
+          commit.update table, rows
+          service.commit path, commit.mutations
+        end
+
+        ##
+        # Inserts or replaces rows in a table. If any of the rows already exist,
+        # it is deleted, and the column values provided are inserted instead.
+        # Unlike #upsert, this means any values not explicitly written become
+        # `NULL`.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   modified.
+        # @param [Array<Hash>] rows One or more hash objects with the hash keys
+        #   matching the table's columns, and the hash values matching the
+        #   table's values.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
+        #                        { id: 2, name: "Harvey",  active: true }]
+        #
+        def replace table, *rows
+          commit = Commit.new
+          commit.replace table, rows
+          service.commit path, commit.mutations
+        end
+
+        ##
+        # Deletes rows from a table. Succeeds whether or not the specified rows
+        # were present.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   modified.
+        # @param [Array<Object>] id One or more primary keys of the rows within
+        #   table to delete.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-database"
+        #
+        #   db.delete "users", [1, 2, 3]
+        #
+        def delete table, *id
+          commit = Commit.new
+          commit.delete table, id
+          service.commit path, commit.mutations
         end
 
         ##

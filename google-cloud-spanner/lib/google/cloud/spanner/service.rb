@@ -334,6 +334,15 @@ module Google
           end
         end
 
+        def commit session_path, mutations = []
+          execute do
+            tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
+              Google::Spanner::V1::TransactionOptions::ReadWrite.new)
+            service.commit \
+              session_path, mutations, single_use_transaction: tx_opts
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end

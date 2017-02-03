@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Session, :delete, :mock_spanner do
+describe Google::Cloud::Spanner::Session, :delete_session, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -26,7 +26,7 @@ describe Google::Cloud::Spanner::Session, :delete, :mock_spanner do
     mock.expect :delete_session, nil, [session_grpc.name]
     session.service.mocked_service = mock
 
-    session.delete
+    session.delete_session
 
     mock.verify
   end
