@@ -268,7 +268,7 @@ module Google
         end
 
         ##
-        # Creates a atabase and starts preparing it to begin serving.
+        # Creates a database and starts preparing it to begin serving.
         #
         # See {Database::Job}.
         #

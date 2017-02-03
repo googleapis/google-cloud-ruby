@@ -250,6 +250,24 @@ module Google
           end
         end
 
+        def get_session session
+          execute do
+            service.get_session session
+          end
+        end
+
+        def create_session database
+          execute do
+            service.create_session database
+          end
+        end
+
+        def delete_session session
+          execute do
+            service.delete_session session
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -280,9 +298,14 @@ module Google
             project, name.to_s)
         end
 
-        def database_path instance_id, dataset_id
+        def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
-            project, instance_id, dataset_id)
+            project, instance_id, database_id)
+        end
+
+        def session_path instance_id, database_id, session_id
+          V1::SpannerClient.session_path(
+            project, instance_id, database_id, session_id)
         end
 
         def execute

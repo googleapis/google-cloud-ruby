@@ -119,6 +119,11 @@ class MockSpanner < Minitest::Spec
       project, name)
   end
 
+  def session_path instance_id, database_id, session_id
+    Google::Cloud::Spanner::V1::SpannerClient.session_path(
+      project, instance_id, database_id, session_id)
+  end
+
   def paged_enum_struct response
     OpenStruct.new page: OpenStruct.new(response: response)
   end

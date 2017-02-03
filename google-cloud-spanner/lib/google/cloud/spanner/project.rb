@@ -18,6 +18,7 @@ require "google/cloud/core/environment"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/instance"
 require "google/cloud/spanner/database"
+require "google/cloud/spanner/session"
 
 module Google
   module Cloud
@@ -334,7 +335,7 @@ module Google
         end
 
         ##
-        # Creates a atabase and starts preparing it to begin serving.
+        # Creates a database and starts preparing it to begin serving.
         #
         # See {Database::Job}.
         #
@@ -372,6 +373,42 @@ module Google
           Database::Job.from_grpc grpc, service
         end
 
+        ##
+        # Creates or retrieves a session. A session can read and/or modify data
+        # in a Cloud Spanner database.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        #   Required.
+        # @param [String] database_id The unique identifier for the database.
+        #   Required.
+        # @param [String] session_id The unique identifier for the database.
+        #   Optional.
+        #
+        # @return [Session, nil] The newly created session if a `session_id` was
+        #   not provided, or an existing session if a `session_id` was provided.
+        #   Can return `nil` if the `session_id` provided is not found.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.session "my-instance", "my-new-database"
+        #
+        #   ...
+        #
+        def session instance_id, database_id, session_id = nil
+          ensure_service!
+          if session_id.nil?
+            grpc = service.create_session \
+              database_path(instance_id, database_id)
+            return Session.from_grpc(grpc, service)
+          end
+          grpc = service.get_session \
+            session_path(instance_id, database_id, session_id)
+          Session.from_grpc grpc, service
+        end
+
         protected
 
         ##
@@ -379,6 +416,16 @@ module Google
         # available.
         def ensure_service!
           fail "Must have active connection to service" unless service
+        end
+
+        def database_path instance_id, database_id
+          Admin::Database::V1::DatabaseAdminClient.database_path(
+            project, instance_id, database_id)
+        end
+
+        def session_path instance_id, database_id, session_id
+          V1::SpannerClient.session_path(
+            project, instance_id, database_id, session_id)
         end
       end
     end
