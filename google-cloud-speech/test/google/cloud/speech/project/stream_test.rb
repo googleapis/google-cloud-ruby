@@ -30,7 +30,7 @@ end
 
 describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   it "streams audio" do
-    stream = speech.stream encoding: :raw, sample_rate: 16000
+    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -42,7 +42,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
 
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000)
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
     streaming_grpc = Google::Cloud::Speech::V1::StreamingRecognitionConfig.new(config: config_grpc)
     init_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(streaming_config: streaming_grpc)
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
@@ -77,7 +77,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams audio over several sends" do
-    stream = speech.stream encoding: :raw, sample_rate: 16000
+    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -91,7 +91,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     file = File.open "acceptance/data/audio.raw", "rb"
 
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000)
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
     streaming_grpc = Google::Cloud::Speech::V1::StreamingRecognitionConfig.new(config: config_grpc)
     init_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(streaming_config: streaming_grpc)
     audio_grpc1 = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: file.read(16000))
@@ -131,7 +131,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams audio with alternatives and interum results" do
-    stream = speech.stream encoding: :raw, sample_rate: 16000, max_alternatives: 10, interim: true
+    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -143,7 +143,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
 
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, max_alternatives: 10)
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000, max_alternatives: 10)
     streaming_grpc = Google::Cloud::Speech::V1::StreamingRecognitionConfig.new(config: config_grpc, interim_results: true)
     init_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(streaming_config: streaming_grpc)
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
@@ -192,7 +192,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams for a single utterance" do
-    stream = speech.stream encoding: :raw, sample_rate: 16000, max_alternatives: 10, interim: true
+    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -205,7 +205,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     stream.on_utterance    { counters[:utterance] += 1 }
     stream.on_error        { |err| puts err.inspect; counters[:error] += 1 }
 
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, max_alternatives: 10)
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000, max_alternatives: 10)
     streaming_grpc = Google::Cloud::Speech::V1::StreamingRecognitionConfig.new(config: config_grpc, interim_results: true)
     init_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(streaming_config: streaming_grpc)
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))

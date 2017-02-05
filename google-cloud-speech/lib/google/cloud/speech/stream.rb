@@ -31,7 +31,9 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = speech.stream encoding: :raw, sample_rate: 16000
+      #   stream = speech.stream encoding: :raw,
+      #                          language: "en-US",
+      #                          sample_rate: 16000
       #
       #   # Stream 5 seconds of audio from the microphone
       #   # Actual implementation of microphone input varies by platform
@@ -94,7 +96,9 @@ module Google
         #
         #   audio = speech.audio "path/to/audio.raw"
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -151,7 +155,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -183,7 +189,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -216,7 +224,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -256,7 +266,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # register callback for when an interim result is returned
         #   stream.on_interim do |final_results, interim_results|
@@ -300,7 +312,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -343,7 +357,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # register callback for when stream has ended.
         #   stream.on_complete do
@@ -389,6 +405,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
         #                          sample_rate: 16000,
         #                          utterance: true
         #
@@ -432,7 +449,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # register callback for when an error is returned
         #   stream.on_error do |error|

@@ -36,14 +36,14 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "can create from a Pathname object" do
-    audio = speech.audio Pathname.new(filepath), encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio Pathname.new(filepath), encoding: :raw, language: "en-US"
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.must_be :content?
     audio.wont_be :url?
     audio.encoding.must_equal :raw
-    audio.sample_rate.must_equal 16000
-    audio.language.must_equal "en"
+    audio.sample_rate.must_be :nil?
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -52,14 +52,14 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "can create from a File object" do
-    audio = speech.audio File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000
+    audio = speech.audio File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.must_be :content?
     audio.wont_be :url?
     audio.encoding.must_equal :raw
     audio.sample_rate.must_equal 16000
-    audio.language.must_be :nil?
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -90,14 +90,14 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
       tmpfile.write File.read(filepath, mode: "rb")
       # tmpfile.rewind
 
-      audio = speech.audio tmpfile, encoding: :raw, sample_rate: 16000
+      audio = speech.audio tmpfile, encoding: :raw, language: "en-US", sample_rate: 16000
 
       audio.must_be_kind_of Google::Cloud::Speech::Audio
       audio.must_be :content?
       audio.wont_be :url?
       audio.encoding.must_equal :raw
       audio.sample_rate.must_equal 16000
-      audio.language.must_be :nil?
+      audio.language.must_equal "en-US"
 
       grpc = audio.to_grpc
       grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -107,14 +107,14 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "can create from a Google Storage URL" do
-    audio = speech.audio "gs://test/file.ext", encoding: :raw, sample_rate: 16000
+    audio = speech.audio "gs://test/file.ext", encoding: :raw, language: "en-US", sample_rate: 16000
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.wont_be :content?
     audio.must_be :url?
     audio.encoding.must_equal :raw
     audio.sample_rate.must_equal 16000
-    audio.language.must_be :nil?
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -124,14 +124,14 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
 
   it "can create from a Storage::File object" do
     gs_img = OpenStruct.new to_gs_url: "gs://test/file.ext"
-    audio = speech.audio gs_img, encoding: :raw, sample_rate: 16000
+    audio = speech.audio gs_img, encoding: :raw, language: "en-US", sample_rate: 16000
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.wont_be :content?
     audio.must_be :url?
     audio.encoding.must_equal :raw
     audio.sample_rate.must_equal 16000
-    audio.language.must_be :nil?
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -140,7 +140,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "can take an Audio object as the source" do
-    orig_audio = speech.audio "gs://test/file.ext", encoding: :raw, sample_rate: 16000
+    orig_audio = speech.audio "gs://test/file.ext", encoding: :raw, language: "en-US", sample_rate: 16000
     audio = speech.audio orig_audio
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
@@ -148,7 +148,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.must_be :url?
     audio.encoding.must_equal :raw
     audio.sample_rate.must_equal 16000
-    audio.language.must_be :nil?
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -157,7 +157,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "preserves attributes from Audio object as the source" do
-    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, sample_rate: 16000, language: "en"
+    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, language: "en-US", sample_rate: 16000
     audio = speech.audio orig_audio
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
@@ -165,7 +165,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.wont_be :url?
     audio.encoding.must_equal :raw
     audio.sample_rate.must_equal 16000
-    audio.language.must_equal "en"
+    audio.language.must_equal "en-US"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -174,15 +174,15 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   end
 
   it "overrides attributes from Audio object as the source" do
-    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, sample_rate: 16000, language: "en"
-    audio = speech.audio orig_audio, encoding: :flac, sample_rate: 48000, language: "es"
+    orig_audio = speech.audio Pathname.new(filepath), encoding: :raw, language: "en-US", sample_rate: 16000
+    audio = speech.audio orig_audio, encoding: :flac, sample_rate: 48000, language: "es-ES"
 
     audio.must_be_kind_of Google::Cloud::Speech::Audio
     audio.must_be :content?
     audio.wont_be :url?
     audio.encoding.must_equal :flac
     audio.sample_rate.must_equal 48000
-    audio.language.must_equal "es"
+    audio.language.must_equal "es-ES"
 
     grpc = audio.to_grpc
     grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
@@ -193,6 +193,6 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
   it "raises when giving an object that is not IO or a Google Storage URL" do
     obj = OpenStruct.new hello: "world"
 
-    expect { speech.audio obj, encoding: :raw, sample_rate: 16000 }.must_raise ArgumentError
+    expect { speech.audio obj, encoding: :raw, language: "en-US", sample_rate: 16000 }.must_raise ArgumentError
   end
 end

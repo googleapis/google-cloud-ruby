@@ -248,11 +248,11 @@ def default_options
 end
 
 def recognition_config
-  Google::Cloud::Speech::V1::RecognitionConfig.new encoding: :LINEAR16, sample_rate_hertz: 16000
+  Google::Cloud::Speech::V1::RecognitionConfig.new encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000
 end
 
 def recognition_config_alternatives
-  Google::Cloud::Speech::V1::RecognitionConfig.new encoding: :LINEAR16, sample_rate_hertz: 16000, max_alternatives: 10
+  Google::Cloud::Speech::V1::RecognitionConfig.new encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000, max_alternatives: 10
 end
 
 def recognition_audio_uri

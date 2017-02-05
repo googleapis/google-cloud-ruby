@@ -56,7 +56,9 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # Or, you can initialize the audio instance with a Google Cloud Storage URI:
@@ -67,7 +69,9 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # Or, with a Google Cloud Storage File object:
@@ -84,7 +88,10 @@ module Google
     #
     # speech = Google::Cloud::Speech.new
     #
-    # audio = speech.audio file, encoding: :raw, sample_rate: 16000
+    # audio = speech.audio file,
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # ## Recognizing speech
@@ -105,9 +112,11 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
-    # results = audio.recognize
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     #
+    # results = audio.recognize
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"
     # result.confidence #=> 0.9826789498329163
@@ -124,9 +133,11 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
-    # job = audio.recognize_job
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     #
+    # job = audio.recognize_job
     # job.done? #=> false
     # job.reload!
     # job.done? #=> true
@@ -149,7 +160,9 @@ module Google
     #
     # audio = speech.audio "path/to/audio.raw"
     #
-    # stream = audio.stream encoding: :raw, sample_rate: 16000
+    # stream = audio.stream encoding: :raw,
+    #                       language: "en-US",
+    #                       sample_rate: 16000
     #
     # # Stream 5 seconds of audio from the microphone
     # # Actual implementation of microphone input varies by platform
@@ -202,7 +215,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
                    client_config: nil

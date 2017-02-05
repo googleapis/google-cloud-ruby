@@ -23,14 +23,14 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
   let(:audio) { Google::Cloud::Speech::Audio.from_source filepath, speech }
 
   it "recognizes audio" do
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, language_code: "en")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     audio.encoding = :raw
     audio.sample_rate = 16000
-    audio.language = "en"
+    audio.language = "en-US"
 
     speech.service.mocked_service = mock
     results = audio.recognize
@@ -43,7 +43,7 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
   end
 
   it "recognizes audio with language (Symbol)" do
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, language_code: "en")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]

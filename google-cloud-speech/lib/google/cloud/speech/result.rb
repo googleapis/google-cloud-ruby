@@ -46,7 +46,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #   results = audio.recognize
       #
       #   result = results.first
@@ -94,7 +96,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #   results = audio.recognize
         #
         #   result = results.first
@@ -150,7 +154,9 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = speech.stream encoding: :raw, sample_rate: 16000
+      #   stream = speech.stream encoding: :raw,
+      #                          language: "en-US",
+      #                          sample_rate: 16000
       #
       #   # register callback for when an interim result is returned
       #   stream.on_interim do |final_results, interim_results|

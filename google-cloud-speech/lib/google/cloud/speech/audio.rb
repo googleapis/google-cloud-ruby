@@ -39,9 +39,11 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
-      #   results = audio.recognize
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #
+      #   results = audio.recognize
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
       #   result.confidence #=> 0.9826789498329163
@@ -78,9 +80,37 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        language: "en-US",
+        #                        sample_rate: 16000
+        #
+        #   audio.encoding = :raw
+        #   audio.encoding #=> :raw
         #
         attr_accessor :encoding
+
+        ##
+        # The language of the supplied audio as a
+        # [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        # "en-US" for English (United States), "en-GB" for English (United
+        # Kingdom), "fr-FR" for French (France). See [Language
+        # Support](https://cloud.google.com/speech/docs/languages) for a list of
+        # the currently supported language codes.
+        #
+        # @return [String,Symbol]
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw,
+        #                        sample_rate: 16000
+        #
+        #   audio.language = "en-US"
+        #   audio.language #=> "en-US"
+        #
+        attr_accessor :language
 
         ##
         # Sample rate in Hertz of the audio data to be recognized. Valid values
@@ -96,29 +126,13 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US"
+        #
+        #   audio.sample_rate = 16000
+        #   audio.sample_rate #=> 16000
         #
         attr_accessor :sample_rate
-
-        ##
-        # The language of the supplied audio as a
-        # [BCP-47](https://tools.ietf.org/html/bcp47) language code.
-        # If not specified, the language defaults to "en-US".  See [Language
-        # Support](https://cloud.google.com/speech/docs/languages)
-        # for a list of the currently supported language codes.
-        #
-        # @return [String,Symbol]
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000,
-        #                        language: :en
-        #
-        attr_accessor :language
 
         ##
         # @private Creates a new Audio instance.
@@ -177,9 +191,11 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   results = audio.recognize
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
+        #   results = audio.recognize
         #   result = results.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
         #   result.confidence #=> 0.9826789498329163
@@ -224,9 +240,11 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   job = audio.recognize_job
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
+        #   job = audio.recognize_job
         #   job.done? #=> false
         #   job.reload!
         #   job.done? #=> true

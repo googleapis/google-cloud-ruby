@@ -38,7 +38,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   job = speech.recognize_job "path/to/audio.raw",
-      #                              encoding: :raw, sample_rate: 16000
+      #                              encoding: :raw,
+      #                              language: "en-US",
+      #                              sample_rate: 16000
       #
       #   job.done? #=> false
       #   job.reload! # API call
@@ -68,7 +70,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         #   job.done? #=> true
         #   results = job.results
@@ -92,7 +96,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         #   job.done? #=> false
         #
@@ -110,7 +116,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         #   job.done? #=> false
         #   job.reload! # API call
@@ -132,7 +140,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         #   job.done? #=> false
         #   job.wait_until_done!

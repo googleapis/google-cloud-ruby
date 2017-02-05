@@ -24,14 +24,14 @@ describe Google::Cloud::Speech::Audio, :recognize_job, :mock_speech do
                      Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
 
   it "recognizes audio job" do
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, language_code: "en")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
     mock.expect :long_running_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
 
     audio.encoding = :raw
     audio.sample_rate = 16000
-    audio.language = "en"
+    audio.language = "en-US"
 
     speech.service.mocked_service = mock
     job = audio.recognize_job
@@ -42,7 +42,7 @@ describe Google::Cloud::Speech::Audio, :recognize_job, :mock_speech do
   end
 
   it "recognizes audio job with language (Symbol)" do
-    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate_hertz: 16000, language_code: "en")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
     mock.expect :long_running_recognize, job_grpc, [config_grpc, audio_grpc, options: default_options]
