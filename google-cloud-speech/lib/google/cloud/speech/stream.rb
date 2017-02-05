@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 require "google/cloud/speech/result"
 require "monitor"
 require "forwardable"
@@ -116,7 +116,7 @@ module Google
           start # lazily call start if the stream wasn't started yet
           # TODO: do not send if stopped?
           synchronize do
-            req = V1beta1::StreamingRecognizeRequest.new(
+            req = V1::StreamingRecognizeRequest.new(
               audio_content: bytes.encode("ASCII-8BIT"))
             @request_queue.push req
           end
@@ -254,9 +254,9 @@ module Google
         end
 
         # @private add a result object, and call the callbacks
-        def add_result!result_index, result_grpc
+        def add_result! result_grpc
           synchronize do
-            @results[result_index] = Result.from_grpc result_grpc
+            @results << Result.from_grpc(result_grpc)
           end
           # callback for final result received
           result!
@@ -266,88 +266,6 @@ module Google
         def result!
           synchronize do
             @callbacks[:result].each { |c| c.call results }
-          end
-        end
-
-        ##
-        # Register to be notified when speech has been detected in the audio
-        # stream.
-        #
-        # @yield [callback] The block to be called when speech has been detected
-        #   in the audio stream.
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when speech has started.
-        #   stream.on_speech_start do
-        #     puts "Speech has started."
-        #   end
-        #
-        #   # Stream 5 seconds of audio from the microphone
-        #   # Actual implementation of microphone input varies by platform
-        #   5.times do
-        #     stream.send MicrophoneInput.read(32000)
-        #   end
-        #
-        #   stream.stop
-        #
-        def on_speech_start &block
-          synchronize do
-            @callbacks[:speech_start] << block
-          end
-        end
-
-        # @private returns single final result once :END_OF_UTTERANCE is
-        # received.
-        def speech_start!
-          synchronize do
-            @callbacks[:speech_start].each(&:call)
-          end
-        end
-
-        ##
-        # Register to be notified when speech has ceased to be detected in the
-        # audio stream.
-        #
-        # @yield [callback] The block to be called when speech has ceased to be
-        #   detected in the audio stream.
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when speech has ended.
-        #   stream.on_speech_end do
-        #     puts "Speech has ended."
-        #   end
-        #
-        #   # Stream 5 seconds of audio from the microphone
-        #   # Actual implementation of microphone input varies by platform
-        #   5.times do
-        #     stream.send MicrophoneInput.read(32000)
-        #   end
-        #
-        #   stream.stop
-        #
-        def on_speech_end &block
-          synchronize do
-            @callbacks[:speech_end] << block
-          end
-        end
-
-        # @private yields single final result once :END_OF_UTTERANCE is
-        # received.
-        def speech_end!
-          synchronize do
-            @callbacks[:speech_end].each(&:call)
           end
         end
 
@@ -365,9 +283,9 @@ module Google
         #
         #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
-        #   # register callback for when audio has ended.
+        #   # register callback for when stream has ended.
         #   stream.on_complete do
-        #     puts "Audio has ended."
+        #     puts "Stream has ended."
         #   end
         #
         #   # Stream 5 seconds of audio from the microphone
@@ -384,9 +302,7 @@ module Google
           end
         end
 
-        # @private yields all final results once the recognition is completed
-        # depending on how the Stream is configured, this can be on the
-        # reception of :END_OF_AUDIO or :END_OF_UTTERANCE.
+        # @private yields when the end of the audio stream has been reached.
         def complete!
           synchronize do
             @callbacks[:complete].each(&:call)
@@ -432,7 +348,7 @@ module Google
           end
         end
 
-        # @private returns single final result once :END_OF_UTTERANCE is
+        # @private returns single final result once :END_OF_SINGLE_UTTERANCE is
         # received.
         def utterance!
           synchronize do
@@ -487,12 +403,16 @@ module Google
           response_enum.each do |response|
             begin
               background_results response
-              background_endpointer response.endpointer_type
+              background_event_type response.speech_event_type
               background_error response.error
             rescue => e
               error! Google::Cloud::Error.from_error(e)
             end
           end
+        rescue => e
+          error! Google::Cloud::Error.from_error(e)
+        ensure
+          complete!
           Thread.pass
         end
 
@@ -501,10 +421,9 @@ module Google
           return unless response.results && response.results.any?
 
           final_grpc, interim_grpcs = *response.results
-          if final_grpc && final_grpc.is_final
-            add_result! response.result_index, final_grpc
-          else
+          unless final_grpc && final_grpc.is_final
             # all results are interim
+            final_grpc = nil
             interim_grpcs = response.results
           end
 
@@ -512,23 +431,17 @@ module Google
           interim_results = Array(interim_grpcs).map do |grpc|
             InterimResult.from_grpc grpc
           end
+
           # callback for interim results received
           interim! interim_results if interim_results.any?
+          # callback for final results received, if any
+          add_result! final_grpc if final_grpc
         end
 
-        def background_endpointer endpointer
-          # Handle the endpointer by raising events
-          if endpointer == :START_OF_SPEECH
-            speech_start!
-          elsif endpointer == :END_OF_SPEECH
-            speech_end!
-          elsif endpointer == :END_OF_AUDIO
-            # TODO: do we automatically call stop here?
-            complete!
-          elsif endpointer == :END_OF_UTTERANCE
-            # TODO: do we automatically call stop here?
-            utterance!
-          end
+        def background_event_type event_type
+          # Handle the event_type by raising events
+          # TODO: do we automatically call stop here?
+          utterance! if event_type == :END_OF_SINGLE_UTTERANCE
         end
 
         def background_error error

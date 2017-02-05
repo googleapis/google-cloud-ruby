@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 
 module Google
   module Cloud
@@ -78,9 +78,6 @@ module Google
           @grpc.response.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
-          # TODO: Ensure we are raising the proper error
-          # TODO: Ensure GRPC behavior here, is an error already raised?
-          # raise @grpc.error
         end
 
         ##
@@ -146,7 +143,7 @@ module Google
         end
 
         ##
-        # @private New Result::Job from a Google::Longrunning::Operation
+        # @private New Result::Job from a Google::Gax::Operation
         # object.
         def self.from_grpc grpc
           new.tap do |job|

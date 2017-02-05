@@ -85,8 +85,10 @@ module Google
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: "gax",
-              app_version: Google::Gax::VERSION
+              app_name: nil,
+              app_version: nil,
+              lib_name: nil,
+              lib_version: ""
             # These require statements are intentionally placed here to initialize
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
@@ -102,12 +104,21 @@ module Google
               client_config: client_config,
               timeout: timeout,
               app_name: app_name,
-              app_version: app_version
+              app_version: app_version,
+              lib_name: lib_name,
+              lib_version: lib_version,
             )
 
-            google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
-              "ruby/#{RUBY_VERSION}".freeze
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            google_api_client = "gl-ruby/#{RUBY_VERSION}"
+            google_api_client << " #{lib_name}/#{lib_version}" if lib_name
+            google_api_client << " gapic/ gax/#{Google::Gax::VERSION}"
+            google_api_client << " grpc/#{GRPC::VERSION}"
+            google_api_client.freeze
+
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "speech_client_config.json"

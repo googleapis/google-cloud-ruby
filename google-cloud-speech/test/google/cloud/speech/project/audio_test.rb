@@ -30,7 +30,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end
@@ -46,7 +46,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_equal "en"
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end
@@ -62,7 +62,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end
@@ -78,7 +78,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end
@@ -100,7 +100,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
       audio.language.must_be :nil?
 
       grpc = audio.to_grpc
-      grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+      grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
       grpc.audio_source.must_equal :content
       grpc.content.must_equal File.read(filepath, mode: "rb")
     end
@@ -117,7 +117,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :uri
     grpc.uri.must_equal "gs://test/file.ext"
   end
@@ -134,7 +134,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :uri
     grpc.uri.must_equal "gs://test/file.ext"
   end
@@ -151,7 +151,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_be :nil?
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :uri
     grpc.uri.must_equal "gs://test/file.ext"
   end
@@ -168,7 +168,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_equal "en"
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end
@@ -185,7 +185,7 @@ describe Google::Cloud::Speech::Project, :audio, :mock_speech do
     audio.language.must_equal "es"
 
     grpc = audio.to_grpc
-    grpc.must_be_kind_of Google::Cloud::Speech::V1beta1::RecognitionAudio
+    grpc.must_be_kind_of Google::Cloud::Speech::V1::RecognitionAudio
     grpc.audio_source.must_equal :content
     grpc.content.must_equal File.read(filepath, mode: "rb")
   end

@@ -484,8 +484,8 @@ module Google
                    utterance: nil, interim: nil
           ensure_service!
 
-          grpc_req = V1beta1::StreamingRecognizeRequest.new(
-            streaming_config: V1beta1::StreamingRecognitionConfig.new(
+          grpc_req = V1::StreamingRecognizeRequest.new(
+            streaming_config: V1::StreamingRecognitionConfig.new(
               {
                 config: audio_config(encoding: convert_encoding(encoding),
                                      sample_rate: sample_rate,
@@ -507,16 +507,16 @@ module Google
         def audio_config encoding: nil, sample_rate: nil, language: nil,
                          max_alternatives: nil, profanity_filter: nil,
                          phrases: nil
-          context = nil
-          context = V1beta1::SpeechContext.new(phrases: phrases) if phrases
+          contexts = nil
+          contexts = [V1::SpeechContext.new(phrases: phrases)] if phrases
           language = String(language) unless language.nil?
-          V1beta1::RecognitionConfig.new({
+          V1::RecognitionConfig.new({
             encoding: convert_encoding(encoding),
-            sample_rate: sample_rate,
+            sample_rate_hertz: sample_rate,
             language_code: language,
             max_alternatives: max_alternatives,
             profanity_filter: profanity_filter,
-            speech_context: context
+            speech_contexts: contexts
           }.delete_if { |_, v| v.nil? })
         end
 

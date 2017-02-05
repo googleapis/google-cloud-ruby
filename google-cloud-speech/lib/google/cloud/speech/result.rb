@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 
 module Google
   module Cloud
@@ -25,7 +25,7 @@ module Google
       #
       # See {Project#recognize} and {Job#results}.
       #
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.SpeechRecognitionResult
       #   SpeechRecognitionResult
       #
       # @attr_reader [String] transcript Transcript text representing the words
@@ -124,9 +124,9 @@ module Google
       #
       # See {Project#stream} and {Stream#on_interim}.
       #
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.SpeechRecognitionResult
       #   SpeechRecognitionResult
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.StreamingRecognitionResult
       #   StreamingRecognitionResult
       #
       # @attr_reader [String] transcript Transcript text representing the words

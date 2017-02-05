@@ -47,7 +47,7 @@ module Google
       #   result.confidence #=> 0.9826789498329163
       #
       class Audio
-        # @private The V1beta1::RecognitionAudio object.
+        # @private The V1::RecognitionAudio object.
         attr_reader :grpc
         # @private The Project object.
         attr_reader :speech
@@ -123,7 +123,7 @@ module Google
         ##
         # @private Creates a new Audio instance.
         def initialize
-          @grpc = V1beta1::RecognitionAudio.new
+          @grpc = V1::RecognitionAudio.new
         end
 
         ##

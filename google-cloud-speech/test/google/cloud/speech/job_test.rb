@@ -16,14 +16,14 @@ require "helper"
 
 describe Google::Cloud::Speech::Job, :mock_speech do
   let(:ops_mock) { Minitest::Mock.new }
-  let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
+  let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}}" }
   let(:incomplete_grpc) { Google::Longrunning::Operation.decode_json incomplete_json }
-  let(:incomplete_gax) { Google::Gax::Operation.new incomplete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
+  let(:incomplete_gax) { Google::Gax::Operation.new incomplete_grpc, ops_mock, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
-  let(:results_grpc) { Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse.decode_json results_json }
-  let(:complete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}" }
+  let(:results_grpc) { Google::Cloud::Speech::V1::LongRunningRecognizeResponse.decode_json results_json }
+  let(:complete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}" }
   let(:complete_grpc) { Google::Longrunning::Operation.decode_json complete_json }
-  let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
+  let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
 
   it "refreshes to get final results" do
     job = Google::Cloud::Speech::Job.from_grpc incomplete_gax

@@ -22,7 +22,7 @@ describe "Asynchonous Recognition", :speech do
   let(:gcs_url)  { gcs_file.to_gs_url }
 
   it "recognizes audio from local file path" do
-    job = speech.recognize_job filepath, encoding: :raw, sample_rate: 16000
+    job = speech.recognize_job filepath, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
@@ -37,7 +37,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from local file object" do
-    job = speech.recognize_job File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000
+    job = speech.recognize_job File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
@@ -52,7 +52,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from GCS URL" do
-    job = speech.recognize_job gcs_url, encoding: :raw, sample_rate: 16000
+    job = speech.recognize_job gcs_url, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
@@ -67,7 +67,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Storage File URL" do
-    job = speech.recognize_job gcs_file, encoding: :raw, sample_rate: 16000
+    job = speech.recognize_job gcs_file, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
@@ -83,7 +83,7 @@ describe "Asynchonous Recognition", :speech do
 
   it "recognizes audio from Audio object" do
     audio = speech.audio gcs_url
-    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
@@ -98,7 +98,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes" do
-    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en-US"
     job = speech.recognize_job audio
 
     job.must_be_kind_of Google::Cloud::Speech::Job
@@ -114,7 +114,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
-    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: :en
+    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en-US".to_sym
     job = speech.recognize_job audio
 
     job.must_be_kind_of Google::Cloud::Speech::Job
@@ -130,8 +130,8 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, overriding attributes" do
-    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es"
-    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es-ES"
+    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
