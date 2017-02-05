@@ -39,8 +39,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    # counters[:speech_start].must_equal 1
-    # counters[:speech_end].must_equal 1
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
 
@@ -50,9 +48,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
 
     responses = [
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"START_OF_SPEECH\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_SPEECH\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_AUDIO\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}],\"isFinal\":true}]}")
     ]
 
@@ -63,7 +58,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.stop
 
-    sleep 0.1 # give callbacks time to fire
+    stream.wait_until_complete!
 
     stub.request_enum.to_a.must_equal [init_grpc, audio_grpc]
 
@@ -77,8 +72,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     counters[:interim].must_equal 0
     counters[:result].must_equal 1
-    # counters[:speech_start].must_equal 1
-    # counters[:speech_end].must_equal 1
     counters[:complete].must_equal 1
     counters[:utterance].must_equal 0
   end
@@ -93,8 +86,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    # stream.on_speech_start { counters[:speech_start] += 1 }
-    # stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
 
@@ -108,9 +99,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     audio_grpc3 = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: file.read(16000))
 
     responses = [
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"START_OF_SPEECH\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_SPEECH\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_AUDIO\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}],\"isFinal\":true}]}")
     ]
 
@@ -124,7 +112,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.stop
 
-    sleep 0.1 # give callbacks time to fire
+    stream.wait_until_complete!
 
     stub.request_enum.to_a.must_equal [init_grpc, audio_grpc1, audio_grpc2, audio_grpc3]
 
@@ -138,8 +126,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     counters[:interim].must_equal 0
     counters[:result].must_equal 1
-    # counters[:speech_start].must_equal 1
-    # counters[:speech_end].must_equal 1
     counters[:complete].must_equal 1
     counters[:utterance].must_equal 0
   end
@@ -154,8 +140,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    # stream.on_speech_start { counters[:speech_start] += 1 }
-    # stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
 
@@ -165,7 +149,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
 
     responses = [
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"START_OF_SPEECH\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how\"}],\"stability\":0.0099999998}]}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old\"}],\"stability\":0.0099999998}]}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is\"}],\"stability\":0.0099999998}]}"),
@@ -180,8 +163,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is\"}],\"stability\":0.89999998},{\"alternatives\":[{\"transcript\":\" the Brooklyn Bridge\"}],\"stability\":0.0099999998}]}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn\"}],\"stability\":0.89999998},{\"alternatives\":[{\"transcript\":\" Bridge\"}],\"stability\":0.0099999998}]}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\"}],\"stability\":0.89999998}]}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_SPEECH\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_AUDIO\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}],\"isFinal\":true}]}")
     ]
 
@@ -192,7 +173,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.stop
 
-    sleep 0.1 # give callbacks time to fire
+    stream.wait_until_complete!
 
     stub.request_enum.to_a.must_equal [init_grpc, audio_grpc]
 
@@ -206,8 +187,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     counters[:interim].must_equal 14
     counters[:result].must_equal 1
-    # counters[:speech_start].must_equal 1
-    # counters[:speech_end].must_equal 1
     counters[:complete].must_equal 1
     counters[:utterance].must_equal 0
   end
@@ -222,8 +201,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    # stream.on_speech_start { counters[:speech_start] += 1 }
-    # stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
     stream.on_error        { |err| puts err.inspect; counters[:error] += 1 }
@@ -234,9 +211,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
 
     responses = [
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"START_OF_SPEECH\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_SINGLE_UTTERANCE\"}"),
-      # Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[],\"speechEventType\":\"END_OF_AUDIO\"}"),
       Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}],\"isFinal\":true}]}")
     ]
 
@@ -247,7 +222,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     stream.stop
 
-    sleep 0.1 # give callbacks time to fire
+    stream.wait_until_complete!
 
     stub.request_enum.to_a.must_equal [init_grpc, audio_grpc]
 
@@ -261,8 +236,6 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
 
     counters[:interim].must_equal 0
     counters[:result].must_equal 1
-    # counters[:speech_start].must_equal 1
-    # counters[:speech_end].must_equal 0
     counters[:complete].must_equal 1
     counters[:utterance].must_equal 1
   end

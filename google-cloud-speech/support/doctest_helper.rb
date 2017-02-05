@@ -226,9 +226,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Stream#results" do
-    mock_speech do |mock|
-    end
+  doctest.before "Google::Cloud::Speech::Project#stream" do
+    skip "Don't have a great way to mock streaming requests yet"
+  end
+
+  doctest.before "Google::Cloud::Speech::Stream" do
+    skip "Don't have a great way to mock streaming requests yet"
   end
 end
 

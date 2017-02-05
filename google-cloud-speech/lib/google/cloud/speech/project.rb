@@ -464,13 +464,6 @@ module Google
         #
         #   stream = speech.stream encoding: :raw, sample_rate: 16000
         #
-        #   # register callback for when a result is returned
-        #   stream.on_result do |results|
-        #     result = results.first
-        #     puts result.transcript # "how old is the Brooklyn Bridge"
-        #     puts result.confidence # 0.9826789498329163
-        #   end
-        #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
         #   5.times do
@@ -478,6 +471,12 @@ module Google
         #   end
         #
         #   stream.stop
+        #   stream.wait_until_complete!
+        #
+        #   results = stream.results
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 0.9826789498329163
         #
         def stream encoding: nil, sample_rate: nil, language: nil,
                    max_alternatives: nil, profanity_filter: nil, phrases: nil,
