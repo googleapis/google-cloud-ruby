@@ -56,14 +56,23 @@ module Google
 
         def cloud_debugger_service
           return mocked_debugger_service if mocked_debugger_service
-          return @cloud_debugger_service if @cloud_debugger_service
-          @cloud_debugger_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
-          @cloud_debugger_service.authorization = Google::Auth.get_application_default(
-            'https://clouddebugger.googleapis.com/'
-          )
-          @cloud_debugger_service
+          @cloud_debugger_service ||= Google::Apis::ClouddebuggerV2::CloudDebuggerService.new.tap do |s|
+            s.authorization = Google::Auth.get_application_default(
+              'https://clouddebugger.googleapis.com/'
+            )
+          end
         end
         attr_accessor :mocked_debugger_service
+
+        def debugger_transmitter_service
+          return mocked_transmitter_service if mocked_transmitter_service
+          @debugger_transmitter_service ||= Google::Apis::ClouddebuggerV2::CloudDebuggerService.new.tap do |s|
+            s.authorization = Google::Auth.get_application_default(
+              'https://clouddebugger.googleapis.com/'
+            )
+          end
+        end
+        attr_accessor :mocked_transmitter_service
 
         def register_debuggee debuggee_hash
           request = Google::Apis::ClouddebuggerV2::RegisterDebuggeeRequest.new({
@@ -79,9 +88,12 @@ module Google
           })
         end
 
-        def update_active_breakpoint breakpoint
-          puts "SERVICE update_active_breakpoint called"
-          puts breakpoint
+        def update_active_breakpoint debuggee_id, breakpoint
+          puts "***SERVICE update_active_breakpoint called\n"
+          request = Google::Apis::ClouddebuggerV2::UpdateActiveBreakpointRequest.new({
+            breakpoint: breakpoint.to_grpc
+          })
+          debugger_transmitter_service.update_active_breakpoint debuggee_id, breakpoint.id, request
         end
 
         def insecure?

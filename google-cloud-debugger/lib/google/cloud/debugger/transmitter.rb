@@ -51,7 +51,7 @@ module Google
             next if breakpoint.nil?
             begin
               agent.breakpoint_manager.mark_off breakpoint
-              service.update_active_breakpoint breakpoint
+              service.update_active_breakpoint agent.debuggee.id, breakpoint
             rescue => e
               @last_exception = e
             end

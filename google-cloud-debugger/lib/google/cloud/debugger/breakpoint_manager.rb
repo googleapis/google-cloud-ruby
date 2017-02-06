@@ -60,6 +60,8 @@ module Google
               create_breakpoint(b.id, b.location.path, b.location.line)
             }
 
+            # server_breakpoints.each do |b| puts b.to_grpc end
+
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
             activate_breakpoints new_breakpoints unless new_breakpoints.empty?
             forget_breakpoints server_breakpoints

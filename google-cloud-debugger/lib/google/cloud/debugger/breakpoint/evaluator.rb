@@ -1,3 +1,21 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+require "google/cloud/debugger/breakpoint/source_location"
+require "google/cloud/debugger/breakpoint/stack_frame"
+require "google/cloud/debugger/breakpoint/variable"
 
 module Google
   module Cloud
@@ -12,21 +30,19 @@ module Google
           }
 
           class << self
-            def eval_call_stack breakpoint, call_stack_bindings
+            def eval_call_stack call_stack_bindings
               result = []
               call_stack_bindings.each_with_index do |frame_binding, i|
-                frame_info = {
-                  file_name: frame_binding.eval("__FILE__"),
-                  line: frame_binding.eval("__LINE__"),
-                  method_id: frame_binding.eval("__method__")
-                }
-                if i < STACK_EVAL_DEPTH
-                  frame_info.merge! eval_frame(frame_binding)
+                frame_info = StackFrame.new.tap do |sf|
+                  sf.function = frame_binding.eval("__method__").to_s
+                  sf.location = SourceLocation.new.tap do |l|
+                    l.path = frame_binding.eval("::File.absolute_path(__FILE__)")
+                    l.line = frame_binding.eval("__LINE__")
+                  end
                 end
 
-                if i < EXPRESSION_TRACE_DEPTH
-                  frame_info.merge! \
-                    eval_expressions(frame_binding, breakpoint.expressions)
+                if i < STACK_EVAL_DEPTH
+                  frame_info.locals = eval_frame_location_variables frame_binding
                 end
 
                 result << frame_info
@@ -35,31 +51,22 @@ module Google
               result
             end
 
-            def eval_frame frame_binding
-              result = {
-                # self: frame_binding.eval("self.to_s"),
-                local_variables: {}
-              }
-
-              frame_binding.local_variables.each do |local_var|
-                result[:local_variables][local_var] =
-                  frame_binding.local_variable_get(local_var).to_s
+            def eval_expressions binding, expressions
+              expressions.map do |expression|
+                evaluated = readonly_eval_expression binding, expression
+                Variable.from_rb_var evaluated
               end
-
-              result
             end
 
-            def eval_expressions binding, expressions
-              result = {
-                expressions: {}
-              }
+            private
 
-              expressions.each do |expression|
-                result[:expressions][expression] =
-                  readonly_eval_expression binding, expression
+            def eval_frame_location_variables frame_binding
+              frame_binding.local_variables.map do |local_var_name|
+                local_var = frame_binding.local_variable_get(local_var_name)
+                Variable.from_rb_var(local_var).tap do |var|
+                  var.name = local_var_name
+                end
               end
-
-              result
             end
 
             def readonly_eval_expression binding, expression
@@ -124,7 +131,7 @@ module Google
                                              allow_setlocal: true
             end
 
-            def self.trace_c_func_callback tp
+            def trace_c_func_callback tp
               nil
             end
           end
