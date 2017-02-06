@@ -70,14 +70,18 @@ module Google
           # end
 
           complete
+          result
         end
 
-        def eql? other_breakpoint
-          @id == other_breakpoint.id
+        def eql? other
+          id == other.id &&
+            path == other.path &&
+            line == other.line
         end
 
-        def == other_breakpoint
-          @id == other_breakpoint.id
+        def == other
+          path == other.path &&
+            line == other.line
         end
 
         def hash
@@ -93,7 +97,7 @@ module Google
 
           def initialize path, line
             @path = path
-            @line = line
+            @line = line.to_i
           end
         end
       end

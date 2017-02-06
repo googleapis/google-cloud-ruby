@@ -36,10 +36,10 @@ module Google
             t = Time.now
             response = @app.call env
 
-            if @debugger.last_exception
+            if @debugger.agent.last_exception
               puts "*******************************************************************************"
-              puts @debugger.last_exception
-              exit @debugger.last_exception
+              puts @debugger.agent.last_exception
+              exit
             end
 
             # end_t = Time.now - t

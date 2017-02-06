@@ -4,10 +4,10 @@ module Google
   module Cloud
     module Debugger
       class Tracer
-        attr_reader :breakpoint_manager
+        attr_reader :agent
 
-        def initialize breakpoint_manager
-          @breakpoint_manager = breakpoint_manager
+        def initialize agent
+          @agent = agent
           @file_tracepoint = nil
           @return_tracepoint = nil
           @return_tracepoint_counter = nil
@@ -19,18 +19,19 @@ module Google
         end
 
         def update_breakpoints_cache
-          @breakpoints_cache = breakpoint_manager.active_breakpoints.clone
+          @breakpoints_cache = agent.breakpoint_manager.active_breakpoints.clone
         end
 
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 
-          # TODO: move this to a unblocking thread
-          breakpoint_manager.complete_breakpoint breakpoint
+          puts "\n\n*********************TRACER EVAL CALLLLLED\n\n"
 
-          breakpoint.eval_breakpoint call_stack_bindings
+          breakpoint.eval_call_stack call_stack_bindings
           # TODO: disable tracepoints if all breakpoints complete, in a non-blocking way
           # disable_tracepoints if breakpoint_manager.all_complete?
+
+          agent.submit_breakpoint breakpoint
         end
 
         def start

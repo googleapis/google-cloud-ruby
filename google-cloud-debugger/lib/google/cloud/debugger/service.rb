@@ -79,6 +79,11 @@ module Google
           })
         end
 
+        def update_active_breakpoint breakpoint
+          puts "SERVICE update_active_breakpoint called"
+          puts breakpoint
+        end
+
         def insecure?
           credentials == :this_channel_is_insecure
         end

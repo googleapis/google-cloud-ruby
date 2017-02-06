@@ -170,7 +170,6 @@ line_tracepoint_callback(VALUE tracepoint, void *data)
     VALUE tracepoint_lineno = rb_tracearg_lineno(tracepoint_arg);
     VALUE tracepoint_binding;
     VALUE call_stack_bindings;
-    VALUE all_complete;
 
     matching_breakpoint = match_breakpoints(self, tracepoint_path, tracepoint_lineno);
     if (RTEST(matching_breakpoint)) {

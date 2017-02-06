@@ -1,5 +1,19 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 require "google/cloud/debugger/breakpoint"
-require "google/cloud/debugger/tracer"
 
 module Google
   module Cloud
@@ -11,7 +25,7 @@ module Google
 
         attr_reader :app_root
 
-        attr_reader :tracer
+        attr_accessor :on_breakpoints_change
 
         def initialize service, app_root: nil
           super()
@@ -27,7 +41,6 @@ module Google
           @completed_breakpoints = []
           @active_breakpoints = []
 
-          @tracer = Debugger::Tracer.new self
           @wait_token = :init
         end
 
@@ -37,54 +50,25 @@ module Google
           rescue
             return false
           end
-          breakpoints = response.breakpoints || []
-          @wait_token = response.next_wait_token
           return true if response.wait_expired?
 
-          puts "************************ new breakpoints:"
-          puts breakpoints
-
-          server_breakpoints = breakpoints.map { |b|
-            create_breakpoint(b.id, b.location.path, b.location.path)
-          }
-
-          # server_breakpoints = [
-          #   create_breakpoint(Time.now.to_i, "app/controllers/test_controller.rb", 13) do |breakpoint|
-          #     # breakpoint.add_expression 'blah = "modified blah"'
-          #     # breakpoint.add_expression '"#{blah} is lame!"'
-          #     # breakpoint.add_expression "$my_global = 'bye'"
-          #     breakpoint.add_expression '1/0'
-          #   end,
-          #
-          #   create_breakpoint(Time.now.to_i + 1, "app/controllers/test_controller.rb", 7) do |breakpoint|
-          #     # breakpoint.add_expression 'blah = "modified blah"'
-          #     breakpoint.add_expression '"#{blah} is lame!"'
-          #     # breakpoint.add_expression "$my_global = 'bye'"
-          #     # breakpoint.add_expression '1/0'
-          #   end
-          # ]
-
           synchronize do
+            server_breakpoints = response.breakpoints || []
+            @wait_token = response.next_wait_token
+
+            server_breakpoints = server_breakpoints.map { |b|
+              create_breakpoint(b.id, b.location.path, b.location.line)
+            }
+
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
             activate_breakpoints new_breakpoints unless new_breakpoints.empty?
             forget_breakpoints server_breakpoints
-            signal_tracer
-          end
 
-          puts "active_breakpoints size: #{active_breakpoints.size}"
-          puts active_breakpoints
+            on_breakpoints_change.call(@active_breakpoints) if
+              on_breakpoints_change.respond_to?(:call)
+          end
 
           true
-        end
-
-        def signal_tracer
-          synchronize do
-            if @active_breakpoints.empty?
-              tracer.stop
-            else
-              tracer.start
-            end
-          end
         end
 
         def activate_breakpoints breakpoints
@@ -102,19 +86,18 @@ module Google
 
         def create_breakpoint id, path, line
           abs_path = "#{app_root}/#{path}"
-          breakpoint = Breakpoint.new id, abs_path, line
+          breakpoint = Breakpoint.new id, abs_path, line.to_i
 
           yield breakpoint if block_given?
 
           breakpoint
         end
 
-        def complete_breakpoint breakpoint
+        def mark_off breakpoint
           synchronize do
             breakpoint = @active_breakpoints.delete breakpoint
-            signal_tracer
 
-            if breakpoint.nil? || breakpoint.complete?
+            if breakpoint.nil?
               false
             else
               breakpoint.complete
