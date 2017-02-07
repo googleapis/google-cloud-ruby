@@ -19,13 +19,13 @@ module Google
   module Cloud
     module Speech
       ##
-      # # Job
+      # # Operation
       #
       # A resource represents the long-running, asynchronous processing of a
-      # speech-recognition operation. The job can be refreshed to retrieve
+      # speech-recognition operation. The op can be refreshed to retrieve
       # recognition results once the audio data has been processed.
       #
-      # See {Project#recognize_job} and {Audio#recognize_job}.
+      # See {Project#process} and {Audio#process}.
       #
       # @see https://cloud.google.com/speech/docs/basics#async-responses
       #   Asynchronous Speech API Responses
@@ -37,17 +37,17 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   job = speech.recognize_job "path/to/audio.raw",
+      #   op = speech.process "path/to/audio.raw",
       #                              encoding: :raw,
       #                              language: "en-US",
       #                              sample_rate: 16000
       #
-      #   job.done? #=> false
-      #   job.reload! # API call
-      #   job.done? #=> true
-      #   results = job.results
+      #   op.done? #=> false
+      #   op.reload! # API call
+      #   op.done? #=> true
+      #   results = op.results
       #
-      class Job
+      class Operation
         ##
         # @private The Google::Gax::Operation gRPC object.
         attr_accessor :grpc
@@ -62,20 +62,20 @@ module Google
         # A speech recognition result corresponding to a portion of the audio.
         #
         # @return [Array<Result>] The transcribed text of audio recognized. If
-        #   the job is not done this will return `nil`.
+        #   the op is not done this will return `nil`.
         #
         # @example
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
+        #   op = speech.process "path/to/audio.raw",
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
-        #   job.done? #=> true
-        #   results = job.results
+        #   op.done? #=> true
+        #   results = op.results
         #
         def results
           return nil unless @grpc.response?
@@ -95,19 +95,19 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
+        #   op = speech.process "path/to/audio.raw",
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
-        #   job.done? #=> false
+        #   op.done? #=> false
         #
         def done?
           @grpc.done?
         end
 
         ##
-        # Reloads the job with current data from the long-running, asynchronous
+        # Reloads the op with current data from the long-running, asynchronous
         # processing of a speech-recognition operation.
         #
         # @example
@@ -115,14 +115,14 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
+        #   op = speech.process "path/to/audio.raw",
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload! # API call
-        #   job.done? #=> true
+        #   op.done? #=> false
+        #   op.reload! # API call
+        #   op.done? #=> true
         #
         def reload!
           @grpc.reload!
@@ -131,7 +131,7 @@ module Google
         alias_method :refresh!, :reload!
 
         ##
-        # Reloads the job until the operation is complete. The delay between
+        # Reloads the op until the operation is complete. The delay between
         # reloads will incrementally increase.
         #
         # @example
@@ -139,14 +139,14 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
+        #   op = speech.process "path/to/audio.raw",
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.wait_until_done!
-        #   job.done? #=> true
+        #   op.done? #=> false
+        #   op.wait_until_done!
+        #   op.done? #=> true
         #
         def wait_until_done!
           @grpc.wait_until_done!

@@ -122,9 +122,9 @@ module Google
     # result.confidence #=> 0.9826789498329163
     # ```
     #
-    # Use {Speech::Audio#recognize_job} for asynchronous speech recognition,
-    # in which a {Speech::Job} is returned immediately after the audio data has
-    # been sent. The job can be refreshed to retrieve {Speech::Result} objects
+    # Use {Speech::Audio#process} for asynchronous speech recognition, in which
+    # a {Speech::Operation} is returned immediately after the audio data has
+    # been sent. The op can be refreshed to retrieve {Speech::Result} objects
     # once the audio data has been processed.
     #
     # ```ruby
@@ -137,11 +137,11 @@ module Google
     #                      language: "en-US",
     #                      sample_rate: 16000
     #
-    # job = audio.recognize_job
-    # job.done? #=> false
-    # job.reload!
-    # job.done? #=> true
-    # results = job.results
+    # op = audio.process
+    # op.done? #=> false
+    # op.wait_until_done!
+    # op.done? #=> true
+    # results = op.results
     #
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"

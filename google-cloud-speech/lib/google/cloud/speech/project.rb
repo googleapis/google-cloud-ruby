@@ -18,7 +18,7 @@ require "google/cloud/env"
 require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
 require "google/cloud/speech/result"
-require "google/cloud/speech/job"
+require "google/cloud/speech/operation"
 require "google/cloud/speech/stream"
 
 module Google
@@ -309,9 +309,9 @@ module Google
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
-        # asynchronously, meaning a Job is returned once the audio data has been
-        # sent, and can be refreshed to retrieve recognition results once the
-        # audio data has been processed.
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
         #
         # @see https://cloud.google.com/speech/docs/basics#async-responses
         #   Asynchronous Speech API Responses
@@ -352,34 +352,34 @@ module Google
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
         #
-        # @return [Job] A resource represents the long-running, asynchronous
-        #   processing of a speech-recognition operation.
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
         #
         # @example
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "gs://bucket-name/path/to/audio.raw",
+        #   op = speech.process "gs://bucket-name/path/to/audio.raw",
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud/storage"
@@ -393,18 +393,17 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job file,
+        #   op = speech.process file,
         #                              encoding: :raw,
         #                              language: "en-US",
         #                              sample_rate: 16000,
         #                              max_alternatives: 10
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
-        def recognize_job source, encoding: nil, sample_rate: nil,
-                          language: nil, max_alternatives: nil,
-                          profanity_filter: nil, phrases: nil
+        def process source, encoding: nil, sample_rate: nil, language: nil,
+                    max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_service!
 
           audio_obj = audio source, encoding: encoding, language: language,
@@ -416,7 +415,7 @@ module Google
             profanity_filter: profanity_filter, phrases: phrases)
 
           grpc = service.recognize_async audio_obj.to_grpc, config
-          Job.from_grpc grpc
+          Operation.from_grpc grpc
         end
 
         ##

@@ -212,9 +212,9 @@ module Google
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
-        # asynchronously, meaning a Job is returned once the audio data has been
-        # sent, and can be refreshed to retrieve recognition results once the
-        # audio data has been processed.
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
         #
         # @see https://cloud.google.com/speech/docs/basics#async-responses
         #   Asynchronous Speech API Responses
@@ -231,8 +231,8 @@ module Google
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
         #
-        # @return [Job] A resource represents the long-running, asynchronous
-        #   processing of a speech-recognition operation.
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
         #
         # @example
         #   require "google/cloud/speech"
@@ -244,22 +244,22 @@ module Google
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
-        #   job = audio.recognize_job
-        #   job.done? #=> false
-        #   job.reload!
-        #   job.done? #=> true
-        #   results = job.results
+        #   op = audio.process
+        #   op.done? #=> false
+        #   op.reload!
+        #   op.done? #=> true
+        #   results = op.results
         #
-        def recognize_job max_alternatives: nil, profanity_filter: nil,
-                          phrases: nil
+        def process max_alternatives: nil, profanity_filter: nil,
+                    phrases: nil
           ensure_speech!
 
-          speech.recognize_job self, encoding: encoding,
-                                     sample_rate: sample_rate,
-                                     language: language,
-                                     max_alternatives: max_alternatives,
-                                     profanity_filter: profanity_filter,
-                                     phrases: phrases
+          speech.process self, encoding: encoding,
+                               sample_rate: sample_rate,
+                               language: language,
+                               max_alternatives: max_alternatives,
+                               profanity_filter: profanity_filter,
+                               phrases: phrases
         end
 
         ##

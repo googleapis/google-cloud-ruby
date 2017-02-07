@@ -163,14 +163,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Project#recognize_job" do
+  doctest.before "Google::Cloud::Speech::Project#process" do
     mock_speech do |mock, mock_ops|
       mock.expect :long_running_recognize, op_done_false(mock_ops), recognize_args
       mock_ops.expect :get_operation, op_done_true_grpc, ["1234567890", options: nil]
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage File object:" do
+  doctest.before "Google::Cloud::Speech::Project#process@With a Google Cloud Storage File object:" do
     mock_storage do |mock|
       mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
       mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
@@ -181,7 +181,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage URI:" do
+  doctest.before "Google::Cloud::Speech::Project#process@With a Google Cloud Storage URI:" do
     mock_speech do |mock, mock_ops|
       mock.expect :long_running_recognize, op_done_false(mock_ops), recognize_args(nil, recognition_audio_uri)
       mock_ops.expect :get_operation, op_done_true_grpc, ["1234567890", options: nil]
@@ -194,21 +194,21 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Audio#recognize_job" do
+  doctest.before "Google::Cloud::Speech::Audio#process" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :long_running_recognize, op_done_false(mock_ops), recognize_args
       mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Job" do
+  doctest.before "Google::Cloud::Speech::Operation" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :long_running_recognize, op_done_false(mock_ops), recognize_args
       mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
-  doctest.before "Google::Cloud::Speech::Job#results" do
+  doctest.before "Google::Cloud::Speech::Operation#results" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :long_running_recognize, op_done_true(mock_ops), recognize_args
     end
@@ -286,8 +286,8 @@ def op_name
 end
 
 def op_done_false_grpc
-  job_json = "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}}"
-  Google::Longrunning::Operation.decode_json job_json
+  op_json = "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}}"
+  Google::Longrunning::Operation.decode_json op_json
 end
 
 def op_done_false ops_mock

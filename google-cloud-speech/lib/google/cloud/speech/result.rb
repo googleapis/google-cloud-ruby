@@ -23,7 +23,7 @@ module Google
       #
       # A speech recognition result corresponding to a portion of the audio.
       #
-      # See {Project#recognize} and {Job#results}.
+      # See {Project#recognize} and {Operation#results}.
       #
       # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.SpeechRecognitionResult
       #   SpeechRecognitionResult

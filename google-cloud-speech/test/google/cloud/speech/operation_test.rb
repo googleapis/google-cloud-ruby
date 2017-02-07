@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Speech::Job, :mock_speech do
+describe Google::Cloud::Speech::Operation, :mock_speech do
   let(:ops_mock) { Minitest::Mock.new }
   let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}}" }
   let(:incomplete_grpc) { Google::Longrunning::Operation.decode_json incomplete_json }
@@ -26,19 +26,19 @@ describe Google::Cloud::Speech::Job, :mock_speech do
   let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
 
   it "refreshes to get final results" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, complete_grpc, ["1234567890", options: nil]
 
-    job.refresh!
+    op.refresh!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -46,23 +46,23 @@ describe Google::Cloud::Speech::Job, :mock_speech do
   end
 
   it "refreshes but is still not done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
 
-    job.refresh!
+    op.refresh!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
   end
 
   it "waits until done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
@@ -74,13 +74,13 @@ describe Google::Cloud::Speech::Job, :mock_speech do
     def incomplete_gax.sleep *args
     end
 
-    job.wait_until_done!
+    op.wait_until_done!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895

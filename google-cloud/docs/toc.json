@@ -393,8 +393,8 @@
           "type": "google/cloud/speech/audio"
         },
         {
-          "title": "Job",
-          "type": "google/cloud/speech/job"
+          "title": "Operation",
+          "type": "google/cloud/speech/operation"
         },
         {
           "title": "Result",
