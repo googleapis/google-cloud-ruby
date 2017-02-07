@@ -93,6 +93,9 @@ module Google
           request = Google::Apis::ClouddebuggerV2::UpdateActiveBreakpointRequest.new({
             breakpoint: breakpoint.to_grpc
           })
+
+          p breakpoint.to_grpc.stack_frames[0].locals
+
           debugger_transmitter_service.update_active_breakpoint debuggee_id, breakpoint.id, request
         end
 

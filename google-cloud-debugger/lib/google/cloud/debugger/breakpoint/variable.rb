@@ -35,17 +35,17 @@ module Google
 
           def self.from_rb_var source
             Variable.new.tap do |var|
-              @type = source.class.to_s
-              @value = source.to_s
+              var.type = source.class.to_s
+              var.value = source.to_s
               # TODO: recursively add members variable array
             end
           end
 
           def to_grpc
-            Google::Apis::ClouddebuggerV2::Variable.new do |v|
+            Google::Apis::ClouddebuggerV2::Variable.new.tap do |v|
               v.name = @name
-              v.value = value
-              v.type = type
+              v.value = @value
+              v.type = @type
               v.members = @members.map { |mem| mem.to_grpc }
             end
           end
