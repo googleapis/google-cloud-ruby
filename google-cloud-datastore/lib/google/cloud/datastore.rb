@@ -545,6 +545,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+      # @param [String] emulator_host Datastore emulator host. Optional.
+      #   If the param is nil, ENV["DATASTORE_EMULATOR_HOST"] will be used.
       #
       # @return [Google::Cloud::Datastore::Dataset]
       #
@@ -566,16 +568,17 @@ module Google
       #   datastore.save task
       #
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
+                   client_config: nil, emulator_host: nil
         project ||= Google::Cloud::Datastore::Dataset.default_project
         project = project.to_s # Always cast to a string
         fail ArgumentError, "project is missing" if project.empty?
 
-        if ENV["DATASTORE_EMULATOR_HOST"]
+        emulator_host ||= ENV["DATASTORE_EMULATOR_HOST"]
+        if emulator_host
           return Google::Cloud::Datastore::Dataset.new(
             Google::Cloud::Datastore::Service.new(
               project, :this_channel_is_insecure,
-              host: ENV["DATASTORE_EMULATOR_HOST"],
+              host: emulator_host,
               client_config: client_config))
         end
         credentials = credentials_with_scope keyfile, scope
