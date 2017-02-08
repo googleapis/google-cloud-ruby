@@ -32,7 +32,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
     Google::Datastore::V1::RunQueryResponse.new(
       batch: Google::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
-        end_cursor: Google::Cloud::Datastore::GRPCUtils.decode_bytes(query_cursor)
+        end_cursor: Google::Cloud::Datastore::Convert.decode_bytes(query_cursor)
       )
     )
   end

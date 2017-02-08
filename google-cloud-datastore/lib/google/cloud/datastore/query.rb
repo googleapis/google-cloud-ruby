@@ -177,8 +177,8 @@ module Google
               property_filter: Google::Datastore::V1::PropertyFilter.new(
                 property: Google::Datastore::V1::PropertyReference.new(
                   name: name),
-                op: GRPCUtils.to_prop_filter_op(operator),
-                value: GRPCUtils.to_value(value)
+                op: Convert.to_prop_filter_op(operator),
+                value: Convert.to_value(value)
               )
             )
 
@@ -331,7 +331,7 @@ module Google
           if cursor.is_a? Cursor
             @grpc.start_cursor = cursor.to_grpc
           elsif cursor.is_a? String
-            @grpc.start_cursor = GRPCUtils.decode_bytes cursor
+            @grpc.start_cursor = Convert.decode_bytes cursor
           else
             fail ArgumentError, "Can't set a cursor using a #{cursor.class}."
           end

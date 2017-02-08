@@ -33,7 +33,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
         Google::Datastore::V1::EntityResult.new(
           entity: Google::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie#{i}").to_grpc,
-            properties: { "name" => Google::Cloud::Datastore::GRPCUtils.to_value("thingamajig") }
+            properties: { "name" => Google::Cloud::Datastore::Convert.to_value("thingamajig") }
           )
         )
       end,
@@ -41,7 +41,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
         Google::Datastore::V1::EntityResult.new(
           entity: Google::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie#{i}").to_grpc,
-            properties: { "name" => Google::Cloud::Datastore::GRPCUtils.to_value("thingamajig") }
+            properties: { "name" => Google::Cloud::Datastore::Convert.to_value("thingamajig") }
           )
         )
       end,
@@ -56,7 +56,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
         Google::Datastore::V1::EntityResult.new(
           entity: Google::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie#{i}").to_grpc,
-            properties: { "name" => Google::Cloud::Datastore::GRPCUtils.to_value("thingamajig") }
+            properties: { "name" => Google::Cloud::Datastore::Convert.to_value("thingamajig") }
           )
         )
       end

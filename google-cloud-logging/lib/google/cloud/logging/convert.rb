@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,49 +13,18 @@
 # limitations under the License.
 
 
-require "google/cloud"
-require "google/protobuf/struct_pb"
-
 module Google
   module Cloud
-    module Core
+    module Logging
       ##
-      # @private Conversion to/from GRPC objects.
-      module GRPCUtils
+      # @private Conversion to/from Logging GRPC objects.
+      module Convert
         ##
         # @private Convert a Hash to a Google::Protobuf::Struct.
         def self.hash_to_struct hash
           # TODO: ArgumentError if hash is not a Hash
           Google::Protobuf::Struct.new fields:
             Hash[hash.map { |k, v| [String(k), object_to_value(v)] }]
-        end
-
-        ##
-        # @private Convert a Google::Protobuf::Struct to a Hash.
-        def self.struct_to_hash struct
-          # TODO: ArgumentError if struct is not a Google::Protobuf::Struct
-          Hash[struct.fields.map { |k, v| [k, value_to_object(v)] }]
-        end
-
-        ##
-        # @private Convert a Google::Protobuf::Value to an Object.
-        def self.value_to_object value
-          # TODO: ArgumentError if struct is not a Google::Protobuf::Value
-          if value.kind == :null_value
-            nil
-          elsif value.kind == :number_value
-            value.number_value
-          elsif value.kind == :string_value
-            value.string_value
-          elsif value.kind == :bool_value
-            value.bool_value
-          elsif value.kind == :struct_value
-            struct_to_hash value.struct_value
-          elsif value.kind == :list_value
-            value.list_value.values.map { |v| value_to_object(v) }
-          else
-            nil # just in case
-          end
         end
 
         ##

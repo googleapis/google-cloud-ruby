@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/grpc_utils"
+require "google/cloud/language/convert"
 
 module Google
   module Cloud
@@ -882,7 +882,7 @@ module Google
           ##
           # @private New Entity from a V1::Entity object.
           def self.from_grpc grpc
-            metadata = Core::GRPCUtils.map_to_hash grpc.metadata
+            metadata = Convert.map_to_hash grpc.metadata
             mentions = Array(grpc.mentions).map do |g|
               text_span = TextSpan.from_grpc g.text
               Mention.new text_span, g.type
