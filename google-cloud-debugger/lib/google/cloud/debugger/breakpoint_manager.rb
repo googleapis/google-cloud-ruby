@@ -54,13 +54,10 @@ module Google
 
           synchronize do
             server_breakpoints = response.breakpoints || []
-            @wait_token = response.next_wait_token
-
-            server_breakpoints = server_breakpoints.map { |b|
-              create_breakpoint(b.id, b.location.path, b.location.line)
+            server_breakpoints = server_breakpoints.map { |grpc_b|
+              create_breakpoint_from_grpc grpc_b
             }
-
-            # server_breakpoints.each do |b| puts b.to_grpc end
+            @wait_token = response.next_wait_token
 
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
             activate_breakpoints new_breakpoints unless new_breakpoints.empty?
@@ -86,9 +83,24 @@ module Google
           end
         end
 
-        def create_breakpoint id, path, line
-          abs_path = "#{app_root}/#{path}"
-          breakpoint = Breakpoint.new id, abs_path, line.to_i
+        def create_breakpoint_from_grpc grpc
+          breakpoint = Breakpoint.new.tap do |b|
+            b.id = grpc.id
+            b.action = grpc.action
+            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
+            b.condition = grpc.condition
+            b.is_final_state = grpc.is_final_state
+            b.expressions = grpc.expressions
+            b.evaluated_expressions = grpc.evaluated_expressions
+            b.create_time = grpc.create_time
+            b.status = grpc.status
+            stack_frames = grpc.stack_frames || []
+            b.stack_frames = stack_frames.map { |sf|
+              Breakpoint::StackFrame.from_grpc sf }
+          end
+
+          # Update breakpoint's relative file path to absolute path
+          breakpoint.location.path &&= "#{app_root}/#{breakpoint.location.path}"
 
           yield breakpoint if block_given?
 

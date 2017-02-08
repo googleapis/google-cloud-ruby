@@ -29,18 +29,14 @@ module Google
         end
 
         def call env
-
-            # puts "********debugger state: #{@debugger.state}"
-            # puts @debugger.last_exception
-
             t = Time.now
             response = @app.call env
 
-            if @debugger.agent.last_exception
-              puts "*******************************************************************************"
-              puts @debugger.agent.last_exception
-              exit
-            end
+            # if @debugger.agent.last_exception
+            #   puts "*******************************************************************************"
+            #   puts @debugger.agent.last_exception
+            #   exit
+            # end
 
             # end_t = Time.now - t
             # f = File.open("debugger_on.txt", "a")

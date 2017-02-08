@@ -43,6 +43,17 @@ module Google
               sf.locals = @locals.map { |var| var.to_grpc }
             end
           end
+
+          def self.from_grpc grpc
+            StackFrame.new.tap do |sf|
+              sf.function = grpc.function
+              sf.location = grpc.location
+              arguments = grpc.arguments || []
+              sf.arguments = arguments.map { |arg| Variable.from_grpc arg }
+              locals = grpc.locals || []
+              sf.locals = locals.map { |var| Variable.from_grpc var }
+            end
+          end
         end
       end
     end

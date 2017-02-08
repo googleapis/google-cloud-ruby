@@ -55,8 +55,10 @@ module Google
 
             def eval_expressions binding, expressions
               expressions.map do |expression|
-                evaluated = readonly_eval_expression binding, expression
-                Variable.from_rb_var evaluated
+                eval_result = readonly_eval_expression binding, expression
+                evaluated_var = Variable.from_rb_var eval_result
+                evaluated_var.name = expression
+                evaluated_var
               end
             end
 

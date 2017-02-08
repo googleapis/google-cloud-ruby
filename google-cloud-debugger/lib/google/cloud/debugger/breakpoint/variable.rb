@@ -49,6 +49,16 @@ module Google
               v.members = @members.map { |mem| mem.to_grpc }
             end
           end
+
+          def self.from_grpc grpc
+            Variable.new.tap do |var|
+              var.name = grpc.name
+              var.value = grpc.value
+              var.type = grpc.type
+              members = grpc.members || []
+              var.members = members.map { |mem| Variable.from_grpc mem }
+            end
+          end
         end
       end
     end

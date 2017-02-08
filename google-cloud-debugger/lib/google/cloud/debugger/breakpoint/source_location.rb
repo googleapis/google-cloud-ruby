@@ -33,6 +33,13 @@ module Google
               sl.line = @line
             end
           end
+
+          def self.from_grpc grpc
+            SourceLocation.new.tap do |sl|
+              sl.path = grpc.path
+              sl.line = grpc.line.to_i
+            end
+          end
         end
       end
     end

@@ -40,23 +40,29 @@ module Google
 
         attr_accessor :status
 
+        attr_accessor :completed
+
         attr_accessor :stack_frames
 
-        def initialize id, path, line, create_time = nil
+        def initialize id = nil, path = nil, line = nil
           @id = id
           @action = :capture
-          @location = SourceLocation.new.tap do |sl|
-            sl.path = path
-            sl.line = line.to_i
+          if path || line
+            @location = SourceLocation.new.tap do |sl|
+              sl.path = path
+              sl.line = line.to_i
+            end
+          else
+            @location = nil
           end
           @condition = nil
           @is_final_state = nil
           @expressions = []
           @evaluated_expressions = []
           @create_time = create_time
-          @status = :active
+          @status = nil
+          @completed = false
           @stack_frames = []
-
         end
 
         def add_expression expression
@@ -72,19 +78,13 @@ module Google
           path_hit?(path) && location.line == line
         end
 
-        def active?
-          status == :active
-        end
-
         def complete
           #TODO set @is_final_state and @final_time
           @is_final_state = true
-          @status = :complete
+          @completed = true
         end
 
-        def complete?
-          status == :complete
-        end
+        alias_method :complete?, :completed
 
         def path
           location.path
@@ -95,6 +95,7 @@ module Google
         end
 
         def eval_call_stack call_stack_bindings
+          puts "BREAKPOINT HIT*******************************\n\n"
           @stack_frames = Evaluator.eval_call_stack call_stack_bindings
           @evaluated_expressions = Evaluator.eval_expressions call_stack_bindings[0], @expressions
 
