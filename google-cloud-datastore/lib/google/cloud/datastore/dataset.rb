@@ -14,7 +14,7 @@
 
 
 require "google/cloud/core/environment"
-require "google/cloud/datastore/grpc_utils"
+require "google/cloud/datastore/convert"
 require "google/cloud/datastore/credentials"
 require "google/cloud/datastore/service"
 require "google/cloud/datastore/commit"

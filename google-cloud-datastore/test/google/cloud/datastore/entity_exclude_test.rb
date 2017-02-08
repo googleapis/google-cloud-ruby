@@ -28,7 +28,7 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
     grpc = Google::Datastore::V1::Entity.new
     grpc.key = Google::Datastore::V1::Key.new
     grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
-    grpc.properties["name"] = Google::Cloud::Datastore::GRPCUtils.to_value "User McNumber"
+    grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
     entity_from_grpc.exclude_from_indexes?("name").must_equal false
@@ -38,7 +38,7 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
     grpc = Google::Datastore::V1::Entity.new
     grpc.key = Google::Datastore::V1::Key.new
     grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
-    grpc.properties["tags"] = Google::Cloud::Datastore::GRPCUtils.to_value ["ruby", "code"]
+    grpc.properties["tags"] = Google::Cloud::Datastore::Convert.to_value ["ruby", "code"]
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
     entity_from_grpc.exclude_from_indexes?("tags").must_equal [false, false]

@@ -131,7 +131,7 @@ module Google
             if gql_query_param.parameter_type == :cursor
               [name, Cursor.from_grpc(gql_query_param.cursor)]
             else
-              [name, GRPCUtils.from_value(gql_query_param.value)]
+              [name, Convert.from_value(gql_query_param.value)]
             end
           end]
           bindings.freeze
@@ -164,7 +164,7 @@ module Google
             else
               @grpc.named_bindings[name.to_s] = \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: GRPCUtils.to_value(value))
+                  value: Convert.to_value(value))
             end
           end
         end
@@ -181,7 +181,7 @@ module Google
             if gql_query_param.parameter_type == :cursor
               Cursor.from_grpc gql_query_param.cursor
             else
-              GRPCUtils.from_value gql_query_param.value
+              Convert.from_value gql_query_param.value
             end
           end
           bindings.freeze
@@ -213,7 +213,7 @@ module Google
             else
               @grpc.positional_bindings << \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: GRPCUtils.to_value(value))
+                  value: Convert.to_value(value))
             end
           end
         end

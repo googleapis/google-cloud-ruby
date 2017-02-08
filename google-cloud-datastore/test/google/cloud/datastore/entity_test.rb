@@ -80,9 +80,9 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     grpc.key.path << Google::Datastore::V1::Key::PathElement.new
     grpc.key.path.first.kind = "User"
     grpc.key.path.first.id = 123456
-    grpc.properties["name"] = Google::Cloud::Datastore::GRPCUtils.to_value "User McNumber"
-    grpc.properties["email"] = Google::Cloud::Datastore::GRPCUtils.to_value "number@example.net"
-    grpc.properties["avatar"] = Google::Cloud::Datastore::GRPCUtils.to_value nil
+    grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
+    grpc.properties["email"] = Google::Cloud::Datastore::Convert.to_value "number@example.net"
+    grpc.properties["avatar"] = Google::Cloud::Datastore::Convert.to_value nil
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
 
@@ -162,8 +162,8 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     grpc = Google::Datastore::V1::Entity.new
     grpc.key = Google::Datastore::V1::Key.new
     grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
-    grpc.properties["name"] = Google::Cloud::Datastore::GRPCUtils.to_value "User McNumber"
-    grpc.properties["email"] = Google::Cloud::Datastore::GRPCUtils.to_value "number@example.net"
+    grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
+    grpc.properties["email"] = Google::Cloud::Datastore::Convert.to_value "number@example.net"
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
 

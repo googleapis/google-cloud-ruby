@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/core/grpc_utils"
 require "google/cloud/datastore/errors"
 require "stringio"
 require "base64"
@@ -21,12 +20,49 @@ require "base64"
 module Google
   module Cloud
     module Datastore
+      # rubocop:disable all
+
       ##
       # @private Conversion to/from Datastore GRPC objects.
-      # This file adds Datastore methods to Core::GRPCUtils.
-      module GRPCUtils
-        extend Google::Cloud::Core::GRPCUtils::ClassMethods
-        # rubocop:disable all
+      module Convert
+        ##
+        # @private Convert a Google::Protobuf::Struct to a Hash.
+        def self.struct_to_hash struct
+          # TODO: ArgumentError if struct is not a Google::Protobuf::Struct
+          Hash[struct.fields.map { |k, v| [k, value_to_object(v)] }]
+        end
+
+        ##
+        # @private Convert a Google::Protobuf::Value to an Object.
+        def self.value_to_object value
+          # TODO: ArgumentError if struct is not a Google::Protobuf::Value
+          if value.kind == :null_value
+            nil
+          elsif value.kind == :number_value
+            value.number_value
+          elsif value.kind == :string_value
+            value.string_value
+          elsif value.kind == :bool_value
+            value.bool_value
+          elsif value.kind == :struct_value
+            struct_to_hash value.struct_value
+          elsif value.kind == :list_value
+            value.list_value.values.map { |v| value_to_object(v) }
+          else
+            nil # just in case
+          end
+        end
+
+        ##
+        # @private Convert a Google::Protobuf::Map to a Hash
+        def self.map_to_hash map
+          if map.respond_to? :to_h
+            map.to_h
+          else
+            # Enumerable doesn't have to_h on ruby 2.0...
+            Hash[map.to_a]
+          end
+        end
 
         PROP_FILTER_OPS = { "<"            => :LESS_THAN,
                             "lt"           => :LESS_THAN,
@@ -134,8 +170,9 @@ module Google
         def self.decode_bytes bytes
           Base64.decode64(bytes.to_s).force_encoding Encoding::ASCII_8BIT
         end
-        # rubocop:enable all
       end
+
+      # rubocop:enable all
     end
   end
 end
