@@ -427,6 +427,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] emulator_host Pub/Sub emulator host. Optional.
+      #   If the param is nil, ENV["PUBSUB_EMULATOR_HOST"] will be used.
       #
       # @return [Google::Cloud::Pubsub::Project]
       #
@@ -439,26 +441,32 @@ module Google
       #   topic.publish "task completed"
       #
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
+                   client_config: nil, emulator_host: nil
         project ||= Google::Cloud::Pubsub::Project.default_project
         project = project.to_s # Always cast to a string
-        if ENV["PUBSUB_EMULATOR_HOST"]
+        emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
+        if emulator_host
           ps = Google::Cloud::Pubsub::Project.new(
             Google::Cloud::Pubsub::Service.new(
               project, :this_channel_is_insecure))
-          ps.service.host = ENV["PUBSUB_EMULATOR_HOST"]
+          ps.service.host = emulator_host
           return ps
         end
-        if keyfile.nil?
-          credentials = Google::Cloud::Pubsub::Credentials.default scope: scope
-        else
-          credentials = Google::Cloud::Pubsub::Credentials.new \
-            keyfile, scope: scope
-        end
+        credentials = credentials_with_scope keyfile, scope
         Google::Cloud::Pubsub::Project.new(
           Google::Cloud::Pubsub::Service.new(
             project, credentials, timeout: timeout,
                                   client_config: client_config))
+      end
+
+      ##
+      # @private
+      def self.credentials_with_scope keyfile, scope
+        if keyfile.nil?
+          Google::Cloud::Pubsub::Credentials.default(scope: scope)
+        else
+          Google::Cloud::Pubsub::Credentials.new(keyfile, scope: scope)
+        end
       end
     end
   end
