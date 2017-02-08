@@ -1,5 +1,9 @@
 # Release History
 
+### 0.22.0 / ????-??-??
+
+* Support for tracking of Stackdriver trace context.
+
 ### 0.21.1 / 2016-11-22
 
 * Support the new GAE Flex beta environment.
