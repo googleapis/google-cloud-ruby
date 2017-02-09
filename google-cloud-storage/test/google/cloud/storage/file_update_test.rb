@@ -106,6 +106,24 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
+  it "updates its storage_class" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi = file_gapi.dup
+    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    rewrite_resp = OpenStruct.new done: true, resource: patched_file_gapi
+    mock.expect :rewrite_object, rewrite_resp,
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi]
+
+    file.service.mocked_service = mock
+
+    file.storage_class.must_equal "STANDARD"
+    file.storage_class = :dra
+    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+
+    mock.verify
+  end
+
   it "updates multiple attributes in a block" do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new(
@@ -132,5 +150,15 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     end
 
     mock.verify
+  end
+
+  it "update does not set storage_class" do
+    file.service.mocked_service = nil
+
+    assert_raises NoMethodError do
+      file.update do |f|
+        f.storage_class = "NEARLINE"
+      end
+    end
   end
 end

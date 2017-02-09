@@ -171,12 +171,13 @@ module Google
                         cache_control: nil, content_disposition: nil,
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                        key: nil
+                        storage_class: nil, key: nil
           file_obj = Google::Apis::StorageV1::Object.new \
             cache_control: cache_control, content_type: content_type,
             content_disposition: content_disposition, md5_hash: md5,
             content_encoding: content_encoding, crc32c: crc32c,
-            content_language: content_language, metadata: metadata
+            content_language: content_language, metadata: metadata,
+            storage_class: storage_class
           content_type ||= mime_type_for(Pathname(source).to_path)
           execute do
             service.insert_object \
@@ -228,6 +229,17 @@ module Google
               source_generation: options[:generation],
               rewrite_token: options[:token],
               options: options
+          end
+        end
+
+        ## Rewrite a file from source bucket/object to a
+        # destination bucket/object.
+        def update_file_storage_class bucket_name, file_path, storage_class
+          execute do
+            service.rewrite_object \
+              bucket_name, file_path,
+              bucket_name, file_path,
+              Google::Apis::StorageV1::Object.new(storage_class: storage_class)
           end
         end
 

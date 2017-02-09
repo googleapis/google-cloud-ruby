@@ -268,6 +268,35 @@ module Google
         end
 
         ##
+        # The file's storage class. This defines how the file is stored and
+        # determines the SLA and the cost of storage. For more information, see
+        # [Storage
+        # Classes](https://cloud.google.com/storage/docs/storage-classes) and
+        # [Per-Object Storage
+        # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
+        def storage_class
+          @gapi.storage_class
+        end
+
+        ##
+        # Updates how the file is stored and determines the SLA and the cost of
+        # storage. Values include `:multi_regional`, `:regional`, `:nearline`,
+        # `:coldline`, `:standard`, and `:dra` (Durable Reduced Availability),
+        # as well as the strings returned by {File#storage_class} or
+        # {Bucket#storage_class}. For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/storage-classes) and
+        # [Per-Object Storage
+        # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
+        # The  default value is the default storage class for the bucket. See
+        # {Bucket#storage_class}.
+        # @param [Symbol, String] storage_class Storage class of the file.
+        def storage_class= storage_class
+          resp = service.update_file_storage_class \
+            bucket, name, storage_class_for(storage_class)
+          @gapi = resp.resource
+        end
+
+        ##
         # Updates the file with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cache_control=},
         # {#content_disposition=}, {#content_encoding=}, {#content_language=},
@@ -782,6 +811,18 @@ module Google
           file
         end
 
+        def storage_class_for str
+          return nil if str.nil?
+          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+            "dra" => "DURABLE_REDUCED_AVAILABILITY",
+            "durable" => "DURABLE_REDUCED_AVAILABILITY",
+            "nearline" => "NEARLINE",
+            "coldline" => "COLDLINE",
+            "multi_regional" => "MULTI_REGIONAL",
+            "regional" => "REGIONAL",
+            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
+        end
+
         ##
         # @private Create a signed_url for a file.
         class Signer
@@ -903,9 +944,15 @@ module Google
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < File
+          # @private Do not allow storage_class to be set in an update call.
+          # It cannot be set with PATCH.
+          undef :storage_class=
+
+          # @private
           attr_reader :updates
+
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @updates = []
             @gapi = gapi
