@@ -97,7 +97,10 @@ module Google
         def eval_call_stack call_stack_bindings
           puts "BREAKPOINT HIT*******************************\n\n"
           @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-          @evaluated_expressions = Evaluator.eval_expressions call_stack_bindings[0], @expressions
+          if @expressions
+            @evaluated_expressions =
+              Evaluator.eval_expressions call_stack_bindings[0], @expressions
+          end
 
           complete
           nil
@@ -126,8 +129,10 @@ module Google
             # b.condition = @condition
             b.expressions = @expressions
             b.is_final_state = @is_final_state
-            b.stack_frames = @stack_frames.map { |sf| sf.to_grpc }
-            b.evaluated_expressions = @evaluated_expressions.map { |exp| exp.to_grpc}
+            this_stack_frames = @stack_frames || []
+            b.stack_frames = this_stack_frames.map { |sf| sf.to_grpc }
+            this_evaluated_expressions = @evaluated_expressions || []
+            b.evaluated_expressions = this_evaluated_expressions.map { |exp| exp.to_grpc}
             #b.variable_table = @variable_table
           end
         end

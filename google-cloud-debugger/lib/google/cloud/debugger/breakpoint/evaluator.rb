@@ -43,8 +43,6 @@ module Google
 
                 if i < STACK_EVAL_DEPTH
                   frame_info.locals = eval_frame_location_variables frame_binding
-                  puts "*******************************************"
-                  p frame_info.locals
                 end
 
                 result << frame_info

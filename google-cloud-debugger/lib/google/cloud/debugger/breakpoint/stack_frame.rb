@@ -40,7 +40,8 @@ module Google
               sf.function = @function
               sf.location = @location.to_grpc
               # sf.arguments = @arguments
-              sf.locals = @locals.map { |var| var.to_grpc }
+              this_locals = @locals || []
+              sf.locals = this_locals.map { |var| var.to_grpc }
             end
           end
 
