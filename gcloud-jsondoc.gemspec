@@ -31,5 +31,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "minitest-autotest", "~> 1.0"
+  s.add_development_dependency "minitest-focus", "~> 1.1"
   s.add_development_dependency "activesupport", "~> 4.0"
 end
