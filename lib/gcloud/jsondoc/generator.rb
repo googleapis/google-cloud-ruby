@@ -1,5 +1,7 @@
+require "json"
 require "jbuilder"
 require "gcloud/jsondoc/doc"
+require "gcloud/jsondoc/generated_toc_doc"
 
 module Gcloud
   module Jsondoc
@@ -11,10 +13,16 @@ module Gcloud
       #
       # @param [YARD::Registry] registry The YARD registry instance containing
       #   the source code objects
-      def initialize registry, source_path = nil
+      # @param [String, nil] source_path The filesystem path to be used for
+      #   source links, instead of the relative execution path. Optional
+      # @param [Hash, nil] generate A hash configuration for types that need to
+      #   be generated, such as TOCs. Optional
+      def initialize registry, source_path = nil, generate: generate
         @registry = registry
         @docs = []
+        @types = []
         @source_path = source_path
+        @generate = generate
       end
 
       def write_to base_path
@@ -35,7 +43,6 @@ module Gcloud
           end
         end
         types_path = Pathname.new(base_path).join "types.json"
-        puts types_path.to_path
         File.write types_path, types_builder.target!
       end
 
@@ -46,15 +53,36 @@ module Gcloud
         modules.each do |object|
           @docs += Doc.new(object, @source_path).subtree
         end
+        set_types
+        generate_docs if @generate
         @registry.clear
       end
+
+      protected
 
       ##
       # Returns a flat list from @docs that can be used to produce `types.json`.
       def set_types
-        @types = []
         docs.each do |doc|
           @types += doc.types_subtree
+        end
+      end
+
+      def generate_docs
+        @generate[:types].each do |gtype|
+          if gtype[:toc]
+            included = @types.each_with_object({}) do |type, memo|
+              if Regexp.new(gtype[:toc][:include]).match(type.filepath) &&
+                !type.object.docstring.empty?
+                memo[type.title] = type.jbuilder.attributes!
+              end
+            end
+            generated_doc = GeneratedTocDoc.new gtype[:title], gtype[:toc][:package], included
+            @docs << generated_doc
+            @types << generated_doc
+          else
+            fail "Property :toc not found. Only TOC-type docs are supported."
+          end
         end
       end
     end
