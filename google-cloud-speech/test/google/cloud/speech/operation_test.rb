@@ -36,7 +36,10 @@ describe Google::Cloud::Speech::Operation, :mock_speech do
     ops_mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.must_be :done?
+    op.must_be :results?
+    op.wont_be :error?
 
     results = op.results
     results.count.must_equal 1
@@ -48,6 +51,7 @@ describe Google::Cloud::Speech::Operation, :mock_speech do
   it "refreshes but is still not done" do
     op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
@@ -56,12 +60,14 @@ describe Google::Cloud::Speech::Operation, :mock_speech do
     ops_mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.wont_be :done?
   end
 
   it "waits until done" do
     op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
@@ -78,7 +84,10 @@ describe Google::Cloud::Speech::Operation, :mock_speech do
     ops_mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.must_be :done?
+    op.must_be :results?
+    op.wont_be :error?
 
     results = op.results
     results.count.must_equal 1

@@ -196,6 +196,13 @@ YARD::Doctest.configure do |doctest|
     skip "Don't duplicate the tests for aliases"
   end
 
+  doctest.before "Google::Cloud::Speech::Project#operation" do
+    mock_speech do |mock, mock_ops|
+      mock_ops.expect :get_operation, op_done_false_grpc, ["1234567890"]
+      mock_ops.expect :get_operation, op_done_true_grpc, ["1234567890", options: nil]
+    end
+  end
+
   doctest.before "Google::Cloud::Speech::Audio" do
     mock_speech do |mock|
       mock.expect :recognize, recognize_response, recognize_args
@@ -227,6 +234,17 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Speech::Operation#results" do
     mock_speech do |mock_service, mock_ops|
       mock_service.expect :long_running_recognize, op_done_true(mock_ops), recognize_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Speech::Operation#error" do
+    mock_speech do |mock_service, mock_ops|
+      mock_service.expect :long_running_recognize, op_done_error(mock_ops), recognize_args
+    end
+  end
+  doctest.before "Google::Cloud::Speech::Operation#error?" do
+    mock_speech do |mock_service, mock_ops|
+      mock_service.expect :long_running_recognize, op_done_error(mock_ops), recognize_args
     end
   end
 
@@ -331,6 +349,17 @@ end
 
 def op_done_true ops_mock
   Google::Gax::Operation.new op_done_true_grpc, ops_mock,
+    Google::Cloud::Speech::V1::LongRunningRecognizeResponse,
+    Google::Cloud::Speech::V1::LongRunningRecognizeMetadata
+end
+
+def op_done_error_grpc
+  error_json = "{\"name\":\"1234567890\",\"done\":true,\"error\":{\"code\":13,\"message\":\"internal error\",\"details\":[]}}"
+  Google::Longrunning::Operation.decode_json error_json
+end
+
+def op_done_error ops_mock
+  Google::Gax::Operation.new op_done_error_grpc, ops_mock,
     Google::Cloud::Speech::V1::LongRunningRecognizeResponse,
     Google::Cloud::Speech::V1::LongRunningRecognizeMetadata
 end

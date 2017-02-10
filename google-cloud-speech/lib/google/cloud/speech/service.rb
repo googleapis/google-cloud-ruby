@@ -99,7 +99,12 @@ module Google
         end
 
         def get_op name
-          execute { ops.get_operation name }
+          execute do
+            Google::Gax::Operation.new \
+              ops.get_operation(name), ops,
+              V1::LongRunningRecognizeResponse,
+              V1::LongRunningRecognizeMetadata
+          end
         end
 
         def inspect

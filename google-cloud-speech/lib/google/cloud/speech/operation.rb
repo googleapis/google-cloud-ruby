@@ -14,6 +14,7 @@
 
 
 require "google/cloud/speech/v1"
+require "google/cloud/errors"
 
 module Google
   module Cloud
@@ -59,6 +60,49 @@ module Google
         end
 
         ##
+        # The unique identifier for the long running operation.
+        #
+        # @return [String] The unique identifier for the long running operation.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
+        #
+        #   op.id #=> "1234567890"
+        #
+        def id
+          @grpc.name
+        end
+
+        ##
+        # Checks if the speech-recognition processing of the audio data is
+        # complete.
+        #
+        # @return [boolean] `true` when complete, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
+        #
+        #   op.done? #=> false
+        #
+        def done?
+          @grpc.done?
+        end
+
+        ##
         # A speech recognition result corresponding to a portion of the audio.
         #
         # @return [Array<Result>] The transcribed text of audio recognized. If
@@ -70,15 +114,20 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
         #   op.done? #=> true
+        #   op.results? #=> true
         #   results = op.results
         #
         def results
+<<<<<<< HEAD
           return nil unless @grpc.response?
+=======
+          return nil unless results?
+>>>>>>> Add Operation lifecycle management
           @grpc.response.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
@@ -96,14 +145,65 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
-        #   op.done? #=> false
+        #   op.done? #=> true
+        #   op.results? #=> true
+        #   results = op.results
         #
-        def done?
-          @grpc.done?
+        def results?
+          @grpc.response?
+        end
+
+        ##
+        # The error information if the speech-recognition processing of the
+        # audio data has returned an error.
+        #
+        # @return [Google::Cloud::Error] The error.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
+        #
+        #   op.done? #=> true
+        #   op.error? #=> true
+        #   error = op.error
+        #
+        def error
+          return nil unless error?
+          Google::Cloud::Error.from_error @grpc.error
+        end
+
+        ##
+        # Checks if the speech-recognition processing of the audio data has
+        # returned an error.
+        #
+        # @return [boolean] `true` when errored, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
+        #
+        #   op.done? #=> true
+        #   op.error? #=> true
+        #   error = op.error
+        #
+        def error?
+          @grpc.error?
         end
 
         ##
@@ -116,9 +216,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
         #   op.done? #=> false
         #   op.reload! # API call
@@ -140,9 +240,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
         #   op.done? #=> false
         #   op.wait_until_done!

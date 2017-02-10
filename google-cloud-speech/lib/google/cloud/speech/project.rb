@@ -526,6 +526,38 @@ module Google
         end
         alias_method :stream_recognize, :stream
 
+        ##
+        # Performs asynchronous speech recognition. Requests are processed
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
+        #
+        # @see https://cloud.google.com/speech/reference/rpc/google.longrunning#google.longrunning.Operations
+        #   Long-running Operation
+        #
+        # @param [String] id The unique identifier for the long running
+        #   operation. Required.
+        #
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.operation "1234567890"
+        #
+        #   op.done? #=> false
+        #   op.reload!
+        #
+        def operation id
+          ensure_service!
+
+          grpc = service.get_op id
+          Operation.from_grpc grpc
+        end
+
         protected
 
         def audio_config encoding: nil, language: nil, sample_rate: nil,

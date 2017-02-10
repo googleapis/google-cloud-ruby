@@ -36,6 +36,7 @@ describe Google::Cloud::Speech::Audio, :process, :mock_speech do
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.wont_be :done?
   end
 
@@ -54,6 +55,7 @@ describe Google::Cloud::Speech::Audio, :process, :mock_speech do
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
     op.wont_be :done?
   end
 end

@@ -144,4 +144,26 @@ describe "Asynchonous Recognition", :speech do
     results.first.confidence.must_be_close_to 0.98267895
     results.first.alternatives.must_be :empty?
   end
+
+  it "can retrieve operations by id" do
+    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+
+    op2 = speech.operation op.id
+
+    op2.must_be_kind_of Google::Cloud::Speech::Operation
+    op2.id.must_equal op.id
+
+    op2.reload!
+    op2.wait_until_done!
+    op2.must_be :done?
+
+    results = op2.results
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.98267895
+    results.first.alternatives.must_be :empty?
+  end
 end
