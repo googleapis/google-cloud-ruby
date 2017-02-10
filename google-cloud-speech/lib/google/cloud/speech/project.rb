@@ -417,6 +417,8 @@ module Google
           grpc = service.recognize_async audio_obj.to_grpc, config
           Operation.from_grpc grpc
         end
+        alias_method :long_running_recognize, :process
+        alias_method :recognize_job, :process
 
         ##
         # Creates a Stream object to perform bidirectional streaming
@@ -522,6 +524,7 @@ module Google
 
           Stream.new service, grpc_req
         end
+        alias_method :stream_recognize, :stream
 
         protected
 

@@ -188,6 +188,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Speech::Project#long_running_recognize" do
+    skip "Don't duplicate the tests for aliases"
+  end
+
+  doctest.before "Google::Cloud::Speech::Project#recognize_job" do
+    skip "Don't duplicate the tests for aliases"
+  end
+
   doctest.before "Google::Cloud::Speech::Audio" do
     mock_speech do |mock|
       mock.expect :recognize, recognize_response, recognize_args
@@ -199,6 +207,14 @@ YARD::Doctest.configure do |doctest|
       mock_service.expect :long_running_recognize, op_done_false(mock_ops), recognize_args
       mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
+  end
+
+  doctest.before "Google::Cloud::Speech::Audio#long_running_recognize" do
+    skip "Don't duplicate the tests for aliases"
+  end
+
+  doctest.before "Google::Cloud::Speech::Audio#recognize_job" do
+    skip "Don't duplicate the tests for aliases"
   end
 
   doctest.before "Google::Cloud::Speech::Operation" do
@@ -227,6 +243,10 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Speech::Project#stream" do
+    skip "Don't have a great way to mock streaming requests yet"
+  end
+
+  doctest.before "Google::Cloud::Speech::Project#stream_recognize" do
     skip "Don't have a great way to mock streaming requests yet"
   end
 

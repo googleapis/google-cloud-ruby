@@ -261,6 +261,8 @@ module Google
                                profanity_filter: profanity_filter,
                                phrases: phrases
         end
+        alias_method :long_running_recognize, :process
+        alias_method :recognize_job, :process
 
         ##
         # @private The Google API Client object for the Audio.
