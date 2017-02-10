@@ -5,10 +5,21 @@ describe Gcloud::Jsondoc, :generator do
   let(:source_path) { "my-module-subdir" }
   let(:generate) do
     {
-      types: [
+      documents: [
         {
+          type: "toc",
           title: "Google::Datastore::V1::DataTypes",
-          toc: { package: "Google::Datastore::V1", include: "includedmodule/" }
+          modules: [
+            {
+              title: "IncludedModule",
+              include: ["includedmodule/"]
+            },
+            {
+              title: "IncludedModule2",
+              include: ["includedmodule2/"],
+              exclude: ["includedmodule2/nested"]
+            }
+          ]
         }
       ]
     }
@@ -29,7 +40,7 @@ describe Gcloud::Jsondoc, :generator do
 
   it "must have all docs" do
     docs.must_be_kind_of Array
-    docs.size.must_equal 11
+    docs.size.must_equal 16
     docs[0].full_name.must_equal "mymodule"
     docs[0].name.must_equal "MyModule"
     docs[0].filepath.must_equal "mymodule.json"
@@ -37,7 +48,7 @@ describe Gcloud::Jsondoc, :generator do
 
   it "must have all types" do
     types.must_be_kind_of Array
-    types.size.must_equal 28
+    types.size.must_equal 36
     types[0].full_name.must_equal "mymodule"
     types[0].name.must_equal "MyModule"
     types[0].filepath.must_equal "mymodule.json"

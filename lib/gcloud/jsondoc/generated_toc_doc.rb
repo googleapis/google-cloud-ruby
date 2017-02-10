@@ -13,7 +13,7 @@ module Gcloud
                   :methods, :subtree, :descendants, :types, :types_subtree,
                   :source_path
 
-      def initialize title, package, included
+      def initialize title, modules
         @name = title.split("::").last
         @title = title
         @full_name = @title.gsub("::", "/").downcase
@@ -24,8 +24,7 @@ module Gcloud
         @types = [self]
         @types_subtree = @types
         @source_path = ""
-        @package = package
-        @included = included
+        @modules = modules
         build!
       end
 
@@ -46,7 +45,8 @@ module Gcloud
 
       def description_template
 <<EOT
-<p>The <code><%= @package %></code> module provides the following types:</p>
+<% @modules.each do |m| -%>
+<h4><%= m.title %></h4>
 
 <table class="table">
   <thead>
@@ -56,15 +56,15 @@ module Gcloud
     </tr>
   </thead>
   <tbody>
-<% @included.each_pair do |k,v| %>
+<% m.types.each do |t| %>
     <tr>
-      <td><a data-custom-type="<%= v["id"] %>"><%= k %></a></td>
-      <td><%= md(v["description"].split("\n")[0].split(". ")[0]) %></td>
+      <td><a data-custom-type="<%= t.id %>"><%= t.name %></a></td>
+      <td><%= unwrap_paragraph t.description %></td>
     </tr>
-<% end -%>
-
+<% end %>
   </tbody>
 </table>
+<% end %>
 EOT
       end
     end

@@ -69,21 +69,48 @@ module Gcloud
       end
 
       def generate_docs
-        @generate[:types].each do |gtype|
-          if gtype[:toc]
-            included = @types.each_with_object({}) do |type, memo|
-              if Regexp.new(gtype[:toc][:include]).match(type.filepath) &&
-                !type.object.docstring.empty?
-                memo[type.title] = type.jbuilder.attributes!
+        @generate[:documents].each do |doc|
+          unless doc[:type] == "toc"
+            fail "documents type 'toc' not found. Only TOC-type docs are currently supported."
+          end
+
+          modules = doc[:modules].map do |m|
+            # There appears to be an issue with duplicates, so create a hash to
+            # ensure only one type for each id is returned.
+            matched_types = @types.each_with_object({}) do |type, memo|
+              if matching_type? type, m[:include], m[:exclude]
+                json = type.jbuilder.attributes!
+                memo[json["id"]] = OpenStruct.new(
+                  id: json["id"],
+                  name: type.title,
+                  description: short_description(json["description"])
+                )
               end
             end
-            generated_doc = GeneratedTocDoc.new gtype[:title], gtype[:toc][:package], included
-            @docs << generated_doc
-            @types << generated_doc
-          else
-            fail "Property :toc not found. Only TOC-type docs are supported."
+            OpenStruct.new title: m[:title], types: matched_types.values
           end
+          generated_doc = GeneratedTocDoc.new doc[:title], modules
+          @docs << generated_doc
+          @types << generated_doc
         end
+      end
+
+      def matching_type? type, include_patterns, exclude_patterns
+        !type.object.docstring.empty? && include_type?(type, include_patterns) &&
+          !include_type?(type, exclude_patterns)
+      end
+      def include_type? type, patterns
+        return false unless patterns
+        patterns.detect do |pattern|
+          Regexp.new(pattern).match(type.filepath)
+        end
+      end
+
+      def short_description description
+        first_sentence_regex = /\A(.+?)(\. |\z)/
+        result = description.match(first_sentence_regex)
+        description = result[0].rstrip if result
+        description
       end
     end
 

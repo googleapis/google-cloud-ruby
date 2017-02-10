@@ -64,10 +64,20 @@ require "gcloud/jsondoc"
 registry = YARD::Registry.load! ".yardoc"
 
 toc_config = {
-  types: [
+  documents: [
     {
+      type: "toc",
       title: "Google::Datastore::V1::DataTypes",
-      toc: { package: "Google::Datastore::V1", include: "google/datastore/v1/" }
+      modules: [
+        {
+          title: "Google::Protobuf",
+          include: ["google/protobuf"]
+        },
+        {
+          title: "Google::Datastore::V1",
+          include: ["google/datastore/v1"]
+        }
+      ]
     }
   ]
 }
