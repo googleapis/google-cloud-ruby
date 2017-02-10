@@ -40,7 +40,7 @@ module Google
 
           @service = service
           @debuggee = Debuggee.new service, module_name: module_name,
-                                   module_version: module_version
+                                            module_version: module_version
           @tracer = Debugger::Tracer.new self
           @breakpoint_manager = BreakpointManager.new service
           @breakpoint_manager.on_breakpoints_change = method :breakpoints_change_callback

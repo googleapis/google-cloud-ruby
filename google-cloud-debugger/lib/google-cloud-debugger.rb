@@ -23,16 +23,22 @@ require "google/cloud"
 
 module Google
   module Cloud
-    def debugger scope: nil, timeout: nil, client_config: nil
-      Google::Cloud.debugger @project, @keyfile, scope: scope,
+    def debugger module_name: nil, module_version: nil, scope: nil,
+                 timeout: nil, client_config: nil
+      Google::Cloud.debugger @project, @keyfile, module_name: module_name,
+                                                 module_version: module_version,
+                                                 scope: scope,
                                                  timeout: (timeout || @timeout),
                                                  client_config: client_config
     end
 
-    def self.debugger project = nil, keyfile = nil, scope: nil, timeout: nil,
-                     client_config: nil
+    def self.debugger project = nil, keyfile = nil, module_name: nil,
+                      module_version: nil, scope: nil, timeout: nil,
+                      client_config: nil
       require "google/cloud/debugger"
       Google::Cloud::Debugger.new project: project, keyfile: keyfile,
+                                  module_name: module_name,
+                                  module_version: module_version,
                                   scope: scope, timeout: timeout,
                                   client_config: client_config
     end

@@ -19,15 +19,16 @@ require "google/cloud/debugger/project"
 module Google
   module Cloud
     module Debugger
-      def self.new project: nil, module_name: nil, module_version: nil,
-                   keyfile: nil, scope: nil, timeout: nil,
+      def self.new project: nil, keyfile: nil, module_name: nil,
+                   module_version: nil, scope: nil, timeout: nil,
                    client_config: nil
         project ||= Google::Cloud::Debugger::Project.default_project
         project = project.to_s # Always cast to a string
         module_name ||= Google::Cloud::Debugger::Project.default_module_name
         module_name = module_name.to_s
-        module_version ||= Google::Cloud::Debugger::Project.default_module_name
+        module_version ||= Google::Cloud::Debugger::Project.default_module_version
         module_version = module_version.to_s
+
         fail ArgumentError, "project is missing" if project.empty?
         fail ArgumentError, "module_name is missing" if module_name.empty?
         fail ArgumentError, "module_version is missing" if module_version.empty?
