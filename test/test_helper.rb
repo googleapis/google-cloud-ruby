@@ -1,4 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'gcloud/jsondoc'
 
-require 'minitest/autorun'
+gem "minitest"
+require "minitest/autorun"
+require "minitest/focus"
