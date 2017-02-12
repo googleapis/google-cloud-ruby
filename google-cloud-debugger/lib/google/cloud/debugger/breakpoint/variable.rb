@@ -18,6 +18,8 @@ module Google
     module Debugger
       class Breakpoint
         class Variable
+          MAX_DEPTH = 2
+
           attr_accessor :name
 
           attr_accessor :value
@@ -33,12 +35,46 @@ module Google
             @members = []
           end
 
-          def self.from_rb_var source
-            Variable.new.tap do |var|
+          def self.from_rb_var source, name: nil, depth: MAX_DEPTH
+            return source if source.is_a? Variable
+            var = Variable.new
+            var.name = name.to_s
+
+            if source.is_a? Hash
+              var.type = "Hash"
+              if depth > 0
+                source.each_pair do |k, v|
+                  var.members << from_rb_var(v, name: k, depth: depth - 1)
+                end
+              else
+                var.value = source.to_s
+              end
+            elsif source.is_a? Array
+              var.type = "Array"
+              if depth > 0
+                source.each_with_index do |el, i|
+                  var.members << from_rb_var(el, name: "[#{i}]",
+                                                 depth: depth - 1)
+                end
+              else
+                var.value = source.to_s
+              end
+            else
               var.type = source.class.to_s
-              var.value = source.to_s
-              # TODO: recursively add members variable array
+              instance_var_names = source.instance_variables
+              if !instance_var_names.empty? && depth > 0
+                instance_var_names.each do |instance_var_name|
+                  instance_var = source.instance_variable_get instance_var_name
+                  var.members << from_rb_var(instance_var,
+                                             name: instance_var_name,
+                                             depth: depth - 1)
+                end
+              else
+                var.value = source.to_s
+              end
             end
+
+            var
           end
 
           def to_grpc

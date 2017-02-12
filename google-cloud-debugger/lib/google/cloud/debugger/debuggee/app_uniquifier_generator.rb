@@ -42,8 +42,9 @@ module Google
               if entry.directory?
                 process_directory sha, entry, depth + 1
               else
-                next unless entry.extname == ".rb"
-                sha << "#{entry.to_path}:#{entry.stat.size}"
+                next unless entry.extname == ".rb" ||
+                            entry.basename.to_s == "Gemfile.lock"
+                sha << "#{entry.expand_path}:#{entry.stat.size}"
               end
             end
           end

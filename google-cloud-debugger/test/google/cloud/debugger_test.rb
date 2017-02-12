@@ -105,7 +105,7 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be_nil
         "debugger-credentials"
       }
       stubbed_module_name = "utest-service"
@@ -168,7 +168,7 @@ describe Google::Cloud do
     it "uses provided project_id, keyfile, module_name, and module_version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be_nil
         "debugger-credentials"
       }
       stubbed_module_name = "utest-service"
