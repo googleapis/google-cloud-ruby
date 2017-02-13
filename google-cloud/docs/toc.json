@@ -399,6 +399,20 @@
         {
           "title": "Result",
           "type": "google/cloud/speech/result"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/speech/v1",
+          "nav": [
+            {
+              "title": "SpeechClient",
+              "type": "google/cloud/speech/v1/speechclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/speech/v1/datatypes"
+            }
+          ]
         }
       ]
     },

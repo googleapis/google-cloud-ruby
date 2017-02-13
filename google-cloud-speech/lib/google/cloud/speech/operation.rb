@@ -123,11 +123,7 @@ module Google
         #   results = op.results
         #
         def results
-<<<<<<< HEAD
-          return nil unless @grpc.response?
-=======
           return nil unless results?
->>>>>>> Add Operation lifecycle management
           @grpc.response.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
