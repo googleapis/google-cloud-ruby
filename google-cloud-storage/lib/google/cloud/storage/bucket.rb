@@ -514,6 +514,16 @@ module Google
         # @param [Hash] metadata A hash of custom, user-provided web-safe keys
         #   and arbitrary string values that will returned with requests for the
         #   file as "x-goog-meta-" response headers.
+        # @param [Symbol, String] storage_class Storage class of the file.
+        #   Determines how the file is stored and determines the SLA and the
+        #   cost of storage. Values include `:multi_regional`, `:regional`,
+        #   `:nearline`, `:coldline`, `:standard`, and `:dra` (Durable Reduced
+        #   Availability), as well as the strings returned by
+        #   {Bucket#storage_class}. For more information, see [Storage
+        #   Classes](https://cloud.google.com/storage/docs/storage-classes) and
+        #   [Per-Object Storage
+        #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
+        #   The default value is the default storage class for the bucket.
         # @param [String] encryption_key Optional. A customer-supplied, AES-256
         #   encryption key that will be used to encrypt the file.
         #
@@ -561,14 +571,14 @@ module Google
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
                         crc32c: nil, md5: nil, metadata: nil,
-                        encryption_key: nil
+                        storage_class: nil, encryption_key: nil
           ensure_service!
           options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                       cache_control: cache_control, content_type: content_type,
                       content_disposition: content_disposition, crc32c: crc32c,
-                      content_encoding: content_encoding,
-                      content_language: content_language, metadata: metadata,
-                      key: encryption_key }
+                      content_encoding: content_encoding, metadata: metadata,
+                      content_language: content_language, key: encryption_key,
+                      storage_class: storage_class_for(storage_class) }
           ensure_file_exists! file
           # TODO: Handle file as an IO and path is missing more gracefully
           path ||= Pathname(file).to_path
@@ -891,6 +901,18 @@ module Google
         def ensure_file_exists! file
           return if ::File.file? file
           fail ArgumentError, "cannot find file #{file}"
+        end
+
+        def storage_class_for str
+          return nil if str.nil?
+          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+            "dra" => "DURABLE_REDUCED_AVAILABILITY",
+            "durable" => "DURABLE_REDUCED_AVAILABILITY",
+            "nearline" => "NEARLINE",
+            "coldline" => "COLDLINE",
+            "multi_regional" => "MULTI_REGIONAL",
+            "regional" => "REGIONAL",
+            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
         end
 
         ##

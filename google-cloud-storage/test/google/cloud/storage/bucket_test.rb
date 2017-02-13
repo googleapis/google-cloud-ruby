@@ -231,7 +231,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
         content_disposition: "attachment; filename=filename.ext",
         content_encoding: "gzip",
         content_language: "en",
-        content_type: "image/png"
+        content_type: "image/png",
+        storage_class: "NEARLINE"
       }
 
       mock = Minitest::Mock.new
@@ -727,12 +728,14 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   def empty_file_gapi cache_control: nil, content_disposition: nil,
                       content_encoding: nil, content_language: nil,
-                      content_type: nil, crc32c: nil, md5: nil, metadata: nil
+                      content_type: nil, crc32c: nil, md5: nil, metadata: nil,
+                      storage_class: nil
     Google::Apis::StorageV1::Object.new(
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,
       content_encoding: content_encoding, crc32c: crc32c,
-      content_language: content_language, metadata: metadata)
+      content_language: content_language, metadata: metadata,
+      storage_class: storage_class)
   end
 
   def find_file_gapi bucket=nil, name = nil

@@ -231,7 +231,7 @@ module Google
         #   Values include `:multi_regional`, `:regional`, `:nearline`,
         #   `:coldline`, `:standard`, and `:dra` (Durable Reduced
         #   Availability), as well as the strings returned by
-        #   Bucket#storage_class. For more information, see [Storage
+        #   {Bucket#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
         #   default value is `:standard`, which is equivalent to
         #   `:multi_regional` or `:regional` depending on the bucket's location
@@ -306,6 +306,7 @@ module Google
         end
 
         def storage_class_for str
+          return nil if str.nil?
           { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
             "dra" => "DURABLE_REDUCED_AVAILABILITY",
             "durable" => "DURABLE_REDUCED_AVAILABILITY",
@@ -313,7 +314,7 @@ module Google
             "coldline" => "COLDLINE",
             "multi_regional" => "MULTI_REGIONAL",
             "regional" => "REGIONAL",
-            "standard" => "STANDARD" }[str.to_s.downcase]
+            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
         end
       end
     end
