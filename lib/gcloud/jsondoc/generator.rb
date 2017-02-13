@@ -107,9 +107,8 @@ module Gcloud
       end
 
       def short_description description
-        first_sentence_regex = /\A(.+?)(\. |\z)/
-        result = description.match(first_sentence_regex)
-        description = result[0].rstrip if result
+        result = description.split(/\.(?=[\W])/)
+        description = result[0] + "." if result.size > 1
         description
       end
     end

@@ -57,13 +57,13 @@ describe Gcloud::Jsondoc, :generated_toc_doc do
     <tr>
       <td><a data-custom-type=\"includedmodule/classa\">IncludedModule::ClassA</a></td>
       <td>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
-applied in order. The following sequences of mutations affecting a single
-entity are not permitted in a single +Commit+ request.</td>
+applied in order.</td>
     </tr>
 
     <tr>
-      <td><a data-custom-type=\"includedmodule/classb\">IncludedModule::ClassB</a></td>
-      <td>Entities not found as +ResultType.KEY_ONLY+ entities.</td>
+      <td><a data-custom-type=\"includedmodule/any\">IncludedModule::Any</a></td>
+      <td>+Any+ contains an arbitrary serialized protocol buffer message along with a
+URL that describes the type of the serialized message.</td>
     </tr>
 
     <tr>
@@ -87,8 +87,7 @@ entity are not permitted in a single +Commit+ request.</td>
     <tr>
       <td><a data-custom-type=\"includedmodule2/classa\">IncludedModule2::ClassA</a></td>
       <td>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
-applied in order. The following sequences of mutations affecting a single
-entity are not permitted in a single +Commit+ request.</td>
+applied in order.</td>
     </tr>
 
     <tr>
