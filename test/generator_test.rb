@@ -48,7 +48,7 @@ describe Gcloud::Jsondoc, :generator do
 
   it "must have all types" do
     types.must_be_kind_of Array
-    types.size.must_equal 36
+    types.size.must_equal 38
     types[0].full_name.must_equal "mymodule"
     types[0].name.must_equal "MyModule"
     types[0].filepath.must_equal "mymodule.json"

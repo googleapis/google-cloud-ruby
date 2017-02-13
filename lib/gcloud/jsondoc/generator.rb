@@ -69,27 +69,27 @@ module Gcloud
       end
 
       def generate_docs
-        @generate[:documents].each do |doc|
-          unless doc[:type] == "toc"
+        @generate[:documents].each do |g_config|
+          unless g_config[:type] == "toc"
             fail "documents type 'toc' not found. Only TOC-type docs are currently supported."
           end
 
-          modules = doc[:modules].map do |m|
+          modules = g_config[:modules].map do |m|
             # There appears to be an issue with duplicates, so create a hash to
             # ensure only one type for each id is returned.
-            matched_types = @types.each_with_object({}) do |type, memo|
-              if matching_type? type, m[:include], m[:exclude]
-                json = type.jbuilder.attributes!
+            matched_types = @docs.each_with_object({}) do |doc, memo|
+              if matching_type? doc, m[:include], m[:exclude]
+                json = doc.jbuilder.attributes!
                 memo[json["id"]] = OpenStruct.new(
                   id: json["id"],
-                  name: type.title,
+                  name: doc.title,
                   description: short_description(json["description"])
                 )
               end
             end
             OpenStruct.new title: m[:title], types: matched_types.values
           end
-          generated_doc = GeneratedTocDoc.new doc[:title], modules
+          generated_doc = GeneratedTocDoc.new g_config[:title], modules
           @docs << generated_doc
           @types << generated_doc
         end
