@@ -17,7 +17,7 @@ module Gcloud
       #   source links, instead of the relative execution path. Optional
       # @param [Hash, nil] generate A hash configuration for types that need to
       #   be generated, such as TOCs. Optional
-      def initialize registry, source_path = nil, generate: generate
+      def initialize registry, source_path = nil, generate: nil
         @registry = registry
         @docs = []
         @types = []
