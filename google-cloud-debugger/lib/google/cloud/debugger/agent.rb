@@ -72,8 +72,10 @@ module Google
 
         def breakpoints_change_callback active_breakpoints
           if active_breakpoints.empty?
+            puts "*********** Agent: tracer stopped"
             tracer.stop
           else
+            puts "*********** Agent: tracer started"
             tracer.start
           end
         end

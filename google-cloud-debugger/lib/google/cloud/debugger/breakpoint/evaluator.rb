@@ -42,7 +42,7 @@ module Google
                 end
 
                 if i < STACK_EVAL_DEPTH
-                  frame_info.locals = eval_frame_location_variables frame_binding
+                  frame_info.locals = eval_frame_variables frame_binding
                 end
 
                 result << frame_info
@@ -62,15 +62,19 @@ module Google
 
             private
 
-            def eval_frame_location_variables frame_binding
-              frame_binding.local_variables.map do |local_var_name|
-                local_var = frame_binding.local_variable_get(local_var_name)
-                puts "name: #{local_var_name}, local var #{local_var}"
+            def eval_frame_variables frame_binding
+              result_variables = []
 
-                Variable.from_rb_var(local_var).tap do |var|
-                  var.name = local_var_name
-                end
+              result_variables << Variable.from_rb_var(frame_binding.receiver,
+                                                       name: "self")
+
+              result_variables += frame_binding.local_variables.map do |local_var_name|
+                local_var = frame_binding.local_variable_get(local_var_name)
+
+                Variable.from_rb_var(local_var, name: local_var_name)
               end
+
+              result_variables
             end
 
             def readonly_eval_expression binding, expression

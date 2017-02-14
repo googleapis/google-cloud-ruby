@@ -18,7 +18,9 @@ module Google
     module Debugger
       class Breakpoint
         class Variable
-          MAX_DEPTH = 2
+          MAX_DEPTH = 3
+          MAX_MEMBERS = 25
+          MAX_STRING_LENGTH = 260
 
           attr_accessor :name
 
@@ -38,40 +40,33 @@ module Google
           def self.from_rb_var source, name: nil, depth: MAX_DEPTH
             return source if source.is_a? Variable
             var = Variable.new
-            var.name = name.to_s
+            var.name = name.to_s if name
+            var.type = source.class.to_s
 
-            if source.is_a? Hash
-              var.type = "Hash"
-              if depth > 0
-                source.each_pair do |k, v|
+            case source
+              when Hash
+                parse_nested var, source, source, depth do |(k, v), _|
                   var.members << from_rb_var(v, name: k, depth: depth - 1)
                 end
-              else
-                var.value = source.to_s
-              end
-            elsif source.is_a? Array
-              var.type = "Array"
-              if depth > 0
-                source.each_with_index do |el, i|
+              when Array
+                parse_nested var, source, source, depth do |el, i|
                   var.members << from_rb_var(el, name: "[#{i}]",
                                                  depth: depth - 1)
                 end
+              when Time
+                var.value = source.inspect
               else
-                var.value = source.to_s
-              end
-            else
-              var.type = source.class.to_s
-              instance_var_names = source.instance_variables
-              if !instance_var_names.empty? && depth > 0
-                instance_var_names.each do |instance_var_name|
-                  instance_var = source.instance_variable_get instance_var_name
-                  var.members << from_rb_var(instance_var,
-                                             name: instance_var_name,
-                                             depth: depth - 1)
+                unless source.instance_variables.empty?
+                  parse_nested var, source,
+                               source.instance_variables, depth do |var_name, _|
+                    instance_var = source.instance_variable_get var_name
+                    var.members << from_rb_var(instance_var,
+                                               name: var_name,
+                                               depth: depth - 1)
+                  end
+                else
+                  var.value = truncate_str(source.inspect)
                 end
-              else
-                var.value = source.to_s
-              end
             end
 
             var
@@ -95,6 +90,28 @@ module Google
               var.members = members.map { |mem| Variable.from_grpc mem }
             end
           end
+
+          def self.parse_nested var, source, member_enumerable, depth
+            if depth > 0
+              member_enumerable.each_with_index do |el, i|
+                if i < MAX_MEMBERS
+                  yield el, i
+                else
+                  var.members << Variable.new.tap { |last_var|
+                    last_var.value = "(Only first 25 items were captured)"
+                  }
+                  break
+                end
+              end
+            else
+              var.value = truncate_str(source.inspect)
+            end
+          end
+
+          def self.truncate_str str
+            str.gsub(/(.{#{MAX_STRING_LENGTH - 3}}).+/,'\1...')
+          end
+          private_class_method :parse_nested, :truncate_str
         end
       end
     end

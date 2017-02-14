@@ -96,11 +96,17 @@ module Google
 
         def eval_call_stack call_stack_bindings
           puts "BREAKPOINT HIT*******************************\n\n"
-          @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-          if @expressions
-            @evaluated_expressions =
-              Evaluator.eval_expressions call_stack_bindings[0], @expressions
+          begin
+            @stack_frames = Evaluator.eval_call_stack call_stack_bindings
+            if @expressions
+              @evaluated_expressions =
+                Evaluator.eval_expressions call_stack_bindings[0], @expressions
+            end
+          rescue => e
+            puts e.message
+            puts e.backtrace
           end
+
 
           complete
           nil
