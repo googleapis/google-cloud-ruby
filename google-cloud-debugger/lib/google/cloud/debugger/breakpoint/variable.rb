@@ -53,8 +53,6 @@ module Google
                   var.members << from_rb_var(el, name: "[#{i}]",
                                                  depth: depth - 1)
                 end
-              when Time
-                var.value = source.inspect
               else
                 unless source.instance_variables.empty?
                   parse_nested var, source,

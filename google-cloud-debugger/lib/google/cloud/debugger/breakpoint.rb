@@ -130,9 +130,9 @@ module Google
         def to_grpc
           Google::Apis::ClouddebuggerV2::Breakpoint.new.tap do |b|
             b.id = @id
-            # b.action = @action
+            b.action = @action
             b.location = @location.to_grpc
-            # b.condition = @condition
+            b.condition = @condition
             b.expressions = @expressions
             b.is_final_state = @is_final_state
             this_stack_frames = @stack_frames || []

@@ -15,41 +15,89 @@ rb_disable_tracepoints(VALUE self)
     return Qnil;
 }
 
+static int
+hash_get_keys_callback(VALUE key, VALUE val, VALUE key_ary)
+{
+    rb_ary_push(key_ary, key);
+
+    return ST_CONTINUE;
+}
+
 static VALUE
-match_breakpoints(VALUE self, VALUE tracepoint_path, VALUE tracepoint_lineno)
+hash_get_keys(VALUE hash)
+{
+    VALUE key_ary;
+
+    if(!RB_TYPE_P(hash, T_HASH)) {
+        return Qnil;
+    }
+
+    key_ary = rb_ary_new();
+
+    rb_hash_foreach(hash, hash_get_keys_callback, key_ary);
+
+    return key_ary;
+}
+
+static VALUE
+match_breakpoints_files(VALUE self, VALUE tracepoint_path)
 {
     int i;
     char *c_tracepoint_path = rb_string_value_cstr(&tracepoint_path);
-    int c_tracepoint_lineno = -1;
 
-    VALUE breakpoints = rb_iv_get(self, "@breakpoints_cache");
-    VALUE* c_breakpoints = RARRAY_PTR(breakpoints);
-    int breakpoints_len = RARRAY_LEN(breakpoints);
+    VALUE path_breakpoints_hash = rb_iv_get(self, "@breakpoints_cache");
+    VALUE breakpoints_paths = hash_get_keys(path_breakpoints_hash);
+    VALUE *c_breakpoints_paths = RARRAY_PTR(breakpoints_paths);
+    int breakpoints_paths_len = RARRAY_LEN(breakpoints_paths);
 
-    if (FIXNUM_P(tracepoint_lineno)) {
-        c_tracepoint_lineno = NUM2INT(tracepoint_lineno);
-    }
-
-    for(i = 0; i < breakpoints_len; i ++) {
-        VALUE breakpoint = c_breakpoints[i];
-        VALUE breakpoint_path = rb_funcall(breakpoint, rb_intern("path"), 0);
+    for (i = 0; i < breakpoints_paths_len; i++) {
+        VALUE breakpoint_path = c_breakpoints_paths[i];
         char *c_breakpoint_path = rb_string_value_cstr(&breakpoint_path);
 
-        // If tracepoint_lineno given, check both file path and lineno.
-        // Otherwise only check file path.
-        if (c_tracepoint_lineno >= 0) {
-            VALUE breakpoint_lineno = rb_funcall(breakpoint, rb_intern("line"), 0);
-            int c_breakpoint_lineno = NUM2INT(breakpoint_lineno);
-            if ((c_tracepoint_lineno == c_breakpoint_lineno) && (strcmp(c_tracepoint_path, c_breakpoint_path) == 0)) {
-                return breakpoint;
-            }
-
-        } else if (strcmp(c_tracepoint_path, c_breakpoint_path) == 0) {
-            return breakpoint;
+        if (strcmp(c_tracepoint_path, c_breakpoint_path) == 0) {
+            return Qtrue;
         }
     }
 
-    return Qnil;
+    return Qfalse;
+}
+
+static VALUE
+match_breakpoints(VALUE self, VALUE tracepoint_path, VALUE tracepoint_lineno)
+{
+    int i, j;
+    char *c_tracepoint_path = rb_string_value_cstr(&tracepoint_path);
+    int c_tracepoint_lineno = c_tracepoint_lineno = NUM2INT(tracepoint_lineno);
+
+    VALUE path_breakpoints_hash = rb_iv_get(self, "@breakpoints_cache");
+    VALUE breakpoints_paths = hash_get_keys(path_breakpoints_hash);
+    VALUE *c_breakpoints_paths = RARRAY_PTR(breakpoints_paths);
+    int breakpoints_paths_len = RARRAY_LEN(breakpoints_paths);
+    VALUE matching_breakpoints = Qnil;
+
+    for (i = 0; i < breakpoints_paths_len; i++) {
+        VALUE breakpoint_path = c_breakpoints_paths[i];
+        char *c_breakpoint_path = rb_string_value_cstr(&breakpoint_path);
+
+        // Found matching file path, keep going
+        if (strcmp(c_tracepoint_path, c_breakpoint_path) == 0) {
+            VALUE line_breakpoint_hash = rb_hash_aref(path_breakpoints_hash, breakpoint_path);
+            VALUE breakpoints_lines = hash_get_keys(line_breakpoint_hash);
+            VALUE *c_breakpoints_lines = RARRAY_PTR(breakpoints_lines);
+            int breakpoints_lines_len = RARRAY_LEN(breakpoints_lines);
+
+            for (j = 0; j < breakpoints_lines_len; j++) {
+                VALUE breakpoint_lineno = c_breakpoints_lines[j];
+                int c_breakpoint_lineno = NUM2INT(breakpoint_lineno);
+
+                if (c_tracepoint_lineno == c_breakpoint_lineno) {
+                    matching_breakpoints = rb_hash_aref(line_breakpoint_hash, breakpoint_lineno);
+                }
+            }
+        }
+    }
+
+    return matching_breakpoints;
 }
 
 // Return 0 if return tracepoint is already enabled. Otherwise enable return
@@ -104,7 +152,7 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
     VALUE line_tracepoint = rb_iv_get(self, "@line_tracepoint");
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_path = rb_tracearg_path(tracepoint_arg);
-    VALUE match_found = match_breakpoints(self, tracepoint_path, Qnil);
+    VALUE match_found = match_breakpoints_files(self, tracepoint_path);
 
     // Return if line_tracepoint is nil
     if (!RTEST(line_tracepoint)) {
@@ -146,7 +194,7 @@ return_tracepoint_callback(VALUE tracepoint, void *data)
         return;
     }
 
-    match_found = match_breakpoints(self, caller_path, Qnil);
+    match_found = match_breakpoints_files(self, caller_path);
 
     if (RTEST(match_found)) {
         if (!RTEST(rb_tracepoint_enabled_p(line_tracepoint))) {
@@ -162,22 +210,37 @@ return_tracepoint_callback(VALUE tracepoint, void *data)
 static void
 line_tracepoint_callback(VALUE tracepoint, void *data)
 {
-    VALUE matching_breakpoint;
     VALUE self = (VALUE) data;
 
+    int i;
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_path = rb_tracearg_path(tracepoint_arg);
     VALUE tracepoint_lineno = rb_tracearg_lineno(tracepoint_arg);
     VALUE tracepoint_binding;
     VALUE call_stack_bindings;
 
-    matching_breakpoint = match_breakpoints(self, tracepoint_path, tracepoint_lineno);
-    if (RTEST(matching_breakpoint)) {
-        tracepoint_binding = rb_tracearg_binding(tracepoint_arg);
-        call_stack_bindings = rb_funcall(tracepoint_binding, rb_intern("callers"), 0);
-        rb_ary_pop(call_stack_bindings);
+    VALUE matching_breakpoints = match_breakpoints(self, tracepoint_path, tracepoint_lineno);
+    VALUE *c_matching_breakpoints;
+    int matching_breakpoints_len;
 
-        rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
+    // If not found any breakpoints (matching_breakpoints isn't t_array type), directly return.
+    if (!RB_TYPE_P(matching_breakpoints, T_ARRAY)) {
+        return;
+    }
+    c_matching_breakpoints = RARRAY_PTR(matching_breakpoints);
+    matching_breakpoints_len = RARRAY_LEN(matching_breakpoints);
+
+    // Evaluate each of the matching breakpoint
+    for (i = 0; i < matching_breakpoints_len; i++) {
+        VALUE matching_breakpoint = c_matching_breakpoints[i];
+
+        if (RTEST(matching_breakpoint)) {
+            tracepoint_binding = rb_tracearg_binding(tracepoint_arg);
+            call_stack_bindings = rb_funcall(tracepoint_binding, rb_intern("callers"), 0);
+            rb_ary_pop(call_stack_bindings);
+
+            rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
+        }
     }
 
     return;
@@ -223,7 +286,4 @@ Init_tracer(VALUE mDebugger)
 
     rb_define_method(cTracer, "register_tracepoints", rb_register_tracepoints, 0);
     rb_define_method(cTracer, "disable_tracepoints", rb_disable_tracepoints, 0);
-
-    printf("Init_tracer called!\n");
-    fflush(stdout);
 }

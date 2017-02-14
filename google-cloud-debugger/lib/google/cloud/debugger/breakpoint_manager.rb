@@ -27,16 +27,10 @@ module Google
 
         attr_accessor :on_breakpoints_change
 
-        def initialize service, app_root: nil
+        def initialize service
           super()
 
           @service = service
-          @app_root = app_root
-          if defined? Rack::Directory
-            @app_root ||= Rack::Directory.new("").root
-          end
-
-          fail "Unable to determine application root path" unless @app_root
 
           @completed_breakpoints = []
           @active_breakpoints = []
@@ -54,6 +48,10 @@ module Google
 
           synchronize do
             server_breakpoints = response.breakpoints || []
+
+            # puts "Servier breakpoints:"
+            # p server_breakpoints
+
             server_breakpoints = server_breakpoints.map { |grpc_b|
               create_breakpoint_from_grpc grpc_b
             }
@@ -65,6 +63,11 @@ module Google
 
             on_breakpoints_change.call(@active_breakpoints) if
               on_breakpoints_change.respond_to?(:call)
+
+            # puts "Active breakpoints: after sync"
+            # p @active_breakpoints
+            # puts "Completed breakpoints: after sync"
+            # p @completed_breakpoints
           end
 
           true
@@ -98,9 +101,6 @@ module Google
             b.stack_frames = stack_frames.map { |sf|
               Breakpoint::StackFrame.from_grpc sf }
           end
-
-          # Update breakpoint's relative file path to absolute path
-          breakpoint.location.path &&= "#{app_root}/#{breakpoint.location.path}"
 
           yield breakpoint if block_given?
 

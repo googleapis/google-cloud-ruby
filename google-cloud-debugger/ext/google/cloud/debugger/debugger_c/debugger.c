@@ -3,8 +3,6 @@
 
 static VALUE mGoogle, mCloud, mDebugger;
 
-//void Init_tracer(VALUE mDebugger);
-
 void
 Init_debugger_c()
 {

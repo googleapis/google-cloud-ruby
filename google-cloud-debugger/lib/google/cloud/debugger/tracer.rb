@@ -21,7 +21,17 @@ module Google
       class Tracer
         attr_reader :agent
 
-        def initialize agent
+        attr_accessor :app_root
+
+        attr_reader :file_tracepoint
+
+        attr_reader :return_tracepoint
+
+        attr_reader :line_tracepoint
+
+        attr_reader :breapoints_cache
+
+        def initialize agent, app_root: nil
           @agent = agent
           @file_tracepoint = nil
           @return_tracepoint = nil
@@ -31,10 +41,29 @@ module Google
           # @fiber_switch_tracepoint = nil
           @line_tracepoint = nil
           @breakpoints_cache = {}
+
+          @app_root = app_root
+          if defined? Rack::Directory
+            @app_root ||= Rack::Directory.new("").root
+          end
+
+          fail "Unable to determine application root path" unless @app_root
         end
 
         def update_breakpoints_cache
-          @breakpoints_cache = agent.breakpoint_manager.active_breakpoints.clone
+          active_breakpoints = agent.breakpoint_manager.active_breakpoints
+          breakpoints_hash = {}
+
+          active_breakpoints.each do |active_breakpoint|
+            breakpoint_line = active_breakpoint.line
+            breakpoint_path = "#{app_root}/#{active_breakpoint.path}"
+            breakpoints_hash[breakpoint_path] ||= {}
+            breakpoints_hash[breakpoint_path][breakpoint_line] ||= []
+            breakpoints_hash[breakpoint_path][breakpoint_line].push(
+              active_breakpoint)
+          end
+
+          @breakpoints_cache = breakpoints_hash
         end
 
         def eval_breakpoint breakpoint, call_stack_bindings
