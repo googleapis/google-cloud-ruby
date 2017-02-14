@@ -92,9 +92,9 @@ module Google
     #
     # face.features.to_h.count #=> 9
     # face.features.eyes.left.pupil
-    # #=> #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
+    # #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
     # face.features.chin.center
-    # #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+    # #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
     # ```
     #
     # To run multiple features on an image in a single request, pass the image

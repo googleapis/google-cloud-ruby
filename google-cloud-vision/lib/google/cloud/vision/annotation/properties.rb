@@ -112,8 +112,8 @@ module Google
           #   color.blue #=> 20.0
           #   color.rgb #=> "f7ec14"
           #   color.alpha #=> 1.0
-          #   color.score #=> 0.20301804
-          #   color.pixel_fraction #=> 0.0072649573
+          #   color.score #=> 0.20301803946495056
+          #   color.pixel_fraction #=> 0.007264957297593355
           #
           class Color
             ##

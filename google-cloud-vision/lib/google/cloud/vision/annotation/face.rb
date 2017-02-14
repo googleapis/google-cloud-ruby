@@ -34,7 +34,7 @@ module Google
         #   image = vision.image "path/to/face.jpg"
         #
         #   face = image.face
-        #   face.confidence #=> 0.86162376
+        #   face.confidence #=> 0.8616237640380859
         #
         class Face
           ##
@@ -137,9 +137,9 @@ module Google
           #   image = vision.image "path/to/face.jpg"
           #   face = image.face
           #
-          #   face.angles.roll #=> -5.1492119
-          #   face.angles.yaw #=> -4.0695682
-          #   face.angles.pitch #=> -13.083284
+          #   face.angles.roll #=> -5.149211883544922
+          #   face.angles.yaw #=> -4.069568157196045
+          #   face.angles.pitch #=> -13.083284378051758
           #
           class Angles
             ##
@@ -239,7 +239,9 @@ module Google
           #   face = image.face
           #
           #   face.bounds.face.count #=> 4
-          #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
+          #   vertex = face.bounds.face.first
+          #   vertex.x #=> 28
+          #   vertex.y #=> 40
           #
           class Bounds
             ##
@@ -339,9 +341,9 @@ module Google
           #
           #   face.features.to_h.count #=> 9
           #   face.features.eyes.left.pupil
-          #   #=> #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
+          #   #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
           #   face.features.chin.center
-          #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+          #   #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
           #
           class Features
             ##
@@ -384,7 +386,7 @@ module Google
             #   face = image.face
             #
             #   face.features["RIGHT_EAR_TRAGION"]
-            #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
+            #   #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
             #
             def [] landmark_type
               landmark = Array(@grpc.landmarks).detect do |l|
@@ -544,9 +546,9 @@ module Google
             #
             #   face.features.to_h.count #=> 9
             #   face.features.eyes.left.pupil
-            #   #=> #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
+            #   #<Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)>
             #   face.features.chin.center
-            #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+            #   #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
             #
             class Landmark
               ##
@@ -575,7 +577,7 @@ module Google
               #   image = vision.image "path/to/face.jpg"
               #   face = image.face
               #
-              #   face.features.forehead.type #=> "FOREHEAD_GLABELLA"
+              #   face.features.forehead.type #=> :FOREHEAD_GLABELLA
               #
               def type
                 @grpc.type
@@ -673,7 +675,7 @@ module Google
             #   chin = face.features.chin
             #
             #   chin.center
-            #   #=> #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
+            #   #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
             #
             class Chin
               attr_reader :left, :center, :right
@@ -743,7 +745,7 @@ module Google
             #
             #   ears = face.features.ears
             #   ears.right
-            #   #=> #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
+            #   #<Landmark (x: 303.81198, y: 88.5782, z: 77.719193)>
             #
             class Ears
               attr_reader :left, :right
@@ -813,7 +815,7 @@ module Google
             #
             #   right_eyebrow = eyebrows.right
             #   right_eyebrow.top
-            #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
+            #   #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
             #
             class Eyebrows
               attr_reader :left, :right
@@ -884,7 +886,7 @@ module Google
             #
             #   right_eyebrow = eyebrows.right
             #   right_eyebrow.top
-            #   #=> #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
+            #   #<Landmark (x: 256.3194, y: 58.222664, z: -17.299419)>
             #
             class Eyebrow
               attr_reader :left, :top, :right
@@ -956,7 +958,7 @@ module Google
             #
             #   right_eye = eyes.right
             #   right_eye.pupil
-            #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
+            #   #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
             #
             class Eyes
               attr_reader :left, :right
@@ -1029,7 +1031,7 @@ module Google
             #   right_eye = face.features.eyes.right
             #
             #   right_eye.pupil
-            #   #=> #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
+            #   #<Landmark (x: 256.63464, y: 79.641411, z: -6.0731235)>
             #
             class Eye
               attr_reader :left, :bottom, :center, :pupil, :top, :right
@@ -1102,7 +1104,7 @@ module Google
             #   lips = face.features.lips
             #
             #   lips.top
-            #   #=> #<Landmark (x: 228.54768, y: 143.2952, z: -5.6550336)>
+            #   #<Landmark (x: 228.54768, y: 143.2952, z: -5.6550336)>
             #
             class Lips
               attr_reader :top, :bottom
@@ -1175,7 +1177,7 @@ module Google
             #   mouth = face.features.mouth
             #
             #   mouth.center
-            #   #=> #<Landmark (x: 228.53499, y: 150.29066, z: 1.1069832)>
+            #   #<Landmark (x: 228.53499, y: 150.29066, z: 1.1069832)>
             #
             class Mouth
               attr_reader :left, :center, :right
@@ -1249,7 +1251,7 @@ module Google
             #   nose = face.features.nose
             #
             #   nose.tip
-            #   #=> #<Landmark (x: 225.23511, y: 122.47372, z: -25.817825)>
+            #   #<Landmark (x: 225.23511, y: 122.47372, z: -25.817825)>
             #
             class Nose
               attr_reader :left, :bottom, :tip, :top, :right
@@ -1320,7 +1322,7 @@ module Google
           #
           #   face.likelihood.to_h.count #=> 7
           #   face.likelihood.sorrow? #=> false
-          #   face.likelihood.sorrow #=> "VERY_UNLIKELY"
+          #   face.likelihood.sorrow #=> :VERY_UNLIKELY
           #
           class Likelihood
             POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)

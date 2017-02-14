@@ -37,8 +37,8 @@ module Google
         #
         #   text.bounds.count #=> 4
         #   vertex = text.bounds.first
-        #   vertex.x #=> 13
-        #   vertex.y #=> 8
+        #   vertex.x #=> 1
+        #   vertex.y #=> 0
         #
         class Vertex
           attr_reader :x, :y

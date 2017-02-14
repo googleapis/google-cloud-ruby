@@ -42,8 +42,8 @@ module Google
       #   annotation = vision.annotate image, labels: true
       #
       #   annotation.labels.map &:description
-      #   #=> ["stone carving", "ancient history", "statue", "sculpture",
-      #   #=>  "monument", "landmark"]
+      #   # ["stone carving", "ancient history", "statue", "sculpture",
+      #   #  "monument", "landmark"]
       #
       # See Google::Cloud#vision
       class Project
@@ -196,8 +196,8 @@ module Google
         #   annotation = vision.annotate image, labels: true
         #
         #   annotation.labels.map &:description
-        #   #=> ["stone carving", "ancient history", "statue", "sculpture",
-        #   #=>  "monument", "landmark"]
+        #   # ["stone carving", "ancient history", "statue", "sculpture",
+        #   #  "monument", "landmark"]
         #
         # @example With multiple images:
         #   require "google/cloud/vision"
@@ -242,7 +242,7 @@ module Google
         #   annotation = vision.annotate image, labels: 3
         #
         #   annotation.labels.map &:description
-        #   #=> ["stone carving", "ancient history", "statue"]
+        #   # ["stone carving", "ancient history", "statue"]
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
                      labels: false, text: false, safe_search: false,
