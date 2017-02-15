@@ -53,12 +53,14 @@ module Google
 
         def self.default_module_name
           ENV["DEBUGGER_MODULE_NAME"] ||
-            Google::Cloud::Core::Environment.gae_module_id
+            Google::Cloud::Core::Environment.gae_module_id ||
+            "ruby"
         end
 
         def self.default_module_version
           ENV["DEBUGGER_MODULE_VERSION"] ||
-            Google::Cloud::Core::Environment.gae_module_version
+            Google::Cloud::Core::Environment.gae_module_version ||
+            ""
         end
 
         def start

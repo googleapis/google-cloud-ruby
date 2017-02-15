@@ -31,7 +31,7 @@ module Google
 
         fail ArgumentError, "project is missing" if project.empty?
         fail ArgumentError, "module_name is missing" if module_name.empty?
-        fail ArgumentError, "module_version is missing" if module_version.empty?
+        fail ArgumentError, "module_version is missing" if module_version.nil?
 
         credentials =
           Google::Cloud::Debugger::Credentials.credentials_with_scope keyfile,
