@@ -60,8 +60,8 @@ module Google
             # Run crop hints.
             CROP_HINTS = 9
 
-            # Run web annotation.
-            WEB_ANNOTATION = 10
+            # Run web detection.
+            WEB_DETECTION = 10
           end
         end
 
@@ -499,9 +499,9 @@ module Google
         # @!attribute [rw] crop_hints_annotation
         #   @return [Google::Cloud::Vision::V1::CropHintsAnnotation]
         #     If present, crop hints have completed successfully.
-        # @!attribute [rw] web_annotation
-        #   @return [Google::Cloud::Vision::V1::WebAnnotation]
-        #     If present, web annotation has completed successfully.
+        # @!attribute [rw] web_detection
+        #   @return [Google::Cloud::Vision::V1::WebDetection]
+        #     If present, web detection has completed successfully.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, represents the error message for the operation.

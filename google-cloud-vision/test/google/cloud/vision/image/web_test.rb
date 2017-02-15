@@ -20,7 +20,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
   let(:image)    { vision.image filepath }
 
   it "detects multiple web matches" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 10)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 10)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -28,7 +28,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     web = image.web 10
@@ -41,7 +41,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
   end
 
   it "detects multiple web matches without specifying a count" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 100)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -49,7 +49,7 @@ describe Google::Cloud::Vision::Image, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     web = image.web

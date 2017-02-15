@@ -18,22 +18,22 @@ module Google
       module V1
         # Relevant information for the image from the Internet.
         # @!attribute [rw] web_entities
-        #   @return [Array<Google::Cloud::Vision::V1::WebAnnotation::WebEntity>]
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebEntity>]
         #     Deduced entities from similar images on the Internet.
         # @!attribute [rw] full_matching_images
-        #   @return [Array<Google::Cloud::Vision::V1::WebAnnotation::WebImage>]
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
         #     Fully matching images from the Internet.
         #     They're definite neardups and most often a copy of the query image with
         #     merely a size change.
         # @!attribute [rw] partial_matching_images
-        #   @return [Array<Google::Cloud::Vision::V1::WebAnnotation::WebImage>]
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
         #     Partial matching images from the Internet.
         #     Those images are similar enough to share some key-point features. For
         #     example an original image will likely have partial matching for its crops.
         # @!attribute [rw] pages_with_matching_images
-        #   @return [Array<Google::Cloud::Vision::V1::WebAnnotation::WebPage>]
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebPage>]
         #     Web pages containing the matching images from the Internet.
-        class WebAnnotation
+        class WebDetection
           # Entity deduced from similar images on the Internet.
           # @!attribute [rw] entity_id
           #   @return [String]

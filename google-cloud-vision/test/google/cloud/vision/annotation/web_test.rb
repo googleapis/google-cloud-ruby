@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation::Web, :mock_vision do
   # Run through JSON to turn all keys to strings...
-  let(:grpc_web) { web_annotation_response }
+  let(:grpc_web) { web_detection_response }
   let(:web) { Google::Cloud::Vision::Annotation::Web.from_grpc grpc_web }
 
   it "knows the given attributes" do

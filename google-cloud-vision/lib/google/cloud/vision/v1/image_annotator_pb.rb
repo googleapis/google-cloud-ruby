@@ -6,7 +6,7 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/text_annotation_pb'
-require 'google/cloud/vision/v1/web_annotation_pb'
+require 'google/cloud/vision/v1/web_detection_pb'
 require 'google/rpc/status_pb'
 require 'google/type/color_pb'
 require 'google/type/latlng_pb'
@@ -26,7 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :SAFE_SEARCH_DETECTION, 6
     value :IMAGE_PROPERTIES, 7
     value :CROP_HINTS, 9
-    value :WEB_ANNOTATION, 10
+    value :WEB_DETECTION, 10
   end
   add_message "google.cloud.vision.v1.ImageSource" do
     optional :gcs_image_uri, :string, 1
@@ -164,7 +164,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :safe_search_annotation, :message, 6, "google.cloud.vision.v1.SafeSearchAnnotation"
     optional :image_properties_annotation, :message, 8, "google.cloud.vision.v1.ImageProperties"
     optional :crop_hints_annotation, :message, 11, "google.cloud.vision.v1.CropHintsAnnotation"
-    optional :web_annotation, :message, 13, "google.cloud.vision.v1.WebAnnotation"
+    optional :web_detection, :message, 13, "google.cloud.vision.v1.WebDetection"
     optional :error, :message, 9, "google.rpc.Status"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do

@@ -18,7 +18,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   let(:filepath) { "acceptance/data/landmark.jpg" }
 
   it "detects web detection" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -26,7 +26,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, web: 1
@@ -37,7 +37,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "detects web detection using mark alias" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -45,7 +45,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.mark filepath, web: 1
@@ -56,7 +56,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "detects web detection using detect alias" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -64,7 +64,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.detect filepath, web: 1
@@ -75,7 +75,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "detects web detection on multiple images" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -87,7 +87,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotations_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detections_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotations = vision.annotate filepath, filepath, web: 1
@@ -99,7 +99,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "uses the default configuration" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: Google::Cloud::Vision.default_max_web)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: Google::Cloud::Vision.default_max_web)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -107,7 +107,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, web: true
@@ -118,7 +118,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: Google::Cloud::Vision.default_max_web)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: Google::Cloud::Vision.default_max_web)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -126,7 +126,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     annotation = vision.annotate filepath, web: "9999"
@@ -137,7 +137,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
   end
 
   it "uses the updated configuration" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_ANNOTATION, max_results: 25)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 25)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -145,7 +145,7 @@ describe Google::Cloud::Vision::Project, :annotate, :web, :mock_vision do
       )
     ]
     mock = Minitest::Mock.new
-    mock.expect :batch_annotate_images, web_annotation_response_grpc, [req, options: default_options]
+    mock.expect :batch_annotate_images, web_detection_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
     Google::Cloud::Vision.stub :default_max_web, 25 do

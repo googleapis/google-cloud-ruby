@@ -452,8 +452,8 @@ module Google
         #   web = annotation.web
         #
         def web
-          return nil unless @grpc.web_annotation
-          @web ||= Web.from_grpc(@grpc.web_annotation)
+          return nil unless @grpc.web_detection
+          @web ||= Web.from_grpc(@grpc.web_detection)
         end
 
         ##

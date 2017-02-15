@@ -193,7 +193,7 @@ module Google
           f << feature(:LOGO_DETECTION, logos) unless logos.zero?
           f << feature(:LABEL_DETECTION, labels) unless labels.zero?
           f << feature(:CROP_HINTS, crop_hints) unless crop_hints.zero?
-          f << feature(:WEB_ANNOTATION, web) unless web.zero?
+          f << feature(:WEB_DETECTION, web) unless web.zero?
           f
         end
 
@@ -232,7 +232,7 @@ module Google
             feature(:SAFE_SEARCH_DETECTION, 1),
             feature(:IMAGE_PROPERTIES, 1),
             feature(:CROP_HINTS, Google::Cloud::Vision.default_max_crop_hints),
-            feature(:WEB_ANNOTATION, Google::Cloud::Vision.default_max_web)
+            feature(:WEB_DETECTION, Google::Cloud::Vision.default_max_web)
           ]
         end
 

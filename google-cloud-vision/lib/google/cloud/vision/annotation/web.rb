@@ -50,7 +50,7 @@ module Google
         #
         class Web
           ##
-          # @private The WebAnnotation GRPC object.
+          # @private The WebDetection GRPC object.
           attr_accessor :grpc
 
           ##

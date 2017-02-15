@@ -507,9 +507,9 @@ describe "Vision", :vision do
       text.words[0].text.must_be_kind_of String
       text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       text.words[0].text.must_equal "Google"
-      text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 21], [13, 21]]
+      text.words[0].bounds.map(&:to_a).must_equal [[14, 7], [52, 7], [52, 19], [14, 19]]
       text.words[27].text.must_equal "Cloud"
-      text.words[27].bounds.map(&:to_a).must_equal [[144, 59], [176, 59], [176, 69], [144, 69]]
+      text.words[27].bounds.map(&:to_a).must_equal [[146, 58], [176, 58], [176, 69], [146, 69]]
 
       text.pages.count.must_equal 1
       text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
@@ -522,14 +522,14 @@ describe "Vision", :vision do
       text.pages[0].width.must_equal 400
       text.pages[0].height.must_equal 80
 
-      text.pages[0].blocks.count.must_equal 1
+      text.pages[0].blocks.count.must_equal 3
       text.pages[0].blocks[0].languages[0].code.must_equal "en"
       text.pages[0].blocks[0].languages[0].confidence.must_be_kind_of Float
       # text.pages[0].blocks[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
       text.pages[0].blocks[0].break_type.must_be :nil?
       text.pages[0].blocks[0].wont_be :prefix_break?
       text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[13, 8], [381, 8], [381, 71], [13, 71]]
+      text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[14, 6], [381, 7], [381, 20], [14, 19]]
 
       text.pages[0].blocks[0].paragraphs.count.must_equal 1
       text.pages[0].blocks[0].paragraphs[0].languages[0].code.must_equal "en"
@@ -538,16 +538,16 @@ describe "Vision", :vision do
       text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
       text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
       text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[13, 8], [381, 8], [381, 71], [13, 71]]
+      text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[14, 6], [381, 7], [381, 20], [14, 19]]
 
-      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 33
+      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 13
       text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
       text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
       # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
       text.pages[0].blocks[0].paragraphs[0].words[0].break_type.must_be :nil?
       text.pages[0].blocks[0].paragraphs[0].words[0].wont_be :prefix_break?
       text.pages[0].blocks[0].paragraphs[0].words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 21], [13, 21]]
+      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[14, 7], [52, 7], [52, 19], [14, 19]]
 
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols.count.must_equal 6
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].code.must_equal "en"
@@ -556,7 +556,7 @@ describe "Vision", :vision do
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].break_type.must_be :nil?
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].wont_be :prefix_break?
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[13, 9], [20, 9], [20, 19], [13, 19]]
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[14, 7], [20, 7], [20, 19], [14, 19]]
       text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
     end
 
