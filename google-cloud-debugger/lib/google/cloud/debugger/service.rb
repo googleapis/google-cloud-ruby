@@ -40,6 +40,23 @@ module Google
           @host = host || "https://www.googleapis.com/auth/cloud_debugger"
           @timeout = timeout
           @client_config = client_config || {}
+          # TODO: Refactor this Apiary client code
+          @cloud_debugger_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
+          @cloud_debugger_service.client_options.application_name    = "gcloud-ruby"
+          @cloud_debugger_service.client_options.application_version = \
+            Google::Cloud::Debugger::VERSION
+          @cloud_debugger_service.request_options.retries = 3
+          @cloud_debugger_service.request_options.timeout_sec      = timeout
+          @cloud_debugger_service.request_options.open_timeout_sec = timeout
+          @cloud_debugger_service.authorization = @credentials.client
+          @debugger_transmitter_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
+          @debugger_transmitter_service.client_options.application_name    = "gcloud-ruby"
+          @debugger_transmitter_service.client_options.application_version = \
+            Google::Cloud::Debugger::VERSION
+          @debugger_transmitter_service.request_options.retries = 3
+          @debugger_transmitter_service.request_options.timeout_sec      = timeout
+          @debugger_transmitter_service.request_options.open_timeout_sec = timeout
+          @debugger_transmitter_service.authorization = @credentials.client
         end
 
         def channel
@@ -56,21 +73,13 @@ module Google
 
         def cloud_debugger_service
           return mocked_debugger_service if mocked_debugger_service
-          @cloud_debugger_service ||= Google::Apis::ClouddebuggerV2::CloudDebuggerService.new.tap do |s|
-            s.authorization = Google::Auth.get_application_default(
-              'https://clouddebugger.googleapis.com/'
-            )
-          end
+          @cloud_debugger_service
         end
         attr_accessor :mocked_debugger_service
 
         def debugger_transmitter_service
           return mocked_transmitter_service if mocked_transmitter_service
-          @debugger_transmitter_service ||= Google::Apis::ClouddebuggerV2::CloudDebuggerService.new.tap do |s|
-            s.authorization = Google::Auth.get_application_default(
-              'https://clouddebugger.googleapis.com/'
-            )
-          end
+          @debugger_transmitter_service
         end
         attr_accessor :mocked_transmitter_service
 

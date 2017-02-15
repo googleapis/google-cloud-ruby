@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-gax", "~> 0.6.0"
   gem.add_dependency "google-protobuf", "~> 3.0"
   gem.add_dependency "googleapis-common-protos", "~> 1.3"
-  gem.add_dependency "google-api-client"
+  gem.add_dependency "google-api-client", "~> 0.10.0"
 
   gem.add_development_dependency "minitest", "~> 5.9"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
