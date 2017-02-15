@@ -28,26 +28,6 @@ module Google
         @exit_lock = Mutex.new
 
         attr_reader :state
-        attr_reader :last_exception
-
-        def ensure_thread
-          fail "async_actor not initialized" if @startup_lock.nil?
-          fail "run_backgrounder method not defined" unless
-            respond_to? :run_backgrounder
-          @startup_lock.synchronize do
-            if (@thread.nil? || !@thread.alive?) && @state != :stopped
-              @lock_cond = new_cond
-              AsyncActor.register_for_cleanup self
-              # TODO: Remove this debug flag
-              Thread.abort_on_exception = true
-              @thread = Thread.new do
-                run_backgrounder
-                AsyncActor.unregister_for_cleanup self
-              end
-            end
-            @state = :running
-          end
-        end
 
         def async_start
           ensure_thread
@@ -171,6 +151,7 @@ module Google
         end
 
         private
+
         def initialize
           super()
           async_actor_init
@@ -180,7 +161,25 @@ module Google
           @startup_lock = Mutex.new
           @thread = nil
           @state = nil
-          @last_exception
+        end
+
+        def ensure_thread
+          fail "async_actor not initialized" if @startup_lock.nil?
+          fail "run_backgrounder method not defined" unless
+            respond_to? :run_backgrounder
+          @startup_lock.synchronize do
+            if (@thread.nil? || !@thread.alive?) && @state != :stopped
+              @lock_cond = new_cond
+              AsyncActor.register_for_cleanup self
+              # TODO: Remove this debug flag
+              Thread.abort_on_exception = true
+              @thread = Thread.new do
+                run_backgrounder
+                AsyncActor.unregister_for_cleanup self
+              end
+            end
+            @state = :running
+          end
         end
       end
     end

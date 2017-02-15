@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
   gem.license       = "Apache-2.0"
 
-  gem.files         = `git ls-files -- lib/*`.split("\n") +
+  gem.files         = `git ls-files -- lib/* ext/*`.split("\n") +
                       ["README.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
@@ -40,5 +40,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "yard-doctest", "~> 0.1.8"
   gem.add_development_dependency "railties", "~> 4.0"
   gem.add_development_dependency "rack", ">= 0.1"
-  gem.add_development_dependency "rake-compiler"
+  gem.add_development_dependency "rake-compiler", "~> 1.0"
 end

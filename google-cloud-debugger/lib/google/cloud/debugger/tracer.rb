@@ -84,7 +84,6 @@ module Google
         end
 
         def stop
-          update_breakpoints_cache
           disable_tracepoints
         end
       end

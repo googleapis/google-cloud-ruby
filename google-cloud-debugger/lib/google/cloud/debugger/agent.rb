@@ -35,7 +35,9 @@ module Google
 
         attr_reader :transmitter
 
-        def initialize service, module_name: nil, module_version: nil
+        attr_reader :last_exception
+
+        def initialize service, module_name: , module_version:
           super()
 
           @service = service

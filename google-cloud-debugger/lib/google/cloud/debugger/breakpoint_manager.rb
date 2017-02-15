@@ -44,45 +44,47 @@ module Google
           rescue
             return false
           end
+
           return true if response.wait_expired?
 
-          synchronize do
-            server_breakpoints = response.breakpoints || []
+          @wait_token = response.next_wait_token
 
+          server_breakpoints = response.breakpoints || []
+          server_breakpoints = server_breakpoints.map { |grpc_b|
+            create_breakpoint_from_grpc grpc_b
+          }
+
+          update_breakpoints server_breakpoints
+
+          true
+        end
+
+        def update_breakpoints server_breakpoints
+          synchronize do
             # puts "Servier breakpoints:"
             # p server_breakpoints
 
-            server_breakpoints = server_breakpoints.map { |grpc_b|
-              create_breakpoint_from_grpc grpc_b
-            }
-            @wait_token = response.next_wait_token
-
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
-            activate_breakpoints new_breakpoints unless new_breakpoints.empty?
-            forget_breakpoints server_breakpoints
+            before_breakpoints_count = @active_breakpoints.size + @completed_breakpoints.size
+
+            # Remember new active breakpoints from server
+            @active_breakpoints += new_breakpoints unless new_breakpoints.empty?
+
+            # Forget old breakpoints
+            @completed_breakpoints &= server_breakpoints
+            @active_breakpoints &= server_breakpoints
+            after_breakpoints_acount = @active_breakpoints.size + @completed_breakpoints.size
+
+            breakpoints_updated = !new_breakpoints.empty? ||
+              (before_breakpoints_count != after_breakpoints_acount)
 
             on_breakpoints_change.call(@active_breakpoints) if
-              on_breakpoints_change.respond_to?(:call)
+              on_breakpoints_change.respond_to?(:call) && breakpoints_updated
 
             # puts "Active breakpoints: after sync"
             # p @active_breakpoints
             # puts "Completed breakpoints: after sync"
             # p @completed_breakpoints
-          end
-
-          true
-        end
-
-        def activate_breakpoints breakpoints
-          synchronize do
-            @active_breakpoints += breakpoints
-          end
-        end
-
-        def forget_breakpoints server_breakpoints
-          synchronize do
-            @completed_breakpoints &= server_breakpoints
-            @active_breakpoints &= server_breakpoints
           end
         end
 

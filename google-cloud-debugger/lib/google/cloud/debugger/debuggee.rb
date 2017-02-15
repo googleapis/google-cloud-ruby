@@ -27,7 +27,7 @@ module Google
         attr_reader :module_version
         attr_reader :id
 
-        def initialize service, module_name: nil, module_version: nil
+        def initialize service, module_name: , module_version:
           @service = service
           @module_name = module_name
           @module_version = module_version
