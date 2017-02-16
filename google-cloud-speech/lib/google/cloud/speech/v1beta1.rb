@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "google/cloud/speech/v1beta1/speech_api"
-require "google/longrunning/operations_api"
+require "google/longrunning/operations_client"
 # Load the protobufs so code can see these classes
 require "google/cloud/speech/v1beta1/cloud_speech_pb"
 require "google/longrunning/operations_pb"

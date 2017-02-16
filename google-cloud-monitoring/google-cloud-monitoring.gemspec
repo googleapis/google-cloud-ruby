@@ -20,10 +20,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "grpc", "~> 1.0"
-  gem.add_dependency "google-gax", "~> 0.6.0"
-  gem.add_dependency "google-protobuf", "~> 3.0"
-  gem.add_dependency "googleapis-common-protos", "~> 1.3"
+  gem.add_dependency "google-gax", "~> 0.7.1"
+  gem.add_dependency "googleapis-common-protos", "~> 1.3.5"
 
   gem.add_development_dependency "rubocop", "<= 0.35.1"
 end
