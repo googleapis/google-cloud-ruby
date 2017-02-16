@@ -47,7 +47,6 @@ module Google
         def run_backgrounder
           loop do
             breakpoint = wait_next_item
-            puts breakpoint
             next if breakpoint.nil?
             begin
               agent.breakpoint_manager.mark_off breakpoint
