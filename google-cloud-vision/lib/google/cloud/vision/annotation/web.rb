@@ -42,7 +42,7 @@ module Google
         #
         #   full_matching_image = web.full_matching_images.first
         #   full_matching_image.url #=> "http://example.com/images/123.jpg"
-        #   full_matching_image.score #=> 0.10226666
+        #   full_matching_image.score #=> 0.10226666927337646
         #
         #   page_with_matching_images = web.pages_with_matching_images.first
         #   page_with_matching_images.url #=> "http://example.com/posts/123"
@@ -260,7 +260,7 @@ module Google
           #
           #   full_matching_image = web.full_matching_images.first
           #   full_matching_image.url #=> "http://example.com/images/123.jpg"
-          #   full_matching_image.score #=> 0.10226666
+          #   full_matching_image.score #=> 0.10226666927337646
           #
           class Image
             ##

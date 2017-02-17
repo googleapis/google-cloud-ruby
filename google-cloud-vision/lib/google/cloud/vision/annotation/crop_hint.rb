@@ -37,10 +37,14 @@ module Google
         #   crop_hint = crop_hints.first
         #
         #   crop_hint.bounds.count #=> 4
-        #   crop_hint.bounds[0] #=> (x: 0, y: 0)
-        #   crop_hint.bounds[1] #=> (x: 511, y: 0)
-        #   crop_hint.bounds[2] #=> (x: 511, y: 383)
-        #   crop_hint.bounds[3] #=> (x: 0, y: 383)
+        #   crop_hint.bounds[0].x #=> 1
+        #   crop_hint.bounds[0].y #=> 0
+        #   crop_hint.bounds[1].x #=> 511
+        #   crop_hint.bounds[1].y #=> 0
+        #   crop_hint.bounds[2].x #=> 511
+        #   crop_hint.bounds[2].y #=> 383
+        #   crop_hint.bounds[3].x #=> 0
+        #   crop_hint.bounds[3].y #=> 383
         #
         #   crop_hint.confidence #=> 1.0
         #   crop_hint.importance_fraction #=> 1.0399999618530273

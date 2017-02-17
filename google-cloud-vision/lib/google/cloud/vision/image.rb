@@ -269,11 +269,14 @@ module Google
         #   text.words.count #=> 28
         #   text.words[0].text #=> "Google"
         #   text.words[0].bounds.count #=> 4
-        #   text.words[0].bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #   vertex = text.words[0].bounds.first
+        #   vertex.x #=> 13
+        #   vertex.y #=> 8
         #
         #   # Use `pages` to access a full structural representation
-        #   text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text
-        #   #=> "G"
+        #   page = text.pages.first
+        #   page.blocks[0].paragraphs[0].words[0].symbols[0].text #=> "G"
+        #
         #
         def text
           ensure_vision!
@@ -299,15 +302,17 @@ module Google
         #   text = image.document
         #
         #   text.text
-        #   #=> "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
         #
         #   text.words[0].text #=> "Google"
         #   text.words[0].bounds.count #=> 4
-        #   text.words[0].bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #   vertex = text.words[0].bounds.first
+        #   vertex.x #=> 13
+        #   vertex.y #=> 8
         #
         #   # Use `pages` to access a full structural representation
-        #   text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text
-        #   #=> "G"
+        #   page = text.pages.first
+        #   page.blocks[0].paragraphs[0].words[0].symbols[0].text #=> "G"
         #
         def document
           ensure_vision!
@@ -386,11 +391,6 @@ module Google
         #   crop_hint = crop_hints.first
         #
         #   crop_hint.bounds.count #=> 4
-        #   crop_hint.bounds[0] #=> (x: 0, y: 0)
-        #   crop_hint.bounds[1] #=> (x: 511, y: 0)
-        #   crop_hint.bounds[2] #=> (x: 511, y: 383)
-        #   crop_hint.bounds[3] #=> (x: 0, y: 383)
-        #
         #   crop_hint.confidence #=> 1.0
         #   crop_hint.importance_fraction #=> 1.0399999618530273
         #
@@ -422,7 +422,7 @@ module Google
         #
         #   full_matching_image = web.full_matching_images.first
         #   full_matching_image.url #=> "http://example.com/images/123.jpg"
-        #   full_matching_image.score #=> 0.10226666
+        #   full_matching_image.score #=> 0.10226666927337646
         #
         #   page_with_matching_images = web.pages_with_matching_images.first
         #   page_with_matching_images.url #=> "http://example.com/posts/123"

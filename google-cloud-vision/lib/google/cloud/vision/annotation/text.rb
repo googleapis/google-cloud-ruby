@@ -42,7 +42,9 @@ module Google
         #
         #   text.words[0].text #=> "Google"
         #   text.words[0].bounds.count #=> 4
-        #   text.words[0].bounds.first #=> #<Vertex (x: 13, y: 8)>
+        #   vertex = text.words[0].bounds.first
+        #   vertex.x #=> 13
+        #   vertex.y #=> 8
         #
         #   # Use `pages` to access a full structural representation
         #   text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text
@@ -269,7 +271,7 @@ module Google
           #   page.wont_be :prefix_break?
           #   page.width #=> 400
           #   page.height #=> 80
-          #   page.blocks.count #=> 3
+          #   page.blocks.count #=> 1
           #
           class Page
             ##
@@ -390,7 +392,6 @@ module Google
             #
             #   block.languages.first.code #=> "en"
             #   block.bounds.count #=> 4
-            #   block.bounds.first #=> #<Vertex (x: 13, y: 8)>
             #   block.paragraphs.count #=> 1
             #
             class Block
@@ -535,8 +536,7 @@ module Google
             #
             #   paragraph.languages.first.code #=> "en"
             #   paragraph.bounds.count #=> 4
-            #   paragraph.bounds.first #=> #<Vertex (x: 13, y: 8)>
-            #   paragraph.paragraphs.words #=> 10
+            #   paragraph.words.count #=> 10
             #
             class Paragraph
               ##
@@ -669,8 +669,7 @@ module Google
             #
             #   word.languages.first.code #=> "en"
             #   word.bounds.count #=> 4
-            #   word.bounds.first #=> #<Vertex (x: 13, y: 8)>
-            #   word.paragraphs.symbols #=> 10
+            #   word.symbols.count #=> 6
             #
             class Word
               ##
@@ -805,7 +804,6 @@ module Google
             #
             #   symbol.languages.first.code #=> "en"
             #   symbol.bounds.count #=> 4
-            #   symbol.bounds.first #=> #<Vertex (x: 13, y: 8)>
             #   symbol.text #=> "G"
             #
             class Symbol
