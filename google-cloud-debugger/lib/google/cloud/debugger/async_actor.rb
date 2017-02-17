@@ -163,10 +163,16 @@ module Google
           @state = nil
         end
 
-        def ensure_thread
-          fail "async_actor not initialized" if @startup_lock.nil?
+        def async_run_job
           fail "run_backgrounder method not defined" unless
             respond_to? :run_backgrounder
+          run_backgrounder
+        ensure
+          @state = :stopped
+        end
+
+        def ensure_thread
+          fail "async_actor not initialized" if @startup_lock.nil?
           @startup_lock.synchronize do
             if (@thread.nil? || !@thread.alive?) && @state != :stopped
               @lock_cond = new_cond
@@ -174,11 +180,11 @@ module Google
               # TODO: Remove this debug flag
               Thread.abort_on_exception = true
               @thread = Thread.new do
-                run_backgrounder
+                async_run_job
                 AsyncActor.unregister_for_cleanup self
               end
+              @state = :running
             end
-            @state = :running
           end
         end
       end

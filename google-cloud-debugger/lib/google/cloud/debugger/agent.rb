@@ -14,7 +14,6 @@
 
 
 require "google/cloud/debugger/async_actor"
-require "google/cloud/debugger/backoff"
 require "google/cloud/debugger/breakpoint_manager"
 require "google/cloud/debugger/debuggee"
 require "google/cloud/debugger/debugger_c"
@@ -48,9 +47,6 @@ module Google
           @breakpoint_manager.on_breakpoints_change = method :breakpoints_change_callback
 
           @transmitter = Transmitter.new service, self
-
-          @register_backoff = Backoff.new
-          @sync_backoff = Backoff.new
         end
 
         def start
@@ -72,6 +68,29 @@ module Google
           transmitter.submit breakpoint
         end
 
+        def run_backgrounder
+          while running?
+            begin
+              sync_breakpoints = ensure_debuggee_registration
+
+              if sync_breakpoints
+                sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
+                unless sync_result
+                  debuggee.revoke_registration
+                end
+              end
+            rescue => e
+              @last_exception = e
+              delay = @sync_backoff.failed
+              puts e
+              puts e.backtrace
+              # break
+            end
+          end
+        end
+
+        private
+
         def breakpoints_change_callback active_breakpoints
           if active_breakpoints.empty?
             puts "*********** Agent: tracer stopped"
@@ -82,56 +101,29 @@ module Google
           end
         end
 
-        def run_backgrounder
-          while running?
-            delay = 0
-            sync_breakpoints = false
-            begin
-              if debuggee.registered?
-                sync_breakpoints = true
-              else
-                sync_breakpoints = debuggee.register
-                if sync_breakpoints
-                  puts "Debuggee #{debuggee.id} successfully registered"
-                  # STDOUT.flush
-                  @register_backoff.succeeded
-                  delay = 0
-                else
-                  @register_backoff.failed
-                end
-              end
-            rescue => e
-              @last_exception = e
-              delay = @register_backoff.failed
-              puts e
-              puts e.backtrace
-              # break
+        def ensure_debuggee_registration
+          if debuggee.registered?
+            registration_result = true
+          else
+            registration_result = debuggee.register
+            if registration_result
+              puts "Debuggee #{debuggee.id} successfully registered"
             end
-
-            begin
-              if sync_breakpoints
-                sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
-                if sync_result
-                  delay = 0
-                  @sync_backoff.succeeded
-                else
-                  debuggee.revoke_registration
-                  delay = @sync_backoff.failed
-                end
-              end
-            rescue => e
-              @last_exception = e
-              delay = @sync_backoff.failed
-              puts e
-              puts e.backtrace
-              # break
-            end
-
-            sleep delay
-            # sleep 3
           end
-        ensure
-          @state = :stopped
+
+          registration_result
+        end
+
+        def async_stop
+          @startup_lock.synchronize do
+            unless @thread.nil?
+              tracer.stop
+
+              @state = :stopped
+              @thread.kill
+              @thread.join
+            end
+          end
         end
 
       end

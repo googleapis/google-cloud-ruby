@@ -21,6 +21,7 @@ module Google
       class Transmitter
         include AsyncActor
 
+        WAIT_INTERVAL = 0.1
         DEFAULT_MAX_QUEUE_SIZE = 1000
 
         attr_accessor :service
@@ -57,13 +58,12 @@ module Google
               puts e.backtrace
             end
           end
-        ensure
-          @state = :stopped
         end
 
         def wait_next_item
           synchronize do
-            sleep 0.1 while state == :suspended || (state == :running && @queue.empty?)
+            @lock_cond.wait WAIT_INTERVAL while
+              state == :suspended || (state == :running && @queue.empty?)
             queue_item = nil
             if @queue.empty?
               @state = :stopped
