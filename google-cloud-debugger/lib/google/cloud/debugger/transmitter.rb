@@ -21,7 +21,6 @@ module Google
       class Transmitter
         include AsyncActor
 
-        WAIT_INTERVAL = 0.1
         DEFAULT_MAX_QUEUE_SIZE = 1000
 
         attr_accessor :service
@@ -40,9 +39,12 @@ module Google
         end
 
         def submit breakpoint
-          @queue.push breakpoint
-          # Discard old entries if queue gets too large
-          @queue.pop while @queue.size > @max_queue_size
+          synchronize do
+            @queue.push breakpoint
+            @lock_cond.broadcast
+            # Discard old entries if queue gets too large
+            @queue.pop while @queue.size > @max_queue_size
+          end
         end
 
         def run_backgrounder
@@ -50,7 +52,6 @@ module Google
             breakpoint = wait_next_item
             next if breakpoint.nil?
             begin
-              agent.breakpoint_manager.mark_off breakpoint
               service.update_active_breakpoint agent.debuggee.id, breakpoint
             rescue => e
               @last_exception = e
@@ -62,8 +63,8 @@ module Google
 
         def wait_next_item
           synchronize do
-            @lock_cond.wait WAIT_INTERVAL while
-              state == :suspended || (state == :running && @queue.empty?)
+            @lock_cond.wait_while {
+              state == :suspended || (state == :running && @queue.empty?)}
             queue_item = nil
             if @queue.empty?
               @state = :stopped

@@ -64,10 +64,6 @@ module Google
           tracer.stop
         end
 
-        def submit_breakpoint breakpoint
-          transmitter.submit breakpoint
-        end
-
         def run_backgrounder
           while running?
             begin
@@ -81,7 +77,6 @@ module Google
               end
             rescue => e
               @last_exception = e
-              delay = @sync_backoff.failed
               puts e
               puts e.backtrace
               # break

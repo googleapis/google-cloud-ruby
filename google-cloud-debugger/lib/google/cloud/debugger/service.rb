@@ -98,7 +98,6 @@ module Google
         end
 
         def update_active_breakpoint debuggee_id, breakpoint
-          puts "***SERVICE update_active_breakpoint called\n"
           request = Google::Apis::ClouddebuggerV2::UpdateActiveBreakpointRequest.new({
             breakpoint: breakpoint.to_grpc
           })

@@ -63,19 +63,42 @@ module Google
               active_breakpoint)
           end
 
+          # Tracer is explicitly designed to not have a lock. This should be the
+          # only place writing @breakpoints_cache to ensure thread safety.
           @breakpoints_cache = breakpoints_hash
+
+          disable_tracepoints if breakpoints_hash.empty?
         end
 
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 
           puts "\n\n*********************TRACER EVAL CALLLLLED\n\n"
+          t1 = Time.now
 
           breakpoint.eval_call_stack call_stack_bindings
-          # TODO: disable tracepoints if all breakpoints complete, in a non-blocking way
+
+          t2 = Time.now
           # disable_tracepoints if breakpoint_manager.all_complete?
 
-          agent.submit_breakpoint breakpoint
+          # Take this completed breakpoint off manager's active breakpoints
+          # list, submit the breakpoint snapshot, and update Tracer's
+          # breakpoints_cache.
+          if breakpoint.complete?
+            agent.breakpoint_manager.mark_off breakpoint
+            t3 = Time.now
+            agent.transmitter.submit breakpoint
+            t4 = Time.now
+            update_breakpoints_cache
+            t5 = Time.now
+          end
+
+          puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
+          puts "*********** Stack Evaluation Time: #{t2-t1} **********"
+          # puts "*********** Mark off Time: #{t3-t2} **********"
+          # puts "*********** Submittion Time: #{t4-t3} **********"
+          # puts "*********** Update Cache Time: #{t5-t4} **********"
+
         end
 
         def start

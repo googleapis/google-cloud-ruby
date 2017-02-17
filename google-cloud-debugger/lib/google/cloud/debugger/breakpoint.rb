@@ -22,6 +22,8 @@ module Google
   module Cloud
     module Debugger
       class Breakpoint
+        include MonitorMixin
+
         attr_accessor :id
 
         attr_accessor :action
@@ -45,6 +47,8 @@ module Google
         attr_accessor :stack_frames
 
         def initialize id = nil, path = nil, line = nil
+          super()
+
           @id = id
           @action = :capture
           if path || line
@@ -71,44 +75,59 @@ module Google
         end
 
         def path_hit? path
-          location.path.match(path) || path.match(location.path)
+          synchronize do
+            location.path.match(path) || path.match(location.path)
+          end
         end
 
         def line_hit? path, line
-          path_hit?(path) && location.line == line
+          synchronize do
+            path_hit?(path) && location.line == line
+          end
         end
 
         def complete
           #TODO set @is_final_state and @final_time
-          @is_final_state = true
-          @completed = true
+          synchronize do
+            @is_final_state = true
+            @completed = true
+          end
         end
 
-        alias_method :complete?, :completed
+        def complete?
+          synchronize do
+            completed
+          end
+        end
 
         def path
-          location.path
+          synchronize do
+            location.path
+          end
         end
 
         def line
-          location.line
+          synchronize do
+            location.line
+          end
         end
 
         def eval_call_stack call_stack_bindings
-          puts "BREAKPOINT HIT*******************************\n\n"
-          begin
-            @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-            if @expressions
-              @evaluated_expressions =
-                Evaluator.eval_expressions call_stack_bindings[0], @expressions
+          synchronize do
+            begin
+              @stack_frames = Evaluator.eval_call_stack call_stack_bindings
+              if @expressions
+                @evaluated_expressions =
+                  Evaluator.eval_expressions call_stack_bindings[0], @expressions
+              end
+            rescue => e
+              puts e.message
+              puts e.backtrace
+              # TODO set breakpoint into error state
             end
-          rescue => e
-            puts e.message
-            puts e.backtrace
+
+            complete
           end
-
-
-          complete
           nil
         end
 
