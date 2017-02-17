@@ -35,7 +35,7 @@ module Google
         #   text.locale #=> "en"
         #   text.words.count #=> 28
         #   text.text
-        #   #=> "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
         #
         class Text
           ##
@@ -148,7 +148,9 @@ module Google
           #   word = words.first
           #   word.text #=> "Google"
           #   word.bounds.count #=> 4
-          #   word.bounds.first #=> #<Vertex (x: 13, y: 8)>
+          #   vertex = word.bounds.first
+          #   vertex.x #=> 13
+          #   vertex.y #=> 8
           #
           class Word
             ##

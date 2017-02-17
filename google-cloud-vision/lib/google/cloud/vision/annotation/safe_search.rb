@@ -35,7 +35,7 @@ module Google
         #
         #   safe_search = image.safe_search
         #   safe_search.spoof? #=> false
-        #   safe_search.spoof #=> "VERY_UNLIKELY"
+        #   safe_search.spoof #=> :VERY_UNLIKELY
         #
         class SafeSearch
           POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)

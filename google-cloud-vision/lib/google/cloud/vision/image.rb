@@ -103,7 +103,9 @@ module Google
         #
         #   face = faces.first
         #   face.bounds.face.count #=> 4
-        #   face.bounds.face.first #=> #<Vertex (x: 153, y: 34)>
+        #   vertex = face.bounds.face.first
+        #   vertex.x #=> 28
+        #   vertex.y #=> 40
         #
         def faces max_results = Google::Cloud::Vision.default_max_faces
           ensure_vision!
@@ -140,7 +142,7 @@ module Google
         #   landmarks = image.landmarks
         #
         #   landmark = landmarks.first
-        #   landmark.score #=> 0.91912264
+        #   landmark.score #=> 0.9191226363182068
         #   landmark.description #=> "Mount Rushmore"
         #   landmark.mid #=> "/m/019dvv"
         #
@@ -179,7 +181,7 @@ module Google
         #   logos = image.logos
         #
         #   logo = logos.first
-        #   logo.score #=> 0.70057315
+        #   logo.score #=> 0.7005731463432312
         #   logo.description #=> "Google"
         #   logo.mid #=> "/m/0b34hf"
         #
@@ -213,15 +215,15 @@ module Google
         #   require "google/cloud/vision"
         #
         #   vision = Google::Cloud::Vision.new
-        #   image = vision.image "path/to/face.jpg"
+        #   image = vision.image "path/to/landmark.jpg"
         #
         #   labels = image.labels
         #
         #   labels.count #=> 4
         #   label = labels.first
-        #   label.score #=> 0.9481349
-        #   label.description #=> "person"
-        #   label.mid #=> "/m/01g317"
+        #   label.score #=> 0.9481348991394043
+        #   label.description #=> "stone carving"
+        #   label.mid #=> "/m/02wtjj"
         #
         def labels max_results = Google::Cloud::Vision.default_max_labels
           ensure_vision!
@@ -254,11 +256,10 @@ module Google
         #
         #   text = image.text
         #
-        #   text = image.text
         #   text.locale #=> "en"
         #   text.words.count #=> 28
         #   text.text
-        #   #=> "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
         #
         def text
           ensure_vision!
@@ -282,7 +283,7 @@ module Google
         #   safe_search = image.safe_search
         #
         #   safe_search.spoof? #=> false
-        #   safe_search.spoof #=> "VERY_UNLIKELY"
+        #   safe_search.spoof #=> :VERY_UNLIKELY
         #
         def safe_search
           ensure_vision!

@@ -37,14 +37,14 @@ module Google
       #   face_image = vision.image "path/to/face.jpg"
       #   landmark_image = vision.image "path/to/landmark.jpg"
       #
-      #   annotation = vision.annotate do |annotate|
+      #   annotations = vision.annotate do |annotate|
       #      annotate.annotate face_image, faces: true, labels: true
       #      annotate.annotate landmark_image, landmarks: true
       #   end
       #
-      #   annotation.faces.count #=> 1
-      #   annotation.labels.count #=> 4
-      #   annotation.landmarks.count #=> 1
+      #   annotations[0].faces.count #=> 1
+      #   annotations[0].labels.count #=> 4
+      #   annotations[1].landmarks.count #=> 1
       #
       class Annotate
         # @private
