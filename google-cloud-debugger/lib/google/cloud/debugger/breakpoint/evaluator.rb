@@ -51,6 +51,10 @@ module Google
               result
             end
 
+            def eval_condition binding, condition
+              !!readonly_eval_expression(binding, condition)
+            end
+
             def eval_expressions binding, expressions
               expressions.map do |expression|
                 eval_result = readonly_eval_expression binding, expression
@@ -109,7 +113,7 @@ module Google
 
             def wrap_expression expression
               return """
-                tp = TracePoint.new(:call, :c_call) do |tp|
+                TracePoint.new(:call, :c_call) do |tp|
                   # immutable_trace_callback tp
                 end.enable do
                   begin

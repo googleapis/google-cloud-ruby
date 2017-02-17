@@ -73,7 +73,7 @@ module Google
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 
-          puts "\n\n*********************TRACER EVAL CALLLLLED\n\n"
+          puts "\n\n**********Breakpoint(#{breakpoint.id}) hit!!"
           t1 = Time.now
 
           breakpoint.eval_call_stack call_stack_bindings
@@ -85,20 +85,20 @@ module Google
           # list, submit the breakpoint snapshot, and update Tracer's
           # breakpoints_cache.
           if breakpoint.complete?
+            puts "**********Breakpoint(#{breakpoint.id}) evaluated!!\n\n"
             agent.breakpoint_manager.mark_off breakpoint
             t3 = Time.now
             agent.transmitter.submit breakpoint
             t4 = Time.now
             update_breakpoints_cache
             t5 = Time.now
+
+            # puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
+            # puts "*********** Stack Evaluation Time: #{t2-t1} **********"
+            # puts "*********** Mark off Time: #{t3-t2} **********"
+            # puts "*********** Submittion Time: #{t4-t3} **********"
+            # puts "*********** Update Cache Time: #{t5-t4} **********"
           end
-
-          puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
-          puts "*********** Stack Evaluation Time: #{t2-t1} **********"
-          # puts "*********** Mark off Time: #{t3-t2} **********"
-          # puts "*********** Submittion Time: #{t4-t3} **********"
-          # puts "*********** Update Cache Time: #{t5-t4} **********"
-
         end
 
         def start
