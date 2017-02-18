@@ -16,8 +16,8 @@ require "spanner_helper"
 
 describe "Spanner Instances", :spanner do
   it "creates, updates, and deletes an instance" do
-    instance_id = "#{$spanner_prefix}-crud"
-    name = "gcloud-ruby Empty Instance"
+    instance_id = "#{$spanner_prefix}-empty"
+    name = "#{$spanner_prefix} Empty"
     config = "regional-us-central1"
 
     spanner.instance(instance_id).must_be :nil?
