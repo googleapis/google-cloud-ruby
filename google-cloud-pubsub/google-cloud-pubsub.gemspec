@@ -19,8 +19,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.0.0"
 
   gem.add_dependency "google-cloud-core", "~> 0.21.0"
-  gem.add_dependency "google-gax", "~> 0.7.1"
-  gem.add_dependency "googleapis-common-protos", "~> 1.3.5"
+  gem.add_dependency "google-gax", "~> 0.8.0"
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.8"
 
   gem.add_development_dependency "minitest", "~> 5.10"
