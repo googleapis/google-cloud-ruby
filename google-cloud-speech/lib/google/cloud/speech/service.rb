@@ -66,7 +66,7 @@ module Google
         def ops
           return mocked_ops if mocked_ops
           @ops ||= \
-            Google::Longrunning::OperationsApi.new(
+            Google::Longrunning::OperationsClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
