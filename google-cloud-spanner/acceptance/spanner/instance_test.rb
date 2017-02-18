@@ -36,7 +36,7 @@ describe "Spanner Instances", :spanner do
     instance.name.must_equal name
     instance.config.instance_config_id.must_equal config
     instance.nodes.must_equal 1
-    instance.labels.to_h.must_equal({ "env" => "development" })
+    instance.labels.to_hash.must_equal({ "env" => "development" })
 
     spanner.instance(instance_id).wont_be :nil?
 
@@ -48,7 +48,7 @@ describe "Spanner Instances", :spanner do
 
     instance.name.must_equal new_name
     instance.nodes.must_equal 2
-    instance.labels.to_h.must_equal({ "env" => "production" })
+    instance.labels.to_hash.must_equal({ "env" => "production" })
 
     instance.delete
     spanner.instance(instance_id).must_be :nil?
