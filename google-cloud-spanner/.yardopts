@@ -1,0 +1,14 @@
+--no-private
+--title=Google Cloud Spanner
+--exclude lib/google/spanner
+--exclude lib/google/cloud/spanner/v1
+--exclude lib/google/cloud/spanner/v1.rb
+--exclude lib/google/cloud/spanner/admin/database/v1
+--exclude lib/google/cloud/spanner/admin/database/v1.rb
+--exclude lib/google/cloud/spanner/admin/instance/v1
+--exclude lib/google/cloud/spanner/admin/instance/v1.rb
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
