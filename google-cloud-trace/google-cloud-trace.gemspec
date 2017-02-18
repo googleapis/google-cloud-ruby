@@ -22,8 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 0.21.1"
   gem.add_dependency "stackdriver-core", "~> 0.21.0"
-  gem.add_dependency "google-gax", "~> 0.7.1"
-  gem.add_dependency "googleapis-common-protos", "~> 1.3.5"
+  gem.add_dependency "google-gax", "~> 0.8.0"
 
   gem.add_development_dependency "minitest", "~> 5.9"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
