@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "google-cloud-monitoring"
   gem.add_runtime_dependency "google-cloud-trace"
 
-  gem.add_development_dependency "minitest", "~> 5.9"
+  gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
