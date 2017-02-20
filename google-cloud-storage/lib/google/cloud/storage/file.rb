@@ -882,24 +882,22 @@ module Google
               key: ext_path.sub("/", "")
             }
 
-            if options[:policy]
-              p = options[:policy]
-              fail "Policy must be given in a Hash" unless p.is_a? Hash
+            p = options[:policy] || {}
+            fail "Policy must be given in a Hash" unless p.is_a? Hash
 
-              i = determine_issuer options
-              s = determine_signing_key options
+            i = determine_issuer options
+            s = determine_signing_key options
 
-              fail SignedUrlUnavailable unless i && s
+            fail SignedUrlUnavailable unless i && s
 
-              policy_str = p.to_json
-              policy = Base64.strict_encode64(policy_str).delete("\n")
+            policy_str = p.to_json
+            policy = Base64.strict_encode64(policy_str).delete("\n")
 
-              signature = generate_signature s, policy
+            signature = generate_signature s, policy
 
-              fields[:GoogleAccessId] = i
-              fields[:signature] = signature
-              fields[:policy] = policy
-            end
+            fields[:GoogleAccessId] = i
+            fields[:signature] = signature
+            fields[:policy] = policy
 
             Google::Cloud::Storage::PostObject.new GOOGLEAPIS_URL, fields
           end
