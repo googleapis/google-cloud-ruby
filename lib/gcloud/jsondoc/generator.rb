@@ -87,7 +87,7 @@ module Gcloud
                 )
               end
             end
-            OpenStruct.new title: m[:title], types: matched_types.values
+            OpenStruct.new title: m[:title], types: matched_types.values.sort_by(&:name)
           end
           generated_doc = GeneratedTocDoc.new g_config[:title], modules
           @docs << generated_doc

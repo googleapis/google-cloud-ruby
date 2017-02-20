@@ -55,15 +55,15 @@ describe Gcloud::Jsondoc, :generated_toc_doc do
   <tbody>
 
     <tr>
-      <td><a data-custom-type=\"includedmodule/classa\">IncludedModule::ClassA</a></td>
-      <td>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
-applied in order.</td>
-    </tr>
-
-    <tr>
       <td><a data-custom-type=\"includedmodule/any\">IncludedModule::Any</a></td>
       <td>+Any+ contains an arbitrary serialized protocol buffer message along with a
 URL that describes the type of the serialized message.</td>
+    </tr>
+
+    <tr>
+      <td><a data-custom-type=\"includedmodule/classa\">IncludedModule::ClassA</a></td>
+      <td>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+applied in order.</td>
     </tr>
 
     <tr>
