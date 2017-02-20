@@ -52,4 +52,22 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
       signing_key_mock.verify
     end
   end
+
+  it "gives a signature even when not specifying a policy" do
+    signing_key_mock = Minitest::Mock.new
+
+    json_policy = Base64.strict_encode64("{}").delete("\n")
+    signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, json_policy]
+    credentials.issuer = "native_client_email"
+    credentials.signing_key = signing_key_mock
+
+
+    signed_post = bucket.post_object file_path
+
+    signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+    signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
+    signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
+
+    signing_key_mock.verify
+  end
 end
