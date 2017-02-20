@@ -39,7 +39,11 @@ module Google
         def post_object path, policy: nil, issuer: nil,
                         client_email: nil, signing_key: nil,
                         private_key: nil
-          # no-op stub, but ensures that calls match this copied signature
+          Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com",
+            { key: "my-todo-app/avatars/heidi/400x400.png",
+              GoogleAccessId: "0123456789@gserviceaccount.com",
+              signature: "ABC...XYZ=",
+              policy: "ABC...XYZ=" }
         end
       end
     end
@@ -196,7 +200,6 @@ YARD::Doctest.configure do |doctest|
 
   # Due to failing line in example: key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
   doctest.skip "Google::Cloud::Storage::Bucket#signed_url"
-  doctest.skip "Google::Cloud::Storage::Bucket#post_object"
   # doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
   #   mock_storage do |mock|
   #     mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
@@ -520,7 +523,6 @@ YARD::Doctest.configure do |doctest|
 
   # Due to failing line in example: key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
   doctest.skip "Google::Cloud::Storage::File#signed_url"
-
   # doctest.before "Google::Cloud::Storage::File#signed_url" do
   #   mock_storage do |mock|
   #     mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
@@ -668,6 +670,32 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
       mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+    end
+  end
+
+  # PostObject
+
+  doctest.before "Google::Cloud::Storage::Bucket#post_object" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+    end
+  end
+  doctest.before "Google::Cloud::Storage::Bucket#post_object@Using a policy to define the upload authorization:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+    end
+  end
+  doctest.before "Google::Cloud::Storage::Bucket#post_object@Using the issuer and signing_key options:" do
+    mock_storage do |mock|
+      OpenSSL::PKey::RSA.stub :new, "key" do
+        mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      end
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::PostObject" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
     end
   end
 
@@ -912,6 +940,3 @@ def random_file_acl_hash bucket_name, file_name
    ]
   }
 end
-
-
-

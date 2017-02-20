@@ -16,6 +16,7 @@
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
+require "google/cloud/storage/post_object"
 require "google/cloud/storage/file"
 require "pathname"
 
@@ -721,6 +722,8 @@ module Google
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
         #
+        # @return [PostObject]
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -729,7 +732,13 @@ module Google
         #   bucket = storage.bucket "my-todo-app"
         #   post = bucket.post_object "avatars/heidi/400x400.png"
         #
-        # @example Using a policy to define the upload authorization
+        #   post.url #=> "https://storage.googleapis.com"
+        #   post.fields[:key] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields[:GoogleAccessId] #=> "0123456789@gserviceaccount.com"
+        #   post.fields[:signature] #=> "ABC...XYZ="
+        #   post.fields[:policy] #=> "ABC...XYZ="
+        #
+        # @example Using a policy to define the upload authorization:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -750,16 +759,28 @@ module Google
         #   post = bucket.post_object "avatars/heidi/400x400.png",
         #                              policy: policy
         #
+        #   post.url #=> "https://storage.googleapis.com"
+        #   post.fields[:key] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields[:GoogleAccessId] #=> "0123456789@gserviceaccount.com"
+        #   post.fields[:signature] #=> "ABC...XYZ="
+        #   post.fields[:policy] #=> "ABC...XYZ="
+        #
         # @example Using the issuer and signing_key options:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-        #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
+        #   key = OpenSSL::PKey::RSA.new
         #   post = bucket.post_object "avatars/heidi/400x400.png",
         #                             issuer: "service-account@gcloud.com",
         #                             signing_key: key
+        #
+        #   post.url #=> "https://storage.googleapis.com"
+        #   post.fields[:key] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields[:GoogleAccessId] #=> "0123456789@gserviceaccount.com"
+        #   post.fields[:signature] #=> "ABC...XYZ="
+        #   post.fields[:policy] #=> "ABC...XYZ="
         #
         def post_object path, policy: nil, issuer: nil,
                         client_email: nil, signing_key: nil,
@@ -951,14 +972,6 @@ module Google
             @updates << attribute
             @updates.uniq!
           end
-        end
-      end
-
-      class PostObject
-        attr_reader :url, :fields
-        def initialize url, fields
-          @url = url
-          @fields = fields
         end
       end
     end
