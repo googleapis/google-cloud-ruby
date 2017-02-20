@@ -32,7 +32,7 @@
     {
       "title": "Datastore",
       "type": "google/cloud/datastore",
-      "patterns": ["\/datastore"],
+      "patterns": ["\/datastore", "google\/protobuf"],
       "nav": [
         {
           "title": "Dataset",
@@ -53,7 +53,7 @@
         {
           "title": "V1",
           "type": "google/cloud/datastore/v1",
-          "patterns": ["\/datastore\/v1"],
+          "patterns": ["\/datastore\/v1", "google\/protobuf"],
           "nav": [
             {
               "title": "DatastoreClient",
@@ -61,7 +61,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/datastore/v1"
+              "type": "google/datastore/v1/datatypes"
             }
           ]
         }

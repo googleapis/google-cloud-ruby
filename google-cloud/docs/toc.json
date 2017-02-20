@@ -154,7 +154,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/datastore/v1"
+              "type": "google/datastore/v1/datatypes"
             }
           ]
         }

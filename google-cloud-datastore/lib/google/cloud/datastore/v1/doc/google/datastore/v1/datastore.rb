@@ -14,43 +14,6 @@
 
 module Google
   module Datastore
-    ##
-    # The `Google::Datastore::V1` module provides the following types:
-    #
-    # Class | Description
-    # ----- | -----------
-    # {Google::Datastore::V1::AllocateIdsRequest} | The request for Datastore::AllocateIds.
-    # {Google::Datastore::V1::AllocateIdsResponse} | The response for Datastore::AllocateIds.
-    # {Google::Datastore::V1::BeginTransactionRequest} | The request for Datastore::BeginTransaction.
-    # {Google::Datastore::V1::BeginTransactionResponse} | The response for Datastore::BeginTransaction.
-    # {Google::Datastore::V1::CommitRequest} | The request for Datastore::Commit.
-    # {Google::Datastore::V1::CommitResponse} | The response for Datastore::Commit.
-    # {Google::Datastore::V1::CompositeFilter} | A filter that merges multiple other filters.
-    # {Google::Datastore::V1::Entity} | A Datastore data object.
-    # {Google::Datastore::V1::EntityResult} | The result of fetching an entity from Datastore.
-    # {Google::Datastore::V1::Filter} | A holder for any type of filter.
-    # {Google::Datastore::V1::GqlQuery} | A query in the GQL grammar.
-    # {Google::Datastore::V1::GqlQueryParameter} | A binding parameter for a GQL query.
-    # {Google::Datastore::V1::Key} | A unique identifier for an entity.
-    # {Google::Datastore::V1::KindExpression} | A representation of a kind.
-    # {Google::Datastore::V1::LookupRequest} | The request for Datastore::Lookup.
-    # {Google::Datastore::V1::LookupResponse} | The response for Datastore::Lookup.
-    # {Google::Datastore::V1::Mutation} | A mutation to apply to an entity.
-    # {Google::Datastore::V1::MutationResult} | The result of applying a mutation.
-    # {Google::Datastore::V1::PartitionId} | A partition ID identifies a grouping of entities.
-    # {Google::Datastore::V1::Projection} | A representation of a property in a projection.
-    # {Google::Datastore::V1::PropertyFilter} | A filter on a specific property.
-    # {Google::Datastore::V1::PropertyOrder} | The desired order for a specific property.
-    # {Google::Datastore::V1::PropertyReference} | A property relative to the kind expressions.
-    # {Google::Datastore::V1::Query} | A query for entities.
-    # {Google::Datastore::V1::QueryResultBatch} | A batch of results produced by a query.
-    # {Google::Datastore::V1::ReadOptions} | The options shared by read requests.
-    # {Google::Datastore::V1::RollbackRequest} | The request for Datastore::Rollback.
-    # {Google::Datastore::V1::RollbackResponse} | The response for Datastore::Rollback.
-    # {Google::Datastore::V1::RunQueryRequest} | The request for Datastore::RunQuery.
-    # {Google::Datastore::V1::RunQueryResponse} | The response for Datastore::RunQuery.
-    # {Google::Datastore::V1::Value} | Holds any of the supported value types and associated metadata.
-    #
     module V1
       # The request for Datastore::Lookup.
       # @!attribute [rw] project_id
