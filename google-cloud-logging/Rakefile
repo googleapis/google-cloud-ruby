@@ -149,7 +149,37 @@ task :jsondoc => :yard do
   require "gcloud/jsondoc"
 
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-logging"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Logging::V2::DataTypes",
+        modules: [
+          {
+            title: "Google::Logging::V2",
+            include: ["google/logging/v2"]
+          },
+          {
+            title: "Google::Logging::Type",
+            include: ["google/logging/type"]
+          },
+          {
+            title: "Google::Api",
+            include: ["google/api"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-logging",
+                                             generate: toc_config
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
 end

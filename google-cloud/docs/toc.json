@@ -261,7 +261,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/logging/v2"
+              "type": "google/logging/v2/datatypes"
             }
           ]
         }

@@ -14,35 +14,6 @@
 
 module Google
   module Logging
-    ##
-    # The `Google::Logging::V2` module provides the following types:
-    #
-    # Class | Description
-    # ----- | -----------
-    # {Google::Logging::V2::CreateLogMetricRequest} | The parameters to CreateLogMetric.
-    # {Google::Logging::V2::CreateSinkRequest} | The parameters to CreateSink.
-    # {Google::Logging::V2::DeleteLogMetricRequest} | The parameters to DeleteLogMetric.
-    # {Google::Logging::V2::DeleteLogRequest} | The parameters to DeleteLog.
-    # {Google::Logging::V2::DeleteSinkRequest} | The parameters to DeleteSink.
-    # {Google::Logging::V2::GetLogMetricRequest} | The parameters to GetLogMetric.
-    # {Google::Logging::V2::GetSinkRequest} | The parameters to GetSink.
-    # {Google::Logging::V2::ListLogEntriesRequest} | The parameters to ListLogEntries.
-    # {Google::Logging::V2::ListLogEntriesResponse} | Result returned from ListLogEntries.
-    # {Google::Logging::V2::ListLogMetricsRequest} | The parameters to ListLogMetrics.
-    # {Google::Logging::V2::ListLogMetricsResponse} | Result returned from ListLogMetrics.
-    # {Google::Logging::V2::ListMonitoredResourceDescriptorsRequest} | The parameters to ListMonitoredResourceDescriptors
-    # {Google::Logging::V2::ListMonitoredResourceDescriptorsResponse} | Result returned from ListMonitoredResourceDescriptors.
-    # {Google::Logging::V2::ListSinksRequest} | The parameters to ListSinks.
-    # {Google::Logging::V2::ListSinksResponse} | Result returned from ListSinks.
-    # {Google::Logging::V2::LogEntry} | An individual entry in a log.
-    # {Google::Logging::V2::LogEntryOperation} | Additional information about a potentially long-running operation with which a log entry is associated.
-    # {Google::Logging::V2::LogMetric} | Describes a logs-based metric.
-    # {Google::Logging::V2::LogSink} | Describes a sink used to export log entries outside of Stackdriver Logging.
-    # {Google::Logging::V2::UpdateLogMetricRequest} | The parameters to UpdateLogMetric.
-    # {Google::Logging::V2::UpdateSinkRequest} | The parameters to UpdateSink.
-    # {Google::Logging::V2::WriteLogEntriesRequest} | The parameters to WriteLogEntries.
-    # {Google::Logging::V2::WriteLogEntriesResponse} | Result returned from WriteLogEntries.
-    #
     module V2
       # The parameters to DeleteLog.
       # @!attribute [rw] log_name
