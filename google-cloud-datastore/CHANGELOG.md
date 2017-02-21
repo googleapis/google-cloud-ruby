@@ -1,5 +1,12 @@
 # Release History
 
+### 0.24.0 / 2017-02-21
+
+* Add emulator_host parameter
+* Fix GRPC retry bug
+* The client_config data structure has replaced retry_codes/retry_codes_def with retry_codes
+* Update GRPC/Protobuf/GAX dependencies
+
 ### 0.23.0 / 2016-12-8
 
 * Many documentation improvements

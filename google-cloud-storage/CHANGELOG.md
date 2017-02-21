@@ -1,6 +1,6 @@
 # Release History
 
-### 0.23.2 / 2017-2-21
+### 0.23.2 / 2017-02-21
 
 * Allow setting a File's storage_class on file creation
 * Allow updating an existing File's storage_class

@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.0.0"
 
   gem.add_dependency "google-cloud-bigquery", "~> 0.23.0"
-  gem.add_dependency "google-cloud-datastore", "~> 0.23.0"
+  gem.add_dependency "google-cloud-datastore", "~> 0.24.0"
   gem.add_dependency "google-cloud-dns", "~> 0.21.0"
   gem.add_dependency "google-cloud-error_reporting", "~> 0.22.0"
   gem.add_dependency "google-cloud-language", "~> 0.23.0"
