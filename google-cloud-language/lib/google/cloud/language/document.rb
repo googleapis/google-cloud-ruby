@@ -74,12 +74,6 @@ module Google
           @grpc.source == :gcs_content_uri
         end
 
-        def url?
-          puts "The method Document#url? is deprecated. " \
-          "Use Document#gcs_url? instead."
-          gcs_url?
-        end
-        
         ##
         # @private The source of the document's content.
         #
