@@ -10,7 +10,7 @@
     {
       "title": "Error Reporting",
       "type": "google/cloud/errorreporting",
-      "patterns": ["\/errorreporting", "\/clouderrorreporting"],
+      "patterns": ["\/errorreporting", "\/clouderrorreporting", "google\/protobuf"],
       "nav": [
 
         {
@@ -24,7 +24,7 @@
         {
           "title": "V1Beta1",
           "type": "google/cloud/errorreporting/v1beta1",
-          "patterns": ["\/errorreporting\/v1beta1", "\/clouderrorreporting"],
+          "patterns": ["\/errorreporting\/v1beta1", "\/clouderrorreporting", "google\/protobuf"],
           "nav": [
             {
               "title": "ReportErrorsServiceClient",
@@ -40,8 +40,7 @@
             },
             {
               "title": "Data Types",
-              "patterns": ["\/clouderrorreporting\/v1beta1"],
-              "type": "google/devtools/clouderrorreporting/v1beta1"
+              "type": "google/devtools/clouderrorreporting/v1beta1/datatypes"
             }
           ]
         }

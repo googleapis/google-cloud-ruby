@@ -211,8 +211,7 @@
             },
             {
               "title": "Data Types",
-              "patterns": ["\/clouderrorreporting\/v1beta1"],
-              "type": "google/devtools/clouderrorreporting/v1beta1"
+              "type": "google/devtools/clouderrorreporting/v1beta1/datatypes"
             }
           ]
         }

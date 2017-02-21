@@ -103,7 +103,29 @@ task :jsondoc => :yard do
   require "gcloud/jsondoc"
 
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-error_reporting"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Devtools::Clouderrorreporting::V1beta1::DataTypes",
+        modules: [
+          {
+            title: "Google::Devtools::Clouderrorreporting::V1beta1",
+            include: ["google/devtools/clouderrorreporting/v1beta1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-error_reporting",
+                                             generate: toc_config
   generator.write_to "jsondoc"
   cp ["docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
 end
