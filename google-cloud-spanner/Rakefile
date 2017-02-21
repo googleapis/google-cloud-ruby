@@ -140,8 +140,24 @@ task :jsondoc => :yard do
             include: ["google/spanner/v1"]
           },
           {
+            title: "Google::Spanner::Admin::Instance::V1",
+            include: ["google/spanner/admin/instance/v1"]
+          },
+          {
+            title: "Google::Spanner::Admin::Database::V1",
+            include: ["google/spanner/admin/database/v1"]
+          },
+          {
+            title: "Google::Iam::V1",
+            include: ["google/iam/v1"]
+          },
+          {
             title: "Google::Protobuf",
             include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
           }
         ]
       }

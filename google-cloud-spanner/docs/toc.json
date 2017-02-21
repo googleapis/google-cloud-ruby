@@ -32,16 +32,24 @@
     {
       "title": "Spanner",
       "type": "google/cloud/spanner",
-      "patterns": ["\/spanner", "google\/protobuf"],
+      "patterns": ["\/spanner", "\/spanner\/v1", "\/spanner\/admin\/instance\/v1", "\/spanner\/admin\/database\/v1", "google\/iam", "google\/protobuf", "google\/rpc"],
       "nav": [
         {
           "title": "V1",
           "type": "google/cloud/spanner/v1",
-          "patterns": ["\/spanner\/v1", "google\/protobuf"],
+          "patterns": ["\/spanner\/v1", "\/spanner\/admin\/instance\/v1", "\/spanner\/admin\/database\/v1", "google\/iam", "google\/protobuf", "google\/rpc"],
           "nav": [
             {
               "title": "SpannerClient",
               "type": "google/cloud/spanner/v1/spannerclient"
+            },
+            {
+              "title": "InstanceAdminClient",
+              "type": "google/cloud/spanner/admin/instance/v1/instanceadminclient"
+            },
+            {
+              "title": "DatabaseAdminClient",
+              "type": "google/cloud/spanner/admin/database/v1/databaseadminclient"
             },
             {
               "title": "Data Types",
