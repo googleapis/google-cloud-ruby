@@ -32,6 +32,7 @@
     {
       "title": "Vision",
       "type": "google/cloud/vision",
+      "patterns": ["\/cloud\/vision", "google\/protobuf", "google\/rpc", "google\/type"],
       "nav": [
         {
           "title": "Project",
@@ -44,6 +45,21 @@
         {
           "title": "Annotation",
           "type": "google/cloud/vision/annotation"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/vision/v1",
+          "patterns": ["\/cloud\/vision\/v1", "google\/protobuf", "google\/rpc", "google\/type"],
+          "nav": [
+            {
+              "title": "ImageAnnotatorClient",
+              "type": "google/cloud/vision/v1/imageannotatorclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/vision/v1/datatypes"
+            }
+          ]
         }
       ]
     }
