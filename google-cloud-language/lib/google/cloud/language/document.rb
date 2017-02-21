@@ -70,10 +70,16 @@ module Google
         ##
         # @private Whether the document source is a Google Cloud Storage URI.
         #
-        def url?
+        def gcs_url?
           @grpc.source == :gcs_content_uri
         end
 
+        def url?
+          puts "The method Document#url? is deprecated. " \
+          "Use Document#gcs_url? instead."
+          gcs_url?
+        end
+        
         ##
         # @private The source of the document's content.
         #

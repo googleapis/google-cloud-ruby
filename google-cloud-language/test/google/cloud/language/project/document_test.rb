@@ -19,7 +19,7 @@ describe Google::Cloud::Language::Project, :document, :mock_language do
     doc = language.document "Hello world!"
     doc.must_be_kind_of Google::Cloud::Language::Document
     doc.must_be :content? # private method
-    doc.wont_be :url? # private method
+    doc.wont_be :gcs_url? # private method
     doc.must_be :text? # private method
     doc.wont_be :html? # private method
     doc.source.must_equal "Hello world!" # private method
@@ -28,7 +28,7 @@ describe Google::Cloud::Language::Project, :document, :mock_language do
   it "builds a document from URL" do
     doc = language.document "gs://bucket/path.txt"
     doc.must_be_kind_of Google::Cloud::Language::Document
-    doc.must_be :url? # private method
+    doc.must_be :gcs_url? # private method
     doc.wont_be :content? # private method
     doc.must_be :text? # private method
     doc.wont_be :html? # private method
@@ -39,7 +39,7 @@ describe Google::Cloud::Language::Project, :document, :mock_language do
     fake = OpenStruct.new to_gs_url: "gs://bucket/path.txt"
     doc = language.document fake
     doc.must_be_kind_of Google::Cloud::Language::Document
-    doc.must_be :url? # private method
+    doc.must_be :gcs_url? # private method
     doc.wont_be :content? # private method
     doc.must_be :text? # private method
     doc.wont_be :html? # private method
@@ -49,7 +49,7 @@ describe Google::Cloud::Language::Project, :document, :mock_language do
   it "sets the format of the URL when provided" do
     doc = language.document "gs://bucket/path.ext", format: :html
     doc.must_be_kind_of Google::Cloud::Language::Document
-    doc.must_be :url? # private method
+    doc.must_be :gcs_url? # private method
     doc.wont_be :content? # private method
     doc.must_be :html? # private method
     doc.wont_be :text? # private method
@@ -59,7 +59,7 @@ describe Google::Cloud::Language::Project, :document, :mock_language do
   it "derives HTML format if the URL ends in .html" do
     doc = language.document "gs://bucket/path.html"
     doc.must_be_kind_of Google::Cloud::Language::Document
-    doc.must_be :url? # private method
+    doc.must_be :gcs_url? # private method
     doc.wont_be :content? # private method
     doc.must_be :html? # private method
     doc.wont_be :text? # private method

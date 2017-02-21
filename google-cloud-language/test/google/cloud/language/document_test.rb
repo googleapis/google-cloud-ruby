@@ -55,7 +55,7 @@ describe Google::Cloud::Language::Document, :mock_language do
 
     # These are private methods
     doc.must_be :content?
-    doc.wont_be :url?
+    doc.wont_be :gcs_url?
     doc.must_be :text?
     doc.wont_be :html?
   end
@@ -65,7 +65,7 @@ describe Google::Cloud::Language::Document, :mock_language do
     doc.must_be_kind_of Google::Cloud::Language::Document
 
     # These are private methods
-    doc.must_be :url?
+    doc.must_be :gcs_url?
     doc.wont_be :content?
     doc.must_be :text?
     doc.wont_be :html?
@@ -76,7 +76,7 @@ describe Google::Cloud::Language::Document, :mock_language do
     doc.must_be_kind_of Google::Cloud::Language::Document
 
     # These are private methods
-    doc.must_be :url?
+    doc.must_be :gcs_url?
     doc.wont_be :content?
     doc.must_be :html?
     doc.wont_be :text?
@@ -87,7 +87,7 @@ describe Google::Cloud::Language::Document, :mock_language do
     doc.must_be_kind_of Google::Cloud::Language::Document
 
     # These are private methods
-    doc.must_be :url?
+    doc.must_be :gcs_url?
     doc.wont_be :content?
     doc.must_be :html?
     doc.wont_be :text?
