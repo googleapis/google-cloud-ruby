@@ -48,29 +48,29 @@ module Google
         end
 
         def run_backgrounder
-          loop do
-            breakpoint = wait_next_item
-            next if breakpoint.nil?
-            begin
-              service.update_active_breakpoint agent.debuggee.id, breakpoint
-            rescue => e
-              @last_exception = e
-              puts e.message
-              puts e.backtrace
-            end
+          breakpoint = wait_next_item
+          return if breakpoint.nil?
+          begin
+            service.update_active_breakpoint agent.debuggee.id, breakpoint
+          rescue => e
+            @last_exception = e
+            puts e.message
+            puts e.backtrace
           end
         end
 
         def wait_next_item
           synchronize do
             @lock_cond.wait_while {
-              state == :suspended || (state == :running && @queue.empty?)}
+              async_state == :suspended ||
+                (async_state == :running && @queue.empty?)}
             queue_item = nil
             if @queue.empty?
-              @state = :stopped
+              @async_state = :stopped
             else
               queue_item = @queue.pop
             end
+            @lock_cond.broadcast
             queue_item
           end
         end

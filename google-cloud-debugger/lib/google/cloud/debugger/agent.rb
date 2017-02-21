@@ -65,22 +65,20 @@ module Google
         end
 
         def run_backgrounder
-          while running?
-            begin
-              sync_breakpoints = ensure_debuggee_registration
+          begin
+            sync_breakpoints = ensure_debuggee_registration
 
-              if sync_breakpoints
-                sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
-                unless sync_result
-                  debuggee.revoke_registration
-                end
+            if sync_breakpoints
+              sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
+              unless sync_result
+                debuggee.revoke_registration
               end
-            rescue => e
-              @last_exception = e
-              puts e
-              puts e.backtrace
-              # break
             end
+          rescue => e
+            @last_exception = e
+            puts e
+            puts e.backtrace
+            # break
           end
         end
 
@@ -114,13 +112,12 @@ module Google
             unless @thread.nil?
               tracer.stop
 
-              @state = :stopped
+              @async_state = :stopped
               @thread.kill
               @thread.join
             end
           end
         end
-
       end
     end
   end

@@ -66,8 +66,6 @@ module Google
           # Tracer is explicitly designed to not have a lock. This should be the
           # only place writing @breakpoints_cache to ensure thread safety.
           @breakpoints_cache = breakpoints_hash
-
-          disable_tracepoints if breakpoints_hash.empty?
         end
 
         def eval_breakpoint breakpoint, call_stack_bindings
@@ -92,6 +90,8 @@ module Google
             t4 = Time.now
             update_breakpoints_cache
             t5 = Time.now
+
+            disable_tracepoints if @breakpoints_cache.empty?
 
             # puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
             # puts "*********** Stack Evaluation Time: #{t2-t1} **********"

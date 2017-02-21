@@ -23,13 +23,11 @@ Gem::Specification.new do |gem|
   gem.add_dependency "binding_of_caller", "~> 0.7"
   gem.add_dependency "json", ">= 1.7"
   gem.add_dependency "google-cloud-core", "~> 0.21.1"
-  gem.add_dependency "grpc", "~> 1.0"
-  gem.add_dependency "google-gax", "~> 0.6.0"
-  gem.add_dependency "google-protobuf", "~> 3.0"
-  gem.add_dependency "googleapis-common-protos", "~> 1.3"
+  gem.add_dependency "google-gax", "~> 0.8.0"
+  #TODO remote this dev dependency
   gem.add_dependency "google-api-client", "~> 0.9.0"
 
-  gem.add_development_dependency "minitest", "~> 5.9"
+  gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
