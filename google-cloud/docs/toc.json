@@ -154,7 +154,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/datastore/v1"
+              "type": "google/datastore/v1/datatypes"
             }
           ]
         }
@@ -211,8 +211,7 @@
             },
             {
               "title": "Data Types",
-              "patterns": ["\/clouderrorreporting\/v1beta1"],
-              "type": "google/devtools/clouderrorreporting/v1beta1"
+              "type": "google/devtools/clouderrorreporting/v1beta1/datatypes"
             }
           ]
         }
@@ -262,7 +261,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/logging/v2"
+              "type": "google/logging/v2/datatypes"
             }
           ]
         }
@@ -293,6 +292,10 @@
             {
               "title": "LanguageServiceClient",
               "type": "google/cloud/language/v1/languageserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/language/v1/datatypes"
             }
           ]
         }
@@ -318,7 +321,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/monitoring/v3"
+              "type": "google/monitoring/v3/datatypes"
             }
           ]
         }
@@ -356,7 +359,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/pubsub/v1"
+              "type": "google/pubsub/v1/datatypes"
             }
           ]
         }
@@ -474,7 +477,7 @@
             {
               "title": "Data Types",
               "patterns": ["\/cloudtrace\/v1"],
-              "type": "google/devtools/cloudtrace/v1"
+              "type": "google/devtools/cloudtrace/v1/datatypes"
             }
           ]
         }
@@ -501,6 +504,7 @@
     {
       "title": "Vision",
       "type": "google/cloud/vision",
+      "patterns": ["\/cloud\/vision"],
       "nav": [
         {
           "title": "Project",
@@ -513,6 +517,21 @@
         {
           "title": "Annotation",
           "type": "google/cloud/vision/annotation"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/vision/v1",
+          "patterns": ["\/cloud\/vision\/v1"],
+          "nav": [
+            {
+              "title": "ImageAnnotatorClient",
+              "type": "google/cloud/vision/v1/imageannotatorclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/vision/v1/datatypes"
+            }
+          ]
         }
       ]
     }

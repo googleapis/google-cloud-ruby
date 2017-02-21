@@ -14,36 +14,6 @@
 
 module Google
   module Pubsub
-    ##
-    # The `Google::Pubsub::V1` module provides the following types:
-    #
-    # Class | Description
-    # ----- | -----------
-    # {Google::Pubsub::V1::AcknowledgeRequest} | Request for the Acknowledge method.
-    # {Google::Pubsub::V1::DeleteSubscriptionRequest} | Request for the DeleteSubscription method.
-    # {Google::Pubsub::V1::DeleteTopicRequest} | Request for the DeleteTopic method.
-    # {Google::Pubsub::V1::GetSubscriptionRequest} | Request for the GetSubscription method.
-    # {Google::Pubsub::V1::GetTopicRequest} | Request for the GetTopic method.
-    # {Google::Pubsub::V1::ListSubscriptionsRequest} | Request for the ListSubscriptions method.
-    # {Google::Pubsub::V1::ListSubscriptionsResponse} | Response for the ListSubscriptions method.
-    # {Google::Pubsub::V1::ListTopicsRequest} | Request for the ListTopics method.
-    # {Google::Pubsub::V1::ListTopicsResponse} | Response for the ListTopics method.
-    # {Google::Pubsub::V1::ListTopicSubscriptionsRequest} | Request for the ListTopicSubscriptions method.
-    # {Google::Pubsub::V1::ListTopicSubscriptionsResponse} | Response for the ListTopicSubscriptions method.
-    # {Google::Pubsub::V1::ModifyAckDeadlineRequest} | Request for the ModifyAckDeadline method.
-    # {Google::Pubsub::V1::ModifyPushConfigRequest} | Request for the ModifyPushConfig method.
-    # {Google::Pubsub::V1::PublishRequest} | Request for the Publish method.
-    # {Google::Pubsub::V1::PublishResponse} | Response for the Publish method.
-    # {Google::Pubsub::V1::PubsubMessage} | A message data and its attributes.
-    # {Google::Pubsub::V1::PullRequest} | Request for the Pull method.
-    # {Google::Pubsub::V1::PullResponse} | Response for the Pull method.
-    # {Google::Pubsub::V1::PushConfig} | Configuration for a push delivery endpoint.
-    # {Google::Pubsub::V1::ReceivedMessage} | A message and its corresponding acknowledgment ID.
-    # {Google::Pubsub::V1::StreamingPullRequest} | Request for the StreamingPull streaming RPC method.
-    # {Google::Pubsub::V1::StreamingPullResponse} | Response for the StreamingPull streaming RPC method.
-    # {Google::Pubsub::V1::Subscription} | A subscription resource.
-    # {Google::Pubsub::V1::Topic} | A topic resource.
-    #
     module V1
       # A topic resource.
       # @!attribute [rw] name

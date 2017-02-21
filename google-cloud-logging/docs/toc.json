@@ -37,7 +37,7 @@
     {
       "title": "Logging",
       "type": "google/cloud/logging",
-      "patterns": ["\/logging"],
+      "patterns": ["\/logging", "google\/api", "google\/protobuf"],
       "nav": [
         {
           "title": "Project",
@@ -62,7 +62,7 @@
         {
           "title": "V2",
           "type": "google/cloud/logging/v2",
-          "patterns": ["\/logging\/v2"],
+          "patterns": ["\/logging\/v2", "\/logging\/type", "google\/api", "google\/protobuf"],
           "nav": [
             {
               "title": "ConfigServiceV2Client",
@@ -78,7 +78,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/logging/v2"
+              "type": "google/logging/v2/datatypes"
             }
           ]
         }

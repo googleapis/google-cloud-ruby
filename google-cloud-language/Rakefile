@@ -95,7 +95,25 @@ task :jsondoc => :yard do
   require "gcloud/jsondoc"
 
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-language"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Cloud::Language::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Language::V1",
+            include: ["google/cloud/language/v1"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-language",
+                                             generate: toc_config
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end

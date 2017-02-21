@@ -37,7 +37,7 @@
     {
       "title": "Trace",
       "type": "google/cloud/trace",
-      "patterns": ["\/trace", "\/cloudtrace"],
+      "patterns": ["\/trace", "\/cloudtrace", "google\/protobuf"],
       "nav": [
         {
           "title": "Project",
@@ -82,7 +82,7 @@
         {
           "title": "V1",
           "type": "google/cloud/trace/v1",
-          "patterns": ["\/trace\/v1", "\/cloudtrace"],
+          "patterns": ["\/trace\/v1", "\/cloudtrace", "google\/protobuf"],
           "nav": [
             {
               "title": "TraceServiceClient",
@@ -90,8 +90,7 @@
             },
             {
               "title": "Data Types",
-              "patterns": ["\/cloudtrace\/v1"],
-              "type": "google/devtools/cloudtrace/v1"
+              "type": "google/devtools/cloudtrace/v1/datatypes"
             }
           ]
         }

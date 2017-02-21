@@ -4,12 +4,12 @@
     {
       "title": "Monitoring",
       "type": "google/cloud/monitoring",
-      "patterns": ["\/monitoring"],
+      "patterns": ["\/monitoring", "google\/api", "google\/protobuf"],
       "nav": [
         {
           "title": "V3",
           "type": "google/cloud/monitoring/v3",
-          "patterns": ["\/monitoring\/v3"],
+          "patterns": ["\/monitoring\/v3", "google\/api", "google\/protobuf"],
           "nav": [
             {
               "title": "GroupServiceClient",
@@ -21,7 +21,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/monitoring/v3"
+              "type": "google/monitoring/v3/datatypes"
             }
           ]
         }

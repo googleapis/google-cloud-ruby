@@ -15,29 +15,6 @@
 module Google
   module Cloud
     module Language
-      ##
-      # The `Google::Cloud::Language::V1` module provides the following types:
-      #
-      # Class | Description
-      # ----- | -----------
-      # {Google::Cloud::Language::V1::AnalyzeEntitiesRequest} | The entity analysis request message.
-      # {Google::Cloud::Language::V1::AnalyzeEntitiesResponse} | The entity analysis response message.
-      # {Google::Cloud::Language::V1::AnalyzeSentimentRequest} | The sentiment analysis request message.
-      # {Google::Cloud::Language::V1::AnalyzeSentimentResponse} | The sentiment analysis response message.
-      # {Google::Cloud::Language::V1::AnalyzeSyntaxRequest} | The syntax analysis request message.
-      # {Google::Cloud::Language::V1::AnalyzeSyntaxResponse} | The syntax analysis response message.
-      # {Google::Cloud::Language::V1::AnnotateTextRequest} | The request message for the text annotation API, which can perform multiple analysis types (sentiment, entities, and syntax) in one call.
-      # {Google::Cloud::Language::V1::AnnotateTextRequest::Features} | All available features for sentiment, syntax, and semantic analysis.
-      # {Google::Cloud::Language::V1::DependencyEdge} | Represents dependency parse tree information for a token.
-      # {Google::Cloud::Language::V1::EncodingType} | Represents the text encoding that the caller uses to process the output.
-      # {Google::Cloud::Language::V1::Entity} | Represents a phrase in the text that is a known entity, such as a person, an organization, or location.
-      # {Google::Cloud::Language::V1::EntityMention} | Represents a mention for an entity in the text.
-      # {Google::Cloud::Language::V1::PartOfSpeech} | Represents part of speech information for a token.
-      # {Google::Cloud::Language::V1::Sentence} | Represents a sentence in the input document.
-      # {Google::Cloud::Language::V1::Sentiment} | Represents the feeling associated with the entire text or entities in the text.
-      # {Google::Cloud::Language::V1::TextSpan} | Represents an output piece of text.
-      # {Google::Cloud::Language::V1::Token} | Represents the smallest syntactic building block of the text.
-      #
       module V1
         # ================================================================ #
         #
