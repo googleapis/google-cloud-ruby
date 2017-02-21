@@ -477,7 +477,7 @@
             {
               "title": "Data Types",
               "patterns": ["\/cloudtrace\/v1"],
-              "type": "google/devtools/cloudtrace/v1"
+              "type": "google/devtools/cloudtrace/v1/datatypes"
             }
           ]
         }

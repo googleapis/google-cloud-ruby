@@ -15,18 +15,6 @@
 module Google
   module Devtools
     module Cloudtrace
-      ##
-      # The `Google::Devtools::Cloudtrace::V1` module provides the following types:
-      #
-      # Class | Description
-      # ----- | -----------
-      # {Google::Devtools::Cloudtrace::V1::GetTraceRequest} | The request message for the GetTrace method.
-      # {Google::Devtools::Cloudtrace::V1::ListTracesRequest} | The request message for the ListTraces method.
-      # {Google::Devtools::Cloudtrace::V1::ListTracesResponse} | The response message for the ListTraces method.
-      # {Google::Devtools::Cloudtrace::V1::PatchTracesRequest} | The request message for the PatchTraces method.
-      # {Google::Devtools::Cloudtrace::V1::Trace} | A trace describes how long it takes for an application to perform an operation.
-      # {Google::Devtools::Cloudtrace::V1::Traces} | List of new or updated traces.
-      # {Google::Devtools::Cloudtrace::V1::TraceSpan} | A span represents a single timed event within a trace.
       module V1
         # A trace describes how long it takes for an application to perform an
         # operation. It consists of a set of spans, each of which represent a single
