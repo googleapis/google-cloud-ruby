@@ -292,6 +292,10 @@
             {
               "title": "LanguageServiceClient",
               "type": "google/cloud/language/v1/languageserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/language/v1/datatypes"
             }
           ]
         }
