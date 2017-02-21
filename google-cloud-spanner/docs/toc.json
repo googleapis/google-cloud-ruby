@@ -31,7 +31,25 @@
   "services": [
     {
       "title": "Spanner",
-      "type": "google/cloud/spanner"
+      "type": "google/cloud/spanner",
+      "patterns": ["\/spanner", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/spanner/v1",
+          "patterns": ["\/spanner\/v1", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "SpannerClient",
+              "type": "google/cloud/spanner/v1/spannerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/spanner/v1/datatypes"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

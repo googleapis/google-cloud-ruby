@@ -128,7 +128,29 @@ task :jsondoc => :yard do
   require "gcloud/jsondoc"
 
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-spanner"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Spanner::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Spanner::V1",
+            include: ["google/spanner/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-spanner",
+                                             generate: toc_config
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
