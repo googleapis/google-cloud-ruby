@@ -359,7 +359,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/pubsub/v1"
+              "type": "google/pubsub/v1/datatypes"
             }
           ]
         }

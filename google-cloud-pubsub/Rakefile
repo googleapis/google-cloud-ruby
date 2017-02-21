@@ -118,7 +118,29 @@ task :jsondoc => :yard do
   require "gcloud/jsondoc"
 
   registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-pubsub"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Pubsub::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Pubsub::V1",
+            include: ["google/pubsub/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-pubsub",
+                                             generate: toc_config
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
 end
