@@ -1,5 +1,17 @@
 # Release History
 
+### 0.25.0 / 2017-02-21
+
+* Update Datastore dependency to 0.24.x
+* Update Error Reporting dependency to 0.23.x
+* Update Natural Language dependency to 0.24.x
+* Update Logging dependency to 0.24.x
+* Update Monitoring dependency to 0.23.x
+* Update Pub/Sub dependency to 0.23.x
+* Update Speech dependency to 0.22.x
+* Update Trace dependency to 0.23.x
+* Update Vision dependency to 0.22.x
+
 ### 0.24.0 / 2017-01-27
 
 * Upgrade to new versions of Error Reporting, Monitoring, Natural Language, and Pub/Sub
