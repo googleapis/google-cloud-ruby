@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # The `Google::Monitoring::V3` module provides the following types:
-    #
-    # Class | Description
-    # ----- | -----------
-    # {Google::Monitoring::V3::Group} | The description of a dynamic collection of monitored resources.
-    # {Google::Monitoring::V3::Point} | A single data point in a time series.
-    # {Google::Monitoring::V3::TimeInterval} | A time interval extending just after a start time through an end time.
-    # {Google::Monitoring::V3::TimeSeries} | A collection of data points that describes the time-varying values of a metric.
-    # {Google::Monitoring::V3::TypedValue} | A single strongly-typed value.
-    #
     module V3
       # A single strongly-typed value.
       # @!attribute [rw] bool_value

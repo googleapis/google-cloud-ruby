@@ -321,7 +321,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/monitoring/v3"
+              "type": "google/monitoring/v3/datatypes"
             }
           ]
         }
