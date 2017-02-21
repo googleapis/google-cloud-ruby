@@ -90,7 +90,8 @@ module Google
         #   `"gs://bucketname/path/to/document.ext"`; or an instance of
         #   Google::Cloud::Storage::File of the text to be annotated.
         # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional.
+        #   Optional. If no format is provided, the document will default to
+        #   TEXT.
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
