@@ -212,9 +212,9 @@
       "defaultService": "google/cloud/trace",
       "versions": [
         "v0.23.0",
-        "master",
+        "master"
         "v0.22.0",
-        "v0.21.0"
+        "v0.21.0",
       ]
     },
     {
