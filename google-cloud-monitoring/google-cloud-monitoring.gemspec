@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-monitoring"
-  gem.version       = "0.22.0"
+  gem.version       = "0.23.0"
 
   gem.authors       = ["Google Inc"]
   gem.email         = ["googleapis-packages@google.com"]
