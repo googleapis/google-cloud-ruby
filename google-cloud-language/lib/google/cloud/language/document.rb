@@ -70,7 +70,7 @@ module Google
         ##
         # @private Whether the document source is a Google Cloud Storage URI.
         #
-        def url?
+        def gcs_url?
           @grpc.source == :gcs_content_uri
         end
 
