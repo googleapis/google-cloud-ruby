@@ -1,5 +1,12 @@
 # Release History
 
+### 0.23.2 / 2017-2-21
+
+* Allow setting a File's storage_class on file creation
+* Allow updating an existing File's storage_class
+* Add File#rotate to rotate encryption keys
+* Add PostObject and Bucket#post_object for uploading via HTML forms
+
 ### 0.23.1 / 2016-12-12
 
 * Support Google extension headers on signed URLs (calavera)
