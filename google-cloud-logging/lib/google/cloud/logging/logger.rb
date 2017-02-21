@@ -14,7 +14,6 @@
 
 
 require "logger"
-require "orderedhash"
 
 module Google
   module Cloud
@@ -90,7 +89,7 @@ module Google
         end
 
         ##
-        # A OrderedHash of Thread IDs to Stackdriver request trace ID. The
+        # A Hash of Thread IDs to Stackdriver request trace ID. The
         # Stackdriver trace ID is a shared request identifier across all
         # Stackdriver services.
         #
@@ -142,7 +141,7 @@ module Google
           @resource = resource
           @labels = labels
           @level = 0 # DEBUG is the default behavior
-          @request_info = OrderedHash.new
+          @request_info = {}
           @closed = false
           # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
