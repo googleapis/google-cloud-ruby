@@ -12,7 +12,4 @@ Init_debugger_c()
 //    UNUSED(mDebugger);
 
     Init_tracer(mDebugger);
-
-    printf("Init_debugger called!\n");
-    fflush(stdout);
 }

@@ -76,8 +76,8 @@ module Google
             end
           rescue => e
             @last_exception = e
-            puts e
-            puts e.backtrace
+            # puts e
+            # puts e.backtrace
             # break
           end
         end
@@ -86,10 +86,10 @@ module Google
 
         def breakpoints_change_callback active_breakpoints
           if active_breakpoints.empty?
-            puts "*********** Agent: tracer stopped"
+            # puts "*********** Agent: tracer stopped"
             tracer.stop
           else
-            puts "*********** Agent: tracer started"
+            # puts "*********** Agent: tracer started"
             tracer.start
           end
         end

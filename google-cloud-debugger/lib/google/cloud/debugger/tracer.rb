@@ -36,10 +36,6 @@ module Google
           @file_tracepoint = nil
           @return_tracepoint = nil
           @return_tracepoint_counter = nil
-          # @b_call_tracepoint = nil
-          # @b_return_tracepoint = nil
-          # @fiber_switch_tracepoint = nil
-          @line_tracepoint = nil
           @breakpoints_cache = {}
 
           @app_root = app_root
@@ -71,7 +67,7 @@ module Google
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 
-          puts "\n\n**********Breakpoint(#{breakpoint.id}) hit!!"
+          # puts "\n\n**********Breakpoint(#{breakpoint.id}) hit!!"
           t1 = Time.now
 
           breakpoint.eval_call_stack call_stack_bindings
@@ -83,7 +79,7 @@ module Google
           # list, submit the breakpoint snapshot, and update Tracer's
           # breakpoints_cache.
           if breakpoint.complete?
-            puts "**********Breakpoint(#{breakpoint.id}) evaluated!!\n\n"
+            # puts "**********Breakpoint(#{breakpoint.id}) evaluated!!\n\n"
             agent.breakpoint_manager.mark_off breakpoint
             t3 = Time.now
             agent.transmitter.submit breakpoint

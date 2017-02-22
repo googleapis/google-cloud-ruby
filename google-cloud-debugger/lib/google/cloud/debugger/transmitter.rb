@@ -54,8 +54,8 @@ module Google
             service.update_active_breakpoint agent.debuggee.id, breakpoint
           rescue => e
             @last_exception = e
-            puts e.message
-            puts e.backtrace
+            # puts e.message
+            # puts e.backtrace
           end
         end
 

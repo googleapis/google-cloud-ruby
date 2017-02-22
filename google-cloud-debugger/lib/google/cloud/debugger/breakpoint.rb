@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "time"
 require "google/cloud/debugger/breakpoint/evaluator"
 require "google/cloud/debugger/breakpoint/source_location"
 require "google/cloud/debugger/breakpoint/stack_frame"
@@ -70,22 +71,22 @@ module Google
           expression
         end
 
-        def path_hit? path
-          synchronize do
-            location.path.match(path) || path.match(location.path)
-          end
-        end
-
-        def line_hit? path, line
-          synchronize do
-            path_hit?(path) && location.line == line
-          end
-        end
+        # def path_hit? path
+        #   synchronize do
+        #     location.path.match(path) || path.match(location.path)
+        #   end
+        # end
+        #
+        # def line_hit? path, line
+        #   synchronize do
+        #     path_hit?(path) && location.line == line
+        #   end
+        # end
 
         def complete
-          #TODO set @is_final_state and @final_time
           synchronize do
             @is_final_state = true
+            @final_time = Time.now.utc.iso8601
             @completed = true
           end
         end
@@ -122,8 +123,8 @@ module Google
                   Evaluator.eval_expressions top_frame_binding, @expressions
               end
             rescue => e
-              puts e.message
-              puts e.backtrace
+              # puts e.message
+              # puts e.backtrace
               # TODO set breakpoint into error state
               return false
             end
