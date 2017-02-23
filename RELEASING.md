@@ -90,6 +90,6 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Some time later, after they have completed, confirm that [Travis CI (Mac OS X)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) and [Appveyor CI (Windows)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-ruby) builds are also green.
 
-1. If your version change is greater than the [semver](http://semver.org/) patch version, then when you are done releasing all individual packages, you should follow these same instructions to release the `google-cloud` umbrella package.
+1. If your version change is greater than the [semver](http://semver.org/) patch version, then when you are done releasing all individual packages, you should follow these same instructions to release the `google-cloud` umbrella package. Furthermore, if your major releases included at least one dependency of the `stackdriver` umbrella package (currently those dependencies are `google-cloud-logging`, `google-cloud-trace`, `google-cloud-error_reporting`, and `google-cloud-monitoring`), then you should also follow these same instructions to release the `stackdriver` umbrella package. It is important that the dependencies of the `google-cloud` and `stackdriver` gems remain compatible so the two can co-exist in the same bundle.
 
 High fives all around!
