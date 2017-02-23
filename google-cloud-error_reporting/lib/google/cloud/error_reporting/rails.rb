@@ -15,6 +15,7 @@
 
 require "google/cloud/core/environment"
 require "google/cloud/error_reporting/v1beta1"
+require "google/cloud/error_reporting/middleware"
 require "google/cloud/credentials"
 
 module Google
