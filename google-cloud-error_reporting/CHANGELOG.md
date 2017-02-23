@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.1 / 2017-02-23
+
+* Add middleware require to rails module (premist)
+
 ### 0.23.0 / 2017-02-21
 
 * Fix GRPC retry bug
