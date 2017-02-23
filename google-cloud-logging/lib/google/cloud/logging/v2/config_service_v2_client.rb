@@ -46,8 +46,6 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
-          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
-
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -137,10 +135,6 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
-          # @param app_name [String]
-          #   The codename of the calling service.
-          # @param app_version [String]
-          #   The version of the calling service.
           def initialize \
               service_path: SERVICE_ADDRESS,
               port: DEFAULT_SERVICE_PORT,
@@ -149,8 +143,10 @@ module Google
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: "gax",
-              app_version: Google::Gax::VERSION
+              app_name: nil,
+              app_version: nil,
+              lib_name: nil,
+              lib_version: ""
             # These require statements are intentionally placed here to initialize
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
@@ -158,9 +154,16 @@ module Google
             require "google/logging/v2/logging_config_services_pb"
 
 
-            google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
-              "ruby/#{RUBY_VERSION}".freeze
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            google_api_client = "gl-ruby/#{RUBY_VERSION}"
+            google_api_client << " #{lib_name}/{lib_version}" if lib_name
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " grpc/#{GRPC::VERSION}"
+            google_api_client.freeze
+
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "config_service_v2_client_config.json"
@@ -213,10 +216,8 @@ module Google
           # Lists sinks.
           #
           # @param parent [String]
-          #   Required. The resource name where this sink was created:
-          #
-          #       "projects/[PROJECT_ID]"
-          #       "organizations/[ORGANIZATION_ID]"
+          #   Required. The parent resource whose sinks are to be listed.
+          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -267,10 +268,12 @@ module Google
           # Gets a sink.
           #
           # @param sink_name [String]
-          #   Required. The resource name of the sink to return:
+          #   Required. The parent resource name of the sink:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -294,22 +297,34 @@ module Google
             @get_sink.call(req, options)
           end
 
-          # Creates a sink.
+          # Creates a sink that exports specified log entries to a destination.  The
+          # export of newly-ingested log entries begins immediately, unless the current
+          # time is outside the sink's start and end times or the sink's
+          # +writer_identity+ is not permitted to write to the destination.  A sink can
+          # export log entries only from the resource owning the sink.
           #
           # @param parent [String]
           #   Required. The resource in which to create the sink:
           #
           #       "projects/[PROJECT_ID]"
           #       "organizations/[ORGANIZATION_ID]"
+          #
+          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
           # @param sink [Google::Logging::V2::LogSink]
           #   Required. The new sink, whose +name+ parameter is a sink identifier that
           #   is not already in use.
           # @param unique_writer_identity [true, false]
-          #   Optional. Whether the sink will have a dedicated service account returned
-          #   in the sink's writer_identity. Set this field to be true to export
-          #   logs from one project to a different project. This field is ignored for
-          #   non-project sinks (e.g. organization sinks) because those sinks are
-          #   required to have dedicated service accounts.
+          #   Optional. Determines the kind of IAM identity returned as +writer_identity+
+          #   in the new sink.  If this value is omitted or set to false, and if the
+          #   sink's parent is a project, then the value returned as +writer_identity+ is
+          #   +cloud-logs@google.com+, the same identity used before the addition of
+          #   writer identities to this API. The sink's destination must be in the same
+          #   project as the sink itself.
+          #
+          #   If this field is set to true, or if the sink is owned by a non-project
+          #   resource such as an organization, then the value of +writer_identity+ will
+          #   be a unique service account used only for exports from the new sink.  For
+          #   more information, see +writer_identity+ in LogSink.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -339,11 +354,18 @@ module Google
             @create_sink.call(req, options)
           end
 
-          # Updates or creates a sink.
+          # Updates a sink. If the named sink doesn't exist, then this method is
+          # identical to
+          # {sinks.create}[https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create].
+          # If the named sink does exist, then this method replaces the following
+          # fields in the existing sink with values from the new sink: +destination+,
+          # +filter+, +output_version_format+, +start_time+, and +end_time+.
+          # The updated filter might also have a new +writer_identity+; see the
+          # +unique_writer_identity+ field.
           #
           # @param sink_name [String]
-          #   Required. The resource name of the sink to update, including the parent
-          #   resource and the sink identifier:
+          #   Required. The full resource name of the sink to update, including the
+          #   parent resource and the sink identifier:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -351,14 +373,20 @@ module Google
           #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink]
           #   Required. The updated sink, whose name is the same identifier that appears
-          #   as part of +sinkName+.  If +sinkName+ does not exist, then
+          #   as part of +sink_name+.  If +sink_name+ does not exist, then
           #   this method creates a new sink.
           # @param unique_writer_identity [true, false]
-          #   Optional. Whether the sink will have a dedicated service account returned
-          #   in the sink's writer_identity. Set this field to be true to export
-          #   logs from one project to a different project. This field is ignored for
-          #   non-project sinks (e.g. organization sinks) because those sinks are
-          #   required to have dedicated service accounts.
+          #   Optional. See
+          #   {sinks.create}[https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create]
+          #   for a description of this field.  When updating a sink, the effect of this
+          #   field on the value of +writer_identity+ in the updated sink depends on both
+          #   the old and new values of this field:
+          #
+          #   +   If the old and new values of this field are both false or both true,
+          #       then there is no change to the sink's +writer_identity+.
+          #   +   If the old value was false and the new value is true, then
+          #       +writer_identity+ is changed to a unique service account.
+          #   +   It is an error if the old value was true and the new value is false.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -388,16 +416,19 @@ module Google
             @update_sink.call(req, options)
           end
 
-          # Deletes a sink.
+          # Deletes a sink. If the sink has a unique +writer_identity+, then that
+          # service account is also deleted.
           #
           # @param sink_name [String]
-          #   Required. The resource name of the sink to delete, including the parent
-          #   resource and the sink identifier:
+          #   Required. The full resource name of the sink to delete, including the
+          #   parent resource and the sink identifier:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
           #
-          #   It is an error if the sink does not exist.
+          #   It is an error if the sink does not exist.  Example:
+          #   +"projects/my-project-id/sinks/my-sink-id"+.  It is an error if
+          #   the sink does not exist.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

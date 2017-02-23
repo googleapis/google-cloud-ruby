@@ -43,6 +43,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :resource_descriptors, :message, 1, "google.api.MonitoredResourceDescriptor"
     optional :next_page_token, :string, 2
   end
+  add_message "google.logging.v2.ListLogsRequest" do
+    optional :parent, :string, 1
+    optional :page_size, :int32, 2
+    optional :page_token, :string, 3
+  end
+  add_message "google.logging.v2.ListLogsResponse" do
+    repeated :log_names, :string, 3
+    optional :next_page_token, :string, 2
+  end
 end
 
 module Google
@@ -55,6 +64,8 @@ module Google
       ListLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesResponse").msgclass
       ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsRequest").msgclass
       ListMonitoredResourceDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsResponse").msgclass
+      ListLogsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsRequest").msgclass
+      ListLogsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsResponse").msgclass
     end
   end
 end

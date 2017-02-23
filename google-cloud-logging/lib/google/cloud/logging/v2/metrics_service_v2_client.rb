@@ -45,8 +45,6 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
-          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
-
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -136,10 +134,6 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
-          # @param app_name [String]
-          #   The codename of the calling service.
-          # @param app_version [String]
-          #   The version of the calling service.
           def initialize \
               service_path: SERVICE_ADDRESS,
               port: DEFAULT_SERVICE_PORT,
@@ -148,8 +142,10 @@ module Google
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: "gax",
-              app_version: Google::Gax::VERSION
+              app_name: nil,
+              app_version: nil,
+              lib_name: nil,
+              lib_version: ""
             # These require statements are intentionally placed here to initialize
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
@@ -157,9 +153,16 @@ module Google
             require "google/logging/v2/logging_metrics_services_pb"
 
 
-            google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
-              "ruby/#{RUBY_VERSION}".freeze
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            google_api_client = "gl-ruby/#{RUBY_VERSION}"
+            google_api_client << " #{lib_name}/{lib_version}" if lib_name
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " grpc/#{GRPC::VERSION}"
+            google_api_client.freeze
+
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "metrics_service_v2_client_config.json"

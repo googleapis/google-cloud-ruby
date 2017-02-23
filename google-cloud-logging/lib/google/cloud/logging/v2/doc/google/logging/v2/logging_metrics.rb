@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@ module Google
   module Logging
     module V2
       # Describes a logs-based metric.  The value of the metric is the
-      # number of log entries that match a logs filter.
+      # number of log entries that match a logs filter in a given time interval.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The client-assigned metric identifier.
@@ -39,7 +39,8 @@ module Google
       #     Optional. A description of this metric, which is used in documentation.
       # @!attribute [rw] filter
       #   @return [String]
-      #     Required. An {advanced logs filter}[https://cloud.google.com/logging/docs/view/advanced_filters].
+      #     Required. An {advanced logs filter}[https://cloud.google.com/logging/docs/view/advanced_filters]
+      #     which is used to match log entries.
       #     Example:
       #
       #         "resource.type=gae_app AND severity>=ERROR"

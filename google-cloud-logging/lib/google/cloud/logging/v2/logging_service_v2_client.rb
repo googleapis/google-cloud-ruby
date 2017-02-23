@@ -45,8 +45,6 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
-          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
-
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -57,10 +55,26 @@ module Google
             "list_monitored_resource_descriptors" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "resource_descriptors")
+              "resource_descriptors"),
+            "list_logs" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "log_names")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
+
+          BUNDLE_DESCRIPTORS = {
+            "write_log_entries" => Google::Gax::BundleDescriptor.new(
+              "entries",
+              [
+                "logName",
+                "resource",
+                "labels"
+              ])
+          }.freeze
+
+          private_constant :BUNDLE_DESCRIPTORS
 
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
@@ -140,10 +154,6 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
-          # @param app_name [String]
-          #   The codename of the calling service.
-          # @param app_version [String]
-          #   The version of the calling service.
           def initialize \
               service_path: SERVICE_ADDRESS,
               port: DEFAULT_SERVICE_PORT,
@@ -152,8 +162,10 @@ module Google
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: "gax",
-              app_version: Google::Gax::VERSION
+              app_name: nil,
+              app_version: nil,
+              lib_name: nil,
+              lib_version: ""
             # These require statements are intentionally placed here to initialize
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
@@ -161,9 +173,16 @@ module Google
             require "google/logging/v2/logging_services_pb"
 
 
-            google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
-              "ruby/#{RUBY_VERSION}".freeze
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            google_api_client = "gl-ruby/#{RUBY_VERSION}"
+            google_api_client << " #{lib_name}/{lib_version}" if lib_name
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " grpc/#{GRPC::VERSION}"
+            google_api_client.freeze
+
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "logging_service_v2_client_config.json"
@@ -175,6 +194,7 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
+                bundle_descriptors: BUNDLE_DESCRIPTORS,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 kwargs: headers
@@ -204,6 +224,10 @@ module Google
             @list_monitored_resource_descriptors = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_monitored_resource_descriptors),
               defaults["list_monitored_resource_descriptors"]
+            )
+            @list_logs = Google::Gax.create_api_call(
+              @logging_service_v2_stub.method(:list_logs),
+              defaults["list_logs"]
             )
           end
 
@@ -322,18 +346,18 @@ module Google
             @write_log_entries.call(req, options)
           end
 
-          # Lists log entries.  Use this method to retrieve log entries from Cloud
-          # Logging.  For ways to export log entries, see
+          # Lists log entries.  Use this method to retrieve log entries from
+          # Stackdriver Logging.  For ways to export log entries, see
           # {Exporting Logs}[https://cloud.google.com/logging/docs/export].
           #
           # @param project_ids [Array<String>]
-          #   Deprecated. One or more project identifiers or project numbers from which
-          #   to retrieve log entries.  Example: +"my-project-1A"+. If
-          #   present, these project identifiers are converted to resource format and
-          #   added to the list of resources in +resourceNames+. Callers should use
-          #   +resourceNames+ rather than this parameter.
+          #   Deprecated. Use +resource_names+ instead.  One or more project identifiers
+          #   or project numbers from which to retrieve log entries.  Example:
+          #   +"my-project-1A"+. If present, these project identifiers are converted to
+          #   resource name format and added to the list of resources in
+          #   +resource_names+.
           # @param resource_names [Array<String>]
-          #   Required. One or more cloud resources from which to retrieve log
+          #   Required. Names of one or more resources from which to retrieve log
           #   entries:
           #
           #       "projects/[PROJECT_ID]"
@@ -343,7 +367,10 @@ module Google
           # @param filter [String]
           #   Optional. A filter that chooses which log entries to return.  See {Advanced
           #   Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
-          #   match the filter are returned.  An empty filter matches all log entries.
+          #   match the filter are returned.  An empty filter matches all log entries in
+          #   the resources listed in +resource_names+. Referencing a parent resource
+          #   that is not listed in +resource_names+ will cause the filter to return no
+          #   results.
           #   The maximum length of the filter is 20000 characters.
           # @param order_by [String]
           #   Optional. How the results should be sorted.  Presently, the only permitted
@@ -405,7 +432,8 @@ module Google
             @list_log_entries.call(req, options)
           end
 
-          # Lists the monitored resource descriptors used by Stackdriver Logging.
+          # Lists the descriptors for monitored resource types used by Stackdriver
+          # Logging.
           #
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -449,6 +477,61 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? })
             @list_monitored_resource_descriptors.call(req, options)
+          end
+
+          # Lists the logs in projects or organizations.
+          # Only logs that have entries are listed.
+          #
+          # @param parent [String]
+          #   Required. The resource name that owns the logs:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::PagedEnumerable<String>]
+          #   An enumerable of String instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #
+          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
+          #
+          #   logging_service_v2_client = LoggingServiceV2Client.new
+          #   formatted_parent = LoggingServiceV2Client.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   logging_service_v2_client.list_logs(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   logging_service_v2_client.list_logs(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_logs \
+              parent,
+              page_size: nil,
+              options: nil
+            req = Google::Logging::V2::ListLogsRequest.new({
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? })
+            @list_logs.call(req, options)
           end
         end
       end
