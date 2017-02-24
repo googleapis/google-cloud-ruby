@@ -58,8 +58,8 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Speech::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_service
 
@@ -71,8 +71,8 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Speech::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_ops
 
