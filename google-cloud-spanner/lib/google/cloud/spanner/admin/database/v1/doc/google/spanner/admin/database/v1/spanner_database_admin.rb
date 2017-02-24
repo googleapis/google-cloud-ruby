@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -140,7 +140,7 @@ module Google
           #     Longrunning::Operation: +<database>/operations/<operation_id>+.
           #
           #     +operation_id+ should be unique within the database, and must be
-          #     a valid identifier: +[a-zA-Z][a-zA-Z0-9_]*+. Note that
+          #     a valid identifier: +[a-z][a-z0-9_]*+. Note that
           #     automatically-generated operation IDs always begin with an
           #     underscore. If the named operation already exists,
           #     UpdateDatabaseDdl returns
