@@ -55,7 +55,7 @@ module Google
         end
 
         def stop
-          breakpoint_manager.stop
+          tracer.stop
           transmitter.async_stop
           async_stop
         end

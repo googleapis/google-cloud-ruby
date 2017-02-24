@@ -131,10 +131,6 @@ module Google
             @completed_breakpoints.clear
           end
         end
-
-        def stop
-          tracer.stop
-        end
       end
     end
   end

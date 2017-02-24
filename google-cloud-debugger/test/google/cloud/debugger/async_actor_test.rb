@@ -57,8 +57,11 @@ describe Google::Cloud::Debugger::AsyncActor do
       stopping.must_equal true
       actor.async_state.must_equal :stopping
 
-      # Let child thread stop
-      sleep 0.1
+      # Wait for child thread to fully stop
+      wait_result = wait_until_true do
+        actor.async_state != :stopping
+      end
+      wait_result.must_equal :completed
 
       stopping = actor.async_stop
       stopping.must_equal false
@@ -167,9 +170,13 @@ describe Google::Cloud::Debugger::AsyncActor do
       actor.async_stopped?.must_equal false
 
       actor.async_stop
-      actor.async_stopped?.must_equal false
+      actor.async_state.must_equal :stopping
 
-      sleep 0.1
+      wait_result = wait_until_true do
+        actor.async_state != :stopping
+      end
+
+      wait_result.must_equal :completed
       actor.async_stopped?.must_equal true
     end
   end
@@ -185,26 +192,30 @@ describe Google::Cloud::Debugger::AsyncActor do
     end
 
     it "forces the async job to stop" do
+      thread_running = false
       actor.define_singleton_method :run_backgrounder do
-        loop {}
+        loop { thread_running = true }
       end
 
       actor.async_start
-      sleep 0.1
+
+      wait_result = wait_until_true do
+        thread_running
+      end
+      wait_result.must_equal :completed
+
       actor.async_stopped?.must_equal false
-      stop = actor.async_stop! 1, force: true
+      stop = actor.async_stop! 0.1, force: true
       stop.must_equal :forced
       actor.async_stopped?.must_equal true
-
     end
   end
 
   describe ".register_for_cleanup" do
     it "adds actor to cleanup_list" do
       klass = Google::Cloud::Debugger::AsyncActor
-      klass.instance_variable_get("@cleanup_list").must_be_nil
       actor.async_start
-      klass.instance_variable_get("@cleanup_list").first.must_equal actor
+      klass.instance_variable_get("@cleanup_list").must_include actor
     end
   end
 

@@ -2,7 +2,6 @@
 #include "ruby/debug.h"
 #include "tracer.h"
 
-
 /**
  *  hash_get_keys_callback
  *  Helper callback function for hash_get_keys.
@@ -38,7 +37,7 @@ hash_get_keys(VALUE hash)
 /**
  *  match_breakpoints_files
  *  Check the Tracer#breakpoints_cache if any breakpoints match the given
- *  tracepoint_path. Return Qtrue if found. Otherwise Qfalse;
+ *  tracepoint_path. Return 1 if found. Otherwise 0;
  */
 static VALUE
 match_breakpoints_files(VALUE self, VALUE tracepoint_path)
@@ -56,30 +55,34 @@ match_breakpoints_files(VALUE self, VALUE tracepoint_path)
         char *c_breakpoint_path = rb_string_value_cstr(&breakpoint_path);
 
         if (strcmp(c_tracepoint_path, c_breakpoint_path) == 0) {
-            return Qtrue;
+            return 1;
         }
     }
 
-    return Qfalse;
+    return 0;
 }
+
+static VALUE
+disable_line_trace_for_thread(VALUE thread);
 
 /**
  *  match_breakpoints
  *  Check the Tracer#breakpoints_cache for any matching breakpoints of given
  *  file path and line number.
  *
- *  Return a Ruby array of breakpoints found. Qnil if no match found.
+ *  Return a Ruby array of breakpoints found. Qtrue if no match found, but this
+ *  file contains at least one breakpoint. Qnil if event triggered in a file
+ *  that doesn't contain any breakpoints.
  */
 static VALUE
 match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
 {
     int i, j;
-
     VALUE path_breakpoints_hash = rb_iv_get(self, "@breakpoints_cache");
     VALUE breakpoints_paths = hash_get_keys(path_breakpoints_hash);
     VALUE *c_breakpoints_paths = RARRAY_PTR(breakpoints_paths);
     int breakpoints_paths_len = RARRAY_LEN(breakpoints_paths);
-    VALUE matching_breakpoints = Qnil;
+    VALUE path_match = Qnil;
 
     // Check the file paths of @breakpoints_cache
     for (i = 0; i < breakpoints_paths_len; i++) {
@@ -92,6 +95,7 @@ match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
             VALUE breakpoints_lines = hash_get_keys(line_breakpoint_hash);
             VALUE *c_breakpoints_lines = RARRAY_PTR(breakpoints_lines);
             int breakpoints_lines_len = RARRAY_LEN(breakpoints_lines);
+            path_match = Qtrue;
 
             // Found matching breakpoints. Return the cached breakpoints array
             for (j = 0; j < breakpoints_lines_len; j++) {
@@ -99,13 +103,13 @@ match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
                 int c_breakpoint_lineno = NUM2INT(breakpoint_lineno);
 
                 if (c_trace_lineno == c_breakpoint_lineno) {
-                    matching_breakpoints = rb_hash_aref(line_breakpoint_hash, breakpoint_lineno);
+                    return rb_hash_aref(line_breakpoint_hash, breakpoint_lineno);
                 }
             }
         }
     }
 
-    return matching_breakpoints;
+    return path_match;
 }
 
 /**
@@ -124,30 +128,34 @@ line_trace_event_callback(rb_event_flag_t event, VALUE self, VALUE hook, ID mid,
     VALUE call_stack_bindings;
 
     int i;
-    VALUE matching_breakpoints = match_breakpoints(self, c_trace_path, c_trace_lineno);
+    VALUE matching_result = match_breakpoints(self, c_trace_path, c_trace_lineno);
     VALUE *c_matching_breakpoints;
     VALUE matching_breakpoint;
     int matching_breakpoints_len;
 
-    // If not found any breakpoints (matching_breakpoints isn't t_array type), directly return.
-    if (!RB_TYPE_P(matching_breakpoints, T_ARRAY)) {
+//    printf("line_trace_event_callback called!\n");
+//    printf("%s - %d\n", rb_sourcefile(), rb_sourceline());
+//    fflush(stdout);
+
+    // If matching result isn't an array, it means we're in completely wrong file,
+    // or not on the right line. Turn line tracing off if we're in wrong file.
+    if (!RB_TYPE_P(matching_result, T_ARRAY)) {
+        if (!RTEST(matching_result)) {
+            disable_line_trace_for_thread(Qnil);
+        }
         return;
     }
 
-    c_matching_breakpoints = RARRAY_PTR(matching_breakpoints);
-    matching_breakpoints_len = RARRAY_LEN(matching_breakpoints);
+    c_matching_breakpoints = RARRAY_PTR(matching_result);
+    matching_breakpoints_len = RARRAY_LEN(matching_result);
+    trace_binding = rb_binding_new();
+    call_stack_bindings = rb_funcall(trace_binding, rb_intern("callers"), 0);
+    rb_ary_pop(call_stack_bindings);
 
     // Evaluate each of the matching breakpoint
     for (i = 0; i < matching_breakpoints_len; i++) {
         matching_breakpoint = c_matching_breakpoints[i];
-
-        if (RTEST(matching_breakpoint) && !RTEST(rb_funcall(matching_breakpoint, rb_intern("complete?"), 0))) {
-            trace_binding = rb_binding_new();
-            call_stack_bindings = rb_funcall(trace_binding, rb_intern("callers"), 0);
-            rb_ary_pop(call_stack_bindings);
-
-            rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
-        }
+        rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
     }
 
     return;
@@ -274,9 +282,14 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
     VALUE self = (VALUE) data;
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_path = rb_tracearg_path(tracepoint_arg);
-    VALUE match_found = match_breakpoints_files(self, tracepoint_path);
+    VALUE match_found;
 
-    if (RTEST(match_found)) {
+    if (!RB_TYPE_P(tracepoint_path, T_STRING))
+        return;
+
+    match_found = match_breakpoints_files(self, tracepoint_path);
+
+    if (match_found) {
         enable_line_tracepoint_for_thread(self);
         // Enable or increment return tracepoint
         if (!enable_return_tracepoint(self)) {
@@ -310,6 +323,7 @@ return_tracepoint_callback(VALUE tracepoint, void *data)
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_binding = rb_tracearg_binding(tracepoint_arg);
 
+    //TODO: Change this to use C API (rb_vm_thread_backtrace_locations)
     VALUE caller_path_eval_str = rb_str_new_cstr("caller_locations(0, 1).first.absolute_path");
     VALUE caller_path = rb_funcall(tracepoint_binding, rb_intern("eval"), 1, caller_path_eval_str);
 
@@ -319,11 +333,28 @@ return_tracepoint_callback(VALUE tracepoint, void *data)
 
     match_found = match_breakpoints_files(self, caller_path);
 
-    if (RTEST(match_found)) {
+    if (match_found) {
         enable_line_tracepoint_for_thread(self);
     }
 
     decrement_or_disable_return_tracepoint(self);
+
+    return;
+}
+
+static void
+fiber_tracepoint_callback(VALUE tracepoint, void *data)
+{
+    VALUE self = (VALUE) data;
+    rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
+    VALUE tracepoint_lineno = rb_tracearg_lineno(tracepoint_arg);
+    int c_tracepoint_lineno = NUM2INT(tracepoint_lineno);
+
+    // Only if lineno is greater than 0, then we know this event is triggered from
+    // fiber execution, and we blindly starts line_tracepoint.
+    if (c_tracepoint_lineno > 0) {
+        enable_line_tracepoint_for_thread(self);
+    }
 
     return;
 }
@@ -358,6 +389,7 @@ static VALUE
 rb_disable_tracepoints(VALUE self)
 {
     VALUE file_tracepoint = rb_iv_get(self, "@file_tracepoint");
+    VALUE fiber_tracepoint = rb_iv_get(self, "@fiber_tracepoint");
     VALUE return_tracepoint = rb_iv_get(self, "@return_tracepoint");
     VALUE threads = rb_funcall(rb_cThread, rb_intern("list"), 0);
     VALUE *c_threads = RARRAY_PTR(threads);
@@ -367,6 +399,8 @@ rb_disable_tracepoints(VALUE self)
 
     if (RTEST(file_tracepoint) && RTEST(rb_tracepoint_enabled_p(file_tracepoint)))
         rb_tracepoint_disable(file_tracepoint);
+    if (RTEST(fiber_tracepoint) && RTEST(rb_tracepoint_enabled_p(fiber_tracepoint)))
+        rb_tracepoint_disable(fiber_tracepoint);
     if (RTEST(return_tracepoint) && RTEST(rb_tracepoint_enabled_p(return_tracepoint)))
         rb_tracepoint_disable(return_tracepoint);
 
@@ -391,15 +425,20 @@ rb_register_tracepoints(VALUE self)
 {
     int file_tracepoint_event = RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_C_CALL | RUBY_EVENT_B_CALL;
     int return_tracepoint_event = RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_C_RETURN | RUBY_EVENT_B_RETURN;
+    int fiber_tracepoint_event = RUBY_EVENT_FIBER_SWITCH;
     VALUE file_tracepoint;
+    VALUE fiber_tracepoint;
 
     // Register the tracepoints if not registered already
     file_tracepoint = register_tracepoint(self, file_tracepoint_event, "@file_tracepoint", file_tracepoint_callback);
+    fiber_tracepoint = register_tracepoint(self, fiber_tracepoint_event, "@fiber_tracepoint", fiber_tracepoint_callback);
     register_tracepoint(self, return_tracepoint_event, "@return_tracepoint", return_tracepoint_callback);
 
-    // Immediately activate file tracepoint
+    // Immediately activate file tracepoint and fiber tracepoint
     if (RTEST(file_tracepoint) && !RTEST(rb_tracepoint_enabled_p(file_tracepoint)))
         rb_tracepoint_enable(file_tracepoint);
+    if (RTEST(fiber_tracepoint) && !RTEST(rb_tracepoint_enabled_p(fiber_tracepoint)))
+        rb_tracepoint_enable(fiber_tracepoint);
 
     return Qnil;
 }

@@ -95,13 +95,13 @@ module Google
 
         def path
           synchronize do
-            location.path
+            location.nil? ? nil : location.path
           end
         end
 
         def line
           synchronize do
-            location.line
+            location.nil? ? nil : location.line
           end
         end
 
@@ -146,7 +146,7 @@ module Google
         # end
 
         def hash
-          id.hash ^ location.path.hash ^ location.line.hash
+          id.hash ^ path.hash ^ line.hash
         end
 
         def to_grpc

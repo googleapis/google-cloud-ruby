@@ -27,14 +27,15 @@ module Google
 
         attr_reader :return_tracepoint
 
-        attr_reader :line_tracepoint
+        attr_reader :fiber_tracepoint
 
-        attr_reader :breapoints_cache
+        attr_reader :breakpoints_cache
 
         def initialize agent, app_root: nil
           @agent = agent
           @file_tracepoint = nil
           @return_tracepoint = nil
+          @fiber_tracepoint = nil
           @return_tracepoint_counter = nil
           @breakpoints_cache = {}
 
@@ -52,7 +53,7 @@ module Google
 
           active_breakpoints.each do |active_breakpoint|
             breakpoint_line = active_breakpoint.line
-            breakpoint_path = "#{app_root}/#{active_breakpoint.path}"
+            breakpoint_path = full_breakpoint_path active_breakpoint.path
             breakpoints_hash[breakpoint_path] ||= {}
             breakpoints_hash[breakpoint_path][breakpoint_line] ||= []
             breakpoints_hash[breakpoint_path][breakpoint_line].push(
@@ -95,6 +96,12 @@ module Google
             # puts "*********** Submittion Time: #{t4-t3} **********"
             # puts "*********** Update Cache Time: #{t5-t4} **********"
           end
+        end
+
+        def full_breakpoint_path breakpoint_path
+          (app_root.nil? || app_root.empty?) ?
+            breakpoint_path :
+            "#{app_root}/#{breakpoint_path}"
         end
 
         def start

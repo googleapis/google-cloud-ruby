@@ -21,7 +21,7 @@ require "json"
 require "base64"
 require "google/cloud/debugger"
 
-class MockSpeech < Minitest::Spec
+class MockDebugger < Minitest::Spec
   let(:project) { "test" }
   # let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
@@ -29,9 +29,15 @@ class MockSpeech < Minitest::Spec
   let(:module_version) { "vTest" }
   let(:debugger) {
     Google::Cloud::Debugger::Project.new(
-      Google::Cloud::Speech::Service.new(project, credentials), module_name: module_name,
-                                                                module_version: module_version
+      Google::Cloud::Debugger::Service.new(project, credentials),
+      module_name: module_name,
+      module_version: module_version
     )
+  }
+  let(:breakpoint_manager) {
+    manager = debugger.agent.breakpoint_manager
+    manager.on_breakpoints_change = nil
+    manager
   }
 
   # Register this spec type for when :speech is used.
@@ -51,4 +57,17 @@ module Rack
       File.expand_path "."
     end
   end
+end
+
+##
+# Helper method to loop until block yields true or timeout.
+def wait_until_true timeout = 5
+  begin_t = Time.now
+
+  until yield
+    return :timeout if Time.now - begin_t > timeout
+    sleep 0.1
+  end
+
+  :completed
 end
