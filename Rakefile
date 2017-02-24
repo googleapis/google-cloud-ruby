@@ -268,9 +268,7 @@ namespace :jsondoc do
 
     header "Copying all gems' jsondoc from gh-pages to google-cloud package in gh-pages"
 
-    unless Dir.exist? gh_pages + "json/google-cloud/#{version}/google/cloud/"
-      mkdir_p gh_pages + "json/google-cloud/#{version}/google/cloud/"
-    end
+    rm_rf gh_pages + "json/google-cloud/#{version}/google", verbose: true
 
     excluded = ["gcloud", "google-cloud", "stackdriver", "stackdriver-core", "google-cloud-spanner", "google-cloud-env"]
     gems.each do |gem|
@@ -291,53 +289,8 @@ namespace :jsondoc do
 
       header_2 "Copying #{gem_shortname} jsondoc from gh-pages to google-cloud package in gh-pages"
 
-      unless gem == "google-cloud-core" # There is no `core` subdir, copy files from google/cloud/
-        # Copy the contents of google/cloud subdir for the gem namespace.
-        rm_rf gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}", verbose: true
-        cp_r "#{src}/google/cloud/#{gem_shortname}",
-             gh_pages + "json/google-cloud/#{version}/google/cloud/#{gem_shortname}",
-             verbose: true
-
-        if Dir.exists? "#{src}/google/#{gem_shortname}"
-          header_2 "Copying  #{gem_shortname} jsondoc for GAPIC"
-          # Copy the contents of google subdir for the gem namespace for GAPIC.
-          rm_rf gh_pages + "json/google-cloud/#{version}/google/#{gem_shortname}", verbose: true
-          cp_r "#{src}/google/#{gem_shortname}",
-               gh_pages + "json/google-cloud/#{version}/google/#{gem_shortname}",
-               verbose: true
-        end
-
-        if Dir.exists? "#{src}/google/protobuf"
-          header_2 "Copying  #{gem_shortname} jsondoc for Protobuf"
-          # Copy the contents of google subdir for Protobufs, without deleting,
-          # since all gems copy to same destination.
-          # NOTE: later gems' protobuf definitions of same name will overwrite earlier!
-          mkdir_p gh_pages + "json/google-cloud/#{version}/google/protobuf", verbose: true
-          cp Dir["#{src}/google/protobuf/*.json"], gh_pages + "json/google-cloud/#{version}/google/protobuf/", verbose: true
-        end
-
-        # Copy GAPIC directories with names that do not match gem namespace
-        if Dir.exists?("#{src}/google/devtools")
-          mkdir_p gh_pages + "json/google-cloud/#{version}/google/devtools", verbose: true
-          # google-cloud-error_reporting
-          if gem == "google-cloud-error_reporting"
-            # Copy the gem's subdir in devtools
-            header_2 "Copying  #{gem_shortname} jsondoc for devtools"
-            cp_r Dir["#{src}/google/devtools/clouderrorreporting"],
-                 gh_pages + "json/google-cloud/#{version}/google/devtools/", verbose: true
-          end
-          # google-cloud-trace
-          if gem == "google-cloud-trace"
-            # Copy the gem's subdir in devtools
-            header_2 "Copying  #{gem_shortname} jsondoc for devtools"
-            cp_r Dir["#{src}/google/devtools/cloudtrace"],
-                 gh_pages + "json/google-cloud/#{version}/google/devtools/", verbose: true
-          end
-        end
-      end
-
       # Copy the contents of google/cloud/ for the gem. This also gets the core error files.
-      cp Dir["#{src}/google/cloud/*.json"], gh_pages + "json/google-cloud/#{version}/google/cloud/", verbose: true
+      cp_r "#{src}/google", gh_pages + "json/google-cloud/#{version}/", verbose: true
       all_types << JSON.parse(File.read("#{src}/types.json"))
       all_google_cloud_methods << JSON.parse(File.read("#{src}/google/cloud.json"))["methods"]
     end
