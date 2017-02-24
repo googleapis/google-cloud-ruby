@@ -37,7 +37,7 @@ module Google
           @project = project
           @credentials = credentials
           @service = API::DnsService.new
-          @service.client_options.application_name    = "gccl"
+          @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::Dns::VERSION
           @service.request_options.retries = retries || 3

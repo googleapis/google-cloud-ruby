@@ -37,7 +37,7 @@ module Google
           @credentials = credentials
           @service = API::CloudResourceManagerService.new
           @service.client_options.application_name = \
-            "gccl"
+            "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::ResourceManager::VERSION
           @service.request_options.retries = retries || 3
