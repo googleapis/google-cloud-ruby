@@ -37,11 +37,23 @@ module Google
           rpc :ListSinks, ListSinksRequest, ListSinksResponse
           # Gets a sink.
           rpc :GetSink, GetSinkRequest, LogSink
-          # Creates a sink.
+          # Creates a sink that exports specified log entries to a destination.  The
+          # export of newly-ingested log entries begins immediately, unless the current
+          # time is outside the sink's start and end times or the sink's
+          # `writer_identity` is not permitted to write to the destination.  A sink can
+          # export log entries only from the resource owning the sink.
           rpc :CreateSink, CreateSinkRequest, LogSink
-          # Updates or creates a sink.
+          # Updates a sink. If the named sink doesn't exist, then this method is
+          # identical to
+          # [sinks.create](/logging/docs/api/reference/rest/v2/projects.sinks/create).
+          # If the named sink does exist, then this method replaces the following
+          # fields in the existing sink with values from the new sink: `destination`,
+          # `filter`, `output_version_format`, `start_time`, and `end_time`.
+          # The updated filter might also have a new `writer_identity`; see the
+          # `unique_writer_identity` field.
           rpc :UpdateSink, UpdateSinkRequest, LogSink
-          # Deletes a sink.
+          # Deletes a sink. If the sink has a unique `writer_identity`, then that
+          # service account is also deleted.
           rpc :DeleteSink, DeleteSinkRequest, Google::Protobuf::Empty
         end
 
