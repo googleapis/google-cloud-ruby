@@ -130,6 +130,7 @@ task :jsondoc => :yard do
   generator = Gcloud::Jsondoc::Generator.new registry,
                                              "google-cloud-trace",
                                              generate: toc_config
+  rm_rf "jsondoc", verbose: true
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
 end
