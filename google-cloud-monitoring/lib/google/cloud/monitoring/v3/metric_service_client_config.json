@@ -2,11 +2,11 @@
   "interfaces": {
     "google.monitoring.v3.MetricService": {
       "retry_codes": {
-          "idempotent": [
-            "DEADLINE_EXCEEDED",
-            "UNAVAILABLE"
-          ],
-          "non_idempotent": []
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "non_idempotent": []
       },
       "retry_params": {
         "default": {
