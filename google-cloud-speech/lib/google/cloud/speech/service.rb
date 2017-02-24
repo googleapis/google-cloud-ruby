@@ -33,7 +33,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1beta1::SpeechApi::SERVICE_ADDRESS
+          @host = host || V1beta1::SpeechClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -53,13 +53,13 @@ module Google
         def service
           return mocked_service if mocked_service
           @service ||= \
-            V1beta1::SpeechApi.new(
+            V1beta1::SpeechClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Speech::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_service
 
@@ -71,8 +71,8 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Speech::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Speech::VERSION)
         end
         attr_accessor :mocked_ops
 
