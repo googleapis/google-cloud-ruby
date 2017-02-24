@@ -26,6 +26,9 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_client"
+
 require "google/cloud/speech/v1beta1/cloud_speech_pb"
 
 module Google
@@ -36,7 +39,7 @@ module Google
         #
         # @!attribute [r] speech_stub
         #   @return [Google::Cloud::Speech::V1beta1::Speech::Stub]
-        class SpeechApi
+        class SpeechClient
           attr_reader :speech_stub
 
           # The default address of the service.
@@ -44,8 +47,6 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
-
-          CODE_GEN_NAME_VERSION = "gapic/0.1.0".freeze
 
           DEFAULT_TIMEOUT = 30
 
@@ -70,10 +71,6 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
-          # @param app_name [String]
-          #   The codename of the calling service.
-          # @param app_version [String]
-          #   The version of the calling service.
           def initialize \
               service_path: SERVICE_ADDRESS,
               port: DEFAULT_SERVICE_PORT,
@@ -82,17 +79,40 @@ module Google
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: "gax",
-              app_version: Google::Gax::VERSION
+              app_name: nil,
+              app_version: nil,
+              lib_name: nil,
+              lib_version: ""
             # These require statements are intentionally placed here to initialize
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/cloud/speech/v1beta1/cloud_speech_services_pb"
 
-            google_api_client = "#{app_name}/#{app_version} " \
-              "#{CODE_GEN_NAME_VERSION} gax/#{Google::Gax::VERSION} " \
-              "ruby/#{RUBY_VERSION}".freeze
+            @operations_client = Google::Longrunning::OperationsClient.new(
+              service_path: service_path,
+              port: port,
+              channel: channel,
+              chan_creds: chan_creds,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              app_name: app_name,
+              app_version: app_version,
+              lib_name: lib_name,
+              lib_version: lib_version,
+            )
+
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            google_api_client = "gl-ruby/#{RUBY_VERSION}"
+            google_api_client << " #{lib_name}/#{lib_version}" if lib_name
+            google_api_client << " gapic/ gax/#{Google::Gax::VERSION}"
+            google_api_client << " grpc/#{GRPC::VERSION}"
+            google_api_client.freeze
+
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
               "speech_client_config.json"
@@ -147,16 +167,23 @@ module Google
           # @return [Google::Cloud::Speech::V1beta1::SyncRecognizeResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
+          #   AudioEncoding = Google::Cloud::Speech::V1beta1::RecognitionConfig::AudioEncoding
           #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
           #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
+          #   encoding = AudioEncoding::FLAC
+          #   sample_rate = 44100
           #   config = RecognitionConfig.new
+          #   config.encoding = encoding
+          #   config.sample_rate = sample_rate
+          #   uri = "gs://bucket_name/file_name.flac"
           #   audio = RecognitionAudio.new
-          #   response = speech_api.sync_recognize(config, audio)
+          #   audio.uri = uri
+          #   response = speech_client.sync_recognize(config, audio)
 
           def sync_recognize \
               config,
@@ -182,19 +209,52 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Longrunning::Operation]
+          # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
+          #   AudioEncoding = Google::Cloud::Speech::V1beta1::RecognitionConfig::AudioEncoding
           #   RecognitionAudio = Google::Cloud::Speech::V1beta1::RecognitionAudio
           #   RecognitionConfig = Google::Cloud::Speech::V1beta1::RecognitionConfig
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
+          #   encoding = AudioEncoding::FLAC
+          #   sample_rate = 44100
           #   config = RecognitionConfig.new
+          #   config.encoding = encoding
+          #   config.sample_rate = sample_rate
+          #   uri = "gs://bucket_name/file_name.flac"
           #   audio = RecognitionAudio.new
-          #   response = speech_api.async_recognize(config, audio)
+          #   audio.uri = uri
+          #
+          #   # Register a callback during the method call.
+          #   operation = speech_client.async_recognize(config, audio) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
 
           def async_recognize \
               config,
@@ -204,7 +264,15 @@ module Google
               config: config,
               audio: audio
             }.delete_if { |_, v| v.nil? })
-            @async_recognize.call(req, options)
+            operation = Google::Gax::Operation.new(
+              @async_recognize.call(req, options),
+              @operations_client,
+              Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse,
+              Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
           end
 
           # Perform bidirectional streaming speech-recognition: receive results while
@@ -226,15 +294,15 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/speech/v1beta1/speech_api"
+          #   require "google/cloud/speech/v1beta1/speech_client"
           #
-          #   SpeechApi = Google::Cloud::Speech::V1beta1::SpeechApi
+          #   SpeechClient = Google::Cloud::Speech::V1beta1::SpeechClient
           #   StreamingRecognizeRequest = Google::Cloud::Speech::V1beta1::StreamingRecognizeRequest
           #
-          #   speech_api = SpeechApi.new
+          #   speech_client = SpeechClient.new
           #   request = StreamingRecognizeRequest.new
           #   requests = [request]
-          #   speech_api.streaming_recognize(requests).each do |element|
+          #   speech_client.streaming_recognize(requests).each do |element|
           #     # Process element.
           #   end
 

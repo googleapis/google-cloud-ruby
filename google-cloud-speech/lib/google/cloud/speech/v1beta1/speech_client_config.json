@@ -2,11 +2,11 @@
   "interfaces": {
     "google.cloud.speech.v1beta1.Speech": {
       "retry_codes": {
-          "idempotent": [
-            "DEADLINE_EXCEEDED",
-            "UNAVAILABLE"
-          ],
-          "non_idempotent": []
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "non_idempotent": []
       },
       "retry_params": {
         "default": {
@@ -31,7 +31,7 @@
           "retry_params_name": "default"
         },
         "StreamingRecognize": {
-          "timeout_millis": 60000,
+          "timeout_millis": 190000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
