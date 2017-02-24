@@ -65,6 +65,7 @@ task :jsondoc => :yard do
 
   registry = YARD::Registry.load! ".yardoc"
   generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-env"
+  rm_rf "jsondoc", verbose: true
   generator.write_to "jsondoc"
   cp ["docs/toc.json"], "jsondoc", verbose: true
 end
