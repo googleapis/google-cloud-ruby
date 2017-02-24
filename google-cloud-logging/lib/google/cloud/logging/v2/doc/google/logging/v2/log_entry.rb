@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -79,6 +79,16 @@ module Google
       #   @return [Google::Logging::V2::LogEntryOperation]
       #     Optional. Information about an operation associated with the log entry, if
       #     applicable.
+      # @!attribute [rw] trace
+      #   @return [String]
+      #     Optional. Resource name of the trace associated with the log entry, if any.
+      #     If it contains a relative resource name, the name is assumed to be relative
+      #     to +//tracing.googleapis.com+. Example:
+      #     +projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+
+      # @!attribute [rw] source_location
+      #   @return [Google::Logging::V2::LogEntrySourceLocation]
+      #     Optional. Source code location information associated with the log entry,
+      #     if any.
       class LogEntry; end
 
       # Additional information about a potentially long-running operation with which
@@ -99,6 +109,26 @@ module Google
       #   @return [true, false]
       #     Optional. Set this to True if this is the last log entry in the operation.
       class LogEntryOperation; end
+
+      # Additional information about the source code location that produced the log
+      # entry.
+      # @!attribute [rw] file
+      #   @return [String]
+      #     Optional. Source file name. Depending on the runtime environment, this
+      #     might be a simple name or a fully-qualified name.
+      # @!attribute [rw] line
+      #   @return [Integer]
+      #     Optional. Line within the source file. 1-based; 0 indicates no line number
+      #     available.
+      # @!attribute [rw] function
+      #   @return [String]
+      #     Optional. Human-readable name of the function or method being invoked, with
+      #     optional context such as the class or package name. This information may be
+      #     used in contexts such as the logs viewer, where a file and line number are
+      #     less meaningful. The format can vary by language. For example:
+      #     +qual.if.ied.Class.method+ (Java), +dir/package.func+ (Go), +function+
+      #     (Python).
+      class LogEntrySourceLocation; end
     end
   end
 end

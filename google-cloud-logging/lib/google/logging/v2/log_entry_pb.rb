@@ -20,6 +20,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :http_request, :message, 7, "google.logging.type.HttpRequest"
     map :labels, :string, :string, 11
     optional :operation, :message, 15, "google.logging.v2.LogEntryOperation"
+    optional :trace, :string, 22
+    optional :source_location, :message, 23, "google.logging.v2.LogEntrySourceLocation"
     oneof :payload do
       optional :proto_payload, :message, 2, "google.protobuf.Any"
       optional :text_payload, :string, 3
@@ -32,6 +34,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :first, :bool, 3
     optional :last, :bool, 4
   end
+  add_message "google.logging.v2.LogEntrySourceLocation" do
+    optional :file, :string, 1
+    optional :line, :int64, 2
+    optional :function, :string, 3
+  end
 end
 
 module Google
@@ -39,6 +46,7 @@ module Google
     module V2
       LogEntry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntry").msgclass
       LogEntryOperation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntryOperation").msgclass
+      LogEntrySourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntrySourceLocation").msgclass
     end
   end
 end

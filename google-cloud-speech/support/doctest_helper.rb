@@ -110,7 +110,7 @@ end
 
 YARD::Doctest.configure do |doctest|
   # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
-  doctest.skip "Google::Cloud::Speech::V1beta1::SpeechApi"
+  doctest.skip "Google::Cloud::Speech::V1beta1::SpeechClient"
 
   doctest.before "Google::Cloud#speech" do
     mock_speech

@@ -36,9 +36,7 @@ er_chan = GRPC::Core::Channel.new Google::Cloud::ErrorReporting::V1beta1::Report
 er_service_name = "google-cloud-ruby_integration_test"
 er_serivce_version = ENV['USER']
 
-error_reporting = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.new channel: er_chan,
-                                                                                     app_name: er_service_name,
-                                                                                     app_version: er_serivce_version
+error_reporting = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.new channel: er_chan
 
 use Google::Cloud::ErrorReporting::Middleware, error_reporting: error_reporting,
                                                service_name: er_service_name,

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -87,14 +87,14 @@ module Google
       # The parameters to +ListLogEntries+.
       # @!attribute [rw] project_ids
       #   @return [Array<String>]
-      #     Deprecated. One or more project identifiers or project numbers from which
-      #     to retrieve log entries.  Example: +"my-project-1A"+. If
-      #     present, these project identifiers are converted to resource format and
-      #     added to the list of resources in +resourceNames+. Callers should use
-      #     +resourceNames+ rather than this parameter.
+      #     Deprecated. Use +resource_names+ instead.  One or more project identifiers
+      #     or project numbers from which to retrieve log entries.  Example:
+      #     +"my-project-1A"+. If present, these project identifiers are converted to
+      #     resource name format and added to the list of resources in
+      #     +resource_names+.
       # @!attribute [rw] resource_names
       #   @return [Array<String>]
-      #     Required. One or more cloud resources from which to retrieve log
+      #     Required. Names of one or more resources from which to retrieve log
       #     entries:
       #
       #         "projects/[PROJECT_ID]"
@@ -105,7 +105,10 @@ module Google
       #   @return [String]
       #     Optional. A filter that chooses which log entries to return.  See {Advanced
       #     Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
-      #     match the filter are returned.  An empty filter matches all log entries.
+      #     match the filter are returned.  An empty filter matches all log entries in
+      #     the resources listed in +resource_names+. Referencing a parent resource
+      #     that is not listed in +resource_names+ will cause the filter to return no
+      #     results.
       #     The maximum length of the filter is 20000 characters.
       # @!attribute [rw] order_by
       #   @return [String]
@@ -134,9 +137,16 @@ module Google
       #     A list of log entries.
       # @!attribute [rw] next_page_token
       #   @return [String]
-      #     If there might be more results than appear in this response, then
+      #     If there might be more results than those appearing in this response, then
       #     +nextPageToken+ is included.  To get the next set of results, call this
       #     method again using the value of +nextPageToken+ as +pageToken+.
+      #
+      #     If a value for +next_page_token+ appears and the +entries+ field is empty,
+      #     it means that the search found no log entries so far but it did not have
+      #     time to search all the possible log entries.  Retry the method with this
+      #     value for +page_token+ to continue the search.  Alternatively, consider
+      #     speeding up the search by changing your filter to specify a single log name
+      #     or resource type, or to narrow the time range of the search.
       class ListLogEntriesResponse; end
 
       # The parameters to ListMonitoredResourceDescriptors
@@ -159,10 +169,43 @@ module Google
       #     A list of resource descriptors.
       # @!attribute [rw] next_page_token
       #   @return [String]
-      #     If there might be more results than appear in this response, then
+      #     If there might be more results than those appearing in this response, then
       #     +nextPageToken+ is included.  To get the next set of results, call this
       #     method again using the value of +nextPageToken+ as +pageToken+.
       class ListMonitoredResourceDescriptorsResponse; end
+
+      # The parameters to ListLogs.
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     Required. The resource name that owns the logs:
+      #
+      #         "projects/[PROJECT_ID]"
+      #         "organizations/[ORGANIZATION_ID]"
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     Optional. The maximum number of results to return from this request.
+      #     Non-positive values are ignored.  The presence of +nextPageToken+ in the
+      #     response indicates that more results might be available.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     Optional. If present, then retrieve the next batch of results from the
+      #     preceding call to this method.  +pageToken+ must be the value of
+      #     +nextPageToken+ from the previous response.  The values of other method
+      #     parameters should be identical to those in the previous call.
+      class ListLogsRequest; end
+
+      # Result returned from ListLogs.
+      # @!attribute [rw] log_names
+      #   @return [Array<String>]
+      #     A list of log names. For example,
+      #     +"projects/my-project/syslog"+ or
+      #     +"organizations/123/cloudresourcemanager.googleapis.com%2Factivity"+.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     If there might be more results than those appearing in this response, then
+      #     +nextPageToken+ is included.  To get the next set of results, call this
+      #     method again using the value of +nextPageToken+ as +pageToken+.
+      class ListLogsResponse; end
     end
   end
 end
