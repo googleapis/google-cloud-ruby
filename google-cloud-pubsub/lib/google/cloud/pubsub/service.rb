@@ -59,8 +59,8 @@ module Google
               channel: channel,
               timeout: timeout,
               client_config: client_config,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Pubsub::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Pubsub::VERSION)
           end
         end
         attr_accessor :mocked_subscriber
@@ -72,8 +72,8 @@ module Google
               service_path: host,
               channel: channel,
               timeout: timeout,
-              app_name: "gcloud-ruby",
-              app_version: Google::Cloud::Pubsub::VERSION)
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Pubsub::VERSION)
           end
         end
         attr_accessor :mocked_publisher
