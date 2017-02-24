@@ -270,9 +270,27 @@ namespace :jsondoc do
 
     rm_rf gh_pages + "json/google-cloud/#{version}/google", verbose: true
 
-    excluded = ["gcloud", "google-cloud", "stackdriver", "stackdriver-core", "google-cloud-spanner", "google-cloud-env"]
+    google_cloud_gems = [
+      "google-cloud-bigquery",
+      "google-cloud-core",
+      "google-cloud-datastore",
+      "google-cloud-dns",
+      "google-cloud-error_reporting",
+      "google-cloud-language",
+      "google-cloud-logging",
+      "google-cloud-monitoring",
+      "google-cloud-pubsub",
+      "google-cloud-resource_manager",
+      "google-cloud-speech",
+      "google-cloud-storage",
+      "google-cloud-trace",
+      "google-cloud-translate",
+      "google-cloud-vision"
+    ]
+    # Currently excluded: "gcloud", "google-cloud", "stackdriver", "stackdriver-core",
+    #                     "google-cloud-spanner", "google-cloud-env"
     gems.each do |gem|
-      next if excluded.include? gem
+      next unless google_cloud_gems.include? gem
 
       ver = if version == "master"
               "master" # When building master, all content should be from master
