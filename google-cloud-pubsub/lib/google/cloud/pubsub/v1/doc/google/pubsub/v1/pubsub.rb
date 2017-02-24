@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -171,6 +171,20 @@ module Google
       #
       #     If the subscriber never acknowledges the message, the Pub/Sub
       #     system will eventually redeliver the message.
+      # @!attribute [rw] retain_acked_messages
+      #   @return [true, false]
+      #     Indicates whether to retain acknowledged messages. If true, then
+      #     messages are not expunged from the subscription's backlog, even if they are
+      #     acknowledged, until they fall out of the +message_retention_duration+
+      #     window.
+      # @!attribute [rw] message_retention_duration
+      #   @return [Google::Protobuf::Duration]
+      #     How long to retain unacknowledged messages in the subscription's backlog,
+      #     from the moment a message is published.
+      #     If +retain_acked_messages+ is true, then this also configures the retention
+      #     of acknowledged messages, and thus configures how far back in time a +Seek+
+      #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
+      #     minutes.
       class Subscription; end
 
       # Configuration for a push delivery endpoint.
@@ -186,11 +200,10 @@ module Google
       #     control different aspects of the message delivery.
       #
       #     The currently supported attribute is +x-goog-version+, which you can
-      #     use to change the format of the push message. This attribute
+      #     use to change the format of the pushed message. This attribute
       #     indicates the version of the data expected by the endpoint. This
-      #     controls the shape of the envelope (i.e. its fields and metadata).
-      #     The endpoint version is based on the version of the Pub/Sub
-      #     API.
+      #     controls the shape of the pushed message (i.e., its fields and metadata).
+      #     The endpoint version is based on the version of the Pub/Sub API.
       #
       #     If not present during the +CreateSubscription+ call, it will default to
       #     the version of the API used to make such call. If not present during a
@@ -219,6 +232,16 @@ module Google
       #     The name of the subscription to get.
       #     Format is +projects/{project}/subscriptions/{sub}+.
       class GetSubscriptionRequest; end
+
+      # Request for the UpdateSubscription method.
+      # @!attribute [rw] subscription
+      #   @return [Google::Pubsub::V1::Subscription]
+      #     The updated subscription object.
+      # @!attribute [rw] update_mask
+      #   @return [Google::Protobuf::FieldMask]
+      #     Indicates which fields in the provided subscription to update.
+      #     Must be specified and non-empty.
+      class UpdateSubscriptionRequest; end
 
       # Request for the +ListSubscriptions+ method.
       # @!attribute [rw] project
@@ -376,6 +399,105 @@ module Google
       #   @return [Array<Google::Pubsub::V1::ReceivedMessage>]
       #     Received Pub/Sub messages. This will not be empty.
       class StreamingPullResponse; end
+
+      # Request for the +CreateSnapshot+ method.
+      # @!attribute [rw] name
+      #   @return [String]
+      #     Optional user-provided name for this snapshot.
+      #     If the name is not provided in the request, the server will assign a random
+      #     name for this snapshot on the same project as the subscription.
+      #     Note that for REST API requests, you must specify a name.
+      #     Format is +projects/{project}/snapshots/{snap}+.
+      # @!attribute [rw] subscription
+      #   @return [String]
+      #     The subscription whose backlog the snapshot retains.
+      #     Specifically, the created snapshot is guaranteed to retain:
+      #      (a) The existing backlog on the subscription. More precisely, this is
+      #          defined as the messages in the subscription's backlog that are
+      #          unacknowledged upon the successful completion of the
+      #          +CreateSnapshot+ request; as well as:
+      #      (b) Any messages published to the subscription's topic following the
+      #          successful completion of the CreateSnapshot request.
+      #     Format is +projects/{project}/subscriptions/{sub}+.
+      class CreateSnapshotRequest; end
+
+      # A snapshot resource.
+      # @!attribute [rw] name
+      #   @return [String]
+      #     The name of the snapshot.
+      # @!attribute [rw] topic
+      #   @return [String]
+      #     The name of the topic from which this snapshot is retaining messages.
+      # @!attribute [rw] expiration_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     The snapshot is guaranteed to exist up until this time.
+      #     A newly-created snapshot expires no later than 7 days from the time of its
+      #     creation. Its exact lifetime is determined at creation by the existing
+      #     backlog in the source subscription. Specifically, the lifetime of the
+      #     snapshot is +7 days - (age of oldest unacked message in the subscription)+.
+      #     For example, consider a subscription whose oldest unacked message is 3 days
+      #     old. If a snapshot is created from this subscription, the snapshot -- which
+      #     will always capture this 3-day-old backlog as long as the snapshot
+      #     exists -- will expire in 4 days.
+      class Snapshot; end
+
+      # Request for the +ListSnapshots+ method.
+      # @!attribute [rw] project
+      #   @return [String]
+      #     The name of the cloud project that snapshots belong to.
+      #     Format is +projects/{project}+.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     Maximum number of snapshots to return.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     The value returned by the last +ListSnapshotsResponse+; indicates that this
+      #     is a continuation of a prior +ListSnapshots+ call, and that the system
+      #     should return the next page of data.
+      class ListSnapshotsRequest; end
+
+      # Response for the +ListSnapshots+ method.
+      # @!attribute [rw] snapshots
+      #   @return [Array<Google::Pubsub::V1::Snapshot>]
+      #     The resulting snapshots.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     If not empty, indicates that there may be more snapshot that match the
+      #     request; this value should be passed in a new +ListSnapshotsRequest+.
+      class ListSnapshotsResponse; end
+
+      # Request for the +DeleteSnapshot+ method.
+      # @!attribute [rw] snapshot
+      #   @return [String]
+      #     The name of the snapshot to delete.
+      #     Format is +projects/{project}/snapshots/{snap}+.
+      class DeleteSnapshotRequest; end
+
+      # Request for the +Seek+ method.
+      # @!attribute [rw] subscription
+      #   @return [String]
+      #     The subscription to affect.
+      # @!attribute [rw] time
+      #   @return [Google::Protobuf::Timestamp]
+      #     The time to seek to.
+      #     Messages retained in the subscription that were published before this
+      #     time are marked as acknowledged, and messages retained in the
+      #     subscription that were published after this time are marked as
+      #     unacknowledged. Note that this operation affects only those messages
+      #     retained in the subscription (configured by the combination of
+      #     +message_retention_duration+ and +retain_acked_messages+). For example,
+      #     if +time+ corresponds to a point before the message retention
+      #     window (or to a point before the system's notion of the subscription
+      #     creation time), only retained messages will be marked as unacknowledged,
+      #     and already-expunged messages will not be restored.
+      # @!attribute [rw] snapshot
+      #   @return [String]
+      #     The snapshot to seek to. The snapshot's topic must be the same as that of
+      #     the provided subscription.
+      #     Format is +projects/{project}/snapshots/{snap}+.
+      class SeekRequest; end
+
+      class SeekResponse; end
     end
   end
 end
