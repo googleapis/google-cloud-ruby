@@ -64,9 +64,7 @@ module Google
             service_version = er_config.service_version
 
             error_reporting = V1beta1::ReportErrorsServiceClient.new(
-              channel: channel,
-              app_name: service_name,
-              app_version: service_version
+              channel: channel
             )
 
             # In later versions of Rails, ActionDispatch::DebugExceptions is
