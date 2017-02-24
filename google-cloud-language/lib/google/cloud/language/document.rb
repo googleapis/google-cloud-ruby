@@ -179,8 +179,9 @@ module Google
         # @param [Boolean] syntax Whether to perform syntactic analysis.
         #   Optional. The default is `false`. If every feature option is
         #   `false`, **all** features will be performed.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation] The results of the content analysis.
         #
@@ -230,8 +231,9 @@ module Google
         # given text into a series of sentences and tokens (generally, word
         # boundaries), providing further analysis on those tokens.
         #
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Syntax] The results for the content analysis.
         #
@@ -270,8 +272,9 @@ module Google
         # nouns such as public figures, landmarks, etc.) and returns information
         # about those entities.
         #
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Entities] The results for the entities analysis.
         #
@@ -301,8 +304,9 @@ module Google
         # a writer's attitude as positive, negative, or neutral. Currently, only
         # English is supported for sentiment analysis.
         #
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.

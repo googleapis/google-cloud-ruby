@@ -207,8 +207,9 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation] The results for the content analysis.
         #
@@ -253,8 +254,9 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Syntax] The results for the content syntax
         #   analysis.
@@ -304,8 +306,9 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Entities] The results for the entities analysis.
         #
@@ -341,8 +344,9 @@ module Google
         # @param [String] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.

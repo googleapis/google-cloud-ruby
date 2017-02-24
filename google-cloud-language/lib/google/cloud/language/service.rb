@@ -117,8 +117,13 @@ module Google
 
         def verify_encoding! encoding
           # TODO: verify encoding against V1::EncodingType
-          return :UTF8 if encoding.nil?
-          encoding
+          { "utf8"   => :UTF8,
+            "utf-8"  => :UTF8,
+            "utf16"  => :UTF16,
+            "utf-16" => :UTF16,
+            "utf32"  => :UTF32,
+            "utf-32" => :UTF32
+          }[String(encoding).downcase] || :UTF8
         end
 
         def default_headers
