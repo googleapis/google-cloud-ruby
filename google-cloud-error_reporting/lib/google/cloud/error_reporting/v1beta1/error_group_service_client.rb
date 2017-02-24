@@ -123,7 +123,7 @@ module Google
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
-            google_api_client << " #{lib_name}/{lib_version}" if lib_name
+            google_api_client << " #{lib_name}/#{lib_version}" if lib_name
             google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
