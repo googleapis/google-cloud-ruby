@@ -12,8 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/speech/v1beta1/speech_api"
-require "google/longrunning/operations_client"
-# Load the protobufs so code can see these classes
-require "google/cloud/speech/v1beta1/cloud_speech_pb"
-require "google/longrunning/operations_pb"
+require "google/cloud/speech/v1beta1/speech_client"
