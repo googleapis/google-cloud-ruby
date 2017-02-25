@@ -23,8 +23,9 @@ dependencies:
     # The following three commands install 2.0.0
     - rvm get stable
     - gem update --system
-    - rvm-exec 2.2.5 gem update --system
+    - rvm-exec 2.4.0 gem update --system
     - rvm-exec 2.3.1 gem update --system
+    - rvm-exec 2.2.5 gem update --system
     - rvm install 2.0.0-p648
     - rvm-exec 2.0.0-p648 gem update --system
     - rvm-exec 2.0.0-p648 gem install bundler
@@ -32,42 +33,18 @@ dependencies:
   override:
     # The following command installs dependencies for 2.1.9
     - bundle update
-    - rvm-exec 2.2.5 bundle update
+    - rvm-exec 2.4.0 bundle update
     - rvm-exec 2.3.1 bundle update
+    - rvm-exec 2.2.5 bundle update
     - rvm-exec 2.0.0-p648 bundle update
 
 test:
   override:
-    - ? |
-        case $CIRCLE_NODE_INDEX in
-         0)
-           rvm-exec 2.3.1 bundle exec rake circleci:build
-           ;;
-         1)
-           rvm-exec 2.2.5 bundle exec rake circleci:build
-           ;;
-         2)
-           rvm rubygems current
-           bundle exec rake circleci:build
-           ;;
-         3)
-           rvm-exec 2.0.0-p648 bundle exec rake circleci:build
-           ;;
-        esac
-      :
+    - ruby build/test.rb:
         parallel: true
 
   post:
-    - ? |
-        case $CIRCLE_NODE_INDEX in
-         0)
-           rvm-exec 2.3.1 bundle exec rake circleci:post
-           ;;
-         1)
-           rvm-exec 2.2.5 bundle exec rake test:coveralls
-           ;;
-        esac
-      :
+    - ruby build/post_test.rb:
         parallel: true
 
 deployment:
@@ -75,4 +52,4 @@ deployment:
     tag: /(\S*)\/v(\S*)/
     owner: GoogleCloudPlatform
     commands:
-      - rvm-exec 2.2.5 bundle exec rake circleci:release
+      - bundle exec rake circleci:release
