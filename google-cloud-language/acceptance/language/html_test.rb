@@ -225,8 +225,6 @@ describe "Language (HTML)", :language do
 
       annotation.language.must_equal "en"
 
-      annotation.sentiment.must_be :nil?
-
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
       annotation.entities.unknown.map(&:name).must_equal []

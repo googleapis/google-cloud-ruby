@@ -213,8 +213,6 @@ describe "Language (HTML/Storage URL)", :language do
 
       annotation.language.must_equal "en"
 
-      annotation.sentiment.must_be :nil?
-
       annotation.entities.must_be :empty?
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
@@ -277,8 +275,6 @@ describe "Language (HTML/Storage URL)", :language do
       annotation = doc.annotate entities: true
 
       annotation.language.must_equal "en"
-
-      annotation.sentiment.must_be :nil?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
