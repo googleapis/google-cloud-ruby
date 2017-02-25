@@ -395,7 +395,7 @@ module Google
             profanity_filter: profanity_filter, phrases: phrases)
 
           grpc = service.recognize_async audio_obj.to_grpc, config
-          Job.from_grpc grpc, service
+          Job.from_grpc grpc
         end
 
         ##
