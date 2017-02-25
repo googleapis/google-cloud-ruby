@@ -63,7 +63,22 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     assert_text_sentiment sentiment
   end
 
-  it "runs sentiment with TEXT format and en language options" do
+  it "runs sentiment with UTF8 encoding options" do
+    grpc_doc = Google::Cloud::Language::V1::Document.new(
+      content: text_content, type: :PLAIN_TEXT)
+    grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
+
+    mock = Minitest::Mock.new
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
+
+    language.service.mocked_service = mock
+    sentiment = language.sentiment text_content, encoding: "utf-8"
+    mock.verify
+
+    assert_text_sentiment sentiment
+  end
+
+  it "runs sentiment with TEXT format and en language and UTF8 encoding options" do
     grpc_doc = Google::Cloud::Language::V1::Document.new(
       content: text_content, type: :PLAIN_TEXT, language: "en")
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_text_json
@@ -72,7 +87,7 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
-    sentiment = language.sentiment text_content, format: :text, language: :en
+    sentiment = language.sentiment text_content, format: :text, language: :en, encoding: :utf8
     mock.verify
 
     assert_text_sentiment sentiment
@@ -93,16 +108,16 @@ describe Google::Cloud::Language::Project, :sentiment, :mock_language do
     assert_html_sentiment sentiment
   end
 
-  it "runs sentiment with HTML format and en language options" do
+  it "runs sentiment with HTML format and en language and UTF16 encoding options" do
     grpc_doc = Google::Cloud::Language::V1::Document.new(
       content: html_content, type: :HTML, language: "en")
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSentimentResponse.decode_json sentiment_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
+    mock.expect :analyze_sentiment, grpc_resp, [grpc_doc, encoding_type: :UTF16, options: default_options]
 
     language.service.mocked_service = mock
-    sentiment = language.sentiment html_content, format: :html, language: :en
+    sentiment = language.sentiment html_content, format: :html, language: :en, encoding: :utf16
     mock.verify
 
     assert_html_sentiment sentiment

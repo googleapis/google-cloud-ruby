@@ -89,10 +89,10 @@ module Google
         #   to be annotated, or a Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/document.ext"`; or an instance of
         #   Google::Cloud::Storage::File of the text to be annotated.
-        # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional. If no format is provided, the document will default to
-        #   TEXT.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] format The format of the document. Acceptable
+        #   values are: `text` or `html`. If no format is provided, the document
+        #   will default to `text`. Optional.
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
         #
@@ -154,7 +154,7 @@ module Google
         #   to be annotated, or a Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/document.ext"`; or an instance of
         #   Google::Cloud::Storage::File of the text to be annotated.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
         #
@@ -172,7 +172,7 @@ module Google
         #   to be annotated, or a Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/document.ext"`; or an instance of
         #   Google::Cloud::Storage::File of the text to be annotated.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
         #
@@ -202,13 +202,14 @@ module Google
         # @param [Boolean] syntax Whether to perform the syntactic analysis.
         #   Optional. The default is `false`. If every feature option is
         #   `false`, **all** features will be performed.
-        # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] format The format of the document. Acceptable
+        #   values are: `text` or `html`. Optional.
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation] The results for the content analysis.
         #
@@ -248,13 +249,14 @@ module Google
         #   content to annotate. This can be an {Document} instance, or any
         #   other type that converts to an {Document}. See {#document} for
         #   details.
-        # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] format The format of the document. Acceptable
+        #   values are: `text` or `html`. Optional.
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Syntax] The results for the content syntax
         #   analysis.
@@ -299,13 +301,14 @@ module Google
         # @param [String, Document] content The content to annotate. This
         #   can be an {Document} instance, or any other type that converts to an
         #   {Document}. See {#document} for details.
-        # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] format The format of the document. Acceptable
+        #   values are: `text` or `html`. Optional.
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Entities] The results for the entities analysis.
         #
@@ -336,13 +339,14 @@ module Google
         # @param [String, Document] content The content to annotate. This
         #   can be an {Document} instance, or any other type that converts to an
         #   {Document}. See {#document} for details.
-        # @param [String] format The format of the document (TEXT/HTML).
-        #   Optional.
-        # @param [String] language The language of the document (if not
+        # @param [String, Symbol] format The format of the document. Acceptable
+        #   values are: `text` or `html`. Optional.
+        # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String] encoding The encoding type used by the API to
-        #   calculate offsets. Optional.
+        # @param [String, Symbol] encoding The encoding type used by the API to
+        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
+        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
