@@ -3,6 +3,7 @@ os:
 - osx
 osx_image: xcode8.2
 rvm:
+- 2.4.0
 - 2.3.1
 - 2.2.5
 - 2.1.9
