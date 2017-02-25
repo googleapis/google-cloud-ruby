@@ -221,8 +221,7 @@ namespace :jsondoc do
     FileUtils.mkdir_p gh_pages
 
     # checkout the gh-pages branch
-    puts "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
-    puts `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
+    sh "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
   end
 
   desc "Copies a gem's jsondoc to gh-pages repo in temp dir."
@@ -368,15 +367,15 @@ namespace :jsondoc do
     puts "cd #{gh_pages}"
     Dir.chdir gh_pages do
       # commit changes
-      puts `git add -A .`
+      sh "git add -A ."
       if ENV["GH_OAUTH_TOKEN"]
-        puts `git config --global user.email "travis@travis-ci.org"`
-        puts `git config --global user.name "travis-ci"`
-        puts `git commit -m "Update documentation for #{git_ref}"`
-        puts `git push -q #{git_repo} gh-pages:gh-pages`
+        sh "git config --global user.email \"travis@travis-ci.org\""
+        sh "git config --global user.name \"travis-ci\""
+        sh "git commit -m \"Update documentation for #{git_ref}\""
+        sh "git push -q #{git_repo} gh-pages:gh-pages"
       else
-        puts `git commit -m "Update documentation for #{git_ref}"`
-        puts `git push -q origin gh-pages`
+        sh "git commit -m \"Update documentation for #{git_ref}\""
+        sh "git push -q origin gh-pages"
       end
     end
   end
@@ -454,49 +453,6 @@ namespace :jsondoc do
 
     Rake::Task["jsondoc:publish"].invoke(tag, gh_pages_dir)
   end
-
-  # TODO: Use checkout of tag repo, below, in jsondoc:package, then delete.
-  # desc "[Deprecated] Publishes the jsondoc for the tag to the gh-pages branch"
-  # task :tag, :tag do |t, args|
-  #   tag = args[:tag]
-  #   fail "Missing required parameter 'tag'." if tag.nil?
-  #
-  #   fail "'tag' must be in the format <gem>/<version>" unless tag.include?("/")
-  #   gem_name, version =  tag.split("/")
-  #
-  #
-  #   # Verify the tag exists
-  #   tag_check = `git show-ref --tags | grep #{tag}`.chomp
-  #   if tag_check.empty?
-  #     fail "Cannot find the tag '#{tag}'."
-  #   end
-  #
-  #   git_repo = "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
-  #   if ENV["GH_OAUTH_TOKEN"]
-  #     git_repo = "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
-  #   end
-  #
-  #   tag_repo  =  Pathname.new(Dir.home) + "tmp/#{tag}-repo"
-  #   FileUtils.remove_dir tag_repo if Dir.exists? tag_repo
-  #   FileUtils.mkdir_p tag_repo
-  #
-  #   header "Cloning tag #{tag} to #{tag_repo}"
-  #
-  #   # checkout the tag repo
-  #   puts "git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null"
-  #   puts `git clone --quiet --branch=#{tag} --single-branch #{git_repo} #{tag_repo} > /dev/null`
-  #   # build the docs in the gem dir in the tag repo
-  #   Dir.chdir tag_repo + gem_name do
-  #     Bundler.with_clean_env do
-  #       # create the docs
-  #       puts "bundle install --path .bundle"
-  #       puts `bundle install --path .bundle`
-  #       puts "bundle exec rake jsondoc"
-  #       puts `bundle exec rake jsondoc`
-  #     end
-  #   end
-  #
-  # end
 end
 
 desc "Start an interactive shell."
