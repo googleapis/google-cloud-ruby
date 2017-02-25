@@ -7,3 +7,6 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
+
+# Use public repo until google-gax 0.8.1 is released
+gem "google-gax", git: "https://github.com/googleapis/gax-ruby.git"
