@@ -188,9 +188,8 @@ module Google
     #
     # content = "Star Wars is a great movie. The Death Star is fearsome."
     # document = language.document content
-    # annotation = document.annotate entities: true, text: true
+    # annotation = document.annotate entities: true, syntax: true
     #
-    # annotation.sentiment #=> nil
     # annotation.entities.count #=> 3
     # annotation.sentences.count #=> 2
     # annotation.tokens.count #=> 13

@@ -269,8 +269,7 @@ module Google
         #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
         #
-        #   annotation = language.syntax document
-        #   syntax = annotation.syntax
+        #   syntax = language.syntax document
         #
         #   sentence = syntax.sentences.last
         #   sentence.text #=> "The Death Star is fearsome."

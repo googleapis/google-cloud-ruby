@@ -67,7 +67,8 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-language gem does not have doctest tests."
+  sh "bundle exec yard config -a autoload_plugins yard-doctest"
+  sh "bundle exec yard doctest"
 end
 
 desc "Start an interactive shell."

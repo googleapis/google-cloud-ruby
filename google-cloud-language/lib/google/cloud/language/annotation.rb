@@ -632,8 +632,7 @@ module Google
         #
         #   entities = annotation.entities
         #   entities.count #=> 3
-        #   entities.people.count #=> 1
-        #   entities.artwork.count #=> 1
+        #   entities.artwork.first.name #=> "Star Wars"
         #
         class Entities < DelegateClass(::Array)
           attr_accessor :language
