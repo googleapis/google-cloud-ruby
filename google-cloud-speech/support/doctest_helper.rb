@@ -137,8 +137,8 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
     end
     mock_speech do |mock, mock_ops|
-      mock.expect :async_recognize, op_done_false, recognize_args(recognition_config_alternatives, recognition_audio_uri)
-      mock_ops.expect :get_operation, nil, ["1234567890"]
+      mock.expect :async_recognize, op_done_false(mock_ops), recognize_args(recognition_config_alternatives, recognition_audio_uri)
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
@@ -164,8 +164,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Speech::Project#recognize_job" do
     mock_speech do |mock, mock_ops|
-      mock.expect :async_recognize, op_done_false, recognize_args
-      mock_ops.expect :get_operation, nil, ["1234567890"]
+      mock.expect :async_recognize, op_done_false(mock_ops), recognize_args
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
@@ -175,15 +175,15 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
     end
     mock_speech do |mock, mock_ops|
-      mock.expect :async_recognize, op_done_false, recognize_args(recognition_config_alternatives, recognition_audio_uri)
-      mock_ops.expect :get_operation, nil, ["1234567890"]
+      mock.expect :async_recognize, op_done_false(mock_ops), recognize_args(recognition_config_alternatives, recognition_audio_uri)
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
   doctest.before "Google::Cloud::Speech::Project#recognize_job@With a Google Cloud Storage URI:" do
     mock_speech do |mock, mock_ops|
-      mock.expect :async_recognize, op_done_false, recognize_args(nil, recognition_audio_uri)
-      mock_ops.expect :get_operation, nil, ["1234567890"]
+      mock.expect :async_recognize, op_done_false(mock_ops), recognize_args(nil, recognition_audio_uri)
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
@@ -195,21 +195,21 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Speech::Audio#recognize_job" do
     mock_speech do |mock_service, mock_ops|
-      mock_service.expect :async_recognize, op_done_false, recognize_args
-      mock_ops.expect :get_operation, op_done_true, [op_name]
+      mock_service.expect :async_recognize, op_done_false(mock_ops), recognize_args
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
   doctest.before "Google::Cloud::Speech::Job" do
     mock_speech do |mock_service, mock_ops|
-      mock_service.expect :async_recognize, op_done_false, recognize_args
-      mock_ops.expect :get_operation, op_done_true, [op_name]
+      mock_service.expect :async_recognize, op_done_false(mock_ops), recognize_args
+      mock_ops.expect :get_operation, op_done_true_grpc, [op_name, options: nil]
     end
   end
 
   doctest.before "Google::Cloud::Speech::Job#results" do
-    mock_speech do |mock_service|
-      mock_service.expect :async_recognize, op_done_true, recognize_args
+    mock_speech do |mock_service, mock_ops|
+      mock_service.expect :async_recognize, op_done_true(mock_ops), recognize_args
     end
   end
 
@@ -281,14 +281,32 @@ def op_name
   "1234567890"
 end
 
-def op_done_false
+def op_done_false_grpc
   job_json = "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}"
   Google::Longrunning::Operation.decode_json job_json
 end
 
-def op_done_true
+def op_done_false ops_mock
+  op = Google::Gax::Operation.new op_done_false_grpc, ops_mock,
+    Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse,
+    Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata
+
+  # stub sleep so the doctests run faster
+  def op.sleep *args
+  end
+
+  op
+end
+
+def op_done_true_grpc
   results_json = "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}"
   results_grpc = Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse.decode_json results_json
   complete_json = "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}"
   Google::Longrunning::Operation.decode_json complete_json
+end
+
+def op_done_true ops_mock
+  Google::Gax::Operation.new op_done_true_grpc, ops_mock,
+    Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse,
+    Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata
 end

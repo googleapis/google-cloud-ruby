@@ -47,18 +47,13 @@ module Google
       #
       class Job
         ##
-        # @private The Google::Longrunning::Operation gRPC object.
+        # @private The Google::Gax::Operation gRPC object.
         attr_accessor :grpc
 
         ##
-        # @private The gRPC Service object.
-        attr_accessor :service
-
-        ##
-        # @private Creates a new Annotation instance.
+        # @private Creates a new Job instance.
         def initialize
           @grpc = nil
-          @service = nil
         end
 
         ##
@@ -79,10 +74,8 @@ module Google
         #   results = job.results
         #
         def results
-          return nil unless done?
-          return nil unless @grpc.result == :response
-          resp = V1beta1::AsyncRecognizeResponse.decode(@grpc.response.value)
-          resp.results.map do |result_grpc|
+          return nil unless @grpc.response?
+          @grpc.response.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
           # TODO: Ensure we are raising the proper error
@@ -107,7 +100,7 @@ module Google
         #   job.done? #=> false
         #
         def done?
-          @grpc.done
+          @grpc.done?
         end
 
         ##
@@ -127,7 +120,7 @@ module Google
         #   job.done? #=> true
         #
         def reload!
-          @grpc = @service.get_op @grpc.name
+          @grpc.reload!
           self
         end
         alias_method :refresh!, :reload!
@@ -149,22 +142,15 @@ module Google
         #   job.done? #=> true
         #
         def wait_until_done!
-          backoff = ->(retries) { sleep 2 * retries + 5 }
-          retries = 0
-          until done?
-            backoff.call retries
-            retries += 1
-            reload!
-          end
+          @grpc.wait_until_done!
         end
 
         ##
         # @private New Result::Job from a Google::Longrunning::Operation
         # object.
-        def self.from_grpc grpc, service
+        def self.from_grpc grpc
           new.tap do |job|
             job.instance_variable_set :@grpc, grpc
-            job.instance_variable_set :@service, service
           end
         end
       end

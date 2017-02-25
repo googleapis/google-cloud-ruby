@@ -15,24 +15,25 @@
 require "helper"
 
 describe Google::Cloud::Speech::Job, :mock_speech do
+  let(:ops_mock) { Minitest::Mock.new }
   let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
   let(:incomplete_grpc) { Google::Longrunning::Operation.decode_json incomplete_json }
+  let(:incomplete_gax) { Google::Gax::Operation.new incomplete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
   let(:results_grpc) { Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse.decode_json results_json }
   let(:complete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}" }
   let(:complete_grpc) { Google::Longrunning::Operation.decode_json complete_json }
+  let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
 
   it "refreshes to get final results" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    mock = Minitest::Mock.new
-    mock.expect :get_operation, complete_grpc, ["1234567890"]
+    ops_mock.expect :get_operation, complete_grpc, ["1234567890", options: nil]
 
-    speech.service.mocked_ops = mock
     job.refresh!
-    mock.verify
+    ops_mock.verify
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.must_be :done?
@@ -45,40 +46,36 @@ describe Google::Cloud::Speech::Job, :mock_speech do
   end
 
   it "refreshes but is still not done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    mock = Minitest::Mock.new
-    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
+    ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
 
-    speech.service.mocked_ops = mock
     job.refresh!
-    mock.verify
+    ops_mock.verify
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
   end
 
   it "waits until done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_grpc, speech.service
+    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.wont_be :done?
 
-    mock = Minitest::Mock.new
-    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
-    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
-    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
-    mock.expect :get_operation, incomplete_grpc, ["1234567890"]
-    mock.expect :get_operation, complete_grpc, ["1234567890"]
+    ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
+    ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
+    ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
+    ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
+    ops_mock.expect :get_operation, complete_grpc,   ["1234567890", options: nil]
 
     # fake out the sleep method so the test doesn't actually block
-    def job.sleep *args
+    def incomplete_gax.sleep *args
     end
 
-    speech.service.mocked_ops = mock
     job.wait_until_done!
-    mock.verify
+    ops_mock.verify
 
     job.must_be_kind_of Google::Cloud::Speech::Job
     job.must_be :done?

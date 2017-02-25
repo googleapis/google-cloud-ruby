@@ -15,8 +15,10 @@
 require "helper"
 
 describe Google::Cloud::Speech::Project, :recognize_job, :mock_speech do
-  let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
-  let(:job_grpc) { Google::Longrunning::Operation.decode_json job_json }
+  let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.V1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
+  let(:job_grpc) { Google::Gax::Operation.new Google::Longrunning::Operation.decode_json(job_json), nil,
+                     Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse,
+                     Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
 
   it "recognizes audio from local file path" do
     config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)
