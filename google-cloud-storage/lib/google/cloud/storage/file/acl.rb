@@ -394,7 +394,7 @@ module Google
           end
 
           def update_predefined_acl! acl_role
-            patched_file = Google::Apis::StorageV1::Object.new acl: nil
+            patched_file = Google::Apis::StorageV1::Object.new acl: []
             @service.patch_file \
               @bucket, @file, patched_file, predefined_acl: acl_role
             clear!

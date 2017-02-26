@@ -730,12 +730,12 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                       content_encoding: nil, content_language: nil,
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                       storage_class: nil
-    Google::Apis::StorageV1::Object.new(
+    Google::Apis::StorageV1::Object.new({
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,
       content_encoding: content_encoding, crc32c: crc32c,
       content_language: content_language, metadata: metadata,
-      storage_class: storage_class)
+      storage_class: storage_class }.delete_if { |_k, v| v.nil? })
   end
 
   def find_file_gapi bucket=nil, name = nil

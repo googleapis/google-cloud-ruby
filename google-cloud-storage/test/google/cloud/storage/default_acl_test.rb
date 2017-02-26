@@ -287,7 +287,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
       Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
-      [bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: nil), predefined_acl: nil, predefined_default_object_acl: acl_role]
+      [bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: []), predefined_acl: nil, predefined_default_object_acl: acl_role]
 
     storage.service.mocked_service = mock
 
