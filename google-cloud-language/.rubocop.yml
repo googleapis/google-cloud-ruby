@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "support/**/*"
     - "google-cloud-language.gemspec"
     - "Rakefile"
     - "lib/google/cloud/language/v1.rb"

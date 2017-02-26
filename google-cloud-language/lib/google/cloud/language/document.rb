@@ -99,6 +99,10 @@ module Google
         #   `:html`.
         #
         # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
         #   document = language.document "<p>The Old Man and the Sea</p>"
         #   document.format = :html
         #
@@ -156,6 +160,10 @@ module Google
         #   accepted.
         #
         # @example
+        #   require "google/cloud/language"
+        #
+        #   language = Google::Cloud::Language.new
+        #
         #   document = language.document "<p>El viejo y el mar</p>"
         #   document.language = "es"
         #
@@ -207,9 +215,8 @@ module Google
         #
         #   content = "Star Wars is a great movie. The Death Star is fearsome."
         #   document = language.document content
-        #   annotation = document.annotate entities: true, text: true
+        #   annotation = document.annotate entities: true, syntax: true
         #
-        #   annotation.sentiment #=> nil
         #   annotation.entities.count #=> 3
         #   annotation.sentences.count #=> 2
         #   annotation.tokens.count #=> 13
