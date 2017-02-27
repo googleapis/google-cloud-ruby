@@ -68,6 +68,8 @@ module Google
                 Float value
               elsif type == "BOOLEAN"
                 (value == "true" ? true : (value == "false" ? false : nil))
+              elsif type == "BYTES"
+                StringIO.new Base64.decode64 value
               else
                 value
               end
@@ -149,7 +151,8 @@ module Google
               parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
                 type: "BYTES"),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value.read.force_encoding("ASCII-8BIT"))
+                value: Base64.strict_encode64(
+                  value.read.force_encoding("ASCII-8BIT")))
             )
           elsif Array === value
             array_params = value.map { |param| Convert.to_query_param param }

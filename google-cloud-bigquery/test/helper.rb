@@ -127,16 +127,23 @@ class MockBigquery < Minitest::Spec
           },
           {
             "name" => "age",
-            "type" => "INTEGER"
+            "type" => "INTEGER",
+            "mode" => "NULLABLE"
           },
           {
             "name" => "score",
             "type" => "FLOAT",
-            "description" => "A score from 0.0 to 10.0"
+            "mode" => "NULLABLE"
           },
           {
             "name" => "active",
-            "type" => "BOOLEAN"
+            "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "avatar",
+            "type" => "BYTES",
+            "mode" => "NULLABLE"
           }
         ]
       },
@@ -221,7 +228,7 @@ class MockBigquery < Minitest::Spec
           {
             "name" => "name",
             "type" => "STRING",
-            "mode" => "NULLABLE"
+            "mode" => "REQUIRED"
           },
           {
             "name" => "age",
@@ -236,6 +243,11 @@ class MockBigquery < Minitest::Spec
           {
             "name" => "active",
             "type" => "BOOLEAN",
+            "mode" => "NULLABLE"
+          },
+          {
+            "name" => "avatar",
+            "type" => "BYTES",
             "mode" => "NULLABLE"
           }
         ]
@@ -342,7 +354,7 @@ class MockBigquery < Minitest::Spec
       ),
       dry_run: nil,
       max_results: nil,
-      query: "SELECT name, age, score, active FROM [some_project:some_dataset.users]",
+      query: "SELECT name, age, score, active, avatar FROM [some_project:some_dataset.users]",
       timeout_ms: 10000,
       use_query_cache: true,
       use_legacy_sql: nil,
@@ -366,7 +378,7 @@ class MockBigquery < Minitest::Spec
           {
             "name" => "name",
             "type" => "STRING",
-            "mode" => "NULLABLE"
+            "mode" => "REQUIRED"
           },
           {
             "name" => "age",
@@ -382,6 +394,11 @@ class MockBigquery < Minitest::Spec
             "name" => "active",
             "type" => "BOOLEAN",
             "mode" => "NULLABLE"
+          },
+          {
+            "name" => "avatar",
+            "type" => "BYTES",
+            "mode" => "NULLABLE"
           }
         ]
       },
@@ -391,7 +408,8 @@ class MockBigquery < Minitest::Spec
             { "v" => "Heidi" },
             { "v" => "36" },
             { "v" => "7.65" },
-            { "v" => "true" }
+            { "v" => "true" },
+            { "v" => "aW1hZ2UgZGF0YQ==" }
           ]
         },
         {
@@ -399,12 +417,14 @@ class MockBigquery < Minitest::Spec
             { "v" => "Aaron" },
             { "v" => "42" },
             { "v" => "8.15" },
-            { "v" => "false" }
+            { "v" => "false" },
+            { "v" => nil }
           ]
         },
         {
           "f" => [
             { "v" => "Sally" },
+            { "v" => nil },
             { "v" => nil },
             { "v" => nil },
             { "v" => nil }
