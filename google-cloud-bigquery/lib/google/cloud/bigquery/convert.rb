@@ -75,6 +75,8 @@ module Google
                 ::Time.at Float(value)
               elsif type == "TIME"
                 Bigquery::Time.new value
+              elsif type == "DATETIME"
+                ::Time.parse("#{value} UTC").to_datetime
               else
                 value
               end

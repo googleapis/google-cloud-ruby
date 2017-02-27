@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     job.schema.must_be :frozen?
     job.schema.fields.wont_be :empty?
-    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration"]
+    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end"]
   end
 
   it "knows its load config" do

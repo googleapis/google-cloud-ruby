@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::View, :mock_bigquery do
     view.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     view.schema.must_be :frozen?
     view.fields.map(&:name).must_equal view.schema.fields.map(&:name)
-    view.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration"]
+    view.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end"]
   end
 
   it "can delete itself" do
