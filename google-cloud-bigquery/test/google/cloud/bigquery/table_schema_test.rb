@@ -34,11 +34,11 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   let(:new_table_hash) { random_table_hash dataset, table_id, table_name, description }
 
-  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", fields: nil }
-  let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: nil }
-  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: nil }
-  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: nil }
-  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "start_date", type: "TIMESTAMP", mode: "NULLABLE", fields: nil }
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] }
+  let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
+  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: [] }
+  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: [] }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "start_date", type: "TIMESTAMP", mode: "NULLABLE", fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
   let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }

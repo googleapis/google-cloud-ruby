@@ -231,6 +231,8 @@ module Google
 
         def add_field name, type, nested_fields, description: nil,
                       mode: :nullable
+          # Make nested fields an empty array if nil
+          nested_fields ||= []
           # Remove any existing field of this name
           fields.reject! { |f| f.name == name }
           fields << Field.new(name, type, description: description,
@@ -304,7 +306,6 @@ module Google
             return if frozen?
             fields.each(&:check_for_changed_fields!)
             gapi_fields = Array(fields).map(&:to_gapi)
-            gapi_fields = nil if gapi_fields.empty?
             @gapi.update! fields: gapi_fields
           end
 

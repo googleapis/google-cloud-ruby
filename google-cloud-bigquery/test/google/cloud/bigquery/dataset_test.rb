@@ -37,7 +37,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:table_schema_gapi) do
     gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
     gapi.fields.each do |f|
-      f.update! fields: nil
+      f.update! fields: []
     end
     gapi
   end
@@ -251,14 +251,14 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
         project_id: project, dataset_id: dataset_id, table_id: table_id),
       schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", fields: nil),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", fields: nil),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: nil),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: nil),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: nil),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", fields: [
-          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: nil),
-          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: nil)])
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: [])])
         ]))
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi

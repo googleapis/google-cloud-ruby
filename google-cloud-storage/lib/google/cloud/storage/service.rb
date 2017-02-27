@@ -91,8 +91,8 @@ module Google
         def patch_bucket bucket_name, bucket_gapi = nil, predefined_acl: nil,
                          predefined_default_acl: nil
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
-          bucket_gapi.acl = nil if predefined_acl
-          bucket_gapi.default_object_acl = nil if predefined_default_acl
+          bucket_gapi.acl = [] if predefined_acl
+          bucket_gapi.default_object_acl = [] if predefined_default_acl
 
           execute do
             service.patch_bucket \
@@ -117,8 +117,8 @@ module Google
         ##
         # Creates a new bucket ACL.
         def insert_bucket_acl bucket_name, entity, role
-          new_acl = Google::Apis::StorageV1::BucketAccessControl.new \
-            entity: entity, role: role
+          new_acl = Google::Apis::StorageV1::BucketAccessControl.new({
+            entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute { service.insert_bucket_access_control bucket_name, new_acl }
         end
 
@@ -137,8 +137,8 @@ module Google
         ##
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role
-          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new \
-            entity: entity, role: role
+          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new({
+            entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_default_object_access_control bucket_name, new_acl
           end
@@ -172,12 +172,12 @@ module Google
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                         storage_class: nil, key: nil
-          file_obj = Google::Apis::StorageV1::Object.new \
+          file_obj = Google::Apis::StorageV1::Object.new({
             cache_control: cache_control, content_type: content_type,
             content_disposition: content_disposition, md5_hash: md5,
             content_encoding: content_encoding, crc32c: crc32c,
             content_language: content_language, metadata: metadata,
-            storage_class: storage_class
+            storage_class: storage_class }.delete_if { |_k, v| v.nil? })
           content_type ||= mime_type_for(Pathname(source).to_path)
           execute do
             service.insert_object \
@@ -282,8 +282,8 @@ module Google
         ##
         # Creates a new file ACL.
         def insert_file_acl bucket_name, file_name, entity, role, options = {}
-          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new \
-            entity: entity, role: role
+          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new({
+            entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_object_access_control \
               bucket_name, file_name, new_acl, generation: options[:generation]
