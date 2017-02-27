@@ -1,5 +1,13 @@
 # Release History
 
+### 0.4.1 / 2017-02-27
+
+* Set version constraints on the gem dependencies for individual stackdriver services. Current versions are:
+  * **google-cloud-logging** `~> 0.24.0`
+  * **google-cloud-error_reporting** `~> 0.23.1`
+  * **google-cloud-monitoring** `~> 0.23.0`
+  * **google-cloud-trace** `~> 0.23.0`
+
 ### 0.4.0 / 2016-12-22
 
 * Now provides Stackdriver Trace instrumentation by including google-cloud-trace.
