@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     job.schema.must_be :frozen?
     job.schema.fields.wont_be :empty?
-    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar"]
+    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar", "started_at"]
   end
 
   it "knows its load config" do
@@ -95,33 +95,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       },
       "createDisposition" => "CREATE_IF_NEEDED",
       "writeDisposition" => "WRITE_EMPTY",
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "REQUIRED"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "avatar",
-            "type" => "BYTES",
-            "mode" => "NULLABLE"
-          }]},
+      "schema" => random_schema_hash,
       "fieldDelimiter" => ",",
       "skipLeadingRows" => 0,
       "encoding" => "UTF-8",

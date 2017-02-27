@@ -16,6 +16,7 @@
 require "google/apis/bigquery_v2"
 require "stringio"
 require "base64"
+require "time"
 
 module Google
   module Cloud
@@ -70,6 +71,8 @@ module Google
                 (value == "true" ? true : (value == "false" ? false : nil))
               elsif type == "BYTES"
                 StringIO.new Base64.decode64 value
+              elsif type == "TIMESTAMP"
+                ::Time.at Float(value)
               else
                 value
               end

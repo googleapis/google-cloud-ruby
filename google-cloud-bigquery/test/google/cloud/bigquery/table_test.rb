@@ -70,7 +70,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     table.schema.must_be :frozen?
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal ["name", "age", "score", "active", "avatar"]
+    table.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at"]
   end
 
   it "can delete itself" do

@@ -39,7 +39,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: [] }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: [] }
   let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", fields: [] }
-  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "start_date", type: "TIMESTAMP", mode: "NULLABLE", fields: [] }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
   let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
@@ -52,7 +52,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   it "gets the schema, fields, and headers" do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     table.schema.must_be :frozen?
-    table.schema.fields.count.must_equal 5
+    table.schema.fields.count.must_equal 6
 
     table.schema.fields[0].name.must_equal "name"
     table.schema.fields[0].type.must_equal "STRING"
@@ -79,9 +79,14 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.fields[4].description.must_equal nil
     table.schema.fields[4].mode.must_equal "NULLABLE"
 
-    table.fields.count.must_equal 5
+    table.schema.fields[5].name.must_equal "started_at"
+    table.schema.fields[5].type.must_equal "TIMESTAMP"
+    table.schema.fields[5].description.must_equal nil
+    table.schema.fields[5].mode.must_equal "NULLABLE"
+
+    table.fields.count.must_equal 6
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal ["name", "age", "score", "active", "avatar"]
+    table.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at"]
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -107,7 +112,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.float "accuracy"
       schema.boolean "approved"
       schema.bytes "avatar"
-      schema.timestamp "start_date"
+      schema.timestamp "started_at"
     end
 
     mock.verify
@@ -147,7 +152,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.timestamp "start_date"
+      schema.timestamp "started_at"
     end
 
     mock.verify
@@ -170,7 +175,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.string "first_name", mode: :required
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
-        nested.timestamp "start_date"
+        nested.timestamp "started_at"
       end
     end
 
