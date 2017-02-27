@@ -198,6 +198,21 @@ module Google
         end
 
         ##
+        # Adds a time field to the schema.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        def time name, description: nil, mode: :nullable
+          add_field name, :time, nil, description: description, mode: mode
+        end
+
+        ##
         # Adds a record field to the schema. A block must be passed describing
         # the nested fields of the record. For more information about nested
         # and repeated records, see [Preparing Data for BigQuery
@@ -259,7 +274,7 @@ module Google
           MODES = %w( NULLABLE REQUIRED REPEATED )
 
           # @private
-          TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP RECORD )
+          TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME RECORD )
 
           def initialize name, type, description: nil,
                          mode: :nullable, fields: nil

@@ -95,7 +95,7 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
     table.schema.must_be :frozen?
     table.schema.fields.wont_be :empty?
     table.fields.wont_be :empty?
-    table.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at"]
+    table.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration"]
 
     mock.verify
 

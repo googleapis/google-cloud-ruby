@@ -129,6 +129,11 @@ class MockBigquery < Minitest::Spec
           "name" => "started_at",
           "type" => "TIMESTAMP",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "duration",
+          "type" => "TIME",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -143,7 +148,8 @@ class MockBigquery < Minitest::Spec
           { "v" => "7.65" },
           { "v" => "true" },
           { "v" => "aW1hZ2UgZGF0YQ==" },
-          { "v" => "1482670800.0" }
+          { "v" => "1482670800.0" },
+          { "v" => "04:00:00" }
         ]
       },
       {
@@ -153,12 +159,14 @@ class MockBigquery < Minitest::Spec
           { "v" => "8.15" },
           { "v" => "false" },
           { "v" => nil },
-          { "v" => nil }
+          { "v" => nil },
+          { "v" => "04:32:10.555555" }
         ]
       },
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },

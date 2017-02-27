@@ -260,6 +260,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", fields: [
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: []),
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: [])])
@@ -277,6 +278,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.boolean "active"
       schema.bytes "avatar"
       schema.timestamp "creation_date"
+      schema.time "duration"
       schema.record "cities_lived", mode: :repeated do |nested_schema|
         nested_schema.string "place"
         nested_schema.integer "number_of_years"\

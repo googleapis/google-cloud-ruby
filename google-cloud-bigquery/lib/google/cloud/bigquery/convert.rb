@@ -73,6 +73,8 @@ module Google
                 StringIO.new Base64.decode64 value
               elsif type == "TIMESTAMP"
                 ::Time.at Float(value)
+              elsif type == "TIME"
+                Bigquery::Time.new value
               else
                 value
               end

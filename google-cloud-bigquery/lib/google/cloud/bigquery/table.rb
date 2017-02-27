@@ -1076,6 +1076,34 @@ module Google
           end
 
           ##
+          # Adds a time field to the schema.
+          #
+          # See {Schema#time}.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |schema|
+          #     schema.time "duration", mode: :required
+          #   end
+          #
+          # @!group Schema
+          def time name, description: nil, mode: :nullable
+            schema.time name, description: description, mode: mode
+          end
+
+          ##
           # Adds a record field to the schema. A block must be passed describing
           # the nested fields of the record. For more information about nested
           # and repeated records, see [Preparing Data for BigQuery
