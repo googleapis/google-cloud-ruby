@@ -188,48 +188,13 @@ module Google
         ##
         # @private New Data from a response object.
         def self.from_gapi gapi, table
-          formatted_rows = format_rows gapi.rows, table.fields
+          formatted_rows = Convert.format_rows gapi.rows, table.fields
 
           data = new formatted_rows
           data.table = table
           data.gapi = gapi
           data
         end
-
-        # rubocop:disable all
-        # Disabled rubocop because this implementation will not last.
-
-        def self.format_rows rows, fields
-          headers = Array(fields).map { |f| f.name }
-          field_types = Array(fields).map { |f| f.type }
-
-          Array(rows).map do |row|
-            values = row.f.map { |f| f.v }
-            formatted_values = format_values field_types, values
-            Hash[headers.zip formatted_values]
-          end
-        end
-
-        def self.format_values field_types, values
-          field_types.zip(values).map do |type, value|
-            begin
-              if value.nil?
-                nil
-              elsif type == "INTEGER"
-                Integer value
-              elsif type == "FLOAT"
-                Float value
-              elsif type == "BOOLEAN"
-                (value == "true" ? true : (value == "false" ? false : nil))
-              else
-                value
-              end
-            rescue
-              value
-            end
-          end
-        end
-        # rubocop:enable all
 
         protected
 

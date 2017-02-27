@@ -14,6 +14,7 @@
 
 
 require "google/cloud/bigquery/version"
+require "google/cloud/bigquery/convert"
 require "google/cloud/errors"
 require "google/apis/bigquery_v2"
 require "pathname"
@@ -412,13 +413,13 @@ module Google
               req.configuration.query.use_legacy_sql = false
               req.configuration.query.parameter_mode = "POSITIONAL"
               req.configuration.query.query_parameters = options[:params].map do |param|
-                to_query_param param
+                Convert.to_query_param param
               end
             elsif Hash === options[:params]
               req.configuration.query.use_legacy_sql = false
               req.configuration.query.parameter_mode = "NAMED"
               req.configuration.query.query_parameters = options[:params].map do |name, param|
-                to_query_param(param).tap do |named_param|
+                Convert.to_query_param(param).tap do |named_param|
                   named_param.name = String name
                 end
               end
@@ -449,13 +450,13 @@ module Google
               req.use_legacy_sql = false
               req.parameter_mode = "POSITIONAL"
               req.query_parameters = options[:params].map do |param|
-                to_query_param param
+                Convert.to_query_param param
               end
             elsif Hash === options[:params]
               req.use_legacy_sql = false
               req.parameter_mode = "NAMED"
               req.query_parameters = options[:params].map do |name, param|
-                to_query_param(param).tap do |named_param|
+                Convert.to_query_param(param).tap do |named_param|
                   named_param.name = String name
                 end
               end
@@ -465,96 +466,6 @@ module Google
           end
 
           req
-        end
-
-        def to_query_param value
-          if TrueClass === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
-              parameter_value: API::QueryParameterValue.new(value: true)
-            )
-          elsif FalseClass === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "BOOL"),
-              parameter_value: API::QueryParameterValue.new(value: false)
-            )
-          elsif Integer === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "INT64"),
-              parameter_value: API::QueryParameterValue.new(value: value)
-            )
-          elsif Float === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "FLOAT64"),
-              parameter_value: API::QueryParameterValue.new(value: value)
-            )
-          elsif String === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "STRING"),
-              parameter_value: API::QueryParameterValue.new(value: value)
-            )
-          elsif DateTime === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "DATETIME"),
-              parameter_value: API::QueryParameterValue.new(
-                value: value.strftime("%Y-%m-%d %H:%M:%S.%6N"))
-            )
-          elsif Date === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "DATE"),
-              parameter_value: API::QueryParameterValue.new(value: value.to_s)
-            )
-          elsif ::Time === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "TIMESTAMP"),
-              parameter_value: API::QueryParameterValue.new(
-                value: value.strftime("%Y-%m-%d %H:%M:%S.%6N%:z"))
-            )
-          elsif Bigquery::Time === value
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "TIME"),
-              parameter_value: API::QueryParameterValue.new(value: value.value)
-            )
-          elsif value.respond_to?(:read) && value.respond_to?(:rewind)
-            value.rewind
-            return API::QueryParameter.new(
-              parameter_type:  API::QueryParameterType.new(type: "BYTES"),
-              parameter_value: API::QueryParameterValue.new(
-                value: value.read.force_encoding("ASCII-8BIT"))
-            )
-          elsif Array === value
-            array_params = value.map { |param| to_query_param param }
-            return API::QueryParameter.new(
-              parameter_type: API::QueryParameterType.new(
-                type: "ARRAY",
-                array_type: array_params.first.parameter_type
-              ),
-              parameter_value: API::QueryParameterValue.new(
-                array_values: array_params.map(&:parameter_value)
-              )
-            )
-          elsif Hash === value
-            struct_pairs = value.map do |name, param|
-              struct_param = to_query_param param
-              [API::QueryParameterType::StructType.new(
-                name: String(name),
-                type: struct_param.parameter_type
-              ), struct_param.parameter_value]
-            end
-
-            return API::QueryParameter.new(
-              parameter_type: API::QueryParameterType.new(
-                type: "STRUCT",
-                struct_types: struct_pairs.map(&:first)
-              ),
-              parameter_value: API::QueryParameterValue.new(
-                struct_values: struct_pairs.map(&:last)
-              )
-            )
-          else
-            fail "A query parameter of type #{value.class} is not supported."
-          end
-          v
         end
 
         # rubocop:enable all

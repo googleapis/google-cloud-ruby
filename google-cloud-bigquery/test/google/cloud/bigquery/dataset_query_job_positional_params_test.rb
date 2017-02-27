@@ -254,7 +254,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
           type: "BYTES"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: File.read("acceptance/data/logo.jpg", mode: "rb")
+          value: Base64.strict_encode64(File.read("acceptance/data/logo.jpg", mode: "rb"))
         )
       )
     ]
@@ -279,7 +279,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
           type: "BYTES"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: File.read("acceptance/data/logo.jpg", mode: "rb")
+          value: Base64.strict_encode64(File.read("acceptance/data/logo.jpg", mode: "rb"))
         )
       )
     ]

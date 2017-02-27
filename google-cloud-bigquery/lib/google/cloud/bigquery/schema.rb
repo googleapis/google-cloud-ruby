@@ -168,6 +168,21 @@ module Google
         end
 
         ##
+        # Adds a bytes field to the schema.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        def bytes name, description: nil, mode: :nullable
+          add_field name, :bytes, nil, description: description, mode: mode
+        end
+
+        ##
         # Adds a timestamp field to the schema.
         #
         # @param [String] name The field name. The name must contain only
@@ -180,6 +195,51 @@ module Google
         #   `:nullable`.
         def timestamp name, description: nil, mode: :nullable
           add_field name, :timestamp, nil, description: description, mode: mode
+        end
+
+        ##
+        # Adds a time field to the schema.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        def time name, description: nil, mode: :nullable
+          add_field name, :time, nil, description: description, mode: mode
+        end
+
+        ##
+        # Adds a datetime field to the schema.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        def datetime name, description: nil, mode: :nullable
+          add_field name, :datetime, nil, description: description, mode: mode
+        end
+
+        ##
+        # Adds a date field to the schema.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        def date name, description: nil, mode: :nullable
+          add_field name, :date, nil, description: description, mode: mode
         end
 
         ##
@@ -244,7 +304,8 @@ module Google
           MODES = %w( NULLABLE REQUIRED REPEATED )
 
           # @private
-          TYPES = %w( STRING INTEGER FLOAT BOOLEAN TIMESTAMP RECORD )
+          TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
+                      DATE RECORD )
 
           def initialize name, type, description: nil,
                          mode: :nullable, fields: nil

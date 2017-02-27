@@ -97,6 +97,102 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_schema_hash
+    {
+      "fields" => [
+        {
+          "name" => "name",
+          "type" => "STRING",
+          "mode" => "REQUIRED"
+        },
+        {
+          "name" => "age",
+          "type" => "INTEGER",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "score",
+          "type" => "FLOAT",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "active",
+          "type" => "BOOLEAN",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "avatar",
+          "type" => "BYTES",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "started_at",
+          "type" => "TIMESTAMP",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "duration",
+          "type" => "TIME",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "target_end",
+          "type" => "DATETIME",
+          "mode" => "NULLABLE"
+        },
+        {
+          "name" => "birthday",
+          "type" => "DATE",
+          "mode" => "NULLABLE"
+        }
+      ]
+    }
+  end
+
+  def random_data_rows
+    [
+      {
+        "f" => [
+          { "v" => "Heidi" },
+          { "v" => "36" },
+          { "v" => "7.65" },
+          { "v" => "true" },
+          { "v" => "aW1hZ2UgZGF0YQ==" },
+          { "v" => "1482670800.0" },
+          { "v" => "04:00:00" },
+          { "v" => "2017-01-01 00:00:00" },
+          { "v" => "1968-10-20" }
+        ]
+      },
+      {
+        "f" => [
+          { "v" => "Aaron" },
+          { "v" => "42" },
+          { "v" => "8.15" },
+          { "v" => "false" },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => "04:32:10.555555" },
+          { "v" => nil },
+          { "v" => nil }
+        ]
+      },
+      {
+        "f" => [
+          { "v" => "Sally" },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil },
+          { "v" => nil }
+        ]
+      }
+    ]
+  end
+
   def random_table_gapi dataset, id = nil, name = nil, description = nil, project_id = nil
     json = random_table_hash(dataset, id, name, description, project_id).to_json
     Google::Apis::BigqueryV2::Table.from_json json
@@ -118,28 +214,7 @@ class MockBigquery < Minitest::Spec
       },
       "friendlyName" => name,
       "description" => description,
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "REQUIRED"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "description" => "A score from 0.0 to 10.0"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN"
-          }
-        ]
-      },
+      "schema" => random_schema_hash,
       "numBytes" => "1000", # String per google/google-api-ruby-client#439
       "numRows" => "100",   # String per google/google-api-ruby-client#439
       "creationTime" => time_millis,
@@ -216,30 +291,7 @@ class MockBigquery < Minitest::Spec
       },
       "friendlyName" => name,
       "description" => description,
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          }
-        ]
-      },
+      "schema" => random_schema_hash,
       "creationTime" => time_millis,
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
@@ -342,7 +394,7 @@ class MockBigquery < Minitest::Spec
       ),
       dry_run: nil,
       max_results: nil,
-      query: "SELECT name, age, score, active FROM [some_project:some_dataset.users]",
+      query: "SELECT * FROM [some_project:some_dataset.users]",
       timeout_ms: 10000,
       use_query_cache: true,
       use_legacy_sql: nil,
@@ -361,56 +413,8 @@ class MockBigquery < Minitest::Spec
         "projectId" => project,
         "jobId" => "job9876543210"
       },
-      "schema" => {
-        "fields" => [
-          {
-            "name" => "name",
-            "type" => "STRING",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "age",
-            "type" => "INTEGER",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "score",
-            "type" => "FLOAT",
-            "mode" => "NULLABLE"
-          },
-          {
-            "name" => "active",
-            "type" => "BOOLEAN",
-            "mode" => "NULLABLE"
-          }
-        ]
-      },
-      "rows" => [
-        {
-          "f" => [
-            { "v" => "Heidi" },
-            { "v" => "36" },
-            { "v" => "7.65" },
-            { "v" => "true" }
-          ]
-        },
-        {
-          "f" => [
-            { "v" => "Aaron" },
-            { "v" => "42" },
-            { "v" => "8.15" },
-            { "v" => "false" }
-          ]
-        },
-        {
-          "f" => [
-            { "v" => "Sally" },
-            { "v" => nil },
-            { "v" => nil },
-            { "v" => nil }
-          ]
-        }
-      ],
+      "schema" => random_schema_hash,
+      "rows" => random_data_rows,
       "pageToken" => token,
       "totalRows" => 3,
       "totalBytesProcessed" => "456789", # String per google/google-api-ruby-client#439

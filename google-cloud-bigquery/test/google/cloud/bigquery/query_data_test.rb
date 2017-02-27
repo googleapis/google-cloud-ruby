@@ -25,16 +25,34 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data[0]["age"].must_equal 36
     query_data[0]["score"].must_equal 7.65
     query_data[0]["active"].must_equal true
+    query_data[0]["avatar"].must_be_kind_of StringIO
+    query_data[0]["avatar"].read.must_equal "image data"
+    query_data[0]["started_at"].must_equal Time.parse("2016-12-25 13:00:00 UTC")
+    query_data[0]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    query_data[0]["target_end"].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
+    query_data[0]["birthday"].must_equal Date.parse("1968-10-20")
+
     query_data[1].must_be_kind_of Hash
     query_data[1]["name"].must_equal "Aaron"
     query_data[1]["age"].must_equal 42
     query_data[1]["score"].must_equal 8.15
     query_data[1]["active"].must_equal false
+    query_data[1]["avatar"].must_equal nil
+    query_data[1]["started_at"].must_equal nil
+    query_data[1]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    query_data[1]["target_end"].must_equal nil
+    query_data[1]["birthday"].must_equal nil
+
     query_data[2].must_be_kind_of Hash
     query_data[2]["name"].must_equal "Sally"
     query_data[2]["age"].must_equal nil
     query_data[2]["score"].must_equal nil
     query_data[2]["active"].must_equal nil
+    query_data[2]["avatar"].must_equal nil
+    query_data[2]["started_at"].must_equal nil
+    query_data[2]["duration"].must_equal nil
+    query_data[2]["target_end"].must_equal nil
+    query_data[2]["birthday"].must_equal nil
   end
 
   it "knows the data metadata" do
@@ -55,22 +73,37 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data.raw[0][1].must_equal query_data[0]["age"].to_s
     query_data.raw[0][2].must_equal query_data[0]["score"].to_s
     query_data.raw[0][3].must_equal query_data[0]["active"].to_s
+    query_data.raw[0][4].must_equal Base64.strict_encode64(query_data[0]["avatar"].read)
+    query_data.raw[0][5].must_equal "1482670800.0"
+    query_data.raw[0][6].must_equal "04:00:00"
+    query_data.raw[0][7].must_equal "2017-01-01 00:00:00"
+    query_data.raw[0][8].must_equal "1968-10-20"
 
     query_data.raw[1][0].must_equal query_data[1]["name"].to_s
     query_data.raw[1][1].must_equal query_data[1]["age"].to_s
     query_data.raw[1][2].must_equal query_data[1]["score"].to_s
     query_data.raw[1][3].must_equal query_data[1]["active"].to_s
+    query_data.raw[1][4].must_equal nil
+    query_data.raw[1][5].must_equal nil
+    query_data.raw[1][6].must_equal "04:32:10.555555"
+    query_data.raw[1][7].must_equal nil
+    query_data.raw[1][8].must_equal nil
 
     query_data.raw[2][0].must_equal query_data[2]["name"].to_s
     query_data.raw[2][1].must_equal nil
     query_data.raw[2][2].must_equal nil
     query_data.raw[2][3].must_equal nil
+    query_data.raw[2][4].must_equal nil
+    query_data.raw[2][5].must_equal nil
+    query_data.raw[2][6].must_equal nil
+    query_data.raw[2][7].must_equal nil
+    query_data.raw[2][8].must_equal nil
   end
 
   it "knows schema, fields, and headers" do
     query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     query_data.fields.must_equal query_data.schema.fields
-    query_data.headers.must_equal ["name", "age", "score", "active"]
+    query_data.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
   end
 
   it "can get the job associated with the data" do

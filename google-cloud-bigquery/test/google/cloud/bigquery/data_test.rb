@@ -40,16 +40,34 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data[0]["age"].must_equal 36
     data[0]["score"].must_equal 7.65
     data[0]["active"].must_equal true
+    data[0]["avatar"].must_be_kind_of StringIO
+    data[0]["avatar"].read.must_equal "image data"
+    data[0]["started_at"].must_equal Time.parse("2016-12-25 13:00:00 UTC")
+    data[0]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    data[0]["target_end"].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
+    data[0]["birthday"].must_equal Date.parse("1968-10-20")
+
     data[1].must_be_kind_of Hash
     data[1]["name"].must_equal "Aaron"
     data[1]["age"].must_equal 42
     data[1]["score"].must_equal 8.15
     data[1]["active"].must_equal false
+    data[1]["avatar"].must_equal nil
+    data[1]["started_at"].must_equal nil
+    data[1]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    data[1]["target_end"].must_equal nil
+    data[1]["birthday"].must_equal nil
+
     data[2].must_be_kind_of Hash
     data[2]["name"].must_equal "Sally"
     data[2]["age"].must_equal nil
     data[2]["score"].must_equal nil
     data[2]["active"].must_equal nil
+    data[2]["avatar"].must_equal nil
+    data[2]["started_at"].must_equal nil
+    data[2]["duration"].must_equal nil
+    data[2]["target_end"].must_equal nil
+    data[2]["birthday"].must_equal nil
   end
 
   it "knows the data metadata" do
@@ -87,16 +105,31 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.raw[0][1].must_equal data[0]["age"].to_s
     data.raw[0][2].must_equal data[0]["score"].to_s
     data.raw[0][3].must_equal data[0]["active"].to_s
+    data.raw[0][4].must_equal Base64.strict_encode64(data[0]["avatar"].read)
+    data.raw[0][5].must_equal "1482670800.0"
+    data.raw[0][6].must_equal "04:00:00"
+    data.raw[0][7].must_equal "2017-01-01 00:00:00"
+    data.raw[0][8].must_equal "1968-10-20"
 
     data.raw[1][0].must_equal data[1]["name"].to_s
     data.raw[1][1].must_equal data[1]["age"].to_s
     data.raw[1][2].must_equal data[1]["score"].to_s
     data.raw[1][3].must_equal data[1]["active"].to_s
+    data.raw[1][4].must_equal nil
+    data.raw[1][5].must_equal nil
+    data.raw[1][6].must_equal "04:32:10.555555"
+    data.raw[1][7].must_equal nil
+    data.raw[1][8].must_equal nil
 
     data.raw[2][0].must_equal data[2]["name"].to_s
     data.raw[2][1].must_equal nil
     data.raw[2][2].must_equal nil
     data.raw[2][3].must_equal nil
+    data.raw[2][4].must_equal nil
+    data.raw[2][5].must_equal nil
+    data.raw[2][6].must_equal nil
+    data.raw[2][7].must_equal nil
+    data.raw[2][8].must_equal nil
   end
 
   it "knows the data metadata" do
@@ -271,56 +304,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     {
       "kind" => "bigquery#tableDataList",
       "etag" => "etag1234567890",
-      "rows" => [
-        {
-          "f" => [
-            {
-              "v" => "Heidi"
-            },
-            {
-              "v" => "36"
-            },
-            {
-              "v" => "7.65"
-            },
-            {
-              "v" => "true"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Aaron"
-            },
-            {
-              "v" => "42"
-            },
-            {
-              "v" => "8.15"
-            },
-            {
-              "v" => "false"
-            }
-          ]
-        },
-        {
-          "f" => [
-            {
-              "v" => "Sally"
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            },
-            {
-              "v" => nil
-            }
-          ]
-        }
-      ],
+      "rows" => random_data_rows,
       "pageToken" => token,
       "totalRows" => "3" # String per google/google-api-ruby-client#439
     }

@@ -30,7 +30,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         { mode: "REQUIRED", name: "name", type: "STRING"},
         { mode: "NULLABLE", name: "age", type: "INTEGER"},
         { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0"},
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN"}
+        { mode: "NULLABLE", name: "active", type: "BOOLEAN"},
+        { mode: "NULLABLE", name: "avatar", type: "BYTES"}
       ]
     }
   }
@@ -191,7 +192,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       Google::Cloud::Bigquery::Schema::Field.new("name", "STRING", mode: :required),
       Google::Cloud::Bigquery::Schema::Field.new("age", :INTEGER),
       Google::Cloud::Bigquery::Schema::Field.new("score", "float", description: "A score from 0.0 to 10.0"),
-      Google::Cloud::Bigquery::Schema::Field.new("active", :boolean)
+      Google::Cloud::Bigquery::Schema::Field.new("active", :boolean),
+      Google::Cloud::Bigquery::Schema::Field.new("avatar", :bytes)
     ]
     table = dataset.create_table table_id,
                                  name: table_name,
@@ -231,6 +233,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       t.schema.integer "age"
       t.schema.float "score", description: "A score from 0.0 to 10.0"
       t.schema.boolean "active"
+      t.schema.bytes "avatar"
     end
 
     mock.verify
@@ -255,7 +258,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", fields: [
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: []),
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: [])])
@@ -271,7 +278,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.integer "age"
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
+      schema.bytes "avatar"
       schema.timestamp "creation_date"
+      schema.time "duration"
+      schema.datetime "target_end"
+      schema.date "birthday"
       schema.record "cities_lived", mode: :repeated do |nested_schema|
         nested_schema.string "place"
         nested_schema.integer "number_of_years"\
@@ -312,6 +323,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         s.integer "age"
         s.float "score", description: "A score from 0.0 to 10.0"
         s.boolean "active"
+        s.bytes "avatar"
       end
     end
 
