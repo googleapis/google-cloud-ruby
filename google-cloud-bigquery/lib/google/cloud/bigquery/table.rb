@@ -1123,12 +1123,40 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
-          #     schema.datetime "duration", mode: :required
+          #     schema.datetime "target_end", mode: :required
           #   end
           #
           # @!group Schema
           def datetime name, description: nil, mode: :nullable
             schema.datetime name, description: description, mode: mode
+          end
+
+          ##
+          # Adds a date field to the schema.
+          #
+          # See {Schema#date}.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |schema|
+          #     schema.date "birthday", mode: :required
+          #   end
+          #
+          # @!group Schema
+          def date name, description: nil, mode: :nullable
+            schema.date name, description: description, mode: mode
           end
 
           ##

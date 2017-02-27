@@ -17,6 +17,7 @@ require "google/apis/bigquery_v2"
 require "stringio"
 require "base64"
 require "time"
+require "date"
 
 module Google
   module Cloud
@@ -77,6 +78,8 @@ module Google
                 Bigquery::Time.new value
               elsif type == "DATETIME"
                 ::Time.parse("#{value} UTC").to_datetime
+              elsif type == "DATE"
+                Date.parse value
               else
                 value
               end

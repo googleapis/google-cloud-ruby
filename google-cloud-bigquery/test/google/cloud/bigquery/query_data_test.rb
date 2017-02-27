@@ -30,6 +30,7 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data[0]["started_at"].must_equal Time.parse("2016-12-25 13:00:00 UTC")
     query_data[0]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     query_data[0]["target_end"].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
+    query_data[0]["birthday"].must_equal Date.parse("1968-10-20")
 
     query_data[1].must_be_kind_of Hash
     query_data[1]["name"].must_equal "Aaron"
@@ -40,6 +41,7 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data[1]["started_at"].must_equal nil
     query_data[1]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
     query_data[1]["target_end"].must_equal nil
+    query_data[1]["birthday"].must_equal nil
 
     query_data[2].must_be_kind_of Hash
     query_data[2]["name"].must_equal "Sally"
@@ -50,6 +52,7 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data[2]["started_at"].must_equal nil
     query_data[2]["duration"].must_equal nil
     query_data[2]["target_end"].must_equal nil
+    query_data[2]["birthday"].must_equal nil
   end
 
   it "knows the data metadata" do
@@ -74,6 +77,7 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data.raw[0][5].must_equal "1482670800.0"
     query_data.raw[0][6].must_equal "04:00:00"
     query_data.raw[0][7].must_equal "2017-01-01 00:00:00"
+    query_data.raw[0][8].must_equal "1968-10-20"
 
     query_data.raw[1][0].must_equal query_data[1]["name"].to_s
     query_data.raw[1][1].must_equal query_data[1]["age"].to_s
@@ -83,6 +87,7 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data.raw[1][5].must_equal nil
     query_data.raw[1][6].must_equal "04:32:10.555555"
     query_data.raw[1][7].must_equal nil
+    query_data.raw[1][8].must_equal nil
 
     query_data.raw[2][0].must_equal query_data[2]["name"].to_s
     query_data.raw[2][1].must_equal nil
@@ -92,12 +97,13 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data.raw[2][5].must_equal nil
     query_data.raw[2][6].must_equal nil
     query_data.raw[2][7].must_equal nil
+    query_data.raw[2][8].must_equal nil
   end
 
   it "knows schema, fields, and headers" do
     query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     query_data.fields.must_equal query_data.schema.fields
-    query_data.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end"]
+    query_data.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
   end
 
   it "can get the job associated with the data" do

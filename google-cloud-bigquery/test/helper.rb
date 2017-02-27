@@ -139,6 +139,11 @@ class MockBigquery < Minitest::Spec
           "name" => "target_end",
           "type" => "DATETIME",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "birthday",
+          "type" => "DATE",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -155,7 +160,8 @@ class MockBigquery < Minitest::Spec
           { "v" => "aW1hZ2UgZGF0YQ==" },
           { "v" => "1482670800.0" },
           { "v" => "04:00:00" },
-          { "v" => "2017-01-01 00:00:00" }
+          { "v" => "2017-01-01 00:00:00" },
+          { "v" => "1968-10-20" }
         ]
       },
       {
@@ -167,12 +173,14 @@ class MockBigquery < Minitest::Spec
           { "v" => nil },
           { "v" => nil },
           { "v" => "04:32:10.555555" },
+          { "v" => nil },
           { "v" => nil }
         ]
       },
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },
