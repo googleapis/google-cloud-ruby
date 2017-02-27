@@ -202,8 +202,7 @@ module Google
           if gapi.schema.nil?
             formatted_rows = []
           else
-            formatted_rows = format_rows gapi.rows,
-                                         gapi.schema.fields
+            formatted_rows = Convert.format_rows gapi.rows, gapi.schema.fields
           end
 
           data = new formatted_rows
