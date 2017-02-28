@@ -68,8 +68,7 @@ module Google
 
         ##
         # Returns API::BatchAnnotateImagesResponse
-        def annotate doc_grpc, syntax: false, entities: false, sentiment: false,
-                     encoding: nil
+        def annotate doc_grpc, syntax: false, entities: false, sentiment: false
           if syntax == false && entities == false && sentiment == false
             syntax = true
             entities = true
@@ -78,33 +77,29 @@ module Google
           features = V1::AnnotateTextRequest::Features.new(
             extract_syntax: syntax, extract_entities: entities,
             extract_document_sentiment: sentiment)
-          encoding = verify_encoding! encoding
           execute do
-            service.annotate_text doc_grpc, features, encoding,
+            service.annotate_text doc_grpc, features, default_encoding,
                                   options: default_options
           end
         end
 
-        def syntax doc_grpc, encoding: nil
-          encoding = verify_encoding! encoding
+        def syntax doc_grpc
           execute do
-            service.analyze_syntax doc_grpc, encoding,
+            service.analyze_syntax doc_grpc, default_encoding,
                                    options: default_options
           end
         end
 
-        def entities doc_grpc, encoding: nil
-          encoding = verify_encoding! encoding
+        def entities doc_grpc
           execute do
-            service.analyze_entities doc_grpc, encoding,
+            service.analyze_entities doc_grpc, default_encoding,
                                      options: default_options
           end
         end
 
-        def sentiment doc_grpc, encoding: nil
-          encoding = verify_encoding! encoding
+        def sentiment doc_grpc
           execute do
-            service.analyze_sentiment doc_grpc, encoding_type: encoding,
+            service.analyze_sentiment doc_grpc, encoding_type: default_encoding,
                                                 options: default_options
           end
         end
@@ -115,23 +110,25 @@ module Google
 
         protected
 
-        def verify_encoding! encoding
-          # TODO: verify encoding against V1::EncodingType
-          { "utf8"   => :UTF8,
-            "utf-8"  => :UTF8,
-            "utf16"  => :UTF16,
-            "utf-16" => :UTF16,
-            "utf32"  => :UTF32,
-            "utf-32" => :UTF32
-          }[String(encoding).downcase] || :UTF8
-        end
-
         def default_headers
           { "google-cloud-resource-prefix" => "projects/#{@project}" }
         end
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
+        end
+
+        def default_encoding
+          utf_16_encodings = [Encoding::UTF_16, Encoding::UTF_16BE,
+                              Encoding::UTF_16LE]
+          return :UTF16 if utf_16_encodings.include? Encoding.default_internal
+
+          utf_32_encodings = [Encoding::UTF_32, Encoding::UTF_32BE,
+                              Encoding::UTF_32LE]
+          return :UTF32 if utf_32_encodings.include? Encoding.default_internal
+
+          # The default encoding_type for all other system settings
+          :UTF8
         end
 
         def execute

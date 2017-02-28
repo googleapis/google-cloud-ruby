@@ -318,7 +318,7 @@ describe "Language (HTML/Storage URL)", :language do
       doc.must_be :html?
       doc.wont_be :text?
 
-      entities = doc.entities encoding: :UTF8
+      entities = doc.entities
 
       entities.language.must_equal "en"
 
