@@ -50,7 +50,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       assert_text_annotation annotation
     end
 
-    it "runs full annotation with content and TEXT format and en language and UTF16 encoding options" do
+    it "runs full annotation with content and TEXT format and en language options" do
       grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: text_content, type: :PLAIN_TEXT, language: "en")
       features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
@@ -58,10 +58,10 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF16, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
 
       language.service.mocked_service = mock
-      annotation = language.annotate text_content, format: :text, language: :en, encoding: :UTF16
+      annotation = language.annotate text_content, format: :text, language: :en
       mock.verify
 
       assert_text_annotation annotation
@@ -122,7 +122,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       assert_text_annotation annotation
     end
 
-    it "runs full annotation with document object using TEXT format and en language and UTF32 encoding options" do
+    it "runs full annotation with document object using TEXT format and en language options" do
       grpc_doc = Google::Cloud::Language::V1::Document.new(
         content: text_content, type: :PLAIN_TEXT, language: "en")
       features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
@@ -130,11 +130,11 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF32, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document text_content, format: :text, language: :en
-      annotation = language.annotate doc, encoding: "utf-32"
+      annotation = language.annotate doc
       mock.verify
 
       assert_text_annotation annotation
@@ -530,25 +530,6 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       assert_text_annotation annotation
     end
 
-    it "runs full annotation with document object using UTF32 encoding options" do
-      grpc_doc = Google::Cloud::Language::V1::Document.new(
-        gcs_content_uri: "gs://bucket/path.ext", type: :PLAIN_TEXT)
-      features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
-        extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-      grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
-
-      mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF32, options: default_options]
-
-      language.service.mocked_service = mock
-      gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
-      doc = language.document gcs_fake
-      annotation = language.annotate doc, encoding: :utf32
-      mock.verify
-
-      assert_text_annotation annotation
-    end
-
     describe "using #text helper" do
       it "runs full annotation using empty options" do
         grpc_doc = Google::Cloud::Language::V1::Document.new(
@@ -583,25 +564,6 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
         doc = language.document gcs_fake, language: :en
         annotation = language.annotate doc
-        mock.verify
-
-        assert_text_annotation annotation
-      end
-
-      it "runs full annotation using UTF16 encoding options" do
-        grpc_doc = Google::Cloud::Language::V1::Document.new(
-          gcs_content_uri: "gs://bucket/path.ext", type: :PLAIN_TEXT, language: "en")
-        features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new(
-          extract_syntax: true, extract_entities: true, extract_document_sentiment: true)
-        grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
-
-        mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF16, options: default_options]
-
-        language.service.mocked_service = mock
-        gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
-        doc = language.document gcs_fake, language: :en
-        annotation = language.annotate doc, encoding: "UTF-16"
         mock.verify
 
         assert_text_annotation annotation

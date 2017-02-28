@@ -53,14 +53,11 @@ module Google
     #
     # ## Creating documents
     #
-    # Cloud Natural Language API supports UTF-8, UTF-16, and UTF-32 encodings.
-    # (Ruby uses UTF-8 natively, which is the default sent to the API, so unless
-    # you're working with text processed in different platform, you should not
-    # need to set the encoding type.) Be aware that only English, Spanish, and
-    # Japanese language content are supported.
-    #
     # Use {Language::Project#document} to create documents for the Cloud Natural
-    # Language service. You can provide text or HTML content as a string:
+    # Language service. (The Cloud Natural Language API currently supports
+    # English, Spanish, and Japanese.)
+    #
+    # You can provide text or HTML content as a string:
     #
     # ```ruby
     # require "google/cloud/language"

@@ -207,9 +207,6 @@ module Google
         # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation] The results for the content analysis.
         #
@@ -228,13 +225,12 @@ module Google
         #   annotation.tokens.count #=> 13
         #
         def annotate content, sentiment: false, entities: false, syntax: false,
-                     format: nil, language: nil, encoding: nil
+                     format: nil, language: nil
           ensure_service!
           doc = document content, language: language, format: format
           grpc = service.annotate doc.to_grpc, sentiment: sentiment,
                                                entities: entities,
-                                               syntax: syntax,
-                                               encoding: encoding
+                                               syntax: syntax
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
@@ -254,9 +250,6 @@ module Google
         # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Syntax] The results for the content syntax
         #   analysis.
@@ -285,10 +278,10 @@ module Google
         #   token.label #=> :TITLE
         #   token.lemma #=> "Star"
         #
-        def syntax content, format: nil, language: nil, encoding: nil
+        def syntax content, format: nil, language: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.syntax doc.to_grpc, encoding: encoding
+          grpc = service.syntax doc.to_grpc
           Annotation::Syntax.from_grpc grpc
         end
 
@@ -305,9 +298,6 @@ module Google
         # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Entities] The results for the entities analysis.
         #
@@ -322,10 +312,10 @@ module Google
         #   entities = language.entities document
         #   entities.count #=> 3
         #
-        def entities content, format: :text, language: nil, encoding: nil
+        def entities content, format: :text, language: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.entities doc.to_grpc, encoding: encoding
+          grpc = service.entities doc.to_grpc
           Annotation::Entities.from_grpc grpc
         end
 
@@ -343,9 +333,6 @@ module Google
         # @param [String, Symbol] language The language of the document (if not
         #   specified, the language is automatically detected). Both ISO and
         #   BCP-47 language codes are accepted. Optional.
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
@@ -368,10 +355,10 @@ module Google
         #   sentence.sentiment.score #=> 0.699999988079071
         #   sentence.sentiment.magnitude #=> 0.699999988079071
         #
-        def sentiment content, format: :text, language: nil, encoding: nil
+        def sentiment content, format: :text, language: nil
           ensure_service!
           doc = document content, language: language, format: format
-          grpc = service.sentiment doc.to_grpc, encoding: encoding
+          grpc = service.sentiment doc.to_grpc
           Annotation::Sentiment.from_grpc grpc
         end
 

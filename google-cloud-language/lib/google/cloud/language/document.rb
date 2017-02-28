@@ -23,11 +23,6 @@ module Google
       #
       # Represents a document for the Language service.
       #
-      # Cloud Natural Language API supports UTF-8, UTF-16, and UTF-32 encodings.
-      # (Ruby uses UTF-8 natively, which is the default sent to the API, so
-      # unless you're working with text processed in different platform, you
-      # should not need to set the encoding type.)
-      #
       # Be aware that only English, Spanish, and Japanese language content are
       # supported.
       #
@@ -187,9 +182,6 @@ module Google
         # @param [Boolean] syntax Whether to perform syntactic analysis.
         #   Optional. The default is `false`. If every feature option is
         #   `false`, **all** features will be performed.
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation] The results of the content analysis.
         #
@@ -221,13 +213,11 @@ module Google
         #   annotation.sentences.count #=> 2
         #   annotation.tokens.count #=> 13
         #
-        def annotate sentiment: false, entities: false, syntax: false,
-                     encoding: nil
+        def annotate sentiment: false, entities: false, syntax: false
           ensure_service!
           grpc = service.annotate to_grpc, sentiment: sentiment,
                                            entities: entities,
-                                           syntax: syntax,
-                                           encoding: encoding
+                                           syntax: syntax
           Annotation.from_grpc grpc
         end
         alias_method :mark, :annotate
@@ -237,10 +227,6 @@ module Google
         # Syntactic analysis extracts linguistic information, breaking up the
         # given text into a series of sentences and tokens (generally, word
         # boundaries), providing further analysis on those tokens.
-        #
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Syntax] The results for the content analysis.
         #
@@ -268,9 +254,9 @@ module Google
         #   token.label #=> :TITLE
         #   token.lemma #=> "Star"
         #
-        def syntax encoding: nil
+        def syntax
           ensure_service!
-          grpc = service.syntax to_grpc, encoding: encoding
+          grpc = service.syntax to_grpc
           Annotation::Syntax.from_grpc grpc
         end
 
@@ -278,10 +264,6 @@ module Google
         # Entity analysis inspects the given text for known entities (proper
         # nouns such as public figures, landmarks, etc.) and returns information
         # about those entities.
-        #
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Entities] The results for the entities analysis.
         #
@@ -299,9 +281,9 @@ module Google
         #   entities.first.type #=> :WORK_OF_ART
         #   entities.first.mid #=> "/m/06mmr"
         #
-        def entities encoding: nil
+        def entities
           ensure_service!
-          grpc = service.entities to_grpc, encoding: encoding
+          grpc = service.entities to_grpc
           Annotation::Entities.from_grpc grpc
         end
 
@@ -310,10 +292,6 @@ module Google
         # prevailing emotional opinion within the text, especially to determine
         # a writer's attitude as positive, negative, or neutral. Currently, only
         # English is supported for sentiment analysis.
-        #
-        # @param [String, Symbol] encoding The encoding type used by the API to
-        #   calculate offsets. Acceptable values are: `utf8`, `utf16`, `utf32`.
-        #   The default value is `utf8`. Optional.
         #
         # @return [Annotation::Sentiment] The results for the sentiment
         #   analysis.
@@ -336,9 +314,9 @@ module Google
         #   sentence.sentiment.score #=> 0.699999988079071
         #   sentence.sentiment.magnitude #=> 0.699999988079071
         #
-        def sentiment encoding: nil
+        def sentiment
           ensure_service!
-          grpc = service.sentiment to_grpc, encoding: encoding
+          grpc = service.sentiment to_grpc
           Annotation::Sentiment.from_grpc grpc
         end
 

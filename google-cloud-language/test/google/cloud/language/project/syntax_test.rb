@@ -64,7 +64,7 @@ describe Google::Cloud::Language::Project, :syntax, :mock_language do
     assert_text_syntax syntax
   end
 
-  it "runs syntax with en language options" do
+  it "runs syntax with TEXT format and en language options" do
     grpc_doc = Google::Cloud::Language::V1::Document.new(
       content: text_content, type: :PLAIN_TEXT, language: "en")
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
@@ -73,37 +73,7 @@ describe Google::Cloud::Language::Project, :syntax, :mock_language do
     mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
 
     language.service.mocked_service = mock
-    syntax = language.syntax text_content, language: :en
-    mock.verify
-
-    assert_text_syntax syntax
-  end
-
-  it "runs syntax with UTF16 encoding options" do
-    grpc_doc = Google::Cloud::Language::V1::Document.new(
-      content: text_content, type: :PLAIN_TEXT)
-    grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
-
-    mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF16, options: default_options]
-
-    language.service.mocked_service = mock
-    syntax = language.syntax text_content, encoding: :UTF16
-    mock.verify
-
-    assert_text_syntax syntax
-  end
-
-  it "runs syntax with TEXT format and en language and UTF32 encoding options" do
-    grpc_doc = Google::Cloud::Language::V1::Document.new(
-      content: text_content, type: :PLAIN_TEXT, language: "en")
-    grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
-
-    mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF32, options: default_options]
-
-    language.service.mocked_service = mock
-    syntax = language.syntax text_content, format: :text, language: :en, encoding: "UTF32"
+    syntax = language.syntax text_content, format: :text, language: :en
     mock.verify
 
     assert_text_syntax syntax
@@ -124,7 +94,7 @@ describe Google::Cloud::Language::Project, :syntax, :mock_language do
     assert_html_syntax syntax
   end
 
-  it "runs syntax with en language options" do
+  it "runs syntax with HTML format and en language options" do
     grpc_doc = Google::Cloud::Language::V1::Document.new(
       content: text_content, type: :HTML, language: "en")
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_html_json
@@ -133,37 +103,7 @@ describe Google::Cloud::Language::Project, :syntax, :mock_language do
     mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
 
     language.service.mocked_service = mock
-    syntax = language.syntax text_content, format: :html, language: "en"
-    mock.verify
-
-    assert_html_syntax syntax
-  end
-
-  it "runs syntax with UTF16 encoding options" do
-    grpc_doc = Google::Cloud::Language::V1::Document.new(
-      content: text_content, type: :HTML)
-    grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_html_json
-
-    mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF16, options: default_options]
-
-    language.service.mocked_service = mock
-    syntax = language.syntax text_content, format: :html, encoding: "utf-16"
-    mock.verify
-
-    assert_html_syntax syntax
-  end
-
-  it "runs syntax with HTML format and en language and UTF32 encoding options" do
-    grpc_doc = Google::Cloud::Language::V1::Document.new(
-      content: text_content, type: :HTML, language: "en")
-    grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_html_json
-
-    mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF32, options: default_options]
-
-    language.service.mocked_service = mock
-    syntax = language.syntax text_content, format: :html, language: :en, encoding: "utf-32".to_sym
+    syntax = language.syntax text_content, format: :html, language: :en
     mock.verify
 
     assert_html_syntax syntax

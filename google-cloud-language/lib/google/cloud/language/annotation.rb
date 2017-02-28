@@ -240,9 +240,17 @@ module Google
         # Represents a piece of text including relative location.
         #
         # @attr_reader [String] text The content of the output text.
-        # @attr_reader [Integer] offset The API calculates the beginning offset
-        #   of the content in the original document according to the `encoding`
-        #   specified in the API request.
+        # @attr_reader [Integer] offset The beginning offset
+        #   of the content in the original document.
+        #
+        #   The API calculates the beginning offset according to the client
+        #   system's default encoding. In Ruby this defaults to UTF-8. To change
+        #   the offset calculation you will need to change Ruby's default
+        #   encoding. This is commonly done by setting
+        #   `Encoding.default_internal` to `Encoding::UTF_16` or
+        #   `Encoding::UTF_32`. If the system is configured to use an encoding
+        #   other than UTF-16 or UTF-32 the offset will be calculated using
+        #   UTF-8.
         #
         # @example
         #   require "google/cloud/language"
@@ -384,9 +392,17 @@ module Google
           alias_method :content, :text
 
           ##
-          # The API calculates the beginning offset of the content in the
-          # original document according to the `encoding` specified in the
-          # API request. See {TextSpan#offset}.
+          # The beginning offset of the content in the original document. See
+          # {TextSpan#offset}.
+          #
+          # The API calculates the beginning offset according to the client
+          # system's default encoding. In Ruby this defaults to UTF-8. To change
+          # the offset calculation you will need to change Ruby's default
+          # encoding. This is commonly done by setting
+          # `Encoding.default_internal` to `Encoding::UTF_16` or
+          # `Encoding::UTF_32`. If the system is configured to use an encoding
+          # other than UTF-16 or UTF-32 the offset will be calculated using
+          # UTF-8.
           #
           # @return [Integer]
           #
@@ -535,11 +551,31 @@ module Google
             @lemma            = lemma
           end
 
+          ##
+          # The content of the output text. See {TextSpan#text}.
+          #
+          # @return [String]
+          #
           def text
             @text_span.text
           end
           alias_method :content, :text
 
+          ##
+          # The beginning offset of the content in the original document. See
+          # {TextSpan#offset}.
+          #
+          # The API calculates the beginning offset according to the client
+          # system's default encoding. In Ruby this defaults to UTF-8. To change
+          # the offset calculation you will need to change Ruby's default
+          # encoding. This is commonly done by setting
+          # `Encoding.default_internal` to `Encoding::UTF_16` or
+          # `Encoding::UTF_32`. If the system is configured to use an encoding
+          # other than UTF-16 or UTF-32 the offset will be calculated using
+          # UTF-8.
+          #
+          # @return [Integer]
+          #
           def offset
             @text_span.offset
           end
@@ -940,9 +976,17 @@ module Google
             alias_method :content, :text
 
             ##
-            # The API calculates the beginning offset of the content in the
-            # original document according to the `encoding` specified in the
-            # API request. See {TextSpan#offset}.
+            # The beginning offset of the content in the original document. See
+            # {TextSpan#offset}.
+            #
+            # The API calculates the beginning offset according to the client
+            # system's default encoding. In Ruby this defaults to UTF-8. To
+            # change the offset calculation you will need to change Ruby's
+            # default encoding. This is commonly done by setting
+            # `Encoding.default_internal` to `Encoding::UTF_16` or
+            # `Encoding::UTF_32`. If the system is configured to use an encoding
+            # other than UTF-16 or UTF-32 the offset will be calculated using
+            # UTF-8.
             #
             # @return [Integer]
             #
