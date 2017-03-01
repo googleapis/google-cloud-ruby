@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.1 / 2017-03-01
+
+* Update GRPC header value sent to the Trace API.
+
 ### 0.23.0 / 2017-02-21
 
 * Fix GRPC retry bug
