@@ -1,5 +1,10 @@
 # Release History
 
+### 0.22.1 / 2017-03-01
+
+* No public API changes.
+* Update GRPC header value sent to the Vision API.
+
 ### 0.22.0 / 2017-02-21
 
 * Fix GRPC retry bug
