@@ -80,8 +80,9 @@
       "name": "google-cloud-datastore",
       "defaultService": "google/cloud/datastore",
       "versions": [
-        "v0.24.0",
+        "v0.24.1",
         "master",
+        "v0.24.0",
         "v0.23.0",
         "v0.21.0",
         "v0.20.1",
@@ -104,8 +105,9 @@
       "name": "google-cloud-error_reporting",
       "defaultService": "google/cloud/errorreporting/v1beta1",
       "versions": [
-        "v0.23.1",
+        "v0.23.2",
         "master",
+        "v0.23.1",
         "v0.23.0",
         "v0.22.0",
         "v0.21.2",
@@ -133,8 +135,9 @@
       "name": "google-cloud-logging",
       "defaultService": "google/cloud/logging",
       "versions": [
-        "v0.24.0",
+        "v0.24.1",
         "master",
+        "v0.24.0",
         "v0.23.2",
         "v0.23.1",
         "v0.23.0",
@@ -150,8 +153,9 @@
       "name": "google-cloud-monitoring",
       "defaultService": "google/cloud/monitoring/v3",
       "versions": [
-        "v0.23.0",
+        "v0.23.1",
         "master",
+        "v0.23.0",
         "v0.22.0",
         "v0.21.0"
       ]
@@ -161,8 +165,9 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
-        "v0.23.0",
+        "v0.23.1",
         "master",
+        "v0.23.0",
         "v0.22.0",
         "v0.21.0",
         "v0.20.1",
@@ -185,8 +190,9 @@
       "name": "google-cloud-speech",
       "defaultService": "google/cloud/speech",
       "versions": [
-        "v0.22.0",
+        "v0.22.1",
         "master",
+        "v0.22.0",
         "v0.21.1",
         "v0.21.0",
         "v0.20.0"
@@ -212,8 +218,9 @@
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",
       "versions": [
-        "v0.23.0",
+        "v0.23.1",
         "master",
+        "v0.23.0",
         "v0.22.0",
         "v0.21.0"
       ]
@@ -237,8 +244,9 @@
       "name": "google-cloud-vision",
       "defaultService": "google/cloud/vision",
       "versions": [
-        "v0.22.0",
+        "v0.22.1",
         "master",
+        "v0.22.0",
         "v0.21.1",
         "v0.21.0",
         "v0.20.2",

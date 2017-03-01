@@ -1,0 +1,1 @@
+{"id":"google/cloud/datastore/transactionerror","name":"TransactionError","title":["Google","Cloud","Datastore","TransactionError"],"description":"<h1 id=\"transactionerror\">TransactionError</h1>\n\n<p>General error for Transaction problems.</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/errors.rb#L39","resources":[],"examples":[],"methods":[]}
