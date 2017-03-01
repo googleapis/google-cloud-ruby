@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.1 / 2017-03-01
+
+* No public API changes.
+* Update GRPC header value sent to the Pub/Sub API.
+* Low level API adds new Protobuf types and GAPIC methods.
+
 ### 0.23.0 / 2017-02-21
 
 * Add emulator_host parameter
