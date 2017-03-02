@@ -713,6 +713,7 @@ module Google
         #
         def insert rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
+          rows = Convert.to_json_rows rows
           ensure_service!
           options = { skip_invalid: skip_invalid,
                       ignore_unknown: ignore_unknown }

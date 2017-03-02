@@ -47,45 +47,53 @@ module Google
         ##
         # @private
         def self.format_rows rows, fields
-          headers = Array(fields).map { |f| f.name }
-          field_types = Array(fields).map { |f| f.type }
-
           Array(rows).map do |row|
-            values = row.f.map { |f| f.v }
-            formatted_values = format_values field_types, values
-            Hash[headers.zip formatted_values]
+            # convert TableRow to hash to handle nested TableCell values
+            format_row row.to_h, fields
           end
         end
 
         ##
         # @private
-        def self.format_values field_types, values
-          field_types.zip(values).map do |type, value|
-            begin
-              if value.nil?
-                nil
-              elsif type == "INTEGER"
-                Integer value
-              elsif type == "FLOAT"
-                Float value
-              elsif type == "BOOLEAN"
-                (value == "true" ? true : (value == "false" ? false : nil))
-              elsif type == "BYTES"
-                StringIO.new Base64.decode64 value
-              elsif type == "TIMESTAMP"
-                ::Time.at Float(value)
-              elsif type == "TIME"
-                Bigquery::Time.new value
-              elsif type == "DATETIME"
-                ::Time.parse("#{value} UTC").to_datetime
-              elsif type == "DATE"
-                Date.parse value
-              else
-                value
-              end
-            rescue => e
-              value
+        def self.format_row row, fields
+          Hash[fields.zip(row[:f]).map { |f, v | [f.name, format_value(v, f)] }]
+        end
+
+        def self.format_value value, field
+          if value.nil?
+            nil
+          elsif value.empty?
+            nil
+          elsif value[:v].nil?
+            nil
+          elsif Array === value[:v]
+            value[:v].map { |v| format_value v, field }
+          elsif Hash === value[:v]
+            if value[:v].empty?
+              nil
+            else
+              format_row value[:v], field.fields
             end
+          elsif field.type == "STRING"
+            String value[:v]
+          elsif field.type == "INTEGER"
+            Integer value[:v]
+          elsif field.type == "FLOAT"
+            Float value[:v]
+          elsif field.type == "BOOLEAN"
+            (value[:v] == "true" ? true : (value[:v] == "false" ? false : nil))
+          elsif field.type == "BYTES"
+            StringIO.new Base64.decode64 value[:v]
+          elsif field.type == "TIMESTAMP"
+            ::Time.at Float(value[:v])
+          elsif field.type == "TIME"
+            Bigquery::Time.new value[:v]
+          elsif field.type == "DATETIME"
+            ::Time.parse("#{value[:v]} UTC").to_datetime
+          elsif field.type == "DATE"
+            Date.parse value[:v]
+          else
+            value[:v]
           end
         end
 
@@ -183,6 +191,9 @@ module Google
                 type: struct_param.parameter_type
               ), struct_param.parameter_value]
             end
+            struct_values = Hash[struct_pairs.map do |type, value|
+              [type.name, value]
+            end]
 
             return Google::Apis::BigqueryV2::QueryParameter.new(
               parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -190,11 +201,41 @@ module Google
                 struct_types: struct_pairs.map(&:first)
               ),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                struct_values: struct_pairs.map(&:last)
+                struct_values: struct_values
               )
             )
           else
             fail "A query parameter of type #{value.class} is not supported."
+          end
+        end
+
+        ##
+        # @private
+        def self.to_json_rows rows
+          rows.map do |row|
+            Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+          end
+        end
+        ##
+        # @private
+        def self.to_json_value value
+          if DateTime === value
+            value.strftime "%Y-%m-%d %H:%M:%S.%6N"
+          elsif Date === value
+            value.to_s
+          elsif ::Time === value
+            value.strftime "%Y-%m-%d %H:%M:%S.%6N%:z"
+          elsif Bigquery::Time === value
+            value.value
+          elsif value.respond_to?(:read) && value.respond_to?(:rewind)
+            value.rewind
+            Base64.strict_encode64(value.read.force_encoding("ASCII-8BIT"))
+          elsif Array === value
+            value.map { |v| to_json_value v }
+          elsif Hash === value
+            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }]
+          else
+            value
           end
         end
 

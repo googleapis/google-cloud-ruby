@@ -163,6 +163,63 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     empty_query_data.count.must_equal 0
   end
 
+  it "handles repeated scalars" do
+    schema_hash = {
+      fields: [
+          { name: "nums",   type: "INTEGER", mode: "REPEATED", fields: [] },
+          { name: "scores", type: "FLOAT",   mode: "REPEATED", fields: [] },
+          { name: "msgs",   type: "STRING",  mode: "REPEATED", fields: [] },
+          { name: "flags",  type: "BOOLEAN", mode: "REPEATED", fields: [] }
+        ]
+    }
+    rows_array = [
+      { f: [
+             { v: [{ v: "1" }, { v: "2" }, { v: "3" }] },
+             { v: [{ v: "100.0" }, { v: "99.9" }, { v: "0.001"}] },
+             { v: [{ v: "hello" }, { v: "world" }] },
+             { v: [{ v: "true" }, { v: "false" }] }
+           ]
+      }
+    ]
+
+    nested_query_data_gapi = Google::Apis::BigqueryV2::QueryResponse.from_json({ schema: schema_hash, rows: rows_array }.to_json)
+    nested_query_data = Google::Cloud::Bigquery::QueryData.from_gapi nested_query_data_gapi, bigquery.service
+
+    nested_query_data.count.must_equal 1
+
+    nested_query_data.must_equal [{"nums"=>[1, 2, 3], "scores"=>[100.0, 99.9, 0.001], "msgs"=>["hello", "world"], "flags"=>[true, false]}]
+  end
+
+  it "handles nested, repeated records" do
+    schema_hash = {
+      fields: [
+        { name: "name", type: "STRING", mode: "NULLABLE", fields: [] },
+        { name: "foo",  type: "RECORD", mode: "REPEATED", fields: [
+          { name: "bar", type: "STRING", mode: "NULLABLE", fields: []  },
+          { name: "baz", type: "RECORD", mode: "NULLABLE", fields: [
+            { name: "bif", type: "INTEGER", mode: "NULLABLE", fields: [] }
+          ]}
+        ]}
+      ]
+    }
+    rows_array = [
+      { f: [ { v: "mike"},
+             { v: [ { v: { f: [ { v: "hey" },   { v: { f: [ { v: "1" } ] } } ] } },
+                    { v: { f: [ { v: "world" }, { v: { f: [ { v: "2" } ] } } ] } }
+                  ]
+             }
+           ]
+      }
+    ]
+
+    nested_query_data_gapi = Google::Apis::BigqueryV2::QueryResponse.from_json({ schema: schema_hash, rows: rows_array }.to_json)
+    nested_query_data = Google::Cloud::Bigquery::QueryData.from_gapi nested_query_data_gapi, bigquery.service
+
+    nested_query_data.count.must_equal 1
+
+    nested_query_data.must_equal [{"name"=>"mike", "foo"=>[{"bar"=>"hey", "baz"=>{"bif"=>1}}, {"bar"=>"world", "baz"=>{"bif"=>2}}]}]
+  end
+
   def nil_query_data_gapi
     gapi = query_data_gapi
     gapi.schema = nil

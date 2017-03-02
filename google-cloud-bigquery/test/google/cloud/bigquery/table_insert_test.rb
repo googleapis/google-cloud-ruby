@@ -132,6 +132,57 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     result.error_count.must_equal 0
   end
 
+  it "properly formats values when inserting" do
+    inserting_row = {
+      id: 2,
+      name: "Gandalf",
+      age: 1000,
+      weight: 198.6,
+      is_magic: true,
+      scores: [100.0, 99.0, 0.001],
+      spells: [
+        { name: "Skydragon",
+          discovered_by: "Firebreather",
+          properties: [
+            { name: "Flying", power: 1.0 },
+            { name: "Creature", power: 1.0 },
+            { name: "Explodey", power: 11.0 }
+          ],
+          icon: File.open("acceptance/data/kitten-test-data.json", "rb"),
+          last_used: Time.parse("2015-10-31 23:59:56 UTC")
+        }
+      ],
+      tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),
+      next_vacation: Date.parse("2666-06-06"),
+      favorite_time: Time.parse("2001-12-19T23:59:59").utc.to_datetime
+    }
+    inserted_row = { "id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6,
+                    "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001],
+                    "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}],
+                    "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==",
+                    "last_used"=>"2015-10-31 23:59:56.000000+00:00"}],
+                    "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06",
+                    "favorite_time"=>"2001-12-20 06:59:59.000000"}
+    inserted_row_gapi = Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
+      insert_id: Digest::MD5.base64digest(inserted_row.inspect),
+      json: inserted_row
+    )
+    mock = Minitest::Mock.new
+    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+      rows: [inserted_row_gapi], ignore_unknown_values: nil, skip_invalid_rows: nil)
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [table.project_id, table.dataset_id, table.table_id, insert_req]
+    table.service.mocked_service = mock
+
+    result = table.insert [inserting_row]
+
+    mock.verify
+
+    result.must_be :success?
+    result.insert_count.must_equal 1
+    result.error_count.must_equal 0
+  end
+
   def success_table_insert_gapi
     Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(
       insert_errors: []
