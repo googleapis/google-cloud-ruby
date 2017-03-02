@@ -391,7 +391,7 @@ module Google
         # @!group Attributes
         #
         def headers
-          fields.map(&:name).map(&:to_sym)
+          schema.headers
         end
 
         ##

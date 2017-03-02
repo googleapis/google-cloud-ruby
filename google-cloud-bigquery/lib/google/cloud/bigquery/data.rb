@@ -66,6 +66,24 @@ module Google
         end
 
         ##
+        # The schema of the data.
+        def schema
+          table.schema
+        end
+
+        ##
+        # The fields of the data.
+        def fields
+          schema.fields
+        end
+
+        ##
+        # The name of the columns in the data.
+        def headers
+          schema.headers
+        end
+
+        ##
         # Whether there is a next page of data.
         #
         # @return [Boolean]

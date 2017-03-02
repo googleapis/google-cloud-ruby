@@ -87,6 +87,21 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.total.must_equal 3
   end
 
+  it "knows schema, fields, and headers" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+
+    data = table.data
+    mock.verify
+
+    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.fields.must_equal data.schema.fields
+    data.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+  end
+
   it "knows the raw, unformatted data" do
     skip
     mock = Minitest::Mock.new
@@ -131,23 +146,6 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.raw[2][6].must_equal nil
     data.raw[2][7].must_equal nil
     data.raw[2][8].must_equal nil
-  end
-
-  it "knows the data metadata" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
-
-    data = table.data
-    mock.verify
-
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.must_equal "bigquery#tableDataList"
-    data.etag.must_equal "etag1234567890"
-    data.token.must_equal "token1234567890"
-    data.total.must_equal 3
   end
 
   it "handles missing rows and fields" do

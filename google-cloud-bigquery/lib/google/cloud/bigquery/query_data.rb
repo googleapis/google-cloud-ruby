@@ -55,22 +55,24 @@ module Google
         ##
         # The schema of the data.
         def schema
-          Schema.from_gapi(@gapi.schema).freeze
+          @schema ||= begin
+            s = Schema.from_gapi(@gapi.schema)
+            # call fields so they will be available
+            s.fields
+            s.freeze
+          end
         end
 
         ##
         # The fields of the data.
         def fields
-          f = schema.fields
-          f = f.to_hash if f.respond_to? :to_hash
-          f = [] if f.nil?
-          f
+          schema.fields
         end
 
         ##
         # The name of the columns in the data.
         def headers
-          fields.map(&:name).map(&:to_sym)
+          schema.headers
         end
 
         ##
