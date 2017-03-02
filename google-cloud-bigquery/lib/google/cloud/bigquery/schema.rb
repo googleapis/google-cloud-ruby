@@ -276,12 +276,9 @@ module Google
         #   end
         #
         def record name, description: nil, mode: nil
-          fail ArgumentError, "nested RECORD type is not permitted" if @nested
           fail ArgumentError, "a block is required" unless block_given?
           empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
-          nested_schema = self.class.from_gapi(empty_schema).tap do |s|
-            s.instance_variable_set :@nested, true
-          end
+          nested_schema = self.class.from_gapi empty_schema
           yield nested_schema
           add_field name, :record, nested_schema.fields,
                     description: description, mode: mode

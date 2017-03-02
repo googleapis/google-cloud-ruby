@@ -207,23 +207,40 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     table.schema.fields.must_include field_string_required
     table.schema.fields.must_include field_record_repeated
-    # table.schema.fields.must_equal [field_string_required, field_record_repeated]
+    table.schema.fields.must_equal [field_string_required, field_record_repeated]
   end
 
-  it "raises when nesting fields more than one level deep" do
-    original_schema = table.schema.dup
+  it "allows nested records several levels deep" do
+    mock = Minitest::Mock.new
+    nested_schema_hash = {
+      fields: [
+        { name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] },
+        { name: "countries_lived", type: "RECORD", mode: "REPEATED", fields: [
+            { name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [
+                { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    nested_schema_gapi = Google::Apis::BigqueryV2::TableSchema.from_json nested_schema_hash.to_json
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = nested_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: nested_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
 
-    assert_raises ArgumentError do
-      table.schema do |schema|
-        schema.string "first_name", mode: :required
-        schema.record "countries_lived", mode: :repeated do |nested|
-          nested.record "cities_lived", mode: :repeated do |nested_2|
-            nested_2.integer "rank", description: "An integer value from 1 to 100"
-          end
+    table.schema replace: true do |schema|
+      schema.string "first_name", mode: :required
+      schema.record "countries_lived", mode: :repeated do |nested|
+        nested.record "cities_lived", mode: :repeated do |nested_2|
+          nested_2.integer "rank", description: "An integer value from 1 to 100"
         end
       end
     end
 
-    table.schema.must_equal original_schema
+    mock.verify
   end
 end
