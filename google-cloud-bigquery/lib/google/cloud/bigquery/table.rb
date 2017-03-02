@@ -856,6 +856,12 @@ module Google
           end
         end
 
+        def resolve_legacy_sql legacy_sql, standard_sql
+          return legacy_sql unless legacy_sql.nil?
+          return !standard_sql unless standard_sql.nil?
+          false
+        end
+
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < Table
