@@ -101,12 +101,20 @@ module Google
         #   Practices
         #
         # @param [String, IO, StringIO, Tempfile, Google::Cloud::Storage::File]
-        #   source A string file path or Cloud Storage URI of the form
+        #   source A string file path, publicly-accessible image HTTP/HTTPS URL,
+        #   or Cloud Storage URI of the form
         #   `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO,
         #   or Tempfile instance; or an instance of
         #   Google::Cloud::Storage::File.
         #
         # @return [Image] An image for the Vision service.
+        #
+        # @example With a publicly-accessible image HTTP/HTTPS URL:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   image = vision.image "https://www.example.com/images/landmark.jpg"
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/vision"
@@ -153,7 +161,11 @@ module Google
         #
         # @param [Image, Object] images The image or images to annotate. This
         #   can be an {Image} instance, or any other type that converts to an
-        #   {Image}. See {#image} for details.
+        #   {Image}: A string file path, publicly-accessible image HTTP/HTTPS
+        #   URL, or Cloud Storage URI of the form
+        #   `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO,
+        #   or Tempfile instance; or an instance of
+        #   Google::Cloud::Storage::File.
         # @param [Boolean, Integer] faces Whether to perform the facial
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_faces}, or may be provided here.
@@ -170,12 +182,19 @@ module Google
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_labels}, or may be provided here.
         #   Optional.
-        # @param [Boolean] text Whether to perform the text (OCR) feature.
+        # @param [Boolean] text Whether to perform the text detection feature
+        #   (OCR for shorter documents with sparse text). Optional.
+        # @param [Boolean] document Whether to perform the document text
+        #   detection feature (OCR for longer documents with dense text).
         #   Optional.
         # @param [Boolean] safe_search Whether to perform the safe search
         #   feature. Optional.
         # @param [Boolean] properties Whether to perform the image properties
         #   feature (currently, the image's dominant colors.) Optional.
+        # @param [Boolean, Integer] crop_hints Whether to perform the crop hints
+        #   feature. Optional.
+        # @param [Boolean, Integer] web Whether to perform the web annotation
+        #   feature. Optional.
         #
         # @yield [annotate] A block for requests that involve multiple feature
         #   configurations. See {Annotate#annotate}.
@@ -230,7 +249,7 @@ module Google
         #   annotations[0].faces.count #=> 1
         #   annotations[0].labels.count #=> 4
         #   annotations[1].landmarks.count #=> 1
-        #   annotations[2].text.words.count #=> 28
+        #   annotations[2].text.pages.count #=> 1
         #
         # @example Maximum result values can also be provided:
         #   require "google/cloud/vision"
@@ -245,12 +264,14 @@ module Google
         #   # ["stone carving", "ancient history", "statue"]
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
-                     labels: false, text: false, safe_search: false,
-                     properties: false
+                     labels: false, text: false, document: false,
+                     safe_search: false, properties: false, crop_hints: false,
+                     web: false
           a = Annotate.new self
           a.annotate(*images, faces: faces, landmarks: landmarks, logos: logos,
-                              labels: labels, text: text,
-                              safe_search: safe_search, properties: properties)
+                              labels: labels, text: text, document: document,
+                              safe_search: safe_search, properties: properties,
+                              crop_hints: crop_hints, web: web)
 
           yield a if block_given?
 

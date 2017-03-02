@@ -103,12 +103,19 @@ module Google
         #   detection feature. The maximum number of results is configured in
         #   {Google::Cloud::Vision.default_max_labels}, or may be provided here.
         #   Optional.
-        # @param [Boolean] text Whether to perform the text (OCR) feature.
+        # @param [Boolean] text Whether to perform the text detection feature
+        #   (OCR for shorter documents with sparse text). Optional.
+        # @param [Boolean] document Whether to perform the document text
+        #   detection feature (OCR for longer documents with dense text).
         #   Optional.
         # @param [Boolean] safe_search Whether to perform the safe search
         #   feature. Optional.
         # @param [Boolean] properties Whether to perform the image properties
         #   feature (currently, the image's dominant colors.) Optional.
+        # @param [Boolean, Integer] crop_hints Whether to perform the crop hints
+        #   feature. Optional.
+        # @param [Boolean, Integer] web Whether to perform the web annotation
+        #   feature. Optional.
         #
         # @return [Annotation, Array<Annotation>] The results for all image
         #   detections, returned as a single {Annotation} instance for one
@@ -133,13 +140,14 @@ module Google
         #   annotations[0].faces.count #=> 1
         #   annotations[0].labels.count #=> 4
         #   annotations[1].landmarks.count #=> 1
-        #   annotations[2].text.words.count #=> 28
+        #   annotations[2].text.pages.count #=> 1
         #
         def annotate *images, faces: false, landmarks: false, logos: false,
-                     labels: false, text: false, safe_search: false,
-                     properties: false
-          add_requests(images, faces, landmarks, logos, labels, text,
-                       safe_search, properties)
+                     labels: false, text: false, document: false,
+                     safe_search: false, properties: false, crop_hints: false,
+                     web: false
+          add_requests(images, faces, landmarks, logos, labels, text, document,
+                       safe_search, properties, crop_hints, web)
         end
 
         protected
@@ -150,9 +158,10 @@ module Google
         end
 
         def add_requests images, faces, landmarks, logos, labels, text,
-                         safe_search, properties
+                         document, safe_search, properties, crop_hints, web
           features = annotate_features(faces, landmarks, logos, labels, text,
-                                       safe_search, properties)
+                                       document, safe_search, properties,
+                                       crop_hints, web)
 
           Array(images).flatten.each do |img|
             i = image(img)
@@ -164,20 +173,34 @@ module Google
           end
         end
 
-        def annotate_features faces, landmarks, logos, labels, text,
-                              safe_search, properties
+        def annotate_features faces, landmarks, logos, labels, text, document,
+                              safe_search, properties, crop_hints, web
           return default_features if default_features?(
-            faces, landmarks, logos, labels, text, safe_search, properties)
+            faces, landmarks, logos, labels, text, document, safe_search,
+            properties, crop_hints, web)
 
-          faces, landmarks, logos, labels = validate_max_values(
-            faces, landmarks, logos, labels)
+          faces, landmarks, logos, labels, crop_hints, web = validate_max_args(
+            faces, landmarks, logos, labels, crop_hints, web)
 
+          f = value_features faces, landmarks, logos, labels, crop_hints, web
+          f + boolean_features(text, document, safe_search, properties)
+        end
+
+        def value_features faces, landmarks, logos, labels, crop_hints, web
           f = []
           f << feature(:FACE_DETECTION, faces) unless faces.zero?
           f << feature(:LANDMARK_DETECTION, landmarks) unless landmarks.zero?
           f << feature(:LOGO_DETECTION, logos) unless logos.zero?
           f << feature(:LABEL_DETECTION, labels) unless labels.zero?
+          f << feature(:CROP_HINTS, crop_hints) unless crop_hints.zero?
+          f << feature(:WEB_DETECTION, web) unless web.zero?
+          f
+        end
+
+        def boolean_features text, document, safe_search, properties
+          f = []
           f << feature(:TEXT_DETECTION, 1) if text
+          f << feature(:DOCUMENT_TEXT_DETECTION, 1) if document
           f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
           f << feature(:IMAGE_PROPERTIES, 1) if properties
           f
@@ -188,11 +211,12 @@ module Google
             type: type, max_results: max_results)
         end
 
-        def default_features? faces, landmarks, logos, labels, text,
-                              safe_search, properties
+        def default_features? faces, landmarks, logos, labels, text, document,
+                              safe_search, properties, crop_hints, web
           faces == false && landmarks == false && logos == false &&
-            labels == false && text == false && safe_search == false &&
-            properties == false
+            labels == false && text == false && document == false &&
+            safe_search == false && properties == false &&
+            crop_hints == false && web == false
         end
 
         def default_features
@@ -204,21 +228,28 @@ module Google
             feature(:LABEL_DETECTION,
                     Google::Cloud::Vision.default_max_labels),
             feature(:TEXT_DETECTION, 1),
+            feature(:DOCUMENT_TEXT_DETECTION, 1),
             feature(:SAFE_SEARCH_DETECTION, 1),
-            feature(:IMAGE_PROPERTIES, 1)
+            feature(:IMAGE_PROPERTIES, 1),
+            feature(:CROP_HINTS, Google::Cloud::Vision.default_max_crop_hints),
+            feature(:WEB_DETECTION, Google::Cloud::Vision.default_max_web)
           ]
         end
 
-        def validate_max_values faces, landmarks, logos, labels
-          faces     = validate_max_value(
+        def validate_max_args faces, landmarks, logos, labels, crop_hints, web
+          faces      = validate_max_value(
             faces, Google::Cloud::Vision.default_max_faces)
-          landmarks = validate_max_value(
+          landmarks  = validate_max_value(
             landmarks, Google::Cloud::Vision.default_max_landmarks)
-          logos     = validate_max_value(
+          logos      = validate_max_value(
             logos, Google::Cloud::Vision.default_max_logos)
-          labels    = validate_max_value(
+          labels     = validate_max_value(
             labels, Google::Cloud::Vision.default_max_labels)
-          [faces, landmarks, logos, labels]
+          crop_hints = validate_max_value(
+            crop_hints, Google::Cloud::Vision.default_max_crop_hints)
+          web        = validate_max_value(
+            web, Google::Cloud::Vision.default_max_web)
+          [faces, landmarks, logos, labels, crop_hints, web]
         end
 
         def validate_max_value value, default_value

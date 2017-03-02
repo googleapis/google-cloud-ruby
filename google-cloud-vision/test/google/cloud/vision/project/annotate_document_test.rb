@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
+describe Google::Cloud::Vision::Project, :annotate, :document, :mock_vision do
   let(:filepath) { "acceptance/data/text.png" }
 
-  it "detects text detection" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+  it "detects document text detection" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -29,7 +29,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.annotate filepath, text: true
+    annotation = vision.annotate filepath, document: true
     mock.verify
 
     annotation.wont_be :nil?
@@ -59,8 +59,8 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     annotation.text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
   end
 
-  it "detects text detection using mark alias" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+  it "detects document text detection using mark alias" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -71,15 +71,15 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.mark filepath, text: true
+    annotation = vision.mark filepath, document: true
     mock.verify
 
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
   end
 
-  it "detects text detection using detect alias" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+  it "detects document text detection using detect alias" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -90,15 +90,15 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.detect filepath, text: true
+    annotation = vision.detect filepath, document: true
     mock.verify
 
     annotation.wont_be :nil?
     annotation.text.wont_be :nil?
   end
 
-  it "detects text detection on multiple images" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+  it "detects document text detection on multiple images" do
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -113,7 +113,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     mock.expect :batch_annotate_images, texts_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotations = vision.annotate filepath, filepath, text: true
+    annotations = vision.annotate filepath, filepath, document: true
     mock.verify
 
     annotations.count.must_equal 2
@@ -122,7 +122,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
   end
 
   it "uses the default configuration when given a truthy value" do
-    feature = Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1)
+    feature = Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1)
     req = [
       Google::Cloud::Vision::V1::AnnotateImageRequest.new(
         image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
@@ -133,7 +133,7 @@ describe Google::Cloud::Vision::Project, :annotate, :text, :mock_vision do
     mock.expect :batch_annotate_images, text_response_grpc, [req, options: default_options]
 
     vision.service.mocked_service = mock
-    annotation = vision.annotate filepath, text: "totes"
+    annotation = vision.annotate filepath, document: "totes"
     mock.verify
 
     annotation.wont_be :nil?

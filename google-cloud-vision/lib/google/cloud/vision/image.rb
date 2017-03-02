@@ -25,6 +25,11 @@ module Google
       #
       # Represents an image for the Vision service.
       #
+      # An Image instance can be created from a string file path, publicly-
+      # accessible image HTTP/HTTPS URL, or Cloud Storage URI of the form
+      # `"gs://bucketname/path/to/image_filename"`; or a File, IO, StringIO, or
+      # Tempfile instance; or an instance of Google::Cloud::Storage::File.
+      #
       # See {Project#image}.
       #
       # The Cloud Vision API supports a variety of image file formats, including
@@ -52,7 +57,7 @@ module Google
       #   image.context.languages = ["en"]
       #
       #   text = image.text
-      #   text.words.count #=> 28
+      #   text.pages.count #=> 1
       #
       class Image
         # Returns the image context for the image, which accepts metadata values
@@ -107,7 +112,7 @@ module Google
         #   vertex.x #=> 28
         #   vertex.y #=> 40
         #
-        def faces max_results = Google::Cloud::Vision.default_max_faces
+        def faces max_results = Vision.default_max_faces
           ensure_vision!
           annotation = @vision.mark self, faces: max_results
           annotation.faces
@@ -146,7 +151,7 @@ module Google
         #   landmark.description #=> "Mount Rushmore"
         #   landmark.mid #=> "/m/019dvv"
         #
-        def landmarks max_results = Google::Cloud::Vision.default_max_landmarks
+        def landmarks max_results = Vision.default_max_landmarks
           ensure_vision!
           annotation = @vision.mark self, landmarks: max_results
           annotation.landmarks
@@ -185,7 +190,7 @@ module Google
         #   logo.description #=> "Google"
         #   logo.mid #=> "/m/0b34hf"
         #
-        def logos max_results = Google::Cloud::Vision.default_max_logos
+        def logos max_results = Vision.default_max_logos
           ensure_vision!
           annotation = @vision.mark self, logos: max_results
           annotation.logos
@@ -225,7 +230,7 @@ module Google
         #   label.description #=> "stone carving"
         #   label.mid #=> "/m/02wtjj"
         #
-        def labels max_results = Google::Cloud::Vision.default_max_labels
+        def labels max_results = Vision.default_max_labels
           ensure_vision!
           annotation = @vision.mark self, labels: max_results
           annotation.labels
@@ -242,7 +247,8 @@ module Google
         end
 
         ##
-        # Performs the `TEXT_DETECTION` (OCR) feature on the image.
+        # Performs the `TEXT_DETECTION` feature (OCR for shorter documents with
+        # sparse text) on the image.
         #
         # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
         #
@@ -256,14 +262,61 @@ module Google
         #
         #   text = image.text
         #
-        #   text.locale #=> "en"
-        #   text.words.count #=> 28
         #   text.text
         #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #
+        #   text.locale #=> "en"
+        #   text.words.count #=> 28
+        #   text.words[0].text #=> "Google"
+        #   text.words[0].bounds.count #=> 4
+        #   vertex = text.words[0].bounds.first
+        #   vertex.x #=> 13
+        #   vertex.y #=> 8
+        #
+        #   # Use `pages` to access a full structural representation
+        #   page = text.pages.first
+        #   page.blocks[0].paragraphs[0].words[0].symbols[0].text #=> "G"
+        #
         #
         def text
           ensure_vision!
           annotation = @vision.mark self, text: true
+          annotation.text
+        end
+
+        ##
+        # Performs the `DOCUMENT_TEXT_DETECTION` feature (OCR for longer
+        # documents with dense text) on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Annotation::Text] The results of document text (OCR)
+        #   detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/text.png"
+        #
+        #   text = image.document
+        #
+        #   text.text
+        #   # "Google Cloud Client for Ruby an idiomatic, intuitive... "
+        #
+        #   text.words[0].text #=> "Google"
+        #   text.words[0].bounds.count #=> 4
+        #   vertex = text.words[0].bounds.first
+        #   vertex.x #=> 13
+        #   vertex.y #=> 8
+        #
+        #   # Use `pages` to access a full structural representation
+        #   page = text.pages.first
+        #   page.blocks[0].paragraphs[0].words[0].symbols[0].text #=> "G"
+        #
+        def document
+          ensure_vision!
+          annotation = @vision.mark self, document: true
           annotation.text
         end
 
@@ -319,6 +372,68 @@ module Google
           annotation.properties
         end
 
+        ##
+        # Performs the `CROP_HINTS` feature on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Array<Annotation::CropHint>] The results of crop hints
+        #   detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   crop_hints = image.crop_hints
+        #   crop_hints.count #=> 1
+        #   crop_hint = crop_hints.first
+        #
+        #   crop_hint.bounds.count #=> 4
+        #   crop_hint.confidence #=> 1.0
+        #   crop_hint.importance_fraction #=> 1.0399999618530273
+        #
+        def crop_hints max_results = Vision.default_max_crop_hints
+          ensure_vision!
+          annotation = @vision.mark self, crop_hints: max_results
+          annotation.crop_hints
+        end
+
+        ##
+        # Performs the `WEB_ANNOTATION` feature on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Annotation::Web] The results of web detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   web = image.web
+        #
+        #   entity = web.entities.first
+        #   entity.entity_id #=> "/m/019dvv"
+        #   entity.score #=> 107.34591674804688
+        #   entity.description #=> "Mount Rushmore National Memorial"
+        #
+        #   full_matching_image = web.full_matching_images.first
+        #   full_matching_image.url #=> "http://example.com/images/123.jpg"
+        #   full_matching_image.score #=> 0.10226666927337646
+        #
+        #   page_with_matching_images = web.pages_with_matching_images.first
+        #   page_with_matching_images.url #=> "http://example.com/posts/123"
+        #   page_with_matching_images.score #=> 8.114753723144531
+        #
+        def web max_results = Vision.default_max_web
+          ensure_vision!
+          annotation = @vision.mark self, web: max_results
+          annotation.web
+        end
+
         # @private
         def to_s
           @to_s ||= begin
@@ -345,7 +460,7 @@ module Google
           elsif url?
             Google::Cloud::Vision::V1::Image.new(
               source: Google::Cloud::Vision::V1::ImageSource.new(
-                gcs_image_uri: @url))
+                image_uri: @url))
           else
             fail ArgumentError, "Unable to use Image with Vision service."
           end
@@ -361,8 +476,8 @@ module Google
           source = source.to_gs_url if source.respond_to? :to_gs_url
           # Everything should be a string from now on
           source = String source
-          # Create an Image from the Google Storage URL
-          return from_url(source, vision) if source.start_with? "gs://"
+          # Create an Image from a HTTP/HTTPS URL or Google Storage URL.
+          return from_url(source, vision) if url? source
           # Create an image from a file on the filesystem
           if File.file? source
             unless File.readable? source
@@ -386,16 +501,23 @@ module Google
         end
 
         ##
-        # @private New Image from an IO object.
+        # @private New Image from a HTTP/HTTPS URL or Google Storage URL.
         def self.from_url url, vision
           url = String url
-          unless url.start_with? "gs://"
-            fail ArgumentError, "Cannot create an Image without a Storage URL"
+          unless url? url
+            fail ArgumentError, "Cannot create an Image without a URL"
           end
           new.tap do |i|
             i.instance_variable_set :@url, url
             i.instance_variable_set :@vision, vision
           end
+        end
+
+        ##
+        # @private
+        def self.url? url
+          regex = %r{\A(http|https|gs):\/\/}
+          !regex.match(url).nil?
         end
 
         protected
@@ -421,7 +543,14 @@ module Google
         #   latin alphabet a hint is not needed. In rare cases, when the
         #   language of the text in the image is known in advance, setting
         #   this hint will help get better results (although it will hurt a
-        #   great deal if the hint is wrong).
+        #   great deal if the hint is wrong). For use with {Image#text}.
+        # @attr [Array<Float>] aspect_ratios Aspect ratios in floats,
+        #   representing the ratio of the width to the height of the image. For
+        #   example, if the desired aspect ratio is 4/3, the corresponding float
+        #   value should be 1.33333.  If not specified, the best possible crop
+        #   is returned. The number of provided aspect ratios is limited to a
+        #   maximum of 16; any aspect ratios provided after the 16th are
+        #   ignored. For use with {Image#crop_hints}.
         #
         # @example
         #   require "google/cloud/vision"
@@ -441,13 +570,14 @@ module Google
           # @return [Area] The lat/long pairs for `latLongRect`.
           attr_reader :area
 
-          attr_accessor :languages
+          attr_accessor :languages, :aspect_ratios
 
           ##
           # @private Creates a new Context instance.
           def initialize
             @area = Area.new
             @languages = []
+            @aspect_ratios = []
           end
 
           ##
@@ -456,7 +586,7 @@ module Google
           # @return [Boolean]
           #
           def empty?
-            area.empty? && languages.empty?
+            area.empty? && languages.empty? && aspect_ratios.empty?
           end
 
           ##
@@ -467,6 +597,12 @@ module Google
             args = {}
             args[:lat_long_rect] = area.to_grpc unless area.empty?
             args[:language_hints] = languages unless languages.empty?
+            unless aspect_ratios.empty?
+              crop_params = Google::Cloud::Vision::V1::CropHintsParams.new(
+                aspect_ratios: aspect_ratios
+              )
+              args[:crop_hints_params] = crop_params
+            end
             Google::Cloud::Vision::V1::ImageContext.new args
           end
 

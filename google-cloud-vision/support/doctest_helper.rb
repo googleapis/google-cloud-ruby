@@ -152,6 +152,8 @@ YARD::Doctest.configure do |doctest|
     Google::Cloud::Vision.default_max_labels = 100
     Google::Cloud::Vision.default_max_landmarks = 100
     Google::Cloud::Vision.default_max_logos = 100
+    Google::Cloud::Vision.default_max_crop_hints = 100
+    Google::Cloud::Vision.default_max_web = 100
     mock_vision do |mock|
       mock.expect :batch_annotate_images, labels_resp, annotate_args
     end
@@ -233,6 +235,18 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Vision::Image#crop_hints" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, crop_hints_resp, annotate_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Vision::Image#web" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, web_detection_resp, annotate_args
+    end
+  end
+
   # Annotate
 
   doctest.before "Google::Cloud::Vision::Annotate" do
@@ -285,6 +299,18 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Vision::Annotation#crop_hint" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, crop_hints_resp, annotate_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Vision::Annotation#web" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, web_detection_resp, annotate_args
+    end
+  end
+
   doctest.before "Google::Cloud::Vision::Annotation::Face" do
     mock_vision do |mock|
       mock.expect :batch_annotate_images, faces_resp, annotate_args
@@ -330,6 +356,18 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Vision::Annotation::Properties" do
     mock_vision do |mock|
       mock.expect :batch_annotate_images, properties_resp, annotate_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Vision::Annotation::CropHint" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, crop_hints_resp, annotate_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Vision::Annotation::Web" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, web_detection_resp, annotate_args
     end
   end
 
@@ -402,7 +440,8 @@ def text_resp
   Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
     responses: [
       Google::Cloud::Vision::V1::AnnotateImageResponse.new(
-        text_annotations: text_annotation_responses
+        text_annotations: text_annotation_responses,
+        full_text_annotation: full_text_annotation_response
       )
     ]
   )
@@ -423,6 +462,26 @@ def properties_resp
     responses: [
       Google::Cloud::Vision::V1::AnnotateImageResponse.new(
         image_properties_annotation: properties_annotation_response
+      )
+    ]
+  )
+end
+
+def crop_hints_resp
+  Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+    responses: [
+      Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+        crop_hints_annotation: crop_hints_annotation_response
+      )
+    ]
+  )
+end
+
+def web_detection_resp
+  Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+    responses: [
+      Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+        web_detection: web_detection_response
       )
     ]
   )
@@ -456,7 +515,8 @@ def multi_resp
         ]
       ),
       Google::Cloud::Vision::V1::AnnotateImageResponse.new(
-        text_annotations: text_annotation_responses
+        text_annotations: text_annotation_responses,
+        full_text_annotation: full_text_annotation_response
       )
     ]
   )
@@ -583,7 +643,43 @@ def text_annotation_responses
   ]
 end
 
-
+def full_text_annotation_response
+  Google::Cloud::Vision::V1::TextAnnotation.new(
+    text: "Google Cloud Client for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
+    pages: [
+      Google::Cloud::Vision::V1::Page.new(
+        property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil), width: 400, height: 80,
+        blocks: [
+          Google::Cloud::Vision::V1::Block.new(
+            property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(
+              detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+            bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+            paragraphs: [
+              Google::Cloud::Vision::V1::Paragraph.new(
+                property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(
+                  detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                words: 10.times.map do
+                  Google::Cloud::Vision::V1::Word.new(
+                    property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                    bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 53, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 53, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                    symbols: 6.times.map do
+                      Google::Cloud::Vision::V1::Symbol.new(
+                        property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                        bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 21, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 21, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                        text: "G"
+                      )
+                    end
+                  )
+                end
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
+end
 
 def safe_search_annotation_response
   Google::Cloud::Vision::V1::SafeSearchAnnotation.new(
@@ -630,5 +726,53 @@ def properties_annotation_response
                            pixel_fraction: 0.00064516132)
       ]
     )
+  )
+end
+
+def crop_hints_bounding_poly
+  Google::Cloud::Vision::V1::BoundingPoly.new(
+    vertices: [
+      Google::Cloud::Vision::V1::Vertex.new(x: 1, y: 0),
+      Google::Cloud::Vision::V1::Vertex.new(x: 511, y: 0),
+      Google::Cloud::Vision::V1::Vertex.new(x: 511, y: 383),
+      Google::Cloud::Vision::V1::Vertex.new(x: 0, y: 383)
+    ]
+  )
+end
+
+def crop_hints_annotation_response
+  Google::Cloud::Vision::V1::CropHintsAnnotation.new(
+    crop_hints: [
+      Google::Cloud::Vision::V1::CropHint.new(
+        bounding_poly: crop_hints_bounding_poly,
+        confidence: 1.0,
+        importance_fraction: 1.0399999618530273
+      )
+    ]
+  )
+end
+
+def web_detection_response
+  Google::Cloud::Vision::V1::WebDetection.new(
+    web_entities: [
+      Google::Cloud::Vision::V1::WebDetection::WebEntity.new(
+        entity_id: "/m/019dvv", score: 107.34591674804688, description: "Mount Rushmore National Memorial"
+      )
+    ],
+    full_matching_images: [
+      Google::Cloud::Vision::V1::WebDetection::WebImage.new(
+        url: "http://example.com/images/123.jpg", score: 0.10226666927337646
+      )
+    ],
+    partial_matching_images: [
+      Google::Cloud::Vision::V1::WebDetection::WebImage.new(
+        url: "http://img.example.com/img/tcs/t/pict/src/33/26/92/src_33269273.jpg", score: 0.13653333485126495
+      )
+    ],
+    pages_with_matching_images: [
+      Google::Cloud::Vision::V1::WebDetection::WebPage.new(
+        url: "http://example.com/posts/123", score: 8.114753723144531
+      )
+    ]
   )
 end

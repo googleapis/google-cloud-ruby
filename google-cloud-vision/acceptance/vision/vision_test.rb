@@ -23,6 +23,8 @@ describe "Vision", :vision do
   let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
 
+  let(:https_url)  { "https://raw.githubusercontent.com/GoogleCloudPlatform/google-cloud-ruby/master/acceptance/data/face.jpg" }
+
   let(:bucket)   { storage.bucket($vision_prefix) || storage.create_bucket($vision_prefix) }
   let(:gcs_file) { bucket.file(face_image) || bucket.create_file(face_image) }
   let(:gcs_url)  { gcs_file.to_gs_url }
@@ -38,6 +40,22 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :crop_hints?
+      annotation.must_be :web?
+    end
+
+    it "runs all annotations on an HTTPS URL" do
+      image = vision.image https_url
+      annotation = vision.annotate image
+
+      annotation.must_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.must_be :label?
+      annotation.wont_be :text?
+      annotation.must_be :safe_search?
+      annotation.must_be :properties?
+      annotation.must_be :web?
     end
 
     it "runs all annotations on a Storage File" do
@@ -50,6 +68,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :web?
     end
 
     it "runs all annotations on a GCS URL" do
@@ -63,6 +82,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
+      annotation.must_be :web?
     end
   end
 
@@ -86,6 +106,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       face = annotation.face
       annotation.face.must_be_kind_of Google::Cloud::Vision::Annotation::Face
@@ -213,6 +235,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       landmark = annotation.landmark
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -266,6 +290,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       logo = annotation.logo
       logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -317,6 +343,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       label = annotation.label
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -360,12 +388,15 @@ describe "Vision", :vision do
       annotation.must_be :text?
       annotation.wont_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       text = annotation.text
       text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
 
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
+
       text.words.count.must_equal 28
       text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
       text.words[0].text.must_be_kind_of String
@@ -374,6 +405,54 @@ describe "Vision", :vision do
       text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
       text.words[27].text.must_equal "Storage."
       text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+
+      text.pages.count.must_equal 1
+      text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+      text.pages[0].languages.count.must_equal 1
+      text.pages[0].languages[0].code.must_equal "en"
+      text.pages[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].break_type.must_be :nil?
+      text.pages[0].wont_be :prefix_break?
+      text.pages[0].width.must_equal 400
+      text.pages[0].height.must_equal 80
+
+      text.pages[0].blocks.count.must_equal 3
+      text.pages[0].blocks[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+
+      text.pages[0].blocks[0].paragraphs.count.must_equal 1
+      text.pages[0].blocks[0].paragraphs[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+
+      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 10
+      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].words[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].words[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols.count.must_equal 6
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[13, 8], [21, 8], [21, 23], [13, 23]]
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
     end
 
     it "detects text from multiple images" do
@@ -393,13 +472,118 @@ describe "Vision", :vision do
       image.context.languages = ["en"]
       annotation = vision.annotate image, text: true
 
-      annotation.text.text.must_include "Google Cloud Client Library for Ruby"
-      annotation.text.locale.must_equal "en"
-      annotation.text.words.count.must_equal 28
-      annotation.text.words[0].text.must_equal "Google"
-      annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
-      annotation.text.words[27].text.must_equal "Storage."
-      annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+      text = annotation.text
+      text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
+
+      text.text.must_include "Google Cloud Client Library for Ruby"
+      text.locale.must_equal "en"
+      text.words.count.must_equal 28
+      text.pages.count.must_equal 1
+    end
+  end
+
+  describe "document" do
+    it "detects text from an image with document option" do
+      annotation = vision.annotate text_image, document: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.must_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
+
+      text = annotation.text
+      text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
+
+      text.text.must_include "Google Cloud Client Library for Ruby"
+      text.locale.must_equal "en"
+
+      text.words.count.must_equal 33
+      text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
+      text.words[0].text.must_be_kind_of String
+      text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.words[0].text.must_equal "Google"
+      text.words[0].bounds.map(&:to_a).must_equal [[14, 7], [52, 7], [52, 19], [14, 19]]
+      text.words[27].text.must_equal "Cloud"
+      text.words[27].bounds.map(&:to_a).must_equal [[146, 58], [176, 58], [176, 69], [146, 69]]
+
+      text.pages.count.must_equal 1
+      text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+      text.pages[0].languages.count.must_equal 1
+      text.pages[0].languages[0].code.must_equal "en"
+      text.pages[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].break_type.must_be :nil?
+      text.pages[0].wont_be :prefix_break?
+      text.pages[0].width.must_equal 400
+      text.pages[0].height.must_equal 80
+
+      text.pages[0].blocks.count.must_equal 3
+      text.pages[0].blocks[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[14, 6], [381, 7], [381, 20], [14, 19]]
+
+      text.pages[0].blocks[0].paragraphs.count.must_equal 1
+      text.pages[0].blocks[0].paragraphs[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[14, 6], [381, 7], [381, 20], [14, 19]]
+
+      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 13
+      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].words[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].words[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[14, 7], [52, 7], [52, 19], [14, 19]]
+
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols.count.must_equal 6
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].code.must_equal "en"
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be_kind_of Float
+      # text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].break_type.must_be :nil?
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].wont_be :prefix_break?
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[14, 7], [20, 7], [20, 19], [14, 19]]
+      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
+    end
+
+    it "detects text from multiple images with document option" do
+      annotations = vision.annotate text_image,
+                             face_image,
+                             logo_image,
+                             document: true
+
+      annotations.count.must_equal 3
+      annotations[0].text.wont_be :nil?
+      annotations[1].text.must_be :nil?
+      annotations[2].text.wont_be :nil?
+    end
+
+    it "detects text from an image with context properties with document option" do
+      image = vision.image text_image
+      image.context.languages = ["en"]
+      annotation = vision.annotate image, document: true
+
+      text = annotation.text
+      text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
+
+      text.text.must_include "Google Cloud Client Library for Ruby"
+      text.locale.must_equal "en"
+      text.words.count.must_equal 33
+      text.pages.count.must_equal 1
     end
   end
 
@@ -414,6 +598,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       annotation.safe_search.wont_be :nil?
       annotation.safe_search.wont_be :adult?
@@ -458,6 +644,8 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.must_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
 
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
@@ -490,6 +678,121 @@ describe "Vision", :vision do
       annotations[0].properties.wont_be :nil?
       annotations[1].properties.wont_be :nil?
       annotations[2].properties.wont_be :nil?
+    end
+  end
+
+  describe "crop_hints" do
+    it "detects crop hints from an image" do
+      annotation = vision.annotate face_image, crop_hints: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.must_be :crop_hints?
+      annotation.wont_be :web?
+
+      crop_hints = annotation.crop_hints
+      crop_hints.count.must_equal 1
+      crop_hint = crop_hints.first
+      crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+      crop_hint.bounds.count.must_equal 4
+      crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      crop_hint.bounds.map(&:to_a).must_equal [[0, 0], [511, 0], [511, 383], [0, 383]]
+
+      crop_hint.confidence.must_be_kind_of Float
+      crop_hint.confidence.wont_be :zero?
+      crop_hint.importance_fraction.must_be_kind_of Float
+      crop_hint.importance_fraction.wont_be :zero?
+    end
+
+    it "detects crop hints from multiple images" do
+      annotations = vision.annotate text_image,
+                             face_image,
+                             logo_image,
+                             crop_hints: true
+
+      annotations.count.must_equal 3
+      annotations[0].crop_hints.wont_be :nil?
+      annotations[1].crop_hints.wont_be :nil?
+      annotations[2].crop_hints.wont_be :nil?
+    end
+
+    it "detects crop hints from an image with context aspect ratios" do
+      image = vision.image face_image
+      image.context.aspect_ratios = [1.0] # square
+      annotation = vision.annotate image, crop_hints: true
+
+      crop_hints = annotation.crop_hints
+      crop_hints.count.must_equal 1
+      crop_hint = crop_hints.first
+      crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+      crop_hint.bounds.count.must_equal 4
+      crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+      crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
+    end
+  end
+
+  describe "web" do
+    it "detects web matches from an image" do
+      annotation = vision.annotate landmark_image, web: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.must_be :web?
+
+      annotation.web.wont_be :nil?
+
+      annotation.web.entities.count.must_be :>, 0
+      annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+      annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
+      annotation.web.entities[0].score.must_be_kind_of Float
+      annotation.web.entities[0].score.must_be :>, 0.0
+      annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
+
+      annotation.web.full_matching_images.count.must_be :>, 0
+      annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+      annotation.web.full_matching_images[0].url.must_be_kind_of String
+      annotation.web.full_matching_images[0].url.wont_be :empty?
+      annotation.web.full_matching_images[0].score.must_be_kind_of Float
+      annotation.web.full_matching_images[0].score.must_be :>, 0.0
+
+      annotation.web.partial_matching_images.count.must_be :>, 0
+      annotation.web.partial_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+      annotation.web.partial_matching_images[0].url.must_be_kind_of String
+      annotation.web.partial_matching_images[0].url.wont_be :empty?
+      annotation.web.partial_matching_images[0].score.must_be_kind_of Float
+      annotation.web.partial_matching_images[0].score.must_be :>, 0.0
+
+      annotation.web.pages_with_matching_images.count.must_be :>, 0
+      annotation.web.pages_with_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
+      annotation.web.pages_with_matching_images[0].url.must_be_kind_of String
+      annotation.web.pages_with_matching_images[0].url.wont_be :empty?
+      annotation.web.pages_with_matching_images[0].score.must_be_kind_of Float
+      annotation.web.pages_with_matching_images[0].score.must_be :>, 0.0
+    end
+
+    it "detects web from multiple images" do
+      annotations = vision.annotate text_image,
+                             face_image,
+                             logo_image,
+                             web: 10
+
+      annotations.count.must_equal 3
+      annotations[0].web.wont_be :nil?
+      annotations[1].web.wont_be :nil?
+      annotations[2].web.wont_be :nil?
     end
   end
 
@@ -623,6 +926,50 @@ describe "Vision", :vision do
         properties.colors[9].rgb.must_equal "9cd6ff"
         properties.colors[9].score.must_be_close_to 0.00096750073
         properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+      end
+    end
+
+    describe "crop_hints" do
+      it "detects crop hints" do
+        crop_hints = vision.image(face_image).crop_hints
+
+        crop_hints.count.must_equal 1
+        crop_hint = crop_hints.first
+        crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+        crop_hint.bounds.count.must_equal 4
+        crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        crop_hint.bounds.map(&:to_a).must_equal [[0, 0], [511, 0], [511, 383], [0, 383]]
+
+        crop_hint.confidence.must_be_kind_of Float
+        crop_hint.confidence.wont_be :zero?
+        crop_hint.importance_fraction.must_be_kind_of Float
+        crop_hint.importance_fraction.wont_be :zero?
+      end
+
+      it "detects crop hints with context aspect ratios" do
+        image = vision.image face_image
+        image.context.aspect_ratios = [1.0] # square
+        crop_hints = image.crop_hints
+
+        crop_hints.count.must_equal 1
+        crop_hint = crop_hints.first
+        crop_hint.must_be_kind_of Google::Cloud::Vision::Annotation::CropHint
+
+        crop_hint.bounds.count.must_equal 4
+        crop_hint.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        crop_hint.bounds.map(&:to_a).must_equal [[55, 0], [444, 0], [444, 383], [55, 383]]
+      end
+    end
+
+    describe "web" do
+      it "detects web matches" do
+        web = vision.image(landmark_image).web 10
+
+        web.entities.count.must_equal 10
+        web.full_matching_images.count.must_equal 10
+        web.partial_matching_images.count.must_equal 10
+        web.pages_with_matching_images.count.must_equal 10
       end
     end
   end

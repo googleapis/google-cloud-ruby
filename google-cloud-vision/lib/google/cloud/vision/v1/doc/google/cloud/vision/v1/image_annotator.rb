@@ -16,9 +16,9 @@ module Google
   module Cloud
     module Vision
       module V1
-        # The <em>Feature</em> indicates what type of image detection task to perform.
         # Users describe the type of Google Cloud Vision API tasks to perform over
-        # images by using <em>Feature</em>s. Features encode the Cloud Vision API
+        # images by using *Feature*s. Each Feature indicates a type of image
+        # detection task to perform. Features encode the Cloud Vision API
         # vertical to operate on and the number of top-scoring results to return.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Vision::V1::Feature::Type]
@@ -47,21 +47,45 @@ module Google
             # Run OCR.
             TEXT_DETECTION = 5
 
-            # Run various computer vision models to compute image safe-search properties.
+            # Run dense text document OCR. Takes precedence when both
+            # DOCUMENT_TEXT_DETECTION and TEXT_DETECTION are present.
+            DOCUMENT_TEXT_DETECTION = 11
+
+            # Run computer vision models to compute image safe-search properties.
             SAFE_SEARCH_DETECTION = 6
 
-            # Compute a set of properties about the image (such as the image's dominant colors).
+            # Compute a set of image properties, such as the image's dominant colors.
             IMAGE_PROPERTIES = 7
+
+            # Run crop hints.
+            CROP_HINTS = 9
+
+            # Run web detection.
+            WEB_DETECTION = 10
           end
         end
 
         # External image source (Google Cloud Storage image location).
         # @!attribute [rw] gcs_image_uri
         #   @return [String]
-        #     Google Cloud Storage image URI. It must be in the following form:
-        #     +gs://bucket_name/object_name+. For more
-        #     details, please see: https://cloud.google.com/storage/docs/reference-uris.
-        #     NOTE: Cloud Storage object versioning is not supported!
+        #     NOTE: For new code +image_uri+ below is preferred.
+        #     Google Cloud Storage image URI, which must be in the following form:
+        #     +gs://bucket_name/object_name+ (for details, see
+        #     {Google Cloud Storage Request
+        #     URIs}[https://cloud.google.com/storage/docs/reference-uris]).
+        #     NOTE: Cloud Storage object versioning is not supported.
+        # @!attribute [rw] image_uri
+        #   @return [String]
+        #     Image URI which supports:
+        #     1) Google Cloud Storage image URI, which must be in the following form:
+        #     +gs://bucket_name/object_name+ (for details, see
+        #     {Google Cloud Storage Request
+        #     URIs}[https://cloud.google.com/storage/docs/reference-uris]).
+        #     NOTE: Cloud Storage object versioning is not supported.
+        #     2) Publicly accessible image HTTP/HTTPS URL.
+        #     This is preferred over the legacy +gcs_image_uri+ above. When both
+        #     +gcs_image_uri+ and +image_uri+ are specified, +image_uri+ takes
+        #     precedence.
         class ImageSource; end
 
         # Client image to perform Google Cloud Vision API tasks over.
@@ -72,27 +96,26 @@ module Google
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] source
         #   @return [Google::Cloud::Vision::V1::ImageSource]
-        #     Google Cloud Storage image location. If both 'content' and 'source'
-        #     are filled for an image, 'content' takes precedence and it will be
-        #     used for performing the image annotation request.
+        #     Google Cloud Storage image location. If both +content+ and +source+
+        #     are provided for an image, +content+ takes precedence and is
+        #     used to perform the image annotation request.
         class Image; end
 
         # A face annotation object contains the results of face detection.
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon around the face. The coordinates of the bounding box
-        #     are in the original image's scale, as returned in ImageParams.
+        #     are in the original image's scale, as returned in +ImageParams+.
         #     The bounding box is computed to "frame" the face in accordance with human
         #     expectations. It is based on the landmarker results.
         #     Note that one or more x and/or y coordinates may not be generated in the
-        #     BoundingPoly (the polygon will be unbounded) if only a partial face appears in
-        #     the image to be annotated.
+        #     +BoundingPoly+ (the polygon will be unbounded) if only a partial face
+        #     appears in the image to be annotated.
         # @!attribute [rw] fd_bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
-        #     This bounding polygon is tighter than the previous
-        #     <code>boundingPoly</code>, and
-        #     encloses only the skin part of the face. Typically, it is used to
-        #     eliminate the face from any image analysis that detects the
+        #     The +fd_bounding_poly+ bounding polygon is tighter than the
+        #     +boundingPoly+, and encloses only the skin part of the face. Typically, it
+        #     is used to eliminate the face from any image analysis that detects the
         #     "amount of skin" visible in an image. It is not based on the
         #     landmarker results, only on the initial face detection, hence
         #     the <code>fd</code> (face detection) prefix.
@@ -101,20 +124,18 @@ module Google
         #     Detected face landmarks.
         # @!attribute [rw] roll_angle
         #   @return [Float]
-        #     Roll angle. Indicates the amount of clockwise/anti-clockwise rotation of
-        #     the
-        #     face relative to the image vertical, about the axis perpendicular to the
-        #     face. Range [-180,180].
+        #     Roll angle, which indicates the amount of clockwise/anti-clockwise rotation
+        #     of the face relative to the image vertical about the axis perpendicular to
+        #     the face. Range [-180,180].
         # @!attribute [rw] pan_angle
         #   @return [Float]
-        #     Yaw angle. Indicates the leftward/rightward angle that the face is
-        #     pointing, relative to the vertical plane perpendicular to the image. Range
+        #     Yaw angle, which indicates the leftward/rightward angle that the face is
+        #     pointing relative to the vertical plane perpendicular to the image. Range
         #     [-180,180].
         # @!attribute [rw] tilt_angle
         #   @return [Float]
-        #     Pitch angle. Indicates the upwards/downwards angle that the face is
-        #     pointing
-        #     relative to the image's horizontal plane. Range [-180,180].
+        #     Pitch angle, which indicates the upwards/downwards angle that the face is
+        #     pointing relative to the image's horizontal plane. Range [-180,180].
         # @!attribute [rw] detection_confidence
         #   @return [Float]
         #     Detection confidence. Range [0, 1].
@@ -145,8 +166,9 @@ module Google
         class FaceAnnotation
           # A face-specific landmark (for example, a face feature).
           # Landmark positions may fall outside the bounds of the image
-          # when the face is near one or more edges of the image.
-          # Therefore it is NOT guaranteed that 0 <= x < width or 0 <= y < height.
+          # if the face is near one or more edges of the image.
+          # Therefore it is NOT guaranteed that +0 <= x < width+ or
+          # +0 <= y < height+.
           # @!attribute [rw] type
           #   @return [Google::Cloud::Vision::V1::FaceAnnotation::Landmark::Type]
           #     Face landmark type.
@@ -155,9 +177,9 @@ module Google
           #     Face landmark position.
           class Landmark
             # Face landmark (feature) type.
-            # Left and right are defined from the vantage of the viewer of the image,
-            # without considering mirror projections typical of photos. So, LEFT_EYE,
-            # typically is the person's right eye.
+            # Left and right are defined from the vantage of the viewer of the image
+            # without considering mirror projections typical of photos. So, +LEFT_EYE+,
+            # typically, is the person's right eye.
             module Type
               # Unknown face landmark detected. Should not be filled.
               UNKNOWN_LANDMARK = 0
@@ -270,10 +292,10 @@ module Google
         # Detected entity location information.
         # @!attribute [rw] lat_lng
         #   @return [Google::Type::LatLng]
-        #     Lat - long location coordinates.
+        #     lat/long location coordinates.
         class LocationInfo; end
 
-        # Arbitrary name/value pair.
+        # A +Property+ consists of a user-supplied name/value pair.
         # @!attribute [rw] name
         #   @return [String]
         #     Name of the property.
@@ -285,70 +307,70 @@ module Google
         # Set of detected entity features.
         # @!attribute [rw] mid
         #   @return [String]
-        #     Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
-        #     For more details on KG please see:
-        #     https://developers.google.com/knowledge-graph/
+        #     Opaque entity ID. Some IDs may be available in
+        #     {Google Knowledge Graph Search API}[https://developers.google.com/knowledge-graph/].
         # @!attribute [rw] locale
         #   @return [String]
         #     The language code for the locale in which the entity textual
-        #     <code>description</code> (next field) is expressed.
+        #     +description+ is expressed.
         # @!attribute [rw] description
         #   @return [String]
-        #     Entity textual description, expressed in its <code>locale</code> language.
+        #     Entity textual description, expressed in its +locale+ language.
         # @!attribute [rw] score
         #   @return [Float]
         #     Overall score of the result. Range [0, 1].
         # @!attribute [rw] confidence
         #   @return [Float]
         #     The accuracy of the entity detection in an image.
-        #     For example, for an image containing 'Eiffel Tower,' this field represents
-        #     the confidence that there is a tower in the query image. Range [0, 1].
+        #     For example, for an image in which the "Eiffel Tower" entity is detected,
+        #     this field represents the confidence that there is a tower in the query
+        #     image. Range [0, 1].
         # @!attribute [rw] topicality
         #   @return [Float]
         #     The relevancy of the ICA (Image Content Annotation) label to the
-        #     image. For example, the relevancy of 'tower' to an image containing
-        #     'Eiffel Tower' is likely higher than an image containing a distant towering
-        #     building, though the confidence that there is a tower may be the same.
-        #     Range [0, 1].
+        #     image. For example, the relevancy of "tower" is likely higher to an image
+        #     containing the detected "Eiffel Tower" than to an image containing a
+        #     detected distant towering building, even though the confidence that
+        #     there is a tower in each image may be the same. Range [0, 1].
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
-        #     Image region to which this entity belongs. Not filled currently
+        #     Image region to which this entity belongs. Currently not produced
         #     for +LABEL_DETECTION+ features. For +TEXT_DETECTION+ (OCR), +boundingPoly+s
         #     are produced for the entire text detected in an image region, followed by
         #     +boundingPoly+s for each word within the detected text.
         # @!attribute [rw] locations
         #   @return [Array<Google::Cloud::Vision::V1::LocationInfo>]
         #     The location information for the detected entity. Multiple
-        #     <code>LocationInfo</code> elements can be present since one location may
-        #     indicate the location of the scene in the query image, and another the
-        #     location of the place where the query image was taken. Location information
-        #     is usually present for landmarks.
+        #     +LocationInfo+ elements can be present because one location may
+        #     indicate the location of the scene in the image, and another location
+        #     may indicate the location of the place where the image was taken.
+        #     Location information is usually present for landmarks.
         # @!attribute [rw] properties
         #   @return [Array<Google::Cloud::Vision::V1::Property>]
-        #     Some entities can have additional optional <code>Property</code> fields.
-        #     For example a different kind of score or string that qualifies the entity.
+        #     Some entities may have optional user-supplied +Property+ (name/value)
+        #     fields, such a score or string that qualifies the entity.
         class EntityAnnotation; end
 
-        # Set of features pertaining to the image, computed by various computer vision
+        # Set of features pertaining to the image, computed by computer vision
         # methods over safe-search verticals (for example, adult, spoof, medical,
         # violence).
         # @!attribute [rw] adult
         #   @return [Google::Cloud::Vision::V1::Likelihood]
-        #     Represents the adult contents likelihood for the image.
+        #     Represents the adult content likelihood for the image.
         # @!attribute [rw] spoof
         #   @return [Google::Cloud::Vision::V1::Likelihood]
-        #     Spoof likelihood. The likelihood that an obvious modification
+        #     Spoof likelihood. The likelihood that an modification
         #     was made to the image's canonical version to make it appear
         #     funny or offensive.
         # @!attribute [rw] medical
         #   @return [Google::Cloud::Vision::V1::Likelihood]
-        #     Likelihood this is a medical image.
+        #     Likelihood that this is a medical image.
         # @!attribute [rw] violence
         #   @return [Google::Cloud::Vision::V1::Likelihood]
         #     Violence likelihood.
         class SafeSearchAnnotation; end
 
-        # Rectangle determined by min and max LatLng pairs.
+        # Rectangle determined by min and max +LatLng+ pairs.
         # @!attribute [rw] min_lat_lng
         #   @return [Google::Type::LatLng]
         #     Min lat/long pair.
@@ -357,8 +379,8 @@ module Google
         #     Max lat/long pair.
         class LatLongRect; end
 
-        # Color information consists of RGB channels, score and fraction of
-        # image the color occupies in the image.
+        # Color information consists of RGB channels, score, and the fraction of
+        # the image that the color occupies in the image.
         # @!attribute [rw] color
         #   @return [Google::Type::Color]
         #     RGB components of the color.
@@ -367,26 +389,56 @@ module Google
         #     Image-specific score for this color. Value in range [0, 1].
         # @!attribute [rw] pixel_fraction
         #   @return [Float]
-        #     Stores the fraction of pixels the color occupies in the image.
+        #     The fraction of pixels the color occupies in the image.
         #     Value in range [0, 1].
         class ColorInfo; end
 
         # Set of dominant colors and their corresponding scores.
         # @!attribute [rw] colors
         #   @return [Array<Google::Cloud::Vision::V1::ColorInfo>]
-        #     RGB color values, with their score and pixel fraction.
+        #     RGB color values with their score and pixel fraction.
         class DominantColorsAnnotation; end
 
-        # Stores image properties (e.g. dominant colors).
+        # Stores image properties, such as dominant colors.
         # @!attribute [rw] dominant_colors
         #   @return [Google::Cloud::Vision::V1::DominantColorsAnnotation]
         #     If present, dominant colors completed successfully.
         class ImageProperties; end
 
-        # Image context.
+        # Single crop hint that is used to generate a new crop when serving an image.
+        # @!attribute [rw] bounding_poly
+        #   @return [Google::Cloud::Vision::V1::BoundingPoly]
+        #     The bounding polygon for the crop region. The coordinates of the bounding
+        #     box are in the original image's scale, as returned in +ImageParams+.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Confidence of this being a salient region.  Range [0, 1].
+        # @!attribute [rw] importance_fraction
+        #   @return [Float]
+        #     Fraction of importance of this salient region with respect to the original
+        #     image.
+        class CropHint; end
+
+        # Set of crop hints that are used to generate new crops when serving images.
+        # @!attribute [rw] crop_hints
+        #   @return [Array<Google::Cloud::Vision::V1::CropHint>]
+        class CropHintsAnnotation; end
+
+        # Parameters for crop hints annotation request.
+        # @!attribute [rw] aspect_ratios
+        #   @return [Array<Float>]
+        #     Aspect ratios in floats, representing the ratio of the width to the height
+        #     of the image. For example, if the desired aspect ratio is 4/3, the
+        #     corresponding float value should be 1.33333.  If not specified, the
+        #     best possible crop is returned. The number of provided aspect ratios is
+        #     limited to a maximum of 16; any aspect ratios provided after the 16th are
+        #     ignored.
+        class CropHintsParams; end
+
+        # Image context and/or feature-specific parameters.
         # @!attribute [rw] lat_long_rect
         #   @return [Google::Cloud::Vision::V1::LatLongRect]
-        #     Lat/long rectangle that specifies the location of the image.
+        #     lat/long rectangle that specifies the location of the image.
         # @!attribute [rw] language_hints
         #   @return [Array<String>]
         #     List of languages to use for TEXT_DETECTION. In most cases, an empty value
@@ -396,8 +448,10 @@ module Google
         #     setting a hint will help get better results (although it will be a
         #     significant hindrance if the hint is wrong). Text detection returns an
         #     error if one or more of the specified languages is not one of the
-        #     {supported
-        #     languages}[https://cloud.google.com/translate/v2/translate-reference#supported_languages].
+        #     {supported languages}[https://cloud.google.com/vision/docs/languages].
+        # @!attribute [rw] crop_hints_params
+        #   @return [Google::Cloud::Vision::V1::CropHintsParams]
+        #     Parameters for crop hints annotation request.
         class ImageContext; end
 
         # Request for performing Google Cloud Vision API tasks over a user-provided
@@ -416,30 +470,43 @@ module Google
         # Response to an image annotation request.
         # @!attribute [rw] face_annotations
         #   @return [Array<Google::Cloud::Vision::V1::FaceAnnotation>]
-        #     If present, face detection completed successfully.
+        #     If present, face detection has completed successfully.
         # @!attribute [rw] landmark_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
-        #     If present, landmark detection completed successfully.
+        #     If present, landmark detection has completed successfully.
         # @!attribute [rw] logo_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
-        #     If present, logo detection completed successfully.
+        #     If present, logo detection has completed successfully.
         # @!attribute [rw] label_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
-        #     If present, label detection completed successfully.
+        #     If present, label detection has completed successfully.
         # @!attribute [rw] text_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
-        #     If present, text (OCR) detection completed successfully.
+        #     If present, text (OCR) detection or document (OCR) text detection has
+        #     completed successfully.
+        # @!attribute [rw] full_text_annotation
+        #   @return [Google::Cloud::Vision::V1::TextAnnotation]
+        #     If present, text (OCR) detection or document (OCR) text detection has
+        #     completed successfully.
+        #     This annotation provides the structural hierarchy for the OCR detected
+        #     text.
         # @!attribute [rw] safe_search_annotation
         #   @return [Google::Cloud::Vision::V1::SafeSearchAnnotation]
-        #     If present, safe-search annotation completed successfully.
+        #     If present, safe-search annotation has completed successfully.
         # @!attribute [rw] image_properties_annotation
         #   @return [Google::Cloud::Vision::V1::ImageProperties]
         #     If present, image properties were extracted successfully.
+        # @!attribute [rw] crop_hints_annotation
+        #   @return [Google::Cloud::Vision::V1::CropHintsAnnotation]
+        #     If present, crop hints have completed successfully.
+        # @!attribute [rw] web_detection
+        #   @return [Google::Cloud::Vision::V1::WebDetection]
+        #     If present, web detection has completed successfully.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, represents the error message for the operation.
-        #     Note that filled-in mage annotations are guaranteed to be
-        #     correct, even when <code>error</code> is non-empty.
+        #     Note that filled-in image annotations are guaranteed to be
+        #     correct, even when +error+ is set.
         class AnnotateImageResponse; end
 
         # Multiple image annotation requests are batched into a single service call.
@@ -454,25 +521,25 @@ module Google
         #     Individual responses to image annotation requests within the batch.
         class BatchAnnotateImagesResponse; end
 
-        # A bucketized representation of likelihood meant to give our clients highly
-        # stable results across model upgrades.
+        # A bucketized representation of likelihood, which is intended to give clients
+        # highly stable results across model upgrades.
         module Likelihood
           # Unknown likelihood.
           UNKNOWN = 0
 
-          # The image very unlikely belongs to the vertical specified.
+          # It is very unlikely that the image belongs to the specified vertical.
           VERY_UNLIKELY = 1
 
-          # The image unlikely belongs to the vertical specified.
+          # It is unlikely that the image belongs to the specified vertical.
           UNLIKELY = 2
 
-          # The image possibly belongs to the vertical specified.
+          # It is possible that the image belongs to the specified vertical.
           POSSIBLE = 3
 
-          # The image likely belongs to the vertical specified.
+          # It is likely that the image belongs to the specified vertical.
           LIKELY = 4
 
-          # The image very likely belongs to the vertical specified.
+          # It is very likely that the image belongs to the specified vertical.
           VERY_LIKELY = 5
         end
       end

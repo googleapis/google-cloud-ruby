@@ -209,6 +209,70 @@ class MockVision < Minitest::Spec
     ]
   end
 
+  def full_text_annotation_response
+    Google::Cloud::Vision::V1::TextAnnotation.new(
+      text: "Google Cloud Client for Ruby an idiomatic, intuitive, and\nnatural way for Ruby developers to integrate with Google Cloud\nPlatform services, like Cloud Datastore and Cloud Storage.\n",
+      pages: [
+        Google::Cloud::Vision::V1::Page.new(
+          property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil), width: 400, height: 80,
+          blocks: [
+            Google::Cloud::Vision::V1::Block.new(
+              property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(
+                detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+              bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+              paragraphs: [
+                Google::Cloud::Vision::V1::Paragraph.new(
+                  property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(
+                    detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                  bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 385, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                  words: [
+                    Google::Cloud::Vision::V1::Word.new(
+                      property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                      bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 53, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 53, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                      symbols: [
+                        Google::Cloud::Vision::V1::Symbol.new(
+                          property: Google::Cloud::Vision::V1::TextAnnotation::TextProperty.new(detected_languages: [Google::Cloud::Vision::V1::TextAnnotation::DetectedLanguage.new(language_code: "en", confidence: 0.0)], detected_break: nil),
+                          bounding_box: Google::Cloud::Vision::V1::BoundingPoly.new(vertices: [Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 21, y: 8), Google::Cloud::Vision::V1::Vertex.new(x: 21, y: 23), Google::Cloud::Vision::V1::Vertex.new(x: 13, y: 23)]),
+                          text: "G"
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  end
+
+  def text_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response
+        )
+      ]
+    )
+  end
+
+  def texts_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response
+        ),
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response
+        )
+      ]
+    )
+  end
+
   def safe_search_annotation_response
     Google::Cloud::Vision::V1::SafeSearchAnnotation.new(
       adult:    :VERY_UNLIKELY,
@@ -254,6 +318,95 @@ class MockVision < Minitest::Spec
                              pixel_fraction: 0.00064516132)
         ]
       )
+    )
+  end
+
+  def full_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          face_annotations: [face_annotation_response],
+          landmark_annotations: [landmark_annotation_response],
+          logo_annotations: [logo_annotation_response],
+          label_annotations: [label_annotation_response],
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response,
+          safe_search_annotation: safe_search_annotation_response,
+          image_properties_annotation: properties_annotation_response,
+          crop_hints_annotation: crop_hints_annotation_response,
+          web_detection: web_detection_response
+        )
+      ]
+    )
+  end
+
+  def crop_hints_annotation_response
+    Google::Cloud::Vision::V1::CropHintsAnnotation.new(
+      crop_hints: [
+        Google::Cloud::Vision::V1::CropHint.new(
+          bounding_poly: bounding_poly,
+          confidence: 1.0,
+          importance_fraction: 1.0399999618530273
+        )
+      ]
+    )
+  end
+
+  def crop_hints_annotation_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          crop_hints_annotation: crop_hints_annotation_response
+        )
+      ]
+    )
+  end
+
+  def web_detection_response
+    Google::Cloud::Vision::V1::WebDetection.new(
+      web_entities: [
+        Google::Cloud::Vision::V1::WebDetection::WebEntity.new(
+          entity_id: "/m/019dvv", score: 107.34591674804688, description: "Mount Rushmore National Memorial"
+        )
+      ],
+      full_matching_images: [
+        Google::Cloud::Vision::V1::WebDetection::WebImage.new(
+          url: "http://www.example.com/pds/trip_image/350", score: 0.10226666927337646
+        )
+      ],
+      partial_matching_images: [
+        Google::Cloud::Vision::V1::WebDetection::WebImage.new(
+          url: "http://img.example.com/img/tcs/t/pict/src/33/26/92/src_33269273.jpg", score: 0.13653333485126495
+        )
+      ],
+      pages_with_matching_images: [
+        Google::Cloud::Vision::V1::WebDetection::WebPage.new(
+          url: "https://www.youtube.com/watch?v=wCLdngIgofg", score: 8.114753723144531
+        )
+      ]
+    )
+  end
+
+  def web_detection_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_detection: web_detection_response
+        )
+      ]
+    )
+  end
+
+  def web_detections_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_detection: web_detection_response
+        ),
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          web_detection: web_detection_response
+        )
+      ]
     )
   end
 end

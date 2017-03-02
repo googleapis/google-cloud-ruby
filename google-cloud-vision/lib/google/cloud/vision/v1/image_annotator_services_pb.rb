@@ -24,9 +24,9 @@ module Google
     module Vision
       module V1
         module ImageAnnotator
-          # Service that performs Google Cloud Vision API detection tasks, such as face,
-          # landmark, logo, label, and text detection, over client images, and returns
-          # detected entities from the images.
+          # Service that performs Google Cloud Vision API detection tasks over client
+          # images, such as face, landmark, logo, label, and text detection. The
+          # ImageAnnotator service returns detected entities from the images.
           class Service
 
             include GRPC::GenericService

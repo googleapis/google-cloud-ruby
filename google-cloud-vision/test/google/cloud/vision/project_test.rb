@@ -75,8 +75,11 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :LOGO_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :LABEL_DETECTION, max_results: 100),
           Google::Cloud::Vision::V1::Feature.new(type: :TEXT_DETECTION, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :DOCUMENT_TEXT_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
-          Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1)
+          Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
+          Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100)
         ]
       )
     ]
@@ -103,11 +106,27 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.must_be :text?
     annotation.text.text.must_include "Google Cloud Client for Ruby"
     annotation.text.locale.must_equal "en"
+    # the `text_annotations` model
     annotation.text.words.count.must_equal 28
     annotation.text.words[0].text.must_equal "Google"
     annotation.text.words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
     annotation.text.words[27].text.must_equal "Storage."
     annotation.text.words[27].bounds.map(&:to_a).must_equal [[304, 59], [351, 59], [351, 74], [304, 74]]
+    # the `full_text_annotation` model
+    annotation.text.pages.count.must_equal 1
+    annotation.text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+    annotation.text.pages[0].languages.count.must_equal 1
+    annotation.text.pages[0].languages[0].code.must_equal "en"
+    annotation.text.pages[0].languages[0].confidence.must_equal 0.0
+    annotation.text.pages[0].break_type.must_be :nil?
+    annotation.text.pages[0].wont_be :prefix_break?
+    annotation.text.pages[0].width.must_equal 400
+    annotation.text.pages[0].height.must_equal 80
+    annotation.text.pages[0].blocks[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].bounds.map(&:to_a).must_equal [[13, 8], [385, 8], [385, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].bounds.map(&:to_a).must_equal [[13, 8], [53, 8], [53, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.map(&:to_a).must_equal [[13, 8], [21, 8], [21, 23], [13, 23]]
+    annotation.text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
 
     annotation.safe_search.wont_be :nil?
     annotation.must_be :safe_search?
@@ -136,6 +155,33 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     annotation.properties.colors[9].rgb.must_equal "9cd6ff"
     annotation.properties.colors[9].score.must_be_close_to 0.00096750073
     annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+
+    annotation.crop_hints[0].bounds.count.must_equal 4
+    annotation.crop_hints[0].bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+    annotation.crop_hints[0].bounds.map(&:to_a).must_equal [[1, 0], [295, 0], [295, 301], [1, 301]]
+    annotation.crop_hints[0].confidence.must_equal 1.0
+    annotation.crop_hints[0].importance_fraction.must_equal 1.0399999618530273
+
+    annotation.web.entities.count.must_equal 1
+    annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
+    annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
+    annotation.web.entities[0].score.must_equal 107.34591674804688
+    annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
+
+    annotation.web.full_matching_images.count.must_equal 1
+    annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+    annotation.web.full_matching_images[0].url.must_equal "http://www.example.com/pds/trip_image/350"
+    annotation.web.full_matching_images[0].score.must_equal 0.10226666927337646
+
+    annotation.web.partial_matching_images.count.must_equal 1
+    annotation.web.partial_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+    annotation.web.partial_matching_images[0].url.must_equal "http://img.example.com/img/tcs/t/pict/src/33/26/92/src_33269273.jpg"
+    annotation.web.partial_matching_images[0].score.must_equal 0.13653333485126495
+
+    annotation.web.pages_with_matching_images.count.must_equal 1
+    annotation.web.pages_with_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
+    annotation.web.pages_with_matching_images[0].url.must_equal "https://www.youtube.com/watch?v=wCLdngIgofg"
+    annotation.web.pages_with_matching_images[0].score.must_equal 8.114753723144531
   end
 
   describe "ImageContext" do
@@ -275,6 +321,33 @@ describe Google::Cloud::Vision::Project, :mock_vision do
       annotation.text.wont_be :nil?
     end
 
+    it "sends when annotating an image with crop hints aspect ratios in context" do
+      req = [
+        Google::Cloud::Vision::V1::AnnotateImageRequest.new(
+          image: Google::Cloud::Vision::V1::Image.new(content: File.read(filepath, mode: "rb")),
+          features: [
+            Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100)
+          ],
+          image_context: Google::Cloud::Vision::V1::ImageContext.new(
+            crop_hints_params: Google::Cloud::Vision::V1::CropHintsParams.new(
+              aspect_ratios: [1.0]
+            )
+          )
+        )
+      ]
+      mock = Minitest::Mock.new
+      mock.expect :batch_annotate_images, crop_hints_annotation_response_grpc, [req, options: default_options]
+
+      vision.service.mocked_service = mock
+      image = vision.image filepath
+      image.context.aspect_ratios = [1.0]
+      annotation = vision.annotate image, crop_hints: true
+      mock.verify
+
+      annotation.wont_be :nil?
+      annotation.crop_hints.wont_be :nil?
+    end
+
     it "sends when annotating an image with location and language hints in context" do
       req = [
         Google::Cloud::Vision::V1::AnnotateImageRequest.new(
@@ -326,28 +399,13 @@ describe Google::Cloud::Vision::Project, :mock_vision do
     )
   end
 
-  def full_response_grpc
-    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
-      responses: [
-        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
-          face_annotations: [face_annotation_response],
-          landmark_annotations: [landmark_annotation_response],
-          logo_annotations: [logo_annotation_response],
-          label_annotations: [label_annotation_response],
-          text_annotations: text_annotation_responses,
-          safe_search_annotation: safe_search_annotation_response,
-          image_properties_annotation: properties_annotation_response
-        )
-      ]
-    )
-  end
-
   def context_response_grpc
     Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
       responses: [
         Google::Cloud::Vision::V1::AnnotateImageResponse.new(
           face_annotations: [face_annotation_response],
-          text_annotations: text_annotation_responses
+          text_annotations: text_annotation_responses,
+          full_text_annotation: full_text_annotation_response
         )
       ]
     )
