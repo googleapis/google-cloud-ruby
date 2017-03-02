@@ -166,7 +166,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     data.etag.wont_be :nil?
     data.total.must_be :nil?
     data.count.wont_be :nil?
-    data.raw.wont_be :nil?
     data.all(request_limit: 2).each do |row|
       row.must_be_kind_of Hash
       [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }

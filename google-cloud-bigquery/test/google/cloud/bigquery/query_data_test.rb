@@ -65,42 +65,6 @@ describe Google::Cloud::Bigquery::QueryData, :mock_bigquery do
     query_data.cache_hit?.must_equal false
   end
 
-  it "knows the raw, unformatted data" do
-    skip
-    query_data.raw.wont_be :nil?
-    query_data.raw.count.must_equal query_data.count
-
-    query_data.raw[0][0].must_equal query_data[0]["name"].to_s
-    query_data.raw[0][1].must_equal query_data[0]["age"].to_s
-    query_data.raw[0][2].must_equal query_data[0]["score"].to_s
-    query_data.raw[0][3].must_equal query_data[0]["active"].to_s
-    query_data.raw[0][4].must_equal Base64.strict_encode64(query_data[0]["avatar"].read)
-    query_data.raw[0][5].must_equal "1482670800.0"
-    query_data.raw[0][6].must_equal "04:00:00"
-    query_data.raw[0][7].must_equal "2017-01-01 00:00:00"
-    query_data.raw[0][8].must_equal "1968-10-20"
-
-    query_data.raw[1][0].must_equal query_data[1]["name"].to_s
-    query_data.raw[1][1].must_equal query_data[1]["age"].to_s
-    query_data.raw[1][2].must_equal query_data[1]["score"].to_s
-    query_data.raw[1][3].must_equal query_data[1]["active"].to_s
-    query_data.raw[1][4].must_equal nil
-    query_data.raw[1][5].must_equal nil
-    query_data.raw[1][6].must_equal "04:32:10.555555"
-    query_data.raw[1][7].must_equal nil
-    query_data.raw[1][8].must_equal nil
-
-    query_data.raw[2][0].must_equal query_data[2]["name"].to_s
-    query_data.raw[2][1].must_equal nil
-    query_data.raw[2][2].must_equal nil
-    query_data.raw[2][3].must_equal nil
-    query_data.raw[2][4].must_equal nil
-    query_data.raw[2][5].must_equal nil
-    query_data.raw[2][6].must_equal nil
-    query_data.raw[2][7].must_equal nil
-    query_data.raw[2][8].must_equal nil
-  end
-
   it "knows schema, fields, and headers" do
     query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     query_data.fields.must_equal query_data.schema.fields

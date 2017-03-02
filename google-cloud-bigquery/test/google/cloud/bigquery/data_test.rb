@@ -102,52 +102,6 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
 
-  it "knows the raw, unformatted data" do
-    skip
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
-
-    data = table.data
-    mock.verify
-
-    data.class.must_equal Google::Cloud::Bigquery::Data
-
-    data.raw.wont_be :nil?
-    data.raw.count.must_equal data.count
-    data.raw[0][0].must_equal data[0]["name"].to_s
-    data.raw[0][1].must_equal data[0]["age"].to_s
-    data.raw[0][2].must_equal data[0]["score"].to_s
-    data.raw[0][3].must_equal data[0]["active"].to_s
-    data.raw[0][4].must_equal Base64.strict_encode64(data[0]["avatar"].read)
-    data.raw[0][5].must_equal "1482670800.0"
-    data.raw[0][6].must_equal "04:00:00"
-    data.raw[0][7].must_equal "2017-01-01 00:00:00"
-    data.raw[0][8].must_equal "1968-10-20"
-
-    data.raw[1][0].must_equal data[1]["name"].to_s
-    data.raw[1][1].must_equal data[1]["age"].to_s
-    data.raw[1][2].must_equal data[1]["score"].to_s
-    data.raw[1][3].must_equal data[1]["active"].to_s
-    data.raw[1][4].must_equal nil
-    data.raw[1][5].must_equal nil
-    data.raw[1][6].must_equal "04:32:10.555555"
-    data.raw[1][7].must_equal nil
-    data.raw[1][8].must_equal nil
-
-    data.raw[2][0].must_equal data[2]["name"].to_s
-    data.raw[2][1].must_equal nil
-    data.raw[2][2].must_equal nil
-    data.raw[2][3].must_equal nil
-    data.raw[2][4].must_equal nil
-    data.raw[2][5].must_equal nil
-    data.raw[2][6].must_equal nil
-    data.raw[2][7].must_equal nil
-    data.raw[2][8].must_equal nil
-  end
-
   it "handles missing rows and fields" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

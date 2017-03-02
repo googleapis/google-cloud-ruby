@@ -196,14 +196,6 @@ module Google
         end
 
         ##
-        # Represents Table Data as a list of positional values (array of
-        # arrays). No type conversion is made, e.g. numbers are formatted as
-        # strings.
-        def raw
-          Array(gapi.rows).map { |row| row.f.map(&:v) }
-        end
-
-        ##
         # @private New Data from a response object.
         def self.from_gapi gapi, table
           formatted_rows = Convert.format_rows(gapi.rows,
