@@ -28,10 +28,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     t = dataset.table table_id
     if t.nil?
       t = dataset.create_table table_id do |schema|
-        schema.integer "id", description: "id description", mode: :required
-        schema.string "breed", description: "breed description", mode: :required
-        schema.string "name", description: "name description", mode: :required
-        schema.timestamp "dob", description: "dob description", mode: :required
+        schema.integer  "id",     description: "id description",    mode: :required
+        schema.string    "breed", description: "breed description", mode: :required
+        schema.string    "name",  description: "name description",  mode: :required
+        schema.timestamp "dob",   description: "dob description",   mode: :required
       end
     end
     t
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
-    ["id", "breed", "name", "dob"].each { |k| fresh.headers.must_include k }
+    [:id, :breed, :name, :dob].each { |k| fresh.headers.must_include k }
 
     fields = fresh.schema.fields
     fields.each do |f|
@@ -164,7 +164,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     data.raw.wont_be :nil?
     data.all(request_limit: 2).each do |row|
       row.must_be_kind_of Hash
-      ["id", "breed", "name", "dob"].each { |k| row.keys.must_include k }
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
     end
     more_data = data.next
     more_data.wont_be :nil?
@@ -175,7 +175,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     #query_data.cache_hit?.must_equal false
     query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     query_data.fields.count.must_equal 4
-    ["id", "breed", "name", "dob"].each { |k| query_data.headers.must_include k }
+    [:id, :breed, :name, :dob].each { |k| query_data.headers.must_include k }
     query_data.count.wont_be :nil?
     query_data.all.each do |row|
       row.must_be_kind_of Hash

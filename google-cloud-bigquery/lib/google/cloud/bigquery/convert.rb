@@ -56,7 +56,10 @@ module Google
         ##
         # @private
         def self.format_row row, fields
-          Hash[fields.zip(row[:f]).map { |f, v | [f.name, format_value(v, f)] }]
+          row_pairs = fields.zip(row[:f]).map do |f, v|
+            [f.name.to_sym, format_value(v, f)]
+          end
+          Hash[row_pairs]
         end
 
         def self.format_value value, field
@@ -192,7 +195,7 @@ module Google
               ), struct_param.parameter_value]
             end
             struct_values = Hash[struct_pairs.map do |type, value|
-              [type.name, value]
+              [type.name.to_sym, value]
             end]
 
             return Google::Apis::BigqueryV2::QueryParameter.new(

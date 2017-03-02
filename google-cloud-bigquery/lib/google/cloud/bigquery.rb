@@ -75,7 +75,7 @@ module Google
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
     #
-    # table.headers #=> ["word", "word_count", "corpus", "corpus_date"]
+    # table.headers #=> [:word, :word_count, :corpus, :corpus_date]
     # table.rows_count #=> 164656
     # ```
     #
@@ -245,7 +245,7 @@ module Google
     # job.wait_until_done!
     # if !job.failed?
     #   job.query_results.each do |row|
-    #     puts row["word"]
+    #     puts row[:word]
     #   end
     # end
     # ```

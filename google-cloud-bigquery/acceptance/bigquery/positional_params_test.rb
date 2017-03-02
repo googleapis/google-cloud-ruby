@@ -20,7 +20,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal "hello"
+    rows.first[:value].must_equal "hello"
   end
 
   it "queries the data with an integer parameter" do
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal 999
+    rows.first[:value].must_equal 999
   end
 
   it "queries the data with a float parameter" do
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal 12.0
+    rows.first[:value].must_equal 12.0
   end
 
   it "queries the data with a boolean parameter" do
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal false
+    rows.first[:value].must_equal false
   end
 
   it "queries the data with a date parameter" do
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal Date.today
+    rows.first[:value].must_equal Date.today
   end
 
   it "queries the data with a datetime parameter" do
@@ -62,9 +62,9 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of DateTime
-    rows.first["value"].must_be_close_to now
-    # rows.first["value"].must_equal now.to_s
+    rows.first[:value].must_be_kind_of DateTime
+    rows.first[:value].must_be_close_to now
+    # rows.first[:value].must_equal now.to_s
   end
 
   it "queries the data with a timestamp parameter" do
@@ -73,8 +73,8 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of ::Time
-    rows.first["value"].must_be_close_to now
+    rows.first[:value].must_be_kind_of ::Time
+    rows.first[:value].must_be_close_to now
   end
 
   it "queries the data with a time parameter" do
@@ -82,8 +82,8 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of Google::Cloud::Bigquery::Time
-    rows.first["value"].value.must_equal "12:30:00"
+    rows.first[:value].must_be_kind_of Google::Cloud::Bigquery::Time
+    rows.first[:value].value.must_equal "12:30:00"
   end
 
   it "queries the data with a bytes parameter" do
@@ -91,8 +91,8 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of StringIO
-    rows.first["value"].read.must_equal "hello world!"
+    rows.first[:value].must_be_kind_of StringIO
+    rows.first[:value].read.must_equal "hello world!"
   end
 
   it "queries the data with an array of integers parameter" do
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal [1, 2, 3, 4]
+    rows.first[:value].must_equal [1, 2, 3, 4]
   end
 
   it "queries the data with an array of strings parameter" do
@@ -108,7 +108,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal ["foo", "bar", "baz"]
+    rows.first[:value].must_equal ["foo", "bar", "baz"]
   end
 
   it "queries the data with a struct parameter" do
@@ -116,6 +116,6 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first.must_equal({ "message" => "hello", "repeat" => 1 })
+    rows.first.must_equal({ message: "hello", repeat: 1 })
   end
 end

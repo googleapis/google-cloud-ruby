@@ -36,20 +36,20 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
     data.class.must_equal Google::Cloud::Bigquery::QueryData
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
-    data[0]["name"].must_equal "Heidi"
-    data[0]["age"].must_equal 36
-    data[0]["score"].must_equal 7.65
-    data[0]["active"].must_equal true
+    data[0][:name].must_equal "Heidi"
+    data[0][:age].must_equal 36
+    data[0][:score].must_equal 7.65
+    data[0][:active].must_equal true
     data[1].must_be_kind_of Hash
-    data[1]["name"].must_equal "Aaron"
-    data[1]["age"].must_equal 42
-    data[1]["score"].must_equal 8.15
-    data[1]["active"].must_equal false
+    data[1][:name].must_equal "Aaron"
+    data[1][:age].must_equal 42
+    data[1][:score].must_equal 8.15
+    data[1][:active].must_equal false
     data[2].must_be_kind_of Hash
-    data[2]["name"].must_equal "Sally"
-    data[2]["age"].must_equal nil
-    data[2]["score"].must_equal nil
-    data[2]["active"].must_equal nil
+    data[2][:name].must_equal "Sally"
+    data[2][:age].must_equal nil
+    data[2][:score].must_equal nil
+    data[2][:active].must_equal nil
     mock.verify
   end
 

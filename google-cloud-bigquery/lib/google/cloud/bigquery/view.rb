@@ -300,7 +300,7 @@ module Google
         # @!group Attributes
         #
         def headers
-          fields.map(&:name)
+          fields.map(&:name).map(&:to_sym)
         end
 
         ##
