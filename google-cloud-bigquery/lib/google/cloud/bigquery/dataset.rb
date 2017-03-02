@@ -407,6 +407,14 @@ module Google
         #   is referenced.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect. Optional. The default value is true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::View]
         #
@@ -416,7 +424,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.create_view "my_view",
-        #             "SELECT name, age FROM [proj:dataset.users]"
+        #             "SELECT name, age FROM proj.dataset.users"
         #
         # @example A name and description can be provided:
         #   require "google/cloud/bigquery"
@@ -424,12 +432,13 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   view = dataset.create_view "my_view",
-        #             "SELECT name, age FROM [proj:dataset.users]",
+        #             "SELECT name, age FROM proj.dataset.users",
         #             name: "My View", description: "This is my view"
         #
         # @!group Table
         #
-        def create_view table_id, query, name: nil, description: nil
+        def create_view table_id, query, name: nil, description: nil,
+                        standard_sql: nil, legacy_sql: nil
           new_view_opts = {
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id, dataset_id: dataset_id, table_id: table_id
@@ -437,7 +446,8 @@ module Google
             friendly_name: name,
             description: description,
             view: Google::Apis::BigqueryV2::ViewDefinition.new(
-              query: query
+              query: query,
+              use_legacy_sql: resolve_legacy_sql(legacy_sql, standard_sql)
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
@@ -585,15 +595,6 @@ module Google
         # @param [Boolean] flatten Flattens all nested and repeated fields in
         #   the query results. The default value is `true`. `large_results`
         #   parameter must be `true` if this is set to `false`.
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
-        #   [legacy
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect for this query. If set to false, the query will use
-        #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
@@ -603,7 +604,16 @@ module Google
         #   dialect. When set to true, the values of `large_results` and
         #   `flatten` are ignored; the query will be run as if `large_results`
         #   is true and `flatten` is false. Optional. The default value is
-        #   false.
+        #   true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -621,13 +631,13 @@ module Google
         #     end
         #   end
         #
-        # @example Query using standard SQL:
+        # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM my_table",
-        #                            standard_sql: true
+        #                            legacy_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -741,15 +751,6 @@ module Google
         #   whenever tables in the query are modified. The default value is
         #   true. For more information, see [query
         #   caching](https://developers.google.com/bigquery/querying-data).
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
-        #   [legacy
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect for this query. If set to false, the query will use
-        #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
@@ -759,7 +760,16 @@ module Google
         #   dialect. When set to true, the values of `large_results` and
         #   `flatten` are ignored; the query will be run as if `large_results`
         #   is true and `flatten` is false. Optional. The default value is
-        #   false.
+        #   true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -774,13 +784,13 @@ module Google
         #     puts row["name"]
         #   end
         #
-        # @example Query using standard SQL:
+        # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name FROM my_table",
-        #                         standard_sql: true
+        #                         legacy_sql: true
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -813,7 +823,7 @@ module Google
         # @!group Data
         #
         def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
-                  cache: true, legacy_sql: nil, standard_sql: nil
+                  cache: true, standard_sql: nil, legacy_sql: nil
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params }
@@ -839,6 +849,12 @@ module Google
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
+        end
+
+        def resolve_legacy_sql legacy_sql, standard_sql
+          return legacy_sql unless legacy_sql.nil?
+          return !standard_sql unless standard_sql.nil?
+          false
         end
 
         def patch_gapi! *attributes

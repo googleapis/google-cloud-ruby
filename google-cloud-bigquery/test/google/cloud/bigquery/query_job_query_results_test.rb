@@ -184,7 +184,7 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
   def query_job_hash
     hash = random_job_hash("job9876543210")
     hash["configuration"]["query"] = {
-      "query" => "SELECT name, age, score, active FROM [users]",
+      "query" => "SELECT name, age, score, active FROM `users`",
       "destinationTable" => {
         "projectId" => "target_project_id",
         "datasetId" => "target_dataset_id",
@@ -201,7 +201,7 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true,
-      "useLegacySql" => nil,
+      "useLegacySql" => false,
     }
     hash
   end

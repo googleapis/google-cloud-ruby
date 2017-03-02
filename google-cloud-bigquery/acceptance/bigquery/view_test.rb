@@ -15,8 +15,8 @@
 require "bigquery_helper"
 
 describe Google::Cloud::Bigquery, :bigquery do
-  let(:publicdata_query) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 100" }
-  let(:publicdata_query_2) { "SELECT url FROM [publicdata:samples.github_nested] LIMIT 50" }
+  let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
+  let(:publicdata_query_2) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 50" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigquery, :bigquery do
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
-    fresh.query_id.must_equal "[#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}]"
+    fresh.query_id.must_equal "`#{bigquery.project}.#{dataset.dataset_id}.#{view.table_id}`"
     fresh.etag.wont_be :nil?
     fresh.api_url.wont_be :nil?
     fresh.query_id.must_equal view.query_id

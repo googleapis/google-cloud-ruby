@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigquery do
-  let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM [some_project:some_dataset.users]" }
+  let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM `some_project.some_dataset.users`" }
 
   let(:dataset_id) { "my_dataset" }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }

@@ -473,6 +473,7 @@ module Google
         def resolve_legacy_sql legacy_sql, standard_sql
           return legacy_sql unless legacy_sql.nil?
           return !standard_sql unless standard_sql.nil?
+          false
         end
 
         ##

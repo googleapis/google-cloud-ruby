@@ -45,8 +45,8 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.must_be :large_results?
     job.must_be :cache?
     job.must_be :flatten?
-    job.must_be :legacy_sql?
-    job.wont_be :standard_sql?
+    job.wont_be :legacy_sql?
+    job.must_be :standard_sql?
   end
 
   it "knows its statistics data" do
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
   def query_job_hash
     hash = random_job_hash
     hash["configuration"]["query"] = {
-      "query" => "SELECT name, age, score, active FROM [users]",
+      "query" => "SELECT name, age, score, active FROM `users`",
       "destinationTable" => {
         "projectId" => "target_project_id",
         "datasetId" => "target_dataset_id",
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true,
-      "useLegacySql" => nil
+      "useLegacySql" => false
     }
     hash["statistics"]["query"] = {
       "cacheHit" => false,

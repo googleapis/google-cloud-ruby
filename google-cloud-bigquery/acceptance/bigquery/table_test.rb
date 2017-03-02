@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{table.table_id}"
-    fresh.query_id.must_equal "[#{bigquery.project}:#{dataset.dataset_id}.#{table.table_id}]"
+    fresh.query_id.must_equal "`#{bigquery.project}.#{dataset.dataset_id}.#{table.table_id}`"
     fresh.etag.wont_be :nil?
     fresh.api_url.wont_be :nil?
     fresh.bytes_count.wont_be :nil?

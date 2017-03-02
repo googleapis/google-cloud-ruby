@@ -346,7 +346,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         project_id: project, dataset_id: dataset_id, table_id: view_id
       ),
       view: Google::Apis::BigqueryV2::ViewDefinition.new(
-        query: query
+        query: query,
+        use_legacy_sql: false
       )
     )
     return_view = create_view_gapi view_id, query
@@ -373,7 +374,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       friendly_name: view_name,
       description: view_description,
       view: Google::Apis::BigqueryV2::ViewDefinition.new(
-        query: query
+        query: query,
+        use_legacy_sql: false
       )
     )
     return_view = create_view_gapi view_id, query, view_name, view_description

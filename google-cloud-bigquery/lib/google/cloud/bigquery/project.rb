@@ -163,15 +163,6 @@ module Google
         #   parameter must be `true` if this is set to `false`.
         # @param [Dataset, String] dataset Specifies the default dataset to use
         #   for unqualified table names in the query.
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
-        #   [legacy
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect for this query. If set to false, the query will use
-        #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
@@ -181,7 +172,16 @@ module Google
         #   dialect. When set to true, the values of `large_results` and
         #   `flatten` are ignored; the query will be run as if `large_results`
         #   is true and `flatten` is false. Optional. The default value is
-        #   false.
+        #   true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -200,14 +200,14 @@ module Google
         #     end
         #   end
         #
-        # @example Query using standard SQL:
+        # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_proj.my_data.my_table`",
-        #                            standard_sql: true
+        #                            legacy_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -252,8 +252,8 @@ module Google
         #
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
                       table: nil, create: nil, write: nil, large_results: nil,
-                      flatten: nil, dataset: nil, legacy_sql: nil,
-                      standard_sql: nil
+                      flatten: nil, dataset: nil, standard_sql: nil,
+                      legacy_sql: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -327,15 +327,6 @@ module Google
         # @param [String] project Specifies the default projectId to assume for
         #   any unqualified table names in the query. Only used if `dataset`
         #   option is set.
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
-        #   [legacy
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect for this query. If set to false, the query will use
-        #   BigQuery's [standard
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is true.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
@@ -345,7 +336,16 @@ module Google
         #   dialect. When set to true, the values of `large_results` and
         #   `flatten` are ignored; the query will be run as if `large_results`
         #   is true and `flatten` is false. Optional. The default value is
-        #   false.
+        #   true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect for this query. If set to false, the query will use
+        #   BigQuery's [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   When set to false, the values of `large_results` and `flatten` are
+        #   ignored; the query will be run as if `large_results` is true and
+        #   `flatten` is false. Optional. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -354,19 +354,19 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`"
         #
         #   data.each do |row|
         #     puts row["name"]
         #   end
         #
-        # @example Query using standard SQL:
+        # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`",
-        #                         standard_sql: true
+        #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]",
+        #                         legacy_sql: true
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -377,7 +377,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]"
+        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`"
         #
         #   data.all do |row|
         #     puts row["name"]
@@ -389,7 +389,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "FROM `my_proj.my_data.my_table`" \
         #                         "WHERE id = ?",
         #                         params: [1]
         #
@@ -403,7 +403,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "FROM `my_proj.my_data.my_table`" \
         #                         "WHERE id = @id",
         #                         params: { id: 1 }
         #
@@ -412,8 +412,8 @@ module Google
         #   end
         #
         def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
-                  cache: true, dataset: nil, project: nil, legacy_sql: nil,
-                  standard_sql: nil
+                  cache: true, dataset: nil, project: nil, standard_sql: nil,
+                  legacy_sql: nil
           ensure_service!
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
                       dataset: dataset, project: project,
@@ -710,7 +710,7 @@ module Google
         #
         #   fourpm = bigquery.time 16, 0, 0
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "FROM `my_proj.my_data.my_table`" \
         #                         "WHERE time_of_date = @time",
         #                         params: { time: fourpm }
         #
@@ -725,7 +725,7 @@ module Google
         #
         #   precise_time = bigquery.time 16, 35, 15.376541
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM [my_proj:my_data.my_table]" \
+        #                         "FROM `my_proj.my_data.my_table`" \
         #                         "WHERE time_of_date >= @time",
         #                         params: { time: precise_time }
         #

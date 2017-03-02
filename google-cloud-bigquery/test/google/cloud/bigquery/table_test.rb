@@ -45,7 +45,14 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "knows its fully-qualified query ID" do
-    table.query_id.must_equal "[#{project}:#{dataset}.#{table_id}]"
+    standard_id = "`#{project}.#{dataset}.#{table_id}`"
+    legacy_id = "[#{project}:#{dataset}.#{table_id}]"
+
+    table.query_id.must_equal standard_id
+    table.query_id(standard_sql: true).must_equal standard_id
+    table.query_id(standard_sql: false).must_equal legacy_id
+    table.query_id(legacy_sql: true).must_equal legacy_id
+    table.query_id(legacy_sql: false).must_equal standard_id
   end
 
   it "knows its creation and modification and expiration times" do

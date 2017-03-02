@@ -297,7 +297,7 @@ class MockBigquery < Minitest::Spec
       "lastModifiedTime" => time_millis,
       "type" => "VIEW",
       "view" => {
-        "query" => "SELECT name, age, score, active FROM [external:publicdata.users]"
+        "query" => "SELECT name, age, score, active FROM `external:publicdata.users`"
       },
       "location" => "US"
     }
@@ -381,7 +381,7 @@ class MockBigquery < Minitest::Spec
           "allowLargeResults" => nil,
           "useQueryCache" => true,
           "flattenResults" => nil,
-          "useLegacySql" => nil
+          "useLegacySql" => false
         }
       }
     }.to_json
@@ -394,10 +394,10 @@ class MockBigquery < Minitest::Spec
       ),
       dry_run: nil,
       max_results: nil,
-      query: "SELECT * FROM [some_project:some_dataset.users]",
+      query: "SELECT * FROM `some_project.some_dataset.users`",
       timeout_ms: 10000,
       use_query_cache: true,
-      use_legacy_sql: nil,
+      use_legacy_sql: false,
     )
   end
 

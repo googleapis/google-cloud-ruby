@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::View, :update, :mock_bigquery do
   end
 
   it "updates its query" do
-    new_query = "SELECT name, age FROM [users]"
+    new_query = "SELECT name, age FROM `users`"
 
     mock = Minitest::Mock.new
     view_hash = random_view_hash dataset_id, table_id, table_name, description
