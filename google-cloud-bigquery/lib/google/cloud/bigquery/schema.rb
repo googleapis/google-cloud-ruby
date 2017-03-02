@@ -44,17 +44,12 @@ module Google
       #   end
       #
       class Schema
-        def initialize
-          @nested = nil
-        end
-
         def fields
-          @fields ||= @gapi.fields.map { |f| Field.from_gapi f }
-        end
-
-        def fields= new_fields
-          @gapi.fields = Array(new_fields).map(&:to_gapi)
-          @fields = @gapi.fields.map { |f| Field.from_gapi f }
+          if frozen?
+            Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
+          else
+            Array(@gapi.fields).map { |f| Field.from_gapi f }
+          end
         end
 
         def headers
@@ -68,27 +63,7 @@ module Google
         # @private
         def changed?
           return false if frozen?
-          check_for_mutated_schema!
           @original_json != @gapi.to_json
-        end
-
-        # @private
-        def freeze
-          @gapi = @gapi.dup.freeze
-          @gapi.fields.freeze
-          @fields = @gapi.fields.map { |f| Field.from_gapi(f).freeze }
-          @fields.freeze
-          super
-        end
-
-        ##
-        # @private Make sure any changes are saved.
-        def check_for_mutated_schema!
-          return if frozen?
-          return if @gapi.frozen?
-          return if @fields.nil?
-          gapi_fields = Array(@fields).map(&:to_gapi)
-          @gapi.update! fields: gapi_fields
         end
 
         # @private
@@ -103,14 +78,13 @@ module Google
 
         # @private
         def to_gapi
-          check_for_mutated_schema!
           @gapi
         end
 
         # @private
         def == other
           return false unless other.is_a? Schema
-          to_gapi.to_h == other.to_gapi.to_h
+          to_gapi.to_json == other.to_gapi.to_json
         end
 
         ##
@@ -125,7 +99,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def string name, description: nil, mode: :nullable
-          add_field name, :string, nil, description: description, mode: mode
+          add_field name, :string, description: description, mode: mode
         end
 
         ##
@@ -140,7 +114,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def integer name, description: nil, mode: :nullable
-          add_field name, :integer, nil, description: description, mode: mode
+          add_field name, :integer, description: description, mode: mode
         end
 
         ##
@@ -155,7 +129,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def float name, description: nil, mode: :nullable
-          add_field name, :float, nil, description: description, mode: mode
+          add_field name, :float, description: description, mode: mode
         end
 
         ##
@@ -170,7 +144,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def boolean name, description: nil, mode: :nullable
-          add_field name, :boolean, nil, description: description, mode: mode
+          add_field name, :boolean, description: description, mode: mode
         end
 
         ##
@@ -185,7 +159,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def bytes name, description: nil, mode: :nullable
-          add_field name, :bytes, nil, description: description, mode: mode
+          add_field name, :bytes, description: description, mode: mode
         end
 
         ##
@@ -200,7 +174,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def timestamp name, description: nil, mode: :nullable
-          add_field name, :timestamp, nil, description: description, mode: mode
+          add_field name, :timestamp, description: description, mode: mode
         end
 
         ##
@@ -215,7 +189,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def time name, description: nil, mode: :nullable
-          add_field name, :time, nil, description: description, mode: mode
+          add_field name, :time, description: description, mode: mode
         end
 
         ##
@@ -230,7 +204,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def datetime name, description: nil, mode: :nullable
-          add_field name, :datetime, nil, description: description, mode: mode
+          add_field name, :datetime, description: description, mode: mode
         end
 
         ##
@@ -245,7 +219,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def date name, description: nil, mode: :nullable
-          add_field name, :date, nil, description: description, mode: mode
+          add_field name, :date, description: description, mode: mode
         end
 
         ##
@@ -262,8 +236,8 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
-        # @yield [nested_schema] a block for setting the nested schema
-        # @yieldparam [Schema] nested_schema the object accepting the
+        # @yield [field] a block for setting the nested record's schema
+        # @yieldparam [Field] field the object accepting the
         #   nested schema
         #
         # @example
@@ -282,24 +256,59 @@ module Google
         #   end
         #
         def record name, description: nil, mode: nil
+          # TODO: do we need to fail if no block was given?
           fail ArgumentError, "a block is required" unless block_given?
-          empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
-          nested_schema = self.class.from_gapi empty_schema
-          yield nested_schema
-          add_field name, :record, nested_schema.fields,
-                    description: description, mode: mode
+
+          nested_field = add_field name, :record, description: description,
+                                                  mode: mode
+          yield nested_field
+          nested_field
         end
 
         protected
 
-        def add_field name, type, nested_fields, description: nil,
-                      mode: :nullable
-          # Make nested fields an empty array if nil
-          nested_fields ||= []
+        def frozen_check!
+          return unless frozen?
+          fail ArgumentError, "Cannot modify a frozen schema"
+        end
+
+        def add_field name, type, description: nil, mode: :nullable
+          frozen_check!
+
+          new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
+            name: String(name),
+            type: verify_type(type),
+            description: description,
+            mode: verify_mode(mode),
+            fields: [])
+
           # Remove any existing field of this name
-          fields.reject! { |f| f.name == name }
-          fields << Field.new(name, type, description: description,
-                                          mode: mode, fields: nested_fields)
+          @gapi.fields ||= []
+          @gapi.fields.reject! { |f| f.name == new_gapi.name }
+
+          # Add to the nested fields
+          @gapi.fields << new_gapi
+
+          # return the public API object
+          Field.from_gapi new_gapi
+        end
+
+        def verify_type type
+          type = type.to_s.upcase
+          unless Field::TYPES.include? type
+            fail ArgumentError,
+                 "Type '#{type}' not found in #{TYPES.inspect}"
+          end
+          type
+        end
+
+        def verify_mode mode
+          mode = :nullable if mode.nil?
+          mode = mode.to_s.upcase
+          unless Field::MODES.include? mode
+            fail ArgumentError "Unable to determine mode for '#{mode}'"
+          end
+          mode
         end
       end
     end

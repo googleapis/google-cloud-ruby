@@ -367,7 +367,7 @@ module Google
               schema_builder = Schema.from_gapi empty_schema
             end
             yield schema_builder
-            schema_builder.check_for_mutated_schema!
+            # schema_builder.check_for_mutated_schema!
             if schema_builder.changed?
               @gapi.schema = schema_builder.to_gapi
               patch_gapi! :schema
@@ -1221,7 +1221,7 @@ module Google
           # Make sure any access changes are saved
           def check_for_mutated_schema!
             return if @schema.nil?
-            @schema.check_for_mutated_schema!
+            # @schema.check_for_mutated_schema!
             return unless @schema.changed?
             @gapi.schema = @schema.to_gapi
             patch_gapi! :schema

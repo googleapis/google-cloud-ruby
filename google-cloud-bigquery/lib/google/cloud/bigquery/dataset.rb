@@ -302,9 +302,6 @@ module Google
         #   length is 1,024 characters.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
-        # @param [Array<Schema::Field>] fields An array of Schema::Field objects
-        #   specifying the schema's data types for the table. The schema may
-        #   also be configured when passing a block.
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
@@ -325,26 +322,6 @@ module Google
         #   table = dataset.create_table "my_table",
         #                                name: "My Table",
         #                                description: "A description of table."
-        #
-        # @example The table's schema fields can be passed as an argument.
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #
-        #   schema_fields = [
-        #     Google::Cloud::Bigquery::Schema::Field.new(
-        #       "first_name", :string, mode: :required),
-        #     Google::Cloud::Bigquery::Schema::Field.new(
-        #       "cities_lived", :record, mode: :repeated,
-        #       fields: [
-        #         Google::Cloud::Bigquery::Schema::Field.new(
-        #           "place", :string, mode: :required),
-        #         Google::Cloud::Bigquery::Schema::Field.new(
-        #           "number_of_years", :integer, mode: :required),
-        #         ])
-        #   ]
-        #   table = dataset.create_table "my_table", fields: schema_fields
         #
         # @example Or the table's schema can be configured with the block.
         #   require "google/cloud/bigquery"
@@ -379,7 +356,7 @@ module Google
         #
         # @!group Table
         #
-        def create_table table_id, name: nil, description: nil, fields: nil
+        def create_table table_id, name: nil, description: nil
           ensure_service!
           new_tb = Google::Apis::BigqueryV2::Table.new(
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
@@ -388,7 +365,6 @@ module Google
           updater = Table::Updater.new(new_tb).tap do |tb|
             tb.name = name unless name.nil?
             tb.description = description unless description.nil?
-            tb.schema.fields = fields unless fields.nil?
           end
 
           yield updater if block_given?

@@ -25,20 +25,6 @@ module Google
           TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
                       DATE RECORD )
 
-          def initialize name, type, description: nil,
-                         mode: :nullable, fields: nil
-            @gapi = Google::Apis::BigqueryV2::TableFieldSchema.new
-            @gapi.update! name: name
-            @gapi.update! type: verify_type(type)
-            @gapi.update! description: description if description
-            @gapi.update! mode: verify_mode(mode) if mode
-            if fields
-              @fields = fields
-              check_for_changed_fields!
-            end
-            @original_json = @gapi.to_json
-          end
-
           def name
             @gapi.name
           end
@@ -72,30 +58,234 @@ module Google
           end
 
           def fields
-            @fields ||= Array(@gapi.fields).map { |f| Field.from_gapi f }
-          end
-
-          def fields= new_fields
-            @fields = new_fields
+            if frozen?
+              Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
+            else
+              Array(@gapi.fields).map { |f| Field.from_gapi f }
+            end
           end
 
           ##
-          # @private Make sure any fields are saved.
-          def check_for_changed_fields!
-            return if frozen?
-            fields.each(&:check_for_changed_fields!)
-            gapi_fields = Array(fields).map(&:to_gapi)
-            @gapi.update! fields: gapi_fields
+          # Adds a string field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def string name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :string, description: description, mode: mode
           end
 
-          # @private
-          def changed?
-            @original_json == to_gapi.to_json
+          ##
+          # Adds an integer field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def integer name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :integer, description: description, mode: mode
+          end
+
+          ##
+          # Adds a floating-point number field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def float name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :float, description: description, mode: mode
+          end
+
+          ##
+          # Adds a boolean field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def boolean name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :boolean, description: description, mode: mode
+          end
+
+          ##
+          # Adds a bytes field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def bytes name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :bytes, description: description, mode: mode
+          end
+
+          ##
+          # Adds a timestamp field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def timestamp name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :timestamp, description: description, mode: mode
+          end
+
+          ##
+          # Adds a time field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def time name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :time, description: description, mode: mode
+          end
+
+          ##
+          # Adds a datetime field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def datetime name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :datetime, description: description, mode: mode
+          end
+
+          ##
+          # Adds a date field to the schema.
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          def date name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :date, description: description, mode: mode
+          end
+
+          ##
+          # Adds a record field to the schema. A block must be passed describing
+          # the nested fields of the record. For more information about nested
+          # and repeated records, see [Preparing Data for BigQuery
+          # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+          #
+          # This can only be called on fields that are of type RECORD.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          # @yield [nested_schema] a block for setting the nested schema
+          # @yieldparam [Schema] nested_schema the object accepting the
+          #   nested schema
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table"
+          #
+          #   table.schema do |schema|
+          #     schema.string "first_name", mode: :required
+          #     schema.record "cities_lived", mode: :repeated do |cities_lived|
+          #       cities_lived.string "place", mode: :required
+          #       cities_lived.integer "number_of_years", mode: :required
+          #     end
+          #   end
+          #
+          def record name, description: nil, mode: nil
+            record_check!
+
+            # TODO: do we need to fail if no block was given?
+            fail ArgumentError, "a block is required" unless block_given?
+
+            nested_field = add_field name, :record, description: description,
+                                                    mode: mode
+            yield nested_field
+            nested_field
           end
 
           # @private
           def self.from_gapi gapi
-            new("to-be-replaced", "STRING").tap do |f|
+            new.tap do |f|
               f.instance_variable_set :@gapi, gapi
               f.instance_variable_set :@original_json, gapi.to_json
             end
@@ -103,8 +293,6 @@ module Google
 
           # @private
           def to_gapi
-            # make sure any changes are saved.
-            check_for_changed_fields!
             @gapi
           end
 
@@ -116,21 +304,53 @@ module Google
 
           protected
 
+          def frozen_check!
+            return unless frozen?
+            fail ArgumentError, "Cannot modify a frozen field"
+          end
+
+          def record_check!
+            return unless type != "RECORD"
+            fail ArgumentError,
+                 "Cannot add fields to a non-RECORD field (#{type})"
+          end
+
+          def add_field name, type, description: nil, mode: :nullable
+            frozen_check!
+
+            new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
+              name: String(name),
+              type: verify_type(type),
+              description: description,
+              mode: verify_mode(mode),
+              fields: [])
+
+            # Remove any existing field of this name
+            @gapi.fields ||= []
+            @gapi.fields.reject! { |f| f.name == new_gapi.name }
+            # Add to the nested fields
+            @gapi.fields << new_gapi
+
+            # return the public API object
+            Field.from_gapi new_gapi
+          end
+
           def verify_type type
-            upcase_type = type.to_s.upcase
-            unless TYPES.include? upcase_type
+            type = type.to_s.upcase
+            unless TYPES.include? type
               fail ArgumentError,
-                   "Type '#{upcase_type}' not found in #{TYPES.inspect}"
+                   "Type '#{type}' not found in #{TYPES.inspect}"
             end
-            upcase_type
+            type
           end
 
           def verify_mode mode
-            upcase_mode = mode.to_s.upcase
-            unless MODES.include? upcase_mode
+            mode = :nullable if mode.nil?
+            mode = mode.to_s.upcase
+            unless MODES.include? mode
               fail ArgumentError "Unable to determine mode for '#{mode}'"
             end
-            upcase_mode
+            mode
           end
         end
       end

@@ -81,15 +81,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "copies schema to a new table" do
-    tbl_copy = dataset.create_table "#{table.table_id}copy" do |tbl|
-      tbl.schema.fields = table.schema.fields
-    end
-
-    tbl_copy.refresh!
-    tbl_copy.headers.must_equal table.headers
-  end
-
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"

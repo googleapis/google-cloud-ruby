@@ -34,16 +34,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   let(:new_table_hash) { random_table_hash dataset, table_id, table_name, description }
 
-  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] }
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
-  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: [] }
-  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: [] }
-  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", fields: [] }
-  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", fields: [] }
-  let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", fields: [] }
-  let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", fields: [] }
-  let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", fields: [] }
-  let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [ field_integer_gapi, field_timestamp_gapi ] }
+  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
   let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
   let(:field_integer) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_integer_gapi }
@@ -147,6 +147,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     end_date_timestamp_gapi = field_timestamp_gapi.dup
     end_date_timestamp_gapi.name = "end_date"
     new_schema_gapi = table_gapi.schema.dup
+    new_schema_gapi.fields = table_gapi.schema.fields.dup
     new_schema_gapi.fields << end_date_timestamp_gapi
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
@@ -214,9 +215,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     mock = Minitest::Mock.new
     nested_schema_hash = {
       fields: [
-        { name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] },
-        { name: "countries_lived", type: "RECORD", mode: "REPEATED", fields: [
-            { name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [
+        { name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] },
+        { name: "countries_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
+            { name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
                 { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] }
               ]
             }

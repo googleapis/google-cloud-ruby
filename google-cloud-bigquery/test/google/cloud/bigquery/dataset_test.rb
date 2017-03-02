@@ -27,11 +27,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:table_schema) {
     {
       fields: [
-        { mode: "REQUIRED", name: "name", type: "STRING"},
-        { mode: "NULLABLE", name: "age", type: "INTEGER"},
-        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0"},
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN"},
-        { mode: "NULLABLE", name: "avatar", type: "BYTES"}
+        { mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [] },
+        { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
+        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
+        { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
+        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] }
       ]
     }
   }
@@ -174,44 +174,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.wont_be :view?
   end
 
-  it "creates a table with a fields option" do
-    mock = Minitest::Mock.new
-    insert_table = Google::Apis::BigqueryV2::Table.new(
-      table_reference: Google::Apis::BigqueryV2::TableReference.new(
-        project_id: project, dataset_id: dataset_id, table_id: table_id),
-      friendly_name: table_name,
-      description: table_description,
-      schema: table_schema_gapi)
-    return_table = create_table_gapi table_id, table_name, table_description
-    return_table.schema = table_schema_gapi
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
-    dataset.service.mocked_service = mock
-
-    schema_fields = [
-      Google::Cloud::Bigquery::Schema::Field.new("name", "STRING", mode: :required),
-      Google::Cloud::Bigquery::Schema::Field.new("age", :INTEGER),
-      Google::Cloud::Bigquery::Schema::Field.new("score", "float", description: "A score from 0.0 to 10.0"),
-      Google::Cloud::Bigquery::Schema::Field.new("active", :boolean),
-      Google::Cloud::Bigquery::Schema::Field.new("avatar", :bytes)
-    ]
-    table = dataset.create_table table_id,
-                                 name: table_name,
-                                 description: table_description,
-                                 fields: schema_fields
-
-    mock.verify
-
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
-    table.table_id.must_equal table_id
-    table.name.must_equal table_name
-    table.description.must_equal table_description
-    table.schema.wont_be :empty?
-    table.schema.must_be :frozen?
-    table.must_be :table?
-    table.wont_be :view?
-  end
-
   it "creates a table with a schema inline" do
     mock = Minitest::Mock.new
     insert_table = Google::Apis::BigqueryV2::Table.new(
@@ -254,18 +216,18 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
         project_id: project, dataset_id: dataset_id, table_id: table_id),
       schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", fields: [
-          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  fields: []),
-          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", fields: [])])
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, fields: [
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  description: nil, fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", description: nil, fields: [])])
         ]))
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
@@ -285,7 +247,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.date "birthday"
       schema.record "cities_lived", mode: :repeated do |nested_schema|
         nested_schema.string "place"
-        nested_schema.integer "number_of_years"\
+        nested_schema.integer "number_of_years"
       end
     end
 
