@@ -209,6 +209,36 @@ module Google
           end
         end
 
+        ##
+        # @private
+        def self.to_json_rows rows
+          rows.map do |row|
+            Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+          end
+        end
+        ##
+        # @private
+        def self.to_json_value value
+          if DateTime === value
+            value.strftime "%Y-%m-%d %H:%M:%S.%6N"
+          elsif Date === value
+            value.to_s
+          elsif ::Time === value
+            value.strftime "%Y-%m-%d %H:%M:%S.%6N%:z"
+          elsif Bigquery::Time === value
+            value.value
+          elsif value.respond_to?(:read) && value.respond_to?(:rewind)
+            value.rewind
+            Base64.strict_encode64(value.read.force_encoding("ASCII-8BIT"))
+          elsif Array === value
+            value.map { |v| to_json_value v }
+          elsif Hash === value
+            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }]
+          else
+            value
+          end
+        end
+
         # rubocop:enable all
       end
     end
