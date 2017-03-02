@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     fresh.view?.must_equal true
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    fresh.headers.must_equal ["url"]
+    fresh.headers.must_equal [:url]
   end
 
   it "gets and sets attributes" do

@@ -21,7 +21,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal "hello"
+    rows.first[:value].must_equal "hello"
   end
 
   it "queries an integer value" do
@@ -29,7 +29,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal 999
+    rows.first[:value].must_equal 999
   end
 
   it "queries a float value" do
@@ -37,7 +37,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal 12.0
+    rows.first[:value].must_equal 12.0
   end
 
   it "queries a boolean value" do
@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal false
+    rows.first[:value].must_equal false
   end
 
   it "queries a date value" do
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of Date
+    rows.first[:value].must_be_kind_of Date
   end
 
   it "queries a datetime value" do
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of DateTime
+    rows.first[:value].must_be_kind_of DateTime
   end
 
   it "queries a timestamp value" do
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of ::Time
+    rows.first[:value].must_be_kind_of ::Time
   end
 
   it "queries a time value" do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of Google::Cloud::Bigquery::Time
+    rows.first[:value].must_be_kind_of Google::Cloud::Bigquery::Time
   end
 
   it "queries a bytes value" do
@@ -85,8 +85,8 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_be_kind_of StringIO
-    rows.first["value"].read.must_equal "hello"
+    rows.first[:value].must_be_kind_of StringIO
+    rows.first[:value].read.must_equal "hello"
   end
 
   it "queries an array of integers value" do
@@ -94,7 +94,7 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal [1, 2, 3, 4]
+    rows.first[:value].must_equal [1, 2, 3, 4]
   end
 
   it "queries an array of strings value" do
@@ -102,6 +102,6 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 1
-    rows.first["value"].must_equal ["foo", "bar", "baz"]
+    rows.first[:value].must_equal ["foo", "bar", "baz"]
   end
 end

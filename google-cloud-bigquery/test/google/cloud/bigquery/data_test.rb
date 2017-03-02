@@ -36,38 +36,38 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
-    data[0]["name"].must_equal "Heidi"
-    data[0]["age"].must_equal 36
-    data[0]["score"].must_equal 7.65
-    data[0]["active"].must_equal true
-    data[0]["avatar"].must_be_kind_of StringIO
-    data[0]["avatar"].read.must_equal "image data"
-    data[0]["started_at"].must_equal Time.parse("2016-12-25 13:00:00 UTC")
-    data[0]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
-    data[0]["target_end"].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
-    data[0]["birthday"].must_equal Date.parse("1968-10-20")
+    data[0][:name].must_equal "Heidi"
+    data[0][:age].must_equal 36
+    data[0][:score].must_equal 7.65
+    data[0][:active].must_equal true
+    data[0][:avatar].must_be_kind_of StringIO
+    data[0][:avatar].read.must_equal "image data"
+    data[0][:started_at].must_equal Time.parse("2016-12-25 13:00:00 UTC")
+    data[0][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    data[0][:target_end].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
+    data[0][:birthday].must_equal Date.parse("1968-10-20")
 
     data[1].must_be_kind_of Hash
-    data[1]["name"].must_equal "Aaron"
-    data[1]["age"].must_equal 42
-    data[1]["score"].must_equal 8.15
-    data[1]["active"].must_equal false
-    data[1]["avatar"].must_equal nil
-    data[1]["started_at"].must_equal nil
-    data[1]["duration"].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
-    data[1]["target_end"].must_equal nil
-    data[1]["birthday"].must_equal nil
+    data[1][:name].must_equal "Aaron"
+    data[1][:age].must_equal 42
+    data[1][:score].must_equal 8.15
+    data[1][:active].must_equal false
+    data[1][:avatar].must_equal nil
+    data[1][:started_at].must_equal nil
+    data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    data[1][:target_end].must_equal nil
+    data[1][:birthday].must_equal nil
 
     data[2].must_be_kind_of Hash
-    data[2]["name"].must_equal "Sally"
-    data[2]["age"].must_equal nil
-    data[2]["score"].must_equal nil
-    data[2]["active"].must_equal nil
-    data[2]["avatar"].must_equal nil
-    data[2]["started_at"].must_equal nil
-    data[2]["duration"].must_equal nil
-    data[2]["target_end"].must_equal nil
-    data[2]["birthday"].must_equal nil
+    data[2][:name].must_equal "Sally"
+    data[2][:age].must_equal nil
+    data[2][:score].must_equal nil
+    data[2][:active].must_equal nil
+    data[2][:avatar].must_equal nil
+    data[2][:started_at].must_equal nil
+    data[2][:duration].must_equal nil
+    data[2][:target_end].must_equal nil
+    data[2][:birthday].must_equal nil
   end
 
   it "knows the data metadata" do
@@ -88,6 +88,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
   end
 
   it "knows the raw, unformatted data" do
+    skip
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
@@ -202,7 +203,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nested_data.class.must_equal Google::Cloud::Bigquery::Data
     nested_data.count.must_equal 1
 
-    nested_data.must_equal [{"nums"=>[1, 2, 3], "scores"=>[100.0, 99.9, 0.001], "msgs"=>["hello", "world"], "flags"=>[true, false]}]
+    nested_data.must_equal [{ nums: [1, 2, 3], scores: [100.0, 99.9, 0.001], msgs: ["hello", "world"], flags: [true, false] }]
   end
 
   it "handles nested, repeated records" do
@@ -247,7 +248,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nested_data.class.must_equal Google::Cloud::Bigquery::Data
     nested_data.count.must_equal 1
 
-    nested_data.must_equal [{"name"=>"mike", "foo"=>[{"bar"=>"hey", "baz"=>{"bif"=>1}}, {"bar"=>"world", "baz"=>{"bif"=>2}}]}]
+    nested_data.must_equal [{ name: "mike", foo: [{ bar: "hey", baz: { bif: 1 } }, { bar: "world", baz: { bif: 2 } }] }]
   end
 
   it "paginates data" do

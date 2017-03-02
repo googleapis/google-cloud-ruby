@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   end
 
   it "loads and returns the properly formatted data" do
-    table.data.sort_by { |r| r["id"] }.zip(example_table_rows) do |returned_row, example_row|
+    table.data.sort_by { |r| r[:id] }.zip(example_table_rows) do |returned_row, example_row|
       assert_rows_equal returned_row, example_row
     end
   end
@@ -45,9 +45,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 3
-    rows[0].must_equal({"name"=>"Gandalf", "scores"=>100.0})
-    rows[1].must_equal({"name"=>"Gandalf", "scores"=>99.0})
-    rows[2].must_equal({"name"=>"Gandalf", "scores"=>0.001})
+    rows[0].must_equal({ name: "Gandalf", scores: 100.0})
+    rows[1].must_equal({ name: "Gandalf", scores: 99.0})
+    rows[2].must_equal({ name: "Gandalf", scores: 0.001})
   end
 
   it "queries repeated records in legacy mode" do
@@ -55,29 +55,29 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
     rows.class.must_equal Google::Cloud::Bigquery::QueryData
     rows.count.must_equal 3
-    rows[0].must_equal({"name"=>"Gandalf", "spells_name"=>"Skydragon", "spells_properties_name"=>"Flying", "spells_properties_power"=>1.0})
-    rows[1].must_equal({"name"=>"Gandalf", "spells_name"=>"Skydragon", "spells_properties_name"=>"Creature", "spells_properties_power"=>1.0})
-    rows[2].must_equal({"name"=>"Gandalf", "spells_name"=>"Skydragon", "spells_properties_name"=>"Explodey", "spells_properties_power"=>11.0})
+    rows[0].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
+    rows[1].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
+    rows[2].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
   end
 
   def assert_rows_equal returned_row, example_row
-    returned_row["id"].must_equal example_row[:id]
-    returned_row["name"].must_equal example_row[:name]
-    returned_row["age"].must_equal example_row[:age]
-    returned_row["weight"].must_equal example_row[:weight]
-    returned_row["is_magic"].must_equal example_row[:is_magic]
-    returned_row["scores"].must_equal example_row[:scores]
-    returned_row["spells"].zip example_row[:spells] do |row_spell, example_spell|
-      row_spell["name"].must_equal example_spell[:name]
-      row_spell["discovered_by"].must_equal example_spell[:discovered_by]
-      row_spell["properties"].zip example_spell[:properties] do |row_properties, example_properties|
-        row_properties["name"].must_equal example_properties[:name]
-        row_properties["power"].must_equal example_properties[:power]
+    returned_row[:id].must_equal example_row[:id]
+    returned_row[:name].must_equal example_row[:name]
+    returned_row[:age].must_equal example_row[:age]
+    returned_row[:weight].must_equal example_row[:weight]
+    returned_row[:is_magic].must_equal example_row[:is_magic]
+    returned_row[:scores].must_equal example_row[:scores]
+    returned_row[:spells].zip example_row[:spells] do |row_spell, example_spell|
+      row_spell[:name].must_equal example_spell[:name]
+      row_spell[:discovered_by].must_equal example_spell[:discovered_by]
+      row_spell[:properties].zip example_spell[:properties] do |row_properties, example_properties|
+        row_properties[:name].must_equal example_properties[:name]
+        row_properties[:power].must_equal example_properties[:power]
       end
     end
-    returned_row["tea_time"].must_equal example_row[:tea_time]
-    returned_row["next_vacation"].must_equal example_row[:next_vacation]
-    returned_row["favorite_time"].must_equal example_row[:favorite_time]
+    returned_row[:tea_time].must_equal example_row[:tea_time]
+    returned_row[:next_vacation].must_equal example_row[:next_vacation]
+    returned_row[:favorite_time].must_equal example_row[:favorite_time]
   end
 
   def get_or_create_example_table dataset, table_id

@@ -70,7 +70,7 @@ module Google
         ##
         # The name of the columns in the data.
         def headers
-          fields.map(&:name)
+          fields.map(&:name).map(&:to_sym)
         end
 
         ##

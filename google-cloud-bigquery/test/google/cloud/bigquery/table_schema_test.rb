@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     table.fields.count.must_equal 9
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
+    table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -161,7 +161,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
 
-    table.headers.must_include "end_date"
+    table.headers.must_include :end_date
   end
 
   it "replaces existing schema with replace option" do
