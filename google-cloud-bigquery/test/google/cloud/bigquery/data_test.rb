@@ -163,6 +163,93 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nil_data.count.must_equal 0
   end
 
+  it "handles repeated scalars" do
+    schema_hash = {
+      fields: [
+          { name: "nums",   type: "INTEGER", mode: "REPEATED", fields: [] },
+          { name: "scores", type: "FLOAT",   mode: "REPEATED", fields: [] },
+          { name: "msgs",   type: "STRING",  mode: "REPEATED", fields: [] },
+          { name: "flags",  type: "BOOLEAN", mode: "REPEATED", fields: [] }
+        ]
+    }
+    rows_array = [
+      { f: [
+             { v: [{ v: "1" }, { v: "2" }, { v: "3" }] },
+             { v: [{ v: "100.0" }, { v: "99.9" }, { v: "0.001"}] },
+             { v: [{ v: "hello" }, { v: "world" }] },
+             { v: [{ v: "true" }, { v: "false" }] }
+           ]
+      }
+    ]
+
+    nested_table_gapi = random_table_gapi dataset_id, table_id, table_name, description
+    nested_table_gapi.schema = Google::Apis::BigqueryV2::TableSchema.from_json schema_hash.to_json
+    nested_table = Google::Cloud::Bigquery::Table.from_gapi nested_table_gapi, bigquery.service
+
+    nested_table_data_hash = table_data_hash
+    nested_table_data_hash["rows"] = rows_array
+    nested_table_data_gapi = Google::Apis::BigqueryV2::TableDataList.from_json nested_table_data_hash.to_json
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                nested_table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+
+    nested_data = nested_table.data
+    mock.verify
+
+    nested_data.class.must_equal Google::Cloud::Bigquery::Data
+    nested_data.count.must_equal 1
+
+    nested_data.must_equal [{"nums"=>[1, 2, 3], "scores"=>[100.0, 99.9, 0.001], "msgs"=>["hello", "world"], "flags"=>[true, false]}]
+  end
+
+  it "handles nested, repeated records" do
+    schema_hash = {
+      fields: [
+        { name: "name", type: "STRING", mode: "NULLABLE", fields: [] },
+        { name: "foo",  type: "RECORD", mode: "REPEATED", fields: [
+          { name: "bar", type: "STRING", mode: "NULLABLE", fields: []  },
+          { name: "baz", type: "RECORD", mode: "NULLABLE", fields: [
+            { name: "bif", type: "INTEGER", mode: "NULLABLE", fields: [] }
+          ]}
+        ]}
+      ]
+    }
+    rows_array = [
+      { f: [ { v: "mike"},
+             { v: [ { v: { f: [ { v: "hey" },   { v: { f: [ { v: "1" } ] } } ] } },
+                    { v: { f: [ { v: "world" }, { v: { f: [ { v: "2" } ] } } ] } }
+                  ]
+             }
+           ]
+      }
+    ]
+
+    nested_table_gapi = random_table_gapi dataset_id, table_id, table_name, description
+    nested_table_gapi.schema = Google::Apis::BigqueryV2::TableSchema.from_json schema_hash.to_json
+    nested_table = Google::Cloud::Bigquery::Table.from_gapi nested_table_gapi, bigquery.service
+
+    nested_table_data_hash = table_data_hash
+    nested_table_data_hash["rows"] = rows_array
+    nested_table_data_gapi = Google::Apis::BigqueryV2::TableDataList.from_json nested_table_data_hash.to_json
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :list_table_data,
+                nested_table_data_gapi,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+
+    nested_data = nested_table.data
+    mock.verify
+
+    nested_data.class.must_equal Google::Cloud::Bigquery::Data
+    nested_data.count.must_equal 1
+
+    nested_data.must_equal [{"name"=>"mike", "foo"=>[{"bar"=>"hey", "baz"=>{"bif"=>1}}, {"bar"=>"world", "baz"=>{"bif"=>2}}]}]
+  end
+
   it "paginates data" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

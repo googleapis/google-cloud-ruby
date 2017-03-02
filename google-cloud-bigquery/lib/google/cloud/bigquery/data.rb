@@ -188,7 +188,8 @@ module Google
         ##
         # @private New Data from a response object.
         def self.from_gapi gapi, table
-          formatted_rows = Convert.format_rows gapi.rows, table.fields
+          formatted_rows = Convert.format_rows(gapi.rows,
+                                               table.gapi.schema.fields)
 
           data = new formatted_rows
           data.table = table
