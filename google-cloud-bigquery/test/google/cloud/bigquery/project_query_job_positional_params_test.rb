@@ -428,12 +428,12 @@ describe Google::Cloud::Bigquery::Project, :query_job, :positional_params, :mock
           ]
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          struct_values: [
-            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
-            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 42),
-            Google::Apis::BigqueryV2::QueryParameterValue.new(value: false),
-            Google::Apis::BigqueryV2::QueryParameterValue.new(value: 98.7)
-          ]
+          struct_values: {
+            "name" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
+            "age" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: 42),
+            "active" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: false),
+            "score" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: 98.7)
+          }
         )
       )
     ]

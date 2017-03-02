@@ -183,6 +183,9 @@ module Google
                 type: struct_param.parameter_type
               ), struct_param.parameter_value]
             end
+            struct_values = Hash[struct_pairs.map do |type, value|
+              [type.name, value]
+            end]
 
             return Google::Apis::BigqueryV2::QueryParameter.new(
               parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -190,7 +193,7 @@ module Google
                 struct_types: struct_pairs.map(&:first)
               ),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                struct_values: struct_pairs.map(&:last)
+                struct_values: struct_values
               )
             )
           else
