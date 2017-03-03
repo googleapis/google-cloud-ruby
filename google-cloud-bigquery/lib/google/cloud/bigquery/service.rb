@@ -171,8 +171,6 @@ module Google
 
         def insert_tabledata dataset_id, table_id, rows, options = {}
           insert_rows = Array(rows).map do |row|
-puts Digest::MD5.base64digest(row.to_json).inspect
-puts row.inspect
             Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
               insert_id: Digest::MD5.base64digest(row.to_json),
               json: row
