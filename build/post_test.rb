@@ -1,7 +1,7 @@
 require "pty"
 
 commands = [
-  "bundle update && bundle exec rake circleci:post",
+  "bundle exec rake circleci:post",
   "bundle exec rake test:coveralls"
 ]
 

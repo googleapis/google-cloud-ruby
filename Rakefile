@@ -494,6 +494,7 @@ namespace :circleci do
     # We don't run post-build on pull requests
     if ENV["CIRCLE_PR_NUMBER"].nil?
       if ENV["CIRCLE_BRANCH"] == "master"
+        Rake::Task["bundleupdate"].invoke
         Rake::Task["jsondoc:master"].invoke
       end
     end
