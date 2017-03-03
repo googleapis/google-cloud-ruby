@@ -172,8 +172,7 @@ module Google
         def insert_tabledata dataset_id, table_id, rows, options = {}
           insert_rows = Array(rows).map do |row|
             Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-              insert_id: Digest::MD5.base64digest(row.inspect),
-              # Hash[row.map{|(k,v)| [k.to_s,v]}] for Hash<String,Object>
+              insert_id: Digest::MD5.base64digest(row.to_json),
               json: row
             )
           end
