@@ -566,31 +566,28 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - A 'duplicate' error is returned in the job result if the
         #     table exists and contains data.
-        # @param [Boolean] large_results If `true`, allows the query to produce
-        #   arbitrarily large result tables at a slight cost in performance.
-        #   Requires `table` parameter to be set.
-        # @param [Boolean] flatten Flattens all nested and repeated fields in
-        #   the query results. The default value is `true`. `large_results`
-        #   parameter must be `true` if this is set to `false`.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
         #   dialect for this query. If set to true, the query will use standard
         #   SQL rather than the [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect. When set to true, the values of `large_results` and
-        #   `flatten` are ignored; the query will be run as if `large_results`
-        #   is true and `flatten` is false. Optional. The default value is
-        #   true.
+        #   dialect. Optional. The default value is true.
         # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect for this query. If set to false, the query will use
         #   BigQuery's [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is false.
+        #   dialect. Optional. The default value is false.
+        # @param [Boolean] large_results This option is specific to Legacy SQL.
+        #   If `true`, allows the query to produce arbitrarily large result
+        #   tables at a slight cost in performance. Requires `table` parameter
+        #   to be set.
+        # @param [Boolean] flatten This option is specific to Legacy SQL.
+        #   Flattens all nested and repeated fields in the query results. The
+        #   default value is `true`. `large_results` parameter must be `true` if
+        #   this is set to `false`.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -656,8 +653,8 @@ module Google
         # @!group Data
         #
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
-                      table: nil, create: nil, write: nil, large_results: nil,
-                      flatten: nil, legacy_sql: nil, standard_sql: nil
+                      table: nil, create: nil, write: nil, standard_sql: nil,
+                      legacy_sql: nil, large_results: nil, flatten: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
