@@ -17,6 +17,23 @@ module Google
   module Cloud
     module Bigquery
       class Schema
+        ##
+        # # Schema Field
+        #
+        # The fields of a table schema.
+        #
+        # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
+        #   Preparing Data for BigQuery
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   name_field = table.schema.field "name"
+        #   name_field.required? #=> true
         class Field
           # @private
           MODES = %w( NULLABLE REQUIRED REPEATED )
@@ -25,38 +42,143 @@ module Google
           TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
                       DATE RECORD )
 
+          ##
+          # The name of the field.
+          #
           def name
             @gapi.name
           end
 
+          ##
+          # Updates the name of the field.
+          #
           def name= new_name
             @gapi.update! name: String(new_name)
           end
 
+          ##
+          # The type of the field.
+          #
           def type
             @gapi.type
           end
 
+          ##
+          # Updates the type of the field.
+          #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
           end
 
+          ##
+          # Checks if the type of the field is `NULLABLE`.
+          def nullable?
+            mode == "NULLABLE"
+          end
+
+          ##
+          # Checks if the type of the field is `REQUIRED`.
+          def required?
+            mode == "REQUIRED"
+          end
+
+          ##
+          # Checks if the type of the field is `REPEATED`.
+          def repeated?
+            mode == "REPEATED"
+          end
+
+          ##
+          # The description of the field.
+          #
           def description
             @gapi.description
           end
 
+          ##
+          # Updates the description of the field.
+          #
           def description= new_description
             @gapi.update! description: new_description
           end
 
+          ##
+          # The mode of the field.
+          #
           def mode
             @gapi.mode
           end
 
+          ##
+          # Updates the mode of the field.
+          #
           def mode= new_mode
             @gapi.update! mode: verify_mode(new_mode)
           end
 
+          ##
+          # Checks if the mode of the field is `STRING`.
+          def string?
+            mode == "STRING"
+          end
+
+          ##
+          # Checks if the mode of the field is `INTEGER`.
+          def integer?
+            mode == "INTEGER"
+          end
+
+          ##
+          # Checks if the mode of the field is `FLOAT`.
+          def float?
+            mode == "FLOAT"
+          end
+
+          ##
+          # Checks if the mode of the field is `BOOLEAN`.
+          def boolean?
+            mode == "BOOLEAN"
+          end
+
+          ##
+          # Checks if the mode of the field is `BYTES`.
+          def bytes?
+            mode == "BYTES"
+          end
+
+          ##
+          # Checks if the mode of the field is `TIMESTAMP`.
+          def timestamp?
+            mode == "TIMESTAMP"
+          end
+
+          ##
+          # Checks if the mode of the field is `TIME`.
+          def time?
+            mode == "TIME"
+          end
+
+          ##
+          # Checks if the mode of the field is `DATETIME`.
+          def datetime?
+            mode == "DATETIME"
+          end
+
+          ##
+          # Checks if the mode of the field is `DATE`.
+          def date?
+            mode == "DATE"
+          end
+
+          ##
+          # Checks if the mode of the field is `RECORD`.
+          def record?
+            mode == "RECORD"
+          end
+
+          ##
+          # The nested fields if the type property is set to `RECORD`. Will be
+          # empty otherwise.
           def fields
             if frozen?
               Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
@@ -65,10 +187,16 @@ module Google
             end
           end
 
+          ##
+          # The names of the nested fields as symbols if the type property is
+          # set to `RECORD`. Will be empty otherwise.
           def headers
             fields.map(&:name).map(&:to_sym)
           end
 
+          ##
+          # Retreive a nested fields by name, if the type property is
+          # set to `RECORD`. Will return `nil` otherwise.
           def field name
             f = fields.find { |fld| fld.name == name.to_s }
             return nil if f.nil?
@@ -79,7 +207,7 @@ module Google
           ##
           # Adds a string field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -98,7 +226,7 @@ module Google
           ##
           # Adds an integer field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -117,7 +245,7 @@ module Google
           ##
           # Adds a floating-point number field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -136,7 +264,7 @@ module Google
           ##
           # Adds a boolean field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -155,7 +283,7 @@ module Google
           ##
           # Adds a bytes field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -174,7 +302,7 @@ module Google
           ##
           # Adds a timestamp field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -193,7 +321,7 @@ module Google
           ##
           # Adds a time field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -212,7 +340,7 @@ module Google
           ##
           # Adds a datetime field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -231,7 +359,7 @@ module Google
           ##
           # Adds a date field to the schema.
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
@@ -253,7 +381,7 @@ module Google
           # and repeated records, see [Preparing Data for BigQuery
           # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
           #
-          # This can only be called on fields that are of type RECORD.
+          # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
           #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must

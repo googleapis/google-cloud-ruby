@@ -44,6 +44,8 @@ module Google
       #   end
       #
       class Schema
+        ##
+        # The fields of the table schema.
         def fields
           if frozen?
             Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
@@ -52,10 +54,14 @@ module Google
           end
         end
 
+        ##
+        # The names of the fields as symbols.
         def headers
           fields.map(&:name).map(&:to_sym)
         end
 
+        ##
+        # Retreive a fields by name.
         def field name
           f = fields.find { |fld| fld.name == name.to_s }
           return nil if f.nil?
@@ -63,35 +69,10 @@ module Google
           f
         end
 
+        ##
+        # Whether the schema has no fields defined.
         def empty?
           fields.empty?
-        end
-
-        # @private
-        def changed?
-          return false if frozen?
-          @original_json != @gapi.to_json
-        end
-
-        # @private
-        def self.from_gapi gapi
-          gapi ||= Google::Apis::BigqueryV2::TableSchema.new fields: []
-          gapi.fields ||= []
-          new.tap do |s|
-            s.instance_variable_set :@gapi, gapi
-            s.instance_variable_set :@original_json, gapi.to_json
-          end
-        end
-
-        # @private
-        def to_gapi
-          @gapi
-        end
-
-        # @private
-        def == other
-          return false unless other.is_a? Schema
-          to_gapi.to_json == other.to_gapi.to_json
         end
 
         ##
@@ -270,6 +251,33 @@ module Google
                                                   mode: mode
           yield nested_field
           nested_field
+        end
+
+        # @private
+        def changed?
+          return false if frozen?
+          @original_json != @gapi.to_json
+        end
+
+        # @private
+        def self.from_gapi gapi
+          gapi ||= Google::Apis::BigqueryV2::TableSchema.new fields: []
+          gapi.fields ||= []
+          new.tap do |s|
+            s.instance_variable_set :@gapi, gapi
+            s.instance_variable_set :@original_json, gapi.to_json
+          end
+        end
+
+        # @private
+        def to_gapi
+          @gapi
+        end
+
+        # @private
+        def == other
+          return false unless other.is_a? Schema
+          to_gapi.to_json == other.to_gapi.to_json
         end
 
         protected
