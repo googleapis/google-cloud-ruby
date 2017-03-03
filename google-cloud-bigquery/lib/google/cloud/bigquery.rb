@@ -95,33 +95,12 @@ module Google
     # explained in [Querying
     # Data](https://cloud.google.com/bigquery/querying-data).
     #
-    # ### Legacy SQL (formerly BigQuery SQL)
-    #
-    # Before version 2.0, BigQuery executed queries using a non-standard SQL
-    # dialect known as BigQuery SQL. This variant is still the default, and will
-    # be used unless you pass the flag `standard_sql: true` with your query.
-    # (If you get an SQL syntax error with a query that may be written in
-    # standard SQL, be sure that you are passing this option.)
-    #
-    # ```ruby
-    # require "google/cloud/bigquery"
-    #
-    # bigquery = Google::Cloud::Bigquery.new
-    #
-    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
-    #       "FROM [publicdata:samples.shakespeare]"
-    # data = bigquery.query sql
-    # ```
-    #
-    # Notice that in legacy SQL, a fully-qualified table name uses the following
-    # format: `[my-dashed-project:dataset1.tableName]`.
-    #
     # ### Standard SQL
     #
     # Standard SQL is the preferred SQL dialect for querying data stored in
     # BigQuery. It is compliant with the SQL 2011 standard, and has extensions
-    # that support querying nested and repeated data. It has several advantages
-    # over legacy SQL, including:
+    # that support querying nested and repeated data. This is the default
+    # syntax. It has several advantages over Legacy SQL, including:
     #
     # * Composability using `WITH` clauses and SQL functions
     # * Subqueries in the `SELECT` list and `WHERE` clause
@@ -136,8 +115,7 @@ module Google
     # For examples that demonstrate some of these features, see [Standard SQL
     # highlights](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights).
     #
-    # Legacy SQL is still the default. To use standard SQL instead, pass the
-    # option `standard_sql: true` with your query.
+    # Standard SQL is the default.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -147,12 +125,35 @@ module Google
     # sql = "SELECT word, SUM(word_count) AS word_count " \
     #       "FROM `bigquery-public-data.samples.shakespeare`" \
     #       "WHERE word IN ('me', 'I', 'you') GROUP BY word"
-    # data = bigquery.query sql, standard_sql: true
+    # data = bigquery.query sql
     # ```
     #
-    # Notice that in standard SQL, the format for a fully-qualified table name
-    # uses back-ticks instead of brackets, and a dot instead of a semi-colon:
-    # <code>`my-dashed-project.dataset1.tableName`</code>.
+    # Notice that in standard SQL, a fully-qualified table name uses the
+    # following format: <code>`my-dashed-project.dataset1.tableName`</code>.
+    #
+    # ### Legacy SQL (formerly BigQuery SQL)
+    #
+    # Before version 2.0, BigQuery executed queries using a non-standard SQL
+    # dialect known as BigQuery SQL. This variant is optional, and can be
+    # enabled by passing the flag `legacy_sql: true` with your query. (If you
+    # get an SQL syntax error with a query that may be written in standard SQL,
+    # be sure that you are passing this option.)
+    #
+    # To use legacy SQL, pass the option `legacy_sql: true` with your query.
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    #
+    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
+    #       "FROM [publicdata:samples.shakespeare]"
+    # data = bigquery.query sql, legacy_sql: true
+    # ```
+    #
+    # Notice that in legacy SQL, a fully-qualified table name uses brackets
+    # instead of back-ticks, and a semi-colon instead of a dot to separate the
+    # project and the dataset: `[my-dashed-project:dataset1.tableName]`.
     #
     # #### Query parameters
     #

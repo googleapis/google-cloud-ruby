@@ -648,7 +648,7 @@ def view_full_hash project = "my-project-id", dataset = "my-dataset-id", id = ni
 
   hash = table_full_hash project, dataset, id, name, description
   hash["type"] = "VIEW"
-  hash["view"] = { "query" => "SELECT name, age, score, active FROM [external:publicdata.users]" }
+  hash["view"] = { "query" => "SELECT name, age, score, active FROM `external.publicdata.users`" }
   hash
 end
 
@@ -767,7 +767,7 @@ end
 def query_job_hash
   hash = random_job_hash
   hash["configuration"]["query"] = {
-    "query" => "SELECT name, age, score, active FROM [users]",
+    "query" => "SELECT name, age, score, active FROM `users`",
     "destinationTable" => {
       "projectId" => "target_project_id",
       "datasetId" => "target_dataset_id",

@@ -120,7 +120,7 @@ module Google
 
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
-        # the format specified by the [Query
+        # the format specified by the [Legacy SQL Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # `project_name:datasetId.tableId`. To use this value in queries see
         # {#query_id}.
@@ -137,6 +137,15 @@ module Google
         # Reference](https://cloud.google.com/bigquery/query-reference#from).
         # Useful in queries.
         #
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect. Optional. The default value is true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. Optional. The default value is false.
+        #
         # @example
         #   require "google/cloud/bigquery"
         #
@@ -148,8 +157,12 @@ module Google
         #
         # @!group Attributes
         #
-        def query_id
-          project_id["-"] ? "[#{id}]" : id
+        def query_id standard_sql: nil, legacy_sql: nil
+          if Convert.resolve_legacy_sql legacy_sql, standard_sql
+            "[#{id}]"
+          else
+            "`#{project_id}.#{dataset_id}.#{table_id}`"
+          end
         end
 
         ##
