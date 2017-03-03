@@ -103,18 +103,23 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "updates its schema" do
-    t = dataset.create_table "table_schema_test"
-    t.schema do |s|
-      s.boolean "available", description: "available description", mode: :nullable
-    end
-    t.headers.must_equal ["available"]
-    t.schema replace: true do |s|
-      s.boolean "available", description: "available description", mode: :nullable
-      s.record "countries_lived", description: "countries_lived description", mode: :repeated do |nested|
-        nested.float "rating", description: "An value from 1 to 10", mode: :nullable
+    begin
+      t = dataset.create_table "table_schema_test"
+      t.schema do |s|
+        s.boolean "available", description: "available description", mode: :nullable
       end
+      t.headers.must_equal [:available]
+      t.schema replace: true do |s|
+        s.boolean "available", description: "available description", mode: :nullable
+        s.record "countries_lived", description: "countries_lived description", mode: :repeated do |nested|
+          nested.float "rating", description: "An value from 1 to 10", mode: :nullable
+        end
+      end
+      t.headers.must_equal [:available, :countries_lived]
+    ensure
+      t2 = dataset.table "table_schema_test"
+      t2.delete if t2
     end
-    t.headers.must_equal ["available", "countries_lived"]
   end
 
   it "inserts rows directly and gets its data" do
