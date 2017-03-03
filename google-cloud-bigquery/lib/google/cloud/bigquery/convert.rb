@@ -218,6 +218,11 @@ module Google
         end
         ##
         # @private
+        def self.to_json_row row
+          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+        end
+        ##
+        # @private
         def self.to_json_value value
           if DateTime === value
             value.strftime "%Y-%m-%d %H:%M:%S.%6N"

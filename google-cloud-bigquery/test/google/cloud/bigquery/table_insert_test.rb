@@ -164,7 +164,8 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
                     "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06",
                     "favorite_time"=>"2001-12-20 06:59:59.000000"}
     inserted_row_gapi = Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-      insert_id: Digest::MD5.base64digest(inserted_row.inspect),
+      insert_id: Digest::MD5.base64digest(
+        Google::Cloud::Bigquery::Convert.to_json_row(inserted_row).inspect),
       json: inserted_row
     )
     mock = Minitest::Mock.new
