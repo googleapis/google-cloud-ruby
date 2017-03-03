@@ -302,9 +302,6 @@ module Google
         #   length is 1,024 characters.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
-        # @param [Array<Schema::Field>] fields An array of Schema::Field objects
-        #   specifying the schema's data types for the table. The schema may
-        #   also be configured when passing a block.
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
@@ -325,26 +322,6 @@ module Google
         #   table = dataset.create_table "my_table",
         #                                name: "My Table",
         #                                description: "A description of table."
-        #
-        # @example The table's schema fields can be passed as an argument.
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #
-        #   schema_fields = [
-        #     Google::Cloud::Bigquery::Schema::Field.new(
-        #       "first_name", :string, mode: :required),
-        #     Google::Cloud::Bigquery::Schema::Field.new(
-        #       "cities_lived", :record, mode: :repeated,
-        #       fields: [
-        #         Google::Cloud::Bigquery::Schema::Field.new(
-        #           "place", :string, mode: :required),
-        #         Google::Cloud::Bigquery::Schema::Field.new(
-        #           "number_of_years", :integer, mode: :required),
-        #         ])
-        #   ]
-        #   table = dataset.create_table "my_table", fields: schema_fields
         #
         # @example Or the table's schema can be configured with the block.
         #   require "google/cloud/bigquery"
@@ -379,7 +356,7 @@ module Google
         #
         # @!group Table
         #
-        def create_table table_id, name: nil, description: nil, fields: nil
+        def create_table table_id, name: nil, description: nil
           ensure_service!
           new_tb = Google::Apis::BigqueryV2::Table.new(
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
@@ -388,7 +365,6 @@ module Google
           updater = Table::Updater.new(new_tb).tap do |tb|
             tb.name = name unless name.nil?
             tb.description = description unless description.nil?
-            tb.schema.fields = fields unless fields.nil?
           end
 
           yield updater if block_given?
@@ -590,31 +566,28 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - A 'duplicate' error is returned in the job result if the
         #     table exists and contains data.
-        # @param [Boolean] large_results If `true`, allows the query to produce
-        #   arbitrarily large result tables at a slight cost in performance.
-        #   Requires `table` parameter to be set.
-        # @param [Boolean] flatten Flattens all nested and repeated fields in
-        #   the query results. The default value is `true`. `large_results`
-        #   parameter must be `true` if this is set to `false`.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
         #   dialect for this query. If set to true, the query will use standard
         #   SQL rather than the [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect. When set to true, the values of `large_results` and
-        #   `flatten` are ignored; the query will be run as if `large_results`
-        #   is true and `flatten` is false. Optional. The default value is
-        #   true.
+        #   dialect. Optional. The default value is true.
         # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect for this query. If set to false, the query will use
         #   BigQuery's [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   When set to false, the values of `large_results` and `flatten` are
-        #   ignored; the query will be run as if `large_results` is true and
-        #   `flatten` is false. Optional. The default value is false.
+        #   dialect. Optional. The default value is false.
+        # @param [Boolean] large_results This option is specific to Legacy SQL.
+        #   If `true`, allows the query to produce arbitrarily large result
+        #   tables at a slight cost in performance. Requires `table` parameter
+        #   to be set.
+        # @param [Boolean] flatten This option is specific to Legacy SQL.
+        #   Flattens all nested and repeated fields in the query results. The
+        #   default value is `true`. `large_results` parameter must be `true` if
+        #   this is set to `false`.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -680,8 +653,8 @@ module Google
         # @!group Data
         #
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
-                      table: nil, create: nil, write: nil, large_results: nil,
-                      flatten: nil, legacy_sql: nil, standard_sql: nil
+                      table: nil, create: nil, write: nil, standard_sql: nil,
+                      legacy_sql: nil, large_results: nil, flatten: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,

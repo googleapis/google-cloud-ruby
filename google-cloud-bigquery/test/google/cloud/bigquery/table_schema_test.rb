@@ -34,16 +34,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   let(:new_table_hash) { random_table_hash dataset, table_id, table_name, description }
 
-  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] }
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
-  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", fields: [] }
-  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", fields: [] }
-  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", fields: [] }
-  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", fields: [] }
-  let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", fields: [] }
-  let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", fields: [] }
-  let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", fields: [] }
-  let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [ field_integer_gapi, field_timestamp_gapi ] }
+  let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
   let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
   let(:field_integer) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_integer_gapi }
@@ -147,6 +147,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     end_date_timestamp_gapi = field_timestamp_gapi.dup
     end_date_timestamp_gapi.name = "end_date"
     new_schema_gapi = table_gapi.schema.dup
+    new_schema_gapi.fields = table_gapi.schema.fields.dup
     new_schema_gapi.fields << end_date_timestamp_gapi
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
@@ -210,13 +211,60 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.fields.must_equal [field_string_required, field_record_repeated]
   end
 
+  it "modifies a nested schema via field" do
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi, field_record_repeated_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
+
+    table.schema replace: true do |schema|
+      schema.string "first_name", mode: :required
+      schema.record "cities_lived", mode: :repeated do |nested|
+        nested.integer "rank", description: "An integer value from 1 to 100"
+        nested.timestamp "started_at"
+      end
+    end
+
+    mock.verify
+
+    next_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi, Google::Apis::BigqueryV2::TableFieldSchema.new(name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi, field_string_required_gapi ])])
+    next_table_gapi = table_gapi.dup
+    next_table_gapi.schema = next_schema_gapi
+    patch_next_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: next_schema_gapi)
+    mock.expect :patch_table, next_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi]
+    table.service.mocked_service = mock
+
+    table.schema do |schema|
+      schema.field("first_name").mode.must_equal "REQUIRED"
+      schema.field "cities_lived" do |nested|
+        # Add a new field to the existing record
+        nested.string "first_name", mode: :required
+      end
+    end
+
+    mock.verify
+
+    table.schema.headers.must_include :first_name
+    table.schema.headers.must_include :cities_lived
+    table.schema.field(:cities_lived).headers.must_include :started_at
+    table.schema.field(:cities_lived).headers.must_include :rank
+    table.schema.field("cities_lived").headers.must_include :first_name
+  end
+
   it "allows nested records several levels deep" do
     mock = Minitest::Mock.new
     nested_schema_hash = {
       fields: [
-        { name: "first_name", type: "STRING", mode: "REQUIRED", fields: [] },
-        { name: "countries_lived", type: "RECORD", mode: "REPEATED", fields: [
-            { name: "cities_lived", type: "RECORD", mode: "REPEATED", fields: [
+        { name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] },
+        { name: "countries_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
+            { name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
                 { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] }
               ]
             }

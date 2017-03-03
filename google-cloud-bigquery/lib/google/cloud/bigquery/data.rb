@@ -66,6 +66,24 @@ module Google
         end
 
         ##
+        # The schema of the data.
+        def schema
+          table.schema
+        end
+
+        ##
+        # The fields of the data.
+        def fields
+          schema.fields
+        end
+
+        ##
+        # The name of the columns in the data.
+        def headers
+          schema.headers
+        end
+
+        ##
         # Whether there is a next page of data.
         #
         # @return [Boolean]
@@ -175,14 +193,6 @@ module Google
             break unless results.next?
             results = results.next
           end
-        end
-
-        ##
-        # Represents Table Data as a list of positional values (array of
-        # arrays). No type conversion is made, e.g. numbers are formatted as
-        # strings.
-        def raw
-          Array(gapi.rows).map { |row| row.f.map(&:v) }
         end
 
         ##

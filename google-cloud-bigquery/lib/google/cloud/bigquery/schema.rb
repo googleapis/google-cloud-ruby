@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigquery/schema/field"
+
 module Google
   module Cloud
     module Bigquery
@@ -42,69 +44,35 @@ module Google
       #   end
       #
       class Schema
-        def initialize
-          @nested = nil
-        end
-
-        def fields
-          @fields ||= @gapi.fields.map { |f| Field.from_gapi f }
-        end
-
-        def fields= new_fields
-          @gapi.fields = Array(new_fields).map(&:to_gapi)
-          @fields = @gapi.fields.map { |f| Field.from_gapi f }
-        end
-
-        def empty?
-          fields.empty?
-        end
-
-        # @private
-        def changed?
-          return false if frozen?
-          check_for_mutated_schema!
-          @original_json != @gapi.to_json
-        end
-
-        # @private
-        def freeze
-          @gapi = @gapi.dup.freeze
-          @gapi.fields.freeze
-          @fields = @gapi.fields.map { |f| Field.from_gapi(f).freeze }
-          @fields.freeze
-          super
-        end
-
         ##
-        # @private Make sure any changes are saved.
-        def check_for_mutated_schema!
-          return if frozen?
-          return if @gapi.frozen?
-          return if @fields.nil?
-          gapi_fields = Array(@fields).map(&:to_gapi)
-          @gapi.update! fields: gapi_fields
-        end
-
-        # @private
-        def self.from_gapi gapi
-          gapi ||= Google::Apis::BigqueryV2::TableSchema.new fields: []
-          gapi.fields ||= []
-          new.tap do |s|
-            s.instance_variable_set :@gapi, gapi
-            s.instance_variable_set :@original_json, gapi.to_json
+        # The fields of the table schema.
+        def fields
+          if frozen?
+            Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
+          else
+            Array(@gapi.fields).map { |f| Field.from_gapi f }
           end
         end
 
-        # @private
-        def to_gapi
-          check_for_mutated_schema!
-          @gapi
+        ##
+        # The names of the fields as symbols.
+        def headers
+          fields.map(&:name).map(&:to_sym)
         end
 
-        # @private
-        def == other
-          return false unless other.is_a? Schema
-          to_gapi.to_h == other.to_gapi.to_h
+        ##
+        # Retreive a fields by name.
+        def field name
+          f = fields.find { |fld| fld.name == name.to_s }
+          return nil if f.nil?
+          yield f if block_given?
+          f
+        end
+
+        ##
+        # Whether the schema has no fields defined.
+        def empty?
+          fields.empty?
         end
 
         ##
@@ -119,7 +87,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def string name, description: nil, mode: :nullable
-          add_field name, :string, nil, description: description, mode: mode
+          add_field name, :string, description: description, mode: mode
         end
 
         ##
@@ -134,7 +102,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def integer name, description: nil, mode: :nullable
-          add_field name, :integer, nil, description: description, mode: mode
+          add_field name, :integer, description: description, mode: mode
         end
 
         ##
@@ -149,7 +117,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def float name, description: nil, mode: :nullable
-          add_field name, :float, nil, description: description, mode: mode
+          add_field name, :float, description: description, mode: mode
         end
 
         ##
@@ -164,7 +132,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def boolean name, description: nil, mode: :nullable
-          add_field name, :boolean, nil, description: description, mode: mode
+          add_field name, :boolean, description: description, mode: mode
         end
 
         ##
@@ -179,7 +147,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def bytes name, description: nil, mode: :nullable
-          add_field name, :bytes, nil, description: description, mode: mode
+          add_field name, :bytes, description: description, mode: mode
         end
 
         ##
@@ -194,7 +162,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def timestamp name, description: nil, mode: :nullable
-          add_field name, :timestamp, nil, description: description, mode: mode
+          add_field name, :timestamp, description: description, mode: mode
         end
 
         ##
@@ -209,7 +177,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def time name, description: nil, mode: :nullable
-          add_field name, :time, nil, description: description, mode: mode
+          add_field name, :time, description: description, mode: mode
         end
 
         ##
@@ -224,7 +192,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def datetime name, description: nil, mode: :nullable
-          add_field name, :datetime, nil, description: description, mode: mode
+          add_field name, :datetime, description: description, mode: mode
         end
 
         ##
@@ -239,7 +207,7 @@ module Google
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
         def date name, description: nil, mode: :nullable
-          add_field name, :date, nil, description: description, mode: mode
+          add_field name, :date, description: description, mode: mode
         end
 
         ##
@@ -256,8 +224,8 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
-        # @yield [nested_schema] a block for setting the nested schema
-        # @yieldparam [Schema] nested_schema the object accepting the
+        # @yield [field] a block for setting the nested record's schema
+        # @yieldparam [Field] field the object accepting the
         #   nested schema
         #
         # @example
@@ -276,141 +244,86 @@ module Google
         #   end
         #
         def record name, description: nil, mode: nil
+          # TODO: do we need to fail if no block was given?
           fail ArgumentError, "a block is required" unless block_given?
-          empty_schema = Google::Apis::BigqueryV2::TableSchema.new fields: []
-          nested_schema = self.class.from_gapi empty_schema
-          yield nested_schema
-          add_field name, :record, nested_schema.fields,
-                    description: description, mode: mode
+
+          nested_field = add_field name, :record, description: description,
+                                                  mode: mode
+          yield nested_field
+          nested_field
+        end
+
+        # @private
+        def changed?
+          return false if frozen?
+          @original_json != @gapi.to_json
+        end
+
+        # @private
+        def self.from_gapi gapi
+          gapi ||= Google::Apis::BigqueryV2::TableSchema.new fields: []
+          gapi.fields ||= []
+          new.tap do |s|
+            s.instance_variable_set :@gapi, gapi
+            s.instance_variable_set :@original_json, gapi.to_json
+          end
+        end
+
+        # @private
+        def to_gapi
+          @gapi
+        end
+
+        # @private
+        def == other
+          return false unless other.is_a? Schema
+          to_gapi.to_json == other.to_gapi.to_json
         end
 
         protected
 
-        def add_field name, type, nested_fields, description: nil,
-                      mode: :nullable
-          # Make nested fields an empty array if nil
-          nested_fields ||= []
-          # Remove any existing field of this name
-          fields.reject! { |f| f.name == name }
-          fields << Field.new(name, type, description: description,
-                                          mode: mode, fields: nested_fields)
+        def frozen_check!
+          return unless frozen?
+          fail ArgumentError, "Cannot modify a frozen schema"
         end
 
-        class Field
-          # @private
-          MODES = %w( NULLABLE REQUIRED REPEATED )
+        def add_field name, type, description: nil, mode: :nullable
+          frozen_check!
 
-          # @private
-          TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
-                      DATE RECORD )
+          new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
+            name: String(name),
+            type: verify_type(type),
+            description: description,
+            mode: verify_mode(mode),
+            fields: [])
 
-          def initialize name, type, description: nil,
-                         mode: :nullable, fields: nil
-            @gapi = Google::Apis::BigqueryV2::TableFieldSchema.new
-            @gapi.update! name: name
-            @gapi.update! type: verify_type(type)
-            @gapi.update! description: description if description
-            @gapi.update! mode: verify_mode(mode) if mode
-            if fields
-              @fields = fields
-              check_for_changed_fields!
-            end
-            @original_json = @gapi.to_json
+          # Remove any existing field of this name
+          @gapi.fields ||= []
+          @gapi.fields.reject! { |f| f.name == new_gapi.name }
+
+          # Add to the nested fields
+          @gapi.fields << new_gapi
+
+          # return the public API object
+          Field.from_gapi new_gapi
+        end
+
+        def verify_type type
+          type = type.to_s.upcase
+          unless Field::TYPES.include? type
+            fail ArgumentError,
+                 "Type '#{type}' not found in #{TYPES.inspect}"
           end
+          type
+        end
 
-          def name
-            @gapi.name
+        def verify_mode mode
+          mode = :nullable if mode.nil?
+          mode = mode.to_s.upcase
+          unless Field::MODES.include? mode
+            fail ArgumentError "Unable to determine mode for '#{mode}'"
           end
-
-          def name= new_name
-            @gapi.update! name: new_name
-          end
-
-          def type
-            @gapi.type
-          end
-
-          def type= new_type
-            @gapi.update! type: verify_type(new_type)
-          end
-
-          def description
-            @gapi.description
-          end
-
-          def description= new_description
-            @gapi.update! description: new_description
-          end
-
-          def mode
-            @gapi.mode
-          end
-
-          def mode= new_mode
-            @gapi.update! mode: verify_mode(new_mode)
-          end
-
-          def fields
-            @fields ||= Array(@gapi.fields).map { |f| Field.from_gapi f }
-          end
-
-          def fields= new_fields
-            @fields = new_fields
-          end
-
-          ##
-          # @private Make sure any fields are saved.
-          def check_for_changed_fields!
-            return if frozen?
-            fields.each(&:check_for_changed_fields!)
-            gapi_fields = Array(fields).map(&:to_gapi)
-            @gapi.update! fields: gapi_fields
-          end
-
-          # @private
-          def changed?
-            @original_json == to_gapi.to_json
-          end
-
-          # @private
-          def self.from_gapi gapi
-            new("to-be-replaced", "STRING").tap do |f|
-              f.instance_variable_set :@gapi, gapi
-              f.instance_variable_set :@original_json, gapi.to_json
-            end
-          end
-
-          # @private
-          def to_gapi
-            # make sure any changes are saved.
-            check_for_changed_fields!
-            @gapi
-          end
-
-          # @private
-          def == other
-            return false unless other.is_a? Field
-            to_gapi.to_h == other.to_gapi.to_h
-          end
-
-          protected
-
-          def verify_type type
-            upcase_type = type.to_s.upcase
-            unless TYPES.include? upcase_type
-              fail ArgumentError,
-                   "Type '#{upcase_type}' not found in #{TYPES.inspect}"
-            end
-            upcase_type
-          end
-
-          def verify_mode mode
-            upcase_mode = mode.to_s.upcase
-            unless MODES.include? upcase_mode
-              fail ArgumentError "Unable to determine mode for '#{mode}'"
-            end
-            upcase_mode
-          end
+          mode
         end
       end
     end

@@ -81,15 +81,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "copies schema to a new table" do
-    tbl_copy = dataset.create_table "#{table.table_id}copy" do |tbl|
-      tbl.schema.fields = table.schema.fields
-    end
-
-    tbl_copy.refresh!
-    tbl_copy.headers.must_equal table.headers
-  end
-
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"
@@ -166,7 +157,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     data.etag.wont_be :nil?
     data.total.must_be :nil?
     data.count.wont_be :nil?
-    data.raw.wont_be :nil?
     data.all(request_limit: 2).each do |row|
       row.must_be_kind_of Hash
       [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
