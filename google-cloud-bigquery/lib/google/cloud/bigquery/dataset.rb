@@ -447,7 +447,8 @@ module Google
             description: description,
             view: Google::Apis::BigqueryV2::ViewDefinition.new(
               query: query,
-              use_legacy_sql: resolve_legacy_sql(legacy_sql, standard_sql)
+              use_legacy_sql: Convert.resolve_legacy_sql(legacy_sql,
+                                                         standard_sql)
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
@@ -849,12 +850,6 @@ module Google
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
-        end
-
-        def resolve_legacy_sql legacy_sql, standard_sql
-          return legacy_sql unless legacy_sql.nil?
-          return !standard_sql unless standard_sql.nil?
-          false
         end
 
         def patch_gapi! *attributes

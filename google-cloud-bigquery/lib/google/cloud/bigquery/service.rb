@@ -402,8 +402,9 @@ module Google
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
                 default_dataset: default_dataset,
-                use_legacy_sql: resolve_legacy_sql(options[:legacy_sql],
-                                                   options[:standard_sql])
+                use_legacy_sql: Convert.resolve_legacy_sql(
+                  options[:legacy_sql], options[:standard_sql])
+
               )
             )
           )
@@ -441,8 +442,8 @@ module Google
             timeout_ms: options[:timeout],
             dry_run: options[:dryrun],
             use_query_cache: options[:cache],
-            use_legacy_sql: resolve_legacy_sql(options[:legacy_sql],
-                                               options[:standard_sql])
+            use_legacy_sql: Convert.resolve_legacy_sql(
+              options[:legacy_sql], options[:standard_sql])
           )
 
           if options[:params]
@@ -469,12 +470,6 @@ module Google
         end
 
         # rubocop:enable all
-
-        def resolve_legacy_sql legacy_sql, standard_sql
-          return legacy_sql unless legacy_sql.nil?
-          return !standard_sql unless standard_sql.nil?
-          false
-        end
 
         ##
         # Job description for copy job

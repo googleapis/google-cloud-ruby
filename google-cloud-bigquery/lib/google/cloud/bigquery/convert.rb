@@ -239,6 +239,12 @@ module Google
           end
         end
 
+        def self.resolve_legacy_sql legacy_sql, standard_sql
+          return !standard_sql unless standard_sql.nil?
+          return legacy_sql unless legacy_sql.nil?
+          false
+        end
+
         # rubocop:enable all
       end
     end
