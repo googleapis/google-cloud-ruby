@@ -447,8 +447,8 @@ module Google
             description: description,
             view: Google::Apis::BigqueryV2::ViewDefinition.new(
               query: query,
-              use_legacy_sql: Convert.resolve_legacy_sql(legacy_sql,
-                                                         standard_sql)
+              use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
+                                                         legacy_sql)
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts

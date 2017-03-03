@@ -403,7 +403,7 @@ module Google
                 flatten_results: options[:flatten],
                 default_dataset: default_dataset,
                 use_legacy_sql: Convert.resolve_legacy_sql(
-                  options[:legacy_sql], options[:standard_sql])
+                  options[:standard_sql], options[:legacy_sql])
 
               )
             )
@@ -443,7 +443,7 @@ module Google
             dry_run: options[:dryrun],
             use_query_cache: options[:cache],
             use_legacy_sql: Convert.resolve_legacy_sql(
-              options[:legacy_sql], options[:standard_sql])
+              options[:standard_sql], options[:legacy_sql])
           )
 
           if options[:params]

@@ -158,7 +158,7 @@ module Google
         # @!group Attributes
         #
         def query_id standard_sql: nil, legacy_sql: nil
-          if Convert.resolve_legacy_sql legacy_sql, standard_sql
+          if Convert.resolve_legacy_sql standard_sql, legacy_sql
             "[#{id}]"
           else
             "`#{project_id}.#{dataset_id}.#{table_id}`"

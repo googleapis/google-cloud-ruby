@@ -212,9 +212,7 @@ module Google
         ##
         # @private
         def self.to_json_rows rows
-          rows.map do |row|
-            Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
-          end
+          rows.map { |row| to_json_row row }
         end
         ##
         # @private
@@ -244,7 +242,7 @@ module Google
           end
         end
 
-        def self.resolve_legacy_sql legacy_sql, standard_sql
+        def self.resolve_legacy_sql standard_sql, legacy_sql
           return !standard_sql unless standard_sql.nil?
           return legacy_sql unless legacy_sql.nil?
           false

@@ -136,7 +136,7 @@ module Google
         # @!group Attributes
         #
         def query_id standard_sql: nil, legacy_sql: nil
-          if Convert.resolve_legacy_sql legacy_sql, standard_sql
+          if Convert.resolve_legacy_sql standard_sql, legacy_sql
             "[#{id}]"
           else
             "`#{project_id}.#{dataset_id}.#{table_id}`"
@@ -344,7 +344,7 @@ module Google
           @gapi.view ||= Google::Apis::BigqueryV2::ViewDefinition.new
           @gapi.view.update! query: new_query
           @gapi.view.update! use_legacy_sql: \
-            Convert.resolve_legacy_sql(legacy_sql, standard_sql)
+            Convert.resolve_legacy_sql(standard_sql, legacy_sql)
           patch_view_gapi! :query
         end
 
@@ -447,6 +447,12 @@ module Google
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
+        end
+
+        def resolve_legacy_sql legacy_sql, standard_sql
+          return legacy_sql unless legacy_sql.nil?
+          return !standard_sql unless standard_sql.nil?
+          false
         end
 
         def patch_gapi! *attributes
