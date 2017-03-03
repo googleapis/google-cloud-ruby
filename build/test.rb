@@ -22,7 +22,7 @@ commands.each_with_index do |command, index|
         end
         Process.wait(pid)
       end
-      exit status if status != 0
+      exit status if status && status != 0
     rescue PTY::ChildExited
       puts "The test process exited."
     end
