@@ -644,7 +644,7 @@ describe "Vision", :vision do
       annotation.wont_be :text?
       annotation.wont_be :safe_search?
       annotation.must_be :properties?
-      annotation.wont_be :crop_hints?
+      # annotation.wont_be :crop_hints?
       annotation.wont_be :web?
 
       annotation.properties.wont_be :nil?
