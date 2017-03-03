@@ -367,7 +367,6 @@ module Google
               schema_builder = Schema.from_gapi empty_schema
             end
             yield schema_builder
-            # schema_builder.check_for_mutated_schema!
             if schema_builder.changed?
               @gapi.schema = schema_builder.to_gapi
               patch_gapi! :schema
@@ -856,12 +855,6 @@ module Google
           end
         end
 
-        def resolve_legacy_sql legacy_sql, standard_sql
-          return legacy_sql unless legacy_sql.nil?
-          return !standard_sql unless standard_sql.nil?
-          false
-        end
-
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < Table
@@ -1221,7 +1214,6 @@ module Google
           # Make sure any access changes are saved
           def check_for_mutated_schema!
             return if @schema.nil?
-            # @schema.check_for_mutated_schema!
             return unless @schema.changed?
             @gapi.schema = @schema.to_gapi
             patch_gapi! :schema
