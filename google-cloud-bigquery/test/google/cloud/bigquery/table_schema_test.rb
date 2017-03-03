@@ -211,6 +211,53 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.fields.must_equal [field_string_required, field_record_repeated]
   end
 
+  it "modifies a nested schema via field" do
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi, field_record_repeated_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+    table.service.mocked_service = mock
+
+    table.schema replace: true do |schema|
+      schema.string "first_name", mode: :required
+      schema.record "cities_lived", mode: :repeated do |nested|
+        nested.integer "rank", description: "An integer value from 1 to 100"
+        nested.timestamp "started_at"
+      end
+    end
+
+    mock.verify
+
+    next_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi, Google::Apis::BigqueryV2::TableFieldSchema.new(name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi, field_string_required_gapi ])])
+    next_table_gapi = table_gapi.dup
+    next_table_gapi.schema = next_schema_gapi
+    patch_next_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: next_schema_gapi)
+    mock.expect :patch_table, next_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi]
+    table.service.mocked_service = mock
+
+    table.schema do |schema|
+      schema.field("first_name").mode.must_equal "REQUIRED"
+      schema.field "cities_lived" do |nested|
+        # Add a new field to the existing record
+        nested.string "first_name", mode: :required
+      end
+    end
+
+    mock.verify
+
+    table.schema.headers.must_include :first_name
+    table.schema.headers.must_include :cities_lived
+    table.schema.field(:cities_lived).headers.must_include :started_at
+    table.schema.field(:cities_lived).headers.must_include :rank
+    table.schema.field("cities_lived").headers.must_include :first_name
+  end
+
   it "allows nested records several levels deep" do
     mock = Minitest::Mock.new
     nested_schema_hash = {

@@ -65,6 +65,17 @@ module Google
             end
           end
 
+          def headers
+            fields.map(&:name).map(&:to_sym)
+          end
+
+          def field name
+            f = fields.find { |fld| fld.name == name.to_s }
+            return nil if f.nil?
+            yield f if block_given?
+            f
+          end
+
           ##
           # Adds a string field to the schema.
           #

@@ -60,6 +60,43 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     rows[2].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
   end
 
+  it "modifies a nested schema via field" do
+    empty_table_id = "#{table_id}_empty"
+    empty_table = dataset.table empty_table_id
+    empty_table.delete if empty_table
+
+    empty_table = dataset.create_table empty_table_id do |schema|
+      schema.integer "id", mode: :nullable
+      schema.string "name", mode: :nullable
+      schema.record "spells", mode: :repeated do |spells|
+        spells.string "name", mode: :nullable
+        spells.record "properties", mode: :repeated do |properties|
+          properties.string "name", mode: :nullable
+          properties.float "power", mode: :nullable
+        end
+      end
+    end
+
+    empty_table.schema.field("spells").headers.wont_include :score
+    empty_table.schema.field("spells").headers.must_include :properties
+    empty_table.schema.field(:spells).field(:properties).headers.wont_include :grade
+    empty_table.schema do |schema|
+      # adds to a nested field directly inline
+      schema.field(:spells).integer :score, mode: :nullable
+      # adds to a nested field in a block
+      schema.field "spells" do |spells|
+        spells.field "properties" do |properties|
+          properties.float "grade", mode: :nullable
+        end
+      end
+    end
+    empty_table.schema.field("spells").headers.must_include :score
+    empty_table.schema.field("spells").headers.must_include :properties
+    empty_table.schema.field(:spells).field(:properties).headers.must_include :grade
+
+    empty_table.delete
+  end
+
   def assert_rows_equal returned_row, example_row
     returned_row[:id].must_equal example_row[:id]
     returned_row[:name].must_equal example_row[:name]
