@@ -12,14 +12,14 @@ commands.each_with_index do |command, index|
   # only run the commands that are for the current node
   if node_index == index % node_total
     begin
-      status = PTY.spawn(command) do |stdout, _stdin, _pid|
+      status = PTY.spawn(command) do |stdout, _stdin, pid|
         begin
           stdout.each_char { |c| print c }
         rescue Errno::EIO
         end
         Process.wait(pid)
       end
-      exit status if status != 0
+      exit status if status && status != 0
     rescue PTY::ChildExited
       puts "The test process exited."
     end

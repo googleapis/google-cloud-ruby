@@ -18,9 +18,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
   let(:rows) { [{"name"=>"Heidi", "age"=>"36", "score"=>"7.65", "active"=>"true"},
                 {"name"=>"Aaron", "age"=>"42", "score"=>"8.15", "active"=>"false"},
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
+  let(:insert_id) { "abc123" }
   let(:insert_rows) { rows.map do |row|
                         Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-                          insert_id: Digest::MD5.base64digest(row.to_json),
+                          insert_id: insert_id,
                           json: row
                         )
                       end }
@@ -37,7 +38,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert rows.first
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert rows.first
+    end
 
     mock.verify
 
@@ -54,7 +58,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert rows
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert rows
+    end
 
     mock.verify
 
@@ -71,7 +78,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert rows
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert rows
+    end
 
     mock.verify
 
@@ -106,7 +116,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert rows, skip_invalid: true
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert rows, skip_invalid: true
+    end
 
     mock.verify
 
@@ -123,7 +136,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert rows, ignore_unknown: true
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert rows, ignore_unknown: true
+    end
 
     mock.verify
 
@@ -154,11 +170,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       ],
       tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),
       next_vacation: Date.parse("2666-06-06"),
-      favorite_time: Time.parse("2001-12-19T23:59:59").utc.to_datetime
+      favorite_time: Time.parse("2001-12-19T23:59:59 UTC").utc.to_datetime
     }
     inserted_row_gapi = Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-      insert_id: "NTj6Lfe9TDx9HlAPU2LDQw==",
-      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==", "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-20 06:59:59.000000"}
+      insert_id: insert_id,
+      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==", "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-19 23:59:59.000000"}
     )
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
@@ -167,7 +183,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req]
     table.service.mocked_service = mock
 
-    result = table.insert [inserting_row]
+    result = nil
+    Digest::MD5.stub :base64digest, insert_id do
+      result = table.insert [inserting_row]
+    end
 
     mock.verify
 
