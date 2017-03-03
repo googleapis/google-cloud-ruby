@@ -156,17 +156,9 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       next_vacation: Date.parse("2666-06-06"),
       favorite_time: Time.parse("2001-12-19T23:59:59").utc.to_datetime
     }
-    inserted_row = Google::Cloud::Bigquery::Convert.to_json_row(
-      { "id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6,
-        "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001],
-        "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}],
-        "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==",
-        "last_used"=>"2015-10-31 23:59:56.000000+00:00"}],
-        "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06",
-        "favorite_time"=>"2001-12-20 06:59:59.000000"})
     inserted_row_gapi = Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-      insert_id: Digest::MD5.base64digest(inserted_row.to_json),
-      json: inserted_row
+      insert_id: "NTj6Lfe9TDx9HlAPU2LDQw==",
+      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==", "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-20 06:59:59.000000"}
     )
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
