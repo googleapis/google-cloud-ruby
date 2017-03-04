@@ -1,5 +1,9 @@
 # Release History
 
+### 0.24.0 / 2017-03-03
+
+* Dependency on Google API Client has been updated to 0.10.x.
+
 ### 0.23.2 / 2017-02-21
 
 * Allow setting a File's storage_class on file creation
