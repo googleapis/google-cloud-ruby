@@ -1,5 +1,10 @@
 # Release History
 
+### 0.23.2 / 2017-03-03
+
+* No public API changes.
+* Update GRPC header value sent to the Pub/Sub API.
+
 ### 0.23.1 / 2017-03-01
 
 * No public API changes.
