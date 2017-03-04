@@ -1,5 +1,10 @@
 # Release History
 
+### 0.24.2 / 2017-03-03
+
+* No public API changes.
+* Update GRPC header value sent to the Datastore API.
+
 ### 0.24.1 / 2017-03-01
 
 * No public API changes.
