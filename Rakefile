@@ -368,14 +368,16 @@ namespace :jsondoc do
     Dir.chdir gh_pages do
       # commit changes
       sh "git add -A ."
-      if ENV["GH_OAUTH_TOKEN"]
-        sh "git config --global user.email \"travis@travis-ci.org\""
-        sh "git config --global user.name \"travis-ci\""
-        sh "git commit -m \"Update documentation for #{git_ref}\""
-        sh "git push -q #{git_repo} gh-pages:gh-pages"
-      else
-        sh "git commit -m \"Update documentation for #{git_ref}\""
-        sh "git push -q origin gh-pages"
+      unless `git status --porcelain`.chomp.empty?
+        if ENV["GH_OAUTH_TOKEN"]
+          sh "git config --global user.email \"travis@travis-ci.org\""
+          sh "git config --global user.name \"travis-ci\""
+          sh "git commit -m \"Update documentation for #{git_ref}\""
+          sh "git push -q #{git_repo} gh-pages:gh-pages"
+        else
+          sh "git commit -m \"Update documentation for #{git_ref}\""
+          sh "git push -q origin gh-pages"
+        end
       end
     end
   end
