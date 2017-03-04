@@ -1,5 +1,14 @@
 # Release History
 
+### 0.26.0 / 2017-03-03
+
+* Update BigQuery dependency to 0.24.x
+* Update DNS dependency to 0.22.x
+* Update Natural Language dependency to 0.25.x
+* Update Resource Manager dependency to 0.22.x
+* Update Storage dependency to 0.24.x
+* Update Vision dependency to 0.23.x
+
 ### 0.25.0 / 2017-02-21
 
 * Update Datastore dependency to 0.24.x
