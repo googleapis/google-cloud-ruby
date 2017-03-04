@@ -1,5 +1,9 @@
 # Release History
 
+### 0.22.0 / 2017-03-03
+
+* Dependency on Google API Client has been updated to 0.10.x.
+
 ### 0.21.0 / 2016-10-20
 
 * New service constructor Google::Cloud::ResourceManager.new
