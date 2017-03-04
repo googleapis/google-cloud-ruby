@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.3 / 2017-03-03
+
+* Update GRPC header value sent to the Error Reporting API.
+
 ### 0.23.2 / 2017-03-01
 
 * Update GRPC header value sent to the Error Reporting API.
