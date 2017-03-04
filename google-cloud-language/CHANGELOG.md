@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 / 2017-03-03
+
+* Removal of `encoding` method argument, encoding now calculated from system settings.
+* Updated documentation and code examples.
+* Update GRPC header value sent to the Natural Language API.
+
 ### 0.24.0 / 2017-02-21
 
 * Fix GRPC retry bug
