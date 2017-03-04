@@ -1,5 +1,15 @@
 # Release History
 
+### 0.23.0 / 2017-03-03
+
+Major release, adding V1.1 support.
+
+* Support image URLs from the internet, not just Cloud Storage.
+* Add document text detection feature, like text but for longer documents.
+* Add crop hints feature.
+* Add web annotation feature
+* Update GRPC header value sent to the Vision API.
+
 ### 0.22.1 / 2017-03-01
 
 * No public API changes.
