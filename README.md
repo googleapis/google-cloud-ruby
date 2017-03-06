@@ -403,7 +403,7 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
-### Cloud Vision API (Alpha)
+### Cloud Vision API (Beta)
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
 - [google-cloud-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/master/google/cloud/vision)
