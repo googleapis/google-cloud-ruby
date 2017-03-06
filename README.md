@@ -18,6 +18,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Datastore](#cloud-datastore-beta) (Beta)
 * [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 * [Cloud Storage](#cloud-storage-beta) (Beta)
+* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -27,7 +28,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Translation API](#translate-api-alpha) (Alpha)
-* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
