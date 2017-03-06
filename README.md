@@ -18,7 +18,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Datastore](#cloud-datastore-beta) (Beta)
 * [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 * [Cloud Storage](#cloud-storage-beta) (Beta)
-* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
+* [Cloud Vision API](#cloud-vision-api-alpha) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
