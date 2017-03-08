@@ -23,11 +23,674 @@ module Google
       class Breakpoint
         module Evaluator
           STACK_EVAL_DEPTH = 5
+
           EXPRESSION_TRACE_DEPTH = 1
 
-          YARV_INS_BLACKLIST = %w{
+          BYTE_CODE_BLACKLIST = %w{
+            setinstancevariable
+            setclassvariable
+            setconstant
             setglobal
-          }
+            defineclass
+            opt_ltlt
+            opt_aset
+            opt_aset_with
+          }.freeze
+
+          LOCAL_BYTE_CODE_BLACKLIST = %w{
+            setlocal
+          }.freeze
+
+          FUNC_CALL_FLAG_BLACKLIST = %w{
+            ARGS_BLOCKARG
+          }.freeze
+
+          CATCH_TABLE_TYPE_BLACKLIST = %w{
+            rescue
+          }.freeze
+
+          BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{BYTE_CODE_BLACKLIST.join '|'}/
+
+          FULL_BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{
+              [*BYTE_CODE_BLACKLIST, *LOCAL_BYTE_CODE_BLACKLIST].join '|'
+          }/
+
+          FUNC_CALL_FLAG_BLACKLIST_REGEX =
+            /<callinfo!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/
+
+          CATCH_TABLE_BLACKLIST_REGEX =
+            /catch table.*catch type: #{CATCH_TABLE_TYPE_BLACKLIST.join '|'}/m
+
+          private_constant :BYTE_CODE_BLACKLIST_REGEX,
+                           :FULL_BYTE_CODE_BLACKLIST_REGEX,
+                           :FUNC_CALL_FLAG_BLACKLIST_REGEX,
+                           :CATCH_TABLE_BLACKLIST_REGEX
+
+          IMMUTABLE_CLASSES = [
+            Bignum,
+            Complex,
+            Fixnum,
+            FalseClass,
+            Float,
+            Integer,
+            MatchData,
+            NilClass,
+            Numeric,
+            Proc,
+            Range,
+            Regexp,
+            Struct,
+            Symbol,
+            TrueClass,
+            Comparable,
+            Enumerable,
+            Math
+          ].freeze
+
+          def self.hashify ary
+            ary.each.with_index(1).to_h
+          end
+          private_class_method :hashify
+
+          C_CLASS_METHOD_WHITELIST = {
+            # Classes
+            Array => hashify(%I{
+              new
+              []
+              try_convert
+            }).freeze,
+            BasicObject => hashify(%I{
+              new
+            }).freeze,
+            Exception => hashify(%I{
+              exception
+              new
+            }).freeze,
+            Enumerator => hashify(%I{
+              new
+            }).freeze,
+            Fiber => hashify(%I{
+              current
+            }).freeze,
+            File => hashify(%I{
+              basename
+              dirname
+              extname
+              join
+              path
+              split
+            }).freeze,
+            Hash => hashify(%I{
+              []
+              new
+              try_convert
+            }).freeze,
+            Module => hashify(%I{
+              constants
+              nesting
+              used_modules
+            }).freeze,
+            Object => hashify(%I{
+              new
+            }).freeze,
+            String => hashify(%I{
+              new
+              try_convert
+            }).freeze,
+            Thread => hashify(%I{
+              DEBUG
+              abort_on_exception
+              current
+              list
+              main
+              pending_interrupt?
+              report_on_exception
+            }).freeze,
+            Time => hashify(%I{
+              at
+              gm
+              local
+              mktime
+              new
+              now
+              utc
+            }).freeze,
+          }.freeze
+
+          C_INSTANCE_METHOD_WHITELIST = {
+            Array => hashify(%I{
+              initialize
+              &
+              *
+              +
+              -
+              <=>
+              ==
+              any?
+              assoc
+              at
+              bsearch
+              bsearch_index
+              collect
+              combination
+              compact
+              []
+              count
+              cycle
+              dig
+              drop
+              drop_while
+              each
+              each_index
+              empty?
+              eql?
+              fetch
+              find_index
+              first
+              flatten
+              frozen?
+              hash
+              include?
+              index
+              inspect
+              to_s
+              join
+              last
+              length
+              map
+              max
+              min
+              pack
+              permutation
+              product
+              rassoc
+              reject
+              repeated_combination
+              repeated_permutation
+              reverse
+              reverse_each
+              rindex
+              rotate
+              sample
+              select
+              shuffle
+              size
+              slice
+              sort
+              sum
+              take
+              take_while
+              to_a
+              to_ary
+              to_h
+              transpose
+              uniq
+              values_at
+              zip
+              |
+            }).freeze,
+            BasicObject => hashify(%I{
+              initialize
+              !
+              !=
+              ==
+              __id__
+              object_id
+              send
+              __send__
+              equal?
+            }).freeze,
+            Binding => hashify(%I{
+              local_variable_defined?
+              local_variable_get
+              local_variables
+              receiver
+            }).freeze,
+            Class => hashify(%I{
+              superclass
+            }).freeze,
+            Dir => hashify(%I{
+              inspect
+              path
+              to_path
+            }).freeze,
+            Exception => hashify(%I{
+              initialize
+              ==
+              backtrace
+              backtrace_locations
+              cause
+              exception
+              inspect
+              message
+              to_s
+            }).freeze,
+            Enumerator => hashify(%I{
+              initialize
+              each
+              each_with_index
+              each_with_object
+              inspect
+              size
+              with_index
+              with_object
+            }).freeze,
+            Fiber => hashify(%I{
+              alive?
+            }).freeze,
+            File => hashify(%I{
+              path
+              to_path
+            }).freeze,
+            Hash => hashify(%I{
+              initialize
+              <
+              <=
+              ==
+              >
+              >=
+              []
+              any?
+              assoc
+              compact
+              compare_by_identity?
+              default_proc
+              dig
+              each
+              each_key
+              each_pair
+              each_value
+              empty?
+              eql?
+              fetch
+              fetch_values
+              flatten
+              has_key?
+              has_value?
+              hash
+              include?
+              to_s
+              inspect
+              invert
+              key
+              key?
+              keys
+              length
+              member?
+              merge
+              rassoc
+              reject
+              select
+              size
+              to_a
+              to_h
+              to_hash
+              to_proc
+              transform_values
+              value?
+              values
+              value_at
+            }).freeze,
+            IO => hashify(%I{
+              autoclose?
+              binmode?
+              close_on_exec?
+              closed?
+              encoding
+              inspect
+              internal_encoding
+              sync
+            }).freeze,
+            Method => hashify(%I{
+              ==
+              []
+              arity
+              call
+              clone
+              curry
+              eql?
+              hash
+              inspect
+              name
+              original_name
+              owner
+              parameters
+              receiver
+              source_location
+              super_method
+              to_proc
+              to_s
+            }).freeze,
+            Module => hashify(%I{
+              <
+              <=
+              <=>
+              ==
+              ===
+              >
+              >=
+              ancestors
+              autoload?
+              class_variable_defined?
+              class_variable_get
+              class_variables
+              const_defined?
+              const_get
+              constants
+              include?
+              included_modules
+              inspect
+              instance_method
+              instance_methods
+              method_defined?
+              name
+              private_instance_methods
+              private_method_defined?
+              protected_instance_methods
+              protected_method_defined?
+              public_instance_method
+              public_instance_methods
+              public_method_defined?
+              singleton_class?
+              to_s
+            }).freeze,
+            Mutex => hashify(%I{
+              locked?
+              owned?
+            }).freeze,
+            # Object => hashify(%I{
+            #   !~
+            #   <=>
+            #   ===
+            #   =~
+            #   class
+            #   clone
+            #   dup
+            #   enum_for
+            #   eql?
+            #   equal?
+            #   frozen?
+            #   hash
+            #   inspect
+            #   instance_of?
+            #   instance_variable_defined?
+            #   instance_variable_get
+            #   instance_variables
+            #   is_a?
+            #   itself
+            #   kind_of?
+            #   method
+            #   methods
+            #   nil?
+            #   object_id
+            #   private_methods
+            #   protected_methods
+            #   public_method
+            #   public_methods
+            #   public_send
+            #   respond_to?
+            #   respond_to_missing?
+            #   __send__
+            #   send
+            #   singleton_class
+            #   singleton_method
+            #   singleton_methods
+            #   tainted?
+            #   tap
+            #   to_enum
+            #   to_s
+            #   untrusted?
+            # }).freeze,
+            String => hashify(%I{
+              initialize
+              %
+              *
+              +
+              +@
+              -@
+              <=>
+              ==
+              ===
+              =~
+              []
+              ascii_only?
+              b
+              bytes
+              bytesize
+              byteslice
+              capitalize
+              casecmp
+              casecmp?
+              center
+              chars
+              chomp
+              chop
+              chr
+              codepoints
+              count
+              crypt
+              delete
+              downcase
+              dump
+              each_byte
+              each_char
+              each_codepoint
+              each_line
+              empty?
+              encoding
+              end_with?
+              eql?
+              getbyte
+              gsub
+              hash
+              hex
+              include?
+              index
+              inspect
+              intern
+              length
+              lines
+              ljust
+              lstrip
+              match
+              match?
+              next
+              oct
+              ord
+              partition
+              reverse
+              rindex
+              rjust
+              rpartition
+              rstrip
+              scan
+              scrub
+              size
+              slice
+              split
+              squeeze
+              start_with?
+              strip
+              sub
+              succ
+              sum
+              swapcase
+              to_c
+              to_f
+              to_i
+              to_r
+              to_s
+              to_str
+              to_sym
+              tr
+              tr_s
+              unpack
+              unpack1
+              upcase
+              upto
+              valid_encoding?
+            }).freeze,
+            ThreadGroup => hashify(%I{
+              enclosed?
+              list
+            }).freeze,
+            Thread => hashify(%I{
+              []
+              abort_on_exception
+              alive?
+              backtrace
+              backtrace_locations
+              group
+              inspect
+              key?
+              keys
+              name
+              pending_interrupt?
+              priority
+              report_on_exception
+              safe_level
+              status
+              stop?
+              thread_variable?
+              thread_variable_get
+              thread_variables
+            }).freeze,
+            Time => hashify(%I{
+              initialize
+              +
+              -
+              <=>
+              asctime
+              ctime
+              day
+              dst?
+              eql?
+              friday?
+              getgm
+              getlocal
+              getuc
+              gmt
+              gmt_offset
+              gmtoff
+              hash
+              hour
+              inspect
+              isdst
+              mday
+              min
+              mon
+              month
+              monday?
+              month
+              nsec
+              round
+              saturday?
+              sec
+              strftime
+              subsec
+              succ
+              sunday?
+              thursday?
+              to_a
+              to_f
+              to_i
+              to_r
+              to_s
+              tuesday?
+              tv_nsec
+              tv_sec
+              tv_usec
+              usec
+              utc?
+              utc_offset
+              wday
+              wednesday?
+              yday
+              year
+              zone
+            }).freeze,
+            UnboundMethod => hashify(%I{
+              ==
+              arity
+              clone
+              eql?
+              hash
+              inspect
+              name
+              original_name
+              owner
+              parameters
+              source_location
+              super_method
+              to_s
+            }).freeze,
+            # Modules
+            Kernel => hashify(%I{
+              Array
+              Complex
+              Float
+              Hash
+              Integer
+              Rational
+              String
+              __callee__
+              __dir__
+              __method__
+              autoload?
+              block_given?
+              caller
+              caller_locations
+              catch
+              format
+              global_variables
+              iterator?
+              lambda
+              local_variables
+              loop
+              method
+              methods
+              proc
+              rand
+              !~
+              <=>
+              ===
+              =~
+              class
+              clone
+              dup
+              enum_for
+              eql?
+              frozen?
+              hash
+              inspect
+              instance_of?
+              instance_variable_defined?
+              instance_variable_get
+              instance_variables
+              is_a?
+              itself
+              kind_of?
+              nil?
+              object_id
+              private_methods
+              protected_methods
+              public_method
+              public_methods
+              public_send
+              respond_to?
+              respond_to_missing?
+              __send__
+              send
+              singleton_class
+              singleton_method
+              singleton_methods
+              tainted?
+              tap
+              to_enum
+              to_s
+              untrusted?
+            }).freeze
+          }.freeze
 
           class << self
             def eval_call_stack call_stack_bindings
@@ -64,6 +727,29 @@ module Google
               end
             end
 
+            def readonly_eval_expression binding, expression
+              begin
+                yarv_instructions =
+                  RubyVM::InstructionSequence.compile(expression).disasm
+              rescue ScriptError
+                return "Unable to compile expression"
+              end
+
+              return "Mutation detected!" unless
+                immutable_yarv_instructions? yarv_instructions
+
+              wrapped_expression = wrap_expression expression
+
+              eval_result =
+                begin
+                  binding.eval wrapped_expression
+                rescue Exception => e
+                  "Unable to evaluate expression: #{e.message}"
+                end
+
+              eval_result
+            end
+
             private
 
             def eval_frame_variables frame_binding
@@ -81,44 +767,31 @@ module Google
               result_variables
             end
 
-            def readonly_eval_expression binding, expression
-              yarv_instructions =
-                RubyVM::InstructionSequence.compile(expression).disasm
+            def immutable_yarv_instructions? yarv_instructions, allow_localops: false
+              if allow_localops
+                byte_code_blacklist_regex = BYTE_CODE_BLACKLIST_REGEX
+              else
+                byte_code_blacklist_regex = FULL_BYTE_CODE_BLACKLIST_REGEX
+              end
 
-              fail "Mutation detected!" unless
-                immutable_yarv_instructions? yarv_instructions
+              func_call_flag_blacklist_regex = FUNC_CALL_FLAG_BLACKLIST_REGEX
 
-              wrapped_expression = wrap_expression expression
+              catch_table_type_blacklist_regex = CATCH_TABLE_BLACKLIST_REGEX
 
-              eval_result =
-                begin
-                  binding.eval wrapped_expression
-                rescue
-                  "Unable to evaluate expression"
-                end
-
-              eval_result
-
-            end
-
-            def immutable_yarv_instructions? yarv_instructions, allow_setlocal: false
-              blacklist = YARV_INS_BLACKLIST
-
-              blacklist << "setlocal" unless allow_setlocal
-
-              blacklist_regex = blacklist.join '|'
-
-              yarv_instructions.match(blacklist_regex) ? false : true
+              !(yarv_instructions.match(func_call_flag_blacklist_regex) ||
+                yarv_instructions.match(byte_code_blacklist_regex) ||
+                yarv_instructions.match(catch_table_type_blacklist_regex))
             end
 
             def wrap_expression expression
               return """
                 TracePoint.new(:call, :c_call) do |tp|
-                  # immutable_trace_callback tp
+                  Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                    :immutable_trace_callback, tp)
                 end.enable do
                   begin
                     #{expression}
-                  rescue => e
+                  rescue Google::Cloud::Debugger::MutationError => e
                     e.message
                   end
                 end
@@ -138,15 +811,50 @@ module Google
               meth = tp.self.method tp.method_id
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
 
-              fail "Mutation detected!" unless
+              fail Google::Cloud::Debugger::MutationError unless
                 immutable_yarv_instructions? yarv_instructions,
-                                             allow_setlocal: true
+                                             allow_localops: true
             end
 
             def trace_c_func_callback tp
-              nil
+              receiver = tp.self
+              mid = tp.method_id
+              invalid_op = false
+
+              if receiver.is_a?(Class) || receiver.is_a?(Module)
+                klass = receiver
+
+                unless IMMUTABLE_CLASSES.include?(klass) ||
+                  (C_CLASS_METHOD_WHITELIST[klass] || {})[mid] ||
+                  (C_INSTANCE_METHOD_WHITELIST[tp.defined_class] || {})[mid]
+                  invalid_op = true
+                end
+              else
+                klass = tp.defined_class
+                unless IMMUTABLE_CLASSES.include?(klass) ||
+                  (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+                  invalid_op = true
+                end
+              end
+
+              if invalid_op
+                fail Google::Cloud::Debugger::MutationError,
+                     "Invalid operation detected"
+              end
             end
           end
+        end
+      end
+
+      class MutationError < StandardError
+        attr_reader :message
+
+        def initialize msg = "Mutation detected!"
+          @message = msg
+        end
+
+        def inspect
+          "#<MutationError: #{message}>"
         end
       end
     end
