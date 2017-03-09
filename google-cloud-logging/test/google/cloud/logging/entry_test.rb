@@ -32,6 +32,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
     entry.payload.must_equal              "payload"
     entry.http_request.must_be_kind_of    Google::Cloud::Logging::Entry::HttpRequest
     entry.operation.must_be_kind_of       Google::Cloud::Logging::Entry::Operation
+    entry.trace.must_equal                "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
   end
 
   it "timestamp gives the correct time when a timestamp is present" do

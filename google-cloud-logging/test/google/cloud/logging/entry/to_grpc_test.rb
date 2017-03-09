@@ -33,6 +33,7 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.proto_payload.must_be :nil?
     grpc.http_request.must_be :nil?
     grpc.operation.must_be :nil?
+    grpc.trace.must_be :empty?
   end
 
   it "returns the correct data when data is added" do
@@ -66,6 +67,8 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     entry.operation.first = true
     entry.operation.last = false
 
+    entry.trace = "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
+
     grpc = entry.to_grpc
 
     grpc.log_name.must_equal "projects/test/logs/testlog"
@@ -98,5 +101,7 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.operation.producer.must_equal "NewApp.NewClass#new_method"
     grpc.operation.first.must_equal true
     grpc.operation.last.must_equal false
+
+    grpc.trace.must_equal "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
   end
 end

@@ -78,7 +78,8 @@ class MockLogging < Minitest::Spec
       },
       "text_payload" => "payload",
       "http_request" => random_http_request_hash,
-      "operation"    => random_operation_hash
+      "operation"    => random_operation_hash,
+      "trace"        => "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
     }
   end
 

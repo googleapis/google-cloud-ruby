@@ -350,6 +350,15 @@ module Google
         attr_reader :operation
 
         ##
+        # Resource name of the trace associated with the log entry, if any. If
+        # it contains a relative resource name, the name is assumed to be
+        # relative to `//tracing.googleapis.com`. Example:
+        # `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+        # Optional.
+        # @return [String]
+        attr_accessor :trace
+
+        ##
         # @private Determines if the Entry has any data.
         def empty?
           log_name.nil? &&
@@ -359,7 +368,8 @@ module Google
             payload.nil? &&
             resource.empty? &&
             http_request.empty? &&
-            operation.empty?
+            operation.empty? &&
+            trace.nil?
         end
 
         ##
@@ -374,7 +384,8 @@ module Google
             labels: labels_grpc,
             resource: resource.to_grpc,
             http_request: http_request.to_grpc,
-            operation: operation.to_grpc
+            operation: operation.to_grpc,
+            trace: trace.to_s
           )
           # Add payload
           append_payload grpc
@@ -398,6 +409,7 @@ module Google
                                     HttpRequest.from_grpc(grpc.http_request)
             e.instance_variable_set "@operation",
                                     Operation.from_grpc(grpc.operation)
+            e.trace = grpc.trace
           end
         end
 
