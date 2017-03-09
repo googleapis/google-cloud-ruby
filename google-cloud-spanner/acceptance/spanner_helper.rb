@@ -55,16 +55,16 @@ module Acceptance
       addl.include? :spanner
     end
 
-    def self.run_one_method klass, method_name, reporter
-      result = nil
-      reporter.prerecord klass, method_name
-      (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
-        puts "Retrying #{klass}##{method_name} (#{try})"
-      end
-      reporter.record result
-    end
+    # def self.run_one_method klass, method_name, reporter
+    #   result = nil
+    #   reporter.prerecord klass, method_name
+    #   (1..3).each do |try|
+    #     result = Minitest.run_one_method(klass, method_name)
+    #     break if (result.passed? || result.skipped?)
+    #     puts "Retrying #{klass}##{method_name} (#{try})"
+    #   end
+    #   reporter.record result
+    # end
   end
 end
 
@@ -77,8 +77,8 @@ $spanner_prefix = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}
 # Setup main instance and database for the tests
 job = $spanner.create_instance $spanner_prefix, name: $spanner_prefix, config: "regional-us-central1", nodes: 1
 job.wait_until_done!
-# job2 = job.instance.create_database "main"
-# job2.wait_until_done!
+job2 = job.instance.create_database "main"
+job2.wait_until_done!
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."

@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,14 +13,15 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/results"
-require "google/cloud/spanner/commit"
+require "google/cloud/errors"
+require "google/cloud/spanner/project"
+require "google/cloud/spanner/session"
 
 module Google
   module Cloud
     module Spanner
       ##
-      # # Session
+      # # Client
       #
       # ...
       #
@@ -33,90 +34,38 @@ module Google
       #   spanner = gcloud.spanner
       #
       #   # ...
-      class Session
+      #
+      class Client
         ##
-        # @private The gRPC Service object.
-        attr_accessor :service
+        # @private Creates a new Spanner Project instance.
+        def initialize project, instance_id, database_id
+          @project = project
+          @instance_id = instance_id
+          @database_id = database_id
+        end
 
-        # @private Creates a new Session instance.
-        def initialize grpc, service
-          @grpc = grpc
-          @service = service
+        # The Spanner project connected to.
+        # @return [Project]
+        def project
+          project
         end
 
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          V1::SpannerClient.match_project_from_session_name @grpc.name
+          @project.service.project
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          V1::SpannerClient.match_instance_from_session_name @grpc.name
+          @instance_id
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          V1::SpannerClient.match_database_from_session_name @grpc.name
-        end
-
-        # The unique identifier for the session.
-        # @return [String]
-        def session_id
-          V1::SpannerClient.match_session_from_session_name @grpc.name
-        end
-
-        # rubocop:disable LineLength
-
-        ##
-        # The full path for the session resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>/databases/<database_id>/sessions/<session_id>`.
-        # @return [String]
-        def path
-          @grpc.name
-        end
-
-        # rubocop:enable LineLength
-
-        ##
-        # Reloads the session resource. Useful for determining if the session is
-        # still valid on the Spanner API.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.reload! # API call
-        #
-        def reload!
-          ensure_service!
-          @grpc = service.get_session path
-          self
-        end
-
-        ##
-        # Permanently deletes the session.
-        #
-        # @return [Boolean] Returns `true` if the session was deleted.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.delete_session
-        #
-        def delete_session
-          ensure_service!
-          service.delete_session path
-          true
+          @database_id
         end
 
         ##
@@ -204,13 +153,7 @@ module Google
         #   puts "User #{user_row[:id]} is #{user_row[:name]}""
         #
         def execute sql, params: nil, streaming: true
-          ensure_service!
-          if streaming
-            Results.from_enum service.streaming_execute_sql path, sql,
-                                                            params: params
-          else
-            Results.from_grpc service.execute_sql path, sql, params: params
-          end
+          session.execute sql, params: params, streaming: streaming
         end
         alias_method :query, :execute
 
@@ -262,13 +205,8 @@ module Google
         #
         def read table, columns, id: nil, limit: nil, streaming: true
           ensure_service!
-          if streaming
-            Results.from_enum service.streaming_read_table \
-              path, table, columns, id: id, limit: limit
-          else
-            Results.from_grpc service.read_table \
-              path, table, columns, id: id, limit: limit
-          end
+          session.read table, columns, id: id, limit: limit,
+                                       streaming: streaming
         end
 
         # Creates changes to be applied to rows in the database.
@@ -288,10 +226,8 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit
-          commit = Commit.new
-          yield commit
-          service.commit path, commit.mutations
+        def commit &block
+          session.commit(&block)
         end
 
         ##
@@ -329,9 +265,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def upsert table, *rows
-          commit = Commit.new
-          commit.upsert table, rows
-          service.commit path, commit.mutations
+          session.upsert table, rows
         end
         alias_method :save, :upsert
 
@@ -369,9 +303,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def insert table, *rows
-          commit = Commit.new
-          commit.insert table, rows
-          service.commit path, commit.mutations
+          session.insert table, rows
         end
 
         ##
@@ -408,9 +340,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def update table, *rows
-          commit = Commit.new
-          commit.update table, rows
-          service.commit path, commit.mutations
+          session.update table, rows
         end
 
         ##
@@ -449,9 +379,7 @@ module Google
         #                        { id: 2, name: "Harvey",  active: true }]
         #
         def replace table, *rows
-          commit = Commit.new
-          commit.replace table, rows
-          service.commit path, commit.mutations
+          session.replace table, rows
         end
 
         ##
@@ -473,16 +401,7 @@ module Google
         #   db.delete "users", [1, 2, 3]
         #
         def delete table, *id
-          commit = Commit.new
-          commit.delete table, id
-          service.commit path, commit.mutations
-        end
-
-        ##
-        # @private Creates a new Session instance from a
-        # Google::Spanner::V1::Session.
-        def self.from_grpc grpc, service
-          new grpc, service
+          session.delete table, id
         end
 
         protected
@@ -491,7 +410,18 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          fail "Must have active connection to service" unless @project.service
+        end
+
+        ##
+        # Creates a new session object every time.
+        # No pooling, no reuse. That will come later...
+        def session
+          ensure_service!
+          grpc = @project.service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          Session.from_grpc(grpc, @project.service)
         end
       end
     end
