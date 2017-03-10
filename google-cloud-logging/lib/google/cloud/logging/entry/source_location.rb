@@ -69,7 +69,7 @@ module Google
           end
 
           ##
-          # @private New HttpRequest from a
+          # @private New Google::Cloud::Logging::Entry::SourceLocation from a
           # Google::Logging::V2::LogEntrySourceLocation object.
           def self.from_grpc grpc
             return new if grpc.nil?
