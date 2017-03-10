@@ -79,7 +79,8 @@ class MockLogging < Minitest::Spec
       "text_payload" => "payload",
       "http_request" => random_http_request_hash,
       "operation"    => random_operation_hash,
-      "trace"        => "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
+      "trace"        => "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824",
+      "source_location"    => random_source_location_hash
     }
   end
 
@@ -104,6 +105,14 @@ class MockLogging < Minitest::Spec
       "producer" => "MyApp.MyClass#my_method",
       "first" => false,
       "last" => false
+    }
+  end
+
+  def random_source_location_hash
+    {
+      "file" => "my_app/my_class.rb",
+      "line" => 321,
+      "function" => "#my_method"
     }
   end
 

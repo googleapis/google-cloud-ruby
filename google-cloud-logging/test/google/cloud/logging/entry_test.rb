@@ -33,6 +33,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
     entry.http_request.must_be_kind_of    Google::Cloud::Logging::Entry::HttpRequest
     entry.operation.must_be_kind_of       Google::Cloud::Logging::Entry::Operation
     entry.trace.must_equal                "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
+    entry.source_location.must_be_kind_of       Google::Cloud::Logging::Entry::SourceLocation
   end
 
   it "timestamp gives the correct time when a timestamp is present" do
@@ -140,5 +141,21 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
     entry.operation.producer.must_be :nil?
     entry.operation.first.must_be :nil?
     entry.operation.last.must_be :nil?
+  end
+
+  it "has the correct source location attributes" do
+    entry.source_location.file.must_equal "my_app/my_class.rb"
+    entry.source_location.line.must_equal 321
+    entry.source_location.function.must_equal "#my_method"
+  end
+
+  it "has a source location even if the Google API object doesn't have it" do
+    entry_hash.delete "source_location"
+
+    entry.source_location.wont_be :nil?
+    entry.source_location.must_be_kind_of Google::Cloud::Logging::Entry::SourceLocation
+    entry.source_location.file.must_be :nil?
+    entry.source_location.line.must_be :nil?
+    entry.source_location.function.must_be :nil?
   end
 end

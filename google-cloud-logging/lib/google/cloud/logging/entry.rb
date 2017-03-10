@@ -17,6 +17,7 @@ require "google/cloud/logging/convert"
 require "google/cloud/logging/resource"
 require "google/cloud/logging/entry/http_request"
 require "google/cloud/logging/entry/operation"
+require "google/cloud/logging/entry/source_location"
 require "google/cloud/logging/entry/list"
 
 module Google
@@ -67,6 +68,7 @@ module Google
           @http_request = HttpRequest.new
           @operation = Operation.new
           @severity = :DEFAULT
+          @source_location = SourceLocation.new
         end
 
         ##
@@ -359,6 +361,12 @@ module Google
         attr_accessor :trace
 
         ##
+        # Source code location information associated with the log entry, if
+        # any.
+        # @return [Google::Cloud::Logging::Entry::SourceLocation]
+        attr_reader :source_location
+
+        ##
         # @private Determines if the Entry has any data.
         def empty?
           log_name.nil? &&
@@ -369,7 +377,8 @@ module Google
             resource.empty? &&
             http_request.empty? &&
             operation.empty? &&
-            trace.nil?
+            trace.nil? &&
+            source_location.empty?
         end
 
         ##
@@ -385,7 +394,8 @@ module Google
             resource: resource.to_grpc,
             http_request: http_request.to_grpc,
             operation: operation.to_grpc,
-            trace: trace.to_s
+            trace: trace.to_s,
+            source_location: source_location.to_grpc
           )
           # Add payload
           append_payload grpc
@@ -410,6 +420,10 @@ module Google
             e.instance_variable_set "@operation",
                                     Operation.from_grpc(grpc.operation)
             e.trace = grpc.trace
+            e.instance_variable_set "@source_location",
+                                    SourceLocation.from_grpc(
+                                      grpc.source_location
+                                    )
           end
         end
 
