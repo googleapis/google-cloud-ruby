@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/core/environment"
 require "google/cloud/logging/service"
 require "google/cloud/logging/credentials"
+require "google/cloud/logging/log/list"
 require "google/cloud/logging/entry"
 require "google/cloud/logging/resource_descriptor"
 require "google/cloud/logging/sink"
@@ -381,6 +382,48 @@ module Google
         def logger log_name, resource, labels = {}
           Logger.new shared_async_writer, log_name, resource, labels
         end
+
+        ##
+        # Lists log names. Use this method to retrieve log names from Cloud
+        # Logging.
+        #
+        # @param [String] resource The cloud resource from which to retrieve log
+        #   names. Optional. If `nil`, the ID of the receiving project instance
+        #   will be used. Examples: `"projects/my-project-1A"`,
+        #   `"projects/1234567890"`.
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of log names to return.
+        #
+        # @return [Array<String>] A list of log names. For example,
+        #   `projects/my-project/syslog` or
+        #   `organizations/123/cloudresourcemanager.googleapis.com%2Factivity`.
+        #   (See {Google::Cloud::Logging::Log::List})
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #   logs = logging.logs
+        #   logs.each { |l| puts l }
+        #
+        # @example Retrieve all log names: (See {Log::List#all})
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #   logs = logging.logs
+        #
+        #   logs.all { |l| puts l }
+        #
+        def logs resource: nil, token: nil, max: nil
+          ensure_service!
+          list_grpc = service.list_logs resource: resource, token: token,
+                                        max: max
+          Log::List.from_grpc list_grpc, service, resource: resource, max: max
+        end
+        alias_method :find_logs, :logs
+        alias_method :log_names, :logs
+        alias_method :find_log_names, :logs
 
         ##
         # Deletes a log and all its log entries. The log will reappear if it

@@ -134,12 +134,15 @@ describe Google::Cloud::Logging, :logging do
 
     let(:resource) { logging.resource "gce_instance", zone: "global", instance_id: "3" }
 
-    it "writes and lists log entries" do
+    it "writes entries and lists entries and logs" do
       # logging.write_entries [entry1, entry2, entry3], resource: resource
       logging.write_entries [entry1, entry2], resource: resource
 
       logging.entries.wont_be :empty?
       logging.entries(max: 1).length.must_equal 1
+
+      logging.logs.wont_be :empty?
+      logging.logs(max: 1).length.must_equal 1
     end
   end
 

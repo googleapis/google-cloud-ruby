@@ -129,6 +129,21 @@ module Google
           end
         end
 
+        def list_logs resource: nil, token: nil, max: nil
+          parent = resource || "projects/#{@project}"
+          call_opts = default_options
+          if token
+            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
+                                                     page_token: token)
+          end
+
+          execute do
+            paged_enum = logging.list_logs parent, page_size: max,
+                                                   options: call_opts
+            paged_enum.page.response
+          end
+        end
+
         def delete_log name
           execute do
             logging.delete_log log_path(name), options: default_options
