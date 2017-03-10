@@ -67,12 +67,9 @@ module Google
                            :CATCH_TABLE_BLACKLIST_REGEX
 
           IMMUTABLE_CLASSES = [
-            Bignum,
             Complex,
-            Fixnum,
             FalseClass,
             Float,
-            Integer,
             MatchData,
             NilClass,
             Numeric,
@@ -85,7 +82,9 @@ module Google
             Comparable,
             Enumerable,
             Math
-          ].freeze
+          ].concat(
+            RUBY_VERSION.to_f >= 2.4 ? [Integer] : [Bignum, Fixnum]
+          ).freeze
 
           def self.hashify ary
             ary.each.with_index(1).to_h
@@ -154,6 +153,9 @@ module Google
               new
               now
               utc
+            }).freeze,
+            Google::Cloud::Debugger::Breakpoint::Evaluator => hashify(%I{
+              disable_method_trace_for_thread
             }).freeze,
           }.freeze
 
@@ -689,7 +691,7 @@ module Google
               to_enum
               to_s
               untrusted?
-            }).freeze
+            }).freeze,
           }.freeze
 
           class << self
@@ -738,26 +740,29 @@ module Google
               return "Mutation detected!" unless
                 immutable_yarv_instructions? yarv_instructions
 
-              wrapped_expression = wrap_expression expression
-
-              eval_result =
+              # The evaluation is most likely triggered from a trace callback,
+              # so addtional tracing is disabled by VM. So we do actual
+              # evaluation in a new thread, where function calls can be traced.
+              thr = Thread.new {
+                eval_result = nil
+                wrapped_expression = wrap_expression expression
                 begin
-                  binding.eval wrapped_expression
+                    eval_result = binding.eval wrapped_expression
+                rescue Google::Cloud::Debugger::MutationError => e
+                  eval_result = e.message
                 rescue Exception => e
-                  "Unable to evaluate expression: #{e.message}"
+                  eval_result = "Unable to evaluate expression: #{}"
                 end
+                eval_result
+              }
 
-              eval_result
+              thr.join.value
             end
 
             private
 
             def eval_frame_variables frame_binding
               result_variables = []
-
-              result_variables << Variable.from_rb_var(frame_binding.receiver,
-                                                       name: "self")
-
               result_variables += frame_binding.local_variables.map do |local_var_name|
                 local_var = frame_binding.local_variable_get(local_var_name)
 
@@ -785,30 +790,19 @@ module Google
 
             def wrap_expression expression
               return """
-                TracePoint.new(:call, :c_call) do |tp|
+                begin
                   Google::Cloud::Debugger::Breakpoint::Evaluator.send(
-                    :immutable_trace_callback, tp)
-                end.enable do
-                  begin
-                    #{expression}
-                  rescue Google::Cloud::Debugger::MutationError => e
-                    e.message
-                  end
+                    :enable_method_trace_for_thread)
+                  #{expression}
+                ensure
+                  Google::Cloud::Debugger::Breakpoint::Evaluator.disable_method_trace_for_thread
                 end
               """
             end
 
-            def immutable_trace_callback tp
-              case tp.event
-                when :call
-                  trace_func_callback tp
-                when :c_call
-                  trace_c_func_callback tp
-              end
-            end
 
-            def trace_func_callback tp
-              meth = tp.self.method tp.method_id
+            def trace_func_callback receiver, mid
+              meth = receiver.method mid
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
 
               fail Google::Cloud::Debugger::MutationError unless
@@ -816,21 +810,17 @@ module Google
                                              allow_localops: true
             end
 
-            def trace_c_func_callback tp
-              receiver = tp.self
-              mid = tp.method_id
-              invalid_op = false
-
+            def trace_c_func_callback receiver, defined_class, mid
               if receiver.is_a?(Class) || receiver.is_a?(Module)
                 klass = receiver
 
                 unless IMMUTABLE_CLASSES.include?(klass) ||
                   (C_CLASS_METHOD_WHITELIST[klass] || {})[mid] ||
-                  (C_INSTANCE_METHOD_WHITELIST[tp.defined_class] || {})[mid]
+                  (C_INSTANCE_METHOD_WHITELIST[defined_class] || {})[mid]
                   invalid_op = true
                 end
               else
-                klass = tp.defined_class
+                klass = defined_class
                 unless IMMUTABLE_CLASSES.include?(klass) ||
                   (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
                   invalid_op = true

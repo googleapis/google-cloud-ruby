@@ -14,12 +14,12 @@
     limitations under the License.
 */
 
-#ifndef GOOGLE_CLOUD_RUBY_DEBUGGER_TRACER_H_
-#define GOOGLE_CLOUD_RUBY_DEBUGGER_TRACER_H_
+#ifndef GOOGLE_CLOUD_RUBY_DEBUGGER_EVALUATOR_H_
+#define GOOGLE_CLOUD_RUBY_DEBUGGER_EVALUATOR_H_
 
 #include "ruby/debug.h"
 
 void
-Init_tracer(VALUE mDebugger);
+Init_evaluator(VALUE mDebugger);
 
 #endif // GOOGLE_CLOUD_RUBY_DEBUGGER_TRACER_H_

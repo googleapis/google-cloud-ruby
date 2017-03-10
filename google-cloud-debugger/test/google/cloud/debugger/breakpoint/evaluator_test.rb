@@ -34,11 +34,15 @@ def readonly_func4 arg
   yield arg
 end
 
-def mutating_func
+def mutating_func1
   begin
-    raise "error"
-  rescue
+  rescue => e
+    e.message
   end
+end
+
+def mutating_func2
+  $global_var = 2
 end
 
 describe Google::Cloud::Debugger::Breakpoint::Evaluator do
@@ -163,7 +167,11 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "doesn't allow return operation in expression" do
       expression = "return"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Unable to compile expression"
+      if RUBY_VERSION.to_f >= 2.4
+        result.must_match "Invalid operation detected"
+      else
+        result.must_match "Unable to compile expression"
+      end
     end
 
     it "doesn't allow using proc as block" do
@@ -179,7 +187,13 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow function with rescue block" do
-      expression = "mutating_func()"
+      expression = "mutating_func1()"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_match "Mutation detected!"
+    end
+
+    it "doesn't allow function that sets global variable with" do
+      expression = "mutating_func2()"
       result = evaluator.readonly_eval_expression binding, expression
       result.must_match "Mutation detected!"
     end

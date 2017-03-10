@@ -1,3 +1,19 @@
+/*
+    Copyright 2016 Google Inc. All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
 #include "ruby/ruby.h"
 #include "ruby/debug.h"
 #include "tracer.h"
@@ -120,8 +136,9 @@ match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
  *  already marked completed.
  */
 static void
-line_trace_event_callback(rb_event_flag_t event, VALUE self, VALUE hook, ID mid, VALUE klass)
+line_trace_event_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE klass)
 {
+    VALUE self = data;
     const char *c_trace_path = rb_sourcefile();
     int c_trace_lineno = rb_sourceline();
     VALUE trace_binding;
@@ -132,10 +149,6 @@ line_trace_event_callback(rb_event_flag_t event, VALUE self, VALUE hook, ID mid,
     VALUE *c_matching_breakpoints;
     VALUE matching_breakpoint;
     int matching_breakpoints_len;
-
-//    printf("line_trace_event_callback called!\n");
-//    printf("%s - %d\n", rb_sourcefile(), rb_sourceline());
-//    fflush(stdout);
 
     // If matching result isn't an array, it means we're in completely wrong file,
     // or not on the right line. Turn line tracing off if we're in wrong file.
@@ -171,22 +184,21 @@ static VALUE
 disable_line_trace_for_thread(VALUE thread)
 {
     VALUE thread_variables_hash;
-    VALUE line_tracepoint_set;
+    VALUE line_trace_set;
 
     if (!RTEST(thread)) {
         thread = rb_thread_current();
     }
     thread_variables_hash = rb_ivar_get(thread, rb_intern("locals"));
-    line_tracepoint_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
+    line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
 
-    if (RTEST(line_tracepoint_set)) {
+    if (RTEST(line_trace_set)) {
         rb_thread_remove_event_hook(thread, line_trace_event_callback);
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qfalse);
     }
 
     return Qnil;
 }
-
 
 /**
  *  enable_return_tracepoint
@@ -246,18 +258,18 @@ decrement_or_disable_return_tracepoint(VALUE self)
 }
 
 /**
- * enable_line_tracepoint_for_thread
+ * enable_line_trace_for_thread
  * Turn on line even trace for current thread. Also set a flag
  * "gcloud_line_trace_set" to Qtrue in current thread's thread variable.
  */
 static VALUE
-enable_line_tracepoint_for_thread(VALUE self)
+enable_line_trace_for_thread(VALUE self)
 {
     VALUE current_thread = rb_thread_current();
     VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
-    VALUE line_tracepoint_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
+    VALUE line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
 
-    if (!RTEST(line_tracepoint_set)) {
+    if (!RTEST(line_trace_set)) {
         rb_thread_add_event_hook(current_thread, line_trace_event_callback, RUBY_EVENT_LINE, self);
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qtrue);
     }
@@ -290,7 +302,7 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
     match_found = match_breakpoints_files(self, tracepoint_path);
 
     if (match_found) {
-        enable_line_tracepoint_for_thread(self);
+        enable_line_trace_for_thread(self);
         // Enable or increment return tracepoint
         if (!enable_return_tracepoint(self)) {
             increment_return_tracepoint_counter(self);
@@ -334,7 +346,7 @@ return_tracepoint_callback(VALUE tracepoint, void *data)
     match_found = match_breakpoints_files(self, caller_path);
 
     if (match_found) {
-        enable_line_tracepoint_for_thread(self);
+        enable_line_trace_for_thread(self);
     }
 
     decrement_or_disable_return_tracepoint(self);
@@ -351,9 +363,9 @@ fiber_tracepoint_callback(VALUE tracepoint, void *data)
     int c_tracepoint_lineno = NUM2INT(tracepoint_lineno);
 
     // Only if lineno is greater than 0, then we know this event is triggered from
-    // fiber execution, and we blindly starts line_tracepoint.
+    // fiber execution, and we blindly starts line_trace.
     if (c_tracepoint_lineno > 0) {
-        enable_line_tracepoint_for_thread(self);
+        enable_line_trace_for_thread(self);
     }
 
     return;
