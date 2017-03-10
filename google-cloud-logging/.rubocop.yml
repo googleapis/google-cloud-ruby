@@ -28,11 +28,11 @@ Style/EmptyLines:
 Style/EmptyElse:
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 12
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 12
 Metrics/AbcSize:
-  Max: 25
+  Max: 28
 Metrics/MethodLength:
   Max: 20
 Metrics/ParameterLists:

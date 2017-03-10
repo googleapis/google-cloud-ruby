@@ -74,7 +74,7 @@ module Google
           end
 
           ##
-          # @private New HttpRequest from a
+          # @private New Google::Cloud::Logging::Entry::Operation from a
           # Google::Logging::V2::LogEntryOperation object.
           def self.from_grpc grpc
             return new if grpc.nil?
