@@ -55,7 +55,7 @@ module Google
           ##
           # Retrieve the next page of logs.
           #
-          # @return [Sink::List]
+          # @return [Log::List]
           #
           # @example
           #   require "google/cloud/logging"
