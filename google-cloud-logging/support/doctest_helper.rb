@@ -122,6 +122,9 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Logging::Project#new_metric"
   doctest.skip "Google::Cloud::Logging::Project#get_metric"
   doctest.skip "Google::Cloud::Logging::Project#find_metric"
+  doctest.skip "Google::Cloud::Logging::Project#find_logs"
+  doctest.skip "Google::Cloud::Logging::Project#log_names"
+  doctest.skip "Google::Cloud::Logging::Project#find_log_names"
   doctest.skip "Google::Cloud::Logging::Sink#start_time"
   doctest.skip "Google::Cloud::Logging::Sink#start_time="
   doctest.skip "Google::Cloud::Logging::Sink#end_time"
@@ -137,31 +140,31 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud.logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
   doctest.before "Google::Cloud#logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging.new" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
@@ -173,8 +176,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Project#entries" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res("next_page_token"), [Array, Hash]
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res("next_page_token"), [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
     end
   end
 
@@ -187,6 +190,13 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Logging::Project#entry" do
     mock_logging do |mock, mock_metrics, mock_sinks|
       mock.expect :write_log_entries, nil, [Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Logging::Project#logs" do
+    mock_logging do |mock, mock_metrics, mock_sinks|
+      mock.expect :list_logs, list_logs_res("next_page_token"), ["projects/my-project", Hash]
+      mock.expect :list_logs, list_logs_res, ["projects/my-project", Hash]
     end
   end
 
@@ -284,7 +294,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Entry::List" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Logging::Log::List" do
+    mock_logging do |mock, mock_metrics, mock_sinks|
+      mock.expect :list_logs, list_logs_res, ["projects/my-project", Hash]
     end
   end
 
@@ -380,10 +396,18 @@ end
 
 # Fixture helpers
 
-def list_res token = nil
+def list_entries_res token = nil
   OpenStruct.new(
     page: OpenStruct.new(
       response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, token))
+    )
+  )
+end
+
+def list_logs_res token = nil
+  OpenStruct.new(
+    page: OpenStruct.new(
+      response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(3, token))
     )
   )
 end
@@ -530,6 +554,13 @@ end
 def list_sinks_json count = 2, token = nil
   {
     sinks: count.times.map { random_sink_hash },
+    next_page_token: token
+  }.delete_if { |_, v| v.nil? }.to_json
+end
+
+def list_logs_json count = 2, token = nil
+  {
+    log_names: count.times.map { "log-name" },
     next_page_token: token
   }.delete_if { |_, v| v.nil? }.to_json
 end
