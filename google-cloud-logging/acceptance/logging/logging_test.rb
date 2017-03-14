@@ -20,7 +20,6 @@ require "logger"
 describe Google::Cloud::Logging, :logging do
   describe "Sinks" do
     it "creates, updates, refreshes, gets, lists, and deletes a sink" do
-      skip
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
       sink = logging.create_sink "#{prefix}-sink",
                                  pubsub_dest,
@@ -70,7 +69,6 @@ describe Google::Cloud::Logging, :logging do
     end
 
     it "lists sinks" do
-      skip
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
       sink = logging.create_sink "#{prefix}-list-sink", pubsub_dest
 
