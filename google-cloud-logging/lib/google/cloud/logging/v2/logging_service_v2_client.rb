@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/logging/v2/logging_pb"
 
 module Google
@@ -235,12 +236,16 @@ module Google
 
           # Deletes all the log entries in a log.
           # The log reappears if it receives new entries.
+          # Log entries written shortly before the delete operation might not be
+          # deleted.
           #
           # @param log_name [String]
           #   Required. The resource name of the log to delete:
           #
           #       "projects/[PROJECT_ID]/logs/[LOG_ID]"
           #       "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+          #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
           #
           #   +[LOG_ID]+ must be URL-encoded. For example,
           #   +"projects/my-project-id/logs/syslog"+,
@@ -270,15 +275,32 @@ module Google
             nil
           end
 
-          # Writes log entries to Stackdriver Logging.  All log entries are
-          # written by this method.
+          # Writes log entries to Stackdriver Logging.
           #
+          # @param entries [Array<Google::Logging::V2::LogEntry>]
+          #   Required.  The log entries to write. Values supplied for the fields
+          #   +log_name+, +resource+, and +labels+ in this +entries.write+ request are
+          #   inserted into those log entries in this list that do not provide their own
+          #   values.
+          #
+          #   Stackdriver Logging also creates and inserts values for +timestamp+ and
+          #   +insert_id+ if the entries do not provide them. The created +insert_id+ for
+          #   the N'th entry in this list will be greater than earlier entries and less
+          #   than later entries.  Otherwise, the order of log entries in this list does
+          #   not matter.
+          #
+          #   To improve throughput and to avoid exceeding the
+          #   {quota limit}[https://cloud.google.com/logging/quota-policy] for calls to +entries.write+,
+          #   you should write multiple log entries at once rather than
+          #   calling this method for each individual log entry.
           # @param log_name [String]
           #   Optional. A default log resource name that is assigned to all log entries
           #   in +entries+ that do not specify a value for +log_name+:
           #
           #       "projects/[PROJECT_ID]/logs/[LOG_ID]"
           #       "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+          #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
           #
           #   +[LOG_ID]+ must be URL-encoded. For example,
           #   +"projects/my-project-id/logs/syslog"+ or
@@ -299,22 +321,12 @@ module Google
           #   entries in +entries+. If a log entry already has a label with the same key
           #   as a label in this parameter, then the log entry's label is not changed.
           #   See LogEntry.
-          # @param entries [Array<Google::Logging::V2::LogEntry>]
-          #   Required. The log entries to write. Values supplied for the fields
-          #   +log_name+, +resource+, and +labels+ in this +entries.write+ request are
-          #   added to those log entries that do not provide their own values for the
-          #   fields.
-          #
-          #   To improve throughput and to avoid exceeding the
-          #   {quota limit}[https://cloud.google.com/logging/quota-policy] for calls to +entries.write+,
-          #   you should write multiple log entries at once rather than
-          #   calling this method for each individual log entry.
           # @param partial_success [true, false]
           #   Optional. Whether valid entries should be written even if some other
           #   entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
-          #   entry is not written, the response status will be the error associated
-          #   with one of the failed entries and include error details in the form of
-          #   WriteLogEntriesPartialErrors.
+          #   entry is not written, then the response status is the error associated
+          #   with one of the failed entries and the response includes error details
+          #   keyed by the entries' zero-based index in the +entries.write+ method.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -350,20 +362,22 @@ module Google
           # Stackdriver Logging.  For ways to export log entries, see
           # {Exporting Logs}[https://cloud.google.com/logging/docs/export].
           #
+          # @param resource_names [Array<String>]
+          #   Required. Names of one or more parent resources from which to
+          #   retrieve log entries:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
+          #
+          #   Projects listed in the +project_ids+ field are added to this list.
           # @param project_ids [Array<String>]
           #   Deprecated. Use +resource_names+ instead.  One or more project identifiers
           #   or project numbers from which to retrieve log entries.  Example:
           #   +"my-project-1A"+. If present, these project identifiers are converted to
           #   resource name format and added to the list of resources in
           #   +resource_names+.
-          # @param resource_names [Array<String>]
-          #   Required. Names of one or more resources from which to retrieve log
-          #   entries:
-          #
-          #       "projects/[PROJECT_ID]"
-          #       "organizations/[ORGANIZATION_ID]"
-          #
-          #   Projects listed in the +project_ids+ field are added to this list.
           # @param filter [String]
           #   Optional. A filter that chooses which log entries to return.  See {Advanced
           #   Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
@@ -378,7 +392,7 @@ module Google
           #   option returns entries in order of increasing values of
           #   +LogEntry.timestamp+ (oldest first), and the second option returns entries
           #   in order of decreasing timestamps (newest first).  Entries with equal
-          #   timestamps are returned in order of +LogEntry.insertId+.
+          #   timestamps are returned in order of their +insert_id+ values.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -479,7 +493,7 @@ module Google
             @list_monitored_resource_descriptors.call(req, options)
           end
 
-          # Lists the logs in projects or organizations.
+          # Lists the logs in projects, organizations, folders, or billing accounts.
           # Only logs that have entries are listed.
           #
           # @param parent [String]
@@ -487,6 +501,8 @@ module Google
           #
           #       "projects/[PROJECT_ID]"
           #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

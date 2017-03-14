@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/datastore/v1/datastore_pb"
 
 module Google
@@ -277,10 +278,6 @@ module Google
           #   The ID of the project against which to make the request.
           # @param mode [Google::Datastore::V1::CommitRequest::Mode]
           #   The type of commit to perform. Defaults to +TRANSACTIONAL+.
-          # @param transaction [String]
-          #   The identifier of the transaction associated with the commit. A
-          #   transaction identifier is returned by a call to
-          #   Datastore::BeginTransaction.
           # @param mutations [Array<Google::Datastore::V1::Mutation>]
           #   The mutations to perform.
           #
@@ -295,6 +292,10 @@ module Google
           #
           #   When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
           #   entity.
+          # @param transaction [String]
+          #   The identifier of the transaction associated with the commit. A
+          #   transaction identifier is returned by a call to
+          #   Datastore::BeginTransaction.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

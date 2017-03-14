@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/iam/v1/iam_policy_pb"
 require "google/pubsub/v1/pubsub_pb"
 
@@ -673,6 +674,9 @@ module Google
           # @param subscription [String]
           #   The subscription from which messages should be pulled.
           #   Format is +projects/{project}/subscriptions/{sub}+.
+          # @param max_messages [Integer]
+          #   The maximum number of messages returned for this request. The Pub/Sub
+          #   system may return fewer than the number specified.
           # @param return_immediately [true, false]
           #   If this field set to true, the system will respond immediately even if
           #   it there are no messages available to return in the +Pull+ response.
@@ -680,9 +684,6 @@ module Google
           #   least one message is available, rather than returning no messages. The
           #   client may cancel the request if it does not wish to wait any longer for
           #   the response.
-          # @param max_messages [Integer]
-          #   The maximum number of messages returned for this request. The Pub/Sub
-          #   system may return fewer than the number specified.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

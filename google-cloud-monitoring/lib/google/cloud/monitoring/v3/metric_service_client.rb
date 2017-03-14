@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/monitoring/v3/metric_service_pb"
 
 module Google
@@ -533,6 +534,8 @@ module Google
           #   The time interval for which results should be returned. Only time series
           #   that contain data points in the specified interval are included
           #   in the response.
+          # @param view [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
+          #   Specifies which information is returned about the time series.
           # @param aggregation [Google::Monitoring::V3::Aggregation]
           #   By default, the raw time series data is returned.
           #   Use this field to combine multiple time series for different
@@ -541,8 +544,6 @@ module Google
           #   Specifies the order in which the points of the time series should
           #   be returned.  By default, results are not ordered.  Currently,
           #   this field must be left blank.
-          # @param view [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
-          #   Specifies which information is returned about the time series.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

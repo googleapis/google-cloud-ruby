@@ -18,7 +18,8 @@ module Google
       # Describes a sink used to export log entries to one of the following
       # destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a
       # Cloud Pub/Sub topic.  A logs filter controls which log entries are
-      # exported. The sink must be created within a project or organization.
+      # exported. The sink must be created within a project, organization, billing
+      # account, or folder.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The client-assigned sink identifier, unique within the
@@ -102,8 +103,12 @@ module Google
       # The parameters to +ListSinks+.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. The parent resource whose sinks are to be listed.
-      #     Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+      #     Required. The parent resource whose sinks are to be listed:
+      #
+      #         "projects/[PROJECT_ID]"
+      #         "organizations/[ORGANIZATION_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]"
+      #         "folders/[FOLDER_ID]"
       # @!attribute [rw] page_token
       #   @return [String]
       #     Optional. If present, then retrieve the next batch of results from the
@@ -131,10 +136,12 @@ module Google
       # The parameters to +GetSink+.
       # @!attribute [rw] sink_name
       #   @return [String]
-      #     Required. The parent resource name of the sink:
+      #     Required. The resource name of the sink:
       #
       #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
       #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+      #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
       #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       class GetSinkRequest; end
@@ -146,6 +153,8 @@ module Google
       #
       #         "projects/[PROJECT_ID]"
       #         "organizations/[ORGANIZATION_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]"
+      #         "folders/[FOLDER_ID]"
       #
       #     Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
       # @!attribute [rw] sink
@@ -157,9 +166,9 @@ module Google
       #     Optional. Determines the kind of IAM identity returned as +writer_identity+
       #     in the new sink.  If this value is omitted or set to false, and if the
       #     sink's parent is a project, then the value returned as +writer_identity+ is
-      #     +cloud-logs@google.com+, the same identity used before the addition of
-      #     writer identities to this API. The sink's destination must be in the same
-      #     project as the sink itself.
+      #     the same group or service account used by Stackdriver Logging before the
+      #     addition of writer identities to this API. The sink's destination must be
+      #     in the same project as the sink itself.
       #
       #     If this field is set to true, or if the sink is owned by a non-project
       #     resource such as an organization, then the value of +writer_identity+ will
@@ -175,6 +184,8 @@ module Google
       #
       #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
       #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+      #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
       #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       # @!attribute [rw] sink
@@ -192,9 +203,9 @@ module Google
       #
       #     +   If the old and new values of this field are both false or both true,
       #         then there is no change to the sink's +writer_identity+.
-      #     +   If the old value was false and the new value is true, then
+      #     +   If the old value is false and the new value is true, then
       #         +writer_identity+ is changed to a unique service account.
-      #     +   It is an error if the old value was true and the new value is false.
+      #     +   It is an error if the old value is true and the new value is false.
       class UpdateSinkRequest; end
 
       # The parameters to +DeleteSink+.
@@ -205,10 +216,10 @@ module Google
       #
       #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
       #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+      #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     It is an error if the sink does not exist.  Example:
-      #     +"projects/my-project-id/sinks/my-sink-id"+.  It is an error if
-      #     the sink does not exist.
+      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       class DeleteSinkRequest; end
     end
   end
