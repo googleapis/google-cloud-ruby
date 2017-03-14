@@ -354,9 +354,9 @@ module Google
         #
         #   priorities = []
         #   percent_completes = []
-        #   datastore.run(query).each do |task|
-        #     priorities << task["priority"]
-        #     percent_completes << task["percent_complete"]
+        #   datastore.run(query).each do |t|
+        #     priorities << t["priority"]
+        #     percent_completes << t["percent_complete"]
         #   end
         #
         # @example A keys-only query using the special property `__key__`:

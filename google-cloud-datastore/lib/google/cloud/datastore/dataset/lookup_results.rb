@@ -47,7 +47,7 @@ module Google
         #   tasks.size #=> 3
         #   tasks.deferred #=> []
         #   tasks.missing #=> []
-        #   descriptions = tasks.map { |task| task["description"] }
+        #   descriptions = tasks.map { |t| t["description"] }
         #   descriptions.size #=> 3
         #   descriptions.deferred #=> raise NoMethodError
         #   descriptions.missing #=> raise NoMethodError
@@ -140,8 +140,8 @@ module Google
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
           #   tasks = datastore.find_all task_key1, task_key2
-          #   tasks.all do |task|
-          #     puts "Task #{task.key.id} (#cursor)"
+          #   tasks.all do |t|
+          #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -162,8 +162,8 @@ module Google
           #   task_key1 = datastore.key "Task", "sampleTask1"
           #   task_key2 = datastore.key "Task", "sampleTask2"
           #   tasks = datastore.find_all task_key1, task_key2
-          #   tasks.all(request_limit: 10) do |task|
-          #     puts "Task #{task.key.id} (#cursor)"
+          #   tasks.all(request_limit: 10) do |t|
+          #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
           def all request_limit: nil
