@@ -161,7 +161,7 @@ module Google
     #
     # query = datastore.query("Task")
     # tasks = datastore.run query
-    # tasks.all do |task|
+    # tasks.all do |t|
     #   puts t["description"]
     # end
     # ```

@@ -49,7 +49,7 @@ module Google
         #
         #   tasks.size #=> 3
         #   tasks.cursor.to_s #=> "c2Vjb25kLXBhZ2UtY3Vyc29y"
-        #   descriptions = tasks.map { |task| task["description"] }
+        #   descriptions = tasks.map { |t| t["description"] }
         #   descriptions.size #=> 3
         #   descriptions.cursor #=> raise NoMethodError
         #
@@ -239,8 +239,8 @@ module Google
           #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
-          #   tasks.all do |task|
-          #     puts "Task #{task.key.id} (#cursor)"
+          #   tasks.all do |t|
+          #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -261,8 +261,8 @@ module Google
           #
           #   query = datastore.query "Task"
           #   tasks = datastore.run query
-          #   tasks.all(request_limit: 10) do |task|
-          #     puts "Task #{task.key.id} (#cursor)"
+          #   tasks.all(request_limit: 10) do |t|
+          #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
           def all request_limit: nil
