@@ -4,6 +4,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/distribution_pb'
+require 'google/api/metric_pb'
 require 'google/protobuf/empty_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogMetric" do

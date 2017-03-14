@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/logging/v2/logging_config_pb"
 
 module Google
@@ -216,8 +217,12 @@ module Google
           # Lists sinks.
           #
           # @param parent [String]
-          #   Required. The parent resource whose sinks are to be listed.
-          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+          #   Required. The parent resource whose sinks are to be listed:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -268,10 +273,12 @@ module Google
           # Gets a sink.
           #
           # @param sink_name [String]
-          #   Required. The parent resource name of the sink:
+          #   Required. The resource name of the sink:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
           #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
@@ -308,6 +315,8 @@ module Google
           #
           #       "projects/[PROJECT_ID]"
           #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
           #
           #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
           # @param sink [Google::Logging::V2::LogSink]
@@ -317,9 +326,9 @@ module Google
           #   Optional. Determines the kind of IAM identity returned as +writer_identity+
           #   in the new sink.  If this value is omitted or set to false, and if the
           #   sink's parent is a project, then the value returned as +writer_identity+ is
-          #   +cloud-logs@google.com+, the same identity used before the addition of
-          #   writer identities to this API. The sink's destination must be in the same
-          #   project as the sink itself.
+          #   the same group or service account used by Stackdriver Logging before the
+          #   addition of writer identities to this API. The sink's destination must be
+          #   in the same project as the sink itself.
           #
           #   If this field is set to true, or if the sink is owned by a non-project
           #   resource such as an organization, then the value of +writer_identity+ will
@@ -369,6 +378,8 @@ module Google
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
           #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink]
@@ -384,9 +395,9 @@ module Google
           #
           #   +   If the old and new values of this field are both false or both true,
           #       then there is no change to the sink's +writer_identity+.
-          #   +   If the old value was false and the new value is true, then
+          #   +   If the old value is false and the new value is true, then
           #       +writer_identity+ is changed to a unique service account.
-          #   +   It is an error if the old value was true and the new value is false.
+          #   +   It is an error if the old value is true and the new value is false.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -425,10 +436,10 @@ module Google
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   It is an error if the sink does not exist.  Example:
-          #   +"projects/my-project-id/sinks/my-sink-id"+.  It is an error if
-          #   the sink does not exist.
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

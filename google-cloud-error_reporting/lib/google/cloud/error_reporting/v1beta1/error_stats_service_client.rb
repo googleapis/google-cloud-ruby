@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_pb"
 
 module Google
@@ -183,12 +184,6 @@ module Google
           #   Platform project ID</a>.
           #
           #   Example: <code>projects/my-project-123</code>.
-          # @param group_id [Array<String>]
-          #   [Optional] List all <code>ErrorGroupStats</code> with these IDs.
-          # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter]
-          #   [Optional] List only <code>ErrorGroupStats</code> which belong to a service
-          #   context that matches the filter.
-          #   Data for all service contexts is returned if this field is not specified.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
           #   [Optional] List data for the given time range.
           #   If not set a default time range is used. The field time_range_begin
@@ -197,6 +192,12 @@ module Google
           #   range are returned, unless the request contains an explicit group_id list.
           #   If a group_id list is given, also <code>ErrorGroupStats</code> with zero
           #   occurrences are returned.
+          # @param group_id [Array<String>]
+          #   [Optional] List all <code>ErrorGroupStats</code> with these IDs.
+          # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter]
+          #   [Optional] List only <code>ErrorGroupStats</code> which belong to a service
+          #   context that matches the filter.
+          #   Data for all service contexts is returned if this field is not specified.
           # @param timed_count_duration [Google::Protobuf::Duration]
           #   [Optional] The preferred duration for a single returned +TimedCount+.
           #   If not set, no timed counts are returned.

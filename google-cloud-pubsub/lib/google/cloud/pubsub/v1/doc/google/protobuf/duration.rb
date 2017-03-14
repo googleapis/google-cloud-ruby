@@ -54,6 +54,12 @@ module Google
     #       end.seconds += 1;
     #       end.nanos -= 1000000000;
     #     }
+    #
+    # Example 3: Compute Duration from datetime.timedelta in Python.
+    #
+    #     td = datetime.timedelta(days=3, minutes=10)
+    #     duration = Duration()
+    #     duration.FromTimedelta(td)
     # @!attribute [rw] seconds
     #   @return [Integer]
     #     Signed seconds of the span of time. Must be from -315,576,000,000

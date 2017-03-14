@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ require "json"
 require "pathname"
 
 require "google/gax"
+
 require "google/spanner/v1/spanner_pb"
 
 module Google
@@ -373,11 +374,11 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the SQL query should be performed.
+          # @param sql [String]
+          #   Required. The SQL query string.
           # @param transaction [Google::Spanner::V1::TransactionSelector]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
-          # @param sql [String]
-          #   Required. The SQL query string.
           # @param params [Google::Protobuf::Struct]
           #   The SQL query string can contain parameter placeholders. A parameter
           #   placeholder consists of +'@'+ followed by the parameter
@@ -456,11 +457,11 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the SQL query should be performed.
+          # @param sql [String]
+          #   Required. The SQL query string.
           # @param transaction [Google::Spanner::V1::TransactionSelector]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
-          # @param sql [String]
-          #   Required. The SQL query string.
           # @param params [Google::Protobuf::Struct]
           #   The SQL query string can contain parameter placeholders. A parameter
           #   placeholder consists of +'@'+ followed by the parameter
@@ -551,15 +552,8 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the read should be performed.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
-          #   The transaction to use. If none is provided, the default is a
-          #   temporary read-only transaction with strong concurrency.
           # @param table [String]
           #   Required. The name of the table in the database to be read.
-          # @param index [String]
-          #   If non-empty, the name of an index on Table. This index is
-          #   used instead of the table primary key when interpreting Key_set
-          #   and sorting result rows. See Key_set for further information.
           # @param columns [Array<String>]
           #   The columns of Table to be returned for each row matching
           #   this request.
@@ -574,6 +568,13 @@ module Google
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
+          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          #   The transaction to use. If none is provided, the default is a
+          #   temporary read-only transaction with strong concurrency.
+          # @param index [String]
+          #   If non-empty, the name of an index on Table. This index is
+          #   used instead of the table primary key when interpreting Key_set
+          #   and sorting result rows. See Key_set for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
           #   is zero, the default is no limit.
@@ -633,15 +634,8 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the read should be performed.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
-          #   The transaction to use. If none is provided, the default is a
-          #   temporary read-only transaction with strong concurrency.
           # @param table [String]
           #   Required. The name of the table in the database to be read.
-          # @param index [String]
-          #   If non-empty, the name of an index on Table. This index is
-          #   used instead of the table primary key when interpreting Key_set
-          #   and sorting result rows. See Key_set for further information.
           # @param columns [Array<String>]
           #   The columns of Table to be returned for each row matching
           #   this request.
@@ -656,6 +650,13 @@ module Google
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
+          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          #   The transaction to use. If none is provided, the default is a
+          #   temporary read-only transaction with strong concurrency.
+          # @param index [String]
+          #   If non-empty, the name of an index on Table. This index is
+          #   used instead of the table primary key when interpreting Key_set
+          #   and sorting result rows. See Key_set for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
           #   is zero, the default is no limit.
@@ -758,6 +759,10 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the transaction to be committed is running.
+          # @param mutations [Array<Google::Spanner::V1::Mutation>]
+          #   The mutations to be executed when this transaction commits. All
+          #   mutations are applied atomically, in the order they appear in
+          #   this list.
           # @param transaction_id [String]
           #   Commit a previously-started transaction.
           # @param single_use_transaction [Google::Spanner::V1::TransactionOptions]
@@ -770,10 +775,6 @@ module Google
           #   executed more than once. If this is undesirable, use
           #   BeginTransaction and
           #   Commit instead.
-          # @param mutations [Array<Google::Spanner::V1::Mutation>]
-          #   The mutations to be executed when this transaction commits. All
-          #   mutations are applied atomically, in the order they appear in
-          #   this list.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
