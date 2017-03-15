@@ -1015,9 +1015,10 @@ module Google
             end
 
             ##
-            # @private New TextSpan from a V1::TextSpan object.
+            # @private New Mention from a V1::Mention object.
             def self.from_grpc grpc
-              new grpc.content, grpc.begin_offset
+              text_span = TextSpan.from_grpc grpc.text
+              new text_span, grpc.type
             end
           end
         end
