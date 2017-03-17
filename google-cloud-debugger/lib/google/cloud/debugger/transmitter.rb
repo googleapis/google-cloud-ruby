@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,8 +54,6 @@ module Google
             service.update_active_breakpoint agent.debuggee.id, breakpoint
           rescue => e
             @last_exception = e
-            # puts e.message
-            # puts e.backtrace
           end
         end
 

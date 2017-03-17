@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,16 +37,16 @@ module Google
 
         def register
           begin
-            response = service.register_debuggee build_request_arg
+            response = service.register_debuggee to_grpc
             @id = response.debuggee.id
           rescue
             revoke_registration
           end
-          !!@id
+          !!id
         end
 
         def registered?
-          !!@id
+          !!id
         end
 
         def revoke_registration
@@ -55,7 +55,7 @@ module Google
 
         private
         def build_request_arg
-          debuggee_arg = {
+          debuggee_args = {
             project: project_id,
             description: description,
             labels: labels,
@@ -63,25 +63,34 @@ module Google
           }
 
           source_context = read_app_json_file "source-context.json"
-          debuggee_arg[:source_contexts] = [source_context] if source_context
+          debuggee_args[:source_contexts] = [source_context] if source_context
 
           source_contexts = read_app_json_file "source-contexts.json"
           if source_contexts
-            debuggee_arg[:ext_source_contexts] = source_contexts
+            debuggee_args[:ext_source_contexts] = source_contexts
           elsif source_context
-            debuggee_arg[:ext_source_contexts] = [{context: source_context}]
+            debuggee_args[:ext_source_contexts] = [{context: source_context}]
           end
 
-          debuggee_arg[:uniquifier] = compute_uniquifier debuggee_arg
+          debuggee_args[:uniquifier] = compute_uniquifier debuggee_args
 
-          debuggee_arg
+          debuggee_args
+        end
+
+        def to_grpc
+          debuggee_args = build_request_arg
+
+          grpc = Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
+            debuggee_args.to_json
+
+          grpc
         end
 
         def labels
           {
-            projectid: project_id,
-            module: module_name,
-            version: module_version
+            "projectid" => String(project_id),
+            "module" => String(module_name),
+            "version" => String(module_version)
           }
         end
 
@@ -113,9 +122,7 @@ module Google
 
         def read_app_json_file file_path
           begin
-            File.open(file_path, "r") do |f|
-              JSON.parse(f)
-            end
+            JSON.parse File.read(file_path), {:symbolize_names => true}
           rescue
             nil
           end

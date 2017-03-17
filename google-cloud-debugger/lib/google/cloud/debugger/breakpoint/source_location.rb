@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,28 +17,56 @@ module Google
   module Cloud
     module Debugger
       class Breakpoint
+        ##
+        # # SourceLocation
+        #
+        # Additional information about the source code location that's
+        # associated with the breakpoint.
+        #
+        # See also {Google::Cloud::Debugger::Breakpoint#location}.
+        #
         class SourceLocation
+          ##
+          # Path to the source file within the source context of the target
+          # binary.
           attr_accessor :path
 
+          ##
+          # Line inside the file. The first line in the file has the value 1.
           attr_accessor :line
 
+          ##
+          # @private Create an empty SourceLocation object.
           def initialize
-            @path = nil
-            @line = nil
           end
 
-          def to_grpc
-            Google::Apis::ClouddebuggerV2::SourceLocation.new.tap do |sl|
-              sl.path = @path
-              sl.line = @line
-            end
-          end
-
+          ##
+          # @private New Google::Cloud::Debugger::Breakpoint::SourceLocation
+          # from a Google::Devtools::Clouddebugger::V2::SourceLocation object.
           def self.from_grpc grpc
-            SourceLocation.new.tap do |sl|
-              sl.path = grpc.path
-              sl.line = grpc.line.to_i
+            return new if grpc.nil?
+            new.tap do |o|
+              o.path = grpc.path
+              o.line = grpc.line
             end
+          end
+
+          ##
+          # @private Determines if the SourceLocation has any data.
+          def empty?
+            path.nil? &&
+              line.nil?
+          end
+
+          ##
+          # @private Exports the SourceLocation to a
+          # Google::Devtools::Clouddebugger::V2::SourceLocation object.
+          def to_grpc
+            return nil if empty?
+            Google::Devtools::Clouddebugger::V2::SourceLocation.new(
+              path: path.to_s,
+              line: line
+            )
           end
         end
       end

@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ module Google
 
         attr_accessor :id
 
-        attr_accessor :action
+        # TODO: Implement logpoint
+        # attr_accessor :action
 
         attr_accessor :location
 
@@ -41,7 +42,18 @@ module Google
 
         attr_accessor :create_time
 
-        attr_accessor :status
+        attr_accessor :final_time
+
+        attr_accessor :user_email
+
+        # TODO: Implement breakpoint error status
+        # attr_accessor :status
+
+        # TODO: Implement variable table
+        # attr_accessor :variable_table
+
+        # TODO: Implement labels
+        # attr_accessor :labels
 
         attr_accessor :completed
 
@@ -51,14 +63,10 @@ module Google
           super()
 
           @id = id
-          @action = :capture
-          if path || line
-            @location = SourceLocation.new.tap do |sl|
-              sl.path = path
-              sl.line = line.to_i
-            end
-          else
-            @location = nil
+          # @action = :capture
+          @location = SourceLocation.new.tap do |sl|
+            sl.path = path
+            sl.line = line.to_i
           end
           @expressions = []
           @evaluated_expressions = []
@@ -66,27 +74,52 @@ module Google
           @stack_frames = []
         end
 
+        ##
+        # @private New Google::Cloud::Debugger::Breakpoint
+        # from a Google::Devtools::Clouddebugger::V2::Breakpoint object.
+        def self.from_grpc grpc
+          return new if grpc.nil?
+          new.tap do |b|
+            b.id = grpc.id
+            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
+            b.condition = grpc.condition
+            b.is_final_state = grpc.is_final_state
+            b.expressions = grpc.expressions.to_a
+            b.evaluated_expressions =
+              Breakpoint::Variable.from_grpc_list grpc.evaluated_expressions
+            b.create_time = timestamp_from_grpc grpc.create_time
+            b.final_time = timestamp_from_grpc grpc.final_time
+            b.user_email = grpc.user_email
+            b.stack_frames = stack_frames_from_grpc grpc
+          end
+        end
+
+        ##
+        # @private Extract array of stack_frame from grpc
+        def self.stack_frames_from_grpc grpc
+          return nil if grpc.stack_frames.nil?
+          grpc.stack_frames.map { |sf| Breakpoint::StackFrame.from_grpc sf }
+        end
+
+        ##
+        # @private Get a Time object from a Google::Protobuf::Timestamp object.
+        def self.timestamp_from_grpc grpc_timestamp
+          return nil if grpc_timestamp.nil?
+          Time.at grpc_timestamp.seconds, Rational(grpc_timestamp.nanos, 1000)
+        end
+        private_class_method :stack_frames_from_grpc, :timestamp_from_grpc
+
         def add_expression expression
           @expressions << expression
           expression
         end
 
-        # def path_hit? path
-        #   synchronize do
-        #     location.path.match(path) || path.match(location.path)
-        #   end
-        # end
-        #
-        # def line_hit? path, line
-        #   synchronize do
-        #     path_hit?(path) && location.line == line
-        #   end
-        # end
-
         def complete
           synchronize do
+            return if completed
+
             @is_final_state = true
-            @final_time = Time.now.utc.iso8601
+            @final_time = Time.now
             @completed = true
           end
         end
@@ -106,7 +139,7 @@ module Google
         end
 
         def check_condition binding
-          return true if condition.nil?
+          return true if condition.nil? || condition.empty?
           Evaluator.eval_condition binding, condition
         end
 
@@ -118,13 +151,11 @@ module Google
               return false unless check_condition top_frame_binding
 
               @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-              if @expressions
+              unless @expressions.empty?
                 @evaluated_expressions =
                   Evaluator.eval_expressions top_frame_binding, @expressions
               end
-            rescue => e
-              # puts e.message
-              # puts e.backtrace
+            rescue
               # TODO set breakpoint into error state
               return false
             end
@@ -140,46 +171,57 @@ module Google
             line == other.line
         end
 
-        # def == other
-        #   path == other.path &&
-        #     line == other.line
-        # end
-
         def hash
           id.hash ^ path.hash ^ line.hash
         end
 
+        ##
+        # @private Exports the Breakpoint to a
+        # Google::Devtools::Clouddebugger::V2::Breakpoint object.
         def to_grpc
-          Google::Apis::ClouddebuggerV2::Breakpoint.new.tap do |b|
-            b.id = @id
-            b.action = @action
-            b.location = @location.to_grpc
-            b.condition = @condition
-            b.expressions = @expressions
-            b.is_final_state = @is_final_state
-            this_stack_frames = @stack_frames || []
-            b.stack_frames = this_stack_frames.map { |sf| sf.to_grpc }
-            this_evaluated_expressions = @evaluated_expressions || []
-            b.evaluated_expressions = this_evaluated_expressions.map { |exp| exp.to_grpc}
-            #b.variable_table = @variable_table
-          end
+          Google::Devtools::Clouddebugger::V2::Breakpoint.new(
+            id: id.to_s,
+            location: location.to_grpc,
+            condition: condition.to_s,
+            expressions: expressions || [],
+            is_final_state: is_final_state,
+            create_time: timestamp_to_grpc(create_time),
+            final_time: timestamp_to_grpc(final_time),
+            user_email: user_email,
+            stack_frames: stack_frames_to_grpc,
+            evaluated_expressions: evaluated_expressions_to_grpc || []
+          )
         end
 
-        def self.from_grpc grpc
-          new.tap do |b|
-            b.id = grpc.id
-            b.action = grpc.action
-            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
-            b.condition = grpc.condition
-            b.is_final_state = grpc.is_final_state
-            b.expressions = grpc.expressions
-            b.evaluated_expressions = grpc.evaluated_expressions
-            b.create_time = grpc.create_time
-            b.status = grpc.status
-            stack_frames = grpc.stack_frames || []
-            b.stack_frames = stack_frames.map { |sf|
-              Breakpoint::StackFrame.from_grpc sf }
-          end
+        private
+
+        ##
+        # @private Exports the Breakpoint stack_frames to an array of
+        # Google::Devtools::Clouddebugger::V2::StackFrame objects.
+        def stack_frames_to_grpc
+          return nil if stack_frames.nil? || stack_frames.empty?
+          stack_frames.map { |sf| sf.to_grpc  }
+        end
+
+        ##
+        # @private Exports the Breakpoint stack_frames to an array of
+        # Google::Devtools::Clouddebugger::V2::StackFrame objects.
+        def evaluated_expressions_to_grpc
+          return nil if evaluated_expressions.nil? ||
+            evaluated_expressions.empty?
+          evaluated_expressions.map { |var| var.to_grpc }
+        end
+
+        ##
+        # @private Formats the timestamp as a Google::Protobuf::Timestamp
+        # object.
+        def timestamp_to_grpc time
+          return nil if time.nil?
+          # TODO: ArgumentError if timestamp is not a Time object?
+          Google::Protobuf::Timestamp.new(
+            seconds: time.to_i,
+            nanos: time.nsec
+          )
         end
       end
     end

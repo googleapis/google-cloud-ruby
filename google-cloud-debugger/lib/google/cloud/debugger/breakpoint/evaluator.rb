@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -716,6 +716,7 @@ module Google
               result
             end
 
+            # TODO fix false possible of evaluating error condition
             def eval_condition binding, condition
               !!readonly_eval_expression(binding, condition)
             end

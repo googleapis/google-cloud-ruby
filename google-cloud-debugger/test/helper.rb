@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -70,4 +70,39 @@ def wait_until_true timeout = 5
   end
 
   :completed
+end
+
+def random_source_location_hash
+  {
+    "path" => "my_app/my_class.rb",
+    "line" => 321
+  }
+end
+
+def random_variable_integer_hash
+  {
+    "name" => "[0]",
+    "type" => "Integer",
+    "value" => "3",
+    "members" => []
+  }
+end
+
+def random_variable_array_hash
+  {
+    "name" => "local_var",
+    "type" => "Array",
+    "members" => [
+      random_variable_integer_hash
+    ]
+  }
+end
+
+def random_stack_frame_hash
+  {
+    "function" => "index",
+    "location" => random_source_location_hash,
+    "arguments" => [random_variable_integer_hash],
+    "locals" => [random_variable_array_hash]
+  }
 end

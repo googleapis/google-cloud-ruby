@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,87 @@
 require "helper"
 
 describe Google::Cloud::Debugger::Breakpoint::Variable do
+  describe "#to_grpc" do
+    let(:variable_hash) { random_variable_array_hash }
+    let(:variable_grpc) {
+      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
+        variable_hash.to_json
+    }
+    let(:variable) {
+      Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
+    }
+
+    it "gets all the attributes" do
+      grpc = variable.to_grpc
+
+      grpc.name.must_equal variable_grpc.name
+      grpc.value.must_equal variable_grpc.value
+      grpc.type.must_equal variable_grpc.type
+      grpc.members.must_equal variable_grpc.members
+    end
+
+    it "has members even if missing from variable" do
+      variable.members = nil
+      grpc = variable.to_grpc
+
+      grpc.name.must_equal variable_grpc.name
+      grpc.value.must_equal variable_grpc.value
+      grpc.members.must_equal []
+    end
+  end
+
+  describe ".from_grpc" do
+    let(:variable_hash) { random_variable_array_hash }
+    let(:variable_grpc) {
+      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
+        variable_hash.to_json
+    }
+
+    it "knows its attributes" do
+      variable_grpc.name.must_equal "local_var"
+      variable_grpc.type.must_equal "Array"
+      variable_grpc.members[0].name.must_equal "[0]"
+      variable_grpc.members[0].type.must_equal "Integer"
+      variable_grpc.members[0].value.must_equal "3"
+      variable_grpc.members[0].members.must_equal []
+    end
+
+    it "has members in grpc even if it's missing from variable" do
+      variable =
+        Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
+      variable.members = nil
+      grpc = variable.to_grpc
+      grpc.members.must_equal []
+    end
+  end
+
+  describe ".from_grpc_list" do
+    let(:variable_hash) { random_variable_integer_hash }
+    let(:variable_grpc) {
+      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
+        variable_hash.to_json
+    }
+    let(:variable) {
+      Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
+    }
+
+    it "converts all the elements" do
+      grpc_ary = [variable_grpc, variable_grpc]
+      ary = Google::Cloud::Debugger::Breakpoint::Variable.from_grpc_list grpc_ary
+
+      ary.size.must_equal 2
+      ary[0].name.must_equal variable.name
+      ary[0].type.must_equal variable.type
+      ary[0].value.must_equal variable.value
+      ary[0].members.must_be_empty
+
+      ary[1].name.must_equal variable.name
+      ary[1].type.must_equal variable.type
+      ary[1].value.must_equal variable.value
+      ary[1].members.must_be_empty
+    end
+  end
+
   describe ".from_rb_var" do
     it "returns Variable itself" do
       var = Google::Cloud::Debugger::Breakpoint::Variable.new

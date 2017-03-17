@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/debugger/version"
+require "google/cloud/debugger/v2"
 require "google/gax/errors"
-
-gem "google-api-client"
-require "google/apis/clouddebugger_v2/classes"
-require "google/apis/clouddebugger_v2/representations"
-require "google/apis/clouddebugger_v2/service"
 
 module Google
   module Cloud
@@ -37,26 +33,9 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || "https://www.googleapis.com/auth/cloud_debugger"
+          @host = host || V2::Controller2Client::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-          # TODO: Refactor this Apiary client code
-          @cloud_debugger_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
-          @cloud_debugger_service.client_options.application_name    = "gcloud-ruby"
-          @cloud_debugger_service.client_options.application_version = \
-            Google::Cloud::Debugger::VERSION
-          @cloud_debugger_service.request_options.retries = 3
-          @cloud_debugger_service.request_options.timeout_sec      = timeout
-          @cloud_debugger_service.request_options.open_timeout_sec = timeout
-          @cloud_debugger_service.authorization = @credentials.client
-          @debugger_transmitter_service = Google::Apis::ClouddebuggerV2::CloudDebuggerService.new
-          @debugger_transmitter_service.client_options.application_name    = "gcloud-ruby"
-          @debugger_transmitter_service.client_options.application_version = \
-            Google::Cloud::Debugger::VERSION
-          @debugger_transmitter_service.request_options.retries = 3
-          @debugger_transmitter_service.request_options.timeout_sec      = timeout
-          @debugger_transmitter_service.request_options.open_timeout_sec = timeout
-          @debugger_transmitter_service.authorization = @credentials.client
         end
 
         def channel
@@ -71,42 +50,62 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        def cloud_debugger_service
-          return mocked_debugger_service if mocked_debugger_service
-          @cloud_debugger_service
+        def debugger
+          return mocked_debugger if mocked_debugger
+          @debugger ||=
+            V2::Controller2Client.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Debugger::VERSION)
         end
-        attr_accessor :mocked_debugger_service
+        attr_accessor :mocked_debugger
 
-        def debugger_transmitter_service
-          return mocked_transmitter_service if mocked_transmitter_service
-          @debugger_transmitter_service
+        def transmitter
+          return mocked_transmitter if mocked_transmitter
+          @transmitter ||=
+            V2::Controller2Client.new(
+              service_path: host,
+              channel: channel,
+              timeout: timeout,
+              client_config: client_config,
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Debugger::VERSION)
         end
-        attr_accessor :mocked_transmitter_service
-
-        def register_debuggee debuggee_hash
-          request = Google::Apis::ClouddebuggerV2::RegisterDebuggeeRequest.new({
-            debuggee: Google::Apis::ClouddebuggerV2::Debuggee.new(debuggee_hash)
-          })
-          cloud_debugger_service.register_debuggee request
-        end
-
-        def list_debuggee_breakpoints debuggee_id, wait_token
-          cloud_debugger_service.list_controller_debuggee_breakpoints(debuggee_id, {
-            wait_token: wait_token,
-            success_on_timeout: true
-          })
-        end
-
-        def update_active_breakpoint debuggee_id, breakpoint
-          request = Google::Apis::ClouddebuggerV2::UpdateActiveBreakpointRequest.new({
-            breakpoint: breakpoint.to_grpc
-          })
-
-          debugger_transmitter_service.update_active_breakpoint debuggee_id, breakpoint.id, request
-        end
+        attr_accessor :mocked_transmitter
 
         def insecure?
           credentials == :this_channel_is_insecure
+        end
+
+        def register_debuggee debuggee_grpc
+          begin
+            execute do
+              debugger.register_debuggee debuggee_grpc, options: default_options
+            end
+          rescue => e
+            puts e.message, e.backtrace
+            exit
+          end
+        end
+
+        def list_active_breakpoints debuggee_id, wait_token
+          execute do
+            debugger.list_active_breakpoints debuggee_id.to_s,
+                                             wait_token: wait_token.to_s,
+                                             success_on_timeout: true,
+                                             options: default_options
+          end
+        end
+
+        def update_active_breakpoint debuggee_id, breakpoint
+          execute do
+            transmitter.update_active_breakpoint debuggee_id.to_s,
+                                                 breakpoint.to_grpc,
+                                                 options: default_options
+          end
         end
 
         def inspect
@@ -115,8 +114,12 @@ module Google
 
         protected
 
-        def project_path
-          "projects/#{@project}"
+        def default_headers
+          { "google-cloud-resource-prefix" => "projects/#{@project}" }
+        end
+
+        def default_options
+          Google::Gax::CallOptions.new kwargs: default_headers
         end
 
         def execute

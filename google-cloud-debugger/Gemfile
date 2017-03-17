@@ -4,10 +4,6 @@ gemspec
 
 gem "rake", "~> 11.0"
 gem "google-cloud-core", path: "../google-cloud-core"
-gem "stackdriver-core", path: "../stackdriver-core"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
-
-#delete me
-gem "google-api-client"

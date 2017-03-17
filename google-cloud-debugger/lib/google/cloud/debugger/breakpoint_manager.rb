@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,12 +40,12 @@ module Google
 
         def sync_active_breakpoints debuggee_id
           begin
-            response = service.list_debuggee_breakpoints debuggee_id, @wait_token
+            response = service.list_active_breakpoints debuggee_id, @wait_token
           rescue
             return false
           end
 
-          return true if response.wait_expired?
+          return true if response.wait_expired
 
           @wait_token = response.next_wait_token
 
@@ -60,10 +60,10 @@ module Google
         end
 
         def update_breakpoints server_breakpoints
-          synchronize do
-            # puts "Servier breakpoints:"
-            # p server_breakpoints
+          # puts "server_breakpoints"
+          # p server_breakpoints
 
+          synchronize do
             new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
             before_breakpoints_count = @active_breakpoints.size + @completed_breakpoints.size
 

@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,41 +19,90 @@ module Google
   module Cloud
     module Debugger
       class Breakpoint
+        ##
+        # # StackFrame
+        #
+        # Represents a stack frame context.
+        #
+        # See also {Google::Cloud::Debugger::Breakpoint#stack_frame}.
+        #
         class StackFrame
+          ##
+          # Demangled function name at the call site.
           attr_accessor :function
 
+          ##
+          # Source location of the call site.
           attr_accessor :location
 
+          ##
+          # Set of arguments passed to this function. Note that this might not
+          # be populated for all stack frames.
           attr_accessor :arguments
 
+          ##
+          # Set of local variables at the stack frame location. Note that this
+          # might not be populated for all stack frames.
           attr_accessor :locals
 
+          ##
+          # @private Create an empty StackFrame object.
           def initialize
-            @function = nil
             @location = SourceLocation.new
-            @arguments = nil
+            @arguments = []
             @locals = []
           end
 
-          def to_grpc
-            Google::Apis::ClouddebuggerV2::StackFrame.new.tap do |sf|
-              sf.function = @function
-              sf.location = @location.to_grpc
-              # sf.arguments = @arguments
-              this_locals = @locals || []
-              sf.locals = this_locals.map { |var| var.to_grpc }
+          ##
+          # @private New Google::Cloud::Debugger::Breakpoint::SourceLocation
+          # from a Google::Devtools::Clouddebugger::V2::SourceLocation object.
+          def self.from_grpc grpc
+            new.tap do |o|
+              o.function = grpc.function
+              o.location = SourceLocation.from_grpc grpc.location
+              o.arguments = Variable.from_grpc_list grpc.arguments
+              o.locals = Variable.from_grpc_list grpc.locals
             end
           end
 
-          def self.from_grpc grpc
-            StackFrame.new.tap do |sf|
-              sf.function = grpc.function
-              sf.location = grpc.location
-              arguments = grpc.arguments || []
-              sf.arguments = arguments.map { |arg| Variable.from_grpc arg }
-              locals = grpc.locals || []
-              sf.locals = locals.map { |var| Variable.from_grpc var }
-            end
+          ##
+          # @private Determines if the StackFrame has any data.
+          def empty?
+            function.nil? &&
+              location.nil? &&
+              arguments.nil? &&
+              locals.nil?
+          end
+
+          ##
+          # @private Exports the StackFrame to a
+          # Google::Devtools::Clouddebugger::V2::StackFrame object.
+          def to_grpc
+            return nil if empty?
+            Google::Devtools::Clouddebugger::V2::StackFrame.new(
+              function: function.to_s,
+              location: location.to_grpc,
+              arguments: arguments_to_grpc,
+              locals: locals_to_grpc
+            )
+          end
+
+          private
+
+          ##
+          # @private Exports the StackFrame arguments to an array of
+          # Google::Devtools::Clouddebugger::V2::Variable objects.
+          def arguments_to_grpc
+            return [] if arguments.nil?
+            arguments.map { |var| var.to_grpc }
+          end
+
+          ##
+          # @private Exports the StackFrame locals to an array of
+          # Google::Devtools::Clouddebugger::V2::Variable objects.
+          def locals_to_grpc
+            return [] if locals.nil?
+            locals.map { |var| var.to_grpc }
           end
         end
       end

@@ -21,11 +21,8 @@ Gem::Specification.new do |gem|
   gem.extensions << "ext/google/cloud/debugger/debugger_c/extconf.rb"
 
   gem.add_dependency "binding_of_caller", "~> 0.7"
-  gem.add_dependency "json", ">= 1.7"
   gem.add_dependency "google-cloud-core", "~> 0.21.1"
   gem.add_dependency "google-gax", "~> 0.8.0"
-  #TODO remote this dev dependency
-  gem.add_dependency "google-api-client", "~> 0.9.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
