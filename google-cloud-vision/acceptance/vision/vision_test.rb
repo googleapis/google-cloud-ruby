@@ -758,29 +758,32 @@ describe "Vision", :vision do
       annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
       annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
       annotation.web.entities[0].score.must_be_kind_of Float
-      annotation.web.entities[0].score.must_be :>, 0.0
+      annotation.web.entities[0].score.wont_be :zero?
       annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
 
-      annotation.web.full_matching_images.count.must_be :>, 0
-      annotation.web.full_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
-      annotation.web.full_matching_images[0].url.must_be_kind_of String
-      annotation.web.full_matching_images[0].url.wont_be :empty?
-      annotation.web.full_matching_images[0].score.must_be_kind_of Float
-      annotation.web.full_matching_images[0].score.must_be :>, 0.0
+      annotation.web.full_matching_images.count.wont_be :zero?
+      annotation.web.full_matching_images.each do |full_matching_image|
+        full_matching_image.must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+        full_matching_image.url.must_be_kind_of String
+        full_matching_image.url.wont_be :empty?
+        full_matching_image.score.must_be_kind_of Float
+      end
 
-      annotation.web.partial_matching_images.count.must_be :>, 0
-      annotation.web.partial_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
-      annotation.web.partial_matching_images[0].url.must_be_kind_of String
-      annotation.web.partial_matching_images[0].url.wont_be :empty?
-      annotation.web.partial_matching_images[0].score.must_be_kind_of Float
-      annotation.web.partial_matching_images[0].score.must_be :>, 0.0
+      annotation.web.partial_matching_images.count.wont_be :zero?
+      annotation.web.partial_matching_images.each do |partial_matching_image|
+        partial_matching_image.must_be_kind_of Google::Cloud::Vision::Annotation::Web::Image
+        partial_matching_image.url.must_be_kind_of String
+        partial_matching_image.url.wont_be :empty?
+        partial_matching_image.score.must_be_kind_of Float
+      end
 
-      annotation.web.pages_with_matching_images.count.must_be :>, 0
-      annotation.web.pages_with_matching_images[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
-      annotation.web.pages_with_matching_images[0].url.must_be_kind_of String
-      annotation.web.pages_with_matching_images[0].url.wont_be :empty?
-      annotation.web.pages_with_matching_images[0].score.must_be_kind_of Float
-      annotation.web.pages_with_matching_images[0].score.must_be :>, 0.0
+      annotation.web.pages_with_matching_images.count.wont_be :zero?
+      annotation.web.pages_with_matching_images.each do |pages_with_matching_image|
+        pages_with_matching_image.must_be_kind_of Google::Cloud::Vision::Annotation::Web::Page
+        pages_with_matching_image.url.must_be_kind_of String
+        pages_with_matching_image.url.wont_be :empty?
+        pages_with_matching_image.score.must_be_kind_of Float
+      end
     end
 
     it "detects web from multiple images" do
