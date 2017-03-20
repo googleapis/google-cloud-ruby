@@ -56,7 +56,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :mock_spanner do
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new

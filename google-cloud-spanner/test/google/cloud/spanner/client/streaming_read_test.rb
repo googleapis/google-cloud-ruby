@@ -68,7 +68,7 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :mock_spanner do
      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json)].to_enum
   end
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
 
   it "can read all rows" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]

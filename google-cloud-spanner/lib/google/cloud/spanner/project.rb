@@ -393,8 +393,8 @@ module Google
         #
         #   ...
         #
-        def client instance_id, database_id
-          Client.new self, instance_id, database_id
+        def client instance_id, database_id, min: 2, max: 10
+          Client.new self, instance_id, database_id, min: min, max: max
         end
 
         protected

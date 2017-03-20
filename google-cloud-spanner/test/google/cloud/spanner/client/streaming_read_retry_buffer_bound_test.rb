@@ -81,7 +81,7 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :buffer_boun
       ]
     }
   end
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
 
   it "returns all rows even when there is no resume_token" do

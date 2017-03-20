@@ -57,7 +57,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
   end
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::ResultSet.decode_json results_json }
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new

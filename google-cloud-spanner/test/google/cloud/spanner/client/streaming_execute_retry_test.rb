@@ -101,7 +101,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :retry, :mock_spa
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
     ].to_enum
   end
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
 
   it "retries aborted responses" do
     mock = Minitest::Mock.new
