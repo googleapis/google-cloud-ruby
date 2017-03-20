@@ -43,9 +43,10 @@ module Google
     #
     # ## Listing Datasets and Tables
     #
-    # A BigQuery project holds datasets, which in turn hold tables. Assuming
-    # that you have not yet created datasets or tables in your own project,
-    # let's connect to Google's `publicdata` project, and see what you find.
+    # A BigQuery project contains datasets, which in turn contain tables.
+    # Assuming that you have not yet created datasets or tables in your own
+    # project, let's connect to Google's `publicdata` project, and see what we
+    # find.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -62,10 +63,10 @@ module Google
     # tables.map &:table_id #=> [..., "shakespeare", "trigrams", "wikipedia"]
     # ```
     #
-    # In addition listing all datasets and tables in the project, you can also
-    # retrieve individual datasets and tables by ID. Let's look at the structure
-    # of the `shakespeare` table, which contains an entry for every word in
-    # every play written by Shakespeare.
+    # In addition to listing all datasets and tables in the project, you can
+    # also retrieve individual datasets and tables by ID. Let's look at the
+    # structure of the `shakespeare` table, which contains an entry for every
+    # word in every play written by Shakespeare.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -79,15 +80,15 @@ module Google
     # table.rows_count #=> 164656
     # ```
     #
-    # Now that you know the column names for the Shakespeare table, you can
-    # write and run a query.
+    # Now that you know the column names for the Shakespeare table, let's
+    # write and run a few queries against it.
     #
     # ## Running queries
     #
     # BigQuery supports two SQL dialects: [standard
     # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-    # and the older [legacy
-    # SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql),
+    # and the older [legacy SQl (BigQuery
+    # SQL)](https://cloud.google.com/bigquery/docs/reference/legacy-sql),
     # as discussed in the guide [Migrating from legacy
     # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql).
     #
@@ -100,7 +101,7 @@ module Google
     # Standard SQL is the preferred SQL dialect for querying data stored in
     # BigQuery. It is compliant with the SQL 2011 standard, and has extensions
     # that support querying nested and repeated data. This is the default
-    # syntax. It has several advantages over Legacy SQL, including:
+    # syntax. It has several advantages over legacy SQL, including:
     #
     # * Composability using `WITH` clauses and SQL functions
     # * Subqueries in the `SELECT` list and `WHERE` clause
@@ -115,7 +116,7 @@ module Google
     # For examples that demonstrate some of these features, see [Standard SQL
     # highlights](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights).
     #
-    # Standard SQL is the default.
+    # As shown in this example, standard SQL is the library default:
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -136,10 +137,10 @@ module Google
     # Before version 2.0, BigQuery executed queries using a non-standard SQL
     # dialect known as BigQuery SQL. This variant is optional, and can be
     # enabled by passing the flag `legacy_sql: true` with your query. (If you
-    # get an SQL syntax error with a query that may be written in standard SQL,
+    # get an SQL syntax error with a query that may be written in legacy SQL,
     # be sure that you are passing this option.)
     #
-    # To use legacy SQL, pass the option `legacy_sql: true` with your query.
+    # To use legacy SQL, pass the option `legacy_sql: true` with your query:
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -201,35 +202,35 @@ module Google
     # ### Synchronous queries
     #
     # Let's start with the simpler synchronous approach. Notice that this time
-    # you are connecting using your own default project. This is necessary for
-    # running a query, since queries need to be able to create tables to hold
-    # results.
+    # you are connecting using your own default project. It is necessary to have
+    # write access to the project for running a query, since queries need to
+    # create tables to hold results.
     #
     # ```ruby
     # require "google/cloud/bigquery"
     #
     # bigquery = Google::Cloud::Bigquery.new
     #
-    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
-    #       "FROM publicdata:samples.shakespeare"
+    # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
+    #       "COUNT(*) as unique_words " \
+    #       "FROM publicdata.samples.shakespeare"
     # data = bigquery.query sql
     #
-    # data.count #=> 50
     # data.next? #=> false
-    # data.first #=> {"word"=>"you", "count"=>42}
+    # data.first #=> {:title=>[{:value=>"hamlet", :count=>5318}, ...}
     # ```
     #
-    # The `TOP` function shown above is just one of a variety of functions
-    # offered by BigQuery. See the [Query
-    # Reference](https://cloud.google.com/bigquery/query-reference) for a full
-    # listing.
+    # The `APPROX_TOP_COUNT` function shown above is just one of a variety of
+    # functions offered by BigQuery. See the [Query Reference (standard
+    # SQL)](https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators)
+    # for a full listing.
     #
     # ### Asynchronous queries
     #
-    # Because you probably should not block for most BigQuery operations,
-    # including querying as well as importing, exporting, and copying data, the
-    # BigQuery API enables you to manage longer-running jobs. In the
-    # asynchronous approach to running a query, an instance of
+    # It is usually best not to block for most BigQuery operations, including
+    # querying as well as importing, exporting, and copying data. Therefore, the
+    # BigQuery API provides facilities for managing longer-running jobs. With
+    # the asynchronous approach to running a query, an instance of
     # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
     # of {Google::Cloud::Bigquery::QueryData}.
     #
@@ -238,24 +239,24 @@ module Google
     #
     # bigquery = Google::Cloud::Bigquery.new
     #
-    # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
-    #       "FROM publicdata:samples.shakespeare"
+    # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
+    #       "COUNT(*) as unique_words " \
+    #       "FROM publicdata.samples.shakespeare"
     # job = bigquery.query_job sql
     #
     # job.wait_until_done!
     # if !job.failed?
-    #   job.query_results.each do |row|
-    #     puts row[:word]
-    #   end
+    #   job.query_results.first
+    #   #=> {:title=>[{:value=>"hamlet", :count=>5318}, ...}
     # end
     # ```
     #
     # Once you have determined that the job is done and has not failed, you can
     # obtain an instance of {Google::Cloud::Bigquery::QueryData} by calling
-    # {Google::Cloud::Bigquery::QueryJob#query_results}. The query results for
-    # both of the above examples are stored in temporary tables with a lifetime
-    # of about 24 hours. See the final example below for a demonstration of how
-    # to store query results in a permanent table.
+    # `query_results` on the job instance. The query results for both of the
+    # above examples are stored in temporary tables with a lifetime of about 24
+    # hours. See the final example below for a demonstration of how to store
+    # query results in a permanent table.
     #
     # ## Creating Datasets and Tables
     #
@@ -276,7 +277,7 @@ module Google
     # example below shows a schema with a repeated record field named
     # `cities_lived`. (For more information about nested and repeated fields,
     # see [Preparing Data for
-    # BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).)
+    # Loading](https://cloud.google.com/bigquery/preparing-data-for-loading).)
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -298,13 +299,13 @@ module Google
     #
     # ## Loading records
     #
+    # To follow along with these examples, you will need to set up billing on
+    # the [Google Developers Console](https://console.developers.google.com).
+    #
     # In addition to CSV, data can be imported from files that are formatted as
     # [Newline-delimited JSON](http://jsonlines.org/) or
     # [Avro](http://avro.apache.org/), or from a Google Cloud Datastore backup.
     # It can also be "streamed" into BigQuery.
-    #
-    # To follow along with these examples, you will need to set up billing on
-    # the [Google Developers Console](https://console.developers.google.com).
     #
     # ### Streaming records
     #
@@ -355,8 +356,7 @@ module Google
     # To follow along with this example, please download the
     # [names.zip](http://www.ssa.gov/OACT/babynames/names.zip) archive from the
     # U.S. Social Security Administration. Inside the archive you will find over
-    # 100 files containing baby name records since the year 1880. A PDF file
-    # also contained in the archive specifies the schema used below.
+    # 100 files containing baby name records since the year 1880.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -365,8 +365,8 @@ module Google
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.create_table "baby_names" do |schema|
     #   schema.string "name", mode: :required
-    #   schema.string "sex", mode: :required
-    #   schema.integer "number", mode: :required
+    #   schema.string "gender", mode: :required
+    #   schema.integer "count", mode: :required
     # end
     #
     # file = File.open "names/yob2014.txt"
@@ -395,37 +395,35 @@ module Google
     # source_table = dataset.table "baby_names"
     # result_table = dataset.create_table "baby_names_results"
     #
-    # sql = "SELECT name, number as count " \
+    # sql = "SELECT name, count " \
     #       "FROM baby_names " \
-    #       "WHERE name CONTAINS 'Sam' " \
-    #       "ORDER BY count DESC"
+    #       "WHERE gender = 'M' " \
+    #       "ORDER BY count ASC LIMIT 5"
     # query_job = dataset.query_job sql, table: result_table
     #
     # query_job.wait_until_done!
     #
     # if !query_job.failed?
-    #
-    #   require "google/cloud/bigquery"
+    #   require "google/cloud/storage"
     #
     #   storage = Google::Cloud::Storage.new
     #   bucket_id = "bigquery-exports-#{SecureRandom.uuid}"
     #   bucket = storage.create_bucket bucket_id
-    #   extract_url = "gs://#{bucket.id}/baby-names-sam.csv"
+    #   extract_url = "gs://#{bucket.id}/baby-names.csv"
     #
     #   extract_job = result_table.extract extract_url
     #
     #   extract_job.wait_until_done!
     #
     #   # Download to local filesystem
-    #   bucket.files.first.download "baby-names-sam.csv"
-    #
+    #   bucket.files.first.download "baby-names.csv"
     # end
     # ```
     #
     # If a table you wish to export contains a large amount of data, you can
     # pass a wildcard URI to export to multiple files (for sharding), or an
-    # array of URIs (for partitioning), or both. See [Exporting Data From
-    # BigQuery](https://cloud.google.com/bigquery/exporting-data-from-bigquery)
+    # array of URIs (for partitioning), or both. See [Exporting
+    # Data](https://cloud.google.com/bigquery/docs/exporting-data)
     # for details.
     #
     # ## Configuring retries and timeout
