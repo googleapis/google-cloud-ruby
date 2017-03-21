@@ -46,8 +46,7 @@ module Google
 
         attr_accessor :user_email
 
-        # TODO: Implement breakpoint error status
-        # attr_accessor :status
+        attr_accessor :status
 
         # TODO: Implement variable table
         # attr_accessor :variable_table
@@ -90,6 +89,7 @@ module Google
             b.create_time = timestamp_from_grpc grpc.create_time
             b.final_time = timestamp_from_grpc grpc.final_time
             b.user_email = grpc.user_email
+            b.status = grpc.status
             b.stack_frames = stack_frames_from_grpc grpc
           end
         end
@@ -109,17 +109,14 @@ module Google
         end
         private_class_method :stack_frames_from_grpc, :timestamp_from_grpc
 
-        def add_expression expression
-          @expressions << expression
-          expression
-        end
-
-        def complete
+        def complete is_final: true
           synchronize do
             return if completed
 
-            @is_final_state = true
-            @final_time = Time.now
+            if is_final
+              @is_final_state = true
+              @final_time = Time.now
+            end
             @completed = true
           end
         end
@@ -140,23 +137,29 @@ module Google
 
         def check_condition binding
           return true if condition.nil? || condition.empty?
-          Evaluator.eval_condition binding, condition
+          begin
+            Evaluator.eval_condition binding, condition
+          rescue
+            set_error_state "Unable to evaluate condition",
+                            refers_to: :BREAKPOINT_CONDITION
+            false
+          end
         end
 
         def eval_call_stack call_stack_bindings
           synchronize do
             top_frame_binding = call_stack_bindings[0]
-            begin
-              # Abort evaluation if breakpoint condition isn't met
-              return false unless check_condition top_frame_binding
 
+            # Abort evaluation if breakpoint condition isn't met
+            return false unless check_condition top_frame_binding
+
+            begin
               @stack_frames = Evaluator.eval_call_stack call_stack_bindings
               unless @expressions.empty?
                 @evaluated_expressions =
                   Evaluator.eval_expressions top_frame_binding, @expressions
               end
             rescue
-              # TODO set breakpoint into error state
               return false
             end
 
@@ -189,8 +192,38 @@ module Google
             final_time: timestamp_to_grpc(final_time),
             user_email: user_email,
             stack_frames: stack_frames_to_grpc,
-            evaluated_expressions: evaluated_expressions_to_grpc || []
+            evaluated_expressions: evaluated_expressions_to_grpc,
+            status: status
           )
+        end
+
+        ##
+        # Set breakoint to an eror state, which initializes the @status instance
+        # variable with the error message. Mark this breakpoint as completed.
+        #
+        # @param [String] message The error message
+        # @param [Google::Devtools::Clouddebugger::V2::StatusMessage::Reference]
+        #   refers_to Enum that specifies what the error refers to. Defaults
+        #   :UNSPECIFIED.
+        # @param [bool] is_final Pass through to {Breakpoint#complete}, which
+        #   marks the breakpoint as final if true. Defaults true.
+        #
+        # @return [Google::Devtools::Clouddebugger::V2::StatusMessage] The grpc
+        #   StatusMessage object, which describes the breakpoint's error state.
+        def set_error_state message, refers_to: :UNSPECIFIED,
+                                     is_final: true
+          description = Google::Devtools::Clouddebugger::V2::FormatMessage.new(
+            format: message
+          )
+          @status = Google::Devtools::Clouddebugger::V2::StatusMessage.new(
+            is_error: true,
+            refers_to: refers_to,
+            description: description
+          )
+
+          complete is_final: is_final
+
+          @status
         end
 
         private
@@ -199,7 +232,7 @@ module Google
         # @private Exports the Breakpoint stack_frames to an array of
         # Google::Devtools::Clouddebugger::V2::StackFrame objects.
         def stack_frames_to_grpc
-          return nil if stack_frames.nil? || stack_frames.empty?
+          return [] if stack_frames.nil?
           stack_frames.map { |sf| sf.to_grpc  }
         end
 
@@ -207,8 +240,7 @@ module Google
         # @private Exports the Breakpoint stack_frames to an array of
         # Google::Devtools::Clouddebugger::V2::StackFrame objects.
         def evaluated_expressions_to_grpc
-          return nil if evaluated_expressions.nil? ||
-            evaluated_expressions.empty?
+          return [] if evaluated_expressions.nil?
           evaluated_expressions.map { |var| var.to_grpc }
         end
 

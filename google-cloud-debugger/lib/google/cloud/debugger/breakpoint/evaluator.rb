@@ -717,13 +717,8 @@ module Google
             end
 
             def eval_condition binding, condition
-              begin
-                result = readonly_eval_expression_exec binding, condition
-              rescue
-                false
-              else
-                !!result
-              end
+              result = readonly_eval_expression_exec binding, condition
+              !!result
             end
 
             def eval_expressions binding, expressions
