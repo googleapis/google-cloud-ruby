@@ -1,5 +1,5 @@
 runtime: ruby
 env: flex
-entrypoint: cd integration/rails4_app; bundle install; bundle exec rackup -p 8080 config.ru
+entrypoint: bash -c "cd integration/rails4_app; bundle install; bundle exec rackup -p 8080 config.ru"
 health_check:
   enable_health_check: False

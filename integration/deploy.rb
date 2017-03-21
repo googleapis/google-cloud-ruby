@@ -31,12 +31,6 @@ def deploy_gae_flex app_dir
     last_gae_version = get_gae_versions.last
     sh "gcloud app deploy -q" do |ok, res|
       if ok
-        # GAE Flex has a bug that the service is really avaible shortly after
-        # the deployment commands returns successfully. So we explicitly sleeps
-        # for 30 seconds before accessing the GAE Flex service.
-        # TODO: Remove this sleep when GAE Flex deployment becomes smooth
-        sleep 30
-
         yield
 
         # Delete the last version of Google App Engine if successfully deployed
