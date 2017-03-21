@@ -716,9 +716,14 @@ module Google
               result
             end
 
-            # TODO fix false possible of evaluating error condition
             def eval_condition binding, condition
-              !!readonly_eval_expression(binding, condition)
+              begin
+                result = readonly_eval_expression_exec binding, condition
+              rescue
+                false
+              else
+                !!result
+              end
             end
 
             def eval_expressions binding, expressions
@@ -732,29 +737,32 @@ module Google
 
             def readonly_eval_expression binding, expression
               begin
-                yarv_instructions =
-                  RubyVM::InstructionSequence.compile(expression).disasm
+                readonly_eval_expression_exec binding, expression
               rescue ScriptError
-                return "Unable to compile expression"
+                "Unable to compile expression"
+              rescue Google::Cloud::Debugger::MutationError => e
+                e.message
+              # TODO "rescue Exception" when long running eval prevention is
+              # available
+              rescue => e
+                "Unable to evaluate expression: #{e.message}"
               end
+            end
 
-              return "Mutation detected!" unless
-                immutable_yarv_instructions? yarv_instructions
+            def readonly_eval_expression_exec binding, expression
+              yarv_instructions =
+                RubyVM::InstructionSequence.compile(expression).disasm
+
+              unless immutable_yarv_instructions? yarv_instructions
+                fail Google::Cloud::Debugger::MutationError,
+                     "Mutation detected!"
+              end
 
               # The evaluation is most likely triggered from a trace callback,
               # so addtional tracing is disabled by VM. So we do actual
               # evaluation in a new thread, where function calls can be traced.
               thr = Thread.new {
-                eval_result = nil
-                wrapped_expression = wrap_expression expression
-                begin
-                    eval_result = binding.eval wrapped_expression
-                rescue Google::Cloud::Debugger::MutationError => e
-                  eval_result = e.message
-                rescue Exception => e
-                  eval_result = "Unable to evaluate expression: #{}"
-                end
-                eval_result
+                binding.eval wrap_expression expression
               }
 
               thr.join.value
