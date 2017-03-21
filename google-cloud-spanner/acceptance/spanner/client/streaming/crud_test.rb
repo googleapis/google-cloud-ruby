@@ -15,7 +15,7 @@
 require "spanner_helper"
 
 describe "Spanner Client", :streaming, :crud, :spanner do
-  let(:db) { spanner.client $spanner_prefix, "main" }
+  let(:db) { spanner_client }
 
   before do
     db.transaction do |tx|

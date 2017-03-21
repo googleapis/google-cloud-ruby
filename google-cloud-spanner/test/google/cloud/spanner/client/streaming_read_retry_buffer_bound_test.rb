@@ -84,6 +84,12 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :buffer_boun
   let(:client) { spanner.client instance_id, database_id, min: 0 }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "returns all rows even when there is no resume_token" do
     no_tokens_enum = [
       Google::Spanner::V1::PartialResultSet.decode_json(results_header.to_json),

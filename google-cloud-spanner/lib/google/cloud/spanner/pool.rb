@@ -27,15 +27,16 @@ module Google
       class Pool
         attr_accessor :min, :max, :pool, :queue
 
-        def initialize client, min: 2, max: 10
+        def initialize client, min: 2, max: 10, keepalive: 1500
           @client = client
           @min = min
           @max = max
-
-          # initialize pool and availability queue
+          @keepalive = keepalive
           @pool = []
           @queue = []
-          @min.times { new_session! }
+
+          # initialize pool and availability queue
+          init
         end
 
         def with_session
@@ -61,13 +62,61 @@ module Google
           nil
         end
 
+        def keepalive!
+          ensure_keepalive_thread!
+
+          # Call keep alive only on the queue, not all sessions.
+          # If a session is checked out, we can assume its being used.
+          queue.each(&:keepalive!)
+        end
+
+        def keepalive_and_sleep!
+          ensure_keepalive_thread!
+
+          keepalive!
+          sleep @keepalive
+        end
+
+        def reset
+          close
+          init
+
+          true
+        end
+
+        def close
+          @thread.kill if @thread
+          @pool.each(&:delete_session)
+          @pool = []
+          @queue = []
+
+          true
+        end
+
         private
+
+        def init
+          @pool = []
+          @queue = []
+          ensure_keepalive_thread!
+          @min.times { new_session! }
+        end
 
         def new_session!
           session = @client.create_new_session
           pool << session
           queue << session
           session
+        end
+
+        def ensure_keepalive_thread!
+          @thread ||= Thread.new do
+            # before calling keepalive
+            sleep @keepalive
+            loop do
+              keepalive_and_sleep!
+            end
+          end
         end
       end
     end

@@ -30,6 +30,12 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     p
   end
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "can checkout and checkin a session" do
     pool.pool.size.must_equal 1
     pool.queue.size.must_equal 1

@@ -65,6 +65,12 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "can execute a simple query without any options" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]

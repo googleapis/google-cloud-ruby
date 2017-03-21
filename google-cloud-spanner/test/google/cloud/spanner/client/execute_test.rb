@@ -59,6 +59,12 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
   let(:results_grpc) { Google::Spanner::V1::ResultSet.decode_json results_json }
   let(:client) { spanner.client instance_id, database_id, min: 0 }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "can execute a simple query" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]

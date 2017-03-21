@@ -103,6 +103,12 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanne
   end
   let(:client) { spanner.client instance_id, database_id, min: 0 }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "retries aborted responses" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 

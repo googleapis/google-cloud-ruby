@@ -103,6 +103,12 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :retry, :mock_spa
   end
   let(:client) { spanner.client instance_id, database_id, min: 0 }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "retries aborted responses" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]

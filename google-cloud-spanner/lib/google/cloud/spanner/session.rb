@@ -494,6 +494,22 @@ module Google
         end
 
         ##
+        # @private
+        # Keeps the session alive by calling SELECT 1
+        def keepalive!
+          ensure_service!
+          execute "SELECT 1"
+          return true
+        rescue Google::Cloud::NotFoundError
+          @grpc = service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          self
+          execute "SELECT 1"
+          return false
+        end
+
+        ##
         # @private Creates a new Session instance from a
         # Google::Spanner::V1::Session.
         def self.from_grpc grpc, service

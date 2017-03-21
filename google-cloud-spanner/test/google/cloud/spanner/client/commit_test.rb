@@ -24,6 +24,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, min: 0 }
 
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
+
   it "commits using a block" do
     mutations = [
       Google::Spanner::V1::Mutation.new(

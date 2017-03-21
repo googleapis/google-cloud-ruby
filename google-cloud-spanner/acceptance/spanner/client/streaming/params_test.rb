@@ -15,7 +15,7 @@
 require "spanner_helper"
 
 describe "Spanner Client", :streaming, :params, :spanner do
-  let(:db) { spanner.client $spanner_prefix, "main" }
+  let(:db) { spanner_client }
 
   it "queries and returns a string parameter" do
     results = db.execute "SELECT @value AS value", params: { value: "hello" }

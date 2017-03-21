@@ -41,11 +41,12 @@ module Google
       class Client
         ##
         # @private Creates a new Spanner Project instance.
-        def initialize project, instance_id, database_id, min: 2, max: 10
+        def initialize project, instance_id, database_id, min: 2, max: 10,
+                       keepalive: 1500
           @project = project
           @instance_id = instance_id
           @database_id = database_id
-          @pool = Pool.new self, min: min, max: max
+          @pool = Pool.new self, min: min, max: max, keepalive: keepalive
         end
 
         # The Spanner project connected to.
@@ -580,6 +581,13 @@ module Google
             yield snp if block_given?
           end
           nil
+        end
+
+        ##
+        # Closes the client connection and releases resources.
+        #
+        def close
+          @pool.close
         end
 
         ##
