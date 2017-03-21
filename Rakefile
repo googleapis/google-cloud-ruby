@@ -675,7 +675,7 @@ namespace :integration do
                     "http://#{project_id}.appspot-preview.com"
 
       fail "You must provide a project_uri. e.g. rake " \
-        "integration:gae[http://my-project.appspot.com]" if project_uri.nil?
+        "integration:gae[http://my-project.appspot-preview.com]" if project_uri.nil?
 
       test_apps = Dir.glob("integration/*_app").select {|f| File.directory? f}
 

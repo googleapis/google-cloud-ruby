@@ -149,32 +149,13 @@ $ rake test:acceptance
 
 The google-cloud-ruby integration tests are end-to-end tests that validate library functionality on real Google Cloud Platform hosting environments. The integration process deploys several Rack-based applications to Google Cloud Platform one by one, then validates google-cloud-ruby code by making requests to these test applications.
 
-All integration tests require [Cloud SDK](https://cloud.google.com/sdk/) for deployment. Following the instructions in [Authentication guide](AUTHENTICATION.md) for installation and authentication. Make sure a project ID is set:
+See the [integration/README.md](integration/README.md) for instructions on how to setup for the integration tests and other details.
+
+To run the integration tests:
 ```sh
-$ gcloud config set project PROJECT_ID
+$ rake integration
 ```
 
-#### Running integration tests on Google App Engine 
-
-To run the integration tests on Google App Engine:
-```sh
-$ rake integration:gae
-```
-
-#### Running integration tests on Google Container Engine 
-
-Additinoal to Cloud SDK, Google Container Engine requires [docker](https://www.docker.com/) for building docker images, and the [Kubernetes commandline tool](http://kubernetes.io/docs/user-guide/kubectl-overview/) for image deployment. 
-
-Follow the [docker website](https://www.docker.com/products/docker) for docker installation instructions. The Kubernetes commandline tool can be installed through Cloud SDK:
-```sh
-$ gcloud components install kubectl
-```
-Make sure a [Google Container Engine Cluster](https://cloud.google.com/container-engine/docs/clusters/operations) with permissions to access all the GCP services this library implements is properly setup and ready to use. It's easier to create the Cluster through [Cloud Platform Console](https://console.cloud.google.com/kubernetes/list). Keep in mind once the Cluster is create, the service permissions cannot be updated. 
-
-To run the integration tests on Google Container Engine:
-```sh
-$ rake integration:gke
-```
 
 ## Coding Style
 
