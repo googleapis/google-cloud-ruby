@@ -153,7 +153,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   data = bigquery.query "SELECT name FROM #{table.query_id}"
+        #   data = bigquery.query "SELECT first_name FROM #{table.query_id}"
         #
         # @!group Attributes
         #
@@ -450,7 +450,7 @@ module Google
         # @param [Table, String] destination_table The destination for the
         #   copied data.
         # @param [String] create Specifies whether the job is allowed to create
-        #   new tables.
+        #   new tables. The default value is `needed`.
         #
         #   The following values are supported:
         #
@@ -567,7 +567,7 @@ module Google
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] create Specifies whether the job is allowed to create
-        #   new tables.
+        #   new tables. The default value is `needed`.
         #
         #   The following values are supported:
         #
@@ -575,7 +575,7 @@ module Google
         #   * `never` - The table must already exist. A 'notFound' error is
         #     raised if the table does not exist.
         # @param [String] write Specifies how to handle data already present in
-        #   the table. The default value is `empty`.
+        #   the table. The default value is `append`.
         #
         #   The following values are supported:
         #

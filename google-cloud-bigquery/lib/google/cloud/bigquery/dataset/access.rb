@@ -36,7 +36,6 @@ module Google
         #     access.add_writer_user "writer@example.com"
         #     access.remove_writer_user "readers@example.com"
         #     access.add_reader_special :all
-        #     access.add_reader_view other_dataset_view_object
         #   end
         #
         class Access

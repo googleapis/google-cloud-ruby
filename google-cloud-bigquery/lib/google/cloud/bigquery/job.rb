@@ -44,8 +44,8 @@ module Google
       #
       #   bigquery = Google::Cloud::Bigquery.new
       #
-      #   q = "SELECT COUNT(word) as count FROM publicdata:samples.shakespeare"
-      #   job = bigquery.query_job q
+      #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
+      #                            "publicdata.samples.shakespeare"
       #
       #   job.wait_until_done!
       #

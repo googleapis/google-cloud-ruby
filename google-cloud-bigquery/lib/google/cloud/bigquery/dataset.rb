@@ -279,8 +279,8 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   dataset.delete
         #
         # @!group Lifecycle
@@ -312,6 +312,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   table = dataset.create_table "my_table"
         #
         # @example You can also pass name and description options.
@@ -319,6 +320,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   table = dataset.create_table "my_table",
         #                                name: "My Table",
         #                                description: "A description of table."
@@ -342,6 +344,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   table = dataset.create_table "my_table" do |t|
         #     t.name = "My Table",
         #     t.description = "A description of my table."
@@ -399,6 +402,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   view = dataset.create_view "my_view",
         #             "SELECT name, age FROM proj.dataset.users"
         #
@@ -407,6 +411,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   view = dataset.create_view "my_view",
         #             "SELECT name, age FROM proj.dataset.users",
         #             name: "My View", description: "This is my view"
@@ -447,6 +452,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   table = dataset.table "my_table"
         #   puts table.name
         #
@@ -476,6 +482,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   tables = dataset.tables
         #   tables.each do |table|
         #     puts table.name
@@ -486,6 +493,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
         #   tables = dataset.tables
         #   tables.all do |table|
         #     puts table.name
@@ -550,7 +558,7 @@ module Google
         #   should be stored. If not present, a new table will be created to
         #   store the results.
         # @param [String] create Specifies whether the job is allowed to create
-        #   new tables.
+        #   new tables. The default value is `needed`.
         #
         #   The following values are supported:
         #
@@ -558,7 +566,7 @@ module Google
         #   * `never` - The table must already exist. A 'notFound' error is
         #     raised if the table does not exist.
         # @param [String] write Specifies the action that occurs if the
-        #   destination table already exists.
+        #   destination table already exists. The default value is `empty`.
         #
         #   The following values are supported:
         #
@@ -591,12 +599,13 @@ module Google
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
-        # @example
+        # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "SELECT name FROM my_table"
+        #   job = dataset.query_job "SELECT name FROM my_table"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -609,9 +618,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "SELECT name FROM my_table",
-        #                            legacy_sql: true
+        #   job = dataset.query_job "SELECT name FROM my_table",
+        #                           legacy_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -624,9 +634,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "SELECT name FROM my_table WHERE id = ?",
-        #                            params: [1]
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = ?",
+        #                           params: [1]
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -639,9 +650,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "SELECT name FROM my_table WHERE id = @id",
-        #                            params: { id: 1 }
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = @id",
+        #                           params: { id: 1 }
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -747,12 +759,13 @@ module Google
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
-        # @example
+        # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "SELECT name FROM my_table"
+        #   data = dataset.query "SELECT name FROM my_table"
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -762,9 +775,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "SELECT name FROM my_table",
-        #                         legacy_sql: true
+        #   data = dataset.query "SELECT name FROM my_table",
+        #                        legacy_sql: true
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -774,9 +788,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "SELECT name FROM my_table WHERE id = ?",
-        #                         params: [1]
+        #   data = dataset.query "SELECT name FROM my_table WHERE id = ?",
+        #                        params: [1]
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -786,9 +801,10 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "SELECT name FROM my_table WHERE id = @id",
-        #                         params: { id: 1 }
+        #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
+        #                        params: { id: 1 }
         #
         #   data.each do |row|
         #     puts row["name"]
