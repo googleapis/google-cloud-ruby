@@ -106,3 +106,26 @@ def random_stack_frame_hash
     "locals" => [random_variable_array_hash]
   }
 end
+
+def random_breakpoint_hash
+  timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
+  {
+    "id" => "abc123",
+    "location" => random_source_location_hash,
+    "create_time" => {
+      "seconds" => timestamp.to_i,
+      "nanos"   => timestamp.nsec
+    },
+    "final_time" => {
+      "seconds" => timestamp.to_i,
+      "nanos"   => timestamp.nsec
+    },
+    "stack_frames" => [random_stack_frame_hash],
+    "condition" => "i == 2",
+    "expressions" => ["[3]"],
+    "evaluated_expressions" => [random_variable_array_hash],
+    "labels" => {
+      "tag" => "hello"
+    }
+  }
+end

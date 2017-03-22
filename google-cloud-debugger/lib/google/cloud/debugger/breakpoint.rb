@@ -51,10 +51,7 @@ module Google
         # TODO: Implement variable table
         # attr_accessor :variable_table
 
-        # TODO: Implement labels
-        # attr_accessor :labels
-
-        attr_accessor :completed
+        attr_accessor :labels
 
         attr_accessor :stack_frames
 
@@ -69,8 +66,8 @@ module Google
           end
           @expressions = []
           @evaluated_expressions = []
-          @completed = false
           @stack_frames = []
+          @labels = {}
         end
 
         ##
@@ -90,6 +87,7 @@ module Google
             b.final_time = timestamp_from_grpc grpc.final_time
             b.user_email = grpc.user_email
             b.status = grpc.status
+            b.labels = hashify_labels grpc.labels
             b.stack_frames = stack_frames_from_grpc grpc
           end
         end
@@ -107,21 +105,29 @@ module Google
           return nil if grpc_timestamp.nil?
           Time.at grpc_timestamp.seconds, Rational(grpc_timestamp.nanos, 1000)
         end
-        private_class_method :stack_frames_from_grpc, :timestamp_from_grpc
 
-        def complete is_final: true
-          synchronize do
-            return if completed
-
-            if is_final
-              @is_final_state = true
-              @final_time = Time.now
-            end
-            @completed = true
+        def self.hashify_labels grpc_labels
+          if grpc_labels.respond_to? :to_h
+            grpc_labels.to_h
+          else
+            # Enumerable doesn't have to_h on ruby 2.0...
+            Hash[grpc_labels.to_a]
           end
         end
 
-        alias_method :complete?, :completed
+        private_class_method :stack_frames_from_grpc, :timestamp_from_grpc,
+                             :hashify_labels
+
+        def complete
+          synchronize do
+            return if complete?
+
+            @is_final_state = true
+            @final_time = Time.now
+          end
+        end
+
+        alias_method :complete?, :is_final_state
 
         def path
           synchronize do
@@ -155,7 +161,7 @@ module Google
 
             begin
               @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-              unless @expressions.empty?
+              unless expressions.empty?
                 @evaluated_expressions =
                   Evaluator.eval_expressions top_frame_binding, @expressions
               end
@@ -193,20 +199,22 @@ module Google
             user_email: user_email,
             stack_frames: stack_frames_to_grpc,
             evaluated_expressions: evaluated_expressions_to_grpc,
-            status: status
+            status: status,
+            labels: labels_to_grpc
           )
         end
 
         ##
         # Set breakoint to an eror state, which initializes the @status instance
-        # variable with the error message. Mark this breakpoint as completed.
+        # variable with the error message. Also mark this breakpoint as
+        # completed if is_final is true.
         #
         # @param [String] message The error message
         # @param [Google::Devtools::Clouddebugger::V2::StatusMessage::Reference]
         #   refers_to Enum that specifies what the error refers to. Defaults
         #   :UNSPECIFIED.
-        # @param [bool] is_final Pass through to {Breakpoint#complete}, which
-        #   marks the breakpoint as final if true. Defaults true.
+        # @param [bool] is_final Marks the breakpoint as final if true.
+        #   Defaults true.
         #
         # @return [Google::Devtools::Clouddebugger::V2::StatusMessage] The grpc
         #   StatusMessage object, which describes the breakpoint's error state.
@@ -221,12 +229,22 @@ module Google
             description: description
           )
 
-          complete is_final: is_final
+          complete if is_final
 
           @status
         end
 
         private
+
+        ##
+        # @private Formats the labels so they can be saved to a
+        # Google::Devtools::Clouddebugger::V2::Breakpoint object.
+        def labels_to_grpc
+          # Coerce symbols to strings
+          Hash[labels.map do |k, v|
+            [String(k), String(v)]
+          end]
+        end
 
         ##
         # @private Exports the Breakpoint stack_frames to an array of
