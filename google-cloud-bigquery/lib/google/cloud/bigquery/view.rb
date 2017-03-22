@@ -40,7 +40,7 @@ module Google
       #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   view = dataset.create_view "my_view",
-      #            "SELECT name, age FROM proj.dataset.users"
+      #            "SELECT name, age FROM `my_project.my_dataset.my_table`"
       #
       class View
         ##

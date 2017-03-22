@@ -32,8 +32,8 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   name_field = table.schema.field "name"
-        #   name_field.required? #=> true
+        #   field = table.schema.field "name"
+        #   field.required? #=> true
         class Field
           # @private
           MODES = %w( NULLABLE REQUIRED REPEATED )

@@ -139,7 +139,7 @@ module Google
         #   should be stored. If not present, a new table will be created to
         #   store the results.
         # @param [String] create Specifies whether the job is allowed to create
-        #   new tables.
+        #   new tables. The default value is `needed`.
         #
         #   The following values are supported:
         #
@@ -147,7 +147,7 @@ module Google
         #   * `never` - The table must already exist. A 'notFound' error is
         #     raised if the table does not exist.
         # @param [String] write Specifies the action that occurs if the
-        #   destination table already exists.
+        #   destination table already exists. The default value is `empty`.
         #
         #   The following values are supported:
         #
@@ -183,13 +183,13 @@ module Google
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
-        # @example
+        # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "[my_proj:my_data.my_table]"
+        #                            "`my_project.my_dataset.my_table`"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -204,7 +204,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_proj.my_data.my_table`",
+        #                            "[my_project:my_dataset.my_table]",
         #                            legacy_sql: true
         #
         #   job.wait_until_done!
@@ -220,7 +220,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_proj.my_data.my_table`" \
+        #                            "`my_dataset.my_table`" \
         #                            " WHERE id = ?",
         #                            params: [1]
         #
@@ -237,7 +237,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_proj.my_data.my_table`" \
+        #                            "`my_dataset.my_table`" \
         #                            " WHERE id = @id",
         #                            params: { id: 1 }
         #
@@ -347,12 +347,13 @@ module Google
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
-        # @example
+        # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`"
+        #   sql = "SELECT name FROM `my_project.my_dataset.my_table`"
+        #   data = bigquery.query sql
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -363,8 +364,8 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM [my_proj:my_data.my_table]",
-        #                         legacy_sql: true
+        #   sql = "SELECT name FROM [my_project:my_dataset.my_table]"
+        #   data = bigquery.query sql, legacy_sql: true
         #
         #   data.each do |row|
         #     puts row["name"]
@@ -375,7 +376,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM `my_proj.my_data.my_table`"
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table`"
         #
         #   data.all do |row|
         #     puts row["name"]
@@ -387,7 +388,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_proj.my_data.my_table`" \
+        #                         "FROM `my_dataset.my_table`" \
         #                         "WHERE id = ?",
         #                         params: [1]
         #
@@ -401,7 +402,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_proj.my_data.my_table`" \
+        #                         "FROM `my_dataset.my_table`" \
         #                         "WHERE id = @id",
         #                         params: { id: 1 }
         #
@@ -487,8 +488,8 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   dataset = bigquery.create_dataset "my_dataset" do |table|
-        #     table.access.add_writer_user "writers@example.com"
+        #   dataset = bigquery.create_dataset "my_dataset" do |dataset|
+        #     dataset.access.add_writer_user "writers@example.com"
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,
@@ -708,7 +709,7 @@ module Google
         #
         #   fourpm = bigquery.time 16, 0, 0
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_proj.my_data.my_table`" \
+        #                         "FROM `my_dataset.my_table`" \
         #                         "WHERE time_of_date = @time",
         #                         params: { time: fourpm }
         #
@@ -723,7 +724,7 @@ module Google
         #
         #   precise_time = bigquery.time 16, 35, 15.376541
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_proj.my_data.my_table`" \
+        #                         "FROM `my_dataset.my_table`" \
         #                         "WHERE time_of_date >= @time",
         #                         params: { time: precise_time }
         #

@@ -30,7 +30,7 @@ module Google
       #
       #   fourpm = Google::Cloud::Bigquery::Time.new "16:00:00"
       #   data = bigquery.query "SELECT name " \
-      #                         "FROM `my_proj.my_data.my_table`" \
+      #                         "FROM `my_project.my_dataset.my_table`" \
       #                         "WHERE time_of_date = @time",
       #                         params: { time: fourpm }
       #
@@ -45,7 +45,7 @@ module Google
       #
       #   precise_time = Google::Cloud::Bigquery::Time.new "16:35:15.376541"
       #   data = bigquery.query "SELECT name " \
-      #                         "FROM `my_proj.my_data.my_table`" \
+      #                         "FROM `my_project.my_dataset.my_table`" \
       #                         "WHERE time_of_date >= @time",
       #                         params: { time: precise_time }
       #

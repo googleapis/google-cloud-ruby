@@ -130,8 +130,8 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   q = "SELECT word FROM publicdata:samples.shakespeare"
-        #   job = bigquery.query_job q
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!
         #   data = job.query_results
