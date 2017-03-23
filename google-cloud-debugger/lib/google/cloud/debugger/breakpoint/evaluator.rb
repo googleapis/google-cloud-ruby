@@ -718,6 +718,12 @@ module Google
 
             def eval_condition binding, condition
               result = readonly_eval_expression_exec binding, condition
+
+              if result.is_a?(Exception) &&
+                 result.instance_variable_get(:@mutation_cause)
+                return false
+              end
+
               !!result
             end
 
@@ -732,32 +738,53 @@ module Google
 
             def readonly_eval_expression binding, expression
               begin
-                readonly_eval_expression_exec binding, expression
-              rescue ScriptError
-                "Unable to compile expression"
-              rescue Google::Cloud::Debugger::MutationError => e
-                e.message
-              # TODO "rescue Exception" when long running eval prevention is
-              # available
+                result = readonly_eval_expression_exec binding, expression
               rescue => e
-                "Unable to evaluate expression: #{e.message}"
+                result = "Unable to evaluate expression: #{e.message}"
               end
+
+              if result.is_a?(Exception) &&
+                 result.instance_variable_get(:@mutation_cause)
+                return result.message
+              end
+
+              result
             end
 
             def readonly_eval_expression_exec binding, expression
-              yarv_instructions =
-                RubyVM::InstructionSequence.compile(expression).disasm
+              begin
+                yarv_instructions =
+                  RubyVM::InstructionSequence.compile(expression).disasm
+              rescue ScriptError
+                return Google::Cloud::Debugger::MutationError.new(
+                  "Unable to compile expression",
+                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
+                )
+              end
 
               unless immutable_yarv_instructions? yarv_instructions
-                fail Google::Cloud::Debugger::MutationError,
-                     "Mutation detected!"
+                return Google::Cloud::Debugger::MutationError.new(
+                  "Mutation detected!",
+                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
+                )
               end
 
               # The evaluation is most likely triggered from a trace callback,
-              # so addtional tracing is disabled by VM. So we do actual
-              # evaluation in a new thread, where function calls can be traced.
+              # where addtional nested tracing is disabled by VM. So we need to
+              # do evaluation in a new thread, where function calls can be
+              # traced.
               thr = Thread.new {
-                binding.eval wrap_expression expression
+                begin
+                  binding.eval wrap_expression(expression)
+                rescue => e
+                  # Threat all StandardError as mutation and set @mutation_cause
+                  unless e.instance_variable_get :@mutation_cause
+                    e.instance_variable_set(
+                      :@mutation_cause,
+                      Google::Cloud::Debugger::MutationError::UNKNOWN_CAUSE)
+                  end
+                  e
+                end
               }
 
               thr.join.value
@@ -799,7 +826,8 @@ module Google
                     :enable_method_trace_for_thread)
                   #{expression}
                 ensure
-                  Google::Cloud::Debugger::Breakpoint::Evaluator.disable_method_trace_for_thread
+                  Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                    :disable_method_trace_for_thread)
                 end
               """
             end
@@ -809,9 +837,13 @@ module Google
               meth = receiver.method mid
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
 
-              fail Google::Cloud::Debugger::MutationError unless
-                immutable_yarv_instructions? yarv_instructions,
-                                             allow_localops: true
+              unless immutable_yarv_instructions?(yarv_instructions,
+                                                  allow_localops: true)
+                fail Google::Cloud::Debugger::MutationError.new(
+                  "Mutation detected!",
+                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
+                )
+              end
             end
 
             def trace_c_func_callback receiver, defined_class, mid
@@ -832,8 +864,12 @@ module Google
               end
 
               if invalid_op
-                fail Google::Cloud::Debugger::MutationError,
-                     "Invalid operation detected"
+                Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                  :disable_method_trace_for_thread)
+                fail Google::Cloud::Debugger::MutationError.new(
+                   "Invalid operation detected",
+                   Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC
+                )
               end
             end
           end
@@ -841,10 +877,15 @@ module Google
       end
 
       class MutationError < StandardError
-        attr_reader :message
+        UNKNOWN_CAUSE = Object.new.freeze
+        PROHIBITED_YARV = Object.new.freeze
+        PROHIBITED_C_FUNC = Object.new.freeze
 
-        def initialize msg = "Mutation detected!"
-          @message = msg
+        attr_reader :mutation_cause
+
+        def initialize msg = "Mutation detected!", mutation_cause = UNKNOWN_CAUSE
+          @mutation_cause = mutation_cause
+          super(msg)
         end
 
         def inspect
