@@ -84,7 +84,7 @@ module Google
         #
         # Returns true if valid GCP project_id is provided and underneath API is
         # able to authenticate. Also either Rails needs to be in "production"
-        # environment or config.stackdriver.use_logging is explicitly true.
+        # environment or config.google_cloud.use_logging is explicitly true.
         #
         # @param [Rails::Railtie::Configuration] config The
         #   Rails.application.config
@@ -93,7 +93,7 @@ module Google
         #
         def self.use_logging? config
           gcp_config = config.google_cloud
-          # Return false if config.stackdriver.use_logging is explicitly false
+          # Return false if config.google_cloud.use_logging is explicitly false
           return false if gcp_config.key?(:use_logging) &&
                           !gcp_config.use_logging
 
