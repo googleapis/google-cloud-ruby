@@ -24,6 +24,9 @@ module Google
       # either a key name string, assigned explicitly by the application, or an
       # integer numeric ID, assigned automatically by Datastore.
       #
+      # @see https://cloud.google.com/datastore/docs/concepts/entities Entities,
+      #   Properties, and Keys
+      #
       # @example
       #   require "google/cloud/datastore"
       #

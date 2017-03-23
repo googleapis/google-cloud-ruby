@@ -61,7 +61,7 @@ module Google
     # Records, called "entities" in Datastore, are retrieved by using a key.
     # The key is more than a numeric identifier, it is a complex data structure
     # that can be used to model relationships. The simplest key has a string
-    # <tt>kind</tt> value, and either a numeric <tt>id</tt> value, or a string
+    # <tt>kind</tt> value and either a numeric <tt>id</tt> value or a string
     # <tt>name</tt> value. A single record can be retrieved by calling
     # {Google::Cloud::Datastore::Dataset#find} and passing the parts of the key:
     #
@@ -242,8 +242,8 @@ module Google
     #
     # Entities hold properties. A property has a name that is a string or
     # symbol, and a value that is an object. Most value objects are supported,
-    # including String, Integer, Date, Time, and even other entity or key
-    # objects. Changes to the entity's properties are persisted by calling
+    # including `String`, `Integer`, `Date`, `Time`, and even other entity or
+    # key objects. Changes to the entity's properties are persisted by calling
     # {Google::Cloud::Datastore::Dataset#save}.
     #
     # ```ruby
@@ -302,7 +302,7 @@ module Google
     #
     # ## Transactions
     #
-    # Complex logic can be wrapped in a Transaction. All queries and updates
+    # Complex logic can be wrapped in a transaction. All queries and updates
     # within the {Google::Cloud::Datastore::Dataset#transaction} block are run
     # within the transaction scope, and will be automatically committed when the
     # block completes.

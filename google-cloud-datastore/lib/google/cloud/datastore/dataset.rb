@@ -35,10 +35,9 @@ module Google
       # Dataset is the data saved in a project's Datastore.
       # Dataset is analogous to a database in relational database world.
       #
-      # Google::Cloud::Datastore::Dataset is the main object for interacting
-      # with Google Datastore. {Google::Cloud::Datastore::Entity} objects are
-      # created, read, updated, and deleted by
-      # Google::Cloud::Datastore::Dataset.
+      # Dataset is the main object for interacting with Google Datastore.
+      # {Google::Cloud::Datastore::Entity} objects are created, read, updated,
+      # and deleted by Dataset.
       #
       # See {Google::Cloud#datastore}
       #
