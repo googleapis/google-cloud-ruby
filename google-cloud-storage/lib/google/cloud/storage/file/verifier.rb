@@ -52,14 +52,24 @@ module Google
           end
 
           def self.md5_for local_file
-            ::File.open(Pathname(local_file).to_path, "rb") do |f|
-              ::Digest::MD5.file(f).base64digest
+            if local_file.respond_to? :path
+              ::File.open(Pathname(local_file).to_path, "rb") do |f|
+                ::Digest::MD5.file(f).base64digest
+              end
+            else # StringIO
+              local_file.rewind
+              ::Digest::MD5.base64digest local_file.read
             end
           end
 
           def self.crc32c_for local_file
-            ::File.open(Pathname(local_file).to_path, "rb") do |f|
-              ::Digest::CRC32c.file(f).base64digest
+            if local_file.respond_to? :path
+              ::File.open(Pathname(local_file).to_path, "rb") do |f|
+                ::Digest::CRC32c.file(f).base64digest
+              end
+            else # StringIO
+              local_file.rewind
+              ::Digest::CRC32c.base64digest local_file.read
             end
           end
         end

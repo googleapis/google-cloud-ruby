@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can download itself" do
+  it "can download itself to a file" do
     # Stub the md5 to match.
     def file.md5
       "1B2M2Y8AsgTpgAmY7PhCfg=="
@@ -93,15 +93,77 @@ describe Google::Cloud::Storage::File, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, file_gapi,
+      mock.expect :get_object, tmpfile,
         [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
       bucket.service.mocked_service = mock
 
-      file.download tmpfile
+      downloaded = file.download tmpfile
+      downloaded.must_be_kind_of File
 
       mock.verify
     end
+  end
+
+  it "can download itself to a file by path" do
+    # Stub the md5 to match.
+    def file.md5
+      "1B2M2Y8AsgTpgAmY7PhCfg=="
+    end
+
+    Tempfile.open "google-cloud" do |tmpfile|
+      # write to the file since the mocked call won't
+      tmpfile.write "yay!"
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object, tmpfile,
+        [bucket.name, file.name, download_dest: tmpfile.path, generation: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download tmpfile.path
+      downloaded.must_be_kind_of File
+
+      mock.verify
+    end
+  end
+
+  it "can download itself to an IO" do
+    # Stub the md5 to match.
+    def file.md5
+      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    end
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, StringIO.new("yay!"),
+      [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+    bucket.service.mocked_service = mock
+
+    downloaded = file.download
+    downloaded.must_be_kind_of StringIO
+
+    mock.verify
+  end
+
+  it "can download itself by specifying an IO" do
+    # Stub the md5 to match.
+    def file.md5
+      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    end
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, StringIO.new("yay!"),
+      [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+    bucket.service.mocked_service = mock
+
+    downloadio = StringIO.new
+    downloaded = file.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloadio.must_equal downloadio # should be the same object
+
+    mock.verify
   end
 
   it "can download itself with customer-supplied encryption key" do
@@ -115,12 +177,13 @@ describe Google::Cloud::Storage::File, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, file_gapi,
+      mock.expect :get_object, nil, # using encryption keys seems to return nil
         [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: key_options]
 
       bucket.service.mocked_service = mock
 
-      file.download tmpfile, encryption_key: encryption_key
+      downloaded = file.download tmpfile, encryption_key: encryption_key
+      downloaded.path.must_equal tmpfile.path
 
       mock.verify
     end
@@ -134,7 +197,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
+        mock.expect :get_object, tmpfile,
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -161,7 +224,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
+        mock.expect :get_object, tmpfile,
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -188,7 +251,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
+        mock.expect :get_object, tmpfile,
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -215,7 +278,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
+        mock.expect :get_object, tmpfile,
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -246,7 +309,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
+        mock.expect :get_object, tmpfile,
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -271,8 +334,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, file_gapi,
-          [bucket.name, file.name, download_dest: tmpfile, generation: nil, options: {}]
+        mock.expect :get_object, tmpfile,
+          [bucket.name, file.name, download_dest: tmpfile.path, generation: nil, options: {}]
 
         bucket.service.mocked_service = mock
 
@@ -284,7 +347,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
         Google::Cloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
           Google::Cloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
             assert_raises Google::Cloud::Storage::FileVerificationError do
-              file.download tmpfile
+              file.download tmpfile.path
             end
           end
         end
