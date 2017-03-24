@@ -1,9 +1,12 @@
 AllCops:
   Exclude:
     - "google-cloud-debugger.gemspec"
-    - "lib/google/debugger/**/*"
+    - "lib/google/devtools/**/*"
+    # GAPIC client has too many violations. Exclude for now.
+    - "lib/google/cloud/debugger/v2/**/*"
     - "Rakefile"
     - "test/**/*"
+    - "tmp/**.*"
 
 Documentation:
   Enabled: false
@@ -32,6 +35,8 @@ Metrics/MethodLength:
   Max: 20
 Metrics/ParameterLists:
   Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 Style/RescueModifier:
   Enabled: false
 Style/ClassVars:
@@ -41,4 +46,4 @@ Style/TrivialAccessors:
 Style/CaseEquality:
   Enabled: false
 Style/FileName:
-  Enabled: false # for lib/google-cloud-logging.rb file
+  Enabled: false # for lib/google-cloud-debugger.rb file

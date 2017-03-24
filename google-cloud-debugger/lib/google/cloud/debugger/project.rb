@@ -32,7 +32,7 @@ module Google
 
         ##
         # @private Creates a new Connection instance.
-        def initialize service, module_name: , module_version:
+        def initialize service, module_name:, module_version:
           @service = service
           @agent = Agent.new service, module_name: module_name,
                                       module_version: module_version

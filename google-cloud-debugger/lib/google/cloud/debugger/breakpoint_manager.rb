@@ -50,9 +50,9 @@ module Google
           @wait_token = response.next_wait_token
 
           server_breakpoints = response.breakpoints || []
-          server_breakpoints = server_breakpoints.map { |grpc_b|
+          server_breakpoints = server_breakpoints.map do |grpc_b|
             Breakpoint.from_grpc grpc_b
-          }
+          end
 
           update_breakpoints server_breakpoints
 
@@ -64,8 +64,10 @@ module Google
           # p server_breakpoints
 
           synchronize do
-            new_breakpoints = server_breakpoints - @active_breakpoints - @completed_breakpoints
-            before_breakpoints_count = @active_breakpoints.size + @completed_breakpoints.size
+            new_breakpoints =
+              server_breakpoints - @active_breakpoints - @completed_breakpoints
+            before_breakpoints_count =
+              @active_breakpoints.size + @completed_breakpoints.size
 
             # Remember new active breakpoints from server
             @active_breakpoints += new_breakpoints unless new_breakpoints.empty?
@@ -73,9 +75,11 @@ module Google
             # Forget old breakpoints
             @completed_breakpoints &= server_breakpoints
             @active_breakpoints &= server_breakpoints
-            after_breakpoints_acount = @active_breakpoints.size + @completed_breakpoints.size
+            after_breakpoints_acount =
+              @active_breakpoints.size + @completed_breakpoints.size
 
-            breakpoints_updated = !new_breakpoints.empty? ||
+            breakpoints_updated =
+              !new_breakpoints.empty? ||
               (before_breakpoints_count != after_breakpoints_acount)
 
             on_breakpoints_change.call(@active_breakpoints) if

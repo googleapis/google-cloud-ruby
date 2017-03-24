@@ -21,13 +21,14 @@ module Google
     module Debugger
       class Debuggee
         module AppUniquifierGenerator
-
           MAX_DEPTH = 10
 
           def self.generate_app_uniquifier sha, app_path = nil
-            app_path ||= defined?(::Rack::Directory) ?
-              Rack::Directory.new("").root :
-              Dir.getwd
+            app_path ||= if defined?(::Rack::Directory)
+                           Rack::Directory.new("").root
+                         else
+                           Dir.getwd
+                         end
 
             process_directory sha, app_path
           end
@@ -53,4 +54,3 @@ module Google
     end
   end
 end
-

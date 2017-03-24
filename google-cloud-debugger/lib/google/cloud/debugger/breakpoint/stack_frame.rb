@@ -93,16 +93,14 @@ module Google
           # @private Exports the StackFrame arguments to an array of
           # Google::Devtools::Clouddebugger::V2::Variable objects.
           def arguments_to_grpc
-            return [] if arguments.nil?
-            arguments.map { |var| var.to_grpc }
+            arguments.nil? ? [] : arguments.map(&:to_grpc)
           end
 
           ##
           # @private Exports the StackFrame locals to an array of
           # Google::Devtools::Clouddebugger::V2::Variable objects.
           def locals_to_grpc
-            return [] if locals.nil?
-            locals.map { |var| var.to_grpc }
+            locals.nil? ? [] : locals.map(&:to_grpc)
           end
         end
       end

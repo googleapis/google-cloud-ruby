@@ -59,9 +59,10 @@ module Google
 
         def wait_next_item
           synchronize do
-            @lock_cond.wait_while {
+            @lock_cond.wait_while do
               async_state == :suspended ||
-                (async_state == :running && @queue.empty?)}
+                (async_state == :running && @queue.empty?)
+            end
             queue_item = nil
             if @queue.empty?
               @async_state = :stopped
@@ -76,4 +77,3 @@ module Google
     end
   end
 end
-

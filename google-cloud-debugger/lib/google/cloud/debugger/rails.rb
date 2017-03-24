@@ -26,13 +26,12 @@ module Google
         end
 
         initializer "Stackdriver.Debugger" do |app|
-          gcp_config = app.config.google_cloud
-          debugger_config = gcp_config[:debugger]
+          debugger_config = Railtie.parse_rails_config config
 
-          project_id = debugger_config.project_id || gcp_config.project_id
-          keyfile = debugger_config.keyfile || gcp_config.keyfile
-          module_name = debugger_config.module_name
-          module_version = debugger_config.module_version
+          project_id = debugger_config[:project_id]
+          keyfile = debugger_config[:keyfile]
+          module_name = debugger_config[:module_name]
+          module_version = debugger_config[:module_version]
 
           debugger = Google::Cloud::Debugger.new project: project_id,
                                                  keyfile: keyfile,
@@ -47,48 +46,60 @@ module Google
         end
 
         ##
-        # Determine whether to use Stackdriver Logging or not.
+        # Determine whether to use Stackdriver Debugger or not.
         #
         # Returns true if valid GCP project_id is provided and underneath API is
         # able to authenticate. Also either Rails needs to be in "production"
-        # environment or config.stackdriver.use_logging is explicitly true.
+        # environment or config.stackdriver.use_debugger is explicitly true.
         #
         # @param [Rails::Railtie::Configuration] config The
         #   Rails.application.config
         #
-        # @return [Boolean] Whether to use Stackdriver Logging
+        # @return [Boolean] Whether to use Stackdriver Debugger
         #
         def self.use_debugger? config
-          return true
+          debugger_config = parse_rails_config config
 
-          gcp_config = config.google_cloud
           # Return false if config.stackdriver.use_logging is explicitly false
-          return false if gcp_config.key?(:use_logging) &&
-                          !gcp_config.use_logging
+          use_debugger = debugger_config[:use_debugger]
+          return false if !use_debugger.nil? && !use_debugger
 
           # Try authenticate authorize client API. Return false if unable to
           # authorize.
-          keyfile = gcp_config.logging.keyfile || gcp_config.keyfile
           begin
-            Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
-          rescue Exception => e
-            warn "Google::Cloud::Logging is not activated due to " \
-              "authorization error: #{e.message}\nFalling back to default " \
-              "logger"
+            Google::Cloud::Debugger::Credentials.credentials_with_scope(
+              debugger_config[:keyfile])
+          rescue => e
+            Rails.log "Google::Cloud::Debugger is not activated due to " \
+              "authorization error: #{e.message}"
             return false
           end
 
-          project_id = gcp_config.logging.project_id || gcp_config.project_id ||
-                       Google::Cloud::Logging::Project.default_project
+          project_id = debugger_config[:project_id] ||
+                       Google::Cloud::Debugger::Project.default_project
           if project_id.to_s.empty?
-            warn "Google::Cloud::Logging is not activated due to empty " \
-              "project_id; falling back to default logger"
+            Rails.log "Google::Cloud::Debugger is not activated due to empty " \
+              "project_id"
             return false
           end
 
           # Otherwise default to true if Rails is running in production or
           # config.stackdriver.use_logging is true
-          Rails.env.production? || gcp_config.use_logging
+          Rails.env.production? || use_debugger
+        end
+
+        def self.parse_rails_config config
+          gcp_config = config.google_cloud
+          debugger_config = gcp_config[:debugger]
+          use_debugger =
+            gcp_config.key?(:use_debugger) ? gcp_config.use_debugger : nil
+          {
+            project_id: debugger_config.project_id || gcp_config.project_id,
+            keyfile: debugger_config.keyfile || gcp_config.keyfile,
+            module_name: debugger_config.module_name,
+            module_version: debugger_config.module_version,
+            use_debugger: use_debugger
+          }
         end
       end
     end

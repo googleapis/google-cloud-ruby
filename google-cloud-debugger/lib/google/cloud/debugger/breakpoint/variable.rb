@@ -181,20 +181,19 @@ module Google
             var.type = source.class.to_s
 
             case source
-              when Hash
-                add_compound_members var, source do |(k, v)|
-                  from_rb_var(v, name: k, depth: depth - 1)
-                end
-              when Array
-                add_compound_members var, source do |el, i|
-                  from_rb_var(el, name: "[#{i}]", depth: depth - 1)
-                end
-              else
-                add_compound_members var,
-                                     source.instance_variables do |var_name|
-                  instance_var = source.instance_variable_get var_name
-                  from_rb_var(instance_var, name: var_name, depth: depth - 1)
-                end
+            when Hash
+              add_compound_members var, source do |(k, v)|
+                from_rb_var(v, name: k, depth: depth - 1)
+              end
+            when Array
+              add_compound_members var, source do |el, i|
+                from_rb_var(el, name: "[#{i}]", depth: depth - 1)
+              end
+            else
+              add_compound_members var, source.instance_variables do |var_name|
+                instance_var = source.instance_variable_get var_name
+                from_rb_var(instance_var, name: var_name, depth: depth - 1)
+              end
             end
             var
           end
@@ -207,9 +206,9 @@ module Google
               if i < MAX_MEMBERS
                 var.members << yield(el, i)
               else
-                var.members << Variable.new.tap { |last_var|
+                var.members << Variable.new.tap do |last_var|
                   last_var.value = "(Only first 25 items were captured)"
-                }
+                end
                 break
               end
             end
@@ -241,7 +240,7 @@ module Google
           # @private Limit string to MAX_STRING_LENTH. Replace extra characters
           # with ellipsis
           def self.truncate_value str
-            str.gsub(/(.{#{MAX_STRING_LENGTH - 3}}).+/,'\1...')
+            str.gsub(/(.{#{MAX_STRING_LENGTH - 3}}).+/, '\1...')
           end
           private_class_method :add_compound_members, :truncate_value
 
@@ -274,8 +273,7 @@ module Google
           # @private Exports the Variable members to an array of
           # Google::Devtools::Clouddebugger::V2::Variable objects.
           def members_to_grpc
-            return nil if members.nil?
-            members.map { |var| var.to_grpc }
+            members.nil? ? nil : members.map(&:to_grpc)
           end
         end
       end

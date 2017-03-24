@@ -50,7 +50,7 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        def debugger
+        def cloud_debugger
           return mocked_debugger if mocked_debugger
           @debugger ||=
             V2::Controller2Client.new(
@@ -81,22 +81,18 @@ module Google
         end
 
         def register_debuggee debuggee_grpc
-          begin
-            execute do
-              debugger.register_debuggee debuggee_grpc, options: default_options
-            end
-          rescue => e
-            puts e.message, e.backtrace
-            exit
+          execute do
+            cloud_debugger.register_debuggee debuggee_grpc,
+                                             options: default_options
           end
         end
 
         def list_active_breakpoints debuggee_id, wait_token
           execute do
-            debugger.list_active_breakpoints debuggee_id.to_s,
-                                             wait_token: wait_token.to_s,
-                                             success_on_timeout: true,
-                                             options: default_options
+            cloud_debugger.list_active_breakpoints debuggee_id.to_s,
+                                                   wait_token: wait_token.to_s,
+                                                   success_on_timeout: true,
+                                                   options: default_options
           end
         end
 

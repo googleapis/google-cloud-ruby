@@ -27,7 +27,7 @@ module Google
         attr_reader :module_version
         attr_reader :id
 
-        def initialize service, module_name: , module_version:
+        def initialize service, module_name:, module_version:
           @service = service
           @module_name = module_name
           @module_version = module_version
@@ -42,11 +42,11 @@ module Google
           rescue
             revoke_registration
           end
-          !!id
+          registered?
         end
 
         def registered?
-          !!id
+          !id.nil?
         end
 
         def revoke_registration
@@ -54,6 +54,7 @@ module Google
         end
 
         private
+
         def build_request_arg
           debuggee_args = {
             project: project_id,
@@ -69,7 +70,7 @@ module Google
           if source_contexts
             debuggee_args[:ext_source_contexts] = source_contexts
           elsif source_context
-            debuggee_args[:ext_source_contexts] = [{context: source_context}]
+            debuggee_args[:ext_source_contexts] = [{ context: source_context }]
           end
 
           debuggee_args[:uniquifier] = compute_uniquifier debuggee_args
@@ -121,14 +122,11 @@ module Google
         end
 
         def read_app_json_file file_path
-          begin
-            JSON.parse File.read(file_path), {:symbolize_names => true}
-          rescue
-            nil
-          end
+          JSON.parse File.read(file_path), symbolize_names: true
+        rescue
+          nil
         end
       end
     end
   end
 end
-

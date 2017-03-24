@@ -212,7 +212,7 @@ module Google
         def self.run_cleanup
           @exit_lock.synchronize do
             if @cleanup_list
-              while !@cleanup_list.empty?
+              until @cleanup_list.empty?
                 @cleanup_list.shift.async_stop! CLEANUP_TIMEOUT, force: true
               end
             end
@@ -261,9 +261,7 @@ module Google
         def async_run_job
           fail "run_backgrounder method not defined" unless
             respond_to? :run_backgrounder
-          while async_working?
-            run_backgrounder
-          end
+          run_backgrounder while async_working?
         ensure
           @async_state = :stopped
         end
@@ -292,4 +290,3 @@ module Google
     end
   end
 end
-

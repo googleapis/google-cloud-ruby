@@ -22,29 +22,26 @@ module Google
       def self.new project: nil, keyfile: nil, module_name: nil,
                    module_version: nil, scope: nil, timeout: nil,
                    client_config: nil
-        project ||= Google::Cloud::Debugger::Project.default_project
+        project ||= Debugger::Project.default_project
         project = project.to_s # Always cast to a string
-        module_name ||= Google::Cloud::Debugger::Project.default_module_name
+        module_name ||= Debugger::Project.default_module_name
         module_name = module_name.to_s
-        module_version ||= Google::Cloud::Debugger::Project.default_module_version
+        module_version ||= Debugger::Project.default_module_version
         module_version = module_version.to_s
 
         fail ArgumentError, "project is missing" if project.empty?
         fail ArgumentError, "module_name is missing" if module_name.empty?
         fail ArgumentError, "module_version is missing" if module_version.nil?
 
-        credentials =
-          Google::Cloud::Debugger::Credentials.credentials_with_scope keyfile,
-                                                                      scope
+        credentials = Credentials.credentials_with_scope keyfile, scope
 
         Google::Cloud::Debugger::Project.new(
           Google::Cloud::Debugger::Service.new(
             project, credentials, timeout: timeout,
                                   client_config: client_config),
-          {
-            module_name: module_name,
-            module_version: module_version
-          })
+          module_name: module_name,
+          module_version: module_version
+        )
       end
     end
   end

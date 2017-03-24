@@ -75,8 +75,7 @@ module Google
         # from a Google::Devtools::Clouddebugger::V2::Breakpoint object.
         def self.from_grpc grpc
           return new if grpc.nil?
-          new.tap do |b|
-            b.id = grpc.id
+          new(grpc.id).tap do |b|
             b.location = Breakpoint::SourceLocation.from_grpc grpc.location
             b.condition = grpc.condition
             b.is_final_state = grpc.is_final_state
@@ -218,8 +217,7 @@ module Google
         #
         # @return [Google::Devtools::Clouddebugger::V2::StatusMessage] The grpc
         #   StatusMessage object, which describes the breakpoint's error state.
-        def set_error_state message, refers_to: :UNSPECIFIED,
-                                     is_final: true
+        def set_error_state message, refers_to: :UNSPECIFIED, is_final: true
           description = Google::Devtools::Clouddebugger::V2::FormatMessage.new(
             format: message
           )
@@ -250,16 +248,14 @@ module Google
         # @private Exports the Breakpoint stack_frames to an array of
         # Google::Devtools::Clouddebugger::V2::StackFrame objects.
         def stack_frames_to_grpc
-          return [] if stack_frames.nil?
-          stack_frames.map { |sf| sf.to_grpc  }
+          stack_frames.nil? ? [] : stack_frames.map(&:to_grpc)
         end
 
         ##
         # @private Exports the Breakpoint stack_frames to an array of
         # Google::Devtools::Clouddebugger::V2::StackFrame objects.
         def evaluated_expressions_to_grpc
-          return [] if evaluated_expressions.nil?
-          evaluated_expressions.map { |var| var.to_grpc }
+          evaluated_expressions.nil? ? [] : evaluated_expressions.map(&:to_grpc)
         end
 
         ##

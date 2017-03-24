@@ -36,7 +36,7 @@ module Google
 
         attr_reader :last_exception
 
-        def initialize service, module_name: , module_version:
+        def initialize service, module_name:, module_version:
           super()
 
           @service = service
@@ -44,7 +44,8 @@ module Google
                                             module_version: module_version
           @tracer = Debugger::Tracer.new self
           @breakpoint_manager = BreakpointManager.new service
-          @breakpoint_manager.on_breakpoints_change = method :breakpoints_change_callback
+          @breakpoint_manager.on_breakpoints_change =
+            method :breakpoints_change_callback
 
           @transmitter = Transmitter.new service, self
         end
@@ -65,20 +66,17 @@ module Google
         end
 
         def run_backgrounder
-          begin
-            sync_breakpoints = ensure_debuggee_registration
+          sync_breakpoints = ensure_debuggee_registration
 
-            if sync_breakpoints
-              sync_result = breakpoint_manager.sync_active_breakpoints debuggee.id
-              unless sync_result
-                debuggee.revoke_registration
-              end
-            end
-          rescue => e
-            @last_exception = e
-            # puts e
-            # puts e.backtrace
+          if sync_breakpoints
+            sync_result =
+              breakpoint_manager.sync_active_breakpoints debuggee.id
+            debuggee.revoke_registration unless sync_result
           end
+        rescue => e
+          @last_exception = e
+          # puts e
+          # puts e.backtrace
         end
 
         private

@@ -26,7 +26,7 @@ module Google
 
           EXPRESSION_TRACE_DEPTH = 1
 
-          BYTE_CODE_BLACKLIST = %w{
+          BYTE_CODE_BLACKLIST = %w(
             setinstancevariable
             setclassvariable
             setconstant
@@ -35,19 +35,19 @@ module Google
             opt_ltlt
             opt_aset
             opt_aset_with
-          }.freeze
+          ).freeze
 
-          LOCAL_BYTE_CODE_BLACKLIST = %w{
+          LOCAL_BYTE_CODE_BLACKLIST = %w(
             setlocal
-          }.freeze
+          ).freeze
 
-          FUNC_CALL_FLAG_BLACKLIST = %w{
+          FUNC_CALL_FLAG_BLACKLIST = %w(
             ARGS_BLOCKARG
-          }.freeze
+          ).freeze
 
-          CATCH_TABLE_TYPE_BLACKLIST = %w{
+          CATCH_TABLE_TYPE_BLACKLIST = %w(
             rescue
-          }.freeze
+          ).freeze
 
           BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{BYTE_CODE_BLACKLIST.join '|'}/
 
@@ -156,7 +156,7 @@ module Google
             }).freeze,
             Google::Cloud::Debugger::Breakpoint::Evaluator => hashify(%I{
               disable_method_trace_for_thread
-            }).freeze,
+            }).freeze
           }.freeze
 
           C_INSTANCE_METHOD_WHITELIST = {
@@ -691,7 +691,7 @@ module Google
               to_enum
               to_s
               untrusted?
-            }).freeze,
+            }).freeze
           }.freeze
 
           class << self
@@ -701,7 +701,8 @@ module Google
                 frame_info = StackFrame.new.tap do |sf|
                   sf.function = frame_binding.eval("__method__").to_s
                   sf.location = SourceLocation.new.tap do |l|
-                    l.path = frame_binding.eval("::File.absolute_path(__FILE__)")
+                    l.path =
+                      frame_binding.eval("::File.absolute_path(__FILE__)")
                     l.line = frame_binding.eval("__LINE__")
                   end
                 end
@@ -724,7 +725,7 @@ module Google
                 return false
               end
 
-              !!result
+              result ? true : false
             end
 
             def eval_expressions binding, expressions
@@ -752,6 +753,33 @@ module Google
             end
 
             def readonly_eval_expression_exec binding, expression
+              compilation_result = validate_compiled_expression expression
+              return compilation_result if compilation_result.is_a?(Exception)
+
+              # The evaluation is most likely triggered from a trace callback,
+              # where addtional nested tracing is disabled by VM. So we need to
+              # do evaluation in a new thread, where function calls can be
+              # traced.
+              thr = Thread.new do
+                begin
+                  binding.eval wrap_expression(expression)
+                rescue => e
+                  # Threat all StandardError as mutation and set @mutation_cause
+                  unless e.instance_variable_get :@mutation_cause
+                    e.instance_variable_set(
+                      :@mutation_cause,
+                      Google::Cloud::Debugger::MutationError::UNKNOWN_CAUSE)
+                  end
+                  e
+                end
+              end
+
+              thr.join.value
+            end
+
+            private
+
+            def validate_compiled_expression expression
               begin
                 yarv_instructions =
                   RubyVM::InstructionSequence.compile(expression).disasm
@@ -769,41 +797,23 @@ module Google
                 )
               end
 
-              # The evaluation is most likely triggered from a trace callback,
-              # where addtional nested tracing is disabled by VM. So we need to
-              # do evaluation in a new thread, where function calls can be
-              # traced.
-              thr = Thread.new {
-                begin
-                  binding.eval wrap_expression(expression)
-                rescue => e
-                  # Threat all StandardError as mutation and set @mutation_cause
-                  unless e.instance_variable_get :@mutation_cause
-                    e.instance_variable_set(
-                      :@mutation_cause,
-                      Google::Cloud::Debugger::MutationError::UNKNOWN_CAUSE)
-                  end
-                  e
-                end
-              }
-
-              thr.join.value
+              yarv_instructions
             end
-
-            private
 
             def eval_frame_variables frame_binding
               result_variables = []
-              result_variables += frame_binding.local_variables.map do |local_var_name|
-                local_var = frame_binding.local_variable_get(local_var_name)
+              result_variables +=
+                frame_binding.local_variables.map do |local_var_name|
+                  local_var = frame_binding.local_variable_get(local_var_name)
 
-                Variable.from_rb_var(local_var, name: local_var_name)
-              end
+                  Variable.from_rb_var(local_var, name: local_var_name)
+                end
 
               result_variables
             end
 
-            def immutable_yarv_instructions? yarv_instructions, allow_localops: false
+            def immutable_yarv_instructions? yarv_instructions,
+                                             allow_localops: false
               if allow_localops
                 byte_code_blacklist_regex = BYTE_CODE_BLACKLIST_REGEX
               else
@@ -820,7 +830,7 @@ module Google
             end
 
             def wrap_expression expression
-              return """
+              """
                 begin
                   Google::Cloud::Debugger::Breakpoint::Evaluator.send(
                     :enable_method_trace_for_thread)
@@ -837,40 +847,39 @@ module Google
               meth = receiver.method mid
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
 
-              unless immutable_yarv_instructions?(yarv_instructions,
-                                                  allow_localops: true)
-                fail Google::Cloud::Debugger::MutationError.new(
-                  "Mutation detected!",
-                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
-                )
-              end
+              return if immutable_yarv_instructions?(yarv_instructions,
+                                                     allow_localops: true)
+              fail Google::Cloud::Debugger::MutationError.new(
+                "Mutation detected!",
+                Google::Cloud::Debugger::MutationError::PROHIBITED_YARV)
             end
 
             def trace_c_func_callback receiver, defined_class, mid
               if receiver.is_a?(Class) || receiver.is_a?(Module)
-                klass = receiver
-
-                unless IMMUTABLE_CLASSES.include?(klass) ||
-                  (C_CLASS_METHOD_WHITELIST[klass] || {})[mid] ||
-                  (C_INSTANCE_METHOD_WHITELIST[defined_class] || {})[mid]
-                  invalid_op = true
-                end
+                invalid_op =
+                  !validate_c_class_method(defined_class, receiver, mid)
               else
-                klass = defined_class
-                unless IMMUTABLE_CLASSES.include?(klass) ||
-                  (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
-                  invalid_op = true
-                end
+                invalid_op = !validate_c_instance_method(defined_class, mid)
               end
 
-              if invalid_op
-                Google::Cloud::Debugger::Breakpoint::Evaluator.send(
-                  :disable_method_trace_for_thread)
-                fail Google::Cloud::Debugger::MutationError.new(
-                   "Invalid operation detected",
-                   Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC
-                )
-              end
+              return unless invalid_op
+
+              Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                :disable_method_trace_for_thread)
+              fail Google::Cloud::Debugger::MutationError.new(
+                "Invalid operation detected",
+                Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC)
+            end
+
+            def validate_c_class_method klass, receiver, mid
+              IMMUTABLE_CLASSES.include?(receiver) ||
+                (C_CLASS_METHOD_WHITELIST[receiver] || {})[mid] ||
+                (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+            end
+
+            def validate_c_instance_method klass, mid
+              IMMUTABLE_CLASSES.include?(klass) ||
+                (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
             end
           end
         end
@@ -883,7 +892,8 @@ module Google
 
         attr_reader :mutation_cause
 
-        def initialize msg = "Mutation detected!", mutation_cause = UNKNOWN_CAUSE
+        def initialize msg = "Mutation detected!",
+                       mutation_cause = UNKNOWN_CAUSE
           @mutation_cause = mutation_cause
           super(msg)
         end
@@ -895,4 +905,3 @@ module Google
     end
   end
 end
-

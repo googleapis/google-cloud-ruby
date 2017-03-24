@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require 'mkmf'
+require "mkmf"
 
 extension_name = "google/cloud/debugger/debugger_c"
 
