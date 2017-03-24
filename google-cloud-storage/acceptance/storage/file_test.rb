@@ -208,6 +208,7 @@ describe Google::Cloud::Storage::File, :storage do
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile
+      downloaded.must_be_kind_of File
 
       downloaded.size.must_equal original.size
       downloaded.size.must_equal uploaded.size
@@ -219,23 +220,45 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
-  it "should upload a file using IO and path" do
+  it "should upload and download a file using IO" do
     inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
+
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
     uploaded.name.must_equal "uploaded/with/inmemory.png"
 
-    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
-      tmpfile.binmode
-      downloaded = uploaded.download tmpfile
+    downloaded = uploaded.download
+    downloaded.must_be_kind_of StringIO
 
-      inmemory.rewind
+    inmemory.rewind
+    downloaded.rewind
 
-      downloaded.size.must_equal inmemory.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal tmpfile.size # Same file
+    downloaded.size.must_equal inmemory.size
+    downloaded.size.must_equal uploaded.size
 
-      File.read(downloaded.path, mode: "rb").must_equal inmemory.read
-    end
+    downloaded.read.must_equal inmemory.read
+    downloaded.read.encoding.must_equal inmemory.read.encoding
+
+    uploaded.delete
+  end
+
+  it "should upload and download text using IO" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
+    uploaded.name.must_equal "uploaded/with/inmemory.png"
+
+    downloadio = StringIO.new()
+    downloaded = uploaded.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloaded.must_equal downloadio # The object returned is the object provided
+
+    inmemory.rewind
+    downloaded.rewind
+
+    downloaded.size.must_equal inmemory.size
+    downloaded.size.must_equal uploaded.size
+
+    downloaded.read.must_equal inmemory.read
+    downloaded.read.encoding.must_equal inmemory.read.encoding
 
     uploaded.delete
   end

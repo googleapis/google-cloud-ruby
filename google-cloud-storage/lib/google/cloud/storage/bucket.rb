@@ -465,7 +465,9 @@ module Google
         # and you can read or update the metadata of an encrypted file without
         # providing the encryption key.
         #
-        # @param [String] file Path of the file on the filesystem to upload.
+        # @param [String, IO] file Path of the file on the filesystem to
+        #   upload. Can be an IO object, or IO-ish object like StringIO. If the
+        #   IO object does not have path, the path argument must be provided.
         # @param [String] path Path to store the file in Google Cloud Storage.
         # @param [String] acl A predefined set of access controls to apply to
         #   this file.

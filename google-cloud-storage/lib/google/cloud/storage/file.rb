@@ -341,8 +341,10 @@ module Google
         # was used with {Bucket#create_file}, the `encryption_key` option must
         # be provided.
         #
-        # @param [String] path The path on the local file system to write the
-        #   data to. The path provided must be writable.
+        # @param [String, IO] path The path on the local file system to write
+        #   the data to. The path provided must be writable. Can also be an IO
+        #   object, or IO-ish object like StringIO. If an IO object, the object
+        #   will be written to, not the filesystem. Optional.
         # @param [Symbol] verify The verification algoruthm used to ensure the
         #   downloaded file contents are correct. Default is `:md5`.
         #
@@ -357,7 +359,10 @@ module Google
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
         #
-        # @return [File] Returns a `::File` object on the local file system
+        # @return [IO] Returns an IO ojbect with the file contents. This will
+        #   usually be a `::File` object on the local file system. If an IO
+        #   object is provided in `path` argument, then that object will be
+        #   returned.
         #
         # @example
         #   require "google/cloud/storage"
@@ -399,12 +404,18 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   file.download "path/to/downloaded/file.ext", verify: :none
         #
-        def download path, verify: :md5, encryption_key: nil
+        def download path = nil, verify: :md5, encryption_key: nil
           ensure_service!
-          service.download_file \
+          if path.nil?
+            path = StringIO.new
+            path.set_encoding "ASCII-8BIT"
+          end
+          file = service.download_file \
             bucket, name, path,
             key: encryption_key
-          verify_file! ::File.new(path), verify
+          # FIX: downloading with encryption key will return nil
+          file ||= ::File.new(path)
+          verify_file! file, verify
         end
 
         ##
