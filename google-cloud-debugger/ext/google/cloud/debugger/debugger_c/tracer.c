@@ -129,14 +129,14 @@ match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
 }
 
 /**
- *  line_trace_event_callback
+ *  line_trace_callback
  *  Callback function for thread line event tracing. It checks tracer#breakpoint_cache
  *  for any breakpoints trigger on current line called. Then trigger evaluation
  *  procedure if found matching breakpoints. It also skip breakpoints that are
  *  already marked completed.
  */
 static void
-line_trace_event_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE klass)
+line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE klass)
 {
     VALUE self = data;
     const char *c_trace_path = rb_sourcefile();
@@ -193,68 +193,11 @@ disable_line_trace_for_thread(VALUE thread)
     line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
 
     if (RTEST(line_trace_set)) {
-        rb_thread_remove_event_hook(thread, line_trace_event_callback);
+        rb_thread_remove_event_hook(thread, line_trace_callback);
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qfalse);
     }
 
     return Qnil;
-}
-
-/**
- *  enable_return_tracepoint
- *  Enables the tracer#return_tracepoint if not enabled already. Returns 1 if
- *  successfully enabled. Otherwise return 0, including previously already enabled.
- */
-static int
-enable_return_tracepoint(VALUE self)
-{
-    VALUE return_tracepoint = rb_iv_get(self, "@return_tracepoint");
-
-    if (!RTEST(rb_tracepoint_enabled_p(return_tracepoint))) {
-        rb_tracepoint_enable(return_tracepoint);
-        rb_iv_set(self, "@return_tracepoint_counter", INT2NUM(0));
-        return 1;
-    }
-    return 0;
-}
-
-/**
- *  increment_return_tracepoint_counter
- *  Helper function to increment tracer#return_tracepoint_counter by 1
- */
-static void
-increment_return_tracepoint_counter(VALUE self)
-{
-    VALUE return_tracepoint_counter = rb_iv_get(self, "@return_tracepoint_counter");
-    if (RTEST(return_tracepoint_counter)) {
-        int c_return_tracepoint_counter = NUM2INT(return_tracepoint_counter) + 1;
-        rb_iv_set(self, "@return_tracepoint_counter", INT2NUM(c_return_tracepoint_counter));
-    }
-}
-
-/**
- *  decrement_or_disable_return_tracepoint
- *  Helper function to decrement tracer#return_tracepoint_counter by 1. If the
- *  counter is already at 0, automatically disable tracer#return_tracepoint and
- *  set counter to Qnil.
- */
-static void
-decrement_or_disable_return_tracepoint(VALUE self)
-{
-    VALUE return_tracepoint = rb_iv_get(self, "@return_tracepoint");
-    VALUE return_tracepoint_counter = rb_iv_get(self, "@return_tracepoint_counter");
-    if (RTEST(return_tracepoint_counter)) {
-        int c_return_tracepoint_counter = NUM2INT(return_tracepoint_counter);
-        // Decrement counter if counter is greater than 0. Otherwise disable return tracepoint and reset counter.
-        if (c_return_tracepoint_counter > 0) {
-            rb_iv_set(self, "@return_tracepoint_counter", INT2NUM(c_return_tracepoint_counter - 1));
-        } else {
-            if (RTEST(rb_tracepoint_enabled_p(return_tracepoint))) {
-                rb_tracepoint_disable(return_tracepoint);
-            }
-            rb_iv_set(self, "@return_tracepoint_counter", Qnil);
-        }
-    }
 }
 
 /**
@@ -270,8 +213,97 @@ enable_line_trace_for_thread(VALUE self)
     VALUE line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
 
     if (!RTEST(line_trace_set)) {
-        rb_thread_add_event_hook(current_thread, line_trace_event_callback, RUBY_EVENT_LINE, self);
+        rb_thread_add_event_hook(current_thread, line_trace_callback, RUBY_EVENT_LINE, self);
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qtrue);
+    }
+
+    return Qnil;
+}
+
+/**
+ * return_trace_callback
+ * Callback function for tracer#return_tracepoint. It gets called on
+ * RUBY_EVENT_END, RUBY_EVENT_RETURN, RUBY_EVENT_C_RETURN, and
+ * RUBY_EVENT_B_RETURN events. It keeps line tracing consistent when Ruby
+ * program counter interleaves files. Everytime called, it checks caller stack
+ * frame's file path, if it matches any of the breakpoints, it turns line
+ * event tracing back on. It also decrements tracer#return_tracepoint_counter
+ * everytime called. When the counter is at 0, it disables itself, which should
+ * be the same stack frame that the return_tracepoint is turned on.
+ */
+static void
+return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
+{
+    VALUE match_found;
+    VALUE self = (VALUE) data;
+    VALUE caller_locations = rb_funcall(rb_mKernel, rb_intern("caller_locations"), 2, INT2NUM(0), INT2NUM(1));
+    VALUE *c_caller_locations;
+    VALUE caller_location;
+    VALUE caller_path;
+
+    if(!RTEST(caller_locations)) {
+        return;
+    }
+
+    c_caller_locations = RARRAY_PTR(caller_locations);
+    caller_location = c_caller_locations[0];
+    caller_path = rb_funcall(caller_location, rb_intern("absolute_path"), 0);
+
+    if(!RTEST(caller_path)) {
+        return;
+    }
+
+    match_found = match_breakpoints_files(self, caller_path);
+
+    if (match_found) {
+        enable_line_trace_for_thread(self);
+    }
+
+    return;
+}
+
+/**
+ *  disable_return_trace_for_thread
+ *  Turn off return events trace hook for a given thread. If no thread is given, it
+ *  turns off line event trace hook in current thread. It only takes action if
+ *  the thread has a thread variable "gcloud_return_trace_set" that's true.
+ */
+static VALUE
+disable_return_trace_for_thread(VALUE thread)
+{
+    VALUE thread_variables_hash;
+    VALUE return_trace_set;
+
+    if (!RTEST(thread)) {
+        thread = rb_thread_current();
+    }
+    thread_variables_hash = rb_ivar_get(thread, rb_intern("locals"));
+    return_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"));
+
+    if (RTEST(return_trace_set)) {
+        rb_thread_remove_event_hook(thread, (rb_event_hook_func_t)return_trace_callback);
+        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"), Qfalse);
+    }
+
+    return Qnil;
+}
+
+/**
+ * enable_return_trace_for_thread
+ * Turn on return events trace for current thread. Also set a flag
+ * "gcloud_return_trace_set" to Qtrue in current thread's thread variable.
+ */
+static VALUE
+enable_return_trace_for_thread(VALUE self)
+{
+    VALUE current_thread = rb_thread_current();
+    VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
+    VALUE return_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"));
+
+    if (!RTEST(return_trace_set)) {
+        int return_tracepoint_event = RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_C_RETURN | RUBY_EVENT_B_RETURN;
+        rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)return_trace_callback, return_tracepoint_event, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
+        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"), Qtrue);
     }
 
     return Qnil;
@@ -303,53 +335,11 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
 
     if (match_found) {
         enable_line_trace_for_thread(self);
-        // Enable or increment return tracepoint
-        if (!enable_return_tracepoint(self)) {
-            increment_return_tracepoint_counter(self);
-        }
+        enable_return_trace_for_thread(self);
     }
     else {
         disable_line_trace_for_thread(Qnil);
-        increment_return_tracepoint_counter(self);
     }
-
-    return;
-}
-
-/**
- * return_tracepoint_callback
- * Callback function for tracer#return_tracepoint. It gets called on
- * RUBY_EVENT_END, RUBY_EVENT_RETURN, RUBY_EVENT_C_RETURN, and
- * RUBY_EVENT_B_RETURN events. It keeps line tracing consistent when Ruby
- * program counter interleaves files. Everytime called, it checks caller stack
- * frame's file path, if it matches any of the breakpoints, it turns line
- * event tracing back on. It also decrements tracer#return_tracepoint_counter
- * everytime called. When the counter is at 0, it disables itself, which should
- * be the same stack frame that the return_tracepoint is turned on.
- */
-static void
-return_tracepoint_callback(VALUE tracepoint, void *data)
-{
-    VALUE match_found;
-    VALUE self = (VALUE) data;
-    rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
-    VALUE tracepoint_binding = rb_tracearg_binding(tracepoint_arg);
-
-    //TODO: Change this to use C API (rb_vm_thread_backtrace_locations)
-    VALUE caller_path_eval_str = rb_str_new_cstr("caller_locations(0, 1).first.absolute_path");
-    VALUE caller_path = rb_funcall(tracepoint_binding, rb_intern("eval"), 1, caller_path_eval_str);
-
-    if(!RTEST(caller_path)) {
-        return;
-    }
-
-    match_found = match_breakpoints_files(self, caller_path);
-
-    if (match_found) {
-        enable_line_trace_for_thread(self);
-    }
-
-    decrement_or_disable_return_tracepoint(self);
 
     return;
 }
@@ -392,17 +382,16 @@ register_tracepoint(VALUE self, int event, const char *instance_variable_name, v
 }
 
 /**
- * rb_disable_tracepoints
- * This is implmenetation of Tracer#disable_tracepoints methods. It disables
- * tracer#file_tracepoint, tracer#return_tracepoint, and line event tracing for
- * all threads.
+ * rb_disable_traces
+ * This is implmenetation of Tracer#disable_traces methods. It disables
+ * tracer#file_tracepoint, tracer#fiber_tracepoint, return even tracing, and
+ * line event tracing for all threads.
  */
 static VALUE
-rb_disable_tracepoints(VALUE self)
+rb_disable_traces(VALUE self)
 {
     VALUE file_tracepoint = rb_iv_get(self, "@file_tracepoint");
     VALUE fiber_tracepoint = rb_iv_get(self, "@fiber_tracepoint");
-    VALUE return_tracepoint = rb_iv_get(self, "@return_tracepoint");
     VALUE threads = rb_funcall(rb_cThread, rb_intern("list"), 0);
     VALUE *c_threads = RARRAY_PTR(threads);
     int c_threads_len = RARRAY_LEN(threads);
@@ -413,13 +402,11 @@ rb_disable_tracepoints(VALUE self)
         rb_tracepoint_disable(file_tracepoint);
     if (RTEST(fiber_tracepoint) && RTEST(rb_tracepoint_enabled_p(fiber_tracepoint)))
         rb_tracepoint_disable(fiber_tracepoint);
-    if (RTEST(return_tracepoint) && RTEST(rb_tracepoint_enabled_p(return_tracepoint)))
-        rb_tracepoint_disable(return_tracepoint);
-
     for (i = 0; i < c_threads_len; i++) {
         thread = c_threads[i];
         if (RTEST(rb_funcall(thread, rb_intern("alive?"), 0))) {
             disable_line_trace_for_thread(thread);
+            disable_return_trace_for_thread(thread);
         }
     }
 
@@ -427,30 +414,38 @@ rb_disable_tracepoints(VALUE self)
 }
 
 /**
- * rb_register_tracepoints
- * This is the implementation of Tracer#register_tracepoints methods. It creates
- * the tracer#file_tracepoints and tracer#return_tracepoints. It also
- * immediately enables file_tracepoint.
+ * rb_enable_traces
+ * This is the implementation of Tracer#enable_traces methods. It creates
+ * the tracer#file_tracepoints and tracer#fiber_tracepoints for the first time
+ * called. Then it also enables them immediately upon creation.
  */
 static VALUE
-rb_register_tracepoints(VALUE self)
+rb_enable_traces(VALUE self)
 {
-    int file_tracepoint_event = RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_C_CALL | RUBY_EVENT_B_CALL;
-    int return_tracepoint_event = RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_C_RETURN | RUBY_EVENT_B_RETURN;
-    int fiber_tracepoint_event = RUBY_EVENT_FIBER_SWITCH;
-    VALUE file_tracepoint;
-    VALUE fiber_tracepoint;
-
-    // Register the tracepoints if not registered already
-    file_tracepoint = register_tracepoint(self, file_tracepoint_event, "@file_tracepoint", file_tracepoint_callback);
-    fiber_tracepoint = register_tracepoint(self, fiber_tracepoint_event, "@fiber_tracepoint", fiber_tracepoint_callback);
-    register_tracepoint(self, return_tracepoint_event, "@return_tracepoint", return_tracepoint_callback);
+    VALUE file_tracepoint = register_tracepoint(self, FILE_TRACEPOINT_EVENT, "@file_tracepoint", file_tracepoint_callback);
+    VALUE fiber_tracepoint = register_tracepoint(self, RUBY_EVENT_FIBER_SWITCH, "@fiber_tracepoint", fiber_tracepoint_callback);
 
     // Immediately activate file tracepoint and fiber tracepoint
-    if (RTEST(file_tracepoint) && !RTEST(rb_tracepoint_enabled_p(file_tracepoint)))
+    if (RTEST(file_tracepoint) && !RTEST(rb_tracepoint_enabled_p(file_tracepoint))) {
         rb_tracepoint_enable(file_tracepoint);
-    if (RTEST(fiber_tracepoint) && !RTEST(rb_tracepoint_enabled_p(fiber_tracepoint)))
+    }
+    if (RTEST(fiber_tracepoint) && !RTEST(rb_tracepoint_enabled_p(fiber_tracepoint))) {
         rb_tracepoint_enable(fiber_tracepoint);
+    }
+
+    return Qnil;
+}
+
+/**
+ * rb_disable_traces_for_thread
+ * It disables line tracing and return event tracing for current thread.
+ */
+static VALUE
+rb_disable_traces_for_thread(VALUE self)
+{
+    VALUE thread = rb_thread_current();
+    disable_line_trace_for_thread(thread);
+    disable_return_trace_for_thread(thread);
 
     return Qnil;
 }
@@ -460,6 +455,7 @@ Init_tracer(VALUE mDebugger)
 {
     VALUE cTracer = rb_define_class_under(mDebugger, "Tracer", rb_cObject);
 
-    rb_define_method(cTracer, "register_tracepoints", rb_register_tracepoints, 0);
-    rb_define_method(cTracer, "disable_tracepoints", rb_disable_tracepoints, 0);
+    rb_define_method(cTracer, "enable_traces", rb_enable_traces, 0);
+    rb_define_method(cTracer, "disable_traces", rb_disable_traces, 0);
+    rb_define_method(cTracer, "disable_traces_for_thread", rb_disable_traces_for_thread, 0);
 }

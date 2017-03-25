@@ -25,8 +25,6 @@ module Google
 
         attr_reader :file_tracepoint
 
-        attr_reader :return_tracepoint
-
         attr_reader :fiber_tracepoint
 
         attr_reader :breakpoints_cache
@@ -34,9 +32,7 @@ module Google
         def initialize agent, app_root: nil
           @agent = agent
           @file_tracepoint = nil
-          @return_tracepoint = nil
           @fiber_tracepoint = nil
-          @return_tracepoint_counter = nil
           @breakpoints_cache = {}
 
           @app_root = app_root
@@ -84,7 +80,7 @@ module Google
           update_breakpoints_cache
           # t5 = Time.now
 
-          disable_tracepoints if @breakpoints_cache.empty?
+          disable_traces if @breakpoints_cache.empty?
 
           # puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
           # puts "*********** Stack Evaluation Time: #{t2-t1} **********"
@@ -103,11 +99,11 @@ module Google
 
         def start
           update_breakpoints_cache
-          register_tracepoints
+          enable_traces unless breakpoints_cache.empty?
         end
 
         def stop
-          disable_tracepoints
+          disable_traces
         end
       end
     end

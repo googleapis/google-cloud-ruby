@@ -96,7 +96,11 @@ module Google
         end
 
         def description
-          "#{module_name}-#{module_version}"
+          if module_version.nil? || module_version.empty?
+            module_name
+          else
+            "#{module_name} - #{module_version}"
+          end
         end
 
         def project_id

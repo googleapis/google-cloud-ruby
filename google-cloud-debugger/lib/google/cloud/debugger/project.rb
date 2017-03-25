@@ -54,7 +54,7 @@ module Google
         def self.default_module_name
           ENV["DEBUGGER_MODULE_NAME"] ||
             Google::Cloud::Core::Environment.gae_module_id ||
-            "ruby"
+            "ruby-app"
         end
 
         def self.default_module_version
