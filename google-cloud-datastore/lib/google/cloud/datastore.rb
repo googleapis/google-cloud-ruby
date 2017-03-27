@@ -130,6 +130,21 @@ module Google
     # tasks = datastore.run query
     # ```
     #
+    # When using Datastore in a multitenant application, a query may be run
+    # within a namespace using the `namespace` option. (See
+    # [Multitenancy](https://cloud.google.com/datastore/docs/concepts/multitenancy))
+    #
+    # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
+    # query = datastore.query("Task").
+    #   where("done", "=", false)
+    #
+    # tasks = datastore.run query, namespace: "ns~todo-project"
+    # ```
+    #
     # Records' key structures can also be queried.
     # (See {Google::Cloud::Datastore::Query#ancestor})
     #
