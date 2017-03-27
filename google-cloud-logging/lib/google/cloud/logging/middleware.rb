@@ -108,6 +108,16 @@ module Google
         # both are provided. Otherwise, construct a default monitored resource
         # based on the current environment.
         #
+        # @param [String] type Type of Google::Cloud::Logging::Resource
+        # @param [Hash<String, String>] labels Metadata lebels of
+        #   Google::Cloud::Logging::Resource
+        #
+        # @return [Google::Cloud::Logging::Resource] An Resource object with
+        #   type and labels
+        #
+        # @see https://cloud.google.com/logging/docs/api/v2/resource-list
+        #   Monitored Resources and Services
+        #
         # @example If both type and labels are provided, it returns resource:
         #   rc = Google::Cloud::Logging::Middleware.build_monitored_resource(
         #          "aws_ec2_instance",
@@ -142,15 +152,6 @@ module Google
         #   rc.type   #=> "global"
         #   rc.labels #=> {}
         #
-        # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
-        # for a full list of monitoring resources
-        #
-        # @param [String] type Type of Google::Cloud::Logging::Resource
-        # @param [Hash<String, String>] labels Metadata lebels of
-        #   Google::Cloud::Logging::Resource
-        #
-        # @return [Google::Cloud::Logging::Resource] An Resource object with
-        #   type and labels
         def self.build_monitored_resource type = nil, labels = nil
           if type && labels
             Google::Cloud::Logging::Resource.new.tap do |r|
@@ -165,6 +166,12 @@ module Google
         ##
         # @private Extract information from current environment and construct
         # the correct monitoring resource types and labels.
+        #
+        # @return [Google::Cloud::Logging::Resource] An Resource object with
+        #   correct type and labels
+        #
+        # @see https://cloud.google.com/logging/docs/api/v2/resource-list
+        #   Monitored Resources and Services
         #
         # @example If running from GAE, returns default resource:
         #   rc = Google::Cloud::Logging::Middleware.send \
@@ -193,11 +200,6 @@ module Google
         #   rc.type   #=> "global"
         #   rc.labels #=> {}
         #
-        # Reference https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
-        # for a full list of monitoring resources
-        #
-        # @return [Google::Cloud::Logging::Resource] An Resource object with
-        #   correct type and labels
         def self.default_monitored_resource
           type, labels =
             if Core::Environment.gae?

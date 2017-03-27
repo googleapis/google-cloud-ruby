@@ -24,25 +24,33 @@ module Google
       ##
       # Railtie
       #
-      # Google::Cloud::Logging::Railtie automatically add the
-      # Google::Cloud::Logging::Middleware to Rack in a Rails environment.
-      # The middleware will set env['rack.logger'] to a
-      # Google::Cloud::Logging::Logger instance to be used by the Rails
+      # Adds the {Google::Cloud::Logging::Middleware} to Rack in a Rails
+      # environment. The middleware will set `env['rack.logger']` to a
+      # {Google::Cloud::Logging::Logger} instance to be used by the Rails
       # application.
       #
       # The Middleware is only added when certain conditions are met. See
-      # {use_logging?} for detail.
+      # {use_logging?} for details.
       #
-      # When loaded, the Google::Cloud::Logging::Middleware will be inserted
-      # before the Rails::Rack::Logger Middleware, which allows it to set the
-      # env['rack.logger'] in place of Rails's default logger. The Railtie
-      # should also initialize the logger with correct GCP project_id
-      # and keyfile if they are defined in Rails environment.rb as follow:
-      #   config.google_cloud.logging.project_id = "my-gcp-project"
-      #   config.google_cloud.logging.keyfile = "/path/to/secret.json"
+      # When loaded, the {Google::Cloud::Logging::Middleware} will be inserted
+      # before the `Rails::Rack::Logger Middleware`, which allows it to set the
+      # `env['rack.logger']` in place of Rails's default logger. The Railtie
+      # will also initialize the logger with correct GCP `project_id`
+      # and `keyfile` if they are defined in the Rails `environment.rb` file as
+      # follows:
+      #
+      # ```ruby
+      # config.google_cloud.logging.project_id = "my-gcp-project"
+      # config.google_cloud.logging.keyfile = "/path/to/secret.json"
+      # ```
+      #
       # or
-      #   config.google_cloud.project_id = "my-gcp-project"
-      #   config.google_cloud.keyfile = "/path/to/secret.json"
+      #
+      # ```ruby
+      # config.google_cloud.project_id = "my-gcp-project"
+      # config.google_cloud.keyfile = "/path/to/secret.json"
+      # ```
+      #
       # If omitted, project_id will be initialized with default environment
       # variables.
       #
@@ -82,12 +90,21 @@ module Google
         ##
         # Determine whether to use Stackdriver Logging or not.
         #
-        # Returns true if valid GCP project_id is provided and underneath API is
-        # able to authenticate. Also either Rails needs to be in "production"
-        # environment or config.google_cloud.use_logging is explicitly true.
+        # Returns `true` if Stackdriver Logging is enabled for this application.
+        # That is, if all of the following are true:
+        #
+        # * A valid GCP `project_id` is available, either because the
+        #   application is hosted on Google Cloud or because it is set in the
+        #   configuration.
+        # * The API is able to authenticate, again either because the
+        #   application is hosted on Google Cloud or because an appropriate
+        #   keyfile is provided in the configuration.
+        # * Either the Rails environment is set to `production` or the
+        #   `config.google_cloud.use_logging` configuration is explicitly set to
+        #   `true`.
         #
         # @param [Rails::Railtie::Configuration] config The
-        #   Rails.application.config
+        #   `Rails.application.config`
         #
         # @return [Boolean] Whether to use Stackdriver Logging
         #
@@ -118,7 +135,7 @@ module Google
           end
 
           # Otherwise default to true if Rails is running in production or
-          # config.stackdriver.use_logging is true
+          # config.google_cloud.use_logging is true
           Rails.env.production? || gcp_config.use_logging
         end
       end
