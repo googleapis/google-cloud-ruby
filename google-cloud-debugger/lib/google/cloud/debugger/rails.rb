@@ -60,7 +60,7 @@ module Google
         def self.use_debugger? config
           debugger_config = parse_rails_config config
 
-          # Return false if config.stackdriver.use_logging is explicitly false
+          # Return false if config.stackdriver.use_debugger is explicitly false
           use_debugger = debugger_config[:use_debugger]
           return false if !use_debugger.nil? && !use_debugger
 
@@ -84,7 +84,7 @@ module Google
           end
 
           # Otherwise default to true if Rails is running in production or
-          # config.stackdriver.use_logging is true
+          # config.stackdriver.use_debugger is true
           Rails.env.production? || use_debugger
         end
 

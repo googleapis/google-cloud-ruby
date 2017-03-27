@@ -22,7 +22,7 @@ module Google
   module Cloud
     module Debugger
       ##
-      # @private Represents the gRPC Logging service, including all the API
+      # @private Represents the gRPC Debugger service, including all the API
       # methods.
       class Service
         attr_accessor :project, :credentials, :host, :timeout, :client_config

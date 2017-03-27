@@ -1,95 +1,26 @@
-# google-cloud-logging
+# google-cloud-debugger
 
-[Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
+[Stackdriver Debugger](https://cloud.google.com/debugger/) ([docs](https://cloud.google.com/debugger/docs/)) lets you inspect the state of a running application at any code location in real time, without stopping or slowing down the application, and without modifying the code to add logging statements. You can use Stackdriver Debugger with any deployment of your application, including test, development, and production. The Ruby debugger adds minimal request latency, typically less than 50ms, and only when the application state is captured. In most cases, this is not noticeable by users.
 
-- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/master/google/cloud/logging)
-- [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
-- [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
+- [google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/master/google/cloud/debugger)
+- [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
+- [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs/)
 
 ## Quick Start
 
-```sh
-$ gem install google-cloud-logging
-```
+Setting up Stackdriver Debugger involves three steps:
 
-## Authentication
+1. Add the `google-cloud-debugger` library to your app.
+2. Register your app's source code.
+3. Deploy your app and set a breakpoint.
 
-This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
-
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/guides/authentication).
-
-## Example
-
-```ruby
-require "google/cloud/logging"
-
-logging = Google::Cloud::Logging.new
-
-# List all log entries
-logging.entries.each do |e|
-  puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-end
-
-# List only entries from a single log
-entries = logging.entries filter: "log:syslog"
-
-# Write a log entry
-entry = logging.entry
-entry.payload = "Job started."
-entry.log_name = "my_app_log"
-entry.resource.type = "gae_app"
-entry.resource.labels[:module_id] = "1"
-entry.resource.labels[:version_id] = "20150925t173233"
-
-logging.write_entries entry
-```
-
-## Rails Integration
-
-This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it sets an instance of Google::Cloud::Logging::Logger as the default Rails logger. Then all consequent log entries will be submitted to the Stackdriver Logging service. 
-
-To do this, simply add this line to config/application.rb:
-```ruby
-require "google/cloud/logging/rails"
-```
-Then the library can be configured through this set of Rails parameters in config/environments/*.rb:
-```ruby
-# Sharing authentication parameters
-config.google_cloud.project_id = "gcp-project-id"
-config.google_cloud.keyfile = "/path/to/gcp/secret.json"
-# Or more specificly for Logging
-config.google_cloud.logging.project_id = "gcp-project-id"
-config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
- 
-# Explicitly enable or disable Logging
-config.google_cloud.use_logging = true
- 
-# Set Stackdriver Logging log name
-config.google_cloud.logging.log_name = "my-app-log"
- 
-# Override default monitored resource if needed. E.g. used on AWS
-config.google_cloud.logging.monitored_resource.type = "aws_ec2_instance"
-config.google_cloud.logging.monitored_resource.labels.instance_id = "ec2-instance-id"
-config.google_cloud.logging.monitored_resource.labels.aws_account = "AWS account number"
-```
-Alternatively, check out [stackdriver](../stackdriver) gem, which includes this Railtie by default.
-
-## Rack Integration
-
-Other Rack base framework can also directly leverage the built-in Middleware.
-```ruby
-require "google/cloud/logging"
-
-logging = Google::Cloud::Logging.new
-resource = Google::Cloud::Logging::Middleware.build_monitored_resource
-logger = logging.logger "my-log-name",
-                        resource
-use Google::Cloud::Logging::Middleware, logger: logger
-```
+See the
+[google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/master/google/cloud/debugger)
+for a quick tutorial.
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.0+.
+This library is supported on Ruby 2.3+.
 
 ## Versioning
 

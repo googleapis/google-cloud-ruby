@@ -26,15 +26,12 @@ The **Project ID** and **Credentials JSON** can be placed in environment variabl
 
 Here are the environment variables (in the order they are checked) for project ID:
 
-1. `LOGGING_PROJECT`
+1. `DEBUGGER_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
 Here are the environment variables (in the order they are checked) for credentials:
 
-1. `LOGGING_KEYFILE` - Path to JSON file
+1. `DEBUGGER_KEYFILE` - Path to JSON file
 2. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file
-3. `LOGGING_KEYFILE_JSON` - JSON contents
+3. `DEBUGGER_KEYFILE_JSON` - JSON contents
 4. `GOOGLE_CLOUD_KEYFILE_JSON` - JSON contents
-
-
-
