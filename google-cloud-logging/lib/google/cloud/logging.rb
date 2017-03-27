@@ -98,7 +98,7 @@ module Google
     # logging = Google::Cloud::Logging.new
     # entries = logging.entries order: "timestamp desc"
     # entries.each do |e|
-    #   puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
+    #   puts "[#{e.timestamp}] #{e.log_name}"
     # end
     # ```
     #
@@ -121,10 +121,11 @@ module Google
     #
     # Before creating the sink, ensure that you have granted
     # `cloud-logs@google.com` permission to write logs to the destination. See
-    # [Permissions for writing exported
-    # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+    # [Exporting Logs
+    # (V2)](https://cloud.google.com/logging/docs/export/configure_export_v2).
     #
     # ```ruby
+    # require "google/cloud/storage"
     # require "google/cloud/logging"
     #
     # storage = Google::Cloud::Storage.new
@@ -134,8 +135,6 @@ module Google
     # # Grant owner permission to Stackdriver Logging service
     # email = "cloud-logs@google.com"
     # bucket.acl.add_owner "group-#{email}"
-    #
-    # require "google/cloud/logging"
     #
     # logging = Google::Cloud::Logging.new
     #
