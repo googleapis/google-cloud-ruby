@@ -220,6 +220,17 @@ module Google
     #                    "avatars/heidi/400x400.png"
     # ```
     #
+    # Files can also be created from an in-memory StringIO object:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "my-todo-app"
+    # bucket.create_file StringIO.new("Hello world!"), "hello-world.txt"
+    # ```
+    #
     # ### Customer-supplied encryption keys
     #
     # By default, Google Cloud Storage manages server-side encryption keys on
@@ -289,6 +300,21 @@ module Google
     # bucket = storage.bucket "my-todo-app"
     # file = bucket.file "avatars/heidi/400x400.png"
     # file.download "/var/todo-app/avatars/heidi/400x400.png"
+    # ```
+    #
+    # Files can also be downloaded to an in-memory StringIO object:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "my-todo-app"
+    # file = bucket.file "hello-world.txt"
+    #
+    # downloaded = file.download
+    # downloaded.rewind
+    # downloaded.read #=> "Hello world!"
     # ```
     #
     # ## Using Signed URLs

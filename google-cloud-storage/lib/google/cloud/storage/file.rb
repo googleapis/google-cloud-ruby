@@ -333,7 +333,7 @@ module Google
         end
 
         ##
-        # Download the file's contents to a local file.
+        # Download the file's contents to a local file or an IO instance.
         #
         # By default, the download is verified by calculating the MD5 digest.
         #
@@ -345,8 +345,9 @@ module Google
         # @param [String, IO] path The path on the local file system to write
         #   the data to. The path provided must be writable. Can also be an IO
         #   object, or IO-ish object like StringIO. If an IO object, the object
-        #   will be written to, not the filesystem. Optional.
-        # @param [Symbol] verify The verification algoruthm used to ensure the
+        #   will be written to, not the filesystem. If omitted, a new StringIO
+        #   instance will be written to and returned. Optional.
+        # @param [Symbol] verify The verification algorithm used to ensure the
         #   downloaded file contents are correct. Default is `:md5`.
         #
         #   Acceptable values are:
@@ -360,10 +361,11 @@ module Google
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
         #
-        # @return [IO] Returns an IO ojbect with the file contents. This will
-        #   usually be a `::File` object on the local file system. If an IO
-        #   object is provided in `path` argument, then that object will be
-        #   returned.
+        # @return [IO] Returns an IO object representing the file data. This
+        #   will ordinarily be a `::File` object referencing the local file
+        #   system. However, if the argument to `path` is `nil`, a StringIO
+        #   instance will be returned. If the argument to `path` is an IO
+        #   object, then that object will be returned.
         #
         # @example
         #   require "google/cloud/storage"
@@ -404,6 +406,18 @@ module Google
         #
         #   file = bucket.file "path/to/my-file.ext"
         #   file.download "path/to/downloaded/file.ext", verify: :none
+        #
+        # @example Download to an in-memory StringIO object.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   downloaded = file.download
+        #   downloaded.rewind
+        #   downloaded.read #=> "Hello world!"
         #
         def download path = nil, verify: :md5, encryption_key: nil
           ensure_service!

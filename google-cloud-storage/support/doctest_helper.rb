@@ -61,8 +61,9 @@ module Google
         end
       end
       class File
-        def download path, verify: :md5, encryption_key: nil
+        def download path = nil, verify: :md5, encryption_key: nil
           # no-op stub, but ensures that calls match this copied signature
+          return StringIO.new("Hello world!") if path.nil?
         end
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
@@ -492,6 +493,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
       mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#download@Download to an in-memory StringIO object." do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
     end
   end
 
