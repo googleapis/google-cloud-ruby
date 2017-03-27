@@ -67,6 +67,10 @@ module Google
           agent.start
         end
         alias_method :attach, :start
+
+        def stop
+          agent.stop
+        end
       end
     end
   end

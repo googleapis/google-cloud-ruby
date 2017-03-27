@@ -21,7 +21,7 @@ module Google
       ##
       # @private Represents the OAuth 2.0 signing logic for Debugger.
       class Credentials < Google::Cloud::Credentials
-        SCOPE = ["https://clouddebugger.googleapis.com"]
+        SCOPE = ["https://www.googleapis.com/auth/cloud_debugger"]
         PATH_ENV_VARS = %w(DEBUGGER_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
         JSON_ENV_VARS = %w(DEBUGGER_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
