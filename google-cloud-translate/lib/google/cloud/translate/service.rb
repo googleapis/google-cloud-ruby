@@ -112,7 +112,9 @@ module Google
           @default_http_headers ||= {
             "User-Agent" => "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
             "google-cloud-resource-prefix" => "projects/#{@project}",
-            "Content-Type" => "application/json"
+            "Content-Type" => "application/json",
+            "x-goog-api-client" => "gl-ruby/#{RUBY_VERSION} " \
+              "gccl/#{Google::Cloud::Translate::VERSION}"
           }
         end
 
