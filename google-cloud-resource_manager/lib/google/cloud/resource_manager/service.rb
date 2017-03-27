@@ -45,7 +45,8 @@ module Google
           @service.request_options.open_timeout_sec = timeout
           @service.request_options.header ||= {}
           @service.request_options.header["x-goog-api-client"] = \
-            "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::ResourceManager::VERSION}"
+            "gl-ruby/#{RUBY_VERSION} " \
+            "gccl/#{Google::Cloud::ResourceManager::VERSION}"
           @service.authorization = @credentials.client
         end
 
