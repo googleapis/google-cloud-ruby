@@ -55,11 +55,14 @@ module Google
     #
     # ## Retrieving Buckets
     #
-    # A Bucket is the container for your data. There is no limit on the number
-    # of buckets that you can create in a project. You can use buckets to
-    # organize and control access to your data. Each bucket has a unique name,
-    # which is how they are retrieved: (See
-    # {Google::Cloud::Storage::Project#bucket})
+    # A {Google::Cloud::Storage::Bucket} instance is a container for your data.
+    # There is no limit on the number of buckets that you can create in a
+    # project. You can use buckets to organize and control access to your data.
+    # For more information, see [Working with
+    # Buckets](https://cloud.google.com/storage/docs/creating-buckets).
+    #
+    # Each bucket has a globally unique name, which is how they are retrieved:
+    # (See {Google::Cloud::Storage::Project#bucket})
     #
     # ```ruby
     # require "google/cloud/storage"
@@ -80,26 +83,37 @@ module Google
     # all_buckets = storage.buckets
     # ```
     #
-    # If you have a significant number of buckets, you may need to paginate
-    # through them: (See {Google::Cloud::Storage::Bucket::List#token})
+    # If you have a significant number of buckets, you may need to fetch them
+    # in multiple service requests.
+    #
+    # Iterating over each bucket, potentially with multiple API calls, by
+    # invoking `all` with a block:
     #
     # ```ruby
     # require "google/cloud/storage"
     #
     # storage = Google::Cloud::Storage.new
     #
-    # all_buckets = []
-    # tmp_buckets = storage.buckets
-    # while tmp_buckets.any? do
-    #   tmp_buckets.each do |bucket|
-    #     all_buckets << bucket
-    #   end
-    #   # break loop if no more buckets available
-    #   break if tmp_buckets.token.nil?
-    #   # get the next group of buckets
-    #   tmp_buckets = storage.buckets token: tmp_buckets.token
+    # buckets = storage.buckets
+    # buckets.all do |bucket|
+    #   puts bucket.name
     # end
     # ```
+    #
+    # Limiting the number of API calls made:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # buckets = storage.buckets
+    # buckets.all(request_limit: 10) do |bucket|
+    #   puts bucket.name
+    # end
+    # ```
+    #
+    # See {Google::Cloud::Storage::Bucket::List} for details.
     #
     # ## Creating a Bucket
     #
@@ -116,10 +130,12 @@ module Google
     #
     # ## Retrieving Files
     #
-    # A File is an individual pieces of data that you store in Google Cloud
-    # Storage. Files contain the data stored as well as metadata describing the
-    # data. Files belong to a bucket and cannot be shared among buckets. There
-    # is no limit on the number of objects that you can create in a bucket.
+    # A {Google::Cloud::Storage::File} instance is an individual data object
+    # that you store in Google Cloud Storage. Files contain the data stored as
+    # well as metadata describing the data. Files belong to a bucket and cannot
+    # be shared among buckets. There is no limit on the number of files that
+    # you can create in a bucket. For more information, see [Working with
+    # Objects](https://cloud.google.com/storage/docs/object-basics).
     #
     # Files are retrieved by their name, which is the path of the file in the
     # bucket: (See {Google::Cloud::Storage::Bucket#file})
@@ -155,32 +171,42 @@ module Google
     # avatar_files = bucket.files prefix: "avatars/"
     # ```
     #
-    # If you have a significant number of files, you may need to paginate
-    # through them: (See {Google::Cloud::Storage::File::List#token})
+    # If you have a significant number of files, you may need to fetch them
+    # in multiple service requests.
+    #
+    # Iterating over each file, potentially with multiple API calls, by
+    # invoking `all` with a block:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    # bucket = storage.bucket "my-todo-app"
+    #
+    # files = storage.files
+    # files.all do |file|
+    #   puts file.name
+    # end
+    # ```
+    #
+    # Limiting the number of API calls made:
     #
     # ```ruby
     # require "google/cloud/storage"
     #
     # storage = Google::Cloud::Storage.new
     #
-    # bucket = storage.bucket "my-todo-app"
-    #
-    # all_files = []
-    # tmp_files = bucket.files
-    # while tmp_files.any? do
-    #   tmp_files.each do |file|
-    #     all_files << file
-    #   end
-    #   # break loop if no more files available
-    #   break if tmp_files.token.nil?
-    #   # get the next group of files
-    #   tmp_files = bucket.files token: tmp_files.token
+    # files = storage.files
+    # files.all(request_limit: 10) do |file|
+    #   puts bucket.name
     # end
     # ```
     #
+    # See {Google::Cloud::Storage::File::List} for details.
+    #
     # ## Creating a File
     #
-    # A new File can be uploaded by specifying the location of a file on the
+    # A new file can be uploaded by specifying the location of a file on the
     # local file system, and the name/path that the file should be stored in the
     # bucket. (See {Google::Cloud::Storage::Bucket#create_file})
     #
@@ -192,6 +218,17 @@ module Google
     # bucket = storage.bucket "my-todo-app"
     # bucket.create_file "/var/todo-app/avatars/heidi/400x400.png",
     #                    "avatars/heidi/400x400.png"
+    # ```
+    #
+    # Files can also be created from an in-memory StringIO object:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "my-todo-app"
+    # bucket.create_file StringIO.new("Hello world!"), "hello-world.txt"
     # ```
     #
     # ### Customer-supplied encryption keys
@@ -265,9 +302,24 @@ module Google
     # file.download "/var/todo-app/avatars/heidi/400x400.png"
     # ```
     #
+    # Files can also be downloaded to an in-memory StringIO object:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "my-todo-app"
+    # file = bucket.file "hello-world.txt"
+    #
+    # downloaded = file.download
+    # downloaded.rewind
+    # downloaded.read #=> "Hello world!"
+    # ```
+    #
     # ## Using Signed URLs
     #
-    # Access without authentication can be granted to a File for a specified
+    # Access without authentication can be granted to a file for a specified
     # period of time. This URL uses a cryptographic signature of your
     # credentials to access the file. (See
     # {Google::Cloud::Storage::File#signed_url})

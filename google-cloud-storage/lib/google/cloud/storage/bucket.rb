@@ -449,8 +449,9 @@ module Google
         alias_method :find_file, :file
 
         ##
-        # Creates a new {File} object by providing a path to a local file to
-        # upload and the path to store it with in the bucket.
+        # Creates a new {File} object by providing a path to a local file (or
+        # any IO or IO-ish object) to upload, along with the path at which to
+        # store it in the bucket.
         #
         # #### Customer-supplied encryption keys
         #
@@ -466,8 +467,9 @@ module Google
         # providing the encryption key.
         #
         # @param [String, IO] file Path of the file on the filesystem to
-        #   upload. Can be an IO object, or IO-ish object like StringIO. If the
-        #   IO object does not have path, the path argument must be provided.
+        #   upload. Can be an IO object, or IO-ish object like StringIO. (If the
+        #   IO object does not have path, a `path` argument must be also be
+        #   provided.)
         # @param [String] path Path to store the file in Google Cloud Storage.
         # @param [String] acl A predefined set of access controls to apply to
         #   this file.
