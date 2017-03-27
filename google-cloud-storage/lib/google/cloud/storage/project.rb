@@ -299,6 +299,110 @@ module Google
           Bucket.from_gapi gapi, service
         end
 
+        ##
+        # Access without authentication can be granted to a File for a specified
+        # period of time. This URL uses a cryptographic signature of your
+        # credentials to access the file identified by `path`. A URL can be
+        # created for paths that do not yet exist. For instance, a URL can be
+        # created to `PUT` file contents to.
+        #
+        # Generating a URL requires service account credentials, either by
+        # connecting with a service account when calling
+        # {Google::Cloud.storage}, or by passing in the service account `issuer`
+        # and `signing_key` values. Although the private key can be passed as a
+        # string for convenience, creating and storing an instance of
+        # `OpenSSL::PKey::RSA` is more efficient when making multiple calls to
+        # `signed_url`.
+        #
+        # A {SignedUrlUnavailable} is raised if the service account credentials
+        # are missing. Service account credentials are acquired by following the
+        # steps in [Service Account Authentication](
+        # https://cloud.google.com/storage/docs/authentication#service_accounts).
+        #
+        # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
+        #   Access Control Signed URLs guide
+        #
+        # @param [String] bucket Name of the bucket.
+        # @param [String] path Path to the file in Google Cloud Storage.
+        # @param [String] method The HTTP verb to be used with the signed URL.
+        #   Signed URLs can be used
+        #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
+        # @param [Integer] expires The number of seconds until the URL expires.
+        #   Default is 300/5 minutes.
+        # @param [String] content_type When provided, the client (browser) must
+        #   send this value in the HTTP header. e.g. `text/plain`
+        # @param [String] content_md5 The MD5 digest value in base64. If you
+        #   provide this in the string, the client (usually a browser) must
+        #   provide this HTTP header with this same value in its request.
+        # @param [Hash] headers Google extension headers (custom HTTP headers
+        #   that begin with `x-goog-`) that must be included in requests that
+        #   use the signed URL.
+        # @param [String] issuer Service Account's Client Email.
+        # @param [String] client_email Service Account's Client Email.
+        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
+        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
+        #   Private Key.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket_name = "my-todo-app"
+        #   file_path = "avatars/heidi/400x400.png"
+        #   shared_url = storage.signed_url bucket_name, file_path
+        #
+        # @example Any of the option parameters may be specified:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket_name = "my-todo-app"
+        #   file_path = "avatars/heidi/400x400.png"
+        #   shared_url = storage.signed_url bucket_name, file_path,
+        #                                   method: "PUT",
+        #                                   content_type: "image/png",
+        #                                   expires: 300 # 5 minutes from now
+        #
+        # @example Using the issuer and signing_key options:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud.storage
+        #
+        #   bucket_name = "my-todo-app"
+        #   file_path = "avatars/heidi/400x400.png"
+        #   issuer_email = "service-account@gcloud.com"
+        #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
+        #   shared_url = storage.signed_url bucket_name, file_path,
+        #                                   issuer: issuer_email,
+        #                                   signing_key: key
+        #
+        # @example Using the headers option:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud.storage
+        #
+        #   bucket_name = "my-todo-app"
+        #   file_path = "avatars/heidi/400x400.png"
+        #   shared_url = storage.signed_url bucket_name, file_path,
+        #                                   headers: {
+        #                                     "x-goog-acl" => "private",
+        #                                     "x-goog-meta-foo" => "bar,baz"
+        #                                   }
+        #
+        def signed_url bucket, path, method: nil, expires: nil,
+                       content_type: nil, content_md5: nil, headers: nil,
+                       issuer: nil, client_email: nil, signing_key: nil,
+                       private_key: nil
+          options = { method: method, expires: expires, headers: headers,
+                      content_type: content_type, content_md5: content_md5,
+                      issuer: issuer, client_email: client_email,
+                      signing_key: signing_key, private_key: private_key }
+          signer = File::Signer.new bucket, path, service
+          signer.signed_url options
+        end
+
         protected
 
         def acl_rule option_name

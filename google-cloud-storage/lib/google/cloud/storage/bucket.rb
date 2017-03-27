@@ -616,7 +616,7 @@ module Google
         # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
         #   Access Control Signed URLs guide
         #
-        # @param [String] path Path to of the file in Google Cloud Storage.
+        # @param [String] path Path to the file in Google Cloud Storage.
         # @param [String] method The HTTP verb to be used with the signed URL.
         #   Signed URLs can be used
         #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
@@ -653,6 +653,7 @@ module Google
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
         #                                  method: "PUT",
+        #                                  content_type: "image/png",
         #                                  expires: 300 # 5 minutes from now
         #
         # @example Using the issuer and signing_key options:
@@ -709,7 +710,7 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/xml-api/post-object
         #
-        # @param [String] path Path to of the file in Google Cloud Storage.
+        # @param [String] path Path to the file in Google Cloud Storage.
         # @param [Hash] policy The security policy that describes what
         #   can and cannot be uploaded in the form. When provided,
         #   the PostObject fields will include a Signature based on the JSON

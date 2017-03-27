@@ -26,13 +26,27 @@ class File
   end
 end
 
+class OpenSSL::PKey::RSA
+  def self.new *args
+    "rsa key"
+  end
+end
+
 module Google
   module Cloud
     module Storage
+      class Project
+        def signed_url bucket, path, method: nil, expires: nil,
+                       content_type: nil, content_md5: nil, headers: nil,
+                       issuer: nil, client_email: nil, signing_key: nil,
+                       private_key: nil
+          # no-op stub, but ensures that calls match this copied signature
+        end
+      end
       class Bucket
         def signed_url path, method: nil, expires: nil, content_type: nil,
-                       content_md5: nil, issuer: nil, client_email: nil,
-                       signing_key: nil, private_key: nil
+                       content_md5: nil, headers: nil, issuer: nil,
+                       client_email: nil, signing_key: nil, private_key: nil
           # no-op stub, but ensures that calls match this copied signature
         end
 
@@ -46,20 +60,13 @@ module Google
               policy: "ABC...XYZ=" }
         end
       end
-    end
-  end
-end
-
-module Google
-  module Cloud
-    module Storage
       class File
         def download path, verify: :md5, encryption_key: nil
           # no-op stub, but ensures that calls match this copied signature
         end
         def signed_url method: nil, expires: nil, content_type: nil,
-                       content_md5: nil, issuer: nil, client_email: nil,
-                       signing_key: nil, private_key: nil
+                       content_md5: nil, headers: nil, issuer: nil,
+                       client_email: nil, signing_key: nil, private_key: nil
           # no-op stub, but ensures that calls match this copied signature
         end
       end
@@ -198,13 +205,11 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # Due to failing line in example: key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
-  doctest.skip "Google::Cloud::Storage::Bucket#signed_url"
-  # doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
-  #   mock_storage do |mock|
-  #     mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-  #   end
-  # end
+  doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+    end
+  end
 
   doctest.before "Google::Cloud::Storage::Bucket#acl" do
     mock_storage do |mock|
@@ -520,15 +525,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-
-  # Due to failing line in example: key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
-  doctest.skip "Google::Cloud::Storage::File#signed_url"
-  # doctest.before "Google::Cloud::Storage::File#signed_url" do
-  #   mock_storage do |mock|
-  #     mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-  #     mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
-  #   end
-  # end
+  doctest.before "Google::Cloud::Storage::File#signed_url" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
+    end
+  end
 
   # File::Acl
 
