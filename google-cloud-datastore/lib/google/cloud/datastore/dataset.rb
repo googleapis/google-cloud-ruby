@@ -429,7 +429,7 @@ module Google
         #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
-        #   tasks = datastore.run query, namespace: "ns~todo-project"
+        #   tasks = datastore.run query, namespace: "example-ns"
         #
         # @example Run the query with a GQL string.
         #   require "google/cloud/datastore"
@@ -447,7 +447,7 @@ module Google
         #
         #   gql_query = datastore.gql "SELECT * FROM Task WHERE done = @done",
         #                             done: false
-        #   tasks = datastore.run gql_query, namespace: "ns~todo-project"
+        #   tasks = datastore.run gql_query, namespace: "example-ns"
         #
         def run query, namespace: nil, consistency: nil
           ensure_service!
@@ -675,10 +675,10 @@ module Google
         #
         #   key = datastore.key ["TaskList", "default"], ["Task", "sampleTask"],
         #                       project: "my-todo-project",
-        #                       namespace: "ns~todo-project"
+        #                       namespace: "example-ns"
         #   key.path #=> [["TaskList", "default"], ["Task", "sampleTask"]]
         #   key.project #=> "my-todo-project"
-        #   key.namespace #=> "ns~todo-project"
+        #   key.namespace #=> "example-ns"
         #
         def key *path, project: nil, namespace: nil
           path = path.flatten.each_slice(2).to_a # group in pairs

@@ -282,6 +282,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before("Google::Cloud::Datastore::Query@Run the query within a namespace with the `namespace` option:") do
+    mock_datastore do |mock|
+      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, nil, Hash]
+    end
+  end
+
   doctest.before("Google::Cloud::Datastore::Transaction") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
@@ -425,7 +431,7 @@ end
 
 def key_grpc kind = "Task", id_or_name = "sampleTask"
   key = Google::Cloud::Datastore::Key.new(kind, id_or_name)
-  key.namespace = "ns~todo-project"
+  key.namespace = "example-ns"
   key.project = "my-todo-project"
   key
 end

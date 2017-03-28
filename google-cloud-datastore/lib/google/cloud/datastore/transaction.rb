@@ -258,7 +258,7 @@ module Google
         #   query = Google::Cloud::Datastore::Query.new.kind("Task").
         #     where("done", "=", false)
         #   datastore.transaction do |tx|
-        #     tasks = tx.run query, namespace: "ns~todo-project"
+        #     tasks = tx.run query, namespace: "example-ns"
         #   end
         #
         def run query, namespace: nil

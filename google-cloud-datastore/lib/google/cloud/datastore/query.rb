@@ -42,6 +42,15 @@ module Google
       #
       #   tasks = datastore.run query
       #
+      # @example Run the query within a namespace with the `namespace` option:
+      #   require "google/cloud/datastore"
+      #
+      #   datastore = Google::Cloud::Datastore.new
+      #
+      #   query = datastore.query("Task").
+      #     where("done", "=", false)
+      #   tasks = datastore.run query, namespace: "example-ns"
+      #
       class Query
         ##
         # Returns a new query object.
