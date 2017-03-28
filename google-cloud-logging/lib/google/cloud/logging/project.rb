@@ -128,7 +128,7 @@ module Google
         #   require "google/cloud/logging"
         #
         #   logging = Google::Cloud::Logging.new
-        #   entries = logging.entries filter: "log:syslog"
+        #   entries = logging.entries filter: "logName:syslog"
         #   entries.each do |e|
         #     puts "[#{e.timestamp}] #{e.payload.inspect}"
         #   end
