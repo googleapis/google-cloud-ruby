@@ -23,21 +23,55 @@ require "google/cloud/debugger/service"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Project
+      #
+      # Projects are top-level containers in Google Cloud Platform. They store
+      # information about billing and authorized users, and they control access
+      # to Stackdriver Logging resources. Each project has a friendly name and a
+      # unique ID. Projects can be created only in the [Google Developers
+      # Console](https://console.developers.google.com). See
+      # {Google::Cloud#debugger}.
+      #
+      # @example
+      #   require "google/cloud/debugger"
+      #
+      #   debugger = Google::Cloud::Debugger.new
+      #   debugger.start
+      #
+      # See Google::Cloud#debugger
       class Project
         ##
         # @private The gRPC Service object.
         attr_accessor :service
 
+        ##
+        # The Stackdriver Debugger Agent object.
         attr_reader :agent
 
         ##
-        # @private Creates a new Connection instance.
+        # @private Creates a new Project instance.
         def initialize service, module_name:, module_version:
           @service = service
           @agent = Agent.new service, module_name: module_name,
                                       module_version: module_version
         end
 
+        ##
+        # The ID of the current project.
+        #
+        # @return [String] the Google Cloud project ID
+        #
+        # @example
+        #   require "google/cloud/debugger"
+        #
+        #   debugger = Google::Cloud::Debugger.new(
+        #     project: "my-project",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   debugger.project #=> "my-project"
+        #
         def project
           service.project
         end
@@ -51,23 +85,48 @@ module Google
             Google::Cloud::Core::Environment.project_id
         end
 
+        ##
+        # @private Default module name identifier.
         def self.default_module_name
           ENV["DEBUGGER_MODULE_NAME"] ||
             Google::Cloud::Core::Environment.gae_module_id ||
             "ruby-app"
         end
 
+        ##
+        # @private Default module version identifier.
         def self.default_module_version
           ENV["DEBUGGER_MODULE_VERSION"] ||
             Google::Cloud::Core::Environment.gae_module_version ||
             ""
         end
 
+        ##
+        # Start the Stackdriver Debugger Agent.
+        #
+        # @example
+        #   require "google/cloud/debugger"
+        #
+        #   debugger = Google::Cloud::Debugger.new
+        #   debugger.start
+        #
+        # See {Google::Cloud::Debugger::Agent#start} for more details.
         def start
           agent.start
         end
         alias_method :attach, :start
 
+        ##
+        # Stop the Stackdriver Debugger Agent.
+        #
+        # @example
+        #   require "google/cloud/debugger"
+        #
+        #   debugger = Google::Cloud::Debugger.new
+        #   debugger.start
+        #   debugger.stop
+        #
+        # See {Google::Cloud::Debugger::Agent#stop} for more details.
         def stop
           agent.stop
         end

@@ -18,17 +18,55 @@ require "binding_of_caller"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Tracer
+      #
+      # When active breakpoints are set for the debugger, the tracer monitors
+      # the running Ruby application and triggers evaluation when the code is
+      # executed at the breakpoint locations.
+      #
+      # The tracer tracks the running application using several Ruby TracePoints
+      # and C level Ruby debugging API.
+      #
       class Tracer
+        ##
+        # The debugger agent this tracer belongs to
+        # @return [Google::Cloud::Debugger::Agent]
         attr_reader :agent
 
+        ##
+        # Ruby application root directory, in absolute path form. The
+        # Stackdriver Debugger Service only knows the relative application file
+        # path. So the tracer needs to combine relative file path with
+        # application root directory to get full file path for tracing purpose
+        # @return [String]
         attr_accessor :app_root
 
+        ##
+        # @private File tracing point that enables line tracing when program
+        # counter enters a file that contains breakpoints
         attr_reader :file_tracepoint
 
+        ##
+        # @private Fiber tracing point that enables line tracing when program
+        # counter enters a file that contains breakpoints through fiber
+        # switching
         attr_reader :fiber_tracepoint
 
+        ##
+        # @private A nested hash structure represent all the active breakpoints.
+        # The structure is optimized for fast access. For example:
+        # {
+        #   "path/to/file.rb" => {                     # The absolute file path
+        #     123 => [                                 # The line number in file
+        #       <Google::Cloud::Debugger::Breakpoint>  # List of breakpoints
+        #     ]
+        #   }
+        # }
         attr_reader :breakpoints_cache
 
+        ##
+        # @private Construct a new instance of Tracer
         def initialize agent, app_root: nil
           @agent = agent
           @file_tracepoint = nil
@@ -41,8 +79,13 @@ module Google
           fail "Unable to determine application root path" unless @app_root
         end
 
+        ##
+        # Update tracer's private breakpoints cache with the list of active
+        # breakpoints from BreakpointManager.
+        #
+        # This methood is atomic for thread safety purpose.
         def update_breakpoints_cache
-          active_breakpoints = agent.breakpoint_manager.active_breakpoints
+          active_breakpoints = agent.breakpoint_manager.active_breakpoints.dup
           breakpoints_hash = {}
 
           active_breakpoints.each do |active_breakpoint|
@@ -59,36 +102,33 @@ module Google
           @breakpoints_cache = breakpoints_hash
         end
 
+        ##
+        # Evaluates a hit breakpoint, and signal BreakpointManager and
+        # Transmitter if this breakpoint is evaluated successfully.
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
-          # t1 = Time.now
 
           breakpoint.eval_call_stack call_stack_bindings
-
-          # t2 = Time.now
-          # disable_tracepoints if breakpoint_manager.all_complete?
 
           # Take this completed breakpoint off manager's active breakpoints
           # list, submit the breakpoint snapshot, and update Tracer's
           # breakpoints_cache.
           return unless breakpoint.complete?
-          # puts "**********Breakpoint(#{breakpoint.id}) evaluated!!\n\n"
+
+          # Signal breakpoint_manager that this breakpoint is evaluated
           agent.breakpoint_manager.mark_off breakpoint
-          # t3 = Time.now
+          # Signal transmitter to submit this breakpoint
           agent.transmitter.submit breakpoint
-          # t4 = Time.now
+
           update_breakpoints_cache
-          # t5 = Time.now
 
+          # Disable all trace points and tracing if all breakpoints are complete
           disable_traces if @breakpoints_cache.empty?
-
-          # puts "\n*********** Total Evaluation Time: #{t5-t1} **********"
-          # puts "*********** Stack Evaluation Time: #{t2-t1} **********"
-          # puts "*********** Mark off Time: #{t3-t2} **********"
-          # puts "*********** Submittion Time: #{t4-t3} **********"
-          # puts "*********** Update Cache Time: #{t5-t4} **********"
         end
 
+        ##
+        # @private Covert breakpoint's relative file path to absolute file
+        # path by combining it with application root directory path.
         def full_breakpoint_path breakpoint_path
           if app_root.nil? || app_root.empty?
             breakpoint_path
@@ -97,11 +137,16 @@ module Google
           end
         end
 
+        ##
+        # Get the sync the breakpoints cache with BreakpointManager. Start
+        # tracing and monitoring if there are any breakpoints.
         def start
           update_breakpoints_cache
           enable_traces unless breakpoints_cache.empty?
         end
 
+        ##
+        # Stops all tracing.
         def stop
           disable_traces
         end

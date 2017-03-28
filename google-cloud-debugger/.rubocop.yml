@@ -6,7 +6,7 @@ AllCops:
     - "lib/google/cloud/debugger/v2/**/*"
     - "Rakefile"
     - "test/**/*"
-    - "tmp/**.*"
+    - "tmp/**/*"
 
 Documentation:
   Enabled: false

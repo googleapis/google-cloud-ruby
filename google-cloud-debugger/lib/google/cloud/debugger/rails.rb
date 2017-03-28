@@ -17,6 +17,39 @@ require "google/cloud/debugger"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Railtie
+      #
+      # Google::Cloud::Debugger::Railtie automatically adds the
+      # Google::Cloud::Debugger::Middleware to Rack in a Rails environment.
+      #
+      # The Middleware is only added when certain conditions are met. See
+      # {#use_debugger?} for detail.
+      #
+      # When loaded, the Google::Cloud::Debugger::Middleware will be inserted
+      # after the Rack::ETag Middleware, which is top of the Rack stack, closest
+      # to the application code.
+      #
+      # The Railtie should also initialize a debugger to be used by the
+      # middleware. The debugger can be configured using the following Rails
+      # configuration:
+      # ```ruby
+      # # Explicitly enable or disable Stackdriver Debugger Agent
+      # config.google_cloud.use_debugger = true
+      # # Shared Google Cloud Platform project identifier
+      # config.google_cloud.project_id = "gcloud-project"
+      # # Google Cloud Platform project identifier for Stackdriver Debugger only
+      # config.google_cloud.debugger.project_id = "debugger-project"
+      # # Share Google Cloud authentication json file
+      # config.google_cloud.keyfile = "/path/to/keyfile.json"
+      # # Google Cloud authentication json file for Stackdriver Debugger only
+      # config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"
+      # # Stackdriver Debugger Agent module name identifier
+      # config.google_cloud.debugger.module_name = "my-ruby-app"
+      # # Stackdriver Debugger Agent module version identifier
+      # config.google_cloud.debugger.module_version = "v1"
+      # ```
+      #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
           config.respond_to? :google_cloud
@@ -88,6 +121,8 @@ module Google
           Rails.env.production? || use_debugger
         end
 
+        ##
+        # @private Helper method to parse rails config into a flattened hash
         def self.parse_rails_config config
           gcp_config = config.google_cloud
           debugger_config = gcp_config[:debugger]

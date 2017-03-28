@@ -21,12 +21,48 @@ require "json"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Debuggee
+      #
+      # Represent a debuggee application. Contains information that identifies
+      # debuggee applications from each other. Maps to gRPC struct
+      # {Google::Devtools::Clouddebugger::V2:Debuggee}.
+      #
+      # It also automatically loads source context information generate from
+      # Cloud SDK. See [Stackdriver Debugger
+      # doc](https://cloud.google.com/debugger/docs/source-context#app_engine_standard_python)
+      # for more information on how to generate this source context information
+      # when used on Google Container Engine and Google Compute engine. This
+      # step is taken care of if debuggee application is hosted on Google App
+      # Engine Flexibile.
+      #
+      # To ensure the multiple instances of the application are indeed same
+      # application. The debuggee also compute a "uniquifier" generated from
+      # source context or application source code.
+      #
       class Debuggee
+        ##
+        # @private The gRPC Service object.
         attr_reader :service
+
+        ##
+        # Name for the debuggee application
+        # @return [String]
         attr_reader :module_name
+
+        ##
+        # Version identifier for the debuggee application
+        # @return [String]
         attr_reader :module_version
+
+        ##
+        # Registered Debuggee ID. Set by Stackdriver Debugger service when
+        # a debuggee application is sucessfully registered.
+        # @return [String]
         attr_reader :id
 
+        ##
+        # @private Construct a new instance of Debuggee
         def initialize service, module_name:, module_version:
           @service = service
           @module_name = module_name
@@ -35,6 +71,10 @@ module Google
           @id = nil
         end
 
+        ##
+        # Register the current application as a debuggee with Stackdriver
+        # Debuggee service.
+        # @return [Bool] True if registered sucessfully; otherwise false.
         def register
           begin
             response = service.register_debuggee to_grpc
@@ -45,16 +85,35 @@ module Google
           registered?
         end
 
+        ##
+        # Check whether this debuggee is currently registered or not
+        # @return [Bool] True if debuggee is registered; otherwise false.
         def registered?
           !id.nil?
         end
 
+        ##
+        # Revoke the registration of this debuggee
         def revoke_registration
           @id = nil
         end
 
+        ##
+        # Convert this debuggee into a gRPC
+        # Google::Devtools::Clouddebugger::V2::Debuggee struct.
+        def to_grpc
+          debuggee_args = build_request_arg
+
+          grpc = Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
+            debuggee_args.to_json
+
+          grpc
+        end
+
         private
 
+        ##
+        # @private Build the parameters for this debuggee
         def build_request_arg
           debuggee_args = {
             project: project_id,
@@ -62,6 +121,8 @@ module Google
             labels: labels,
             agent_version: agent_version
           }
+
+          debuggee_args[:id] = id if id
 
           source_context = read_app_json_file "source-context.json"
           debuggee_args[:source_contexts] = [source_context] if source_context
@@ -78,15 +139,8 @@ module Google
           debuggee_args
         end
 
-        def to_grpc
-          debuggee_args = build_request_arg
-
-          grpc = Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
-            debuggee_args.to_json
-
-          grpc
-        end
-
+        ##
+        # @private Build labels hash for this debuggee
         def labels
           {
             "projectid" => String(project_id),
@@ -95,6 +149,13 @@ module Google
           }
         end
 
+        ##
+        # @private Build description string for this debuggee. In
+        # "<module name> - <module version>" format. Or just the module
+        # version if module name is missing.
+        #
+        # @return [String] A compact debuggee description.
+        #
         def description
           if module_version.nil? || module_version.empty?
             module_name
@@ -103,14 +164,21 @@ module Google
           end
         end
 
+        ##
+        # @private Get debuggee project id
         def project_id
           service.project
         end
 
+        ##
+        # @private Build debuggee agent version identifier
         def agent_version
           "google.com/ruby#{RUBY_VERSION}-#{Google::Cloud::Debugger::VERSION}"
         end
 
+        ##
+        # @private Generate a debuggee uniquifier from source context
+        # information or application source code
         def compute_uniquifier debuggee_args
           return @computed_uniquifier if @computed_uniquifier
 
@@ -125,6 +193,8 @@ module Google
           @computed_uniquifier = sha.hexdigest
         end
 
+        ##
+        # @private Helper method to parse json file
         def read_app_json_file file_path
           JSON.parse File.read(file_path), symbolize_names: true
         rescue

@@ -77,9 +77,9 @@ module Google
     # you can view your applications breakpoint snapshots in real time by
     # opening the Google Cloud Console in your web browser and navigating to the
     # "Debug" section. It also integrates with Google App Engine Flexible to
-    # make application registration more seemless, and helps Stackdriver Debugger
-    # Console to select correct version of source code from Cloud Source
-    # Repository.
+    # make application registration more seemless, and helps Stackdriver
+    # Debugger Console to select correct version of source code from Cloud
+    # Source Repository.
     #
     # Note that when no breakpoints are created, the debugger agent consumes
     # very little resource and has no interference with the running application.
@@ -113,9 +113,9 @@ module Google
     # # Google Cloud Platform project identifier for Stackdriver Debugger only
     # config.google_cloud.debugger.project_id = "debugger-project"
     # # Share Google Cloud authentication json file
-    # config.google_cloud.keyfile = "/path/to/file.json"
+    # config.google_cloud.keyfile = "/path/to/keyfile.json"
     # # Google Cloud authentication json file for Stackdriver Debugger only
-    # config.google_cloud.debugger.keyfile = "/path/to/debugger/file.json"
+    # config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"
     # # Stackdriver Debugger Agent module name identifier
     # config.google_cloud.debugger.module_name = "my-ruby-app"
     # # Stackdriver Debugger Agent module version identifier
@@ -146,8 +146,8 @@ module Google
     # `config.ru` Rack configuration file:
     #
     # ```ruby
-    # require "google/cloud/trace"
-    # use Google::Cloud::Trace::Middleware
+    # require "google/cloud/debugger"
+    # use Google::Cloud::Debugger::Middleware
     # ```
     #
     # Some web frameworks have an alternate mechanism for modifying the
@@ -166,301 +166,194 @@ module Google
     #
     # ## Stackdriver Debugger API
     #
+    # This library also includes an easy to use Ruby client for the
+    # Stackdriver Debugger API. This API provides calls to register debuggee
+    # application, as well as creating or modifying breakpoints.
     #
+    # For further information on the Debugger API, see
+    # {Google::Cloud::Debugger::Project}
     #
-    # The goal of google-cloud is to provide an API and application
-    # instrumentation that are comfortable to Rubyists. Authentication is
-    # handled by {Google::Cloud#debugger}. You can provide the project and
-    # credential information to connect to the Stackdriver Debugger service, or
-    # if you are running on Google Cloud Platform this configuration is taken
-    # care of for you. You can read more about the options for connecting in t
-    # he [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # ### Registering debuggee application
     #
-    # If you just want to write your application's logs to the Stackdriver
-    # Logging service, you may find it easiest to use the [Stackdriver Debugger
-    # Instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/instrumentation)
-    # provided by this library. Otherwise, read on to learn more about the
+    # ```ruby
+    # require "google/cloud/debugger/v2"
+    #
+    # Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
+    # Debuggee = Google::Devtools::Clouddebugger::V2::Debuggee
+    #
+    # controller2_client = Controller2Client.new
+    # debuggee = Debuggee.new
+    # response = controller2_client.register_debuggee(debuggee)
+    # debuggee_id = response.debuggee.id
+    # ```
+    # See [Stackdriver Debuggee Debuggee
+    # doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Debuggee)
+    # on fields necessary for registerying a debuggee.
+    #
+    # Upon successful registration, the response debuggee object will contain
+    # a debuggee_id that's later needed to interact with the other Stackdriver
     # Debugger API.
     #
-    # ## Listing log entries
+    # See {Google::Cloud::Debugger::V2::Controller2Client} for details.
     #
-    # Stackdriver Logging gathers log entries from many services, including
-    # Google App Engine and Google Compute Engine. (See the [List of Log
-    # Types](https://cloud.google.com/logging/docs/view/logs_index).) In
-    # addition, you can write your own log entries to the service.
-    #
-    # {Google::Cloud::Logging::Project#entries} returns the
-    # {Google::Cloud::Logging::Entry} records belonging to your project:
+    # ### List Active Breakpoints
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # entries = logging.entries
-    # entries.each do |e|
-    #   puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-    # end
+    # Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
+    # controller2_client = Controller2Client.new
+    #
+    # debuggee_id = ''
+    # response = controller2_client.list_active_breakpoints(debuggee_id)
+    # breakpoints = response.breakpoints
     # ```
     #
-    # You can narrow the results to a single log using an [advanced logs
-    # filter](https://cloud.google.com/logging/docs/view/advanced_filters). A
-    # log is a named collection of entries. Logs can be produced by Google Cloud
-    # Platform services, by third-party services, or by your applications. For
-    # example, the log `compute.googleapis.com/activity_log` is produced by
-    # Google Compute Engine. Logs are simply referenced by name in google-cloud.
-    # There is no `Log` type in google-cloud or `Log` resource in the
-    # Stackdriver Logging API.
+    # See {Google::Cloud::Debugger::V2::Controller2Client} for details.
+    #
+    # ### Update Active Breakpoint
+    #
+    # Users can send custom snapshots for active breakpoints using this API.
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # entries = logging.entries filter: "log:syslog"
-    # entries.each do |e|
-    #   puts "[#{e.timestamp}] #{e.payload.inspect}"
-    # end
+    # Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
+    # Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
+    #
+    # controller2_client = Controller2Client.new
+    # debuggee_id = ''
+    # breakpoint = Breakpoint.new
+    # response =
+    #   controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
     # ```
     #
-    # You can also order the log entries by `timestamp`.
+    # See [Stackdriver Debugger Breakpoint
+    # doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
+    # for all available fields for breakpoint.
+    #
+    # See {Google::Cloud::Debugger::V2::Controller2Client} for details.
+    #
+    # ### Set Breakpoint
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # entries = logging.entries order: "timestamp desc"
-    # entries.each do |e|
-    #   puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-    # end
+    # Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
+    #
+    # debugger2_client = Debugger2Client.new
+    # debuggee_id = ''
+    # breakpoint = Breakpoint.new
+    # client_version = ''
+    # response = debugger2_client.set_breakpoint(
+    #              debuggee_id, breakpoint, client_version)
     # ```
     #
-    # ## Exporting log entries
+    # See [Stackdriver Debugger Breakpoint
+    # doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
+    # for fields needed to specify breakpoint location.
     #
-    # Stackdriver Logging lets you export log entries to destinations including
-    # Google Cloud Storage buckets (for long term log storage), Google BigQuery
-    # datasets (for log analysis), and Google Pub/Sub (for streaming to other
-    # applications).
+    # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
-    # ### Creating sinks
-    #
-    # A {Google::Cloud::Logging::Sink} is an object that lets you to specify a
-    # set of log entries to export.
-    #
-    # In addition to the name of the sink and the export destination,
-    # {Google::Cloud::Logging::Project#create_sink} accepts an [advanced logs
-    # filter](https://cloud.google.com/logging/docs/view/advanced_filters) to
-    # narrow the collection.
-    #
-    # Before creating the sink, ensure that you have granted
-    # `cloud-logs@google.com` permission to write logs to the destination. See
-    # [Permissions for writing exported
-    # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+    # ### Get Breakpoint
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # storage = Google::Cloud::Storage.new
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
     #
-    # bucket = storage.create_bucket "my-logs-bucket"
-    #
-    # # Grant owner permission to Stackdriver Logging service
-    # email = "cloud-logs@google.com"
-    # bucket.acl.add_owner "group-#{email}"
-    #
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    #
-    # sink = logging.create_sink "my-sink",
-    #                            "storage.googleapis.com/#{bucket.id}"
+    # debugger2_client = Debugger2Client.new
+    # debuggee_id = ''
+    # breakpoint_id = ''
+    # client_version = ''
+    # response = debugger2_client.get_breakpoint(
+    #              debuggee_id, breakpoint_id, client_version)
     # ```
     #
-    # When you create a sink, only new log entries are exported. Stackdriver
-    # Logging does not send previously-ingested log entries to the sink's
-    # destination.
+    # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
-    # ### Listing sinks
-    #
-    # You can also list the sinks belonging to your project with
-    # {Google::Cloud::Logging::Project#sinks}.
+    # ### Delete Breakpoint
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # sinks = logging.sinks
-    # sinks.each do |s|
-    #   puts "#{s.name}: #{s.filter} -> #{s.destination}"
-    # end
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
+    #
+    # debugger2_client = Debugger2Client.new
+    # debuggee_id = ''
+    # breakpoint_id = ''
+    # client_version = ''
+    # debugger2_client.delete_breakpoint(
+    #   debuggee_id, breakpoint_id, client_version)
     # ```
     #
-    # ## Creating logs-based metrics
+    # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
-    # You can use log entries in your project as the basis for [Google Cloud
-    # Monitoring](https://cloud.google.com/monitoring/docs) metrics. These
-    # metrics can then be used to produce Cloud Monitoring reports and alerts.
-    #
-    # ### Creating metrics
-    #
-    # A metric is a measured value that can be used to assess a system. Use
-    # {Google::Cloud::Logging::Project#create_metric} to configure a
-    # {Google::Cloud::Logging::Metric} based on a collection of log entries
-    # matching an [advanced logs
-    # filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+    # ### List Breakpoints
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # metric = logging.create_metric "errors", "severity>=ERROR"
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
+    #
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
+    #
+    # debugger2_client = Debugger2Client.new
+    # debuggee_id = ''
+    # client_version = ''
+    # response = debugger2_client.list_breakpoints(debuggee_id, client_version)
     # ```
     #
-    # ### Listing metrics
+    # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
-    # You can also list the metrics belonging to your project with
-    # {Google::Cloud::Logging::Project#metrics}.
+    # ### List Debuggees
     #
     # ```ruby
-    # require "google/cloud/logging"
+    # require "google/cloud/debugger/v2"
     #
-    # logging = Google::Cloud::Logging.new
-    # metrics = logging.metrics
-    # metrics.each do |m|
-    #   puts "#{m.name}: #{m.filter}"
-    # end
+    # Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
+    #
+    # debugger2_client = Debugger2Client.new
+    # project = ''
+    # client_version = ''
+    # response = debugger2_client.list_debuggees(project, client_version)
     # ```
     #
-    # ## Writing log entries
-    #
-    # An {Google::Cloud::Logging::Entry} is composed of metadata and a payload.
-    # The payload is traditionally a message string, but in Stackdriver Logging
-    # it can also be a JSON or protocol buffer object. A single log can have
-    # entries with different payload types. In addition to the payload, your
-    # argument(s) to {Google::Cloud::Logging::Project#write_entries} must also
-    # contain a log name and a resource.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    #
-    # entry = logging.entry
-    # entry.payload = "Job started."
-    # entry.log_name = "my_app_log"
-    # entry.resource.type = "gae_app"
-    # entry.resource.labels[:module_id] = "1"
-    # entry.resource.labels[:version_id] = "20150925t173233"
-    #
-    # logging.write_entries entry
-    # ```
-    #
-    # If you write a collection of log entries, you can provide the log name,
-    # resource, and/or labels hash to be used for all of the entries, and omit
-    # these values from the individual entries.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    #
-    # entry1 = logging.entry
-    # entry1.payload = "Job started."
-    # entry2 = logging.entry
-    # entry2.payload = "Job completed."
-    # labels = { job_size: "large", job_code: "red" }
-    #
-    # resource = logging.resource "gae_app",
-    #                             "module_id" => "1",
-    #                             "version_id" => "20150925t173233"
-    #
-    # logging.write_entries [entry1, entry2],
-    #                       log_name: "my_app_log",
-    #                       resource: resource,
-    #                       labels: labels
-    # ```
-    #
-    # Normally, writing log entries is done synchronously; the call to
-    # {Google::Cloud::Logging::Project#write_entries} will block until it has
-    # either completed transmitting the data or encountered an error. To "fire
-    # and forget" without blocking, use {Google::Cloud::Logging::AsyncWriter};
-    # it spins up a background thread that writes log entries in batches. Calls
-    # to {Google::Cloud::Logging::AsyncWriter#write_entries} simply add entries
-    # to its work queue and return immediately.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    # async = logging.async_writer
-    #
-    # entry1 = logging.entry
-    # entry1.payload = "Job started."
-    # entry2 = logging.entry
-    # entry2.payload = "Job completed."
-    # labels = { job_size: "large", job_code: "red" }
-    #
-    # resource = logging.resource "gae_app",
-    #                             "module_id" => "1",
-    #                             "version_id" => "20150925t173233"
-    #
-    # async.write_entries [entry1, entry2],
-    #                     log_name: "my_app_log",
-    #                     resource: resource,
-    #                     labels: labels
-    # ```
-    #
-    # ### Creating a Ruby Logger implementation
-    #
-    # If your environment requires a logger instance that is API-compatible with
-    # Ruby's standard library
-    # [Logger](http://ruby-doc.org/stdlib/libdoc/logger/rdoc), you can use
-    # {Google::Cloud::Logging::Project#logger} to create one.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    #
-    # resource = logging.resource "gae_app",
-    #                             module_id: "1",
-    #                             version_id: "20150925t173233"
-    #
-    # logger = logging.logger "my_app_log", resource, env: :production
-    # logger.info "Job started."
-    # ```
-    #
-    # By default, the logger instance writes log entries asynchronously in a
-    # background thread using an {Google::Cloud::Logging::AsyncWriter}. If you
-    # want to customize or disable asynchronous writing, you may call the
-    # Logger constructor directly.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new
-    #
-    # resource = logging.resource "gae_app",
-    #                             module_id: "1",
-    #                             version_id: "20150925t173233"
-    #
-    # logger = Google::Cloud::Logging::Logger.new logging,
-    #                                             "my_app_log",
-    #                                             resource,
-    #                                             {env: :production}
-    # logger.info "Log entry written synchronously."
-    # ```
-    #
-    # ## Configuring timeout
-    #
-    # You can configure the request `timeout` value in seconds.
-    #
-    # ```ruby
-    # require "google/cloud/logging"
-    #
-    # logging = Google::Cloud::Logging.new timeout: 120
-    # ```
+    # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
+      ##
+      # Creates a new debugger object for instrumenting Stackdriver Debugger for
+      # an application. Each call creates a new debugger agent with independent
+      # connection service.
+      #
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      #
+      # @param [String] project Project identifier for the Stackdriver Debugger
+      #   service.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
+      #   either the JSON data or the path to a readable file.
+      # @param [String] module_name Name for the debuggee application. Optional.
+      # @param [String] module_version Version identifier for the debuggee
+      #   application. Optional.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+      #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Debugger::Project]
+      #
+      # @example
+      #   require "google/cloud/debugger"
+      #
+      #   debugger = Google::Cloud::Debugger.new
+      #   debugger.start
+      #
       def self.new project: nil, keyfile: nil, module_name: nil,
                    module_version: nil, scope: nil, timeout: nil,
                    client_config: nil

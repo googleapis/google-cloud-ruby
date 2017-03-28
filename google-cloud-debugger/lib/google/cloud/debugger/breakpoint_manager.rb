@@ -18,15 +18,41 @@ require "google/cloud/debugger/breakpoint"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # BreakpointManager
+      #
+      # Responsible for querying Stackdriver Debugger service for any active
+      # breakpoints and keep an accurate local copies of the breakpoints.
+      #
+      # It correctly remembers which breakpoints are currently active and
+      # watched by the debugger agent, and which breakpoints are already
+      # completed. The BreakpointManager holds the record of truth for debugger
+      # breakpoints
+      #
       class BreakpointManager
         include MonitorMixin
 
+        ##
+        # @private The gRPC Service object.
         attr_reader :service
 
+        ##
+        # Application root directory, in absolute file path form.
+        # @return [String]
         attr_reader :app_root
 
+        ##
+        # Callback function invoked when new breakpoints are added or removed
+        # @return [Method]
         attr_accessor :on_breakpoints_change
 
+        ##
+        # @private The wait token from Stackdriver Debugger service used
+        # for breakpoints long polling
+        attr_reader :wait_token
+
+        ##
+        # @private Construct new instance of BreakpointManager
         def initialize service
           super()
 
@@ -38,6 +64,17 @@ module Google
           @wait_token = :init
         end
 
+        ##
+        # Sync active breakpoints with Stackdriver Debugger service for a given
+        # debuggee application. Each request to the debugger service returns
+        # the full list of all active breakpoints. This method makes sure the
+        # local cache of active breakpoints is consistent with server
+        # breakpoints set.
+        #
+        # @param [String] debuggee_id Debuggee application ID
+        #
+        # @return [Bool] True if synced successfully; otherwise false.
+        #
         def sync_active_breakpoints debuggee_id
           begin
             response = service.list_active_breakpoints debuggee_id, @wait_token
@@ -59,10 +96,19 @@ module Google
           true
         end
 
+        ##
+        # Update the local breakpoints cache with a list of server active
+        # breakpoints. New breakpoints will be added to local cache, and deleted
+        # breakpoints will be removed from local cache.
+        #
+        # It also correctly identifies evaluated active breakpoints from the
+        # server set of breakpoints, and does not re-add such evaluated
+        # breakpoints to the active list again.
+        #
+        # @param [Array<Google::Cloud::Debugger::Breakpoint>] server_breakpoints
+        #   List of active breakpoints from Stackdriver Debugger service
+        #
         def update_breakpoints server_breakpoints
-          # puts "server_breakpoints"
-          # p server_breakpoints
-
           synchronize do
             new_breakpoints =
               server_breakpoints - @active_breakpoints - @completed_breakpoints
@@ -84,51 +130,81 @@ module Google
 
             on_breakpoints_change.call(@active_breakpoints) if
               on_breakpoints_change.respond_to?(:call) && breakpoints_updated
-
-            # puts "Active breakpoints: after sync"
-            # p @active_breakpoints
-            # puts "Completed breakpoints: after sync"
-            # p @completed_breakpoints
           end
         end
 
+        ##
+        # Mark a given active breakpoint as completed. Meaning moving it from
+        # list of active breakpoints to completed breakpoints.
+        #
+        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
+        #   to remove from local cache
+        #
+        # @return [Google::Cloud::Debugger::Breakpoint, NilClass] The same
+        #   breakpoint if successfully marked off as completed. Nil if
+        #   this breakpoint isn't found in the list of active breakpoints or
+        #   failed to mark off as completed.
+        #
         def mark_off breakpoint
           synchronize do
             breakpoint = @active_breakpoints.delete breakpoint
 
             if breakpoint.nil?
-              false
+              nil
             else
               @completed_breakpoints << breakpoint
-              true
+              breakpoint
             end
           end
         end
 
+        ##
+        # Get a list of all breakpoints, both active and completed.
+        #
+        # @return [Array<Google::Cloud::Debugger::Breakpoint>] A list of all
+        #   breakpoints.
         def breakpoints
           synchronize do
             @active_breakpoints | @completed_breakpoints
           end
         end
 
+        ##
+        # Get a list of all completed breakpoints.
+        #
+        # @return [Array<Google::Cloud::Debugger::Breakpoint>] A list of all
+        #   completed breakpoints.
         def completed_breakpoints
           synchronize do
             @completed_breakpoints
           end
         end
 
+        ##
+        # Get a list of all active breakpoints.
+        #
+        # @return [Array<Google::Cloud::Debugger::Breakpoint>] A list of all
+        #   active breakpoints.
         def active_breakpoints
           synchronize do
             @active_breakpoints
           end
         end
 
+        ##
+        # Check whether any active breakpoints haven't been completed yet.
+        #
+        # @return [Bool] True if no more active breakpoints are left. False
+        #   otherwise.
         def all_complete?
           synchronize do
             @active_breakpoints.empty?
           end
         end
 
+        ##
+        # Clear local breakpoints cache. Remove all active and completed
+        # breakpoints
         def clear_breakpoints
           synchronize do
             @active_breakpoints.clear

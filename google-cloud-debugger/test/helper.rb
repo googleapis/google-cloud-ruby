@@ -23,7 +23,7 @@ require "google/cloud/debugger"
 
 class MockDebugger < Minitest::Spec
   let(:project) { "test" }
-  # let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
+  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:module_name) { "test-service" }
   let(:module_version) { "vTest" }
@@ -34,15 +34,81 @@ class MockDebugger < Minitest::Spec
       module_version: module_version
     )
   }
+  let(:debuggee_id) { "test debuggee id" }
+  let(:debuggee) {
+    agent.debuggee.instance_variable_set :@id, debuggee_id
+    agent.debuggee
+  }
+  let(:agent) { debugger.agent }
   let(:breakpoint_manager) {
-    manager = debugger.agent.breakpoint_manager
+    manager = agent.breakpoint_manager
     manager.on_breakpoints_change = nil
     manager
   }
+  let(:tracer) { agent.tracer }
+  let(:transmitter) { agent.transmitter }
 
   # Register this spec type for when :speech is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_debugger
+  end
+
+  def random_source_location_hash
+    {
+      "path" => "my_app/my_class.rb",
+      "line" => 321
+    }
+  end
+
+  def random_variable_integer_hash
+    {
+      "name" => "[0]",
+      "type" => "Integer",
+      "value" => "3",
+      "members" => []
+    }
+  end
+
+  def random_variable_array_hash
+    {
+      "name" => "local_var",
+      "type" => "Array",
+      "members" => [
+        random_variable_integer_hash
+      ]
+    }
+  end
+
+  def random_stack_frame_hash
+    {
+      "function" => "index",
+      "location" => random_source_location_hash,
+      "arguments" => [random_variable_integer_hash],
+      "locals" => [random_variable_array_hash]
+    }
+  end
+
+  def random_breakpoint_hash
+    timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
+    {
+      "id" => "abc123",
+      "location" => random_source_location_hash,
+      "create_time" => {
+        "seconds" => timestamp.to_i,
+        "nanos"   => timestamp.nsec
+      },
+      "final_time" => {
+        "seconds" => timestamp.to_i,
+        "nanos"   => timestamp.nsec
+      },
+      "stack_frames" => [random_stack_frame_hash],
+      "condition" => "i == 2",
+      "expressions" => ["[3]"],
+      "evaluated_expressions" => [random_variable_array_hash],
+      "labels" => {
+        "tag" => "hello"
+      }
+    }
   end
 end
 
@@ -54,7 +120,7 @@ module Rack
 
     # Spoof with current test directory
     def root
-      File.expand_path "."
+      ::File.expand_path "."
     end
   end
 end
@@ -70,62 +136,4 @@ def wait_until_true timeout = 5
   end
 
   :completed
-end
-
-def random_source_location_hash
-  {
-    "path" => "my_app/my_class.rb",
-    "line" => 321
-  }
-end
-
-def random_variable_integer_hash
-  {
-    "name" => "[0]",
-    "type" => "Integer",
-    "value" => "3",
-    "members" => []
-  }
-end
-
-def random_variable_array_hash
-  {
-    "name" => "local_var",
-    "type" => "Array",
-    "members" => [
-      random_variable_integer_hash
-    ]
-  }
-end
-
-def random_stack_frame_hash
-  {
-    "function" => "index",
-    "location" => random_source_location_hash,
-    "arguments" => [random_variable_integer_hash],
-    "locals" => [random_variable_array_hash]
-  }
-end
-
-def random_breakpoint_hash
-  timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
-  {
-    "id" => "abc123",
-    "location" => random_source_location_hash,
-    "create_time" => {
-      "seconds" => timestamp.to_i,
-      "nanos"   => timestamp.nsec
-    },
-    "final_time" => {
-      "seconds" => timestamp.to_i,
-      "nanos"   => timestamp.nsec
-    },
-    "stack_frames" => [random_stack_frame_hash],
-    "condition" => "i == 2",
-    "expressions" => ["[3]"],
-    "evaluated_expressions" => [random_variable_array_hash],
-    "labels" => {
-      "tag" => "hello"
-    }
-  }
 end

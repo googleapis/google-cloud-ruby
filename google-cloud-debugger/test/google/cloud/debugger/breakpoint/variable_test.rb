@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Variable do
+describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
   describe "#to_grpc" do
     let(:variable_hash) { random_variable_array_hash }
     let(:variable_grpc) {

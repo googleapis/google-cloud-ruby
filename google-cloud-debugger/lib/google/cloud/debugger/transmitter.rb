@@ -18,18 +18,41 @@ require "google/cloud/debugger/async_actor"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Transmitter
+      #
+      # Responsible for submit evaluated breakpoints back to Stackdriver
+      # Debugger service asynchronously. It has it's own dedicated child thread,
+      # so it doesn't interfere with main Ruby application threads or the
+      # debugger agent's thread.
+      #
+      # The transmitter is controlled by the debugger agent it belongs to.
+      # Debugger agent submits evaluated breakpoint into a thread safe queue,
+      # and the transmitter operates directly on the queue along with minimal
+      # interaction with the rest debugger agent components
+      #
       class Transmitter
         include AsyncActor
 
+        ##
+        # @private Default maximum backlog size for the job queue
         DEFAULT_MAX_QUEUE_SIZE = 1000
 
+        ##
+        # @private The gRPC Service object.
         attr_accessor :service
 
+        ##
+        # The debugger agent this transmiter belongs to
+        # @return [Google::Cloud::Debugger::Agent]
         attr_accessor :agent
 
+        ##
+        # Maxium backlog size for this transmitter's queue
         attr_accessor :max_queue_size
 
-
+        ##
+        # @private Construct a new instance of Tramsnitter
         def initialize service, agent, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
           super()
           @service = service
@@ -38,6 +61,24 @@ module Google
           @queue = Thread::Queue.new
         end
 
+        ##
+        # Starts the transmitter and its worker thread
+        def start
+          async_start
+        end
+
+        ##
+        # Stops the transmitter and its worker thread. Once stopped, cannot be
+        # started again.
+        def stop
+          async_stop
+        end
+
+        ##
+        # Enqueue an evaluated breakpoints to be submitted by the transmitter.
+        #
+        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The evaluated
+        #   breakpoint to be submitted
         def submit breakpoint
           synchronize do
             @queue.push breakpoint
@@ -47,6 +88,9 @@ module Google
           end
         end
 
+        ##
+        # @private Callback fucntion for AsyncActor module to run the async
+        # job in a loop
         def run_backgrounder
           breakpoint = wait_next_item
           return if breakpoint.nil?
@@ -57,6 +101,12 @@ module Google
           end
         end
 
+        private
+
+        ##
+        # @private The the next item from the transmitter queue. If there are
+        # no more item, it blocks the transmitter thread until an item is
+        # enqueued
         def wait_next_item
           synchronize do
             @lock_cond.wait_while do

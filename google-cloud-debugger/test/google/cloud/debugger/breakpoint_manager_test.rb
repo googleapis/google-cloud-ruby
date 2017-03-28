@@ -26,6 +26,53 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
     Google::Cloud::Debugger::Breakpoint.new "3"
   }
 
+  describe "#sync_active_breakpoints" do
+    it "returns false if sync request raises error" do
+      mocked_list_breakpoints = ->(_, _) { raise }
+
+      breakpoint_manager.service.stub :list_active_breakpoints, mocked_list_breakpoints do
+        breakpoint_manager.sync_active_breakpoints(nil).must_equal false
+      end
+    end
+
+    it "returns true if response.wait_expired is true" do
+      mocked_response = OpenStruct.new(wait_expired: true)
+      breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
+        breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+      end
+    end
+
+    it "updates @wait_token after a successful sync" do
+      wait_token = "a unique token"
+      mocked_response = OpenStruct.new(wait_expired: false, next_wait_token: wait_token)
+
+      breakpoint_manager.wait_token.must_equal :init
+
+      breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
+        breakpoint_manager.sync_active_breakpoints(nil)
+      end
+
+      breakpoint_manager.wait_token.must_equal wait_token
+    end
+
+    it "calls #update_breakpoints with a list of Google::Cloud::Debugger::Breakpoints" do
+      wait_token = "a unique token"
+      mocked_response = OpenStruct.new wait_expired: false,
+                                       next_wait_token: wait_token,
+                                       breakpoints: [nil]
+      mocked_update_breakpoints = Minitest::Mock.new
+      mocked_update_breakpoints.expect :call, nil, [[breakpoint1]]
+
+      breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
+        Google::Cloud::Debugger::Breakpoint.stub :from_grpc, breakpoint1 do
+          breakpoint_manager.stub :update_breakpoints, mocked_update_breakpoints do
+            breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+          end
+        end
+      end
+    end
+  end
+
   describe "#update_breakpoints" do
     it "addes new breakpoints" do
       breakpoint_manager.active_breakpoints.must_be_empty
@@ -121,6 +168,86 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
 
       breakpoint_manager.active_breakpoints.size.must_equal 1
       breakpoint_manager.completed_breakpoints.must_be_empty
+    end
+  end
+
+  describe "#breakpoints" do
+    it "returns both active and completed breakpoints" do
+      breakpoint_manager.instance_variable_set :@active_breakpoints, [
+        breakpoint1,
+        breakpoint2
+      ]
+      breakpoint_manager.instance_variable_set :@completed_breakpoints, [
+        breakpoint3
+      ]
+
+      breakpoint_manager.breakpoints.must_equal [breakpoint1, breakpoint2, breakpoint3]
+    end
+  end
+
+  describe "#active_breakpoints" do
+    it "only returns both active breakpoints" do
+      breakpoint_manager.instance_variable_set :@active_breakpoints, [
+        breakpoint1,
+        breakpoint2
+      ]
+      breakpoint_manager.instance_variable_set :@completed_breakpoints, [
+        breakpoint3
+      ]
+
+      breakpoint_manager.active_breakpoints.must_equal [breakpoint1, breakpoint2]
+    end
+  end
+
+  describe "#completed breakpoints" do
+    it "only returns completed breakpoints" do
+      breakpoint_manager.instance_variable_set :@active_breakpoints, [
+        breakpoint1,
+        breakpoint2
+      ]
+      breakpoint_manager.instance_variable_set :@completed_breakpoints, [
+        breakpoint3
+      ]
+
+      breakpoint_manager.completed_breakpoints.must_equal [breakpoint3]
+    end
+  end
+
+  describe "#all_complete?" do
+    it "returns true only if there are active breakpoints" do
+      breakpoint_manager.all_complete?.must_equal true
+      breakpoint_manager.instance_variable_set :@active_breakpoints, [
+        breakpoint1,
+        breakpoint2
+      ]
+      breakpoint_manager.all_complete?.must_equal false
+      breakpoint_manager.instance_variable_set :@active_breakpoints, []
+      breakpoint_manager.all_complete?.must_equal true
+    end
+
+    it "return true if there are only completed breakpoints" do
+      breakpoint_manager.all_complete?.must_equal true
+      breakpoint_manager.instance_variable_set :@completed_breakpoints, [
+        breakpoint3
+      ]
+      breakpoint_manager.all_complete?.must_equal true
+    end
+  end
+
+  describe "#clear_breakpoints" do
+    it "deletes all local active and completed breakpoints" do
+      breakpoint_manager.instance_variable_set :@active_breakpoints, [
+        breakpoint1,
+        breakpoint2
+      ]
+      breakpoint_manager.instance_variable_set :@completed_breakpoints, [
+        breakpoint3
+      ]
+
+      breakpoint_manager.breakpoints.wont_be_empty
+
+      breakpoint_manager.clear_breakpoints
+      breakpoint_manager.breakpoints.must_be_empty
     end
   end
 end

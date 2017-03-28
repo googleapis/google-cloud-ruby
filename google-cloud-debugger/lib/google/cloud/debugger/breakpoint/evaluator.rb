@@ -21,11 +21,32 @@ module Google
   module Cloud
     module Debugger
       class Breakpoint
+        ##
+        # Helps to evaluate program state at the location of breakpoint during
+        # executing. The program state, such as local variables and call stack,
+        # are retrieved using Ruby Binding objects.
+        #
+        # The breakpoints may consist of conditional expression and other
+        # code expressions. The Evaluator helps evaluates these expression in
+        # a read-only context. Meaning if the expressions trigger any write
+        # operations in middle of the evaluation, the evaluator is able to
+        # abort the operation and prevent the program state from being altered.
+        #
+        # The evaluated results are saved onto the breakpoints fields. See
+        # [Stackdriver Breakpoints
+        # Doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
+        # for details.
+        #
         module Evaluator
+          ##
+          # Max number of top stacks to collect local variables information
           STACK_EVAL_DEPTH = 5
 
-          EXPRESSION_TRACE_DEPTH = 1
-
+          ##
+          # @private YARV bytecode that the evaluator blocks during expression
+          # evaluation. If the breakpoint contains expressions that uses the
+          # following bytecode, the evaluator will block the expression
+          # evaluation from execusion.
           BYTE_CODE_BLACKLIST = %w(
             setinstancevariable
             setclassvariable
@@ -37,27 +58,44 @@ module Google
             opt_aset_with
           ).freeze
 
+          ##
+          # @private YARV bytecode that the evaluator blocks during expression
+          # evaluation on the top level. (not from within by predefined methods)
           LOCAL_BYTE_CODE_BLACKLIST = %w(
             setlocal
           ).freeze
 
+          ##
+          # @private YARV bytecode call flags that the evaluator blocks during
+          # expression evaluation
           FUNC_CALL_FLAG_BLACKLIST = %w(
             ARGS_BLOCKARG
           ).freeze
 
+          ##
+          # @private YARV instructions catch table type that the evaluator
+          # blocks during expression evaluation
           CATCH_TABLE_TYPE_BLACKLIST = %w(
             rescue
           ).freeze
 
+          ##
+          # @private Predefined regex. Saves time during runtime.
           BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{BYTE_CODE_BLACKLIST.join '|'}/
 
+          ##
+          # @private Predefined regex. Saves time during runtime.
           FULL_BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{
               [*BYTE_CODE_BLACKLIST, *LOCAL_BYTE_CODE_BLACKLIST].join '|'
           }/
 
+          ##
+          # @private Predefined regex. Saves time during runtime.
           FUNC_CALL_FLAG_BLACKLIST_REGEX =
             /<callinfo!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/
 
+          ##
+          # @private Predefined regex. Saves time during runtime.
           CATCH_TABLE_BLACKLIST_REGEX =
             /catch table.*catch type: #{CATCH_TABLE_TYPE_BLACKLIST.join '|'}/m
 
@@ -66,6 +104,9 @@ module Google
                            :FUNC_CALL_FLAG_BLACKLIST_REGEX,
                            :CATCH_TABLE_BLACKLIST_REGEX
 
+          ##
+          # @private List of pre-approved classes to be used during expression
+          # evaluation.
           IMMUTABLE_CLASSES = [
             Complex,
             FalseClass,
@@ -86,11 +127,16 @@ module Google
             RUBY_VERSION.to_f >= 2.4 ? [Integer] : [Bignum, Fixnum]
           ).freeze
 
+          ##
+          # @private helper method to hashify an array
           def self.hashify ary
             ary.each.with_index(1).to_h
           end
           private_class_method :hashify
 
+          ##
+          # @private List of C level class methods that the evaluator allows
+          # during expression evaluation
           C_CLASS_METHOD_WHITELIST = {
             # Classes
             Array => hashify(%I{
@@ -159,6 +205,9 @@ module Google
             }).freeze
           }.freeze
 
+          ##
+          # @private List of C level instance methods that the evaluator allows
+          # during expression evaluation
           C_INSTANCE_METHOD_WHITELIST = {
             Array => hashify(%I{
               initialize
@@ -695,6 +744,17 @@ module Google
           }.freeze
 
           class << self
+            ##
+            # Evaluates call stack. Collects function name and location of each
+            # frame from given binding objects. Collects local variable
+            # information from top frames.
+            #
+            # @param [Array<Binding>] call_stack_bindings A list of binding
+            #   objects that come from each of the call stack frames.
+            # @return [Array<Google::Cloud::Debugger::Breakpoint::StackFrame>]
+            #   A list of StackFrame objects that represent state of the
+            #   call stack
+            #
             def eval_call_stack call_stack_bindings
               result = []
               call_stack_bindings.each_with_index do |frame_binding, i|
@@ -717,6 +777,18 @@ module Google
               result
             end
 
+            ##
+            # Evaluates a boolean conditional expression in the given context
+            # binding. The evaluation subjects to the read-only rules. If
+            # the expression does any write operation, the evaluation aborts
+            # and returns false.
+            #
+            # @param [Binding] binding The binding object from the context
+            # @param [String] condition A string of code to be evaluates
+            #
+            # @return [Bool] True if condition expression read-only evaluates
+            #   to true. Otherwise false.
+            #
             def eval_condition binding, condition
               result = readonly_eval_expression_exec binding, condition
 
@@ -728,6 +800,19 @@ module Google
               result ? true : false
             end
 
+            ##
+            # Evaluates the breakpoint expressions at the point that triggered
+            # the breakpoint. The expressions subject to the read-only rules.
+            # If the expressions do any write operations, the evaluations abort
+            # and show an error message in place of the real result.
+            #
+            # @param [Binding] binding The binding object from the context
+            # @param [Array<String>] expressions A list of code strings to be
+            #   evaluated
+            # @return [Array<Google::Cloud::Debugger::Breakpoint::Variable>]
+            #   A list of Breakpoint::Variables objects that represent the
+            #   expression evaluations results.
+            #
             def eval_expressions binding, expressions
               expressions.map do |expression|
                 eval_result = readonly_eval_expression binding, expression
@@ -737,6 +822,17 @@ module Google
               end
             end
 
+            ##
+            # @private Read-only evaluates a single expression in a given
+            # context binding. Handles any exceptions raised.
+            #
+            # @param [Binding] binding The binding object from the context
+            # @param [String] expression A string of code to be evaluates
+            #
+            # @return [Object] The result Ruby object from evaluating the
+            #   expression. If the expression is blocked from mutating
+            #   the state of program. An error message is returned instead.
+            #
             def readonly_eval_expression binding, expression
               begin
                 result = readonly_eval_expression_exec binding, expression
@@ -752,6 +848,21 @@ module Google
               result
             end
 
+            private
+
+            ##
+            # @private Actually read-only evaluates an expression in a given
+            # context binding. The evaluation is done in a separate thread due
+            # to this method may be run from Ruby Trace call back, where
+            # addtional code tracing is disabled in original thread.
+            #
+            # @param [Binding] binding The binding object from the context
+            # @param [String] expression A string of code to be evaluates
+            #
+            # @return [Object] The result Ruby object from evaluating the
+            #   expression. It returns Google::Cloud::Debugger::MutationError
+            #   if a mutation is caught.
+            #
             def readonly_eval_expression_exec binding, expression
               compilation_result = validate_compiled_expression expression
               return compilation_result if compilation_result.is_a?(Exception)
@@ -777,8 +888,17 @@ module Google
               thr.join.value
             end
 
-            private
-
+            ##
+            # @private Compile the expression into YARV instructions. Return
+            # Google::Cloud::Debugger::MutationError if any prohibited YARV
+            # instructions are found.
+            #
+            # @param [String] expression String of code expression
+            #
+            # @return [String,Google::Cloud::Debugger::MutationError] It returns
+            #   the compile YARV instructions if no prohibited bytecodes are
+            #   found. Otherwise return Google::Cloud::Debugger::MutationError.
+            #
             def validate_compiled_expression expression
               begin
                 yarv_instructions =
@@ -800,6 +920,16 @@ module Google
               yarv_instructions
             end
 
+            ##
+            # @private Helps evaluating local variables from a single frame
+            # binding
+            #
+            # @param [Binding] frame_binding The context binding object from
+            #   a given frame.
+            # @return [Array<Google::Cloud::Debugger::Variable>] A list of
+            #   Breakpoint::Variables that represent all the local variables
+            #   in a context frame.
+            #
             def eval_frame_variables frame_binding
               result_variables = []
               result_variables +=
@@ -812,6 +942,18 @@ module Google
               result_variables
             end
 
+            ##
+            # @private Helps checking if a given set of YARV instructions
+            # contains any prohibited bytecode or instructions.
+            #
+            # @param [String] yarv_instructions Compiled YARV instructions
+            #   string
+            # @param [Bool] allow_localops Whether allows local variable
+            #   write operations
+            #
+            # @return [Bool] True if the YARV instructions don't contain any
+            #   prohibited operations. Otherwise false.
+            #
             def immutable_yarv_instructions? yarv_instructions,
                                              allow_localops: false
               if allow_localops
@@ -829,6 +971,8 @@ module Google
                 yarv_instructions.match(catch_table_type_blacklist_regex))
             end
 
+            ##
+            # @private Wraps expression with tracing code
             def wrap_expression expression
               """
                 begin
@@ -842,7 +986,17 @@ module Google
               """
             end
 
-
+            ##
+            # @private Evaluation tracing callback function. This is called
+            # everytime a Ruby function is called during evaluation of
+            # an expression.
+            #
+            # @param [Object] receiver The receiver of the function being called
+            # @param [Symbol] mid The method name
+            #
+            # @return [NilClass] Nil if no prohibited operations are found.
+            #   Otherwise raise Google::Cloud::Debugger::MutationError error.
+            #
             def trace_func_callback receiver, mid
               meth = receiver.method mid
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
@@ -854,6 +1008,19 @@ module Google
                 Google::Cloud::Debugger::MutationError::PROHIBITED_YARV)
             end
 
+            ##
+            # @private Evaluation tracing callback function. This is called
+            # everytime a C function is called during evaluation of
+            # an expression.
+            #
+            # @param [Object] receiver The receiver of the function being called
+            # @param [Class] defined_class The Class of where the function is
+            #   defined
+            # @param [Symbol] mid The method name
+            #
+            # @return [NilClass] Nil if no prohibited operations are found.
+            #   Otherwise raise Google::Cloud::Debugger::MutationError error.
+            #
             def trace_c_func_callback receiver, defined_class, mid
               if receiver.is_a?(Class) || receiver.is_a?(Module)
                 invalid_op =
@@ -871,12 +1038,18 @@ module Google
                 Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC)
             end
 
+            ##
+            # @private Helper method to verify wehter a C level class method
+            # is allowed or not.
             def validate_c_class_method klass, receiver, mid
               IMMUTABLE_CLASSES.include?(receiver) ||
                 (C_CLASS_METHOD_WHITELIST[receiver] || {})[mid] ||
                 (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
             end
 
+            ##
+            # @private Helper method to verify wehter a C level instance method
+            # is allowed or not.
             def validate_c_instance_method klass, mid
               IMMUTABLE_CLASSES.include?(klass) ||
                 (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
@@ -885,6 +1058,9 @@ module Google
         end
       end
 
+      ##
+      # @private Custom error type used to identify mutation during breakpoint
+      # expression evaluations
       class MutationError < StandardError
         UNKNOWN_CAUSE = Object.new.freeze
         PROHIBITED_YARV = Object.new.freeze

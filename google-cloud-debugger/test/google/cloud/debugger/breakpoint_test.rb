@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint do
+describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
   let(:breakpoint_hash) { random_breakpoint_hash }
   let(:breakpoint_json) { breakpoint_hash.to_json }
   let(:breakpoint_grpc) {

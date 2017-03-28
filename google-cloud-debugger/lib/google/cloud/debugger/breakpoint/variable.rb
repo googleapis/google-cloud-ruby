@@ -24,11 +24,14 @@ module Google
         # type. Note how the following variables are represented:
         #
         # A simple Variable:
+        # ```ruby
         #   x = 5
         #   # Captured variable:
         #   # { name: "x", value: "5", type: "Integer" }
+        # ```
         #
         # A Compound Variable:
+        # ```ruby
         #   class T
         #     attr_accessor :m1, :m2
         #     ...
@@ -43,8 +46,10 @@ module Google
         #   #     { name: "@m2", value: "2", type: "String" }
         #   #   ]
         #   # }
+        # ```
         #
         # A Hash object:
+        # ```ruby
         #   hash = { a: 1, b: :two }
         #   # Captured variable:
         #   # {
@@ -55,8 +60,10 @@ module Google
         #   #     { name: "b", value: ":2", type: "Symbol" }
         #   #   ]
         #   # }
+        # ```
         #
         # An Array object:
+        # ```ruby
         #   ary = [1, nil]
         #   # Captured variable:
         #   # {
@@ -67,6 +74,7 @@ module Google
         #   #     { name: "[1]", value: "nil", type: "NilClass" }
         #   #   ]
         #   # }
+        # ```
         #
         class Variable
           ##

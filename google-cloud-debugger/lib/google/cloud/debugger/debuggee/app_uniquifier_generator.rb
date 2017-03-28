@@ -20,9 +20,27 @@ module Google
   module Cloud
     module Debugger
       class Debuggee
+        ##
+        # Generates an application debuggee uniquifier by hashing the
+        # application file stats.
+        #
         module AppUniquifierGenerator
+          ##
+          # Max number of directory levels the generator looks into.
           MAX_DEPTH = 10
 
+          ##
+          # Computes the application uniquifier by examine the file stats of
+          # the files in the given application root directory. It only looks at
+          # .rb files and Gemfile.lock
+          #
+          # @param [Digest::SHA] A digest SHA object used to add the hashing
+          #   values
+          # @param [String] app_path Application root directory where the Ruby
+          #   application is located.
+          #
+          # @return [NilClass]
+          #
           def self.generate_app_uniquifier sha, app_path = nil
             app_path ||= if defined?(::Rack::Directory)
                            Rack::Directory.new("").root
@@ -31,10 +49,14 @@ module Google
                          end
 
             process_directory sha, app_path
+
+            nil
           end
 
           private
 
+          ##
+          # @private Recursively parse files and directories.
           def self.process_directory sha, path, depth = 1
             return if depth > MAX_DEPTH
 

@@ -25,36 +25,105 @@ module Google
       class Breakpoint
         include MonitorMixin
 
+        ##
+        # Breakpoint identifier, unique in the scope of the debuggee.
         attr_accessor :id
 
         # TODO: Implement logpoint
         # attr_accessor :action
+        # attr_accessor :log_message_format
+        # attr_accessor :log_level
 
+        ##
+        # Breakpoint source location.
+        # @return [Google::Cloud::Debugger::Breakpoint::SourceLocation]
         attr_accessor :location
 
+        ##
+        # Condition that triggers the breakpoint. The condition is a compound
+        # boolean expression composed using expressions in a programming
+        # language at the source location.
         attr_accessor :condition
 
+        ##
+        # When true, indicates that this is a final result and the breakpoint
+        # state will not change from here on.
+        # @return [Bool]
         attr_accessor :is_final_state
 
+        ##
+        # List of read-only expressions to evaluate at the breakpoint location.
+        # The expressions are composed using expressions in the programming
+        # language at the source location. If the breakpoint action is LOG, the
+        # evaluated expressions are included in log statements.
+        # @return [Array<String>]
         attr_accessor :expressions
 
+        ##
+        # Values of evaluated expressions at breakpoint time. The evaluated
+        # expressions appear in exactly the same order they are listed in the
+        # expressions field. The name field holds the original expression text,
+        # the value or members field holds the result of the evaluated
+        # expression. If the expression cannot be evaluated, the status inside
+        # the Variable will indicate an error and contain the error text.
+        # @return [Array<Google::Cloud::Debugger::Breakpoint::Variable>]
         attr_accessor :evaluated_expressions
 
+        ##
+        # Time this breakpoint was created by the server in seconds resolution.
+        # @return [Time]
         attr_accessor :create_time
 
+        ##
+        # Time this breakpoint was finalized as seen by the server in seconds
+        # resolution.
+        # @return [Time]
         attr_accessor :final_time
 
+        ##
+        # E-mail address of the user that created this breakpoint
         attr_accessor :user_email
 
+        ##
+        # Breakpoint status.
+        #
+        # The status includes an error flag and a human readable message. This
+        # field is usually unset. The message can be either informational or an
+        # error message. Regardless, clients should always display the text
+        # message back to the user.
+        #
+        #  Error status indicates complete failure of the breakpoint.
         attr_accessor :status
 
+        ##
+        # The variable_table exists to aid with computation, memory and network
+        # traffic optimization. It enables storing a variable once and reference
+        # it from multiple variables, including variables stored in the
+        # variable_table itself. For example, the same this object, which may
+        # appear at many levels of the stack, can have all of its data stored
+        # once in this table. The stack frame variables then would hold only a
+        # reference to it.
+        #
+        # The variable var_table_index field is an index into this repeated
+        # field. The stored objects are nameless and get their name from the
+        # referencing variable. The effective variable is a merge of the
+        # referencing variable and the referenced variable.
         # TODO: Implement variable table
         # attr_accessor :variable_table
 
+        ##
+        # A set of custom breakpoint properties, populated by the agent, to be
+        # displayed to the user.
+        # @return [Hash<String, String>]
         attr_accessor :labels
 
+        ##
+        # The stack at breakpoint time.
+        # @return [Array<Google::Cloud::Debugger::Breakpoint::StackFrame>]
         attr_accessor :stack_frames
 
+        ##
+        # @private Construct a new instance of Breakpoint.
         def initialize id = nil, path = nil, line = nil
           super()
 
@@ -105,6 +174,8 @@ module Google
           Time.at grpc_timestamp.seconds, Rational(grpc_timestamp.nanos, 1000)
         end
 
+        ##
+        # @private Helper method to convert a gRPC map to Ruby Hash
         def self.hashify_labels grpc_labels
           if grpc_labels.respond_to? :to_h
             grpc_labels.to_h
@@ -117,6 +188,9 @@ module Google
         private_class_method :stack_frames_from_grpc, :timestamp_from_grpc,
                              :hashify_labels
 
+        ##
+        # Marks a breakpoint as complete if this breakpoint isn't completed
+        # already. Set @is_final_state to true and set @final_time.
         def complete
           synchronize do
             return if complete?
@@ -128,18 +202,39 @@ module Google
 
         alias_method :complete?, :is_final_state
 
+        ##
+        # Get the file path of this breakpoint
+        # @example
+        #   breakpoint = Breakpoint.new nil, "path/to/file.rb"
+        #   breakpoint.path #=> "path/to/file.rb"
+        # @return [String] The file path for this breakpoint
         def path
           synchronize do
             location.nil? ? nil : location.path
           end
         end
 
+        ##
+        # Get the line number of this breakpoint
+        # @example
+        #   breakpoint = Breakpoint.new nil, "path/to/file.rb", 11
+        #   breakpoint.line #=> 11
+        # @return [Integer] The line number for this breakpoint
         def line
           synchronize do
             location.nil? ? nil : location.line
           end
         end
 
+        ##
+        # Evaluate the breakpoint's condition expression against a given binding
+        # object. Returns true if the condition expression evalutes to true;
+        # false if error happens or the expression evaluates to false.
+        #
+        # @param [Binding] binding A Ruby Binding object
+        # @return [Bool] True if condition evalutes to true, false if condition
+        #   evaluates to false or error raised during evaluation.
+        #
         def check_condition binding
           return true if condition.nil? || condition.empty?
           begin
@@ -151,6 +246,17 @@ module Google
           end
         end
 
+        ##
+        # Evaluate the breakpoint. Use @stack_frames and
+        # @evaluated_expressions instance variables to store the result
+        # snapshot. Set breakpoint to complete.
+        #
+        # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
+        #   objects, from the call stack that leads to the triggering of the
+        #   breakpoints.
+        #
+        # @return [Bool] True if evaluated successfully; false otherwise.
+        #
         def eval_call_stack call_stack_bindings
           synchronize do
             top_frame_binding = call_stack_bindings[0]
@@ -173,12 +279,16 @@ module Google
           true
         end
 
+        ##
+        # Check if two breakpoints are equal to each other
         def eql? other
           id == other.id &&
             path == other.path &&
             line == other.line
         end
 
+        ##
+        # @private Override default hashing function
         def hash
           id.hash ^ path.hash ^ line.hash
         end
