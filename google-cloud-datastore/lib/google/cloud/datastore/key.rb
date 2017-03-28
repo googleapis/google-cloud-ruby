@@ -81,7 +81,7 @@ module Google
         #   )
         #
         #   task = datastore.find "Task", "sampleTask"
-        #   task.key.namespace #=> "ns~todo-project"
+        #   task.key.namespace #=> "example-ns"
         #
         attr_accessor :namespace
 

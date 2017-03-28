@@ -431,7 +431,7 @@ end
 
 def key_grpc kind = "Task", id_or_name = "sampleTask"
   key = Google::Cloud::Datastore::Key.new(kind, id_or_name)
-  key.namespace = "ns~todo-project"
+  key.namespace = "example-ns"
   key.project = "my-todo-project"
   key
 end

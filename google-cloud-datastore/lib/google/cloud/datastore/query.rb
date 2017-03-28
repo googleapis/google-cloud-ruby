@@ -49,7 +49,7 @@ module Google
       #
       #   query = datastore.query("Task").
       #     where("done", "=", false)
-      #   tasks = datastore.run query, namespace: "ns~todo-project"
+      #   tasks = datastore.run query, namespace: "example-ns"
       #
       class Query
         ##
