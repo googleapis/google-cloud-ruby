@@ -199,4 +199,14 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.must_be :done?
     mock.verify
   end
+
+  it "can cancel itself" do
+    mock = Minitest::Mock.new
+    mock.expect :cancel_job, job_id,
+      [project, job_id]
+    bigquery.service.mocked_service = mock
+
+    job.cancel
+    mock.verify
+  end
 end

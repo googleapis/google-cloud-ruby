@@ -206,6 +206,13 @@ module Google
         end
 
         ##
+        # Cancel the job and return a gapi cancel job response.
+        def cancel
+          ensure_service!
+          service.cancel_job job_id
+        end
+
+        ##
         # Created a new job with the current configuration.
         def rerun!
           ensure_service!

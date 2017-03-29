@@ -204,6 +204,12 @@ module Google
         end
 
         ##
+        # Cancel the job specified by jobId.
+        def cancel_job job_id
+          execute { service.cancel_job @project, job_id }
+        end
+
+        ##
         # Returns the job specified by jobID.
         def get_job job_id
           execute { service.get_job @project, job_id }
