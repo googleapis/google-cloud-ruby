@@ -133,8 +133,7 @@ module Google
               obj.rewind
               content = obj.read.force_encoding("ASCII-8BIT")
               encoded_content = Base64.strict_encode64(content)
-              [Google::Protobuf::Value.new(string_value: encoded_content),
-               Google::Spanner::V1::Type.new(code: :BYTES)]
+              Google::Protobuf::Value.new(string_value: encoded_content)
             else
               raise ArgumentError,
                     "A value of type #{obj.class} is not supported."

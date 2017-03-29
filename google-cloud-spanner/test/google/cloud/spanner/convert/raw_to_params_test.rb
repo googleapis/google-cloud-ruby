@@ -116,6 +116,16 @@ describe Google::Cloud::Spanner::Convert, :raw_to_params, :mock_spanner do
                                             Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRING))] })
   end
 
+  it "converts an Array of IO-ish values" do
+    array = [StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")]
+
+    foo, bar, baz = %w[ foo bar baz ].map {|raw| Base64.strict_encode64(raw) }
+
+    combined_params = Google::Cloud::Spanner::Convert.raw_to_params list: array
+    combined_params.must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: foo), Google::Protobuf::Value.new(string_value: bar), Google::Protobuf::Value.new(string_value: baz)])),
+                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :BYTES))] })
+  end
+
   it "converts a simple Hash value" do
     combined_params = Google::Cloud::Spanner::Convert.raw_to_params settings: { foo: :bar }
     combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"foo"=>Google::Protobuf::Value.new(string_value: "bar")})),
