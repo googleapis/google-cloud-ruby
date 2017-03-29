@@ -2,7 +2,7 @@
 
 This library provides information on the application hosting environment for apps running on Google Cloud Platform.
 
-- [google-cloud-env API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-env/master/google/cloud/env)
+- [google-cloud-env API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-env/latest)
 
 ## Supported Ruby Versions
 

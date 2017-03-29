@@ -2,7 +2,7 @@
 
 [Google Cloud Speech API](https://cloud.google.com/speech/) ([docs](https://cloud.google.com/speech/docs)) enables developers to convert audio to text by applying powerful neural network models.
 
-- [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/master/google/cloud/speech)
+- [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest)
 - [google-cloud-speech on RubyGems](https://rubygems.org/gems/google-cloud-speech)
 - [Google Cloud Speech API documentation](https://cloud.google.com/speech/docs)
 
