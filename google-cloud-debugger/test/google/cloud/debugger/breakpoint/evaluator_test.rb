@@ -102,7 +102,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       local_var = "original local var"
       expression = "local_var = 'new local var'"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       local_var.must_equal "original local var"
     end
 
@@ -114,7 +114,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       $global_var = "original global var"
       expression = "$global_var = 'new global var'"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       $global_var.must_equal "original global var"
     end
 
@@ -122,21 +122,21 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       @instance_var = "original instance var"
       expression = "@instance_var = 'new instance var'"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       @instance_var.must_equal "original instance var"
     end
 
     it "doesn't allow setting class variable" do
       expression = "@@class_var = 'new class var'"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
     end
 
     it "doesn't allow setting constant" do
       TEST_CONST  = "original constant"
       expression = "TEST_CONST = 'new constant'"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       TEST_CONST.must_equal "original constant"
     end
 
@@ -144,7 +144,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       ary = [1,2]
       expression = "ary << 3"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       ary.size.must_equal 2
     end
 
@@ -152,7 +152,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       ary = [1,2]
       expression = "ary[0] = 2"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       ary.must_include 1
     end
 
@@ -160,7 +160,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       hsh = {"abc" => 123}
       expression = "hsh['abc'] = 456"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
       hsh["abc"].must_equal 123
     end
 
@@ -178,7 +178,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       proc = Proc.new { |arg| "arg: #{arg}" }
       expression = "readonly_func4(123, &proc)"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_equal "Mutation detected!"
+      result.must_match "Mutation detected!"
     end
 
     it "allows function call with block" do
@@ -196,6 +196,30 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       expression = "mutating_func2()"
       result = evaluator.readonly_eval_expression binding, expression
       result.must_match "Mutation detected!"
+    end
+
+    it "returns ZeroDivisionError error message" do
+      expression = "1/0"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_match "divided by 0"
+    end
+
+    it "returns NameError error message" do
+      expression = "a_thing_that_is_not_defined"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_match "undefined local variable or method"
+    end
+
+    it "returns NoMethodError error message" do
+      expression = "nil.blahblahblah"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_match "undefined method"
+    end
+
+    it "returns Argument error message" do
+      expression = "nil.send"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_match "no method name given"
     end
   end
 end

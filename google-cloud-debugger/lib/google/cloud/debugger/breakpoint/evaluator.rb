@@ -139,6 +139,9 @@ module Google
           # during expression evaluation
           C_CLASS_METHOD_WHITELIST = {
             # Classes
+            ArgumentError => hashify(%I{
+              new
+            }).freeze,
             Array => hashify(%I{
               new
               []
@@ -157,6 +160,9 @@ module Google
             Fiber => hashify(%I{
               current
             }).freeze,
+            FiberError => hashify(%I{
+              new
+            }).freeze,
             File => hashify(%I{
               basename
               dirname
@@ -165,17 +171,41 @@ module Google
               path
               split
             }).freeze,
+            FloatDomainError => hashify(%I{
+              new
+            }).freeze,
             Hash => hashify(%I{
               []
               new
               try_convert
+            }).freeze,
+            IndexError => hashify(%I{
+              new
+            }).freeze,
+            KeyError => hashify(%I{
+              new
             }).freeze,
             Module => hashify(%I{
               constants
               nesting
               used_modules
             }).freeze,
+            NameError => hashify(%I{
+              new
+            }).freeze,
+            NoMethodError => hashify(%I{
+              new
+            }).freeze,
             Object => hashify(%I{
+              new
+            }).freeze,
+            RangeError => hashify(%I{
+              new
+            }).freeze,
+            RegexpError => hashify(%I{
+              new
+            }).freeze,
+            RuntimeError => hashify(%I{
               new
             }).freeze,
             String => hashify(%I{
@@ -200,8 +230,14 @@ module Google
               now
               utc
             }).freeze,
+            TypeError => hashify(%I{
+              new
+            }).freeze,
             Google::Cloud::Debugger::Breakpoint::Evaluator => hashify(%I{
               disable_method_trace_for_thread
+            }).freeze,
+            ZeroDivisionError => hashify(%I{
+              new
             }).freeze
           }.freeze
 
@@ -209,6 +245,9 @@ module Google
           # @private List of C level instance methods that the evaluator allows
           # during expression evaluation
           C_INSTANCE_METHOD_WHITELIST = {
+            ArgumentError => hashify(%I{
+              initialize
+            }).freeze,
             Array => hashify(%I{
               initialize
               &
@@ -286,6 +325,7 @@ module Google
               !=
               ==
               __id__
+              method_missing
               object_id
               send
               __send__
@@ -329,9 +369,15 @@ module Google
             Fiber => hashify(%I{
               alive?
             }).freeze,
+            FiberError => hashify(%I{
+              initialize
+            }).freeze,
             File => hashify(%I{
               path
               to_path
+            }).freeze,
+            FloatDomainError => hashify(%I{
+              initialize
             }).freeze,
             Hash => hashify(%I{
               initialize
@@ -382,6 +428,9 @@ module Google
               values
               value_at
             }).freeze,
+            IndexError => hashify(%I{
+              initialize
+            }).freeze,
             IO => hashify(%I{
               autoclose?
               binmode?
@@ -391,6 +440,9 @@ module Google
               inspect
               internal_encoding
               sync
+            }).freeze,
+            KeyError => hashify(%I{
+              initialize
             }).freeze,
             Method => hashify(%I{
               ==
@@ -449,6 +501,12 @@ module Google
               locked?
               owned?
             }).freeze,
+            NameError => hashify(%I{
+              initialize
+            }).freeze,
+            NoMethodError => hashify(%I{
+              initialize
+            }).freeze,
             # Object => hashify(%I{
             #   !~
             #   <=>
@@ -492,6 +550,15 @@ module Google
             #   to_s
             #   untrusted?
             # }).freeze,
+            RangeError => hashify(%I{
+              initialize
+            }).freeze,
+            RegexpError => hashify(%I{
+              initialize
+            }).freeze,
+            RuntimeError => hashify(%I{
+              initialize
+            }).freeze,
             String => hashify(%I{
               initialize
               %
@@ -660,6 +727,9 @@ module Google
               year
               zone
             }).freeze,
+            TypeError => hashify(%I{
+              initialize
+            }).freeze,
             UnboundMethod => hashify(%I{
               ==
               arity
@@ -674,6 +744,9 @@ module Google
               source_location
               super_method
               to_s
+            }).freeze,
+            ZeroDivisionError => hashify(%I{
+              initialize
             }).freeze,
             # Modules
             Kernel => hashify(%I{
@@ -842,7 +915,7 @@ module Google
 
               if result.is_a?(Exception) &&
                  result.instance_variable_get(:@mutation_cause)
-                return result.message
+                return "Error: #{result.message}"
               end
 
               result
