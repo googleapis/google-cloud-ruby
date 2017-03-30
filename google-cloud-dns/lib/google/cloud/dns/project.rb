@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/dns/service"
 require "google/cloud/dns/credentials"
 require "google/cloud/dns/zone"
@@ -131,7 +131,7 @@ module Google
           ENV["DNS_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::Environment.project_id
+            Google::Cloud.env.project_id
         end
 
         ##

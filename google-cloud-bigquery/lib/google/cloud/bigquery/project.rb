@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/credentials"
@@ -89,7 +89,7 @@ module Google
           ENV["BIGQUERY_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::Environment.project_id
+            Google::Cloud.env.project_id
         end
 
         ##

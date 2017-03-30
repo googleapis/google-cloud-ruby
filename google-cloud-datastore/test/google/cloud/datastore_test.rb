@@ -74,7 +74,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Datastore::Credentials.stub :default, default_credentials do
             datastore = Google::Cloud.datastore
             datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
@@ -125,7 +125,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Datastore::Credentials.stub :default, default_credentials do
             datastore = Google::Cloud::Datastore.new
             datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
@@ -173,7 +173,7 @@ describe Google::Cloud do
       # Clear all environment variables, except DATASTORE_EMULATOR_HOST
       ENV.stub :[], emulator_check do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Datastore::Credentials.stub :default, default_credentials do
             datastore = Google::Cloud::Datastore.new
             datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
@@ -190,7 +190,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Datastore::Credentials.stub :default, default_credentials do
             datastore = Google::Cloud::Datastore.new emulator_host: emulator_host
             datastore.must_be_kind_of Google::Cloud::Datastore::Dataset

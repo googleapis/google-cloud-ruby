@@ -202,18 +202,20 @@ module Google
         #
         def self.default_monitored_resource
           type, labels =
-            if Core::Environment.gae?
+            if Google::Cloud.env.app_engine?
               ["gae_app", {
-                module_id: Core::Environment.gae_module_id,
-                version_id: Core::Environment.gae_module_version }]
-            elsif Core::Environment.gke?
+                module_id: Google::Cloud.env.app_engine_service_id,
+                version_id: Google::Cloud.env.app_engine_service_version }]
+            elsif Google::Cloud.env.container_engine?
               ["container", {
-                cluster_name: Core::Environment.gke_cluster_name,
-                namespace_id: Core::Environment.gke_namespace_id || "default" }]
-            elsif Core::Environment.gce?
+                cluster_name: Google::Cloud.env.container_engine_cluster_name,
+                namespace_id: \
+                  Google::Cloud.env.container_engine_namespace_id || "default"
+              }]
+            elsif Google::Cloud.env.compute_engine?
               ["gce_instance", {
-                instance_id: Core::Environment.instance_id,
-                zone: Core::Environment.instance_zone }]
+                instance_id: Google::Cloud.env.instance_name,
+                zone: Google::Cloud.env.instance_zone }]
             else
               ["global", {}]
             end

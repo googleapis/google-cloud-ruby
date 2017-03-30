@@ -159,7 +159,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Translate::Credentials.stub :default, default_credentials do
             translate = Google::Cloud.translate
             translate.must_be_kind_of Google::Cloud::Translate::Api
@@ -260,7 +260,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Translate::Credentials.stub :default, default_credentials do
             translate = Google::Cloud::Translate.new
             translate.must_be_kind_of Google::Cloud::Translate::Api

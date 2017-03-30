@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "stackdriver/core/trace_context"
 
 module Google
@@ -312,12 +312,12 @@ module Google
             Google::Cloud::Trace::LabelKey.set_stack_trace labels,
                                                            skip_frames: 3
           end
-          if Google::Cloud::Core::Environment.gae?
+          if Google::Cloud.env.app_engine?
             set_label labels, Google::Cloud::Trace::LabelKey::GAE_APP_MODULE,
-                      Google::Cloud::Core::Environment.gae_module_id
+                      Google::Cloud.env.app_engine_service_id
             set_label labels,
                       Google::Cloud::Trace::LabelKey::GAE_APP_MODULE_VERSION,
-                      Google::Cloud::Core::Environment.gae_module_version
+                      Google::Cloud.env.app_engine_service_version
           end
         end
 

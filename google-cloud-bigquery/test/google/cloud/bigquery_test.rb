@@ -74,7 +74,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
             bigquery = Google::Cloud.bigquery
             bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
@@ -125,7 +125,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
             bigquery = Google::Cloud::Bigquery.new
             bigquery.must_be_kind_of Google::Cloud::Bigquery::Project

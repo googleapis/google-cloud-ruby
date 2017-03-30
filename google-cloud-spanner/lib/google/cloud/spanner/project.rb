@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/instance"
 require "google/cloud/spanner/database"
@@ -72,7 +72,7 @@ module Google
           ENV["SPANNER_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::Environment.project_id
+            Google::Cloud.env.project_id
         end
 
         ##

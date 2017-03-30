@@ -74,7 +74,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Dns::Credentials.stub :default, default_credentials do
             dns = Google::Cloud.dns
             dns.must_be_kind_of Google::Cloud::Dns::Project
@@ -125,7 +125,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Dns::Credentials.stub :default, default_credentials do
             dns = Google::Cloud::Dns.new
             dns.must_be_kind_of Google::Cloud::Dns::Project

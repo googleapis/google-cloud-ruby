@@ -73,7 +73,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud.spanner
             spanner.must_be_kind_of Google::Cloud::Spanner::Project
@@ -124,7 +124,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
             spanner.must_be_kind_of Google::Cloud::Spanner::Project
