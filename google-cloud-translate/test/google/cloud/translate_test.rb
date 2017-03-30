@@ -111,46 +111,49 @@ describe Google::Cloud do
       stubbed_env = ->(name) {
         "found-api-key" if name == "GOOGLE_CLOUD_KEY"
       }
-      stubbed_service = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, key: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, key: nil) {
         key.must_equal "found-api-key"
         project.must_be :empty?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
+        credentials.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
         OpenStruct.new key: key
       }
 
-      # Clear all environment variables
-      # ENV.stub :[], nil do
-      ENV.stub :[], stubbed_env do
-        Google::Cloud::Translate::Service.stub :new, stubbed_service do
-          translate = Google::Cloud.translate
-          translate.must_be_kind_of Google::Cloud::Translate::Api
-          translate.service.must_be_kind_of OpenStruct
-          translate.service.key.must_equal "found-api-key"
+      # Prevent return of actual project in any environment including GCE, etc.
+      Google::Cloud::Translate::Api.stub :default_project, nil do
+        # Clear all environment variables
+        # ENV.stub :[], nil do
+        ENV.stub :[], stubbed_env do
+          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            translate = Google::Cloud.translate
+            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.service.must_be_kind_of OpenStruct
+            translate.service.key.must_equal "found-api-key"
+          end
         end
       end
     end
 
     it "uses provided api key" do
-      stubbed_service = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, key: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, key: nil) {
         key.must_equal "my-api-key"
         project.must_be :empty?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
+        credentials.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
         OpenStruct.new key: key
       }
-
-      # Clear all environment variables
-      ENV.stub :[], nil do
-        Google::Cloud::Translate::Service.stub :new, stubbed_service do
-          translate = Google::Cloud.translate "my-api-key"
-          translate.must_be_kind_of Google::Cloud::Translate::Api
-          translate.service.must_be_kind_of OpenStruct
-          translate.service.key.must_equal "my-api-key"
+      # Prevent return of actual project in any environment including GCE, etc.
+      Google::Cloud::Translate::Api.stub :default_project, nil do
+        # Clear all environment variables
+        ENV.stub :[], nil do
+          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            translate = Google::Cloud.translate "my-api-key"
+            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.service.must_be_kind_of OpenStruct
+            translate.service.key.must_equal "my-api-key"
+          end
         end
       end
     end
@@ -176,10 +179,9 @@ describe Google::Cloud do
         scope.must_be :nil?
         "translate-credentials"
       }
-      stubbed_service = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, key: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, key: nil) {
         project.must_equal "project-id"
-        keyfile.must_equal "translate-credentials"
-        scope.must_be :nil?
+        credentials.must_equal "translate-credentials"
         key.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
@@ -212,46 +214,50 @@ describe Google::Cloud do
       stubbed_env = ->(name) {
         "found-api-key" if name == "GOOGLE_CLOUD_KEY"
       }
-      stubbed_service = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, key: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, key: nil) {
         key.must_equal "found-api-key"
         project.must_be :empty?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
+        credentials.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
         OpenStruct.new key: key
       }
 
-      # Clear all environment variables
-      # ENV.stub :[], nil do
-      ENV.stub :[], stubbed_env do
-        Google::Cloud::Translate::Service.stub :new, stubbed_service do
-          translate = Google::Cloud::Translate.new
-          translate.must_be_kind_of Google::Cloud::Translate::Api
-          translate.service.must_be_kind_of OpenStruct
-          translate.service.key.must_equal "found-api-key"
+      # Prevent return of actual project in any environment including GCE, etc.
+      Google::Cloud::Translate::Api.stub :default_project, nil do
+        # Clear all environment variables
+        # ENV.stub :[], nil do
+        ENV.stub :[], stubbed_env do
+          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            translate = Google::Cloud::Translate.new
+            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.service.must_be_kind_of OpenStruct
+            translate.service.key.must_equal "found-api-key"
+          end
         end
       end
     end
 
     it "uses provided api key" do
-      stubbed_service = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, key: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, key: nil) {
         key.must_equal "my-api-key"
         project.must_be :empty?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
+        credentials.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
         OpenStruct.new key: key
       }
 
-      # Clear all environment variables
-      ENV.stub :[], nil do
-        Google::Cloud::Translate::Service.stub :new, stubbed_service do
-          translate = Google::Cloud::Translate.new key: "my-api-key"
-          translate.must_be_kind_of Google::Cloud::Translate::Api
-          translate.service.must_be_kind_of OpenStruct
-          translate.service.key.must_equal "my-api-key"
+      # Prevent return of actual project in any environment including GCE, etc.
+      Google::Cloud::Translate::Api.stub :default_project, nil do
+        # Clear all environment variables
+        ENV.stub :[], nil do
+          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            translate = Google::Cloud::Translate.new key: "my-api-key"
+            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.service.must_be_kind_of OpenStruct
+            translate.service.key.must_equal "my-api-key"
+          end
         end
       end
     end
