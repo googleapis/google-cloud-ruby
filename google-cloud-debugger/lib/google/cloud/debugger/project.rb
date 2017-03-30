@@ -30,8 +30,7 @@ module Google
       # information about billing and authorized users, and they control access
       # to Stackdriver Logging resources. Each project has a friendly name and a
       # unique ID. Projects can be created only in the [Google Developers
-      # Console](https://console.developers.google.com). See
-      # {Google::Cloud#debugger}.
+      # Console](https://console.developers.google.com).
       #
       # @example
       #   require "google/cloud/debugger"
@@ -110,7 +109,7 @@ module Google
         #   debugger = Google::Cloud::Debugger.new
         #   debugger.start
         #
-        # See {Google::Cloud::Debugger::Agent#start} for more details.
+        # See {Agent#start} for more details.
         def start
           agent.start
         end
@@ -126,7 +125,7 @@ module Google
         #   debugger.start
         #   debugger.stop
         #
-        # See {Google::Cloud::Debugger::Agent#stop} for more details.
+        # See {Agent#stop} for more details.
         def stop
           agent.stop
         end

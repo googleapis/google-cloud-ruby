@@ -23,7 +23,7 @@ module Google
         # Additional information about the source code location that's
         # associated with the breakpoint.
         #
-        # See also {Google::Cloud::Debugger::Breakpoint#location}.
+        # See also {Breakpoint#location}.
         #
         class SourceLocation
           ##

@@ -26,7 +26,7 @@ module Google
       #
       # Represent a debuggee application. Contains information that identifies
       # debuggee applications from each other. Maps to gRPC struct
-      # {Google::Devtools::Clouddebugger::V2:Debuggee}.
+      # {Google::Devtools::Clouddebugger::V2::Debuggee}.
       #
       # It also automatically loads source context information generate from
       # Cloud SDK. See [Stackdriver Debugger

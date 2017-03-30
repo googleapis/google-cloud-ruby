@@ -34,7 +34,7 @@ module Google
           # the files in the given application root directory. It only looks at
           # .rb files and Gemfile.lock
           #
-          # @param [Digest::SHA] A digest SHA object used to add the hashing
+          # @param [Digest::SHA] sha A digest SHA object used to add the hashing
           #   values
           # @param [String] app_path Application root directory where the Ruby
           #   application is located.

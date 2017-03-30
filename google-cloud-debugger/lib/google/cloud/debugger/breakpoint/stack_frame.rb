@@ -24,7 +24,7 @@ module Google
         #
         # Represents a stack frame context.
         #
-        # See also {Google::Cloud::Debugger::Breakpoint#stack_frame}.
+        # See also {Breakpoint#stack_frames}.
         #
         class StackFrame
           ##

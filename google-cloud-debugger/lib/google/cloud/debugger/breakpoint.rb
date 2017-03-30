@@ -244,8 +244,8 @@ module Google
 
         ##
         # Evaluate the breakpoint unless it's already marked as completed. Use
-        # @stack_frames and @evaluated_expressions instance variables to store
-        # the result snapshot. Set breakpoint to complete when done.
+        # "@stack_frames" and "@evaluated_expressions" instance variables to
+        # store the result snapshot. Set breakpoint to complete when done.
         #
         # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
         #   objects, from the call stack that leads to the triggering of the

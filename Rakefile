@@ -288,6 +288,7 @@ namespace :jsondoc do
       "google-cloud-bigquery",
       "google-cloud-core",
       "google-cloud-datastore",
+      "google-cloud-debugger",
       "google-cloud-dns",
       "google-cloud-error_reporting",
       "google-cloud-language",
@@ -347,7 +348,8 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
     end
 
-    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring", "google-cloud-trace"]
+    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting",
+                        "google-cloud-monitoring", "google-cloud-trace", "google-cloud-debugger"]
     gems.each do |gem|
       next unless stackdriver_gems.include? gem
 

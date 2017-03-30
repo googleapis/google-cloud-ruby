@@ -106,8 +106,7 @@ module Google
         # Evaluates a hit breakpoint, and signal BreakpointManager and
         # Transmitter if this breakpoint is evaluated successfully.
         #
-        # See {Google::Cloud::Debugger::Breakpoint#eval_call_stack} for
-        # evaluation details.
+        # See {Breakpoint#eval_call_stack} for evaluation details.
         #
         # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
         #   to be evaluated

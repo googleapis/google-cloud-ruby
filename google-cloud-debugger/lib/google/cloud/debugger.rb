@@ -112,7 +112,7 @@ module Google
     # config.google_cloud.project_id = "gcloud-project"
     # # Google Cloud Platform project identifier for Stackdriver Debugger only
     # config.google_cloud.debugger.project_id = "debugger-project"
-    # # Share Google Cloud authentication json file
+    # # Shared Google Cloud authentication json file
     # config.google_cloud.keyfile = "/path/to/keyfile.json"
     # # Google Cloud authentication json file for Stackdriver Debugger only
     # config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"

@@ -251,8 +251,9 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
   end
 
   describe "Time" do
-    it "allows #+" do
-      expression_must_be_kind_of "Time.now + 3", Time
+    it "allows #hour" do
+      int_class = 1.class
+      expression_must_be_kind_of "Time.now.hour", int_class
     end
 
     it "allows #utc?" do
@@ -335,7 +336,15 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #`" do
-      expression_not_allowed "`ls`"
+      result = evaluator.readonly_eval_expression binding, "`ls`"
+
+      # ActiveSupport overloads Kernel, injects additional code into the
+      # execution path
+      if defined? Rails
+        result.must_match "Mutation detected"
+      else
+        result.must_match "Invalid operation detected"
+      end
     end
 
     it "doesn't allow #eval" do

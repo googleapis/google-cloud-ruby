@@ -26,7 +26,7 @@ describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
       end
     end
 
-    it "doesn't exists max_queue_size" do
+    it "doesn't exceeds max_queue_size" do
       max_queue_size = transmitter.max_queue_size
       transmitter.start
 

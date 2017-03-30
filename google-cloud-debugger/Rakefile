@@ -34,16 +34,8 @@ task :acceptance, :project, :keyfile do |t, args|
 end
 
 namespace :acceptance do
-  desc "Run acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-debugger"
-      track_files "lib/**/*.rb"
-      add_filter "acceptance/"
-    end
-
-    Rake::Task["acceptance"].invoke
+  task :run do
+    puts "This gem does not have acceptance tests."
   end
 end
 
@@ -79,6 +71,7 @@ task :jsondoc => :yard do
 
   registry = YARD::Registry.load! ".yardoc"
   generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-debugger"
+  rm_rf "jsondoc", verbose: true
   generator.write_to "jsondoc"
   cp ["docs/authentication.md", "docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
 end
