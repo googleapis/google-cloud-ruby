@@ -105,6 +105,16 @@ module Google
         ##
         # Evaluates a hit breakpoint, and signal BreakpointManager and
         # Transmitter if this breakpoint is evaluated successfully.
+        #
+        # See {Google::Cloud::Debugger::Breakpoint#eval_call_stack} for
+        # evaluation details.
+        #
+        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
+        #   to be evaluated
+        # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
+        #   objects, from the each frame of the call stack that leads to the
+        #   triggering of the breakpoints.
+        #
         def eval_breakpoint breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 

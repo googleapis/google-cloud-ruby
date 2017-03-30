@@ -48,7 +48,7 @@ module Google
         ##
         # When true, indicates that this is a final result and the breakpoint
         # state will not change from here on.
-        # @return [Bool]
+        # @return [Boolean]
         attr_accessor :is_final_state
 
         ##
@@ -209,9 +209,7 @@ module Google
         #   breakpoint.path #=> "path/to/file.rb"
         # @return [String] The file path for this breakpoint
         def path
-          synchronize do
-            location.nil? ? nil : location.path
-          end
+          location.nil? ? nil : location.path
         end
 
         ##
@@ -221,9 +219,7 @@ module Google
         #   breakpoint.line #=> 11
         # @return [Integer] The line number for this breakpoint
         def line
-          synchronize do
-            location.nil? ? nil : location.line
-          end
+          location.nil? ? nil : location.line
         end
 
         ##
@@ -232,7 +228,7 @@ module Google
         # false if error happens or the expression evaluates to false.
         #
         # @param [Binding] binding A Ruby Binding object
-        # @return [Bool] True if condition evalutes to true, false if condition
+        # @return [Boolean] True if condition evalutes to true, false if condition
         #   evaluates to false or error raised during evaluation.
         #
         def check_condition binding
@@ -247,18 +243,20 @@ module Google
         end
 
         ##
-        # Evaluate the breakpoint. Use @stack_frames and
-        # @evaluated_expressions instance variables to store the result
-        # snapshot. Set breakpoint to complete.
+        # Evaluate the breakpoint unless it's already marked as completed. Use
+        # @stack_frames and @evaluated_expressions instance variables to store
+        # the result snapshot. Set breakpoint to complete when done.
         #
         # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
         #   objects, from the call stack that leads to the triggering of the
         #   breakpoints.
         #
-        # @return [Bool] True if evaluated successfully; false otherwise.
+        # @return [Boolean] True if evaluated successfully; false otherwise.
         #
         def eval_call_stack call_stack_bindings
           synchronize do
+            return false if complete?
+
             top_frame_binding = call_stack_bindings[0]
 
             # Abort evaluation if breakpoint condition isn't met
@@ -322,7 +320,7 @@ module Google
         # @param [Google::Devtools::Clouddebugger::V2::StatusMessage::Reference]
         #   refers_to Enum that specifies what the error refers to. Defaults
         #   :UNSPECIFIED.
-        # @param [bool] is_final Marks the breakpoint as final if true.
+        # @param [Boolean] is_final Marks the breakpoint as final if true.
         #   Defaults true.
         #
         # @return [Google::Devtools::Clouddebugger::V2::StatusMessage] The grpc

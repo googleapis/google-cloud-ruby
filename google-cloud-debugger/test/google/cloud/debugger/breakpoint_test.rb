@@ -193,6 +193,12 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
   end
 
   describe "#eval_call_stack" do
+    it "returns false if breakpoint is evaluated already" do
+      breakpoint.complete
+
+      breakpoint.eval_call_stack(nil).must_equal false
+    end
+
     it "returns false if condition check fails" do
       breakpoint.stub :check_condition, false do
         breakpoint.eval_call_stack [nil]

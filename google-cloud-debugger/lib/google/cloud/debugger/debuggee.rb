@@ -74,7 +74,7 @@ module Google
         ##
         # Register the current application as a debuggee with Stackdriver
         # Debuggee service.
-        # @return [Bool] True if registered sucessfully; otherwise false.
+        # @return [Boolean] True if registered sucessfully; otherwise false.
         def register
           begin
             response = service.register_debuggee to_grpc
@@ -87,7 +87,7 @@ module Google
 
         ##
         # Check whether this debuggee is currently registered or not
-        # @return [Bool] True if debuggee is registered; otherwise false.
+        # @return [Boolean] True if debuggee is registered; otherwise false.
         def registered?
           !id.nil?
         end
@@ -104,10 +104,8 @@ module Google
         def to_grpc
           debuggee_args = build_request_arg
 
-          grpc = Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
+          Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
             debuggee_args.to_json
-
-          grpc
         end
 
         private

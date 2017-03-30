@@ -73,7 +73,7 @@ module Google
         #
         # @param [String] debuggee_id Debuggee application ID
         #
-        # @return [Bool] True if synced successfully; otherwise false.
+        # @return [Boolean] True if synced successfully; otherwise false.
         #
         def sync_active_breakpoints debuggee_id
           begin
@@ -194,7 +194,7 @@ module Google
         ##
         # Check whether any active breakpoints haven't been completed yet.
         #
-        # @return [Bool] True if no more active breakpoints are left. False
+        # @return [Boolean] True if no more active breakpoints are left. False
         #   otherwise.
         def all_complete?
           synchronize do

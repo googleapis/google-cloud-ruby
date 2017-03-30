@@ -185,12 +185,6 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
   end
 
-  describe "Object" do
-    it "allows #method" do
-
-    end
-  end
-
   describe "String" do
     it "allows #length" do
       expression_must_equal "'abc'.length", 3

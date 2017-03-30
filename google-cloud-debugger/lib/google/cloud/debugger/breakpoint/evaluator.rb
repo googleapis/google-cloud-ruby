@@ -507,49 +507,6 @@ module Google
             NoMethodError => hashify(%I{
               initialize
             }).freeze,
-            # Object => hashify(%I{
-            #   !~
-            #   <=>
-            #   ===
-            #   =~
-            #   class
-            #   clone
-            #   dup
-            #   enum_for
-            #   eql?
-            #   equal?
-            #   frozen?
-            #   hash
-            #   inspect
-            #   instance_of?
-            #   instance_variable_defined?
-            #   instance_variable_get
-            #   instance_variables
-            #   is_a?
-            #   itself
-            #   kind_of?
-            #   method
-            #   methods
-            #   nil?
-            #   object_id
-            #   private_methods
-            #   protected_methods
-            #   public_method
-            #   public_methods
-            #   public_send
-            #   respond_to?
-            #   respond_to_missing?
-            #   __send__
-            #   send
-            #   singleton_class
-            #   singleton_method
-            #   singleton_methods
-            #   tainted?
-            #   tap
-            #   to_enum
-            #   to_s
-            #   untrusted?
-            # }).freeze,
             RangeError => hashify(%I{
               initialize
             }).freeze,
@@ -859,7 +816,7 @@ module Google
             # @param [Binding] binding The binding object from the context
             # @param [String] condition A string of code to be evaluates
             #
-            # @return [Bool] True if condition expression read-only evaluates
+            # @return [Boolean] True if condition expression read-only evaluates
             #   to true. Otherwise false.
             #
             def eval_condition binding, condition
@@ -1021,10 +978,10 @@ module Google
             #
             # @param [String] yarv_instructions Compiled YARV instructions
             #   string
-            # @param [Bool] allow_localops Whether allows local variable
+            # @param [Boolean] allow_localops Whether allows local variable
             #   write operations
             #
-            # @return [Bool] True if the YARV instructions don't contain any
+            # @return [Boolean] True if the YARV instructions don't contain any
             #   prohibited operations. Otherwise false.
             #
             def immutable_yarv_instructions? yarv_instructions,
