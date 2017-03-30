@@ -229,7 +229,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.must_be :done?
 
     load_job.wont_be :failed?
-    load_job.gapi.must_be :nil?
   end
 
   it "extracts data to a url in your bucket" do
