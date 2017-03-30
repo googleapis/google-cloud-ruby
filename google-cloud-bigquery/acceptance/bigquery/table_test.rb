@@ -217,6 +217,21 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     copy_job.write_empty?.must_equal true
   end
 
+  it "creates and cancels jobs" do
+    load_job = table.load local_file
+
+    load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    load_job.wont_be :done?
+
+    load_job.cancel
+    load_job.wait_until_done!
+
+    load_job.must_be :done?
+
+    load_job.wont_be :failed?
+    load_job.gapi.must_be :nil?
+  end
+
   it "extracts data to a url in your bucket" do
     skip "The BigQuery to Storage acceptance tests are failing with internalError"
     begin

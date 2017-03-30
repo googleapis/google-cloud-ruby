@@ -202,7 +202,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
 
   it "can cancel itself" do
     mock = Minitest::Mock.new
-    mock.expect :cancel_job, job_id,
+    mock.expect :cancel_job, Google::Apis::BigqueryV2::CancelJobResponse.new(job: job_gapi),
       [project, job_id]
     bigquery.service.mocked_service = mock
 

@@ -206,10 +206,12 @@ module Google
         end
 
         ##
-        # Cancel the job and return a gapi cancel job response.
+        # Cancels the job.
         def cancel
           ensure_service!
-          service.cancel_job job_id
+          resp = service.cancel_job job_id
+          @gapi = resp.job
+          true
         end
 
         ##
