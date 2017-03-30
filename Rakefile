@@ -134,6 +134,21 @@ namespace :acceptance do
     end
   end
 
+  # Runs each gem's acceptance tests without verifying that a test environment
+  # is used. May delete production data! Use only with caution!
+  task :unsafe, :bundleupdate do |t, args|
+    bundleupdate = args[:bundleupdate]
+    Rake::Task["bundleupdate"].invoke if bundleupdate
+    gems.each do |gem|
+      Dir.chdir gem do
+        Bundler.with_clean_env do
+          header "UNSAFE ACCEPTANCE TESTS FOR #{gem}"
+          sh "bundle exec rake acceptance:run -v"
+        end
+      end
+    end
+  end
+
   desc "Runs acceptance tests with coverage for all gems."
   task :coverage do
     FileUtils.remove_dir "coverage", force: true
