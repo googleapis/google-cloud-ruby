@@ -52,7 +52,7 @@ module Google
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
-          config.respond_to? :google_cloud
+          config.key? :google_cloud
         config.google_cloud[:debugger] = ::ActiveSupport::OrderedOptions.new
         config.google_cloud.define_singleton_method :debugger do
           self[:debugger]

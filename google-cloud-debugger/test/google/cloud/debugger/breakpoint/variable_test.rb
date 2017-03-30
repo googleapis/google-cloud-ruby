@@ -137,6 +137,16 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
       var.members.must_be_empty
     end
 
+    it "converts empty Hash" do
+      h = {}
+      var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var h
+
+      var.name.must_be_nil
+      var.type.must_equal "Hash"
+      var.members.must_be_empty
+      var.value.must_equal "{}"
+    end
+
     it "converts Hash" do
       int_clsas = 1.class.to_s
       h = {k1: 1, k2: {k3: "2", k4: {k5: {k6: 3}}}}
@@ -172,6 +182,16 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
       var.members[1].members[1].members[0].name.must_equal "k5"
       var.members[1].members[1].members[0].value.must_equal({k6: 3}.to_s)
       var.members[1].members[1].members[0].members.must_be_empty
+    end
+
+    it "converts empty Array" do
+      ary = []
+      var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var ary
+
+      var.name.must_be_nil
+      var.type.must_equal "Array"
+      var.members.must_be_empty
+      var.value.must_equal "[]"
     end
 
     it "converts Array" do
@@ -236,19 +256,19 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
       var.members[0].members.must_be_empty
     end
 
-    it "limits members count to 25" do
+    it "limits members count to 10" do
       ary = (1..27).to_a
       var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var ary
 
       var.type.must_equal "Array"
       var.name.must_be_nil
       var.value.must_be_nil
-      var.members.size.must_equal 26
+      var.members.size.must_equal 11
 
-      var.members[25].type.must_be_nil
-      var.members[25].name.must_be_nil
-      var.members[25].value.must_equal "(Only first 25 items were captured)"
-      var.members[25].members.must_be_empty
+      var.members[10].type.must_be_nil
+      var.members[10].name.must_be_nil
+      var.members[10].value.must_equal "(Only first 10 items were captured)"
+      var.members[10].members.must_be_empty
     end
 
     it "limits string length to Variable::MAX_STRING_LENGTH" do

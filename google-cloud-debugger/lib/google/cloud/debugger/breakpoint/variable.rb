@@ -83,8 +83,7 @@ module Google
 
           ##
           # Max number of member variables to evaluate in compound variables
-          # TODO: Reduce max members to just 10
-          MAX_MEMBERS = 25
+          MAX_MEMBERS = 10
 
           ##
           # Max length on variable inspect results. Truncate extra and replace
@@ -160,26 +159,38 @@ module Google
           #   var.members[1].value #=> "two"
           #   var.members[1].type  #=> "Symbol"
           #
-          # TODO: add more examples
+          # @example
+          #   foo = Foo.new(a: 1, b: []) #=> #<Foo:0x0000 @a: 1, @b: []>
+          #   var = Variable.from_rb_var foo, name: "foo"
+          #   var.name  #=> "foo"
+          #   var.type  #=> "Foo"
+          #   var.members[0].name  #=> "@a"
+          #   var.members[0].value #=> "1"
+          #   var.members[0].type  #=> "Integer"
+          #   var.members[1].name  #=> "@b"
+          #   var.members[1].value #=> "[]"
+          #   var.members[1].type  #=> "Array"
           #
           # @return [Google::Cloud::Debugger::Breakpoint::Variable] Converted
           #   variable.
           #
-
           def self.from_rb_var source, name: nil, depth: MAX_DEPTH
             return source if source.is_a? Variable
 
-            if (source.is_a?(Hash) || source.is_a?(Array) ||
-              !source.instance_variables.empty?) && depth > 0
-              return from_compound_var source, name: name, depth: depth
+            # If source is a non-empty Array or Hash, or source has instance
+            # variables, evaluate source as a compound variable.
+            if (((source.is_a?(Hash) || source.is_a?(Array)) &&
+               !source.empty?) || !source.instance_variables.empty?) &&
+               depth > 0
+              from_compound_var source, name: name, depth: depth
+            else
+              var = Variable.new
+              var.name = name.to_s if name
+              var.type = source.class.to_s
+              var.value = truncate_value(source.inspect)
+
+              var
             end
-
-            var = Variable.new
-            var.name = name.to_s if name
-            var.type = source.class.to_s
-            var.value = truncate_value(source.inspect)
-
-            var
           end
 
           def self.from_compound_var source, name: nil, depth: MAX_DEPTH
@@ -215,7 +226,8 @@ module Google
                 var.members << yield(el, i)
               else
                 var.members << Variable.new.tap do |last_var|
-                  last_var.value = "(Only first 25 items were captured)"
+                  last_var.value =
+                    "(Only first #{MAX_MEMBERS} items were captured)"
                 end
                 break
               end

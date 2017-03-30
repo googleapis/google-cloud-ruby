@@ -276,8 +276,6 @@ module Google
             if (@thread.nil? || !@thread.alive?) && @async_state != :stopped
               @lock_cond = new_cond
               AsyncActor.register_for_cleanup self
-              # TODO: Remove this debug flag
-              Thread.abort_on_exception = true
               @thread = Thread.new do
                 async_run_job
                 AsyncActor.unregister_for_cleanup self

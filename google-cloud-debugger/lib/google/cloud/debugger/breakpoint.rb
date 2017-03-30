@@ -373,7 +373,6 @@ module Google
         # object.
         def timestamp_to_grpc time
           return nil if time.nil?
-          # TODO: ArgumentError if timestamp is not a Time object?
           Google::Protobuf::Timestamp.new(
             seconds: time.to_i,
             nanos: time.nsec

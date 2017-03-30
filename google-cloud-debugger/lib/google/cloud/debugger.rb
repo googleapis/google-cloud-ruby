@@ -62,11 +62,11 @@ module Google
     # Other Stackdriver Debugger service features not covered by this
     # application instrumentation:
     #
-    # *   Source code management. The Stackdriver Debugger service console is
-    #     able to display your application source code from a source of your
-    #     choice as a more convenient way to manage breakpoints. See [Debugger
-    #     Doc](https://cloud.google.com/debugger/docs/source-context) on how to
-    #     select source code on Stackdriver Debugger UI.
+    # *   Source code context generation. The Stackdriver Debugger service
+    #     console is able to display your application source code from a source
+    #     of your choice if a source context JSON file exists. See
+    #     [Debugger Doc](https://cloud.google.com/debugger/docs/source-context)
+    #     on how to select source code on Stackdriver Debugger UI.
     # *   Breakpoints creation and manipulation. See the [Debugger
     #     Doc](https://cloud.google.com/debugger/docs/debugging) on how to
     #     manage breakpoints on Cloud Console, or see the [#Debugger
@@ -84,11 +84,11 @@ module Google
     # Note that when no breakpoints are created, the debugger agent consumes
     # very little resource and has no interference with the running application.
     # Once breakpoints are created and depends on where the breakpoints are
-    # located, the debugger agent may add a little time onto each request. The
-    # application performance will be back to normal after all breakpoints are
-    # finished evaluating. Be aware the more breakpoints are created, or the
-    # more complicated the breakpoints are located, the more resource the
-    # debugger agent would need to consume.
+    # located, the debugger agent may add a little latency onto each request.
+    # The application performance will be back to normal after all breakpoints
+    # are finished being evaluated. Be aware the more breakpoints are created,
+    # or the harder to reach the breakpoints, the more resource the debugger
+    # agent would need to consume.
     #
     # ### Using instrumentation with Ruby on Rails
     #
