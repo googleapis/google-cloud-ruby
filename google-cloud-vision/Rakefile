@@ -47,8 +47,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["STORAGE_KEYFILE"] = nil
   ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
@@ -62,6 +61,11 @@ namespace :acceptance do
     end
 
     Rake::Task["acceptance"].invoke
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 end
 

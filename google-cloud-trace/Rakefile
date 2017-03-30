@@ -59,8 +59,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["TRACE_KEYFILE"] = nil
   ENV["TRACE_KEYFILE_JSON"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/trace/**/*_test.rb").each { |file| require_relative file }
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
@@ -74,6 +73,11 @@ namespace :acceptance do
     end
 
     Rake::Task["acceptance"].invoke
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/trace/**/*_test.rb").each { |file| require_relative file }
   end
 end
 

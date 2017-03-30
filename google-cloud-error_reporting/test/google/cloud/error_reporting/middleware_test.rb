@@ -80,10 +80,13 @@ describe Google::Cloud::ErrorReporting::Middleware do
 
     it "raises ArgumentError if empty project_id provided" do
       assert_raises ArgumentError do
-        Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
-        :new, "A default error_reporting" do
-          ENV.stub :[], nil do
-            Google::Cloud::ErrorReporting::Middleware.new nil
+        # Prevent return of actual project in any environment including GCE, etc.
+        Google::Cloud::Core::Environment.stub :project_id, nil do
+          Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
+          :new, "A default error_reporting" do
+            ENV.stub :[], nil do
+              Google::Cloud::ErrorReporting::Middleware.new nil
+            end
           end
         end
       end

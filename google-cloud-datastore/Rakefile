@@ -44,8 +44,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["DATASTORE_KEYFILE"] = nil
   ENV["DATASTORE_KEYFILE_JSON"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
@@ -63,6 +62,11 @@ namespace :acceptance do
 
   desc "Run acceptance cleanup."
   task :cleanup do
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 
   # TODO: Add a setup task to create indexes for the datastore

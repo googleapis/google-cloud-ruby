@@ -44,8 +44,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["PUBSUB_KEYFILE"] = nil
   ENV["PUBSUB_KEYFILE_JSON"] = keyfile
 
-  $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative file }
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
@@ -85,6 +84,11 @@ namespace :acceptance do
     puts "Cleaning up Pub/Sub topics and subscriptions"
     Google::Cloud.pubsub.topics.all &:delete
     Google::Cloud.pubsub.subscriptions.all &:delete
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative file }
   end
 end
 

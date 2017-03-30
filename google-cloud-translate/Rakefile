@@ -58,8 +58,7 @@ task :acceptance, :project, :keyfile, :key do |t, args|
   ENV["TRANSLATE_KEYFILE_JSON"] = keyfile
   ENV["TRANSLATE_KEY"] = nil
 
-  $LOAD_PATH.unshift "lib", "acceptance"
-  Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
@@ -79,8 +78,7 @@ namespace :acceptance do
     ENV["GCLOUD_KEYFILE_JSON"] = nil
     ENV["TRANSLATE_KEY"] = key
 
-    $LOAD_PATH.unshift "lib", "acceptance"
-    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+    Rake::Task["acceptance:run"].invoke
   end
 
   desc "Run acceptance tests with coverage."
@@ -93,6 +91,11 @@ namespace :acceptance do
     end
 
     Rake::Task["acceptance"].invoke
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 end
 

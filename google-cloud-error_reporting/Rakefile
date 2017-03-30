@@ -37,6 +37,9 @@ task :acceptance do
 end
 
 namespace :acceptance do
+  task :run do
+    puts "This gem does not have acceptance tests."
+  end
   desc "Run acceptance cleanup."
   task :cleanup do
   end
