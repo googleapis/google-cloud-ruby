@@ -2,7 +2,7 @@
 
 [Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
 
-- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/master/google/cloud/logging)
+- [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -46,7 +46,7 @@ logging.write_entries entry
 
 ## Rails Integration
 
-This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it sets an instance of Google::Cloud::Logging::Logger as the default Rails logger. Then all consequent log entries will be submitted to the Stackdriver Logging service. 
+This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it sets an instance of Google::Cloud::Logging::Logger as the default Rails logger. Then all consequent log entries will be submitted to the Stackdriver Logging service.
 
 To do this, simply add this line to config/application.rb:
 ```ruby
@@ -60,13 +60,13 @@ config.google_cloud.keyfile = "/path/to/gcp/secret.json"
 # Or more specificly for Logging
 config.google_cloud.logging.project_id = "gcp-project-id"
 config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
- 
+
 # Explicitly enable or disable Logging
 config.google_cloud.use_logging = true
- 
+
 # Set Stackdriver Logging log name
 config.google_cloud.logging.log_name = "my-app-log"
- 
+
 # Override default monitored resource if needed. E.g. used on AWS
 config.google_cloud.logging.monitored_resource.type = "aws_ec2_instance"
 config.google_cloud.logging.monitored_resource.labels.instance_id = "ec2-instance-id"

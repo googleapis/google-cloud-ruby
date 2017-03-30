@@ -4,7 +4,7 @@
 
 The current `gcloud` gem exists only to facilitate the timely transition of legacy code from the deprecated `Gcloud` namespace to the new `Google::Cloud` namespace. Please see the top-level project [README](../README.md) for current information about using the `google-cloud` umbrella gem and the individual service gems.
 
-- [gcloud API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/master/gcloud)
+- [gcloud API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/gcloud/latest)
 - [gcloud on RubyGems](https://rubygems.org/gems/gcloud)
 
 ## Quick Start
