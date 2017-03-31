@@ -93,6 +93,14 @@
       ]
     },
     {
+      "id": "google-cloud-debugger",
+      "name": "google-cloud-debugger",
+      "defaultService": "google/cloud/debugger",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-dns",
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",

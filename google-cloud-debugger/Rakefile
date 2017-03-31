@@ -9,7 +9,7 @@ spec = Gem::Specification.load("google-cloud-debugger.gemspec")
 Rake::ExtensionTask.new("google/cloud/debugger/debugger_c", spec)
 
 desc "Run tests."
-task :test do
+task :test => :compile do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
@@ -30,23 +30,23 @@ end
 
 # Acceptance tests
 desc "Run the debugger acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, [:project, :keyfile] => :compile do |t, args|
+  puts "This gem does not have acceptance tests."
 end
 
 namespace :acceptance do
-  task :run do
+  task :run => :compile do
     puts "This gem does not have acceptance tests."
   end
 end
 
 desc "Run yard-doctest example tests."
-task doctest: :yard do
-  sh "bundle exec yard config -a autoload_plugins yard-doctest"
-  sh "bundle exec yard doctest"
+task doctest: [:compile, :yard] do
+  puts "This gem does not have doc tests."
 end
 
 desc "Start an interactive shell."
-task :console do
+task :console => :compile do
   require "irb"
   require "irb/completion"
   require "pp"
@@ -65,7 +65,7 @@ require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
 desc "Generates JSON output from google-cloud-debugger .yardoc"
-task :jsondoc => :yard do
+task :jsondoc => [:compile, :yard] do
   require "rubygems"
   require "gcloud/jsondoc"
 

@@ -20,9 +20,6 @@
 #include "tracer.h"
 #include "evaluator.h"
 
-/* To prevent unused parameter warnings */
-#define UNUSED(x) (void)(x)
-
 void
 Init_debugger_c();
 

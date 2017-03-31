@@ -49,8 +49,6 @@ rb_disable_method_trace_for_thread(VALUE self)
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"), Qfalse);
     }
 
-    fflush(stdout);
-
     return Qnil;
 }
 
@@ -65,8 +63,6 @@ rb_enable_method_trace_for_thread(VALUE self)
         rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)eval_trace_callback, RUBY_EVENT_CALL | RUBY_EVENT_C_CALL, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
         rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"), Qtrue);
     }
-
-    fflush(stdout);
 
     return Qnil;
 }

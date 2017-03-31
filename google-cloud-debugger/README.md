@@ -18,6 +18,16 @@ See the
 [google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/master/google/cloud/debugger)
 for a quick tutorial.
 
+## Authentication
+
+This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
+
+Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
+
+## Usage
+
+This library provides a Stackdriver Debugger Agent that's able to work with Ruby applications. It also integrates with Ruby on Rails and other popular Rack-based frameworks. See the [Instrumentation Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/instrumentation) for more details.
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 2.3+.

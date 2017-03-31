@@ -36,7 +36,7 @@ task :each, :bundleupdate do |t, args|
 end
 
 desc "Runs tests for all gems."
-task :test do
+task :test => :compile do
   require "active_support/all"
   gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/test"
@@ -89,7 +89,7 @@ namespace :test do
 end
 
 desc "Runs acceptance tests for all gems."
-task :acceptance, :project, :keyfile, :key do |t, args|
+task :acceptance, [:project, :keyfile, :key] => :compile do |t, args|
   project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
@@ -348,8 +348,6 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
     end
 
-    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting",
-                        "google-cloud-monitoring", "google-cloud-trace", "google-cloud-debugger"]
     gems.each do |gem|
       next unless stackdriver_gems.include? gem
 
@@ -462,7 +460,6 @@ namespace :jsondoc do
       Rake::Task["jsondoc:google_cloud"].invoke(google_cloud_version, gh_pages_dir)
     end
 
-    stackdriver_gems = ["stackdriver", "google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
     if stackdriver_gems.include? gem
       stackdriver_version = manifest_versions["stackdriver"]
       header "Assembling jsondoc for stackdriver package"
@@ -783,6 +780,19 @@ namespace :changes do
   end
 end
 
+desc "Compile each gems"
+task :compile do
+  gems_with_ext = ["google-cloud-debugger"]
+  gems_with_ext.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "Compile C extension for #{gem}"
+        sh "bundle exec rake compile"
+      end
+    end
+  end
+end
+
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
@@ -852,5 +862,14 @@ def extract_args args, *keys
   end
   vals.length > 1 ? vals : vals.first
 end
+
+def stackdriver_gems
+  ["google-cloud-logging",
+   "google-cloud-error_reporting",
+   "google-cloud-monitoring",
+   "google-cloud-trace",
+   "google-cloud-debugger"]
+end
+
 
 task :default => :test

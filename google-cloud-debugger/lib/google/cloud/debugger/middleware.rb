@@ -66,12 +66,10 @@ module Google
           # Enable/resume breakpoints tracing
           @debugger.agent.tracer.start
 
-          response = @app.call env
-
+          @app.call env
+        ensure
           # Stop breakpoints tracing beyond this point
           @debugger.agent.tracer.disable_traces_for_thread
-
-          response
         end
       end
     end
