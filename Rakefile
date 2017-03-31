@@ -493,12 +493,15 @@ namespace :circleci do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          sh "bundle update"
+          spec = Gem::Specification::load("#{gem}.gemspec")
+          if spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+            sh "bundle update"
 
-          if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
+            if run_acceptance
+              sh "bundle exec rake ci:acceptance"
+            else
+              sh "bundle exec rake ci"
+            end
           end
         end
       end
@@ -540,12 +543,15 @@ namespace :travis do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          sh "bundle update"
+          spec = Gem::Specification::load("#{gem}.gemspec")
+          if spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+            sh "bundle update"
 
-          if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
+            if run_acceptance
+              sh "bundle exec rake ci:acceptance"
+            else
+              sh "bundle exec rake ci"
+            end
           end
         end
       end
@@ -567,21 +573,24 @@ namespace :appveyor do
     gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
-          # Fix acceptance/data symlinks on windows
-          require "fileutils"
-          FileUtils.mkdir_p "acceptance"
-          FileUtils.rm_f "acceptance/data"
-          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
+          spec = Gem::Specification::load("#{gem}.gemspec")
+          if spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+            # Fix acceptance/data symlinks on windows
+            require "fileutils"
+            FileUtils.mkdir_p "acceptance"
+            FileUtils.rm_f "acceptance/data"
+            sh "call mklink /j acceptance\\data ..\\acceptance\\data"
 
-          sh "bundle update"
+            sh "bundle update"
 
-          if run_acceptance
-            # Set the SSL certificate so connections can be made
-            ENV["SSL_CERT_FILE"] = ssl_cert_file
+            if run_acceptance
+              # Set the SSL certificate so connections can be made
+              ENV["SSL_CERT_FILE"] = ssl_cert_file
 
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
+              sh "bundle exec rake ci:acceptance"
+            else
+              sh "bundle exec rake ci"
+            end
           end
         end
       end
@@ -594,9 +603,12 @@ task :ci, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
   gems.each do |gem|
     Dir.chdir gem do
-      Bundler.with_clean_env do
-        sh "bundle update" if bundleupdate
-        sh "bundle exec rake ci"
+      spec = Gem::Specification::load("#{gem}.gemspec")
+      if spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+        Bundler.with_clean_env do
+          sh "bundle update" if bundleupdate
+          sh "bundle exec rake ci"
+        end
       end
     end
   end
@@ -607,9 +619,12 @@ namespace :ci do
     bundleupdate = args[:bundleupdate]
     gems.each do |gem|
       Dir.chdir gem do
-        Bundler.with_clean_env do
-          sh "bundle update" if bundleupdate
-          sh "bundle exec rake ci:acceptance"
+        spec = Gem::Specification::load("#{gem}.gemspec")
+        if spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+          Bundler.with_clean_env do
+            sh "bundle update" if bundleupdate
+            sh "bundle exec rake ci:acceptance"
+          end
         end
       end
     end
