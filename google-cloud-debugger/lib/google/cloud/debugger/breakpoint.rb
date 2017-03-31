@@ -228,8 +228,8 @@ module Google
         # false if error happens or the expression evaluates to false.
         #
         # @param [Binding] binding A Ruby Binding object
-        # @return [Boolean] True if condition evalutes to true, false if condition
-        #   evaluates to false or error raised during evaluation.
+        # @return [Boolean] True if condition evalutes to true, false if
+        #   condition evaluates to false or error raised during evaluation.
         #
         def check_condition binding
           return true if condition.nil? || condition.empty?
