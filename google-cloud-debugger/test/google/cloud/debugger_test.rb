@@ -82,21 +82,20 @@ describe Google::Cloud do
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
+      stubbed_env = OpenStruct.new project_id: "project-id",
+                                   app_engine_service_id: default_module_name,
+                                   app_engine_service_version: default_module_version
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, stubbed_env do
           Google::Cloud::Debugger::Credentials.stub :default, default_credentials do
-            Google::Cloud::Core::Environment.stub :gae_module_id, default_module_name do
-              Google::Cloud::Core::Environment.stub :gae_module_version, default_module_version do
-                debugger = Google::Cloud.debugger
-                debugger.must_be_kind_of Google::Cloud::Debugger::Project
-                debugger.project.must_equal "project-id"
-                debugger.agent.debuggee.module_name.must_equal default_module_name
-                debugger.agent.debuggee.module_version.must_equal default_module_version
-                debugger.service.credentials.must_equal default_credentials
-              end
-            end
+            debugger = Google::Cloud.debugger
+            debugger.must_be_kind_of Google::Cloud::Debugger::Project
+            debugger.project.must_equal "project-id"
+            debugger.agent.debuggee.module_name.must_equal default_module_name
+            debugger.agent.debuggee.module_version.must_equal default_module_version
+            debugger.service.credentials.must_equal default_credentials
           end
         end
       end
@@ -145,21 +144,21 @@ describe Google::Cloud do
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id, keyfile, module_name, and module_version" do
+      stubbed_env = OpenStruct.new project_id: "project-id",
+                                   app_engine_service_id: default_module_name,
+                                   app_engine_service_version: default_module_version
+
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
-        Google::Cloud::Core::Environment.stub :project_id, "project-id" do
+        Google::Cloud.stub :env, stubbed_env do
           Google::Cloud::Debugger::Credentials.stub :default, default_credentials do
-            Google::Cloud::Core::Environment.stub :gae_module_id, default_module_name do
-              Google::Cloud::Core::Environment.stub :gae_module_version, default_module_version do
-                debugger = Google::Cloud::Debugger.new
-                debugger.must_be_kind_of Google::Cloud::Debugger::Project
-                debugger.project.must_equal "project-id"
-                debugger.agent.debuggee.module_name.must_equal default_module_name
-                debugger.agent.debuggee.module_version.must_equal default_module_version
-                debugger.service.credentials.must_equal default_credentials
-              end
-            end
+            debugger = Google::Cloud::Debugger.new
+            debugger.must_be_kind_of Google::Cloud::Debugger::Project
+            debugger.project.must_equal "project-id"
+            debugger.agent.debuggee.module_name.must_equal default_module_name
+            debugger.agent.debuggee.module_version.must_equal default_module_version
+            debugger.service.credentials.must_equal default_credentials
           end
         end
       end

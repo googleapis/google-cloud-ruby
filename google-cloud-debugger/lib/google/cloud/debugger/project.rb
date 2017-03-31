@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/debugger/agent"
 require "google/cloud/debugger/credentials"
 require "google/cloud/debugger/middleware"
@@ -81,14 +81,14 @@ module Google
           ENV["DEBUGGER_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud::Core::Environment.project_id
+            Google::Cloud.env.project_id
         end
 
         ##
         # @private Default module name identifier.
         def self.default_module_name
           ENV["DEBUGGER_MODULE_NAME"] ||
-            Google::Cloud::Core::Environment.gae_module_id ||
+            Google::Cloud.env.app_engine_service_id ||
             "ruby-app"
         end
 
@@ -96,7 +96,7 @@ module Google
         # @private Default module version identifier.
         def self.default_module_version
           ENV["DEBUGGER_MODULE_VERSION"] ||
-            Google::Cloud::Core::Environment.gae_module_version ||
+            Google::Cloud.env.app_engine_service_version ||
             ""
         end
 
