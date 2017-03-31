@@ -54,7 +54,7 @@ module Google
         WAIT_INTERVAL = 1.0
 
         @cleanup_list = nil
-        @exit_lock = Mutex.new
+        @exit_lock = Monitor.new
 
         ##
         # @private The async actor state

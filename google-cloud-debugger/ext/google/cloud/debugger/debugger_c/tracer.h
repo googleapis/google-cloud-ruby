@@ -22,6 +22,9 @@
 #define FILE_TRACEPOINT_EVENT (RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_C_CALL | RUBY_EVENT_B_CALL)
 #define FIBER_TRACEPOINT_EVENT RUBY_EVENT_FIBER_SWITCH
 
+/* To prevent unused parameter warnings */
+#define UNUSED(x) (void)(x)
+
 void
 Init_tracer(VALUE mDebugger);
 

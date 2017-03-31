@@ -344,6 +344,7 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
     return;
 }
 
+#ifdef RUBY_EVENT_FIBER_SWITCH
 static void
 fiber_tracepoint_callback(VALUE tracepoint, void *data)
 {
@@ -360,7 +361,7 @@ fiber_tracepoint_callback(VALUE tracepoint, void *data)
 
     return;
 }
-
+#endif
 
 /**
  * register_tracepoint
@@ -390,18 +391,29 @@ register_tracepoint(VALUE self, int event, const char *instance_variable_name, v
 static VALUE
 rb_disable_traces(VALUE self)
 {
-    VALUE file_tracepoint = rb_iv_get(self, "@file_tracepoint");
-    VALUE fiber_tracepoint = rb_iv_get(self, "@fiber_tracepoint");
-    VALUE threads = rb_funcall(rb_cThread, rb_intern("list"), 0);
-    VALUE *c_threads = RARRAY_PTR(threads);
-    int c_threads_len = RARRAY_LEN(threads);
+    VALUE file_tracepoint;
+    VALUE fiber_tracepoint;
+    VALUE threads;
+    VALUE *c_threads;
+    int c_threads_len;
     VALUE thread;
     int i;
 
+    file_tracepoint = rb_iv_get(self, "@file_tracepoint");
+    threads = rb_funcall(rb_cThread, rb_intern("list"), 0);
+    c_threads_len = RARRAY_LEN(threads);
+    c_threads = RARRAY_PTR(threads);
+    UNUSED(fiber_tracepoint);
+
     if (RTEST(file_tracepoint) && RTEST(rb_tracepoint_enabled_p(file_tracepoint)))
         rb_tracepoint_disable(file_tracepoint);
+
+#ifdef RUBY_EVENT_FIBER_SWITCH
+    fiber_tracepoint= rb_iv_get(self, "@fiber_tracepoint");
     if (RTEST(fiber_tracepoint) && RTEST(rb_tracepoint_enabled_p(fiber_tracepoint)))
         rb_tracepoint_disable(fiber_tracepoint);
+#endif
+
     for (i = 0; i < c_threads_len; i++) {
         thread = c_threads[i];
         if (RTEST(rb_funcall(thread, rb_intern("alive?"), 0))) {
@@ -422,17 +434,22 @@ rb_disable_traces(VALUE self)
 static VALUE
 rb_enable_traces(VALUE self)
 {
-    VALUE file_tracepoint = register_tracepoint(self, FILE_TRACEPOINT_EVENT, "@file_tracepoint", file_tracepoint_callback);
-    VALUE fiber_tracepoint = register_tracepoint(self, RUBY_EVENT_FIBER_SWITCH, "@fiber_tracepoint", fiber_tracepoint_callback);
+    VALUE file_tracepoint;
+    VALUE fiber_tracepoint;
+
+    file_tracepoint = register_tracepoint(self, FILE_TRACEPOINT_EVENT, "@file_tracepoint", file_tracepoint_callback);
+    UNUSED(fiber_tracepoint);
 
     // Immediately activate file tracepoint and fiber tracepoint
     if (RTEST(file_tracepoint) && !RTEST(rb_tracepoint_enabled_p(file_tracepoint))) {
         rb_tracepoint_enable(file_tracepoint);
     }
+#ifdef RUBY_EVENT_FIBER_SWITCH
+    fiber_tracepoint = register_tracepoint(self, RUBY_EVENT_FIBER_SWITCH, "@fiber_tracepoint", fiber_tracepoint_callback);
     if (RTEST(fiber_tracepoint) && !RTEST(rb_tracepoint_enabled_p(fiber_tracepoint))) {
         rb_tracepoint_enable(fiber_tracepoint);
     }
-
+#endif
     return Qnil;
 }
 
