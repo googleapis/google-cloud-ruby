@@ -112,47 +112,31 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   end
 
   describe ".default_monitored_resource" do
-    it "returns resource of type gae_app if gae? is true" do
-      Google::Cloud::Core::Environment.stub :gae?, true do
-        Google::Cloud::Core::Environment.stub :gke?, false do
-          Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-            rc.type.must_equal "gae_app"
-          end
-        end
+    it "returns resource of type gae_app if app_engine? is true" do
+      Google::Cloud.stub :env, OpenStruct.new(:app_engine? => true, :container_engine? => false, :compute_engine? => true) do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        rc.type.must_equal "gae_app"
       end
     end
 
-    it "returns resource of type container if gke? is true" do
-      Google::Cloud::Core::Environment.stub :gae?, false do
-        Google::Cloud::Core::Environment.stub :gke?, true do
-          Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-            rc.type.must_equal "container"
-          end
-        end
+    it "returns resource of type container if container_engine? is true" do
+      Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => true, :compute_engine? => true) do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        rc.type.must_equal "container"
       end
     end
 
-    it "returns resource of type gce_instance if gce? is true" do
-      Google::Cloud::Core::Environment.stub :gae?, false do
-        Google::Cloud::Core::Environment.stub :gke?, false do
-          Google::Cloud::Core::Environment.stub :gce?, true do
-            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-            rc.type.must_equal "gce_instance"
-          end
-        end
+    it "returns resource of type gce_instance if compute_engine? is true" do
+      Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => true) do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        rc.type.must_equal "gce_instance"
       end
     end
 
     it "returns resource of type global if not on GCP" do
-      Google::Cloud::Core::Environment.stub :gae?, false do
-        Google::Cloud::Core::Environment.stub :gke?, false do
-          Google::Cloud::Core::Environment.stub :gce?, false do
-            rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-            rc.type.must_equal "global"
-          end
-        end
+      Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => false) do
+        rc = Google::Cloud::Logging::Middleware.build_monitored_resource
+        rc.type.must_equal "global"
       end
     end
   end

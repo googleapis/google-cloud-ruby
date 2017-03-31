@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/error_reporting/v1beta1"
 require "rack"
 require "rack/request"
@@ -64,16 +64,16 @@ module Google
           @error_reporting = error_reporting
           @service_name = service_name ||
                           ENV["ERROR_REPORTING_SERVICE"] ||
-                          Google::Cloud::Core::Environment.gae_module_id ||
+                          Google::Cloud.env.app_engine_service_id ||
                           "ruby"
           @service_version = service_version ||
                              ENV["ERROR_REPORTING_VERSION"] ||
-                             Google::Cloud::Core::Environment.gae_module_version
+                             Google::Cloud.env.app_engine_service_version
           @ignore_classes = Array(ignore_classes)
           @project_id = project_id ||
                         ENV["ERROR_REPORTING_PROJECT"] ||
                         ENV["GOOGLE_CLOUD_PROJECT"] ||
-                        Google::Cloud::Core::Environment.project_id
+                        Google::Cloud.env.project_id
 
           fail ArgumentError, "project_id is required" if @project_id.nil?
         end

@@ -17,8 +17,4 @@
 # #logging methods can be available, but the library and all dependencies won't
 # be loaded until required and used.
 
-
-gem "google-cloud-core"
-require "google/cloud"
-
 # There is no Google::Cloud integration to add.

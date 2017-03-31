@@ -18,6 +18,7 @@ gem "rack", ">= 0.1"
 gem "sinatra", "~> 1.4"
 
 gem "google-cloud-core", path: "google-cloud-core"
+gem "google-cloud-env", path: "google-cloud-env"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
 gem "google-cloud-datastore", path: "google-cloud-datastore"
 gem "google-cloud-dns", path: "google-cloud-dns"

@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.0.0"
 
   gem.add_dependency "googleauth", "~> 0.5.1"
+  gem.add_dependency "google-cloud-env", "~> 0.1.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/core/environment"
+require "google/cloud/env"
 require "google/cloud/error_reporting/v1beta1"
 require "google/cloud/error_reporting/middleware"
 require "google/cloud/credentials"
@@ -165,7 +165,7 @@ module Google
 
         ##
         # Determine the GCP project_id from Rails configuration or environment
-        # variables. Default to Google::Cloud::Core::Environment.project_id
+        # variables. Default to Google::Cloud.env.project_id
         #
         # @param [Rails::Railtie::Configuration] config The
         #   Rails.application.config
@@ -177,7 +177,7 @@ module Google
             config.google_cloud.project_id ||
             ENV["ERROR_REPORTING_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
-            Google::Cloud::Core::Environment.project_id
+            Google::Cloud.env.project_id
         end
         private_class_method :project_id
       end

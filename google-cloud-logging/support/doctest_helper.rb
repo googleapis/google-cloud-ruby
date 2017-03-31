@@ -358,38 +358,26 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Logging::Middleware" do
-    Google::Cloud::Core::Environment.define_singleton_method :gae? do
-      false
-    end
-
-    Google::Cloud::Core::Environment.define_singleton_method :gke? do
-      false
-    end
-
-    Google::Cloud::Core::Environment.define_singleton_method :gce? do
-      false
-    end
-
-    Google::Cloud::Core::Environment.define_singleton_method :get_metadata_attribute do |_, _|
-      nil
+    Google::Cloud.define_singleton_method :env do
+      OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => false)
     end
   end
 
   doctest.before "Google::Cloud::Logging::Middleware.build_monitored_resource@If running from GAE, returns default resource" do
-    Google::Cloud::Core::Environment.define_singleton_method :gae? do
-      true
+    Google::Cloud.define_singleton_method :env do
+      OpenStruct.new(:app_engine? => true, :container_engine? => false, :compute_engine? => true)
     end
   end
 
   doctest.before "Google::Cloud::Logging::Middleware.build_monitored_resource@If running from GKE, returns default resource" do
-    Google::Cloud::Core::Environment.define_singleton_method :gke? do
-      true
+    Google::Cloud.define_singleton_method :env do
+      OpenStruct.new(:app_engine? => false, :container_engine? => true, :compute_engine? => true)
     end
   end
 
   doctest.before "Google::Cloud::Logging::Middleware.build_monitored_resource@If running from GCE, return default resource" do
-    Google::Cloud::Core::Environment.define_singleton_method :gce? do
-      true
+    Google::Cloud.define_singleton_method :env do
+      OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => true)
     end
   end
 end
