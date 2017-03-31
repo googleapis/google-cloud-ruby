@@ -81,7 +81,7 @@ describe Google::Cloud::ErrorReporting::Middleware do
     it "raises ArgumentError if empty project_id provided" do
       assert_raises ArgumentError do
         # Prevent return of actual project in any environment including GCE, etc.
-        Google::Cloud::Core::Environment.stub :project_id, nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: nil) do
           Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
           :new, "A default error_reporting" do
             ENV.stub :[], nil do
