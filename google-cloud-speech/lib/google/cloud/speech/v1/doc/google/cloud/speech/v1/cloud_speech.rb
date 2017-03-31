@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -100,8 +100,9 @@ module Google
         #     the audio source (instead of re-sampling).
         # @!attribute [rw] language_code
         #   @return [String]
-        #     *Required* The language of the supplied audio as a BCP-47 language tag.
-        #     Example: "en-US"  https://www.rfc-editor.org/rfc/bcp/bcp47.txt
+        #     *Required* The language of the supplied audio as a
+        #     {BCP-47}[https://www.rfc-editor.org/rfc/bcp/bcp47.txt] language tag.
+        #     Example: "en-US".
         #     See {Language Support}[https://cloud.google.com/speech/docs/languages]
         #     for a list of the currently supported language codes.
         # @!attribute [rw] max_alternatives
@@ -129,34 +130,52 @@ module Google
           #
           # For best results, the audio source should be captured and transmitted using
           # a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-          # reduced if lossy codecs (such as AMR, AMR_WB and MULAW) are used to capture
-          # or transmit the audio, particularly if background noise is present.
+          # reduced if lossy codecs, which include the other codecs listed in
+          # this section, are used to capture or transmit the audio, particularly if
+          # background noise is present.
           module AudioEncoding
             # Not specified. Will return result Google::Rpc::Code::INVALID_ARGUMENT.
             ENCODING_UNSPECIFIED = 0
 
             # Uncompressed 16-bit signed little-endian samples (Linear PCM).
-            # This is the only encoding that may be used by +LongRunningRecognize+.
             LINEAR16 = 1
 
-            # This is the recommended encoding for +Recognize+ and
-            # +StreamingRecognize+ because it uses lossless compression; therefore
-            # recognition accuracy is not compromised by a lossy codec.
-            #
-            # The stream FLAC (Free Lossless Audio Codec) encoding is specified at:
-            # http://flac.sourceforge.net/documentation.html.
-            # 16-bit and 24-bit samples are supported.
-            # Not all fields in STREAMINFO are supported.
+            # {+FLAC+}[https://xiph.org/flac/documentation.html] (Free Lossless Audio
+            # Codec) is the recommended encoding because it is
+            # lossless--therefore recognition is not compromised--and
+            # requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+            # encoding supports 16-bit and 24-bit samples, however, not all fields in
+            # +STREAMINFO+ are supported.
             FLAC = 2
 
             # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
             MULAW = 3
 
-            # Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000 Hz.
+            # Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
             AMR = 4
 
-            # Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000 Hz.
+            # Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
             AMR_WB = 5
+
+            # Opus encoded audio frames in Ogg container
+            # ({OggOpus}[https://wiki.xiph.org/OggOpus]).
+            # +sample_rate_hertz+ must be 16000.
+            OGG_OPUS = 6
+
+            # Although the use of lossy encodings is not recommended, if a very low
+            # bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+            # Speex encoding. The {Speex}[https://speex.org/]  encoding supported by
+            # Cloud Speech API has a header byte in each block, as in MIME type
+            # +audio/x-speex-with-header-byte+.
+            # It is a variant of the RTP Speex encoding defined in
+            # {RFC 5574}[https://tools.ietf.org/html/rfc5574].
+            # The stream is a sequence of blocks, one block per RTP packet. Each block
+            # starts with a byte containing the length of the block, in bytes, followed
+            # by one or more frames of Speex data, padded to an integral number of
+            # bytes (octets) as specified in RFC 5574. In other words, each RTP header
+            # is replaced with a single byte containing the block length. Only Speex
+            # wideband is supported. +sample_rate_hertz+ must be 16000.
+            SPEEX_WITH_HEADER_BYTE = 7
           end
         end
 
@@ -169,9 +188,7 @@ module Google
         #     to improve the accuracy for specific words and phrases, for example, if
         #     specific commands are typically spoken by the user. This can also be used
         #     to add additional words to the vocabulary of the recognizer. See
-        #     {usage limits}[https://cloud.google.com/speech/limits#content]. Note:
-        #     phrases may be added via repeated speech_contexts and/or repeated phrases,
-        #     and these limits apply to the total of all phrases.
+        #     {usage limits}[https://cloud.google.com/speech/limits#content].
         class SpeechContext; end
 
         # Contains audio data in the encoding specified in the +RecognitionConfig+.

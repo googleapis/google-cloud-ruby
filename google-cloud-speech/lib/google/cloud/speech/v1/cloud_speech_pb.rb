@@ -44,6 +44,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :MULAW, 3
     value :AMR, 4
     value :AMR_WB, 5
+    value :OGG_OPUS, 6
+    value :SPEEX_WITH_HEADER_BYTE, 7
   end
   add_message "google.cloud.speech.v1.SpeechContext" do
     repeated :phrases, :string, 1

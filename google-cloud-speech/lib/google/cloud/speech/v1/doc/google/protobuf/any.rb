@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,6 +38,16 @@ module Google
     #     if (any.is(Foo.class)) {
     #       foo = any.unpack(Foo.class);
     #     }
+    #
+    #  Example 3: Pack and unpack a message in Python.
+    #
+    #     foo = Foo(...)
+    #     any = Any()
+    #     any.Pack(foo)
+    #     ...
+    #     if any.Is(Foo.DESCRIPTOR):
+    #       any.Unpack(foo)
+    #       ...
     #
     # The pack methods provided by protobuf library will by default use
     # 'type.googleapis.com/full.type.name' as the type URL and the unpack
@@ -78,10 +88,10 @@ module Google
     #     A URL/resource name whose content describes the type of the
     #     serialized protocol buffer message.
     #
-    #     For URLs which use the schema +http+, +https+, or no schema, the
+    #     For URLs which use the scheme +http+, +https+, or no scheme, the
     #     following restrictions and interpretations apply:
     #
-    #     * If no schema is provided, +https+ is assumed.
+    #     * If no scheme is provided, +https+ is assumed.
     #     * The last segment of the URL's path must represent the fully
     #       qualified name of the type (as in +path/google.protobuf.Duration+).
     #       The name should be in a canonical form (e.g., leading "." is
@@ -94,7 +104,7 @@ module Google
     #       on changes to types. (Use versioned type names to manage
     #       breaking changes.)
     #
-    #     Schemas other than +http+, +https+ (or the empty schema) might be
+    #     Schemes other than +http+, +https+ (or the empty scheme) might be
     #     used with implementation specific semantics.
     # @!attribute [rw] value
     #   @return [String]
