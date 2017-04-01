@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2017-03-31
+
+* Updated documentation
+
 ### 0.22.0 / 2017-03-03
 
 * Updated documentation and code examples.

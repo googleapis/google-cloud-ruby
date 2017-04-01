@@ -99,8 +99,9 @@
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
       "versions": [
-        "v0.22.0",
+        "v0.23.0",
         "master",
+        "v0.22.0",
         "v0.21.0",
         "v0.20.1",
         "v0.20.0"
