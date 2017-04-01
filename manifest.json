@@ -84,8 +84,9 @@
       "name": "google-cloud-datastore",
       "defaultService": "google/cloud/datastore",
       "versions": [
-        "v0.24.2",
+        "v1.0.0",
         "master",
+        "v0.24.2",
         "v0.24.1",
         "v0.24.0",
         "v0.23.0",
