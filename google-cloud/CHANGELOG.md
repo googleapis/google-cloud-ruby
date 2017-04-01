@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 / 2017-03-31
+
+* Datastore 1.0 release
+* Logging 1.0 release
+* Updated dependencies on all other gems
+
 ### 0.26.0 / 2017-03-03
 
 * Update BigQuery dependency to 0.24.x
