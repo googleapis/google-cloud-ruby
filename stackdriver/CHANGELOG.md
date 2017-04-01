@@ -1,5 +1,10 @@
 # Release History
 
+### 0.5.0 / 2017-03-31
+
+* Logging 1.0 release
+* Updated dependencies on all other gems
+
 ### 0.4.1 / 2017-02-27
 
 * Set version constraints on the gem dependencies for individual stackdriver services. Current versions are:
