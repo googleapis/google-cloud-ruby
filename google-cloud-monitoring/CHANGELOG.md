@@ -1,5 +1,10 @@
 # Release History
 
+### 0.24.0 / 2017-03-31
+
+* Updated documentation
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.23.2 / 2017-03-03
 
 * Update GRPC header value sent to the Monitoring API.
