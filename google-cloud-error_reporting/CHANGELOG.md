@@ -1,5 +1,9 @@
 # Release History
 
+### 0.24.0 / 2017-03-31
+
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.23.3 / 2017-03-03
 
 * Update GRPC header value sent to the Error Reporting API.

@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.23.1"
+  gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.24.0"
   gem.add_runtime_dependency "google-cloud-logging", "~> 0.24.0"
   gem.add_runtime_dependency "google-cloud-monitoring", "~> 0.23.0"
   gem.add_runtime_dependency "google-cloud-trace", "~> 0.23.0"
