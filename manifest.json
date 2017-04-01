@@ -105,6 +105,15 @@
       ]
     },
     {
+      "id": "google-cloud-env",
+      "name": "google-cloud-env",
+      "defaultService": "google/cloud/env",
+      "versions": [
+        "v1.0.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-error_reporting",
       "name": "google-cloud-error_reporting",
       "defaultService": "google/cloud/errorreporting/v1beta1",
