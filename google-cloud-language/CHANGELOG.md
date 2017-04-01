@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.0 / 2017-03-31
+
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.25.0 / 2017-03-03
 
 * Removal of `encoding` method argument, encoding now calculated from system settings.
