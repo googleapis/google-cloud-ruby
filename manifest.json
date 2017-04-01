@@ -57,8 +57,9 @@
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
       "versions": [
-        "v0.24.0",
+        "v0.25.0",
         "master",
+        "v0.24.0",
         "v0.23.0",
         "v0.21.0",
         "v0.20.2",
