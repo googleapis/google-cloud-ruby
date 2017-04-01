@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2017-03-31
+
+* Updated documentation
+
 ### 0.22.0 / 2017-03-03
 
 * Dependency on Google API Client has been updated to 0.10.x.
