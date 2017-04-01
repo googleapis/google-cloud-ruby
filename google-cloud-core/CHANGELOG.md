@@ -1,5 +1,10 @@
 # Release History
 
+### 1.0.0 / 2017-03-31
+
+* Release 1.0
+* Add dependency on google-cloud-env
+
 ### 0.21.1 / 2016-11-22
 
 * Support the new GAE Flex beta environment.
