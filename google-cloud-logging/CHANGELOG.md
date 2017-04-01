@@ -1,5 +1,13 @@
 # Release History
 
+### 1.0.0 / 2017-03-31
+
+* Release 1.0
+* Added `#trace` and `#source_location` to Entry
+* Added listing of logs for the project
+* Updated documentation
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.24.2 / 2017-03-03
 
 * No public API changes.
