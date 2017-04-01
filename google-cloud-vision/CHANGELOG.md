@@ -1,5 +1,10 @@
 # Release History
 
+### 0.24.0 / 2017-03-31
+
+* Updated documentation
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.23.0 / 2017-03-03
 
 Major release, adding V1.1 support.

@@ -31,7 +31,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-storage", "~> 0.25.0"
   gem.add_dependency "google-cloud-trace", "~> 0.24.0"
   gem.add_dependency "google-cloud-translate", "~> 0.23.0"
-  gem.add_dependency "google-cloud-vision", "~> 0.23.0"
+  gem.add_dependency "google-cloud-vision", "~> 0.24.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
