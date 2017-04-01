@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 / 2017-03-31
+
+* Allow upload and download of in-memory IO objects
+* Added signed_url at top-level object, without creating a bucket or file object
+* Updated documentation
+
 ### 0.24.0 / 2017-03-03
 
 * Dependency on Google API Client has been updated to 0.10.x.
