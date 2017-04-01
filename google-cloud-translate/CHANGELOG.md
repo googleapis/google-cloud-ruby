@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2017-03-31
+
+* No changes
+
 ### 0.22.2 / 2016-12-22
 
 * Change product name to Google Cloud Translation API in docs.
