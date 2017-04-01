@@ -294,8 +294,9 @@
       "name": "stackdriver-core",
       "defaultService": "stackdriver/core",
       "versions": [
-        "v0.22.0",
+        "v1.0.0",
         "master",
+        "v0.22.0",
         "v0.21.0"
       ]
     }
