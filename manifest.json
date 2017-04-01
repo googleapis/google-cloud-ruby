@@ -99,8 +99,9 @@
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
       "versions": [
-        "v0.22.0",
+        "v0.23.0",
         "master",
+        "v0.22.0",
         "v0.21.0",
         "v0.20.1",
         "v0.20.0"
@@ -120,8 +121,9 @@
       "name": "google-cloud-error_reporting",
       "defaultService": "google/cloud/errorreporting/v1beta1",
       "versions": [
-        "v0.23.3",
+        "v0.24.0",
         "master",
+        "v0.23.3",
         "v0.23.2",
         "v0.23.1",
         "v0.23.0",
@@ -136,8 +138,9 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.25.0",
+        "v0.26.0",
         "master",
+        "v0.25.0",
         "v0.24.0",
         "v0.23.0",
         "v0.22.0",
