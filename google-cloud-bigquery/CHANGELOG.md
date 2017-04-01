@@ -1,5 +1,10 @@
 # Release History
 
+### 0.25.0 / 2017-03-31
+
+* Add `#cancel` to `Job`
+* Updated documentation
+
 ### 0.24.0 / 2017-03-03
 
 Major release, several new features, some breaking changes.
