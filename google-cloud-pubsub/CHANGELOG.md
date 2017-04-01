@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 / 2017-03-31
+
+* Updated documentation
+* Updated retry configuration for pull requests
+* Automatic retry on `UNAVAILABLE` errors
+
 ### 0.23.2 / 2017-03-03
 
 * No public API changes.
