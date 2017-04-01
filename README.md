@@ -12,13 +12,16 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 * [API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs)
 * [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
+This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
+
+* [Cloud Datastore](#cloud-datastore-ga) (GA)
+* [Stackdriver Logging](#stackdriver-logging-ga) (GA)
+
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
-* [Cloud Datastore](#cloud-datastore-beta) (Beta)
-* [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 * [Cloud Storage](#cloud-storage-beta) (Beta)
-* [Cloud Vision API](#cloud-vision-api-alpha) (Beta)
+* [Cloud Vision API](#cloud-vision-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -90,7 +93,7 @@ data.each do |row|
 end
 ```
 
-### Cloud Datastore (Beta)
+### Cloud Datastore (GA)
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
 - [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest)
@@ -168,7 +171,7 @@ end
 
 ```
 
-### Stackdriver Logging (Beta)
+### Stackdriver Logging (GA)
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
 - [google-cloud-logging API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest)
@@ -438,6 +441,10 @@ google-cloud-ruby is supported on Ruby 2.0+.
 This library follows [Semantic Versioning](http://semver.org/).
 
 Please note it is currently under active development. Any release versioned 0.x.y is subject to backwards incompatible changes at any time.
+
+**GA**: Libraries defined at the GA (general availability) quality level are stable. The code surface will not change in backwards-incompatible ways unless absolutely necessary (e.g. because of critical security issues) or with an extensive deprecation period. Issues and requests against GA libraries are addressed with the highest priority.
+
+Please note that the auto-generated portions of the GA libraries (the ones in modules such as `v1` or `v2`) are considered to be of **Beta** quality, even if the libraries that wrap them are GA.
 
 **Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
 
