@@ -71,6 +71,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @return [String,Symbol]
         #

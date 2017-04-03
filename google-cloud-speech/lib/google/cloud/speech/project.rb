@@ -122,6 +122,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @param [String,Symbol] language The language of the supplied audio as
         #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
@@ -225,6 +234,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @param [String,Symbol] language The language of the supplied audio as
         #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
@@ -338,6 +356,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @param [String,Symbol] language The language of the supplied audio as
         #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
@@ -454,6 +481,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @param [String,Symbol] language The language of the supplied audio as
         #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
@@ -588,7 +624,8 @@ module Google
 
         def convert_encoding encoding
           mapping = { raw: :LINEAR16, linear: :LINEAR16, linear16: :LINEAR16,
-                      flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB }
+                      flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB,
+                      ogg_opus: :OGG_OPUS, speex: :SPEEX_WITH_HEADER_BYTE }
           mapping[encoding] || encoding
         end
 
