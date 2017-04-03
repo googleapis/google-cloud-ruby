@@ -113,4 +113,12 @@ class MockStorage < Minitest::Spec
      (0...10).map { ("a".."z").to_a[rand(26)] }.join,
      (0...10).map { ("a".."z").to_a[rand(26)] }.join + ".txt"].join "/"
   end
+
+  def done_rewrite gapi
+    Google::Apis::StorageV1::RewriteResponse.new done: true, resource: gapi
+  end
+
+  def undone_rewrite token
+    Google::Apis::StorageV1::RewriteResponse.new done: false, rewrite_token: token
+  end
 end

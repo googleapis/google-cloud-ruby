@@ -294,6 +294,11 @@ module Google
         def storage_class= storage_class
           resp = service.update_file_storage_class \
             bucket, name, storage_class_for(storage_class)
+          until resp.done
+            sleep 1
+            resp = service.update_file_storage_class \
+              bucket, name, storage_class_for(storage_class), resp.rewrite_token
+          end
           @gapi = resp.resource
         end
 
@@ -512,9 +517,14 @@ module Google
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
-          gapi = service.copy_file bucket, name,
+          resp = service.copy_file bucket, name,
                                    dest_bucket, dest_path, options
-          File.from_gapi gapi, service
+          until resp.done
+            sleep 1
+            resp = service.copy_file bucket, name, dest_bucket, dest_path,
+                                     options.merge(token: resp.rewrite_token)
+          end
+          File.from_gapi resp.resource, service
         end
 
         ##
@@ -568,6 +578,7 @@ module Google
                       destination_key: new_encryption_key }
           gapi = service.rewrite_file bucket, name, bucket, name, options
           until gapi.done
+            sleep 1
             options[:token] = gapi.rewrite_token
             gapi = service.rewrite_file bucket, name, bucket, name, options
           end
