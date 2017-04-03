@@ -21,6 +21,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 * [BigQuery](#bigquery-beta) (Beta)
 * [Cloud Storage](#cloud-storage-beta) (Beta)
+* [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision API](#cloud-vision-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
@@ -30,7 +31,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
-* [Cloud Translation API](#translate-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -376,7 +376,7 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-### Cloud Translation API (Alpha)
+### Cloud Translation API (Beta)
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/latest)
