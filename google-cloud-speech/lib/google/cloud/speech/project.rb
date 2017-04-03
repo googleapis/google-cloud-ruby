@@ -324,10 +324,20 @@ module Google
         # @param [String, Symbol] encoding Encoding of audio data to be
         #   recognized. Optional.
         #
-        #   Currently, the only acceptable value is:
+        #   Acceptable values are:
         #
         #   * `raw` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
+        #   * `flac` - The [Free Lossless Audio
+        #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
+        #     Only 16-bit samples are supported. Not all fields in STREAMINFO
+        #     are supported. (FLAC)
+        #   * `mulaw` - 8-bit samples that compand 14-bit audio samples using
+        #     G.711 PCMU/mu-law. (MULAW)
+        #   * `amr` - Adaptive Multi-Rate Narrowband codec. (`sample_rate` must
+        #     be 8000 Hz.) (AMR)
+        #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
+        #     be 16000 Hz.) (AMR_WB)
         #
         # @param [String,Symbol] language The language of the supplied audio as
         #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
