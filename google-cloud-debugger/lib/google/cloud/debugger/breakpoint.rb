@@ -312,7 +312,7 @@ module Google
         end
 
         ##
-        # Set breakpoint to an eror state, which initializes the @status
+        # Set breakpoint to an error state, which initializes the @status
         # instance variable with the error message. Also mark this breakpoint as
         # completed if is_final is true.
         #
