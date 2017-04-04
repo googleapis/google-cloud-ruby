@@ -26,12 +26,12 @@ describe Google::Cloud::Storage::File, :storage do
   # URL should end with Caf%C3%A9
   let(:filenames) { ["Caf\u00e9", "Cafe\u0301"] }
   let(:filecontent) { ["Normalization Form C", "Normalization Form D"] }
-  
+
   it "does not perform any file name normalization" do
     filenames.each_with_index do |name, i|
       file = bucket.file name
       file.name.must_equal name
-      Tempfile.open ["cafe"] do |tmpfile|
+      Tempfile.open "cafe" do |tmpfile|
         downloaded = file.download tmpfile
         File.read(downloaded.path).must_equal filecontent[i]
       end
