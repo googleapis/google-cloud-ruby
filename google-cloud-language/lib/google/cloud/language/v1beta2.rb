@@ -11,4 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/language/v1/language_service_client"
+require "google/cloud/language/v1beta2/language_service_client"
