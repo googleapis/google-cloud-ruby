@@ -193,6 +193,8 @@ module Google
             end
           end
 
+          ##
+          # @private Helper method that converts compound variables.
           def self.from_compound_var source, name: nil, depth: MAX_DEPTH
             return source if source.is_a? Variable
             var = Variable.new

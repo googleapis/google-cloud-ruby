@@ -28,7 +28,7 @@ module Google
       # debuggee applications from each other. Maps to gRPC struct
       # {Google::Devtools::Clouddebugger::V2::Debuggee}.
       #
-      # It also automatically loads source context information generate from
+      # It also automatically loads source context information generated from
       # Cloud SDK. See [Stackdriver Debugger
       # doc](https://cloud.google.com/debugger/docs/source-context#app_engine_standard_python)
       # for more information on how to generate this source context information
@@ -36,8 +36,8 @@ module Google
       # step is taken care of if debuggee application is hosted on Google App
       # Engine Flexibile.
       #
-      # To ensure the multiple instances of the application are indeed same
-      # application. The debuggee also compute a "uniquifier" generated from
+      # To ensure the multiple instances of the application are indeed the same
+      # application, the debuggee also compute a "uniquifier" generated from
       # source context or application source code.
       #
       class Debuggee

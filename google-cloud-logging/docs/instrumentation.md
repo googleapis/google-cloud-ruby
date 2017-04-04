@@ -1,4 +1,4 @@
-# Stackdriver Debugger Instrumentation
+# Stackdriver Logging Instrumentation
 
 Stackdriver Debugger is a feature of the Google Cloud Platform that lets
 you inspect the state of an application at any code location without using

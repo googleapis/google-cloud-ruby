@@ -33,22 +33,21 @@ module Google
       # The Railtie should also initialize a debugger to be used by the
       # middleware. The debugger can be configured using the following Rails
       # configuration:
-      # ```ruby
-      # # Explicitly enable or disable Stackdriver Debugger Agent
-      # config.google_cloud.use_debugger = true
-      # # Shared Google Cloud Platform project identifier
-      # config.google_cloud.project_id = "gcloud-project"
-      # # Google Cloud Platform project identifier for Stackdriver Debugger only
-      # config.google_cloud.debugger.project_id = "debugger-project"
-      # # Share Google Cloud authentication json file
-      # config.google_cloud.keyfile = "/path/to/keyfile.json"
-      # # Google Cloud authentication json file for Stackdriver Debugger only
-      # config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"
-      # # Stackdriver Debugger Agent module name identifier
-      # config.google_cloud.debugger.module_name = "my-ruby-app"
-      # # Stackdriver Debugger Agent module version identifier
-      # config.google_cloud.debugger.module_version = "v1"
-      # ```
+      # @example
+      #   # Explicitly enable or disable Stackdriver Debugger Agent
+      #   config.google_cloud.use_debugger = true
+      #   # Shared Google Cloud Platform project identifier
+      #   config.google_cloud.project_id = "gcloud-project"
+      #   # Google Cloud Platform project identifier for Stackdriver Debugger
+      #   config.google_cloud.debugger.project_id = "debugger-project"
+      #   # Share Google Cloud authentication json file
+      #   config.google_cloud.keyfile = "/path/to/keyfile.json"
+      #   # Google Cloud authentication json file for Stackdriver Debugger only
+      #   config.google_cloud.debugger.keyfile = "/path/to/keyfile.json"
+      #   # Stackdriver Debugger Agent module name identifier
+      #   config.google_cloud.debugger.module_name = "my-ruby-app"
+      #   # Stackdriver Debugger Agent module version identifier
+      #   config.google_cloud.debugger.module_version = "v1"
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless

@@ -132,7 +132,7 @@ module Google
         end
 
         ##
-        # Stops the tracer regardless whether any active breakpoints are
+        # Stops the tracer regardless of whether any active breakpoints are
         # present. Once the tracer stops monitoring the debuggee application,
         # the application can return to normal performance.
         def stop_tracer

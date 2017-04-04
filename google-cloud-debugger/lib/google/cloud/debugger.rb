@@ -59,27 +59,14 @@ module Google
     # *   A Rack middleware and Railtie that automatically manages the debugger
     #     agent for Ruby on Rails and other Rack-based Ruby applications.
     #
-    # Other Stackdriver Debugger service features not covered by this
-    # application instrumentation:
-    #
-    # *   Source code context generation. The Stackdriver Debugger service
-    #     console is able to display your application source code from a source
-    #     of your choice if a source context JSON file exists. See
-    #     [Debugger Doc](https://cloud.google.com/debugger/docs/source-context)
-    #     on how to select source code on Stackdriver Debugger UI.
-    # *   Breakpoints creation and manipulation. See the [Debugger
-    #     Doc](https://cloud.google.com/debugger/docs/debugging) on how to
-    #     manage breakpoints on Cloud Console, or see the [#Debugger
-    #     API](#stackdriver-debugger-api) section on how to manage breakpoints
-    #     using the Ruby API client.
-    #
-    # When this library is installed and configured in your running application,
-    # you can view your applications breakpoint snapshots in real time by
-    # opening the Google Cloud Console in your web browser and navigating to the
-    # "Debug" section. It also integrates with Google App Engine Flexible to
-    # make application registration more seemless, and helps Stackdriver
-    # Debugger Console to select correct version of source code from Cloud
-    # Source Repository.
+    # When this library is configured in your running application, and the
+    # source code and breakpoints are setup through the Google Cloud Console,
+    # You'll be able to
+    # [interact](https://cloud.google.com/debugger/docs/debugging) with your
+    # application in real time through the [Stackdriver Debugger
+    # UI](https://console.cloud.google.com/debug?_ga=1.84295834.280814654.1476313407).
+    # This library also integrates with Google App Engine Flexible to make
+    # debuggee application configuration more seemless.
     #
     # Note that when no breakpoints are created, the debugger agent consumes
     # very little resource and has no interference with the running application.
@@ -137,6 +124,15 @@ module Google
     #
     # This will install the debugger middleware in your application.
     #
+    # Configuration parameters may also be passed in as arguments to Middleware.
+    # ```ruby
+    # require "google/cloud/debugger"
+    # use Google::Cloud::Debugger::Middleware project: "debugger-project-id",
+    #                                         keyfile: "/path/to/keyfile.json",
+    #                                         module_name: "my-ruby-app",
+    #                                         module_version: "v1"
+    # ```
+    #
     # ### Using instrumentation with other Rack-based frameworks
     #
     # To install application instrumentation in an app using another Rack-based
@@ -186,7 +182,7 @@ module Google
     # response = controller2_client.register_debuggee(debuggee)
     # debuggee_id = response.debuggee.id
     # ```
-    # See [Stackdriver Debuggee Debuggee
+    # See [Stackdriver Debugger Debuggee
     # doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Debuggee)
     # on fields necessary for registerying a debuggee.
     #

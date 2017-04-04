@@ -27,7 +27,7 @@ module Google
       #   is interrupted.
       #
       # To use AsyncActor, the classes that are including this module need to
-      # define a run_backgrounder methods that does the background job. The
+      # define a run_backgrounder method that does the background job. The
       # classes can then control the child thread job through instance methods
       # like async_start, async_stop, etc.
       #
