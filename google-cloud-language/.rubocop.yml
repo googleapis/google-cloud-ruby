@@ -6,6 +6,8 @@ AllCops:
     - "Rakefile"
     - "lib/google/cloud/language/v1.rb"
     - "lib/google/cloud/language/v1/**/*"
+    - "lib/google/cloud/language/v1beta2.rb"
+    - "lib/google/cloud/language/v1beta2/**/*"
     - "test/**/*"
 
 Documentation:
