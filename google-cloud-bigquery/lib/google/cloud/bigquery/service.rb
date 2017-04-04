@@ -58,9 +58,10 @@ module Google
             service.client_options.application_name    = "gcloud-ruby"
             service.client_options.application_version = \
               Google::Cloud::Bigquery::VERSION
+            service.client_options.open_timeout_sec = timeout
+            service.client_options.read_timeout_sec = timeout
+            service.client_options.send_timeout_sec = timeout
             service.request_options.retries = @retries || 3
-            service.request_options.timeout_sec      = @timeout
-            service.request_options.open_timeout_sec = @timeout
             service.request_options.header ||= {}
             service.request_options.header["x-goog-api-client"] = \
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
