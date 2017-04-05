@@ -1,5 +1,11 @@
 # Release History
 
+### 0.28.0 / 2017-04-05
+
+* Storage 1.0 release
+* Speech Beta release
+* Updated dependencies BigQuery, DNS, and Resource Manager
+
 ### 0.27.0 / 2017-03-31
 
 * Datastore 1.0 release
