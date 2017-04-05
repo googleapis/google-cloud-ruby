@@ -460,7 +460,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :copy_object, file_gapi, ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -468,7 +468,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :copy_object, file_gapi, ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -476,7 +476,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :copy_object, file_gapi, ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", {:destination_predefined_acl=>nil, :source_generation=>123456, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", {:destination_predefined_acl=>nil, :source_generation=>123456, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -740,7 +740,9 @@ def object_access_control_gapi
   Google::Apis::StorageV1::ObjectAccessControl.new entity: entity
 end
 
-
+def done_rewrite gapi
+  Google::Apis::StorageV1::RewriteResponse.new done: true, resource: gapi
+end
 
 def random_bucket_hash(name = "my-bucket",
   url_root="https://www.googleapis.com/storage/v1", location="US",

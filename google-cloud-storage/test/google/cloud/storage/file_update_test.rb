@@ -111,11 +111,37 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
-    rewrite_resp = OpenStruct.new done: true, resource: patched_file_gapi
-    mock.expect :rewrite_object, rewrite_resp,
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi]
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: nil]
 
     file.service.mocked_service = mock
+
+    file.storage_class.must_equal "STANDARD"
+    file.storage_class = :dra
+    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+
+    mock.verify
+  end
+
+  it "updates its storage_class, calling rewrite_object as many times as is needed" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi = file_gapi.dup
+    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: nil]
+    mock.expect :rewrite_object, undone_rewrite("keeptrying"),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "notyetcomplete"]
+    mock.expect :rewrite_object, undone_rewrite("almostthere"),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "keeptrying"]
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "almostthere"]
+
+    file.service.mocked_service = mock
+
+    # mock out sleep to make the test run faster
+    def file.sleep *args
+    end
 
     file.storage_class.must_equal "STANDARD"
     file.storage_class = :dra
