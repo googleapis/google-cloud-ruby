@@ -1,0 +1,13 @@
+Gemfile.lock
+coverage/*
+doc/*
+pkg/*
+html/*
+jsondoc/*
+
+# Ignore YARD stuffs
+.yardoc
+
+# Ignore compilation related files
+debugger_c.so
+tmp/*

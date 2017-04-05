@@ -21,6 +21,9 @@ gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
 gem "google-cloud-datastore", path: "google-cloud-datastore"
+if Gem::Version.new(RUBY_VERSION)  >= Gem::Version.new("2.2.0")
+  gem "google-cloud-debugger", path: "google-cloud-debugger"
+end
 gem "google-cloud-dns", path: "google-cloud-dns"
 gem "google-cloud-error_reporting", path: "google-cloud-error_reporting"
 gem "google-cloud-language", path: "google-cloud-language"

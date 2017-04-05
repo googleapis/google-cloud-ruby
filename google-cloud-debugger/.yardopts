@@ -1,0 +1,8 @@
+--no-private
+--title=Stackdriver Debugger
+--exclude lib/google/devtools
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md

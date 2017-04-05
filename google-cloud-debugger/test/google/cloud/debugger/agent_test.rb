@@ -1,0 +1,76 @@
+# Copyright 2017 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "helper"
+
+describe Google::Cloud::Debugger::Agent, :mock_debugger do
+  describe "#initialize" do
+    it "initializes all the children components" do
+      agent.debuggee.must_be_kind_of Google::Cloud::Debugger::Debuggee
+      agent.tracer.must_be_kind_of Google::Cloud::Debugger::Tracer
+      agent.breakpoint_manager.must_be_kind_of Google::Cloud::Debugger::BreakpointManager
+      agent.breakpoint_manager.on_breakpoints_change.must_be_kind_of Method
+      agent.transmitter.must_be_kind_of Google::Cloud::Debugger::Transmitter
+    end
+  end
+
+  describe "#start" do
+    it "calls Transmitter#start" do
+      mocked_transmitter = Minitest::Mock.new
+      mocked_transmitter.expect :start, nil
+
+      agent.stub :transmitter, mocked_transmitter do
+        agent.stub :async_start, nil do
+          agent.start
+        end
+      end
+
+      mocked_transmitter.verify
+    end
+  end
+
+  describe "#stop" do
+    it "calls Tracer#stop and #Transmitter#stop" do
+      mocked_transmitter = Minitest::Mock.new
+      mocked_transmitter.expect :stop, nil
+
+      mocked_tracer = Minitest::Mock.new
+      mocked_tracer.expect :stop, nil
+
+      agent.stub :transmitter, mocked_transmitter do
+        agent.stub :tracer, mocked_tracer do
+          agent.stub :async_stop, nil do
+            agent.stop
+          end
+        end
+      end
+
+      mocked_tracer.verify
+      mocked_transmitter.verify
+    end
+  end
+
+  describe "#stop_tracer" do
+    it "calls Tracer#stop" do
+      mocked_tracer = Minitest::Mock.new
+      mocked_tracer.expect :stop, nil
+
+      agent.stub :tracer, mocked_tracer do
+        agent.stop
+      end
+
+      mocked_tracer.verify
+    end
+  end
+end

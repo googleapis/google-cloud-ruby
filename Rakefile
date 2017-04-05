@@ -3,7 +3,7 @@ require "open3"
 require "json"
 
 task :bundleupdate do
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "BUNDLE UPDATE FOR #{gem}"
@@ -17,7 +17,7 @@ desc "Runs rubocop, jsodoc, and tests for all gems individually."
 task :each, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
   Rake::Task["bundleupdate"].invoke if bundleupdate
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "RUNNING #{gem}"
@@ -36,9 +36,9 @@ task :each, :bundleupdate do |t, args|
 end
 
 desc "Runs tests for all gems."
-task :test do
+task :test => :compile do
   require "active_support/all"
-  gems.each do |gem|
+  valid_gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/test"
     Dir.glob("#{gem}/test/**/*_test.rb").each { |file| require_relative file }
     $LOAD_PATH.delete "#{gem}/lib"
@@ -51,7 +51,7 @@ namespace :test do
   task :each, :bundleupdate do |t, args|
     bundleupdate = args[:bundleupdate]
     Rake::Task["bundleupdate"].invoke if bundleupdate
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "RUNNING TESTS FOR #{gem}"
@@ -71,7 +71,7 @@ namespace :test do
       command_name :coverage
       track_files "lib/**/*.rb"
       add_filter "test/"
-      gems.each { |gem| add_group gem, "#{gem}/lib" }
+      valid_gems.each { |gem| add_group gem, "#{gem}/lib" }
     end
 
     header "Running tests and coverage report"
@@ -89,7 +89,7 @@ namespace :test do
 end
 
 desc "Runs acceptance tests for all gems."
-task :acceptance, :project, :keyfile, :key do |t, args|
+task :acceptance, [:project, :keyfile, :key] => :compile do |t, args|
   project = args[:project] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
@@ -111,7 +111,7 @@ task :acceptance, :project, :keyfile, :key do |t, args|
   end  # always overwrite when running tests
   ENV["GOOGLE_CLOUD_KEY"] = key
 
-  gems.each do |gem|
+  valid_gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
     Dir.glob("#{gem}/acceptance/**/*_test.rb").each { |file| require_relative file }
     $LOAD_PATH.delete "#{gem}/lib"
@@ -124,7 +124,7 @@ namespace :acceptance do
   task :each, :bundleupdate do |t, args|
     bundleupdate = args[:bundleupdate]
     Rake::Task["bundleupdate"].invoke if bundleupdate
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "ACCEPTANCE TESTS FOR #{gem}"
@@ -139,7 +139,7 @@ namespace :acceptance do
   task :unsafe, :bundleupdate do |t, args|
     bundleupdate = args[:bundleupdate]
     Rake::Task["bundleupdate"].invoke if bundleupdate
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "UNSAFE ACCEPTANCE TESTS FOR #{gem}"
@@ -159,7 +159,7 @@ namespace :acceptance do
       command_name :coverage
       track_files "lib/**/*.rb"
       add_filter "acceptance/"
-      gems.each { |gem| add_group gem, "#{gem}/lib" }
+      valid_gems.each { |gem| add_group gem, "#{gem}/lib" }
     end
 
     header "Running acceptance tests and coverage report"
@@ -170,7 +170,7 @@ namespace :acceptance do
   task :cleanup, :bundleupdate do |t, args|
     bundleupdate = args[:bundleupdate]
     Rake::Task["bundleupdate"].invoke if bundleupdate
-    gems.each do |gem|
+    valid_gems.each do |gem|
       cd gem do
         Bundler.with_clean_env do
           run_task_if_exists "acceptance:cleanup"
@@ -185,7 +185,7 @@ task :rubocop, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
   Rake::Task["bundleupdate"].invoke if bundleupdate
   header "Running rubocop reports"
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "RUBOCOP REPORT FOR #{gem}"
@@ -200,7 +200,7 @@ task :doctest, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
   Rake::Task["bundleupdate"].invoke if bundleupdate
   header "Running yard-doctest example code tests"
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "DOCTEST FOR #{gem}"
@@ -215,7 +215,7 @@ task :jsondoc, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
   Rake::Task["bundleupdate"].invoke if bundleupdate
   header "Running jsondoc reports"
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "JSONDOC FOR #{gem}"
@@ -288,6 +288,7 @@ namespace :jsondoc do
       "google-cloud-bigquery",
       "google-cloud-core",
       "google-cloud-datastore",
+      "google-cloud-debugger",
       "google-cloud-dns",
       "google-cloud-error_reporting",
       "google-cloud-language",
@@ -347,7 +348,6 @@ namespace :jsondoc do
       mkdir_p gh_pages + "json/stackdriver/#{version}/google/cloud", verbose: true
     end
 
-    stackdriver_gems = ["google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring", "google-cloud-trace"]
     gems.each do |gem|
       next unless stackdriver_gems.include? gem
 
@@ -460,7 +460,6 @@ namespace :jsondoc do
       Rake::Task["jsondoc:google_cloud"].invoke(google_cloud_version, gh_pages_dir)
     end
 
-    stackdriver_gems = ["stackdriver", "google-cloud-logging", "google-cloud-error_reporting", "google-cloud-monitoring"]
     if stackdriver_gems.include? gem
       stackdriver_version = manifest_versions["stackdriver"]
       header "Assembling jsondoc for stackdriver package"
@@ -491,7 +490,7 @@ namespace :circleci do
       run_acceptance = true
     end
 
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           sh "bundle update"
@@ -538,7 +537,7 @@ namespace :travis do
       run_acceptance = true
     end
 
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           sh "bundle update"
@@ -565,7 +564,7 @@ namespace :appveyor do
       run_acceptance = true
     end
 
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           # Fix acceptance/data symlinks on windows
@@ -593,7 +592,7 @@ end
 desc "Run the CI build for all gems."
 task :ci, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
-  gems.each do |gem|
+  valid_gems.each do |gem|
     Dir.chdir gem do
       Bundler.with_clean_env do
         sh "bundle update" if bundleupdate
@@ -606,7 +605,7 @@ namespace :ci do
   desc "Run the CI build, with acceptance tests, for all gems."
   task :acceptance, :bundleupdate do |t, args|
     bundleupdate = args[:bundleupdate]
-    gems.each do |gem|
+    valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
           sh "bundle update" if bundleupdate
@@ -697,7 +696,7 @@ namespace :integration do
       test_apps.each do |test_app|
         header "Deploying #{test_app} to GAE Flex"
         deploy_gae_flex test_app do
-          gems.each do |gem|
+          valid_gems.each do |gem|
             Dir.chdir gem do
               header "Running integration:gae for gem #{gem}"
               Bundler.with_clean_env do
@@ -740,7 +739,7 @@ namespace :integration do
           header "Deploying docker image #{image_location}"
           deploy_gke_image image_name, image_location do |pod_name|
             # Invoke integration:gke with on each gem
-            gems.each do |gem|
+            valid_gems.each do |gem|
               Dir.chdir gem do
                 Bundler.with_clean_env do
                   header "Running integration:gke for gem #{gem}"
@@ -781,8 +780,32 @@ namespace :changes do
   end
 end
 
+desc "Compile each gems"
+task :compile do
+  gems_with_ext = valid_gems.select { |gem|
+    spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
+    !spec.extensions.empty?
+  }
+  gems_with_ext.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "Compile C extension for #{gem}"
+        sh "bundle update"
+        sh "bundle exec rake compile"
+      end
+    end
+  end
+end
+
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
+end
+
+def valid_gems
+  gems.select { |gem|
+    spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
+    spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
+  }
 end
 
 def header str, token = "#"
@@ -850,5 +873,14 @@ def extract_args args, *keys
   end
   vals.length > 1 ? vals : vals.first
 end
+
+def stackdriver_gems
+  ["google-cloud-logging",
+   "google-cloud-error_reporting",
+   "google-cloud-monitoring",
+   "google-cloud-trace",
+   "google-cloud-debugger"]
+end
+
 
 task :default => :test

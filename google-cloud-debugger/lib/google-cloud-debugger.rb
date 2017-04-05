@@ -1,0 +1,121 @@
+# Copyright 2017 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+##
+# This file is here to be autorequired by bundler, so that the .debugger and
+# #debugger methods can be available, but the library and all dependencies won't
+# be loaded until required and used.
+
+
+gem "google-cloud-core"
+require "google/cloud"
+
+module Google
+  module Cloud
+    ##
+    # Creates a new debugger object for instrumenting Stackdriver Debugger for
+    # an application. Each call creates a new debugger agent with independent
+    # connection service.
+    #
+    # For more information on connecting to Google Cloud see the [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    #
+    # @param [String] module_name Name for the debuggee application. Optional.
+    # @param [String] module_version Version identifier for the debuggee
+    #   application. Optional.
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud_debugger`
+    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
+    #
+    # @return [Google::Cloud::Debugger::Project]
+    #
+    # @example
+    #   require "google/cloud"
+    #
+    #   gcloud = Google::Cloud.new
+    #   debugger = gcloud.debugger
+    #
+    #   debugger.start
+    #
+    # @example The default scope can be overridden with the `scope` option:
+    #   require "google/cloud"
+    #
+    #   gcloud  = Google::Cloud.new
+    #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
+    #   debugger = gcloud.debugger scope: platform_scope
+    #
+    def debugger module_name: nil, module_version: nil, scope: nil,
+                 timeout: nil, client_config: nil
+      Google::Cloud.debugger @project, @keyfile, module_name: module_name,
+                                                 module_version: module_version,
+                                                 scope: scope,
+                                                 timeout: (timeout || @timeout),
+                                                 client_config: client_config
+    end
+
+    ##
+    # Creates a new debugger object for instrumenting Stackdriver Debugger for
+    # an application. Each call creates a new debugger agent with independent
+    # connection service.
+    #
+    # For more information on connecting to Google Cloud see the [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    #
+    # @param [String] project Project identifier for the Stackdriver Debugger
+    #   service you are connecting to.
+    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+    #   file path the file must be readable.
+    # @param [String] module_name Name for the debuggee application. Optional.
+    # @param [String] module_version Version identifier for the debuggee
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud_debugger`
+    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
+    #
+    # @return [Google::Cloud::Debugger::Project]
+    #
+    # @example
+    #   require "google/cloud"
+    #
+    #   debugger = Google::Cloud.debugger
+    #
+    #   debugger.start
+    #
+    def self.debugger project = nil, keyfile = nil, module_name: nil,
+                      module_version: nil, scope: nil, timeout: nil,
+                      client_config: nil
+      require "google/cloud/debugger"
+      Google::Cloud::Debugger.new project: project, keyfile: keyfile,
+                                  module_name: module_name,
+                                  module_version: module_version,
+                                  scope: scope, timeout: timeout,
+                                  client_config: client_config
+    end
+  end
+end
