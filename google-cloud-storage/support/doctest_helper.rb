@@ -240,6 +240,45 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#policy" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#policy@Use `force` to retrieve the latest policy from the service:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#policy@Update the policy by passing a block:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#policy=" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#test_permissions" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-todo-app", ["storage.buckets.get", "storage.buckets.delete"]]
+    end
+  end
+
   # Bucket::Acl
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#reload!" do
@@ -435,6 +474,23 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Storage::Bucket::List" do
     mock_storage do |mock|
       mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", {:prefix=>nil, :page_token=>nil, :max_results=>nil}]
+    end
+  end
+
+  # Bucket::Policy
+
+  doctest.before "Google::Cloud::Storage::Policy" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Policy#role" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
     end
   end
 
@@ -959,4 +1015,39 @@ def random_file_acl_hash bucket_name, file_name
     }
    ]
   }
+end
+
+def policy_gapi
+  Google::Apis::StorageV1::Policy.new(
+    etag: "CAE=",
+    bindings: [
+      Google::Apis::StorageV1::Policy::Binding.new(
+        role: "roles/storage.objectViewer",
+        members: [
+          "user:viewer@example.com"
+        ]
+      )
+    ]
+  )
+end
+
+def new_policy_gapi
+  Google::Apis::StorageV1::Policy.new(
+    etag: "CAE=",
+    bindings: [
+      Google::Apis::StorageV1::Policy::Binding.new(
+        role: "roles/storage.objectViewer",
+        members: [
+          "user:viewer@example.com",
+          "serviceAccount:1234567890@developer.gserviceaccount.com"
+        ]
+      )
+    ]
+  )
+end
+
+def permissions_gapi
+  Google::Apis::StorageV1::TestIamPermissionsResponse.new(
+    permissions: ["storage.buckets.get"]
+  )
 end

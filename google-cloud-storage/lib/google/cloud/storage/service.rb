@@ -157,6 +157,30 @@ module Google
         end
 
         ##
+        # Returns Google::Apis::StorageV1::Policy
+        def get_bucket_policy bucket_name
+          # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
+          #                               user_ip: nil, options: nil)
+          execute { service.get_bucket_iam_policy bucket_name }
+        end
+
+        ##
+        # Returns Google::Apis::StorageV1::Policy
+        def set_bucket_policy bucket_name, new_policy
+          execute do
+            service.set_bucket_iam_policy bucket_name, new_policy
+          end
+        end
+
+        ##
+        # Returns Google::Apis::StorageV1::TestIamPermissionsResponse
+        def test_bucket_permissions bucket_name, permissions
+          execute do
+            service.test_bucket_iam_permissions bucket_name, permissions
+          end
+        end
+
+        ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, options = {}
           execute do

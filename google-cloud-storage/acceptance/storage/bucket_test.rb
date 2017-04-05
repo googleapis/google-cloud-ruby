@@ -110,4 +110,33 @@ describe Google::Cloud::Storage::Bucket, :storage do
     random_bucket = storage.bucket "#{bucket_name}_does_not_exist"
     random_bucket.must_be :nil?
   end
+
+  describe "IAM Policies and Permissions" do
+
+    it "allows policy to be updated on a bucket" do
+      # Check permissions first
+      roles = ["storage.buckets.getIamPolicy", "storage.buckets.setIamPolicy"]
+      permissions = bucket.test_permissions roles
+      skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
+
+      bucket.policy.must_be_kind_of Google::Cloud::Storage::Policy
+
+      # We need a valid service account in order to update the policy
+      service_account = storage.service.credentials.client.issuer
+      service_account.wont_be :nil?
+      role = "roles/storage.objectCreator"
+      member = "serviceAccount:#{service_account}"
+      bucket.policy do |p|
+        p.add role, member
+      end
+
+      bucket.policy(force: true).role(role).must_include member
+    end
+
+    it "allows permissions to be tested on a bucket" do
+      roles = ["storage.buckets.delete", "storage.buckets.get"]
+      permissions = bucket.test_permissions roles
+      permissions.must_equal roles
+    end
+  end
 end

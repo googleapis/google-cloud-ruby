@@ -16,6 +16,7 @@
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
+require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "google/cloud/storage/file"
 require "pathname"
@@ -886,6 +887,140 @@ module Google
         #
         def default_acl
           @default_acl ||= Bucket::DefaultAcl.new self
+        end
+
+        ##
+        # Gets and updates the [Cloud IAM](https://cloud.google.com/iam/) access
+        # control policy for this bucket.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        # @see https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy
+        #   Buckets: setIamPolicy
+        #
+        # @param [Boolean] force Force load the latest policy when `true`.
+        #   Otherwise the policy will be memoized to reduce the number of API
+        #   calls made. The default is `false`.
+        #
+        # @yield [policy] A block for updating the policy. The latest policy
+        #   will be read from the service and passed to the block. After the
+        #   block completes, the modified policy will be written to the service.
+        # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+        #   bucket
+        #
+        # @return [Policy] the current Cloud IAM Policy for this bucket
+        #
+        # @example Policy values are memoized to reduce the number of API calls:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy # API call
+        #   policy_2 = bucket.policy # No API call
+        #
+        # @example Use `force` to retrieve the latest policy from the service:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy force: true # API call
+        #   policy_2 = bucket.policy force: true # API call
+        #
+        # @example Update the policy by passing a block:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy do |p|
+        #     p.add "roles/owner", "user:owner@example.com"
+        #   end # 2 API calls
+        #
+        def policy force: false
+          @policy = nil if force || block_given?
+          @policy ||= begin
+            ensure_service!
+            gapi = service.get_bucket_policy name
+            Policy.from_gapi gapi
+          end
+          return @policy unless block_given?
+          p = @policy.deep_dup
+          yield p
+          self.policy = p
+        end
+
+        ##
+        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for this bucket. The policy should be read from {#policy}. See
+        # {Google::Cloud::Storage::Policy} for an explanation of the
+        # policy `etag` property and how to modify policies.
+        #
+        # You can also update the policy by passing a block to {#policy}, which
+        # will call this method internally after the block completes.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        # @see https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy
+        #   Buckets: setIamPolicy
+        #
+        # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+        #   bucket
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy # API call
+        #
+        #   policy.add "roles/owner", "user:owner@example.com"
+        #
+        #   bucket.policy = policy # API call
+        #
+        def policy= new_policy
+          ensure_service!
+          gapi = service.set_bucket_policy name, new_policy.to_gapi
+          @policy = Policy.from_gapi gapi
+        end
+
+        ##
+        # Tests the specified permissions against the [Cloud
+        # IAM](https://cloud.google.com/iam/) access control policy.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        #
+        # @param [String, Array<String>] permissions The set of permissions
+        #   against which to check access. Permissions must be of the format
+        #   `storage.resource.capability`, where resource is one of `buckets` or
+        #   `objects`.
+        #
+        # @return [Array<String>] The permissions held by the caller.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   permissions = bucket.test_permissions "storage.buckets.get",
+        #                                         "storage.buckets.delete"
+        #   permissions.include? "storage.buckets.get"    #=> true
+        #   permissions.include? "storage.buckets.delete" #=> false
+        #
+        def test_permissions *permissions
+          permissions = Array(permissions).flatten
+          ensure_service!
+          gapi = service.test_bucket_permissions name, permissions
+          gapi.permissions
         end
 
         ##
