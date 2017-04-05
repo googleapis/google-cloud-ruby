@@ -18,6 +18,10 @@ module Google
   module Cloud
     module Logging
       ##
+      # Default log name to be used for Stackdriver Logging
+      DEFAULT_LOG_NAME = Middleware::DEFAULT_LOG_NAME
+
+      ##
       # Railtie
       #
       # Adds the {Google::Cloud::Logging::Middleware} to Rack in a Rails
