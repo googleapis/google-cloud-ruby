@@ -208,13 +208,14 @@ module Google
         # destination bucket/object.
         def copy_file source_bucket_name, source_file_path,
                       destination_bucket_name, destination_file_path,
-                      options = {}
+                      file_gapi = nil, options = {}
           key_options = rewrite_key_options options[:key],
                                             options[:key]
           execute do
             service.rewrite_object \
               source_bucket_name, source_file_path,
               destination_bucket_name, destination_file_path,
+              file_gapi,
               destination_predefined_acl: options[:acl],
               source_generation: options[:generation],
               rewrite_token: options[:token],
@@ -226,30 +227,18 @@ module Google
         # destination bucket/object.
         def rewrite_file source_bucket_name, source_file_path,
                          destination_bucket_name, destination_file_path,
-                         options = {}
+                         file_gapi = nil, options = {}
           key_options = rewrite_key_options options[:source_key],
                                             options[:destination_key]
           execute do
             service.rewrite_object \
               source_bucket_name, source_file_path,
               destination_bucket_name, destination_file_path,
+              file_gapi,
               destination_predefined_acl: options[:acl],
               source_generation: options[:generation],
               rewrite_token: options[:token],
               options: key_options
-          end
-        end
-
-        ## Rewrite a file from source bucket/object to a
-        # destination bucket/object.
-        def update_file_storage_class bucket_name, file_path, storage_class,
-                                      token = nil
-          execute do
-            service.rewrite_object \
-              bucket_name, file_path,
-              bucket_name, file_path,
-              Google::Apis::StorageV1::Object.new(storage_class: storage_class),
-              rewrite_token: token
           end
         end
 

@@ -112,7 +112,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: nil]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, options: {}]
 
     file.service.mocked_service = mock
 
@@ -129,13 +129,13 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: nil]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "notyetcomplete"]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", options: {}]
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "keeptrying"]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", options: {}]
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, rewrite_token: "almostthere"]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", options: {}]
 
     file.service.mocked_service = mock
 
@@ -178,13 +178,37 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
-  it "update does not set storage_class" do
-    file.service.mocked_service = nil
+  it "updates does not set metadata if it has not changed" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new(
+      content_language: "de"
+    )
+    mock.expect :patch_object, file_gapi,
+      [bucket_name, file.name, patch_file_gapi, predefined_acl: nil]
 
-    assert_raises NoMethodError do
-      file.update do |f|
-        f.storage_class = "NEARLINE"
-      end
+    file.service.mocked_service = mock
+
+    file.update do |f|
+      f.content_language = "de"
     end
+
+    mock.verify
+  end
+
+  it "update accepts storage_class" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
+    patched_file_gapi = file_gapi.dup
+    patched_file_gapi.storage_class = "NEARLINE"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, options: {}]
+
+    file.service.mocked_service = mock
+
+    file.update do |f|
+      f.storage_class = :nearline
+    end
+
+    mock.verify
   end
 end

@@ -171,7 +171,7 @@ module Google
         # directive for the file data.
         def cache_control= cache_control
           @gapi.cache_control = cache_control
-          patch_gapi! :cache_control
+          update_gapi! :cache_control
         end
 
         ##
@@ -186,7 +186,7 @@ module Google
         # of the file data.
         def content_disposition= content_disposition
           @gapi.content_disposition = content_disposition
-          patch_gapi! :content_disposition
+          update_gapi! :content_disposition
         end
 
         ##
@@ -203,7 +203,7 @@ module Google
         # data.
         def content_encoding= content_encoding
           @gapi.content_encoding = content_encoding
-          patch_gapi! :content_encoding
+          update_gapi! :content_encoding
         end
 
         ##
@@ -218,7 +218,7 @@ module Google
         # the file data.
         def content_language= content_language
           @gapi.content_language = content_language
-          patch_gapi! :content_language
+          update_gapi! :content_language
         end
 
         ##
@@ -234,7 +234,7 @@ module Google
         # the file data.
         def content_type= content_type
           @gapi.content_type = content_type
-          patch_gapi! :content_type
+          update_gapi! :content_type
         end
 
         ##
@@ -253,7 +253,7 @@ module Google
         # "x-goog-meta-" response headers.
         def metadata= metadata
           @gapi.metadata = metadata
-          patch_gapi! :metadata
+          update_gapi! :metadata
         end
 
         ##
@@ -292,14 +292,8 @@ module Google
         # {Bucket#storage_class}.
         # @param [Symbol, String] storage_class Storage class of the file.
         def storage_class= storage_class
-          resp = service.update_file_storage_class \
-            bucket, name, storage_class_for(storage_class)
-          until resp.done
-            sleep 1
-            resp = service.update_file_storage_class \
-              bucket, name, storage_class_for(storage_class), resp.rewrite_token
-          end
-          @gapi = resp.resource
+          @gapi.storage_class = storage_class_for(storage_class)
+          update_gapi! :storage_class
         end
 
         ##
@@ -334,7 +328,7 @@ module Google
           updater = Updater.new gapi
           yield updater
           updater.check_for_changed_metadata!
-          patch_gapi! updater.updates unless updater.updates.empty?
+          update_gapi! updater.updates unless updater.updates.empty?
         end
 
         ##
@@ -576,11 +570,11 @@ module Google
           ensure_service!
           options = { source_key: encryption_key,
                       destination_key: new_encryption_key }
-          gapi = service.rewrite_file bucket, name, bucket, name, options
+          gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           until gapi.done
             sleep 1
             options[:token] = gapi.rewrite_token
-            gapi = service.rewrite_file bucket, name, bucket, name, options
+            gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           end
           File.from_gapi gapi.resource, service
         end
@@ -816,15 +810,30 @@ module Google
           fail "Must have active connection" unless service
         end
 
-        def patch_gapi! *attributes
+        def update_gapi! *attributes
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
-          patch_args = Hash[attributes.map do |attr|
+          update_args = Hash[attributes.map do |attr|
             [attr, @gapi.send(attr)]
           end]
-          patch_gapi = Google::Apis::StorageV1::Object.new patch_args
-          @gapi = service.patch_file bucket, name, patch_gapi
+          update_gapi = Google::Apis::StorageV1::Object.new update_args
+          if attributes.include? :storage_class
+            @gapi = rewrite_gapi bucket, name, update_gapi
+          else
+            @gapi = service.patch_file bucket, name, update_gapi
+          end
+        end
+
+        def rewrite_gapi bucket, name, update_gapi
+          resp = service.rewrite_file bucket, name, bucket, name, update_gapi
+          until resp.done
+            sleep 1
+            rewrite_options = { token: resp.rewrite_token }
+            resp = service.rewrite_file bucket, name, bucket, name,
+                                        update_gapi, rewrite_options
+          end
+          resp.resource
         end
 
         def fix_copy_args dest_bucket, dest_path, options = {}
@@ -864,10 +873,6 @@ module Google
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < File
-          # @private Do not allow storage_class to be set in an update call.
-          # It cannot be set with PATCH.
-          undef :storage_class=
-
           # @private
           attr_reader :updates
 
@@ -876,6 +881,7 @@ module Google
           def initialize gapi
             @updates = []
             @gapi = gapi
+            @metadata ||= @gapi.metadata.to_h.dup
           end
 
           ##
@@ -883,8 +889,7 @@ module Google
           # values that will returned with requests for the file as
           # "x-goog-meta-" response headers.
           def metadata
-            # do not freeze metadata
-            @metadata ||= @gapi.metadata.to_h.dup
+            @metadata
           end
 
           ##
@@ -894,22 +899,22 @@ module Google
           def metadata= metadata
             @metadata = metadata
             @gapi.metadata = @metadata
-            patch_gapi! :metadata
+            update_gapi! :metadata
           end
 
           ##
           # @private Make sure any metadata changes are saved
           def check_for_changed_metadata!
-            return if @metadata == @gapi.metadata
+            return if @metadata == @gapi.metadata.to_h
             @gapi.metadata = @metadata
-            patch_gapi! :metadata
+            update_gapi! :metadata
           end
 
           protected
 
           ##
           # Queue up all the updates instead of making them.
-          def patch_gapi! attribute
+          def update_gapi! attribute
             @updates << attribute
             @updates.uniq!
           end
