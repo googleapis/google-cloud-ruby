@@ -112,7 +112,7 @@ module Google
 
           # Return false if config.google_cloud.use_logging is explicitly false
           use_logging = logging_config[:use_logging]
-          return false if !use_logging.nil? && !use_logging
+          return false if use_logging == false
 
           project_id = logging_config[:project_id] ||
                        Google::Cloud::Logging::Project.default_project
@@ -144,7 +144,7 @@ module Google
         # @private Helper method to parse rails config into a flattened hash
         def self.parse_rails_config config
           gcp_config = config.google_cloud
-          logging_config = gcp_config[:logging]
+          logging_config = gcp_config.logging
           use_logging =
             gcp_config.key?(:use_logging) ? gcp_config.use_logging : nil
           {
