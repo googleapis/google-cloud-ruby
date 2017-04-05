@@ -1,5 +1,19 @@
 # Release History
 
+### 0.24.0 / 2017-04-05
+
+* Upgrade to V1 API, including the following changes:
+	* Support `OGG_OPUS` and `SPEEX_WITH_HEADER_BYTE` encodings
+	* The `language` argument is now mandatory on all recognition methods
+	* `#recognize_job` has been renamed `#process`, aliased as `#long_running_recognize` and `#recognize_job`
+	* `#stream` has been aliased as `#stream_recognize`
+	* `Stream` added `#wait_until_complete!` method, which blocks until stream is complete
+	* `Stream` removed `#speech_start` and `#speech_end` callback methods
+	* `Stream` now calls `#complete` callback method when stream ends, not when `END_OF_AUDIO` event is received (the `END_OF_AUDIO` event was removed in V1)
+	* `Job` has been renamed `Operation`
+	* `Operation` added `id` attribute, can be retrieved by `id`
+* Add documentation for Low Level API
+
 ### 0.23.0 / 2017-03-31
 
 * Updated documentation

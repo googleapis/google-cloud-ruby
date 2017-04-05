@@ -21,6 +21,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 * [BigQuery](#bigquery-beta) (Beta)
 * [Cloud Storage](#cloud-storage-beta) (Beta)
+* [Cloud Speech API](#cloud-speech-api-beta) (Beta)
 * [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision API](#cloud-vision-api-beta) (Beta)
 
@@ -30,7 +31,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -312,7 +312,7 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-### Cloud Speech API (Alpha)
+### Cloud Speech API (Beta)
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
 - [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest)
