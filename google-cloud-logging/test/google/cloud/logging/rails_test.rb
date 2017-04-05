@@ -25,6 +25,7 @@ describe Google::Cloud::Logging::Railtie do
       @rails_config = ::ActiveSupport::OrderedOptions.new
       @rails_config.google_cloud = ::ActiveSupport::OrderedOptions.new
       @rails_config.google_cloud.logging = ::ActiveSupport::OrderedOptions.new
+      @rails_config.google_cloud.logging.monitored_resource = ::ActiveSupport::OrderedOptions.new
     end
 
     it "returns false if config.google_cloud.use_logging is explicitly false" do

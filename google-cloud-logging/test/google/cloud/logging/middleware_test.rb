@@ -45,6 +45,24 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     Google::Cloud::Logging::Middleware.new rack_app, logger: logger
   }
 
+  describe "#initialize" do
+    let(:default_credentials) { OpenStruct.new empty: true }
+
+    it "creates a default logger object if one isn't provided" do
+      Google::Cloud::Logging::Project.stub :default_project, project do
+        Google::Cloud::Logging::Credentials.stub :default, default_credentials do
+          middleware = Google::Cloud::Logging::Middleware.new rack_app
+        end
+      end
+
+      middleware.logger.must_be_kind_of Google::Cloud::Logging::Logger
+    end
+
+    it "uses the logger provided if given" do
+      middleware.logger.must_equal logger
+    end
+  end
+
   describe "#call" do
     it "sets env[\"rack.logger\"] to the given logger" do
       stubbed_call = ->(env) {

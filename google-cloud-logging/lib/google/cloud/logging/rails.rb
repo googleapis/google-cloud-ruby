@@ -19,7 +19,7 @@ module Google
     module Logging
       ##
       # Default log name to be used for Stackdriver Logging
-      DEFAULT_LOG_NAME = "ruby_app_log"
+      DEFAULT_LOG_NAME = Middleware::DEFAULT_LOG_NAME
 
       ##
       # Railtie
@@ -65,20 +65,19 @@ module Google
 
         initializer "Stackdriver.Logging", before: :initialize_logger do |app|
           if self.class.use_logging? app.config
-            gcp_config = app.config.google_cloud
-            log_config = gcp_config.logging
+            logging_config = Railtie.parse_rails_config config
 
-            project_id = log_config.project_id || gcp_config.project_id
-            keyfile = log_config.keyfile || gcp_config.keyfile
-            resource_type = log_config.monitored_resource.type
-            resource_labels = log_config.monitored_resource.labels
+            project_id = logging_config[:project_id]
+            keyfile = logging_config[:keyfile]
+            resource_type = logging_config[:resource_type]
+            resource_labels = logging_config[:resource_labels]
+            log_name = logging_config[:log_name]
 
             logging = Google::Cloud::Logging.new project: project_id,
                                                  keyfile: keyfile
             resource =
               Logging::Middleware.build_monitored_resource resource_type,
                                                            resource_labels
-            log_name = log_config.log_name || DEFAULT_LOG_NAME
 
             app.config.logger = logging.logger log_name, resource
             app.middleware.insert_before Rails::Rack::Logger,
@@ -109,14 +108,18 @@ module Google
         # @return [Boolean] Whether to use Stackdriver Logging
         #
         def self.use_logging? config
-          gcp_config = config.google_cloud
+          logging_config = Railtie.parse_rails_config config
+
           # Return false if config.google_cloud.use_logging is explicitly false
-          return false if gcp_config.key?(:use_logging) &&
-                          !gcp_config.use_logging
+          use_logging = logging_config[:use_logging]
+          return false if use_logging == false
+
+          project_id = logging_config[:project_id] ||
+                       Google::Cloud::Logging::Project.default_project
+          keyfile = logging_config[:keyfile]
 
           # Try authenticate authorize client API. Return false if unable to
           # authorize.
-          keyfile = gcp_config.logging.keyfile || gcp_config.keyfile
           begin
             Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
           rescue Exception => e
@@ -126,8 +129,6 @@ module Google
             return false
           end
 
-          project_id = gcp_config.logging.project_id || gcp_config.project_id ||
-                       Google::Cloud::Logging::Project.default_project
           if project_id.to_s.empty?
             warn "Google::Cloud::Logging is not activated due to empty " \
               "project_id; falling back to default logger"
@@ -136,7 +137,24 @@ module Google
 
           # Otherwise default to true if Rails is running in production or
           # config.google_cloud.use_logging is true
-          Rails.env.production? || gcp_config.use_logging
+          Rails.env.production? || use_logging
+        end
+
+        ##
+        # @private Helper method to parse rails config into a flattened hash
+        def self.parse_rails_config config
+          gcp_config = config.google_cloud
+          logging_config = gcp_config.logging
+          use_logging =
+            gcp_config.key?(:use_logging) ? gcp_config.use_logging : nil
+          {
+            project_id: logging_config.project_id || gcp_config.project_id,
+            keyfile: logging_config.keyfile || gcp_config.keyfile,
+            resource_type: logging_config.monitored_resource.type,
+            resource_labels: logging_config.monitored_resource.labels,
+            log_name: logging_config.log_name || Middleware::DEFAULT_LOG_NAME,
+            use_logging: use_logging
+          }
         end
       end
     end

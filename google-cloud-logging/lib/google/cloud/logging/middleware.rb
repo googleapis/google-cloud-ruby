@@ -20,6 +20,11 @@ module Google
     module Logging
       class Middleware
         ##
+        # The default log name used to instantiate the default logger if one
+        # isn't provided.
+        DEFAULT_LOG_NAME = "ruby_app_log"
+
+        ##
         # A default value for the log_name_map argument. Directs health check
         # logs to a separate log name so they don't spam the main log.
         DEFAULT_LOG_NAME_MAP = { "/_ah/health" => "ruby_health_check_log" }
@@ -35,7 +40,16 @@ module Google
         # @param [Google::Cloud::Logging::Logger] logger A logger to be used by
         #   this middleware. The middleware will be interacting with the logger
         #   to track Stackdriver request trace ID. It also properly sets
-        #   env["rack.logger"] to this assigned logger for accessing.
+        #   env["rack.logger"] to this assigned logger for accessing. If not
+        #   specified, a default logger with be used.
+        # @param [String] project_id Project identifier for the Stackdriver
+        #   Logging service. Used to create a default logger if one isn't
+        #   specified and a service account is used for authentication.
+        #   Optional.
+        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+        #   file path the file must be readable. Used to create a default logger
+        #   if one isn't specified and a service account is used for
+        #   authentication. Optional.
         # @param [Hash] log_name_map A map from URI path to log name override.
         #   The path may be a string or regex. If a request path matches an
         #   entry in this map, the log name is set accordingly, otherwise the
@@ -44,9 +58,17 @@ module Google
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil, log_name_map: DEFAULT_LOG_NAME_MAP
+        def initialize app, logger: nil, project_id: nil, keyfile: nil,
+                       log_name_map: DEFAULT_LOG_NAME_MAP
           @app = app
-          @logger = logger
+          if logger
+            @logger = logger
+          else
+            logging = Google::Cloud::Logging.new project: project_id,
+                                                 keyfile: keyfile
+            resource = Middleware.build_monitored_resource
+            @logger = logging.logger DEFAULT_LOG_NAME, resource
+          end
           @log_name_map = log_name_map
         end
 
