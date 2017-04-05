@@ -340,6 +340,38 @@ describe Google::Cloud::Storage::File, :storage do
     copied.delete
   end
 
+  it "should copy an existing file, with updates" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo",
+                                  content_language: "en"
+    uploaded.content_language.must_equal "en"
+
+    copied = try_with_backoff "copying existing file" do
+      uploaded.copy "CloudLogoCopy" do |copy|
+        copy.content_language = "de"
+      end
+    end
+    copied.content_language.must_equal "de"
+
+    uploaded.name.must_equal "CloudLogo"
+    copied.name.must_equal "CloudLogoCopy"
+    copied.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
+      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
+        downloaded1 = uploaded.download tmpfile1
+        downloaded2 = copied.download tmpfile2
+        downloaded1.size.must_equal downloaded2.size
+
+        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+      end
+    end
+
+    uploaded.delete
+    copied.delete
+  end
+
   it "should copy an existing file with customer-supplied encryption key" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png", encryption_key: encryption_key
     copied = try_with_backoff "copying existing file with encryption key" do

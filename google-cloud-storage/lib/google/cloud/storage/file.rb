@@ -468,6 +468,7 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
+        # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -503,19 +504,40 @@ module Google
         #   file.copy "copy/of/previous/generation/file.ext",
         #             generation: 123456
         #
+        # @example The file can be modified during copying:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.copy "new-destination-bucket",
+        #             "path/to/destination/file.ext" do |f|
+        #     f.metadata["copied_from"] = "#{file.bucket}/#{file.name}"
+        #   end
+        #
         def copy dest_bucket_or_path, dest_path = nil, acl: nil,
                  generation: nil, encryption_key: nil
           ensure_service!
-          options = { acl: acl, generation: generation,
-                      key: encryption_key }
+          options = { acl: acl, generation: generation, key: encryption_key }
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
-          resp = service.copy_file bucket, name,
-                                   dest_bucket, dest_path, options
+          copy_gapi = nil
+          if block_given?
+            updater = Updater.new gapi
+            yield updater
+            updater.check_for_changed_metadata!
+            copy_gapi = gapi_from_attrs(updater.updates) if updater.updates.any?
+          end
+
+          resp = service.copy_file bucket, name, dest_bucket, dest_path,
+                                   copy_gapi, options
           until resp.done
             sleep 1
             resp = service.copy_file bucket, name, dest_bucket, dest_path,
+                                     copy_gapi,
                                      options.merge(token: resp.rewrite_token)
           end
           File.from_gapi resp.resource, service
@@ -813,16 +835,25 @@ module Google
         def update_gapi! *attributes
           attributes.flatten!
           return if attributes.empty?
+          update_gapi = gapi_from_attrs attributes
+          return if update_gapi.nil?
+
           ensure_service!
-          update_args = Hash[attributes.map do |attr|
-            [attr, @gapi.send(attr)]
-          end]
-          update_gapi = Google::Apis::StorageV1::Object.new update_args
+
           if attributes.include? :storage_class
             @gapi = rewrite_gapi bucket, name, update_gapi
           else
             @gapi = service.patch_file bucket, name, update_gapi
           end
+        end
+
+        def gapi_from_attrs *attributes
+          attributes.flatten!
+          return nil if attributes.empty?
+          attr_params = Hash[attributes.map do |attr|
+            [attr, @gapi.send(attr)]
+          end]
+          Google::Apis::StorageV1::Object.new attr_params
         end
 
         def rewrite_gapi bucket, name, update_gapi
