@@ -110,9 +110,8 @@
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
       "versions": [
-        "v0.24.0",
-        "master",
         "v0.23.0",
+        "master",
         "v0.22.0",
         "v0.21.0",
         "v0.20.1",
@@ -217,9 +216,8 @@
       "name": "google-cloud-resource_manager",
       "defaultService": "google/cloud/resourcemanager",
       "versions": [
-        "v0.24.0",
-        "master",
         "v0.23.0",
+        "master",
         "v0.22.0",
         "v0.21.0",
         "v0.20.1",
