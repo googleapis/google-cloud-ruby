@@ -16,19 +16,19 @@ require "helper"
 
 describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
-  let(:results_grpc) { Google::Cloud::Speech::V1beta1::SyncRecognizeResponse.decode_json results_json }
+  let(:results_grpc) { Google::Cloud::Speech::V1::RecognizeResponse.decode_json results_json }
   let(:results) { results_grpc.results.map { |result_grpc| Google::Cloud::Speech::Result.from_grpc result_grpc } }
   let(:filepath) { "acceptance/data/audio.raw" }
 
   it "recognizes audio from local file path" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize filepath, encoding: :raw, sample_rate: 16000
+    results = speech.recognize filepath, encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -38,14 +38,14 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from local file object" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000
+    results = speech.recognize File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -55,14 +55,14 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from GCS URL" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize "gs://some_bucket/audio.raw", encoding: :raw, sample_rate: 16000
+    results = speech.recognize "gs://some_bucket/audio.raw", encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -72,15 +72,15 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from Storage File URL" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000)
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(uri: "gs://some_bucket/audio.raw")
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     gcs_fake = OpenStruct.new to_gs_url: "gs://some_bucket/audio.raw"
-    results = speech.recognize gcs_fake, encoding: :raw, sample_rate: 16000
+    results = speech.recognize gcs_fake, encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -90,14 +90,14 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from Audio object" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    audio = speech.audio filepath, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio filepath, encoding: :raw, language: "en-US", sample_rate: 16000
     results = speech.recognize audio
     mock.verify
 
@@ -108,15 +108,15 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
     audio = speech.audio filepath
-    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en"
+    results = speech.recognize audio, encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -126,15 +126,15 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
   end
 
   it "recognizes audio from Audio object, overriding attributes" do
-    config_grpc = Google::Cloud::Speech::V1beta1::RecognitionConfig.new(encoding: :LINEAR16, sample_rate: 16000, language_code: "en")
-    audio_grpc = Google::Cloud::Speech::V1beta1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
+    audio_grpc = Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb"))
 
     mock = Minitest::Mock.new
-    mock.expect :sync_recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    audio = speech.audio filepath, encoding: :flac, sample_rate: 48000, language: "en"
-    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio filepath, encoding: :flac, sample_rate: 48000, language: "en-US"
+    results = speech.recognize audio, encoding: :raw, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 
 module Google
   module Cloud
@@ -23,9 +23,9 @@ module Google
       #
       # A speech recognition result corresponding to a portion of the audio.
       #
-      # See {Project#recognize} and {Job#results}.
+      # See {Project#recognize} and {Operation#results}.
       #
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.SpeechRecognitionResult
       #   SpeechRecognitionResult
       #
       # @attr_reader [String] transcript Transcript text representing the words
@@ -46,7 +46,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #   results = audio.recognize
       #
       #   result = results.first
@@ -94,7 +96,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #   results = audio.recognize
         #
         #   result = results.first
@@ -124,9 +128,9 @@ module Google
       #
       # See {Project#stream} and {Stream#on_interim}.
       #
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.SpeechRecognitionResult
       #   SpeechRecognitionResult
-      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult
+      # @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.V1#google.cloud.speech.V1.StreamingRecognitionResult
       #   StreamingRecognitionResult
       #
       # @attr_reader [String] transcript Transcript text representing the words
@@ -150,7 +154,9 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = speech.stream encoding: :raw, sample_rate: 16000
+      #   stream = speech.stream encoding: :raw,
+      #                          language: "en-US",
+      #                          sample_rate: 16000
       #
       #   # register callback for when an interim result is returned
       #   stream.on_interim do |final_results, interim_results|

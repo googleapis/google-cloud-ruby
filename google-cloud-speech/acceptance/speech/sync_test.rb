@@ -22,7 +22,7 @@ describe "Synchonous Recognition", :speech do
   let(:gcs_url)  { gcs_file.to_gs_url }
 
   it "recognizes audio from local file path" do
-    results = speech.recognize filepath, encoding: :raw, sample_rate: 16000
+    results = speech.recognize filepath, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -31,7 +31,7 @@ describe "Synchonous Recognition", :speech do
   end
 
   it "recognizes audio from local file object" do
-    results = speech.recognize File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000
+    results = speech.recognize File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -40,7 +40,7 @@ describe "Synchonous Recognition", :speech do
   end
 
   it "recognizes audio from GCS URL" do
-    results = speech.recognize gcs_url, encoding: :raw, sample_rate: 16000
+    results = speech.recognize gcs_url, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -49,7 +49,7 @@ describe "Synchonous Recognition", :speech do
   end
 
   it "recognizes audio from Storage File object" do
-    results = speech.recognize gcs_file, encoding: :raw, sample_rate: 16000
+    results = speech.recognize gcs_file, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -58,7 +58,7 @@ describe "Synchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object" do
-    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en-US"
     results = speech.recognize audio
 
     results.count.must_equal 1
@@ -69,7 +69,7 @@ describe "Synchonous Recognition", :speech do
 
   it "recognizes audio from Audio object, preserving attributes" do
     audio = speech.audio gcs_url
-    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en"
+    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -79,7 +79,7 @@ describe "Synchonous Recognition", :speech do
 
   it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
     audio = speech.audio gcs_url
-    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: :en
+    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en-US".to_sym
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
@@ -88,8 +88,8 @@ describe "Synchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, overriding attributes" do
-    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es"
-    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es-ES"
+    results = speech.recognize audio, encoding: :raw, sample_rate: 16000, language: "en-US"
 
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"

@@ -20,12 +20,10 @@ describe "Streaming Recognition", :speech do
   it "default params" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :raw, sample_rate: 16000
+    stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US"
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    stream.on_speech_start { counters[:speech_start] += 1 }
-    stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
     stream.on_error do |error|
@@ -36,10 +34,7 @@ describe "Streaming Recognition", :speech do
 
     stream.stop
 
-    while counters[:complete] == 0 do
-      sleep 1
-    end
-    sleep 3 # give more callbacks time to finish
+    stream.wait_until_complete!
 
     results = stream.results
 
@@ -50,8 +45,6 @@ describe "Streaming Recognition", :speech do
 
     counters[:interim].must_be :zero?
     counters[:result].must_equal 1
-    counters[:speech_start].must_equal 1
-    counters[:speech_end].must_be :>=, 0
     counters[:complete].must_equal 1
     counters[:utterance].must_be :zero?
   end
@@ -59,12 +52,10 @@ describe "Streaming Recognition", :speech do
   it "sends multiple times" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :raw, sample_rate: 16000
+    stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US"
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
-    stream.on_speech_start { counters[:speech_start] += 1 }
-    stream.on_speech_end   { counters[:speech_end] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
     stream.on_utterance    { counters[:utterance] += 1 }
     stream.on_error do |error|
@@ -84,10 +75,7 @@ describe "Streaming Recognition", :speech do
 
     stream.stop
 
-    while counters[:complete] == 0 do
-      sleep 1
-    end
-    sleep 3 # give more callbacks time to finish
+    stream.wait_until_complete!
 
     results = stream.results
 
@@ -98,8 +86,6 @@ describe "Streaming Recognition", :speech do
 
     counters[:interim].must_be :zero?
     counters[:result].must_equal 1
-    counters[:speech_start].must_equal 1
-    counters[:speech_end].must_be :>=, 0
     counters[:complete].must_equal 1
     counters[:utterance].must_be :zero?
   end
@@ -108,12 +94,10 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, interim: true
+      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
-      stream.on_speech_start { counters[:speech_start] += 1 }
-      stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
       stream.on_error do |error|
@@ -124,10 +108,7 @@ describe "Streaming Recognition", :speech do
 
       stream.stop
 
-      while counters[:complete] == 0 do
-        sleep 1
-      end
-      sleep 3 # give more callbacks time to finish
+      stream.wait_until_complete!
 
       results = stream.results
 
@@ -138,8 +119,6 @@ describe "Streaming Recognition", :speech do
 
       counters[:interim].must_be :>, 0
       counters[:result].must_equal 1
-      counters[:speech_start].must_equal 1
-      counters[:speech_end].must_be :>=, 0
       counters[:complete].must_equal 1
       counters[:utterance].must_be :zero?
     end
@@ -147,12 +126,10 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, interim: true
+      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
-      stream.on_speech_start { counters[:speech_start] += 1 }
-      stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
       stream.on_error do |error|
@@ -169,10 +146,7 @@ describe "Streaming Recognition", :speech do
 
       stream.stop
 
-      while counters[:complete] == 0 do
-        sleep 1
-      end
-      sleep 3 # give more callbacks time to finish
+      stream.wait_until_complete!
 
       results = stream.results
 
@@ -183,8 +157,6 @@ describe "Streaming Recognition", :speech do
 
       counters[:interim].must_be :>, 0
       counters[:result].must_equal 1
-      counters[:speech_start].must_equal 1
-      counters[:speech_end].must_be :>=, 0
       counters[:complete].must_equal 1
       counters[:utterance].must_be :zero?
     end
@@ -194,12 +166,10 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, utterance: true
+      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
-      stream.on_speech_start { counters[:speech_start] += 1 }
-      stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
       stream.on_error do |error|
@@ -218,10 +188,7 @@ describe "Streaming Recognition", :speech do
 
       stream.stop
 
-      while counters[:complete] == 0 do
-        sleep 1
-      end
-      sleep 3 # give more callbacks time to finish
+      stream.wait_until_complete!
 
       results = stream.results
 
@@ -232,8 +199,6 @@ describe "Streaming Recognition", :speech do
 
       counters[:interim].must_equal 0
       counters[:result].must_equal 1
-      counters[:speech_start].must_equal 1
-      counters[:speech_end].must_be :>=, 0
       counters[:complete].must_equal 1
       counters[:utterance].must_be :>=, 0
     end
@@ -241,12 +206,10 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, utterance: true
+      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
-      stream.on_speech_start { counters[:speech_start] += 1 }
-      stream.on_speech_end   { counters[:speech_end] += 1 }
       stream.on_complete     { counters[:complete] += 1 }
       stream.on_utterance    { counters[:utterance] += 1 }
       stream.on_error do |error|
@@ -270,10 +233,7 @@ describe "Streaming Recognition", :speech do
 
       stream.stop
 
-      while counters[:complete] == 0 do
-        sleep 1
-      end
-      sleep 3 # give more callbacks time to finish
+      stream.wait_until_complete!
 
       results = stream.results
 
@@ -284,8 +244,6 @@ describe "Streaming Recognition", :speech do
 
       counters[:interim].must_equal 0
       counters[:result].must_equal 1
-      counters[:speech_start].must_equal 1
-      counters[:speech_end].must_be :>=, 0
       counters[:complete].must_equal 1
       counters[:utterance].must_be :>=, 0
     end

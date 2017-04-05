@@ -18,7 +18,7 @@ require "google/cloud/env"
 require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
 require "google/cloud/speech/result"
-require "google/cloud/speech/job"
+require "google/cloud/speech/operation"
 require "google/cloud/speech/stream"
 
 module Google
@@ -44,7 +44,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #   results = audio.recognize
       #
       #   result = results.first
@@ -120,18 +122,27 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
         #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
+        #
+        # @param [String,Symbol] language The language of the supplied audio as
+        #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        #   "en-US" for English (United States), "en-GB" for English (United
+        #   Kingdom), "fr-FR" for French (France). See [Language
+        #   Support](https://cloud.google.com/speech/docs/languages) for a list
+        #   of the currently supported language codes. Optional.
         # @param [Integer] sample_rate Sample rate in Hertz of the audio data
         #   to be recognized. Valid values are: 8000-48000. 16000 is optimal.
         #   For best results, set the sampling rate of the audio source to 16000
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
-        # @param [String] language The language of the supplied audio as a
-        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
-        #   code. If not specified, the language defaults to "en-US".  See
-        #   [Language
-        #   Support](https://cloud.google.com/speech/docs/languages)
-        #   for a list of the currently supported language codes. Optional.
         #
         # @return [Audio] The audio file to be recognized.
         #
@@ -141,7 +152,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/speech"
@@ -149,7 +162,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud/storage"
@@ -163,17 +178,20 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   audio = speech.audio file, encoding: :raw, sample_rate: 16000
+        #   audio = speech.audio file,
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
-        def audio source, encoding: nil, sample_rate: nil, language: nil
+        def audio source, encoding: nil, language: nil, sample_rate: nil
           if source.is_a? Audio
             audio = source.dup
           else
             audio = Audio.from_source source, self
           end
           audio.encoding = encoding unless encoding.nil?
-          audio.sample_rate = sample_rate unless sample_rate.nil?
           audio.language = language unless language.nil?
+          audio.sample_rate = sample_rate unless sample_rate.nil?
           audio
         end
 
@@ -216,18 +234,27 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
         #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
+        #
+        # @param [String,Symbol] language The language of the supplied audio as
+        #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        #   "en-US" for English (United States), "en-GB" for English (United
+        #   Kingdom), "fr-FR" for French (France). See [Language
+        #   Support](https://cloud.google.com/speech/docs/languages) for a list
+        #   of the currently supported language codes. Optional.
         # @param [Integer] sample_rate Sample rate in Hertz of the audio data
         #   to be recognized. Valid values are: 8000-48000. 16000 is optimal.
         #   For best results, set the sampling rate of the audio source to 16000
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
-        # @param [String] language The language of the supplied audio as a
-        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
-        #   code. If not specified, the language defaults to "en-US".  See
-        #   [Language
-        #   Support](https://cloud.google.com/speech/docs/languages)
-        #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
         #   fewer. Valid values are 0-30. Defaults to 1. Optional.
@@ -248,7 +275,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/speech"
@@ -256,7 +285,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "gs://bucket-name/path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud/storage"
@@ -270,16 +301,18 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   results = speech.recognize file, encoding: :raw,
+        #   results = speech.recognize file,
+        #                              encoding: :raw,
+        #                              language: "en-US",
         #                              sample_rate: 16000,
         #                              max_alternatives: 10
         #
-        def recognize source, encoding: nil, sample_rate: nil, language: nil,
+        def recognize source, encoding: nil, language: nil, sample_rate: nil,
                       max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_service!
 
-          audio_obj = audio source, encoding: encoding,
-                                    sample_rate: sample_rate, language: language
+          audio_obj = audio source, encoding: encoding, language: language,
+                                    sample_rate: sample_rate
 
           config = audio_config(
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
@@ -294,9 +327,9 @@ module Google
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
-        # asynchronously, meaning a Job is returned once the audio data has been
-        # sent, and can be refreshed to retrieve recognition results once the
-        # audio data has been processed.
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
         #
         # @see https://cloud.google.com/speech/docs/basics#async-responses
         #   Asynchronous Speech API Responses
@@ -309,22 +342,41 @@ module Google
         # @param [String, Symbol] encoding Encoding of audio data to be
         #   recognized. Optional.
         #
-        #   Currently, the only acceptable value is:
+        #   Acceptable values are:
         #
         #   * `raw` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
+        #   * `flac` - The [Free Lossless Audio
+        #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
+        #     Only 16-bit samples are supported. Not all fields in STREAMINFO
+        #     are supported. (FLAC)
+        #   * `mulaw` - 8-bit samples that compand 14-bit audio samples using
+        #     G.711 PCMU/mu-law. (MULAW)
+        #   * `amr` - Adaptive Multi-Rate Narrowband codec. (`sample_rate` must
+        #     be 8000 Hz.) (AMR)
+        #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
+        #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
         #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
+        #
+        # @param [String,Symbol] language The language of the supplied audio as
+        #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        #   "en-US" for English (United States), "en-GB" for English (United
+        #   Kingdom), "fr-FR" for French (France). See [Language
+        #   Support](https://cloud.google.com/speech/docs/languages) for a list
+        #   of the currently supported language codes. Optional.
         # @param [Integer] sample_rate Sample rate in Hertz of the audio data
         #   to be recognized. Valid values are: 8000-48000. 16000 is optimal.
         #   For best results, set the sampling rate of the audio source to 16000
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
-        # @param [String] language The language of the supplied audio as a
-        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
-        #   code. If not specified, the language defaults to "en-US".  See
-        #   [Language
-        #   Support](https://cloud.google.com/speech/docs/languages)
-        #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
         #   fewer. Valid values are 0-30. Defaults to 1. Optional.
@@ -337,30 +389,34 @@ module Google
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
         #
-        # @return [Job] A resource represents the long-running, asynchronous
-        #   processing of a speech-recognition operation.
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
         #
         # @example
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #   op = speech.process "path/to/audio.raw",
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
         # @example With a Google Cloud Storage URI:
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job "gs://bucket-name/path/to/audio.raw",
-        #                              encoding: :raw, sample_rate: 16000
+        #   op = speech.process "gs://bucket-name/path/to/audio.raw",
+        #                              encoding: :raw,
+        #                              language: "en-US",
+        #                              sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
         # @example With a Google Cloud Storage File object:
         #   require "google/cloud/storage"
@@ -374,20 +430,21 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   job = speech.recognize_job file, encoding: :raw,
+        #   op = speech.process file,
+        #                              encoding: :raw,
+        #                              language: "en-US",
         #                              sample_rate: 16000,
         #                              max_alternatives: 10
         #
-        #   job.done? #=> false
-        #   job.reload!
+        #   op.done? #=> false
+        #   op.reload!
         #
-        def recognize_job source, encoding: nil, sample_rate: nil,
-                          language: nil, max_alternatives: nil,
-                          profanity_filter: nil, phrases: nil
+        def process source, encoding: nil, sample_rate: nil, language: nil,
+                    max_alternatives: nil, profanity_filter: nil, phrases: nil
           ensure_service!
 
-          audio_obj = audio source, encoding: encoding,
-                                    sample_rate: sample_rate, language: language
+          audio_obj = audio source, encoding: encoding, language: language,
+                                    sample_rate: sample_rate
 
           config = audio_config(
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
@@ -395,8 +452,10 @@ module Google
             profanity_filter: profanity_filter, phrases: phrases)
 
           grpc = service.recognize_async audio_obj.to_grpc, config
-          Job.from_grpc grpc
+          Operation.from_grpc grpc
         end
+        alias_method :long_running_recognize, :process
+        alias_method :recognize_job, :process
 
         ##
         # Creates a Stream object to perform bidirectional streaming
@@ -422,18 +481,27 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
         #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
+        #
+        # @param [String,Symbol] language The language of the supplied audio as
+        #   a [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        #   "en-US" for English (United States), "en-GB" for English (United
+        #   Kingdom), "fr-FR" for French (France). See [Language
+        #   Support](https://cloud.google.com/speech/docs/languages) for a list
+        #   of the currently supported language codes. Optional.
         # @param [Integer] sample_rate Sample rate in Hertz of the audio data
         #   to be recognized. Valid values are: 8000-48000. 16000 is optimal.
         #   For best results, set the sampling rate of the audio source to 16000
         #   Hz. If that's not possible, use the native sample rate of the audio
         #   source (instead of re-sampling). Optional.
-        # @param [String] language The language of the supplied audio as a
-        #   [BCP-47](https://tools.ietf.org/html/bcp47) language
-        #   code. If not specified, the language defaults to "en-US".  See
-        #   [Language
-        #   Support](https://cloud.google.com/speech/docs/languages)
-        #   for a list of the currently supported language codes. Optional.
         # @param [String] max_alternatives The Maximum number of recognition
         #   hypotheses to be returned. Default is 1. The service may return
         #   fewer. Valid values are 0-30. Defaults to 1. Optional.
@@ -462,14 +530,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when a result is returned
-        #   stream.on_result do |results|
-        #     result = results.first
-        #     puts result.transcript # "how old is the Brooklyn Bridge"
-        #     puts result.confidence # 0.9826789498329163
-        #   end
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -478,18 +541,24 @@ module Google
         #   end
         #
         #   stream.stop
+        #   stream.wait_until_complete!
         #
-        def stream encoding: nil, sample_rate: nil, language: nil,
+        #   results = stream.results
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 0.9826789498329163
+        #
+        def stream encoding: nil, language: nil, sample_rate: nil,
                    max_alternatives: nil, profanity_filter: nil, phrases: nil,
                    utterance: nil, interim: nil
           ensure_service!
 
-          grpc_req = V1beta1::StreamingRecognizeRequest.new(
-            streaming_config: V1beta1::StreamingRecognitionConfig.new(
+          grpc_req = V1::StreamingRecognizeRequest.new(
+            streaming_config: V1::StreamingRecognitionConfig.new(
               {
                 config: audio_config(encoding: convert_encoding(encoding),
-                                     sample_rate: sample_rate,
                                      language: language,
+                                     sample_rate: sample_rate,
                                      max_alternatives: max_alternatives,
                                      profanity_filter: profanity_filter,
                                      phrases: phrases),
@@ -501,28 +570,62 @@ module Google
 
           Stream.new service, grpc_req
         end
+        alias_method :stream_recognize, :stream
+
+        ##
+        # Performs asynchronous speech recognition. Requests are processed
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
+        #
+        # @see https://cloud.google.com/speech/reference/rpc/google.longrunning#google.longrunning.Operations
+        #   Long-running Operation
+        #
+        # @param [String] id The unique identifier for the long running
+        #   operation. Required.
+        #
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   op = speech.operation "1234567890"
+        #
+        #   op.done? #=> false
+        #   op.reload!
+        #
+        def operation id
+          ensure_service!
+
+          grpc = service.get_op id
+          Operation.from_grpc grpc
+        end
 
         protected
 
-        def audio_config encoding: nil, sample_rate: nil, language: nil,
+        def audio_config encoding: nil, language: nil, sample_rate: nil,
                          max_alternatives: nil, profanity_filter: nil,
                          phrases: nil
-          context = nil
-          context = V1beta1::SpeechContext.new(phrases: phrases) if phrases
+          contexts = nil
+          contexts = [V1::SpeechContext.new(phrases: phrases)] if phrases
           language = String(language) unless language.nil?
-          V1beta1::RecognitionConfig.new({
+          V1::RecognitionConfig.new({
             encoding: convert_encoding(encoding),
-            sample_rate: sample_rate,
             language_code: language,
+            sample_rate_hertz: sample_rate,
             max_alternatives: max_alternatives,
             profanity_filter: profanity_filter,
-            speech_context: context
+            speech_contexts: contexts
           }.delete_if { |_, v| v.nil? })
         end
 
         def convert_encoding encoding
           mapping = { raw: :LINEAR16, linear: :LINEAR16, linear16: :LINEAR16,
-                      flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB }
+                      flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB,
+                      ogg_opus: :OGG_OPUS, speex: :SPEEX_WITH_HEADER_BYTE }
           mapping[encoding] || encoding
         end
 

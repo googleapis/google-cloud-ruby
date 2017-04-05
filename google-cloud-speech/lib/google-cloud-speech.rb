@@ -51,7 +51,9 @@ module Google
     #   speech = gcloud.speech
     #
     #   audio = speech.audio "path/to/audio.raw",
-    #                        encoding: :raw, sample_rate: 16000
+    #                        encoding: :raw,
+    #                        language: "en-US",
+    #                        sample_rate: 16000
     #
     # @example The default scope can be overridden with the `scope` option:
     #   require "google/cloud"
@@ -97,7 +99,9 @@ module Google
     #   speech = Google::Cloud.speech
     #
     #   audio = speech.audio "path/to/audio.raw",
-    #                        encoding: :raw, sample_rate: 16000
+    #                        encoding: :raw,
+    #                        language: "en-US",
+    #                        sample_rate: 16000
     #
     def self.speech project = nil, keyfile = nil, scope: nil, timeout: nil,
                     client_config: nil

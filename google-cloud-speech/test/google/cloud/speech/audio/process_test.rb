@@ -14,51 +14,48 @@
 
 require "helper"
 
-describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
-  let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
-  let(:results_grpc) { Google::Cloud::Speech::V1::RecognizeResponse.decode_json results_json }
-  let(:results) { results_grpc.results.map { |result_grpc| Google::Cloud::Speech::Result.from_grpc result_grpc } }
+describe Google::Cloud::Speech::Audio, :process, :mock_speech do
   let(:filepath) { "acceptance/data/audio.raw" }
   let(:audio_grpc) { Google::Cloud::Speech::V1::RecognitionAudio.new(content: File.read(filepath, mode: "rb")) }
   let(:audio) { Google::Cloud::Speech::Audio.from_source filepath, speech }
+  let(:op_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.V1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
+  let(:op_grpc) { Google::Gax::Operation.new Google::Longrunning::Operation.decode_json(op_json), nil, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
 
-  it "recognizes audio" do
+  it "recognizes audio op" do
     config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
-    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     audio.encoding = :raw
     audio.sample_rate = 16000
     audio.language = "en-US"
 
     speech.service.mocked_service = mock
-    results = audio.recognize
+    op = audio.process
     mock.verify
 
-    results.count.must_equal 1
-    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-    results.first.confidence.must_be_close_to 0.98267895
-    results.first.alternatives.must_be :empty?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
   end
 
-  it "recognizes audio with language (Symbol)" do
+  it "recognizes audio op with language (Symbol)" do
     config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en", sample_rate_hertz: 16000)
 
     mock = Minitest::Mock.new
-    mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
+    mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     audio.encoding = :raw
     audio.sample_rate = 16000
     audio.language = :en
 
     speech.service.mocked_service = mock
-    results = audio.recognize
+    op = audio.process
     mock.verify
 
-    results.count.must_equal 1
-    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-    results.first.confidence.must_be_close_to 0.98267895
-    results.first.alternatives.must_be :empty?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
   end
 end

@@ -56,7 +56,9 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # Or, you can initialize the audio instance with a Google Cloud Storage URI:
@@ -67,7 +69,9 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # Or, with a Google Cloud Storage File object:
@@ -84,7 +88,10 @@ module Google
     #
     # speech = Google::Cloud::Speech.new
     #
-    # audio = speech.audio file, encoding: :raw, sample_rate: 16000
+    # audio = speech.audio file,
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     # ```
     #
     # ## Recognizing speech
@@ -105,17 +112,19 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
-    # results = audio.recognize
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     #
+    # results = audio.recognize
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"
     # result.confidence #=> 0.9826789498329163
     # ```
     #
-    # Use {Speech::Audio#recognize_job} for asynchronous speech recognition,
-    # in which a {Speech::Job} is returned immediately after the audio data has
-    # been sent. The job can be refreshed to retrieve {Speech::Result} objects
+    # Use {Speech::Audio#process} for asynchronous speech recognition, in which
+    # a {Speech::Operation} is returned immediately after the audio data has
+    # been sent. The op can be refreshed to retrieve {Speech::Result} objects
     # once the audio data has been processed.
     #
     # ```ruby
@@ -124,13 +133,15 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw, sample_rate: 16000
-    # job = audio.recognize_job
+    #                      encoding: :raw,
+    #                      language: "en-US",
+    #                      sample_rate: 16000
     #
-    # job.done? #=> false
-    # job.reload!
-    # job.done? #=> true
-    # results = job.results
+    # op = audio.process
+    # op.done? #=> false
+    # op.wait_until_done!
+    # op.done? #=> true
+    # results = op.results
     #
     # result = results.first
     # result.transcript #=> "how old is the Brooklyn Bridge"
@@ -149,14 +160,9 @@ module Google
     #
     # audio = speech.audio "path/to/audio.raw"
     #
-    # stream = audio.stream encoding: :raw, sample_rate: 16000
-    #
-    # # register callback for when a result is returned
-    # stream.on_result do |results|
-    #   result = results.first
-    #   result.transcript #=> "how old is the Brooklyn Bridge"
-    #   result.confidence #=> 0.9826789498329163
-    # end
+    # stream = audio.stream encoding: :raw,
+    #                       language: "en-US",
+    #                       sample_rate: 16000
     #
     # # Stream 5 seconds of audio from the microphone
     # # Actual implementation of microphone input varies by platform
@@ -165,6 +171,12 @@ module Google
     # end
     #
     # stream.stop
+    # stream.wait_until_complete!
+    #
+    # results = stream.results
+    # result = results.first
+    # result.transcript #=> "how old is the Brooklyn Bridge"
+    # result.confidence #=> 0.9826789498329163
     # ```
     #
     # Obtaining audio data from input sources such as a Microphone is outside
@@ -203,7 +215,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
                    client_config: nil

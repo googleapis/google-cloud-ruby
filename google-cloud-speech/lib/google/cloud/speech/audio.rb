@@ -39,15 +39,17 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw, sample_rate: 16000
-      #   results = audio.recognize
+      #                        encoding: :raw,
+      #                        language: "en-US",
+      #                        sample_rate: 16000
       #
+      #   results = audio.recognize
       #   result = results.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
       #   result.confidence #=> 0.9826789498329163
       #
       class Audio
-        # @private The V1beta1::RecognitionAudio object.
+        # @private The V1::RecognitionAudio object.
         attr_reader :grpc
         # @private The Project object.
         attr_reader :speech
@@ -69,6 +71,15 @@ module Google
         #     be 8000 Hz.) (AMR)
         #   * `amr_wb` - Adaptive Multi-Rate Wideband codec. (`sample_rate` must
         #     be 16000 Hz.) (AMR_WB)
+        #   * `ogg_opus` - Ogg Mapping for Opus. (OGG_OPUS)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription.
+        #   * `speex` - Speex with header byte. (SPEEX_WITH_HEADER_BYTE)
+        #
+        #     Lossy codecs do not recommend, as they result in a lower-quality
+        #     speech transcription. If you must use a low-bitrate encoder,
+        #     OGG_OPUS is preferred.
         #
         # @return [String,Symbol]
         #
@@ -78,9 +89,37 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        language: "en-US",
+        #                        sample_rate: 16000
+        #
+        #   audio.encoding = :raw
+        #   audio.encoding #=> :raw
         #
         attr_accessor :encoding
+
+        ##
+        # The language of the supplied audio as a
+        # [BCP-47](https://tools.ietf.org/html/bcp47) language code. e.g.
+        # "en-US" for English (United States), "en-GB" for English (United
+        # Kingdom), "fr-FR" for French (France). See [Language
+        # Support](https://cloud.google.com/speech/docs/languages) for a list of
+        # the currently supported language codes.
+        #
+        # @return [String,Symbol]
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   audio = speech.audio "path/to/audio.raw",
+        #                        encoding: :raw,
+        #                        sample_rate: 16000
+        #
+        #   audio.language = "en-US"
+        #   audio.language #=> "en-US"
+        #
+        attr_accessor :language
 
         ##
         # Sample rate in Hertz of the audio data to be recognized. Valid values
@@ -96,34 +135,18 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
+        #                        encoding: :raw,
+        #                        language: "en-US"
+        #
+        #   audio.sample_rate = 16000
+        #   audio.sample_rate #=> 16000
         #
         attr_accessor :sample_rate
 
         ##
-        # The language of the supplied audio as a
-        # [BCP-47](https://tools.ietf.org/html/bcp47) language code.
-        # If not specified, the language defaults to "en-US".  See [Language
-        # Support](https://cloud.google.com/speech/docs/languages)
-        # for a list of the currently supported language codes.
-        #
-        # @return [String,Symbol]
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000,
-        #                        language: :en
-        #
-        attr_accessor :language
-
-        ##
         # @private Creates a new Audio instance.
         def initialize
-          @grpc = V1beta1::RecognitionAudio.new
+          @grpc = V1::RecognitionAudio.new
         end
 
         ##
@@ -177,9 +200,11 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   results = audio.recognize
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
+        #   results = audio.recognize
         #   result = results.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
         #   result.confidence #=> 0.9826789498329163
@@ -196,9 +221,9 @@ module Google
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
-        # asynchronously, meaning a Job is returned once the audio data has been
-        # sent, and can be refreshed to retrieve recognition results once the
-        # audio data has been processed.
+        # asynchronously, meaning a Operation is returned once the audio data
+        # has been sent, and can be refreshed to retrieve recognition results
+        # once the audio data has been processed.
         #
         # @see https://cloud.google.com/speech/docs/basics#async-responses
         #   Asynchronous Speech API Responses
@@ -215,8 +240,8 @@ module Google
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
         #
-        # @return [Job] A resource represents the long-running, asynchronous
-        #   processing of a speech-recognition operation.
+        # @return [Operation] A resource represents the long-running,
+        #   asynchronous processing of a speech-recognition operation.
         #
         # @example
         #   require "google/cloud/speech"
@@ -224,25 +249,29 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw, sample_rate: 16000
-        #   job = audio.recognize_job
+        #                        encoding: :raw,
+        #                        language: "en-US",
+        #                        sample_rate: 16000
         #
-        #   job.done? #=> false
-        #   job.reload!
-        #   job.done? #=> true
-        #   results = job.results
+        #   op = audio.process
+        #   op.done? #=> false
+        #   op.reload!
+        #   op.done? #=> true
+        #   results = op.results
         #
-        def recognize_job max_alternatives: nil, profanity_filter: nil,
-                          phrases: nil
+        def process max_alternatives: nil, profanity_filter: nil,
+                    phrases: nil
           ensure_speech!
 
-          speech.recognize_job self, encoding: encoding,
-                                     sample_rate: sample_rate,
-                                     language: language,
-                                     max_alternatives: max_alternatives,
-                                     profanity_filter: profanity_filter,
-                                     phrases: phrases
+          speech.process self, encoding: encoding,
+                               sample_rate: sample_rate,
+                               language: language,
+                               max_alternatives: max_alternatives,
+                               profanity_filter: profanity_filter,
+                               phrases: phrases
         end
+        alias_method :long_running_recognize, :process
+        alias_method :recognize_job, :process
 
         ##
         # @private The Google API Client object for the Audio.

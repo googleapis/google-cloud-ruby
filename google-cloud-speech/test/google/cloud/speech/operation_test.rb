@@ -14,31 +14,34 @@
 
 require "helper"
 
-describe Google::Cloud::Speech::Job, :mock_speech do
+describe Google::Cloud::Speech::Operation, :mock_speech do
   let(:ops_mock) { Minitest::Mock.new }
-  let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}}" }
+  let(:incomplete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}}" }
   let(:incomplete_grpc) { Google::Longrunning::Operation.decode_json incomplete_json }
-  let(:incomplete_gax) { Google::Gax::Operation.new incomplete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
+  let(:incomplete_gax) { Google::Gax::Operation.new incomplete_grpc, ops_mock, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.98267895}]}]}" }
-  let(:results_grpc) { Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse.decode_json results_json }
-  let(:complete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeMetadata\",\"value\":\"CFQSDAi6jKS/BRCwkLafARoMCIeZpL8FEKjRqswC\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}" }
+  let(:results_grpc) { Google::Cloud::Speech::V1::LongRunningRecognizeResponse.decode_json results_json }
+  let(:complete_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeMetadata\",\"value\":\"CGQSDAjeiPXEBRCou4mXARoMCN+I9cQFENj+gPIB\"}, \"done\": true, \"response\": {\"typeUrl\":\"type.googleapis.com/google.cloud.speech.v1.LongRunningRecognizeResponse\",\"value\":\"#{Base64.strict_encode64(results_grpc.to_proto)}\"}" }
   let(:complete_grpc) { Google::Longrunning::Operation.decode_json complete_json }
-  let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1beta1::AsyncRecognizeResponse, Google::Cloud::Speech::V1beta1::AsyncRecognizeMetadata }
+  let(:complete_gax) { Google::Gax::Operation.new complete_grpc, ops_mock, Google::Cloud::Speech::V1::LongRunningRecognizeResponse, Google::Cloud::Speech::V1::LongRunningRecognizeMetadata }
 
   it "refreshes to get final results" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, complete_grpc, ["1234567890", options: nil]
 
-    job.refresh!
+    op.refresh!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.must_be :done?
+    op.must_be :results?
+    op.wont_be :error?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -46,23 +49,26 @@ describe Google::Cloud::Speech::Job, :mock_speech do
   end
 
   it "refreshes but is still not done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
 
-    job.refresh!
+    op.refresh!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
   end
 
   it "waits until done" do
-    job = Google::Cloud::Speech::Job.from_grpc incomplete_gax
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
+    op = Google::Cloud::Speech::Operation.from_grpc incomplete_gax
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
 
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
     ops_mock.expect :get_operation, incomplete_grpc, ["1234567890", options: nil]
@@ -74,13 +80,16 @@ describe Google::Cloud::Speech::Job, :mock_speech do
     def incomplete_gax.sleep *args
     end
 
-    job.wait_until_done!
+    op.wait_until_done!
     ops_mock.verify
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.must_be :done?
+    op.must_be :results?
+    op.wont_be :error?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895

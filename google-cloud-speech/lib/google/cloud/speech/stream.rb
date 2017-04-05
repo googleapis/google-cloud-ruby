@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 require "google/cloud/speech/result"
 require "monitor"
 require "forwardable"
@@ -31,14 +31,9 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = speech.stream encoding: :raw, sample_rate: 16000
-      #
-      #   # register callback for when a result is returned
-      #   stream.on_result do |results|
-      #     result = results.first
-      #     puts result.transcript # "how old is the Brooklyn Bridge"
-      #     puts result.confidence # 0.9826789498329163
-      #   end
+      #   stream = speech.stream encoding: :raw,
+      #                          language: "en-US",
+      #                          sample_rate: 16000
       #
       #   # Stream 5 seconds of audio from the microphone
       #   # Actual implementation of microphone input varies by platform
@@ -47,6 +42,12 @@ module Google
       #   end
       #
       #   stream.stop
+      #   stream.wait_until_complete!
+      #
+      #   results = stream.results
+      #   result = results.first
+      #   result.transcript #=> "how old is the Brooklyn Bridge"
+      #   result.confidence #=> 0.9826789498329163
       #
       class Stream
         include MonitorMixin
@@ -95,14 +96,9 @@ module Google
         #
         #   audio = speech.audio "path/to/audio.raw"
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when a result is returned
-        #   stream.on_result do |results|
-        #     result = results.first
-        #     puts result.transcript # "how old is the Brooklyn Bridge"
-        #     puts result.confidence # 0.9826789498329163
-        #   end
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -111,12 +107,18 @@ module Google
         #   end
         #
         #   stream.stop
+        #   stream.wait_until_complete!
+        #
+        #   results = stream.results
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 0.9826789498329163
         #
         def send bytes
           start # lazily call start if the stream wasn't started yet
           # TODO: do not send if stopped?
           synchronize do
-            req = V1beta1::StreamingRecognizeRequest.new(
+            req = V1::StreamingRecognizeRequest.new(
               audio_content: bytes.encode("ASCII-8BIT"))
             @request_queue.push req
           end
@@ -153,7 +155,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -176,6 +180,81 @@ module Google
         end
 
         ##
+        # Whether all speech recognition results have been returned.
+        #
+        # @return [Boolean] All speech recognition results have been returned.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
+        #
+        #   # Stream 5 seconds of audio from the microphone
+        #   # Actual implementation of microphone input varies by platform
+        #   5.times do
+        #     stream.send MicrophoneInput.read(32000)
+        #   end
+        #
+        #   stream.stop
+        #
+        #   stream.wait_until_complete!
+        #   stream.complete? #=> true
+        #
+        #   results = stream.results
+        #   results.each do |result|
+        #     puts result.transcript
+        #     puts result.confidence
+        #   end
+        #
+        def complete?
+          synchronize do
+            @complete
+          end
+        end
+
+        ##
+        # Blocks until all speech recognition results have been returned.
+        #
+        # @example
+        #   require "google/cloud/speech"
+        #
+        #   speech = Google::Cloud::Speech.new
+        #
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
+        #
+        #   # Stream 5 seconds of audio from the microphone
+        #   # Actual implementation of microphone input varies by platform
+        #   5.times do
+        #     stream.send MicrophoneInput.read(32000)
+        #   end
+        #
+        #   stream.stop
+        #
+        #   stream.wait_until_complete!
+        #   stream.complete? #=> true
+        #
+        #   results = stream.results
+        #   results.each do |result|
+        #     puts result.transcript
+        #     puts result.confidence
+        #   end
+        #
+        def wait_until_complete!
+          complete_check = nil
+          synchronize { complete_check = @complete }
+          while complete_check.nil?
+            sleep 1
+            synchronize { complete_check = @complete }
+          end
+        end
+
+        ##
         # Register to be notified on the reception of an interim result.
         #
         # @yield [callback] The block for accessing final and interim results.
@@ -187,7 +266,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # register callback for when an interim result is returned
         #   stream.on_interim do |final_results, interim_results|
@@ -211,9 +292,10 @@ module Google
           end
         end
 
+        ##
         # @private yields two arguments, all final results and the
         # non-final/incomplete result
-        def interim! interim_results
+        def pass_interim! interim_results
           synchronize do
             @callbacks[:interim].each { |c| c.call results, interim_results }
           end
@@ -230,14 +312,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when an interim result is returned
-        #   stream.on_result do |results|
-        #     result = results.first
-        #     puts result.transcript # "how old is the Brooklyn Bridge"
-        #     puts result.confidence # 0.9826789498329163
-        #   end
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -246,6 +323,12 @@ module Google
         #   end
         #
         #   stream.stop
+        #   stream.wait_until_complete!
+        #
+        #   results = stream.results
+        #   result = results.first
+        #   result.transcript #=> "how old is the Brooklyn Bridge"
+        #   result.confidence #=> 0.9826789498329163
         #
         def on_result &block
           synchronize do
@@ -253,101 +336,12 @@ module Google
           end
         end
 
+        ##
         # @private add a result object, and call the callbacks
-        def add_result!result_index, result_grpc
+        def pass_result! result_grpc
           synchronize do
-            @results[result_index] = Result.from_grpc result_grpc
-          end
-          # callback for final result received
-          result!
-        end
-
-        # @private yields each final results as they are received
-        def result!
-          synchronize do
-            @callbacks[:result].each { |c| c.call results }
-          end
-        end
-
-        ##
-        # Register to be notified when speech has been detected in the audio
-        # stream.
-        #
-        # @yield [callback] The block to be called when speech has been detected
-        #   in the audio stream.
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when speech has started.
-        #   stream.on_speech_start do
-        #     puts "Speech has started."
-        #   end
-        #
-        #   # Stream 5 seconds of audio from the microphone
-        #   # Actual implementation of microphone input varies by platform
-        #   5.times do
-        #     stream.send MicrophoneInput.read(32000)
-        #   end
-        #
-        #   stream.stop
-        #
-        def on_speech_start &block
-          synchronize do
-            @callbacks[:speech_start] << block
-          end
-        end
-
-        # @private returns single final result once :END_OF_UTTERANCE is
-        # received.
-        def speech_start!
-          synchronize do
-            @callbacks[:speech_start].each(&:call)
-          end
-        end
-
-        ##
-        # Register to be notified when speech has ceased to be detected in the
-        # audio stream.
-        #
-        # @yield [callback] The block to be called when speech has ceased to be
-        #   detected in the audio stream.
-        #
-        # @example
-        #   require "google/cloud/speech"
-        #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
-        #
-        #   # register callback for when speech has ended.
-        #   stream.on_speech_end do
-        #     puts "Speech has ended."
-        #   end
-        #
-        #   # Stream 5 seconds of audio from the microphone
-        #   # Actual implementation of microphone input varies by platform
-        #   5.times do
-        #     stream.send MicrophoneInput.read(32000)
-        #   end
-        #
-        #   stream.stop
-        #
-        def on_speech_end &block
-          synchronize do
-            @callbacks[:speech_end] << block
-          end
-        end
-
-        # @private yields single final result once :END_OF_UTTERANCE is
-        # received.
-        def speech_end!
-          synchronize do
-            @callbacks[:speech_end].each(&:call)
+            @results << Result.from_grpc(result_grpc)
+            @callbacks[:result].each { |c| c.call @results }
           end
         end
 
@@ -363,11 +357,13 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
-        #   # register callback for when audio has ended.
+        #   # register callback for when stream has ended.
         #   stream.on_complete do
-        #     puts "Audio has ended."
+        #     puts "Stream has ended."
         #   end
         #
         #   # Stream 5 seconds of audio from the microphone
@@ -384,11 +380,11 @@ module Google
           end
         end
 
-        # @private yields all final results once the recognition is completed
-        # depending on how the Stream is configured, this can be on the
-        # reception of :END_OF_AUDIO or :END_OF_UTTERANCE.
-        def complete!
+        ##
+        # @private yields when the end of the audio stream has been reached.
+        def pass_complete!
           synchronize do
+            @complete = true
             @callbacks[:complete].each(&:call)
           end
         end
@@ -409,6 +405,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
         #                          sample_rate: 16000,
         #                          utterance: true
         #
@@ -432,9 +429,10 @@ module Google
           end
         end
 
-        # @private returns single final result once :END_OF_UTTERANCE is
+        ##
+        # @private returns single final result once :END_OF_SINGLE_UTTERANCE is
         # received.
-        def utterance!
+        def pass_utterance!
           synchronize do
             @callbacks[:utterance].each(&:call)
           end
@@ -451,7 +449,9 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw, sample_rate: 16000
+        #   stream = speech.stream encoding: :raw,
+        #                          language: "en-US",
+        #                          sample_rate: 16000
         #
         #   # register callback for when an error is returned
         #   stream.on_error do |error|
@@ -487,12 +487,16 @@ module Google
           response_enum.each do |response|
             begin
               background_results response
-              background_endpointer response.endpointer_type
+              background_event_type response.speech_event_type
               background_error response.error
             rescue => e
               error! Google::Cloud::Error.from_error(e)
             end
           end
+        rescue => e
+          error! Google::Cloud::Error.from_error(e)
+        ensure
+          pass_complete!
           Thread.pass
         end
 
@@ -501,10 +505,9 @@ module Google
           return unless response.results && response.results.any?
 
           final_grpc, interim_grpcs = *response.results
-          if final_grpc && final_grpc.is_final
-            add_result! response.result_index, final_grpc
-          else
+          unless final_grpc && final_grpc.is_final
             # all results are interim
+            final_grpc = nil
             interim_grpcs = response.results
           end
 
@@ -512,23 +515,17 @@ module Google
           interim_results = Array(interim_grpcs).map do |grpc|
             InterimResult.from_grpc grpc
           end
+
           # callback for interim results received
-          interim! interim_results if interim_results.any?
+          pass_interim! interim_results if interim_results.any?
+          # callback for final results received, if any
+          pass_result! final_grpc if final_grpc
         end
 
-        def background_endpointer endpointer
-          # Handle the endpointer by raising events
-          if endpointer == :START_OF_SPEECH
-            speech_start!
-          elsif endpointer == :END_OF_SPEECH
-            speech_end!
-          elsif endpointer == :END_OF_AUDIO
-            # TODO: do we automatically call stop here?
-            complete!
-          elsif endpointer == :END_OF_UTTERANCE
-            # TODO: do we automatically call stop here?
-            utterance!
-          end
+        def background_event_type event_type
+          # Handle the event_type by raising events
+          # TODO: do we automatically call stop here?
+          pass_utterance! if event_type == :END_OF_SINGLE_UTTERANCE
         end
 
         def background_error error

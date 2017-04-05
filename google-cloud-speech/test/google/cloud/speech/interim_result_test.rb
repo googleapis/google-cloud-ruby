@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Speech::InterimResult, :mock_speech do
   let(:results_json) { "{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is\"}],\"stability\":0.89999998},{\"alternatives\":[{\"transcript\":\" the Brooklyn Bridge\"}],\"stability\":0.0099999998}]}" }
-  let(:results_grpc) { Google::Cloud::Speech::V1beta1::StreamingRecognizeResponse.decode_json results_json }
+  let(:results_grpc) { Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json results_json }
   let(:results) { results_grpc.results.map { |result_grpc| Google::Cloud::Speech::InterimResult.from_grpc result_grpc } }
 
   it "knows itself" do

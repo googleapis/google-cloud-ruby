@@ -22,14 +22,14 @@ describe "Asynchonous Recognition", :speech do
   let(:gcs_url)  { gcs_file.to_gs_url }
 
   it "recognizes audio from local file path" do
-    job = speech.recognize_job filepath, encoding: :raw, sample_rate: 16000
+    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -37,14 +37,14 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from local file object" do
-    job = speech.recognize_job File.open(filepath, "rb"), encoding: :raw, sample_rate: 16000
+    op = speech.process File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -52,14 +52,14 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from GCS URL" do
-    job = speech.recognize_job gcs_url, encoding: :raw, sample_rate: 16000
+    op = speech.process gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -67,14 +67,14 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Storage File URL" do
-    job = speech.recognize_job gcs_file, encoding: :raw, sample_rate: 16000
+    op = speech.process gcs_file, encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -83,14 +83,14 @@ describe "Asynchonous Recognition", :speech do
 
   it "recognizes audio from Audio object" do
     audio = speech.audio gcs_url
-    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -98,15 +98,15 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes" do
-    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: "en"
-    job = speech.recognize_job audio
+    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process audio
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -114,15 +114,15 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
-    audio = speech.audio gcs_url, encoding: :raw, sample_rate: 16000, language: :en
-    job = speech.recognize_job audio
+    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000, language: "en-US"
+    op = speech.process audio
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895
@@ -130,15 +130,37 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, overriding attributes" do
-    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es"
-    job = speech.recognize_job audio, encoding: :raw, sample_rate: 16000, language: "en"
+    audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es-ES"
+    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
 
-    job.must_be_kind_of Google::Cloud::Speech::Job
-    job.wont_be :done?
-    job.wait_until_done!
-    job.must_be :done?
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+    op.wait_until_done!
+    op.must_be :done?
 
-    results = job.results
+    results = op.results
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.98267895
+    results.first.alternatives.must_be :empty?
+  end
+
+  it "can retrieve operations by id" do
+    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.wont_be :done?
+
+    op2 = speech.operation op.id
+
+    op2.must_be_kind_of Google::Cloud::Speech::Operation
+    op2.id.must_equal op.id
+
+    op2.reload!
+    op2.wait_until_done!
+    op2.must_be :done?
+
+    results = op2.results
     results.count.must_equal 1
     results.first.transcript.must_equal "how old is the Brooklyn Bridge"
     results.first.confidence.must_be_close_to 0.98267895

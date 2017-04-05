@@ -16,7 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/speech/credentials"
 require "google/cloud/speech/version"
-require "google/cloud/speech/v1beta1"
+require "google/cloud/speech/v1"
 
 module Google
   module Cloud
@@ -33,7 +33,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1beta1::SpeechClient::SERVICE_ADDRESS
+          @host = host || V1::SpeechClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -53,7 +53,7 @@ module Google
         def service
           return mocked_service if mocked_service
           @service ||= \
-            V1beta1::SpeechClient.new(
+            V1::SpeechClient.new(
               service_path: host,
               channel: channel,
               timeout: timeout,
@@ -82,13 +82,14 @@ module Google
 
         def recognize_sync audio, config
           execute do
-            service.sync_recognize config, audio, options: default_options
+            service.recognize config, audio, options: default_options
           end
         end
 
         def recognize_async audio, config
           execute do
-            service.async_recognize config, audio, options: default_options
+            service.long_running_recognize \
+              config, audio, options: default_options
           end
         end
 
@@ -98,7 +99,12 @@ module Google
         end
 
         def get_op name
-          execute { ops.get_operation name }
+          execute do
+            Google::Gax::Operation.new \
+              ops.get_operation(name), ops,
+              V1::LongRunningRecognizeResponse,
+              V1::LongRunningRecognizeMetadata
+          end
         end
 
         def inspect
