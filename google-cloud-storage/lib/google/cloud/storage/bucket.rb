@@ -915,7 +915,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy # API call
         #   policy_2 = bucket.policy # No API call
@@ -925,7 +925,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy force: true # API call
         #   policy_2 = bucket.policy force: true # API call
@@ -935,10 +935,10 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy do |p|
-        #     p.add "roles/owner", "user:owner@example.com"
+        #     p.add "roles/storage.admin", "user:owner@example.com"
         #   end # 2 API calls
         #
         def policy force: false
@@ -976,11 +976,11 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy # API call
         #
-        #   policy.add "roles/owner", "user:owner@example.com"
+        #   policy.add "roles/storage.admin", "user:owner@example.com"
         #
         #   bucket.policy = policy # API call
         #
@@ -1009,7 +1009,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   permissions = bucket.test_permissions "storage.buckets.get",
         #                                         "storage.buckets.delete"

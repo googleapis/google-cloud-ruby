@@ -61,7 +61,7 @@ module Google
       #
       #   storage = Google::Cloud::Storage.new
       #
-      #   bucket = storage.bucket "my-todo-app"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   policy = bucket.policy # API call
       #
@@ -99,7 +99,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy # API call
         #
@@ -129,7 +129,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy # API call
         #
@@ -157,7 +157,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy
         #
