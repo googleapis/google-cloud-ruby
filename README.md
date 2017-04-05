@@ -16,11 +16,11 @@ This client supports the following Google Cloud Platform services at a [General 
 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
+* [Cloud Storage](#cloud-storage-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
-* [Cloud Storage](#cloud-storage-beta) (Beta)
 * [Cloud Speech API](#cloud-speech-api-beta) (Beta)
 * [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision API](#cloud-vision-api-beta) (Beta)
@@ -341,7 +341,7 @@ result.transcript #=> "how old is the Brooklyn Bridge"
 result.confidence #=> 0.9826789498329163
 ```
 
-### Cloud Storage (Beta)
+### Cloud Storage (GA)
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
 - [google-cloud-storage API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-storage/latest)

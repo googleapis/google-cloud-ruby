@@ -1,5 +1,12 @@
 # Release History
 
+### 1.0.0 / 2017-04-05
+
+* Release 1.0
+* Improvements to File copy for large files
+* Allow file attributes to be changed during copy
+* Upgrade dependency on Google API Client
+
 ### 0.25.0 / 2017-03-31
 
 * Allow upload and download of in-memory IO objects
