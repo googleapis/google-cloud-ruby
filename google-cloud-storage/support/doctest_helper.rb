@@ -460,7 +460,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -468,7 +468,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -476,7 +476,15 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", {:destination_predefined_acl=>nil, :source_generation=>123456, :rewrite_token => nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>123456, :rewrite_token => nil, :options=>{}}]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#copy@The file can be modified during copying:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", Google::Apis::StorageV1::Object, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
     end
   end
 
@@ -484,7 +492,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :rewrite_object, OpenStruct.new(done: true, resource: file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, OpenStruct.new(done: true, resource: file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext", nil, Hash]
     end
   end
 
