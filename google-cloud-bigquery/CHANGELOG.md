@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.0 / 2017-04-05
+
+* Upgrade dependency on Google API Client
+
 ### 0.25.0 / 2017-03-31
 
 * Add `#cancel` to `Job`
