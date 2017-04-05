@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "delegate"
+
 module Google
   module Cloud
     module ResourceManager
