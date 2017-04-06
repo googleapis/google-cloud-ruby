@@ -57,8 +57,8 @@ describe Google::Cloud::Debugger::Debuggee::AppUniquifierGenerator do
 
       sha.to_s.must_equal expected_sha.to_s
 
-      test_file = Pathname.new "#{File.dirname(__FILE__)}/test_dir/test_ruby_file.rb"
-      expected_sha << "#{test_file.expand_path}:56"
+      test_file = Pathname.new File.join(File.dirname(__FILE__), "test_dir", "test_ruby_file.rb")
+      expected_sha << "#{test_file.expand_path}:#{test_file.stat.size}"
 
       Google::Cloud::Debugger::Debuggee::AppUniquifierGenerator.process_directory sha, "#{File.dirname(__FILE__)}/test_dir"
       sha.to_s.must_equal expected_sha.to_s
