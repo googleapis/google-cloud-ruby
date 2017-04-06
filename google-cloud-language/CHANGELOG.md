@@ -1,5 +1,10 @@
 # Release History
 
+### 0.26.1 / 2017-04-06
+
+* Fix error due to missing require.
+* Add v1beta2 Low level API.
+
 ### 0.26.0 / 2017-03-31
 
 * Automatic retry on `UNAVAILABLE` errors
