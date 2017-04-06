@@ -218,8 +218,9 @@
       "name": "google-cloud-resource_manager",
       "defaultService": "google/cloud/resourcemanager",
       "versions": [
-        "v0.24.0",
+        "v0.24.1",
         "master",
+        "v0.24.0",
         "v0.23.0",
         "v0.22.0",
         "v0.21.0",

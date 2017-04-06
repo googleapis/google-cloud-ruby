@@ -1,5 +1,9 @@
 # Release History
 
+### 0.24.1 / 2017-04-06
+
+* Fix error due to missing require.
+
 ### 0.24.0 / 2017-04-05
 
 * Upgrade dependency on Google API Client
