@@ -34,11 +34,6 @@ module Google
     # Extract entities and understand sentiments in multiple languages by
     # translating text first with Cloud Translation API.
     #
-    # The Google Cloud Natural Language API is currently a beta release, and
-    # might be changed in backward-incompatible ways. It is not subject to any
-    # SLA or deprecation policy and is not intended for real-time usage in
-    # critical applications.
-    #
     # For more information about Cloud Natural Language API, read the [Google
     # Cloud Natural Language API
     # Documentation](https://cloud.google.com/natural-language/docs/).
