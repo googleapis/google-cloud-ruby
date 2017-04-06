@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Language
-      VERSION = "0.26.1"
+      VERSION = "0.26.2"
     end
   end
 end

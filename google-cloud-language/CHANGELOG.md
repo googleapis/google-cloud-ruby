@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.2 / 2017-04-06
+
+* Update documentation.
+
 ### 0.26.1 / 2017-04-06
 
 * Fix error due to missing require.
