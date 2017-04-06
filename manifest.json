@@ -151,9 +151,8 @@
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
       "versions": [
-        "v0.26.2",
-        "master",
         "v0.26.1",
+        "master",
         "v0.26.0",
         "v0.25.0",
         "v0.24.0",
