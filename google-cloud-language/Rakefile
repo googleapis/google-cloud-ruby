@@ -112,6 +112,16 @@ task :jsondoc => :yard do
             include: ["google/cloud/language/v1"]
           }
         ]
+      },
+      {
+        type: "toc",
+        title: "Google::Cloud::Language::V1beta2::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Language::V1beta2",
+            include: ["google/cloud/language/v1beta2"]
+          }
+        ]
       }
     ]
   }

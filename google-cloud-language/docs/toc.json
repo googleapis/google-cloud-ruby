@@ -49,7 +49,7 @@
         {
           "title": "V1",
           "type": "google/cloud/language/v1",
-          "patterns": ["\/language\/v1"],
+          "patterns": ["\/language\/v1$", "\/language\/v1\/"],
           "nav": [
             {
               "title": "LanguageServiceClient",
@@ -58,6 +58,21 @@
             {
               "title": "Data Types",
               "type": "google/cloud/language/v1/datatypes"
+            }
+          ]
+        },
+        {
+          "title": "V1Beta2",
+          "type": "google/cloud/language/v1beta2",
+          "patterns": ["\/language\/v1beta2"],
+          "nav": [
+            {
+              "title": "LanguageServiceClient",
+              "type": "google/cloud/language/v1beta2/languageserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/language/v1beta2/datatypes"
             }
           ]
         }
