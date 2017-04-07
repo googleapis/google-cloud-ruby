@@ -48,12 +48,6 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
 
-### Lower-level (GAPIC) API versioning
-
-The lower-level API support contained within this package is versioned separately to match its corresponding Google Cloud Platform service API version.
-
-*Please note that in lower-level API support in this package, version `v1beta2` comes after version `v1`. The API version `v1beta2` contains new features that were not released in `v1`.*
-
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
