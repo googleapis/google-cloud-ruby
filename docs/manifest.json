@@ -103,6 +103,7 @@
       "name": "google-cloud-debugger",
       "defaultService": "google/cloud/debugger",
       "versions": [
+        "v0.24.0",
         "master"
       ]
     },
