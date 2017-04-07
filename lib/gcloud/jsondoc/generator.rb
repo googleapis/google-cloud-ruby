@@ -96,7 +96,9 @@ module Gcloud
       end
 
       def matching_type? type, include_patterns, exclude_patterns
-        !type.object.docstring.empty? && include_type?(type, include_patterns) &&
+        type.object &&
+          !type.object.docstring.empty? &&
+          include_type?(type, include_patterns) &&
           !include_type?(type, exclude_patterns)
       end
       def include_type? type, patterns
