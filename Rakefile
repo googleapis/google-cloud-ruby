@@ -434,6 +434,7 @@ namespace :jsondoc do
     gem, version = split_tag tag
 
     # Verify the tag exists
+    `git fetch`
     tag_check = `git show-ref --tags | grep #{tag}`.chomp
     if tag_check.empty?
       fail "Cannot find the tag '#{tag}'."
