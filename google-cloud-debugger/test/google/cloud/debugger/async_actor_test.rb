@@ -216,6 +216,7 @@ describe Google::Cloud::Debugger::AsyncActor do
       klass = Google::Cloud::Debugger::AsyncActor
       actor.async_start
       klass.instance_variable_get("@cleanup_list").must_include actor
+      actor.async_stop
     end
   end
 

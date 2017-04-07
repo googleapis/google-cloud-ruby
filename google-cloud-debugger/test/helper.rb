@@ -27,9 +27,21 @@ class MockDebugger < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:module_name) { "test-service" }
   let(:module_version) { "vTest" }
+  let(:service) {
+    service = Google::Cloud::Debugger::Service.new(project, credentials)
+    mocked_debugger = Object.new
+    mocked_transmitter = Object.new
+    mocked_debugger.define_singleton_method :register_debuggee do |*_| end
+    mocked_debugger.define_singleton_method :list_active_breakpoints do |*_| end
+    mocked_transmitter.define_singleton_method :update_active_breakpoint do |*_| end
+
+    service.mocked_debugger = mocked_debugger
+    service.mocked_transmitter = mocked_transmitter
+    service
+  }
   let(:debugger) {
     Google::Cloud::Debugger::Project.new(
-      Google::Cloud::Debugger::Service.new(project, credentials),
+      service,
       module_name: module_name,
       module_version: module_version
     )
