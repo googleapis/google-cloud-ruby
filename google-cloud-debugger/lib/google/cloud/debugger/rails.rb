@@ -58,19 +58,20 @@ module Google
         end
 
         initializer "Stackdriver.Debugger" do |app|
-          debugger_config = Railtie.parse_rails_config config
-
-          project_id = debugger_config[:project_id]
-          keyfile = debugger_config[:keyfile]
-          module_name = debugger_config[:module_name]
-          module_version = debugger_config[:module_version]
-
-          debugger = Google::Cloud::Debugger.new project: project_id,
-                                                 keyfile: keyfile,
-                                                 module_name: module_name,
-                                                 module_version: module_version
-
           if self.class.use_debugger? app.config
+            debugger_config = Railtie.parse_rails_config config
+
+            project_id = debugger_config[:project_id]
+            keyfile = debugger_config[:keyfile]
+            module_name = debugger_config[:module_name]
+            module_version = debugger_config[:module_version]
+
+            debugger =
+              Google::Cloud::Debugger.new project: project_id,
+                                          keyfile: keyfile,
+                                          module_name: module_name,
+                                          module_version: module_version
+
             app.middleware.insert_after Rack::ETag,
                                         Google::Cloud::Debugger::Middleware,
                                         debugger: debugger
@@ -102,16 +103,16 @@ module Google
             Google::Cloud::Debugger::Credentials.credentials_with_scope(
               debugger_config[:keyfile])
           rescue => e
-            Rails.log "Google::Cloud::Debugger is not activated due to " \
-              "authorization error: #{e.message}"
+            Rails.logger.warn "Google::Cloud::Debugger is not activated due " \
+              "to authorization error: #{e.message}"
             return false
           end
 
           project_id = debugger_config[:project_id] ||
                        Google::Cloud::Debugger::Project.default_project
           if project_id.to_s.empty?
-            Rails.log "Google::Cloud::Debugger is not activated due to empty " \
-              "project_id"
+            Rails.logger.warn "Google::Cloud::Debugger is not activated due " \
+              "to empty project_id"
             return false
           end
 
