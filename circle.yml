@@ -52,4 +52,4 @@ deployment:
     tag: /(\S*)\/v(\S*)/
     owner: GoogleCloudPlatform
     commands:
-      - bundle exec rake circleci:release
+      - rvm-exec 2.4.0 bundle exec rake circleci:release
