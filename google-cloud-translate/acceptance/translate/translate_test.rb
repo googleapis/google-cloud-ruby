@@ -51,7 +51,7 @@ describe Google::Cloud::Translate, :translate do
 
     translation = translate.translate "How are you today?", to: "es", model: "base"
     translation.text.must_equal "¿Cómo estás hoy?"
-    translation.model.must_be :nil?
+    translation.model.must_equal "base"
 
     translations = translate.translate "Hello", "How are you today?", to: :es, model: :nmt
     translations.count.must_equal 2
