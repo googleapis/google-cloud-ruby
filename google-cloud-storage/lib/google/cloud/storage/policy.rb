@@ -63,13 +63,11 @@ module Google
       #
       #   bucket = storage.bucket "my-todo-app"
       #
-      #   policy = bucket.policy # API call
-      #
-      #   policy.remove "roles/storage.admin", "user:owner@example.com"
-      #   policy.add "roles/storage.admin", "user:newowner@example.com"
-      #   policy.roles["roles/storage.objectViewer"] = ["allUsers"]
-      #
-      #   bucket.policy = policy # API call
+      #   bucket.policy do |p|
+      #     p.remove "roles/storage.admin", "user:owner@example.com"
+      #     p.add "roles/storage.admin", "user:newowner@example.com"
+      #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
+      #   end
       #
       class Policy
         attr_reader :etag, :roles
@@ -101,11 +99,9 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy # API call
-        #
-        #   policy.add "roles/storage.admin", "user:newowner@example.com"
-        #
-        #   bucket.policy = policy # API call
+        #   bucket.policy do |p|
+        #     p.add "roles/storage.admin", "user:newowner@example.com"
+        #   end
         #
         def add role_name, member
           role(role_name) << member
@@ -131,11 +127,9 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy # API call
-        #
-        #   policy.remove "roles/storage.admin", "user:owner@example.com"
-        #
-        #   bucket.policy = policy # API call
+        #   bucket.policy do |p|
+        #     p.remove "roles/storage.admin", "user:owner@example.com"
+        #   end
         #
         def remove role_name, member
           role(role_name).delete member
@@ -159,9 +153,9 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy
-        #
-        #   policy.role("roles/storage.admin") << "user:owner@example.com"
+        #   bucket.policy do |p|
+        #     p.role("roles/storage.admin") << "user:owner@example.com"
+        #   end
         #
         def role role_name
           roles[role_name] ||= []

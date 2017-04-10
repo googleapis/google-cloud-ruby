@@ -421,7 +421,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
-        #   policy = sub.policy do |p|
+        #   sub.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #

@@ -63,13 +63,11 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #   instance = spanner.instance "my-instance"
       #
-      #   policy = instance.policy # API call
-      #
-      #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-      #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-      #   policy.roles["roles/viewer"] = ["allUsers"] # Local call
-      #
-      #   instance.policy = policy # API call
+      #   policy = instance.policy do |p|
+      #     p.remove "roles/owner", "user:owner@example.com"
+      #     p.add "roles/owner", "user:newowner@example.com"
+      #     p.roles["roles/viewer"] = ["allUsers"]
+      #   end
       #
       class Policy
         attr_reader :etag, :roles
@@ -100,11 +98,9 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "my-instance"
         #
-        #   policy = instance.policy # API call
-        #
-        #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-        #
-        #   instance.policy = policy # API call
+        #   policy = instance.policy do |p|
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #   end
         #
         def add role_name, member
           role(role_name) << member
@@ -129,11 +125,9 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "my-instance"
         #
-        #   policy = instance.policy # API call
-        #
-        #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-        #
-        #   instance.policy = policy # API call
+        #   policy = instance.policy do |p|
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #   end
         #
         def remove role_name, member
           role(role_name).delete member
@@ -156,9 +150,9 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "my-instance"
         #
-        #   policy = instance.policy
-        #
-        #   policy.role("roles/viewer") << "user:viewer@example.com"
+        #   policy = instance.policy do |p|
+        #     p.role("roles/viewer") << "user:viewer@example.com"
+        #   end
         #
         def role role_name
           roles[role_name] ||= []

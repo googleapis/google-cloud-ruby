@@ -62,13 +62,11 @@ module Google
       #   resource_manager = Google::Cloud::ResourceManager.new
       #   project = resource_manager.project "tokyo-rain-123"
       #
-      #   policy = project.policy # API call
-      #
-      #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-      #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-      #   policy.roles["roles/viewer"] = ["allUsers"] # Local call
-      #
-      #   project.policy = policy # API call
+      #   project.policy do |p|
+      #     p.remove "roles/owner", "user:owner@example.com"
+      #     p.add "roles/owner", "user:newowner@example.com"
+      #     p.roles["roles/viewer"] = ["allUsers"]
+      #   end
       #
       class Policy
         ##
@@ -102,11 +100,9 @@ module Google
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
-        #   policy = project.policy # API call
-        #
-        #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-        #
-        #   project.policy = policy # API call
+        #   project.policy do |p|
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #   end
         #
         def add role_name, member
           role(role_name) << member
@@ -130,11 +126,9 @@ module Google
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
-        #   policy = project.policy # API call
-        #
-        #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-        #
-        #   project.policy = policy # API call
+        #   project.policy do |p|
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #   end
         #
         def remove role_name, member
           role(role_name).delete member
@@ -157,9 +151,9 @@ module Google
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
-        #   policy = project.policy
-        #
-        #   policy.role("roles/viewer") << "user:viewer@example.com"
+        #   project.policy do |p|
+        #     p.role("roles/viewer") << "user:viewer@example.com"
+        #   end
         #
         def role role_name
           roles[role_name] ||= []

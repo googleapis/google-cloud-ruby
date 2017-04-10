@@ -61,13 +61,11 @@ module Google
       #   pubsub = Google::Cloud::Pubsub.new
       #   topic = pubsub.topic "my-topic"
       #
-      #   policy = topic.policy # API call
-      #
-      #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-      #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-      #   policy.roles["roles/viewer"] = ["allUsers"] # Local call
-      #
-      #   topic.policy = policy # API call
+      #   topic.policy do |p|
+      #     p.remove "roles/owner", "user:owner@example.com"
+      #     p.add "roles/owner", "user:newowner@example.com"
+      #     p.roles["roles/viewer"] = ["allUsers"]
+      #   end
       #
       class Policy
         attr_reader :etag, :roles
@@ -98,11 +96,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
-        #   policy = topic.policy # API call
-        #
-        #   policy.add "roles/owner", "user:newowner@example.com" # Local call
-        #
-        #   topic.policy = policy # API call
+        #   topic.policy do |p|
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #   end
         #
         def add role_name, member
           role(role_name) << member
@@ -127,11 +123,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
-        #   policy = topic.policy # API call
-        #
-        #   policy.remove "roles/owner", "user:owner@example.com" # Local call
-        #
-        #   topic.policy = policy # API call
+        #   topic.policy do |p|
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #   end
         #
         def remove role_name, member
           role(role_name).delete member
@@ -154,9 +148,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
-        #   policy = topic.policy
-        #
-        #   policy.role("roles/viewer") << "user:viewer@example.com"
+        #   topic.policy do |p|
+        #     p.role("roles/viewer") << "user:viewer@example.com"
+        #   end
         #
         def role role_name
           roles[role_name] ||= []

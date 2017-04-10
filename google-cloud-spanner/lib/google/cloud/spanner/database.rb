@@ -284,7 +284,7 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   database = spanner.database "my-instance", "my-database"
         #
-        #   policy = database.policy do |p|
+        #   database.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #

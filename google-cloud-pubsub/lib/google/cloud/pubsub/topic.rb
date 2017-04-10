@@ -319,7 +319,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "my-topic"
         #
-        #   policy = topic.policy do |p|
+        #   topic.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
