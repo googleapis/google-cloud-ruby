@@ -366,7 +366,7 @@ module Google
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
-        #   policy = project.policy do |p|
+        #   project.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
