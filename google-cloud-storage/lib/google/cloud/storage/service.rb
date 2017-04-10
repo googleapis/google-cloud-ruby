@@ -323,6 +323,38 @@ module Google
         end
 
         ##
+        # Returns Google::Apis::StorageV1::Policy
+        def get_file_policy bucket_name, file_name
+          # get_object_iam_policy(bucket, object, generation: nil, fields: nil,
+          #                                       quota_user: nil, user_ip: nil,
+          #                                       options: nil)
+          execute { service.get_object_iam_policy bucket_name, file_name }
+        end
+
+        ##
+        # Returns Google::Apis::StorageV1::Policy
+        def set_file_policy bucket_name, file_name, new_policy
+          # set_object_iam_policy(bucket, object, policy_object = nil,
+          #                       generation: nil, fields: nil, quota_user: nil,
+          #                       user_ip: nil, options: nil)
+          execute do
+            service.set_object_iam_policy bucket_name, file_name, new_policy
+          end
+        end
+
+        ##
+        # Returns Google::Apis::StorageV1::TestIamPermissionsResponse
+        def test_file_permissions bucket_name, file_name, permissions
+          execute do
+            # test_object_iam_permissions(bucket, object, permissions,
+            # generation: nil, fields: nil, quota_user: nil, user_ip: nil,
+            # options: nil)
+            service.test_object_iam_permissions bucket_name, file_name,
+                                                permissions
+          end
+        end
+
+        ##
         # Retrieves the mime-type for a file path.
         # An empty string is returned if no mime-type can be found.
         def mime_type_for path

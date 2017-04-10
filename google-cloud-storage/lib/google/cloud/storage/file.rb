@@ -801,6 +801,150 @@ module Google
         end
 
         ##
+        # Gets and updates the [Cloud IAM](https://cloud.google.com/iam/) access
+        # control policy for this file.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        # @see https://cloud.google.com/storage/docs/json_api/v1/objects/setIamPolicy
+        #   Objects: setIamPolicy
+        #
+        # @param [Boolean] force Force load the latest policy when `true`.
+        #   Otherwise the policy will be memoized to reduce the number of API
+        #   calls made. The default is `false`.
+        #
+        # @yield [policy] A block for updating the policy. The latest policy
+        #   will be read from the service and passed to the block. After the
+        #   block completes, the modified policy will be written to the service.
+        # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+        #   file
+        #
+        # @return [Policy] the current Cloud IAM Policy for this file
+        #
+        # @example Policy values are memoized to reduce the number of API calls:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   policy = file.policy # API call
+        #   policy_2 = file.policy # No API call
+        #
+        # @example Use `force` to retrieve the latest policy from the service:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   policy = file.policy force: true # API call
+        #   policy_2 = file.policy force: true # API call
+        #
+        # @example Update the policy by passing a block:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   policy = file.policy do |p|
+        #     p.add "roles/storage.admin", "user:owner@example.com"
+        #   end # 2 API calls
+        #
+        def policy force: false
+          @policy = nil if force || block_given?
+          @policy ||= begin
+            ensure_service!
+            gapi = service.get_file_policy bucket, name
+            Policy.from_gapi gapi
+          end
+          return @policy unless block_given?
+          p = @policy.deep_dup
+          yield p
+          self.policy = p
+        end
+
+        ##
+        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for this file. The policy should be read from {#policy}. See
+        # {Google::Cloud::Storage::Policy} for an explanation of the
+        # policy `etag` property and how to modify policies.
+        #
+        # You can also update the policy by passing a block to {#policy}, which
+        # will call this method internally after the block completes.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        # @see https://cloud.google.com/storage/docs/json_api/v1/objects/setIamPolicy
+        #   Objects: setIamPolicy
+        #
+        # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
+        #   bucket
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   policy = file.policy # API call
+        #
+        #   policy.add "roles/storage.admin", "user:owner@example.com"
+        #
+        #   file.policy = policy # API call
+        #
+        def policy= new_policy
+          ensure_service!
+          gapi = service.set_file_policy bucket, name, new_policy.to_gapi
+          @policy = Policy.from_gapi gapi
+        end
+
+        ##
+        # Tests the specified permissions against the [Cloud
+        # IAM](https://cloud.google.com/iam/) access control policy.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing
+        #   Policies
+        #
+        # @param [String, Array<String>] permissions The set of permissions
+        #   against which to check access. Permissions must be of the format
+        #   `storage.resource.capability`, where resource is one of `buckets` or
+        #   `objects`.
+        #
+        # @return [Array<String>] The permissions held by the caller.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   permissions = file.test_permissions "storage.objects.get",
+        #                                       "storage.objects.delete"
+        #   permissions.include? "storage.objects.get"    #=> true
+        #   permissions.include? "storage.objects.delete" #=> false
+        #
+        def test_permissions *permissions
+          permissions = Array(permissions).flatten
+          ensure_service!
+          gapi = service.test_file_permissions bucket, name, permissions
+          gapi.permissions
+        end
+
+        ##
         # Reloads the file with current data from the Storage service.
         def reload!
           ensure_service!

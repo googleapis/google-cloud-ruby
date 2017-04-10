@@ -526,4 +526,37 @@ describe Google::Cloud::Storage::File, :storage do
       File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
     end
   end
+
+  describe "IAM Policies and Permissions" do
+
+    it "allows policy to be updated on a file" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoPolicyUpdateFile.png"
+      # Check permissions first
+      roles = ["storage.objects.getIamPolicy", "storage.objects.setIamPolicy"]
+      permissions = file.test_permissions roles
+      skip "Don't have permissions to get/set file's policy" unless permissions == roles
+
+      file.policy.must_be_kind_of Google::Cloud::Storage::Policy
+
+      # We need a valid service account in order to update the policy
+      service_account = storage.service.credentials.client.issuer
+      service_account.wont_be :nil?
+      role = "roles/storage.objectCreator"
+      member = "serviceAccount:#{service_account}"
+      file.policy do |p|
+        p.add role, member
+      end
+
+      file.policy(force: true).role(role).must_include member
+    end
+
+    it "allows permissions to be tested on a file" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoPermissionsTestFile.png"
+      roles = ["storage.objects.get"]
+      permissions = file.test_permissions roles
+      permissions.must_equal roles
+    end
+  end
 end
