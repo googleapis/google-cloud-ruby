@@ -937,7 +937,7 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy do |p|
+        #   bucket.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
