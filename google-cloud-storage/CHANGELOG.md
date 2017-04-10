@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.1 / 2017-04-10
+
+* Add Bucket IAM support
+
 ### 1.0.0 / 2017-04-05
 
 * Release 1.0
