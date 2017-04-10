@@ -349,7 +349,7 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "my-instance"
         #
-        #   policy = instance.policy do |p|
+        #   instance.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
