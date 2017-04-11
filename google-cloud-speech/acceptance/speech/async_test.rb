@@ -114,7 +114,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
-    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000, language: "en-US"
+    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
     op = speech.process audio
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
