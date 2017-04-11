@@ -22,7 +22,6 @@ describe "Asynchonous Recognition", :speech do
   let(:gcs_url)  { gcs_file.to_gs_url }
 
   it "recognizes audio from local file path" do
-    skip "Inline audio is not allowed with LongRunningRecognize."
     op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -38,7 +37,6 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from local file object" do
-    skip "Inline audio is not allowed with LongRunningRecognize."
     op = speech.process File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -148,7 +146,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "can retrieve operations by id" do
-    op = speech.process gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
