@@ -269,7 +269,7 @@ module Google
           end
         end
 
-        def execute_sql session_path, sql, params: nil
+        def execute_sql session_path, sql, transaction: nil, params: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
@@ -281,12 +281,13 @@ module Google
           end
           execute do
             service.execute_sql \
-              session_path, sql, params: input_params,
+              session_path, sql, transaction: transaction, params: input_params,
                                  param_types: input_param_types
           end
         end
 
-        def streaming_execute_sql session_path, sql, params: nil
+        def streaming_execute_sql session_path, sql, transaction: nil,
+                                  params: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
@@ -298,12 +299,13 @@ module Google
           end
           execute do
             service.execute_streaming_sql \
-              session_path, sql, params: input_params,
+              session_path, sql, transaction: transaction, params: input_params,
                                  param_types: input_param_types
           end
         end
 
-        def read_table session_path, table_name, columns, id: nil, limit: nil
+        def read_table session_path, table_name, columns, id: nil,
+                       transaction: nil, limit: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
           unless id.nil?
@@ -314,12 +316,13 @@ module Google
           end
           execute do
             service.read \
-              session_path, table_name, columns, key_set, limit: limit
+              session_path, table_name, columns, key_set,
+              transaction: transaction, limit: limit
           end
         end
 
         def streaming_read_table session_path, table_name, columns, id: nil,
-                                 limit: nil
+                                 transaction: nil, limit: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
           unless id.nil?
@@ -330,17 +333,28 @@ module Google
           end
           execute do
             service.streaming_read \
-              session_path, table_name, columns, key_set, limit: limit
+              session_path, table_name, columns, key_set,
+              transaction: transaction, limit: limit
           end
         end
 
-        def commit session_path, mutations = []
-          execute do
+        def commit session_name, mutations = [], transaction_id: nil
+          tx_opts = nil
+          if transaction_id.nil?
             tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
               Google::Spanner::V1::TransactionOptions::ReadWrite.new)
-            service.commit \
-              session_path, mutations, single_use_transaction: tx_opts
           end
+          execute do
+            service.commit \
+              session_name, mutations,
+              transaction_id: transaction_id, single_use_transaction: tx_opts
+          end
+        end
+
+        def begin_transaction session_name
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
+            Google::Spanner::V1::TransactionOptions::ReadWrite.new)
+          execute { service.begin_transaction session_name, tx_opts }
         end
 
         def inspect

@@ -47,4 +47,43 @@ describe "Spanner Client", :spanner do
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
+
+  describe :transaction do
+    it "runs a simple streaming query" do
+      results = nil
+      db.transaction do |tx|
+        results = tx.execute "SELECT 42 AS num"
+      end
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      results.types.must_be_kind_of Hash
+      results.types.keys.count.must_equal 1
+      results.types[:num].must_equal :INT64
+
+      rows = results.rows.to_a # grab all from the enumerator
+      rows.count.must_equal 1
+      row = rows.first
+      row.must_be_kind_of Hash
+      row.keys.must_equal [:num]
+      row[:num].must_equal 42
+    end
+
+    it "runs a simple non-streaming query" do
+      results = nil
+      db.transaction do |tx|
+        results = tx.execute "SELECT 42 AS num", streaming: false
+      end
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      results.types.must_be_kind_of Hash
+      results.types.keys.count.must_equal 1
+      results.types[:num].must_equal :INT64
+
+      results.rows.count.must_equal 1
+      row = results.rows.first
+      row.must_be_kind_of Hash
+      row.keys.must_equal [:num]
+      row[:num].must_equal 42
+    end
+  end
 end

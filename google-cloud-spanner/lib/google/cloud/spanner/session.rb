@@ -35,6 +35,10 @@ module Google
       #   # ...
       class Session
         ##
+        # @private The Google::Spanner::V1::Session object
+        attr_accessor :grpc
+
+        ##
         # @private The gRPC Service object.
         attr_accessor :service
 
