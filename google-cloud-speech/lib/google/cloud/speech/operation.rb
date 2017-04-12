@@ -39,9 +39,9 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   op = speech.process "path/to/audio.raw",
-      #                              encoding: :raw,
-      #                              language: "en-US",
-      #                              sample_rate: 16000
+      #                       encoding: :raw,
+      #                       language: "en-US",
+      #                       sample_rate: 16000
       #
       #   op.done? #=> false
       #   op.reload! # API call

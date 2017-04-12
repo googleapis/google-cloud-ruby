@@ -411,9 +411,9 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "gs://bucket-name/path/to/audio.raw",
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000
         #
         #   op.done? #=> false
         #   op.reload!
@@ -431,10 +431,10 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process file,
-        #                              encoding: :raw,
-        #                              language: "en-US",
-        #                              sample_rate: 16000,
-        #                              max_alternatives: 10
+        #                       encoding: :raw,
+        #                       language: "en-US",
+        #                       sample_rate: 16000,
+        #                       max_alternatives: 10
         #
         #   op.done? #=> false
         #   op.reload!
