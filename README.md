@@ -21,6 +21,7 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
+* [Cloud Natural Language API](#cloud-natural-language-api-beta) (Beta)
 * [Cloud Speech API](#cloud-speech-api-beta) (Beta)
 * [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 * [Cloud Vision API](#cloud-vision-api-beta) (Beta)
@@ -28,7 +29,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 
@@ -210,7 +210,7 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-### Cloud Natural Language API (Alpha)
+### Cloud Natural Language API (Beta)
 
 - [google-cloud-language README](google-cloud-language/README.md)
 - [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest)
