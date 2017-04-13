@@ -357,6 +357,18 @@ module Google
           execute { service.begin_transaction session_name, tx_opts }
         end
 
+        def create_snapshot session_name, strong: nil, timestamp: nil,
+                            staleness: nil
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(read_only:
+            Google::Spanner::V1::TransactionOptions::ReadOnly.new({
+              strong: strong,
+              read_timestamp: Convert.time_to_timestamp(timestamp),
+              exact_staleness: Convert.number_to_duration(staleness),
+              return_read_timestamp: true
+            }.delete_if { |_, v| v.nil? }))
+          execute { service.begin_transaction session_name, tx_opts }
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end

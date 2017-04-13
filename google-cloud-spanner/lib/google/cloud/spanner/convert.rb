@@ -229,6 +229,39 @@ module Google
               nil # just in case
             end
           end
+
+          def number_to_duration number
+            return nil if number.nil?
+
+            Google::Protobuf::Duration.new \
+              seconds: number.to_i,
+              nanos: (number.remainder(1) * 1000000000).round
+          end
+
+          def duration_to_number duration
+            return nil if duration.nil?
+
+            return duration.seconds if duration.nanos == 0
+
+            duration.seconds + (duration.nanos / 1000000000.0)
+          end
+
+          def time_to_timestamp time
+            return nil if time.nil?
+
+            # Force the object to be a Time object.
+            time = time.to_time
+
+            Google::Protobuf::Timestamp.new \
+              seconds: time.to_i,
+              nanos: time.nsec
+          end
+
+          def timestamp_to_time timestamp
+            return nil if timestamp.nil?
+
+            Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
+          end
         end
 
         # rubocop:enable all

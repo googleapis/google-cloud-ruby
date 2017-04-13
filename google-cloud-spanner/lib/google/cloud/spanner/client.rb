@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/spanner/project"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
+require "google/cloud/spanner/snapshot"
 
 module Google
   module Cloud
@@ -437,6 +438,66 @@ module Google
           nil
         end
 
+        ##
+        # Creates a snapshot for reads that execute atomically at a single
+        # logical point in time across columns, rows, and tables in a database.
+        #
+        # @param [true, false] strong Read at a timestamp where all previously
+        #   committed transactions are visible.
+        # @param [Time, DateTime] timestamp Executes all reads at the given
+        #   timestamp. Unlike other modes, reads at a specific timestamp are
+        #   repeatable; the same read at the same timestamp always returns the
+        #   same data. If the timestamp is in the future, the read will block
+        #   until the specified timestamp, modulo the read's deadline.
+        #
+        #   Useful for large scale consistent reads such as mapreduces, or for
+        #   coordinating many reads against a consistent snapshot of the data.
+        # @param [Numeric] staleness Executes all reads at a timestamp that is
+        #   +staleness+ old. The timestamp is chosen soon after the read
+        #   is started.
+        #
+        #   Guarantees that all writes that have committed more than the
+        #   specified number of seconds ago are visible. Because Cloud Spanner
+        #   chooses the exact timestamp, this mode works even if the client's
+        #   local clock is substantially skewed from Cloud Spanner commit
+        #   timestamps.
+        #
+        #   Useful for reading at nearby replicas without the distributed
+        #   timestamp negotiation overhead of single-use +staleness+.
+        #
+        # @yield [snapshot] The block for reading and writing data.
+        # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
+        #   object.
+        #
+        # @return [Google::Cloud::Spanner::Snapshot]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.snapshot do |snp|
+        #     results = snp.execute "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
+        #
+        def snapshot strong: nil, timestamp: nil, staleness: nil
+          validate_snapshot_args! strong: strong, timestamp: timestamp,
+                                  staleness: staleness
+          ensure_service!
+          snp_session = session
+          snp_grpc = @project.service.create_snapshot \
+            snp_session.path, strong: strong, timestamp: timestamp,
+                              staleness: staleness
+          snp = Snapshot.from_grpc(snp_grpc, snp_session)
+          yield snp if block_given?
+          snp
+        end
+
         protected
 
         ##
@@ -455,6 +516,17 @@ module Google
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id)
           Session.from_grpc(grpc, @project.service)
+        end
+
+        ##
+        # Check for valid snapshot arguments
+        def validate_snapshot_args! strong: nil, timestamp: nil, staleness: nil
+          remaining_args = { strong: strong, timestamp: timestamp,
+                             staleness: staleness }.delete_if { |_, v| v.nil? }
+          return true if remaining_args.keys.count <= 1
+          fail ArgumentError,
+               "Can only provide one of the following arguments: " \
+               "(strong, timestamp, staleness)"
         end
       end
     end
