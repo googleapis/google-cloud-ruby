@@ -14,7 +14,7 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :spanner do
+describe "Spanner Client", :execute, :spanner do
   let(:db) { spanner.client $spanner_prefix, "main" }
 
   it "runs a simple streaming query" do
@@ -35,6 +35,68 @@ describe "Spanner Client", :spanner do
 
   it "runs a simple non-streaming query" do
     results = db.execute "SELECT 42 AS num", streaming: false
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    results.rows.count.must_equal 1
+    row = results.rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple streaming query using a single-use timestamp option" do
+    results = db.execute "SELECT 42 AS num", timestamp: (Time.now - 60)
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple non-streaming query using a single-use timestamp option" do
+    results = db.execute "SELECT 42 AS num", timestamp: (Time.now - 60), streaming: false
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    results.rows.count.must_equal 1
+    row = results.rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple streaming query using a single-use staleness option" do
+    results = db.execute "SELECT 42 AS num", staleness: 60
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple non-streaming query using a single-use staleness option" do
+    results = db.execute "SELECT 42 AS num", staleness: 60, streaming: false
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
     results.types.must_be_kind_of Hash

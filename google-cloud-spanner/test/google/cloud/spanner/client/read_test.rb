@@ -118,6 +118,61 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     assert_results results
   end
 
+  it "can read using a single-use timestamp" do
+    time = Time.now
+    timestamp = Google::Cloud::Spanner::Convert.time_to_timestamp time
+    tx_selector = Google::Spanner::V1::TransactionSelector.new(single_use:
+                    Google::Spanner::V1::TransactionOptions.new(read_only:
+                      Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+                        min_read_timestamp: timestamp)))
+
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, timestamp: time, streaming: false
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "can read using a single-use staleness" do
+    staleness = 60
+    duration = Google::Cloud::Spanner::Convert.number_to_duration staleness
+    tx_selector = Google::Spanner::V1::TransactionSelector.new(single_use:
+                    Google::Spanner::V1::TransactionOptions.new(read_only:
+                      Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+                        max_staleness: duration)))
+
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, staleness: staleness, streaming: false
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "does not allow multiple single-use options to be given" do
+    mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
+
+    assert_raises ArgumentError do
+      client.read "my-table", [], timestamp: Time.now, staleness: 60, streaming: false
+    end
+
+    mock.verify
+  end
+
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.wont_be :streaming?

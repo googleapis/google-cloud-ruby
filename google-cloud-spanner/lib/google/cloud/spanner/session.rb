@@ -20,6 +20,8 @@ module Google
   module Cloud
     module Spanner
       ##
+      # @private
+      #
       # # Session
       #
       # ...
@@ -155,6 +157,9 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
+        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        #   transaction selector value to send. Only used for single-use
+        #   transactions.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -207,13 +212,14 @@ module Google
         #   user_row = results.rows.first
         #   puts "User #{user_row[:id]} is #{user_row[:name]}""
         #
-        def execute sql, params: nil, streaming: true
+        def execute sql, params: nil, transaction: nil, streaming: true
           ensure_service!
           if streaming
-            Results.from_enum service.streaming_execute_sql path, sql,
-                                                            params: params
+            Results.from_enum service.streaming_execute_sql \
+              path, sql, params: params, transaction: transaction
           else
-            Results.from_grpc service.execute_sql path, sql, params: params
+            Results.from_grpc service.execute_sql \
+              path, sql, params: params, transaction: transaction
           end
         end
         alias_method :query, :execute
@@ -231,6 +237,9 @@ module Google
         #   there are columns in the primary key.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
+        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        #   transaction selector value to send. Only used for single-use
+        #   transactions.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -264,14 +273,17 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, streaming: true
+        def read table, columns, id: nil, limit: nil, transaction: nil,
+                 streaming: true
           ensure_service!
           if streaming
             Results.from_enum service.streaming_read_table \
-              path, table, columns, id: id, limit: limit
+              path, table, columns, id: id, limit: limit,
+                                    transaction: transaction
           else
             Results.from_grpc service.read_table \
-              path, table, columns, id: id, limit: limit
+              path, table, columns, id: id, limit: limit,
+                                    transaction: transaction
           end
         end
 

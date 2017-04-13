@@ -102,6 +102,26 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
+        # @param [Time, DateTime] timestamp Executes all reads at a
+        #   timestamp >= +timestamp+.
+        #
+        #   This is useful for requesting fresher data than some previous read,
+        #   or data that is fresh enough to observe the effects of some
+        #   previously committed transaction whose timestamp is known.
+        #
+        #   Cannot be used with staleness.
+        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
+        #   max_staleness+ seconds. Guarantees that all writes that have
+        #   committed more than the specified number of seconds ago are visible.
+        #   Because Cloud Spanner chooses the exact timestamp, this mode works
+        #   even if the client's local clock is substantially skewed from Cloud
+        #   Spanner commit timestamps.
+        #
+        #   Useful for reading the freshest data available at a nearby replica,
+        #   while bounding the possible staleness if the local replica has
+        #   fallen behind.
+        #
+        #   Cannot be used with timestamp.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -154,8 +174,15 @@ module Google
         #   user_row = results.rows.first
         #   puts "User #{user_row[:id]} is #{user_row[:name]}""
         #
-        def execute sql, params: nil, streaming: true
-          session.execute sql, params: params, streaming: streaming
+        def execute sql, params: nil, timestamp: nil, staleness: nil,
+                    streaming: true
+          validate_single_use_args! timestamp: timestamp, staleness: staleness
+          ensure_service!
+
+          single_use_tx = single_use_transaction timestamp: timestamp,
+                                                 staleness: staleness
+          session.execute sql, params: params, transaction: single_use_tx,
+                               streaming: streaming
         end
         alias_method :query, :execute
 
@@ -172,6 +199,26 @@ module Google
         #   there are columns in the primary key.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
+        # @param [Time, DateTime] timestamp Executes all reads at a
+        #   timestamp >= +timestamp+.
+        #
+        #   This is useful for requesting fresher data than some previous read,
+        #   or data that is fresh enough to observe the effects of some
+        #   previously committed transaction whose timestamp is known.
+        #
+        #   Cannot be used with staleness.
+        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
+        #   max_staleness+ seconds. Guarantees that all writes that have
+        #   committed more than the specified number of seconds ago are visible.
+        #   Because Cloud Spanner chooses the exact timestamp, this mode works
+        #   even if the client's local clock is substantially skewed from Cloud
+        #   Spanner commit timestamps.
+        #
+        #   Useful for reading the freshest data available at a nearby replica,
+        #   while bounding the possible staleness if the local replica has
+        #   fallen behind.
+        #
+        #   Cannot be used with timestamp.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -205,9 +252,15 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, streaming: true
+        def read table, columns, id: nil, limit: nil, timestamp: nil,
+                 staleness: nil, streaming: true
+          validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
+
+          single_use_tx = single_use_transaction timestamp: timestamp,
+                                                 staleness: staleness
           session.read table, columns, id: id, limit: limit,
+                                       transaction: single_use_tx,
                                        streaming: streaming
         end
 
@@ -516,6 +569,27 @@ module Google
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id)
           Session.from_grpc(grpc, @project.service)
+        end
+
+        ##
+        # Check for valid snapshot arguments
+        def validate_single_use_args! timestamp: nil, staleness: nil
+          return true if timestamp.nil? || staleness.nil?
+          fail ArgumentError,
+               "Can only provide one of the following arguments: " \
+               "(timestamp, staleness)"
+        end
+
+        ##
+        # Create a single-use TransactionSelector
+        def single_use_transaction timestamp: nil, staleness: nil
+          return nil if timestamp.nil? && staleness.nil?
+          Google::Spanner::V1::TransactionSelector.new(single_use:
+            Google::Spanner::V1::TransactionOptions.new(read_only:
+              Google::Spanner::V1::TransactionOptions::ReadOnly.new({
+                min_read_timestamp: Convert.time_to_timestamp(timestamp),
+                max_staleness: Convert.number_to_duration(staleness)
+              }.delete_if { |_, v| v.nil? })))
         end
 
         ##
