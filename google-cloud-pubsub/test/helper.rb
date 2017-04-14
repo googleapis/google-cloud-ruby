@@ -97,6 +97,27 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
+  def snapshots_json topic_name, num_snapshots, token = nil
+    snapshots = num_snapshots.times.map do
+      JSON.parse(snapshot_json(topic_name, "snapshot-#{rand 1000}"))
+    end
+    data = { "snapshots" => snapshots }
+    data["next_page_token"] = token unless token.nil?
+    data.to_json
+  end
+
+  def snapshot_json topic_name, snapshot_name
+    time = Time.now
+    timestamp = {
+      "seconds" => time.to_i,
+      "nanos" => time.nsec
+    }
+    { "name" => snapshot_path(snapshot_name),
+      "topic" => topic_path(topic_name),
+      "expiration_time" => timestamp
+    }.to_json
+  end
+
   def rec_message_json message, id = rand(1000000)
     {
       "ack_id" => "ack-id-#{id}",
@@ -126,6 +147,10 @@ class MockPubsub < Minitest::Spec
 
   def subscription_path subscription_name
     "#{project_path}/subscriptions/#{subscription_name}"
+  end
+
+  def snapshot_path snapshot_name
+    "#{project_path}/snapshots/#{snapshot_name}"
   end
 
   def paged_enum_struct response

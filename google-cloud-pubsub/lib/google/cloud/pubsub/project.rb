@@ -18,6 +18,7 @@ require "google/cloud/env"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
+require "google/cloud/pubsub/snapshot"
 
 module Google
   module Cloud
@@ -430,6 +431,46 @@ module Google
         end
         alias_method :find_subscriptions, :subscriptions
         alias_method :list_subscriptions, :subscriptions
+
+
+        ##
+        # Retrieves a list of snapshots for the given project.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of snapshots to return.
+        #
+        # @return [Array<Google::Cloud::Pubsub::Snapshot>] (See
+        #   {Google::Cloud::Pubsub::Snapshot::List})
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   snapshots = pubsub.snapshots
+        #   snapshots.each do |snapshot|
+        #     puts snapshot.name
+        #   end
+        #
+        # @example Retrieve all snapshots: (See {Snapshot::List#all})
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   snapshots = pubsub.snapshots
+        #   snapshots.all do |snapshot|
+        #     puts snapshot.name
+        #   end
+        #
+        def snapshots token: nil, max: nil
+          ensure_service!
+          options = { token: token, max: max }
+          grpc = service.list_snapshots options
+          Snapshot::List.from_grpc grpc, service, max
+        end
+        alias_method :find_snapshots, :snapshots
+        alias_method :list_snapshots, :snapshots
 
         protected
 

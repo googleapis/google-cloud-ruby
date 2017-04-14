@@ -279,6 +279,45 @@ module Google
           end
         end
 
+        ##
+        # Lists snapshots by project.
+        def list_snapshots options = {}
+          call_options = default_options
+          if (token = options[:token])
+            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
+                                                        page_token: token
+          end
+
+          execute do
+            paged_enum = subscriber.list_snapshots project_path(options),
+                                                   page_size: options[:max],
+                                                   options: call_options
+
+            paged_enum.page.response
+          end
+        end
+
+        ##
+        # Creates a snapshot on a given subscription.
+        def create_snapshot subscription, snapshot_name
+          name = snapshot_path snapshot_name
+          execute do
+            subscriber.create_snapshot name,
+                                       subscription_path(subscription),
+                                       options: default_options
+          end
+        end
+
+        ##
+        # Deletes an existing snapshot.
+        # All pending messages in the snapshot are immediately dropped.
+        def delete_snapshot snapshot
+          execute do
+            subscriber.delete_snapshot snapshot_path(snapshot),
+                                       options: default_options
+          end
+        end
+
         def get_topic_policy topic_name, options = {}
           execute do
             publisher.get_iam_policy topic_path(topic_name, options),
@@ -344,6 +383,13 @@ module Google
         def subscription_path subscription_name, options = {}
           return subscription_name if subscription_name.to_s.include? "/"
           "#{project_path(options)}/subscriptions/#{subscription_name}"
+        end
+
+        def snapshot_path snapshot_name, options = {}
+          if snapshot_name.nil? || snapshot_name.to_s.include?("/")
+            return snapshot_name
+          end
+          "#{project_path(options)}/snapshots/#{snapshot_name}"
         end
 
         def inspect
