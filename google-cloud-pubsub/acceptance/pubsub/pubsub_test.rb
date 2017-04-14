@@ -208,6 +208,58 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscription.delete
     end
 
+    it "should be able to pull same message again after ack by seeking to snapshot" do
+      subscription = topic.subscribe "#{$topic_prefix}-sub5"
+      subscription.wont_be :nil?
+      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+      # Publish a new message
+      msg = topic.publish "hello-#{rand(1000)}"
+      msg.wont_be :nil?
+
+      snapshot = subscription.create_snapshot
+
+      # Check it pulls the message
+      events = pull_with_retry subscription
+      events.wont_be :empty?
+      events.count.must_equal 1
+      event = events.first
+      event.wont_be :nil?
+      event.msg.data.must_equal msg.data
+      # Acknowledge the message
+      subscription.ack event.ack_id
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # Reset to the snapshot
+      subscription.seek snapshot
+
+      # Check it again pulls the message
+      events = pull_with_retry subscription
+      events.wont_be :empty?
+      events.count.must_equal 1
+      event = events.first
+      event.wont_be :nil?
+      event.msg.data.must_equal msg.data
+      # Acknowledge the message
+      subscription.ack event.ack_id
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # Remove the subscription
+      subscription.delete
+    end
+
     def pull_with_retry sub
       events = []
       retries = 0

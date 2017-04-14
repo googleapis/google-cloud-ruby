@@ -363,6 +363,16 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Pubsub::Subscription#seek" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-sub"), ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [nil, "projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
+      mock_subscriber.expect :seek, nil, ["projects/my-project/subscriptions/my-sub", Hash]
+    end
+  end
+
   ##
   # Subscription::List
 

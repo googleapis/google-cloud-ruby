@@ -281,6 +281,34 @@ module Google
     # sub.delay 120, received_messages
     # ```
     #
+    # ## Creating a snapshot and using seek
+    #
+    # You can create a snapshot to retain the existing backlog on a
+    # subscription. The snapshot will hold the messages in the subscription's
+    # backlog that are unacknowledged upon the successful completion of the
+    # `create_snapshot` operation.
+    #
+    # Later, you can use `seek` to reset the subscription's backlog to the
+    # snapshot.
+    #
+    # (See {Google::Cloud::Pubsub::Subscription#create_snapshot} and
+    # {Google::Cloud::Pubsub::Subscription#seek})
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    #
+    # snapshot = sub.create_snapshot
+    #
+    # messages = sub.pull
+    # sub.acknowledge messages
+    #
+    # sub.seek snapshot
+    # ```
+    #
     # ## Listening for Messages
     #
     # Long running workers are easy to create with `listen`, which runs an

@@ -318,6 +318,24 @@ module Google
           end
         end
 
+        ##
+        # Adjusts the given subscription to a time or snapshot.
+        def seek subscription, time_or_snapshot
+          subscription = subscription_path(subscription)
+          execute do
+            if (time = time_to_timestamp time_or_snapshot)
+              subscriber.seek subscription, time: time, options: default_options
+            else
+              if time_or_snapshot.is_a? Snapshot
+                time_or_snapshot = time_or_snapshot.name
+              end
+              subscriber.seek subscription,
+                              snapshot: snapshot_path(time_or_snapshot),
+                              options: default_options
+            end
+          end
+        end
+
         def get_topic_policy topic_name, options = {}
           execute do
             publisher.get_iam_policy topic_path(topic_name, options),
@@ -404,6 +422,19 @@ module Google
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
+        end
+
+        ##
+        # @private Get a Google::Protobuf::Timestamp object from a Time object.
+        def time_to_timestamp time
+          return nil if time.nil?
+          # Make sure to_time is supported.
+          return nil unless time.respond_to? :to_time
+          time = time.to_time
+          # Make sure we have a Time object.
+          # Rails' String#to_time returns nil if the string doesn't parse.
+          return nil unless time
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
         end
 
         def execute

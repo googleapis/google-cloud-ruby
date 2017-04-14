@@ -425,6 +425,58 @@ module Google
         alias_method :new_snapshot, :create_snapshot
 
         ##
+        # Resets the subscription's backlog to a given {Snapshot} or to a point
+        # in time, whichever is provided in the request.
+        #
+        # @param [Snapshot, String, Time] snapshot The `Snapshot` instance,
+        #   snapshot name, or time to which to perform the seek.
+        #   If the argument is a snapshot, the snapshot's topic must be the
+        #   same as that of the subscription. If it is a time, messages retained
+        #   in the subscription that were published before this time are marked
+        #   as acknowledged, and messages retained in the subscription that were
+        #   published after this time are marked as unacknowledged. Note that
+        #   this operation affects only those messages retained in the
+        #   subscription. For example, if the time corresponds to a point before
+        #   the message retention window (or to a point before the system's
+        #   notion of the subscription creation time), only retained messages
+        #   will be marked as unacknowledged, and already-expunged messages will
+        #   not be restored.
+        #
+        # @return [Boolean] Returns `true` if the seek was successful.
+        #
+        # @example Using a snapshot
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   snapshot = sub.create_snapshot
+        #
+        #   messages = sub.pull
+        #   sub.acknowledge messages
+        #
+        #   sub.seek snapshot
+        #
+        # @example Using a time:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   time = Time.now
+        #
+        #   messages = sub.pull
+        #   sub.acknowledge messages
+        #
+        #   sub.seek time
+        #
+        def seek snapshot
+          ensure_service!
+          service.seek name, snapshot
+          true
+        end
+
+        ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this subscription.
         #
