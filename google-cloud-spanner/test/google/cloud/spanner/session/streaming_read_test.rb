@@ -48,7 +48,7 @@ describe Google::Cloud::Spanner::Session, :read, :streaming, :mock_spanner do
         { boolValue: true},
         { stringValue: "29" },
         { numberValue: 0.9 },
-        { stringValue: "2017-01-29T00:00:10Z" },
+        { stringValue: "2017-01-02T03:04:05.060000000Z" },
         { stringValue: "1950-01-01" },
         { stringValue: "aW1hZ2U=" }
       ]
@@ -152,7 +152,7 @@ describe Google::Cloud::Spanner::Session, :read, :streaming, :mock_spanner do
     row[:active].must_equal true
     row[:age].must_equal 29
     row[:score].must_equal 0.9
-    row[:updated_at].must_equal Time.parse("2017-01-29T00:00:10Z")
+    row[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
     row[:birthday].must_equal Date.parse("1950-01-01")
     row[:avatar].must_be_kind_of StringIO
     row[:avatar].read.must_equal "image"

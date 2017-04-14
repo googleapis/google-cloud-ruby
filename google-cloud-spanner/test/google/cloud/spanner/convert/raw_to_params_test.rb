@@ -60,7 +60,7 @@ describe Google::Cloud::Spanner::Convert, :raw_to_params, :mock_spanner do
     timestamp = Time.parse "2017-01-01 20:04:05.06 -0700"
 
     combined_params = Google::Cloud::Spanner::Convert.raw_to_params updated_at: timestamp
-    combined_params.must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05Z"),
+    combined_params.must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z"),
                                                   Google::Spanner::V1::Type.new(code: :TIMESTAMP)] })
   end
 
@@ -68,7 +68,7 @@ describe Google::Cloud::Spanner::Convert, :raw_to_params, :mock_spanner do
     timestamp = DateTime.parse "2017-01-01 20:04:05.06 -0700"
 
     combined_params = Google::Cloud::Spanner::Convert.raw_to_params updated_at: timestamp
-    combined_params.must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05Z"),
+    combined_params.must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z"),
                                                   Google::Spanner::V1::Type.new(code: :TIMESTAMP)] })
   end
 

@@ -63,10 +63,10 @@ describe Google::Cloud::Spanner::Convert, :value_to_raw, :mock_spanner do
   end
 
   it "converts a TIMESTAMP value" do
-    value = Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05Z")
+    value = Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z")
     type = Google::Spanner::V1::Type.new(code: :TIMESTAMP)
     raw = Google::Cloud::Spanner::Convert.value_to_raw value, type
-    raw.must_equal Time.parse("2017-01-02 03:04:05 UTC")
+    raw.must_equal Time.parse("2017-01-02 03:04:05.06 UTC")
   end
 
   it "converts a DATE value" do

@@ -43,7 +43,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :mock_spanner do
         { boolValue: true},
         { stringValue: "29" },
         { numberValue: 0.9 },
-        { stringValue: "2017-01-29T00:00:10Z" },
+        { stringValue: "2017-01-02T03:04:05.060000000Z" },
         { stringValue: "1950-01-01" },
         { stringValue: "aW1hZ2U=" },
         { listValue: { values: [ { stringValue: "1"},
@@ -114,7 +114,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :mock_spanner do
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE updated_at = @updated_at", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE updated_at = @updated_at", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }]
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE updated_at = @updated_at", params: { updated_at: timestamp }
@@ -265,7 +265,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :mock_spanner do
     row[:active].must_equal true
     row[:age].must_equal 29
     row[:score].must_equal 0.9
-    row[:updated_at].must_equal Time.parse("2017-01-29T00:00:10Z")
+    row[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
     row[:birthday].must_equal Date.parse("1950-01-01")
     row[:avatar].must_be_kind_of StringIO
     row[:avatar].read.must_equal "image"

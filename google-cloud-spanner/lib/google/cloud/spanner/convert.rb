@@ -53,11 +53,8 @@ module Google
             elsif Numeric === obj # Any number not an integer gets to be a float
               [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :FLOAT64)]
-            elsif Time === obj
-              [raw_to_value(obj.utc.strftime('%FT%TZ')),
-               Google::Spanner::V1::Type.new(code: :TIMESTAMP)]
-            elsif DateTime === obj
-              [raw_to_value(obj.to_time.utc.strftime('%FT%TZ')),
+            elsif Time === obj || DateTime === obj
+              [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :TIMESTAMP)]
             elsif Date === obj
               [raw_to_value(obj.to_s),
@@ -118,7 +115,7 @@ module Google
               end
             elsif Time === obj || DateTime === obj
               Google::Protobuf::Value.new(string_value:
-                obj.to_time.utc.strftime('%FT%TZ'))
+                obj.to_time.utc.strftime("%FT%T.%NZ"))
             elsif Date === obj
               Google::Protobuf::Value.new string_value: obj.to_s
             elsif Array === obj
