@@ -55,7 +55,6 @@ describe Google::Cloud::Debugger::AsyncActor do
     it "sets the state to :stopping" do
       stopping = actor.async_stop
       stopping.must_equal true
-      actor.async_state.must_equal :stopping
 
       # Wait for child thread to fully stop
       wait_result = wait_until_true do
