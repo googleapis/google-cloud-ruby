@@ -26,7 +26,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
     mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    op = speech.process "acceptance/data/audio.raw", encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process "acceptance/data/audio.raw", encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -42,7 +42,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
     mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    op = speech.process File.open("acceptance/data/audio.raw", "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process File.open("acceptance/data/audio.raw", "rb"), encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -59,7 +59,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
     mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    op = speech.process "gs://some_bucket/audio.raw", encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process "gs://some_bucket/audio.raw", encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -76,7 +76,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
 
     speech.service.mocked_service = mock
     gcs_fake = OpenStruct.new to_gs_url: "gs://some_bucket/audio.raw"
-    op = speech.process gcs_fake, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process gcs_fake, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -93,7 +93,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
 
     speech.service.mocked_service = mock
     audio = speech.audio "gs://some_bucket/audio.raw"
-    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process audio, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -109,7 +109,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
     mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    audio = speech.audio "gs://some_bucket/audio.raw", encoding: :raw, language: "en-US", sample_rate: 16000
+    audio = speech.audio "gs://some_bucket/audio.raw", encoding: :linear16, language: "en-US", sample_rate: 16000
     op = speech.process audio
     mock.verify
 
@@ -127,7 +127,7 @@ describe Google::Cloud::Speech::Project, :process, :mock_speech do
 
     speech.service.mocked_service = mock
     audio = speech.audio "gs://some_bucket/audio.raw", encoding: :flac, sample_rate: 48000, language: "en-US"
-    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process audio, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     op.must_be_kind_of Google::Cloud::Speech::Operation

@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Speech::Stream, :mock_speech do
   it "knows itself" do
-    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?

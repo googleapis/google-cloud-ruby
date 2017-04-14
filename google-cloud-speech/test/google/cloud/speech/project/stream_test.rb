@@ -30,7 +30,7 @@ end
 
 describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   it "streams audio" do
-    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -77,7 +77,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams audio over several sends" do
-    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -131,7 +131,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams audio with alternatives and interum results" do
-    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?
@@ -192,7 +192,7 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
   end
 
   it "streams for a single utterance" do
-    stream = speech.stream encoding: :raw, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000, max_alternatives: 10, interim: true
     stream.must_be_kind_of Google::Cloud::Speech::Stream
     stream.wont_be :started?
     stream.wont_be :stopped?

@@ -46,7 +46,7 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw,
+      #                        encoding: :linear16,
       #                        language: "en-US",
       #                        sample_rate: 16000
       #   results = audio.recognize
@@ -96,7 +96,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #   results = audio.recognize
@@ -154,7 +154,7 @@ module Google
       #
       #   speech = Google::Cloud::Speech.new
       #
-      #   stream = speech.stream encoding: :raw,
+      #   stream = speech.stream encoding: :linear16,
       #                          language: "en-US",
       #                          sample_rate: 16000
       #

@@ -26,7 +26,7 @@ require "google/cloud/speech"
 speech = Google::Cloud::Speech.new
 
 audio = speech.audio "path/to/audio.raw",
-                     encoding: :raw,
+                     encoding: :linear16,
                      language: "en-US",
                      sample_rate: 16000
 

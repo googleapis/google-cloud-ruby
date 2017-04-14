@@ -51,7 +51,7 @@ module Google
     #   speech = gcloud.speech
     #
     #   audio = speech.audio "path/to/audio.raw",
-    #                        encoding: :raw,
+    #                        encoding: :linear16,
     #                        language: "en-US",
     #                        sample_rate: 16000
     #
@@ -99,7 +99,7 @@ module Google
     #   speech = Google::Cloud.speech
     #
     #   audio = speech.audio "path/to/audio.raw",
-    #                        encoding: :raw,
+    #                        encoding: :linear16,
     #                        language: "en-US",
     #                        sample_rate: 16000
     #

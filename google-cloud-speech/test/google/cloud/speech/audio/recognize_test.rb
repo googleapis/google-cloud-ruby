@@ -28,7 +28,7 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
     mock = Minitest::Mock.new
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
-    audio.encoding = :raw
+    audio.encoding = :linear16
     audio.sample_rate = 16000
     audio.language = "en-US"
 
@@ -48,7 +48,7 @@ describe Google::Cloud::Speech::Audio, :recognize, :mock_speech do
     mock = Minitest::Mock.new
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
-    audio.encoding = :raw
+    audio.encoding = :linear16
     audio.sample_rate = 16000
     audio.language = :en
 

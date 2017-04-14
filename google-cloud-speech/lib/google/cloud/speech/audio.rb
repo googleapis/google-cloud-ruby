@@ -39,7 +39,7 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw,
+      #                        encoding: :linear16,
       #                        language: "en-US",
       #                        sample_rate: 16000
       #
@@ -59,7 +59,7 @@ module Google
         #
         #   Acceptable values are:
         #
-        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #   * `linear16` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
         #   * `flac` - The [Free Lossless Audio
         #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
@@ -92,8 +92,8 @@ module Google
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
-        #   audio.encoding = :raw
-        #   audio.encoding #=> :raw
+        #   audio.encoding = :linear16
+        #   audio.encoding #=> :linear16
         #
         attr_accessor :encoding
 
@@ -113,7 +113,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        sample_rate: 16000
         #
         #   audio.language = "en-US"
@@ -135,7 +135,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US"
         #
         #   audio.sample_rate = 16000
@@ -200,7 +200,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
@@ -249,7 +249,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #

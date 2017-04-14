@@ -20,7 +20,7 @@ describe "Streaming Recognition", :speech do
   it "default params" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US"
+    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US"
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
@@ -52,7 +52,7 @@ describe "Streaming Recognition", :speech do
   it "sends multiple times" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US"
+    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US"
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
@@ -94,7 +94,7 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", interim: true
+      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -126,7 +126,7 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", interim: true
+      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", interim: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -166,7 +166,7 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", utterance: true
+      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -206,7 +206,7 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :raw, sample_rate: 16000, language: "en-US", utterance: true
+      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", utterance: true
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
