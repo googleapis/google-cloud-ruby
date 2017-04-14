@@ -166,7 +166,7 @@ describe Google::Cloud::Spanner::Snapshot, :execute, :mock_spanner do
     file = StringIO.new "contents"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_sql, results_grpc, [session_grpc.name, "SELECT * FROM users WHERE avatar = @avatar", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: "contents") }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }]
+    mock.expect :execute_sql, results_grpc, [session_grpc.name, "SELECT * FROM users WHERE avatar = @avatar", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }]
     snapshot.service.mocked_service = mock
 
     results = snapshot.execute "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file }, streaming: false

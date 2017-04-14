@@ -171,7 +171,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
-    mock.expect :execute_sql, results_grpc, [session_grpc.name, "SELECT * FROM users WHERE avatar = @avatar", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: "contents") }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }]
+    mock.expect :execute_sql, results_grpc, [session_grpc.name, "SELECT * FROM users WHERE avatar = @avatar", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }]
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file }, streaming: false

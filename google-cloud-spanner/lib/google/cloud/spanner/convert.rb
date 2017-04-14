@@ -85,7 +85,7 @@ module Google
                 ))]
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
-              [raw_to_value(obj.read.force_encoding("ASCII-8BIT")),
+              [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :BYTES)]
             else
               raise ArgumentError,

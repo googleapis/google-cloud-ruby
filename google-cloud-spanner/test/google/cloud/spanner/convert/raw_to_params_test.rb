@@ -96,7 +96,7 @@ describe Google::Cloud::Spanner::Convert, :raw_to_params, :mock_spanner do
     file = StringIO.new "contents"
 
     combined_params = Google::Cloud::Spanner::Convert.raw_to_params avatar: file
-    combined_params.must_equal({ "avatar" => [Google::Protobuf::Value.new(string_value: "contents"),
+    combined_params.must_equal({ "avatar" => [Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")),
                                               Google::Spanner::V1::Type.new(code: :BYTES)] })
   end
 
