@@ -81,9 +81,10 @@ namespace :acceptance do
 
     $LOAD_PATH.unshift "lib"
     require "google/cloud/pubsub"
-    puts "Cleaning up Pub/Sub topics and subscriptions"
+    puts "Cleaning up Pub/Sub topics, subscriptions, and snapshots"
     Google::Cloud.pubsub.topics.all &:delete
     Google::Cloud.pubsub.subscriptions.all &:delete
+    Google::Cloud.pubsub.snapshots.all &:delete
   end
 
   task :run do

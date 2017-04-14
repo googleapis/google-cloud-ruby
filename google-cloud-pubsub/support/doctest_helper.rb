@@ -72,7 +72,10 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Pubsub::Project#find_subscription"
   doctest.skip "Google::Cloud::Pubsub::Project#find_subscriptions"
   doctest.skip "Google::Cloud::Pubsub::Project#list_subscriptions"
+  doctest.skip "Google::Cloud::Pubsub::Project#find_snapshots"
+  doctest.skip "Google::Cloud::Pubsub::Project#list_snapshots"
   doctest.skip "Google::Cloud::Pubsub::Subscription#ack"
+  doctest.skip "Google::Cloud::Pubsub::Subscription#new_snapshot"
   doctest.skip "Google::Cloud::Pubsub::Topic#create_subscription"
   doctest.skip "Google::Cloud::Pubsub::Topic#new_subscription"
   doctest.skip "Google::Cloud::Pubsub::Topic#get_subscription"
@@ -221,6 +224,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Pubsub::Project#snapshots" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), ["projects/my-project", Hash]
+    end
+  end
+
   ##
   # ReceivedMessage
 
@@ -239,6 +249,36 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
     end
   end
+
+  ##
+  # Snapshot
+
+  doctest.before "Google::Cloud::Pubsub::Snapshot" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp, ["projects/my-project/snapshots/my-snapshot", "projects/my-project/subscriptions/my-sub", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Snapshot#delete" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
+    end
+  end
+
+  ##
+  # Snapshot::List
+
+  doctest.before "Google::Cloud::Pubsub::Snapshot::List" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), ["projects/my-project", Hash]
+    end
+  end
+
 
   ##
   # Subscription
@@ -266,7 +306,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # This example loops indefinitely, making support difficult...
+  # This example loops indefinitely, making testing difficult if not impossible...
   doctest.skip "Google::Cloud::Pubsub::Subscription#listen"
 
   doctest.before "Google::Cloud::Pubsub::Subscription#policy" do
@@ -306,6 +346,30 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
       mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Subscription#create_snapshot" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp, ["projects/my-project/snapshots/my-snapshot", "projects/my-project/subscriptions/my-sub", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Subscription#create_snapshot@Without providing a name:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [nil, "projects/my-project/subscriptions/my-sub", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Subscription#seek" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-sub"), ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [nil, "projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
+      mock_subscriber.expect :seek, nil, ["projects/my-project/subscriptions/my-sub", Hash]
     end
   end
 
@@ -492,6 +556,27 @@ def subscription_json topic_name, sub_name,
   }.to_json
 end
 
+def snapshots_json topic_name, num_snapshots, token = nil
+  snapshots = num_snapshots.times.map do
+    JSON.parse(snapshot_json(topic_name, "snapshot-#{rand 1000}"))
+  end
+  data = { "snapshots" => snapshots }
+  data["next_page_token"] = token unless token.nil?
+  data.to_json
+end
+
+def snapshot_json topic_name, snapshot_name
+  time = Time.now
+  timestamp = {
+    "seconds" => time.to_i,
+    "nanos" => time.nsec
+  }
+  { "name" => snapshot_path(snapshot_name),
+    "topic" => topic_path(topic_name),
+    "expiration_time" => timestamp
+  }.to_json
+end
+
 def rec_message_json message, id = rand(1000000)
   {
     "ack_id" => "ack-id-#{id}",
@@ -523,6 +608,10 @@ def subscription_path subscription_name
   "#{project_path}/subscriptions/#{subscription_name}"
 end
 
+def snapshot_path snapshot_name
+  "#{project_path}/snapshots/#{snapshot_name}"
+end
+
 def paged_enum_struct response
   OpenStruct.new page: OpenStruct.new(response: response)
 end
@@ -536,6 +625,15 @@ end
 def list_subscriptions_resp token = "next_page_token"
   response = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("my-topic", 3, token)
   paged_enum_struct response
+end
+
+def list_snapshots_resp token = "next_page_token"
+  response = Google::Pubsub::V1::ListSnapshotsResponse.decode_json snapshots_json("my-topic", 3, token)
+  paged_enum_struct response
+end
+
+def snapshot_resp snapshot_name = "my-snapshot"
+  Google::Pubsub::V1::Snapshot.decode_json snapshot_json("my-topic", snapshot_name)
 end
 
 def policy_resp

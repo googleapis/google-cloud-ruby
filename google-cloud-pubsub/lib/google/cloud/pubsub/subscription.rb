@@ -16,6 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/received_message"
+require "google/cloud/pubsub/snapshot"
 
 module Google
   module Cloud
@@ -373,6 +374,105 @@ module Google
           ack_ids = coerce_ack_ids messages
           ensure_service!
           service.modify_ack_deadline name, ack_ids, new_deadline
+          true
+        end
+
+        ##
+        # Creates a new {Snapshot} from the subscription. The created snapshot
+        # is guaranteed to retain:
+        #
+        # * The existing backlog on the subscription. More precisely, this is
+        #   defined as the messages in the subscription's backlog that are
+        #   unacknowledged upon the successful completion of the
+        #   `create_snapshot` operation; as well as:
+        # * Any messages published to the subscription's topic following the
+        #   successful completion of the `create_snapshot` operation.
+        #
+        # @param [String, nil] snapshot_name Name of the new snapshot. If the
+        #   name is not provided, the server will assign a random name
+        #   for this snapshot on the same project as the subscription. The
+        #   format is `projects/{project}/snapshots/{snap}`. The name must start
+        #   with a letter, and contain only letters ([A-Za-z]), numbers
+        #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
+        #   (+) or percent signs (%). It must be between 3 and 255 characters in
+        #   length, and it must not start with "goog". Optional.
+        #
+        # @return [Google::Cloud::Pubsub::Snapshot]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   snapshot = sub.create_snapshot "my-snapshot"
+        #   snapshot.name #=> "projects/my-project/snapshots/my-snapshot"
+        #
+        # @example Without providing a name:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   snapshot = sub.create_snapshot
+        #   snapshot.name #=> "projects/my-project/snapshots/gcr-analysis-..."
+        #
+        def create_snapshot snapshot_name = nil
+          ensure_service!
+          grpc = service.create_snapshot name, snapshot_name
+          Snapshot.from_grpc grpc, service
+        end
+        alias_method :new_snapshot, :create_snapshot
+
+        ##
+        # Resets the subscription's backlog to a given {Snapshot} or to a point
+        # in time, whichever is provided in the request.
+        #
+        # @param [Snapshot, String, Time] snapshot The `Snapshot` instance,
+        #   snapshot name, or time to which to perform the seek.
+        #   If the argument is a snapshot, the snapshot's topic must be the
+        #   same as that of the subscription. If it is a time, messages retained
+        #   in the subscription that were published before this time are marked
+        #   as acknowledged, and messages retained in the subscription that were
+        #   published after this time are marked as unacknowledged. Note that
+        #   this operation affects only those messages retained in the
+        #   subscription. For example, if the time corresponds to a point before
+        #   the message retention window (or to a point before the system's
+        #   notion of the subscription creation time), only retained messages
+        #   will be marked as unacknowledged, and already-expunged messages will
+        #   not be restored.
+        #
+        # @return [Boolean] Returns `true` if the seek was successful.
+        #
+        # @example Using a snapshot
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   snapshot = sub.create_snapshot
+        #
+        #   messages = sub.pull
+        #   sub.acknowledge messages
+        #
+        #   sub.seek snapshot
+        #
+        # @example Using a time:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   sub = pubsub.subscription "my-sub"
+        #
+        #   time = Time.now
+        #
+        #   messages = sub.pull
+        #   sub.acknowledge messages
+        #
+        #   sub.seek time
+        #
+        def seek snapshot
+          ensure_service!
+          service.seek name, snapshot
           true
         end
 

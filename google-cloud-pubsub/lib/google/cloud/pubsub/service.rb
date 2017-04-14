@@ -279,6 +279,63 @@ module Google
           end
         end
 
+        ##
+        # Lists snapshots by project.
+        def list_snapshots options = {}
+          call_options = default_options
+          if (token = options[:token])
+            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
+                                                        page_token: token
+          end
+
+          execute do
+            paged_enum = subscriber.list_snapshots project_path(options),
+                                                   page_size: options[:max],
+                                                   options: call_options
+
+            paged_enum.page.response
+          end
+        end
+
+        ##
+        # Creates a snapshot on a given subscription.
+        def create_snapshot subscription, snapshot_name
+          name = snapshot_path snapshot_name
+          execute do
+            subscriber.create_snapshot name,
+                                       subscription_path(subscription),
+                                       options: default_options
+          end
+        end
+
+        ##
+        # Deletes an existing snapshot.
+        # All pending messages in the snapshot are immediately dropped.
+        def delete_snapshot snapshot
+          execute do
+            subscriber.delete_snapshot snapshot_path(snapshot),
+                                       options: default_options
+          end
+        end
+
+        ##
+        # Adjusts the given subscription to a time or snapshot.
+        def seek subscription, time_or_snapshot
+          subscription = subscription_path(subscription)
+          execute do
+            if (time = time_to_timestamp time_or_snapshot)
+              subscriber.seek subscription, time: time, options: default_options
+            else
+              if time_or_snapshot.is_a? Snapshot
+                time_or_snapshot = time_or_snapshot.name
+              end
+              subscriber.seek subscription,
+                              snapshot: snapshot_path(time_or_snapshot),
+                              options: default_options
+            end
+          end
+        end
+
         def get_topic_policy topic_name, options = {}
           execute do
             publisher.get_iam_policy topic_path(topic_name, options),
@@ -346,6 +403,13 @@ module Google
           "#{project_path(options)}/subscriptions/#{subscription_name}"
         end
 
+        def snapshot_path snapshot_name, options = {}
+          if snapshot_name.nil? || snapshot_name.to_s.include?("/")
+            return snapshot_name
+          end
+          "#{project_path(options)}/snapshots/#{snapshot_name}"
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -358,6 +422,19 @@ module Google
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
+        end
+
+        ##
+        # @private Get a Google::Protobuf::Timestamp object from a Time object.
+        def time_to_timestamp time
+          return nil if time.nil?
+          # Make sure to_time is supported.
+          return nil unless time.respond_to? :to_time
+          time = time.to_time
+          # Make sure we have a Time object.
+          # Rails' String#to_time returns nil if the string doesn't parse.
+          return nil unless time
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
         end
 
         def execute

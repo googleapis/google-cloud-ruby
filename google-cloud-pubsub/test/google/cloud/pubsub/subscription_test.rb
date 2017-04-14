@@ -109,4 +109,67 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
     mock.verify
   end
+
+  it "creates a snapshot" do
+    new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
+    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    snapshot = subscription.create_snapshot new_snapshot_name
+
+    mock.verify
+
+    snapshot.wont_be :nil?
+    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+  end
+
+  it "creates a snapshot with new_snapshot alias" do
+    new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
+    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    snapshot = subscription.new_snapshot new_snapshot_name
+
+    mock.verify
+
+    snapshot.wont_be :nil?
+    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+  end
+
+  it "raises when creating a snapshot that already exists" do
+    existing_snapshot_name = "existing-snapshot"
+
+    stub = Object.new
+    def stub.create_snapshot *args
+      gax_error = Google::Gax::GaxError.new "already exists"
+      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(6, "already exists")
+      raise gax_error
+    end
+    subscription.service.mocked_subscriber = stub
+
+    assert_raises Google::Cloud::AlreadyExistsError do
+      subscription.create_snapshot existing_snapshot_name
+    end
+  end
+
+  it "raises when creating a snapshot on a deleted subscription" do
+    new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
+
+    stub = Object.new
+    def stub.create_snapshot *args
+      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+      raise gax_error
+    end
+    subscription.service.mocked_subscriber = stub
+
+    assert_raises Google::Cloud::NotFoundError do
+      # Let's assume the subscription has been deleted before calling create.
+      subscription.create_snapshot new_snapshot_name
+    end
+  end
 end

@@ -23,12 +23,17 @@ describe Google::Cloud::Pubsub, :pubsub do
 
   def retrieve_subscription topic, subscription_name
     topic.get_subscription(subscription_name) ||
-    topic.subscribe(subscription_name)
+      topic.subscribe(subscription_name)
+  end
+
+  def retrieve_snapshot project, subscription, snapshot_name
+    existing = project.snapshots.detect { |s| s.name.split("/").last == snapshot_name }
+    existing || subscription.create_snapshot(snapshot_name)
   end
 
   let(:new_topic_name)  {  $topic_names[0] }
-  let(:topic_names)     {  $topic_names[3..5] }
-  let(:lazy_topic_name) {  $topic_names[6] }
+  let(:topic_names)     {  $topic_names[3..6] }
+  let(:lazy_topic_name) {  $topic_names[7] }
 
   before do
     # create all topics
@@ -203,6 +208,58 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscription.delete
     end
 
+    it "should be able to pull same message again after ack by seeking to snapshot" do
+      subscription = topic.subscribe "#{$topic_prefix}-sub5"
+      subscription.wont_be :nil?
+      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+      # Publish a new message
+      msg = topic.publish "hello-#{rand(1000)}"
+      msg.wont_be :nil?
+
+      snapshot = subscription.create_snapshot
+
+      # Check it pulls the message
+      events = pull_with_retry subscription
+      events.wont_be :empty?
+      events.count.must_equal 1
+      event = events.first
+      event.wont_be :nil?
+      event.msg.data.must_equal msg.data
+      # Acknowledge the message
+      subscription.ack event.ack_id
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # Reset to the snapshot
+      subscription.seek snapshot
+
+      # Check it again pulls the message
+      events = pull_with_retry subscription
+      events.wont_be :empty?
+      events.count.must_equal 1
+      event = events.first
+      event.wont_be :nil?
+      event.msg.data.must_equal msg.data
+      # Acknowledge the message
+      subscription.ack event.ack_id
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # No messages, should be empty
+      events = subscription.pull
+      events.must_be :empty?
+
+      # Remove the subscription
+      subscription.delete
+    end
+
     def pull_with_retry sub
       events = []
       retries = 0
@@ -270,6 +327,42 @@ describe Google::Cloud::Pubsub, :pubsub do
       roles = ["pubsub.subscriptions.consume", "pubsub.subscriptions.get"]
       permissions = subscription.test_permissions roles
       permissions.must_equal roles
+    end
+  end
+
+  describe "Snapshots on Project" do
+    let(:topic) { retrieve_topic $topic_names[4] }
+    let(:subscription) { retrieve_subscription topic, "#{$topic_prefix}-subSnapshots" }
+
+    before do
+      3.times.each do |i|
+        retrieve_snapshot pubsub, subscription, $snapshot_names[i]
+      end
+    end
+
+    it "should list all snapshots registered to the project" do
+      snapshots = pubsub.snapshots
+      snapshots.each do |snapshot|
+        # snapshots on project are objects...
+        snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      end
+      snapshots.token.must_be :nil?
+    end
+
+    it "should return a token if there are more results" do
+      sub_count = pubsub.snapshots.count
+      snapshots = pubsub.snapshots max: (sub_count - 1)
+      snapshots.count.must_equal (sub_count - 1)
+      snapshots.each do |snapshot|
+        snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      end
+      snapshots.token.wont_be :nil?
+
+      # retrieve the next list of snapshots
+      next_subs = pubsub.snapshots token: snapshots.token
+      next_subs.count.must_equal 1
+      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      next_subs.token.must_be :nil?
     end
   end
 end

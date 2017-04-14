@@ -73,7 +73,9 @@ require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $topic_prefix = "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
-$topic_names = 7.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$topic_names = 8.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$snapshot_prefix = "gcloud-ruby-acceptance-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
+$snapshot_names = 3.times.map { "#{$snapshot_prefix}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
@@ -87,6 +89,19 @@ rescue => e
   puts "Error while cleaning up pubsub topics after tests.\n\n#{e}"
 end
 
+def clean_up_pubsub_snapshots
+  puts "Cleaning up pubsub snapshots after tests."
+  snapshots = $pubsub.snapshots
+  $snapshot_names.each do |snapshot_name|
+    if snapshot = (snapshots.detect { |s| s.name.split("/").last == snapshot_name })
+      snapshot.delete
+    end
+  end
+rescue => e
+  puts "Error while cleaning up pubsub snapshots after tests.\n\n#{e}"
+end
+
 Minitest.after_run do
   clean_up_pubsub_topics
+  clean_up_pubsub_snapshots
 end
