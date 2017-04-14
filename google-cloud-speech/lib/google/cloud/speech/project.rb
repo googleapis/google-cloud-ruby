@@ -623,7 +623,7 @@ module Google
         end
 
         def convert_encoding encoding
-          mapping = { raw: :LINEAR16, linear: :LINEAR16, linear16: :LINEAR16,
+          mapping = { linear: :LINEAR16, linear16: :LINEAR16,
                       flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB,
                       ogg_opus: :OGG_OPUS, speex: :SPEEX_WITH_HEADER_BYTE }
           mapping[encoding] || encoding
