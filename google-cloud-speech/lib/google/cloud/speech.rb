@@ -56,7 +56,7 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw,
+    #                      encoding: :linear16,
     #                      language: "en-US",
     #                      sample_rate: 16000
     # ```
@@ -69,7 +69,7 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-    #                      encoding: :raw,
+    #                      encoding: :linear16,
     #                      language: "en-US",
     #                      sample_rate: 16000
     # ```
@@ -89,7 +89,7 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio file,
-    #                      encoding: :raw,
+    #                      encoding: :linear16,
     #                      language: "en-US",
     #                      sample_rate: 16000
     # ```
@@ -112,7 +112,7 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw,
+    #                      encoding: :linear16,
     #                      language: "en-US",
     #                      sample_rate: 16000
     #
@@ -133,7 +133,7 @@ module Google
     # speech = Google::Cloud::Speech.new
     #
     # audio = speech.audio "path/to/audio.raw",
-    #                      encoding: :raw,
+    #                      encoding: :linear16,
     #                      language: "en-US",
     #                      sample_rate: 16000
     #
@@ -160,7 +160,7 @@ module Google
     #
     # audio = speech.audio "path/to/audio.raw"
     #
-    # stream = audio.stream encoding: :raw,
+    # stream = audio.stream encoding: :linear16,
     #                       language: "en-US",
     #                       sample_rate: 16000
     #
@@ -215,7 +215,7 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw,
+      #                        encoding: :linear16,
       #                        language: "en-US",
       #                        sample_rate: 16000
       #

@@ -28,7 +28,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize filepath, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -45,7 +45,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize File.open(filepath, "rb"), encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -62,7 +62,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    results = speech.recognize "gs://some_bucket/audio.raw", encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize "gs://some_bucket/audio.raw", encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -80,7 +80,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
 
     speech.service.mocked_service = mock
     gcs_fake = OpenStruct.new to_gs_url: "gs://some_bucket/audio.raw"
-    results = speech.recognize gcs_fake, encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize gcs_fake, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -97,7 +97,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
     mock.expect :recognize, results_grpc, [config_grpc, audio_grpc, options: default_options]
 
     speech.service.mocked_service = mock
-    audio = speech.audio filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+    audio = speech.audio filepath, encoding: :linear16, language: "en-US", sample_rate: 16000
     results = speech.recognize audio
     mock.verify
 
@@ -116,7 +116,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
 
     speech.service.mocked_service = mock
     audio = speech.audio filepath
-    results = speech.recognize audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize audio, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1
@@ -134,7 +134,7 @@ describe Google::Cloud::Speech::Project, :recognize, :mock_speech do
 
     speech.service.mocked_service = mock
     audio = speech.audio filepath, encoding: :flac, sample_rate: 48000, language: "en-US"
-    results = speech.recognize audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    results = speech.recognize audio, encoding: :linear16, language: "en-US", sample_rate: 16000
     mock.verify
 
     results.count.must_equal 1

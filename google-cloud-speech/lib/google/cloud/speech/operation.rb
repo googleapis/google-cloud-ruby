@@ -39,7 +39,7 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   op = speech.process "path/to/audio.raw",
-      #                       encoding: :raw,
+      #                       encoding: :linear16,
       #                       language: "en-US",
       #                       sample_rate: 16000
       #
@@ -70,7 +70,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -92,7 +92,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -114,7 +114,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -141,7 +141,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -165,7 +165,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -190,7 +190,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -212,7 +212,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -236,7 +236,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #

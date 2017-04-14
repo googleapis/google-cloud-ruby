@@ -44,7 +44,7 @@ module Google
       #   speech = Google::Cloud::Speech.new
       #
       #   audio = speech.audio "path/to/audio.raw",
-      #                        encoding: :raw,
+      #                        encoding: :linear16,
       #                        language: "en-US",
       #                        sample_rate: 16000
       #   results = audio.recognize
@@ -110,7 +110,7 @@ module Google
         #
         #   Acceptable values are:
         #
-        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #   * `linear16` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
         #   * `flac` - The [Free Lossless Audio
         #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
@@ -152,7 +152,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
@@ -162,7 +162,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio "gs://bucket-name/path/to/audio.raw",
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
@@ -179,7 +179,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   audio = speech.audio file,
-        #                        encoding: :raw,
+        #                        encoding: :linear16,
         #                        language: "en-US",
         #                        sample_rate: 16000
         #
@@ -222,7 +222,7 @@ module Google
         #
         #   Acceptable values are:
         #
-        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #   * `linear16` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
         #   * `flac` - The [Free Lossless Audio
         #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
@@ -275,7 +275,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "path/to/audio.raw",
-        #                              encoding: :raw,
+        #                              encoding: :linear16,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
@@ -285,7 +285,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize "gs://bucket-name/path/to/audio.raw",
-        #                              encoding: :raw,
+        #                              encoding: :linear16,
         #                              language: "en-US",
         #                              sample_rate: 16000
         #
@@ -302,7 +302,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   results = speech.recognize file,
-        #                              encoding: :raw,
+        #                              encoding: :linear16,
         #                              language: "en-US",
         #                              sample_rate: 16000,
         #                              max_alternatives: 10
@@ -344,7 +344,7 @@ module Google
         #
         #   Acceptable values are:
         #
-        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #   * `linear16` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
         #   * `flac` - The [Free Lossless Audio
         #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
@@ -398,7 +398,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -411,7 +411,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process "gs://bucket-name/path/to/audio.raw",
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000
         #
@@ -431,7 +431,7 @@ module Google
         #   speech = Google::Cloud::Speech.new
         #
         #   op = speech.process file,
-        #                       encoding: :raw,
+        #                       encoding: :linear16,
         #                       language: "en-US",
         #                       sample_rate: 16000,
         #                       max_alternatives: 10
@@ -469,7 +469,7 @@ module Google
         #
         #   Acceptable values are:
         #
-        #   * `raw` - Uncompressed 16-bit signed little-endian samples.
+        #   * `linear16` - Uncompressed 16-bit signed little-endian samples.
         #     (LINEAR16)
         #   * `flac` - The [Free Lossless Audio
         #     Codec](http://flac.sourceforge.net/documentation.html) encoding.
@@ -530,7 +530,7 @@ module Google
         #
         #   speech = Google::Cloud::Speech.new
         #
-        #   stream = speech.stream encoding: :raw,
+        #   stream = speech.stream encoding: :linear16,
         #                          language: "en-US",
         #                          sample_rate: 16000
         #
@@ -623,7 +623,7 @@ module Google
         end
 
         def convert_encoding encoding
-          mapping = { raw: :LINEAR16, linear: :LINEAR16, linear16: :LINEAR16,
+          mapping = { linear: :LINEAR16, linear16: :LINEAR16,
                       flac: :FLAC, mulaw: :MULAW, amr: :AMR, amr_wb: :AMR_WB,
                       ogg_opus: :OGG_OPUS, speex: :SPEEX_WITH_HEADER_BYTE }
           mapping[encoding] || encoding

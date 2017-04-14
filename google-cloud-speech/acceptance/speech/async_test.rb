@@ -22,7 +22,7 @@ describe "Asynchonous Recognition", :speech do
   let(:gcs_url)  { gcs_file.to_gs_url }
 
   it "recognizes audio from local file path" do
-    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process filepath, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -37,7 +37,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from local file object" do
-    op = speech.process File.open(filepath, "rb"), encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process File.open(filepath, "rb"), encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -52,7 +52,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from GCS URL" do
-    op = speech.process gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process gcs_url, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -67,7 +67,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Storage File URL" do
-    op = speech.process gcs_file, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process gcs_file, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -83,7 +83,7 @@ describe "Asynchonous Recognition", :speech do
 
   it "recognizes audio from Audio object" do
     audio = speech.audio gcs_url
-    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process audio, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -98,7 +98,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes" do
-    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
+    audio = speech.audio gcs_url, encoding: :linear16, language: "en-US", sample_rate: 16000
     op = speech.process audio
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -114,7 +114,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "recognizes audio from Audio object, preserving attributes, language (Symbol)" do
-    audio = speech.audio gcs_url, encoding: :raw, language: "en-US", sample_rate: 16000
+    audio = speech.audio gcs_url, encoding: :linear16, language: "en-US", sample_rate: 16000
     op = speech.process audio
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
@@ -131,7 +131,7 @@ describe "Asynchonous Recognition", :speech do
 
   it "recognizes audio from Audio object, overriding attributes" do
     audio = speech.audio gcs_url, encoding: :flac, sample_rate: 48000, language: "es-ES"
-    op = speech.process audio, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process audio, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
@@ -146,7 +146,7 @@ describe "Asynchonous Recognition", :speech do
   end
 
   it "can retrieve operations by id" do
-    op = speech.process filepath, encoding: :raw, language: "en-US", sample_rate: 16000
+    op = speech.process filepath, encoding: :linear16, language: "en-US", sample_rate: 16000
 
     op.must_be_kind_of Google::Cloud::Speech::Operation
     op.wont_be :done?
