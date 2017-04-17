@@ -300,6 +300,13 @@ module Google
         #   messages. If `true`, then messages are not expunged from the
         #   subscription's backlog, even if they are acknowledged, until they
         #   fall out of the `retention_duration` window. Default is `false`.
+        # @param [Numeric] retention How long to retain unacknowledged messages
+        #   in the subscription's backlog, from the moment a message is
+        #   published. If `retain_acked` is `true`, then this also configures
+        #   the retention of acknowledged messages, and thus configures how far
+        #   back in time a {#seek} can be done. Cannot be more than 604,800
+        #   seconds (7 days) or less than 600 seconds (10 minutes). Default is
+        #   604,800 seconds (7 days).
         # @param [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed.
         # @param [String] autocreate Flag to control whether the topic will be
@@ -333,10 +340,11 @@ module Google
         #                          autocreate: true
         #
         def subscribe topic_name, subscription_name, deadline: nil,
-                      retain_acked: false, endpoint: nil, autocreate: nil
+                      retain_acked: false, retention: nil, endpoint: nil,
+                      autocreate: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked,
-                      endpoint: endpoint }
+                      retention: retention, endpoint: endpoint }
           grpc = service.create_subscription topic_name,
                                              subscription_name, options
           Subscription.from_grpc grpc, service
@@ -345,7 +353,8 @@ module Google
             create_topic topic_name
             return subscribe(topic_name, subscription_name,
                              deadline: deadline, retain_acked: retain_acked,
-                             endpoint: endpoint, autocreate: false)
+                             retention: retention, endpoint: endpoint,
+                             autocreate: false)
           end
           raise e
         end

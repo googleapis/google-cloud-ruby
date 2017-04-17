@@ -39,6 +39,10 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     assert subscription.retain_acked
   end
 
+  it "gets its retention from the Google API object" do
+    subscription.retention.must_equal 600.9
+  end
+
   it "gets endpoint from the Google API object" do
     subscription.endpoint.must_equal sub_endpoint
   end

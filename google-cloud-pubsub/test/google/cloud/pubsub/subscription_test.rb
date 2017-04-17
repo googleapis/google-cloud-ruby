@@ -38,6 +38,10 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     subscription.must_respond_to :retain_acked
   end
 
+  it "knows its retention_duration" do
+    subscription.must_respond_to :retention
+  end
+
   it "has an endpoint" do
     subscription.must_respond_to :endpoint
   end

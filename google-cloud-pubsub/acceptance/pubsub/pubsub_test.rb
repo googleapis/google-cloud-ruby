@@ -174,10 +174,11 @@ describe Google::Cloud::Pubsub, :pubsub do
     end
 
     it "should allow creation of a subscription with options" do
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       assert subscription.retain_acked
+      subscription.retention.must_equal 600
       subscription.delete
     end
 
