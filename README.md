@@ -25,13 +25,12 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Cloud Natural Language API](#cloud-natural-language-api-beta) (Alpha)
+* [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Cloud Speech API](#cloud-speech-api-beta) (Alpha)
-* [Cloud Vision API](#cloud-vision-api-beta) (Alpha)
+* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
+* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
