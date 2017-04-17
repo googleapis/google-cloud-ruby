@@ -24,14 +24,14 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
-  it "gets endpoint from the Google API object" do
+  it "gets topic from the Google API object" do
     # No mocked service means no API calls are happening.
     subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
     subscription.topic.must_be :lazy?
     subscription.topic.name.must_equal topic_path(topic_name)
   end
 
-  it "gets endpoint from the Google API object" do
+  it "gets deadline from the Google API object" do
     subscription.deadline.must_equal sub_deadline
   end
 
