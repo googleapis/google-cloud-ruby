@@ -35,6 +35,10 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     subscription.deadline.must_equal sub_deadline
   end
 
+  it "gets retain_acked from the Google API object" do
+    assert subscription.retain_acked
+  end
+
   it "gets endpoint from the Google API object" do
     subscription.endpoint.must_equal sub_endpoint
   end
@@ -79,6 +83,17 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
       subscription.service.mocked_subscriber = mock
 
       subscription.deadline.must_equal sub_deadline
+
+      mock.verify
+    end
+
+    it "makes an HTTP API call to retrieve retain_acked" do
+      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+      subscription.service.mocked_subscriber = mock
+
+      assert subscription.retain_acked
 
       mock.verify
     end

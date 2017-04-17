@@ -34,6 +34,10 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     subscription.must_respond_to :deadline
   end
 
+  it "knows its retain_acked" do
+    subscription.must_respond_to :retain_acked
+  end
+
   it "has an endpoint" do
     subscription.must_respond_to :endpoint
   end

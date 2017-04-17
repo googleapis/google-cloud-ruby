@@ -99,6 +99,20 @@ module Google
         end
 
         ##
+        # Indicates whether to retain acknowledged messages. If `true`, then
+        # messages are not expunged from the subscription's backlog, even if
+        # they are acknowledged, until they fall out of the
+        # {#retention_duration} window. Default is `false`.
+        #
+        # @return [Boolean] Returns `true` if acknowledged messages are
+        #   retained.
+        #
+        def retain_acked
+          ensure_grpc!
+          @grpc.retain_acked_messages
+        end
+
+        ##
         # Returns the URL locating the endpoint to which messages should be
         # pushed.
         def endpoint

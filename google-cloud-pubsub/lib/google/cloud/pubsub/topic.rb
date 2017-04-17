@@ -100,6 +100,10 @@ module Google
         # @param [Integer] deadline The maximum number of seconds after a
         #   subscriber receives a message before the subscriber should
         #   acknowledge the message.
+        # @param [Boolean] retain_acked Indicates whether to retain acknowledged
+        #   messages. If `true`, then messages are not expunged from the
+        #   subscription's backlog, even if they are acknowledged, until they
+        #   fall out of the `retention_duration` window. Default is `false`.
         # @param [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed.
         #
@@ -124,9 +128,11 @@ module Google
         #                         deadline: 120,
         #                         endpoint: "https://example.com/push"
         #
-        def subscribe subscription_name, deadline: nil, endpoint: nil
+        def subscribe subscription_name, deadline: nil, retain_acked: false,
+                      endpoint: nil
           ensure_service!
-          options = { deadline: deadline, endpoint: endpoint }
+          options = { deadline: deadline, retain_acked: retain_acked,
+                      endpoint: endpoint }
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end

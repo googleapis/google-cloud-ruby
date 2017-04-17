@@ -208,12 +208,14 @@ module Google
                             attributes: (options[:attributes] || {}).to_h
                         end
           deadline = options[:deadline]
+          retain_acked = options[:retain_acked]
 
           execute do
             subscriber.create_subscription name,
                                            topic,
                                            push_config: push_config,
                                            ack_deadline_seconds: deadline,
+                                           retain_acked_messages: retain_acked,
                                            options: default_options
           end
         end

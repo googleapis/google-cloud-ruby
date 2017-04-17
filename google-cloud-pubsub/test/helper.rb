@@ -94,6 +94,7 @@ class MockPubsub < Minitest::Spec
       "topic" => topic_path(topic_name),
       "push_config" => { "push_endpoint" => endpoint },
       "ack_deadline_seconds" => deadline,
+      "retain_acked_messages" => true
     }.to_json
   end
 
