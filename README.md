@@ -21,16 +21,16 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
-* [Cloud Natural Language API](#cloud-natural-language-api-beta) (Beta)
-* [Cloud Speech API](#cloud-speech-api-beta) (Beta)
 * [Cloud Translation API](#cloud-translation-api-beta) (Beta)
-* [Cloud Vision API](#cloud-vision-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
+* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
+* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -210,7 +210,7 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-### Cloud Natural Language API (Beta)
+### Cloud Natural Language API (Alpha)
 
 - [google-cloud-language README](google-cloud-language/README.md)
 - [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest)
@@ -312,7 +312,7 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-### Cloud Speech API (Beta)
+### Cloud Speech API (Alpha)
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
 - [google-cloud-speech API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest)
@@ -406,7 +406,7 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
-### Cloud Vision API (Beta)
+### Cloud Vision API (Alpha)
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
 - [google-cloud-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/latest)
