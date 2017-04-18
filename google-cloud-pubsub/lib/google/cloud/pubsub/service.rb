@@ -208,12 +208,16 @@ module Google
                             attributes: (options[:attributes] || {}).to_h
                         end
           deadline = options[:deadline]
+          retain_acked = options[:retain_acked]
+          mrd = number_to_duration options[:retention]
 
           execute do
             subscriber.create_subscription name,
                                            topic,
                                            push_config: push_config,
                                            ack_deadline_seconds: deadline,
+                                           retain_acked_messages: retain_acked,
+                                           message_retention_duration: mrd,
                                            options: default_options
           end
         end
@@ -435,6 +439,14 @@ module Google
           # Rails' String#to_time returns nil if the string doesn't parse.
           return nil unless time
           Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
+        end
+
+        def number_to_duration number
+          return nil if number.nil?
+
+          Google::Protobuf::Duration.new \
+            seconds: number.to_i,
+            nanos: (number.remainder(1) * 1000000000).round
         end
 
         def execute

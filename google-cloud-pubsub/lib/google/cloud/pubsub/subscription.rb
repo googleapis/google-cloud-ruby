@@ -99,6 +99,36 @@ module Google
         end
 
         ##
+        # Indicates whether to retain acknowledged messages. If `true`, then
+        # messages are not expunged from the subscription's backlog, even if
+        # they are acknowledged, until they fall out of the
+        # {#retention_duration} window. Default is `false`.
+        #
+        # @return [Boolean] Returns `true` if acknowledged messages are
+        #   retained.
+        #
+        def retain_acked
+          ensure_grpc!
+          @grpc.retain_acked_messages
+        end
+
+        ##
+        # How long to retain unacknowledged messages in the subscription's
+        # backlog, from the moment a message is published. If
+        # {#retain_acked} is `true`, then this also configures the retention of
+        # acknowledged messages, and thus configures how far back in time a
+        # {#seek} can be done. Cannot be more than 604,800 seconds (7 days) or
+        # less than 600 seconds (10 minutes). Default is 604,800 seconds (7
+        # days).
+        #
+        # @return [Numeric] The message retention duration in seconds.
+        #
+        def retention
+          ensure_grpc!
+          duration_to_number @grpc.message_retention_duration
+        end
+
+        ##
         # Returns the URL locating the endpoint to which messages should be
         # pushed.
         def endpoint
@@ -621,6 +651,14 @@ module Google
         end
 
         protected
+
+        def duration_to_number duration
+          return nil if duration.nil?
+
+          return duration.seconds if duration.nanos == 0
+
+          duration.seconds + (duration.nanos / 1000000000.0)
+        end
 
         ##
         # @private Raise an error unless an active connection to the service is
