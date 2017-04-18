@@ -51,7 +51,7 @@ describe Google::Cloud::Spanner::Results, :from_enum, :single_response, :mock_sp
   let(:results_enum) do
     [Google::Spanner::V1::PartialResultSet.decode_json(results_hash.to_json)].to_enum
   end
-  let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum }
+  let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "exists" do
     results.must_be_kind_of Google::Cloud::Spanner::Results

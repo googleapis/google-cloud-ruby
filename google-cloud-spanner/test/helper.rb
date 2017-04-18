@@ -128,3 +128,24 @@ class MockSpanner < Minitest::Spec
     OpenStruct.new page: OpenStruct.new(response: response)
   end
 end
+
+# This is used to raise errors in an enumerator
+class AbortableEnumerator
+  def initialize enum
+    @enum = enum
+  end
+
+  def next
+    v = @enum.next
+    raise v if v == GRPC::Aborted
+    v
+  end
+
+  def method_missing method, *args
+    @enum.send method, *args
+  end
+
+  def inspect
+    "<#{self.class}>"
+  end
+end

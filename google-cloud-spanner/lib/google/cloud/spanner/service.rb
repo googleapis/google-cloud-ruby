@@ -287,7 +287,7 @@ module Google
         end
 
         def streaming_execute_sql session_path, sql, transaction: nil,
-                                  params: nil
+                                  params: nil, resume_token: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
@@ -300,7 +300,8 @@ module Google
           execute do
             service.execute_streaming_sql \
               session_path, sql, transaction: transaction, params: input_params,
-                                 param_types: input_param_types
+                                 param_types: input_param_types,
+                                 resume_token: resume_token
           end
         end
 
@@ -322,7 +323,7 @@ module Google
         end
 
         def streaming_read_table session_path, table_name, columns, id: nil,
-                                 transaction: nil, limit: nil
+                                 transaction: nil, limit: nil, resume_token: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
           unless id.nil?
@@ -334,7 +335,7 @@ module Google
           execute do
             service.streaming_read \
               session_path, table_name, columns, key_set,
-              transaction: transaction, limit: limit
+              transaction: transaction, limit: limit, resume_token: resume_token
           end
         end
 

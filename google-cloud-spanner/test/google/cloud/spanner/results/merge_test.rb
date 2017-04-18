@@ -25,7 +25,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ stringValue: "ghi" }] }
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -52,7 +52,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ stringValue: "i" }, { stringValue: "jkl" }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -79,7 +79,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { stringValue: "jkl" }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -106,7 +106,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ stringValue: "" }, { stringValue: "jkl" }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -133,7 +133,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ stringValue: "ghi" }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -160,7 +160,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { stringValue: "5" }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -187,7 +187,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { numberValue: 3.0 }] }}]}
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
@@ -215,7 +215,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
       { values: [{ stringValue: "f" }] }
     ]
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
-    results = Google::Cloud::Spanner::Results.from_enum results_enum
+    results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?

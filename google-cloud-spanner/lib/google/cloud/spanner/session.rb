@@ -215,8 +215,8 @@ module Google
         def execute sql, params: nil, transaction: nil, streaming: true
           ensure_service!
           if streaming
-            Results.from_enum service.streaming_execute_sql \
-              path, sql, params: params, transaction: transaction
+            Results.execute service, path, sql,
+                            params: params, transaction: transaction
           else
             Results.from_grpc service.execute_sql \
               path, sql, params: params, transaction: transaction
@@ -277,9 +277,8 @@ module Google
                  streaming: true
           ensure_service!
           if streaming
-            Results.from_enum service.streaming_read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
+            Results.read service, path, table, columns,
+                         id: id, limit: limit, transaction: transaction
           else
             Results.from_grpc service.read_table \
               path, table, columns, id: id, limit: limit,
