@@ -412,8 +412,8 @@ module Google
                 flatten_results: options[:flatten],
                 default_dataset: default_dataset,
                 use_legacy_sql: Convert.resolve_legacy_sql(
-                  options[:standard_sql], options[:legacy_sql])
-
+                  options[:standard_sql], options[:legacy_sql]),
+                maximum_billing_tier: options[:billing_tier]
               )
             )
           )
