@@ -920,17 +920,7 @@ module Google
         #   policy = bucket.policy # API call
         #   policy_2 = bucket.policy # No API call
         #
-        # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   policy = bucket.policy force: true # API call
-        #   policy_2 = bucket.policy force: true # API call
-        #
-        # @example Update the policy by passing a block:
+        # @example Retrieve the latest policy and update it in a block:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new

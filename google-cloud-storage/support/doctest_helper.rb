@@ -247,15 +247,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Bucket#policy@Use `force` to retrieve the latest policy from the service:" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-    end
-  end
-
-  doctest.before "Google::Cloud::Storage::Bucket#policy@Update the policy by passing a block:" do
+  doctest.before "Google::Cloud::Storage::Bucket#policy@Retrieve the latest policy and update it in a block:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
       mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
