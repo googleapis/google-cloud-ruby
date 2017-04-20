@@ -123,15 +123,16 @@ module Google
           begin
             Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
           rescue Exception => e
-            warn "Google::Cloud::Logging is not activated due to " \
-              "authorization error: #{e.message}\nFalling back to default " \
-              "logger"
+            STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
+              "it failed to authorize with the service. (#{e.message}) " \
+              "Falling back to the default Rails logger."
             return false
           end
 
           if project_id.to_s.empty?
-            warn "Google::Cloud::Logging is not activated due to empty " \
-              "project_id; falling back to default logger"
+            STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
+              "the project ID could not be determined. " \
+              "Falling back to the default Rails logger."
             return false
           end
 

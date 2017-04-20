@@ -166,13 +166,14 @@ module Google
           begin
             Google::Cloud::Trace::Credentials.credentials_with_scope keyfile
           rescue Exception => e
-            warn "Unable to initialize Google::Cloud::Trace due " \
-              "to authorization error: #{e.message}"
+            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+              "it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           if project_id(config).to_s.empty?
-            warn "Google::Cloud::Trace is not activated due to empty project_id"
+            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+              "the project ID could not be determined."
             return false
           end
 

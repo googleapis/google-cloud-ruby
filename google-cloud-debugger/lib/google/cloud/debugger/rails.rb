@@ -103,16 +103,16 @@ module Google
             Google::Cloud::Debugger::Credentials.credentials_with_scope(
               debugger_config[:keyfile])
           rescue => e
-            Rails.logger.warn "Google::Cloud::Debugger is not activated due " \
-              "to authorization error: #{e.message}"
+            STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
+              "it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           project_id = debugger_config[:project_id] ||
                        Google::Cloud::Debugger::Project.default_project
           if project_id.to_s.empty?
-            Rails.logger.warn "Google::Cloud::Debugger is not activated due " \
-              "to empty project_id"
+            STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
+              "the project ID could not be determined."
             return false
           end
 
