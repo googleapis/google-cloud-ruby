@@ -1,5 +1,9 @@
 # Release History
 
+### 0.24.1 / 2017-04-21
+
+* If Rails integration fails due to an auth error, the notice is now printed to STDOUT rather than STDERR, which should make it a bit less scary when displayed in Docker output.
+
 ### 0.24.0 / 2017-03-31
 
 * Updated documentation
