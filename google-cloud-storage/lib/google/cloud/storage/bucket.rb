@@ -898,10 +898,6 @@ module Google
         # @see https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy
         #   Buckets: setIamPolicy
         #
-        # @param [Boolean] force Force load the latest policy when `true`.
-        #   Otherwise the policy will be memoized to reduce the number of API
-        #   calls made. The default is `false`.
-        #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the service and passed to the block. After the
         #   block completes, the modified policy will be written to the service.
@@ -920,6 +916,16 @@ module Google
         #   policy = bucket.policy # API call
         #   policy_2 = bucket.policy # No API call
         #
+        # @example Retrieve the latest policy from the service:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy # API call
+        #   policy_2 = policy.reload! # API call
+        #
         # @example Retrieve the latest policy and update it in a block:
         #   require "google/cloud/storage"
         #
@@ -936,7 +942,7 @@ module Google
           @policy ||= begin
             ensure_service!
             gapi = service.get_bucket_policy name
-            Policy.from_gapi gapi
+            Policy.from_gapi gapi, service
           end
           return @policy unless block_given?
           p = @policy.deep_dup
@@ -977,7 +983,7 @@ module Google
         def policy= new_policy
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi
-          @policy = Policy.from_gapi gapi
+          @policy = Policy.from_gapi gapi, service
         end
 
         ##
