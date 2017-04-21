@@ -1,5 +1,10 @@
 # Release History
 
+### 1.0.1 / 2017-04-21
+
+* Middleware constructor can be called without an explicit logger. This should make integration in non-Rails applications simpler.
+* If Rails integration fails due to an auth error, the notice is now printed to STDOUT rather than STDERR, which should make it a bit less scary when displayed in Docker output.
+
 ### 1.0.0 / 2017-03-31
 
 * Release 1.0
