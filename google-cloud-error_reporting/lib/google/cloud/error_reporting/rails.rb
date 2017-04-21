@@ -145,14 +145,14 @@ module Google
           begin
             grpc_channel keyfile
           rescue StandardError => e
-            Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
-            "activated due to authorization error: #{e.message}"
+            STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
+              "because it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           if project_id(config).to_s.empty?
-            Rails.logger.warn "Google::Cloud::ErrorReporting is not " \
-            "activated due to empty project_id"
+            STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
+              "because the project ID could not be determined."
             return false
           end
 
