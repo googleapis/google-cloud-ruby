@@ -28,7 +28,7 @@ module Google
       #
       #   spanner = Google::Cloud::Spanner.new
       #
-      #   db = spanner.session "my-instance", "my-database"
+      #   db = spanner.client "my-instance", "my-database"
       #
       #   db.commit do |c|
       #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
@@ -71,7 +71,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   db.commit do |c|
         #     c.upsert "users", [{ id: 1, name: "Charlie", active: false },
@@ -123,7 +123,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   db.commit do |c|
         #     c.insert "users", [{ id: 1, name: "Charlie", active: false },
@@ -174,7 +174,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   db.commit do |c|
         #     c.update "users", [{ id: 1, name: "Charlie", active: false },
@@ -227,7 +227,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   db.commit do |c|
         #     c.replace "users", [{ id: 1, name: "Charlie", active: false },
@@ -264,7 +264,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   db.commit do |c|
         #     c.delete "users", [1, 2, 3]

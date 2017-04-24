@@ -32,7 +32,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   results = db.execute "SELECT * FROM users"
         #
@@ -66,7 +66,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.session "my-instance", "my-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
         #   results = db.execute "SELECT * FROM users"
         #
@@ -88,22 +88,31 @@ module Google
           chunked_value = nil
           resume_token = nil
 
-          @enum.each_with_index do |grpc, index|
-            # @metadata ||= grpc.metadata # should be set before the first iteration
-            @stats ||= grpc.stats
+          # Cannot call Enumerator#each because it won't return the first
+          # value that was already identified when calling Enumerator#peek.
+          # Iterate only using Enumerator#next and break on StopIteration.
+          loop do
+            begin
+              grpc = @enum.next
+              # metadata should be set before the first iteration...
+              @metadata ||= grpc.metadata
+              @stats ||= grpc.stats
 
-            if chunked_value
-              grpc.values.unshift merge(chunked_value, grpc.values.shift)
-              chunked_value = nil
-            end
-            to_iterate = values + grpc.values
-            chunked_value = to_iterate.pop if grpc.chunked_value
+              if chunked_value
+                grpc.values.unshift merge(chunked_value, grpc.values.shift)
+                chunked_value = nil
+              end
+              to_iterate = values + grpc.values
+              chunked_value = to_iterate.pop if grpc.chunked_value
 
-            resume_token = grpc.resume_token
+              resume_token = grpc.resume_token
 
-            values = to_iterate.pop(to_iterate.count % fields.count)
-            to_iterate.each_slice(fields.count) do |slice|
-              yield Convert.row_to_raw(fields, slice)
+              values = to_iterate.pop(to_iterate.count % fields.count)
+              to_iterate.each_slice(fields.count) do |slice|
+                yield Convert.row_to_raw(fields, slice)
+              end
+            rescue StopIteration
+              break
             end
           end
 

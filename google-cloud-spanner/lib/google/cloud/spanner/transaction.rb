@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,110 +20,29 @@ module Google
   module Cloud
     module Spanner
       ##
-      # @private
+      # # Transaction
       #
-      # # Session
-      #
-      # ...
-      #
-      # See {Google::Cloud#spanner}
+      # A transaction in Cloud Spanner is a set of reads and writes that execute
+      # atomically at a single logical point in time across columns, rows, and
+      # tables in a database.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/spanner"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
+      #   spanner = Google::Cloud::Spanner.new
+      #   db = spanner.client "my-instance", "my-database"
       #
-      #   # ...
-      class Session
-        ##
-        # @private The Google::Spanner::V1::Session object
-        attr_accessor :grpc
-
-        ##
+      #   db.transaction do |tx|
+      #     results = tx.execute "SELECT * FROM users"
+      #
+      #     results.rows.each do |row|
+      #       puts "User #{row[:id]} is #{row[:name]}""
+      #     end
+      #   end
+      #
+      class Transaction
         # @private The gRPC Service object.
         attr_accessor :service
-
-        # @private Creates a new Session instance.
-        def initialize grpc, service
-          @grpc = grpc
-          @service = service
-        end
-
-        # The unique identifier for the project.
-        # @return [String]
-        def project_id
-          V1::SpannerClient.match_project_from_session_name @grpc.name
-        end
-
-        # The unique identifier for the instance.
-        # @return [String]
-        def instance_id
-          V1::SpannerClient.match_instance_from_session_name @grpc.name
-        end
-
-        # The unique identifier for the database.
-        # @return [String]
-        def database_id
-          V1::SpannerClient.match_database_from_session_name @grpc.name
-        end
-
-        # The unique identifier for the session.
-        # @return [String]
-        def session_id
-          V1::SpannerClient.match_session_from_session_name @grpc.name
-        end
-
-        # rubocop:disable LineLength
-
-        ##
-        # The full path for the session resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>/databases/<database_id>/sessions/<session_id>`.
-        # @return [String]
-        def path
-          @grpc.name
-        end
-
-        # rubocop:enable LineLength
-
-        ##
-        # Reloads the session resource. Useful for determining if the session is
-        # still valid on the Spanner API.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.reload! # API call
-        #
-        def reload!
-          ensure_service!
-          @grpc = service.get_session path
-          self
-        end
-
-        ##
-        # Permanently deletes the session.
-        #
-        # @return [Boolean] Returns `true` if the session was deleted.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.delete_session
-        #
-        def delete_session
-          ensure_service!
-          service.delete_session path
-          true
-        end
 
         ##
         # Executes a SQL query.
@@ -157,9 +76,6 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
-        #   transaction selector value to send. Only used for single-use
-        #   transactions.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -175,51 +91,54 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users"
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users"
         #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
         #   end
         #
         # @example Query using query parameters:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users WHERE active = @active",
-        #                        params: { active: true }
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users WHERE active = @active",
+        #                          params: { active: true }
         #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
         #   end
         #
         # @example Query without streaming results:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users WHERE id = @user_id",
-        #                        params: { user_id: 1 },
-        #                        streaming: false
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users WHERE id = @user_id",
+        #                          params: { user_id: 1 },
+        #                          streaming: false
         #
-        #   user_row = results.rows.first
-        #   puts "User #{user_row[:id]} is #{user_row[:name]}""
+        #     user_row = results.rows.first
+        #     puts "User #{user_row[:id]} is #{user_row[:name]}"
+        #   end
         #
-        def execute sql, params: nil, transaction: nil, streaming: true
+        def execute sql, params: nil, streaming: true
           ensure_service!
           if streaming
             Results.from_enum service.streaming_execute_sql \
-              path, sql, params: params, transaction: transaction
+              session_name, sql, transaction: tx_selector, params: params
           else
             Results.from_grpc service.execute_sql \
-              path, sql, params: params, transaction: transaction
+              session_name, sql, transaction: tx_selector, params: params
           end
         end
         alias_method :query, :execute
@@ -237,9 +156,6 @@ module Google
         #   there are columns in the primary key.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
-        #   transaction selector value to send. Only used for single-use
-        #   transactions.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -251,39 +167,40 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.read "users", ["id, "name"]
+        #   db.transaction do |tx|
+        #     results = tx.read "users", ["id, "name"]
         #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
         #   end
         #
         # @example Read without streaming results:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.read "users", ["id, "name"], streaming: false
+        #   db.transaction do |tx|
+        #     results = tx.read "users", ["id, "name"], streaming: false
         #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
         #   end
         #
-        def read table, columns, id: nil, limit: nil, transaction: nil,
-                 streaming: true
+        def read table, columns, id: nil, limit: nil, streaming: true
           ensure_service!
           if streaming
             Results.from_enum service.streaming_read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
+              session_name, table, columns, id: id, transaction: tx_selector,
+                                            limit: limit
           else
             Results.from_grpc service.read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
+              session_name, table, columns, id: id, transaction: tx_selector,
+                                            limit: limit
           end
         end
 
@@ -296,18 +213,21 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.commit do |c|
-        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   db.transaction do |tx|
+        #     tx.commit do |c|
+        #       c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #       c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #     end
         #   end
         #
         def commit
+          ensure_service!
           commit = Commit.new
           yield commit
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
 
         ##
@@ -338,16 +258,19 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
-        #                       { id: 2, name: "Harvey",  active: true }]
+        #   db.transaction do |tx|
+        #     tx.upsert "users", [{ id: 1, name: "Charlie", active: false },
+        #                         { id: 2, name: "Harvey",  active: true }]
+        #   end
         #
         def upsert table, *rows
+          ensure_service!
           commit = Commit.new
           commit.upsert table, rows
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
         alias_method :save, :upsert
 
@@ -378,16 +301,19 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
-        #                       { id: 2, name: "Harvey",  active: true }]
+        #   db.transaction do |tx|
+        #     tx.insert "users", [{ id: 1, name: "Charlie", active: false },
+        #                         { id: 2, name: "Harvey",  active: true }]
+        #   end
         #
         def insert table, *rows
+          ensure_service!
           commit = Commit.new
           commit.insert table, rows
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
 
         ##
@@ -417,16 +343,19 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.update "users", [{ id: 1, name: "Charlie", active: false },
-        #                       { id: 2, name: "Harvey",  active: true }]
+        #   db.transaction do |tx|
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false },
+        #                         { id: 2, name: "Harvey",  active: true }]
+        #   end
         #
         def update table, *rows
+          ensure_service!
           commit = Commit.new
           commit.update table, rows
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
 
         ##
@@ -458,16 +387,19 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
-        #                        { id: 2, name: "Harvey",  active: true }]
+        #   db.transaction do |tx|
+        #     tx.replace "users", [{ id: 1, name: "Charlie", active: false },
+        #                          { id: 2, name: "Harvey",  active: true }]
+        #   end
         #
         def replace table, *rows
+          ensure_service!
           commit = Commit.new
           commit.replace table, rows
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
 
         ##
@@ -483,25 +415,47 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   db.delete "users", [1, 2, 3]
+        #   db.transaction { |tx| tx.delete "users", [1, 2, 3] }
         #
         def delete table, *id
+          ensure_service!
           commit = Commit.new
           commit.delete table, id
-          service.commit path, commit.mutations
+          service.commit session_name, commit.mutations,
+                         transaction_id: transaction_id
         end
 
         ##
-        # @private Creates a new Session instance from a
-        # Google::Spanner::V1::Session.
-        def self.from_grpc grpc, service
-          new grpc, service
+        # @private Creates a new Transaction instance from a
+        # Google::Spanner::V1::Transaction.
+        def self.from_grpc grpc, session
+          new.tap do |s|
+            s.instance_variable_set :@transaction_grpc, grpc
+            s.instance_variable_set :@session_grpc,     session.grpc
+            s.instance_variable_set :@service,          session.service
+          end
         end
 
         protected
+
+        ##
+        # The full path for the session resource.
+        def session_name
+          @session_grpc.name
+        end
+
+        def transaction_id
+          return nil if @transaction_grpc.nil?
+          @transaction_grpc.id
+        end
+
+        # The TransactionSelector to be used for queries
+        def tx_selector
+          return nil if transaction_id.nil?
+          Google::Spanner::V1::TransactionSelector.new id: transaction_id
+        end
 
         ##
         # @private Raise an error unless an active connection to the service is

@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,17 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/results"
-require "google/cloud/spanner/commit"
+require "google/cloud/errors"
+require "google/cloud/spanner/project"
+require "google/cloud/spanner/session"
+require "google/cloud/spanner/transaction"
+require "google/cloud/spanner/snapshot"
 
 module Google
   module Cloud
     module Spanner
       ##
-      # @private
-      #
-      # # Session
+      # # Client
       #
       # ...
       #
@@ -35,94 +36,38 @@ module Google
       #   spanner = gcloud.spanner
       #
       #   # ...
-      class Session
+      #
+      class Client
         ##
-        # @private The Google::Spanner::V1::Session object
-        attr_accessor :grpc
+        # @private Creates a new Spanner Project instance.
+        def initialize project, instance_id, database_id
+          @project = project
+          @instance_id = instance_id
+          @database_id = database_id
+        end
 
-        ##
-        # @private The gRPC Service object.
-        attr_accessor :service
-
-        # @private Creates a new Session instance.
-        def initialize grpc, service
-          @grpc = grpc
-          @service = service
+        # The Spanner project connected to.
+        # @return [Project]
+        def project
+          project
         end
 
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          V1::SpannerClient.match_project_from_session_name @grpc.name
+          @project.service.project
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          V1::SpannerClient.match_instance_from_session_name @grpc.name
+          @instance_id
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          V1::SpannerClient.match_database_from_session_name @grpc.name
-        end
-
-        # The unique identifier for the session.
-        # @return [String]
-        def session_id
-          V1::SpannerClient.match_session_from_session_name @grpc.name
-        end
-
-        # rubocop:disable LineLength
-
-        ##
-        # The full path for the session resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>/databases/<database_id>/sessions/<session_id>`.
-        # @return [String]
-        def path
-          @grpc.name
-        end
-
-        # rubocop:enable LineLength
-
-        ##
-        # Reloads the session resource. Useful for determining if the session is
-        # still valid on the Spanner API.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.reload! # API call
-        #
-        def reload!
-          ensure_service!
-          @grpc = service.get_session path
-          self
-        end
-
-        ##
-        # Permanently deletes the session.
-        #
-        # @return [Boolean] Returns `true` if the session was deleted.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.delete_session
-        #
-        def delete_session
-          ensure_service!
-          service.delete_session path
-          true
+          @database_id
         end
 
         ##
@@ -157,9 +102,26 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
-        #   transaction selector value to send. Only used for single-use
-        #   transactions.
+        # @param [Time, DateTime] timestamp Executes all reads at a
+        #   timestamp >= +timestamp+.
+        #
+        #   This is useful for requesting fresher data than some previous read,
+        #   or data that is fresh enough to observe the effects of some
+        #   previously committed transaction whose timestamp is known.
+        #
+        #   Cannot be used with staleness.
+        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
+        #   max_staleness+ seconds. Guarantees that all writes that have
+        #   committed more than the specified number of seconds ago are visible.
+        #   Because Cloud Spanner chooses the exact timestamp, this mode works
+        #   even if the client's local clock is substantially skewed from Cloud
+        #   Spanner commit timestamps.
+        #
+        #   Useful for reading the freshest data available at a nearby replica,
+        #   while bounding the possible staleness if the local replica has
+        #   fallen behind.
+        #
+        #   Cannot be used with timestamp.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -212,15 +174,15 @@ module Google
         #   user_row = results.rows.first
         #   puts "User #{user_row[:id]} is #{user_row[:name]}""
         #
-        def execute sql, params: nil, transaction: nil, streaming: true
+        def execute sql, params: nil, timestamp: nil, staleness: nil,
+                    streaming: true
+          validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
-          if streaming
-            Results.from_enum service.streaming_execute_sql \
-              path, sql, params: params, transaction: transaction
-          else
-            Results.from_grpc service.execute_sql \
-              path, sql, params: params, transaction: transaction
-          end
+
+          single_use_tx = single_use_transaction timestamp: timestamp,
+                                                 staleness: staleness
+          session.execute sql, params: params, transaction: single_use_tx,
+                               streaming: streaming
         end
         alias_method :query, :execute
 
@@ -237,9 +199,26 @@ module Google
         #   there are columns in the primary key.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
-        #   transaction selector value to send. Only used for single-use
-        #   transactions.
+        # @param [Time, DateTime] timestamp Executes all reads at a
+        #   timestamp >= +timestamp+.
+        #
+        #   This is useful for requesting fresher data than some previous read,
+        #   or data that is fresh enough to observe the effects of some
+        #   previously committed transaction whose timestamp is known.
+        #
+        #   Cannot be used with staleness.
+        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
+        #   max_staleness+ seconds. Guarantees that all writes that have
+        #   committed more than the specified number of seconds ago are visible.
+        #   Because Cloud Spanner chooses the exact timestamp, this mode works
+        #   even if the client's local clock is substantially skewed from Cloud
+        #   Spanner commit timestamps.
+        #
+        #   Useful for reading the freshest data available at a nearby replica,
+        #   while bounding the possible staleness if the local replica has
+        #   fallen behind.
+        #
+        #   Cannot be used with timestamp.
         # @param [Boolean] streaming When `true`, all result are returned as a
         #   stream. There is no limit on the size of the returned result set.
         #   However, no individual row in the result set can exceed 100 MiB, and
@@ -273,18 +252,16 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, transaction: nil,
-                 streaming: true
+        def read table, columns, id: nil, limit: nil, timestamp: nil,
+                 staleness: nil, streaming: true
+          validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
-          if streaming
-            Results.from_enum service.streaming_read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
-          else
-            Results.from_grpc service.read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
-          end
+
+          single_use_tx = single_use_transaction timestamp: timestamp,
+                                                 staleness: staleness
+          session.read table, columns, id: id, limit: limit,
+                                       transaction: single_use_tx,
+                                       streaming: streaming
         end
 
         # Creates changes to be applied to rows in the database.
@@ -304,10 +281,8 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit
-          commit = Commit.new
-          yield commit
-          service.commit path, commit.mutations
+        def commit &block
+          session.commit(&block)
         end
 
         ##
@@ -345,9 +320,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def upsert table, *rows
-          commit = Commit.new
-          commit.upsert table, rows
-          service.commit path, commit.mutations
+          session.upsert table, rows
         end
         alias_method :save, :upsert
 
@@ -385,9 +358,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def insert table, *rows
-          commit = Commit.new
-          commit.insert table, rows
-          service.commit path, commit.mutations
+          session.insert table, rows
         end
 
         ##
@@ -424,9 +395,7 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def update table, *rows
-          commit = Commit.new
-          commit.update table, rows
-          service.commit path, commit.mutations
+          session.update table, rows
         end
 
         ##
@@ -465,9 +434,7 @@ module Google
         #                        { id: 2, name: "Harvey",  active: true }]
         #
         def replace table, *rows
-          commit = Commit.new
-          commit.replace table, rows
-          service.commit path, commit.mutations
+          session.replace table, rows
         end
 
         ##
@@ -489,16 +456,99 @@ module Google
         #   db.delete "users", [1, 2, 3]
         #
         def delete table, *id
-          commit = Commit.new
-          commit.delete table, id
-          service.commit path, commit.mutations
+          session.delete table, id
         end
 
         ##
-        # @private Creates a new Session instance from a
-        # Google::Spanner::V1::Session.
-        def self.from_grpc grpc, service
-          new grpc, service
+        # Creates a transaction for reads and writes that execute atomically at
+        # a single logical point in time across columns, rows, and tables in a
+        # database.
+        #
+        # @yield [transaction] The block for reading and writing data.
+        # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
+        #   Transaction object.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
+        #
+        def transaction
+          ensure_service!
+          tx_session = session
+          tx_grpc = @project.service.begin_transaction tx_session.path
+          tx = Transaction.from_grpc(tx_grpc, tx_session)
+          yield tx
+          nil
+        end
+
+        ##
+        # Creates a snapshot for reads that execute atomically at a single
+        # logical point in time across columns, rows, and tables in a database.
+        #
+        # @param [true, false] strong Read at a timestamp where all previously
+        #   committed transactions are visible.
+        # @param [Time, DateTime] timestamp Executes all reads at the given
+        #   timestamp. Unlike other modes, reads at a specific timestamp are
+        #   repeatable; the same read at the same timestamp always returns the
+        #   same data. If the timestamp is in the future, the read will block
+        #   until the specified timestamp, modulo the read's deadline.
+        #
+        #   Useful for large scale consistent reads such as mapreduces, or for
+        #   coordinating many reads against a consistent snapshot of the data.
+        # @param [Numeric] staleness Executes all reads at a timestamp that is
+        #   +staleness+ old. The timestamp is chosen soon after the read
+        #   is started.
+        #
+        #   Guarantees that all writes that have committed more than the
+        #   specified number of seconds ago are visible. Because Cloud Spanner
+        #   chooses the exact timestamp, this mode works even if the client's
+        #   local clock is substantially skewed from Cloud Spanner commit
+        #   timestamps.
+        #
+        #   Useful for reading at nearby replicas without the distributed
+        #   timestamp negotiation overhead of single-use +staleness+.
+        #
+        # @yield [snapshot] The block for reading and writing data.
+        # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
+        #   object.
+        #
+        # @return [Google::Cloud::Spanner::Snapshot]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.snapshot do |snp|
+        #     results = snp.execute "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
+        #
+        def snapshot strong: nil, timestamp: nil, staleness: nil
+          validate_snapshot_args! strong: strong, timestamp: timestamp,
+                                  staleness: staleness
+          ensure_service!
+          snp_session = session
+          snp_grpc = @project.service.create_snapshot \
+            snp_session.path, strong: strong, timestamp: timestamp,
+                              staleness: staleness
+          snp = Snapshot.from_grpc(snp_grpc, snp_session)
+          yield snp if block_given?
+          snp
         end
 
         protected
@@ -507,7 +557,50 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          fail "Must have active connection to service" unless @project.service
+        end
+
+        ##
+        # Creates a new session object every time.
+        # No pooling, no reuse. That will come later...
+        def session
+          ensure_service!
+          grpc = @project.service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          Session.from_grpc(grpc, @project.service)
+        end
+
+        ##
+        # Check for valid snapshot arguments
+        def validate_single_use_args! timestamp: nil, staleness: nil
+          return true if timestamp.nil? || staleness.nil?
+          fail ArgumentError,
+               "Can only provide one of the following arguments: " \
+               "(timestamp, staleness)"
+        end
+
+        ##
+        # Create a single-use TransactionSelector
+        def single_use_transaction timestamp: nil, staleness: nil
+          return nil if timestamp.nil? && staleness.nil?
+          Google::Spanner::V1::TransactionSelector.new(single_use:
+            Google::Spanner::V1::TransactionOptions.new(read_only:
+              Google::Spanner::V1::TransactionOptions::ReadOnly.new({
+                min_read_timestamp: Convert.time_to_timestamp(timestamp),
+                max_staleness: Convert.number_to_duration(staleness)
+              }.delete_if { |_, v| v.nil? })))
+        end
+
+        ##
+        # Check for valid snapshot arguments
+        def validate_snapshot_args! strong: nil, timestamp: nil, staleness: nil
+          remaining_args = { strong: strong, timestamp: timestamp,
+                             staleness: staleness }.delete_if { |_, v| v.nil? }
+          return true if remaining_args.keys.count <= 1
+          fail ArgumentError,
+               "Can only provide one of the following arguments: " \
+               "(strong, timestamp, staleness)"
         end
       end
     end

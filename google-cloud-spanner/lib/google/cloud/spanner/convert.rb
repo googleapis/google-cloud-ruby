@@ -53,11 +53,8 @@ module Google
             elsif Numeric === obj # Any number not an integer gets to be a float
               [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :FLOAT64)]
-            elsif Time === obj
-              [raw_to_value(obj.utc.strftime('%FT%TZ')),
-               Google::Spanner::V1::Type.new(code: :TIMESTAMP)]
-            elsif DateTime === obj
-              [raw_to_value(obj.to_time.utc.strftime('%FT%TZ')),
+            elsif Time === obj || DateTime === obj
+              [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :TIMESTAMP)]
             elsif Date === obj
               [raw_to_value(obj.to_s),
@@ -85,7 +82,7 @@ module Google
                 ))]
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
-              [raw_to_value(obj.read.force_encoding("ASCII-8BIT")),
+              [raw_to_value(obj),
                Google::Spanner::V1::Type.new(code: :BYTES)]
             else
               raise ArgumentError,
@@ -118,7 +115,7 @@ module Google
               end
             elsif Time === obj || DateTime === obj
               Google::Protobuf::Value.new(string_value:
-                obj.to_time.utc.strftime('%FT%TZ'))
+                obj.to_time.utc.strftime("%FT%T.%NZ"))
             elsif Date === obj
               Google::Protobuf::Value.new string_value: obj.to_s
             elsif Array === obj
@@ -228,6 +225,39 @@ module Google
             else
               nil # just in case
             end
+          end
+
+          def number_to_duration number
+            return nil if number.nil?
+
+            Google::Protobuf::Duration.new \
+              seconds: number.to_i,
+              nanos: (number.remainder(1) * 1000000000).round
+          end
+
+          def duration_to_number duration
+            return nil if duration.nil?
+
+            return duration.seconds if duration.nanos == 0
+
+            duration.seconds + (duration.nanos / 1000000000.0)
+          end
+
+          def time_to_timestamp time
+            return nil if time.nil?
+
+            # Force the object to be a Time object.
+            time = time.to_time
+
+            Google::Protobuf::Timestamp.new \
+              seconds: time.to_i,
+              nanos: time.nsec
+          end
+
+          def timestamp_to_time timestamp
+            return nil if timestamp.nil?
+
+            Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
           end
         end
 

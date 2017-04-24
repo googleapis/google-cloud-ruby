@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,17 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Results, :from_enum, :mock_spanner do
-  let :results_hash1 do
+describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
+  let(:instance_id) { "my-instance-id" }
+  let(:database_id) { "my-database-id" }
+  let(:session_id) { "session123" }
+  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:transaction_id) { "tx789" }
+  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
+  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let :results_hash do
     {
       metadata: {
         rowType: {
@@ -32,11 +41,7 @@ describe Google::Cloud::Spanner::Results, :from_enum, :mock_spanner do
                                            arrayElementType: { code: "INT64" } } }
           ]
         }
-      }
-    }
-  end
-  let :results_hash2 do
-    {
+      },
       values: [
         { stringValue: "1" },
         { stringValue: "Charlie" },
@@ -45,27 +50,38 @@ describe Google::Cloud::Spanner::Results, :from_enum, :mock_spanner do
         { numberValue: 0.9 },
         { stringValue: "2017-01-02T03:04:05.060000000Z" },
         { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" }
-      ]
-    }
-  end
-  let :results_hash3 do
-    {
-      values: [
+        { stringValue: "aW1hZ2U=" },
         { listValue: { values: [ { stringValue: "1"},
                                  { stringValue: "2"},
                                  { stringValue: "3"} ]}}
       ]
     }
   end
-  let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json)].to_enum
-  end
-  let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum }
+  let(:results_json) { results_hash.to_json }
+  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
+  let(:results_enum) { Array(results_grpc).to_enum }
+  let(:client) { spanner.client instance_id, database_id }
+  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
 
-  it "exists" do
+  it "can execute a simple query" do
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil]
+    spanner.service.mocked_service = mock
+
+    results = nil
+    client.transaction do |tx|
+      tx.must_be_kind_of Google::Cloud::Spanner::Transaction
+      results = tx.execute "SELECT * FROM users"
+    end
+
+    mock.verify
+
+    assert_results results
+  end
+
+  def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.must_be :streaming?
 

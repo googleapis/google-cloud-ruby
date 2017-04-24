@@ -65,6 +65,89 @@ module Acceptance
       end
       reporter.record result
     end
+
+    module Fixtures
+      def accounts_ddl_statement
+        <<-ACCOUNTS
+          CREATE TABLE accounts (
+            account_id INT64 NOT NULL,
+            username STRING(32),
+            friends ARRAY<INT64>,
+            active BOOL NOT NULL,
+            reputation FLOAT64,
+            avatar BYTES(8192)
+          ) PRIMARY KEY (account_id)
+        ACCOUNTS
+      end
+
+      def lists_ddl_statement
+        <<-LISTS
+          CREATE TABLE task_lists (
+            account_id INT64 NOT NULL,
+            task_list_id INT64 NOT NULL,
+            description STRING(1024) NOT NULL
+          ) PRIMARY KEY (account_id, task_list_id),
+            INTERLEAVE IN PARENT accounts ON DELETE CASCADE
+        LISTS
+      end
+
+      def items_ddl_statement
+        <<-ITEMS
+          CREATE TABLE task_items (
+            account_id INT64 NOT NULL,
+            task_list_id INT64 NOT NULL,
+            task_item_id INT64 NOT NULL,
+            description STRING(1024) NOT NULL,
+            active BOOL NOT NULL,
+            priority INT64 NOT NULL,
+            due_date DATE,
+            created_at TIMESTAMP,
+            updated_at TIMESTAMP
+          ) PRIMARY KEY (account_id, task_list_id, task_item_id),
+            INTERLEAVE IN PARENT task_lists ON DELETE CASCADE
+        ITEMS
+      end
+
+      def schema_ddl_statements
+        [
+          accounts_ddl_statement,
+          lists_ddl_statement,
+          items_ddl_statement
+        ]
+      end
+
+      def default_account_rows
+        [
+          {
+            account_id: 1,
+            username: "blowmage",
+            reputation: 63.5,
+            active: true,
+            avatar: File.open("acceptance/data/logo.jpg", "rb"),
+            friends: [2]
+          }, {
+            account_id: 2,
+            username: "quartzmo",
+            reputation: 87.9,
+            active: true,
+            avatar: StringIO.new("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAABxpRE9UAAAAAgAAAAAAAAAgAAAAKAAAACAAAAAgAAABxj2CfowAAAGSSURBVHgB7Jc9TsNAEIX3JDkCPUV6KlpKFHEGlD4nyA04ACUXQKTgCEipUnKGNEbP0otentayicZ24SlWs7tjO/N9u/5J2b2+NUtuZcnwYE8BuQPyGZAPwXwLLPk5kG+BJa9+fgfkh1B+CeancL4F8i2Q/wWm/S/w+XFoTseftn0dvhu0OXfhpM+AGvzcEiYVAFisPqE9zrETJhHAlXfg2lglMK9z0f3RBfB+ZyRUV3x+erzsEIjjOBqc1xtNAIrvguybV3A9lkVHxlEE6GrrPb/ZvAySwlUnfCmlPQ+R8JCExvGtcRQBLFwj4FGkznX1VYDKPG/f2/MjwCksXACgdNUxJjwK9xwl4JihOwTFR0kIF+CABEPRnvsvPFctMoYKqAFSAFaMwB4pp3Y+bodIYL9WmIAaIOHxo7W8wiHvAjTvhUeNwwSgeAeAABbqOewC5hBdwFD4+9+7puzXV9fS6/b1wwT4tsaYAhwOOQdUQch5vgZCeAhAv3ZM31yYAAUgvApQQQ6n5w6FB/RVe1jdJOAPAAD//1eMQwoAAAGQSURBVO1UMU4DQQy8X9AgWopIUINEkS4VlJQo4gvwAV7AD3gEH4iSgidESpWSXyyZExP5lr0c7K5PsXBhec/2+jzjuWtent9CLdtu1mG5+gjz+WNr7IsY7eH+tvO+xfuqk4vz7CH91edFaF5v9nb6dBKm13edvrL+0Lk5lMzJkQDeJSkkgHF6mR8CHwMHCQR/NAQQGD0BAlwK4FCefQiefq+A2Vn29tG7igLAfmwcnJu/nJy3BMQkMN9HEPr8AL3bfBv7Bp+7/SoExMDjZwKEJwmyhnnmQIQEBIlz2x0iKoAvJkAC6TsTIH6MqRrEWUMSZF2zAwqT4Eu/e6pzFAIkmNSZ4OFT+VYBIIF//UqbJwnF/4DU0GwOn8r/JQYCpPGufEfJuZiA37ycQw/5uFeqPq4pfR6FADmkBCXjfWdZj3NfXW58dAJyB9W65wRoMWulryvAyqa05nQFaDFrpa8rwMqmtOZ0BWgxa6WvK8DKprTmdAVoMWulryvAyqa05nQFaDFrpa8rwMqmtOb89wr4AtQ4aPoL6yVpAAAAAElFTkSuQmCC"),
+            friends: [1]
+          }, {
+            account_id: 3,
+            username: "-inactive-",
+            active: false
+          }
+        ]
+      end
+
+      def default_list_rows
+      end
+
+      def default_item_rows
+      end
+    end
+
+    include Fixtures
   end
 end
 
@@ -75,10 +158,13 @@ require "securerandom"
 $spanner_prefix = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}"
 
 # Setup main instance and database for the tests
+fixture = Object.new
+fixture.extend Acceptance::SpannerTest::Fixtures
+
 job = $spanner.create_instance $spanner_prefix, name: $spanner_prefix, config: "regional-us-central1", nodes: 1
 job.wait_until_done!
-# job2 = job.instance.create_database "main"
-# job2.wait_until_done!
+job2 = job.instance.create_database "main", statements: fixture.schema_ddl_statements
+job2.wait_until_done!
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
