@@ -382,7 +382,8 @@ class MockBigquery < Minitest::Spec
           "useQueryCache" => true,
           "flattenResults" => nil,
           "useLegacySql" => false,
-          "maximumBillingTier" => nil
+          "maximumBillingTier" => nil,
+          "maximumBytesBilled" => nil
         }
       }
     }.to_json
