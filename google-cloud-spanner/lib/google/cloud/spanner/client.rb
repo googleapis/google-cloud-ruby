@@ -482,12 +482,20 @@ module Google
         #     end
         #   end
         #
-        def transaction
+        def transaction &block
           ensure_service!
           tx_session = session
           tx_grpc = @project.service.begin_transaction tx_session.path
           tx = Transaction.from_grpc(tx_grpc, tx_session)
-          yield tx
+          begin
+            block.call tx
+          rescue Google::Cloud::AbortedError
+            # TODO: retrieve delay from ABORTED error
+            # Retry the entire transaction
+            tx2_grpc = @project.service.begin_transaction tx_session.path
+            tx2 = Transaction.from_grpc(tx2_grpc, tx_session)
+            block.call tx2
+          end
           nil
         end
 
