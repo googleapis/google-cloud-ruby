@@ -20,10 +20,11 @@ describe Google::Cloud::Spanner::Session, :delete, :mock_spanner do
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
 
   it "can reload itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_session, session_grpc, [session_grpc.name]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
     session.reload!

@@ -24,6 +24,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
   let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash do
     {
       metadata: {
@@ -74,13 +75,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil]
-    # mock.expect :commit, ->{ raise GRPC::Aborted }, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil]
-    # mock.expect :commit, Google::Spanner::V1::CommitResponse.new(commit_timestamp: Google::Protobuf::Timestamp.new()), [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_selector]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    # mock.expect :commit, ->{ raise GRPC::Aborted }, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    # mock.expect :commit, Google::Spanner::V1::CommitResponse.new(commit_timestamp: Google::Protobuf::Timestamp.new()), [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_selector, options: default_options]
     def mock.commit *args
       # first time called this will raise
       if @called == nil

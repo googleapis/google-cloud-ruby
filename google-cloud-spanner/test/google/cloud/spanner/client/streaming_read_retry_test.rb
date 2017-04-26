@@ -19,6 +19,7 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanne
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash1 do
     {
       metadata: {
@@ -106,9 +107,9 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanne
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
-    mock.expect :streaming_read, AbortableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil]
-    mock.expect :streaming_read, AbortableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: "abc123"]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, AbortableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, AbortableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: "abc123", options: default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns

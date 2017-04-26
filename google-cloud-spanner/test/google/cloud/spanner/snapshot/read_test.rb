@@ -24,6 +24,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
   let(:snapshot) { Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash do
     {
       metadata: {
@@ -66,7 +67,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil, options: default_options]
     snapshot.service.mocked_service = mock
 
     results = snapshot.read "my-table", columns, streaming: false
@@ -80,7 +81,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, limit: nil]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, limit: nil, options: default_options]
     snapshot.service.mocked_service = mock
 
     results = snapshot.read "my-table", columns, id: [1, 2, 3], streaming: false
@@ -94,7 +95,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: 5]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: 5, options: default_options]
     snapshot.service.mocked_service = mock
 
     results = snapshot.read "my-table", columns, limit: 5, streaming: false
@@ -108,7 +109,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: tx_selector, limit: 1]
+    mock.expect :read, results_grpc, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: tx_selector, limit: 1, options: default_options]
     snapshot.service.mocked_service = mock
 
     results = snapshot.read "my-table", columns, id: 1, limit: 1, streaming: false
