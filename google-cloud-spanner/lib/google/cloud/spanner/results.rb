@@ -86,7 +86,8 @@ module Google
 
           fields = @metadata.row_type.fields
           values = []
-          cached_responses = []
+          buffered_responses = []
+          buffer_upper_bound = 10
           chunked_value = nil
           resume_token = nil
 
@@ -100,12 +101,14 @@ module Google
               @metadata ||= grpc.metadata
               @stats ||= grpc.stats
 
-              cached_responses << grpc
+              buffered_responses << grpc
 
-              if grpc.resume_token && grpc.resume_token != ""
+              if (grpc.resume_token && grpc.resume_token != "") ||
+                buffered_responses.size >= buffer_upper_bound
+                # This can set the resume_token to nil
                 resume_token = grpc.resume_token
 
-                cached_responses.each do |resp|
+                buffered_responses.each do |resp|
                   if chunked_value
                     resp.values.unshift merge(chunked_value, resp.values.shift)
                     chunked_value = nil
@@ -117,9 +120,18 @@ module Google
                     yield Convert.row_to_raw(fields, slice)
                   end
                 end
-                cached_responses = []
+
+                # Flush the buffered responses now that they are all handled
+                buffered_responses = []
               end
-            rescue GRPC::Aborted
+            rescue GRPC::Aborted => aborted
+              if resume_token.nil? || resume_token.empty?
+                # Re-raise if the resume_token is not a valid value.
+                # This can happen if the buffer was flushed.
+                raise Google::Cloud::Error.from_error(aborted)
+              end
+
+              # Resume the stream from the last known resume_token
               if @execute_options
                 @enum = @service.streaming_execute_sql \
                   @session_path, @sql,
@@ -129,14 +141,16 @@ module Google
                   @session_path, @table, @columns,
                   @read_options.merge(resume_token: resume_token)
               end
-              cached_responses = []
+
+              # Flush the buffered responses to reset to the resume_token
+              buffered_responses = []
             rescue StopIteration
               break
             end
           end
 
           # clear out any remaining values left over
-          cached_responses.each do |resp|
+          buffered_responses.each do |resp|
             if chunked_value
               resp.values.unshift merge(chunked_value, resp.values.shift)
               chunked_value = nil
