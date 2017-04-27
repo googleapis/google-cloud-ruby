@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -63,22 +63,47 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
 
-  it "can execute a simple query" do
+  it "retries aborted transactions" do
+    mutations = [
+      Google::Spanner::V1::Mutation.new(
+        update: Google::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+        )
+      )
+    ]
+
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil]
+    # mock.expect :commit, ->{ raise GRPC::Aborted }, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil]
+    # mock.expect :commit, Google::Spanner::V1::CommitResponse.new(commit_timestamp: Google::Protobuf::Timestamp.new()), [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_selector]
+    def mock.commit *args
+      # first time called this will raise
+      if @called == nil
+        @called = true
+        gax_error = Google::Gax::GaxError.new "aborted"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(10, "aborted")
+        raise gax_error
+      end
+      # second call will return correct response
+      Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
+    end
     spanner.service.mocked_service = mock
 
     results = nil
     client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
       results = tx.execute "SELECT * FROM users"
+      tx.update "users", [{ id: 1, name: "Charlie", active: false }]
     end
 
-    mock.verify
-
     assert_results results
+
+    mock.verify
   end
 
   def assert_results results
