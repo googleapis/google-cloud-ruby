@@ -434,6 +434,96 @@ module Google
           annotation.web
         end
 
+        ##
+        # Performs detection of Cloud Vision
+        # [features](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature)
+        # on the image. If no options for features are provided, **all** image
+        # detection features will be performed, with a default of `100` results
+        # for faces, landmarks, logos, labels, crop_hints, and web. If any
+        # feature option is provided, only the specified feature detections will
+        # be performed. Please review
+        # [Pricing](https://cloud.google.com/vision/docs/pricing) before use, as
+        # a separate charge is incurred for each feature performed on an image.
+        #
+        # @see https://cloud.google.com/vision/docs/requests-and-responses Cloud
+        #   Vision API Requests and Responses
+        # @see https://cloud.google.com/vision/reference/rest/v1/images/annotate#AnnotateImageRequest
+        #   AnnotateImageRequest
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @param [Boolean, Integer] faces Whether to perform the facial
+        #   detection feature. The maximum number of results is configured in
+        #   {Google::Cloud::Vision.default_max_faces}, or may be provided here.
+        #   Optional.
+        # @param [Boolean, Integer] landmarks Whether to perform the landmark
+        #   detection feature. The maximum number of results is configured in
+        #   {Google::Cloud::Vision.default_max_landmarks}, or may be provided
+        #   here. Optional.
+        # @param [Boolean, Integer] logos Whether to perform the logo detection
+        #   feature. The maximum number of results is configured in
+        #   {Google::Cloud::Vision.default_max_logos}, or may be provided here.
+        #   Optional.
+        # @param [Boolean, Integer] labels Whether to perform the label
+        #   detection feature. The maximum number of results is configured in
+        #   {Google::Cloud::Vision.default_max_labels}, or may be provided here.
+        #   Optional.
+        # @param [Boolean] text Whether to perform the text detection feature
+        #   (OCR for shorter documents with sparse text). Optional.
+        # @param [Boolean] document Whether to perform the document text
+        #   detection feature (OCR for longer documents with dense text).
+        #   Optional.
+        # @param [Boolean] safe_search Whether to perform the safe search
+        #   feature. Optional.
+        # @param [Boolean] properties Whether to perform the image properties
+        #   feature (currently, the image's dominant colors.) Optional.
+        # @param [Boolean, Integer] crop_hints Whether to perform the crop hints
+        #   feature. Optional.
+        # @param [Boolean, Integer] web Whether to perform the web annotation
+        #   feature. Optional.
+        #
+        # @return [Annotation] The results for all image detections, returned as
+        #   a single {Annotation} instance.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   image = vision.image "path/to/landmark.jpg"
+        #
+        #   annotation = image.annotate labels: true, landmarks: true
+        #
+        #   annotation.labels.map &:description
+        #   # ["stone carving", "ancient history", "statue", "sculpture",
+        #   #  "monument", "landmark"]
+        #   annotation.landmarks.count #=> 1
+        #
+        # @example Maximum result values can also be provided:
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #
+        #   image = vision.image "path/to/landmark.jpg"
+        #
+        #   annotation = image.annotate labels: 3, landmarks: 3
+        #
+        #   annotation.labels.map &:description
+        #   # ["stone carving", "ancient history", "statue"]
+        #   annotation.landmarks.count #=> 1
+        #
+        def annotate faces: false, landmarks: false, logos: false,
+                     labels: false, text: false, document: false,
+                     safe_search: false, properties: false, crop_hints: false,
+                     web: false
+          @vision.annotate(self, faces: faces, landmarks: landmarks,
+                                 logos: logos, labels: labels, text: text,
+                                 document: document, safe_search: safe_search,
+                                 properties: properties, crop_hints: crop_hints,
+                                 web: web)
+        end
+        alias_method :mark, :annotate
+        alias_method :detect, :annotate
+
         # @private
         def to_s
           @to_s ||= begin

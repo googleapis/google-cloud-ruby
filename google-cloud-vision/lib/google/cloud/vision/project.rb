@@ -140,9 +140,9 @@ module Google
         # [features](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature)
         # on the given image(s). If no options for features are provided,
         # **all** image detection features will be performed, with a default of
-        # `100` results for faces, landmarks, logos, and labels. If any feature
-        # option is provided, only the specified feature detections will be
-        # performed. Please review
+        # `100` results for faces, landmarks, logos, labels, crop_hints, and
+        # web. If any feature option is provided, only the specified feature
+        # detections will be performed. Please review
         # [Pricing](https://cloud.google.com/vision/docs/pricing) before use, as
         # a separate charge is incurred for each feature performed on an image.
         #
