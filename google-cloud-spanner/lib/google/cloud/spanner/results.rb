@@ -14,6 +14,7 @@
 
 
 require "google/cloud/spanner/convert"
+require "google/cloud/errors"
 
 module Google
   module Cloud
@@ -85,6 +86,8 @@ module Google
 
           fields = @metadata.row_type.fields
           values = []
+          buffered_responses = []
+          buffer_upper_bound = 10
           chunked_value = nil
           resume_token = nil
 
@@ -98,22 +101,69 @@ module Google
               @metadata ||= grpc.metadata
               @stats ||= grpc.stats
 
-              if chunked_value
-                grpc.values.unshift merge(chunked_value, grpc.values.shift)
-                chunked_value = nil
-              end
-              to_iterate = values + grpc.values
-              chunked_value = to_iterate.pop if grpc.chunked_value
+              buffered_responses << grpc
 
-              resume_token = grpc.resume_token
+              if (grpc.resume_token && grpc.resume_token != "") ||
+                buffered_responses.size >= buffer_upper_bound
+                # This can set the resume_token to nil
+                resume_token = grpc.resume_token
 
-              values = to_iterate.pop(to_iterate.count % fields.count)
-              to_iterate.each_slice(fields.count) do |slice|
-                yield Convert.row_to_raw(fields, slice)
+                buffered_responses.each do |resp|
+                  if chunked_value
+                    resp.values.unshift merge(chunked_value, resp.values.shift)
+                    chunked_value = nil
+                  end
+                  to_iterate = values + Array(resp.values)
+                  chunked_value = to_iterate.pop if resp.chunked_value
+                  values = to_iterate.pop(to_iterate.count % fields.count)
+                  to_iterate.each_slice(fields.count) do |slice|
+                    yield Convert.row_to_raw(fields, slice)
+                  end
+                end
+
+                # Flush the buffered responses now that they are all handled
+                buffered_responses = []
               end
+            rescue GRPC::Aborted => aborted
+              if resume_token.nil? || resume_token.empty?
+                # Re-raise if the resume_token is not a valid value.
+                # This can happen if the buffer was flushed.
+                raise Google::Cloud::Error.from_error(aborted)
+              end
+
+              # Resume the stream from the last known resume_token
+              if @execute_options
+                @enum = @service.streaming_execute_sql \
+                  @session_path, @sql,
+                  @execute_options.merge(resume_token: resume_token)
+              else
+                @enum = @service.streaming_read_table \
+                  @session_path, @table, @columns,
+                  @read_options.merge(resume_token: resume_token)
+              end
+
+              # Flush the buffered responses to reset to the resume_token
+              buffered_responses = []
             rescue StopIteration
               break
             end
+          end
+
+          # clear out any remaining values left over
+          buffered_responses.each do |resp|
+            if chunked_value
+              resp.values.unshift merge(chunked_value, resp.values.shift)
+              chunked_value = nil
+            end
+            to_iterate = values + Array(resp.values)
+            chunked_value = to_iterate.pop if resp.chunked_value
+            values = to_iterate.pop(to_iterate.count % fields.count)
+            to_iterate.each_slice(fields.count) do |slice|
+              yield Convert.row_to_raw(fields, slice)
+            end
+          end
+          values.each_slice(fields.count) do |slice|
+            yield Convert.row_to_raw(fields, slice)
           end
 
           # If we get this far then we can release the session
@@ -143,13 +193,41 @@ module Google
         end
 
         # @private
-        def self.from_enum enum
+        def self.from_enum enum, service
           grpc = enum.peek
-          results = new
-          results.instance_variable_set :@metadata,   grpc.metadata
-          results.instance_variable_set :@stats,      grpc.stats
-          results.instance_variable_set :@enum,       enum
-          results
+          new.tap do |results|
+            results.instance_variable_set :@metadata, grpc.metadata
+            results.instance_variable_set :@stats,    grpc.stats
+            results.instance_variable_set :@enum,     enum
+            results.instance_variable_set :@service,  service
+          end
+        end
+
+        # @private
+        def self.execute service, session_path, sql, params: nil,
+                         transaction: nil
+          execute_options = { transaction: transaction, params: params }
+          enum = service.streaming_execute_sql session_path, sql,
+                                               execute_options
+          from_enum(enum, service).tap do |results|
+            results.instance_variable_set :@session_path,    session_path
+            results.instance_variable_set :@sql,             sql
+            results.instance_variable_set :@execute_options, execute_options
+          end
+        end
+
+        # @private
+        def self.read service, session_path, table, columns, id: nil,
+                      limit: nil, transaction: nil
+          read_options = { id: id, limit: limit, transaction: transaction }
+          enum = service.streaming_read_table \
+            session_path, table, columns, read_options
+          from_enum(enum, service).tap do |results|
+            results.instance_variable_set :@session_path, session_path
+            results.instance_variable_set :@table,        table
+            results.instance_variable_set :@columns,      columns
+            results.instance_variable_set :@read_options, read_options
+          end
         end
 
         # @private

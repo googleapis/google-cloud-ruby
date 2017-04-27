@@ -135,8 +135,8 @@ module Google
         def execute sql, params: nil, streaming: true
           ensure_service!
           if streaming
-            Results.from_enum service.streaming_execute_sql \
-              session_name, sql, transaction: tx_selector, params: params
+            Results.execute service, session_name, sql,
+                            params: params, transaction: tx_selector
           else
             Results.from_grpc service.execute_sql \
               session_name, sql, transaction: tx_selector, params: params
@@ -195,9 +195,8 @@ module Google
         def read table, columns, id: nil, limit: nil, streaming: true
           ensure_service!
           if streaming
-            Results.from_enum service.streaming_read_table \
-              session_name, table, columns, id: id, transaction: tx_selector,
-                                            limit: limit
+            Results.read service, session_name, table, columns,
+                         id: id, limit: limit, transaction: tx_selector
           else
             Results.from_grpc service.read_table \
               session_name, table, columns, id: id, transaction: tx_selector,
