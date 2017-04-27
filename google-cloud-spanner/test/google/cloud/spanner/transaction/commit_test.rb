@@ -23,6 +23,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
   let(:transaction_id) { "tx789" }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
   let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new() }
 
   it "commits using a block" do
@@ -63,7 +64,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.commit do |c|
@@ -88,7 +89,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.update "users", [{ id: 1, name: "Charlie", active: false }]
@@ -107,7 +108,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.insert "users", [{ id: 2, name: "Harvey",  active: true }]
@@ -126,7 +127,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.upsert "users", [{ id: 3, name: "Marley",  active: false }]
@@ -145,7 +146,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.save "users", [{ id: 3, name: "Marley",  active: false }]
@@ -164,7 +165,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.replace "users", [{ id: 4, name: "Henry",  active: true }]
@@ -186,7 +187,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.delete "users", [1, 2, 3, 4, 5]
@@ -208,7 +209,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.delete "users", 5
@@ -226,7 +227,7 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     transaction.service.mocked_service = mock
 
     transaction.delete "users"

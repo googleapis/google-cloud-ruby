@@ -19,6 +19,7 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :retry, :mock_spa
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash1 do
     {
       metadata: {
@@ -104,9 +105,9 @@ describe Google::Cloud::Spanner::Client, :execute, :streaming, :retry, :mock_spa
 
   it "retries aborted responses" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id)]
-    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum1), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil]
-    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum2), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: "abc123"]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum1), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum2), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: "abc123", options: default_options]
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users"

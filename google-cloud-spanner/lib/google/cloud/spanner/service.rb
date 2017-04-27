@@ -251,25 +251,28 @@ module Google
           end
         end
 
-        def get_session session
+        def get_session session_name
+          opts = default_options_from_session session_name
           execute do
-            service.get_session session
+            service.get_session session_name, options: opts
           end
         end
 
-        def create_session database
+        def create_session database_name
+          opts = default_options_from_session database_name
           execute do
-            service.create_session database
+            service.create_session database_name, options: opts
           end
         end
 
-        def delete_session session
+        def delete_session session_name
+          opts = default_options_from_session session_name
           execute do
-            service.delete_session session
+            service.delete_session session_name, options: opts
           end
         end
 
-        def execute_sql session_path, sql, transaction: nil, params: nil
+        def execute_sql session_name, sql, transaction: nil, params: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
@@ -279,14 +282,15 @@ module Google
             input_param_types = Hash[
               input_param_pairs.map { |k, v| [k, v.last] }]
           end
+          opts = default_options_from_session session_name
           execute do
             service.execute_sql \
-              session_path, sql, transaction: transaction, params: input_params,
-                                 param_types: input_param_types
+              session_name, sql, transaction: transaction, params: input_params,
+                                 param_types: input_param_types, options: opts
           end
         end
 
-        def streaming_execute_sql session_path, sql, transaction: nil,
+        def streaming_execute_sql session_name, sql, transaction: nil,
                                   params: nil, resume_token: nil
           input_params = nil
           input_param_types = nil
@@ -297,15 +301,16 @@ module Google
             input_param_types = Hash[
               input_param_pairs.map { |k, v| [k, v.last] }]
           end
+          opts = default_options_from_session session_name
           execute do
             service.execute_streaming_sql \
-              session_path, sql, transaction: transaction, params: input_params,
+              session_name, sql, transaction: transaction, params: input_params,
                                  param_types: input_param_types,
-                                 resume_token: resume_token
+                                 resume_token: resume_token, options: opts
           end
         end
 
-        def read_table session_path, table_name, columns, id: nil,
+        def read_table session_name, table_name, columns, id: nil,
                        transaction: nil, limit: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
@@ -315,14 +320,15 @@ module Google
             end
             key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
           end
+          opts = default_options_from_session session_name
           execute do
             service.read \
-              session_path, table_name, columns, key_set,
-              transaction: transaction, limit: limit
+              session_name, table_name, columns, key_set,
+              transaction: transaction, limit: limit, options: opts
           end
         end
 
-        def streaming_read_table session_path, table_name, columns, id: nil,
+        def streaming_read_table session_name, table_name, columns, id: nil,
                                  transaction: nil, limit: nil, resume_token: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
@@ -332,10 +338,12 @@ module Google
             end
             key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
           end
+          opts = default_options_from_session session_name
           execute do
             service.streaming_read \
-              session_path, table_name, columns, key_set,
-              transaction: transaction, limit: limit, resume_token: resume_token
+              session_name, table_name, columns, key_set,
+              transaction: transaction, limit: limit,
+              resume_token: resume_token, options: opts
           end
         end
 
@@ -345,17 +353,22 @@ module Google
             tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
               Google::Spanner::V1::TransactionOptions::ReadWrite.new)
           end
+          opts = default_options_from_session session_name
           execute do
             service.commit \
               session_name, mutations,
-              transaction_id: transaction_id, single_use_transaction: tx_opts
+              transaction_id: transaction_id, single_use_transaction: tx_opts,
+              options: opts
           end
         end
 
         def begin_transaction session_name
           tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
             Google::Spanner::V1::TransactionOptions::ReadWrite.new)
-          execute { service.begin_transaction session_name, tx_opts }
+          opts = default_options_from_session session_name
+          execute do
+            service.begin_transaction session_name, tx_opts, options: opts
+          end
         end
 
         def create_snapshot session_name, strong: nil, timestamp: nil,
@@ -367,7 +380,10 @@ module Google
               exact_staleness: Convert.number_to_duration(staleness),
               return_read_timestamp: true
             }.delete_if { |_, v| v.nil? }))
-          execute { service.begin_transaction session_name, tx_opts }
+          opts = default_options_from_session session_name
+          execute do
+            service.begin_transaction session_name, tx_opts, options: opts
+          end
         end
 
         def inspect
@@ -376,12 +392,10 @@ module Google
 
         protected
 
-        def default_headers
-          { "google-cloud-resource-prefix" => "projects/#{@project}" }
-        end
-
-        def default_options
-          Google::Gax::CallOptions.new kwargs: default_headers
+        def default_options_from_session session_name
+          default_prefix = session_name.split("/sessions/").first
+          Google::Gax::CallOptions.new kwargs: \
+            { "google-cloud-resource-prefix" => default_prefix }
         end
 
         def project_path
