@@ -41,6 +41,8 @@ module Google
       #     stream.send MicrophoneInput.read(32000)
       #   end
       #
+      #   # This sample assumes that it is part of a longer running process
+      #   # that will run until the stream is complete.
       #   stream.stop
       #   stream.wait_until_complete!
       #
@@ -106,6 +108,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #   stream.wait_until_complete!
         #
@@ -199,6 +203,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #
         #   stream.wait_until_complete!
@@ -234,6 +240,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #
         #   stream.wait_until_complete!
@@ -284,6 +292,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #
         def on_interim &block
@@ -322,6 +332,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #   stream.wait_until_complete!
         #
@@ -372,6 +384,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #
         def on_complete &block
@@ -421,6 +435,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop unless stream.stopped?
         #
         def on_utterance &block
@@ -465,6 +481,8 @@ module Google
         #     stream.send MicrophoneInput.read(32000)
         #   end
         #
+        #   # This sample assumes that it is part of a longer running
+        #   # process that will run until the stream is complete.
         #   stream.stop
         #
         def on_error &block
