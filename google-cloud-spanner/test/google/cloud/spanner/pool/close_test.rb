@@ -24,6 +24,7 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:pool) do
+    session.instance_variable_set :@last_updated_at, Time.now
     p = client.instance_variable_get :@pool
     p.all_sessions = [session]
     p.session_queue = [session]

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Pool, :keepalive, :mock_spanner do
+describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -23,12 +23,7 @@ describe Google::Cloud::Spanner::Pool, :keepalive, :mock_spanner do
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
-  let(:pool) do
-    p = client.instance_variable_get :@pool
-    p.all_sessions = [session]
-    p.session_queue = [session]
-    p
-  end
+  let(:pool) { client.instance_variable_get :@pool }
   let :results_hash do
     {
       metadata: {
@@ -53,30 +48,35 @@ describe Google::Cloud::Spanner::Pool, :keepalive, :mock_spanner do
     client.close
   end
 
-  it "calls keepalive on all sessions" do
+  it "calls keepalive on the sessions that need it" do
+    # update the session so it was last updated an hour ago
+    session.instance_variable_set :@last_updated_at, Time.now - 60*60
+    sleep 0.25 # sleep enough that the thread ensure_valid finishes
+    # set the session in the pool
+    pool.all_sessions = [session]
+    pool.session_queue = [session]
+
     mock = Minitest::Mock.new
     mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    pool.keepalive!
+    pool.send :ensure_valid!
 
     mock.verify
   end
 
-  it "calls keepalive on all sessions and sleeps" do
-    skip "This keeps failing on CI. Not sure why..."
+  it "doesn't calls keepalive on sessions that don't need it" do
+    # update the session so it was last updated now
+    session.instance_variable_set :@last_updated_at, Time.now
+    sleep 0.25 # sleep enough that the thread ensure_valid finishes
+    # set the session in the pool
+    pool.all_sessions = [session]
+    pool.session_queue = [session]
+
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    # stub out the sleep method so the test doesn't actually block
-    mock.expect :sleep, nil, [1500]
-    pool.define_singleton_method :sleep do |count|
-      # call the mock to satisfy the expectation
-      mock.sleep count
-    end
-
-    pool.keepalive_and_sleep!
+    pool.send :ensure_valid!
 
     mock.verify
   end

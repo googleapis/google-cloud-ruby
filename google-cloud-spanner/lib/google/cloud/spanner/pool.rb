@@ -31,7 +31,7 @@ module Google
       class Pool
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
-        def initialize client, min: 10, max: 100, keepalive: 1500,
+        def initialize client, min: 10, max: 100, keepalive: 1800,
                        write_ratio: 0.3, fail: true
           @client = client
           @min = min
@@ -129,22 +129,6 @@ module Google
           nil
         end
 
-        def keepalive!
-          ensure_keepalive_thread!
-
-          # Call keep alive only on the queue, not all sessions or transactions.
-          # If a session or transaction is checked out assume its being used.
-          session_queue.each(&:keepalive!)
-          transaction_queue.each(&:keepalive!)
-        end
-
-        def keepalive_and_sleep!
-          ensure_keepalive_thread!
-
-          keepalive!
-          sleep @keepalive
-        end
-
         def reset
           close
           init
@@ -168,7 +152,7 @@ module Google
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
-          ensure_keepalive_thread!
+          ensure_valid_thread!
           # init session queue
           @min.times { session_queue << new_session! }
           # init transaction queue
@@ -191,12 +175,19 @@ module Google
           all_sessions.size < @max
         end
 
-        def ensure_keepalive_thread!
+        def ensure_valid!
+          session_queue.each { |s| s.ensure_valid! since: @keepalive }
+          transaction_queue.each do |tx|
+            tx.session.ensure_valid! since: @keepalive
+          end
+        end
+
+        def ensure_valid_thread!
           @thread ||= Thread.new do
             # before calling keepalive
-            sleep @keepalive
             loop do
-              keepalive_and_sleep!
+              ensure_valid!
+              sleep 300
             end
           end
         end

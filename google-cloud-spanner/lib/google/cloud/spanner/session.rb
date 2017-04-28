@@ -221,8 +221,11 @@ module Google
         #
         def execute sql, params: nil, types: nil, transaction: nil
           ensure_service!
-          Results.execute service, path, sql,
-                          params: params, types: types, transaction: transaction
+          results = Results.execute service, path, sql,
+                                    params: params, types: types,
+                                    transaction: transaction
+          @last_updated_at = Time.now
+          results
         end
         alias_method :query, :execute
 
@@ -265,9 +268,11 @@ module Google
         def read table, columns, keys: nil, index: nil, limit: nil,
                  transaction: nil
           ensure_service!
-          Results.read service, path, table, columns,
-                       keys: keys, index: index, limit: limit,
-                       transaction: transaction
+          results = Results.read service, path, table, columns,
+                                 keys: keys, index: index, limit: limit,
+                                 transaction: transaction
+          @last_updated_at = Time.now
+          results
         end
 
         ##
@@ -294,10 +299,12 @@ module Google
         #   end
         #
         def commit transaction_id: nil
+          ensure_service!
           commit = Commit.new
           yield commit
           commit_resp = service.commit path, commit.mutations,
                                        transaction_id: transaction_id
+          @last_updated_at = Time.now
           Convert.timestamp_to_time commit_resp.commit_timestamp
         end
 
@@ -512,6 +519,7 @@ module Google
         # Rolls back the transaction, releasing any locks it holds.
         def rollback transaction_id
           service.rollback path, transaction_id
+          @last_updated_at = Time.now
           true
         end
 
@@ -525,7 +533,7 @@ module Google
 
         ##
         # @private
-        # Keeps the session alive by calling SELECT 1
+        # Keeps the session alive by executing `"SELECT 1"`.
         def keepalive!
           ensure_service!
           execute "SELECT 1"
@@ -535,6 +543,16 @@ module Google
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id)
           return false
+        end
+
+        ##
+        # @private
+        # Ensures that the session has been used recently. If not, call
+        # keepalive.
+        def ensure_valid! since: 3000
+          return keepalive! if @last_updated_at.nil?
+          return nil if @last_updated_at + since > Time.now
+          keepalive!
         end
 
         ##

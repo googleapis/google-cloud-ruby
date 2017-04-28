@@ -419,9 +419,10 @@ module Google
         #     maintain at any point in time. The default is 10.
         #   * `:max` (Integer) Maximum number of sessions that the client will
         #     have at any point in time. The default is 100.
-        #   * `:keepalive` (Integer) The delay in seconds between attemtps to
-        #     prevent the idle sessions from being closed by the Cloud Spanner
-        #     service. The default is 1500.
+        #   * `:keepalive` (Numeric) The amount of time a session can be idle
+        #     before an attempt is made to prevent the idle sessions from being
+        #     closed by the Cloud Spanner service. The default is 1800 (30
+        #     minutes).
         #   * `:write_ratio` (Float) The ratio of sessions with pre-allocated
         #     transactions to those without. Pre-allocating transactions
         #     improves the performance of writes made by the client. The higher
