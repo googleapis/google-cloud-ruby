@@ -390,8 +390,8 @@ module Google
         #
         # @!group Data
         #
-        def data max: nil, timeout: 10000, cache: true, dryrun: nil
-          sql = "SELECT * FROM #{query_id}"
+        def data max: nil, timeout: 10000, cache: true, dryrun: nil, where: '1=1'
+          sql = "SELECT * FROM #{query_id} WHERE #{where}"
           ensure_service!
           options = { max: max, timeout: timeout, cache: cache, dryrun: dryrun }
           gapi = service.query sql, options
