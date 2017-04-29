@@ -15,6 +15,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/spanner/project"
+require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
@@ -40,10 +41,12 @@ module Google
       class Client
         ##
         # @private Creates a new Spanner Project instance.
-        def initialize project, instance_id, database_id
+        def initialize project, instance_id, database_id, min: 2, max: 10,
+                       keepalive: 1500
           @project = project
           @instance_id = instance_id
           @database_id = database_id
+          @pool = Pool.new self, min: min, max: max, keepalive: keepalive
         end
 
         # The Spanner project connected to.
@@ -181,8 +184,13 @@ module Google
 
           single_use_tx = single_use_transaction timestamp: timestamp,
                                                  staleness: staleness
-          session.execute sql, params: params, transaction: single_use_tx,
-                               streaming: streaming
+          results = nil
+          @pool.with_session do |session|
+            results = session.execute \
+              sql, params: params, transaction: single_use_tx,
+                   streaming: streaming
+          end
+          results
         end
         alias_method :query, :execute
 
@@ -259,9 +267,13 @@ module Google
 
           single_use_tx = single_use_transaction timestamp: timestamp,
                                                  staleness: staleness
-          session.read table, columns, id: id, limit: limit,
-                                       transaction: single_use_tx,
-                                       streaming: streaming
+          results = nil
+          @pool.with_session do |session|
+            results = session.read \
+              table, columns, id: id, limit: limit, transaction: single_use_tx,
+                              streaming: streaming
+          end
+          results
         end
 
         # Creates changes to be applied to rows in the database.
@@ -282,7 +294,9 @@ module Google
         #   end
         #
         def commit &block
-          session.commit(&block)
+          @pool.with_session do |session|
+            session.commit(&block)
+          end
         end
 
         ##
@@ -320,7 +334,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def upsert table, *rows
-          session.upsert table, rows
+          @pool.with_session do |session|
+            session.upsert table, rows
+          end
         end
         alias_method :save, :upsert
 
@@ -358,7 +374,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def insert table, *rows
-          session.insert table, rows
+          @pool.with_session do |session|
+            session.insert table, rows
+          end
         end
 
         ##
@@ -395,7 +413,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def update table, *rows
-          session.update table, rows
+          @pool.with_session do |session|
+            session.update table, rows
+          end
         end
 
         ##
@@ -434,7 +454,9 @@ module Google
         #                        { id: 2, name: "Harvey",  active: true }]
         #
         def replace table, *rows
-          session.replace table, rows
+          @pool.with_session do |session|
+            session.replace table, rows
+          end
         end
 
         ##
@@ -456,7 +478,9 @@ module Google
         #   db.delete "users", [1, 2, 3]
         #
         def delete table, *id
-          session.delete table, id
+          @pool.with_session do |session|
+            session.delete table, id
+          end
         end
 
         ##
@@ -484,17 +508,18 @@ module Google
         #
         def transaction &block
           ensure_service!
-          tx_session = session
-          tx_grpc = @project.service.begin_transaction tx_session.path
-          tx = Transaction.from_grpc(tx_grpc, tx_session)
-          begin
-            block.call tx
-          rescue Google::Cloud::AbortedError
-            # TODO: retrieve delay from ABORTED error
-            # Retry the entire transaction
-            tx2_grpc = @project.service.begin_transaction tx_session.path
-            tx2 = Transaction.from_grpc(tx2_grpc, tx_session)
-            block.call tx2
+          @pool.with_session do |session|
+            tx_grpc = @project.service.begin_transaction session.path
+            tx = Transaction.from_grpc(tx_grpc, session)
+            begin
+              block.call tx
+            rescue Google::Cloud::AbortedError
+              # TODO: retrieve delay from ABORTED error
+              # Retry the entire transaction
+              tx2_grpc = @project.service.begin_transaction session.path
+              tx2 = Transaction.from_grpc(tx2_grpc, session)
+              block.call tx2
+            end
           end
           nil
         end
@@ -530,8 +555,6 @@ module Google
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
         #   object.
         #
-        # @return [Google::Cloud::Spanner::Snapshot]
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -550,13 +573,32 @@ module Google
           validate_snapshot_args! strong: strong, timestamp: timestamp,
                                   staleness: staleness
           ensure_service!
-          snp_session = session
-          snp_grpc = @project.service.create_snapshot \
-            snp_session.path, strong: strong, timestamp: timestamp,
-                              staleness: staleness
-          snp = Snapshot.from_grpc(snp_grpc, snp_session)
-          yield snp if block_given?
-          snp
+          @pool.with_session do |session|
+            snp_grpc = @project.service.create_snapshot \
+              session.path, strong: strong, timestamp: timestamp,
+                            staleness: staleness
+            snp = Snapshot.from_grpc(snp_grpc, session)
+            yield snp if block_given?
+          end
+          nil
+        end
+
+        ##
+        # Closes the client connection and releases resources.
+        #
+        def close
+          @pool.close
+        end
+
+        ##
+        # @private
+        # Creates a new session object every time.
+        def create_new_session
+          ensure_service!
+          grpc = @project.service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          Session.from_grpc(grpc, @project.service)
         end
 
         protected
@@ -566,17 +608,6 @@ module Google
         # available.
         def ensure_service!
           fail "Must have active connection to service" unless @project.service
-        end
-
-        ##
-        # Creates a new session object every time.
-        # No pooling, no reuse. That will come later...
-        def session
-          ensure_service!
-          grpc = @project.service.create_session \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
-          Session.from_grpc(grpc, @project.service)
         end
 
         ##

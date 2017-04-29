@@ -57,7 +57,13 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   end
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::ResultSet.decode_json results_json }
-  let(:client) { spanner.client instance_id, database_id }
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
+
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
+  end
 
   it "can read all rows" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]

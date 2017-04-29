@@ -303,10 +303,10 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit
+        def commit transaction_id: nil
           commit = Commit.new
           yield commit
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
         end
 
         ##
@@ -343,10 +343,10 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows
+        def upsert table, *rows, transaction_id: nil
           commit = Commit.new
           commit.upsert table, rows
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
         end
         alias_method :save, :upsert
 
@@ -383,10 +383,10 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows
+        def insert table, *rows, transaction_id: nil
           commit = Commit.new
           commit.insert table, rows
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
         end
 
         ##
@@ -422,10 +422,10 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows
+        def update table, *rows, transaction_id: nil
           commit = Commit.new
           commit.update table, rows
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
         end
 
         ##
@@ -463,10 +463,10 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows
+        def replace table, *rows, transaction_id: nil
           commit = Commit.new
           commit.replace table, rows
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
         end
 
         ##
@@ -487,10 +487,26 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, *id
+        def delete table, *id, transaction_id: nil
           commit = Commit.new
           commit.delete table, id
-          service.commit path, commit.mutations
+          service.commit path, commit.mutations, transaction_id: transaction_id
+        end
+
+        ##
+        # @private
+        # Keeps the session alive by calling SELECT 1
+        def keepalive!
+          ensure_service!
+          execute "SELECT 1"
+          return true
+        rescue Google::Cloud::NotFoundError
+          @grpc = service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          self
+          execute "SELECT 1"
+          return false
         end
 
         ##

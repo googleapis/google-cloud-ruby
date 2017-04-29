@@ -35,7 +35,7 @@ module Acceptance
   #     end
   #   end
   class SpannerTest < Minitest::Test
-    attr_accessor :spanner
+    attr_accessor :spanner, :spanner_client
 
     ##
     # Setup project based on available ENV variables
@@ -43,6 +43,10 @@ module Acceptance
       @spanner = $spanner
 
       refute_nil @spanner, "You do not have an active spanner to run the tests."
+
+      @spanner_client = $spanner_client
+
+      refute_nil @spanner_client, "You do not have an active client to run the tests."
 
       super
     end
@@ -166,12 +170,17 @@ job.wait_until_done!
 job2 = job.instance.create_database "main", statements: fixture.schema_ddl_statements
 job2.wait_until_done!
 
+# Create one client for all tests, to minimize resource usage
+$spanner_client = $spanner.client $spanner_prefix, "main"
+
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
   $spanner.instances.all.select { |i| i.instance_id.start_with? $spanner_prefix }.each do |instance|
     instance.databases.all.each &:drop
     instance.delete
   end
+  puts "Closing the Spanner Client."
+  $spanner_client.close
 rescue => e
   puts "Error while cleaning up instances and databases after spanner tests.\n\n#{e}"
 end

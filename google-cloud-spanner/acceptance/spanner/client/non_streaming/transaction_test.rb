@@ -15,7 +15,7 @@
 require "spanner_helper"
 
 describe "Spanner Client", :non_streaming, :transaction, :spanner do
-  let(:db) { spanner.client $spanner_prefix, "main" }
+  let(:db) { spanner_client }
 
   it "runs a simple query" do
     results = nil

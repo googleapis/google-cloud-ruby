@@ -41,8 +41,8 @@ module Google
       #   end
       #
       class Transaction
-        # @private The gRPC Service object.
-        attr_accessor :service
+        # @private The Session object.
+        attr_accessor :session
 
         ##
         # Executes a SQL query.
@@ -132,14 +132,9 @@ module Google
         #   end
         #
         def execute sql, params: nil, streaming: true
-          ensure_service!
-          if streaming
-            Results.execute service, session_name, sql,
-                            params: params, transaction: tx_selector
-          else
-            Results.from_grpc service.execute_sql \
-              session_name, sql, transaction: tx_selector, params: params
-          end
+          ensure_session!
+          session.execute sql, params: params, transaction: tx_selector,
+                               streaming: streaming
         end
         alias_method :query, :execute
 
@@ -192,15 +187,10 @@ module Google
         #   end
         #
         def read table, columns, id: nil, limit: nil, streaming: true
-          ensure_service!
-          if streaming
-            Results.read service, session_name, table, columns,
-                         id: id, limit: limit, transaction: tx_selector
-          else
-            Results.from_grpc service.read_table \
-              session_name, table, columns, id: id, transaction: tx_selector,
-                                            limit: limit
-          end
+          ensure_session!
+          session.read table, columns, id: id, limit: limit,
+                                       transaction: tx_selector,
+                                       streaming: streaming
         end
 
         # Creates changes to be applied to rows in the database.
@@ -222,11 +212,10 @@ module Google
         #   end
         #
         def commit
-          ensure_service!
-          commit = Commit.new
-          yield commit
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.commit transaction_id: transaction_id do |c|
+            yield c
+          end
         end
 
         ##
@@ -265,11 +254,8 @@ module Google
         #   end
         #
         def upsert table, *rows
-          ensure_service!
-          commit = Commit.new
-          commit.upsert table, rows
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.upsert table, rows, transaction_id: transaction_id
         end
         alias_method :save, :upsert
 
@@ -308,11 +294,8 @@ module Google
         #   end
         #
         def insert table, *rows
-          ensure_service!
-          commit = Commit.new
-          commit.insert table, rows
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.insert table, rows, transaction_id: transaction_id
         end
 
         ##
@@ -350,11 +333,8 @@ module Google
         #   end
         #
         def update table, *rows
-          ensure_service!
-          commit = Commit.new
-          commit.update table, rows
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.update table, rows, transaction_id: transaction_id
         end
 
         ##
@@ -394,11 +374,8 @@ module Google
         #   end
         #
         def replace table, *rows
-          ensure_service!
-          commit = Commit.new
-          commit.replace table, rows
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.replace table, rows, transaction_id: transaction_id
         end
 
         ##
@@ -419,11 +396,8 @@ module Google
         #   db.transaction { |tx| tx.delete "users", [1, 2, 3] }
         #
         def delete table, *id
-          ensure_service!
-          commit = Commit.new
-          commit.delete table, id
-          service.commit session_name, commit.mutations,
-                         transaction_id: transaction_id
+          ensure_session!
+          session.delete table, id, transaction_id: transaction_id
         end
 
         ##
@@ -431,23 +405,16 @@ module Google
         # Google::Spanner::V1::Transaction.
         def self.from_grpc grpc, session
           new.tap do |s|
-            s.instance_variable_set :@transaction_grpc, grpc
-            s.instance_variable_set :@session_grpc,     session.grpc
-            s.instance_variable_set :@service,          session.service
+            s.instance_variable_set :@grpc,    grpc
+            s.instance_variable_set :@session, session
           end
         end
 
         protected
 
-        ##
-        # The full path for the session resource.
-        def session_name
-          @session_grpc.name
-        end
-
         def transaction_id
-          return nil if @transaction_grpc.nil?
-          @transaction_grpc.id
+          return nil if @grpc.nil?
+          @grpc.id
         end
 
         # The TransactionSelector to be used for queries
@@ -459,8 +426,12 @@ module Google
         ##
         # @private Raise an error unless an active connection to the service is
         # available.
-        def ensure_service!
-          fail "Must have active connection to service" unless service
+        def ensure_session!
+          fail "Must have active connection to service" unless session
+        end
+
+        def service
+          session.service
         end
       end
     end

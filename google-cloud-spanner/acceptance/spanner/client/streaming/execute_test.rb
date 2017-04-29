@@ -15,7 +15,7 @@
 require "spanner_helper"
 
 describe "Spanner Client", :streaming, :execute, :spanner do
-  let(:db) { spanner.client $spanner_prefix, "main" }
+  let(:db) { spanner_client }
 
   it "runs a simple query" do
     results = db.execute "SELECT 42 AS num"
