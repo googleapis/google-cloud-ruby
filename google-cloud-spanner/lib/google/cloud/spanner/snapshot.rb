@@ -75,15 +75,6 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
-        #
-        #  When `false`, all result are returned in a single reply. This method
-        #  cannot be used to return a result set larger than 10 MiB; if the
-        #  query yields more data than that, the query fails with an error.
-        #
         # @return [Google::Cloud::Spanner::Results]
         #
         # @example
@@ -116,26 +107,9 @@ module Google
         #     end
         #   end
         #
-        # @example Query without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users " \
-        #                           "WHERE id = @user_id",
-        #                           params: { user_id: 1 },
-        #                           streaming: false
-        #
-        #     user_row = results.rows.first
-        #     puts "User #{user_row[:id]} is #{user_row[:name]}"
-        #   end
-        #
-        def execute sql, params: nil, streaming: true
+        def execute sql, params: nil
           ensure_session!
-          session.execute sql, params: params, transaction: tx_selector,
-                               streaming: streaming
+          session.execute sql, params: params, transaction: tx_selector
         end
         alias_method :query, :execute
 
@@ -152,10 +126,6 @@ module Google
         #   there are columns in the primary key.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -173,25 +143,10 @@ module Google
         #     end
         #   end
         #
-        # @example Read without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.snapshot do |snp|
-        #     results = snp.read "users", ["id, "name"], streaming: false
-        #
-        #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
-        #     end
-        #   end
-        #
-        def read table, columns, id: nil, limit: nil, streaming: true
+        def read table, columns, id: nil, limit: nil
           ensure_session!
           session.read table, columns, id: id, limit: limit,
-                                       transaction: tx_selector,
-                                       streaming: streaming
+                                       transaction: tx_selector
         end
 
         ##

@@ -14,7 +14,7 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :streaming, :crud, :spanner do
+describe "Spanner Client", :crud, :spanner do
   let(:db) { spanner_client }
 
   before do

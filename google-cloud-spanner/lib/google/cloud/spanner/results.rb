@@ -76,8 +76,6 @@ module Google
         #   end
         #
         def rows
-          return @rows.to_enum if @rows
-
           return nil if @closed
 
           unless block_given?
@@ -173,25 +171,6 @@ module Google
 
         # rubocop:enable all
 
-        ##
-        # Whether the returned data is streaming from the Spanner API.
-        # @return [Boolean]
-        def streaming?
-          !@enum.nil?
-        end
-
-        # @private
-        def self.from_grpc grpc
-          results = new
-          rows = grpc.rows.map do |row|
-            Convert.row_to_raw grpc.metadata.row_type.fields, row.values
-          end
-          results.instance_variable_set :@metadata, grpc.metadata
-          results.instance_variable_set :@rows,     rows
-          results.instance_variable_set :@stats,    grpc.stats
-          results
-        end
-
         # @private
         def self.from_enum enum, service
           grpc = enum.peek
@@ -232,12 +211,7 @@ module Google
 
         # @private
         def to_s
-          if streaming?
-            "#<#{self.class.name} (types: #{types.inspect} streaming)>"
-          else
-            "#<#{self.class.name} (" \
-              "(types: #{types.inspect}, rows: #{rows.count})>"
-          end
+          "(types: #{types.inspect} streaming)"
         end
 
         # @private

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :execute, :retry, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -110,15 +110,13 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanne
   end
 
   it "retries aborted responses" do
-    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :streaming_read, AbortableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
-    mock.expect :streaming_read, AbortableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: "abc123", options: default_options]
+    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum1), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    mock.expect :execute_streaming_sql, AbortableEnumerator.new(results_enum2), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: "abc123", options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.read "my-table", columns
+    results = client.execute "SELECT * FROM users"
 
     assert_results results
 
@@ -127,7 +125,6 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :mock_spanne
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

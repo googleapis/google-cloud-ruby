@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :buffer_bound, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :read, :retry, :buffer_bound, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -204,7 +204,6 @@ describe Google::Cloud::Spanner::Client, :read, :streaming, :retry, :buffer_boun
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

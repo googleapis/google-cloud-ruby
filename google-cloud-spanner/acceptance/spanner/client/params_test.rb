@@ -14,7 +14,7 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :streaming, :params, :spanner do
+describe "Spanner Client", :params, :spanner do
   let(:db) { spanner_client }
 
   it "queries and returns a string parameter" do

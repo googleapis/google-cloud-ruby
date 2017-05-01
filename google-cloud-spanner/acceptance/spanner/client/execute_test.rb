@@ -14,7 +14,7 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :streaming, :execute, :spanner do
+describe "Spanner Client", :execute, :spanner do
   let(:db) { spanner_client }
 
   it "runs a simple query" do
