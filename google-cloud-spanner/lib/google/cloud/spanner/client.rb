@@ -488,6 +488,11 @@ module Google
               retry
             rescue RollbackError
               # Transaction block was interrupted, allow to continue
+            rescue => err
+              # Rollback transaction when handling unexpeced error
+              # Don't use Transaction#rollback since it raises
+              session.rollback tx.send(:transaction_id)
+              raise err
             end
           end
           nil

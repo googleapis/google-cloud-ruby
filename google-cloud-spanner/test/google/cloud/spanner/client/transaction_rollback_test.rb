@@ -93,6 +93,31 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     assert_results results
   end
 
+  it "will rollback a transaction when handling unexpected errors" do
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = nil
+    assert_raises ZeroDivisionError do
+      client.transaction do |tx|
+        tx.must_be_kind_of Google::Cloud::Spanner::Transaction
+        results = tx.execute "SELECT * FROM users"
+        # Cause an error
+        1/0
+        # This code will never be run, so no mocks for it.
+        tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+      end
+    end
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
