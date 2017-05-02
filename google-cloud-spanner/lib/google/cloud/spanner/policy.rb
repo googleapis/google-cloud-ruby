@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "google/cloud/spanner/errors"
 
 module Google
   module Cloud

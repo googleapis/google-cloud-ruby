@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/credentials"
 require "google/cloud/spanner/version"
 require "google/cloud/spanner/v1"
@@ -359,6 +359,13 @@ module Google
               session_name, mutations,
               transaction_id: transaction_id, single_use_transaction: tx_opts,
               options: opts
+          end
+        end
+
+        def rollback session_name, transaction_id
+          opts = default_options_from_session session_name
+          execute do
+            service.rollback session_name, transaction_id, options: opts
           end
         end
 

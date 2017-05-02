@@ -44,3 +44,5 @@ Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
   Enabled: false # for lib/google-cloud-spanner.rb file
+Lint/HandleExceptions:
+  Enabled: false

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
 require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
@@ -486,6 +486,8 @@ module Google
               # Create new transaction and retry the block
               tx = create_transaction! session
               retry
+            rescue RollbackError
+              # Transaction block was interrupted, allow to continue
             end
           end
           nil
