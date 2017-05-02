@@ -18,6 +18,18 @@ require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/spanner"
 
+# define SecureRandom#int64
+require "securerandom"
+module Random::Formatter
+  # SecureRandom.int64 generates a random signed 64-bit integer.
+  #
+  # The result will be an integer between the values -9,223,372,036,854,775,808
+  # and 9,223,372,036,854,775,807.
+  def int64
+    random_bytes(8).unpack("q")[0]
+  end
+end
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 
@@ -59,18 +71,44 @@ module Acceptance
       addl.include? :spanner
     end
 
-    def self.run_one_method klass, method_name, reporter
-      result = nil
-      reporter.prerecord klass, method_name
-      (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
-        puts "Retrying #{klass}##{method_name} (#{try})"
-      end
-      reporter.record result
-    end
+    # def self.run_one_method klass, method_name, reporter
+    #   result = nil
+    #   reporter.prerecord klass, method_name
+    #   (1..3).each do |try|
+    #     result = Minitest.run_one_method(klass, method_name)
+    #     break if (result.passed? || result.skipped?)
+    #     puts "Retrying #{klass}##{method_name} (#{try})"
+    #   end
+    #   reporter.record result
+    # end
 
     module Fixtures
+      def stuffs_ddl_statement
+        <<-STUFFS
+          CREATE TABLE stuffs (
+            id INT64 NOT NULL,
+            int INT64,
+            float FLOAT64,
+            bool BOOL,
+            string STRING(32),
+            byte BYTES(10485760),
+            date DATE,
+            timestamp TIMESTAMP,
+            ints ARRAY<INT64>,
+            floats ARRAY<FLOAT64>,
+            bools ARRAY<BOOL>,
+            strings ARRAY<STRING(32)>,
+            bytes ARRAY<BYTES(10485760)>,
+            dates ARRAY<DATE>,
+            timestamps ARRAY<TIMESTAMP>
+          ) PRIMARY KEY (id)
+        STUFFS
+      end
+
+      def stuffs_index_statement
+        "CREATE INDEX IsStuffsIdPrime ON stuffs(bool, id)"
+      end
+
       def accounts_ddl_statement
         <<-ACCOUNTS
           CREATE TABLE accounts (
@@ -114,10 +152,52 @@ module Acceptance
 
       def schema_ddl_statements
         [
+          stuffs_ddl_statement,
+          stuffs_index_statement,
           accounts_ddl_statement,
           lists_ddl_statement,
           items_ddl_statement
         ]
+      end
+
+      def stuffs_table_types
+        { id: :INT64,
+          int: :INT64,
+          float: :FLOAT64,
+          bool: :BOOL,
+          string: :STRING,
+          byte: :BYTES,
+          date: :DATE,
+          timestamp: :TIMESTAMP,
+          ints: [:INT64],
+          floats: [:FLOAT64],
+          bools: [:BOOL],
+          strings: [:STRING],
+          bytes: [:BYTES],
+          dates: [:DATE],
+          timestamps: [:TIMESTAMP]
+        }
+      end
+
+      def stuffs_random_row id = SecureRandom.int64
+        { id: id,
+          int: rand(0..1000),
+          float: rand(0.0..100.0),
+          bool: [true, false].sample,
+          string: SecureRandom.hex(16),
+          byte: File.open("acceptance/data/face.jpg", "rb"),
+          date: Date.today + rand(-100..100),
+          timestamp: Time.now + rand(-60*60*24.0..60*60*24.0),
+          ints: rand(2..10).times.map { rand(0..1000) },
+          floats: rand(2..10).times.map { rand(0.0..100.0) },
+          bools: rand(2..10).times.map { [true, false].sample },
+          strings: rand(2..10).times.map { SecureRandom.hex(16) },
+          bytes: [File.open("acceptance/data/face.jpg", "rb"),
+                  File.open("acceptance/data/landmark.jpg", "rb"),
+                  File.open("acceptance/data/logo.jpg", "rb")],
+          dates: rand(2..10).times.map { Date.today + rand(-100..100) },
+          timestamps: rand(2..10).times.map { Time.now + rand(-60*60*24.0..60*60*24.0) }
+        }
       end
 
       def default_account_rows

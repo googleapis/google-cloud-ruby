@@ -61,8 +61,9 @@ module Google
               [raw_to_value(obj.to_s),
                Google::Spanner::V1::Type.new(code: :DATE)]
             elsif Array === obj
-              # Use recursion to get the param type for the first item the list
-              nested_param_type = raw_to_param_and_type(obj.first).last
+              # Find the param type for the first non-nil item the list
+              nested_param_value = obj.detect { |x| !x.nil? }
+              nested_param_type = raw_to_param_and_type(nested_param_value).last
               [raw_to_value(obj),
                Google::Spanner::V1::Type.new(
                 code: :ARRAY, array_element_type: nested_param_type)]
