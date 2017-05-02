@@ -160,14 +160,6 @@ module Google
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
-        #
-        #  When `false`, all result are returned in a single reply. This method
-        #  cannot be used to return a result set larger than 10 MiB; if the
-        #  query yields more data than that, the query fails with an error.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -198,29 +190,10 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Query without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.execute "SELECT * FROM users WHERE id = @user_id",
-        #                        params: { user_id: 1 },
-        #                        streaming: false
-        #
-        #   user_row = results.rows.first
-        #   puts "User #{user_row[:id]} is #{user_row[:name]}""
-        #
-        def execute sql, params: nil, transaction: nil, streaming: true
+        def execute sql, params: nil, transaction: nil
           ensure_service!
-          if streaming
-            Results.execute service, path, sql,
-                            params: params, transaction: transaction
-          else
-            Results.from_grpc service.execute_sql \
-              path, sql, params: params, transaction: transaction
-          end
+          Results.execute service, path, sql,
+                          params: params, transaction: transaction
         end
         alias_method :query, :execute
 
@@ -240,10 +213,6 @@ module Google
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -260,30 +229,10 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Read without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.read "users", ["id, "name"], streaming: false
-        #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
-        #   end
-        #
-        def read table, columns, id: nil, limit: nil, transaction: nil,
-                 streaming: true
+        def read table, columns, id: nil, limit: nil, transaction: nil
           ensure_service!
-          if streaming
-            Results.read service, path, table, columns,
-                         id: id, limit: limit, transaction: transaction
-          else
-            Results.from_grpc service.read_table \
-              path, table, columns, id: id, limit: limit,
-                                    transaction: transaction
-          end
+          Results.read service, path, table, columns,
+                       id: id, limit: limit, transaction: transaction
         end
 
         # Creates changes to be applied to rows in the database.

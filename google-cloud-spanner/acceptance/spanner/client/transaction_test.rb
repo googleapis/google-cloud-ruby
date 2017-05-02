@@ -14,13 +14,13 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :non_streaming, :transaction, :spanner do
+describe "Spanner Client", :transaction, :spanner do
   let(:db) { spanner_client }
 
   it "runs a simple query" do
     results = nil
     db.transaction do |tx|
-      results = tx.execute "SELECT 42 AS num", streaming: false
+      results = tx.execute "SELECT 42 AS num"
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -28,8 +28,9 @@ describe "Spanner Client", :non_streaming, :transaction, :spanner do
     results.types.keys.count.must_equal 1
     results.types[:num].must_equal :INT64
 
-    results.rows.count.must_equal 1
-    row = results.rows.first
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
     row.must_be_kind_of Hash
     row.keys.must_equal [:num]
     row[:num].must_equal 42

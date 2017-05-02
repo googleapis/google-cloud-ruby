@@ -55,7 +55,6 @@ describe Google::Cloud::Spanner::Results, :from_enum, :single_response, :mock_sp
 
   it "exists" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

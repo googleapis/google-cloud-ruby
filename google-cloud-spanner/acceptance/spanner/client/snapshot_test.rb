@@ -14,7 +14,7 @@
 
 require "spanner_helper"
 
-describe "Spanner Client", :non_streaming, :snapshot, :spanner do
+describe "Spanner Client", :snapshot, :spanner do
   let(:db) { spanner_client }
 
   before do
@@ -35,7 +35,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
   it "runs a query" do
     results = nil
     db.snapshot do |snp|
-      results = snp.execute "SELECT * FROM accounts", streaming: false
+      results = snp.execute "SELECT * FROM accounts"
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -49,7 +49,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
   it "runs a read" do
     results = nil
     db.snapshot do |snp|
-      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar], streaming: false
+      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar]
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -63,7 +63,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
   it "runs a query with strong option" do
     results = nil
     db.snapshot strong: true do |snp|
-      results = snp.execute "SELECT * FROM accounts", streaming: false
+      results = snp.execute "SELECT * FROM accounts"
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -77,7 +77,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
   it "runs a read with strong option" do
     results = nil
     db.snapshot strong: true do |snp|
-      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar], streaming: false
+      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar]
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -92,7 +92,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
     results = nil
     sleep 1
     db.snapshot timestamp: (Time.now - 1) do |snp|
-      results = snp.execute "SELECT * FROM accounts", streaming: false
+      results = snp.execute "SELECT * FROM accounts"
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -107,7 +107,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
     results = nil
     sleep 1
     db.snapshot timestamp: (Time.now - 1) do |snp|
-      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar], streaming: false
+      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar]
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -122,7 +122,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
     results = nil
     sleep 1
     db.snapshot staleness: 1 do |snp|
-      results = snp.execute "SELECT * FROM accounts", streaming: false
+      results = snp.execute "SELECT * FROM accounts"
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -137,7 +137,7 @@ describe "Spanner Client", :non_streaming, :snapshot, :spanner do
     results = nil
     sleep 1
     db.snapshot staleness: 1 do |snp|
-      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar], streaming: false
+      results = snp.read "accounts", [:account_id, :username, :friends, :active, :reputation, :avatar]
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 

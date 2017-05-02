@@ -90,7 +90,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

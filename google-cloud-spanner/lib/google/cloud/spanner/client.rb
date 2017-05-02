@@ -125,14 +125,6 @@ module Google
         #   fallen behind.
         #
         #   Cannot be used with timestamp.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
-        #
-        #  When `false`, all result are returned in a single reply. This method
-        #  cannot be used to return a result set larger than 10 MiB; if the
-        #  query yields more data than that, the query fails with an error.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -163,22 +155,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Query without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.execute "SELECT * FROM users WHERE id = @user_id",
-        #                        params: { user_id: 1 },
-        #                        streaming: false
-        #
-        #   user_row = results.rows.first
-        #   puts "User #{user_row[:id]} is #{user_row[:name]}""
-        #
-        def execute sql, params: nil, timestamp: nil, staleness: nil,
-                    streaming: true
+        def execute sql, params: nil, timestamp: nil, staleness: nil
           validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
 
@@ -187,8 +164,7 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.execute \
-              sql, params: params, transaction: single_use_tx,
-                   streaming: streaming
+              sql, params: params, transaction: single_use_tx
           end
           results
         end
@@ -227,10 +203,6 @@ module Google
         #   fallen behind.
         #
         #   Cannot be used with timestamp.
-        # @param [Boolean] streaming When `true`, all result are returned as a
-        #   stream. There is no limit on the size of the returned result set.
-        #   However, no individual row in the result set can exceed 100 MiB, and
-        #   no column value can exceed 10 MiB.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -247,21 +219,8 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Read without streaming results:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.read "users", ["id, "name"], streaming: false
-        #
-        #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
-        #   end
-        #
         def read table, columns, id: nil, limit: nil, timestamp: nil,
-                 staleness: nil, streaming: true
+                 staleness: nil
           validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
 
@@ -270,8 +229,7 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.read \
-              table, columns, id: id, limit: limit, transaction: single_use_tx,
-                              streaming: streaming
+              table, columns, id: id, limit: limit, transaction: single_use_tx
           end
           results
         end

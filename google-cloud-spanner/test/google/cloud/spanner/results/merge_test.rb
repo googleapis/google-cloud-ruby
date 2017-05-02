@@ -28,7 +28,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -55,7 +54,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -82,7 +80,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -109,7 +106,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -136,7 +132,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -163,7 +158,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -190,7 +184,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -218,7 +211,6 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

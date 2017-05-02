@@ -14,16 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Transaction, :read, :streaming, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :read, :retry, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
-  let(:transaction_id) { "tx789" }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
-  let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
-  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash1 do
     {
@@ -49,17 +44,37 @@ describe Google::Cloud::Spanner::Transaction, :read, :streaming, :mock_spanner d
     {
       values: [
         { stringValue: "1" },
-        { stringValue: "Charlie" },
-        { boolValue: true},
-        { stringValue: "29" },
-        { numberValue: 0.9 },
-        { stringValue: "2017-01-02T03:04:05.060000000Z" },
-        { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" }
-      ]
+        { stringValue: "Charlie" }
+      ],
+      resumeToken: Base64.strict_encode64("xyz890")
     }
   end
   let :results_hash3 do
+    {
+      values: [
+        { boolValue: true},
+        { stringValue: "29" }
+      ]
+    }
+  end
+  let :results_hash4 do
+    {
+      values: [
+        { numberValue: 0.9 },
+        { stringValue: "2017-01-02T03:04:05.060000000Z" }
+      ],
+      resumeToken: Base64.strict_encode64("abc123")
+    }
+  end
+  let :results_hash5 do
+    {
+      values: [
+        { stringValue: "1950-01-01" },
+        { stringValue: "aW1hZ2U=" },
+      ]
+    }
+  end
+  let :results_hash6 do
     {
       values: [
         { listValue: { values: [ { stringValue: "1"},
@@ -68,71 +83,50 @@ describe Google::Cloud::Spanner::Transaction, :read, :streaming, :mock_spanner d
       ]
     }
   end
-  let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json)].to_enum
+  let(:results_enum1) do
+    [
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
+      GRPC::Aborted,
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
+    ].to_enum
+  end
+  let(:results_enum2) do
+    [
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
+      Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
+    ].to_enum
+  end
+  let(:client) { spanner.client instance_id, database_id, min: 0 }
+
+  after do
+    # Close the client and release the keepalive thread
+    client.instance_variable_get(:@pool).pool = []
+    client.close
   end
 
-  it "can read all rows" do
+  it "retries aborted responses" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil, resume_token: nil, options: default_options]
-    session.service.mocked_service = mock
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, AbortableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, AbortableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: "abc123", options: default_options]
+    spanner.service.mocked_service = mock
 
-    results = transaction.read "my-table", columns
-
-    mock.verify
-
-    assert_results results
-  end
-
-  it "can read rows by id" do
-    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-
-    mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, limit: nil, resume_token: nil, options: default_options]
-    session.service.mocked_service = mock
-
-    results = transaction.read "my-table", columns, id: [1, 2, 3]
-
-    mock.verify
+    results = client.read "my-table", columns
 
     assert_results results
-  end
-
-  it "can read rows with limit" do
-    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-
-    mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: 5, resume_token: nil, options: default_options]
-    session.service.mocked_service = mock
-
-    results = transaction.read "my-table", columns, limit: 5
 
     mock.verify
-
-    assert_results results
-  end
-
-  it "can read just one row with limit" do
-    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-
-    mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: tx_selector, limit: 1, resume_token: nil, options: default_options]
-    session.service.mocked_service = mock
-
-    results = transaction.read "my-table", columns, id: 1, limit: 1
-
-    mock.verify
-
-    assert_results results
   end
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.must_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash

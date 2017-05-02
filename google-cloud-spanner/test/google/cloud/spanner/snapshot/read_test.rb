@@ -25,7 +25,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
   let(:snapshot) { Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
-  let :results_hash do
+  let :results_hash1 do
     {
       metadata: {
         rowType: {
@@ -42,35 +42,46 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
                                            arrayElementType: { code: "INT64" } } }
           ]
         }
-      },
-     rows: [{
-        values: [
-          { stringValue: "1" },
-          { stringValue: "Charlie" },
-          { boolValue: true},
-          { stringValue: "29" },
-          { numberValue: 0.9 },
-          { stringValue: "2017-01-02T03:04:05.060000000Z" },
-          { stringValue: "1950-01-01" },
-          { stringValue: "aW1hZ2U=" },
-          { listValue: { values: [ { stringValue: "1"},
-                                   { stringValue: "2"},
-                                   { stringValue: "3"} ]}}
-        ]
       }
-    ]}
+    }
   end
-  let(:results_json) { results_hash.to_json }
-  let(:results_grpc) { Google::Spanner::V1::ResultSet.decode_json results_json }
+  let :results_hash2 do
+    {
+      values: [
+        { stringValue: "1" },
+        { stringValue: "Charlie" },
+        { boolValue: true},
+        { stringValue: "29" },
+        { numberValue: 0.9 },
+        { stringValue: "2017-01-02T03:04:05.060000000Z" },
+        { stringValue: "1950-01-01" },
+        { stringValue: "aW1hZ2U=" }
+      ]
+    }
+  end
+  let :results_hash3 do
+    {
+      values: [
+        { listValue: { values: [ { stringValue: "1"},
+                                 { stringValue: "2"},
+                                 { stringValue: "3"} ]}}
+      ]
+    }
+  end
+  let(:results_enum) do
+    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
+     Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
+     Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json)].to_enum
+  end
 
   it "can read all rows" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = snapshot.read "my-table", columns, streaming: false
+    results = snapshot.read "my-table", columns
 
     mock.verify
 
@@ -81,10 +92,10 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, limit: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = snapshot.read "my-table", columns, id: [1, 2, 3], streaming: false
+    results = snapshot.read "my-table", columns, id: [1, 2, 3]
 
     mock.verify
 
@@ -95,10 +106,10 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: 5, options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, limit: 5, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = snapshot.read "my-table", columns, limit: 5, streaming: false
+    results = snapshot.read "my-table", columns, limit: 5
 
     mock.verify
 
@@ -109,10 +120,10 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :read, results_grpc, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: tx_selector, limit: 1, options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: tx_selector, limit: 1, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = snapshot.read "my-table", columns, id: 1, limit: 1, streaming: false
+    results = snapshot.read "my-table", columns, id: 1, limit: 1
 
     mock.verify
 
@@ -121,7 +132,6 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
 
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.wont_be :streaming?
 
     results.types.wont_be :nil?
     results.types.must_be_kind_of Hash
@@ -136,8 +146,9 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     results.types[:avatar].must_equal      :BYTES
     results.types[:project_ids].must_equal [:INT64]
 
-    results.rows.count.must_equal 1
-    row = results.rows.first
+    rows = results.rows.to_a # grab them all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
     row.must_be_kind_of Hash
     row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     row[:id].must_equal 1
