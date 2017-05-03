@@ -36,7 +36,7 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
-  Max: 25
+  Max: 20
 Metrics/MethodLength:
   Max: 20
   Exclude:
@@ -53,3 +53,5 @@ Style/FileName:
   Enabled: false # for lib/google-cloud-error_reporting.rb file
 Lint/RescueException:
   Enabled: false # for lib/google/cloud/error_reporting/middleware.rb file
+Lint/AmbiguousOperator:
+  Enabled: false # for lib/google/cloud/error_reporting/project.rb file

@@ -13,16 +13,10 @@
 # limitations under the License.
 
 
-require "stackdriver/core/configuration"
-require "stackdriver/core/trace_context"
-require "stackdriver/core/version"
-
-module Stackdriver
-  ##
-  # The Stackdriver::Core module is a namespace for common types and shared
-  # utilities used by the Google Stackdriver libraries. Most applications will
-  # not need to use these classes directly.
-  #
-  module Core
+module Google
+  module Cloud
+    module ErrorReporting
+      VERSION = "0.24.0".freeze
+    end
   end
 end

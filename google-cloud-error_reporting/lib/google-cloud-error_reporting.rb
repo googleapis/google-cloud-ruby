@@ -13,12 +13,100 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .logging and
-# #logging methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler
 
 
 gem "google-cloud-core"
 require "google/cloud"
 
-# There is no Google::Cloud integration to add.
+module Google
+  module Cloud
+    ##
+    # Create a new object for connecting to the Stackdriver Error Reporting
+    # service. Each call creates a new connection.
+    #
+    # For more information on connecting to Google Cloud see the [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
+    #
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
+    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
+    #
+    # @return [Google::Cloud::ErrorReporting::Project]
+    #
+    # @example
+    #   require "google/cloud/error_reporting"
+    #
+    #   gcloud = Google::Cloud.new "GCP_Project_ID",
+    #                              "/path/to/gcp/secretkey.json"
+    #   error_reporting = gcloud.error_reporting
+    #
+    #   error_event = error_reporting.error_event "Error with Backtrace",
+    #                                             timestamp: Time.now,
+    #                                             service_name: "my_app_name",
+    #                                             service_version: "v8"
+    #   error_reporting.report error_event
+    #
+    def error_reporting scope: nil, timeout: nil, client_config: nil
+      Google::Cloud.error_reporting @project, @keyfile,
+                                    scope: scope,
+                                    timeout: (timeout || @timeout),
+                                    client_config: client_config
+    end
+
+
+    ##
+    # Create a new object for connecting to the Stackdriver Error Reporting
+    # service. Each call creates a new connection.
+    #
+    # For more information on connecting to Google Cloud see the [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
+    #
+    # @param [String] project Google Cloud Platform project identifier for the
+    #   Stackdriver Error Reporting service you are connecting to. Use
+    #   Project.default_project if not provided.
+    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+    #   file path the file must be readable.
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
+    #   set of resources and operations that the connection  can access. See
+    #   [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
+    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Hash] client_config A hash of values to override the default
+    #   behavior of the API client. Optional.
+    #
+    # @return [Google::Cloud::ErrorReporting::Project]
+    #
+    # @example
+    #   require "google/cloud/error_reporting"
+    #
+    #   gcloud = Google::Cloud.error_reporting "GCP_Project_ID",
+    #                                          "/path/to/gcp/secretkey.json"
+    #
+    #   error_event = error_reporting.error_event "Error with Backtrace",
+    #                                             timestamp: Time.now,
+    #                                             service_name: "my_app_name",
+    #                                             service_version: "v8"
+    #   error_reporting.report error_event
+    #
+    def self.error_reporting project = nil, keyfile = nil, scope: nil,
+                             timeout: nil, client_config: nil
+      require "google/cloud/error_reporting"
+      Google::Cloud::ErrorReporting.new project: project, keyfile: keyfile,
+                                        scope: scope, timeout: timeout,
+                                        client_config: client_config
+    end
+  end
+end
