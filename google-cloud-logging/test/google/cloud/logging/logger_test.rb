@@ -29,14 +29,16 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
   let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
 
-  def write_req_args severity, extra_labels: {}, log_name_override: nil
+  def write_req_args severity, extra_labels: {}, log_name_override: nil,
+                     trace: nil
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
-    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
-                                                 severity: severity,
-                                                 timestamp: timestamp_grpc)]
+    entry = Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
+                                              severity: severity,
+                                              timestamp: timestamp_grpc)
+    entry.trace = trace if trace
     [
-      entries,
+      [entry],
       log_name: "projects/test/logs/#{log_name_override || log_name}",
       resource: resource.to_grpc,
       labels: labels.merge(extra_labels),
@@ -178,13 +180,15 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
     it "passes request info to log writes" do
       mock = Minitest::Mock.new
-      args = write_req_args :ERROR, log_name_override: "my_app_log",
-                            extra_labels: { "traceId" => "my_trace_id" }
+      trace_id = "my_trace_id"
+      log_name = "my_app_log"
+      args = write_req_args :ERROR, log_name_override: log_name,
+                            extra_labels: { "traceId" => trace_id },
+                            trace: "projects/#{project}/traces/#{trace_id}"
       mock.expect :write_log_entries, write_res, args
       logging.service.mocked_logging = mock
 
-      info = Google::Cloud::Logging::Logger::RequestInfo.new \
-        "my_trace_id", "my_app_log"
+      info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
       logger.add_request_info info: info
 
       Time.stub :now, timestamp do

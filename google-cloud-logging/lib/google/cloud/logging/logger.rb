@@ -83,6 +83,11 @@ module Google
         attr_accessor :datetime_format
 
         ##
+        # The project ID this logger is sending data to. If set, this value is
+        # used to set the trace field of log entries.
+        attr_accessor :project
+
+        ##
         # This logger treats progname as an alias for log_name.
         def progname= name
           @log_name = name
@@ -146,6 +151,10 @@ module Google
           # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
           @datetime_format = ""
+
+          # The writer is usually a Project or AsyncWriter.
+          logging = @writer.respond_to?(:logging) ? @writer.logging : @writer
+          @project = logging.project if logging.respond_to? :project
         end
 
         ##
@@ -460,7 +469,12 @@ module Google
           info = request_info
           if info
             actual_log_name = info.log_name || actual_log_name
-            merged_labels["traceId"] = info.trace_id unless info.trace_id.nil?
+            unless info.trace_id.nil?
+              merged_labels["traceId"] = info.trace_id
+              unless @project.nil?
+                entry.trace = "projects/#{@project}/traces/#{info.trace_id}"
+              end
+            end
           end
           merged_labels = labels.merge(merged_labels) unless labels.nil?
 
