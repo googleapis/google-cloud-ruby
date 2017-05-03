@@ -208,6 +208,9 @@ module Google
         # @param [Object, Array<Object>] id A single, or list of keys to match
         #   returned data to. Values should have exactly as many elements as
         #   there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
@@ -229,10 +232,12 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, transaction: nil
+        def read table, columns, id: nil, index: nil, limit: nil,
+                 transaction: nil
           ensure_service!
           Results.read service, path, table, columns,
-                       id: id, limit: limit, transaction: transaction
+                       id: id, index: index, limit: limit,
+                       transaction: transaction
         end
 
         # Creates changes to be applied to rows in the database.

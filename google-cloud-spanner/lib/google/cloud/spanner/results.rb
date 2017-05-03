@@ -246,8 +246,9 @@ module Google
 
         # @private
         def self.read service, session_path, table, columns, id: nil,
-                      limit: nil, transaction: nil
-          read_options = { id: id, limit: limit, transaction: transaction }
+                      index: nil, limit: nil, transaction: nil
+          read_options = { id: id, index: index, limit: limit,
+                           transaction: transaction }
           enum = service.streaming_read_table \
             session_path, table, columns, read_options
           from_enum(enum, service).tap do |results|

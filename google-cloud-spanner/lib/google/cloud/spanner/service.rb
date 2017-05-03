@@ -310,7 +310,7 @@ module Google
           end
         end
 
-        def read_table session_name, table_name, columns, id: nil,
+        def read_table session_name, table_name, columns, id: nil, index: nil,
                        transaction: nil, limit: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
@@ -324,12 +324,14 @@ module Google
           execute do
             service.read \
               session_name, table_name, columns, key_set,
-              transaction: transaction, limit: limit, options: opts
+              transaction: transaction, index: index, limit: limit,
+              options: opts
           end
         end
 
         def streaming_read_table session_name, table_name, columns, id: nil,
-                                 transaction: nil, limit: nil, resume_token: nil
+                                 index: nil, transaction: nil, limit: nil,
+                                 resume_token: nil
           columns.map!(&:to_s)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
           unless id.nil?
@@ -342,7 +344,7 @@ module Google
           execute do
             service.streaming_read \
               session_name, table_name, columns, key_set,
-              transaction: transaction, limit: limit,
+              transaction: transaction, index: index, limit: limit,
               resume_token: resume_token, options: opts
           end
         end

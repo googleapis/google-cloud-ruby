@@ -74,7 +74,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
     results = session.read "my-table", columns
@@ -88,10 +88,24 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
     results = session.read "my-table", columns, id: [1, 2, 3]
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "can read rows with index" do
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1,1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2,2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3,3]).list_value]), transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, options: default_options]
+    session.service.mocked_service = mock
+
+    results = session.read "my-table", columns, id: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
 
     mock.verify
 
@@ -102,7 +116,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: 5, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: 5, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
     results = session.read "my-table", columns, limit: 5
@@ -116,7 +130,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: nil, limit: 1, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: nil, index: nil, limit: 1, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
     results = session.read "my-table", columns, id: 1, limit: 1
