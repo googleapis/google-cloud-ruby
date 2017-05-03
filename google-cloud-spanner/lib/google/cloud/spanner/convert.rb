@@ -262,6 +262,23 @@ module Google
 
             Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
           end
+
+          def to_key_range range
+            range_opts = {
+              start_closed: raw_to_value(Array(range.begin)).list_value,
+              end_closed: raw_to_value(Array(range.end)).list_value }
+
+            if range.respond_to?(:exclude_begin?) && range.exclude_begin?
+              range_opts[:start_open] = range_opts[:start_closed]
+              range_opts.delete :start_closed
+            end
+            if range.exclude_end?
+              range_opts[:end_open] = range_opts[:end_closed]
+              range_opts.delete :end_closed
+            end
+
+            Google::Spanner::V1::KeyRange.new range_opts
+          end
         end
 
         # rubocop:enable all

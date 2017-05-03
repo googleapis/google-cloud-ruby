@@ -205,9 +205,9 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys to match
-        #   returned data to. Values should have exactly as many elements as
-        #   there are columns in the primary key.
+        # @param [Object, Array<Object>] id A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         # @param [String] index The name of an index to use instead of the
         #   table's primary key when interpreting `id` and sorting result rows.
         #   Optional.

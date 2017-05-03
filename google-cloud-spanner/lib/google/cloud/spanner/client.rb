@@ -19,6 +19,7 @@ require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
+require "google/cloud/spanner/range"
 
 module Google
   module Cloud
@@ -178,9 +179,9 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys to match
-        #   returned data to. Values should have exactly as many elements as
-        #   there are columns in the primary key.
+        # @param [Object, Array<Object>] id A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         # @param [String] index The name of an index to use instead of the
         #   table's primary key when interpreting `id` and sorting result rows.
         #   Optional.
@@ -543,6 +544,40 @@ module Google
             yield snp if block_given?
           end
           nil
+        end
+
+        ##
+        # Creates a Spanner Range. This can be used in place of a Ruby Range
+        # when needing to excluse the beginning value.
+        #
+        # @param [Object] beginning The object that defines the beginning of the
+        #   range.
+        # @param [Object] ending The object that defines the end of the range.
+        # @param [Boolean] exclude_begin Determines if the range excludes its
+        # beginning value. Default is `false`.
+        # @param [Boolean] exclude_end Determines if the range excludes its
+        # ending value. Default is `false`.
+        #
+        # @return [Google::Cloud::Spanner::Range]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   key_range = db.range 1, 100
+        #   results = db.read "users", ["id, "name"], id: key_range
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        def range beginning, ending, exclude_begin: false, exclude_end: false
+          Range.new beginning, ending,
+                    exclude_begin: exclude_begin,
+                    exclude_end: exclude_end
         end
 
         ##

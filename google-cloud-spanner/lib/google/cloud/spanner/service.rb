@@ -313,17 +313,10 @@ module Google
         def read_table session_name, table_name, columns, id: nil, index: nil,
                        transaction: nil, limit: nil
           columns.map!(&:to_s)
-          key_set = Google::Spanner::V1::KeySet.new(all: true)
-          unless id.nil?
-            key_list = Array(id).map do |i|
-              Convert.raw_to_value(Array(i)).list_value
-            end
-            key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
-          end
           opts = default_options_from_session session_name
           execute do
             service.read \
-              session_name, table_name, columns, key_set,
+              session_name, table_name, columns, key_set(id),
               transaction: transaction, index: index, limit: limit,
               options: opts
           end
@@ -333,17 +326,10 @@ module Google
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil
           columns.map!(&:to_s)
-          key_set = Google::Spanner::V1::KeySet.new(all: true)
-          unless id.nil?
-            key_list = Array(id).map do |i|
-              Convert.raw_to_value(Array(i)).list_value
-            end
-            key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
-          end
           opts = default_options_from_session session_name
           execute do
             service.streaming_read \
-              session_name, table_name, columns, key_set,
+              session_name, table_name, columns, key_set(id),
               transaction: transaction, index: index, limit: limit,
               resume_token: resume_token, options: opts
           end
@@ -393,6 +379,30 @@ module Google
         end
 
         protected
+
+        def key_set keys
+          return Google::Spanner::V1::KeySet.new(all: true) if keys.nil?
+          if keys_are_ranges? keys
+            keys = [keys] unless keys.is_a? Array
+            key_ranges = keys.map do |r|
+              Convert.to_key_range(r)
+            end
+            return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
+          end
+          key_list = Array(keys).map do |i|
+            Convert.raw_to_value(Array(i)).list_value
+          end
+          Google::Spanner::V1::KeySet.new keys: key_list
+        end
+
+        def keys_are_ranges? keys
+          keys = [keys] unless keys.is_a? Array
+          keys.each do |key|
+            return true if key.is_a? ::Range
+            return true if key.is_a? Google::Cloud::Spanner::Range
+          end
+          false
+        end
 
         def default_options_from_session session_name
           default_prefix = session_name.split("/sessions/").first

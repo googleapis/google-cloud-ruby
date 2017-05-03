@@ -116,6 +116,21 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     assert_results results
   end
 
+  it "can read rows with index and range" do
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, options: default_options]
+    session.service.mocked_service = mock
+
+    lookup_range = snapshot.range [1,1], [3,3]
+    results = snapshot.read "my-table", columns, id: lookup_range, index: "MyTableCompositeKey"
+
+    mock.verify
+
+    assert_results results
+  end
+
   it "can read rows with limit" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
