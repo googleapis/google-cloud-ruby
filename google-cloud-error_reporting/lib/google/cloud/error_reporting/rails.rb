@@ -50,7 +50,8 @@ module Google
         config.google_cloud.error_reporting = ActiveSupport::OrderedOptions.new
 
         initializer "Google.Cloud.ErrorReporting" do |app|
-          if self.class.use_error_reporting? app.config
+          use_error_reporting = self.class.use_error_reporting? app.config
+          if use_error_reporting
             er_config = Railtie.parse_rails_config app.config
 
             project_id = er_config[:project_id]
@@ -78,6 +79,8 @@ module Google
                                         service_name: service_name,
                                         service_version: service_version
           end
+
+          Google::Cloud.configure.use_error_reporting = use_error_reporting
         end
 
         ##
@@ -123,7 +126,7 @@ module Google
 
           # Otherwise return true if Rails is running in production or
           # config.google_cloud.use_error_reporting is explicitly true
-          Rails.env.production? || use_error_reporting
+          Rails.env.production? || use_error_reporting || false
         end
 
         ##

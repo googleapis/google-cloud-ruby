@@ -209,14 +209,13 @@ module Google
         # @return [ErrorEvent] An ErrorEvent object containing information
         #   from the given exception
         def self.from_exception exception
-          if exception.backtrace.nil?
-            message = exception.message
-          else
-            backtrace = exception.backtrace
+          backtrace = exception.backtrace
+          message = exception.message
+
+          unless backtrace.nil?
             error_location = backtrace.first
 
-            message = "#{error_location}: #{exception.message} " \
-                      "(#{exception.class})\n\t" +
+            message = "#{error_location}: #{message} (#{exception.class})\n\t" +
                       backtrace.drop(1).join("\n\t")
             file_path, line_number, function_name = error_location.split(":")
             function_name = function_name.to_s[/`(.*)'/, 1]

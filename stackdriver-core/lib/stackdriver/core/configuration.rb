@@ -21,7 +21,7 @@ module Stackdriver
     # predefined options.
     #
     # @example
-    #   options = [opt1, {category1: [opt2]}, {category2: [opt3]}]
+    #   options = [:opt1, {category1: [:opt2]}, {category2: [:opt3]}]
     #   config = Stackdriver::Core::Configuration.new options: options
     #
     #   config.opt1 = true
@@ -34,17 +34,48 @@ module Stackdriver
     #
     class Configuration
       ##
-      # @private Constructs a new instance of Configuration object.
+      # Constructs a new instance of Configuration object.
       #
       # @param [Array<Symbol, Hash<Symbol, Array>>] options A nested list of
       #   predefined option keys. Symbols in array will be option keys for this
       #   level. Nested hash translates to nested Configuration objects with
       #   nested options.
       #
-      def initialize options: []
+      def initialize options
         @configs = {}
 
-        init_options @configs, options
+        init_options options
+      end
+
+      ##
+      # Add more valid options to a Configuration object
+      #
+      # @param [Array<Symbol, Hash<Symbol, Array>>] options A nested list of
+      #   predefined option keys. Symbols in array will be option keys for this
+      #   level. Nested hash translates to nested Configuration objects with
+      #   nested options.
+      #
+      # @example
+      #   config = Stackdriver::Core::Configuration.new options: [:opt1]
+      #   config.opt2 #=> RuntimeError: Unrecognized option: opt2
+      #
+      #   config.add_otpions options: [:opt2]
+      #   config.opt2 #=> nil
+      #
+      def add_options options
+        init_options options
+      end
+
+      ##
+      # Check if the Configuration object has this option
+      #
+      # @param [Symbol] option The key to check for.
+      #
+      # @return [Boolean] True if the inquired key is a valid option for this
+      #   Configuration object. False otherwise.
+      #
+      def option? option
+        @configs.key? option
       end
 
       ##
@@ -57,7 +88,7 @@ module Stackdriver
         assignment = !match[2].empty?
 
         if @configs.key? config_key
-          if @configs[config_key].is_a? Configuration
+          if @configs[config_key].is_a? Stackdriver::Core::Configuration
             if assignment
               fail "#{config_key} is not a configuration option"
             else
@@ -77,14 +108,14 @@ module Stackdriver
 
       private
 
-      def init_options configs, options
+      def init_options options
         options.each do |option|
           case option
             when Symbol
-              configs[option] = nil
+              @configs[option] = nil
             when Hash
               option.each do |k, v|
-                configs[k] = self.class.new options: v
+                @configs[k] = self.class.new v
               end
             else
               fail ArgumentError \

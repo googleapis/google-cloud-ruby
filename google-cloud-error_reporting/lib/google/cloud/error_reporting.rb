@@ -196,12 +196,17 @@ module Google
       #   the Google::Cloud::ErrorReporting module uses.
       #
       def self.configure
-        @@config ||=
-          ::Stackdriver::Core::Configuration.new options: CONFIG_OPTIONS
+        # Initialize :error_reporting as a nested Configuration under
+        # Google::Cloud if haven't already
+        unless Google::Cloud.configure.option? :error_reporting
+          Google::Cloud.configure.add_options [{
+            error_reporting: CONFIG_OPTIONS
+          }]
+        end
 
-        yield @@config if block_given?
+        yield Google::Cloud.configure.error_reporting if block_given?
 
-        @@config
+        Google::Cloud.configure.error_reporting
       end
 
       ##
@@ -253,6 +258,8 @@ module Google
       #   service.
       #
       def self.report exception, service_name: nil, service_version: nil, &block
+        return if Google::Cloud.configure.use_error_reporting == false
+
         unless defined? @@default_client
           project_id = configure.project_id
           keyfile = configure.keyfile
