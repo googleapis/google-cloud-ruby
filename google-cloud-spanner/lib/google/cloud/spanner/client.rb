@@ -471,12 +471,11 @@ module Google
             tx = Transaction.from_grpc(tx_grpc, session)
             begin
               block.call tx
-            rescue Google::Cloud::AbortedError
-              # TODO: retrieve delay from ABORTED error
-              # Retry the entire transaction
-              tx2_grpc = @project.service.begin_transaction session.path
-              tx2 = Transaction.from_grpc(tx2_grpc, session)
-              block.call tx2
+            rescue Google::Cloud::AbortedError => err
+              sleep delay_from_aborted(err)
+              tx_grpc = @project.service.begin_transaction session.path
+              tx = Transaction.from_grpc(tx_grpc, session)
+              retry
             end
           end
           nil
@@ -598,6 +597,25 @@ module Google
           fail ArgumentError,
                "Can only provide one of the following arguments: " \
                "(strong, timestamp, staleness)"
+        end
+
+        ##
+        # Retrieves the delay value from Google::Cloud::AbortedError
+        def delay_from_aborted err
+          return 0 if err.nil?
+          if err.respond_to?(:metadata) && err.metadata["retryDelay"]
+            # a correct metadata will look like this:
+            # "{\"retryDelay\":{\"seconds\":60}}"
+            seconds = err.metadata["retryDelay"]["seconds"].to_i
+            nanos = err.metadata["retryDelay"]["nanos"].to_i
+            return seconds if nanos.zero?
+            return seconds + (nanos / 1000000000.0)
+          end
+          # No metadata? Try the inner error
+          delay_from_aborted(err.cause)
+        rescue
+          # Any error gets the default delay, which is 0
+          return 0
         end
       end
     end
