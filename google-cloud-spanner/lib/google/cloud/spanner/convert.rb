@@ -137,11 +137,14 @@ module Google
             end
           end
 
-          def row_to_raw row_types, row
-            # this calls to_ruby on the value objects.
-            Hash[row_types.zip(row).map do |field, value|
+          def row_to_pairs row_types, row
+            row_types.zip(row).map do |field, value|
               [field.name.to_sym, value_to_raw(value, field.type)]
-            end]
+            end
+          end
+
+          def row_to_raw row_types, row
+            Hash[row_to_pairs(row_types, row)]
           end
 
           def value_to_raw value, type
