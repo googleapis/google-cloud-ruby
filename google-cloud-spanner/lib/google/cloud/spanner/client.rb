@@ -106,26 +106,48 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id -> 1`.
-        # @param [Time, DateTime] timestamp Executes all reads at a
-        #   timestamp >= +timestamp+.
+        # @param [Hash] single_use Perform the read with a single-use snapshot
+        #   (read-only transaction). The snapshot can be created by providing
+        #   just one of the following options in the hash:
         #
-        #   This is useful for requesting fresher data than some previous read,
-        #   or data that is fresh enough to observe the effects of some
-        #   previously committed transaction whose timestamp is known.
+        #   * `:strong` (true, false) Read at a timestamp where all previously
+        #     committed transactions are visible.
+        #   * `:timestamp` (Time, DateTime) Executes all reads at the given
+        #     timestamp. Unlike other modes, reads at a specific timestamp are
+        #     repeatable; the same read at the same timestamp always returns the
+        #     same data. If the timestamp is in the future, the read will block
+        #     until the specified timestamp, modulo the read's deadline.
         #
-        #   Cannot be used with staleness.
-        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
-        #   max_staleness+ seconds. Guarantees that all writes that have
-        #   committed more than the specified number of seconds ago are visible.
-        #   Because Cloud Spanner chooses the exact timestamp, this mode works
-        #   even if the client's local clock is substantially skewed from Cloud
-        #   Spanner commit timestamps.
+        #     Useful for large scale consistent reads such as mapreduces, or for
+        #     coordinating many reads against a consistent snapshot of the data.
+        #   * `:staleness` (Numeric) Executes all reads at a timestamp that is
+        #     exactly the number of seconds provided old. The timestamp is
+        #     chosen soon after the read is started.
         #
-        #   Useful for reading the freshest data available at a nearby replica,
-        #   while bounding the possible staleness if the local replica has
-        #   fallen behind.
+        #     Guarantees that all writes that have committed more than the
+        #     specified number of seconds ago are visible. Because Cloud Spanner
+        #     chooses the exact timestamp, this mode works even if the client's
+        #     local clock is substantially skewed from Cloud Spanner commit
+        #     timestamps.
         #
-        #   Cannot be used with timestamp.
+        #     Useful for reading at nearby replicas without the distributed
+        #     timestamp negotiation overhead of single-use `bounded_staleness`.
+        #   * `:bounded_timestamp` (Time, DateTime) Executes all reads at a
+        #     timestamp greater than the value provided.
+        #
+        #     This is useful for requesting fresher data than some previous
+        #     read, or data that is fresh enough to observe the effects of some
+        #     previously committed transaction whose timestamp is known.
+        #   * `:bounded_staleness` (Numeric) Read data at a timestamp greater
+        #     than or equal to the number of seconds provided. Guarantees that
+        #     all writes that have committed more than the specified number of
+        #     seconds ago are visible. Because Cloud Spanner chooses the exact
+        #     timestamp, this mode works even if the client's local clock is
+        #     substantially skewed from Cloud Spanner commit timestamps.
+        #
+        #     Useful for reading the freshest data available at a nearby
+        #     replica, while bounding the possible staleness if the local
+        #     replica has fallen behind.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -156,12 +178,11 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def execute sql, params: nil, timestamp: nil, staleness: nil
-          validate_single_use_args! timestamp: timestamp, staleness: staleness
+        def execute sql, params: nil, single_use: {}
+          validate_single_use_args! single_use
           ensure_service!
 
-          single_use_tx = single_use_transaction timestamp: timestamp,
-                                                 staleness: staleness
+          single_use_tx = single_use_transaction single_use
           results = nil
           @pool.with_session do |session|
             results = session.execute \
@@ -187,26 +208,48 @@ module Google
         #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
-        # @param [Time, DateTime] timestamp Executes all reads at a
-        #   timestamp >= +timestamp+.
+        # @param [Hash] single_use Perform the read with a single-use snapshot
+        #   (read-only transaction). The snapshot can be created by providing
+        #   just one of the following options in the hash:
         #
-        #   This is useful for requesting fresher data than some previous read,
-        #   or data that is fresh enough to observe the effects of some
-        #   previously committed transaction whose timestamp is known.
+        #   * `:strong` (true, false) Read at a timestamp where all previously
+        #     committed transactions are visible.
+        #   * `:timestamp` (Time, DateTime) Executes all reads at the given
+        #     timestamp. Unlike other modes, reads at a specific timestamp are
+        #     repeatable; the same read at the same timestamp always returns the
+        #     same data. If the timestamp is in the future, the read will block
+        #     until the specified timestamp, modulo the read's deadline.
         #
-        #   Cannot be used with staleness.
-        # @param [Numeric] staleness Read data at a timestamp >= +NOW -
-        #   max_staleness+ seconds. Guarantees that all writes that have
-        #   committed more than the specified number of seconds ago are visible.
-        #   Because Cloud Spanner chooses the exact timestamp, this mode works
-        #   even if the client's local clock is substantially skewed from Cloud
-        #   Spanner commit timestamps.
+        #     Useful for large scale consistent reads such as mapreduces, or for
+        #     coordinating many reads against a consistent snapshot of the data.
+        #   * `:staleness` (Numeric) Executes all reads at a timestamp that is
+        #     exactly the number of seconds provided old. The timestamp is
+        #     chosen soon after the read is started.
         #
-        #   Useful for reading the freshest data available at a nearby replica,
-        #   while bounding the possible staleness if the local replica has
-        #   fallen behind.
+        #     Guarantees that all writes that have committed more than the
+        #     specified number of seconds ago are visible. Because Cloud Spanner
+        #     chooses the exact timestamp, this mode works even if the client's
+        #     local clock is substantially skewed from Cloud Spanner commit
+        #     timestamps.
         #
-        #   Cannot be used with timestamp.
+        #     Useful for reading at nearby replicas without the distributed
+        #     timestamp negotiation overhead of single-use `bounded_staleness`.
+        #   * `:bounded_timestamp` (Time, DateTime) Executes all reads at a
+        #     timestamp greater than the value provided.
+        #
+        #     This is useful for requesting fresher data than some previous
+        #     read, or data that is fresh enough to observe the effects of some
+        #     previously committed transaction whose timestamp is known.
+        #   * `:bounded_staleness` (Numeric) Read data at a timestamp greater
+        #     than or equal to the number of seconds provided. Guarantees that
+        #     all writes that have committed more than the specified number of
+        #     seconds ago are visible. Because Cloud Spanner chooses the exact
+        #     timestamp, this mode works even if the client's local clock is
+        #     substantially skewed from Cloud Spanner commit timestamps.
+        #
+        #     Useful for reading the freshest data available at a nearby
+        #     replica, while bounding the possible staleness if the local
+        #     replica has fallen behind.
         #
         # @return [Google::Cloud::Spanner::Results]
         #
@@ -224,12 +267,11 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 timestamp: nil, staleness: nil
-          validate_single_use_args! timestamp: timestamp, staleness: staleness
+                 single_use: {}
+          validate_single_use_args! single_use
           ensure_service!
 
-          single_use_tx = single_use_transaction timestamp: timestamp,
-                                                 staleness: staleness
+          single_use_tx = single_use_transaction single_use
           results = nil
           @pool.with_session do |session|
             results = session.read \
@@ -659,22 +701,37 @@ module Google
 
         ##
         # Check for valid snapshot arguments
-        def validate_single_use_args! timestamp: nil, staleness: nil
-          return true if timestamp.nil? || staleness.nil?
+        def validate_single_use_args! opts = {}
+          return true if opts.nil? || opts.empty?
+          valid_keys = [:strong, :timestamp, :staleness, :bounded_timestamp,
+                        :bounded_staleness]
+          if opts.keys.count == 1 && valid_keys.include?(opts.keys.first)
+            return true
+          end
           fail ArgumentError,
-               "Can only provide one of the following arguments: " \
-               "(timestamp, staleness)"
+               "Must provide only one of the following single_use values: " \
+               "#{valid_keys}"
         end
 
         ##
         # Create a single-use TransactionSelector
-        def single_use_transaction timestamp: nil, staleness: nil
-          return nil if timestamp.nil? && staleness.nil?
+        def single_use_transaction opts = {}
+          return nil if opts.nil? || opts.empty?
+
+          exact_timestamp = Convert.time_to_timestamp opts[:timestamp]
+          exact_staleness = Convert.number_to_duration opts[:staleness]
+          bnded_timestamp = Convert.time_to_timestamp opts[:bounded_timestamp]
+          bnded_staleness = Convert.number_to_duration opts[:bounded_staleness]
+
           Google::Spanner::V1::TransactionSelector.new(single_use:
             Google::Spanner::V1::TransactionOptions.new(read_only:
               Google::Spanner::V1::TransactionOptions::ReadOnly.new({
-                min_read_timestamp: Convert.time_to_timestamp(timestamp),
-                max_staleness: Convert.number_to_duration(staleness)
+                strong: opts[:strong],
+                read_timestamp: exact_timestamp,
+                exact_staleness: exact_staleness,
+                min_read_timestamp: bnded_timestamp,
+                max_staleness: bnded_staleness,
+                return_read_timestamp: true
               }.delete_if { |_, v| v.nil? })))
         end
 

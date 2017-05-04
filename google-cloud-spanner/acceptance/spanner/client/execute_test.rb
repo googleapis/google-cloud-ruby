@@ -33,8 +33,24 @@ describe "Spanner Client", :execute, :spanner do
     row[:num].must_equal 42
   end
 
+  it "runs a simple query using a single-use strong option" do
+    results = db.execute "SELECT 42 AS num", single_use: { strong: true }
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
   it "runs a simple query using a single-use timestamp option" do
-    results = db.execute "SELECT 42 AS num", timestamp: (Time.now - 60)
+    results = db.execute "SELECT 42 AS num", single_use: { timestamp: (Time.now - 60) }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
     results.types.must_be_kind_of Hash
@@ -50,7 +66,39 @@ describe "Spanner Client", :execute, :spanner do
   end
 
   it "runs a simple query using a single-use staleness option" do
-    results = db.execute "SELECT 42 AS num", staleness: 60
+    results = db.execute "SELECT 42 AS num", single_use: { staleness: 60 }
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple query using a single-use bounded_timestamp option" do
+    results = db.execute "SELECT 42 AS num", single_use: { bounded_timestamp: (Time.now - 60) }
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.types.must_be_kind_of Hash
+    results.types.keys.count.must_equal 1
+    results.types[:num].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Hash
+    row.keys.must_equal [:num]
+    row[:num].must_equal 42
+  end
+
+  it "runs a simple query using a single-use bounded_staleness option" do
+    results = db.execute "SELECT 42 AS num", single_use: { bounded_staleness: 60 }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
     results.types.must_be_kind_of Hash
