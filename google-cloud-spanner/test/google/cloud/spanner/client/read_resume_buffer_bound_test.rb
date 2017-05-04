@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :read, :retry, :buffer_bound, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -176,14 +176,14 @@ describe Google::Cloud::Spanner::Client, :read, :retry, :buffer_bound, :mock_spa
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      GRPC::Aborted,
+      GRPC::Unavailable,
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json)
     ].to_enum
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :streaming_read, AbortableEnumerator.new(bounds_with_abort_enum), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, UnavailableEnumerator.new(bounds_with_abort_enum), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, limit: nil, resume_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
@@ -195,7 +195,7 @@ describe Google::Cloud::Spanner::Client, :read, :retry, :buffer_bound, :mock_spa
     # gets the second row
     assert_row row_enum.next
     # raises error getting third row, since the buffer bound has been reached
-    assert_raises Google::Cloud::AbortedError do
+    assert_raises Google::Cloud::UnavailableError do
       results.rows.next
     end
 

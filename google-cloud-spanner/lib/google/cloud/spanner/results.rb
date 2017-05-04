@@ -122,11 +122,11 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
-            rescue GRPC::Aborted => aborted
+            rescue GRPC::Unavailable => err
               if resume_token.nil? || resume_token.empty?
                 # Re-raise if the resume_token is not a valid value.
                 # This can happen if the buffer was flushed.
-                raise Google::Cloud::Error.from_error(aborted)
+                raise Google::Cloud::Error.from_error(err)
               end
 
               # Resume the stream from the last known resume_token
