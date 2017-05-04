@@ -220,6 +220,24 @@ module Google
 
         # rubocop:enable all
 
+        ##
+        # Identifier of the transaction results were run in. Single-use
+        # read-only transactions do not have IDs, because single-use
+        # transactions do not support multiple requests.
+        # @return [String] The transaction id.
+        def transaction
+          return nil if @metadata.nil? || @metadata.transaction.nil?
+          @metadata.transaction.id
+        end
+
+        ##
+        # The read timestamp chosen for snapshots.
+        # @return [Time] The chosen timestamp.
+        def timestamp
+          return nil if @metadata.nil? || @metadata.transaction.nil?
+          Convert.timestamp_to_time @metadata.transaction.read_timestamp
+        end
+
         # @private
         def self.from_enum enum, service
           grpc = enum.peek
