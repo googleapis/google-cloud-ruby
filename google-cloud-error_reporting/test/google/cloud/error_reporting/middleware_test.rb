@@ -89,6 +89,18 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
         end
       end
     end
+
+    it "sets Google::Cloud::ErrorReporting\#@@default_client" do
+      middleware
+      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).object_id.must_equal error_reporting.object_id
+    end
+
+    it "sets Google::Cloud::ErrorReporting.configure" do
+      middleware
+      Google::Cloud::ErrorReporting.configure.project_id.must_equal project_id
+      Google::Cloud::ErrorReporting.configure.service_name.must_equal service_name
+      Google::Cloud::ErrorReporting.configure.service_version.must_equal service_version
+    end
   end
 
   describe "#call" do
@@ -132,7 +144,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       end
     end
 
-    it "calls error_reporting#report_error_event to report the error" do
+    it "calls error_reporting#report to report the error" do
       stub_reporting = ->(error_event) {
         error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       }
@@ -142,7 +154,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       end
     end
 
-    it "calls error_reporting#report_error_event when no correct status found" do
+    it "calls error_reporting#report when no correct status found" do
       stub_error_reporting = MiniTest::Mock.new
       stub_error_reporting.expect :report, nil do |error_event|
         error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
@@ -174,7 +186,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
   end
 
-  describe "#build_error_event_from_exception" do
+  describe "#error_event_from_exception" do
     it "injects service_name and service_version" do
       error_event = middleware.error_event_from_exception rack_env, app_exception
 
@@ -189,6 +201,17 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
         error_event = middleware.error_event_from_exception rack_env, app_exception
         error_event.user.must_equal user
       end
+    end
+
+    it "injects http data from Rack::Request" do
+      error_event = middleware.error_event_from_exception rack_env, app_exception
+
+      error_event.http_method.must_equal "GET"
+      error_event.http_url.must_match "localhost:3000"
+      error_event.http_user_agent.must_match "chrome-1.2.3"
+      error_event.http_referrer.must_be_nil
+      error_event.http_status.must_equal 500
+      error_event.http_remote_ip.must_equal "127.0.0.1"
     end
   end
 

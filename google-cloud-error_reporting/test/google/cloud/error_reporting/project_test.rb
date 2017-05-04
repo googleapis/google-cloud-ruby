@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -70,9 +70,9 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
   end
 
   describe "#report_exception" do
-    exception_msg = "A serious error from application"
-    service_name = "my-service"
-    service_version ="vTesting"
+    let(:exception_msg) { "A serious error from application" }
+    let(:service_name) { "my-service" }
+    let(:service_version) { "vTesting" }
 
     it "injects service_name and service_version" do
       stub_report = ->(error_event) {
@@ -99,6 +99,56 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
             exception = StandardError.new  exception_msg
             error_reporting.report_exception exception
           end
+        end
+      end
+    end
+
+    it "calls report with an transformed ErrorEvent object" do
+      mocked_report = Minitest::Mock.new
+      mocked_report.expect :call, nil, [Google::Cloud::ErrorReporting::ErrorEvent]
+
+      error_reporting.stub :report, mocked_report do
+        exception = StandardError.new exception_msg
+        error_reporting.report_exception exception
+      end
+
+      mocked_report.verify
+    end
+  end
+
+  describe ".default_project" do
+    it "calls Google::Cloud.env.project_id if no environment variable found" do
+      Google::Cloud.env.stub :project_id, "another-project" do
+        ENV.stub :[], nil do
+          Google::Cloud::ErrorReporting::Project.default_project.must_equal "another-project"
+        end
+      end
+    end
+  end
+
+  describe ".default_service_name" do
+    it "calls Google::Cloud.env.app_engine_service_id if no environment variable found" do
+      Google::Cloud.env.stub :app_engine_service_id, "another-service-id" do
+        ENV.stub :[], nil do
+          Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "another-service-id"
+        end
+      end
+    end
+
+    it "defaults to 'ruby'" do
+      Google::Cloud.env.stub :app_engine_service_id, nil do
+        ENV.stub :[], nil do
+          Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "ruby"
+        end
+      end
+    end
+  end
+
+  describe ".default_service_version" do
+    it "calls Google::Cloud.env.app_engine_service_version if no environment variable found" do
+      Google::Cloud.env.stub :app_engine_service_version, "another-service-version" do
+        ENV.stub :[], nil do
+          Google::Cloud::ErrorReporting::Project.default_service_version.must_equal "another-service-version"
         end
       end
     end

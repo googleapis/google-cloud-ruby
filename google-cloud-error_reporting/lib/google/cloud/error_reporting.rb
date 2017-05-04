@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -106,6 +106,19 @@ module Google
         service_version
       }
 
+      # Initialize :error_reporting as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :error_reporting
+        Google::Cloud.configure.add_options [{
+          error_reporting: CONFIG_OPTIONS
+        }]
+      end
+
+      ##
+      # @private The default Google::Cloud::ErrorReporting::Project client used
+      # for the Google::Cloud::ErrorReporting.report API.
+      @@default_client = nil
+
       ##
       # Creates a new object for connecting to the Stackdriver Error Reporting
       # service. Each call creates a new connection.
@@ -196,14 +209,6 @@ module Google
       #   the Google::Cloud::ErrorReporting module uses.
       #
       def self.configure
-        # Initialize :error_reporting as a nested Configuration under
-        # Google::Cloud if haven't already
-        unless Google::Cloud.configure.option? :error_reporting
-          Google::Cloud.configure.add_options [{
-            error_reporting: CONFIG_OPTIONS
-          }]
-        end
-
         yield Google::Cloud.configure.error_reporting if block_given?
 
         Google::Cloud.configure.error_reporting
@@ -260,9 +265,11 @@ module Google
       def self.report exception, service_name: nil, service_version: nil, &block
         return if Google::Cloud.configure.use_error_reporting == false
 
-        unless defined? @@default_client
-          project_id = configure.project_id
-          keyfile = configure.keyfile
+        unless @@default_client
+          project_id = configure.project_id ||
+                       Google::Cloud.configure.project_id
+          keyfile = configure.keyfile ||
+                    Google::Cloud.configure.keyfile
 
           @@default_client = new project: project_id, keyfile: keyfile
         end

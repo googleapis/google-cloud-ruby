@@ -17,7 +17,7 @@ require "stackdriver/core/configuration"
 
 describe Stackdriver::Core::Configuration do
   let(:options) { [:k1, :k2, {k3: [:k4, :k5]}, :k6] }
-  let(:configuration) { Stackdriver::Core::Configuration.new options: options }
+  let(:configuration) { Stackdriver::Core::Configuration.new options }
 
   describe "#initialize" do
     it "accepts no parameters" do
@@ -27,7 +27,7 @@ describe Stackdriver::Core::Configuration do
     end
 
     it "accepts empty fields array" do
-      config = Stackdriver::Core::Configuration.new options: []
+      config = Stackdriver::Core::Configuration.new []
 
       config.must_be_kind_of Stackdriver::Core::Configuration
     end
@@ -54,6 +54,52 @@ describe Stackdriver::Core::Configuration do
       nested_configuration.must_be_kind_of Stackdriver::Core::Configuration
       nested_configs.key?(:k4).must_equal true
       nested_configs.key?(:k5).must_equal true
+    end
+  end
+
+  describe "#add_option" do
+    it "introduces new option" do
+      assert_raises RuntimeError do
+        configuration.k7
+      end
+
+      configuration.add_options [:k7]
+
+      configuration.k7.must_be_nil
+      configuration.k7 = true
+      configuration.k7.must_equal true
+
+      configuration.k1.must_be_nil
+    end
+
+    it "allows nested option" do
+      assert_raises RuntimeError do
+        configuration.k7.k8
+      end
+
+      configuration.add_options [{k7: [:k8]}]
+
+      configuration.k7.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k7.k8.must_be_nil
+    end
+  end
+
+  describe "#option?" do
+    it "returns true if configuration has that option" do
+      configuration.k1.must_be_nil
+      configuration.option?(:k1).must_equal true
+    end
+
+    it "returns true even if the key is a sub configuration group" do
+      configuration.k3.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.option?(:k3).must_equal true
+    end
+
+    it "returns false if configuration doesn't have that option" do
+      assert_raises RuntimeError do
+        configuration.k7
+      end
+      configuration.option?(:k7).must_equal false
     end
   end
 
@@ -90,7 +136,7 @@ describe Stackdriver::Core::Configuration do
       end
 
       configuration.k3.k4.must_equal "test value"
-      e.message.must_match "is not a configuration option"
+      e.message.must_match "k3 is a sub Configuration group. Not an option."
     end
 
     it "raises exception if setting a non-valid option" do

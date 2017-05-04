@@ -41,7 +41,7 @@ module Stackdriver
       #   level. Nested hash translates to nested Configuration objects with
       #   nested options.
       #
-      def initialize options
+      def initialize options = []
         @configs = {}
 
         init_options options
@@ -90,7 +90,7 @@ module Stackdriver
         if @configs.key? config_key
           if @configs[config_key].is_a? Stackdriver::Core::Configuration
             if assignment
-              fail "#{config_key} is not a configuration option"
+              fail "#{config_key} is a sub Configuration group. Not an option."
             else
               return @configs[config_key]
             end
