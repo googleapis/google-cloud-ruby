@@ -20,6 +20,7 @@ require "action_dispatch"
 describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
   let(:app_exception_msg) { "A serious error from application" }
   let(:project_id) { "gcp-test-name" }
+  let(:keyfile) { "/path/test.json" }
   let(:service_name) { "my-test-service" }
   let(:service_version) { "vTest" }
 
@@ -53,6 +54,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     Google::Cloud::ErrorReporting::Middleware.new rack_app,
                                                   error_reporting: error_reporting,
                                                   project_id: project_id,
+                                                  keyfile: keyfile,
                                                   service_name: service_name,
                                                   service_version: service_version,
                                                   ignore_classes: [IgnoredError]
@@ -61,6 +63,14 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     Google::Cloud::ErrorReporting::Middleware.new rack_app,
                                                   error_reporting: error_reporting,
                                                   project_id: project_id
+  }
+
+  after {
+    # Clear configuration values between each test
+    config_hash = Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs)
+    config_hash.each do |k, _|
+      config_hash[k] = nil
+    end
   }
 
   describe "#initialize" do
@@ -78,12 +88,54 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
 
     it "raises ArgumentError if empty project_id provided" do
+      stubbed_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
+
       assert_raises ArgumentError do
         # Prevent return of actual project in any environment including GCE, etc.
         Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
           Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+            Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
+              ENV.stub :[], nil do
+                Google::Cloud::ErrorReporting::Middleware.new nil
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses Google::Cloud::ErrorReporting.configure if parameters not given" do
+      stubbed_config = OpenStruct.new project_id: "another-project-id",
+                                      keyfile: "another-keyfile",
+                                      service_name: nil, service_version: nil
+
+      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
+        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+          Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
             ENV.stub :[], nil do
-              Google::Cloud::ErrorReporting::Middleware.new nil
+              midware = Google::Cloud::ErrorReporting::Middleware.new nil
+              midware.project_id.must_equal "another-project-id"
+              midware.keyfile.must_equal "another-keyfile"
+            end
+          end
+        end
+      end
+    end
+
+    it "uses Google::Cloud.configure if parameters not given and " do
+      stubbed_er_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
+      stubbed_gcloud_config = OpenStruct.new project_id: "gcloud-project-id",
+                                             keyfile: "gcloud-keyfile"
+
+      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
+        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+          Google::Cloud.stub :configure, stubbed_gcloud_config do
+            Google::Cloud::ErrorReporting.stub :configure, stubbed_er_config do
+              ENV.stub :[], nil do
+                midware = Google::Cloud::ErrorReporting::Middleware.new nil
+                midware.project_id.must_equal "gcloud-project-id"
+                midware.keyfile.must_equal "gcloud-keyfile"
+              end
             end
           end
         end
@@ -96,8 +148,16 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
 
     it "sets Google::Cloud::ErrorReporting.configure" do
+      Google::Cloud::ErrorReporting.configure.project_id.must_be_nil
+      Google::Cloud::ErrorReporting.configure.keyfile.must_be_nil
+      Google::Cloud::ErrorReporting.configure.service_name.must_be_nil
+      Google::Cloud::ErrorReporting.configure.service_version.must_be_nil
+
+      # Constructs a new Middleware, which sets Google::Cloud::ErrorReporting.configure
       middleware
+
       Google::Cloud::ErrorReporting.configure.project_id.must_equal project_id
+      Google::Cloud::ErrorReporting.configure.keyfile.must_equal keyfile
       Google::Cloud::ErrorReporting.configure.service_name.must_equal service_name
       Google::Cloud::ErrorReporting.configure.service_version.must_equal service_version
     end

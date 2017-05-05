@@ -75,6 +75,7 @@ module Google
             app.middleware.insert_after rails_exception_middleware,
                                         Middleware,
                                         project_id: project_id,
+                                        keyfile: keyfile,
                                         error_reporting: error_reporting,
                                         service_name: service_name,
                                         service_version: service_version
