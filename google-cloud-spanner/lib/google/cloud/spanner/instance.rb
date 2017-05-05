@@ -25,17 +25,36 @@ module Google
       ##
       # # Instance
       #
-      # ...
+      # Represents a Cloud Spanner instance. Instances are dedicated Cloud
+      # Spanner serving and storage resources to be used by Cloud Spanner
+      # databases. Instances offer isolation: problems with databases in one
+      # instance will not affect other instances. However, within an instance
+      # databases can affect each other. For example, if one database in an
+      # instance receives a lot of requests and consumes most of the instance
+      # resources, fewer resources are available for other databases in that
+      # instance, and their performance may suffer.
       #
-      # See {Google::Cloud#spanner}
+      # See {Google::Cloud::Spanner::Project#instances},
+      # {Google::Cloud::Spanner::Project#instance}, and
+      # {Google::Cloud::Spanner::Project#create_instance}.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/spanner"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
+      #   spanner = Google::Cloud::Spanner.new
       #
-      #   # ...
+      #   job = spanner.create_instance "my-new-instance",
+      #                                 name: "My New Instance",
+      #                                 config: "regional-us-central1",
+      #                                 nodes: 5,
+      #                                 labels: { production: :env }
+      #
+      #   job.done? #=> false
+      #   job.reload! # API call
+      #   job.done? #=> true
+      #
+      #   instance = spanner.instance "my-new-instance"
+      #
       class Instance
         ##
         # @private The gRPC Service object.
@@ -412,7 +431,13 @@ module Google
         #
         #   The permissions that can be checked on a instance are:
         #
-        #   * TODO
+        #   * pubsub.instances.create
+        #   * pubsub.instances.list
+        #   * pubsub.instances.get
+        #   * pubsub.instances.getIamPolicy
+        #   * pubsub.instances.update
+        #   * pubsub.instances.setIamPolicy
+        #   * pubsub.instances.delete
         #
         # @return [Array<Strings>] The permissions that have access.
         #

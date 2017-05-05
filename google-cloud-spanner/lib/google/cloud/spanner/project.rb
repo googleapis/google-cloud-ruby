@@ -27,17 +27,23 @@ module Google
       ##
       # # Project
       #
-      # ...
+      # Projects are top-level containers in Google Cloud Platform. They store
+      # information about billing and authorized users, and they contain
+      # Cloud Spanner data. Each project has a friendly name and a unique ID.
       #
-      # See {Google::Cloud#spanner}
+      # Google::Cloud::Spanner::Project is the main object for interacting with
+      # Cloud Spanner. {Google::Cloud::Spanner::Instance} and
+      # {Google::Cloud::Spanner::Database} objects are created,
+      # accessed, and managed by Google::Cloud::Spanner::Project.
+      #
+      # See {Google::Cloud::Spanner.new} and {Google::Cloud#spanner}.
       #
       # @example
       #   require "google/cloud"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
-      #
-      #   # ...
+      #   spanner = Google::Cloud::Spanner.new
+      #   instance = spanner.instance "my-instance"
+      #   database = instance.database "my-database"
       #
       class Project
         ##
@@ -390,9 +396,15 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.client "my-instance", "my-new-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
-        #   ...
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
         #
         def client instance_id, database_id, min: 2, max: 10, keepalive: 1500
           Client.new self, instance_id, database_id, min: min, max: max,

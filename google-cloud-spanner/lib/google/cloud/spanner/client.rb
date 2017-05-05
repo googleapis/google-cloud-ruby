@@ -27,21 +27,28 @@ module Google
       ##
       # # Client
       #
-      # ...
+      # A client is used to read and/or modify data in a Cloud Spanner database.
       #
-      # See {Google::Cloud#spanner}
+      # See {Google::Cloud::Spanner::Project#client}.
       #
       # @example
       #   require "google/cloud"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
+      #   spanner = Google::Cloud::Spanner.new
       #
-      #   # ...
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   db.transaction do |tx|
+      #     results = tx.execute "SELECT * FROM users"
+      #
+      #     results.rows.each do |row|
+      #       puts "User #{row[:id]} is #{row[:name]}""
+      #     end
+      #   end
       #
       class Client
         ##
-        # @private Creates a new Spanner Project instance.
+        # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, min: 2, max: 10,
                        keepalive: 1500
           @project = project

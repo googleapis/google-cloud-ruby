@@ -24,17 +24,20 @@ module Google
       #
       # # Session
       #
-      # ...
+      # A session can be used to perform transactions that read and/or modify
+      # data in a Cloud Spanner database. Sessions are meant to be reused for
+      # many consecutive transactions.
       #
-      # See {Google::Cloud#spanner}
+      # Sessions can only execute one transaction at a time. To execute multiple
+      # concurrent read-write/write-only transactions, create multiple sessions.
+      # Note that standalone reads and queries use a transaction internally, and
+      # count toward the one transaction limit.
       #
-      # @example
-      #   require "google/cloud"
+      # Cloud Spanner limits the number of sessions that can exist at any given
+      # time; thus, it is a good idea to delete idle and/or unneeded sessions.
+      # Aside from explicit deletes, Cloud Spanner can delete sessions for which
+      # no operations are sent for more than an hour.
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
-      #
-      #   # ...
       class Session
         ##
         # @private The Google::Spanner::V1::Session object

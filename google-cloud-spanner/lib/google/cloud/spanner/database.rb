@@ -23,17 +23,33 @@ module Google
       ##
       # # Database
       #
-      # ...
+      # Represents a Cloud Spanner database. To use Cloud Spanner's read and
+      # write operations, you must first create a database. A database belongs
+      # to a {Instance} and contains tables and indexes. You may create multiple
+      # databases in an {Instance}.
       #
-      # See {Google::Cloud#spanner}
+      # See {Google::Cloud::Spanner::Instance#databases},
+      # {Google::Cloud::Spanner::Instance#database}, and
+      # {Google::Cloud::Spanner::Instance#create_database}.
+      #
+      # To read and/or modify data in a Cloud Spanner database, use an instance
+      # of {Google::Cloud::Spanner::Client}. See
+      # {Google::Cloud::Spanner::Project#client}.
       #
       # @example
       #   require "google/cloud"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
+      #   spanner = Google::Cloud::Spanner.new
+      #   instance = spanner.instance "my-instance"
       #
-      #   # ...
+      #   job = instance.create_database "my-new-database"
+      #
+      #   job.done? #=> false
+      #   job.reload! # API call
+      #   job.done? #=> true
+      #
+      #   database = instance.database "my-new-database"
+      #
       class Database
         ##
         # @private The gRPC Service object.
@@ -315,7 +331,20 @@ module Google
         #
         #   The permissions that can be checked on a database are:
         #
-        #   * TODO
+        #   * pubsub.databases.create
+        #   * pubsub.databases.list
+        #   * pubsub.databases.update
+        #   * pubsub.databases.updateDdl
+        #   * pubsub.databases.get
+        #   * pubsub.databases.getDdl
+        #   * pubsub.databases.getIamPolicy
+        #   * pubsub.databases.setIamPolicy
+        #   * pubsub.databases.beginReadOnlyTransaction
+        #   * pubsub.databases.beginOrRollbackReadWriteTransaction
+        #   * pubsub.databases.read
+        #   * pubsub.databases.select
+        #   * pubsub.databases.write
+        #   * pubsub.databases.drop
         #
         # @return [Array<Strings>] The permissions that have access.
         #

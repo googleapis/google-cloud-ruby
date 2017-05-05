@@ -22,17 +22,23 @@ module Google
         ##
         # # Instance Config
         #
-        # ...
+        # Represents a Cloud Spanner instance configuration. Instance
+        # configurations define the geographic placement of nodes and their
+        # replication.
         #
-        # See {Google::Cloud#spanner}
+        # See {Google::Cloud::Spanner::Project#instance_configs} and
+        # {Google::Cloud::Spanner::Project#instance_config}.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/spanner"
         #
-        #   gcloud = Google::Cloud.new
-        #   spanner = gcloud.spanner
+        #   spanner = Google::Cloud::Spanner.new
         #
-        #   # ...
+        #   instance_configs = spanner.instance_configs
+        #   instance_configs.each do |config|
+        #     puts config.name
+        #   end
+        #
         class Config
           ##
           # @private Creates a new Instance::Config instance.
