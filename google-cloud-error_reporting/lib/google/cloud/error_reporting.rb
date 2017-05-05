@@ -42,59 +42,30 @@ module Google
     #
     # ## Report Error
     #
-    # Create a Google::Cloud object and a
-    # {Google::Cloud::ErrorReporting::Project} object help provide
-    # authentication and GCP project context information. Then A
-    # {Google::Cloud::ErrorReporting::ErrorEvent} can be instantiated on top of
-    # the Google::Cloud::ErrorReporting::Project object, which represents an
-    # error event and describes the error's content and context.
-    # ```ruby
-    #   require "google/cloud/error_reporting"
-    #
-    #   error_reporting = Google::Cloud::ErrorReporting.new
-    #
-    #   error_event =
-    #     error_reporting.error_event "Error with Backtrace",
-    #                                 timestamp: Time.now,
-    #                                 service_name: "my_app_name",
-    #                                 service_version: "v8",
-    #                                 user: "johndoh",
-    #                                 file_path: "controllers/MyController.rb",
-    #                                 line_number: 123,
-    #                                 function_name: "index"
-    #   error_reporting.report error_event
-    # ```
-    #
-    # If running from withint Google Compute Engine, or have corresponding
-    # environment variables (see {Google::Cloud::ErrorReporting::Project})
-    # defined, the instantiation process can be simplified to:
-    # ```ruby
-    #   require "google/cloud/error_reporting"
-    #
-    #   error_reporting = Google::Cloud.error_reporting
-    #
-    #   error_event =
-    #     error_reporting.error_event "Error with Backtrace",
-    #                                 timestamp: Time.now,
-    #                                 service_name: "my_app_name",
-    #                                 service_version: "v8",
-    #                                 user: "johndoh",
-    #                                 file_path: "controllers/MyController.rb",
-    #                                 line_number: 123,
-    #                                 function_name: "index"
-    #   error_reporting.report error_event
-    # ```
-    #
-    # ## Configuring timeout
-    #
-    # You can set the request `timeout` value in seconds.
-    #
+    # You can easily report exceptions from your applications to Stackdriver
+    # ErrorReporting service
     # ```ruby
     # require "google/cloud/error_reporting"
     #
-    # gcloud = Google::Cloud.new
-    # error_reporting = gcloud.error_reporting timeout: 120
+    # # Configure Stackdriver ErrorReporting instrumentation
+    # Google::Cloud::ErrorReporting.configure do |config|
+    #   config.project_id = "my-project"
+    #   config.keyfile = "/path/to/keyfile.json"
+    # end
+    #
+    # # Insert a Rack Middleware to report unhanded exceptions
+    # use Google::Cloud::ErrorReporting::Middleware
+    #
+    # # Or explicitly submit exceptions
+    # begin
+    #   fail "Boom!"
+    # rescue => exception
+    #   Google::Cloud::ErrorReporting.report exception
+    # end
     # ```
+    # See the [Instrumentation
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
+    # for more examples.
     #
     module ErrorReporting
       ##
