@@ -502,14 +502,14 @@ describe "Vision", :vision do
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
 
-      text.words.count.must_equal 33
+      text.words.count.must_equal 32
       text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
       text.words[0].text.must_be_kind_of String
       text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       text.words[0].text.must_equal "Google"
       text.words[0].bounds.map(&:to_a).must_equal [[14, 7], [52, 7], [52, 19], [14, 19]]
       text.words[27].text.must_equal "Cloud"
-      text.words[27].bounds.map(&:to_a).must_equal [[146, 58], [176, 58], [176, 69], [146, 69]]
+      text.words[27].bounds.map(&:to_a).must_equal [[146, 58], [177, 58], [177, 69], [146, 69]]
 
       text.pages.count.must_equal 1
       text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
@@ -582,7 +582,7 @@ describe "Vision", :vision do
 
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
-      text.words.count.must_equal 33
+      text.words.count.must_equal 32
       text.pages.count.must_equal 1
     end
   end
