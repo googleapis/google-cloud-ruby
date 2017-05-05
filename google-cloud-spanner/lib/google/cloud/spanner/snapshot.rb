@@ -121,7 +121,7 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys or key
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
         # @param [String] index The name of an index to use instead of the
@@ -146,9 +146,9 @@ module Google
         #     end
         #   end
         #
-        def read table, columns, id: nil, index: nil, limit: nil
+        def read table, columns, keys: nil, index: nil, limit: nil
           ensure_session!
-          session.read table, columns, id: id, index: index, limit: limit,
+          session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector
         end
 
@@ -174,7 +174,7 @@ module Google
         #
         #   db.snapshot do |snp|
         #     key_range = db.range 1, 100
-        #     results = snp.read "users", ["id, "name"], id: key_range
+        #     results = snp.read "users", ["id, "name"], keys: key_range
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}""

@@ -310,26 +310,26 @@ module Google
           end
         end
 
-        def read_table session_name, table_name, columns, id: nil, index: nil,
+        def read_table session_name, table_name, columns, keys: nil, index: nil,
                        transaction: nil, limit: nil
           columns.map!(&:to_s)
           opts = default_options_from_session session_name
           execute do
             service.read \
-              session_name, table_name, columns, key_set(id),
+              session_name, table_name, columns, key_set(keys),
               transaction: transaction, index: index, limit: limit,
               options: opts
           end
         end
 
-        def streaming_read_table session_name, table_name, columns, id: nil,
+        def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil
           columns.map!(&:to_s)
           opts = default_options_from_session session_name
           execute do
             service.streaming_read \
-              session_name, table_name, columns, key_set(id),
+              session_name, table_name, columns, key_set(keys),
               transaction: transaction, index: index, limit: limit,
               resume_token: resume_token, options: opts
           end

@@ -91,7 +91,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = session.read "my-table", columns, id: [1, 2, 3]
+    results = session.read "my-table", columns, keys: [1, 2, 3]
 
     mock.verify
 
@@ -105,7 +105,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1,1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2,2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3,3]).list_value]), transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = session.read "my-table", columns, id: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
+    results = session.read "my-table", columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
 
     mock.verify
 
@@ -120,7 +120,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     lookup_range = [1,1]..[3,3]
-    results = session.read "my-table", columns, id: lookup_range, index: "MyTableCompositeKey"
+    results = session.read "my-table", columns, keys: lookup_range, index: "MyTableCompositeKey"
 
     mock.verify
 
@@ -148,7 +148,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value]), transaction: nil, index: nil, limit: 1, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = session.read "my-table", columns, id: 1, limit: 1
+    results = session.read "my-table", columns, keys: 1, limit: 1
 
     mock.verify
 

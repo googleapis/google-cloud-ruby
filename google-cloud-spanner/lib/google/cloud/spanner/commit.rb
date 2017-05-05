@@ -256,8 +256,8 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] id One or more primary keys of the rows within
-        #   table to delete.
+        # @param [Array<Object>] keys One or more primary keys of the rows
+        #   within table to delete.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -271,8 +271,8 @@ module Google
         #   end
 
         #
-        def delete table, *id
-          keys = Array(id).flatten
+        def delete table, *keys
+          keys = Array(keys).flatten
           keys.delete_if(&:nil?)
           key_set = Google::Spanner::V1::KeySet.new(all: true)
           if keys.any?

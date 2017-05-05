@@ -121,7 +121,7 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys or key
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
         # @param [String] index The name of an index to use instead of the
@@ -146,9 +146,9 @@ module Google
         #     end
         #   end
         #
-        def read table, columns, id: nil, index: nil, limit: nil
+        def read table, columns, keys: nil, index: nil, limit: nil
           ensure_session!
-          session.read table, columns, id: id, index: index, limit: limit,
+          session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector
         end
 
@@ -343,8 +343,8 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] id One or more primary keys of the rows within
-        #   table to delete.
+        # @param [Array<Object>] keys One or more primary keys of the rows
+        #   within table to delete.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -354,9 +354,9 @@ module Google
         #
         #   db.transaction { |tx| tx.delete "users", [1, 2, 3] }
         #
-        def delete table, *id
+        def delete table, *keys
           ensure_session!
-          session.delete table, id, transaction_id: transaction_id
+          session.delete table, keys, transaction_id: transaction_id
         end
 
         ##
@@ -381,7 +381,7 @@ module Google
         #
         #   db.transaction do |tx|
         #     key_range = tx.range 1, 100
-        #     results = tx.read "users", ["id, "name"], id: key_range
+        #     results = tx.read "users", ["id, "name"], keys: key_range
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}""

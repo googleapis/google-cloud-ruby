@@ -179,7 +179,7 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys or key
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
         # @param [String] index The name of an index to use instead of the
@@ -223,7 +223,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, index: nil, limit: nil,
+        def read table, columns, keys: nil, index: nil, limit: nil,
                  timestamp: nil, staleness: nil
           validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
@@ -233,7 +233,7 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.read \
-              table, columns, id: id, index: index, limit: limit,
+              table, columns, keys: keys, index: index, limit: limit,
                               transaction: single_use_tx
           end
           results
@@ -428,8 +428,8 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] id One or more primary keys of the rows within
-        #   table to delete.
+        # @param [Array<Object>] keys One or more primary keys of the rows
+        #   within table to delete.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -440,9 +440,9 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, *id
+        def delete table, *keys
           @pool.with_session do |session|
-            session.delete table, id
+            session.delete table, keys
           end
         end
 
@@ -568,7 +568,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   key_range = db.range 1, 100
-        #   results = db.read "users", ["id, "name"], id: key_range
+        #   results = db.read "users", ["id, "name"], keys: key_range
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}""
