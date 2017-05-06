@@ -39,7 +39,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -53,7 +53,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -67,7 +67,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -81,7 +81,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -96,7 +96,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -111,7 +111,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -126,7 +126,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
@@ -141,7 +141,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
+    results.fields.to_h.must_equal({:account_id=>:INT64, :username=>:STRING, :friends=>[:INT64], :active=>:BOOL, :reputation=>:FLOAT64, :avatar=>:BYTES})
 
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual

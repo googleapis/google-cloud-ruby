@@ -17,6 +17,7 @@ require "time"
 require "date"
 require "stringio"
 require "base64"
+require "google/cloud/spanner/data"
 
 module Google
   module Cloud
@@ -181,10 +182,7 @@ module Google
                 value_to_raw v, type.array_element_type
               end
             when :STRUCT
-              # Unsupported query shape: A struct value cannot be returned as a
-              # column value. Rewrite the query to flatten the struct fields in
-              # the result.
-              fail "STRUCT not implemented yet"
+              Data.from_grpc value.list_value.values, type.struct_type.fields
             end
           end
 

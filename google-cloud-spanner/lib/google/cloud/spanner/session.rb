@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/spanner/data"
 require "google/cloud/spanner/results"
 require "google/cloud/spanner/commit"
 

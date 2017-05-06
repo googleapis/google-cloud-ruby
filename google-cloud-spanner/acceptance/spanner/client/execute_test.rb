@@ -21,14 +21,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num"
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
@@ -37,14 +37,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num", single_use: { strong: true }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
@@ -53,14 +53,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num", single_use: { timestamp: (Time.now - 60) }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
@@ -69,14 +69,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num", single_use: { staleness: 60 }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
@@ -85,14 +85,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num", single_use: { bounded_timestamp: (Time.now - 60) }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end
@@ -101,14 +101,14 @@ describe "Spanner Client", :execute, :spanner do
     results = db.execute "SELECT 42 AS num", single_use: { bounded_staleness: 60 }
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:num].must_equal :INT64
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:num].must_equal :INT64
 
     rows = results.rows.to_a # grab all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
   end

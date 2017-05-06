@@ -15,11 +15,13 @@
 
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
+require "google/cloud/spanner/data"
 require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
+require "google/cloud/spanner/convert"
 
 module Google
   module Cloud
@@ -678,16 +680,37 @@ module Google
         end
 
         ##
+        # @private
+        # Creates fields object from types
+        #
+        # @param [Array, Hash] types Accepts an array of types, array of type
+        #   pairs, hash of positional types, hash of named types.
+        #
+        # @return [Fields] The fields of the given types.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #   user_fields = db.fields id: :INT64, name: :STRING, active: :BOOL
+        #
+        #   db.update "users", [user_fields.data(1, "Charlie", false),
+        #                       user_fields.data(2, "Harvey", true)]
+        #
+        def fields types
+          Fields.new types
+        end
+
+        ##
+        # @private
         # Executes a query to retrieve the field names and types for a table.
         #
         # @param [String] table The name of the table in the database to
-        #   retrieve types for
-        # @param [Boolean] pairs Allow the types to be represented as a nested
-        #   Array of pairs rather than a Hash. This is useful when results have
-        #   duplicate names. The default is `false`.
+        #   retrieve fields for.
         #
-        # @return [Hash, Array] The types of the returned data. The default is a
-        #   Hash. Is a nested Array of Arrays when `pairs` is specified.
+        # @return [Fields] The fields of the given table.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -696,13 +719,13 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   users_types = db.types_for "users"
+        #   users_types = db.fields_for "users"
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }],
         #             types: users_types
         #
-        def types_for table, pairs: false
-          execute("SELECT * FROM #{table} WHERE 1 = 0").types pairs: pairs
+        def fields_for table
+          execute("SELECT * FROM #{table} WHERE 1 = 0").fields
         end
 
         ##

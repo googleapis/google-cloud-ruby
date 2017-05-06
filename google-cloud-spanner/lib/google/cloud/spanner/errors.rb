@@ -19,10 +19,18 @@ module Google
   module Cloud
     module Spanner
       ##
-      # # TransactionError
+      # @private
+      # # RollbackError
       #
-      # General error for Transaction problems.
+      # Signal that the Transaction has been rolled back
       class RollbackError < Google::Cloud::Error
+      end
+
+      ##
+      # # DuplicateNameError
+      #
+      # Data has more than one instance of a name.
+      class DuplicateNameError < Google::Cloud::Error
       end
     end
   end

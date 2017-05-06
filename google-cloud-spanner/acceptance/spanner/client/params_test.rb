@@ -21,7 +21,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: "hello" }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :STRING
+    results.fields[:value].must_equal :STRING
     results.rows.first[:value].must_equal "hello"
   end
 
@@ -29,7 +29,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: 999 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :INT64
+    results.fields[:value].must_equal :INT64
     results.rows.first[:value].must_equal 999
   end
 
@@ -37,7 +37,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: 12.0 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :FLOAT64
+    results.fields[:value].must_equal :FLOAT64
     results.rows.first[:value].must_equal 12.0
   end
 
@@ -45,7 +45,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: Float::INFINITY }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :FLOAT64
+    results.fields[:value].must_equal :FLOAT64
     results.rows.first[:value].must_equal Float::INFINITY
   end
 
@@ -53,7 +53,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: -Float::INFINITY }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :FLOAT64
+    results.fields[:value].must_equal :FLOAT64
     results.rows.first[:value].must_equal -Float::INFINITY
   end
 
@@ -61,7 +61,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: Float::NAN }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :FLOAT64
+    results.fields[:value].must_equal :FLOAT64
     returned_value = results.rows.first[:value]
     returned_value.must_be_kind_of Float
     returned_value.must_be :nan?
@@ -71,7 +71,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: false }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :BOOL
+    results.fields[:value].must_equal :BOOL
     results.rows.first[:value].must_equal false
   end
 
@@ -80,7 +80,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: today }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :DATE
+    results.fields[:value].must_equal :DATE
     results.rows.first[:value].must_equal Date.today
   end
 
@@ -89,7 +89,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: now.to_datetime }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :TIMESTAMP
+    results.fields[:value].must_equal :TIMESTAMP
     results.rows.first[:value].must_equal now
   end
 
@@ -98,7 +98,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: now }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :TIMESTAMP
+    results.fields[:value].must_equal :TIMESTAMP
     results.rows.first[:value].must_equal now
   end
 
@@ -106,7 +106,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: StringIO.new("hello world!") }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :BYTES
+    results.fields[:value].must_equal :BYTES
     returned_value = results.rows.first[:value]
     returned_value.must_be_kind_of StringIO
     returned_value.read.must_equal "hello world!"
@@ -116,7 +116,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT CAST(@value AS BYTES) AS value", params: { value: "hello world!" }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :BYTES
+    results.fields[:value].must_equal :BYTES
     returned_value = results.rows.first[:value]
     returned_value.must_be_kind_of StringIO
     returned_value.read.must_equal "hello world!"
@@ -126,7 +126,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT CAST(@value AS STRING) AS value", params: { value: StringIO.new("hello world!") }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :STRING
+    results.fields[:value].must_equal :STRING
     results.rows.first[:value].must_equal "hello world!"
   end
 
@@ -134,7 +134,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: [1, 2, 3, 4] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal [:INT64]
+    results.fields[:value].must_equal [:INT64]
     results.rows.first[:value].must_equal [1, 2, 3, 4]
   end
 
@@ -142,7 +142,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: ["foo", "bar", "baz"] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal [:STRING]
+    results.fields[:value].must_equal [:STRING]
     results.rows.first[:value].must_equal ["foo", "bar", "baz"]
   end
 
@@ -153,7 +153,7 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value AS value", params: { value: { message: "hello", repeat: 1 } }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:value].must_equal :STRUCT
+    results.fields[:value].must_equal :STRUCT
     results.rows.first[:value].must_equal({ message: "hello", repeat: 1 })
   end
 
@@ -163,8 +163,8 @@ describe "Spanner Client", :params, :spanner do
     results = db.execute "SELECT @value.message AS message, @value.repeat AS repeat", params: { value: { message: "hello", repeat: 1 } }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.types[:message].must_equal :STRING
-    results.types[:repeat].must_equal :INT64
+    results.fields[:message].must_equal :STRING
+    results.fields[:repeat].must_equal :INT64
     returned_row = results.rows.first
     returned_row[:message].must_equal "hello"
     returned_row[:repeat].must_equal 1

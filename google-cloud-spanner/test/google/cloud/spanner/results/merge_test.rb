@@ -29,15 +29,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal :STRING
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal :STRING
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal "abcdefghi"
   end
 
@@ -55,15 +55,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:STRING]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal ["abc", "def", "ghi", "jkl"]
   end
 
@@ -81,15 +81,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:STRING]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal ["abc", "def", nil, "ghi", nil, "jkl"]
   end
 
@@ -107,15 +107,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:STRING]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal ["abc", "def", "ghi", "jkl"]
   end
 
@@ -133,15 +133,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:STRING]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal ["abcdefghi"]
   end
 
@@ -159,15 +159,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:INT64]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:INT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal [1, 23, 4, nil, 5]
   end
 
@@ -185,15 +185,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal [:FLOAT64]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal [:FLOAT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row[:f1].must_equal [1.0, 2.0, Float::INFINITY, -Float::INFINITY, Float::NAN, nil, 3.0]
   end
 
@@ -212,13 +212,13 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 1
-    results.types[:f1].must_equal :STRING
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[:f1].must_equal :STRING
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 4
-    rows.must_equal [{ f1: "ab" }, { f1: "c" }, { f1: "d" }, { f1: "ef" }]
+    rows.map(&:to_h).must_equal [{ f1: "ab" }, { f1: "c" }, { f1: "d" }, { f1: "ef" }]
   end
 end

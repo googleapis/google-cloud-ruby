@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/convert"
 require "google/cloud/spanner/errors"
+require "google/cloud/spanner/data"
 
 module Google
   module Cloud
@@ -44,12 +44,7 @@ module Google
         ##
         # Returns the field names and types for the rows in the returned data.
         #
-        # @param [Boolean] pairs Allow the types to be represented as a nested
-        #   Array of pairs rather than a Hash. This is useful when results have
-        #   duplicate names. The default is `false`.
-        #
-        # @return [Hash, Array] The types of the returned data. The default is a
-        #   Hash. Is a nested Array of Arrays when `pairs` is specified.
+        # @return [Fields] The fields of the returned data.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -60,35 +55,12 @@ module Google
         #
         #   results = db.execute "SELECT * FROM users"
         #
-        #   results.types.each do |name, type|
+        #   results.fields.each do |name, type|
         #     puts "Column #{name} is type {type}"
         #   end
         #
-        # @example Returning an array of array pairs instead of a hash:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.execute "SELECT 1 AS count, 2 AS count"
-        #
-        #   results.types(pairs: true).each do |row|
-        #     row #=> [[:count, :INT64], [:count, :INT64]]
-        #   end
-        #
-        def types pairs: false
-          row_types = @metadata.row_type.fields
-          type_pairs = row_types.map do |field|
-            # raise field.inspect
-            if field.type.code == :ARRAY
-              [field.name.to_sym, [field.type.array_element_type.code]]
-            else
-              [field.name.to_sym, field.type.code]
-            end
-          end
-          return type_pairs if pairs
-          Hash[type_pairs]
+        def fields
+          @fields ||= Fields.from_grpc @metadata.row_type.fields
         end
 
         # rubocop:disable all
@@ -96,13 +68,8 @@ module Google
         ##
         # The values returned from the request.
         #
-        # @param [Boolean] pairs Allow the rows to be represented as a nested
-        #   Array of pairs rather than a Hash. This is useful when results have
-        #   duplicate names. The default is `false`.
-        #
         # @yield [row] An enumerator for the rows.
-        # @yieldparam [Hash, Array] row a hash that contains the result names
-        #   and values. Or, if pairs was specified, an array of arrays.
+        # @yieldparam [Data] row object that contains the data values.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -117,24 +84,11 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Returning an array of array pairs instead of a hash:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   results = db.execute "SELECT 1 AS count, 2 AS count"
-        #
-        #   results.rows(pairs: true).each do |row|
-        #     row #=> [[:count, 1], [:count, 2]]
-        #   end
-        #
-        def rows pairs: false
+        def rows
           return nil if @closed
 
           unless block_given?
-            return enum_for(:rows, pairs: pairs)
+            return enum_for(:rows)
           end
 
           fields = @metadata.row_type.fields
@@ -170,11 +124,7 @@ module Google
                   chunked_value = to_iterate.pop if resp.chunked_value
                   values = to_iterate.pop(to_iterate.count % fields.count)
                   to_iterate.each_slice(fields.count) do |slice|
-                    if pairs
-                      yield Convert.row_to_pairs(fields, slice)
-                    else
-                      yield Convert.row_to_raw(fields, slice)
-                    end
+                    yield Data.from_grpc(slice, fields)
                   end
                 end
 
@@ -216,19 +166,11 @@ module Google
             chunked_value = to_iterate.pop if resp.chunked_value
             values = to_iterate.pop(to_iterate.count % fields.count)
             to_iterate.each_slice(fields.count) do |slice|
-              if pairs
-                yield Convert.row_to_pairs(fields, slice)
-              else
-                yield Convert.row_to_raw(fields, slice)
-              end
+              yield Data.from_grpc(slice, fields)
             end
           end
           values.each_slice(fields.count) do |slice|
-            if pairs
-              yield Convert.row_to_pairs(fields, slice)
-            else
-              yield Convert.row_to_raw(fields, slice)
-            end
+            yield Data.from_grpc(slice, fields)
           end
 
           # If we get this far then we can release the session
@@ -297,7 +239,7 @@ module Google
 
         # @private
         def to_s
-          "(types: #{types.inspect} streaming)"
+          "(#{fields.inspect} streaming)"
         end
 
         # @private
