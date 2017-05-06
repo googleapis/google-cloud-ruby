@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.1 / 2017-05-06
+
+* Update google-protobuf to the previous known working version
+
 ### 1.0.0 / 2017-03-31
 
 * Release 1.0
