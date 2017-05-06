@@ -10,4 +10,5 @@ jsondoc/*
 
 # Ignore compilation related files
 debugger_c.so
+debugger_c.bundle
 tmp/*
