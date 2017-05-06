@@ -99,7 +99,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       # second call will return correct response
       Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
     end
-    mock.expect :sleep, nil, [0]
+    mock.expect :sleep, nil, [1.3]
     spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
@@ -260,7 +260,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       # third call will return correct response
       Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
     end
-    mock.expect :sleep, nil, [0]
+    mock.expect :sleep, nil, [1.3]
     mock.expect :sleep, nil, [30]
     spanner.service.mocked_service = mock
 
@@ -277,6 +277,72 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     end
 
     assert_results results
+
+    mock.verify
+  end
+
+  it "retries with incremental backoff until deadline has passed" do
+    skip "Can't get trailing metadata on Ruby 2.0" unless Exception.instance_methods.include? :cause
+
+    mutations = [
+      Google::Spanner::V1::Mutation.new(
+        update: Google::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    def mock.commit *args
+      gax_error = Google::Gax::GaxError.new "aborted"
+      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(10, "aborted")
+      raise gax_error
+    end
+    mock.expect :sleep, nil, [1.3]
+    mock.expect :sleep, nil, [1.6900000000000002]
+    mock.expect :sleep, nil, [2.1970000000000005]
+    mock.expect :sleep, nil, [2.856100000000001]
+
+    mock.expect :current_time, Time.now, []
+    mock.expect :current_time, Time.now, []
+    mock.expect :current_time, Time.now + 30, []
+    mock.expect :current_time, Time.now + 60, []
+    mock.expect :current_time, Time.now + 90, []
+    mock.expect :current_time, Time.now + 125, []
+    spanner.service.mocked_service = mock
+
+    client.define_singleton_method :sleep do |count|
+      # call the mock to satisfy the expectation
+      mock.sleep count
+    end
+    client.define_singleton_method :current_time do
+      # call the mock to satisfy the expectation
+      mock.current_time
+    end
+
+    assert_raises Google::Cloud::AbortedError do
+      client.transaction do |tx|
+        tx.must_be_kind_of Google::Cloud::Spanner::Transaction
+        results = tx.execute "SELECT * FROM users"
+        tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+      end
+    end
 
     mock.verify
   end
