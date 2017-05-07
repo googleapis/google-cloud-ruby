@@ -360,6 +360,35 @@ module Google
         end
 
         ##
+        # Indicates the field names and types for a table.
+        #
+        # @param [String] table The name of the table in the database to
+        #   retrieve types for
+        # @param [Boolean] pairs Allow the types to be represented as a nested
+        #   Array of pairs rather than a Hash. This is useful when results have
+        #   duplicate names. The default is `false`.
+        #
+        # @return [Hash, Array] The types of the returned data. The default is a
+        #   Hash. Is a nested Array of Arrays when `pairs` is specified.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     users_types = rx.types_for "users"
+        #     tx.insert "users", [{ id: 1, name: "Charlie", active: false },
+        #                         { id: 2, name: "Harvey",  active: true }],
+        #               types: users_types
+        #   end
+        #
+        def types_for table, pairs: false
+          execute("SELECT * FROM #{table} WHERE 1 = 0").types pairs: pairs
+        end
+
+        ##
         # Creates a Spanner Range. This can be used in place of a Ruby Range
         # when needing to excluse the beginning value.
         #
