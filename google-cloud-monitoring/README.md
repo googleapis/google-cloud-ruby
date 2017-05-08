@@ -8,9 +8,9 @@ Idiomatic Ruby client for [Stackdriver Monitoring API][Product Documentation]
 ## Quick Start
 In order to use this library, you first need to go through the following steps:
 
-- [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-- [Enable the monitoring api.](https://console.cloud.google.com/apis/api/monitoring)
-- [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+2. [Enable the monitoring api.](https://console.cloud.google.com/apis/api/monitoring)
+3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
 ```
