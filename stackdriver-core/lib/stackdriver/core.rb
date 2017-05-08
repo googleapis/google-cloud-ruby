@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud_configuration"
+require "google/cloud/configuration"
 require "stackdriver/core/configuration"
 require "stackdriver/core/trace_context"
 require "stackdriver/core/version"

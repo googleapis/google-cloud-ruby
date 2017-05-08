@@ -81,7 +81,7 @@ module Stackdriver
       ##
       # @private Dynamic getters and setters
       def method_missing mid, *args
-        match = mid.match(/(\w+)(=?)$/)
+        match = mid.to_s.match(/(\w+)(=?)$/)
         fail NoMethodError, mid unless match
 
         config_key = match[1].to_sym
