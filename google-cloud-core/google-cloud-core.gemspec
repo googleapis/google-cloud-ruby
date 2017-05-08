@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "google-cloud-core is the internal shared library for google-cloud-ruby."
   gem.summary       = "Internal shared library for google-cloud-ruby"
-  gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
+  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-core"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
