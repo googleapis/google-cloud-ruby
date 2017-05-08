@@ -205,9 +205,12 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys to match
-        #   returned data to. Values should have exactly as many elements as
-        #   there are columns in the primary key.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
@@ -229,10 +232,12 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, transaction: nil
+        def read table, columns, keys: nil, index: nil, limit: nil,
+                 transaction: nil
           ensure_service!
           Results.read service, path, table, columns,
-                       id: id, limit: limit, transaction: transaction
+                       keys: keys, index: index, limit: limit,
+                       transaction: transaction
         end
 
         # Creates changes to be applied to rows in the database.
@@ -424,8 +429,9 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] id One or more primary keys of the rows within
-        #   table to delete.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -436,9 +442,9 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, *id, transaction_id: nil
+        def delete table, keys = [], transaction_id: nil
           commit = Commit.new
-          commit.delete table, id
+          commit.delete table, keys
           service.commit path, commit.mutations, transaction_id: transaction_id
         end
 

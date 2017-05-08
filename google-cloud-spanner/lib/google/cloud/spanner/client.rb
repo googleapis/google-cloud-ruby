@@ -19,6 +19,7 @@ require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
+require "google/cloud/spanner/range"
 
 module Google
   module Cloud
@@ -178,9 +179,12 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys to match
-        #   returned data to. Values should have exactly as many elements as
-        #   there are columns in the primary key.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         # @param [Time, DateTime] timestamp Executes all reads at a
@@ -219,8 +223,8 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def read table, columns, id: nil, limit: nil, timestamp: nil,
-                 staleness: nil
+        def read table, columns, keys: nil, index: nil, limit: nil,
+                 timestamp: nil, staleness: nil
           validate_single_use_args! timestamp: timestamp, staleness: staleness
           ensure_service!
 
@@ -229,7 +233,8 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.read \
-              table, columns, id: id, limit: limit, transaction: single_use_tx
+              table, columns, keys: keys, index: index, limit: limit,
+                              transaction: single_use_tx
           end
           results
         end
@@ -423,8 +428,9 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] id One or more primary keys of the rows within
-        #   table to delete.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -435,9 +441,9 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, *id
+        def delete table, keys = []
           @pool.with_session do |session|
-            session.delete table, id
+            session.delete table, keys
           end
         end
 
@@ -555,6 +561,68 @@ module Google
             yield snp if block_given?
           end
           nil
+        end
+
+        ##
+        # Indicates the field names and types for a table.
+        #
+        # @param [String] table The name of the table in the database to
+        #   retrieve types for
+        # @param [Boolean] pairs Allow the types to be represented as a nested
+        #   Array of pairs rather than a Hash. This is useful when results have
+        #   duplicate names. The default is `false`.
+        #
+        # @return [Hash, Array] The types of the returned data. The default is a
+        #   Hash. Is a nested Array of Arrays when `pairs` is specified.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   users_types = db.types_for "users"
+        #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }],
+        #             types: users_types
+        #
+        def types_for table, pairs: false
+          execute("SELECT * FROM #{table} WHERE 1 = 0").types pairs: pairs
+        end
+
+        ##
+        # Creates a Spanner Range. This can be used in place of a Ruby Range
+        # when needing to excluse the beginning value.
+        #
+        # @param [Object] beginning The object that defines the beginning of the
+        #   range.
+        # @param [Object] ending The object that defines the end of the range.
+        # @param [Boolean] exclude_begin Determines if the range excludes its
+        # beginning value. Default is `false`.
+        # @param [Boolean] exclude_end Determines if the range excludes its
+        # ending value. Default is `false`.
+        #
+        # @return [Google::Cloud::Spanner::Range]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   key_range = db.range 1, 100
+        #   results = db.read "users", ["id, "name"], keys: key_range
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}""
+        #   end
+        #
+        def range beginning, ending, exclude_begin: false, exclude_end: false
+          Range.new beginning, ending,
+                    exclude_begin: exclude_begin,
+                    exclude_end: exclude_end
         end
 
         ##

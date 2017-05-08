@@ -121,9 +121,12 @@ module Google
         #   read.
         # @param [Array<String>] columns The columns of table to be returned for
         #   each row matching this request.
-        # @param [Object, Array<Object>] id A single, or list of keys to match
-        #   returned data to. Values should have exactly as many elements as
-        #   there are columns in the primary key.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         #
@@ -143,10 +146,45 @@ module Google
         #     end
         #   end
         #
-        def read table, columns, id: nil, limit: nil
+        def read table, columns, keys: nil, index: nil, limit: nil
           ensure_session!
-          session.read table, columns, id: id, limit: limit,
+          session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector
+        end
+
+        ##
+        # Creates a Spanner Range. This can be used in place of a Ruby Range
+        # when needing to excluse the beginning value.
+        #
+        # @param [Object] beginning The object that defines the beginning of the
+        #   range.
+        # @param [Object] ending The object that defines the end of the range.
+        # @param [Boolean] exclude_begin Determines if the range excludes its
+        # beginning value. Default is `false`.
+        # @param [Boolean] exclude_end Determines if the range excludes its
+        # ending value. Default is `false`.
+        #
+        # @return [Google::Cloud::Spanner::Range]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.snapshot do |snp|
+        #     key_range = db.range 1, 100
+        #     results = snp.read "users", ["id, "name"], keys: key_range
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
+        #
+        def range beginning, ending, exclude_begin: false, exclude_end: false
+          Range.new beginning, ending,
+                    exclude_begin: exclude_begin,
+                    exclude_end: exclude_end
         end
 
         ##
