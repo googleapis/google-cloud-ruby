@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "google/cloud/spanner/errors"
 require "google/cloud/env"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/client"

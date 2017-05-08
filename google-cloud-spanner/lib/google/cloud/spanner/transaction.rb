@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/results"
 require "google/cloud/spanner/commit"
 
@@ -354,6 +355,26 @@ module Google
         def delete table, *id
           ensure_session!
           session.delete table, id, transaction_id: transaction_id
+        end
+
+        ##
+        # Rolls back the transaction, releasing any locks it holds. It is a good
+        # idea to call this for any transaction that includes one or more `read`
+        # or `execute` requests and ultimately decides not to commit.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction { |tx| tx.rollback }
+        #
+        def rollback
+          ensure_session!
+          session.rollback transaction_id
+          # Raise RollbackError so the client can stop the transaction.
+          fail RollbackError
         end
 
         ##

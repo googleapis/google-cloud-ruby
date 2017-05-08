@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
 require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
@@ -446,6 +446,9 @@ module Google
         # a single logical point in time across columns, rows, and tables in a
         # database.
         #
+        # @param [Numeric] deadline The total amount of time in seconds the
+        #   transaction has to succeed.
+        #
         # @yield [transaction] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
         #   Transaction object.
@@ -464,19 +467,32 @@ module Google
         #     end
         #   end
         #
-        def transaction &block
+        def transaction deadline: 120, &block
           ensure_service!
+
+          deadline = validate_deadline deadline
+          backoff = 1.0
+          start_time = current_time
+
           @pool.with_session do |session|
-            tx_grpc = @project.service.begin_transaction session.path
-            tx = Transaction.from_grpc(tx_grpc, session)
+            tx = create_transaction! session
             begin
               block.call tx
-            rescue Google::Cloud::AbortedError
-              # TODO: retrieve delay from ABORTED error
-              # Retry the entire transaction
-              tx2_grpc = @project.service.begin_transaction session.path
-              tx2 = Transaction.from_grpc(tx2_grpc, session)
-              block.call tx2
+            rescue Google::Cloud::AbortedError => err
+              # Re-raise if deadline has passed
+              raise err if current_time - start_time > deadline
+              # Sleep the amount from RetryDelay, or incremental backoff
+              sleep(delay_from_aborted(err) || backoff *= 1.3)
+              # Create new transaction and retry the block
+              tx = create_transaction! session
+              retry
+            rescue RollbackError
+              # Transaction block was interrupted, allow to continue
+            rescue => err
+              # Rollback transaction when handling unexpeced error
+              # Don't use Transaction#rollback since it raises
+              session.rollback tx.send(:transaction_id)
+              raise err
             end
           end
           nil
@@ -568,6 +584,11 @@ module Google
           fail "Must have active connection to service" unless @project.service
         end
 
+        def create_transaction! session
+          tx_grpc = @project.service.begin_transaction session.path
+          Transaction.from_grpc(tx_grpc, session)
+        end
+
         ##
         # Check for valid snapshot arguments
         def validate_single_use_args! timestamp: nil, staleness: nil
@@ -598,6 +619,37 @@ module Google
           fail ArgumentError,
                "Can only provide one of the following arguments: " \
                "(strong, timestamp, staleness)"
+        end
+
+        def validate_deadline deadline
+          return 120 unless deadline.is_a? Numeric
+          return 120 if deadline < 0
+          deadline
+        end
+
+        ##
+        # Defer to this method so we have something to mock for tests
+        def current_time
+          Time.now
+        end
+
+        ##
+        # Retrieves the delay value from Google::Cloud::AbortedError
+        def delay_from_aborted err
+          return nil if err.nil?
+          if err.respond_to?(:metadata) && err.metadata["retryDelay"]
+            # a correct metadata will look like this:
+            # "{\"retryDelay\":{\"seconds\":60}}"
+            seconds = err.metadata["retryDelay"]["seconds"].to_i
+            nanos = err.metadata["retryDelay"]["nanos"].to_i
+            return seconds if nanos.zero?
+            return seconds + (nanos / 1000000000.0)
+          end
+          # No metadata? Try the inner error
+          delay_from_aborted(err.cause)
+        rescue
+          # Any error indicates the backoff should be handled elsewhere
+          return nil
         end
       end
     end

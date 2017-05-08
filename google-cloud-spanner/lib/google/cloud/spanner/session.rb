@@ -443,6 +443,12 @@ module Google
         end
 
         ##
+        # Rolls back the transaction, releasing any locks it holds.
+        def rollback transaction_id
+          service.rollback path, transaction_id
+        end
+
+        ##
         # @private
         # Keeps the session alive by calling SELECT 1
         def keepalive!
