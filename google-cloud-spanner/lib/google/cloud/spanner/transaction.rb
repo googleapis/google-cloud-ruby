@@ -343,8 +343,9 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] keys One or more primary keys of the rows
-        #   within table to delete.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -354,7 +355,7 @@ module Google
         #
         #   db.transaction { |tx| tx.delete "users", [1, 2, 3] }
         #
-        def delete table, *keys
+        def delete table, keys = []
           ensure_session!
           session.delete table, keys, transaction_id: transaction_id
         end

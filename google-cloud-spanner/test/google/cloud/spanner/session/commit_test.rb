@@ -171,7 +171,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     mock.verify
   end
 
-  it "deletes multiple rows directly" do
+  it "deletes multiple rows of keys directly" do
     mutations = [
       Google::Spanner::V1::Mutation.new(
         delete: Google::Spanner::V1::Mutation::Delete.new(
@@ -189,6 +189,26 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     session.delete "users", [1, 2, 3, 4, 5]
+
+    mock.verify
+  end
+
+  it "deletes multiple rows of key ranges directly" do
+    mutations = [
+      Google::Spanner::V1::Mutation.new(
+        delete: Google::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+            ranges: [Google::Cloud::Spanner::Convert.to_key_range(1..100)]
+          )
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :commit, commit_resp, [session.path, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
+    session.service.mocked_service = mock
+
+    session.delete "users", 1..100
 
     mock.verify
   end

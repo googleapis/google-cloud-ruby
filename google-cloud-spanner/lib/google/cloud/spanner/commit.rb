@@ -256,8 +256,9 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
-        # @param [Array<Object>] keys One or more primary keys of the rows
-        #   within table to delete.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -271,20 +272,11 @@ module Google
         #   end
 
         #
-        def delete table, *keys
-          keys = Array(keys).flatten
-          keys.delete_if(&:nil?)
-          key_set = Google::Spanner::V1::KeySet.new(all: true)
-          if keys.any?
-            key_list = keys.map do |i|
-              Convert.raw_to_value(Array(i)).list_value
-            end
-            key_set = Google::Spanner::V1::KeySet.new(keys: key_list)
-          end
+        def delete table, keys = []
           @mutations += [
             Google::Spanner::V1::Mutation.new(
               delete: Google::Spanner::V1::Mutation::Delete.new(
-                table: table, key_set: key_set)
+                table: table, key_set: key_set(keys))
             )
           ]
           keys
@@ -293,6 +285,33 @@ module Google
         # @private
         def mutations
           @mutations
+        end
+
+        protected
+
+        def key_set keys
+          return Google::Spanner::V1::KeySet.new(all: true) if keys.nil?
+          keys = [keys] unless keys.is_a? Array
+          return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
+          if keys_are_ranges? keys
+            keys = [keys] unless keys.is_a? Array
+            key_ranges = keys.map do |r|
+              Convert.to_key_range(r)
+            end
+            return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
+          end
+          key_list = Array(keys).map do |i|
+            Convert.raw_to_value(Array(i)).list_value
+          end
+          Google::Spanner::V1::KeySet.new keys: key_list
+        end
+
+        def keys_are_ranges? keys
+          keys.each do |key|
+            return true if key.is_a? ::Range
+            return true if key.is_a? Google::Cloud::Spanner::Range
+          end
+          false
         end
       end
     end

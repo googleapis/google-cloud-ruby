@@ -382,6 +382,8 @@ module Google
 
         def key_set keys
           return Google::Spanner::V1::KeySet.new(all: true) if keys.nil?
+          keys = [keys] unless keys.is_a? Array
+          return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
           if keys_are_ranges? keys
             keys = [keys] unless keys.is_a? Array
             key_ranges = keys.map do |r|
@@ -396,7 +398,6 @@ module Google
         end
 
         def keys_are_ranges? keys
-          keys = [keys] unless keys.is_a? Array
           keys.each do |key|
             return true if key.is_a? ::Range
             return true if key.is_a? Google::Cloud::Spanner::Range
