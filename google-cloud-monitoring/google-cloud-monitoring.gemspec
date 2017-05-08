@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["googleapis-packages@google.com"]
   gem.description   = "google-cloud-monitoring is the official library for Stackdriver Monitoring."
   gem.summary       = "API Cient library for Stackdriver Monitoring"
-  gem.homepage      = "http://googlecloudplatform.github.io/google-cloud-ruby/"
+  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-monitoring"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
