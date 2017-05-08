@@ -1,0 +1,1 @@
+{"id":"google/cloud/spanner/rollbackerror","name":"RollbackError","title":["Google","Cloud","Spanner","RollbackError"],"description":"<h1 id=\"transactionerror\">TransactionError</h1>\n\n<p>General error for Transaction problems.</p>","source":"google-cloud-spanner/lib/google/cloud/spanner/errors.rb#L25","resources":[],"examples":[],"methods":[]}
