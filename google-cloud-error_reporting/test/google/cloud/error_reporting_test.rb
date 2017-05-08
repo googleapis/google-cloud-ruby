@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::ErrorReporting do
+describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   describe ".new" do
     let(:default_credentials) { OpenStruct.new empty: true}
     let(:found_credentials) { "{}" }
@@ -91,14 +91,18 @@ describe Google::Cloud::ErrorReporting do
       Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).must_be_nil
     }
 
+    after {
+      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, nil
+      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).must_be_nil
+    }
+
     it "doesn't call Project#report_exception if Google::Cloud.configure.use_error_reporting is false" do
-      # Google::Cloud.configure.use_error_reporting = false
-      error_reporting = Google::Cloud::ErrorReporting.new project: "test-project-id"
-      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, error_reporting
+      stubbed_configure = OpenStruct.new use_error_reporting: false
       stubbed_report_exception = ->(_, _) { fail "Shouldn't be called" }
+      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, error_reporting
 
       error_reporting.stub :report_exception, stubbed_report_exception do
-        Google::Cloud.configure.stub :method_missing, false do
+        Google::Cloud.stub :configure, stubbed_configure do
           Google::Cloud::ErrorReporting.report exception
         end
       end

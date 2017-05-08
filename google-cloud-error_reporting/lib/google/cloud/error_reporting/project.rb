@@ -29,8 +29,7 @@ module Google
       # information about billing and authorized users, and they control access
       # to Stackdriver ErrorReporting. Each project has a friendly name and a
       # unique ID. Projects can be created only in the [Google Developers
-      # Console](https://console.developers.google.com). See
-      # {Google::Cloud#error_reporting}.
+      # Console](https://console.developers.google.com).
       #
       # @example
       #   require "google/cloud/error_reporting"
@@ -90,7 +89,8 @@ module Google
         # @param [Google::Cloud::ErrorReporting::Service] service The underneath
         #   Service object
         #
-        # @return A new Project instance
+        # @return [Google::Cloud::ErrorReporting::Project] A new Project
+        #   instance
         #
         def initialize service
           @service = service
@@ -99,7 +99,7 @@ module Google
         ##
         # Get the name of current project_id from underneath gRPC Service object
         #
-        # @return The current project_id
+        # @return [String] The current project_id
         #
         def project
           service.project
@@ -172,19 +172,6 @@ module Google
         #   this field empty if the user was not logged in. In this case the
         #   Error Reporting system will use other data, such as remote IP
         #   address, to distinguish affected users
-        # @param [String] http_method The type of HTTP request, such as GET,
-        #   POST, etc.
-        # @param [String] http_url The URL of the request.
-        # @param [String] http_user_agent The user agent information that is
-        #   provided with the request.
-        # @param [String] http_referrer The referrer information that is
-        #   provided with the request.
-        # @param [Number] http_status The HTTP response status code for the
-        #   request.
-        # @param [String] http_remote_ip The IP address from which the request
-        #   originated. This can be IPv4, IPv6, or a token which is derived from
-        #   the IP address, depending on the data that has been provided in the
-        #   error report.
         # @param [String] file_path The source code filename, which can include
         #   a truncated relative path, or a full path from a production machine.
         # @param [Number] line_number 1-based. 0 indicates that the line number

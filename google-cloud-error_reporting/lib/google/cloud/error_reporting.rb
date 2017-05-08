@@ -195,7 +195,7 @@ module Google
       #
       # This public method creates a default Stackdriver ErrorReporting client
       # and reuse that between calls. The default client is initialized with
-      # parameters defined in {Google::Cloud::ErrorReporting.configure}.
+      # parameters defined in {.configure}.
       #
       # The error event can be customized before reporting. See the example
       # below and {Google::Cloud::ErrorReporting::ErrorEvent} class for avaiable

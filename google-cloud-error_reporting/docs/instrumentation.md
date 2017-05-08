@@ -12,12 +12,6 @@ $ gem install google-cloud-error_reporting
 ```ruby
 require "google/cloud/error_reporting"
  
-# Configure Stackdriver ErrorReporting instrumentation
-Google::Cloud::ErrorReporting.configure do |config|
-  config.project_id = "my-project"
-  config.keyfile = "/path/to/keyfile.json"
-end
- 
 # Insert a Rack Middleware to report unhanded exceptions 
 use Google::Cloud::ErrorReporting::Middleware
  
@@ -30,7 +24,11 @@ end
 ```
 
 ## Configuration
-All Stackdriver service instrumentation can be configured through a single interface
+The Stackdriver ErrorReporting instrumentation featuers should work by default 
+on Goolge Cloud Platform environments without needing any additional 
+configurations. In case you want customization or running from none Google Cloud 
+Platform environments, the ErrorReporting and all Stackdriver services 
+instrumentation can be configured through a single interface
 ```ruby
 require "google/cloud/error_reporting"
  
@@ -104,20 +102,13 @@ Rails.application.configure do
 end
 ```
 
-Alternatively, check out [stackdriver](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver) gem, which enables this Railtie by default.
+Alternatively, check out the [stackdriver](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver) gem, which enables this Railtie by default.
 
 ### Rack Integration
 
 Other Rack base framework can also directly leverage the Middleware directly:
 ```ruby
 require "google/cloud/error_reporting"
- 
-Google::Cloud::ErrorReporting.configure do |config|
-  config.project_id      = "my-project"
-  config.keyfile         = "/path/to/keyfile.json"
-  config.service_name    = "my-app-name"
-  config.service_version = "my-app-version"
-end
  
 use Google::Cloud::ErrorReporting::Middleware
 ```
