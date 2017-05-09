@@ -148,6 +148,24 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       assert_results results
     end
 
+    it "can execute a simple query with the read_timestamp option (Time)" do
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+      spanner.service.mocked_service = mock
+
+      results = nil
+      client.snapshot read_timestamp: snapshot_time do |snp|
+        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        results = snp.execute "SELECT * FROM users"
+      end
+
+      mock.verify
+
+      assert_results results
+    end
+
     it "can execute a simple query with the timestamp option (DateTime)" do
       mock = Minitest::Mock.new
       mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -157,6 +175,24 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot timestamp: snapshot_datetime do |snp|
+        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        results = snp.execute "SELECT * FROM users"
+      end
+
+      mock.verify
+
+      assert_results results
+    end
+
+    it "can execute a simple query with the read_timestamp option (DateTime)" do
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+      spanner.service.mocked_service = mock
+
+      results = nil
+      client.snapshot read_timestamp: snapshot_datetime do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end
@@ -181,6 +217,24 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot staleness: snapshot_staleness do |snp|
+        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        results = snp.execute "SELECT * FROM users"
+      end
+
+      mock.verify
+
+      assert_results results
+    end
+
+    it "can execute a simple query with the exact_staleness option" do
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+      spanner.service.mocked_service = mock
+
+      results = nil
+      client.snapshot exact_staleness: snapshot_staleness do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end

@@ -110,6 +110,27 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     assert_results results
   end
 
+  it "reads with read_timestamp" do
+    transaction = Google::Spanner::V1::TransactionSelector.new(
+      single_use: Google::Spanner::V1::TransactionOptions.new(
+        read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+          read_timestamp: timestamp, return_read_timestamp: true
+        )
+      )
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, single_use: { read_timestamp: time_obj }
+
+    mock.verify
+
+    assert_results results
+  end
+
   it "reads with staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
@@ -125,6 +146,27 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns, single_use: { staleness: 120 }
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "reads with exact_staleness" do
+    transaction = Google::Spanner::V1::TransactionSelector.new(
+      single_use: Google::Spanner::V1::TransactionOptions.new(
+        read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+          exact_staleness: duration, return_read_timestamp: true
+        )
+      )
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, single_use: { exact_staleness: 120 }
 
     mock.verify
 
@@ -152,6 +194,27 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     assert_results results
   end
 
+  it "reads with min_read_timestamp" do
+    transaction = Google::Spanner::V1::TransactionSelector.new(
+      single_use: Google::Spanner::V1::TransactionOptions.new(
+        read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+          min_read_timestamp: timestamp, return_read_timestamp: true
+        )
+      )
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, single_use: { min_read_timestamp: time_obj }
+
+    mock.verify
+
+    assert_results results
+  end
+
   it "reads with bounded_staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
@@ -167,6 +230,27 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns, single_use: { bounded_staleness: 120 }
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "reads with max_staleness" do
+    transaction = Google::Spanner::V1::TransactionSelector.new(
+      single_use: Google::Spanner::V1::TransactionOptions.new(
+        read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+          max_staleness: duration, return_read_timestamp: true
+        )
+      )
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, single_use: { max_staleness: 120 }
 
     mock.verify
 
