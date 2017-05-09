@@ -100,7 +100,7 @@ module Google
           #
           #   databases = spanner.databases "my-instance"
           #   databases.all do |database|
-          #     puts database.name
+          #     puts database.database_id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -110,7 +110,7 @@ module Google
           #
           #   databases = spanner.databases "my-instance"
           #   all_database_ids = databases.all.map do |database|
-          #     database.name
+          #     database.database_id
           #   end
           #
           # @example Limit the number of API calls made:
@@ -120,7 +120,7 @@ module Google
           #
           #   databases = spanner.databases "my-instance"
           #   databases.all(request_limit: 10) do |database|
-          #     puts database.name
+          #     puts database.database_id
           #   end
           #
           def all request_limit: nil

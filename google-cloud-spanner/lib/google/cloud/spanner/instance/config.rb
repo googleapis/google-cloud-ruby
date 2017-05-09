@@ -36,7 +36,7 @@ module Google
         #
         #   instance_configs = spanner.instance_configs
         #   instance_configs.each do |config|
-        #     puts config.name
+        #     puts config.instance_config_id
         #   end
         #
         class Config

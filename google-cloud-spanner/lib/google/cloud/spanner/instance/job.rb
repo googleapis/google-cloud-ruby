@@ -20,8 +20,8 @@ module Google
         ##
         # # Job
         #
-        # A resource represents the long-running, asynchronous processing of an
-        # instance create or update operation. The job can be refreshed to
+        # A resource representing the long-running, asynchronous processing of
+        # an instance create or update operation. The job can be refreshed to
         # retrieve the instance object once the operation has been completed.
         #
         # See {Project#create_instance} and {Instance#update}.
@@ -62,7 +62,7 @@ module Google
           end
 
           ##
-          # The instance.
+          # The instance that is the object of the operation.
           #
           # @return [Google::Cloud::Spanner::Instance, nil] Returns `nil`
           #   if operation is not complete.

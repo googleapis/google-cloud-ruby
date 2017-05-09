@@ -100,7 +100,7 @@ module Google
         #
         #   instances = spanner.instances
         #   instances.each do |instance|
-        #     puts instance.name
+        #     puts instance.instance_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -110,7 +110,7 @@ module Google
         #
         #   instances = spanner.instances
         #   instances.all do |instance|
-        #     puts instance.name
+        #     puts instance.instance_id
         #   end
         #
         def instances token: nil, max: nil
@@ -225,7 +225,7 @@ module Google
         #
         #   instance_configs = spanner.instance_configs
         #   instance_configs.each do |config|
-        #     puts config.name
+        #     puts config.instance_config_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -235,7 +235,7 @@ module Google
         #
         #   instance_configs = spanner.instance_configs
         #   instance_configs.all do |config|
-        #     puts config.name
+        #     puts config.instance_config_id
         #   end
         #
         def instance_configs token: nil, max: nil
@@ -293,7 +293,7 @@ module Google
         #
         #   databases = spanner.databases "my-instance"
         #   databases.each do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -303,7 +303,7 @@ module Google
         #
         #   databases = spanner.databases "my-instance"
         #   databases.all do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         def databases instance_id, token: nil, max: nil

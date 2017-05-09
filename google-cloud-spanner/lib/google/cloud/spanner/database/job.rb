@@ -20,8 +20,8 @@ module Google
         ##
         # # Job
         #
-        # A resource represents the long-running, asynchronous processing of an
-        # database create or update operation. The job can be refreshed to
+        # A resource representing the long-running, asynchronous processing of
+        # a database create or update operation. The job can be refreshed to
         # retrieve the database object once the operation has been completed.
         #
         # See {Project#create_database} and {Database#update}.
@@ -59,7 +59,7 @@ module Google
           end
 
           ##
-          # The database.
+          # The database that is the object of the operation.
           #
           # @return [Google::Cloud::Spanner::Database, nil] Returns `nil`
           #   if operation is not complete.
@@ -121,7 +121,7 @@ module Google
 
           ##
           # Reloads the job with current data from the long-running,
-          # asynchronous processing of an database operation.
+          # asynchronous processing of a database operation.
           #
           # @example
           #   require "google/cloud/spanner"

@@ -236,7 +236,7 @@ module Google
         #   instance = spanner.instance "my-instance"
         #   databases = instance.databases
         #   databases.each do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -247,7 +247,7 @@ module Google
         #   instance = spanner.instance "my-instance"
         #   databases = instance.databases
         #   databases.all do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         def databases token: nil, max: nil

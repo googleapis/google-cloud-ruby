@@ -99,7 +99,7 @@ module Google
           #   spanner = Google::Cloud::Spanner.new
           #
           #   spanner.instances.all do |instance|
-          #     puts instance.name
+          #     puts instance.instance_id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -108,7 +108,7 @@ module Google
           #   spanner = Google::Cloud::Spanner.new
           #
           #   all_instance_ids = spanner.instances.all.map do |instance|
-          #     instance.name
+          #     instance.instance_id
           #   end
           #
           # @example Limit the number of API calls made:
@@ -117,7 +117,7 @@ module Google
           #   spanner = Google::Cloud::Spanner.new
           #
           #   spanner.instances.all(request_limit: 10) do |instance|
-          #     puts instance.name
+          #     puts instance.instance_id
           #   end
           #
           def all request_limit: nil
