@@ -27,7 +27,7 @@ module Google
           %w(ERROR_REPORTING_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
 
         ##
-        # @private Create credentials with given scope and/or keyfile
+        # @private Create credentials with given scope and/or keyfile.
         def self.credentials_with_scope keyfile, scope = nil
           if keyfile.nil?
             default(scope: scope)

@@ -16,12 +16,15 @@ module Google
   module Cloud
     module ErrorReporting
       ##
-      # ErrorEvent
+      # # ErrorEvent
       #
-      # An individual error event to report
+      # An individual error event to report to Stackdriver Error Reporting
+      # service.
       #
       # Google::Cloud::ErrorReporting::ErrorEvent is able to be transformed
-      # into gRPC ErrorEvent structure. Once an error event is reported, the GCP
+      # into
+      # {Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent}
+      # gRPC structure. Once an error event is reported, the GCP
       # Stackdriver ErrorReporting service is able to parse the message and
       # backtrace, then group the error events by content.
       #
@@ -42,7 +45,6 @@ module Google
         ##
         # Time when the event occurred. If not provided, the time when the event
         # was received by the Error Reporting system will be used.
-        #
         attr_accessor :event_time
 
         ##
@@ -117,7 +119,7 @@ module Google
         ##
         # Build a new ErrorEvent from a
         # Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-        # object
+        # object.
         #
         # @param [
         #   Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
@@ -153,7 +155,7 @@ module Google
         end
 
         ##
-        # @private Extract service context info from gRPC into an ErrorEvent
+        # @private Extract service context info from gRPC into an ErrorEvent.
         def self.extract_service_context error_event, service_context_grpc
           return nil if service_context_grpc.nil?
 
@@ -162,7 +164,7 @@ module Google
         end
 
         ##
-        # @private Extract error context info from gRPC into an ErrorEvent
+        # @private Extract error context info from gRPC into an ErrorEvent.
         def self.extract_error_context error_event, error_context_grpc
           return nil if error_context_grpc.nil?
 
@@ -173,7 +175,7 @@ module Google
         end
 
         ##
-        # @private Extract http request info from gRPC into an ErrorEvent
+        # @private Extract http request info from gRPC into an ErrorEvent.
         def self.extract_http_request error_event, http_request_grpc
           return nil if http_request_grpc.nil?
 
@@ -186,7 +188,7 @@ module Google
         end
 
         ##
-        # @private Extract source location info from gRPC into an ErrorEvent
+        # @private Extract source location info from gRPC into an ErrorEvent.
         def self.extract_source_location error_event, source_location_grpc
           return nil if source_location_grpc.nil?
 
@@ -202,12 +204,12 @@ module Google
                              :extract_source_location
 
         ##
-        # Construct an ErrorEvent object based on a given exception
+        # Construct an ErrorEvent object based on a given exception.
         #
-        # @param [Exception] exception A Ruby exception
+        # @param [Exception] exception A Ruby exception.
         #
         # @return [ErrorEvent] An ErrorEvent object containing information
-        #   from the given exception
+        #   from the given exception.
         def self.from_exception exception
           backtrace = exception.backtrace
           message = exception.message
@@ -230,10 +232,10 @@ module Google
         end
 
         ##
-        # Convert ErrorEvent object to gRPC struct
+        # Convert ErrorEvent object to gRPC struct.
         #
         # @return [Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
-        #   gRPC struct that represent an ErrorEvent
+        #   gRPC struct that represent an ErrorEvent.
         def to_grpc
           error_event_hash = {
             event_time: event_time_hash,

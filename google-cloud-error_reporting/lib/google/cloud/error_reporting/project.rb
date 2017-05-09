@@ -40,13 +40,13 @@ module Google
       #                                             service_name: "my_app_name"
       #   error_reporting.report error_event
       #
-      # @see Google::Cloud::ErrorReporting.new
+      # See {Google::Cloud::ErrorReporting.new}
       #
       class Project
         ##
-        # Find default project_id from ERROR_REPORTING_RPOJECT,
-        # GOOGLE_CLOUD_PROJECT, GCLOUD_PROJECT environment varaibles, or query
-        # from GCE meta service
+        # Find default project_id from `ERROR_REPORTING_RPOJECT`,
+        # `GOOGLE_CLOUD_PROJECT`, `GCLOUD_PROJECT` environment varaibles, or
+        # query from GCE meta service.
         #
         # @return [String] default valid GCP project_id
         #
@@ -57,8 +57,8 @@ module Google
         end
 
         ##
-        # Find default service_name from ERROR_REPORTING_SERVICE,
-        # GAE_MODULE_NAME environment varaibles or just "ruby"
+        # Find default service_name from `ERROR_REPORTING_SERVICE`,
+        # `GAE_MODULE_NAME` environment Variables, or just "ruby".
         #
         # @return [String] default GCP service_name
         #
@@ -69,8 +69,8 @@ module Google
         end
 
         ##
-        # Find default service_version from ERROR_REPORTING_VERSION or
-        # GAE_MODULE_VERSION environment varaibles
+        # Find default service_version from `ERROR_REPORTING_VERSION` or
+        # `GAE_MODULE_VERSION` environment varaibles.
         #
         # @return [String] default GCP service_version
         #
@@ -84,9 +84,9 @@ module Google
         attr_accessor :service
 
         ##
-        # Create a new Project instance
+        # @private Create a new Project instance.
         #
-        # @param [Google::Cloud::ErrorReporting::Service] service The underneath
+        # @param [Google::Cloud::ErrorReporting::Service] service The underlying
         #   Service object
         #
         # @return [Google::Cloud::ErrorReporting::Project] A new Project
@@ -97,7 +97,8 @@ module Google
         end
 
         ##
-        # Get the name of current project_id from underneath gRPC Service object
+        # Get the name of current project_id from underneath gRPC Service
+        # object.
         #
         # @return [String] The current project_id
         #
@@ -106,7 +107,8 @@ module Google
         end
 
         ##
-        # Report an ErrorEvent to Stackdriver ErrorReporting
+        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver
+        # Error Reporting service.
         #
         # @example
         #   require "google/cloud/error_reporting"
@@ -121,8 +123,9 @@ module Google
         end
 
         ##
-        # Create an ErrorEvent from the given exception, and report this
-        # ErrorEvent to Stackdriver Error Reporting
+        # Create a {Google::Cloud::ErrorReporting::ErrorEvent} from the
+        # given exception, and report this ErrorEvent to Stackdriver Error
+        # Reporting service.
         #
         # @param [Exception] exception A Ruby exception
         # @param [String] service_name The service's name.
@@ -156,7 +159,8 @@ module Google
         end
 
         ##
-        # Create a new ErrorEvent instance
+        # Create a new {Google::Cloud::ErrorReporting::ErrorEvent} instance
+        # with given parameters.
         #
         # @param [String] message The error message along with backtrace
         # @param [String] service_name The service's name.
@@ -171,7 +175,7 @@ module Google
         #   uniquely identifies the user. When sending an error report, leave
         #   this field empty if the user was not logged in. In this case the
         #   Error Reporting system will use other data, such as remote IP
-        #   address, to distinguish affected users
+        #   address, to distinguish affected users.
         # @param [String] file_path The source code filename, which can include
         #   a truncated relative path, or a full path from a production machine.
         # @param [Number] line_number 1-based. 0 indicates that the line number

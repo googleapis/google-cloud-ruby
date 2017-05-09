@@ -88,18 +88,14 @@ module Stackdriver
         assignment = !match[2].empty?
 
         if @configs.key? config_key
-          if @configs[config_key].is_a? Stackdriver::Core::Configuration
-            if assignment
+          if assignment
+            if @configs[config_key].is_a? Stackdriver::Core::Configuration
               fail "#{config_key} is a sub Configuration group. Not an option."
             else
-              return @configs[config_key]
+              @configs[config_key] = args.first
             end
           else
-            if assignment
-              @configs[config_key] = args.first
-            else
-              return @configs[config_key]
-            end
+            return @configs[config_key]
           end
         else
           fail "Unrecognized Option: #{mid}"
@@ -111,15 +107,15 @@ module Stackdriver
       def init_options options
         options.each do |option|
           case option
-            when Symbol
-              @configs[option] = nil
-            when Hash
-              option.each do |k, v|
-                @configs[k] = self.class.new v
-              end
-            else
-              fail ArgumentError \
-                "Configuration option can only be symbol or hash"
+          when Symbol
+            @configs[option] = nil
+          when Hash
+            option.each do |k, v|
+              @configs[k] = self.class.new v
+            end
+          else
+            fail ArgumentError \
+              "Configuration option can only be symbol or hash"
           end
         end
       end

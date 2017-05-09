@@ -69,7 +69,8 @@ module Google
         attr_accessor :mocked_error_reporting
 
         ##
-        # Report an ErrorEvent to Stackdriver ErrorReporting
+        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver
+        # Error Reporting service.
         #
         # @example
         #   require "google/cloud/error_reporting"

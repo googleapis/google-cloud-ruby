@@ -21,12 +21,12 @@ require "stackdriver/core"
 module Google
   module Cloud
     ##
-    # # Stackdriver ErrorReporting
+    # # ErrorReporting
     #
     # Stackdriver Error Reporting counts, analyzes and aggregates the crashes in
-    # your running cloud services. The Stackdriver Error Reporting API provides:
-    # * [A simple endpoint to report errors from your application](
-    # #report-error).
+    # your running cloud services. The Stackdriver Error Reporting
+    # Instrumentation client provides
+    # [a simple way to report errors](#report-error) from your application.
     #
     # For general information about Stackdriver Error Reporting, read
     # [Stackdriver Error Reporting Documentation]
@@ -36,14 +36,15 @@ module Google
     # Rubyists. Authentication is handled by Google::Cloud#error_reporting.
     # You can provide the project and credential information to connect to the
     # Stackdriver Error Reporting service, or if you are running on Google
-    # Compute Engine this configuration is taken care of for you. You can read
+    # Cloud Platform this configuration is taken care of for you. You can read
     # more about the options for connecting in the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ## Report Error
     #
     # You can easily report exceptions from your applications to Stackdriver
-    # ErrorReporting service
+    # Error Reporting service:
+    #
     # ```ruby
     # require "google/cloud/error_reporting"
     #
@@ -63,6 +64,7 @@ module Google
     #   Google::Cloud::ErrorReporting.report exception
     # end
     # ```
+    #
     # See the [Instrumentation
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
     # for more examples.
@@ -141,27 +143,29 @@ module Google
       end
 
       ##
-      # Configure the default Google::Cloud::ErrorReporting client, allow the
-      # Google::Cloud::ErrorReporting.report public method to reuse these
+      # Configure the default {Google::Cloud::ErrorReporting::Project}
+      # client, allows the {.report} public method to reuse these
       # configured parameters.
       #
       # Possible configuration parameters:
-      #   * project_id: The Google Cloud Project ID. Automatically discovered
-      #                 when running from GCP environments.
-      #   * keyfile: The service account JSON file path. Automatically
-      #              discovered when running from GCP environments.
-      #   * service_name: An identifier for the running service. Optional,
-      #              automatically discovered when running from Google App
-      #              Engine Flex. Otherwise default to "ruby".
-      #   * service_version: A version identifier for the running service.
-      #                      Optional, automatically discovered when running
-      #                      from Google App Engine Flex.
+      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
+      #                   when running from GCP environments.
+      #   * `keyfile`: The service account JSON file path. Automatically
+      #                discovered when running from GCP environments.
+      #   * `service_name`: An identifier for the running service. Optional,
+      #                     automatically discovered when running from Google
+      #                     App Engine Flex. Otherwise default to "ruby".
+      #   * `service_version`: A version identifier for the running service.
+      #                        Optional, automatically discovered when running
+      #                        from Google App Engine Flex.
       #
       # Note the project_id and keyfile configuration changes won't be picked up
-      # after the first Google::Cloud::ErrorReporting.report call.
+      # after the first {.report} call.
       #
       # @example
       #   # in app.rb
+      #   require "google/cloud/error_reporting"
+      #
       #   Google::Cloud::ErrorReporting.configure do |config|
       #     config.project_id = "my-project-id"
       #     config.keyfile = "/path/to/keyfile.json"
@@ -203,12 +207,7 @@ module Google
       #
       # @example Basic usage
       #   # in app.rb
-      #   Google::Cloud::ErrorReporting.configure do |config|
-      #     config.project_id = "my-project-id"
-      #     config.keyfile = "/path/to/keyfile.json"
-      #     config.service_name = "my-service"
-      #     config.service_version = "v8"
-      #   end
+      #   require "google/cloud/error_reporting"
       #
       #   begin
       #     fail "boom"
@@ -218,6 +217,8 @@ module Google
       #   end
       #
       # @example The error event can be customized if needed
+      #   require "google/cloud/error_reporting"
+      #
       #   begin
       #     fail "boom"
       #   rescue => exception

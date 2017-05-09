@@ -4,11 +4,13 @@ The google-cloud-error_reporting gem provides framework instrumentation features
 to make it easy to report exceptions from your application.
 
 ## Installation
+
 ```
 $ gem install google-cloud-error_reporting
 ```
 
 ## Quick Start
+
 ```ruby
 require "google/cloud/error_reporting"
  
@@ -28,7 +30,8 @@ The Stackdriver ErrorReporting instrumentation featuers should work by default
 on Goolge Cloud Platform environments without needing any additional 
 configurations. In case you want customization or running from none Google Cloud 
 Platform environments, the ErrorReporting and all Stackdriver services 
-instrumentation can be configured through a single interface
+instrumentation can be configured through a single interface:
+
 ```ruby
 require "google/cloud/error_reporting"
  
@@ -50,7 +53,8 @@ end
 ```
 
 The Stackdriver ErrorReporting specific configuration parameters can also be
-configured through its own interface
+configured through its own interface:
+
 ```ruby
 require "google/cloud/error_reporting"
  
@@ -69,19 +73,32 @@ Google::Cloud.configure do |config|
   config.error_reporting.service_version = "my-app-version"
 end
 ```
-These configuration parameters will be applied to both of the `Google::Cloud::ErrorReporting::Middleware` and
-the `Google::Cloud::ErrorReporting.report` interface
+
+These configuration parameters will be applied to both of the 
+`Google::Cloud::ErrorReporting::Middleware` and the 
+`Google::Cloud::ErrorReporting.report` interface.
 
 ## Rack Middleware and Railtie
-The google-cloud-error_reporting gem provides a Rack Middleware class that can easily integrate with Rack based application frameworks, such as Rails and Sinatra. When enabled, it automatically gathers application exceptions from requests and submit the information to the Stackdriver Error Reporting service. On top of that, the google-cloud-error_reporting also implements a Railtie class that automatically enables the Rack Middleware in Rails applications when used.
+The google-cloud-error_reporting gem provides a Rack Middleware class that can 
+easily integrate with Rack based application frameworks, such as Rails and 
+Sinatra. When enabled, it automatically gathers application exceptions from 
+requests and submit the information to the Stackdriver Error Reporting service.
+ On top of that, the google-cloud-error_reporting also implements a Railtie 
+ class that automatically enables the Rack Middleware in Rails applications when 
+ used.
 
 ### Rails Integration
 
-To use the Stackdriver Error Reporting Railtie for Ruby on Rails applications, simply add this line to config/application.rb:
+To use the Stackdriver Error Reporting Railtie for Ruby on Rails applications, 
+simply add this line to config/application.rb:
+
 ```ruby
 require "google/cloud/error_reporting/rails"
 ```
-Then the instrumentation library can also be configured through Rails configuration interface:
+
+Then the instrumentation library can also be configured through Rails 
+configuration interface:
+
 ```ruby
 # In config/environments/*.rb
  
@@ -102,20 +119,24 @@ Rails.application.configure do
 end
 ```
 
-Alternatively, check out the [stackdriver](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver) gem, which enables this Railtie by default.
+Alternatively, check out the 
+[stackdriver](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver) 
+gem, which enables this Railtie by default.
 
 ### Rack Integration
 
 Other Rack base framework can also directly leverage the Middleware directly:
+
 ```ruby
 require "google/cloud/error_reporting"
  
 use Google::Cloud::ErrorReporting::Middleware
 ```
 
-## Report Captured Expcetions
-Captured Ruby exceptions can be directly reported to Stackdriver ErrorReporting
-by using `Google::Cloud::ErrorReporting.report`
+## Report Captured Exceptions
+Captured Ruby exceptions can be directly reported to Stackdriver Error Reporting
+by using `Google::Cloud::ErrorReporting.report`:
+
 ```ruby
 begin
   fail "Boom!"
@@ -124,7 +145,8 @@ rescue => exception
 end
 ```
 
-The reported error event can also be customized
+The reported error event can also be customized:
+
 ```ruby
 begin
   fail "Boom!"
@@ -137,5 +159,7 @@ rescue => exception
   end
 end
 ```
-See [Google::Cloud::ErrorReporting::ErrorEvent](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/v0.24.0/google/cloud/errorreporting/errorevent) 
+
+See 
+[Google::Cloud::ErrorReporting::ErrorEvent](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/google/cloud/errorreporting/errorevent) 
 class for all options.

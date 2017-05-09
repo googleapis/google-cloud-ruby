@@ -72,4 +72,3 @@ module Google
     extend Configuration
   end
 end
-

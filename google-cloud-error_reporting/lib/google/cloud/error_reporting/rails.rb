@@ -20,18 +20,19 @@ module Google
   module Cloud
     module ErrorReporting
       ##
-      # Railtie
+      # # Railtie
       #
       # Google::Cloud::ErrorReporting::Railtie automatically add the
-      # Google::Cloud::ErrorReporting::Middleware to Rack in a Rails
+      # {Google::Cloud::ErrorReporting::Middleware} to Rack in a Rails
       # environment. It will automatically capture Exceptions from the Rails app
-      # and report them to Stackdriver Error Reporting.
+      # and report them to Stackdriver Error Reporting service.
       #
       # The Middleware is only added when certain conditions are met. See
       # {Railtie.use_error_reporting?} for detail.
       #
-      # When loaded, the Google::Cloud::ErrorReporting::Middleware will be
-      # inserted after ::ActionDispatch::DebugExceptions Middleware, which
+      # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
+      # inserted after ActionDispatch::DebugExceptions or
+      # ActionDispatch::ShowExceptions Middleware, which
       # allows it to actually rescue all Exceptions and throw it back up. The
       # middleware should also be initialized with correct gcp project_id,
       # keyfile, service_name, and service_version if they are defined in
@@ -131,7 +132,7 @@ module Google
         end
 
         ##
-        # @private Helper method to parse rails config into a flattened hash
+        # @private Helper method to parse rails config into a flattened hash.
         def self.parse_rails_config config
           gcp_config = config.google_cloud
           er_config = gcp_config.error_reporting

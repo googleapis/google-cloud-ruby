@@ -20,7 +20,7 @@ module Google
   module Cloud
     module ErrorReporting
       ##
-      # Middleware
+      # # Middleware
       #
       # Google::Cloud::ErrorReporting::Middleware defines a Rack Middleware
       # that can automatically catch upstream exceptions and report them
@@ -54,7 +54,7 @@ module Google
         attr_reader :ignore_classes
 
         ##
-        # Construct a new instance of Middleware
+        # Construct a new instance of Middleware.
         #
         # @param [Rack::Application] app The Rack application
         # @param [Google::Cloud::ErrorReporting::Project] error_reporting A
@@ -221,7 +221,7 @@ module Google
 
         ##
         # Helper method to derive HTTP status code base on exception class in
-        # Rails. Returns nil if not in Rails environment
+        # Rails. Returns nil if not in Rails environment.
         #
         # @param [Exception] exception An Ruby exception
         #
