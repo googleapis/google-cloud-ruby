@@ -254,15 +254,6 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       error_event.service_version.must_equal service_version
     end
 
-    it "injects user from ENV['USER']" do
-      user = "john_doe"
-
-      ENV.stub :[], user do
-        error_event = middleware.error_event_from_exception rack_env, app_exception
-        error_event.user.must_equal user
-      end
-    end
-
     it "injects http data from Rack::Request" do
       error_event = middleware.error_event_from_exception rack_env, app_exception
 

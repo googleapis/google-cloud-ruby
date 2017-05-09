@@ -67,7 +67,8 @@ module Google
         #   file path the file must be readable.
         # @param [String] service_name Name of the service. Default to
         #   {Google::Cloud::ErrorReporting::Project.default_service_name}.
-        #   Automatically discovered if on Google App Engine Flex.
+        #   Automatically discovered if on Google App Engine Flexible
+        #   Environment.
         # @param [String] service_version Version of the service. Optional.
         #   Default to
         #   {Google::Cloud::ErrorReporting::Project.default_service_version}.
@@ -150,9 +151,9 @@ module Google
         end
 
         ##
-        # Creates a ErrorEvent based on the exception. Fill in the
-        # HttpRequestContext section of the ErrorEvent based on the HTTP Request
-        # headers.
+        # Creates a {Google::Cloud::ErrorReporting::ErrorEvent} based on the
+        # exception. Fill in the HttpRequestContext section of the ErrorEvent
+        # based on the HTTP Request headers.
         #
         # When used in Rails environment. It replies on
         # ActionDispatch::ExceptionWrapper class to derive a HTTP status code
@@ -166,8 +167,6 @@ module Google
         #
         def error_event_from_exception env, exception
           error_event = ErrorReporting::ErrorEvent.from_exception exception
-
-          error_event.user = ENV["USER"]
 
           # Inject service_context info into error_event object
           error_event.service_name = service_name

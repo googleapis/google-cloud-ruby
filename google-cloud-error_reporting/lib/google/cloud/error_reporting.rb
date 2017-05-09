@@ -26,7 +26,8 @@ module Google
     # Stackdriver Error Reporting counts, analyzes and aggregates the crashes in
     # your running cloud services. The Stackdriver Error Reporting
     # Instrumentation client provides
-    # [a simple way to report errors](#report-error) from your application.
+    # [a simple way to report errors](#how-to-report-errors) from your
+    # application.
     #
     # For general information about Stackdriver Error Reporting, read
     # [Stackdriver Error Reporting Documentation]
@@ -40,7 +41,7 @@ module Google
     # more about the options for connecting in the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # ## Report Error
+    # ## How to report errors
     #
     # You can easily report exceptions from your applications to Stackdriver
     # Error Reporting service:
@@ -82,9 +83,7 @@ module Google
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :error_reporting
-        Google::Cloud.configure.add_options [{
-          error_reporting: CONFIG_OPTIONS
-        }]
+        Google::Cloud.configure.add_options error_reporting: CONFIG_OPTIONS
       end
 
       ##

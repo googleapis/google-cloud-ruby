@@ -36,10 +36,10 @@ module Stackdriver
       ##
       # Constructs a new instance of Configuration object.
       #
-      # @param [Array<Symbol, Hash<Symbol, Array>>] options A nested list of
-      #   predefined option keys. Symbols in array will be option keys for this
-      #   level. Nested hash translates to nested Configuration objects with
-      #   nested options.
+      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
+      #   or Hash of predefined option keys. Symbols in array will be option
+      #   keys for current level. Nested hash translates to nested Configuration
+      #   objects with nested options.
       #
       def initialize options = []
         @configs = {}
@@ -50,10 +50,10 @@ module Stackdriver
       ##
       # Add more valid options to a Configuration object
       #
-      # @param [Array<Symbol, Hash<Symbol, Array>>] options A nested list of
-      #   predefined option keys. Symbols in array will be option keys for this
-      #   level. Nested hash translates to nested Configuration objects with
-      #   nested options.
+      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
+      #   or Hash of predefined option keys. Symbols in array will be option
+      #   keys for current level. Nested hash translates to nested Configuration
+      #   objects with nested options.
       #
       # @example
       #   config = Stackdriver::Core::Configuration.new options: [:opt1]
@@ -105,6 +105,7 @@ module Stackdriver
       private
 
       def init_options options
+        options = [options].flatten(1)
         options.each do |option|
           case option
           when Symbol

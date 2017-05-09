@@ -25,7 +25,7 @@ module Google
       # Google::Cloud::ErrorReporting::Railtie automatically add the
       # {Google::Cloud::ErrorReporting::Middleware} to Rack in a Rails
       # environment. It will automatically capture Exceptions from the Rails app
-      # and report them to Stackdriver Error Reporting service.
+      # and report them to the Stackdriver Error Reporting service.
       #
       # The Middleware is only added when certain conditions are met. See
       # {Railtie.use_error_reporting?} for detail.
@@ -136,7 +136,7 @@ module Google
         def self.parse_rails_config config
           gcp_config = config.google_cloud
           er_config = gcp_config.error_reporting
-          if gcp_config.key?(:use_error_reporting)
+          if gcp_config.key? :use_error_reporting
             use_error_reporting = gcp_config.use_error_reporting
           else
             use_error_reporting = nil
