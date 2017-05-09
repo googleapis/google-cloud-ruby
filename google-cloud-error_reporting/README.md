@@ -1,7 +1,7 @@
 # google-cloud-error_reporting
 
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) counts,
-analyzes and aggregates the crashes in your running cloud services. A
+analyzes and aggregates errors raised in your running cloud services. A
 centralized error management interface displays the results with sorting 
 and filtering capabilities. A dedicated view shows the error details: time 
 chart, occurrences, affected user count, first and last seen dates and a 
@@ -29,7 +29,8 @@ The Instrumentation client and API use Service Account credentials to connect
 to Google Cloud services. When running on Google Cloud Platform environments, 
 the credentials will be discovered automatically. When running on other 
 environments the Service Account credentials can be specified by providing the 
-path to the JSON file, or the JSON itself, in environment variables.
+path to the JSON file, or the JSON itself, in environment variables or 
+configuration code.
 
 Instructions and configuration options are covered in the 
 [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/authentication).

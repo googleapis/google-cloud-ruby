@@ -18,9 +18,10 @@ require "google/cloud/configuration"
 describe Google::Cloud do
   describe ".configure" do
     it "allows the right config options" do
-      valid_options = Google::Cloud::Configuration::CONFIG_OPTIONS
-
-      Google::Cloud.configure.instance_variable_get(:@configs).keys.must_equal valid_options
+      config = Google::Cloud.configure
+      Google::Cloud::Configuration::CONFIG_OPTIONS.each do |option|
+        config.option?(option).must_equal true
+      end
     end
 
     it "doesn't allow the wrong option" do

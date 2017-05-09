@@ -26,11 +26,10 @@ end
 ```
 
 ## Configuration
-The Stackdriver ErrorReporting instrumentation featuers should work by default 
-on Goolge Cloud Platform environments without needing any additional 
-configurations. In case you want customization or running from none Google Cloud 
-Platform environments, the ErrorReporting and all Stackdriver services 
-instrumentation can be configured through a single interface:
+The default configuration enables Stackdriver instrumentation features for most 
+applications running on Google Cloud Platform. If you want to run on a non 
+Google Cloud environment or you want to customize the instrumentation behavior,
+you can modify the Stackdriver configuration through a single interface:
 
 ```ruby
 require "google/cloud/error_reporting"
@@ -52,7 +51,7 @@ Google::Cloud.configure do |config|
 end
 ```
 
-The Stackdriver ErrorReporting specific configuration parameters can also be
+Configuration specific to Stackdriver Error Reporting can also be
 configured through its own interface:
 
 ```ruby
@@ -82,10 +81,10 @@ These configuration parameters will be applied to both of the
 The google-cloud-error_reporting gem provides a Rack Middleware class that can 
 easily integrate with Rack based application frameworks, such as Rails and 
 Sinatra. When enabled, it automatically gathers application exceptions from 
-requests and submit the information to the Stackdriver Error Reporting service.
- On top of that, the google-cloud-error_reporting also implements a Railtie 
- class that automatically enables the Rack Middleware in Rails applications when 
- used.
+requests and submits the information to the Stackdriver Error Reporting service.
+On top of that, the google-cloud-error_reporting also implements a Railtie 
+class that automatically enables the Rack Middleware in Rails applications when 
+used.
 
 ### Rails Integration
 
@@ -96,7 +95,7 @@ simply add this line to config/application.rb:
 require "google/cloud/error_reporting/rails"
 ```
 
-Then the instrumentation library can also be configured through Rails 
+Then the instrumentation library can also be configured using Rails 
 configuration interface:
 
 ```ruby
@@ -125,7 +124,7 @@ gem, which enables this Railtie by default.
 
 ### Rack Integration
 
-Other Rack base framework can also directly leverage the Middleware directly:
+Other Rack-based framework can also directly leverage the Middleware directly:
 
 ```ruby
 require "google/cloud/error_reporting"
@@ -134,7 +133,7 @@ use Google::Cloud::ErrorReporting::Middleware
 ```
 
 ## Report Captured Exceptions
-Captured Ruby exceptions can be directly reported to Stackdriver Error Reporting
+Captured Ruby exceptions can be reported directly to Stackdriver Error Reporting
 by using `Google::Cloud::ErrorReporting.report`:
 
 ```ruby
