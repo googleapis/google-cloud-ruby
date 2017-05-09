@@ -52,6 +52,9 @@ describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
   it "defaults to hashes" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
+    results.transaction.must_be :nil?
+    results.timestamp.must_be :nil?
+
     types = results.types
     types.wont_be :nil?
     types.must_be_kind_of Hash
@@ -67,6 +70,9 @@ describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
 
   it "can return an array of pairs" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.transaction.must_be :nil?
+    results.timestamp.must_be :nil?
 
     types = results.types pairs: true
     types.wont_be :nil?
