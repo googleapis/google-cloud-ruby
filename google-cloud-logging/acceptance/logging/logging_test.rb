@@ -246,7 +246,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     def entries_via_backoff type
-      filter = "log_name = projects/#{logging.project}/logs/#{log_name}-#{type}"
+      filter = "resource.type = \"gce_instance\" AND " +
+        "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
       if entries.count < 6 && @sleep < 5
         @sleep += 1
@@ -364,7 +365,8 @@ describe Google::Cloud::Logging, :logging do
     end
 
     def entries_via_backoff type
-      filter = "log_name = projects/#{logging.project}/logs/#{log_name}-#{type}"
+      filter = "resource.type = \"gce_instance\" AND " +
+        "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
       if entries.count < 6 && @sleep < 5
         @sleep += 1
