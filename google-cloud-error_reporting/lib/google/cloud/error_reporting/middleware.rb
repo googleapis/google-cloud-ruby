@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
-require "google/cloud/error_reporting/v1beta1"
 require "rack"
 require "rack/request"
 
@@ -22,60 +20,84 @@ module Google
   module Cloud
     module ErrorReporting
       ##
-      # Middleware
+      # # Middleware
       #
       # Google::Cloud::ErrorReporting::Middleware defines a Rack Middleware
       # that can automatically catch upstream exceptions and report them
       # to Stackdriver Error Reporting.
       #
       class Middleware
-        attr_reader :error_reporting, :ignore_classes, :project_id,
-                    :service_name, :service_version
+        ##
+        # A Google::Cloud::ErrorReporting::Project client used to report
+        # error events.
+        attr_reader :error_reporting
 
         ##
-        # Construct a new instance of Middleware
+        # @private The Google Cloud project ID
+        attr_reader :project_id
+
+        ##
+        # @private The Google Cloud keyfile path
+        attr_reader :keyfile
+
+        ##
+        # @private An identifier for the running service
+        attr_reader :service_name
+
+        ##
+        # @private A version identifer for the running service
+        attr_reader :service_version
+
+        ##
+        # @private A list of Exception classes to ignore. The Middleware will
+        # not report these exceptions to Stackdriver ErrorReporting service.
+        attr_reader :ignore_classes
+
+        ##
+        # Construct a new instance of Middleware.
         #
-        # @param [Rack Application] app The Rack application
-        # @param [
-        #   Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient]
-        #   error_reporting A ErrorReporting::V1beta1::ReportErrorsServiceClient
-        #   object to for reporting exceptions
+        # @param [Rack::Application] app The Rack application
+        # @param [Google::Cloud::ErrorReporting::Project] error_reporting A
+        #   Google::Cloud::ErrorReporting::Project client for reporting
+        #   exceptions
         # @param [String] project_id Name of GCP project. Default to
-        #   ENV["ERROR_REPORTING_PROJECT"] then ENV["GOOGLE_CLOUD_PROJECT"].
-        #   Automatically discovered if on GAE
+        #   {Google::Cloud::ErrorReporting::Project.default_project}.
+        #   Automatically discovered from GCP environments.
+        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+        #   file path the file must be readable.
         # @param [String] service_name Name of the service. Default to
-        #   ENV["ERROR_REPORTING_SERVICE"] then "ruby". Automatically discovered
-        #   if on GAE
+        #   {Google::Cloud::ErrorReporting::Project.default_service_name}.
+        #   Automatically discovered if on Google App Engine Flexible
+        #   Environment.
         # @param [String] service_version Version of the service. Optional.
-        #   ENV["ERROR_REPORTING_VERSION"]. Automatically discovered if on GAE
+        #   Default to
+        #   {Google::Cloud::ErrorReporting::Project.default_service_version}.
+        #   Automatically discovered if on Google App Engine Flex.
         # @param [Array<Class>] ignore_classes A single or an array of Exception
-        #   classes to ignore
+        #   classes to ignore. Optional.
         #
         # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of
         #   Middleware
         #
-        def initialize app,
-                       error_reporting: V1beta1::ReportErrorsServiceClient.new,
-                       project_id: nil,
-                       service_name: nil,
-                       service_version: nil,
+        def initialize app, error_reporting: nil, project_id: nil, keyfile: nil,
+                       service_name: nil, service_version: nil,
                        ignore_classes: nil
           @app = app
-          @error_reporting = error_reporting
-          @service_name = service_name ||
-                          ENV["ERROR_REPORTING_SERVICE"] ||
-                          Google::Cloud.env.app_engine_service_id ||
-                          "ruby"
-          @service_version = service_version ||
-                             ENV["ERROR_REPORTING_VERSION"] ||
-                             Google::Cloud.env.app_engine_service_version
-          @ignore_classes = Array(ignore_classes)
-          @project_id = project_id ||
-                        ENV["ERROR_REPORTING_PROJECT"] ||
-                        ENV["GOOGLE_CLOUD_PROJECT"] ||
-                        Google::Cloud.env.project_id
-
+          load_config project_id: project_id,
+                      keyfile: keyfile,
+                      service_name: service_name,
+                      service_version: service_version
           fail ArgumentError, "project_id is required" if @project_id.nil?
+
+          @ignore_classes = Array(ignore_classes)
+          @error_reporting = error_reporting ||
+                             ErrorReporting.new(project: @project_id,
+                                                keyfile: @keyfile)
+
+          # Set module default client to reuse the same client. Update module
+          # configuration parameters.
+          Google::Cloud::ErrorReporting.class_variable_set :@@default_client,
+                                                           @error_reporting
         end
 
         ##
@@ -118,21 +140,20 @@ module Google
           # Do not any exceptions that's specified by the ignore_classes list.
           return if ignore_classes.include? exception.class
 
-          error_event_grpc = build_error_event_from_exception env, exception
+          error_event = error_event_from_exception env, exception
 
           # If this exception maps to a HTTP status code less than 500, do
           # not report it.
-          status_code =
-            error_event_grpc.context.http_request.response_status_code.to_i
+          status_code = error_event.http_status.to_i
           return if status_code > 0 && status_code < 500
 
-          error_reporting.report_error_event full_project_id, error_event_grpc
+          error_reporting.report error_event
         end
 
         ##
-        # Creates a GRPC ErrorEvent based on the exception. Fill in the
-        # HttpRequestContext section of the ErrorEvent based on the HTTP Request
-        # headers.
+        # Creates a {Google::Cloud::ErrorReporting::ErrorEvent} based on the
+        # exception. Fill in the HttpRequestContext section of the ErrorEvent
+        # based on the HTTP Request headers.
         #
         # When used in Rails environment. It replies on
         # ActionDispatch::ExceptionWrapper class to derive a HTTP status code
@@ -141,56 +162,72 @@ module Google
         # @param [Hash] env Rack environment hash
         # @param [Exception] exception Exception to convert from
         #
-        # @return [
-        #   Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
-        #   The gRPC ReportedErrorEvent object that's based
-        #   on given exception
+        # @return [Google::Cloud::ErrorReporting::ErrorEvent] The gRPC
+        #   ErrorEvent object that's based on given env and exception
         #
-        def build_error_event_from_exception env, exception
-          error_event = ErrorEvent.from_exception exception
+        def error_event_from_exception env, exception
+          error_event = ErrorReporting::ErrorEvent.from_exception exception
 
           # Inject service_context info into error_event object
-          error_event[:service_context] = {
-            service: service_name,
-            version: service_version
-          }.delete_if { |_, v| v.nil? }
+          error_event.service_name = service_name
+          error_event.service_version = service_version
 
           # Inject http_request_context info into error_event object
           rack_request = Rack::Request.new env
-          error_event[:context][:http_request] = {
-            method: rack_request.request_method,
-            url: rack_request.url,
-            user_agent: rack_request.user_agent,
-            referrer: rack_request.referrer,
-            response_status_code: get_http_status(exception),
-            remote_ip: rack_request.ip
-          }.delete_if { |_, v| v.nil? }
+          error_event.http_method = rack_request.request_method
+          error_event.http_url = rack_request.url
+          error_event.http_user_agent = rack_request.user_agent
+          error_event.http_referrer = rack_request.referrer
+          error_event.http_status = http_status(exception)
+          error_event.http_remote_ip = rack_request.ip
 
-          error_event.to_grpc
-        end
-
-        ##
-        # Build full ReportErrorsServiceClient project_path from project_id,
-        # which is in "projects/#{project_id}" format.
-        #
-        # @return [String] fully qualified project id in
-        #   "projects/#{project_id}" format
-        def full_project_id
-          V1beta1::ReportErrorsServiceClient.project_path project_id
+          error_event
         end
 
         private
 
         ##
+        # Sync Middleware configuration parameters from multiple sources. The
+        # sources take precedence in following order: explicit parameters,
+        # Google::Cloud::ErrorReporting.configure, Google::Cloud.configure,
+        # then Google::Cloud::ErrorReporting::Project#defaults. This methods
+        # sets final parameters as Middleware instance varaibles, then set
+        # the same parameters back into Google::Cloud::ErrorReporting, to ensure
+        # the Middleware and the simple API configuration are consistent.
+        #
+        def load_config project_id: nil, keyfile: nil,
+                        service_name: nil, service_version: nil
+          gcloud_config = Google::Cloud.configure
+          er_config = Google::Cloud::ErrorReporting.configure
+
+          @project_id = project_id ||
+                        er_config.project_id ||
+                        gcloud_config.project_id ||
+                        ErrorReporting::Project.default_project
+          @keyfile = keyfile || er_config.keyfile || gcloud_config.keyfile
+          @service_name = service_name ||
+                          er_config.service_name ||
+                          ErrorReporting::Project.default_service_name
+          @service_version = service_version ||
+                             er_config.service_version ||
+                             ErrorReporting::Project.default_service_version
+
+          er_config.project_id = @project_id
+          er_config.keyfile = @keyfile
+          er_config.service_name = @service_name
+          er_config.service_version = @service_version
+        end
+
+        ##
         # Helper method to derive HTTP status code base on exception class in
-        # Rails. Returns nil if not in Rails environment
+        # Rails. Returns nil if not in Rails environment.
         #
         # @param [Exception] exception An Ruby exception
         #
         # @return [Integer] A number that represents HTTP status code or nil if
         #   status code can't be determined
         #
-        def get_http_status exception
+        def http_status exception
           http_status = nil
           if defined?(ActionDispatch::ExceptionWrapper) &&
              ActionDispatch::ExceptionWrapper.respond_to?(
@@ -204,110 +241,6 @@ module Google
 
           http_status
         end
-
-        ##
-        # This class implements a hash representation of
-        # Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-        class ErrorEvent
-          # Internal data structure mirroring gRPC ReportedErrorEvent structure
-          attr_reader :hash
-
-          ##
-          # Construct a new ErrorEvent object
-          #
-          # @return [ErrorEvent] A new ErrorEvent object
-          def initialize
-            @hash = {}
-          end
-
-          ##
-          # Construct an ErrorEvent object based on a given exception
-          #
-          # @param [Exception] exception A Ruby exception
-          #
-          # @return [ErrorEvent] An ErrorEvent object containing information
-          #   from the given exception
-          def self.from_exception exception
-            exception_data = extract_exception exception
-
-            # Build error_context hash
-            error_context = {
-              user: ENV["USER"],
-              report_location: {
-                file_path: exception_data[:file_path],
-                function_name: exception_data[:function_name],
-                line_number: exception_data[:line_number].to_i
-              }.delete_if { |_, v| v.nil? }
-            }.delete_if { |_, v| v.nil? }
-
-            # Build error_event hash
-            error_event = ErrorEvent.new
-            t = Time.now
-            error_event.hash.merge!({
-              event_time: {
-                seconds: t.to_i,
-                nanos: t.nsec
-              },
-              message: exception_data[:message],
-              context: error_context
-            }.delete_if { |_, v| v.nil? })
-
-            error_event
-          end
-
-          ##
-          # Helper method extract data from exception
-          #
-          # @param [Exception] exception A Ruby Exception
-          #
-          # @return [Hash] A hash containing formatted error message with
-          # backtrace, file_path, line_number, and function_name
-          def self.extract_exception exception
-            if exception.backtrace.nil? || exception.backtrace.empty?
-              message = exception.message
-            else
-              message = "#{exception.backtrace.first}: #{exception.message} " \
-                        "(#{exception.class})\n\t" +
-                        exception.backtrace.drop(1).join("\n\t")
-              file_path, line_number, function_name =
-                exception.backtrace.first.split(":")
-              function_name = function_name.to_s[/`(.*)'/, 1]
-            end
-
-            {
-              message: message,
-              file_path: file_path,
-              line_number: line_number,
-              function_name: function_name
-            }
-          end
-          private_class_method :extract_exception
-
-          ##
-          # Get the value of the given key from internal hash
-          def [] key
-            hash[key]
-          end
-
-          ##
-          # Write new value with the key in internal hash
-          def []= key, value
-            hash[key] = value
-          end
-
-          ##
-          # Convert ErrorEvent object to gRPC struct
-          #
-          # @return [Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
-          #   gRPC struct that represent an ErrorEvent
-          def to_grpc
-            grpc_module =
-              Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-            grpc_module.decode_json hash.to_json
-          end
-        end
-
-        private_constant :ErrorEvent
       end
     end
   end

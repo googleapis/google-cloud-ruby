@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,10 @@
 # limitations under the License.
 
 
-require "google/cloud/configuration"
-require "stackdriver/core/configuration"
-require "stackdriver/core/trace_context"
-require "stackdriver/core/version"
-
-module Stackdriver
-  ##
-  # The Stackdriver::Core module is a namespace for common types and shared
-  # utilities used by the Google Stackdriver libraries. Most applications will
-  # not need to use these classes directly.
-  #
-  module Core
+module Google
+  module Cloud
+    module ErrorReporting
+      VERSION = "0.24.0".freeze
+    end
   end
 end

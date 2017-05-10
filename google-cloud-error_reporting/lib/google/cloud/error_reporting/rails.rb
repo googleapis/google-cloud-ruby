@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,27 +13,26 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
-require "google/cloud/error_reporting/v1beta1"
+require "google/cloud/error_reporting"
 require "google/cloud/error_reporting/middleware"
-require "google/cloud/credentials"
 
 module Google
   module Cloud
     module ErrorReporting
       ##
-      # Railtie
+      # # Railtie
       #
       # Google::Cloud::ErrorReporting::Railtie automatically add the
-      # Google::Cloud::ErrorReporting::Middleware to Rack in a Rails
+      # {Google::Cloud::ErrorReporting::Middleware} to Rack in a Rails
       # environment. It will automatically capture Exceptions from the Rails app
-      # and report them to Stackdriver Error Reporting.
+      # and report them to the Stackdriver Error Reporting service.
       #
       # The Middleware is only added when certain conditions are met. See
       # {Railtie.use_error_reporting?} for detail.
       #
-      # When loaded, the Google::Cloud::ErrorReporting::Middleware will be
-      # inserted after ::ActionDispatch::DebugExceptions Middleware, which
+      # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
+      # inserted after ActionDispatch::DebugExceptions or
+      # ActionDispatch::ShowExceptions Middleware, which
       # allows it to actually rescue all Exceptions and throw it back up. The
       # middleware should also be initialized with correct gcp project_id,
       # keyfile, service_name, and service_version if they are defined in
@@ -52,20 +51,14 @@ module Google
         config.google_cloud.error_reporting = ActiveSupport::OrderedOptions.new
 
         initializer "Google.Cloud.ErrorReporting" do |app|
-          if self.class.use_error_reporting? app.config
-            gcp_config = app.config.google_cloud
-            er_config = gcp_config.error_reporting
+          use_error_reporting = self.class.use_error_reporting? app.config
+          if use_error_reporting
+            er_config = Railtie.parse_rails_config app.config
 
-            project_id = er_config.project_id || gcp_config.project_id
-            keyfile = er_config.keyfile || gcp_config.keyfile
-
-            channel = self.class.grpc_channel keyfile
-            service_name = er_config.service_name
-            service_version = er_config.service_version
-
-            error_reporting = V1beta1::ReportErrorsServiceClient.new(
-              channel: channel
-            )
+            project_id = er_config[:project_id]
+            keyfile = er_config[:keyfile]
+            service_name = er_config[:service_name]
+            service_version = er_config[:service_version]
 
             # In later versions of Rails, ActionDispatch::DebugExceptions is
             # responsible for catching exceptions. But it didn't exist until
@@ -77,44 +70,19 @@ module Google
                 ::ActionDispatch::ShowExceptions
               end
 
+            error_reporting = ErrorReporting.new project: project_id,
+                                                 keyfile: keyfile
+
             app.middleware.insert_after rails_exception_middleware,
                                         Middleware,
                                         project_id: project_id,
+                                        keyfile: keyfile,
                                         error_reporting: error_reporting,
                                         service_name: service_name,
                                         service_version: service_version
           end
-        end
 
-        ##
-        # Construct a gRPC Channel object from given keyfile
-        #
-        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-        #   file path the file must be readable.
-        #
-        # @return [GRPC::Core::Channel] gRPC Channel object based on given
-        #   keyfile
-        #
-        def self.grpc_channel keyfile = nil
-          require "grpc"
-
-          scopes = V1beta1::ReportErrorsServiceClient::ALL_SCOPES
-          credentials = if keyfile.nil?
-                          Google::Cloud::Credentials.default(
-                            scope: scopes)
-                        else
-                          Google::Cloud::Credentials.new(
-                            keyfile, scope: scopes)
-                        end
-
-          # Return nil if :this_channel_is_insecure
-          return nil if credentials == :this_channel_is_insecure
-
-          channel_cred = GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
-          host = V1beta1::ReportErrorsServiceClient::SERVICE_ADDRESS
-
-          GRPC::Core::Channel.new host, nil, channel_cred
+          Google::Cloud.configure.use_error_reporting = use_error_reporting
         end
 
         ##
@@ -131,26 +99,28 @@ module Google
         # @return [Boolean] Whether to use Stackdriver Error Reporting
         #
         def self.use_error_reporting? config
-          gcp_config = config.google_cloud
-          er_config = gcp_config.error_reporting
+          er_config = Railtie.parse_rails_config config
 
           # Return false if config.google_cloud.use_error_reporting is
           # explicitly false
-          return false if gcp_config.key?(:use_error_reporting) &&
-                          !gcp_config.use_error_reporting
+          use_error_reporting = er_config[:use_error_reporting]
+          return false if use_error_reporting == false
+
+          project_id = er_config[:project_id] ||
+                       ErrorReporting::Project.default_project
+          keyfile = er_config[:keyfile]
 
           # Check credentialing. Returns false if authorization errors are
           # rescued.
-          keyfile = er_config.keyfile || gcp_config.keyfile
           begin
-            grpc_channel keyfile
+            ErrorReporting::Credentials.credentials_with_scope keyfile
           rescue StandardError => e
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"
             return false
           end
 
-          if project_id(config).to_s.empty?
+          if project_id.to_s.empty?
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because the project ID could not be determined."
             return false
@@ -158,28 +128,28 @@ module Google
 
           # Otherwise return true if Rails is running in production or
           # config.google_cloud.use_error_reporting is explicitly true
-          Rails.env.production? ||
-            (gcp_config.key?(:use_error_reporting) &&
-              gcp_config.use_error_reporting)
+          Rails.env.production? || use_error_reporting || false
         end
 
         ##
-        # Determine the GCP project_id from Rails configuration or environment
-        # variables. Default to Google::Cloud.env.project_id
-        #
-        # @param [Rails::Railtie::Configuration] config The
-        #   Rails.application.config
-        #
-        # @return [String] GCP project_id
-        #
-        def self.project_id config
-          config.google_cloud.error_reporting.project_id ||
-            config.google_cloud.project_id ||
-            ENV["ERROR_REPORTING_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
+        # @private Helper method to parse rails config into a flattened hash.
+        def self.parse_rails_config config
+          gcp_config = config.google_cloud
+          er_config = gcp_config.error_reporting
+          if gcp_config.key? :use_error_reporting
+            use_error_reporting = gcp_config.use_error_reporting
+          else
+            use_error_reporting = nil
+          end
+
+          {
+            project_id: er_config.project_id || gcp_config.project_id,
+            keyfile: er_config.keyfile || gcp_config.keyfile,
+            service_name: er_config.service_name,
+            service_version: er_config.service_version,
+            use_error_reporting: use_error_reporting
+          }
         end
-        private_class_method :project_id
       end
     end
   end

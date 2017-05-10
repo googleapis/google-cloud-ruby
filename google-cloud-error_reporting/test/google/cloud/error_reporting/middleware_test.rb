@@ -17,9 +17,10 @@ require "helper"
 require "google/cloud/error_reporting/middleware"
 require "action_dispatch"
 
-describe Google::Cloud::ErrorReporting::Middleware do
+describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
   let(:app_exception_msg) { "A serious error from application" }
   let(:project_id) { "gcp-test-name" }
+  let(:keyfile) { "/path/test.json" }
   let(:service_name) { "my-test-service" }
   let(:service_version) { "vTest" }
 
@@ -44,15 +45,16 @@ describe Google::Cloud::ErrorReporting::Middleware do
     end
     app
   }
-  let(:error_reporting) {
-    obj = OpenStruct.new report: Proc.new {}
-    obj.define_singleton_method(:report_error_event) do end
-    obj
-  }
+  # let(:error_reporting) {
+  #   obj = OpenStruct.new report: Proc.new {}
+  #   obj.define_singleton_method(:report_error_event) do end
+  #   obj
+  # }
   let(:middleware) {
     Google::Cloud::ErrorReporting::Middleware.new rack_app,
                                                   error_reporting: error_reporting,
                                                   project_id: project_id,
+                                                  keyfile: keyfile,
                                                   service_name: service_name,
                                                   service_version: service_version,
                                                   ignore_classes: [IgnoredError]
@@ -63,14 +65,21 @@ describe Google::Cloud::ErrorReporting::Middleware do
                                                   project_id: project_id
   }
 
+  after {
+    # Clear configuration values between each test
+    config_hash = Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs)
+    config_hash.each do |k, _|
+      config_hash[k] = nil
+    end
+  }
+
   describe "#initialize" do
     it "uses the error_reporting given" do
       middleware.error_reporting.must_equal error_reporting
     end
 
     it "creates a default error_reporting if not given one" do
-      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
-        :new, "A default error_reporting" do
+      Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
         middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
                                                                    project_id: project_id
 
@@ -79,17 +88,78 @@ describe Google::Cloud::ErrorReporting::Middleware do
     end
 
     it "raises ArgumentError if empty project_id provided" do
+      stubbed_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
+
       assert_raises ArgumentError do
         # Prevent return of actual project in any environment including GCE, etc.
-        Google::Cloud.stub :env, OpenStruct.new(project_id: nil) do
-          Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.stub \
-          :new, "A default error_reporting" do
-            ENV.stub :[], nil do
-              Google::Cloud::ErrorReporting::Middleware.new nil
+        Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
+          Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+            Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
+              ENV.stub :[], nil do
+                Google::Cloud::ErrorReporting::Middleware.new nil
+              end
             end
           end
         end
       end
+    end
+
+    it "uses Google::Cloud::ErrorReporting.configure if parameters not given" do
+      stubbed_config = OpenStruct.new project_id: "another-project-id",
+                                      keyfile: "another-keyfile",
+                                      service_name: nil, service_version: nil
+
+      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
+        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+          Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
+            ENV.stub :[], nil do
+              midware = Google::Cloud::ErrorReporting::Middleware.new nil
+              midware.project_id.must_equal "another-project-id"
+              midware.keyfile.must_equal "another-keyfile"
+            end
+          end
+        end
+      end
+    end
+
+    it "uses Google::Cloud.configure if parameters not given and " do
+      stubbed_er_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
+      stubbed_gcloud_config = OpenStruct.new project_id: "gcloud-project-id",
+                                             keyfile: "gcloud-keyfile"
+
+      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
+        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
+          Google::Cloud.stub :configure, stubbed_gcloud_config do
+            Google::Cloud::ErrorReporting.stub :configure, stubbed_er_config do
+              ENV.stub :[], nil do
+                midware = Google::Cloud::ErrorReporting::Middleware.new nil
+                midware.project_id.must_equal "gcloud-project-id"
+                midware.keyfile.must_equal "gcloud-keyfile"
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "sets Google::Cloud::ErrorReporting\#@@default_client" do
+      middleware
+      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).object_id.must_equal error_reporting.object_id
+    end
+
+    it "sets Google::Cloud::ErrorReporting.configure" do
+      Google::Cloud::ErrorReporting.configure.project_id.must_be_nil
+      Google::Cloud::ErrorReporting.configure.keyfile.must_be_nil
+      Google::Cloud::ErrorReporting.configure.service_name.must_be_nil
+      Google::Cloud::ErrorReporting.configure.service_version.must_be_nil
+
+      # Constructs a new Middleware, which sets Google::Cloud::ErrorReporting.configure
+      middleware
+
+      Google::Cloud::ErrorReporting.configure.project_id.must_equal project_id
+      Google::Cloud::ErrorReporting.configure.keyfile.must_equal keyfile
+      Google::Cloud::ErrorReporting.configure.service_name.must_equal service_name
+      Google::Cloud::ErrorReporting.configure.service_version.must_equal service_version
     end
   end
 
@@ -126,35 +196,35 @@ describe Google::Cloud::ErrorReporting::Middleware do
 
   describe "#report_exception" do
     it "doesn't call report_exception if exception's class is been ignored" do
-      stub_report = ->(_, _) { fail "This exception should've been ignored" }
+      stub_report = ->(_) { fail "This exception should've been ignored" }
       ignore_exception = IgnoredError.new "To be ignored"
 
-      middleware.error_reporting.stub :report_error_event, stub_report do
+      middleware.error_reporting.stub :report, stub_report do
         middleware.report_exception rack_env, ignore_exception
       end
     end
 
-    it "calls error_reporting#report_error_event to report the error" do
-      stub_reporting = ->(_, error_event) {
-        error_event.must_be_kind_of Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+    it "calls error_reporting#report to report the error" do
+      stub_reporting = ->(error_event) {
+        error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       }
 
-      middleware.error_reporting.stub :report_error_event, stub_reporting do
+      middleware.error_reporting.stub :report, stub_reporting do
         middleware.report_exception rack_env, app_exception
       end
     end
 
-    it "calls error_reporting#report_error_event when no correct status found" do
+    it "calls error_reporting#report when no correct status found" do
       stub_error_reporting = MiniTest::Mock.new
-      stub_error_reporting.expect :report_error_event, nil do |_, error_event|
-        error_event.must_be_kind_of Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+      stub_error_reporting.expect :report, nil do |error_event|
+        error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       end
       stub_http_status = ->(exception) {
         exception.message.must_equal app_exception_msg
         nil
       }
 
-      middleware.stub :get_http_status, stub_http_status do
+      middleware.stub :http_status, stub_http_status do
         middleware.stub :error_reporting, stub_error_reporting do
           middleware.report_exception rack_env, app_exception
         end
@@ -162,53 +232,49 @@ describe Google::Cloud::ErrorReporting::Middleware do
     end
 
     it "doesn't report if the exception maps to a HTTP code less than 500" do
-      stub_reporting = ->(_, _) { fail "This exception should've been skipped" }
+      stub_reporting = ->(_) { fail "This exception should've been skipped" }
       stub_http_status = ->(exception) {
         exception.message.must_equal app_exception_msg
         407
       }
 
-      middleware.stub :get_http_status, stub_http_status do
-        middleware.error_reporting.stub :report_error_event, stub_reporting do
+      middleware.stub :http_status, stub_http_status do
+        middleware.error_reporting.stub :report, stub_reporting do
           middleware.report_exception rack_env, app_exception
         end
       end
     end
   end
 
-  describe "#full_project_id" do
-    it "translates given project_id to full project path" do
-      middleware.full_project_id.must_equal "projects/#{project_id}"
-    end
-  end
-
-  describe "#build_error_event_from_exception" do
+  describe "#error_event_from_exception" do
     it "injects service_name and service_version" do
-      error_event = middleware.build_error_event_from_exception rack_env, app_exception
+      error_event = middleware.error_event_from_exception rack_env, app_exception
 
-      error_event.service_context.service.must_equal service_name
-      error_event.service_context.version.must_equal service_version
+      error_event.service_name.must_equal service_name
+      error_event.service_version.must_equal service_version
     end
 
-    it "injects user from ENV['USER']" do
-      user = "john_doe"
+    it "injects http data from Rack::Request" do
+      error_event = middleware.error_event_from_exception rack_env, app_exception
 
-      ENV.stub :[], user do
-        error_event = middleware.build_error_event_from_exception rack_env, app_exception
-        error_event.context.user.must_equal user
-      end
+      error_event.http_method.must_equal "GET"
+      error_event.http_url.must_match "localhost:3000"
+      error_event.http_user_agent.must_match "chrome-1.2.3"
+      error_event.http_referrer.must_be_nil
+      error_event.http_status.must_equal 500
+      error_event.http_remote_ip.must_equal "127.0.0.1"
     end
   end
 
-  describe ".get_http_status" do
+  describe ".http_status" do
     it "returns right http_status code based on exception class" do
-      status = middleware.send :get_http_status, app_exception
+      status = middleware.send :http_status, app_exception
       status.must_equal 500
     end
 
     it "returns right http_status code based on exception class #2" do
       app_exception.class.stub :name, "ActionDispatch::ParamsParser::ParseError" do
-        status = middleware.send :get_http_status, app_exception
+        status = middleware.send :http_status, app_exception
         status.must_equal 400
       end
     end
