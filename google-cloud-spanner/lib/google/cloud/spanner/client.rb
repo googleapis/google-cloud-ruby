@@ -53,7 +53,7 @@ module Google
         # The Spanner project connected to.
         # @return [Project]
         def project
-          project
+          @project
         end
 
         # The unique identifier for the project.
