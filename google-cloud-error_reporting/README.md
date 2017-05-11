@@ -9,12 +9,13 @@ cleaned exception stack trace. Opt-in to receive email and mobile alerts on
 new errors.
 
 - [google-cloud-error_reporting API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest)
+- [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
 
-google-cloud-error_reporting provides an instrumentation API to make it easy to 
-report exceptions to Stackdriver Error Reporting service. It also contains a 
-full API client library for the 
+google-cloud-error_reporting provides an instrumentation API that makes it easy 
+to report exceptions to the Stackdriver Error Reporting service. It also 
+contains a full API client library for the 
 [Stackdriver Error Reporting API](https://developers.google.com/apis-explorer/#p/clouderrorreporting/v1beta1/) 
 (v1beta1).
 
@@ -58,14 +59,17 @@ end
 
 ## Rails and Rack Integration
 
-This library also provides a built-in Railtie for Ruby on Rails integration. To do this, simply add this line to config/application.rb:
+This library also provides a built-in Railtie for Ruby on Rails integration. To
+ do this, simply add this line to config/application.rb:
 ```ruby
 require "google/cloud/error_reporting/rails"
 ```
 
-Alternatively, check out [stackdriver](../stackdriver) gem, which includes this library and enables the Railtie by default.
+Alternatively, check out [stackdriver](../stackdriver) gem, which includes this 
+library and enables the Railtie by default.
 
-For Rack integration and more examples, see [Instrumentation Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation).
+For Rack integration and more examples, see 
+[Instrumentation Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation).
 
 ## Supported Ruby Versions
 
@@ -75,22 +79,31 @@ This library is supported on Ruby 2.0+.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
+It is currently in major version zero (0.y.z), which means that anything may 
+change at any time and the public API should not be considered stable.
 
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
 
-See the [Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing) for more information on how to get started.
+See the 
+[Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing) 
+for more information on how to get started.
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See [Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
+Please note that this project is released with a Contributor Code of Conduct. By
+participating in this project you agree to abide by its terms. See 
+[Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
 
 ## License
 
-This library is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
+This library is licensed under Apache 2.0. Full license text is available in
+ [LICENSE](LICENSE).
 
 ## Support
 
-Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
-Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
+Please 
+[report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
+Don't hesitate to 
+[ask questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby) 
+about the client or APIs on [StackOverflow](http://stackoverflow.com).
 
