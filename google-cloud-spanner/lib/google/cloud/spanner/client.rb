@@ -50,12 +50,6 @@ module Google
           @pool = Pool.new self, min: min, max: max, keepalive: keepalive
         end
 
-        # The Spanner project connected to.
-        # @return [Project]
-        def project
-          @project
-        end
-
         # The unique identifier for the project.
         # @return [String]
         def project_id
@@ -72,6 +66,24 @@ module Google
         # @return [String]
         def database_id
           @database_id
+        end
+
+        # The Spanner project connected to.
+        # @return [Project]
+        def project
+          @project
+        end
+
+        # The Spanner instance connected to.
+        # @return [Instance]
+        def instance
+          @project.instance instance_id
+        end
+
+        # The Spanner database connected to.
+        # @return [Database]
+        def database
+          @project.database instance_id, database_id
         end
 
         ##
