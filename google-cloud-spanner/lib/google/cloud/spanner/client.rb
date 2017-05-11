@@ -780,6 +780,17 @@ module Google
           Session.from_grpc(grpc, @project.service)
         end
 
+        # @private
+        def to_s
+          "(project_id: #{project_id}, instance_id: #{instance_id}, " \
+            "database_id: #{database_id})"
+        end
+
+        # @private
+        def inspect
+          "#<#{self.class.name} #{self}>"
+        end
+
         protected
 
         ##
