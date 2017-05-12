@@ -44,6 +44,22 @@ module Google
         attr_accessor :session
 
         ##
+        # Identifier of the transaction results were run in.
+        # @return [String] The transaction id.
+        def transaction_id
+          return nil if @grpc.nil?
+          @grpc.id
+        end
+
+        ##
+        # The read timestamp chosen for snapshots.
+        # @return [Time] The chosen timestamp.
+        def timestamp
+          return nil if @grpc.nil?
+          Convert.timestamp_to_time @grpc.read_timestamp
+        end
+
+        ##
         # Executes a SQL query.
         #
         # Arguments can be passed using `params`, Ruby types are mapped to
@@ -198,11 +214,6 @@ module Google
         end
 
         protected
-
-        def transaction_id
-          return nil if @grpc.nil?
-          @grpc.id
-        end
 
         # The TransactionSelector to be used for queries
         def tx_selector

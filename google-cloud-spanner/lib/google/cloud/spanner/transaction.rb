@@ -46,6 +46,14 @@ module Google
         attr_accessor :session
 
         ##
+        # Identifier of the transaction results were run in.
+        # @return [String] The transaction id.
+        def transaction_id
+          return nil if @grpc.nil?
+          @grpc.id
+        end
+
+        ##
         # Executes a SQL query.
         #
         # Arguments can be passed using `params`, Ruby types are mapped to
@@ -466,11 +474,6 @@ module Google
         end
 
         protected
-
-        def transaction_id
-          return nil if @grpc.nil?
-          @grpc.id
-        end
 
         # The TransactionSelector to be used for queries
         def tx_selector

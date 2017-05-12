@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
+describe Google::Cloud::Spanner::Results, :timestamp, :mock_spanner do
   let(:time_obj) { Time.parse "2014-10-02T15:01:23.045123456Z" }
   let(:timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp time_obj }
   let :results_types do
@@ -29,7 +29,6 @@ describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
           ]
         },
         transaction: {
-          id: Base64.strict_encode64("tx123"),
           read_timestamp: JSON.parse(timestamp.to_json)
         }
       }
@@ -43,7 +42,6 @@ describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
   it "knows it has a timestamp" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.transaction.must_equal "tx123"
     results.timestamp.must_equal time_obj
   end
 end
