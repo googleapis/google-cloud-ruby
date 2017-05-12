@@ -227,7 +227,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def execute sql, params: nil, types: nil, single_use: {}
+        def execute sql, params: nil, types: nil, single_use: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -326,7 +326,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 single_use: {}
+                 single_use: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -825,7 +825,7 @@ module Google
 
         ##
         # Check for valid snapshot arguments
-        def validate_single_use_args! opts = {}
+        def validate_single_use_args! opts
           return true if opts.nil? || opts.empty?
           valid_keys = [:strong, :timestamp, :read_timestamp, :staleness,
                         :exact_staleness, :bounded_timestamp,
@@ -840,7 +840,7 @@ module Google
 
         ##
         # Create a single-use TransactionSelector
-        def single_use_transaction opts = {}
+        def single_use_transaction opts
           return nil if opts.nil? || opts.empty?
 
           exact_timestamp = Convert.time_to_timestamp \
