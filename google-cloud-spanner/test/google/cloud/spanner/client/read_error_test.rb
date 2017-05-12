@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -90,14 +90,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      GRPC::Unavailable,
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
-    ].to_enum
-  end
-  let(:results_enum2) do
-    [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
+      GRPC::InvalidArgument,
       Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
     ].to_enum
   end
@@ -109,52 +102,18 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
     client.close
   end
 
-  it "resumes broken response streams" do
+  it "raises unhandled errors" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
-    mock.expect :streaming_read, RaiseableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: "abc123", options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.read "my-table", columns
-
-    assert_results results
+    assert_raises Google::Cloud::InvalidArgumentError do
+      client.read("my-table", columns).rows.to_a
+    end
 
     mock.verify
-  end
-
-  def assert_results results
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 9
-    results.fields[:id].must_equal          :INT64
-    results.fields[:name].must_equal        :STRING
-    results.fields[:active].must_equal      :BOOL
-    results.fields[:age].must_equal         :INT64
-    results.fields[:score].must_equal       :FLOAT64
-    results.fields[:updated_at].must_equal  :TIMESTAMP
-    results.fields[:birthday].must_equal    :DATE
-    results.fields[:avatar].must_equal      :BYTES
-    results.fields[:project_ids].must_equal [:INT64]
-
-    rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
-    row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-    row[:id].must_equal 1
-    row[:name].must_equal "Charlie"
-    row[:active].must_equal true
-    row[:age].must_equal 29
-    row[:score].must_equal 0.9
-    row[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    row[:birthday].must_equal Date.parse("1950-01-01")
-    row[:avatar].must_be_kind_of StringIO
-    row[:avatar].read.must_equal "image"
-    row[:project_ids].must_equal [1, 2, 3]
   end
 end

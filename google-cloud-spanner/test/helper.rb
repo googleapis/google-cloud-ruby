@@ -130,14 +130,14 @@ class MockSpanner < Minitest::Spec
 end
 
 # This is used to raise errors in an enumerator
-class UnavailableEnumerator
+class RaiseableEnumerator
   def initialize enum
     @enum = enum
   end
 
   def next
     v = @enum.next
-    raise v if v == GRPC::Unavailable
+    raise v if v.is_a? Class
     v
   end
 

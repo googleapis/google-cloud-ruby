@@ -449,6 +449,8 @@ module Google
         rescue Google::Gax::GaxError => e
           # GaxError wraps BadStatus, but exposes it as #cause
           raise Google::Cloud::Error.from_error(e.cause)
+        rescue GRPC::BadStatus => e
+          raise Google::Cloud::Error.from_error(e)
         end
       end
     end

@@ -160,6 +160,8 @@ module Google
 
               # Flush the buffered responses to reset to the resume_token
               buffered_responses = []
+            rescue GRPC::BadStatus => err
+              raise Google::Cloud::Error.from_error(err)
             rescue StopIteration
               break
             end
