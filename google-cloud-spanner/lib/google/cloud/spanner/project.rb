@@ -27,17 +27,43 @@ module Google
       ##
       # # Project
       #
-      # ...
+      # Projects are top-level containers in Google Cloud Platform. They store
+      # information about billing and authorized users, and they contain
+      # Cloud Spanner data. Each project has a friendly name and a unique ID.
       #
-      # See {Google::Cloud#spanner}
+      # Google::Cloud::Spanner::Project is the main object for interacting with
+      # Cloud Spanner.
       #
-      # @example
+      # {Google::Cloud::Spanner::Instance} and
+      # {Google::Cloud::Spanner::Database} objects are created,
+      # accessed, and managed by Google::Cloud::Spanner::Project.
+      #
+      # A {Google::Cloud::Spanner::Client} obtained from a project can be used
+      # to read and/or modify data in a Cloud Spanner database.
+      #
+      # See {Google::Cloud::Spanner.new} and {Google::Cloud#spanner}.
+      #
+      # @example Obtaining an instance and a database from a project.
       #   require "google/cloud"
       #
-      #   gcloud = Google::Cloud.new
-      #   spanner = gcloud.spanner
+      #   spanner = Google::Cloud::Spanner.new
+      #   instance = spanner.instance "my-instance"
+      #   database = instance.database "my-database"
       #
-      #   # ...
+      # @example Obtaining a client for use with a database.
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   db.transaction do |tx|
+      #     results = tx.execute "SELECT * FROM users"
+      #
+      #     results.rows.each do |row|
+      #       puts "User #{row[:id]} is #{row[:name]}""
+      #     end
+      #   end
       #
       class Project
         ##
@@ -50,7 +76,8 @@ module Google
           @service = service
         end
 
-        # The Spanner project connected to.
+        ##
+        # The identifier for the Cloud Spanner project.
         #
         # @example
         #   require "google/cloud"
@@ -77,7 +104,7 @@ module Google
         end
 
         ##
-        # Retrieves the list of instances for the given project.
+        # Retrieves the list of Cloud Spanner instances for the project.
         #
         # @param [String] token The `token` value returned by the last call to
         #   `instances`; indicates that this is a continuation of a call,
@@ -94,7 +121,7 @@ module Google
         #
         #   instances = spanner.instances
         #   instances.each do |instance|
-        #     puts instance.name
+        #     puts instance.instance_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -104,7 +131,7 @@ module Google
         #
         #   instances = spanner.instances
         #   instances.all do |instance|
-        #     puts instance.name
+        #     puts instance.instance_id
         #   end
         #
         def instances token: nil, max: nil
@@ -114,7 +141,7 @@ module Google
         end
 
         ##
-        # Retrieves instance by name.
+        # Retrieves a Cloud Spanner instance by unique identifier.
         #
         # @param [String] instance_id The unique identifier for the instance.
         #
@@ -142,7 +169,8 @@ module Google
         end
 
         ##
-        # Creates an instance and starts preparing it to begin serving.
+        # Creates a Cloud Spanner instance and starts preparing it to begin
+        # serving.
         #
         # See {Instance::Job}.
         #
@@ -202,7 +230,7 @@ module Google
         end
 
         ##
-        # Retrieves a list of instance configuration for the given project.
+        # Retrieves the list of instance configurations for the project.
         #
         # @param [String] token The `token` value returned by the last call to
         #   `instance_configs`; indicates that this is a continuation of a call,
@@ -219,7 +247,7 @@ module Google
         #
         #   instance_configs = spanner.instance_configs
         #   instance_configs.each do |config|
-        #     puts config.name
+        #     puts config.instance_config_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -229,7 +257,7 @@ module Google
         #
         #   instance_configs = spanner.instance_configs
         #   instance_configs.all do |config|
-        #     puts config.name
+        #     puts config.instance_config_id
         #   end
         #
         def instance_configs token: nil, max: nil
@@ -239,7 +267,7 @@ module Google
         end
 
         ##
-        # Retrieves instance configuration by name.
+        # Retrieves an instance configuration by unique identifier.
         #
         # @param [String] instance_config_id The instance configuration
         #   identifier. Values can be the `instance_config_id`, or the full
@@ -269,7 +297,7 @@ module Google
         end
 
         ##
-        # Retrieves the list of databases for the given project.
+        # Retrieves the list of databases for the project.
         #
         # @param [String] instance_id The unique identifier for the instance.
         # @param [String] token The `token` value returned by the last call to
@@ -287,7 +315,7 @@ module Google
         #
         #   databases = spanner.databases "my-instance"
         #   databases.each do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         # @example Retrieve all: (See {Instance::Config::List::List#all})
@@ -297,7 +325,7 @@ module Google
         #
         #   databases = spanner.databases "my-instance"
         #   databases.all do |database|
-        #     puts database.name
+        #     puts database.database_id
         #   end
         #
         def databases instance_id, token: nil, max: nil
@@ -307,7 +335,7 @@ module Google
         end
 
         ##
-        # Retrieves database by name.
+        # Retrieves a database by unique identifier.
         #
         # @param [String] instance_id The unique identifier for the instance.
         # @param [String] database_id The unique identifier for the database.
@@ -375,8 +403,8 @@ module Google
         end
 
         ##
-        # Creates a Spanner Client. A client is used to read and/or modify data
-        # in a Cloud Spanner database.
+        # Creates a Cloud Spanner client. A client is used to read and/or modify
+        # data in a Cloud Spanner database.
         #
         # @param [String] instance_id The unique identifier for the instance.
         #   Required.
@@ -390,9 +418,15 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   db = spanner.client "my-instance", "my-new-database"
+        #   db = spanner.client "my-instance", "my-database"
         #
-        #   ...
+        #   db.transaction do |tx|
+        #     results = tx.execute "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}""
+        #     end
+        #   end
         #
         def client instance_id, database_id, min: 2, max: 10, keepalive: 1500
           Client.new self, instance_id, database_id, min: min, max: max,

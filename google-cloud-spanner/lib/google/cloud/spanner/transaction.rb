@@ -76,7 +76,7 @@ module Google
         #   parameter placeholders, minus the "@", are the the hash keys, and
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
-        #   something like `:msg_id -> 1`.
+        #   something like `:msg_id => 1`.
         # @return [Google::Cloud::Spanner::Results]
         #
         # @example
@@ -153,9 +153,10 @@ module Google
                                        transaction: tx_selector
         end
 
-        # Creates changes to be applied to rows in the database.
+        ##
+        # Commits the transaction. Accepts an optional block for mutations.
         #
-        # @yield [commit] The block for updating the data.
+        # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
         # @example
@@ -165,10 +166,9 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     tx.commit do |c|
-        #       c.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #       c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-        #     end
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #     tx.commit
         #   end
         #
         def commit
@@ -201,6 +201,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -242,6 +245,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -280,6 +286,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -322,6 +331,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -362,7 +374,7 @@ module Google
         end
 
         ##
-        # Indicates the field names and types for a table.
+        # Returns the field names and types for a table.
         #
         # @param [String] table The name of the table in the database to
         #   retrieve types for
@@ -391,8 +403,8 @@ module Google
         end
 
         ##
-        # Creates a Spanner Range. This can be used in place of a Ruby Range
-        # when needing to excluse the beginning value.
+        # Creates a Cloud Spanner Range. This can be used in place of a Ruby
+        # Range when needing to exclude the beginning value.
         #
         # @param [Object] beginning The object that defines the beginning of the
         #   range.
@@ -428,7 +440,8 @@ module Google
         ##
         # Rolls back the transaction, releasing any locks it holds. It is a good
         # idea to call this for any transaction that includes one or more `read`
-        # or `execute` requests and ultimately decides not to commit.
+        # or `execute` requests and for which the decision has been made not to
+        # commit.
         #
         # @example
         #   require "google/cloud/spanner"

@@ -23,7 +23,9 @@ module Google
       #
       # # Pool
       #
-      # ...
+      # Implements a pool for managing and reusing
+      # {Google::Cloud::Spanner::Session} instances.
+      #
       class Pool
         attr_accessor :min, :max, :pool, :queue
 
