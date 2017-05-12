@@ -42,6 +42,34 @@ describe "Spanner Client", :types, :bytes, :spanner do
     returned_value.read.must_equal "hello"
   end
 
+  it "writes and reads random bytes" do
+    id = SecureRandom.int64
+    random_bytes = StringIO.new(SecureRandom.random_bytes(rand(1024..4096)))
+    db.upsert table_name, { id: id, byte: random_bytes }
+    results = db.read table_name, [:id, :byte], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    returned_value = results.rows.first[:byte]
+    returned_value.must_be_kind_of StringIO
+    random_bytes.rewind
+    returned_value.read.must_equal random_bytes.read
+  end
+
+  it "writes and queries random bytes" do
+    id = SecureRandom.int64
+    random_bytes = StringIO.new(SecureRandom.random_bytes(rand(1024..4096)))
+    db.upsert table_name, { id: id, byte: random_bytes }
+    results = db.execute "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    returned_value = results.rows.first[:byte]
+    returned_value.must_be_kind_of StringIO
+    random_bytes.rewind
+    returned_value.read.must_equal random_bytes.read
+  end
+
   it "writes and reads NULL bytes" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, byte: nil }
