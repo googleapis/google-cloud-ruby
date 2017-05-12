@@ -401,6 +401,7 @@ module Google
         end
 
         ##
+        # @private
         # Returns the field names and types for a table.
         #
         # @param [String] table The name of the table in the database to
