@@ -52,7 +52,6 @@ describe "Spanner Client", :params, :float64, :spanner do
   end
 
   it "queries and returns a NULL float64 parameter" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :FLOAT64 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -61,7 +60,6 @@ describe "Spanner Client", :params, :float64, :spanner do
   end
 
   it "queries and returns an array of float64 parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [1.0, 2.2, 3.5] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -70,7 +68,6 @@ describe "Spanner Client", :params, :float64, :spanner do
   end
 
   it "queries and returns an array of special float64 parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [Float::INFINITY, -Float::INFINITY, -Float::NAN] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -91,11 +88,18 @@ describe "Spanner Client", :params, :float64, :spanner do
   end
 
   it "queries and returns an empty array of float64 parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:FLOAT64] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:FLOAT64]
     results.rows.first[:value].must_equal []
+  end
+
+  it "queries and returns a NULL array of float64 parameters" do
+    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:FLOAT64] }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields[:value].must_equal [:FLOAT64]
+    results.rows.first[:value].must_be :nil?
   end
 end

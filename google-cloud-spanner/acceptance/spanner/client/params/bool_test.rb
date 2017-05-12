@@ -26,7 +26,6 @@ describe "Spanner Client", :params, :bool, :spanner do
   end
 
   it "queries and returns a NULL bool parameter" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :BOOL }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -35,7 +34,6 @@ describe "Spanner Client", :params, :bool, :spanner do
   end
 
   it "queries and returns an array of bool parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [false, true, false] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -52,11 +50,18 @@ describe "Spanner Client", :params, :bool, :spanner do
   end
 
   it "queries and returns an empty array of bool parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:BOOL] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BOOL]
     results.rows.first[:value].must_equal []
+  end
+
+  it "queries and returns a NULL array of bool parameters" do
+    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:BOOL] }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields[:value].must_equal [:BOOL]
+    results.rows.first[:value].must_be :nil?
   end
 end

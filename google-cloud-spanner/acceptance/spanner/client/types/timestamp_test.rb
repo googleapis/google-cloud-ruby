@@ -40,9 +40,8 @@ describe "Spanner Client", :types, :timestamp, :spanner do
   end
 
   it "writes and reads NULL timestamp" do
-    skip
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamp: nil }, types: table_types
+    db.upsert table_name, { id: id, timestamp: nil }
     results = db.read table_name, [:id, :timestamp], keys: id
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -91,9 +90,8 @@ describe "Spanner Client", :types, :timestamp, :spanner do
   end
 
   it "writes and reads empty array of timestamp" do
-    skip
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: [] }, types: table_types
+    db.upsert table_name, { id: id, timestamps: [] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -101,11 +99,30 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     results.rows.first.to_h.must_equal({ id: id, timestamps: [] })
   end
 
-  it "writes and reads NULL array of timestamp" do
-    skip
+  it "writes and queries empty array of timestamp" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: nil }, types: table_types
+    db.upsert table_name, { id: id, timestamps: [] }
+    results = db.execute "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    results.rows.first.to_h.must_equal({ id: id, timestamps: [] })
+  end
+
+  it "writes and reads NULL array of timestamp" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, timestamps: nil }
     results = db.read table_name, [:id, :timestamps], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    results.rows.first.to_h.must_equal({ id: id, timestamps: nil })
+  end
+
+  it "writes and queries NULL array of timestamp" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, timestamps: nil }
+    results = db.execute "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })

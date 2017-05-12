@@ -181,7 +181,7 @@ describe Google::Cloud::Spanner::Transaction, :execute, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE project_ids = @list", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = transaction.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }
+    results = transaction.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }, types: { list: [:INT64] }
 
     mock.verify
 

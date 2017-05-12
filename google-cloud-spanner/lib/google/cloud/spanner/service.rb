@@ -276,7 +276,7 @@ module Google
           input_params = nil
           input_param_types = nil
           unless params.nil?
-            input_param_pairs = Convert.raw_to_params params
+            input_param_pairs = Convert.to_query_params params
             input_params = Google::Protobuf::Struct.new(
               fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
             input_param_types = Hash[
@@ -291,11 +291,11 @@ module Google
         end
 
         def streaming_execute_sql session_name, sql, transaction: nil,
-                                  params: nil, resume_token: nil
+                                  params: nil, types: nil, resume_token: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
-            input_param_pairs = Convert.raw_to_params params
+            input_param_pairs = Convert.to_query_params params, types
             input_params = Google::Protobuf::Struct.new(
               fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
             input_param_types = Hash[

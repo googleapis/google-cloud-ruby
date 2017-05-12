@@ -127,6 +127,24 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
+        # @param [Hash] types Types of the SQL parameters for the query string.
+        #   The parameter placeholders, minus the "@", are the the hash keys,
+        #   and the Spanner Type codes are the hash values. Types are optional.
+        #
+        #   The Spanner Type codes that can be specifid are:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #
+        #   Arrays are specified by providing the type code in an array. For
+        #   example, an array of integers are specified as `[:INT64]`.
+        #
+        #   Structs are not yet supported in query parameters.
         # @param [Hash] single_use Perform the read with a single-use snapshot
         #   (read-only transaction). (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
@@ -209,7 +227,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def execute sql, params: nil, single_use: {}
+        def execute sql, params: nil, types: nil, single_use: {}
           validate_single_use_args! single_use
           ensure_service!
 
@@ -217,7 +235,7 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.execute \
-              sql, params: params, transaction: single_use_tx
+              sql, params: params, types: types, transaction: single_use_tx
           end
           results
         end

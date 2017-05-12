@@ -27,7 +27,6 @@ describe "Spanner Client", :params, :date, :spanner do
   end
 
   it "queries and returns a NULL date parameter" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :DATE }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -36,7 +35,6 @@ describe "Spanner Client", :params, :date, :spanner do
   end
 
   it "queries and returns an array of date parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [(date_value - 1), date_value, (date_value + 1)] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -53,11 +51,18 @@ describe "Spanner Client", :params, :date, :spanner do
   end
 
   it "queries and returns an empty array of date parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:DATE] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:DATE]
     results.rows.first[:value].must_equal []
+  end
+
+  it "queries and returns a NULL array of date parameters" do
+    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:DATE] }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields[:value].must_equal [:DATE]
+    results.rows.first[:value].must_be :nil?
   end
 end

@@ -28,7 +28,6 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns a NULL bytes parameter" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :BYTES }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -62,11 +61,18 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an empty array of bytes parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:BYTES] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BYTES]
     results.rows.first[:value].must_equal []
+  end
+
+  it "queries and returns a NULL array of bytes parameters" do
+    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:BYTES] }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields[:value].must_equal [:BYTES]
+    results.rows.first[:value].must_be :nil?
   end
 end

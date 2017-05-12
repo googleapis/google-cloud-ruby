@@ -201,9 +201,10 @@ module Google
         end
 
         # @private
-        def self.execute service, session_path, sql, params: nil,
+        def self.execute service, session_path, sql, params: nil, types: nil,
                          transaction: nil
-          execute_options = { transaction: transaction, params: params }
+          execute_options = { transaction: transaction, params: params,
+                              types: types }
           enum = service.streaming_execute_sql session_path, sql,
                                                execute_options
           from_enum(enum, service).tap do |results|

@@ -85,6 +85,24 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
+        # @param [Hash] types Types of the SQL parameters for the query string.
+        #   The parameter placeholders, minus the "@", are the the hash keys,
+        #   and the Spanner Type codes are the hash values. Types are optional.
+        #
+        #   The Spanner Type codes that can be specifid are:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #
+        #   Arrays are specified by providing the type code in an array. For
+        #   example, an array of integers are specified as `[:INT64]`.
+        #
+        #   Structs are not yet supported in query parameters.
         # @return [Google::Cloud::Spanner::Results]
         #
         # @example
@@ -116,9 +134,10 @@ module Google
         #     end
         #   end
         #
-        def execute sql, params: nil
+        def execute sql, params: nil, types: nil
           ensure_session!
-          session.execute sql, params: params, transaction: tx_selector
+          session.execute sql, params: params, types: types,
+                               transaction: tx_selector
         end
         alias_method :query, :execute
 

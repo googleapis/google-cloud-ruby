@@ -17,7 +17,6 @@ require "spanner_helper"
 describe "Spanner Client", :types, :bytes, :spanner do
   let(:db) { spanner_client }
   let(:table_name) { "stuffs" }
-  let(:table_types) { stuffs_table_types }
 
   it "writes and reads bytes" do
     id = SecureRandom.int64
@@ -44,9 +43,8 @@ describe "Spanner Client", :types, :bytes, :spanner do
   end
 
   it "writes and reads NULL bytes" do
-    skip
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, byte: nil }, types: table_types
+    db.upsert table_name, { id: id, byte: nil }
     results = db.read table_name, [:id, :byte], keys: id
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -122,9 +120,8 @@ describe "Spanner Client", :types, :bytes, :spanner do
   end
 
   it "writes and reads empty array of byte" do
-    skip
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, bytes: [] }, types: table_types
+    db.upsert table_name, { id: id, bytes: [] }
     results = db.read table_name, [:id, :bytes], keys: id
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -132,11 +129,30 @@ describe "Spanner Client", :types, :bytes, :spanner do
     results.rows.first[:bytes].must_equal []
   end
 
-  it "writes and reads NULL array of byte" do
-    skip
+  it "writes and queries empty array of byte" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, bytes: nil }, types: table_types
+    db.upsert table_name, { id: id, bytes: [] }
+    results = db.execute "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    results.rows.first[:bytes].must_equal []
+  end
+
+  it "writes and reads NULL array of byte" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, bytes: nil }
     results = db.read table_name, [:id, :bytes], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    results.rows.first[:bytes].must_be :nil?
+  end
+
+  it "writes and queries NULL array of byte" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, bytes: nil }
+    results = db.execute "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })

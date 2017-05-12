@@ -27,7 +27,6 @@ describe "Spanner Client", :params, :timestamp, :spanner do
   end
 
   it "queries and returns a NULL timestamp parameter" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :TIMESTAMP }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -36,7 +35,6 @@ describe "Spanner Client", :params, :timestamp, :spanner do
   end
 
   it "queries and returns an array of timestamp parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [(timestamp_value - 180.0), timestamp_value, (timestamp_value - 240.0)] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -53,7 +51,6 @@ describe "Spanner Client", :params, :timestamp, :spanner do
   end
 
   it "queries and returns an empty array of timestamp parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:TIMESTAMP] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -62,7 +59,6 @@ describe "Spanner Client", :params, :timestamp, :spanner do
   end
 
   it "queries and returns an NULL array of timestamp parameters" do
-    skip
     results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:TIMESTAMP] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -82,7 +78,6 @@ describe "Spanner Client", :params, :timestamp, :spanner do
     end
 
     it "queries and returns an array of timestamp parameters" do
-      skip
       results = db.execute "SELECT @value AS value", params: { value: [(datetime_value - 1), datetime_value, (datetime_value + 1)] }
 
       results.must_be_kind_of Google::Cloud::Spanner::Results
