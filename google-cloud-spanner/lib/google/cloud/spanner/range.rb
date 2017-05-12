@@ -19,7 +19,10 @@ module Google
       ##
       # # Range
       #
-      # @example
+      # Represents a range of rows in a table or index. A range has a start key
+      # and an end key. These keys can be open or closed, indicating if the
+      # range includes rows with that key.
+      #
       # @example
       #   require "google/cloud/spanner"
       #
@@ -45,7 +48,7 @@ module Google
 
         ##
         # Creates a Spanner Range. This can be used in place of a Ruby Range
-        # when needing to excluse the beginning value.
+        # when needing to exclude the beginning value.
         #
         # @param [Object] beginning The object that defines the beginning of the
         #   range.

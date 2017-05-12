@@ -22,9 +22,27 @@ module Google
       ##
       # # Results
       #
+      # Represents the result set from an operation returning data.
+      #
+      # See {Google::Cloud::Spanner::Client#execute} and
+      # {Google::Cloud::Spanner::Client#read}.
+      #
+      # @example
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   results = db.execute "SELECT * FROM users"
+      #
+      #   results.types.each do |name, type|
+      #     puts "Column #{name} is type {type}"
+      #   end
+      #
       class Results
         ##
-        # Indicates the field names and types for the rows in the returned data.
+        # Returns the field names and types for the rows in the returned data.
         #
         # @param [Boolean] pairs Allow the types to be represented as a nested
         #   Array of pairs rather than a Hash. This is useful when results have
@@ -46,7 +64,7 @@ module Google
         #     puts "Column #{name} is type {type}"
         #   end
         #
-        # @example Can return an array of array pairs instead of a hash
+        # @example Returning an array of array pairs instead of a hash:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
@@ -99,7 +117,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        # @example Can returns an array of array pairs instead of a hash
+        # @example Returning an array of array pairs instead of a hash:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new

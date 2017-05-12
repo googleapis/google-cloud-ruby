@@ -98,7 +98,7 @@ module Google
         alias_method :display_name, :name
 
         ##
-        # The instance config resource.
+        # The instance configuration resource.
         # @return [Instance::Config]
         def config
           ensure_service!
@@ -133,7 +133,8 @@ module Google
         alias_method :node_count=, :nodes=
 
         ##
-        # The current instance state.
+        # The current instance state. Possible values are `:CREATING` and
+        # `:READY`.
         # @return [Symbol]
         def state
           @grpc.state
@@ -218,7 +219,7 @@ module Google
         end
 
         ##
-        # Retrieves the list of databases for the given project.
+        # Retrieves the list of databases for the given instance.
         #
         # @param [String] token The `token` value returned by the last call to
         #   `databases`; indicates that this is a continuation of a call,
@@ -257,7 +258,7 @@ module Google
         end
 
         ##
-        # Retrieves database by name.
+        # Retrieves a database belonging to the instance by identifier.
         #
         # @param [String] database_id The unique identifier for the database.
         #

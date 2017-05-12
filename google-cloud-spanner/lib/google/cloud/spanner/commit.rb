@@ -21,7 +21,9 @@ module Google
       ##
       # # Commit
       #
-      # Creates changes to be applied to rows in the database.
+      # Accepts mutations for execution within a transaction. All writes will
+      # execute atomically at a single logical point in time across columns,
+      # rows, and tables in a database.
       #
       # @example
       #   require "google/cloud/spanner"
@@ -65,6 +67,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -118,6 +123,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -168,6 +176,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -221,6 +232,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"

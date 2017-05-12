@@ -112,10 +112,12 @@ module Google
         #   parameter placeholders, minus the "@", are the the hash keys, and
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
-        #   something like `:msg_id -> 1`.
+        #   something like `:msg_id => 1`.
         # @param [Hash] single_use Perform the read with a single-use snapshot
-        #   (read-only transaction). The snapshot can be created by providing
-        #   just one of the following options in the hash:
+        #   (read-only transaction). (See
+        #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        #   The snapshot can be created by providing exactly one of the
+        #   following options in the hash:
         #
         #   * **Strong**
         #     * `:strong` (true, false) Read at a timestamp where all previously
@@ -224,8 +226,10 @@ module Google
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         # @param [Hash] single_use Perform the read with a single-use snapshot
-        #   (read-only transaction). The snapshot can be created by providing
-        #   just one of the following options in the hash:
+        #   (read-only transaction). (See
+        #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        #   The snapshot can be created by providing exactly one of the
+        #   following options in the hash:
         #
         #   * **Strong**
         #     * `:strong` (true, false) Read at a timestamp where all previously
@@ -304,9 +308,15 @@ module Google
           results
         end
 
-        # Creates changes to be applied to rows in the database.
+        ##
+        # Creates and commits a transaction for writes that execute atomically
+        # at a single logical point in time across columns, rows, and tables in
+        # a database.
         #
-        # @yield [commit] The block for updating the data.
+        # Unlike {#transaction}, which can also perform reads, this operation
+        # accepts only mutations and makes a single API request.
+        #
+        # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
         # @example
@@ -351,6 +361,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -391,6 +404,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -429,6 +445,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -470,6 +489,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -516,6 +538,9 @@ module Google
         # Creates a transaction for reads and writes that execute atomically at
         # a single logical point in time across columns, rows, and tables in a
         # database.
+        #
+        # Unlike {#commit}, which does not allow reads, this operation
+        # makes separate API requests to begin and commit the transaction.
         #
         # @param [Numeric] deadline The total amount of time in seconds the
         #   transaction has to succeed.
@@ -570,8 +595,11 @@ module Google
         end
 
         ##
-        # Creates a snapshot for reads that execute atomically at a single
-        # logical point in time across columns, rows, and tables in a database.
+        # Creates a snapshot read-only transaction for reads that execute
+        # atomically at a single logical point in time across columns, rows, and
+        # tables in a database. For transactions that only read, snapshot
+        # read-only transactions provide simpler semantics and are almost always
+        # faster than read-write transactions.
         #
         # @param [true, false] strong Read at a timestamp where all previously
         #   committed transactions are visible.
@@ -583,7 +611,9 @@ module Google
         #
         #   Useful for large scale consistent reads such as mapreduces, or for
         #   coordinating many reads against a consistent snapshot of the data.
-        # @param [Time, DateTime] read_timestamp Same as `timestamp`
+        #   (See
+        #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        # @param [Time, DateTime] read_timestamp Same as `timestamp`.
         # @param [Numeric] staleness Executes all reads at a timestamp that is
         #   +staleness+ old. The timestamp is chosen soon after the read
         #   is started.
@@ -595,8 +625,9 @@ module Google
         #   timestamps.
         #
         #   Useful for reading at nearby replicas without the distributed
-        #   timestamp negotiation overhead of single-use +staleness+.
-        # @param [Numeric] exact_staleness Same as `staleness`
+        #   timestamp negotiation overhead of single-use +staleness+. (See
+        #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        # @param [Numeric] exact_staleness Same as `staleness`.
         #
         # @yield [snapshot] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
@@ -635,7 +666,7 @@ module Google
         end
 
         ##
-        # Indicates the field names and types for a table.
+        # Executes a query to retrieve the field names and types for a table.
         #
         # @param [String] table The name of the table in the database to
         #   retrieve types for
@@ -664,7 +695,7 @@ module Google
 
         ##
         # Creates a Spanner Range. This can be used in place of a Ruby Range
-        # when needing to excluse the beginning value.
+        # when needing to exclude the beginning value.
         #
         # @param [Object] beginning The object that defines the beginning of the
         #   range.

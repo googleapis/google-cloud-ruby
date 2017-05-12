@@ -159,7 +159,7 @@ module Google
         #   parameter placeholders, minus the "@", are the the hash keys, and
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
-        #   something like `:msg_id -> 1`.
+        #   something like `:msg_id => 1`.
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
@@ -243,9 +243,13 @@ module Google
                        transaction: transaction
         end
 
+        ##
         # Creates changes to be applied to rows in the database.
         #
-        # @yield [commit] The block for updating the data.
+        # @param [String] transaction_id The identifier of previously-started
+        #   transaction to be used instead of starting a new transaction.
+        #   Optional.
+        # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
         # @example
@@ -290,6 +294,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -330,6 +337,9 @@ module Google
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
         #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -368,6 +378,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"
@@ -409,6 +422,9 @@ module Google
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
         #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
         #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
         # @example
         #   require "google/cloud/spanner"

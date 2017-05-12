@@ -74,7 +74,7 @@ module Google
         #   parameter placeholders, minus the "@", are the the hash keys, and
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
-        #   something like `:msg_id -> 1`.
+        #   something like `:msg_id => 1`.
         # @return [Google::Cloud::Spanner::Results]
         #
         # @example
@@ -153,8 +153,8 @@ module Google
         end
 
         ##
-        # Creates a Spanner Range. This can be used in place of a Ruby Range
-        # when needing to excluse the beginning value.
+        # Creates a Cloud Spanner Range. This can be used in place of a Ruby
+        # Range when needing to exclude the beginning value.
         #
         # @param [Object] beginning The object that defines the beginning of the
         #   range.

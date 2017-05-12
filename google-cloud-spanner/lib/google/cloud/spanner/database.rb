@@ -95,23 +95,23 @@ module Google
         # rubocop:enable LineLength
 
         ##
-        # The current database state.
+        # The current database state. Possible values are `:CREATING` and
+        # `:READY`.
         # @return [Symbol]
         def state
           @grpc.state
         end
 
         ##
-        # The database is still being created. Resources may not be available
-        # yet, and operations such as database creation may not work.
+        # The database is still being created. Operations on the database may
+        # fail with `FAILED_PRECONDITION` in this state.
         # @return [Boolean]
         def creating?
           state == :CREATING
         end
 
         ##
-        # The database is fully created and ready to do work such as creating
-        # databases.
+        # The database is fully created and ready for use.
         # @return [Boolean]
         def ready?
           state == :READY
