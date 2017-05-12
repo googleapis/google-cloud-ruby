@@ -193,7 +193,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE project_ids = @list", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }
+    results = client.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }, types: { list: [:INT64] }
 
     mock.verify
 
@@ -248,23 +248,23 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 9
-    results.types[:id].must_equal          :INT64
-    results.types[:name].must_equal        :STRING
-    results.types[:active].must_equal      :BOOL
-    results.types[:age].must_equal         :INT64
-    results.types[:score].must_equal       :FLOAT64
-    results.types[:updated_at].must_equal  :TIMESTAMP
-    results.types[:birthday].must_equal    :DATE
-    results.types[:avatar].must_equal      :BYTES
-    results.types[:project_ids].must_equal [:INT64]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 9
+    results.fields[:id].must_equal          :INT64
+    results.fields[:name].must_equal        :STRING
+    results.fields[:active].must_equal      :BOOL
+    results.fields[:age].must_equal         :INT64
+    results.fields[:score].must_equal       :FLOAT64
+    results.fields[:updated_at].must_equal  :TIMESTAMP
+    results.fields[:birthday].must_equal    :DATE
+    results.fields[:avatar].must_equal      :BYTES
+    results.fields[:project_ids].must_equal [:INT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     row[:id].must_equal 1
     row[:name].must_equal "Charlie"

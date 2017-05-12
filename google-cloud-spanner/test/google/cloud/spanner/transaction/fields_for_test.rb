@@ -14,11 +14,16 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :types_for, :mock_spanner do
+describe Google::Cloud::Spanner::Transaction, :fields_for, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:transaction_id) { "tx789" }
+  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
+  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash do
     {
@@ -43,39 +48,31 @@ describe Google::Cloud::Spanner::Client, :types_for, :mock_spanner do
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
-    client.close
-  end
-
-  it "can get a table's types" do
+  it "can get a table's fields" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE 1 = 0", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
-    spanner.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE 1 = 0", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    session.service.mocked_service = mock
 
-    types = client.types_for "users"
+    fields = transaction.fields_for "users"
 
     mock.verify
 
-    assert_types types
+    assert_fields fields
   end
 
-  def assert_types types
-    types.wont_be :nil?
-    types.must_be_kind_of Hash
-    types.keys.count.must_equal 9
-    types[:id].must_equal          :INT64
-    types[:name].must_equal        :STRING
-    types[:active].must_equal      :BOOL
-    types[:age].must_equal         :INT64
-    types[:score].must_equal       :FLOAT64
-    types[:updated_at].must_equal  :TIMESTAMP
-    types[:birthday].must_equal    :DATE
-    types[:avatar].must_equal      :BYTES
-    types[:project_ids].must_equal [:INT64]
+  def assert_fields fields
+    fields.wont_be :nil?
+    fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    fields.keys.count.must_equal 9
+    fields[:id].must_equal          :INT64
+    fields[:name].must_equal        :STRING
+    fields[:active].must_equal      :BOOL
+    fields[:age].must_equal         :INT64
+    fields[:score].must_equal       :FLOAT64
+    fields[:updated_at].must_equal  :TIMESTAMP
+    fields[:birthday].must_equal    :DATE
+    fields[:avatar].must_equal      :BYTES
+    fields[:project_ids].must_equal [:INT64]
   end
 end

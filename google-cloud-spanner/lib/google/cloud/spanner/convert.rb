@@ -17,6 +17,7 @@ require "time"
 require "date"
 require "stringio"
 require "base64"
+require "google/cloud/spanner/data"
 
 module Google
   module Cloud
@@ -27,17 +28,30 @@ module Google
         # rubocop:disable all
 
         module ClassMethods
-          def raw_to_params input_params
-            formatted_params = input_params.map do |key, obj|
-              [String(key), raw_to_param_and_type(obj)]
+          def to_query_params params, types = nil
+            types ||= {}
+            formatted_params = params.map do |key, obj|
+              [String(key), raw_to_value_and_type(obj, types[key])]
             end
             Hash[formatted_params]
           end
 
-          def raw_to_param_and_type obj
+          def raw_to_value_and_type obj, type = nil
             if NilClass === obj
-              [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-               Google::Spanner::V1::Type.new(code: :INT64)]
+              if type
+                if type.is_a?(Array) && type.count == 1
+                  [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+                   Google::Spanner::V1::Type.new(
+                     code: :ARRAY, array_element_type:
+                      Google::Spanner::V1::Type.new(code: type.first))]
+                # elsif type.is_a? Fields
+                else
+                  [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+                   Google::Spanner::V1::Type.new(code: type)]
+                end
+              else
+                raise ArgumentError, "Must provide type for nil values."
+              end
             elsif String === obj
               [raw_to_value(obj), Google::Spanner::V1::Type.new(code: :STRING)]
             elsif Symbol === obj
@@ -60,14 +74,24 @@ module Google
               [raw_to_value(obj.to_s),
                Google::Spanner::V1::Type.new(code: :DATE)]
             elsif Array === obj
-              # Use recursion to get the param type for the first item the list
-              nested_param_type = raw_to_param_and_type(obj.first).last
+              if type && !type.is_a?(Array)
+                raise ArgumentError, "Array values must have an Array type."
+              end
+              type ||= begin
+                # Find the param type for the first non-nil item the list
+                nested_param_value = obj.detect { |x| !x.nil? }
+                if nested_param_value.nil?
+                  raise ArgumentError, "Array values must have an Array type."
+                end
+                [raw_to_value_and_type(nested_param_value).last.code]
+              end
               [raw_to_value(obj),
                Google::Spanner::V1::Type.new(
-                code: :ARRAY, array_element_type: nested_param_type)]
+                code: :ARRAY, array_element_type:
+                  Google::Spanner::V1::Type.new(code: type.first))]
             elsif Hash === obj
               field_pairs = obj.map do |key, value|
-                [key, raw_to_param_and_type(value).last]
+                [key, raw_to_value_and_type(value).last]
               end
               formatted_fields = field_pairs.map do |name, param_type|
                 Google::Spanner::V1::StructType::Field.new(
@@ -181,10 +205,7 @@ module Google
                 value_to_raw v, type.array_element_type
               end
             when :STRUCT
-              # Unsupported query shape: A struct value cannot be returned as a
-              # column value. Rewrite the query to flatten the struct fields in
-              # the result.
-              fail "STRUCT not implemented yet"
+              Data.from_grpc value.list_value.values, type.struct_type.fields
             end
           end
 

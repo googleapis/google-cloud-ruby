@@ -15,11 +15,13 @@
 
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
+require "google/cloud/spanner/data"
 require "google/cloud/spanner/pool"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
+require "google/cloud/spanner/convert"
 
 module Google
   module Cloud
@@ -125,6 +127,24 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
+        # @param [Hash] types Types of the SQL parameters for the query string.
+        #   The parameter placeholders, minus the "@", are the the hash keys,
+        #   and the Spanner Type codes are the hash values. Types are optional.
+        #
+        #   The Spanner Type codes that can be specifid are:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #
+        #   Arrays are specified by providing the type code in an array. For
+        #   example, an array of integers are specified as `[:INT64]`.
+        #
+        #   Structs are not yet supported in query parameters.
         # @param [Hash] single_use Perform the read with a single-use snapshot
         #   (read-only transaction). (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
@@ -207,7 +227,7 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}""
         #   end
         #
-        def execute sql, params: nil, single_use: {}
+        def execute sql, params: nil, types: nil, single_use: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -215,7 +235,7 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.execute \
-              sql, params: params, transaction: single_use_tx
+              sql, params: params, types: types, transaction: single_use_tx
           end
           results
         end
@@ -306,7 +326,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 single_use: {}
+                 single_use: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -678,16 +698,37 @@ module Google
         end
 
         ##
+        # @private
+        # Creates fields object from types
+        #
+        # @param [Array, Hash] types Accepts an array of types, array of type
+        #   pairs, hash of positional types, hash of named types.
+        #
+        # @return [Fields] The fields of the given types.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #   user_fields = db.fields id: :INT64, name: :STRING, active: :BOOL
+        #
+        #   db.update "users", [user_fields.data(1, "Charlie", false),
+        #                       user_fields.data(2, "Harvey", true)]
+        #
+        def fields types
+          Fields.new types
+        end
+
+        ##
+        # @private
         # Executes a query to retrieve the field names and types for a table.
         #
         # @param [String] table The name of the table in the database to
-        #   retrieve types for
-        # @param [Boolean] pairs Allow the types to be represented as a nested
-        #   Array of pairs rather than a Hash. This is useful when results have
-        #   duplicate names. The default is `false`.
+        #   retrieve fields for.
         #
-        # @return [Hash, Array] The types of the returned data. The default is a
-        #   Hash. Is a nested Array of Arrays when `pairs` is specified.
+        # @return [Fields] The fields of the given table.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -696,13 +737,13 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   users_types = db.types_for "users"
+        #   users_types = db.fields_for "users"
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }],
         #             types: users_types
         #
-        def types_for table, pairs: false
-          execute("SELECT * FROM #{table} WHERE 1 = 0").types pairs: pairs
+        def fields_for table
+          execute("SELECT * FROM #{table} WHERE 1 = 0").fields
         end
 
         ##
@@ -757,6 +798,17 @@ module Google
           Session.from_grpc(grpc, @project.service)
         end
 
+        # @private
+        def to_s
+          "(project_id: #{project_id}, instance_id: #{instance_id}, " \
+            "database_id: #{database_id})"
+        end
+
+        # @private
+        def inspect
+          "#<#{self.class.name} #{self}>"
+        end
+
         protected
 
         ##
@@ -773,7 +825,7 @@ module Google
 
         ##
         # Check for valid snapshot arguments
-        def validate_single_use_args! opts = {}
+        def validate_single_use_args! opts
           return true if opts.nil? || opts.empty?
           valid_keys = [:strong, :timestamp, :read_timestamp, :staleness,
                         :exact_staleness, :bounded_timestamp,
@@ -788,7 +840,7 @@ module Google
 
         ##
         # Create a single-use TransactionSelector
-        def single_use_transaction opts = {}
+        def single_use_transaction opts
           return nil if opts.nil? || opts.empty?
 
           exact_timestamp = Convert.time_to_timestamp \

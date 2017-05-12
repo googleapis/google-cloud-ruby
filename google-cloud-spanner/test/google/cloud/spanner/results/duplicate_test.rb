@@ -49,35 +49,31 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
-  it "defaults to hashes" do
+  it "handles duplicate names" do
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    types = results.types
-    types.wont_be :nil?
-    types.must_be_kind_of Hash
-    types.must_equal({:"num" => :STRING, :"str" => :STRING})
+    fields = results.fields
+    fields.wont_be :nil?
+    fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    fields.types.must_equal [:INT64, :INT64, :STRING, :STRING]
+    fields.keys.must_equal [:num, :str, :num, :str]
+    fields.pairs.must_equal [[:num, :INT64], [:str, :INT64], [:num, :STRING], [:str, :STRING]]
+    fields.to_a.must_equal [:INT64, :INT64, :STRING, :STRING]
+    assert_raises Google::Cloud::Spanner::DuplicateNameError do
+      fields.to_h
+    end
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 2
-    rows.first.must_be_kind_of Hash
-    rows.first.must_equal({num: "hello", str: "world"})
-    rows.last.must_be_kind_of Hash
-    rows.last.must_equal({num: "hola", str: "mundo"})
-  end
-
-  it "can return an array of pairs" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-
-    types = results.types pairs: true
-    types.wont_be :nil?
-    types.must_be_kind_of Array
-    types.must_equal [[:num, :INT64], [:str, :INT64], [:num, :STRING], [:str, :STRING]]
-
-    rows = results.rows(pairs: true).to_a # grab them all from the enumerator
-    rows.count.must_equal 2
-    rows.first.must_be_kind_of Array
-    rows.first.must_equal [[:num, 1], [:str, 2], [:num, "hello"], [:str, "world"]]
-    rows.last.must_be_kind_of Array
-    rows.last.must_equal [[:num, 3], [:str, 4], [:num, "hola"], [:str, "mundo"]]
+    rows.first.to_a.must_equal [1, 2, "hello", "world"]
+    rows.last.to_a.must_equal [3, 4, "hola", "mundo"]
+    assert_raises Google::Cloud::Spanner::DuplicateNameError do
+      rows.first.to_h
+    end
+    assert_raises Google::Cloud::Spanner::DuplicateNameError do
+      rows.last.to_h
+    end
+    rows.first.pairs.must_equal [[:num, 1], [:str, 2], [:num, "hello"], [:str, "world"]]
+    rows.last.pairs.must_equal [[:num, 3], [:str, 4], [:num, "hola"], [:str, "mundo"]]
   end
 end

@@ -114,8 +114,8 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :streaming_read, UnavailableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
-    mock.expect :streaming_read, UnavailableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: "abc123", options: default_options]
+    mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
+    mock.expect :streaming_read, RaiseableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: "abc123", options: default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
@@ -128,23 +128,23 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.types.wont_be :nil?
-    results.types.must_be_kind_of Hash
-    results.types.keys.count.must_equal 9
-    results.types[:id].must_equal          :INT64
-    results.types[:name].must_equal        :STRING
-    results.types[:active].must_equal      :BOOL
-    results.types[:age].must_equal         :INT64
-    results.types[:score].must_equal       :FLOAT64
-    results.types[:updated_at].must_equal  :TIMESTAMP
-    results.types[:birthday].must_equal    :DATE
-    results.types[:avatar].must_equal      :BYTES
-    results.types[:project_ids].must_equal [:INT64]
+    results.fields.wont_be :nil?
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 9
+    results.fields[:id].must_equal          :INT64
+    results.fields[:name].must_equal        :STRING
+    results.fields[:active].must_equal      :BOOL
+    results.fields[:age].must_equal         :INT64
+    results.fields[:score].must_equal       :FLOAT64
+    results.fields[:updated_at].must_equal  :TIMESTAMP
+    results.fields[:birthday].must_equal    :DATE
+    results.fields[:avatar].must_equal      :BYTES
+    results.fields[:project_ids].must_equal [:INT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
     row = rows.first
-    row.must_be_kind_of Hash
+    row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     row[:id].must_equal 1
     row[:name].must_equal "Charlie"

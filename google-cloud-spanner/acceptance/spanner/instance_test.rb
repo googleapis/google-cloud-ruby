@@ -54,6 +54,17 @@ describe "Spanner Instances", :spanner do
     spanner.instance(instance_id).must_be :nil?
   end
 
+  it "lists and gets instances" do
+    all_instances = spanner.instances.all.to_a
+    all_instances.wont_be :empty?
+    all_instances.each do |instance|
+      instance.must_be_kind_of Google::Cloud::Spanner::Instance
+    end
+
+    first_instance = spanner.instance all_instances.first.instance_id
+    first_instance.must_be_kind_of Google::Cloud::Spanner::Instance
+  end
+
   def map_to_hash map
     if map.respond_to? :to_h
       map.to_h

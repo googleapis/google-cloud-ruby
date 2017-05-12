@@ -50,4 +50,15 @@ describe "Spanner Databases", :spanner do
     database.drop
     spanner.database(instance_id, database_id).must_be :nil?
   end
+
+  it "lists and gets databases" do
+    all_databases = spanner.databases(instance_id).all.to_a
+    all_databases.wont_be :empty?
+    all_databases.each do |database|
+      database.must_be_kind_of Google::Cloud::Spanner::Database
+    end
+
+    first_database = spanner.database all_databases.first.instance_id, all_databases.first.database_id
+    first_database.must_be_kind_of Google::Cloud::Spanner::Database
+  end
 end

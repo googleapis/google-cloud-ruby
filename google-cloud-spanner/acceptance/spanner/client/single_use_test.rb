@@ -1,0 +1,175 @@
+# Copyright 2017 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "spanner_helper"
+
+describe "Spanner Client", :single_use, :spanner do
+  let(:db) { spanner_client }
+  let(:columns) { [:account_id, :username, :friends, :active, :reputation, :avatar] }
+  let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
+
+  before do
+    db.delete "accounts"
+    db.insert "accounts", default_account_rows
+  end
+
+  after do
+    db.delete "accounts"
+  end
+
+  it "runs a query with strong option" do
+    results = db.execute "SELECT * FROM accounts", single_use: { strong: true }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  it "runs a read with strong option" do
+    results = db.read "accounts", columns, single_use: { strong: true }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  it "runs a query with timestamp option" do
+    timestamp = Time.now
+    results = db.execute "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_equal timestamp
+  end
+
+  it "runs a read with timestamp option" do
+    timestamp = Time.now
+    results = db.read "accounts", columns, single_use: { timestamp: timestamp }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_equal timestamp
+  end
+
+  it "runs a query with staleness option" do
+    results = db.execute "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  it "runs a read with staleness option" do
+    results = db.read "accounts", columns, single_use: { staleness: 0.0001 }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  it "runs a query with bounded_timestamp option" do
+    timestamp = Time.now
+    results = db.execute "SELECT * FROM accounts", single_use: { bounded_timestamp: timestamp }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_equal timestamp
+  end
+
+  it "runs a read with bounded_timestamp option" do
+    timestamp = Time.now
+    results = db.read "accounts", columns, single_use: { bounded_timestamp: timestamp }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_equal timestamp
+  end
+
+  it "runs a query with bounded_staleness option" do
+    results = db.execute "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  it "runs a read with bounded_staleness option" do
+    results = db.read "accounts", columns, single_use: { bounded_staleness: 0.0001 }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+
+    results.timestamp.wont_be :nil?
+    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+  end
+
+  def assert_accounts_equal expected, actual
+    expected[:account_id].must_equal actual[:account_id]
+    expected[:username].must_equal actual[:username]
+    expected[:reputation].must_equal actual[:reputation]
+    expected[:active].must_equal actual[:active]
+    if expected[:avatar] && actual[:avatar]
+      expected[:avatar].read.must_equal actual[:avatar].read
+    end
+    expected[:friends].must_equal actual[:friends]
+  end
+end
