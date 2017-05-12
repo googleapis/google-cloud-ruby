@@ -1,0 +1,1 @@
+{"id":"google/cloud/spanner/duplicatenameerror","name":"DuplicateNameError","title":["Google","Cloud","Spanner","DuplicateNameError"],"description":"<h1 id=\"duplicatenameerror\">DuplicateNameError</h1>\n\n<p>Data has more than one instance of a name.</p>","source":"google-cloud-spanner/lib/google/cloud/spanner/errors.rb#L33","resources":[],"examples":[],"methods":[]}
