@@ -65,7 +65,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp
+    results.timestamp.must_be_close_to timestamp, 1
   end
 
   it "runs a read with timestamp option" do
@@ -79,7 +79,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp
+    results.timestamp.must_be_close_to timestamp, 1
   end
 
   it "runs a query with staleness option" do
