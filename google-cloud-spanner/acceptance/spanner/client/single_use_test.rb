@@ -119,7 +119,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_equal timestamp
+    results.timestamp.must_be_close_to timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with bounded_timestamp option" do
@@ -133,7 +133,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_equal timestamp
+    results.timestamp.must_be_close_to timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with bounded_staleness option" do
