@@ -55,7 +55,7 @@ describe "Spanner Client", :large_data, :spanner do
       bytes: [random_big_bytes, random_small_bytes, random_big_bytes]
     }
   end
-focus
+
   it "writes and reads large random data" do
     my_row = random_row
     db.upsert table_name, my_row
@@ -81,7 +81,7 @@ focus
       byte.read.must_equal my_row[:bytes][index].read
     end
   end
-focus
+
   it "writes and queries bytes" do
     my_row = random_row
     db.upsert table_name, my_row
