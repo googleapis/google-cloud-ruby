@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 
@@ -87,6 +87,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
       # first time called this will raise
@@ -139,6 +142,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+
     def mock.commit *args
       # first time called this will raise
       if @called == nil
@@ -189,6 +195,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
       # first time called this will raise
@@ -243,6 +252,10 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+
     def mock.commit *args
       # first time called this will raise
       if @called == nil
@@ -309,6 +322,10 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+
     def mock.commit *args
       gax_error = Google::Gax::GaxError.new "aborted"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(10, "aborted")

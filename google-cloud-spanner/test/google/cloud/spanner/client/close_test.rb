@@ -26,8 +26,8 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
 
   before do
     p = client.instance_variable_get :@pool
-    p.pool = [session]
-    p.queue = [session]
+    p.all_sessions = [session]
+    p.session_queue = [session]
   end
 
   it "deletes sessions" do

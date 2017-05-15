@@ -25,14 +25,14 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:pool) do
     p = client.instance_variable_get :@pool
-    p.pool = [session]
-    p.queue = [session]
+    p.all_sessions = [session]
+    p.session_queue = [session]
     p
   end
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 

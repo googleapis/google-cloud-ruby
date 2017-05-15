@@ -494,6 +494,14 @@ module Google
 
         ##
         # @private
+        # Creates a new transaction object every time.
+        def create_transaction
+          tx_grpc = service.begin_transaction path
+          Transaction.from_grpc(tx_grpc, self)
+        end
+
+        ##
+        # @private
         # Keeps the session alive by calling SELECT 1
         def keepalive!
           ensure_service!
@@ -503,8 +511,6 @@ module Google
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id)
-          self
-          execute "SELECT 1"
           return false
         end
 

@@ -47,7 +47,7 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 

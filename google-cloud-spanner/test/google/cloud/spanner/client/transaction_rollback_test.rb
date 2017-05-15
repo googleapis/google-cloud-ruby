@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 
@@ -76,6 +76,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
     results = nil
@@ -99,6 +101,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
     results = nil
