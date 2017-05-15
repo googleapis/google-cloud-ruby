@@ -64,7 +64,7 @@ module Google
         #
         #   results = db.execute "SELECT * FROM users"
         #
-        #   results.fields.each do |name, type|
+        #   results.fields.pairs.each do |name, type|
         #     puts "Column #{name} is type {type}"
         #   end
         #

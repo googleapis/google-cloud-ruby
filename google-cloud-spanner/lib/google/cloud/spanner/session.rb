@@ -161,11 +161,15 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
-        # @param [Hash] types Types of the SQL parameters for the query string.
-        #   The parameter placeholders, minus the "@", are the the hash keys,
-        #   and the Spanner Type codes are the hash values. Types are optional.
+        # @param [Hash] types Types of the SQL parameters in `params`. It is not
+        #   always possible for Cloud Spanner to infer the right SQL type from a
+        #   value in `params`. In these cases, the `types` hash can be used to
+        #   specify the exact SQL type for some or all of the SQL query
+        #   parameters.
         #
-        #   The Spanner Type codes that can be specifid are:
+        #   The keys of the hash should be query string parameter placeholders,
+        #   minus the "@". The values of the hash should be Cloud Spanner type
+        #   codes from the following list:
         #
         #   * `:BOOL`
         #   * `:BYTES`
@@ -179,6 +183,8 @@ module Google
         #   example, an array of integers are specified as `[:INT64]`.
         #
         #   Structs are not yet supported in query parameters.
+        #
+        #   Types are optional.
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
