@@ -67,10 +67,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
 
   after {
     # Clear configuration values between each test
-    config_hash = Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs)
-    config_hash.each do |k, _|
-      config_hash[k] = nil
-    end
+    Google::Cloud::ErrorReporting.configure.clear
   }
 
   describe "#initialize" do

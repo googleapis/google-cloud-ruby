@@ -190,8 +190,8 @@ module Google
         # Sync Middleware configuration parameters from multiple sources. The
         # sources take precedence in following order: explicit parameters,
         # Google::Cloud::ErrorReporting.configure, Google::Cloud.configure,
-        # then Google::Cloud::ErrorReporting::Project#defaults. This methods
-        # sets final parameters as Middleware instance varaibles, then set
+        # then Google::Cloud::ErrorReporting::Project#defaults. This method
+        # sets final parameters as Middleware instance varaibles, then sets
         # the same parameters back into Google::Cloud::ErrorReporting, to ensure
         # the Middleware and the simple API configuration are consistent.
         #

@@ -64,8 +64,9 @@ module Google
           ::ActiveSupport::OrderedOptions.new
 
         initializer "Stackdriver.Logging", before: :initialize_logger do |app|
-          if self.class.use_logging? app.config
-            logging_config = Railtie.parse_rails_config config
+          use_logging = self.class.use_logging? app.config
+          if use_logging
+            logging_config = Railtie.parse_rails_config app.config
 
             project_id = logging_config[:project_id]
             keyfile = logging_config[:keyfile]
@@ -82,8 +83,15 @@ module Google
             app.config.logger = logging.logger log_name, resource
             app.middleware.insert_before Rails::Rack::Logger,
                                          Google::Cloud::Logging::Middleware,
-                                         logger: app.config.logger
+                                         logger: app.config.logger,
+                                         project_id: project_id,
+                                         keyfile: keyfile,
+                                         log_name: log_name,
+                                         resource_type: resource_type,
+                                         resource_labels: resource_labels
           end
+
+          Google::Cloud.configure.use_logging = use_logging
         end
 
         ##

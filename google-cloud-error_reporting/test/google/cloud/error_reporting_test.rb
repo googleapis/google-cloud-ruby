@@ -67,19 +67,12 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   end
 
   describe ".configure" do
-    it "initializes Google::Cloud.configure.error_reporting once" do
-      error_reporting_config = Google::Cloud.configure.error_reporting
-      Google::Cloud::ErrorReporting.configure
-      Google::Cloud.configure.error_reporting.must_equal error_reporting_config
+    it "has Google::Cloud.configure.error_reporting initialized already" do
+      Google::Cloud.configure.option?(:error_reporting).must_equal true
     end
 
     it "operates on the same Configuration object as Google::Cloud.configure.error_reporting" do
       Google::Cloud::ErrorReporting.configure.must_equal Google::Cloud.configure.error_reporting
-    end
-
-    it "initialies ErrorReporting Configuration with all the valid operations" do
-      Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs).keys.must_equal Google::Cloud::ErrorReporting::CONFIG_OPTIONS
-      Google::Cloud.configure.error_reporting.instance_variable_get(:@configs).keys.must_equal Google::Cloud::ErrorReporting::CONFIG_OPTIONS
     end
   end
 

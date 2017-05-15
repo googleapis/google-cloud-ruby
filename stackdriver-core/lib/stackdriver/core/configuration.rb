@@ -22,103 +22,95 @@ module Stackdriver
     # predefined options.
     #
     # @example
-    #   options = [:opt1, {category1: [:opt2]}, {category2: [:opt3]}]
-    #   config = Stackdriver::Core::Configuration.new options: options
+    #   nested_categories = [:nested1, {nested2: [:nested3]}]
+    #   config = Stackdriver::Core::Configuration.new nested: nested_categories
     #
-    #   config.opt1 = true
-    #   config.category1.opt2 = false
+    #   config.opt1        #=> nil
+    #   config.opt1 = true #=> true
+    #   config.opt1        #=> true
     #
-    #   config.opt1           #=> true
-    #   config.category1.opt2 #=> false
-    #   config.category2.opt3 #=> nil
-    #   config.opt4           #=> RuntimeError: Unrecognized option: opt4
+    #   config.nested1           #=> <Stackdriver::Core::Configuration>
+    #   config.nested2.nested3   #=> <Stackdriver::Core::Configuration>
     #
-    class Configuration
+    class Configuration < Hash
       ##
       # Constructs a new instance of Configuration object.
       #
-      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
-      #   or Hash of predefined option keys. Symbols in array will be option
-      #   keys for current level. Nested hash translates to nested Configuration
-      #   objects with nested options.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
+      #   A Symbol, or nested Array and Hash of sub configuration categories.
+      #   A single Symbol and Symbols in array will be keys to next level of
+      #   categories. Nested hash represent sub categories with further nested
+      #   sub categories.
       #
-      def initialize options = []
-        @configs = {}
+      def initialize nested = {}
+        super()
 
-        init_options options
+        add_nested nested
       end
 
       ##
-      # Add more valid options to a Configuration object
+      # Add nested sub configurations to a Configuration object
       #
-      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
-      #   or Hash of predefined option keys. Symbols in array will be option
-      #   keys for current level. Nested hash translates to nested Configuration
-      #   objects with nested options.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, ( Array, Hash)>] nested
+      #   A Symbol, or nested Array and Hash of sub configuration categories.
+      #   A single Symbol and Symbols in array will be keys to next level of
+      #   categories. Nested hash represent sub categories with further nested
+      #   sub categories.
       #
       # @example
-      #   config = Stackdriver::Core::Configuration.new options: [:opt1]
-      #   config.opt2 #=> RuntimeError: Unrecognized option: opt2
+      #   config = Stackdriver::Core::Configuration.new
+      #   config.nest1 #=> nil
+      #   config.add_nested {nest1: [nest2]}
+      #   config.nest1 #=> <Stackdriver::Core::Configuration>
+      #   config.nest1.nest2 #=> <Stackdriver::Core::Configuration>
       #
-      #   config.add_otpions options: [:opt2]
-      #   config.opt2 #=> nil
-      #
-      def add_options options
-        init_options options
+      def add_nested nested
+        nested = [nested].flatten(1)
+        nested.each do |sub_key|
+          case sub_key
+            when Symbol
+              self[sub_key] = self.class.new
+            when Hash
+              sub_key.each do |k, v|
+                self[k] = self.class.new v
+              end
+            else
+              fail ArgumentError \
+              "Configuration option can only be Symbol or Hash"
+          end
+        end
+      end
+
+      ##
+      # @private Wrap inherited #[] method. Force key to be a Symbol.
+      def []= key, value
+        super key.to_sym, value
+      end
+
+      ##
+      # @private Wrap inherited #[]= method. Force key to be a Symbol.
+      def [] key
+        super key.to_sym
       end
 
       ##
       # Check if the Configuration object has this option
       #
-      # @param [Symbol] option The key to check for.
+      # @param [Symbol] key The key to check for.
       #
       # @return [Boolean] True if the inquired key is a valid option for this
       #   Configuration object. False otherwise.
       #
-      def option? option
-        @configs.key? option
-      end
+      alias_method :option?, :key?
 
       ##
       # @private Dynamic getters and setters
       def method_missing mid, *args
-        match = mid.to_s.match(/(\w+)(=?)$/)
-        fail NoMethodError, mid unless match
-
-        config_key = match[1].to_sym
-        assignment = !match[2].empty?
-
-        if @configs.key? config_key
-          if assignment
-            if @configs[config_key].is_a? Stackdriver::Core::Configuration
-              fail "#{config_key} is a sub Configuration group. Not an option."
-            else
-              @configs[config_key] = args.first
-            end
-          else
-            return @configs[config_key]
-          end
+        method_string = mid.to_s
+        if method_string.chomp!("=")
+          self[method_string] = args.first
         else
-          fail "Unrecognized Option: #{mid}"
-        end
-      end
-
-      private
-
-      def init_options options
-        options = [options].flatten(1)
-        options.each do |option|
-          case option
-          when Symbol
-            @configs[option] = nil
-          when Hash
-            option.each do |k, v|
-              @configs[k] = self.class.new v
-            end
-          else
-            fail ArgumentError \
-              "Configuration option can only be symbol or hash"
-          end
+          self[mid]
         end
       end
     end

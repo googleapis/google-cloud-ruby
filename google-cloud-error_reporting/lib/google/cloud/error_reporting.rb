@@ -71,19 +71,10 @@ module Google
     # for more examples.
     #
     module ErrorReporting
-      ##
-      # @private Instrumentation library configuration options
-      CONFIG_OPTIONS = %I{
-        project_id
-        keyfile
-        service_name
-        service_version
-      }
-
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :error_reporting
-        Google::Cloud.configure.add_options error_reporting: CONFIG_OPTIONS
+        Google::Cloud.configure.add_nested :error_reporting
       end
 
       ##

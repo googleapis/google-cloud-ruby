@@ -37,7 +37,7 @@ describe Google::Cloud::Logging::Railtie do
     it "returns false if can't find non-empty project_id" do
       Google::Cloud::Logging::Credentials.stub :default, nil do
         Google::Cloud::Logging::Project.stub :default_project, nil do
-          $stderr.stub :write, nil do
+          STDOUT.stub :puts, nil do
             Google::Cloud::Logging::Railtie.use_logging?(@rails_config).must_equal false
           end
         end

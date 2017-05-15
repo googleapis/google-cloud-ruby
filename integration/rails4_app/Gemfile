@@ -47,6 +47,7 @@ end
 
 gem "google-cloud-bigquery", path: "../../google-cloud-bigquery"
 gem "google-cloud-core", path: "../../google-cloud-core"
+gem "google-cloud-debugger", path: "../../google-cloud-debugger"
 gem "google-cloud-env", path: "../../google-cloud-env"
 gem "google-cloud-datastore", path: "../../google-cloud-datastore"
 gem "google-cloud-debugger", path: "../../google-cloud-debugger"

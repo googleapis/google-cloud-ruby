@@ -15,6 +15,7 @@
 
 require "google-cloud-logging"
 require "google/cloud/logging/project"
+require "stackdriver/core"
 
 module Google
   module Cloud
@@ -328,6 +329,14 @@ module Google
     # ```
     #
     module Logging
+      # Initialize :error_reporting as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :logging
+        Google::Cloud.configure.add_nested logging: {
+          monitored_resource: :labels
+        }
+      end
+
       ##
       # Creates a new object for connecting to the Stackdriver Logging service.
       # Each call creates a new connection.
@@ -378,6 +387,32 @@ module Google
           Google::Cloud::Logging::Service.new(
             project, credentials, timeout: timeout,
                                   client_config: client_config))
+      end
+
+      ##
+      # Configure the Google::Cloud::Logging::Middleware when used in a
+      # Rack-based application.
+      #
+      # Possible configuration parameters:
+      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
+      #       when running from GCP environments.
+      #   * `keyfile`: The service account JSON file path. Automatically
+      #       discovered when running from GCP environments.
+      #   * `log_name`: A name for the log.
+      #   * `monitored_resource.type`: Identifier for monitored resource.
+      #       Optional. See [Monitored Resource
+      #       Doc](https://cloud.google.com/logging/docs/api/v2/resource-list)
+      #       for full list.
+      #   * `monitored_resource.labels`: Hash of custom labels for Monitored
+      #       Resource.
+      #
+      # @return [Stackdriver::Core::Configuration] The configuration object
+      #   the Google::Cloud::Logging module uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.logging if block_given?
+
+        Google::Cloud.configure.logging
       end
     end
   end
