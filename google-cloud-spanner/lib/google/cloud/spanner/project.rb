@@ -429,10 +429,11 @@ module Google
         #   end
         #
         def client instance_id, database_id, min: 2, max: 10, keepalive: 1500,
-                   write_ratio: 0.5
+                   write_ratio: 0.5, fail: false
           Client.new self, instance_id, database_id, min: min, max: max,
                                                      keepalive: keepalive,
-                                                     write_ratio: write_ratio
+                                                     write_ratio: write_ratio,
+                                                     fail: fail
         end
 
         protected

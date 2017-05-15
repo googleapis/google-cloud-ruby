@@ -52,12 +52,12 @@ module Google
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, min: 2, max: 10,
-                       keepalive: 1500, write_ratio: 0.5
+                       keepalive: 1500, write_ratio: 0.5, fail: false
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @pool = Pool.new self, min: min, max: max, keepalive: keepalive,
-                                 write_ratio: write_ratio
+                                 write_ratio: write_ratio, fail: fail
         end
 
         # The unique identifier for the project.

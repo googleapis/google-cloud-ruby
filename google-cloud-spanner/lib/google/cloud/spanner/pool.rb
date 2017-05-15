@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "thread"
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/session"
 
 module Google
@@ -30,7 +32,7 @@ module Google
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
         def initialize client, min: 2, max: 10, keepalive: 1500,
-                       write_ratio: 0.5
+                       write_ratio: 0.5, fail: false
           @client = client
           @min = min
           @max = max
@@ -38,6 +40,10 @@ module Google
           @write_ratio = write_ratio
           @write_ratio = 0 if write_ratio < 0
           @write_ratio = 1 if write_ratio > 1
+          @fail = fail
+
+          @mutex = Mutex.new
+          @resource = ConditionVariable.new
 
           # initialize pool and availability queue
           init
@@ -53,20 +59,32 @@ module Google
         end
 
         def checkout_session
-          read_session = session_queue.shift
-          return read_session if read_session
-          write_transaction = transaction_queue.shift
-          return write_transaction.session if write_transaction
+          @mutex.synchronize do
+            loop do
+              read_session = session_queue.shift
+              return read_session if read_session
+              write_transaction = transaction_queue.shift
+              return write_transaction.session if write_transaction
 
-          fail "No available sessions" if all_sessions.size >= @max
-          new_session!
+              return new_session! if can_allocate_more_sessions?
+
+              fail SessionLimitError if @fail
+
+              @resource.wait @mutex
+            end
+          end
         end
 
         def checkin_session session
-          fail "Cannot checkin session" unless all_sessions.include? session
+          unless all_sessions.include? session
+            fail ArgumentError, "Cannot checkin session"
+          end
 
-          # Do we ever delete sessions if the queue is *too* full?
-          session_queue.push session
+          @mutex.synchronize do
+            session_queue.push session
+
+            @resource.broadcast
+          end
 
           nil
         end
@@ -81,21 +99,32 @@ module Google
         end
 
         def checkout_transaction
-          write_transaction = transaction_queue.shift
-          return write_transaction if write_transaction
-          read_session = session_queue.shift
-          return read_session.create_transaction if read_session
+          @mutex.synchronize do
+            loop do
+              write_transaction = transaction_queue.shift
+              return write_transaction if write_transaction
+              read_session = session_queue.shift
+              return read_session.create_transaction if read_session
 
-          fail "No available sessions" if all_sessions.size >= @max
-          new_transaction!
+              return new_transaction! if can_allocate_more_sessions?
+
+              fail SessionLimitError if @fail
+
+              @resource.wait @mutex
+            end
+          end
         end
 
         def checkin_transaction tx
-          fail "Cannot checkin session" unless all_sessions.include? tx.session
+          unless all_sessions.include? tx.session
+            fail ArgumentError, "Cannot checkin session"
+          end
 
-          # Do we ever delete transactions if the queue is *too* full?
-          # Push a *NEW* transaction to the queue...
-          transaction_queue.push tx.session.create_transaction
+          @mutex.synchronize do
+            transaction_queue.push tx.session.create_transaction
+
+            @resource.broadcast
+          end
 
           nil
         end
@@ -156,6 +185,10 @@ module Google
 
         def new_transaction!
           new_session!.create_transaction
+        end
+
+        def can_allocate_more_sessions?
+          all_sessions.size < @max
         end
 
         def ensure_keepalive_thread!

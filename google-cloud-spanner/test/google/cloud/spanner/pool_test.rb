@@ -21,7 +21,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
-  let(:client) { spanner.client instance_id, database_id, min: 0, max: 4 }
+  let(:client) { spanner.client instance_id, database_id, min: 0, max: 4, fail: true }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:pool) do
@@ -91,10 +91,9 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     s3 = pool.checkout_session
     s4 = pool.checkout_session
 
-    checkout_session_error = assert_raises RuntimeError do
+    assert_raises Google::Cloud::Spanner::SessionLimitError do
       pool.checkout_session
     end
-    checkout_session_error.message.must_equal "No available sessions"
 
     pool.all_sessions.size.must_equal 4
     pool.session_queue.size.must_equal 0
@@ -113,7 +112,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
   it "raises when checking in a session that does not belong" do
     outside_session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service
 
-    checkin_error = assert_raises RuntimeError do
+    checkin_error = assert_raises ArgumentError do
       pool.checkin_session outside_session
     end
     checkin_error.message.must_equal "Cannot checkin session"
@@ -230,10 +229,9 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     tx3 = pool.checkout_transaction
     tx4 = pool.checkout_transaction
 
-    checkout_session_error = assert_raises RuntimeError do
+    assert_raises Google::Cloud::Spanner::SessionLimitError do
       pool.checkout_transaction
     end
-    checkout_session_error.message.must_equal "No available sessions"
 
     pool.all_sessions.size.must_equal 4
     pool.session_queue.size.must_equal 0
@@ -269,7 +267,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     outside_session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service
     outside_tx = Google::Cloud::Spanner::Transaction.from_grpc Google::Spanner::V1::Transaction.new(id: "outside-tx-001"), outside_session
 
-    checkin_error = assert_raises RuntimeError do
+    checkin_error = assert_raises ArgumentError do
       pool.checkin_transaction outside_tx
     end
     checkin_error.message.must_equal "Cannot checkin session"
