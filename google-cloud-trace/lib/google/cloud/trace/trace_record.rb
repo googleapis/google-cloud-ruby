@@ -32,7 +32,8 @@ module Google
       #   env = my_get_rack_environment
       #   trace_context = Stackdriver::Core::TraceContext.parse_rack_env env
       #
-      #   trace = Google::Cloud::TraceRecord.new "my-project", trace_context
+      #   trace = Google::Cloud::Trace::TraceRecord.new "my-project",
+      #                                                 trace_context
       #   span = trace.create_span "root_span"
       #   subspan = span.create_span "subspan"
       #
