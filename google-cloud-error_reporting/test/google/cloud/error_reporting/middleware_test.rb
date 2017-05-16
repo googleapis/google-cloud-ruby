@@ -45,29 +45,22 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
     app
   }
-  # let(:error_reporting) {
-  #   obj = OpenStruct.new report: Proc.new {}
-  #   obj.define_singleton_method(:report_error_event) do end
-  #   obj
-  # }
   let(:middleware) {
+    Google::Cloud::ErrorReporting.configure do |config|
+      config.ignore_classes = [IgnoredError]
+      config.service_name = service_name
+      config.service_version = service_version
+    end
     Google::Cloud::ErrorReporting::Middleware.new rack_app,
                                                   error_reporting: error_reporting,
                                                   project_id: project_id,
-                                                  keyfile: keyfile,
-                                                  service_name: service_name,
-                                                  service_version: service_version,
-                                                  ignore_classes: [IgnoredError]
-  }
-  let(:default_middleware) {
-    Google::Cloud::ErrorReporting::Middleware.new rack_app,
-                                                  error_reporting: error_reporting,
-                                                  project_id: project_id
+                                                  keyfile: keyfile
   }
 
   after {
     # Clear configuration values between each test
     Google::Cloud::ErrorReporting.configure.clear
+    Google::Cloud.configure.delete :use_error_reporting
   }
 
   describe "#initialize" do

@@ -44,6 +44,8 @@ module Google
       #   config.google_cloud.error_reporting.keyfile = "/path/to/secret.json"
       #   config.google_cloud.error_reporting.service_name = "my-service-name"
       #   config.google_cloud.error_reporting.service_version = "v1"
+      #   config.google_cloud.error_reporting.ignore_classes =
+      #     [ActiveRecord::Exception]
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ActiveSupport::OrderedOptions.new unless
@@ -51,70 +53,95 @@ module Google
         config.google_cloud.error_reporting = ActiveSupport::OrderedOptions.new
 
         initializer "Google.Cloud.ErrorReporting" do |app|
-          use_error_reporting = self.class.use_error_reporting? app.config
-          if use_error_reporting
-            er_config = Railtie.parse_rails_config app.config
+          consolidate_rails_config app.config
 
-            project_id = er_config[:project_id]
-            keyfile = er_config[:keyfile]
-            service_name = er_config[:service_name]
-            service_version = er_config[:service_version]
-
-            # In later versions of Rails, ActionDispatch::DebugExceptions is
-            # responsible for catching exceptions. But it didn't exist until
-            # Rails 3.2. So we use ShowExceptions as pivot for earlier Rails.
-            rails_exception_middleware =
-              if defined? ::ActionDispatch::DebugExceptions
-                ::ActionDispatch::DebugExceptions
-              else
-                ::ActionDispatch::ShowExceptions
-              end
-
-            error_reporting = ErrorReporting.new project: project_id,
-                                                 keyfile: keyfile
-
-            app.middleware.insert_after rails_exception_middleware,
-                                        Middleware,
-                                        project_id: project_id,
-                                        keyfile: keyfile,
-                                        error_reporting: error_reporting,
-                                        service_name: service_name,
-                                        service_version: service_version
-          end
-
-          Google::Cloud.configure.use_error_reporting = use_error_reporting
+          self.class.init_middleware app if Cloud.configure.use_error_reporting
         end
 
         ##
-        # Determine whether to use Stackdriver Error Reporting or not.
-        #
-        # Returns true if valid GCP project_id and keyfile are provided and
-        # either Rails is in "production" environment or \
-        # config.google_cloud.use_error_reporting is explicitly true. Otherwise
-        # false.
+        # @private Init Error Reporting integration for Rails. Setup
+        # configuration and insert the Middleware.
+        def self.init_middleware app
+          project_id = ErrorReporting.configure.project_id
+          keyfile = ErrorReporting.configure.keyfile
+
+          # In later versions of Rails, ActionDispatch::DebugExceptions is
+          # responsible for catching exceptions. But it didn't exist until
+          # Rails 3.2. So we use ShowExceptions as pivot for earlier Rails.
+          rails_exception_middleware =
+            if defined? ::ActionDispatch::DebugExceptions
+              ::ActionDispatch::DebugExceptions
+            else
+              ::ActionDispatch::ShowExceptions
+            end
+
+          error_reporting = ErrorReporting.new project: project_id,
+                                               keyfile: keyfile
+
+          app.middleware.insert_after rails_exception_middleware,
+                                      Middleware,
+                                      project_id: project_id,
+                                      keyfile: keyfile,
+                                      error_reporting: error_reporting
+        end
+
+        ##
+        # @private Consolidate Rails configuration into Error Reporting
+        # instrumentation configuration. Also consolidate the
+        # `use_error_reporting` setting by verifying credentials and Rails
+        # environment. The `use_error_reporting` setting will be true if
+        # credentials are valid, and the setting is manually set to true or
+        # Rails is in production environment.
         #
         # @param [Rails::Railtie::Configuration] config The
         #   Rails.application.config
         #
-        # @return [Boolean] Whether to use Stackdriver Error Reporting
-        #
-        def self.use_error_reporting? config
-          er_config = Railtie.parse_rails_config config
+        def self.consolidate_rails_config config
+          merge_rails_config config
 
-          # Return false if config.google_cloud.use_error_reporting is
-          # explicitly false
-          use_error_reporting = er_config[:use_error_reporting]
-          return false if use_error_reporting == false
+          ErrorReporting.configure.project_id ||=
+            ErrorReporting::Project.default_project
 
-          project_id = er_config[:project_id] ||
-                       ErrorReporting::Project.default_project
-          keyfile = er_config[:keyfile]
+          # Done if Google::Cloud.configure.use_error_reporting is explicitly
+          # false
+          return if Google::Cloud.configure.use_error_reporting == false
 
-          # Check credentialing. Returns false if authorization errors are
-          # rescued.
+          # Verify credentials and set use_error_reporting to false if
+          # credentials are invalid
+          unless valid_credentials? ErrorReporting.configure.project_id,
+                                    ErrorReporting.configure.keyfile
+            Cloud.configure.use_error_reporting = false
+            return
+          end
+
+          # Otherwise set use_error_reporting to true if Rails is running in
+          # production
+          Google::Cloud.configure.use_error_reporting ||= Rails.env.production?
+        end
+
+        ##
+        # @private Merge Rails configuration into Error Reporting
+        # instrumentation configuration.
+        def self.merge_rails_config rails_config
+          gcp_config = rails_config.google_cloud
+          er_config = gcp_config.error_reporting
+
+          Cloud.configure.use_error_reporting ||= gcp_config.use_error_reporting
+          ErrorReporting.configure do |config|
+            config.project_id ||= er_config.project_id || gcp_config.project_id
+            config.keyfile ||= er_config.keyfile || gcp_config.keyfile
+            config.service_name ||= er_config.service_name
+            config.service_version ||= er_config.service_version
+            config.ignore_classes ||= er_config.ignore_classes
+          end
+        end
+
+        ##
+        # @private Verify credentials
+        def self.valid_credentials? project_id, keyfile
           begin
             ErrorReporting::Credentials.credentials_with_scope keyfile
-          rescue StandardError => e
+          rescue => e
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"
             return false
@@ -126,30 +153,12 @@ module Google
             return false
           end
 
-          # Otherwise return true if Rails is running in production or
-          # config.google_cloud.use_error_reporting is explicitly true
-          Rails.env.production? || use_error_reporting || false
+          true
         end
 
-        ##
-        # @private Helper method to parse rails config into a flattened hash.
-        def self.parse_rails_config config
-          gcp_config = config.google_cloud
-          er_config = gcp_config.error_reporting
-          if gcp_config.key? :use_error_reporting
-            use_error_reporting = gcp_config.use_error_reporting
-          else
-            use_error_reporting = nil
-          end
-
-          {
-            project_id: er_config.project_id || gcp_config.project_id,
-            keyfile: er_config.keyfile || gcp_config.keyfile,
-            service_name: er_config.service_name,
-            service_version: er_config.service_version,
-            use_error_reporting: use_error_reporting
-          }
-        end
+        private_class_method :consolidate_rails_config,
+                             :merge_rails_config,
+                             :valid_credentials?
       end
     end
   end

@@ -24,7 +24,6 @@ module Google
       # to Stackdriver Error Reporting.
       #
       class Middleware
-        ##
         # A Google::Cloud::ErrorReporting::Project client used to report
         # error events.
         attr_reader :error_reporting
@@ -38,19 +37,6 @@ module Google
         attr_reader :keyfile
 
         ##
-        # @private An identifier for the running service
-        attr_reader :service_name
-
-        ##
-        # @private A version identifer for the running service
-        attr_reader :service_version
-
-        ##
-        # @private A list of Exception classes to ignore. The Middleware will
-        # not report these exceptions to Stackdriver ErrorReporting service.
-        attr_reader :ignore_classes
-
-        ##
         # Construct a new instance of Middleware.
         #
         # @param [Rack::Application] app The Rack application
@@ -62,42 +48,27 @@ module Google
         #   Automatically discovered from GCP environments.
         # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
         #   file path the file must be readable.
-        # @param [String] service_name Name of the service. Default to
-        #   {Google::Cloud::ErrorReporting::Project.default_service_name}.
-        #   Automatically discovered if on Google App Engine Flexible
-        #   Environment.
-        # @param [String] service_version Version of the service. Optional.
-        #   Default to
         #   {Google::Cloud::ErrorReporting::Project.default_service_version}.
         #   Automatically discovered if on Google App Engine Flex.
-        # @param [Array<Class>] ignore_classes A single or an array of Exception
-        #   classes to ignore. Optional.
         #
         # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of
         #   Middleware
         #
-        def initialize app, error_reporting: nil, project_id: nil, keyfile: nil,
-                       service_name: nil, service_version: nil,
-                       ignore_classes: nil
+        def initialize app, error_reporting: nil, project_id: nil, keyfile: nil
           require "rack"
           require "rack/request"
-
           @app = app
           load_config project_id: project_id,
-                      keyfile: keyfile,
-                      service_name: service_name,
-                      service_version: service_version
+                      keyfile: keyfile
           fail ArgumentError, "project_id is required" if @project_id.nil?
 
-          @ignore_classes = Array(ignore_classes)
           @error_reporting = error_reporting ||
                              ErrorReporting.new(project: @project_id,
                                                 keyfile: @keyfile)
 
           # Set module default client to reuse the same client. Update module
           # configuration parameters.
-          Google::Cloud::ErrorReporting.class_variable_set :@@default_client,
-                                                           @error_reporting
+          ErrorReporting.class_variable_set :@@default_client, @error_reporting
         end
 
         ##
@@ -138,7 +109,7 @@ module Google
         #
         def report_exception env, exception
           # Do not any exceptions that's specified by the ignore_classes list.
-          return if ignore_classes.include? exception.class
+          return if configuration.ignore_classes.include? exception.class
 
           error_event = error_event_from_exception env, exception
 
@@ -169,8 +140,8 @@ module Google
           error_event = ErrorReporting::ErrorEvent.from_exception exception
 
           # Inject service_context info into error_event object
-          error_event.service_name = service_name
-          error_event.service_version = service_version
+          error_event.service_name = configuration.service_name
+          error_event.service_version = configuration.service_version
 
           # Inject http_request_context info into error_event object
           rack_request = Rack::Request.new env
@@ -187,35 +158,27 @@ module Google
         private
 
         ##
-        # Sync Middleware configuration parameters from multiple sources. The
-        # sources take precedence in following order: explicit parameters,
-        # Google::Cloud::ErrorReporting.configure, Google::Cloud.configure,
-        # then Google::Cloud::ErrorReporting::Project#defaults. This method
-        # sets final parameters as Middleware instance varaibles, then sets
-        # the same parameters back into Google::Cloud::ErrorReporting, to ensure
-        # the Middleware and the simple API configuration are consistent.
+        # Consolidate configurations from various sources. Also set
+        # instrumentation config parameters to default values if not set
+        # already.
         #
-        def load_config project_id: nil, keyfile: nil,
-                        service_name: nil, service_version: nil
-          gcloud_config = Google::Cloud.configure
-          er_config = Google::Cloud::ErrorReporting.configure
-
+        def load_config project_id: nil, keyfile: nil
           @project_id = project_id ||
-                        er_config.project_id ||
-                        gcloud_config.project_id ||
+                        configuration.project_id ||
+                        Cloud.configure.project_id ||
                         ErrorReporting::Project.default_project
-          @keyfile = keyfile || er_config.keyfile || gcloud_config.keyfile
-          @service_name = service_name ||
-                          er_config.service_name ||
-                          ErrorReporting::Project.default_service_name
-          @service_version = service_version ||
-                             er_config.service_version ||
-                             ErrorReporting::Project.default_service_version
+          @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
 
-          er_config.project_id = @project_id
-          er_config.keyfile = @keyfile
-          er_config.service_name = @service_name
-          er_config.service_version = @service_version
+          # Set defaults
+          configuration.service_name ||=
+            ErrorReporting::Project.default_service_name
+          configuration.service_version ||=
+            ErrorReporting::Project.default_service_version
+          configuration.ignore_classes = Array(configuration.ignore_classes)
+
+          # Ensure instrumentation configurations are aligned
+          configuration.project_id = @project_id
+          configuration.keyfile = @keyfile
         end
 
         ##
@@ -240,6 +203,12 @@ module Google
           end
 
           http_status
+        end
+
+        ##
+        # @private Get Google::Cloud::ErrorReporting.configure
+        def configuration
+          Google::Cloud::ErrorReporting.configure
         end
       end
     end

@@ -34,6 +34,14 @@ module Google
         attr_reader :logger
 
         ##
+        # @private The Google Cloud project ID
+        attr_reader :project_id
+
+        ##
+        # @private The Google Cloud keyfile path
+        attr_reader :keyfile
+
+        ##
         # Create a new AppEngine logging Middleware.
         #
         # @param [Rack Application] app Rack application
@@ -50,37 +58,25 @@ module Google
         #   file path the file must be readable. Used to create a default logger
         #   if one isn't specified and a service account is used for
         #   authentication. Optional.
-        # @param [String] log_name The name of the log to use. Use default
-        #   log name if nil.
-        # @param [String] resource_type The name of Logging Monitored Resource.
-        #   Defaults to
-        # @param [Hash] log_name_map A map from URI path to log name override.
-        #   The path may be a string or regex. If a request path matches an
-        #   entry in this map, the log name is set accordingly, otherwise the
-        #   logger's default log_name is used.
         #
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil, project_id: nil, keyfile: nil,
-                       log_name: nil, log_name_map: DEFAULT_LOG_NAME_MAP,
-                       resource_type: nil, resource_labels: nil
+        def initialize app, logger: nil, project_id: nil, keyfile: nil
           @app = app
-          @log_name_map = log_name_map
 
           load_config project_id: project_id,
-                      keyfile: keyfile,
-                      log_name: log_name,
-                      resource_type: resource_type,
-                      resource_labels: resource_labels
+                      keyfile: keyfile
+          fail ArgumentError, "project_id is required" if @project_id.nil?
 
           if logger
             @logger = logger
           else
             logging = Google::Cloud::Logging.new project: @project_id,
                                                  keyfile: @keyfile
-            resource = Middleware.build_monitored_resource @resource_type,
-                                                           @resource_labels
+            resource = Middleware.build_monitored_resource(
+              configuration.monitored_resource.type,
+              configuration.monitored_resource.labels)
             @logger = logging.logger @log_name, resource
           end
         end
@@ -129,10 +125,11 @@ module Google
         #     no override.
         #
         def get_log_name env
-          return nil unless @log_name_map
+          log_name_map = configuration.log_name_map
+          return nil unless log_name_map
           path = "#{env['SCRIPT_NAME']}#{env['PATH_INFO']}"
           path = "/#{path}" unless path.start_with? "/"
-          @log_name_map.each do |k, v|
+          log_name_map.each do |k, v|
             return v if k === path
           end
           nil
@@ -270,25 +267,26 @@ module Google
         # sources. The sources take precendence in the following order:
         # explicit parameters; Google::Cloud::Logging.configure;
         # Google::Cloud.configure; and finally the defaults.
-        def load_config project_id: nil, keyfile: nil, log_name: nil,
-                        resource_type: nil, resource_labels: nil
-          gcloud_config = Google::Cloud.configure
-          logging_config = gcloud_config.logging
-
+        def load_config project_id: nil, keyfile: nil
           @project_id = project_id ||
-                        logging_config.project_id ||
-                        gcloud_config.project_id ||
+                        configuration.project_id ||
+                        Cloud.configure.project_id ||
                         Logging::Project.default_project
-          @keyfile = keyfile || logging_config.keyfile || gcloud_config.keyfile
-          @log_name = log_name || logging_config.log_name || DEFAULT_LOG_NAME
-          @resource_type = resource_type || logging_config.resource_type
-          @resource_labels = resource_labels || logging_config.resource_labels
+          @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
 
-          logging_config.project_id = @project_id
-          logging_config.keyfile = @keyfile
-          logging_config.log_name = @log_name
-          logging_config.resource_type = @resource_type
-          logging_config.resource_labels = @resource_labels
+          # Set defaults
+          configuration.log_name ||= DEFAULT_LOG_NAME
+          configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
+
+          # Ensure instrumentation configurations are aligned
+          configuration.project_id = @project_id
+          configuration.keyfile = @keyfile
+        end
+
+        ##
+        # @private Get Google::Cloud::Logging.configure
+        def configuration
+          Google::Cloud::Logging.configure
         end
       end
     end

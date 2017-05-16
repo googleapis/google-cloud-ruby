@@ -42,7 +42,19 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   let(:labels) { { "env" => "production" } }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:middleware) {
-    Google::Cloud::Logging::Middleware.new rack_app, logger: logger
+    Google::Cloud::Logging::Middleware.new rack_app, logger: logger,
+                                                     project_id: project
+  }
+
+  after {
+    # Clear configuration values between each test
+    Google::Cloud::Logging.configure.delete :project_id
+    Google::Cloud::Logging.configure.delete :keyfile
+    Google::Cloud::Logging.configure.delete :log_name
+    Google::Cloud::Logging.configure.delete :log_name_map
+    Google::Cloud::Logging.configure.monitored_resource.delete :type
+    Google::Cloud::Logging.configure.monitored_resource.labels.clear
+    Google::Cloud.configure.delete :use_logging
   }
 
   describe "#initialize" do

@@ -64,68 +64,91 @@ module Google
           ::ActiveSupport::OrderedOptions.new
 
         initializer "Stackdriver.Logging", before: :initialize_logger do |app|
-          use_logging = self.class.use_logging? app.config
-          if use_logging
-            logging_config = Railtie.parse_rails_config app.config
+          consolidate_rails_config app.config
 
-            project_id = logging_config[:project_id]
-            keyfile = logging_config[:keyfile]
-            resource_type = logging_config[:resource_type]
-            resource_labels = logging_config[:resource_labels]
-            log_name = logging_config[:log_name]
-
-            logging = Google::Cloud::Logging.new project: project_id,
-                                                 keyfile: keyfile
-            resource =
-              Logging::Middleware.build_monitored_resource resource_type,
-                                                           resource_labels
-
-            app.config.logger = logging.logger log_name, resource
-            app.middleware.insert_before Rails::Rack::Logger,
-                                         Google::Cloud::Logging::Middleware,
-                                         logger: app.config.logger,
-                                         project_id: project_id,
-                                         keyfile: keyfile,
-                                         log_name: log_name,
-                                         resource_type: resource_type,
-                                         resource_labels: resource_labels
-          end
-
-          Google::Cloud.configure.use_logging = use_logging
+          self.class.init_middleware app if Cloud.configure.use_logging
         end
 
         ##
-        # Determine whether to use Stackdriver Logging or not.
-        #
-        # Returns `true` if Stackdriver Logging is enabled for this application.
-        # That is, if all of the following are true:
-        #
-        # * A valid GCP `project_id` is available, either because the
-        #   application is hosted on Google Cloud or because it is set in the
-        #   configuration.
-        # * The API is able to authenticate, again either because the
-        #   application is hosted on Google Cloud or because an appropriate
-        #   keyfile is provided in the configuration.
-        # * Either the Rails environment is set to `production` or the
-        #   `config.google_cloud.use_logging` configuration is explicitly set to
-        #   `true`.
+        # @private Init Logging integration for Rails. Setup configuration and
+        # insert the Middleware.
+        def self.init_middleware app
+          project_id = Logging.configure.project_id
+          keyfile = Logging.configure.keyfile
+          resource_type = Logging.configure.resource_type
+          resource_labels = Logging.configure.resource_labels
+          log_name = Logging.configure.log_name
+
+          logging = Google::Cloud::Logging.new project: project_id,
+                                               keyfile: keyfile
+          resource =
+            Logging::Middleware.build_monitored_resource resource_type,
+                                                         resource_labels
+
+          app.config.logger = logging.logger log_name, resource
+          app.middleware.insert_before Rails::Rack::Logger,
+                                       Google::Cloud::Logging::Middleware,
+                                       logger: app.config.logger,
+                                       project_id: project_id,
+                                       keyfile: keyfile
+        end
+
+        ##
+        # @private Consolidate Rails configuration into Logging instrumentation
+        # configuration. Also consolidate the `use_logging` setting by verifying
+        # credentials and Rails environment. The `use_logging` setting will be
+        # true if credentials are valid, and the setting is manually set to true
+        # or Rails is in production environment.
         #
         # @param [Rails::Railtie::Configuration] config The
-        #   `Rails.application.config`
+        #   Rails.application.config
         #
-        # @return [Boolean] Whether to use Stackdriver Logging
-        #
-        def self.use_logging? config
-          logging_config = Railtie.parse_rails_config config
+        def self.consolidate_rails_config config
+          merge_rails_config config
 
-          # Return false if config.google_cloud.use_logging is explicitly false
-          use_logging = logging_config[:use_logging]
-          return false if use_logging == false
+          # Fallback to default config values if config parameters not provided.
+          Logging.configure.project_id ||= Logging::Project.default_project
+          Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
 
-          project_id = logging_config[:project_id] ||
-                       Google::Cloud::Logging::Project.default_project
-          keyfile = logging_config[:keyfile]
+          # Done if Google::Cloud.configure.use_logging is explicitly false
+          return if Google::Cloud.configure.use_logging == false
 
+          # Verify credentials and set use_error_reporting to false if
+          # credentials are invalid
+          unless valid_credentials? Logging.configure.project_id,
+                                    Logging.configure.keyfile
+            Cloud.configure.use_logging = false
+            return
+          end
+
+          # Otherwise set use_logging to true if Rails is running in production
+          Google::Cloud.configure.use_logging ||= Rails.env.production?
+        end
+
+        ##
+        # @private Merge Rails configuration into Logging instrumentation
+        # configuration.
+        def self.merge_rails_config rails_config
+          gcp_config = rails_config.google_cloud
+          logging_config = gcp_config.logging
+
+          Cloud.configure.use_logging ||= gcp_config.use_logging
+          Logging.configure do |config|
+            config.project_id ||= logging_config.project_id ||
+                                  gcp_config.project_id
+            config.keyfile ||= logging_config.keyfile || gcp_config.keyfile
+            config.log_name ||= logging_config.log_name
+            config.log_name_map ||= logging_config.log_name_map
+            config.monitored_resource.type ||=
+              logging_config.monitored_resource.type
+            config.monitored_resource.labels.merge!(
+              logging_config.monitored_resource.labels)
+          end
+        end
+
+        ##
+        # @private Verify credentials
+        def self.valid_credentials? project_id, keyfile
           # Try authenticate authorize client API. Return false if unable to
           # authorize.
           begin
@@ -144,27 +167,12 @@ module Google
             return false
           end
 
-          # Otherwise default to true if Rails is running in production or
-          # config.google_cloud.use_logging is true
-          Rails.env.production? || use_logging
+          true
         end
 
-        ##
-        # @private Helper method to parse rails config into a flattened hash
-        def self.parse_rails_config config
-          gcp_config = config.google_cloud
-          logging_config = gcp_config.logging
-          use_logging =
-            gcp_config.key?(:use_logging) ? gcp_config.use_logging : nil
-          {
-            project_id: logging_config.project_id || gcp_config.project_id,
-            keyfile: logging_config.keyfile || gcp_config.keyfile,
-            resource_type: logging_config.monitored_resource.type,
-            resource_labels: logging_config.monitored_resource.labels,
-            log_name: logging_config.log_name || Middleware::DEFAULT_LOG_NAME,
-            use_logging: use_logging
-          }
-        end
+        private_class_method :consolidate_rails_config,
+                             :merge_rails_config,
+                             :valid_credentials?
       end
     end
   end
