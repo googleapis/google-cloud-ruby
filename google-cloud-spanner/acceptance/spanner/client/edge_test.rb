@@ -69,4 +69,10 @@ describe "Spanner Client", :edge, :spanner do
       db.execute "SELECT id, name FROM #{table_name}"
     end
   end
+
+  it "queries with bad SQL fails" do
+    assert_raises GRPC::InvalidArgument do
+      db.execute "SELECT Apples AND Oranges"
+    end
+  end
 end
