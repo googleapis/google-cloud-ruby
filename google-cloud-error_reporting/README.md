@@ -65,10 +65,10 @@ This library also provides a built-in Railtie for Ruby on Rails integration. To
 require "google/cloud/error_reporting/rails"
 ```
 
-Alternatively, check out [stackdriver](../stackdriver) gem, which includes this 
-library and enables the Railtie by default.
+Alternatively, check out the [stackdriver](../stackdriver) gem, which includes 
+this library and enables the Railtie by default.
 
-For Rack integration and more examples, see 
+For Rack integration and more examples, see the
 [Instrumentation Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation).
 
 ## Supported Ruby Versions
