@@ -22,28 +22,91 @@ module Google
       ##
       # # Data
       #
-      # ...
+      # Represents a row in a result from Cloud Spanner. Provides access to data
+      # in a hash-like structure. Values can be retrieved by name (String), or
+      # in cases in which values are unnamed, by zero-based index position
+      # (Integer).
+      #
+      # @example
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   results = db.execute "SELECT * FROM users"
+      #
+      #   results.rows.each do |row|
+      #     puts "User #{row[:id]} is #{row[:name]}""
+      #   end
+      #
       class Data
+        ##
+        # Returns the names and values of the data as an array of field objects.
+        #
+        # @return [Array<Array>] An array containing name and value pairs.
+        #
         def fields
           @fields ||= Fields.from_grpc @grpc_fields
         end
 
+        ##
+        # Returns the types of the data.
+        #
+        # See [Data
+        # types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        # @return [Array<Symbol>] An array containing the types of the values.
+        #
         def types
           fields.types
         end
 
+        ##
+        # Returns the names of values, or in cases in which values are unnamed,
+        # the zero-based index position of values.
+        #
+        # @return [Array<(String,Integer)>] An array containing the names
+        #   (String) or position (Integer) for the corresponding values of the
+        #   data.
+        #
         def keys
           fields.keys
         end
 
+        ##
+        # Returns the values of the data.
+        #
+        # @return [Array<Object>] An array containing the values.
+        #
         def values
           keys.count.times.map { |i| self[i] }
         end
 
+        ##
+        # Returns the names or positions and their corresponding values as an
+        # array of arrays.
+        #
+        # @return [Array<Array>] An array containing name/position and value
+        #   pairs.
+        #
         def pairs
           keys.zip values
         end
 
+        ##
+        # Returns the value object for the provided name (String) or index
+        # (Integer). Do not pass a name to this method if the data has more than
+        # one member with the same name.
+        #
+        # @param [String, Integer] key The name (String) or zero-based index
+        #   position (Integer) of the value.
+        #
+        # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
+        #   contains duplicate names.
+        #
+        # @return [Object, nil] The value, or nil if no value is found.
+        #
         def [] key
           if key.is_a? Integer
             return Convert.value_to_raw(@grpc_values[key],
@@ -56,6 +119,11 @@ module Google
           Convert.value_to_raw(@grpc_values[index], @grpc_fields[index].type)
         end
 
+        ##
+        # Returns the values as an array.
+        #
+        # @return [Array<Object>] An array containing the values of the data.
+        #
         def to_a
           values.map do |value|
             if value.is_a? Data
@@ -68,6 +136,17 @@ module Google
           end
         end
 
+        ##
+        # Returns the names or indexes and corresponding values of the data as a
+        # hash. Do not use this method if the data has more than one member with
+        # the same name.
+        #
+        # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
+        #   contains duplicate names.
+        #
+        # @return [Hash<(String,Integer)=>Object>] A hash containing the names
+        #   or indexes and corresponding values.
+        #
         def to_h
           fail DuplicateNameError if fields.duplicate_names?
           hashified_pairs = pairs.map do |key, value|
@@ -105,6 +184,9 @@ module Google
           "#<#{self.class.name} #{self}>"
         end
 
+        ##
+        # @private Creates a new Data instance from
+        # Spanner values and fields.
         def self.from_grpc grpc_values, grpc_fields
           new.tap do |d|
             d.instance_variable_set :@grpc_values, grpc_values

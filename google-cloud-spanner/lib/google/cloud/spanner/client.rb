@@ -127,11 +127,15 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
-        # @param [Hash] types Types of the SQL parameters for the query string.
-        #   The parameter placeholders, minus the "@", are the the hash keys,
-        #   and the Spanner Type codes are the hash values. Types are optional.
+        # @param [Hash] types Types of the SQL parameters in `params`. It is not
+        #   always possible for Cloud Spanner to infer the right SQL type from a
+        #   value in `params`. In these cases, the `types` hash can be used to
+        #   specify the exact SQL type for some or all of the SQL query
+        #   parameters.
         #
-        #   The Spanner Type codes that can be specifid are:
+        #   The keys of the hash should be query string parameter placeholders,
+        #   minus the "@". The values of the hash should be Cloud Spanner type
+        #   codes from the following list:
         #
         #   * `:BOOL`
         #   * `:BYTES`
@@ -145,6 +149,8 @@ module Google
         #   example, an array of integers are specified as `[:INT64]`.
         #
         #   Structs are not yet supported in query parameters.
+        #
+        #   Types are optional.
         # @param [Hash] single_use Perform the read with a single-use snapshot
         #   (read-only transaction). (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
@@ -198,7 +204,7 @@ module Google
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
         #
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] the query results
         #
         # @example
         #   require "google/cloud/spanner"
@@ -310,7 +316,7 @@ module Google
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
         #
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] The results of the read.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -699,7 +705,7 @@ module Google
 
         ##
         # @private
-        # Creates fields object from types
+        # Creates fields object from types.
         #
         # @param [Array, Hash] types Accepts an array of types, array of type
         #   pairs, hash of positional types, hash of named types.

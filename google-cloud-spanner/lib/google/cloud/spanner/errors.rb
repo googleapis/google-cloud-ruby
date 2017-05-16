@@ -22,14 +22,19 @@ module Google
       # @private
       # # RollbackError
       #
-      # Signal that the Transaction has been rolled back
+      # Signal that the Transaction has been rolled back.
+      #
       class RollbackError < Google::Cloud::Error
       end
 
       ##
       # # DuplicateNameError
       #
-      # Data has more than one instance of a name.
+      # Data accessed by name (typically by calling
+      # {Google::Cloud::Spanner::Data#[]} with a key or calling
+      # {Google::Cloud::Spanner::Data#to_h}) has more than one occurrence of the
+      # same name. Such data should be accessed by position rather than by name.
+      #
       class DuplicateNameError < Google::Cloud::Error
       end
     end
