@@ -396,6 +396,48 @@
       ]
     },
     {
+      "title": "Spanner",
+      "type": "google/cloud/spanner",
+      "patterns": ["\/spanner", "google\/iam", "google\/protobuf", "google\/rpc"],
+      "nav": [
+        {
+          "title": "Client",
+          "type": "google/cloud/spanner/client"
+        },
+        {
+          "title": "Results",
+          "type": "google/cloud/spanner/results"
+        },
+        {
+          "title": "Project",
+          "type": "google/cloud/spanner/project"
+        },
+        {
+          "title": "Instance",
+          "type": "google/cloud/spanner/instance"
+        },
+        {
+          "title": "Database",
+          "type": "google/cloud/spanner/database"
+        },
+        {
+          "title": "V1",
+          "type": "google/cloud/spanner/v1",
+          "patterns": ["\/spanner\/v1", "google\/iam", "google\/protobuf", "google\/rpc"],
+          "nav": [
+            {
+              "title": "SpannerClient",
+              "type": "google/cloud/spanner/v1/spannerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/spanner/v1/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Speech",
       "type": "google/cloud/speech",
       "nav": [
