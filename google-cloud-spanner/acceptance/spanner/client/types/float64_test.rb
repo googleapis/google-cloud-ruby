@@ -38,10 +38,86 @@ describe "Spanner Client", :types, :float64, :spanner do
     results.rows.first.to_h.must_equal({ id: id, float: 99.99 })
   end
 
+  it "writes and reads Infinity float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: Float::INFINITY }
+    results = db.read table_name, [:id, :float], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    results.rows.first.to_h.must_equal({ id: id, float: Float::INFINITY })
+  end
+
+  it "writes and queries Infinity float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: Float::INFINITY }
+    results = db.execute "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    results.rows.first.to_h.must_equal({ id: id, float: Float::INFINITY })
+  end
+
+  it "writes and reads -Infinity float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: -Float::INFINITY }
+    results = db.read table_name, [:id, :float], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    results.rows.first.to_h.must_equal({ id: id, float: -Float::INFINITY })
+  end
+
+  it "writes and queries -Infinity float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: -Float::INFINITY }
+    results = db.execute "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    results.rows.first.to_h.must_equal({ id: id, float: -Float::INFINITY })
+  end
+
+  it "writes and reads NaN float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: Float::NAN }
+    results = db.read table_name, [:id, :float], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    returned_hash = results.rows.first.to_h
+    returned_value = returned_hash[:float]
+    returned_value.must_be_kind_of Float
+    returned_value.must_be :nan?
+  end
+
+  it "writes and queries NaN float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: Float::NAN }
+    results = db.execute "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    returned_hash = results.rows.first.to_h
+    returned_value = returned_hash[:float]
+    returned_value.must_be_kind_of Float
+    returned_value.must_be :nan?
+  end
+
   it "writes and reads NULL float64" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, float: nil }
     results = db.read table_name, [:id, :float], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    results.rows.first.to_h.must_equal({ id: id, float: nil })
+  end
+
+  it "writes and queries NULL float64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, float: nil }
+    results = db.execute "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })

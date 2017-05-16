@@ -48,6 +48,16 @@ describe "Spanner Client", :types, :date, :spanner do
     results.rows.first.to_h.must_equal({ id: id, date: nil })
   end
 
+  it "writes and queries NULL date" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, date: nil }
+    results = db.execute "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
+    results.rows.first.to_h.must_equal({ id: id, date: nil })
+  end
+
   it "writes and reads array of date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }

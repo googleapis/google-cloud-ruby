@@ -49,6 +49,16 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     results.rows.first.to_h.must_equal({ id: id, timestamp: nil })
   end
 
+  it "writes and queries NULL timestamp" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, timestamp: nil }
+    results = db.execute "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    results.rows.first.to_h.must_equal({ id: id, timestamp: nil })
+  end
+
   it "writes and reads array of timestamp" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }

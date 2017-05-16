@@ -48,6 +48,16 @@ describe "Spanner Client", :types, :int64, :spanner do
     results.rows.first.to_h.must_equal({ id: id, int: nil })
   end
 
+  it "writes and queries NULL int64" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, int: nil }
+    results = db.execute "SELECT id, int FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, int: :INT64 })
+    results.rows.first.to_h.must_equal({ id: id, int: nil })
+  end
+
   it "writes and reads array of int64" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, ints: [9997, 9998, 9999] }

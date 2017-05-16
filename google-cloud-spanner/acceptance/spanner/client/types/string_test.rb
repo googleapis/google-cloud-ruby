@@ -49,6 +49,16 @@ describe "Spanner Client", :types, :string, :spanner do
     results.rows.first.to_h.must_equal({ id: id, string: nil })
   end
 
+  it "writes and queries NULL string" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, string: nil }
+    results = db.execute "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
+    results.rows.first.to_h.must_equal({ id: id, string: nil })
+  end
+
   it "writes and reads array of string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, strings: ["howdy", "hola", "hello"] }

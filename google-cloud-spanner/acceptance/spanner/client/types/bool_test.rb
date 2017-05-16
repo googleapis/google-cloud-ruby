@@ -48,6 +48,16 @@ describe "Spanner Client", :types, :bool, :spanner do
     results.rows.first.to_h.must_equal({ id: id, bool: nil })
   end
 
+  it "writes and queries NULL bool" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, bool: nil }
+    results = db.execute "SELECT id, bool FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, bool: :BOOL })
+    results.rows.first.to_h.must_equal({ id: id, bool: nil })
+  end
+
   it "writes and reads array of bool" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, bools: [true, false, true] }

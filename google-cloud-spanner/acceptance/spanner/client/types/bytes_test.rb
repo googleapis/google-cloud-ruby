@@ -81,6 +81,17 @@ describe "Spanner Client", :types, :bytes, :spanner do
     returned_value.must_be :nil?
   end
 
+  it "writes and queries NULL bytes" do
+    id = SecureRandom.int64
+    db.upsert table_name, { id: id, byte: nil }
+    results = db.execute "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    returned_value = results.rows.first[:byte]
+    returned_value.must_be :nil?
+  end
+
   it "writes and reads array of bytes" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, bytes: [StringIO.new("howdy"), StringIO.new("hola"), StringIO.new("hello")] }
