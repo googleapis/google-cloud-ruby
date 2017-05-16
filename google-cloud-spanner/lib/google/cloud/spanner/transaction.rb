@@ -483,10 +483,30 @@ module Google
         #   db.transaction { |tx| tx.rollback }
         #
         def rollback
-          ensure_session!
-          session.rollback transaction_id
+          safe_rollback
           # Raise RollbackError so the client can stop the transaction.
           fail RollbackError
+        end
+
+        ##
+        # @private
+        # Rolls back the transaction without raising.
+        #
+        def safe_rollback
+          ensure_session!
+          session.rollback transaction_id
+        end
+
+        ##
+        # @private
+        # Keeps the transaction alive by calling SELECT 1
+        def keepalive!
+          ensure_service!
+          execute "SELECT 1"
+          return true
+        rescue Google::Cloud::NotFoundError
+          @grpc = session.create_transaction.grpc
+          return false
         end
 
         ##

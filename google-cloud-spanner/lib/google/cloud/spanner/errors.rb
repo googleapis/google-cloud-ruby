@@ -37,6 +37,13 @@ module Google
       #
       class DuplicateNameError < Google::Cloud::Error
       end
+
+      ##
+      # # SessionLimitError
+      #
+      # More sessions have been allocated than configured for.
+      class SessionLimitError < Google::Cloud::Error
+      end
     end
   end
 end

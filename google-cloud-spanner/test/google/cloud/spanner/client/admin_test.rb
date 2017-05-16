@@ -21,11 +21,11 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 

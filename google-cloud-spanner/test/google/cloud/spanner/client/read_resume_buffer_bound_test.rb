@@ -81,12 +81,12 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
       ]
     }
   end
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 

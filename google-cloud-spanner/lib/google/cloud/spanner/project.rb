@@ -410,6 +410,25 @@ module Google
         #   Required.
         # @param [String] database_id The unique identifier for the database.
         #   Required.
+        # @param [Hash] pool Settings to control how and when sessions are
+        #   managed by the client. The following settings can be provided:
+        #
+        #   * `:min` (Integer) Minimum number of sessions that the client will
+        #     maintain at any point in time. The default is 2.
+        #   * `:max` (Integer) Maximum number of sessions that the client will
+        #     have at any point in time. The default is 10.
+        #   * `:keepalive` (Integer) The delay in seconds between attemtps to
+        #     prevent the idle sessions from being closed by the Cloud Spanner
+        #     service. The default is 1500.
+        #   * `:write_ratio` (Float) The ratio of sessions with pre-allocated
+        #     transactions to those without. Pre-allocating transactions
+        #     improves the performance of writes made by the client. The higher
+        #     the value, the more transactions are pre-allocated. The value must
+        #     be >= 0 and <= 1. The default is 0.5.
+        #   * `:fail` (true/false) When `true` the client raises a
+        #     {SessionLimitError} when the client has allocated the `max` number
+        #     of sessions. When `false` the client blocks until a session
+        #     becomes available. The default is `true`.
         #
         # @return [Client] The newly created client.
         #
@@ -428,9 +447,9 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, min: 2, max: 10, keepalive: 1500
-          Client.new self, instance_id, database_id, min: min, max: max,
-                                                     keepalive: keepalive
+        def client instance_id, database_id, pool: {}
+          Client.new self, instance_id, database_id,
+                     valid_session_pool_options(pool)
         end
 
         protected
@@ -445,6 +464,12 @@ module Google
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
             project, instance_id, database_id)
+        end
+
+        def valid_session_pool_options opts = {}
+          { min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
+            write_ratio: opts[:write_ratio], fail: opts[:fail]
+          }.delete_if { |_k, v| v.nil? }
         end
       end
     end

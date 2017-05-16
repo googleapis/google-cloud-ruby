@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "thread"
+require "google/cloud/spanner/errors"
 require "google/cloud/spanner/session"
 
 module Google
@@ -27,39 +29,102 @@ module Google
       # {Google::Cloud::Spanner::Session} instances.
       #
       class Pool
-        attr_accessor :min, :max, :pool, :queue
+        attr_accessor :all_sessions, :session_queue, :transaction_queue
 
-        def initialize client, min: 2, max: 10, keepalive: 1500
+        def initialize client, min: 2, max: 10, keepalive: 1500,
+                       write_ratio: 0.5, fail: true
           @client = client
           @min = min
           @max = max
           @keepalive = keepalive
-          @pool = []
-          @queue = []
+          @write_ratio = write_ratio
+          @write_ratio = 0 if write_ratio < 0
+          @write_ratio = 1 if write_ratio > 1
+          @fail = fail
+
+          @mutex = Mutex.new
+          @resource = ConditionVariable.new
 
           # initialize pool and availability queue
           init
         end
 
         def with_session
-          session = checkout
-          yield session
-          checkin session
-        end
-
-        def checkout
-          if queue.empty?
-            fail "No available sessions" if pool.size >= @max
-            new_session!
+          session = checkout_session
+          begin
+            yield session
+          ensure
+            checkin_session session
           end
-          queue.shift
         end
 
-        def checkin session
-          fail "Cannot checkin session" unless pool.include? session
+        def checkout_session
+          @mutex.synchronize do
+            loop do
+              read_session = session_queue.shift
+              return read_session if read_session
+              write_transaction = transaction_queue.shift
+              return write_transaction.session if write_transaction
 
-          # Do we ever delete sessions if the queue is *too* full?
-          queue.push session
+              return new_session! if can_allocate_more_sessions?
+
+              fail SessionLimitError if @fail
+
+              @resource.wait @mutex
+            end
+          end
+        end
+
+        def checkin_session session
+          unless all_sessions.include? session
+            fail ArgumentError, "Cannot checkin session"
+          end
+
+          @mutex.synchronize do
+            session_queue.push session
+
+            @resource.broadcast
+          end
+
+          nil
+        end
+
+        def with_transaction
+          tx = checkout_transaction
+          begin
+            yield tx
+          ensure
+            checkin_transaction tx
+          end
+        end
+
+        def checkout_transaction
+          @mutex.synchronize do
+            loop do
+              write_transaction = transaction_queue.shift
+              return write_transaction if write_transaction
+              read_session = session_queue.shift
+              return read_session.create_transaction if read_session
+
+              return new_transaction! if can_allocate_more_sessions?
+
+              fail SessionLimitError if @fail
+
+              @resource.wait @mutex
+            end
+          end
+        end
+
+        def checkin_transaction tx
+          unless all_sessions.include? tx.session
+            fail ArgumentError, "Cannot checkin session"
+          end
+
+          @mutex.synchronize do
+            transaction_queue.push tx.session.create_transaction
+
+            @resource.broadcast
+          end
 
           nil
         end
@@ -67,9 +132,10 @@ module Google
         def keepalive!
           ensure_keepalive_thread!
 
-          # Call keep alive only on the queue, not all sessions.
-          # If a session is checked out, we can assume its being used.
-          queue.each(&:keepalive!)
+          # Call keep alive only on the queue, not all sessions or transactions.
+          # If a session or transaction is checked out assume its being used.
+          session_queue.each(&:keepalive!)
+          transaction_queue.each(&:keepalive!)
         end
 
         def keepalive_and_sleep!
@@ -88,9 +154,10 @@ module Google
 
         def close
           @thread.kill if @thread
-          @pool.each(&:delete_session)
-          @pool = []
-          @queue = []
+          @all_sessions.each(&:delete_session)
+          @all_sessions = []
+          @session_queue = []
+          @transaction_queue = []
 
           true
         end
@@ -98,17 +165,30 @@ module Google
         private
 
         def init
-          @pool = []
-          @queue = []
+          @all_sessions = []
+          @session_queue = []
+          @transaction_queue = []
           ensure_keepalive_thread!
-          @min.times { new_session! }
+          # init session queue
+          @min.times { session_queue << new_session! }
+          # init transaction queue
+          (@min * @write_ratio).round.times do
+            transaction_queue << checkout_session.create_transaction
+          end
         end
 
         def new_session!
           session = @client.create_new_session
-          pool << session
-          queue << session
+          all_sessions << session
           session
+        end
+
+        def new_transaction!
+          new_session!.create_transaction
+        end
+
+        def can_allocate_more_sessions?
+          all_sessions.size < @max
         end
 
         def ensure_keepalive_thread!

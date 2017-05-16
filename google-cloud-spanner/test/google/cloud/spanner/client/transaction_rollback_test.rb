@@ -61,12 +61,12 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
 
   after do
     # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).pool = []
+    client.instance_variable_get(:@pool).all_sessions = []
     client.close
   end
 
@@ -76,6 +76,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
     results = nil
@@ -99,6 +101,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
     results = nil

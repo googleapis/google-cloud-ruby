@@ -17,6 +17,22 @@ require "spanner_helper"
 describe "Spanner Client", :execute, :spanner do
   let(:db) { spanner_client }
 
+  it "runs SELECT 1" do
+    results = db.execute "SELECT 1"
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+
+    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+    results.fields.keys.count.must_equal 1
+    results.fields[0].must_equal :INT64
+
+    rows = results.rows.to_a # grab all from the enumerator
+    rows.count.must_equal 1
+    row = rows.first
+    row.must_be_kind_of Google::Cloud::Spanner::Data
+    row.keys.must_equal [0]
+    row[0].must_equal 1
+  end
+
   it "runs a simple query" do
     results = db.execute "SELECT 42 AS num"
     results.must_be_kind_of Google::Cloud::Spanner::Results

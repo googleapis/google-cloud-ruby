@@ -52,11 +52,12 @@ module Google
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, min: 2, max: 10,
-                       keepalive: 1500
+                       keepalive: 1500, write_ratio: 0.5, fail: true
           @project = project
           @instance_id = instance_id
           @database_id = database_id
-          @pool = Pool.new self, min: min, max: max, keepalive: keepalive
+          @pool = Pool.new self, min: min, max: max, keepalive: keepalive,
+                                 write_ratio: write_ratio, fail: fail
         end
 
         # The unique identifier for the project.
@@ -608,8 +609,7 @@ module Google
           backoff = 1.0
           start_time = current_time
 
-          @pool.with_session do |session|
-            tx = create_transaction! session
+          @pool.with_transaction do |tx|
             begin
               block.call tx
             rescue Google::Cloud::AbortedError => err
@@ -617,15 +617,15 @@ module Google
               raise err if current_time - start_time > deadline
               # Sleep the amount from RetryDelay, or incremental backoff
               sleep(delay_from_aborted(err) || backoff *= 1.3)
-              # Create new transaction and retry the block
-              tx = create_transaction! session
+              # Create new transaction on the session and retry the block
+              tx = tx.session.create_transaction
               retry
             rescue RollbackError
               # Transaction block was interrupted, allow to continue
             rescue => err
               # Rollback transaction when handling unexpeced error
               # Don't use Transaction#rollback since it raises
-              session.rollback tx.send(:transaction_id)
+              tx.safe_rollback
               raise err
             end
           end
@@ -822,11 +822,6 @@ module Google
         # available.
         def ensure_service!
           fail "Must have active connection to service" unless @project.service
-        end
-
-        def create_transaction! session
-          tx_grpc = @project.service.begin_transaction session.path
-          Transaction.from_grpc(tx_grpc, session)
         end
 
         ##
