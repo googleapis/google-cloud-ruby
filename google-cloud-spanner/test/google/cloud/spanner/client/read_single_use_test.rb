@@ -56,7 +56,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
   let(:results_enum) do
     [Google::Spanner::V1::PartialResultSet.decode_json(results_hash.to_json)].to_enum
   end
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
   let(:time_obj) { Time.parse "2014-10-02T15:01:23.045123456Z" }
   let(:timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp time_obj }

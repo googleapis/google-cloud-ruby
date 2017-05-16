@@ -43,7 +43,7 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
   let(:results_json) { results_hash.to_json }
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
-  let(:client) { spanner.client instance_id, database_id, min: 0 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   after do
     # Close the client and release the keepalive thread

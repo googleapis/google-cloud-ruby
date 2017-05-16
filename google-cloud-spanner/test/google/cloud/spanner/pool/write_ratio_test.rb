@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:client) { spanner.client instance_id, database_id, min: 0, max: 4 }
+  let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client_pool) do
