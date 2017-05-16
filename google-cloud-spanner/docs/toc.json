@@ -64,6 +64,14 @@
               "type": "google/cloud/spanner/v1/spannerclient"
             },
             {
+              "title": "InstanceAdminClient",
+              "type": "google/cloud/spanner/admin/instance/v1/instanceadminclient"
+            },
+            {
+              "title": "DatabaseAdminClient",
+              "type": "google/cloud/spanner/admin/database/v1/databaseadminclient"
+            },
+            {
               "title": "Data Types",
               "type": "google/spanner/v1/datatypes"
             }
