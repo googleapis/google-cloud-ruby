@@ -279,6 +279,8 @@ module Google
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -295,6 +297,7 @@ module Google
           commit = Commit.new
           yield commit
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
 
         ##
@@ -324,6 +327,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -338,6 +343,7 @@ module Google
           commit = Commit.new
           commit.upsert table, rows
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
         alias_method :save, :upsert
 
@@ -367,6 +373,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -381,6 +389,7 @@ module Google
           commit = Commit.new
           commit.insert table, rows
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
 
         ##
@@ -409,6 +418,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -423,6 +434,7 @@ module Google
           commit = Commit.new
           commit.update table, rows
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
 
         ##
@@ -453,6 +465,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -467,6 +481,7 @@ module Google
           commit = Commit.new
           commit.replace table, rows
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
 
         ##
@@ -478,6 +493,8 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
+        #
+        # @return [Boolean] Returns `true` if the operation succeeded.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -492,12 +509,14 @@ module Google
           commit = Commit.new
           commit.delete table, keys
           service.commit path, commit.mutations, transaction_id: transaction_id
+          true
         end
 
         ##
         # Rolls back the transaction, releasing any locks it holds.
         def rollback transaction_id
           service.rollback path, transaction_id
+          true
         end
 
         ##
