@@ -166,7 +166,7 @@ describe "Spanner Client", :snapshot, :spanner do
     end
   end
 
-  it "reads are consistent even when updates happen" do
+  it "strong reads are consistent even when updates happen" do
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
@@ -189,12 +189,104 @@ describe "Spanner Client", :snapshot, :spanner do
     end
   end
 
-  it "queries are consistent even when updates happen" do
+  it "strong queries are consistent even when updates happen" do
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot strong: true do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+      snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+
+      results = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
+      # verify we got the row we were expecting
+      results.rows.first.to_h.must_equal sample_row
+
+      # outside of the snapshot, update the row!
+      db.update "accounts", modified_row
+
+      results2 = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
+      # verify we got the previous row, not the modified row
+      results2.rows.first.to_h.must_equal sample_row
+    end
+  end
+
+  it "timestamp reads are consistent even when updates happen" do
+    first_row = default_account_rows.first
+    sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
+    modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
+
+    db.snapshot timestamp: Time.now do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+      snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+
+      results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
+      # verify we got the row we were expecting
+      results.rows.first.to_h.must_equal sample_row
+
+      # outside of the snapshot, update the row!
+      db.update "accounts", modified_row
+
+      results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
+      # verify we got the previous row, not the modified row
+      results2.rows.first.to_h.must_equal sample_row
+    end
+  end
+
+  it "timestamp queries are consistent even when updates happen" do
+    first_row = default_account_rows.first
+    sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
+    modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
+
+    db.snapshot timestamp: Time.now do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+      snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+
+      results = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
+      # verify we got the row we were expecting
+      results.rows.first.to_h.must_equal sample_row
+
+      # outside of the snapshot, update the row!
+      db.update "accounts", modified_row
+
+      results2 = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
+      # verify we got the previous row, not the modified row
+      results2.rows.first.to_h.must_equal sample_row
+    end
+  end
+
+  it "staleness reads are consistent even when updates happen" do
+    first_row = default_account_rows.first
+    sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
+    modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
+
+    db.snapshot staleness: 0.01 do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+      snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+
+      results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
+      # verify we got the row we were expecting
+      results.rows.first.to_h.must_equal sample_row
+
+      # outside of the snapshot, update the row!
+      db.update "accounts", modified_row
+
+      results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
+      # verify we got the previous row, not the modified row
+      results2.rows.first.to_h.must_equal sample_row
+    end
+  end
+
+  it "staleness queries are consistent even when updates happen" do
+    first_row = default_account_rows.first
+    sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
+    modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
+
+    db.snapshot staleness: 0.01 do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
