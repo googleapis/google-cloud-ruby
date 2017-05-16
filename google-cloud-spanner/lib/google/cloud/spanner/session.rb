@@ -189,7 +189,8 @@ module Google
         #   transaction selector value to send. Only used for single-use
         #   transactions.
         #
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] The results of the query
+        #   execution.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -245,7 +246,8 @@ module Google
         #   transaction selector value to send. Only used for single-use
         #   transactions.
         #
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] The results of the read
+        #   operation.
         #
         # @example
         #   require "google/cloud/spanner"

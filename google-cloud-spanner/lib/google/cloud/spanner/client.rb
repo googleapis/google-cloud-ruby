@@ -205,7 +205,8 @@ module Google
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
         #
-        # @return [Google::Cloud::Spanner::Results] the query results
+        # @return [Google::Cloud::Spanner::Results] The results of the query
+        #   execution.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -760,11 +761,11 @@ module Google
         #   range.
         # @param [Object] ending The object that defines the end of the range.
         # @param [Boolean] exclude_begin Determines if the range excludes its
-        # beginning value. Default is `false`.
+        #   beginning value. Default is `false`.
         # @param [Boolean] exclude_end Determines if the range excludes its
-        # ending value. Default is `false`.
+        #   ending value. Default is `false`.
         #
-        # @return [Google::Cloud::Spanner::Range]
+        # @return [Google::Cloud::Spanner::Range] The new Range instance.
         #
         # @example
         #   require "google/cloud/spanner"

@@ -130,7 +130,7 @@ module Google
         #   will be memoized to reduce the number of API calls made to the
         #   Spanner service. The default is `false`.
         #
-        # @return [Array<String>] the DDL statements
+        # @return [Array<String>] The DDL statements.
         #
         # @example statements are memoized to reduce the number of API calls:
         #   require "google/cloud/spanner"
@@ -176,7 +176,8 @@ module Google
         #   {Google::Cloud::AlreadyExistsError} if the named operation already
         #   exists. Optional.
         #
-        # @return [Database::Job] the DDL statements
+        # @return [Database::Job] The job representing the long-running,
+        #   asynchronous processing of a database schema update operation.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -241,7 +242,7 @@ module Google
         # @yieldparam [Policy] policy the current Cloud IAM Policy for this
         #   database
         #
-        # @return [Policy] the current Cloud IAM Policy for this database
+        # @return [Policy] The current Cloud IAM Policy for this database.
         #
         # @example Policy values are memoized to reduce the number of API calls:
         #   require "google/cloud/spanner"

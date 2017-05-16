@@ -56,7 +56,7 @@ module Google
           ##
           # Retrieve the next page of instances.
           #
-          # @return [Instance::List]
+          # @return [Instance::List] The list of instances.
           #
           # @example
           #   require "google/cloud/spanner"

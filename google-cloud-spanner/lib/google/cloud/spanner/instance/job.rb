@@ -64,8 +64,8 @@ module Google
           ##
           # The instance that is the object of the operation.
           #
-          # @return [Google::Cloud::Spanner::Instance, nil] Returns `nil`
-          #   if operation is not complete.
+          # @return [Google::Cloud::Spanner::Instance, nil] The instance, or
+          #   `nil` if the operation is not complete.
           #
           # @example
           #   require "google/cloud/spanner"
@@ -134,6 +134,9 @@ module Google
           ##
           # Reloads the job with current data from the long-running,
           # asynchronous processing of an instance operation.
+          #
+          # @return [Google::Cloud::Spanner::Instance::Job] The same job
+          #   instance.
           #
           # @example
           #   require "google/cloud/spanner"

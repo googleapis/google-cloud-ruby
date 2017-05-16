@@ -109,7 +109,8 @@ module Google
         #   Structs are not yet supported in query parameters.
         #
         #   Types are optional.
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] The results of the query
+        #   execution.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -164,7 +165,8 @@ module Google
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
         #
-        # @return [Google::Cloud::Spanner::Results]
+        # @return [Google::Cloud::Spanner::Results] The results of the read
+        #   operation.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -441,11 +443,11 @@ module Google
         #   range.
         # @param [Object] ending The object that defines the end of the range.
         # @param [Boolean] exclude_begin Determines if the range excludes its
-        # beginning value. Default is `false`.
+        #   beginning value. Default is `false`.
         # @param [Boolean] exclude_end Determines if the range excludes its
-        # ending value. Default is `false`.
+        #   ending value. Default is `false`.
         #
-        # @return [Google::Cloud::Spanner::Range]
+        # @return [Google::Cloud::Spanner::Range] The new Range instance.
         #
         # @example
         #   require "google/cloud/spanner"

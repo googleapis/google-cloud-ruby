@@ -61,8 +61,8 @@ module Google
           ##
           # The database that is the object of the operation.
           #
-          # @return [Google::Cloud::Spanner::Database, nil] Returns `nil`
-          #   if operation is not complete.
+          # @return [Google::Cloud::Spanner::Database, nil] The database, or
+          #   `nil` if the operation is not complete.
           #
           # @example
           #   require "google/cloud/spanner"
@@ -122,6 +122,9 @@ module Google
           ##
           # Reloads the job with current data from the long-running,
           # asynchronous processing of a database operation.
+          #
+          # @return [Google::Cloud::Spanner::Database::Job] The same job
+          #   instance.
           #
           # @example
           #   require "google/cloud/spanner"
