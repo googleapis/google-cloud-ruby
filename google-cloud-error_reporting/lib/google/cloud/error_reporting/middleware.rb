@@ -13,9 +13,6 @@
 # limitations under the License.
 
 
-require "rack"
-require "rack/request"
-
 module Google
   module Cloud
     module ErrorReporting
@@ -82,6 +79,9 @@ module Google
         def initialize app, error_reporting: nil, project_id: nil, keyfile: nil,
                        service_name: nil, service_version: nil,
                        ignore_classes: nil
+          require "rack"
+          require "rack/request"
+
           @app = app
           load_config project_id: project_id,
                       keyfile: keyfile,

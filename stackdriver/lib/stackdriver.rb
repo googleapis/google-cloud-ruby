@@ -20,8 +20,7 @@ gem "google-cloud-trace"
 
 require "google/cloud/logging"
 require "google/cloud/trace"
-
-require "google/cloud/error_reporting/middleware" if defined? ::Rack
+require "google/cloud/error_reporting"
 
 if defined? ::Rails::Railtie
   require "google/cloud/error_reporting/rails"
