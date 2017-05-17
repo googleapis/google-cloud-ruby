@@ -178,7 +178,7 @@ module Google
           end
 
           def retry_error_reason? response #:nodoc:
-            result = JSON.parse(response.body)["data"]
+            result = JSON.parse(response.body)
             if result &&
                result["error"] &&
                result["error"]["errors"]
