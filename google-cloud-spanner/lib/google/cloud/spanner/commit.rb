@@ -72,8 +72,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Array<Hash>] The array of rows.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -129,8 +127,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Array<Hash>] The array of rows.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -184,8 +180,6 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
-        #
-        # @return [Array<Hash>] The array of rows.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -243,8 +237,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Array<Hash>] The array of rows.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -282,8 +274,6 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
-        #
-        # @return [Array<Hash>] The array of keys.
         #
         # @example
         #   require "google/cloud/spanner"
