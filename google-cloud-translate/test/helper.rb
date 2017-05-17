@@ -31,3 +31,23 @@ class MockTranslate < Minitest::Spec
     addl.include? :mock_translate
   end
 end
+
+class MockHttp
+  attr_reader :request_count
+
+  def initialize
+    @request_count = 0
+  end
+
+  def stub_response(status, body)
+    @stub_status = status
+    @stub_body = body
+  end
+
+  def post(*_)
+    @request_count += 1
+    Faraday::Response.new.tap do |response|
+      response.finish(status: @stub_status, body: @stub_body)
+    end
+  end
+end
