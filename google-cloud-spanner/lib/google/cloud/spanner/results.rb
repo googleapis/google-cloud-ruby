@@ -90,7 +90,7 @@ module Google
         #   results = db.execute "SELECT * FROM users"
         #
         #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         def rows

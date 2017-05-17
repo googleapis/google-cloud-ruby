@@ -37,7 +37,7 @@ module Google
       #     results = tx.execute "SELECT * FROM users"
       #
       #     results.rows.each do |row|
-      #       puts "User #{row[:id]} is #{row[:name]}""
+      #       puts "User #{row[:id]} is #{row[:name]}"
       #     end
       #   end
       #
@@ -122,7 +122,7 @@ module Google
         #     results = tx.execute "SELECT * FROM users"
         #
         #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
+        #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
@@ -137,7 +137,7 @@ module Google
         #                          params: { active: true }
         #
         #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
+        #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
@@ -175,10 +175,10 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.read "users", ["id, "name"]
+        #     results = tx.read "users", ["id", "name"]
         #
         #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
+        #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
@@ -465,10 +465,10 @@ module Google
         #
         #   db.transaction do |tx|
         #     key_range = tx.range 1, 100
-        #     results = tx.read "users", ["id, "name"], keys: key_range
+        #     results = tx.read "users", ["id", "name"], keys: key_range
         #
         #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
+        #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #

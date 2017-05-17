@@ -61,7 +61,7 @@ module Google
       #     results = tx.execute "SELECT * FROM users"
       #
       #     results.rows.each do |row|
-      #       puts "User #{row[:id]} is #{row[:name]}""
+      #       puts "User #{row[:id]} is #{row[:name]}"
       #     end
       #   end
       #
@@ -445,7 +445,7 @@ module Google
         #     results = tx.execute "SELECT * FROM users"
         #
         #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}""
+        #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
