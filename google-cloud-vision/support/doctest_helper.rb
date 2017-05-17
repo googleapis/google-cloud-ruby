@@ -119,6 +119,8 @@ YARD::Doctest.configure do |doctest|
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Vision::Project#mark"
   doctest.skip "Google::Cloud::Vision::Project#detect"
+  doctest.skip "Google::Cloud::Vision::Image#mark"
+  doctest.skip "Google::Cloud::Vision::Image#detect"
   doctest.skip "Google::Cloud::Vision::Annotation::Face::Angles#pan"
   doctest.skip "Google::Cloud::Vision::Annotation::Face::Angles#tilt"
 
@@ -244,6 +246,12 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Vision::Image#web" do
     mock_vision do |mock|
       mock.expect :batch_annotate_images, web_detection_resp, annotate_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Vision::Image#annotate" do
+    mock_vision do |mock|
+      mock.expect :batch_annotate_images, labels_landmarks_resp, annotate_args
     end
   end
 
@@ -431,6 +439,18 @@ def labels_resp images_count = 1, *labels_counts
   responses = images_count.times.map do
     Google::Cloud::Vision::V1::AnnotateImageResponse.new(
       label_annotations: label_annotation_response(labels_counts.shift || 1)
+    )
+  end
+  Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(responses: responses)
+end
+
+def labels_landmarks_resp images_count = 1, *labels_counts
+  responses = images_count.times.map do
+    Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+      label_annotations: label_annotation_response(labels_counts.shift || 1),
+      landmark_annotations: [
+        landmark_annotation_response
+      ]
     )
   end
   Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(responses: responses)
