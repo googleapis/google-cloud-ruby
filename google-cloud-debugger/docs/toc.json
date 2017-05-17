@@ -10,6 +10,11 @@
       ]
     },
     {
+      "title": "Instrumentation",
+      "id": "instrumentation",
+      "contents": "instrumentation.md"
+    },
+    {
       "title": "FAQ",
       "id": "faq",
       "edit": "https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/faq/readme.md",

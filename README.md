@@ -25,10 +25,13 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Stackdriver Debugger](#stackdriver-debugger-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Stackdriver Error Reporting](#stackdriv-error-reporting-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
+* [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
@@ -135,6 +138,28 @@ query = datastore.query("Task").
 tasks = datastore.run query
 ```
 
+### Stackdriver Debugger (Alpha)
+
+- [google-cloud-debugger README](google-cloud-debugger/README.md)
+- [google-cloud-debugger instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/instrumentation)
+- [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
+- [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs)
+
+#### Quick Start
+
+```
+$ gem install google-cloud-debugger
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/debugger"
+
+debugger = Google::Cloud::Debugger.new
+debugger.start
+```
+
 ### Cloud DNS (Alpha)
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
@@ -169,6 +194,32 @@ change = zone.update do |tx|
   end
 end
 
+```
+
+### Stackdriver Error Reporting (Alpha)
+
+- [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
+- [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
+- [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
+- [Stackdriver Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-error_reporting
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/error_reporting"
+
+# Report an exception
+begin
+  fail "Boom!"
+rescue => exception
+  Google::Cloud::ErrorReporting.report exception
+end
 ```
 
 ### Stackdriver Logging (GA)
@@ -310,6 +361,32 @@ end
 
 # List only projects with the "production" label
 projects = resource_manager.projects filter: "labels.env:production"
+```
+
+### Stackdriver Trace (Alpha)
+
+- [google-cloud-trace README](google-cloud-trace/README.md)
+- [google-cloud-trace instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/guides/instrumentation)
+- [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
+- [Stackdriver Trace documentation](https://cloud.google.com/trace/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-trace
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/trace"
+
+trace = Google::Cloud::Trace.new
+
+result_set = trace.list_traces Time.now - 3600, Time.now
+result_set.each do |trace_record|
+  puts "Retrieved trace ID: #{trace_record.trace_id}"
+end
 ```
 
 ### Cloud Speech API (Alpha)

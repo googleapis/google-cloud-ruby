@@ -30,7 +30,7 @@ This library provides a Stackdriver Debugger Agent that's able to work with Ruby
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.3+.
+This library is supported on Ruby 2.2+.
 
 ## Versioning
 
