@@ -135,67 +135,9 @@ module Google
           Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH
 
         initializer "Google.Cloud.Trace" do |app|
-          if Google::Cloud::Trace::Railtie.use_trace? app.config
-            Google::Cloud::Trace::Railtie.init_trace app
-          end
-        end
+          consolidate_rails_config app.config
 
-        ##
-        # Determine whether to use Stackdriver Trace or not.
-        #
-        # Returns true if valid GCP project_id and keyfile are provided and
-        # either Rails is in "production" environment or
-        # config.google_cloud.use_trace is explicitly true. Otherwise false.
-        #
-        # @param [Rails::Railtie::Configuration] config The
-        #     Rails.application.config
-        #
-        # @return [Boolean] Whether to use Stackdriver Trace
-        #
-        def self.use_trace? config
-          gcp_config = config.google_cloud
-
-          # Return false if config.google_cloud.use_trace is
-          # explicitly false
-          return false if gcp_config.key?(:use_trace) &&
-                          !gcp_config.use_trace
-
-          # Try authenticate authorize client API. Return false if unable to
-          # authorize.
-          keyfile = gcp_config.trace.keyfile || gcp_config.keyfile
-          begin
-            Google::Cloud::Trace::Credentials.credentials_with_scope keyfile
-          rescue Exception => e
-            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
-              "it failed to authorize with the service. (#{e.message})"
-            return false
-          end
-
-          if project_id(config).to_s.empty?
-            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
-              "the project ID could not be determined."
-            return false
-          end
-
-          # Otherwise return true if Rails is running in production or
-          # config.google_cloud.use_trace is explicitly true
-          Rails.env.production? ||
-            (gcp_config.key?(:use_trace) && gcp_config.use_trace)
-        end
-
-        ##
-        # Return the effective project ID for this app, given a Rails config.
-        #
-        # @param [Rails::Railtie::Configuration] config The
-        #     Rails.application.config
-        # @return [String] The project ID, or nil if not found.
-        #
-        def self.project_id config
-          config.google_cloud.trace.project_id ||
-            config.google_cloud.project_id ||
-            ENV["TRACE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
+          self.class.init_middleware app if Cloud.configure.use_trace
         end
 
         ##
@@ -204,11 +146,10 @@ module Google
         #
         # @private
         #
-        def self.init_trace app
-          gcp_config = app.config.google_cloud
-          trace_config = gcp_config.trace
-          project_id = trace_config.project_id || gcp_config.project_id
-          keyfile = trace_config.keyfile || gcp_config.keyfile
+        def self.init_middleware app
+          trace_config = Trace.configure
+          project_id = trace_config.project_id
+          keyfile = trace_config.keyfile
 
           tracer = Google::Cloud::Trace.new project: project_id,
                                             keyfile: keyfile
@@ -226,6 +167,81 @@ module Google
               capture_stack: trace_config.capture_stack
           end
         end
+
+        ##
+        # @private Consolidate Rails configuration into Trace instrumentation
+        # configuration. Also consolidate the `use_trace` setting by verifying
+        # credentials and Rails environment. The `use_trace` setting will be
+        # true if credentials are valid, and the setting is manually set to
+        # true or Rails is in production environment.
+        #
+        # @param [Rails::Railtie::Configuration] config The
+        #   Rails.application.config
+        #
+        def self.consolidate_rails_config config
+          merge_rails_config config
+
+          Trace.configure.project_id ||=
+            Trace::Project.default_project
+
+          # Done if Google::Cloud.configure.use_trace is explicitly false
+          return if Google::Cloud.configure.use_trace == false
+
+          # Verify credentials and set use_error_reporting to false if
+          # credentials are invalid
+          unless valid_credentials? Trace.configure.project_id,
+                                    Trace.configure.keyfile
+            Cloud.configure.use_trace = false
+            return
+          end
+
+          # Otherwise set use_trace to true if Rails is running in production
+          Google::Cloud.configure.use_trace ||= Rails.env.production?
+        end
+
+        ##
+        # @private Merge Rails configuration into Trace instrumentation
+        # configuration.
+        def self.merge_rails_config rails_config
+          gcp_config = rails_config.google_cloud
+          trace_config = gcp_config.trace
+
+          Cloud.configure.use_trace ||= gcp_config.use_trace
+          Trace.configure do |config|
+            config.project_id ||= trace_config.project_id ||
+                                  gcp_config.project_id
+            config.keyfile ||= trace_config.keyfile || gcp_config.keyfile
+            config.notifications ||= trace_config.notifications
+            config.max_data_length ||= trace_config.max_data_length
+            config.capture_stack ||= trace_config.capture_stack
+            config.sampler ||= trace_config.sampler
+            config.span_id_generator ||= trace_config.span_id_generator
+          end
+        end
+
+        ##
+        # @private Verify credentials
+        def self.valid_credentials? project_id, keyfile
+          begin
+            Google::Cloud::Trace::Credentials.credentials_with_scope keyfile
+          rescue Exception => e
+            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+              "it failed to authorize with the service. (#{e.message})"
+            return false
+          end
+
+          if project_id.to_s.empty?
+            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+              "the project ID could not be determined."
+            return false
+          end
+
+          true
+        end
+
+        private_class_method :consolidate_rails_config,
+                             :merge_rails_config,
+                             :valid_credentials?
       end
     end
   end

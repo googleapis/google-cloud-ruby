@@ -121,14 +121,11 @@ module Google
         #     may be any Proc that implements the sampling contract.
         #
         def initialize app,
-                       service: nil,
-                       capture_stack: false,
-                       sampler: nil,
-                       span_id_generator: nil
+                       service: nil
           @app = app
-          @capture_stack = capture_stack
-          @sampler = sampler
-          @span_id_generator = span_id_generator
+
+          Google::Cloud::Trace.configure.capture_stack ||= false
+
           if service
             @service = service
           else
@@ -172,13 +169,14 @@ module Google
         def get_trace_context env
           Stackdriver::Core::TraceContext.parse_rack_env(env) do |tc|
             if tc.sampled?.nil?
-              sampler = @sampler || Google::Cloud::Trace::TimeSampler.default
+              sampler = configuration.sampler ||
+                        Google::Cloud::Trace::TimeSampler.default
               sampled = sampler.call env
               tc = Stackdriver::Core::TraceContext.new \
                 trace_id: tc.trace_id,
                 span_id: tc.span_id,
                 sampled: sampled,
-                capture_stack: sampled && @capture_stack
+                capture_stack: sampled && configuration.capture_stack
             end
             tc
           end
@@ -195,7 +193,7 @@ module Google
           Google::Cloud::Trace::TraceRecord.new \
             @service.project,
             trace_context,
-            span_id_generator: @span_id_generator
+            span_id_generator: configuration.span_id_generator
         end
 
         ##
@@ -351,6 +349,14 @@ module Google
                 span.trace.trace_context.to_string
           end
           result
+        end
+
+        private
+
+        ##
+        # @private Get Google::Cloud::Trace.configure
+        def configuration
+          Google::Cloud::Trace.configure
         end
       end
     end

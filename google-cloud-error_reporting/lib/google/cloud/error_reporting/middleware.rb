@@ -60,7 +60,6 @@ module Google
           @app = app
           load_config project_id: project_id,
                       keyfile: keyfile
-          fail ArgumentError, "project_id is required" if @project_id.nil?
 
           @error_reporting = error_reporting ||
                              ErrorReporting.new(project: @project_id,
