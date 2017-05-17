@@ -91,9 +91,8 @@ end
 
 def clean_up_pubsub_snapshots
   puts "Cleaning up pubsub snapshots after tests."
-  snapshots = $pubsub.snapshots
-  $snapshot_names.each do |snapshot_name|
-    if snapshot = (snapshots.detect { |s| s.name.split("/").last == snapshot_name })
+  $pubsub.snapshots.all do |snapshot|
+    if snapshot.name.include? $snapshot_prefix
       snapshot.delete
     end
   end
