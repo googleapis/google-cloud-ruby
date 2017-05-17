@@ -111,8 +111,8 @@ module Google
         #   and that the system should return the next page of data.
         # @param [Integer] max Maximum number of instances to return.
         #
-        # @return [Array<Google::Cloud::Spanner::Instance>] (See
-        #   {Google::Cloud::Spanner::Instance::List})
+        # @return [Array<Google::Cloud::Spanner::Instance>] The list of
+        #   instances. (See {Google::Cloud::Spanner::Instance::List})
         #
         # @example
         #   require "google/cloud/spanner"
@@ -145,8 +145,8 @@ module Google
         #
         # @param [String] instance_id The unique identifier for the instance.
         #
-        # @return [Google::Cloud::Spanner::Instance, nil] Returns `nil`
-        #   if instance does not exist.
+        # @return [Google::Cloud::Spanner::Instance, nil] The instance, or `nil`
+        #   if the instance does not exist.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -237,7 +237,8 @@ module Google
         #   and that the system should return the next page of data.
         # @param [Integer] max Maximum number of instance configs to return.
         #
-        # @return [Array<Google::Cloud::Spanner::Instance::Config>] (See
+        # @return [Array<Google::Cloud::Spanner::Instance::Config>] The list of
+        #   instance configurations. (See
         #   {Google::Cloud::Spanner::Instance::Config::List})
         #
         # @example
@@ -273,8 +274,9 @@ module Google
         #   identifier. Values can be the `instance_config_id`, or the full
         #   path.
         #
-        # @return [Google::Cloud::Spanner::Instance::Config, nil] Returns `nil`
-        #   if instance configuration does not exist.
+        # @return [Google::Cloud::Spanner::Instance::Config, nil] The instance
+        #   configuration, or `nil` if the instance configuration does not
+        #   exist.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -305,8 +307,8 @@ module Google
         #   and that the system should return the next page of data.
         # @param [Integer] max Maximum number of databases to return.
         #
-        # @return [Array<Google::Cloud::Spanner::Database>] (See
-        #   {Google::Cloud::Spanner::Database::List})
+        # @return [Array<Google::Cloud::Spanner::Database>] The list of
+        #   databases. (See {Google::Cloud::Spanner::Database::List})
         #
         # @example
         #   require "google/cloud/spanner"
@@ -340,8 +342,8 @@ module Google
         # @param [String] instance_id The unique identifier for the instance.
         # @param [String] database_id The unique identifier for the database.
         #
-        # @return [Google::Cloud::Spanner::Database, nil] Returns `nil`
-        #   if database does not exist.
+        # @return [Google::Cloud::Spanner::Database, nil] The database, or `nil`
+        #   if the database does not exist.
         #
         # @example
         #   require "google/cloud/spanner"

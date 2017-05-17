@@ -285,7 +285,6 @@ module Google
         #   db.commit do |c|
         #     c.delete "users", [1, 2, 3]
         #   end
-
         #
         def delete table, keys = []
           @mutations += [

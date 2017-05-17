@@ -54,9 +54,9 @@ module Google
         #   range.
         # @param [Object] ending The object that defines the end of the range.
         # @param [Boolean] exclude_begin Determines if the range excludes its
-        # beginning value. Default is `false`.
+        #   beginning value. Default is `false`.
         # @param [Boolean] exclude_end Determines if the range excludes its
-        # ending value. Default is `false`.
+        #   ending value. Default is `false`.
         #
         # @example
         #   require "google/cloud/spanner"

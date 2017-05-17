@@ -55,9 +55,10 @@ module Google
             end
 
             ##
-            # Retrieve the next page of instance configs.
+            # Retrieve the next page of instance configurations.
             #
-            # @return [Instance::Config::List]
+            # @return [Instance::Config::List] The list of instance
+            #   configurations.
             #
             # @example
             #   require "google/cloud/spanner"

@@ -205,7 +205,8 @@ module Google
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
         #
-        # @return [Google::Cloud::Spanner::Results] the query results
+        # @return [Google::Cloud::Spanner::Results] The results of the query
+        #   execution.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -358,6 +359,8 @@ module Google
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -403,6 +406,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -446,6 +451,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -487,6 +494,8 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        # @return [Boolean] Returns `true` if the operation succeeded.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -532,6 +541,8 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
+        # @return [Boolean] Returns `true` if the operation succeeded.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -557,6 +568,8 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
+        #
+        # @return [Boolean] Returns `true` if the operation succeeded.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -760,11 +773,11 @@ module Google
         #   range.
         # @param [Object] ending The object that defines the end of the range.
         # @param [Boolean] exclude_begin Determines if the range excludes its
-        # beginning value. Default is `false`.
+        #   beginning value. Default is `false`.
         # @param [Boolean] exclude_end Determines if the range excludes its
-        # ending value. Default is `false`.
+        #   ending value. Default is `false`.
         #
-        # @return [Google::Cloud::Spanner::Range]
+        # @return [Google::Cloud::Spanner::Range] The new Range instance.
         #
         # @example
         #   require "google/cloud/spanner"

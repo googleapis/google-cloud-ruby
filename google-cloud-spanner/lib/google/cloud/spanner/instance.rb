@@ -169,7 +169,9 @@ module Google
         # * Label values must be between 0 and 63 characters long and must
         #   conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         # * No more than 64 labels can be associated with a given resource.
-        # @return [Hash{String=>String}]
+        #
+        # @return [Hash{String=>String}] The label keys and values in a hash.
+        #
         def labels
           @grpc.labels
         end
@@ -343,7 +345,7 @@ module Google
         # @yieldparam [Policy] policy the current Cloud IAM Policy for this
         #   instance
         #
-        # @return [Policy] the current Cloud IAM Policy for this instance
+        # @return [Policy] The current Cloud IAM Policy for this instance.
         #
         # @example Policy values are memoized to reduce the number of API calls:
         #   require "google/cloud/spanner"
