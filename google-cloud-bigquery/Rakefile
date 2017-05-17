@@ -89,7 +89,7 @@ namespace :acceptance do
       begin
         ds.tables.all &:delete
         ds.delete
-      rescue Google::Cloud::Bigquery::ApiError => e
+      rescue Google::Cloud::Error => e
         puts e.message
       end
     end
