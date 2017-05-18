@@ -32,7 +32,7 @@ module Google
       # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
       # inserted after ActionDispatch::DebugExceptions or
       # ActionDispatch::ShowExceptions Middleware, which
-      # allows it to actually rescue all Exceptions and throw it back up.
+      # allows it to actually rescue all Exceptions and re-throw them back up.
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # on how to configure the Railtie and Middleware.

@@ -38,7 +38,7 @@ module Stackdriver
       #
       # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
       #   A Symbol, or nested Array and Hash of sub configuration categories.
-      #   A single Symbol and Symbols in array will be keys to next level of
+      #   A single symbol, or symbols in array, will be key(s) to next level of
       #   categories. Nested hash represent sub categories with further nested
       #   sub categories.
       #
@@ -53,7 +53,7 @@ module Stackdriver
       #
       # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
       #   A Symbol, or nested Array and Hash of sub configuration categories.
-      #   A single Symbol and Symbols in array will be keys to next level of
+      #   A single symbol, or symbols in array, will be key(s) to next level of
       #   categories. Nested hash represent sub categories with further nested
       #   sub categories.
       #
