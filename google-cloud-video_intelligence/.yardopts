@@ -1,5 +1,6 @@
 --no-private
---title=Google Cloud Video Intelligence
+--title=Google Cloud Video Intelligence API
+--exclude lib/google/cloud/video_intelligence/v1beta1
 --markup markdown
 
 ./lib/**/*.rb
