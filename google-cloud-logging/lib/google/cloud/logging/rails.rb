@@ -34,25 +34,10 @@ module Google
       #
       # When loaded, the {Google::Cloud::Logging::Middleware} will be inserted
       # before the `Rails::Rack::Logger Middleware`, which allows it to set the
-      # `env['rack.logger']` in place of Rails's default logger. The Railtie
-      # will also initialize the logger with correct GCP `project_id`
-      # and `keyfile` if they are defined in the Rails `environment.rb` file as
-      # follows:
-      #
-      # ```ruby
-      # config.google_cloud.logging.project_id = "my-gcp-project"
-      # config.google_cloud.logging.keyfile = "/path/to/secret.json"
-      # ```
-      #
-      # or
-      #
-      # ```ruby
-      # config.google_cloud.project_id = "my-gcp-project"
-      # config.google_cloud.keyfile = "/path/to/secret.json"
-      # ```
-      #
-      # If omitted, project_id will be initialized with default environment
-      # variables.
+      # `env['rack.logger']` in place of Rails's default logger.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
@@ -75,8 +60,8 @@ module Google
         def self.init_middleware app
           project_id = Logging.configure.project_id
           keyfile = Logging.configure.keyfile
-          resource_type = Logging.configure.resource_type
-          resource_labels = Logging.configure.resource_labels
+          resource_type = Logging.configure.monitored_resource.type
+          resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name
 
           logging = Google::Cloud::Logging.new project: project_id,
@@ -106,9 +91,7 @@ module Google
         def self.consolidate_rails_config config
           merge_rails_config config
 
-          # Fallback to default config values if config parameters not provided.
-          Logging.configure.project_id ||= Logging::Project.default_project
-          Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
+          init_default_config
 
           # Done if Google::Cloud.configure.use_logging is explicitly false
           return if Google::Cloud.configure.use_logging == false
@@ -147,6 +130,13 @@ module Google
         end
 
         ##
+        # Fallback to default config values if config parameters not provided.
+        def self.init_default_config
+          Logging.configure.project_id ||= Logging::Project.default_project
+          Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
+        end
+
+        ##
         # @private Verify credentials
         def self.valid_credentials? project_id, keyfile
           # Try authenticate authorize client API. Return false if unable to
@@ -171,6 +161,7 @@ module Google
         end
 
         private_class_method :merge_rails_config,
+                             :init_default_config,
                              :valid_credentials?
       end
     end

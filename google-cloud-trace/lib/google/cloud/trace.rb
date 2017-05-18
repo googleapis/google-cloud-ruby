@@ -345,19 +345,9 @@ module Google
       ##
       # Configure the Stackdriver Trace instrumentation Middleware.
       #
-      # Possible configuration parameters:
-      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
-      #       when running from GCP environments.
-      #   * `keyfile`: The service account JSON file path. Automatically
-      #       discovered when running from GCP environments.
-      #   * `notifications`: A list of ActiveSupport notification type Strings
-      #       to override the default notifications the Trace Middleware
-      #       subscribes.
-      #   * `max_data_length`: The maximum length of span properties recorded
-      #       with ActiveSupport notification events. Any property value larger
-      #       than this length is truncated.
-      #   * `capture_stack`: Boolean. Whether to capture the call stack with
-      #       each trace span. Default is false.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object
       #   the Google::Cloud::ErrorReporting module uses.

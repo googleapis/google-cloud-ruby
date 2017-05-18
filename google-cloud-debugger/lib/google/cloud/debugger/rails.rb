@@ -31,23 +31,9 @@ module Google
       # to the application code.
       #
       # The Railtie should also initialize a debugger to be used by the
-      # middleware. The debugger can be configured using the following Rails
-      # configuration:
-      # @example
-      #   # Explicitly enable or disable Stackdriver Debugger Agent
-      #   config.google_cloud.use_debugger = true
-      #   # Shared Google Cloud Platform project identifier
-      #   config.google_cloud.project_id = "gcloud-project"
-      #   # Google Cloud Platform project identifier for Stackdriver Debugger
-      #   config.google_cloud.debugger.project_id = "debugger-project"
-      #   # Share Google Cloud authentication json file
-      #   config.google_cloud.keyfile = "/path/to/keyfile.json"
-      #   # Google Cloud authentication json file for Stackdriver Debugger only
-      #   config.google_cloud.debugger.keyfile = "/path/to/keyfile.json"
-      #   # Stackdriver Debugger Agent module name identifier
-      #   config.google_cloud.debugger.module_name = "my-ruby-app"
-      #   # Stackdriver Debugger Agent module version identifier
-      #   config.google_cloud.debugger.module_version = "v1"
+      # Middleware. See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
@@ -84,12 +70,7 @@ module Google
         def self.consolidate_rails_config config
           merge_rails_config config
 
-          Debugger.configure.project_id ||= Debugger::Project.default_project
-          Debugger.configure.module_name ||=
-            Debugger::Project.default_module_name
-          Debugger.configure.module_version ||=
-            Debugger::Project.default_module_version
-
+          init_default_config
 
           # Done if Google::Cloud.configure.use_debugger is explicitly
           # false
@@ -125,6 +106,15 @@ module Google
         end
 
         ##
+        # Fallback to default config values if config parameters not provided.
+        def self.init_default_config
+          config = Debugger.configure
+          config.project_id ||= Debugger::Project.default_project
+          config.module_name ||= Debugger::Project.default_module_name
+          config.module_version ||= Debugger::Project.default_module_version
+        end
+
+        ##
         # @private Verify credentials
         def self.valid_credentials? project_id, keyfile
           begin
@@ -145,6 +135,7 @@ module Google
         end
 
         private_class_method :merge_rails_config,
+                             :init_default_config,
                              :valid_credentials?
       end
     end

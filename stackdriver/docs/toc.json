@@ -1,6 +1,11 @@
 {
   "guides": [
     {
+      "title": "Configuration",
+      "id": "instrumentation_configuration",
+      "contents": "configuration.md"
+    },
+    {
       "title": "Error Reporting Instrumentation",
       "id": "error_reporting_instrumentation",
       "contents": "google/cloud/errorreporting/instrumentation.md"

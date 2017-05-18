@@ -168,15 +168,21 @@ module Google
           @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
 
           # Set defaults
+          init_default_config
+
+          # Ensure instrumentation configurations are aligned
+          configuration.project_id = @project_id
+          configuration.keyfile = @keyfile
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
           configuration.service_name ||=
             ErrorReporting::Project.default_service_name
           configuration.service_version ||=
             ErrorReporting::Project.default_service_version
           configuration.ignore_classes = Array(configuration.ignore_classes)
-
-          # Ensure instrumentation configurations are aligned
-          configuration.project_id = @project_id
-          configuration.keyfile = @keyfile
         end
 
         ##

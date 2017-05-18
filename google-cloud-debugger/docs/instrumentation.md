@@ -50,6 +50,17 @@ are finished being evaluated. Be aware the more breakpoints are created,
 or the harder to reach the breakpoints, the more resource the debugger
 agent would need to consume.
 
+### Configuration
+
+The default configuration enables Stackdriver instrumentation features to run on
+Google Cloud Platform. You can easily configure the instrumentation library if 
+you want to run on a non Google Cloud environment or you want to customize 
+the default behavior.
+
+See the
+[Configuration Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+for full configuration parameters.
+
 ### Using instrumentation with Ruby on Rails
 
 To install application instrumentation in your Ruby on Rails app, add this
@@ -61,28 +72,7 @@ require "google/cloud/debugger/rails"
 ```
 
 This will load a Railtie that automatically integrates with the Rails
-framework by injecting a Rack middleware. The Railtie also takes in the
-following Rails configuration as parameter of the debugger agent
-initialization:
-
-```ruby
-# Explicitly enable or disable Stackdriver Debugger Agent
-config.google_cloud.use_debugger = true
-# Shared Google Cloud Platform project identifier
-config.google_cloud.project_id = "gcloud-project"
-# Google Cloud Platform project identifier for Stackdriver Debugger only
-config.google_cloud.debugger.project_id = "debugger-project"
-# Shared Google Cloud authentication json file
-config.google_cloud.keyfile = "/path/to/keyfile.json"
-# Google Cloud authentication json file for Stackdriver Debugger only
-config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"
-# Stackdriver Debugger Agent module name identifier
-config.google_cloud.debugger.module_name = "my-ruby-app"
-# Stackdriver Debugger Agent module version identifier
-config.google_cloud.debugger.module_version = "v1"
-```
-
-See the Google::Cloud::Debugger::Railtie class for more information.
+framework by injecting a Rack middleware. 
 
 ### Using instrumentation with Sinatra
 
@@ -96,15 +86,6 @@ use Google::Cloud::Debugger::Middleware
 ```
 
 This will install the debugger middleware in your application.
-
-Configuration parameters may also be passed in as arguments to Middleware.
-```ruby
-require "google/cloud/debugger"
-use Google::Cloud::Debugger::Middleware project: "debugger-project-id",
-                                        keyfile: "/path/to/keyfile.json",
-                                        module_name: "my-ruby-app",
-                                        module_version: "v1"
-```
 
 ### Using instrumentation with other Rack-based frameworks
 

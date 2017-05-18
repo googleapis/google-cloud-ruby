@@ -32,19 +32,10 @@ module Google
       # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
       # inserted after ActionDispatch::DebugExceptions or
       # ActionDispatch::ShowExceptions Middleware, which
-      # allows it to actually rescue all Exceptions and throw it back up. The
-      # middleware should also be initialized with correct gcp project_id,
-      # keyfile, service_name, and service_version if they are defined in
-      # Rails environment files as follow:
-      #   config.google_cloud.project_id = "my-gcp-project"
-      #   config.google_cloud.keyfile = "/path/to/secret.json"
-      # or
-      #   config.google_cloud.error_reporting.project_id = "my-gcp-project"
-      #   config.google_cloud.error_reporting.keyfile = "/path/to/secret.json"
-      #   config.google_cloud.error_reporting.service_name = "my-service-name"
-      #   config.google_cloud.error_reporting.service_version = "v1"
-      #   config.google_cloud.error_reporting.ignore_classes =
-      #     [ActiveRecord::Exception]
+      # allows it to actually rescue all Exceptions and throw it back up.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ActiveSupport::OrderedOptions.new unless
@@ -89,8 +80,7 @@ module Google
         def self.consolidate_rails_config config
           merge_rails_config config
 
-          ErrorReporting.configure.project_id ||=
-            ErrorReporting::Project.default_project
+          init_default_config
 
           # Done if Google::Cloud.configure.use_error_reporting is explicitly
           # false
@@ -127,6 +117,16 @@ module Google
         end
 
         ##
+        # Fallback to default config values if config parameters not provided.
+        def self.init_default_config
+          config = ErrorReporting.configure
+          config.project_id ||= ErrorReporting::Project.default_project
+          config.service_name ||= ErrorReporting::Project.default_service_name
+          config.service_version ||=
+            ErrorReporting::Project.default_service_version
+        end
+
+        ##
         # @private Verify credentials
         def self.valid_credentials? project_id, keyfile
           begin
@@ -147,6 +147,7 @@ module Google
         end
 
         private_class_method :merge_rails_config,
+                             :init_default_config,
                              :valid_credentials?
       end
     end

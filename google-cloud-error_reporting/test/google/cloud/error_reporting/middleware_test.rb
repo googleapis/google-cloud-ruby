@@ -77,23 +77,6 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       end
     end
 
-    it "raises ArgumentError if empty project_id provided" do
-      stubbed_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
-
-      assert_raises ArgumentError do
-        # Prevent return of actual project in any environment including GCE, etc.
-        Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
-          Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
-            Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
-              ENV.stub :[], nil do
-                Google::Cloud::ErrorReporting::Middleware.new nil
-              end
-            end
-          end
-        end
-      end
-    end
-
     it "uses Google::Cloud::ErrorReporting.configure if parameters not given" do
       stubbed_config = OpenStruct.new project_id: "another-project-id",
                                       keyfile: "another-keyfile",

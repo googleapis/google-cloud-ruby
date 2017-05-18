@@ -393,18 +393,9 @@ module Google
       # Configure the Google::Cloud::Logging::Middleware when used in a
       # Rack-based application.
       #
-      # Possible configuration parameters:
-      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
-      #       when running from GCP environments.
-      #   * `keyfile`: The service account JSON file path. Automatically
-      #       discovered when running from GCP environments.
-      #   * `log_name`: A name for the log.
-      #   * `monitored_resource.type`: Identifier for monitored resource.
-      #       Optional. See [Monitored Resource
-      #       Doc](https://cloud.google.com/logging/docs/api/v2/resource-list)
-      #       for full list.
-      #   * `monitored_resource.labels`: Hash of custom labels for Monitored
-      #       Resource.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object
       #   the Google::Cloud::Logging module uses.

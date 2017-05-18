@@ -386,11 +386,9 @@ module Google
       ##
       # Configure the Stackdriver Debugger agent.
       #
-      # Possible configuration parameters:
-      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
-      #                   when running from GCP environments.
-      #   * `keyfile`: The service account JSON file path. Automatically
-      #                discovered when running from GCP environments.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object
       #   the Google::Cloud::ErrorReporting module uses.

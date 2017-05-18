@@ -114,11 +114,6 @@ module Google
         # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Trace::Service] service The service object.
         #     Optional if running on GCE.
-        # @param [Boolean] capture_stack Whether to capture stack traces for
-        #     each span. Default is false.
-        # @param [Proc] sampler A sampler to use, or `nil` to use the default.
-        #     See {Google::Cloud::Trace::TimeSampler}. Note that the sampler
-        #     may be any Proc that implements the sampling contract.
         #
         def initialize app,
                        service: nil

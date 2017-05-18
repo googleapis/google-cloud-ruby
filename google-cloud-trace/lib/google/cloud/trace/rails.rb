@@ -43,59 +43,9 @@ module Google
       #
       # ## Configuration
       #
-      # The following Rails configuration options are recognized.
-      #
-      # ```ruby
-      # config.google_cloud.use_trace = true | false
-      # ```
-      #
-      # Normally, tracing is activated when `RAILS_ENV` is set to `production`
-      # and credentials are available. You can override this and enable tracing
-      # in other environments by setting `use_trace` explicitly.
-      #
-      # ```ruby
-      # config.google_cloud.keyfile = "path/to/file"
-      # ```
-      #
-      # If your application is running on Google Cloud Platform, it will
-      # automatically use credentials available to your project. However, if
-      # you are running an application locally or on a different hosting
-      # provider, you may provide a path to your credentials file using this
-      # configuration.
-      #
-      # ```ruby
-      # config.google_cloud.project_id = "my-project-id"
-      # ```
-      #
-      # If your application is running on Google Cloud Platform, it will
-      # automatically select the project under which it is running. However, if
-      # you are running an application locally or on a different hosting
-      # provider, or if you want to log traces to a different project than you
-      # are using to host your application, you may provide the project ID.
-      #
-      # ```ruby
-      # config.google_cloud.trace.notifications = ["event1", "event2"]
-      # ```
-      #
-      # By default, this Railtie subscribes to ActiveSupport notifications
-      # emitted by ActiveRecord queries, rendering, and emailing functions.
-      # See {DEFAULT_NOTIFICATIONS}. If you want to customize the list of
-      # notification types, edit the notifications configuration.
-      #
-      # ```ruby
-      # config.google_cloud.trace.max_data_length = 1024
-      # ```
-      #
-      # The maximum length of span properties recorded with ActiveSupport
-      # notification events. Any property value larger than this length is
-      # truncated.
-      #
-      # ```ruby
-      # config.google_cloud.trace.capture_stack = true | false
-      # ```
-      #
-      # Whether to capture the call stack with each trace span. Default is
-      # false.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # on how to configure the Railtie and Middleware.
       #
       # ## Measuring custom functionality
       #
@@ -180,8 +130,7 @@ module Google
         def self.consolidate_rails_config config
           merge_rails_config config
 
-          Trace.configure.project_id ||=
-            Trace::Project.default_project
+          init_default_config
 
           # Done if Google::Cloud.configure.use_trace is explicitly false
           return if Google::Cloud.configure.use_trace == false
@@ -219,6 +168,12 @@ module Google
         end
 
         ##
+        # Fallback to default config values if config parameters not provided.
+        def self.init_default_config
+          Trace.configure.project_id ||= Trace::Project.default_project
+        end
+
+        ##
         # @private Verify credentials
         def self.valid_credentials? project_id, keyfile
           begin
@@ -239,6 +194,7 @@ module Google
         end
 
         private_class_method :merge_rails_config,
+                             :init_default_config,
                              :valid_credentials?
       end
     end

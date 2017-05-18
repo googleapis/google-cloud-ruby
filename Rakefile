@@ -399,19 +399,19 @@ namespace :jsondoc do
 
   desc "Generates the jsondoc for master branch for all gems, updates google-cloud with all gems' master branch, publishes."
   task :master do
-    unless ENV["GH_OAUTH_TOKEN"]
-      # only check this if we are not running on travis
-      branch = `git symbolic-ref --short HEAD`.chomp
-      if "master" != branch
-        puts "You are on the #{branch} branch. You must be on the master branch to run this rake task."
-        exit
-      end
-
-      unless `git status --porcelain`.chomp.empty?
-        puts "The master branch is not clean. Unable to update gh-pages."
-        exit
-      end
-    end
+    # unless ENV["GH_OAUTH_TOKEN"]
+    #   # only check this if we are not running on travis
+    #   branch = `git symbolic-ref --short HEAD`.chomp
+    #   if "master" != branch
+    #     puts "You are on the #{branch} branch. You must be on the master branch to run this rake task."
+    #     exit
+    #   end
+    #
+    #   unless `git status --porcelain`.chomp.empty?
+    #     puts "The master branch is not clean. Unable to update gh-pages."
+    #     exit
+    #   end
+    # end
 
     gh_pages_dir = "all-master-gh-pages"
 
@@ -424,7 +424,7 @@ namespace :jsondoc do
     end
     Rake::Task["jsondoc:google_cloud"].invoke("master", gh_pages_dir)
     Rake::Task["jsondoc:stackdriver"].invoke("master", gh_pages_dir)
-    Rake::Task["jsondoc:publish"].invoke("master", gh_pages_dir)
+    # Rake::Task["jsondoc:publish"].invoke("master", gh_pages_dir)
   end
 
   # Usage: rake jsondoc:package["google-cloud-vision/v0.21.1"]
