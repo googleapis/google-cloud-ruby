@@ -59,7 +59,7 @@ namespace :integration do
   desc "Run integration tests against GAE"
   task :gae, :project_uri do |t, args|
     fail "You must provide a project_uri. e.g. rake " \
-      "integration:gae[http://my-project.appspot.com]" if args[:project_uri].nil?
+      "integration:gae[http://my-project.appspot-preview.com]" if args[:project_uri].nil?
 
     ENV["TEST_GOOGLE_CLOUD_PROJECT_URI"] = args[:project_uri]
 

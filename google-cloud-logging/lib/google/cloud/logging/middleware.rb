@@ -72,12 +72,13 @@ module Google
           if logger
             @logger = logger
           else
+            log_name = configuration.log_name
             logging = Google::Cloud::Logging.new project: @project_id,
                                                  keyfile: @keyfile
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
               configuration.monitored_resource.labels)
-            @logger = logging.logger @log_name, resource
+            @logger = logging.logger log_name, resource
           end
         end
 

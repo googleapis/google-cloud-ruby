@@ -17,23 +17,14 @@ require 'sinatra'
 require 'stackdriver'
 require 'grpc'
 
-#######################################
-# Setup ErrorReporting Middleware
-er_service_name = "google-cloud-ruby_integration_test"
-er_serivce_version = ENV['USER']
-
-use Google::Cloud::ErrorReporting::Middleware, service_name: er_service_name,
-                                               service_version: er_serivce_version
-#######################################
-
+Google::Cloud.configure do |config|
+  config.logging.log_name = "google-cloud-ruby_integration_test"
+end
 
 #######################################
-# Setup Logging Middleware
-logging = Google::Cloud::Logging.new
-resource = Google::Cloud::Logging::Middleware.build_monitored_resource
-sd_logger = logging.logger "google-cloud-ruby_integration_test", resource
-use Google::Cloud::Logging::Middleware, logger: sd_logger
-#######################################
+# Setup Middlewares
+use Google::Cloud::ErrorReporting::Middleware
+use Google::Cloud::Logging::Middleware
 
 
 # Set :raise_errors to expose error message in production environment
