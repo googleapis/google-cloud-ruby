@@ -196,9 +196,7 @@ module Google
           # @example
           #   require "google/cloud/video_intelligence/v1beta1"
           #
-          #   VideoIntelligenceServiceClient = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient
-          #
-          #   video_intelligence_service_client = VideoIntelligenceServiceClient.new
+          #   video_intelligence_service_client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
           #   input_uri = ''
           #   features = []
           #

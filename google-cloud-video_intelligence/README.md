@@ -1,45 +1,25 @@
-Google Cloud Video Intelligence API for Ruby
-=================================================
+# Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
-Google Cloud Video Intelligence API uses [Google API extensions][google-gax] to provide an
-easy-to-use client library for the [Google Cloud Video Intelligence API][] (v1beta1) defined in the [googleapis][] git repository
+Idiomatic Ruby client for [Google Cloud Video Intelligence API][Product Documentation]
+- [Client Library Documentation][]
+- [Product Documentation][]
 
+## Quick Start
+In order to use this library, you first need to go through the following steps:
 
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/cloud/videointelligence/v1beta1
-[google-gax]: https://github.com/googleapis/gax-ruby
-[Google Cloud Video Intelligence API]: https://developers.google.com/apis-explorer/?hl=en_US#p/videointelligence/v1beta1
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+2. [Enable the video-intelligence api.](https://console.cloud.google.com/apis/api/video-intelligence)
+3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
-Getting started
----------------
+### Installation
+```
+$ gem install google-cloud-video_intelligence
+```
 
-google-cloud-video_intelligence will allow you to connect to the [Google Cloud Video Intelligence API][] and access all its methods.
+### Next Steps
+- Read the [Client Library Documentation][] for Google Cloud Video Intelligence API to see other available methods on the client.
+- Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation] to learn more about the product and see How-to Guides.
+- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md) to see the full list of Cloud APIs that we cover.
 
-In order to achieve so, you need to set up authentication, as well as install the library locally.
-
-
-Setup Authentication
---------------------
-
-To authenticate all of your API calls, first install and setup the [Google Cloud SDK][].
-Once done, you can then run the following command in your terminal:
-
-    $ gcloud beta auth application-default login
-
-or
-
-    $ gcloud auth login
-
-Please see the [gcloud beta auth application-default login][] to find documentation showing the difference between these commands.
-
-[Google Cloud SDK]: https://cloud.google.com/sdk/
-[gcloud beta auth application-default login]: https://cloud.google.com/sdk/gcloud/reference/beta/auth/application-default/login
-
-
-Installation
--------------------
-
-Install this library using gem:
-
-    $ [sudo] gem install google-cloud-video_intelligence
-
-At this point you are all set to continue.
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1
+[Product Documentation]: https://cloud.google.com/video-intelligence

@@ -55,18 +55,15 @@ end
 describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient do
 
   describe 'annotate_video' do
-    custom_error = CustomTestError.new "Custom test error for VideoIntelligenceServiceClient#annotate_video."
-
-    AnnotateVideoResponse = Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse
-    VideoIntelligenceServiceClient = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient#annotate_video."
 
     it 'invokes annotate_video without error' do
-      # Create request parameters and expected request
+      # Create request parameters
       input_uri = ''
       features = []
 
       # Create expected grpc response
-      expected_response = AnnotateVideoResponse.new
+      expected_response = Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse.new
       result = Google::Protobuf::Any.new
       result.pack(expected_response)
       operation = Google::Longrunning::Operation.new(
@@ -84,8 +81,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = VideoIntelligenceServiceClient.new channel: channel
+        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
 
         # Call method
         response = client.annotate_video(input_uri, features)
@@ -96,13 +92,13 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
     end
 
     it 'invokes annotate_video and returns an operation error.' do
-      # Create request parameters and expected request
+      # Create request parameters
       input_uri = ''
       features = []
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for VideoIntelligenceServiceClient#annotate_video.'
+        message: 'Operation error for Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient#annotate_video.'
       )
       operation = Google::Longrunning::Operation.new(
         name: 'operations/annotate_video_test',
@@ -119,8 +115,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = VideoIntelligenceServiceClient.new channel: channel
+        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
 
         # Call method
         response = client.annotate_video(input_uri, features)
@@ -132,7 +127,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
     end
 
     it 'invokes annotate_video with error' do
-      # Create request parameters and expected request
+      # Create request parameters
       input_uri = ''
       features = []
 
@@ -145,8 +140,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = VideoIntelligenceServiceClient.new channel: channel
+        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
