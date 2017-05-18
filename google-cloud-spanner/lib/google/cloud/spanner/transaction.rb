@@ -154,8 +154,8 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   read.
-        # @param [Array<String>] columns The columns of table to be returned for
-        #   each row matching this request.
+        # @param [Array<String, Symbol>] columns The columns of table to be
+        #   returned for each row matching this request.
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
@@ -175,7 +175,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.read "users", ["id", "name"]
+        #     results = tx.read "users", [:id, :name]
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -465,7 +465,7 @@ module Google
         #
         #   db.transaction do |tx|
         #     key_range = tx.range 1, 100
-        #     results = tx.read "users", ["id", "name"], keys: key_range
+        #     results = tx.read "users", [:id, :name], keys: key_range
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"

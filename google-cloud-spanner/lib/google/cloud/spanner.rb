@@ -195,7 +195,7 @@ module Google
     #
     # db = spanner.client "my-instance", "my-database"
     #
-    # results = db.read "users", ["id", "name"], keys: 1..5
+    # results = db.read "users", [:id, :name], keys: 1..5
     #
     # results.rows.each do |row|
     #   puts "User #{row[:id]} is #{row[:name]}"
@@ -286,7 +286,7 @@ module Google
     #   # Perform another read using the `read` method. Even if the data
     #   # is updated in-between the reads, the snapshot ensures that both
     #   # return the same data.
-    #   results_2 = db.read "users", ["id", "name"]
+    #   results_2 = db.read "users", [:id, :name]
     #   results_2.rows.each do |row|
     #     puts "User #{row[:id]} is #{row[:name]}"
     #   end

@@ -31,7 +31,7 @@ module Google
       #   db = spanner.client "my-instance", "my-database"
       #
       #   key_range = db.range 1, 100
-      #   results = db.read "users", ["id", "name"], keys: key_range
+      #   results = db.read "users", [:id, :name], keys: key_range
       #
       #   results.rows.each do |row|
       #     puts "User #{row[:id]} is #{row[:name]}"
@@ -66,7 +66,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   key_range = Google::Cloud::Spanner::Range.new 1, 100
-        #   results = db.read "users", ["id", "name"], keys: key_range
+        #   results = db.read "users", [:id, :name], keys: key_range
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
