@@ -5,7 +5,6 @@ This gem instruments a Ruby web application for Stackdriver diagnostics. When lo
 Specifically, this gem is a convenience package that loads and automatically activates the instrumentation features of the following gems:
 - [google-cloud-logging](../google-cloud-logging)
 - [google-cloud-error_reporting](../google-cloud-error_reporting)
-- [google-cloud-monitoring](../google-cloud-monitoring)
 - [google-cloud-trace](../google-cloud-trace)
 
 Please see the top-level project [README](../README.md) for more information about the individual Stackdriver google-cloud-ruby gems.
