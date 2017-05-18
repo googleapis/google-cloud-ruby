@@ -596,6 +596,15 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). Optional. If unspecified, this will be
+        #   set to your project default. For more information, see [High-Compute
+        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
+        #   job. Queries that will have bytes billed beyond this limit will fail
+        #   (without incurring a charge). Optional. If unspecified, this will be
+        #   set to your project default.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -666,11 +675,14 @@ module Google
         #
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
                       table: nil, create: nil, write: nil, standard_sql: nil,
-                      legacy_sql: nil, large_results: nil, flatten: nil
+                      legacy_sql: nil, large_results: nil, flatten: nil,
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      maximum_billing_tier: maximum_billing_tier,
+                      maximum_bytes_billed: maximum_bytes_billed,
                       params: params }
           options[:dataset] ||= self
           ensure_service!
