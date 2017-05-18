@@ -81,7 +81,8 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
+        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
+        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new channel: channel
 
         # Call method
         response = client.annotate_video(input_uri, features)
@@ -115,6 +116,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
+        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
         client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
 
         # Call method
@@ -140,6 +142,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
+        channel = GRPC::Core::Channel.new VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
         client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new
 
         # Call method
