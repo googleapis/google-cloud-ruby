@@ -1,0 +1,27 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "Video Intelligence",
+      "type": "google/cloud/video_intelligence",
+      "patterns": ["\/video_intelligence"],
+      "nav": [
+        {
+          "title": "V1beta1",
+          "type": "google/cloud/video_intelligence/v1beta1",
+          "patterns": ["\/video_intelligence\/v1beta1"],
+          "nav": [
+            {
+              "title": "VideoIntelligenceServiceClient",
+              "type": "google/cloud/video_intelligence/v1beta1/videointelligenceserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/videointelligence/v1beta1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

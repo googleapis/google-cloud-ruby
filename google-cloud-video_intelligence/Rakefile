@@ -39,25 +39,87 @@ namespace :test do
   end
 end
 
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-video_intelligence .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Cloud::VideoIntelligence::V1beta1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Videointelligence::V1beta1",
+            include: ["google/cloud/videointelligence/v1beta1"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-video_intelligence",
+                                             generate: toc_config
+  rm_rf "jsondoc", verbose: true
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  puts "The google-cloud-video_intelligence gem does not have doctest tests."
+end
+
+# Acceptance tests
+desc "Run the video_intelligence acceptance tests."
+task :acceptance do
+  puts "The google-cloud-video_intelligence gem does not have acceptance tests."
+end
+
+namespace :acceptance do
+  task :run do
+    puts "This gem does not have acceptance tests."
+  end
+
+  desc "Run acceptance tests with coverage."
+  task :coverage do
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup do
+  end
+end
+
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-video_intelligence"
   header "google-cloud-video_intelligence rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "google-cloud-video_intelligence jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-video_intelligence doctest", "*"
+  sh "bundle exec rake doctest"
   header "google-cloud-video_intelligence test", "*"
   sh "bundle exec rake test"
 end
-
 namespace :ci do
-  desc "Run the CI build, with smoke_tests."
-  task :smoke_test do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
     Rake::Task["ci"].invoke
-    header "google-cloud-video_intelligence smoke_test", "*"
-    sh "bundle exec rake smoke_test -v"
+    header "google-cloud-video_intelligence acceptance", "*"
+    sh "bundle exec rake acceptance -v"
   end
   task :a do
     # This is a handy shortcut to save typing
-    Rake::Task["ci:smoke_test"].invoke
+    Rake::Task["ci:acceptance"].invoke
   end
 end
 
