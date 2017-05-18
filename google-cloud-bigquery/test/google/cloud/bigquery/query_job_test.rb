@@ -47,6 +47,8 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.must_be :flatten?
     job.wont_be :legacy_sql?
     job.must_be :standard_sql?
+    job.maximum_billing_tier.must_equal 2
+    job.maximum_bytes_billed.must_equal 12345678901234
   end
 
   it "knows its statistics data" do
@@ -85,7 +87,9 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "allowLargeResults" => true,
       "useQueryCache" => true,
       "flattenResults" => true,
-      "useLegacySql" => false
+      "useLegacySql" => false,
+      "maximumBillingTier" => 2,
+      "maximumBytesBilled" => 12345678901234 # Long
     }
     hash["statistics"]["query"] = {
       "cacheHit" => false,

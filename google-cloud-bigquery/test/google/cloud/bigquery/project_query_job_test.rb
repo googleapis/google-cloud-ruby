@@ -67,11 +67,15 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job_gapi.configuration.query.write_disposition = "WRITE_TRUNCATE"
     job_gapi.configuration.query.allow_large_results = true
     job_gapi.configuration.query.flatten_results = false
+    job_gapi.configuration.query.maximum_billing_tier = 2
+    job_gapi.configuration.query.maximum_bytes_billed = 12345678901234
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = bigquery.query_job query, table: table,
                                 create: :never, write: :truncate,
-                                large_results: true, flatten: false
+                                large_results: true, flatten: false,
+                                maximum_billing_tier: 2,
+                                maximum_bytes_billed: 12345678901234
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob

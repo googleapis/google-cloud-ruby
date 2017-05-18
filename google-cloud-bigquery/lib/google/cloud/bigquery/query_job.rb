@@ -75,6 +75,22 @@ module Google
         end
 
         ##
+        # Limits the billing tier for this job.
+        # For more information, see [High-Compute
+        # queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        def maximum_billing_tier
+          @gapi.configuration.query.maximum_billing_tier
+        end
+
+        ##
+        # Limits the bytes billed for this job.
+        def maximum_bytes_billed
+          Integer @gapi.configuration.query.maximum_bytes_billed
+        rescue
+          nil
+        end
+
+        ##
         # Checks if the query results are from the query cache.
         def cache_hit?
           @gapi.statistics.query.cache_hit

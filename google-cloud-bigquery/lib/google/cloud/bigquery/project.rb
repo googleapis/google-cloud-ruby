@@ -155,6 +155,8 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - A 'duplicate' error is returned in the job result if the
         #     table exists and contains data.
+        # @param [Dataset, String] dataset The default dataset to use for
+        #   unqualified table names in the query. Optional.
         # @param [Boolean] large_results If `true`, allows the query to produce
         #   arbitrarily large result tables at a slight cost in performance.
         #   Requires `table` parameter to be set.
@@ -180,6 +182,15 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). Optional. If unspecified, this will be
+        #   set to your project default. For more information, see [High-Compute
+        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
+        #   job. Queries that will have bytes billed beyond this limit will fail
+        #   (without incurring a charge). Optional. If unspecified, this will be
+        #   set to your project default.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #

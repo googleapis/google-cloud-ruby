@@ -202,6 +202,8 @@ describe Google::Cloud::Bigquery::QueryJob, :query_results, :mock_bigquery do
       "useQueryCache" => true,
       "flattenResults" => true,
       "useLegacySql" => false,
+      "maximumBillingTier" => nil,
+      "maximumBytesBilled" => nil
     }
     hash
   end
