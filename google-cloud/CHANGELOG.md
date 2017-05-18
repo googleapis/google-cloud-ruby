@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.0 / 2017-05-18
+
+* Add Vision Intelligence
+
 ### 0.28.0 / 2017-04-05
 
 * Storage 1.0 release
