@@ -3,21 +3,21 @@
   "services": [
     {
       "title": "Video Intelligence",
-      "type": "google/cloud/video_intelligence",
-      "patterns": ["\/video_intelligence"],
+      "type": "google/cloud/videointelligence",
+      "patterns": ["\/videointelligence", "google\/protobuf", "google\/rpc"],
       "nav": [
         {
           "title": "V1beta1",
-          "type": "google/cloud/video_intelligence/v1beta1",
-          "patterns": ["\/video_intelligence\/v1beta1"],
+          "type": "google/cloud/videointelligence/v1beta1",
+          "patterns": ["\/videointelligence\/v1beta1", "google\/protobuf", "google\/rpc"],
           "nav": [
             {
               "title": "VideoIntelligenceServiceClient",
-              "type": "google/cloud/video_intelligence/v1beta1/videointelligenceserviceclient"
+              "type": "google/cloud/videointelligence/v1beta1/videointelligenceserviceclient"
             },
             {
               "title": "Data Types",
-              "type": "google/cloud/videointelligence/v1beta1"
+              "type": "google/cloud/videointelligence/v1beta1/datatypes"
             }
           ]
         }
