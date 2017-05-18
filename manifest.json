@@ -325,6 +325,14 @@
       ]
     },
     {
+      "id": "google-cloud-video_intelligence",
+      "name": "google-cloud-video_intelligence",
+      "defaultService": "google/cloud/videointelligence",
+      "versions": [
+        "master"
+      ]
+    },
+    {
       "id": "stackdriver",
       "name": "stackdriver",
       "defaultService": "stackdriver",
