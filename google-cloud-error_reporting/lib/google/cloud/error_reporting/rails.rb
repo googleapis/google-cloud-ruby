@@ -14,7 +14,6 @@
 
 
 require "google/cloud/error_reporting"
-require "google/cloud/error_reporting/middleware"
 
 module Google
   module Cloud
@@ -53,7 +52,7 @@ module Google
         config.google_cloud.error_reporting = ActiveSupport::OrderedOptions.new
 
         initializer "Google.Cloud.ErrorReporting" do |app|
-          consolidate_rails_config app.config
+          self.class.consolidate_rails_config app.config
 
           self.class.init_middleware app if Cloud.configure.use_error_reporting
         end
@@ -62,9 +61,6 @@ module Google
         # @private Init Error Reporting integration for Rails. Setup
         # configuration and insert the Middleware.
         def self.init_middleware app
-          project_id = ErrorReporting.configure.project_id
-          keyfile = ErrorReporting.configure.keyfile
-
           # In later versions of Rails, ActionDispatch::DebugExceptions is
           # responsible for catching exceptions. But it didn't exist until
           # Rails 3.2. So we use ShowExceptions as pivot for earlier Rails.
@@ -75,14 +71,8 @@ module Google
               ::ActionDispatch::ShowExceptions
             end
 
-          error_reporting = ErrorReporting.new project: project_id,
-                                               keyfile: keyfile
-
           app.middleware.insert_after rails_exception_middleware,
-                                      Middleware,
-                                      project_id: project_id,
-                                      keyfile: keyfile,
-                                      error_reporting: error_reporting
+                                      Google::Cloud::ErrorReporting::Middleware
         end
 
         ##
@@ -156,8 +146,7 @@ module Google
           true
         end
 
-        private_class_method :consolidate_rails_config,
-                             :merge_rails_config,
+        private_class_method :merge_rails_config,
                              :valid_credentials?
       end
     end

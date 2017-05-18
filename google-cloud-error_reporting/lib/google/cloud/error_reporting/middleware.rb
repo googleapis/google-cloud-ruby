@@ -58,8 +58,7 @@ module Google
           require "rack"
           require "rack/request"
           @app = app
-          load_config project_id: project_id,
-                      keyfile: keyfile
+          load_config project_id: project_id, keyfile: keyfile
 
           @error_reporting = error_reporting ||
                              ErrorReporting.new(project: @project_id,

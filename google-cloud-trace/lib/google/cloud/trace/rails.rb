@@ -135,7 +135,7 @@ module Google
           Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH
 
         initializer "Google.Cloud.Trace" do |app|
-          consolidate_rails_config app.config
+          self.class.consolidate_rails_config app.config
 
           self.class.init_middleware app if Cloud.configure.use_trace
         end
@@ -157,8 +157,7 @@ module Google
           app.middleware.insert_before \
             Rack::Runtime,
             Google::Cloud::Trace::Middleware,
-            service: tracer.service,
-            capture_stack: trace_config.capture_stack
+            service: tracer.service
 
           trace_config.notifications.each do |type|
             Google::Cloud::Trace::Notifications.instrument \
@@ -239,8 +238,7 @@ module Google
           true
         end
 
-        private_class_method :consolidate_rails_config,
-                             :merge_rails_config,
+        private_class_method :merge_rails_config,
                              :valid_credentials?
       end
     end

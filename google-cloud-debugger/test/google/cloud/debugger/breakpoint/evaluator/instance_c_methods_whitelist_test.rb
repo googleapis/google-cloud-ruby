@@ -338,13 +338,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "doesn't allow #`" do
       result = evaluator.readonly_eval_expression binding, "`ls`"
 
-      # ActiveSupport overloads Kernel, injects additional code into the
-      # execution path
-      if defined? Rails
-        result.must_match "Mutation detected"
-      else
-        result.must_match "Invalid operation detected"
-      end
+      result.must_match "Invalid operation detected"
     end
 
     it "doesn't allow #eval" do

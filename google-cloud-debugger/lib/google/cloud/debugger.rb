@@ -15,6 +15,7 @@
 
 require "google-cloud-debugger"
 require "google/cloud/debugger/project"
+require "stackdriver/core"
 
 module Google
   module Cloud
@@ -319,6 +320,12 @@ module Google
     # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
+      # Initialize :error_reporting as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :debugger
+        Google::Cloud.configure.add_nested :debugger
+      end
+
       ##
       # Creates a new debugger object for instrumenting Stackdriver Debugger for
       # an application. Each call creates a new debugger agent with independent
@@ -373,6 +380,25 @@ module Google
           module_name: module_name,
           module_version: module_version
         )
+      end
+
+
+      ##
+      # Configure the Stackdriver Debugger agent.
+      #
+      # Possible configuration parameters:
+      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
+      #                   when running from GCP environments.
+      #   * `keyfile`: The service account JSON file path. Automatically
+      #                discovered when running from GCP environments.
+      #
+      # @return [Stackdriver::Core::Configuration] The configuration object
+      #   the Google::Cloud::ErrorReporting module uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.debugger if block_given?
+
+        Google::Cloud.configure.debugger
       end
     end
   end

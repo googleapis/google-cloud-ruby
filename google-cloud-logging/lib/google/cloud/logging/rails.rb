@@ -64,7 +64,7 @@ module Google
           ::ActiveSupport::OrderedOptions.new
 
         initializer "Stackdriver.Logging", before: :initialize_logger do |app|
-          consolidate_rails_config app.config
+          self.class.consolidate_rails_config app.config
 
           self.class.init_middleware app if Cloud.configure.use_logging
         end
@@ -170,8 +170,7 @@ module Google
           true
         end
 
-        private_class_method :consolidate_rails_config,
-                             :merge_rails_config,
+        private_class_method :merge_rails_config,
                              :valid_credentials?
       end
     end

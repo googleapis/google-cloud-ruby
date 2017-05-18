@@ -124,13 +124,15 @@ module Google
                        service: nil
           @app = app
 
-          Google::Cloud::Trace.configure.capture_stack ||= false
+          load_config
 
           if service
             @service = service
           else
-            project_id = Google::Cloud::Trace::Project.default_project
-            @service = Google::Cloud::Trace.new.service if project_id
+            project_id = configuration.project_id
+            if project_id
+              @service = Google::Cloud::Trace.new(project: project_id).service
+            end
           end
         end
 
@@ -352,6 +354,18 @@ module Google
         end
 
         private
+
+        ##
+        # Consolidate configurations from various sources. Also set
+        # instrumentation config parameters to default values if not set
+        # already.
+        #
+        def load_config
+          # Set defaults
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       Trace::Project.default_project
+          Google::Cloud::Trace.configure.capture_stack ||= false
+        end
 
         ##
         # @private Get Google::Cloud::Trace.configure
