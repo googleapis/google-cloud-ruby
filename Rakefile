@@ -300,6 +300,7 @@ namespace :jsondoc do
       "google-cloud-storage",
       "google-cloud-trace",
       "google-cloud-translate",
+      "google-cloud-video_intelligence",
       "google-cloud-vision"
     ]
     # Currently excluded: "gcloud", "google-cloud", "stackdriver", "stackdriver-core",
