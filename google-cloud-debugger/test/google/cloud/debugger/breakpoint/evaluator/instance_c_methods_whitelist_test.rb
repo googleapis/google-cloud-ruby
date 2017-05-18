@@ -338,7 +338,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "doesn't allow #`" do
       result = evaluator.readonly_eval_expression binding, "`ls`"
 
-      result.match?("Mutation detected|Invalid operation detected").must_equal true
+      result.match("Mutation detected|Invalid operation detected").wont_be_nil
     end
 
     it "doesn't allow #eval" do

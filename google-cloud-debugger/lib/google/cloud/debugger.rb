@@ -387,7 +387,7 @@ module Google
       # Configure the Stackdriver Debugger agent.
       #
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object

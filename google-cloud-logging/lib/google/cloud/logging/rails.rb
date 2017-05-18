@@ -36,7 +36,7 @@ module Google
       # before the `Rails::Rack::Logger Middleware`, which allows it to set the
       # `env['rack.logger']` in place of Rails's default logger.
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie

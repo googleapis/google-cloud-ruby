@@ -32,7 +32,7 @@ module Google
       #
       # The Railtie should also initialize a debugger to be used by the
       # Middleware. See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie

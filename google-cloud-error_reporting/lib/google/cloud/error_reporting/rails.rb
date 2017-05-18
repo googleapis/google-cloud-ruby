@@ -34,7 +34,7 @@ module Google
       # ActionDispatch::ShowExceptions Middleware, which
       # allows it to actually rescue all Exceptions and throw it back up.
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriverguides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
