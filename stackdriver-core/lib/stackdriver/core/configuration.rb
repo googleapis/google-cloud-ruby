@@ -51,7 +51,7 @@ module Stackdriver
       ##
       # Add nested sub configurations to a Configuration object
       #
-      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, ( Array, Hash)>] nested
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
       #   A Symbol, or nested Array and Hash of sub configuration categories.
       #   A single Symbol and Symbols in array will be keys to next level of
       #   categories. Nested hash represent sub categories with further nested
@@ -68,14 +68,14 @@ module Stackdriver
         nested = [nested].flatten(1)
         nested.each do |sub_key|
           case sub_key
-            when Symbol
-              self[sub_key] = self.class.new
-            when Hash
-              sub_key.each do |k, v|
-                self[k] = self.class.new v
-              end
-            else
-              fail ArgumentError \
+          when Symbol
+            self[sub_key] = self.class.new
+          when Hash
+            sub_key.each do |k, v|
+              self[k] = self.class.new v
+            end
+          else
+            fail ArgumentError \
               "Configuration option can only be Symbol or Hash"
           end
         end
