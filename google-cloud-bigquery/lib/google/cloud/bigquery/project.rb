@@ -155,6 +155,8 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - A 'duplicate' error is returned in the job result if the
         #     table exists and contains data.
+        # @param [Dataset, String] dataset The default dataset to use for
+        #   unqualified table names in the query. Optional.
         # @param [Boolean] large_results If `true`, allows the query to produce
         #   arbitrarily large result tables at a slight cost in performance.
         #   Requires `table` parameter to be set.
