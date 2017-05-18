@@ -59,6 +59,14 @@ task :jsondoc => :yard do
           {
             title: "Google::Cloud::Videointelligence::V1beta1",
             include: ["google/cloud/videointelligence/v1beta1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
           }
         ]
       }
