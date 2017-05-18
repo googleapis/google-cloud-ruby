@@ -202,7 +202,7 @@ module Google
         #   results = db.execute "SELECT * FROM users"
         #
         #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         # @example Query using query parameters:
@@ -216,7 +216,7 @@ module Google
         #                        params: { active: true }
         #
         #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         def execute sql, params: nil, types: nil, transaction: nil
@@ -232,8 +232,8 @@ module Google
         #
         # @param [String] table The name of the table in the database to be
         #   read.
-        # @param [Array<String>] columns The columns of table to be returned for
-        #   each row matching this request.
+        # @param [Array<String, Symbol>] columns The columns of table to be
+        #   returned for each row matching this request.
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
@@ -256,10 +256,10 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.read "users", ["id, "name"]
+        #   results = db.read "users", [:id, :name]
         #
         #   results.rows.each do |row|
-        #     puts "User #{row[:id]} is #{row[:name]}""
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
