@@ -34,14 +34,6 @@ module Google
         attr_reader :logger
 
         ##
-        # @private The Google Cloud project ID
-        attr_reader :project_id
-
-        ##
-        # @private The Google Cloud keyfile path
-        attr_reader :keyfile
-
-        ##
         # Create a new AppEngine logging Middleware.
         #
         # @param [Rack Application] app Rack application
@@ -50,31 +42,25 @@ module Google
         #   to track Stackdriver request trace ID. It also properly sets
         #   env["rack.logger"] to this assigned logger for accessing. If not
         #   specified, a default logger with be used.
-        # @param [String] project_id Project identifier for the Stackdriver
-        #   Logging service. Used to create a default logger if one isn't
-        #   specified and a service account is used for authentication.
-        #   Optional.
-        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-        #   file path the file must be readable. Used to create a default logger
-        #   if one isn't specified and a service account is used for
-        #   authentication. Optional.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility reason. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil, project_id: nil, keyfile: nil
+        def initialize app, logger: nil, **kwargs
           @app = app
 
-          load_config project_id: project_id,
-                      keyfile: keyfile
-          fail ArgumentError, "project_id is required" if @project_id.nil?
+          load_config kwargs
 
           if logger
             @logger = logger
           else
             log_name = configuration.log_name
-            logging = Google::Cloud::Logging.new project: @project_id,
-                                                 keyfile: @keyfile
+            logging = Logging.new project: configuration.project_id,
+                                  keyfile: configuration.keyfile
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
               configuration.monitored_resource.labels)
@@ -264,24 +250,29 @@ module Google
         private
 
         ##
-        # @private Sync Middleware configuration parameters from multiple
-        # sources. The sources take precendence in the following order:
-        # explicit parameters; Google::Cloud::Logging.configure;
-        # Google::Cloud.configure; and finally the defaults.
-        def load_config project_id: nil, keyfile: nil
-          @project_id = project_id ||
-                        configuration.project_id ||
-                        Cloud.configure.project_id ||
-                        Logging::Project.default_project
-          @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
+        # Consolidate configurations from various sources. Also set
+        # instrumentation config parameters to default values if not set
+        # already.
+        #
+        def load_config **kwargs
+          configuration.project_id = kwargs[:project_id] ||
+                                     configuration.project_id
+          configuration.keyfile = kwargs[:keyfile] ||
+                                  configuration.keyfile
+          configuration.log_name_map ||= kwargs[:log_name_map] ||
+                                         configuration.log_name_map
 
-          # Set defaults
+          init_default_config
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       Logging::Project.default_project
+          configuration.keyfile ||= Cloud.configure.keyfile
           configuration.log_name ||= DEFAULT_LOG_NAME
           configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
-
-          # Ensure instrumentation configurations are aligned
-          configuration.project_id = @project_id
-          configuration.keyfile = @keyfile
         end
 
         ##

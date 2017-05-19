@@ -77,44 +77,6 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       end
     end
 
-    it "uses Google::Cloud::ErrorReporting.configure if parameters not given" do
-      stubbed_config = OpenStruct.new project_id: "another-project-id",
-                                      keyfile: "another-keyfile",
-                                      service_name: nil, service_version: nil
-
-      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
-        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
-          Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
-            ENV.stub :[], nil do
-              midware = Google::Cloud::ErrorReporting::Middleware.new nil
-              midware.project_id.must_equal "another-project-id"
-              midware.keyfile.must_equal "another-keyfile"
-            end
-          end
-        end
-      end
-    end
-
-    it "uses Google::Cloud.configure if parameters not given and " do
-      stubbed_er_config = OpenStruct.new project_id: nil, keyfile: nil, service_name: nil, service_version: nil
-      stubbed_gcloud_config = OpenStruct.new project_id: "gcloud-project-id",
-                                             keyfile: "gcloud-keyfile"
-
-      Google::Cloud::ErrorReporting::Project.stub :default_project, nil do
-        Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
-          Google::Cloud.stub :configure, stubbed_gcloud_config do
-            Google::Cloud::ErrorReporting.stub :configure, stubbed_er_config do
-              ENV.stub :[], nil do
-                midware = Google::Cloud::ErrorReporting::Middleware.new nil
-                midware.project_id.must_equal "gcloud-project-id"
-                midware.keyfile.must_equal "gcloud-keyfile"
-              end
-            end
-          end
-        end
-      end
-    end
-
     it "sets Google::Cloud::ErrorReporting\#@@default_client" do
       middleware
       Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).object_id.must_equal error_reporting.object_id

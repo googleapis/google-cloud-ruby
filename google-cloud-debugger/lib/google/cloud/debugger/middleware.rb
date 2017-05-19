@@ -29,22 +29,22 @@ module Google
         # @param [Google::Cloud::Debugger::Project] debugger A debugger to be
         #   used by this middleware. If not given, will construct a new one
         #   using the other parameters.
-        # @param [String] project_id Project identifier for the Stackdriver
-        #   Debugger service. Optional if a debugger is given.
-        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
-        #   either the JSON data or the path to a readable file. Optional if
-        #   a debugger is given.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility reason. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::Debugger::Middleware] A new
         #   Google::Cloud::Debugger::Middleware instance
         #
-        def initialize app, debugger: nil, project_id: nil, keyfile: nil
+        def initialize app, debugger: nil, **kwargs
           @app = app
-          load_config project_id: project_id, keyfile: keyfile
+
+          load_config kwargs
 
           @debugger = debugger ||
-                      Debugger.new(project: @project_id,
-                                   keyfile: @keyfile,
+                      Debugger.new(project: configuration.project_id,
+                                   keyfile: configuration.keyfile,
                                    module_name: configuration.module_name,
                                    module_version: configuration.module_version)
           # Immediately start the debugger agent
@@ -78,22 +78,30 @@ module Google
         # instrumentation config parameters to default values if not set
         # already.
         #
-        def load_config project_id: nil, keyfile: nil
-          @project_id = project_id ||
-                        configuration.project_id ||
-                        Cloud.configure.project_id ||
-                        Debugger::Project.default_project
-          @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
+        def load_config **kwargs
+          configuration.project_id = kwargs[:project_id] ||
+                                     configuration.project_id
+          configuration.keyfile = kwargs[:keyfile] ||
+                                  configuration.keyfile
 
-          # Set defaults
-          configuration.module_name ||=
-            Debugger::Project.default_module_name
+          configuration.module_name = kwargs[:module_name] ||
+                                      configuration.module_name
+          configuration.module_version = kwargs[:module_version] ||
+                                         configuration.module_version
+
+          init_default_config
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       Debugger::Project.default_project
+          configuration.keyfile ||= Cloud.configure.keyfile
+
+          configuration.module_name ||= Debugger::Project.default_module_name
           configuration.module_version ||=
             Debugger::Project.default_module_version
-
-          # Ensure instrumentation configurations are aligned
-          configuration.project_id = @project_id
-          configuration.keyfile = @keyfile
         end
 
         ##

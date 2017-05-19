@@ -114,12 +114,16 @@ module Google
         # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Trace::Service] service The service object.
         #     Optional if running on GCE.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility reason. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
         def initialize app,
-                       service: nil
+                       service: nil, **kwargs
           @app = app
 
-          load_config
+          load_config kwargs
 
           if service
             @service = service
@@ -355,11 +359,23 @@ module Google
         # instrumentation config parameters to default values if not set
         # already.
         #
-        def load_config
-          # Set defaults
+        def load_config **kwargs
+          configuration.capture_stack = kwargs[:capture_stack] ||
+                                        configuration.capture_stack
+          configuration.sampler = kwargs[:sampler] ||
+                                  configuration.sampler
+          configuration.span_id_generator = kwargs[:span_id_generator] ||
+                                            configuration.span_id_generator
+
+          init_default_config
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
           configuration.project_id ||= Cloud.configure.project_id ||
                                        Trace::Project.default_project
-          Google::Cloud::Trace.configure.capture_stack ||= false
+          configuration.capture_stack ||= false
         end
 
         ##

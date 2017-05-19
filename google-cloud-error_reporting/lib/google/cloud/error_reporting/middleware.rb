@@ -29,40 +29,31 @@ module Google
         attr_reader :error_reporting
 
         ##
-        # @private The Google Cloud project ID
-        attr_reader :project_id
-
-        ##
-        # @private The Google Cloud keyfile path
-        attr_reader :keyfile
-
-        ##
         # Construct a new instance of Middleware.
         #
         # @param [Rack::Application] app The Rack application
         # @param [Google::Cloud::ErrorReporting::Project] error_reporting A
         #   Google::Cloud::ErrorReporting::Project client for reporting
         #   exceptions
-        # @param [String] project_id Name of GCP project. Default to
-        #   {Google::Cloud::ErrorReporting::Project.default_project}.
-        #   Automatically discovered from GCP environments.
-        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-        #   file path the file must be readable.
-        #   {Google::Cloud::ErrorReporting::Project.default_service_version}.
-        #   Automatically discovered if on Google App Engine Flex.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility reason. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of
         #   Middleware
         #
-        def initialize app, error_reporting: nil, project_id: nil, keyfile: nil
+        def initialize app, error_reporting: nil, **kwargs
           require "rack"
           require "rack/request"
           @app = app
-          load_config project_id: project_id, keyfile: keyfile
 
-          @error_reporting = error_reporting ||
-                             ErrorReporting.new(project: @project_id,
-                                                keyfile: @keyfile)
+          load_config kwargs
+
+          @error_reporting =
+            error_reporting ||
+            ErrorReporting.new(project: configuration.project_id,
+                               keyfile: configuration.keyfile)
 
           # Set module default client to reuse the same client. Update module
           # configuration parameters.
@@ -160,26 +151,30 @@ module Google
         # instrumentation config parameters to default values if not set
         # already.
         #
-        def load_config project_id: nil, keyfile: nil
-          @project_id = project_id ||
-                        configuration.project_id ||
-                        Cloud.configure.project_id ||
-                        ErrorReporting::Project.default_project
-          @keyfile = keyfile || configuration.keyfile || Cloud.configure.keyfile
+        def load_config **kwargs
+          configuration.project_id = kwargs[:project_id] ||
+                                     configuration.project_id
+          configuration.keyfile = kwargs[:keyfile] ||
+                                  configuration.keyfile
+          configuration.service_name = kwargs[:service_name] ||
+                                       configuration.service_name
+          configuration.service_version = kwargs[:service_version] ||
+                                          configuration.service_version
+          configuration.ignore_classes = kwargs[:ignore_classes] ||
+                                         configuration.ignore_classes
 
-          # Set defaults
           init_default_config
-
-          # Ensure instrumentation configurations are aligned
-          configuration.project_id = @project_id
-          configuration.keyfile = @keyfile
         end
 
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       ErrorReporting::Project.default_project
+          configuration.keyfile ||= Cloud.configure.keyfile
           configuration.service_name ||=
             ErrorReporting::Project.default_service_name
+
           configuration.service_version ||=
             ErrorReporting::Project.default_service_version
           configuration.ignore_classes = Array(configuration.ignore_classes)
