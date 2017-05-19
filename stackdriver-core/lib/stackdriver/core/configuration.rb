@@ -18,55 +18,55 @@ module Stackdriver
     ##
     # @private Helps organize configuration options for Stackdriver
     # instrumentation libraries. It's initialized with a nested list of
-    # predefined option keys, then only allows getting and setting these
+    # predefined category keys, then only allows getting and setting these
     # predefined options.
     #
     # @example
-    #   nested_categories = [:nested1, {nested2: [:nested3]}]
-    #   config = Stackdriver::Core::Configuration.new nested: nested_categories
+    #   nested_categories = [:cat1, {cat2: [:cat3]}]
+    #   config = Stackdriver::Core::Configuration.new nested_categories
     #
     #   config.opt1        #=> nil
     #   config.opt1 = true #=> true
     #   config.opt1        #=> true
     #
-    #   config.nested1           #=> <Stackdriver::Core::Configuration>
-    #   config.nested2.nested3   #=> <Stackdriver::Core::Configuration>
+    #   config.cat1           #=> <Stackdriver::Core::Configuration>
+    #   config.cat2.cat3   #=> <Stackdriver::Core::Configuration>
     #
     class Configuration < Hash
       ##
       # Constructs a new instance of Configuration object.
       #
-      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
-      #   A Symbol, or nested Array and Hash of sub configuration categories.
-      #   A single symbol, or symbols in array, will be key(s) to next level of
-      #   categories. Nested hash represent sub categories with further nested
-      #   sub categories.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>]
+      #   categories A Symbol, or nested Array and Hash of sub configuration
+      #   categories. A single symbol, or symbols in array, will be key(s) to
+      #   next level of categories. Nested hash represent sub categories with
+      #   further nested sub categories.
       #
-      def initialize nested = {}
+      def initialize categories = {}
         super()
 
-        add_nested nested
+        add_options categories
       end
 
       ##
-      # Add nested sub configurations to a Configuration object
+      # Add nested sub configuration categories to a Configuration object
       #
-      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>] nested
-      #   A Symbol, or nested Array and Hash of sub configuration categories.
-      #   A single symbol, or symbols in array, will be key(s) to next level of
-      #   categories. Nested hash represent sub categories with further nested
-      #   sub categories.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>]
+      #   categories A Symbol, or nested Array and Hash of sub configuration
+      #   categories. A single symbol, or symbols in array, will be key(s) to
+      #   next level of categories. Nested hash represent sub categories with
+      #   further nested sub categories.
       #
       # @example
       #   config = Stackdriver::Core::Configuration.new
-      #   config.nest1 #=> nil
-      #   config.add_nested {nest1: [nest2]}
-      #   config.nest1 #=> <Stackdriver::Core::Configuration>
-      #   config.nest1.nest2 #=> <Stackdriver::Core::Configuration>
+      #   config.cat1 #=> nil
+      #   config.add_options {cat1: [:cat2]}
+      #   config.cat1 #=> <Stackdriver::Core::Configuration>
+      #   config.cat1.cat2 #=> <Stackdriver::Core::Configuration>
       #
-      def add_nested nested
-        nested = [nested].flatten(1)
-        nested.each do |sub_key|
+      def add_options categories
+        categories = [categories].flatten(1)
+        categories.each do |sub_key|
           case sub_key
           when Symbol
             self[sub_key] = self.class.new

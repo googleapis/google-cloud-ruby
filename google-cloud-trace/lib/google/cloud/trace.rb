@@ -194,7 +194,7 @@ module Google
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :trace
-        Google::Cloud.configure.add_nested :trace
+        Google::Cloud.configure.add_options :trace
       end
 
       ##

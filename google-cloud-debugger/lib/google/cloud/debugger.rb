@@ -323,7 +323,7 @@ module Google
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :debugger
-        Google::Cloud.configure.add_nested :debugger
+        Google::Cloud.configure.add_options :debugger
       end
 
       ##

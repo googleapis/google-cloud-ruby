@@ -53,11 +53,11 @@ describe Stackdriver::Core::Configuration do
     end
   end
 
-  describe "#add_nested" do
+  describe "#add_options" do
     it "introduces new nested categories" do
       configuration.k4.must_be_nil
 
-      configuration.add_nested [:k4, {k5: [:k6]}]
+      configuration.add_options [:k4, {k5: [:k6]}]
 
       configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
       configuration.k5.must_be_kind_of Stackdriver::Core::Configuration
@@ -67,7 +67,7 @@ describe Stackdriver::Core::Configuration do
     it "accepts simple hash with one symbol" do
       configuration.k4.must_be_nil
 
-      configuration.add_nested k4: :k5
+      configuration.add_options k4: :k5
 
       configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
       configuration.k4.k5.must_be_kind_of Stackdriver::Core::Configuration
