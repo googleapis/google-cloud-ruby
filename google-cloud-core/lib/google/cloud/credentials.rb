@@ -44,9 +44,10 @@ module Google
 
       def initialize keyfile, scope: nil
         verify_keyfile_provided! keyfile
-        if keyfile.is_a? Signet::OAuth2::Client
+        case keyfile
+        when Signet::OAuth2::Client
           @client = keyfile
-        elsif keyfile.is_a? Hash
+        when Hash
           hash = stringify_hash_keys keyfile
           hash["scope"] ||= scope
           @client = init_client hash
