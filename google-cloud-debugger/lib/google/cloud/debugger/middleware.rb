@@ -30,7 +30,7 @@ module Google
         #   used by this middleware. If not given, will construct a new one
         #   using the other parameters.
         # @param [Hash] *kwargs Hash of configuration settings. Used for
-        #   backward API compatibility reason. See the [Configuration
+        #   backward API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
         #
