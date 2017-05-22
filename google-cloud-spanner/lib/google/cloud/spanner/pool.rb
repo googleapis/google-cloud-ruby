@@ -59,6 +59,7 @@ module Google
         end
 
         def checkout_session
+          action = nil
           @mutex.synchronize do
             loop do
               read_session = session_queue.shift
@@ -66,13 +67,18 @@ module Google
               write_transaction = transaction_queue.shift
               return write_transaction.session if write_transaction
 
-              return new_session! if can_allocate_more_sessions?
+              if can_allocate_more_sessions?
+                action = :new
+                break
+              end
 
               fail SessionLimitError if @fail
 
               @resource.wait @mutex
             end
           end
+
+          return new_session! if action == :new
         end
 
         def checkin_session session
@@ -99,20 +105,31 @@ module Google
         end
 
         def checkout_transaction
+          action = nil
           @mutex.synchronize do
             loop do
               write_transaction = transaction_queue.shift
               return write_transaction if write_transaction
               read_session = session_queue.shift
-              return read_session.create_transaction if read_session
+              if read_session
+                action = read_session
+                break
+              end
 
-              return new_transaction! if can_allocate_more_sessions?
+              if can_allocate_more_sessions?
+                action = :new
+                break
+              end
 
               fail SessionLimitError if @fail
 
               @resource.wait @mutex
             end
           end
+          if action.is_a? Google::Cloud::Spanner::Session
+            return action.create_transaction
+          end
+          return new_transaction! if action == :new
         end
 
         def checkin_transaction tx
@@ -154,16 +171,26 @@ module Google
           @transaction_queue = []
           ensure_valid_thread!
           # init session queue
-          @min.times { session_queue << new_session! }
+          @min.times do
+            s = new_session!
+            @mutex.synchronize do
+              session_queue << s
+            end
+          end
           # init transaction queue
           (@min * @write_ratio).round.times do
-            transaction_queue << checkout_session.create_transaction
+            tx = checkout_session.create_transaction
+            @mutex.synchronize do
+              transaction_queue << tx
+            end
           end
         end
 
         def new_session!
           session = @client.create_new_session
-          all_sessions << session
+          @mutex.synchronize do
+            all_sessions << session
+          end
           session
         end
 
@@ -172,6 +199,7 @@ module Google
         end
 
         def can_allocate_more_sessions?
+          # This is expected to be called from within a synchronize block
           all_sessions.size < @max
         end
 
