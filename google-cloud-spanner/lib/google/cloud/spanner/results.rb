@@ -256,7 +256,8 @@ module Google
           elsif left.kind == :list_value
             left_val = left.list_value.values.pop
             right_val = right.list_value.values.shift
-            if left_val.kind == :string_value && right_val.kind == :string_value
+            if (left_val.kind == right_val.kind) &&
+               (left_val.kind == :list_value || left_val.kind == :string_value)
               left.list_value.values << merge(left_val, right_val)
             else
               left.list_value.values << left_val
