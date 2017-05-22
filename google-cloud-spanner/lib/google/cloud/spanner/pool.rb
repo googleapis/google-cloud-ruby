@@ -83,7 +83,7 @@ module Google
           @mutex.synchronize do
             session_queue.push session
 
-            @resource.broadcast
+            @resource.signal
           end
 
           nil
@@ -123,7 +123,7 @@ module Google
           @mutex.synchronize do
             transaction_queue.push tx.session.create_transaction
 
-            @resource.broadcast
+            @resource.signal
           end
 
           nil
