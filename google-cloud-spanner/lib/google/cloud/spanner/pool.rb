@@ -32,7 +32,7 @@ module Google
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
         def initialize client, min: 10, max: 100, keepalive: 1800,
-                       write_ratio: 0.3, fail: true
+                       write_ratio: 0.3, fail: true, block_on_init: nil
           @client = client
           @min = min
           @max = max
@@ -46,7 +46,7 @@ module Google
           @resource = ConditionVariable.new
 
           # initialize pool and availability queue
-          init
+          init block_on_init: block_on_init
         end
 
         def with_session
@@ -165,25 +165,34 @@ module Google
 
         private
 
-        def init
+        def init block_on_init: nil
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
           ensure_valid_thread!
           # init session queue
-          @min.times do
-            s = new_session!
-            @mutex.synchronize do
-              session_queue << s
+          num_transactions = (@min * @write_ratio).round
+          num_sessions = @min.to_i - num_transactions
+          init_session_threads = num_sessions.times.map do
+            Thread.new do
+              s = new_session!
+              @mutex.synchronize do
+                session_queue << s
+              end
             end
           end
+          init_session_threads.map(&:join) if block_on_init
           # init transaction queue
-          (@min * @write_ratio).round.times do
-            tx = checkout_session.create_transaction
-            @mutex.synchronize do
-              transaction_queue << tx
+          init_transaction_threads = num_transactions.times.map do
+            Thread.new do
+              tx = new_transaction!
+              @mutex.synchronize do
+                transaction_queue << tx
+              end
             end
           end
+          init_transaction_threads.map(&:join) if block_on_init
+          # Do not block on calling Thread#join on the threads by default
         end
 
         def new_session!
