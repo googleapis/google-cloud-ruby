@@ -15,7 +15,6 @@
 
 gem "google-cloud-error_reporting"
 gem "google-cloud-logging"
-gem "google-cloud-monitoring"
 gem "google-cloud-trace"
 
 require "google/cloud/logging"
@@ -42,7 +41,6 @@ require "legacy_stackdriver"
 # Specifically, this gem is a convenience package that loads the following gems:
 # - [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
 # - [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting)
-# - [google-cloud-monitoring](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring)
 # - [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace)
 #
 # On top of that, stackdriver gem automatically activates the following
