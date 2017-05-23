@@ -35,7 +35,7 @@ describe Google::Cloud::Trace::Railtie do
 
   after {
     Google::Cloud.configure.delete :use_trace
-    Google::Cloud::Trace.configure.clear
+    Google::Cloud::Trace.configure.instance_variable_get(:@configs).clear
   }
 
   describe ".consolidate_rails_config" do

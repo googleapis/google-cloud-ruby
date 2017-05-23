@@ -119,8 +119,7 @@ module Google
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
         #
-        def initialize app,
-                       service: nil, **kwargs
+        def initialize app, service: nil, **kwargs
           @app = app
 
           load_config kwargs

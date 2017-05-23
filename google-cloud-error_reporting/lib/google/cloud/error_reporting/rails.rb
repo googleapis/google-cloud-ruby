@@ -31,8 +31,9 @@ module Google
       #
       # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
       # inserted after ActionDispatch::DebugExceptions or
-      # ActionDispatch::ShowExceptions Middleware, which
-      # allows it to actually rescue all Exceptions and re-throw them back up.
+      # ActionDispatch::ShowExceptions Middleware, which allows it to intercept
+      # and handle all Exceptions without interfering with Rails's normal error
+      # pages.
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # on how to configure the Railtie and Middleware.
@@ -54,7 +55,7 @@ module Google
         def self.init_middleware app
           # In later versions of Rails, ActionDispatch::DebugExceptions is
           # responsible for catching exceptions. But it didn't exist until
-          # Rails 3.2. So we use ShowExceptions as pivot for earlier Rails.
+          # Rails 3.2. So we use ShowExceptions as fallback for earlier Rails.
           rails_exception_middleware =
             if defined? ::ActionDispatch::DebugExceptions
               ::ActionDispatch::DebugExceptions

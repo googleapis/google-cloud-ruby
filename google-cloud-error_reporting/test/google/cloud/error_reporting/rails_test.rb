@@ -33,7 +33,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
   end
 
   after {
-    Google::Cloud::ErrorReporting.configure.clear
+    Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs).clear
     Google::Cloud.configure.delete :use_error_reporting
   }
 

@@ -73,9 +73,7 @@ module Google
           app.config.logger = logging.logger log_name, resource
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
-                                       logger: app.config.logger,
-                                       project_id: project_id,
-                                       keyfile: keyfile
+                                       logger: app.config.logger
         end
 
         ##
@@ -124,8 +122,8 @@ module Google
             config.log_name_map ||= logging_config.log_name_map
             config.monitored_resource.type ||=
               logging_config.monitored_resource.type
-            config.monitored_resource.labels.merge!(
-              logging_config.monitored_resource.labels)
+            config.monitored_resource.labels ||=
+              logging_config.monitored_resource.labels.to_h
           end
         end
 

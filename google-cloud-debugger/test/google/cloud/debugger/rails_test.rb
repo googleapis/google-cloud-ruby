@@ -31,13 +31,8 @@ describe Google::Cloud::Debugger::Railtie do
     config
   end
 
-  before {
-    Google::Cloud::Debugger.configure.clear
-    Google::Cloud.configure.delete :use_debugger
-  }
-
   after {
-    Google::Cloud::Debugger.configure.clear
+    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
     Google::Cloud.configure.delete :use_debugger
   }
 

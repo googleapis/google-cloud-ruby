@@ -332,9 +332,7 @@ module Google
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :logging
-        Google::Cloud.configure.add_options logging: {
-          monitored_resource: :labels
-        }
+        Google::Cloud.configure.add_options logging: :monitored_resource
       end
 
       ##

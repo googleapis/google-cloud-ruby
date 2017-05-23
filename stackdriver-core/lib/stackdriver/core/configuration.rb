@@ -32,7 +32,7 @@ module Stackdriver
     #   config.cat1           #=> <Stackdriver::Core::Configuration>
     #   config.cat2.cat3   #=> <Stackdriver::Core::Configuration>
     #
-    class Configuration < Hash
+    class Configuration
       ##
       # Constructs a new instance of Configuration object.
       #
@@ -43,7 +43,7 @@ module Stackdriver
       #   further nested sub categories.
       #
       def initialize categories = {}
-        super()
+        @configs = {}
 
         add_options categories
       end
@@ -82,15 +82,22 @@ module Stackdriver
       end
 
       ##
-      # @private Wrap inherited #[] method. Force key to be a Symbol.
+      # Assign an option with `key` to value, while forcing `key` to be a
+      # Symbol.
       def []= key, value
-        super key.to_sym, value
+        @configs[key.to_sym] = value
       end
 
       ##
-      # @private Wrap inherited #[]= method. Force key to be a Symbol.
+      # Get the option with `key`, while forcing `key` to be a Symbol.
       def [] key
-        super key.to_sym
+        @configs[key.to_sym]
+      end
+
+      ##
+      # Delete the option with `key`, while forcing `key` to be a Symbol.
+      def delete key
+        @configs.delete key.to_sym
       end
 
       ##
@@ -101,7 +108,9 @@ module Stackdriver
       # @return [Boolean] True if the inquired key is a valid option for this
       #   Configuration object. False otherwise.
       #
-      alias_method :option?, :key?
+      def option? key
+        @configs.key? key.to_sym
+      end
 
       ##
       # @private Dynamic getters and setters

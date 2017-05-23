@@ -40,7 +40,7 @@ describe Google::Cloud::Logging::Railtie do
     Google::Cloud::Logging.configure.delete :log_name
     Google::Cloud::Logging.configure.delete :log_name_map
     Google::Cloud::Logging.configure.monitored_resource.delete :type
-    Google::Cloud::Logging.configure.monitored_resource.labels.clear
+    Google::Cloud::Logging.configure.monitored_resource.delete :labels
     Google::Cloud.configure.delete :use_logging
   }
 

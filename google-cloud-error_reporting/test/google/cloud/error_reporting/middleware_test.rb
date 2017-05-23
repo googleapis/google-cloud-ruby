@@ -59,7 +59,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
 
   after {
     # Clear configuration values between each test
-    Google::Cloud::ErrorReporting.configure.clear
+    Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs).clear
     Google::Cloud.configure.delete :use_error_reporting
   }
 

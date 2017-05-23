@@ -74,13 +74,11 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       config.span_id_generator = mock_span_id_generator
     end
     Google::Cloud::Trace::Middleware.new base_app
-                                         # sampler: sampler,
-                                         # span_id_generator: mock_span_id_generator
   }
 
   after {
     Google::Cloud.configure.delete :use_trace
-    Google::Cloud::Trace.configure.clear
+    Google::Cloud::Trace.configure.instance_variable_get(:@configs).clear
   }
 
   def base_app(&block)
@@ -206,7 +204,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
         middleware.call env
       end
 
-      # mock.verify
+      mock.verify
     end
   end
 end

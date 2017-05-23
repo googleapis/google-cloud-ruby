@@ -79,7 +79,8 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.project_id = kwargs[:project_id] ||
+          configuration.project_id = kwargs[:project] ||
+                                     kwargs[:project_id] ||
                                      configuration.project_id
           configuration.keyfile = kwargs[:keyfile] ||
                                   configuration.keyfile
