@@ -91,45 +91,6 @@ module Google
         # rubocop:enable LineLength
 
         ##
-        # Reloads the session resource. Useful for determining if the session is
-        # still valid on the Spanner API.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.reload! # API call
-        #
-        def reload!
-          ensure_service!
-          @grpc = service.get_session path
-          self
-        end
-
-        ##
-        # Permanently deletes the session.
-        #
-        # @return [Boolean] Returns `true` if the session was deleted.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.delete_session
-        #
-        def delete_session
-          ensure_service!
-          service.delete_session path
-          true
-        end
-
-        ##
         # Executes a SQL query.
         #
         # Arguments can be passed using `params`, Ruby types are mapped to
@@ -532,6 +493,15 @@ module Google
         end
 
         ##
+        # Reloads the session resource. Useful for determining if the session is
+        # still valid on the Spanner API.
+        def reload!
+          ensure_service!
+          @grpc = service.get_session path
+          self
+        end
+
+        ##
         # @private
         # Keeps the session alive by executing `"SELECT 1"`.
         def keepalive!
@@ -546,13 +516,19 @@ module Google
         end
 
         ##
+        # Permanently deletes the session.
+        def release!
+          ensure_service!
+          service.delete_session path
+        end
+
+        ##
         # @private
-        # Ensures that the session has been used recently. If not, call
-        # keepalive.
-        def ensure_valid! since: 3000
-          return keepalive! if @last_updated_at.nil?
-          return nil if @last_updated_at + since > Time.now
-          keepalive!
+        # Determines if the session has been idle longer than the given
+        # duration.
+        def idle_since? duration
+          return true if @last_updated_at.nil?
+          Time.now > @last_updated_at + duration
         end
 
         ##
@@ -560,6 +536,12 @@ module Google
         # Google::Spanner::V1::Session.
         def self.from_grpc grpc, service
           new grpc, service
+        end
+
+        ##
+        # @private
+        def session
+          self
         end
 
         protected

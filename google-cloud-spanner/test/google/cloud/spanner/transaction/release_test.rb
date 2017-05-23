@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,20 +14,23 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
+describe Google::Cloud::Spanner::Session, :release, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:transaction_id) { "tx789" }
+  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
 
-  it "can reload itself" do
+  it "can release itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
-    session.service.mocked_service = mock
+    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
+    spanner.service.mocked_service = mock
 
-    session.reload!
+    transaction.release!
 
     mock.verify
   end

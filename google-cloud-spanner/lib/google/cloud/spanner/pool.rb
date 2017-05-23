@@ -32,7 +32,8 @@ module Google
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
         def initialize client, min: 10, max: 100, keepalive: 1800,
-                       write_ratio: 0.3, fail: true, block_on_init: nil
+                       write_ratio: 0.3, fail: true, block_on_init: nil,
+                       skip_background_thread: nil
           @client = client
           @min = min
           @max = max
@@ -46,7 +47,8 @@ module Google
           @resource = ConditionVariable.new
 
           # initialize pool and availability queue
-          init block_on_init: block_on_init
+          init block_on_init: block_on_init,
+               skip_background_thread: skip_background_thread
         end
 
         def with_session
@@ -166,7 +168,7 @@ module Google
           @mutex.synchronize do
             @all_sessions.map do |s|
               Thread.new do
-                s.delete_session rescue nil
+                s.release!
               end
             end.map(&:join)
             @all_sessions = []
@@ -177,13 +179,43 @@ module Google
           true
         end
 
+        def keepalive_or_release!
+          to_keepalive = []
+          to_release = []
+
+          @mutex.synchronize do
+            available_count = session_queue.count + transaction_queue.count
+            release_count = @min - available_count
+            release_count = 0 if release_count < 0
+
+            to_keepalive += (session_queue + transaction_queue).select do |x|
+              x.idle_since? @keepalive
+            end
+
+            # Remove a random portion of the sessions and transactions
+            to_release = to_keepalive.sample release_count
+            to_keepalive -= to_release
+
+            # Remove those to be released from circulation
+            @all_sessions -= to_release.map(&:session)
+            @session_queue -= to_release
+            @transaction_queue -= to_release
+          end
+
+          to_release.map! { |x| Thread.new { x.release! } }
+          to_keepalive.map! { |x| Thread.new { x.keepalive! } }
+
+          # join all the threads before returning
+          (to_release + to_keepalive).map(&:join)
+        end
+
         private
 
-        def init block_on_init: nil
+        def init block_on_init: nil, skip_background_thread: nil
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
-          ensure_valid_thread!
+          ensure_background_thread! unless skip_background_thread
           # init session queue
           num_transactions = (@min * @write_ratio).round
           num_sessions = @min.to_i - num_transactions
@@ -226,29 +258,11 @@ module Google
           all_sessions.size < @max
         end
 
-        def ensure_valid!
-          ensure_valid_threads = []
-          @mutex.synchronize do
-            ensure_valid_threads += session_queue.map do |s|
-              Thread.new do
-                s.ensure_valid! since: @keepalive
-              end
-            end
-            ensure_valid_threads += transaction_queue.map do |tx|
-              Thread.new do
-                tx.session.ensure_valid! since: @keepalive
-              end
-            end
-          end
-          # join all the threads before returning
-          ensure_valid_threads.map(&:join)
-        end
-
-        def ensure_valid_thread!
+        def ensure_background_thread!
           @thread ||= Thread.new do
             # before calling keepalive
             loop do
-              ensure_valid!
+              keepalive_or_release!
               sleep 300
             end
           end

@@ -470,14 +470,26 @@ module Google
 
         ##
         # @private
-        # Keeps the transaction alive by calling SELECT 1
+        # Keeps the transaction current by creating a new transaction.
         def keepalive!
-          ensure_service!
-          execute "SELECT 1"
-          return true
-        rescue Google::Cloud::NotFoundError
-          @grpc = session.create_transaction.grpc
-          return false
+          ensure_session!
+          @grpc = session.create_transaction.instance_variable_get :@grpc
+        end
+
+        ##
+        # @private
+        # Permanently deletes the transaction and session.
+        def release!
+          ensure_session!
+          session.release!
+        end
+
+        ##
+        # @private
+        # Determines if the transaction has been idle longer than the given
+        # duration.
+        def idle_since? duration
+          session.idle_since? duration
         end
 
         ##

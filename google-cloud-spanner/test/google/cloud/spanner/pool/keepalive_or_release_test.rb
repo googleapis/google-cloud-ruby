@@ -14,15 +14,18 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
+describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:transaction_id) { "tx789" }
+  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:pool) { client.instance_variable_get :@pool }
   let :results_hash do
     {
@@ -42,6 +45,11 @@ describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
 
+  before do
+    # kill the background thread before starting the tests
+    pool.instance_variable_get(:@thread).kill
+  end
+
   after do
     # Close the client and release the keepalive thread
     client.instance_variable_get(:@pool).all_sessions = []
@@ -51,7 +59,6 @@ describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
   it "calls keepalive on the sessions that need it" do
     # update the session so it was last updated an hour ago
     session.instance_variable_set :@last_updated_at, Time.now - 60*60
-    sleep 0.25 # sleep enough that the thread ensure_valid finishes
     # set the session in the pool
     pool.all_sessions = [session]
     pool.session_queue = [session]
@@ -60,15 +67,30 @@ describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
     session.service.mocked_service = mock
 
-    pool.send :ensure_valid!
+    pool.keepalive_or_release!
 
     mock.verify
   end
 
-  it "doesn't calls keepalive on sessions that don't need it" do
+  it "calls keepalive on the transactions that need it" do
+    # update the session so it was last updated an hour ago
+    session.instance_variable_set :@last_updated_at, Time.now - 60*60
+    # set the session in the pool
+    pool.all_sessions = [session]
+    pool.transaction_queue = [transaction]
+
+    mock = Minitest::Mock.new
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    session.service.mocked_service = mock
+
+    pool.keepalive_or_release!
+
+    mock.verify
+  end
+
+  it "doesn't call keepalive on sessions that don't need it" do
     # update the session so it was last updated now
     session.instance_variable_set :@last_updated_at, Time.now
-    sleep 0.25 # sleep enough that the thread ensure_valid finishes
     # set the session in the pool
     pool.all_sessions = [session]
     pool.session_queue = [session]
@@ -76,7 +98,22 @@ describe Google::Cloud::Spanner::Pool, :ensure_valid!, :mock_spanner do
     mock = Minitest::Mock.new
     session.service.mocked_service = mock
 
-    pool.send :ensure_valid!
+    pool.keepalive_or_release!
+
+    mock.verify
+  end
+
+  it "doesn't call keepalive on transactions that don't need it" do
+    # update the session so it was last updated now
+    session.instance_variable_set :@last_updated_at, Time.now
+    # set the session in the pool
+    pool.all_sessions = [session]
+    pool.transaction_queue = [transaction]
+
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+
+    pool.keepalive_or_release!
 
     mock.verify
   end

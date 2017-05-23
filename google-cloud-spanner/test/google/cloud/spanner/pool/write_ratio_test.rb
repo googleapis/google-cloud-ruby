@@ -41,7 +41,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [session_path(instance_id, database_id, "session-002"), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5, block_on_init: true
+    pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5, block_on_init: true, skip_background_thread: true
 
     pool.all_sessions.size.must_equal 2
     pool.session_queue.size.must_equal 1
@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-005-01"), [session_path(instance_id, database_id, "session-005"), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    pool = Google::Cloud::Spanner::Pool.new client, min: 5, write_ratio: 0.5, block_on_init: true
+    pool = Google::Cloud::Spanner::Pool.new client, min: 5, write_ratio: 0.5, block_on_init: true, skip_background_thread: true
 
     pool.all_sessions.size.must_equal 5
     pool.session_queue.size.must_equal 2
@@ -89,7 +89,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-008-01"), [session_path(instance_id, database_id, "session-008"), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    pool = Google::Cloud::Spanner::Pool.new client, min: 8, write_ratio: 0.3, block_on_init: true
+    pool = Google::Cloud::Spanner::Pool.new client, min: 8, write_ratio: 0.3, block_on_init: true, skip_background_thread: true
 
     pool.all_sessions.size.must_equal 8
     pool.session_queue.size.must_equal 6
