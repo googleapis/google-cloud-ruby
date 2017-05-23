@@ -10,33 +10,33 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Build the gem locally.
 
-  ```sh
-  $ rake build
-  ```
+    ```sh
+    $ rake build
+    ```
 
 1. Install the gem locally.
 
-  ```sh
-  $ rake install
-  ```
+    ```sh
+    $ rake install
+    ```
 
 1. Using IRB (not `rake console`!), manually test the gem that you installed in the previous step.
 
 1. Review the changes since the last release.
 
-  ```sh
-  $ bundle exec rake changes[<gem>]
-  ```
+    ```sh
+    $ bundle exec rake changes[<gem>]
+    ```
 
 1. Review the commits in the changes output, making notes of significant changes. (For examples of what a significant change is, browse the changes in the gem's `CHANGELOG.md`
 
 1. If you haven't already, switch to the master branch, ensure that you have no changes, and pull from origin.
 
-  ```sh
-  $ git checkout master
-  $ git status
-  $ git pull --rebase
-  ```
+    ```sh
+    $ git checkout master
+    $ git status
+    $ git pull --rebase
+    ```
 
 1. Edit the gem's `CHANGELOG.md`. Using your notes from the previous step, write bullet-point lists of the major and minor changes. You can also add examples, fixes, thank yous, and anything else helpful or relevant. See google-cloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
 
@@ -48,33 +48,33 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Commit your changes. Copy and paste the significant points from your `CHANGELOG.md` edit as the description in your commit message.
 
-  ```sh
-  $ git commit -am "Release <gem> <version> ..."
-  ```
+    ```sh
+    $ git commit -am "Release <gem> <version> ..."
+    ```
 
 1. Ensure again that you have every commit from `origin master`.
 
-  ```sh
-  $ git pull --rebase
-  ```
+    ```sh
+    $ git pull --rebase
+    ```
 
 1. Tag the version.
 
-  ```sh
-  $ git tag <gem>/v<version>
-  ```
+    ```sh
+    $ git tag <gem>/v<version>
+    ```
 
 1. Push the tag.
 
-  ```sh
-  $ git push origin <gem>/v<version>
-  ```
+    ```sh
+    $ git push origin <gem>/v<version>
+    ```
 
 1. Push the commit to the master branch.
 
-  ```sh
-  $ git push
-  ```
+    ```sh
+    $ git push
+    ```
 
 1. On the [google-cloud-ruby releases page](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases), click [Draft a new release](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/new). Complete the form. Include the bullet-point lists of the major and minor changes from the gem's `CHANGELOG.md`. You can also add examples, fixes, thank yous, and anything else helpful or relevant. See google-cloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
 
