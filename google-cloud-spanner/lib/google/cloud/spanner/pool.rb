@@ -204,10 +204,21 @@ module Google
         end
 
         def ensure_valid!
-          session_queue.each { |s| s.ensure_valid! since: @keepalive }
-          transaction_queue.each do |tx|
-            tx.session.ensure_valid! since: @keepalive
+          ensure_valid_threads = []
+          @mutex.synchronize do
+            ensure_valid_threads += session_queue.map do |s|
+              Thread.new do
+                s.ensure_valid! since: @keepalive
+              end
+            end
+            ensure_valid_threads += transaction_queue.map do |tx|
+              Thread.new do
+                tx.session.ensure_valid! since: @keepalive
+              end
+            end
           end
+          # join all the threads before returning
+          ensure_valid_threads.map(&:join)
         end
 
         def ensure_valid_thread!
