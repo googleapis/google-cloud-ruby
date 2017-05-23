@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.1 / 2017-05-23
+
+* Fix error handling (adrian-gomez)
+
 ### 0.23.0 / 2017-03-31
 
 * No changes
