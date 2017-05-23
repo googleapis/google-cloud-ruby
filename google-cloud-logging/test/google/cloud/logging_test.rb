@@ -166,4 +166,14 @@ describe Google::Cloud do
       end
     end
   end
+
+  describe ".configure" do
+    it "has Google::Cloud.configure.logging initialized already" do
+      Google::Cloud.configure.option?(:logging).must_equal true
+    end
+
+    it "operates on the same Configuration object as Google::Cloud.configure.logging" do
+      Google::Cloud::Logging.configure.must_equal Google::Cloud.configure.logging
+    end
+  end
 end

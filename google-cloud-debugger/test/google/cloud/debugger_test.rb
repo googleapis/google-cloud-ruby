@@ -137,6 +137,16 @@ describe Google::Cloud do
     end
   end
 
+  describe ".configure" do
+    it "has Google::Cloud.configure.debugger initialized already" do
+      Google::Cloud.configure.option?(:debugger).must_equal true
+    end
+
+    it "operates on the same Configuration object as Google::Cloud.configure.debugger" do
+      Google::Cloud::Debugger.configure.must_equal Google::Cloud.configure.debugger
+    end
+  end
+
   describe "Debugger.new" do
     let(:default_credentials) { OpenStruct.new empty: true }
     let(:default_module_name) { "default-utest-service" }

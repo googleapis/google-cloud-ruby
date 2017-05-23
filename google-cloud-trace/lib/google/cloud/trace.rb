@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "stackdriver/core/trace_context"
 require "google-cloud-trace"
 require "google/cloud/trace/version"
 require "google/cloud/trace/credentials"
@@ -28,11 +27,12 @@ require "google/cloud/trace/span_kind"
 require "google/cloud/trace/time_sampler"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
+require "stackdriver/core"
 
 module Google
   module Cloud
     ##
-    # # Stackdriver Trace
+    # # Trace
     #
     # The Stackdriver Trace service collects and stores latency data from your
     # application and displays it in the Google Cloud Platform Console, giving
@@ -191,6 +191,12 @@ module Google
     module Trace
       THREAD_KEY = :__stackdriver_trace_span__
 
+      # Initialize :error_reporting as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :trace
+        Google::Cloud.configure.add_options :trace
+      end
+
       ##
       # Creates a new object for connecting to the Stackdriver Trace service.
       # Each call creates a new connection.
@@ -334,6 +340,22 @@ module Google
         else
           yield nil
         end
+      end
+
+      ##
+      # Configure the Stackdriver Trace instrumentation Middleware.
+      #
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # for full configuration parameters.
+      #
+      # @return [Stackdriver::Core::Configuration] The configuration object
+      #   the Google::Cloud::ErrorReporting module uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.trace if block_given?
+
+        Google::Cloud.configure.trace
       end
     end
   end

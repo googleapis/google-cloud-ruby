@@ -18,17 +18,12 @@ require "google/cloud/configuration"
 
 describe Google::Cloud do
   describe ".configure" do
-    it "allows the right config options" do
+    it "allows the config options" do
       config = Google::Cloud.configure
-      Google::Cloud::Configuration::CONFIG_OPTIONS.each do |option|
-        config.option?(option).must_equal true
-      end
-    end
 
-    it "doesn't allow the wrong option" do
-      assert_raises RuntimeError do
-        Google::Cloud.configure.wrong_opt123
-      end
+      config.opt1.must_be_nil
+      config.opt1 = "value"
+      config.opt1.must_equal "value"
     end
 
     it "returns same object between calls" do

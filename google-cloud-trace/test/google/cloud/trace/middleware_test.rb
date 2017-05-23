@@ -69,9 +69,16 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     ::Proc.new { my_span_id }
   }
   let(:base_middleware) {
-    Google::Cloud::Trace::Middleware.new base_app,
-                                         sampler: sampler,
-                                         span_id_generator: mock_span_id_generator
+    Google::Cloud::Trace.configure do |config|
+      config.sampler = sampler
+      config.span_id_generator = mock_span_id_generator
+    end
+    Google::Cloud::Trace::Middleware.new base_app
+  }
+
+  after {
+    Google::Cloud.configure.delete :use_trace
+    Google::Cloud::Trace.configure.instance_variable_get(:@configs).clear
   }
 
   def base_app(&block)
@@ -160,11 +167,13 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
+      Google::Cloud::Trace.configure do |config|
+        config.sampler = sampler
+        config.span_id_generator = mock_span_id_generator
+      end
       middleware = Google::Cloud::Trace::Middleware.new \
         base_app,
-        sampler: sampler,
-        service: tracer.service,
-        span_id_generator: mock_span_id_generator
+        service: tracer.service
       result = ::Time.stub :now, start_time do
         middleware.call env
       end
@@ -183,12 +192,15 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
         Google::Cloud::Trace.get.span_id.must_equal my_span_id
         ["200", {}, "Hello, world!\n"]
       end
+
+      Google::Cloud::Trace.configure do |config|
+        config.sampler = sampler
+        config.span_id_generator = mock_span_id_generator
+      end
       middleware = Google::Cloud::Trace::Middleware.new \
         base_app(&myapp),
-        sampler: sampler,
-        service: tracer.service,
-        span_id_generator: mock_span_id_generator
-      result = ::Time.stub :now, start_time do
+        service: tracer.service
+      ::Time.stub :now, start_time do
         middleware.call env
       end
 

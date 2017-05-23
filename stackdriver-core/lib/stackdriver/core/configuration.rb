@@ -18,107 +18,108 @@ module Stackdriver
     ##
     # @private Helps organize configuration options for Stackdriver
     # instrumentation libraries. It's initialized with a nested list of
-    # predefined option keys, then only allows getting and setting these
+    # predefined category keys, then only allows getting and setting these
     # predefined options.
     #
     # @example
-    #   options = [:opt1, {category1: [:opt2]}, {category2: [:opt3]}]
-    #   config = Stackdriver::Core::Configuration.new options: options
+    #   nested_categories = [:cat1, {cat2: [:cat3]}]
+    #   config = Stackdriver::Core::Configuration.new nested_categories
     #
-    #   config.opt1 = true
-    #   config.category1.opt2 = false
+    #   config.opt1        #=> nil
+    #   config.opt1 = true #=> true
+    #   config.opt1        #=> true
     #
-    #   config.opt1           #=> true
-    #   config.category1.opt2 #=> false
-    #   config.category2.opt3 #=> nil
-    #   config.opt4           #=> RuntimeError: Unrecognized option: opt4
+    #   config.cat1           #=> <Stackdriver::Core::Configuration>
+    #   config.cat2.cat3   #=> <Stackdriver::Core::Configuration>
     #
     class Configuration
       ##
       # Constructs a new instance of Configuration object.
       #
-      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
-      #   or Hash of predefined option keys. Symbols in array will be option
-      #   keys for current level. Nested hash translates to nested Configuration
-      #   objects with nested options.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>]
+      #   categories A Symbol, or nested Array and Hash of sub configuration
+      #   categories. A single symbol, or symbols in array, will be key(s) to
+      #   next level of categories. Nested hash represent sub categories with
+      #   further nested sub categories.
       #
-      def initialize options = []
+      def initialize categories = {}
         @configs = {}
 
-        init_options options
+        add_options categories
       end
 
       ##
-      # Add more valid options to a Configuration object
+      # Add nested sub configuration categories to a Configuration object
       #
-      # @param [Array<Symbol, Hash>, Hash<Symbol, Array>] options A nested Array
-      #   or Hash of predefined option keys. Symbols in array will be option
-      #   keys for current level. Nested hash translates to nested Configuration
-      #   objects with nested options.
+      # @param [Symbol, Array<Symbol, Hash>, Hash<Symbol, (Array, Hash)>]
+      #   categories A Symbol, or nested Array and Hash of sub configuration
+      #   categories. A single symbol, or symbols in array, will be key(s) to
+      #   next level of categories. Nested hash represent sub categories with
+      #   further nested sub categories.
       #
       # @example
-      #   config = Stackdriver::Core::Configuration.new options: [:opt1]
-      #   config.opt2 #=> RuntimeError: Unrecognized option: opt2
+      #   config = Stackdriver::Core::Configuration.new
+      #   config.cat1 #=> nil
+      #   config.add_options {cat1: [:cat2]}
+      #   config.cat1 #=> <Stackdriver::Core::Configuration>
+      #   config.cat1.cat2 #=> <Stackdriver::Core::Configuration>
       #
-      #   config.add_otpions options: [:opt2]
-      #   config.opt2 #=> nil
-      #
-      def add_options options
-        init_options options
+      def add_options categories
+        categories = [categories].flatten(1)
+        categories.each do |sub_key|
+          case sub_key
+          when Symbol
+            self[sub_key] = self.class.new
+          when Hash
+            sub_key.each do |k, v|
+              self[k] = self.class.new v
+            end
+          else
+            fail ArgumentError \
+              "Configuration option can only be Symbol or Hash"
+          end
+        end
+      end
+
+      ##
+      # Assign an option with `key` to value, while forcing `key` to be a
+      # Symbol.
+      def []= key, value
+        @configs[key.to_sym] = value
+      end
+
+      ##
+      # Get the option with `key`, while forcing `key` to be a Symbol.
+      def [] key
+        @configs[key.to_sym]
+      end
+
+      ##
+      # Delete the option with `key`, while forcing `key` to be a Symbol.
+      def delete key
+        @configs.delete key.to_sym
       end
 
       ##
       # Check if the Configuration object has this option
       #
-      # @param [Symbol] option The key to check for.
+      # @param [Symbol] key The key to check for.
       #
       # @return [Boolean] True if the inquired key is a valid option for this
       #   Configuration object. False otherwise.
       #
-      def option? option
-        @configs.key? option
+      def option? key
+        @configs.key? key.to_sym
       end
 
       ##
       # @private Dynamic getters and setters
       def method_missing mid, *args
-        match = mid.to_s.match(/(\w+)(=?)$/)
-        fail NoMethodError, mid unless match
-
-        config_key = match[1].to_sym
-        assignment = !match[2].empty?
-
-        if @configs.key? config_key
-          if assignment
-            if @configs[config_key].is_a? Stackdriver::Core::Configuration
-              fail "#{config_key} is a sub Configuration group. Not an option."
-            else
-              @configs[config_key] = args.first
-            end
-          else
-            return @configs[config_key]
-          end
+        method_string = mid.to_s
+        if method_string.chomp!("=")
+          self[method_string] = args.first
         else
-          fail "Unrecognized Option: #{mid}"
-        end
-      end
-
-      private
-
-      def init_options options
-        options = [options].flatten(1)
-        options.each do |option|
-          case option
-          when Symbol
-            @configs[option] = nil
-          when Hash
-            option.each do |k, v|
-              @configs[k] = self.class.new v
-            end
-          else
-            fail ArgumentError \
-              "Configuration option can only be symbol or hash"
-          end
+          self[mid]
         end
       end
     end

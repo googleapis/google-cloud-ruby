@@ -25,6 +25,11 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
     Google::Cloud::Debugger::Middleware.new rack_app, debugger: debugger
   }
 
+  after {
+    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
+    Google::Cloud.configure.delete :use_debugger
+  }
+
   describe "#call" do
     it "calls Tracer#start and Tracer#disable_traces_for_thread for each request" do
       mocked_tracer = Minitest::Mock.new

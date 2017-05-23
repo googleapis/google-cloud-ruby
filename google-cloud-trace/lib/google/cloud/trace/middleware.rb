@@ -114,26 +114,23 @@ module Google
         # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Trace::Service] service The service object.
         #     Optional if running on GCE.
-        # @param [Boolean] capture_stack Whether to capture stack traces for
-        #     each span. Default is false.
-        # @param [Proc] sampler A sampler to use, or `nil` to use the default.
-        #     See {Google::Cloud::Trace::TimeSampler}. Note that the sampler
-        #     may be any Proc that implements the sampling contract.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
-        def initialize app,
-                       service: nil,
-                       capture_stack: false,
-                       sampler: nil,
-                       span_id_generator: nil
+        def initialize app, service: nil, **kwargs
           @app = app
-          @capture_stack = capture_stack
-          @sampler = sampler
-          @span_id_generator = span_id_generator
+
+          load_config kwargs
+
           if service
             @service = service
           else
-            project_id = Google::Cloud::Trace::Project.default_project
-            @service = Google::Cloud::Trace.new.service if project_id
+            project_id = configuration.project_id
+            if project_id
+              @service = Google::Cloud::Trace.new(project: project_id).service
+            end
           end
         end
 
@@ -172,13 +169,14 @@ module Google
         def get_trace_context env
           Stackdriver::Core::TraceContext.parse_rack_env(env) do |tc|
             if tc.sampled?.nil?
-              sampler = @sampler || Google::Cloud::Trace::TimeSampler.default
+              sampler = configuration.sampler ||
+                        Google::Cloud::Trace::TimeSampler.default
               sampled = sampler.call env
               tc = Stackdriver::Core::TraceContext.new \
                 trace_id: tc.trace_id,
                 span_id: tc.span_id,
                 sampled: sampled,
-                capture_stack: sampled && @capture_stack
+                capture_stack: sampled && configuration.capture_stack
             end
             tc
           end
@@ -195,7 +193,7 @@ module Google
           Google::Cloud::Trace::TraceRecord.new \
             @service.project,
             trace_context,
-            span_id_generator: @span_id_generator
+            span_id_generator: configuration.span_id_generator
         end
 
         ##
@@ -351,6 +349,38 @@ module Google
                 span.trace.trace_context.to_string
           end
           result
+        end
+
+        private
+
+        ##
+        # Consolidate configurations from various sources. Also set
+        # instrumentation config parameters to default values if not set
+        # already.
+        #
+        def load_config **kwargs
+          configuration.capture_stack = kwargs[:capture_stack] ||
+                                        configuration.capture_stack
+          configuration.sampler = kwargs[:sampler] ||
+                                  configuration.sampler
+          configuration.span_id_generator = kwargs[:span_id_generator] ||
+                                            configuration.span_id_generator
+
+          init_default_config
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       Trace::Project.default_project
+          configuration.capture_stack ||= false
+        end
+
+        ##
+        # @private Get Google::Cloud::Trace.configure
+        def configuration
+          Google::Cloud::Trace.configure
         end
       end
     end

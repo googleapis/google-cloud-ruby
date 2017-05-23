@@ -124,6 +124,8 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "allows .at" do
+      skip if RUBY_VERSION.to_f < 2.4
+
       expression_must_be_kind_of "Time.at 0", Time
     end
   end

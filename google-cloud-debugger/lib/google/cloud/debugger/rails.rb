@@ -31,23 +31,9 @@ module Google
       # to the application code.
       #
       # The Railtie should also initialize a debugger to be used by the
-      # middleware. The debugger can be configured using the following Rails
-      # configuration:
-      # @example
-      #   # Explicitly enable or disable Stackdriver Debugger Agent
-      #   config.google_cloud.use_debugger = true
-      #   # Shared Google Cloud Platform project identifier
-      #   config.google_cloud.project_id = "gcloud-project"
-      #   # Google Cloud Platform project identifier for Stackdriver Debugger
-      #   config.google_cloud.debugger.project_id = "debugger-project"
-      #   # Share Google Cloud authentication json file
-      #   config.google_cloud.keyfile = "/path/to/keyfile.json"
-      #   # Google Cloud authentication json file for Stackdriver Debugger only
-      #   config.google_cloud.debugger.keyfile = "/path/to/keyfile.json"
-      #   # Stackdriver Debugger Agent module name identifier
-      #   config.google_cloud.debugger.module_name = "my-ruby-app"
-      #   # Stackdriver Debugger Agent module version identifier
-      #   config.google_cloud.debugger.module_version = "v1"
+      # Middleware. See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
@@ -58,84 +44,99 @@ module Google
         end
 
         initializer "Stackdriver.Debugger" do |app|
-          if self.class.use_debugger? app.config
-            debugger_config = Railtie.parse_rails_config config
+          self.class.consolidate_rails_config app.config
 
-            project_id = debugger_config[:project_id]
-            keyfile = debugger_config[:keyfile]
-            module_name = debugger_config[:module_name]
-            module_version = debugger_config[:module_version]
-
-            debugger =
-              Google::Cloud::Debugger.new project: project_id,
-                                          keyfile: keyfile,
-                                          module_name: module_name,
-                                          module_version: module_version
-
-            app.middleware.insert_after Rack::ETag,
-                                        Google::Cloud::Debugger::Middleware,
-                                        debugger: debugger
-          end
+          self.class.init_middleware app if Cloud.configure.use_debugger
         end
 
         ##
-        # Determine whether to use Stackdriver Debugger or not.
-        #
-        # Returns true if valid GCP project_id is provided and underneath API is
-        # able to authenticate. Also either Rails needs to be in "production"
-        # environment or config.stackdriver.use_debugger is explicitly true.
+        # @private Init Debugger integration for Rails. Setup configuration and
+        # insert the Middleware.
+        def self.init_middleware app
+          app.middleware.insert_after Rack::ETag,
+                                      Google::Cloud::Debugger::Middleware
+        end
+
+        ##
+        # @private Consolidate Rails configuration into Debugger instrumentation
+        # configuration. Also consolidate the `use_debugger` setting by
+        # verifying credentials and Rails environment. The `use_debugger`
+        # setting will be true if credentials are valid, and the setting is
+        # manually set to true or Rails is in production environment.
         #
         # @param [Rails::Railtie::Configuration] config The
         #   Rails.application.config
         #
-        # @return [Boolean] Whether to use Stackdriver Debugger
-        #
-        def self.use_debugger? config
-          debugger_config = parse_rails_config config
+        def self.consolidate_rails_config config
+          merge_rails_config config
 
-          # Return false if config.stackdriver.use_debugger is explicitly false
-          use_debugger = debugger_config[:use_debugger]
-          return false if !use_debugger.nil? && !use_debugger
+          init_default_config
 
-          # Try authenticate authorize client API. Return false if unable to
-          # authorize.
+          # Done if Google::Cloud.configure.use_debugger is explicitly
+          # false
+          return if Google::Cloud.configure.use_debugger == false
+
+          # Verify credentials and set use_debugger to false if
+          # credentials are invalid
+          unless valid_credentials? Debugger.configure.project_id,
+                                    Debugger.configure.keyfile
+            Cloud.configure.use_debugger = false
+            return
+          end
+
+          # Otherwise set use_debugger to true if Rails is running in
+          # production
+          Google::Cloud.configure.use_debugger ||= Rails.env.production?
+        end
+
+        ##
+        # @private Merge Rails configuration into Debugger instrumentation
+        # configuration.
+        def self.merge_rails_config rails_config
+          gcp_config = rails_config.google_cloud
+          dbg_config = gcp_config.debugger
+
+          Cloud.configure.use_debugger ||= gcp_config.use_debugger
+          Debugger.configure do |config|
+            config.project_id ||= dbg_config.project_id || gcp_config.project_id
+            config.keyfile ||= dbg_config.keyfile || gcp_config.keyfile
+            config.module_name ||= dbg_config.module_name
+            config.module_version ||= dbg_config.module_version
+          end
+        end
+
+        ##
+        # Fallback to default config values if config parameters not provided.
+        def self.init_default_config
+          config = Debugger.configure
+          config.project_id ||= Debugger::Project.default_project
+          config.module_name ||= Debugger::Project.default_module_name
+          config.module_version ||= Debugger::Project.default_module_version
+        end
+
+        ##
+        # @private Verify credentials
+        def self.valid_credentials? project_id, keyfile
           begin
-            Google::Cloud::Debugger::Credentials.credentials_with_scope(
-              debugger_config[:keyfile])
+            Debugger::Credentials.credentials_with_scope keyfile
           rescue => e
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
               "it failed to authorize with the service. (#{e.message})"
             return false
           end
 
-          project_id = debugger_config[:project_id] ||
-                       Google::Cloud::Debugger::Project.default_project
           if project_id.to_s.empty?
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
               "the project ID could not be determined."
             return false
           end
 
-          # Otherwise default to true if Rails is running in production or
-          # config.stackdriver.use_debugger is true
-          Rails.env.production? || use_debugger
+          true
         end
 
-        ##
-        # @private Helper method to parse rails config into a flattened hash
-        def self.parse_rails_config config
-          gcp_config = config.google_cloud
-          debugger_config = gcp_config[:debugger]
-          use_debugger =
-            gcp_config.key?(:use_debugger) ? gcp_config.use_debugger : nil
-          {
-            project_id: debugger_config.project_id || gcp_config.project_id,
-            keyfile: debugger_config.keyfile || gcp_config.keyfile,
-            module_name: debugger_config.module_name,
-            module_version: debugger_config.module_version,
-            use_debugger: use_debugger
-          }
-        end
+        private_class_method :merge_rails_config,
+                             :init_default_config,
+                             :valid_credentials?
       end
     end
   end

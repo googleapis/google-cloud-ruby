@@ -42,34 +42,30 @@ module Google
         #   to track Stackdriver request trace ID. It also properly sets
         #   env["rack.logger"] to this assigned logger for accessing. If not
         #   specified, a default logger with be used.
-        # @param [String] project_id Project identifier for the Stackdriver
-        #   Logging service. Used to create a default logger if one isn't
-        #   specified and a service account is used for authentication.
-        #   Optional.
-        # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-        #   file path the file must be readable. Used to create a default logger
-        #   if one isn't specified and a service account is used for
-        #   authentication. Optional.
-        # @param [Hash] log_name_map A map from URI path to log name override.
-        #   The path may be a string or regex. If a request path matches an
-        #   entry in this map, the log name is set accordingly, otherwise the
-        #   logger's default log_name is used.
+        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        #   backward API compatibility. See the [Configuration
+        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+        #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil, project_id: nil, keyfile: nil,
-                       log_name_map: DEFAULT_LOG_NAME_MAP
+        def initialize app, logger: nil, **kwargs
           @app = app
+
+          load_config kwargs
+
           if logger
             @logger = logger
           else
-            logging = Google::Cloud::Logging.new project: project_id,
-                                                 keyfile: keyfile
-            resource = Middleware.build_monitored_resource
-            @logger = logging.logger DEFAULT_LOG_NAME, resource
+            log_name = configuration.log_name
+            logging = Logging.new project: configuration.project_id,
+                                  keyfile: configuration.keyfile
+            resource = Middleware.build_monitored_resource(
+              configuration.monitored_resource.type,
+              configuration.monitored_resource.labels)
+            @logger = logging.logger log_name, resource
           end
-          @log_name_map = log_name_map
         end
 
         ##
@@ -116,10 +112,11 @@ module Google
         #     no override.
         #
         def get_log_name env
-          return nil unless @log_name_map
+          log_name_map = configuration.log_name_map
+          return nil unless log_name_map
           path = "#{env['SCRIPT_NAME']}#{env['PATH_INFO']}"
           path = "/#{path}" unless path.start_with? "/"
-          @log_name_map.each do |k, v|
+          log_name_map.each do |k, v|
             return v if k === path
           end
           nil
@@ -249,6 +246,40 @@ module Google
         end
 
         private_class_method :default_monitored_resource
+
+        private
+
+        ##
+        # Consolidate configurations from various sources. Also set
+        # instrumentation config parameters to default values if not set
+        # already.
+        #
+        def load_config **kwargs
+          configuration.project_id = kwargs[:project_id] ||
+                                     configuration.project_id
+          configuration.keyfile = kwargs[:keyfile] ||
+                                  configuration.keyfile
+          configuration.log_name_map ||= kwargs[:log_name_map] ||
+                                         configuration.log_name_map
+
+          init_default_config
+        end
+
+        ##
+        # Fallback to default configuration values if not defined already
+        def init_default_config
+          configuration.project_id ||= Cloud.configure.project_id ||
+                                       Logging::Project.default_project
+          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.log_name ||= DEFAULT_LOG_NAME
+          configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
+        end
+
+        ##
+        # @private Get Google::Cloud::Logging.configure
+        def configuration
+          Google::Cloud::Logging.configure
+        end
       end
     end
   end

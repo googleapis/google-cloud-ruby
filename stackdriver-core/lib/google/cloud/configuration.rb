@@ -23,20 +23,9 @@ module Google
     # configurations.
     module Configuration
       ##
-      # @private Instrumentation library configuration options
-      CONFIG_OPTIONS = %I{
-        project_id
-        keyfile
-        use_debugger
-        use_error_reporting
-        use_logging
-        use_trace
-      }
-
-      ##
       # @private The shared Configuration object that all the Stackdriver
       # instrumentation libraries will build on top of.
-      @@config = ::Stackdriver::Core::Configuration.new CONFIG_OPTIONS
+      @@config = ::Stackdriver::Core::Configuration.new
 
       ##
       # Configure the default parameter for Google::Cloud. The values defined on

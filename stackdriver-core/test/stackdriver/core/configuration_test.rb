@@ -17,11 +17,11 @@ require "helper"
 require "stackdriver/core/configuration"
 
 describe Stackdriver::Core::Configuration do
-  let(:options) { [:k1, :k2, {k3: [:k4, :k5]}, :k6] }
-  let(:configuration) { Stackdriver::Core::Configuration.new options }
+  let(:nested_categories) { [:k1, {k2: [:k3]}] }
+  let(:configuration) { Stackdriver::Core::Configuration.new nested_categories }
 
   describe "#initialize" do
-    it "accepts no parameters" do
+    it "works with no parameters" do
       config = Stackdriver::Core::Configuration.new
 
       config.must_be_kind_of Stackdriver::Core::Configuration
@@ -34,124 +34,82 @@ describe Stackdriver::Core::Configuration do
     end
 
     it "initializes options to nil" do
-      configs = configuration.instance_variable_get :@configs
-
-      configs[:k1].must_be_nil
-      configs[:k6].must_be_nil
-    end
-
-    it "initalizes all the option keys" do
-      configs = configuration.instance_variable_get :@configs
-
-      [:k1, :k2, :k3, :k6].all? { |k| configs.key? k }.must_equal true
+      configuration.opt1.must_be_nil
+      configuration.opt2.must_be_nil
     end
 
     it "initializes nested Stackdriver::Core::Configuration" do
-      configs = configuration.instance_variable_get :@configs
+      configuration.k1.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k2.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k2.k3.must_be_kind_of Stackdriver::Core::Configuration
+    end
 
-      nested_configuration = configs[:k3]
-      nested_configs = nested_configuration.instance_variable_get :@configs
+    it "accepts hash too" do
+      config = Stackdriver::Core::Configuration.new k1: {k2: [:k3]}
 
-      nested_configuration.must_be_kind_of Stackdriver::Core::Configuration
-      nested_configs.key?(:k4).must_equal true
-      nested_configs.key?(:k5).must_equal true
+      config.k1.must_be_kind_of Stackdriver::Core::Configuration
+      config.k1.k2.must_be_kind_of Stackdriver::Core::Configuration
+      config.k1.k2.k3.must_be_kind_of Stackdriver::Core::Configuration
     end
   end
 
-  describe "#add_option" do
-    it "introduces new option" do
-      assert_raises RuntimeError do
-        configuration.k7
-      end
+  describe "#add_options" do
+    it "introduces new nested categories" do
+      configuration.k4.must_be_nil
 
-      configuration.add_options [:k7]
+      configuration.add_options [:k4, {k5: [:k6]}]
 
-      configuration.k7.must_be_nil
-      configuration.k7 = true
-      configuration.k7.must_equal true
-
-      configuration.k1.must_be_nil
+      configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k5.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k5.k6.must_be_kind_of Stackdriver::Core::Configuration
     end
 
-    it "allows nested option" do
-      assert_raises RuntimeError do
-        configuration.k7.k8
-      end
+    it "accepts simple hash with one symbol" do
+      configuration.k4.must_be_nil
 
-      configuration.add_options [{k7: [:k8]}]
+      configuration.add_options k4: :k5
 
-      configuration.k7.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k7.k8.must_be_nil
+      configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k4.k5.must_be_kind_of Stackdriver::Core::Configuration
     end
   end
 
   describe "#option?" do
     it "returns true if configuration has that option" do
-      configuration.k1.must_be_nil
-      configuration.option?(:k1).must_equal true
+      configuration.option?(:opt1).must_equal false
+      configuration.opt1 = true
+      configuration.option?(:opt1).must_equal true
     end
 
     it "returns true even if the key is a sub configuration group" do
-      configuration.k3.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.option?(:k3).must_equal true
+      configuration.k2.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.option?(:k2).must_equal true
     end
 
     it "returns false if configuration doesn't have that option" do
-      assert_raises RuntimeError do
-        configuration.k7
-      end
       configuration.option?(:k7).must_equal false
     end
   end
 
   describe "#method_missing" do
-    it "gets a valid option" do
-      configuration.k1.must_be_nil
+    it "any keys are allowed" do
+      configuration.total_non_sense.must_be_nil
     end
 
-    it "sets a valid option" do
-      configuration.k1 = "test value"
-
-      configuration.k1.must_equal "test value"
-
-      configs = configuration.instance_variable_get :@configs
-
-      configs[:k1].must_equal "test value"
+    it "sets and get a valid option" do
+      configuration.opt1.must_be_nil
+      configuration.opt1 = "test value"
+      configuration.opt1.must_equal "test value"
     end
 
     it "gets a valid nested option" do
-      configuration.k3.k4.must_be_nil
+      configuration.k1.opt4.must_be_nil
     end
 
     it "sets a valid nested option" do
-      configuration.k3.k4 = "test value"
+      configuration.k2.k3 = "test value"
 
-      configuration.k3.k4.must_equal "test value"
-    end
-
-    it "raises exception if setting a nested category" do
-      configuration.k3.k4 = "test value"
-
-      e = assert_raises RuntimeError do
-        configuration.k3 = "test value 2"
-      end
-
-      configuration.k3.k4.must_equal "test value"
-      e.message.must_match "k3 is a sub Configuration group. Not an option."
-    end
-
-    it "raises exception if setting a non-valid option" do
-      e = assert_raises RuntimeError do
-        configuration.foo = "test value"
-      end
-      e.message.must_match "Unrecognized Option: foo"
-    end
-
-    it "raises exception if setting a non-valid nested option" do
-      e = assert_raises RuntimeError do
-        configuration.k3.foo = "test value"
-      end
-      e.message.must_match "Unrecognized Option: foo"
+      configuration.k2.k3.must_equal "test value"
     end
   end
 end

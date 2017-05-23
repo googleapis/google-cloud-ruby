@@ -71,19 +71,10 @@ module Google
     # for more examples.
     #
     module ErrorReporting
-      ##
-      # @private Instrumentation library configuration options
-      CONFIG_OPTIONS = %I{
-        project_id
-        keyfile
-        service_name
-        service_version
-      }
-
       # Initialize :error_reporting as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :error_reporting
-        Google::Cloud.configure.add_options error_reporting: CONFIG_OPTIONS
+        Google::Cloud.configure.add_options :error_reporting
       end
 
       ##
@@ -146,20 +137,9 @@ module Google
       # client, allows the {.report} public method to reuse these
       # configured parameters.
       #
-      # Possible configuration parameters:
-      #   * `project_id`: The Google Cloud Project ID. Automatically discovered
-      #                   when running from GCP environments.
-      #   * `keyfile`: The service account JSON file path. Automatically
-      #                discovered when running from GCP environments.
-      #   * `service_name`: An identifier for the running service. Optional,
-      #                     automatically discovered when running from Google
-      #                     App Engine Flex. Otherwise default to "ruby".
-      #   * `service_version`: A version identifier for the running service.
-      #                        Optional, automatically discovered when running
-      #                        from Google App Engine Flex.
-      #
-      # Note the project_id and keyfile configuration changes won't be picked up
-      # after the first {.report} call.
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # for full configuration parameters.
       #
       # @example
       #   # in app.rb

@@ -15,6 +15,7 @@
 
 require "google-cloud-logging"
 require "google/cloud/logging/project"
+require "stackdriver/core"
 
 module Google
   module Cloud
@@ -328,6 +329,12 @@ module Google
     # ```
     #
     module Logging
+      # Initialize :error_reporting as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :logging
+        Google::Cloud.configure.add_options logging: :monitored_resource
+      end
+
       ##
       # Creates a new object for connecting to the Stackdriver Logging service.
       # Each call creates a new connection.
@@ -378,6 +385,23 @@ module Google
           Google::Cloud::Logging::Service.new(
             project, credentials, timeout: timeout,
                                   client_config: client_config))
+      end
+
+      ##
+      # Configure the Google::Cloud::Logging::Middleware when used in a
+      # Rack-based application.
+      #
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # for full configuration parameters.
+      #
+      # @return [Stackdriver::Core::Configuration] The configuration object
+      #   the Google::Cloud::Logging module uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.logging if block_given?
+
+        Google::Cloud.configure.logging
       end
     end
   end
