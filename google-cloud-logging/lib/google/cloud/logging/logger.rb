@@ -463,24 +463,34 @@ module Google
             e.payload = message
           end
 
-          # merge input labels and request info
-          merged_labels = {}
           actual_log_name = log_name
           info = request_info
           if info
             actual_log_name = info.log_name || actual_log_name
-            unless info.trace_id.nil?
-              merged_labels["traceId"] = info.trace_id
-              unless @project.nil?
-                entry.trace = "projects/#{@project}/traces/#{info.trace_id}"
-              end
+            unless info.trace_id.nil? || @project.nil?
+              entry.trace = "projects/#{@project}/traces/#{info.trace_id}"
             end
           end
-          merged_labels = labels.merge(merged_labels) unless labels.nil?
 
           writer.write_entries entry, log_name: actual_log_name,
                                       resource: resource,
-                                      labels: merged_labels
+                                      labels: entry_labels
+        end
+
+        ##
+        # @private generate the labels hash for a log entry.
+        def entry_labels
+          merged_labels = {}
+          info = request_info
+
+          if info && !info.trace_id.nil?
+            merged_labels["traceId"] = info.trace_id
+            if Google::Cloud.env.app_engine?
+              merged_labels["appengine.googleapis.com/trace_id"] = info.trace_id
+            end
+          end
+
+          labels.nil? ? merged_labels : labels.merge(merged_labels)
         end
 
         ##

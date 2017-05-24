@@ -192,8 +192,32 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       logger.add_request_info info: info
 
       Time.stub :now, timestamp do
-        logger.error "Danger Will Robinson!"
-        mock.verify
+        Google::Cloud.env.stub :app_engine?, false do
+          logger.error "Danger Will Robinson!"
+          mock.verify
+        end
+      end
+    end
+
+    it "Also sets 'appengine.googleapis.com/trace_id' label on GAE" do
+      mock = Minitest::Mock.new
+      trace_id = "my_trace_id"
+      log_name = "my_app_log"
+      args = write_req_args :ERROR, log_name_override: log_name,
+                            extra_labels: { "traceId" => trace_id,
+                                            "appengine.googleapis.com/trace_id" => trace_id },
+                            trace: "projects/#{project}/traces/#{trace_id}"
+      mock.expect :write_log_entries, write_res, args
+      logging.service.mocked_logging = mock
+
+      info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
+      logger.add_request_info info: info
+
+      Time.stub :now, timestamp do
+        Google::Cloud.env.stub :app_engine?, true do
+          logger.error "Danger Will Robinson!"
+          mock.verify
+        end
       end
     end
   end
