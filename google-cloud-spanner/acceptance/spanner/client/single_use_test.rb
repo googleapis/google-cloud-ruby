@@ -20,8 +20,10 @@ describe "Spanner Client", :single_use, :spanner do
   let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
 
   before do
-    db.delete "accounts"
-    db.insert "accounts", default_account_rows
+    @setup_timestamp = db.commit do |c|
+      c.delete "accounts"
+      c.insert "accounts", default_account_rows
+    end
   end
 
   after do
@@ -38,7 +40,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with strong option" do
@@ -51,12 +53,11 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with timestamp option" do
-    timestamp = Time.now
-    results = db.execute "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+    results = db.execute "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -65,12 +66,11 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp, 1
+    results.timestamp.must_be_close_to @setup_timestamp, 1
   end
 
   it "runs a read with timestamp option" do
-    timestamp = Time.now
-    results = db.read "accounts", columns, single_use: { timestamp: timestamp }
+    results = db.read "accounts", columns, single_use: { timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -79,7 +79,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp, 1
+    results.timestamp.must_be_close_to @setup_timestamp, 1
   end
 
   it "runs a query with staleness option" do
@@ -92,7 +92,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with staleness option" do
@@ -105,12 +105,11 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with bounded_timestamp option" do
-    timestamp = Time.now
-    results = db.execute "SELECT * FROM accounts", single_use: { bounded_timestamp: timestamp }
+    results = db.execute "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -119,12 +118,11 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with bounded_timestamp option" do
-    timestamp = Time.now
-    results = db.read "accounts", columns, single_use: { bounded_timestamp: timestamp }
+    results = db.read "accounts", columns, single_use: { bounded_timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -133,7 +131,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to timestamp, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with bounded_staleness option" do
@@ -146,7 +144,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with bounded_staleness option" do
@@ -159,7 +157,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
+    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   def assert_accounts_equal expected, actual

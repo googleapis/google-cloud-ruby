@@ -21,8 +21,10 @@ describe "Spanner Client", :transaction, :spanner do
   let(:additional_account) { { account_id: 4, username: "swcloud", reputation: 99.894, active: true, friends: [1,2] } }
 
   before do
-    db.delete "accounts"
-    db.insert "accounts", default_account_rows
+    db.commit do |c|
+      c.delete "accounts"
+      c.insert "accounts", default_account_rows
+    end
   end
 
   after do
