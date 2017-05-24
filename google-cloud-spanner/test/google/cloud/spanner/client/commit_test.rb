@@ -19,7 +19,9 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new() }
+  let(:commit_time) { Time.now }
+  let(:commit_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp commit_time }
+  let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
@@ -72,13 +74,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.commit do |c|
+    timestamp = client.commit do |c|
       c.update "users", [{ id: 1, name: "Charlie", active: false }]
       c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
       c.upsert "users", [{ id: 3, name: "Marley",  active: false }]
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -98,7 +101,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.update "users", [{ id: 1, name: "Charlie", active: false }]
+    timestamp = client.update "users", [{ id: 1, name: "Charlie", active: false }]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -118,7 +122,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+    timestamp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -138,7 +143,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.upsert "users", [{ id: 3, name: "Marley",  active: false }]
+    timestamp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -158,7 +164,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.save "users", [{ id: 3, name: "Marley",  active: false }]
+    timestamp = client.save "users", [{ id: 3, name: "Marley",  active: false }]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -178,7 +185,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.replace "users", [{ id: 4, name: "Henry",  active: true }]
+    timestamp = client.replace "users", [{ id: 4, name: "Henry",  active: true }]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -201,7 +209,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.delete "users", [1, 2, 3, 4, 5]
+    timestamp = client.delete "users", [1, 2, 3, 4, 5]
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -222,7 +231,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.delete "users", 1..100
+    timestamp = client.delete "users", 1..100
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -245,7 +255,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.delete "users", 5
+    timestamp = client.delete "users", 5
+    timestamp.must_equal commit_time
 
     mock.verify
   end
@@ -264,7 +275,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
-    client.delete "users"
+    timestamp = client.delete "users"
+    timestamp.must_equal commit_time
 
     mock.verify
   end
