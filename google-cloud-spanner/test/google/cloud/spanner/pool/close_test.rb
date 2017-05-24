@@ -37,12 +37,26 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
     client.close
   end
 
-  it "deletes sessions" do
+  it "deletes sessions when closed" do
     mock = Minitest::Mock.new
     mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
     pool.close
+
+    mock.verify
+  end
+
+  it "cannot be used after being closed" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
+    session.service.mocked_service = mock
+
+    pool.close
+
+    assert_raises Google::Cloud::Spanner::ClientClosedError do
+      pool.checkout_session
+    end
 
     mock.verify
   end

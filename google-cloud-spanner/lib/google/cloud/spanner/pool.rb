@@ -62,6 +62,8 @@ module Google
           action = nil
           @mutex.synchronize do
             loop do
+              fail ClientClosedError if @closed
+
               read_session = session_queue.shift
               return read_session if read_session
               write_transaction = transaction_queue.shift
@@ -108,6 +110,8 @@ module Google
           action = nil
           @mutex.synchronize do
             loop do
+              fail ClientClosedError if @closed
+
               write_transaction = transaction_queue.shift
               return write_transaction if write_transaction
               read_session = session_queue.shift
@@ -155,10 +159,20 @@ module Google
 
         def close
           @thread.kill if @thread
-          @all_sessions.each(&:delete_session)
-          @all_sessions = []
-          @session_queue = []
-          @transaction_queue = []
+          # Unblock all waiting threads
+          @closed = true
+          @resource.broadcast
+          # Delete all sessions
+          @mutex.synchronize do
+            @all_sessions.map do |s|
+              Thread.new do
+                s.delete_session rescue nil
+              end
+            end.map(&:join)
+            @all_sessions = []
+            @session_queue = []
+            @transaction_queue = []
+          end
 
           true
         end
