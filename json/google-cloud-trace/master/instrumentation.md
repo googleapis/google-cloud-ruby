@@ -4,21 +4,32 @@ Then google-cloud-trace gem provides a Rack Middleware class that integrates wit
 
 Additionally, the google-cloud-trace gem provides a Railtie class that automatically enables the Rack Middleware in Rails applications when used.
 
-## Configuration
-The default configuration enables Stackdriver instrumentation features to run
-on Google Cloud Platform. You can easily configure the instrumentation library 
-if you want to run on a non Google Cloud environment or you want to customize 
-the default behavior.
-
-See the 
-[Configuration Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
-for full configuration parameters.
-
 ## Rails Integration
 
 To use the Stackdriver Logging Railtie for Ruby on Rails applications, simply add this line to config/application.rb:
 ```ruby
 require "google/cloud/trace/rails"
+```
+
+Then the library can be configured through this set of Rails parameters in config/environments/*.rb:
+```ruby
+# Sharing authentication parameters
+config.google_cloud.project_id = "gcp-project-id"
+config.google_cloud.keyfile = "/path/to/gcp/secret.json"
+# Or more specificly for Logging
+config.google_cloud.logging.project_id = "gcp-project-id"
+config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
+
+# Explicitly enable or disable Trace
+config.google_cloud.use_trace = true
+
+# Choose ActiveRecord notifications to trace
+config.google_cloud.trace.notifications =
+  Google::Cloud::Trace::Railtie::DEFAULT_NOTIFICATIONS +
+  ["render_partial.action_view"]
+
+# Specify whether to capture call stacks
+config.google_cloud.trace.capture_stack = true
 ```
 
 Alternatively, check out the [stackdriver](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver) gem, which enables this Railtie by default.
