@@ -168,7 +168,7 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
     // Evaluate each of the matching breakpoint
     for (i = 0; i < matching_breakpoints_len; i++) {
         matching_breakpoint = c_matching_breakpoints[i];
-        rb_funcall(self, rb_intern("eval_breakpoint"), 2, matching_breakpoint, call_stack_bindings);
+        rb_funcall(self, rb_intern("breakpoint_hit"), 2, matching_breakpoint, call_stack_bindings);
     }
 
     return;

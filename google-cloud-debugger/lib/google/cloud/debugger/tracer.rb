@@ -103,31 +103,14 @@ module Google
         end
 
         ##
-        # Evaluates a hit breakpoint, and signal BreakpointManager and
-        # Transmitter if this breakpoint is evaluated successfully.
+        # Callback function when a breakpoint is hit. Handover the hit
+        # breakpoint to breakpoint_manager to be evaluated.
         #
-        # See {Breakpoint#eval_call_stack} for evaluation details.
-        #
-        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
-        #   to be evaluated
-        # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
-        #   objects, from the each frame of the call stack that leads to the
-        #   triggering of the breakpoints.
-        #
-        def eval_breakpoint breakpoint, call_stack_bindings
+        def breakpoint_hit breakpoint, call_stack_bindings
           return if breakpoint.nil? || breakpoint.complete?
 
-          breakpoint.eval_call_stack call_stack_bindings
-
-          # Take this completed breakpoint off manager's active breakpoints
-          # list, submit the breakpoint snapshot, and update Tracer's
-          # breakpoints_cache.
-          return unless breakpoint.complete?
-
-          # Signal breakpoint_manager that this breakpoint is evaluated
-          agent.breakpoint_manager.mark_off breakpoint
-          # Signal transmitter to submit this breakpoint
-          agent.transmitter.submit breakpoint
+          agent.breakpoint_manager.breakpoint_hit breakpoint,
+                                                  call_stack_bindings
 
           update_breakpoints_cache
 

@@ -33,6 +33,11 @@ module Google
         include MonitorMixin
 
         ##
+        # The debugger agent this tracer belongs to
+        # @return [Google::Cloud::Debugger::Agent]
+        attr_reader :agent
+
+        ##
         # @private The gRPC Service object.
         attr_reader :service
 
@@ -53,9 +58,10 @@ module Google
 
         ##
         # @private Construct new instance of BreakpointManager
-        def initialize service
+        def initialize agent, service
           super()
 
+          @agent = agent
           @service = service
 
           @completed_breakpoints = []
@@ -130,6 +136,58 @@ module Google
 
             on_breakpoints_change.call(@active_breakpoints) if
               on_breakpoints_change.respond_to?(:call) && breakpoints_updated
+          end
+        end
+
+        ##
+        # Evaluates a hit breakpoint, and submit the breakpoint to
+        # Transmitter if this breakpoint is evaluated successfully.
+        #
+        # See {Breakpoint#evaluate} for evaluation details.
+        #
+        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
+        #   to be evaluated
+        # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
+        #   objects, from the each frame of the call stack that leads to the
+        #   triggering of the breakpoints.
+        #
+        def breakpoint_hit breakpoint, call_stack_bindings
+          breakpoint.evaluate call_stack_bindings
+
+          case breakpoint.action
+          when :CAPTURE
+            # Take this completed breakpoint off manager's active breakpoints
+            # list, submit the breakpoint snapshot, and update Tracer's
+            # breakpoints_cache.
+            return unless breakpoint.complete?
+
+            # Remove this breakpoint from active list
+            mark_off breakpoint
+            # Signal transmitter to submit this breakpoint
+            agent.transmitter.submit breakpoint
+          when :LOG
+            log_logpoint breakpoint
+          end
+        end
+
+        ##
+        # Assume the given logpoint is successfully evaluated, log the
+        # evaluated log message via logger
+        #
+        # @param [Google::Cloud::Debugger::Breakpoint] logpoint The evaluated
+        #   logpoint.
+        def log_logpoint logpoint
+          return unless agent.logger && logpoint.evaluated_log_message
+
+          message = "LOGPOINT: #{logpoint.evaluated_log_message}"
+
+          case logpoint.log_level
+          when :INFO
+            agent.logger.info message
+          when :WARNING
+            agent.logger.warn message
+          when :ERROR
+            agent.logger.error message
           end
         end
 

@@ -54,7 +54,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     Google::Cloud::Logging.configure.delete :log_name_map
     Google::Cloud::Logging.configure.monitored_resource.delete :type
     Google::Cloud::Logging.configure.monitored_resource.delete :labels
-    Google::Cloud.configure.instance_variable_get(:@configs).delete :use_logging
+    Google::Cloud.configure.delete :use_logging
   }
 
   describe "#initialize" do

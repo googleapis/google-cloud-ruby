@@ -144,6 +144,107 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
     end
   end
 
+  describe "#breakpoint_hit" do
+    let(:breakpoint) {
+      Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb", 123
+    }
+
+    it "marks breakpoint off and submits breakpoint" do
+      mocked_submit = Minitest::Mock.new
+      mocked_submit.expect :call, nil, [Google::Cloud::Debugger::Breakpoint]
+      mocked_mark_off = Minitest::Mock.new
+      mocked_mark_off.expect :call, nil, [Google::Cloud::Debugger::Breakpoint]
+
+      stubbed_evaluate = ->(_) { breakpoint.complete }
+
+      tracer.update_breakpoints_cache
+
+      breakpoint.stub :evaluate, stubbed_evaluate do
+        transmitter.stub :submit, mocked_submit do
+          breakpoint_manager.stub :mark_off, mocked_mark_off do
+            breakpoint_manager.breakpoint_hit breakpoint, nil
+          end
+        end
+      end
+
+      mocked_submit.verify
+      mocked_mark_off.verify
+    end
+
+    it "doesn't mark breakpoint off ir submits breakpoint if breakpoint fail to evaluate" do
+      stubbed_submit = ->(_) { fail }
+      stubbed_mark_off = ->(_) { fail }
+
+      breakpoint.stub :evaluate, nil do
+        transmitter.stub :submit, stubbed_submit do
+          breakpoint_manager.stub :mark_off, stubbed_mark_off do
+            breakpoint_manager.breakpoint_hit breakpoint, nil
+          end
+        end
+      end
+    end
+
+    it "calls #log_logpoint if the breakpoint is a logpoint" do
+      mocked_log_logpoint = Minitest::Mock.new
+      mocked_log_logpoint.expect :call, nil, [Google::Cloud::Debugger::Breakpoint]
+      breakpoint.action = :LOG
+
+      breakpoint_manager.stub :log_logpoint, mocked_log_logpoint do
+        breakpoint.stub :evaluate, nil do
+          breakpoint_manager.breakpoint_hit breakpoint, nil
+        end
+      end
+
+      mocked_log_logpoint.verify
+    end
+  end
+
+  describe "#log_logpoint" do
+    let(:logpoint) do
+      Google::Cloud::Debugger::Breakpoint.new.tap do |b|
+        b.log_level = :INFO
+        b.evaluated_log_message = "Hello World"
+      end
+    end
+
+    it "calls logger.info if log_level is :INFO" do
+      mocked_info = Minitest::Mock.new
+      mocked_info.expect :call, nil, ["LOGPOINT: Hello World"]
+
+      agent.logger.stub :info, mocked_info do
+        breakpoint_manager.log_logpoint logpoint
+      end
+
+      mocked_info.verify
+    end
+
+    it "calls logger.warn if log_level is :WARNING" do
+      mocked_warn = Minitest::Mock.new
+      mocked_warn.expect :call, nil, ["LOGPOINT: Hello World"]
+
+      agent.logger.stub :warn, mocked_warn do
+        logpoint.log_level = :WARNING
+
+        breakpoint_manager.log_logpoint logpoint
+      end
+
+      mocked_warn.verify
+    end
+
+    it "calls logger.error if log_level is :ERROR" do
+      mocked_error = Minitest::Mock.new
+      mocked_error.expect :call, nil, ["LOGPOINT: Hello World"]
+
+      agent.logger.stub :error, mocked_error do
+        logpoint.log_level = :ERROR
+
+        breakpoint_manager.log_logpoint logpoint
+      end
+
+      mocked_error.verify
+    end
+  end
+
   describe "#mark_off" do
     it "moves a breakpoint from @active_breakpoints list to @completed_breakpoints list" do
       breakpoint_manager.update_breakpoints [breakpoint1]

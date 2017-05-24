@@ -40,37 +40,37 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     Google::Cloud::Debugger::Breakpoint.new "7", breakpoint_path, 72 }
 
   it "catches breakpoint from function call" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       breakpoint.must_equal breakpoint1
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint1]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_func
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint called from a child thread" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       assert_equal breakpoint, breakpoint1
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint1]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       thr = Thread.new do
         tracer_test_func
@@ -79,121 +79,121 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint from block yield" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       breakpoint.must_equal breakpoint2
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint2]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_func3
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint when function interleave files" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       breakpoint.must_equal breakpoint3
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint3]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_func4
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint from lambda function" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       breakpoint.must_equal breakpoint4
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint4]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_lambda.call
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint from proc" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       breakpoint.must_equal breakpoint5
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint5]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_proc.call
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint from fiber" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       assert_equal breakpoint, breakpoint6
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint6]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       tracer_test_fiber.resume
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 
   it "catches breakpoint from fiber after fiber yields" do
-    breakpoint_hit = false
-    stubbed_eval_breakpoint = ->(breakpoint, call_stack_bindings) do
+    hit = false
+    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
       assert_equal breakpoint, breakpoint7
-      breakpoint_hit = true
+      hit = true
     end
 
     breakpoint_manager.update_breakpoints [breakpoint7]
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :eval_breakpoint, stubbed_eval_breakpoint do
+    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
       tracer.start
       test_filber = tracer_test_fiber
       test_filber.resume
@@ -201,6 +201,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    breakpoint_hit.must_equal true
+    hit.must_equal true
   end
 end

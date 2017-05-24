@@ -878,6 +878,33 @@ module Google
               result
             end
 
+            ##
+            # Format log message by interpolate expressions.
+            #
+            # @example
+            #   Evaluator.format_log_message("Hello $0",
+            #                                ["World"]) #=> "Hello World"
+            #
+            # @param [String] message_format The message with with
+            #   expression placeholders such as `$0`, `$1`, etc.
+            # @param [Array<Google::Cloud::Debugger::Breakpoint::Variable>]
+            #   expressions An array of evaluated expression variables to be
+            #   placed into message_format's placeholders. The variables need
+            #   to have type equal String.
+            #
+            # @return [String] The formatted message string
+            #
+            def format_message message_format, expressions
+              # Substitute placeholders with expressions
+              message = message_format.gsub(/(?<!\$)\$\d+/) do |placeholder|
+                  index = placeholder.match(/\$(\d+)/)[1].to_i
+                  index < expressions.size ? expressions[index].inspect : ""
+              end
+
+              # Unescape "$" charactors
+              message.gsub(/\$\$/, "$")
+            end
+
             private
 
             ##

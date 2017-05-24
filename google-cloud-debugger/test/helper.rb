@@ -104,6 +104,7 @@ class MockDebugger < Minitest::Spec
     timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     {
       "id" => "abc123",
+      "action" => :CAPTURE,
       "location" => random_source_location_hash,
       "create_time" => {
         "seconds" => timestamp.to_i,

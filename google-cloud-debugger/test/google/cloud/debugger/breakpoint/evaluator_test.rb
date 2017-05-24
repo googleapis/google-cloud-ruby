@@ -222,4 +222,26 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       result.must_match "no method name given"
     end
   end
+
+  describe ".format_message" do
+    it "formats basic message" do
+      evaluator.format_message("Hello World", []).must_equal "Hello World"
+    end
+
+    it "formats message with expressions" do
+      evaluator.format_message("Hello $0$1", ["World", :!]).must_equal "Hello \"World\":!"
+    end
+
+    it "formats message with extra expressions" do
+      evaluator.format_message("Hello $0$1", ["World", :!, :zomg]).must_equal "Hello \"World\":!"
+    end
+
+    it "formats message with extra placeholder" do
+      evaluator.format_message("Hello $0$1$2", ["World", :!]).must_equal "Hello \"World\":!"
+    end
+
+    it "doesn't substitute escaped placeholder and unescape them" do
+      evaluator.format_message("Hello 0 $0 $$0 $$$$0", ["World"]).must_equal "Hello 0 \"World\" $0 $$0"
+    end
+  end
 end
