@@ -199,7 +199,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       end
     end
 
-    it "Alo sets 'appengine.googleapis.com/trace_id' label on GAE" do
+    it "Also sets 'appengine.googleapis.com/trace_id' label on GAE" do
       mock = Minitest::Mock.new
       trace_id = "my_trace_id"
       log_name = "my_app_log"
