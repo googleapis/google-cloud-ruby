@@ -20,8 +20,10 @@ describe "Spanner Client", :snapshot, :spanner do
   let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
 
   before do
-    db.delete "accounts"
-    db.insert "accounts", default_account_rows
+    @setup_timestamp = db.commit do |c|
+      c.delete "accounts"
+      c.insert "accounts", default_account_rows
+    end
   end
 
   after do
@@ -97,9 +99,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with timestamp option" do
-    timestamp = Time.now
     results = nil
-    db.snapshot timestamp: timestamp do |snp|
+    db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
@@ -115,9 +116,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a read with timestamp option" do
-    timestamp = Time.now
     results = nil
-    db.snapshot timestamp: timestamp do |snp|
+    db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
@@ -217,7 +217,7 @@ describe "Spanner Client", :snapshot, :spanner do
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-    db.snapshot timestamp: Time.now do |snp|
+    db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?
@@ -240,7 +240,7 @@ describe "Spanner Client", :snapshot, :spanner do
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-    db.snapshot timestamp: Time.now do |snp|
+    db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 3 # within 3 seconds?

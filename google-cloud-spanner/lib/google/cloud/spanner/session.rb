@@ -279,7 +279,7 @@ module Google
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -296,8 +296,9 @@ module Google
         def commit transaction_id: nil
           commit = Commit.new
           yield commit
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit_resp = service.commit path, commit.mutations,
+                                       transaction_id: transaction_id
+          Convert.timestamp_to_time commit_resp.commit_timestamp
         end
 
         ##
@@ -327,7 +328,7 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -340,10 +341,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def upsert table, *rows, transaction_id: nil
-          commit = Commit.new
-          commit.upsert table, rows
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit transaction_id: transaction_id do |c|
+            c.upsert table, rows
+          end
         end
         alias_method :save, :upsert
 
@@ -373,7 +373,7 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -386,10 +386,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def insert table, *rows, transaction_id: nil
-          commit = Commit.new
-          commit.insert table, rows
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit transaction_id: transaction_id do |c|
+            c.insert table, rows
+          end
         end
 
         ##
@@ -418,7 +417,7 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -431,10 +430,9 @@ module Google
         #                       { id: 2, name: "Harvey",  active: true }]
         #
         def update table, *rows, transaction_id: nil
-          commit = Commit.new
-          commit.update table, rows
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit transaction_id: transaction_id do |c|
+            c.update table, rows
+          end
         end
 
         ##
@@ -465,7 +463,7 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -478,10 +476,9 @@ module Google
         #                        { id: 2, name: "Harvey",  active: true }]
         #
         def replace table, *rows, transaction_id: nil
-          commit = Commit.new
-          commit.replace table, rows
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit transaction_id: transaction_id do |c|
+            c.replace table, rows
+          end
         end
 
         ##
@@ -494,7 +491,7 @@ module Google
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
         #
-        # @return [Boolean] Returns `true` if the operation succeeded.
+        # @return [Time] The timestamp at which the operation committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -506,10 +503,9 @@ module Google
         #   db.delete "users", [1, 2, 3]
         #
         def delete table, keys = [], transaction_id: nil
-          commit = Commit.new
-          commit.delete table, keys
-          service.commit path, commit.mutations, transaction_id: transaction_id
-          true
+          commit transaction_id: transaction_id do |c|
+            c.delete table, keys
+          end
         end
 
         ##
