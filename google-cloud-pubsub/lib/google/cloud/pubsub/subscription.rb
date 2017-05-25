@@ -513,11 +513,6 @@ module Google
         # @see https://cloud.google.com/pubsub/docs/reference/rpc/google.iam.v1#iampolicy
         #   google.iam.v1.IAMPolicy
         #
-        # @param [Boolean] force Force the latest policy to be retrieved from
-        #   the Pub/Sub service when `true`. Otherwise the policy will be
-        #   memoized to reduce the number of API calls made to the Pub/Sub
-        #   service. The default is `false`.
-        #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the Pub/Sub service and passed to the block. After
         #   the block completes, the modified policy will be written to the
@@ -527,23 +522,13 @@ module Google
         #
         # @return [Policy] the current Cloud IAM Policy for this subscription
         #
-        # @example Policy values are memoized to reduce the number of API calls:
+        # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #   sub = pubsub.subscription "my-subscription"
         #
-        #   policy = sub.policy # API call
-        #   policy_2 = sub.policy # No API call
-        #
-        # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #   sub = pubsub.subscription "my-subscription"
-        #
-        #   policy = sub.policy force: true # API call
-        #   policy_2 = sub.policy force: true # API call
+        #   policy = sub.policy
         #
         # @example Update the policy by passing a block:
         #   require "google/cloud/pubsub"
@@ -553,19 +538,15 @@ module Google
         #
         #   sub.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
-        #   end # 2 API calls
+        #   end
         #
-        def policy force: nil
-          @policy = nil if force || block_given?
-          @policy ||= begin
-            ensure_service!
-            grpc = service.get_subscription_policy name
-            Policy.from_grpc grpc
-          end
-          return @policy unless block_given?
-          p = @policy.deep_dup
-          yield p
-          self.policy = p
+        def policy
+          ensure_service!
+          grpc = service.get_subscription_policy name
+          policy = Policy.from_grpc grpc
+          return policy unless block_given?
+          yield policy
+          self.policy = policy
         end
 
         ##
@@ -583,6 +564,8 @@ module Google
         # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
         #   subscription
         #
+        # @return [Policy] the policy returned by the API update operation
+        #
         # @example
         #   require "google/cloud/pubsub"
         #
@@ -598,7 +581,7 @@ module Google
         def policy= new_policy
           ensure_service!
           grpc = service.set_subscription_policy name, new_policy.to_grpc
-          @policy = Policy.from_grpc grpc
+          Policy.from_grpc grpc
         end
 
         ##
