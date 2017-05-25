@@ -42,7 +42,7 @@ load_job = table.load file
 count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"
 data = bigquery.query count_sql
 data.each do |row|
-  puts row["name"]
+  puts row[:name]
 end
 ```
 

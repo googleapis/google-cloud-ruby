@@ -35,7 +35,7 @@ module Google
       #                         params: { time: fourpm }
       #
       #   data.each do |row|
-      #     puts row["name"]
+      #     puts row[:name]
       #   end
       #
       # @example Create Time with fractional seconds:
@@ -50,7 +50,7 @@ module Google
       #                         params: { time: precise_time }
       #
       #   data.each do |row|
-      #     puts row["name"]
+      #     puts row[:name]
       #   end
       #
       Time = Struct.new :value

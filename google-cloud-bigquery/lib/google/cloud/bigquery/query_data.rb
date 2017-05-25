@@ -144,7 +144,7 @@ module Google
         #
         #   data = job.query_results
         #   data.all do |row|
-        #     puts row["word"]
+        #     puts row[:word]
         #   end
         #
         # @example Using the enumerator by not passing a block:
@@ -155,7 +155,7 @@ module Google
         #
         #   data = job.query_results
         #   words = data.all.map do |row|
-        #     row["word"]
+        #     row[:word]
         #   end
         #
         # @example Limit the number of API calls made:
@@ -166,7 +166,7 @@ module Google
         #
         #   data = job.query_results
         #   data.all(request_limit: 10) do |row|
-        #     puts row["word"]
+        #     puts row[:word]
         #   end
         #
         def all request_limit: nil
