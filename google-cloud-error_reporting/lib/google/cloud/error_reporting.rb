@@ -30,15 +30,15 @@ module Google
     # application.
     #
     # For general information about Stackdriver Error Reporting, read
-    # [Stackdriver Error Reporting Documentation]
-    # (https://cloud.google.com/error-reporting/docs/).
+    # [Stackdriver Error Reporting
+    # Documentation](https://cloud.google.com/error-reporting/docs/).
     #
     # The goal of google-cloud-ruby is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by Google::Cloud#error_reporting.
-    # You can provide the project and credential information to connect to the
-    # Stackdriver Error Reporting service, or if you are running on Google
-    # Cloud Platform this configuration is taken care of for you. You can read
-    # more about the options for connecting in the [Authentication
+    # Rubyists. Authentication is handled by the client. You can provide the
+    # project and credential information to connect to the Stackdriver Error
+    # Reporting service, or if you are running on Google Cloud Platform this
+    # configuration is taken care of for you. You can read more about the
+    # options for connecting in the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ## How to report errors
