@@ -31,8 +31,8 @@ module Google
       class Pool
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
-        def initialize client, min: 2, max: 10, keepalive: 1500,
-                       write_ratio: 0.5, fail: true
+        def initialize client, min: 10, max: 100, keepalive: 1500,
+                       write_ratio: 0.3, fail: true
           @client = client
           @min = min
           @max = max

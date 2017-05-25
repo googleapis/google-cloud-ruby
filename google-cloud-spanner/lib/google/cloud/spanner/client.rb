@@ -51,8 +51,8 @@ module Google
       class Client
         ##
         # @private Creates a new Spanner Client instance.
-        def initialize project, instance_id, database_id, min: 2, max: 10,
-                       keepalive: 1500, write_ratio: 0.5, fail: true
+        def initialize project, instance_id, database_id, min: 10, max: 100,
+                       keepalive: 1500, write_ratio: 0.3, fail: true
           @project = project
           @instance_id = instance_id
           @database_id = database_id
