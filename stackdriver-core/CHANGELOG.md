@@ -1,5 +1,9 @@
 # Release History
 
+### 1.1.0 / 2017-05-25
+
+* Introduce new Stackdriver instrumentation configuration interface.
+
 ### 1.0.0 / 2017-03-31
 
 * Release 1.0
