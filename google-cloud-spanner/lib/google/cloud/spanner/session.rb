@@ -498,7 +498,14 @@ module Google
         def reload!
           ensure_service!
           @grpc = service.get_session path
-          self
+          @last_updated_at = Time.now
+          return self
+        rescue Google::Cloud::NotFoundError
+          @grpc = service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          @last_updated_at = Time.now
+          return self
         end
 
         ##

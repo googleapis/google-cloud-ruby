@@ -40,6 +40,11 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
   end
 
   it "can checkout and checkin a session" do
+    mock = Minitest::Mock.new
+    # reload on session pool checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    spanner.service.mocked_service = mock
+
     pool.all_sessions.size.must_equal 1
     pool.session_queue.size.must_equal 1
 
@@ -52,11 +57,16 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
     pool.all_sessions.size.must_equal 1
     pool.session_queue.size.must_equal 1
+
+    mock.verify
   end
 
   it "creates new sessions when needed" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    # reload on session pool checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1
@@ -82,6 +92,11 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    # reload on session pool checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1
@@ -126,6 +141,9 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     mock = Minitest::Mock.new
     # created when checking in
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
+    # reload on session pool checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1
@@ -152,6 +170,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     # created when checking out
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     # created when checking in
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -179,6 +198,8 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     # created when checking in
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     spanner.service.mocked_service = mock
@@ -215,10 +236,16 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-003-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-004-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     # created when checking in
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-003-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-004-02"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1

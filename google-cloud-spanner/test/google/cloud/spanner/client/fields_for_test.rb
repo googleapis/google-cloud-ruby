@@ -55,6 +55,8 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE 1 = 0", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    # created when checking in
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     fields = client.fields_for "users"

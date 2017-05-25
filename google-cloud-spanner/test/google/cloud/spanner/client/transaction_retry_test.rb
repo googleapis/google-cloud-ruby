@@ -89,6 +89,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
     # transaction checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
@@ -143,6 +144,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
     # transaction checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
@@ -197,6 +199,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
     # transaction checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
@@ -254,6 +257,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
     # transaction checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args
@@ -324,6 +328,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
 
     # transaction checkin
+    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
 
     def mock.commit *args

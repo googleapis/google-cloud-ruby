@@ -90,6 +90,7 @@ module Google
             fail ArgumentError, "Cannot checkin session"
           end
 
+          session.reload!
           @mutex.synchronize do
             session_queue.push session
 
@@ -143,8 +144,9 @@ module Google
             fail ArgumentError, "Cannot checkin session"
           end
 
+          tx = tx.session.reload!.create_transaction
           @mutex.synchronize do
-            transaction_queue.push tx.session.create_transaction
+            transaction_queue.push tx
 
             @resource.signal
           end
