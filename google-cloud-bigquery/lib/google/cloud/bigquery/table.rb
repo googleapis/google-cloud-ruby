@@ -413,7 +413,7 @@ module Google
         #
         #   data = table.data
         #   data.each do |row|
-        #     puts row["first_name"]
+        #     puts row[:first_name]
         #   end
         #   if data.next?
         #     more_data = data.next if data.next?
@@ -428,7 +428,7 @@ module Google
         #
         #   data = table.data
         #   data.all do |row|
-        #     puts row["first_name"]
+        #     puts row[:first_name]
         #   end
         #
         # @!group Data

@@ -152,7 +152,7 @@ module Google
         #   job.wait_until_done!
         #   data = job.query_results
         #   data.each do |row|
-        #     puts row["word"]
+        #     puts row[:word]
         #   end
         #   data = data.next if data.next?
         #

@@ -205,7 +205,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -221,7 +221,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -238,7 +238,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -255,7 +255,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -371,7 +371,7 @@ module Google
         #   data = bigquery.query sql
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using legacy SQL:
@@ -383,7 +383,7 @@ module Google
         #   data = bigquery.query sql, legacy_sql: true
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Retrieve all rows: (See {QueryData#all})
@@ -394,7 +394,7 @@ module Google
         #   data = bigquery.query "SELECT name FROM `my_dataset.my_table`"
         #
         #   data.all do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using positional query parameters:
@@ -408,7 +408,7 @@ module Google
         #                         params: [1]
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using named query parameters:
@@ -422,7 +422,7 @@ module Google
         #                         params: { id: 1 }
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
@@ -729,7 +729,7 @@ module Google
         #                         params: { time: fourpm }
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Create Time with fractional seconds:
@@ -744,7 +744,7 @@ module Google
         #                         params: { time: precise_time }
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         def time hour, minute, second

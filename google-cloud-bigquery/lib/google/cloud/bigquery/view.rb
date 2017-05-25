@@ -384,7 +384,7 @@ module Google
         #
         #   data = view.data
         #   data.each do |row|
-        #     puts row["first_name"]
+        #     puts row[:first_name]
         #   end
         #   more_data = data.next if data.next?
         #

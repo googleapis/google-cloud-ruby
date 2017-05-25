@@ -619,7 +619,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -635,7 +635,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -651,7 +651,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -667,7 +667,7 @@ module Google
         #   job.wait_until_done!
         #   if !job.failed?
         #     job.query_results.each do |row|
-        #       puts row["name"]
+        #       puts row[:name]
         #     end
         #   end
         #
@@ -780,7 +780,7 @@ module Google
         #   data = dataset.query "SELECT name FROM my_table"
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using legacy SQL:
@@ -793,7 +793,7 @@ module Google
         #                        legacy_sql: true
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using positional query parameters:
@@ -806,7 +806,7 @@ module Google
         #                        params: [1]
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @example Query using named query parameters:
@@ -819,7 +819,7 @@ module Google
         #                        params: { id: 1 }
         #
         #   data.each do |row|
-        #     puts row["name"]
+        #     puts row[:name]
         #   end
         #
         # @!group Data
