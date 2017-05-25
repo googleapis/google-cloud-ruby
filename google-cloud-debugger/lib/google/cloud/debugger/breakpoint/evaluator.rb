@@ -897,8 +897,8 @@ module Google
             def format_message message_format, expressions
               # Substitute placeholders with expressions
               message = message_format.gsub(/(?<!\$)\$\d+/) do |placeholder|
-                  index = placeholder.match(/\$(\d+)/)[1].to_i
-                  index < expressions.size ? expressions[index].inspect : ""
+                index = placeholder.match(/\$(\d+)/)[1].to_i
+                index < expressions.size ? expressions[index].inspect : ""
               end
 
               # Unescape "$" charactors
