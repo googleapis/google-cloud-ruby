@@ -324,6 +324,10 @@ module Google
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :debugger
         Google::Cloud.configure.add_options :debugger
+
+        Google::Cloud.configure.define_singleton_method :debugger do
+          Google::Cloud.configure[:debugger]
+        end
       end
 
       ##
@@ -394,9 +398,9 @@ module Google
       #   the Google::Cloud::ErrorReporting module uses.
       #
       def self.configure
-        yield Google::Cloud.configure.debugger if block_given?
+        yield Google::Cloud.configure[:debugger] if block_given?
 
-        Google::Cloud.configure.debugger
+        Google::Cloud.configure[:debugger]
       end
     end
   end
