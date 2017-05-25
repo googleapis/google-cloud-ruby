@@ -136,7 +136,7 @@
     {
       "id": "google-cloud-error_reporting",
       "name": "google-cloud-error_reporting",
-      "defaultService": "google/cloud/errorreporting/v1beta1",
+      "defaultService": "google/cloud/errorreporting",
       "versions": [
         "v0.24.0",
         "master",
