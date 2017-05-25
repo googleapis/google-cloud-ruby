@@ -9,6 +9,16 @@ to the Stackdriver Logging service.
 On top of that, the google-cloud-logging also implements a Railtie class that 
 automatically enables the Rack Middleware in Rails applications when used.
 
+## Configuration
+The default configuration enables Stackdriver instrumentation features to run
+on Google Cloud Platform. You can easily configure the instrumentation library 
+if you want to run on a non Google Cloud environment or you want to customize 
+the default behavior.
+
+See the 
+[Configuration Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+for full configuration parameters.
+
 ## Using instrumentation with Ruby on Rails
 
 To install application instrumentation in your Ruby on Rails app, add this
@@ -18,27 +28,8 @@ add the following line to your `config/application.rb` file:
 require "google/cloud/logging/rails"
 ```
 This will load a Railtie that automatically integrates with the Rails
-framework by injecting a Rack middleware. The logging instrumentation can be 
-configured with the following Rails configuration:
-```ruby
-# Sharing authentication parameters
-config.google_cloud.project_id = "gcp-project-id"
-config.google_cloud.keyfile = "/path/to/gcp/secret.json"
-# Or more specificly for Logging
-config.google_cloud.logging.project_id = "gcp-project-id"
-config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
- 
-# Explicitly enable or disable Logging
-config.google_cloud.use_logging = true
- 
-# Set Stackdriver Logging log name
-config.google_cloud.logging.log_name = "my-app-log"
- 
-# Override default monitored resource if needed. E.g. used on AWS
-config.google_cloud.logging.monitored_resource.type = "aws_ec2_instance"
-config.google_cloud.logging.monitored_resource.labels.instance_id = "ec2-instance-id"
-config.google_cloud.logging.monitored_resource.labels.aws_account = "AWS account number"
-```
+framework by injecting a Rack middleware.
+
 ## Using instrumentation with Sinatra
 
 To install application instrumentation in your Sinatra app, add this gem,
@@ -52,17 +43,6 @@ use Google::Cloud::Logging::Middleware
 
 This will install the logging middleware in your application.
 
-You may customize the logging instrumention by providing your own
-Google::Cloud::Logging::Logger:
-```ruby
-require "google/cloud/logging"
- 
-logging = Google::Cloud::Logging.new
-resource = Google::Cloud::Logging::Middleware.build_monitored_resource
-logger = logging.logger "my-log-name",
-                        resource
-use Google::Cloud::Logging::Middleware, logger: logger
-```
 ### Using instrumentation with other Rack-based frameworks
 
 To install application instrumentation in an app using another Rack-based
