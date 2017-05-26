@@ -41,7 +41,12 @@ module Google
 
         def channel
           require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
+          GRPC::Core::Channel.new host, chan_args, chan_creds
+        end
+
+        def chan_args
+          { "grpc.max_send_message_length"    => -1,
+            "grpc.max_receive_message_length" => -1 }
         end
 
         def chan_creds
