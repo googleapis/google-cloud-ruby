@@ -1,5 +1,10 @@
 # Release History
 
+### 1.1.0 / 2017-05-25
+
+* Introduce new `Google::Cloud::Logging.configure` instrumentation configuration interface.
+* Google::Cloud::Logger now sends extra trace context information in log entries.
+
 ### 1.0.1 / 2017-04-21
 
 * Middleware constructor can be called without an explicit logger. This should make integration in non-Rails applications simpler.
