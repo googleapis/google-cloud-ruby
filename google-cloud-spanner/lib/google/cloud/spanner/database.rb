@@ -230,11 +230,6 @@ module Google
         # @see https://cloud.google.com/spanner/reference/rpc/google.iam.v1#google.iam.v1.Policy
         #   google.iam.v1.IAMPolicy
         #
-        # @param [Boolean] force Force the latest policy to be retrieved from
-        #   the Spanner service when `true`. Otherwise the policy will be
-        #   memoized to reduce the number of API calls made to the Spanner
-        #   service. The default is `false`.
-        #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the Spanner service and passed to the block. After
         #   the block completes, the modified policy will be written to the
@@ -244,23 +239,13 @@ module Google
         #
         # @return [Policy] The current Cloud IAM Policy for this database.
         #
-        # @example Policy values are memoized to reduce the number of API calls:
+        # @example
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
         #   database = spanner.database "my-instance", "my-database"
         #
-        #   policy = database.policy # API call
-        #   policy_2 = database.policy # No API call
-        #
-        # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   database = spanner.database "my-instance", "my-database"
-        #
-        #   policy = database.policy force: true # API call
-        #   policy_2 = database.policy force: true # API call
+        #   policy = database.policy
         #
         # @example Update the policy by passing a block:
         #   require "google/cloud/spanner"
@@ -272,17 +257,13 @@ module Google
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
-        def policy force: nil
-          @policy = nil if force || block_given?
-          @policy ||= begin
-            ensure_service!
-            grpc = service.get_database_policy instance_id, database_id
-            Policy.from_grpc grpc
-          end
-          return @policy unless block_given?
-          p = @policy.deep_dup
-          yield p
-          self.policy = p
+        def policy
+          ensure_service!
+          grpc = service.get_database_policy instance_id, database_id
+          policy = Policy.from_grpc grpc
+          return policy unless block_given?
+          yield policy
+          self.policy = policy
         end
 
         ##
@@ -300,6 +281,8 @@ module Google
         # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
         #   database
         #
+        # @return [Policy] The policy returned by the API update operation.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -316,7 +299,7 @@ module Google
           ensure_service!
           grpc = service.set_database_policy \
             instance_id, database_id, new_policy.to_grpc
-          @policy = Policy.from_grpc grpc
+          Policy.from_grpc grpc
         end
 
         ##

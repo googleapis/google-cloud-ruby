@@ -63,52 +63,6 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
-  it "memoizes policy" do
-    existing_policy = Google::Cloud::Spanner::Policy.from_grpc Google::Iam::V1::Policy.decode_json(viewer_policy_json)
-    instance.instance_variable_set "@policy", existing_policy
-
-    # No mocks, no errors, no HTTP calls are made
-    policy = instance.policy
-    policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 2
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-  end
-
-  it "makes API calls when forced, even if already memoized" do
-    get_res = Google::Iam::V1::Policy.decode_json owner_policy_json
-    mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [instance.path]
-    instance.service.mocked_instances = mock
-
-    existing_policy = Google::Cloud::Spanner::Policy.from_grpc Google::Iam::V1::Policy.decode_json(viewer_policy_json)
-    instance.instance_variable_set "@policy", existing_policy
-    returned_policy = instance.policy
-    returned_policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    returned_policy.roles.must_be_kind_of Hash
-    returned_policy.roles.size.must_equal 1
-    returned_policy.roles["roles/viewer"].must_be_kind_of Array
-    returned_policy.roles["roles/viewer"].count.must_equal 2
-    returned_policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    returned_policy.roles["roles/viewer"].last.must_equal  "serviceAccount:1234567890@developer.gserviceaccount.com"
-
-    policy = instance.policy force: true
-
-    mock.verify
-
-    policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be :nil?
-    policy.roles["roles/owner"].must_be_kind_of Array
-    policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "user:owner@example.com"
-    policy.roles["roles/owner"].last.must_equal  "serviceAccount:0987654321@developer.gserviceaccount.com"
-  end
-
   it "sets the IAM Policy" do
     get_res = Google::Iam::V1::Policy.decode_json owner_policy_json
     mock = Minitest::Mock.new
@@ -128,12 +82,10 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     policy.add "roles/owner", "user:newowner@example.com"
     policy.remove "roles/owner", "user:owner@example.com"
 
-    instance.policy = policy
+    policy = instance.policy = policy
 
     mock.verify
 
-    # Setting the policy also memoizes the policy
-    policy = instance.policy
     policy.must_be_kind_of Google::Cloud::Spanner::Policy
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
