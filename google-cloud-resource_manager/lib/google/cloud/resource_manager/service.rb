@@ -75,7 +75,7 @@ module Google
         ##
         # Returns API::Project
         def create_project project_id, name, labels
-          project_attrs = { projectId: project_id, name: name,
+          project_attrs = { project_id: project_id, name: name,
                             labels: labels }.delete_if { |_, v| v.nil? }
           execute { service.create_project API::Project.new(project_attrs) }
         end
