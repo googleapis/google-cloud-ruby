@@ -1,5 +1,12 @@
 # Release History
 
+### 0.25.0 / 2017-05-25
+
+* New Error Reporting instrumentation client.
+* Introduce simple `Google::Cloud::ErrorReporting.report` interface to easily report Ruby exception.
+* New `Google::Cloud::ErrorReporting.configure` instrumentation configuration interface.
+* `Google::Cloud::ErrorReporting::Middleware` can now be used without required parameters.
+
 ### 0.24.0 / 2017-03-31
 
 * Automatic retry on `UNAVAILABLE` errors
