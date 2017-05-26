@@ -1,5 +1,9 @@
 # Release History
 
+### 0.25.0 / 2017-05-25
+
+* Introduce new `Google::Cloud::Trace.configure` instrumentation configuration interface.
+
 ### 0.24.1 / 2017-04-21
 
 * If Rails integration fails due to an auth error, the notice is now printed to STDOUT rather than STDERR, which should make it a bit less scary when displayed in Docker output.
