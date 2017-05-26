@@ -143,6 +143,27 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
   end
 
+  it "creates a bucket with block labels" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.labels = { "env" => "production", "foo" => "bar" }
+    mock.expect :insert_bucket, created_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.labels.must_equal Hash.new
+      b.labels = { "env" => "production" }
+      b.labels["foo"] = "bar"
+    end
+
+    mock.verify
+
+    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
+    bucket.name.must_equal bucket_name
+    bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
+  end
+
   it "creates a bucket with predefined acl" do
     mock = Minitest::Mock.new
     created_bucket = create_bucket_gapi bucket_name

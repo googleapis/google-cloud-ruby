@@ -37,12 +37,17 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     one_off_bucket.website_main.must_be :nil?
     one_off_bucket.website_404.must_be :nil?
+    one_off_bucket.labels.must_equal({})
     one_off_bucket.update do |b|
       b.website_main = "index.html"
       b.website_404 = "not_found.html"
+      # update labels with symbols
+      b.labels[:foo] = :bar
     end
     one_off_bucket.website_main.must_equal "index.html"
     one_off_bucket.website_404.must_equal "not_found.html"
+    # labels with symbols are not strings
+    one_off_bucket.labels.must_equal({ "foo" => "bar" })
 
     one_off_bucket_copy = storage.bucket one_off_bucket_name
     one_off_bucket_copy.wont_be :nil?
@@ -67,6 +72,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.versioning?.must_be :nil?
     bucket.website_main.must_be :nil?
     bucket.website_404.must_be :nil?
+    bucket.labels.must_be :empty?
 
     bucket.cors.each do |cors|
       cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
