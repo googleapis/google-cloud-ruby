@@ -1,5 +1,13 @@
 # Release History
 
+### 0.6.0 / 2017-05-25
+
+* Debugger 0.25.0 release.
+* Error Reporting 0.25.0 release.
+* Logging 1.1.0 release.
+* Trace 0.25.0 release.
+* Remove `google-cloud-monitoring` from this umbrella gem.
+
 ### 0.5.0 / 2017-03-31
 
 * Logging 1.0 release
