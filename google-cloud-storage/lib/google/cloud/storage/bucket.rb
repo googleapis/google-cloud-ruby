@@ -265,6 +265,22 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels. The hash is frozen and changes are not
+        # allowed.
+        def labels
+          m = @gapi.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the hash of user-provided labels.
+        def labels= labels
+          @gapi.labels = labels
+          patch_gapi! :labels
+        end
+
+        ##
         # Updates the page returned from a static website served from the bucket
         # when a site visitor requests a resource that does not exist.
         #
@@ -320,6 +336,7 @@ module Google
           updater = Updater.new @gapi
           yield updater
           # Add check for mutable cors
+          updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           patch_gapi! updater.updates unless updater.updates.empty?
         end
@@ -1078,7 +1095,30 @@ module Google
           def initialize gapi
             @updates = []
             @gapi = gapi
+            @labels = @gapi.labels.to_h.dup
             @cors_builder = nil
+          end
+
+          ##
+          # A hash of user-provided labels. Changes are allowed.
+          def labels
+            @labels
+          end
+
+          ##
+          # Updates the hash of user-provided labels.
+          def labels= labels
+            @labels = labels
+            @gapi.labels = @labels
+            patch_gapi! :labels
+          end
+
+          ##
+          # @private Make sure any labels changes are saved
+          def check_for_changed_labels!
+            return if @labels == @gapi.labels.to_h
+            @gapi.labels = @labels
+            patch_gapi! :labels
           end
 
           def cors

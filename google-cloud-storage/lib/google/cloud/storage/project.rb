@@ -293,6 +293,7 @@ module Google
             b.versioning = versioning unless versioning.nil?
           end
           yield updater if block_given?
+          updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl)

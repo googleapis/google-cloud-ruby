@@ -182,14 +182,41 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     mock.verify
   end
 
+  it "cannot modify its labels" do
+    bucket.labels.must_equal Hash.new
+    assert_raises do
+      bucket.labels["foo"] = "bar"
+    end
+  end
+
+  it "updates its labels" do
+    mock = Minitest::Mock.new
+    new_labels = { "env" => "production", "foo" => "bar" }
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new labels: new_labels
+    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class
+    returned_bucket_hash[:labels] = new_labels
+    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json returned_bucket_hash.to_json
+    mock.expect :patch_bucket, returned_bucket_gapi,
+      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil]
+
+    bucket.service.mocked_service = mock
+
+    bucket.labels.must_equal Hash.new
+    bucket.labels = new_labels
+    bucket.labels.must_equal new_labels
+
+    mock.verify
+  end
+
   it "updates multiple attributes in a block" do
     mock = Minitest::Mock.new
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_bucket: bucket_logging_bucket, log_object_prefix: bucket_logging_prefix
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main, not_found_page: bucket_website_404
-    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi, logging: patch_logging_gapi, website: patch_website_gapi
-    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404).to_json
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(versioning: patch_versioning_gapi, logging: patch_logging_gapi, website: patch_website_gapi, labels: { "env" => "production" })
+    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class, true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404
+    returned_bucket_hash[:labels] = { "env" => "production" }
+    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json returned_bucket_hash.to_json
     mock.expect :patch_bucket, returned_bucket_gapi,
       [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil]
 
@@ -200,6 +227,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     bucket.logging_prefix.must_equal nil
     bucket.website_main.must_equal nil
     bucket.website_404.must_equal nil
+    bucket.labels.must_equal Hash.new
 
     bucket.update do |b|
       b.versioning = true
@@ -207,6 +235,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       b.logging_bucket = bucket_logging_bucket
       b.website_main = bucket_website_main
       b.website_404 = bucket_website_404
+      b.labels["env"] = "production"
     end
 
     bucket.versioning?.must_equal true
@@ -214,6 +243,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     bucket.logging_prefix.must_equal bucket_logging_prefix
     bucket.website_main.must_equal bucket_website_main
     bucket.website_404.must_equal bucket_website_404
+    bucket.labels.must_equal({ "env" => "production" })
 
     mock.verify
   end
