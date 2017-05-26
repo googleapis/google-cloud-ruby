@@ -898,9 +898,9 @@ module Google
         # @see https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy
         #   Buckets: setIamPolicy
         #
-        # @param [Boolean] force Force load the latest policy when `true`.
-        #   Otherwise the policy will be memoized to reduce the number of API
-        #   calls made. The default is `false`.
+        # @param [Boolean] force [Deprecated] Force the latest policy to be
+        #   retrieved from the Storage service when `true`. Deprecated because
+        #   the latest policy is now always retrieved. The default is `false`.
         #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the service and passed to the block. After the
@@ -910,15 +910,14 @@ module Google
         #
         # @return [Policy] the current Cloud IAM Policy for this bucket
         #
-        # @example Policy values are memoized to reduce the number of API calls:
+        # @example
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy # API call
-        #   policy_2 = bucket.policy # No API call
+        #   policy = bucket.policy
         #
         # @example Retrieve the latest policy and update it in a block:
         #   require "google/cloud/storage"
@@ -929,19 +928,16 @@ module Google
         #
         #   bucket.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
-        #   end # 2 API calls
+        #   end
         #
-        def policy force: false
-          @policy = nil if force || block_given?
-          @policy ||= begin
-            ensure_service!
-            gapi = service.get_bucket_policy name
-            Policy.from_gapi gapi
-          end
-          return @policy unless block_given?
-          p = @policy.deep_dup
-          yield p
-          self.policy = p
+        def policy force: nil
+          warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
+          ensure_service!
+          gapi = service.get_bucket_policy name
+          policy = Policy.from_gapi gapi
+          return policy unless block_given?
+          yield policy
+          self.policy = policy
         end
 
         ##
@@ -961,6 +957,8 @@ module Google
         # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
         #   bucket
         #
+        # @return [Policy] The policy returned by the API update operation.
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -977,7 +975,7 @@ module Google
         def policy= new_policy
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi
-          @policy = Policy.from_gapi gapi
+          Policy.from_gapi gapi
         end
 
         ##

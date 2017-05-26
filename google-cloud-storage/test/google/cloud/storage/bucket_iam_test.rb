@@ -67,86 +67,24 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
   end
 
-  it "memoizes policy" do
-    bucket.instance_variable_set "@policy", old_policy
-
-    # No mocks, no errors, no HTTP calls are made
-    policy = bucket.policy
-    policy.must_be_kind_of Google::Cloud::Storage::Policy
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    policy.roles["roles/storage.objectViewer"].count.must_equal 1
-    policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-  end
-
-  it "can force load the policy" do
-    mock = Minitest::Mock.new
-    mock.expect :get_bucket_iam_policy, new_policy_gapi, [bucket_name]
-
-    storage.service.mocked_service = mock
-    policy = bucket.policy force: true
-    mock.verify
-
-    policy.must_be_kind_of Google::Cloud::Storage::Policy
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    policy.roles["roles/storage.objectViewer"].count.must_equal 2
-    policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-  end
-
-  it "can force load the policy, even if already memoized" do
-    # memoize the policy object
-    bucket.instance_variable_set "@policy", old_policy
-
-    returned_policy = bucket.policy
-    returned_policy.must_be_kind_of Google::Cloud::Storage::Policy
-    returned_policy.roles.must_be_kind_of Hash
-    returned_policy.roles.size.must_equal 1
-    returned_policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    returned_policy.roles["roles/storage.objectViewer"].count.must_equal 1
-    returned_policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-
-    mock = Minitest::Mock.new
-    mock.expect :get_bucket_iam_policy, new_policy_gapi, [bucket_name]
-
-    storage.service.mocked_service = mock
-    policy = bucket.policy force: true
-    mock.verify
-
-    policy.must_be_kind_of Google::Cloud::Storage::Policy
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    policy.roles["roles/storage.objectViewer"].count.must_equal 2
-    policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-  end
-
   it "sets the policy" do
     mock = Minitest::Mock.new
     mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi]
 
     storage.service.mocked_service = mock
-    bucket.policy = new_policy
+    policy = bucket.policy = new_policy
     mock.verify
 
-    # Setting the policy also memoizes the policy
-    bucket.policy.must_be_kind_of Google::Cloud::Storage::Policy
-    bucket.policy.roles.must_be_kind_of Hash
-    bucket.policy.roles.size.must_equal 1
-    bucket.policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    bucket.policy.roles["roles/storage.objectViewer"].count.must_equal 2
-    bucket.policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-    bucket.policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
+    policy.roles["roles/storage.objectViewer"].count.must_equal 2
+    policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
+    policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "sets the policy in a block" do
-    # memoize the policy object, to ensure that it is reloaded for update
-    bucket.instance_variable_set "@policy", old_policy
-
     mock = Minitest::Mock.new
     mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name]
 
@@ -160,11 +98,11 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
     policy.roles.must_be_kind_of Hash
-    bucket.policy.roles.size.must_equal 1
-    bucket.policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
-    bucket.policy.roles["roles/storage.objectViewer"].count.must_equal 2
-    bucket.policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
-    bucket.policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    policy.roles.size.must_equal 1
+    policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
+    policy.roles["roles/storage.objectViewer"].count.must_equal 2
+    policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
+    policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "tests the permissions available" do
