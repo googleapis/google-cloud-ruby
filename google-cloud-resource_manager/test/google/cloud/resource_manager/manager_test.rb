@@ -31,7 +31,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
   it "creates a project" do
     mock = Minitest::Mock.new
     created_project = create_project_gapi("new-project-456")
-    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(projectId: "new-project-456")]
+    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(project_id: "new-project-456")]
 
     resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-456"
@@ -46,7 +46,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
   it "creates a project with a name and labels" do
     mock = Minitest::Mock.new
     created_project = create_project_gapi("new-project-789", "My New Project", {"env" => "development"})
-    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(projectId: "new-project-789", name: "My New Project", labels: {:env => :development})]
+    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(project_id: "new-project-789", name: "My New Project", labels: {:env => :development})]
 
     resource_manager.service.mocked_service = mock
     project = resource_manager.create_project "new-project-789",
