@@ -46,17 +46,17 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     end
   end
 
-  describe "#eval_breakpoint" do
+  describe "#breakpoint_hit" do
     let(:breakpoint) {
       Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb", 123
     }
 
-    it "doesn't call Breakpoint#eval_call_stack if breakpoint is already completed" do
-      stubbed_eval_call_stack = ->(_) { fail "Shouldn't be called" }
+    it "doesn't call BreakpointManager#breakpoint_hit if breakpoint is already completed" do
+      stubbed_breakpoint_hit = ->(_) { fail "Shouldn't be called" }
 
-      breakpoint.stub :eval_call_stack, stubbed_eval_call_stack do
+      breakpoint_manager.stub :breakpoint_hit, stubbed_breakpoint_hit do
         breakpoint.stub :complete?, true do
-          tracer.eval_breakpoint breakpoint, nil
+          tracer.breakpoint_hit breakpoint, nil
         end
       end
     end
@@ -67,42 +67,19 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.update_breakpoints_cache
       tracer.breakpoints_cache.wont_be_empty
 
-      stubbed_eval_call_stack = ->(_) { breakpoint.complete }
+      stubbed_evaluate = ->(_) { breakpoint.complete }
       mocked_disable_traces = Minitest::Mock.new
       mocked_disable_traces.expect :call, nil
 
-      breakpoint.stub :eval_call_stack, stubbed_eval_call_stack do
+      breakpoint.stub :evaluate, stubbed_evaluate do
         transmitter.stub :submit, nil do
           tracer.stub :disable_traces, mocked_disable_traces do
-            tracer.eval_breakpoint breakpoint, nil
+            tracer.breakpoint_hit breakpoint, nil
           end
         end
       end
 
       mocked_disable_traces.verify
-    end
-
-    it "marks breakpoint off fromm breakpoint_manager and submits breakpoint" do
-      mocked_submit = Minitest::Mock.new
-      mocked_submit.expect :call, nil, [Google::Cloud::Debugger::Breakpoint]
-      mocked_mark_off = Minitest::Mock.new
-      mocked_mark_off.expect :call, nil, [Google::Cloud::Debugger::Breakpoint]
-
-      stubbed_eval_call_stack = ->(_) { breakpoint.complete }
-
-      breakpoint_manager.instance_variable_set :@active_breakpoints, [breakpoint]
-      tracer.update_breakpoints_cache
-
-      breakpoint.stub :eval_call_stack, stubbed_eval_call_stack do
-        transmitter.stub :submit, mocked_submit do
-          breakpoint_manager.stub :mark_off, mocked_mark_off do
-            tracer.eval_breakpoint breakpoint, nil
-          end
-        end
-      end
-
-      mocked_submit.verify
-      mocked_mark_off.verify
     end
   end
 

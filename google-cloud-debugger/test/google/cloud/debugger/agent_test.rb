@@ -22,6 +22,20 @@ describe Google::Cloud::Debugger::Agent, :mock_debugger do
       agent.breakpoint_manager.must_be_kind_of Google::Cloud::Debugger::BreakpointManager
       agent.breakpoint_manager.on_breakpoints_change.must_be_kind_of Method
       agent.transmitter.must_be_kind_of Google::Cloud::Debugger::Transmitter
+      agent.logger.must_be_kind_of Google::Cloud::Logging::Logger
+    end
+
+    it "the default logger shares same project_id and credentials" do
+      agent.logger.project.must_equal service.project
+
+      agent.logger.writer.logging.service.credentials.must_equal service.credentials
+    end
+
+    it "uses the logger passed in" do
+      new_agent = Google::Cloud::Debugger::Agent.new nil, logger: "test-logger",
+                                                          module_name: nil,
+                                                          module_version: nil
+      new_agent.logger.must_equal "test-logger"
     end
   end
 

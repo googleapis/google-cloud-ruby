@@ -29,10 +29,26 @@ module Google
         # Breakpoint identifier, unique in the scope of the debuggee.
         attr_accessor :id
 
-        # TODO: Implement logpoint
-        # attr_accessor :action
-        # attr_accessor :log_message_format
-        # attr_accessor :log_level
+        ##
+        # Action to take when a breakpoint is hit. Either :CAPTURE or :LOG.
+        # @return [Symbol]
+        attr_accessor :action
+
+        ##
+        # Only relevant when action is LOG. Defines the message to log when the
+        # breakpoint hits. The message may include parameter placeholders $0,
+        # $1, etc. These placeholders are replaced with the evaluated value of
+        # the appropriate expression. Expressions not referenced in
+        # logMessageFormat are not logged.
+        attr_accessor :log_message_format
+
+        ##
+        # Indicates the severity of the log. Only relevant when action is LOG.
+        attr_accessor :log_level
+
+        ##
+        # The evaluated log message when action is LOG.
+        attr_accessor :evaluated_log_message
 
         ##
         # Breakpoint source location.
@@ -128,7 +144,7 @@ module Google
           super()
 
           @id = id
-          # @action = :capture
+          @action = :CAPTURE
           @location = SourceLocation.new.tap do |sl|
             sl.path = path
             sl.line = line.to_i
@@ -144,19 +160,23 @@ module Google
         # from a Google::Devtools::Clouddebugger::V2::Breakpoint object.
         def self.from_grpc grpc
           return new if grpc.nil?
-          new(grpc.id).tap do |b|
-            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
+          new.tap do |b|
+            b.id = grpc.id
+            b.action = grpc.action
             b.condition = grpc.condition
-            b.is_final_state = grpc.is_final_state
-            b.expressions = grpc.expressions.to_a
+            b.create_time = timestamp_from_grpc grpc.create_time
             b.evaluated_expressions =
               Breakpoint::Variable.from_grpc_list grpc.evaluated_expressions
-            b.create_time = timestamp_from_grpc grpc.create_time
+            b.expressions = grpc.expressions.to_a
             b.final_time = timestamp_from_grpc grpc.final_time
-            b.user_email = grpc.user_email
-            b.status = grpc.status
             b.labels = hashify_labels grpc.labels
+            b.log_message_format = grpc.log_message_format
+            b.log_level = grpc.log_level
+            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
+            b.is_final_state = grpc.is_final_state
+            b.status = grpc.status
             b.stack_frames = stack_frames_from_grpc grpc
+            b.user_email = grpc.user_email
           end
         end
 
@@ -243,9 +263,11 @@ module Google
         end
 
         ##
-        # Evaluate the breakpoint unless it's already marked as completed. Use
-        # "@stack_frames" and "@evaluated_expressions" instance variables to
-        # store the result snapshot. Set breakpoint to complete when done.
+        # Evaluate the breakpoint unless it's already marked as completed.
+        # Store evaluted results in @evaluated_expressions, @stack_frames, and
+        # @evaluated_log_message, depends on the action of breakpoint. Mark
+        # breakpoint complete if successfully evaluated a breakpoint with
+        # :CAPTURE action.
         #
         # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
         #   objects, from the call stack that leads to the triggering of the
@@ -253,28 +275,13 @@ module Google
         #
         # @return [Boolean] True if evaluated successfully; false otherwise.
         #
-        def eval_call_stack call_stack_bindings
-          synchronize do
-            return false if complete?
-
-            top_frame_binding = call_stack_bindings[0]
-
-            # Abort evaluation if breakpoint condition isn't met
-            return false unless check_condition top_frame_binding
-
-            begin
-              @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-              unless expressions.empty?
-                @evaluated_expressions =
-                  Evaluator.eval_expressions top_frame_binding, @expressions
-              end
-            rescue
-              return false
-            end
-
-            complete
+        def evaluate call_stack_bindings
+          case action
+          when :CAPTURE
+            evaluate_snapshot_point call_stack_bindings
+          when :LOG
+            evaluate_logpoint call_stack_bindings[0]
           end
-          true
         end
 
         ##
@@ -341,6 +348,55 @@ module Google
         end
 
         private
+
+        ##
+        # @private Evaluate snapshot point
+        def evaluate_snapshot_point call_stack_bindings
+          synchronize do
+            top_binding = call_stack_bindings[0]
+
+            return false if complete? || !check_condition(top_binding)
+
+            begin
+              unless expressions.empty?
+                @evaluated_expressions =
+                  Evaluator.eval_expressions top_binding, @expressions
+              end
+
+              @stack_frames = Evaluator.eval_call_stack call_stack_bindings
+
+              complete
+            rescue
+              return false
+            end
+          end
+
+          true
+        end
+
+        ##
+        # @private Evaluate logpoint
+        def evaluate_logpoint binding
+          synchronize do
+            return false if complete? || !check_condition(binding)
+
+            begin
+              unless expressions.empty?
+                @evaluated_expressions = expressions.map do |expression|
+                  Evaluator.readonly_eval_expression binding, expression
+                end
+              end
+              @evaluated_log_message =
+                Evaluator.format_message log_message_format,
+                                         evaluated_expressions
+            rescue
+              return false
+            end
+          end
+
+          true
+        end
+
 
         ##
         # @private Formats the labels so they can be saved to a

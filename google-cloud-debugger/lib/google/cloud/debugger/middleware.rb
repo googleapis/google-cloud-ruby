@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/logging/logger"
+
 module Google
   module Cloud
     module Debugger
@@ -47,6 +49,7 @@ module Google
                                    keyfile: configuration.keyfile,
                                    module_name: configuration.module_name,
                                    module_version: configuration.module_version)
+
           # Immediately start the debugger agent
           @debugger.start
         end
@@ -64,6 +67,11 @@ module Google
         def call env
           # Enable/resume breakpoints tracing
           @debugger.agent.tracer.start
+
+          # Use Stackdriver Logger for debugger if available
+          if env["rack.logger"].is_a? Google::Cloud::Logging::Logger
+            @debugger.agent.logger = env["rack.logger"]
+          end
 
           @app.call env
         ensure

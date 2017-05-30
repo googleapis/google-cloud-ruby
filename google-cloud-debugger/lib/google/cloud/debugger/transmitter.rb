@@ -53,7 +53,7 @@ module Google
 
         ##
         # @private Construct a new instance of Tramsnitter
-        def initialize service, agent, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
+        def initialize agent, service, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
           super()
           @service = service
           @agent = agent

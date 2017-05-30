@@ -15,6 +15,8 @@
 
 require "helper"
 
+require "logger"
+
 describe Google::Cloud::Debugger::Middleware, :mock_debugger do
   let(:rack_app) {
     app = OpenStruct.new
@@ -37,10 +39,34 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
       mocked_tracer.expect :disable_traces_for_thread, nil
 
       debugger.agent.stub :tracer, mocked_tracer do
-        middleware.call nil
+        middleware.call({})
       end
 
       mocked_tracer.verify
+    end
+
+    it "swaps debugger agent's logger if there's an Stackdriver Logger set for the Rack already" do
+      logger = Google::Cloud::Logging::Logger.new nil, nil, nil
+      debugger = middleware.instance_variable_get :@debugger
+      env = { "rack.logger" => logger }
+
+      debugger.agent.logger.wont_equal logger
+
+      middleware.call env
+
+      debugger.agent.logger.must_equal logger
+    end
+
+    it "doesn't swap debugger agent's logger if rack.logger isn't a Stackdriver Logger" do
+      logger = Logger.new(STDOUT)
+      debugger = middleware.instance_variable_get :@debugger
+      env = { "rack.logger" => logger }
+
+      debugger.agent.logger.wont_equal logger
+
+      middleware.call env
+
+      debugger.agent.logger.wont_equal logger
     end
   end
 end

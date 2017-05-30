@@ -19,6 +19,7 @@ require "google/cloud/debugger/debuggee"
 require "google/cloud/debugger/debugger_c"
 require "google/cloud/debugger/tracer"
 require "google/cloud/debugger/transmitter"
+require "google/cloud/logging"
 
 module Google
   module Cloud
@@ -46,6 +47,10 @@ module Google
       #   agent.start
       #
       class Agent
+        ##
+        # Name of the logpoints log file.
+        DEFAULT_LOG_NAME = "debugger_logpoints"
+
         ##
         # @private Debugger Agent is an asynchronous actor
         include AsyncActor
@@ -82,6 +87,10 @@ module Google
         attr_reader :transmitter
 
         ##
+        # The logger used to write the results of Logpoints.
+        attr_accessor :logger
+
+        ##
         # @private The last exception captured in the agent child thread
         attr_reader :last_exception
 
@@ -90,23 +99,27 @@ module Google
         #
         # @param [Google::Cloud::Debugger::Service] service The gRPC Service
         #   object
+        # @param [Google::Cloud::Logging::Logger] logger The logger used
+        #   to write the results of Logpoints.
         # @param [String] module_name Name for the debuggee application.
         #   Optional.
         # @param [String] module_version Version identifier for the debuggee
         #   application. Optional.
         #
-        def initialize service, module_name:, module_version:
+        def initialize service, logger: nil, module_name:, module_version:
           super()
 
           @service = service
           @debuggee = Debuggee.new service, module_name: module_name,
                                             module_version: module_version
           @tracer = Debugger::Tracer.new self
-          @breakpoint_manager = BreakpointManager.new service
+          @breakpoint_manager = BreakpointManager.new self, service
           @breakpoint_manager.on_breakpoints_change =
             method :breakpoints_change_callback
 
-          @transmitter = Transmitter.new service, self
+          @transmitter = Transmitter.new self, service
+
+          @logger = logger || default_logger
         end
 
         ##
@@ -197,6 +210,20 @@ module Google
               @thread.join
             end
           end
+        end
+
+        ##
+        # @private Create a default logger
+        def default_logger
+          project_id = @service.project
+          credentials = @service.credentials
+          logging = Google::Cloud::Logging::Project.new(
+            Google::Cloud::Logging::Service.new(
+              project_id, credentials))
+          resource =
+            Google::Cloud::Logging::Middleware.build_monitored_resource
+
+          logging.logger DEFAULT_LOG_NAME, resource
         end
       end
     end
