@@ -24,6 +24,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   let(:old_policy_gapi) {
     Google::Apis::StorageV1::Policy.new(
       etag: "CAE=",
+      resource_id: "buckets/#{bucket_name}",
       bindings: [
         Google::Apis::StorageV1::Policy::Binding.new(
           role: "roles/storage.objectViewer",
@@ -37,6 +38,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   let(:new_policy_gapi) {
     Google::Apis::StorageV1::Policy.new(
       etag: "CAE=",
+      resource_id: "buckets/#{bucket_name}",
       bindings: [
         Google::Apis::StorageV1::Policy::Binding.new(
           role: "roles/storage.objectViewer",
@@ -48,8 +50,8 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
       ]
     )
   }
-  let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi }
-  let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi }
+  let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi, storage.service }
+  let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi, storage.service }
 
   it "gets the policy" do
     mock = Minitest::Mock.new

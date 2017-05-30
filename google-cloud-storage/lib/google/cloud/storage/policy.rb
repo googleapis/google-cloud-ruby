@@ -70,13 +70,31 @@ module Google
       #   end
       #
       class Policy
-        attr_reader :etag, :roles
+        ##
+        # @private The Service object.
+        attr_accessor :service
+
+        ##
+        # @private The Google API Client object.
+        attr_accessor :gapi
 
         ##
         # @private Creates a Policy object.
-        def initialize etag, roles
-          @etag = etag
-          @roles = roles
+        def initialize
+          @service = nil
+          @gapi = Google::Apis::StorageV1::Policy.new
+        end
+
+        ##
+        # The name of the bucket.
+        def resource_id
+          @gapi.resource_id
+        end
+
+        ##
+        # HTTP 1.1 Entity tag for the policy.
+        def etag
+          @gapi.etag
         end
 
         ##
@@ -135,6 +153,12 @@ module Google
           role(role_name).delete member
         end
 
+        def roles
+          @roles ||= @gapi.bindings.each_with_object({}) do |binding, memo|
+            memo[binding.role] = binding.members.to_a
+          end
+        end
+
         ##
         # Convenience method returning the array of members bound to a role in
         # this policy, or an empty array if no value is present for the role in
@@ -162,43 +186,76 @@ module Google
         end
 
         ##
-        # Returns a deep copy of the policy.
+        # Returns a deep copy of the policy. The service object referenced by
+        # the policy is not duplicated.
         #
         # @return [Policy]
         #
         def deep_dup
           dup.tap do |p|
-            roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
-              memo[k] = v.dup rescue value
+            gapi_dup = @gapi.dup
+            bindings_dup =  @gapi.bindings.map do |binding|
+              binding_dup = binding.dup
+              binding_dup.members = binding.members.dup
+              binding_dup
             end
-            p.instance_variable_set "@roles", roles_dup
+            gapi_dup.bindings = bindings_dup
+            p.gapi = gapi_dup
           end
         end
+
+        ##
+        # Reloads the policy with current data from the Cloud IAM service.
+        #
+        # @example Retrieve the latest policy from the service:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy force: true # API call
+        #   policy_2 = policy.reload! # API call
+        #
+        def reload!
+          ensure_service!
+          bucket_name = resource_id.split("/").last
+          # TODO: replace line above with regex supporting generation
+          # TODO: conditional for get_object_policy
+          @gapi = service.get_bucket_policy bucket_name
+        end
+        alias_method :refresh!, :reload!
 
         ##
         # @private Convert the Policy to a
         # Google::Apis::StorageV1::Policy.
         def to_gapi
-          Google::Apis::StorageV1::Policy.new(
-            etag: etag,
-            bindings: roles.keys.map do |role_name|
-              next if roles[role_name].empty?
-              Google::Apis::StorageV1::Policy::Binding.new(
-                role: role_name,
-                members: roles[role_name]
-              )
-            end
-          )
+          @gapi.bindings = roles.keys.map do |role_name|
+            next if roles[role_name].empty?
+            Google::Apis::StorageV1::Policy::Binding.new(
+              role: role_name,
+              members: roles[role_name]
+            )
+          end
+          @gapi
         end
 
         ##
         # @private New Policy from a
         # Google::Apis::StorageV1::Policy object.
-        def self.from_gapi gapi
-          roles = gapi.bindings.each_with_object({}) do |binding, memo|
-            memo[binding.role] = binding.members.to_a
+        def self.from_gapi gapi, conn
+          new.tap do |f|
+            f.gapi = gapi
+            f.service = conn
           end
-          new gapi.etag, roles
+        end
+
+        protected
+
+        ##
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          fail "Must have active connection" unless service
         end
       end
     end
