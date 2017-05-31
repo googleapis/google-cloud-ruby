@@ -40,6 +40,9 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
       mocked_tracer.expect :start, nil
       mocked_tracer.expect :disable_traces_for_thread, nil
 
+      # Construct middleware
+      middleware
+
       debugger.agent.stub :tracer, mocked_tracer do
         middleware.call({})
       end

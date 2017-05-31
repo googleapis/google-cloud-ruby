@@ -142,7 +142,6 @@ module Google
         # Once Debugger Agent is stopped, it cannot be started again.
         #
         def stop
-          tracer.stop
           transmitter.stop
           async_stop
         end
@@ -171,10 +170,13 @@ module Google
         end
 
         ##
-        # @private Callback function to be invoked when the agent actor is about
-        # to be stopped.
-        def cleanup_callback
-          tracer.stop
+        # @private Callback function when the async actor thread state changes
+        def on_async_state_change
+          if async_running?
+            tracer.start
+          else
+            tracer.stop
+          end
         end
 
         private
@@ -204,13 +206,6 @@ module Google
           end
 
           registration_result
-        end
-
-        ##
-        # @private Override the #backgrounder_stoppable? method from AsyncActor
-        # module. The actor can be stopped unconditionally.
-        def backgrounder_stoppable?
-          true
         end
 
         ##

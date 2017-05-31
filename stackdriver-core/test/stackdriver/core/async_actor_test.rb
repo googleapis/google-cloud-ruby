@@ -33,6 +33,10 @@ describe Stackdriver::Core::AsyncActor do
     def start_thread &block
       block.call
     end
+
+    def on_async_state_change
+
+    end
   end
 
   let(:actor) { AsyncActorTest.new }
@@ -52,6 +56,21 @@ describe Stackdriver::Core::AsyncActor do
       thr.kill
       thr.join
     end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
+    end
   end
 
   describe "#async_stop" do
@@ -68,6 +87,21 @@ describe Stackdriver::Core::AsyncActor do
       stopping = actor.async_stop
       stopping.must_equal false
     end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
+    end
   end
 
   describe "#async_suspend" do
@@ -83,6 +117,21 @@ describe Stackdriver::Core::AsyncActor do
       suspended.must_equal false
 
       actor.async_stop
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 
@@ -101,6 +150,21 @@ describe Stackdriver::Core::AsyncActor do
       resumed.must_equal false
 
       actor.async_stop
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 
@@ -232,6 +296,21 @@ describe Stackdriver::Core::AsyncActor do
       stop = actor.async_stop!
       stop.must_equal :forced
       actor.async_stopped?.must_equal true
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 

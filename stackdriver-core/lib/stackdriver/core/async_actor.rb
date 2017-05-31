@@ -76,6 +76,7 @@ module Stackdriver
         synchronize do
           if async_state != :stopped
             @async_state = :stopping
+            async_state_change
             @lock_cond.broadcast
             true
           else
@@ -95,6 +96,7 @@ module Stackdriver
         synchronize do
           if async_state == :running
             @async_state = :suspended
+            async_state_change
             @lock_cond.broadcast
             true
           else
@@ -114,6 +116,7 @@ module Stackdriver
         synchronize do
           if async_state == :suspended
             @async_state = :running
+            async_state_change
             @lock_cond.broadcast
             true
           else
@@ -235,12 +238,7 @@ module Stackdriver
       def self.run_cleanup
         @exit_lock.synchronize do
           if @cleanup_list
-            until @cleanup_list.empty?
-              actor = @cleanup_list.shift
-
-              actor.cleanup_callback if actor.respond_to? :cleanup_callback
-              actor.async_stop!
-            end
+            @cleanup_list.shift.async_stop! until @cleanup_list.empty?
           end
         end
       end
@@ -300,6 +298,7 @@ module Stackdriver
         end
       ensure
         @async_state = :stopped
+        async_state_change
       end
 
       ##
@@ -317,6 +316,7 @@ module Stackdriver
               AsyncActor.unregister_for_cleanup self
             end
             @async_state = :running
+            async_state_change
           end
         end
       end
@@ -332,14 +332,15 @@ module Stackdriver
       end
 
       ##
-      # Abstract method that the inheriting classes should implement.
-      #
-      # When the actor is being gracefully asked to stop, it will only change
-      # the actor status from :stopping to :stopped if the result of this method
-      # returns true.
+      # @private Default backgrounder stop condition when asked to be stopped
+      # gracefully. Called from #async_run_job when async actor state changes
+      # to :stopping
       def backgrounder_stoppable?
-        fail "#{self.class} class should override " \
-          "#backgrounder_stoppable? method"
+        true
+      end
+
+      def async_state_change
+        on_async_state_change if respond_to? :on_async_state_change
       end
     end
   end

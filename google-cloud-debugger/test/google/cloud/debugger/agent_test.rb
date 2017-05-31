@@ -62,11 +62,11 @@ describe Google::Cloud::Debugger::Agent, :mock_debugger do
       mocked_tracer = Minitest::Mock.new
       mocked_tracer.expect :stop, nil
 
+      agent.async_start
+
       agent.stub :transmitter, mocked_transmitter do
         agent.stub :tracer, mocked_tracer do
-          agent.stub :async_stop, nil do
-            agent.stop
-          end
+          agent.stop
         end
       end
 
@@ -79,6 +79,8 @@ describe Google::Cloud::Debugger::Agent, :mock_debugger do
     it "calls Tracer#stop" do
       mocked_tracer = Minitest::Mock.new
       mocked_tracer.expect :stop, nil
+
+      agent.async_start
 
       agent.stub :tracer, mocked_tracer do
         agent.stop

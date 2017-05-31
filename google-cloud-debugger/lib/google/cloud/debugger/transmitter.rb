@@ -103,11 +103,9 @@ module Google
         end
 
         ##
-        # @private Callback function to be invoked when the transmitter actor
-        # is about to be stopped.
-        def cleanup_callback
+        # @private Callback function when the async actor thread state changes
+        def on_async_state_change
           synchronize do
-            async_stop
             @queue_resource.broadcast
           end
         end
