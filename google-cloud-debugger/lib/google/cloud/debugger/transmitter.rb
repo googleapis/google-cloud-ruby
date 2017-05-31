@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/debugger/async_actor"
+require "stackdriver/core/async_actor"
 
 module Google
   module Cloud
@@ -32,7 +32,7 @@ module Google
       # interaction with the rest debugger agent components
       #
       class Transmitter
-        include AsyncActor
+        include Stackdriver::Core::AsyncActor
 
         ##
         # @private Default maximum backlog size for the job queue
@@ -58,7 +58,8 @@ module Google
           @service = service
           @agent = agent
           @max_queue_size = max_queue_size
-          @queue = Thread::Queue.new
+          @queue = []
+          @queue_resource = new_cond
         end
 
         ##
@@ -82,7 +83,7 @@ module Google
         def submit breakpoint
           synchronize do
             @queue.push breakpoint
-            @lock_cond.broadcast
+            @queue_resource.broadcast
             # Discard old entries if queue gets too large
             @queue.pop while @queue.size > @max_queue_size
           end
@@ -101,6 +102,16 @@ module Google
           end
         end
 
+        ##
+        # @private Callback function to be invoked when the transmitter actor
+        # is about to be stopped.
+        def cleanup_callback
+          synchronize do
+            async_stop
+            @queue_resource.broadcast
+          end
+        end
+
         private
 
         ##
@@ -109,18 +120,20 @@ module Google
         # enqueued
         def wait_next_item
           synchronize do
-            @lock_cond.wait_while do
-              async_state == :suspended ||
-                (async_state == :running && @queue.empty?)
+            @queue_resource.wait_while do
+              async_suspended? || (async_running? && @queue.empty?)
             end
-            queue_item = nil
-            if @queue.empty?
-              @async_state = :stopped
-            else
-              queue_item = @queue.pop
-            end
-            @lock_cond.broadcast
-            queue_item
+            @queue.pop
+          end
+        end
+
+        ##
+        # @private Override the #backgrounder_stoppable? method from AsyncActor
+        # module. The actor can be gracefully stopped when queue is
+        # empty.
+        def backgrounder_stoppable?
+          synchronize do
+            @queue.empty?
           end
         end
       end

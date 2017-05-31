@@ -13,13 +13,13 @@
 # limitations under the License.
 
 
-require "google/cloud/debugger/async_actor"
 require "google/cloud/debugger/breakpoint_manager"
 require "google/cloud/debugger/debuggee"
 require "google/cloud/debugger/debugger_c"
 require "google/cloud/debugger/tracer"
 require "google/cloud/debugger/transmitter"
 require "google/cloud/logging"
+require "stackdriver/core/async_actor"
 
 module Google
   module Cloud
@@ -53,7 +53,7 @@ module Google
 
         ##
         # @private Debugger Agent is an asynchronous actor
-        include AsyncActor
+        include Stackdriver::Core::AsyncActor
 
         ##
         # @private The gRPC Service object.
@@ -120,6 +120,9 @@ module Google
           @transmitter = Transmitter.new self, service
 
           @logger = logger || default_logger
+
+          # Agent actor thread needs to force exit immediately.
+          set_cleanup_options timeout: 0
         end
 
         ##
@@ -167,6 +170,13 @@ module Google
           @last_exception = e
         end
 
+        ##
+        # @private Callback function to be invoked when the agent actor is about
+        # to be stopped.
+        def cleanup_callback
+          tracer.stop
+        end
+
         private
 
         ##
@@ -197,19 +207,10 @@ module Google
         end
 
         ##
-        # @private Override AsyncActor#async_stop to immediately kill the child
-        # thread instead of waiting for it to return, because the breakpoints
-        # are queried with a hanging long poll mechanism.
-        def async_stop
-          @startup_lock.synchronize do
-            unless @thread.nil?
-              tracer.stop
-
-              @async_state = :stopped
-              @thread.kill
-              @thread.join
-            end
-          end
+        # @private Override the #backgrounder_stoppable? method from AsyncActor
+        # module. The actor can be stopped unconditionally.
+        def backgrounder_stoppable?
+          true
         end
 
         ##

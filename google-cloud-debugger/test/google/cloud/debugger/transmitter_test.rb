@@ -17,37 +17,38 @@ require "helper"
 
 describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
   describe "#submit" do
+    let(:queue) { transmitter.instance_variable_get(:@queue) }
+    let(:queue_resource) { transmitter.instance_variable_get(:@queue_resource) }
+
     it "puts the breakpoint on queue" do
       breakpoint = OpenStruct.new
-      transmitter.start
-      transmitter.instance_variable_get(:@lock_cond).stub :broadcast, nil do
-        transmitter.submit breakpoint
-        transmitter.instance_variable_get(:@queue).pop.must_equal breakpoint
-      end
+
+      transmitter.submit breakpoint
+      queue.pop.must_equal breakpoint
     end
 
     it "doesn't exceeds max_queue_size" do
       max_queue_size = 3
       transmitter.max_queue_size = max_queue_size
-      transmitter.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+      transmitter.instance_variable_set :@queue_resource, OpenStruct.new(broadcast: nil)
 
       max_queue_size.times do |i|
         transmitter.submit i
       end
 
       wait_until_true do
-        transmitter.instance_variable_get(:@queue).size == max_queue_size
+        queue.size == max_queue_size
       end
 
       transmitter.submit nil
 
       wait_until_true do
-        transmitter.instance_variable_get(:@queue).size == max_queue_size
+        queue.size == max_queue_size
       end
 
-      transmitter.instance_variable_get(:@queue).size.must_equal max_queue_size
+      queue.size.must_equal max_queue_size
 
-      transmitter.instance_variable_set :@lock_cond, nil
+      transmitter.instance_variable_set :@queue_resource, nil
     end
 
     it "wakes up the child queue to dequeue the breakpoints" do
@@ -61,12 +62,17 @@ describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
         transmitter.submit breakpoint
 
         wait_result = wait_until_true do
-          transmitter.instance_variable_get(:@queue).size == 0
+          queue.size == 0
         end
         wait_result.must_equal :completed
       end
 
       mocked_service.verify
+
+      transmitter.stop
+      transmitter.synchronize do
+        queue_resource.broadcast
+      end
     end
   end
 end

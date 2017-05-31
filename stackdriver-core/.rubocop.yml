@@ -29,7 +29,11 @@ Metrics/AbcSize:
   Max: 25
 Metrics/MethodLength:
   Max: 20
+Metrics/ModuleLength:
+  Enabled: false
 Metrics/ParameterLists:
+  Enabled: false
+Style/AccessorMethodName:
   Enabled: false
 Style/RescueModifier:
   Enabled: false
