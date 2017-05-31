@@ -900,7 +900,7 @@ module Google
         #
         # @param [Boolean] force [Deprecated] Force the latest policy to be
         #   retrieved from the Storage service when `true`. Deprecated because
-        #   the latest policy is now always retrieved. The default is `false`.
+        #   the latest policy is now always retrieved. The default is `nil`.
         #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the service and passed to the block. After the
