@@ -160,20 +160,6 @@ module Google
         end
 
         ##
-        # Returns a deep copy of the policy.
-        #
-        # @return [Policy]
-        #
-        def deep_dup
-          dup.tap do |p|
-            roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
-              memo[k] = v.dup rescue value
-            end
-            p.instance_variable_set "@roles", roles_dup
-          end
-        end
-
-        ##
         # @private Convert the Policy to a
         # Google::Apis::CloudresourcemanagerV1::Policy.
         def to_gapi

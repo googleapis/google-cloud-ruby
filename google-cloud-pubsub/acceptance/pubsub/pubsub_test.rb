@@ -316,7 +316,7 @@ describe Google::Cloud::Pubsub, :pubsub do
         p.add role, member
       end
 
-      subscription.policy(force: true).role(role).must_include member
+      subscription.policy.role(role).must_include member
     end
 
     it "allows permissions to be tested on a topic" do

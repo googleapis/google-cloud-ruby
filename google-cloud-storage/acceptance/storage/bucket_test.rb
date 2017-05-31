@@ -136,7 +136,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
         p.add role, member
       end
 
-      bucket.policy(force: true).role(role).must_include member
+      bucket.policy.role(role).must_include member
     end
 
     it "allows permissions to be tested on a bucket" do

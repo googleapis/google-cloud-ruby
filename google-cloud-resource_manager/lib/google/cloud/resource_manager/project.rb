@@ -330,10 +330,6 @@ module Google
         # @see https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/setIamPolicy
         #   projects.setIamPolicy
         #
-        # @param [Boolean] force Force load the latest policy when `true`.
-        #   Otherwise the policy will be memoized to reduce the number of API
-        #   calls made. The default is `false`.
-        #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the service and passed to the block. After the
         #   block completes, the modified policy will be written to the service.
@@ -342,23 +338,13 @@ module Google
         #
         # @return [Policy] the current Cloud IAM Policy for this project
         #
-        # @example Policy values are memoized to reduce the number of API calls:
+        # @example
         #   require "google/cloud/resource_manager"
         #
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
         #
-        #   policy = project.policy # API call
-        #   policy_2 = project.policy # No API call
-        #
-        # @example Use `force` to retrieve the latest policy from the service:
-        #   require "google/cloud/resource_manager"
-        #
-        #   resource_manager = Google::Cloud::ResourceManager.new
-        #   project = resource_manager.project "tokyo-rain-123"
-        #
-        #   policy = project.policy force: true # API call
-        #   policy_2 = project.policy force: true # API call
+        #   policy = project.policy
         #
         # @example Update the policy by passing a block:
         #   require "google/cloud/resource_manager"
@@ -368,19 +354,15 @@ module Google
         #
         #   project.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
-        #   end # 2 API calls
+        #   end
         #
-        def policy force: false
-          @policy = nil if force || block_given?
-          @policy ||= begin
-            ensure_service!
-            gapi = service.get_policy project_id
-            Policy.from_gapi gapi
-          end
-          return @policy unless block_given?
-          p = @policy.deep_dup
-          yield p
-          self.policy = p
+        def policy
+          ensure_service!
+          gapi = service.get_policy project_id
+          policy = Policy.from_gapi gapi
+          return policy unless block_given?
+          yield policy
+          self.policy = policy
         end
 
         ##
@@ -400,6 +382,8 @@ module Google
         # @param [Policy] new_policy a new or modified Cloud IAM Policy for this
         #   project
         #
+        # @return [Policy] the policy returned by the API update operation
+        #
         # @example
         #   require "google/cloud/resource_manager"
         #
@@ -415,9 +399,7 @@ module Google
         def policy= new_policy
           ensure_service!
           gapi = service.set_policy project_id, new_policy.to_gapi
-          # Convert symbols to strings for backwards compatibility.
-          # This will go away when we add a ResourceManager::Policy class.
-          @policy = Policy.from_gapi gapi
+          Policy.from_gapi gapi
         end
 
         ##

@@ -164,9 +164,13 @@ module Google
         ##
         # Returns a deep copy of the policy.
         #
+        # @deprecated Because the latest policy is now always retrieved by
+        #   {Bucket#policy}.
+        #
         # @return [Policy]
         #
         def deep_dup
+          warn "DEPRECATED: Storage::Policy#deep_dup"
           dup.tap do |p|
             roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
               memo[k] = v.dup rescue value

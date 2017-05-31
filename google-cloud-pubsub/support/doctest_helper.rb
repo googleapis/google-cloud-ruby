@@ -317,14 +317,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Subscription#policy@Use `force` to retrieve the latest policy from the service:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Pubsub::Subscription#pull@A maximum number of messages returned can also be specified:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
