@@ -297,7 +297,7 @@ describe Google::Cloud::Pubsub, :pubsub do
         p.add role, member
       end
 
-      topic.policy(force: true).role(role).must_include member
+      topic.policy.role(role).must_include member
     end
 
     it "allows policy to be updated on a subscription" do
