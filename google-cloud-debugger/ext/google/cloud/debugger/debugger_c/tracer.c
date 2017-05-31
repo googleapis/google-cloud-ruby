@@ -162,13 +162,13 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
     c_matching_breakpoints = RARRAY_PTR(matching_result);
     matching_breakpoints_len = RARRAY_LEN(matching_result);
     trace_binding = rb_binding_new();
-    call_stack_bindings = rb_funcall(trace_binding, rb_intern("callers"), 0);
+    call_stack_bindings = rb_funcall(trace_binding, CALLERS_ID, 0);
     rb_ary_pop(call_stack_bindings);
 
     // Evaluate each of the matching breakpoint
     for (i = 0; i < matching_breakpoints_len; i++) {
         matching_breakpoint = c_matching_breakpoints[i];
-        rb_funcall(self, rb_intern("breakpoint_hit"), 2, matching_breakpoint, call_stack_bindings);
+        rb_funcall(self, BREAKPOINT_HIT_ID, 2, matching_breakpoint, call_stack_bindings);
     }
 
     return;
@@ -189,12 +189,12 @@ disable_line_trace_for_thread(VALUE thread)
     if (!RTEST(thread)) {
         thread = rb_thread_current();
     }
-    thread_variables_hash = rb_ivar_get(thread, rb_intern("locals"));
-    line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
+    thread_variables_hash = rb_ivar_get(thread, LOCALS_ID);
+    line_trace_set = rb_hash_aref(thread_variables_hash, LINE_TRACE_THREAD_FLAG);
 
     if (RTEST(line_trace_set)) {
         rb_thread_remove_event_hook(thread, line_trace_callback);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qfalse);
+        rb_hash_aset(thread_variables_hash, LINE_TRACE_THREAD_FLAG, Qfalse);
     }
 
     return Qnil;
@@ -209,12 +209,12 @@ static VALUE
 enable_line_trace_for_thread(VALUE self)
 {
     VALUE current_thread = rb_thread_current();
-    VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
-    VALUE line_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"));
+    VALUE thread_variables_hash = rb_ivar_get(current_thread, LOCALS_ID);
+    VALUE line_trace_set = rb_hash_aref(thread_variables_hash, LINE_TRACE_THREAD_FLAG);
 
     if (!RTEST(line_trace_set)) {
         rb_thread_add_event_hook(current_thread, line_trace_callback, RUBY_EVENT_LINE, self);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_line_trace_set"), Qtrue);
+        rb_hash_aset(thread_variables_hash, LINE_TRACE_THREAD_FLAG, Qtrue);
     }
 
     return Qnil;
@@ -236,7 +236,7 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 {
     VALUE match_found;
     VALUE self = (VALUE) data;
-    VALUE caller_locations = rb_funcall(rb_mKernel, rb_intern("caller_locations"), 2, INT2NUM(0), INT2NUM(1));
+    VALUE caller_locations = rb_funcall(rb_mKernel, CALLER_LOCATIONS_ID, 2, INT2NUM(0), INT2NUM(1));
     VALUE *c_caller_locations;
     VALUE caller_location;
     VALUE caller_path;
@@ -247,7 +247,7 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 
     c_caller_locations = RARRAY_PTR(caller_locations);
     caller_location = c_caller_locations[0];
-    caller_path = rb_funcall(caller_location, rb_intern("absolute_path"), 0);
+    caller_path = rb_funcall(caller_location, ABSOLUTE_PATH_ID, 0);
 
     if(!RTEST(caller_path)) {
         return;
@@ -277,12 +277,12 @@ disable_return_trace_for_thread(VALUE thread)
     if (!RTEST(thread)) {
         thread = rb_thread_current();
     }
-    thread_variables_hash = rb_ivar_get(thread, rb_intern("locals"));
-    return_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"));
+    thread_variables_hash = rb_ivar_get(thread, LOCALS_ID);
+    return_trace_set = rb_hash_aref(thread_variables_hash, RETURN_TRACE_THREAD_FLAG);
 
     if (RTEST(return_trace_set)) {
         rb_thread_remove_event_hook(thread, (rb_event_hook_func_t)return_trace_callback);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"), Qfalse);
+        rb_hash_aset(thread_variables_hash, RETURN_TRACE_THREAD_FLAG, Qfalse);
     }
 
     return Qnil;
@@ -297,13 +297,13 @@ static VALUE
 enable_return_trace_for_thread(VALUE self)
 {
     VALUE current_thread = rb_thread_current();
-    VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
-    VALUE return_trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"));
+    VALUE thread_variables_hash = rb_ivar_get(current_thread, LOCALS_ID);
+    VALUE return_trace_set = rb_hash_aref(thread_variables_hash, RETURN_TRACE_THREAD_FLAG);
 
     if (!RTEST(return_trace_set)) {
         int return_tracepoint_event = RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_C_RETURN | RUBY_EVENT_B_RETURN;
         rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)return_trace_callback, return_tracepoint_event, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_return_trace_set"), Qtrue);
+        rb_hash_aset(thread_variables_hash, RETURN_TRACE_THREAD_FLAG, Qtrue);
     }
 
     return Qnil;
@@ -400,7 +400,7 @@ rb_disable_traces(VALUE self)
     int i;
 
     file_tracepoint = rb_iv_get(self, "@file_tracepoint");
-    threads = rb_funcall(rb_cThread, rb_intern("list"), 0);
+    threads = rb_funcall(rb_cThread, LIST_ID, 0);
     c_threads_len = RARRAY_LEN(threads);
     c_threads = RARRAY_PTR(threads);
     UNUSED(fiber_tracepoint);
@@ -416,7 +416,7 @@ rb_disable_traces(VALUE self)
 
     for (i = 0; i < c_threads_len; i++) {
         thread = c_threads[i];
-        if (RTEST(rb_funcall(thread, rb_intern("alive?"), 0))) {
+        if (RTEST(rb_funcall(thread, ALIVE_Q_ID, 0))) {
             disable_line_trace_for_thread(thread);
             disable_return_trace_for_thread(thread);
         }

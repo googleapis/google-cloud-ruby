@@ -28,10 +28,10 @@ eval_trace_callback(void *data, rb_trace_arg_t *trace_arg)
     VALUE method_id = rb_tracearg_method_id(trace_arg);
 
     if (event & RUBY_EVENT_CALL) {
-        rb_funcall(evaluator, rb_intern("trace_func_callback"), 2, obj, method_id);
+        rb_funcall(evaluator, TRACE_FUNC_CB_ID, 2, obj, method_id);
     }
     if (event & RUBY_EVENT_C_CALL) {
-        rb_funcall(evaluator, rb_intern("trace_c_func_callback"), 3, obj, klass, method_id);
+        rb_funcall(evaluator, TRACE_FUNC_C_CB_ID, 3, obj, klass, method_id);
     }
 
     return;
@@ -41,12 +41,12 @@ static VALUE
 rb_disable_method_trace_for_thread(VALUE self)
 {
     VALUE current_thread = rb_thread_current();
-    VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
-    VALUE trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"));
+    VALUE thread_variables_hash = rb_ivar_get(current_thread, LOCALS_ID);
+    VALUE trace_set = rb_hash_aref(thread_variables_hash, EVAL_TRACE_THREAD_FLAG);
 
     if (RTEST(trace_set)) {
         rb_thread_remove_event_hook(current_thread, (rb_event_hook_func_t)eval_trace_callback);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"), Qfalse);
+        rb_hash_aset(thread_variables_hash, EVAL_TRACE_THREAD_FLAG, Qfalse);
     }
 
     return Qnil;
@@ -56,12 +56,12 @@ static VALUE
 rb_enable_method_trace_for_thread(VALUE self)
 {
     VALUE current_thread = rb_thread_current();
-    VALUE thread_variables_hash = rb_ivar_get(current_thread, rb_intern("locals"));
-    VALUE trace_set = rb_hash_aref(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"));
+    VALUE thread_variables_hash = rb_ivar_get(current_thread, LOCALS_ID);
+    VALUE trace_set = rb_hash_aref(thread_variables_hash, EVAL_TRACE_THREAD_FLAG);
 
     if (!RTEST(trace_set)) {
         rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)eval_trace_callback, RUBY_EVENT_CALL | RUBY_EVENT_C_CALL, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
-        rb_hash_aset(thread_variables_hash, rb_str_new2("gcloud_eval_trace_set"), Qtrue);
+        rb_hash_aset(thread_variables_hash, EVAL_TRACE_THREAD_FLAG, Qtrue);
     }
 
     return Qnil;
