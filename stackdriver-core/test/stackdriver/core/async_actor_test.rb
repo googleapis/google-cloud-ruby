@@ -215,11 +215,20 @@ describe Stackdriver::Core::AsyncActor do
     end
 
     it "doesn't wait if timeout is 0" do
+      thread_running = false
+      actor.define_singleton_method :run_backgrounder do
+        loop { thread_running = true }
+      end
+
       actor.async_start
 
-      actor.send :set_cleanup_options, timeout: 0
-
+      wait_result = wait_until_true do
+        thread_running
+      end
+      wait_result.must_equal :completed
       actor.async_stopped?.must_equal false
+
+      actor.send :set_cleanup_options, timeout: 0
       stop = actor.async_stop!
       stop.must_equal :forced
       actor.async_stopped?.must_equal true
