@@ -614,6 +614,8 @@ module Google
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
         #   Transaction object.
         #
+        # @return [Time] The timestamp at which the transaction committed.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -638,6 +640,9 @@ module Google
           @pool.with_transaction do |tx|
             begin
               block.call tx
+              commit_resp = @project.service.commit \
+                tx.session.path, tx.mutations, transaction_id: tx.transaction_id
+              return Convert.timestamp_to_time commit_resp.commit_timestamp
             rescue Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
               raise err if current_time - start_time > deadline
@@ -646,16 +651,15 @@ module Google
               # Create new transaction on the session and retry the block
               tx = tx.session.create_transaction
               retry
-            rescue RollbackError
-              # Transaction block was interrupted, allow to continue
             rescue => err
-              # Rollback transaction when handling unexpeced error
-              # Don't use Transaction#rollback since it raises
-              tx.safe_rollback
+              # Rollback transaction when handling unexpected error
+              tx.session.rollback tx.transaction_id
+              # Return nil if raised with rollback.
+              return nil if err.is_a? Rollback
+              # Re-raise error.
               raise err
             end
           end
-          nil
         end
 
         ##

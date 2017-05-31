@@ -70,7 +70,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     client.close
   end
 
-  it "can rollback a transaction and not continue code in the block" do
+  it "will rollback and not pass on the error when using Rollback" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -81,21 +81,22 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     spanner.service.mocked_service = mock
 
     results = nil
-    client.transaction do |tx|
+    timestamp = client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
       results = tx.execute "SELECT * FROM users"
-      # Rollback, RollbackError is handled by the client.
-      tx.rollback
-      # This code will never be run, so no mocks for it.
+      # This mutation will never be committed, so no mocks for it.
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+      # Cause an error
+      raise Google::Cloud::Spanner::Rollback
     end
+    timestamp.must_be :nil?
 
     mock.verify
 
     assert_results results
   end
 
-  it "will rollback a transaction when handling unexpected errors" do
+  it "will rollback and pass on the error" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -110,10 +111,10 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
       client.transaction do |tx|
         tx.must_be_kind_of Google::Cloud::Spanner::Transaction
         results = tx.execute "SELECT * FROM users"
+        # This mutation will never be committed, so no mocks for it.
+        tx.update "users", [{ id: 1, name: "Charlie", active: false }]
         # Cause an error
         1/0
-        # This code will never be run, so no mocks for it.
-        tx.update "users", [{ id: 1, name: "Charlie", active: false }]
       end
     end
 

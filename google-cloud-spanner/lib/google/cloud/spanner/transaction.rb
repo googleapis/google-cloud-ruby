@@ -45,6 +45,10 @@ module Google
         # @private The Session object.
         attr_accessor :session
 
+        def initialize
+          @commit = Commit.new
+        end
+
         ##
         # Identifier of the transaction results were run in.
         # @return [String] The transaction id.
@@ -189,33 +193,6 @@ module Google
         end
 
         ##
-        # Commits the transaction. Accepts an optional block for mutations.
-        #
-        # @yield [commit] The block for mutating the data.
-        # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
-        #
-        # @return [Time] The timestamp at which the transaction committed.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.transaction do |tx|
-        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-        #     tx.commit
-        #   end
-        #
-        def commit
-          ensure_session!
-          session.commit transaction_id: transaction_id do |c|
-            yield c
-          end
-        end
-
-        ##
         # Inserts or updates rows in a table. If any of the rows already exist,
         # then its column values are overwritten with the ones provided. Any
         # column values not explicitly written are preserved.
@@ -242,8 +219,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Time] The timestamp at which the transaction committed.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -257,7 +232,7 @@ module Google
         #
         def upsert table, *rows
           ensure_session!
-          session.upsert table, rows, transaction_id: transaction_id
+          @commit.upsert table, rows
         end
         alias_method :save, :upsert
 
@@ -287,8 +262,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Time] The timestamp at which the transaction committed.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -302,7 +275,7 @@ module Google
         #
         def insert table, *rows
           ensure_session!
-          session.insert table, rows, transaction_id: transaction_id
+          @commit.insert table, rows
         end
 
         ##
@@ -331,8 +304,6 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @return [Time] The timestamp at which the transaction committed.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -346,7 +317,7 @@ module Google
         #
         def update table, *rows
           ensure_session!
-          session.update table, rows, transaction_id: transaction_id
+          @commit.update table, rows
         end
 
         ##
@@ -390,7 +361,7 @@ module Google
         #
         def replace table, *rows
           ensure_session!
-          session.replace table, rows, transaction_id: transaction_id
+          @commit.replace table, rows
         end
 
         ##
@@ -413,7 +384,7 @@ module Google
         #
         def delete table, keys = []
           ensure_session!
-          session.delete table, keys, transaction_id: transaction_id
+          @commit.delete table, keys
         end
 
         ##
@@ -479,35 +450,6 @@ module Google
         end
 
         ##
-        # Rolls back the transaction, releasing any locks it holds. It is a good
-        # idea to call this for any transaction that includes one or more `read`
-        # or `execute` requests and for which the decision has been made not to
-        # commit.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.transaction { |tx| tx.rollback }
-        #
-        def rollback
-          safe_rollback
-          # Raise RollbackError so the client can stop the transaction.
-          fail RollbackError
-        end
-
-        ##
-        # @private
-        # Rolls back the transaction without raising.
-        #
-        def safe_rollback
-          ensure_session!
-          session.rollback transaction_id
-        end
-
-        ##
         # @private
         # Keeps the transaction alive by calling SELECT 1
         def keepalive!
@@ -517,6 +459,13 @@ module Google
         rescue Google::Cloud::NotFoundError
           @grpc = session.create_transaction.grpc
           return false
+        end
+
+        ##
+        # @private
+        # All of the mutations created in the transaction block.
+        def mutations
+          @commit.mutations
         end
 
         ##

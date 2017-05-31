@@ -19,12 +19,13 @@ module Google
   module Cloud
     module Spanner
       ##
-      # @private
-      # # RollbackError
+      # # Rollback
       #
-      # Signal that the Transaction has been rolled back.
+      # Used to rollback a transaction without passing on the exception. Any
+      # other error raised in a transaction will rollback _and_ pass on the
+      # exception.
       #
-      class RollbackError < Google::Cloud::Error
+      class Rollback < Google::Cloud::Error
       end
 
       ##

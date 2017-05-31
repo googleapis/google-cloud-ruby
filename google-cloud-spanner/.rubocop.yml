@@ -31,9 +31,9 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
-  Max: 25
+  Max: 30
 Metrics/MethodLength:
-  Max: 20
+  Max: 25
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:
