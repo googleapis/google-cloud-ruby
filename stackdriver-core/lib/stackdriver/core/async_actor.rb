@@ -77,7 +77,6 @@ module Stackdriver
           if async_state != :stopped
             @async_state = :stopping
             async_state_change
-            @lock_cond.broadcast
             true
           else
             false
@@ -97,7 +96,6 @@ module Stackdriver
           if async_state == :running
             @async_state = :suspended
             async_state_change
-            @lock_cond.broadcast
             true
           else
             false
@@ -117,7 +115,6 @@ module Stackdriver
           if async_state == :suspended
             @async_state = :running
             async_state_change
-            @lock_cond.broadcast
             true
           else
             false
@@ -283,14 +280,11 @@ module Stackdriver
       end
 
       ##
-      # @private Wrapper method for running the async job. It requires classes
-      #   that include AsyncActor module to define a run_backgrounder method.
-      #   Then it runs a loop that checks for the state is workable (:running
-      #   or :suspended), which calls the run_backgrounder method. It ensures
-      #   the state variable gets set to :stopped when this method exists.
+      # @private Wrapper method for running the async job. It runs a loop
+      # while the condition allows, and it calls the run_backgrounder method.
+      # This method also ensures the state variable gets set to :stopped when
+      # it exits.
       def async_run_job
-        fail "run_backgrounder method not defined" unless
-          respond_to? :run_backgrounder
         until async_stopped?
           run_backgrounder
 
@@ -339,8 +333,22 @@ module Stackdriver
         true
       end
 
+      ##
+      # @private Handler when the async actor's state changes. Call
+      # the `on_async_state_change` callback function if it's defined.
       def async_state_change
-        on_async_state_change if respond_to? :on_async_state_change
+        on_async_state_change
+
+        synchronize do
+          @lock_cond.broadcast
+        end
+      end
+
+      ##
+      # @private Default abstract definition of this function that's a no-op.
+      # The extending classes can override this method to handle state changing
+      # logic.
+      def on_async_state_change
       end
     end
   end
