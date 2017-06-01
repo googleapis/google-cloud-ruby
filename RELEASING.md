@@ -35,7 +35,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
     ```sh
     $ git checkout master
     $ git status
-    $ git pull --rebase
+    $ git pull <remote> master --rebase
     ```
 
 1. Edit the gem's `CHANGELOG.md`. Using your notes from the previous step, write bullet-point lists of the major and minor changes. You can also add examples, fixes, thank yous, and anything else helpful or relevant. See google-cloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
@@ -44,7 +44,14 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Edit the gem's entry in `docs/manifest.json`, adding your new version number to the head of the list, and moving `"master"` to be just below it.
 
-1. If your version change is greater than the [semver](http://semver.org/) patch version, edit the requirement for the gem in `google-cloud/google-cloud.gemspec`, replacing the old version number for the gem with your new version number.
+1. If your version change is greater than the [semver](http://semver.org/) patch version, edit the requirement for the gem in `google-cloud/google-cloud.gemspec` and `stackdriver/stackdriver.gemspec`, replacing the old version number for the gem with your new version number.
+
+1. Test all the version dependencies are correct.
+
+    ```sh
+    $ bundle update
+    $ bundle exec rake ci[yes]
+    ```
 
 1. Commit your changes. Copy and paste the significant points from your `CHANGELOG.md` edit as the description in your commit message.
 
@@ -55,7 +62,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 1. Ensure again that you have every commit from `origin master`.
 
     ```sh
-    $ git pull --rebase
+    $ git pull <remote> master --rebase
     ```
 
 1. Tag the version.
@@ -64,23 +71,25 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
     $ git tag <gem>/v<version>
     ```
 
-1. Push the tag.
+1. Push the tag. This will trigger a build job on [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby).
 
     ```sh
-    $ git push origin <gem>/v<version>
+    $ git push <remote> <gem>/v<version>
     ```
 
-1. Push the commit to the master branch.
+1. Repeat steps 1 through 15 if you're releasing multiple gems.
+
+1. Wait until the tag build job from step 15 has started (preferrably wait for it to finish and turn green). Then push the commit to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
 
     ```sh
-    $ git push
+    $ git push <remote> master
     ```
 
 1. On the [google-cloud-ruby releases page](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases), click [Draft a new release](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/new). Complete the form. Include the bullet-point lists of the major and minor changes from the gem's `CHANGELOG.md`. You can also add examples, fixes, thank yous, and anything else helpful or relevant. See google-cloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
 
 1. Click `Publish release`.
 
-1. Check that the [Circle CI build](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) has passed for the tag. Also, inspect the build logs to confirm that the `release` task completed successfully, and that the docs build succeeded. This can fail on a green build because it is an "after" action in the build.
+1. Check again that the [Circle CI build](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) has passed for the tag. Also, inspect the build logs to confirm that the `release` task completed successfully, and that the docs build succeeded. This can fail on a green build because it is an "after" action in the build.
 
 1. Confirm that the gem for the new version is available on [RubyGems.org](https://rubygems.org/gems/google-cloud).
 
