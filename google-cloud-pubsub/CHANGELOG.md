@@ -1,5 +1,16 @@
 # Release History
 
+### 0.25.0 / 2017-06-01
+
+* Add Snapshot and Subscription#seek.
+* Add Subscription#retain_acked and Subscription#retention.
+* Update gem spec homepage links.
+* Remove memoization of Policy.
+* Remove force parameter from Subscription#policy and Topic#policy.
+* Remove Policy#deep_dup.
+* Configure gRPC max_send_message_length and max_receive_message_length
+to accommodate max message size > 4 MB.
+
 ### 0.24.0 / 2017-03-31
 
 * Updated documentation
