@@ -1,5 +1,14 @@
 # Release History
 
+### 1.1.0 / 2017-06-01
+
+* Add Bucket#labels.
+* Update gem spec homepage links.
+* Remove memoization of Policy.
+* Deprecate force parameter in Bucket#policy. (Will be removed in a future version.)
+* Deprecate Policy#deep_dup. (Will be removed in a future version.)
+
+
 ### 1.0.1 / 2017-04-10
 
 * Add Bucket IAM support
