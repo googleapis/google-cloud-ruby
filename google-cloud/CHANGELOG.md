@@ -1,10 +1,16 @@
 # Release History
 
+### 0.31.0 / 2017-06-01
+
+* Pub/Sub 0.25.0 release
+* Resource Manager 0.25.0 release
+* Storage 1.1.0 release
+
 ### 0.30.0 / 2017-05-25
 
-* Error Reporting 0.25.0 release.
-* Logging 1.1.0 release.
-* Trace 0.25.0 release.
+* Error Reporting 0.25.0 release
+* Logging 1.1.0 release
+* Trace 0.25.0 release
 
 ### 0.29.0 / 2017-05-18
 

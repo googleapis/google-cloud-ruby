@@ -15,6 +15,6 @@
 
 module Google
   module Cloud
-    VERSION = "0.30.0"
+    VERSION = "0.31.0"
   end
 end
