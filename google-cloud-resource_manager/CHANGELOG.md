@@ -1,5 +1,13 @@
 # Release History
 
+### 0.25.0 / 2017-06-01
+
+* Fix apiary client argument case.
+* Update gem spec homepage links.
+* Remove memoization of Policy.
+* Remove force parameter from Project#policy.
+* Remove Policy#deep_dup.
+
 ### 0.24.1 / 2017-04-06
 
 * Fix error due to missing require.
