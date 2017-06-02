@@ -147,7 +147,10 @@ module Google
     # tables in a database.
     #
     # Use {Spanner::Client#commit} to execute various mutations atomically at a
-    # single logical point in time:
+    # single logical point in time. All changes are accumulated in memory until
+    # the block completes. Unlike {Spanner::Client#transaction}, which can also
+    # perform reads, this operation accepts only mutations and makes a single
+    # API request.
     #
     # ```ruby
     # require "google/cloud/spanner"
@@ -213,7 +216,10 @@ module Google
     # only if the budget of `Albums(2, 2)` is at least $300,000.
     #
     # Use {Spanner::Client#transaction} to execute both reads and writes
-    # atomically at a single logical point in time:
+    # atomically at a single logical point in time. All changes are accumulated
+    # in memory until the block completes. Transactions will be automatically
+    # retried when possible. This operation makes separate API requests to begin
+    # and commit the transaction.
     #
     # ```ruby
     # require "google/cloud/spanner"

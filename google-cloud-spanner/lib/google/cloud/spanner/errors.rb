@@ -21,9 +21,25 @@ module Google
       ##
       # # Rollback
       #
-      # Used to rollback a transaction without passing on the exception. Any
-      # other error raised in a transaction will rollback _and_ pass on the
-      # exception.
+      # Used to rollback a transaction without passing on the exception. See
+      # {Client#transaction}.
+      #
+      # @example
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   db.transaction do |tx|
+      #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+      #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+      #
+      #     if something_wrong?
+      #       # Rollback the transaction without passing on the error
+      #       # outside of the transaction method.
+      #       raise Google::Cloud::Spanner::Rollback
+      #     end
+      #   end
       #
       class Rollback < Google::Cloud::Error
       end

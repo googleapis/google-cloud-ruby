@@ -26,6 +26,9 @@ module Google
       # execute atomically at a single logical point in time across columns,
       # rows, and tables in a database.
       #
+      # All changes are accumulated in memory until the block passed to
+      # {Client#commit} completes.
+      #
       # @example
       #   require "google/cloud/spanner"
       #
@@ -49,6 +52,9 @@ module Google
         # Inserts or updates rows in a table. If any of the rows already exist,
         # then its column values are overwritten with the ones provided. Any
         # column values not explicitly written are preserved.
+        #
+        # All changes are accumulated in memory until the block passed to
+        # {Client#commit} completes.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -103,7 +109,10 @@ module Google
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
-        # write or request fails with error `ALREADY_EXISTS`.
+        # write or request fails with error {Google::Cloud::AlreadyExistsError}.
+        #
+        # All changes are accumulated in memory until the block passed to
+        # {Client#commit} completes.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -157,7 +166,10 @@ module Google
 
         ##
         # Updates existing rows in a table. If any of the rows does not already
-        # exist, the request fails with error `NOT_FOUND`.
+        # exist, the request fails with error {Google::Cloud::NotFoundError}.
+        #
+        # All changes are accumulated in memory until the block passed to
+        # {Client#commit} completes.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -215,6 +227,9 @@ module Google
         # Unlike #upsert, this means any values not explicitly written become
         # `NULL`.
         #
+        # All changes are accumulated in memory until the block passed to
+        # {Client#commit} completes.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Array<Hash>] rows One or more hash objects with the hash keys
@@ -268,6 +283,9 @@ module Google
         ##
         # Deletes rows from a table. Succeeds whether or not the specified rows
         # were present.
+        #
+        # All changes are accumulated in memory until the block passed to
+        # {Client#commit} completes.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
