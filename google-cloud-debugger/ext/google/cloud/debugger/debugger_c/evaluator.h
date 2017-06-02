@@ -19,14 +19,6 @@
 
 #include "ruby/debug.h"
 
-// Cache commonly used Ruby IDs
-#define LOCALS_ID rb_intern("locals")
-#define TRACE_FUNC_CB_ID rb_intern("trace_func_callback")
-#define TRACE_FUNC_C_CB_ID rb_intern("trace_c_func_callback")
-
-// Cache commonly used Ruby Symbols
-#define EVAL_TRACE_THREAD_FLAG ID2SYM(rb_intern("gcloud_eval_trace_set"))
-
 void
 Init_evaluator(VALUE mDebugger);
 
