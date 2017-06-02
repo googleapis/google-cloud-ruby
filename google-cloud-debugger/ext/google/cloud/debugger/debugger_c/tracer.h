@@ -22,19 +22,6 @@
 #define FILE_TRACEPOINT_EVENT (RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_C_CALL | RUBY_EVENT_B_CALL)
 #define FIBER_TRACEPOINT_EVENT RUBY_EVENT_FIBER_SWITCH
 
-// Cache commonly used Ruby IDs
-//#define CALLERS_ID rb_intern("callers")
-//#define BREAKPOINT_HIT_ID rb_intern("breakpoint_hit")
-//#define LOCALS_ID rb_intern("locals")
-//#define CALLER_LOCATIONS_ID rb_intern("caller_locations")
-//#define ABSOLUTE_PATH_ID rb_intern("absolute_path")
-//#define LIST_ID rb_intern("list")
-//#define ALIVE_Q_ID rb_intern("alive?")
-
-// Cache commonly used Ruby Symbols
-//#define LINE_TRACE_THREAD_FLAG ID2SYM(rb_intern("gcloud_line_trace_set"))
-//#define RETURN_TRACE_THREAD_FLAG ID2SYM(rb_intern("gcloud_return_trace_set"))
-
 /* To prevent unused parameter warnings */
 #define UNUSED(x) (void)(x)
 
