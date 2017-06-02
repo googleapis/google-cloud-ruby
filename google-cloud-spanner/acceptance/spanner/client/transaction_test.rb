@@ -32,7 +32,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "modifies accounts and verifies data with reads" do
-    db.transaction do |tx|
+    timestamp = db.transaction do |tx|
       tx.transaction_id.wont_be :nil?
 
       tx_results = tx.read "accounts", columns
@@ -42,43 +42,30 @@ describe "Spanner Client", :transaction, :spanner do
         assert_accounts_equal expected, actual
       end
 
+      reversed_update_rows = default_account_rows.map do |row|
+        { account_id: row[:account_id], username: row[:username].reverse }
+      end
+      tx.update "accounts", reversed_update_rows
       tx.insert "accounts", additional_account
     end
+    timestamp.must_be_kind_of Time
 
     # outside of transaction, verify the new account was added
     results = db.read "accounts", columns
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
-    results.rows.zip(default_account_rows + [additional_account]).each do |expected, actual|
+    # new data fixtures to match updated rows
+    reversed_account_rows = default_account_rows.map do |row|
+      row[:username] = row[:username].reverse
+      row
+    end
+    results.rows.zip(reversed_account_rows + [additional_account]).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
   end
 
-  it "modifies accounts and verifies data with queries" do
-    db.transaction do |tx|
-      tx.transaction_id.wont_be :nil?
-
-      tx_results = tx.execute "SELECT * FROM accounts"
-      tx_results.must_be_kind_of Google::Cloud::Spanner::Results
-      tx_results.fields.to_h.must_equal fields_hash
-      tx_results.rows.zip(default_account_rows).each do |expected, actual|
-        assert_accounts_equal expected, actual
-      end
-
-      tx.insert "accounts", additional_account
-    end
-
-    # outside of transaction, verify the new account was added
-    results = db.execute "SELECT * FROM accounts ORDER BY account_id"
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
-    results.rows.zip(default_account_rows + [additional_account]).each do |expected, actual|
-      assert_accounts_equal expected, actual
-    end
-  end
-
-  it "can rollback a transaction" do
-    db.transaction do |tx|
+  it "can rollback a transaction without passing on using Rollback" do
+    timestamp = db.transaction do |tx|
       tx.transaction_id.wont_be :nil?
 
       tx_results = tx.read "accounts", columns
@@ -88,10 +75,15 @@ describe "Spanner Client", :transaction, :spanner do
         assert_accounts_equal expected, actual
       end
 
-      tx.rollback
-
+      reversed_account_rows = default_account_rows.map do |row|
+        { id: row[:id], username: row[:username].reverse }
+      end
+      tx.upsert "accounts", reversed_account_rows
       tx.insert "accounts", additional_account
+
+      raise Google::Cloud::Spanner::Rollback
     end
+    timestamp.must_be :nil?
 
     # outside of transaction, the new account was NOT added
     results = db.read "accounts", columns
@@ -102,7 +94,7 @@ describe "Spanner Client", :transaction, :spanner do
     end
   end
 
-  it "unhandled errors will rollback the transaction" do
+  it "can rollback a transaction and pass on the error" do
     assert_raises ZeroDivisionError do
       db.transaction do |tx|
         tx.transaction_id.wont_be :nil?
@@ -114,9 +106,13 @@ describe "Spanner Client", :transaction, :spanner do
           assert_accounts_equal expected, actual
         end
 
-        1 / 0
-
+        reversed_account_rows = default_account_rows.map do |row|
+          { id: row[:id], username: row[:username].reverse }
+        end
+        tx.upsert "accounts", reversed_account_rows
         tx.insert "accounts", additional_account
+
+        1 / 0
       end
     end
 

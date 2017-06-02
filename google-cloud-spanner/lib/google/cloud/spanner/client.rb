@@ -362,40 +362,14 @@ module Google
         end
 
         ##
-        # Creates and commits a transaction for writes that execute atomically
-        # at a single logical point in time across columns, rows, and tables in
-        # a database.
-        #
-        # Unlike {#transaction}, which can also perform reads, this operation
-        # accepts only mutations and makes a single API request.
-        #
-        # @yield [commit] The block for mutating the data.
-        # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
-        #
-        # @return [Time] The timestamp at which the operation committed.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.commit do |c|
-        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-        #   end
-        #
-        def commit &block
-          @pool.with_session do |session|
-            session.commit(&block)
-          end
-        end
-
-        ##
         # Inserts or updates rows in a table. If any of the rows already exist,
         # then its column values are overwritten with the ones provided. Any
         # column values not explicitly written are preserved.
+        #
+        # Changes are made immediately upon calling this method using a
+        # single-use transaction. To make multiple changes in the same
+        # single-use transaction use {#commit}. To make changes in a transaction
+        # that supports reads and automatic retry protection use {#transaction}.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -440,7 +414,12 @@ module Google
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
-        # write or request fails with error `ALREADY_EXISTS`.
+        # write or request fails with {Google::Cloud::AlreadyExistsError}.
+        #
+        # Changes are made immediately upon calling this method using a
+        # single-use transaction. To make multiple changes in the same
+        # single-use transaction use {#commit}. To make changes in a transaction
+        # that supports reads and automatic retry protection use {#transaction}.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -484,7 +463,12 @@ module Google
 
         ##
         # Updates existing rows in a table. If any of the rows does not already
-        # exist, the request fails with error `NOT_FOUND`.
+        # exist, the request fails with {Google::Cloud::NotFoundError}.
+        #
+        # Changes are made immediately upon calling this method using a
+        # single-use transaction. To make multiple changes in the same
+        # single-use transaction use {#commit}. To make changes in a transaction
+        # that supports reads and automatic retry protection use {#transaction}.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -532,6 +516,11 @@ module Google
         # Unlike #upsert, this means any values not explicitly written become
         # `NULL`.
         #
+        # Changes are made immediately upon calling this method using a
+        # single-use transaction. To make multiple changes in the same
+        # single-use transaction use {#commit}. To make changes in a transaction
+        # that supports reads and automatic retry protection use {#transaction}.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Array<Hash>] rows One or more hash objects with the hash keys
@@ -576,6 +565,11 @@ module Google
         # Deletes rows from a table. Succeeds whether or not the specified rows
         # were present.
         #
+        # Changes are made immediately upon calling this method using a
+        # single-use transaction. To make multiple changes in the same
+        # single-use transaction use {#commit}. To make changes in a transaction
+        # that supports reads and automatic retry protection use {#transaction}.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Object, Array<Object>] keys A single, or list of keys or key
@@ -600,19 +594,61 @@ module Google
         end
 
         ##
+        # Creates and commits a transaction for writes that execute atomically
+        # at a single logical point in time across columns, rows, and tables in
+        # a database.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Unlike {#transaction}, which can also perform reads, this operation
+        # accepts only mutations and makes a single API request.
+        #
+        # @yield [commit] The block for mutating the data.
+        # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
+        #
+        # @return [Time] The timestamp at which the operation committed.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.commit do |c|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
+        def commit &block
+          fail ArgumentError, "Must provide a block" unless block_given?
+
+          @pool.with_session do |session|
+            session.commit(&block)
+          end
+        end
+
+        ##
         # Creates a transaction for reads and writes that execute atomically at
         # a single logical point in time across columns, rows, and tables in a
         # database.
         #
-        # Unlike {#commit}, which does not allow reads, this operation
-        # makes separate API requests to begin and commit the transaction.
+        # The transaction will always commit unless an error is raised. If the
+        # error raised is {Rollback} the transaction method will return without
+        # passing on the error. All other errors will be passed on.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Transactions will be automatically retried when possible, until
+        # `deadline` is reached. This operation makes separate API requests to
+        # begin and commit the transaction.
         #
         # @param [Numeric] deadline The total amount of time in seconds the
-        #   transaction has to succeed.
+        #   transaction has to succeed. The default is `120`.
         #
         # @yield [transaction] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
         #   Transaction object.
+        #
+        # @return [Time] The timestamp at which the transaction committed.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -626,6 +662,26 @@ module Google
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
+        #
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
+        # @example Manually rollback the transaction using {Rollback}:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #
+        #     if something_wrong?
+        #       # Rollback the transaction without passing on the error
+        #       # outside of the transaction method.
+        #       raise Google::Cloud::Spanner::Rollback
+        #     end
         #   end
         #
         def transaction deadline: 120, &block
@@ -638,6 +694,9 @@ module Google
           @pool.with_transaction do |tx|
             begin
               block.call tx
+              commit_resp = @project.service.commit \
+                tx.session.path, tx.mutations, transaction_id: tx.transaction_id
+              return Convert.timestamp_to_time commit_resp.commit_timestamp
             rescue Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
               raise err if current_time - start_time > deadline
@@ -646,16 +705,15 @@ module Google
               # Create new transaction on the session and retry the block
               tx = tx.session.create_transaction
               retry
-            rescue RollbackError
-              # Transaction block was interrupted, allow to continue
             rescue => err
-              # Rollback transaction when handling unexpeced error
-              # Don't use Transaction#rollback since it raises
-              tx.safe_rollback
+              # Rollback transaction when handling unexpected error
+              tx.session.rollback tx.transaction_id
+              # Return nil if raised with rollback.
+              return nil if err.is_a? Rollback
+              # Re-raise error.
               raise err
             end
           end
-          nil
         end
 
         ##

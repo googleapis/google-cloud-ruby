@@ -91,11 +91,9 @@ describe "Spanner Client", :crud, :spanner do
     db.transaction do |tx|
       tx.read("accounts", ["account_id"]).rows.count.must_equal 0
 
-      tx.commit do |c|
-        c.insert "accounts", default_account_rows[0]
-        c.upsert "accounts", default_account_rows[1]
-        c.insert "accounts", default_account_rows[2]
-      end
+      tx.insert "accounts", default_account_rows[0]
+      tx.upsert "accounts", default_account_rows[1]
+      tx.insert "accounts", default_account_rows[2]
     end
 
     db.transaction do |tx|
@@ -112,42 +110,6 @@ describe "Spanner Client", :crud, :spanner do
       tx.execute(active_count_sql).rows.first[:count].must_equal 3
 
       tx.delete "accounts", [1, 2, 3]
-    end
-
-    db.read("accounts", ["account_id"]).rows.count.must_equal 0
-  end
-
-  it "inserts, updates, upserts, reads, and deletes records in a transaction using commit" do
-    active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
-
-    db.transaction do |tx|
-      tx.read("accounts", ["account_id"]).rows.count.must_equal 0
-
-      tx.commit do |c|
-        c.insert "accounts", default_account_rows[0]
-        c.upsert "accounts", default_account_rows[1]
-        c.insert "accounts", default_account_rows[2]
-      end
-    end
-
-    db.transaction do |tx|
-      tx.read("accounts", ["account_id"]).rows.count.must_equal 3
-
-      tx.execute(active_count_sql).rows.first[:count].must_equal 2
-
-      activate_inactive_account = { account_id: 3, active: true }
-
-      tx.commit do |c|
-        c.upsert "accounts", activate_inactive_account
-      end
-    end
-
-    db.transaction do |tx|
-      tx.execute(active_count_sql).rows.first[:count].must_equal 3
-
-      tx.commit do |c|
-        c.delete "accounts", [1, 2, 3]
-      end
     end
 
     db.read("accounts", ["account_id"]).rows.count.must_equal 0
