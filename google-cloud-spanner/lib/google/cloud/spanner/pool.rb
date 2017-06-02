@@ -14,6 +14,7 @@
 
 
 require "thread"
+require "concurrent"
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/session"
 
@@ -32,8 +33,7 @@ module Google
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
         def initialize client, min: 10, max: 100, keepalive: 1800,
-                       write_ratio: 0.3, fail: true, block_on_init: nil,
-                       skip_background_thread: nil
+                       write_ratio: 0.3, fail: true
           @client = client
           @min = min
           @max = max
@@ -47,8 +47,7 @@ module Google
           @resource = ConditionVariable.new
 
           # initialize pool and availability queue
-          init block_on_init: block_on_init,
-               skip_background_thread: skip_background_thread
+          init
         end
 
         def with_session
@@ -90,7 +89,6 @@ module Google
             fail ArgumentError, "Cannot checkin session"
           end
 
-          session.reload!
           @mutex.synchronize do
             session_queue.push session
 
@@ -105,7 +103,11 @@ module Google
           begin
             yield tx
           ensure
-            checkin_transaction tx
+            future do
+              # Create and checkin a new transaction
+              tx = tx.session.create_transaction
+              checkin_transaction tx
+            end
           end
         end
 
@@ -144,7 +146,6 @@ module Google
             fail ArgumentError, "Cannot checkin session"
           end
 
-          tx = tx.session.reload!.create_transaction
           @mutex.synchronize do
             transaction_queue.push tx
 
@@ -162,21 +163,21 @@ module Google
         end
 
         def close
-          @thread.kill if @thread
+          @mutex.synchronize do
+            @closed = true
+          end
+          @keepalive_task.shutdown
           # Unblock all waiting threads
-          @closed = true
           @resource.broadcast
           # Delete all sessions
           @mutex.synchronize do
-            @all_sessions.map do |s|
-              Thread.new do
-                s.release!
-              end
-            end.map(&:join)
+            @all_sessions.each { |s| future { s.release! } }
             @all_sessions = []
             @session_queue = []
             @transaction_queue = []
           end
+          # shutdown existing thread pool
+          @thread_pool.shutdown
 
           true
         end
@@ -204,48 +205,43 @@ module Google
             @transaction_queue -= to_release
           end
 
-          to_release.map! { |x| Thread.new { x.release! } }
-          to_keepalive.map! { |x| Thread.new { x.keepalive! } }
-
-          # join all the threads before returning
-          (to_release + to_keepalive).map(&:join)
+          to_release.each { |x| future { x.release! } }
+          to_keepalive.each { |x| future { x.keepalive! } }
         end
 
         private
 
-        def init block_on_init: nil, skip_background_thread: nil
+        def init
+          # init the thread pool
+          @thread_pool = Concurrent::FixedThreadPool.new(
+            [2, Concurrent.processor_count].max * 2,
+            fallback_policy: :caller_runs
+          )
+          # init the queues
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
-          ensure_background_thread! unless skip_background_thread
+          # init the keepalive task
+          create_keepalive_task!
           # init session queue
           num_transactions = (@min * @write_ratio).round
           num_sessions = @min.to_i - num_transactions
-          init_session_threads = num_sessions.times.map do
-            Thread.new do
-              s = new_session!
-              @mutex.synchronize do
-                session_queue << s
-              end
-            end
+          num_sessions.times.each do
+            future { checkin_session new_session! }
           end
-          init_session_threads.map(&:join) if block_on_init
           # init transaction queue
-          init_transaction_threads = num_transactions.times.map do
-            Thread.new do
-              tx = new_transaction!
-              @mutex.synchronize do
-                transaction_queue << tx
-              end
-            end
+          num_transactions.times.each do
+            future { checkin_transaction new_transaction! }
           end
-          init_transaction_threads.map(&:join) if block_on_init
-          # Do not block on calling Thread#join on the threads by default
         end
 
         def new_session!
           session = @client.create_new_session
+
           @mutex.synchronize do
+            # don't add if the pool is closed
+            return session.release! if @closed
+
             all_sessions << session
           end
           session
@@ -260,14 +256,18 @@ module Google
           all_sessions.size < @max
         end
 
-        def ensure_background_thread!
-          @thread ||= Thread.new do
-            # before calling keepalive
-            loop do
-              keepalive_or_release!
-              sleep 300
-            end
+        def create_keepalive_task!
+          @keepalive_task = Concurrent::TimerTask.new(execution_interval: 300,
+                                                      timeout_interval: 60) do
+            keepalive_or_release!
           end
+          @keepalive_task.execute
+        end
+
+        def future
+          Concurrent::Future.new(executor: @thread_pool) do
+            yield
+          end.execute
         end
       end
     end

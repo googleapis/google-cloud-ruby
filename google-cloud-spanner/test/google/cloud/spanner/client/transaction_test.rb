@@ -72,6 +72,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "can execute a simple query" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -79,7 +86,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
     # transaction checkin
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -89,6 +95,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       results = tx.execute "SELECT * FROM users"
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -118,6 +126,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     end
     timestamp.must_equal commit_time
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
   end
 
@@ -143,6 +153,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -170,6 +182,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     end
     timestamp.must_equal commit_time
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
   end
 
@@ -196,6 +210,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     end
     timestamp.must_equal commit_time
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
   end
 
@@ -221,6 +237,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       tx.replace "users", [{ id: 4, name: "Henry",  active: true }]
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -251,6 +269,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     end
     timestamp.must_equal commit_time
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
   end
 
@@ -277,6 +297,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       tx.delete "users", 1..100
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -307,6 +329,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     end
     timestamp.must_equal commit_time
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
   end
 
@@ -331,6 +355,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       tx.delete "users"
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -388,6 +414,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       tx.delete "users", [1, 2, 3, 4, 5]
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end

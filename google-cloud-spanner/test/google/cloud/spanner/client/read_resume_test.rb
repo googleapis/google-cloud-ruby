@@ -109,6 +109,13 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "resumes broken response streams" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
@@ -116,13 +123,13 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
     mock.expect :streaming_read, RaiseableEnumerator.new(results_enum2), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: "abc123", options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
 
     assert_results results
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end

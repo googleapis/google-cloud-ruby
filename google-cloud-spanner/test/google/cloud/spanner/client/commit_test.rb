@@ -32,6 +32,13 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "commits using a block" do
     mutations = [
       Google::Spanner::V1::Mutation.new(
@@ -72,8 +79,6 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.commit do |c|
@@ -84,6 +89,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       c.delete "users", [1, 2, 3, 4, 5]
     end
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -101,12 +108,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.update "users", [{ id: 1, name: "Charlie", active: false }]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -124,12 +131,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -147,12 +154,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -170,12 +177,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.save "users", [{ id: 3, name: "Marley",  active: false }]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -193,12 +200,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.replace "users", [{ id: 4, name: "Henry",  active: true }]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -219,12 +226,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", [1, 2, 3, 4, 5]
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -243,12 +250,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", 1..100
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -269,12 +276,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", 5
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -291,12 +298,12 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
     mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
-    # created when checking in
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users"
     timestamp.must_equal commit_time
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end

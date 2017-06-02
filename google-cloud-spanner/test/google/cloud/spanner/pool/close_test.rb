@@ -37,12 +37,19 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool.instance_variable_get(:@thread_pool).shutdown
+    pool.instance_variable_get(:@thread_pool).wait_for_termination 60
+  end
+
   it "deletes sessions when closed" do
     mock = Minitest::Mock.new
     mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
     pool.close
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -53,6 +60,8 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
     session.service.mocked_service = mock
 
     pool.close
+
+    wait_until_thread_pool_is_done!
 
     assert_raises Google::Cloud::Spanner::ClientClosedError do
       pool.checkout_session
