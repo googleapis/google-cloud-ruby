@@ -71,6 +71,7 @@ module Google
               return write_transaction.session if write_transaction
 
               if can_allocate_more_sessions?
+                @new_sessions_in_process += 1
                 action = :new
                 break
               end
@@ -126,6 +127,7 @@ module Google
               end
 
               if can_allocate_more_sessions?
+                @new_sessions_in_process += 1
                 action = :new
                 break
               end
@@ -218,6 +220,7 @@ module Google
             fallback_policy: :caller_runs
           )
           # init the queues
+          @new_sessions_in_process = @min.to_i
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
@@ -242,6 +245,7 @@ module Google
             # don't add if the pool is closed
             return session.release! if @closed
 
+            @new_sessions_in_process -= 1
             all_sessions << session
           end
           session
@@ -253,7 +257,7 @@ module Google
 
         def can_allocate_more_sessions?
           # This is expected to be called from within a synchronize block
-          all_sessions.size < @max
+          all_sessions.size + @new_sessions_in_process < @max
         end
 
         def create_keepalive_task!
