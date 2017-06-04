@@ -14,6 +14,7 @@
 
 
 require "google/cloud/configuration"
+require "stackdriver/core/async_actor"
 require "stackdriver/core/configuration"
 require "stackdriver/core/trace_context"
 require "stackdriver/core/version"

@@ -13,13 +13,13 @@
 # limitations under the License.
 
 
-require "google/cloud/debugger/async_actor"
 require "google/cloud/debugger/breakpoint_manager"
 require "google/cloud/debugger/debuggee"
 require "google/cloud/debugger/debugger_c"
 require "google/cloud/debugger/tracer"
 require "google/cloud/debugger/transmitter"
 require "google/cloud/logging"
+require "stackdriver/core/async_actor"
 
 module Google
   module Cloud
@@ -53,7 +53,7 @@ module Google
 
         ##
         # @private Debugger Agent is an asynchronous actor
-        include AsyncActor
+        include Stackdriver::Core::AsyncActor
 
         ##
         # @private The gRPC Service object.
@@ -120,6 +120,9 @@ module Google
           @transmitter = Transmitter.new self, service
 
           @logger = logger || default_logger
+
+          # Agent actor thread needs to force exit immediately.
+          set_cleanup_options timeout: 0
         end
 
         ##
@@ -139,7 +142,6 @@ module Google
         # Once Debugger Agent is stopped, it cannot be started again.
         #
         def stop
-          tracer.stop
           transmitter.stop
           async_stop
         end
@@ -165,6 +167,16 @@ module Google
           end
         rescue => e
           @last_exception = e
+        end
+
+        ##
+        # @private Callback function when the async actor thread state changes
+        def on_async_state_change
+          if async_running?
+            tracer.start
+          else
+            tracer.stop
+          end
         end
 
         private
@@ -194,22 +206,6 @@ module Google
           end
 
           registration_result
-        end
-
-        ##
-        # @private Override AsyncActor#async_stop to immediately kill the child
-        # thread instead of waiting for it to return, because the breakpoints
-        # are queried with a hanging long poll mechanism.
-        def async_stop
-          @startup_lock.synchronize do
-            unless @thread.nil?
-              tracer.stop
-
-              @async_state = :stopped
-              @thread.kill
-              @thread.join
-            end
-          end
         end
 
         ##

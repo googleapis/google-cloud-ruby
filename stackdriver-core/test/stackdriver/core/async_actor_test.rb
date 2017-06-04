@@ -14,13 +14,16 @@
 
 
 require "helper"
+require "stackdriver/core/async_actor"
 
-describe Google::Cloud::Debugger::AsyncActor do
+describe Stackdriver::Core::AsyncActor do
   class AsyncActorTest
-    include Google::Cloud::Debugger::AsyncActor
+    include Stackdriver::Core::AsyncActor
 
     def initialize
       super()
+
+      set_cleanup_options timeout: 0.1
     end
 
     def run_backgrounder
@@ -29,6 +32,10 @@ describe Google::Cloud::Debugger::AsyncActor do
 
     def start_thread &block
       block.call
+    end
+
+    def on_async_state_change
+
     end
   end
 
@@ -49,6 +56,21 @@ describe Google::Cloud::Debugger::AsyncActor do
       thr.kill
       thr.join
     end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
+    end
   end
 
   describe "#async_stop" do
@@ -65,6 +87,21 @@ describe Google::Cloud::Debugger::AsyncActor do
       stopping = actor.async_stop
       stopping.must_equal false
     end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
+    end
   end
 
   describe "#async_suspend" do
@@ -80,6 +117,21 @@ describe Google::Cloud::Debugger::AsyncActor do
       suspended.must_equal false
 
       actor.async_stop
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 
@@ -98,6 +150,21 @@ describe Google::Cloud::Debugger::AsyncActor do
       resumed.must_equal false
 
       actor.async_stop
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 
@@ -184,8 +251,10 @@ describe Google::Cloud::Debugger::AsyncActor do
     it "waits for the async job to stop" do
       actor.async_start
 
+      actor.send :set_cleanup_options, force: false
+
       actor.async_stopped?.must_equal false
-      stop = actor.async_stop! 0.1
+      stop = actor.async_stop!
       stop.must_equal :waited
       actor.async_stopped?.must_equal true
     end
@@ -204,15 +273,50 @@ describe Google::Cloud::Debugger::AsyncActor do
       wait_result.must_equal :completed
 
       actor.async_stopped?.must_equal false
-      stop = actor.async_stop! 0.1, force: true
+      stop = actor.async_stop!
       stop.must_equal :forced
       actor.async_stopped?.must_equal true
+    end
+
+    it "doesn't wait if timeout is 0" do
+      thread_running = false
+      actor.define_singleton_method :run_backgrounder do
+        loop { thread_running = true }
+      end
+
+      actor.async_start
+
+      wait_result = wait_until_true do
+        thread_running
+      end
+      wait_result.must_equal :completed
+      actor.async_stopped?.must_equal false
+
+      actor.send :set_cleanup_options, timeout: 0
+      stop = actor.async_stop!
+      stop.must_equal :forced
+      actor.async_stopped?.must_equal true
+    end
+
+    it "calls #on_async_state_change" do
+      mocked_change = Minitest::Mock.new
+      mocked_change.expect :call, nil
+
+      actor.instance_variable_set :@lock_cond, OpenStruct.new(broadcast: nil)
+
+      actor.stub :on_async_state_change, mocked_change do
+        actor.stub :ensure_thread, nil do
+          actor.async_stop
+        end
+      end
+
+      mocked_change.verify
     end
   end
 
   describe ".register_for_cleanup" do
     it "adds actor to cleanup_list" do
-      klass = Google::Cloud::Debugger::AsyncActor
+      klass = Stackdriver::Core::AsyncActor
       actor.async_start
       klass.instance_variable_get("@cleanup_list").must_include actor
       actor.async_stop
@@ -222,12 +326,10 @@ describe Google::Cloud::Debugger::AsyncActor do
   describe ".run_cleanup" do
     it "calls async_stop! on actors" do
       mock = Minitest::Mock.new
-      mock.expect :async_stop!, true, [
-                  Google::Cloud::Debugger::AsyncActor::CLEANUP_TIMEOUT,
-                  {force: true}]
+      mock.expect :async_stop!, true, []
 
-      Google::Cloud::Debugger::AsyncActor.register_for_cleanup mock
-      Google::Cloud::Debugger::AsyncActor.send :run_cleanup
+      Stackdriver::Core::AsyncActor.register_for_cleanup mock
+      Stackdriver::Core::AsyncActor.send :run_cleanup
 
       mock.verify
     end
