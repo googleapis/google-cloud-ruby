@@ -158,7 +158,7 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   instance = spanner.instance "non-existing" #=> nil
+        #   instance = spanner.instance "non-existing" # nil
         #
         def instance instance_id
           ensure_service!
@@ -288,7 +288,7 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   config = spanner.instance_config "non-existing" #=> nil
+        #   config = spanner.instance_config "non-existing" # nil
         #
         def instance_config instance_config_id
           ensure_service!
@@ -355,7 +355,7 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   database = spanner.database "my-instance", "my-database" #=> nil
+        #   database = spanner.database "my-instance", "my-database" # nil
         #
         def database instance_id, database_id
           ensure_service!

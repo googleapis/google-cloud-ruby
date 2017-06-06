@@ -279,7 +279,7 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "my-instance"
-        #   database = instance.database "my-database" #=> nil
+        #   database = instance.database "my-database" # nil
         #
         def database database_id
           ensure_service!

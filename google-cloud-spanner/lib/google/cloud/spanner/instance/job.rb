@@ -78,6 +78,8 @@ module Google
           #                                 nodes: 5,
           #                                 labels: { production: :env }
           #
+          #   job.done? #=> false
+          #   job.reload!
           #   job.done? #=> true
           #   instance = job.instance
           #
