@@ -663,6 +663,9 @@ module Google
           end
         end
 
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
+
         ##
         # Creates a transaction for reads and writes that execute atomically at
         # a single logical point in time across columns, rows, and tables in a
@@ -722,6 +725,9 @@ module Google
         #
         def transaction deadline: 120, &block
           ensure_service!
+          unless Thread.current[:transaction_id].nil?
+            fail "Nested transactions are not allowed"
+          end
 
           deadline = validate_deadline deadline
           backoff = 1.0
@@ -729,6 +735,7 @@ module Google
 
           @pool.with_transaction do |tx|
             begin
+              Thread.current[:transaction_id] = tx.transaction_id
               block.call tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
@@ -748,9 +755,14 @@ module Google
               return nil if err.is_a? Rollback
               # Re-raise error.
               raise err
+            ensure
+              Thread.current[:transaction_id] = nil
             end
           end
         end
+
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
 
         ##
         # Creates a snapshot read-only transaction for reads that execute
