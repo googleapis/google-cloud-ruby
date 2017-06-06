@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "support/**/*"
     - "google-cloud-spanner.gemspec"
     - "Rakefile"
     - "test/**/*"

@@ -72,6 +72,8 @@ module Google
           #   job = spanner.create_database "my-instance",
           #                                 "my-new-database"
           #
+          #   job.done? #=> false
+          #   job.reload!
           #   job.done? #=> true
           #   database = job.database
           #

@@ -700,8 +700,8 @@ module Google
         #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #
-        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
         # @example Manually rollback the transaction using {Rollback}:
@@ -711,8 +711,8 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
-        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #
         #     if something_wrong?
         #       # Rollback the transaction without passing on the error

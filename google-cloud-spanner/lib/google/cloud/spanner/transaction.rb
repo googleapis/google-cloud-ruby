@@ -423,7 +423,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     users_types = rx.fields_for "users"
+        #     users_types = tx.fields_for "users"
         #     tx.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                         { id: 2, name: "Harvey",  active: true }],
         #               types: users_types
