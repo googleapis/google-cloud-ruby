@@ -416,17 +416,18 @@ module Google
         #   managed by the client. The following settings can be provided:
         #
         #   * `:min` (Integer) Minimum number of sessions that the client will
-        #     maintain at any point in time. The default is 2.
+        #     maintain at any point in time. The default is 10.
         #   * `:max` (Integer) Maximum number of sessions that the client will
-        #     have at any point in time. The default is 10.
-        #   * `:keepalive` (Integer) The delay in seconds between attemtps to
-        #     prevent the idle sessions from being closed by the Cloud Spanner
-        #     service. The default is 1500.
+        #     have at any point in time. The default is 100.
+        #   * `:keepalive` (Numeric) The amount of time a session can be idle
+        #     before an attempt is made to prevent the idle sessions from being
+        #     closed by the Cloud Spanner service. The default is 1800 (30
+        #     minutes).
         #   * `:write_ratio` (Float) The ratio of sessions with pre-allocated
         #     transactions to those without. Pre-allocating transactions
         #     improves the performance of writes made by the client. The higher
         #     the value, the more transactions are pre-allocated. The value must
-        #     be >= 0 and <= 1. The default is 0.5.
+        #     be >= 0 and <= 1. The default is 0.3.
         #   * `:fail` (true/false) When `true` the client raises a
         #     {SessionLimitError} when the client has allocated the `max` number
         #     of sessions. When `false` the client blocks until a session

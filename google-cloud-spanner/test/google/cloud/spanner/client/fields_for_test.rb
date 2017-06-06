@@ -51,6 +51,13 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "can get a table's fields" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -58,6 +65,8 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
     spanner.service.mocked_service = mock
 
     fields = client.fields_for "users"
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 

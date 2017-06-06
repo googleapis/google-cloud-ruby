@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
+describe Google::Cloud::Spanner::Session, :release, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -22,12 +22,12 @@ describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
 
-  it "can reload itself" do
+  it "can release itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
+    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
-    session.reload!
+    session.release!
 
     mock.verify
   end

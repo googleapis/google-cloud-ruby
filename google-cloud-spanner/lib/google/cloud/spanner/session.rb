@@ -91,45 +91,6 @@ module Google
         # rubocop:enable LineLength
 
         ##
-        # Reloads the session resource. Useful for determining if the session is
-        # still valid on the Spanner API.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.reload! # API call
-        #
-        def reload!
-          ensure_service!
-          @grpc = service.get_session path
-          self
-        end
-
-        ##
-        # Permanently deletes the session.
-        #
-        # @return [Boolean] Returns `true` if the session was deleted.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.delete_session
-        #
-        def delete_session
-          ensure_service!
-          service.delete_session path
-          true
-        end
-
-        ##
         # Executes a SQL query.
         #
         # Arguments can be passed using `params`, Ruby types are mapped to
@@ -221,8 +182,11 @@ module Google
         #
         def execute sql, params: nil, types: nil, transaction: nil
           ensure_service!
-          Results.execute service, path, sql,
-                          params: params, types: types, transaction: transaction
+          results = Results.execute service, path, sql,
+                                    params: params, types: types,
+                                    transaction: transaction
+          @last_updated_at = Time.now
+          results
         end
         alias_method :query, :execute
 
@@ -265,9 +229,11 @@ module Google
         def read table, columns, keys: nil, index: nil, limit: nil,
                  transaction: nil
           ensure_service!
-          Results.read service, path, table, columns,
-                       keys: keys, index: index, limit: limit,
-                       transaction: transaction
+          results = Results.read service, path, table, columns,
+                                 keys: keys, index: index, limit: limit,
+                                 transaction: transaction
+          @last_updated_at = Time.now
+          results
         end
 
         ##
@@ -294,10 +260,12 @@ module Google
         #   end
         #
         def commit transaction_id: nil
+          ensure_service!
           commit = Commit.new
           yield commit
           commit_resp = service.commit path, commit.mutations,
                                        transaction_id: transaction_id
+          @last_updated_at = Time.now
           Convert.timestamp_to_time commit_resp.commit_timestamp
         end
 
@@ -512,6 +480,7 @@ module Google
         # Rolls back the transaction, releasing any locks it holds.
         def rollback transaction_id
           service.rollback path, transaction_id
+          @last_updated_at = Time.now
           true
         end
 
@@ -524,8 +493,24 @@ module Google
         end
 
         ##
+        # Reloads the session resource. Useful for determining if the session is
+        # still valid on the Spanner API.
+        def reload!
+          ensure_service!
+          @grpc = service.get_session path
+          @last_updated_at = Time.now
+          return self
+        rescue Google::Cloud::NotFoundError
+          @grpc = service.create_session \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id)
+          @last_updated_at = Time.now
+          return self
+        end
+
+        ##
         # @private
-        # Keeps the session alive by calling SELECT 1
+        # Keeps the session alive by executing `"SELECT 1"`.
         def keepalive!
           ensure_service!
           execute "SELECT 1"
@@ -538,10 +523,32 @@ module Google
         end
 
         ##
+        # Permanently deletes the session.
+        def release!
+          ensure_service!
+          service.delete_session path
+        end
+
+        ##
+        # @private
+        # Determines if the session has been idle longer than the given
+        # duration.
+        def idle_since? duration
+          return true if @last_updated_at.nil?
+          Time.now > @last_updated_at + duration
+        end
+
+        ##
         # @private Creates a new Session instance from a
         # Google::Spanner::V1::Session.
         def self.from_grpc grpc, service
           new grpc, service
+        end
+
+        ##
+        # @private
+        def session
+          self
         end
 
         protected

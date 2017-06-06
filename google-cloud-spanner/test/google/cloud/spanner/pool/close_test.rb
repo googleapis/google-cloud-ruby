@@ -24,6 +24,7 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:pool) do
+    session.instance_variable_set :@last_updated_at, Time.now
     p = client.instance_variable_get :@pool
     p.all_sessions = [session]
     p.session_queue = [session]
@@ -36,12 +37,35 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
     client.close
   end
 
-  it "deletes sessions" do
+  def wait_until_thread_pool_is_done!
+    pool.instance_variable_get(:@thread_pool).shutdown
+    pool.instance_variable_get(:@thread_pool).wait_for_termination 60
+  end
+
+  it "deletes sessions when closed" do
     mock = Minitest::Mock.new
     mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
     pool.close
+
+    wait_until_thread_pool_is_done!
+
+    mock.verify
+  end
+
+  it "cannot be used after being closed" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
+    session.service.mocked_service = mock
+
+    pool.close
+
+    wait_until_thread_pool_is_done!
+
+    assert_raises Google::Cloud::Spanner::ClientClosedError do
+      pool.checkout_session
+    end
 
     mock.verify
   end

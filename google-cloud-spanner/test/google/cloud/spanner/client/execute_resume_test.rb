@@ -109,6 +109,13 @@ describe Google::Cloud::Spanner::Client, :execute, :resume, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "resumes broken response streams" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -119,6 +126,8 @@ describe Google::Cloud::Spanner::Client, :execute, :resume, :mock_spanner do
     results = client.execute "SELECT * FROM users"
 
     assert_results results
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end

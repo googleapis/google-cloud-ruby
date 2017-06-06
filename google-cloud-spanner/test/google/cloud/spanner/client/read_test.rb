@@ -76,6 +76,13 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "can read all rows" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
@@ -85,6 +92,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -101,6 +110,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
 
     results = client.read "my-table", columns, keys: [1, 2, 3]
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -115,6 +126,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -132,6 +145,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     lookup_range = client.range [1,1], [3,3]
     results = client.read "my-table", columns, keys: lookup_range, index: "MyTableCompositeKey"
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -147,6 +162,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
 
     results = client.read "my-table", columns, limit: 5
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -161,6 +178,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns, keys: 1, limit: 1
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 

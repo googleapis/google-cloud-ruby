@@ -70,6 +70,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "will rollback and not pass on the error when using Rollback" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -90,6 +97,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
       raise Google::Cloud::Spanner::Rollback
     end
     timestamp.must_be :nil?
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -117,6 +126,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
         1/0
       end
     end
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 

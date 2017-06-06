@@ -71,6 +71,13 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "can execute a simple query without any options" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -83,6 +90,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
       results = snp.execute "SELECT * FROM users"
     end
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -98,6 +107,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         snp.execute "SELECT * FROM users"
       end
     end
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
   end
@@ -117,6 +128,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end
+
+      wait_until_thread_pool_is_done!
 
       mock.verify
 
@@ -143,6 +156,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
+      wait_until_thread_pool_is_done!
+
       mock.verify
 
       assert_results results
@@ -160,6 +175,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end
+
+      wait_until_thread_pool_is_done!
 
       mock.verify
 
@@ -179,6 +196,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
+      wait_until_thread_pool_is_done!
+
       mock.verify
 
       assert_results results
@@ -196,6 +215,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end
+
+      wait_until_thread_pool_is_done!
 
       mock.verify
 
@@ -221,6 +242,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
+      wait_until_thread_pool_is_done!
+
       mock.verify
 
       assert_results results
@@ -238,6 +261,8 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute "SELECT * FROM users"
       end
+
+      wait_until_thread_pool_is_done!
 
       mock.verify
 

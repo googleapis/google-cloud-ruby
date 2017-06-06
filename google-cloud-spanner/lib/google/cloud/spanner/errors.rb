@@ -61,6 +61,13 @@ module Google
       # More sessions have been allocated than configured for.
       class SessionLimitError < Google::Cloud::Error
       end
+
+      ##
+      # # ClientClosedError
+      #
+      # The client is closed and can no longer be used.
+      class ClientClosedError < Google::Cloud::Error
+      end
     end
   end
 end

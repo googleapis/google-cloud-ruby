@@ -64,6 +64,13 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     client.close
   end
 
+  def wait_until_thread_pool_is_done!
+    pool = client.instance_variable_get :@pool
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   it "can execute a simple query" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -71,6 +78,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users"
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -85,6 +94,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE active = @active", params: { active: true }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -98,6 +109,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE age = @age", params: { age: 29 }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -110,6 +123,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE score = @score", params: { score: 0.9 }
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -126,6 +141,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE updated_at = @updated_at", params: { updated_at: timestamp }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -141,6 +158,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE birthday = @birthday", params: { birthday: date }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -153,6 +172,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE name = @name", params: { name: "Charlie" }
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -169,6 +190,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -182,6 +205,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [1,2,3] }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -194,6 +219,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }, types: { list: [:INT64] }
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 
@@ -210,6 +237,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: :production } }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -225,6 +254,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
     results = client.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
 
+    wait_until_thread_pool_is_done!
+
     mock.verify
 
     assert_results results
@@ -239,6 +270,8 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     spanner.service.mocked_service = mock
 
     results = client.execute "SELECT * FROM users WHERE settings = @dict", params: { dict: { } }
+
+    wait_until_thread_pool_is_done!
 
     mock.verify
 

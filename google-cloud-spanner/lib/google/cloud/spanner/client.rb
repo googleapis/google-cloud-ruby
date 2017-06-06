@@ -51,8 +51,8 @@ module Google
       class Client
         ##
         # @private Creates a new Spanner Client instance.
-        def initialize project, instance_id, database_id, min: 2, max: 10,
-                       keepalive: 1500, write_ratio: 0.5, fail: true
+        def initialize project, instance_id, database_id, min: 10, max: 100,
+                       keepalive: 1800, write_ratio: 0.3, fail: true
           @project = project
           @instance_id = instance_id
           @database_id = database_id
@@ -371,6 +371,12 @@ module Google
         # single-use transaction use {#commit}. To make changes in a transaction
         # that supports reads and automatic retry protection use {#transaction}.
         #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#upsert} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#upsert} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind upserts.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Array<Hash>] rows One or more hash objects with the hash keys
@@ -421,6 +427,12 @@ module Google
         # single-use transaction use {#commit}. To make changes in a transaction
         # that supports reads and automatic retry protection use {#transaction}.
         #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#insert} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#insert} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind inserts.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Array<Hash>] rows One or more hash objects with the hash keys
@@ -469,6 +481,12 @@ module Google
         # single-use transaction. To make multiple changes in the same
         # single-use transaction use {#commit}. To make changes in a transaction
         # that supports reads and automatic retry protection use {#transaction}.
+        #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#update} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#update} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind updates.
         #
         # @param [String] table The name of the table in the database to be
         #   modified.
@@ -521,6 +539,12 @@ module Google
         # single-use transaction use {#commit}. To make changes in a transaction
         # that supports reads and automatic retry protection use {#transaction}.
         #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#replace} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#replace} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind replaces.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Array<Hash>] rows One or more hash objects with the hash keys
@@ -570,6 +594,12 @@ module Google
         # single-use transaction use {#commit}. To make changes in a transaction
         # that supports reads and automatic retry protection use {#transaction}.
         #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#delete} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#delete} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind deletions.
+        #
         # @param [String] table The name of the table in the database to be
         #   modified.
         # @param [Object, Array<Object>] keys A single, or list of keys or key
@@ -601,6 +631,12 @@ module Google
         # All changes are accumulated in memory until the block completes.
         # Unlike {#transaction}, which can also perform reads, this operation
         # accepts only mutations and makes a single API request.
+        #
+        # **Note:** This method does not feature replay protection present in
+        # {Transaction#commit} (See {#transaction}). This method makes a single
+        # RPC, whereas {Transaction#commit} requires two RPCs (one of which may
+        # be performed in advance), and so this method may be appropriate for
+        # latency sensitive and/or high throughput blind changes.
         #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
