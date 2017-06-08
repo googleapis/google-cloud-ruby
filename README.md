@@ -32,6 +32,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
+* [Cloud Spanner API](#cloud-spanner-api-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
@@ -386,6 +387,37 @@ trace = Google::Cloud::Trace.new
 result_set = trace.list_traces Time.now - 3600, Time.now
 result_set.each do |trace_record|
   puts "Retrieved trace ID: #{trace_record.trace_id}"
+end
+```
+
+### Cloud Spanner API (Alpha)
+
+- [google-cloud-spanner README](google-cloud-spanner/README.md)
+- [google-cloud-spanner API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest)
+- [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
+- [Google Cloud Speech API documentation](https://cloud.google.com/spanner/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-spanner
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/spanner"
+
+spanner = Google::Cloud::Spanner.new
+
+db = spanner.client "my-instance", "my-database"
+
+db.transaction do |tx|
+  results = tx.execute "SELECT * FROM users"
+
+  results.rows.each do |row|
+    puts "User #{row[:id]} is #{row[:name]}"
+  end
 end
 ```
 
