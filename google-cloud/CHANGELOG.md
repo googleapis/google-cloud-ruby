@@ -1,5 +1,9 @@
 # Release History
 
+### 0.32.0 / 2017-06-08
+
+* Add Spanner (google-cloud-spanner)
+
 ### 0.31.0 / 2017-06-01
 
 * Pub/Sub 0.25.0 release
