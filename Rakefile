@@ -296,6 +296,7 @@ namespace :jsondoc do
       "google-cloud-monitoring",
       "google-cloud-pubsub",
       "google-cloud-resource_manager",
+      "google-cloud-spanner",
       "google-cloud-speech",
       "google-cloud-storage",
       "google-cloud-trace",
