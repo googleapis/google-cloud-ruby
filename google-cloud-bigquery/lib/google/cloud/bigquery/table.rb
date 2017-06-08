@@ -634,6 +634,8 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [Boolean] autodetect Indicates if we should automatically infer
+        #   the options and schema for CSV, JSON and AVRO sources.
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -675,7 +677,7 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil
+                 dryrun: nil, autodetect: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -683,7 +685,8 @@ module Google
                       quoted_newlines: quoted_newlines, encoding: encoding,
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, dryrun: dryrun }
+                      skip_leading: skip_leading, dryrun: dryrun,
+                      autodetect: autodetect }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
