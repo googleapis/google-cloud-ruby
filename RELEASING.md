@@ -79,7 +79,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Repeat steps 1 through 15 if you're releasing multiple gems.
 
-1. Wait until the tag build job from step 15 has started (preferrably wait for it to finish and turn green). Then push the commit to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
+1. Wait until the tag build job from step 15 has started (preferably wait for it to finish and turn green). Then push the commit to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
 
     ```sh
     $ git push <remote> master
