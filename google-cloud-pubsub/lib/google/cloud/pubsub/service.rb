@@ -18,6 +18,7 @@ require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/gax/errors"
+require "google/cloud/pubsub/publisher"
 
 module Google
   module Cloud
@@ -87,6 +88,12 @@ module Google
           credentials == :this_channel_is_insecure
         end
 
+        def async_publisher
+          return mocked_async_publisher if mocked_async_publisher
+          @async_publisher ||= Publisher.new(self).tap(&:start)
+        end
+        attr_accessor :mocked_async_publisher
+
         ##
         # Gets the configuration of a topic.
         # Since the topic only has the name attribute,
@@ -150,10 +157,23 @@ module Google
               data: data, attributes: attributes)
           end
 
+          publish_messages topic, messages
+        end
+
+        ##
+        # Unlike publish, publish_messages takes an array of message grpc
+        # objects instead of an array of data/attribute arrays.
+        def publish_messages topic, messages
           execute do
             publisher.publish topic_path(topic), messages,
                               options: default_options
           end
+        end
+
+        ##
+        # Publish to the async publisher
+        def publish_async topic_name, data, attributes, &block
+          async_publisher.publish topic_name, data, attributes, &block
         end
 
         ##

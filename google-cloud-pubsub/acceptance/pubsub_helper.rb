@@ -79,10 +79,10 @@ $snapshot_names = 3.times.map { "#{$snapshot_prefix}-#{SecureRandom.hex(4)}".dow
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
-  $topic_names.each do |topic_name|
-    if t = $pubsub.get_topic(topic_name)
-      t.subscriptions.each { |s| s.delete }
-      t.delete
+  $pubsub.topics.all do |topic|
+    if topic.name.include? $topic_prefix
+      topic.subscriptions.each(&:delete)
+      topic.delete
     end
   end
 rescue => e
