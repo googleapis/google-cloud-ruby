@@ -36,8 +36,7 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "creates a subscription when calling subscribe" do
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
@@ -56,8 +55,7 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new
