@@ -22,33 +22,4 @@ describe Google::Cloud::Pubsub::Topic, :lazy, :mock_pubsub do
   it "is not lazy when created with an HTTP method" do
     topic.wont_be :lazy?
   end
-
-  describe "lazy topic with default autocreate" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
-
-    it "will autocreate when created lazily" do
-      topic.must_be :lazy?
-    end
-  end
-
-  describe "lazy topic with explicit autocreate" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: true }
-
-    it "will autocreate when created lazily" do
-      topic.must_be :lazy?
-    end
-  end
-
-  describe "lazy topic without autocomplete" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
-
-    it "knows if it will create a topic on the Pub/Sub service" do
-      topic.must_be :lazy?
-    end
-  end
 end

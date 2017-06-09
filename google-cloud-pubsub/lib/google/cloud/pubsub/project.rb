@@ -83,13 +83,7 @@ module Google
         ##
         # Retrieves topic by name.
         #
-        # The topic will be created if the topic does not exist and the
-        # `autocreate` option is set to true.
-        #
         # @param [String] topic_name Name of a topic.
-        # @param [Boolean] autocreate Flag to control whether the requested
-        #   topic will be created if it does not exist. Ignored if `skip_lookup`
-        #   is `true`. The default value is `false`.
         # @param [String] project If the topic belongs to a project other than
         #   the one currently connected to, the alternate project ID can be
         #   specified here.
@@ -99,9 +93,7 @@ module Google
         #   does not exist. Default is `false`.
         #
         # @return [Google::Cloud::Pubsub::Topic, nil] Returns `nil` if topic
-        #   does not exist. Will return a newly created{
-        #   Google::Cloud::Pubsub::Topic} if the topic does not exist and
-        #   `autocreate` is set to `true`.
+        #   does not exist.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -115,12 +107,6 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "non-existing-topic" # nil
         #
-        # @example With the `autocreate` option set to `true`.
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #   topic = pubsub.topic "non-existing-topic", autocreate: true
-        #
         # @example Create topic in a different project with the `project` flag.
         #   require "google/cloud/pubsub"
         #
@@ -133,14 +119,13 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
-        def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
+        def topic topic_name, project: nil, skip_lookup: nil
           ensure_service!
           options = { project: project }
           return Topic.new_lazy(topic_name, service, options) if skip_lookup
           grpc = service.get_topic topic_name
           Topic.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
-          return create_topic(topic_name) if autocreate
           nil
         end
         alias_method :get_topic, :topic
@@ -207,18 +192,11 @@ module Google
         alias_method :list_topics, :topics
 
         ##
-        # Publishes one or more messages to the given topic. The topic will be
-        # created if the topic does previously not exist and the `autocreate`
-        # option is provided.
-        #
-        # A note about auto-creating the topic: Any message published to a topic
-        # without a subscription will be lost.
+        # Publishes one or more messages to the given topic.
         #
         # @param [String] topic_name Name of a topic.
         # @param [String, File] data The message data.
         # @param [Hash] attributes Optional attributes for the message.
-        # @option attributes [Boolean] :autocreate Flag to control whether the
-        #   provided topic will be created if it does not exist.
         # @yield [publisher] a block for publishing multiple messages in one
         #   request
         # @yieldparam [Topic::Publisher] publisher the topic publisher object
@@ -260,32 +238,21 @@ module Google
         #     p.publish "task 3 completed", foo: :bif
         #   end
         #
-        # @example With `autocreate`:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   msg = pubsub.publish "new-topic", "task completed", autocreate: true
-        #
         def publish topic_name, data = nil, attributes = {}
           # Fix parameters
           if data.is_a?(::Hash) && attributes.empty?
             attributes = data
             data = nil
           end
-          # extract autocreate option
-          autocreate = attributes.delete :autocreate
           ensure_service!
           publisher = Topic::Publisher.new data, attributes
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
-          publish_batch_messages topic_name, publisher, autocreate
+          publish_batch_messages topic_name, publisher
         end
 
         ##
-        # Creates a new {Subscription} object for the provided topic. The topic
-        # will be created if the topic does previously not exist and the
-        # `autocreate` option is provided.
+        # Creates a new {Subscription} object for the provided topic.
         #
         # @param [String] topic_name Name of a topic.
         # @param [String] subscription_name Name of the new subscription. Must
@@ -309,8 +276,6 @@ module Google
         #   604,800 seconds (7 days).
         # @param [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed.
-        # @param [String] autocreate Flag to control whether the topic will be
-        #   created if it does not exist.
         #
         # @return [Google::Cloud::Pubsub::Subscription]
         #
@@ -331,32 +296,14 @@ module Google
         #                          deadline: 120,
         #                          endpoint: "https://example.com/push"
         #
-        # @example With `autocreate`:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscribe "new-topic", "new-topic-sub",
-        #                          autocreate: true
-        #
         def subscribe topic_name, subscription_name, deadline: nil,
-                      retain_acked: false, retention: nil, endpoint: nil,
-                      autocreate: nil
+                      retain_acked: false, retention: nil, endpoint: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked,
                       retention: retention, endpoint: endpoint }
           grpc = service.create_subscription topic_name,
                                              subscription_name, options
           Subscription.from_grpc grpc, service
-        rescue Google::Cloud::NotFoundError => e
-          if autocreate
-            create_topic topic_name
-            return subscribe(topic_name, subscription_name,
-                             deadline: deadline, retain_acked: retain_acked,
-                             retention: retention, endpoint: endpoint,
-                             autocreate: false)
-          end
-          raise e
         end
         alias_method :create_subscription, :subscribe
         alias_method :new_subscription, :subscribe
@@ -497,15 +444,9 @@ module Google
 
         ##
         # Call the publish API with arrays of data data and attrs.
-        def publish_batch_messages topic_name, batch, autocreate = false
+        def publish_batch_messages topic_name, batch
           grpc = service.publish topic_name, batch.messages
           batch.to_gcloud_messages Array(grpc.message_ids)
-        rescue Google::Cloud::NotFoundError => e
-          if autocreate
-            create_topic topic_name
-            return publish_batch_messages topic_name, batch, false
-          end
-          raise e
         end
       end
     end
