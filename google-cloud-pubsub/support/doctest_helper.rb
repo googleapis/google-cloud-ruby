@@ -145,12 +145,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Project#topic@With the `autocreate` option set to `true`." do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/non-existing-topic", Hash]
-    end
-  end
-                                                            
   doctest.before "Google::Cloud::Pubsub::Project#topic@Create topic in a different project with the `project` flag." do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/another-topic", Hash]
@@ -176,12 +170,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Project#publish@With `autocreate`:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/new-topic", [pubsub_message("task completed")], Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Pubsub::Project#publish@Additionally, a message can be published with attributes:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed", {"foo"=>"bar", "this"=>"that"})], Hash]
@@ -202,12 +190,6 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::Project#subscribe" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Pubsub::Project#subscribe@With `autocreate`:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "new-topic-sub"), ["projects/my-project/subscriptions/new-topic-sub", "projects/my-project/topics/new-topic", Hash]
     end
   end
 
@@ -652,9 +634,3 @@ def topic_permissions_resp
     permissions: ["pubsub.topics.get"]
   )
 end
-
-
-
-
-
-

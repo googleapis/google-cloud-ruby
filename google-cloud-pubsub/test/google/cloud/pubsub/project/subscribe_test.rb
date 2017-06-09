@@ -47,55 +47,9 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
 
-  it "creates a subscription and topic when called with autocreate" do
-    new_sub_name = "new-sub-using-autocreate"
-
-    # Create multiple stubs, but not verify the arguments passed in.
-    # Use this approach because Minitest::Mock can't verify an error is raised.
-    stub_subscriber = Object.new
-    def stub_subscriber.create_subscription *args
-      first_time = @called.nil?
-      @called = true
-      if first_time
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
-      end
-      Google::Pubsub::V1::Subscription.decode_json(
-        "{\"name\":\"projects/test/subscriptions/new-sub-using-autocreate\",\"topic\":\"projects/test/topics/topic-name-goes-here\",\"push_config\":{\"push_endpoint\":\"http://example.com/callback\"},\"ack_deadline_seconds\":60}")
-    end
-    pubsub.service.mocked_subscriber = stub_subscriber
-
-    stub_publisher = Object.new
-    def stub_publisher.create_topic *args
-      Google::Pubsub::V1::Topic.decode_json(
-        "{\"name\":\"projects/test/topics/topic-name-goes-here\"}")
-    end
-    pubsub.service.mocked_publisher = stub_publisher
-
-    sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
-  end
-
-  it "creates a subscription but not topic even when called with autocreate" do
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
-    mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, options: default_options]
-    pubsub.service.mocked_subscriber = mock
-
-    sub = pubsub.subscribe topic_name, new_sub_name, autocreate: true
-
-    mock.verify
-
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
-  end
-
   describe "lazy topic that exists" do
     let(:topic) { Google::Cloud::Pubsub::pubsub.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "creates a subscription when calling subscribe" do
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
@@ -114,8 +68,7 @@ describe Google::Cloud::Pubsub::Project, :subscribe, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Google::Cloud::Pubsub::pubsub.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new

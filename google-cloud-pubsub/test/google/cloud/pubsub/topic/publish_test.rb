@@ -130,8 +130,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
 
   describe "lazy topic that exists" do
     let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "publishes a message" do
      messages = [
@@ -197,8 +196,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
 
   describe "lazy topic that does not exist" do
     let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+                                                 pubsub.service }
 
     it "publishes a message" do
       stub = Object.new
