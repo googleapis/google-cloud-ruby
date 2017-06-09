@@ -41,6 +41,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
     t
   end
+  let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
   before do
     table
@@ -99,5 +100,16 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       t.table_id.wont_be :nil?
       t.created_at.must_be_kind_of Time # Loads full representation
     end
+  end
+
+  it "imports data from a local file and creates a new table with specified schema" do
+    job = dataset.load "local_file_table", local_file do |schema|
+      schema.integer  "id",     description: "id description",    mode: :required
+      schema.string    "breed", description: "breed description", mode: :required
+      schema.string    "name",  description: "name description",  mode: :required
+      schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+    job.wait_until_done!
+    job.output_rows.must_equal 3
   end
 end

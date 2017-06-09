@@ -646,7 +646,7 @@ module Google
         #
         #   load_job = table.load "gs://my-bucket/file-name.csv"
         #
-        # @example Pass a google-cloud storage file instance:
+        # @example Pass a google-cloud-storage `File` instance:
         #   require "google/cloud/bigquery"
         #   require "google/cloud/storage"
         #

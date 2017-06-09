@@ -178,7 +178,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_data.next.must_be :nil?
   end
 
-  it "imports data from a local files" do
+  it "imports data from a local file" do
     job = table.load local_file
     job.wait_until_done!
     job.output_rows.must_equal 3
