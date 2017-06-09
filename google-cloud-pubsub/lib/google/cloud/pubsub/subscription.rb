@@ -220,8 +220,6 @@ module Google
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
         #
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
@@ -250,15 +248,13 @@ module Google
         #   msgs = sub.pull immediate: false
         #   msgs.each { |msg| msg.acknowledge! }
         #
-        def pull immediate: true, max: 100, autoack: false
+        def pull immediate: true, max: 100
           ensure_service!
           options = { immediate: immediate, max: max }
           list_grpc = service.pull name, options
-          messages = Array(list_grpc.received_messages).map do |msg_grpc|
+          Array(list_grpc.received_messages).map do |msg_grpc|
             ReceivedMessage.from_grpc msg_grpc, self
           end
-          acknowledge messages if autoack
-          messages
         rescue Google::Cloud::DeadlineExceededError
           []
         end
@@ -272,8 +268,6 @@ module Google
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
         #
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
@@ -286,8 +280,8 @@ module Google
         #   msgs = sub.wait_for_messages
         #   msgs.each { |msg| msg.acknowledge! }
         #
-        def wait_for_messages max: 100, autoack: false
-          pull immediate: false, max: max, autoack: autoack
+        def wait_for_messages max: 100
+          pull immediate: false, max: max
         end
 
         ##
@@ -298,8 +292,6 @@ module Google
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
         # @param [Number] delay The number of seconds to pause between requests
         #   when the Google Cloud service has no messages to return. The default
         #   value is `1`.
@@ -326,19 +318,9 @@ module Google
         #     # process msg
         #   end
         #
-        # @example Automatically acknowledge messages with `autoack`:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen autoack: true do |msg|
-        #     # process msg
-        #   end
-        #
-        def listen max: 100, autoack: false, delay: 1
+        def listen max: 100, delay: 1
           loop do
-            msgs = wait_for_messages max: max, autoack: autoack
+            msgs = wait_for_messages max: max
             if msgs.any?
               msgs.each { |msg| yield msg }
             else
