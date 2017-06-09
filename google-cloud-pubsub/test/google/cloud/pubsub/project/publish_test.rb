@@ -83,49 +83,4 @@ describe Google::Cloud::Pubsub::Project, :publish, :mock_pubsub do
     msgs.last.message_id.must_equal "msg3"
     msgs.last.attributes["format"].must_equal "none"
   end
-
-  it "publishes a message to an existing topic with autocreate" do
-    messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
-    ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    pubsub.service.mocked_publisher = mock
-
-    msg = pubsub.publish topic_name, message1, autocreate: true
-
-    mock.verify
-
-    msg.must_be_kind_of Google::Cloud::Pubsub::Message
-    msg.message_id.must_equal "msg1"
-  end
-
-  it "publishes a message to a non-existing topic with autocreate" do
-    new_topic_name = "new-topic-using-autocreate"
-
-    # Create a stub, but not verify the arguments passed in.
-    # Use this approach because Minitest::Mock can't verify an error is raised.
-    stub = Object.new
-    def stub.publish *args
-      first_time = @called.nil?
-      @called = true
-      if first_time
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
-      end
-      Google::Pubsub::V1::PublishResponse.decode_json(
-        "{\"message_ids\":[\"msg1\"]}")
-    end
-    def stub.create_topic *args
-      Google::Pubsub::V1::Topic.decode_json(
-        "{\"name\":\"projects/test/topics/new-topic-using-autocreate\"}")
-    end
-    pubsub.service.mocked_publisher = stub
-
-    msg = pubsub.publish new_topic_name, message1, autocreate: true
-    msg.must_be_kind_of Google::Cloud::Pubsub::Message
-    msg.message_id.must_equal "msg1"
-  end
 end
