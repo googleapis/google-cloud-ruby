@@ -340,21 +340,6 @@ module Google
     # end
     # ```
     #
-    # When processing time and the acknowledgement deadline are a concern,
-    # messages can be automatically acknowledged as they are pulled with the
-    # `autoack` option:
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub"
-    # sub.listen autoack: true do |msg|
-    #   # process msg
-    # end
-    # ```
-    #
     # ## Configuring timeout
     #
     # You can configure the request `timeout` value in seconds.
