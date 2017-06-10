@@ -52,8 +52,10 @@ module Google
 
           @error_reporting =
             error_reporting ||
-            ErrorReporting.new(project: configuration.project_id,
-                               keyfile: configuration.keyfile)
+            ErrorReporting::AsyncErrorReporter.new(
+              ErrorReporting.new(project: configuration.project_id,
+                                 keyfile: configuration.keyfile)
+            )
 
           # Set module default client to reuse the same client. Update module
           # configuration parameters.
