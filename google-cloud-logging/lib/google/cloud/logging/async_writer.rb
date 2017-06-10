@@ -307,7 +307,7 @@ module Google
         #     after the timeout, or `:forced` if it was forcibly killed.
         #
         def stop! timeout, force: false
-          @cleanup_options[:timeout] = timeout || @cleanup_options[:timeout]
+          @cleanup_options[:timeout] = timeout unless timeout.nil?
           @cleanup_options[:force] = force unless force.nil?
 
           async_stop!
