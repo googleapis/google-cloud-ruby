@@ -612,10 +612,10 @@ def rec_message_json message, id = rand(1000000)
   }.to_json
 end
 
-def rec_messages_json message
+def rec_messages_json message, id = nil
   {
     "received_messages" => [
-      JSON.parse(rec_message_json(message))
+      JSON.parse(rec_message_json(message, id))
     ]
   }.to_json
 end

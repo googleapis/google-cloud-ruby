@@ -24,52 +24,52 @@ describe Google::Cloud::Pubsub, :async, :pubsub do
       topic.subscribe(subscription_name)
   end
 
-  let(:topic) { retrieve_topic "#{$topic_prefix}-async" }
-  let(:sub) { retrieve_subscription topic, "#{$topic_prefix}-async-sub" }
+  let(:nonce) { rand 100 }
+  let(:topic) { retrieve_topic "#{$topic_prefix}-async#{nonce}" }
+  let(:sub) { retrieve_subscription topic, "#{$topic_prefix}-async-sub#{nonce}" }
 
   it "publishes and pulls asyncronously" do
     events = sub.pull
     events.must_be :empty?
     # Publish a new message
-    unpublished = true
     publish_result = nil
     topic.publish_async "hello" do |result|
       publish_result = result
-      unpublished = false
       assert_equal "hello", result.msg.data
     end
+
     unpublished_retries = 0
-    while unpublished
+    while publish_result.nil?
       fail "publish has failed" if unpublished_retries >= 5
       unpublished_retries += 1
       puts "the async publish has not completed yet. sleeping for #{unpublished_retries*unpublished_retries} second(s) and retrying."
       sleep unpublished_retries*unpublished_retries
     end
+    publish_result.wont_be :nil?
     publish_result.must_be :succeeded?
-    # Check it received the published message
-    events = pull_with_retry sub
-    events.wont_be :empty?
-    events.count.must_equal 1
-    event = events.first
-    event.wont_be :nil?
-    event.msg.data.must_equal publish_result.data
-    event.msg.published_at.wont_be :nil?
-    # Acknowledge the message
-    sub.ack event.ack_id
+
+    received_message = nil
+    subscriber = sub.listen do |msg|
+      received_message = msg
+      # Acknowledge the message
+      msg.ack!
+    end
+    subscriber.start
+
+    subscription_retries = 0
+    while received_message.nil?
+      fail "published message was never received has failed" if subscription_retries >= 10
+      subscription_retries += 1
+      puts "received_message has not been received. sleeping for #{subscription_retries} second(s) and retrying."
+      sleep subscription_retries
+    end
+    received_message.wont_be :nil?
+    received_message.data.must_equal publish_result.data
+
+    subscriber.stop
+    subscriber.wait!
+
     # Remove the subscription
     sub.delete
-  end
-
-  def pull_with_retry sub
-    events = []
-    retries = 0
-    while retries <= 5 do
-      events = sub.pull
-      break if events.any?
-      retries += 1
-      puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
-      sleep retries*retries
-    end
-    events
   end
 end
