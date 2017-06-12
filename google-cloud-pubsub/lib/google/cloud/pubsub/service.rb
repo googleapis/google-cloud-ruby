@@ -247,6 +247,12 @@ module Google
           end
         end
 
+        def streaming_pull request_enum
+          execute do
+            subscriber.streaming_pull request_enum, options: default_options
+          end
+        end
+
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids

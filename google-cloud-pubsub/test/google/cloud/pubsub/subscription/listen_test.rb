@@ -14,8 +14,6 @@
 
 require "helper"
 
-class Google::Cloud::Pubsub::ListenMustStopInTests < StandardError; end
-
 describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
@@ -23,79 +21,22 @@ describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
-  let(:empty_json) { { "received_messages" => [] }.to_json }
 
-  it "can listen for messages" do
-    stub = Object.new
-    def stub.pull *args
-      @count ||= 0
-      @count +=1
-      raise Google::Cloud::Pubsub::ListenMustStopInTests if @count >= 3
-      Google::Pubsub::V1::PullResponse.decode_json \
-        "{\"received_messages\":[{\"ack_id\":\"ack-id-529967\",\"message\":{\"data\":\"cHVsbGVkLW1lc3NhZ2U=\\n\",\"attributes\":{},\"message_id\":\"msg-id-529967\"}}]}"
+  it "will create a Subscriber" do
+    subscriber = subscription.listen do |msg|
+      puts msg.msg_id
     end
-    pubsub.service.mocked_subscriber = stub
-
-    expect do
-      subscription.listen do |msg|
-        msg.must_be_kind_of Google::Cloud::Pubsub::ReceivedMessage
-      end
-    end.must_raise Google::Cloud::Pubsub::ListenMustStopInTests
+    subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
+    subscriber.subscription_name.must_equal subscription.name
+    subscriber.deadline.must_equal 60
   end
 
-  it "sleeps when there are no results returned" do
-    stub = Object.new
-    def stub.pull *args
-      @count ||= 0
-      @count +=1
-      raise Google::Cloud::Pubsub::ListenMustStopInTests if @count >= 3
-      Google::Pubsub::V1::PullResponse.decode_json \
-        "{\"received_messages\":[]}"
+  it "will set deadline while creating a Subscriber" do
+    subscriber = subscription.listen deadline: 120 do |msg|
+      puts msg.msg_id
     end
-    pubsub.service.mocked_subscriber = stub
-
-    $listen_sleep_mock = Minitest::Mock.new
-    $listen_sleep_mock.expect :mock_sleep, nil, [1]
-    $listen_sleep_mock.expect :mock_sleep, nil, [1]
-    def subscription.sleep delay
-      $listen_sleep_mock.mock_sleep delay
-    end
-
-    expect do
-      subscription.listen do |msg|
-        msg.must_be_kind_of Google::Cloud::Pubsub::ReceivedMessage
-      end
-    end.must_raise Google::Cloud::Pubsub::ListenMustStopInTests
-
-    $listen_sleep_mock.verify
-    $listen_sleep_mock = nil
-  end
-
-  it "sleeps for the value passed in :delay" do
-    stub = Object.new
-    def stub.pull *args
-      @count ||= 0
-      @count +=1
-      raise Google::Cloud::Pubsub::ListenMustStopInTests if @count >= 3
-      Google::Pubsub::V1::PullResponse.decode_json \
-        "{\"received_messages\":[]}"
-    end
-    pubsub.service.mocked_subscriber = stub
-
-    $listen_sleep_mock = Minitest::Mock.new
-    $listen_sleep_mock.expect :mock_sleep, nil, [999]
-    $listen_sleep_mock.expect :mock_sleep, nil, [999]
-    def subscription.sleep delay
-      $listen_sleep_mock.mock_sleep delay
-    end
-
-    expect do
-      subscription.listen(delay: 999) do |msg|
-        msg.must_be_kind_of Google::Cloud::Pubsub::ReceivedMessage
-      end
-    end.must_raise Google::Cloud::Pubsub::ListenMustStopInTests
-
-    $listen_sleep_mock.verify
-    $listen_sleep_mock = nil
+    subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
+    subscriber.subscription_name.must_equal subscription.name
+    subscriber.deadline.must_equal 120
   end
 end
