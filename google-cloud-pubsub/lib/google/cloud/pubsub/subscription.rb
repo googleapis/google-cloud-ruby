@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/received_message"
 require "google/cloud/pubsub/snapshot"
+require "google/cloud/pubsub/subscriber"
 
 module Google
   module Cloud
@@ -285,18 +286,13 @@ module Google
         end
 
         ##
-        # Poll the backend for new messages. This runs a loop to ping the API,
-        # blocking indefinitely, yielding retrieved messages as they are
-        # received.
+        # Create a {Subscriber} object that polls the backend for new messages
+        # and processes them with the code provided in the callback.
         #
-        # @param [Integer] max The maximum number of messages to return for this
-        #   request. The Pub/Sub system may return fewer than the number
-        #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Number] delay The number of seconds to pause between requests
-        #   when the Google Cloud service has no messages to return. The default
-        #   value is `1`.
         # @yield [msg] a block for processing new messages
         # @yieldparam [ReceivedMessage] msg the newly received message
+        #
+        # @return [Subscriber]
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -304,29 +300,20 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen do |msg|
+        #
+        #   subscriber = sub.listen do |msg|
         #     # process msg
+        #     msg.ack!
         #   end
         #
-        # @example Limit number of messages pulled per API request with `max`:
-        #   require "google/cloud/pubsub"
+        #   subscriber.start
+        #   subscriber.wait!
         #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen max: 20 do |msg|
-        #     # process msg
-        #   end
-        #
-        def listen max: 100, delay: 1
-          loop do
-            msgs = wait_for_messages max: max
-            if msgs.any?
-              msgs.each { |msg| yield msg }
-            else
-              sleep delay
-            end
-          end
+        def listen deadline: nil, threads: nil, &block
+          ensure_service!
+          deadline ||= self.deadline
+
+          Subscriber.new block, name, deadline, threads, service
         end
 
         ##

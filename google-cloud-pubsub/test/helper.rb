@@ -45,6 +45,20 @@ class Google::Gax::CallOptions
   end
 end
 
+class StreamingPullStub
+  attr_reader :request_enum, :responses
+
+  def initialize responses
+    @responses = responses
+  end
+
+  def streaming_pull request_enum, options: nil
+    @request_enum = request_enum
+    # return response enumerator
+    @responses.each
+  end
+end
+
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
@@ -131,10 +145,10 @@ class MockPubsub < Minitest::Spec
     }.to_json
   end
 
-  def rec_messages_json message
+  def rec_messages_json message, id = nil
     {
       "received_messages" => [
-        JSON.parse(rec_message_json(message))
+        JSON.parse(rec_message_json(message, id))
       ]
     }.to_json
   end
