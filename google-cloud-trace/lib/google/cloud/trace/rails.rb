@@ -98,16 +98,9 @@ module Google
         #
         def self.init_middleware app
           trace_config = Trace.configure
-          project_id = trace_config.project_id
-          keyfile = trace_config.keyfile
 
-          tracer = Google::Cloud::Trace.new project: project_id,
-                                            keyfile: keyfile
-
-          app.middleware.insert_before \
-            Rack::Runtime,
-            Google::Cloud::Trace::Middleware,
-            service: tracer.service
+          app.middleware.insert_before Rack::Runtime,
+                                       Google::Cloud::Trace::Middleware
 
           trace_config.notifications.each do |type|
             Google::Cloud::Trace::Notifications.instrument \
