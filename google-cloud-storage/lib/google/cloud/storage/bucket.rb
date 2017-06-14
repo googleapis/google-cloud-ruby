@@ -294,12 +294,45 @@ module Google
         end
 
         ##
+        # Indicates that a client accessing the bucket or a file it contains
+        # must assume the transit costs related to the access. The requester
+        # must indicate the project to which the access costs should be billed.
+        #
+        # This feature is currently available only to whitelisted projects.
+        #
+        # @return [Boolean, nil] Returns `true` if requester pays is enabled for
+        #   the bucket.
+        #
+        def requester_pays
+          @gapi.billing.requester_pays if @gapi.billing
+        end
+        alias_method :requester_pays?, :requester_pays
+
+        ##
+        # Indicates that a client accessing the bucket or a file it contains
+        # must assume the transit costs related to the access. The requester
+        # must indicate the project to which the access costs should be billed.
+        #
+        # This feature is currently available only to whitelisted projects.
+        #
+        # @param [Boolean] new_requester_pays When set to `true`, the bucket is
+        #   requester pays.
+        #
+        def requester_pays= new_requester_pays
+          @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
+          @gapi.billing.requester_pays = new_requester_pays
+          patch_gapi! :billing
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
-        # {#website_main=}, and {#website_404=}. In addition, the #cors
-        # configuration accessible in the block is completely mutable and will
-        # be included in the request. (See {Bucket::Cors})
+        # {#website_main=}, {#website_404=}, and {#requester_pays=}.
+        #
+        # In addition, the #cors configuration accessible in the block is
+        # completely mutable and will be included in the request. (See
+        # {Bucket::Cors})
         #
         # @yield [bucket] a block yielding a delegate object for updating the
         #   file

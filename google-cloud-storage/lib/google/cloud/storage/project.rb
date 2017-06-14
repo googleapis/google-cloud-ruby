@@ -270,6 +270,7 @@ module Google
         #   bucket = storage.create_bucket "my-bucket" do |b|
         #     b.website_main = "index.html"
         #     b.website_404 = "not_found.html"
+        #     b.requester_pays = true
         #     b.cors.add_rule ["http://example.org", "https://example.org"],
         #                      "*",
         #                      headers: ["X-My-Custom-Header"],

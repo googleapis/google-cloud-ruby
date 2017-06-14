@@ -48,7 +48,7 @@ class MockStorage < Minitest::Spec
   def random_bucket_hash(name=random_bucket_name,
     url_root="https://www.googleapis.com/storage/v1", location="US",
     storage_class="STANDARD", versioning=nil, logging_bucket=nil,
-    logging_prefix=nil, website_main=nil, website_404=nil, cors=[])
+    logging_prefix=nil, website_main=nil, website_404=nil, cors=[], requester_pays=nil)
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -64,6 +64,7 @@ class MockStorage < Minitest::Spec
       "storageClass" => storage_class,
       "versioning" => versioning_config,
       "website" => website_hash(website_main, website_404),
+      "billing" => billing_hash(requester_pays),
       "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
   end
 
@@ -77,6 +78,10 @@ class MockStorage < Minitest::Spec
     { "mainPageSuffix" => website_main,
       "notFoundPage"   => website_404,
     }.delete_if { |_, v| v.nil? } if website_main || website_404
+  end
+
+  def billing_hash(requester_pays)
+    { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
   def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"

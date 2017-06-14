@@ -26,6 +26,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
+  let(:bucket_requester_pays) { true }
   let(:bucket_cors_gapi) { Google::Apis::StorageV1::Bucket::CorsConfiguration.new(
     max_age_seconds: 300,
     origin: ["http://example.org", "https://example.org"],
@@ -182,6 +183,24 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     mock.verify
   end
 
+  it "updates its requester pays" do
+    mock = Minitest::Mock.new
+    patch_billing_gapi = Google::Apis::StorageV1::Bucket::Billing.new requester_pays: bucket_requester_pays
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new billing: patch_billing_gapi
+    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
+      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [], bucket_requester_pays).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi,
+      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil]
+
+    bucket.service.mocked_service = mock
+
+    bucket.requester_pays.must_equal nil
+    bucket.requester_pays = bucket_requester_pays
+    bucket.requester_pays.must_equal bucket_requester_pays
+
+    mock.verify
+  end
+
   it "cannot modify its labels" do
     bucket.labels.must_equal Hash.new
     assert_raises do
@@ -213,8 +232,9 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_bucket: bucket_logging_bucket, log_object_prefix: bucket_logging_prefix
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main, not_found_page: bucket_website_404
-    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(versioning: patch_versioning_gapi, logging: patch_logging_gapi, website: patch_website_gapi, labels: { "env" => "production" })
-    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class, true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404
+    patch_billing_gapi = Google::Apis::StorageV1::Bucket::Billing.new requester_pays: bucket_requester_pays
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(versioning: patch_versioning_gapi, logging: patch_logging_gapi, website: patch_website_gapi, billing: patch_billing_gapi, labels: { "env" => "production" })
+    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class, true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404, [], bucket_requester_pays
     returned_bucket_hash[:labels] = { "env" => "production" }
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json returned_bucket_hash.to_json
     mock.expect :patch_bucket, returned_bucket_gapi,
@@ -227,6 +247,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     bucket.logging_prefix.must_equal nil
     bucket.website_main.must_equal nil
     bucket.website_404.must_equal nil
+    bucket.requester_pays.must_equal nil
     bucket.labels.must_equal Hash.new
 
     bucket.update do |b|
@@ -235,6 +256,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       b.logging_bucket = bucket_logging_bucket
       b.website_main = bucket_website_main
       b.website_404 = bucket_website_404
+      b.requester_pays = bucket_requester_pays
       b.labels["env"] = "production"
     end
 
@@ -243,6 +265,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     bucket.logging_prefix.must_equal bucket_logging_prefix
     bucket.website_main.must_equal bucket_website_main
     bucket.website_404.must_equal bucket_website_404
+    bucket.requester_pays.must_equal bucket_requester_pays
     bucket.labels.must_equal({ "env" => "production" })
 
     mock.verify

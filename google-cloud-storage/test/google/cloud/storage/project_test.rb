@@ -25,6 +25,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
+  let(:bucket_requester_pays) { true }
   let(:bucket_cors) { [{ max_age_seconds: 300,
                          origin: ["http://example.org", "https://example.org"],
                          http_method: ["*"],
@@ -120,6 +121,23 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket.name.must_equal bucket_name
     bucket.website_main.must_equal bucket_website_main
     bucket.website_404.must_equal bucket_website_404
+  end
+
+  it "creates a bucket with requester pays" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name, billing: Google::Apis::StorageV1::Bucket::Billing.new(requester_pays: bucket_requester_pays)
+    mock.expect :insert_bucket, created_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil]
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.requester_pays = bucket_requester_pays
+    end
+
+    mock.verify
+
+    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
+    bucket.name.must_equal bucket_name
+    bucket.requester_pays.must_equal bucket_requester_pays
   end
 
   it "creates a bucket with block CORS" do
@@ -448,11 +466,12 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   end
 
   def create_bucket_gapi name = nil, location: nil, storage_class: nil,
-                         versioning: nil, logging: nil, website: nil, cors: nil
+                         versioning: nil, logging: nil, website: nil, cors: nil,
+                         billing: nil
     options = {
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
-      cors_configurations: cors
+      cors_configurations: cors, billing: billing
     }.delete_if { |_, v| v.nil? }
     Google::Apis::StorageV1::Bucket.new options
   end

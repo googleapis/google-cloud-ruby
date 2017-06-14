@@ -36,12 +36,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_versioning) { true }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
+  let(:bucket_requester_pays) { true }
   let(:bucket_labels) { { "env" => "production", "foo" => "bar" } }
   let :bucket_complete_hash do
     h = random_bucket_hash bucket_name, bucket_url_root,
                            bucket_location, bucket_storage_class, bucket_versioning,
                            bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
-                           bucket_website_404, bucket_cors
+                           bucket_website_404, bucket_cors, bucket_requester_pays
     h[:labels] = bucket_labels
     h
   end
@@ -70,6 +71,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     bucket_complete.versioning?.must_equal bucket_versioning
     bucket_complete.website_main.must_equal bucket_website_main
     bucket_complete.website_404.must_equal bucket_website_404
+    bucket_complete.requester_pays.must_equal bucket_requester_pays
   end
 
   it "knows its labels" do
