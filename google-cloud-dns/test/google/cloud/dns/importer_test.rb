@@ -55,7 +55,7 @@ EOS
   it "imports records from zonefile file path" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_path
     records = importer.records
-    records.size.must_equal 16
+    records.size.must_be :>=, 16
     records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns.example.com. username.example.com. 2007120710 1d 2h 4w 1h"]
     record_must_be records[1], "example.com.", "MX", 3600, ["10 mail.example.com.", "20 mail2.example.com.", "50 mail3"]
@@ -73,6 +73,7 @@ EOS
     record_must_be records[13], "2.1.0.10.in-addr.arpa.", "PTR", 3600, ["server.example.com."]
     record_must_be records[14], "sip.example.com.", "SRV", 3600, ["0 5 5060 sip.example.com."]
     record_must_be records[15], "2.1.2.1", "NAPTR", 3600, ["10 100 \"u\" \"E2U+sip\" \"!^.*$!sip:info@example.com!\" .","10 101 \"u\" \"E2U+h323\" \"!^.*$!h323:info@example.com!\" .","10 102 \"u\" \"E2U+msg\" \"!^.*$!mailto:info@example.com!\" ."]
+    record_must_be records[16], "example.com.", "SPF", 3600, [""] if records.size > 16 # zonefile 1.06
   end
 
   it "imports records from zonefile IO instance" do
