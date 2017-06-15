@@ -61,13 +61,14 @@ module Google
         end
 
         ##
-        # The received data.
+        # The message payload. This data is a list of bytes encoded as
+        # ASCII-8BIT.
         def data
           @grpc.data
         end
 
         ##
-        # The received attributes.
+        # Optional attributes for the message.
         def attributes
           return @grpc.attributes.to_h if @grpc.attributes.respond_to? :to_h
           # Enumerable doesn't have to_h on Ruby 2.0, so fallback to this
