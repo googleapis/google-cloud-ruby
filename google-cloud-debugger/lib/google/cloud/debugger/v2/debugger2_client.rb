@@ -74,6 +74,12 @@ module Google
           #   A Channel object through which to make calls.
           # @param chan_creds [Grpc::ChannelCredentials]
           #   A ChannelCredentials for the setting up the RPC client.
+          # @param updater_proc [Proc]
+          #   A function that transforms the metadata for requests, e.g., to give
+          #   OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
           # @param client_config[Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
@@ -86,6 +92,7 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
@@ -130,6 +137,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Devtools::Clouddebugger::V2::Debugger2::Stub.method(:new)
             )
@@ -174,7 +182,7 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::SetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger/v2/debugger2_client"
+          #   require "google/cloud/debugger/v2"
           #
           #   Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
           #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
@@ -213,7 +221,7 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::GetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger/v2/debugger2_client"
+          #   require "google/cloud/debugger/v2"
           #
           #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
           #
@@ -250,7 +258,7 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger/v2/debugger2_client"
+          #   require "google/cloud/debugger/v2"
           #
           #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
           #
@@ -304,7 +312,7 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger/v2/debugger2_client"
+          #   require "google/cloud/debugger/v2"
           #
           #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
           #
@@ -350,7 +358,7 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger/v2/debugger2_client"
+          #   require "google/cloud/debugger/v2"
           #
           #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
           #
