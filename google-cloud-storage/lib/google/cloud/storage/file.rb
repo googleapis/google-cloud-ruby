@@ -746,12 +746,12 @@ module Google
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil
           ensure_service!
-          options = { method: method, expires: expires, headers: headers,
-                      content_type: content_type, content_md5: content_md5,
-                      issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key }
           signer = File::Signer.from_file self
-          signer.signed_url options
+          signer.signed_url method: method, expires: expires, headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer, client_email: client_email,
+                            signing_key: signing_key, private_key: private_key
         end
 
         ##
@@ -860,9 +860,8 @@ module Google
           resp = service.rewrite_file bucket, name, bucket, name, update_gapi
           until resp.done
             sleep 1
-            rewrite_options = { token: resp.rewrite_token }
             resp = service.rewrite_file bucket, name, bucket, name,
-                                        update_gapi, rewrite_options
+                                        update_gapi, token: resp.rewrite_token
           end
           resp.resource
         end

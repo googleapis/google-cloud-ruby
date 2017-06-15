@@ -81,12 +81,12 @@ module Google
         ##
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
-        def insert_bucket bucket_gapi, options = {}
+        def insert_bucket bucket_gapi, acl: nil, default_acl: nil
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
-              predefined_acl: options[:acl],
-              predefined_default_object_acl: options[:default_acl]
+              predefined_acl: acl,
+              predefined_default_object_acl: default_acl
           end
         end
 
@@ -182,14 +182,13 @@ module Google
 
         ##
         # Retrieves a list of files matching the criteria.
-        def list_files bucket_name, options = {}
+        def list_files bucket_name, delimiter: nil, max: nil, token: nil,
+                       prefix: nil, versions: nil
           execute do
             service.list_objects \
-              bucket_name, delimiter: options[:delimiter],
-                           max_results: options[:max],
-                           page_token: options[:token],
-                           prefix: options[:prefix],
-                           versions: options[:versions]
+              bucket_name, delimiter: delimiter, max_results: max,
+                           page_token: token, prefix: prefix,
+                           versions: versions
           end
         end
 
@@ -232,17 +231,17 @@ module Google
         # destination bucket/object.
         def copy_file source_bucket_name, source_file_path,
                       destination_bucket_name, destination_file_path,
-                      file_gapi = nil, options = {}
-          key_options = rewrite_key_options options[:key],
-                                            options[:key]
+                      file_gapi = nil, key: nil, acl: nil, generation: nil,
+                      token: nil
+          key_options = rewrite_key_options key, key
           execute do
             service.rewrite_object \
               source_bucket_name, source_file_path,
               destination_bucket_name, destination_file_path,
               file_gapi,
-              destination_predefined_acl: options[:acl],
-              source_generation: options[:generation],
-              rewrite_token: options[:token],
+              destination_predefined_acl: acl,
+              source_generation: generation,
+              rewrite_token: token,
               options: key_options
           end
         end
@@ -251,17 +250,17 @@ module Google
         # destination bucket/object.
         def rewrite_file source_bucket_name, source_file_path,
                          destination_bucket_name, destination_file_path,
-                         file_gapi = nil, options = {}
-          key_options = rewrite_key_options options[:source_key],
-                                            options[:destination_key]
+                         file_gapi = nil, source_key: nil, destination_key: nil,
+                         acl: nil, generation: nil, token: nil
+          key_options = rewrite_key_options source_key, destination_key
           execute do
             service.rewrite_object \
               source_bucket_name, source_file_path,
               destination_bucket_name, destination_file_path,
               file_gapi,
-              destination_predefined_acl: options[:acl],
-              source_generation: options[:generation],
-              rewrite_token: options[:token],
+              destination_predefined_acl: acl,
+              source_generation: generation,
+              rewrite_token: token,
               options: key_options
           end
         end
@@ -304,21 +303,22 @@ module Google
 
         ##
         # Creates a new file ACL.
-        def insert_file_acl bucket_name, file_name, entity, role, options = {}
+        def insert_file_acl bucket_name, file_name, entity, role,
+                            generation: nil
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new({
             entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_object_access_control \
-              bucket_name, file_name, new_acl, generation: options[:generation]
+              bucket_name, file_name, new_acl, generation: generation
           end
         end
 
         ##
         # Permanently deletes a file ACL.
-        def delete_file_acl bucket_name, file_name, entity, options = {}
+        def delete_file_acl bucket_name, file_name, entity, generation: nil
           execute do
             service.delete_object_access_control \
-              bucket_name, file_name, entity, generation: options[:generation]
+              bucket_name, file_name, entity, generation: generation
           end
         end
 

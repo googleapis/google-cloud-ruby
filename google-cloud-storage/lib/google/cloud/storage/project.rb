@@ -128,8 +128,7 @@ module Google
         #   end
         #
         def buckets prefix: nil, token: nil, max: nil
-          options = { prefix: prefix, token: token, max: max }
-          gapi = service.list_buckets options
+          gapi = service.list_buckets prefix: prefix, token: token, max: max
           Bucket::List.from_gapi gapi, service, prefix, max
         end
         alias_method :find_buckets, :buckets
@@ -397,12 +396,12 @@ module Google
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
                        private_key: nil
-          options = { method: method, expires: expires, headers: headers,
-                      content_type: content_type, content_md5: content_md5,
-                      issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key }
           signer = File::Signer.new bucket, path, service
-          signer.signed_url options
+          signer.signed_url method: method, expires: expires, headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer, client_email: client_email,
+                            signing_key: signing_key, private_key: private_key
         end
 
         protected

@@ -447,14 +447,9 @@ module Google
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
                   versions: nil
           ensure_service!
-          options = {
-            prefix:    prefix,
-            delimiter: delimiter,
-            token:     token,
-            max:       max,
-            versions:  versions
-          }
-          gapi = service.list_files name, options
+          gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
+                                          token: token, max: max,
+                                          versions: versions
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions
         end
@@ -491,8 +486,8 @@ module Google
         #
         def file path, generation: nil, encryption_key: nil
           ensure_service!
-          options = { generation: generation, key: encryption_key }
-          gapi = service.get_file name, path, options
+          gapi = service.get_file name, path, generation: generation,
+                                              key: encryption_key
           File.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil
@@ -844,12 +839,11 @@ module Google
                         client_email: nil, signing_key: nil,
                         private_key: nil
           ensure_service!
-          options = { issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key,
-                      policy: policy }
 
           signer = File::Signer.from_bucket self, path
-          signer.post_object options
+          signer.post_object issuer: issuer, client_email: client_email,
+                             signing_key: signing_key, private_key: private_key,
+                             policy: policy
         end
 
         ##

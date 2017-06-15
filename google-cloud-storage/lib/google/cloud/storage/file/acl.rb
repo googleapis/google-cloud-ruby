@@ -163,9 +163,8 @@ module Google
           #   file.acl.add_owner "group-#{email}"
           #
           def add_owner entity, generation: nil
-            options = { generation: generation }
             gapi = @service.insert_file_acl @bucket, @file, entity, "OWNER",
-                                            options
+                                            generation: generation
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -212,9 +211,8 @@ module Google
           #   file.acl.add_reader "group-#{email}"
           #
           def add_reader entity, generation: nil
-            options = { generation: generation }
             gapi = @service.insert_file_acl @bucket, @file, entity, "READER",
-                                            options
+                                            generation: generation
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -250,8 +248,8 @@ module Google
           #   file.acl.delete "user-#{email}"
           #
           def delete entity, generation: nil
-            options = { generation: generation }
-            @service.delete_file_acl @bucket, @file, entity, options
+            @service.delete_file_acl @bucket, @file, entity,
+                                     generation: generation
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
