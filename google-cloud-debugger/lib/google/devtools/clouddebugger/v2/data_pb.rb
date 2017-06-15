@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :BREAKPOINT_SOURCE_LOCATION, 3
     value :BREAKPOINT_CONDITION, 4
     value :BREAKPOINT_EXPRESSION, 7
+    value :BREAKPOINT_AGE, 8
     value :VARIABLE_NAME, 5
     value :VARIABLE_VALUE, 6
   end
