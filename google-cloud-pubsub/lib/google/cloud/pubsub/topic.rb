@@ -240,7 +240,11 @@ module Google
         ##
         # Publishes one or more messages to the topic.
         #
-        # @param [String, File] data The message data.
+        # The message payload must not be empty; it must contain either a
+        # non-empty data field, or at least one attribute.
+        #
+        # @param [String, File] data The message payload. This will be converted
+        #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
         # @yield [batch] a block for publishing multiple messages in one
         #   request
@@ -301,7 +305,11 @@ module Google
         ##
         # Publishes a message asynchonously to the topic.
         #
-        # @param [String, File] data The message data.
+        # The message payload must not be empty; it must contain either a
+        # non-empty data field, or at least one attribute.
+        #
+        # @param [String, File] data The message payload. This will be converted
+        #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
         # @yield [result] the callback for when the message has been published
         # @yieldparam [PublishResult] result the result of the asynchonous

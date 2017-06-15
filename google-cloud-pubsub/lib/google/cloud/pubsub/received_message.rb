@@ -66,13 +66,14 @@ module Google
         alias_method :msg, :message
 
         ##
-        # The received message's data.
+        # The received message payload. This data is a list of bytes encoded as
+        # ASCII-8BIT.
         def data
           message.data
         end
 
         ##
-        # The received message's attributes.
+        # Optional attributes for the received message.
         def attributes
           message.attributes
         end
