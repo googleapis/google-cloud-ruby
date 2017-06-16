@@ -43,6 +43,11 @@ module Google
         attr_accessor :service
 
         ##
+        # @private The user_pays flag for sending `userProject` query param for
+        # operations on requester_pays buckets and their files.
+        attr_accessor :user_pays
+
+        ##
         # @private The Google API Client object.
         attr_accessor :gapi
 
@@ -51,6 +56,7 @@ module Google
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Bucket.new
+          @user_pays = nil
         end
 
         ##
@@ -393,7 +399,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_bucket name
+          service.delete_bucket name, user_pays: user_pays
           true
         end
 
@@ -449,9 +455,10 @@ module Google
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
-                                          versions: versions
+                                          versions: versions,
+                                          user_pays: user_pays
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
-                               versions
+                               versions, user_pays: user_pays
         end
         alias_method :find_files, :files
 
@@ -487,8 +494,9 @@ module Google
         def file path, generation: nil, encryption_key: nil
           ensure_service!
           gapi = service.get_file name, path, generation: generation,
-                                              key: encryption_key
-          File.from_gapi gapi, service
+                                              key: encryption_key,
+                                              user_pays: user_pays
+          File.from_gapi gapi, service, user_pays: user_pays
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -629,7 +637,8 @@ module Google
                       content_disposition: content_disposition, crc32c: crc32c,
                       content_encoding: content_encoding, metadata: metadata,
                       content_language: content_language, key: encryption_key,
-                      storage_class: storage_class_for(storage_class) }
+                      storage_class: storage_class_for(storage_class),
+                      user_pays: user_pays }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
@@ -977,7 +986,7 @@ module Google
         def policy force: nil
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
-          gapi = service.get_bucket_policy name
+          gapi = service.get_bucket_policy name, user_pays: user_pays
           policy = Policy.from_gapi gapi
           return policy unless block_given?
           yield policy
@@ -1018,7 +1027,8 @@ module Google
         #
         def policy= new_policy
           ensure_service!
-          gapi = service.set_bucket_policy name, new_policy.to_gapi
+          gapi = service.set_bucket_policy name, new_policy.to_gapi,
+                                           user_pays: user_pays
           Policy.from_gapi gapi
         end
 
@@ -1051,7 +1061,8 @@ module Google
         def test_permissions *permissions
           permissions = Array(permissions).flatten
           ensure_service!
-          gapi = service.test_bucket_permissions name, permissions
+          gapi = service.test_bucket_permissions name, permissions,
+                                                 user_pays: user_pays
           gapi.permissions
         end
 
@@ -1065,10 +1076,11 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, conn
+        def self.from_gapi gapi, service, user_pays: nil
           new.tap do |f|
             f.gapi = gapi
-            f.service = conn
+            f.service = service
+            f.user_pays = user_pays
           end
         end
 
@@ -1088,7 +1100,7 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
-          @gapi = service.patch_bucket name, patch_gapi
+          @gapi = service.patch_bucket name, patch_gapi, user_pays: user_pays
         end
 
         ##

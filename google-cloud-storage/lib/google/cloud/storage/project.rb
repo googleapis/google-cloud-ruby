@@ -137,6 +137,14 @@ module Google
         # Retrieves bucket by name.
         #
         # @param [String] bucket_name Name of a bucket.
+        # @param [Boolean] user_pays If the `requester_pays` flag is enabled
+        #   for the requested bucket and if this parameter is `true`, transit
+        #   costs for operations on the requested bucket or a file it contains
+        #   will be billed to the current project for this client. (See
+        #   {#project} for the ID of the current project.) The default is `nil`.
+        #
+        #   The requester pays feature is currently available only to
+        #   whitelisted projects.
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
         #   does not exist
@@ -149,9 +157,9 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   puts bucket.name
         #
-        def bucket bucket_name
-          gapi = service.get_bucket bucket_name
-          Bucket.from_gapi gapi, service
+        def bucket bucket_name, user_pays: nil
+          gapi = service.get_bucket bucket_name, user_pays: user_pays
+          Bucket.from_gapi gapi, service, user_pays: user_pays
         rescue Google::Cloud::NotFoundError
           nil
         end

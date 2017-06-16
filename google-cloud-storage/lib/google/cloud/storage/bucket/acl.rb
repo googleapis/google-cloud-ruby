@@ -49,11 +49,17 @@ module Google
                     "public_write" => "publicReadWrite" }
 
           ##
+          # @private The user_pays flag for sending `userProject` query param
+          # for operations on requester_pays buckets and their files.
+          attr_accessor :user_pays
+
+          ##
           # @private Initialized a new Acl object.
           # Must provide a valid Bucket object.
           def initialize bucket
             @bucket = bucket.name
             @service = bucket.service
+            @user_pays = bucket.user_pays
             @owners  = nil
             @writers = nil
             @readers = nil
@@ -72,7 +78,7 @@ module Google
           #   bucket.acl.reload!
           #
           def reload!
-            gapi = @service.list_bucket_acls @bucket
+            gapi = @service.list_bucket_acls @bucket, user_pays: user_pays
             acls = Array(gapi.items)
             @owners  = entities_from_acls acls, "OWNER"
             @writers = entities_from_acls acls, "WRITER"
@@ -215,7 +221,8 @@ module Google
           #   bucket.acl.add_writer "group-#{email}"
           #
           def add_writer entity
-            gapi = @service.insert_bucket_acl @bucket, entity, "WRITER"
+            gapi = @service.insert_bucket_acl @bucket, entity, "WRITER",
+                                              user_pays: user_pays
             entity = gapi.entity
             @writers.push entity unless @writers.nil?
             entity
@@ -290,7 +297,7 @@ module Google
           #   bucket.acl.delete "user-#{email}"
           #
           def delete entity
-            @service.delete_bucket_acl @bucket, entity
+            @service.delete_bucket_acl @bucket, entity, user_pays: user_pays
             @owners.delete entity  unless @owners.nil?
             @writers.delete entity unless @writers.nil?
             @readers.delete entity unless @readers.nil?
@@ -406,7 +413,8 @@ module Google
           end
 
           def update_predefined_acl! acl_role
-            @service.patch_bucket @bucket, predefined_acl: acl_role
+            @service.patch_bucket @bucket, predefined_acl: acl_role,
+                                           user_pays: user_pays
             clear!
           end
 
@@ -450,11 +458,17 @@ module Google
                     "public_read" => "publicRead" }
 
           ##
+          # @private The user_pays flag for sending `userProject` query param
+          # for operations on requester_pays buckets and their files.
+          attr_accessor :user_pays
+
+          ##
           # @private Initialized a new DefaultAcl object.
           # Must provide a valid Bucket object.
           def initialize bucket
             @bucket = bucket.name
             @service = bucket.service
+            @user_pays = bucket.user_pays
             @owners  = nil
             @readers = nil
           end
@@ -472,7 +486,7 @@ module Google
           #   bucket.default_acl.reload!
           #
           def reload!
-            gapi = @service.list_default_acls @bucket
+            gapi = @service.list_default_acls @bucket, user_pays: user_pays
             acls = Array(gapi.items).map do |acl|
               next acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
               fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
@@ -557,7 +571,8 @@ module Google
           #   bucket.default_acl.add_owner "group-#{email}"
           #
           def add_owner entity
-            gapi = @service.insert_default_acl @bucket, entity, "OWNER"
+            gapi = @service.insert_default_acl @bucket, entity, "OWNER",
+                                               user_pays: user_pays
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -599,7 +614,8 @@ module Google
           #   bucket.default_acl.add_reader "group-#{email}"
           #
           def add_reader entity
-            gapi = @service.insert_default_acl @bucket, entity, "READER"
+            gapi = @service.insert_default_acl @bucket, entity, "READER",
+                                               user_pays: user_pays
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -632,7 +648,7 @@ module Google
           #   bucket.default_acl.delete "user-#{email}"
           #
           def delete entity
-            @service.delete_default_acl @bucket, entity
+            @service.delete_default_acl @bucket, entity, user_pays: user_pays
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
@@ -765,7 +781,8 @@ module Google
           end
 
           def update_predefined_default_acl! acl_role
-            @service.patch_bucket @bucket, predefined_default_acl: acl_role
+            @service.patch_bucket @bucket, predefined_default_acl: acl_role,
+                                           user_pays: user_pays
             clear!
           end
 

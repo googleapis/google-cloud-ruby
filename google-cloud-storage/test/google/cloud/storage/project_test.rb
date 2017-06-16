@@ -439,7 +439,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
 
     storage.service.mocked_service = mock
 
@@ -454,11 +454,26 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
 
     storage.service.mocked_service = mock
 
     bucket = storage.find_bucket bucket_name
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+  end
+
+  it "finds a bucket with user_pays" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, { user_project: "test" }]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_pays: true
 
     mock.verify
 

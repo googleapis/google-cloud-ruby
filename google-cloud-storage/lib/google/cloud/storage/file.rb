@@ -55,6 +55,11 @@ module Google
         attr_accessor :service
 
         ##
+        # @private The user_pays flag for sending `userProject` query param for
+        # operations on requester_pays buckets and their files.
+        attr_accessor :user_pays
+
+        ##
         # @private The Google API Client object.
         attr_accessor :gapi
 
@@ -63,6 +68,7 @@ module Google
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Object.new
+          @user_pays = nil
         end
 
         ##
@@ -425,8 +431,7 @@ module Google
             path.set_encoding "ASCII-8BIT"
           end
           file = service.download_file \
-            bucket, name, path,
-            key: encryption_key
+            bucket, name, path, key: encryption_key, user_pays: user_pays
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
@@ -520,7 +525,8 @@ module Google
         def copy dest_bucket_or_path, dest_path = nil, acl: nil,
                  generation: nil, encryption_key: nil
           ensure_service!
-          options = { acl: acl, generation: generation, key: encryption_key }
+          options = { acl: acl, generation: generation, key: encryption_key,
+                      user_pays: user_pays }
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
@@ -591,7 +597,8 @@ module Google
         def rotate encryption_key: nil, new_encryption_key: nil
           ensure_service!
           options = { source_key: encryption_key,
-                      destination_key: new_encryption_key }
+                      destination_key: new_encryption_key,
+                      user_pays: user_pays }
           gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           until gapi.done
             sleep 1
@@ -618,7 +625,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_file bucket, name
+          service.delete_file bucket, name, user_pays: user_pays
           true
         end
 
@@ -804,7 +811,7 @@ module Google
         # Reloads the file with current data from the Storage service.
         def reload!
           ensure_service!
-          @gapi = service.get_file bucket, name
+          @gapi = service.get_file bucket, name, user_pays: user_pays
         end
         alias_method :refresh!, :reload!
 
@@ -817,10 +824,11 @@ module Google
 
         ##
         # @private New File from a Google API Client object.
-        def self.from_gapi gapi, service
+        def self.from_gapi gapi, service, user_pays: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = service
+            f.user_pays = user_pays
           end
         end
 
@@ -843,7 +851,8 @@ module Google
           if attributes.include? :storage_class
             @gapi = rewrite_gapi bucket, name, update_gapi
           else
-            @gapi = service.patch_file bucket, name, update_gapi
+            @gapi = service.patch_file \
+              bucket, name, update_gapi, user_pays: user_pays
           end
         end
 
@@ -857,11 +866,13 @@ module Google
         end
 
         def rewrite_gapi bucket, name, update_gapi
-          resp = service.rewrite_file bucket, name, bucket, name, update_gapi
+          resp = service.rewrite_file \
+            bucket, name, bucket, name, update_gapi, user_pays: user_pays
           until resp.done
             sleep 1
-            resp = service.rewrite_file bucket, name, bucket, name,
-                                        update_gapi, token: resp.rewrite_token
+            resp = service.rewrite_file \
+              bucket, name, bucket, name, update_gapi,
+              token: resp.rewrite_token, user_pays: user_pays
           end
           resp.resource
         end

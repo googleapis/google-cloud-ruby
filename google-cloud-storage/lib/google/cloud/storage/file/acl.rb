@@ -51,12 +51,18 @@ module Google
                     "public_read" => "publicRead" }
 
           ##
+          # @private The user_pays flag for sending `userProject` query param
+          # for operations on requester_pays buckets and their files.
+          attr_accessor :user_pays
+
+          ##
           # @private Initialized a new Acl object.
           # Must provide a valid Bucket object.
           def initialize file
             @bucket = file.bucket
             @file = file.name
             @service = file.service
+            @user_pays = file.user_pays
             @owners  = nil
             @readers = nil
           end
@@ -75,7 +81,7 @@ module Google
           #   file.acl.reload!
           #
           def reload!
-            gapi = @service.list_file_acls @bucket, @file
+            gapi = @service.list_file_acls @bucket, @file, user_pays: user_pays
             acls = Array(gapi.items)
             @owners  = entities_from_acls acls, "OWNER"
             @readers = entities_from_acls acls, "READER"
@@ -164,7 +170,8 @@ module Google
           #
           def add_owner entity, generation: nil
             gapi = @service.insert_file_acl @bucket, @file, entity, "OWNER",
-                                            generation: generation
+                                            generation: generation,
+                                            user_pays: user_pays
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -212,7 +219,8 @@ module Google
           #
           def add_reader entity, generation: nil
             gapi = @service.insert_file_acl @bucket, @file, entity, "READER",
-                                            generation: generation
+                                            generation: generation,
+                                            user_pays: user_pays
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -248,8 +256,9 @@ module Google
           #   file.acl.delete "user-#{email}"
           #
           def delete entity, generation: nil
-            @service.delete_file_acl @bucket, @file, entity,
-                                     generation: generation
+            @service.delete_file_acl \
+              @bucket, @file, entity,
+              generation: generation, user_pays: user_pays
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
@@ -389,8 +398,8 @@ module Google
 
           def update_predefined_acl! acl_role
             patched_file = Google::Apis::StorageV1::Object.new acl: []
-            @service.patch_file \
-              @bucket, @file, patched_file, predefined_acl: acl_role
+            @service.patch_file @bucket, @file, patched_file,
+                                predefined_acl: acl_role, user_pays: user_pays
             clear!
           end
 

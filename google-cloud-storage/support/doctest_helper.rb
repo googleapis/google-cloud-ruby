@@ -110,28 +110,28 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud.storage" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud#storage" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage.new" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
@@ -139,49 +139,49 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#cors" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#update" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#delete" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :delete_bucket, nil, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :delete_bucket, nil, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#files" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :list_objects, list_files_gapi, ["my-bucket", {:delimiter=>nil, :max_results=>nil, :page_token=>nil, :prefix=>nil, :versions=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#find_files" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :list_objects, list_files_gapi, ["my-bucket", {:delimiter=>nil, :max_results=>nil, :page_token=>nil, :prefix=>nil, :versions=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#create_file" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
       # Following expectation is only used in last example
       mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
@@ -190,7 +190,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#new_file" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
       # Following expectation is only used in last example
       mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
@@ -199,7 +199,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#upload_file" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
       # Following expectation is only used in last example
       mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
@@ -208,66 +208,66 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#acl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#acl@Or, grant access via a predefined permissions list:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"publicRead", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#default_acl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :insert_default_object_access_control, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::ObjectAccessControl]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :insert_default_object_access_control, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::ObjectAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#default_acl@Or, grant access via a predefined permissions list:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"publicRead"}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#policy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#policy@Retrieve the latest policy and update it in a block:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#policy=" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#test_permissions" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-todo-app", ["storage.buckets.get", "storage.buckets.delete"]]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
+      mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-todo-app", ["storage.buckets.get", "storage.buckets.delete"], Hash]
     end
   end
 
@@ -275,94 +275,94 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#reload!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       access_controls = Google::Apis::StorageV1::BucketAccessControls.from_json(random_bucket_acl_hash("my-bucket").to_json)
-      mock.expect :list_bucket_access_controls, access_controls, ["my-bucket"]
+      mock.expect :list_bucket_access_controls, access_controls, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       access_controls = Google::Apis::StorageV1::BucketAccessControls.from_json(random_bucket_acl_hash("my-bucket").to_json)
-      mock.expect :list_bucket_access_controls, access_controls, ["my-bucket"]
+      mock.expect :list_bucket_access_controls, access_controls, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#add_owner" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#add_writer" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#add_reader" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#delete" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :delete_bucket_access_control, true, ["my-bucket", "user-heidi@example.net"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :delete_bucket_access_control, true, ["my-bucket", "user-heidi@example.net", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#auth" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"authenticatedRead", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#private" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"private", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#project_private!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"projectPrivate", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#projectPrivate!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"projectPrivate", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#public" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"publicRead", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#public_write!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"publicReadWrite", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Acl#publicReadWrite!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>"publicReadWrite", :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -370,79 +370,79 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       access_controls = Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash("my-bucket").to_json)
-      mock.expect :list_default_object_access_controls, access_controls, ["my-bucket"]
+      mock.expect :list_default_object_access_controls, access_controls, ["my-bucket", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#add_" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :insert_default_object_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::ObjectAccessControl]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_default_object_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::ObjectAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#delete" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :delete_default_object_access_control, true, ["my-bucket", "user-heidi@example.net"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :delete_default_object_access_control, true, ["my-bucket", "user-heidi@example.net", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#auth" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"authenticatedRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#owner_full!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"bucketOwnerFullControl"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#bucketOwnerFullControl!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"bucketOwnerFullControl"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#owner_read!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"bucketOwnerRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#bucketOwnerRead!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"bucketOwnerRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#private" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"private"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#project" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"projectPrivate"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::DefaultAcl#public" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>"publicRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -450,14 +450,14 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::Cors" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Bucket::Cors#add_rule" do
     mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -465,7 +465,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::List" do
     mock_storage do |mock|
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", {:prefix=>nil, :page_token=>nil, :max_results=>nil}]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
     end
   end
 
@@ -473,17 +473,17 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Policy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Policy#role" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app"]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
@@ -491,55 +491,55 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::File" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:download_dest=>"path/to/downloaded/file.ext", :generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#update" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#copy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", nil, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#copy@The file can be copied to a new path in the current bucket:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/destination/file.ext", nil, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#copy@The file can also be copied by specifying a generation:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", nil, {:destination_predefined_acl=>nil, :source_generation=>123456, :rewrite_token => nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "copy/of/previous/generation/file.ext", nil, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#copy@The file can be modified during copying:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", Google::Apis::StorageV1::Object, {:destination_predefined_acl=>nil, :source_generation=>nil, :rewrite_token => nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#rotate" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
       mock.expect :rewrite_object, OpenStruct.new(done: true, resource: file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext", nil, Hash]
     end
@@ -547,53 +547,53 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::File#delete" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext"]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#download@Download to an in-memory StringIO object." do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#public_url" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#url" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#acl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
-      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, {:generation=>nil}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", Hash]
+      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#acl@Or, grant access via a predefined permissions list:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"publicRead"}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File#signed_url" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
-      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+      mock.expect :get_object, file_gapi, ["my-todo-app", "avatars/heidi/400x400.png", Hash]
     end
   end
 
@@ -601,98 +601,98 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::File::Acl" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
       access_controls = Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash("my-bucket", "path/to/my-file.ext").to_json)
-      mock.expect :list_object_access_controls, access_controls, ["my-bucket", "path/to/my-file.ext"]
+      mock.expect :list_object_access_controls, access_controls, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#add_owner" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, {:generation=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#add_reader" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, {:generation=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :insert_object_access_control, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::ObjectAccessControl, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#delete" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :delete_object_access_control, true, ["my-bucket", "path/to/my-file.ext", "user-heidi@example.net", {:generation=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :delete_object_access_control, true, ["my-bucket", "path/to/my-file.ext", "user-heidi@example.net", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#auth" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"authenticatedRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#owner_full!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"bucketOwnerFullControl"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#bucketOwnerFullControl!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"bucketOwnerFullControl"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#owner_read!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"bucketOwnerRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#bucketOwnerRead!" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"bucketOwnerRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#private" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"private"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#project" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"projectPrivate"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::File::Acl#public" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, {:predefined_acl=>"publicRead"}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
     end
   end
 
@@ -700,8 +700,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::File::List" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :list_objects, list_files_gapi, ["my-bucket", {:delimiter=>nil, :max_results=>nil, :page_token=>nil, :prefix=>nil, :versions=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
     end
   end
 
@@ -709,24 +709,24 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Project" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Project#buckets" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", {:prefix=>nil, :page_token=>nil, :max_results=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Project#buckets@Retrieve buckets with names that begin with a given prefix:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", {:prefix=>"user-", :page_token=>nil, :max_results=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
     end
   end
 
@@ -734,9 +734,9 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Project#create_bucket" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket"]
-      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", {:generation=>nil, :options=>{}}]
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -744,25 +744,25 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#post_object" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end
   end
   doctest.before "Google::Cloud::Storage::Bucket#post_object@Using a policy to define the upload authorization:" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end
   end
   doctest.before "Google::Cloud::Storage::Bucket#post_object@Using the issuer and signing_key options:" do
     mock_storage do |mock|
       OpenSSL::PKey::RSA.stub :new, "key" do
-        mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+        mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       end
     end
   end
 
   doctest.before "Google::Cloud::Storage::PostObject" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app"]
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end
   end
 
