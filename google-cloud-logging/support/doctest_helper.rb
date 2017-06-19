@@ -256,8 +256,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Project#create_sink" do
     mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
     mock_logging do |mock, mock_metrics, mock_sinks|
       mock_sinks.expect :create_sink, nil, ["projects/my-project", Google::Logging::V2::LogSink, Hash]
@@ -272,8 +272,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Sink" do
     mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, {:predefined_acl=>nil, :predefined_default_object_acl=>nil}]
-      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl]
+      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
     mock_logging do |mock, mock_metrics, mock_sinks|
       mock_sinks.expect :create_sink, nil, ["projects/my-project", Google::Logging::V2::LogSink, Hash]
