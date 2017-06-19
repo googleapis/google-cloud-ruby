@@ -3,8 +3,9 @@
 This gem instruments a Ruby web application for Stackdriver diagnostics. When loaded, it integrates with Rails, Sinatra, or other Rack-based web frameworks to collect application diagnostic and monitoring information for your application.
 
 Specifically, this gem is a convenience package that loads and automatically activates the instrumentation features of the following gems:
-- [google-cloud-logging](../google-cloud-logging)
+- [google-cloud-debugger](../google-cloud-debugger)
 - [google-cloud-error_reporting](../google-cloud-error_reporting)
+- [google-cloud-logging](../google-cloud-logging)
 - [google-cloud-trace](../google-cloud-trace)
 
 Please see the top-level project [README](../README.md) for more information about the individual Stackdriver google-cloud-ruby gems.
@@ -23,7 +24,7 @@ require "stackdriver"
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.0+.
+This library is supported on Ruby 2.2+.
 
 ## Versioning
 
