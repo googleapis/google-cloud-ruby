@@ -21,9 +21,6 @@ gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
 gem "google-cloud-datastore", path: "google-cloud-datastore"
-if Gem::Version.new(RUBY_VERSION)  >= Gem::Version.new("2.2.0")
-  gem "google-cloud-debugger", path: "google-cloud-debugger"
-end
 gem "google-cloud-dns", path: "google-cloud-dns"
 gem "google-cloud-error_reporting", path: "google-cloud-error_reporting"
 gem "google-cloud-language", path: "google-cloud-language"
@@ -40,8 +37,12 @@ gem "google-cloud-vision", path: "google-cloud-vision"
 gem "google-cloud-video_intelligence", path: "google-cloud-video_intelligence"
 gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
-gem "stackdriver", path: "stackdriver"
 gem "stackdriver-core", path: "stackdriver-core"
+
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.2.0")
+  gem "stackdriver", path: "stackdriver"
+  gem "google-cloud-debugger", path: "google-cloud-debugger"
+end
 
 # TEMP: rainbow (a dependency of rubocop) version 2.2 seems to have a problem,
 # so pinning to 2.1 for now.
