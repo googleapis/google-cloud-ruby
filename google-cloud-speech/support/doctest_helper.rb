@@ -133,8 +133,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Speech::Project#audio@With a Google Cloud Storage File object:" do
     mock_storage do |mock|
-      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
-      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name", Hash]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", Hash]
     end
     mock_speech do |mock, mock_ops|
       mock.expect :long_running_recognize, op_done_false(mock_ops), recognize_args(recognition_config_alternatives, recognition_audio_uri)
@@ -154,8 +154,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Speech::Project#recognize@With a Google Cloud Storage File object:" do
     mock_storage do |mock|
-      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
-      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name", Hash]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", Hash]
     end
     mock_speech do |mock|
       mock.expect :recognize, recognize_response, recognize_args(recognition_config_alternatives, recognition_audio_uri)
@@ -171,8 +171,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Speech::Project#process@With a Google Cloud Storage File object:" do
     mock_storage do |mock|
-      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name"]
-      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket,  OpenStruct.new(name: "bucket-name"), ["bucket-name", Hash]
+      mock.expect :get_object,  OpenStruct.new(bucket: "bucket-name", name: "path/to/audio.raw"), ["bucket-name", "path/to/audio.raw", Hash]
     end
     mock_speech do |mock, mock_ops|
       mock.expect :long_running_recognize, op_done_false(mock_ops), recognize_args(recognition_config_alternatives, recognition_audio_uri)
