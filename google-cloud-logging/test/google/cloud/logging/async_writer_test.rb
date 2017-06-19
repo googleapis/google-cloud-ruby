@@ -118,27 +118,14 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       labels: labels2
     )
     async_writer.resume
+
+    wait_result = wait_until_true {
+      async_writer.instance_variable_get(:@queue).size == 0
+    }
+
+    wait_result.must_equal :completed
+
     async_writer.stop! 1
-
-    mock.verify
-  end
-
-  it "cleans up threads on exit" do
-    mock = Minitest::Mock.new
-    logging.service.mocked_logging = mock
-
-    mock.expect :write_log_entries, write_res, write_req_args("payload1")
-
-    async_writer.write_entries(
-      entries("payload1"),
-      log_name: log_name,
-      resource: resource,
-      labels: labels1
-    )
-
-    async_writer.stopped?.must_equal false
-    Google::Cloud::Logging::AsyncWriter.run_cleanup
-    async_writer.stopped?.must_equal true
 
     mock.verify
   end

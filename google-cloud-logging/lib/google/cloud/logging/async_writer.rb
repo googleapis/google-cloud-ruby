@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "set"
 
+require "set"
+require "stackdriver/core/async_actor"
 
 module Google
   module Cloud
@@ -53,12 +54,11 @@ module Google
       #                       labels: labels
       #
       class AsyncWriter
-        DEFAULT_MAX_QUEUE_SIZE = 10000
-        CLEANUP_TIMEOUT = 10.0
-        WAIT_INTERVAL = 1.0
+        include Stackdriver::Core::AsyncActor
 
-        @cleanup_list = nil
-        @exit_lock = Mutex.new
+        DEFAULT_MAX_QUEUE_SIZE = 10000
+        CLEANUP_TIMEOUT = Stackdriver::Core::AsyncActor::CLEANUP_TIMEOUT
+        WAIT_INTERVAL = Stackdriver::Core::AsyncActor::WAIT_INTERVAL
 
         ##
         # @private Item in the log entries queue.
@@ -85,7 +85,9 @@ module Google
 
         ##
         # The current state. Either :running, :suspended, :stopping, or :stopped
-        attr_reader :state
+        #
+        # DEPRECATED. Use #async_state instead.
+        alias_method :state, :async_state
 
         ##
         # The last exception thrown by the background thread, or nil if nothing
@@ -95,11 +97,13 @@ module Google
         ##
         # @private Creates a new AsyncWriter instance.
         def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
+          super()
+
           @logging = logging
           @max_queue_size = max_queue_size
-          @startup_lock = Mutex.new
-          @thread = nil
-          @state = :running
+          @queue_resource = new_cond
+          @queue = []
+          @queue_size = 0
         end
 
         ##
@@ -145,16 +149,16 @@ module Google
         def write_entries entries, log_name: nil, resource: nil, labels: nil
           ensure_thread
           entries = Array(entries)
-          @lock.synchronize do
+          synchronize do
             fail "AsyncWriter has been stopped" unless writable?
             queue_item = QueueItem.new entries, log_name, resource, labels
             if @queue.empty? || !@queue.last.try_combine(queue_item)
               @queue.push queue_item
             end
             @queue_size += entries.size
-            @lock_cond.broadcast
+            @queue_resource.broadcast
             while @max_queue_size && @queue_size > @max_queue_size
-              @lock_cond.wait
+              @queue_resource.wait
             end
           end
           self
@@ -202,21 +206,12 @@ module Google
         # issued writes will complete. Once any existing backlog has been
         # cleared, the state will change to :stopped.
         #
+        # DEPRECATED. Use #async_stop instead.
+        #
         # @return [Boolean] Returns true if the writer was running, or false
         #   if the writer had already been stopped.
         #
-        def stop
-          ensure_thread
-          @lock.synchronize do
-            if state != :stopped
-              @state = :stopping
-              @lock_cond.broadcast
-              true
-            else
-              false
-            end
-          end
-        end
+        alias_method :stop, :async_stop
 
         ##
         # Suspends this asynchronous writer.
@@ -224,21 +219,12 @@ module Google
         # After this call succeeds, the state will change to :suspended, and
         # the writer will stop sending RPCs until resumed.
         #
+        # DEPRECATED. Use #async_suspend instead.
+        #
         # @return [Boolean] Returns true if the writer had been running and was
         #   suspended, otherwise false.
         #
-        def suspend
-          ensure_thread
-          @lock.synchronize do
-            if state == :running
-              @state = :suspended
-              @lock_cond.broadcast
-              true
-            else
-              false
-            end
-          end
-        end
+        alias_method :suspend, :async_suspend
 
         ##
         # Resumes this suspended asynchronous writer.
@@ -246,74 +232,55 @@ module Google
         # After this call succeeds, the state will change to :running, and
         # the writer will resume sending RPCs.
         #
+        # DEPRECATED. Use #async_resume instead.
+        #
         # @return [Boolean] Returns true if the writer had been suspended and
         #   is now running, otherwise false.
         #
-        def resume
-          ensure_thread
-          @lock.synchronize do
-            if state == :suspended
-              @state = :running
-              @lock_cond.broadcast
-              true
-            else
-              false
-            end
-          end
-        end
+        alias_method :resume, :async_resume
 
         ##
         # Returns true if this writer is running.
         #
+        # DEPRECATED. Use #async_running? instead.
+        #
         # @return [Boolean] Returns true if the writer is currently running.
         #
-        def running?
-          ensure_thread
-          @lock.synchronize do
-            state == :running
-          end
-        end
+        alias_method :running?, :async_running?
 
         ##
         # Returns true if this writer is suspended.
         #
+        # DEPRECATED. Use #async_suspended? instead.
+        #
         # @return [Boolean] Returns true if the writer is currently suspended.
         #
-        def suspended?
-          ensure_thread
-          @lock.synchronize do
-            state == :suspended
-          end
-        end
+        alias_method :suspended?, :async_suspended?
 
         ##
         # Returns true if this writer is still accepting writes. This means
         # it is either running or suspended.
         #
+        # DEPRECATED. Use #async_working? instead.
+        #
         # @return [Boolean] Returns true if the writer is accepting writes.
         #
-        def writable?
-          ensure_thread
-          @lock.synchronize do
-            state == :suspended || state == :running
-          end
-        end
+        alias_method :writable?, :async_working?
 
         ##
         # Returns true if this writer is fully stopped.
         #
+        # DEPRECATED. Use #async_stopped? instead.
+        #
         # @return [Boolean] Returns true if the writer is fully stopped.
         #
-        def stopped?
-          ensure_thread
-          @lock.synchronize do
-            state == :stopped
-          end
-        end
+        alias_method :stopped?, :async_stopped?
 
         ##
         # Blocks until this asynchronous writer has been stopped, or the given
         # timeout (if present) has elapsed.
+        #
+        # DEPRECATED. Use #wait_until_async_stopped instead.
         #
         # @param [Number, nil] timeout Timeout in seconds, or `nil` for no
         #     timeout.
@@ -321,23 +288,12 @@ module Google
         # @return [Boolean] Returns true if the writer is stopped, or false
         #   if the timeout expired.
         #
-        def wait_until_stopped timeout = nil
-          ensure_thread
-          deadline = timeout ? ::Time.new.to_f + timeout : nil
-          @lock.synchronize do
-            until state == :stopped
-              cur_time = ::Time.new.to_f
-              return false if deadline && cur_time >= deadline
-              interval = deadline ? deadline - cur_time : WAIT_INTERVAL
-              interval = WAIT_INTERVAL if interval > WAIT_INTERVAL
-              @lock_cond.wait interval
-            end
-          end
-          true
-        end
+        alias_method :wait_until_stopped, :wait_until_async_stopped
 
         ##
         # Stop this asynchronous writer and block until it has been stopped.
+        #
+        # DEPRECATED. Use #async_stop! instead.
         #
         # @param [Number] timeout Timeout in seconds.
         # @param [Boolean] force If set to true, and the writer hasn't stopped
@@ -351,63 +307,41 @@ module Google
         #     after the timeout, or `:forced` if it was forcibly killed.
         #
         def stop! timeout, force: false
-          return :stopped unless stop
-          return :waited if wait_until_stopped timeout
-          return :timeout unless force
-          @thread.kill
-          @thread.join
-          :forced
+          @cleanup_options[:timeout] = timeout unless timeout.nil?
+          @cleanup_options[:force] = force unless force.nil?
+
+          async_stop!
+        end
+
+        ##
+        # @private Callback function when the async actor thread state changes
+        def on_async_state_change
+          synchronize do
+            @queue_resource.broadcast
+          end
         end
 
         protected
-
-        ##
-        # @private Ensures the background thread is running. This is called
-        # at the start of all public methods, and kicks off the thread lazily.
-        # It also ensures the thread gets restarted (with an empty queue) in
-        # case this object is forked into a child process.
-        #
-        def ensure_thread
-          @startup_lock.synchronize do
-            if (@thread.nil? || !@thread.alive?) && @state != :stopped
-              @queue_size = 0
-              @queue = []
-              @lock = Monitor.new
-              @lock_cond = @lock.new_cond
-              AsyncWriter.register_for_cleanup self
-              @thread = Thread.new do
-                run_backgrounder
-                AsyncWriter.unregister_for_cleanup self
-              end
-            end
-          end
-        end
 
         ##
         # @private The background thread implementation, which continuously
         # waits for and performs work, and returns only when fully stopped.
         #
         def run_backgrounder
-          loop do
-            queue_item = wait_next_item
-            return unless queue_item
-            begin
-              logging.write_entries(
-                queue_item.entries,
-                log_name: queue_item.log_name,
-                resource: queue_item.resource,
-                labels: queue_item.labels
-              )
-            rescue => e
-              # Ignore any exceptions thrown from the background thread, but
-              # keep running to ensure its state behavior remains consistent.
-              @last_exception = e
-            end
+          queue_item = wait_next_item
+          return unless queue_item
+          begin
+            logging.write_entries(
+              queue_item.entries,
+              log_name: queue_item.log_name,
+              resource: queue_item.resource,
+              labels: queue_item.labels
+            )
+          rescue => e
+            # Ignore any exceptions thrown from the background thread, but
+            # keep running to ensure its state behavior remains consistent.
+            @last_exception = e
           end
-        ensure
-          # If something drastic happened like the thread was killed, make
-          # sure the state is consistent.
-          @state = :stopped
         end
 
         ##
@@ -418,61 +352,30 @@ module Google
         #   queue, returns `nil`.
         #
         def wait_next_item
-          @lock.synchronize do
+          synchronize do
             while state == :suspended ||
                   (state == :running && @queue.empty?)
-              @lock_cond.wait
+              @queue_resource.wait
             end
             queue_item = nil
             if @queue.empty?
-              @state = :stopped
+              async_stop
             else
               queue_item = @queue.shift
               @queue_size -= queue_item.entries.size
             end
-            @lock_cond.broadcast
+            @queue_resource.broadcast
             queue_item
           end
         end
 
         ##
-        # Register the given AsyncWriter for cleanup on VM exit.
-        #
-        # @private
-        #
-        def self.register_for_cleanup async
-          @exit_lock.synchronize do
-            unless @cleanup_list
-              @cleanup_list = ::Set.new
-              at_exit { AsyncWriter.run_cleanup }
-            end
-            @cleanup_list.add async
-          end
-        end
-
-        ##
-        # Unregister the given AsyncWriter for cleanup on VM exit.
-        #
-        # @private
-        #
-        def self.unregister_for_cleanup async
-          @exit_lock.synchronize do
-            @cleanup_list.delete async if @cleanup_list
-          end
-        end
-
-        ##
-        # Exit hook that cleans up any running AsyncWriters.
-        #
-        # @private
-        #
-        def self.run_cleanup
-          @exit_lock.synchronize do
-            if @cleanup_list
-              @cleanup_list.each do |async|
-                async.stop! CLEANUP_TIMEOUT, force: true
-              end
-            end
+        # @private Override the #backgrounder_stoppable? method from AsyncActor
+        # module. The actor can be gracefully stopped when queue is
+        # empty.
+        def backgrounder_stoppable?
+          synchronize do
+            @queue.empty?
           end
         end
       end
