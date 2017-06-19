@@ -30,9 +30,6 @@ if defined? ::Rails::Railtie
   require "google/cloud/trace/rails"
 end
 
-# Backward compatibility with legacy stackdriver gem
-require "legacy_stackdriver"
-
 ##
 # # Stackdriver
 #
