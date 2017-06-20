@@ -20,7 +20,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:bucket_user_pays) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_pays: true }
+  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
   let(:old_policy_gapi) {
     Google::Apis::StorageV1::Policy.new(
@@ -68,12 +68,12 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     policy.roles["roles/storage.objectViewer"].first.must_equal "user:viewer@example.com"
   end
 
-  it "gets the policy with user_pays set to true" do
+  it "gets the policy with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, user_project: "test"]
 
     storage.service.mocked_service = mock
-    policy = bucket_user_pays.policy
+    policy = bucket_user_project.policy
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
@@ -101,12 +101,12 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
-  it "sets the policy with user_pays set to true" do
+  it "sets the policy with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: "test"]
 
     storage.service.mocked_service = mock
-    policy = bucket_user_pays.policy = new_policy
+    policy = bucket_user_project.policy = new_policy
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
@@ -139,14 +139,14 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     policy.roles["roles/storage.objectViewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
-  it "sets the policy in a block with user_pays set to true" do
+  it "sets the policy in a block with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, user_project: "test"]
 
     mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: "test"]
 
     storage.service.mocked_service = mock
-    policy = bucket_user_pays.policy do |p|
+    policy = bucket_user_project.policy do |p|
       p.add "roles/storage.objectViewer", "serviceAccount:1234567890@developer.gserviceaccount.com"
     end
     mock.verify
@@ -173,13 +173,13 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     permissions.must_equal ["storage.buckets.get"]
   end
 
-  it "tests the permissions available with user_pays set to true" do
+  it "tests the permissions available with user_project set to true" do
     mock = Minitest::Mock.new
     update_policy_response = Google::Apis::StorageV1::TestIamPermissionsResponse.new permissions: ["storage.buckets.get"]
     mock.expect :test_bucket_iam_permissions, update_policy_response, [bucket_name, ["storage.buckets.get", "storage.buckets.delete"], user_project: "test"]
 
     storage.service.mocked_service = mock
-    permissions = bucket_user_pays.test_permissions "storage.buckets.get",
+    permissions = bucket_user_project.test_permissions "storage.buckets.get",
                                            "storage.buckets.delete"
     mock.verify
 

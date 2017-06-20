@@ -61,7 +61,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates its versioning with user_pays set to true" do
+  it "updates its versioning with user_project set to true" do
     mock = Minitest::Mock.new
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi
@@ -71,7 +71,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
 
     bucket.service.mocked_service = mock
-    bucket.user_pays = true
+    bucket.user_project = true
 
     bucket.versioning?.must_equal nil
     bucket.versioning = true

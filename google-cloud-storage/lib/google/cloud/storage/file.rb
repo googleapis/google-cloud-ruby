@@ -55,9 +55,45 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The user_pays flag for sending `userProject` query param for
-        # operations on requester_pays buckets and their files.
-        attr_accessor :user_pays
+        # A `true`/`false` value or a project ID string to be sent as the
+        # `userProject` query param for operations on requester pays buckets and
+        # their files. The default is `nil`. For convenience, this attribute
+        # should be set when first retrieving the bucket, by providing the
+        # `user_project` option to {Project#bucket}.
+        #
+        # If the `requester_pays` flag is enabled for the bucket, and if this
+        # attribute is set to `true`, transit costs for operations on the bucket
+        # will be billed to the current project for this client. (See
+        # {Project#project} for the ID of the current project.) If this
+        # attribute is set to a project ID other than the current project, and
+        # that project is authorized for the currently authenticated service
+        # account, transit costs will be billed to the given project.
+        #
+        # The requester pays feature is currently available only to whitelisted
+        # projects.
+        #
+        # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        #
+        # @example With `user_project` set to pay for a requester pays bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket", user_project: true
+        #   file = bucket.file "path/to/file.ext" # Billed to current project
+        #   file.user_project #=> true
+        #
+        # @example With `user_project` set to a project other than the default:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket",
+        #                           user_project: "my-other-project"
+        #   file = bucket.file "path/to/file.ext" # Billed to current project
+        #   file.user_project #=> "my-other-project"
+        #
+        attr_accessor :user_project
 
         ##
         # @private The Google API Client object.
@@ -68,7 +104,7 @@ module Google
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Object.new
-          @user_pays = nil
+          @user_project = nil
         end
 
         ##
@@ -431,7 +467,7 @@ module Google
             path.set_encoding "ASCII-8BIT"
           end
           file = service.download_file \
-            bucket, name, path, key: encryption_key, user_pays: user_pays
+            bucket, name, path, key: encryption_key, user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
@@ -526,7 +562,7 @@ module Google
                  generation: nil, encryption_key: nil
           ensure_service!
           options = { acl: acl, generation: generation, key: encryption_key,
-                      user_pays: user_pays }
+                      user_project: user_project }
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
@@ -598,7 +634,7 @@ module Google
           ensure_service!
           options = { source_key: encryption_key,
                       destination_key: new_encryption_key,
-                      user_pays: user_pays }
+                      user_project: user_project }
           gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           until gapi.done
             sleep 1
@@ -625,7 +661,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_file bucket, name, user_pays: user_pays
+          service.delete_file bucket, name, user_project: user_project
           true
         end
 
@@ -811,7 +847,7 @@ module Google
         # Reloads the file with current data from the Storage service.
         def reload!
           ensure_service!
-          @gapi = service.get_file bucket, name, user_pays: user_pays
+          @gapi = service.get_file bucket, name, user_project: user_project
         end
         alias_method :refresh!, :reload!
 
@@ -824,11 +860,11 @@ module Google
 
         ##
         # @private New File from a Google API Client object.
-        def self.from_gapi gapi, service, user_pays: nil
+        def self.from_gapi gapi, service, user_project: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = service
-            f.user_pays = user_pays
+            f.user_project = user_project
           end
         end
 
@@ -852,7 +888,7 @@ module Google
             @gapi = rewrite_gapi bucket, name, update_gapi
           else
             @gapi = service.patch_file \
-              bucket, name, update_gapi, user_pays: user_pays
+              bucket, name, update_gapi, user_project: user_project
           end
         end
 
@@ -867,12 +903,12 @@ module Google
 
         def rewrite_gapi bucket, name, update_gapi
           resp = service.rewrite_file \
-            bucket, name, bucket, name, update_gapi, user_pays: user_pays
+            bucket, name, bucket, name, update_gapi, user_project: user_project
           until resp.done
             sleep 1
             resp = service.rewrite_file \
               bucket, name, bucket, name, update_gapi,
-              token: resp.rewrite_token, user_pays: user_pays
+              token: resp.rewrite_token, user_project: user_project
           end
           resp.resource
         end

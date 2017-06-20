@@ -43,20 +43,56 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The user_pays flag for sending `userProject` query param for
-        # operations on requester_pays buckets and their files.
-        attr_accessor :user_pays
-
-        ##
         # @private The Google API Client object.
         attr_accessor :gapi
+
+        ##
+        # A `true`/`false` value or a project ID string to be sent as the
+        # `userProject` query param for operations on requester pays buckets and
+        # their files. The default is `nil`. For convenience, this attribute
+        # should be set when first retrieving the bucket, by providing the
+        # `user_project` option to {Project#bucket}.
+        #
+        # If the `requester_pays` flag is enabled for the bucket, and if this
+        # attribute is set to `true`, transit costs for operations on the bucket
+        # will be billed to the current project for this client. (See
+        # {Project#project} for the ID of the current project.) If this
+        # attribute is set to a project ID other than the current project, and
+        # that project is authorized for the currently authenticated service
+        # account, transit costs will be billed to the given project.
+        #
+        # The requester pays feature is currently available only to whitelisted
+        # projects.
+        #
+        # See also {#requester_pays=} and {#requester_pays}.
+        #
+        # @example With `user_project` set to pay for a requester pays bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket", user_project: true
+        #   files = bucket.files # Billed to current project
+        #   bucket.user_project #=> true
+        #
+        # @example With `user_project` set to a project other than the default:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket",
+        #                           user_project: "my-other-project"
+        #   files = bucket.files # Billed to "my-other-project"
+        #   bucket.user_project #=> "my-other-project"
+        #
+        attr_accessor :user_project
 
         ##
         # @private Create an empty Bucket object.
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Bucket.new
-          @user_pays = nil
+          @user_project = nil
         end
 
         ##
@@ -302,7 +338,8 @@ module Google
         ##
         # Indicates that a client accessing the bucket or a file it contains
         # must assume the transit costs related to the access. The requester
-        # must indicate the project to which the access costs should be billed.
+        # must pass the `user_project` option to {Project#bucket} to indicate
+        # the project to which the access costs should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
@@ -317,12 +354,24 @@ module Google
         ##
         # Indicates that a client accessing the bucket or a file it contains
         # must assume the transit costs related to the access. The requester
-        # must indicate the project to which the access costs should be billed.
+        # must pass the `user_project` option to {Project#bucket} to indicate
+        # the project to which the access costs should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
         # @param [Boolean] new_requester_pays When set to `true`, the bucket is
         #   requester pays.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.requester_pays = true # API call
+        #   # Other projects must now provide `user_project` option when calling
+        #   # Project#bucket to access this bucket.
         #
         def requester_pays= new_requester_pays
           @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
@@ -399,7 +448,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_bucket name, user_pays: user_pays
+          service.delete_bucket name, user_project: user_project
           true
         end
 
@@ -456,9 +505,9 @@ module Google
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
-                                          user_pays: user_pays
+                                          user_project: user_project
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
-                               versions, user_pays: user_pays
+                               versions, user_project: user_project
         end
         alias_method :find_files, :files
 
@@ -495,8 +544,8 @@ module Google
           ensure_service!
           gapi = service.get_file name, path, generation: generation,
                                               key: encryption_key,
-                                              user_pays: user_pays
-          File.from_gapi gapi, service, user_pays: user_pays
+                                              user_project: user_project
+          File.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -578,7 +627,7 @@ module Google
         #   cost of storage. Values include `:multi_regional`, `:regional`,
         #   `:nearline`, `:coldline`, `:standard`, and `:dra` (Durable Reduced
         #   Availability), as well as the strings returned by
-        #   {Bucket#storage_class}. For more information, see [Storage
+        #   {#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes) and
         #   [Per-Object Storage
         #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
@@ -638,7 +687,7 @@ module Google
                       content_encoding: content_encoding, metadata: metadata,
                       content_language: content_language, key: encryption_key,
                       storage_class: storage_class_for(storage_class),
-                      user_pays: user_pays }
+                      user_project: user_project }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
@@ -986,7 +1035,7 @@ module Google
         def policy force: nil
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
-          gapi = service.get_bucket_policy name, user_pays: user_pays
+          gapi = service.get_bucket_policy name, user_project: user_project
           policy = Policy.from_gapi gapi
           return policy unless block_given?
           yield policy
@@ -1028,7 +1077,7 @@ module Google
         def policy= new_policy
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi,
-                                           user_pays: user_pays
+                                           user_project: user_project
           Policy.from_gapi gapi
         end
 
@@ -1062,7 +1111,7 @@ module Google
           permissions = Array(permissions).flatten
           ensure_service!
           gapi = service.test_bucket_permissions name, permissions,
-                                                 user_pays: user_pays
+                                                 user_project: user_project
           gapi.permissions
         end
 
@@ -1076,11 +1125,11 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, service, user_pays: nil
+        def self.from_gapi gapi, service, user_project: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = service
-            f.user_pays = user_pays
+            f.user_project = user_project
           end
         end
 
@@ -1100,7 +1149,8 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
-          @gapi = service.patch_bucket name, patch_gapi, user_pays: user_pays
+          @gapi = service.patch_bucket name, patch_gapi,
+                                       user_project: user_project
         end
 
         ##

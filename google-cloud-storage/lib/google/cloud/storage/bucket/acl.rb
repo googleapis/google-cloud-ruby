@@ -49,9 +49,25 @@ module Google
                     "public_write" => "publicReadWrite" }
 
           ##
-          # @private The user_pays flag for sending `userProject` query param
-          # for operations on requester_pays buckets and their files.
-          attr_accessor :user_pays
+          # A `true`/`false` value or a project ID string to be sent as the
+          # `userProject` query param for operations on requester pays buckets
+          # and their files. The default is `nil`. For convenience, this
+          # attribute should be set when first retrieving the bucket, by
+          # providing the `user_project` option to {Project#bucket}.
+          #
+          # If the `requester_pays` flag is enabled for the bucket, and if this
+          # attribute is set to `true`, transit costs for operations on the
+          # bucket will be billed to the current project for this client. (See
+          # {Project#project} for the ID of the current project.) If this
+          # attribute is set to a project ID other than the current project, and
+          # that project is authorized for the currently authenticated service
+          # account, transit costs will be billed to the given project.
+          #
+          # The requester pays feature is currently available only to
+          # whitelisted projects.
+          #
+          # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+          attr_accessor :user_project
 
           ##
           # @private Initialized a new Acl object.
@@ -59,7 +75,7 @@ module Google
           def initialize bucket
             @bucket = bucket.name
             @service = bucket.service
-            @user_pays = bucket.user_pays
+            @user_project = bucket.user_project
             @owners  = nil
             @writers = nil
             @readers = nil
@@ -78,7 +94,7 @@ module Google
           #   bucket.acl.reload!
           #
           def reload!
-            gapi = @service.list_bucket_acls @bucket, user_pays: user_pays
+            gapi = @service.list_bucket_acls @bucket, user_project: user_project
             acls = Array(gapi.items)
             @owners  = entities_from_acls acls, "OWNER"
             @writers = entities_from_acls acls, "WRITER"
@@ -222,7 +238,7 @@ module Google
           #
           def add_writer entity
             gapi = @service.insert_bucket_acl @bucket, entity, "WRITER",
-                                              user_pays: user_pays
+                                              user_project: user_project
             entity = gapi.entity
             @writers.push entity unless @writers.nil?
             entity
@@ -297,7 +313,8 @@ module Google
           #   bucket.acl.delete "user-#{email}"
           #
           def delete entity
-            @service.delete_bucket_acl @bucket, entity, user_pays: user_pays
+            @service.delete_bucket_acl @bucket, entity,
+                                       user_project: user_project
             @owners.delete entity  unless @owners.nil?
             @writers.delete entity unless @writers.nil?
             @readers.delete entity unless @readers.nil?
@@ -414,7 +431,7 @@ module Google
 
           def update_predefined_acl! acl_role
             @service.patch_bucket @bucket, predefined_acl: acl_role,
-                                           user_pays: user_pays
+                                           user_project: user_project
             clear!
           end
 
@@ -458,9 +475,25 @@ module Google
                     "public_read" => "publicRead" }
 
           ##
-          # @private The user_pays flag for sending `userProject` query param
-          # for operations on requester_pays buckets and their files.
-          attr_accessor :user_pays
+          # A `true`/`false` value or a project ID string to be sent as the
+          # `userProject` query param for operations on requester pays buckets
+          # and their files. The default is `nil`. For convenience, this
+          # attribute should be set when first retrieving the bucket, by
+          # providing the `user_project` option to {Project#bucket}.
+          #
+          # If the `requester_pays` flag is enabled for the bucket, and if this
+          # attribute is set to `true`, transit costs for operations on the
+          # bucket will be billed to the current project for this client. (See
+          # {Project#project} for the ID of the current project.) If this
+          # attribute is set to a project ID other than the current project, and
+          # that project is authorized for the currently authenticated service
+          # account, transit costs will be billed to the given project.
+          #
+          # The requester pays feature is currently available only to
+          # whitelisted projects.
+          #
+          # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+          attr_accessor :user_project
 
           ##
           # @private Initialized a new DefaultAcl object.
@@ -468,7 +501,7 @@ module Google
           def initialize bucket
             @bucket = bucket.name
             @service = bucket.service
-            @user_pays = bucket.user_pays
+            @user_project = bucket.user_project
             @owners  = nil
             @readers = nil
           end
@@ -486,7 +519,8 @@ module Google
           #   bucket.default_acl.reload!
           #
           def reload!
-            gapi = @service.list_default_acls @bucket, user_pays: user_pays
+            gapi = @service.list_default_acls @bucket,
+                                              user_project: user_project
             acls = Array(gapi.items).map do |acl|
               next acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
               fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
@@ -572,7 +606,7 @@ module Google
           #
           def add_owner entity
             gapi = @service.insert_default_acl @bucket, entity, "OWNER",
-                                               user_pays: user_pays
+                                               user_project: user_project
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -615,7 +649,7 @@ module Google
           #
           def add_reader entity
             gapi = @service.insert_default_acl @bucket, entity, "READER",
-                                               user_pays: user_pays
+                                               user_project: user_project
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -648,7 +682,8 @@ module Google
           #   bucket.default_acl.delete "user-#{email}"
           #
           def delete entity
-            @service.delete_default_acl @bucket, entity, user_pays: user_pays
+            @service.delete_default_acl @bucket, entity,
+                                        user_project: user_project
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
@@ -782,7 +817,7 @@ module Google
 
           def update_predefined_default_acl! acl_role
             @service.patch_bucket @bucket, predefined_default_acl: acl_role,
-                                           user_pays: user_pays
+                                           user_project: user_project
             clear!
           end
 

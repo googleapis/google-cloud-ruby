@@ -465,7 +465,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket.name.must_equal bucket_name
   end
 
-  it "finds a bucket with user_pays" do
+  it "finds a bucket with user_project set to true" do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
@@ -473,7 +473,22 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    bucket = storage.bucket bucket_name, user_pays: true
+    bucket = storage.bucket bucket_name, user_project: true
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+  end
+
+  it "finds a bucket with user_project set to another project ID" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, { user_project: "my-other-project" }]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: "my-other-project"
 
     mock.verify
 

@@ -19,12 +19,12 @@ require "uri"
 describe Google::Cloud::Storage::File, :mock_storage do
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash("bucket").to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:bucket_user_pays) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_pays: true }
+  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
   let(:file_hash) { random_file_hash bucket.name, "file.ext" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
-  let(:file_user_pays) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_pays: true }
+  let(:file_user_project) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_project: true }
 
   let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
@@ -94,13 +94,13 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can delete itself with user_pays set to true" do
+  it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_pays.name, { user_project: "test" }]
+    mock.expect :delete_object, nil, [bucket.name, file_user_project.name, { user_project: "test" }]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    file_user_pays.delete
+    file_user_project.delete
 
     mock.verify
   end
@@ -151,9 +151,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
-  it "can download itself to a file with user_pays set to true" do
+  it "can download itself to a file with user_project set to true" do
     # Stub the md5 to match.
-    def file_user_pays.md5
+    def file_user_project.md5
       "1B2M2Y8AsgTpgAmY7PhCfg=="
     end
 
@@ -163,11 +163,11 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :get_object, tmpfile,
-        [bucket.name, file_user_pays.name, download_dest: tmpfile, generation: nil, user_project: "test", options: {}]
+        [bucket.name, file_user_project.name, download_dest: tmpfile, generation: nil, user_project: "test", options: {}]
 
       bucket.service.mocked_service = mock
 
-      downloaded = file_user_pays.download tmpfile
+      downloaded = file_user_project.download tmpfile
       downloaded.must_be_kind_of File
 
       mock.verify
@@ -463,14 +463,14 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can copy itself with user_pays set to true" do
+  it "can copy itself with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    file_user_pays.copy "new-file.ext"
+    file_user_project.copy "new-file.ext"
 
     mock.verify
   end
@@ -557,24 +557,24 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can copy itself calling rewrite multiple times with user_pays set to true" do
+  it "can copy itself calling rewrite multiple times with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
     mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
     # mock out sleep to make the test run faster
-    def file_user_pays.sleep *args
+    def file_user_project.sleep *args
     end
 
-    file_user_pays.copy "new-file.ext"
+    file_user_project.copy "new-file.ext"
 
     mock.verify
   end
@@ -609,7 +609,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can copy itself while updating its attributes with user_pays set to true" do
+  it "can copy itself while updating its attributes with user_project set to true" do
     mock = Minitest::Mock.new
     update_file_gapi = Google::Apis::StorageV1::Object.new(
       cache_control: "private, max-age=0, no-cache",
@@ -621,11 +621,11 @@ describe Google::Cloud::Storage::File, :mock_storage do
       storage_class: "NEARLINE"
     )
     mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_pays.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    file_user_pays.copy "new-file.ext" do |f|
+    file_user_project.copy "new-file.ext" do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "inline; filename=filename.ext"
       f.content_encoding = "deflate"
@@ -655,18 +655,18 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can rotate its customer-supplied encryption keys with user_pays set to true" do
+  it "can rotate its customer-supplied encryption keys with user_project set to true" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
     mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file_user_pays.name, bucket.name, file_user_pays.name, nil,
+                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
                  destination_predefined_acl: nil, source_generation: nil,
                  rewrite_token: nil, user_project: "test", options: options ]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    updated = file_user_pays.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_pays.name
+    updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+    updated.name.must_equal file_user_project.name
 
     mock.verify
   end
@@ -727,26 +727,26 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can rotate its customer-supplied encryption keys with multiple requests for large objects with user_pays set to true" do
+  it "can rotate its customer-supplied encryption keys with multiple requests for large objects with user_project set to true" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-                [bucket.name, file_user_pays.name, bucket.name, file_user_pays.name, nil,
+                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
                  destination_predefined_acl: nil, source_generation: nil,
                  rewrite_token: nil, user_project: "test", options: options ]
     mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file_user_pays.name, bucket.name, file_user_pays.name, nil,
+                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
                  destination_predefined_acl: nil, source_generation: nil,
                  rewrite_token: "notyetcomplete", user_project: "test", options: options ]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
     # mock out sleep to make the test run faster
-    def file_user_pays.sleep *args
+    def file_user_project.sleep *args
     end
 
-    updated = file_user_pays.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_pays.name
+    updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+    updated.name.must_equal file_user_project.name
 
     mock.verify
   end
@@ -771,19 +771,19 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
-  it "can reload itself with user_pays set to true" do
+  it "can reload itself with user_project set to true" do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_pays.name, file_name, 1234567891).to_json),
-      [bucket_user_pays.name, file_name, generation: nil, user_project: "test", options: {}]
-    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_pays.name, file_name, 1234567892).to_json),
-      [bucket_user_pays.name, file_name, generation: nil, user_project: "test", options: {}]
+    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567891).to_json),
+      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567892).to_json),
+      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
 
-    bucket_user_pays.service.mocked_service = mock
+    bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock
 
-    file = bucket_user_pays.file file_name
+    file = bucket_user_project.file file_name
     file.generation.must_equal 1234567891
     file.reload!
     file.generation.must_equal 1234567892

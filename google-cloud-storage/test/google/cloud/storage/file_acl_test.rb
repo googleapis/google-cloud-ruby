@@ -20,7 +20,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   let(:bucket_name) { "bucket" }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(bucket_name).to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:bucket_user_pays) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_pays: true }
+  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
   let(:file_name) { "file.ext" }
   let(:file_hash) { random_file_hash bucket.name, file_name }
@@ -44,7 +44,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.verify
   end
 
-  it "retrieves the ACL with user_pays set to true" do
+  it "retrieves the ACL with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :get_object, file_gapi, [bucket_name, file_name, generation: nil, user_project: "test", options: {}]
     mock.expect :list_object_access_controls,
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    file = bucket_user_pays.file file_name
+    file = bucket_user_project.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.readers.wont_be :empty?
@@ -136,7 +136,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.verify
   end
 
-  it "adds to the ACL with user_pays set to true" do
+  it "adds to the ACL with user_project set to true" do
     reader_entity = "user-user@example.net"
     reader_acl = {
        "kind" => "storage#bucketAccessControl",
@@ -160,7 +160,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    file = bucket_user_pays.file file_name
+    file = bucket_user_project.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.readers.wont_be :empty?
@@ -226,7 +226,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.verify
   end
 
-  it "removes from the ACL with user_pays set to true" do
+  it "removes from the ACL with user_project set to true" do
     existing_reader_entity = "project-viewers-1234567890"
 
     mock = Minitest::Mock.new
@@ -239,7 +239,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    file = bucket_user_pays.file file_name
+    file = bucket_user_project.file file_name
     file.name.must_equal file_name
     file.acl.owners.wont_be  :empty?
     file.acl.readers.wont_be :empty?

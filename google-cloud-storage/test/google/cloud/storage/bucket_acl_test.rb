@@ -41,7 +41,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.verify
   end
 
-  it "retrieves the ACL with user_pays set to true" do
+  it "retrieves the ACL with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
     mock.expect :list_bucket_access_controls,
@@ -50,7 +50,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    bucket = storage.bucket bucket_name, user_pays: true
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?
@@ -98,7 +98,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.verify
   end
 
-  it "adds to the ACL with user_pays set to true" do
+  it "adds to the ACL with user_project set to true" do
     writer_entity = "user-user@example.net"
     writer_acl = {
        "kind" => "storage#bucketAccessControl",
@@ -122,7 +122,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    bucket = storage.bucket bucket_name, user_pays: true
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?
@@ -165,7 +165,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.verify
   end
 
-  it "removes from the ACL with user_pays set to true" do
+  it "removes from the ACL with user_project set to true" do
     existing_reader_entity = "project-viewers-1234567890"
 
     mock = Minitest::Mock.new
@@ -178,7 +178,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
 
     storage.service.mocked_service = mock
 
-    bucket = storage.bucket bucket_name, user_pays: true
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.name.must_equal bucket_name
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.must_be :empty?

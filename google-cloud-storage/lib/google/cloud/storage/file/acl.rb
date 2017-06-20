@@ -51,9 +51,25 @@ module Google
                     "public_read" => "publicRead" }
 
           ##
-          # @private The user_pays flag for sending `userProject` query param
-          # for operations on requester_pays buckets and their files.
-          attr_accessor :user_pays
+          # A `true`/`false` value or a project ID string to be sent as the
+          # `userProject` query param for operations on requester pays buckets
+          # and their files. The default is `nil`. For convenience, this
+          # attribute should be set when first retrieving the bucket, by
+          # providing the `user_project` option to {Project#bucket}.
+          #
+          # If the `requester_pays` flag is enabled for the bucket, and if this
+          # attribute is set to `true`, transit costs for operations on the
+          # bucket will be billed to the current project for this client. (See
+          # {Project#project} for the ID of the current project.) If this
+          # attribute is set to a project ID other than the current project, and
+          # that project is authorized for the currently authenticated service
+          # account, transit costs will be billed to the given project.
+          #
+          # The requester pays feature is currently available only to
+          # whitelisted projects.
+          #
+          # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+          attr_accessor :user_project
 
           ##
           # @private Initialized a new Acl object.
@@ -62,7 +78,7 @@ module Google
             @bucket = file.bucket
             @file = file.name
             @service = file.service
-            @user_pays = file.user_pays
+            @user_project = file.user_project
             @owners  = nil
             @readers = nil
           end
@@ -81,7 +97,8 @@ module Google
           #   file.acl.reload!
           #
           def reload!
-            gapi = @service.list_file_acls @bucket, @file, user_pays: user_pays
+            gapi = @service.list_file_acls @bucket, @file,
+                                           user_project: user_project
             acls = Array(gapi.items)
             @owners  = entities_from_acls acls, "OWNER"
             @readers = entities_from_acls acls, "READER"
@@ -171,7 +188,7 @@ module Google
           def add_owner entity, generation: nil
             gapi = @service.insert_file_acl @bucket, @file, entity, "OWNER",
                                             generation: generation,
-                                            user_pays: user_pays
+                                            user_project: user_project
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -220,7 +237,7 @@ module Google
           def add_reader entity, generation: nil
             gapi = @service.insert_file_acl @bucket, @file, entity, "READER",
                                             generation: generation,
-                                            user_pays: user_pays
+                                            user_project: user_project
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -258,7 +275,7 @@ module Google
           def delete entity, generation: nil
             @service.delete_file_acl \
               @bucket, @file, entity,
-              generation: generation, user_pays: user_pays
+              generation: generation, user_project: user_project
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
@@ -399,7 +416,8 @@ module Google
           def update_predefined_acl! acl_role
             patched_file = Google::Apis::StorageV1::Object.new acl: []
             @service.patch_file @bucket, @file, patched_file,
-                                predefined_acl: acl_role, user_pays: user_pays
+                                predefined_acl: acl_role,
+                                user_project: user_project
             clear!
           end
 

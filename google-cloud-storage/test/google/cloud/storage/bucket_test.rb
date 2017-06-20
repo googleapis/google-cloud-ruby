@@ -21,7 +21,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:bucket_user_pays) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_pays: true }
+  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
   let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
@@ -101,13 +101,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
 
-  it "can delete itself with user_pays set to true" do
+  it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, [bucket_user_pays.name, user_project: "test"]
+    mock.expect :delete_bucket, nil, [bucket_user_project.name, user_project: "test"]
 
-    bucket_user_pays.service.mocked_service = mock
+    bucket_user_project.service.mocked_service = mock
 
-    bucket_user_pays.delete
+    bucket_user_project.delete
 
     mock.verify
   end
@@ -338,7 +338,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
-  it "creates a file with user_pays set to true" do
+  it "creates a file with user_project set to true" do
     new_file_name = random_file_path
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
@@ -346,12 +346,12 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       tmpfile.rewind
 
       mock = Minitest::Mock.new
-      mock.expect :insert_object, create_file_gapi(bucket_user_pays.name, new_file_name),
-        [bucket_user_pays.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", user_project: "test", options: {}]
+      mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
+        [bucket_user_project.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", user_project: "test", options: {}]
 
-      bucket_user_pays.service.mocked_service = mock
+      bucket_user_project.service.mocked_service = mock
 
-      bucket_user_pays.create_file tmpfile, new_file_name
+      bucket_user_project.create_file tmpfile, new_file_name
 
       mock.verify
     end
@@ -703,16 +703,16 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     files.count.must_equal 6
   end
 
-  it "paginates files with all and user_pays set to true" do
+  it "paginates files with all and user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket_user_pays.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+      [bucket_user_project.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
     mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
-      [bucket_user_pays.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"]
+      [bucket_user_project.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"]
 
-    bucket_user_pays.service.mocked_service = mock
+    bucket_user_project.service.mocked_service = mock
 
-    files = bucket_user_pays.files.all(request_limit: 1).to_a
+    files = bucket_user_project.files.all(request_limit: 1).to_a
 
     mock.verify
 
@@ -784,16 +784,16 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file.name.must_equal file_name
   end
 
-  it "finds a file with user_pays set to true" do
+  it "finds a file with user_project set to true" do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket_user_pays.name, file_name),
-      [bucket_user_pays.name, file_name, generation: nil, user_project: "test", options: {}]
+    mock.expect :get_object, find_file_gapi(bucket_user_project.name, file_name),
+      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
 
-    bucket_user_pays.service.mocked_service = mock
+    bucket_user_project.service.mocked_service = mock
 
-    file = bucket_user_pays.file file_name
+    file = bucket_user_project.file file_name
 
     mock.verify
 

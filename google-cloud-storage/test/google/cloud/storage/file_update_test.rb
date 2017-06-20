@@ -21,7 +21,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
   let(:file_hash) { random_file_hash bucket_name, "file.ext" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
-  let(:file_user_pays) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_pays: true }
+  let(:file_user_project) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_project: true }
 
   it "updates its cache control" do
     mock = Minitest::Mock.new
@@ -124,19 +124,19 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates its storage_class with user_pays set to true" do
+  it "updates its storage_class with user_project set to true" do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file_user_pays.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket_name, file.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    file_user_pays.storage_class.must_equal "STANDARD"
-    file_user_pays.storage_class = :dra
-    file_user_pays.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    file_user_project.storage_class.must_equal "STANDARD"
+    file_user_project.storage_class = :dra
+    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -168,29 +168,29 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates its storage_class, calling rewrite_object as many times as is needed with user_pays set to true" do
+  it "updates its storage_class, calling rewrite_object as many times as is needed with user_project set to true" do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket_name, file_user_pays.name, bucket_name, file_user_pays.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket_name, file_user_pays.name, bucket_name, file_user_pays.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket_name, file_user_pays.name, bucket_name, file_user_pays.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file_user_pays.name, bucket_name, file_user_pays.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
     # mock out sleep to make the test run faster
-    def file_user_pays.sleep *args
+    def file_user_project.sleep *args
     end
 
-    file_user_pays.storage_class.must_equal "STANDARD"
-    file_user_pays.storage_class = :dra
-    file_user_pays.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    file_user_project.storage_class.must_equal "STANDARD"
+    file_user_project.storage_class = :dra
+    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -223,7 +223,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates multiple attributes in a block with user_pays set to true" do
+  it "updates multiple attributes in a block with user_project set to true" do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new(
       cache_control: "private, max-age=0, no-cache",
@@ -234,11 +234,11 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
       metadata: { "player" => "Bob", "score" => "10" }
     )
     mock.expect :patch_object, file_gapi,
-      [bucket_name, file_user_pays.name, patch_file_gapi, predefined_acl: nil, user_project: "test"]
+      [bucket_name, file_user_project.name, patch_file_gapi, predefined_acl: nil, user_project: "test"]
 
-    file_user_pays.service.mocked_service = mock
+    file_user_project.service.mocked_service = mock
 
-    file_user_pays.update do |f|
+    file_user_project.update do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "inline; filename=filename.ext"
       f.content_encoding = "deflate"

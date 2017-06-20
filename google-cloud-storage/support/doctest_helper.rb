@@ -263,11 +263,32 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#requester_pays" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#user_project" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#test_permissions" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
       mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-todo-app", ["storage.buckets.get", "storage.buckets.delete"], Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#user_project" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
     end
   end
 
@@ -574,6 +595,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::File#user_project" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/file.ext", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::File#acl" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
@@ -714,6 +742,20 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to pay for a requester pays bucket:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to a project other than the default:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Project#buckets" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -730,6 +772,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Storage::Project#find_bucket" # alias for #bucket
   doctest.skip "Google::Cloud::Storage::Project#find_buckets" # alias for #buckets
 
   doctest.before "Google::Cloud::Storage::Project#create_bucket" do

@@ -435,6 +435,59 @@ module Google
     # file.acl.public!
     # ```
     #
+    # ## Assigning payment to the requester
+    #
+    # The requester pays feature enables the owner of a bucket to indicate that
+    # a client accessing the bucket or a file it contains must assume the
+    # transit costs related to the access. This feature is currently available
+    # only to whitelisted projects.
+    #
+    # Assign transit costs for bucket and file operations to requesting clients
+    # with the `requester_pays` flag:
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "my-bucket"
+    #
+    # bucket.requester_pays = true # API call
+    # # Clients must now provide `user_project` option when calling
+    # # Project#bucket to access this bucket.
+    # ```
+    #
+    # Once the `requester_pays` flag is enabled for a bucket, a client
+    # attempting to access the bucket and its files must provide the
+    # `user_project` option to {Project#bucket}. If the argument given is
+    # `true`, transit costs for operations on the requested bucket or a file it
+    # contains will be billed to the current project for the client. (See
+    # {Project#project} for the ID of the current project.)
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "other-project-bucket", user_project: true
+    #
+    # files = bucket.files # Billed to current project
+    # ```
+    #
+    # If the argument is a project ID string, and the indicated project is
+    # authorized for the currently authenticated service account, transit costs
+    # will be billed to the indicated project.
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # bucket = storage.bucket "other-project-bucket",
+    #                         user_project: "my-other-project"
+    # files = bucket.files # Billed to "my-other-project"
+    # ```
+    #
     # ## Configuring retries and timeout
     #
     # You can configure how many times API requests may be automatically

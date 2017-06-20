@@ -74,10 +74,10 @@ module Google
         ##
         # Retrieves bucket by name.
         # Returns Google::Apis::StorageV1::Bucket.
-        def get_bucket bucket_name, user_pays: nil
+        def get_bucket bucket_name, user_project: nil
           execute do
             service.get_bucket bucket_name,
-                               user_project: user_project(user_pays)
+                               user_project: user_project(user_project)
           end
         end
 
@@ -96,7 +96,7 @@ module Google
         ##
         # Updates a bucket, including its ACL metadata.
         def patch_bucket bucket_name, bucket_gapi = nil, predefined_acl: nil,
-                         predefined_default_acl: nil, user_pays: nil
+                         predefined_default_acl: nil, user_project: nil
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
@@ -106,116 +106,116 @@ module Google
               bucket_name, bucket_gapi,
               predefined_acl: predefined_acl,
               predefined_default_object_acl: predefined_default_acl,
-              user_project: user_project(user_pays)
+              user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes an empty bucket.
-        def delete_bucket bucket_name, user_pays: nil
+        def delete_bucket bucket_name, user_project: nil
           execute do
             service.delete_bucket bucket_name,
-                                  user_project: user_project(user_pays)
+                                  user_project: user_project(user_project)
           end
         end
 
         ##
         # Retrieves a list of ACLs for the given bucket.
-        def list_bucket_acls bucket_name, user_pays: nil
+        def list_bucket_acls bucket_name, user_project: nil
           execute do
             service.list_bucket_access_controls \
-              bucket_name, user_project: user_project(user_pays)
+              bucket_name, user_project: user_project(user_project)
           end
         end
 
         ##
         # Creates a new bucket ACL.
-        def insert_bucket_acl bucket_name, entity, role, user_pays: nil
+        def insert_bucket_acl bucket_name, entity, role, user_project: nil
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new({
             entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_bucket_access_control \
-              bucket_name, new_acl, user_project: user_project(user_pays)
+              bucket_name, new_acl, user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes a bucket ACL.
-        def delete_bucket_acl bucket_name, entity, user_pays: nil
+        def delete_bucket_acl bucket_name, entity, user_project: nil
           execute do
             service.delete_bucket_access_control \
-              bucket_name, entity, user_project: user_project(user_pays)
+              bucket_name, entity, user_project: user_project(user_project)
           end
         end
 
         ##
         # Retrieves a list of default ACLs for the given bucket.
-        def list_default_acls bucket_name, user_pays: nil
+        def list_default_acls bucket_name, user_project: nil
           execute do
             service.list_default_object_access_controls \
-              bucket_name, user_project: user_project(user_pays)
+              bucket_name, user_project: user_project(user_project)
           end
         end
 
         ##
         # Creates a new default ACL.
-        def insert_default_acl bucket_name, entity, role, user_pays: nil
+        def insert_default_acl bucket_name, entity, role, user_project: nil
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new({
             entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_default_object_access_control \
-              bucket_name, new_acl, user_project: user_project(user_pays)
+              bucket_name, new_acl, user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes a default ACL.
-        def delete_default_acl bucket_name, entity, user_pays: nil
+        def delete_default_acl bucket_name, entity, user_project: nil
           execute do
             service.delete_default_object_access_control \
-              bucket_name, entity, user_project: user_project(user_pays)
+              bucket_name, entity, user_project: user_project(user_project)
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def get_bucket_policy bucket_name, user_pays: nil
+        def get_bucket_policy bucket_name, user_project: nil
           # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
           #                               user_ip: nil, options: nil)
           execute do
-            service.get_bucket_iam_policy bucket_name,
-                                          user_project: user_project(user_pays)
+            service.get_bucket_iam_policy \
+              bucket_name, user_project: user_project(user_project)
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def set_bucket_policy bucket_name, new_policy, user_pays: nil
+        def set_bucket_policy bucket_name, new_policy, user_project: nil
           execute do
-            service.set_bucket_iam_policy bucket_name, new_policy,
-                                          user_project: user_project(user_pays)
+            service.set_bucket_iam_policy \
+              bucket_name, new_policy, user_project: user_project(user_project)
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::TestIamPermissionsResponse
-        def test_bucket_permissions bucket_name, permissions, user_pays: nil
+        def test_bucket_permissions bucket_name, permissions, user_project: nil
           execute do
             service.test_bucket_iam_permissions \
-              bucket_name, permissions, user_project: user_project(user_pays)
+              bucket_name, permissions, user_project: user_project(user_project)
           end
         end
 
         ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
-                       prefix: nil, versions: nil, user_pays: nil
+                       prefix: nil, versions: nil, user_project: nil
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
                            page_token: token, prefix: prefix,
                            versions: versions,
-                           user_project: user_project(user_pays)
+                           user_project: user_project(user_project)
           end
         end
 
@@ -225,7 +225,7 @@ module Google
                         cache_control: nil, content_disposition: nil,
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, key: nil, user_pays: nil
+                        storage_class: nil, key: nil, user_project: nil
           file_obj = Google::Apis::StorageV1::Object.new({
             cache_control: cache_control, content_type: content_type,
             content_disposition: content_disposition, md5_hash: md5,
@@ -239,19 +239,20 @@ module Google
               bucket_name, file_obj,
               name: path, predefined_acl: acl, upload_source: source,
               content_encoding: content_encoding, content_type: content_type,
-              user_project: user_project(user_pays), options: key_options(key)
+              user_project: user_project(user_project),
+              options: key_options(key)
           end
         end
 
         ##
         # Retrieves an object or its metadata.
         def get_file bucket_name, file_path, generation: nil, key: nil,
-                     user_pays: nil
+                     user_project: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               generation: generation,
-              user_project: user_project(user_pays),
+              user_project: user_project(user_project),
               options: key_options(key)
           end
         end
@@ -261,7 +262,7 @@ module Google
         def copy_file source_bucket_name, source_file_path,
                       destination_bucket_name, destination_file_path,
                       file_gapi = nil, key: nil, acl: nil, generation: nil,
-                      token: nil, user_pays: nil
+                      token: nil, user_project: nil
           key_options = rewrite_key_options key, key
           execute do
             service.rewrite_object \
@@ -271,7 +272,7 @@ module Google
               destination_predefined_acl: acl,
               source_generation: generation,
               rewrite_token: token,
-              user_project: user_project(user_pays),
+              user_project: user_project(user_project),
               options: key_options
           end
         end
@@ -281,7 +282,8 @@ module Google
         def rewrite_file source_bucket_name, source_file_path,
                          destination_bucket_name, destination_file_path,
                          file_gapi = nil, source_key: nil, destination_key: nil,
-                         acl: nil, generation: nil, token: nil, user_pays: nil
+                         acl: nil, generation: nil, token: nil,
+                         user_project: nil
           key_options = rewrite_key_options source_key, destination_key
           execute do
             service.rewrite_object \
@@ -291,7 +293,7 @@ module Google
               destination_predefined_acl: acl,
               source_generation: generation,
               rewrite_token: token,
-              user_project: user_project(user_pays),
+              user_project: user_project(user_project),
               options: key_options
           end
         end
@@ -299,67 +301,68 @@ module Google
         ##
         # Download contents of a file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, user_pays: nil
+                          key: nil, user_project: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               download_dest: target_path, generation: generation,
-              user_project: user_project(user_pays), options: key_options(key)
+              user_project: user_project(user_project),
+              options: key_options(key)
           end
         end
 
         ##
         # Updates a file's metadata.
         def patch_file bucket_name, file_path, file_gapi = nil,
-                       predefined_acl: nil, user_pays: nil
+                       predefined_acl: nil, user_project: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
           execute do
             service.patch_object \
               bucket_name, file_path, file_gapi,
               predefined_acl: predefined_acl,
-              user_project: user_project(user_pays)
+              user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes a file.
-        def delete_file bucket_name, file_path, user_pays: nil
+        def delete_file bucket_name, file_path, user_project: nil
           execute do
             service.delete_object bucket_name, file_path,
-                                  user_project: user_project(user_pays)
+                                  user_project: user_project(user_project)
           end
         end
 
         ##
         # Retrieves a list of ACLs for the given file.
-        def list_file_acls bucket_name, file_name, user_pays: nil
+        def list_file_acls bucket_name, file_name, user_project: nil
           execute do
             service.list_object_access_controls \
-              bucket_name, file_name, user_project: user_project(user_pays)
+              bucket_name, file_name, user_project: user_project(user_project)
           end
         end
 
         ##
         # Creates a new file ACL.
         def insert_file_acl bucket_name, file_name, entity, role,
-                            generation: nil, user_pays: nil
+                            generation: nil, user_project: nil
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new({
             entity: entity, role: role }.delete_if { |_k, v| v.nil? })
           execute do
             service.insert_object_access_control \
               bucket_name, file_name, new_acl,
-              generation: generation, user_project: user_project(user_pays)
+              generation: generation, user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, generation: nil,
-                            user_pays: nil
+                            user_project: nil
           execute do
             service.delete_object_access_control \
               bucket_name, file_name, entity,
-              generation: generation, user_project: user_project(user_pays)
+              generation: generation, user_project: user_project(user_project)
           end
         end
 
@@ -377,8 +380,12 @@ module Google
 
         protected
 
-        def user_project user_pays
-          @project if user_pays
+        def user_project user_project
+          if user_project.respond_to?(:to_str)
+            user_project.to_str
+          elsif user_project
+            @project
+          end
         end
 
         def key_options key
