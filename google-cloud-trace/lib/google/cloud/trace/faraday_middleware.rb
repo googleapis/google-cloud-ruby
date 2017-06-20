@@ -42,16 +42,10 @@ module Google
           labels = span.labels
           label_keys = Google::Cloud::Trace::LabelKey
 
-          set_label labels, label_keys::AGENT,
-                    Google::Cloud::Trace::Middleware::AGENT_NAME
-          set_label labels, label_keys::HTTP_HOST, env.url.host
           set_label labels, label_keys::HTTP_METHOD, env.method
-          set_label labels, label_keys::HTTP_CLIENT_PROTOCOL, env.url.scheme
           set_label labels, label_keys::HTTP_USER_AGENT,
                     env.request_headers[:user_agent]
           set_label labels, label_keys::HTTP_URL, env.url.to_s
-          set_label labels, label_keys::PID, ::Process.pid.to_s
-          set_label labels, label_keys::TID, ::Thread.current.object_id.to_s
         end
 
         ##
