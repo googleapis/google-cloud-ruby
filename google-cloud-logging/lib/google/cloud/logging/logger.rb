@@ -71,6 +71,12 @@ module Google
         # The logging severity threshold (e.g. `Logger::INFO`)
         attr_reader :level
         alias_method :sev_threshold, :level
+        alias_method :local_level, :level
+
+        ##
+        # Boolean flag that indicates whether this logger can be silenced or
+        # not.
+        attr_accessor :silencer
 
         ##
         # This logger does not use a formatter, but it provides a default
@@ -151,6 +157,7 @@ module Google
           # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
           @datetime_format = ""
+          @silencer = true
 
           # The writer is usually a Project or AsyncWriter.
           logging = @writer.respond_to?(:logging) ? @writer.logging : @writer
@@ -169,9 +176,9 @@ module Google
         #
         def debug message = nil, &block
           if block_given?
-            add 0, nil, message, &block
+            add ::Logger::DEBUG, nil, message, &block
           else
-            add 0, message, nil, &block
+            add ::Logger::DEBUG, message, nil, &block
           end
         end
 
@@ -187,9 +194,9 @@ module Google
         #
         def info message = nil, &block
           if block_given?
-            add 1, nil, message, &block
+            add ::Logger::INFO, nil, message, &block
           else
-            add 1, message, nil, &block
+            add ::Logger::INFO, message, nil, &block
           end
         end
 
@@ -205,9 +212,9 @@ module Google
         #
         def warn message = nil, &block
           if block_given?
-            add 2, nil, message, &block
+            add ::Logger::WARN, nil, message, &block
           else
-            add 2, message, nil, &block
+            add ::Logger::WARN, message, nil, &block
           end
         end
 
@@ -223,9 +230,9 @@ module Google
         #
         def error message = nil, &block
           if block_given?
-            add 3, nil, message, &block
+            add ::Logger::ERROR, nil, message, &block
           else
-            add 3, message, nil, &block
+            add ::Logger::ERROR, message, nil, &block
           end
         end
 
@@ -241,9 +248,9 @@ module Google
         #
         def fatal message = nil, &block
           if block_given?
-            add 4, nil, message, &block
+            add ::Logger::FATAL, nil, message, &block
           else
-            add 4, message, nil, &block
+            add ::Logger::FATAL, message, nil, &block
           end
         end
 
@@ -260,9 +267,9 @@ module Google
         #
         def unknown message = nil, &block
           if block_given?
-            add 5, nil, message, &block
+            add ::Logger::UNKNOWN, nil, message, &block
           else
-            add 5, message, nil, &block
+            add ::Logger::UNKNOWN, message, nil, &block
           end
         end
 
@@ -281,7 +288,7 @@ module Google
         #   called when the logger is configured to show them.
         #
         def add severity, message = nil, progname = nil
-          severity = derive_severity(severity) || 5 # 5 is UNKNOWN/DEFAULT
+          severity = derive_severity(severity) || ::Logger::UNKNOWN
           return true if severity < @level
 
           if message.nil?
@@ -312,35 +319,42 @@ module Google
         # Returns `true` if the current severity level allows for sending
         # `DEBUG` messages.
         def debug?
-          @level <= 0
+          @level <= ::Logger::DEBUG
         end
 
         ##
         # Returns `true` if the current severity level allows for sending `INFO`
         # messages.
         def info?
-          @level <= 1
+          @level <= ::Logger::INFO
         end
 
         ##
         # Returns `true` if the current severity level allows for sending `WARN`
         # messages.
         def warn?
-          @level <= 2
+          @level <= ::Logger::WARN
         end
 
         ##
         # Returns `true` if the current severity level allows for sending
         # `ERROR` messages.
         def error?
-          @level <= 3
+          @level <= ::Logger::ERROR
         end
 
         ##
         # Returns `true` if the current severity level allows for sending
         # `FATAL` messages.
         def fatal?
-          @level <= 4
+          @level <= ::Logger::FATAL
+        end
+
+        ##
+        # Returns `true` if the current severity level allows for sending
+        # `UNKNOWN` messages.
+        def unknown?
+          @level <= ::Logger::UNKNOWN
         end
 
         ##
@@ -369,6 +383,7 @@ module Google
           @level = new_level
         end
         alias_method :sev_threshold=, :level=
+        alias_method :local_level=, :level=
 
         ##
         # Close the logging "device". This effectively disables logging from
@@ -452,6 +467,50 @@ module Google
         # @deprecated Use delete_request_info
         alias_method :delete_trace_id, :delete_request_info
 
+        ##
+        # No-op method. Created to match the spec of ActiveSupport::Logger#flush
+        # method when used in Rails application.
+        def flush
+          self
+        end
+
+        ##
+        # Filter out low severity messages within block.
+        #
+        # @param [Integer] temp_level Severity threshold to filter within the
+        #   block. Messages with lower severity will be blocked. Default
+        #   ::Logger::ERROR
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #
+        #   logger = logging.logger "my_app_log", resource, env: :production
+        #
+        #   logger.silence do
+        #     logger.info "Info message"   # No log entry written
+        #     logger.error "Error message" # Log entry written
+        #   end
+        def silence temp_level = ::Logger::ERROR
+          if silencer
+            begin
+              old_level = level
+              self.level = temp_level
+
+              yield self
+            ensure
+              self.level = old_level
+            end
+          else
+            yield self
+          end
+        end
+
         protected
 
         ##
@@ -500,12 +559,12 @@ module Google
 
           downcase_severity = severity.to_s.downcase
           case downcase_severity
-          when "debug".freeze then 0
-          when "info".freeze then 1
-          when "warn".freeze then 2
-          when "error".freeze then 3
-          when "fatal".freeze then 4
-          when "unknown".freeze then 5
+          when "debug".freeze then ::Logger::DEBUG
+          when "info".freeze then ::Logger::INFO
+          when "warn".freeze then ::Logger::WARN
+          when "error".freeze then ::Logger::ERROR
+          when "fatal".freeze then ::Logger::FATAL
+          when "unknown".freeze then ::Logger::UNKNOWN
           else nil
           end
         end
