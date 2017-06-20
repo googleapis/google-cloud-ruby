@@ -96,19 +96,6 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
   end
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "raises unhandled errors" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
@@ -121,7 +108,7 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
       client.read("my-table", columns).rows.to_a
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end

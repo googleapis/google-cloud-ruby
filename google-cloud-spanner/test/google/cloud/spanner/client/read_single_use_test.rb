@@ -62,19 +62,6 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
   let(:timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp time_obj }
   let(:duration) { Google::Cloud::Spanner::Convert.number_to_duration 120 }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "reads with strong" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
@@ -91,7 +78,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { strong: true }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -114,7 +101,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { timestamp: time_obj }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -137,7 +124,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { read_timestamp: time_obj }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -160,7 +147,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { staleness: 120 }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -183,7 +170,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { exact_staleness: 120 }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -206,7 +193,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { bounded_timestamp: time_obj }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -229,7 +216,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { min_read_timestamp: time_obj }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -252,7 +239,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { bounded_staleness: 120 }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -275,7 +262,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
 
     results = client.read "my-table", columns, single_use: { max_staleness: 120 }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 

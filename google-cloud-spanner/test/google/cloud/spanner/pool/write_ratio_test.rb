@@ -29,15 +29,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
   end
 
   after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done! pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
+    shutdown_client! client
   end
 
   it "creates two sessions and one transaction" do
@@ -49,7 +41,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5
 
-    wait_until_thread_pool_is_done! pool
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 2
     pool.session_queue.size.must_equal 1
@@ -72,7 +64,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 5, write_ratio: 0.5
 
-    wait_until_thread_pool_is_done! pool
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 5
     pool.session_queue.size.must_equal 2
@@ -97,7 +89,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 8, write_ratio: 0.3
 
-    wait_until_thread_pool_is_done! pool
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 8
     pool.session_queue.size.must_equal 6

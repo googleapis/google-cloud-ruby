@@ -32,14 +32,7 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
   end
 
   after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool.instance_variable_get(:@thread_pool).shutdown
-    pool.instance_variable_get(:@thread_pool).wait_for_termination 60
+    shutdown_client! client
   end
 
   it "deletes sessions when closed" do
@@ -49,7 +42,7 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
 
     pool.close
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end
@@ -61,7 +54,7 @@ describe Google::Cloud::Spanner::Pool, :close, :mock_spanner do
 
     pool.close
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     assert_raises Google::Cloud::Spanner::ClientClosedError do
       pool.checkout_session

@@ -34,16 +34,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
   end
 
   after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
+    shutdown_client! client
   end
 
   it "can checkout and checkin a session" do
@@ -57,7 +48,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
     pool.checkin_session s
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 1
     pool.session_queue.size.must_equal 1
@@ -80,7 +71,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     pool.checkin_session s1
     pool.checkin_session s2
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 2
     pool.session_queue.size.must_equal 2
@@ -115,7 +106,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     pool.checkin_session s3
     pool.checkin_session s4
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 4
     pool.session_queue.size.must_equal 4
@@ -158,7 +149,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
     pool.checkin_transaction tx
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 1
     pool.session_queue.size.must_equal 0
@@ -185,7 +176,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
     pool.checkin_transaction tx
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 1
     pool.session_queue.size.must_equal 0
@@ -214,7 +205,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     pool.checkin_transaction tx1
     pool.checkin_transaction tx2
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 2
     pool.session_queue.size.must_equal 0
@@ -246,7 +237,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
       end
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     pool.all_sessions.size.must_equal 2
     pool.session_queue.size.must_equal 0
@@ -307,7 +298,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
     pool.session_queue.size.must_equal 2
     pool.transaction_queue.size.must_equal 2
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end
