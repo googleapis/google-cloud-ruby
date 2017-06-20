@@ -242,11 +242,13 @@ module Google
                     Google::Cloud.configure.keyfile
 
           @@default_client = AsyncErrorReporter.new(
-            new project: project_id, keyfile: keyfile)
+            new(project: project_id, keyfile: keyfile)
+          )
         end
 
         @@default_client
       end
+
       private_class_method :default_client
     end
   end
