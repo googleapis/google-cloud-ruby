@@ -178,7 +178,7 @@ module Google
           if block_given?
             add ::Logger::DEBUG, nil, message, &block
           else
-            add ::Logger::DEBUG, message, nil, &block
+            add ::Logger::DEBUG, message
           end
         end
 
@@ -196,7 +196,7 @@ module Google
           if block_given?
             add ::Logger::INFO, nil, message, &block
           else
-            add ::Logger::INFO, message, nil, &block
+            add ::Logger::INFO, message
           end
         end
 
@@ -214,7 +214,7 @@ module Google
           if block_given?
             add ::Logger::WARN, nil, message, &block
           else
-            add ::Logger::WARN, message, nil, &block
+            add ::Logger::WARN, message
           end
         end
 
@@ -232,7 +232,7 @@ module Google
           if block_given?
             add ::Logger::ERROR, nil, message, &block
           else
-            add ::Logger::ERROR, message, nil, &block
+            add ::Logger::ERROR, message
           end
         end
 
@@ -250,7 +250,7 @@ module Google
           if block_given?
             add ::Logger::FATAL, nil, message, &block
           else
-            add ::Logger::FATAL, message, nil, &block
+            add ::Logger::FATAL, message
           end
         end
 
@@ -269,7 +269,7 @@ module Google
           if block_given?
             add ::Logger::UNKNOWN, nil, message, &block
           else
-            add ::Logger::UNKNOWN, message, nil, &block
+            add ::Logger::UNKNOWN, message
           end
         end
 
