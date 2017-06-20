@@ -45,8 +45,7 @@ describe Google::Cloud::Trace::FaradayMiddleware do
   describe "#add_request_labels" do
     it "sets all the labels" do
       env = OpenStruct.new request_headers: {user_agent: "test-agent"},
-                           url: OpenStruct.new(host: "test-host",
-                                               scheme: "tcp")
+                           url: Object.new
       env.define_singleton_method(:method) { "test-method" }
       env.url.define_singleton_method(:to_s) { "full-url" }
 
@@ -54,14 +53,9 @@ describe Google::Cloud::Trace::FaradayMiddleware do
 
       middleware.send :add_request_labels, span, env
 
-      span.labels[Google::Cloud::Trace::LabelKey::AGENT].must_equal Google::Cloud::Trace::Middleware::AGENT_NAME
-      span.labels[Google::Cloud::Trace::LabelKey::HTTP_HOST].must_equal "test-host"
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_METHOD].must_equal "test-method"
-      span.labels[Google::Cloud::Trace::LabelKey::HTTP_CLIENT_PROTOCOL].must_equal "tcp"
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_USER_AGENT].must_equal "test-agent"
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_URL].must_equal "full-url"
-      span.labels[Google::Cloud::Trace::LabelKey::PID].must_be_kind_of String
-      span.labels[Google::Cloud::Trace::LabelKey::TID].must_be_kind_of String
     end
   end
 
