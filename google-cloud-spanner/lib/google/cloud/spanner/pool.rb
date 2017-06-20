@@ -86,11 +86,11 @@ module Google
         end
 
         def checkin_session session
-          unless all_sessions.include? session
-            fail ArgumentError, "Cannot checkin session"
-          end
-
           @mutex.synchronize do
+            unless all_sessions.include? session
+              fail ArgumentError, "Cannot checkin session"
+            end
+
             session_queue.push session
 
             @resource.signal
@@ -144,11 +144,11 @@ module Google
         end
 
         def checkin_transaction tx
-          unless all_sessions.include? tx.session
-            fail ArgumentError, "Cannot checkin session"
-          end
-
           @mutex.synchronize do
+            unless all_sessions.include? tx.session
+              fail ArgumentError, "Cannot checkin session"
+            end
+
             transaction_queue.push tx
 
             @resource.signal
