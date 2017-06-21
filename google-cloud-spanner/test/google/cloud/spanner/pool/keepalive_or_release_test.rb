@@ -51,14 +51,7 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
   end
 
   after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool.instance_variable_get(:@thread_pool).shutdown
-    pool.instance_variable_get(:@thread_pool).wait_for_termination 60
+    shutdown_client! client
   end
 
   it "calls keepalive on the sessions that need it" do
@@ -74,7 +67,7 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
 
     pool.keepalive_or_release!
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end
@@ -92,7 +85,7 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
 
     pool.keepalive_or_release!
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end
@@ -109,6 +102,8 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
 
     pool.keepalive_or_release!
 
+    shutdown_pool! pool
+
     mock.verify
   end
 
@@ -123,6 +118,8 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
     session.service.mocked_service = mock
 
     pool.keepalive_or_release!
+
+    shutdown_pool! pool
 
     mock.verify
   end

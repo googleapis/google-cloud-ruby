@@ -64,19 +64,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "retries aborted transactions without retry metadata" do
     mutations = [
       Google::Spanner::V1::Mutation.new(
@@ -126,7 +113,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     assert_results results
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -182,7 +169,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     assert_results results
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -238,7 +225,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     assert_results results
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -304,7 +291,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
 
     assert_results results
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -376,7 +363,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       end
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end

@@ -22,6 +22,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
+  let(:pool) { client.instance_variable_get :@pool }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
 
   before do
@@ -31,13 +32,6 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
     p.session_queue = [session]
   end
 
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "deletes sessions when closed" do
     mock = Minitest::Mock.new
     mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
@@ -45,7 +39,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
 
     client.close
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end
@@ -61,7 +55,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
       client.execute "SELECT 1"
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_pool! pool
 
     mock.verify
   end

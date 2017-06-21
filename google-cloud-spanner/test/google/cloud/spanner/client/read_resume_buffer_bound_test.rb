@@ -84,19 +84,6 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "returns all rows even when there is no resume_token" do
     no_tokens_enum = [
       Google::Spanner::V1::PartialResultSet.decode_json(results_header.to_json),
@@ -129,7 +116,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
     rows.count.must_equal 3
     rows.each { |row| assert_row row }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -166,7 +153,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
     rows.count.must_equal 3
     rows.each { |row| assert_row row }
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -210,7 +197,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
       results.rows.next
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end

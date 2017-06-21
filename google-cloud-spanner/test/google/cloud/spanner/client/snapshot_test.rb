@@ -65,19 +65,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
 
-  after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
-  end
-
-  def wait_until_thread_pool_is_done!
-    pool = client.instance_variable_get :@pool
-    thread_pool = pool.instance_variable_get :@thread_pool
-    thread_pool.shutdown
-    thread_pool.wait_for_termination 60
-  end
-
   it "can execute a simple query without any options" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
@@ -91,7 +78,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = snp.execute "SELECT * FROM users"
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
 
@@ -108,7 +95,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       end
     end
 
-    wait_until_thread_pool_is_done!
+    shutdown_client! client
 
     mock.verify
   end
@@ -129,7 +116,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -156,7 +143,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -176,7 +163,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -196,7 +183,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -216,7 +203,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -242,7 +229,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 
@@ -262,7 +249,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
         results = snp.execute "SELECT * FROM users"
       end
 
-      wait_until_thread_pool_is_done!
+      shutdown_client! client
 
       mock.verify
 

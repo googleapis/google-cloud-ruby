@@ -55,6 +55,26 @@ class MockSpanner < Minitest::Spec
     addl.include? :mock_spanner
   end
 
+  def shutdown_client! client
+    # extract the pool
+    pool = client.instance_variable_get :@pool
+    # remove all sessions so we don't have to handle the calls to session_delete
+    pool.all_sessions = []
+
+    # close the client
+    client.close
+
+    # close the client
+    shutdown_pool! pool
+  end
+
+  def shutdown_pool! pool
+    # ensure the pool's thread pool is also shut down
+    thread_pool = pool.instance_variable_get :@thread_pool
+    thread_pool.shutdown
+    thread_pool.wait_for_termination 60
+  end
+
   def instance_configs_hash
     {
       instanceConfigs: [

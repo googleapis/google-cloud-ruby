@@ -24,9 +24,7 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   after do
-    # Close the client and release the keepalive thread
-    client.instance_variable_get(:@pool).all_sessions = []
-    client.close
+    shutdown_client! client
   end
 
   it "knows its project_id" do
