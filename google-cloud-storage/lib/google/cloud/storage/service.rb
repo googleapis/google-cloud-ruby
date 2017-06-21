@@ -381,11 +381,9 @@ module Google
         protected
 
         def user_project user_project
-          if user_project.respond_to?(:to_str)
-            user_project.to_str
-          elsif user_project
-            @project
-          end
+          return nil unless user_project # nil or false get nil
+          return @project if user_project == true # handle the true  condition
+          String(user_project) # convert the value to a string
         end
 
         def key_options key
