@@ -358,9 +358,7 @@ module Google
               @queue_resource.wait
             end
             queue_item = nil
-            if @queue.empty?
-              async_stop
-            else
+            unless @queue.empty?
               queue_item = @queue.shift
               @queue_size -= queue_item.entries.size
             end
