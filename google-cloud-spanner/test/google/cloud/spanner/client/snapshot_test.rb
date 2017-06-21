@@ -257,6 +257,37 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     end
   end
 
+  it "does not allow nested snapshots" do
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = nil
+    results2 = nil
+
+    nested_error = assert_raises RuntimeError do
+      client.snapshot do |snp|
+        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        results = snp.execute "SELECT * FROM users"
+
+        client.snapshot do |snp2|
+          snp2.must_be_kind_of Google::Cloud::Spanner::Snapshot
+          results2 = snp2.execute "SELECT * FROM other_users"
+        end
+      end
+    end
+    nested_error.message.must_equal "Nested snapshots are not allowed"
+
+    shutdown_client! client
+
+    mock.verify
+
+    assert_results results
+    assert_nil results2
+  end
+
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 

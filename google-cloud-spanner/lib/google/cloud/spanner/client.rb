@@ -823,14 +823,24 @@ module Google
                                   read_timestamp: read_timestamp,
                                   staleness: staleness,
                                   exact_staleness: exact_staleness
+
           ensure_service!
+          unless Thread.current[:transaction_id].nil?
+            fail "Nested snapshots are not allowed"
+          end
+
           @pool.with_session do |session|
-            snp_grpc = @project.service.create_snapshot \
-              session.path, strong: strong,
-                            timestamp: (timestamp || read_timestamp),
-                            staleness: (staleness || exact_staleness)
-            snp = Snapshot.from_grpc(snp_grpc, session)
-            yield snp if block_given?
+            begin
+              snp_grpc = @project.service.create_snapshot \
+                session.path, strong: strong,
+                              timestamp: (timestamp || read_timestamp),
+                              staleness: (staleness || exact_staleness)
+              Thread.current[:transaction_id] = snp_grpc.id
+              snp = Snapshot.from_grpc(snp_grpc, session)
+              yield snp if block_given?
+            ensure
+              Thread.current[:transaction_id] = nil
+            end
           end
           nil
         end
