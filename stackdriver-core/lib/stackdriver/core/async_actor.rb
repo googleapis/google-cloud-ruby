@@ -199,6 +199,30 @@ module Stackdriver
       end
 
       ##
+      # Block current thread until the async job is fully stopped.
+      #
+      # @param [Integer] timeout If given, lift the blocking when the time has
+      #   exceeded the timeout. If nil, block indefinitely.
+      #
+      # @return [Boolean] True if async job is fully stopped. False if timeout.
+      #
+      def wait_until_async_stopped timeout = nil
+        ensure_thread
+        deadline = timeout ? ::Time.new.to_f + timeout : nil
+        synchronize do
+          until async_state == :stopped
+            cur_time = ::Time.new.to_f
+            return false if deadline && cur_time >= deadline
+            max_interval = @cleanup_options[:wait_interval]
+            interval = deadline ? deadline - cur_time : max_interval
+            interval = max_interval if interval > max_interval
+            @lock_cond.wait interval
+          end
+        end
+        true
+      end
+
+      ##
       # Abstract method that the inheriting classes should implement.
       #
       # This should be the main task job that will be run asynchronously and
@@ -243,28 +267,6 @@ module Stackdriver
       private_class_method :run_cleanup
 
       private
-
-      ##
-      # @private Helper method to async_stop! to wait for async job to
-      # terminate.
-      #
-      # @return [Boolean] True if async job terminated. False if timeout.
-      #
-      def wait_until_async_stopped timeout = nil
-        ensure_thread
-        deadline = timeout ? ::Time.new.to_f + timeout : nil
-        synchronize do
-          until async_state == :stopped
-            cur_time = ::Time.new.to_f
-            return false if deadline && cur_time >= deadline
-            max_interval = @cleanup_options[:wait_interval]
-            interval = deadline ? deadline - cur_time : max_interval
-            interval = max_interval if interval > max_interval
-            @lock_cond.wait interval
-          end
-        end
-        true
-      end
 
       ##
       # @private Constructor to initialize MonitorMixin
