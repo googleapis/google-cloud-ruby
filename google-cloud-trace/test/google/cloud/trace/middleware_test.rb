@@ -106,6 +106,20 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     }
   end
 
+  describe ".initialize" do
+    it "uses the service object passed in" do
+      middleware = Google::Cloud::Trace::Middleware.new base_app, service: "test-service"
+      middleware.instance_variable_get(:@service).must_equal "test-service"
+    end
+
+    it "creates a default AsyncReporter if service isn't passed in" do
+      Google::Cloud::Trace.configure.project_id = "test"
+      Google::Cloud::Trace.stub :new, OpenStruct.new(service: nil) do
+        base_middleware.instance_variable_get(:@service).must_be_kind_of Google::Cloud::Trace::AsyncReporter
+      end
+    end
+  end
+
   describe ".get_trace_context" do
     it "passes through the existing sampling decision" do
       env = rack_env sample: true

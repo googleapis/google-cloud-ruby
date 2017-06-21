@@ -66,3 +66,16 @@ class MockTrace < Minitest::Spec
     "projects/#{project}"
   end
 end
+
+##
+# Helper method to loop until block yields true or timeout.
+def wait_until_true timeout = 5
+  begin_t = Time.now
+
+  until yield
+    return :timeout if Time.now - begin_t > timeout
+    sleep 0.1
+  end
+
+  :completed
+end

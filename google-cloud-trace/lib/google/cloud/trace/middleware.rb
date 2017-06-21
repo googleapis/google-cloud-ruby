@@ -14,6 +14,7 @@
 
 
 require "google/cloud/env"
+require "google/cloud/trace/async_reporter"
 require "stackdriver/core/trace_context"
 
 module Google
@@ -112,8 +113,8 @@ module Google
         # Create a new Middleware for traces
         #
         # @param [Rack Application] app Rack application
-        # @param [Google::Cloud::Trace::Service] service The service object.
-        #     Optional if running on GCE.
+        # @param [Google::Cloud::Trace::Service, AsyncReporter] service
+        #   The service object to update traces. Optional if running on GCE.
         # @param [Hash] *kwargs Hash of configuration settings. Used for
         #   backward API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
@@ -128,8 +129,12 @@ module Google
             @service = service
           else
             project_id = configuration.project_id
+
             if project_id
-              @service = Google::Cloud::Trace.new(project: project_id).service
+              keyfile = configuration.keyfile
+              tracer = Google::Cloud::Trace.new project: project_id,
+                                                keyfile: keyfile
+              @service = Google::Cloud::Trace::AsyncReporter.new tracer.service
             end
           end
         end
