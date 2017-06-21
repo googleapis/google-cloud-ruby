@@ -16,7 +16,7 @@ for full configuration parameters.
 
 ## Rails Integration
 
-To use the Stackdriver Logging Railtie for Ruby on Rails applications, simply add this line to config/application.rb:
+To use the Stackdriver Logging Railtie for Ruby on Rails applications, simply add this line to `config/application.rb`:
 ```ruby
 require "google/cloud/trace/rails"
 ```
@@ -30,3 +30,20 @@ Other Rack base frameworks can also directly leverage the built-in Middleware.
 require "google/cloud/trace"
 use Google::Cloud::Trace::Middleware
 ```
+
+## Faraday Middleware
+
+On top of the Rack Middleware, you can also trace outbound Faraday requests by 
+using the Faraday Middleware provided with this gem:
+
+```ruby
+require "google/cloud/trace/faraday_middleware"
+
+conn = Faraday.new "https://www.google.com"
+conn.use Google::Cloud::Trace::FaradayMiddleware
+
+result = conn.get
+```
+
+A child span will be create for each outbound Faraday request, and will be 
+submitted together with the overall application request trace by the Rack Middleware.
