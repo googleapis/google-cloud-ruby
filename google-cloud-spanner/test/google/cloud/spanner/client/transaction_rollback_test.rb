@@ -121,6 +121,36 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     assert_results results
   end
 
+  it "does not allow nested transactions" do
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+
+    nested_error = assert_raises RuntimeError do
+      client.transaction do |tx|
+        tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        tx.upsert "users", [{ id: 3, name: "Marley",  active: false }]
+        tx.replace "users", [{ id: 4, name: "Henry",  active: true }]
+        tx.delete "users", [1, 2, 3, 4, 5]
+
+        # A nested transaction is not allowed
+        client.transaction do |tx2|
+          tx2.insert "users", [{ id: 6, name: "Barney",  active: true }]
+        end
+      end
+    end
+    nested_error.message.must_equal "Nested transactions are not allowed"
+
+    shutdown_client! client
+
+    mock.verify
+  end
+
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
