@@ -68,12 +68,14 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       middleware.error_reporting.must_equal error_reporting
     end
 
-    it "creates a default error_reporting if not given one" do
-      Google::Cloud::ErrorReporting.stub :new, "A default error_reporting" do
-        middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
-                                                                   project_id: project_id
+    it "creates a default async_error_reporter if not given one" do
+      Google::Cloud::ErrorReporting::AsyncErrorReporter.stub :new, "A default reporter" do
+        Google::Cloud::ErrorReporting.stub :new, nil do
+          middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
+                                                                     project_id: project_id
 
-        middleware.error_reporting.must_equal "A default error_reporting"
+          middleware.error_reporting.must_equal "A default reporter"
+        end
       end
     end
 

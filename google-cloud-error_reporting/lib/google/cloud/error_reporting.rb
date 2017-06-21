@@ -14,6 +14,7 @@
 
 
 require "google-cloud-error_reporting"
+require "google/cloud/error_reporting/async_error_reporter"
 require "google/cloud/error_reporting/project"
 require "google/cloud/error_reporting/middleware"
 require "stackdriver/core"
@@ -213,26 +214,42 @@ module Google
       # @param [String] service_version A version identifier for running
       #   service.
       #
-      def self.report exception, service_name: nil, service_version: nil, &block
+      def self.report exception, service_name: nil, service_version: nil
         return if Google::Cloud.configure.use_error_reporting == false
 
+        service_name ||= configure.service_name ||
+                         Project.default_service_name
+        service_version ||= configure.service_version ||
+                            Project.default_service_version
+
+        error_event = ErrorEvent.from_exception(exception).tap do |event|
+          event.service_name = service_name
+          event.service_version = service_version
+        end
+
+        yield error_event if block_given?
+
+        default_client.report error_event
+      end
+
+      ##
+      # @private Create a private client to
+      def self.default_client
         unless @@default_client
           project_id = configure.project_id ||
                        Google::Cloud.configure.project_id
           keyfile = configure.keyfile ||
                     Google::Cloud.configure.keyfile
 
-          @@default_client = new project: project_id, keyfile: keyfile
+          @@default_client = AsyncErrorReporter.new(
+            new(project: project_id, keyfile: keyfile)
+          )
         end
 
-        service_name ||= configure.service_name
-        service_version ||= configure.service_version
-
-        @@default_client.report_exception exception,
-                                          service_name: service_name,
-                                          service_version: service_version,
-                                          &block
+        @@default_client
       end
+
+      private_class_method :default_client
     end
   end
 end
