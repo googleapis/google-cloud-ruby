@@ -281,4 +281,28 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       end
     end
   end
+
+  describe "#silence" do
+    it "correctly blocks out low level entries in block" do
+      mocked_write_entry = Minitest::Mock.new
+      mocked_write_entry.expect :call, nil, [::Logger::INFO, "Correct info message"]
+      mocked_write_entry.expect :call, nil, [::Logger::FATAL, "Correct fatal message"]
+
+      logger.level.must_equal ::Logger::DEBUG
+
+      logger.stub :write_entry, mocked_write_entry do
+        logger.info "Correct info message"
+        logger.silence ::Logger::FATAL do |logger|
+          logger.info "Wrong info message"
+          logger.fatal "Correct fatal message"
+
+          logger.level.must_equal ::Logger::FATAL
+        end
+      end
+
+      logger.level.must_equal ::Logger::DEBUG
+
+      mocked_write_entry.verify
+    end
+  end
 end
