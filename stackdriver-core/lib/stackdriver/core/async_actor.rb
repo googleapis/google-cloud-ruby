@@ -305,12 +305,14 @@ module Stackdriver
           if (@thread.nil? || !@thread.alive?) && @async_state != :stopped
             @lock_cond = new_cond
             AsyncActor.register_for_cleanup self
+
+            @async_state = :running
+            async_state_change
+
             @thread = Thread.new do
               async_run_job
               AsyncActor.unregister_for_cleanup self
             end
-            @async_state = :running
-            async_state_change
           end
         end
       end
