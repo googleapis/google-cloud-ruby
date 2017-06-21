@@ -55,43 +55,34 @@ module Google
         attr_accessor :service
 
         ##
-        # A `true`/`false` value or a project ID string to be sent as the
-        # `userProject` query param for operations on requester pays buckets and
-        # their files. The default is `nil`. For convenience, this attribute
-        # should be set when first retrieving the bucket, by providing the
-        # `user_project` option to {Project#bucket}.
+        # A boolean value or a project ID string for a requester pays
+        # bucket and its files. If this attribute is set to `true`, transit
+        # costs for operations on the file will be billed to the current
+        # project for this client. (See {Project#project} for the ID of the
+        # current project.) If this attribute is set to a project ID, and that
+        # project is authorized for the currently authenticated service account,
+        # transit costs will be billed to the that project. The default is
+        # `nil`.
         #
-        # If the `requester_pays` flag is enabled for the bucket, and if this
-        # attribute is set to `true`, transit costs for operations on the bucket
-        # will be billed to the current project for this client. (See
-        # {Project#project} for the ID of the current project.) If this
-        # attribute is set to a project ID other than the current project, and
-        # that project is authorized for the currently authenticated service
-        # account, transit costs will be billed to the given project.
+        # In general, this attribute should be set when first retrieving the
+        # owning bucket by providing the `user_project` option to
+        # {Project#bucket}.
         #
         # The requester pays feature is currently available only to whitelisted
         # projects.
         #
-        # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
+        # enable requester pays for a bucket.
         #
-        # @example With `user_project` set to pay for a requester pays bucket:
+        # @example Setting a non-default project:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "other-project-bucket", user_project: true
         #   file = bucket.file "path/to/file.ext" # Billed to current project
-        #   file.user_project #=> true
-        #
-        # @example With `user_project` set to a project other than the default:
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "other-project-bucket",
-        #                           user_project: "my-other-project"
-        #   file = bucket.file "path/to/file.ext" # Billed to current project
-        #   file.user_project #=> "my-other-project"
+        #   file.user_project = "my-other-project"
+        #   file.download "file.ext" # Billed to "my-other-project"
         #
         attr_accessor :user_project
 

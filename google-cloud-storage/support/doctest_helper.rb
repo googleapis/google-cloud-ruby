@@ -289,6 +289,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
       mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
+      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
     end
   end
 
@@ -598,6 +599,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Storage::File#user_project" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/file.ext", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/file.ext", Hash]
     end
   end

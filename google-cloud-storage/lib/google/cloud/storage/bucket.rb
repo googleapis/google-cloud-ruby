@@ -47,43 +47,33 @@ module Google
         attr_accessor :gapi
 
         ##
-        # A `true`/`false` value or a project ID string to be sent as the
-        # `userProject` query param for operations on requester pays buckets and
-        # their files. The default is `nil`. For convenience, this attribute
-        # should be set when first retrieving the bucket, by providing the
-        # `user_project` option to {Project#bucket}.
+        # A boolean value or a project ID string for a requester pays
+        # bucket and its files. If this attribute is set to `true`, transit
+        # costs for operations on the bucket will be billed to the current
+        # project for this client. (See {Project#project} for the ID of the
+        # current project.) If this attribute is set to a project ID, and that
+        # project is authorized for the currently authenticated service account,
+        # transit costs will be billed to the that project. The default is
+        # `nil`.
         #
-        # If the `requester_pays` flag is enabled for the bucket, and if this
-        # attribute is set to `true`, transit costs for operations on the bucket
-        # will be billed to the current project for this client. (See
-        # {Project#project} for the ID of the current project.) If this
-        # attribute is set to a project ID other than the current project, and
-        # that project is authorized for the currently authenticated service
-        # account, transit costs will be billed to the given project.
+        # In general, this attribute should be set when first retrieving the
+        # bucket by providing the `user_project` option to {Project#bucket}.
         #
         # The requester pays feature is currently available only to whitelisted
         # projects.
         #
-        # See also {#requester_pays=} and {#requester_pays}.
+        # See also {#requester_pays=} and {#requester_pays} to enable requester
+        # pays for a bucket.
         #
-        # @example With `user_project` set to pay for a requester pays bucket:
+        # @example Setting a non-default project:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "other-project-bucket", user_project: true
         #   files = bucket.files # Billed to current project
-        #   bucket.user_project #=> true
-        #
-        # @example With `user_project` set to a project other than the default:
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "other-project-bucket",
-        #                           user_project: "my-other-project"
+        #   bucket.user_project = "my-other-project"
         #   files = bucket.files # Billed to "my-other-project"
-        #   bucket.user_project #=> "my-other-project"
         #
         attr_accessor :user_project
 
@@ -352,17 +342,18 @@ module Google
         alias_method :requester_pays?, :requester_pays
 
         ##
-        # Indicates that a client accessing the bucket or a file it contains
-        # must assume the transit costs related to the access. The requester
-        # must pass the `user_project` option to {Project#bucket} to indicate
-        # the project to which the access costs should be billed.
+        # Enables requester pays for the bucket. If enabled, a client accessing
+        # the bucket or a file it contains must assume the transit costs related
+        # to the access. The requester must pass the `user_project` option to
+        # {Project#bucket} to indicate the project to which the access costs
+        # should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
-        # @param [Boolean] new_requester_pays When set to `true`, the bucket is
-        #   requester pays.
+        # @param [Boolean] new_requester_pays When set to `true`, requester pays
+        #   is enabled for the bucket.
         #
-        # @example
+        # @example Enable requester pays for a bucket:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
