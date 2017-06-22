@@ -472,6 +472,8 @@ module Google
                    client_config: nil, emulator_host: nil
         project ||= Google::Cloud::Pubsub::Project.default_project
         project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
         emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
         if emulator_host
           ps = Google::Cloud::Pubsub::Project.new(
@@ -480,7 +482,9 @@ module Google
           ps.service.host = emulator_host
           return ps
         end
+
         credentials = credentials_with_scope keyfile, scope
+
         Google::Cloud::Pubsub::Project.new(
           Google::Cloud::Pubsub::Service.new(
             project, credentials, timeout: timeout,

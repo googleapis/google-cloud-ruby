@@ -366,12 +366,16 @@ module Google
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
                    client_config: nil
         project ||= Google::Cloud::Spanner::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
         if keyfile.nil?
           credentials = Google::Cloud::Spanner::Credentials.default scope: scope
         else
           credentials = Google::Cloud::Spanner::Credentials.new(
             keyfile, scope: scope)
         end
+
         Google::Cloud::Spanner::Project.new(
           Google::Cloud::Spanner::Service.new(
             project, credentials, timeout: timeout,
