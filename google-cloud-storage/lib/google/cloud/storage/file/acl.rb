@@ -51,12 +51,35 @@ module Google
                     "public_read" => "publicRead" }
 
           ##
+          # A boolean value or a project ID string for a requester pays
+          # bucket and its files. If this attribute is set to `true`, transit
+          # costs for operations on the file will be billed to the current
+          # project for this client. (See {Project#project} for the ID of the
+          # current project.) If this attribute is set to a project ID, and that
+          # project is authorized for the currently authenticated service
+          # account, transit costs will be billed to the that project. The
+          # default is `nil`.
+          #
+          # In general, this attribute should be set when first retrieving the
+          # owning bucket by providing the `user_project` option to
+          # {Project#bucket}.
+          #
+          # The requester pays feature is currently available only to
+          # whitelisted projects.
+          #
+          # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
+          # enable requester pays for a bucket.
+          #
+          attr_accessor :user_project
+
+          ##
           # @private Initialized a new Acl object.
           # Must provide a valid Bucket object.
           def initialize file
             @bucket = file.bucket
             @file = file.name
             @service = file.service
+            @user_project = file.user_project
             @owners  = nil
             @readers = nil
           end
@@ -75,7 +98,8 @@ module Google
           #   file.acl.reload!
           #
           def reload!
-            gapi = @service.list_file_acls @bucket, @file
+            gapi = @service.list_file_acls @bucket, @file,
+                                           user_project: user_project
             acls = Array(gapi.items)
             @owners  = entities_from_acls acls, "OWNER"
             @readers = entities_from_acls acls, "READER"
@@ -163,9 +187,9 @@ module Google
           #   file.acl.add_owner "group-#{email}"
           #
           def add_owner entity, generation: nil
-            options = { generation: generation }
             gapi = @service.insert_file_acl @bucket, @file, entity, "OWNER",
-                                            options
+                                            generation: generation,
+                                            user_project: user_project
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -212,9 +236,9 @@ module Google
           #   file.acl.add_reader "group-#{email}"
           #
           def add_reader entity, generation: nil
-            options = { generation: generation }
             gapi = @service.insert_file_acl @bucket, @file, entity, "READER",
-                                            options
+                                            generation: generation,
+                                            user_project: user_project
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
@@ -250,8 +274,9 @@ module Google
           #   file.acl.delete "user-#{email}"
           #
           def delete entity, generation: nil
-            options = { generation: generation }
-            @service.delete_file_acl @bucket, @file, entity, options
+            @service.delete_file_acl \
+              @bucket, @file, entity,
+              generation: generation, user_project: user_project
             @owners.delete entity  unless @owners.nil?
             @readers.delete entity unless @readers.nil?
             true
@@ -391,8 +416,9 @@ module Google
 
           def update_predefined_acl! acl_role
             patched_file = Google::Apis::StorageV1::Object.new acl: []
-            @service.patch_file \
-              @bucket, @file, patched_file, predefined_acl: acl_role
+            @service.patch_file @bucket, @file, patched_file,
+                                predefined_acl: acl_role,
+                                user_project: user_project
             clear!
           end
 

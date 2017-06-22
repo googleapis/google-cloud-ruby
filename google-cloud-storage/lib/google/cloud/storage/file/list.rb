@@ -79,11 +79,12 @@ module Google
             ensure_service!
             options = {
               prefix: @prefix, delimiter: @delimiter, token: @token, max: @max,
-              versions: @versions
+              versions: @versions, user_project: @user_project
             }
             gapi = @service.list_files @bucket, options
             File::List.from_gapi gapi, @service, @bucket, @prefix,
-                                 @delimiter, @max, @versions
+                                 @delimiter, @max, @versions,
+                                 user_project: @user_project
           end
 
           ##
@@ -159,7 +160,8 @@ module Google
           # @private New File::List from a Google API Client
           # Google::Apis::StorageV1::Objects object.
           def self.from_gapi gapi_list, service, bucket = nil, prefix = nil,
-                             delimiter = nil, max = nil, versions = nil
+                             delimiter = nil, max = nil, versions = nil,
+                             user_project: nil
             files = new(Array(gapi_list.items).map do |gapi_object|
               File.from_gapi gapi_object, service
             end)
@@ -171,6 +173,7 @@ module Google
             files.instance_variable_set :@delimiter, delimiter
             files.instance_variable_set :@max, max
             files.instance_variable_set :@versions, versions
+            files.instance_variable_set :@user_project, user_project
             files
           end
 

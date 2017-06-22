@@ -128,8 +128,7 @@ module Google
         #   end
         #
         def buckets prefix: nil, token: nil, max: nil
-          options = { prefix: prefix, token: token, max: max }
-          gapi = service.list_buckets options
+          gapi = service.list_buckets prefix: prefix, token: token, max: max
           Bucket::List.from_gapi gapi, service, prefix, max
         end
         alias_method :find_buckets, :buckets
@@ -138,6 +137,20 @@ module Google
         # Retrieves bucket by name.
         #
         # @param [String] bucket_name Name of a bucket.
+        # @param [Boolean, String] user_project If the `requester_pays` flag is
+        #   enabled for the requested bucket, and if this parameter is set to
+        #   `true`, transit costs for operations on the requested bucket or a
+        #   file it contains will be billed to the current project for this
+        #   client. (See {#project} for the ID of the current project.) If this
+        #   parameter is set to a project ID other than the current project, and
+        #   that project is authorized for the currently authenticated service
+        #   account, transit costs will be billed to the given project. The
+        #   default is `nil`.
+        #
+        #   The requester pays feature is currently available only to
+        #   whitelisted projects.
+        #
+        #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
         #   does not exist
@@ -150,9 +163,26 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   puts bucket.name
         #
-        def bucket bucket_name
-          gapi = service.get_bucket bucket_name
-          Bucket.from_gapi gapi, service
+        # @example With `user_project` set to pay for a requester pays bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket", user_project: true
+        #   files = bucket.files # Billed to current project
+        #
+        # @example With `user_project` set to a project other than the default:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket",
+        #                           user_project: "my-other-project"
+        #   files = bucket.files # Billed to "my-other-project"
+        #
+        def bucket bucket_name, user_project: nil
+          gapi = service.get_bucket bucket_name, user_project: user_project
+          Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -270,6 +300,7 @@ module Google
         #   bucket = storage.create_bucket "my-bucket" do |b|
         #     b.website_main = "index.html"
         #     b.website_404 = "not_found.html"
+        #     b.requester_pays = true
         #     b.cors.add_rule ["http://example.org", "https://example.org"],
         #                      "*",
         #                      headers: ["X-My-Custom-Header"],
@@ -396,12 +427,12 @@ module Google
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
                        private_key: nil
-          options = { method: method, expires: expires, headers: headers,
-                      content_type: content_type, content_md5: content_md5,
-                      issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key }
           signer = File::Signer.new bucket, path, service
-          signer.signed_url options
+          signer.signed_url method: method, expires: expires, headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer, client_email: client_email,
+                            signing_key: signing_key, private_key: private_key
         end
 
         protected

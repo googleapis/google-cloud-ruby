@@ -47,10 +47,42 @@ module Google
         attr_accessor :gapi
 
         ##
+        # A boolean value or a project ID string for a requester pays
+        # bucket and its files. If this attribute is set to `true`, transit
+        # costs for operations on the bucket will be billed to the current
+        # project for this client. (See {Project#project} for the ID of the
+        # current project.) If this attribute is set to a project ID, and that
+        # project is authorized for the currently authenticated service account,
+        # transit costs will be billed to the that project. The default is
+        # `nil`.
+        #
+        # In general, this attribute should be set when first retrieving the
+        # bucket by providing the `user_project` option to {Project#bucket}.
+        #
+        # The requester pays feature is currently available only to whitelisted
+        # projects.
+        #
+        # See also {#requester_pays=} and {#requester_pays} to enable requester
+        # pays for a bucket.
+        #
+        # @example Setting a non-default project:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket", user_project: true
+        #   files = bucket.files # Billed to current project
+        #   bucket.user_project = "my-other-project"
+        #   files = bucket.files # Billed to "my-other-project"
+        #
+        attr_accessor :user_project
+
+        ##
         # @private Create an empty Bucket object.
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Bucket.new
+          @user_project = nil
         end
 
         ##
@@ -294,12 +326,59 @@ module Google
         end
 
         ##
+        # Indicates that a client accessing the bucket or a file it contains
+        # must assume the transit costs related to the access. The requester
+        # must pass the `user_project` option to {Project#bucket} to indicate
+        # the project to which the access costs should be billed.
+        #
+        # This feature is currently available only to whitelisted projects.
+        #
+        # @return [Boolean, nil] Returns `true` if requester pays is enabled for
+        #   the bucket.
+        #
+        def requester_pays
+          @gapi.billing.requester_pays if @gapi.billing
+        end
+        alias_method :requester_pays?, :requester_pays
+
+        ##
+        # Enables requester pays for the bucket. If enabled, a client accessing
+        # the bucket or a file it contains must assume the transit costs related
+        # to the access. The requester must pass the `user_project` option to
+        # {Project#bucket} to indicate the project to which the access costs
+        # should be billed.
+        #
+        # This feature is currently available only to whitelisted projects.
+        #
+        # @param [Boolean] new_requester_pays When set to `true`, requester pays
+        #   is enabled for the bucket.
+        #
+        # @example Enable requester pays for a bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.requester_pays = true # API call
+        #   # Other projects must now provide `user_project` option when calling
+        #   # Project#bucket to access this bucket.
+        #
+        def requester_pays= new_requester_pays
+          @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
+          @gapi.billing.requester_pays = new_requester_pays
+          patch_gapi! :billing
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
-        # {#website_main=}, and {#website_404=}. In addition, the #cors
-        # configuration accessible in the block is completely mutable and will
-        # be included in the request. (See {Bucket::Cors})
+        # {#website_main=}, {#website_404=}, and {#requester_pays=}.
+        #
+        # In addition, the #cors configuration accessible in the block is
+        # completely mutable and will be included in the request. (See
+        # {Bucket::Cors})
         #
         # @yield [bucket] a block yielding a delegate object for updating the
         #   file
@@ -360,7 +439,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_bucket name
+          service.delete_bucket name, user_project: user_project
           true
         end
 
@@ -414,16 +493,12 @@ module Google
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
                   versions: nil
           ensure_service!
-          options = {
-            prefix:    prefix,
-            delimiter: delimiter,
-            token:     token,
-            max:       max,
-            versions:  versions
-          }
-          gapi = service.list_files name, options
+          gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
+                                          token: token, max: max,
+                                          versions: versions,
+                                          user_project: user_project
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
-                               versions
+                               versions, user_project: user_project
         end
         alias_method :find_files, :files
 
@@ -458,9 +533,10 @@ module Google
         #
         def file path, generation: nil, encryption_key: nil
           ensure_service!
-          options = { generation: generation, key: encryption_key }
-          gapi = service.get_file name, path, options
-          File.from_gapi gapi, service
+          gapi = service.get_file name, path, generation: generation,
+                                              key: encryption_key,
+                                              user_project: user_project
+          File.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -542,7 +618,7 @@ module Google
         #   cost of storage. Values include `:multi_regional`, `:regional`,
         #   `:nearline`, `:coldline`, `:standard`, and `:dra` (Durable Reduced
         #   Availability), as well as the strings returned by
-        #   {Bucket#storage_class}. For more information, see [Storage
+        #   {#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes) and
         #   [Per-Object Storage
         #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
@@ -601,7 +677,8 @@ module Google
                       content_disposition: content_disposition, crc32c: crc32c,
                       content_encoding: content_encoding, metadata: metadata,
                       content_language: content_language, key: encryption_key,
-                      storage_class: storage_class_for(storage_class) }
+                      storage_class: storage_class_for(storage_class),
+                      user_project: user_project }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
@@ -811,12 +888,11 @@ module Google
                         client_email: nil, signing_key: nil,
                         private_key: nil
           ensure_service!
-          options = { issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key,
-                      policy: policy }
 
           signer = File::Signer.from_bucket self, path
-          signer.post_object options
+          signer.post_object issuer: issuer, client_email: client_email,
+                             signing_key: signing_key, private_key: private_key,
+                             policy: policy
         end
 
         ##
@@ -950,7 +1026,7 @@ module Google
         def policy force: nil
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
-          gapi = service.get_bucket_policy name
+          gapi = service.get_bucket_policy name, user_project: user_project
           policy = Policy.from_gapi gapi
           return policy unless block_given?
           yield policy
@@ -991,7 +1067,8 @@ module Google
         #
         def policy= new_policy
           ensure_service!
-          gapi = service.set_bucket_policy name, new_policy.to_gapi
+          gapi = service.set_bucket_policy name, new_policy.to_gapi,
+                                           user_project: user_project
           Policy.from_gapi gapi
         end
 
@@ -1024,7 +1101,8 @@ module Google
         def test_permissions *permissions
           permissions = Array(permissions).flatten
           ensure_service!
-          gapi = service.test_bucket_permissions name, permissions
+          gapi = service.test_bucket_permissions name, permissions,
+                                                 user_project: user_project
           gapi.permissions
         end
 
@@ -1038,10 +1116,11 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, conn
+        def self.from_gapi gapi, service, user_project: nil
           new.tap do |f|
             f.gapi = gapi
-            f.service = conn
+            f.service = service
+            f.user_project = user_project
           end
         end
 
@@ -1061,7 +1140,8 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
-          @gapi = service.patch_bucket name, patch_gapi
+          @gapi = service.patch_bucket name, patch_gapi,
+                                       user_project: user_project
         end
 
         ##

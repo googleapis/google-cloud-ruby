@@ -55,6 +55,38 @@ module Google
         attr_accessor :service
 
         ##
+        # A boolean value or a project ID string for a requester pays
+        # bucket and its files. If this attribute is set to `true`, transit
+        # costs for operations on the file will be billed to the current
+        # project for this client. (See {Project#project} for the ID of the
+        # current project.) If this attribute is set to a project ID, and that
+        # project is authorized for the currently authenticated service account,
+        # transit costs will be billed to the that project. The default is
+        # `nil`.
+        #
+        # In general, this attribute should be set when first retrieving the
+        # owning bucket by providing the `user_project` option to
+        # {Project#bucket}.
+        #
+        # The requester pays feature is currently available only to whitelisted
+        # projects.
+        #
+        # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
+        # enable requester pays for a bucket.
+        #
+        # @example Setting a non-default project:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "other-project-bucket", user_project: true
+        #   file = bucket.file "path/to/file.ext" # Billed to current project
+        #   file.user_project = "my-other-project"
+        #   file.download "file.ext" # Billed to "my-other-project"
+        #
+        attr_accessor :user_project
+
+        ##
         # @private The Google API Client object.
         attr_accessor :gapi
 
@@ -63,6 +95,7 @@ module Google
         def initialize
           @service = nil
           @gapi = Google::Apis::StorageV1::Object.new
+          @user_project = nil
         end
 
         ##
@@ -425,8 +458,7 @@ module Google
             path.set_encoding "ASCII-8BIT"
           end
           file = service.download_file \
-            bucket, name, path,
-            key: encryption_key
+            bucket, name, path, key: encryption_key, user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
@@ -520,7 +552,8 @@ module Google
         def copy dest_bucket_or_path, dest_path = nil, acl: nil,
                  generation: nil, encryption_key: nil
           ensure_service!
-          options = { acl: acl, generation: generation, key: encryption_key }
+          options = { acl: acl, generation: generation, key: encryption_key,
+                      user_project: user_project }
           dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
                                                           dest_path, options
 
@@ -591,7 +624,8 @@ module Google
         def rotate encryption_key: nil, new_encryption_key: nil
           ensure_service!
           options = { source_key: encryption_key,
-                      destination_key: new_encryption_key }
+                      destination_key: new_encryption_key,
+                      user_project: user_project }
           gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           until gapi.done
             sleep 1
@@ -618,7 +652,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_file bucket, name
+          service.delete_file bucket, name, user_project: user_project
           true
         end
 
@@ -746,12 +780,12 @@ module Google
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil
           ensure_service!
-          options = { method: method, expires: expires, headers: headers,
-                      content_type: content_type, content_md5: content_md5,
-                      issuer: issuer, client_email: client_email,
-                      signing_key: signing_key, private_key: private_key }
           signer = File::Signer.from_file self
-          signer.signed_url options
+          signer.signed_url method: method, expires: expires, headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer, client_email: client_email,
+                            signing_key: signing_key, private_key: private_key
         end
 
         ##
@@ -804,7 +838,7 @@ module Google
         # Reloads the file with current data from the Storage service.
         def reload!
           ensure_service!
-          @gapi = service.get_file bucket, name
+          @gapi = service.get_file bucket, name, user_project: user_project
         end
         alias_method :refresh!, :reload!
 
@@ -817,10 +851,11 @@ module Google
 
         ##
         # @private New File from a Google API Client object.
-        def self.from_gapi gapi, service
+        def self.from_gapi gapi, service, user_project: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = service
+            f.user_project = user_project
           end
         end
 
@@ -843,7 +878,8 @@ module Google
           if attributes.include? :storage_class
             @gapi = rewrite_gapi bucket, name, update_gapi
           else
-            @gapi = service.patch_file bucket, name, update_gapi
+            @gapi = service.patch_file \
+              bucket, name, update_gapi, user_project: user_project
           end
         end
 
@@ -857,12 +893,13 @@ module Google
         end
 
         def rewrite_gapi bucket, name, update_gapi
-          resp = service.rewrite_file bucket, name, bucket, name, update_gapi
+          resp = service.rewrite_file \
+            bucket, name, bucket, name, update_gapi, user_project: user_project
           until resp.done
             sleep 1
-            rewrite_options = { token: resp.rewrite_token }
-            resp = service.rewrite_file bucket, name, bucket, name,
-                                        update_gapi, rewrite_options
+            resp = service.rewrite_file \
+              bucket, name, bucket, name, update_gapi,
+              token: resp.rewrite_token, user_project: user_project
           end
           resp.resource
         end

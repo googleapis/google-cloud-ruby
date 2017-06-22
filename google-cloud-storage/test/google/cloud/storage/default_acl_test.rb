@@ -25,14 +25,31 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
 
   it "retrieves the default ACL" do
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
-      [bucket_name]
+      [bucket_name, user_project: nil]
 
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
+    bucket.name.must_equal bucket_name
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.readers.wont_be :empty?
+
+    mock.verify
+  end
+
+  it "retrieves the default ACL with user_project set to true" do
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name, user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.name.must_equal bucket_name
     bucket.default_acl.owners.wont_be  :empty?
     bucket.default_acl.readers.wont_be :empty?
@@ -54,13 +71,13 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
       }
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
-      [bucket_name]
+      [bucket_name, user_project: nil]
     mock.expect :insert_default_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")]
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER"), user_project: nil]
 
     storage.service.mocked_service = mock
 
@@ -77,20 +94,83 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     mock.verify
   end
 
+  it "adds to the default ACL with user_project set to true" do
+    reader_entity = "user-user@example.net"
+    reader_acl = {
+       "kind" => "storage#bucketAccessControl",
+       "id" => "#{bucket_name}-UUID/#{reader_entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{reader_entity}",
+       "bucket" => "#{bucket_name}-UUID",
+       "entity" => reader_entity,
+       "email" => "user@example.net",
+       "role" => "READER",
+       "etag" => "CAE="
+      }
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name, user_project: "test"]
+    mock.expect :insert_default_object_access_control,
+      Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER"), user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
+    bucket.name.must_equal bucket_name
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.readers.wont_be :empty?
+
+    bucket.default_acl.add_reader reader_entity
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.readers.wont_be :empty?
+    bucket.default_acl.readers.must_include reader_entity
+
+    mock.verify
+  end
+
   it "removes from the default ACL" do
     existing_reader_entity = "project-viewers-1234567890"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name]
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
-      [bucket_name]
+      [bucket_name, user_project: nil]
     mock.expect :delete_default_object_access_control, nil,
-      [bucket_name, existing_reader_entity]
+      [bucket_name, existing_reader_entity, user_project: nil]
 
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
+    bucket.name.must_equal bucket_name
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.readers.wont_be :empty?
+
+    reader_entity = bucket.default_acl.readers.first
+    bucket.default_acl.delete reader_entity
+    bucket.default_acl.owners.wont_be  :empty?
+    bucket.default_acl.readers.must_be :empty?
+
+    mock.verify
+  end
+
+  it "removes from the default ACL with user_project set to true" do
+    existing_reader_entity = "project-viewers-1234567890"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :list_default_object_access_controls,
+      Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
+      [bucket_name, user_project: "test"]
+    mock.expect :delete_default_object_access_control, nil,
+      [bucket_name, existing_reader_entity, user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.name.must_equal bucket_name
     bucket.default_acl.owners.wont_be  :empty?
     bucket.default_acl.readers.wont_be :empty?
@@ -287,7 +367,8 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
       Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
-      [bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: []), predefined_acl: nil, predefined_default_object_acl: acl_role]
+      [bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: []),
+       predefined_acl: nil, predefined_default_object_acl: acl_role, user_project: nil]
 
     storage.service.mocked_service = mock
 

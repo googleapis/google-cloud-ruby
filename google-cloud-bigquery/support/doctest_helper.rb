@@ -197,8 +197,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigquery::Dataset#load@Pass a google-cloud-storage `File` instance:" do
     mock_storage do |mock|
-      mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket"]
-      mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket", Hash]
+      mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", Hash]
     end
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
@@ -451,8 +451,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigquery::Table#load@Pass a google-cloud-storage `File` instance:" do
     mock_storage do |mock|
-      mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket"]
-      mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", {:generation=>nil, :options=>{}}]
+      mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket", Hash]
+      mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", Hash]
     end
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]

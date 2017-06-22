@@ -71,8 +71,8 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            options = { prefix: @prefix, token: @token, max: @max }
-            gapi = @service.list_buckets options
+            gapi = @service.list_buckets prefix: @prefix, token: @token,
+                                         max: @max
             Bucket::List.from_gapi gapi, @service, @prefix, @max
           end
 
