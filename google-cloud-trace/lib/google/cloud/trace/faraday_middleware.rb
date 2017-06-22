@@ -60,7 +60,7 @@ module Google
           label_keys = Google::Cloud::Trace::LabelKey
 
           response = env.response
-          response_body = env.body || ""
+          response_body = response.body || ""
           response_status = response.status
           response_url = response.headers[:location]
 

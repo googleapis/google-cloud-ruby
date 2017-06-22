@@ -72,8 +72,8 @@ describe Google::Cloud::Trace::FaradayMiddleware do
 
   describe "#add_response_labels" do
     it "sets all the labels" do
-      env = OpenStruct.new response: OpenStruct.new(status: 42, headers: {location: "new-url"}),
-                           body: "body"
+      env = OpenStruct.new response: OpenStruct.new(status: 42, body: "body",
+                                                    headers: {location: "new-url"})
       span = OpenStruct.new labels: {}
 
       middleware.send :add_response_labels, span, env
