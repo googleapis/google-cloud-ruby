@@ -28,7 +28,7 @@ module Google
 
             response = @app.call env
 
-            add_response_labels span, response if span
+            add_response_labels span, env if span
 
             response
           end
@@ -43,17 +43,34 @@ module Google
           label_keys = Google::Cloud::Trace::LabelKey
 
           set_label labels, label_keys::HTTP_METHOD, env.method
-          set_label labels, label_keys::HTTP_USER_AGENT,
-                    env.request_headers[:user_agent]
           set_label labels, label_keys::HTTP_URL, env.url.to_s
+
+          # Only sets request size if request is not sent yet.
+          unless env.status
+            request_body = env.body || ""
+            set_label labels, label_keys::RPC_REQUEST_SIZE,
+                      request_body.bytesize.to_s
+          end
         end
 
         ##
         # @private Set Trace span labels from response
-        def add_response_labels span, response
-          set_label span.labels,
-                    Google::Cloud::Trace::LabelKey::HTTP_STATUS_CODE,
-                    response.status.to_s
+        def add_response_labels span, env
+          labels = span.labels
+          label_keys = Google::Cloud::Trace::LabelKey
+
+          response = env.response
+          response_body = env.body || ""
+          response_status = response.status
+          response_url = response.headers[:location]
+
+          set_label labels, label_keys::RPC_RESPONSE_SIZE,
+                    response_body.bytesize.to_s
+          set_label labels, label_keys::HTTP_STATUS_CODE, response_status.to_s
+
+          if 300 <= response_status && response_status < 400 && response_url
+            set_label labels, label_keys::HTTP_REDIRECTED_URL, response_url
+          end
         end
 
         ##
