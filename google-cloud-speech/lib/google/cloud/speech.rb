@@ -222,12 +222,16 @@ module Google
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
                    client_config: nil
         project ||= Google::Cloud::Speech::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
         if keyfile.nil?
           credentials = Google::Cloud::Speech::Credentials.default scope: scope
         else
           credentials = Google::Cloud::Speech::Credentials.new(
             keyfile, scope: scope)
         end
+
         Google::Cloud::Speech::Project.new(
           Google::Cloud::Speech::Service.new(
             project, credentials, timeout: timeout,

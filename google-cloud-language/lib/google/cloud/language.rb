@@ -246,6 +246,9 @@ module Google
       def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
                    client_config: nil
         project ||= Google::Cloud::Language::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
         if keyfile.nil?
           credentials = Google::Cloud::Language::Credentials.default(
             scope: scope)
@@ -253,6 +256,7 @@ module Google
           credentials = Google::Cloud::Language::Credentials.new(
             keyfile, scope: scope)
         end
+
         Google::Cloud::Language::Project.new(
           Google::Cloud::Language::Service.new(
             project, credentials, timeout: timeout,
