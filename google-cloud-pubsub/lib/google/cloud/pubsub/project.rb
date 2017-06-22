@@ -19,6 +19,7 @@ require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
 require "google/cloud/pubsub/snapshot"
+require "google/cloud/pubsub/publisher"
 
 module Google
   module Cloud
@@ -217,7 +218,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = pubsub.publish "my-topic", file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -249,6 +251,47 @@ module Google
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
           publish_batch_messages topic_name, publisher
+        end
+
+        ##
+        # Publishes a message to the given topic asynchonously.
+        #
+        # @param [String] topic_name Name of a topic.
+        # @param [String, File] data The message data.
+        # @param [Hash] attributes Optional attributes for the message.
+        # @yield [result] the callback for when the message has been published
+        # @yieldparam [PublishResult] result the result of the asynchonous
+        #   publish
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   pubsub.publish_async "my-topic", "task completed" do |result|
+        #     puts result.msg_id if result.succeeded?
+        #   end
+        #
+        # @example A message can be published using a File object:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   file = File.open "message.txt", mode: "rb"
+        #   pubsub.publish_async "my-topic", file
+        #
+        # @example Additionally, a message can be published with attributes:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   pubsub.publish_async "my-topic",
+        #                        "task completed",
+        #                        foo: :bar, this: :that
+        #
+        def publish_async topic_name, data = nil, attributes = {}, &block
+          ensure_service!
+          service.publish_async topic_name, data, attributes, &block
         end
 
         ##

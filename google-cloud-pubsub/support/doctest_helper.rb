@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 class File
-  def self.open f
+  def self.open *args
     "task completed"
   end
 end
@@ -43,8 +43,9 @@ def mock_pubsub
 
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
+    pubsub.service.mocked_async_publisher = Minitest::Mock.new
     if block_given?
-      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber
+      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber, pubsub.service.mocked_async_publisher
     end
 
     pubsub
@@ -184,6 +185,19 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Project#publish_async" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_async_publisher|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_async_publisher.expect :publish, nil, ["my-topic", "task completed", {}]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Project#publish_async@Additionally, a message can be published with attributes:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_async_publisher|
+      mock_async_publisher.expect :publish, nil, ["my-topic", "task completed", {:foo=>:bar, :this=>:that}]
     end
   end
 
@@ -413,6 +427,20 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Topic#publish_async" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_async_publisher|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_async_publisher.expect :publish, nil, ["projects/my-project/topics/my-topic", "task completed", {}]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Topic#publish_async@Additionally, a message can be published with attributes:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_async_publisher|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_async_publisher.expect :publish, nil, ["projects/my-project/topics/my-topic", "task completed", {:foo=>:bar, :this=>:that}]
     end
   end
 

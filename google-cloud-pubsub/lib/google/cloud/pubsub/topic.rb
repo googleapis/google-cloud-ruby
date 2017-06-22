@@ -258,7 +258,8 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = topic.publish file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -288,6 +289,48 @@ module Google
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
           publish_batch_messages publisher
+        end
+
+        ##
+        # Publishes a message asynchonously to the topic.
+        #
+        # @param [String, File] data The message data.
+        # @param [Hash] attributes Optional attributes for the message.
+        # @yield [result] the callback for when the message has been published
+        # @yieldparam [PublishResult] result the result of the asynchonous
+        #   publish
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.publish_async "task completed" do |result|
+        #     puts result.msg_id if result.succeeded?
+        #   end
+        #
+        # @example A message can be published using a File object:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   file = File.open "message.txt", mode: "rb"
+        #   topic.publish_async file
+        #
+        # @example Additionally, a message can be published with attributes:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.publish_async "task completed",
+        #                       foo: :bar, this: :that
+        #
+        def publish_async data = nil, attributes = {}, &block
+          ensure_service!
+          service.publish_async name, data, attributes, &block
         end
 
         ##
