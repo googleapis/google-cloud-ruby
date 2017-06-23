@@ -70,6 +70,9 @@ module Google
         GAE_MEMCACHE_SIZE = "g.co/gae/memcache/size"
         GAE_REQUEST_LOG_ID = "g.co/gae/request_log_id"
 
+        RPC_REQUEST_SIZE = "/rpc/request/size"
+        RPC_RESPONSE_SIZE = "/rpc/response/size"
+
         ##
         # Set the stack trace label in the given labels hash. The current call
         # stack is formatted so the Stackdriver UI will display it.

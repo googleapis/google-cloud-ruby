@@ -44,8 +44,7 @@ describe Google::Cloud::Trace::FaradayMiddleware do
 
   describe "#add_request_labels" do
     it "sets all the labels" do
-      env = OpenStruct.new request_headers: {user_agent: "test-agent"},
-                           url: Object.new
+      env = OpenStruct.new url: Object.new, body: "body"
       env.define_singleton_method(:method) { "test-method" }
       env.url.define_singleton_method(:to_s) { "full-url" }
 
@@ -54,19 +53,33 @@ describe Google::Cloud::Trace::FaradayMiddleware do
       middleware.send :add_request_labels, span, env
 
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_METHOD].must_equal "test-method"
-      span.labels[Google::Cloud::Trace::LabelKey::HTTP_USER_AGENT].must_equal "test-agent"
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_URL].must_equal "full-url"
+      span.labels[Google::Cloud::Trace::LabelKey::RPC_REQUEST_SIZE].must_equal "body".bytesize.to_s
+    end
+
+    it "doesn't set request size if request is sent already" do
+      env = OpenStruct.new url: Object.new, body: "body", status: "200"
+      env.define_singleton_method(:method) { "test-method" }
+      env.url.define_singleton_method(:to_s) { "full-url" }
+
+      span = OpenStruct.new labels: {}
+
+      middleware.send :add_request_labels, span, env
+
+      span.labels[Google::Cloud::Trace::LabelKey::RPC_REQUEST_SIZE].must_be_nil
     end
   end
 
   describe "#add_response_labels" do
     it "sets all the labels" do
-      response = OpenStruct.new status: 42
+      env = OpenStruct.new response: OpenStruct.new(status: 42, body: "body",
+                                                    headers: {location: "new-url"})
       span = OpenStruct.new labels: {}
 
-      middleware.send :add_response_labels, span, response
+      middleware.send :add_response_labels, span, env
 
       span.labels[Google::Cloud::Trace::LabelKey::HTTP_STATUS_CODE].must_equal "42"
+      span.labels[Google::Cloud::Trace::LabelKey::RPC_RESPONSE_SIZE].must_equal "body".bytesize.to_s
     end
   end
 end
