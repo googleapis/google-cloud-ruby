@@ -740,9 +740,14 @@ module Google
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
               return Convert.timestamp_to_time commit_resp.commit_timestamp
-            rescue Google::Cloud::AbortedError => err
+            rescue GRPC::Aborted, Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
-              raise err if current_time - start_time > deadline
+              if current_time - start_time > deadline
+                if err.is_a? GRPC::BadStatus
+                  err = Google::Cloud::Error.from_error err
+                end
+                raise err
+              end
               # Sleep the amount from RetryDelay, or incremental backoff
               sleep(delay_from_aborted(err) || backoff *= 1.3)
               # Create new transaction on the session and retry the block
@@ -1033,7 +1038,8 @@ module Google
         end
 
         ##
-        # Retrieves the delay value from Google::Cloud::AbortedError
+        # Retrieves the delay value from Google::Cloud::AbortedError or
+        # GRPC::Aborted
         def delay_from_aborted err
           return nil if err.nil?
           if err.respond_to?(:metadata) && err.metadata["retryDelay"]
