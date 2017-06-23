@@ -28,6 +28,9 @@ def SecureRandom.int64
   random_bytes(8).unpack("q")[0]
 end
 
+# Disable exit handlers because it messes with minitest/autorun
+Concurrent.disable_at_exit_handlers!
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 
