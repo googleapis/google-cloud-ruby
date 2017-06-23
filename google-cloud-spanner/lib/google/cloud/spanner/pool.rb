@@ -33,7 +33,7 @@ module Google
         attr_accessor :all_sessions, :session_queue, :transaction_queue
 
         def initialize client, min: 10, max: 100, keepalive: 1800,
-                       write_ratio: 0.3, fail: true
+                       write_ratio: 0.3, fail: true, threads: nil
           @client = client
           @min = min
           @max = max
@@ -42,6 +42,7 @@ module Google
           @write_ratio = 0 if write_ratio < 0
           @write_ratio = 1 if write_ratio > 1
           @fail = fail
+          @threads = threads || [2, Concurrent.processor_count * 2].max
 
           @mutex = Mutex.new
           @resource = ConditionVariable.new
@@ -215,9 +216,7 @@ module Google
 
         def init
           # init the thread pool
-          @thread_pool = Concurrent::FixedThreadPool.new(
-            [2, Concurrent.processor_count*2].max
-          )
+          @thread_pool = Concurrent::FixedThreadPool.new @threads
           # init the queues
           @new_sessions_in_process = @min.to_i
           @all_sessions = []
