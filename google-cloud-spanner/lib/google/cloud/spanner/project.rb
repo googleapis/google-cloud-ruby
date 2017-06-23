@@ -432,6 +432,8 @@ module Google
         #     {SessionLimitError} when the client has allocated the `max` number
         #     of sessions. When `false` the client blocks until a session
         #     becomes available. The default is `true`.
+        #   * `:threads` (Integer) The number of threads in the thread pool. The
+        #     default is twice the number of available CPUs.
         #
         # @return [Client] The newly created client.
         #
@@ -471,7 +473,8 @@ module Google
 
         def valid_session_pool_options opts = {}
           { min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
-            write_ratio: opts[:write_ratio], fail: opts[:fail]
+            write_ratio: opts[:write_ratio], fail: opts[:fail],
+            threads: opts[:threads]
           }.delete_if { |_k, v| v.nil? }
         end
       end
