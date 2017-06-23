@@ -456,9 +456,9 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
-  # Topic::Publisher
+  # Topic::BatchPublisher
 
-  doctest.before "Google::Cloud::Pubsub::Topic::Publisher" do
+  doctest.before "Google::Cloud::Pubsub::Topic::BatchPublisher" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       messages = [
