@@ -18,7 +18,8 @@ module Google
     module Pubsub
       class Topic
         ##
-        # Topic Publisher object used to publish multiple messages at once.
+        # Topic Batch Publisher object used to publish multiple messages at
+        # once.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -31,7 +32,7 @@ module Google
         #     t.publish "task 2 completed", foo: :baz
         #     t.publish "task 3 completed", foo: :bif
         #   end
-        class Publisher
+        class BatchPublisher
           ##
           # @private The messages to publish
           attr_reader :messages

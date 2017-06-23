@@ -14,7 +14,7 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/pubsub/topic/publisher"
+require "google/cloud/pubsub/topic/batch_publisher"
 require "google/cloud/pubsub/topic/list"
 require "google/cloud/pubsub/subscription"
 require "google/cloud/pubsub/policy"
@@ -236,9 +236,10 @@ module Google
         #
         # @param [String, File] data The message data.
         # @param [Hash] attributes Optional attributes for the message.
-        # @yield [publisher] a block for publishing multiple messages in one
+        # @yield [batch] a block for publishing multiple messages in one
         #   request
-        # @yieldparam [Topic::Publisher] publisher the topic publisher object
+        # @yieldparam [Topic::BatchPublisher] batch the topic batch publisher
+        #   object
         #
         # @return [Message, Array<Message>] Returns the published message when
         #   called without a block, or an array of messages when called with a
@@ -284,10 +285,10 @@ module Google
         #
         def publish data = nil, attributes = {}
           ensure_service!
-          publisher = Publisher.new data, attributes
-          yield publisher if block_given?
-          return nil if publisher.messages.count.zero?
-          publish_batch_messages publisher
+          batch = BatchPublisher.new data, attributes
+          yield batch if block_given?
+          return nil if batch.messages.count.zero?
+          publish_batch_messages batch
         end
 
         ##
