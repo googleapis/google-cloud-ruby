@@ -6,6 +6,11 @@
       "contents": "configuration.md"
     },
     {
+      "title": "Debugger Instrumentation",
+      "id": "debugger_instrumentation",
+      "contents": "google/cloud/debugger/instrumentation.md"
+    },
+    {
       "title": "Error Reporting Instrumentation",
       "id": "error_reporting_instrumentation",
       "contents": "google/cloud/errorreporting/instrumentation.md"
