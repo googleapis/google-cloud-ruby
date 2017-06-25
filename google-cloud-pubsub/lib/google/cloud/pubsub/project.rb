@@ -119,12 +119,12 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
-        def topic topic_name, project: nil, skip_lookup: nil
+        def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
           return Topic.new_lazy(topic_name, service, options) if skip_lookup
           grpc = service.get_topic topic_name
-          Topic.from_grpc grpc, service
+          Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -218,7 +218,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = pubsub.publish "my-topic", file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"

@@ -14,6 +14,7 @@
 
 
 require "google/cloud/errors"
+require "google/cloud/pubsub/topic/async_publisher"
 require "google/cloud/pubsub/topic/batch_publisher"
 require "google/cloud/pubsub/topic/list"
 require "google/cloud/pubsub/subscription"
@@ -51,6 +52,11 @@ module Google
           @grpc = Google::Pubsub::V1::Topic.new
           @name = nil
           @exists = nil
+          @async_opts = {}
+        end
+
+        def async_publisher
+          @async_publisher
         end
 
         ##
@@ -259,7 +265,8 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = topic.publish file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -289,6 +296,50 @@ module Google
           yield batch if block_given?
           return nil if batch.messages.count.zero?
           publish_batch_messages batch
+        end
+
+        ##
+        # Publishes a message asynchonously to the topic.
+        #
+        # @param [String, File] data The message data.
+        # @param [Hash] attributes Optional attributes for the message.
+        # @yield [result] the callback for when the message has been published
+        # @yieldparam [PublishResult] result the result of the asynchonous
+        #   publish
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.publish_async "task completed" do |result|
+        #     puts result.msg_id if result.succeeded?
+        #   end
+        #
+        # @example A message can be published using a File object:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   file = File.open "message.txt", mode: "rb"
+        #   topic.publish_async file
+        #
+        # @example Additionally, a message can be published with attributes:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.publish_async "task completed",
+        #                       foo: :bar, this: :that
+        #
+        def publish_async data = nil, attributes = {}, &block
+          ensure_service!
+
+          @async_publisher ||= AsyncPublisher.new(name, service, @async_opts)
+          @async_publisher.publish data, attributes, &block
         end
 
         ##
@@ -448,10 +499,11 @@ module Google
 
         ##
         # @private New Topic from a Google::Pubsub::V1::Topic object.
-        def self.from_grpc grpc, service
-          new.tap do |f|
-            f.grpc = grpc
-            f.service = service
+        def self.from_grpc grpc, service, async: nil
+          new.tap do |t|
+            t.grpc = grpc
+            t.service = service
+            t.instance_variable_set :@async_opts, async if async
           end
         end
 

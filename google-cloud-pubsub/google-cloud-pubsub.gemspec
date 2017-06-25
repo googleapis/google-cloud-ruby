@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-core", "~> 1.0"
   gem.add_dependency "google-gax", "~> 0.8.0"
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.8"
+  gem.add_dependency "concurrent-ruby", "~> 1.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
