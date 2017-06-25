@@ -145,11 +145,6 @@ module Google
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
         def publish topic, messages
-          messages = messages.map do |data, attributes|
-            Google::Pubsub::V1::PubsubMessage.new(
-              data: data, attributes: attributes)
-          end
-
           execute do
             publisher.publish topic_path(topic), messages,
                               options: default_options
