@@ -70,8 +70,10 @@ module Google
         GAE_MEMCACHE_SIZE = "g.co/gae/memcache/size"
         GAE_REQUEST_LOG_ID = "g.co/gae/request_log_id"
 
+        RPC_HOST = "/rpc/host"
         RPC_REQUEST_SIZE = "/rpc/request/size"
         RPC_RESPONSE_SIZE = "/rpc/response/size"
+        RPC_STATUS_CODE = "/rpc/status_code"
 
         ##
         # Set the stack trace label in the given labels hash. The current call
