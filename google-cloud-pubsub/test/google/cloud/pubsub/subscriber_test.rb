@@ -18,14 +18,16 @@ describe Google::Cloud::Pubsub::Subscriber, :mock_pubsub do
   let(:callback) { Proc.new { |msg| puts msg.inspect } }
   let(:subscription_name) { "subscription-name-goes-here" }
   let(:deadline) { 120 }
+  let(:inventory) { 250 }
   let(:threads) { 4 }
-  let(:subscriber) { Google::Cloud::Pubsub::Subscriber.new callback, subscription_name, deadline, threads, pubsub.service }
+  let(:subscriber) { Google::Cloud::Pubsub::Subscriber.new callback, subscription_name, deadline, inventory, threads, pubsub.service }
 
   it "knows itself" do
     subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
     subscriber.callback.must_equal callback
     subscriber.subscription_name.must_equal subscription_name
     subscriber.deadline.must_equal deadline
+    subscriber.instance_variable_get(:@inventory).limit.must_equal inventory
     subscriber.threads.must_equal threads
   end
 end

@@ -309,11 +309,11 @@ module Google
         #   subscriber.start
         #   subscriber.wait!
         #
-        def listen deadline: nil, threads: nil, &block
+        def listen deadline: nil, inventory: nil, threads: nil, &block
           ensure_service!
           deadline ||= self.deadline
 
-          Subscriber.new block, name, deadline, threads, service
+          Subscriber.new block, name, deadline, inventory, threads, service
         end
 
         ##

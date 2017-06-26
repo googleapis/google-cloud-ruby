@@ -34,16 +34,19 @@ module Google
 
         ##
         # Subscriber attributes.
-        attr_reader :callback, :subscription_name, :deadline, :threads
+        attr_reader :callback, :subscription_name, :deadline, :inventory,
+                    :threads
 
         ##
         # @private Create an empty {Subscriber} object.
-        def initialize callback, subscription_name, deadline, threads, service
+        def initialize callback, subscription_name, deadline, inventory,
+                       threads, service
           @request_queue = nil
           @output_enum = nil
           @callback = callback
           @subscription_name = subscription_name
-          @deadline = deadline
+          @deadline = deadline || 60
+          @inventory = Inventory.new self, (inventory || 100)
           @threads = threads || [2, Concurrent.processor_count * 2].max
           @service = service
 
@@ -66,20 +69,28 @@ module Google
           synchronize do
             return if @request_queue.nil?
             @request_queue.push self
+            @inventory.stop
+            @stopped = true
           end
 
           true
         end
 
+        def stopped?
+          synchronize { @stopped }
+        end
+
+        def paused?
+          synchronize { @paused }
+        end
+
         def wait!
           synchronize do
-            return if @background_thread.nil?
-            @background_thread.join
-          end
+            @background_thread.join if @background_thread
 
-          return true if @thread_pool.shutdown?
-          @thread_pool.shutdown
-          @thread_pool.wait_for_termination
+            @thread_pool.shutdown
+            @thread_pool.wait_for_termination
+          end
 
           true
         end
@@ -95,6 +106,8 @@ module Google
 
           synchronize do
             @request_queue.push ack_request
+            @inventory.remove ack_ids
+            unpause_streaming!
           end
 
           true
@@ -113,14 +126,47 @@ module Google
 
           synchronize do
             @request_queue.push deadline_ack_request
+            @inventory.remove deadline_ack_ids
+            unpause_streaming!
           end
 
           true
         end
 
+        def inventory
+          synchronize { @inventory.count }
+        end
+
+        ##
+        # @private
+        def delay_inventory!
+          synchronize do
+            return true if @inventory.empty?
+
+            inv_mod_ack_deadline = @inventory.ack_ids.map { deadline }
+            inv_mod_ack_request = Google::Pubsub::V1::StreamingPullRequest.new
+            inv_mod_ack_request.modify_deadline_ack_ids += @inventory.ack_ids
+            inv_mod_ack_request.modify_deadline_seconds += inv_mod_ack_deadline
+
+            @request_queue.push inv_mod_ack_request
+          end
+
+          true
+        end
+
+        ##
+        # @private
+        def clear_inventory!
+          synchronize do
+            @inventory.clear
+            unpause_streaming!
+          end
+        end
+
         # @private
         def to_s
-          format "(subscription: %s)", subscription_name
+          format "(subscription: %s, inventory: %i)", subscription_name,
+                 inventory
         end
 
         # @private
@@ -130,29 +176,45 @@ module Google
 
         protected
 
+        # rubocop:disable all
+
         def background_run
-          @output_enum.each do |response|
-            response.received_messages.each do |rec_msg_grpc|
-              perform_callback_async @callback, rec_msg_grpc
+          until synchronize { @stopped }
+            Thread.current.kill if synchronize { @paused }
+
+            begin
+              # Cannot syncronize the enumerator, causes deadlock
+              response = @output_enum.next
+              response.received_messages.each do |rec_msg_grpc|
+                rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
+                synchronize do
+                  @inventory.add rec_msg.ack_id
+
+                  perform_callback_async rec_msg
+                end
+              end
+              synchronize { pause_streaming! }
+            rescue StopIteration
+              break
             end
           end
         rescue GRPC::DeadlineExceeded
           # The GRPC client will raise when stream is opened longer than the
           # timeout value it is configured for. When this happends, restart the
           # stream stealthly.
-          synchronize do
-            start_streaming!
-          end
         rescue => e
-          @request_queue.unshift Google::Cloud::Error.from_error(e)
-          Thread.current.kill
+          synchronize do
+            @request_queue.unshift Google::Cloud::Error.from_error(e)
+          end
         ensure
           Thread.pass
         end
 
-        def perform_callback_async callback, rec_msg_grpc
+        # rubocop:enable all
+
+        def perform_callback_async rec_msg
           Concurrent::Future.new(executor: @thread_pool) do
-            callback.call ReceivedMessage.from_grpc(rec_msg_grpc, self)
+            @callback.call rec_msg
           end.execute
         end
 
@@ -160,7 +222,28 @@ module Google
           @request_queue.unshift initial_input_request
           @output_enum = service.streaming_pull @request_queue.each_item
 
+          @background_thread.kill if @background_thread
           @background_thread = Thread.new { background_run }
+          @stopped = nil
+        end
+
+        def pause_streaming!
+          return if @paused
+
+          @paused = true if inventory_full?
+        end
+
+        def unpause_streaming!
+          return if @paused.nil? || inventory_full?
+
+          @paused = nil
+          # Need to recreate the enums otherwise we get the error:
+          # "fiber called across threads"
+          start_streaming!
+        end
+
+        def inventory_full?
+          @inventory.full?
         end
 
         def initial_input_request
@@ -180,6 +263,92 @@ module Google
         end
 
         # @private
+        class Inventory
+          include MonitorMixin
+
+          attr_reader :subscriber, :limit
+
+          def initialize subscriber, limit
+            @subscriber = subscriber
+            @limit = limit
+            @_ack_ids = []
+            @wait_cond = new_cond
+
+            super()
+          end
+
+          def ack_ids
+            @_ack_ids
+          end
+
+          def add *ack_ids
+            ack_ids = Array(ack_ids).flatten
+            synchronize do
+              @_ack_ids += ack_ids
+              @start_time ||= Time.now
+              @background_thread ||= Thread.new { background_run }
+            end
+          end
+
+          def remove *ack_ids
+            ack_ids = Array(ack_ids).flatten
+            synchronize do
+              @_ack_ids -= ack_ids
+              clear if @_ack_ids.empty?
+            end
+          end
+
+          def clear
+            synchronize do
+              @_ack_ids = []
+              if @background_thread
+                @background_thread.kill
+                @background_thread = nil
+              end
+              @start_time = nil
+            end
+          end
+
+          def count
+            synchronize do
+              @_ack_ids.count
+            end
+          end
+
+          def empty?
+            synchronize do
+              @_ack_ids.empty?
+            end
+          end
+
+          def stop
+            synchronize do
+              @stopped = true
+            end
+          end
+
+          def full?
+            count >= limit
+          end
+
+          protected
+
+          def background_run
+            synchronize do
+              until @stopped
+                @wait_cond.wait calc_delay
+
+                @subscriber.delay_inventory!
+              end
+            end
+          end
+
+          def calc_delay
+            (@subscriber.deadline - 3) * rand(0.8..0.9)
+          end
+        end
+
+        # @private
         class EnumeratorQueue
           extend Forwardable
           def_delegators :@q, :push
@@ -193,7 +362,10 @@ module Google
           def unshift request
             new_queue = Queue.new
             new_queue.push request
-            new_queue.push @q.pop while @q.size > 0
+            while @q.size > 0
+              r = @q.pop
+              new_queue.push r unless r.equal? @sentinel
+            end
             @q = new_queue
           end
 
