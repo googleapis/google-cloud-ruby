@@ -119,12 +119,12 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
-        def topic topic_name, project: nil, skip_lookup: nil
+        def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
           return Topic.new_lazy(topic_name, service, options) if skip_lookup
           grpc = service.get_topic topic_name
-          Topic.from_grpc grpc, service
+          Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -197,9 +197,10 @@ module Google
         # @param [String] topic_name Name of a topic.
         # @param [String, File] data The message data.
         # @param [Hash] attributes Optional attributes for the message.
-        # @yield [publisher] a block for publishing multiple messages in one
+        # @yield [batch] a block for publishing multiple messages in one
         #   request
-        # @yieldparam [Topic::Publisher] publisher the topic publisher object
+        # @yieldparam [Topic::BatchPublisher] batch the topic batch publisher
+        #   object
         #
         # @return [Message, Array<Message>] Returns the published message when
         #   called without a block, or an array of messages when called with a
@@ -217,7 +218,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = pubsub.publish "my-topic", file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -245,7 +247,7 @@ module Google
             data = nil
           end
           ensure_service!
-          publisher = Topic::Publisher.new data, attributes
+          publisher = Topic::BatchPublisher.new data, attributes
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
           publish_batch_messages topic_name, publisher

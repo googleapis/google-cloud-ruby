@@ -18,7 +18,8 @@ module Google
     module Pubsub
       class Topic
         ##
-        # Topic Publisher object used to publish multiple messages at once.
+        # Topic Batch Publisher object used to publish multiple messages at
+        # once.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -31,7 +32,7 @@ module Google
         #     t.publish "task 2 completed", foo: :baz
         #     t.publish "task 3 completed", foo: :bif
         #   end
-        class Publisher
+        class BatchPublisher
           ##
           # @private The messages to publish
           attr_reader :messages
@@ -51,25 +52,15 @@ module Google
           # All messages added will be published at once.
           # See {Google::Cloud::Pubsub::Topic#publish}
           def publish data, attributes = {}
-            # Convert IO-ish objects to strings
-            if data.respond_to?(:read) && data.respond_to?(:rewind)
-              data.rewind
-              data = data.read
-            end
-            # Convert data to encoded byte array to match the protobuf defn
-            data = String(data).force_encoding("ASCII-8BIT")
-            # Convert attributes to strings to match the protobuf definition
-            attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
-            @messages << [data, attributes]
+            @messages << create_pubsub_message(data, attributes)
           end
 
           ##
           # @private Create Message objects with message ids.
           def to_gcloud_messages message_ids
-            msgs = @messages.zip(Array(message_ids)).map do |arr, id|
-              Message.from_grpc(
-                Google::Pubsub::V1::PubsubMessage.new(
-                  data: arr[0], attributes: arr[1], message_id: id))
+            msgs = @messages.zip(Array(message_ids)).map do |msg, id|
+              msg.message_id = id
+              Message.from_grpc msg
             end
             # Return just one Message if a single publish,
             # otherwise return the array of Messages.
@@ -78,6 +69,29 @@ module Google
             else
               msgs
             end
+          end
+
+          protected
+
+          def create_pubsub_message data, attributes
+            attributes ||= {}
+            if data.is_a?(::Hash) && attributes.empty?
+              attributes = data
+              data = nil
+            end
+            # Convert IO-ish objects to strings
+            if data.respond_to?(:read) && data.respond_to?(:rewind)
+              data.rewind
+              data = data.read
+            end
+            # Convert data to encoded byte array to match the protobuf defn
+            data = String(data).force_encoding("ASCII-8BIT")
+
+            # Convert attributes to strings to match the protobuf definition
+            attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+
+            Google::Pubsub::V1::PubsubMessage.new data: data,
+                                                  attributes: attributes
           end
         end
       end
