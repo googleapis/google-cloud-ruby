@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 / 2017-06-27
+
+* Upgrade dependency on Google API Client.
+* Update gem spec homepage links.
+* Update tests.
+
 ### 0.24.0 / 2017-04-05
 
 * Upgrade dependency on Google API Client
