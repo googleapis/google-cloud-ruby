@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.0 / 2017-06-27
+
+* Upgrade dependency on Google API Client
+
 ### 0.25.0 / 2017-06-01
 
 * Fix apiary client argument case.
