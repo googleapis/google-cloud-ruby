@@ -1002,8 +1002,7 @@ module Google
 
           schema = nil
           if block_given?
-            schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(fields: [])
-            schema = Schema.from_gapi schema_gapi
+            schema = Schema.from_gapi
             yield schema
             schema = schema.to_gapi
           end

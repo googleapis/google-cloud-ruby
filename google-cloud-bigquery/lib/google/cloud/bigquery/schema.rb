@@ -260,7 +260,10 @@ module Google
         end
 
         # @private
-        def self.from_gapi gapi
+        # @param [Google::Apis::BigqueryV2::TableSchema, nil] gapi Returns an
+        #   empty schema if nil or no arg is provided. The default is nil.
+        #
+        def self.from_gapi gapi = nil
           gapi ||= Google::Apis::BigqueryV2::TableSchema.new fields: []
           gapi.fields ||= []
           new.tap do |s|

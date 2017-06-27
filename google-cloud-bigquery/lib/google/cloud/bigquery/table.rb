@@ -361,11 +361,7 @@ module Google
           ensure_full_data!
           schema_builder = Schema.from_gapi @gapi.schema
           if block_given?
-            if replace
-              empty_schema = Google::Apis::BigqueryV2::TableSchema.new(
-                fields: [])
-              schema_builder = Schema.from_gapi empty_schema
-            end
+            schema_builder = Schema.from_gapi if replace
             yield schema_builder
             if schema_builder.changed?
               @gapi.schema = schema_builder.to_gapi
@@ -909,10 +905,7 @@ module Google
             # TODO: make sure to call ensure_full_data! on Dataset#update
             @schema ||= Schema.from_gapi @gapi.schema
             if block_given?
-              if replace
-                @schema = Schema.from_gapi \
-                  Google::Apis::BigqueryV2::TableSchema.new(fields: [])
-              end
+              @schema = Schema.from_gapi if replace
               yield @schema
               check_for_mutated_schema!
             end
