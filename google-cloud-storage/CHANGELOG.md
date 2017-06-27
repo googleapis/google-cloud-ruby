@@ -1,5 +1,10 @@
 # Release History
 
+### 1.2.0 / 2017-06-27
+
+* Add Requester Pays support
+* Upgrade dependency on Google API Client
+
 ### 1.1.0 / 2017-06-01
 
 * Add Bucket#labels.
