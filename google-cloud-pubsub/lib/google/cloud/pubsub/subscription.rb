@@ -388,6 +388,7 @@ module Google
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
+        alias_method :modify_ack_deadline, :delay
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot
