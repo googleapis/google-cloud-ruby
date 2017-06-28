@@ -136,6 +136,7 @@ module Google
           ensure_subscription!
           subscription.delay new_deadline, ack_id
         end
+        alias_method :modify_ack_deadline!, :delay!
 
         ##
         # Resets the acknowledge deadline for the message without acknowledging
