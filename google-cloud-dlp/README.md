@@ -13,7 +13,7 @@ In order to use this library, you first need to go through the following steps:
 
 ### Installation
 ```
-$ gem install google-cloud-privacy-dlp
+$ gem install google-cloud-dlp
 ```
 
 ### Next Steps
@@ -21,5 +21,5 @@ $ gem install google-cloud-privacy-dlp
 - Read the [DLP API Product documentation][Product Documentation] to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md) to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-privacy-dlp/latest/google/privacy/dlp/v2beta1
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2beta1
 [Product Documentation]: https://cloud.google.com/dlp

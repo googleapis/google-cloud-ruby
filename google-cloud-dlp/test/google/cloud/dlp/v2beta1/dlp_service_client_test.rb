@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/privacy/dlp/v2beta1/dlp_service_client"
+require "google/cloud/dlp/v2beta1/dlp_service_client"
 require "google/privacy/dlp/v2beta1/dlp_services_pb"
 require "google/longrunning/operations_pb"
 
@@ -52,10 +52,10 @@ class MockGrpcClientStub
   end
 end
 
-describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
+describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
   describe 'inspect_content' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#inspect_content."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#inspect_content."
 
     it 'invokes inspect_content without error' do
       # Create request parameters
@@ -76,7 +76,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.inspect_content(inspect_config, items)
@@ -101,7 +101,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
@@ -115,7 +115,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
   end
 
   describe 'redact_content' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#redact_content."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#redact_content."
 
     it 'invokes redact_content without error' do
       # Create request parameters
@@ -138,7 +138,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:redact_content, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.redact_content(
@@ -169,7 +169,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:redact_content, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
@@ -187,7 +187,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
   end
 
   describe 'create_inspect_operation' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#create_inspect_operation."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#create_inspect_operation."
 
     it 'invokes create_inspect_operation without error' do
       # Create request parameters
@@ -218,7 +218,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.create_inspect_operation(
@@ -240,7 +240,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#create_inspect_operation.'
+        message: 'Operation error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#create_inspect_operation.'
       )
       operation = Google::Longrunning::Operation.new(
         name: 'operations/create_inspect_operation_test',
@@ -259,7 +259,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.create_inspect_operation(
@@ -291,7 +291,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
@@ -309,11 +309,11 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
   end
 
   describe 'list_inspect_findings' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#list_inspect_findings."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#list_inspect_findings."
 
     it 'invokes list_inspect_findings without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.result_path("[RESULT]")
+      formatted_name = Google::Cloud::Dlp::V2beta1::DlpServiceClient.result_path("[RESULT]")
 
       # Create expected grpc response
       next_page_token = "nextPageToken-1530815211"
@@ -329,7 +329,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_inspect_findings, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.list_inspect_findings(formatted_name)
@@ -341,7 +341,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes list_inspect_findings with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.result_path("[RESULT]")
+      formatted_name = Google::Cloud::Dlp::V2beta1::DlpServiceClient.result_path("[RESULT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -352,7 +352,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_inspect_findings, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
@@ -366,7 +366,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
   end
 
   describe 'list_info_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#list_info_types."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#list_info_types."
 
     it 'invokes list_info_types without error' do
       # Create request parameters
@@ -387,7 +387,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.list_info_types(category, language_code)
@@ -412,7 +412,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do
@@ -426,7 +426,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
   end
 
   describe 'list_root_categories' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient#list_root_categories."
+    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2beta1::DlpServiceClient#list_root_categories."
 
     it 'invokes list_root_categories without error' do
       # Create request parameters
@@ -445,7 +445,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_root_categories, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         response = client.list_root_categories(language_code)
@@ -468,7 +468,7 @@ describe Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient do
       mock_stub = MockGrpcClientStub.new(:list_root_categories, mock_method)
 
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Privacy::Dlp::V2beta1::DlpServiceClient.new
+        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
 
         # Call method
         err = assert_raises Google::Gax::GaxError do

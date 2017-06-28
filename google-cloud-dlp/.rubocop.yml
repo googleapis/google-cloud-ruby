@@ -1,8 +1,8 @@
 AllCops:
   Exclude:
-    - "google-cloud-privacy-dlp.gemspec"
+    - "google-cloud-dlp.gemspec"
     - "lib/google/privacy/dlp/v2beta1/**/*"
-    - "lib/google/cloud/privacy/dlp/v2beta1/**/*"
+    - "lib/google/cloud/dlp/v2beta1/**/*"
     - "Rakefile"
     - "test/**/*"
 
@@ -25,10 +25,10 @@ Style/EmptyElse:
   Enabled: false
 Style/HashSyntax:
   Exclude:
-    - "lib/google/cloud/privacy/dlp/v2beta1/**/*"
+    - "lib/google/cloud/dlp/v2beta1/**/*"
 Metrics/LineLength:
   Exclude:
-    - "lib/google/cloud/privacy/dlp/v2beta1/**/*"
+    - "lib/google/cloud/dlp/v2beta1/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
@@ -36,11 +36,11 @@ Metrics/PerceivedComplexity:
 Metrics/AbcSize:
   Max: 25
   Exclude:
-    - "lib/google/cloud/privacy/dlp/v2beta1/**/*"
+    - "lib/google/cloud/dlp/v2beta1/**/*"
 Metrics/MethodLength:
   Max: 20
   Exclude:
-    - "lib/google/cloud/privacy/dlp/v2beta1/**/*"
+    - "lib/google/cloud/dlp/v2beta1/**/*"
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:

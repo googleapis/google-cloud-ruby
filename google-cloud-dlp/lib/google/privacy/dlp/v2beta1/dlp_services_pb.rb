@@ -38,13 +38,14 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.privacy.dlp.v2beta1.DlpService'
 
-            # Find potentially sensitive info in a list of strings.
+            # Finds potentially sensitive info in a list of strings.
             # This method has limits on input size, processing time, and output size.
             rpc :InspectContent, InspectContentRequest, InspectContentResponse
-            # Redact potentially sensitive info from a list of strings.
+            # Redacts potentially sensitive info from a list of strings.
             # This method has limits on input size, processing time, and output size.
             rpc :RedactContent, RedactContentRequest, RedactContentResponse
-            # Schedule a job scanning content in a Google Cloud Platform data repository.
+            # Schedules a job scanning content in a Google Cloud Platform data
+            # repository.
             rpc :CreateInspectOperation, CreateInspectOperationRequest, Google::Longrunning::Operation
             # Returns list of results for given inspect operation result set id.
             rpc :ListInspectFindings, ListInspectFindingsRequest, ListInspectFindingsResponse

@@ -30,7 +30,7 @@ namespace :test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-cloud-privacy-dlp"
+      command_name "google-cloud-dlp"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -40,9 +40,9 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Run the google-cloud-privacy-dlp acceptance tests."
+desc "Run the google-cloud-dlp acceptance tests."
 task :acceptance do
-  puts "The google-cloud-privacy-dlp gem does not have acceptance tests."
+  puts "The google-cloud-dlp gem does not have acceptance tests."
 end
 
 namespace :acceptance do
@@ -63,7 +63,7 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-privacy-dlp .yardoc"
+desc "Generates JSON output from google-cloud-dlp .yardoc"
 task :jsondoc => :yard do
   require "rubygems"
   require "gcloud/jsondoc"
@@ -78,7 +78,7 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Privacy::Dlp::V2beta1",
-            include: ["google/cloud/privacy/dlp/v2beta1"]
+            include: ["google/cloud/dlp/v2beta1"]
           },
           {
             title: "Google::Protobuf",
@@ -94,7 +94,7 @@ task :jsondoc => :yard do
   }
 
   generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-privacy-dlp",
+                                             "google-cloud-dlp",
                                              generate: toc_config
   rm_rf "jsondoc", verbose: true
   generator.write_to "jsondoc"
@@ -103,19 +103,19 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-privacy-dlp gem does not have doctest tests."
+  puts "The google-cloud-dlp gem does not have doctest tests."
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING google-cloud-privacy-dlp"
-  header "google-cloud-privacy-dlp rubocop", "*"
+  header "BUILDING google-cloud-dlp"
+  header "google-cloud-dlp rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-privacy-dlp jsondoc", "*"
+  header "google-cloud-dlp jsondoc", "*"
   sh "bundle exec rake jsondoc"
-  header "google-cloud-privacy-dlp doctest", "*"
+  header "google-cloud-dlp doctest", "*"
   sh "bundle exec rake doctest"
-  header "google-cloud-privacy-dlp test", "*"
+  header "google-cloud-dlp test", "*"
   sh "bundle exec rake test"
 end
 
@@ -124,7 +124,7 @@ namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :smoke_test do
     Rake::Task["ci"].invoke
-    header "google-cloud-privacy-dlp acceptance", "*"
+    header "google-cloud-dlp acceptance", "*"
     sh "bundle exec rake acceptance -v"
   end
   task :a do

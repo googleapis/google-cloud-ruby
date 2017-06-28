@@ -2,12 +2,12 @@
 # encoding: utf-8
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-privacy-dlp"
+  gem.name          = "google-cloud-dlp"
   gem.version       = "0.20.0"
 
   gem.authors       = ["Google Inc"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-privacy-dlp is the official library for DLP API."
+  gem.description   = "google-cloud-dlp is the official library for DLP API."
   gem.summary       = "API Client library for DLP API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"

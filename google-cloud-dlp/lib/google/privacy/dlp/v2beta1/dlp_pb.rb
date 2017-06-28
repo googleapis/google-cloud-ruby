@@ -6,7 +6,10 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/privacy/dlp/v2beta1/storage_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/date_pb'
+require 'google/type/timeofday_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2beta1.InspectConfig" do
     repeated :info_types, :message, 1, "google.privacy.dlp.v2beta1.InfoType"
@@ -54,10 +57,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :inspect_config, :message, 1, "google.privacy.dlp.v2beta1.InspectConfig"
     repeated :items, :message, 2, "google.privacy.dlp.v2beta1.ContentItem"
     repeated :replace_configs, :message, 3, "google.privacy.dlp.v2beta1.RedactContentRequest.ReplaceConfig"
+    repeated :image_redaction_configs, :message, 4, "google.privacy.dlp.v2beta1.RedactContentRequest.ImageRedactionConfig"
   end
   add_message "google.privacy.dlp.v2beta1.RedactContentRequest.ReplaceConfig" do
     optional :info_type, :message, 1, "google.privacy.dlp.v2beta1.InfoType"
     optional :replace_with, :string, 2
+  end
+  add_message "google.privacy.dlp.v2beta1.RedactContentRequest.ImageRedactionConfig" do
+    optional :redaction_color, :message, 3, "google.privacy.dlp.v2beta1.Color"
+    oneof :target do
+      optional :info_type, :message, 1, "google.privacy.dlp.v2beta1.InfoType"
+      optional :redact_all_text, :bool, 2
+    end
+  end
+  add_message "google.privacy.dlp.v2beta1.Color" do
+    optional :red, :float, 1
+    optional :green, :float, 2
+    optional :blue, :float, 3
   end
   add_message "google.privacy.dlp.v2beta1.RedactContentResponse" do
     repeated :items, :message, 1, "google.privacy.dlp.v2beta1.ContentItem"
@@ -99,6 +115,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
+    optional :filter, :string, 4
   end
   add_message "google.privacy.dlp.v2beta1.ListInspectFindingsResponse" do
     optional :result, :message, 1, "google.privacy.dlp.v2beta1.InspectResult"
@@ -149,6 +166,8 @@ module Google
         ImageLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ImageLocation").msgclass
         RedactContentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RedactContentRequest").msgclass
         RedactContentRequest::ReplaceConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RedactContentRequest.ReplaceConfig").msgclass
+        RedactContentRequest::ImageRedactionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RedactContentRequest.ImageRedactionConfig").msgclass
+        Color = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Color").msgclass
         RedactContentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RedactContentResponse").msgclass
         InspectContentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectContentRequest").msgclass
         InspectContentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectContentResponse").msgclass
