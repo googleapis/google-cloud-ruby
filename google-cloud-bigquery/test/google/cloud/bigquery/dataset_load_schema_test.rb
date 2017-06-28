@@ -59,7 +59,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
   end
 
-  it "can specify a schema during load" do
+  it "can specify a schema in a block during load" do
     mock = Minitest::Mock.new
     insert_job = Google::Apis::BigqueryV2::Job.new(
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -76,6 +76,61 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     job = dataset.load table_id, load_file, create: :needed do |schema|
       schema.string "name", mode: :required
       schema.integer "age"
+      schema.float "score", description: "A score from 0.0 to 10.0"
+      schema.boolean "active"
+      schema.bytes "avatar"
+    end
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
+  it "can specify a schema as an option during load" do
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_reference,
+          schema: table_schema_gapi,
+          source_uris: [load_url],
+          create_disposition: "CREATE_IF_NEEDED"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(load_url),
+      [project, insert_job]
+    dataset.service.mocked_service = mock
+
+    schema = bigquery.schema
+    schema.string "name", mode: :required
+    schema.integer "age"
+    schema.float "score", description: "A score from 0.0 to 10.0"
+    schema.boolean "active"
+    schema.bytes "avatar"
+
+    job = dataset.load table_id, load_file, create: :needed, schema: schema
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
+  it "can specify a schema both as an option and in a block during load" do
+    mock = Minitest::Mock.new
+    insert_job = Google::Apis::BigqueryV2::Job.new(
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_reference,
+          schema: table_schema_gapi,
+          source_uris: [load_url],
+          create_disposition: "CREATE_IF_NEEDED"),
+        dry_run: nil))
+    mock.expect :insert_job, load_job_gapi(load_url),
+      [project, insert_job]
+    dataset.service.mocked_service = mock
+
+    schema = bigquery.schema
+    schema.string "name", mode: :required
+    schema.integer "age"
+
+    job = dataset.load table_id, load_file, create: :needed, schema: schema do |schema|
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
       schema.bytes "avatar"

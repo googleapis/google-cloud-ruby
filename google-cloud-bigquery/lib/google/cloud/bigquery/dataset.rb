@@ -924,12 +924,22 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        #   destination table. Optional. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        #
+        #   See {Project#schema} for the creation of the schema for use with
+        #   this option. Also note that for most use cases, the block yielded by
+        #   this method is a more convenient way to configure the schema.
         #
         # @yield [schema] A block for setting the schema for the destination
         #   table. The schema can be omitted if the destination table already
         #   exists, or if you're loading data from a Google Cloud Datastore
         #   backup.
-        # @yieldparam [Schema] schema the object accepting the schema
+        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
+        #   instance provided using the `schema` option, or a new, empty schema
+        #   instance
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -997,15 +1007,14 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil
+                 dryrun: nil, schema: nil
           ensure_service!
 
-          schema = nil
           if block_given?
-            schema = Schema.from_gapi
+            schema ||= Schema.from_gapi
             yield schema
-            schema = schema.to_gapi
           end
+          schema_gapi = schema.to_gapi if schema
 
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -1014,7 +1023,7 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
-                      schema: schema }
+                      schema: schema_gapi }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"

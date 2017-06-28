@@ -32,6 +32,19 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
     t
   end
+  let(:table_with_schema_id) { "dataset_table_with_schema" }
+  let(:table_with_schema) do
+    t = dataset.table table_with_schema_id
+    if t.nil?
+      t = dataset.create_table table_with_schema_id do |schema|
+        schema.integer  "id",     description: "id description",    mode: :required
+        schema.string    "breed", description: "breed description", mode: :required
+        schema.string    "name",  description: "name description",  mode: :required
+        schema.timestamp "dob",   description: "dob description",   mode: :required
+      end
+    end
+    t
+  end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:view_id) { "dataset_view" }
   let(:view) do
@@ -102,13 +115,32 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports data from a local file and creates a new table with specified schema" do
+  it "imports data from a local file and creates a new table with specified schema in a block" do
     job = dataset.load "local_file_table", local_file do |schema|
       schema.integer  "id",     description: "id description",    mode: :required
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
     end
+    job.wait_until_done!
+    job.output_rows.must_equal 3
+  end
+
+  it "imports data from a local file and creates a new table with specified schema as an option" do
+    schema = bigquery.schema
+    schema.integer  "id",     description: "id description",    mode: :required
+    schema.string    "breed", description: "breed description", mode: :required
+    schema.string    "name",  description: "name description",  mode: :required
+    schema.timestamp "dob",   description: "dob description",   mode: :required
+
+    job = dataset.load "local_file_table_2", local_file, schema: schema
+
+    job.wait_until_done!
+    job.output_rows.must_equal 3
+  end
+
+  it "imports data from a local file and creates a new table without a schema" do
+    job = dataset.load table_with_schema.table_id, local_file, create: :never
     job.wait_until_done!
     job.output_rows.must_equal 3
   end

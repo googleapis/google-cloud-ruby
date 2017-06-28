@@ -22,6 +22,7 @@ require "google/cloud/bigquery/job"
 require "google/cloud/bigquery/query_data"
 require "google/cloud/bigquery/project/list"
 require "google/cloud/bigquery/time"
+require "google/cloud/bigquery/schema"
 
 module Google
   module Cloud
@@ -749,6 +750,35 @@ module Google
         #
         def time hour, minute, second
           Bigquery::Time.new "#{hour}:#{minute}:#{second}"
+        end
+
+        ##
+        # Creates a new, empty schema instance. This instance can be populated
+        # and passed to {Dataset#load} using the `schema` option. However, for
+        # most use cases, the block yielded by {Dataset#load} is a more
+        # convenient way to configure the schema for the destination table.
+        #
+        # @return [Google::Cloud::Bigquery::Schema]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   schema = bigquery.schema
+        #   schema.string "first_name", mode: :required
+        #   schema.record "cities_lived", mode: :repeated do |nested_schema|
+        #     nested_schema.string "place", mode: :required
+        #     nested_schema.integer "number_of_years", mode: :required
+        #   end
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   gs_url = "gs://my-bucket/file-name.csv"
+        #   load_job = dataset.load "my_new_table", gs_url, schema: schema
+        #
+        def schema
+          Schema.from_gapi
         end
 
         ##
