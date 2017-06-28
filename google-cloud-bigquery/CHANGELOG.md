@@ -1,5 +1,14 @@
 # Release History
 
+### 0.27.0 / 2017-06-28
+
+* Add `maximum_billing_tier` and `maximum_bytes_billed` to `QueryJob`, `Project#query_job` and `Dataset#query_job`.
+* Add `Dataset#load` to support creating, configuring and loading a table in one API call.
+* Add `Project#schema`.
+* Upgrade dependency on Google API Client.
+* Update gem spec homepage links.
+* Update examples of field access to use symbols instead of strings in the documentation.
+
 ### 0.26.0 / 2017-04-05
 
 * Upgrade dependency on Google API Client
