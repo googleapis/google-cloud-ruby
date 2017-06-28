@@ -34,6 +34,9 @@ COPY . /app/
 # Install required gems.
 RUN cd integration/rails5_app && bundle install && rbenv rehash;
 
+# Compile debugger gem
+RUN cd google-cloud-debugger && bundle install && bundle exec rake compile
+
 # Temporary. Will be moved to base image later.
 ENV RACK_ENV=production \
     RAILS_ENV=production \

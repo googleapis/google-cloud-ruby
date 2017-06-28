@@ -32,7 +32,10 @@ ENV RBENV_VERSION=${REQUESTED_RUBY_VERSION:-$RBENV_VERSION}
 COPY . /app/
 
 # Install required gems.
-RUN bundle install && rbenv rehash;
+RUN cd integration/sinatra1_app && bundle install && rbenv rehash;
+
+# Compile debugger gem
+RUN cd google-cloud-debugger && bundle install && bundle exec rake compile
 
 # Temporary. Will be moved to base image later.
 ENV RACK_ENV=production \
@@ -48,4 +51,4 @@ RUN if test -d app/assets -a -f config/application.rb; then \
 ENTRYPOINT []
 
 # Start application on port $PORT.
-CMD bundle exec ruby integration/sinatra1_app/app.rb
+CMD cd integration/sinatra1_app && bundle exec ruby app.rb
