@@ -232,6 +232,28 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#reject!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#nack!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#ignore!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+    end
+  end
+
   ##
   # Snapshot
 
