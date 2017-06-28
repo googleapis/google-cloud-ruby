@@ -55,6 +55,13 @@ module Google
         alias_method :msg_id, :message_id
 
         ##
+        # The time at which the message was published.
+        def published_at
+          message.published_at
+        end
+        alias_method :publish_time, :published_at
+
+        ##
         # The error that was raised when published, if any.
         def error
           @error

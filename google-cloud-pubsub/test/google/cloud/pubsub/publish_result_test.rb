@@ -36,6 +36,14 @@ describe Google::Cloud::Pubsub::PublishResult, :mock_pubsub do
     result.message.message_id.must_be :empty?
     result.msg.message_id.must_be :empty?
 
+    result.published_at.must_be :nil?
+    result.message.published_at.must_be :nil?
+    result.msg.published_at.must_be :nil?
+
+    result.publish_time.must_be :nil?
+    result.message.publish_time.must_be :nil?
+    result.msg.publish_time.must_be :nil?
+
     result.message.must_equal msg
     result.msg.must_equal msg
 
@@ -64,6 +72,14 @@ describe Google::Cloud::Pubsub::PublishResult, :mock_pubsub do
       result.message_id.must_be :empty?
       result.message.message_id.must_be :empty?
       result.msg.message_id.must_be :empty?
+
+      result.published_at.must_be :nil?
+      result.message.published_at.must_be :nil?
+      result.msg.published_at.must_be :nil?
+
+      result.publish_time.must_be :nil?
+      result.message.publish_time.must_be :nil?
+      result.msg.publish_time.must_be :nil?
 
       result.message.must_equal msg
       result.msg.must_equal msg

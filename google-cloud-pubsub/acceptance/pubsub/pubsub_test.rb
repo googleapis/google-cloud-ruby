@@ -204,6 +204,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       event = events.first
       event.wont_be :nil?
       event.msg.data.must_equal msg.data
+      event.msg.published_at.wont_be :nil?
       # Acknowledge the message
       subscription.ack event.ack_id
       # Remove the subscription
@@ -231,6 +232,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       event = events.first
       event.wont_be :nil?
       event.msg.data.must_equal msg.data
+      event.msg.published_at.wont_be :nil?
       # Acknowledge the message
       subscription.ack event.ack_id
 

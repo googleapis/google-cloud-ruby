@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 
 module Google
@@ -82,6 +83,13 @@ module Google
           @grpc.message_id
         end
         alias_method :msg_id, :message_id
+
+        ##
+        # The time at which the message was published.
+        def published_at
+          Convert.timestamp_to_time @grpc.publish_time
+        end
+        alias_method :publish_time, :published_at
 
         ##
         # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
