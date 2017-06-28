@@ -1,5 +1,12 @@
 # Release History
 
+### 0.33.0 / 2017-06-28
+
+* BigQuery 0.27.0 release
+* DNS 0.25.0 release
+* Resource Manager 0.26.0 release
+* Storage 1.2.0 release
+
 ### 0.32.0 / 2017-06-08
 
 * Add Spanner (google-cloud-spanner)
