@@ -54,5 +54,16 @@ describe Google::Cloud::Pubsub::Message, :mock_pubsub do
       msg.msg_id.must_equal     rec_message_data["message"]["message_id"]
       msg.message_id.must_equal rec_message_data["message"]["message_id"]
     end
+
+    it "knows its published_at" do
+      msg.published_at.must_be :nil?
+      msg.publish_time.must_be :nil?
+
+      publish_time = Time.now
+      rec_message_grpc.publish_time = Google::Cloud::Pubsub::Convert.time_to_timestamp publish_time
+
+      msg.published_at.must_equal publish_time
+      msg.publish_time.must_equal publish_time
+    end
   end
 end
