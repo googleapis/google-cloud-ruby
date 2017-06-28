@@ -138,6 +138,31 @@ module Google
         end
 
         ##
+        # Resets the acknowledge deadline for the message without acknowledging
+        # it.
+        #
+        # This will make the message available for redelivery.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   received_message = sub.pull.first
+        #   if received_message
+        #     puts received_message.message.data
+        #     # Release message back to the API.
+        #     received_message.reject!
+        #   end
+        #
+        def reject!
+          delay! 0
+        end
+        alias_method :nack!, :reject!
+        alias_method :ignore!, :reject!
+
+        ##
         # @private New ReceivedMessage from a
         # Google::Pubsub::V1::ReceivedMessage object.
         def self.from_grpc grpc, subscription

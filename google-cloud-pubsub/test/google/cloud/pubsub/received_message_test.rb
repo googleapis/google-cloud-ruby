@@ -92,4 +92,34 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
 
     mock.verify
   end
+
+  it "can reject" do
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    rec_message.reject!
+
+    mock.verify
+  end
+
+  it "can nack" do
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    rec_message.nack!
+
+    mock.verify
+  end
+
+  it "can ignore" do
+    mock = Minitest::Mock.new
+    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    rec_message.ignore!
+
+    mock.verify
+  end
 end
