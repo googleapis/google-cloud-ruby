@@ -231,6 +231,13 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
     end
   end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
+    end
+  end
 
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage#reject!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
@@ -296,6 +303,13 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Pubsub::Subscription#delay" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], 120, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::Subscription#modify_ack_deadline" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
