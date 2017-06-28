@@ -127,11 +127,12 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "imports data from a local file and creates a new table with specified schema as an option" do
-    schema = bigquery.schema
-    schema.integer  "id",     description: "id description",    mode: :required
-    schema.string    "breed", description: "breed description", mode: :required
-    schema.string    "name",  description: "name description",  mode: :required
-    schema.timestamp "dob",   description: "dob description",   mode: :required
+    schema = bigquery.schema do |s|
+      s.integer  "id",     description: "id description",    mode: :required
+      s.string    "breed", description: "breed description", mode: :required
+      s.string    "name",  description: "name description",  mode: :required
+      s.timestamp "dob",   description: "dob description",   mode: :required
+    end
 
     job = dataset.load "local_file_table_2", local_file, schema: schema
 

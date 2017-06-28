@@ -753,10 +753,17 @@ module Google
         end
 
         ##
-        # Creates a new, empty schema instance. This instance can be populated
-        # and passed to {Dataset#load} using the `schema` option. However, for
-        # most use cases, the block yielded by {Dataset#load} is a more
-        # convenient way to configure the schema for the destination table.
+        # Creates a new schema instance. An optional block may be given to
+        # configure the schema, otherwise the schema is returned empty and may
+        # be configured directly.
+        #
+        # The returned schema can be passed to {Dataset#load} using the `schema`
+        # option. However, for most use cases, the block yielded by
+        # {Dataset#load} is a more convenient way to configure the schema for
+        # the destination table.
+        #
+        # @yield [schema] a block for setting the schema
+        # @yieldparam [Schema] schema the object accepting the schema
         #
         # @return [Google::Cloud::Bigquery::Schema]
         #
@@ -765,11 +772,12 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   schema = bigquery.schema
-        #   schema.string "first_name", mode: :required
-        #   schema.record "cities_lived", mode: :repeated do |nested_schema|
-        #     nested_schema.string "place", mode: :required
-        #     nested_schema.integer "number_of_years", mode: :required
+        #   schema = bigquery.schema do |s|
+        #     s.string "first_name", mode: :required
+        #     s.record "cities_lived", mode: :repeated do |nested_schema|
+        #       nested_schema.string "place", mode: :required
+        #       nested_schema.integer "number_of_years", mode: :required
+        #     end
         #   end
         #
         #   dataset = bigquery.dataset "my_dataset"
@@ -778,7 +786,9 @@ module Google
         #   load_job = dataset.load "my_new_table", gs_url, schema: schema
         #
         def schema
-          Schema.from_gapi
+          s = Schema.from_gapi
+          yield s if block_given?
+          s
         end
 
         ##
