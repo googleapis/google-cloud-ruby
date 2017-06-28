@@ -53,6 +53,7 @@ describe Google::Cloud::Pubsub, :async, :pubsub do
     event = events.first
     event.wont_be :nil?
     event.msg.data.must_equal publish_result.data
+    event.msg.published_at.wont_be :nil?
     # Acknowledge the message
     sub.ack event.ack_id
     # Remove the subscription
