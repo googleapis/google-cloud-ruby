@@ -31,6 +31,9 @@ def deploy_gae_flex app_dir
     last_gae_version = get_gae_versions.last
     sh "gcloud app deploy -q" do |ok, res|
       if ok
+        # Wait couple minutes for load balancer to stablize
+        sleep 120
+
         yield
 
         # Delete the last version of Google App Engine if successfully deployed
