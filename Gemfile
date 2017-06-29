@@ -15,7 +15,6 @@ gem "gems", "~> 0.8"
 gem "actionpack", "~> 4.0"
 gem "railties", "~> 4.0"
 gem "rack", ">= 0.1"
-gem "sinatra", "~> 1.4"
 
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
