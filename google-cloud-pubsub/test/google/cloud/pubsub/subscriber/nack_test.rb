@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
+describe Google::Cloud::Pubsub::Subscriber, :nack, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
@@ -28,7 +28,7 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
   let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message3-msg-goes-here", 1113) }
 
-  it "can acknowledge a single message" do
+  it "can nack a single message" do
     rec_message_msg = "pulled-message"
     rec_message_ack_id = 123456789
     pull_res = Google::Pubsub::V1::StreamingPullResponse.decode_json rec_messages_json(rec_message_msg, rec_message_ack_id)
@@ -38,12 +38,12 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
     called = false
 
     subscription.service.mocked_subscriber = stub
-    subscriber = subscription.listen streams: 1 do |result|
-      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, result
-      assert_equal rec_message_msg, result.data
-      assert_equal "ack-id-#{rec_message_ack_id}", result.ack_id
+    subscriber = subscription.listen streams: 1 do |msg|
+      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
+      assert_equal rec_message_msg, msg.data
+      assert_equal "ack-id-#{rec_message_ack_id}", msg.ack_id
 
-      result.ack!
+      msg.nack!
       called = true
     end
     subscriber.start
@@ -62,10 +62,10 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
     requests_made = stub.request_enum.to_a
     requests_made.count.must_equal 2
     requests_made.first.must_equal Google::Pubsub::V1::StreamingPullRequest.new(subscription: subscription_path(sub_name), stream_ack_deadline_seconds: 60)
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(ack_ids: ["ack-id-#{rec_message_ack_id}"])
+    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-#{rec_message_ack_id}"], modify_deadline_seconds: [0])
   end
 
-  it "can acknowledge multiple messages" do
+  it "can nack multiple messages" do
     pull_res = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc, rec_msg2_grpc, rec_msg3_grpc]
     responses = [pull_res]
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
       assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
-      msg.ack!
+      msg.nack!
       called +=1
     end
     subscriber.start
@@ -94,8 +94,8 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
     requests_made = stub.request_enum.to_a
     requests_made.count.must_equal 4
     requests_made.first.must_equal Google::Pubsub::V1::StreamingPullRequest.new(subscription: subscription_path(sub_name), stream_ack_deadline_seconds: 60)
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(ack_ids: ["ack-id-1111"])
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(ack_ids: ["ack-id-1112"])
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(ack_ids: ["ack-id-1113"])
+    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1111"], modify_deadline_seconds: [0])
+    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1112"], modify_deadline_seconds: [0])
+    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1113"], modify_deadline_seconds: [0])
   end
 end
