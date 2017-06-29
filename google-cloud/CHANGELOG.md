@@ -1,5 +1,9 @@
 # Release History
 
+### 0.34.0 / 2017-06-28
+
+* Translate 1.0.0 release
+
 ### 0.33.0 / 2017-06-28
 
 * BigQuery 0.27.0 release
