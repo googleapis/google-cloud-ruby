@@ -38,7 +38,7 @@ describe Google::Cloud::Pubsub::Subscriber, :delay, :mock_pubsub do
     called = false
 
     subscription.service.mocked_subscriber = stub
-    subscriber = subscription.listen do |msg|
+    subscriber = subscription.listen streams: 1 do |msg|
       assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
       assert_equal rec_message_msg, msg.data
       assert_equal "ack-id-#{rec_message_ack_id}", msg.ack_id
@@ -73,7 +73,7 @@ describe Google::Cloud::Pubsub::Subscriber, :delay, :mock_pubsub do
     called = 0
 
     subscription.service.mocked_subscriber = stub
-    subscriber = subscription.listen do |msg|
+    subscriber = subscription.listen streams: 1 do |msg|
       assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
       msg.delay! 42
       called +=1
