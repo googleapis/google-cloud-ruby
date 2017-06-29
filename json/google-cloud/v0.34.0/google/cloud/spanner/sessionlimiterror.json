@@ -1,0 +1,1 @@
+{"id":"google/cloud/spanner/sessionlimiterror","name":"SessionLimitError","title":["Google","Cloud","Spanner","SessionLimitError"],"description":"<h1 id=\"sessionlimiterror\">SessionLimitError</h1>\n\n<p>More sessions have been allocated than configured for.</p>","source":"google-cloud-spanner/lib/google/cloud/spanner/errors.rb#L62","resources":[],"examples":[],"methods":[]}
