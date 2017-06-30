@@ -146,7 +146,7 @@ module Google
         #                                               env: :production
         #   logger.info "Job started."
         #
-        def initialize writer, log_name, resource, labels = nil
+        def initialize writer, log_name, resource, labels = {}
           @writer = writer
           @log_name = log_name
           @resource = resource
