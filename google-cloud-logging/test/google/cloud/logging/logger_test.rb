@@ -49,6 +49,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   it "@labels instance variable is default to empty hash if not given" do
     logger = Google::Cloud::Logging::Logger.new logging, log_name, resource
     logger.labels.must_be_kind_of Hash
+    logger.labels.must_be :empty?
   end
 
   it "creates a DEBUG log entry with #debug" do
