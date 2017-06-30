@@ -150,7 +150,7 @@ module Google
           @writer = writer
           @log_name = log_name
           @resource = resource
-          @labels = labels
+          @labels = labels || {}
           @level = 0 # DEBUG is the default behavior
           @request_info = {}
           @closed = false
@@ -549,7 +549,7 @@ module Google
             end
           end
 
-          labels.nil? ? merged_labels : labels.merge(merged_labels)
+          labels.merge(merged_labels)
         end
 
         ##
