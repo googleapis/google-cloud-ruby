@@ -549,7 +549,7 @@ module Google
             end
           end
 
-          labels.nil? ? merged_labels : labels.merge(merged_labels)
+          labels.merge(merged_labels)
         end
 
         ##
