@@ -146,11 +146,11 @@ module Google
         #                                               env: :production
         #   logger.info "Job started."
         #
-        def initialize writer, log_name, resource, labels = {}
+        def initialize writer, log_name, resource, labels = nil
           @writer = writer
           @log_name = log_name
           @resource = resource
-          @labels = labels
+          @labels = labels || {}
           @level = 0 # DEBUG is the default behavior
           @request_info = {}
           @closed = false
