@@ -307,7 +307,6 @@ module Google
         #   end
         #
         #   subscriber.start
-        #   subscriber.wait!
         #
         def listen deadline: nil, streams: nil, inventory: nil, threads: nil,
                    &block

@@ -13,11 +13,13 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/subscriber/async_acknowledger"
+require "google/cloud/pubsub/subscriber/async_delayer"
+require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
 require "monitor"
 require "concurrent"
-
 
 module Google
   module Cloud
@@ -29,7 +31,7 @@ module Google
 
           ##
           # @private Implementation attributes.
-          attr_reader :request_queue, :output_enum
+          attr_reader :callback_thread_pool, :push_thread_pool
 
           ##
           # Subscriber attributes.
@@ -41,33 +43,40 @@ module Google
             @subscriber = subscriber
 
             @request_queue = nil
-            @output_enum = nil
             @stopped = nil
+            @paused  = nil
+            @pause_cond = new_cond
 
             @inventory = Inventory.new self, subscriber.inventory
+            @callback_thread_pool = Concurrent::FixedThreadPool.new \
+              subscriber.threads
+            @push_thread_pool = Concurrent::FixedThreadPool.new \
+              subscriber.threads
 
             super() # to init MonitorMixin
           end
 
           def start
             synchronize do
-              return if @request_queue
+              break if @request_queue
 
               start_streaming!
             end
 
-            true
+            self
           end
 
           def stop
             synchronize do
-              return if @request_queue.nil?
+              break if @stopped
+              break if @request_queue.nil?
+
               @request_queue.push self
               @inventory.stop
               @stopped = true
             end
 
-            true
+            self
           end
 
           def stopped?
@@ -81,9 +90,18 @@ module Google
           def wait!
             synchronize do
               @background_thread.join if @background_thread
+
+              @callback_thread_pool.shutdown
+              @callback_thread_pool.wait_for_termination
+
+              @async_acknowledger.stop.wait! if @async_acknowledger
+              @async_delayer.stop.wait!      if @async_delayer
+
+              @push_thread_pool.shutdown
+              @push_thread_pool.wait_for_termination
             end
 
-            true
+            self
           end
 
           ##
@@ -92,11 +110,10 @@ module Google
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
-            ack_request = Google::Pubsub::V1::StreamingPullRequest.new
-            ack_request.ack_ids += ack_ids
+            async_acknowledger # To make sure the object is loaded
 
             synchronize do
-              @request_queue.push ack_request
+              @async_acknowledger.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
             end
@@ -106,17 +123,14 @@ module Google
 
           ##
           # @private
-          def delay new_deadline, *messages
+          def delay deadline, *messages
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
-            mod_ack_deadline = mod_ack_ids.count.times.map { new_deadline }
-            mod_ack_request = Google::Pubsub::V1::StreamingPullRequest.new
-            mod_ack_request.modify_deadline_ack_ids += mod_ack_ids
-            mod_ack_request.modify_deadline_seconds += mod_ack_deadline
+            async_delayer # To make sure the object is loaded
 
             synchronize do
-              @request_queue.push mod_ack_request
+              @async_delayer.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
             end
@@ -124,22 +138,31 @@ module Google
             true
           end
 
+          def async_acknowledger
+            synchronize { @async_acknowledger ||= AsyncAcknowledger.new self }
+          end
+
+          def async_delayer
+            synchronize { @async_delayer ||= AsyncDelayer.new self }
+          end
+
+          def push request
+            synchronize { @request_queue.push request }
+          end
+
           def inventory
-            synchronize { @inventory.count }
+            synchronize { @inventory }
           end
 
           ##
           # @private
           def delay_inventory!
+            async_delayer # To make sure the object is loaded
+
             synchronize do
               return true if @inventory.empty?
 
-              inv_deadline = @inventory.ack_ids.map { subscriber.deadline }
-              inv_request = Google::Pubsub::V1::StreamingPullRequest.new
-              inv_request.modify_deadline_ack_ids += @inventory.ack_ids
-              inv_request.modify_deadline_seconds += inv_deadline
-
-              @request_queue.push inv_request
+              @async_delayer.delay subscriber.deadline, @inventory.ack_ids
             end
 
             true
@@ -147,7 +170,7 @@ module Google
 
           # @private
           def to_s
-            format "(inventory: %i)", inventory
+            format "(inventory: %i)", inventory.count
           end
 
           # @private
@@ -159,13 +182,18 @@ module Google
 
           # rubocop:disable all
 
-          def background_run
+          def background_run enum
             until synchronize { @stopped }
-              Thread.current.kill if synchronize { @paused }
+              synchronize do
+                if @paused
+                  @pause_cond.wait
+                  next
+                end
+              end
 
               begin
                 # Cannot syncronize the enumerator, causes deadlock
-                response = @output_enum.next
+                response = enum.next
                 response.received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   synchronize do
@@ -186,29 +214,33 @@ module Google
             synchronize { start_streaming! }
           rescue => e
             synchronize do
-              @request_queue.unshift Google::Cloud::Error.from_error(e)
+              @request_queue.push Google::Cloud::Error.from_error(e)
             end
           end
 
           # rubocop:enable all
 
           def perform_callback_async rec_msg
-            Concurrent::Future.new(executor: subscriber.thread_pool) do
+            Concurrent::Future.new(executor: callback_thread_pool) do
               subscriber.callback.call rec_msg
             end.execute
           end
 
           def start_streaming!
             # signal to the previous queue to shut down
-            @background_thread.kill if @background_thread
             @request_queue.push self if @request_queue
 
             @request_queue = EnumeratorQueue.new self
             @request_queue.push initial_input_request
-            @output_enum = subscriber.service.streaming_pull \
-              @request_queue.each_item
+            output_enum = subscriber.service.streaming_pull @request_queue.each
 
-            @background_thread = Thread.new { background_run }
+            @stopped = nil
+            @paused  = nil
+
+            # create new background thread to handle new enumerator
+            @background_thread = Thread.new(output_enum) do |enum|
+              background_run enum
+            end
           end
 
           def pause_streaming!
@@ -227,9 +259,8 @@ module Google
             return unless unpause_streaming?
 
             @paused = nil
-            # Need to recreate the enums otherwise we get the error:
-            # "fiber called across threads"
-            start_streaming!
+            # signal to the background thread that we are unpaused
+            @pause_cond.broadcast
           end
 
           def unpause_streaming?
@@ -280,7 +311,6 @@ module Google
               ack_ids = Array(ack_ids).flatten
               synchronize do
                 @_ack_ids += ack_ids
-                @start_time ||= Time.now
                 @background_thread ||= Thread.new { background_run }
               end
             end
@@ -289,18 +319,12 @@ module Google
               ack_ids = Array(ack_ids).flatten
               synchronize do
                 @_ack_ids -= ack_ids
-                clear if @_ack_ids.empty?
-              end
-            end
-
-            def clear
-              synchronize do
-                @_ack_ids = []
-                if @background_thread
-                  @background_thread.kill
-                  @background_thread = nil
+                if @_ack_ids.empty?
+                  if @background_thread
+                    @background_thread.kill
+                    @background_thread = nil
+                  end
                 end
-                @start_time = nil
               end
             end
 
@@ -319,6 +343,7 @@ module Google
             def stop
               synchronize do
                 @stopped = true
+                @background_thread.kill if @background_thread
               end
             end
 
