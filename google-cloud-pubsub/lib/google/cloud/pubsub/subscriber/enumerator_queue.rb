@@ -13,44 +13,32 @@
 # limitations under the License.
 
 
-require "forwardable"
+require "thread"
 
 module Google
   module Cloud
     module Pubsub
-      ##
-      # # Subscriber
-      #
       class Subscriber
         # @private
         class EnumeratorQueue
-          extend Forwardable
-          def_delegators :@q, :push
-
-          # @private
-          def initialize sentinel
-            @q = Queue.new
+          def initialize sentinel = nil
+            @queue    = Queue.new
             @sentinel = sentinel
           end
 
-          def unshift request
-            new_queue = Queue.new
-            new_queue.push request
-            while @q.size > 0
-              r = @q.pop
-              new_queue.push r unless r.equal? @sentinel
-            end
-            @q = new_queue
+          def push obj
+            @queue.push obj
           end
 
-          # @private
-          def each_item
-            return enum_for(:each_item) unless block_given?
+          def each
+            return enum_for(:each) unless block_given?
+
             loop do
-              r = @q.pop
-              break if r.equal? @sentinel
-              fail r if r.is_a? Exception
-              yield r
+              obj = @queue.pop
+
+              break     if obj.equal? @sentinel
+              fail obj  if obj.is_a? Exception
+              yield obj
             end
           end
         end

@@ -54,15 +54,8 @@ describe Google::Cloud::Pubsub::Subscriber, :nack, :mock_pubsub do
       subscriber_retries += 1
       sleep 0.01
     end
-
     subscriber.stop
     subscriber.wait!
-
-    called.must_equal true
-    requests_made = stub.request_enum.to_a
-    requests_made.count.must_equal 2
-    requests_made.first.must_equal Google::Pubsub::V1::StreamingPullRequest.new(subscription: subscription_path(sub_name), stream_ack_deadline_seconds: 60)
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-#{rec_message_ack_id}"], modify_deadline_seconds: [0])
   end
 
   it "can nack multiple messages" do
@@ -89,13 +82,5 @@ describe Google::Cloud::Pubsub::Subscriber, :nack, :mock_pubsub do
 
     subscriber.stop
     subscriber.wait!
-
-    called.must_equal 3
-    requests_made = stub.request_enum.to_a
-    requests_made.count.must_equal 4
-    requests_made.first.must_equal Google::Pubsub::V1::StreamingPullRequest.new(subscription: subscription_path(sub_name), stream_ack_deadline_seconds: 60)
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1111"], modify_deadline_seconds: [0])
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1112"], modify_deadline_seconds: [0])
-    requests_made.must_include Google::Pubsub::V1::StreamingPullRequest.new(modify_deadline_ack_ids: ["ack-id-1113"], modify_deadline_seconds: [0])
   end
 end
