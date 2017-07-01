@@ -15,9 +15,7 @@
 
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/subscriber/stream"
-require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "monitor"
-require "concurrent"
 
 module Google
   module Cloud
@@ -46,17 +44,13 @@ module Google
           @deadline = deadline || 60
           @streams = streams || 1
           @inventory = inventory || 100
-          @threads = threads || [2, Concurrent.processor_count * 2].max
-          @thread_pool = Concurrent::FixedThreadPool.new @threads
+          @threads = threads || 4
           @service = service
 
-          @stream_pool = @streams.times.map do
-            Thread.new do
-              Thread.current[:stream] = Stream.new self
-            end
+          stream_pool = @streams.times.map do
+            Thread.new { Stream.new self }
           end
-          @stream_pool.map!(&:join)
-          @stream_pool.map! { |t| t[:stream] }
+          @stream_pool = stream_pool.map(&:value)
 
           super() # to init MonitorMixin
         end
@@ -90,11 +84,6 @@ module Google
             end
           end
           wait_pool.join
-
-          synchronize do
-            @thread_pool.shutdown
-            @thread_pool.wait_for_termination
-          end
 
           self
         end
