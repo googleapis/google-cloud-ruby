@@ -485,6 +485,27 @@ describe Google::Cloud::Storage::File, :storage do
     end
   end
 
+  it "bucket should create a signed read url with response content type and disposition" do
+    local_file = File.new files[:logo][:path]
+    file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+
+    five_min_from_now = 5 * 60
+    url = bucket.signed_url file.name, method: "GET",
+                                       expires: five_min_from_now,
+                                       query: { "response-content-type" => "application/octet-stream",
+                                                "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
+
+    uri = URI url
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
+    resp = http.get uri.request_uri
+    resp.code.must_equal "200"
+    resp["Content-Type"].must_equal "application/octet-stream"
+    resp["Content-Disposition"].must_equal "attachment; filename=\"google-cloud.png\""
+  end
+
   it "should create a signed delete url" do
     file = bucket.create_file files[:logo][:path], "CloudLogoSignedUrlDelete.png"
 
