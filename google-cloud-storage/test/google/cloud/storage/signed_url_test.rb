@@ -102,6 +102,26 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
   end
 
+  it "allows response content type and disposition to be passed in as options" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+      credentials.issuer = "native_client_email"
+      credentials.signing_key = signing_key_mock
+
+      signed_url = file.signed_url query: { "response-content-type" => "image/png",
+                                            "response-content-disposition" => "attachment; filename=\"test.png\"" }
+
+      signed_url_params = CGI::parse(URI(signed_url).query)
+      signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
+      signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+      signed_url_params["response-content-type"].must_equal ["image/png"]
+      signed_url_params["response-content-disposition"].must_equal ["attachment; filename=\"test.png\""]
+
+      signing_key_mock.verify
+    end
+  end
+
   it "raises when missing issuer" do
     credentials.issuer = nil
     credentials.signing_key = PoisonSigningKey.new

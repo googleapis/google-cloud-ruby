@@ -731,6 +731,8 @@ module Google
         #   Private Key.
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
+        # @param [Hash] query Query string parameters to include in the signed
+        #   URL, such as response-content-type and response-content-disposition.
         #
         # @example
         #   require "google/cloud/storage"
@@ -778,14 +780,16 @@ module Google
         #
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil
+                       client_email: nil, signing_key: nil, private_key: nil,
+                       query: nil
           ensure_service!
           signer = File::Signer.from_file self
           signer.signed_url method: method, expires: expires, headers: headers,
                             content_type: content_type,
                             content_md5: content_md5,
                             issuer: issuer, client_email: client_email,
-                            signing_key: signing_key, private_key: private_key
+                            signing_key: signing_key, private_key: private_key,
+                            query: query
         end
 
         ##

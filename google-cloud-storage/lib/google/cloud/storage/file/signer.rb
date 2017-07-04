@@ -109,7 +109,7 @@ module Google
             fail SignedUrlUnavailable unless i && s
 
             sig = generate_signature s, signature_str(options)
-            generate_signed_url i, sig, options[:expires]
+            generate_signed_url i, sig, options[:expires], options[:query]
           end
 
           def generate_signature signing_key, secret
@@ -120,10 +120,18 @@ module Google
             Base64.strict_encode64(signature).delete("\n")
           end
 
-          def generate_signed_url issuer, signed_string, expires
-            "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
+          def generate_signed_url issuer, signed_string, expires, query
+            url = "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
               "&Expires=#{expires}" \
               "&Signature=#{CGI.escape signed_string}"
+
+            if query
+              query.each do |name, value|
+                url << "&#{CGI.escape name}=#{CGI.escape value}"
+              end
+            end
+
+            url
           end
 
           def format_extension_headers headers
