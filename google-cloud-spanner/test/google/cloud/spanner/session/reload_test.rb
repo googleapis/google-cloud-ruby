@@ -27,8 +27,17 @@ describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
     mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
+    session.must_be_kind_of Google::Cloud::Spanner::Session
+
     session.reload!
 
     mock.verify
+
+    session.must_be_kind_of Google::Cloud::Spanner::Session
+
+    session.project_id.must_equal "test"
+    session.instance_id.must_equal "my-instance-id"
+    session.database_id.must_equal "my-database-id"
+    session.session_id.must_equal "session123"
   end
 end

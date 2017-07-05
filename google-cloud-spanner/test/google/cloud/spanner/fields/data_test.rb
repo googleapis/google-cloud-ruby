@@ -33,6 +33,9 @@ describe Google::Cloud::Spanner::Fields, :data do
                                  score: :FLOAT64, updated_at: :TIMESTAMP, birthday: :DATE,
                                  avatar: :BYTES }) #project_ids: [:INT64]
 
+    data.fields.to_s.wont_be :empty?
+    data.fields.inspect.must_match /Google::Cloud::Spanner::Fields/
+
     data.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar] # , :project_ids
     data_values = data.values
     data_values[0].must_equal 1
@@ -91,5 +94,8 @@ describe Google::Cloud::Spanner::Fields, :data do
     data_array[7].must_be_kind_of StringIO
     data_array[7].read.must_equal "image"
     # data_array[8].must_equal [1, 2, 3]
+
+    data.to_s.wont_be :empty?
+    data.inspect.must_match /Google::Cloud::Spanner::Data/
   end
 end
