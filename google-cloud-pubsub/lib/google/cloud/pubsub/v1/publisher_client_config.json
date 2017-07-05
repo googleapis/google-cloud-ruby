@@ -15,9 +15,7 @@
           "INTERNAL",
           "UNAVAILABLE"
         ],
-        "non_idempotent": [
-          "UNAVAILABLE"
-        ]
+        "non_idempotent": []
       },
       "retry_params": {
         "default": {
