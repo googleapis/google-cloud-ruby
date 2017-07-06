@@ -18,6 +18,8 @@ namespace :test do
       command_name "google-cloud-pubsub"
       track_files "lib/**/*.rb"
       add_filter "test/"
+      add_filter "lib/google/pubsub/"
+      add_filter "lib/google/cloud/pubsub/v1/"
     end
 
     Rake::Task["test"].invoke

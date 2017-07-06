@@ -71,7 +71,10 @@ namespace :test do
       command_name :coverage
       track_files "lib/**/*.rb"
       add_filter "test/"
-      valid_gems.each { |gem| add_group gem, "#{gem}/lib" }
+      valid_gems_with_coverage_filters.each do |gem, filters|
+        filters.each { |filter| add_filter filter }
+        add_group gem, "#{gem}/lib"
+      end
     end
 
     header "Running tests and coverage report"
@@ -809,6 +812,15 @@ def valid_gems
     spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
     spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
   }
+end
+
+def valid_gems_with_coverage_filters
+  coverage_override = {
+    "google-cloud-pubsub" => ["google-cloud-pubsub/test/", "google-cloud-pubsub/lib/google/pubsub/", "google-cloud-pubsub/lib/google/cloud/pubsub/v1/"]
+  }
+
+  coverage = Hash[valid_gems.map { |gem| [gem, ["#{gem}/test/"]] }]
+  coverage.merge coverage_override
 end
 
 def header str, token = "#"
