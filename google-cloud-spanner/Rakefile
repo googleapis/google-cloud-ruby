@@ -18,6 +18,10 @@ namespace :test do
       command_name "google-cloud-spanner"
       track_files "lib/**/*.rb"
       add_filter "test/"
+      add_filter "lib/google/spanner/"
+      add_filter "lib/google/cloud/spanner/v1/"
+      add_filter "lib/google/cloud/spanner/admin/instance/v1/"
+      add_filter "lib/google/cloud/spanner/admin/database/v1/"
     end
 
     Rake::Task["test"].invoke
