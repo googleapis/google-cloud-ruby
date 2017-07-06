@@ -818,6 +818,7 @@ def valid_gems_with_coverage_filters
   coverage_override = {
     "google-cloud-datastore" => ["google-cloud-datastore/test/", "google-cloud-datastore/lib/google/datastore/", "google-cloud-datastore/lib/google/cloud/datastore/v1/"],
     "google-cloud-language" => ["google-cloud-language/test/", "google-cloud-language/lib/google/cloud/language/v1/"],
+    "google-cloud-logging" => ["google-cloud-logging/test/", "google-cloud-logging/lib/google/logging/", "google-cloud-logging/lib/google/cloud/logging/v2/"],
     "google-cloud-pubsub" => ["google-cloud-pubsub/test/", "google-cloud-pubsub/lib/google/pubsub/", "google-cloud-pubsub/lib/google/cloud/pubsub/v1/"]
   }
 
