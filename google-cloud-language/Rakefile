@@ -18,6 +18,7 @@ namespace :test do
       command_name "google-cloud-language"
       track_files "lib/**/*.rb"
       add_filter "test/"
+      add_filter "lib/google/cloud/language/v1/"
     end
 
     Rake::Task["test"].invoke

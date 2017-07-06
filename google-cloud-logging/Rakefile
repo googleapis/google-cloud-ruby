@@ -18,6 +18,8 @@ namespace :test do
       command_name "google-cloud-logging"
       track_files "lib/**/*.rb"
       add_filter "test/"
+      add_filter "lib/google/logging/"
+      add_filter "lib/google/cloud/logging/v2/"
     end
 
     Rake::Task["test"].invoke
