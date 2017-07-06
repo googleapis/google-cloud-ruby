@@ -732,7 +732,7 @@ module Google
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
         # @param [Hash] query Query string parameters to include in the signed
-        #   URL, such as response-content-type and response-content-disposition.
+        #   URL, such as response-content-disposition.
         #
         # @example
         #   require "google/cloud/storage"

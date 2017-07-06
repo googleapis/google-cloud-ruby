@@ -492,8 +492,7 @@ describe Google::Cloud::Storage::File, :storage do
     five_min_from_now = 5 * 60
     url = bucket.signed_url file.name, method: "GET",
                                        expires: five_min_from_now,
-                                       query: { "response-content-type" => "application/octet-stream",
-                                                "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
+                                       query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
 
     uri = URI url
     http = Net::HTTP.new uri.host, uri.port

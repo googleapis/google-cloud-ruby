@@ -109,13 +109,11 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = file.signed_url query: { "response-content-type" => "image/png",
-                                            "response-content-disposition" => "attachment; filename=\"test.png\"" }
+      signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"test.png\"" }
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
       signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
-      signed_url_params["response-content-type"].must_equal ["image/png"]
       signed_url_params["response-content-disposition"].must_equal ["attachment; filename=\"test.png\""]
 
       signing_key_mock.verify
