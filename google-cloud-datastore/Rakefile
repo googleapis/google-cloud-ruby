@@ -18,6 +18,8 @@ namespace :test do
       command_name "google-cloud-datastore"
       track_files "lib/**/*.rb"
       add_filter "test/"
+      add_filter "lib/google/datastore/"
+      add_filter "lib/google/cloud/datastore/v1/"
     end
 
     Rake::Task["test"].invoke
