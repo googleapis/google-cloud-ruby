@@ -22,27 +22,59 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
 
   let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"google.spanner.admin.database.v1.CreateDatabaseMetadata\",\"value\":\"\"}}" }
   let(:job_grpc) { Google::Longrunning::Operation.decode_json job_json }
+  let(:database_grpc) do
+    Google::Spanner::Admin::Database::V1::Database.new \
+      name: "projects/bustling-kayak-91516/instances/my-new-instance",
+      config: "projects/my-project/instanceConfigs/regional-us-central1",
+      display_name: "My New Instance",
+      node_count: 1,
+      state: :READY,
+      labels: {}
+  end
+  let(:job_grpc_done) do
+    Google::Longrunning::Operation.new(
+      name:"1234567890",
+      metadata: Google::Protobuf::Any.new(
+        type_url: "google.spanner.admin.database.v1.CreateDatabaseMetadata",
+        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+      ),
+      done: true,
+      response: Google::Protobuf::Any.new(
+        type_url: "type.googleapis.com/google.spanner.admin.database.v1.database",
+        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+      )
+    )
+  end
 
   it "creates an empty database" do
     instance_id = "my-instance-id"
     database_id = "new-database"
 
+    mock = Minitest::Mock.new
     create_res = Google::Gax::Operation.new(
                    job_grpc,
-                   Object.new,
+                   mock,
                    Google::Spanner::Admin::Database::V1::Database,
                    Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
                  )
-    mock = Minitest::Mock.new
     mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: []]
+    mock.expect :get_operation, job_grpc_done, ["1234567890", Hash]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id
 
-    mock.verify
-
     job.must_be_kind_of Google::Cloud::Spanner::Database::Job
     job.wont_be :done?
+    job.wont_be :error?
+    job.database.must_be :nil?
+
+    job.reload!
+    database = job.database
+
+    database.wont_be :nil?
+    database.must_be_kind_of Google::Cloud::Spanner::Database
+
+    mock.verify
   end
 
   it "creates a database with additional statements" do

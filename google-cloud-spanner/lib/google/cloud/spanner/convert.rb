@@ -209,48 +209,6 @@ module Google
             end
           end
 
-          ##
-          # @private Convert an Object to a Google::Protobuf::Value.
-          def object_to_value obj
-            case obj
-            when NilClass then Google::Protobuf::Value.new null_value:
-              :NULL_VALUE
-            when Numeric then Google::Protobuf::Value.new number_value: obj
-            when String then Google::Protobuf::Value.new string_value: obj
-            when TrueClass then Google::Protobuf::Value.new bool_value: true
-            when FalseClass then Google::Protobuf::Value.new bool_value: false
-            when Hash then Google::Protobuf::Value.new struct_value:
-              hash_to_struct(obj)
-            when Array then Google::Protobuf::Value.new list_value:
-              Google::Protobuf::ListValue.new(values:
-                obj.map { |o| object_to_value(o) })
-            else
-              # TODO: Could raise ArgumentError here, or convert to a string
-              Google::Protobuf::Value.new string_value: obj.to_s
-            end
-          end
-
-          ##
-          # @private Convert a Google::Protobuf::Value to an Object.
-          def value_to_object value
-            # TODO: ArgumentError if struct is not a Google::Protobuf::Value
-            if value.kind == :null_value
-              nil
-            elsif value.kind == :number_value
-              value.number_value
-            elsif value.kind == :string_value
-              value.string_value
-            elsif value.kind == :bool_value
-              value.bool_value
-            elsif value.kind == :struct_value
-              struct_to_hash value.struct_value
-            elsif value.kind == :list_value
-              value.list_value.values.map { |v| value_to_object(v) }
-            else
-              nil # just in case
-            end
-          end
-
           def number_to_duration number
             return nil if number.nil?
 

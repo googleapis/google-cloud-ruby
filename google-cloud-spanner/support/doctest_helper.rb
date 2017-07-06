@@ -68,8 +68,8 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Spanner::Snapshot#query"
   doctest.skip "Google::Cloud::Spanner::Transaction#query"
   doctest.skip "Google::Cloud::Spanner::Transaction#save"
-  doctest.skip "Google::Cloud::Spanner::Instance::Job#reload!"
-  doctest.skip "Google::Cloud::Spanner::Database::Job#reload!"
+  doctest.skip "Google::Cloud::Spanner::Instance::Job#refresh!"
+  doctest.skip "Google::Cloud::Spanner::Database::Job#refresh!"
 
   doctest.before "Google::Cloud#spanner" do
     mock_spanner do |mock, mock_instances, mock_databases|

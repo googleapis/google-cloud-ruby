@@ -272,24 +272,6 @@ module Google
           end
         end
 
-        def execute_sql session_name, sql, transaction: nil, params: nil
-          input_params = nil
-          input_param_types = nil
-          unless params.nil?
-            input_param_pairs = Convert.to_query_params params
-            input_params = Google::Protobuf::Struct.new(
-              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
-            input_param_types = Hash[
-              input_param_pairs.map { |k, v| [k, v.last] }]
-          end
-          opts = default_options_from_session session_name
-          execute do
-            service.execute_sql \
-              session_name, sql, transaction: transaction, params: input_params,
-                                 param_types: input_param_types, options: opts
-          end
-        end
-
         def streaming_execute_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil
           input_params = nil
@@ -307,18 +289,6 @@ module Google
               session_name, sql, transaction: transaction, params: input_params,
                                  param_types: input_param_types,
                                  resume_token: resume_token, options: opts
-          end
-        end
-
-        def read_table session_name, table_name, columns, keys: nil, index: nil,
-                       transaction: nil, limit: nil
-          columns.map!(&:to_s)
-          opts = default_options_from_session session_name
-          execute do
-            service.read \
-              session_name, table_name, columns, key_set(keys),
-              transaction: transaction, index: index, limit: limit,
-              options: opts
           end
         end
 
