@@ -58,3 +58,7 @@ deployment:
     owner: GoogleCloudPlatform
     commands:
       - rvm-exec 2.4.0 bundle exec rake circleci:release
+
+notify:
+  webhooks:
+    - url: https://coveralls.io/webhook?repo_token=VdG8EataF3PrWBZOBH7Hr80BXUjYRLh7o
