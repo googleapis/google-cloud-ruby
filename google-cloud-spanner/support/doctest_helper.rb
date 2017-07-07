@@ -588,6 +588,20 @@ YARD::Doctest.configure do |doctest|
       5.times do
         mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
       end
+      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Transaction#execute" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project-id/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
@@ -813,8 +827,35 @@ def results_hash1
   }
 end
 
+def results_hash_marketing
+  {
+    metadata: {
+      rowType: {
+        fields: [
+          { name: "marketing_budget",          type: { code: "INT64" } }
+        ]
+      }
+    }
+  }
+end
+
+def results_hash_marketing_2
+  {
+    values: [
+      { stringValue: "400000" }
+    ]
+  }
+end
+
 def results_enum
   [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json)].to_enum
+end
+
+def results_enum_marketing
+  [
+    Google::Spanner::V1::PartialResultSet.decode_json(results_hash_marketing.to_json),
+    Google::Spanner::V1::PartialResultSet.decode_json(results_hash_marketing_2.to_json)
+  ].to_enum
 end
 
 def commit_timestamp

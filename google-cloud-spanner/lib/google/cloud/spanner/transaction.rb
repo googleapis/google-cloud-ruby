@@ -38,11 +38,38 @@ module Google
       #   db = spanner.client "my-instance", "my-database"
       #
       #   db.transaction do |tx|
-      #     results = tx.execute "SELECT * FROM users"
+      #     # Read the second album budget.
+      #     second_album_result = tx.read "Albums", ["marketing_budget"],
+      #                                   keys: [[2, 2]], limit: 1
+      #     second_album_row = second_album_result.rows.first
+      #     second_album_budget = second_album_row.values.first
       #
-      #     results.rows.each do |row|
-      #       puts "User #{row[:id]} is #{row[:name]}"
+      #     transfer_amount = 200000
+      #
+      #     if second_album_budget < 300000
+      #       # Raising an exception will automatically roll back the
+      #       # transaction.
+      #       raise "The second album doesn't have enough funds to transfer"
       #     end
+      #
+      #     # Read the first album's budget.
+      #     first_album_result = tx.read "Albums", ["marketing_budget"],
+      #                                   keys: [[1, 1]], limit: 1
+      #     first_album_row = first_album_result.rows.first
+      #     first_album_budget = first_album_row.values.first
+      #
+      #     # Update the budgets.
+      #     second_album_budget -= transfer_amount
+      #     first_album_budget += transfer_amount
+      #     puts "Setting first album's budget to #{first_album_budget} and " \
+      #          "the second album's budget to #{second_album_budget}."
+      #
+      #     # Update the rows.
+      #     rows = [
+      #       {singer_id: 1, album_id: 1, marketing_budget: first_album_budget},
+      #       {singer_id: 2, album_id: 2, marketing_budget: second_album_budget}
+      #     ]
+      #     tx.update "Albums", rows
       #   end
       #
       class Transaction
