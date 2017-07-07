@@ -132,7 +132,7 @@ module Google
     #
     # db = spanner.client "my-instance", "my-database"
     #
-    # results = client.execute "SELECT 1"
+    # results = db.execute "SELECT 1"
     #
     # results.rows.each do |row|
     #   puts row
@@ -160,8 +160,8 @@ module Google
     # db = spanner.client "my-instance", "my-database"
     #
     # db.commit do |c|
-    #   c.update "users", [{ id: 1, name: "Charlie", active: false }]
-    #   c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+    #   c.update "users", [{ id: 1, username: "charlie94", name: "Charlie" }]
+    #   c.insert "users", [{ id: 2, username: "harvey00", name: "Harvey" }]
     # end
     # ```
     #
@@ -232,7 +232,7 @@ module Google
     #   # Read the second album budget.
     #   second_album_result = tx.read "Albums", ["marketing_budget"],
     #                                 keys: [[2, 2]], limit: 1
-    #   second_album_row = second_album_result.first
+    #   second_album_row = second_album_result.rows.first
     #   second_album_budget = second_album_row.values.first
     #
     #   transfer_amount = 200000
@@ -245,7 +245,7 @@ module Google
     #   # Read the first album's budget.
     #   first_album_result = tx.read "Albums", ["marketing_budget"],
     #                                 keys: [[1, 1]], limit: 1
-    #   first_album_row = first_album_result.first
+    #   first_album_row = first_album_result.rows.first
     #   first_album_budget = first_album_row.values.first
     #
     #   # Update the budgets.
