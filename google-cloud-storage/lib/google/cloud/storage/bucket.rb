@@ -734,7 +734,13 @@ module Google
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
         # @param [Hash] query Query string parameters to include in the signed
-        #   URL, such as response-content-disposition.
+        #   URL. The given parameters are not verified by the signature.
+        #
+        #   Parameters such as `response-content-disposition` and
+        #   `response-content-type` can alter the behavior of the response when
+        #   using the URL, but only when the file resource is missing the
+        #   corresponding values. (These values can be permanently set using
+        #   {File#content_disposition=} and {File#content_type=}.)
         #
         # @example
         #   require "google/cloud/storage"
