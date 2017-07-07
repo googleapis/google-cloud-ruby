@@ -107,15 +107,13 @@ module Google
         #   `:text` and `:html`. This is optional. The Translation API default
         #   is `:html`.
         # @param [String] model The model used by the service to perform the
-        #   translation. The neural machine translation model (`nmt`) is billed
-        #   as a premium edition feature. If this is set to `base`, then the
-        #   service will return translation using the current standard model.
-        #   The default value is `base`.
+        #   translation. Can be either `base` to use the Phrase-Based Machine
+        #   Translation (PBMT) model, or `nmt` to use the Neural Machine
+        #   Translation (NMT) model. The default is `nmt`.
         #
-        #   Acceptable values are:
-        #
-        #   * `nmt` - Use the neural machine translation model
-        #   * `base` - Use the current standard model
+        #    If the model is `nmt`, and the requested language translation pair
+        #    is not supported for the NMT model, then the request is translated
+        #    using the PBMT model.
         #
         # @param [String] cid The customization id for translate. This is
         #   optional.

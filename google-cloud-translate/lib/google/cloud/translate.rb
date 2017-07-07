@@ -34,17 +34,6 @@ module Google
     # with translated text back. You don't need to extract your source text or
     # reassemble the translated content.
     #
-    # ## Premium Edition
-    #
-    # Using the `model` parameter, you can set the model used by the service to
-    # perform the translation. The neural machine translation model (`nmt`) is
-    # billed as a premium edition feature. Because neural machine translation is
-    # computationally significantly more resource intensive than the standard
-    # model, the price for the premium edition is higher than the standard
-    # edition. If the `model` parameter not set or is set to `base`, then the
-    # service will return translation using the current standard model and
-    # standard edition pricing.
-    #
     # ## Authenticating
     #
     # Like other Cloud Platform services, Google Cloud Translation API supports
