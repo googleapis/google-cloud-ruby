@@ -43,7 +43,7 @@ module Google
           Array(@gapi.insert_errors).map do |ie|
             row = @rows[ie.index]
             errors = ie.errors.map { |e| JSON.parse e.to_json }
-            InsertError.new row, errors
+            InsertError.new ie.index, row, errors
           end
         end
 
@@ -53,10 +53,21 @@ module Google
           end
         end
 
+        def insert_error_for row
+          json_row = Convert.to_json_row(row)
+          insert_errors.detect { |e| e.row == json_row }
+        end
+
         def errors_for row
-          ie = insert_errors.detect { |e| e.row == row }
+          ie = insert_error_for row
           return ie.errors if ie
           []
+        end
+
+        def index_for row
+          ie = insert_error_for row
+          return ie.index if ie
+          nil
         end
 
         # @private New InsertResponse from the inserted rows and a
@@ -68,11 +79,13 @@ module Google
         ##
         # InsertError
         class InsertError
+          attr_reader :index
           attr_reader :row
           attr_reader :errors
 
           # @private
-          def initialize row, errors
+          def initialize index, row, errors
+            @index = index
             @row = row
             @errors = errors
           end

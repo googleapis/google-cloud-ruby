@@ -89,6 +89,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     result.insert_count.must_equal 2
     result.error_count.must_equal 1
     result.insert_errors.count.must_equal 1
+    result.insert_errors.first.index.must_equal 0
     result.insert_errors.first.row.must_equal rows.first
     result.insert_errors.first.errors.count.must_equal 1
     result.insert_errors.first.errors.first["reason"].must_equal "r34s0n"
@@ -97,12 +98,30 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     result.insert_errors.first.errors.first["message"].must_equal "m3ss4g3"
 
     result.error_rows.first.must_equal rows.first
+
+    first_row_insert_error = result.insert_error_for(rows.first)
+    first_row_insert_error.index.must_equal 0
+    first_row_insert_error.row.must_equal rows.first
+    first_row_insert_error.errors.first["reason"].must_equal "r34s0n"
+    first_row_insert_error.errors.first["location"].must_equal "l0c4t10n"
+    first_row_insert_error.errors.first["debugInfo"].must_equal "d3bugInf0"
+    first_row_insert_error.errors.first["message"].must_equal "m3ss4g3"
+
+    first_row_index = result.index_for(rows.first)
+    first_row_index.must_equal 0
+
     first_row_errors = result.errors_for(rows.first)
     first_row_errors.count.must_equal 1
     first_row_errors.first["reason"].must_equal "r34s0n"
     first_row_errors.first["location"].must_equal "l0c4t10n"
     first_row_errors.first["debugInfo"].must_equal "d3bugInf0"
     first_row_errors.first["message"].must_equal "m3ss4g3"
+
+    last_row_insert_error = result.insert_error_for(rows.last)
+    last_row_insert_error.must_be_nil
+
+    last_row_index = result.index_for(rows.last)
+    last_row_index.must_be_nil
 
     last_row_errors = result.errors_for(rows.last)
     last_row_errors.count.must_equal 0

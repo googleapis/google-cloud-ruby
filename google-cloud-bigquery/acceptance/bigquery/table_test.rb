@@ -44,6 +44,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
+  let(:invalid_rows) do
+    [
+        { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+        { name: nil,       breed: "golden retriever?", id: 5, dob: Time.now.utc },
+        { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
 
@@ -176,6 +183,34 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       row.must_be_kind_of Hash
     end
     query_data.next.must_be :nil?
+  end
+
+  it "insert skip invalid rows and return insert errors" do
+    # data = table.data
+    insert_response = table.insert invalid_rows, skip_invalid: true
+    insert_response.wont_be :success?
+    insert_response.insert_count.must_equal 2
+
+    insert_response.insert_errors.wont_be :empty?
+    insert_response.insert_errors.count.must_equal 1
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.index.must_equal 1
+
+    # In the context of this test, the original row cannot be compared with InsertResponse row because
+    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
+    # dates/times are formated as timestamp strings with milliseconds.
+    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
+    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
+    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
+    insert_response.insert_errors.first.row.must_equal bigquery_row
+
+    insert_response.error_rows.wont_be :empty?
+    insert_response.error_rows.count.must_equal 1
+    insert_response.error_rows.first.must_equal bigquery_row
+
+    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
+    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
+    insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
   it "imports data from a local file" do
