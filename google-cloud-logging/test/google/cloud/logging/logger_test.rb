@@ -205,6 +205,63 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       end
     end
 
+    describe "with a custom static label" do
+      let(:labels) {
+        {
+          "custom_label" => "just a string"
+        }
+      }
+
+      let(:env) { { "HTTP_X_CUSTOM_HEADER" => "42" } }
+
+      it "writes custom dynamic labels based on the request env" do
+        mock = Minitest::Mock.new
+        args = write_req_args :ERROR, extra_labels: {
+                                        "custom_label" => "just a string"
+                                      }
+
+        mock.expect :write_log_entries, write_res, args
+        logging.service.mocked_logging = mock
+
+        logger.add_request_info env: env
+
+        Time.stub :now, timestamp do
+          Google::Cloud.env.stub :app_engine?, false do
+            logger.error "Danger Will Robinson!"
+            mock.verify
+          end
+        end
+      end
+    end
+
+    describe "with a custom dynamic label function based on the request env" do
+      let(:labels) {
+        {
+          "custom_header_value" => ->(env) {
+            env.fetch("HTTP_X_CUSTOM_HEADER")
+          }
+        }
+      }
+
+      let(:env) { { "HTTP_X_CUSTOM_HEADER" => "42" } }
+
+      it "executes the function and writes the result as a log label" do
+        mock = Minitest::Mock.new
+        args = write_req_args :ERROR, extra_labels: { "custom_header_value" => "42" }
+        mock.expect :write_log_entries, write_res, args
+        logging.service.mocked_logging = mock
+
+        logger.add_request_info env: env
+
+        Time.stub :now, timestamp do
+          Google::Cloud.env.stub :app_engine?, false do
+            logger.error "Danger Will Robinson!"
+            mock.verify
+          end
+        end
+      end
+    end
+
     it "Also sets 'appengine.googleapis.com/trace_id' label on GAE" do
       mock = Minitest::Mock.new
       trace_id = "my_trace_id"

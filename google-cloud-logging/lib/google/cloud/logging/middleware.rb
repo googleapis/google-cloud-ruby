@@ -83,7 +83,8 @@ module Google
           env["rack.logger"] = logger
           trace_id = get_trace_id env
           log_name = get_log_name env
-          logger.add_request_info trace_id: trace_id, log_name: log_name
+          logger.add_request_info trace_id: trace_id, log_name: log_name,
+                                  env: env
           begin
             @app.call env
           ensure

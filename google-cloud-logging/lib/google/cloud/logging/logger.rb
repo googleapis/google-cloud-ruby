@@ -47,7 +47,7 @@ module Google
         # The log_name is a String that controls the name of the Stackdriver
         # log to write to. If it is nil, the default log_name for this Logger
         # is used.
-        RequestInfo = ::Struct.new :trace_id, :log_name
+        RequestInfo = ::Struct.new :trace_id, :log_name, :env
 
         ##
         # The Google Cloud writer object that calls to {#write_entries} are made
@@ -429,11 +429,14 @@ module Google
         #     should be logged.
         # @param [String, nil] log_name The log name to use, or nil to use
         #     this logger's default.
+        # @param [Hash, nil] env The request's Rack environment or `nil` if not
+        #     available.
         #
         def add_request_info info: nil,
+                             env: nil,
                              trace_id: nil,
                              log_name: nil
-          info ||= RequestInfo.new trace_id, log_name
+          info ||= RequestInfo.new trace_id, log_name, env
           @request_info[current_thread_id] = info
 
           # Start removing old entries if hash gets too large.
@@ -549,7 +552,9 @@ module Google
             end
           end
 
-          labels.merge(merged_labels)
+          request_env = info && request_info.env || {}
+
+          compute_labels(request_env).merge(merged_labels)
         end
 
         ##
@@ -581,6 +586,29 @@ module Google
         # @private Get current thread id
         def current_thread_id
           Thread.current.object_id
+        end
+
+        private
+
+        ##
+        # @private Compute values for labels
+        def compute_labels request_env
+          Hash[
+            labels.map do |k, value_or_proc|
+              [k, compute_label_value(request_env, value_or_proc)]
+            end
+          ]
+        end
+
+        ##
+        # @private Compute individual label value.
+        # Value can be a Proc (function of the request env) or a static value.
+        def compute_label_value request_env, value_or_proc
+          if value_or_proc.respond_to?(:call)
+            value_or_proc.call(request_env)
+          else
+            value_or_proc
+          end
         end
       end
     end

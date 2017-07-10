@@ -9,6 +9,7 @@ AllCops:
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
+    - "lib/google/cloud/logging/rails.rb"
 
 Documentation:
   Enabled: false
