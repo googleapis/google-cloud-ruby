@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 / 2017-07-11
+
+* Add Faraday Middleware to help collect outbound RPC information.
+* Update `Google::Cloud::Trace::Middleware` and `Google::Cloud::Trace::Railtie` to submit trace spans asynchronously by default.
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+
 ### 0.25.0 / 2017-05-25
 
 * Introduce new `Google::Cloud::Trace.configure` instrumentation configuration interface.
