@@ -48,12 +48,10 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
 
   describe ".from_grpc" do
     it "knows its attributes" do
-      int_class = 1.class.to_s
-
       variable_grpc.name.must_equal "local_var"
       variable_grpc.type.must_equal "Array"
       variable_grpc.members[0].name.must_equal "[0]"
-      variable_grpc.members[0].type.must_equal int_class
+      variable_grpc.members[0].type.must_equal "Integer"
       variable_grpc.members[0].value.must_equal "3"
       variable_grpc.members[0].members.must_equal []
     end
