@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 / 2017-07-11
+
+* Replace the `encoding` type `:raw` with `:linear16` in code, tests, and examples.
+* Update initialization to raise a better error if project ID is not specified.
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+
 ### 0.24.0 / 2017-04-05
 
 * Upgrade to V1 API, including the following changes:
