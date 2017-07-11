@@ -1,5 +1,10 @@
 # Release History
 
+### 1.1.0 / 2017-07-11
+
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+* Update gem spec homepage links.
+
 ### 1.0.1 / 2017-05-06
 
 * Update google-protobuf to the previous known working version
