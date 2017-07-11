@@ -146,7 +146,7 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
 
   describe "#breakpoint_hit" do
     let(:breakpoint) {
-      Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb", 123
+      Google::Cloud::Debugger::Snappoint.new nil, "path/to/file.rb", 123
     }
 
     it "marks breakpoint off and submits breakpoint" do

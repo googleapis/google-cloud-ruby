@@ -112,6 +112,12 @@ module Google
           attr_accessor :members
 
           ##
+          # @private Reference to a variable in the shared variable table. More
+          # than one variable can reference the same variable in the table. The
+          # var_table_index field is an index into variable_table in Breakpoint.
+          attr_accessor :var_table_index
+
+          ##
           # @private Status associated with the variable. This field will
           # usually stay unset. A status of a single variable only applies to
           # that variable or expression. The rest of breakpoint data still
@@ -132,22 +138,26 @@ module Google
 
           ##
           # Convert a Ruby variable into a
-          # Google::Cloud::Debugger::Breakpoint::Variable object.
+          # Google::Cloud::Debugger::Breakpoint::Variable object. If
+          # a variable table is provided, it will store all the subsequently
+          # created compound variables into the variable table for sharing.
           #
           # @param [Any] source Source Ruby variable to convert from
           # @param [String] name Name of the varaible
           # @param [Integer] depth Number of levels to evaluate in compound
           #   variables. Default to
           #   {Google::Cloud::Debugger::Breakpoint::Variable::MAX_DEPTH}
+          # @param [Breakpoint::VariableTable] var_table A variable table
+          #   to store shared compound variables. Optional.
           #
-          # @example
+          # @example Simple variable convertion
           #   x = 3
           #   var = Variable.from_rb_var x, name: "x"
           #   var.name  #=> "x"
           #   var.value #=> "3"
           #   var.type  #=> "Integer"
           #
-          # @example
+          # @example Hash convertion
           #   hash = {a: 1, b: :two}
           #   var = Variable.from_rb_var hash, name: "hash"
           #   var.name  #=> "hash"
@@ -159,8 +169,9 @@ module Google
           #   var.members[1].value #=> "two"
           #   var.members[1].type  #=> "Symbol"
           #
-          # @example
+          # @example Custom compound variable convertion
           #   foo = Foo.new(a: 1, b: []) #=> #<Foo:0x0000 @a: 1, @b: []>
+          #   var_table = VariableTable.new
           #   var = Variable.from_rb_var foo, name: "foo"
           #   var.name  #=> "foo"
           #   var.type  #=> "Foo"
@@ -171,18 +182,35 @@ module Google
           #   var.members[1].value #=> "[]"
           #   var.members[1].type  #=> "Array"
           #
+          # @example Use variable table for shared compound variables
+          #   hash = {a: 1}
+          #   ary = [hash, hash]
+          #   var_table = VariableTable.new
+          #   var = Variable.from_rb_var ary, name: "ary", var_table: var_table
+          #   var.name            #=> "ary"
+          #   var.var_table_index #=> 0
+          #   var_table[0].type   #=> "Array"
+          #   var_table[0].members[0].name            #=> "[0]"
+          #   var_table[0].members[0].var_table_index #=> 1
+          #   var_table[0].members[1].name            #=> "[1]"
+          #   var_table[0].members[1].var_table_index #=> 1
+          #   var_table[1].type #=> "Hash"
+          #   var_table[1].members[0].name #=> "a"
+          #   var_table[1].members[0].type #=> "Integer"
+          #   var_table[1].members[0].value #=> "1"
+          #
           # @return [Google::Cloud::Debugger::Breakpoint::Variable] Converted
           #   variable.
           #
-          def self.from_rb_var source, name: nil, depth: MAX_DEPTH
+          def self.from_rb_var source, name: nil, depth: MAX_DEPTH,
+                               var_table: nil
             return source if source.is_a? Variable
 
             # If source is a non-empty Array or Hash, or source has instance
             # variables, evaluate source as a compound variable.
-            if (((source.is_a?(Hash) || source.is_a?(Array)) &&
-               !source.empty?) || !source.instance_variables.empty?) &&
-               depth > 0
-              from_compound_var source, name: name, depth: depth
+            if compound_var?(source) && depth > 0
+              from_compound_var source, name: name, depth: depth,
+                                        var_table: var_table
             else
               var = Variable.new
               var.name = name.to_s if name
@@ -195,34 +223,73 @@ module Google
 
           ##
           # @private Helper method that converts compound variables.
-          def self.from_compound_var source, name: nil, depth: MAX_DEPTH
+          def self.from_compound_var source, name: nil, depth: MAX_DEPTH,
+                                     var_table: nil
             return source if source.is_a? Variable
+
             var = Variable.new
             var.name = name.to_s if name
+
+            if var_table
+              var.var_table_index =
+                var_table.rb_var_index(source) ||
+                add_shared_compound_var(source, depth, var_table)
+            else
+              var.type = source.class.to_s
+              add_compound_members var, source, depth
+            end
+
+            var
+          end
+
+          ##
+          # @private Determine if a given Ruby variable is a compound variable.
+          def self.compound_var? source
+            ((source.is_a?(Hash) || source.is_a?(Array)) && !source.empty?) ||
+              !source.instance_variables.empty?
+          end
+
+          ##
+          # @private Add a shared compound variable to the breakpoint
+          # variable table.
+          def self.add_shared_compound_var source, depth, var_table
+            var = Variable.new
             var.type = source.class.to_s
 
+            table_index = var_table.size
+            var_table.add_var source, var
+
+            add_compound_members var, source, depth, var_table
+
+            table_index
+          end
+
+          ##
+          # @private Add member variables to a compound variable.
+          def self.add_compound_members var, source, depth, var_table = nil
             case source
             when Hash
-              add_compound_members var, source do |(k, v)|
-                from_rb_var(v, name: k, depth: depth - 1)
+              add_member_vars var, source do |(k, v)|
+                from_rb_var v, name: k, depth: depth - 1, var_table: var_table
               end
             when Array
-              add_compound_members var, source do |el, i|
-                from_rb_var(el, name: "[#{i}]", depth: depth - 1)
+              add_member_vars var, source do |el, i|
+                from_rb_var el, name: "[#{i}]", depth: depth - 1,
+                                var_table: var_table
               end
             else
-              add_compound_members var, source.instance_variables do |var_name|
+              add_member_vars var, source.instance_variables do |var_name|
                 instance_var = source.instance_variable_get var_name
-                from_rb_var(instance_var, name: var_name, depth: depth - 1)
+                from_rb_var instance_var, name: var_name, depth: depth - 1,
+                                          var_table: var_table
               end
             end
-            var
           end
 
           ##
           # @private Help interate through collection of member variables for
           # compound variables.
-          def self.add_compound_members var, members
+          def self.add_member_vars var, members
             members.each_with_index do |el, i|
               if i < MAX_MEMBERS
                 var.members << yield(el, i)
@@ -236,6 +303,9 @@ module Google
             end
           end
 
+          private_class_method :add_compound_members, :add_shared_compound_var,
+                               :add_member_vars, :compound_var?
+
           ##
           # @private New Google::Cloud::Debugger::Breakpoint::Variable
           # from a Google::Devtools::Clouddebugger::V2::Variable object.
@@ -246,6 +316,7 @@ module Google
               o.value   = grpc.value
               o.type    = grpc.type
               o.members = from_grpc_list grpc.members
+              o.var_table_index = var_table_index_from_grpc grpc.var_table_index
             end
           end
 
@@ -256,6 +327,12 @@ module Google
           def self.from_grpc_list grpc_list
             return [] if grpc_list.nil?
             grpc_list.map { |var_grpc| from_grpc var_grpc }
+          end
+
+          ##
+          # @private Extract var_table_index from the equivalent GRPC struct
+          def self.var_table_index_from_grpc grpc
+            grpc.nil? ? nil : grpc.value
           end
 
           ##
@@ -272,7 +349,8 @@ module Google
             name.nil? &&
               value.nil? &&
               type.nil? &&
-              members.nil?
+              members.nil? &&
+              var_table_index.nil?
             # TODO: Add status when implementing variable status
           end
 
@@ -285,11 +363,23 @@ module Google
               name: name.to_s,
               value: value.to_s,
               type: type.to_s,
+              var_table_index: var_table_index_to_grpc,
               members: members_to_grpc || []
             )
           end
 
           private
+
+          ##
+          # @private Exports the Variable var_table_index attribute to
+          # an Int32Value gRPC struct
+          def var_table_index_to_grpc
+            if var_table_index
+              Google::Protobuf::Int32Value.new value: var_table_index
+            else
+              nil
+            end
+          end
 
           ##
           # @private Exports the Variable members to an array of

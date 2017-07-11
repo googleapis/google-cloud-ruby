@@ -120,7 +120,8 @@ class MockDebugger < Minitest::Spec
       "evaluated_expressions" => [random_variable_array_hash],
       "labels" => {
         "tag" => "hello"
-      }
+      },
+      "variable_table" => [random_variable_array_hash]
     }
   end
 end

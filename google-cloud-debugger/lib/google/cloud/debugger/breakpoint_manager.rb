@@ -13,7 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/debugger/breakpoint"
+require "google/cloud/debugger/snappoint"
+require "google/cloud/debugger/logpoint"
 
 module Google
   module Cloud
