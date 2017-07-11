@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.0 / 2017-07-11
+
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+
 ### 0.25.0 / 2017-05-25
 
 * Introduce new `Google::Cloud::Debugger.configure` instrumentation configuration interface.
