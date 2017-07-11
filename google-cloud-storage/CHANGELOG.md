@@ -1,9 +1,13 @@
 # Release History
 
+### 1.3.0 / 2017-07-11
+
+* Add `query` parameter to `#signed_url` methods (georgeclaghorn).
+
 ### 1.2.0 / 2017-06-27
 
-* Add Requester Pays support
-* Upgrade dependency on Google API Client
+* Add Requester Pays support.
+* Upgrade dependency on Google API Client.
 
 ### 1.1.0 / 2017-06-01
 
