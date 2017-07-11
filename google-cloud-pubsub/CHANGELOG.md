@@ -1,5 +1,10 @@
 # Release History
 
+### 0.26.0 / 2017-07-11
+
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+* Update initialization to raise a better error if project ID is not specified.
+
 ### 0.25.0 / 2017-06-01
 
 * Add Snapshot and Subscription#seek.
