@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.1 / 2017-07-11
+
+* Add `InsertResponse::InsertError#index` (zedalaye)
+
 ### 0.27.0 / 2017-06-28
 
 * Add `maximum_billing_tier` and `maximum_bytes_billed` to `QueryJob`, `Project#query_job` and `Dataset#query_job`.
