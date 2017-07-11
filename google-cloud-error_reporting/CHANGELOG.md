@@ -1,5 +1,10 @@
 # Release History
 
+### 0.26.0 / 2017-07-11
+
+* Update `Google::Cloud::ErrorReporting::Middleware` and `Google::Cloud::ErrorReporting::Railtie` to submit error events asynchronously by default.
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+
 ### 0.25.0 / 2017-05-25
 
 * New Error Reporting instrumentation client.
