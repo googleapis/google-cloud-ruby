@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 / 2017-07-11
+
+* Update `labels` parameter in `Google::Cloud::Logging::Logger#initialize` to default to empty hash.
+* Update `Google::Cloud::Logging::Logger` to support the following `ActiveSupport::Logger` methods: `:local_level`, `:local_level=`, `:silence`, `:silencer`, and `:unknown?`.
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+* Update gem spec homepage links.
+
 ### 1.1.0 / 2017-05-25
 
 * Introduce new `Google::Cloud::Logging.configure` instrumentation configuration interface.
