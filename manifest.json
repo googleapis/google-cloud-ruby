@@ -140,8 +140,9 @@
       "name": "google-cloud-env",
       "defaultService": "google/cloud/env",
       "versions": [
-        "v1.0.0",
-        "master"
+        "v1.0.1",
+        "master",
+        "v1.0.0"
       ]
     },
     {
