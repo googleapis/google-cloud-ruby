@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 / 2017-07-11
+
+* Add `Image#annotate`.
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+* Update gem spec homepage links.
+
 ### 0.24.0 / 2017-03-31
 
 * Updated documentation
