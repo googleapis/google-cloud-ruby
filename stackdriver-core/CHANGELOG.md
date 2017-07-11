@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.0 / 2017-07-11
+
+* Introduce `Stackdriver::Core::AsyncActor` module, used by stackdriver gems to perform asynchronous jobs.
+
 ### 1.1.0 / 2017-05-25
 
 * Introduce new Stackdriver instrumentation configuration interface.
