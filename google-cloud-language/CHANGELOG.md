@@ -1,5 +1,12 @@
 # Release History
 
+### 0.27.0 / 2017-07-11
+
+* Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
+* Update initialization to raise a better error if project ID is not specified.
+* Add GAPIC V1Beta2 API documentation.
+* Update gem spec homepage links.
+
 ### 0.26.2 / 2017-04-06
 
 * Update documentation.
