@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.1 / 2017-07-11
+
+* Remove mention of discontinued Premium Edition billing from documentation.
+
 ### 1.0.0 / 2017-06-28
 
 * Release 1.0
