@@ -311,7 +311,7 @@
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",
       "versions": [
-        "v0.26.0",
+        "v0.26.1",
         "master",
         "v0.25.0",
         "v0.24.1",
