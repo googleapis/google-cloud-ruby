@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.1 / 2017-07-11
+
+* stackdriver-core 1.2.0 release
+
 ### 1.2.0 / 2017-07-11
 
 * Update `labels` parameter in `Google::Cloud::Logging::Logger#initialize` to default to empty hash.
