@@ -18,9 +18,9 @@ require "google/cloud/trace"
 module GRPC
   module Core
     ##
-    # Instrumentation Stackdriver Trace in GRPC by patching GRPC::Core::Call
-    # class. Intercept each GRPC request and create a Trace span with basic
-    # request information.
+    # Stackdriver Trace instrumentation of GRPC by patching GRPC::Core::Call
+    # class. Add more RPC information into the trace span created by upstream
+    # patch from GRPC::ActiveCallWithTrace
     module CallWithTrace
       ##
       # @private Add request labels from the Call object and message.
@@ -62,22 +62,24 @@ module GRPC
       end
 
       ##
-      # Override GRPC::Core::Call#run_batch method. Wrap the original method
-      # with a trace span that will get submitted with the overall request trace
-      # span tree.
+      # Override GRPC::Core::Call#run_batch method. Reuse the "gRPC request"
+      # span created in ActiveCallWithTrace patch to add more information from
+      # the request.
       def run_batch *args
-        Google::Cloud::Trace.in_span "gRPC request" do |span|
-          if span && args.size > 0
-            message = args[0]
-            CallWithTrace.add_request_labels self, message, span.labels
-          end
+        span = Google::Cloud::Trace.get
+        # Make sure we're in a "gRPC request" span
+        span = nil if span && span.name != "gRPC request"
 
-          response = super
-
-          CallWithTrace.add_response_labels response, span.labels if span
-
-          response
+        if span && !args.empty?
+          message = args[0]
+          CallWithTrace.add_request_labels self, message, span.labels
         end
+
+        response = super
+
+        CallWithTrace.add_response_labels response, span.labels if span
+
+        response
       end
     end
 

@@ -71,6 +71,7 @@ module Google
         GAE_REQUEST_LOG_ID = "g.co/gae/request_log_id"
 
         RPC_HOST = "/rpc/host"
+        RPC_REQUEST_TYPE = "/rpc/request/type"
         RPC_REQUEST_SIZE = "/rpc/request/size"
         RPC_RESPONSE_SIZE = "/rpc/response/size"
         RPC_STATUS_CODE = "/rpc/status_code"

@@ -163,7 +163,7 @@ module Google
 
         def load_grpc
           require "grpc"
-          # require "google/cloud/trace/patches/active_call_with_trace"
+          require "google/cloud/trace/patches/active_call_with_trace"
           require "google/cloud/trace/patches/call_with_trace"
         end
       end
