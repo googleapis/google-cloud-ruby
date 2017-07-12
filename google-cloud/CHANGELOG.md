@@ -1,47 +1,63 @@
 # Release History
 
+### 0.35.0 / 2017-07-11
+
+* Datastore 1.1.0 release.
+* Debugger 0.26.0 release.
+* Error Reporting 0.26.0 release.
+* Natural Language 0.27.0 release.
+* Logging 1.2.0 release.
+* Monitoring 0.25.0 release.
+* Pub/Sub 0.26.0 release.
+* Spanner 0.22.0 release.
+* Speech 0.25.0 release.
+* Storage 1.3.0 release.
+* Trace 0.26.0 release.
+* Video Intelligence 0.21.0 release.
+* Vision 0.25.0 release.
+
 ### 0.34.0 / 2017-06-28
 
-* Translate 1.0.0 release
+* Translate 1.0.0 release.
 
 ### 0.33.0 / 2017-06-28
 
-* BigQuery 0.27.0 release
-* DNS 0.25.0 release
-* Resource Manager 0.26.0 release
-* Storage 1.2.0 release
+* BigQuery 0.27.0 release.
+* DNS 0.25.0 release.
+* Resource Manager 0.26.0 release.
+* Storage 1.2.0 release.
 
 ### 0.32.0 / 2017-06-08
 
-* Add Spanner (google-cloud-spanner)
+* Add Spanner (google-cloud-spanner).
 
 ### 0.31.0 / 2017-06-01
 
-* Pub/Sub 0.25.0 release
-* Resource Manager 0.25.0 release
-* Storage 1.1.0 release
+* Pub/Sub 0.25.0 release.
+* Resource Manager 0.25.0 release.
+* Storage 1.1.0 release.
 
 ### 0.30.0 / 2017-05-25
 
-* Error Reporting 0.25.0 release
-* Logging 1.1.0 release
-* Trace 0.25.0 release
+* Error Reporting 0.25.0 release.
+* Logging 1.1.0 release.
+* Trace 0.25.0 release.
 
 ### 0.29.0 / 2017-05-18
 
-* Add Vision Intelligence
+* Add Vision Intelligence.
 
 ### 0.28.0 / 2017-04-05
 
-* Storage 1.0 release
-* Speech Beta release
-* Updated dependencies BigQuery, DNS, and Resource Manager
+* Storage 1.0 release.
+* Speech Beta release.
+* Updated dependencies BigQuery, DNS, and Resource Manager.
 
 ### 0.27.0 / 2017-03-31
 
-* Datastore 1.0 release
-* Logging 1.0 release
-* Updated dependencies on all other gems
+* Datastore 1.0 release.
+* Logging 1.0 release.
+* Updated dependencies on all other gems.
 
 ### 0.26.0 / 2017-03-03
 
@@ -66,12 +82,12 @@
 
 ### 0.24.0 / 2017-01-27
 
-* Upgrade to new versions of Error Reporting, Monitoring, Natural Language, and Pub/Sub
-* Add Trace service
+* Upgrade to new versions of Error Reporting, Monitoring, Natural Language, and Pub/Sub.
+* Add Trace service.
 
 ### 0.23.0 / 2016-21-8
 
-* Upgrade to beta versions of BigQuery, Datastore, Logging, and Storage (0.23.x)
+* Upgrade to beta versions of BigQuery, Datastore, Logging, and Storage (0.23.x).
 
 ### 0.22.0 / 2016-11-14
 
@@ -85,8 +101,8 @@
 ### 0.21.0 / 2016-10-20
 
 * Update all service gems to 0.21.x
-* Add Error Reporting service
-* Add Monitoring service
+* Add Error Reporting service.
+* Add Monitoring service.
 
 ### 0.20.1 / 2016-09-30
 
@@ -96,5 +112,5 @@ Add google-cloud-speech.
 
 This gem is the new name for the old `gcloud` gem. Legacy code can continue to use the `gcloud` gem.
 
-* Namespace is now `Google::Cloud`
-* Each service now has its own gem package
+* Namespace is now `Google::Cloud`.
+* Each service now has its own gem package.
