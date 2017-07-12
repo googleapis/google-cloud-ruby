@@ -1,0 +1,1 @@
+{"id":"stackdriver/core","name":"Core","title":["Stackdriver","Core"],"description":"<p>The Stackdriver::Core module is a namespace for common types and shared\nutilities used by the Google Stackdriver libraries. Most applications will\nnot need to use these classes directly.</p>","source":"stackdriver-core/lib/stackdriver/core.rb#L28","resources":[],"examples":[],"methods":[]}
