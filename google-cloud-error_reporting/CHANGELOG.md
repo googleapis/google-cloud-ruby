@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.1 / 2017-07-11
+
+* stackdriver-core 1.2.0 release
+
 ### 0.26.0 / 2017-07-11
 
 * Update `Google::Cloud::ErrorReporting::Middleware` and `Google::Cloud::ErrorReporting::Railtie` to submit error events asynchronously by default.
