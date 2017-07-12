@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.1 / 2017-07-11
+
+* stackdriver-core 1.2.0 release
+
 ### 0.26.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
