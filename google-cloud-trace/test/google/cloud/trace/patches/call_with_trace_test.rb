@@ -57,7 +57,7 @@ describe GRPC::Core::CallWithTrace do
         message.must_equal "grpc-test-message"
         add_labels_called = true
       end
-      stubbed_span = OpenStruct.new(labels: {}, name: "gRPC request")
+      stubbed_span = OpenStruct.new(labels: {}, name: GRPC::ActiveCallWithTrace::SPAN_NAME)
       stubbed_span.define_singleton_method :in_span do |_, _, &b|
         b.call self
       end

@@ -68,7 +68,7 @@ module GRPC
       def run_batch *args
         span = Google::Cloud::Trace.get
         # Make sure we're in a "gRPC request" span
-        span = nil if span && span.name != "gRPC request"
+        span = nil if span && span.name != GRPC::ActiveCallWithTrace::SPAN_NAME
 
         if span && !args.empty?
           message = args[0]

@@ -21,12 +21,14 @@ module GRPC
   # class. Intercept each GRPC request and create a Trace span with basic
   # request information.
   module ActiveCallWithTrace
+    SPAN_NAME = "gRPC request"
+
     ##
     # Override GRPC::ActiveCall#request_response method. Wrap the original
     # method with a trace span that will get submitted with the overall request
     # trace span tree.
     def request_response *args
-      Google::Cloud::Trace.in_span "gRPC request" do |span|
+      Google::Cloud::Trace.in_span SPAN_NAME do |span|
         if span && !args.empty?
           grpc_request = args[0]
           label_key = Google::Cloud::Trace::LabelKey::RPC_REQUEST_TYPE
