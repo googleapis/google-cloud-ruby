@@ -38,12 +38,16 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.name.must_equal table_name
     table.description.must_equal description
     table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
 
     table.name = new_table_name
 
     table.name.must_equal new_table_name
     table.description.must_equal description
     table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
 
     mock.verify
   end
@@ -61,13 +65,81 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.name.must_equal table_name
     table.description.must_equal description
     table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
 
     table.description = new_description
 
     table.name.must_equal table_name
     table.description.must_equal new_description
     table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
 
     mock.verify
   end
+
+  it "updates time partitioning type" do
+    type = "DAY"
+
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["timePartitioning"] = {
+        "type"  => type,
+    }
+    partitioning = Google::Apis::BigqueryV2::TimePartitioning.new type: type
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning
+    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
+      [project, dataset_id, table_id, request_table_gapi]
+    table.service.mocked_service = mock
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
+
+    table.time_partitioning_type = type
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_equal type
+    table.time_partitioning_expiration.must_be_nil
+
+    mock.verify
+  end
+
+  it "updates time partitioning expiration" do
+    expiration = 86_400
+    expiration_ms = expiration * 1_000
+
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["timePartitioning"] = {
+        "expirationMs" => expiration_ms,
+    }
+    partitioning = Google::Apis::BigqueryV2::TimePartitioning.new expiration_ms: expiration_ms
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning
+    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
+      [project, dataset_id, table_id, request_table_gapi]
+    table.service.mocked_service = mock
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
+
+    table.time_partitioning_expiration = expiration
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_expiration.must_equal expiration
+
+    mock.verify
+  end
+
 end

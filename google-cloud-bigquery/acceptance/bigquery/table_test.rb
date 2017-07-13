@@ -36,6 +36,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     t
   end
+  let(:time_partitioned_table_id) { "daily_kittens"}
+  let(:seven_days) { 7 * 24 * 60 * 60 }
+  let(:time_partitioned_table) do
+    t = dataset.table time_partitioned_table_id
+    if t.nil?
+      t = dataset.create_table time_partitioned_table_id do |updater|
+        updater.time_partitioning_type = "DAY"
+        updater.time_partitioning_expiration = seven_days
+      end
+    end
+    t
+  end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -70,6 +82,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.modified_at.must_be_kind_of Time
     fresh.table?.must_equal true
     fresh.view?.must_equal false
+    fresh.time_partitioning_type.must_be_nil
+    fresh.time_partitioning_expiration.must_be_nil
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
@@ -100,6 +114,23 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     table.description.must_equal new_desc
   end
 
+  it "gets and sets time partitioning" do
+    partitioned_table = dataset.table "weekly_kittens"
+    if partitioned_table.nil?
+      partitioned_table = dataset.create_table "weekly_kittens" do |updater|
+        updater.time_partitioning_type = "DAY"
+        updater.time_partitioning_expiration = seven_days
+      end
+    end
+
+    partitioned_table.time_partitioning_expiration = 1
+
+    partitioned_table.reload!
+    partitioned_table.table_id.must_equal "weekly_kittens"
+    partitioned_table.time_partitioning_type.must_equal "DAY"
+    partitioned_table.time_partitioning_expiration.must_equal 1
+  end
+
   it "updates its schema" do
     begin
       t = dataset.create_table "table_schema_test"
@@ -118,6 +149,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       t2 = dataset.table "table_schema_test"
       t2.delete if t2
     end
+  end
+
+  it "allows tables to be created with time_partioning enabled" do
+    table = time_partitioned_table
+    table.time_partitioning_type.must_equal "DAY"
+    table.time_partitioning_expiration.must_equal seven_days
   end
 
   it "inserts rows directly and gets its data" do
