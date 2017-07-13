@@ -118,6 +118,96 @@ module Google
           table_ref
         end
 
+        ###
+        # Is the table partitioned?
+        #
+        # @!group Attributes
+        #
+        def time_partitioning?
+          !@gapi.time_partitioning.nil?
+        end
+
+        ###
+        # The period for which the table is partitioned, if any.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_type
+          ensure_full_data!
+          @gapi.time_partitioning.type if time_partitioning?
+        end
+
+        ##
+        # Sets the partitioning for the table. See [Partitioned Tables
+        # ](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # You can only set partitioning when creating a table as in
+        # the example below. BigQuery does not allow you to change partitioning
+        # on an existing table.
+        #
+        # @param [String] type The partition type. Currently the only
+        # supported value is "DAY".
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |table|
+        #     table.time_partitioning_type = "DAY"
+        #   end
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_type= type
+          @gapi.time_partitioning ||=
+              Google::Apis::BigqueryV2::TimePartitioning.new
+          @gapi.time_partitioning.type = type
+          patch_gapi! :time_partitioning
+        end
+
+
+        ###
+        # The expiration for the table partitions, if any, in seconds.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_expiration
+          ensure_full_data!
+          @gapi.time_partitioning.expiration_ms / 1_000 if
+              time_partitioning? &&
+              !@gapi.time_partitioning.expiration_ms.nil?
+        end
+
+        ##
+        # Sets the partition expiration for the table. See [Partitioned Tables
+        # ](https://cloud.google.com/bigquery/docs/partitioned-tables). The
+        # table must also be partitioned.
+        #
+        # See {Table#time_partitioning_type=}.
+        #
+        # @param [Integer] expiration An expiration time, in seconds,
+        # for data in partitions.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |table|
+        #     table.time_partitioning_type = "DAY"
+        #     table.time_partitioning_expiration = 86_400
+        #   end
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_expiration= expiration
+          @gapi.time_partitioning ||=
+              Google::Apis::BigqueryV2::TimePartitioning.new
+          @gapi.time_partitioning.expiration_ms = expiration * 1000
+          patch_gapi! :time_partitioning
+        end
+
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
         # the format specified by the [Legacy SQL Query
