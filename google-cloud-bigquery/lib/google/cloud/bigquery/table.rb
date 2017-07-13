@@ -1227,8 +1227,8 @@ module Google
             @gapi
           end
 
-          def time_partitioning type: 'DAY', expire_ms: nil
-            @gapi.time_partitioning = { type: type, expire_ms: expire_ms }
+          def time_partitioning type: 'DAY', expiration_ms: nil
+            @gapi.time_partitioning = { type: type, expiration_ms: expiration_ms }
           end
 
           protected
