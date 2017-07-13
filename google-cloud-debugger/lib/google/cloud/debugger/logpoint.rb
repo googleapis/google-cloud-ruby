@@ -81,7 +81,7 @@ module Google
             index < expressions.size ? expressions[index].inspect : ""
           end
 
-          # Unescape "$" charactors
+          # Unescape "$" characters
           message.gsub(/\$\$/, "$")
         end
       end

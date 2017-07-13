@@ -30,7 +30,7 @@ module Google
           # @private Item in the variables list. :orig_var is reference to the
           # original Ruby variable. :var is the equivalent
           # Breakpoint::Variable.
-          ListItem = Struct.new(:orig_var, :var)
+          ListItem = Struct.new :orig_var, :var
 
           ##
           # @private Create a new VariableTable instance

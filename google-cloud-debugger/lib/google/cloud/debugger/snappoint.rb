@@ -89,15 +89,15 @@ module Google
               sf.function = frame_binding.eval("__method__").to_s
               sf.location = SourceLocation.new.tap do |l|
                 l.path =
-                  frame_binding.eval("::File.absolute_path(__FILE__)")
-                l.line = frame_binding.eval("__LINE__")
+                  frame_binding.eval "::File.absolute_path(__FILE__)"
+                l.line = frame_binding.eval "__LINE__"
               end
             end
 
             if i < STACK_EVAL_DEPTH
               frame_info.locals =
                 frame_binding.local_variables.map do |local_var_name|
-                  local_var = frame_binding.local_variable_get(local_var_name)
+                  local_var = frame_binding.local_variable_get local_var_name
 
                   Variable.from_rb_var local_var, name: local_var_name,
                                                   var_table: variable_table
