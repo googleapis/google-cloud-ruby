@@ -30,17 +30,19 @@ module Google
 
           attr_reader :topic_name, :service, :batch
           attr_reader :max_bytes, :max_messages, :interval
-          attr_reader :thread, :publisher_thread_pool, :callback_thread_pool
+          attr_reader :publish_threads, :callback_threads
+          attr_reader :publish_thread_pool, :callback_thread_pool
 
           def initialize topic_name, service, max_bytes: 5242880,
-                         max_messages: 1000, interval: 0.25, threads: nil
+                         max_messages: 1000, interval: 0.25, threads: {}
             @topic_name = service.topic_path topic_name
-            @service = service
+            @service    = service
 
-            @max_bytes = max_bytes
-            @max_messages = max_messages
-            @interval = interval
-            @threads = threads || [2, Concurrent.processor_count * 2].max
+            @max_bytes        = max_bytes
+            @max_messages     = max_messages
+            @interval         = interval
+            @publish_threads  = (threads[:publish] || 4).to_i
+            @callback_threads = (threads[:callback] || 8).to_i
 
             @cond = new_cond
 
@@ -65,9 +67,7 @@ module Google
                 end
               end
 
-              @first_published_at ||= Time.now
-              @thread_pool ||= Concurrent::FixedThreadPool.new @threads
-              @thread ||= Thread.new { run_background }
+              init_resources!
 
               @cond.signal
             end
@@ -81,7 +81,7 @@ module Google
               @stopped = true
               publish_batch!
               @cond.signal
-              @thread_pool.shutdown if @thread_pool
+              @publish_thread_pool.shutdown if @publish_thread_pool
             end
 
             self
@@ -89,7 +89,14 @@ module Google
 
           def wait! timeout = nil
             synchronize do
-              @thread_pool.wait_for_termination timeout if @thread_pool
+              if @publish_thread_pool
+                @publish_thread_pool.wait_for_termination timeout
+              end
+
+              if @callback_thread_pool
+                @callback_thread_pool.shutdown
+                @callback_thread_pool.wait_for_termination timeout
+              end
             end
 
             self
@@ -113,6 +120,15 @@ module Google
           end
 
           protected
+
+          def init_resources!
+            @first_published_at   ||= Time.now
+            @publish_thread_pool  ||= Concurrent::FixedThreadPool.new \
+              @publish_threads
+            @callback_thread_pool ||= Concurrent::FixedThreadPool.new \
+              @callback_threads
+            @thread ||= Thread.new { run_background }
+          end
 
           def run_background
             synchronize do
@@ -144,22 +160,30 @@ module Google
           end
 
           def publish_batch_async topic_name, batch
-            Concurrent::Future.new(executor: @thread_pool) do
+            Concurrent::Future.new(executor: @publish_thread_pool) do
               begin
                 grpc = @service.publish topic_name, batch.messages
                 batch.items.zip(Array(grpc.message_ids)) do |item, id|
                   next unless item.callback
 
                   item.msg.message_id = id
-                  item.callback.call PublishResult.from_grpc(item.msg)
+                  publish_result = PublishResult.from_grpc(item.msg)
+                  execute_callback_async item.callback, publish_result
                 end
               rescue => e
                 batch.items.each do |item|
                   next unless item.callback
 
-                  item.callback.call PublishResult.from_error(item.msg, e)
+                  publish_result = PublishResult.from_error(item.msg, e)
+                  execute_callback_async item.callback, publish_result
                 end
               end
+            end.execute
+          end
+
+          def execute_callback_async callback, publish_result
+            Concurrent::Future.new(executor: @callback_thread_pool) do
+              callback.call publish_result
             end.execute
           end
 
