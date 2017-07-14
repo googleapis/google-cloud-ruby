@@ -133,11 +133,8 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_instance "my-new-instance",
-          #                                 name: "My New Instance",
-          #                                 config: "regional-us-central1",
-          #                                 nodes: 5,
-          #                                 labels: { production: :env }
+          #   job = spanner.create_database "my-instance",
+          #                                 "my-new-database"
           #
           #   job.error? # true
           #
