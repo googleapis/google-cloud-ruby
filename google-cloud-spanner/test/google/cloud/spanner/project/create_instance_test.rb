@@ -62,6 +62,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
     job.must_be_kind_of Google::Cloud::Spanner::Instance::Job
     job.wont_be :done?
     job.wont_be :error?
+    job.error.must_be :nil?
     job.instance.must_be :nil?
 
     job.reload!

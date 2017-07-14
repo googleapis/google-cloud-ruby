@@ -134,6 +134,35 @@ module Google
           end
 
           ##
+          # The status code and message if the operation associated with this
+          # job produced an error, returned as an error object.
+          #
+          # @return [Google::Cloud::Error, nil] An error object containing the
+          #   status code and message, or `nil` if no error occurred.
+          #
+          # @example
+          #   require "google/cloud/spanner"
+          #
+          #   spanner = Google::Cloud::Spanner.new
+          #
+          #   job = spanner.create_instance "my-new-instance",
+          #                                 name: "My New Instance",
+          #                                 config: "regional-us-central1",
+          #                                 nodes: 5,
+          #                                 labels: { production: :env }
+          #
+          #   job.error? # true
+          #
+          #   error = job.error
+          #
+          def error
+            return nil unless error?
+            fail GRPC::BadStatus.new @grpc.error.code, @grpc.error.message
+          rescue GRPC::BadStatus => err
+            Google::Cloud::Error.from_error err
+          end
+
+          ##
           # Reloads the job with current data from the long-running,
           # asynchronous processing of an instance operation.
           #
