@@ -248,8 +248,11 @@ fixture.extend Acceptance::SpannerTest::Fixtures
 
 job = $spanner.create_instance $spanner_prefix, name: $spanner_prefix, config: "regional-us-central1", nodes: 1
 job.wait_until_done!
+raise job.error if job.error?
+
 job2 = job.instance.create_database "main", statements: fixture.schema_ddl_statements
 job2.wait_until_done!
+raise job2.error if job2.error?
 
 # Create one client for all tests, to minimize resource usage
 $spanner_client = $spanner.client $spanner_prefix, "main"
