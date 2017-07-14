@@ -86,9 +86,7 @@ namespace :acceptance do
     $LOAD_PATH.unshift "lib"
     require "google/cloud/spanner"
     puts "Cleaning up Spanner instances and databases."
-    # Only remove the instances that start with gcloud-ruby since we are sharing
-    # a project with the other languages during development.
-    Google::Cloud::Spanner.new.instances.all.select { |i| i.instance_id.start_with? "gcruby" }.each do |instance|
+    Google::Cloud::Spanner.new.instances.all do |instance|
       begin
         instance.databases.all.each &:drop
         instance.delete
