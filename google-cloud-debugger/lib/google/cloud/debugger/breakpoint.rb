@@ -18,6 +18,7 @@ require "google/cloud/debugger/breakpoint/evaluator"
 require "google/cloud/debugger/breakpoint/source_location"
 require "google/cloud/debugger/breakpoint/stack_frame"
 require "google/cloud/debugger/breakpoint/variable"
+require "google/cloud/debugger/breakpoint/variable_table"
 
 module Google
   module Cloud
@@ -124,8 +125,7 @@ module Google
         # field. The stored objects are nameless and get their name from the
         # referencing variable. The effective variable is a merge of the
         # referencing variable and the referenced variable.
-        # TODO: Implement variable table
-        # attr_accessor :variable_table
+        attr_accessor :variable_table
 
         ##
         # A set of custom breakpoint properties, populated by the agent, to be
@@ -153,6 +153,7 @@ module Google
           @evaluated_expressions = []
           @stack_frames = []
           @labels = {}
+          @variable_table = []
         end
 
         ##
@@ -160,24 +161,37 @@ module Google
         # from a Google::Devtools::Clouddebugger::V2::Breakpoint object.
         def self.from_grpc grpc
           return new if grpc.nil?
-          new.tap do |b|
+
+          breakpoint = grpc.action == :LOG ? Logpoint.new : Snappoint.new
+          breakpoint.tap do |b|
             b.id = grpc.id
             b.action = grpc.action
             b.condition = grpc.condition
-            b.create_time = timestamp_from_grpc grpc.create_time
-            b.evaluated_expressions =
-              Breakpoint::Variable.from_grpc_list grpc.evaluated_expressions
             b.expressions = grpc.expressions.to_a
-            b.final_time = timestamp_from_grpc grpc.final_time
             b.labels = hashify_labels grpc.labels
             b.log_message_format = grpc.log_message_format
             b.log_level = grpc.log_level
-            b.location = Breakpoint::SourceLocation.from_grpc grpc.location
             b.is_final_state = grpc.is_final_state
             b.status = grpc.status
-            b.stack_frames = stack_frames_from_grpc grpc
             b.user_email = grpc.user_email
+
+            assign_complex_grpc_fields grpc, b
           end
+        end
+
+        ##
+        # @private Helper method that helps extracting complex fields from
+        # grpc struct into a breakpoint.
+        def self.assign_complex_grpc_fields grpc, breakpoint
+          breakpoint.create_time = timestamp_from_grpc grpc.create_time
+          breakpoint.evaluated_expressions =
+            Breakpoint::Variable.from_grpc_list grpc.evaluated_expressions
+          breakpoint.final_time = timestamp_from_grpc grpc.final_time
+          breakpoint.location =
+            Breakpoint::SourceLocation.from_grpc grpc.location
+          breakpoint.stack_frames = stack_frames_from_grpc grpc
+          breakpoint.variable_table =
+            Breakpoint::VariableTable.from_grpc grpc.variable_table
         end
 
         ##
@@ -205,8 +219,10 @@ module Google
           end
         end
 
-        private_class_method :stack_frames_from_grpc, :timestamp_from_grpc,
-                             :hashify_labels
+        private_class_method :stack_frames_from_grpc,
+                             :timestamp_from_grpc,
+                             :hashify_labels,
+                             :assign_complex_grpc_fields
 
         ##
         # Marks a breakpoint as complete if this breakpoint isn't completed
@@ -263,28 +279,6 @@ module Google
         end
 
         ##
-        # Evaluate the breakpoint unless it's already marked as completed.
-        # Store evaluted results in @evaluated_expressions, @stack_frames, and
-        # @evaluated_log_message, depends on the action of breakpoint. Mark
-        # breakpoint complete if successfully evaluated a breakpoint with
-        # :CAPTURE action.
-        #
-        # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
-        #   objects, from the call stack that leads to the triggering of the
-        #   breakpoints.
-        #
-        # @return [Boolean] True if evaluated successfully; false otherwise.
-        #
-        def evaluate call_stack_bindings
-          case action
-          when :CAPTURE
-            evaluate_snapshot_point call_stack_bindings
-          when :LOG
-            evaluate_logpoint call_stack_bindings[0]
-          end
-        end
-
-        ##
         # Check if two breakpoints are equal to each other
         def eql? other
           id == other.id &&
@@ -314,7 +308,8 @@ module Google
             stack_frames: stack_frames_to_grpc,
             evaluated_expressions: evaluated_expressions_to_grpc,
             status: status,
-            labels: labels_to_grpc
+            labels: labels_to_grpc,
+            variable_table: variable_table.to_grpc
           )
         end
 
@@ -350,55 +345,6 @@ module Google
         private
 
         ##
-        # @private Evaluate snapshot point
-        def evaluate_snapshot_point call_stack_bindings
-          synchronize do
-            top_binding = call_stack_bindings[0]
-
-            return false if complete? || !check_condition(top_binding)
-
-            begin
-              unless expressions.empty?
-                @evaluated_expressions =
-                  Evaluator.eval_expressions top_binding, @expressions
-              end
-
-              @stack_frames = Evaluator.eval_call_stack call_stack_bindings
-
-              complete
-            rescue
-              return false
-            end
-          end
-
-          true
-        end
-
-        ##
-        # @private Evaluate logpoint
-        def evaluate_logpoint binding
-          synchronize do
-            return false if complete? || !check_condition(binding)
-
-            begin
-              unless expressions.empty?
-                @evaluated_expressions = expressions.map do |expression|
-                  Evaluator.readonly_eval_expression binding, expression
-                end
-              end
-              @evaluated_log_message =
-                Evaluator.format_message log_message_format,
-                                         evaluated_expressions
-            rescue
-              return false
-            end
-          end
-
-          true
-        end
-
-
-        ##
         # @private Formats the labels so they can be saved to a
         # Google::Devtools::Clouddebugger::V2::Breakpoint object.
         def labels_to_grpc
@@ -417,7 +363,7 @@ module Google
 
         ##
         # @private Exports the Breakpoint stack_frames to an array of
-        # Google::Devtools::Clouddebugger::V2::StackFrame objects.
+        # Google::Devtools::Clouddebugger::V2::Variable objects.
         def evaluated_expressions_to_grpc
           evaluated_expressions.nil? ? [] : evaluated_expressions.map(&:to_grpc)
         end

@@ -16,16 +16,17 @@
 require "helper"
 
 describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
-  describe "#to_grpc" do
-    let(:variable_hash) { random_variable_array_hash }
-    let(:variable_grpc) {
-      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
+  let(:variable_hash) { random_variable_array_hash }
+  let(:variable_grpc) {
+    Google::Devtools::Clouddebugger::V2::Variable.decode_json \
         variable_hash.to_json
-    }
-    let(:variable) {
-      Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
-    }
+  }
+  let(:variable) {
+    Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
+  }
+  let(:var_table) { Google::Cloud::Debugger::Breakpoint::VariableTable.new }
 
+  describe "#to_grpc" do
     it "gets all the attributes" do
       grpc = variable.to_grpc
 
@@ -46,12 +47,6 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
   end
 
   describe ".from_grpc" do
-    let(:variable_hash) { random_variable_array_hash }
-    let(:variable_grpc) {
-      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
-        variable_hash.to_json
-    }
-
     it "knows its attributes" do
       variable_grpc.name.must_equal "local_var"
       variable_grpc.type.must_equal "Array"
@@ -71,15 +66,6 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
   end
 
   describe ".from_grpc_list" do
-    let(:variable_hash) { random_variable_integer_hash }
-    let(:variable_grpc) {
-      Google::Devtools::Clouddebugger::V2::Variable.decode_json \
-        variable_hash.to_json
-    }
-    let(:variable) {
-      Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
-    }
-
     it "converts all the elements" do
       grpc_ary = [variable_grpc, variable_grpc]
       ary = Google::Cloud::Debugger::Breakpoint::Variable.from_grpc_list grpc_ary
@@ -88,12 +74,12 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
       ary[0].name.must_equal variable.name
       ary[0].type.must_equal variable.type
       ary[0].value.must_equal variable.value
-      ary[0].members.must_be_empty
+      ary[0].members.wont_be_empty
 
       ary[1].name.must_equal variable.name
       ary[1].type.must_equal variable.type
       ary[1].value.must_equal variable.value
-      ary[1].members.must_be_empty
+      ary[1].members.wont_be_empty
     end
   end
 
@@ -280,6 +266,60 @@ describe Google::Cloud::Debugger::Breakpoint::Variable, :mock_debugger do
       var.name.must_be_nil
       var.value.size.must_equal str_max
       var.members.must_be_empty
+    end
+
+    it "uses var_table to store repeated variables" do
+      hash = { a: 1 }
+      ary = [hash, hash]
+      int_class = 1.class.to_s
+
+      var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var ary, var_table: var_table
+      var.type.must_be_nil
+      var.var_table_index.must_equal 0
+      var.members.must_be_empty
+      var.value.must_be_nil
+
+      var_table.size.must_equal 2
+      var_table[0].var.type.must_equal "Array"
+      var_table[0].var.members.size.must_equal 2
+      var_table[0].var.members[0].var_table_index.must_equal 1
+      var_table[0].var.members[1].var_table_index.must_equal 1
+
+      var_table[1].var.type.must_equal "Hash"
+      var_table[1].var.members.size.must_equal 1
+      var_table[1].var.members[0].name.must_equal "a"
+      var_table[1].var.members[0].type.must_equal int_class
+      var_table[1].var.members[0].value.must_equal "1"
+    end
+
+    it "uses var_table for nested compound variable" do
+      ary = [1, [2]]
+      int_class = 1.class.to_s
+
+      var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var ary, var_table: var_table
+
+      var.type.must_be_nil
+      var.var_table_index.must_equal 0
+      var.members.must_be_empty
+      var.value.must_be_nil
+
+      var_table.size.must_equal 2
+      var_table[0].var.type.must_equal "Array"
+      var_table[0].var.members.size.must_equal 2
+      var_table[0].var.members[0].name.must_equal "[0]"
+      var_table[0].var.members[0].type.must_equal int_class
+      var_table[0].var.members[0].value .must_equal "1"
+
+      var_table[0].var.members[1].name.must_equal "[1]"
+      var_table[0].var.members[1].type.must_be_nil
+      var_table[0].var.members[1].members.must_be_empty
+      var_table[0].var.members[1].var_table_index.must_equal 1
+
+      var_table[1].var.type.must_equal "Array"
+      var_table[1].var.name.must_be_nil
+      var_table[1].var.members.size.must_equal 1
+      var_table[1].var.members[0].type.must_equal int_class
+      var_table[1].var.members[0].value .must_equal "2"
     end
   end
 end

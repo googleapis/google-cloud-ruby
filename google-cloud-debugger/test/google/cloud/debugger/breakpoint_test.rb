@@ -57,6 +57,11 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       breakpoint.condition.must_equal "i == 2"
       breakpoint.labels.must_equal({"tag" => "hello"})
       breakpoint.is_final_state.wont_equal true
+      variable_table_var = breakpoint.variable_table.first
+      variable_table_var.var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      variable_table_var.var.name.must_equal "local_var"
+      variable_table_var.var.type.must_equal "Array"
+      variable_table_var.var.members.wont_be_empty
     end
 
     it "knows all of the attributes for logpoint" do
@@ -121,6 +126,7 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       stack_frame.locals.wont_be_empty
       grpc.condition.must_equal "i == 2"
       grpc.labels["tag"].must_equal "hello"
+      grpc.variable_table.wont_be_empty
     end
   end
 
@@ -204,108 +210,6 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       end
 
       mocked_set_error_state.verify
-    end
-  end
-
-  describe "#evaluate" do
-    it "returns false if breakpoint is evaluated already" do
-      breakpoint.complete
-
-      breakpoint.evaluate([]).must_equal false
-    end
-
-    it "returns false if logpoint is evaluated already" do
-      logpoint.complete
-
-      logpoint.evaluate([]).must_equal false
-    end
-
-    it "returns false if condition check fails" do
-      breakpoint.stub :check_condition, false do
-        breakpoint.evaluate [nil]
-      end
-    end
-
-    it "returns false if logpoint condition check fails" do
-      logpoint.stub :check_condition, false do
-        logpoint.evaluate [nil]
-      end
-    end
-
-    it "returns false if Evaluator.eval_condition raises exception" do
-      stubbed_eval_call_stack = ->(_) { raise }
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_call_stack, stubbed_eval_call_stack do
-        breakpoint.stub :check_condition, true do
-          breakpoint.evaluate([nil]).must_equal false
-        end
-      end
-    end
-
-    it "returns false if Evaluator.eval_expressions raises exception" do
-      stubbed_eval_expressions = ->(_) { raise }
-
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_call_stack, nil do
-        Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_expressions, stubbed_eval_expressions do
-          breakpoint.stub :check_condition, true do
-            breakpoint.evaluate([nil]).must_equal false
-          end
-        end
-      end
-    end
-
-    it "sets @evaluated_expressions and @stack_frames for breakpoint" do
-      stubbed_eval_call_stack = -> (_) { ["test-stack-frame"] }
-      stubbed_eval_expressions = ->(_, _) { ["test-expression"] }
-
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_call_stack, stubbed_eval_call_stack do
-        Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_expressions, stubbed_eval_expressions do
-          breakpoint.stub :check_condition, true do
-            breakpoint.evaluate([nil])
-
-            breakpoint.evaluated_expressions.must_equal ["test-expression"]
-            breakpoint.stack_frames.must_equal ["test-stack-frame"]
-          end
-        end
-      end
-    end
-
-    it "sets @evaluated_expressions and @evaluated_log_message for logpoint" do
-      stubbed_format_message = -> (_, _) { "test log message" }
-      stubbed_eval_expression = ->(_, _) { "test-expression" }
-
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :format_message, stubbed_format_message do
-        Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_eval_expression do
-          logpoint.stub :check_condition, true do
-            logpoint.evaluate([nil])
-
-            logpoint.evaluated_expressions.must_equal ["test-expression"]
-            logpoint.evaluated_log_message.must_equal "test log message"
-          end
-        end
-      end
-    end
-
-    it "calls complete if finishes evaluation" do
-      mocked_complete = Minitest::Mock.new
-      mocked_complete.expect :call, nil
-
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_call_stack, [] do
-        Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_expressions, [] do
-          breakpoint.stub :check_condition, true do
-            breakpoint.stub :complete, mocked_complete do
-              breakpoint.evaluate([nil]).must_equal true
-            end
-          end
-        end
-      end
-
-      mocked_complete.verify
-    end
-
-    it "doesn't complete logpoints" do
-      logpoint.evaluate []
-
-      logpoint.complete?.must_equal false
     end
   end
 

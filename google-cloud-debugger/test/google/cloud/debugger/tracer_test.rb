@@ -48,7 +48,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   describe "#breakpoint_hit" do
     let(:breakpoint) {
-      Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb", 123
+      Google::Cloud::Debugger::Snappoint.new nil, "path/to/file.rb", 123
     }
 
     it "doesn't call BreakpointManager#breakpoint_hit if breakpoint is already completed" do

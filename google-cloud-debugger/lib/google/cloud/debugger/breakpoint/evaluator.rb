@@ -39,10 +39,6 @@ module Google
         #
         module Evaluator
           ##
-          # Max number of top stacks to collect local variables information
-          STACK_EVAL_DEPTH = 5
-
-          ##
           # @private YARV bytecode that the evaluator blocks during expression
           # evaluation. If the breakpoint contains expressions that uses the
           # following bytecode, the evaluator will block the expression
@@ -775,39 +771,6 @@ module Google
 
           class << self
             ##
-            # Evaluates call stack. Collects function name and location of each
-            # frame from given binding objects. Collects local variable
-            # information from top frames.
-            #
-            # @param [Array<Binding>] call_stack_bindings A list of binding
-            #   objects that come from each of the call stack frames.
-            # @return [Array<Google::Cloud::Debugger::Breakpoint::StackFrame>]
-            #   A list of StackFrame objects that represent state of the
-            #   call stack
-            #
-            def eval_call_stack call_stack_bindings
-              result = []
-              call_stack_bindings.each_with_index do |frame_binding, i|
-                frame_info = StackFrame.new.tap do |sf|
-                  sf.function = frame_binding.eval("__method__").to_s
-                  sf.location = SourceLocation.new.tap do |l|
-                    l.path =
-                      frame_binding.eval("::File.absolute_path(__FILE__)")
-                    l.line = frame_binding.eval("__LINE__")
-                  end
-                end
-
-                if i < STACK_EVAL_DEPTH
-                  frame_info.locals = eval_frame_variables frame_binding
-                end
-
-                result << frame_info
-              end
-
-              result
-            end
-
-            ##
             # Evaluates a boolean conditional expression in the given context
             # binding. The evaluation subjects to the read-only rules. If
             # the expression does any write operation, the evaluation aborts
@@ -828,28 +791,6 @@ module Google
               end
 
               result ? true : false
-            end
-
-            ##
-            # Evaluates the breakpoint expressions at the point that triggered
-            # the breakpoint. The expressions subject to the read-only rules.
-            # If the expressions do any write operations, the evaluations abort
-            # and show an error message in place of the real result.
-            #
-            # @param [Binding] binding The binding object from the context
-            # @param [Array<String>] expressions A list of code strings to be
-            #   evaluated
-            # @return [Array<Google::Cloud::Debugger::Breakpoint::Variable>]
-            #   A list of Breakpoint::Variables objects that represent the
-            #   expression evaluations results.
-            #
-            def eval_expressions binding, expressions
-              expressions.map do |expression|
-                eval_result = readonly_eval_expression binding, expression
-                evaluated_var = Variable.from_rb_var eval_result
-                evaluated_var.name = expression
-                evaluated_var
-              end
             end
 
             ##
@@ -876,33 +817,6 @@ module Google
               end
 
               result
-            end
-
-            ##
-            # Format log message by interpolate expressions.
-            #
-            # @example
-            #   Evaluator.format_log_message("Hello $0",
-            #                                ["World"]) #=> "Hello World"
-            #
-            # @param [String] message_format The message with with
-            #   expression placeholders such as `$0`, `$1`, etc.
-            # @param [Array<Google::Cloud::Debugger::Breakpoint::Variable>]
-            #   expressions An array of evaluated expression variables to be
-            #   placed into message_format's placeholders. The variables need
-            #   to have type equal String.
-            #
-            # @return [String] The formatted message string
-            #
-            def format_message message_format, expressions
-              # Substitute placeholders with expressions
-              message = message_format.gsub(/(?<!\$)\$\d+/) do |placeholder|
-                index = placeholder.match(/\$(\d+)/)[1].to_i
-                index < expressions.size ? expressions[index].inspect : ""
-              end
-
-              # Unescape "$" charactors
-              message.gsub(/\$\$/, "$")
             end
 
             private
@@ -932,7 +846,7 @@ module Google
                 begin
                   binding.eval wrap_expression(expression)
                 rescue => e
-                  # Threat all StandardError as mutation and set @mutation_cause
+                  # Treat all StandardError as mutation and set @mutation_cause
                   unless e.instance_variable_get :@mutation_cause
                     e.instance_variable_set(
                       :@mutation_cause,
@@ -975,28 +889,6 @@ module Google
               end
 
               yarv_instructions
-            end
-
-            ##
-            # @private Helps evaluating local variables from a single frame
-            # binding
-            #
-            # @param [Binding] frame_binding The context binding object from
-            #   a given frame.
-            # @return [Array<Google::Cloud::Debugger::Variable>] A list of
-            #   Breakpoint::Variables that represent all the local variables
-            #   in a context frame.
-            #
-            def eval_frame_variables frame_binding
-              result_variables = []
-              result_variables +=
-                frame_binding.local_variables.map do |local_var_name|
-                  local_var = frame_binding.local_variable_get(local_var_name)
-
-                  Variable.from_rb_var(local_var, name: local_var_name)
-                end
-
-              result_variables
             end
 
             ##

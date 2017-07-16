@@ -48,26 +48,6 @@ end
 describe Google::Cloud::Debugger::Breakpoint::Evaluator do
   let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
 
-  describe ".eval_expressions" do
-    it "calls readonly_eval_expression and return Debugger::Variable of result" do
-      mock_binding = "A binding"
-      mock_expressions = ["1 + 1"]
-
-      stubbed_readonly_eval_expression = ->(b, e) {
-        b.must_equal mock_binding
-        e.must_equal mock_expressions.first
-        "Readonly Evaluated"
-      }
-
-      evaluator.stub :readonly_eval_expression, stubbed_readonly_eval_expression do
-        result = evaluator.eval_expressions mock_binding, mock_expressions
-        result.size.must_equal 1
-        result.first.value.must_equal Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var("Readonly Evaluated").value
-        result.first.name.must_equal mock_expressions.first
-      end
-    end
-  end
-
   describe ".readonly_eval_expression" do
     it "uses the binding object passed in" do
       mock_binding = MiniTest::Mock.new
@@ -220,28 +200,6 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       expression = "nil.send"
       result = evaluator.readonly_eval_expression binding, expression
       result.must_match "no method name given"
-    end
-  end
-
-  describe ".format_message" do
-    it "formats basic message" do
-      evaluator.format_message("Hello World", []).must_equal "Hello World"
-    end
-
-    it "formats message with expressions" do
-      evaluator.format_message("Hello $0$1", ["World", :!]).must_equal "Hello \"World\":!"
-    end
-
-    it "formats message with extra expressions" do
-      evaluator.format_message("Hello $0$1", ["World", :!, :zomg]).must_equal "Hello \"World\":!"
-    end
-
-    it "formats message with extra placeholder" do
-      evaluator.format_message("Hello $0$1$2", ["World", :!]).must_equal "Hello \"World\":!"
-    end
-
-    it "doesn't substitute escaped placeholder and unescape them" do
-      evaluator.format_message("Hello 0 $0 $$0 $$$$0", ["World"]).must_equal "Hello 0 \"World\" $0 $$0"
     end
   end
 end
