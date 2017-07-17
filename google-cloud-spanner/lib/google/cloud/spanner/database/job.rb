@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/spanner/status"
 
 module Google
   module Cloud
@@ -122,11 +123,11 @@ module Google
           end
 
           ##
-          # The status code and message if the operation associated with this
-          # job produced an error, returned as an error object.
+          # The status if the operation associated with this job produced an
+          # error.
           #
-          # @return [Google::Cloud::Error, nil] An error object containing the
-          #   status code and message, or `nil` if no error occurred.
+          # @return [Google::Cloud::Spanner::Status, nil] A status object with
+          #   the status code and message, or `nil` if no error occurred.
           #
           # @example
           #   require "google/cloud/spanner"
@@ -142,9 +143,7 @@ module Google
           #
           def error
             return nil unless error?
-            fail GRPC::BadStatus.new @grpc.error.code, @grpc.error.message
-          rescue GRPC::BadStatus => err
-            Google::Cloud::Error.from_error err
+            Google::Cloud::Spanner::Status.from_grpc @grpc.error
           end
 
           ##
