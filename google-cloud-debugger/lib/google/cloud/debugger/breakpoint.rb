@@ -17,6 +17,7 @@ require "time"
 require "google/cloud/debugger/breakpoint/evaluator"
 require "google/cloud/debugger/breakpoint/source_location"
 require "google/cloud/debugger/breakpoint/stack_frame"
+require "google/cloud/debugger/breakpoint/status_message"
 require "google/cloud/debugger/breakpoint/variable"
 require "google/cloud/debugger/breakpoint/variable_table"
 
@@ -273,7 +274,7 @@ module Google
             Evaluator.eval_condition binding, condition
           rescue
             set_error_state "Unable to evaluate condition",
-                            refers_to: :BREAKPOINT_CONDITION
+                            refers_to: StatusMessage::BREAKPOINT_CONDITION
             false
           end
         end
@@ -319,23 +320,21 @@ module Google
         # completed if is_final is true.
         #
         # @param [String] message The error message
-        # @param [Google::Devtools::Clouddebugger::V2::StatusMessage::Reference]
-        #   refers_to Enum that specifies what the error refers to. Defaults
-        #   :UNSPECIFIED.
+        # @param [Symbol] refers_to Enum that specifies what the error refers
+        #   to. Defaults :UNSPECIFIED. See {Breakpoint::StatusMessage} class for
+        #   list of possible values
         # @param [Boolean] is_final Marks the breakpoint as final if true.
         #   Defaults true.
         #
-        # @return [Google::Devtools::Clouddebugger::V2::StatusMessage] The grpc
+        # @return [Google::Cloud::Debugger::Breakpoint::StatusMessage] The grpc
         #   StatusMessage object, which describes the breakpoint's error state.
-        def set_error_state message, refers_to: :UNSPECIFIED, is_final: true
-          description = Google::Devtools::Clouddebugger::V2::FormatMessage.new(
-            format: message
-          )
-          @status = Google::Devtools::Clouddebugger::V2::StatusMessage.new(
-            is_error: true,
-            refers_to: refers_to,
-            description: description
-          )
+        def set_error_state message, refers_to: StatusMessage::UNSPECIFIED,
+                            is_final: true
+          @status = StatusMessage.new.tap do |s|
+            s.is_error = true
+            s.refers_to = refers_to
+            s.description = message
+          end
 
           complete if is_final
 

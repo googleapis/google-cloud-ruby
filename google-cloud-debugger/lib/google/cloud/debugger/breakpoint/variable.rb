@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/debugger/breakpoint/status_message"
+
 module Google
   module Cloud
     module Debugger
@@ -127,8 +129,7 @@ module Google
           # VARIABLE_NAME. Alternatively refers_to will be set to
           # VARIABLE_VALUE. In either case variable value and members will be
           # unset.
-          # TODO: Implement variable status
-          # attr_accessor :status
+          attr_accessor :status
 
           ##
           # @private Create an empty Variable object.
@@ -317,6 +318,7 @@ module Google
               o.type    = grpc.type
               o.members = from_grpc_list grpc.members
               o.var_table_index = var_table_index_from_grpc grpc.var_table_index
+              o.status = Breakpoint::StatusMessage.from_grpc grpc.status
             end
           end
 
@@ -350,8 +352,8 @@ module Google
               value.nil? &&
               type.nil? &&
               members.nil? &&
-              var_table_index.nil?
-            # TODO: Add status when implementing variable status
+              var_table_index.nil? &&
+              status.nil?
           end
 
           ##
@@ -364,11 +366,18 @@ module Google
               value: value.to_s,
               type: type.to_s,
               var_table_index: var_table_index_to_grpc,
-              members: members_to_grpc || []
+              members: members_to_grpc || [],
+              status: status_to_grpc
             )
           end
 
           private
+
+          ##
+          # @private Exports the Variable status to grpc
+          def status_to_grpc
+            status.nil? ? nil : status.to_grpc
+          end
 
           ##
           # @private Exports the Variable var_table_index attribute to

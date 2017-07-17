@@ -244,9 +244,9 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       status = breakpoint.set_error_state error_message, refers_to: :BREAKPOINT_CONDITION
 
       breakpoint.status.must_equal status
-      breakpoint.status.must_be_kind_of Google::Devtools::Clouddebugger::V2::StatusMessage
+      breakpoint.status.must_be_kind_of Google::Cloud::Debugger::Breakpoint::StatusMessage
 
-      status.description.format.must_equal error_message
+      status.description.must_equal error_message
       status.is_error.must_equal true
       status.refers_to.must_equal :BREAKPOINT_CONDITION
     end
