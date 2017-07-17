@@ -578,6 +578,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Status" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      #mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project-id/instances/my-instance"]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project-id/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
+    end
+  end
+
   # Transaction
 
   doctest.before "Google::Cloud::Spanner::Transaction" do
