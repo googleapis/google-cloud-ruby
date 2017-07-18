@@ -86,11 +86,30 @@ module Google
         # @param [String] topic_name Name of a topic.
         # @param [String] project If the topic belongs to a project other than
         #   the one currently connected to, the alternate project ID can be
-        #   specified here.
+        #   specified here. Optional.
         # @param [Boolean] skip_lookup Optionally create a {Topic} object
         #   without verifying the topic resource exists on the Pub/Sub service.
         #   Calls made on this object will raise errors if the topic resource
-        #   does not exist. Default is `false`.
+        #   does not exist. Default is `false`. Optional.
+        # @param [Hash] async A hash of values to configure the topic's
+        #   {Topic::AsyncPublisher} that is created when {Topic#publish_async}
+        #   is called. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #   * `:max_bytes` (Integer) The maximum size of messages to be
+        #     collected before the batch is published. Default is 10,000,000
+        #     (10MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 1,000.
+        #   * `:interval` (Numeric) The number of seconds to collect messages
+        #     before the batch is published. Default is 0.25.
+        #   * `:threads` (Hash) The number of threads to create to handle
+        #     concurrent calls by the publisher:
+        #     * `:publish` (Integer) The number of threads used to publish
+        #       messages. Default is 4.
+        #     * `:callback` (Integer) The number of threads to handle the
+        #       published messages' callbacks. Default is 8.
         #
         # @return [Google::Cloud::Pubsub::Topic, nil] Returns `nil` if topic
         #   does not exist.
@@ -119,6 +138,23 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
+        # @example Configuring AsyncPublisher to increase concurrent callbacks:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   topic = pubsub.topic "my-topic",
+        #                        async: { threads: { callback: 16 } }
+        #
+        #   topic.publish_async "task completed" do |result|
+        #     if result.succeeded?
+        #       log_publish_success result.data
+        #     else
+        #       log_publish_failure result.data, result.error
+        #     end
+        #   end
+        #
+        #   topic.async_publisher.stop.wait!
+        #
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
@@ -135,6 +171,25 @@ module Google
         # Creates a new topic.
         #
         # @param [String] topic_name Name of a topic.
+        # @param [Hash] async A hash of values to configure the topic's
+        #   {Topic::AsyncPublisher} that is created when {Topic#publish_async}
+        #   is called. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #   * `:max_bytes` (Integer) The maximum size of messages to be
+        #     collected before the batch is published. Default is 10,000,000
+        #     (10MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 1,000.
+        #   * `:interval` (Numeric) The number of seconds to collect messages
+        #     before the batch is published. Default is 0.25.
+        #   * `:threads` (Hash) The number of threads to create to handle
+        #     concurrent calls by the publisher:
+        #     * `:publish` (Integer) The number of threads used to publish
+        #       messages. Default is 4.
+        #     * `:callback` (Integer) The number of threads to handle the
+        #       published messages' callbacks. Default is 8.
         #
         # @return [Google::Cloud::Pubsub::Topic]
         #
@@ -144,10 +199,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name
+        def create_topic topic_name, async: nil
           ensure_service!
           grpc = service.create_topic topic_name
-          Topic.from_grpc grpc, service
+          Topic.from_grpc grpc, service, async: async
         end
         alias_method :new_topic, :create_topic
 

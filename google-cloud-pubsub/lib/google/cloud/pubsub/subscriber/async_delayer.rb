@@ -30,7 +30,7 @@ module Google
           attr_reader :batch
           attr_reader :max_bytes, :interval
 
-          def initialize stream, max_bytes: 8388608, interval: 0.25
+          def initialize stream, max_bytes: 10000000, interval: 0.25
             @stream = stream
 
             @max_bytes = max_bytes
@@ -144,7 +144,7 @@ module Google
           class Batch
             attr_reader :ack_ids, :request
 
-            def initialize max_bytes: 8388608
+            def initialize max_bytes: 10000000
               @max_bytes = max_bytes
               @request = Google::Pubsub::V1::StreamingPullRequest.new
             end

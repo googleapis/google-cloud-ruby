@@ -289,6 +289,26 @@ module Google
         # Create a {Subscriber} object that polls the backend for new messages
         # and processes them with the code provided in the callback.
         #
+        # @param [Numeric] deadline The default number of seconds the stream
+        #   will hold received messages before modifying the message's ack
+        #   deadline. The minimum is 10, the maximum is 600. Default is
+        #   {#deadline}. Optional.
+        # @param [Integer] streams The number of concurrent streams to open to
+        #   pull messages from the subscription. Default is 4. Optional.
+        # @param [Integer] inventory The number of received messages to be
+        #   collected by subscriber. Default is 1,000. Optional.
+        # @param [Hash] threads The number of threads to create to handle
+        #   concurrent calls by each stream opened by the subscriber. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #     * `:callback` (Integer) The number of threads used to handle the
+        #       received messages. Default is 8.
+        #     * `:push` (Integer) The number of threads to handle
+        #       acknowledgement ({ReceivedMessage#ack!}) and delay messages
+        #       ({ReceivedMessage#nack!}, {ReceivedMessage#delay!}). Default is
+        #       4.
+        #
         # @yield [msg] a block for processing new messages
         # @yieldparam [ReceivedMessage] msg the newly received message
         #
@@ -308,7 +328,22 @@ module Google
         #
         #   subscriber.start
         #
-        def listen deadline: nil, streams: nil, inventory: nil, threads: nil,
+        # @example Configuring to increase concurrent callbacks:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   subscriber = sub.listen threads: { callback: 16 } do |msg|
+        #     # store the message somewhere before acknowledging
+        #     store_in_backend msg.data # takes a few seconds
+        #     msg.ack!
+        #   end
+        #
+        #   subscriber.start
+        #
+        def listen deadline: nil, streams: nil, inventory: nil, threads: {},
                    &block
           ensure_service!
           deadline ||= self.deadline

@@ -151,6 +151,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Pubsub::Project#topic@Configuring AsyncPublisher to increase concurrent callbacks:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Pubsub::Project#create_topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :create_topic, nil, ["projects/my-project/topics/my-topic", Hash]
@@ -324,9 +331,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # This example loops indefinitely, making testing difficult if not impossible...
-  doctest.skip "Google::Cloud::Pubsub::Subscription#listen"
-
   doctest.before "Google::Cloud::Pubsub::Subscription#policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
@@ -394,6 +398,17 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
+  # Subscriber
+
+  doctest.before "Google::Cloud::Pubsub::Subscriber" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+    end
+  end
+
+  ##
   # Topic
 
   doctest.before "Google::Cloud::Pubsub::Topic" do
@@ -449,20 +464,6 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
-    end
-  end
-
-  doctest.skip "Google::Cloud::Pubsub::Topic#publish_async" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, nil, ["projects/my-project/topics/my-topic", "task completed", {}]
-    end
-  end
-
-  doctest.skip "Google::Cloud::Pubsub::Topic#publish_async@Additionally, a message can be published with attributes:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, nil, ["projects/my-project/topics/my-topic", "task completed", {:foo=>:bar, :this=>:that}]
     end
   end
 
