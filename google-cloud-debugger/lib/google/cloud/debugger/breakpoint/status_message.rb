@@ -83,11 +83,10 @@ module Google
               Google::Devtools::Clouddebugger::V2::FormatMessage.new \
                 format: description.to_s
 
-            Google::Devtools::Clouddebugger::V2::StatusMessage.new(
+            Google::Devtools::Clouddebugger::V2::StatusMessage.new \
               is_error: true,
               refers_to: refers_to,
               description: description_grpc
-            )
           end
         end
       end
