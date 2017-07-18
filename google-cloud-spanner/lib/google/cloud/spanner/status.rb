@@ -24,9 +24,12 @@ module Google
       # Represents a logical error model from the Spanner service, containing an
       # error code, an error message, and optional error details.
       #
-      # @attr [Symbol] code The status code, which should be an enum value of
+      # @attr [Integer] code The status code, which should be an enum value of
       #   [google.rpc.Code](https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto).
-      #   For example, `:INVALID_ARGUMENT`.
+      # @attr [String] description The human-readable description for the status
+      #   code, which should be an enum value of
+      #   [google.rpc.Code](https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto).
+      #   For example, `INVALID_ARGUMENT`.
       # @attr [String] message A developer-facing error message, which should be
       #   in English.
       # @attr [Array, nil] details A list of messages that carry the error
@@ -45,12 +48,13 @@ module Google
       #   status = job.error
       #
       class Status
-        attr_reader :code, :message, :details
+        attr_reader :code, :description, :message, :details
 
         ##
         # @private Creates a Status object.
-        def initialize code, message, details
+        def initialize code, description, message, details
           @code = code
+          @description = description
           @message = message
           @details = details
         end
@@ -58,17 +62,18 @@ module Google
         ##
         # @private New Status from a Google::Rpc::Status object.
         def self.from_grpc grpc
-          code_sym = grpc_code_description_for grpc.code
-          new code_sym, grpc.message, grpc.details
+          new grpc.code, description_for(grpc.code), grpc.message, grpc.details
         end
 
-        # @private Get a descriptive symbol for a gRPC error integer
-        def self.grpc_code_description_for grpc_error_code
-          [:OK, :CANCELLED, :UNKNOWN, :INVALID_ARGUMENT, :DEADLINE_EXCEEDED,
-           :NOT_FOUND, :ALREADY_EXISTS, :PERMISSION_DENIED, :RESOURCE_EXHAUSTED,
-           :FAILED_PRECONDITION, :ABORTED, :OUT_OF_RANGE, :UNIMPLEMENTED,
-           :INTERNAL, :UNAVAILABLE, :DATA_LOSS, :UNAUTHENTICATED
-          ][grpc_error_code]
+        # @private Get a descriptive symbol for a google.rpc.Code integer
+        def self.description_for code
+          descriptions = %w(
+            OK CANCELLED UNKNOWN INVALID_ARGUMENT DEADLINE_EXCEEDED NOT_FOUND
+            ALREADY_EXISTS PERMISSION_DENIED RESOURCE_EXHAUSTED
+            FAILED_PRECONDITION ABORTED OUT_OF_RANGE UNIMPLEMENTED INTERNAL
+            UNAVAILABLE DATA_LOSS UNAUTHENTICATED
+          )
+          descriptions[code]
         end
       end
     end

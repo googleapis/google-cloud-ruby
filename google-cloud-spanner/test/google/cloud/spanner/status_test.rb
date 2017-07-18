@@ -19,119 +19,136 @@ describe Google::Cloud::Spanner::Status do
 
   it "supports code 0" do
     status = from_grpc 0
-    status.code.must_equal :OK
+    status.code.must_equal 0
+    status.description.must_equal "OK"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 1" do
     status = from_grpc 1
-    status.code.must_equal :CANCELLED
+    status.code.must_equal 1
+    status.description.must_equal "CANCELLED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 2" do
     status = from_grpc 2
-    status.code.must_equal :UNKNOWN
+    status.code.must_equal 2
+    status.description.must_equal "UNKNOWN"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 3" do
     status = from_grpc 3
-    status.code.must_equal :INVALID_ARGUMENT
+    status.code.must_equal 3
+    status.description.must_equal "INVALID_ARGUMENT"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 4" do
     status = from_grpc 4
-    status.code.must_equal :DEADLINE_EXCEEDED
+    status.code.must_equal 4
+    status.description.must_equal "DEADLINE_EXCEEDED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 5" do
     status = from_grpc 5
-    status.code.must_equal :NOT_FOUND
+    status.code.must_equal 5
+    status.description.must_equal "NOT_FOUND"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 6" do
     status = from_grpc 6
-    status.code.must_equal :ALREADY_EXISTS
+    status.code.must_equal 6
+    status.description.must_equal "ALREADY_EXISTS"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 7" do
     status = from_grpc 7
-    status.code.must_equal :PERMISSION_DENIED
+    status.code.must_equal 7
+    status.description.must_equal "PERMISSION_DENIED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 8" do
     status = from_grpc 8
-    status.code.must_equal :RESOURCE_EXHAUSTED
+    status.code.must_equal 8
+    status.description.must_equal "RESOURCE_EXHAUSTED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 9" do
     status = from_grpc 9
-    status.code.must_equal :FAILED_PRECONDITION
+    status.code.must_equal 9
+    status.description.must_equal "FAILED_PRECONDITION"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 10" do
     status = from_grpc 10
-    status.code.must_equal :ABORTED
+    status.code.must_equal 10
+    status.description.must_equal "ABORTED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 11" do
     status = from_grpc 11
-    status.code.must_equal :OUT_OF_RANGE
+    status.code.must_equal 11
+    status.description.must_equal "OUT_OF_RANGE"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 12" do
     status = from_grpc 12
-    status.code.must_equal :UNIMPLEMENTED
+    status.code.must_equal 12
+    status.description.must_equal "UNIMPLEMENTED"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 13" do
     status = from_grpc 13
-    status.code.must_equal :INTERNAL
+    status.code.must_equal 13
+    status.description.must_equal "INTERNAL"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 14" do
     status = from_grpc 14
-    status.code.must_equal :UNAVAILABLE
+    status.code.must_equal 14
+    status.description.must_equal "UNAVAILABLE"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 15" do
     status = from_grpc 15
-    status.code.must_equal :DATA_LOSS
+    status.code.must_equal 15
+    status.description.must_equal "DATA_LOSS"
     status.message.must_equal msg
     status.details.must_equal []
   end
 
   it "supports code 16" do
     status = from_grpc 16
-    status.code.must_equal :UNAUTHENTICATED
+    status.code.must_equal 16
+    status.description.must_equal "UNAUTHENTICATED"
     status.message.must_equal msg
     status.details.must_equal []
   end
