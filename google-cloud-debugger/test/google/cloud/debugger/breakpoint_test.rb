@@ -186,24 +186,26 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       breakpoint.check_condition(nil).must_equal true
     end
 
-    it "calls Evaluator.eval_condition with the given binding" do
-      bind = "test binding"
-      mocked_eval_condition = Minitest::Mock.new
-      mocked_eval_condition.expect :call, true, [bind, "i == 2"]
-
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_condition, mocked_eval_condition do
-        breakpoint.check_condition bind
-      end
-
-      mocked_eval_condition.verify
-    end
-
     it "calls breakpoint#set_error_state if Evaluator.eval_condition raises error" do
-      stubbed_eval_condition = ->(_, _) { raise }
+      stubbed_readonly_eval_expression = ->(_, _) { raise }
       mocked_set_error_state = Minitest::Mock.new
       mocked_set_error_state.expect :call, nil, [String, {refers_to: :BREAKPOINT_CONDITION}]
 
-      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :eval_condition, stubbed_eval_condition do
+      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_readonly_eval_expression do
+        breakpoint.stub :set_error_state, mocked_set_error_state do
+          breakpoint.check_condition nil
+        end
+      end
+
+      mocked_set_error_state.verify
+    end
+
+    it "calls breakpoint#set_error_state if mutation is detected while evaluating condition" do
+      mocked_set_error_state = Minitest::Mock.new
+      mocked_set_error_state.expect :call, nil, [String, {refers_to: :BREAKPOINT_CONDITION}]
+      stubbed_condition_result = Google::Cloud::Debugger::MutationError.new
+
+      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_condition_result do
         breakpoint.stub :set_error_state, mocked_set_error_state do
           breakpoint.check_condition nil
         end

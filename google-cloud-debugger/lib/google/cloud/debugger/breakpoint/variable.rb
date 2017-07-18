@@ -357,7 +357,7 @@ module Google
           end
 
           ##
-          # @private Exports the Variable to a
+          # Exports the Variable to a
           # Google::Devtools::Clouddebugger::V2::Variable object.
           def to_grpc
             return nil if empty?
@@ -369,6 +369,16 @@ module Google
               members: members_to_grpc || [],
               status: status_to_grpc
             )
+          end
+
+          ##
+          # Set this variable to an error state by setting the status field
+          def set_error_state message, refers_to: StatusMessage::UNSPECIFIED
+            @status = StatusMessage.new.tap do |s|
+              s.is_error = true
+              s.refers_to = refers_to
+              s.description = message
+            end
           end
 
           private

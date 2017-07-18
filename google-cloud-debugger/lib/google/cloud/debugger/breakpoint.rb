@@ -173,7 +173,6 @@ module Google
             b.log_message_format = grpc.log_message_format
             b.log_level = grpc.log_level
             b.is_final_state = grpc.is_final_state
-            b.status = grpc.status
             b.user_email = grpc.user_email
 
             assign_complex_grpc_fields grpc, b
@@ -191,6 +190,7 @@ module Google
           breakpoint.location =
             Breakpoint::SourceLocation.from_grpc grpc.location
           breakpoint.stack_frames = stack_frames_from_grpc grpc
+          breakpoint.status = Breakpoint::StatusMessage.from_grpc grpc.status
           breakpoint.variable_table =
             Breakpoint::VariableTable.from_grpc grpc.variable_table
         end
@@ -261,8 +261,9 @@ module Google
 
         ##
         # Evaluate the breakpoint's condition expression against a given binding
-        # object. Returns true if the condition expression evalutes to true;
-        # false if error happens or the expression evaluates to false.
+        # object. Returns true if the condition expression evalutes to true or
+        # there isn't a condition; otherwise false. Set breakpoint to error
+        # state if exception happens.
         #
         # @param [Binding] binding A Ruby Binding object
         # @return [Boolean] True if condition evalutes to true, false if
@@ -270,13 +271,23 @@ module Google
         #
         def check_condition binding
           return true if condition.nil? || condition.empty?
-          begin
-            Evaluator.eval_condition binding, condition
-          rescue
-            set_error_state "Unable to evaluate condition",
+          condition_result =
+            Evaluator.readonly_eval_expression binding, condition
+
+          if condition_result.is_a?(Exception) &&
+             condition_result.instance_variable_get(:@mutation_cause)
+            set_error_state "Error: #{condition_result.message}",
                             refers_to: StatusMessage::BREAKPOINT_CONDITION
-            false
+
+            return false
           end
+
+
+          condition_result ? true : false
+        rescue => e
+          set_error_state "Error: #{e.message}",
+                          refers_to: StatusMessage::BREAKPOINT_CONDITION
+          false
         end
 
         ##
@@ -308,7 +319,7 @@ module Google
             user_email: user_email,
             stack_frames: stack_frames_to_grpc,
             evaluated_expressions: evaluated_expressions_to_grpc,
-            status: status,
+            status: status_to_grpc,
             labels: labels_to_grpc,
             variable_table: variable_table.to_grpc
           )
@@ -365,6 +376,13 @@ module Google
         # Google::Devtools::Clouddebugger::V2::Variable objects.
         def evaluated_expressions_to_grpc
           evaluated_expressions.nil? ? [] : evaluated_expressions.map(&:to_grpc)
+        end
+
+        ##
+        # @private Exports Breakpoint status to
+        # Google::Devtools::Clouddebugger::V2::StatusMessage object
+        def status_to_grpc
+          status.nil? ? nil: status.to_grpc
         end
 
         ##

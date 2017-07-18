@@ -77,6 +77,8 @@ describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
     end
 
     it "doesn't complete logpoints" do
+      logpoint.condition = nil
+
       logpoint.evaluate []
 
       logpoint.complete?.must_equal false

@@ -65,8 +65,18 @@ module Google
         def eval_expressions binding
           @evaluated_expressions = expressions.map do |expression|
             eval_result = Evaluator.readonly_eval_expression binding, expression
-            evaluated_var = Variable.from_rb_var eval_result,
-                                                 var_table: variable_table
+
+            if eval_result.is_a?(Exception) &&
+               eval_result.instance_variable_get(:@mutation_cause)
+              evaluated_var = Variable.new
+              evaluated_var.set_error_state \
+                "Error: #{eval_result.message}",
+                refers_to: StatusMessage::VARIABLE_VALUE
+            else
+              evaluated_var = Variable.from_rb_var eval_result,
+                                                   var_table: variable_table
+            end
+
             evaluated_var.name = expression
             evaluated_var
           end
