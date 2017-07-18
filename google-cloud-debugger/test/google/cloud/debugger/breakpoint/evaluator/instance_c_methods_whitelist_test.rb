@@ -33,11 +33,11 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #push" do
-      expression_not_allowed "[].push 1"
+      expression_prohibited "[].push 1"
     end
 
     it "doesn't allow #compact!" do
-      expression_not_allowed "[nil].compact!"
+      expression_prohibited "[nil].compact!"
     end
   end
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #instance_eval" do
-      expression_not_allowed "[].instance_eval { |a| a == self }"
+      expression_prohibited "[].instance_eval { |a| a == self }"
     end
   end
 
@@ -57,7 +57,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #eval" do
-      expression_not_allowed "binding.eval ''"
+      expression_prohibited "binding.eval ''"
     end
   end
 
@@ -68,7 +68,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #new" do
-      expression_not_allowed "Class.new"
+      expression_prohibited "Class.new"
     end
   end
 
@@ -80,7 +80,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #each" do
       dir = Dir.new ".."
-      expression_not_allowed "dir.each", binding
+      expression_prohibited "dir.each", binding
     end
   end
 
@@ -90,7 +90,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #set_backtrace" do
-      expression_not_allowed "Exception.new.set_backtrace []"
+      expression_prohibited "Exception.new.set_backtrace []"
     end
   end
 
@@ -100,7 +100,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #next" do
-      expression_not_allowed "[].each.next"
+      expression_prohibited "[].each.next"
     end
   end
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #resume" do
       fiber = Fiber.new {}
-      expression_not_allowed "fiber.resume", binding
+      expression_prohibited "fiber.resume", binding
     end
   end
 
@@ -125,7 +125,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #chmod" do
       file = File.new __FILE__
-      expression_not_allowed "file.chmod 0777", binding
+      expression_prohibited "file.chmod 0777", binding
     end
   end
 
@@ -143,11 +143,11 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #delete" do
-      expression_not_allowed "{}.delete :a"
+      expression_prohibited "{}.delete :a"
     end
 
     it "doesn't allow #select!" do
-      expression_not_allowed "{}.select! {}"
+      expression_prohibited "{}.select! {}"
     end
   end
 
@@ -159,7 +159,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #readlines" do
       io = IO.new 1
-      expression_not_allowed "io.readlines", binding
+      expression_prohibited "io.readlines", binding
     end
   end
 
@@ -169,7 +169,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #unbind" do
-      expression_not_allowed "[].method(:each).unbind"
+      expression_prohibited "[].method(:each).unbind"
     end
   end
 
@@ -181,7 +181,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #lock" do
       mutex = Mutex.new
-      expression_not_allowed "mutex.lock", binding
+      expression_prohibited "mutex.lock", binding
     end
   end
 
@@ -199,11 +199,11 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #reverse!" do
-      expression_not_allowed "'abc'.reverse!"
+      expression_prohibited "'abc'.reverse!"
     end
 
     it "doesn't allow capitalize!" do
-      expression_not_allowed "'abc'.capitalize!"
+      expression_prohibited "'abc'.capitalize!"
     end
   end
 
@@ -216,7 +216,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "doesn't allow #add" do
       tg = ThreadGroup.new
       thr = Thread.new {}
-      expression_not_allowed "tg.add thr", binding
+      expression_prohibited "tg.add thr", binding
     end
   end
 
@@ -241,12 +241,12 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #exit" do
       thr = Thread.new {}
-      expression_not_allowed "thr.exit", binding
+      expression_prohibited "thr.exit", binding
     end
 
     it "doesn't allow #join" do
       thr = Thread.new {}
-      expression_not_allowed "thr.join", binding
+      expression_prohibited "thr.join", binding
     end
   end
 
@@ -262,11 +262,11 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow #utc" do
-      expression_not_allowed "Time.now.utc"
+      expression_prohibited "Time.now.utc"
     end
 
     it "doesn't allow #gmtime" do
-      expression_not_allowed "Time.now.gmtime"
+      expression_prohibited "Time.now.gmtime"
     end
   end
 
@@ -278,7 +278,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #bind" do
       meth = [].method(:size).unbind
-      expression_not_allowed "meth.bind []", binding
+      expression_prohibited "meth.bind []", binding
     end
   end
 
@@ -308,45 +308,45 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
 
     it "doesn't allow #instance_variable_set" do
       obj = Object.new
-      expression_not_allowed "obj.instance_variable_set :@a, 3", binding
+      expression_prohibited "obj.instance_variable_set :@a, 3", binding
     end
 
     it "doesn't allow #exit" do
-      expression_not_allowed "exit"
+      expression_prohibited "exit"
     end
 
     it "doesn't allow #fail" do
-      expression_not_allowed "fail"
+      expression_prohibited "fail"
     end
 
     it "doesn't allow #fork" do
-      expression_not_allowed "fork"
+      expression_prohibited "fork"
     end
 
     it "doesn't allow #raise" do
-      expression_not_allowed "raise"
+      expression_prohibited "raise"
     end
 
     it "doesn't allow #sleep" do
-      expression_not_allowed "sleep"
+      expression_prohibited "sleep"
     end
 
     it "doesn't allow #system" do
-      expression_not_allowed "system"
+      expression_prohibited "system"
     end
 
     it "doesn't allow #`" do
       result = evaluator.readonly_eval_expression binding, "`ls`"
-
-      result.match("Mutation detected|Invalid operation detected").wont_be_nil
+      result.must_be_kind_of Google::Cloud::Debugger::MutationError
+      result.message.match("#{evaluator::MUTATION_DETECTED_MSG}|#{evaluator::PROHIBITED_OPERATION_MSG}").wont_be_nil
     end
 
     it "doesn't allow #eval" do
-      expression_not_allowed "eval '[]'"
+      expression_prohibited "eval '[]'"
     end
 
     it "doesn't allow #exec" do
-      expression_not_allowed "exec 'ls'"
+      expression_prohibited "exec 'ls'"
     end
   end
 end

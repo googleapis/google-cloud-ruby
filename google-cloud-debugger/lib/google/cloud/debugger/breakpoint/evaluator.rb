@@ -769,30 +769,11 @@ module Google
             }).freeze
           }.freeze
 
+          PROHIBITED_OPERATION_MSG = "Prohibited operation detected".freeze
+          MUTATION_DETECTED_MSG = "Mutation detected!".freeze
+          COMPILATION_FAIL_MSG = "Unable to compile expression".freeze
+
           class << self
-            ##
-            # Evaluates a boolean conditional expression in the given context
-            # binding. The evaluation subjects to the read-only rules. If
-            # the expression does any write operation, the evaluation aborts
-            # and returns false.
-            #
-            # @param [Binding] binding The binding object from the context
-            # @param [String] condition A string of code to be evaluates
-            #
-            # @return [Boolean] True if condition expression read-only evaluates
-            #   to true. Otherwise false.
-            #
-            def eval_condition binding, condition
-              result = readonly_eval_expression_exec binding, condition
-
-              if result.is_a?(Exception) &&
-                 result.instance_variable_get(:@mutation_cause)
-                return false
-              end
-
-              result ? true : false
-            end
-
             ##
             # @private Read-only evaluates a single expression in a given
             # context binding. Handles any exceptions raised.
@@ -802,21 +783,13 @@ module Google
             #
             # @return [Object] The result Ruby object from evaluating the
             #   expression. If the expression is blocked from mutating
-            #   the state of program. An error message is returned instead.
+            #   the state of program. A
+            #   {Google::Cloud::Debugger::MutationError} will be returned.
             #
             def readonly_eval_expression binding, expression
-              begin
-                result = readonly_eval_expression_exec binding, expression
-              rescue => e
-                result = "Unable to evaluate expression: #{e.message}"
-              end
-
-              if result.is_a?(Exception) &&
-                 result.instance_variable_get(:@mutation_cause)
-                return "Error: #{result.message}"
-              end
-
-              result
+              readonly_eval_expression_exec binding, expression
+            rescue => e
+              "Unable to evaluate expression: #{e.message}"
             end
 
             private
@@ -876,14 +849,14 @@ module Google
                   RubyVM::InstructionSequence.compile(expression).disasm
               rescue ScriptError
                 return Google::Cloud::Debugger::MutationError.new(
-                  "Unable to compile expression",
+                  COMPILATION_FAIL_MSG,
                   Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
                 )
               end
 
               unless immutable_yarv_instructions? yarv_instructions
                 return Google::Cloud::Debugger::MutationError.new(
-                  "Mutation detected!",
+                  MUTATION_DETECTED_MSG,
                   Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
                 )
               end
@@ -953,7 +926,7 @@ module Google
               return if immutable_yarv_instructions?(yarv_instructions,
                                                      allow_localops: true)
               fail Google::Cloud::Debugger::MutationError.new(
-                "Mutation detected!",
+                MUTATION_DETECTED_MSG,
                 Google::Cloud::Debugger::MutationError::PROHIBITED_YARV)
             end
 
@@ -983,7 +956,7 @@ module Google
               Google::Cloud::Debugger::Breakpoint::Evaluator.send(
                 :disable_method_trace_for_thread)
               fail Google::Cloud::Debugger::MutationError.new(
-                "Invalid operation detected",
+                PROHIBITED_OPERATION_MSG,
                 Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC)
             end
 

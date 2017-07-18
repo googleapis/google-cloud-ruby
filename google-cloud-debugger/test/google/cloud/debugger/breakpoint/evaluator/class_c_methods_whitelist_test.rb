@@ -60,15 +60,15 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow .exist? method" do
-      expression_not_allowed "File.exist? './file.rb'"
+      expression_prohibited "File.exist? './file.rb'"
     end
 
     it "doesn't allow .size method" do
-      expression_not_allowed "File.size './file.rb'"
+      expression_prohibited "File.size './file.rb'"
     end
 
     it "doesn't allow .open method" do
-      expression_not_allowed "File.open './file.rb'"
+      expression_prohibited "File.open './file.rb'"
     end
   end
 
@@ -106,15 +106,15 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     end
 
     it "doesn't allow .new" do
-      expression_not_allowed "Thread.new {}"
+      expression_prohibited "Thread.new {}"
     end
 
     it "doesn't allow .fork" do
-      expression_not_allowed "Thread.fork {}"
+      expression_prohibited "Thread.fork {}"
     end
 
     it "doesn't allow .exit" do
-      expression_not_allowed "Thread.exit"
+      expression_prohibited "Thread.exit"
     end
   end
 

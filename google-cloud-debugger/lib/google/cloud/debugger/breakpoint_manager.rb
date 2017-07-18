@@ -160,6 +160,7 @@ module Google
             # Take this completed breakpoint off manager's active breakpoints
             # list, submit the breakpoint snapshot, and update Tracer's
             # breakpoints_cache.
+
             return unless breakpoint.complete?
 
             # Remove this breakpoint from active list
