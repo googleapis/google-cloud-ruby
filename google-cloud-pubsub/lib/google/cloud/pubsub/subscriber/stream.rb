@@ -25,6 +25,7 @@ module Google
   module Cloud
     module Pubsub
       class Subscriber
+        ##
         # @private
         class Stream
           include MonitorMixin
@@ -47,11 +48,11 @@ module Google
             @paused  = nil
             @pause_cond = new_cond
 
-            @inventory = Inventory.new self, subscriber.inventory
+            @inventory = Inventory.new self, subscriber.stream_inventory
             @callback_thread_pool = Concurrent::FixedThreadPool.new \
-              subscriber.threads
+              subscriber.callback_threads
             @push_thread_pool = Concurrent::FixedThreadPool.new \
-              subscriber.threads
+              subscriber.push_threads
 
             super() # to init MonitorMixin
           end
@@ -288,6 +289,7 @@ module Google
             end
           end
 
+          ##
           # @private
           class Inventory
             include MonitorMixin

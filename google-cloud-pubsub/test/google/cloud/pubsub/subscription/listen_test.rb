@@ -29,7 +29,7 @@ describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
     subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
     subscriber.subscription_name.must_equal subscription.name
     subscriber.deadline.must_equal 60
-    subscriber.streams.must_equal 1
+    subscriber.streams.must_equal 4
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -39,7 +39,7 @@ describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
     subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
     subscriber.subscription_name.must_equal subscription.name
     subscriber.deadline.must_equal 120
-    subscriber.streams.must_equal 1
+    subscriber.streams.must_equal 4
   end
 
   it "will set deadline while creating a Subscriber" do

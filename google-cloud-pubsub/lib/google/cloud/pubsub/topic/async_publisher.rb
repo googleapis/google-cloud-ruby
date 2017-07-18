@@ -23,17 +23,53 @@ module Google
     module Pubsub
       class Topic
         ##
-        # # AsyncPublisher
+        # Used to publish multiple messages in batches to a topic. See
+        # {Google::Cloud::Pubsub::Topic#async_publisher}
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.publish_async "task completed" do |result|
+        #     if result.succeeded?
+        #       log_publish_success result.data
+        #     else
+        #       log_publish_failure result.data, result.error
+        #     end
+        #   end
+        #
+        #   topic.async_publisher.stop.wait!
+        #
+        # @attr_reader [String] topic_name The name of the topic the messages
+        #   are published to. In the form of
+        #   "/projects/project-identifier/topics/topic-name".
+        # @attr_reader [Integer] max_bytes The maximum size of messages to be
+        #   collected before the batch is published. Default is 10,000,000
+        #   (10MB).
+        # @attr_reader [Integer] max_messages The maximum number of messages to
+        #   be collected before the batch is published. Default is 1,000.
+        # @attr_reader [Numeric] interval The number of seconds to collect
+        #   messages before the batch is published. Default is 0.25.
+        # @attr_reader [Numeric] publish_threads The number of threads used to
+        #   publish messages. Default is 4.
+        # @attr_reader [Numeric] callback_threads The number of threads to
+        #   handle the published messages' callbacks. Default is 8.
         #
         class AsyncPublisher
           include MonitorMixin
 
-          attr_reader :topic_name, :service, :batch
-          attr_reader :max_bytes, :max_messages, :interval
-          attr_reader :publish_threads, :callback_threads
-          attr_reader :publish_thread_pool, :callback_thread_pool
+          attr_reader :topic_name, :max_bytes, :max_messages, :interval,
+                      :publish_threads, :callback_threads
+          ##
+          # @private Implementation accessors
+          attr_reader :service, :batch, :publish_thread_pool,
+                      :callback_thread_pool
 
-          def initialize topic_name, service, max_bytes: 5242880,
+          ##
+          # @private Create a new instance of the object.
+          def initialize topic_name, service, max_bytes: 10000000,
                          max_messages: 1000, interval: 0.25, threads: {}
             @topic_name = service.topic_path topic_name
             @service    = service
@@ -50,6 +86,10 @@ module Google
             super()
           end
 
+          ##
+          # Add a message to the async publisher to be published to the topic.
+          # Messages will be collected in batches and published together.
+          # See {Google::Cloud::Pubsub::Topic#publish_async}
           def publish data = nil, attributes = {}, &block
             msg = create_pubsub_message data, attributes
 
@@ -74,6 +114,13 @@ module Google
             nil
           end
 
+          ##
+          # Begins the process of stopping the publisher. Messages already in
+          # the queue will be published, but no new messages can be added. Use
+          # {#wait!} to block until the publisher is fully stopped and all
+          # pending messages have been published.
+          #
+          # @return [AsyncPublisher] returns self so calls can be chained.
           def stop
             synchronize do
               break if @stopped
@@ -87,6 +134,13 @@ module Google
             self
           end
 
+          ##
+          # Blocks until the publisher is fully stopped, all pending messages
+          # have been published, and all callbacks have completed. Does not stop
+          # the publisher. To stop the publisher, first call {#stop} and then
+          # call {#wait!} to block until the publisher is stopped.
+          #
+          # @return [AsyncPublisher] returns self so calls can be chained.
           def wait! timeout = nil
             synchronize do
               if @publish_thread_pool
@@ -102,6 +156,11 @@ module Google
             self
           end
 
+          ##
+          # Forces all messages in the current batch to be published
+          # immediately.
+          #
+          # @return [AsyncPublisher] returns self so calls can be chained.
           def flush
             synchronize do
               publish_batch!
@@ -111,10 +170,18 @@ module Google
             self
           end
 
+          ##
+          # Whether the publisher has been started.
+          #
+          # @return [boolean] `true` when started, `false` otherwise.
           def started?
             !stopped?
           end
 
+          ##
+          # Whether the publisher has been stopped.
+          #
+          # @return [boolean] `true` when stopped, `false` otherwise.
           def stopped?
             synchronize { @stopped }
           end
@@ -208,6 +275,8 @@ module Google
                                                   attributes: attributes
           end
 
+          ##
+          # @private
           class Batch
             attr_reader :messages, :callbacks
 

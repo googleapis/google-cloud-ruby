@@ -147,7 +147,30 @@ module Google
     #                     this: :that
     # ```
     #
-    # Multiple messages can be published at the same time by passing a block:
+    # Messages can also be published in batches asynchronously using
+    # `publish_async`. (See {Google::Cloud::Pubsub::Topic#publish_async} and
+    # {Google::Cloud::Pubsub::Topic::AsyncPublisher})
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # topic = pubsub.topic "my-topic"
+    # topic.publish_async "task completed" do |result|
+    #   if result.succeeded?
+    #     log_publish_success result.data
+    #   else
+    #     log_publish_failure result.data, result.error
+    #   end
+    # end
+    #
+    # topic.async_publisher.stop.wait!
+    # ```
+    #
+    # Or multiple messages can be published in batches at the same time by
+    # passing a block to `publish`. (See
+    # {Google::Cloud::Pubsub::Topic::BatchPublisher})
     #
     # ```ruby
     # require "google/cloud/pubsub"
@@ -311,9 +334,10 @@ module Google
     #
     # ## Listening for Messages
     #
-    # Long running workers are easy to create with `listen`, which runs an
-    # infinitely blocking loop to process messages as they are received. (See
-    # {Google::Cloud::Pubsub::Subscription#listen})
+    # A subscriber object can be created using `listen`, which streams messages
+    # from the backend and processes them as they are received. (See
+    # {Google::Cloud::Pubsub::Subscription#listen} and
+    # {Google::Cloud::Pubsub::Subscriber})
     #
     # ```ruby
     # require "google/cloud/pubsub"
@@ -321,13 +345,22 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # sub.listen do |msg|
+    #
+    # subscriber = sub.listen do |msg|
     #   # process msg
+    #   msg.ack!
     # end
+    #
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
-    # Messages are retrieved in batches for efficiency. The number of messages
-    # pulled per batch can be limited with the `max` option:
+    # The subscriber object can be configured to control the number of
+    # concurrent streams to open, the number of received messages to be
+    # collected, and the number of threads each stream opens for concurrent
+    # calls made to handle the received messages.
     #
     # ```ruby
     # require "google/cloud/pubsub"
@@ -335,19 +368,14 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # sub.listen max: 20 do |msg|
-    #   # process msg
+    #
+    # subscriber = sub.listen threads: { callback: 16 } do |msg|
+    #   # store the message somewhere before acknowledging
+    #   store_in_backend msg.data # takes a few seconds
+    #   msg.ack!
     # end
-    # ```
     #
-    # ## Configuring timeout
-    #
-    # You can configure the request `timeout` value in seconds.
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new timeout: 120
+    # subscriber.start
     # ```
     #
     # ## Working Across Projects

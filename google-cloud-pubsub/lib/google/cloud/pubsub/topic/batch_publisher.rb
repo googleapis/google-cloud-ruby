@@ -48,8 +48,8 @@ module Google
           end
 
           ##
-          # Add multiple messages to the topic.
-          # All messages added will be published at once.
+          # Add a message to the batch to be published to the topic.
+          # All messages added to the batch will be published at once.
           # See {Google::Cloud::Pubsub::Topic#publish}
           def publish data, attributes = {}
             @messages << create_pubsub_message(data, attributes)
