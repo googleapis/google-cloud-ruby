@@ -17,11 +17,11 @@ This client supports the following Google Cloud Platform services at a [General 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
+* [Cloud Translation API](#cloud-translation-api-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
-* [Cloud Translation API](#cloud-translation-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -485,7 +485,7 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-### Cloud Translation API (Beta)
+### Cloud Translation API (GA)
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
 - [google-cloud-translate API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/latest)
