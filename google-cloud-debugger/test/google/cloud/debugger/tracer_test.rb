@@ -46,7 +46,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     end
   end
 
-  describe "#breakpoint_hit" do
+  describe "#breakpoints_hit" do
     let(:breakpoint) {
       Google::Cloud::Debugger::Snappoint.new nil, "path/to/file.rb", 123
     }
@@ -56,7 +56,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
       breakpoint_manager.stub :breakpoint_hit, stubbed_breakpoint_hit do
         breakpoint.stub :complete?, true do
-          tracer.breakpoint_hit breakpoint, nil
+          tracer.breakpoints_hit [breakpoint], nil
         end
       end
     end
@@ -74,7 +74,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       breakpoint.stub :evaluate, stubbed_evaluate do
         transmitter.stub :submit, nil do
           tracer.stub :disable_traces, mocked_disable_traces do
-            tracer.breakpoint_hit breakpoint, nil
+            tracer.breakpoints_hit [breakpoint], nil
           end
         end
       end

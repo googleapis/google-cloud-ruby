@@ -14,6 +14,7 @@
 
 
 require "google/cloud/logging/logger"
+require "google/cloud/debugger/request_quota_manager"
 
 module Google
   module Cloud
@@ -44,11 +45,18 @@ module Google
 
           load_config kwargs
 
-          @debugger = debugger ||
-                      Debugger.new(project: configuration.project_id,
-                                   keyfile: configuration.keyfile,
-                                   module_name: configuration.module_name,
-                                   module_version: configuration.module_version)
+          if debugger
+            @debugger = debugger
+          else
+            @debugger =
+              Debugger.new(project: configuration.project_id,
+                           keyfile: configuration.keyfile,
+                           module_name: configuration.module_name,
+                           module_version: configuration.module_version)
+
+            @debugger.agent.quota_manager =
+              Google::Cloud::Debugger::RequestQuotaManager.new
+          end
 
           # Immediately start the debugger agent
           @debugger.start
@@ -77,6 +85,9 @@ module Google
         ensure
           # Stop breakpoints tracing beyond this point
           @debugger.agent.tracer.disable_traces_for_thread
+
+          # Reset quotas after each request finishes.
+          @debugger.agent.quota_manager.reset if @debugger.agent.quota_manager
         end
 
         private

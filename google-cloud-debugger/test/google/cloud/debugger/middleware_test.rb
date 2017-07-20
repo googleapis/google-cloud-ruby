@@ -73,6 +73,24 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
 
       debugger.agent.logger.wont_equal logger
     end
+
+    it "resets quota after each request" do
+      debugger.agent.quota_manager = Google::Cloud::Debugger::RequestQuotaManager.new
+
+      stubbed_call = ->(_) {
+        debugger.agent.quota_manager.count_quota.times do
+          debugger.agent.quota_manager.consume
+        end
+
+        debugger.agent.quota_manager.more?.must_equal false
+      }
+
+      rack_app.stub :call, stubbed_call do
+        middleware.call({})
+
+        debugger.agent.quota_manager.more?.must_equal true
+      end
+    end
   end
 end
 

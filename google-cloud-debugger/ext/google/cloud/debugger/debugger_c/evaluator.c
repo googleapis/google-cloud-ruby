@@ -23,19 +23,31 @@ eval_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 {
     rb_event_flag_t event = rb_tracearg_event_flag(trace_arg);
     VALUE evaluator = (VALUE)data;
-    VALUE klass = rb_tracearg_defined_class(trace_arg);
-    VALUE obj = rb_tracearg_self(trace_arg);
-    VALUE method_id = rb_tracearg_method_id(trace_arg);
+    VALUE klass;
+    VALUE obj;
+    VALUE method_id;
+    ID trace_line_cb_id;
     ID trace_func_cb_id;
     ID trace_c_func_cb_id;
 
+    CONST_ID(trace_line_cb_id, "trace_line_callback");
     CONST_ID(trace_func_cb_id, "trace_func_callback");
     CONST_ID(trace_c_func_cb_id, "trace_c_func_callback");
 
+    if (event & RUBY_EVENT_LINE) {
+        rb_funcall(evaluator, trace_line_cb_id, 0);
+    }
     if (event & RUBY_EVENT_CALL) {
+        obj = rb_tracearg_self(trace_arg);
+        method_id = rb_tracearg_method_id(trace_arg);
+
         rb_funcall(evaluator, trace_func_cb_id, 2, obj, method_id);
     }
     if (event & RUBY_EVENT_C_CALL) {
+        klass = rb_tracearg_defined_class(trace_arg);
+        obj = rb_tracearg_self(trace_arg);
+        method_id = rb_tracearg_method_id(trace_arg);
+
         rb_funcall(evaluator, trace_c_func_cb_id, 3, obj, klass, method_id);
     }
 
@@ -87,7 +99,7 @@ rb_enable_method_trace_for_thread(VALUE self)
     trace_set = rb_hash_aref(thread_variables_hash, eval_trace_thread_flag);
 
     if (!RTEST(trace_set)) {
-        rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)eval_trace_callback, RUBY_EVENT_CALL | RUBY_EVENT_C_CALL, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
+        rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)eval_trace_callback, RUBY_EVENT_LINE | RUBY_EVENT_CALL | RUBY_EVENT_C_CALL, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
         rb_hash_aset(thread_variables_hash, eval_trace_thread_flag, Qtrue);
     }
 

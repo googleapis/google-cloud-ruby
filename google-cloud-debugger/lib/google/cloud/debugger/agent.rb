@@ -91,6 +91,11 @@ module Google
         attr_accessor :logger
 
         ##
+        # A quota tracking object helps tracking resource consumption during
+        # evaluations.
+        attr_accessor :quota_manager
+
+        ##
         # @private The last exception captured in the agent child thread
         attr_reader :last_exception
 

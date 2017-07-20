@@ -144,17 +144,13 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
     VALUE trace_binding;
     VALUE call_stack_bindings;
 
-    int i;
     VALUE matching_result = match_breakpoints(self, c_trace_path, c_trace_lineno);
-    VALUE *c_matching_breakpoints;
-    VALUE matching_breakpoint;
-    int matching_breakpoints_len;
 
     ID callers_id;
-    ID breakpoint_hit_id;
+    ID breakpoints_hit_id;
 
     CONST_ID(callers_id, "callers");
-    CONST_ID(breakpoint_hit_id, "breakpoint_hit");
+    CONST_ID(breakpoints_hit_id, "breakpoints_hit");
 
     // If matching result isn't an array, it means we're in completely wrong file,
     // or not on the right line. Turn line tracing off if we're in wrong file.
@@ -165,17 +161,11 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
         return;
     }
 
-    c_matching_breakpoints = RARRAY_PTR(matching_result);
-    matching_breakpoints_len = RARRAY_LEN(matching_result);
     trace_binding = rb_binding_new();
     call_stack_bindings = rb_funcall(trace_binding, callers_id, 0);
     rb_ary_pop(call_stack_bindings);
 
-    // Evaluate each of the matching breakpoint
-    for (i = 0; i < matching_breakpoints_len; i++) {
-        matching_breakpoint = c_matching_breakpoints[i];
-        rb_funcall(self, breakpoint_hit_id, 2, matching_breakpoint, call_stack_bindings);
-    }
+    rb_funcall(self, breakpoints_hit_id, 2, matching_result, call_stack_bindings);
 
     return;
 }
