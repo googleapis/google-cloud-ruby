@@ -234,10 +234,23 @@ module Google
         ##
         # The bucket's storage class. This defines how objects in the bucket are
         # stored and determines the SLA and the cost of storage. Values include
-        # `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`, `COLDLINE`, `STANDARD`,
-        # and `DURABLE_REDUCED_AVAILABILITY`.
+        # `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`, `COLDLINE`, and
+        # `DURABLE_REDUCED_AVAILABILITY`.
         def storage_class
           @gapi.storage_class
+        end
+
+        ##
+        # Updates the bucket's storage class. This defines how objects in the
+        # bucket are stored and determines the SLA and the cost of storage.
+        # Accepted values include `:multi_regional`, `:regional`, `:nearline`,
+        # and `:coldline`, as well as the equivalent strings returned by
+        # {Bucket#storage_class}. For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/storage-classes).
+        # @param [Symbol, String] new_storage_class Storage class of the bucket.
+        def storage_class= new_storage_class
+          @gapi.storage_class = storage_class_for(new_storage_class)
+          patch_gapi! :storage_class
         end
 
         ##
@@ -615,12 +628,11 @@ module Google
         #   file as "x-goog-meta-" response headers.
         # @param [Symbol, String] storage_class Storage class of the file.
         #   Determines how the file is stored and determines the SLA and the
-        #   cost of storage. Values include `:multi_regional`, `:regional`,
-        #   `:nearline`, `:coldline`, `:standard`, and `:dra` (Durable Reduced
-        #   Availability), as well as the strings returned by
-        #   {#storage_class}. For more information, see [Storage
-        #   Classes](https://cloud.google.com/storage/docs/storage-classes) and
-        #   [Per-Object Storage
+        #   cost of storage. Accepted values include `:multi_regional`,
+        #   `:regional`, `:nearline`, and `:coldline`, as well as the equivalent
+        #   strings returned by {#storage_class}. For more information, see
+        #   [Storage Classes](https://cloud.google.com/storage/docs/storage-classes)
+        #   and [Per-Object Storage
         #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
         #   The default value is the default storage class for the bucket.
         # @param [String] encryption_key Optional. A customer-supplied, AES-256

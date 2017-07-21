@@ -35,17 +35,20 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     storage.bucket(one_off_bucket_name).wont_be :nil?
 
+    one_off_bucket.storage_class.wont_be :nil?
     one_off_bucket.website_main.must_be :nil?
     one_off_bucket.website_404.must_be :nil?
     one_off_bucket.requester_pays.must_be :nil?
     one_off_bucket.labels.must_equal({})
     one_off_bucket.update do |b|
+      b.storage_class = :nearline
       b.website_main = "index.html"
       b.website_404 = "not_found.html"
       b.requester_pays = true
       # update labels with symbols
       b.labels[:foo] = :bar
     end
+    one_off_bucket.storage_class.must_equal "NEARLINE"
     one_off_bucket.website_main.must_equal "index.html"
     one_off_bucket.website_404.must_equal "not_found.html"
     one_off_bucket.requester_pays.must_equal true
@@ -54,6 +57,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     one_off_bucket_copy = storage.bucket one_off_bucket_name
     one_off_bucket_copy.wont_be :nil?
+    one_off_bucket_copy.storage_class.must_equal "NEARLINE"
     one_off_bucket_copy.website_main.must_equal "index.html"
     one_off_bucket_copy.website_404.must_equal "not_found.html"
     one_off_bucket_copy.requester_pays.must_equal true

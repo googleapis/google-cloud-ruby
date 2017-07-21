@@ -314,10 +314,10 @@ module Google
 
         ##
         # Updates how the file is stored and determines the SLA and the cost of
-        # storage. Values include `:multi_regional`, `:regional`, `:nearline`,
-        # `:coldline`, `:standard`, and `:dra` (Durable Reduced Availability),
-        # as well as the strings returned by {File#storage_class} or
-        # {Bucket#storage_class}. For more information, see [Storage
+        # storage. Accepted values include `:multi_regional`, `:regional`,
+        # `:nearline`, and `:coldline`, as well as the equivalent strings
+        # returned by {File#storage_class} or {Bucket#storage_class}. For more
+        # information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes) and
         # [Per-Object Storage
         # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
