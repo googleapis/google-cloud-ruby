@@ -100,7 +100,7 @@ module Google
         ##
         # Returns API::Policy
         def get_policy project_id
-          execute { service.get_project_iam_policy "projects/#{project_id}" }
+          execute { service.get_project_iam_policy project_id }
         end
 
         ##
@@ -108,7 +108,7 @@ module Google
         def set_policy project_id, new_policy
           req = API::SetIamPolicyRequest.new policy: new_policy
           execute do
-            service.set_project_iam_policy "projects/#{project_id}", req
+            service.set_project_iam_policy project_id, req
           end
         end
 
@@ -117,7 +117,7 @@ module Google
         def test_permissions project_id, permissions
           req = API::TestIamPermissionsRequest.new permissions: permissions
           execute do
-            service.test_project_iam_permissions "projects/#{project_id}", req
+            service.test_project_iam_permissions project_id, req
           end
         end
 
