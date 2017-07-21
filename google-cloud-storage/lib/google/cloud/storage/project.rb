@@ -258,12 +258,11 @@ module Google
         #   Logs](https://cloud.google.com/storage/docs/access-logs).
         # @param [Symbol, String] storage_class Defines how objects in the
         #   bucket are stored and determines the SLA and the cost of storage.
-        #   Values include `:multi_regional`, `:regional`, `:nearline`,
-        #   `:coldline`, `:standard`, and `:dra` (Durable Reduced
-        #   Availability), as well as the strings returned by
+        #   Accepted values include `:multi_regional`, `:regional`, `:nearline`,
+        #   and `:coldline`, as well as the equivalent strings returned by
         #   {Bucket#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
-        #   default value is `:standard`, which is equivalent to
+        #   default value is the Standard storage class, which is equivalent to
         #   `:multi_regional` or `:regional` depending on the bucket's location
         #   settings.
         # @param [Boolean] versioning Whether [Object
@@ -313,12 +312,13 @@ module Google
                           website_main: nil, website_404: nil, versioning: nil
           new_bucket = Google::Apis::StorageV1::Bucket.new({
             name: bucket_name,
-            location: location,
-            storage_class: storage_class_for(storage_class)
+            location: location
           }.delete_if { |_, v| v.nil? })
+          storage_class = storage_class_for(storage_class)
           updater = Bucket::Updater.new(new_bucket).tap do |b|
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
+            b.storage_class = storage_class unless storage_class.nil?
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
