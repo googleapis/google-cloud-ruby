@@ -207,10 +207,11 @@ module Google
                 break
               end
             end
-          rescue GRPC::DeadlineExceeded
-            # The GRPC client will raise when stream is opened longer than the
-            # timeout value it is configured for. When this happends, restart the
-            # stream stealthly.
+          rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled
+            # The GAPIC layer will raise DeadlineExceeded when stream is opened
+            # longer than the timeout value it is configured for. When this
+            # happends, restart the stream stealthly.
+            # Also stealthly restart the stream on Unavailable and Cancelled.
             synchronize { start_streaming! }
           rescue => e
             synchronize do
