@@ -61,6 +61,8 @@ module Google
 
                 @batch_created_at ||= Time.now
                 @background_thread ||= Thread.new { run_background }
+
+                push_batch_request! if @batch.ready?
               end
 
               @cond.signal
@@ -142,7 +144,7 @@ module Google
           end
 
           class Batch
-            attr_reader :ack_ids, :request
+            attr_reader :max_bytes, :request
 
             def initialize max_bytes: 10000000
               @max_bytes = max_bytes
@@ -156,13 +158,17 @@ module Google
 
             def try_add deadline, ack_id
               addl_bytes = deadline.to_s.size + ack_id.size
-              return false if total_message_size + addl_bytes >= @max_bytes
+              return false if total_message_bytes + addl_bytes >= @max_bytes
 
               add deadline, ack_id
               true
             end
 
-            def total_message_size
+            def ready?
+              total_message_bytes >= @max_bytes
+            end
+
+            def total_message_bytes
               request.to_proto.size
             end
           end

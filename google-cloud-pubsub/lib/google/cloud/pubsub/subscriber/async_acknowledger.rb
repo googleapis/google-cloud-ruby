@@ -61,6 +61,8 @@ module Google
 
                 @batch_created_at ||= Time.now
                 @background_thread ||= Thread.new { run_background }
+
+                push_batch_request! if @batch.ready?
               end
 
               @cond.signal
@@ -142,32 +144,31 @@ module Google
           end
 
           class Batch
-            attr_reader :ack_ids
+            attr_reader :max_bytes, :request
 
             def initialize max_bytes: 10000000
               @max_bytes = max_bytes
-              @ack_ids = []
+              @request = Google::Pubsub::V1::StreamingPullRequest.new
             end
 
             def add ack_id
-              @ack_ids << ack_id
+              @request.ack_ids << ack_id
             end
 
             def try_add ack_id
-              return false if total_message_size + ack_id.size >= @max_bytes
+              addl_bytes = ack_id.size
+              return false if total_message_bytes + addl_bytes >= @max_bytes
 
               add ack_id
               true
             end
 
-            def total_message_size
-              request.to_proto.size
+            def ready?
+              total_message_bytes >= @max_bytes
             end
 
-            def request
-              Google::Pubsub::V1::StreamingPullRequest.new.tap do |r|
-                r.ack_ids += @ack_ids
-              end
+            def total_message_bytes
+              request.to_proto.size
             end
           end
         end

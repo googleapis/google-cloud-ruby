@@ -108,6 +108,8 @@ module Google
 
             init_resources!
 
+            publish_batch! if @batch.ready?
+
             @cond.signal
           end
           nil
@@ -292,18 +294,23 @@ module Google
 
           def try_add msg, callback
             if total_message_count + 1 > @publisher.max_messages ||
-               total_message_size + msg.to_proto.size >= @publisher.max_bytes
+               total_message_bytes + msg.to_proto.size >= @publisher.max_bytes
               return false
             end
             add msg, callback
             true
           end
 
+          def ready?
+            total_message_count >= @publisher.max_messages ||
+              total_message_bytes >= @publisher.max_bytes
+          end
+
           def total_message_count
             @messages.count
           end
 
-          def total_message_size
+          def total_message_bytes
             @messages.map(&:to_proto).map(&:size).inject(0, :+)
           end
 

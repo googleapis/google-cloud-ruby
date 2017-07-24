@@ -111,9 +111,8 @@ module Google
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
-            async_acknowledger # To make sure the object is loaded
-
             synchronize do
+              @async_acknowledger ||= AsyncAcknowledger.new self
               @async_acknowledger.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
@@ -128,9 +127,8 @@ module Google
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
-            async_modify_deadliner # To make sure the object is loaded
-
             synchronize do
+              @async_modify_deadliner ||= AsyncModifyDeadliner.new self
               @async_modify_deadliner.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
@@ -140,13 +138,11 @@ module Google
           end
 
           def async_acknowledger
-            synchronize { @async_acknowledger ||= AsyncAcknowledger.new self }
+            synchronize { @async_acknowledger }
           end
 
           def async_modify_deadliner
-            synchronize do
-              @async_modify_deadliner ||= AsyncModifyDeadliner.new self
-            end
+            synchronize { @async_modify_deadliner }
           end
 
           def push request

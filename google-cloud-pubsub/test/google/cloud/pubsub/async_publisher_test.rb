@@ -232,15 +232,13 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
       end
     end
 
-    # messages in the batch are:
-    publisher.batch.messages.must_equal messages
-    publisher.batch.callbacks.count.must_equal 10
+    # batch was published immediately when ready
+    publisher.batch.must_be :nil?
 
     publisher.must_be :started?
     publisher.wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.flush
     wait_until { callbacks == 30 }
 
     publisher.stop.wait!
@@ -299,6 +297,52 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
     publisher.batch.must_be :nil?
 
     callbacks.must_equal 30
+
+    mock.verify
+  end
+
+  it "publishes when message size is greater than the limit" do
+    message = Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+    message_id = "msg1"
+    big_msg_data = SecureRandom.random_bytes 120
+    big_message = Google::Pubsub::V1::PubsubMessage.new(data: big_msg_data)
+    big_message_id = "msg999"
+
+    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: [message_id] }.to_json)
+    big_publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: [big_message_id] }.to_json)
+    mock = Minitest::Mock.new
+    mock.expect :publish, publish_res, [topic_path(topic_name), [message], options: default_options]
+    mock.expect :publish, big_publish_res, [topic_path(topic_name), [big_message], options: default_options]
+    pubsub.service.mocked_publisher = mock
+
+    # 190 is bigger than 10 messages, but less than 11.
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 100
+
+    callbacks = 0
+
+    publisher.publish message1 do |msg|
+      callbacks += 1
+    end
+    publisher.publish big_msg_data do |msg|
+      callbacks += 1
+    end
+
+    # Batch is nil because the second message published immediately
+    publisher.batch.must_be :nil?
+
+    publisher.must_be :started?
+    publisher.wont_be :stopped?
+
+    wait_until { callbacks == 2 }
+
+    publisher.stop.wait!
+
+    publisher.wont_be :started?
+    publisher.must_be :stopped?
+
+    publisher.batch.must_be :nil?
+
+    callbacks.must_equal 2
 
     mock.verify
   end
