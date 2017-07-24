@@ -14,9 +14,9 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/pubsub/topic/async_publisher"
-require "google/cloud/pubsub/topic/batch_publisher"
 require "google/cloud/pubsub/topic/list"
+require "google/cloud/pubsub/async_publisher"
+require "google/cloud/pubsub/batch_publisher"
 require "google/cloud/pubsub/subscription"
 require "google/cloud/pubsub/policy"
 
@@ -58,7 +58,7 @@ module Google
         ##
         # AsyncPublisher object used to publish multiple messages in batches.
         #
-        # @return [Topic::AsyncPublisher] Returns publisher object if calls to
+        # @return [AsyncPublisher] Returns publisher object if calls to
         #   {#publish_async} have been made, returns `nil` otherwise.
         #
         # @example
@@ -270,7 +270,7 @@ module Google
         # @param [Hash] attributes Optional attributes for the message.
         # @yield [batch] a block for publishing multiple messages in one
         #   request
-        # @yieldparam [Topic::BatchPublisher] batch the topic batch publisher
+        # @yieldparam [BatchPublisher] batch the topic batch publisher
         #   object
         #
         # @return [Message, Array<Message>] Returns the published message when

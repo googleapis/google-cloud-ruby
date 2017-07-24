@@ -18,6 +18,7 @@ require "google/cloud/env"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
+require "google/cloud/pubsub/batch_publisher"
 require "google/cloud/pubsub/snapshot"
 
 module Google
@@ -92,7 +93,7 @@ module Google
         #   Calls made on this object will raise errors if the topic resource
         #   does not exist. Default is `false`. Optional.
         # @param [Hash] async A hash of values to configure the topic's
-        #   {Topic::AsyncPublisher} that is created when {Topic#publish_async}
+        #   {AsyncPublisher} that is created when {Topic#publish_async}
         #   is called. Optional.
         #
         #   Hash keys and values may include the following:
@@ -172,7 +173,7 @@ module Google
         #
         # @param [String] topic_name Name of a topic.
         # @param [Hash] async A hash of values to configure the topic's
-        #   {Topic::AsyncPublisher} that is created when {Topic#publish_async}
+        #   {AsyncPublisher} that is created when {Topic#publish_async}
         #   is called. Optional.
         #
         #   Hash keys and values may include the following:
@@ -258,7 +259,7 @@ module Google
         # @param [Hash] attributes Optional attributes for the message.
         # @yield [batch] a block for publishing multiple messages in one
         #   request
-        # @yieldparam [Topic::BatchPublisher] batch the topic batch publisher
+        # @yieldparam [BatchPublisher] batch the topic batch publisher
         #   object
         #
         # @return [Message, Array<Message>] Returns the published message when
@@ -306,7 +307,7 @@ module Google
             data = nil
           end
           ensure_service!
-          publisher = Topic::BatchPublisher.new data, attributes
+          publisher = BatchPublisher.new data, attributes
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
           publish_batch_messages topic_name, publisher

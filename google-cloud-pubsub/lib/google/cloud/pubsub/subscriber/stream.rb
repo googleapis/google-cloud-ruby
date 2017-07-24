@@ -14,7 +14,7 @@
 
 
 require "google/cloud/pubsub/subscriber/async_acknowledger"
-require "google/cloud/pubsub/subscriber/async_delayer"
+require "google/cloud/pubsub/subscriber/async_modify_deadliner"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
@@ -95,8 +95,8 @@ module Google
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              @async_acknowledger.stop.wait! if @async_acknowledger
-              @async_delayer.stop.wait!      if @async_delayer
+              @async_acknowledger.stop.wait!     if @async_acknowledger
+              @async_modify_deadliner.stop.wait! if @async_modify_deadliner
 
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
@@ -128,10 +128,10 @@ module Google
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
-            async_delayer # To make sure the object is loaded
+            async_modify_deadliner # To make sure the object is loaded
 
             synchronize do
-              @async_delayer.delay deadline, mod_ack_ids
+              @async_modify_deadliner.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
             end
@@ -143,8 +143,10 @@ module Google
             synchronize { @async_acknowledger ||= AsyncAcknowledger.new self }
           end
 
-          def async_delayer
-            synchronize { @async_delayer ||= AsyncDelayer.new self }
+          def async_modify_deadliner
+            synchronize do
+              @async_modify_deadliner ||= AsyncModifyDeadliner.new self
+            end
           end
 
           def push request
@@ -158,12 +160,13 @@ module Google
           ##
           # @private
           def delay_inventory!
-            async_delayer # To make sure the object is loaded
+            async_modify_deadliner # To make sure the object is loaded
 
             synchronize do
               return true if @inventory.empty?
 
-              @async_delayer.delay subscriber.deadline, @inventory.ack_ids
+              @async_modify_deadliner.delay subscriber.deadline,
+                                            @inventory.ack_ids
             end
 
             true

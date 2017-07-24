@@ -52,7 +52,7 @@ module Google
                   @batch.add ack_id
                 else
                   unless @batch.try_add ack_id
-                    publish_batch!
+                    push_batch_request!
 
                     @batch = Batch.new max_bytes: @max_bytes
                     @batch.add ack_id
@@ -74,7 +74,7 @@ module Google
               break if @stopped
 
               @stopped = true
-              publish_batch!
+              push_batch_request!
               @cond.signal
             end
 
@@ -91,7 +91,7 @@ module Google
 
           def flush
             synchronize do
-              publish_batch!
+              push_batch_request!
               @cond.signal
             end
 
@@ -119,7 +119,7 @@ module Google
                 time_since_first_publish = Time.now - @batch_created_at
                 if time_since_first_publish > @interval
                   # interval met, publish the batch...
-                  publish_batch!
+                  push_batch_request!
                   @cond.wait
                 else
                   # still waiting for the interval to publish the batch...
@@ -129,7 +129,7 @@ module Google
             end
           end
 
-          def publish_batch!
+          def push_batch_request!
             return unless @batch
 
             request = @batch.request

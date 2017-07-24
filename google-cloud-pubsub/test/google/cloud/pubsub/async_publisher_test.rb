@@ -16,7 +16,7 @@ require "helper"
 
 Thread.abort_on_exception = true
 
-describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
+describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic_name2) { "differnt-topic-name" }
   let(:message1) { "new-message-here" }
@@ -35,7 +35,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1
 
@@ -65,7 +65,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1, format: :text
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     callback_called = false
 
@@ -136,7 +136,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1
     publisher.publish message2
@@ -170,7 +170,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     callback_count = 0
 
@@ -222,7 +222,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, max_messages: 10, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_messages: 10, interval: 10
 
     callbacks = 0
 
@@ -270,7 +270,7 @@ describe Google::Cloud::Pubsub::Topic::AsyncPublisher, :mock_pubsub do
     pubsub.service.mocked_publisher = mock
 
     # 190 is bigger than 10 messages, but less than 11.
-    publisher = Google::Cloud::Pubsub::Topic::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 190, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 190, interval: 10
 
     callbacks = 0
 

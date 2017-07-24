@@ -149,7 +149,7 @@ module Google
     #
     # Messages can also be published in batches asynchronously using
     # `publish_async`. (See {Google::Cloud::Pubsub::Topic#publish_async} and
-    # {Google::Cloud::Pubsub::Topic::AsyncPublisher})
+    # {Google::Cloud::Pubsub::AsyncPublisher})
     #
     # ```ruby
     # require "google/cloud/pubsub"
@@ -170,7 +170,7 @@ module Google
     #
     # Or multiple messages can be published in batches at the same time by
     # passing a block to `publish`. (See
-    # {Google::Cloud::Pubsub::Topic::BatchPublisher})
+    # {Google::Cloud::Pubsub::BatchPublisher})
     #
     # ```ruby
     # require "google/cloud/pubsub"
