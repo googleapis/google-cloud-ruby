@@ -163,7 +163,7 @@ module Google
                              delimiter = nil, max = nil, versions = nil,
                              user_project: nil
             files = new(Array(gapi_list.items).map do |gapi_object|
-              File.from_gapi gapi_object, service
+              File.from_gapi gapi_object, service, user_project: user_project
             end)
             files.instance_variable_set :@token, gapi_list.next_page_token
             files.instance_variable_set :@prefixes, Array(gapi_list.prefixes)

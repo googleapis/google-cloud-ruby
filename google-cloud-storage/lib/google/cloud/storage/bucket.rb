@@ -1132,7 +1132,7 @@ module Google
         # Reloads the bucket with current data from the Storage service.
         def reload!
           ensure_service!
-          @gapi = service.get_bucket name
+          @gapi = service.get_bucket name, user_project: user_project
         end
         alias_method :refresh!, :reload!
 
