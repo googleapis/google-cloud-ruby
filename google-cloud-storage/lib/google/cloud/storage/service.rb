@@ -326,9 +326,11 @@ module Google
 
         ##
         # Permanently deletes a file.
-        def delete_file bucket_name, file_path, user_project: nil
+        def delete_file bucket_name, file_path, generation: nil,
+                        user_project: nil
           execute do
             service.delete_object bucket_name, file_path,
+                                  generation: generation,
                                   user_project: user_project(user_project)
           end
         end

@@ -639,6 +639,11 @@ module Google
         # Permanently deletes the file.
         #
         # @return [Boolean] Returns `true` if the file was deleted.
+        # @param [Boolean, Integer] generation Specify a version of the file to
+        #   delete. When `true`, it will delete the version returned by
+        #   {#generation}. The default behavior is to delete the latest version
+        #   of the file (regardless of the version to which the file is set,
+        #   which is the version returned by {#generation}.)
         #
         # @example
         #   require "google/cloud/storage"
@@ -650,9 +655,31 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   file.delete
         #
-        def delete
+        # @example The file's generation can used by passing `true`:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.delete generation: true
+        #
+        # @example A generation can also be specified:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.delete generation: 123456
+        #
+        def delete generation: nil
           ensure_service!
-          service.delete_file bucket, name, user_project: user_project
+          generation = self.generation if generation == true
+          service.delete_file bucket, name, generation: generation,
+                                            user_project: user_project
           true
         end
 

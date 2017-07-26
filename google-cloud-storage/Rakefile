@@ -84,7 +84,9 @@ namespace :acceptance do
     puts "Cleaning up Storage buckets and files"
     Google::Cloud.storage.buckets.all do |b|
       begin
-        b.files.all &:delete
+        b.files(versions: true).all do |file|
+          file.delete generation: true
+        end
         # Add one second delay between bucket deletes to avoid rate limiting errors
         sleep 1
         b.delete

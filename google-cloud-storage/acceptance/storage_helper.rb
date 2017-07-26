@@ -93,7 +93,9 @@ def clean_up_storage_buckets
   $bucket_names.each do |bucket_name|
     if b = $storage.bucket(bucket_name)
       begin
-        b.files.all &:delete
+        b.files(versions: true).all do |file|
+          file.delete generation: true
+        end
         # Add one second delay between bucket deletes to avoid rate limiting errors
         sleep 1
         b.delete

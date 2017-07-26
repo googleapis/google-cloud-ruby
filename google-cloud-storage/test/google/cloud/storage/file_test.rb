@@ -85,7 +85,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file.name, { user_project: nil }]
+    mock.expect :delete_object, nil, [bucket.name, file.name, { generation: nil, user_project: nil }]
 
     file.service.mocked_service = mock
 
@@ -94,13 +94,58 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.verify
   end
 
+  it "can delete itself with generation set to true" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_object, nil, [bucket.name, file.name, { generation: 1234567890, user_project: nil }]
+
+    file.service.mocked_service = mock
+
+    file.generation.must_equal 1234567890
+    file.delete generation: true
+
+    mock.verify
+  end
+
+  it "can delete itself with generation set to a generation" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_object, nil, [bucket.name, file.name, { generation: 1234567894, user_project: nil }]
+
+    file.service.mocked_service = mock
+
+    file.delete generation: 1234567894
+
+    mock.verify
+  end
+
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_project.name, { user_project: "test" }]
+    mock.expect :delete_object, nil, [bucket.name, file_user_project.name, { generation: nil, user_project: "test" }]
 
     file_user_project.service.mocked_service = mock
 
     file_user_project.delete
+
+    mock.verify
+  end
+
+  it "can delete itself with generation set to true and user_project set to true" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_object, nil, [bucket.name, file.name, { generation: 1234567890, user_project: "test" }]
+
+    file_user_project.service.mocked_service = mock
+
+    file_user_project.delete generation: true
+
+    mock.verify
+  end
+
+  it "can delete itself with generation set to a generation and user_project set to true" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_object, nil, [bucket.name, file.name, { generation: 1234567894, user_project: "test" }]
+
+    file_user_project.service.mocked_service = mock
+
+    file_user_project.delete generation: 1234567894
 
     mock.verify
   end
