@@ -18,6 +18,13 @@ require "google/cloud/debugger/breakpoint"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Logpoint
+      #
+      # A kind of {Google::Cloud::Debugger::Breakpoint} that can be evaluated
+      # to generate a formatted log string, which later can be submitted to
+      # Stackdriver Logging service
+      #
       class Logpoint < Breakpoint
         ##
         # Evaluate the breakpoint unless it's already marked as completed.

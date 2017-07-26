@@ -31,11 +31,11 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
       var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.from_grpc var_table_grpc
       var_table.must_be_kind_of Google::Cloud::Debugger::Breakpoint::VariableTable
       var_table.size.must_equal 2
-      var_table[0].orig_var.must_be_nil
-      var_table[0].var.name.must_equal variable.name
-      var_table[0].var.type.must_equal variable.type
-      var_table[0].var.value.must_equal variable.value
-      var_table[0].var.members.must_equal variable.members
+      var_table[0].source_var.must_be_nil
+      var_table[0].name.must_equal variable.name
+      var_table[0].type.must_equal variable.type
+      var_table[0].value.must_equal variable.value
+      var_table[0].members.must_equal variable.members
     end
   end
 
@@ -45,8 +45,8 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
                         random_variable_integer_hash.to_json
       variable = Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
 
-      var_table.add_var nil, variable
-      var_table.add_var nil, variable
+      var_table.add variable
+      var_table.add variable
 
       var_table_grpc = var_table.to_grpc
 
@@ -58,21 +58,27 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
     end
   end
 
-  describe "#add_var" do
-    it "automatically creates a Breakpoint::Variable if one isn't given" do
-      var_table.add_var 1
+  describe "#add" do
+    it "doesn't add variable to the list unless it's a Breakpoint::Variable" do
+      variable = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 1
 
-      var_table[0].orig_var.must_equal 1
-      var_table[0].var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-      var_table[0].var.value.must_equal "1"
+      var_table.add "Doesn't add"
+      var_table.add variable
+
+      var_table.size.must_equal 1
+      var_table.first.must_equal variable
     end
   end
 
   describe "#rb_var_index" do
     it "returns index of the item found" do
-      var_table.add_var 4
-      var_table.add_var 5
-      var_table.add_var 6
+      variable1 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 4
+      variable2 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 5
+      variable3 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 6
+
+      var_table.add variable1
+      var_table.add variable2
+      var_table.add variable3
 
       var_table.rb_var_index(4).must_equal 0
       var_table.rb_var_index(5).must_equal 1
@@ -80,9 +86,13 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
     end
 
     it "returns nil if item not found" do
-      var_table.add_var 4
-      var_table.add_var 5
-      var_table.add_var 6
+      variable1 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 4
+      variable2 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 5
+      variable3 = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var 6
+
+      var_table.add variable1
+      var_table.add variable2
+      var_table.add variable3
 
       var_table.rb_var_index(8).must_be_nil
     end

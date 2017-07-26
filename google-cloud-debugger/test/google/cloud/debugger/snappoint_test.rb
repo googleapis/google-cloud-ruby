@@ -27,6 +27,15 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
 
   let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
 
+  describe "#initialize" do
+    it "insert a buffer full variable into variable table" do
+      snappoint = Google::Cloud::Debugger::Snappoint.new
+
+      snappoint.variable_table.size.must_equal 1
+      snappoint.variable_table[0].status.description.must_equal Google::Cloud::Debugger::Breakpoint::Variable::BUFFER_FULL_MSG
+    end
+  end
+
   describe ".eval_expressions" do
     it "calls readonly_eval_expression and return Debugger::Variable of result" do
       mock_binding = "A binding"
@@ -129,6 +138,26 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.evaluated_expressions.wont_be_empty
       snappoint.evaluated_expressions.first.name.must_equal snappoint.expressions.first
     end
+
+    it "limits expression evaluations to max size" do
+      long_str = "x" * 5000
+      count = (Google::Cloud::Debugger::Snappoint::MAX_PAYLOAD_SIZE / long_str.bytesize).floor + 1
+
+      snappoint.expressions = ["long_str"] * count
+      snappoint.variable_table.add Google::Cloud::Debugger::Breakpoint::Variable.buffer_full_variable
+
+      snappoint.eval_expressions binding
+
+      snappoint.evaluated_expressions.size.must_equal count
+
+      count.times do |i|
+        if i < count - 1
+          snappoint.evaluated_expressions[i].value.must_match /x+/
+        else
+          snappoint.evaluated_expressions[i].buffer_full_variable?.must_equal true
+        end
+      end
+    end
   end
 
   describe "#eval_call_stack" do
@@ -151,6 +180,66 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
         if i >= Google::Cloud::Debugger::Snappoint::STACK_EVAL_DEPTH
           sf.locals.must_be_empty
         end
+      end
+    end
+
+    it "limits local variables evaluations if expressions already used up all quota" do
+      long_str = "x" * 1000
+      count = (Google::Cloud::Debugger::Snappoint::MAX_PAYLOAD_SIZE / long_str.bytesize).floor + 3
+
+      snappoint.expressions = ["long_str"] * count
+      snappoint.variable_table.add Google::Cloud::Debugger::Breakpoint::Variable.buffer_full_variable
+
+      snappoint.eval_expressions binding
+      snappoint.eval_call_stack [binding]
+
+      snappoint.evaluated_expressions.size.must_equal count
+
+
+      snappoint.stack_frames.first.locals.size.must_equal 2
+      snappoint.stack_frames.first.locals.each do |var|
+        if var.name == "long_str"
+          var.buffer_full_variable?.must_equal true
+        end
+      end
+    end
+  end
+
+  describe "#calculate_total_size" do
+    it "gets the total size of evaluated variables" do
+      local_var = "test-local-var"
+
+      snappoint.condition = nil
+      snappoint.expressions = ["'hello'"]
+      snappoint.variable_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
+
+      snappoint.evaluate [binding]
+
+      snappoint.send(:calculate_total_size).must_equal "'hello'".bytesize + String.to_s.bytesize +
+                                                        "hello".inspect.bytesize + "local_var".bytesize +
+                                                        "test-local-var".inspect.bytesize + String.to_s.bytesize
+    end
+  end
+
+  describe "#convert_variable" do
+    it "convert the Ruby variable if current breakpoint is within limit" do
+      var = snappoint.send :convert_variable, 1, name: "one"
+      var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      var.value.must_equal "1"
+      var.name.must_equal "one"
+    end
+
+    it "returns buffer full referencing variable if current breakpoint size is full" do
+      snappoint.stub :calculate_total_size, Google::Cloud::Debugger::Snappoint::MAX_PAYLOAD_SIZE + 1 do
+        snappoint.init_var_table
+
+        var = snappoint.send :convert_variable, 1
+
+        var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+        var.value.must_be_nil
+        var.name.must_be_nil
+        var.type.must_be_nil
+        var.var_table_index.must_equal 0
       end
     end
   end

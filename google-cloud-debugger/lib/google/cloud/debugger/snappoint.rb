@@ -18,10 +18,50 @@ require "google/cloud/debugger/breakpoint"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Snappoint
+      #
+      # A kind of {Google::Cloud::Debugger::Breakpoint} that can be evaluated
+      # to capture the state of the program at time of evaluation. This is
+      # essentially a {Google::Cloud::Debugger::Breakpoint} with action attrubte
+      # set to `:CAPTURE`
+      #
       class Snappoint < Breakpoint
         ##
         # Max number of top stacks to collect local variables information
         STACK_EVAL_DEPTH = 5
+
+        ##
+        # Max size of payload a Snappoint collects
+        MAX_PAYLOAD_SIZE = 32768 # 32KB
+
+        ##
+        # @private Max size an evaluated expression variable is allowed to be
+        MAX_EXPRESSION_LIMIT = 32768 # 32KB
+
+        ##
+        # @private Max size a normal evaluated variable is allowed to be
+        MAX_VAR_LIMIT = 1024 # 1KB
+
+        ##
+        # @private Construct a new Snappoint instance.
+        def initialize *args
+          super
+
+          init_var_table
+        end
+
+        ##
+        # @private Initialize the variable table by inserting a buffer full
+        # variable at index 0. This variable will be shared by other variable
+        # evaluations if this Snappoint exceeds size limit.
+        def init_var_table
+          return if @variable_table[0] &&
+                    @variable_table[0].buffer_full_variable?
+
+          buffer_full_var = Variable.buffer_full_variable
+          @variable_table.variables.unshift buffer_full_var
+        end
 
         ##
         # Evaluate the breakpoint unless it's already marked as completed.
@@ -62,9 +102,11 @@ module Google
         #
         # @param [Binding] binding The binding object from the context
         #
-        def eval_expressions binding
-          @evaluated_expressions = expressions.map do |expression|
-            eval_result = Evaluator.readonly_eval_expression binding, expression
+        def eval_expressions bind
+          @evaluated_expressions = []
+
+          expressions.each do |expression|
+            eval_result = Evaluator.readonly_eval_expression bind, expression
 
             if eval_result.is_a?(Exception) &&
                eval_result.instance_variable_get(:@mutation_cause)
@@ -73,12 +115,12 @@ module Google
                 "Error: #{eval_result.message}",
                 refers_to: StatusMessage::VARIABLE_VALUE
             else
-              evaluated_var = Variable.from_rb_var eval_result,
-                                                   var_table: variable_table
+              evaluated_var = convert_variable eval_result,
+                                               name: expression,
+                                               limit: MAX_EXPRESSION_LIMIT
             end
 
-            evaluated_var.name = expression
-            evaluated_var
+            @evaluated_expressions << evaluated_var
           end
         end
 
@@ -94,6 +136,8 @@ module Google
         #   call stack
         #
         def eval_call_stack call_stack_bindings
+          @stack_frames = []
+
           call_stack_bindings.each_with_index do |frame_binding, i|
             frame_info = StackFrame.new.tap do |sf|
               sf.function = frame_binding.eval("__method__").to_s
@@ -104,17 +148,57 @@ module Google
               end
             end
 
-            if i < STACK_EVAL_DEPTH
-              frame_info.locals =
-                frame_binding.local_variables.map do |local_var_name|
-                  local_var = frame_binding.local_variable_get local_var_name
-
-                  Variable.from_rb_var local_var, name: local_var_name,
-                                                  var_table: variable_table
-                end
-            end
-
             @stack_frames << frame_info
+
+            next if i >= STACK_EVAL_DEPTH
+
+            frame_binding.local_variables.each do |local_var_name|
+              local_var = frame_binding.local_variable_get local_var_name
+              var = convert_variable local_var, name: local_var_name,
+                                                limit: MAX_VAR_LIMIT
+
+              frame_info.locals << var
+            end
+          end
+        end
+
+        private
+
+        ##
+        # @private Compute the total size of all the evaluated variables in
+        # this breakpoint.
+        def calculate_total_size
+          result = evaluated_expressions.inject(0) do |sum, exp|
+            sum + exp.payload_size
+          end
+
+          stack_frames.each do |stack_frame|
+            result = stack_frame.locals.inject(result) do |sum, local|
+              sum + local.payload_size
+            end
+          end
+
+          result = variable_table.variables.inject(result) do |sum, var|
+            sum + var.payload_size
+          end
+
+          result
+        end
+
+        ##
+        # @private Translate a Ruby variable into a {Breakpoint::Variable}.
+        # If the existing evaluated variables already exceed maximum allowed
+        # size, then return a buffer full warning variable instead.
+        def convert_variable source, name: nil, limit: nil
+          current_total_size = calculate_total_size
+          var = Variable.from_rb_var source, name: name, limit: limit,
+                                             var_table: variable_table
+
+          if (current_total_size + var.payload_size <= MAX_PAYLOAD_SIZE) ||
+             var.reference_variable?
+            var
+          else
+            Breakpoint::Variable.buffer_full_variable variable_table, name: name
           end
         end
       end
