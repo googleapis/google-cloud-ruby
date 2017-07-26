@@ -46,7 +46,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     end
   end
 
-  describe "#breakpoint_hit" do
+  describe "#breakpoints_hit" do
     let(:breakpoint) {
       Google::Cloud::Debugger::Snappoint.new nil, "path/to/file.rb", 123
     }
@@ -56,7 +56,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
       breakpoint_manager.stub :breakpoint_hit, stubbed_breakpoint_hit do
         breakpoint.stub :complete?, true do
-          tracer.breakpoint_hit breakpoint, nil
+          tracer.breakpoints_hit [breakpoint], nil
         end
       end
     end
@@ -74,12 +74,42 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       breakpoint.stub :evaluate, stubbed_evaluate do
         transmitter.stub :submit, nil do
           tracer.stub :disable_traces, mocked_disable_traces do
-            tracer.breakpoint_hit breakpoint, nil
+            tracer.breakpoints_hit [breakpoint], nil
           end
         end
       end
 
       mocked_disable_traces.verify
+    end
+
+    it "stops triggering breakpoints once quota is reached" do
+      quota_manager = OpenStruct.new more?: false
+      agent.quota_manager = quota_manager
+
+      stubbed_breakpoint_hit = ->(_, _) { fail "Shouldn't be called" }
+
+      breakpoint_manager.stub :breakpoint_hit, stubbed_breakpoint_hit do
+        tracer.breakpoints_hit [breakpoint], nil
+      end
+
+      breakpoint.complete?.wont_equal true
+    end
+
+    it "records time used after each evaluation if there's a quota manager" do
+      time_used = 0
+      quota_manager = OpenStruct.new more?: true
+      quota_manager.define_singleton_method :consume do |args|
+        time_used += args[:time]
+      end
+      agent.quota_manager = quota_manager
+
+      stubbed_breakpoint_hit = ->(_, _) { sleep 0.01 }
+
+      breakpoint_manager.stub :breakpoint_hit, stubbed_breakpoint_hit do
+        tracer.breakpoints_hit [breakpoint], nil
+      end
+
+      time_used.wont_equal 0
     end
   end
 

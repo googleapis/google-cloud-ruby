@@ -103,14 +103,26 @@ module Google
         end
 
         ##
-        # Callback function when a breakpoint is hit. Handover the hit
+        # Callback function when a set of breakpoints are hit. Handover the hit
         # breakpoint to breakpoint_manager to be evaluated.
-        #
-        def breakpoint_hit breakpoint, call_stack_bindings
-          return if breakpoint.nil? || breakpoint.complete?
+        def breakpoints_hit breakpoints, call_stack_bindings
+          breakpoints.each do |breakpoint|
+            # Stop evaluating breakpoints if we have quotas and the quotas are
+            # met.
+            break if agent.quota_manager && !agent.quota_manager.more?
 
-          agent.breakpoint_manager.breakpoint_hit breakpoint,
-                                                  call_stack_bindings
+            next if breakpoint.nil? || breakpoint.complete?
+
+            time_begin = Time.now
+
+            agent.breakpoint_manager.breakpoint_hit breakpoint,
+                                                    call_stack_bindings
+
+            # Report time and resource consumption to quota manager
+            if agent.quota_manager.respond_to? :consume
+              agent.quota_manager.consume time: Time.now - time_begin
+            end
+          end
 
           update_breakpoints_cache
 

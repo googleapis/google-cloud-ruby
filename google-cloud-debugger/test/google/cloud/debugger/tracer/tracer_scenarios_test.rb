@@ -41,8 +41,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from function call" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      breakpoint.must_equal breakpoint1
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint1
       hit = true
     end
 
@@ -50,7 +50,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_func
       tracer.stop
@@ -61,8 +61,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint called from a child thread" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      assert_equal breakpoint, breakpoint1
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      assert_equal breakpoints.first, breakpoint1
       hit = true
     end
 
@@ -70,7 +70,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       thr = Thread.new do
         tracer_test_func
@@ -84,8 +84,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from block yield" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      breakpoint.must_equal breakpoint2
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint2
       hit = true
     end
 
@@ -93,7 +93,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_func3
       tracer.stop
@@ -104,8 +104,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint when function interleave files" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      breakpoint.must_equal breakpoint3
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint3
       hit = true
     end
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_func4
       tracer.stop
@@ -124,8 +124,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from lambda function" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      breakpoint.must_equal breakpoint4
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint4
       hit = true
     end
 
@@ -133,7 +133,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_lambda.call
       tracer.stop
@@ -144,8 +144,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from proc" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      breakpoint.must_equal breakpoint5
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint5
       hit = true
     end
 
@@ -153,7 +153,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_proc.call
       tracer.stop
@@ -164,8 +164,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from fiber" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      assert_equal breakpoint, breakpoint6
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      assert_equal breakpoints.first, breakpoint6
       hit = true
     end
 
@@ -173,7 +173,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       tracer_test_fiber.resume
       tracer.stop
@@ -184,8 +184,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
   it "catches breakpoint from fiber after fiber yields" do
     hit = false
-    stubbed_breakpoint_hit = ->(breakpoint, call_stack_bindings) do
-      assert_equal breakpoint, breakpoint7
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      assert_equal breakpoints.first, breakpoint7
       hit = true
     end
 
@@ -193,7 +193,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     tracer = debugger.agent.tracer
     tracer.app_root = ""
 
-    tracer.stub :breakpoint_hit, stubbed_breakpoint_hit do
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
       test_filber = tracer_test_fiber
       test_filber.resume
