@@ -845,6 +845,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     file.name.must_equal file_name
     file.user_project.must_be :nil?
+    file.wont_be :lazy?
   end
 
   it "finds a file with find_file alias" do
@@ -862,6 +863,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     file.name.must_equal file_name
     file.user_project.must_be :nil?
+    file.wont_be :lazy?
   end
 
   it "finds a file with generation" do
@@ -880,6 +882,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     file.name.must_equal file_name
     file.user_project.must_be :nil?
+    file.wont_be :lazy?
   end
 
   it "finds a file with customer-supplied encryption key" do
@@ -897,6 +900,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     file.name.must_equal file_name
     file.user_project.must_be :nil?
+    file.wont_be :lazy?
   end
 
   it "finds a file with user_project set to true" do
@@ -914,6 +918,76 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     file.name.must_equal file_name
     file.user_project.must_equal true
+    file.wont_be :lazy?
+  end
+
+  it "finds a file with skip_lookup" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+
+    bucket.service.mocked_service = mock
+
+    file = bucket.file file_name, skip_lookup: true
+
+    mock.verify
+
+    file.name.must_equal file_name
+    file.generation.must_be :nil?
+    file.user_project.must_be :nil?
+    file.must_be :lazy?
+  end
+
+  it "finds a file with skip_lookup and find_file alias" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+
+    bucket.service.mocked_service = mock
+
+    file = bucket.find_file file_name, skip_lookup: true
+
+    mock.verify
+
+    file.name.must_equal file_name
+    file.generation.must_be :nil?
+    file.user_project.must_be :nil?
+    file.must_be :lazy?
+  end
+
+  it "finds a file with generation and skip_lookup" do
+    file_name = "file.ext"
+    generation = 123
+
+    mock = Minitest::Mock.new
+
+    bucket.service.mocked_service = mock
+
+    file = bucket.file file_name, generation: generation, skip_lookup: true
+
+    mock.verify
+
+    file.name.must_equal file_name
+    file.generation.must_equal generation
+    file.user_project.must_be :nil?
+    file.must_be :lazy?
+  end
+
+  it "finds a file with user_project and skip_lookupset to true" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+
+    bucket_user_project.service.mocked_service = mock
+
+    file = bucket_user_project.file file_name, skip_lookup: true
+
+    mock.verify
+
+    file.name.must_equal file_name
+    file.generation.must_be :nil?
+    file.user_project.must_equal true
+    file.must_be :lazy?
   end
 
   it "can reload itself" do

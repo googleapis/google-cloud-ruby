@@ -527,9 +527,13 @@ module Google
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
+        # @param [Boolean] skip_lookup Optionally create a Bucket object
+        #   without verifying the bucket resource exists on the Storage service.
+        #   Calls made on this object will raise errors if the bucket resource
+        #   does not exist. Default is `false`.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
-        #   to {#create_file}.
+        #   to {#create_file}. (Not used if `skip_lookup` is also set.)
         #
         # @return [Google::Cloud::Storage::File, nil] Returns nil if file does
         #   not exist
@@ -544,8 +548,13 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, encryption_key: nil
+        def file path, generation: nil, skip_lookup: nil, encryption_key: nil
           ensure_service!
+          if skip_lookup
+            return File.new_lazy name, path, service,
+                                 generation: generation,
+                                 user_project: user_project
+          end
           gapi = service.get_file name, path, generation: generation,
                                               key: encryption_key,
                                               user_project: user_project
@@ -1195,9 +1204,7 @@ module Google
         def ensure_gapi!
           ensure_service!
           return unless lazy?
-          @gapi = service.get_bucket name
-          # If NotFound then lazy will never be unset
-          @lazy = nil
+          reload!
         end
 
         def patch_gapi! *attributes

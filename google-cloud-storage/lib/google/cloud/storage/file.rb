@@ -676,8 +676,8 @@ module Google
         #   file.delete generation: 123456
         #
         def delete generation: nil
-          ensure_service!
           generation = self.generation if generation == true
+          ensure_service!
           service.delete_file bucket, name, generation: generation,
                                             user_project: user_project
           true
@@ -873,11 +873,74 @@ module Google
 
         ##
         # Reloads the file with current data from the Storage service.
-        def reload!
+        #
+        # @param [Boolean, Integer] generation Specify a version of the file to
+        #   reload with. When `true`, it will reload the version returned by
+        #   {#generation}. The default behavior is to reload with the latest
+        #   version of the file (regardless of the version to which the file is
+        #   set, which is the version returned by {#generation}.)
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.reload!
+        #
+        # @example The file's generation can used by passing `true`:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext", generation: 123456
+        #   file.reload! generation: true
+        #
+        # @example A generation can also be specified:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext", generation: 123456
+        #   file.reload! generation: 123457
+        #
+        def reload! generation: nil
+          generation = self.generation if generation == true
           ensure_service!
-          @gapi = service.get_file bucket, name, user_project: user_project
+          @gapi = service.get_file bucket, name, generation: generation,
+                                                 user_project: user_project
+          # If NotFound then lazy will never be unset
+          @lazy = nil
+          self
         end
         alias_method :refresh!, :reload!
+
+        ##
+        # Determines whether the file exists in the Storage service.
+        def exists?
+          # Always true if we have a grpc object
+          return true unless lazy?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # @private
+        # Determines whether the file was created without retrieving the
+        # resource record from the API.
+        def lazy?
+          @lazy
+        end
 
         ##
         # @private URI of the location and file name in the format of
@@ -896,12 +959,35 @@ module Google
           end
         end
 
+        ##
+        # @private New lazy Bucket object without making an HTTP request.
+        def self.new_lazy bucket, name, service, generation: nil,
+                          user_project: nil
+          # TODO: raise if name is nil?
+          new.tap do |f|
+            f.gapi.bucket = bucket
+            f.gapi.name = name
+            f.gapi.generation = generation
+            f.service = service
+            f.user_project = user_project
+            f.instance_variable_set :@lazy, true
+          end
+        end
+
         protected
 
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
+        end
+
+        ##
+        # Ensures the Google::Apis::StorageV1::Bucket object exists.
+        def ensure_gapi!
+          ensure_service!
+          return unless lazy?
+          reload! generation: true
         end
 
         def update_gapi! *attributes
