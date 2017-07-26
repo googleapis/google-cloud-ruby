@@ -980,6 +980,27 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
 
+  it "can reload itself with user_project set to true" do
+    bucket_name = "found-bucket"
+    new_url_root = "https://www.googleapis.com/storage/v2"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+      [bucket_name, {user_project: "test"}]
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
+      [bucket_name, {user_project: "test"}]
+
+    bucket_user_project.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
+    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+
+    bucket.reload!
+
+    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    mock.verify
+  end
+
   def create_file_gapi bucket=nil, name = nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
