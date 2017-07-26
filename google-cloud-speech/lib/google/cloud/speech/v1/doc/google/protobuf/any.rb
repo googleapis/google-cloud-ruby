@@ -77,7 +77,7 @@ module Google
     # If the embedded message type is well-known and has a custom JSON
     # representation, that representation will be embedded adding a field
     # +value+ which holds the custom JSON in addition to the +@type+
-    # field. Example (for message Google::Protobuf::Duration):
+    # field. Example (for message {Google::Protobuf::Duration}):
     #
     #     {
     #       "@type": "type.googleapis.com/google.protobuf.Duration",
@@ -96,7 +96,7 @@ module Google
     #       qualified name of the type (as in +path/google.protobuf.Duration+).
     #       The name should be in a canonical form (e.g., leading "." is
     #       not accepted).
-    #     * An HTTP GET on the URL must yield a Google::Protobuf::Type
+    #     * An HTTP GET on the URL must yield a {Google::Protobuf::Type}
     #       value in binary format, or produce an error.
     #     * Applications are allowed to cache lookup results based on the
     #       URL, or have them precompiled into a binary to avoid any
