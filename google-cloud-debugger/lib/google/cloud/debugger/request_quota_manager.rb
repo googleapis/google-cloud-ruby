@@ -16,6 +16,19 @@
 module Google
   module Cloud
     module Debugger
+      ##
+      # # RequestQuotaManager
+      #
+      # Tracking object used by debugger agent to manage quota in
+      # request-based applications. This class tracks the amount of time
+      # and number of breakpoints to evaluation in a single session.
+      #
+      # The debugger agent doesn't have use a quota manager by default, which
+      # means it will evaluate all breakpoints encountered and takes as much
+      # time as needed. This class is utilized by
+      # {Google::Cloud::Debugger::Middleware} class to limit latency overhead
+      # when used in Rack-based applications.
+      #
       class RequestQuotaManager
         # Default Total time allowed to consume, in seconds
         DEFAULT_TIME_QUOTA = 0.05
