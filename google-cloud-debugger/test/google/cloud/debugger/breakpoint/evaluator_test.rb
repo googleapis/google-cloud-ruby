@@ -46,7 +46,9 @@ def mutating_func2
 end
 
 def infinite_loop
-  infinite_loop()
+  while true
+    1 + 1
+  end
 end
 
 describe Google::Cloud::Debugger::Breakpoint::Evaluator do
