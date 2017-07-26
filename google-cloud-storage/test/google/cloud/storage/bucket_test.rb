@@ -382,6 +382,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.size.must_equal num_files
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "lists files with find_files alias" do
@@ -398,6 +402,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.size.must_equal num_files
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "lists files with prefix set" do
@@ -415,6 +423,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     files.prefixes.wont_be :empty?
     files.prefixes.must_include "/prefix/path1/"
     files.prefixes.must_include "/prefix/path2/"
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "lists files with delimiter set" do
@@ -432,6 +444,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     files.prefixes.wont_be :empty?
     files.prefixes.must_include "/prefix/path1/"
     files.prefixes.must_include "/prefix/path2/"
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "lists files with max set" do
@@ -448,6 +464,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     files.count.must_equal 3
     files.token.wont_be :nil?
     files.token.must_equal "next_page_token"
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "lists files with versions set" do
@@ -462,6 +482,30 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 3
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
+  end
+
+  it "lists files with user_project set to true" do
+    num_files = 3
+
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(num_files),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+
+    bucket_user_project.service.mocked_service = mock
+
+    files = bucket_user_project.files
+
+    mock.verify
+
+    files.size.must_equal num_files
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_equal true
+    end
   end
 
   it "paginates files" do
@@ -481,9 +525,17 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     first_files.count.must_equal 3
     first_files.token.wont_be :nil?
     first_files.token.must_equal "next_page_token"
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.token.must_be :nil?
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with next? and next" do
@@ -502,9 +554,17 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     first_files.count.must_equal 3
     first_files.next?.must_equal true
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.next?.must_equal false
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with next? and next and prefix set" do
@@ -523,9 +583,17 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     first_files.count.must_equal 3
     first_files.next?.must_equal true
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.next?.must_equal false
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with next? and next and delimiter set" do
@@ -544,9 +612,17 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     first_files.count.must_equal 3
     first_files.next?.must_equal true
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.next?.must_equal false
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with next? and next and max set" do
@@ -565,9 +641,17 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     first_files.count.must_equal 3
     first_files.next?.must_equal true
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.next?.must_equal false
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with next? and next and versions set" do
@@ -586,9 +670,47 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     first_files.count.must_equal 3
     first_files.next?.must_equal true
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
 
     second_files.count.must_equal 2
     second_files.next?.must_equal false
+    second_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
+  end
+
+  it "paginates files with user_project set to true" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+    mock.expect :list_objects, list_files_gapi(2),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"]
+
+    bucket_user_project.service.mocked_service = mock
+
+    first_files = bucket_user_project.files
+    second_files = bucket_user_project.files token: first_files.token
+
+    mock.verify
+
+    first_files.count.must_equal 3
+    first_files.token.wont_be :nil?
+    first_files.token.must_equal "next_page_token"
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_equal true
+    end
+
+    second_files.count.must_equal 2
+    second_files.token.must_be :nil?
+    first_files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_equal true
+    end
   end
 
   it "paginates files with all" do
@@ -605,6 +727,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and prefix set" do
@@ -621,6 +747,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and delimiter set" do
@@ -637,6 +767,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and max set" do
@@ -653,6 +787,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and versions set" do
@@ -669,6 +807,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all using Enumerator" do
@@ -685,6 +827,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 5
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and request_limit set" do
@@ -701,6 +847,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 6
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_be :nil?
+    end
   end
 
   it "paginates files with all and user_project set to true" do
@@ -717,6 +867,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     files.count.must_equal 6
+    files.each do |file|
+      file.must_be_kind_of Google::Cloud::Storage::File
+      file.user_project.must_equal true
+    end
   end
 
   it "finds a file" do
@@ -733,6 +887,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     file.name.must_equal file_name
+    file.user_project.must_be :nil?
   end
 
   it "finds a file with find_file alias" do
@@ -749,6 +904,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     file.name.must_equal file_name
+    file.user_project.must_be :nil?
   end
 
   it "finds a file with generation" do
@@ -766,6 +922,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     file.name.must_equal file_name
+    file.user_project.must_be :nil?
   end
 
   it "finds a file with customer-supplied encryption key" do
@@ -782,6 +939,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     file.name.must_equal file_name
+    file.user_project.must_be :nil?
   end
 
   it "finds a file with user_project set to true" do
@@ -798,6 +956,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
 
     file.name.must_equal file_name
+    file.user_project.must_equal true
   end
 
   it "can reload itself" do
@@ -813,6 +972,27 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     bucket.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
+    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+
+    bucket.reload!
+
+    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    mock.verify
+  end
+
+  it "can reload itself with user_project set to true" do
+    bucket_name = "found-bucket"
+    new_url_root = "https://www.googleapis.com/storage/v2"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+      [bucket_name, {user_project: "test"}]
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
+      [bucket_name, {user_project: "test"}]
+
+    bucket_user_project.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
     bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
     bucket.reload!

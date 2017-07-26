@@ -772,6 +772,9 @@ module Google
           PROHIBITED_OPERATION_MSG = "Prohibited operation detected".freeze
           MUTATION_DETECTED_MSG = "Mutation detected!".freeze
           COMPILATION_FAIL_MSG = "Unable to compile expression".freeze
+          LONG_EVAL_MSG = "Evaluation exceeded time limit".freeze
+
+          EXPRESSION_EVALUATION_TIME_THRESHOLD = 0.05
 
           class << self
             ##
@@ -817,6 +820,10 @@ module Google
               # traced.
               thr = Thread.new do
                 begin
+                  deadline = Time.now + EXPRESSION_EVALUATION_TIME_THRESHOLD
+                  Thread.current.thread_variable_set :evaluation_deadline,
+                                                     deadline
+
                   binding.eval wrap_expression(expression)
                 rescue => e
                   # Treat all StandardError as mutation and set @mutation_cause
@@ -825,6 +832,7 @@ module Google
                       :@mutation_cause,
                       Google::Cloud::Debugger::MutationError::UNKNOWN_CAUSE)
                   end
+
                   e
                 end
               end
@@ -906,6 +914,21 @@ module Google
                     :disable_method_trace_for_thread)
                 end
               """
+            end
+
+            ##
+            # @private Evaluation tracing callback function for line event.
+            # This is called when ever line of Ruby code invoked during tracing.
+            # It keeps track of expression evaluation time usage and error out
+            # if the evaluation exceeds the predetermined deadline.
+            def trace_line_callback
+              deadline = Thread.current.thread_variable_get :evaluation_deadline
+
+              return if Time.now <= deadline
+
+              disable_method_trace_for_thread
+
+              fail Google::Cloud::Debugger::EvaluationError, LONG_EVAL_MSG
             end
 
             ##
@@ -999,6 +1022,12 @@ module Google
         def inspect
           "#<MutationError: #{message}>"
         end
+      end
+
+      ##
+      # @private Custom error type used to identify evaluation error during
+      # breakpoint expression evaluation.
+      class EvaluationError < StandardError
       end
     end
   end

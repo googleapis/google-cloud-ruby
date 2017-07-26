@@ -45,6 +45,12 @@ def mutating_func2
   $global_var = 2
 end
 
+def infinite_loop
+  while true
+    1 + 1
+  end
+end
+
 describe Google::Cloud::Debugger::Breakpoint::Evaluator do
   let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
 
@@ -193,6 +199,13 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       result = evaluator.readonly_eval_expression binding, expression
       result.must_be_kind_of ArgumentError
       result.message.must_match "no method name given"
+    end
+
+    it "errors out if evaluation takes too long" do
+      expression = "infinite_loop()"
+      result = evaluator.readonly_eval_expression binding, expression
+      result.must_be_kind_of Google::Cloud::Debugger::EvaluationError
+      result.message.must_match "Evaluation exceeded time limit"
     end
   end
 end
