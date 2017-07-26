@@ -16,16 +16,16 @@ module Google
   module Rpc
     # The +Status+ type defines a logical error model that is suitable for different
     # programming environments, including REST APIs and RPC APIs. It is used by
-    # {gRPC}[https://github.com/grpc]. The error model is designed to be:
+    # [gRPC](https://github.com/grpc). The error model is designed to be:
     #
-    # - Simple to use and understand for most users
-    # - Flexible enough to meet unexpected needs
+    # * Simple to use and understand for most users
+    # * Flexible enough to meet unexpected needs
     #
     # = Overview
     #
     # The +Status+ message contains three pieces of data: error code, error message,
     # and error details. The error code should be an enum value of
-    # Google::Rpc::Code, but it may accept additional error codes if needed.  The
+    # {Google::Rpc::Code}, but it may accept additional error codes if needed.  The
     # error message should be a developer-facing English message that helps
     # developers *understand* and *resolve* the error. If a localized user-facing
     # error message is needed, put the localized message in the error details or
@@ -49,31 +49,31 @@ module Google
     #
     # Example uses of this error model include:
     #
-    # - Partial errors. If a service needs to return partial errors to the client,
-    #     it may embed the +Status+ in the normal response to indicate the partial
-    #     errors.
+    # * Partial errors. If a service needs to return partial errors to the client,
+    #   it may embed the +Status+ in the normal response to indicate the partial
+    #   errors.
     #
-    # - Workflow errors. A typical workflow has multiple steps. Each step may
-    #     have a +Status+ message for error reporting purpose.
+    # * Workflow errors. A typical workflow has multiple steps. Each step may
+    #   have a +Status+ message for error reporting purpose.
     #
-    # - Batch operations. If a client uses batch request and batch response, the
-    #     +Status+ message should be used directly inside batch response, one for
-    #     each error sub-response.
+    # * Batch operations. If a client uses batch request and batch response, the
+    #   +Status+ message should be used directly inside batch response, one for
+    #   each error sub-response.
     #
-    # - Asynchronous operations. If an API call embeds asynchronous operation
-    #     results in its response, the status of those operations should be
-    #     represented directly using the +Status+ message.
+    # * Asynchronous operations. If an API call embeds asynchronous operation
+    #   results in its response, the status of those operations should be
+    #   represented directly using the +Status+ message.
     #
-    # - Logging. If some API errors are stored in logs, the message +Status+ could
-    #     be used directly after any stripping needed for security/privacy reasons.
+    # * Logging. If some API errors are stored in logs, the message +Status+ could
+    #   be used directly after any stripping needed for security/privacy reasons.
     # @!attribute [rw] code
     #   @return [Integer]
-    #     The status code, which should be an enum value of Google::Rpc::Code.
+    #     The status code, which should be an enum value of {Google::Rpc::Code}.
     # @!attribute [rw] message
     #   @return [String]
     #     A developer-facing error message, which should be in English. Any
     #     user-facing error message should be localized and sent in the
-    #     Google::Rpc::Status#details field, or localized by the client.
+    #     {Google::Rpc::Status#details} field, or localized by the client.
     # @!attribute [rw] details
     #   @return [Array<Google::Protobuf::Any>]
     #     A list of messages that carry the error details.  There will be a

@@ -36,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max_alternatives, :int32, 4
     optional :profanity_filter, :bool, 5
     repeated :speech_contexts, :message, 6, "google.cloud.speech.v1.SpeechContext"
+    optional :enable_word_time_offsets, :bool, 8
   end
   add_enum "google.cloud.speech.v1.RecognitionConfig.AudioEncoding" do
     value :ENCODING_UNSPECIFIED, 0
@@ -87,6 +88,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1.SpeechRecognitionAlternative" do
     optional :transcript, :string, 1
     optional :confidence, :float, 2
+    repeated :words, :message, 3, "google.cloud.speech.v1.WordInfo"
+  end
+  add_message "google.cloud.speech.v1.WordInfo" do
+    optional :start_time, :message, 1, "google.protobuf.Duration"
+    optional :end_time, :message, 2, "google.protobuf.Duration"
+    optional :word, :string, 3
   end
 end
 
@@ -110,6 +117,7 @@ module Google
         StreamingRecognitionResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.StreamingRecognitionResult").msgclass
         SpeechRecognitionResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechRecognitionResult").msgclass
         SpeechRecognitionAlternative = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechRecognitionAlternative").msgclass
+        WordInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.WordInfo").msgclass
       end
     end
   end

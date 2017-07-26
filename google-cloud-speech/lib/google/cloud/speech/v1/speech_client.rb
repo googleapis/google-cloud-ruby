@@ -165,11 +165,15 @@ module Google
           # Performs synchronous speech recognition: receive results after all audio
           # has been sent and processed.
           #
-          # @param config [Google::Cloud::Speech::V1::RecognitionConfig]
+          # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
           #   *Required* Provides information to the recognizer that specifies how to
           #   process the request.
-          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio]
+          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
+          #   can also be provided.
+          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
           #   *Required* The audio data to be recognized.
+          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -178,32 +182,28 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   AudioEncoding = Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding
-          #   RecognitionAudio = Google::Cloud::Speech::V1::RecognitionAudio
-          #   RecognitionConfig = Google::Cloud::Speech::V1::RecognitionConfig
-          #   SpeechClient = Google::Cloud::Speech::V1::SpeechClient
-          #
-          #   speech_client = SpeechClient.new
-          #   encoding = AudioEncoding::FLAC
+          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
-          #   config = RecognitionConfig.new
-          #   config.encoding = encoding
-          #   config.sample_rate_hertz = sample_rate_hertz
-          #   config.language_code = language_code
+          #   config = {
+          #     encoding: encoding,
+          #     sample_rate_hertz: sample_rate_hertz,
+          #     language_code: language_code
+          #   }
           #   uri = "gs://bucket_name/file_name.flac"
-          #   audio = RecognitionAudio.new
-          #   audio.uri = uri
+          #   audio = { uri: uri }
           #   response = speech_client.recognize(config, audio)
 
           def recognize \
               config,
               audio,
               options: nil
-            req = Google::Cloud::Speech::V1::RecognizeRequest.new({
+            req = {
               config: config,
               audio: audio
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1::RecognizeRequest)
             @recognize.call(req, options)
           end
 
@@ -212,11 +212,15 @@ module Google
           # +Operation.error+ or an +Operation.response+ which contains
           # a +LongRunningRecognizeResponse+ message.
           #
-          # @param config [Google::Cloud::Speech::V1::RecognitionConfig]
+          # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
           #   *Required* Provides information to the recognizer that specifies how to
           #   process the request.
-          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio]
+          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
+          #   can also be provided.
+          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
           #   *Required* The audio data to be recognized.
+          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -225,22 +229,17 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   AudioEncoding = Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding
-          #   RecognitionAudio = Google::Cloud::Speech::V1::RecognitionAudio
-          #   RecognitionConfig = Google::Cloud::Speech::V1::RecognitionConfig
-          #   SpeechClient = Google::Cloud::Speech::V1::SpeechClient
-          #
-          #   speech_client = SpeechClient.new
-          #   encoding = AudioEncoding::FLAC
+          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
-          #   config = RecognitionConfig.new
-          #   config.encoding = encoding
-          #   config.sample_rate_hertz = sample_rate_hertz
-          #   config.language_code = language_code
+          #   config = {
+          #     encoding: encoding,
+          #     sample_rate_hertz: sample_rate_hertz,
+          #     language_code: language_code
+          #   }
           #   uri = "gs://bucket_name/file_name.flac"
-          #   audio = RecognitionAudio.new
-          #   audio.uri = uri
+          #   audio = { uri: uri }
           #
           #   # Register a callback during the method call.
           #   operation = speech_client.long_running_recognize(config, audio) do |op|
@@ -273,10 +272,11 @@ module Google
               config,
               audio,
               options: nil
-            req = Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new({
+            req = {
               config: config,
               audio: audio
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1::LongRunningRecognizeRequest)
             operation = Google::Gax::Operation.new(
               @long_running_recognize.call(req, options),
               @operations_client,
@@ -309,11 +309,8 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   SpeechClient = Google::Cloud::Speech::V1::SpeechClient
-          #   StreamingRecognizeRequest = Google::Cloud::Speech::V1::StreamingRecognizeRequest
-          #
-          #   speech_client = SpeechClient.new
-          #   request = StreamingRecognizeRequest.new
+          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   request = {}
           #   requests = [request]
           #   speech_client.streaming_recognize(requests).each do |element|
           #     # Process element.
