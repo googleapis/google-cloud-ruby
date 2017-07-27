@@ -239,4 +239,58 @@ describe Google::Cloud::Speech::Project, :stream, :mock_speech do
     counters[:complete].must_equal 1
     counters[:utterance].must_equal 1
   end
+
+  it "streams audio with word_info" do
+    stream = speech.stream encoding: :linear16, language: "en-US", sample_rate: 16000, words: true
+    stream.must_be_kind_of Google::Cloud::Speech::Stream
+    stream.wont_be :started?
+    stream.wont_be :stopped?
+
+    counters = Hash.new { |h, k| h[k] = 0 }
+
+    stream.on_interim      { counters[:interim] += 1 }
+    stream.on_result       { counters[:result] += 1 }
+    stream.on_complete     { counters[:complete] += 1 }
+    stream.on_utterance    { counters[:utterance] += 1 }
+
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000, enable_word_time_offsets: true)
+    streaming_grpc = Google::Cloud::Speech::V1::StreamingRecognitionConfig.new(config: config_grpc)
+    init_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(streaming_config: streaming_grpc)
+    audio_grpc = Google::Cloud::Speech::V1::StreamingRecognizeRequest.new(audio_content: File.read("acceptance/data/audio.raw", mode: "rb"))
+
+    responses = [
+      Google::Cloud::Speech::V1::StreamingRecognizeResponse.decode_json("{\"results\":[{\"alternatives\":[{\"transcript\":\"how old is the Brooklyn Bridge\",\"confidence\":0.987629,\"words\":[{\"startTime\":{},\"endTime\":{\"nanos\":300000000},\"word\":\"how\"},{\"startTime\":{\"nanos\":300000000},\"endTime\":{\"nanos\":600000000},\"word\":\"old\"},{\"startTime\":{\"nanos\":600000000},\"endTime\":{\"nanos\":800000000},\"word\":\"is\"},{\"startTime\":{\"nanos\":800000000},\"endTime\":{\"nanos\":900000000},\"word\":\"the\"},{\"startTime\":{\"nanos\":900000000},\"endTime\":{\"seconds\":1,\"nanos\":100000000},\"word\":\"Brooklyn\"},{\"startTime\":{\"seconds\":1,\"nanos\":100000000},\"endTime\":{\"seconds\":1,\"nanos\":500000000},\"word\":\"Bridge\"}]}],\"isFinal\":true}]}")
+    ]
+
+    stub = StreamingServiceStub.new(responses)
+    speech.service.mocked_service = stub
+
+    stream.send File.read("acceptance/data/audio.raw", mode: "rb")
+
+    stream.stop
+
+    stream.wait_until_complete!
+
+    stub.request_enum.to_a.must_equal [init_grpc, audio_grpc]
+
+    results = stream.results
+
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.98762899
+    results.first.words.wont_be :empty?
+    results.first.words.map(&:word).must_equal %w{how old is the Brooklyn Bridge}
+    results.first.words.each do |word|
+      word.must_be_kind_of Google::Cloud::Speech::Result::Word
+      word.word.must_be_kind_of String
+      word.start_time.must_be_kind_of Numeric
+      word.end_time.must_be_kind_of Numeric
+    end
+    results.first.alternatives.must_be :empty?
+
+    counters[:interim].must_equal 0
+    counters[:result].must_equal 1
+    counters[:complete].must_equal 1
+    counters[:utterance].must_equal 0
+  end
 end

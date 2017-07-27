@@ -248,4 +248,38 @@ describe "Streaming Recognition", :speech do
       counters[:utterance].must_be :>=, 0
     end
   end
+
+  it "uses words" do
+    counters = Hash.new { |h, k| h[k] = 0 }
+
+    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", words: true
+
+    stream.on_interim      { counters[:interim] += 1 }
+    stream.on_result       { counters[:result] += 1 }
+    stream.on_complete     { counters[:complete] += 1 }
+    stream.on_utterance    { counters[:utterance] += 1 }
+    stream.on_error do |error|
+      puts "The following error occurred while streaming: #{error}"
+    end
+
+    stream.send File.read(filepath, mode: "rb")
+
+    stream.stop
+
+    stream.wait_until_complete!
+
+    results = stream.results
+
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.9, 0.1
+    results.first.words.wont_be :empty?
+    results.first.words.map(&:word).must_equal %w{how old is the Brooklyn Bridge}
+    results.first.alternatives.must_be :empty?
+
+    counters[:interim].must_be :zero?
+    counters[:result].must_equal 1
+    counters[:complete].must_equal 1
+    counters[:utterance].must_be :zero?
+  end
 end
