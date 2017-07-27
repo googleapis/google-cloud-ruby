@@ -22,6 +22,7 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
+* [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -32,7 +33,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
-* [Cloud Spanner API](#cloud-spanner-api-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
@@ -390,7 +390,7 @@ result_set.each do |trace_record|
 end
 ```
 
-### Cloud Spanner API (Alpha)
+### Cloud Spanner API (Beta)
 
 - [google-cloud-spanner README](google-cloud-spanner/README.md)
 - [google-cloud-spanner API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest)
