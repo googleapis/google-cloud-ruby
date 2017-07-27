@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.0 / 2017-07-27
+
+* Add `Job#error` returning `Spanner::Status`.
+
 ### 0.22.0 / 2017-07-11
 
 * Remove `Policy#deep_dup`.

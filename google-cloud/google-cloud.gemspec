@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-monitoring", "~> 0.25.0"
   gem.add_dependency "google-cloud-pubsub", "~> 0.26.0"
   gem.add_dependency "google-cloud-resource_manager", "~> 0.26.0"
-  gem.add_dependency "google-cloud-spanner", "~> 0.22.0"
+  gem.add_dependency "google-cloud-spanner", "~> 0.23.0"
   gem.add_dependency "google-cloud-speech", "~> 0.25.0"
   gem.add_dependency "google-cloud-storage", "~> 1.3"
   gem.add_dependency "google-cloud-trace", "~> 0.26.0"
