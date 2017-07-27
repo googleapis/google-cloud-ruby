@@ -14,6 +14,7 @@
 
 
 require "google/cloud/speech/v1"
+require "google/cloud/speech/convert"
 
 module Google
   module Cloud
@@ -35,6 +36,10 @@ module Google
       #   recognition is correct. This field is typically provided only for the
       #   top hypothesis. A value of 0.0 is a sentinel value indicating
       #   confidence was not set.
+      # @attr_reader [Array<Result::Word>] words A list of words with additional
+      #   information about each word. Currently, the only additional
+      #   information provided is the the start and end time offsets. Available
+      #   when using the `words` argument in relevant methods.
       # @attr_reader [Array<Result::Alternative>] alternatives Additional
       #   recognition hypotheses (up to the value specified in
       #   `max_alternatives`). The server may return fewer than
@@ -56,13 +61,14 @@ module Google
       #   result.confidence #=> 0.9826789498329163
       #
       class Result
-        attr_reader :transcript, :confidence, :alternatives
+        attr_reader :transcript, :confidence, :words, :alternatives
 
         ##
         # @private Creates a new Results instance.
-        def initialize transcript, confidence, alternatives = []
-          @transcript  = transcript
-          @confidence = confidence
+        def initialize transcript, confidence, words = [], alternatives = []
+          @transcript   = transcript
+          @confidence   = confidence
+          @words        = words
           @alternatives = alternatives
         end
 
@@ -71,10 +77,42 @@ module Google
         def self.from_grpc grpc
           head, *tail = *grpc.alternatives
           return nil if head.nil?
+          words = Array(head.words).map do |w|
+            Word.new w.word, Convert.duration_to_number(w.start_time),
+                     Convert.duration_to_number(w.end_time)
+          end
           alternatives = tail.map do |alt|
             Alternative.new alt.transcript, alt.confidence
           end
-          new head.transcript, head.confidence, alternatives
+          new head.transcript, head.confidence, words, alternatives
+        end
+
+        ##
+        # Word-specific information for recognized words. Currently, the only
+        # additional information provided is the the start and end time offsets.
+        # Available when using the `words` argument in relevant methods.
+        #
+        # @attr_reader [String] word The word corresponding to this set of
+        #   information.
+        # @attr_reader [Numeric] start_time Time offset relative to the
+        #   beginning of the audio, and corresponding to the start of the spoken
+        #   word. This field is only set if `words` was specified. This is an
+        #   experimental feature and the accuracy of the time offset can vary.
+        # @attr_reader [Numeric] end_time Time offset relative to the
+        #   beginning of the audio, and corresponding to the end of the spoken
+        #   word. This field is only set if `words` was specified. This is an
+        #   experimental feature and the accuracy of the time offset can vary.
+        class Word
+          attr_reader :word, :start_time, :end_time
+          alias_method :to_str, :word
+
+          ##
+          # @private Creates a new Result::Word instance.
+          def initialize word, start_time, end_time
+            @word       = word
+            @start_time = start_time
+            @end_time   = end_time
+          end
         end
 
         ##
@@ -114,7 +152,7 @@ module Google
           ##
           # @private Creates a new Result::Alternative instance.
           def initialize transcript, confidence
-            @transcript  = transcript
+            @transcript = transcript
             @confidence = confidence
           end
         end

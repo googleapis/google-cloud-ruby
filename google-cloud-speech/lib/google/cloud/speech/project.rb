@@ -266,6 +266,10 @@ module Google
         #   phrases "hints" so that the speech recognition is more likely to
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] words When `true`, return a list of words with
+        #   additional information about each word. Currently, the only
+        #   additional information provided is the the start and end time
+        #   offsets. See {Result#words}. Default is `false`.
         #
         # @return [Array<Result>] The transcribed text of audio recognized.
         #
@@ -308,7 +312,8 @@ module Google
         #                              max_alternatives: 10
         #
         def recognize source, encoding: nil, language: nil, sample_rate: nil,
-                      max_alternatives: nil, profanity_filter: nil, phrases: nil
+                      max_alternatives: nil, profanity_filter: nil,
+                      phrases: nil, words: nil
           ensure_service!
 
           audio_obj = audio source, encoding: encoding, language: language,
@@ -317,7 +322,8 @@ module Google
           config = audio_config(
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
-            profanity_filter: profanity_filter, phrases: phrases)
+            profanity_filter: profanity_filter, phrases: phrases,
+            words: words)
 
           grpc = service.recognize_sync audio_obj.to_grpc, config
           grpc.results.map do |result_grpc|
@@ -388,6 +394,10 @@ module Google
         #   phrases "hints" so that the speech recognition is more likely to
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] words When `true`, return a list of words with
+        #   additional information about each word. Currently, the only
+        #   additional information provided is the the start and end time
+        #   offsets. See {Result#words}. Default is `false`.
         #
         # @return [Operation] A resource represents the long-running,
         #   asynchronous processing of a speech-recognition operation.
@@ -440,7 +450,8 @@ module Google
         #   op.reload!
         #
         def process source, encoding: nil, sample_rate: nil, language: nil,
-                    max_alternatives: nil, profanity_filter: nil, phrases: nil
+                    max_alternatives: nil, profanity_filter: nil, phrases: nil,
+                    words: nil
           ensure_service!
 
           audio_obj = audio source, encoding: encoding, language: language,
@@ -449,7 +460,8 @@ module Google
           config = audio_config(
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
-            profanity_filter: profanity_filter, phrases: phrases)
+            profanity_filter: profanity_filter, phrases: phrases,
+            words: words)
 
           grpc = service.recognize_async audio_obj.to_grpc, config
           Operation.from_grpc grpc
@@ -513,6 +525,10 @@ module Google
         #   phrases "hints" so that the speech recognition is more likely to
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] words When `true`, return a list of words with
+        #   additional information about each word. Currently, the only
+        #   additional information provided is the the start and end time
+        #   offsets. See {Result#words}. Default is `false`.
         # @param [Boolean] utterance When `true`, the service will perform
         #   continuous recognition (continuing to process audio even if the user
         #   pauses speaking) until the client closes the output stream (gRPC
@@ -550,7 +566,7 @@ module Google
         #
         def stream encoding: nil, language: nil, sample_rate: nil,
                    max_alternatives: nil, profanity_filter: nil, phrases: nil,
-                   utterance: nil, interim: nil
+                   words: nil, utterance: nil, interim: nil
           ensure_service!
 
           grpc_req = V1::StreamingRecognizeRequest.new(
@@ -561,7 +577,7 @@ module Google
                                      sample_rate: sample_rate,
                                      max_alternatives: max_alternatives,
                                      profanity_filter: profanity_filter,
-                                     phrases: phrases),
+                                     phrases: phrases, words: words),
                 single_utterance: utterance,
                 interim_results: interim
               }.delete_if { |_, v| v.nil? }
@@ -608,7 +624,7 @@ module Google
 
         def audio_config encoding: nil, language: nil, sample_rate: nil,
                          max_alternatives: nil, profanity_filter: nil,
-                         phrases: nil
+                         phrases: nil, words: nil
           contexts = nil
           contexts = [V1::SpeechContext.new(phrases: phrases)] if phrases
           language = String(language) unless language.nil?
@@ -618,7 +634,8 @@ module Google
             sample_rate_hertz: sample_rate,
             max_alternatives: max_alternatives,
             profanity_filter: profanity_filter,
-            speech_contexts: contexts
+            speech_contexts: contexts,
+            enable_word_time_offsets: words
           }.delete_if { |_, v| v.nil? })
         end
 

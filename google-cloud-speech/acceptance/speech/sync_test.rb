@@ -96,4 +96,15 @@ describe "Synchonous Recognition", :speech do
     results.first.confidence.must_be_close_to 0.9, 0.1
     results.first.alternatives.must_be :empty?
   end
+
+  it "recognizes audio with words" do
+    results = speech.recognize filepath, encoding: :linear16, sample_rate: 16000, language: "en-US", words: true
+
+    results.count.must_equal 1
+    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.confidence.must_be_close_to 0.9, 0.1
+    results.first.words.wont_be :empty?
+    results.first.words.map(&:word).must_equal %w{how old is the Brooklyn Bridge}
+    results.first.alternatives.must_be :empty?
+  end
 end

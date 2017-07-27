@@ -58,4 +58,23 @@ describe Google::Cloud::Speech::Audio, :process, :mock_speech do
     op.id.must_equal "1234567890"
     op.wont_be :done?
   end
+
+  it "recognizes audio op with words" do
+    config_grpc = Google::Cloud::Speech::V1::RecognitionConfig.new(encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000, enable_word_time_offsets: true)
+
+    mock = Minitest::Mock.new
+    mock.expect :long_running_recognize, op_grpc, [config_grpc, audio_grpc, options: default_options]
+
+    audio.encoding = :linear16
+    audio.sample_rate = 16000
+    audio.language = "en-US"
+
+    speech.service.mocked_service = mock
+    op = audio.process words: true
+    mock.verify
+
+    op.must_be_kind_of Google::Cloud::Speech::Operation
+    op.id.must_equal "1234567890"
+    op.wont_be :done?
+  end
 end

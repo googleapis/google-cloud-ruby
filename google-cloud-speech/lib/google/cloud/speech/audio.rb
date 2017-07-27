@@ -191,6 +191,10 @@ module Google
         #   phrases "hints" so that the speech recognition is more likely to
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] words When `true`, return a list of words with
+        #   additional information about each word. Currently, the only
+        #   additional information provided is the the start and end time
+        #   offsets. See {Result#words}. Default is `false`.
         #
         # @return [Array<Result>] The transcribed text of audio recognized.
         #
@@ -209,14 +213,15 @@ module Google
         #   result.transcript #=> "how old is the Brooklyn Bridge"
         #   result.confidence #=> 0.9826789498329163
         #
-        def recognize max_alternatives: nil, profanity_filter: nil, phrases: nil
+        def recognize max_alternatives: nil, profanity_filter: nil,
+                      phrases: nil, words: nil
           ensure_speech!
 
           speech.recognize self, encoding: encoding, sample_rate: sample_rate,
                                  language: language,
                                  max_alternatives: max_alternatives,
                                  profanity_filter: profanity_filter,
-                                 phrases: phrases
+                                 phrases: phrases, words: words
         end
 
         ##
@@ -239,6 +244,10 @@ module Google
         #   phrases "hints" so that the speech recognition is more likely to
         #   recognize them. See [usage
         #   limits](https://cloud.google.com/speech/limits#content). Optional.
+        # @param [Boolean] words When `true`, return a list of words with
+        #   additional information about each word. Currently, the only
+        #   additional information provided is the the start and end time
+        #   offsets. See {Result#words}. Default is `false`.
         #
         # @return [Operation] A resource represents the long-running,
         #   asynchronous processing of a speech-recognition operation.
@@ -260,7 +269,7 @@ module Google
         #   results = op.results
         #
         def process max_alternatives: nil, profanity_filter: nil,
-                    phrases: nil
+                    phrases: nil, words: nil
           ensure_speech!
 
           speech.process self, encoding: encoding,
@@ -268,7 +277,7 @@ module Google
                                language: language,
                                max_alternatives: max_alternatives,
                                profanity_filter: profanity_filter,
-                               phrases: phrases
+                               phrases: phrases, words: words
         end
         alias_method :long_running_recognize, :process
         alias_method :recognize_job, :process
