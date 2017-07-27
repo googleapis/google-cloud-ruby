@@ -1,5 +1,9 @@
 # Release History
 
+### 0.36.0 / 2017-07-27
+
+* Spanner 0.23.0 release.
+
 ### 0.35.0 / 2017-07-11
 
 * Datastore 1.1.0 release.
