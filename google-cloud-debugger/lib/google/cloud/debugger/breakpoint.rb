@@ -24,6 +24,13 @@ require "google/cloud/debugger/breakpoint/variable_table"
 module Google
   module Cloud
     module Debugger
+      ##
+      # # Breakpoint
+      #
+      # Abstract class that represents a breakpoint, which can be set and
+      # triggered in a debuggee application. Maps to gRPC struct
+      # {Google::Devtools::Clouddebugger::V2::Breakpoint}.
+      #
       class Breakpoint
         include MonitorMixin
 
@@ -154,7 +161,7 @@ module Google
           @evaluated_expressions = []
           @stack_frames = []
           @labels = {}
-          @variable_table = []
+          @variable_table = VariableTable.new
         end
 
         ##

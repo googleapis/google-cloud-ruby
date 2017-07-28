@@ -95,7 +95,9 @@ module Google
 
           server_breakpoints = response.breakpoints || []
           server_breakpoints = server_breakpoints.map do |grpc_b|
-            Breakpoint.from_grpc grpc_b
+            breakpoint = Breakpoint.from_grpc grpc_b
+            breakpoint.init_var_table if breakpoint.is_a? Debugger::Snappoint
+            breakpoint
           end
 
           update_breakpoints server_breakpoints

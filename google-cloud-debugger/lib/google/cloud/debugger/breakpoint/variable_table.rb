@@ -19,18 +19,30 @@ module Google
   module Cloud
     module Debugger
       class Breakpoint
+        ##
+        # # VariableTable
+        #
+        # The variable_table exists to aid with computation, memory and network
+        # traffic optimization. It enables storing a variable once and reference
+        # it from multiple variables, including variables stored in the
+        # variable_table itself. For example, the same this object, which may
+        # appear at many levels of the stack, can have all of its data stored
+        # once in this table. The stack frame variables then would hold only a
+        # reference to it.
+        #
+        # The variable var_table_index field is an index into this repeated
+        # field. The stored objects are nameless and get their name from the
+        # referencing variable. The effective variable is a merge of the
+        # referencing variable and the referenced variable.
+        #
+        # See also {Breakpoint#variable_table}.
+        #
         class VariableTable
           extend Forwardable
 
           ##
           # @private Array to store variables.
           attr_accessor :variables
-
-          ##
-          # @private Item in the variables list. :orig_var is reference to the
-          # original Ruby variable. :var is the equivalent
-          # Breakpoint::Variable.
-          ListItem = Struct.new :orig_var, :var
 
           ##
           # @private Create a new VariableTable instance
@@ -46,7 +58,7 @@ module Google
 
             new.tap do |vt|
               vt.variables = grpc_table.map do |grpc_var|
-                ListItem.new nil, Breakpoint::Variable.from_grpc(grpc_var)
+                Breakpoint::Variable.from_grpc grpc_var
               end
             end
           end
@@ -55,29 +67,25 @@ module Google
           # @private Search a variable in this VariableTable by matching
           # object_id, return the array index if found.
           def rb_var_index rb_var
-            variables.each_with_index do |list_item, i|
-              return i if list_item.orig_var.object_id == rb_var.object_id
+            variables.each_with_index do |var, i|
+              return i if var.source_var.object_id == rb_var.object_id
             end
 
             nil
           end
 
           ##
-          # @private Add a Ruby object and it's Breakpoint::Variable equivalent
-          # to this VariableTable
-          def add_var rb_var, var = nil
-            var ||=
-              Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var rb_var
+          # @private Add a Breakpoint::Variable to this VariableTable
+          def add var
+            return unless var.is_a? Breakpoint::Variable
 
-            variables << ListItem.new(rb_var, var)
+            variables << var
           end
 
           ##
           # @private Export this VariableTable as a gRPC struct
           def to_grpc
-            variables.map do |list_item|
-              list_item.var.nil? ? nil : list_item.var.to_grpc
-            end.compact
+            variables.map(&:to_grpc).compact
           end
 
           def_instance_delegators :@variables, :size, :first, :[]

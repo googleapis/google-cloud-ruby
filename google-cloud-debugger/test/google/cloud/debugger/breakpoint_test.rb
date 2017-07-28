@@ -58,10 +58,10 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       breakpoint.labels.must_equal({"tag" => "hello"})
       breakpoint.is_final_state.wont_equal true
       variable_table_var = breakpoint.variable_table.first
-      variable_table_var.var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-      variable_table_var.var.name.must_equal "local_var"
-      variable_table_var.var.type.must_equal "Array"
-      variable_table_var.var.members.wont_be_empty
+      variable_table_var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      variable_table_var.name.must_equal "local_var"
+      variable_table_var.type.must_equal "Array"
+      variable_table_var.members.wont_be_empty
     end
 
     it "knows all of the attributes for logpoint" do
