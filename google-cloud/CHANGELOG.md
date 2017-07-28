@@ -1,5 +1,9 @@
 # Release History
 
+### 0.37.0 / 2017-07-28
+
+* Speech 0.26.0 release.
+
 ### 0.36.0 / 2017-07-27
 
 * Spanner 0.23.0 release.
