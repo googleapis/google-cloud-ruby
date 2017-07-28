@@ -531,7 +531,6 @@ module Google
           # reference variable to the shared buffer full variable
           def buffer_full_variable?
             if (status &&
-               status.is_error == true &&
                status.description == BUFFER_FULL_MSG) ||
                (var_table &&
                  reference_variable? &&
