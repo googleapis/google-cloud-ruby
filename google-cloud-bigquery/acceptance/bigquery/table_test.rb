@@ -36,6 +36,17 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     t
   end
+  let(:time_partitioned_table_id) { "daily_kittens"}
+  let(:seven_days_ms) { 7*24*60*60*1000 }
+  let(:time_partitioned_table) do
+    t = dataset.table time_partitioned_table_id
+    if t.nil?
+      t = dataset.create_table time_partitioned_table_id do |updater|
+        updater.time_partitioning type: "DAY", expiration_ms: seven_days_ms
+      end
+    end
+    t
+  end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -70,6 +81,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.modified_at.must_be_kind_of Time
     fresh.table?.must_equal true
     fresh.view?.must_equal false
+    fresh.time_partitioning.must_be :nil?
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
@@ -118,6 +130,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       t2 = dataset.table "table_schema_test"
       t2.delete if t2
     end
+  end
+
+  it "allow tables to be created with time_partioning enabled" do
+    table = time_partitioned_table
+    table.time_partitioning.wont_be :nil?
+    table.time_partitioning.type.must_equal "DAY"
+    table.time_partitioning.expiration_ms.must_equal seven_days_ms
   end
 
   it "inserts rows directly and gets its data" do

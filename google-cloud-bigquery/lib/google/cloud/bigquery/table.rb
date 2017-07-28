@@ -118,6 +118,16 @@ module Google
           table_ref
         end
 
+        ###
+        # The gapi fragment containing TimePartitioning ExpirationMS and Type
+        # as a camel-cased hash.
+        def time_partitioning
+          ensure_full_data!
+          time_part = @gapi.time_partitioning
+          time_part = time_part.to_hash if time_part.respond_to? :to_hash
+          time_part
+        end
+
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
         # the format specified by the [Legacy SQL Query
@@ -1215,6 +1225,13 @@ module Google
           def to_gapi
             check_for_mutated_schema!
             @gapi
+          end
+
+          def time_partitioning type: "DAY", expiration_ms: nil
+            @gapi.time_partitioning = {
+              type: type,
+              expiration_ms: expiration_ms
+            }
           end
 
           protected
