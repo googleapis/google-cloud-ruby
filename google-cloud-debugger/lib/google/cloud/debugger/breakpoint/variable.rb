@@ -93,7 +93,7 @@ module Google
           MAX_STRING_LENGTH = 500
 
           ##
-          # @private Minimum amoutn of size limit needed for evaluation.
+          # @private Minimum amount of size limit needed for evaluation.
           MIN_REQUIRED_SIZE = 100
 
           ##
@@ -169,18 +169,18 @@ module Google
           #   {Google::Cloud::Debugger::Breakpoint::Variable::MAX_DEPTH}
           # @param [Breakpoint::VariableTable] var_table A variable table
           #   to store shared compound variables. Optional.
-          # @param [Integer] limit Maximum number of bytes this convertion
+          # @param [Integer] limit Maximum number of bytes this conversion
           #   should take. This include nested compound member variables'
-          #   convertions.
+          #   conversions.
           #
-          # @example Simple variable convertion
+          # @example Simple variable conversion
           #   x = 3
           #   var = Variable.from_rb_var x, name: "x"
           #   var.name  #=> "x"
           #   var.value #=> "3"
           #   var.type  #=> "Integer"
           #
-          # @example Hash convertion
+          # @example Hash conversion
           #   hash = {a: 1, b: :two}
           #   var = Variable.from_rb_var hash, name: "hash"
           #   var.name  #=> "hash"
@@ -192,7 +192,7 @@ module Google
           #   var.members[1].value #=> "two"
           #   var.members[1].type  #=> "Symbol"
           #
-          # @example Custom compound variable convertion
+          # @example Custom compound variable conversion
           #   foo = Foo.new(a: 1, b: []) #=> #<Foo:0x0000 @a: 1, @b: []>
           #   var_table = VariableTable.new
           #   var = Variable.from_rb_var foo, name: "foo"
