@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.0 / 2017-07-28
+
+* Add words argument for recognition, Result#words, and Result::Word
+
 ### 0.25.0 / 2017-07-11
 
 * Replace the `encoding` type `:raw` with `:linear16` in code, tests, and examples.
