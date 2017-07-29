@@ -22,9 +22,9 @@ module Google
       class Subscriber
         ##
         # @private
-        # # AsyncAcknowledger
+        # # AsyncPusher
         #
-        class AsyncAcknowledger
+        class AsyncPusher
           include MonitorMixin
 
           attr_reader :batch
@@ -49,13 +49,42 @@ module Google
               ack_ids.each do |ack_id|
                 if @batch.nil?
                   @batch = Batch.new max_bytes: @max_bytes
-                  @batch.add ack_id
+                  @batch.ack ack_id
                 else
-                  unless @batch.try_add ack_id
+                  unless @batch.try_ack ack_id
                     push_batch_request!
 
                     @batch = Batch.new max_bytes: @max_bytes
-                    @batch.add ack_id
+                    @batch.ack ack_id
+                  end
+                end
+
+                @batch_created_at ||= Time.now
+                @background_thread ||= Thread.new { run_background }
+
+                push_batch_request! if @batch.ready?
+              end
+
+              @cond.signal
+            end
+
+            nil
+          end
+
+          def delay deadline, ack_ids
+            return true if ack_ids.empty?
+
+            synchronize do
+              ack_ids.each do |ack_id|
+                if @batch.nil?
+                  @batch = Batch.new max_bytes: @max_bytes
+                  @batch.delay deadline, ack_id
+                else
+                  unless @batch.try_delay deadline, ack_id
+                    push_batch_request!
+
+                    @batch = Batch.new max_bytes: @max_bytes
+                    @batch.delay deadline, ack_id
                   end
                 end
 
@@ -151,15 +180,28 @@ module Google
               @request = Google::Pubsub::V1::StreamingPullRequest.new
             end
 
-            def add ack_id
+            def ack ack_id
               @request.ack_ids << ack_id
             end
 
-            def try_add ack_id
+            def try_ack ack_id
               addl_bytes = ack_id.size
               return false if total_message_bytes + addl_bytes >= @max_bytes
 
-              add ack_id
+              ack ack_id
+              true
+            end
+
+            def delay deadline, ack_id
+              @request.modify_deadline_seconds << deadline
+              @request.modify_deadline_ack_ids << ack_id
+            end
+
+            def try_delay deadline, ack_id
+              addl_bytes = deadline.to_s.size + ack_id.size
+              return false if total_message_bytes + addl_bytes >= @max_bytes
+
+              delay deadline, ack_id
               true
             end
 
