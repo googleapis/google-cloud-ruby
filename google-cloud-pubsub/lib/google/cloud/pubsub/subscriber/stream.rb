@@ -13,8 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/pubsub/subscriber/async_acknowledger"
-require "google/cloud/pubsub/subscriber/async_modify_deadliner"
+require "google/cloud/pubsub/subscriber/async_pusher"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
@@ -95,8 +94,7 @@ module Google
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              @async_acknowledger.stop.wait!     if @async_acknowledger
-              @async_modify_deadliner.stop.wait! if @async_modify_deadliner
+              @async_pusher.stop.wait! if @async_pusher
 
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
@@ -112,8 +110,8 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @async_acknowledger ||= AsyncAcknowledger.new self
-              @async_acknowledger.acknowledge ack_ids
+              @async_pusher ||= AsyncPusher.new self
+              @async_pusher.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
             end
@@ -128,8 +126,8 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @async_modify_deadliner ||= AsyncModifyDeadliner.new self
-              @async_modify_deadliner.delay deadline, mod_ack_ids
+              @async_pusher ||= AsyncPusher.new self
+              @async_pusher.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
             end
@@ -137,12 +135,8 @@ module Google
             true
           end
 
-          def async_acknowledger
-            synchronize { @async_acknowledger }
-          end
-
-          def async_modify_deadliner
-            synchronize { @async_modify_deadliner }
+          def async_pusher
+            synchronize { @async_pusher }
           end
 
           def push request
@@ -156,13 +150,11 @@ module Google
           ##
           # @private
           def delay_inventory!
-            async_modify_deadliner # To make sure the object is loaded
-
             synchronize do
               return true if @inventory.empty?
 
-              @async_modify_deadliner.delay subscriber.deadline,
-                                            @inventory.ack_ids
+              @async_pusher ||= AsyncPusher.new self
+              @async_pusher.delay subscriber.deadline, @inventory.ack_ids
             end
 
             true
