@@ -27,21 +27,17 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     end
 
     it "sets @breakpoints_cache with a nested hash" do
-      breakpoint1 = OpenStruct.new line: 123, path: "path/to/file1.rb"
-      breakpoint2 = OpenStruct.new line: 345, path: "path/to/file1.rb"
-      breakpoint3 = OpenStruct.new line: 987, path: "path/to/file2.rb"
-      breakpoint4 = OpenStruct.new line: 987, path: "path/to/file2.rb"
-
-      stubbed_full_path = ->(path) { path }
+      breakpoint1 = OpenStruct.new line: 123, full_path: "path/to/file1.rb"
+      breakpoint2 = OpenStruct.new line: 345, full_path: "path/to/file1.rb"
+      breakpoint3 = OpenStruct.new line: 987, full_path: "path/to/file2.rb"
+      breakpoint4 = OpenStruct.new line: 987, full_path: "path/to/file2.rb"
 
       breakpoint_manager.stub :active_breakpoints, [breakpoint1, breakpoint2, breakpoint3, breakpoint4] do
-        tracer.stub :full_breakpoint_path, stubbed_full_path do
-          breakpoints_hash = agent.tracer.update_breakpoints_cache
+        breakpoints_hash = agent.tracer.update_breakpoints_cache
 
-          breakpoints_hash["path/to/file1.rb"][123].must_equal [breakpoint1]
-          breakpoints_hash["path/to/file1.rb"][345].must_equal [breakpoint2]
-          breakpoints_hash["path/to/file2.rb"][987].must_equal [breakpoint3, breakpoint4]
-        end
+        breakpoints_hash["path/to/file1.rb"][123].must_equal [breakpoint1]
+        breakpoints_hash["path/to/file1.rb"][345].must_equal [breakpoint2]
+        breakpoints_hash["path/to/file2.rb"][987].must_equal [breakpoint3, breakpoint4]
       end
     end
   end

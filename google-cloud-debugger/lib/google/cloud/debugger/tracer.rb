@@ -35,14 +35,6 @@ module Google
         attr_reader :agent
 
         ##
-        # Ruby application root directory, in absolute path form. The
-        # Stackdriver Debugger Service only knows the relative application file
-        # path. So the tracer needs to combine relative file path with
-        # application root directory to get full file path for tracing purpose
-        # @return [String]
-        attr_accessor :app_root
-
-        ##
         # @private File tracing point that enables line tracing when program
         # counter enters a file that contains breakpoints
         attr_reader :file_tracepoint
@@ -67,16 +59,11 @@ module Google
 
         ##
         # @private Construct a new instance of Tracer
-        def initialize agent, app_root: nil
+        def initialize agent
           @agent = agent
           @file_tracepoint = nil
           @fiber_tracepoint = nil
           @breakpoints_cache = {}
-
-          @app_root = app_root
-          @app_root ||= Rack::Directory.new("").root if defined? Rack::Directory
-
-          fail "Unable to determine application root path" unless @app_root
         end
 
         ##
@@ -90,7 +77,7 @@ module Google
 
           active_breakpoints.each do |active_breakpoint|
             breakpoint_line = active_breakpoint.line
-            breakpoint_path = full_breakpoint_path active_breakpoint.path
+            breakpoint_path = active_breakpoint.full_path
             breakpoints_hash[breakpoint_path] ||= {}
             breakpoints_hash[breakpoint_path][breakpoint_line] ||= []
             breakpoints_hash[breakpoint_path][breakpoint_line].push(
@@ -128,17 +115,6 @@ module Google
 
           # Disable all trace points and tracing if all breakpoints are complete
           disable_traces if @breakpoints_cache.empty?
-        end
-
-        ##
-        # @private Covert breakpoint's relative file path to absolute file
-        # path by combining it with application root directory path.
-        def full_breakpoint_path breakpoint_path
-          if app_root.nil? || app_root.empty?
-            breakpoint_path
-          else
-            "#{app_root}/#{breakpoint_path}"
-          end
         end
 
         ##

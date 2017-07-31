@@ -93,12 +93,8 @@ module Google
 
           @wait_token = response.next_wait_token
 
-          server_breakpoints = response.breakpoints || []
-          server_breakpoints = server_breakpoints.map do |grpc_b|
-            breakpoint = Breakpoint.from_grpc grpc_b
-            breakpoint.init_var_table if breakpoint.is_a? Debugger::Snappoint
-            breakpoint
-          end
+          server_breakpoints =
+            convert_grpc_breakpoints response.breakpoints || []
 
           update_breakpoints server_breakpoints
 
@@ -120,9 +116,9 @@ module Google
         def update_breakpoints server_breakpoints
           synchronize do
             new_breakpoints =
-              server_breakpoints - @active_breakpoints - @completed_breakpoints
-            before_breakpoints_count =
-              @active_breakpoints.size + @completed_breakpoints.size
+              filter_breakpoints server_breakpoints - breakpoints
+
+            before_breakpoints_count = breakpoints.size
 
             # Remember new active breakpoints from server
             @active_breakpoints += new_breakpoints unless new_breakpoints.empty?
@@ -130,8 +126,7 @@ module Google
             # Forget old breakpoints
             @completed_breakpoints &= server_breakpoints
             @active_breakpoints &= server_breakpoints
-            after_breakpoints_acount =
-              @active_breakpoints.size + @completed_breakpoints.size
+            after_breakpoints_acount = breakpoints.size
 
             breakpoints_updated =
               !new_breakpoints.empty? ||
@@ -272,6 +267,42 @@ module Google
             @active_breakpoints.clear
             @completed_breakpoints.clear
           end
+        end
+
+        private
+
+        ##
+        # @private Convert the list of grpc breakpoints from Debugger service to
+        # {Google::Cloud::Debugger::Breakpoint}.
+        def convert_grpc_breakpoints grpc_breakpoints
+          grpc_breakpoints.map do |grpc_b|
+            breakpoint = Breakpoint.from_grpc grpc_b
+            breakpoint.app_root = agent.app_root
+            breakpoint.init_var_table if breakpoint.is_a? Debugger::Snappoint
+            breakpoint
+          end
+        end
+
+        ##
+        # @private Varify a list of given breakpoints. Filter out those
+        # aren't valid and submit them directly.
+        def filter_breakpoints breakpoints
+          valid_breakpoints = []
+          invalid_breakpoints = []
+
+          breakpoints.each do |breakpoint|
+            if breakpoint.valid?
+              valid_breakpoints << breakpoint
+            else
+              invalid_breakpoints << breakpoint
+            end
+          end
+
+          invalid_breakpoints.each do |breakpoint|
+            agent.transmitter.submit breakpoint if breakpoint.complete?
+          end
+
+          valid_breakpoints
         end
       end
     end

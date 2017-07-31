@@ -48,7 +48,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint1]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -68,7 +67,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint1]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -91,7 +89,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint2]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -111,7 +108,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint3]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -131,7 +127,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint4]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -151,7 +146,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint5]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -171,7 +165,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint6]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
@@ -191,7 +184,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     breakpoint_manager.update_breakpoints [breakpoint7]
     tracer = debugger.agent.tracer
-    tracer.app_root = ""
 
     tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
       tracer.start
