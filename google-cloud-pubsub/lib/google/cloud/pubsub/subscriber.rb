@@ -80,7 +80,7 @@ module Google
           @callback_threads = (threads[:callback] || 8).to_i
           @push_threads = (threads[:push] || 4).to_i
 
-          @stream_inventory = (@streams/@inventory).ceil
+          @stream_inventory = @inventory.fdiv(@streams).ceil
           @service = service
 
           @started = nil

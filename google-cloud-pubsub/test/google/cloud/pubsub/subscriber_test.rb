@@ -19,7 +19,7 @@ describe Google::Cloud::Pubsub::Subscriber, :mock_pubsub do
   let(:subscription_name) { "subscription-name-goes-here" }
   let(:deadline) { 120 }
   let(:streams) { 8 }
-  let(:inventory) { 250 }
+  let(:inventory) { 2000 }
   let(:callback_threads) { 16 }
   let(:push_threads) { 8 }
   let(:subscriber) { Google::Cloud::Pubsub::Subscriber.new subscription_name, callback, deadline: deadline, streams: streams, inventory: inventory, threads: { callback: callback_threads, push: push_threads}, service: pubsub.service }
@@ -31,6 +31,7 @@ describe Google::Cloud::Pubsub::Subscriber, :mock_pubsub do
     subscriber.deadline.must_equal deadline
     subscriber.streams.must_equal streams
     subscriber.inventory.must_equal inventory
+    subscriber.stream_inventory.must_equal 250
     subscriber.callback_threads.must_equal callback_threads
     subscriber.push_threads.must_equal push_threads
   end
