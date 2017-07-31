@@ -206,9 +206,7 @@ module Google
             # Also stealthly restart the stream on Unavailable and Cancelled.
             synchronize { start_streaming! }
           rescue => e
-            synchronize do
-              @request_queue.push Google::Cloud::Error.from_error(e)
-            end
+            fail Google::Cloud::Error.from_error(e)
           end
 
           # rubocop:enable all
@@ -221,10 +219,12 @@ module Google
 
           def start_streaming!
             # signal to the previous queue to shut down
-            @request_queue.push self if @request_queue
+            old_queue = []
+            old_queue = @request_queue.dump_queue if @request_queue
 
             @request_queue = EnumeratorQueue.new self
             @request_queue.push initial_input_request
+            old_queue.each { |obj| @request_queue.push obj }
             output_enum = subscriber.service.streaming_pull @request_queue.each
 
             @stopped = nil
@@ -285,7 +285,7 @@ module Google
             return "not started" if @background_thread.nil?
 
             status = @background_thread.status
-            return "error" if status == nil
+            return "error" if status.nil?
             return "stopped" if status == false
             status
           end

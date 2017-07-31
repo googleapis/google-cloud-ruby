@@ -30,14 +30,18 @@ module Google
             @queue.push obj
           end
 
+          def dump_queue
+            objs = []
+            objs << @queue.pop until @queue.empty?
+            objs
+          end
+
           def each
             return enum_for(:each) unless block_given?
 
             loop do
               obj = @queue.pop
-
-              break     if obj.equal? @sentinel
-              fail obj  if obj.is_a? Exception
+              break if obj.equal? @sentinel
               yield obj
             end
           end
