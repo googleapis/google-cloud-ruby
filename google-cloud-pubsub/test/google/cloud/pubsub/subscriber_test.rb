@@ -34,5 +34,8 @@ describe Google::Cloud::Pubsub::Subscriber, :mock_pubsub do
     subscriber.stream_inventory.must_equal 250
     subscriber.callback_threads.must_equal callback_threads
     subscriber.push_threads.must_equal push_threads
+
+    subscriber.to_s.must_equal "(subscription: subscription-name-goes-here, streams: 8)"
+    subscriber.stream_pool.first.to_s.must_equal "(inventory: 0, status: not started)"
   end
 end

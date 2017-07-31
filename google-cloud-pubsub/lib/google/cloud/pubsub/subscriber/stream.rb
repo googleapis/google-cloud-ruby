@@ -162,7 +162,7 @@ module Google
 
           # @private
           def to_s
-            format "(inventory: %i)", inventory.count
+            format "(inventory: %i, status: %s)", inventory.count, status
           end
 
           # @private
@@ -279,6 +279,15 @@ module Google
             Array(messages).flatten.map do |msg|
               msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
             end
+          end
+
+          def status
+            return "not started" if @background_thread.nil?
+
+            status = @background_thread.status
+            return "error" if status == nil
+            return "stopped" if status == false
+            status
           end
 
           ##
