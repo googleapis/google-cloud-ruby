@@ -111,6 +111,7 @@ module Google
             if eval_result.is_a?(Exception) &&
                eval_result.instance_variable_get(:@mutation_cause)
               evaluated_var = Variable.new
+              evaluated_var.name = expression
               evaluated_var.set_error_state \
                 "Error: #{eval_result.message}",
                 refers_to: StatusMessage::VARIABLE_VALUE

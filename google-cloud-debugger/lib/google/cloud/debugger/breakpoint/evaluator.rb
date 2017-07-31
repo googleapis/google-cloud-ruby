@@ -790,6 +790,9 @@ module Google
             #   {Google::Cloud::Debugger::MutationError} will be returned.
             #
             def readonly_eval_expression binding, expression
+              compilation_result = validate_compiled_expression expression
+              return compilation_result if compilation_result.is_a?(Exception)
+
               readonly_eval_expression_exec binding, expression
             rescue => e
               "Unable to evaluate expression: #{e.message}"
@@ -811,33 +814,36 @@ module Google
             #   if a mutation is caught.
             #
             def readonly_eval_expression_exec binding, expression
-              compilation_result = validate_compiled_expression expression
-              return compilation_result if compilation_result.is_a?(Exception)
-
               # The evaluation is most likely triggered from a trace callback,
               # where addtional nested tracing is disabled by VM. So we need to
               # do evaluation in a new thread, where function calls can be
               # traced.
               thr = Thread.new do
                 begin
-                  deadline = Time.now + EXPRESSION_EVALUATION_TIME_THRESHOLD
-                  Thread.current.thread_variable_set :evaluation_deadline,
-                                                     deadline
-
                   binding.eval wrap_expression(expression)
                 rescue => e
                   # Treat all StandardError as mutation and set @mutation_cause
                   unless e.instance_variable_get :@mutation_cause
                     e.instance_variable_set(
                       :@mutation_cause,
-                      Google::Cloud::Debugger::MutationError::UNKNOWN_CAUSE)
+                      Google::Cloud::Debugger::EvaluationError::UNKNOWN_CAUSE)
                   end
 
                   e
                 end
               end
 
-              thr.join.value
+              thr.join EXPRESSION_EVALUATION_TIME_THRESHOLD
+
+              # Force terminate evaluation thread if not finished already and
+              # return an Exception
+              if thr.alive?
+                thr.kill
+
+                Google::Cloud::Debugger::EvaluationError.new LONG_EVAL_MSG
+              else
+                thr.value
+              end
             end
 
             ##
@@ -858,14 +864,14 @@ module Google
               rescue ScriptError
                 return Google::Cloud::Debugger::MutationError.new(
                   COMPILATION_FAIL_MSG,
-                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
+                  Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
                 )
               end
 
               unless immutable_yarv_instructions? yarv_instructions
                 return Google::Cloud::Debugger::MutationError.new(
                   MUTATION_DETECTED_MSG,
-                  Google::Cloud::Debugger::MutationError::PROHIBITED_YARV
+                  Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
                 )
               end
 
@@ -917,21 +923,6 @@ module Google
             end
 
             ##
-            # @private Evaluation tracing callback function for line event.
-            # This is called when ever line of Ruby code invoked during tracing.
-            # It keeps track of expression evaluation time usage and error out
-            # if the evaluation exceeds the predetermined deadline.
-            def trace_line_callback
-              deadline = Thread.current.thread_variable_get :evaluation_deadline
-
-              return if Time.now <= deadline
-
-              disable_method_trace_for_thread
-
-              fail Google::Cloud::Debugger::EvaluationError, LONG_EVAL_MSG
-            end
-
-            ##
             # @private Evaluation tracing callback function. This is called
             # everytime a Ruby function is called during evaluation of
             # an expression.
@@ -950,7 +941,7 @@ module Google
                                                      allow_localops: true)
               fail Google::Cloud::Debugger::MutationError.new(
                 MUTATION_DETECTED_MSG,
-                Google::Cloud::Debugger::MutationError::PROHIBITED_YARV)
+                Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV)
             end
 
             ##
@@ -980,7 +971,7 @@ module Google
                 :disable_method_trace_for_thread)
               fail Google::Cloud::Debugger::MutationError.new(
                 PROHIBITED_OPERATION_MSG,
-                Google::Cloud::Debugger::MutationError::PROHIBITED_C_FUNC)
+                Google::Cloud::Debugger::EvaluationError::PROHIBITED_C_FUNC)
             end
 
             ##
@@ -1004,30 +995,32 @@ module Google
       end
 
       ##
-      # @private Custom error type used to identify mutation during breakpoint
-      # expression evaluations
-      class MutationError < StandardError
+      # @private Custom error type used to identify evaluation error during
+      # breakpoint expression evaluation.
+      class EvaluationError < StandardError
         UNKNOWN_CAUSE = Object.new.freeze
         PROHIBITED_YARV = Object.new.freeze
         PROHIBITED_C_FUNC = Object.new.freeze
 
         attr_reader :mutation_cause
 
-        def initialize msg = "Mutation detected!",
-                       mutation_cause = UNKNOWN_CAUSE
+        def initialize msg = nil, mutation_cause = UNKNOWN_CAUSE
           @mutation_cause = mutation_cause
           super(msg)
         end
 
         def inspect
-          "#<MutationError: #{message}>"
+          "#<#{self.class}: #{message}>"
         end
       end
 
       ##
-      # @private Custom error type used to identify evaluation error during
-      # breakpoint expression evaluation.
-      class EvaluationError < StandardError
+      # @private Custom error type used to identify mutation during breakpoint
+      # expression evaluations
+      class MutationError < EvaluationError
+        def initialize msg = "Mutation detected!", *args
+          super
+        end
       end
     end
   end

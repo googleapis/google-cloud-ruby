@@ -125,18 +125,30 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
 
   describe "#eval_expressions" do
     it "set @evaluated_expressions to array of Breakpoint::Variable" do
-      snappoint.evaluated_expressions = []
       snappoint.eval_expressions binding
       snappoint.evaluated_expressions.must_be_kind_of Array
       snappoint.evaluated_expressions.all? { |var| var.is_a? Google::Cloud::Debugger::Breakpoint::Variable }.must_equal true
     end
 
     it "sets the Breakpoint::Variable name to the expression itself" do
-      snappoint.evaluated_expressions = []
       snappoint.eval_expressions binding
 
       snappoint.evaluated_expressions.wont_be_empty
       snappoint.evaluated_expressions.first.name.must_equal snappoint.expressions.first
+    end
+
+    it "create a error variable if expression evaluation fails with mutation error" do
+      stubbed_error = Google::Cloud::Debugger::MutationError.new
+
+      Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_error do
+        snappoint.expressions = ["hello"]
+        snappoint.eval_expressions binding
+
+        snappoint.evaluated_expressions.size.must_equal 1
+        snappoint.evaluated_expressions.first.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+        snappoint.evaluated_expressions.first.name.must_equal "hello"
+        snappoint.evaluated_expressions.first.status.refers_to.must_equal Google::Cloud::Debugger::Breakpoint::StatusMessage::VARIABLE_VALUE
+      end
     end
 
     it "limits expression evaluations to max size" do
