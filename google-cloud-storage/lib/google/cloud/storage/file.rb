@@ -1044,8 +1044,8 @@ module Google
         def verify_file! file, verify = :md5
           verify_md5    = verify == :md5    || verify == :all
           verify_crc32c = verify == :crc32c || verify == :all
-          Verifier.verify_md5! self, file    if verify_md5
-          Verifier.verify_crc32c! self, file if verify_crc32c
+          Verifier.verify_md5! self, file    if verify_md5    && md5
+          Verifier.verify_crc32c! self, file if verify_crc32c && crc32c
           file
         end
 
