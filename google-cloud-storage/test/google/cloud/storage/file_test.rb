@@ -834,4 +834,67 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     mock.verify
   end
+
+  it "can list its generations" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567894).to_json),
+      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: [
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567894).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567893).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567892).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567891).to_json)
+                               ]),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil]
+
+    bucket.service.mocked_service = mock
+    file.service.mocked_service = mock
+
+    file = bucket.file file_name
+    file.generation.must_equal 1234567894
+
+    generations = file.generations
+    generations.count.must_equal 4
+    generations.each do |f|
+      f.must_be_kind_of Google::Cloud::Storage::File
+      f.user_project.must_be :nil?
+    end
+    generations.map(&:generation).must_equal [1234567894, 1234567893, 1234567892, 1234567891]
+
+    mock.verify
+  end
+
+  it "can list its generations with user_project set to true" do
+    file_name = "file.ext"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567894).to_json),
+      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+    mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: [
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567894).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567893).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567892).to_json),
+                                 Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, 1234567891).to_json)
+                               ]),
+      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test"]
+
+    bucket_user_project.service.mocked_service = mock
+    file.service.mocked_service = mock
+
+    file = bucket_user_project.file file_name
+    file.generation.must_equal 1234567894
+    file.user_project.must_equal true
+
+    generations = file.generations
+    generations.count.must_equal 4
+    generations.each do |f|
+      f.must_be_kind_of Google::Cloud::Storage::File
+      f.user_project.must_equal true
+    end
+    generations.map(&:generation).must_equal [1234567894, 1234567893, 1234567892, 1234567891]
+
+    mock.verify
+  end
 end

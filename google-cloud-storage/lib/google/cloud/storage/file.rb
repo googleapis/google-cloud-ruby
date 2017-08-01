@@ -330,6 +330,45 @@ module Google
         end
 
         ##
+        # Retrieves a list of versioned files for the current object.
+        #
+        # Useful for listing archived versions of the file, restoring the live
+        # version of the file to an older version, or deleting an archived
+        # version. You can turn versioning on or off for a bucket at any time
+        # with {Bucket#versioning=}. Turning versioning off leaves existing file
+        # versions in place and causes the bucket to stop accumulating new
+        # archived object versions. (See {Bucket#versioning} and
+        # {File#generation})
+        #
+        # @see https://cloud.google.com/storage/docs/object-versioning Object
+        #   Versioning
+        #
+        # @return [Array<Google::Cloud::Storage::File>] (See
+        #   {Google::Cloud::Storage::File::List})
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.generation #=> 1234567890
+        #   file.generations.each do |versioned_file|
+        #     versioned_file.generation
+        #   end
+        #
+        def generations
+          ensure_service!
+          gapi = service.list_files bucket, prefix: name,
+                                            versions: true,
+                                            user_project: user_project
+          File::List.from_gapi gapi, service, bucket, name, nil, nil, true,
+                               user_project: user_project
+        end
+
+        ##
         # Updates the file with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cache_control=},
         # {#content_disposition=}, {#content_encoding=}, {#content_language=},

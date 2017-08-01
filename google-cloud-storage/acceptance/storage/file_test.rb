@@ -47,7 +47,7 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   after do
-    bucket.files.all { |f| f.delete rescue nil }
+    bucket.files(versions: true).all { |f| f.delete generation: true rescue nil }
   end
 
   it "should upload and download a file" do
@@ -325,6 +325,14 @@ describe Google::Cloud::Storage::File, :storage do
 
     uploaded.content_type.must_equal meta[:content_type]
     uploaded.metadata["title"].must_equal meta[:metadata][:title]
+  end
+
+  it "should list generations" do
+    uploaded = bucket.create_file files[:logo][:path],
+                                  "CloudLogo"
+
+    uploaded.generation.wont_be :nil?
+    uploaded.generations.wont_be :nil?
   end
 
   it "should create and update storage_class" do
