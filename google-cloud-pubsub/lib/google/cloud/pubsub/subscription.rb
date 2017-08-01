@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/received_message"
 require "google/cloud/pubsub/snapshot"
+require "google/cloud/pubsub/subscriber"
 
 module Google
   module Cloud
@@ -220,8 +221,6 @@ module Google
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
         #
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
@@ -250,15 +249,13 @@ module Google
         #   msgs = sub.pull immediate: false
         #   msgs.each { |msg| msg.acknowledge! }
         #
-        def pull immediate: true, max: 100, autoack: false
+        def pull immediate: true, max: 100
           ensure_service!
           options = { immediate: immediate, max: max }
           list_grpc = service.pull name, options
-          messages = Array(list_grpc.received_messages).map do |msg_grpc|
+          Array(list_grpc.received_messages).map do |msg_grpc|
             ReceivedMessage.from_grpc msg_grpc, self
           end
-          acknowledge messages if autoack
-          messages
         rescue Google::Cloud::DeadlineExceededError
           []
         end
@@ -272,8 +269,6 @@ module Google
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
         #
         # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
         #
@@ -286,25 +281,38 @@ module Google
         #   msgs = sub.wait_for_messages
         #   msgs.each { |msg| msg.acknowledge! }
         #
-        def wait_for_messages max: 100, autoack: false
-          pull immediate: false, max: max, autoack: autoack
+        def wait_for_messages max: 100
+          pull immediate: false, max: max
         end
 
         ##
-        # Poll the backend for new messages. This runs a loop to ping the API,
-        # blocking indefinitely, yielding retrieved messages as they are
-        # received.
+        # Create a {Subscriber} object that receives  and processes messages
+        # using the code provided in the callback.
         #
-        # @param [Integer] max The maximum number of messages to return for this
-        #   request. The Pub/Sub system may return fewer than the number
-        #   specified. The default value is `100`, the maximum value is `1000`.
-        # @param [Boolean] autoack Automatically acknowledge the message as it
-        #   is pulled. The default value is `false`.
-        # @param [Number] delay The number of seconds to pause between requests
-        #   when the Google Cloud service has no messages to return. The default
-        #   value is `1`.
+        # @param [Numeric] deadline The default number of seconds the stream
+        #   will hold received messages before modifying the message's ack
+        #   deadline. The minimum is 10, the maximum is 600. Default is
+        #   {#deadline}. Optional.
+        # @param [Integer] streams The number of concurrent streams to open to
+        #   pull messages from the subscription. Default is 4. Optional.
+        # @param [Integer] inventory The number of received messages to be
+        #   collected by subscriber. Default is 1,000. Optional.
+        # @param [Hash] threads The number of threads to create to handle
+        #   concurrent calls by each stream opened by the subscriber. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #     * `:callback` (Integer) The number of threads used to handle the
+        #       received messages. Default is 8.
+        #     * `:push` (Integer) The number of threads to handle
+        #       acknowledgement ({ReceivedMessage#ack!}) and delay messages
+        #       ({ReceivedMessage#nack!}, {ReceivedMessage#delay!}). Default is
+        #       4.
+        #
         # @yield [msg] a block for processing new messages
         # @yieldparam [ReceivedMessage] msg the newly received message
+        #
+        # @return [Subscriber]
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -312,39 +320,40 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen do |msg|
+        #
+        #   subscriber = sub.listen do |msg|
         #     # process msg
+        #     msg.ack!
         #   end
         #
-        # @example Limit number of messages pulled per API request with `max`:
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
+        #
+        # @example Configuring to increase concurrent callbacks:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen max: 20 do |msg|
-        #     # process msg
+        #
+        #   subscriber = sub.listen threads: { callback: 16 } do |msg|
+        #     # store the message somewhere before acknowledging
+        #     store_in_backend msg.data # takes a few seconds
+        #     msg.ack!
         #   end
         #
-        # @example Automatically acknowledge messages with `autoack`:
-        #   require "google/cloud/pubsub"
+        #   subscriber.start
         #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.listen autoack: true do |msg|
-        #     # process msg
-        #   end
-        #
-        def listen max: 100, autoack: false, delay: 1
-          loop do
-            msgs = wait_for_messages max: max, autoack: autoack
-            if msgs.any?
-              msgs.each { |msg| yield msg }
-            else
-              sleep delay
-            end
-          end
+        def listen deadline: nil, streams: nil, inventory: nil, threads: {},
+                   &block
+          ensure_service!
+          deadline ||= self.deadline
+
+          Subscriber.new name, block, deadline: deadline, streams: streams,
+                                      inventory: inventory, threads: threads,
+                                      service: service
         end
 
         ##
@@ -406,6 +415,7 @@ module Google
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
+        alias_method :modify_ack_deadline, :delay
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot

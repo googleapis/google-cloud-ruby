@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 
 module Google
@@ -61,13 +62,14 @@ module Google
         end
 
         ##
-        # The received data.
+        # The message payload. This data is a list of bytes encoded as
+        # ASCII-8BIT.
         def data
           @grpc.data
         end
 
         ##
-        # The received attributes.
+        # Optional attributes for the message.
         def attributes
           return @grpc.attributes.to_h if @grpc.attributes.respond_to? :to_h
           # Enumerable doesn't have to_h on Ruby 2.0, so fallback to this
@@ -81,6 +83,13 @@ module Google
           @grpc.message_id
         end
         alias_method :msg_id, :message_id
+
+        ##
+        # The time at which the message was published.
+        def published_at
+          Convert.timestamp_to_time @grpc.publish_time
+        end
+        alias_method :publish_time, :published_at
 
         ##
         # @private New Message from a Google::Pubsub::V1::PubsubMessage object.

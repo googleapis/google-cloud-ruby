@@ -18,6 +18,7 @@ require "google/cloud/env"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
+require "google/cloud/pubsub/batch_publisher"
 require "google/cloud/pubsub/snapshot"
 
 module Google
@@ -83,25 +84,36 @@ module Google
         ##
         # Retrieves topic by name.
         #
-        # The topic will be created if the topic does not exist and the
-        # `autocreate` option is set to true.
-        #
         # @param [String] topic_name Name of a topic.
-        # @param [Boolean] autocreate Flag to control whether the requested
-        #   topic will be created if it does not exist. Ignored if `skip_lookup`
-        #   is `true`. The default value is `false`.
         # @param [String] project If the topic belongs to a project other than
         #   the one currently connected to, the alternate project ID can be
-        #   specified here.
+        #   specified here. Optional.
         # @param [Boolean] skip_lookup Optionally create a {Topic} object
         #   without verifying the topic resource exists on the Pub/Sub service.
         #   Calls made on this object will raise errors if the topic resource
-        #   does not exist. Default is `false`.
+        #   does not exist. Default is `false`. Optional.
+        # @param [Hash] async A hash of values to configure the topic's
+        #   {AsyncPublisher} that is created when {Topic#publish_async}
+        #   is called. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #   * `:max_bytes` (Integer) The maximum size of messages to be
+        #     collected before the batch is published. Default is 10,000,000
+        #     (10MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 1,000.
+        #   * `:interval` (Numeric) The number of seconds to collect messages
+        #     before the batch is published. Default is 0.25.
+        #   * `:threads` (Hash) The number of threads to create to handle
+        #     concurrent calls by the publisher:
+        #     * `:publish` (Integer) The number of threads used to publish
+        #       messages. Default is 4.
+        #     * `:callback` (Integer) The number of threads to handle the
+        #       published messages' callbacks. Default is 8.
         #
         # @return [Google::Cloud::Pubsub::Topic, nil] Returns `nil` if topic
-        #   does not exist. Will return a newly created{
-        #   Google::Cloud::Pubsub::Topic} if the topic does not exist and
-        #   `autocreate` is set to `true`.
+        #   does not exist.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -115,12 +127,6 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "non-existing-topic" # nil
         #
-        # @example With the `autocreate` option set to `true`.
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #   topic = pubsub.topic "non-existing-topic", autocreate: true
-        #
         # @example Create topic in a different project with the `project` flag.
         #   require "google/cloud/pubsub"
         #
@@ -133,14 +139,30 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
-        def topic topic_name, autocreate: nil, project: nil, skip_lookup: nil
+        # @example Configuring AsyncPublisher to increase concurrent callbacks:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   topic = pubsub.topic "my-topic",
+        #                        async: { threads: { callback: 16 } }
+        #
+        #   topic.publish_async "task completed" do |result|
+        #     if result.succeeded?
+        #       log_publish_success result.data
+        #     else
+        #       log_publish_failure result.data, result.error
+        #     end
+        #   end
+        #
+        #   topic.async_publisher.stop.wait!
+        #
+        def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
           return Topic.new_lazy(topic_name, service, options) if skip_lookup
           grpc = service.get_topic topic_name
-          Topic.from_grpc grpc, service
+          Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError
-          return create_topic(topic_name) if autocreate
           nil
         end
         alias_method :get_topic, :topic
@@ -150,6 +172,25 @@ module Google
         # Creates a new topic.
         #
         # @param [String] topic_name Name of a topic.
+        # @param [Hash] async A hash of values to configure the topic's
+        #   {AsyncPublisher} that is created when {Topic#publish_async}
+        #   is called. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #   * `:max_bytes` (Integer) The maximum size of messages to be
+        #     collected before the batch is published. Default is 10,000,000
+        #     (10MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 1,000.
+        #   * `:interval` (Numeric) The number of seconds to collect messages
+        #     before the batch is published. Default is 0.25.
+        #   * `:threads` (Hash) The number of threads to create to handle
+        #     concurrent calls by the publisher:
+        #     * `:publish` (Integer) The number of threads used to publish
+        #       messages. Default is 4.
+        #     * `:callback` (Integer) The number of threads to handle the
+        #       published messages' callbacks. Default is 8.
         #
         # @return [Google::Cloud::Pubsub::Topic]
         #
@@ -159,10 +200,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name
+        def create_topic topic_name, async: nil
           ensure_service!
           grpc = service.create_topic topic_name
-          Topic.from_grpc grpc, service
+          Topic.from_grpc grpc, service, async: async
         end
         alias_method :new_topic, :create_topic
 
@@ -207,21 +248,19 @@ module Google
         alias_method :list_topics, :topics
 
         ##
-        # Publishes one or more messages to the given topic. The topic will be
-        # created if the topic does previously not exist and the `autocreate`
-        # option is provided.
+        # Publishes one or more messages to the given topic.
         #
-        # A note about auto-creating the topic: Any message published to a topic
-        # without a subscription will be lost.
+        # The message payload must not be empty; it must contain either a
+        # non-empty data field, or at least one attribute.
         #
         # @param [String] topic_name Name of a topic.
-        # @param [String, File] data The message data.
+        # @param [String, File] data The message payload. This will be converted
+        #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
-        # @option attributes [Boolean] :autocreate Flag to control whether the
-        #   provided topic will be created if it does not exist.
-        # @yield [publisher] a block for publishing multiple messages in one
+        # @yield [batch] a block for publishing multiple messages in one
         #   request
-        # @yieldparam [Topic::Publisher] publisher the topic publisher object
+        # @yieldparam [BatchPublisher] batch the topic batch publisher
+        #   object
         #
         # @return [Message, Array<Message>] Returns the published message when
         #   called without a block, or an array of messages when called with a
@@ -239,7 +278,8 @@ module Google
         #
         #   pubsub = Google::Cloud::Pubsub.new
         #
-        #   msg = pubsub.publish "my-topic", File.open("message.txt")
+        #   file = File.open "message.txt", mode: "rb"
+        #   msg = pubsub.publish "my-topic", file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -260,32 +300,21 @@ module Google
         #     p.publish "task 3 completed", foo: :bif
         #   end
         #
-        # @example With `autocreate`:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   msg = pubsub.publish "new-topic", "task completed", autocreate: true
-        #
         def publish topic_name, data = nil, attributes = {}
           # Fix parameters
           if data.is_a?(::Hash) && attributes.empty?
             attributes = data
             data = nil
           end
-          # extract autocreate option
-          autocreate = attributes.delete :autocreate
           ensure_service!
-          publisher = Topic::Publisher.new data, attributes
+          publisher = BatchPublisher.new data, attributes
           yield publisher if block_given?
           return nil if publisher.messages.count.zero?
-          publish_batch_messages topic_name, publisher, autocreate
+          publish_batch_messages topic_name, publisher
         end
 
         ##
-        # Creates a new {Subscription} object for the provided topic. The topic
-        # will be created if the topic does previously not exist and the
-        # `autocreate` option is provided.
+        # Creates a new {Subscription} object for the provided topic.
         #
         # @param [String] topic_name Name of a topic.
         # @param [String] subscription_name Name of the new subscription. Must
@@ -309,8 +338,6 @@ module Google
         #   604,800 seconds (7 days).
         # @param [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed.
-        # @param [String] autocreate Flag to control whether the topic will be
-        #   created if it does not exist.
         #
         # @return [Google::Cloud::Pubsub::Subscription]
         #
@@ -331,32 +358,14 @@ module Google
         #                          deadline: 120,
         #                          endpoint: "https://example.com/push"
         #
-        # @example With `autocreate`:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscribe "new-topic", "new-topic-sub",
-        #                          autocreate: true
-        #
         def subscribe topic_name, subscription_name, deadline: nil,
-                      retain_acked: false, retention: nil, endpoint: nil,
-                      autocreate: nil
+                      retain_acked: false, retention: nil, endpoint: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked,
                       retention: retention, endpoint: endpoint }
           grpc = service.create_subscription topic_name,
                                              subscription_name, options
           Subscription.from_grpc grpc, service
-        rescue Google::Cloud::NotFoundError => e
-          if autocreate
-            create_topic topic_name
-            return subscribe(topic_name, subscription_name,
-                             deadline: deadline, retain_acked: retain_acked,
-                             retention: retention, endpoint: endpoint,
-                             autocreate: false)
-          end
-          raise e
         end
         alias_method :create_subscription, :subscribe
         alias_method :new_subscription, :subscribe
@@ -497,15 +506,9 @@ module Google
 
         ##
         # Call the publish API with arrays of data data and attrs.
-        def publish_batch_messages topic_name, batch, autocreate = false
+        def publish_batch_messages topic_name, batch
           grpc = service.publish topic_name, batch.messages
           batch.to_gcloud_messages Array(grpc.message_ids)
-        rescue Google::Cloud::NotFoundError => e
-          if autocreate
-            create_topic topic_name
-            return publish_batch_messages topic_name, batch, false
-          end
-          raise e
         end
       end
     end

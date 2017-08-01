@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 class File
-  def self.open f
+  def self.open *args
     "task completed"
   end
 end
@@ -145,15 +145,16 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Project#topic@With the `autocreate` option set to `true`." do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/non-existing-topic", Hash]
-    end
-  end
-                                                            
   doctest.before "Google::Cloud::Pubsub::Project#topic@Create topic in a different project with the `project` flag." do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/another-topic", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::Project#topic@Configuring AsyncPublisher to increase concurrent callbacks:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
     end
   end
 
@@ -173,12 +174,6 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Pubsub::Project#publish@With `autocreate`:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/new-topic", [pubsub_message("task completed")], Hash]
     end
   end
 
@@ -202,12 +197,6 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::Project#subscribe" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Pubsub::Project#subscribe@With `autocreate`:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "new-topic-sub"), ["projects/my-project/subscriptions/new-topic-sub", "projects/my-project/topics/new-topic", Hash]
     end
   end
 
@@ -247,6 +236,35 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#reject!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#nack!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::ReceivedMessage#ignore!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
     end
   end
 
@@ -298,6 +316,13 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], 120, Hash]
     end
   end
+  doctest.before "Google::Cloud::Pubsub::Subscription#modify_ack_deadline" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], 120, Hash]
+    end
+  end
 
   doctest.before "Google::Cloud::Pubsub::Subscription#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
@@ -305,9 +330,6 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :delete_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
     end
   end
-
-  # This example loops indefinitely, making testing difficult if not impossible...
-  doctest.skip "Google::Cloud::Pubsub::Subscription#listen"
 
   doctest.before "Google::Cloud::Pubsub::Subscription#policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
@@ -372,6 +394,17 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :list_subscriptions, list_subscriptions_resp, ["projects/my-project", Hash]
       mock_subscriber.expect :list_subscriptions, list_subscriptions_resp(nil), ["projects/my-project", Hash]
+    end
+  end
+
+  ##
+  # Subscriber
+
+  doctest.before "Google::Cloud::Pubsub::Subscriber" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
     end
   end
 
@@ -474,9 +507,9 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
-  # Topic::Publisher
+  # BatchPublisher
 
-  doctest.before "Google::Cloud::Pubsub::Topic::Publisher" do
+  doctest.before "Google::Cloud::Pubsub::BatchPublisher" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       messages = [
@@ -580,10 +613,10 @@ def rec_message_json message, id = rand(1000000)
   }.to_json
 end
 
-def rec_messages_json message
+def rec_messages_json message, id = nil
   {
     "received_messages" => [
-      JSON.parse(rec_message_json(message))
+      JSON.parse(rec_message_json(message, id))
     ]
   }.to_json
 end
@@ -652,9 +685,3 @@ def topic_permissions_resp
     permissions: ["pubsub.topics.get"]
   )
 end
-
-
-
-
-
-

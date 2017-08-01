@@ -66,13 +66,14 @@ module Google
         alias_method :msg, :message
 
         ##
-        # The received message's data.
+        # The received message payload. This data is a list of bytes encoded as
+        # ASCII-8BIT.
         def data
           message.data
         end
 
         ##
-        # The received message's attributes.
+        # Optional attributes for the received message.
         def attributes
           message.attributes
         end
@@ -84,6 +85,13 @@ module Google
           message.message_id
         end
         alias_method :msg_id, :message_id
+
+        ##
+        # The time at which the message was published.
+        def published_at
+          message.published_at
+        end
+        alias_method :publish_time, :published_at
 
         ##
         # Acknowledges receipt of the message.
@@ -135,6 +143,32 @@ module Google
           ensure_subscription!
           subscription.delay new_deadline, ack_id
         end
+        alias_method :modify_ack_deadline!, :delay!
+
+        ##
+        # Resets the acknowledge deadline for the message without acknowledging
+        # it.
+        #
+        # This will make the message available for redelivery.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   received_message = sub.pull.first
+        #   if received_message
+        #     puts received_message.message.data
+        #     # Release message back to the API.
+        #     received_message.reject!
+        #   end
+        #
+        def reject!
+          delay! 0
+        end
+        alias_method :nack!, :reject!
+        alias_method :ignore!, :reject!
 
         ##
         # @private New ReceivedMessage from a

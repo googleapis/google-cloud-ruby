@@ -28,121 +28,39 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
   end
 
   describe "lazy topic object of a topic that exists" do
-    describe "lazy topic with default autocreate" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service }
+    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.service }
 
-      it "checks if the topic exists by making an HTTP call" do
-        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
-        mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
-        topic.service.mocked_publisher = mock
+    it "checks if the topic exists by making an HTTP call" do
+      get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+      mock = Minitest::Mock.new
+      mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
+      topic.service.mocked_publisher = mock
 
-        topic.must_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.must_be :exists?
+      topic.must_be :exists?
+      # Additional exists? calls do not make HTTP calls
+      topic.must_be :exists?
 
-        mock.verify
-      end
-    end
-
-    describe "lazy topic with explicit autocreate" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service,
-                                                   autocreate: true }
-
-      it "checks if the topic exists by making an HTTP call" do
-        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
-        mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
-        topic.service.mocked_publisher = mock
-
-        topic.must_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.must_be :exists?
-
-        mock.verify
-      end
-    end
-
-    describe "lazy topic without autocomplete" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service,
-                                                   autocreate: false }
-
-      it "checks if the topic exists by making an HTTP call" do
-        get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
-        mock = Minitest::Mock.new
-        mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
-        topic.service.mocked_publisher = mock
-
-        topic.must_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.must_be :exists?
-
-        mock.verify
-      end
+      mock.verify
     end
   end
 
   describe "lazy topic object of a topic that does not exist" do
-    describe "lazy topic with default autocreate" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service }
+    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
+                                                 pubsub.service }
 
-      it "checks if the topic exists by making an HTTP call" do
-        stub = Object.new
-        def stub.get_topic *args
-          gax_error = Google::Gax::GaxError.new "not found"
-          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-          raise gax_error
-        end
-        topic.service.mocked_publisher = stub
-
-        topic.wont_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.wont_be :exists?
+    it "checks if the topic exists by making an HTTP call" do
+      stub = Object.new
+      def stub.get_topic *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
       end
-    end
+      topic.service.mocked_publisher = stub
 
-    describe "lazy topic with explicit autocreate" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service,
-                                                   autocreate: true }
-
-      it "checks if the topic exists by making an HTTP call" do
-        stub = Object.new
-        def stub.get_topic *args
-          gax_error = Google::Gax::GaxError.new "not found"
-          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-          raise gax_error
-        end
-        topic.service.mocked_publisher = stub
-
-        topic.wont_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.wont_be :exists?
-      end
-    end
-
-    describe "lazy topic without autocomplete" do
-      let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                   pubsub.service,
-                                                   autocreate: false }
-
-      it "checks if the topic exists by making an HTTP call" do
-        stub = Object.new
-        def stub.get_topic *args
-          gax_error = Google::Gax::GaxError.new "not found"
-          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-          raise gax_error
-        end
-        topic.service.mocked_publisher = stub
-
-        topic.wont_be :exists?
-        # Additional exists? calls do not make HTTP calls
-        topic.wont_be :exists?
-      end
+      topic.wont_be :exists?
+      # Additional exists? calls do not make HTTP calls
+      topic.wont_be :exists?
     end
   end
 end
