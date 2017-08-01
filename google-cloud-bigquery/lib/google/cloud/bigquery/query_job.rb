@@ -129,6 +129,35 @@ module Google
         end
 
         ##
+        # Refreshes the job until the job is `DONE`.
+        # The delay between refreshes will incrementally increase.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   job.done? #=> true
+        #
+        def wait_until_done!
+          return if done?
+
+          ensure_service!
+          loop do
+            query_results_gapi = service.job_query_results job_id, max: 0
+            if query_results_gapi.job_complete
+              @destination_schema_gapi = query_results_gapi.schema
+              break
+            end
+          end
+          reload!
+        end
+
+        ##
         # Retrieves the query results for the job.
         #
         # @param [String] token Page token, returned by a previous call,
@@ -161,6 +190,70 @@ module Google
           options = { token: token, max: max, start: start, timeout: timeout }
           gapi = service.job_query_results job_id, options
           QueryData.from_gapi gapi, service
+        end
+
+        ##
+        # Retrieves the query results for the job.
+        #
+        # @param [String] token Page token, returned by a previous call,
+        #   identifying the result set.
+        # @param [Integer] max Maximum number of results to return.
+        # @param [Integer] start Zero-based index of the starting row to read.
+        #
+        # @return [Google::Cloud::Bigquery::Data]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #   data.each do |row|
+        #     puts row[:word]
+        #   end
+        #   data = data.next if data.next?
+        #
+        def data token: nil, max: nil, start: nil
+          return nil unless done?
+
+          ensure_schema!
+
+          options = { token: token, max: max, start: start }
+          data_gapi = service.list_tabledata destination_table_dataset_id,
+                                             destination_table_table_id, options
+          Data.from_gapi data_gapi, destination_table_gapi, service
+        end
+
+        protected
+
+        def ensure_schema!
+          return unless destination_schema.nil?
+
+          query_results_gapi = service.job_query_results job_id, max: 0
+          # fail "unable to retrieve schema" if query_results_gapi.schema.nil?
+          @destination_schema_gapi = query_results_gapi.schema
+        end
+
+        def destination_schema
+          @destination_schema_gapi
+        end
+
+        def destination_table_dataset_id
+          @gapi.configuration.query.destination_table.dataset_id
+        end
+
+        def destination_table_table_id
+          @gapi.configuration.query.destination_table.table_id
+        end
+
+        def destination_table_gapi
+          Google::Apis::BigqueryV2::Table.new \
+            table_reference: @gapi.configuration.query.destination_table,
+            schema: destination_schema
         end
       end
     end
