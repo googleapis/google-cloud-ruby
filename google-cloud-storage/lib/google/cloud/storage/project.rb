@@ -137,6 +137,10 @@ module Google
         # Retrieves bucket by name.
         #
         # @param [String] bucket_name Name of a bucket.
+        # @param [Boolean] skip_lookup Optionally create a Bucket object
+        #   without verifying the bucket resource exists on the Storage service.
+        #   Calls made on this object will raise errors if the bucket resource
+        #   does not exist. Default is `false`.
         # @param [Boolean, String] user_project If the `requester_pays` flag is
         #   enabled for the requested bucket, and if this parameter is set to
         #   `true`, transit costs for operations on the requested bucket or a
@@ -180,7 +184,11 @@ module Google
         #                           user_project: "my-other-project"
         #   files = bucket.files # Billed to "my-other-project"
         #
-        def bucket bucket_name, user_project: nil
+        def bucket bucket_name, skip_lookup: false, user_project: nil
+          if skip_lookup
+            return Bucket.new_lazy bucket_name, service,
+                                   user_project: user_project
+          end
           gapi = service.get_bucket bucket_name, user_project: user_project
           Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError

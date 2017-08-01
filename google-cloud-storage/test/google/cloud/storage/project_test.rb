@@ -448,6 +448,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     mock.verify
 
     bucket.name.must_equal bucket_name
+    bucket.wont_be :lazy?
   end
 
   it "finds a bucket with find_bucket alias" do
@@ -463,6 +464,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     mock.verify
 
     bucket.name.must_equal bucket_name
+    bucket.wont_be :lazy?
   end
 
   it "finds a bucket with user_project set to true" do
@@ -478,6 +480,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     mock.verify
 
     bucket.name.must_equal bucket_name
+    bucket.wont_be :lazy?
   end
 
   it "finds a bucket with user_project set to another project ID" do
@@ -493,6 +496,67 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     mock.verify
 
     bucket.name.must_equal bucket_name
+    bucket.wont_be :lazy?
+  end
+
+  it "returns a lazy bucket" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, skip_lookup: true
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+    bucket.must_be :lazy?
+  end
+
+  it "returns a lazy bucket with find_bucket alias" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.find_bucket bucket_name, skip_lookup: true
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+    bucket.must_be :lazy?
+  end
+
+  it "returns a lazy bucket with user_project set to true" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, skip_lookup: true, user_project: true
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+    bucket.must_be :lazy?
+  end
+
+  it "returns a lazy bucket with user_project set to another project ID" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, skip_lookup: true, user_project: "my-other-project"
+
+    mock.verify
+
+    bucket.name.must_equal bucket_name
+    bucket.must_be :lazy?
   end
 
   def create_bucket_gapi name = nil, location: nil, storage_class: nil,

@@ -527,9 +527,13 @@ module Google
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
+        # @param [Boolean] skip_lookup Optionally create a Bucket object
+        #   without verifying the bucket resource exists on the Storage service.
+        #   Calls made on this object will raise errors if the bucket resource
+        #   does not exist. Default is `false`.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
-        #   to {#create_file}.
+        #   to {#create_file}. (Not used if `skip_lookup` is also set.)
         #
         # @return [Google::Cloud::Storage::File, nil] Returns nil if file does
         #   not exist
@@ -544,8 +548,13 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, encryption_key: nil
+        def file path, generation: nil, skip_lookup: nil, encryption_key: nil
           ensure_service!
+          if skip_lookup
+            return File.new_lazy name, path, service,
+                                 generation: generation,
+                                 user_project: user_project
+          end
           gapi = service.get_file name, path, generation: generation,
                                               key: encryption_key,
                                               user_project: user_project
@@ -1133,16 +1142,52 @@ module Google
         def reload!
           ensure_service!
           @gapi = service.get_bucket name, user_project: user_project
+          # If NotFound then lazy will never be unset
+          @lazy = nil
+          self
         end
         alias_method :refresh!, :reload!
 
         ##
+        # Determines whether the bucket exists in the Storage service.
+        def exists?
+          # Always true if we have a grpc object
+          return true unless lazy?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # @private
+        # Determines whether the bucket was created without retrieving the
+        # resource record from the API.
+        def lazy?
+          @lazy
+        end
+
+        ##
         # @private New Bucket from a Google API Client object.
         def self.from_gapi gapi, service, user_project: nil
-          new.tap do |f|
-            f.gapi = gapi
-            f.service = service
-            f.user_project = user_project
+          new.tap do |b|
+            b.gapi = gapi
+            b.service = service
+            b.user_project = user_project
+          end
+        end
+
+        ##
+        # @private New lazy Bucket object without making an HTTP request.
+        def self.new_lazy name, service, user_project: nil
+          # TODO: raise if name is nil?
+          new.tap do |b|
+            b.gapi.name = name
+            b.service = service
+            b.user_project = user_project
+            b.instance_variable_set :@lazy, true
           end
         end
 
@@ -1152,6 +1197,14 @@ module Google
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
+        end
+
+        ##
+        # Ensures the Google::Apis::StorageV1::Bucket object exists.
+        def ensure_gapi!
+          ensure_service!
+          return unless lazy?
+          reload!
         end
 
         def patch_gapi! *attributes
@@ -1164,6 +1217,8 @@ module Google
           patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
           @gapi = service.patch_bucket name, patch_gapi,
                                        user_project: user_project
+          @lazy = nil
+          self
         end
 
         ##

@@ -1,4 +1,4 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +16,10 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Storage::Bucket, :mock_storage do
+describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
   let(:bucket_hash) { random_bucket_hash }
-  let(:bucket_json) { bucket_hash.to_json }
-  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
-  let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
+  let(:bucket) { Google::Cloud::Storage::Bucket.new_lazy bucket_name, storage.service }
+  let(:bucket_user_project) { Google::Cloud::Storage::Bucket.new_lazy bucket_name, storage.service, user_project: true }
 
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
   let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
@@ -39,17 +37,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_website_404) { "404.html" }
   let(:bucket_requester_pays) { true }
   let(:bucket_labels) { { "env" => "production", "foo" => "bar" } }
-  let :bucket_complete_hash do
-    h = random_bucket_hash bucket_name, bucket_url_root,
-                           bucket_location, bucket_storage_class, bucket_versioning,
-                           bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
-                           bucket_website_404, bucket_cors, bucket_requester_pays
-    h[:labels] = bucket_labels
-    h
-  end
-  let(:bucket_complete_json) { bucket_complete_hash.to_json }
-  let(:bucket_complete_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_complete_json }
-  let(:bucket_complete) { Google::Cloud::Storage::Bucket.from_gapi bucket_complete_gapi, storage.service }
 
   let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
@@ -58,36 +45,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
       "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
     } }
-  end
-
-  it "knows its attributes" do
-    bucket_complete.id.must_equal bucket_complete_hash["id"]
-    bucket_complete.name.must_equal bucket_name
-    bucket_complete.created_at.must_be_within_delta bucket_complete_hash["timeCreated"].to_datetime
-    bucket_complete.api_url.must_equal bucket_url
-    bucket_complete.location.must_equal bucket_location
-    bucket_complete.logging_bucket.must_equal bucket_logging_bucket
-    bucket_complete.logging_prefix.must_equal bucket_logging_prefix
-    bucket_complete.storage_class.must_equal bucket_storage_class
-    bucket_complete.versioning?.must_equal bucket_versioning
-    bucket_complete.website_main.must_equal bucket_website_main
-    bucket_complete.website_404.must_equal bucket_website_404
-    bucket_complete.requester_pays.must_equal bucket_requester_pays
-  end
-
-  it "knows its labels" do
-    # mostly emtpy bucket has a labels hash
-    bucket.labels.must_equal Hash.new
-    # a complete bucket has a labels hash with the correct values
-    bucket_complete.labels.must_equal bucket_labels
-  end
-
-  it "return frozen cors" do
-    bucket_complete.cors.each do |cors|
-      cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
-      cors.frozen?.must_equal true
-    end
-    bucket_complete.cors.frozen?.must_equal true
   end
 
   it "can delete itself" do
@@ -1016,7 +973,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file.must_be :lazy?
   end
 
-  it "finds a file with user_project and skip_lookup set to true" do
+  it "finds a file with user_project and skip_lookupset to true" do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new

@@ -292,6 +292,30 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should download a file while skipping lookups" do
+    original = File.new files[:logo][:path]
+    uploaded = bucket.create_file original, "CloudLogo.png"
+
+    lazy_bucket = storage.bucket bucket_name, skip_lookup: true
+    lazy_file = lazy_bucket.file "CloudLogo.png", skip_lookup: true
+
+    lazy_bucket.must_be :lazy?
+    lazy_file.must_be :lazy?
+
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = lazy_file.download tmpfile
+
+      downloaded.size.must_equal original.size
+      downloaded.size.must_equal uploaded.size
+      downloaded.size.must_equal tmpfile.size # Same file
+
+      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+    end
+
+    uploaded.delete
+  end
+
   it "should write metadata" do
     meta = { content_type: "x-image/x-png",
              metadata: { title: "Logo Image" } }
