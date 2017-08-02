@@ -522,8 +522,8 @@ module Google
         def data token: nil, max: nil, start: nil
           ensure_service!
           options = { token: token, max: max, start: start }
-          gapi = service.list_tabledata dataset_id, table_id, options
-          Data.from_gapi gapi, self
+          data_gapi = service.list_tabledata dataset_id, table_id, options
+          Data.from_gapi data_gapi, gapi, service
         end
 
         ##

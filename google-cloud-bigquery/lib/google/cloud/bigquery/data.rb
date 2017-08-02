@@ -26,8 +26,12 @@ module Google
       # Also contains metadata such as `etag` and `total`.
       class Data < DelegateClass(::Array)
         ##
+        # @private The Service object.
+        attr_accessor :service
+
+        ##
         # @private The {Table} object the data belongs to.
-        attr_accessor :table
+        attr_accessor :table_gapi
 
         ##
         # @private The Google API Client object.
@@ -35,8 +39,9 @@ module Google
 
         # @private
         def initialize arr = []
-          @table = nil
-          @gapi = {}
+          @service = nil
+          @table_gapi = nil
+          @gapi = nil
           super arr
         end
 
@@ -68,7 +73,7 @@ module Google
         ##
         # The schema of the data.
         def schema
-          table.schema
+          Schema.from_gapi @table_gapi.schema
         end
 
         ##
@@ -123,8 +128,12 @@ module Google
         #
         def next
           return nil unless next?
-          ensure_table!
-          table.data token: token
+          ensure_service!
+          data_gapi = service.list_tabledata \
+            @table_gapi.table_reference.dataset_id,
+            @table_gapi.table_reference.table_id,
+            token: token
+          self.class.from_gapi data_gapi, @table_gapi, @service
         end
 
         ##
@@ -197,13 +206,14 @@ module Google
 
         ##
         # @private New Data from a response object.
-        def self.from_gapi gapi, table
+        def self.from_gapi gapi, table_gapi, service
           formatted_rows = Convert.format_rows(gapi.rows,
-                                               table.gapi.schema.fields)
+                                               table_gapi.schema.fields)
 
           data = new formatted_rows
-          data.table = table
+          data.table_gapi = table_gapi
           data.gapi = gapi
+          data.service = service
           data
         end
 
@@ -211,8 +221,8 @@ module Google
 
         ##
         # Raise an error unless an active service is available.
-        def ensure_table!
-          fail "Must have active connection" unless table
+        def ensure_service!
+          fail "Must have active connection" unless service
         end
       end
     end
