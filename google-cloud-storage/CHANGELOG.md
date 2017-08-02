@@ -1,5 +1,19 @@
 # Release History
 
+### 1.4.0 / 2017-08-02
+
+* Add `skip_lookup` option for retrieving `Bucket` and `File` objects
+  without accessing the Storage API
+  * Add `Bucket#exists?` method
+  * Add `File#exists?` method
+* Add `File#generations` method
+  * Add `generation` argument to `File#delete`
+  * Add `generation` argument to `File#reload!`
+* Add `Bucket#storage_class=` method
+* Fix for when the `user_project` value set on a `Bucket` was not being
+  properly set on all `File` objects returned by `Bucket`.
+* Fix to use `user_project` value when reloading a `Bucket`.
+
 ### 1.3.0 / 2017-07-11
 
 * Add `query` parameter to `#signed_url` methods (georgeclaghorn).
