@@ -17,13 +17,13 @@ require "helper"
 
 describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
   let(:breakpoint1) {
-    Google::Cloud::Debugger::Breakpoint.new "1"
+    Google::Cloud::Debugger::Breakpoint.new "1", __FILE__, __LINE__
   }
   let(:breakpoint2) {
-    Google::Cloud::Debugger::Breakpoint.new "2"
+    Google::Cloud::Debugger::Breakpoint.new "2", __FILE__, __LINE__
   }
   let(:breakpoint3) {
-    Google::Cloud::Debugger::Breakpoint.new "3"
+    Google::Cloud::Debugger::Breakpoint.new "3", __FILE__, __LINE__
   }
 
   describe "#sync_active_breakpoints" do
@@ -68,6 +68,23 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
           breakpoint_manager.stub :update_breakpoints, mocked_update_breakpoints do
             breakpoint_manager.sync_active_breakpoints(nil).must_equal true
           end
+        end
+      end
+    end
+
+    it "injects app_root to the breakpoints received from server" do
+      wait_token = "a unique token"
+      mocked_response = OpenStruct.new wait_expired: false,
+                                       next_wait_token: wait_token,
+                                       breakpoints: [nil]
+
+      breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
+        Google::Cloud::Debugger::Breakpoint.stub :from_grpc, breakpoint1 do
+          app_root = "my/app/path"
+          breakpoint_manager.agent.app_root =app_root
+          breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+
+          breakpoint1.full_path.must_match app_root
         end
       end
     end
@@ -141,6 +158,15 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       breakpoint_manager.active_breakpoints.must_be_empty
       breakpoint_manager.completed_breakpoints.size.must_equal 1
       breakpoint_manager.completed_breakpoints.must_include breakpoint1
+    end
+
+    it "only add valid breakpoints" do
+      breakpoint_manager.stub :filter_breakpoints, [breakpoint2] do
+        breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2]
+      end
+
+      breakpoint_manager.active_breakpoints.size.must_equal 1
+      breakpoint_manager.active_breakpoints.first.must_equal breakpoint2
     end
   end
 
@@ -349,6 +375,24 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
 
       breakpoint_manager.clear_breakpoints
       breakpoint_manager.breakpoints.must_be_empty
+    end
+  end
+
+  describe "#filter_breakpoints" do
+    it "validates breakpoint and directly submit those aren't valid" do
+      breakpoint2.location.path = nil
+
+      mocked_submit = Minitest::Mock.new
+      mocked_submit.expect :call, nil, [breakpoint2]
+
+      breakpoint_manager.agent.transmitter.stub :submit, mocked_submit do
+        breakpoints = breakpoint_manager.send :filter_breakpoints, [breakpoint1, breakpoint2]
+
+        breakpoints.size.must_equal 1
+        breakpoints.first.must_equal breakpoint1
+      end
+
+      mocked_submit.verify
     end
   end
 end

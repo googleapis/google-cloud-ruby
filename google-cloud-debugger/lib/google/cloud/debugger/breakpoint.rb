@@ -18,6 +18,7 @@ require "google/cloud/debugger/breakpoint/evaluator"
 require "google/cloud/debugger/breakpoint/source_location"
 require "google/cloud/debugger/breakpoint/stack_frame"
 require "google/cloud/debugger/breakpoint/status_message"
+require "google/cloud/debugger/breakpoint/validator"
 require "google/cloud/debugger/breakpoint/variable"
 require "google/cloud/debugger/breakpoint/variable_table"
 
@@ -42,6 +43,11 @@ module Google
         # Action to take when a breakpoint is hit. Either :CAPTURE or :LOG.
         # @return [Symbol]
         attr_accessor :action
+
+        ##
+        # Absolute path to the debuggee Ruby application root directory.
+        # @return [String]
+        attr_accessor :app_root
 
         ##
         # Only relevant when action is LOG. Defines the message to log when the
@@ -153,6 +159,8 @@ module Google
 
           @id = id
           @action = :CAPTURE
+          # Use relative path for SourceLocation, because that's how the server
+          # side canonical breakpoints are defined.
           @location = SourceLocation.new.tap do |sl|
             sl.path = path
             sl.line = line.to_i
@@ -244,7 +252,21 @@ module Google
           end
         end
 
-        alias_method :complete?, :is_final_state
+        ##
+        # Check if the breakpoint has been evaluated or set to a final error
+        # state.
+        def complete?
+          is_final_state ? true : false
+        end
+
+        ##
+        # Check if the breakpoint is valid or not. Invoke validation function
+        # if breakpoint hasn't been finallized yet.
+        def valid?
+          Validator.validate self unless complete?
+
+          status && status.is_error ? false : true
+        end
 
         ##
         # Get the file path of this breakpoint
@@ -357,6 +379,17 @@ module Google
           complete if is_final
 
           @status
+        end
+
+        ##
+        # Get full absolute file path by combining the relative file path
+        # with application root directory path.
+        def full_path
+          if app_root.nil? || app_root.empty?
+            path
+          else
+            File.join app_root, path
+          end
         end
 
         private

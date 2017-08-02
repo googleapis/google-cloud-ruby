@@ -96,6 +96,14 @@ module Google
         attr_accessor :quota_manager
 
         ##
+        # Absolute path to the debuggee Ruby application root directory. The
+        # Stackdriver Debugger service creates canonical breakpoints with only
+        # relative path. So the debugger agent combines the relative path to
+        # the application directory to trace and evaluate breakpoints.
+        # @return [String]
+        attr_accessor :app_root
+
+        ##
         # @private The last exception captured in the agent child thread
         attr_reader :last_exception
 
@@ -107,11 +115,13 @@ module Google
         # @param [Google::Cloud::Logging::Logger] logger The logger used
         #   to write the results of Logpoints.
         # @param [String] module_name Name for the debuggee application.
-        #   Optional.
         # @param [String] module_version Version identifier for the debuggee
-        #   application. Optional.
+        #   application.
+        # @param [String] app_root Absolute path to the root directory of
+        #   the debuggee application. Default to Rack root.
         #
-        def initialize service, logger: nil, module_name:, module_version:
+        def initialize service, logger: nil, module_name:, module_version:,
+                       app_root: nil
           super()
 
           @service = service
@@ -125,6 +135,9 @@ module Google
           @transmitter = Transmitter.new self, service
 
           @logger = logger || default_logger
+
+          @app_root = app_root
+          @app_root ||= Rack::Directory.new("").root if defined? Rack::Directory
 
           # Agent actor thread needs to force exit immediately.
           set_cleanup_options timeout: 0
