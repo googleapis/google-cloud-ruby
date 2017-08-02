@@ -78,9 +78,9 @@ module Google
             return false unless line
 
             blank_line = line =~ /^\s*$/
-            commit_line = line =~ /^\s*#.*$/
+            comment_line = line =~ /^\s*#.*$/
 
-            blank_line || commit_line ? false : true
+            blank_line || comment_line ? false : true
           rescue
             false
           end
