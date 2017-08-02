@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.1 / 2017-08-01
+
+* Update documentation.
+
 ### 0.26.0 / 2017-07-28
 
 * Add words argument for recognition, Result#words, and Result::Word
