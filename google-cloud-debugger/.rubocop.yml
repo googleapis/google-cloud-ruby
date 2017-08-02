@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - "acceptance/**/*"
     - "google-cloud-debugger.gemspec"
     - "lib/google/devtools/**/*"
     # GAPIC client has too many violations. Exclude for now.
