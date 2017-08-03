@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - "acceptance/**/*"
     - "integration/**/*"
     - "google-cloud-error_reporting.gemspec"
     - "lib/google/devtools/**/*"
