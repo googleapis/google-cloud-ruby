@@ -397,7 +397,7 @@ module Google
         # Job description for query job
         def query_table_config query, options
           dest_table = table_ref_from options[:table]
-          default_dataset = dataset_ref_from options[:dataset]
+          dataset_config = dataset_ref_from options[:dataset], options[:project]
           req = API::Job.new(
             configuration: API::JobConfiguration.new(
               query: API::JobConfigurationQuery.new(
@@ -410,7 +410,7 @@ module Google
                 write_disposition: write_disposition(options[:write]),
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
-                default_dataset: default_dataset,
+                default_dataset: dataset_config,
                 use_legacy_sql: Convert.resolve_legacy_sql(
                   options[:standard_sql], options[:legacy_sql]),
                 maximum_billing_tier: options[:maximum_billing_tier],

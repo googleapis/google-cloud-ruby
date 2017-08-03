@@ -158,6 +158,9 @@ module Google
         #     table exists and contains data.
         # @param [Dataset, String] dataset The default dataset to use for
         #   unqualified table names in the query. Optional.
+        # @param [String] project Specifies the default projectId to assume for
+        #   any unqualified table names in the query. Only used if `dataset`
+        #   option is set.
         # @param [Boolean] large_results If `true`, allows the query to produce
         #   arbitrarily large result tables at a slight cost in performance.
         #   Requires `table` parameter to be set.
@@ -262,15 +265,15 @@ module Google
         #
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
                       table: nil, create: nil, write: nil, dataset: nil,
-                      standard_sql: nil, legacy_sql: nil, large_results: nil,
-                      flatten: nil, maximum_billing_tier: nil,
-                      maximum_bytes_billed: nil
+                      project: nil, standard_sql: nil, legacy_sql: nil,
+                      large_results: nil, flatten: nil,
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset, legacy_sql: legacy_sql,
-                      standard_sql: standard_sql,
+                      dataset: dataset, project: project,
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params }
