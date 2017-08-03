@@ -98,18 +98,18 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
-  it "queries the data with dataset option as a String" do
+  it "queries the data with dataset and project options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
     job_gapi = query_job_gapi(query)
     job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
-      project_id: dataset.project_id,
-      dataset_id: dataset.dataset_id
+      project_id: "some_random_project",
+      dataset_id: "some_random_dataset"
     )
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = bigquery.query_job query, dataset: dataset_id
+    job = bigquery.query_job query, dataset: "some_random_dataset", project: "some_random_project"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
