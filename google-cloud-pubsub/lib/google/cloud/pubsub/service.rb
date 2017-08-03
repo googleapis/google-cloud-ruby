@@ -15,6 +15,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/pubsub/credentials"
+require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/gax/errors"
@@ -209,7 +210,7 @@ module Google
                         end
           deadline = options[:deadline]
           retain_acked = options[:retain_acked]
-          mrd = number_to_duration options[:retention]
+          mrd = Convert.number_to_duration options[:retention]
 
           execute do
             subscriber.create_subscription name,
@@ -219,6 +220,14 @@ module Google
                                            retain_acked_messages: retain_acked,
                                            message_retention_duration: mrd,
                                            options: default_options
+          end
+        end
+
+        def update_subscription subscription_obj, *fields
+          mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
+          execute do
+            subscriber.update_subscription \
+              subscription_obj, mask, options: default_options
           end
         end
 
@@ -333,7 +342,8 @@ module Google
         def seek subscription, time_or_snapshot
           subscription = subscription_path(subscription)
           execute do
-            if (time = time_to_timestamp time_or_snapshot)
+            if a_time? time_or_snapshot
+              time = Convert.time_to_timestamp time_or_snapshot
               subscriber.seek subscription, time: time, options: default_options
             else
               if time_or_snapshot.is_a? Snapshot
@@ -426,33 +436,19 @@ module Google
 
         protected
 
+        def a_time? obj
+          return false unless obj.respond_to? :to_time
+          # Rails' String#to_time returns nil if the string doesn't parse.
+          return false if obj.to_time.nil?
+          true
+        end
+
         def default_headers
           { "google-cloud-resource-prefix" => "projects/#{@project}" }
         end
 
         def default_options
           Google::Gax::CallOptions.new kwargs: default_headers
-        end
-
-        ##
-        # @private Get a Google::Protobuf::Timestamp object from a Time object.
-        def time_to_timestamp time
-          return nil if time.nil?
-          # Make sure to_time is supported.
-          return nil unless time.respond_to? :to_time
-          time = time.to_time
-          # Make sure we have a Time object.
-          # Rails' String#to_time returns nil if the string doesn't parse.
-          return nil unless time
-          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
-        end
-
-        def number_to_duration number
-          return nil if number.nil?
-
-          Google::Protobuf::Duration.new \
-            seconds: number.to_i,
-            nanos: (number.remainder(1) * 1000000000).round
         end
 
         def execute

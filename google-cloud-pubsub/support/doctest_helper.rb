@@ -108,8 +108,8 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
-      mock_subscriber.expect :get_subscription, nil, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [OpenStruct.new(message: pubsub_message)]), ["projects/my-project/subscriptions/", 100, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [OpenStruct.new(message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
     end
   end
 
