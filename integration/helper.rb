@@ -15,21 +15,31 @@
 
 require "fileutils"
 require "open3"
+require "net/http"
 
 ##
 # Keep trying a block of code until the code of block yield a true statement or
 # raise error after timeout
 def keep_trying_till_true timeout = 30
   t_begin = Time.now
+  delay = 2
   loop do
     if yield
       break
     elsif (Time.now - t_begin) > timeout
       fail "Timeout after trying for #{timeout} seconds"
     else
-      sleep 1
+      sleep delay
     end
+    delay += 1
   end
+end
+
+##
+# Verify the given uri can be accessed successfully.
+def verify_uri_acessibility uri
+  res = Net::HTTP.get_response URI(uri)
+  res.is_a? Net::HTTPSuccess
 end
 
 ##

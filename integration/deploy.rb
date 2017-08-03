@@ -19,7 +19,7 @@ require_relative "./helper.rb"
 # Setup the app.yaml file and deploy this directory to GAE. When run from repo
 # root directory, this will deploy the integration/classic_sinatra_app.rb onto
 # GAE for testing use.
-def deploy_gae_flex app_dir
+def deploy_gae_flex app_dir, project_uri
   unless File.file? "app.yaml"
     FileUtils.cp "#{app_dir}/app.yaml.example", "app.yaml"
     temp_app_yaml = true
@@ -31,15 +31,21 @@ def deploy_gae_flex app_dir
     last_gae_version = get_gae_versions.last
     sh "gcloud beta app deploy -q" do |ok, res|
       if ok
-        # Wait couple minutes for load balancer to stablize
-        sleep 120
+        # Make sure the deployment is fully accessible.
+        keep_trying_till_true 300 do
+          verify_uri_acessibility project_uri
+        end
 
         yield
 
         # Delete the last version of Google App Engine if successfully deployed
         unless last_gae_version.empty?
           puts "gcloud app versions delete #{last_gae_version} -q"
-          `gcloud app versions delete #{last_gae_version} -q`
+          keep_trying_till_true 600 do
+            `gcloud app versions delete #{last_gae_version} -q`
+
+            !get_gae_versions.include?(last_gae_version)
+          end
         end
       else
         fail "'gcloud app deploy' failed with status = #{res.exitstatus}"

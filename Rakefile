@@ -690,7 +690,7 @@ namespace :integration do
       project_id = gcloud_project_id
       fail "Unabled to determine project_id from gcloud SDK. Please make " \
         "sure gcloud SDK is logged in and a valid project ID is configured." unless project_id
-      # If project_uri not given, default to "http://[project_id].appspot.com"
+      # If project_uri not given, default to "http://[project_id].appspot-preview.com"
       project_uri = args[:project_uri] ||
                     "http://#{project_id}.appspot-preview.com"
 
@@ -701,7 +701,7 @@ namespace :integration do
 
       test_apps.each do |test_app|
         header "Deploying #{test_app} to GAE Flex"
-        deploy_gae_flex test_app do
+        deploy_gae_flex test_app, project_uri do
           valid_gems.each do |gem|
             Dir.chdir gem do
               header "Running integration:gae for gem #{gem}"
