@@ -784,10 +784,6 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
   end
 
-  def find_job_gapi job_id
-    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
-  end
-
   def list_jobs_gapi count = 2, token = nil
     hash = {
       "kind" => "bigquery#jobList",
