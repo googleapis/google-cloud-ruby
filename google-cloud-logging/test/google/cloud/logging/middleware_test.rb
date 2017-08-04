@@ -89,6 +89,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       stubbed_add_request_info = ->(args) {
         args[:trace_id].must_equal trace_id
         args[:log_name].must_equal "ruby_health_check_log"
+        args[:env].must_equal rack_env
       }
       logger.stub :add_request_info, stubbed_add_request_info do
         middleware.call rack_env

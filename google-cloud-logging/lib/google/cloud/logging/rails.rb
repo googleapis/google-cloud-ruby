@@ -63,6 +63,7 @@ module Google
           resource_type = Logging.configure.monitored_resource.type
           resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name
+          labels = Logging.configure.labels
 
           logging = Google::Cloud::Logging.new project: project_id,
                                                keyfile: keyfile
@@ -70,7 +71,7 @@ module Google
             Logging::Middleware.build_monitored_resource resource_type,
                                                          resource_labels
 
-          app.config.logger = logging.logger log_name, resource
+          app.config.logger = logging.logger log_name, resource, labels
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
                                        logger: app.config.logger
@@ -109,7 +110,7 @@ module Google
         ##
         # @private Merge Rails configuration into Logging instrumentation
         # configuration.
-        def self.merge_rails_config rails_config
+        def self.merge_rails_config rails_config # rubocop:disable AbcSize
           gcp_config = rails_config.google_cloud
           logging_config = gcp_config.logging
 
@@ -119,6 +120,7 @@ module Google
                                   gcp_config.project_id
             config.keyfile ||= logging_config.keyfile || gcp_config.keyfile
             config.log_name ||= logging_config.log_name
+            config.labels ||= logging_config.labels
             config.log_name_map ||= logging_config.log_name_map
             config.monitored_resource.type ||=
               logging_config.monitored_resource.type

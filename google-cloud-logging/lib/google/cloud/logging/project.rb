@@ -362,7 +362,8 @@ module Google
         # @param [Google::Cloud::Logging::Resource] resource The monitored
         #   resource to be associated with written log entries.
         # @param [Hash] labels A set of user-defined data to be associated with
-        #   written log entries.
+        #   written log entries. Values can be strings or Procs which are
+        #   functions of the request environment.
         #
         # @return [Google::Cloud::Logging::Logger] a Logger object that can be
         #   used in place of a ruby standard library logger object.
