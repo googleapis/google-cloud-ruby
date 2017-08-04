@@ -691,8 +691,10 @@ module Google
         end
 
         ##
-        # Queries data using the [synchronous
-        # method](https://cloud.google.com/bigquery/querying-data).
+        # Queries data using a synchronous method that blocks for a response. In
+        # this method, a {QueryJob} is created and its results are saved
+        # to a temporary table, then read from the table. Timeouts and transient
+        # errors are generally handled as needed to complete the query.
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
@@ -717,6 +719,8 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # @see https://cloud.google.com/bigquery/querying-data Querying Data
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -734,16 +738,6 @@ module Google
         #   result set is large. In addition to this limit, responses are also
         #   limited to 10 MB. By default, there is no maximum row count, and
         #   only the byte limit applies.
-        # @param [Integer] timeout How long to wait for the query to complete,
-        #   in milliseconds, before the request times out and returns. Note that
-        #   this is only a timeout for the request, not the query. If the query
-        #   takes longer to run than the timeout value, the call returns without
-        #   any results and with QueryData#complete? set to false. The default
-        #   value is 10000 milliseconds (10 seconds).
-        # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the
-        #   job. Instead, if the query is valid, BigQuery returns statistics
-        #   about the job such as how many bytes would be processed. If the
-        #   query is invalid, an error returns. The default value is `false`.
         # @param [Boolean] cache Whether to look for the result in the query
         #   cache. The query cache is a best-effort cache that will be flushed
         #   whenever tables in the query are modified. The default value is
@@ -769,7 +763,7 @@ module Google
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::QueryData]
+        # @return [Google::Cloud::Bigquery::Data]
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
@@ -824,16 +818,18 @@ module Google
         #
         # @!group Data
         #
-        def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
-                  cache: true, standard_sql: nil, legacy_sql: nil
-          options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      params: params }
-          options[:dataset] ||= dataset_id
-          options[:project] ||= project_id
+        def query query, params: nil, max: nil, cache: true, standard_sql: nil,
+                  legacy_sql: nil
           ensure_service!
-          gapi = service.query query, options
-          QueryData.from_gapi gapi, service
+          options = { cache: cache, legacy_sql: legacy_sql,
+                      standard_sql: standard_sql, params: params }
+
+          job = query_job query, options
+          job.wait_until_done!
+
+          # TODO: Use an appropriate Error subclass for code/reason. See #1648
+          fail Google::Cloud::Error, job.error["message"] if job.failed?
+          job.data max: max
         end
 
         ##
