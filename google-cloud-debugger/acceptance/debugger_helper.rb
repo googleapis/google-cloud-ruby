@@ -17,9 +17,14 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/debugger"
+require "grpc"
 
 # Create shared debugger clients so we don't create new for each test
-$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new
+key_hash = JSON.parse ENV["DEBUGGER_KEYFILE_JSON"]
+debugger_credentials = Google::Cloud::Debugger::Credentials.credentials_with_scope key_hash
+debugger_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
+  GRPC::Core::CallCredentials.new debugger_credentials.client.updater_proc
+$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new chan_creds: debugger_channel_cred
 $debugger = Google::Cloud::Debugger.new
 
 module Acceptance
@@ -40,13 +45,6 @@ module Acceptance
 
       refute_nil @debugger, "You do not have an active debugger to run the tests."
       refute_nil @vtk_debugger_client, "You do not have an active debugger vtk client to run the tests."
-      super
-    end
-
-    ##
-    # Cleanup test objects after tests are finished.
-    def teardown
-      $debugger.stop
       super
     end
 
@@ -154,4 +152,10 @@ module Acceptance
       addl.include? :debugger
     end
   end
+end
+
+##
+# Stop the debugger after the whole test suite is finished.
+Minitest.after_run do
+  $debugger.stop
 end
