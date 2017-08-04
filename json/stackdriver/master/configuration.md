@@ -52,6 +52,10 @@ end
 Google::Cloud::Logging.configure do |config|
   config.project_id = "error-reporting-project"
   config.log_name = "my-app-log"
+  config.google_cloud.labels = {
+    "my-static-label" => "static-label-value",
+    "my-dynamic-label" => ->(rack_env) { rack_env["HTTP_X_MY_HEADER"] }
+  }
 end
 
 # Trace specific configurations 
@@ -95,6 +99,7 @@ end
 * `logging.log_name_map`: [`Hash`] Map specific request routes to other log. Default: `{ "/_ah/health" => "ruby_health_check_log" }`
 * `logging.monitored_resource.type`: [`String`] Resource type name. See [full list](https://cloud.google.com/logging/docs/api/v2/resource-list). Self discovered on GCP.
 * `logging.monitored_resource.labels`: [`Hash`] Resource labels. See [full list](https://cloud.google.com/logging/docs/api/v2/resource-list). Self discovered on GCP.
+* `logging.labels`: [`Hash`] User defined labels. A `Hash` of label names to string label values or callables/`Proc` which are functions of the Rack environment.
 
 #### Trace
 
