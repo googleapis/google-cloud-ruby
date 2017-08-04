@@ -29,14 +29,47 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Run the debugger acceptance tests."
-task :acceptance, [:project, :keyfile] => :compile do |t, args|
-  puts "This gem does not have acceptance tests."
+desc "Runs the trace acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DEBUGGER_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DEBUGGER_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["DEBUGGER_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123,/path/to/keyfile.json] or DEBUGGER_TEST_PROJECT=test123 DEBUGGER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["DEBUGGER_PROJECT"] = project
+  ENV["DEBUGGER_KEYFILE"] = nil
+  ENV["DEBUGGER_KEYFILE_JSON"] = keyfile
+  ENV["LOGGING_PROJECT"] = project
+  ENV["LOGGING_KEYFILE"] = nil
+  ENV["LOGGING_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
-  task :run => :compile do
-    puts "This gem does not have acceptance tests."
+  desc "Runs acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-debugger"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/debugger/**/*_test.rb").each { |file| require_relative file }
   end
 end
 
