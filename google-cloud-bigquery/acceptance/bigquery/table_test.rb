@@ -208,18 +208,16 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     more_data = data.next
     more_data.wont_be :nil?
 
-    query_data = dataset.query query
-    query_data.class.must_equal Google::Cloud::Bigquery::QueryData
-    query_data.total_bytes.wont_be(:nil?) if query_data.complete?
-    #query_data.cache_hit?.must_equal false
-    query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    query_data.fields.count.must_equal 4
-    [:id, :breed, :name, :dob].each { |k| query_data.headers.must_include k }
-    query_data.count.wont_be :nil?
-    query_data.all.each do |row|
+    data = dataset.query query
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.total.wont_be(:nil?)
+    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.fields.count.must_equal 4
+    [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
+    data.all.each do |row|
       row.must_be_kind_of Hash
     end
-    query_data.next.must_be :nil?
+    data.next.must_be :nil?
   end
 
   it "insert skip invalid rows and return insert errors" do
