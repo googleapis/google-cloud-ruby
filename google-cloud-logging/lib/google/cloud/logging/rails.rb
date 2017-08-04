@@ -110,7 +110,7 @@ module Google
         ##
         # @private Merge Rails configuration into Logging instrumentation
         # configuration.
-        def self.merge_rails_config rails_config
+        def self.merge_rails_config rails_config # rubocop:disable AbcSize
           gcp_config = rails_config.google_cloud
           logging_config = gcp_config.logging
 
