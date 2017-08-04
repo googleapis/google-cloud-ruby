@@ -232,7 +232,7 @@ module Google
     # BigQuery API provides facilities for managing longer-running jobs. With
     # the asynchronous approach to running a query, an instance of
     # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
-    # of {Google::Cloud::Bigquery::QueryData}.
+    # of {Google::Cloud::Bigquery::Data}.
     #
     # ```ruby
     # require "google/cloud/bigquery"

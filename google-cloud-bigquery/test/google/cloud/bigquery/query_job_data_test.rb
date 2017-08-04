@@ -15,12 +15,6 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
-  let(:query_request) {
-    qrg = query_request_gapi
-    qrg.default_dataset = nil
-    qrg.query = "SELECT * FROM test-project:my_dataset.my_view"
-    qrg
-  }
   let(:dataset_id) { "target_dataset_id" }
   let(:table_id) { "target_table_id" }
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi query_job_gapi,
@@ -314,29 +308,5 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
       "maximumBytesBilled" => nil
     }
     hash
-  end
-
-  def table_data_gapi token: "token1234567890"
-    Google::Apis::BigqueryV2::TableDataList.from_json table_data_hash(token: token).to_json
-  end
-
-  def table_data_hash token: "token1234567890"
-    {
-      "kind" => "bigquery#tableDataList",
-      "etag" => "etag1234567890",
-      "rows" => random_data_rows,
-      "pageToken" => token,
-      "totalRows" => "3" # String per google/google-api-ruby-client#439
-    }
-  end
-
-  def nil_table_data_gapi
-    Google::Apis::BigqueryV2::TableDataList.from_json nil_table_data_json
-  end
-
-  def nil_table_data_json
-    h = table_data_hash
-    h.delete "rows"
-    h.to_json
   end
 end

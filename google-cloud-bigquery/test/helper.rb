@@ -364,8 +364,56 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def query_job_gapi query
-    Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
+  def find_job_gapi job_id
+    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
+  end
+
+  def job_resp_gapi job_gapi, job_id: "job9876543210"
+    job_gapi = job_gapi.dup
+    job_gapi.job_reference = Google::Apis::BigqueryV2::JobReference.new(
+      project_id: project,
+      job_id: job_id
+    )
+    job_gapi
+  end
+
+
+
+  def query_job_resp_gapi query, job_id: job_id
+    Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id)
+  end
+
+  def query_job_resp_json query, job_id: "job9876543210"
+    hash = random_job_hash(job_id, "done")
+    hash["configuration"]["query"] = {
+      "query" => query,
+      "destinationTable" => {
+        "projectId" => project,
+        "datasetId" => "target_dataset_id",
+        "tableId"   => "target_table_id"
+      },
+      "tableDefinitions" => {},
+      "createDisposition" => "CREATE_IF_NEEDED",
+      "writeDisposition" => "WRITE_EMPTY",
+      "defaultDataset" => {
+        "datasetId" => "my_dataset",
+        "projectId" => project
+      },
+      "priority" => "BATCH",
+      "allowLargeResults" => true,
+      "useQueryCache" => true,
+      "flattenResults" => true,
+      "useLegacySql" => false,
+      "maximumBillingTier" => nil,
+      "maximumBytesBilled" => nil
+    }
+    hash.to_json
+  end
+
+  def query_job_gapi query, parameter_mode: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
+    gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
+    gapi
   end
 
   def query_job_json query
@@ -423,5 +471,29 @@ class MockBigquery < Minitest::Spec
       "jobComplete" => true,
       "cacheHit" => false
     }
+  end
+
+  def table_data_gapi token: "token1234567890"
+    Google::Apis::BigqueryV2::TableDataList.from_json table_data_hash(token: token).to_json
+  end
+
+  def table_data_hash token: "token1234567890"
+    {
+      "kind" => "bigquery#tableDataList",
+      "etag" => "etag1234567890",
+      "rows" => random_data_rows,
+      "pageToken" => token,
+      "totalRows" => "3" # String per google/google-api-ruby-client#439
+    }
+  end
+
+  def nil_table_data_gapi
+    Google::Apis::BigqueryV2::TableDataList.from_json nil_table_data_json
+  end
+
+  def nil_table_data_json
+    h = table_data_hash
+    h.delete "rows"
+    h.to_json
   end
 end
