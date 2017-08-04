@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries values in standard mode" do
     rows = bigquery.query "SELECT * FROM #{dataset_id}.#{table_id} WHERE id = ?", params: [2]
 
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 1
     row = rows.first
 
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries repeated scalars in legacy mode" do
     rows = bigquery.query "SELECT name, scores FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 3
     rows[0].must_equal({ name: "Gandalf", scores: 100.0})
     rows[1].must_equal({ name: "Gandalf", scores: 99.0})
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries repeated records in legacy mode" do
     rows = bigquery.query "SELECT name, spells.name, spells.properties.name, spells.properties.power FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 3
     rows[0].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
     rows[1].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
