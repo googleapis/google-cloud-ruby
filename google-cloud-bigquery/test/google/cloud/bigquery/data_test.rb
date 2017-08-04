@@ -335,28 +335,4 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     data.class.must_equal Google::Cloud::Bigquery::Data
   end
-
-  def table_data_gapi token: "token1234567890"
-    Google::Apis::BigqueryV2::TableDataList.from_json table_data_hash(token: token).to_json
-  end
-
-  def table_data_hash token: "token1234567890"
-    {
-      "kind" => "bigquery#tableDataList",
-      "etag" => "etag1234567890",
-      "rows" => random_data_rows,
-      "pageToken" => token,
-      "totalRows" => "3" # String per google/google-api-ruby-client#439
-    }
-  end
-
-  def nil_table_data_gapi
-    Google::Apis::BigqueryV2::TableDataList.from_json nil_table_data_json
-  end
-
-  def nil_table_data_json
-    h = table_data_hash
-    h.delete "rows"
-    h.to_json
-  end
 end

@@ -16,6 +16,7 @@ require "helper"
 
 describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM `some_project.some_dataset.users`" }
+  let(:job_id) { "job9876543210" }
 
   let(:dataset_id) { "my_dataset" }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
@@ -23,24 +24,12 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   let(:table_id) { "my_table" }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
-  let(:query_request_gapi) do
-    Google::Apis::BigqueryV2::QueryRequest.new(
-      query: query,
-      timeout_ms: 10000,
-      use_query_cache: true,
-      use_legacy_sql: false,
-      parameter_mode: "NAMED",
-      default_dataset: nil,
-      dry_run: nil,
-      max_results: nil
-    )
-  end
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
 
   it "queries the data with a string parameter" do
-    query_request_gapi.query = "#{query} WHERE name = @name"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE name = @name", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "name",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -51,21 +40,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
         )
       )
     ]
-
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE name = @name", params: { name: "Testy McTesterson" }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with an integer parameter" do
-    query_request_gapi.query = "#{query} WHERE age > @age"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE age > @age", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "age",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -79,18 +74,25 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE age > @age", params: { age: 35 }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a float parameter" do
-    query_request_gapi.query = "#{query} WHERE score > @score"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE score > @score", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "score",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -104,18 +106,25 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE score > @score", params: { score: 90.0 }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a true parameter" do
-    query_request_gapi.query = "#{query} WHERE active = @active"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "active",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -129,18 +138,25 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE active = @active", params: { active: true }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a false parameter" do
-    query_request_gapi.query = "#{query} WHERE active = @active"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "active",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -154,20 +170,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE active = @active", params: { active: false }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a date parameter" do
     today = Date.today
 
-    query_request_gapi.query = "#{query} WHERE create_date = @day"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE create_date = @day", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "day",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -181,20 +204,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE create_date = @day", params: { day: today }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a datetime parameter" do
     now = DateTime.now
 
-    query_request_gapi.query = "#{query} WHERE update_datetime < @when"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE update_datetime < @when", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "when",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -208,20 +238,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE update_datetime < @when", params: { when: now }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a timestamp parameter" do
     now = ::Time.now
 
-    query_request_gapi.query = "#{query} WHERE update_timestamp < @when"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE update_timestamp < @when", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "when",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -235,20 +272,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE update_timestamp < @when", params: { when: now }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a time parameter" do
     timeofday = bigquery.time 16, 0, 0
 
-    query_request_gapi.query = "#{query} WHERE create_time = @time"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE create_time = @time", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "time",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -262,20 +306,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE create_time = @time", params: { time: timeofday }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a File parameter" do
     file = File.open "acceptance/data/logo.jpg", "rb"
 
-    query_request_gapi.query = "#{query} WHERE avatar = @file"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "file",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -289,20 +340,27 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE avatar = @file", params: { file: file }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a StringIO parameter" do
     file = StringIO.new File.read("acceptance/data/logo.jpg", mode: "rb")
 
-    query_request_gapi.query = "#{query} WHERE avatar = @file"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "file",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -316,12 +374,19 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE avatar = @file", params: { file: file }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -329,14 +394,14 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     today = Date.today
     now = ::Time.now
 
-    query_request_gapi.query = "#{query} WHERE name = @name" +
+    job_gapi = query_job_gapi "#{query} WHERE name = @name" +
                                        " AND age > @age" +
                                        " AND score > @score" +
                                        " AND active = @active" +
                                        " AND create_date = @date" +
-                                       " AND update_timestamp < @time"
+                                       " AND update_timestamp < @time", parameter_mode: "NAMED"
 
-    query_request_gapi.query_parameters = [
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "name",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -395,7 +460,14 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE name = @name" +
                                   " AND age > @age" +
@@ -413,13 +485,13 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with an array parameter" do
-    query_request_gapi.query = "#{query} WHERE name IN @names"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE name IN @names", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "names",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -440,18 +512,25 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE name IN @names", params: { names: %w{name1 name2 name3} }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   it "queries the data with a struct parameter" do
-    query_request_gapi.query = "#{query} WHERE meta = @meta"
-    query_request_gapi.query_parameters = [
+    job_gapi = query_job_gapi "#{query} WHERE meta = @meta", parameter_mode: "NAMED"
+    job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "meta",
         parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
@@ -484,12 +563,19 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request_gapi]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query "#{query} WHERE meta = @meta", params: { meta: { name: "Testy McTesterson", age: 42, active: false, score: 98.7 } }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 

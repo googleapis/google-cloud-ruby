@@ -15,12 +15,9 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
-  let(:query_request) {
-    qrg = query_request_gapi
-    qrg.default_dataset = nil
-    qrg
-  }
-  let(:query) { query_request.query }
+  let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
+
+  let(:job_id) { "job9876543210" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
@@ -33,12 +30,20 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    job_gapi = query_job_gapi query
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query query
     mock.verify
-    # data.must_be_kind_of Google::Cloud::Bigquery::QueryData
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    # data.must_be_kind_of Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0][:name].must_equal "Heidi"
@@ -60,20 +65,28 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "paginates the data" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    job_gapi = query_job_gapi query
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, "job9876543210", {max_results: nil, page_token: "token1234567890", start_index: nil, timeout_ms: nil}]
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: "token1234567890", start_index: nil }]
 
     data = bigquery.query query
-    # data.must_be_kind_of Google::Cloud::Bigquery::QueryData
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    # data.must_be_kind_of Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     data.token.must_equal "token1234567890"
     data.next?.must_equal true
 
     data2 = data.next
-    data2.class.must_equal Google::Cloud::Bigquery::QueryData
+    data2.class.must_equal Google::Cloud::Bigquery::Data
     data2.count.must_equal 3
     mock.verify
   end
@@ -81,11 +94,18 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with max option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    query_request.max_results = 42
-    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    job_gapi = query_job_gapi query
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: 42, page_token: nil, start_index: nil }]
 
     data = bigquery.query query, max: 42
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -93,13 +113,21 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with dataset option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    query_request.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: "some_random_dataset", project_id: project
     )
-    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query query, dataset: "some_random_dataset"
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -107,38 +135,22 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with dataset and project options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    query_request.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: "some_random_dataset", project_id: "some_random_project"
     )
-    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
 
     data = bigquery.query query, dataset: "some_random_dataset",
                                  project: "some_random_project"
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
-    data.count.must_equal 3
-    mock.verify
-  end
-
-  it "queries the data with timeout option" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    query_request.timeout_ms = 15000
-    mock.expect :query_job, query_data_gapi, [project, query_request]
-
-    data = bigquery.query query, timeout: 15000
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
-    data.count.must_equal 3
-    mock.verify
-  end
-
-  it "queries the data with dryrun option" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    query_request.dry_run = true
-    mock.expect :query_job, query_data_gapi, [project, query_request]
-
-    data = bigquery.query query, dryrun: true
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -146,10 +158,21 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with cache option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :query_job, query_data_gapi, [project, query_request]
 
-    data = bigquery.query query, cache: true
-    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.use_query_cache = false
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+
+
+    data = bigquery.query query, cache: false
+    data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 3
     mock.verify
   end
