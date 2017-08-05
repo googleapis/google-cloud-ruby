@@ -208,7 +208,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -224,7 +224,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -241,7 +241,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -258,7 +258,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
