@@ -52,7 +52,7 @@ module Google
       #   if job.failed?
       #     puts job.error
       #   else
-      #     puts job.query_results.first
+      #     puts job.data.first
       #   end
       #
       class Job
