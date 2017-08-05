@@ -164,41 +164,6 @@ module Google
         #   identifying the result set.
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
-        # @param [Integer] timeout How long to wait for the query to complete,
-        #   in milliseconds, before returning. Default is 10,000 milliseconds
-        #   (10 seconds).
-        #
-        # @return [Google::Cloud::Bigquery::QueryData]
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
-        #   job = bigquery.query_job sql
-        #
-        #   job.wait_until_done!
-        #   data = job.query_results
-        #   data.each do |row|
-        #     puts row[:word]
-        #   end
-        #   data = data.next if data.next?
-        #
-        def query_results token: nil, max: nil, start: nil, timeout: nil
-          ensure_service!
-          options = { token: token, max: max, start: start, timeout: timeout }
-          gapi = service.job_query_results job_id, options
-          QueryData.from_gapi gapi, service
-        end
-
-        ##
-        # Retrieves the query results for the job.
-        #
-        # @param [String] token Page token, returned by a previous call,
-        #   identifying the result set.
-        # @param [Integer] max Maximum number of results to return.
-        # @param [Integer] start Zero-based index of the starting row to read.
         #
         # @return [Google::Cloud::Bigquery::Data]
         #
@@ -227,6 +192,7 @@ module Google
                                              destination_table_table_id, options
           Data.from_gapi data_gapi, destination_table_gapi, service
         end
+        alias_method :query_results, :data
 
         protected
 

@@ -64,6 +64,10 @@ def mock_storage
 end
 
 YARD::Doctest.configure do |doctest|
+  # Skip aliases
+  doctest.skip "Google::Cloud::Bigquery::QueryJob#query_results"
+
+
   # Google::Cloud#bigquery@The default scope can be overridden with the `scope` option:
   doctest.before "Google::Cloud#bigquery" do
     mock_bigquery do |mock|
@@ -167,6 +171,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job, query_job_gapi, ["my-project-id", "1234567890"]
       mock.expect :get_job_query_results, query_data_gapi, ["my-project-id", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil), ["my-project-id", "target_dataset_id", "target_table_id", Hash]
     end
   end
 
@@ -239,6 +244,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
       mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job_query_results, query_data_gapi, ["my-project-id", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil), ["my-project-id", "target_dataset_id", "target_table_id", Hash]
     end
   end
 
@@ -325,6 +331,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job, query_job_gapi, ["my-project-id", "1234567890"]
       mock.expect :get_job_query_results, query_data_gapi, ["my-project-id", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil), ["my-project-id", "target_dataset_id", "target_table_id", Hash]
     end
   end
 
@@ -352,15 +359,9 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigquery::QueryData#all@Using the enumerator by not passing a block:
   # Google::Cloud::Bigquery::QueryData#next
   # Google::Cloud::Bigquery::QueryData#next?
-  doctest.before "Google::Cloud::Bigquery::QueryData" do
-    mock_bigquery do |mock|
-      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
-      mock.expect :get_job, query_job_gapi, ["my-project-id", "my_job"]
-      mock.expect :get_job_query_results, query_data_gapi(token: nil), ["my-project-id", "1234567890", Hash]
-    end
-  end
+  doctest.skip "Google::Cloud::Bigquery::QueryData" # TODO Remove with class, or reinstate
 
-  # Google::Cloud::Bigquery::QueryJob#query_results
+  # Google::Cloud::Bigquery::QueryJob#data
   doctest.before "Google::Cloud::Bigquery::QueryJob" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
