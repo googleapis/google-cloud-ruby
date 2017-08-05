@@ -246,17 +246,17 @@ module Google
     #
     # job.wait_until_done!
     # if !job.failed?
-    #   job.query_results.first
+    #   job.data.first
     #   #=> {:title=>[{:value=>"hamlet", :count=>5318}, ...}
     # end
     # ```
     #
     # Once you have determined that the job is done and has not failed, you can
-    # obtain an instance of {Google::Cloud::Bigquery::QueryData} by calling
-    # `query_results` on the job instance. The query results for both of the
-    # above examples are stored in temporary tables with a lifetime of about 24
-    # hours. See the final example below for a demonstration of how to store
-    # query results in a permanent table.
+    # obtain an instance of {Google::Cloud::Bigquery::Data} by calling `data` on
+    # the job instance. The query results for both of the above examples are
+    # stored in temporary tables with a lifetime of about 24 hours. See the
+    # final example below for a demonstration of how to store query results in a
+    # permanent table.
     #
     # ## Creating Datasets and Tables
     #
