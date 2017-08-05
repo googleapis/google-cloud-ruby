@@ -191,9 +191,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
-    query_job.query_results.class.must_equal Google::Cloud::Bigquery::QueryData
-    query_job.query_results.count.wont_be :nil?
-    query_job.query_results.job.job_id.must_equal query_job.job_id
+    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.total.wont_be :nil?
 
     data = table.data max: 1
     data.class.must_equal Google::Cloud::Bigquery::Data
