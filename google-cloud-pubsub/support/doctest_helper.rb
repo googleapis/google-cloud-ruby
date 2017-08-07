@@ -170,30 +170,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Project#publish" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Pubsub::Project#publish@Additionally, a message can be published with attributes:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed", {"foo"=>"bar", "this"=>"that"})], Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Pubsub::Project#publish@Multiple messages can be sent at the same time using a block:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      messages = [
-        pubsub_message("task 1 completed", { "foo" => "bar" }),
-        pubsub_message("task 2 completed", { "foo" => "baz" }),
-        pubsub_message("task 3 completed", { "foo" => "bif" })
-      ]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Pubsub::Project#subscribe" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
