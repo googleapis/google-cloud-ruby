@@ -364,7 +364,7 @@
     "name": "utah",
     "type": "LOCATION",
     "metadata": {
-      "wikipedia_url": "http://en.wikipedia.org/wiki/Utah",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Utah",
       "mid": "/m/07srw"
     },
     "salience": 0.061737571,
