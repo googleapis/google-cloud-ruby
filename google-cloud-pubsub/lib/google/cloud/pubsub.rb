@@ -222,6 +222,29 @@ module Google
     # msgs = sub.wait_for_messages
     # ```
     #
+    # Messages can also be streamed from a subscription with a subscriber object
+    # that can be created using `listen`. (See
+    # {Google::Cloud::Pubsub::Subscription#listen} and
+    # {Google::Cloud::Pubsub::Subscriber})
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    #
+    # subscriber = sub.listen do |msg|
+    #   # process msg
+    #   msg.ack!
+    # end
+    #
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
+    # ```
+    #
     # ## Acknowledging a Message
     #
     # Messages that are received can be acknowledged in Pub/Sub, marking the
