@@ -248,63 +248,6 @@ module Google
         alias_method :list_topics, :topics
 
         ##
-        # Creates a new {Subscription} object for the provided topic.
-        #
-        # @param [String] topic_name Name of a topic.
-        # @param [String] subscription_name Name of the new subscription. Must
-        #   start with a letter, and contain only letters ([A-Za-z]), numbers
-        #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
-        #   (+) or percent signs (%). It must be between 3 and 255 characters in
-        #   length, and it must not start with "goog".
-        # @param [Integer] deadline The maximum number of seconds after a
-        #   subscriber receives a message before the subscriber should
-        #   acknowledge the message.
-        # @param [Boolean] retain_acked Indicates whether to retain acknowledged
-        #   messages. If `true`, then messages are not expunged from the
-        #   subscription's backlog, even if they are acknowledged, until they
-        #   fall out of the `retention_duration` window. Default is `false`.
-        # @param [Numeric] retention How long to retain unacknowledged messages
-        #   in the subscription's backlog, from the moment a message is
-        #   published. If `retain_acked` is `true`, then this also configures
-        #   the retention of acknowledged messages, and thus configures how far
-        #   back in time a {#seek} can be done. Cannot be more than 604,800
-        #   seconds (7 days) or less than 600 seconds (10 minutes). Default is
-        #   604,800 seconds (7 days).
-        # @param [String] endpoint A URL locating the endpoint to which messages
-        #   should be pushed.
-        #
-        # @return [Google::Cloud::Pubsub::Subscription]
-        #
-        # @example
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscribe "my-topic", "my-topic-sub"
-        #   sub.name #=> "my-topic-sub"
-        #
-        # @example Wait 2 minutes for acknowledgement and push all to endpoint:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.subscribe "my-topic", "my-topic-sub",
-        #                          deadline: 120,
-        #                          endpoint: "https://example.com/push"
-        #
-        def subscribe topic_name, subscription_name, deadline: nil,
-                      retain_acked: false, retention: nil, endpoint: nil
-          ensure_service!
-          options = { deadline: deadline, retain_acked: retain_acked,
-                      retention: retention, endpoint: endpoint }
-          grpc = service.create_subscription topic_name,
-                                             subscription_name, options
-          Subscription.from_grpc grpc, service
-        end
-        alias_method :create_subscription, :subscribe
-        alias_method :new_subscription, :subscribe
-
-        ##
         # Retrieves subscription by name.
         #
         # @param [String] subscription_name Name of a subscription.

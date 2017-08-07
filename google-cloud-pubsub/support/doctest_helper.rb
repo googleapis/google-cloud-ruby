@@ -170,12 +170,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Project#subscribe" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Pubsub::Project#subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
