@@ -33,9 +33,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.score.must_be_kind_of Float
-      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
-      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -54,9 +52,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.sentences.first.offset.must_equal 0
       annotation.sentences.first.must_be :sentiment?
       annotation.sentences.first.score.must_be_kind_of Float
-      annotation.sentences.first.score.wont_be :zero?
       annotation.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentences.first.magnitude.wont_be :zero?
 
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
@@ -78,9 +74,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.score.must_be_kind_of Float
-      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
-      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -99,9 +93,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.sentences.first.offset.must_equal 0
       annotation.sentences.first.must_be :sentiment?
       annotation.sentences.first.score.must_be_kind_of Float
-      annotation.sentences.first.score.wont_be :zero?
       annotation.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentences.first.magnitude.wont_be :zero?
 
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
@@ -123,9 +115,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.score.must_be_kind_of Float
-      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
-      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -144,9 +134,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.sentences.first.offset.must_equal 0
       annotation.sentences.first.must_be :sentiment?
       annotation.sentences.first.score.must_be_kind_of Float
-      annotation.sentences.first.score.wont_be :zero?
       annotation.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentences.first.magnitude.wont_be :zero?
 
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
@@ -168,9 +156,7 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.score.must_be_kind_of Float
-      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
-      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.entities.count.must_equal 5
       annotation.entities.language.must_equal "en"
@@ -189,9 +175,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.sentences.first.offset.must_equal 0
       annotation.sentences.first.must_be :sentiment?
       annotation.sentences.first.score.must_be_kind_of Float
-      annotation.sentences.first.score.wont_be :zero?
       annotation.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentences.first.magnitude.wont_be :zero?
 
       annotation.tokens.count.must_equal 24
       token = annotation.tokens.first
@@ -240,17 +224,13 @@ describe "Language (TEXT/Storage URL)", :language do
 
       annotation.sentiment.language.must_equal "en"
       annotation.sentiment.score.must_be_kind_of Float
-      annotation.sentiment.score.wont_be :zero?
       annotation.sentiment.magnitude.must_be_kind_of Float
-      annotation.sentiment.magnitude.wont_be :zero?
 
       annotation.sentiment.sentences.first.text.must_equal hello
       annotation.sentiment.sentences.first.offset.must_equal 0
       annotation.sentiment.sentences.first.must_be :sentiment?
       annotation.sentiment.sentences.first.score.must_be_kind_of Float
-      annotation.sentiment.sentences.first.score.wont_be :zero?
       annotation.sentiment.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentiment.sentences.first.magnitude.wont_be :zero?
 
       annotation.entities.must_be :empty?
 
@@ -259,9 +239,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.sentences.first.offset.must_equal 0
       annotation.sentences.first.must_be :sentiment?
       annotation.sentences.first.score.must_be_kind_of Float
-      annotation.sentences.first.score.wont_be :zero?
       annotation.sentences.first.magnitude.must_be_kind_of Float
-      annotation.sentences.first.magnitude.wont_be :zero?
 
       annotation.tokens.must_be :empty?
     end
@@ -332,8 +310,8 @@ describe "Language (TEXT/Storage URL)", :language do
 
       entities.places.first.name.must_equal "Utah"
       entities.places.first.type.must_equal :LOCATION
-      entities.places.first.metadata.must_equal({"wikipedia_url"=>"http://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
-      entities.places.first.wikipedia_url.must_equal "http://en.wikipedia.org/wiki/Utah"
+      entities.places.first.metadata.must_equal({"wikipedia_url"=>"https://en.wikipedia.org/wiki/Utah", "mid"=>"/m/07srw"})
+      entities.places.first.wikipedia_url.must_equal "https://en.wikipedia.org/wiki/Utah"
       entities.places.first.mid.must_equal "/m/07srw"
       entities.places.first.salience.must_be_kind_of Float
       entities.places.first.mentions.count.must_equal 1
@@ -354,18 +332,14 @@ describe "Language (TEXT/Storage URL)", :language do
       sentiment.language.must_equal "en"
 
       sentiment.score.must_be_kind_of Float
-      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
-      sentiment.magnitude.wont_be :zero?
 
       sentiment.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       sentiment.sentences.first.text.must_equal hello
       sentiment.sentences.first.offset.must_equal 0
       sentiment.sentences.first.must_be :sentiment?
       sentiment.sentences.first.score.must_be_kind_of Float
-      sentiment.sentences.first.score.wont_be :zero?
       sentiment.sentences.first.magnitude.must_be_kind_of Float
-      sentiment.sentences.first.magnitude.wont_be :zero?
     end
 
     it "works with creating a document" do
@@ -378,18 +352,14 @@ describe "Language (TEXT/Storage URL)", :language do
       sentiment.language.must_equal "en"
 
       sentiment.score.must_be_kind_of Float
-      sentiment.score.wont_be :zero?
       sentiment.magnitude.must_be_kind_of Float
-      sentiment.magnitude.wont_be :zero?
 
       sentiment.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       sentiment.sentences.first.text.must_equal hello
       sentiment.sentences.first.offset.must_equal 0
       sentiment.sentences.first.must_be :sentiment?
       sentiment.sentences.first.score.must_be_kind_of Float
-      sentiment.sentences.first.score.wont_be :zero?
       sentiment.sentences.first.magnitude.must_be_kind_of Float
-      sentiment.sentences.first.magnitude.wont_be :zero?
     end
   end
 end
