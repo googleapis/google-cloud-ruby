@@ -1,5 +1,10 @@
 # Release History
 
+### 0.8.0 / 2017-08-07
+
+* Debugger 0.27.0 release.
+* Trace 0.27.0 release.
+
 ### 0.7.0 / 2017-07-11
 
 * Debugger 0.26.0 release.
