@@ -1,5 +1,9 @@
 # Release History
 
+### 0.38.0 / 2017-08-07
+
+* Trace 0.27.0 release.
+
 ### 0.37.0 / 2017-07-28
 
 * Speech 0.26.0 release.
