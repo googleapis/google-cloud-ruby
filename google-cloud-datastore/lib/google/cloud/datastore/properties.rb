@@ -73,17 +73,13 @@ module Google
         alias_method :to_hash, :to_h
 
         def to_grpc
-          Hash[@hash.map { |(k, v)| [k.to_s, Convert.to_value(v)] }]
+          # Convert to Hash with Google::Datastore::V1::Value values.
+          Hash[@hash.map { |k, v| [k.to_s, Convert.to_value(v)] }]
         end
 
         def self.from_grpc grpc_map
-          # For some reason Google::Protobuf::Map#map isn't returning the value.
-          # It returns nil every time. COnvert to Hash to get actual objects.
-          grpc_hash = Convert.map_to_hash grpc_map
-          grpc_array = grpc_hash.map do |(k, v)|
-            [k.to_s, Convert.from_value(v)]
-          end
-          new Hash[grpc_array]
+          # Convert to Hash of string keys and raw values.
+          new Hash[grpc_map.map { |k, v| [k.to_s, Convert.from_value(v)] }]
         end
 
         protected

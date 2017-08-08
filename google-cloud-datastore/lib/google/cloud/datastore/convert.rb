@@ -53,17 +53,6 @@ module Google
           end
         end
 
-        ##
-        # @private Convert a Google::Protobuf::Map to a Hash
-        def self.map_to_hash map
-          if map.respond_to? :to_h
-            map.to_h
-          else
-            # Enumerable doesn't have to_h on ruby 2.0...
-            Hash[map.to_a]
-          end
-        end
-
         PROP_FILTER_OPS = { "<"            => :LESS_THAN,
                             "lt"           => :LESS_THAN,
                             "<="           => :LESS_THAN_OR_EQUAL,
