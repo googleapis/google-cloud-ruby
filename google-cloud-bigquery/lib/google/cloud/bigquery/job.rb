@@ -15,7 +15,6 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
-require "google/cloud/bigquery/query_data"
 require "google/cloud/bigquery/job/list"
 require "json"
 

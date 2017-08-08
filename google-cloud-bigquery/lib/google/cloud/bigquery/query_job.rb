@@ -14,6 +14,7 @@
 
 
 require "google/cloud/bigquery/service"
+require "google/cloud/bigquery/data"
 
 module Google
   module Cloud
