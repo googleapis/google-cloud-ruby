@@ -72,7 +72,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   it "returns data" do
     data = view.data max: 2
 
-    data.class.name.must_equal "Google::Cloud::Bigquery::QueryData" # Array delegate
+    data.class.name.must_equal "Google::Cloud::Bigquery::Data" # Array delegate
     data.count.must_equal 2
   end
 end

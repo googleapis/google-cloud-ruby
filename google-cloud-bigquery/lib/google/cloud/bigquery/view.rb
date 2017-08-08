@@ -349,7 +349,11 @@ module Google
         end
 
         ##
-        # Runs a query to retrieve all data from the view.
+        # Runs a query to retrieve all data from the view, in a synchronous
+        # method that blocks for a response. In this method, a {QueryJob} is
+        # created and its results are saved to a temporary table, then read from
+        # the table. Timeouts and transient errors are generally handled as
+        # needed to complete the query.
         #
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
@@ -357,23 +361,13 @@ module Google
         #   result set is large. In addition to this limit, responses are also
         #   limited to 10 MB. By default, there is no maximum row count, and
         #   only the byte limit applies.
-        # @param [Integer] timeout How long to wait for the query to complete,
-        #   in milliseconds, before the request times out and returns. Note that
-        #   this is only a timeout for the request, not the query. If the query
-        #   takes longer to run than the timeout value, the call returns without
-        #   any results and with QueryData#complete? set to false. The default
-        #   value is 10000 milliseconds (10 seconds).
         # @param [Boolean] cache Whether to look for the result in the query
         #   cache. The query cache is a best-effort cache that will be flushed
         #   whenever tables in the query are modified. The default value is
         #   true. For more information, see [query
         #   caching](https://developers.google.com/bigquery/querying-data).
-        # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the
-        #   job. Instead, if the query is valid, BigQuery returns statistics
-        #   about the job such as how many bytes would be processed. If the
-        #   query is invalid, an error returns. The default value is `false`.
         #
-        # @return [Google::Cloud::Bigquery::QueryData]
+        # @return [Google::Cloud::Bigquery::Data]
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -390,12 +384,17 @@ module Google
         #
         # @!group Data
         #
-        def data max: nil, timeout: 10000, cache: true, dryrun: nil
+        def data max: nil, cache: true
           sql = "SELECT * FROM #{query_id}"
           ensure_service!
-          options = { max: max, timeout: timeout, cache: cache, dryrun: dryrun }
-          gapi = service.query sql, options
-          QueryData.from_gapi gapi, service
+
+          gapi = service.query_job sql, cache: cache
+          job = Job.from_gapi gapi, service
+          job.wait_until_done!
+
+          # TODO: Use an appropriate Error subclass for code/reason. See #1648
+          fail Google::Cloud::Error, job.error["message"] if job.failed?
+          job.data max: max
         end
 
         ##
