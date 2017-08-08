@@ -228,10 +228,6 @@ module Google
           execute { service.insert_job @project, config }
         end
 
-        def query query, options = {}
-          execute { service.query_job @project, query_config(query, options) }
-        end
-
         ##
         # Returns the query data for the job
         def job_query_results job_id, options = {}
