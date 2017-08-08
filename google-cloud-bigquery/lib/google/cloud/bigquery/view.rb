@@ -15,7 +15,6 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
-require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/apis/bigquery_v2"
 
