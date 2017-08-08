@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.0 / 2017-08-07
+
+* Add instrumentation to collect outbound GRPC requests information. 
+
 ### 0.26.1 / 2017-07-11
 
 * stackdriver-core 1.2.0 release
