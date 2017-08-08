@@ -314,7 +314,7 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigquery::Project#query@Query using named query parameters:
   # Google::Cloud::Bigquery::Project#query@Query using positional query parameters:
   # Google::Cloud::Bigquery::Project#query@Query using standard SQL:
-  # Google::Cloud::Bigquery::Project#query@Retrieve all rows: (See {QueryData#all})
+  # Google::Cloud::Bigquery::Project#query@Retrieve all rows: (See {Data#all})
   doctest.before "Google::Cloud::Bigquery::Project#query" do
     mock_bigquery do |mock|
       mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
@@ -353,13 +353,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :list_projects, list_projects_gapi, [Hash]
     end
   end
-
-  # Google::Cloud::Bigquery::QueryData#all@Iterating each row by passing a block:
-  # Google::Cloud::Bigquery::QueryData#all@Limit the number of API calls made:
-  # Google::Cloud::Bigquery::QueryData#all@Using the enumerator by not passing a block:
-  # Google::Cloud::Bigquery::QueryData#next
-  # Google::Cloud::Bigquery::QueryData#next?
-  doctest.skip "Google::Cloud::Bigquery::QueryData" # TODO Remove with class, or reinstate
 
   # Google::Cloud::Bigquery::QueryJob#data
   doctest.before "Google::Cloud::Bigquery::QueryJob" do
