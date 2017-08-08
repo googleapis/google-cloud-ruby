@@ -1,5 +1,15 @@
 # Release History
 
+### 0.27.0 / 2017-08-07
+
+* Optimize breakpoint evaluation memory usage by adopting shared variable table.
+* Update breakpoint to error state if the breakpoint is set at an invalid position or 
+    if condition evaluation fail with an error.
+* Set errored variable evaluation to error state.
+* Restrict the amount of time spent on evaluating breakpoints within each rack application request.
+* Restrict total memory usage on collecting variables within each breakpoint evaluation. Prioritize 
+    memory allocation to user defined variables over local variables. 
+
 ### 0.26.1 / 2017-07-11
 
 * stackdriver-core 1.2.0 release
