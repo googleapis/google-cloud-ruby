@@ -316,7 +316,7 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
     mock.expect :publish, big_publish_res, [topic_path(topic_name), [big_message], options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    # 190 is bigger than 10 messages, but less than 11.
+    # the big message's 120 bytes is bigger than the max bytes limit
     publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 100
 
     callbacks = 0
@@ -344,6 +344,8 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
     publisher.batch.must_be :nil?
 
     callbacks.must_equal 2
+
+    sleep 0.1
 
     mock.verify
   end
