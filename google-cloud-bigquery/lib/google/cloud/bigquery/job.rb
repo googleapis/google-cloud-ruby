@@ -191,17 +191,14 @@ module Google
         #   }
         #
         def error
-          return nil if @gapi.status.nil?
-          return nil if @gapi.status.error_result.nil?
-          JSON.parse @gapi.status.error_result.to_json
+          status["errorResult"]
         end
 
         ##
         # The errors for the job, if any errors have occurred. Returns an array
         # of hash objects. See {#error}.
         def errors
-          return [] if @gapi.status.nil?
-          Array(@gapi.status.errors).map { |e| JSON.parse e.to_json }
+          Array status["errors"]
         end
 
         ##
@@ -265,6 +262,20 @@ module Google
           end
         end
 
+        ##
+        # @private New Google::Apis::Error with job failure details
+        def gapi_error
+          return nil unless failed?
+
+          error_status_code = status_code_for_reason error["reason"]
+          error_body = error
+          error_body["errors"] = errors
+
+          Google::Apis::Error.new error["message"],
+                                  status_code: error_status_code,
+                                  body: error_body
+        end
+
         protected
 
         ##
@@ -294,6 +305,19 @@ module Google
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil
+        end
+
+        def status_code_for_reason reason
+          codes = { "accessDenied" => 403, "backendError" => 500,
+                    "billingNotEnabled" => 403,
+                    "billingTierLimitExceeded" => 400, "blocked" => 403,
+                    "duplicate" => 409, "internalError" =>500, "invalid" => 400,
+                    "invalidQuery" => 400, "notFound" =>404,
+                    "notImplemented" => 501, "quotaExceeded" => 403,
+                    "rateLimitExceeded" => 403, "resourceInUse" => 400,
+                    "resourcesExceeded" => 400, "responseTooLarge" => 403,
+                    "tableUnavailable" => 400 }
+          codes[reason] || 0
         end
       end
     end
