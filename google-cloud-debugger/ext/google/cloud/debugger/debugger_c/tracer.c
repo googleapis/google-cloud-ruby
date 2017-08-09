@@ -139,15 +139,23 @@ static void
 line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE klass)
 {
     VALUE self = data;
-    const char *c_trace_path = rb_sourcefile();
-    int c_trace_lineno = rb_sourceline();
+    VALUE trace_path;
+    int c_trace_lineno;
+    const char *c_trace_path;
     VALUE trace_binding;
     VALUE call_stack_bindings;
-
-    VALUE matching_result = match_breakpoints(self, c_trace_path, c_trace_lineno);
-
     ID callers_id;
     ID breakpoints_hit_id;
+    VALUE matching_result;
+
+    c_trace_path = rb_sourcefile();
+    // Ensure C_trace_path is absolute path
+    trace_path = rb_str_new_cstr(c_trace_path);
+    trace_path = rb_file_expand_path(trace_path, Qnil);
+    c_trace_path = rb_string_value_cstr(&trace_path);
+
+    c_trace_lineno = rb_sourceline();
+    matching_result = match_breakpoints(self, c_trace_path, c_trace_lineno);
 
     CONST_ID(callers_id, "callers");
     CONST_ID(breakpoints_hit_id, "breakpoints_hit");
@@ -371,6 +379,9 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
 
     if (!RB_TYPE_P(tracepoint_path, T_STRING))
         return;
+
+    // Ensure tracepoint_path is absolute path
+    tracepoint_path = rb_file_expand_path(tracepoint_path, Qnil);
 
     match_found = match_breakpoints_files(self, tracepoint_path);
 
