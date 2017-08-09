@@ -21,8 +21,11 @@ Google::Cloud.configure do |config|
   config.logging.log_name = "google-cloud-ruby_integration_test"
 end
 
+$debugger = Google::Cloud::Debugger.new
+
 #######################################
 # Setup Middlewares
+use Google::Cloud::Debugger::Middleware, debugger: $debugger
 use Google::Cloud::ErrorReporting::Middleware
 use Google::Cloud::Logging::Middleware
 
@@ -34,11 +37,37 @@ set :port, 8080
 
 
 get '/' do
-  "Test classic sinatra app up and running"
+  "google-cloud-ruby classic sinatra app up and running"
 end
 
 get '/_ah/health' do
   "Success"
+end
+
+def trigger_breakpoint
+  local_var = 6 * 7
+  local_var
+end
+
+get '/test_debugger_info' do
+  debuggee_id = $debugger.agent.debuggee.id
+  agent_version = $debugger.agent.debuggee.send :agent_version
+  file_path = __FILE__
+  line = method(:trigger_breakpoint).source_location.last + 2
+
+  {
+    debuggee_id: debuggee_id,
+    agent_version: agent_version,
+    breakpoint_file_path: file_path,
+    breakpoint_line: line,
+    logger_monitored_resource_type: logger.resource.type
+  }.to_json
+end
+
+get '/test_debugger' do
+  trigger_breakpoint
+
+  "breakpoint triggered"
 end
 
 get '/test_error_reporting' do

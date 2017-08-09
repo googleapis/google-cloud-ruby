@@ -65,5 +65,5 @@ gem "google-cloud-translate", path: "../../google-cloud-translate"
 gem "google-cloud-vision", path: "../../google-cloud-vision"
 gem "google-cloud", path: "../../google-cloud"
 gem "gcloud", path: "../../gcloud"
-gem "stackdriver", path: "../../stackdriver"
+gem "stackdriver", path: "../../stackdriver", require: false
 gem "stackdriver-core", path: "../../stackdriver-core"

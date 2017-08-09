@@ -3,6 +3,32 @@ class TestController < ApplicationController
     render text: "google-cloud-ruby Rails 5 test app"
   end
 
+  def trigger_breakpoint
+    local_var = 6 * 7
+    local_var
+  end
+
+  def test_debugger_info
+    debuggee_id = $debugger.agent.debuggee.id
+    agent_version = $debugger.agent.debuggee.send :agent_version
+    file_path = "app/controllers/test_controller.rb"
+    line = method(:trigger_breakpoint).source_location.last + 2
+
+    render json: {
+      debuggee_id: debuggee_id,
+      agent_version: agent_version,
+      breakpoint_file_path: file_path,
+      breakpoint_line: line,
+      logger_monitored_resource_type: Rails.logger.resource.type
+    }
+  end
+
+  def test_debugger
+    trigger_breakpoint
+
+    render text: "breakpoint triggered"
+  end
+
   def test_error_reporting
     error_toke = params[:token]
     raise "Test error from Rails 5: #{error_toke}"
