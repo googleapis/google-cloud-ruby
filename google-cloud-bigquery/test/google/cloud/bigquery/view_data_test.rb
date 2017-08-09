@@ -170,4 +170,62 @@ describe Google::Cloud::Bigquery::View, :data, :mock_bigquery do
     data2.class.must_equal Google::Cloud::Bigquery::Data
     mock.verify
   end
+
+  it "raises when the job fails with reason accessDenied" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.priority = nil
+
+    mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+
+    err = expect { view.data }.must_raise Google::Cloud::PermissionDeniedError
+    err.message.must_equal "string"
+    if err.respond_to? :cause
+      err.cause.body.must_equal({
+        "debugInfo"=>"string",
+        "location"=>"string",
+        "message"=>"string",
+        "reason"=>"accessDenied",
+        "errors"=>[{
+          "debugInfo"=>"string",
+          "location"=>"string",
+          "message"=>"string",
+          "reason"=>"accessDenied"
+        }]
+      })
+    end
+
+    mock.verify
+  end
+
+  it "raises when the job fails with reason backendError" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.priority = nil
+
+    mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id, reason: "backendError"), [project, job_gapi]
+
+    err = expect { view.data }.must_raise Google::Cloud::InternalError
+    err.message.must_equal "string"
+    if err.respond_to? :cause
+      err.cause.body.must_equal({
+        "debugInfo"=>"string",
+        "location"=>"string",
+        "message"=>"string",
+        "reason"=>"backendError",
+        "errors"=>[{
+          "debugInfo"=>"string",
+          "location"=>"string",
+          "message"=>"string",
+          "reason"=>"backendError"
+        }]
+      })
+    end
+
+    mock.verify
+  end
 end
