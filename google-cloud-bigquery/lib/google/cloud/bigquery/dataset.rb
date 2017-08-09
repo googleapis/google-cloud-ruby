@@ -827,8 +827,16 @@ module Google
           job = query_job query, options
           job.wait_until_done!
 
-          # TODO: Use an appropriate Error subclass for code/reason. See #1648
-          fail Google::Cloud::Error, job.error["message"] if job.failed?
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
           job.data max: max
         end
 
