@@ -410,6 +410,32 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
+  def failed_query_job_resp_gapi query, job_id: job_id, reason: "accessDenied"
+    Google::Apis::BigqueryV2::Job.from_json failed_query_job_resp_json(query, job_id: job_id, reason: reason)
+  end
+
+  def failed_query_job_resp_json query, job_id: "job9876543210", reason: "accessDenied"
+    hash = JSON.parse query_job_resp_json(query, job_id: job_id)
+    hash["status"] = {
+      "state" => "done",
+      "errorResult" => {
+        "reason" => reason,
+        "location" => "string",
+        "debugInfo" => "string",
+        "message" => "string"
+      },
+      "errors" => [
+        {
+          "reason" => reason,
+          "location" => "string",
+          "debugInfo" => "string",
+          "message" => "string"
+        }
+      ]
+    }
+    hash.to_json
+  end
+
   def query_job_gapi query, parameter_mode: nil, dataset: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
