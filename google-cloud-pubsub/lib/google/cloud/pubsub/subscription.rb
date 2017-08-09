@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/received_message"
@@ -50,26 +51,15 @@ module Google
         # @private Create an empty {Subscription} object.
         def initialize
           @service = nil
-          @grpc = Google::Pubsub::V1::Subscription.new
-          @name = nil
+          @grpc = nil
+          @lazy = nil
           @exists = nil
-        end
-
-        ##
-        # @private New lazy {Topic} object without making an HTTP request.
-        def self.new_lazy name, service, options = {}
-          new.tap do |s|
-            s.grpc = nil
-            s.service = service
-            s.instance_variable_set "@name",
-                                    service.subscription_path(name, options)
-          end
         end
 
         ##
         # The name of the subscription.
         def name
-          @grpc ? @grpc.name : @name
+          @grpc.name
         end
 
         ##
@@ -99,6 +89,15 @@ module Google
           @grpc.ack_deadline_seconds
         end
 
+        def deadline= new_deadline
+          update_grpc = @grpc.dup
+          update_grpc.ack_deadline_seconds = new_deadline
+          @grpc = service.update_subscription update_grpc,
+                                              :ack_deadline_seconds
+          @lazy = nil
+          self
+        end
+
         ##
         # Indicates whether to retain acknowledged messages. If `true`, then
         # messages are not expunged from the subscription's backlog, even if
@@ -111,6 +110,15 @@ module Google
         def retain_acked
           ensure_grpc!
           @grpc.retain_acked_messages
+        end
+
+        def retain_acked= new_retain_acked
+          update_grpc = @grpc.dup
+          update_grpc.retain_acked_messages = !(!new_retain_acked)
+          @grpc = service.update_subscription update_grpc,
+                                              :retain_acked_messages
+          @lazy = nil
+          self
         end
 
         ##
@@ -126,7 +134,17 @@ module Google
         #
         def retention
           ensure_grpc!
-          duration_to_number @grpc.message_retention_duration
+          Convert.duration_to_number @grpc.message_retention_duration
+        end
+
+        def retention= new_retention
+          update_grpc = @grpc.dup
+          update_grpc.message_retention_duration = \
+            Convert.number_to_duration new_retention
+          @grpc = service.update_subscription update_grpc,
+                                              :message_retention_duration
+          @lazy = nil
+          self
         end
 
         ##
@@ -160,12 +178,12 @@ module Google
         #   sub.exists? #=> true
         #
         def exists?
-          # Always true if we have a grpc object
-          return true unless @grpc.nil?
+          # Always true if the object is not set as lazy
+          return true unless lazy?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_grpc!
-          @exists = !@grpc.nil?
+          @exists = true
         rescue Google::Cloud::NotFoundError
           @exists = false
         end
@@ -181,10 +199,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.get_subscription "my-topic-sub"
-        #   sub.lazy? #=> false
+        #   sub.lazy? #=> nil
         #
         def lazy?
-          @grpc.nil?
+          @lazy
         end
 
         ##
@@ -643,15 +661,17 @@ module Google
           end
         end
 
-        protected
-
-        def duration_to_number duration
-          return nil if duration.nil?
-
-          return duration.seconds if duration.nanos == 0
-
-          duration.seconds + (duration.nanos / 1000000000.0)
+        ##
+        # @private New lazy {Topic} object without making an HTTP request.
+        def self.new_lazy name, service, options = {}
+          lazy_grpc = Google::Pubsub::V1::Subscription.new \
+            name: service.subscription_path(name, options)
+          from_grpc(lazy_grpc, service).tap do |s|
+            s.instance_variable_set :@lazy, true
+          end
         end
+
+        protected
 
         ##
         # @private Raise an error unless an active connection to the service is
@@ -664,8 +684,8 @@ module Google
         # Ensures a Google::Pubsub::V1::Subscription object exists.
         def ensure_grpc!
           ensure_service!
-          return @grpc if @grpc
-          @grpc = service.get_subscription @name
+          @grpc = service.get_subscription name if lazy?
+          @lazy = nil
         end
 
         ##

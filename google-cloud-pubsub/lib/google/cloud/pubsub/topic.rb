@@ -49,8 +49,8 @@ module Google
         # @private Create an empty {Topic} object.
         def initialize
           @service = nil
-          @grpc = Google::Pubsub::V1::Topic.new
-          @name = nil
+          @grpc = nil
+          @lazy = nil
           @exists = nil
           @async_opts = {}
         end
@@ -82,20 +82,10 @@ module Google
         end
 
         ##
-        # @private New lazy {Topic} object without making an HTTP request.
-        def self.new_lazy name, service, options = {}
-          new.tap do |t|
-            t.grpc = nil
-            t.service = service
-            t.instance_variable_set "@name", service.topic_path(name, options)
-          end
-        end
-
-        ##
         # The name of the topic in the form of
         # "/projects/project-identifier/topics/topic-name".
         def name
-          @grpc ? @grpc.name : @name
+          @grpc.name
         end
 
         ##
@@ -513,12 +503,14 @@ module Google
         #   topic.exists? #=> true
         #
         def exists?
-          # Always true if we have a grpc object
-          return true unless @grpc.nil?
+          # Always true if the object is not set as lazy
+          return true unless lazy?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_grpc!
-          @exists = !@grpc.nil?
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
         end
 
         ##
@@ -531,10 +523,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   topic.lazy? #=> false
+        #   topic.lazy? #=> nil
         #
         def lazy?
-          @grpc.nil?
+          @lazy
         end
 
         ##
@@ -544,6 +536,16 @@ module Google
             t.grpc = grpc
             t.service = service
             t.instance_variable_set :@async_opts, async if async
+          end
+        end
+
+        ##
+        # @private New lazy {Topic} object without making an HTTP request.
+        def self.new_lazy name, service, options = {}
+          lazy_grpc = Google::Pubsub::V1::Topic.new \
+            name: service.topic_path(name, options)
+          from_grpc(lazy_grpc, service).tap do |t|
+            t.instance_variable_set :@lazy, true
           end
         end
 
@@ -560,10 +562,8 @@ module Google
         # Ensures a Google::Pubsub::V1::Topic object exists.
         def ensure_grpc!
           ensure_service!
-          return @grpc if @grpc
-          @grpc = service.get_topic @name
-        rescue Google::Cloud::NotFoundError
-          nil
+          @grpc = service.get_topic name if lazy?
+          @lazy = nil
         end
 
         ##
