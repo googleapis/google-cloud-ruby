@@ -376,7 +376,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         tmp.size.must_equal 0
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
-        extract_job = table.extract extract_file
+        job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+
+        extract_job = table.extract extract_file, job_id: job_id
+        extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?
         # Refresh to get the latest file data
