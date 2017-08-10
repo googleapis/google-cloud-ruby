@@ -274,9 +274,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "copies itself to another table" do
-    copy_job = table.copy target_table_id, create: :needed, write: :empty
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy target_table_id, create: :needed, write: :empty, job_id: job_id
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.job_id.must_equal job_id
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
