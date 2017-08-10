@@ -165,8 +165,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
-    query_job = dataset.query_job query
+
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.job_id.must_equal job_id
     query_job.wait_until_done!
 
     # Job methods
