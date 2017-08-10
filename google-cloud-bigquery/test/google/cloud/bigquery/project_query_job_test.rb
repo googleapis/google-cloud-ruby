@@ -120,16 +120,16 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
-
     job_id = "my_test_job_id"
-    job_gapi.job_reference = job_reference_gapi project, job_id
+    job_gapi = query_job_gapi query, job_id: job_id
+
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = bigquery.query_job query, job_id: job_id
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
   end
 
   it "queries the data with prefix option" do
@@ -140,30 +140,30 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
+    job_gapi = query_job_gapi query, job_id: job_id
 
-    job_gapi.job_reference = job_reference_gapi project, job_id
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = bigquery.query_job query, prefix: prefix
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
   end
 
   it "queries the data with job_id option if both job_id and prefix options are provided" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
-
     job_id = "my_test_job_id"
-    job_gapi.job_reference = job_reference_gapi project, job_id
+    job_gapi = query_job_gapi query, job_id: job_id
+
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = bigquery.query_job query, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
   end
 end
