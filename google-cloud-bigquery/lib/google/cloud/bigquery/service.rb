@@ -518,6 +518,7 @@ module Google
           end
           dest_format = source_format storage_urls.first, options[:format]
           API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               extract: API::JobConfigurationExtract.new(
                 destination_uris: Array(storage_urls),
