@@ -552,6 +552,21 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [String] job_id The ID of the job. The ID must contain only
+        #   letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
+        #   The maximum length is 1,024 characters. If `job_id` is provided,
+        #   then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         # @return [Google::Cloud::Bigquery::CopyJob]
         #
@@ -576,9 +591,11 @@ module Google
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil, dryrun: nil
+        def copy destination_table, create: nil, write: nil, dryrun: nil,
+                 job_id: nil, prefix: nil
           ensure_service!
-          options = { create: create, write: write, dryrun: dryrun }
+          options = { create: create, write: write, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix }
           gapi = service.copy_table table_ref,
                                     get_table_ref(destination_table),
                                     options

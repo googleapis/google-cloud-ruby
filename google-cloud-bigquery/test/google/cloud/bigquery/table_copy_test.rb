@@ -159,12 +159,64 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
-  def copy_job_gapi source, target
-    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target)
+  it "can copy itself with job_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy target_table, job_id: job_id
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
   end
 
-  def copy_job_json source, target
+  it "can copy itself with prefix option" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy target_table, prefix: prefix
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
+  it "can copy itself with job_id option if both job_id and prefix options are provided" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy target_table, job_id: job_id, prefix: "IGNORED"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
+  def copy_job_gapi source, target, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id)
+  end
+
+  def copy_job_json source, target, job_id
     {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
       "configuration" => {
         "copy" => {
           "sourceTable" => {
