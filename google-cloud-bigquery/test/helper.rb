@@ -445,8 +445,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210"
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
