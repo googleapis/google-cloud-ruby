@@ -1,5 +1,29 @@
 # Release History
 
+### 0.27.0 / 2017-08-10
+
+This is a major release that offers new functionality. It adds the ability to asynchronously publish batches of messages when a threshold is met (batch message count, total batch size, batch age). It also adds the ability to receive and acknowledge messages via multiple streams.
+
+* Publishing Messages Asynchronously
+  * `Topic#publish_async` and `AsyncPublisher` added
+  * `AsyncPublisher` can be stopped
+  * `PublishResult` object is yielded from `Topic#publish_async`
+* Subscriber Streaming Messages
+  * `Subscription#listen` changed to return a `Subscriber` object
+  * `Subscriber` can open multiple streams to pull messages
+  * `Subscriber` must be started to begin streaming messages
+  * `Subscriber` can be stopped
+  * `Subscriber`'s received messages are leased until acknowledged or rejected
+* Other Additions
+  * `ReceivedMessage#reject!` method added (aliased as `nack!` and `ignore!`)
+  * `Message#published_at` attribute was added
+* Removals
+  * `Project#publish` method has been removed
+  * `Project#subscribe` method has been removed
+  * `Project#topic` method argument `autocreate` was removed
+  * `Subscription#pull` method argument `autoack` was removed
+  * `Subscription#wait_for_messages` method argument `autoack` was removed
+
 ### 0.26.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
