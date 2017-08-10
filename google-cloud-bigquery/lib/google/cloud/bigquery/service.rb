@@ -499,6 +499,7 @@ module Google
         # Job description for copy job
         def copy_table_config source, target, options = {}
           API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               copy: API::JobConfigurationTableCopy.new(
                 source_table: source,
