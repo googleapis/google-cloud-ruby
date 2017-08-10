@@ -232,9 +232,10 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
+        "v0.27.0",
+        "master",
         "v0.26.0",
         "v0.25.0",
-        "master",
         "v0.24.0",
         "v0.23.2",
         "v0.23.1",
