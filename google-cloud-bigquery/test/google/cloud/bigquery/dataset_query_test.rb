@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
   let(:query) { "SELECT * FROM `some_project.some_dataset.users`" }
 
-  let(:job_id) { "job9876543210" }
+  let(:job_id) { "job_9876543210" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
