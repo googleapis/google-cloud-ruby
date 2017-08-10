@@ -1,0 +1,1 @@
+{"id":"google/datastore/v1/rollbackresponse","name":"RollbackResponse","title":["Google","Datastore","V1","RollbackResponse"],"description":"<p>The response for Datastore::Rollback.\n(an empty message).</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/v1/doc/google/datastore/v1/datastore.rb#L102","resources":[],"examples":[],"methods":[]}
