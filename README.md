@@ -22,6 +22,7 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
+* [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
@@ -30,7 +31,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Stackdriver Error Reporting](#stackdriv-error-reporting-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
-* [Cloud Pub/Sub](#cloud-pubsub-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
@@ -293,7 +293,7 @@ annotation.sentences.count #=> 2
 annotation.tokens.count #=> 13
 ```
 
-### Cloud Pub/Sub (Alpha)
+### Cloud Pub/Sub (Beta)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
 - [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest)
