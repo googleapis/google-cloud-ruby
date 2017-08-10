@@ -284,7 +284,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
   end
 
   def query_job_hash
-    hash = random_job_hash("job9876543210", "done")
+    hash = random_job_hash("job_9876543210", "done")
     hash["configuration"]["query"] = {
       "query" => "SELECT name, age, score, active FROM `users`",
       "destinationTable" => {

@@ -331,6 +331,23 @@ module Google
           end
         end
 
+        # Generate a random string similar to the BigQuery service job IDs.
+        def generate_id
+          SecureRandom.urlsafe_base64(21)
+        end
+
+        # If no job_id or prefix is given, always generate a client-side job ID
+        # anyway, for idempotent retry in the google-api-client layer.
+        # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
+        def job_ref_from job_id, prefix
+          prefix ||= "job_"
+          job_id ||= "#{prefix}#{generate_id}"
+          API::JobReference.new(
+            project_id: @project,
+            job_id: job_id
+          )
+        end
+
         def load_table_file_opts dataset_id, table_id, file, options = {}
           path = Pathname(file).to_path
           {
@@ -414,6 +431,9 @@ module Google
               )
             )
           )
+
+          job_ref = job_ref_from options[:job_id], options[:prefix]
+          req.job_reference = job_ref if job_ref
 
           if options[:params]
             if Array === options[:params]

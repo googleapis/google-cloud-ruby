@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::View, :data, :mock_bigquery do
     qrg
   }
   let(:query) { "SELECT * FROM `test-project.my_dataset.my_view`" }
-  let(:job_id) { "job9876543210" }
+  let(:job_id) { "job_9876543210" }
 
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_view" }

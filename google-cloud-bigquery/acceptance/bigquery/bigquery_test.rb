@@ -99,9 +99,11 @@ describe Google::Cloud::Bigquery, :bigquery do
     rows.count.must_equal 100
   end
 
-  it "should run a query job" do
-    job = bigquery.query_job publicdata_query
+  it "should run a query job with job id" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = bigquery.query_job publicdata_query, job_id: job_id
     job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.job_id.must_equal job_id
     job.wait_until_done!
     rows = job.data
     rows.total.must_equal 100
