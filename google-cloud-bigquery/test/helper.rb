@@ -39,7 +39,14 @@ end
 class MockBigquery < Minitest::Spec
   let(:project) { bigquery.service.project }
   let(:credentials) { bigquery.service.credentials }
-  let(:bigquery) { Google::Cloud::Bigquery::Project.new(Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new)) }
+  let(:service) do
+    Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new).tap do |s|
+      s.define_singleton_method :generate_id do
+        "9876543210"
+      end
+    end
+  end
+  let(:bigquery) { Google::Cloud::Bigquery::Project.new service }
 
   # Register this spec type for when :mock_bigquery is used.
   register_spec_type(self) do |desc, *addl|
@@ -320,7 +327,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_job_hash id = "1234567890", state = "running"
+  def random_job_hash id = "job_9876543210", state = "running"
     {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -368,22 +375,24 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
   end
 
-  def job_resp_gapi job_gapi, job_id: "job9876543210"
+  def job_resp_gapi job_gapi, job_id: "job_9876543210"
     job_gapi = job_gapi.dup
-    job_gapi.job_reference = Google::Apis::BigqueryV2::JobReference.new(
-      project_id: project,
-      job_id: job_id
-    )
+    job_gapi.job_reference = job_reference_gapi project, job_id
     job_gapi
   end
 
+  def job_reference_gapi project, job_id
+    Google::Apis::BigqueryV2::JobReference.new(
+      project_id: project,
+      job_id: job_id
+    )
+  end
 
-
-  def query_job_resp_gapi query, job_id: job_id
+  def query_job_resp_gapi query, job_id: nil
     Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id)
   end
 
-  def query_job_resp_json query, job_id: "job9876543210"
+  def query_job_resp_json query, job_id: "job_9876543210"
     hash = random_job_hash(job_id, "done")
     hash["configuration"]["query"] = {
       "query" => query,
@@ -410,11 +419,11 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def failed_query_job_resp_gapi query, job_id: job_id, reason: "accessDenied"
+  def failed_query_job_resp_gapi query, job_id: nil, reason: "accessDenied"
     Google::Apis::BigqueryV2::Job.from_json failed_query_job_resp_json(query, job_id: job_id, reason: reason)
   end
 
-  def failed_query_job_resp_json query, job_id: "job9876543210", reason: "accessDenied"
+  def failed_query_job_resp_json query, job_id: "job_9876543210", reason: "accessDenied"
     hash = JSON.parse query_job_resp_json(query, job_id: job_id)
     hash["status"] = {
       "state" => "done",
@@ -445,8 +454,12 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query
+  def query_job_json query, job_id: "job_9876543210"
     {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
       "configuration" => {
         "query" => {
           "query" => query,
@@ -490,7 +503,7 @@ class MockBigquery < Minitest::Spec
       "etag" => "etag1234567890",
       "jobReference" => {
         "projectId" => project,
-        "jobId" => "job9876543210"
+        "jobId" => "job_9876543210"
       },
       "schema" => random_schema_hash,
       "rows" => random_data_rows,
