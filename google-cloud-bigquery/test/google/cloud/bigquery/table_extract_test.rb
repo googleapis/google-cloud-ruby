@@ -180,12 +180,64 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
-  def extract_job_gapi table, extract_file
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file)
+  it "can extract itself with job_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract extract_url, job_id: job_id
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.job_id.must_equal job_id
   end
 
-  def extract_job_json table, extract_file
+  it "can extract itself with prefix option" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract extract_url, prefix: prefix
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.job_id.must_equal job_id
+  end
+
+  it "can extract itself with job_id option if both job_id and prefix options are provided" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract extract_url, job_id: job_id, prefix: "IGNORED"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.job_id.must_equal job_id
+  end
+
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
+  end
+
+  def extract_job_json table, extract_file, job_id
     {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
       "configuration" => {
         "extract" => {
           "destinationUris" => [extract_file.to_gs_url],

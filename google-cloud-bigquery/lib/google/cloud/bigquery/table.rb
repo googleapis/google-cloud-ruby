@@ -626,6 +626,21 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [String] job_id The ID of the job. The ID must contain only
+        #   letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
+        #   The maximum length is 1,024 characters. If `job_id` is provided,
+        #   then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
@@ -643,10 +658,11 @@ module Google
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil, dryrun: nil
+                    header: nil, dryrun: nil, job_id: nil, prefix: nil
           ensure_service!
           options = { format: format, compression: compression,
-                      delimiter: delimiter, header: header, dryrun: dryrun }
+                      delimiter: delimiter, header: header, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix }
           gapi = service.extract_table table_ref, extract_url, options
           Job.from_gapi gapi, service
         end
