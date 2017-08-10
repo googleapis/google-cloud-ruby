@@ -1,5 +1,9 @@
 # Release History
 
+### 0.39.0 / 2017-08-10
+
+* Pub/Sub 0.27.0 release.
+
 ### 0.38.0 / 2017-08-07
 
 * Trace 0.27.0 release.
