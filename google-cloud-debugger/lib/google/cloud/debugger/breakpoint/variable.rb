@@ -175,27 +175,31 @@ module Google
           #
           # @example Simple variable conversion
           #   x = 3
-          #   var = Variable.from_rb_var x, name: "x"
+          #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
+          #           x, name: "x"
           #   var.name  #=> "x"
           #   var.value #=> "3"
           #   var.type  #=> "Integer"
           #
           # @example Hash conversion
           #   hash = {a: 1, b: :two}
-          #   var = Variable.from_rb_var hash, name: "hash"
+          #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
+          #           hash, name: "hash"
           #   var.name  #=> "hash"
           #   var.type  #=> "Hash"
           #   var.members[0].name  #=> "a"
           #   var.members[0].value #=> "1"
           #   var.members[0].type  #=> "Integer"
           #   var.members[1].name  #=> "b"
-          #   var.members[1].value #=> "two"
+          #   var.members[1].value #=> ":two"
           #   var.members[1].type  #=> "Symbol"
           #
           # @example Custom compound variable conversion
-          #   foo = Foo.new(a: 1, b: []) #=> #<Foo:0x0000 @a: 1, @b: []>
-          #   var_table = VariableTable.new
-          #   var = Variable.from_rb_var foo, name: "foo"
+          #   foo = Foo.new(a: 1, b: [])
+          #   foo.inspect  #=> "#<Foo:0xXXXXXX @a=1, @b=[]>"
+          #   var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
+          #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
+          #           foo, name: "foo"
           #   var.name  #=> "foo"
           #   var.type  #=> "Foo"
           #   var.members[0].name  #=> "@a"
@@ -208,8 +212,9 @@ module Google
           # @example Use variable table for shared compound variables
           #   hash = {a: 1}
           #   ary = [hash, hash]
-          #   var_table = VariableTable.new
-          #   var = Variable.from_rb_var ary, name: "ary", var_table: var_table
+          #   var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
+          #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
+          #           ary, name: "ary", var_table: var_table
           #   var.name            #=> "ary"
           #   var.var_table_index #=> 0
           #   var_table[0].type   #=> "Array"

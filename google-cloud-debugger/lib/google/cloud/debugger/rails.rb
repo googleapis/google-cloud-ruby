@@ -23,8 +23,9 @@ module Google
       # Google::Cloud::Debugger::Railtie automatically adds the
       # Google::Cloud::Debugger::Middleware to Rack in a Rails environment.
       #
-      # The Middleware is only added when certain conditions are met. See
-      # {Railtie.use_debugger?} for detail.
+      # The Middleware is only added when the
+      # `Google::Cloud.configure.use_debugger` setting is true or Rails is
+      # in production environment.
       #
       # When loaded, the Google::Cloud::Debugger::Middleware will be inserted
       # after the Rack::ETag Middleware, which is top of the Rack stack, closest

@@ -100,7 +100,7 @@ module Google
         # rules. If the expressions do any write operations, the evaluations
         # abort and show an error message in place of the real result.
         #
-        # @param [Binding] binding The binding object from the context
+        # @param [Binding] bind The binding object from the context
         #
         def eval_expressions bind
           @evaluated_expressions = []

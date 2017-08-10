@@ -29,7 +29,7 @@ module Google
         ##
         # Evaluate the breakpoint unless it's already marked as completed.
         # Store evaluted expressions and stack frame variables in
-        # @evaluated_expressions and @evaluated_log_message.
+        # `@evaluated_expressions` and `@evaluated_log_message`.
         #
         # @param [Array<Binding>] call_stack_bindings An array of Ruby Binding
         #   objects, from the call stack that leads to the triggering of the
@@ -69,8 +69,9 @@ module Google
         # @private Format log message by interpolate expressions.
         #
         # @example
-        #   Evaluator.format_log_message("Hello $0",
-        #                                ["World"]) #=> "Hello World"
+        #   log_point = Google::Cloud::Debugger::Logpoint.new
+        #   log_point.format_message(
+        #     "Hello $0", ["World"]) #=> "Hello \"World\""
         #
         # @param [String] message_format The message with with
         #   expression placeholders such as `$0`, `$1`, etc.
