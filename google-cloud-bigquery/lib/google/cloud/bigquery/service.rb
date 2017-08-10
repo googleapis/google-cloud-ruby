@@ -412,6 +412,7 @@ module Google
           dest_table = table_ref_from options[:table]
           dataset_config = dataset_ref_from options[:dataset], options[:project]
           req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               query: API::JobConfigurationQuery.new(
                 query: query,
@@ -431,9 +432,6 @@ module Google
               )
             )
           )
-
-          job_ref = job_ref_from options[:job_id], options[:prefix]
-          req.job_reference = job_ref if job_ref
 
           if options[:params]
             if Array === options[:params]
