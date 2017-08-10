@@ -22,7 +22,7 @@ describe Google::Cloud::Debugger, :debugger do
     breakpoint_file_path = nil
     breakpoint_line = nil
 
-    wait_until do
+    keep_trying_till_true do
       debugger_info_json = send_request "test_debugger_info"
       debugger_info = JSON.parse debugger_info_json
 
@@ -37,7 +37,7 @@ describe Google::Cloud::Debugger, :debugger do
     breakpoint_id = set_test_snappoint debuggee_id, agent_version, breakpoint_file_path, breakpoint_line
 
     breakpoint = nil
-    wait_until do
+    keep_trying_till_true 60 do
       # Send request to trigger debugger
       send_request "test_debugger"
 
@@ -65,7 +65,7 @@ describe Google::Cloud::Debugger, :debugger do
     breakpoint_line = nil
     monitored_resource_type = nil
 
-    wait_until do
+    keep_trying_till_true do
       debugger_info_json = send_request "test_debugger_info"
       debugger_info = JSON.parse debugger_info_json
 
@@ -89,7 +89,13 @@ describe Google::Cloud::Debugger, :debugger do
     filter = "resource.type=\"#{monitored_resource_type}\" AND textPayload:#{token} AND timestamp > \"#{timestamp}\""
 
     entries = nil
-    wait_until do
+    send_request "test_debugger"
+
+    # Logs can take up to a minute before they become avaiable for read.
+    # Directly sleep 45 seconds before even trying to find log entries.
+    sleep 45
+
+    keep_trying_till_true do
       # Send request to trigger debugger
       send_request "test_debugger"
 

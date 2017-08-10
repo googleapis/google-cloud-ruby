@@ -28,6 +28,7 @@ $debugger = Google::Cloud::Debugger.new
 use Google::Cloud::Debugger::Middleware, debugger: $debugger
 use Google::Cloud::ErrorReporting::Middleware
 use Google::Cloud::Logging::Middleware
+use Google::Cloud::Trace::Middleware
 
 
 # Set :raise_errors to expose error message in production environment
@@ -90,4 +91,15 @@ get '/test_logger' do
       labels: logger.resource.labels
     }
   }.to_json
+end
+
+get '/test_trace' do
+  trace_token = params[:token]
+  if trace_token
+    span_labels = {"token" => trace_token}
+    Google::Cloud::Trace.in_span "integration_test_span", labels: span_labels do
+      sleep 0.5
+    end
+  end
+  trace_token.to_s
 end

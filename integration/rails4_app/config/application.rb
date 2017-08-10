@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 
 require "google/cloud/logging/rails"
 require "google/cloud/error_reporting/rails"
+require "google/cloud/trace/rails"
 require "google/cloud/debugger"
 
 module Rails4App

@@ -17,7 +17,6 @@ require "minitest/autorun"
 require "minitest/rg"
 require "minitest/focus"
 require "net/http"
-require "open3"
 require "json"
 require "google/cloud/debugger"
 require_relative "../../integration/helper"
@@ -26,9 +25,6 @@ $vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new
 
 module Integration
   class DebuggerTest < Minitest::Test
-    MIN_DELAY = 5
-    MAX_DELAY = 15
-
     attr_accessor :debugger
 
     ##
@@ -99,17 +95,6 @@ module Integration
 
     # Add spec DSL
     extend Minitest::Spec::DSL
-
-    def wait_until
-      delay = MIN_DELAY
-      while delay <= MAX_DELAY
-        sleep delay
-        result = yield
-        return result if result
-        delay += 2
-      end
-      nil
-    end
 
     # Register this spec type for when :trace is used.
     register_spec_type(self) do |desc, *addl|

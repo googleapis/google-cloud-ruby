@@ -30,8 +30,8 @@ class TestController < ApplicationController
   end
 
   def test_error_reporting
-    error_toke = params[:token]
-    raise "Test error from Rails 4: #{error_toke}"
+    error_token = params[:token]
+    raise "Test error from Rails 4: #{error_token}"
   end
 
   def test_logging
@@ -51,5 +51,17 @@ class TestController < ApplicationController
         labels: Rails.logger.resource.labels
       }
     }
+  end
+
+  def test_trace
+    trace_token = params[:token]
+    if trace_token
+      span_labels = {"token" => trace_token}
+      Google::Cloud::Trace.in_span "integration_test_span", labels: span_labels do
+        sleep 0.5
+      end
+    end
+
+    render text: trace_token.to_s
   end
 end

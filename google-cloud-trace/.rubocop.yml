@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "integration/**/*"
     - "google-cloud-trace.gemspec"
     - "lib/google/devtools/**/*"
     - "lib/google/cloud/trace/v1/**/*"
