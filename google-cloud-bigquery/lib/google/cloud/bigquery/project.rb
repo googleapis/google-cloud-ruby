@@ -194,10 +194,10 @@ module Google
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
-        # @param [String] job_id The ID of the job. The ID must contain only
-        #   letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-        #   The maximum length is 1,024 characters. If `job_id` is provided,
-        #   then `prefix` will not be used.
+        # @param [String] job_id A user-defined ID for the query job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
         #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
