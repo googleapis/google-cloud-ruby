@@ -106,8 +106,8 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new
-        #   span = trace.create_span "root_span"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   span = trace_record.create_span "root_span"
         #   Google::Cloud::Trace::LabelKey.set_stack_trace span.labels
         #
         def self.set_stack_trace labels,
