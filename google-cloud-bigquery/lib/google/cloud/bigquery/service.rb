@@ -369,6 +369,7 @@ module Google
         def load_table_file_config dataset_id, table_id, file, options = {}
           load_opts = load_table_file_opts dataset_id, table_id, file, options
           API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
@@ -397,6 +398,7 @@ module Google
         def load_table_url_config dataset_id, table_id, url, options = {}
           load_opts = load_table_url_opts dataset_id, table_id, url, options
           API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
