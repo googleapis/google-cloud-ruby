@@ -87,7 +87,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Trace.new" do
+  doctest.before "Google::Cloud::Trace" do
     mock_trace do |mock|
       mock.expect :list_traces, stubbed_list_traces, [String, Hash]
     end
