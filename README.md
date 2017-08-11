@@ -35,6 +35,8 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
+* [Cloud Monitoring API](#cloud-monitoring-api-alpha) (Alpha)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -540,6 +542,80 @@ image = vision.image "path/to/landmark.jpg"
 landmark = image.landmark
 landmark.description #=> "Mount Rushmore"
 ```
+
+### Cloud Monitoring API (Alpha)
+
+- [google-cloud-monitoring README](google-cloud-monitoring/README.md)
+- [google-cloud-monitoring API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest)
+- [google-cloud-monitoring on RubyGems](https://rubygems.org/gems/google-cloud-monitoring)
+- [Google Cloud Monitoring API documentation](https://cloud.google.com/monitoring/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-monitoring
+```
+
+#### Preview
+```rb
+ require "google/cloud/monitoring/v3"
+
+ MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
+
+ metric_service_client = MetricServiceClient.new
+ formatted_name = MetricServiceClient.project_path(project_id)
+
+ # Iterate over all results.
+ metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
+   # Process element.
+ end
+
+ # Or iterate over results one page at a time.
+ metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
+   # Process each page at a time.
+   page.each do |element|
+     # Process element.
+   end
+ end
+```
+
+### Cloud Video Intelligence API (Alpha)
+
+- [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
+- [google-cloud-video_intelligence API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest)
+- [google-cloud-video_intelligence on RubyGems](https://rubygems.org/gems/google-cloud-video_intelligence)
+- [Google Cloud Video Intelligence API documentation](https://cloud.google.com/video-intelligence/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-video_intelligence
+```
+
+#### Preview
+
+```rb
+ require "google/cloud/video_intelligence/v1beta1"
+ require "google/cloud/videointelligence/v1beta1/video_intelligence_pb"
+
+ VideoIntelligenceServiceClient = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient
+
+ video_intelligence_service_client = VideoIntelligenceServiceClient.new
+
+ input_uri = 'gs://[ BUCKET-ID ]/[ OBJECT-ID ]'
+ features = [Google::Cloud::Videointelligence::V1beta1::Feature::FACE_DETECTION]
+
+  # Register a callback during the method call.
+ operation = video_intelligence_service_client.annotate_video(input_uri, features) do |op|
+    raise op.results.message if op.error?
+    op_results = op.results
+    # Process the results.
+
+    metadata = op.metadata
+    # Process the metadata.
+  end
+```
+
 
 ## Supported Ruby Versions
 
