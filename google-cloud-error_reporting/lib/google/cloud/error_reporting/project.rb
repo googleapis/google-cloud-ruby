@@ -36,7 +36,7 @@ module Google
       #
       #   error_reporting = Google::Cloud::ErrorReporting.new
       #   error_event = error_reporting.error_event "Error with Backtrace",
-      #                                             timestamp: Time.now
+      #                                             event_time: Time.now,
       #                                             service_name: "my_app_name"
       #   error_reporting.report error_event
       #
@@ -140,9 +140,10 @@ module Google
         #
         #   begin
         #     fail StandardError, "A serious problem"
-        #   rescue StandardError => exception
-        #     error_reporting.report_exception, service_name: "my_app_name",
-        #                                       service_version: "v8"
+        #   rescue => exception
+        #     error_reporting.report_exception exception,
+        #                                      service_name: "my_app_name",
+        #                                      service_version: "v8"
         #   end
         #
         def report_exception exception, service_name: nil, service_version: nil

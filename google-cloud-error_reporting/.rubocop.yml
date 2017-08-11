@@ -7,6 +7,7 @@ AllCops:
     - "lib/google/cloud/error_reporting/v1beta1/**/*"
     - "lib/google/cloud/error_reporting/v1beta1.rb"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
 
 Documentation:
