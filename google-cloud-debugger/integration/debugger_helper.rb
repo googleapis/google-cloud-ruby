@@ -37,7 +37,7 @@ module Integration
     end
 
     ##
-    # Create a test gRPC Snappoing
+    # Create a test gRPC Snappoint
     def sample_snappoint file_path, line
       breakpoint_hash = {
         "location" => {
