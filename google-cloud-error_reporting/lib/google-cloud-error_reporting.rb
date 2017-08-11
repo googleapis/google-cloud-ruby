@@ -50,7 +50,7 @@ module Google
     #   error_reporting = gcloud.error_reporting
     #
     #   error_event = error_reporting.error_event "Error with Backtrace",
-    #                                             timestamp: Time.now,
+    #                                             event_time: Time.now,
     #                                             service_name: "my_app_name",
     #                                             service_version: "v8"
     #   error_reporting.report error_event
@@ -92,11 +92,12 @@ module Google
     # @example
     #   require "google/cloud/error_reporting"
     #
-    #   gcloud = Google::Cloud.error_reporting "GCP_Project_ID",
-    #                                          "/path/to/gcp/secretkey.json"
+    #   error_reporting =
+    #     Google::Cloud.error_reporting "GCP_Project_ID",
+    #                                   "/path/to/gcp/secretkey.json"
     #
     #   error_event = error_reporting.error_event "Error with Backtrace",
-    #                                             timestamp: Time.now,
+    #                                             event_time: Time.now,
     #                                             service_name: "my_app_name",
     #                                             service_version: "v8"
     #   error_reporting.report error_event

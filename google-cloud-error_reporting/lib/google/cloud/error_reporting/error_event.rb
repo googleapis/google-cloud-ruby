@@ -37,7 +37,7 @@ module Google
       #   error_reporting = Google::Cloud::ErrorReporting.new
       #
       #   error_event = error_reporting.error_event "Error with Backtrace",
-      #                                             timestamp: Time.now,
+      #                                             event_time: Time.now,
       #                                             service_name: "my_app_name",
       #                                             service_version: "v8"
       #   error_reporting.report error_event
