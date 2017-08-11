@@ -174,43 +174,43 @@ module Google
           #   conversions.
           #
           # @example Simple variable conversion
-          #   x = 3
+          #   x = 3.0
           #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
           #           x, name: "x"
           #   var.name  #=> "x"
-          #   var.value #=> "3"
-          #   var.type  #=> "Integer"
+          #   var.value #=> "3.0"
+          #   var.type  #=> "Float"
           #
           # @example Hash conversion
-          #   hash = {a: 1, b: :two}
+          #   hash = {a: 1.0, b: :two}
           #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
           #           hash, name: "hash"
           #   var.name  #=> "hash"
           #   var.type  #=> "Hash"
           #   var.members[0].name  #=> "a"
-          #   var.members[0].value #=> "1"
-          #   var.members[0].type  #=> "Integer"
+          #   var.members[0].value #=> "1.0"
+          #   var.members[0].type  #=> "Float"
           #   var.members[1].name  #=> "b"
           #   var.members[1].value #=> ":two"
           #   var.members[1].type  #=> "Symbol"
           #
           # @example Custom compound variable conversion
-          #   foo = Foo.new(a: 1, b: [])
-          #   foo.inspect  #=> "#<Foo:0xXXXXXX @a=1, @b=[]>"
+          #   foo = Foo.new(a: 1.0, b: [])
+          #   foo.inspect  #=> "#<Foo:0xXXXXXX @a=1.0, @b=[]>"
           #   var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
           #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
           #           foo, name: "foo"
           #   var.name  #=> "foo"
           #   var.type  #=> "Foo"
           #   var.members[0].name  #=> "@a"
-          #   var.members[0].value #=> "1"
-          #   var.members[0].type  #=> "Integer"
+          #   var.members[0].value #=> "1.0"
+          #   var.members[0].type  #=> "Float"
           #   var.members[1].name  #=> "@b"
           #   var.members[1].value #=> "[]"
           #   var.members[1].type  #=> "Array"
           #
           # @example Use variable table for shared compound variables
-          #   hash = {a: 1}
+          #   hash = {a: 1.0}
           #   ary = [hash, hash]
           #   var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
           #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
@@ -224,8 +224,8 @@ module Google
           #   var_table[0].members[1].var_table_index #=> 1
           #   var_table[1].type #=> "Hash"
           #   var_table[1].members[0].name #=> "a"
-          #   var_table[1].members[0].type #=> "Integer"
-          #   var_table[1].members[0].value #=> "1"
+          #   var_table[1].members[0].type #=> "Float"
+          #   var_table[1].members[0].value #=> "1.0"
           #
           # @return [Google::Cloud::Debugger::Breakpoint::Variable] Converted
           #   variable.
