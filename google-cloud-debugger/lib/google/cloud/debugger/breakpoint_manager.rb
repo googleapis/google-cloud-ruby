@@ -141,7 +141,8 @@ module Google
         # Evaluates a hit breakpoint, and submit the breakpoint to
         # Transmitter if this breakpoint is evaluated successfully.
         #
-        # See {Breakpoint#evaluate} for evaluation details.
+        # See {Snappoint#evaluate} and {Logpoint#evaluate} for evaluation
+        # details.
         #
         # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The breakpoint
         #   to be evaluated

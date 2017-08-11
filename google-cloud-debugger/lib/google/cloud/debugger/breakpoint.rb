@@ -271,7 +271,8 @@ module Google
         ##
         # Get the file path of this breakpoint
         # @example
-        #   breakpoint = Breakpoint.new nil, "path/to/file.rb"
+        #   breakpoint =
+        #     Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb"
         #   breakpoint.path #=> "path/to/file.rb"
         # @return [String] The file path for this breakpoint
         def path
@@ -281,7 +282,8 @@ module Google
         ##
         # Get the line number of this breakpoint
         # @example
-        #   breakpoint = Breakpoint.new nil, "path/to/file.rb", 11
+        #   breakpoint =
+        #     Google::Cloud::Debugger::Breakpoint.new nil, "path/to/file.rb", 11
         #   breakpoint.line #=> 11
         # @return [Integer] The line number for this breakpoint
         def line
