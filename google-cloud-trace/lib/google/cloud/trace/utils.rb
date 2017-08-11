@@ -28,6 +28,7 @@ module Google
         # @private
         #
         def self.time_to_grpc time
+          return nil if time.nil?
           Google::Protobuf::Timestamp.new seconds: time.to_i,
                                           nanos: time.nsec
         end

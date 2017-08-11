@@ -57,13 +57,14 @@ module Google
         # @example
         #
         #   require "google/cloud/trace"
-        #   require "activerecord"
+        #   require "active_record"
         #
         #   Google::Cloud::Trace::Notifications.instrument "sql.activerecord"
         #
-        #   trace = Google::Cloud::Trace::Trace.new
-        #   Google::Cloud::Trace.set trace
-        #   ActiveRecord::Base.query "SHOW TABLES"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   Google::Cloud::Trace.set trace_record
+        #
+        #   ActiveRecord::Base.connection.execute "SHOW TABLES"
         #
         def self.instrument type,
                             max_length: DEFAULT_MAX_DATA_LENGTH,

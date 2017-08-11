@@ -29,7 +29,7 @@ module Google
       # @example
       #   require "google/cloud/trace"
       #
-      #   env = my_get_rack_environment
+      #   env = {}
       #   trace_context = Stackdriver::Core::TraceContext.parse_rack_env env
       #
       #   trace = Google::Cloud::Trace::TraceRecord.new "my-project",
@@ -182,8 +182,8 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new trace_context
-        #   span = trace.create_span "root_span"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   span = trace_record.create_span "root_span"
         #
         def create_span name, span_id: nil, parent_span_id: 0,
                         kind: SpanKind::UNSPECIFIED,
@@ -219,8 +219,8 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new trace_context
-        #   trace.in_span "root_span" do |span|
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record.in_span "root_span" do |span|
         #     # Do stuff...
         #   end
         #

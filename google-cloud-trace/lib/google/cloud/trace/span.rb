@@ -244,8 +244,8 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new trace_context
-        #   span = trace.create_span "root_span"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   span = trace_record.create_span "root_span"
         #   subspan = span.create_span "subspan"
         #
         def create_span name, span_id: nil, kind: SpanKind::UNSPECIFIED,
@@ -272,8 +272,8 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new trace_context
-        #   trace.in_span "root_span" do |span|
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record.in_span "root_span" do |span|
         #     # Do stuff...
         #     span.in_span "subspan" do |subspan|
         #       # Do subspan stuff...
@@ -367,9 +367,9 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace = Google::Cloud::Trace.new
-        #   root1 = trace.create_span "root_span_1"
-        #   root2 = trace.create_span "root_span_2"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   root1 = trace_record.create_span "root_span_1"
+        #   root2 = trace_record.create_span "root_span_2"
         #   subspan = root1.create_span "subspan"
         #   subspan.move_under root2
         #
