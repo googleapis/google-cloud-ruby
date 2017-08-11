@@ -31,17 +31,50 @@ namespace :test do
   end
 end
 
-desc "Run acceptance tests."
-task :acceptance do
-  puts "The google-cloud-error_reporting gem does not have acceptance tests."
+# Acceptance tests
+desc "Run the logging acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["ERROR_REPORTING_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["ERROR_REPORTING_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["ERROR_REPORTING_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123,/path/to/keyfile.json] " \
+      "or ERROR_REPORTING_TEST_PROJECT=test123 ERROR_REPORTING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["ERROR_REPORTING_PROJECT"] = project
+  ENV["ERROR_REPORTING_KEYFILE"] = nil
+  ENV["ERROR_REPORTING_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
-  task :run do
-    puts "This gem does not have acceptance tests."
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-error_reporting"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
   end
+
   desc "Run acceptance cleanup."
   task :cleanup do
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/error_reporting/**/*_test.rb").each { |file| require_relative file }
   end
 end
 
