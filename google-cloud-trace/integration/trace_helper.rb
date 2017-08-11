@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,28 @@ require "minitest/autorun"
 require "minitest/rg"
 require "minitest/focus"
 require "net/http"
-require "open3"
-require "json"
+require "google/cloud/trace"
 require_relative "../../integration/helper"
+
+$tracer = Google::Cloud::Trace.new project: gcloud_project_id
+
+module Integration
+  class TraceTest < Minitest::Test
+    ##
+    # Setup shared trace client before each test
+    def setup
+      @tracer = $tracer
+
+      refute_nil @tracer, "You do not have an active trace client to run the tests."
+      super
+    end
+
+    # Add spec DSL
+    extend Minitest::Spec::DSL
+
+    # Register this spec type for when :trace is used.
+    register_spec_type(self) do |desc, *addl|
+      addl.include? :trace
+    end
+  end
+end

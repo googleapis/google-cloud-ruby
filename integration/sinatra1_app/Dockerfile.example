@@ -31,24 +31,11 @@ ENV RBENV_VERSION=${REQUESTED_RUBY_VERSION:-$RBENV_VERSION}
 # Copy the application files.
 COPY . /app/
 
-# Install required gems.
-RUN cd integration/sinatra1_app && bundle install && rbenv rehash;
-
 # Compile debugger gem
-RUN cd google-cloud-debugger && bundle install && bundle exec rake compile
-
-# Temporary. Will be moved to base image later.
-ENV RACK_ENV=production \
-    RAILS_ENV=production \
-    RAILS_SERVE_STATIC_FILES=true
-
-# Run asset pipeline if we're in a Rails app.
-RUN if test -d app/assets -a -f config/application.rb; then \
-      bundle exec rake assets:precompile; \
-    fi
+RUN cd /app/google-cloud-debugger && bundle update && bundle exec rake compile
 
 # BUG: Reset entrypoint to override base image.
 ENTRYPOINT []
 
 # Start application on port $PORT.
-CMD cd integration/sinatra1_app && bundle exec ruby app.rb
+CMD cd /app/integration/sinatra1_app && bundle update && bundle exec ruby app.rb

@@ -73,6 +73,32 @@ namespace :acceptance do
   end
 end
 
+namespace :integration do
+  desc "Run integration tests against GAE"
+  task :gae, :project_uri do |t, args|
+    fail "You must provide a project_uri. e.g. rake " \
+      "integration:gae[http://my-project.appspot-preview.com]" if args[:project_uri].nil?
+
+    ENV["TEST_GOOGLE_CLOUD_PROJECT_URI"] = args[:project_uri]
+
+    $LOAD_PATH.unshift "lib", "integration"
+    Dir.glob("integration/*_test.rb").each { |file| require_relative file }
+    Dir.glob("integration/gae/**/*_test.rb").each { |file| require_relative file }
+  end
+
+  desc "Run integration tests against GKE"
+  task :gke, :pod_name do |t, args|
+    fail "You must provide the GKE pod name. e.g. " \
+      "rake integration:gke[google-cloud-ruby-test]" if args[:pod_name].nil?
+
+    ENV["TEST_GKE_POD_NAME"] = args[:pod_name]
+
+    $LOAD_PATH.unshift "lib", "integration"
+    Dir.glob("integration/*_test.rb").each { |file| require_relative file }
+    Dir.glob("integration/gke/**/*_test.rb").each { |file| require_relative file }
+  end
+end
+
 desc "Run yard-doctest example tests."
 task doctest: [:compile, :yard] do
   puts "This gem does not have doc tests."

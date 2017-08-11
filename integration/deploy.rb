@@ -121,7 +121,7 @@ def deploy_gke_image image_name, image_location
   rc_yaml_file_name = "integration_rc.yaml"
   if File.file? rc_yaml_file_name
     fail "The #{rc_yaml_file_name} file already exist. Please omit it and " \
-  "try again."
+      "try again."
   else
     # Copy example yaml file and update with correct content
     File.open "integration/integration_rc.yaml.example" do |source_file|
@@ -142,20 +142,21 @@ def deploy_gke_image image_name, image_location
 
     # Keep polling for GKE pod status till it's "Running"
     pod_name = nil
-    pod_status = nil
+    puts "Waiting for pod to start"
     keep_trying_till_true 300 do
-      stdout = `kubectl get pods`
-      pods_info = stdout.split("\n").drop(1)
-      pods_info.each do |pod_info|
-        pod_info = pod_info.split
-        if pod_info[0].match image_name
-          pod_name = pod_info[0]
-          pod_status = pod_info[2] == "Running"
-          break
-        end
-      end
-      pod_status
+      pod_info = `kubectl get pods | grep #{image_name}`.split
+      pod_name = pod_info[0]
+
+      pod_info[2] == "Running"
     end
+
+    # Wait until the test app is actually accessible.
+    puts "Waiting for pod #{pod_name} to become accessible"
+    keep_trying_till_true 300 do
+      ping_status = Open3.capture3("kubectl exec #{pod_name} -- curl localhost:8080").last
+      ping_status.success?
+    end
+
     yield pod_name
   ensure
     # Clean up GKE services
