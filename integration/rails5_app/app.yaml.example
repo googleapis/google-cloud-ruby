@@ -1,5 +1,5 @@
 runtime: ruby
 env: flex
-entrypoint: bash -c "cd google-cloud-debugger; bundle update; bundle exec rake compile; cd ../integration/rails5_app; bundle install; bundle exec rackup -p 8080 config.ru"
+entrypoint: bash -c "cd google-cloud-debugger; bundle update; bundle exec rake recompile; cd ../integration/rails5_app; bundle install; bundle exec rackup -p 8080 config.ru"
 health_check:
   enable_health_check: False

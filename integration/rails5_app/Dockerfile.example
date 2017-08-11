@@ -32,7 +32,7 @@ ENV RBENV_VERSION=${REQUESTED_RUBY_VERSION:-$RBENV_VERSION}
 COPY . /app/
 
 # Compile debugger gem
-RUN cd /app/google-cloud-debugger && bundle update && bundle exec rake compile
+RUN cd /app/google-cloud-debugger && bundle update && bundle exec rake recompile
 
 # BUG: Reset entrypoint to override base image.
 ENTRYPOINT []
