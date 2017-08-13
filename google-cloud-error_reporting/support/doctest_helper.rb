@@ -83,11 +83,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::ErrorReporting.report" do
-    mock_error_reporting
-  end
-
-  doctest.before "Google::Cloud::ErrorReporting.new" do
+  doctest.before "Google::Cloud::ErrorReporting" do
     mock_error_reporting
   end
 

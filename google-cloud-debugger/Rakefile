@@ -1,12 +1,32 @@
 require "bundler/setup"
 require "bundler/gem_tasks"
+require "fileutils"
 
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
 require "rake/extensiontask"
 spec = Gem::Specification.load("google-cloud-debugger.gemspec")
-Rake::ExtensionTask.new("google/cloud/debugger/debugger_c", spec)
+ext_name = "google/cloud/debugger/debugger_c"
+Rake::ExtensionTask.new(ext_name, spec)
+
+namespace :compile do
+  desc "Cleanup compilation files"
+  task :cleanup do
+    puts "remove #{ext_name}.*"
+    Dir.glob "lib/google/cloud/debugger/debugger_c.*" do |f|
+      File.delete f
+    end
+    puts "remove directory tmp"
+    FileUtils.remove_dir "tmp"
+  end
+end
+
+desc "Clean up compilation files and compile again"
+task :recompile do
+  Rake::Task["compile:cleanup"].invoke
+  Rake::Task["compile"].invoke
+end
 
 desc "Run tests."
 task :test => :compile do
