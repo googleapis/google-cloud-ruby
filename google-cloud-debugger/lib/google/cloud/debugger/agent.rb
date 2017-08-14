@@ -136,8 +136,7 @@ module Google
 
           @logger = logger || default_logger
 
-          @app_root = app_root
-          @app_root ||= Rack::Directory.new("").root if defined? Rack::Directory
+          init_app_root app_root
 
           # Agent actor thread needs to force exit immediately.
           set_cleanup_options timeout: 0
@@ -198,6 +197,16 @@ module Google
         end
 
         private
+
+        ##
+        # @private Initialize `@app_root` instance variable.
+        def init_app_root app_root = nil
+          app_root ||= Google::Cloud::Debugger.configure.app_root
+          app_root ||= Rack::Directory.new("").root if defined? Rack::Directory
+          app_root ||= Dir.pwd
+
+          @app_root = app_root
+        end
 
         ##
         # @private Callback function for breakpoint manager when any updates
