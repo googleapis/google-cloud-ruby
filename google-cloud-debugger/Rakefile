@@ -17,10 +17,9 @@ namespace :compile do
       puts "remove #{f}"
       File.delete f
     end
-    if File.directory? "tmp"
-      puts "remove directory ./tmp"
-      FileUtils.remove_dir "tmp"
-    end
+
+    puts "remove directory ./tmp"
+    FileUtils.remove_dir "tmp", true
   end
 end
 
