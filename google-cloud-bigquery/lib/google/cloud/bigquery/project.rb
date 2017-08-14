@@ -194,6 +194,24 @@ module Google
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
+        # @param [String] job_id A user-defined ID for the query job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -266,7 +284,8 @@ module Google
                       table: nil, create: nil, write: nil, dataset: nil,
                       project: nil, standard_sql: nil, legacy_sql: nil,
                       large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
+                      job_id: nil, prefix: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -275,7 +294,7 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params }
+                      params: params, job_id: job_id, prefix: prefix }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end

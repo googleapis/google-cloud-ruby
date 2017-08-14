@@ -73,4 +73,67 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
+
+  it "queries the data with job_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_id = "my_test_job_id"
+    job_gapi = query_job_gapi query, job_id: job_id
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: dataset_id
+    )
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query, job_id: job_id
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
+  end
+
+  it "queries the data with prefix option" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, job_id: job_id
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: dataset_id
+    )
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query, prefix: prefix
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
+  end
+
+  it "queries the data with job_id option if both job_id and prefix options are provided" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_id = "my_test_job_id"
+    job_gapi = query_job_gapi query, job_id: job_id
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: dataset_id
+    )
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query, job_id: job_id, prefix: "IGNORED"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.job_id.must_equal job_id
+  end
 end

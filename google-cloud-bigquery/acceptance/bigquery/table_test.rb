@@ -165,8 +165,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
-    query_job = dataset.query_job query
+
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.job_id.must_equal job_id
     query_job.wait_until_done!
 
     # Job methods
@@ -248,7 +251,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "imports data from a local file" do
-    job = table.load local_file
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = table.load local_file, job_id: job_id, job_id: job_id
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
@@ -271,9 +277,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "copies itself to another table" do
-    copy_job = table.copy target_table_id, create: :needed, write: :empty
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy target_table_id, create: :needed, write: :empty, job_id: job_id
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.job_id.must_equal job_id
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
@@ -371,7 +379,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         tmp.size.must_equal 0
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
-        extract_job = table.extract extract_file
+        job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+
+        extract_job = table.extract extract_file, job_id: job_id
+        extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?
         # Refresh to get the latest file data

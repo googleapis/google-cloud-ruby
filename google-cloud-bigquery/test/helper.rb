@@ -39,7 +39,14 @@ end
 class MockBigquery < Minitest::Spec
   let(:project) { bigquery.service.project }
   let(:credentials) { bigquery.service.credentials }
-  let(:bigquery) { Google::Cloud::Bigquery::Project.new(Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new)) }
+  let(:service) do
+    Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new).tap do |s|
+      s.define_singleton_method :generate_id do
+        "9876543210"
+      end
+    end
+  end
+  let(:bigquery) { Google::Cloud::Bigquery::Project.new service }
 
   # Register this spec type for when :mock_bigquery is used.
   register_spec_type(self) do |desc, *addl|
@@ -320,7 +327,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_job_hash id = "1234567890", state = "running"
+  def random_job_hash id = "job_9876543210", state = "running"
     {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -368,22 +375,24 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
   end
 
-  def job_resp_gapi job_gapi, job_id: "job9876543210"
+  def job_resp_gapi job_gapi, job_id: "job_9876543210"
     job_gapi = job_gapi.dup
-    job_gapi.job_reference = Google::Apis::BigqueryV2::JobReference.new(
-      project_id: project,
-      job_id: job_id
-    )
+    job_gapi.job_reference = job_reference_gapi project, job_id
     job_gapi
   end
 
+  def job_reference_gapi project, job_id
+    Google::Apis::BigqueryV2::JobReference.new(
+      project_id: project,
+      job_id: job_id
+    )
+  end
 
-
-  def query_job_resp_gapi query, job_id: job_id
+  def query_job_resp_gapi query, job_id: nil
     Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id)
   end
 
-  def query_job_resp_json query, job_id: "job9876543210"
+  def query_job_resp_json query, job_id: "job_9876543210"
     hash = random_job_hash(job_id, "done")
     hash["configuration"]["query"] = {
       "query" => query,
@@ -410,11 +419,11 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def failed_query_job_resp_gapi query, job_id: job_id, reason: "accessDenied"
+  def failed_query_job_resp_gapi query, job_id: nil, reason: "accessDenied"
     Google::Apis::BigqueryV2::Job.from_json failed_query_job_resp_json(query, job_id: job_id, reason: reason)
   end
 
-  def failed_query_job_resp_json query, job_id: "job9876543210", reason: "accessDenied"
+  def failed_query_job_resp_json query, job_id: "job_9876543210", reason: "accessDenied"
     hash = JSON.parse query_job_resp_json(query, job_id: job_id)
     hash["status"] = {
       "state" => "done",
@@ -436,8 +445,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query)
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210"
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
@@ -445,8 +454,12 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query
+  def query_job_json query, job_id: "job_9876543210"
     {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
       "configuration" => {
         "query" => {
           "query" => query,
@@ -490,7 +503,7 @@ class MockBigquery < Minitest::Spec
       "etag" => "etag1234567890",
       "jobReference" => {
         "projectId" => project,
-        "jobId" => "job9876543210"
+        "jobId" => "job_9876543210"
       },
       "schema" => random_schema_hash,
       "rows" => random_data_rows,
@@ -524,5 +537,84 @@ class MockBigquery < Minitest::Spec
     h = table_data_hash
     h.delete "rows"
     h.to_json
+  end
+
+  def load_job_gapi table_reference, source_format = "NEWLINE_DELIMITED_JSON", job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.new(
+      job_reference: job_reference_gapi(project, job_id),
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_reference,
+          source_format: source_format
+        ),
+        dry_run: nil
+      )
+    )
+  end
+
+  def load_job_csv_options_gapi table_reference, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.new(
+      job_reference: job_reference_gapi(project, job_id),
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_reference,
+          source_format: "CSV",
+          allow_jagged_rows: true,
+          allow_quoted_newlines: true,
+          encoding: "ISO-8859-1",
+          field_delimiter: "\t",
+          ignore_unknown_values: true,
+          max_bad_records: 42,
+          quote: "'",
+          skip_leading_rows: 1
+        ),
+        dry_run: nil
+      )
+    )
+  end
+
+  def load_job_url_gapi table_reference, url, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.new(
+      job_reference: job_reference_gapi(project, job_id),
+      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+          destination_table: table_reference,
+          source_uris: [url],
+        ),
+        dry_run: nil
+      )
+    )
+  end
+
+  def load_job_resp_gapi load_url, job_id: "job_9876543210"
+    hash = random_job_hash job_id
+    hash["configuration"]["load"] = {
+      "sourceUris" => [load_url],
+      "destinationTable" => {
+        "projectId" => project,
+        "datasetId" => dataset_id,
+        "tableId" => table_id
+      }
+    }
+    Google::Apis::BigqueryV2::Job.from_json hash.to_json
+  end
+
+  def temp_csv
+    Tempfile.open ["import", ".csv"] do |tmpfile|
+      tmpfile.puts "id,name"
+      1000.times do |x|
+        tmpfile.puts "#{x},#{SecureRandom.urlsafe_base64(rand(8..16))}"
+      end
+      yield tmpfile
+    end
+  end
+
+  def temp_json
+    Tempfile.open ["import", ".json"] do |tmpfile|
+      h = {}
+      1000.times { |x| h["key-#{x}"] = {name: SecureRandom.urlsafe_base64(rand(8..16)) } }
+      tmpfile.write h.to_json
+      yield tmpfile
+    end
   end
 end

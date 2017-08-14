@@ -605,6 +605,21 @@ module Google
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
+        # @param [String] job_id A user-defined ID for the query job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -676,14 +691,15 @@ module Google
         def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
                       table: nil, create: nil, write: nil, standard_sql: nil,
                       legacy_sql: nil, large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
+                      job_id: nil, prefix: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params }
+                      params: params, job_id: job_id, prefix: prefix }
           options[:dataset] ||= self
           ensure_service!
           gapi = service.query_job query, options
@@ -936,6 +952,21 @@ module Google
         #   See {Project#schema} for the creation of the schema for use with
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
+        # @param [String] job_id A user-defined ID for the load job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         # @yield [schema] A block for setting the schema for the destination
         #   table. The schema can be omitted if the destination table already
@@ -1011,7 +1042,7 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, schema: nil
+                 dryrun: nil, schema: nil, job_id: nil, prefix: nil
           ensure_service!
 
           if block_given?
@@ -1027,7 +1058,7 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
-                      schema: schema_gapi }
+                      schema: schema_gapi, job_id: job_id, prefix: prefix }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"

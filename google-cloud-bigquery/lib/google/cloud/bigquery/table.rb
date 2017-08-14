@@ -552,6 +552,21 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [String] job_id A user-defined ID for the copy job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         # @return [Google::Cloud::Bigquery::CopyJob]
         #
@@ -576,9 +591,11 @@ module Google
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil, dryrun: nil
+        def copy destination_table, create: nil, write: nil, dryrun: nil,
+                 job_id: nil, prefix: nil
           ensure_service!
-          options = { create: create, write: write, dryrun: dryrun }
+          options = { create: create, write: write, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix }
           gapi = service.copy_table table_ref,
                                     get_table_ref(destination_table),
                                     options
@@ -609,6 +626,21 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [String] job_id A user-defined ID for the extract job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
@@ -626,10 +658,11 @@ module Google
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil, dryrun: nil
+                    header: nil, dryrun: nil, job_id: nil, prefix: nil
           ensure_service!
           options = { format: format, compression: compression,
-                      delimiter: delimiter, header: header, dryrun: dryrun }
+                      delimiter: delimiter, header: header, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix }
           gapi = service.extract_table table_ref, extract_url, options
           Job.from_gapi gapi, service
         end
@@ -720,6 +753,21 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [String] job_id A user-defined ID for the load job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -761,7 +809,7 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil
+                 dryrun: nil, job_id: nil, prefix: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -769,7 +817,8 @@ module Google
                       quoted_newlines: quoted_newlines, encoding: encoding,
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, dryrun: dryrun }
+                      skip_leading: skip_leading, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
