@@ -171,7 +171,6 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
 
     trace_binding = rb_binding_new();
     call_stack_bindings = rb_funcall(trace_binding, callers_id, 0);
-    rb_ary_pop(call_stack_bindings);
 
     rb_funcall(self, breakpoints_hit_id, 2, matching_result, call_stack_bindings);
 
