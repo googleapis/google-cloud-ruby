@@ -13,12 +13,13 @@ Rake::ExtensionTask.new(ext_name, spec)
 namespace :compile do
   desc "Cleanup compilation files"
   task :cleanup do
-    puts "remove #{ext_name}.*"
     Dir.glob "lib/google/cloud/debugger/debugger_c.*" do |f|
+      puts "remove #{f}"
       File.delete f
     end
-    puts "remove directory tmp"
-    FileUtils.remove_dir "tmp"
+
+    puts "remove directory ./tmp"
+    FileUtils.remove_dir "tmp", true
   end
 end
 
