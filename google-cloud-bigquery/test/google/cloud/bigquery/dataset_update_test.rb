@@ -31,8 +31,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.friendly_name = new_dataset_name
-    patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi]
+    patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -53,8 +53,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.description = new_description
-    patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -75,8 +75,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_table_expiration_ms = new_default_expiration
-    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
