@@ -96,7 +96,7 @@ end
 
 namespace :integration do
   desc "Run integration tests against GAE"
-  task :gae, :project_uri do |t, args|
+  task :gae, [:project_uri] => :recompile do |t, args|
     fail "You must provide a project_uri. e.g. rake " \
       "integration:gae[http://my-project.appspot-preview.com]" if args[:project_uri].nil?
 
@@ -108,7 +108,7 @@ namespace :integration do
   end
 
   desc "Run integration tests against GKE"
-  task :gke, :pod_name do |t, args|
+  task :gke, [:pod_name] => :recompile do |t, args|
     fail "You must provide the GKE pod name. e.g. " \
       "rake integration:gke[google-cloud-ruby-test]" if args[:pod_name].nil?
 
