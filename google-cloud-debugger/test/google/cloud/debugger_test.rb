@@ -19,12 +19,12 @@ describe Google::Cloud do
   describe "#debugger" do
     it "calls out to Google::Cloud.debugger" do
       gcloud = Google::Cloud.new
-      stubbed_debugger = ->(project, keyfile, module_name: nil, module_version: nil,
+      stubbed_debugger = ->(project, keyfile, service_name: nil, service_version: nil,
         scope: nil, timeout: nil, client_config: nil) {
         project.must_be_nil
         keyfile.must_be_nil
-        module_name.must_be_nil
-        module_version.must_be_nil
+        service_name.must_be_nil
+        service_version.must_be_nil
         scope.must_be_nil
         timeout.must_be_nil
         client_config.must_be_nil
@@ -38,12 +38,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.debugger" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_debugger = ->(project, keyfile, module_name: nil, module_version: nil,
+      stubbed_debugger = ->(project, keyfile, service_name: nil, service_version: nil,
         scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
-        module_name.must_be_nil
-        module_version.must_be_nil
+        service_name.must_be_nil
+        service_version.must_be_nil
         scope.must_be_nil
         timeout.must_be_nil
         client_config.must_be_nil
@@ -57,19 +57,19 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.debugger" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_debugger = ->(project, keyfile, module_name: nil, module_version: nil,
+      stubbed_debugger = ->(project, keyfile, service_name: nil, service_version: nil,
         scope: nil, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
-        module_name.must_equal "utest-service"
-        module_version.must_equal "vUTest"
+        service_name.must_equal "utest-service"
+        service_version.must_equal "vUTest"
         scope.must_equal "http://example.com/scope"
         timeout.must_equal 60
         client_config.must_equal({ "gax" => "options" })
         "debugger-project-object-scoped"
       }
       Google::Cloud.stub :debugger, stubbed_debugger do
-        project = gcloud.debugger module_name: "utest-service", module_version: "vUTest", scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
+        project = gcloud.debugger service_name: "utest-service", service_version: "vUTest", scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
         project.must_equal "debugger-project-object-scoped"
       end
     end
@@ -77,14 +77,14 @@ describe Google::Cloud do
 
   describe ".debugger" do
     let(:default_credentials) { OpenStruct.new empty: true }
-    let(:default_module_name) { "default-utest-service" }
-    let(:default_module_version) { "vDefaultUTest" }
+    let(:default_service_name) { "default-utest-service" }
+    let(:default_service_version) { "vDefaultUTest" }
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
       stubbed_env = OpenStruct.new project_id: "project-id",
-                                   app_engine_service_id: default_module_name,
-                                   app_engine_service_version: default_module_version
+                                   app_engine_service_id: default_service_name,
+                                   app_engine_service_version: default_service_version
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
@@ -93,8 +93,8 @@ describe Google::Cloud do
             debugger = Google::Cloud.debugger
             debugger.must_be_kind_of Google::Cloud::Debugger::Project
             debugger.project.must_equal "project-id"
-            debugger.agent.debuggee.module_name.must_equal default_module_name
-            debugger.agent.debuggee.module_version.must_equal default_module_version
+            debugger.agent.debuggee.service_name.must_equal default_service_name
+            debugger.agent.debuggee.service_version.must_equal default_service_version
             debugger.service.credentials.must_equal default_credentials
           end
         end
@@ -107,8 +107,8 @@ describe Google::Cloud do
         scope.must_be_nil
         "debugger-credentials"
       }
-      stubbed_module_name = "utest-service"
-      stubbed_module_version = "vUTest"
+      stubbed_service_name = "utest-service"
+      stubbed_service_version = "vUTest"
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "debugger-credentials"
@@ -123,11 +123,11 @@ describe Google::Cloud do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Debugger::Service.stub :new, stubbed_service do
-                debugger = Google::Cloud.debugger "project-id", "path/to/keyfile.json", module_name: stubbed_module_name, module_version: stubbed_module_version
+                debugger = Google::Cloud.debugger "project-id", "path/to/keyfile.json", service_name: stubbed_service_name, service_version: stubbed_service_version
                 debugger.must_be_kind_of Google::Cloud::Debugger::Project
                 debugger.project.must_equal "project-id"
-                debugger.agent.debuggee.module_name.must_equal stubbed_module_name
-                debugger.agent.debuggee.module_version.must_equal stubbed_module_version
+                debugger.agent.debuggee.service_name.must_equal stubbed_service_name
+                debugger.agent.debuggee.service_version.must_equal stubbed_service_version
                 debugger.service.must_be_kind_of OpenStruct
               end
             end
@@ -149,14 +149,14 @@ describe Google::Cloud do
 
   describe "Debugger.new" do
     let(:default_credentials) { OpenStruct.new empty: true }
-    let(:default_module_name) { "default-utest-service" }
-    let(:default_module_version) { "vDefaultUTest" }
+    let(:default_service_name) { "default-utest-service" }
+    let(:default_service_version) { "vDefaultUTest" }
     let(:found_credentials) { "{}" }
 
-    it "gets defaults for project_id, keyfile, module_name, and module_version" do
+    it "gets defaults for project_id, keyfile, service_name, and service_version" do
       stubbed_env = OpenStruct.new project_id: "project-id",
-                                   app_engine_service_id: default_module_name,
-                                   app_engine_service_version: default_module_version
+                                   app_engine_service_id: default_service_name,
+                                   app_engine_service_version: default_service_version
 
       # Clear all environment variables
       ENV.stub :[], nil do
@@ -166,22 +166,22 @@ describe Google::Cloud do
             debugger = Google::Cloud::Debugger.new
             debugger.must_be_kind_of Google::Cloud::Debugger::Project
             debugger.project.must_equal "project-id"
-            debugger.agent.debuggee.module_name.must_equal default_module_name
-            debugger.agent.debuggee.module_version.must_equal default_module_version
+            debugger.agent.debuggee.service_name.must_equal default_service_name
+            debugger.agent.debuggee.service_version.must_equal default_service_version
             debugger.service.credentials.must_equal default_credentials
           end
         end
       end
     end
 
-    it "uses provided project_id, keyfile, module_name, and module_version" do
+    it "uses provided project_id, keyfile, service_name, and service_version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_be_nil
         "debugger-credentials"
       }
-      stubbed_module_name = "utest-service"
-      stubbed_module_version = "vUTest"
+      stubbed_service_name = "utest-service"
+      stubbed_service_version = "vUTest"
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "debugger-credentials"
@@ -196,11 +196,11 @@ describe Google::Cloud do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Debugger::Service.stub :new, stubbed_service do
-                debugger = Google::Cloud::Debugger.new project: "project-id", keyfile: "path/to/keyfile.json", module_name: stubbed_module_name, module_version: stubbed_module_version
+                debugger = Google::Cloud::Debugger.new project: "project-id", keyfile: "path/to/keyfile.json", service_name: stubbed_service_name, service_version: stubbed_service_version
                 debugger.must_be_kind_of Google::Cloud::Debugger::Project
                 debugger.project.must_equal "project-id"
-                debugger.agent.debuggee.module_name.must_equal stubbed_module_name
-                debugger.agent.debuggee.module_version.must_equal stubbed_module_version
+                debugger.agent.debuggee.service_name.must_equal stubbed_service_name
+                debugger.agent.debuggee.service_version.must_equal stubbed_service_version
                 debugger.service.must_be_kind_of OpenStruct
               end
             end

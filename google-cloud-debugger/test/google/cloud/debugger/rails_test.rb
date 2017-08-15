@@ -26,8 +26,8 @@ describe Google::Cloud::Debugger::Railtie do
     config.google_cloud.debugger = ::ActiveSupport::OrderedOptions.new
     config.google_cloud.project_id = "test-project"
     config.google_cloud.keyfile = "test/keyfile"
-    config.google_cloud.debugger.module_name = "test-module"
-    config.google_cloud.debugger.module_version = "test-version"
+    config.google_cloud.debugger.service_name = "test-module"
+    config.google_cloud.debugger.service_version = "test-version"
     config
   end
 
@@ -44,8 +44,8 @@ describe Google::Cloud::Debugger::Railtie do
         Google::Cloud::Debugger.configure do |config|
           config.project_id.must_equal "test-project"
           config.keyfile.must_equal "test/keyfile"
-          config.module_name.must_equal "test-module"
-          config.module_version.must_equal "test-version"
+          config.service_name.must_equal "test-module"
+          config.service_version.must_equal "test-version"
         end
       end
     end
@@ -54,8 +54,8 @@ describe Google::Cloud::Debugger::Railtie do
       Google::Cloud::Debugger.configure do |config|
         config.project_id = "another-test-project"
         config.keyfile = "/another/test/keyfile"
-        config.module_name = "another-test-module"
-        config.module_version = "another-test-version"
+        config.service_name = "another-test-module"
+        config.service_version = "another-test-version"
       end
 
       STDOUT.stub :puts, nil do
@@ -64,8 +64,8 @@ describe Google::Cloud::Debugger::Railtie do
         Google::Cloud::Debugger.configure do |config|
           config.project_id.must_equal "another-test-project"
           config.keyfile.must_equal "/another/test/keyfile"
-          config.module_name.must_equal "another-test-module"
-          config.module_version.must_equal "another-test-version"
+          config.service_name.must_equal "another-test-module"
+          config.service_version.must_equal "another-test-version"
         end
       end
     end

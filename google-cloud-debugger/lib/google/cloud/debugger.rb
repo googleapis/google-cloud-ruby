@@ -104,10 +104,10 @@ module Google
     # config.google_cloud.keyfile = "/path/to/keyfile.json"
     # # Google Cloud authentication json file for Stackdriver Debugger only
     # config.google_cloud.debugger.keyfile = "/path/to/debugger/keyfile.json"
-    # # Stackdriver Debugger Agent module name identifier
-    # config.google_cloud.debugger.module_name = "my-ruby-app"
-    # # Stackdriver Debugger Agent module version identifier
-    # config.google_cloud.debugger.module_version = "v1"
+    # # Stackdriver Debugger Agent service name identifier
+    # config.google_cloud.debugger.service_name = "my-ruby-app"
+    # # Stackdriver Debugger Agent service version identifier
+    # config.google_cloud.debugger.service_version = "v1"
     # ```
     #
     # See the {Google::Cloud::Debugger::Railtie} class for more information.
@@ -130,8 +130,8 @@ module Google
     # require "google/cloud/debugger"
     # use Google::Cloud::Debugger::Middleware project: "debugger-project-id",
     #                                         keyfile: "/path/to/keyfile.json",
-    #                                         module_name: "my-ruby-app",
-    #                                         module_version: "v1"
+    #                                         service_name: "my-ruby-app",
+    #                                         service_version: "v1"
     # ```
     #
     # ### Using instrumentation with other Rack-based frameworks
@@ -343,8 +343,9 @@ module Google
       #   service.
       # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
       #   either the JSON data or the path to a readable file.
-      # @param [String] module_name Name for the debuggee application. Optional.
-      # @param [String] module_version Version identifier for the debuggee
+      # @param [String] service_name Name for the debuggee application.
+      #   Optional.
+      # @param [String] service_version Version identifier for the debuggee
       #   application. Optional.
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
@@ -361,19 +362,19 @@ module Google
       #   debugger = Google::Cloud::Debugger.new
       #   debugger.start
       #
-      def self.new project: nil, keyfile: nil, module_name: nil,
-                   module_version: nil, scope: nil, timeout: nil,
+      def self.new project: nil, keyfile: nil, service_name: nil,
+                   service_version: nil, scope: nil, timeout: nil,
                    client_config: nil
         project ||= Debugger::Project.default_project
         project = project.to_s # Always cast to a string
-        module_name ||= Debugger::Project.default_module_name
-        module_name = module_name.to_s
-        module_version ||= Debugger::Project.default_module_version
-        module_version = module_version.to_s
+        service_name ||= Debugger::Project.default_service_name
+        service_name = service_name.to_s
+        service_version ||= Debugger::Project.default_service_version
+        service_version = service_version.to_s
 
         fail ArgumentError, "project is missing" if project.empty?
-        fail ArgumentError, "module_name is missing" if module_name.empty?
-        fail ArgumentError, "module_version is missing" if module_version.nil?
+        fail ArgumentError, "service_name is missing" if service_name.empty?
+        fail ArgumentError, "service_version is missing" if service_version.nil?
 
         credentials = Credentials.credentials_with_scope keyfile, scope
 
@@ -381,8 +382,8 @@ module Google
           Google::Cloud::Debugger::Service.new(
             project, credentials, timeout: timeout,
                                   client_config: client_config),
-          module_name: module_name,
-          module_version: module_version
+          service_name: service_name,
+          service_version: service_version
         )
       end
 

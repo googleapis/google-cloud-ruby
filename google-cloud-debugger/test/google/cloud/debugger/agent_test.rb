@@ -33,8 +33,8 @@ describe Google::Cloud::Debugger::Agent, :mock_debugger do
 
     it "uses the logger passed in" do
       new_agent = Google::Cloud::Debugger::Agent.new nil, logger: "test-logger",
-                                                          module_name: nil,
-                                                          module_version: nil
+                                                          service_name: nil,
+                                                          service_version: nil
       new_agent.logger.must_equal "test-logger"
     end
   end

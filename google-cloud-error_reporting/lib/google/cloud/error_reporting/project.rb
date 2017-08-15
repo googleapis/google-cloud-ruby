@@ -58,7 +58,7 @@ module Google
 
         ##
         # Find default service_name from `ERROR_REPORTING_SERVICE`,
-        # `GAE_MODULE_NAME` environment Variables, or just "ruby".
+        # `GAE_SERVICE` environment Variables, or just "ruby".
         #
         # @return [String] default GCP service_name
         #
@@ -70,7 +70,7 @@ module Google
 
         ##
         # Find default service_version from `ERROR_REPORTING_VERSION` or
-        # `GAE_MODULE_VERSION` environment varaibles.
+        # `GAE_VERSION` environment varaibles.
         #
         # @return [String] default GCP service_version
         #

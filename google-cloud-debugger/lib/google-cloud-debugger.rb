@@ -31,8 +31,8 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String] module_name Name for the debuggee application. Optional.
-    # @param [String] module_version Version identifier for the debuggee
+    # @param [String] service_name Name for the debuggee application. Optional.
+    # @param [String] service_version Version identifier for the debuggee
     #   application. Optional.
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
@@ -63,13 +63,14 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   debugger = gcloud.debugger scope: platform_scope
     #
-    def debugger module_name: nil, module_version: nil, scope: nil,
+    def debugger service_name: nil, service_version: nil, scope: nil,
                  timeout: nil, client_config: nil
-      Google::Cloud.debugger @project, @keyfile, module_name: module_name,
-                                                 module_version: module_version,
-                                                 scope: scope,
-                                                 timeout: (timeout || @timeout),
-                                                 client_config: client_config
+      Google::Cloud.debugger @project, @keyfile,
+                             service_name: service_name,
+                             service_version: service_version,
+                             scope: scope,
+                             timeout: (timeout || @timeout),
+                             client_config: client_config
     end
 
     ##
@@ -84,8 +85,8 @@ module Google
     #   service you are connecting to.
     # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
     #   file path the file must be readable.
-    # @param [String] module_name Name for the debuggee application. Optional.
-    # @param [String] module_version Version identifier for the debuggee
+    # @param [String] service_name Name for the debuggee application. Optional.
+    # @param [String] service_version Version identifier for the debuggee
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -107,13 +108,13 @@ module Google
     #
     #   debugger.start
     #
-    def self.debugger project = nil, keyfile = nil, module_name: nil,
-                      module_version: nil, scope: nil, timeout: nil,
+    def self.debugger project = nil, keyfile = nil, service_name: nil,
+                      service_version: nil, scope: nil, timeout: nil,
                       client_config: nil
       require "google/cloud/debugger"
       Google::Cloud::Debugger.new project: project, keyfile: keyfile,
-                                  module_name: module_name,
-                                  module_version: module_version,
+                                  service_name: service_name,
+                                  service_version: service_version,
                                   scope: scope, timeout: timeout,
                                   client_config: client_config
     end

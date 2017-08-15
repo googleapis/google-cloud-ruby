@@ -48,12 +48,12 @@ module Google
         ##
         # Name for the debuggee application
         # @return [String]
-        attr_reader :module_name
+        attr_reader :service_name
 
         ##
         # Version identifier for the debuggee application
         # @return [String]
-        attr_reader :module_version
+        attr_reader :service_version
 
         ##
         # Registered Debuggee ID. Set by Stackdriver Debugger service when
@@ -63,10 +63,10 @@ module Google
 
         ##
         # @private Construct a new instance of Debuggee
-        def initialize service, module_name:, module_version:
+        def initialize service, service_name:, service_version:
           @service = service
-          @module_name = module_name
-          @module_version = module_version
+          @service_name = service_name
+          @service_version = service_version
           @computed_uniquifier = nil
           @id = nil
         end
@@ -142,8 +142,8 @@ module Google
         def labels
           {
             "projectid" => String(project_id),
-            "module" => String(module_name),
-            "version" => String(module_version)
+            "module" => String(service_name),
+            "version" => String(service_version)
           }
         end
 
@@ -155,10 +155,10 @@ module Google
         # @return [String] A compact debuggee description.
         #
         def description
-          if module_version.nil? || module_version.empty?
-            module_name
+          if service_version.nil? || service_version.empty?
+            service_name
           else
-            "#{module_name} - #{module_version}"
+            "#{service_name} - #{service_version}"
           end
         end
 

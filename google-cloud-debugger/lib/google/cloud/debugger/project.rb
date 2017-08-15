@@ -50,10 +50,10 @@ module Google
 
         ##
         # @private Creates a new Project instance.
-        def initialize service, module_name:, module_version:
+        def initialize service, service_name:, service_version:
           @service = service
-          @agent = Agent.new service, module_name: module_name,
-                                      module_version: module_version
+          @agent = Agent.new service, service_name: service_name,
+                                      service_version: service_version
         end
 
         ##
@@ -85,17 +85,17 @@ module Google
         end
 
         ##
-        # @private Default module name identifier.
-        def self.default_module_name
-          ENV["DEBUGGER_MODULE_NAME"] ||
+        # @private Default service name identifier.
+        def self.default_service_name
+          ENV["DEBUGGER_SERVICE_NAME"] ||
             Google::Cloud.env.app_engine_service_id ||
             "ruby-app"
         end
 
         ##
-        # @private Default module version identifier.
-        def self.default_module_version
-          ENV["DEBUGGER_MODULE_VERSION"] ||
+        # @private Default service version identifier.
+        def self.default_service_version
+          ENV["DEBUGGER_SERVICE_VERSION"] ||
             Google::Cloud.env.app_engine_service_version ||
             ""
         end
