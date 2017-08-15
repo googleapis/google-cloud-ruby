@@ -1088,6 +1088,7 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new patch_args
+          patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi
         end
 

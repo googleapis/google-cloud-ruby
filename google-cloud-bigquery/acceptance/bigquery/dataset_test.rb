@@ -96,6 +96,42 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     dataset.default_expiration = nil
   end
 
+  it "should fail to set metadata with stale etag" do
+    fresh = bigquery.dataset dataset.dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::Error
+    err.message.must_equal "conditionNotMet: Precondition Failed"
+  end
+
+  it "create dataset returns an etag that is different from get dataset" do
+    fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
+    fresh = bigquery.create_dataset fresh_dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset fresh_dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.wont_equal fresh.etag
+  end
+
+  it "create dataset returns valid etag equal to get dataset" do
+    skip "the etag on create is currently different from the etag on get"
+    fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
+    fresh = bigquery.create_dataset fresh_dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset fresh_dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+  end
+
   it "should get a list of tables and views" do
     tables = dataset.tables
     # The code in before ensures we have at least one dataset
