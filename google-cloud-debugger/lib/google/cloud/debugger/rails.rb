@@ -101,8 +101,8 @@ module Google
           Debugger.configure do |config|
             config.project_id ||= dbg_config.project_id || gcp_config.project_id
             config.keyfile ||= dbg_config.keyfile || gcp_config.keyfile
-            config.module_name ||= dbg_config.module_name
-            config.module_version ||= dbg_config.module_version
+            config.service_name ||= dbg_config.service_name
+            config.service_version ||= dbg_config.service_version
           end
         end
 
@@ -111,8 +111,8 @@ module Google
         def self.init_default_config
           config = Debugger.configure
           config.project_id ||= Debugger::Project.default_project
-          config.module_name ||= Debugger::Project.default_module_name
-          config.module_version ||= Debugger::Project.default_module_version
+          config.service_name ||= Debugger::Project.default_service_name
+          config.service_version ||= Debugger::Project.default_service_version
         end
 
         ##

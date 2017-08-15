@@ -48,7 +48,7 @@ def mock_debugger
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
     debugger = Google::Cloud::Debugger::Project.new(
       Google::Cloud::Debugger::Service.new("my-project", credentials),
-      module_name: nil, module_version: nil)
+      service_name: nil, service_version: nil)
 
     debugger.service.mocked_debugger = Minitest::Mock.new
     debugger.service.mocked_transmitter = Minitest::Mock.new

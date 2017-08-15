@@ -114,19 +114,19 @@ module Google
         #   object
         # @param [Google::Cloud::Logging::Logger] logger The logger used
         #   to write the results of Logpoints.
-        # @param [String] module_name Name for the debuggee application.
-        # @param [String] module_version Version identifier for the debuggee
+        # @param [String] service_name Name for the debuggee application.
+        # @param [String] service_version Version identifier for the debuggee
         #   application.
         # @param [String] app_root Absolute path to the root directory of
         #   the debuggee application. Default to Rack root.
         #
-        def initialize service, logger: nil, module_name:, module_version:,
+        def initialize service, logger: nil, service_name:, service_version:,
                        app_root: nil
           super()
 
           @service = service
-          @debuggee = Debuggee.new service, module_name: module_name,
-                                            module_version: module_version
+          @debuggee = Debuggee.new service, service_name: service_name,
+                                            service_version: service_version
           @tracer = Debugger::Tracer.new self
           @breakpoint_manager = BreakpointManager.new self, service
           @breakpoint_manager.on_breakpoints_change =

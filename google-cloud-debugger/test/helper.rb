@@ -25,8 +25,8 @@ class MockDebugger < Minitest::Spec
   let(:project) { "test" }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:module_name) { "test-service" }
-  let(:module_version) { "vTest" }
+  let(:service_name) { "test-service" }
+  let(:service_version) { "vTest" }
   let(:service) {
     service = Google::Cloud::Debugger::Service.new(project, credentials)
     mocked_debugger = Object.new
@@ -42,8 +42,8 @@ class MockDebugger < Minitest::Spec
   let(:debugger) {
     Google::Cloud::Debugger::Project.new(
       service,
-      module_name: module_name,
-      module_version: module_version
+      service_name: service_name,
+      service_version: service_version
     )
   }
   let(:debuggee_id) { "test debuggee id" }

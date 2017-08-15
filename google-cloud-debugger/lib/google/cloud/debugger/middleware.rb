@@ -51,8 +51,8 @@ module Google
             @debugger =
               Debugger.new(project: configuration.project_id,
                            keyfile: configuration.keyfile,
-                           module_name: configuration.module_name,
-                           module_version: configuration.module_version)
+                           service_name: configuration.service_name,
+                           service_version: configuration.service_version)
 
             @debugger.agent.quota_manager =
               Google::Cloud::Debugger::RequestQuotaManager.new
@@ -104,10 +104,10 @@ module Google
           configuration.keyfile = kwargs[:keyfile] ||
                                   configuration.keyfile
 
-          configuration.module_name = kwargs[:module_name] ||
-                                      configuration.module_name
-          configuration.module_version = kwargs[:module_version] ||
-                                         configuration.module_version
+          configuration.service_name = kwargs[:service_name] ||
+                                       configuration.service_name
+          configuration.service_version = kwargs[:service_version] ||
+                                          configuration.service_version
 
           init_default_config
         end
@@ -119,9 +119,9 @@ module Google
                                        Debugger::Project.default_project
           configuration.keyfile ||= Cloud.configure.keyfile
 
-          configuration.module_name ||= Debugger::Project.default_module_name
-          configuration.module_version ||=
-            Debugger::Project.default_module_version
+          configuration.service_name ||= Debugger::Project.default_service_name
+          configuration.service_version ||=
+            Debugger::Project.default_service_version
         end
 
         ##
