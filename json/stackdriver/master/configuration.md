@@ -45,7 +45,7 @@ end
 # Debugger specific configurations 
 Google::Cloud::Debugger.configure do |config|
   config.project_id = "debugger-project"
-  config.module_name = "my-service"
+  config.service_name = "my-service"
 end
 
 # Logging specific configurations 
@@ -88,8 +88,8 @@ end
 
 * `debugger.project_id`: [`String`] Google Cloud Platform Project identifier just for Debugger. Self discovered on GCP.
 * `debugger.keyfile`: [`String`] Path to service account JSON keyfile. Self discovered on GCP.
-* `debugger.module_name`: [`String`] Identifier to running service. Self discovered on GCP. Default: `"ruby-app"`
-* `debugger.module_version`: [`String`] Version identifier to running service. Self discovered on GCP.
+* `debugger.service_name`: [`String`] Identifier to running service. Self discovered on GCP. Default: `"ruby-app"`
+* `debugger.service_version`: [`String`] Version identifier to running service. Self discovered on GCP.
 * `debugger.root`: [`String`] The root directory of the debuggee application in absolute file path form. Default: `Rack::Directory#root` if the application framework is rack-based,i.e. Ruby on Rails, Sinatra. Otherwise use current working directory.
 
 #### Logging
