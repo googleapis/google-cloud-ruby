@@ -15,11 +15,19 @@
 
 require "helper"
 require "google/cloud/debugger/tracer/tracer_test_helper"
+require "google/cloud/debugger/tracer/tracer_test_helper_2"
 
 ##
 # Method call defined in different file to distract tracer
 def tracer_distraction_method1
   tracer_test_func5
+end
+
+##
+# Method call defined in different file to distract tracer
+def tracer_distraction_method2
+  var = nil
+  var
 end
 
 describe Google::Cloud::Debugger::Tracer, :mock_debugger do
@@ -38,6 +46,10 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     Google::Cloud::Debugger::Breakpoint.new "6", breakpoint_path, 70 }
   let(:breakpoint7) {
     Google::Cloud::Debugger::Breakpoint.new "7", breakpoint_path, 72 }
+  let(:breakpoint8) {
+    Google::Cloud::Debugger::Breakpoint.new "8", breakpoint_path, 82 }
+  let(:breakpoint9) {
+    Google::Cloud::Debugger::Breakpoint.new "9", breakpoint_path, 89 }
 
   it "catches breakpoint from function call" do
     hit = false
@@ -118,6 +130,44 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     hit.must_equal true
   end
 
+  it "catches breakpoint when function interleave files#2" do
+    hit = false
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint8
+      hit = true
+    end
+
+    breakpoint_manager.update_breakpoints [breakpoint8]
+    tracer = debugger.agent.tracer
+
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
+      tracer.start
+      tracer_test_func6
+      tracer.stop
+    end
+
+    hit.must_equal true
+  end
+
+  it "catches breakpoint when function interleave files#3" do
+    hit = false
+    stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
+      breakpoints.first.must_equal breakpoint9
+      hit = true
+    end
+
+    breakpoint_manager.update_breakpoints [breakpoint9]
+    tracer = debugger.agent.tracer
+
+    tracer.stub :breakpoints_hit, stubbed_breakpoints_hit do
+      tracer.start
+      tracer_test_func7
+      tracer.stop
+    end
+
+    hit.must_equal true
+  end
+
   it "catches breakpoint from lambda function" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
@@ -157,6 +207,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   end
 
   it "catches breakpoint from fiber" do
+    skip("Fiber tracing not supported") if RUBY_VERSION.to_f < 2.3
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
       assert_equal breakpoints.first, breakpoint6
@@ -176,6 +227,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   end
 
   it "catches breakpoint from fiber after fiber yields" do
+    skip("Fiber tracing not supported") if RUBY_VERSION.to_f < 2.3
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
       assert_equal breakpoints.first, breakpoint7
