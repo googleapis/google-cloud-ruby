@@ -73,3 +73,18 @@ def tracer_test_fiber
     result
   end
 end
+
+##
+# Helper method to test tracer
+def tracer_test_func6
+  tracer_distraction_method2
+  var = nil
+  var
+end
+
+##
+# Helper method to test tracer
+def tracer_test_func7
+  tracer_distraction_method3
+  true
+end

@@ -261,6 +261,7 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
     VALUE *c_caller_locations;
     VALUE caller_location;
     VALUE caller_path;
+    int c_caller_locations_len;
 
     ID caller_locations_id;
     ID absolute_path_id;
@@ -268,19 +269,24 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
     CONST_ID(caller_locations_id, "caller_locations");
     CONST_ID(absolute_path_id, "absolute_path");
 
-    caller_locations = rb_funcall(rb_mKernel, caller_locations_id, 2, INT2NUM(0), INT2NUM(1));
+    caller_locations = rb_funcall(rb_mKernel, caller_locations_id, 2, INT2NUM(1), INT2NUM(1));
 
+
+    // Return if current execution stack is too shallow.
     if(!RTEST(caller_locations)) {
         return;
     }
 
     c_caller_locations = RARRAY_PTR(caller_locations);
-    caller_location = c_caller_locations[0];
-    caller_path = rb_funcall(caller_location, absolute_path_id, 0);
+    c_caller_locations_len = RARRAY_LEN(caller_locations);
 
-    if(!RTEST(caller_path)) {
+    // Make sure caller locations has at least one entry.
+    if(c_caller_locations_len == 0) {
         return;
     }
+
+    caller_location = c_caller_locations[0];
+    caller_path = rb_funcall(caller_location, absolute_path_id, 0);
 
     match_found = match_breakpoints_files(self, caller_path);
 
