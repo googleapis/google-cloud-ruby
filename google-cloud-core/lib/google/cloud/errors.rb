@@ -50,6 +50,7 @@ module Google
           403 => PermissionDeniedError,
           404 => NotFoundError,
           409 => AlreadyExistsError, # AbortedError
+          412 => FailedPreconditionError,
           429 => ResourceExhaustedError,
           499 => CanceledError,
           500 => InternalError, # UnknownError/DataLossError
