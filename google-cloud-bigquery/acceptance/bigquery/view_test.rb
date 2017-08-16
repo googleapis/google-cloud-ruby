@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery, :bigquery do
+describe Google::Cloud::Bigquery::View, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:publicdata_query_2) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 50" }
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -55,11 +55,14 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "gets and sets attributes" do
+    view.reload! # TODO: remove after fixing etag staleness after create_table
     new_name = "New name!"
     new_desc = "New description!"
 
     view.name = new_name
+    view.reload! # TODO: remove after fixing etag staleness after create_table
     view.description = new_desc
+    view.reload! # TODO: remove after fixing etag staleness after create_table
     view.query = publicdata_query_2
 
     view.reload!
@@ -67,6 +70,22 @@ describe Google::Cloud::Bigquery, :bigquery do
     view.name.must_equal new_name
     view.description.must_equal new_desc
     view.query.must_equal publicdata_query_2
+  end
+
+  it "should fail to set metadata with stale etag" do
+    fresh = dataset.table view.table_id
+    fresh.etag.wont_be :nil?
+
+    stale = dataset.table view_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    fresh.reload! # TODO: remove after fixing etag staleness after create_table
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
+    err.message.must_equal "conditionNotMet: Precondition Failed"
   end
 
   it "returns data" do
