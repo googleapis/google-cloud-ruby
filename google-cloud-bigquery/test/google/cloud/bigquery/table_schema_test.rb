@@ -52,6 +52,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_timestamp) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_timestamp_gapi }
   let(:field_record_repeated) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_record_repeated_gapi }
 
+  let(:etag) { "etag123456789" }
+
   it "gets the schema, fields, and headers" do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     table.schema.must_be :frozen?
@@ -108,7 +110,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "sets a flat schema via a block with replace option true" do
-    new_schema = Google::Apis::BigqueryV2::TableSchema.new(
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
       fields: [field_string_required_gapi,
                field_integer_gapi,
                field_float_gapi,
@@ -121,10 +123,10 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock = Minitest::Mock.new
     returned_table_gapi = table_gapi.dup
-    returned_table_gapi.schema = new_schema
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema)
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -151,9 +153,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     new_schema_gapi.fields << end_date_timestamp_gapi
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema do |schema|
@@ -171,9 +173,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       fields: [field_timestamp_gapi])
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -191,9 +193,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       fields: [field_string_required_gapi, field_record_repeated_gapi])
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -217,9 +219,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       fields: [field_string_required_gapi, field_record_repeated_gapi])
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: new_schema_gapi)
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -233,12 +235,14 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     mock.verify
 
     next_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
-      fields: [field_string_required_gapi, Google::Apis::BigqueryV2::TableFieldSchema.new(name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi, field_string_required_gapi ])])
+      fields: [field_string_required_gapi, Google::Apis::BigqueryV2::TableFieldSchema.new(name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi, field_string_required_gapi ])],
+      etag: etag
+    )
     next_table_gapi = table_gapi.dup
     next_table_gapi.schema = next_schema_gapi
-    patch_next_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: next_schema_gapi)
+    patch_next_table_gapi = Google::Apis::BigqueryV2::Table.new schema: next_schema_gapi, etag: etag
     mock.expect :patch_table, next_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema do |schema|
@@ -275,9 +279,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     nested_schema_gapi = Google::Apis::BigqueryV2::TableSchema.from_json nested_schema_hash.to_json
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = nested_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(schema: nested_schema_gapi)
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: nested_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
