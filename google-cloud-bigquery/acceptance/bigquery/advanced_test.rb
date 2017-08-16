@@ -80,6 +80,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     empty_table.schema.field("spells").headers.wont_include :score
     empty_table.schema.field("spells").headers.must_include :properties
     empty_table.schema.field(:spells).field(:properties).headers.wont_include :grade
+    empty_table.reload! # TODO: remove after fixing etag staleness after create_table
     empty_table.schema do |schema|
       # adds to a nested field directly inline
       schema.field(:spells).integer :score, mode: :nullable
