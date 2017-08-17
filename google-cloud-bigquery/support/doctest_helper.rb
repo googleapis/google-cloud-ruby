@@ -377,6 +377,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -392,6 +393,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -494,6 +496,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -564,6 +567,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::View#query=" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
       mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
       mock.expect :patch_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view", Google::Apis::BigqueryV2::Table, Hash]
     end
