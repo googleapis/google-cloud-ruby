@@ -134,6 +134,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -142,6 +143,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -373,6 +375,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
     end
   end
@@ -387,6 +390,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
     end
   end
@@ -395,7 +399,8 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
-      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :list_table_data, table_data_gapi(token: nil), ["my-project-id", "my-dataset-id", "my-table-id", Hash]
       mock.expect :insert_all_table_data,
                   Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
@@ -487,6 +492,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id", Google::Apis::BigqueryV2::Table, Hash]
     end
   end
@@ -514,6 +520,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my-table-id"]
     end
   end
 
@@ -531,6 +538,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, view_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Table]
+      mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
       mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
     end
   end
