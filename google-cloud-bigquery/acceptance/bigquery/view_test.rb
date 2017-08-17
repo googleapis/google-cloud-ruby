@@ -55,14 +55,11 @@ describe Google::Cloud::Bigquery::View, :bigquery do
   end
 
   it "gets and sets attributes" do
-    view.reload! # TODO: remove after fixing etag staleness after create_table
     new_name = "New name!"
     new_desc = "New description!"
 
     view.name = new_name
-    view.reload! # TODO: remove after fixing etag staleness after create_table
     view.description = new_desc
-    view.reload! # TODO: remove after fixing etag staleness after create_table
     view.query = publicdata_query_2
 
     view.reload!
@@ -82,7 +79,6 @@ describe Google::Cloud::Bigquery::View, :bigquery do
 
     # Modify on the server, which will change the etag
     fresh.description = "Description 1"
-    fresh.reload! # TODO: remove after fixing etag staleness after create_table
     stale.etag.wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
     err.message.must_equal "conditionNotMet: Precondition Failed"
