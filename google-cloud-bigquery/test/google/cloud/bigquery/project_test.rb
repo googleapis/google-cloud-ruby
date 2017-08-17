@@ -16,18 +16,20 @@ require "helper"
 require "json"
 
 describe Google::Cloud::Bigquery::Project, :mock_bigquery do
+  let(:dataset_id) { "my_dataset" }
+
   it "creates an empty dataset" do
     mock = Minitest::Mock.new
-    created_dataset = create_dataset_gapi "my_dataset"
+    created_dataset = create_dataset_gapi dataset_id
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset")
+        project_id: project, dataset_id: dataset_id)
     )
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :get_dataset, created_dataset, [project, dataset_id]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset"
+    dataset = bigquery.create_dataset dataset_id
 
     mock.verify
 
@@ -35,26 +37,25 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "creates a dataset with options" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
     location = "EU"
 
     mock = Minitest::Mock.new
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :get_dataset, created_dataset, [project, dataset_id]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset id, name: name,
+    dataset = bigquery.create_dataset dataset_id, name: name,
                                       description: description,
                                       expiration: default_expiration,
                                       location: location
@@ -72,17 +73,17 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi "my_dataset"
+    created_dataset = create_dataset_gapi dataset_id
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :get_dataset, created_dataset, [project, dataset_id]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset" do |ds|
+    dataset = bigquery.create_dataset dataset_id do |ds|
       ds.access do |acl|
         refute acl.writer_user? "writers@example.com"
         acl.add_writer_user "writers@example.com"
@@ -97,7 +98,6 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "creates a dataset with options and access rules using a block" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
@@ -106,21 +106,21 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :get_dataset, created_dataset, [project, dataset_id]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+    dataset = bigquery.create_dataset dataset_id, location: location do |ds|
       ds.name = name
       ds.description = description
       ds.default_expiration = default_expiration
@@ -142,7 +142,6 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "creates a dataset with block options and access rules not using a block" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
@@ -151,21 +150,21 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :get_dataset, created_dataset, [project, dataset_id]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+    dataset = bigquery.create_dataset dataset_id, location: location do |ds|
       ds.name = name
       ds.description = description
       ds.default_expiration = default_expiration
