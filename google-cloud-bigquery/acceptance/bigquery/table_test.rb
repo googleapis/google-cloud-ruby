@@ -105,9 +105,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"
-    table.reload! # TODO: remove after fixing etag staleness after create_table
     table.name = new_name
-    table.reload! # TODO: remove after fixing etag staleness after create_table
     table.description = new_desc
 
     table.reload!
@@ -126,7 +124,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     # Modify on the server, which will change the etag
     fresh.description = "Description 1"
-    fresh.reload! # TODO: remove after fixing etag staleness after create_table
     stale.etag.wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
     err.message.must_equal "conditionNotMet: Precondition Failed"
@@ -149,7 +146,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   # TODO: Remove this test and restore original impl after acceptance test
   # indicates that service etag bug is fixed
-
   it "etag from get table is different from etag returned by Service#insert_table" do
     service = bigquery.service
     new_table_id = "#{rand 100}_kittens"
@@ -177,7 +173,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       end
     end
 
-    partitioned_table.reload! # TODO: remove after fixing etag staleness after create_table
     partitioned_table.time_partitioning_expiration = 1
 
     partitioned_table.reload!
@@ -189,12 +184,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "updates its schema" do
     begin
       t = dataset.create_table "table_schema_test"
-      t.reload! # TODO: remove after fixing etag staleness after create_table
       t.schema do |s|
         s.boolean "available", description: "available description", mode: :nullable
       end
       t.headers.must_equal [:available]
-      t.reload! # TODO: remove after fixing etag staleness after create_table
       t.schema replace: true do |s|
         s.boolean "available", description: "available description", mode: :nullable
         s.record "countries_lived", description: "countries_lived description", mode: :repeated do |nested|
