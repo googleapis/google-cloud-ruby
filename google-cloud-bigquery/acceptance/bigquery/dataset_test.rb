@@ -111,18 +111,25 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     err.message.must_equal "conditionNotMet: Precondition Failed"
   end
 
-  it "create dataset returns an etag that is different from get dataset" do
-    fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
-    fresh = bigquery.create_dataset fresh_dataset_id
-    fresh.etag.wont_be :nil?
+  # TODO: Remove this test and restore original impl after acceptance test
+  # indicates that service etag bug is fixed
+  it "etag from get dataset is different from etag returned by Service#insert_dataset" do
+    service = bigquery.service
 
-    stale = bigquery.dataset fresh_dataset_id
-    stale.etag.wont_be :nil?
-    stale.etag.wont_equal fresh.etag
+    new_dataset_id = "#{prefix}_#{rand 100}_unique"
+    new_ds = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: bigquery.project, dataset_id: new_dataset_id))
+
+    new_gapi = service.insert_dataset new_ds
+    new_gapi.etag.wont_be :nil?
+
+    fresh = bigquery.dataset new_dataset_id
+    fresh.etag.wont_be :nil?
+    fresh.etag.wont_equal new_gapi.etag
   end
 
   it "create dataset returns valid etag equal to get dataset" do
-    skip "the etag on create is currently different from the etag on get"
     fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
     fresh = bigquery.create_dataset fresh_dataset_id
     fresh.etag.wont_be :nil?
