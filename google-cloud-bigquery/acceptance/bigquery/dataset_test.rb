@@ -96,6 +96,49 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     dataset.default_expiration = nil
   end
 
+  it "should fail to set metadata with stale etag" do
+    fresh = bigquery.dataset dataset.dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
+    err.message.must_equal "conditionNotMet: Precondition Failed"
+  end
+
+  # TODO: Remove this test and restore original impl after acceptance test
+  # indicates that service etag bug is fixed
+  it "etag from get dataset is different from etag returned by Service#insert_dataset" do
+    service = bigquery.service
+
+    new_dataset_id = "#{prefix}_#{rand 100}_unique"
+    new_ds = Google::Apis::BigqueryV2::Dataset.new(
+      dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: bigquery.project, dataset_id: new_dataset_id))
+
+    new_gapi = service.insert_dataset new_ds
+    new_gapi.etag.wont_be :nil?
+
+    fresh = bigquery.dataset new_dataset_id
+    fresh.etag.wont_be :nil?
+    fresh.etag.wont_equal new_gapi.etag
+  end
+
+  it "create dataset returns valid etag equal to get dataset" do
+    fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
+    fresh = bigquery.create_dataset fresh_dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset fresh_dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+  end
+
   it "should get a list of tables and views" do
     tables = dataset.tables
     # The code in before ensures we have at least one dataset

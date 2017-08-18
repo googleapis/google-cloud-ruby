@@ -26,15 +26,17 @@ describe Google::Cloud::Bigquery::View, :update, :mock_bigquery do
 
 
   let(:schema) { view.schema.dup }
+  let(:etag) { "etag123456789" }
 
   it "updates its name" do
     new_table_name = "My Updated View"
 
     mock = Minitest::Mock.new
     view_hash = random_view_hash dataset_id, table_id, new_table_name, description
-    request_view_gapi = Google::Apis::BigqueryV2::Table.new friendly_name: "My Updated View"
-    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json),
-      [project, dataset_id, table_id, request_view_gapi]
+    request_view_gapi = Google::Apis::BigqueryV2::Table.new friendly_name: "My Updated View", etag: etag
+    mock.expect :patch_table, return_view(view_hash),
+      [project, dataset_id, table_id, request_view_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_view(view_hash), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
     view.name.must_equal table_name
@@ -55,9 +57,10 @@ describe Google::Cloud::Bigquery::View, :update, :mock_bigquery do
 
     mock = Minitest::Mock.new
     view_hash = random_view_hash dataset_id, table_id, table_name, new_description
-    request_view_gapi = Google::Apis::BigqueryV2::Table.new description: "This is my updated view"
-    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json),
-      [project, dataset_id, table_id, request_view_gapi]
+    request_view_gapi = Google::Apis::BigqueryV2::Table.new description: "This is my updated view", etag: etag
+    mock.expect :patch_table, return_view(view_hash),
+      [project, dataset_id, table_id, request_view_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_view(view_hash), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
     view.name.must_equal table_name
@@ -82,10 +85,12 @@ describe Google::Cloud::Bigquery::View, :update, :mock_bigquery do
     request_view_gapi = Google::Apis::BigqueryV2::Table.new(
       view: Google::Apis::BigqueryV2::ViewDefinition.new(
         query: new_query
-      )
+      ),
+      etag: etag
     )
-    mock.expect :patch_table, Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json),
-      [project, dataset_id, table_id, request_view_gapi]
+    mock.expect :patch_table, return_view(view_hash),
+      [project, dataset_id, table_id, request_view_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_view(view_hash), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
     view.name.must_equal table_name
@@ -100,5 +105,9 @@ describe Google::Cloud::Bigquery::View, :update, :mock_bigquery do
     view.query.must_equal new_query
 
     mock.verify
+  end
+
+  def return_view view_hash
+    Google::Apis::BigqueryV2::Table.from_json(view_hash.to_json)
   end
 end

@@ -927,7 +927,12 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::BigqueryV2::Table.new patch_args
+          patch_gapi.etag = etag if etag
           @gapi = service.patch_table dataset_id, table_id, patch_gapi
+
+          # TODO: restore original impl after acceptance test indicates that
+          # service etag bug is fixed
+          reload!
         end
 
         def self.class_for gapi

@@ -114,6 +114,56 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     table.description.must_equal new_desc
   end
 
+  it "should fail to set metadata with stale etag" do
+    fresh = dataset.table table.table_id
+    fresh.etag.wont_be :nil?
+
+    stale = dataset.table table_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
+    err.message.must_equal "conditionNotMet: Precondition Failed"
+  end
+
+  it "create dataset returns valid etag equal to get dataset" do
+    fresh_table_id = "#{rand 100}_kittens"
+    fresh = dataset.create_table fresh_table_id do |schema|
+      schema.integer  "id",     description: "id description",    mode: :required
+      schema.string    "breed", description: "breed description", mode: :required
+      schema.string    "name",  description: "name description",  mode: :required
+      schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+    fresh.etag.wont_be :nil?
+
+    stale = dataset.table fresh_table_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+  end
+
+  # TODO: Remove this test and restore original impl after acceptance test
+  # indicates that service etag bug is fixed
+  it "etag from get table is different from etag returned by Service#insert_table" do
+    service = bigquery.service
+    new_table_id = "#{rand 100}_kittens"
+
+    new_tb = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: bigquery.project, dataset_id: dataset_id,
+        table_id: new_table_id))
+    updater = Google::Cloud::Bigquery::Table::Updater.new(new_tb)
+
+    new_gapi = service.insert_table dataset.dataset_id, updater.to_gapi
+    new_gapi.etag.wont_be :nil?
+
+    fresh = dataset.table new_table_id
+    fresh.etag.wont_be :nil?
+    fresh.etag.wont_equal new_gapi.etag
+  end
+
   it "gets and sets time partitioning" do
     partitioned_table = dataset.table "weekly_kittens"
     if partitioned_table.nil?

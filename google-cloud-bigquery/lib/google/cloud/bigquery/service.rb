@@ -98,8 +98,13 @@ module Google
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
         def patch_dataset dataset_id, patched_dataset_gapi
+          options = {}
+          if patched_dataset_gapi.etag
+            options[:header] = { "If-Match" => patched_dataset_gapi.etag }
+          end
           execute do
-            service.patch_dataset @project, dataset_id, patched_dataset_gapi
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi,
+                                  options: options
           end
         end
 
@@ -149,9 +154,13 @@ module Google
         # Updates information in an existing table, replacing fields that
         # are provided in the submitted table resource.
         def patch_table dataset_id, table_id, patched_table_gapi
+          options = {}
+          if patched_table_gapi.etag
+            options[:header] = { "If-Match" => patched_table_gapi.etag }
+          end
           execute do
             service.patch_table @project, dataset_id, table_id,
-                                patched_table_gapi
+                                patched_table_gapi, options: options
           end
         end
 

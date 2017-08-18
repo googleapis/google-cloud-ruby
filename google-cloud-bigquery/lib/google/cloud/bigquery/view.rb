@@ -483,7 +483,12 @@ module Google
         def patch_table_gapi patch_args
           ensure_service!
           patch_gapi = Google::Apis::BigqueryV2::Table.new patch_args
+          patch_gapi.etag = etag if etag
           @gapi = service.patch_table dataset_id, table_id, patch_gapi
+
+          # TODO: restore original impl after acceptance test indicates that
+          # service etag bug is fixed
+          reload!
         end
 
         ##
