@@ -117,8 +117,7 @@ module Google
         #
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
-        #   project.labels["env"] #=> "dev" # read only
-        #   project.labels["env"] = "production" # raises error
+        #   project.labels["env"] # read-only
         #
         # @example Labels can be updated by passing a block, or with {#labels=}:
         #   require "google/cloud/resource_manager"

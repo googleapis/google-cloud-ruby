@@ -5,6 +5,7 @@ AllCops:
     - "lib/google/pubsub/**/*"
     - "lib/google/iam/**/*"
     - "Rakefile"
+    - "support/**/*"
     - "test/**/*"
 
 Documentation:
