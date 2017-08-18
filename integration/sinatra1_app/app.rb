@@ -32,7 +32,7 @@ use Google::Cloud::Trace::Middleware
 
 
 # Set :raise_errors to expose error message in production environment
-set :raise_errors, false
+set :raise_errors, true
 set :bind, "0.0.0.0"
 set :port, 8080
 
@@ -79,10 +79,6 @@ end
 get '/test_error_reporting' do
   error_toke = params[:token]
   raise StandardError, "Test error from sinatra classic: #{error_toke}"
-end
-
-error 500 do
-  'Error message -> ' +  @env['sinatra.error'].message
 end
 
 get '/test_logging' do

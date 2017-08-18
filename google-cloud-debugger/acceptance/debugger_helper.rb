@@ -59,7 +59,7 @@ module Acceptance
     ##
     # Create a test gRPC Snappoing
     def sample_snappoint
-      file_path = File.expand_path __FILE__
+      file_path = "acceptance/debugger_helper.rb"
       line = method(:trigger_breakpoint).source_location.last + 2
 
       breakpoint_hash = {
@@ -80,7 +80,7 @@ module Acceptance
     ##
     # Create a test gRPC logpoint
     def sample_logpoint token = nil
-      file_path = File.expand_path __FILE__
+      file_path = "acceptance/debugger_helper.rb"
       line = method(:trigger_breakpoint).source_location.last + 2
 
       breakpoint_hash = {
