@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.1 / 2017-08-18
+
+* Update connection configuration.
+
 ### 0.23.0 / 2017-07-27
 
 * Add `Job#error` returning `Spanner::Status`.
