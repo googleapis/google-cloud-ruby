@@ -88,3 +88,11 @@ def tracer_test_func7
   tracer_distraction_method3
   true
 end
+
+def dynamic_define_method
+  eval "def foo1; 6 * 7; end"
+  eval "def foo2; foo1; end"
+
+  result = foo2
+  result
+end
