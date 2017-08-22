@@ -81,9 +81,12 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     new_name = "New name"
     new_desc = "New description!"
     new_default_expiration = 12345678
+    new_labels = { "bar" => "baz" }
+
     dataset.name = new_name
     dataset.description = new_desc
     dataset.default_expiration = new_default_expiration
+    dataset.labels = new_labels
 
     fresh = bigquery.dataset dataset.dataset_id
     fresh.wont_be :nil?
@@ -92,6 +95,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     fresh.name.must_equal new_name
     fresh.description.must_equal new_desc
     fresh.default_expiration.must_equal new_default_expiration
+    fresh.labels.must_equal new_labels
 
     dataset.default_expiration = nil
   end
