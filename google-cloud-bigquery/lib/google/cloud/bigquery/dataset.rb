@@ -211,6 +211,34 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this dataset. Labels
+        # are used to organize and group datasets. See [Labeling
+        # Datasets](https://cloud.google.com/bigquery/docs/labeling-datasets).
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the hash of user-provided labels associated with this dataset.
+        # Labels are used to organize and group datasets. See [Labeling
+        # Datasets](https://cloud.google.com/bigquery/docs/labeling-datasets).
+        #
+        # @!group Attributes
+        #
+        def labels= labels
+          @gapi.labels = labels
+          patch_gapi! :labels
+        end
+
+        ##
         # Retrieves the access rules for a Dataset. The rules can be updated
         # when passing a block, see {Dataset::Access} for all the methods
         # available.

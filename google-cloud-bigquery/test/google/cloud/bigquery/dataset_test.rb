@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:default_expiration) { 999 }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
+  let(:labels) { { "foo" => "bar" } }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
@@ -61,6 +62,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     dataset.etag.must_equal etag
     dataset.api_url.must_equal api_url
     dataset.location.must_equal location_code
+    dataset.labels.must_equal labels
+    dataset.labels.must_be :frozen?
   end
 
   it "knows its creation and modification times" do
