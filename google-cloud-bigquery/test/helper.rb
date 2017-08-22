@@ -85,7 +85,8 @@ class MockBigquery < Minitest::Spec
       "access" => [],
       "creationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "location" => location
+      "location" => location,
+      "labels" => { "foo" => "bar" }
     }
   end
 
