@@ -480,6 +480,50 @@ module Google
         end
 
         ##
+        # A lower-bound estimate of the number of bytes currently in this
+        # table's streaming buffer, if one is present. This field will be absent
+        # if the table is not being streamed to or if there is no data in the
+        # streaming buffer.
+        #
+        # @!group Attributes
+        #
+        def buffer_bytes
+          ensure_full_data!
+          @gapi.streaming_buffer.estimated_bytes if @gapi.streaming_buffer
+        end
+
+        ##
+        # A lower-bound estimate of the number of rows currently in this
+        # table's streaming buffer, if one is present. This field will be absent
+        # if the table is not being streamed to or if there is no data in the
+        # streaming buffer.
+        #
+        # @!group Attributes
+        #
+        def buffer_rows
+          ensure_full_data!
+          @gapi.streaming_buffer.estimated_rows if @gapi.streaming_buffer
+        end
+
+        ##
+        # The time of the oldest entry currently in this table's streaming
+        # buffer, if one is present. This field will be absent if the table is
+        # not being streamed to or if there is no data in the streaming buffer.
+        #
+        # @!group Attributes
+        #
+        def buffer_oldest_at
+          ensure_full_data!
+          return nil unless @gapi.streaming_buffer
+          oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
+          begin
+            ::Time.at(Integer(oldest_entry_time) / 1000.0)
+          rescue
+            nil
+          end
+        end
+
+        ##
         # Retrieves data from the table.
         #
         # @param [String] token Page token, returned by a previous call,

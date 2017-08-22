@@ -85,6 +85,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.time_partitioning_type.must_be_nil
     fresh.time_partitioning_expiration.must_be_nil
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
+
+    # streaming buffer is transient, it seems it may or may not be present?
+    fresh.buffer_bytes.must_be_kind_of Integer if fresh.buffer_bytes
+    fresh.buffer_rows.must_be_kind_of Integer if fresh.buffer_rows
+    fresh.buffer_oldest_at.must_be_kind_of Time if fresh.buffer_oldest_at
+
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
     [:id, :breed, :name, :dob].each { |k| fresh.headers.must_include k }
