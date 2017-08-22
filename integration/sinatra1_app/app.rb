@@ -70,12 +70,6 @@ get '/test_debugger' do
   "breakpoint triggered"
 end
 
-# Sinatra error handling code randomly fails with Runtime Error. Monkey patch
-# the bad method.
-settings.define_singleton_method :use_code? do
-  false
-end
-
 get '/test_error_reporting' do
   error_toke = params[:token]
   raise StandardError, "Test error from sinatra classic: #{error_toke}"

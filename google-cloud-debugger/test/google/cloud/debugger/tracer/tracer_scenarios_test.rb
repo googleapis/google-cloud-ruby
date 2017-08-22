@@ -50,6 +50,8 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     Google::Cloud::Debugger::Breakpoint.new "8", breakpoint_path, 82 }
   let(:breakpoint9) {
     Google::Cloud::Debugger::Breakpoint.new "9", breakpoint_path, 89 }
+  let(:breakpoint10) {
+    Google::Cloud::Debugger::Breakpoint.new "10", breakpoint_path, 97 }
 
   it "catches breakpoint from function call" do
     hit = false
@@ -246,5 +248,16 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
     end
 
     hit.must_equal true
+  end
+
+  it "doesn't raise error when tracing dynamically defined methods" do
+    breakpoint_manager.update_breakpoints [breakpoint10]
+    tracer = debugger.agent.tracer
+
+    tracer.stub :breakpoints_hit, nil do
+      tracer.start
+      dynamic_define_method.must_equal 42
+      tracer.stop
+    end
   end
 end

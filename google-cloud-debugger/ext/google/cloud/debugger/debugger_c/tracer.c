@@ -55,16 +55,26 @@ hash_get_keys(VALUE hash)
  *  Check the Tracer#breakpoints_cache if any breakpoints match the given
  *  tracepoint_path. Return 1 if found. Otherwise 0;
  */
-static VALUE
+static int
 match_breakpoints_files(VALUE self, VALUE tracepoint_path)
 {
     int i;
-    char *c_tracepoint_path = rb_string_value_cstr(&tracepoint_path);
+    char *c_tracepoint_path;
+    VALUE path_breakpoints_hash;
+    VALUE breakpoints_paths;
+    VALUE *c_breakpoints_paths;
+    int breakpoints_paths_len;
 
-    VALUE path_breakpoints_hash = rb_iv_get(self, "@breakpoints_cache");
-    VALUE breakpoints_paths = hash_get_keys(path_breakpoints_hash);
-    VALUE *c_breakpoints_paths = RARRAY_PTR(breakpoints_paths);
-    int breakpoints_paths_len = RARRAY_LEN(breakpoints_paths);
+    // Return 0 if the given path is Qnil
+    if(!RTEST(tracepoint_path)) {
+        return 0;
+    }
+
+    c_tracepoint_path = rb_string_value_cstr(&tracepoint_path);
+    path_breakpoints_hash = rb_iv_get(self, "@breakpoints_cache");
+    breakpoints_paths = hash_get_keys(path_breakpoints_hash);
+    c_breakpoints_paths = RARRAY_PTR(breakpoints_paths);
+    breakpoints_paths_len = RARRAY_LEN(breakpoints_paths);
 
     for (i = 0; i < breakpoints_paths_len; i++) {
         VALUE breakpoint_path = c_breakpoints_paths[i];
@@ -152,6 +162,11 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
     // Ensure C_trace_path is absolute path
     trace_path = rb_str_new_cstr(c_trace_path);
     trace_path = rb_file_expand_path(trace_path, Qnil);
+
+    if(!RTEST(trace_path)) {
+        return;
+    }
+
     c_trace_path = rb_string_value_cstr(&trace_path);
 
     c_trace_lineno = rb_sourceline();
@@ -255,7 +270,7 @@ enable_line_trace_for_thread(VALUE self)
 static void
 return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 {
-    VALUE match_found;
+    int match_found;
     VALUE self = (VALUE) data;
     VALUE caller_locations;
     VALUE *c_caller_locations;
@@ -287,6 +302,11 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 
     caller_location = c_caller_locations[0];
     caller_path = rb_funcall(caller_location, absolute_path_id, 0);
+
+    // Return if caller location doesn't have absolute path. (i.e. dynamically defined method)
+    if(!RTEST(caller_path)) {
+        return;
+    }
 
     match_found = match_breakpoints_files(self, caller_path);
 
@@ -380,13 +400,17 @@ file_tracepoint_callback(VALUE tracepoint, void *data)
     VALUE self = (VALUE) data;
     rb_trace_arg_t *tracepoint_arg = rb_tracearg_from_tracepoint(tracepoint);
     VALUE tracepoint_path = rb_tracearg_path(tracepoint_arg);
-    VALUE match_found;
+    int match_found;
 
     if (!RB_TYPE_P(tracepoint_path, T_STRING))
         return;
 
     // Ensure tracepoint_path is absolute path
     tracepoint_path = rb_file_expand_path(tracepoint_path, Qnil);
+
+    if (!RTEST(tracepoint_path)) {
+        return;
+    }
 
     match_found = match_breakpoints_files(self, tracepoint_path);
 
