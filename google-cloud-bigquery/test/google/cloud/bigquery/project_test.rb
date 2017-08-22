@@ -102,6 +102,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     description = "This is my dataset"
     default_expiration = 999
     location = "EU"
+    labels = { "foo" => "bar" }
 
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
@@ -114,6 +115,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
+      labels: labels,
       location: location,
       access: filled_access)
     mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
@@ -124,6 +126,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       ds.name = name
       ds.description = description
       ds.default_expiration = default_expiration
+      ds.labels = labels
       ds.access do |acl|
         refute acl.writer_user? "writers@example.com"
         acl.add_writer_user "writers@example.com"
@@ -137,6 +140,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
+    dataset.labels.must_equal labels
     dataset.location.must_equal location
     dataset.access.wont_be :empty?
   end
