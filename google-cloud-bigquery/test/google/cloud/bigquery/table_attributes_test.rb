@@ -125,5 +125,7 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
   attr_test :bytes_count, 1000
   attr_test :rows_count, 100
   attr_test :location, "US"
+  attr_test :buffer_bytes, 2000
+  attr_test :buffer_rows, 200
 
 end

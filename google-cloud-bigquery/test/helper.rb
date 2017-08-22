@@ -229,7 +229,12 @@ class MockBigquery < Minitest::Spec
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
       "type" => "TABLE",
-      "location" => "US"
+      "location" => "US",
+      "streamingBuffer" => {
+        "estimatedBytes" => "2000", # String per google/google-api-ruby-client
+        "estimatedRows" => "200", # String per google/google-api-ruby-client
+        "oldestEntryTime" => time_millis
+      }
     }
   end
 
