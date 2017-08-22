@@ -567,6 +567,11 @@ module Google
         #
         # @param [Boolean] all Whether to list all datasets, including hidden
         #   ones. The default is `false`.
+        # @param [String] filter An expression for filtering the results of the
+        #   request by label. The syntax is `labels.<name>[:<value>]`.
+        #   Multiple filters can be `AND`ed together by connecting with a space.
+        #   Example: `labels.department:receiving labels.active`. See [Filtering
+        #   datasets using labels](https://cloud.google.com/bigquery/docs/labeling-datasets#filtering_datasets_using_labels).
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of datasets to return.
@@ -601,11 +606,11 @@ module Google
         #     puts dataset.name
         #   end
         #
-        def datasets all: nil, token: nil, max: nil
+        def datasets all: nil, filter: nil, token: nil, max: nil
           ensure_service!
-          options = { all: all, token: token, max: max }
+          options = { all: all, filter: filter, token: token, max: max }
           gapi = service.list_datasets options
-          Dataset::List.from_gapi gapi, service, all, max
+          Dataset::List.from_gapi gapi, service, all, filter, max
         end
 
         ##

@@ -77,8 +77,8 @@ module Google
         def list_datasets options = {}
           execute do
             service.list_datasets \
-              @project, all: options[:all], max_results: options[:max],
-                        page_token: options[:token]
+              @project, all: options[:all], filter: options[:filter],
+                        max_results: options[:max], page_token: options[:token]
           end
         end
 
