@@ -71,9 +71,9 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            options = { all: @hidden, token: token, max: @max }
+            options = { all: @hidden, filter: @filter, token: token, max: @max }
             gapi = @service.list_datasets options
-            self.class.from_gapi gapi, @service, @hidden, @max
+            self.class.from_gapi gapi, @service, @hidden, @filter, @max
           end
 
           ##
@@ -140,7 +140,8 @@ module Google
 
           ##
           # @private New Dataset::List from a response object.
-          def self.from_gapi gapi_list, service, hidden = nil, max = nil
+          def self.from_gapi gapi_list, service, hidden = nil, filter = nil,
+                             max = nil
             datasets = List.new(Array(gapi_list.datasets).map do |gapi_object|
               Dataset.from_gapi gapi_object, service
             end)
@@ -148,6 +149,7 @@ module Google
             datasets.instance_variable_set :@etag,    gapi_list.etag
             datasets.instance_variable_set :@service, service
             datasets.instance_variable_set :@hidden,  hidden
+            datasets.instance_variable_set :@filter,  filter
             datasets.instance_variable_set :@max,     max
             datasets
           end
