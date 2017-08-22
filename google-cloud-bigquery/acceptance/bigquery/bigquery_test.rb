@@ -24,11 +24,15 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     d
   end
+  let(:labels) { { "foo" => "bar" } }
+  let(:filter) { "labels.foo:bar" }
   let(:dataset_2_id) { "#{prefix}_dataset_2" }
   let(:dataset_2) do
     d = bigquery.dataset dataset_2_id
     if d.nil?
-      d = bigquery.create_dataset dataset_2_id
+      d = bigquery.create_dataset dataset_2_id do |ds|
+        ds.labels = labels
+      end
     end
     d
   end
@@ -66,6 +70,14 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     more_datasets = datasets.next
     more_datasets.wont_be :nil?
+  end
+
+  it "should get a list of datasets by labels filter" do
+    datasets = bigquery.datasets filter: filter
+    datasets.count.must_equal 1
+    ds = datasets.first
+    ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    ds.labels.must_equal labels
   end
 
   it "create a dataset with access rules" do
