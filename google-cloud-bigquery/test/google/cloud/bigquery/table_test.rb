@@ -80,6 +80,12 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
 
+  it "knows its streaming buffer attributes" do
+    table.buffer_bytes.must_equal 2000
+    table.buffer_rows.must_equal 200
+    table.buffer_oldest_at.must_be_close_to ::Time.now, 1
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_table, nil,
