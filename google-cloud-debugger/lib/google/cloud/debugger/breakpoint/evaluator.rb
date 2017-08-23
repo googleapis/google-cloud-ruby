@@ -107,6 +107,7 @@ module Google
             Complex,
             FalseClass,
             Float,
+            Integer,
             MatchData,
             NilClass,
             Numeric,
@@ -120,7 +121,7 @@ module Google
             Enumerable,
             Math
           ].concat(
-            RUBY_VERSION.to_f >= 2.4 ? [Integer] : [Bignum, Fixnum]
+            RUBY_VERSION.to_f >= 2.4 ? [] : [Bignum, Fixnum]
           ).freeze
 
           ##
@@ -1006,10 +1007,10 @@ module Google
       # @private Custom error type used to identify evaluation error during
       # breakpoint expression evaluation.
       class EvaluationError < StandardError
-        UNKNOWN_CAUSE = Object.new.freeze
-        PROHIBITED_YARV = Object.new.freeze
-        PROHIBITED_C_FUNC = Object.new.freeze
-        META_PROGRAMMING = Object.new.freeze
+        UNKNOWN_CAUSE = :unknown_cause
+        PROHIBITED_YARV = :prohibited_yarv
+        PROHIBITED_C_FUNC = :prohibited_c_func
+        META_PROGRAMMING = :meta_programming
 
         attr_reader :mutation_cause
 
