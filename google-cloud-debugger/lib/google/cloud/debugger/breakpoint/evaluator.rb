@@ -938,7 +938,7 @@ module Google
               begin
                 meth = receiver.method mid
               rescue
-                fail Google::Cloud::Debugger::EvaluationError.new(
+                raise Google::Cloud::Debugger::EvaluationError.new(
                   PROHIBITED_OPERATION_MSG,
                   Google::Cloud::Debugger::EvaluationError::META_PROGRAMMING)
               end
