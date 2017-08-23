@@ -934,7 +934,15 @@ module Google
             #   Otherwise raise Google::Cloud::Debugger::MutationError error.
             #
             def trace_func_callback receiver, mid
-              meth = receiver.method mid
+              meth = nil
+              begin
+                meth = receiver.method mid
+              rescue
+                fail Google::Cloud::Debugger::EvaluationError.new(
+                  PROHIBITED_OPERATION_MSG,
+                  Google::Cloud::Debugger::EvaluationError::META_PROGRAMMING)
+              end
+
               yarv_instructions = RubyVM::InstructionSequence.disasm meth
 
               return if immutable_yarv_instructions?(yarv_instructions,
@@ -1001,6 +1009,7 @@ module Google
         UNKNOWN_CAUSE = Object.new.freeze
         PROHIBITED_YARV = Object.new.freeze
         PROHIBITED_C_FUNC = Object.new.freeze
+        META_PROGRAMMING = Object.new.freeze
 
         attr_reader :mutation_cause
 

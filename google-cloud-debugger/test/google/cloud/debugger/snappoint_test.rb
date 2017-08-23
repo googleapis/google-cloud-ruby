@@ -48,13 +48,22 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
         "Readonly Evaluated"
       }
 
-      evaluator.stub :readonly_eval_expression, stubbed_readonly_eval_expression do
-        snappoint.eval_expressions mock_binding
+      stubbed_from_var = ->(source, args) {
+        Google::Cloud::Debugger::Breakpoint::Variable.new.tap do |var|
+          var.name = args[:name]
+          var.value = source.inspect
+        end
+      }
 
-        snappoint.evaluated_expressions.size.must_equal 1
-        snappoint.evaluated_expressions.first.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-        snappoint.evaluated_expressions.first.value.must_equal "Readonly Evaluated".inspect
-        snappoint.evaluated_expressions.first.name.must_equal mock_expressions.first
+      evaluator.stub :readonly_eval_expression, stubbed_readonly_eval_expression do
+        Google::Cloud::Debugger::Breakpoint::Variable.stub :from_rb_var, stubbed_from_var do
+          snappoint.eval_expressions mock_binding
+
+          snappoint.evaluated_expressions.size.must_equal 1
+          snappoint.evaluated_expressions.first.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+          snappoint.evaluated_expressions.first.value.must_equal "Readonly Evaluated".inspect
+          snappoint.evaluated_expressions.first.name.must_equal mock_expressions.first
+        end
       end
     end
   end

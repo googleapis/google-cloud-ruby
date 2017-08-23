@@ -244,13 +244,36 @@ module Google
               from_compound_var source, name: name, depth: depth,
                                         var_table: var_table, limit: limit
             else
-              new.tap do |var|
-                var.name = name.to_s if name
-                var.type = source.class.to_s
-                limit = deduct_limit limit,
-                                     var.name.to_s.bytesize + var.type.bytesize
-                var.value = truncate_value source.inspect, limit
-                var.source_var = source
+              from_primitive_var source, name: name, limit: limit
+            end
+          rescue => e
+            puts e.backtrace
+
+            new.tap do |var|
+              var.name = name.to_s if name
+              var.set_error_state e.message
+              var.source_var = source
+            end
+          end
+
+          ##
+          # @private Helper method that converts primitive variables.
+          def self.from_primitive_var source, name: nil, limit: nil
+            new.tap do |var|
+              var.name = name.to_s if name
+              var.type = source.class.to_s
+              var.source_var = source
+              limit = deduct_limit limit,
+                                   var.name.to_s.bytesize + var.type.bytesize
+              # Securely invoke #inspect method on source variable
+              inspect_result =
+                Evaluator.readonly_eval_expression binding, "source.inspect"
+              if inspect_result.is_a? String
+                var.value = truncate_value inspect_result, limit
+              elsif inspect_result.is_a? Exception
+                var.set_error_state "Error: #{inspect_result.message}"
+              else
+                var.set_error_state "Error: Variable couldn't be inspected"
               end
             end
           end
@@ -349,8 +372,7 @@ module Google
                 var.members << Variable.new.tap do |last_var|
                   last_var.set_error_state \
                     "Only first #{i} items were captured. Use in " \
-                    "an expression to see all items.",
-                    refers_to: StatusMessage::VARIABLE_VALUE
+                    "an expression to see all items."
                 end
                 break
               else
@@ -373,8 +395,7 @@ module Google
                 var.var_table = var_table
                 var.var_table_index = 0
               else
-                var.set_error_state BUFFER_FULL_MSG,
-                                    refers_to: StatusMessage::VARIABLE_VALUE
+                var.set_error_state BUFFER_FULL_MSG
               end
             end
           end
@@ -457,7 +478,7 @@ module Google
 
           ##
           # Set this variable to an error state by setting the status field
-          def set_error_state message, refers_to: StatusMessage::UNSPECIFIED
+          def set_error_state message, refers_to: StatusMessage::VARIABLE_VALUE
             @status = StatusMessage.new.tap do |s|
               s.is_error = true
               s.refers_to = refers_to
