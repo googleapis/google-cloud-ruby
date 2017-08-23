@@ -24,7 +24,7 @@ module Google
     # 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.
     # By restricting to that range, we ensure that we can convert to
     # and from  RFC 3339 date strings.
-    # See {https://www.ietf.org/rfc/rfc3339.txt}[https://www.ietf.org/rfc/rfc3339.txt].
+    # See [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).
     #
     # Example 1: Compute Timestamp from POSIX +time()+.
     #

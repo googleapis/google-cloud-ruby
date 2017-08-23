@@ -19,16 +19,13 @@ module Google
         # Type of information detected by the API.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the information type. For built-in info types, this is provided by
-        #     the API call ListInfoTypes. For user-defined info types, this is
-        #     provided by the user. All user-defined info types must have unique names,
-        #     and cannot conflict with built-in info type names.
+        #     Name of the information type.
         class InfoType; end
 
         # General identifier of a data field in a storage service.
         # @!attribute [rw] column_name
         #   @return [String]
-        #     Column name describing the field.
+        #     Name describing the field.
         class FieldId; end
 
         # Datastore partition ID.
@@ -97,6 +94,16 @@ module Google
         #     The url, in the format of +gs://bucket/<path>+.
         class CloudStoragePath; end
 
+        # Options defining BigQuery table and row identifiers.
+        # @!attribute [rw] table_reference
+        #   @return [Google::Privacy::Dlp::V2beta1::BigQueryTable]
+        #     Complete BigQuery table reference.
+        # @!attribute [rw] identifying_fields
+        #   @return [Array<Google::Privacy::Dlp::V2beta1::FieldId>]
+        #     References to fields uniquely identifying rows within the table.
+        #     Nested fields in the format, like +person.birthdate.year+, are allowed.
+        class BigQueryOptions; end
+
         # Shared message indicating Cloud storage type.
         # @!attribute [rw] datastore_options
         #   @return [Google::Privacy::Dlp::V2beta1::DatastoreOptions]
@@ -104,6 +111,9 @@ module Google
         # @!attribute [rw] cloud_storage_options
         #   @return [Google::Privacy::Dlp::V2beta1::CloudStorageOptions]
         #     Google Cloud Storage options specification.
+        # @!attribute [rw] big_query_options
+        #   @return [Google::Privacy::Dlp::V2beta1::BigQueryOptions]
+        #     BigQuery options specification.
         class StorageConfig; end
 
         # Record key for a finding in a Cloud Storage file.
@@ -172,6 +182,23 @@ module Google
         # @!attribute [rw] datastore_key
         #   @return [Google::Privacy::Dlp::V2beta1::DatastoreKey]
         class RecordKey; end
+
+        # Message defining the location of a BigQuery table. A table is uniquely
+        # identified  by its project_id, dataset_id, and table_name. Within a query
+        # a table is often referenced with a string in the format of:
+        # +<project_id>:<dataset_id>.<table_id>+ or
+        # +<project_id>.<dataset_id>.<table_id>+.
+        # @!attribute [rw] project_id
+        #   @return [String]
+        #     The Google Cloud Platform project ID of the project containing the table.
+        #     If omitted, project ID is inferred from the API call.
+        # @!attribute [rw] dataset_id
+        #   @return [String]
+        #     Dataset ID of the table.
+        # @!attribute [rw] table_id
+        #   @return [String]
+        #     Name of the table.
+        class BigQueryTable; end
       end
     end
   end

@@ -29,7 +29,7 @@ module Google
         #     Only returns findings equal or above this threshold.
         # @!attribute [rw] max_findings
         #   @return [Integer]
-        #     Limits the number of findings per content item.
+        #     Limits the number of findings per content item or long running operation.
         # @!attribute [rw] include_quote
         #   @return [true, false]
         #     When true, a contextual quote from the data that triggered a finding is
@@ -51,7 +51,21 @@ module Google
         # @!attribute [rw] value
         #   @return [String]
         #     String data to inspect or redact.
+        # @!attribute [rw] table
+        #   @return [Google::Privacy::Dlp::V2beta1::Table]
+        #     Structured content for inspection.
         class ContentItem; end
+
+        # Structured content to inspect. Up to 50,000 +Value+s per request allowed.
+        # @!attribute [rw] headers
+        #   @return [Array<Google::Privacy::Dlp::V2beta1::FieldId>]
+        # @!attribute [rw] rows
+        #   @return [Array<Google::Privacy::Dlp::V2beta1::Table::Row>]
+        class Table
+          # @!attribute [rw] values
+          #   @return [Array<Google::Privacy::Dlp::V2beta1::Value>]
+          class Row; end
+        end
 
         # All the findings for a single scanned item.
         # @!attribute [rw] findings
@@ -102,7 +116,16 @@ module Google
         # @!attribute [rw] field_id
         #   @return [Google::Privacy::Dlp::V2beta1::FieldId]
         #     Field id of the field containing the finding.
+        # @!attribute [rw] table_location
+        #   @return [Google::Privacy::Dlp::V2beta1::TableLocation]
+        #     Location within a +ContentItem.Table+.
         class Location; end
+
+        # Location of a finding within a +ContentItem.Table+.
+        # @!attribute [rw] row_index
+        #   @return [Integer]
+        #     The zero-based index of the row where the finding is located.
+        class TableLocation; end
 
         # Generic half-open interval [start, end)
         # @!attribute [rw] start
@@ -159,12 +182,12 @@ module Google
           # @!attribute [rw] info_type
           #   @return [Google::Privacy::Dlp::V2beta1::InfoType]
           #     Only one per info_type should be provided per request. If not
-          #     specified, and redact_all_text is false, the DLP API will redacts all
+          #     specified, and redact_all_text is false, the DLP API will redact all
           #     text that it matches against all info_types that are found, but not
           #     specified in another ImageRedactionConfig.
           # @!attribute [rw] redact_all_text
           #   @return [true, false]
-          #     If true, all text found in the image, regardless if it matches an
+          #     If true, all text found in the image, regardless whether it matches an
           #     info_type, is redacted.
           # @!attribute [rw] redaction_color
           #   @return [Google::Privacy::Dlp::V2beta1::Color]
@@ -228,14 +251,19 @@ module Google
         #     identifier for the Operation, and the +count+ is a counter used for
         #     tracking the number of files written. <p>The CSV file(s) contain the
         #     following columns regardless of storage type scanned: <li>id <li>info_type
-        #     <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
+        #     <li>likelihood <li>byte size of finding <li>quote <li>timestamp<br/>
         #     <p>For Cloud Storage the next columns are: <li>file_path
         #     <li>start_offset<br/>
         #     <p>For Cloud Datastore the next columns are: <li>project_id
-        #     <li>namespace_id <li>path <li>column_name <li>offset
+        #     <li>namespace_id <li>path <li>column_name <li>offset<br/>
+        #     <p>For BigQuery the next columns are: <li>row_number <li>project_id
+        #     <li>dataset_id <li>table_id
         class CreateInspectOperationRequest; end
 
         # Cloud repository for storing output.
+        # @!attribute [rw] table
+        #   @return [Google::Privacy::Dlp::V2beta1::BigQueryTable]
+        #     Store findings in a new table in the dataset.
         # @!attribute [rw] storage_path
         #   @return [Google::Privacy::Dlp::V2beta1::CloudStoragePath]
         #     The path to a Google Cloud Storage location to store output.
@@ -286,7 +314,7 @@ module Google
         #   @return [String]
         #     Identifier of the results set returned as metadata of
         #     the longrunning operation created by a call to CreateInspectOperation.
-        #     Should be in the format of +inspect/results/{id}.
+        #     Should be in the format of +inspect/results/{id}+.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Maximum number of results to return.
@@ -370,6 +398,23 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2beta1::CategoryDescription>]
         #     List of all into type categories supported by the API.
         class ListRootCategoriesResponse; end
+
+        # Set of primitive values supported by the system.
+        # @!attribute [rw] integer_value
+        #   @return [Integer]
+        # @!attribute [rw] float_value
+        #   @return [Float]
+        # @!attribute [rw] string_value
+        #   @return [String]
+        # @!attribute [rw] boolean_value
+        #   @return [true, false]
+        # @!attribute [rw] timestamp_value
+        #   @return [Google::Protobuf::Timestamp]
+        # @!attribute [rw] time_value
+        #   @return [Google::Type::TimeOfDay]
+        # @!attribute [rw] date_value
+        #   @return [Google::Type::Date]
+        class Value; end
 
         # Categorization of results based on how likely they are to represent a match,
         # based on the number of elements they contain which imply a match.

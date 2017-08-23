@@ -23,7 +23,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     oneof :data_item do
       optional :data, :bytes, 2
       optional :value, :string, 3
+      optional :table, :message, 4, "google.privacy.dlp.v2beta1.Table"
     end
+  end
+  add_message "google.privacy.dlp.v2beta1.Table" do
+    repeated :headers, :message, 1, "google.privacy.dlp.v2beta1.FieldId"
+    repeated :rows, :message, 2, "google.privacy.dlp.v2beta1.Table.Row"
+  end
+  add_message "google.privacy.dlp.v2beta1.Table.Row" do
+    repeated :values, :message, 1, "google.privacy.dlp.v2beta1.Value"
   end
   add_message "google.privacy.dlp.v2beta1.InspectResult" do
     repeated :findings, :message, 1, "google.privacy.dlp.v2beta1.Finding"
@@ -42,6 +50,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :image_boxes, :message, 3, "google.privacy.dlp.v2beta1.ImageLocation"
     optional :record_key, :message, 4, "google.privacy.dlp.v2beta1.RecordKey"
     optional :field_id, :message, 5, "google.privacy.dlp.v2beta1.FieldId"
+    optional :table_location, :message, 6, "google.privacy.dlp.v2beta1.TableLocation"
+  end
+  add_message "google.privacy.dlp.v2beta1.TableLocation" do
+    optional :row_index, :int64, 1
   end
   add_message "google.privacy.dlp.v2beta1.Range" do
     optional :start, :int64, 1
@@ -92,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2beta1.OutputStorageConfig" do
     oneof :type do
+      optional :table, :message, 1, "google.privacy.dlp.v2beta1.BigQueryTable"
       optional :storage_path, :message, 2, "google.privacy.dlp.v2beta1.CloudStoragePath"
     end
   end
@@ -143,6 +156,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2beta1.ListRootCategoriesResponse" do
     repeated :categories, :message, 1, "google.privacy.dlp.v2beta1.CategoryDescription"
   end
+  add_message "google.privacy.dlp.v2beta1.Value" do
+    oneof :type do
+      optional :integer_value, :int64, 1
+      optional :float_value, :double, 2
+      optional :string_value, :string, 3
+      optional :boolean_value, :bool, 4
+      optional :timestamp_value, :message, 5, "google.protobuf.Timestamp"
+      optional :time_value, :message, 6, "google.type.TimeOfDay"
+      optional :date_value, :message, 7, "google.type.Date"
+    end
+  end
   add_enum "google.privacy.dlp.v2beta1.Likelihood" do
     value :LIKELIHOOD_UNSPECIFIED, 0
     value :VERY_UNLIKELY, 1
@@ -159,9 +183,12 @@ module Google
       module V2beta1
         InspectConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectConfig").msgclass
         ContentItem = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ContentItem").msgclass
+        Table = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Table").msgclass
+        Table::Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Table.Row").msgclass
         InspectResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectResult").msgclass
         Finding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Finding").msgclass
         Location = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Location").msgclass
+        TableLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.TableLocation").msgclass
         Range = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Range").msgclass
         ImageLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ImageLocation").msgclass
         RedactContentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RedactContentRequest").msgclass
@@ -184,6 +211,7 @@ module Google
         CategoryDescription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.CategoryDescription").msgclass
         ListRootCategoriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ListRootCategoriesRequest").msgclass
         ListRootCategoriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ListRootCategoriesResponse").msgclass
+        Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Value").msgclass
         Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Likelihood").enummodule
       end
     end

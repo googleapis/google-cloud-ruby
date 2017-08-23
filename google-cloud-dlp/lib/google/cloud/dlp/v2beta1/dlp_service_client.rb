@@ -30,6 +30,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/privacy/dlp/v2beta1/dlp_pb"
+require "google/cloud/dlp/credentials"
 
 module Google
   module Cloud
@@ -80,13 +81,21 @@ module Google
           #   The domain name of the API remote host.
           # @param port [Integer]
           #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param updater_proc [Proc]
-          #   A function that transforms the metadata for requests, e.g., to give
-          #   OAuth credentials.
+          # @param credentials
+          #   [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
           # @param scopes [Array<String>]
           #   The OAuth scopes for this service. This parameter is ignored if
           #   an updater_proc is supplied.
@@ -103,6 +112,7 @@ module Google
               channel: nil,
               chan_creds: nil,
               updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
@@ -116,12 +126,23 @@ module Google
             require "google/gax/grpc"
             require "google/privacy/dlp/v2beta1/dlp_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if app_name || app_version
+              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            end
+
+            credentials ||= Google::Cloud::Dlp::Credentials.default
+
             @operations_client = Google::Longrunning::OperationsClient.new(
               service_path: service_path,
               port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
+              credentials: credentials,
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
@@ -131,8 +152,20 @@ module Google
               lib_version: lib_version,
             )
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Dlp::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Gax::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
@@ -215,7 +248,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   inspect_config = {}
           #   items = []
           #   response = dlp_service_client.inspect_content(inspect_config, items)
@@ -260,7 +293,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   inspect_config = {}
           #   items = []
           #   replace_configs = []
@@ -303,11 +336,13 @@ module Google
           #   identifier for the Operation, and the +count+ is a counter used for
           #   tracking the number of files written. <p>The CSV file(s) contain the
           #   following columns regardless of storage type scanned: <li>id <li>info_type
-          #   <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
+          #   <li>likelihood <li>byte size of finding <li>quote <li>timestamp<br/>
           #   <p>For Cloud Storage the next columns are: <li>file_path
           #   <li>start_offset<br/>
           #   <p>For Cloud Datastore the next columns are: <li>project_id
-          #   <li>namespace_id <li>path <li>column_name <li>offset
+          #   <li>namespace_id <li>path <li>column_name <li>offset<br/>
+          #   <p>For BigQuery the next columns are: <li>row_number <li>project_id
+          #   <li>dataset_id <li>table_id
           #   A hash of the same form as `Google::Privacy::Dlp::V2beta1::OutputStorageConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -318,7 +353,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   inspect_config = {}
           #   storage_config = {}
           #   output_config = {}
@@ -377,7 +412,7 @@ module Google
           # @param name [String]
           #   Identifier of the results set returned as metadata of
           #   the longrunning operation created by a call to CreateInspectOperation.
-          #   Should be in the format of +inspect/results/{id}.
+          #   Should be in the format of +inspect/results/{id}+.
           # @param page_size [Integer]
           #   Maximum number of results to return.
           #   If 0, the implementation selects a reasonable value.
@@ -401,7 +436,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   formatted_name = Google::Cloud::Dlp::V2beta1::DlpServiceClient.result_path("[RESULT]")
           #   response = dlp_service_client.list_inspect_findings(formatted_name)
 
@@ -437,7 +472,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   category = ''
           #   language_code = ''
           #   response = dlp_service_client.list_info_types(category, language_code)
@@ -468,7 +503,7 @@ module Google
           # @example
           #   require "google/cloud/dlp/v2beta1"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+          #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
           #   language_code = ''
           #   response = dlp_service_client.list_root_categories(language_code)
 

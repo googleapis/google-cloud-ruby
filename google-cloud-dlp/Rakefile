@@ -39,6 +39,31 @@ namespace :test do
   end
 end
 
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["SMOKE_TEST_PROJECT"].nil?
+    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
+      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-dlp"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
+  end
+end
+
 # Acceptance tests
 desc "Run the google-cloud-dlp acceptance tests."
 task :acceptance do
@@ -119,6 +144,18 @@ task :ci do
   sh "bundle exec rake test"
 end
 
+namespace :ci do
+  desc "Run the CI build, with smoke_tests."
+  task :smoke_test do
+    Rake::Task["ci"].invoke
+    header "google-cloud-dlp smoke_test", "*"
+    sh "bundle exec rake smoke_test -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:smoke_test"].invoke
+  end
+end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."

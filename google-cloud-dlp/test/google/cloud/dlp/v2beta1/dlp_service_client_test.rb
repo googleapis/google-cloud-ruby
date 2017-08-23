@@ -17,6 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
+require "google/cloud/dlp"
 require "google/cloud/dlp/v2beta1/dlp_service_client"
 require "google/privacy/dlp/v2beta1/dlp_services_pb"
 require "google/longrunning/operations_pb"
@@ -52,6 +53,19 @@ class MockGrpcClientStub
   end
 end
 
+class MockCredentialsClass < Google::Cloud::Dlp::Credentials
+  def initialize(method_name)
+    @method_name = method_name
+  end
+
+  def updater_proc
+    proc do
+      raise "The method `#{@method_name}` was trying to make a grpc request. This should not " \
+          "happen since the grpc layer is being mocked."
+    end
+  end
+end
+
 describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
   describe 'inspect_content' do
@@ -70,19 +84,27 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::InspectContentRequest, request)
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
+        items = items.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
+        end
         assert_equal(items, request.items)
         expected_response
       end
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("inspect_content")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.inspect_content(inspect_config, items)
+          # Call method
+          response = client.inspect_content(inspect_config, items)
 
-        # Verify the response
-        assert_equal(expected_response, response)
+          # Verify the response
+          assert_equal(expected_response, response)
+        end
       end
     end
 
@@ -95,21 +117,29 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::InspectContentRequest, request)
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
+        items = items.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
+        end
         assert_equal(items, request.items)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("inspect_content")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.inspect_content(inspect_config, items)
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.inspect_content(inspect_config, items)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
@@ -131,24 +161,35 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::RedactContentRequest, request)
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
+        items = items.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
+        end
         assert_equal(items, request.items)
+        replace_configs = replace_configs.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::RedactContentRequest::ReplaceConfig)
+        end
         assert_equal(replace_configs, request.replace_configs)
         expected_response
       end
       mock_stub = MockGrpcClientStub.new(:redact_content, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("redact_content")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.redact_content(
-          inspect_config,
-          items,
-          replace_configs
-        )
+          # Call method
+          response = client.redact_content(
+            inspect_config,
+            items,
+            replace_configs
+          )
 
-        # Verify the response
-        assert_equal(expected_response, response)
+          # Verify the response
+          assert_equal(expected_response, response)
+        end
       end
     end
 
@@ -162,26 +203,37 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::RedactContentRequest, request)
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
+        items = items.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
+        end
         assert_equal(items, request.items)
+        replace_configs = replace_configs.map do |req|
+          Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::RedactContentRequest::ReplaceConfig)
+        end
         assert_equal(replace_configs, request.replace_configs)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub.new(:redact_content, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("redact_content")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.redact_content(
-            inspect_config,
-            items,
-            replace_configs
-          )
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.redact_content(
+              inspect_config,
+              items,
+              replace_configs
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
@@ -217,18 +269,23 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("create_inspect_operation")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.create_inspect_operation(
-          inspect_config,
-          storage_config,
-          output_config
-        )
+          # Call method
+          response = client.create_inspect_operation(
+            inspect_config,
+            storage_config,
+            output_config
+          )
 
-        # Verify the response
-        assert_equal(expected_response, response.response)
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
       end
     end
 
@@ -258,19 +315,24 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("create_inspect_operation")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.create_inspect_operation(
-          inspect_config,
-          storage_config,
-          output_config
-        )
+          # Call method
+          response = client.create_inspect_operation(
+            inspect_config,
+            storage_config,
+            output_config
+          )
 
-        # Verify the response
-        assert(response.error?)
-        assert_equal(operation_error, response.error)
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
       end
     end
 
@@ -290,20 +352,25 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("create_inspect_operation")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.create_inspect_operation(
-            inspect_config,
-            storage_config,
-            output_config
-          )
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.create_inspect_operation(
+              inspect_config,
+              storage_config,
+              output_config
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
@@ -328,14 +395,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_inspect_findings, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_inspect_findings")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.list_inspect_findings(formatted_name)
+          # Call method
+          response = client.list_inspect_findings(formatted_name)
 
-        # Verify the response
-        assert_equal(expected_response, response)
+          # Verify the response
+          assert_equal(expected_response, response)
+        end
       end
     end
 
@@ -351,16 +423,21 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_inspect_findings, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_inspect_findings")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.list_inspect_findings(formatted_name)
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.list_inspect_findings(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
@@ -386,14 +463,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_info_types")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.list_info_types(category, language_code)
+          # Call method
+          response = client.list_info_types(category, language_code)
 
-        # Verify the response
-        assert_equal(expected_response, response)
+          # Verify the response
+          assert_equal(expected_response, response)
+        end
       end
     end
 
@@ -411,16 +493,21 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_info_types")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.list_info_types(category, language_code)
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.list_info_types(category, language_code)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
@@ -444,14 +531,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_root_categories, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_root_categories")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        response = client.list_root_categories(language_code)
+          # Call method
+          response = client.list_root_categories(language_code)
 
-        # Verify the response
-        assert_equal(expected_response, response)
+          # Verify the response
+          assert_equal(expected_response, response)
+        end
       end
     end
 
@@ -467,16 +559,21 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       end
       mock_stub = MockGrpcClientStub.new(:list_root_categories, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("list_root_categories")
+
       Google::Privacy::Dlp::V2beta1::DlpService::Stub.stub(:new, mock_stub) do
-        client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
+        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.list_root_categories(language_code)
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.list_root_categories(language_code)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end

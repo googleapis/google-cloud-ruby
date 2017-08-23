@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2beta1.InfoType" do
     optional :name, :string, 1
@@ -38,10 +39,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2beta1.CloudStoragePath" do
     optional :path, :string, 1
   end
+  add_message "google.privacy.dlp.v2beta1.BigQueryOptions" do
+    optional :table_reference, :message, 1, "google.privacy.dlp.v2beta1.BigQueryTable"
+    repeated :identifying_fields, :message, 2, "google.privacy.dlp.v2beta1.FieldId"
+  end
   add_message "google.privacy.dlp.v2beta1.StorageConfig" do
     oneof :type do
       optional :datastore_options, :message, 2, "google.privacy.dlp.v2beta1.DatastoreOptions"
       optional :cloud_storage_options, :message, 3, "google.privacy.dlp.v2beta1.CloudStorageOptions"
+      optional :big_query_options, :message, 4, "google.privacy.dlp.v2beta1.BigQueryOptions"
     end
   end
   add_message "google.privacy.dlp.v2beta1.CloudStorageKey" do
@@ -68,6 +74,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :datastore_key, :message, 2, "google.privacy.dlp.v2beta1.DatastoreKey"
     end
   end
+  add_message "google.privacy.dlp.v2beta1.BigQueryTable" do
+    optional :project_id, :string, 1
+    optional :dataset_id, :string, 2
+    optional :table_id, :string, 3
+  end
 end
 
 module Google
@@ -84,12 +95,14 @@ module Google
         CloudStorageOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.CloudStorageOptions").msgclass
         CloudStorageOptions::FileSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.CloudStorageOptions.FileSet").msgclass
         CloudStoragePath = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.CloudStoragePath").msgclass
+        BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.BigQueryOptions").msgclass
         StorageConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.StorageConfig").msgclass
         CloudStorageKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.CloudStorageKey").msgclass
         DatastoreKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.DatastoreKey").msgclass
         Key = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Key").msgclass
         Key::PathElement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Key.PathElement").msgclass
         RecordKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.RecordKey").msgclass
+        BigQueryTable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.BigQueryTable").msgclass
       end
     end
   end
