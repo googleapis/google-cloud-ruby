@@ -106,6 +106,18 @@ module Google
         end
 
         ##
+        # Describes the execution plan for the query.
+        #
+        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>]
+        #
+        def query_plan
+          return nil unless @gapi.statistics.query.query_plan
+          Array(@gapi.statistics.query.query_plan).map do |stage|
+            Stage.from_gapi stage
+          end
+        end
+
+        ##
         # The table in which the query results are stored.
         def destination
           table = @gapi.configuration.query.destination_table
@@ -194,6 +206,102 @@ module Google
           Data.from_gapi data_gapi, destination_table_gapi, service
         end
         alias_method :query_results, :data
+
+        ##
+        # Represents a stage in the execution plan for the query.
+        #
+        # @attr_reader [Float] compute_ratio_avg Relative amount of time the
+        #   average shard spent on CPU-bound tasks.
+        # @attr_reader [Float] compute_ratio_max Relative amount of time the
+        #   slowest shard spent on CPU-bound tasks.
+        # @attr_reader [Integer] id Unique ID for the stage within the query
+        #   plan.
+        # @attr_reader [String] name Human-readable name for the stage.
+        # @attr_reader [Float] read_ratio_avg Relative amount of time the
+        #   average shard spent reading input.
+        # @attr_reader [Float] read_ratio_max Relative amount of time the
+        #   slowest shard spent reading input.
+        # @attr_reader [Integer] records_read Number of records read into the
+        #   stage.
+        # @attr_reader [Integer] records_written Number of records written by
+        #   the stage.
+        # @attr_reader [Array<Step>] steps List of operations within the stage
+        #   in dependency order (approximately chronological).
+        # @attr_reader [Float] wait_ratio_avg Relative amount of time the
+        #   average shard spent waiting to be scheduled.
+        # @attr_reader [Float] wait_ratio_max Relative amount of time the
+        #   slowest shard spent waiting to be scheduled.
+        # @attr_reader [Float] write_ratio_avg Relative amount of time the
+        #   average shard spent on writing output.
+        # @attr_reader [Float] write_ratio_max Relative amount of time the
+        #   slowest shard spent on writing output.
+        #
+        class Stage
+          attr_reader :compute_ratio_avg, :compute_ratio_max, :id, :name,
+                      :read_ratio_avg, :read_ratio_max, :records_read,
+                      :records_written, :status, :steps, :wait_ratio_avg,
+                      :wait_ratio_max, :write_ratio_avg, :write_ratio_max
+
+          ##
+          # @private Creates a new Stage instance.
+          def initialize compute_ratio_avg, compute_ratio_max, id, name,
+                         read_ratio_avg, read_ratio_max, records_read,
+                         records_written, status, steps, wait_ratio_avg,
+                         wait_ratio_max, write_ratio_avg, write_ratio_max
+            @compute_ratio_avg = compute_ratio_avg
+            @compute_ratio_max = compute_ratio_max
+            @id                = id
+            @name              = name
+            @read_ratio_avg    = read_ratio_avg
+            @read_ratio_max    = read_ratio_max
+            @records_read      = records_read
+            @records_written   = records_written
+            @status            = status
+            @steps             = steps
+            @wait_ratio_avg    = wait_ratio_avg
+            @wait_ratio_max    = wait_ratio_max
+            @write_ratio_avg   = write_ratio_avg
+            @write_ratio_max   = write_ratio_max
+          end
+
+          ##
+          # @private New Stage from a statistics.query.queryPlan element.
+          def self.from_gapi gapi
+            steps = Array(gapi.steps).map { |g| Step.from_gapi g }
+            new gapi.compute_ratio_avg, gapi.compute_ratio_max, gapi.id,
+                gapi.name, gapi.read_ratio_avg, gapi.read_ratio_max,
+                gapi.records_read, gapi.records_written, gapi.status, steps,
+                gapi.wait_ratio_avg, gapi.wait_ratio_max, gapi.write_ratio_avg,
+                gapi.write_ratio_max
+          end
+        end
+
+        ##
+        # Represents an operation in a stage in the execution plan for the
+        # query.
+        #
+        # @attr_reader [String] kind Machine-readable operation type. For a full
+        #   list of operation types, see [Steps
+        #   metadata](https://cloud.google.com/bigquery/query-plan-explanation#steps_metadata).
+        # @attr_reader [Array<String>] substeps Human-readable stage
+        #   descriptions.
+        #
+        class Step
+          attr_reader :kind, :substeps
+
+          ##
+          # @private Creates a new Stage instance.
+          def initialize kind, substeps
+            @kind = kind
+            @substeps = substeps
+          end
+
+          ##
+          # @private New Step from a statistics.query.queryPlan[].steps element.
+          def self.from_gapi gapi
+            new gapi.kind, Array(gapi.substeps)
+          end
+        end
 
         protected
 
