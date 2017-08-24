@@ -57,9 +57,10 @@ module Google
           end
 
           ##
-          # @private Check the file from given file path is a ".rb" file
+          # @private Check the file from given file path is a Ruby file
           def self.verify_file_type file_path
-            File.extname(file_path) == ".rb"
+            File.extname(file_path) == ".rb" ||
+              File.basename(file_path) == "config.ru"
           rescue
             false
           end
