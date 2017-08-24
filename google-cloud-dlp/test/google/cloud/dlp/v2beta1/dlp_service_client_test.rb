@@ -73,8 +73,14 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes inspect_content without error' do
       # Create request parameters
-      inspect_config = {}
-      items = []
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      type = "text/plain"
+      value = "My email is example@example.com."
+      items_element = { type: type, value: value }
+      items = [items_element]
 
       # Create expected grpc response
       expected_response = {}
@@ -110,8 +116,14 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes inspect_content with error' do
       # Create request parameters
-      inspect_config = {}
-      items = []
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      type = "text/plain"
+      value = "My email is example@example.com."
+      items_element = { type: type, value: value }
+      items = [items_element]
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -149,9 +161,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes redact_content without error' do
       # Create request parameters
-      inspect_config = {}
-      items = []
-      replace_configs = []
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      type = "text/plain"
+      value = "My email is example@example.com."
+      items_element = { type: type, value: value }
+      items = [items_element]
+      name_2 = "EMAIL_ADDRESS"
+      info_type = { name: name_2 }
+      replace_with = "REDACTED"
+      replace_configs_element = { info_type: info_type, replace_with: replace_with }
+      replace_configs = [replace_configs_element]
 
       # Create expected grpc response
       expected_response = {}
@@ -195,9 +217,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes redact_content with error' do
       # Create request parameters
-      inspect_config = {}
-      items = []
-      replace_configs = []
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      type = "text/plain"
+      value = "My email is example@example.com."
+      items_element = { type: type, value: value }
+      items = [items_element]
+      name_2 = "EMAIL_ADDRESS"
+      info_type = { name: name_2 }
+      replace_with = "REDACTED"
+      replace_configs_element = { info_type: info_type, replace_with: replace_with }
+      replace_configs = [replace_configs_element]
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -243,13 +275,19 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes create_inspect_operation without error' do
       # Create request parameters
-      inspect_config = {}
-      storage_config = {}
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      url = "gs://example_bucket/example_file.png"
+      file_set = { url: url }
+      cloud_storage_options = { file_set: file_set }
+      storage_config = { cloud_storage_options: cloud_storage_options }
       output_config = {}
 
       # Create expected grpc response
-      name = "name3373707"
-      expected_response = { name: name }
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2beta1::InspectOperationResult)
       result = Google::Protobuf::Any.new
       result.pack(expected_response)
@@ -291,8 +329,14 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes create_inspect_operation and returns an operation error.' do
       # Create request parameters
-      inspect_config = {}
-      storage_config = {}
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      url = "gs://example_bucket/example_file.png"
+      file_set = { url: url }
+      cloud_storage_options = { file_set: file_set }
+      storage_config = { cloud_storage_options: cloud_storage_options }
       output_config = {}
 
       # Create expected grpc response
@@ -338,8 +382,14 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes create_inspect_operation with error' do
       # Create request parameters
-      inspect_config = {}
-      storage_config = {}
+      name = "EMAIL_ADDRESS"
+      info_types_element = { name: name }
+      info_types = [info_types_element]
+      inspect_config = { info_types: info_types }
+      url = "gs://example_bucket/example_file.png"
+      file_set = { url: url }
+      cloud_storage_options = { file_set: file_set }
+      storage_config = { cloud_storage_options: cloud_storage_options }
       output_config = {}
 
       # Mock Grpc layer
@@ -447,8 +497,8 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes list_info_types without error' do
       # Create request parameters
-      category = ''
-      language_code = ''
+      category = "PII"
+      language_code = "en"
 
       # Create expected grpc response
       expected_response = {}
@@ -481,8 +531,8 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes list_info_types with error' do
       # Create request parameters
-      category = ''
-      language_code = ''
+      category = "PII"
+      language_code = "en"
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -517,7 +567,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes list_root_categories without error' do
       # Create request parameters
-      language_code = ''
+      language_code = "en"
 
       # Create expected grpc response
       expected_response = {}
@@ -549,7 +599,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
 
     it 'invokes list_root_categories with error' do
       # Create request parameters
-      language_code = ''
+      language_code = "en"
 
       # Mock Grpc layer
       mock_method = proc do |request|

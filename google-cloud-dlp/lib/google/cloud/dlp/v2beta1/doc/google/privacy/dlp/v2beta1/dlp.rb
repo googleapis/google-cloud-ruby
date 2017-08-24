@@ -37,7 +37,29 @@ module Google
         # @!attribute [rw] exclude_types
         #   @return [true, false]
         #     When true, excludes type information of the findings.
-        class InspectConfig; end
+        # @!attribute [rw] info_type_limits
+        #   @return [Array<Google::Privacy::Dlp::V2beta1::InspectConfig::InfoTypeLimit>]
+        #     Configuration of findings limit given for specified info types.
+        class InspectConfig
+          # Max findings configuration per info type, per content item or long running
+          # operation.
+          # @!attribute [rw] info_type
+          #   @return [Google::Privacy::Dlp::V2beta1::InfoType]
+          #     Type of information the findings limit applies to. Only one limit per
+          #     info_type should be provided. If InfoTypeLimit does not have an
+          #     info_type, the DLP API applies the limit against all info_types that are
+          #     found but not specified in another InfoTypeLimit.
+          # @!attribute [rw] max_findings
+          #   @return [Integer]
+          #     Max findings limit for the given infoType.
+          class InfoTypeLimit; end
+        end
+
+        # Additional configuration for inspect long running operations.
+        # @!attribute [rw] max_item_findings
+        #   @return [Integer]
+        #     Max number of findings per file, Datastore entity, or database row.
+        class OperationConfig; end
 
         # Container structure for the content to inspect.
         # @!attribute [rw] type
@@ -258,6 +280,9 @@ module Google
         #     <li>namespace_id <li>path <li>column_name <li>offset<br/>
         #     <p>For BigQuery the next columns are: <li>row_number <li>project_id
         #     <li>dataset_id <li>table_id
+        # @!attribute [rw] operation_config
+        #   @return [Google::Privacy::Dlp::V2beta1::OperationConfig]
+        #     Additional configuration settings for long running operations.
         class CreateInspectOperationRequest; end
 
         # Cloud repository for storing output.

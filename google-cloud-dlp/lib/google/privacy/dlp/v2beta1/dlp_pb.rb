@@ -17,6 +17,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max_findings, :int32, 3
     optional :include_quote, :bool, 4
     optional :exclude_types, :bool, 6
+    repeated :info_type_limits, :message, 7, "google.privacy.dlp.v2beta1.InspectConfig.InfoTypeLimit"
+  end
+  add_message "google.privacy.dlp.v2beta1.InspectConfig.InfoTypeLimit" do
+    optional :info_type, :message, 1, "google.privacy.dlp.v2beta1.InfoType"
+    optional :max_findings, :int32, 2
+  end
+  add_message "google.privacy.dlp.v2beta1.OperationConfig" do
+    optional :max_item_findings, :int64, 1
   end
   add_message "google.privacy.dlp.v2beta1.ContentItem" do
     optional :type, :string, 1
@@ -101,6 +109,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :inspect_config, :message, 1, "google.privacy.dlp.v2beta1.InspectConfig"
     optional :storage_config, :message, 2, "google.privacy.dlp.v2beta1.StorageConfig"
     optional :output_config, :message, 3, "google.privacy.dlp.v2beta1.OutputStorageConfig"
+    optional :operation_config, :message, 5, "google.privacy.dlp.v2beta1.OperationConfig"
   end
   add_message "google.privacy.dlp.v2beta1.OutputStorageConfig" do
     oneof :type do
@@ -182,6 +191,8 @@ module Google
     module Dlp
       module V2beta1
         InspectConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectConfig").msgclass
+        InspectConfig::InfoTypeLimit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.InspectConfig.InfoTypeLimit").msgclass
+        OperationConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.OperationConfig").msgclass
         ContentItem = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.ContentItem").msgclass
         Table = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Table").msgclass
         Table::Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2beta1.Table.Row").msgclass

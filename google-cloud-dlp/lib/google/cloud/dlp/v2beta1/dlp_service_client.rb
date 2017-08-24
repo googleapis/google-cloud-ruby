@@ -249,8 +249,14 @@ module Google
           #   require "google/cloud/dlp/v2beta1"
           #
           #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
-          #   inspect_config = {}
-          #   items = []
+          #   name = "EMAIL_ADDRESS"
+          #   info_types_element = { name: name }
+          #   info_types = [info_types_element]
+          #   inspect_config = { info_types: info_types }
+          #   type = "text/plain"
+          #   value = "My email is example@example.com."
+          #   items_element = { type: type, value: value }
+          #   items = [items_element]
           #   response = dlp_service_client.inspect_content(inspect_config, items)
 
           def inspect_content \
@@ -294,9 +300,19 @@ module Google
           #   require "google/cloud/dlp/v2beta1"
           #
           #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
-          #   inspect_config = {}
-          #   items = []
-          #   replace_configs = []
+          #   name = "EMAIL_ADDRESS"
+          #   info_types_element = { name: name }
+          #   info_types = [info_types_element]
+          #   inspect_config = { info_types: info_types }
+          #   type = "text/plain"
+          #   value = "My email is example@example.com."
+          #   items_element = { type: type, value: value }
+          #   items = [items_element]
+          #   name_2 = "EMAIL_ADDRESS"
+          #   info_type = { name: name_2 }
+          #   replace_with = "REDACTED"
+          #   replace_configs_element = { info_type: info_type, replace_with: replace_with }
+          #   replace_configs = [replace_configs_element]
           #   response = dlp_service_client.redact_content(inspect_config, items, replace_configs)
 
           def redact_content \
@@ -345,6 +361,10 @@ module Google
           #   <li>dataset_id <li>table_id
           #   A hash of the same form as `Google::Privacy::Dlp::V2beta1::OutputStorageConfig`
           #   can also be provided.
+          # @param operation_config [Google::Privacy::Dlp::V2beta1::OperationConfig | Hash]
+          #   Additional configuration settings for long running operations.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2beta1::OperationConfig`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -354,8 +374,14 @@ module Google
           #   require "google/cloud/dlp/v2beta1"
           #
           #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
-          #   inspect_config = {}
-          #   storage_config = {}
+          #   name = "EMAIL_ADDRESS"
+          #   info_types_element = { name: name }
+          #   info_types = [info_types_element]
+          #   inspect_config = { info_types: info_types }
+          #   url = "gs://example_bucket/example_file.png"
+          #   file_set = { url: url }
+          #   cloud_storage_options = { file_set: file_set }
+          #   storage_config = { cloud_storage_options: cloud_storage_options }
           #   output_config = {}
           #
           #   # Register a callback during the method call.
@@ -389,11 +415,13 @@ module Google
               inspect_config,
               storage_config,
               output_config,
+              operation_config: nil,
               options: nil
             req = {
               inspect_config: inspect_config,
               storage_config: storage_config,
-              output_config: output_config
+              output_config: output_config,
+              operation_config: operation_config
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::CreateInspectOperationRequest)
             operation = Google::Gax::Operation.new(
@@ -473,8 +501,8 @@ module Google
           #   require "google/cloud/dlp/v2beta1"
           #
           #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
-          #   category = ''
-          #   language_code = ''
+          #   category = "PII"
+          #   language_code = "en"
           #   response = dlp_service_client.list_info_types(category, language_code)
 
           def list_info_types \
@@ -504,7 +532,7 @@ module Google
           #   require "google/cloud/dlp/v2beta1"
           #
           #   dlp_service_client = Google::Cloud::Dlp::V2beta1.new
-          #   language_code = ''
+          #   language_code = "en"
           #   response = dlp_service_client.list_root_categories(language_code)
 
           def list_root_categories \

@@ -21,11 +21,15 @@ module Google
     ##
     # # Ruby Client for DLP API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [DLP API][Product Documentation]: The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
+    # [DLP API][Product Documentation]:
+    # The Google Data Loss Prevention API provides methods for detection of
+    # privacy-sensitive fragments in text, images, and Google Cloud Platform storage
+    # repositories.
     # - [Product Documentation][]
     #
     # ## Quick Start
-    # In order to use this library, you first need to go through the following steps:
+    # In order to use this library, you first need to go through the following
+    # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable the DLP API.](https://console.cloud.google.com/apis/api/dlp)
@@ -52,8 +56,10 @@ module Google
     # ```
     #
     # ### Next Steps
-    # - Read the [DLP API Product documentation][Product Documentation] to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md) to see the full list of Cloud APIs that we cover.
+    # - Read the [DLP API Product documentation][Product Documentation]
+    #   to learn more about the product and see How-to Guides.
+    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+    #   to see the full list of Cloud APIs that we cover.
     #
     # [Product Documentation]: https://cloud.google.com/dlp
     #
