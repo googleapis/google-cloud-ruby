@@ -103,7 +103,7 @@ module Google
 
           ##
           # @private Error message when variable can't be converted.
-          FAIL_CONVERSION_MSG = "Error: Variable couldn't be evaluated."
+          FAIL_CONVERSION_MSG = "Error: Unable to inspect value"
 
           ##
           # @private Name of the variable, if any.
