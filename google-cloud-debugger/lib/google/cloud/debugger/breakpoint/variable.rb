@@ -197,11 +197,11 @@ module Google
           # @example Custom compound variable conversion
           #   foo = Foo.new(a: 1.0, b: [])
           #   foo.inspect  #=> "#<Foo:0xXXXXXX @a=1.0, @b=[]>"
-          #   var_table = Google::Cloud::Debugger::Breakpoint::VariableTable.new
           #   var = Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var \
           #           foo, name: "foo"
           #   var.name  #=> "foo"
           #   var.type  #=> "Foo"
+          #   var.inspect #=> ""
           #   var.members[0].name  #=> "@a"
           #   var.members[0].value #=> "1.0"
           #   var.members[0].type  #=> "Float"
