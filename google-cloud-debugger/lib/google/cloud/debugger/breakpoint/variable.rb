@@ -102,6 +102,10 @@ module Google
           BUFFER_FULL_MSG = "Buffer full. Use an expression to see more data."
 
           ##
+          # @private Error message when variable can't be converted.
+          FAIL_CONVERSION_MSG = "Error: Variable couldn't be evaluated."
+
+          ##
           # @private Name of the variable, if any.
           # @return [String]
           attr_accessor :name
@@ -201,7 +205,6 @@ module Google
           #           foo, name: "foo"
           #   var.name  #=> "foo"
           #   var.type  #=> "Foo"
-          #   var.inspect #=> ""
           #   var.members[0].name  #=> "@a"
           #   var.members[0].value #=> "1.0"
           #   var.members[0].type  #=> "Float"
@@ -246,12 +249,10 @@ module Google
             else
               from_primitive_var source, name: name, limit: limit
             end
-          rescue => e
-            puts e.backtrace
-
+          rescue
             new.tap do |var|
               var.name = name.to_s if name
-              var.set_error_state e.message
+              var.set_error_state FAIL_CONVERSION_MSG
               var.source_var = source
             end
           end
@@ -265,16 +266,8 @@ module Google
               var.source_var = source
               limit = deduct_limit limit,
                                    var.name.to_s.bytesize + var.type.bytesize
-              # Securely invoke #inspect method on source variable
-              inspect_result =
-                Evaluator.readonly_eval_expression binding, "source.inspect"
-              if inspect_result.is_a? String
-                var.value = truncate_value inspect_result, limit
-              elsif inspect_result.is_a? Exception
-                var.set_error_state "Error: #{inspect_result.message}"
-              else
-                var.set_error_state "Error: Variable couldn't be inspected"
-              end
+
+              var.value = truncate_value source.inspect, limit
             end
           end
 
@@ -408,7 +401,8 @@ module Google
 
           private_class_method :add_compound_members,
                                :add_shared_compound_var,
-                               :add_member_vars, :compound_var?,
+                               :add_member_vars,
+                               :compound_var?,
                                :deduct_limit
 
           ##
