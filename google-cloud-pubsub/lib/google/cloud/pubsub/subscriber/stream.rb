@@ -199,11 +199,13 @@ module Google
                 break
               end
             end
-          rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled
+          rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
+                 GRPC::ResourceExhausted, GRPC::Internal
             # The GAPIC layer will raise DeadlineExceeded when stream is opened
             # longer than the timeout value it is configured for. When this
             # happends, restart the stream stealthly.
-            # Also stealthly restart the stream on Unavailable and Cancelled.
+            # Also stealthly restart the stream on Unavailable, Cancelled,
+            # ResourceExhausted, and Internal.
             synchronize { start_streaming! }
           rescue => e
             fail Google::Cloud::Error.from_error(e)
