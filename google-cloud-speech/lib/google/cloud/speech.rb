@@ -158,11 +158,9 @@ module Google
     #
     # speech = Google::Cloud::Speech.new
     #
-    # audio = speech.audio "path/to/audio.raw"
-    #
-    # stream = audio.stream encoding: :linear16,
-    #                       language: "en-US",
-    #                       sample_rate: 16000
+    # stream = speech.stream encoding: :linear16,
+    #                        language: "en-US",
+    #                        sample_rate: 16000
     #
     # # Stream 5 seconds of audio from the microphone
     # # Actual implementation of microphone input varies by platform
