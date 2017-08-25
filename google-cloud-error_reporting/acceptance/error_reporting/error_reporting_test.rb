@@ -58,11 +58,9 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
                                                      error_group_id
       error_events = response.page.response.error_events
 
-      error_events.each do |event|
-        error_event = event if event.service_context.version == service_version
+      error_event = error_events.find do |event|
+        event.service_context.version == service_version
       end
-
-      error_event
     end
 
     error_event.service_context.service.must_equal service_name
