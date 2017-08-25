@@ -136,7 +136,15 @@ describe Google::Cloud::Logging, :logging do
       # logging.write_entries [entry1, entry2, entry3], resource: resource
       logging.write_entries [entry1, entry2], resource: resource
 
-      logging.entries.wont_be :empty?
+      delay = 1
+      entries = nil
+      while delay < 5
+        entries = logging.entries
+        break unless entries.empty?
+        sleep delay
+        delay += 1
+      end
+      entries.wont_be_empty
       logging.entries(max: 1).length.must_equal 1
 
       logging.logs.wont_be :empty?
@@ -150,7 +158,7 @@ describe Google::Cloud::Logging, :logging do
     let(:labels) { { env: :production } }
 
     before do
-      @sleep = 0
+      @sleep = 2
     end
 
     it "writes to a log with add and a symbol" do
@@ -249,7 +257,7 @@ describe Google::Cloud::Logging, :logging do
       filter = "resource.type = \"gce_instance\" AND " +
         "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
-      if entries.count < 6 && @sleep < 5
+      if entries.count < 6 && @sleep < 7
         @sleep += 1
         puts "sleeping for #{@sleep} seconds to and retry pulling #{type} log entries"
         sleep @sleep
@@ -265,7 +273,7 @@ describe Google::Cloud::Logging, :logging do
     let(:labels) { { env: :production } }
 
     before do
-      @sleep = 0
+      @sleep = 2
     end
 
     it "writes to a log with add and a symbol" do
@@ -368,7 +376,7 @@ describe Google::Cloud::Logging, :logging do
       filter = "resource.type = \"gce_instance\" AND " +
         "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
-      if entries.count < 6 && @sleep < 5
+      if entries.count < 6 && @sleep < 7
         @sleep += 1
         puts "sleeping for #{@sleep} seconds to and retry pulling #{type} log entries"
         sleep @sleep
