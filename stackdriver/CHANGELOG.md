@@ -1,5 +1,9 @@
 # Release History
 
+### 0.9.0 / 2017-08-25
+
+* Debugger 0.28.0 release.
+
 ### 0.8.0 / 2017-08-07
 
 * Debugger 0.27.0 release.
