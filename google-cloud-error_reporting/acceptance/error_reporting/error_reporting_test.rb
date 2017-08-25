@@ -52,15 +52,18 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
     error_group = error_group_stats.first.group
     error_group_id = error_group.group_id
 
-    error_events = nil
+    error_event = nil
     wait_until do
       response = @error_stats_vtk_client.list_events formatted_project,
                                                      error_group_id
       error_events = response.page.response.error_events
-      !error_events.empty?
-    end
 
-    error_event = error_events.first
+      error_events.each do |event|
+        error_event = event if event.service_context.version == service_version
+      end
+
+      error_event
+    end
 
     error_event.service_context.service.must_equal service_name
     error_event.service_context.version.must_equal service_version
