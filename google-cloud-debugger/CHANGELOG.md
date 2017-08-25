@@ -1,5 +1,13 @@
 # Release History
 
+### 0.28.0 / 2017-08-25
+
+* Support single file Rack-based applications.
+* Support none-Rack-based Ruby applications.
+* API Breaking Change:
+    * `module_name` initialization parameter renamed to `service_name`
+    * `module_version` initialization parameter renamed to `module_version`
+
 ### 0.27.0 / 2017-08-07
 
 * Optimize breakpoint evaluation memory usage by adopting shared variable table.
