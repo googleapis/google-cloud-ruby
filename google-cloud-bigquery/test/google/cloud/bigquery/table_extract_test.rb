@@ -35,6 +35,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
                                        description }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   it "can extract itself to a storage file" do
     mock = Minitest::Mock.new
@@ -226,6 +227,21 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
     job.job_id.must_equal job_id
+  end
+
+  it "can extract itself with the job labels option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.labels = labels
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract extract_file, labels: labels
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.labels.must_equal labels
   end
 
   def extract_job_gapi table, extract_file, job_id: "job_9876543210"

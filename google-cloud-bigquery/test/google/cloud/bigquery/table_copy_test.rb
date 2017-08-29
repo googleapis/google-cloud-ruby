@@ -42,6 +42,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
                                               "target-project" }
   let(:target_table_other_proj) { Google::Cloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
                                                          bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   it "can copy itself" do
     mock = Minitest::Mock.new
@@ -205,6 +206,20 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     job.job_id.must_equal job_id
+  end
+
+  it "can copy itself with the job labels option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.labels = labels
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy target_table, labels: labels
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.labels.must_equal labels
   end
 
   def copy_job_gapi source, target, job_id: "job_9876543210"

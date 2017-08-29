@@ -65,6 +65,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
+  let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
     fresh = dataset.table table.table_id
@@ -318,9 +319,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "imports data from a local file" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = table.load local_file, job_id: job_id, job_id: job_id
+    job = table.load local_file, job_id: job_id, labels: labels
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
+    job.labels.must_equal labels
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
@@ -344,10 +346,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "copies itself to another table" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    copy_job = table.copy target_table_id, create: :needed, write: :empty, job_id: job_id
+    copy_job = table.copy target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     copy_job.job_id.must_equal job_id
+    copy_job.labels.must_equal labels
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
@@ -407,9 +410,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract extract_url
+        extract_job = table.extract extract_url, labels: labels
 
         extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+        extract_job.labels.must_equal labels
         extract_job.wait_until_done!
 
         extract_job.wont_be :failed?
