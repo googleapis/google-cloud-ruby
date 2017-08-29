@@ -29,6 +29,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -237,7 +238,22 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210"
+  it "can load a storage file with the job labels option" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi.configuration.labels = labels
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url, labels: labels),
+      [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load load_file, labels: labels
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.labels.must_equal labels
+
+    mock.verify
+  end
+
+  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
     hash = random_job_hash job_id
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
@@ -247,7 +263,9 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
         "tableId" => table.table_id
       },
     }
-    Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp.configuration.labels = labels if labels
+    resp
   end
 
   # Borrowed from MockStorage, load to a common module?

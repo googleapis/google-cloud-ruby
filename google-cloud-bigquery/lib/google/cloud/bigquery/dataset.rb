@@ -648,6 +648,13 @@ module Google
         #   underscores (_), or dashes (-). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -720,14 +727,15 @@ module Google
                       table: nil, create: nil, write: nil, standard_sql: nil,
                       legacy_sql: nil, large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil
+                      job_id: nil, prefix: nil, labels: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, job_id: job_id, prefix: prefix }
+                      params: params, job_id: job_id, prefix: prefix,
+                      labels: labels }
           options[:dataset] ||= self
           ensure_service!
           gapi = service.query_job query, options
@@ -995,6 +1003,13 @@ module Google
         #   underscores (_), or dashes (-). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         # @yield [schema] A block for setting the schema for the destination
         #   table. The schema can be omitted if the destination table already
@@ -1070,7 +1085,7 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, schema: nil, job_id: nil, prefix: nil
+                 dryrun: nil, schema: nil, job_id: nil, prefix: nil, labels: nil
           ensure_service!
 
           if block_given?
@@ -1086,7 +1101,8 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
-                      schema: schema_gapi, job_id: job_id, prefix: prefix }
+                      schema: schema_gapi, job_id: job_id, prefix: prefix,
+                      labels: labels }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
