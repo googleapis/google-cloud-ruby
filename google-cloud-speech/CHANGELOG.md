@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.2 / 2017-08-29
+
+* Correct stream example code
+
 ### 0.26.1 / 2017-08-01
 
 * Update documentation.

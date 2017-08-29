@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Speech
-      VERSION = "0.26.1"
+      VERSION = "0.26.2"
     end
   end
 end
