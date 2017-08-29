@@ -202,6 +202,21 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this job. Labels can be
+        # provided when the job is created, and used to organize and group jobs.
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.configuration.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
         # Cancels the job.
         def cancel
           ensure_service!

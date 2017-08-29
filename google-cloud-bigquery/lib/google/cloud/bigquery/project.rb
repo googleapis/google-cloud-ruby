@@ -212,6 +212,13 @@ module Google
         #
         #   See [Generating a job
         #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -285,7 +292,7 @@ module Google
                       project: nil, standard_sql: nil, legacy_sql: nil,
                       large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil
+                      job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -294,7 +301,8 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, job_id: job_id, prefix: prefix }
+                      params: params, job_id: job_id, prefix: prefix,
+                      labels: labels }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end

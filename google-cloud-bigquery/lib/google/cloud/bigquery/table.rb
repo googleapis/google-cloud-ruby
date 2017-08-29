@@ -611,6 +611,13 @@ module Google
         #   underscores (_), or dashes (-). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         # @return [Google::Cloud::Bigquery::CopyJob]
         #
@@ -636,10 +643,10 @@ module Google
         # @!group Data
         #
         def copy destination_table, create: nil, write: nil, dryrun: nil,
-                 job_id: nil, prefix: nil
+                 job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { create: create, write: write, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix }
+                      job_id: job_id, prefix: prefix, labels: labels }
           gapi = service.copy_table table_ref,
                                     get_table_ref(destination_table),
                                     options
@@ -685,6 +692,13 @@ module Google
         #   underscores (_), or dashes (-). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
@@ -702,11 +716,12 @@ module Google
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil, dryrun: nil, job_id: nil, prefix: nil
+                    header: nil, dryrun: nil, job_id: nil, prefix: nil,
+                    labels: nil
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix }
+                      job_id: job_id, prefix: prefix, labels: labels }
           gapi = service.extract_table table_ref, extract_url, options
           Job.from_gapi gapi, service
         end
@@ -812,6 +827,13 @@ module Google
         #   underscores (_), or dashes (-). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -853,7 +875,7 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, job_id: nil, prefix: nil
+                 dryrun: nil, job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -862,7 +884,7 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix }
+                      job_id: job_id, prefix: prefix, labels: labels }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
