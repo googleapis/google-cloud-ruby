@@ -1136,6 +1136,69 @@ module Google
           end
         end
 
+        ##
+        # Inserts data into the given table for near-immediate querying, without
+        # the need to complete a #load operation before the data can appear in
+        # query results.
+        #
+        # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery
+        #   Streaming Data Into BigQuery
+        #
+        # @param [String] table_id The ID of the destination table.
+        # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
+        #   containing the data.
+        # @param [Boolean] skip_invalid Insert all valid rows of a request, even
+        #   if invalid rows exist. The default value is `false`, which causes
+        #   the entire request to fail if any invalid rows exist.
+        # @param [Boolean] ignore_unknown Accept rows that contain values that
+        #   do not match the schema. The unknown values are ignored. Default is
+        #   false, which treats unknown values as errors.
+        # @param [Boolean] create Specifies whether the method should create a
+        #   new table with the given `table_id`, if no table is found for
+        #   `table_id`. The default value is false.
+        #
+        # @return [Google::Cloud::Bigquery::InsertResponse]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows
+        #
+        # @!group Data
+        #
+        def insert table_id, rows, skip_invalid: nil, ignore_unknown: nil,
+                   create: nil
+          rows = [rows] if rows.is_a? Hash
+          rows = Convert.to_json_rows rows
+          options = { skip_invalid: skip_invalid,
+                      ignore_unknown: ignore_unknown }
+          ensure_service!
+
+          gapi = nil
+          if create
+            begin
+              gapi = service.insert_tabledata dataset_id, table_id, rows, options
+            rescue Google::Cloud::NotFoundError
+              create_table table_id do |t|
+                yield t if block_given?
+              end
+            end
+            sleep 10
+            gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          else
+            gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          end
+
+          InsertResponse.from_gapi rows, gapi
+        end
+
         protected
 
         ##
