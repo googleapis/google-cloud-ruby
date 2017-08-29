@@ -195,7 +195,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "inserts rows directly and gets its data" do
-    data = table.data
+    # data = table.data
     insert_response = table.insert rows
     insert_response.must_be :success?
     insert_response.insert_count.must_equal 3
