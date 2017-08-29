@@ -46,6 +46,20 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     t
   end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
+  let(:rows) do
+    [
+      { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+      { name: "ryan",    breed: "golden retriever?", id: 5, dob: Time.now.utc },
+      { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
+  let(:invalid_rows) do
+    [
+        { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+        { name: nil,       breed: "golden retriever?", id: 5, dob: Time.now.utc },
+        { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
   let(:view_id) { "dataset_view" }
   let(:view) do
     t = dataset.table view_id
@@ -176,5 +190,85 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job = dataset.load table_with_schema.table_id, local_file, create: :never
     job.wait_until_done!
     job.output_rows.must_equal 3
+  end
+
+  it "inserts rows directly and gets its data" do
+    insert_response = dataset.insert table_with_schema.table_id, rows
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    data = table_with_schema.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
+  it "insert skip invalid rows and return insert errors" do
+    insert_response = dataset.insert table_with_schema.table_id, invalid_rows, skip_invalid: true
+    insert_response.wont_be :success?
+    insert_response.insert_count.must_equal 2
+
+    insert_response.insert_errors.wont_be :empty?
+    insert_response.insert_errors.count.must_equal 1
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.index.must_equal 1
+
+    # In the context of this test, the original row cannot be compared with InsertResponse row because
+    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
+    # dates/times are formated as timestamp strings with milliseconds.
+    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
+    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
+    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
+    insert_response.insert_errors.first.row.must_equal bigquery_row
+
+    insert_response.error_rows.wont_be :empty?
+    insert_response.error_rows.count.must_equal 1
+    insert_response.error_rows.first.must_equal bigquery_row
+
+    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
+    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
+    insert_response.index_for(invalid_rows[1]).must_equal 1
+  end
+  focus
+  it "creates missing table while inserts rows directly" do
+    new_table_id = "new_dataset_table_id_#{rand(1000)}"
+
+    insert_response = dataset.insert new_table_id, rows, create: true do |t|
+      t.schema.integer  "id",     description: "id description",    mode: :required
+      t.schema.string    "breed", description: "breed description", mode: :required
+      t.schema.string    "name",  description: "name description",  mode: :required
+      t.schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    table = dataset.table new_table_id
+    table.wont_be_nil
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
   end
 end
