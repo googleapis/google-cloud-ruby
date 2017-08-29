@@ -1153,8 +1153,8 @@ module Google
         # @param [Boolean] ignore_unknown Accept rows that contain values that
         #   do not match the schema. The unknown values are ignored. Default is
         #   false, which treats unknown values as errors.
-        # @param [Boolean] create Specifies whether the method should create a
-        #   new table with the given `table_id`, if no table is found for
+        # @param [Boolean] autocreate Specifies whether the method should create
+        #   a new table with the given `table_id`, if no table is found for
         #   `table_id`. The default value is false.
         #
         # @return [Google::Cloud::Bigquery::InsertResponse]
@@ -1174,29 +1174,25 @@ module Google
         # @!group Data
         #
         def insert table_id, rows, skip_invalid: nil, ignore_unknown: nil,
-                   create: nil
-          rows = [rows] if rows.is_a? Hash
-          rows = Convert.to_json_rows rows
-          options = { skip_invalid: skip_invalid,
-                      ignore_unknown: ignore_unknown }
-          ensure_service!
-
-          gapi = nil
-          if create
-            begin
-              gapi = service.insert_tabledata dataset_id, table_id, rows, options
-            rescue Google::Cloud::NotFoundError
-              create_table table_id do |t|
-                yield t if block_given?
+                   autocreate: nil
+          if autocreate
+            tbl = table table_id
+            if tbl.nil?
+              tbl = create_table table_id do |tbl_updater|
+                yield tbl_updater if block_given?
               end
             end
-            sleep 10
-            gapi = service.insert_tabledata dataset_id, table_id, rows, options
+            tbl.insert rows, skip_invalid: skip_invalid,
+                             ignore_unknown: ignore_unknown
           else
+            rows = [rows] if rows.is_a? Hash
+            rows = Convert.to_json_rows rows
+            ensure_service!
+            options = { skip_invalid: skip_invalid,
+                        ignore_unknown: ignore_unknown }
             gapi = service.insert_tabledata dataset_id, table_id, rows, options
+            InsertResponse.from_gapi rows, gapi
           end
-
-          InsertResponse.from_gapi rows, gapi
         end
 
         protected

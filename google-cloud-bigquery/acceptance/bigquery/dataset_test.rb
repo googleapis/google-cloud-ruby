@@ -239,11 +239,11 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     insert_response.errors_for(invalid_rows[1]).wont_be :empty?
     insert_response.index_for(invalid_rows[1]).must_equal 1
   end
-  focus
+
   it "creates missing table while inserts rows directly" do
     new_table_id = "new_dataset_table_id_#{rand(1000)}"
 
-    insert_response = dataset.insert new_table_id, rows, create: true do |t|
+    insert_response = dataset.insert new_table_id, rows, autocreate: true do |t|
       t.schema.integer  "id",     description: "id description",    mode: :required
       t.schema.string    "breed", description: "breed description", mode: :required
       t.schema.string    "name",  description: "name description",  mode: :required
