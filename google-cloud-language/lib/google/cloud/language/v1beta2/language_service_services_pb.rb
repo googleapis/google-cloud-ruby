@@ -47,8 +47,10 @@ module Google
             # tokenization along with part of speech tags, dependency trees, and other
             # properties.
             rpc :AnalyzeSyntax, AnalyzeSyntaxRequest, AnalyzeSyntaxResponse
-            # A convenience method that provides all syntax, sentiment, and entity
-            # features in one call.
+            # Classifies a document into categories.
+            rpc :ClassifyText, ClassifyTextRequest, ClassifyTextResponse
+            # A convenience method that provides all syntax, sentiment, entity, and
+            # classification features in one call.
             rpc :AnnotateText, AnnotateTextRequest, AnnotateTextResponse
           end
 
