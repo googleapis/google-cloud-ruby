@@ -55,6 +55,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.job_id.must_equal job_gapi.job_reference.job_id
     job.labels.must_equal labels
     job.labels.must_be :frozen?
+    job.user_email.must_equal "user@example.com"
   end
 
   it "knows its state" do
