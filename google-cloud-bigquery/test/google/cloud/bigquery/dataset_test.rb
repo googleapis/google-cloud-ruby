@@ -105,7 +105,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         project_id: project, dataset_id: dataset_id, table_id: table_id))
     return_table = create_table_gapi table_id
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id
@@ -129,7 +128,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     # Make sure the returning table has no schema
     return_table.update! schema: nil
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id,
@@ -158,7 +156,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     # Make sure the returning table has no schema
     return_table.update! schema: nil
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -188,7 +185,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -235,7 +231,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |schema|
@@ -277,7 +272,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
     mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
-    mock.expect :get_table, return_table, [project, dataset_id, table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -317,7 +311,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     )
     return_view = create_view_gapi view_id, query
     mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
-    mock.expect :get_table, return_view, [project, dataset_id, view_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query
@@ -345,7 +338,6 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     )
     return_view = create_view_gapi view_id, query, view_name, view_description
     mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
-    mock.expect :get_table, return_view, [project, dataset_id, view_id]
     dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query,
