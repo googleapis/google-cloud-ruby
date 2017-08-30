@@ -556,10 +556,8 @@ module Google
             updater.check_for_mutated_access!
           end
 
-          service.insert_dataset new_ds
-          # TODO: restore original impl after acceptance test indicates that
-          # service etag bug is fixed
-          dataset dataset_id
+          gapi = service.insert_dataset new_ds
+          Dataset.from_gapi gapi, service
         end
 
         ##
