@@ -401,12 +401,7 @@ module Google
           yield updater if block_given?
 
           gapi = service.insert_table dataset_id, updater.to_gapi
-
-          # TODO: restore original impl after acceptance test indicates that
-          # service etag bug is fixed
-          t = Table.from_gapi gapi, service
-          t.reload!
-          t
+          Table.from_gapi gapi, service
         end
 
         ##
@@ -468,12 +463,7 @@ module Google
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
 
           gapi = service.insert_table dataset_id, new_view
-
-          # TODO: restore original impl after acceptance test indicates that
-          # service etag bug is fixed
-          v = Table.from_gapi gapi, service
-          v.reload!
-          v
+          Table.from_gapi gapi, service
         end
 
         ##
