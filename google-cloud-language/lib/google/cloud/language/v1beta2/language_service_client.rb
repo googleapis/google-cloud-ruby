@@ -56,8 +56,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
-          # @param credentials
-          #   [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
           #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
