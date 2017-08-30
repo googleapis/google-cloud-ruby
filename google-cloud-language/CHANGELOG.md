@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.1 / 2017-08-30
+
+* Update GAPIC V1Beta2 API.
+
 ### 0.27.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
