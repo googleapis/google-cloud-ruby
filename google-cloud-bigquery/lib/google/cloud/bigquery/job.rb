@@ -83,6 +83,12 @@ module Google
         end
 
         ##
+        # The email address of the user who ran the job.
+        def user_email
+          @gapi.user_email
+        end
+
+        ##
         # The current state of the job. The possible values are `PENDING`,
         # `RUNNING`, and `DONE`. A `DONE` state does not mean that the job
         # completed successfully. Use {#failed?} to discover if an error
