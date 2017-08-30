@@ -1,0 +1,1 @@
+{"id":"google/cloud/language/v1beta2/dependencyedge/label","name":"Label","title":["Google","Cloud","Language","V1beta2","DependencyEdge","Label"],"description":"<p>The parse label enum for the token.</p>","source":"google-cloud-language/lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb#L501","resources":[],"examples":[],"methods":[]}
