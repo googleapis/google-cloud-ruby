@@ -324,6 +324,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     job.job_id.must_equal job_id
     job.labels.must_equal labels
     job.wont_be :autodetect?
+    job.null_marker.must_equal ""
     job.wait_until_done!
     job.output_rows.must_equal 3
   end

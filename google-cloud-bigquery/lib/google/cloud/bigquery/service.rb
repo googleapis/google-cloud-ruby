@@ -371,7 +371,8 @@ module Google
             autodetect: options[:autodetect],
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records], quote: options[:quote],
+            max_bad_records: options[:max_bad_records],
+            null_marker: options[:null_marker], quote: options[:quote],
             schema: options[:schema], skip_leading_rows: options[:skip_leading]
           }.delete_if { |_, v| v.nil? }
         end
@@ -403,7 +404,8 @@ module Google
             autodetect: options[:autodetect],
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records], quote: options[:quote],
+            max_bad_records: options[:max_bad_records],
+            null_marker: options[:null_marker], quote: options[:quote],
             schema: options[:schema], skip_leading_rows: options[:skip_leading]
           }.delete_if { |_, v| v.nil? }
         end
