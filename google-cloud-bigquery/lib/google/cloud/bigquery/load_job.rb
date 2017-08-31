@@ -119,7 +119,7 @@ module Google
         # file. The default is `false`.
         def quoted_newlines?
           val = @gapi.configuration.load.allow_quoted_newlines
-          val = true if val.nil?
+          val = false if val.nil?
           val
         end
 

@@ -17,6 +17,8 @@ require "json"
 require "uri"
 
 describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
+  let(:job_defaults_gapi) { Google::Apis::BigqueryV2::Job.from_json load_job_defaults_hash.to_json }
+  let(:job_defaults) { Google::Cloud::Bigquery::Job.from_gapi job_defaults_gapi, bigquery.service }
   let(:job_gapi) { Google::Apis::BigqueryV2::Job.from_json load_job_hash.to_json }
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi, bigquery.service }
   let(:job_id) { job.job_id }
@@ -48,7 +50,24 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     table.table_id.must_equal   "target_table_id"
   end
 
-  it "knows its attributes" do
+  it "knows its default attributes" do
+    job_defaults.delimiter.must_equal ","
+    job_defaults.skip_leading_rows.must_equal 0
+    job_defaults.must_be :utf8?
+    job_defaults.wont_be :iso8859_1?
+    job_defaults.quote.must_equal "\""
+    job_defaults.max_bad_records.must_equal 0
+    job_defaults.null_marker.must_equal ""
+    job_defaults.wont_be :quoted_newlines?
+    job_defaults.wont_be :autodetect?
+    job_defaults.must_be :json?
+    job_defaults.wont_be :csv?
+    job_defaults.wont_be :backup?
+    job_defaults.wont_be :allow_jagged_rows?
+    job_defaults.wont_be :ignore_unknown_values?
+  end
+
+  it "knows its full attributes" do
     job.delimiter.must_equal ","
     job.skip_leading_rows.must_equal 0
     job.must_be :utf8?
@@ -84,6 +103,27 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.config["load"]["destinationTable"]["tableId"].must_equal "target_table_id"
     job.config["load"]["createDisposition"].must_equal "CREATE_IF_NEEDED"
     job.config["load"]["encoding"].must_equal "UTF-8"
+  end
+
+  def load_job_defaults_hash
+    hash = random_job_hash
+    hash["configuration"]["load"] = {
+      "sourceUris" => ["gs://bucket/file.ext"],
+      "destinationTable" => {
+        "projectId" => "target_project_id",
+        "datasetId" => "target_dataset_id",
+        "tableId"   => "target_table_id"
+      },
+      "schema" => random_schema_hash,
+      "sourceFormat" => "NEWLINE_DELIMITED_JSON"
+    }
+    hash["statistics"]["load"] = {
+      "inputFiles" => "3", # String per google/google-api-ruby-client#439
+      "inputFileBytes" => "456", # String per google/google-api-ruby-client#439
+      "outputRows" => "5", # String per google/google-api-ruby-client#439
+      "outputBytes" => "789" # String per google/google-api-ruby-client#439
+    }
+    hash
   end
 
   def load_job_hash
