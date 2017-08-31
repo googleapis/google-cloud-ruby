@@ -49,7 +49,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
         [project, load_job_csv_options_gapi(table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
       job = dataset.load table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
-        encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
+        encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
