@@ -573,7 +573,8 @@ class MockBigquery < Minitest::Spec
           max_bad_records: 42,
           quote: "'",
           skip_leading_rows: 1,
-          autodetect: true
+          autodetect: true,
+          null_marker: "\N"
         ),
         dry_run: nil
       )
