@@ -18,8 +18,13 @@ require "uri"
 
 describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   # Create a job object with the project's mocked connection object
+  let(:labels) { { "foo" => "bar" } }
   let(:job_hash) { random_job_hash }
-  let(:job_gapi) { Google::Apis::BigqueryV2::Job.from_json random_job_hash.to_json }
+  let(:job_gapi) do
+    job_gapi = Google::Apis::BigqueryV2::Job.from_json random_job_hash.to_json
+    job_gapi.configuration.labels = labels
+    job_gapi
+  end
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
@@ -48,6 +53,9 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   it "knows its attributes" do
     job.job_id.wont_be :nil?
     job.job_id.must_equal job_gapi.job_reference.job_id
+    job.labels.must_equal labels
+    job.labels.must_be :frozen?
+    job.user_email.must_equal "user@example.com"
   end
 
   it "knows its state" do

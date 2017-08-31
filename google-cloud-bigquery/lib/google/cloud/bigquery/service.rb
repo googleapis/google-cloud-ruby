@@ -377,13 +377,15 @@ module Google
 
         def load_table_file_config dataset_id, table_id, file, options = {}
           load_opts = load_table_file_opts dataset_id, table_id, file, options
-          API::Job.new(
+          req = API::Job.new(
             job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def load_table_url_opts dataset_id, table_id, url, options = {}
@@ -406,13 +408,15 @@ module Google
 
         def load_table_url_config dataset_id, table_id, url, options = {}
           load_opts = load_table_url_opts dataset_id, table_id, url, options
-          API::Job.new(
+          req = API::Job.new(
             job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         # rubocop:disable all
@@ -443,6 +447,7 @@ module Google
               )
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
 
           if options[:params]
             if Array === options[:params]
@@ -509,7 +514,7 @@ module Google
         ##
         # Job description for copy job
         def copy_table_config source, target, options = {}
-          API::Job.new(
+          req = API::Job.new(
             job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               copy: API::JobConfigurationTableCopy.new(
@@ -521,6 +526,8 @@ module Google
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def extract_table_config table, storage_files, options = {}
@@ -528,7 +535,7 @@ module Google
             url.respond_to?(:to_gs_url) ? url.to_gs_url : url
           end
           dest_format = source_format storage_urls.first, options[:format]
-          API::Job.new(
+          req = API::Job.new(
             job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               extract: API::JobConfigurationExtract.new(
@@ -542,6 +549,8 @@ module Google
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def create_disposition str

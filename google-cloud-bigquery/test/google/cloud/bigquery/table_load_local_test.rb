@@ -22,6 +22,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   it "can upload a csv file" do
     mock = Minitest::Mock.new
@@ -144,7 +145,25 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
     mock.verify
   end
 
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210"
+  it "can upload a json file with the job labels option" do
+    mock = Minitest::Mock.new
+    table.service.mocked_service = mock
+    job_gapi = load_job_gapi(table_gapi.table_reference)
+    job_gapi.configuration.labels = labels
+
+    temp_json do |file|
+      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", labels: labels),
+        [project, job_gapi, upload_source: file, content_type: "application/json"]
+
+      job = table.load file, format: "JSON", labels: labels
+      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.labels.must_equal labels
+    end
+
+    mock.verify
+  end
+
+  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
     hash = random_job_hash job_id
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
@@ -154,6 +173,8 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
         "tableId" => table.table_id
       },
     }
-    Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp.configuration.labels = labels if labels
+    resp
   end
 end

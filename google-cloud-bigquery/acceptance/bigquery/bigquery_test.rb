@@ -116,9 +116,16 @@ describe Google::Cloud::Bigquery, :bigquery do
     job = bigquery.query_job publicdata_query, job_id: job_id
     job.must_be_kind_of Google::Cloud::Bigquery::Job
     job.job_id.must_equal job_id
+    job.user_email.wont_be_nil
     job.wait_until_done!
     rows = job.data
     rows.total.must_equal 100
+  end
+
+  it "should run a query job with job labels" do
+    job = bigquery.query_job publicdata_query, labels: labels
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.labels.must_equal labels
   end
 
   it "should get a list of jobs" do

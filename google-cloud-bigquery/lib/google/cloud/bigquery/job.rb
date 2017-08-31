@@ -83,6 +83,12 @@ module Google
         end
 
         ##
+        # The email address of the user who ran the job.
+        def user_email
+          @gapi.user_email
+        end
+
+        ##
         # The current state of the job. The possible values are `PENDING`,
         # `RUNNING`, and `DONE`. A `DONE` state does not mean that the job
         # completed successfully. Use {#failed?} to discover if an error
@@ -199,6 +205,21 @@ module Google
         # of hash objects. See {#error}.
         def errors
           Array status["errors"]
+        end
+
+        ##
+        # A hash of user-provided labels associated with this job. Labels can be
+        # provided when the job is created, and used to organize and group jobs.
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.configuration.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
         end
 
         ##
