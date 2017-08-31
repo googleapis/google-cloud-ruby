@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
         [project, load_job_csv_options_gapi(table_gapi.table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true,
+      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
         quote: "'", skip_leading: 1
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
