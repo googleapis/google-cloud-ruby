@@ -944,6 +944,9 @@ module Google
         # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
         #   quoted data sections that contain newline characters in a CSV file.
         #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
         # @param [String] encoding The character encoding of the data. The
         #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
         #   `UTF-8`.
@@ -1085,7 +1088,8 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, schema: nil, job_id: nil, prefix: nil, labels: nil
+                 dryrun: nil, schema: nil, job_id: nil, prefix: nil,
+                 labels: nil, autodetect: nil
           ensure_service!
 
           if block_given?
@@ -1102,7 +1106,7 @@ module Google
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
                       schema: schema_gapi, job_id: job_id, prefix: prefix,
-                      labels: labels }
+                      labels: labels, autodetect: autodetect }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
