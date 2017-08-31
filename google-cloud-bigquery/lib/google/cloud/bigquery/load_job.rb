@@ -110,6 +110,15 @@ module Google
         end
 
         ##
+        # Checks if BigQuery should automatically infer the options and schema
+        # for CSV and JSON sources. The default is `false`.
+        def autodetect?
+          val = @gapi.configuration.load.autodetect
+          val = false if val.nil?
+          val
+        end
+
+        ##
         # Checks if the format of the source data is [newline-delimited
         # JSON](http://jsonlines.org/). The default is `false`.
         def json?

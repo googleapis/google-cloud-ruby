@@ -56,6 +56,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.quote.must_equal "\""
     job.max_bad_records.must_equal 0
     job.must_be :quoted_newlines?
+    job.must_be :autodetect?
     job.must_be :json?
     job.wont_be :csv?
     job.wont_be :backup?
@@ -102,6 +103,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       "quote" => "\"",
       "maxBadRecords" => 0,
       "allowQuotedNewlines" => true,
+      "autodetect" => true,
       "sourceFormat" => "NEWLINE_DELIMITED_JSON",
       "allowJaggedRows" => true,
       "ignoreUnknownValues" => true
