@@ -55,6 +55,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.wont_be :iso8859_1?
     job.quote.must_equal "\""
     job.max_bad_records.must_equal 0
+    job.null_marker.must_equal "\N"
     job.must_be :quoted_newlines?
     job.must_be :autodetect?
     job.must_be :json?
@@ -102,6 +103,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       "encoding" => "UTF-8",
       "quote" => "\"",
       "maxBadRecords" => 0,
+      "nullMarker" => "\N",
       "allowQuotedNewlines" => true,
       "autodetect" => true,
       "sourceFormat" => "NEWLINE_DELIMITED_JSON",
