@@ -323,6 +323,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.labels.must_equal labels
+    job.wont_be :autodetect?
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
