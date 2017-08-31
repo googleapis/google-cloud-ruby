@@ -96,8 +96,8 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
-    job = dataset.load table_id, special_file, jagged_rows: true, quoted_newlines: true,
-      encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
+    job = dataset.load table_id, special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
+      encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 

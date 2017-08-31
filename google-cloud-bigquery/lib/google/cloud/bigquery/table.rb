@@ -776,6 +776,9 @@ module Google
         # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
         #   quoted data sections that contain newline characters in a CSV file.
         #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
         # @param [String] encoding The character encoding of the data. The
         #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
         #   `UTF-8`.
@@ -800,6 +803,13 @@ module Google
         #   records exceeds this value, an invalid error is returned in the job
         #   result. The default value is `0`, which requires that all records
         #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
         # @param [String] quote The value that is used to quote data sections in
         #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
         #   then uses the first byte of the encoded string to split the data in
@@ -875,7 +885,8 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, job_id: nil, prefix: nil, labels: nil
+                 dryrun: nil, job_id: nil, prefix: nil, labels: nil,
+                 autodetect: nil, null_marker: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -884,7 +895,8 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
+                      job_id: job_id, prefix: prefix, labels: labels,
+                      autodetect: autodetect, null_marker: null_marker }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"

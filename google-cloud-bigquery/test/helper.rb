@@ -572,7 +572,9 @@ class MockBigquery < Minitest::Spec
           ignore_unknown_values: true,
           max_bad_records: 42,
           quote: "'",
-          skip_leading_rows: 1
+          skip_leading_rows: 1,
+          autodetect: true,
+          null_marker: "\N"
         ),
         dry_run: nil
       )
