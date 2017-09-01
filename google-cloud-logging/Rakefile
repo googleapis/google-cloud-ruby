@@ -62,7 +62,7 @@ namespace :acceptance do
     Rake::Task["acceptance"].invoke
   end
 
-  desc "Removes *ALL* Logging sinks and metrics. Use with caution."
+  desc "Removes *ALL* Logging logs, sinks, and metrics. Use with caution."
   task :cleanup do |t, args|
     project = args[:project]
     project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
@@ -83,10 +83,13 @@ namespace :acceptance do
 
     $LOAD_PATH.unshift "lib"
     require "google/cloud/logging"
-    puts "Cleaning up LOGGING sinks and metrics"
+    puts "Cleaning up LOGGING logs, sinks, and metrics"
     begin
-      # Google::Cloud.logging.sinks.all &:delete
-      Google::Cloud.logging.metrics.all &:delete
+      logging = Google::Cloud.logging
+      # only delete acceptance logs, not the other logs needed for project.
+      logging.logs.select { |l| l.include? "gcloud_ruby_acceptance" }.each { |l| logging.delete_log l }
+      # logging.sinks.all &:delete
+      logging.metrics.all &:delete
     rescue Google::Cloud::Error => e
       puts e.message
     end
