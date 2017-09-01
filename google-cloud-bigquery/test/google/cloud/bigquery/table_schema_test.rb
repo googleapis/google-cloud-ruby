@@ -61,47 +61,47 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     table.schema.fields[0].name.must_equal "name"
     table.schema.fields[0].type.must_equal "STRING"
-    table.schema.fields[0].description.must_equal nil
+    table.schema.fields[0].description.must_be :nil?
     table.schema.fields[0].mode.must_equal "REQUIRED"
 
     table.schema.fields[1].name.must_equal "age"
     table.schema.fields[1].type.must_equal "INTEGER"
-    table.schema.fields[1].description.must_equal nil
+    table.schema.fields[1].description.must_be :nil?
     table.schema.fields[1].mode.must_equal "NULLABLE"
 
     table.schema.fields[2].name.must_equal "score"
     table.schema.fields[2].type.must_equal "FLOAT"
-    table.schema.fields[2].description.must_equal nil
+    table.schema.fields[2].description.must_be :nil?
     table.schema.fields[2].mode.must_equal "NULLABLE"
 
     table.schema.fields[3].name.must_equal "active"
     table.schema.fields[3].type.must_equal "BOOLEAN"
-    table.schema.fields[3].description.must_equal nil
+    table.schema.fields[3].description.must_be :nil?
     table.schema.fields[3].mode.must_equal "NULLABLE"
 
     table.schema.fields[4].name.must_equal "avatar"
     table.schema.fields[4].type.must_equal "BYTES"
-    table.schema.fields[4].description.must_equal nil
+    table.schema.fields[4].description.must_be :nil?
     table.schema.fields[4].mode.must_equal "NULLABLE"
 
     table.schema.fields[5].name.must_equal "started_at"
     table.schema.fields[5].type.must_equal "TIMESTAMP"
-    table.schema.fields[5].description.must_equal nil
+    table.schema.fields[5].description.must_be :nil?
     table.schema.fields[5].mode.must_equal "NULLABLE"
 
     table.schema.fields[6].name.must_equal "duration"
     table.schema.fields[6].type.must_equal "TIME"
-    table.schema.fields[6].description.must_equal nil
+    table.schema.fields[6].description.must_be :nil?
     table.schema.fields[6].mode.must_equal "NULLABLE"
 
     table.schema.fields[7].name.must_equal "target_end"
     table.schema.fields[7].type.must_equal "DATETIME"
-    table.schema.fields[7].description.must_equal nil
+    table.schema.fields[7].description.must_be :nil?
     table.schema.fields[7].mode.must_equal "NULLABLE"
 
     table.schema.fields[8].name.must_equal "birthday"
     table.schema.fields[8].type.must_equal "DATE"
-    table.schema.fields[8].description.must_equal nil
+    table.schema.fields[8].description.must_be :nil?
     table.schema.fields[8].mode.must_equal "NULLABLE"
 
     table.fields.count.must_equal 9

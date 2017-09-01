@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.wont_be :failed?
 
     job.gapi.status.state = nil
-    job.state.must_equal nil
+    job.state.must_be :nil?
     job.wont_be :running?
     job.wont_be :pending?
     job.wont_be :done?

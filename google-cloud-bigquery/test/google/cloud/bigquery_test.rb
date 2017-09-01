@@ -20,8 +20,8 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.bigquery" do
       gcloud = Google::Cloud.new
       stubbed_bigquery = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
-        project.must_equal nil
-        keyfile.must_equal nil
+        project.must_be :nil?
+        keyfile.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
@@ -88,14 +88,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
         project.must_equal "project-id"
         credentials.must_equal "bigquery-credentials"
-        retries.must_equal nil
-        timeout.must_equal nil
+        retries.must_be :nil?
+        timeout.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -139,14 +139,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
         project.must_equal "project-id"
         credentials.must_equal "bigquery-credentials"
-        retries.must_equal nil
-        timeout.must_equal nil
+        retries.must_be :nil?
+        timeout.must_be :nil?
         OpenStruct.new project: project
       }
 
