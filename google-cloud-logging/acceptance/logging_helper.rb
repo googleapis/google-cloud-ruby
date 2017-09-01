@@ -78,11 +78,12 @@ module Acceptance
 end
 
 def clean_up_logging_sinks_metrics
-  puts "Cleaning up logging sinks and metrics after tests."
+  puts "Cleaning up logging logs, sinks, and metrics after tests."
+  $logging.logs.select { |l| l.include? $prefix }.each { |l| $logging.delete_log l }
   # $logging.sinks.select { |s| s.name.start_with? $prefix }.map &:delete
   $logging.metrics.select { |m| m.name.start_with? $prefix }.map &:delete
 rescue => e
-  puts "Error while cleaning up logging sinks and metrics after tests.\n\n#{e}"
+  puts "Error while cleaning up logging logs, sinks, and metrics after tests.\n\n#{e}"
 end
 
 Minitest.after_run do
