@@ -83,7 +83,7 @@ module Google
         # @param scopes [Array<String>]
         #   The OAuth scopes for this service. This parameter is ignored if
         #   an updater_proc is supplied.
-        # @param client_config[Hash]
+        # @param client_config [Hash]
         #   A Hash for call options for each method. See
         #   Google::Gax#construct_settings for the structure of
         #   this data. Falls back to the default config if not specified
