@@ -390,7 +390,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "extracts data to a url in your bucket" do
-    skip "The BigQuery to Storage acceptance tests are failing with internalError"
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file
@@ -406,7 +405,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       load_job.iso8859_1?.must_equal false
       load_job.quote.must_equal "\""
       load_job.max_bad_records.must_equal 0
-      load_job.quoted_newlines?.must_equal true
+      load_job.quoted_newlines?.must_equal false
       load_job.json?.must_equal true
       load_job.csv?.must_equal false
       load_job.backup?.must_equal false
@@ -452,7 +451,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "extracts data to a file in your bucket" do
-    skip "The BigQuery to Storage acceptance tests are failing with internalError"
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file

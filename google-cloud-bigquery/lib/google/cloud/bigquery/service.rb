@@ -474,6 +474,14 @@ module Google
             end
           end
 
+          if options[:external]
+            external_table_pairs = options[:external].map do |name, obj|
+              [String(name), obj.to_gapi]
+            end
+            external_table_hash = Hash[external_table_pairs]
+            req.configuration.query.table_definitions = external_table_hash
+          end
+
           req
         end
 
@@ -591,6 +599,7 @@ module Google
                   "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
                   "avro" => "AVRO",
                   "datastore" => "DATASTORE_BACKUP",
+                  "backup" => "DATASTORE_BACKUP",
                   "datastore_backup" => "DATASTORE_BACKUP"
                 }[format.to_s.downcase]
           return val unless val.nil?

@@ -54,22 +54,22 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[1][:age].must_equal 42
     data[1][:score].must_equal 8.15
     data[1][:active].must_equal false
-    data[1][:avatar].must_equal nil
-    data[1][:started_at].must_equal nil
+    data[1][:avatar].must_be :nil?
+    data[1][:started_at].must_be :nil?
     data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
-    data[1][:target_end].must_equal nil
-    data[1][:birthday].must_equal nil
+    data[1][:target_end].must_be :nil?
+    data[1][:birthday].must_be :nil?
 
     data[2].must_be_kind_of Hash
     data[2][:name].must_equal "Sally"
-    data[2][:age].must_equal nil
-    data[2][:score].must_equal nil
-    data[2][:active].must_equal nil
-    data[2][:avatar].must_equal nil
-    data[2][:started_at].must_equal nil
-    data[2][:duration].must_equal nil
-    data[2][:target_end].must_equal nil
-    data[2][:birthday].must_equal nil
+    data[2][:age].must_be :nil?
+    data[2][:score].must_be :nil?
+    data[2][:active].must_be :nil?
+    data[2][:avatar].must_be :nil?
+    data[2][:started_at].must_be :nil?
+    data[2][:duration].must_be :nil?
+    data[2][:target_end].must_be :nil?
+    data[2][:birthday].must_be :nil?
     end
 
   it "can retrieve query results when it already has destination_schema" do
@@ -104,22 +104,22 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[1][:age].must_equal 42
     data[1][:score].must_equal 8.15
     data[1][:active].must_equal false
-    data[1][:avatar].must_equal nil
-    data[1][:started_at].must_equal nil
+    data[1][:avatar].must_be :nil?
+    data[1][:started_at].must_be :nil?
     data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
-    data[1][:target_end].must_equal nil
-    data[1][:birthday].must_equal nil
+    data[1][:target_end].must_be :nil?
+    data[1][:birthday].must_be :nil?
 
     data[2].must_be_kind_of Hash
     data[2][:name].must_equal "Sally"
-    data[2][:age].must_equal nil
-    data[2][:score].must_equal nil
-    data[2][:active].must_equal nil
-    data[2][:avatar].must_equal nil
-    data[2][:started_at].must_equal nil
-    data[2][:duration].must_equal nil
-    data[2][:target_end].must_equal nil
-    data[2][:birthday].must_equal nil
+    data[2][:age].must_be :nil?
+    data[2][:score].must_be :nil?
+    data[2][:active].must_be :nil?
+    data[2][:avatar].must_be :nil?
+    data[2][:started_at].must_be :nil?
+    data[2][:duration].must_be :nil?
+    data[2][:target_end].must_be :nil?
+    data[2][:birthday].must_be :nil?
   end
 
   it "paginates data" do

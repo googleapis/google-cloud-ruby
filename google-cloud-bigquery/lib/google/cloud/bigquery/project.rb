@@ -19,6 +19,7 @@ require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/credentials"
 require "google/cloud/bigquery/dataset"
 require "google/cloud/bigquery/job"
+require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/project/list"
 require "google/cloud/bigquery/time"
 require "google/cloud/bigquery/schema"
@@ -127,6 +128,10 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
+        # @param [Hash<String|Symbol, External::Table>] external A Hash that
+        #   represents the mapping of the external tables to the table names
+        #   used in the SQL query. The hash keys are the table names, and the
+        #   hash values are the external table objects. See {Project#query}.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -160,9 +165,6 @@ module Google
         # @param [String] project Specifies the default projectId to assume for
         #   any unqualified table names in the query. Only used if `dataset`
         #   option is set.
-        # @param [Boolean] large_results If `true`, allows the query to produce
-        #   arbitrarily large result tables at a slight cost in performance.
-        #   Requires `table` parameter to be set.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
@@ -294,12 +296,34 @@ module Google
         #     end
         #   end
         #
-        def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
-                      table: nil, create: nil, write: nil, dataset: nil,
-                      project: nil, standard_sql: nil, legacy_sql: nil,
-                      large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil, labels: nil, udfs: nil
+        # @example Query using external data source:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = bigquery.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   job = bigquery.query_job "SELECT * FROM my_ext_table",
+        #                            external: { my_ext_table: csv_table }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.data.each do |row|
+        #       puts row[:name]
+        #     end
+        #   end
+        #
+        def query_job query, params: nil, external: nil,
+                      priority: "INTERACTIVE", cache: true, table: nil,
+                      create: nil, write: nil, dataset: nil, project: nil,
+                      standard_sql: nil, legacy_sql: nil, large_results: nil,
+                      flatten: nil, maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil, job_id: nil, prefix: nil,
+                      labels: nil, udfs: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -308,8 +332,8 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, job_id: job_id, prefix: prefix,
-                      labels: labels, udfs: udfs }
+                      params: params, external: external, labels: labels,
+                      job_id: job_id, prefix: prefix, udfs: udfs }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end
@@ -353,6 +377,10 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
+        # @param [Hash<String|Symbol, External::Table>] external A Hash that
+        #   represents the mapping of the external tables to the table names
+        #   used in the SQL query. The hash keys are the table names, and the
+        #   hash values are the external table objects. See {Project#query}.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
@@ -456,12 +484,30 @@ module Google
         #     puts row[:name]
         #   end
         #
-        def query query, params: nil, max: nil, cache: true, dataset: nil,
-                  project: nil, standard_sql: nil, legacy_sql: nil
+        # @example Query using external data source:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = bigquery.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   data = bigquery.query "SELECT * FROM my_ext_table",
+        #                         external: { my_ext_table: csv_table }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
+        def query query, params: nil, external: nil, max: nil, cache: true,
+                  dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil
           ensure_service!
           options = { cache: cache, dataset: dataset, project: project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      params: params }
+                      params: params, external: external }
 
           job = query_job query, options
           job.wait_until_done!
@@ -477,6 +523,57 @@ module Google
           end
 
           job.data max: max
+        end
+
+        ##
+        # Creates a new External::Table (or subclass) object that represents the
+        # external data source that can be queried from directly, even though
+        # the data is not stored in BigQuery. Instead of loading or streaming
+        # the data, this object references the external data source.
+        #
+        # @see https://cloud.google.com/bigquery/external-data-sources Querying
+        #   External Data Sources
+        #
+        # @param [String, Array<String>] url The fully-qualified URL(s) that
+        #   point to your data in Google Cloud. An attempt will be made to
+        #   derive the format from the URLs provided.
+        # @param [String|Symbol] format The data format. This value will be used
+        #   even if the provided URLs are recognized as a different format.
+        #   Optional.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `sheets` - Google Sheets
+        #   * `datastore_backup` - Cloud Datastore backup
+        #   * `bigtable` - Bigtable
+        #
+        # @return [Google::Cloud::Bigquery::External::Table] External table.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = bigquery.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   data = bigquery.query "SELECT * FROM my_ext_table",
+        #                         external: { my_ext_table: csv_table }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
+        def external url, format: nil
+          ext = External.from_urls url, format
+          yield ext if block_given?
+          ext
         end
 
         ##
