@@ -447,7 +447,8 @@ module Google
                 use_legacy_sql: Convert.resolve_legacy_sql(
                   options[:standard_sql], options[:legacy_sql]),
                 maximum_billing_tier: options[:maximum_billing_tier],
-                maximum_bytes_billed: options[:maximum_bytes_billed]
+                maximum_bytes_billed: options[:maximum_bytes_billed],
+                user_defined_function_resources: udfs(options[:udfs])
               )
             )
           )
@@ -611,6 +612,19 @@ module Google
           mime_type
         rescue
           nil
+        end
+
+        def udfs array_or_str
+          return nil if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = API::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
 
         def execute

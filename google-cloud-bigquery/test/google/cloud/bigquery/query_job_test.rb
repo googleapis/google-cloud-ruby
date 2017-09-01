@@ -94,6 +94,14 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     step.substeps.must_equal [ "word", "FROM publicdata:samples.shakespeare" ]
   end
 
+  it "knows its user defined function resources" do
+    job.udfs.wont_be_nil
+    job.udfs.must_be_kind_of Array
+    job.udfs.count.must_equal 2
+    job.udfs.first.must_equal "return x+1;"
+    job.udfs.last.must_equal "gs://my-bucket/my-lib.js"
+  end
+
   def query_job_gapi
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
     gapi.statistics.query = statistics_query_gapi
@@ -122,7 +130,11 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "flattenResults" => true,
       "useLegacySql" => false,
       "maximumBillingTier" => 2,
-      "maximumBytesBilled" => 12345678901234 # Long
+      "maximumBytesBilled" => 12345678901234, # Long
+      "userDefinedFunctionResources" => [
+        { "inlineCode" => "return x+1;" },
+        { "resourceUri" => "gs://my-bucket/my-lib.js" }
+      ]
     }
     hash
   end

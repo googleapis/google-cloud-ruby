@@ -25,6 +25,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     d
   end
   let(:labels) { { "foo" => "bar" } }
+  let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
   let(:filter) { "labels.foo:bar" }
   let(:dataset_2_id) { "#{prefix}_dataset_2" }
   let(:dataset_2) do
@@ -126,6 +127,12 @@ describe Google::Cloud::Bigquery, :bigquery do
     job = bigquery.query_job publicdata_query, labels: labels
     job.must_be_kind_of Google::Cloud::Bigquery::Job
     job.labels.must_equal labels
+  end
+
+  it "should run a query job with user defined function resources" do
+    job = bigquery.query_job publicdata_query, udfs: udfs
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.udfs.must_equal udfs
   end
 
   it "should get a list of jobs" do

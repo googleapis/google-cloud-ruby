@@ -479,10 +479,30 @@ class MockBigquery < Minitest::Spec
           "flattenResults" => nil,
           "useLegacySql" => false,
           "maximumBillingTier" => nil,
-          "maximumBytesBilled" => nil
+          "maximumBytesBilled" => nil,
+          "userDefinedFunctionResources" => nil
         }
       }
     }.to_json
+  end
+
+  def udfs_gapi_inline
+    Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(
+      inline_code: "return x+1;"
+    )
+  end
+
+  def udfs_gapi_uri
+    Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(
+      resource_uri: "gs://my-bucket/my-lib.js"
+    )
+  end
+
+  def udfs_gapi_array
+    [
+      udfs_gapi_inline,
+      udfs_gapi_uri
+    ]
   end
 
   def query_request_gapi
