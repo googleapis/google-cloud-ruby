@@ -219,6 +219,13 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -292,7 +299,7 @@ module Google
                       project: nil, standard_sql: nil, legacy_sql: nil,
                       large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil, labels: nil
+                      job_id: nil, prefix: nil, labels: nil, udfs: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
@@ -302,7 +309,7 @@ module Google
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params, job_id: job_id, prefix: prefix,
-                      labels: labels }
+                      labels: labels, udfs: udfs }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end
