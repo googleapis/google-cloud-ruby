@@ -142,6 +142,21 @@ module Google
         end
 
         ##
+        # The user-defined function resources used in the query. May be either a
+        # code resource to load from a Google Cloud Storage URI
+        # (`gs://bucket/path`), or an inline resource that contains code for a
+        # user-defined function (UDF). Providing an inline code resource is
+        # equivalent to providing a URI for a file containing the same code. See
+        # [User-Defined Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        def udfs
+          udfs_gapi = @gapi.configuration.query.user_defined_function_resources
+          return nil unless udfs_gapi
+          Array(udfs_gapi).map do |udf|
+            udf.inline_code || udf.resource_uri
+          end
+        end
+
+        ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
         #
