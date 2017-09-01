@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "google-cloud-video_intelligence.gemspec"
+    - "lib/google/cloud/video_intelligence.rb"
     - "lib/google/cloud/video_intelligence/**/*"
     - "lib/google/cloud/videointelligence/**/*"
     - "Rakefile"

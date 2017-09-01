@@ -69,6 +69,24 @@ task :jsondoc => :yard do
             include: ["google/rpc"]
           }
         ]
+      },
+      {
+        type: "toc",
+        title: "Google::Cloud::VideoIntelligence::V1beta2::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Videointelligence::V1beta2",
+            include: ["google/cloud/videointelligence/v1beta2"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
       }
     ]
   }
