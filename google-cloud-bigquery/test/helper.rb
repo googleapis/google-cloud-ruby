@@ -480,7 +480,7 @@ class MockBigquery < Minitest::Spec
           "useLegacySql" => false,
           "maximumBillingTier" => nil,
           "maximumBytesBilled" => nil,
-          "userDefinedFunctionResources" => nil
+          "userDefinedFunctionResources" => []
         }
       }
     }.to_json
