@@ -57,9 +57,9 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     data[1][:active].must_equal false
     data[2].must_be_kind_of Hash
     data[2][:name].must_equal "Sally"
-    data[2][:age].must_equal nil
-    data[2][:score].must_equal nil
-    data[2][:active].must_equal nil
+    data[2][:age].must_be :nil?
+    data[2][:score].must_be :nil?
+    data[2][:active].must_be :nil?
   end
 
   it "paginates the data" do

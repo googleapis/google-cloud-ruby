@@ -109,7 +109,6 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
       project_id: "some_random_project",
       dataset_id: "some_random_dataset"
     )
-    puts job_gapi.job_reference.job_id
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = bigquery.query_job query, dataset: "some_random_dataset", project: "some_random_project"
