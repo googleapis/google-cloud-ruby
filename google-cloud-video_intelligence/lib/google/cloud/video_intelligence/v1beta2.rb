@@ -65,31 +65,32 @@ module Google
         ##
         # Service that implements Google Cloud Video Intelligence API.
         #
-        # @param credentials
-        #   [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #   Provides the means for authenticating requests made by the client. This parameter can
-        #   be many types.
-        #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
-        #   authenticating requests made by this client.
-        #   A `String` will be treated as the path to the keyfile to be used for the construction of
-        #   credentials for this client.
-        #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #   credentials for this client.
-        #   A `GRPC::Core::Channel` will be used to make calls through.
-        #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #   should already be composed with a `GRPC::Core::CallCredentials` object.
-        #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #   metadata for requests, generally, to give OAuth credentials.
-        # @param scopes [Array<String>]
-        #   The OAuth scopes for this service. This parameter is ignored if
-        #   an updater_proc is supplied.
-        # @param client_config [Hash]
-        #   A Hash for call options for each method. See
-        #   Google::Gax#construct_settings for the structure of
-        #   this data. Falls back to the default config if not specified
-        #   or the specified config is missing data points.
-        # @param timeout [Numeric]
-        #   The default timeout, in seconds, for calls made through this client.
+        # @overload self.new(credentials: nil, scopes: nil, client_config: nil, timeout: nil)
+        #   @param credentials
+        #     [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+        #     Provides the means for authenticating requests made by the client. This parameter can
+        #     be many types.
+        #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+        #     authenticating requests made by this client.
+        #     A `String` will be treated as the path to the keyfile to be used for the construction of
+        #     credentials for this client.
+        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+        #     credentials for this client.
+        #     A `GRPC::Core::Channel` will be used to make calls through.
+        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+        #     should already be composed with a `GRPC::Core::CallCredentials` object.
+        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+        #     metadata for requests, generally, to give OAuth credentials.
+        #   @param scopes [Array<String>]
+        #     The OAuth scopes for this service. This parameter is ignored if
+        #     an updater_proc is supplied.
+        #   @param client_config [Hash]
+        #     A Hash for call options for each method. See
+        #     Google::Gax#construct_settings for the structure of
+        #     this data. Falls back to the default config if not specified
+        #     or the specified config is missing data points.
+        #   @param timeout [Numeric]
+        #     The default timeout, in seconds, for calls made through this client.
         def self.new(*args, **kwargs)
           Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClient.new(*args, **kwargs)
         end
