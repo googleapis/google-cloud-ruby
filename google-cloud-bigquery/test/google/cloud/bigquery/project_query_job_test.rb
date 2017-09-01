@@ -25,6 +25,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
+  let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
 
   it "queries the data" do
     mock = Minitest::Mock.new
@@ -181,5 +182,35 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.labels.must_equal labels
+  end
+
+  it "queries the data with an array for the udfs option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.user_defined_function_resources = udfs_gapi_array
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query, udfs: udfs
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.udfs.must_equal udfs
+  end
+
+  it "queries the data with a string for the udfs option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.user_defined_function_resources = [udfs_gapi_uri]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query, udfs: "gs://my-bucket/my-lib.js"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
   end
 end
