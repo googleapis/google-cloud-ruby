@@ -615,7 +615,6 @@ module Google
         end
 
         def udfs array_or_str
-          return nil if array_or_str.nil?
           Array(array_or_str).map do |uri_or_code|
             resource = API::UserDefinedFunctionResource.new
             if uri_or_code.start_with?("gs://")
