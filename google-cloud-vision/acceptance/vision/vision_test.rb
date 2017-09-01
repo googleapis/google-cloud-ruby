@@ -299,13 +299,13 @@ describe "Vision", :vision do
       logo.mid.must_equal "/m/0b34hf"
       logo.locale.must_be :empty?
       logo.description.must_equal "Google"
-      logo.score.must_be_close_to 0.6936290860176086
+      logo.score.must_be_close_to 0.7072761058807373
       logo.confidence.must_be :zero?
       logo.topicality.must_be :zero?
       logo.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       logo.bounds[0].x.must_equal 11
-      logo.bounds[0].y.must_equal 16
-      logo.bounds[1].to_a.must_equal [335, 16]
+      logo.bounds[0].y.must_equal 14
+      logo.bounds[1].to_a.must_equal [335, 14]
       logo.bounds[2].to_a.must_equal [335, 84]
       logo.bounds[3].to_a.must_equal [11,  84]
       logo.locations.must_be :empty?
