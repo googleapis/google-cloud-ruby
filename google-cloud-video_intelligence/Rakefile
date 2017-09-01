@@ -58,7 +58,7 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Cloud::Videointelligence::V1beta1",
-            include: ["google/cloud/videointelligence/v1beta1"]
+            include: ["google/cloud/videointelligence/v1beta1/"]
           },
           {
             title: "Google::Protobuf",
@@ -76,7 +76,7 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Cloud::Videointelligence::V1beta2",
-            include: ["google/cloud/videointelligence/v1beta2"]
+            include: ["google/cloud/videointelligence/v1beta2/"]
           },
           {
             title: "Google::Protobuf",
