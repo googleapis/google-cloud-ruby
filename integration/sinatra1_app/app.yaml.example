@@ -1,5 +1,0 @@
-runtime: ruby
-env: flex
-entrypoint: bash -c "cd google-cloud-debugger; bundle update; bundle exec rake recompile; cd ../integration/sinatra1_app; bundle install; bundle exec ruby app.rb"
-health_check:
-  enable_health_check: False
