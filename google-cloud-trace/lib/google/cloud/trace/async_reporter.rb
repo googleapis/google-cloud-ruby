@@ -78,6 +78,7 @@ module Google
           begin
             service.patch_traces traces
           rescue => e
+            warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
             @last_exception = e
           end
         end

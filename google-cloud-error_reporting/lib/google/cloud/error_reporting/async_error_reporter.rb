@@ -82,6 +82,8 @@ module Google
           begin
             error_reporting.report error_event
           rescue => e
+            warn error_event.message if error_event.message
+            warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
             @last_exception = e
           end
         end

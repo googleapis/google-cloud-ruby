@@ -98,6 +98,7 @@ module Google
           begin
             service.update_active_breakpoint agent.debuggee.id, breakpoint
           rescue => e
+            warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
             @last_exception = e
           end
         end
