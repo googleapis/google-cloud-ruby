@@ -1,5 +1,9 @@
 # Release History
 
+### 0.40.0 / 2017-09-07
+
+* Video Intelligence 0.22.0 release.
+
 ### 0.39.0 / 2017-08-10
 
 * Pub/Sub 0.27.0 release.
