@@ -29,36 +29,26 @@ describe Google::Cloud::Logging, :logging do
       sink.name.must_equal "#{prefix}-sink"
       sink.destination.must_equal pubsub_dest
       sink.filter.must_equal "severity = ALERT"
-      sink.start_at.wont_be :nil?
-      sink.end_at.must_be :nil?
 
       sink.filter = "severity >= WARNING"
-      sink.start_at = nil
-      sink.end_at = Time.parse "2020-01-01"
 
       sink.save
 
       sink.name.must_equal "#{prefix}-sink"
       sink.destination.must_equal pubsub_dest
       sink.filter.must_equal "severity >= WARNING"
-      sink.start_at.must_be :nil?
-      sink.end_at.wont_be :nil?
 
       sink.refresh!
 
       sink.name.must_equal "#{prefix}-sink"
       sink.destination.must_equal pubsub_dest
       sink.filter.must_equal "severity >= WARNING"
-      sink.start_at.must_be :nil?
-      sink.end_at.wont_be :nil?
 
       dup_sink = logging.sink "#{prefix}-sink"
 
       dup_sink.name.must_equal "#{prefix}-sink"
       dup_sink.destination.must_equal pubsub_dest
       dup_sink.filter.must_equal "severity >= WARNING"
-      dup_sink.start_at.must_be :nil?
-      dup_sink.end_at.wont_be :nil?
 
       logging.sinks.wont_be :empty?
       logging.sinks(max: 1).length.must_equal 1
