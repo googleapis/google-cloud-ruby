@@ -183,6 +183,7 @@ module Google
             debuggee.revoke_registration unless sync_result
           end
         rescue => e
+          warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
           @last_exception = e
         end
 
