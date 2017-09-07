@@ -45,11 +45,11 @@ dependencies:
 
 test:
   override:
-    - rvm-exec 2.4.0 bundle exec ruby build/test.rb:
+    - ruby build/test.rb:
         parallel: true
 
   post:
-    - rvm-exec 2.4.0 bundle exec ruby build/post_test.rb:
+    - ruby build/post_test.rb:
         parallel: true
 
 deployment:
