@@ -1,6 +1,7 @@
 # Gcloud::Jsondoc
 
-Generates Ruby documentation in JSON format.
+Generates Ruby documentation in JSON format. Docstrings are collected only from
+non-private classes and modules.
 
 ## Installation
 

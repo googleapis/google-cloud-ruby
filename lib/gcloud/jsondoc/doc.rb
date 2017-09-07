@@ -52,7 +52,7 @@ module Gcloud
 
       def set_children
         @children = @object.children.select do |c|
-          c.type == :class &&
+          (c.type == :class || c.type == :module) &&
             c.visibility == :public &&
             c.namespace.name == @object.name &&
             !c.has_tag?(:private)
