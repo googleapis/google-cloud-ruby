@@ -328,6 +328,7 @@ describe Stackdriver::Core::AsyncActor do
       mock = Minitest::Mock.new
       mock.expect :async_stop!, true, []
 
+      Stackdriver::Core::AsyncActor.instance_variable_set :@cleanup_list,  nil
       Stackdriver::Core::AsyncActor.register_for_cleanup mock
       Stackdriver::Core::AsyncActor.send :run_cleanup
 
