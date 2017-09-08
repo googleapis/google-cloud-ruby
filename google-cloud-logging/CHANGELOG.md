@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.2 / 2017-09-08
+
+* Add `labels` configuration option to `Google::Cloud::Logging::Middleware` for Rails and other Rack-based framework integrations.
+
 ### 1.2.1 / 2017-07-11
 
 * stackdriver-core 1.2.0 release
