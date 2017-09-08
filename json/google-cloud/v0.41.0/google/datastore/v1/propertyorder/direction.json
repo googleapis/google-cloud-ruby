@@ -1,0 +1,1 @@
+{"id":"google/datastore/v1/propertyorder/direction","name":"Direction","title":["Google","Datastore","V1","PropertyOrder","Direction"],"description":"<p>The sort direction.</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/v1/doc/google/datastore/v1/query.rb#L127","resources":[],"examples":[],"methods":[]}
