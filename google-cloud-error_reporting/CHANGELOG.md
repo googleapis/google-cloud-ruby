@@ -1,5 +1,10 @@
 # Release History
 
+### 0.27.0 / 2017-09-08
+
+* Rename `module_name` and `module_version` parameters to `service_name` and `service_version` respectively.
+* Print captured exception from asynchronous worker thread.
+
 ### 0.26.1 / 2017-07-11
 
 * stackdriver-core 1.2.0 release
