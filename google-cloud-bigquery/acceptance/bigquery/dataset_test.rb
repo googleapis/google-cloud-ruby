@@ -240,7 +240,38 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
-  it "creates missing table while inserts rows directly" do
+  it "inserts rows with autocreate option" do
+    # schema block is not needed in this test since table exists, but provide anyway
+    insert_response = dataset.insert table_with_schema.table_id, rows, autocreate: true do |t|
+      t.schema.integer  "id",     description: "id description",    mode: :required
+      t.schema.string    "breed", description: "breed description", mode: :required
+      t.schema.string    "name",  description: "name description",  mode: :required
+      t.schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    table = dataset.table table_with_schema_id
+    table.wont_be_nil
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
+  it "creates missing table while inserts rows with autocreate option" do
     new_table_id = "new_dataset_table_id_#{rand(1000)}"
 
     insert_response = dataset.insert new_table_id, rows, autocreate: true do |t|
