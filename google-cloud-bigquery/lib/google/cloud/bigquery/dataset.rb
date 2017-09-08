@@ -1171,31 +1171,62 @@ module Google
         #   ]
         #   dataset.insert "my_table", rows
         #
+        # @example Using `autocreate` to create a new table if none exists.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows, autocreate: true do |t|
+        #     t.schema.string "first_name", mode: :required
+        #     t.schema.integer "age", mode: :required
+        #   end
+        #
         # @!group Data
         #
         def insert table_id, rows, skip_invalid: nil, ignore_unknown: nil,
                    autocreate: nil
           if autocreate
-            tbl = table table_id
-            if tbl.nil?
-              tbl = create_table table_id do |tbl_updater|
-                yield tbl_updater if block_given?
+            begin
+              insert_data table_id, rows, skip_invalid: skip_invalid,
+                                          ignore_unknown: ignore_unknown
+            rescue Google::Cloud::NotFoundError
+              sleep rand(1..60)
+              begin
+                create_table table_id do |tbl_updater|
+                  yield tbl_updater if block_given?
+                end
+              # rubocop:disable Lint/HandleExceptions
+              rescue Google::Cloud::AlreadyExistsError
               end
+              # rubocop:enable Lint/HandleExceptions
+
+              sleep 60
+              insert table_id, rows, skip_invalid: skip_invalid,
+                                     ignore_unknown: ignore_unknown,
+                                     autocreate: true
             end
-            tbl.insert rows, skip_invalid: skip_invalid,
-                             ignore_unknown: ignore_unknown
           else
-            rows = [rows] if rows.is_a? Hash
-            rows = Convert.to_json_rows rows
-            ensure_service!
-            options = { skip_invalid: skip_invalid,
-                        ignore_unknown: ignore_unknown }
-            gapi = service.insert_tabledata dataset_id, table_id, rows, options
-            InsertResponse.from_gapi rows, gapi
+            insert_data table_id, rows, skip_invalid: skip_invalid,
+                                        ignore_unknown: ignore_unknown
           end
         end
 
         protected
+
+        def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil
+          rows = [rows] if rows.is_a? Hash
+          rows = Convert.to_json_rows rows
+          ensure_service!
+          options = { skip_invalid: skip_invalid,
+                      ignore_unknown: ignore_unknown }
+          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          InsertResponse.from_gapi rows, gapi
+        end
 
         ##
         # Raise an error unless an active service is available.
