@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.1 / 2017-09-08
+
+* Print captured exception from asynchronous worker thread.
+
 ### 0.27.0 / 2017-08-07
 
 * Add instrumentation to collect outbound GRPC requests information. 
