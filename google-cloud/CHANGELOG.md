@@ -1,5 +1,9 @@
 # Release History
 
+### 0.41.0 / 2017-09-08
+
+* Error Reporting 0.27.0 release.
+
 ### 0.40.0 / 2017-09-07
 
 * Video Intelligence 0.22.0 release.
