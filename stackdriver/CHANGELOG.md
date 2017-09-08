@@ -1,5 +1,9 @@
 # Release History
 
+### 0.10.0 / 2017-09-08
+
+* Error Reporting 0.27.0 release.
+
 ### 0.9.0 / 2017-08-25
 
 * Debugger 0.28.0 release.
