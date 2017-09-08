@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.1 / 2017-09-08
+
+* Print captured exception from asynchronous worker threads.
+
 ### 0.28.0 / 2017-08-25
 
 * Support single file Rack-based applications.
