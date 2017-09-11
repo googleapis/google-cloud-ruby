@@ -40,7 +40,7 @@ describe Google::Cloud::Trace, :trace do
     sleep 60
 
     results = nil
-    keep_trying_till_true 60 do
+    keep_trying_till_true 240 do
       result_set = @tracer.list_traces Time.now - 300, Time.now, filter: "span:integration_test_span", view: :COMPLETE
       results = result_set.instance_variable_get :@results
       !results.empty?

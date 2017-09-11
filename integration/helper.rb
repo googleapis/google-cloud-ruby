@@ -22,7 +22,7 @@ require "net/http"
 # raise error after timeout
 def keep_trying_till_true timeout = 30
   t_begin = Time.now
-  delay = 2
+  delay = 10
   loop do
     if yield
       break
