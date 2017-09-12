@@ -18,7 +18,14 @@ require "google/cloud/logging"
 
 describe Google::Cloud::Logging do
   it "correctly setups logger" do
-    response = JSON.parse send_request("test_logger")
+    response = nil
+    keep_trying_till_true 120 do
+      begin
+        response = JSON.parse send_request("test_logger")
+      rescue
+        nil
+      end
+    end
 
     response["logger_class"].must_equal "Google::Cloud::Logging::Logger"
     response["writer_class"].must_equal "Google::Cloud::Logging::AsyncWriter"
