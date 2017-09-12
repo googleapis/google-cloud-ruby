@@ -53,7 +53,8 @@ describe Google::Cloud::Debugger, :debugger do
         project_id, credentials))
 
     log_name = @debugger.agent.logger.log_name
-    filter = "logName=projects/#{project_id}/logs/#{log_name} AND resource.type=\"global\" AND textPayload:#{token}"
+    time_stamp = (Time.now - 120).to_datetime.rfc3339
+    filter = "logName=projects/#{project_id}/logs/#{log_name} AND resource.type=\"global\" AND textPayload:#{token} AND timestamp>=#{time_stamp.inspect}"
     entries = nil
     wait_until do
       trigger_breakpoint
