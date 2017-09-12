@@ -24,7 +24,7 @@ describe Google::Cloud::Trace, :trace do
 
     results = nil
     keep_trying_till_true 240 do
-      result_set = @tracer.list_traces Time.now - 300, Time.now, filter: "root:/test_trace"
+      result_set = @tracer.list_traces Time.now - 350, Time.now, filter: "+root:/test_trace"
       results = result_set.instance_variable_get :@results
       !results.empty?
     end
@@ -41,18 +41,20 @@ describe Google::Cloud::Trace, :trace do
 
     results = nil
     keep_trying_till_true 240 do
-      result_set = @tracer.list_traces Time.now - 300, Time.now, filter: "span:integration_test_span", view: :COMPLETE
+      result_set = @tracer.list_traces Time.now - 350, Time.now, filter: "+span:integration_test_span", view: :COMPLETE
       results = result_set.instance_variable_get :@results
       !results.empty?
     end
 
     results.wont_be_empty
 
+    span_found = false
     results.each do |trace_record|
       trace_record.all_spans.wont_be_empty
       trace_record.all_spans.each do |span|
-        span.labels["token"].must_equal token if span.name == "integration_test_span"
+        span_found = true if span.name == "integration_test_span" && span.labels["token"] == token
       end
     end
+    span_found.must_equal true
   end
 end

@@ -18,7 +18,14 @@ require "google/cloud/logging"
 
 describe Google::Cloud::Logging do
   it "Uses monitored resource with 'gae_app' type" do
-    response = JSON.parse send_request("test_logger")
+    response = nil
+    keep_trying_till_true 120 do
+      begin
+        response = JSON.parse send_request("test_logger")
+      rescue
+        nil
+      end
+    end
 
     response["monitored_resource"]["type"].must_equal "gae_app"
     response["monitored_resource"]["labels"]["module_id"].wont_be_nil

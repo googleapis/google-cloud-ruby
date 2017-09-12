@@ -24,7 +24,12 @@ describe Google::Cloud::Debugger, :debugger do
 
     keep_trying_till_true do
       debugger_info_json = send_request "test_debugger_info"
-      debugger_info = JSON.parse debugger_info_json
+      debugger_info =
+        begin
+          JSON.parse debugger_info_json
+        rescue
+          {}
+        end
 
       debuggee_id = debugger_info["debuggee_id"]
       agent_version = debugger_info["agent_version"]
