@@ -1,5 +1,9 @@
 # Release History
 
+### 0.23.2 / 2017-09-12
+
+* Update connection configuration.
+
 ### 0.23.1 / 2017-08-18
 
 * Update connection configuration.
