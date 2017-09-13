@@ -19,6 +19,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
+  let(:labels) { { "foo" => "bar" } }
   let(:table_gapi) { random_table_gapi dataset_id, table_id, table_name, description }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
@@ -145,6 +146,27 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_expiration.must_equal expiration
 
+    mock.verify
+  end
+
+  it "updates its labels" do
+    new_labels = { "bar" => "baz" }
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["labels"] = new_labels
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new labels: new_labels, etag: etag
+    mock.expect :patch_table, return_table(table_hash),
+      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    table.service.mocked_service = mock
+
+    table.labels.must_equal labels
+
+    table.labels = new_labels
+
+    table.labels.must_equal new_labels
     mock.verify
   end
 
