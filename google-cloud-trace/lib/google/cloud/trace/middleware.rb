@@ -379,6 +379,7 @@ module Google
         def init_default_config
           configuration.project_id ||= Cloud.configure.project_id ||
                                        Trace::Project.default_project
+          configuration.keyfile ||= Cloud.configure.keyfile
           configuration.capture_stack ||= false
         end
 
