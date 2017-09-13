@@ -54,20 +54,19 @@ module Google
       FILE_DIR = File.realdirpath(Pathname.new(__FILE__).join("..").join("video_intelligence"))
 
       AVAILABLE_VERSIONS = Dir["#{FILE_DIR}/*"]
-        .select {|file| File.directory?(file)}
-        .select {|dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir))}
-        .select {|dir| File.exist?(dir + ".rb")}
-        .map {|dir| File.basename(dir)}
+        .select { |file| File.directory?(file) }
+        .select { |dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir)) }
+        .select { |dir| File.exist?(dir + ".rb") }
+        .map { |dir| File.basename(dir) }
 
       ##
       # Service that implements Google Cloud Video Intelligence API.
       #
-      # @overload self.new(version: :v1beta2, credentials: nil, scopes: nil, client_config: nil, timeout: nil)
-      #   @param version [Symbol, String]
-      #     The major version of the service to be used. By default :v1beta2
-      #     is used.
-      #   @param credentials
-      #     [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      # @param version [Symbol, String]
+      #   The major version of the service to be used. By default :v1beta2
+      #   is used.
+      # @overload
+      #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can
       #     be many types.
       #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for

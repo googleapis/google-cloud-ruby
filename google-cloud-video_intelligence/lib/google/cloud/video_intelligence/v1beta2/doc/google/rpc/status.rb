@@ -31,7 +31,7 @@ module Google
     # error message is needed, put the localized message in the error details or
     # localize it in the client. The optional error details may contain arbitrary
     # information about the error. There is a predefined set of error detail types
-    # in the package +google.rpc+ which can be used for common error conditions.
+    # in the package +google.rpc+ that can be used for common error conditions.
     #
     # = Language mapping
     #
@@ -54,7 +54,7 @@ module Google
     #   errors.
     #
     # * Workflow errors. A typical workflow has multiple steps. Each step may
-    #   have a +Status+ message for error reporting purpose.
+    #   have a +Status+ message for error reporting.
     #
     # * Batch operations. If a client uses batch request and batch response, the
     #   +Status+ message should be used directly inside batch response, one for
@@ -76,8 +76,8 @@ module Google
     #     {Google::Rpc::Status#details} field, or localized by the client.
     # @!attribute [rw] details
     #   @return [Array<Google::Protobuf::Any>]
-    #     A list of messages that carry the error details.  There will be a
-    #     common set of message types for APIs to use.
+    #     A list of messages that carry the error details.  There is a common set of
+    #     message types for APIs to use.
     class Status; end
   end
 end
