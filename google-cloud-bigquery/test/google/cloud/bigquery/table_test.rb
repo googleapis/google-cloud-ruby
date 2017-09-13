@@ -23,6 +23,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:description) { "This is my table" }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
+  let(:labels) { { "foo" => "bar" } }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
@@ -38,6 +39,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.table?.must_equal true
     table.view?.must_equal false
     table.location.must_equal location_code
+    table.labels.must_equal labels
+    table.labels.must_be :frozen?
   end
 
   it "knows its fully-qualified ID" do
