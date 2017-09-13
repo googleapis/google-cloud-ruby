@@ -416,6 +416,34 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this table. Labels
+        # are used to organize and group tables. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the hash of user-provided labels associated with this table.
+        # Labels are used to organize and group tables. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # @!group Attributes
+        #
+        def labels= labels
+          @gapi.labels = labels
+          patch_gapi! :labels
+        end
+
+        ##
         # Returns the table's schema. This method can also be used to set,
         # replace, or add to the schema by passing a block. See {Schema} for
         # available methods.
