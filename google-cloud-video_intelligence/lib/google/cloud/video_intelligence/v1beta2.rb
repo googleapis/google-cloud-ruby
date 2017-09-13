@@ -90,12 +90,19 @@ module Google
             timeout: nil,
             lib_name: nil,
             lib_version: nil
-          kwargs = Hash[
-            *method(__method__).parameters
-              .select { |_, param| binding.local_variable_get(param) != nil }
-              .map { |_, param| [param, binding.local_variable_get(param)] }
-              .flatten(1)
-            ]
+          kwargs = {
+            service_path: service_path,
+            port: port,
+            channel: channel,
+            chan_creds: chan_creds,
+            updater_proc: updater_proc,
+            credentials: credentials,
+            scopes: scopes,
+            client_config: client_config,
+            timeout: timeout,
+            lib_name: lib_name,
+            lib_version: lib_version
+          }.select { |_, v| v != nil }
           Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClient.new(**kwargs)
         end
       end
