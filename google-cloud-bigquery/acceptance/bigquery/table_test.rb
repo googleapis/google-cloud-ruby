@@ -112,13 +112,17 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"
+    new_labels = { "bar" => "baz" }
+
     table.name = new_name
     table.description = new_desc
+    table.labels = new_labels
 
     table.reload!
     table.table_id.must_equal table_id
     table.name.must_equal new_name
     table.description.must_equal new_desc
+    table.labels.must_equal new_labels
   end
 
   it "should fail to set metadata with stale etag" do

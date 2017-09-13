@@ -230,6 +230,7 @@ class MockBigquery < Minitest::Spec
       "lastModifiedTime" => time_millis,
       "type" => "TABLE",
       "location" => "US",
+      "labels" => { "foo" => "bar" },
       "streamingBuffer" => {
         "estimatedBytes" => "2000", # String per google/google-api-ruby-client
         "estimatedRows" => "200", # String per google/google-api-ruby-client
