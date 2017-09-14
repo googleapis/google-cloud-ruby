@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
   let(:source_dataset) { "source_dataset" }
   let(:source_table_id) { "source_table_id" }
   let(:source_table_name) { "Source Table" }
@@ -42,19 +42,18 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
                                               "target-project" }
   let(:target_table_other_proj) { Google::Cloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
                                                          bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   it "can copy itself" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     job_gapi = copy_job_gapi(source_table, target_table)
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table
+    job = source_table.copy_job target_table
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy to a table identified by a string" do
@@ -62,14 +61,12 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     bigquery.service.mocked_service = mock
 
     job_gapi = copy_job_gapi(source_table, target_table_other_proj)
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, ["test-project", job_gapi]
+    mock.expect :insert_job, job_gapi, ["test-project", job_gapi]
 
-    result = source_table.copy "target-project:target_dataset.target_table_id"
+    job = source_table.copy_job "target-project:target_dataset.target_table_id"
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy to a table name string only" do
@@ -84,14 +81,26 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     )
 
     job_gapi = copy_job_gapi(source_table, new_target_table)
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy "new_target_table_id"
+    job = source_table.copy_job "new_target_table_id"
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+  end
+
+  it "can copy itself as a dryrun" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.dry_run = true
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, dryrun: true
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition" do
@@ -100,14 +109,12 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table, create: "CREATE_NEVER"
+    job = source_table.copy_job target_table, create: "CREATE_NEVER"
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition symbol" do
@@ -116,14 +123,12 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table, create: :never
+    job = source_table.copy_job target_table, create: :never
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
 
@@ -133,14 +138,12 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table, write: "WRITE_TRUNCATE"
+    job = source_table.copy_job target_table, write: "WRITE_TRUNCATE"
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with write disposition symbol" do
@@ -149,14 +152,74 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table, write: :truncate
+    job = source_table.copy_job target_table, write: :truncate
     mock.verify
 
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+  end
+
+  it "can copy itself with job_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, job_id: job_id
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
+  it "can copy itself with prefix option" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, prefix: prefix
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
+  it "can copy itself with job_id option if both job_id and prefix options are provided" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_id = "my_test_job_id"
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, job_id: job_id, prefix: "IGNORED"
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
+  it "can copy itself with the job labels option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.labels = labels
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, labels: labels
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.labels.must_equal labels
   end
 
   def copy_job_gapi source, target, job_id: "job_9876543210"
@@ -187,9 +250,5 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
         "dryRun" => nil
       }
     }.to_json
-  end
-
-  def status_done
-    Google::Apis::BigqueryV2::JobStatus.new state: "done"
   end
 end
