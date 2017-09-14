@@ -30,7 +30,7 @@ module Google
       # {CopyJob}, {ExtractJob}, {LoadJob}, and {QueryJob}.
       #
       # A job instance is created when you call {Project#query_job},
-      # {Dataset#query_job}, {Table#copy}, {Table#extract}, {Table#load}, or
+      # {Dataset#query_job}, {Table#copy_job}, {Table#extract}, {Table#load}, or
       # {View#data}.
       #
       # @see https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects

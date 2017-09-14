@@ -599,14 +599,18 @@ module Google
         end
 
         ##
-        # Copies the data from the table to another table. The destination table
-        # argument can also be a string identifier as specified by the [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # `project_name:datasetId.tableId`. This is useful for referencing
-        # tables in other projects and datasets.
+        # Copies the data from the table to another table using an asynchronous
+        # method. In this method, a {CopyJob} is immediately returned. The
+        # caller may poll the service by repeatedly calling {Job#reload!} and
+        # {Job#done?} to detect when the job is done, or simply block until the
+        # job is done by calling #{Job#wait_until_done!}. See also #{#copy}.
         #
         # @param [Table, String] destination_table The destination for the
-        #   copied data.
+        #   copied data. This can also be a string identifier as specified by
+        #   the [Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
+        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   tables in other projects and datasets.
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
         #
@@ -657,7 +661,7 @@ module Google
         #   table = dataset.table "my_table"
         #   destination_table = dataset.table "my_destination_table"
         #
-        #   copy_job = table.copy destination_table
+        #   copy_job = table.copy_job destination_table
         #
         # @example Passing a string identifier for the destination table:
         #   require "google/cloud/bigquery"
@@ -666,12 +670,12 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   copy_job = table.copy "other-project:other_dataset.other_table"
+        #   copy_job = table.copy_job "other-project:other_dataset.other_table"
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil, dryrun: nil,
-                 job_id: nil, prefix: nil, labels: nil
+        def copy_job destination_table, create: nil, write: nil, dryrun: nil,
+                     job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { create: create, write: write, dryrun: dryrun,
                       job_id: job_id, prefix: prefix, labels: labels }
@@ -679,6 +683,76 @@ module Google
                                     get_table_ref(destination_table),
                                     options
           Job.from_gapi gapi, service
+        end
+
+        ##
+        # Copies the data from the table to another table using a synchronous
+        # method that blocks for a response. Timeouts and transient errors are
+        # generally handled as needed to complete the job. See also
+        # #{#copy_job}.
+        #
+        # @param [Table, String] destination_table The destination for the
+        #   copied data. This can also be a string identifier as specified by
+        #   the [Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
+        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   tables in other projects and datasets.
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the destination table. The default value is `empty`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the destination table
+        #     already contains data.
+        #
+        # @return [Boolean] Returns `true` if the copy operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   table.copy destination_table
+        #
+        # @example Passing a string identifier for the destination table:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.copy "other-project:other_dataset.other_table"
+        #
+        # @!group Data
+        #
+        def copy destination_table, create: nil, write: nil
+          job = copy_job destination_table, create: create, write: write
+          job.wait_until_done!
+
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
+          true
         end
 
         ##
