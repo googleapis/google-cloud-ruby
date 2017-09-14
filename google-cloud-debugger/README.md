@@ -1,6 +1,6 @@
 # google-cloud-debugger
 
-[Stackdriver Debugger](https://cloud.google.com/debugger/) ([docs](https://cloud.google.com/debugger/docs/)) lets you inspect the state of a running application at any code location in real time, without stopping or slowing down the application, and without modifying the code to add logging statements. You can use Stackdriver Debugger with any deployment of your application, including test, development, and production. The Ruby debugger adds minimal request latency, typically less than 50ms, and only when the application state is captured. In most cases, this is not noticeable by users.
+[Stackdriver Debugger](https://cloud.google.com/debugger/) lets you inspect the state of a running application at any code location in real time, without stopping or slowing down the application, and without modifying the code to add logging statements. You can use Stackdriver Debugger with any deployment of your application, including test, development, and production. The Ruby debugger adds minimal request latency, typically less than 50ms, and only when the application state is captured. In most cases, this is not noticeable by users.
 
 - [google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/master/google/cloud/debugger)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
@@ -8,25 +8,170 @@
 
 ## Quick Start
 
-Setting up Stackdriver Debugger involves three steps:
+Install the gem directly:
 
-1. Add the `google-cloud-debugger` library to your app.
-2. Register your app's source code.
-3. Deploy your app and set a breakpoint.
+```sh
+$ gem install google-cloud-debugger
+```
 
-See the
-[google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/master/google/cloud/debugger)
-for a quick tutorial.
+Or install through Bundler:
+
+1. Add the `google-cloud-debugger` gem to your Gemfile:
+
+```ruby
+gem "google-cloud-debugger"
+```
+
+2. Use Bundler to install the gem:
+
+```sh
+$ bundle install
+```
+
+Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes 
+the `google-cloud-debugger` gem.
+
+## Enable Stackdriver Debugger API
+
+The Stackdriver Debugger agent would need the [Stackdriver Debugger 
+API](https://console.cloud.google.com/apis/library/clouddebugger.googleapis.com) 
+to be enabled on your Google Cloud project. Make sure it's enabled if not 
+already.
+
+## Enabling the Debugger agent
+
+If you're using Ruby on Rails and the `stackdriver` gem, they automatically 
+loads the library into your application when it starts.
+
+Otherwise, you can load the Railtie that comes with the library into your Ruby 
+on Rails application by explicitly require it in the application startup path:
+
+```ruby
+# In config/application.rb
+require "google/cloud/debugger/rails"
+```
+
+Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware 
+provided by the library:
+
+```ruby
+require "google/cloud/debugger"
+use Google::Cloud::Debugger::Middleware
+```
+
+Non-rack-based applications can start the agent explicitly at the entry point of
+your application:
+
+```ruby
+require "google/cloud/debugger"
+Google::Cloud::Debugger.new.start
+```
+
+### Configuring the agent
+
+You can customize the behavior of the Stackdriver Debugger agent. See the 
+[agent configuration](../stackdriver/docs/configuration.md) for a list of 
+possible configuration options.
+
+## Running on Google Cloud Platform
+
+The Stackdriver Debugger agent should work without you manually providing 
+authentication credentials for instances running on Google Cloud Platform, as 
+long as the Stackdriver Debugger API access scope is enabled on that instance.
+
+### App Engine
+
+On Google App Engine, the Stackdriver Debugger API access scope is enabled by 
+default, and the Stackdriver Debugger agent can be used without providing 
+credentials or a project ID.
+
+### Container Engine
+
+On Google Container Engine, you must explicitly add the `cloud_debugger` OAuth 
+scope when creating the cluster:
+
+```sh
+$ gcloud container clusters create example-cluster-name --scopes https://www.googleapis.com/auth/cloud_debugger
+```
+
+You can also do this through the Google Cloud Platform Console. Select 
+**Enabled** in the Cloud Platform section of **Create a container cluster**.
+
+### Compute Engine
+
+To use Stackdriver Debugger, Compute Engine VM instances should have one of the 
+following access scopes. These are only relevant when you use Compute Engine's 
+default service account:
+
+* `https://www.googleapis.com/auth/cloud-platform`
+* `https://www.googleapis.com/auth/cloud_debugger`
+
+The `cloud-platform` access scope can be supplied when creating a new instance 
+through the Google Cloud Platform Console. Select **Allow full access to all 
+Cloud APIs** in the **Identity and API access** section of **Create an 
+instance**.
+
+The `cloud_debugger` access scope must be supplied manually using the SDK's 
+`gcloud compute instances create` command or the `gcloud compute instances 
+set-service-account` command.
+
+## Running locally and elsewhere
+
+To run the Stackdriver Debugger agent outside of Google Cloud Platform, you must 
+supply your GCP project ID and appropriate service account credentials directly 
+to the Stackdriver Debugger agent. This applies to running the agent on your own 
+workstation, on your datacenter's computers, or on the VM instances of another 
+cloud provider. See the [Authentication section](#authentication) for 
+instructions on how to do so.
 
 ## Authentication
 
-This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
+This library uses Service Account credentials to connect to Google Cloud
+services. When running on Compute Engine the credentials will be discovered 
+automatically. When running on other environments the Service Account 
+credentials can be specified by providing in several ways.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
+The best way to provide authentication information if you're using Ruby on Rails
+is through the Rails configuration interface:
 
-## Usage
+```ruby
+# in config/environments/*.rb
+Rails.application.configure do |config|
+  # Shared parameters
+  config.google_cloud.project_id = "your-project-id"
+  config.google_cloud.keyfile = "/path/to/key.json"
+  # Or Stackdriver Debugger agent specific parameters
+  config.google_cloud.debugger.project_id = "your-project-id"
+  config.google_cloud.debugger.keyfile = "/path/to/key.json"
+end
+```
 
-This library provides a Stackdriver Debugger Agent that's able to work with Ruby applications. It also integrates with Ruby on Rails and other popular Rack-based frameworks. See the [Instrumentation Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/instrumentation) for more details.
+Other Rack-based applications that are loading the Rack Middleware directly can use
+the configration interface:
+ 
+```ruby
+require "google/cloud/debugger"
+Google::Cloud.configure do |config|
+  # Shared parameters
+  config.project_id = "your-project-id"
+  config.keyfile = "/path/to/key.json"
+  # Or Stackdriver Debugger agent specific parameters
+  config.debugger.project_id = "your-project-id"
+  config.debugger.keyfile = "/path/to/key.json"
+end
+```
+
+Or provide the parameters to the Stackdriver Debugger agent when it starts:
+
+```ruby
+require "google/cloud/debugger"
+Google::Cloud::Debugger.new(project_id: "your-project-id",
+                            keyfile: "/path/to/key.json").start
+```
+
+This library also supports the other authentication methods provided by the 
+`google-cloud-ruby` suite. Instructions and configuration options are covered 
+in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
 
 ## Supported Ruby Versions
 
