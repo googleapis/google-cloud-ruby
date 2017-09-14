@@ -20,7 +20,7 @@ module Google
       # # CopyJob
       #
       # A {Job} subclass representing a copy operation that may be performed on
-      # a {Table}. A CopyJob instance is created when you call {Table#copy}.
+      # a {Table}. A CopyJob instance is created when you call {Table#copy_job}.
       #
       # @see https://cloud.google.com/bigquery/docs/tables#copyingtable Copying
       #   an Existing Table
@@ -30,7 +30,7 @@ module Google
       class CopyJob < Job
         ##
         # The table from which data is copied. This is the table on
-        # which {Table#copy} was called. Returns a {Table} instance.
+        # which {Table#copy_job} was called. Returns a {Table} instance.
         def source
           table = @gapi.configuration.copy.source_table
           return nil unless table

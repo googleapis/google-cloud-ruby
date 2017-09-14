@@ -411,8 +411,17 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # Google::Cloud::Bigquery::Table#copy@Passing a string identifier for the destination table:
   doctest.before "Google::Cloud::Bigquery::Table#copy" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_destination_table"]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
+  # Google::Cloud::Bigquery::Table#copy_job@Passing a string identifier for the destination table:
+  doctest.before "Google::Cloud::Bigquery::Table#copy_job" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
