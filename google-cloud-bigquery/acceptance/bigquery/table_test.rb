@@ -65,6 +65,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
+  let(:target_table_2_id) { "kittens_copy_2" }
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
@@ -350,9 +351,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "copies itself to another table" do
+  it "copies itself to another table with copy_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    copy_job = table.copy target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
+    copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     copy_job.job_id.must_equal job_id
@@ -367,6 +368,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     copy_job.write_truncate?.must_equal false
     copy_job.write_append?.must_equal false
     copy_job.write_empty?.must_equal true
+  end
+
+  it "copies itself to another table with copy" do
+    result = table.copy target_table_2_id, create: :needed, write: :empty
+    result.must_equal true
   end
 
   it "creates and cancels jobs" do
