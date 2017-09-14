@@ -106,7 +106,7 @@ module Google
               credentials ||= chan_creds
               credentials ||= updater_proc
             end
-            if service_path || port
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
               warn "`service_path` and `port` parameters are deprecated and will be removed"
             end
 
