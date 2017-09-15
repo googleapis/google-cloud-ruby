@@ -166,7 +166,7 @@ module Google
             if credentials.is_a?(Proc)
               updater_proc = credentials
             end
-            if credentials.is_a?(Google::Gax::Credentials)
+            if credentials.is_a?(Google::Gax::Credentials) || credentials.is_a?(Google::Cloud::Credentials)
               updater_proc = credentials.updater_proc
             end
 
