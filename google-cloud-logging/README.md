@@ -59,14 +59,34 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-## Logging in Rack-based frameworks
+## Using Stackdriver Logging in frameworks
 
 The `google-cloud-logging` library provides framework integration for popular 
 Rack-based frameworks, such as Ruby on Rails and Sinatra, which sets the default 
 Rack logger to an instance of Stackdriver Logging logger.
 
-If you're using Ruby on Rails and the `stackdriver` gem, bundler automatically 
-loads the library into your application when it starts.
+### With Ruby on Rails
+
+You can load the Railtie that comes with the library into your Ruby 
+on Rails application by explicitly require it in the application startup path:
+
+```ruby
+# In config/application.rb
+require "google/cloud/logging/rails"
+```
+
+If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+your application when it starts.
+
+You'll be able to use Stackdriver logger through the standard Rails logger:
+
+```ruby
+Rails.logger.info "Hello World"
+# Or just...
+logger.warn "Hola Mundo"
+```
+
+### With other Rack-based frameworks
 
 Other Rack-based applications can use the Rack Middleware to replace the Rack 
 logger with the Stackdriver Logging logger:
@@ -87,7 +107,7 @@ logger.error "Bonjour Monde"
 ```
 
 For other frameworks, consult the documentations on how to utilize the Rack 
-logger. 
+logger.
 
 ### Configuring the framework integration
 

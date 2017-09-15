@@ -40,7 +40,7 @@ the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
 
-The Stackdriver Error Reporting library would need the [Stackdriver Error
+The Stackdriver Error Reporting library needs the [Stackdriver Error
 Reporting API](https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com) 
 to be enabled on your Google Cloud project. Make sure it's enabled if not 
 already.
@@ -52,16 +52,20 @@ Stackdriver Error Reporting into popular Rack-based Ruby web frameworks such as
 Ruby on Rails and Sinatra. When the library integration is enabled, it 
 automatically reports exceptions captured from the application's Rack stack.
 
-If you're using Ruby on Rails and the `stackdriver` gem, they automatically 
-loads the library into your application when it starts.
+### With Ruby on Rails
 
-Otherwise, you can load the Railtie that comes with the library into your Ruby 
+You can load the Railtie that comes with the library into your Ruby 
 on Rails application by explicitly require it in the application startup path:
 
 ```ruby
 # In config/application.rb
 require "google/cloud/error_reporting/rails"
 ```
+
+If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+your application when it starts.
+
+### With other Rack-based frameworks
 
 Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware 
 provided by the library:
@@ -155,8 +159,8 @@ Rails.application.configure do |config|
 end
 ```
 
-Other Rack-based applications that are loading the Rack Middleware directly can use
-the configration interface:
+Other Rack-based applications that are loading the Rack Middleware directly or
+using the manually reporting interface can leverage the configration interface:
  
 ```ruby
 require "google/cloud/error_reporting"

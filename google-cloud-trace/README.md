@@ -40,7 +40,7 @@ the `google-cloud-cloud` gem.
 
 ## Enable Stackdriver Trace API
 
-The Stackdriver Trace library would need the [Stackdriver Trace 
+The Stackdriver Trace library needs the [Stackdriver Trace 
 API](https://console.cloud.google.com/apis/library/cloudtrace.googleapis.com) 
 to be enabled on your Google Cloud project. Make sure it's enabled if not 
 already.
@@ -52,16 +52,20 @@ Trace into popular Rack-based Ruby web frameworks such as Ruby on Rails and
 Sinatra. When the library integration is enabled, it automatically traces 
 incoming requests in the application.
 
-If you're using Ruby on Rails and the `stackdriver` gem, they automatically 
-loads the library into your application when it starts.
+### With Ruby on Rails
 
-Otherwise, you can load the Railtie that comes with the library into your Ruby 
+You can load the Railtie that comes with the library into your Ruby 
 on Rails application by explicitly require it in the application startup path:
 
 ```ruby
 # In config/application.rb
 require "google/cloud/trace/rails"
 ```
+
+If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+your application when it starts.
+
+### With other Rack-based frameworks
 
 Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware 
 provided by the library:

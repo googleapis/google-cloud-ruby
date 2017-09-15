@@ -33,23 +33,32 @@ the `google-cloud-debugger` gem.
 
 ## Enable Stackdriver Debugger API
 
-The Stackdriver Debugger agent would need the [Stackdriver Debugger 
+The Stackdriver Debugger agent needs the [Stackdriver Debugger 
 API](https://console.cloud.google.com/apis/library/clouddebugger.googleapis.com) 
 to be enabled on your Google Cloud project. Make sure it's enabled if not 
 already.
 
 ## Enabling the Debugger agent
 
-If you're using Ruby on Rails and the `stackdriver` gem, they automatically 
-loads the library into your application when it starts.
+The Stackdriver Debugger library provides a Debugger agent that helps instrument
+breakpoints in your running applications. The library also comes with a Railtie
+and a Rack Middleware to help control the Debugger agent in popular Rack based
+frameworks, such as Ruby on Rails and Sinatra.
 
-Otherwise, you can load the Railtie that comes with the library into your Ruby 
+### With Ruby on Rails
+
+You can load the Railtie that comes with the library into your Ruby 
 on Rails application by explicitly require it in the application startup path:
 
 ```ruby
 # In config/application.rb
 require "google/cloud/debugger/rails"
 ```
+
+If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+your application when it starts.
+
+### With other Rack-based frameworks
 
 Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware 
 provided by the library:
@@ -58,6 +67,8 @@ provided by the library:
 require "google/cloud/debugger"
 use Google::Cloud::Debugger::Middleware
 ```
+
+### Without Rack-based framework
 
 Non-rack-based applications can start the agent explicitly at the entry point of
 your application:
