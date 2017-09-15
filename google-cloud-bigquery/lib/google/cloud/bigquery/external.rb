@@ -22,13 +22,14 @@ module Google
       ##
       # # External
       #
-      # Creates a new {External::Table} (or subclass) object that represents the
-      # external data source that can be queried from directly, even though
-      # the data is not stored in BigQuery. Instead of loading or streaming
-      # the data, this object references the external data source.
+      # Creates a new {External::DataSource} (or subclass) object that
+      # represents the external data source that can be queried from directly,
+      # even though the data is not stored in BigQuery. Instead of loading or
+      # streaming the data, this object references the external data source.
       #
-      # See {External::Table}, {External::CsvTable}, {External::JsonTable},
-      # {External::SheetsTable}, {External::BigtableTable}
+      # See {External::DataSource}, {External::CsvSource},
+      # {External::JsonSource}, {External::SheetsSource},
+      # {External::BigtableSource}
       #
       # @example
       #   require "google/cloud/bigquery"
@@ -61,6 +62,18 @@ module Google
             e.gapi.source_uris = Array(urls)
             e.gapi.source_format = external_format
           end
+        end
+
+        ##
+        # @private Google API Client object.
+        def self.from_gapi gapi
+          external_format = source_format_for gapi.source_uris,
+                                              gapi.source_format
+          if external_format.nil?
+            fail ArgumentError, "Unable to determine external table format"
+          end
+          external_class = table_class_for external_format
+          external_class.from_gapi gapi
         end
 
         ##
@@ -97,27 +110,28 @@ module Google
         # @private Determine table class from source_format
         def self.table_class_for format
           case format
-          when "CSV"                    then External::CsvTable
-          when "NEWLINE_DELIMITED_JSON" then External::JsonTable
-          when "GOOGLE_SHEETS"          then External::SheetsTable
-          when "BIGTABLE"               then External::BigtableTable
+          when "CSV"                    then External::CsvSource
+          when "NEWLINE_DELIMITED_JSON" then External::JsonSource
+          when "GOOGLE_SHEETS"          then External::SheetsSource
+          when "BIGTABLE"               then External::BigtableSource
           else
             # AVRO and DATASTORE_BACKUP
-            External::Table
+            External::DataSource
           end
         end
 
         ##
-        # # Table
+        # # DataSource
         #
-        # External::Table and its subclasses represents an external data source
-        # that can be queried from directly, even though the data is not stored
-        # in BigQuery. Instead of loading or streaming the data, this object
-        # references the external data source.
+        # External::DataSource and its subclasses represents an external data
+        # source that can be queried from directly, even though the data is not
+        # stored in BigQuery. Instead of loading or streaming the data, this
+        # object references the external data source.
         #
-        # The AVRO and Datastore Backup formats use {External::Table}. See
-        # {External::CsvTable}, {External::JsonTable}, {External::SheetsTable},
-        # {External::BigtableTable} for the other formats.
+        # The AVRO and Datastore Backup formats use {External::DataSource}. See
+        # {External::CsvSource}, {External::JsonSource},
+        # {External::SheetsSource}, {External::BigtableSource} for the other
+        # formats.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -136,7 +150,7 @@ module Google
         #     puts row[:name]
         #   end
         #
-        class Table
+        class DataSource
           ##
           # @private The Google API Client object.
           attr_accessor :gapi
@@ -358,6 +372,7 @@ module Google
           #   csv_table.autodetect #=> true
           #
           def autodetect= new_autodetect
+            frozen_check!
             @gapi.autodetect = new_autodetect
           end
 
@@ -405,6 +420,7 @@ module Google
           #   csv_table.compression #=> "GZIP"
           #
           def compression= new_compression
+            frozen_check!
             @gapi.compression = new_compression
           end
 
@@ -465,6 +481,7 @@ module Google
           #   csv_table.ignore_unknown #=> true
           #
           def ignore_unknown= new_ignore_unknown
+            frozen_check!
             @gapi.ignore_unknown_values = new_ignore_unknown
           end
 
@@ -517,6 +534,7 @@ module Google
           #   csv_table.max_bad_records #=> 10
           #
           def max_bad_records= new_max_bad_records
+            frozen_check!
             @gapi.max_bad_records = new_max_bad_records
           end
 
@@ -525,16 +543,31 @@ module Google
           def to_gapi
             @gapi
           end
+
+          ##
+          # @private Google API Client object.
+          def self.from_gapi gapi
+            new_table = new
+            new_table.instance_variable_set :@gapi, gapi
+            new_table
+          end
+
+          protected
+
+          def frozen_check!
+            return unless frozen?
+            fail ArgumentError, "Cannot modify external data source when frozen"
+          end
         end
 
         ##
-        # # CsvTable
+        # # CsvSource
         #
-        # {External::CsvTable} is a subclass of {External::Table} and represents
-        # a CSV external data source that can be queried from directly, such as
-        # Google Cloud Storage or Google Drive, even though the data is not
-        # stored in BigQuery. Instead of loading or streaming the data, this
-        # object references the external data source.
+        # {External::CsvSource} is a subclass of {External::DataSource} and
+        # represents a CSV external data source that can be queried from
+        # directly, such as Google Cloud Storage or Google Drive, even though
+        # the data is not stored in BigQuery. Instead of loading or streaming
+        # the data, this object references the external data source.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -554,9 +587,9 @@ module Google
         #     puts row[:name]
         #   end
         #
-        class CsvTable < External::Table
+        class CsvSource < External::DataSource
           ##
-          # @private Create an empty CsvTable object.
+          # @private Create an empty CsvSource object.
           def initialize
             super
             @gapi.csv_options = Google::Apis::BigqueryV2::CsvOptions.new
@@ -603,6 +636,7 @@ module Google
           #   csv_table.jagged_rows #=> true
           #
           def jagged_rows= new_jagged_rows
+            frozen_check!
             @gapi.csv_options.allow_jagged_rows = new_jagged_rows
           end
 
@@ -647,6 +681,7 @@ module Google
           #   csv_table.quoted_newlines #=> true
           #
           def quoted_newlines= new_quoted_newlines
+            frozen_check!
             @gapi.csv_options.allow_quoted_newlines = new_quoted_newlines
           end
 
@@ -689,6 +724,7 @@ module Google
           #   csv_table.encoding #=> "UTF-8"
           #
           def encoding= new_encoding
+            frozen_check!
             @gapi.csv_options.encoding = new_encoding
           end
 
@@ -777,6 +813,7 @@ module Google
           #   csv_table.delimiter #=> "|"
           #
           def delimiter= new_delimiter
+            frozen_check!
             @gapi.csv_options.field_delimiter = new_delimiter
           end
 
@@ -819,6 +856,7 @@ module Google
           #   csv_table.quote #=> "'"
           #
           def quote= new_quote
+            frozen_check!
             @gapi.csv_options.quote = new_quote
           end
 
@@ -863,6 +901,7 @@ module Google
           #   csv_table.skip_leading_rows #=> 1
           #
           def skip_leading_rows= row_count
+            frozen_check!
             @gapi.csv_options.skip_leading_rows = row_count
           end
 
@@ -895,7 +934,11 @@ module Google
           #
           def schema replace: false
             @schema ||= Schema.from_gapi @gapi.schema
-            @schema = Schema.from_gapi if replace
+            if replace
+              frozen_check!
+              @schema = Schema.from_gapi
+            end
+            @schema.freeze if frozen?
             yield @schema if block_given?
             @schema
           end
@@ -922,6 +965,7 @@ module Google
           #   csv_table.schema = csv_shema
           #
           def schema= new_schema
+            frozen_check!
             @schema = new_schema
           end
 
@@ -945,12 +989,21 @@ module Google
             @gapi.schema = @schema.to_gapi if @schema
             @gapi
           end
+
+          ##
+          # @private Google API Client object.
+          def self.from_gapi gapi
+            new_table = super
+            schema = Schema.from_gapi gapi.schema
+            new_table.instance_variable_set :@schema, schema
+            new_table
+          end
         end
 
         ##
-        # # JsonTable
+        # # JsonSource
         #
-        # {External::JsonTable} is a subclass of {External::Table} and
+        # {External::JsonSource} is a subclass of {External::DataSource} and
         # represents a JSON external data source that can be queried from
         # directly, such as Google Cloud Storage or Google Drive, even though
         # the data is not stored in BigQuery. Instead of loading or streaming
@@ -982,7 +1035,7 @@ module Google
         #     puts row[:name]
         #   end
         #
-        class JsonTable < External::Table
+        class JsonSource < External::DataSource
           ##
           # The schema for the data.
           #
@@ -1012,7 +1065,11 @@ module Google
           #
           def schema replace: false
             @schema ||= Schema.from_gapi @gapi.schema
-            @schema = Schema.from_gapi if replace
+            if replace
+              frozen_check!
+              @schema = Schema.from_gapi
+            end
+            @schema.freeze if frozen?
             yield @schema if block_given?
             @schema
           end
@@ -1039,6 +1096,7 @@ module Google
           #   json_table.schema = json_shema
           #
           def schema= new_schema
+            frozen_check!
             @schema = new_schema
           end
 
@@ -1062,12 +1120,21 @@ module Google
             @gapi.schema = @schema.to_gapi if @schema
             @gapi
           end
+
+          ##
+          # @private Google API Client object.
+          def self.from_gapi gapi
+            new_table = super
+            schema = Schema.from_gapi gapi.schema
+            new_table.instance_variable_set :@schema, schema
+            new_table
+          end
         end
 
         ##
-        # # SheetsTable
+        # # SheetsSource
         #
-        # {External::SheetsTable} is a subclass of {External::Table} and
+        # {External::SheetsSource} is a subclass of {External::DataSource} and
         # represents a Google Sheets external data source that can be queried
         # from directly, even though the data is not stored in BigQuery. Instead
         # of loading or streaming the data, this object references the external
@@ -1090,9 +1157,9 @@ module Google
         #     puts row[:name]
         #   end
         #
-        class SheetsTable < External::Table
+        class SheetsSource < External::DataSource
           ##
-          # @private Create an empty SheetsTable object.
+          # @private Create an empty SheetsSource object.
           def initialize
             super
             @gapi.google_sheets_options = \
@@ -1153,14 +1220,15 @@ module Google
           #   sheets_table.skip_leading_rows #=> 1
           #
           def skip_leading_rows= row_count
+            frozen_check!
             @gapi.google_sheets_options.skip_leading_rows = row_count
           end
         end
 
         ##
-        # # BigtableTable
+        # # BigtableSource
         #
-        # {External::BigtableTable} is a subclass of {External::Table} and
+        # {External::BigtableSource} is a subclass of {External::DataSource} and
         # represents a Bigtable external data source that can be queried from
         # directly, even though the data is not stored in BigQuery. Instead of
         # loading or streaming the data, this object references the external
@@ -1189,9 +1257,9 @@ module Google
         #     puts row[:name]
         #   end
         #
-        class BigtableTable < External::Table
+        class BigtableSource < External::DataSource
           ##
-          # @private Create an empty BigtableTable object.
+          # @private Create an empty BigtableSource object.
           def initialize
             super
             @gapi.bigtable_options = \
@@ -1204,12 +1272,12 @@ module Google
           # their types. This list restricts the column families that can be
           # referenced in queries and specifies their value types. You can use
           # this list to do type conversions - see
-          # {BigtableTable::ColumnFamily#type} for more details. If you leave
+          # {BigtableSource::ColumnFamily#type} for more details. If you leave
           # this list empty, all column families are present in the table schema
           # and their values are read as `BYTES`. During a query only the column
           # families referenced in that query are read from Bigtable.
           #
-          # @return [Array<BigtableTable::ColumnFamily>]
+          # @return [Array<BigtableSource::ColumnFamily>]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1238,19 +1306,19 @@ module Google
           # types. Columns belonging to the column family may also be exposed.
           #
           # @param [String] family_id Identifier of the column family. See
-          #   {BigtableTable::ColumnFamily#family_id}.
+          #   {BigtableSource::ColumnFamily#family_id}.
           # @param [String] encoding The encoding of the values when the type is
-          #   not `STRING`. See {BigtableTable::ColumnFamily#encoding}.
+          #   not `STRING`. See {BigtableSource::ColumnFamily#encoding}.
           # @param [Boolean] latest Whether only the latest version of value are
           #   exposed for all columns in this column family. See
-          #   {BigtableTable::ColumnFamily#latest}.
+          #   {BigtableSource::ColumnFamily#latest}.
           # @param [String] type The type to convert the value in cells of this
-          #   column. See {BigtableTable::ColumnFamily#type}.
+          #   column. See {BigtableSource::ColumnFamily#type}.
           #
           # @yield [family] a block for setting the family
-          # @yieldparam [BigtableTable::ColumnFamily] family the family object
+          # @yieldparam [BigtableSource::ColumnFamily] family the family object
           #
-          # @return [BigtableTable::ColumnFamily]
+          # @return [BigtableSource::ColumnFamily]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1269,7 +1337,8 @@ module Google
           #   end
           #
           def add_family family_id, encoding: nil, latest: nil, type: nil
-            fam = BigtableTable::ColumnFamily.new
+            frozen_check!
+            fam = BigtableSource::ColumnFamily.new
             fam.family_id = family_id
             fam.encoding = encoding if encoding
             fam.latest = latest if latest
@@ -1322,6 +1391,7 @@ module Google
           #   bigtable_table.rowkey_as_string #=> true
           #
           def rowkey_as_string= row_rowkey
+            frozen_check!
             @gapi.bigtable_options.read_rowkey_as_string = row_rowkey
           end
 
@@ -1333,7 +1403,34 @@ module Google
           end
 
           ##
-          # # BigtableTable::ColumnFamily
+          # @private Google API Client object.
+          def self.from_gapi gapi
+            new_table = super
+            families = Array gapi.bigtable_options.column_families
+            families = families.map do |fam_gapi|
+              BigtableSource::ColumnFamily.from_gapi fam_gapi
+            end
+            new_table.instance_variable_set :@families, families
+            new_table
+          end
+
+          ##
+          # @private
+          def freeze
+            @families.map(&:freeze!)
+            @families.freeze!
+            super
+          end
+
+          protected
+
+          def frozen_check!
+            return unless frozen?
+            fail ArgumentError, "Cannot modify external data source when frozen"
+          end
+
+          ##
+          # # BigtableSource::ColumnFamily
           #
           # A Bigtable column family used to expose in the table schema along
           # with its types and columns.
@@ -1363,7 +1460,7 @@ module Google
           #
           class ColumnFamily
             ##
-            # @private Create an empty BigtableTable::ColumnFamily object.
+            # @private Create an empty BigtableSource::ColumnFamily object.
             def initialize
               @gapi = Google::Apis::BigqueryV2::BigtableColumnFamily.new
               @columns = []
@@ -1418,6 +1515,7 @@ module Google
             #   bigtable_table.families[0].encoding #=> "UTF-8"
             #
             def encoding= new_encoding
+              frozen_check!
               @gapi.encoding = new_encoding
             end
 
@@ -1462,6 +1560,7 @@ module Google
             #   bigtable_table.families[0].family_id #=> "User"
             #
             def family_id= new_family_id
+              frozen_check!
               @gapi.family_id = new_family_id
             end
 
@@ -1510,6 +1609,7 @@ module Google
             #   bigtable_table.families[0].latest #=> true
             #
             def latest= new_latest
+              frozen_check!
               @gapi.only_read_latest = new_latest
             end
 
@@ -1578,13 +1678,14 @@ module Google
             #   bigtable_table.families[0].type #=> "STRING"
             #
             def type= new_type
+              frozen_check!
               @gapi.type = new_type
             end
 
             ##
             # Lists of columns that should be exposed as individual fields.
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1613,13 +1714,13 @@ module Google
             # along with its types.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             # @param [String] type The type to convert the value in cells of
-            #   this column. See {BigtableTable::Column#type}. The following
+            #   this column. See {BigtableSource::Column#type}. The following
             #   BigQuery types are allowed:
             #
             # * `BYTES`
@@ -1629,9 +1730,9 @@ module Google
             # * `BOOLEAN`
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1647,7 +1748,8 @@ module Google
             #   end
             #
             def add_column qualifier, as: nil, type: nil
-              col = BigtableTable::Column.new
+              frozen_check!
+              col = BigtableSource::Column.new
               col.qualifier = qualifier
               col.field_name = as if as
               col.type = type if type
@@ -1661,16 +1763,16 @@ module Google
             # that is specified as the `BYTES` type.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1696,16 +1798,16 @@ module Google
             # that is specified as the `STRING` type.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1731,16 +1833,16 @@ module Google
             # that is specified as the `INTEGER` type.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1766,16 +1868,16 @@ module Google
             # that is specified as the `FLOAT` type.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1801,16 +1903,16 @@ module Google
             # that is specified as the `BOOLEAN` type.
             #
             # @param [String] qualifier Qualifier of the column. See
-            #   {BigtableTable::Column#qualifier}.
+            #   {BigtableSource::Column#qualifier}.
             # @param [String] as A valid identifier to be used as the column
             #   field name if the qualifier is not a valid BigQuery field
             #   identifier (i.e. does not match `[a-zA-Z][a-zA-Z0-9_]*`). See
-            #   {BigtableTable::Column#field_name}.
+            #   {BigtableSource::Column#field_name}.
             #
             # @yield [column] a block for setting the column
-            # @yieldparam [BigtableTable::Column] column the column object
+            # @yieldparam [BigtableSource::Column] column the column object
             #
-            # @return [Array<BigtableTable::Column>]
+            # @return [Array<BigtableSource::Column>]
             #
             # @example
             #   require "google/cloud/bigquery"
@@ -1837,10 +1939,38 @@ module Google
               @gapi.columns = @columns.map(&:to_gapi)
               @gapi
             end
+
+            ##
+            # @private Google API Client object.
+            def self.from_gapi gapi
+              new_fam = new
+              new_fam.instance_variable_set :@gapi, gapi
+              columns = Array(gapi.columns).map do |col_gapi|
+                BigtableSource::Column.from_gapi col_gapi
+              end
+              new_fam.instance_variable_set :@columns, columns
+              new_fam
+            end
+
+            ##
+            # @private
+            def freeze
+              @columns.map(&:freeze!)
+              @columns.freeze!
+              super
+            end
+
+            protected
+
+            def frozen_check!
+              return unless frozen?
+              fail ArgumentError,
+                   "Cannot modify external data source when frozen"
+            end
           end
 
           ##
-          # # BigtableTable::Column
+          # # BigtableSource::Column
           #
           # A Bigtable column to expose in the table schema along with its
           # types.
@@ -1870,7 +2000,7 @@ module Google
           #
           class Column
             ##
-            # @private Create an empty BigtableTable::Column object.
+            # @private Create an empty BigtableSource::Column object.
             def initialize
               @gapi = Google::Apis::BigqueryV2::BigtableColumn.new
             end
@@ -1933,6 +2063,7 @@ module Google
             #   end
             #
             def qualifier= new_qualifier
+              frozen_check!
               fail ArgumentError if new_qualifier.nil?
 
               utf8_qualifier = new_qualifier.encode Encoding::UTF_8
@@ -2005,6 +2136,7 @@ module Google
             #   end
             #
             def encoding= new_encoding
+              frozen_check!
               @gapi.encoding = new_encoding
             end
 
@@ -2060,6 +2192,7 @@ module Google
             #   end
             #
             def field_name= new_field_name
+              frozen_check!
               @gapi.field_name = new_field_name
             end
 
@@ -2112,6 +2245,7 @@ module Google
             #   end
             #
             def latest= new_latest
+              frozen_check!
               @gapi.only_read_latest = new_latest
             end
 
@@ -2186,6 +2320,7 @@ module Google
             #   end
             #
             def type= new_type
+              frozen_check!
               @gapi.type = new_type
             end
 
@@ -2193,6 +2328,22 @@ module Google
             # @private Google API Client object.
             def to_gapi
               @gapi
+            end
+
+            ##
+            # @private Google API Client object.
+            def self.from_gapi gapi
+              new_col = new
+              new_col.instance_variable_set :@gapi, gapi
+              new_col
+            end
+
+            protected
+
+            def frozen_check!
+              return unless frozen?
+              fail ArgumentError,
+                   "Cannot modify external data source when frozen"
             end
           end
         end

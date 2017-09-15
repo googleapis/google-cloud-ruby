@@ -19,6 +19,7 @@ require "google/cloud/bigquery/view"
 require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/cloud/bigquery/schema"
+require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/apis/bigquery_v2"
 
@@ -405,6 +406,15 @@ module Google
         end
 
         ##
+        # Checks if the table's type is "EXTERNAL".
+        #
+        # @!group Attributes
+        #
+        def external?
+          @gapi.type == "EXTERNAL"
+        end
+
+        ##
         # The geographic location where the table should reside. Possible
         # values include EU and US. The default value is US.
         #
@@ -505,6 +515,50 @@ module Google
         #
         def headers
           schema.headers
+        end
+
+        ##
+        # The {External::DataSource} (or subclass) object that represents the
+        # external data source that the table represents. Data can be queried
+        # the table, even though the data is not stored in BigQuery. Instead of
+        # loading or streaming the data, this object references the external
+        # data source.
+        #
+        # Present only if the table represents an External Data Source. See
+        # {#external?} and {External::DataSource}.
+        #
+        # @see https://cloud.google.com/bigquery/external-data-sources
+        #   Querying External Data Sources
+        #
+        # @return [External::DataSource]
+        #
+        #   @!group Attributes
+        #
+        def external
+          return nil if @gapi.external_data_configuration.nil?
+          External.from_gapi(@gapi.external_data_configuration).freeze
+        end
+
+        ##
+        # Set the {External::DataSource} (or subclass) object that represents
+        # the external data source that the table represents. Data can be
+        # queried the table, even though the data is not stored in BigQuery.
+        # Instead of loading or streaming the data, this object references the
+        # external data source.
+        #
+        # Use only if the table represents an External Data Source. See
+        # {#external?} and {External::DataSource}.
+        #
+        # @see https://cloud.google.com/bigquery/external-data-sources
+        #   Querying External Data Sources
+        #
+        # @return [External::DataSource] External data source.
+        #
+        # @!group Attributes
+        #
+        def external= external
+          @gapi.external_data_configuration = external.to_gapi
+          patch_gapi! :external_data_configuration
         end
 
         ##

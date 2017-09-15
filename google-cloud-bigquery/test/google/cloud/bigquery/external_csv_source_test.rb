@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::CsvTable do
+describe Google::Cloud::Bigquery::External::CsvSource do
   it "can be used for CSV" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -26,7 +26,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::Table
+    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     table.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
     table.must_be :csv?
     table.format.must_equal "CSV"
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets jagged_rows" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets quoted_newlines" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets encoding" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets delimiter" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -139,7 +139,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets quote" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -161,7 +161,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets skip_leading_rows" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -183,7 +183,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets schema using block" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
@@ -228,7 +228,7 @@ describe Google::Cloud::Bigquery::External::CsvTable do
   end
 
   it "sets schema using object" do
-    table = Google::Cloud::Bigquery::External::CsvTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
       e.gapi.source_format = "CSV"
     end
