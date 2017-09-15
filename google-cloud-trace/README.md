@@ -75,7 +75,7 @@ require "google/cloud/trace"
 use Google::Cloud::Trace::Middleware
 ```
 
-### Adding Custom Trace Span
+### Adding Custom Trace Spans
 
 The Stackdriver Trace Rack Middleware automatically creates a trace record for
 incoming requests. You can add additional custom trace spans within each 
