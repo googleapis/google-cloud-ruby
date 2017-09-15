@@ -48,7 +48,7 @@ frameworks, such as Ruby on Rails and Sinatra.
 ### With Ruby on Rails
 
 You can load the Railtie that comes with the library into your Ruby 
-on Rails application by explicitly require it in the application startup path:
+on Rails application by explicitly requiring it during the application startup:
 
 ```ruby
 # In config/application.rb

@@ -63,12 +63,12 @@ logging.write_entries entry
 
 The `google-cloud-logging` library provides framework integration for popular 
 Rack-based frameworks, such as Ruby on Rails and Sinatra, which sets the default 
-Rack logger to an instance of Stackdriver Logging logger.
+Rack logger to an instance of the Stackdriver Logging logger.
 
 ### With Ruby on Rails
 
 You can load the Railtie that comes with the library into your Ruby 
-on Rails application by explicitly require it in the application startup path:
+on Rails application by explicitly requiring it during the application startup:
 
 ```ruby
 # In config/application.rb

@@ -55,7 +55,7 @@ incoming requests in the application.
 ### With Ruby on Rails
 
 You can load the Railtie that comes with the library into your Ruby 
-on Rails application by explicitly require it in the application startup path:
+on Rails application by explicitly requiring it during the application startup:
 
 ```ruby
 # In config/application.rb
@@ -75,7 +75,7 @@ require "google/cloud/trace"
 use Google::Cloud::Trace::Middleware
 ```
 
-### Add Custom Trace Span
+### Adding Custom Trace Span
 
 The Stackdriver Trace Rack Middleware automatically creates a trace record for
 incoming requests. You can add additional custom trace spans within each 
