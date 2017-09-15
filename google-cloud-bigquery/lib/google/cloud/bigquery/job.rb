@@ -30,8 +30,8 @@ module Google
       # {CopyJob}, {ExtractJob}, {LoadJob}, and {QueryJob}.
       #
       # A job instance is created when you call {Project#query_job},
-      # {Dataset#query_job}, {Table#copy_job}, {Table#extract}, {Table#load}, or
-      # {View#data}.
+      # {Dataset#query_job}, {Table#copy_job}, {Table#extract_job},
+      # {Table#load}, or {View#data}.
       #
       # @see https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects
       #   Managing Jobs, Datasets, and Projects
@@ -259,7 +259,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   extract_job = table.extract "gs://my-bucket/file-name.json",
+        #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
         #                               format: "json"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true

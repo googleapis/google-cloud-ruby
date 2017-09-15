@@ -812,14 +812,14 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   extract_job = table.extract "gs://my-bucket/file-name.json",
+        #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
         #                               format: "json"
         #
         # @!group Data
         #
-        def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil, dryrun: nil, job_id: nil, prefix: nil,
-                    labels: nil
+        def extract_job extract_url, format: nil, compression: nil,
+                        delimiter: nil, header: nil, dryrun: nil, job_id: nil,
+                        prefix: nil, labels: nil
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
