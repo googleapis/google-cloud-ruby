@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::Table do
+describe Google::Cloud::Bigquery::External::DataSource do
   it "can be used for AVRO" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.avro"]
       e.gapi.source_format = "AVRO"
     end
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::External::Table do
       source_format: "AVRO"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::Table
+    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     table.urls.must_equal ["gs://my-bucket/path/to/file.avro"]
     table.must_be :avro?
     table.format.must_equal "AVRO"
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigquery::External::Table do
   end
 
   it "can be used for DATASTORE_BACKUP" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.backup_info"]
       e.gapi.source_format = "DATASTORE_BACKUP"
     end
@@ -49,7 +49,7 @@ describe Google::Cloud::Bigquery::External::Table do
       source_format: "DATASTORE_BACKUP"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::Table
+    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     table.urls.must_equal ["gs://my-bucket/path/to/file.backup_info"]
     table.must_be :backup?
     table.format.must_equal "DATASTORE_BACKUP"
@@ -64,7 +64,7 @@ describe Google::Cloud::Bigquery::External::Table do
   end
 
   it "sets autodetect" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.avro"]
       e.gapi.source_format = "AVRO"
     end
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::External::Table do
   end
 
   it "sets compression" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.avro"]
       e.gapi.source_format = "AVRO"
     end
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::External::Table do
   end
 
   it "sets ignore_unknown" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.avro"]
       e.gapi.source_format = "AVRO"
     end
@@ -124,7 +124,7 @@ describe Google::Cloud::Bigquery::External::Table do
   end
 
   it "sets max_bad_records" do
-    table = Google::Cloud::Bigquery::External::Table.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.avro"]
       e.gapi.source_format = "AVRO"
     end

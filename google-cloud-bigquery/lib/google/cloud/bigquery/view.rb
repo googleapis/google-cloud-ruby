@@ -264,6 +264,15 @@ module Google
         end
 
         ##
+        # Checks if the table's type is "EXTERNAL".
+        #
+        # @!group Attributes
+        #
+        def external?
+          @gapi.type == "EXTERNAL"
+        end
+
+        ##
         # The geographic location where the table should reside. Possible
         # values include EU and US. The default value is US.
         #

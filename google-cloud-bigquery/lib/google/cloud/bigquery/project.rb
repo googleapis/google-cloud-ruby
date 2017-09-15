@@ -128,10 +128,10 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
-        # @param [Hash<String|Symbol, External::Table>] external A Hash that
-        #   represents the mapping of the external tables to the table names
-        #   used in the SQL query. The hash keys are the table names, and the
-        #   hash values are the external table objects. See {Project#query}.
+        # @param [Hash<String|Symbol, External::DataSource>] external A Hash
+        #   that represents the mapping of the external tables to the table
+        #   names used in the SQL query. The hash keys are the table names, and
+        #   the hash values are the external table objects. See {Project#query}.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -377,10 +377,10 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
-        # @param [Hash<String|Symbol, External::Table>] external A Hash that
-        #   represents the mapping of the external tables to the table names
-        #   used in the SQL query. The hash keys are the table names, and the
-        #   hash values are the external table objects. See {Project#query}.
+        # @param [Hash<String|Symbol, External::DataSource>] external A Hash
+        #   that represents the mapping of the external tables to the table
+        #   names used in the SQL query. The hash keys are the table names, and
+        #   the hash values are the external table objects. See {Project#query}.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
@@ -526,10 +526,10 @@ module Google
         end
 
         ##
-        # Creates a new External::Table (or subclass) object that represents the
-        # external data source that can be queried from directly, even though
-        # the data is not stored in BigQuery. Instead of loading or streaming
-        # the data, this object references the external data source.
+        # Creates a new External::DataSource (or subclass) object that
+        # represents the external data source that can be queried from directly,
+        # even though the data is not stored in BigQuery. Instead of loading or
+        # streaming the data, this object references the external data source.
         #
         # @see https://cloud.google.com/bigquery/external-data-sources Querying
         #   External Data Sources
@@ -550,7 +550,7 @@ module Google
         #   * `datastore_backup` - Cloud Datastore backup
         #   * `bigtable` - Bigtable
         #
-        # @return [Google::Cloud::Bigquery::External::Table] External table.
+        # @return [External::DataSource] External data source.
         #
         # @example
         #   require "google/cloud/bigquery"

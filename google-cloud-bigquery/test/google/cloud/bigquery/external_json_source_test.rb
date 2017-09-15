@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::JsonTable do
+describe Google::Cloud::Bigquery::External::JsonSource do
   it "can be used for JSON" do
-    table = Google::Cloud::Bigquery::External::JsonTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::External::JsonTable do
       source_format: "NEWLINE_DELIMITED_JSON"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::Table
+    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     table.urls.must_equal ["gs://my-bucket/path/to/file.json"]
     table.must_be :json?
     table.format.must_equal "NEWLINE_DELIMITED_JSON"
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigquery::External::JsonTable do
   end
 
   it "sets schema using block" do
-    table = Google::Cloud::Bigquery::External::JsonTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::External::JsonTable do
   end
 
   it "sets schema using object" do
-    table = Google::Cloud::Bigquery::External::JsonTable.new.tap do |e|
+    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
