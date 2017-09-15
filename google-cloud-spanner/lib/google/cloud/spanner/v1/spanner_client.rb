@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/spanner/v1/spanner_pb"
+require "google/cloud/spanner/credentials"
 
 module Google
   module Cloud
@@ -98,64 +99,24 @@ module Google
             )
           end
 
-          # Parses the project from a database resource.
-          # @param database_name [String]
-          # @return [String]
-          def self.match_project_from_database_name database_name
-            DATABASE_PATH_TEMPLATE.match(database_name)["project"]
-          end
-
-          # Parses the instance from a database resource.
-          # @param database_name [String]
-          # @return [String]
-          def self.match_instance_from_database_name database_name
-            DATABASE_PATH_TEMPLATE.match(database_name)["instance"]
-          end
-
-          # Parses the database from a database resource.
-          # @param database_name [String]
-          # @return [String]
-          def self.match_database_from_database_name database_name
-            DATABASE_PATH_TEMPLATE.match(database_name)["database"]
-          end
-
-          # Parses the project from a session resource.
-          # @param session_name [String]
-          # @return [String]
-          def self.match_project_from_session_name session_name
-            SESSION_PATH_TEMPLATE.match(session_name)["project"]
-          end
-
-          # Parses the instance from a session resource.
-          # @param session_name [String]
-          # @return [String]
-          def self.match_instance_from_session_name session_name
-            SESSION_PATH_TEMPLATE.match(session_name)["instance"]
-          end
-
-          # Parses the database from a session resource.
-          # @param session_name [String]
-          # @return [String]
-          def self.match_database_from_session_name session_name
-            SESSION_PATH_TEMPLATE.match(session_name)["database"]
-          end
-
-          # Parses the session from a session resource.
-          # @param session_name [String]
-          # @return [String]
-          def self.match_session_from_session_name session_name
-            SESSION_PATH_TEMPLATE.match(session_name)["session"]
-          end
-
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param client_config[Hash]
+          # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -167,11 +128,11 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -180,9 +141,33 @@ module Google
             require "google/gax/grpc"
             require "google/spanner/v1/spanner_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Spanner::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Spanner::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Gax::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
@@ -211,6 +196,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Spanner::V1::Spanner::Stub.method(:new)
             )
@@ -287,20 +273,19 @@ module Google
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_database = SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
           #   response = spanner_client.create_session(formatted_database)
 
           def create_session \
               database,
               options: nil
-            req = Google::Spanner::V1::CreateSessionRequest.new({
+            req = {
               database: database
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::CreateSessionRequest)
             @create_session.call(req, options)
           end
 
@@ -316,20 +301,19 @@ module Google
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_name = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   response = spanner_client.get_session(formatted_name)
 
           def get_session \
               name,
               options: nil
-            req = Google::Spanner::V1::GetSessionRequest.new({
+            req = {
               name: name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::GetSessionRequest)
             @get_session.call(req, options)
           end
 
@@ -342,20 +326,19 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_name = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   spanner_client.delete_session(formatted_name)
 
           def delete_session \
               name,
               options: nil
-            req = Google::Spanner::V1::DeleteSessionRequest.new({
+            req = {
               name: name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::DeleteSessionRequest)
             @delete_session.call(req, options)
             nil
           end
@@ -367,19 +350,21 @@ module Google
           #
           # Queries inside read-write transactions might return +ABORTED+. If
           # this occurs, the application should restart the transaction from
-          # the beginning. See Transaction for more details.
+          # the beginning. See {Google::Spanner::V1::Transaction Transaction} for more details.
           #
           # Larger result sets can be fetched in streaming fashion by calling
-          # ExecuteStreamingSql instead.
+          # {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} instead.
           #
           # @param session [String]
           #   Required. The session in which the SQL query should be performed.
           # @param sql [String]
           #   Required. The SQL query string.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
-          # @param params [Google::Protobuf::Struct]
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
+          # @param params [Google::Protobuf::Struct | Hash]
           #   The SQL query string can contain parameter placeholders. A parameter
           #   placeholder consists of +'@'+ followed by the parameter
           #   name. Parameter names consist of any combination of letters,
@@ -394,37 +379,39 @@ module Google
           #   Parameter values are specified using +params+, which is a JSON
           #   object whose keys are parameter names, and whose values are the
           #   corresponding parameter values.
-          # @param param_types [Hash{String => Google::Spanner::V1::Type}]
+          #   A hash of the same form as `Google::Protobuf::Struct`
+          #   can also be provided.
+          # @param param_types [Hash{String => Google::Spanner::V1::Type | Hash}]
           #   It is not always possible for Cloud Spanner to infer the right SQL type
           #   from a JSON value.  For example, values of type +BYTES+ and values
-          #   of type +STRING+ both appear in Params as JSON strings.
+          #   of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params Params} as JSON strings.
           #
           #   In these cases, +param_types+ can be used to specify the exact
           #   SQL type for some or all of the SQL query parameters. See the
-          #   definition of Type for more information
+          #   definition of {Google::Spanner::V1::Type Type} for more information
           #   about SQL types.
+          #   A hash of the same form as `Google::Spanner::V1::Type`
+          #   can also be provided.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted SQL query
           #   execution, +resume_token+ should be copied from the last
-          #   PartialResultSet yielded before the interruption. Doing this
+          #   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
           #   enables the new SQL query execution to resume where the last one left
           #   off. The rest of the request parameters must exactly match the
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   ResultSetStats.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   sql = ''
           #   response = spanner_client.execute_sql(formatted_session, sql)
 
@@ -437,7 +424,7 @@ module Google
               resume_token: nil,
               query_mode: nil,
               options: nil
-            req = Google::Spanner::V1::ExecuteSqlRequest.new({
+            req = {
               session: session,
               sql: sql,
               transaction: transaction,
@@ -445,12 +432,13 @@ module Google
               param_types: param_types,
               resume_token: resume_token,
               query_mode: query_mode
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteSqlRequest)
             @execute_sql.call(req, options)
           end
 
-          # Like ExecuteSql, except returns the result
-          # set as a stream. Unlike ExecuteSql, there
+          # Like {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}, except returns the result
+          # set as a stream. Unlike {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}, there
           # is no limit on the size of the returned result set. However, no
           # individual row in the result set can exceed 100 MiB, and no
           # column value can exceed 10 MiB.
@@ -459,10 +447,12 @@ module Google
           #   Required. The session in which the SQL query should be performed.
           # @param sql [String]
           #   Required. The SQL query string.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
-          # @param params [Google::Protobuf::Struct]
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
+          # @param params [Google::Protobuf::Struct | Hash]
           #   The SQL query string can contain parameter placeholders. A parameter
           #   placeholder consists of +'@'+ followed by the parameter
           #   name. Parameter names consist of any combination of letters,
@@ -477,25 +467,29 @@ module Google
           #   Parameter values are specified using +params+, which is a JSON
           #   object whose keys are parameter names, and whose values are the
           #   corresponding parameter values.
-          # @param param_types [Hash{String => Google::Spanner::V1::Type}]
+          #   A hash of the same form as `Google::Protobuf::Struct`
+          #   can also be provided.
+          # @param param_types [Hash{String => Google::Spanner::V1::Type | Hash}]
           #   It is not always possible for Cloud Spanner to infer the right SQL type
           #   from a JSON value.  For example, values of type +BYTES+ and values
-          #   of type +STRING+ both appear in Params as JSON strings.
+          #   of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params Params} as JSON strings.
           #
           #   In these cases, +param_types+ can be used to specify the exact
           #   SQL type for some or all of the SQL query parameters. See the
-          #   definition of Type for more information
+          #   definition of {Google::Spanner::V1::Type Type} for more information
           #   about SQL types.
+          #   A hash of the same form as `Google::Spanner::V1::Type`
+          #   can also be provided.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted SQL query
           #   execution, +resume_token+ should be copied from the last
-          #   PartialResultSet yielded before the interruption. Doing this
+          #   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
           #   enables the new SQL query execution to resume where the last one left
           #   off. The rest of the request parameters must exactly match the
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   ResultSetStats.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -504,12 +498,10 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   sql = ''
           #   spanner_client.execute_streaming_sql(formatted_session, sql).each do |element|
           #     # Process element.
@@ -524,7 +516,7 @@ module Google
               resume_token: nil,
               query_mode: nil,
               options: nil
-            req = Google::Spanner::V1::ExecuteSqlRequest.new({
+            req = {
               session: session,
               sql: sql,
               transaction: transaction,
@@ -532,56 +524,61 @@ module Google
               param_types: param_types,
               resume_token: resume_token,
               query_mode: query_mode
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteSqlRequest)
             @execute_streaming_sql.call(req, options)
           end
 
           # Reads rows from the database using key lookups and scans, as a
           # simple key/value style alternative to
-          # ExecuteSql.  This method cannot be used to
+          # {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}.  This method cannot be used to
           # return a result set larger than 10 MiB; if the read matches more
           # data than that, the read fails with a +FAILED_PRECONDITION+
           # error.
           #
           # Reads inside read-write transactions might return +ABORTED+. If
           # this occurs, the application should restart the transaction from
-          # the beginning. See Transaction for more details.
+          # the beginning. See {Google::Spanner::V1::Transaction Transaction} for more details.
           #
           # Larger result sets can be yielded in streaming fashion by calling
-          # StreamingRead instead.
+          # {Google::Spanner::V1::Spanner::StreamingRead StreamingRead} instead.
           #
           # @param session [String]
           #   Required. The session in which the read should be performed.
           # @param table [String]
           #   Required. The name of the table in the database to be read.
           # @param columns [Array<String>]
-          #   The columns of Table to be returned for each row matching
+          #   The columns of {Google::Spanner::V1::ReadRequest#table Table} to be returned for each row matching
           #   this request.
-          # @param key_set [Google::Spanner::V1::KeySet]
+          # @param key_set [Google::Spanner::V1::KeySet | Hash]
           #   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-          #   primary keys of the rows in Table to be yielded, unless Index
-          #   is present. If Index is present, then Key_set instead names
-          #   index keys in Index.
+          #   primary keys of the rows in {Google::Spanner::V1::ReadRequest#table Table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index Index}
+          #   is present. If {Google::Spanner::V1::ReadRequest#index Index} is present, then {Google::Spanner::V1::ReadRequest#key_set Key_set} instead names
+          #   index keys in {Google::Spanner::V1::ReadRequest#index Index}.
           #
-          #   Rows are yielded in table primary key order (if Index is empty)
-          #   or index key order (if Index is non-empty).
+          #   Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index Index} is empty)
+          #   or index key order (if {Google::Spanner::V1::ReadRequest#index Index} is non-empty).
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          #   A hash of the same form as `Google::Spanner::V1::KeySet`
+          #   can also be provided.
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
           # @param index [String]
-          #   If non-empty, the name of an index on Table. This index is
-          #   used instead of the table primary key when interpreting Key_set
-          #   and sorting result rows. See Key_set for further information.
+          #   If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table Table}. This index is
+          #   used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set Key_set}
+          #   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set Key_set} for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
           #   is zero, the default is no limit.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted read,
           #   +resume_token+ should be copied from the last
-          #   PartialResultSet yielded before the interruption. Doing this
+          #   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
           #   enables the new read to resume where the last read left off. The
           #   rest of the request parameters must exactly match the request
           #   that yielded this token.
@@ -591,16 +588,13 @@ module Google
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   KeySet = Google::Spanner::V1::KeySet
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   table = ''
           #   columns = []
-          #   key_set = KeySet.new
+          #   key_set = {}
           #   response = spanner_client.read(formatted_session, table, columns, key_set)
 
           def read \
@@ -613,7 +607,7 @@ module Google
               limit: nil,
               resume_token: nil,
               options: nil
-            req = Google::Spanner::V1::ReadRequest.new({
+            req = {
               session: session,
               table: table,
               columns: columns,
@@ -622,12 +616,13 @@ module Google
               index: index,
               limit: limit,
               resume_token: resume_token
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::ReadRequest)
             @read.call(req, options)
           end
 
-          # Like Read, except returns the result set as a
-          # stream. Unlike Read, there is no limit on the
+          # Like {Google::Spanner::V1::Spanner::Read Read}, except returns the result set as a
+          # stream. Unlike {Google::Spanner::V1::Spanner::Read Read}, there is no limit on the
           # size of the returned result set. However, no individual row in
           # the result set can exceed 100 MiB, and no column value can exceed
           # 10 MiB.
@@ -637,33 +632,37 @@ module Google
           # @param table [String]
           #   Required. The name of the table in the database to be read.
           # @param columns [Array<String>]
-          #   The columns of Table to be returned for each row matching
+          #   The columns of {Google::Spanner::V1::ReadRequest#table Table} to be returned for each row matching
           #   this request.
-          # @param key_set [Google::Spanner::V1::KeySet]
+          # @param key_set [Google::Spanner::V1::KeySet | Hash]
           #   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-          #   primary keys of the rows in Table to be yielded, unless Index
-          #   is present. If Index is present, then Key_set instead names
-          #   index keys in Index.
+          #   primary keys of the rows in {Google::Spanner::V1::ReadRequest#table Table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index Index}
+          #   is present. If {Google::Spanner::V1::ReadRequest#index Index} is present, then {Google::Spanner::V1::ReadRequest#key_set Key_set} instead names
+          #   index keys in {Google::Spanner::V1::ReadRequest#index Index}.
           #
-          #   Rows are yielded in table primary key order (if Index is empty)
-          #   or index key order (if Index is non-empty).
+          #   Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index Index} is empty)
+          #   or index key order (if {Google::Spanner::V1::ReadRequest#index Index} is non-empty).
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
-          # @param transaction [Google::Spanner::V1::TransactionSelector]
+          #   A hash of the same form as `Google::Spanner::V1::KeySet`
+          #   can also be provided.
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
           #   The transaction to use. If none is provided, the default is a
           #   temporary read-only transaction with strong concurrency.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
           # @param index [String]
-          #   If non-empty, the name of an index on Table. This index is
-          #   used instead of the table primary key when interpreting Key_set
-          #   and sorting result rows. See Key_set for further information.
+          #   If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table Table}. This index is
+          #   used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set Key_set}
+          #   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set Key_set} for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
           #   is zero, the default is no limit.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted read,
           #   +resume_token+ should be copied from the last
-          #   PartialResultSet yielded before the interruption. Doing this
+          #   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
           #   enables the new read to resume where the last read left off. The
           #   rest of the request parameters must exactly match the request
           #   that yielded this token.
@@ -675,16 +674,13 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   KeySet = Google::Spanner::V1::KeySet
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   table = ''
           #   columns = []
-          #   key_set = KeySet.new
+          #   key_set = {}
           #   spanner_client.streaming_read(formatted_session, table, columns, key_set).each do |element|
           #     # Process element.
           #   end
@@ -699,7 +695,7 @@ module Google
               limit: nil,
               resume_token: nil,
               options: nil
-            req = Google::Spanner::V1::ReadRequest.new({
+            req = {
               session: session,
               table: table,
               columns: columns,
@@ -708,43 +704,44 @@ module Google
               index: index,
               limit: limit,
               resume_token: resume_token
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::ReadRequest)
             @streaming_read.call(req, options)
           end
 
           # Begins a new transaction. This step can often be skipped:
-          # Read, ExecuteSql and
-          # Commit can begin a new transaction as a
+          # {Google::Spanner::V1::Spanner::Read Read}, {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} and
+          # {Google::Spanner::V1::Spanner::Commit Commit} can begin a new transaction as a
           # side-effect.
           #
           # @param session [String]
           #   Required. The session in which the transaction runs.
-          # @param options_ [Google::Spanner::V1::TransactionOptions]
+          # @param options_ [Google::Spanner::V1::TransactionOptions | Hash]
           #   Required. Options for the new transaction.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionOptions`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Spanner::V1::Transaction]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #   TransactionOptions = Google::Spanner::V1::TransactionOptions
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
-          #   options_ = TransactionOptions.new
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   options_ = {}
           #   response = spanner_client.begin_transaction(formatted_session, options_)
 
           def begin_transaction \
               session,
               options_,
               options: nil
-            req = Google::Spanner::V1::BeginTransactionRequest.new({
+            req = {
               session: session,
               options: options_
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::BeginTransactionRequest)
             @begin_transaction.call(req, options)
           end
 
@@ -759,13 +756,15 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the transaction to be committed is running.
-          # @param mutations [Array<Google::Spanner::V1::Mutation>]
+          # @param mutations [Array<Google::Spanner::V1::Mutation | Hash>]
           #   The mutations to be executed when this transaction commits. All
           #   mutations are applied atomically, in the order they appear in
           #   this list.
+          #   A hash of the same form as `Google::Spanner::V1::Mutation`
+          #   can also be provided.
           # @param transaction_id [String]
           #   Commit a previously-started transaction.
-          # @param single_use_transaction [Google::Spanner::V1::TransactionOptions]
+          # @param single_use_transaction [Google::Spanner::V1::TransactionOptions | Hash]
           #   Execute mutations in a temporary transaction. Note that unlike
           #   commit of a previously-started transaction, commit with a
           #   temporary transaction is non-idempotent. That is, if the
@@ -773,20 +772,20 @@ module Google
           #   instance, due to retries in the application, or in the
           #   transport library), it is possible that the mutations are
           #   executed more than once. If this is undesirable, use
-          #   BeginTransaction and
-          #   Commit instead.
+          #   {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction} and
+          #   {Google::Spanner::V1::Spanner::Commit Commit} instead.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionOptions`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Spanner::V1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   mutations = []
           #   response = spanner_client.commit(formatted_session, mutations)
 
@@ -796,18 +795,19 @@ module Google
               transaction_id: nil,
               single_use_transaction: nil,
               options: nil
-            req = Google::Spanner::V1::CommitRequest.new({
+            req = {
               session: session,
               mutations: mutations,
               transaction_id: transaction_id,
               single_use_transaction: single_use_transaction
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::CommitRequest)
             @commit.call(req, options)
           end
 
           # Rolls back a transaction, releasing any locks it holds. It is a good
           # idea to call this for any transaction that includes one or more
-          # Read or ExecuteSql requests and
+          # {Google::Spanner::V1::Spanner::Read Read} or {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} requests and
           # ultimately decides not to commit.
           #
           # +Rollback+ returns +OK+ if it successfully aborts the transaction, the
@@ -823,12 +823,10 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner/v1/spanner_client"
+          #   require "google/cloud/spanner/v1"
           #
-          #   SpannerClient = Google::Cloud::Spanner::V1::SpannerClient
-          #
-          #   spanner_client = SpannerClient.new
-          #   formatted_session = SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   transaction_id = ''
           #   spanner_client.rollback(formatted_session, transaction_id)
 
@@ -836,10 +834,11 @@ module Google
               session,
               transaction_id,
               options: nil
-            req = Google::Spanner::V1::RollbackRequest.new({
+            req = {
               session: session,
               transaction_id: transaction_id
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::RollbackRequest)
             @rollback.call(req, options)
             nil
           end

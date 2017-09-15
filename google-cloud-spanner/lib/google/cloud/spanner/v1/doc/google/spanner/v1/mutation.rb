@@ -17,7 +17,7 @@ module Google
     module V1
       # A modification to one or more Cloud Spanner rows.  Mutations can be
       # applied to a Cloud Spanner database by sending them in a
-      # Commit call.
+      # {Google::Spanner::V1::Spanner::Commit Commit} call.
       # @!attribute [rw] insert
       #   @return [Google::Spanner::V1::Mutation::Write]
       #     Insert new rows in a table. If any of the rows already exist,
@@ -28,28 +28,28 @@ module Google
       #     already exist, the transaction fails with error +NOT_FOUND+.
       # @!attribute [rw] insert_or_update
       #   @return [Google::Spanner::V1::Mutation::Write]
-      #     Like Insert, except that if the row already exists, then
+      #     Like {Google::Spanner::V1::Mutation#insert Insert}, except that if the row already exists, then
       #     its column values are overwritten with the ones provided. Any
       #     column values not explicitly written are preserved.
       # @!attribute [rw] replace
       #   @return [Google::Spanner::V1::Mutation::Write]
-      #     Like Insert, except that if the row already exists, it is
+      #     Like {Google::Spanner::V1::Mutation#insert Insert}, except that if the row already exists, it is
       #     deleted, and the column values provided are inserted
-      #     instead. Unlike Insert_or_update, this means any values not
+      #     instead. Unlike {Google::Spanner::V1::Mutation#insert_or_update Insert_or_update}, this means any values not
       #     explicitly written become +NULL+.
       # @!attribute [rw] delete
       #   @return [Google::Spanner::V1::Mutation::Delete]
       #     Delete rows from a table. Succeeds whether or not the named
       #     rows were present.
       class Mutation
-        # Arguments to Insert, Update, Insert_or_update, and
-        # Replace operations.
+        # Arguments to {Google::Spanner::V1::Mutation#insert Insert}, {Google::Spanner::V1::Mutation#update Update}, {Google::Spanner::V1::Mutation#insert_or_update Insert_or_update}, and
+        # {Google::Spanner::V1::Mutation#replace Replace} operations.
         # @!attribute [rw] table
         #   @return [String]
         #     Required. The table whose rows will be written.
         # @!attribute [rw] columns
         #   @return [Array<String>]
-        #     The names of the columns in Table to be written.
+        #     The names of the columns in {Google::Spanner::V1::Mutation::Write#table Table} to be written.
         #
         #     The list of columns must contain enough columns to allow
         #     Cloud Spanner to derive values for all primary key columns in the
@@ -59,20 +59,20 @@ module Google
         #     The values to be written. +values+ can contain more than one
         #     list of values. If it does, then multiple rows are written, one
         #     for each entry in +values+. Each list in +values+ must have
-        #     exactly as many entries as there are entries in Columns
+        #     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns Columns}
         #     above. Sending multiple lists is equivalent to sending multiple
         #     +Mutation+s, each containing one +values+ entry and repeating
-        #     Table and Columns. Individual values in each list are
-        #     encoded as described Here.
+        #     {Google::Spanner::V1::Mutation::Write#table Table} and {Google::Spanner::V1::Mutation::Write#columns Columns}. Individual values in each list are
+        #     encoded as described {Google::Spanner::V1::TypeCode Here}.
         class Write; end
 
-        # Arguments to Delete operations.
+        # Arguments to {Google::Spanner::V1::Mutation#delete Delete} operations.
         # @!attribute [rw] table
         #   @return [String]
         #     Required. The table whose rows will be deleted.
         # @!attribute [rw] key_set
         #   @return [Google::Spanner::V1::KeySet]
-        #     Required. The primary keys of the rows within Table to delete.
+        #     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table Table} to delete.
         class Delete; end
       end
     end

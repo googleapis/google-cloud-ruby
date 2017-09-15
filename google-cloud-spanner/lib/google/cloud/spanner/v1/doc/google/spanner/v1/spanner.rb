@@ -14,8 +14,19 @@
 
 module Google
   module Spanner
+    ##
+    # # Cloud Spanner API Contents
+    #
+    # | Class | Description |
+    # | ----- | ----------- |
+    # | [SpannerClient][] | Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. |
+    # | [Data Types][] | Data types for Google::Cloud::Spanner::V1 |
+    #
+    # [SpannerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/spannerclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/datatypes
+    #
     module V1
-      # The request for CreateSession.
+      # The request for {Google::Spanner::V1::Spanner::CreateSession CreateSession}.
       # @!attribute [rw] database
       #   @return [String]
       #     Required. The database in which the new session is created.
@@ -27,20 +38,20 @@ module Google
       #     Required. The name of the session.
       class Session; end
 
-      # The request for GetSession.
+      # The request for {Google::Spanner::V1::Spanner::GetSession GetSession}.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The name of the session to retrieve.
       class GetSessionRequest; end
 
-      # The request for DeleteSession.
+      # The request for {Google::Spanner::V1::Spanner::DeleteSession DeleteSession}.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The name of the session to delete.
       class DeleteSessionRequest; end
 
-      # The request for ExecuteSql and
-      # ExecuteStreamingSql.
+      # The request for {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} and
+      # {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the SQL query should be performed.
@@ -71,24 +82,24 @@ module Google
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
       #     from a JSON value.  For example, values of type +BYTES+ and values
-      #     of type +STRING+ both appear in Params as JSON strings.
+      #     of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params Params} as JSON strings.
       #
       #     In these cases, +param_types+ can be used to specify the exact
       #     SQL type for some or all of the SQL query parameters. See the
-      #     definition of Type for more information
+      #     definition of {Google::Spanner::V1::Type Type} for more information
       #     about SQL types.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     If this request is resuming a previously interrupted SQL query
       #     execution, +resume_token+ should be copied from the last
-      #     PartialResultSet yielded before the interruption. Doing this
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new SQL query execution to resume where the last one left
       #     off. The rest of the request parameters must exactly match the
       #     request that yielded this token.
       # @!attribute [rw] query_mode
       #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
       #     Used to control the amount of debugging information returned in
-      #     ResultSetStats.
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}.
       class ExecuteSqlRequest
         # Mode in which the query must be processed.
         module QueryMode
@@ -106,8 +117,8 @@ module Google
         end
       end
 
-      # The request for Read and
-      # StreamingRead.
+      # The request for {Google::Spanner::V1::Spanner::Read Read} and
+      # {Google::Spanner::V1::Spanner::StreamingRead StreamingRead}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the read should be performed.
@@ -120,22 +131,22 @@ module Google
       #     Required. The name of the table in the database to be read.
       # @!attribute [rw] index
       #   @return [String]
-      #     If non-empty, the name of an index on Table. This index is
-      #     used instead of the table primary key when interpreting Key_set
-      #     and sorting result rows. See Key_set for further information.
+      #     If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table Table}. This index is
+      #     used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set Key_set}
+      #     and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set Key_set} for further information.
       # @!attribute [rw] columns
       #   @return [Array<String>]
-      #     The columns of Table to be returned for each row matching
+      #     The columns of {Google::Spanner::V1::ReadRequest#table Table} to be returned for each row matching
       #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
       #     Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-      #     primary keys of the rows in Table to be yielded, unless Index
-      #     is present. If Index is present, then Key_set instead names
-      #     index keys in Index.
+      #     primary keys of the rows in {Google::Spanner::V1::ReadRequest#table Table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index Index}
+      #     is present. If {Google::Spanner::V1::ReadRequest#index Index} is present, then {Google::Spanner::V1::ReadRequest#key_set Key_set} instead names
+      #     index keys in {Google::Spanner::V1::ReadRequest#index Index}.
       #
-      #     Rows are yielded in table primary key order (if Index is empty)
-      #     or index key order (if Index is non-empty).
+      #     Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index Index} is empty)
+      #     or index key order (if {Google::Spanner::V1::ReadRequest#index Index} is non-empty).
       #
       #     It is not an error for the +key_set+ to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
@@ -147,13 +158,13 @@ module Google
       #   @return [String]
       #     If this request is resuming a previously interrupted read,
       #     +resume_token+ should be copied from the last
-      #     PartialResultSet yielded before the interruption. Doing this
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new read to resume where the last read left off. The
       #     rest of the request parameters must exactly match the request
       #     that yielded this token.
       class ReadRequest; end
 
-      # The request for BeginTransaction.
+      # The request for {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction runs.
@@ -162,7 +173,7 @@ module Google
       #     Required. Options for the new transaction.
       class BeginTransactionRequest; end
 
-      # The request for Commit.
+      # The request for {Google::Spanner::V1::Spanner::Commit Commit}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction to be committed is running.
@@ -178,8 +189,8 @@ module Google
       #     instance, due to retries in the application, or in the
       #     transport library), it is possible that the mutations are
       #     executed more than once. If this is undesirable, use
-      #     BeginTransaction and
-      #     Commit instead.
+      #     {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction} and
+      #     {Google::Spanner::V1::Spanner::Commit Commit} instead.
       # @!attribute [rw] mutations
       #   @return [Array<Google::Spanner::V1::Mutation>]
       #     The mutations to be executed when this transaction commits. All
@@ -187,13 +198,13 @@ module Google
       #     this list.
       class CommitRequest; end
 
-      # The response for Commit.
+      # The response for {Google::Spanner::V1::Spanner::Commit Commit}.
       # @!attribute [rw] commit_timestamp
       #   @return [Google::Protobuf::Timestamp]
       #     The Cloud Spanner timestamp at which the transaction committed.
       class CommitResponse; end
 
-      # The request for Rollback.
+      # The request for {Google::Spanner::V1::Spanner::Rollback Rollback}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction to roll back is running.
