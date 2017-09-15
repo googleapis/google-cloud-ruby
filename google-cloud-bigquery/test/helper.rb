@@ -628,6 +628,10 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Job.from_json hash.to_json
   end
 
+  def status state = "running"
+    Google::Apis::BigqueryV2::JobStatus.new state: state
+  end
+
   def temp_csv
     Tempfile.open ["import", ".csv"] do |tmpfile|
       tmpfile.puts "id,name"

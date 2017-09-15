@@ -48,7 +48,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     bigquery.service.mocked_service = mock
     job_gapi = copy_job_gapi(source_table, target_table)
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy target_table
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, target_table_other_proj)
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, ["test-project", job_gapi]
 
     result = source_table.copy "target-project:target_dataset.target_table_id"
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
 
     job_gapi = copy_job_gapi(source_table, new_target_table)
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy "new_target_table_id"
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy target_table, create: "CREATE_NEVER"
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy target_table, create: :never
@@ -134,7 +134,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy target_table, write: "WRITE_TRUNCATE"
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_gapi = copy_job_gapi(source_table, target_table)
     job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
     job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status_done
+    job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     result = source_table.copy target_table, write: :truncate
@@ -187,9 +187,5 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
         "dryRun" => nil
       }
     }.to_json
-  end
-
-  def status_done
-    Google::Apis::BigqueryV2::JobStatus.new state: "done"
   end
 end
