@@ -421,7 +421,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract extract_url, labels: labels
+        extract_job = table.extract_job extract_url, labels: labels
 
         extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
         extract_job.labels.must_equal labels
@@ -461,7 +461,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-        extract_job = table.extract extract_file, job_id: job_id
+        extract_job = table.extract_job extract_file, job_id: job_id
         extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?

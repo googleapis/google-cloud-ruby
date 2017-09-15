@@ -411,7 +411,7 @@ module Google
     #   bucket = storage.create_bucket bucket_id
     #   extract_url = "gs://#{bucket.id}/baby-names.csv"
     #
-    #   extract_job = result_table.extract extract_url
+    #   extract_job = result_table.extract_job extract_url
     #
     #   extract_job.wait_until_done!
     #

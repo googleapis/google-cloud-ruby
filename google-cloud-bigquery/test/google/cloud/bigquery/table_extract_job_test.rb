@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:extract_bucket_gapi) {  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_file
+    job = table.extract_job extract_file
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url
+    job = table.extract_job extract_url
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, dryrun: true
+    job = table.extract_job extract_url, dryrun: true
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract "#{extract_url}.csv"
+    job = table.extract_job "#{extract_url}.csv"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, format: :csv
+    job = table.extract_job extract_url, format: :csv
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
+    job = table.extract_job extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -132,7 +132,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract "#{extract_url}.json"
+    job = table.extract_job "#{extract_url}.json"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -146,7 +146,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, format: :json
+    job = table.extract_job extract_url, format: :json
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -161,7 +161,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract "#{extract_url}.avro"
+    job = table.extract_job "#{extract_url}.avro"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -175,7 +175,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, format: :avro
+    job = table.extract_job extract_url, format: :avro
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, job_id: job_id
+    job = table.extract_job extract_url, job_id: job_id
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -207,7 +207,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, prefix: prefix
+    job = table.extract_job extract_url, prefix: prefix
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -222,7 +222,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_url, job_id: job_id, prefix: "IGNORED"
+    job = table.extract_job extract_url, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
@@ -237,7 +237,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = table.extract extract_file, labels: labels
+    job = table.extract_job extract_file, labels: labels
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
