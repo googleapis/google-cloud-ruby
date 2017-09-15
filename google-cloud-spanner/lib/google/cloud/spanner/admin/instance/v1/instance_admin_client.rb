@@ -30,7 +30,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/spanner/admin/instance/v1/spanner_instance_admin_pb"
-require "google/cloud/spanner/admin/instance/credentials"
+require "google/cloud/spanner/credentials"
 
 module Google
   module Cloud
@@ -195,7 +195,7 @@ module Google
                   warn "`service_path` and `port` parameters are deprecated and will be removed"
                 end
 
-                credentials ||= Google::Cloud::Spanner::Admin::Instance::Credentials.default
+                credentials ||= Google::Cloud::Spanner::Credentials.default
 
                 @operations_client = Google::Longrunning::OperationsClient.new(
                   credentials: credentials,
