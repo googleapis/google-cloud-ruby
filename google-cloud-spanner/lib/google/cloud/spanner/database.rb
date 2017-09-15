@@ -64,22 +64,19 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_project_from_database_name @grpc.name
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_instance_from_database_name @grpc.name
+          @grpc.name.split("/")[3]
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_database_from_database_name @grpc.name
+          @grpc.name.split("/")[5]
         end
 
         # rubocop:disable LineLength
