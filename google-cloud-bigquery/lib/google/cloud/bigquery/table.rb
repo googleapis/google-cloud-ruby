@@ -756,7 +756,12 @@ module Google
         end
 
         ##
-        # Extract the data from the table to a Google Cloud Storage file.
+        # Extracts the data from the table to a Google Cloud Storage file using
+        # an asynchronous method. In this method, an {ExtractJob} is immediately
+        # returned. The caller may poll the service by repeatedly calling
+        # {Job#reload!} and {Job#done?} to detect when the job is done, or
+        # simply block until the job is done by calling #{Job#wait_until_done!}.
+        # See also #{#extract}.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -826,6 +831,68 @@ module Google
                       job_id: job_id, prefix: prefix, labels: labels }
           gapi = service.extract_table table_ref, extract_url, options
           Job.from_gapi gapi, service
+        end
+
+        ##
+        # Extracts the data from the table to a Google Cloud Storage file using
+        # a synchronous method that blocks for a response. Timeouts and
+        # transient errors are generally handled as needed to complete the job.
+        # See also #{#extract_job}.
+        #
+        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
+        #   Exporting Data From BigQuery
+        #
+        # @param [Google::Cloud::Storage::File, String, Array<String>]
+        #   extract_url The Google Storage file or file URI pattern(s) to which
+        #   BigQuery should extract the table data.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        # @param [String] compression The compression type to use for exported
+        #   files. Possible values include `GZIP` and `NONE`. The default value
+        #   is `NONE`.
+        # @param [String] delimiter Delimiter to use between fields in the
+        #   exported data. Default is <code>,</code>.
+        # @param [Boolean] header Whether to print out a header row in the
+        #   results. Default is `true`.
+        #
+        #
+        # @return [Boolean] Returns `true` if the extract operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.extract "gs://my-bucket/file-name.json", format: "json"
+        #
+        # @!group Data
+        #
+        def extract extract_url, format: nil, compression: nil, delimiter: nil,
+                    header: nil
+          job = extract_job extract_url, format: format,
+                                         compression: compression,
+                                         delimiter: delimiter, header: header
+          job.wait_until_done!
+
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
+          true
         end
 
         ##

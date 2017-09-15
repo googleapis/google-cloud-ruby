@@ -260,7 +260,7 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
-        #                               format: "json"
+        #                                   format: "json"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true
         def wait_until_done!
