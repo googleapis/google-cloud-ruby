@@ -21,7 +21,7 @@ module Google
       #
       # A {Job} subclass representing an export operation that may be performed
       # on a {Table}. A ExtractJob instance is created when you call
-      # {Table#extract}.
+      # {Table#extract_job}.
       #
       # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
       #   Exporting Data From BigQuery
@@ -38,7 +38,7 @@ module Google
 
         ##
         # The table from which the data is exported. This is the table upon
-        # which {Table#extract} was called. Returns a {Table} instance.
+        # which {Table#extract_job} was called. Returns a {Table} instance.
         def source
           table = @gapi.configuration.extract.source_table
           return nil unless table

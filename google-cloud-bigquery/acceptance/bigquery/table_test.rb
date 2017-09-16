@@ -389,7 +389,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.wont_be :failed?
   end
 
-  it "extracts data to a url in your bucket" do
+  it "extracts data to a url in your bucket with extract_job" do
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file
@@ -421,7 +421,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract extract_url, labels: labels
+        extract_job = table.extract_job extract_url, labels: labels
 
         extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
         extract_job.labels.must_equal labels
@@ -450,7 +450,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "extracts data to a file in your bucket" do
+  it "extracts data to a file in your bucket with extract_job" do
     begin
       # Make sure there is data to extract...
       load_job = table.load local_file
@@ -461,10 +461,65 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-        extract_job = table.extract extract_file, job_id: job_id
+        extract_job = table.extract_job extract_file, job_id: job_id
         extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?
+        # Refresh to get the latest file data
+        extract_file = bucket.file "kitten-test-data-backup.json"
+        downloaded_file = extract_file.download tmp.path
+        downloaded_file.size.must_be :>, 0
+      end
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "extracts data to a url in your bucket with extract" do
+    begin
+      # Make sure there is data to extract...
+      load_job = table.load local_file
+
+      load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      load_job.wait_until_done!
+
+      load_job.wont_be :failed?
+
+      Tempfile.open "empty_extract_file.json" do |tmp|
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
+        result = table.extract extract_url
+        result.must_equal true
+
+        extract_file = bucket.file "kitten-test-data-backup.json"
+        downloaded_file = extract_file.download tmp.path
+        downloaded_file.size.must_be :>, 0
+      end
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "extracts data to a file in your bucket with extract" do
+    begin
+      # Make sure there is data to extract...
+      load_job = table.load local_file
+      load_job.wait_until_done!
+      Tempfile.open "empty_extract_file.json" do |tmp|
+        tmp.size.must_equal 0
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
+
+        result = table.extract extract_file
+        result.must_equal true
         # Refresh to get the latest file data
         extract_file = bucket.file "kitten-test-data-backup.json"
         downloaded_file = extract_file.download tmp.path
