@@ -322,7 +322,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
-  it "imports data from a local file" do
+  it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id, labels: labels
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -334,7 +334,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a file in your bucket" do
+  it "imports data from a file in your bucket with load_job" do
     begin
       bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
       file = bucket.create_file local_file
@@ -342,6 +342,27 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       job = table.load_job file
       job.wait_until_done!
       job.wont_be :failed?
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "imports data from a local file with load" do
+    result = table.load local_file
+    result.must_equal true
+  end
+
+  it "imports data from a file in your bucket with load" do
+    begin
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file = bucket.create_file local_file
+
+      result = table.load file
+      result.must_equal true
     ensure
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
@@ -482,12 +503,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "extracts data to a url in your bucket with extract" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load_job local_file
-
-      load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      load_job.wait_until_done!
-
-      load_job.wont_be :failed?
+      result = table.load local_file
+      result.must_equal true
 
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
@@ -511,8 +528,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "extracts data to a file in your bucket with extract" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load_job local_file
-      load_job.wait_until_done!
+      result = table.load local_file
+      result.must_equal true
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"

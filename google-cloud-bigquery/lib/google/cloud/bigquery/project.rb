@@ -900,9 +900,9 @@ module Google
         # configure the schema, otherwise the schema is returned empty and may
         # be configured directly.
         #
-        # The returned schema can be passed to {Dataset#load_job} using the
+        # The returned schema can be passed to {Dataset#load} using the
         # `schema` option. However, for most use cases, the block yielded by
-        # {Dataset#load_job} is a more convenient way to configure the schema
+        # {Dataset#load} is a more convenient way to configure the schema
         # for the destination table.
         #
         # @yield [schema] a block for setting the schema
