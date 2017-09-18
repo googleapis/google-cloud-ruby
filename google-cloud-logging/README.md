@@ -8,17 +8,32 @@
 
 ## Quick Start
 
+Install the gem directly:
+
 ```sh
 $ gem install google-cloud-logging
 ```
 
-## Authentication
+Or install through Bundler:
 
-This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
+1. Add the `google-cloud-logging` gem to your Gemfile:
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/guides/authentication).
+```ruby
+gem "google-cloud-logging"
+```
 
-## Example
+2. Use Bundler to install the gem:
+
+```sh
+$ bundle install
+```
+
+Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes 
+the `google-cloud-logging` gem.
+
+## Logging using client library
+
+You can directly read or write log entries through the client library:
 
 ```ruby
 require "google/cloud/logging"
@@ -44,48 +59,102 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-## Rails Integration
+## Using Stackdriver Logging in frameworks
 
-This library also provides a built in Railtie for Ruby on Rails integration. When enabled, it sets an instance of Google::Cloud::Logging::Logger as the default Rails logger. Then all consequent log entries will be submitted to the Stackdriver Logging service.
+The `google-cloud-logging` library provides framework integration for popular 
+Rack-based frameworks, such as Ruby on Rails and Sinatra, which sets the default 
+Rack logger to an instance of the Stackdriver Logging logger.
 
-To do this, simply add this line to config/application.rb:
+### With Ruby on Rails
+
+You can load the Railtie that comes with the library into your Ruby 
+on Rails application by explicitly requiring it during the application startup:
+
 ```ruby
+# In config/application.rb
 require "google/cloud/logging/rails"
 ```
-Then the library can be configured through this set of Rails parameters in config/environments/*.rb:
+
+If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+your application when it starts.
+
+You'll be able to use Stackdriver logger through the standard Rails logger:
+
 ```ruby
-# Sharing authentication parameters
-config.google_cloud.project_id = "gcp-project-id"
-config.google_cloud.keyfile = "/path/to/gcp/secret.json"
-# Or more specificly for Logging
-config.google_cloud.logging.project_id = "gcp-project-id"
-config.google_cloud.logging.keyfile = "/path/to/gcp/sercret.json"
-
-# Explicitly enable or disable Logging
-config.google_cloud.use_logging = true
-
-# Set Stackdriver Logging log name
-config.google_cloud.logging.log_name = "my-app-log"
-
-# Override default monitored resource if needed. E.g. used on AWS
-config.google_cloud.logging.monitored_resource.type = "aws_ec2_instance"
-config.google_cloud.logging.monitored_resource.labels.instance_id = "ec2-instance-id"
-config.google_cloud.logging.monitored_resource.labels.aws_account = "AWS account number"
+Rails.logger.info "Hello World"
+# Or just...
+logger.warn "Hola Mundo"
 ```
-Alternatively, check out [stackdriver](../stackdriver) gem, which includes this Railtie by default.
 
-## Rack Integration
+### With other Rack-based frameworks
 
-Other Rack base framework can also directly leverage the built-in Middleware.
+Other Rack-based applications can use the Rack Middleware to replace the Rack 
+logger with the Stackdriver Logging logger:
+
 ```ruby
 require "google/cloud/logging"
-
-logging = Google::Cloud::Logging.new
-resource = Google::Cloud::Logging::Middleware.build_monitored_resource
-logger = logging.logger "my-log-name",
-                        resource
-use Google::Cloud::Logging::Middleware, logger: logger
+use Google::Cloud::Logging::Middleware
 ```
+
+Once the Rack logger is set, some Rack-based frameworks, such as Ruby on Rails 
+and Sinatra, automatically initialize the default application logger to use the 
+Rack logger:
+
+```ruby
+logger.info "Hello World"
+logger.warn "Hola Mundo"
+logger.error "Bonjour Monde"
+```
+
+For other frameworks, consult the documentations on how to utilize the Rack 
+logger.
+
+### Configuring the framework integration
+
+You can customize the behavior of the Stackdriver Logging framework integration 
+for Ruby. See the [configuration guide](../stackdriver/configuration.md) for a 
+list of possible configuration options.
+
+## Authentication
+
+This library uses Service Account credentials to connect to Google Cloud 
+services. When running on Compute Engine the credentials will be discovered 
+automatically. When running on other environments the Service Account 
+credentials can be specified by providing in several ways.
+
+If you're using Ruby on Rails and the library's Rails integration feature, you 
+can provide the authentication parameters through the Rails configuration 
+interface:
+ 
+```ruby
+# Add this to config/environments/*.rb
+Rails.application.configure do |config|
+  # Shared parameters
+  config.google_cloud.project_id = "your-project-id"
+  config.google_cloud.keyfile = "/path/to/key.json"
+  # Stackdriver Logging specific parameters
+  config.google_cloud.logging.project_id = "your-project-id"
+  config.google_cloud.logging.keyfile    = "/path/to/key.json"
+end
+```
+Other Rack-based applications that are loading the Rack Middleware directly can 
+use the configration interface:
+
+```ruby
+require "google/cloud/logging"
+Google::Cloud.configure do |config|
+  # Shared parameters
+  config.project_id = "your-project-id"
+  config.keyfile = "/path/to/key.json"
+  # Or Stackdriver logging specific parameters
+  config.logging.project_id = "your-project-id"
+  config.logging.keyfile = "/path/to/key.json"
+end
+```
+
+See the [Authentication 
+Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/guides/authentication).
+for more ways to authenticate the client library.
 
 ## Supported Ruby Versions
 
