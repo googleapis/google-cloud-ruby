@@ -625,7 +625,9 @@ class MockBigquery < Minitest::Spec
         "tableId" => table_id
       }
     }
-    Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp.status = status "done"
+    resp
   end
 
   def status state = "running"
