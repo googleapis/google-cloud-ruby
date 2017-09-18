@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :load_job, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_file
+    job = table.load_job load_file
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, format: :csv
+    job = table.load_job special_file, format: :csv
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
+    job = table.load_job special_file
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -94,7 +94,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
+    job = table.load_job special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
+    job = table.load_job special_file
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -130,7 +130,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
+    job = table.load_job special_file
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -149,7 +149,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, projection_fields: projection_fields
+    job = table.load_job special_file, projection_fields: projection_fields
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -162,7 +162,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url
+    job = table.load_job load_url
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -176,7 +176,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, dryrun: true
+    job = table.load_job load_url, dryrun: true
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -190,7 +190,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, create: "CREATE_NEVER"
+    job = table.load_job load_url, create: "CREATE_NEVER"
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -204,7 +204,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, create: :never
+    job = table.load_job load_url, create: :never
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -218,7 +218,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, write: "WRITE_TRUNCATE"
+    job = table.load_job load_url, write: "WRITE_TRUNCATE"
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -232,7 +232,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, write: :truncate
+    job = table.load_job load_url, write: :truncate
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -246,7 +246,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_file, labels: labels
+    job = table.load_job load_file, labels: labels
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.labels.must_equal labels
 
