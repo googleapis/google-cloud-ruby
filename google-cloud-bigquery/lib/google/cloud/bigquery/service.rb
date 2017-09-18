@@ -61,7 +61,7 @@ module Google
             service.client_options.open_timeout_sec = timeout
             service.client_options.read_timeout_sec = timeout
             service.client_options.send_timeout_sec = timeout
-            service.request_options.retries = @retries || 3
+            service.request_options.retries = 0 # handle retries in #execute
             service.request_options.header ||= {}
             service.request_options.header["x-goog-api-client"] = \
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
@@ -75,7 +75,8 @@ module Google
         # Lists all datasets in the specified project to which you have
         # been granted the READER dataset role.
         def list_datasets options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_datasets \
               @project, all: options[:all], filter: options[:filter],
                         max_results: options[:max], page_token: options[:token]
@@ -85,7 +86,8 @@ module Google
         ##
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
-          execute { service.get_dataset @project, dataset_id }
+          # The get operation is considered idempotent
+          execute(backoff: true) { service.get_dataset @project, dataset_id }
         end
 
         ##
@@ -98,11 +100,14 @@ module Google
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
         def patch_dataset dataset_id, patched_dataset_gapi
+          patch_with_backoff = false
           options = {}
           if patched_dataset_gapi.etag
             options[:header] = { "If-Match" => patched_dataset_gapi.etag }
+            # The patch with etag operation is considered idempotent
+            patch_with_backoff = true
           end
-          execute do
+          execute backoff: patch_with_backoff do
             service.patch_dataset @project, dataset_id, patched_dataset_gapi,
                                   options: options
           end
@@ -124,7 +129,8 @@ module Google
         # Lists all tables in the specified dataset.
         # Requires the READER dataset role.
         def list_tables dataset_id, options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_tables @project, dataset_id,
                                 max_results: options[:max],
                                 page_token: options[:token]
@@ -132,7 +138,10 @@ module Google
         end
 
         def get_project_table project_id, dataset_id, table_id
-          execute { service.get_table project_id, dataset_id, table_id }
+          # The get operation is considered idempotent
+          execute backoff: true do
+            service.get_table project_id, dataset_id, table_id
+          end
         end
 
         ##
@@ -141,7 +150,10 @@ module Google
         # it only returns the table resource,
         # which describes the structure of this table.
         def get_table dataset_id, table_id
-          execute { get_project_table @project, dataset_id, table_id }
+          # The get operation is considered idempotent
+          execute backoff: true do
+            get_project_table @project, dataset_id, table_id
+          end
         end
 
         ##
@@ -154,11 +166,14 @@ module Google
         # Updates information in an existing table, replacing fields that
         # are provided in the submitted table resource.
         def patch_table dataset_id, table_id, patched_table_gapi
+          patch_with_backoff = false
           options = {}
           if patched_table_gapi.etag
             options[:header] = { "If-Match" => patched_table_gapi.etag }
+            # The patch with etag operation is considered idempotent
+            patch_with_backoff = true
           end
-          execute do
+          execute backoff: patch_with_backoff do
             service.patch_table @project, dataset_id, table_id,
                                 patched_table_gapi, options: options
           end
@@ -174,7 +189,8 @@ module Google
         ##
         # Retrieves data from the table.
         def list_tabledata dataset_id, table_id, options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_table_data @project, dataset_id, table_id,
                                     max_results: options.delete(:max),
                                     page_token: options.delete(:token),
@@ -195,7 +211,8 @@ module Google
             skip_invalid_rows: options[:skip_invalid]
           )
 
-          execute do
+          # The insertAll with insertId operation is considered idempotent
+          execute backoff: true do
             service.insert_all_table_data(
               @project, dataset_id, table_id, insert_req)
           end
@@ -205,7 +222,8 @@ module Google
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
         def list_jobs options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_jobs \
               @project, all_users: options[:all], max_results: options[:max],
                         page_token: options[:token], projection: "full",
@@ -222,25 +240,30 @@ module Google
         ##
         # Returns the job specified by jobID.
         def get_job job_id
-          execute { service.get_job @project, job_id }
+          # The get operation is considered idempotent
+          execute(backoff: true) { service.get_job @project, job_id }
         end
 
         def insert_job config
           job_object = API::Job.new(
+            job_reference: job_ref_from(nil, nil),
             configuration: config
           )
-          execute { service.insert_job @project, job_object }
+          # Jobs have generated id, so this operation is considered idempotent
+          execute(backoff: true) { service.insert_job @project, job_object }
         end
 
         def query_job query, options = {}
           config = query_table_config(query, options)
-          execute { service.insert_job @project, config }
+          # Jobs have generated id, so this operation is considered idempotent
+          execute(backoff: true) { service.insert_job @project, config }
         end
 
         ##
         # Returns the query data for the job
         def job_query_results job_id, options = {}
-          execute do
+          # The get operation is considered idempotent
+          execute backoff: true do
             service.get_job_query_results @project,
                                           job_id,
                                           max_results: options.delete(:max),
@@ -251,21 +274,24 @@ module Google
         end
 
         def copy_table source, target, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job @project, copy_table_config(
               source, target, options)
           end
         end
 
         def extract_table table, storage_files, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, extract_table_config(table, storage_files, options)
           end
         end
 
         def load_table_gs_url dataset_id, table_id, url, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, load_table_url_config(dataset_id, table_id,
                                               url, options)
@@ -273,7 +299,8 @@ module Google
         end
 
         def load_table_file dataset_id, table_id, file, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, load_table_file_config(
                 dataset_id, table_id, file, options),
@@ -304,7 +331,7 @@ module Google
         ##
         # Lists all projects to which you have been granted any project role.
         def list_projects options = {}
-          execute do
+          execute backoff: true do
             service.list_projects max_results: options[:max],
                                   page_token: options[:token]
           end
@@ -635,10 +662,71 @@ module Google
           end
         end
 
-        def execute
-          yield
+        def execute backoff: nil
+          if backoff
+            Backoff.new(retries: retries).execute { yield }
+          else
+            yield
+          end
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error(e)
+        end
+
+        class Backoff
+          class << self
+            attr_accessor :retries
+            attr_accessor :reasons
+            attr_accessor :backoff
+          end
+          self.retries = 5
+          self.reasons = %w(rateLimitExceeded backendError)
+          self.backoff = lambda do |retries|
+            # Max delay is 32 seconds
+            # See "Back-off Requirements" here:
+            # https://cloud.google.com/bigquery/sla
+            retries = 5 if retries > 5
+            delay = 2 ** retries
+            sleep delay
+          end
+
+          def initialize options = {}
+            @retries = (options[:retries] || Backoff.retries).to_i
+            @reasons = (options[:reasons] || Backoff.reasons).to_a
+            @backoff =  options[:backoff] || Backoff.backoff
+          end
+
+          def execute
+            current_retries = 0
+            loop do
+              begin
+                return yield
+              rescue Google::Apis::Error => e
+                raise e unless retry? e.body, current_retries
+
+                @backoff.call current_retries
+                current_retries += 1
+              end
+            end
+          end
+
+          protected
+
+          def retry? result, current_retries #:nodoc:
+            if current_retries < @retries
+              return true if retry_error_reason? result
+            end
+            false
+          end
+
+          def retry_error_reason? err_body
+            err_hash = JSON.parse err_body
+            Array(err_hash["error"]["errors"]).each do |error|
+              return true if @reasons.include? error["reason"]
+            end
+            false
+          rescue
+            false
+          end
         end
       end
     end
