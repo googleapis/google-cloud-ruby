@@ -36,7 +36,7 @@ table = dataset.create_table "todos",
 
 # Load data into the table
 file = File.open "/archive/todos/completed-todos.csv"
-load_job = table.load_job file
+table.load file
 
 # Run a query for the number of completed todos by owner
 count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"

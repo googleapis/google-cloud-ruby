@@ -657,7 +657,7 @@ module Google
         # method. In this method, a {CopyJob} is immediately returned. The
         # caller may poll the service by repeatedly calling {Job#reload!} and
         # {Job#done?} to detect when the job is done, or simply block until the
-        # job is done by calling #{Job#wait_until_done!}. See also #{#copy}.
+        # job is done by calling #{Job#wait_until_done!}. See also {#copy}.
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
@@ -743,7 +743,7 @@ module Google
         # Copies the data from the table to another table using a synchronous
         # method that blocks for a response. Timeouts and transient errors are
         # generally handled as needed to complete the job. See also
-        # #{#copy_job}.
+        # {#copy_job}.
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
@@ -815,7 +815,7 @@ module Google
         # returned. The caller may poll the service by repeatedly calling
         # {Job#reload!} and {Job#done?} to detect when the job is done, or
         # simply block until the job is done by calling #{Job#wait_until_done!}.
-        # See also #{#extract}.
+        # See also {#extract}.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -891,7 +891,7 @@ module Google
         # Extracts the data from the table to a Google Cloud Storage file using
         # a synchronous method that blocks for a response. Timeouts and
         # transient errors are generally handled as needed to complete the job.
-        # See also #{#extract_job}.
+        # See also {#extract_job}.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -1123,6 +1123,169 @@ module Google
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           fail Google::Cloud::Error, "Don't know how to load #{file}"
+        end
+
+        ##
+        # Loads data into the table. You can pass a google-cloud storage file
+        # path or a google-cloud storage file instance. Or, you can upload a
+        # file directly. See [Loading Data with a POST Request](
+        # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # @param [File, Google::Cloud::Storage::File, String] file A file or the
+        #   URI of a Google Cloud Storage file containing data to load into the
+        #   table.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `datastore_backup` - Cloud Datastore backup
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the table. The default value is `append`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the table already contains
+        #     data.
+        # @param [Array<String>] projection_fields If the `format` option is set
+        #   to `datastore_backup`, indicates which entity properties to load
+        #   from a Cloud Datastore backup. Property names are case sensitive and
+        #   must be top-level properties. If not set, BigQuery loads all
+        #   properties. If any named property isn't found in the Cloud Datastore
+        #   backup, an invalid error is returned.
+        # @param [Boolean] jagged_rows Accept rows that are missing trailing
+        #   optional columns. The missing values are treated as nulls. If
+        #   `false`, records with missing trailing columns are treated as bad
+        #   records, and if there are too many bad records, an invalid error is
+        #   returned in the job result. The default value is `false`. Only
+        #   applicable to CSV, ignored for other formats.
+        # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
+        #   quoted data sections that contain newline characters in a CSV file.
+        #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
+        # @param [String] encoding The character encoding of the data. The
+        #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
+        #   `UTF-8`.
+        # @param [String] delimiter Specifices the separator for fields in a CSV
+        #   file. BigQuery converts the string to `ISO-8859-1` encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. Default is <code>,</code>.
+        # @param [Boolean] ignore_unknown Indicates if BigQuery should allow
+        #   extra values that are not represented in the table schema. If true,
+        #   the extra values are ignored. If false, records with extra columns
+        #   are treated as bad records, and if there are too many bad records,
+        #   an invalid error is returned in the job result. The default value is
+        #   `false`.
+        #
+        #   The `format` property determines what BigQuery treats as an extra
+        #   value:
+        #
+        #   * `CSV`: Trailing columns
+        #   * `JSON`: Named values that don't match any column names
+        # @param [Integer] max_bad_records The maximum number of bad records
+        #   that BigQuery can ignore when running the job. If the number of bad
+        #   records exceeds this value, an invalid error is returned in the job
+        #   result. The default value is `0`, which requires that all records
+        #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
+        # @param [String] quote The value that is used to quote data sections in
+        #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. The default value is a double-quote
+        #   <code>"</code>. If your data does not contain quoted sections, set
+        #   the property value to an empty string. If your data contains quoted
+        #   newline characters, you must also set the allowQuotedNewlines
+        #   property to true.
+        # @param [Integer] skip_leading The number of rows at the top of a CSV
+        #   file that BigQuery will skip when loading the data. The default
+        #   value is `0`. This property is useful if you have header rows in the
+        #   file that should be skipped.
+        #
+        # @return [Google::Cloud::Bigquery::LoadJob]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   load_job = table.load_job "gs://my-bucket/file-name.csv"
+        #
+        # @example Pass a google-cloud-storage `File` instance:
+        #   require "google/cloud/bigquery"
+        #   require "google/cloud/storage"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "file-name.csv"
+        #   load_job = table.load_job file
+        #
+        # @example Upload a file directly:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   file = File.open "my_data.csv"
+        #   load_job = table.load_job file
+        #
+        # @!group Data
+        #
+        def load file, format: nil, create: nil, write: nil,
+                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
+                 encoding: nil, delimiter: nil, ignore_unknown: nil,
+                 max_bad_records: nil, quote: nil, skip_leading: nil,
+                 autodetect: nil, null_marker: nil
+          job = load_job file, format: format, create: create, write: write,
+                               projection_fields: projection_fields,
+                               jagged_rows: jagged_rows,
+                               quoted_newlines: quoted_newlines,
+                               encoding: encoding, delimiter: delimiter,
+                               ignore_unknown: ignore_unknown,
+                               max_bad_records: max_bad_records, quote: quote,
+                               skip_leading: skip_leading,
+                               autodetect: autodetect, null_marker: null_marker
+
+          job.wait_until_done!
+
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
+          true
         end
 
         ##

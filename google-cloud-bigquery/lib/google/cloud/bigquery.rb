@@ -370,7 +370,7 @@ module Google
     # end
     #
     # file = File.open "names/yob2014.txt"
-    # load_job = table.load_job file, format: "csv"
+    # table.load file, format: "csv"
     # ```
     #
     # Because the names data, although formatted as CSV, is distributed in files
