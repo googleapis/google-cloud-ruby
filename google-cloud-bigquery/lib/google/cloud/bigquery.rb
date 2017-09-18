@@ -468,7 +468,7 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/bigquery`
       # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
+      #   error. The default value is `5`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       #
       # @return [Google::Cloud::Bigquery::Project]

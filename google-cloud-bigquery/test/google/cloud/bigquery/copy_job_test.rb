@@ -67,6 +67,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     bigquery.service.mocked_service = mock
 
     rerun_job_gapi = Google::Apis::BigqueryV2::Job.new(
+      job_reference: job_reference_gapi(project, "job_9876543210"),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.from_json(job.configuration.to_json)
     )
     mock.expect :insert_job, copy_job_gapi(job.job_id + "-rerun"), [project, rerun_job_gapi]
