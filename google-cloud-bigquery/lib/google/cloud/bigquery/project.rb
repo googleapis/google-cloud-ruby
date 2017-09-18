@@ -900,10 +900,10 @@ module Google
         # configure the schema, otherwise the schema is returned empty and may
         # be configured directly.
         #
-        # The returned schema can be passed to {Dataset#load} using the `schema`
-        # option. However, for most use cases, the block yielded by
-        # {Dataset#load} is a more convenient way to configure the schema for
-        # the destination table.
+        # The returned schema can be passed to {Dataset#load_job} using the
+        # `schema` option. However, for most use cases, the block yielded by
+        # {Dataset#load_job} is a more convenient way to configure the schema
+        # for the destination table.
         #
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
@@ -926,7 +926,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
-        #   load_job = dataset.load "my_new_table", gs_url, schema: schema
+        #   load_job = dataset.load_job "my_new_table", gs_url, schema: schema
         #
         def schema
           s = Schema.from_gapi

@@ -1077,7 +1077,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   load_job = table.load "gs://my-bucket/file-name.csv"
+        #   load_job = table.load_job "gs://my-bucket/file-name.csv"
         #
         # @example Pass a google-cloud-storage `File` instance:
         #   require "google/cloud/bigquery"
@@ -1090,7 +1090,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "file-name.csv"
-        #   load_job = table.load file
+        #   load_job = table.load_job file
         #
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
@@ -1100,16 +1100,16 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   file = File.open "my_data.csv"
-        #   load_job = table.load file
+        #   load_job = table.load_job file
         #
         # @!group Data
         #
-        def load file, format: nil, create: nil, write: nil,
-                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
-                 encoding: nil, delimiter: nil, ignore_unknown: nil,
-                 max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, job_id: nil, prefix: nil, labels: nil,
-                 autodetect: nil, null_marker: nil
+        def load_job file, format: nil, create: nil, write: nil,
+                     projection_fields: nil, jagged_rows: nil,
+                     quoted_newlines: nil, encoding: nil, delimiter: nil,
+                     ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                     skip_leading: nil, dryrun: nil, job_id: nil, prefix: nil,
+                     labels: nil, autodetect: nil, null_marker: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -1127,7 +1127,7 @@ module Google
 
         ##
         # Inserts data into the table for near-immediate querying, without the
-        # need to complete a #load operation before the data can appear in query
+        # need to complete a load operation before the data can appear in query
         # results.
         #
         # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery

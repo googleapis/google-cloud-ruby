@@ -198,11 +198,11 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Bigquery::Dataset#load@Upload a file directly:" do
+  doctest.before "Google::Cloud::Bigquery::Dataset#load_job@Upload a file directly:" do
     skip "This creates a File object, which is difficult to mock with doctest."
   end
 
-  doctest.before "Google::Cloud::Bigquery::Dataset#load@Pass a google-cloud-storage `File` instance:" do
+  doctest.before "Google::Cloud::Bigquery::Dataset#load_job@Pass a google-cloud-storage `File` instance:" do
     mock_storage do |mock|
       mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket", Hash]
       mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", Hash]
@@ -474,11 +474,11 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Bigquery::Table#load@Upload a file directly:" do
+  doctest.before "Google::Cloud::Bigquery::Table#load_job@Upload a file directly:" do
     skip "This creates a File object, which is difficult to mock with doctest."
   end
 
-  doctest.before "Google::Cloud::Bigquery::Table#load@Pass a google-cloud-storage `File` instance:" do
+  doctest.before "Google::Cloud::Bigquery::Table#load_job@Pass a google-cloud-storage `File` instance:" do
     mock_storage do |mock|
       mock.expect :get_bucket,  OpenStruct.new(name: "my-bucket"), ["my-bucket", Hash]
       mock.expect :get_object,  OpenStruct.new(bucket: "my-bucket", name: "path/to/audio.raw"), ["my-bucket", "file-name.csv", Hash]

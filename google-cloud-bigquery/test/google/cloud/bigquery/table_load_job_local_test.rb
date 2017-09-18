@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
   let(:dataset) { "dataset" }
   let(:table_id) { "table_id" }
   let(:table_name) { "Target Table" }
@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
         [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv
+      job = table.load_job file, format: :csv
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
         [project, load_job_csv_options_gapi(table_gapi.table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
+      job = table.load_job file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
         [project, load_job_gapi(table_gapi.table_reference), upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON"
+      job = table.load_job file, format: "JSON"
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
     table.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"
-    job = table.load local_json
+    job = table.load_job local_json
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -98,7 +98,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON", job_id: job_id
+      job = table.load_job file, format: "JSON", job_id: job_id
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
@@ -119,7 +119,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON", prefix: prefix
+      job = table.load_job file, format: "JSON", prefix: prefix
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
@@ -137,7 +137,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON", job_id: job_id, prefix: "IGNORED"
+      job = table.load_job file, format: "JSON", job_id: job_id, prefix: "IGNORED"
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", labels: labels),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON", labels: labels
+      job = table.load_job file, format: "JSON", labels: labels
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.labels.must_equal labels
     end

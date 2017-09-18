@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
+describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
@@ -34,7 +34,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.csv"),
         [project, load_job_gapi(table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = dataset.load table_id, file, format: :csv
+      job = dataset.load_job table_id, file, format: :csv
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
     mock.verify
@@ -48,7 +48,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.csv"),
         [project, load_job_csv_options_gapi(table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = dataset.load table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
+      job = dataset.load_job table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.json"),
         [project, load_job_gapi(table_reference), upload_source: file, content_type: "application/json"]
 
-      job = dataset.load table_id, file, format: "JSON"
+      job = dataset.load_job table_id, file, format: "JSON"
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
@@ -83,7 +83,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"
-    job = dataset.load table_id, local_json
+    job = dataset.load_job table_id, local_json
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -99,7 +99,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = dataset.load table_id, file, format: "JSON", job_id: job_id
+      job = dataset.load_job table_id, file, format: "JSON", job_id: job_id
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = dataset.load table_id, file, format: "JSON", prefix: prefix
+      job = dataset.load_job table_id, file, format: "JSON", prefix: prefix
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
@@ -138,7 +138,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi("some/file/path.json", job_id: job_id),
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
-      job = dataset.load table_id, file, format: "JSON", job_id: job_id, prefix: "IGNORED"
+      job = dataset.load_job table_id, file, format: "JSON", job_id: job_id, prefix: "IGNORED"
       job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       job.job_id.must_equal job_id
     end
