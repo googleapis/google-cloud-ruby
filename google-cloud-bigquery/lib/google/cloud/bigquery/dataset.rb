@@ -1149,7 +1149,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
-        #   load_job = dataset.load "my_new_table", gs_url do |schema|
+        #   load_job = dataset.load_job "my_new_table", gs_url do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -1167,7 +1167,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "file-name.csv"
-        #   load_job = dataset.load "my_new_table", file do |schema|
+        #   load_job = dataset.load_job "my_new_table", file do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -1182,7 +1182,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   file = File.open "my_data.csv"
-        #   load_job = dataset.load "my_new_table", file do |schema|
+        #   load_job = dataset.load_job "my_new_table", file do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -1196,18 +1196,18 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   load_job = dataset.load "my_new_table",
+        #   load_job = dataset.load_job "my_new_table",
         #                           "gs://my-bucket/xxxx.kind_name.backup_info",
         #                           format: "datastore_backup"
         #
         # @!group Data
         #
-        def load table_id, file, format: nil, create: nil, write: nil,
-                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
-                 encoding: nil, delimiter: nil, ignore_unknown: nil,
-                 max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, schema: nil, job_id: nil, prefix: nil,
-                 labels: nil, autodetect: nil, null_marker: nil
+        def load_job table_id, file, format: nil, create: nil, write: nil,
+                     projection_fields: nil, jagged_rows: nil,
+                     quoted_newlines: nil, encoding: nil, delimiter: nil,
+                     ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                     skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
+                     prefix: nil, labels: nil, autodetect: nil, null_marker: nil
           ensure_service!
 
           if block_given?
@@ -1242,7 +1242,7 @@ module Google
 
         ##
         # Inserts data into the given table for near-immediate querying, without
-        # the need to complete a #load operation before the data can appear in
+        # the need to complete a load operation before the data can appear in
         # query results.
         #
         # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery

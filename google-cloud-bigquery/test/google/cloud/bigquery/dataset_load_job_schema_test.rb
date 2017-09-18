@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
+describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
-    job = dataset.load table_id, load_file, create: :needed do |schema|
+    job = dataset.load_job table_id, load_file, create: :needed do |schema|
       schema.string "name", mode: :required
       schema.integer "age"
       schema.float "score", description: "A score from 0.0 to 10.0"
@@ -96,7 +96,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     schema.boolean "active"
     schema.bytes "avatar"
 
-    job = dataset.load table_id, load_file, create: :needed, schema: schema
+    job = dataset.load_job table_id, load_file, create: :needed, schema: schema
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     schema.string "name", mode: :required
     schema.integer "age"
 
-    job = dataset.load table_id, load_file, create: :needed, schema: schema do |schema|
+    job = dataset.load_job table_id, load_file, create: :needed, schema: schema do |schema|
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
       schema.bytes "avatar"
