@@ -158,9 +158,9 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports data from a local file and creates a new table with specified schema in a block" do
+  it "imports data from a local file and creates a new table with specified schema in a block with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = dataset.load "local_file_table", local_file, job_id: job_id do |schema|
+    job = dataset.load_job "local_file_table", local_file, job_id: job_id do |schema|
       schema.integer  "id",     description: "id description",    mode: :required
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
@@ -172,7 +172,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a local file and creates a new table with specified schema as an option" do
+  it "imports data from a local file and creates a new table with specified schema as an option with load_job" do
     schema = bigquery.schema do |s|
       s.integer  "id",     description: "id description",    mode: :required
       s.string    "breed", description: "breed description", mode: :required
@@ -180,16 +180,43 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       s.timestamp "dob",   description: "dob description",   mode: :required
     end
 
-    job = dataset.load "local_file_table_2", local_file, schema: schema
+    job = dataset.load_job "local_file_table_2", local_file, schema: schema
 
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a local file and creates a new table without a schema" do
-    job = dataset.load table_with_schema.table_id, local_file, create: :never
+  it "imports data from a local file and creates a new table without a schema with load_job" do
+    job = dataset.load_job table_with_schema.table_id, local_file, create: :never
     job.wait_until_done!
     job.output_rows.must_equal 3
+  end
+
+  it "imports data from a local file and creates a new table with specified schema in a block with load" do
+    result = dataset.load "local_file_table", local_file do |schema|
+      schema.integer  "id",     description: "id description",    mode: :required
+      schema.string    "breed", description: "breed description", mode: :required
+      schema.string    "name",  description: "name description",  mode: :required
+      schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+    result.must_equal true
+  end
+
+  it "imports data from a local file and creates a new table with specified schema as an option with load" do
+    schema = bigquery.schema do |s|
+      s.integer  "id",     description: "id description",    mode: :required
+      s.string    "breed", description: "breed description", mode: :required
+      s.string    "name",  description: "name description",  mode: :required
+      s.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    result = dataset.load "local_file_table_2", local_file, schema: schema
+    result.must_equal true
+  end
+
+  it "imports data from a local file and creates a new table without a schema with load" do
+    result = dataset.load table_with_schema.table_id, local_file, create: :never
+    result.must_equal true
   end
 
   it "inserts rows directly and gets its data" do

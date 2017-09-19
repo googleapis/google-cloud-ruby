@@ -22,7 +22,8 @@ module Google
       # # LoadJob
       #
       # A {Job} subclass representing a load operation that may be performed
-      # on a {Table}. A LoadJob instance is created when you call {Table#load}.
+      # on a {Table}. A LoadJob instance is created when you call
+      # {Table#load_job}.
       #
       # @see https://cloud.google.com/bigquery/loading-data-into-bigquery
       #   Loading Data Into BigQuery
@@ -39,7 +40,7 @@ module Google
 
         ##
         # The table into which the operation loads data. This is the table on
-        # which {Table#load} was invoked. Returns a {Table} instance.
+        # which {Table#load_job} was invoked. Returns a {Table} instance.
         def destination
           table = @gapi.configuration.load.destination_table
           return nil unless table

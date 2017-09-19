@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2015 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :load_job, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -22,16 +22,14 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
   let(:load_file) { storage_file }
   let(:load_url) { load_file.to_gs_url }
 
-  let(:dataset_id) { "my_dataset" }
-  let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
-                                                      bigquery.service }
+  let(:dataset) { "dataset" }
   let(:table_id) { "table_id" }
-  let(:table_reference) { Google::Apis::BigqueryV2::TableReference.new(
-    project_id: "test-project",
-    dataset_id: "my_dataset",
-    table_id: "table_id"
-  ) }
+  let(:table_name) { "Target Table" }
+  let(:description) { "This is the target table" }
+  let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
+  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:labels) { { "foo" => "bar" } }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -40,13 +38,13 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
 
   it "can specify a storage file" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi(table_reference, load_url)
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_file
-    result.must_equal true
+    job = table.load_job load_file
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -56,14 +54,14 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     special_url = special_file.to_gs_url
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
     job_gapi.configuration.load.source_format = "CSV"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file, format: :csv
-    result.must_equal true
+    job = table.load_job special_file, format: :csv
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -73,14 +71,14 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     special_url = special_file.to_gs_url
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
     job_gapi.configuration.load.source_format = "CSV"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file
-    result.must_equal true
+    job = table.load_job special_file
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -90,16 +88,16 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     special_url = special_file.to_gs_url
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_csv_options_gapi table_reference
+    job_gapi = load_job_csv_options_gapi table_gapi.table_reference
     job_gapi.configuration.load.source_uris = [special_url]
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
+    job = table.load_job special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
-    result.must_equal true
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -109,14 +107,14 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     special_url = special_file.to_gs_url
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
     job_gapi.configuration.load.source_format = "AVRO"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file
-    result.must_equal true
+    job = table.load_job special_file
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -126,14 +124,14 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     special_url = special_file.to_gs_url
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
     job_gapi.configuration.load.source_format = "DATASTORE_BACKUP"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file
-    result.must_equal true
+    job = table.load_job special_file
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -144,86 +142,130 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     projection_fields = ["first_name"]
 
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
     job_gapi.configuration.load.source_format = "DATASTORE_BACKUP"
     job_gapi.configuration.load.projection_fields = projection_fields
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, special_file, projection_fields: projection_fields
-    result.must_equal true
+    job = table.load_job special_file, projection_fields: projection_fields
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
 
   it "can specify a storage url" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, load_url
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_url
-    result.must_equal true
+    job = table.load_job load_url
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
+  it "can load itself as a dryrun" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi.configuration.dry_run = true
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
+      [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job load_url, dryrun: true
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
 
   it "can load itself with create disposition" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     job_gapi.configuration.load.create_disposition = "CREATE_NEVER"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_url, create: "CREATE_NEVER"
-    result.must_equal true
+    job = table.load_job load_url, create: "CREATE_NEVER"
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
 
   it "can load itself with create disposition symbol" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     job_gapi.configuration.load.create_disposition = "CREATE_NEVER"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_url, create: :never
-    result.must_equal true
+    job = table.load_job load_url, create: :never
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
 
   it "can load itself with write disposition" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     job_gapi.configuration.load.write_disposition = "WRITE_TRUNCATE"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_url, write: "WRITE_TRUNCATE"
-    result.must_equal true
+    job = table.load_job load_url, write: "WRITE_TRUNCATE"
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
 
   it "can load itself with write disposition symbol" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     job_gapi.configuration.load.write_disposition = "WRITE_TRUNCATE"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
-    dataset.service.mocked_service = mock
+    table.service.mocked_service = mock
 
-    result = dataset.load table_id, load_url, write: :truncate
-    result.must_equal true
+    job = table.load_job load_url, write: :truncate
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
+  end
+
+  it "can load a storage file with the job labels option" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi.configuration.labels = labels
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url, labels: labels),
+      [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job load_file, labels: labels
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.labels.must_equal labels
+
+    mock.verify
+  end
+
+  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
+    hash = random_job_hash job_id
+    hash["configuration"]["load"] = {
+      "sourceUris" => [load_url],
+      "destinationTable" => {
+        "projectId" => table.project_id,
+        "datasetId" => table.dataset_id,
+        "tableId" => table.table_id
+      },
+    }
+    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp.configuration.labels = labels if labels
+    resp
   end
 
   # Borrowed from MockStorage, load to a common module?

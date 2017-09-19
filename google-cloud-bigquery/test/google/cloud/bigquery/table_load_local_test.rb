@@ -22,7 +22,6 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
-  let(:labels) { { "foo" => "bar" } }
 
   it "can upload a csv file" do
     mock = Minitest::Mock.new
@@ -32,8 +31,8 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
         [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result = table.load file, format: :csv
+      result.must_equal true
     end
 
     mock.verify
@@ -47,10 +46,10 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
         [project, load_job_csv_options_gapi(table_gapi.table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
+      result = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result.must_equal true
     end
 
     mock.verify
@@ -68,8 +67,8 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
         [project, load_job_gapi(table_gapi.table_reference), upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result = table.load file, format: "JSON"
+      result.must_equal true
     end
 
     mock.verify
@@ -82,89 +81,14 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
     table.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"
-    job = table.load local_json
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load local_json
+    result.must_equal true
 
     mock.verify
   end
 
-  it "can upload a json file with job_id option" do
-    mock = Minitest::Mock.new
-    table.service.mocked_service = mock
-    job_id = "my_test_job_id"
-    job_gapi = load_job_gapi table_gapi.table_reference, job_id: job_id
-
-    temp_json do |file|
-      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
-
-      job = table.load file, format: "JSON", job_id: job_id
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
-    end
-
-    mock.verify
-  end
-
-  it "can upload a json file with prefix option" do
-    generated_id = "9876543210"
-    prefix = "my_test_job_prefix_"
-    job_id = prefix + generated_id
-
-    mock = Minitest::Mock.new
-    table.service.mocked_service = mock
-    job_gapi = load_job_gapi table_gapi.table_reference, job_id: job_id
-
-    temp_json do |file|
-      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
-
-      job = table.load file, format: "JSON", prefix: prefix
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
-    end
-
-    mock.verify
-  end
-
-  it "can upload a json file with job_id option if both job_id and prefix options are provided" do
-    mock = Minitest::Mock.new
-    table.service.mocked_service = mock
-    job_id = "my_test_job_id"
-    job_gapi = load_job_gapi table_gapi.table_reference, job_id: job_id
-
-    temp_json do |file|
-      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
-
-      job = table.load file, format: "JSON", job_id: job_id, prefix: "IGNORED"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
-    end
-
-    mock.verify
-  end
-
-  it "can upload a json file with the job labels option" do
-    mock = Minitest::Mock.new
-    table.service.mocked_service = mock
-    job_gapi = load_job_gapi(table_gapi.table_reference)
-    job_gapi.configuration.labels = labels
-
-    temp_json do |file|
-      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", labels: labels),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
-
-      job = table.load file, format: "JSON", labels: labels
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.labels.must_equal labels
-    end
-
-    mock.verify
-  end
-
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
-    hash = random_job_hash job_id
+  def load_job_resp_gapi table, load_url
+    hash = random_job_hash
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
       "destinationTable" => {
@@ -174,7 +98,7 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
       },
     }
     resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.configuration.labels = labels if labels
+    resp.status = status "done"
     resp
   end
 end

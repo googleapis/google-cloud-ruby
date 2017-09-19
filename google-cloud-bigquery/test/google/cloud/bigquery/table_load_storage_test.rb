@@ -29,7 +29,6 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
-  let(:labels) { { "foo" => "bar" } }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -39,12 +38,13 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   it "can specify a storage file" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
-    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
+    load_job_resp_gapi = load_job_resp_gapi(table, load_url)
+    mock.expect :insert_job, load_job_resp_gapi,
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_file
+    result.must_equal true
 
     mock.verify
   end
@@ -60,8 +60,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, format: :csv
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load special_file, format: :csv
+    result.must_equal true
 
     mock.verify
   end
@@ -77,8 +77,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load special_file
+    result.must_equal true
 
     mock.verify
   end
@@ -94,10 +94,10 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
+    result = table.load special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result.must_equal true
 
     mock.verify
   end
@@ -113,8 +113,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load special_file
+    result.must_equal true
 
     mock.verify
   end
@@ -130,8 +130,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load special_file
+    result.must_equal true
 
     mock.verify
   end
@@ -149,8 +149,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load special_file, projection_fields: projection_fields
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load special_file, projection_fields: projection_fields
+    result.must_equal true
 
     mock.verify
   end
@@ -162,22 +162,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-
-    mock.verify
-  end
-
-  it "can load itself as a dryrun" do
-    mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
-    job_gapi.configuration.dry_run = true
-    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
-      [project, job_gapi]
-    table.service.mocked_service = mock
-
-    job = table.load load_url, dryrun: true
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_url
+    result.must_equal true
 
     mock.verify
   end
@@ -190,8 +176,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, create: "CREATE_NEVER"
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_url, create: "CREATE_NEVER"
+    result.must_equal true
 
     mock.verify
   end
@@ -204,8 +190,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, create: :never
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_url, create: :never
+    result.must_equal true
 
     mock.verify
   end
@@ -218,8 +204,8 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, write: "WRITE_TRUNCATE"
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_url, write: "WRITE_TRUNCATE"
+    result.must_equal true
 
     mock.verify
   end
@@ -232,29 +218,14 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       [project, job_gapi]
     table.service.mocked_service = mock
 
-    job = table.load load_url, write: :truncate
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load load_url, write: :truncate
+    result.must_equal true
 
     mock.verify
   end
 
-  it "can load a storage file with the job labels option" do
-    mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
-    job_gapi.configuration.labels = labels
-    mock.expect :insert_job, load_job_resp_gapi(table, load_url, labels: labels),
-      [project, job_gapi]
-    table.service.mocked_service = mock
-
-    job = table.load load_file, labels: labels
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.labels.must_equal labels
-
-    mock.verify
-  end
-
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
-    hash = random_job_hash job_id
+  def load_job_resp_gapi table, load_url
+    hash = random_job_hash
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
       "destinationTable" => {
@@ -264,7 +235,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
       },
     }
     resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.configuration.labels = labels if labels
+    resp.status = status "done"
     resp
   end
 
