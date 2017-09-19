@@ -1297,7 +1297,7 @@ module Google
         #   Streaming Data Into BigQuery
         #
         # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
-        #   containing the data.
+        #   containing the data. Required.
         # @param [Boolean] skip_invalid Insert all valid rows of a request, even
         #   if invalid rows exist. The default value is `false`, which causes
         #   the entire request to fail if any invalid rows exist.
@@ -1324,6 +1324,7 @@ module Google
         #
         def insert rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
+          fail ArgumentError, "No rows provided" if rows.empty?
           rows = Convert.to_json_rows rows
           ensure_service!
           options = { skip_invalid: skip_invalid,
