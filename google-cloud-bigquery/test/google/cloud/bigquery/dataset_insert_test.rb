@@ -41,8 +41,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
@@ -61,8 +61,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
@@ -81,8 +81,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
     mock.expect :insert_all_table_data, failure_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
@@ -138,8 +138,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: true)
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
@@ -158,8 +158,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: insert_rows, ignore_unknown_values: true, skip_invalid_rows: nil)
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
@@ -205,8 +205,8 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
       rows: [inserted_row_gapi], ignore_unknown_values: nil, skip_invalid_rows: nil)
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
-    table.service.mocked_service = mock
+                [project, dataset_id, table_id, insert_req]
+    dataset.service.mocked_service = mock
 
     result = nil
     Digest::MD5.stub :base64digest, insert_id do
