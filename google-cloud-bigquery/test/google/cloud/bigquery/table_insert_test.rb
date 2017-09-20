@@ -30,6 +30,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
+  it "raises if rows is an empty array" do
+    expect { table.insert [] }.must_raise ArgumentError
+  end
+
   it "can insert one row" do
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
