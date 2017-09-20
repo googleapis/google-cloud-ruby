@@ -24,7 +24,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [BigQuery](#bigquery-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -37,6 +36,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 * [Cloud Monitoring API](#cloud-monitoring-api-alpha) (Alpha)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -579,7 +579,7 @@ $ gem install google-cloud-monitoring
  end
 ```
 
-### Cloud Video Intelligence API (Beta)
+### Cloud Video Intelligence API (Alpha)
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
 - [google-cloud-video_intelligence API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest)
