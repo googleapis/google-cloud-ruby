@@ -104,7 +104,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
           client = Google::Cloud::VideoIntelligence.new(version: :v1beta2)
 
           # Call method
-          response = client.annotate_video(input_uri, features)
+          response = client.annotate_video(input_uri: input_uri, features: features)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -144,7 +144,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
           client = Google::Cloud::VideoIntelligence.new(version: :v1beta2)
 
           # Call method
-          response = client.annotate_video(input_uri, features)
+          response = client.annotate_video(input_uri: input_uri, features: features)
 
           # Verify the response
           assert(response.error?)
@@ -176,7 +176,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.annotate_video(input_uri, features)
+            client.annotate_video(input_uri: input_uri, features: features)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
