@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.2 / 2017-09-20
+
+* Fix the bug where `Google::Cloud::Trace::Middleware` wasn't using the shared `project_id` parameter.
+
 ### 0.27.1 / 2017-09-08
 
 * Print captured exception from asynchronous worker thread.
