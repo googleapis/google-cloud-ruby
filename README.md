@@ -22,20 +22,20 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
+* [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
+* [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
+* [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Stackdriver Debugger](#stackdriver-debugger-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Stackdriver Error Reporting](#stackdriv-error-reporting-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Stackdriver Trace](#stackdriver-trace-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
-* [Cloud Monitoring API](#cloud-monitoring-api-alpha) (Alpha)
+* [Stackdriver Monitoring API](#stackdriver-monitoring-api-alpha) (Alpha)
 * [Cloud Video Intelligence API](#cloud-video-intelligence-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
@@ -141,7 +141,7 @@ query = datastore.query("Task").
 tasks = datastore.run query
 ```
 
-### Stackdriver Debugger (Alpha)
+### Stackdriver Debugger (Beta)
 
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
 - [google-cloud-debugger instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/instrumentation)
@@ -199,7 +199,7 @@ end
 
 ```
 
-### Stackdriver Error Reporting (Alpha)
+### Stackdriver Error Reporting (Beta)
 
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
 - [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
@@ -366,7 +366,7 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-### Stackdriver Trace (Alpha)
+### Stackdriver Trace (Beta)
 
 - [google-cloud-trace README](google-cloud-trace/README.md)
 - [google-cloud-trace instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/guides/instrumentation)
@@ -543,7 +543,7 @@ landmark = image.landmark
 landmark.description #=> "Mount Rushmore"
 ```
 
-### Cloud Monitoring API (Alpha)
+### Stackdriver Monitoring API (Alpha)
 
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
 - [google-cloud-monitoring API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest)
