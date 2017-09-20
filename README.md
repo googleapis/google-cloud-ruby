@@ -24,7 +24,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [BigQuery](#bigquery-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api-alpha) (Beta)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
