@@ -113,6 +113,7 @@ module Google
             credentials ||= Google::Cloud::VideoIntelligence::Credentials.default
 
             @operations_client = Google::Longrunning::OperationsClient.new(
+              service_path: service_path,
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
@@ -192,11 +193,11 @@ module Google
           #   multiple videos. Supported wildcards: '*' to match 0 or more characters;
           #   '?' to match 1 character. If unset, the input video should be embedded
           #   in the request as +input_content+. If set, +input_content+ should be unset.
-          # @param features [Array<Google::Cloud::Videointelligence::V1beta2::Feature>]
-          #   Requested video annotation features.
           # @param input_content [String]
           #   The video data bytes. Encoding: base64. If unset, the input video(s)
           #   should be specified via +input_uri+. If set, +input_uri+ should be unset.
+          # @param features [Array<Google::Cloud::Videointelligence::V1beta2::Feature>]
+          #   Requested video annotation features.
           # @param video_context [Google::Cloud::Videointelligence::V1beta2::VideoContext | Hash]
           #   Additional video context and/or feature-specific parameters.
           #   A hash of the same form as `Google::Cloud::Videointelligence::V1beta2::VideoContext`
@@ -221,11 +222,9 @@ module Google
           #   require "google/cloud/video_intelligence/v1beta2"
           #
           #   video_intelligence_service_client = Google::Cloud::VideoIntelligence::V1beta2.new
-          #   input_uri = ''
-          #   features = []
           #
           #   # Register a callback during the method call.
-          #   operation = video_intelligence_service_client.annotate_video(input_uri, features) do |op|
+          #   operation = video_intelligence_service_client.annotate_video do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -252,17 +251,17 @@ module Google
           #   operation.wait_until_done!
 
           def annotate_video \
-              input_uri,
-              features,
+              input_uri: nil,
               input_content: nil,
+              features: nil,
               video_context: nil,
               output_uri: nil,
               location_id: nil,
               options: nil
             req = {
               input_uri: input_uri,
-              features: features,
               input_content: input_content,
+              features: features,
               video_context: video_context,
               output_uri: output_uri,
               location_id: location_id
