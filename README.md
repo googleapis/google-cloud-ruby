@@ -23,7 +23,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 * [BigQuery](#bigquery-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
-* [Stackdriver Error Reporting](#stackdriv-error-reporting-beta) (Beta)
+* [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
