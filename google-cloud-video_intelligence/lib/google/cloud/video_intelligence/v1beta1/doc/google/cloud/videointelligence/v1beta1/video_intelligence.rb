@@ -15,16 +15,27 @@
 module Google
   module Cloud
     module Videointelligence
+      ##
+      # # Google Cloud Video Intelligence API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [VideoIntelligenceServiceClient][] | Google Cloud Video Intelligence API. |
+      # | [Data Types][] | Data types for Google::Cloud::VideoIntelligence::V1beta1 |
+      #
+      # [VideoIntelligenceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1/videointelligenceserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1/datatypes
+      #
       module V1beta1
         # Video annotation request.
         # @!attribute [rw] input_uri
         #   @return [String]
         #     Input video location. Currently, only
-        #     {Google Cloud Storage}[https://cloud.google.com/storage/] URIs are
+        #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
         #     supported, which must be specified in the following format:
         #     +gs://bucket-id/object-id+ (other URI formats return
-        #     Google::Rpc::Code::INVALID_ARGUMENT). For more information, see
-        #     {Request URIs}[https://cloud.google.com/storage/docs/reference-uris].
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
+        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
         #     A video URI may include wildcards in +object-id+, and thus identify
         #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
         #     '?' to match 1 character. If unset, the input video should be embedded
@@ -42,11 +53,11 @@ module Google
         # @!attribute [rw] output_uri
         #   @return [String]
         #     Optional location where the output (in JSON format) should be stored.
-        #     Currently, only {Google Cloud Storage}[https://cloud.google.com/storage/]
+        #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
         #     URIs are supported, which must be specified in the following format:
         #     +gs://bucket-id/object-id+ (other URI formats return
-        #     Google::Rpc::Code::INVALID_ARGUMENT). For more information, see
-        #     {Request URIs}[https://cloud.google.com/storage/docs/reference-uris].
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
+        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
         # @!attribute [rw] location_id
         #   @return [String]
         #     Optional cloud region where annotation should take place. Supported cloud
@@ -191,7 +202,7 @@ module Google
         # @!attribute [rw] input_uri
         #   @return [String]
         #     Video file location in
-        #     {Google Cloud Storage}[https://cloud.google.com/storage/].
+        #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] label_annotations
         #   @return [Array<Google::Cloud::Videointelligence::V1beta1::LabelAnnotation>]
         #     Label annotations. There is exactly one element for each unique label.
@@ -222,7 +233,7 @@ module Google
         # @!attribute [rw] input_uri
         #   @return [String]
         #     Video file location in
-        #     {Google Cloud Storage}[https://cloud.google.com/storage/].
+        #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] progress_percent
         #   @return [Integer]
         #     Approximate percentage processed thus far.

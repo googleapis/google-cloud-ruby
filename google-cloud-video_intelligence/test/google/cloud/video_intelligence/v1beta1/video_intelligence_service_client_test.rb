@@ -17,6 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
+require "google/cloud/video_intelligence"
 require "google/cloud/video_intelligence/v1beta1/video_intelligence_service_client"
 require "google/cloud/videointelligence/v1beta1/video_intelligence_services_pb"
 require "google/longrunning/operations_pb"
@@ -52,6 +53,19 @@ class MockGrpcClientStub
   end
 end
 
+class MockCredentialsClass < Google::Cloud::VideoIntelligence::Credentials
+  def initialize(method_name)
+    @method_name = method_name
+  end
+
+  def updater_proc
+    proc do
+      raise "The method `#{@method_name}` was trying to make a grpc request. This should not " \
+          "happen since the grpc layer is being mocked."
+    end
+  end
+end
+
 describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient do
 
   describe 'annotate_video' do
@@ -63,7 +77,8 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       features = []
 
       # Create expected grpc response
-      expected_response = Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse.new
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse)
       result = Google::Protobuf::Any.new
       result.pack(expected_response)
       operation = Google::Longrunning::Operation.new(
@@ -74,21 +89,26 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest, request)
         assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
         operation
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("annotate_video")
+
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new channel: channel
+        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
-        # Call method
-        response = client.annotate_video(input_uri, features)
+          # Call method
+          response = client.annotate_video(input_uri, features)
 
-        # Verify the response
-        assert_equal(expected_response, response.response)
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
       end
     end
 
@@ -109,22 +129,27 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest, request)
         assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
         operation
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("annotate_video")
+
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new channel: channel
+        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
-        # Call method
-        response = client.annotate_video(input_uri, features)
+          # Call method
+          response = client.annotate_video(input_uri, features)
 
-        # Verify the response
-        assert(response.error?)
-        assert_equal(operation_error, response.error)
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
       end
     end
 
@@ -135,23 +160,28 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest, request)
         assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
+      # Mock auth layer
+      mock_credentials = MockCredentialsClass.new("annotate_video")
+
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        channel = GRPC::Core::Channel.new Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient::SERVICE_ADDRESS, nil, :this_channel_is_insecure
-        client = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient.new channel: channel
+        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
-        # Call method
-        err = assert_raises Google::Gax::GaxError do
-          client.annotate_video(input_uri, features)
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.annotate_video(input_uri, features)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
         end
-
-        # Verify the GaxError wrapped the custom error that was raised.
-        assert_match(custom_error.message, err.message)
       end
     end
   end
