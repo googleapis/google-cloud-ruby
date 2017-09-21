@@ -17,14 +17,10 @@ require "trace_helper"
 
 describe Google::Cloud::Trace, :trace do
   it "automatically creates trace for a ingress request" do
-    send_request "test_trace"
-
-    # Wait 60 seconds before querying for the trace record
-    sleep 60
-
     results = nil
     keep_trying_till_true 240 do
-      result_set = @tracer.list_traces Time.now - 350, Time.now, filter: "+root:/test_trace"
+      send_request "test_trace"
+      result_set = @tracer.list_traces Time.now - 240, Time.now, filter: "+root:/test_trace"
       results = result_set.instance_variable_get :@results
       !results.empty?
     end
@@ -34,14 +30,10 @@ describe Google::Cloud::Trace, :trace do
 
   it "allows custom spans with custom labels" do
     token = rand(0x100000000000).to_s
-    send_request "test_trace", "token=#{token}"
-
-    # Wait 60 seconds before querying for the trace record
-    sleep 60
-
     results = nil
     keep_trying_till_true 240 do
-      result_set = @tracer.list_traces Time.now - 350, Time.now, filter: "+span:integration_test_span", view: :COMPLETE
+      send_request "test_trace", "token=#{token}"
+      result_set = @tracer.list_traces Time.now - 240, Time.now, filter: "+span:integration_test_span", view: :COMPLETE
       results = result_set.instance_variable_get :@results
       !results.empty?
     end
