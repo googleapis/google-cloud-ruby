@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "google/cloud/storage"
+require "google/cloud/pubsub"
 
 class File
   def self.file? f
@@ -91,6 +92,22 @@ module Google
   end
 end
 
+module Google
+  module Cloud
+    module Pubsub
+      def self.stub_new
+        define_singleton_method :new do |*args|
+          yield *args
+        end
+      end
+      # Create default unmocked methods that will raise if ever called
+      def self.new *args
+        raise "This code example is not yet mocked"
+      end
+    end
+  end
+end
+
 def mock_storage
   Google::Cloud::Storage.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
@@ -104,9 +121,33 @@ def mock_storage
   end
 end
 
+def mock_pubsub
+  Google::Cloud::Pubsub.stub_new do |*args|
+    credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+    pubsub = Google::Cloud::Pubsub::Project.new(Google::Cloud::Pubsub::Service.new("my-project", credentials))
+
+    pubsub.service.mocked_publisher = Minitest::Mock.new
+    pubsub.service.mocked_subscriber = Minitest::Mock.new
+    if block_given?
+      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber
+    end
+
+    pubsub
+  end
+end
+
 YARD::Doctest.configure do |doctest|
   # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
   doctest.skip "Google::Cloud::Storage::V1beta1::SpeechClient"
+
+  # Skip all aliases, since tests would be exact duplicates
+  doctest.skip "Google::Cloud::Storage::Bucket#new_file"
+  doctest.skip "Google::Cloud::Storage::Bucket#find_files"
+  doctest.skip "Google::Cloud::Storage::Bucket#new_notification"
+  doctest.skip "Google::Cloud::Storage::Bucket#find_notification"
+  doctest.skip "Google::Cloud::Storage::Bucket#find_notifications"
+  doctest.skip "Google::Cloud::Storage::Project#find_bucket"
+  doctest.skip "Google::Cloud::Storage::Project#find_buckets"
 
   doctest.before "Google::Cloud.storage" do
     mock_storage do |mock|
@@ -172,13 +213,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Bucket#find_files" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Storage::Bucket#create_file" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -188,12 +222,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Bucket#new_file" do
+  doctest.before "Google::Cloud::Storage::Bucket#create_notification" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_iam_policy, policy_gapi, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :set_iam_policy, policy_gapi, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    end
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
-      # Following expectation is only used in last example
-      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
+      mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
     end
   end
 
@@ -237,6 +274,20 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       mock.expect :patch_bucket, object_access_control_gapi, ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#notification" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_notification, notification_gapi, ["my-bucket", "1", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#notifications" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :list_notifications, list_notifications_gapi, ["my-bucket", Hash]
     end
   end
 
@@ -743,6 +794,28 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # Notification
+
+  doctest.before "Google::Cloud::Storage::Notification" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_iam_policy, policy_gapi, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :set_iam_policy, policy_gapi, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    end
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Notification#delete" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_notification, notification_gapi, ["my-bucket", "1", Hash]
+      mock.expect :delete_notification, nil, ["my-bucket", nil, Hash]
+    end
+  end
+
   # Project
 
   doctest.before "Google::Cloud::Storage::Project" do
@@ -781,9 +854,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
     end
   end
-
-  doctest.skip "Google::Cloud::Storage::Project#find_bucket" # alias for #bucket
-  doctest.skip "Google::Cloud::Storage::Project#find_buckets" # alias for #buckets
 
   doctest.before "Google::Cloud::Storage::Project#create_bucket" do
     mock_storage do |mock|
@@ -1096,4 +1166,34 @@ def permissions_gapi
   Google::Apis::StorageV1::TestIamPermissionsResponse.new(
     permissions: ["storage.buckets.get"]
   )
+end
+
+def notification_gapi
+  Google::Apis::StorageV1::Notification.new(
+    payload_format: "JSON_API_V1",
+    topic: "my-topic"
+  )
+end
+
+def list_notifications_gapi count = 2
+  notifications = count.times.map { notification_gapi }
+  Google::Apis::StorageV1::Notifications.new kind: "storage#notifications", items: notifications
+end
+
+def topic_gapi topic_name = "my-topic"
+  Google::Pubsub::V1::Topic.new name: topic_path(topic_name)
+end
+
+def policy_gapi
+  Google::Iam::V1::Policy.new(
+    bindings: []
+  )
+end
+
+def project_path
+  "projects/my-project"
+end
+
+def topic_path topic_name
+  "#{project_path}/topics/#{topic_name}"
 end

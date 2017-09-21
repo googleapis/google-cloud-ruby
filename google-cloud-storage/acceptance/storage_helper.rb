@@ -17,6 +17,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/storage"
+require "google/cloud/pubsub"
 
 # Create shared storage object so we don't create new for each test
 $storage = Google::Cloud.new.storage retries: 10
@@ -36,13 +37,16 @@ module Acceptance
   #   end
   class StorageTest < Minitest::Test
     attr_accessor :storage
+    attr_accessor :prefix
 
     ##
     # Setup project based on available ENV variables
     def setup
       @storage = $storage
+      @prefix = $prefix
 
       refute_nil @storage, "You do not have an active storage to run the tests."
+      refute_nil @prefix, "You do not have a prefix to name the pubsub topics with."
 
       super
     end
@@ -87,6 +91,7 @@ require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $bucket_names = 4.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
+$prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 
 def clean_up_storage_buckets
   puts "Cleaning up storage buckets after tests."

@@ -126,4 +126,16 @@ class MockStorage < Minitest::Spec
   def undone_rewrite token
     Google::Apis::StorageV1::RewriteResponse.new done: false, rewrite_token: token
   end
+
+  def random_notification_gapi id: "1", topic: "//pubsub.googleapis.com/projects/test/topics/my-topic", payload: "NONE"
+    gapi = Google::Apis::StorageV1::Notification.new(
+      custom_attributes: { "foo" => "bar" },
+      event_types: ["OBJECT_FINALIZE"],
+      object_name_prefix: "my-prefix",
+      payload_format: payload,
+      topic: topic
+    )
+    gapi.id = id if id
+    gapi
+  end
 end

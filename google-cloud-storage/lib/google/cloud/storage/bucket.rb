@@ -19,6 +19,7 @@ require "google/cloud/storage/bucket/cors"
 require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "google/cloud/storage/file"
+require "google/cloud/storage/notification"
 require "pathname"
 
 module Google
@@ -1136,6 +1137,147 @@ module Google
                                                  user_project: user_project
           gapi.permissions
         end
+
+        ##
+        # Retrieves the entire list of Pub/Sub notification subscriptions for
+        # the bucket.
+        #
+        # @see https://cloud.google.com/storage/docs/pubsub-notifications Cloud
+        #   Pub/Sub Notifications for Google Cloud
+        #
+        # @return [Array<Google::Cloud::Storage::Notification>]
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   notifications = bucket.notifications
+        #   notifications.each do |notification|
+        #     puts notification.id
+        #   end
+        #
+        def notifications
+          ensure_service!
+          gapi = service.list_notifications name, user_project: user_project
+          Array(gapi.items).map do |gapi_object|
+            Notification.from_gapi name, gapi_object, service,
+                                   user_project: user_project
+          end
+        end
+        alias_method :find_notifications, :notifications
+
+        ##
+        # Retrieves a Pub/Sub notification subscription for the bucket.
+        #
+        # @see https://cloud.google.com/storage/docs/pubsub-notifications Cloud
+        #   Pub/Sub Notifications for Google Cloud
+        #
+        # @param [String] id The Notification ID.
+        #
+        # @return [Google::Cloud::Storage::Notification, nil] Returns nil if the
+        #   notification does not exist
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   notification = bucket.notification "1"
+        #   puts notification.id
+        #
+        def notification id
+          ensure_service!
+          gapi = service.get_notification name, id, user_project: user_project
+          Notification.from_gapi name, gapi, service, user_project: user_project
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+        alias_method :find_notification, :notification
+
+
+        ##
+        # Creates a new Pub/Sub notification subscription for the bucket.
+        #
+        # @see https://cloud.google.com/storage/docs/pubsub-notifications Cloud
+        #   Pub/Sub Notifications for Google Cloud
+        #
+        # @param [String] topic The name of the Cloud PubSub topic to which the
+        #   notification subscription will publish.
+        # @param [Hash(String => String)] custom_attrs The custom attributes for
+        #   the notification. An optional list of additional attributes to
+        #   attach to each Cloud Pub/Sub message published for the notification
+        #   subscription.
+        # @param [Symbol, String] event_types The event types for the
+        #   notification subscription. If provided, messages will only be sent
+        #   for the listed event types. If empty, messages will be sent for all
+        #   event types.
+        #
+        #   Acceptable values are:
+        #
+        #   * `:finalize` - Sent when a new object (or a new generation of
+        #     an existing object) is successfully created in the bucket. This
+        #     includes copying or rewriting an existing object. A failed upload
+        #     does not trigger this event.
+        #   * `:update` - Sent when the metadata of an existing object changes.
+        #   * `:delete` - Sent when an object has been permanently deleted. This
+        #     includes objects that are overwritten or are deleted as part of
+        #     the bucket's lifecycle configuration. For buckets with object
+        #     versioning enabled, this is not sent when an object is archived
+        #     (see `OBJECT_ARCHIVE`), even if archival occurs via the
+        #     {File#delete} method.
+        #   * `:archive` - Only sent when the bucket has enabled object
+        #     versioning. This event indicates that the live version of an
+        #     object has become an archived version, either because it was
+        #     archived or because it was overwritten by the upload of an object
+        #     of the same name.
+        # @param [String] prefix The file name prefix for the notification
+        #   subscription. If provided, the notification will only be applied to
+        #   file names that begin with this prefix.
+        # @param [Symbol, String, Boolean] payload The desired content of the
+        #   Pub/Sub message payload. Acceptable values are:
+        #
+        #   * `true` or `:json` - The Pub/Sub message payload will be a UTF-8
+        #     string containing the [resource
+        #     representation](https://cloud.google.com/storage/docs/json_api/v1/objects#resource-representations)
+        #     of the file's metadata.
+        #   * `false` or `:none` - No payload is included with the notification.
+        #
+        #   The default value is `:json`.
+        #
+        # @return [Array<String>] The permissions held by the caller.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #   require "google/cloud/storage"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #   topic = pubsub.create_topic "my-topic"
+        #   topic.policy do |p|
+        #     p.add "roles/pubsub.publisher",
+        #           "serviceAccount:my-project" \
+        #           "@gs-project-accounts.iam.gserviceaccount.com"
+        #   end
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   notification = bucket.create_notification topic.name
+        #
+        def create_notification topic, custom_attrs: nil, event_types: nil,
+                                prefix: nil, payload: nil
+          ensure_service!
+          options = { custom_attrs: custom_attrs, event_types: event_types,
+                      prefix: prefix, payload: payload,
+                      user_project: user_project }
+
+          gapi = service.insert_notification name, topic, options
+          Notification.from_gapi name, gapi, service, user_project: user_project
+        end
+        alias_method :new_notification, :create_notification
 
         ##
         # Reloads the bucket with current data from the Storage service.

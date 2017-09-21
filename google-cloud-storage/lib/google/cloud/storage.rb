@@ -488,6 +488,38 @@ module Google
     # files = bucket.files # Billed to "my-other-project"
     # ```
     #
+    # ## Configuring Pub/Sub notification subscriptions
+    #
+    # You can configure notifications to send Google Cloud Pub/Sub messages
+    # about changes to files in your buckets. For example, you can track files
+    # that are created and deleted in your bucket. Each notification contains
+    # information describing both the event that triggered it and the file that
+    # changed.
+    #
+    # You can send notifications to any Cloud Pub/Sub topic in any project for
+    # which your service account has sufficient permissions. As shown below, you
+    # need to explicitly grant permission to your service account to enable
+    # Google Cloud Storage to publish on behalf of your account. (Even if your
+    # current project created and owns the topic.)
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    # require "google/cloud/storage"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    # topic = pubsub.create_topic "my-topic"
+    # topic.policy do |p|
+    #   p.add "roles/pubsub.publisher",
+    #         "serviceAccount:my-project" \
+    #         "@gs-project-accounts.iam.gserviceaccount.com"
+    # end
+    #
+    # storage = Google::Cloud::Storage.new
+    # bucket = storage.bucket "my-bucket"
+    #
+    # notification = bucket.create_notification topic.name
+    # ```
+    #
     # ## Configuring retries and timeout
     #
     # You can configure how many times API requests may be automatically
