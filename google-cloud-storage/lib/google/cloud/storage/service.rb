@@ -207,6 +207,52 @@ module Google
         end
 
         ##
+        # Retrieves a list of Pub/Sub notification subscriptions for a bucket.
+        def list_notifications bucket_name, user_project: nil
+          execute do
+            service.list_notifications bucket_name,
+                                       user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Creates a new Pub/Sub notification subscription for a bucket.
+        def insert_notification bucket_name, topic_name, custom_attrs: nil,
+                                event_types: nil, prefix: nil, payload: nil,
+                                user_project: nil
+          new_notification = Google::Apis::StorageV1::Notification.new({
+            custom_attributes: custom_attrs,
+            event_types: event_types(event_types),
+            object_name_prefix: prefix,
+            payload_format: payload_format(payload),
+            topic: topic_path(topic_name) }.delete_if { |_k, v| v.nil? })
+
+          execute do
+            service.insert_notification \
+              bucket_name, new_notification,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Retrieves a Pub/Sub notification subscription for a bucket.
+        def get_notification bucket_name, notification_id, user_project: nil
+          execute do
+            service.get_notification bucket_name, notification_id,
+                                     user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Deletes a new Pub/Sub notification subscription for a bucket.
+        def delete_notification bucket_name, notification_id, user_project: nil
+          execute do
+            service.delete_notification bucket_name, notification_id,
+                                        user_project: user_project(user_project)
+          end
+        end
+
+        ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil
@@ -417,6 +463,42 @@ module Google
           headers["x-goog-#{source}encryption-key-sha256"] = \
             Base64.strict_encode64 key_sha256
           options
+        end
+
+        def topic_path topic_name
+          return topic_name if topic_name.to_s.include? "/"
+          "//pubsub.googleapis.com/projects/#{project}/topics/#{topic_name}"
+        end
+
+        # Pub/Sub notification subscription event_types
+        def event_types arr
+          arr.map { |x| event_type x } if arr
+        end
+
+        # Pub/Sub notification subscription event_types
+        def event_type str
+          { "object_finalize" => "OBJECT_FINALIZE",
+            "finalize" => "OBJECT_FINALIZE",
+            "create" => "OBJECT_FINALIZE",
+            "object_metadata_update" => "OBJECT_METADATA_UPDATE",
+            "object_update" => "OBJECT_METADATA_UPDATE",
+            "metadata_update" => "OBJECT_METADATA_UPDATE",
+            "update" => "OBJECT_METADATA_UPDATE",
+            "object_delete" => "OBJECT_DELETE",
+            "delete" => "OBJECT_DELETE",
+            "object_archive" => "OBJECT_ARCHIVE",
+            "archive" => "OBJECT_ARCHIVE" }[str.to_s.downcase]
+        end
+
+        # Pub/Sub notification subscription payload_format
+        # Defaults to "JSON_API_V1"
+        def payload_format str_or_bool
+          return "JSON_API_V1" if str_or_bool.nil?
+          { "json_api_v1" => "JSON_API_V1",
+            "json" => "JSON_API_V1",
+            "true" => "JSON_API_V1",
+            "none" => "NONE",
+            "false" => "NONE" }[str_or_bool.to_s.downcase]
         end
 
         def execute
