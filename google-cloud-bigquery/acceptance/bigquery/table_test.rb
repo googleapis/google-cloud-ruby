@@ -207,6 +207,135 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
+    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.job_id.must_equal job_id
+    query_job.wait_until_done!
+
+    # Job methods
+    query_job.done?.must_equal true
+    query_job.running?.must_equal false
+    query_job.pending?.must_equal false
+    query_job.created_at.must_be_kind_of Time
+    query_job.started_at.must_be_kind_of Time
+    query_job.ended_at.must_be_kind_of Time
+    query_job.configuration.wont_be :nil?
+    query_job.statistics.wont_be :nil?
+    query_job.status.wont_be :nil?
+    query_job.errors.must_be :empty?
+    query_job.rerun!
+    query_job.wait_until_done!
+
+    query_job.batch?.must_equal false
+    query_job.interactive?.must_equal true
+    query_job.large_results?.must_equal false
+    query_job.cache?.must_equal true
+    query_job.flatten?.must_equal true
+    query_job.cache_hit?.must_equal false
+    query_job.bytes_processed.wont_be :nil?
+    query_job.destination.wont_be :nil?
+    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.total.wont_be :nil?
+
+    # Query Job - Statistics Query Plan
+    query_job.query_plan.wont_be_nil
+    query_job.query_plan.must_be_kind_of Array
+    query_job.query_plan.wont_be :empty?
+    stage = query_job.query_plan.first
+    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.compute_ratio_avg.must_be_kind_of Float
+    stage.compute_ratio_max.must_be_kind_of Float
+    stage.id.must_be_kind_of Integer
+    stage.name.must_be_kind_of String
+    stage.read_ratio_avg.must_be_kind_of Float
+    stage.read_ratio_max.must_be_kind_of Float
+    stage.records_read.must_be_kind_of Integer
+    stage.records_written.must_be_kind_of Integer
+    stage.status.must_be_kind_of String
+    stage.wait_ratio_avg.must_be_kind_of Float
+    stage.wait_ratio_max.must_be_kind_of Float
+    stage.write_ratio_avg.must_be_kind_of Float
+    stage.write_ratio_max.must_be_kind_of Float
+    stage.steps.wont_be_nil
+    stage.steps.must_be_kind_of Array
+    stage.steps.wont_be :empty?
+    step = stage.steps.first
+    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.kind.must_be_kind_of String
+    step.substeps.wont_be_nil
+    step.substeps.must_be_kind_of Array
+    step.substeps.wont_be :empty?
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+
+    data = dataset.query query
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.total.wont_be(:nil?)
+    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.fields.count.must_equal 4
+    [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
+    data.all.each do |row|
+      row.must_be_kind_of Hash
+    end
+    data.next.must_be :nil?
+  end
+
+  it "insert skip invalid rows and return insert errors" do
+    # data = table.data
+    insert_response = table.insert invalid_rows, skip_invalid: true
+    insert_response.wont_be :success?
+    insert_response.insert_count.must_equal 2
+
+    insert_response.insert_errors.wont_be :empty?
+    insert_response.insert_errors.count.must_equal 1
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.index.must_equal 1
+
+    # In the context of this test, the original row cannot be compared with InsertResponse row because
+    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
+    # dates/times are formated as timestamp strings with milliseconds.
+    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
+    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
+    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
+    insert_response.insert_errors.first.row.must_equal bigquery_row
+
+    insert_response.error_rows.wont_be :empty?
+    insert_response.error_rows.count.must_equal 1
+    insert_response.error_rows.first.must_equal bigquery_row
+
+    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
+    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
+    insert_response.index_for(invalid_rows[1]).must_equal 1
+  end
+
+  it "inserts rows asynchonously and gets its data" do
+    # data = table.data
+    insert_response = nil
+
+    inserter = table.insert_async do |response|
+      insert_response = response
+    end
+    inserter.insert rows
+
+    inserter.flush
+    inserter.stop.wait!
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
@@ -268,7 +397,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     step.substeps.must_be_kind_of Array
     step.substeps.wont_be :empty?
 
-
     data = table.data max: 1
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.kind.wont_be :nil?
@@ -292,34 +420,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       row.must_be_kind_of Hash
     end
     data.next.must_be :nil?
-  end
-
-  it "insert skip invalid rows and return insert errors" do
-    # data = table.data
-    insert_response = table.insert invalid_rows, skip_invalid: true
-    insert_response.wont_be :success?
-    insert_response.insert_count.must_equal 2
-
-    insert_response.insert_errors.wont_be :empty?
-    insert_response.insert_errors.count.must_equal 1
-    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
-    insert_response.insert_errors.first.index.must_equal 1
-
-    # In the context of this test, the original row cannot be compared with InsertResponse row because
-    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
-    # dates/times are formated as timestamp strings with milliseconds.
-    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
-    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
-    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
-    insert_response.insert_errors.first.row.must_equal bigquery_row
-
-    insert_response.error_rows.wont_be :empty?
-    insert_response.error_rows.count.must_equal 1
-    insert_response.error_rows.first.must_equal bigquery_row
-
-    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
-    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
-    insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
   it "imports data from a local file with load_job" do

@@ -1547,6 +1547,65 @@ module Google
           end
         end
 
+        ##
+        # Create an asynchonous inserter object used to insert rows in batches.
+        #
+        # @param [String] table_id The ID of the table to insert rows into.
+        # @param [Boolean] skip_invalid Insert all valid rows of a request, even
+        #   if invalid rows exist. The default value is `false`, which causes
+        #   the entire request to fail if any invalid rows exist.
+        # @param [Boolean] ignore_unknown Accept rows that contain values that
+        #   do not match the schema. The unknown values are ignored. Default is
+        #   false, which treats unknown values as errors.
+        # @attr_reader [Integer] max_bytes The maximum size of rows to be
+        #   collected before the batch is published. Default is 10,000,000
+        #   (10MB).
+        # @param [Integer] max_rows The maximum number of rows to be collected
+        #   before the batch is published. Default is 500.
+        # @attr_reader [Numeric] interval The number of seconds to collect
+        #   messages before the batch is published. Default is 10.
+        # @attr_reader [Numeric] threads The number of threads used to insert
+        #   batches of rows. Default is 4.
+        # @yield [response] the callback for when a batch of rows is inserted
+        # @yieldparam [InsertResponse] response the result of the asynchonous
+        #   insert
+        #
+        # @return [Table::AsyncInserter] Returns inserter object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   inserter = table.insert_async do |response|
+        #     log_insert "inserted #{response.insert_count} rows " \
+        #       "with #{response.error_count} errors"
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
+        def insert_async table_id, skip_invalid: nil, ignore_unknown: nil,
+                         max_bytes: 10000000, max_rows: 500, interval: 10,
+                         threads: 4, &block
+          ensure_service!
+
+          # Get table, don't use Dataset#table which handles NotFoundError
+          gapi = service.get_table dataset_id, table_id
+          table = Table.from_gapi gapi, service
+          # Get the AsyncInserter from the table
+          table.insert_async skip_invalid: skip_invalid,
+                             ignore_unknown: ignore_unknown,
+                             max_bytes: max_bytes, max_rows: max_rows,
+                             interval: interval, threads: threads, &block
+        end
+
         protected
 
         def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil
