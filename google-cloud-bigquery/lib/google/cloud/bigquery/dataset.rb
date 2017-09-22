@@ -423,6 +423,13 @@ module Google
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect. Optional. The default value is false.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
         # @return [Google::Cloud::Bigquery::View]
         #
@@ -448,7 +455,7 @@ module Google
         # @!group Table
         #
         def create_view table_id, query, name: nil, description: nil,
-                        standard_sql: nil, legacy_sql: nil
+                        standard_sql: nil, legacy_sql: nil, udfs: nil
           new_view_opts = {
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id, dataset_id: dataset_id, table_id: table_id
@@ -458,7 +465,8 @@ module Google
             view: Google::Apis::BigqueryV2::ViewDefinition.new(
               query: query,
               use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
-                                                         legacy_sql)
+                                                         legacy_sql),
+              user_defined_function_resources: udfs_gapi(udfs)
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
@@ -1611,6 +1619,19 @@ module Google
           ::File.file? file
         rescue
           false
+        end
+
+        def udfs_gapi array_or_str
+          return [] if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
 
         ##

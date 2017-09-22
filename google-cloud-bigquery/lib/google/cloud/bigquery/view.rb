@@ -323,18 +323,13 @@ module Google
         ##
         # Updates the query that executes each time the view is loaded.
         #
+        # This sets the query using standard SQL. To specify legacy SQL or to
+        # use user-defined function resources use (#set_query) instead.
+        #
         # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
         #   Reference
         #
         # @param [String] new_query The query that defines the view.
-        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
-        #   [standard
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   dialect. Optional. The default value is true.
-        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
-        #   [legacy
-        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect. Optional. The default value is false.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -344,16 +339,96 @@ module Google
         #   view = dataset.table "my_view"
         #
         #   view.query = "SELECT first_name FROM " \
-        #                "`my_project.my_dataset.my_table`"
+        #                  "`my_project.my_dataset.my_table`"
         #
         # @!group Lifecycle
         #
-        def query= new_query, standard_sql: nil, legacy_sql: nil
-          @gapi.view ||= Google::Apis::BigqueryV2::ViewDefinition.new
-          @gapi.view.update! query: new_query
-          @gapi.view.update! use_legacy_sql: \
-            Convert.resolve_legacy_sql(standard_sql, legacy_sql)
-          patch_view_gapi! :query
+        def query= new_query
+          set_query new_query
+        end
+
+        ##
+        # Updates the query that executes each time the view is loaded. Allows
+        # setting of standard vs. legacy SQL and user-defined function
+        # resources.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+        #   Reference
+        #
+        # @param [String] query The query that defines the view.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect. Optional. The default value is true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. Optional. The default value is false.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.set_query "SELECT first_name FROM " \
+        #                    "`my_project.my_dataset.my_table`",
+        #                  standard_sql: true
+        #
+        # @!group Lifecycle
+        #
+        def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
+          @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new \
+            query: query,
+            use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
+                                                       legacy_sql),
+            user_defined_function_resources: udfs_gapi(udfs)
+          patch_view_gapi!
+        end
+
+        ##
+        # Checks if the view's query is using legacy sql.
+        #
+        # @!group Attributes
+        #
+        def query_legacy_sql?
+          val = @gapi.view.use_legacy_sql
+          return true if val.nil?
+          val
+        end
+
+        ##
+        # Checks if the view's query is using standard sql.
+        #
+        # @!group Attributes
+        #
+        def query_standard_sql?
+          !query_legacy_sql?
+        end
+
+        ##
+        # The user-defined function resources used in the view's query. May be
+        # either a code resource to load from a Google Cloud Storage URI
+        # (`gs://bucket/path`), or an inline resource that contains code for a
+        # user-defined function (UDF). Providing an inline code resource is
+        # equivalent to providing a URI for a file containing the same code. See
+        # [User-Defined
+        # Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @!group Attributes
+        #
+        def query_udfs
+          udfs_gapi = @gapi.view.user_defined_function_resources
+          return [] if udfs_gapi.nil?
+          Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
         end
 
         ##
@@ -464,29 +539,12 @@ module Google
           fail "Must have active connection" unless service
         end
 
-        def resolve_legacy_sql legacy_sql, standard_sql
-          return legacy_sql unless legacy_sql.nil?
-          return !standard_sql unless standard_sql.nil?
-          false
-        end
-
         def patch_gapi! *attributes
           return if attributes.empty?
           patch_args = Hash[attributes.map do |attr|
             [attr, @gapi.send(attr)]
           end]
           patch_table_gapi patch_args
-        end
-
-        def patch_view_gapi! *attributes
-          return if attributes.empty?
-          patch_args = Hash[attributes.map do |attr|
-            [attr, @gapi.view.send(attr)]
-          end]
-          patch_view_args = Google::Apis::BigqueryV2::ViewDefinition.new(
-            patch_args
-          )
-          patch_table_gapi view: patch_view_args
         end
 
         def patch_table_gapi patch_args
@@ -498,6 +556,10 @@ module Google
           # TODO: restore original impl after acceptance test indicates that
           # service etag bug is fixed
           reload!
+        end
+
+        def patch_view_gapi!
+          patch_table_gapi view: @gapi.view
         end
 
         ##
@@ -515,6 +577,19 @@ module Google
 
         def data_complete?
           @gapi.is_a? Google::Apis::BigqueryV2::Table
+        end
+
+        def udfs_gapi array_or_str
+          return [] if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
       end
     end

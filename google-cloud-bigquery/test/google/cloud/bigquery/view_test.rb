@@ -35,6 +35,10 @@ describe Google::Cloud::Bigquery::View, :mock_bigquery do
     view.description.must_equal description
     view.etag.must_equal etag
     view.api_url.must_equal api_url
+    view.query.must_equal "SELECT name, age, score, active FROM `external.publicdata.users`"
+    view.wont_be :query_standard_sql?
+    view.must_be :query_legacy_sql?
+    view.query_udfs.must_be :empty?
     view.view?.must_equal true
     view.table?.must_equal false
     view.location.must_equal location_code
