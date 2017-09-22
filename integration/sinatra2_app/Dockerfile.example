@@ -38,4 +38,4 @@ RUN cd /app/google-cloud-debugger && bundle update && bundle exec rake recompile
 ENTRYPOINT []
 
 # Start application on port $PORT.
-CMD cd /app/integration/sinatra1_app && bundle update && bundle exec ruby app.rb
+CMD cd /app/integration/sinatra2_app && bundle update && bundle exec ruby app.rb

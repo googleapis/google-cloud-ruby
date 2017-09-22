@@ -36,7 +36,7 @@ describe Google::Cloud::Logging do
     send_request "test_logging", "token=#{token}"
 
     logs = []
-    keep_trying_till_true 120 do
+    keep_trying_till_true 240 do
       stdout = Open3.capture3(
         "gcloud beta logging read \"logName=projects/#{gcloud_project_id}/logs/google-cloud-ruby_integration_test " \
         "AND textPayload:#{token}\" --limit 1 --format json"
