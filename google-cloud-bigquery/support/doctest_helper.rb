@@ -612,6 +612,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::View#set_query" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
+      mock.expect :patch_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, view_full_gapi, ["my-project-id", "my-dataset-id", "my_view"]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::View#query_id" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]

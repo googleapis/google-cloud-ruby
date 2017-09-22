@@ -311,7 +311,7 @@ class MockBigquery < Minitest::Spec
       "lastModifiedTime" => time_millis,
       "type" => "VIEW",
       "view" => {
-        "query" => "SELECT name, age, score, active FROM `external:publicdata.users`"
+        "query" => "SELECT name, age, score, active FROM `external.publicdata.users`"
       },
       "location" => "US"
     }
