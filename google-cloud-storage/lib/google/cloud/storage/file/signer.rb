@@ -121,13 +121,13 @@ module Google
           end
 
           def generate_signed_url issuer, signed_string, expires, query
-            url = "#{ext_url}?GoogleAccessId=#{CGI.escape issuer}" \
+            url = "#{ext_url}?GoogleAccessId=#{url_escape issuer}" \
               "&Expires=#{expires}" \
-              "&Signature=#{CGI.escape signed_string}"
+              "&Signature=#{url_escape signed_string}"
 
             if query
               query.each do |name, value|
-                url << "&#{CGI.escape name}=#{CGI.escape value}"
+                url << "&#{url_escape name}=#{url_escape value}"
               end
             end
 
@@ -142,6 +142,10 @@ module Google
             end
             flatten.reject! { |h| h.start_with? "x-goog-encryption-key" }
             flatten.sort.join
+          end
+
+          def url_escape str
+            CGI.escape String str
           end
         end
       end
