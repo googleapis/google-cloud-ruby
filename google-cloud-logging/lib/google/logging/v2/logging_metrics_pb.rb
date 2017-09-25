@@ -7,11 +7,16 @@ require 'google/api/annotations_pb'
 require 'google/api/distribution_pb'
 require 'google/api/metric_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogMetric" do
     optional :name, :string, 1
     optional :description, :string, 2
     optional :filter, :string, 3
+    optional :metric_descriptor, :message, 5, "google.api.MetricDescriptor"
+    optional :value_extractor, :string, 6
+    map :label_extractors, :string, :string, 7
+    optional :bucket_options, :message, 8, "google.api.Distribution.BucketOptions"
     optional :version, :enum, 4, "google.logging.v2.LogMetric.ApiVersion"
   end
   add_enum "google.logging.v2.LogMetric.ApiVersion" do

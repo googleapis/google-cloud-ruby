@@ -43,18 +43,27 @@ module Google
           # `writer_identity` is not permitted to write to the destination.  A sink can
           # export log entries only from the resource owning the sink.
           rpc :CreateSink, CreateSinkRequest, LogSink
-          # Updates a sink. If the named sink doesn't exist, then this method is
-          # identical to
-          # [sinks.create](/logging/docs/api/reference/rest/v2/projects.sinks/create).
-          # If the named sink does exist, then this method replaces the following
-          # fields in the existing sink with values from the new sink: `destination`,
-          # `filter`, `output_version_format`, `start_time`, and `end_time`.
-          # The updated filter might also have a new `writer_identity`; see the
+          # Updates a sink.  This method replaces the following fields in the existing
+          # sink with values from the new sink: `destination`, `filter`,
+          # `output_version_format`, `start_time`, and `end_time`.
+          # The updated sink might also have a new `writer_identity`; see the
           # `unique_writer_identity` field.
           rpc :UpdateSink, UpdateSinkRequest, LogSink
           # Deletes a sink. If the sink has a unique `writer_identity`, then that
           # service account is also deleted.
           rpc :DeleteSink, DeleteSinkRequest, Google::Protobuf::Empty
+          # Lists all the exclusions in a parent resource.
+          rpc :ListExclusions, ListExclusionsRequest, ListExclusionsResponse
+          # Gets the description of an exclusion.
+          rpc :GetExclusion, GetExclusionRequest, LogExclusion
+          # Creates a new exclusion in a specified parent resource.
+          # Only log entries belonging to that resource can be excluded.
+          # You can have up to 10 exclusions in a resource.
+          rpc :CreateExclusion, CreateExclusionRequest, LogExclusion
+          # Changes one or more properties of an existing exclusion.
+          rpc :UpdateExclusion, UpdateExclusionRequest, LogExclusion
+          # Deletes an exclusion.
+          rpc :DeleteExclusion, DeleteExclusionRequest, Google::Protobuf::Empty
         end
 
         Stub = Service.rpc_stub_class

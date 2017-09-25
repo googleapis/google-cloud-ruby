@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :log_name, :string, 12
     optional :resource, :message, 8, "google.api.MonitoredResource"
     optional :timestamp, :message, 9, "google.protobuf.Timestamp"
+    optional :receive_timestamp, :message, 24, "google.protobuf.Timestamp"
     optional :severity, :enum, 10, "google.logging.type.LogSeverity"
     optional :insert_id, :string, 4
     optional :http_request, :message, 7, "google.logging.type.HttpRequest"
