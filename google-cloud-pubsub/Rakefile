@@ -45,6 +45,9 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["PUBSUB_PROJECT"] = project
   ENV["PUBSUB_KEYFILE"] = nil
   ENV["PUBSUB_KEYFILE_JSON"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE"] = nil
+  ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
