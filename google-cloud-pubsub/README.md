@@ -3,7 +3,7 @@
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/docs/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
 
 - [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest)
-- [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
+- [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
 ## Quick Start
