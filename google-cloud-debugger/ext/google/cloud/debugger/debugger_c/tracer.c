@@ -18,6 +18,13 @@
 #include "ruby/debug.h"
 #include "tracer.h"
 
+#define FILE_TRACEPOINT_EVENTS (RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_B_CALL)
+#define RETURN_TRACEPOINT_EVENTS (RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_B_RETURN)
+#define FIBER_TRACEPOINT_EVENT RUBY_EVENT_FIBER_SWITCH
+
+/* To prevent unused parameter warnings */
+#define UNUSED(x) (void)(x)
+
 /**
  *  hash_get_keys_callback
  *  Helper callback function for hash_get_keys.
