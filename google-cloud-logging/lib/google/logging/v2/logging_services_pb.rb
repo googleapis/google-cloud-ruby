@@ -37,7 +37,13 @@ module Google
           # Log entries written shortly before the delete operation might not be
           # deleted.
           rpc :DeleteLog, DeleteLogRequest, Google::Protobuf::Empty
-          # Writes log entries to Stackdriver Logging.
+          # ## Log entry resources
+          #
+          # Writes log entries to Stackdriver Logging. This API method is the
+          # only way to send log entries to Stackdriver Logging. This method
+          # is used, directly or indirectly, by the Stackdriver Logging agent
+          # (fluentd) and all logging libraries configured to use Stackdriver
+          # Logging.
           rpc :WriteLogEntries, WriteLogEntriesRequest, WriteLogEntriesResponse
           # Lists log entries.  Use this method to retrieve log entries from
           # Stackdriver Logging.  For ways to export log entries, see

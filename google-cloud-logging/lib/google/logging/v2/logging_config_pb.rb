@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogSink" do
@@ -13,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :filter, :string, 5
     optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
     optional :writer_identity, :string, 8
+    optional :include_children, :bool, 9
     optional :start_time, :message, 10, "google.protobuf.Timestamp"
     optional :end_time, :message, 11, "google.protobuf.Timestamp"
   end
@@ -46,6 +48,36 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.DeleteSinkRequest" do
     optional :sink_name, :string, 1
   end
+  add_message "google.logging.v2.LogExclusion" do
+    optional :name, :string, 1
+    optional :description, :string, 2
+    optional :filter, :string, 3
+    optional :disabled, :bool, 4
+  end
+  add_message "google.logging.v2.ListExclusionsRequest" do
+    optional :parent, :string, 1
+    optional :page_token, :string, 2
+    optional :page_size, :int32, 3
+  end
+  add_message "google.logging.v2.ListExclusionsResponse" do
+    repeated :exclusions, :message, 1, "google.logging.v2.LogExclusion"
+    optional :next_page_token, :string, 2
+  end
+  add_message "google.logging.v2.GetExclusionRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.logging.v2.CreateExclusionRequest" do
+    optional :parent, :string, 1
+    optional :exclusion, :message, 2, "google.logging.v2.LogExclusion"
+  end
+  add_message "google.logging.v2.UpdateExclusionRequest" do
+    optional :name, :string, 1
+    optional :exclusion, :message, 2, "google.logging.v2.LogExclusion"
+    optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+  end
+  add_message "google.logging.v2.DeleteExclusionRequest" do
+    optional :name, :string, 1
+  end
 end
 
 module Google
@@ -59,6 +91,13 @@ module Google
       CreateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateSinkRequest").msgclass
       UpdateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateSinkRequest").msgclass
       DeleteSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteSinkRequest").msgclass
+      LogExclusion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogExclusion").msgclass
+      ListExclusionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsRequest").msgclass
+      ListExclusionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsResponse").msgclass
+      GetExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetExclusionRequest").msgclass
+      CreateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateExclusionRequest").msgclass
+      UpdateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateExclusionRequest").msgclass
+      DeleteExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteExclusionRequest").msgclass
     end
   end
 end

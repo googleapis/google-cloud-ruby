@@ -23,6 +23,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.logging.v2.WriteLogEntriesResponse" do
   end
+  add_message "google.logging.v2.WriteLogEntriesPartialErrors" do
+    map :log_entry_errors, :int32, :message, 1, "google.rpc.Status"
+  end
   add_message "google.logging.v2.ListLogEntriesRequest" do
     repeated :project_ids, :string, 1
     repeated :resource_names, :string, 8
@@ -60,6 +63,7 @@ module Google
       DeleteLogRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLogRequest").msgclass
       WriteLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesRequest").msgclass
       WriteLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesResponse").msgclass
+      WriteLogEntriesPartialErrors = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesPartialErrors").msgclass
       ListLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesRequest").msgclass
       ListLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesResponse").msgclass
       ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsRequest").msgclass
