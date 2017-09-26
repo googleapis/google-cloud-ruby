@@ -30,9 +30,12 @@ module Gcloud
         docs.each do |doc|
           json = doc.jbuilder.target!
           json_path = Pathname.new(base_path).join doc.filepath
-          puts json_path.to_path
-          FileUtils.mkdir_p(json_path.dirname)
-          File.write json_path.to_path, json
+          fp = json_path.to_path
+          unless doc.title == "Google::Cloud::Videointelligence"
+            puts fp
+            FileUtils.mkdir_p(json_path.dirname)
+            File.write fp, json
+          end
         end
         set_types
         types_builder = Jbuilder.new do |json|
