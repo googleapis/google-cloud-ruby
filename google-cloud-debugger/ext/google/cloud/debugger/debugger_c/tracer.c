@@ -18,6 +18,13 @@
 #include "ruby/debug.h"
 #include "tracer.h"
 
+#define FILE_TRACEPOINT_EVENTS (RUBY_EVENT_CLASS | RUBY_EVENT_CALL | RUBY_EVENT_B_CALL)
+#define RETURN_TRACEPOINT_EVENTS (RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_B_RETURN)
+#define FIBER_TRACEPOINT_EVENT RUBY_EVENT_FIBER_SWITCH
+
+/* To prevent unused parameter warnings */
+#define UNUSED(x) (void)(x)
+
 /**
  *  hash_get_keys_callback
  *  Helper callback function for hash_get_keys.
@@ -259,7 +266,7 @@ enable_line_trace_for_thread(VALUE self)
 /**
  * return_trace_callback
  * Callback function for tracer#return_tracepoint. It gets called on
- * RUBY_EVENT_END, RUBY_EVENT_RETURN, RUBY_EVENT_C_RETURN, and
+ * RUBY_EVENT_END, RUBY_EVENT_RETURN, and
  * RUBY_EVENT_B_RETURN events. It keeps line tracing consistent when Ruby
  * program counter interleaves files. Everytime called, it checks caller stack
  * frame's file path, if it matches any of the breakpoints, it turns line
@@ -375,8 +382,7 @@ enable_return_trace_for_thread(VALUE self)
     return_trace_set = rb_hash_aref(thread_variables_hash, return_trace_thread_flag);
 
     if (!RTEST(return_trace_set)) {
-        int return_tracepoint_event = RUBY_EVENT_END | RUBY_EVENT_RETURN | RUBY_EVENT_C_RETURN | RUBY_EVENT_B_RETURN;
-        rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)return_trace_callback, return_tracepoint_event, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
+        rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)return_trace_callback, RETURN_TRACEPOINT_EVENTS, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
         rb_hash_aset(thread_variables_hash, return_trace_thread_flag, Qtrue);
     }
 
@@ -386,7 +392,7 @@ enable_return_trace_for_thread(VALUE self)
 /**
  * file_tracepoint_callback
  * Callback function for tracer#file_tracepoint. It gets called on
- * RUBY_EVENT_CLASS, RUBY_EVENT_CALL, RUBY_EVENT_C_CALL, and RUBY_EVENT_B_CALL
+ * RUBY_EVENT_CLASS, RUBY_EVENT_CALL, and RUBY_EVENT_B_CALL
  * events. It check if any breakpoints matches current file the VM program counter
  * is in, and turn on line event tracing for that thread. Otherwise turn off
  * line tracing if in wrong file. The first time it turns on line even tracing,
@@ -523,7 +529,7 @@ rb_enable_traces(VALUE self)
     VALUE file_tracepoint;
     VALUE fiber_tracepoint;
 
-    file_tracepoint = register_tracepoint(self, FILE_TRACEPOINT_EVENT, "@file_tracepoint", file_tracepoint_callback);
+    file_tracepoint = register_tracepoint(self, FILE_TRACEPOINT_EVENTS, "@file_tracepoint", file_tracepoint_callback);
     UNUSED(fiber_tracepoint);
 
     // Immediately activate file tracepoint and fiber tracepoint
