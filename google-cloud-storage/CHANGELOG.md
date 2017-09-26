@@ -1,5 +1,10 @@
 # Release History
 
+### 1.5.0 / 2017-09-26
+
+* Add Pub/Sub notification subscriptions.
+* Update `#signed_url` to support symbols (dimroc).
+
 ### 1.4.0 / 2017-08-02
 
 * Add `skip_lookup` option for retrieving `Bucket` and `File` objects
