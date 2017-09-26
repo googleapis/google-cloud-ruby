@@ -249,8 +249,9 @@ module Google
         alias_method :refresh!, :reload!
 
         ##
-        # Refreshes the job until the job is `DONE`.
-        # The delay between refreshes will incrementally increase.
+        # Refreshes the job until the job is `DONE`. The delay between refreshes
+        # starts at 5 seconds and increases exponentially to a maximum of 60
+        # seconds.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -263,8 +264,12 @@ module Google
         #                                   format: "json"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true
+        #
         def wait_until_done!
-          backoff = ->(retries) { sleep 2 * retries + 5 }
+          backoff = lambda do |retries|
+            delay = [retries ** 2 + 5, 60].min # Maximum delay is 60
+            sleep delay
+          end
           retries = 0
           until done?
             backoff.call retries
