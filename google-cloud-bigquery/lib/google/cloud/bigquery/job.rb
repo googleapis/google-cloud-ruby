@@ -235,6 +235,11 @@ module Google
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
         #
+        # @param [Integer] min The minimum time in seconds for waiting.
+        # @param [Integer] max The maximum time in seconds for waiting.
+        #   The method call will time out and return within the time.
+        #   The default value is infinity, so will not time out.
+        #
         # @example
         #   require "google/cloud/bigquery"
         #
@@ -246,12 +251,16 @@ module Google
         #                               format: "json"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true
-        def wait_until_done!
-          backoff = ->(retries) { sleep 2 * retries + 5 }
+        def wait_until_done! min: 5, max: Float::INFINITY
+          backoff = ->(retries) { 2 * retries + min }
           retries = 0
+          total = 0
           until done?
-            backoff.call retries
+            interval = backoff.call retries
+            return unless total + interval < max
+            sleep interval
             retries += 1
+            total += interval
             reload!
           end
         end
