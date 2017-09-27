@@ -43,10 +43,4 @@ describe Google::Cloud::Debugger::Backoff do
       (interval2 > interval1).must_equal true
     end
   end
-
-  describe "#wait" do
-    it "doesn't sleep if " do
-
-    end
-  end
 end
