@@ -14,6 +14,7 @@
 
 
 require "digest/sha1"
+require "google/cloud/debugger/backoff"
 require "google/cloud/debugger/debuggee/app_uniquifier_generator"
 require "google/cloud/debugger/version"
 require "json"
@@ -69,6 +70,7 @@ module Google
           @service_version = service_version
           @computed_uniquifier = nil
           @id = nil
+          @register_backoff = Google::Cloud::Debugger::Backoff.new
         end
 
         ##
@@ -76,13 +78,20 @@ module Google
         # Debuggee service.
         # @return [Boolean] True if registered sucessfully; otherwise false.
         def register
+          # Wait if backoff applies
+          sleep @register_backoff.interval if @register_backoff.backing_off?
+
           begin
             response = service.register_debuggee to_grpc
             @id = response.debuggee.id
           rescue
             revoke_registration
           end
-          registered?
+
+          registered = registered?
+          registered ? @register_backoff.succeeded : @register_backoff.failed
+
+          registered
         end
 
         ##
