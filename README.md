@@ -595,25 +595,39 @@ $ gem install google-cloud-video_intelligence
 #### Preview
 
 ```rb
- require "google/cloud/video_intelligence/v1beta1"
- require "google/cloud/videointelligence/v1beta1/video_intelligence_pb"
+ require "google/cloud/video_intelligence/v1beta2"
 
- VideoIntelligenceServiceClient = Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient
+ video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
+ input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
+ features_element = :LABEL_DETECTION
+ features = [features_element]
 
- video_intelligence_service_client = VideoIntelligenceServiceClient.new
+ # Register a callback during the method call.
+ operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
+   raise op.results.message if op.error?
+   op_results = op.results
+   # Process the results.
 
- input_uri = 'gs://[ BUCKET-ID ]/[ OBJECT-ID ]'
- features = [Google::Cloud::Videointelligence::V1beta1::Feature::FACE_DETECTION]
+   metadata = op.metadata
+   # Process the metadata.
+ end
 
-  # Register a callback during the method call.
- operation = video_intelligence_service_client.annotate_video(input_uri, features) do |op|
-    raise op.results.message if op.error?
-    op_results = op.results
-    # Process the results.
+ # Or use the return value to register a callback.
+ operation.on_done do |op|
+   raise op.results.message if op.error?
+   op_results = op.results
+   # Process the results.
 
-    metadata = op.metadata
-    # Process the metadata.
-  end
+   metadata = op.metadata
+   # Process the metadata.
+ end
+
+ # Manually reload the operation.
+ operation.reload!
+
+ # Or block until the operation completes, triggering callbacks on
+ # completion.
+ operation.wait_until_done!
 ```
 
 
