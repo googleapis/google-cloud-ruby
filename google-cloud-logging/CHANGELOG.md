@@ -1,5 +1,10 @@
 # Release History
 
+### 1.2.3 / 2017-09-27
+
+* Updated protobuf classes.
+* Updated README.
+
 ### 1.2.2 / 2017-09-08
 
 * Add `labels` configuration option to `Google::Cloud::Logging::Middleware` for Rails and other Rack-based framework integrations.
