@@ -29,6 +29,7 @@ describe "Spanner Instances", :spanner do
     job.wait_until_done!
 
     job.must_be :done?
+    raise Google::Cloud::Error.from_error(job.error) if job.error?
     instance = job.instance
     instance.wont_be :nil?
     instance.must_be_kind_of Google::Cloud::Spanner::Instance
