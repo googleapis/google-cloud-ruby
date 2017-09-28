@@ -28,6 +28,7 @@ describe "Spanner Databases", :spanner do
     job.wait_until_done!
 
     job.must_be :done?
+    raise Google::Cloud::Error.from_error(job.error) if job.error?
     database = job.database
     database.wont_be :nil?
     database.must_be_kind_of Google::Cloud::Spanner::Database
