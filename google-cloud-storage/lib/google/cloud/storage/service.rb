@@ -471,8 +471,8 @@ module Google
         end
 
         # Pub/Sub notification subscription event_types
-        def event_types arr
-          arr.map { |x| event_type x } if arr
+        def event_types str_or_arr
+          Array(str_or_arr).map { |x| event_type x } if str_or_arr
         end
 
         # Pub/Sub notification subscription event_types

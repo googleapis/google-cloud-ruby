@@ -24,10 +24,13 @@ module Google
       # Represents a Pub/Sub notification subscription for a Cloud Storage
       # bucket.
       #
+      # See {Bucket#create_notification}, {Bucket#notifications}, and
+      # {Bucket#notification}.
+      #
       # @see https://cloud.google.com/storage/docs/pubsub-notifications Cloud
       #   Pub/Sub Notifications for Google Cloud
       #
-      # @attr [String] bucket The name of the {Bucket} to which this
+      # @attr_reader [String] bucket The name of the {Bucket} to which this
       #   notification belongs.
       #
       # @example
@@ -99,8 +102,8 @@ module Google
         end
 
         ##
-        # The event types of this notification. If present, only send
-        # notifications about listed event types. If empty, sent notifications
+        # The event types of this notification. If present, messages will only
+        # be sent for the listed event types. If empty, messages will be sent
         # for all event types.
         #
         # The following is a list of event types currently supported by Cloud
