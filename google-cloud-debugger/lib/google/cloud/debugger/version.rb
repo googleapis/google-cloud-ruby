@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Debugger
-      VERSION = "0.28.1"
+      VERSION = "0.28.2"
     end
   end
 end

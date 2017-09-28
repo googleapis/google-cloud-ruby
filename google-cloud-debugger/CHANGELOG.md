@@ -1,5 +1,10 @@
 # Release History
 
+### 0.28.2 / 2017-09-28
+
+* Improve Breakpoint tracer performance by not tracking C function calls in file tracing.
+* Add a backoff behavior in the debuggee registration to reduce spamming requests when registrations fail.
+
 ### 0.28.1 / 2017-09-08
 
 * Print captured exception from asynchronous worker threads.
