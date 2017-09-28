@@ -342,8 +342,9 @@ module Google
         ##
         # Indicates that a client accessing the bucket or a file it contains
         # must assume the transit costs related to the access. The requester
-        # must pass the `user_project` option to {Project#bucket} to indicate
-        # the project to which the access costs should be billed.
+        # must pass the `user_project` option to {Project#bucket} and
+        # {Project#buckets} to indicate the project to which the access costs
+        # should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
@@ -359,8 +360,8 @@ module Google
         # Enables requester pays for the bucket. If enabled, a client accessing
         # the bucket or a file it contains must assume the transit costs related
         # to the access. The requester must pass the `user_project` option to
-        # {Project#bucket} to indicate the project to which the access costs
-        # should be billed.
+        # {Project#bucket} and {Project#buckets} to indicate the project to
+        # which the access costs should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
@@ -376,7 +377,7 @@ module Google
         #
         #   bucket.requester_pays = true # API call
         #   # Other projects must now provide `user_project` option when calling
-        #   # Project#bucket to access this bucket.
+        #   # Project#bucket or Project#buckets to access this bucket.
         #
         def requester_pays= new_requester_pays
           @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new

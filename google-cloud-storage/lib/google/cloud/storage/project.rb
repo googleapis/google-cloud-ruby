@@ -93,21 +93,19 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of buckets to return.
-        # @param [Boolean, String] user_project If the `requester_pays` flag is
-        #   enabled for any of the returned buckets, and if this parameter is
-        #   set to `true`, transit costs for operations on the enabled buckets
-        #   or their files will be billed to the current project for this
-        #   client. (See {#project} for the ID of the current project.) If this
-        #   parameter is set to a project ID other than the current project, and
-        #   that project is authorized for the currently authenticated service
-        #   account, transit costs will be billed to the given project. The
-        #   default is `nil`.
+        # @param [Boolean, String] user_project If this parameter is set to
+        #   `true`, transit costs for operations on the enabled buckets or their
+        #   files will be billed to the current project for this client. (See
+        #   {#project} for the ID of the current project.) If this parameter is
+        #   set to a project ID other than the current project, and that project
+        #   is authorized for the currently authenticated service account,
+        #   transit costs will be billed to the given project. The default is
+        #   `nil`.
         #
-        #   The requester pays feature is currently available only to
-        #   whitelisted projects.
+        #   The value provided will be applied to all operations on the returned
+        #   bucket instances and their files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
-        #
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -158,8 +156,7 @@ module Google
         #   without verifying the bucket resource exists on the Storage service.
         #   Calls made on this object will raise errors if the bucket resource
         #   does not exist. Default is `false`.
-        # @param [Boolean, String] user_project If the `requester_pays` flag is
-        #   enabled for the requested bucket, and if this parameter is set to
+        # @param [Boolean, String] user_project If this parameter is set to
         #   `true`, transit costs for operations on the requested bucket or a
         #   file it contains will be billed to the current project for this
         #   client. (See {#project} for the ID of the current project.) If this
@@ -168,8 +165,8 @@ module Google
         #   account, transit costs will be billed to the given project. The
         #   default is `nil`.
         #
-        #   The requester pays feature is currently available only to
-        #   whitelisted projects.
+        #   The value provided will be applied to all operations on the returned
+        #   bucket instance and its files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         #
@@ -303,15 +300,13 @@ module Google
         #   does not exist. For more information, see [How to Host a Static
         #   Website
         #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
-        # @param [Boolean, String] user_project If the `requester_pays` flag is
-        #   enabled for the new bucket, and if this parameter is set to a
-        #   project ID other than the current project, and that project is
-        #   authorized for the currently authenticated service account, transit
-        #   costs for operations on the requested bucket or a file it contains
-        #   will be billed to the given project. The default is `nil`.
+        # @param [String] user_project If this parameter is set to a project ID
+        #   other than the current project, and that project is authorized for
+        #   the currently authenticated service account, transit costs will be
+        #   billed to the given project. The default is `nil`.
         #
-        #   The requester pays feature is currently available only to
-        #   whitelisted projects.
+        #   The value provided will be applied to all operations on the returned
+        #   bucket instance and its files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         #
