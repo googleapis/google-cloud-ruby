@@ -45,7 +45,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      annotation.entities.other.map(&:name).must_equal ["ruby", "code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
@@ -86,7 +86,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      annotation.entities.other.map(&:name).must_equal ["ruby", "code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
@@ -127,7 +127,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      annotation.entities.other.map(&:name).must_equal ["ruby", "code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
@@ -168,7 +168,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      annotation.entities.other.map(&:name).must_equal ["ruby", "code"]
 
       annotation.sentences.map(&:text).must_equal [hello, sayhi, ruby]
       annotation.sentences.first.text.must_equal hello
@@ -263,7 +263,7 @@ describe "Language (TEXT/Storage URL)", :language do
       annotation.entities.events.map(&:name).must_equal []
       annotation.entities.artwork.map(&:name).must_equal []
       annotation.entities.goods.map(&:name).must_equal []
-      annotation.entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      annotation.entities.other.map(&:name).must_equal ["ruby", "code"]
 
       annotation.sentences.must_be :empty?
       annotation.tokens.must_be :empty?
@@ -285,7 +285,7 @@ describe "Language (TEXT/Storage URL)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      entities.other.map(&:name).must_equal ["ruby", "code"]
     end
 
     it "works with creating a document" do
@@ -306,7 +306,7 @@ describe "Language (TEXT/Storage URL)", :language do
       entities.events.map(&:name).must_equal []
       entities.artwork.map(&:name).must_equal []
       entities.goods.map(&:name).must_equal []
-      entities.other.map(&:name).must_equal ["ruby", "writing code"]
+      entities.other.map(&:name).must_equal ["ruby", "code"]
 
       entities.places.first.name.must_equal "Utah"
       entities.places.first.type.must_equal :LOCATION
