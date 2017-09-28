@@ -72,8 +72,9 @@ module Google
             return nil unless next?
             ensure_service!
             gapi = @service.list_buckets prefix: @prefix, token: @token,
-                                         max: @max
-            Bucket::List.from_gapi gapi, @service, @prefix, @max
+                                         max: @max, user_project: @user_project
+            Bucket::List.from_gapi gapi, @service, @prefix, @max,
+                                   user_project: @user_project
           end
 
           ##
@@ -144,14 +145,16 @@ module Google
           ##
           # @private New Bucket::List from a Google API Client
           # Google::Apis::StorageV1::Buckets object.
-          def self.from_gapi gapi_list, service, prefix = nil, max = nil
+          def self.from_gapi gapi_list, service, prefix = nil, max = nil,
+                             user_project: nil
             buckets = new(Array(gapi_list.items).map do |gapi_object|
-              Bucket.from_gapi gapi_object, service
+              Bucket.from_gapi gapi_object, service, user_project: user_project
             end)
             buckets.instance_variable_set :@token, gapi_list.next_page_token
             buckets.instance_variable_set :@service, service
             buckets.instance_variable_set :@prefix, prefix
             buckets.instance_variable_set :@max, max
+            buckets.instance_variable_set :@user_project, user_project
             buckets
           end
 

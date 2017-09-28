@@ -35,6 +35,20 @@ describe "Storage", :buckets, :storage do
     second_buckets.each { |b| b.must_be_kind_of Google::Cloud::Storage::Bucket }
   end
 
+  it "gets pages of buckets with user_project set to true" do
+    first_buckets = storage.buckets max: 2, user_project: true
+    first_buckets.next?.must_equal true
+    first_buckets.each do |b|
+      b.must_be_kind_of Google::Cloud::Storage::Bucket
+      b.user_project.must_equal true
+    end
+    second_buckets = first_buckets.next
+    second_buckets.each do |b|
+      b.must_be_kind_of Google::Cloud::Storage::Bucket
+      b.user_project.must_equal true
+    end
+  end
+
   it "gets all buckets with request_limit" do
     storage.buckets(max: 2).all(request_limit: 1) do |bucket|
       bucket.must_be_kind_of Google::Cloud::Storage::Bucket

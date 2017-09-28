@@ -31,7 +31,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     storage.bucket(one_off_bucket_name).must_be :nil?
 
-    one_off_bucket = storage.create_bucket(one_off_bucket_name)
+    one_off_bucket = storage.create_bucket one_off_bucket_name, user_project: true
 
     storage.bucket(one_off_bucket_name).wont_be :nil?
 
@@ -40,6 +40,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     one_off_bucket.website_404.must_be :nil?
     one_off_bucket.requester_pays.must_be :nil?
     one_off_bucket.labels.must_equal({})
+    one_off_bucket.user_project.must_equal true
     one_off_bucket.update do |b|
       b.storage_class = :nearline
       b.website_main = "index.html"
@@ -55,12 +56,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
     # labels with symbols are not strings
     one_off_bucket.labels.must_equal({ "foo" => "bar" })
 
-    one_off_bucket_copy = storage.bucket one_off_bucket_name
+    one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
     one_off_bucket_copy.wont_be :nil?
     one_off_bucket_copy.storage_class.must_equal "NEARLINE"
     one_off_bucket_copy.website_main.must_equal "index.html"
     one_off_bucket_copy.website_404.must_equal "not_found.html"
     one_off_bucket_copy.requester_pays.must_equal true
+    one_off_bucket_copy.user_project.must_equal true
 
     one_off_bucket.files.all &:delete
     one_off_bucket.delete

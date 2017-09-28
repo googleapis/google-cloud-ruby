@@ -93,6 +93,21 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of buckets to return.
+        # @param [Boolean, String] user_project If the `requester_pays` flag is
+        #   enabled for any of the returned buckets, and if this parameter is
+        #   set to `true`, transit costs for operations on the enabled buckets
+        #   or their files will be billed to the current project for this
+        #   client. (See {#project} for the ID of the current project.) If this
+        #   parameter is set to a project ID other than the current project, and
+        #   that project is authorized for the currently authenticated service
+        #   account, transit costs will be billed to the given project. The
+        #   default is `nil`.
+        #
+        #   The requester pays feature is currently available only to
+        #   whitelisted projects.
+        #
+        #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        #
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -127,9 +142,11 @@ module Google
         #     puts bucket.name
         #   end
         #
-        def buckets prefix: nil, token: nil, max: nil
-          gapi = service.list_buckets prefix: prefix, token: token, max: max
-          Bucket::List.from_gapi gapi, service, prefix, max
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil
+          gapi = service.list_buckets \
+            prefix: prefix, token: token, max: max, user_project: user_project
+          Bucket::List.from_gapi \
+            gapi, service, prefix, max, user_project: user_project
         end
         alias_method :find_buckets, :buckets
 
@@ -286,6 +303,18 @@ module Google
         #   does not exist. For more information, see [How to Host a Static
         #   Website
         #   ](https://cloud.google.com/storage/docs/website-configuration#step4).
+        # @param [Boolean, String] user_project If the `requester_pays` flag is
+        #   enabled for the new bucket, and if this parameter is set to a
+        #   project ID other than the current project, and that project is
+        #   authorized for the currently authenticated service account, transit
+        #   costs for operations on the requested bucket or a file it contains
+        #   will be billed to the given project. The default is `nil`.
+        #
+        #   The requester pays feature is currently available only to
+        #   whitelisted projects.
+        #
+        #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        #
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
         # @yieldparam [Bucket] cors the bucket object to be configured
@@ -317,7 +346,8 @@ module Google
         def create_bucket bucket_name, acl: nil, default_acl: nil,
                           location: nil, storage_class: nil,
                           logging_bucket: nil, logging_prefix: nil,
-                          website_main: nil, website_404: nil, versioning: nil
+                          website_main: nil, website_404: nil, versioning: nil,
+                          requester_pays: nil, user_project: nil
           new_bucket = Google::Apis::StorageV1::Bucket.new({
             name: bucket_name,
             location: location
@@ -330,13 +360,15 @@ module Google
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
+            b.requester_pays = requester_pays unless requester_pays.nil?
           end
           yield updater if block_given?
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           gapi = service.insert_bucket \
-            new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl)
-          Bucket.from_gapi gapi, service
+            new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
+                        user_project: user_project
+          Bucket.from_gapi gapi, service, user_project: user_project
         end
 
         ##
