@@ -55,24 +55,18 @@ module Google
         attr_accessor :service
 
         ##
-        # A boolean value or a project ID string for a requester pays
-        # bucket and its files. If this attribute is set to `true`, transit
-        # costs for operations on the file will be billed to the current
-        # project for this client. (See {Project#project} for the ID of the
-        # current project.) If this attribute is set to a project ID, and that
-        # project is authorized for the currently authenticated service account,
-        # transit costs will be billed to the that project. The default is
-        # `nil`.
+        # If this attribute is set to `true`, transit costs for operations on
+        # the file will be billed to the current project for this client. (See
+        # {Project#project} for the ID of the current project.) If this
+        # attribute is set to a project ID, and that project is authorized for
+        # the currently authenticated service account, transit costs will be
+        # billed to the that project. The default is `nil`.
         #
         # In general, this attribute should be set when first retrieving the
         # owning bucket by providing the `user_project` option to
-        # {Project#bucket}.
+        # {Project#bucket} or {Project#buckets}.
         #
-        # The requester pays feature is currently available only to whitelisted
-        # projects.
-        #
-        # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
-        # enable requester pays for a bucket.
+        # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         #
         # @example Setting a non-default project:
         #   require "google/cloud/storage"

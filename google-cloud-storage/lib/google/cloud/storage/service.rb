@@ -64,10 +64,11 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil
           execute do
-            service.list_buckets @project, prefix: prefix, page_token: token,
-                                           max_results: max
+            service.list_buckets \
+              @project, prefix: prefix, page_token: token, max_results: max,
+                        user_project: user_project(user_project)
           end
         end
 
@@ -84,12 +85,14 @@ module Google
         ##
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
-        def insert_bucket bucket_gapi, acl: nil, default_acl: nil
+        def insert_bucket bucket_gapi, acl: nil, default_acl: nil,
+                          user_project: nil
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
               predefined_acl: acl,
-              predefined_default_object_acl: default_acl
+              predefined_default_object_acl: default_acl,
+              user_project: user_project(user_project)
           end
         end
 
@@ -471,8 +474,8 @@ module Google
         end
 
         # Pub/Sub notification subscription event_types
-        def event_types arr
-          arr.map { |x| event_type x } if arr
+        def event_types str_or_arr
+          Array(str_or_arr).map { |x| event_type x } if str_or_arr
         end
 
         # Pub/Sub notification subscription event_types

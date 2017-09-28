@@ -342,8 +342,9 @@ module Google
         ##
         # Indicates that a client accessing the bucket or a file it contains
         # must assume the transit costs related to the access. The requester
-        # must pass the `user_project` option to {Project#bucket} to indicate
-        # the project to which the access costs should be billed.
+        # must pass the `user_project` option to {Project#bucket} and
+        # {Project#buckets} to indicate the project to which the access costs
+        # should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
@@ -359,8 +360,8 @@ module Google
         # Enables requester pays for the bucket. If enabled, a client accessing
         # the bucket or a file it contains must assume the transit costs related
         # to the access. The requester must pass the `user_project` option to
-        # {Project#bucket} to indicate the project to which the access costs
-        # should be billed.
+        # {Project#bucket} and {Project#buckets} to indicate the project to
+        # which the access costs should be billed.
         #
         # This feature is currently available only to whitelisted projects.
         #
@@ -376,7 +377,7 @@ module Google
         #
         #   bucket.requester_pays = true # API call
         #   # Other projects must now provide `user_project` option when calling
-        #   # Project#bucket to access this bucket.
+        #   # Project#bucket or Project#buckets to access this bucket.
         #
         def requester_pays= new_requester_pays
           @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
@@ -1211,10 +1212,10 @@ module Google
         #   the notification. An optional list of additional attributes to
         #   attach to each Cloud Pub/Sub message published for the notification
         #   subscription.
-        # @param [Symbol, String] event_types The event types for the
-        #   notification subscription. If provided, messages will only be sent
-        #   for the listed event types. If empty, messages will be sent for all
-        #   event types.
+        # @param [Symbol, String, Array<Symbol, String>] event_types The event
+        #   types for the notification subscription. If provided, messages will
+        #   only be sent for the listed event types. If empty, messages will be
+        #   sent for all event types.
         #
         #   Acceptable values are:
         #
@@ -1240,15 +1241,15 @@ module Google
         # @param [Symbol, String, Boolean] payload The desired content of the
         #   Pub/Sub message payload. Acceptable values are:
         #
-        #   * `true` or `:json` - The Pub/Sub message payload will be a UTF-8
+        #   * `:json` or `true` - The Pub/Sub message payload will be a UTF-8
         #     string containing the [resource
         #     representation](https://cloud.google.com/storage/docs/json_api/v1/objects#resource-representations)
         #     of the file's metadata.
-        #   * `false` or `:none` - No payload is included with the notification.
+        #   * `:none` or `false` - No payload is included with the notification.
         #
         #   The default value is `:json`.
         #
-        # @return [Array<String>] The permissions held by the caller.
+        # @return [Google::Cloud::Storage::Notification]
         #
         # @example
         #   require "google/cloud/pubsub"

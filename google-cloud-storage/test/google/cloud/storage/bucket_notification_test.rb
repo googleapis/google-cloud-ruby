@@ -71,7 +71,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
     notification.payload.must_equal "JSON_API_V1"
   end
 
-  it "creates a notification with a symbol event type" do
+  it "creates a notification with a array of symbols event type" do
     mock = Minitest::Mock.new
     mock.expect :insert_notification, random_notification_gapi(id: notification_id),
                 [bucket.name, random_notification_gapi(id: nil), { user_project: nil }]
@@ -80,6 +80,23 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     notification = bucket.create_notification topic_name, custom_attrs: custom_attrs,
                                                           event_types: [:finalize],
+                                                          prefix: filename_prefix,
+                                                          payload: payload
+
+    mock.verify
+
+    notification.event_types.must_equal event_types
+  end
+
+  it "creates a notification with a single symbol event type" do
+    mock = Minitest::Mock.new
+    mock.expect :insert_notification, random_notification_gapi(id: notification_id),
+                [bucket.name, random_notification_gapi(id: nil), { user_project: nil }]
+
+    bucket.service.mocked_service = mock
+
+    notification = bucket.create_notification topic_name, custom_attrs: custom_attrs,
+                                                          event_types: :finalize,
                                                           prefix: filename_prefix,
                                                           payload: payload
 
