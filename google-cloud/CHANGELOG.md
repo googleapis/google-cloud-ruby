@@ -1,5 +1,9 @@
 # Release History
 
+### 0.43.0 / 2017-09-29
+
+* Spanner 1.0 release.
+
 ### 0.42.0 / 2017-09-28
 
 * Storage 1.6.0 release.
