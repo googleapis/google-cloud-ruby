@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.0 / 2017-09-28
+
+* Update Google API Client dependency to 0.14.x.
+
 ### 0.27.1 / 2017-07-11
 
 * Add `InsertResponse::InsertError#index` (zedalaye)
