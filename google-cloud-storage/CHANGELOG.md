@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.0 / 2017-09-28
+
+* Add `user_project` option to `Project#buckets` and `Project#create_bucket`.
+* Upgrade to Google API Client 0.14.2.
+* Update documentation.
+
 ### 1.5.0 / 2017-09-26
 
 * Add Pub/Sub notification subscriptions.
