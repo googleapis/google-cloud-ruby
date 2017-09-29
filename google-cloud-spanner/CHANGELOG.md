@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.0 / 2017-09-29
+
+* Release 1.0
+
 ### 0.23.2 / 2017-09-12
 
 * Update connection configuration.
