@@ -1,5 +1,20 @@
 # Release History
 
+### 0.42.0 / 2017-09-28
+
+* Storage 1.6.0 release.
+  * Add `user_project` option to `Project#buckets` and `Project#create_bucket`.
+  * Upgrade to Google API Client 0.14.2.
+  * Update documentation.
+* Video Intelligence 0.23.0 release.
+  * Beta release
+* BigQuery 0.28.0 release.
+  * Update Google API Client dependency to 0.14.x.
+* DNS 0.26.0 release.
+  * Update Google API Client dependency to 0.14.x.
+* Resource Manager 0.27.0 release.
+  * Update Google API Client dependency to 0.14.x.
+
 ### 0.41.0 / 2017-09-08
 
 * Error Reporting 0.27.0 release.
