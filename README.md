@@ -16,6 +16,7 @@ This client supports the following Google Cloud Platform services at a [General 
 
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
+* [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
 
@@ -25,7 +26,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
-* [Cloud Spanner API](#cloud-spanner-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
 * [Cloud Video Intelligence API](#cloud-video-intelligence-api-beta) (Beta)
 
@@ -392,7 +392,7 @@ result_set.each do |trace_record|
 end
 ```
 
-### Cloud Spanner API (Beta)
+### Cloud Spanner API (GA)
 
 - [google-cloud-spanner README](google-cloud-spanner/README.md)
 - [google-cloud-spanner API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest)
