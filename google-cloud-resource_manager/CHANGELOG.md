@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.0 / 2017-09-28
+
+* Update Google API Client dependency to 0.14.x.
+
 ### 0.26.0 / 2017-06-27
 
 * Upgrade dependency on Google API Client
