@@ -258,14 +258,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   dataset.access # [{"role"=>"OWNER",
-        #                  #   "specialGroup"=>"projectOwners"},
-        #                  #  {"role"=>"WRITER",
-        #                  #   "specialGroup"=>"projectWriters"},
-        #                  #  {"role"=>"READER",
-        #                  #   "specialGroup"=>"projectReaders"},
-        #                  #  {"role"=>"OWNER",
-        #                  #   "userByEmail"=>"123456789-...com"}]
+        #   access = dataset.access
+        #   access.writer_user? "reader@example.com" #=> false
         #
         # @example Manage the access rules by passing a block:
         #   require "google/cloud/bigquery"
