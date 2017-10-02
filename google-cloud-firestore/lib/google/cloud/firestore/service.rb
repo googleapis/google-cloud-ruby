@@ -46,32 +46,6 @@ module Google
               lib_version: Google::Cloud::Firestore::VERSION)
         end
 
-        def list_documents parent, collection_id, token: nil
-          options = call_options parent: database_path, token: token
-
-          execute do
-            firestore.list_documents parent, collection_id, nil, nil, nil,
-                                     options: options
-          end
-        end
-
-        def get_document path, mask: nil
-          options = call_options parent: database_path
-
-          execute do
-            firestore.get_document path, document_mask(mask), options: options
-          end
-        end
-
-        def list_collections parent, token: nil, page_size: nil
-          options = call_options parent: database_path, token: token
-
-          execute do
-            firestore.list_collection_ids parent, page_size: page_size,
-                                                  options: options
-          end
-        end
-
         def database_path project_id: project, database_id: "(default)"
           V1beta1::FirestoreClient.database_root_path project_id, database_id
         end
@@ -96,15 +70,6 @@ module Google
             kwargs: default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
-        end
-
-        def document_mask mask
-          return nil if mask.nil?
-
-          mask = Array mask
-          return nil if mask.empty?
-
-          Google::Firestore::V1beta1::DocumentMask.new field_paths: mask
         end
 
         def execute

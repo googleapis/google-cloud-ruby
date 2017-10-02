@@ -46,7 +46,7 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
       #
-      # @return [Google::Cloud::Firestore::Project]
+      # @return [Google::Cloud::Firestore::Database]
       #
       # @example
       #   require "google/cloud/firestore"
@@ -67,7 +67,7 @@ module Google
             keyfile, scope: scope
         end
 
-        Google::Cloud::Firestore::Project.new \
+        Google::Cloud::Firestore::Database.new \
           Google::Cloud::Firestore::Service.new \
             project, credentials,
             timeout: timeout, client_config: client_config

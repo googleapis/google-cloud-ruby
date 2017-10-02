@@ -76,8 +76,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
             firestore = Google::Cloud.firestore
-            firestore.must_be_kind_of Google::Cloud::Firestore::Project
+            firestore.must_be_kind_of Google::Cloud::Firestore::Database
             firestore.project_id.must_equal "project-id"
+            firestore.database_id.must_equal "(default)"
             firestore.service.credentials.must_equal default_credentials
           end
         end
@@ -105,8 +106,9 @@ describe Google::Cloud do
             Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Firestore::Service.stub :new, stubbed_service do
                 firestore = Google::Cloud.firestore "project-id", "path/to/keyfile.json"
-                firestore.must_be_kind_of Google::Cloud::Firestore::Project
+                firestore.must_be_kind_of Google::Cloud::Firestore::Database
                 firestore.project_id.must_equal "project-id"
+                firestore.database_id.must_equal "(default)"
                 firestore.service.must_be_kind_of OpenStruct
               end
             end
@@ -127,8 +129,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
             firestore = Google::Cloud::Firestore.new
-            firestore.must_be_kind_of Google::Cloud::Firestore::Project
+            firestore.must_be_kind_of Google::Cloud::Firestore::Database
             firestore.project_id.must_equal "project-id"
+            firestore.database_id.must_equal "(default)"
             firestore.service.credentials.must_equal default_credentials
           end
         end
@@ -156,8 +159,9 @@ describe Google::Cloud do
             Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Firestore::Service.stub :new, stubbed_service do
                 firestore = Google::Cloud::Firestore.new project: "project-id", keyfile: "path/to/keyfile.json"
-                firestore.must_be_kind_of Google::Cloud::Firestore::Project
+                firestore.must_be_kind_of Google::Cloud::Firestore::Database
                 firestore.project_id.must_equal "project-id"
+                firestore.database_id.must_equal "(default)"
                 firestore.service.must_be_kind_of OpenStruct
               end
             end

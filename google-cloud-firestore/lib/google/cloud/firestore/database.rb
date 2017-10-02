@@ -13,52 +13,37 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
-require "google/cloud/firestore/database"
-require "google/cloud/firestore/service"
-
 module Google
   module Cloud
     module Firestore
       ##
-      # # Project
+      # # Database
       #
-      class Project
+      class Database
         ##
         # @private The Service object.
         attr_accessor :service
 
         ##
-        # @private Creates a new Firestore Project instance.
+        # @private Creates a new Firestore Database instance.
         def initialize service
           @service = service
         end
 
-        ##
-        # The identifier for the Cloud Firestore project.
-        #
-        # @example
-        #   require "google/cloud"
-        #
-        #   firestore = Google::Cloud::Firestore.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
-        #   )
-        #
-        #   firestore.project #=> "my-project-id"
-        #
         def project
+          @project ||= Project.new service
+        end
+
+        def project_id
           service.project
         end
-        alias_method :project_id, :project
 
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["FIRESTORE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
+        def database_id
+          "(default)"
+        end
+
+        def path
+          service.database_path
         end
 
         protected

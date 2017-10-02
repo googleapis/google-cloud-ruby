@@ -42,7 +42,7 @@ module Google
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
     #
-    # @return [Google::Cloud::Firestore::Project]
+    # @return [Google::Cloud::Firestore::Database]
     #
     # @example
     #   require "google/cloud"
@@ -86,7 +86,7 @@ module Google
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
     #
-    # @return [Google::Cloud::Firestore::Project]
+    # @return [Google::Cloud::Firestore::Database]
     #
     # @example
     #   require "google/cloud"
