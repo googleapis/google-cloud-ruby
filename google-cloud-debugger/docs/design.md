@@ -32,8 +32,7 @@ breakpoints are managed by a shared Breakpoint Manager object and they are
 traced by using using Ruby VM Tracing API at C level.
 
 ![google-cloud-debugger agent 
-design](https://gist.githubusercontent.com/hxiong388/9fdfec068a218f83cc9bfc7fe6ce587d/raw/5810920af8e9161445c9198adcf18a063077457b/google-cloud-debugger-agent-design.svg?sanitize=true
-"Debugger Agent Design")
+design](google-cloud-debugger-agent-design.svg "Debugger Agent Design")
 
 ## Agent Components
 
@@ -95,7 +94,7 @@ works.
 ### Breakpoints
 
 Unlike traditional debugging tools, users don't create breakpoints 
-locally. INstead, breakpoints are created on the [Stackdriver Debugger
+locally. Instead, breakpoints are created on the [Stackdriver Debugger
 UI](http://console.cloud.google.com/debug) for registered debuggee services,
 which then distributes the breakpoints to all the registered debuggee 
 applications under that service. Once a debugger agent gets the breakpoint, it
@@ -210,8 +209,7 @@ The following diagram illustrates how file TracePoint, return TracePoint,
 and line tracing work together in a basic interleaving situation:
 
 ![google-cloud-debugger tracer
-flow](https://gist.githubusercontent.com/hxiong388/9fdfec068a218f83cc9bfc7fe6ce587d/raw/7ef7ad1ead51c74757d397cf946288f5a01edd97/google-cloud-debugger-tracer.svg?sanitize=true
-"Debugger Tracer Flow Diagram")
+flow](google-cloud-debugger-tracer.svg "Debugger Tracer Flow Diagram")
 
 In this figure, the breakpoint is set on breakpoint.rb, line 3. The File 
 TracePoint is responsible for turning on/off the line TracePoint and return 
@@ -247,7 +245,7 @@ stack. Then retrieves local variables and stack frame data from the binding
 objects. We only gets local variables for the top 5 most recent stack
 frames, assuming those will be the commonly used data for user, and it's
 not often useful to collect local variables for all the frames. The user defined
-expressions are evaluated using the [readyonly expression 
+expressions are evaluated using the [readonly expression 
 evaluation](#readonly-expression-evaluation) technique described below.
 
 #### Variable conversion
