@@ -46,6 +46,20 @@ module Google
               lib_version: Google::Cloud::Firestore::VERSION)
         end
 
+        def list_collections parent, transaction: nil
+          list_args = {}
+          if transaction.is_a? String
+            list_args[:transaction] = transaction
+          elsif transaction
+            list_args[:new_transaction] = transaction
+          end
+          list_args[:options] = call_options parent: database_path
+
+          execute do
+            firestore.list_collection_ids parent, list_args
+          end
+        end
+
         def database_path project_id: project, database_id: "(default)"
           V1beta1::FirestoreClient.database_root_path project_id, database_id
         end
