@@ -14,6 +14,7 @@
 
 
 require "google/cloud/firestore/collection"
+require "google/cloud/firestore/document"
 
 module Google
   module Cloud
@@ -68,6 +69,17 @@ module Google
           Collection.from_path "#{path}/documents/#{collection_path}", self
         end
         alias_method :collection, :col
+
+        def doc document_path
+          if document_path.to_s.split("/").count.odd?
+            fail ArgumentError, "document_path must refer to a document."
+          end
+
+          doc_path = "#{path}/documents/#{document_path}"
+
+          Document.from_path doc_path, self
+        end
+        alias_method :document, :doc
 
         protected
 
