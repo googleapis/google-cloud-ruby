@@ -13,6 +13,9 @@
 # limitations under the License.
 
 
+require "google/cloud/firestore/document"
+require "google/cloud/firestore/generate"
+
 module Google
   module Cloud
     module Firestore
@@ -63,10 +66,22 @@ module Google
             context
           end
 
+          def doc document_path = nil
+            document_path ||= random_document_id
+
+            ensure_context!
+            context.doc "#{collection_path}/#{document_path}"
+          end
+          alias_method :document, :doc
+
           protected
 
           def parent_path
             path.split("/")[0...-1].join("/")
+          end
+
+          def random_document_id
+            Generate.unique_id
           end
 
           ##
