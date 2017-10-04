@@ -30,9 +30,29 @@ module Google
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #
+      #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
+      #                            "publicdata.samples.shakespeare"
+      #
+      #   job.wait_until_done!
+      #
+      #   if job.failed?
+      #     puts job.error
+      #   else
+      #     puts job.data.first
+      #   end
+      #
       class QueryJob < Job
         ##
         # Checks if the priority for the query is `BATCH`.
+        #
+        # @return [Boolean] `true` when the priority is `BATCH`, `false`
+        #   otherwise.
+        #
         def batch?
           val = @gapi.configuration.query.priority
           val == "BATCH"
@@ -40,6 +60,10 @@ module Google
 
         ##
         # Checks if the priority for the query is `INTERACTIVE`.
+        #
+        # @return [Boolean] `true` when the priority is `INTERACTIVE`, `false`
+        #   otherwise.
+        #
         def interactive?
           val = @gapi.configuration.query.priority
           return true if val.nil?
@@ -49,6 +73,10 @@ module Google
         ##
         # Checks if the the query job allows arbitrarily large results at a
         # slight cost to performance.
+        #
+        # @return [Boolean] `true` when large results are allowed, `false`
+        #   otherwise.
+        #
         def large_results?
           val = @gapi.configuration.query.allow_large_results
           return false if val.nil?
@@ -59,6 +87,10 @@ module Google
         # Checks if the query job looks for an existing result in the query
         # cache. For more information, see [Query
         # Caching](https://cloud.google.com/bigquery/querying-data#querycaching).
+        #
+        # @return [Boolean] `true` when the query cache will be used, `false`
+        #   otherwise.
+        #
         def cache?
           val = @gapi.configuration.query.use_query_cache
           return false if val.nil?
@@ -69,6 +101,10 @@ module Google
         # Checks if the query job flattens nested and repeated fields in the
         # query results. The default is `true`. If the value is `false`,
         # #large_results? should return `true`.
+        #
+        # @return [Boolean] `true` when the job flattens results, `false`
+        #   otherwise.
+        #
         def flatten?
           val = @gapi.configuration.query.flatten_results
           return true if val.nil?
@@ -76,15 +112,27 @@ module Google
         end
 
         ##
-        # Limits the billing tier for this job.
-        # For more information, see [High-Compute
+        # Limits the billing tier for this job. Queries that have resource usage
+        # beyond this tier will fail (without incurring a charge). If
+        # unspecified, this will be set to your project default. For more
+        # information, see [High-Compute
         # queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        #
+        # @return [Integer, nil] The tier number, or `nil` for the project
+        #   default.
+        #
         def maximum_billing_tier
           @gapi.configuration.query.maximum_billing_tier
         end
 
         ##
-        # Limits the bytes billed for this job.
+        # Limits the bytes billed for this job. Queries that will have bytes
+        # billed beyond this limit will fail (without incurring a charge). If
+        # `nil`, this will be set to your project default.
+        #
+        # @return [Integer, nil] The number of bytes, or `nil` for the project
+        #   default.
+        #
         def maximum_bytes_billed
           Integer @gapi.configuration.query.maximum_bytes_billed
         rescue
@@ -93,12 +141,19 @@ module Google
 
         ##
         # Checks if the query results are from the query cache.
+        #
+        # @return [Boolean] `true` when the job statistics indicate a cache hit,
+        #   `false` otherwise.
+        #
         def cache_hit?
           @gapi.statistics.query.cache_hit
         end
 
         ##
         # The number of bytes processed by the query.
+        #
+        # @return [Integer] Total bytes processed for the job.
+        #
         def bytes_processed
           Integer @gapi.statistics.query.total_bytes_processed
         rescue
@@ -108,7 +163,27 @@ module Google
         ##
         # Describes the execution plan for the query.
         #
-        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>]
+        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>] An array
+        #   containing the stages of the execution plan.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #
+        #   stages = job.query_plan
+        #   stages.each do |stage|
+        #     puts stage.name
+        #     stage.steps.each do |step|
+        #       puts step.kind
+        #       puts step.substeps.inspect
+        #     end
+        #   end
         #
         def query_plan
           return nil unless @gapi.statistics.query.query_plan
@@ -119,6 +194,9 @@ module Google
 
         ##
         # The table in which the query results are stored.
+        #
+        # @return [Table] A table instance.
+        #
         def destination
           table = @gapi.configuration.query.destination_table
           return nil unless table
@@ -129,6 +207,9 @@ module Google
 
         ##
         # Checks if the query job is using legacy sql.
+        #
+        # @return [Boolean] `true` when legacy sql is used, `false` otherwise.
+        #
         def legacy_sql?
           val = @gapi.configuration.query.use_legacy_sql
           return true if val.nil?
@@ -137,6 +218,9 @@ module Google
 
         ##
         # Checks if the query job is using standard sql.
+        #
+        # @return [Boolean] `true` when standard sql is used, `false` otherwise.
+        #
         def standard_sql?
           !legacy_sql?
         end
@@ -148,6 +232,10 @@ module Google
         # user-defined function (UDF). Providing an inline code resource is
         # equivalent to providing a URI for a file containing the same code. See
         # [User-Defined Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @return [Array<String>] An array containing Google Cloud Storage URIs
+        #   and/or inline source code.
+        #
         def udfs
           udfs_gapi = @gapi.configuration.query.user_defined_function_resources
           return nil unless udfs_gapi
@@ -193,7 +281,8 @@ module Google
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
         #
-        # @return [Google::Cloud::Bigquery::Data]
+        # @return [Google::Cloud::Bigquery::Data] An object providing access to
+        #   data read from the destination table for the job.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -251,6 +340,25 @@ module Google
         # @attr_reader [Float] write_ratio_max Relative amount of time the
         #   slowest shard spent on writing output.
         #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #
+        #   stages = job.query_plan
+        #   stages.each do |stage|
+        #     puts stage.name
+        #     stage.steps.each do |step|
+        #       puts step.kind
+        #       puts step.substeps.inspect
+        #     end
+        #   end
+        #
         class Stage
           attr_reader :compute_ratio_avg, :compute_ratio_max, :id, :name,
                       :read_ratio_avg, :read_ratio_max, :records_read,
@@ -300,6 +408,25 @@ module Google
         #   metadata](https://cloud.google.com/bigquery/query-plan-explanation#steps_metadata).
         # @attr_reader [Array<String>] substeps Human-readable stage
         #   descriptions.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #
+        #   stages = job.query_plan
+        #   stages.each do |stage|
+        #     puts stage.name
+        #     stage.steps.each do |step|
+        #       puts step.kind
+        #       puts step.substeps.inspect
+        #     end
+        #   end
         #
         class Step
           attr_reader :kind, :substeps

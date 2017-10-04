@@ -65,6 +65,7 @@ end
 
 YARD::Doctest.configure do |doctest|
   # Skip aliases
+  doctest.skip "Google::Cloud::Bigquery::Job#refresh!"
   doctest.skip "Google::Cloud::Bigquery::QueryJob#query_results"
 
 
@@ -264,9 +265,64 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::CopyJob" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_destination_table"]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::ExtractJob" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
   # Google::Cloud::Bigquery::Job
   # Google::Cloud::Bigquery::Job#wait_until_done!
   doctest.before "Google::Cloud::Bigquery::Job" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+      mock.expect :get_job_query_results, query_data_gapi, ["my-project-id", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil), ["my-project-id", "target_dataset_id", "target_table_id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Job#cancel" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+      mock.expect :cancel_job, OpenStruct.new(job: query_job_gapi), ["my-project-id", "1234567890"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Job#rerun!" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Job#reload!" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+      mock.expect :get_job, query_job_gapi, ["my-project-id", "1234567890"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::LoadJob" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :insert_job, query_job_gapi, ["my-project-id", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::QueryJob" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
@@ -931,7 +987,18 @@ def query_job_hash
   }
   hash["statistics"]["query"] = {
     "cacheHit" => false,
-    "totalBytesProcessed" => 123456
+    "totalBytesProcessed" => 123456,
+    "queryPlan" => [
+      {
+        "steps" => [
+          {
+            "substeps" => [
+              "select"
+            ]
+          }
+        ]
+      }
+    ]
   }
   hash
 end

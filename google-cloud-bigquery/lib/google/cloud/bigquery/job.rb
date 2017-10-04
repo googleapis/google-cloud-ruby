@@ -33,8 +33,8 @@ module Google
       # {Dataset#query_job}, {Table#copy_job}, {Table#extract_job},
       # {Table#load_job}, or {View#data}.
       #
-      # @see https://cloud.google.com/bigquery/docs/managing_jobs_datasets_projects
-      #   Managing Jobs, Datasets, and Projects
+      # @see https://cloud.google.com/bigquery/docs/managing-jobs Running and
+      #   Managing Jobs
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #
@@ -72,27 +72,40 @@ module Google
 
         ##
         # The ID of the job.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), underscores (_), or dashes (-). The maximum length is 1,024
+        #   characters.
+        #
         def job_id
           @gapi.job_reference.job_id
         end
 
         ##
         # The ID of the project containing the job.
+        #
+        # @return [String] The project ID.
+        #
         def project_id
           @gapi.job_reference.project_id
         end
 
         ##
         # The email address of the user who ran the job.
+        #
+        # @return [String] The email address.
+        #
         def user_email
           @gapi.user_email
         end
 
         ##
-        # The current state of the job. The possible values are `PENDING`,
-        # `RUNNING`, and `DONE`. A `DONE` state does not mean that the job
-        # completed successfully. Use {#failed?} to discover if an error
+        # The current state of the job. A `DONE` state does not mean that the
+        # job completed successfully. Use {#failed?} to discover if an error
         # occurred or if the job was successful.
+        #
+        # @return [String] The state code. The possible values are `PENDING`,
+        #   `RUNNING`, and `DONE`.
         def state
           return nil if @gapi.status.nil?
           @gapi.status.state
@@ -107,6 +120,9 @@ module Google
 
         ##
         # Checks if the job's state is `PENDING`.
+        #
+        # @return [Boolean] `true` when `PENDING`, `false` otherwise.
+        #
         def pending?
           return false if state.nil?
           "pending".casecmp(state).zero?
@@ -117,13 +133,20 @@ module Google
         # running. However, a `DONE` state does not mean that the job completed
         # successfully.  Use {#failed?} to detect if an error occurred or if the
         # job was successful.
+        #
+        # @return [Boolean] `true` when `DONE`, `false` otherwise.
+        #
         def done?
           return false if state.nil?
           "done".casecmp(state).zero?
         end
 
         ##
-        # Checks if an error is present.
+        # Checks if an error is present. Use {#error} to access the error
+        # object.
+        #
+        # @return [Boolean] `true` when there is an error, `false` otherwise.
+        #
         def failed?
           !error.nil?
         end
@@ -140,6 +163,9 @@ module Google
         # The time when the job was started.
         # This field is present after the job's state changes from `PENDING`
         # to either `RUNNING` or `DONE`.
+        #
+        # @return [Time, nil] The start time from the job statistics.
+        #
         def started_at
           ::Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
         rescue
@@ -149,6 +175,9 @@ module Google
         ##
         # The time when the job ended.
         # This field is present when the job's state is `DONE`.
+        #
+        # @return [Time, nil] The end time from the job statistics.
+        #
         def ended_at
           ::Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
         rescue
@@ -170,6 +199,9 @@ module Google
         #
         # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
         #   reference
+        #
+        # @return [Hash] The job statistics.
+        #
         def statistics
           JSON.parse @gapi.statistics.to_json
         end
@@ -178,6 +210,9 @@ module Google
         ##
         # The job's status. Returns a hash. The values contained in the hash are
         # also exposed by {#state}, {#error}, and {#errors}.
+        #
+        # @return [Hash] The job status.
+        #
         def status
           JSON.parse @gapi.status.to_json
         end
@@ -189,7 +224,8 @@ module Google
         # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
         #   reference
         #
-        # @return [Hash] Returns a hash containing `reason` and `message` keys:
+        # @return [Hash, nil] Returns a hash containing `reason` and `message`
+        #   keys:
         #
         #   {
         #     "reason"=>"notFound",
@@ -203,6 +239,15 @@ module Google
         ##
         # The errors for the job, if any errors have occurred. Returns an array
         # of hash objects. See {#error}.
+        #
+        # @return [Array<Hash>, nil] Returns an array of hashes containing
+        #   `reason` and `message` keys:
+        #
+        #   {
+        #     "reason"=>"notFound",
+        #     "message"=>"Not found: Table publicdata:samples.BAD_ID"
+        #   }
+        #
         def errors
           Array status["errors"]
         end
@@ -214,6 +259,8 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
+        # @return [Hash] The job labels.
+        #
         # @!group Attributes
         #
         def labels
@@ -224,6 +271,17 @@ module Google
 
         ##
         # Cancels the job.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
+        #                            "publicdata.samples.shakespeare"
+        #
+        #   job.cancel
+        #
         def cancel
           ensure_service!
           resp = service.cancel_job job_id
@@ -233,6 +291,18 @@ module Google
 
         ##
         # Created a new job with the current configuration.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
+        #                            "publicdata.samples.shakespeare"
+        #
+        #   job.wait_until_done!
+        #   job.rerun!
+        #
         def rerun!
           ensure_service!
           gapi = service.insert_job @gapi.configuration
@@ -241,6 +311,19 @@ module Google
 
         ##
         # Reloads the job with current data from the BigQuery service.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
+        #                            "publicdata.samples.shakespeare"
+        #
+        #   job.done?
+        #   job.reload!
+        #   job.done? #=> true
+        #
         def reload!
           ensure_service!
           gapi = service.get_job job_id
