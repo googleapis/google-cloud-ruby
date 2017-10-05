@@ -260,6 +260,9 @@ module Google
         # destination table already exists, or if you're loading data from
         # Google Cloud Datastore.
         #
+        # The returned object is frozen and changes are not allowed. Use
+        # {Table#schema} to update the schema.
+        #
         # @return [Schema, nil] A schema object, or `nil`.
         #
         def schema
