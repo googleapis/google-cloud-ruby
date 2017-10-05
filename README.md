@@ -268,7 +268,7 @@ logging.write_entries entry
 
 - [google-cloud-language README](google-cloud-language/README.md)
 - [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest)
-- [google-cloud-language on RubyGems](https://rubygems.org/gems/[google-cloud-language)
+- [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
 - [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
 
 #### Quick Start
