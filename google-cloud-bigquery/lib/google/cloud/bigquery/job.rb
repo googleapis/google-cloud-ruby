@@ -153,6 +153,9 @@ module Google
 
         ##
         # The time when the job was created.
+        #
+        # @return [Time, nil] The creation time from the job statistics.
+        #
         def created_at
           ::Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
         rescue
