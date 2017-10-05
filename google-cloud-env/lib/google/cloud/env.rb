@@ -67,9 +67,10 @@ module Google
       #
       # @param [Hash] env Mock environment variables.
       # @param [Faraday::Connection] connection Faraday connection to use.
+      # @param [Hash] metadata_cache Mock cache.
       #
-      def initialize env: nil, connection: nil
-        @metadata_cache = {}
+      def initialize env: nil, connection: nil, metadata_cache: nil
+        @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
         @connection = connection ||
                       ::Faraday.new(url: METADATA_HOST,

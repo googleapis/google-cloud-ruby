@@ -62,6 +62,19 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       grpc.agent_version.wont_be_nil
       grpc.labels.to_a.wont_be_empty
     end
+
+    it "uses numeric project ID if available" do
+      numeric_id = 1234567890
+      path_base = "#{Google::Cloud::Env::METADATA_PATH_BASE}/project"
+      metadata_cache = {
+        "#{path_base}/project-id" => project,
+        "#{path_base}/numeric-project-id" => numeric_id
+      }
+      mock_env = Google::Cloud::Env.new metadata_cache: metadata_cache
+      debuggee.instance_variable_set :@env, mock_env
+      grpc = debuggee.to_grpc
+      grpc.project.must_equal numeric_id.to_s
+    end
   end
 
   describe "#read_app_json_file" do
