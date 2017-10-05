@@ -73,7 +73,7 @@ module Google
         ##
         # The schema of the data.
         def schema
-          Schema.from_gapi @table_gapi.schema
+          Schema.from_gapi(@table_gapi.schema).freeze
         end
 
         ##
