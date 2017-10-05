@@ -60,8 +60,9 @@ module Google
 
         ##
         # A unique ID for this dataset, without the project name.
-        # The ID must contain only letters (a-z, A-Z), numbers (0-9),
-        # or underscores (_). The maximum length is 1,024 characters.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -71,6 +72,8 @@ module Google
 
         ##
         # The ID of the project containing this dataset.
+        #
+        # @return [String] The project ID.
         #
         # @!group Attributes
         #
@@ -91,6 +94,8 @@ module Google
         ##
         # A descriptive name for the dataset.
         #
+        # @return [String] The friendly name.
+        #
         # @!group Attributes
         #
         def name
@@ -100,6 +105,8 @@ module Google
         ##
         # Updates the descriptive name for the dataset.
         #
+        # @param [String] new_name The new friendly name.
+        #
         # @!group Attributes
         #
         def name= new_name
@@ -108,7 +115,9 @@ module Google
         end
 
         ##
-        # A string hash of the dataset.
+        # The ETag hash of the dataset.
+        #
+        # @return [String] The ETag hash.
         #
         # @!group Attributes
         #
@@ -120,6 +129,8 @@ module Google
         ##
         # A URL that can be used to access the dataset using the REST API.
         #
+        # @return [String] A REST URL for the resource.
+        #
         # @!group Attributes
         #
         def api_url
@@ -129,6 +140,8 @@ module Google
 
         ##
         # A user-friendly description of the dataset.
+        #
+        # @return [String] The description.
         #
         # @!group Attributes
         #
@@ -140,6 +153,8 @@ module Google
         ##
         # Updates the user-friendly description of the dataset.
         #
+        # @param [String] new_description The new description for the dataset.
+        #
         # @!group Attributes
         #
         def description= new_description
@@ -149,6 +164,8 @@ module Google
 
         ##
         # The default lifetime of all tables in the dataset, in milliseconds.
+        #
+        # @return [Integer] The default table expiration in milliseconds.
         #
         # @!group Attributes
         #
@@ -165,6 +182,9 @@ module Google
         # Updates the default lifetime of all tables in the dataset, in
         # milliseconds.
         #
+        # @param [Integer] new_default_expiration The new default table
+        #   expiration in milliseconds.
+        #
         # @!group Attributes
         #
         def default_expiration= new_default_expiration
@@ -174,6 +194,8 @@ module Google
 
         ##
         # The time when this dataset was created.
+        #
+        # @return [Time, nil] The creation time.
         #
         # @!group Attributes
         #
@@ -189,6 +211,8 @@ module Google
         ##
         # The date when this dataset or any of its tables was last modified.
         #
+        # @return [Time, nil] The last modified time.
+        #
         # @!group Attributes
         #
         def modified_at
@@ -202,7 +226,9 @@ module Google
 
         ##
         # The geographic location where the dataset should reside. Possible
-        # values include EU and US. The default value is US.
+        # values include `EU` and `US`. The default value is `US`.
+        #
+        # @return [String] The location code.
         #
         # @!group Attributes
         #
@@ -213,11 +239,22 @@ module Google
 
         ##
         # A hash of user-provided labels associated with this dataset. Labels
-        # are used to organize and group datasets. See [Labeling
-        # Datasets](https://cloud.google.com/bigquery/docs/labeling-datasets).
+        # are used to organize and group datasets. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
         #
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
+        #
+        # @return [Hash<String, String>] A hash containing key/value pairs.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   labels = dataset.labels
+        #   labels["department"] #=> "shipping"
         #
         # @!group Attributes
         #
@@ -229,8 +266,26 @@ module Google
 
         ##
         # Updates the hash of user-provided labels associated with this dataset.
-        # Labels are used to organize and group datasets. See [Labeling
-        # Datasets](https://cloud.google.com/bigquery/docs/labeling-datasets).
+        # Labels are used to organize and group datasets. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # @param [Hash<String, String>] labels A hash containing key/value
+        #   pairs.
+        #
+        #   * Label keys and values can be no longer than 63 characters.
+        #   * Label keys and values can contain only lowercase letters, numbers,
+        #     underscores, hyphens, and international characters.
+        #   * Label keys and values cannot exceed 128 bytes in size.
+        #   * Label keys must begin with a letter.
+        #   * Label keys must be unique within a dataset.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   dataset.labels = { "department" => "shipping" }
         #
         # @!group Attributes
         #
@@ -250,7 +305,7 @@ module Google
         # @yield [access] a block for setting rules
         # @yieldparam [Dataset::Access] access the object accepting rules
         #
-        # @return [Google::Cloud::Bigquery::Dataset::Access]
+        # @return [Google::Cloud::Bigquery::Dataset::Access] The access object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -328,7 +383,7 @@ module Google
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
-        # @return [Google::Cloud::Bigquery::Table]
+        # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -425,7 +480,7 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::View]
+        # @return [Google::Cloud::Bigquery::View] A new view object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -505,8 +560,8 @@ module Google
         # @param [Integer] max Maximum number of tables to return.
         #
         # @return [Array<Google::Cloud::Bigquery::Table>,
-        #   Array<Google::Cloud::Bigquery::View>] (See
-        #   {Google::Cloud::Bigquery::Table::List})
+        #   Array<Google::Cloud::Bigquery::View>] An array of tables and/or
+        #   views(See {Google::Cloud::Bigquery::Table::List})
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -670,7 +725,7 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::QueryJob]
+        # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
@@ -856,7 +911,7 @@ module Google
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::Data]
+        # @return [Google::Cloud::Bigquery::Data] A new data object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
@@ -1147,7 +1202,7 @@ module Google
         #   instance provided using the `schema` option, or a new, empty schema
         #   instance
         #
-        # @return [Google::Cloud::Bigquery::LoadJob]
+        # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1357,7 +1412,7 @@ module Google
         #   instance provided using the `schema` option, or a new, empty schema
         #   instance
         #
-        # @return [Google::Cloud::Bigquery::LoadJob]
+        # @return [Boolean] Returns `true` if the load job was successful.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1482,7 +1537,8 @@ module Google
         #   a new table with the given `table_id`, if no table is found for
         #   `table_id`. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::InsertResponse]
+        # @return [Google::Cloud::Bigquery::InsertResponse] An insert response
+        #   object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1564,7 +1620,7 @@ module Google
         # @yieldparam [InsertResponse] response the result of the asynchonous
         #   insert
         #
-        # @return [Table::AsyncInserter] Returns inserter object.
+        # @return [Table::AsyncInserter] Returns an inserter object.
         #
         # @example
         #   require "google/cloud/bigquery"

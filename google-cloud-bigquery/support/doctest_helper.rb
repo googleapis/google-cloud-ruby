@@ -191,6 +191,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Dataset#labels" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :patch_dataset, dataset_full_gapi, ["my-project-id", "my-dataset-id", Google::Apis::BigqueryV2::Dataset, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Dataset#load" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
@@ -742,7 +750,8 @@ def random_dataset_hash project = "my-project-id", id = nil, name = nil, descrip
     "access" => [],
     "creationTime" => time_millis,
     "lastModifiedTime" => time_millis,
-    "location" => location
+    "location" => location,
+    "labels" => { "department" => "shipping" }
   }
 end
 
