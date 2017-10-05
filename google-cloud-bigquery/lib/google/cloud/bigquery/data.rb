@@ -22,8 +22,23 @@ module Google
       ##
       # # Data
       #
-      # Represents {Table} Data as a list of name/value pairs.
-      # Also contains metadata such as `etag` and `total`.
+      # Represents {Table} Data as a list of name/value pairs (hashes.)
+      # Also contains metadata such as `etag` and `total`, and provides access
+      # to the schema of the table from which the data was read.
+      #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   data = table.data
+      #   puts "#{data.count} of #{data.total}"
+      #   if data.next?
+      #     next_data = data.next
+      #   end
+      #
       class Data < DelegateClass(::Array)
         ##
         # @private The Service object.
@@ -47,23 +62,50 @@ module Google
 
         ##
         # The resource type of the API response.
+        #
+        # @return [String] The resource type.
+        #
         def kind
           @gapi.kind
         end
 
         ##
-        # The etag.
+        # An ETag hash for the page of results represented by the data instance.
+        #
+        # @return [String] The ETag hash.
+        #
         def etag
           @gapi.etag
         end
 
         ##
-        # A token used for paging results.
+        # A token used for paging results. Used by the data instance to retrieve
+        # subsequent pages. See {#next}.
+        #
+        # @return [String] The pagination token.
+        #
         def token
           @gapi.page_token
         end
 
+        ##
         # The total number of rows in the complete table.
+        #
+        # @return [Integer] The number of rows.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   data = table.data
+        #   puts "#{data.count} of #{data.total}"
+        #   if data.next?
+        #     next_data = data.next
+        #   end
+        #
         def total
           Integer @gapi.total_rows
         rescue
@@ -71,19 +113,72 @@ module Google
         end
 
         ##
-        # The schema of the data.
+        # The schema of the table from which the data was read.
+        #
+        # The returned object is frozen and changes are not allowed. Use
+        # {Table#schema} to update the schema.
+        #
+        # @return [Schema] A schema object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   data = table.data
+        #
+        #   schema = data.schema
+        #   field = schema.field "name"
+        #   field.required? #=> true
+        #
         def schema
           Schema.from_gapi(@table_gapi.schema).freeze
         end
 
         ##
-        # The fields of the data.
+        # The fields of the data, obtained from the schema of the table from
+        # which the data was read.
+        #
+        # @return [Array<Schema::Field>] An array of field objects.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   data = table.data
+        #
+        #   data.fields.each do |field|
+        #     puts field.name
+        #   end
+        #
         def fields
           schema.fields
         end
 
         ##
-        # The name of the columns in the data.
+        # The name of the columns in the data, obtained from the schema of the
+        # table from which the data was read.
+        #
+        # @return [Array<Symbol>] An array of column names.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   data = table.data
+        #
+        #   data.headers.each do |header|
+        #     puts header
+        #   end
+        #
         def headers
           schema.headers
         end
@@ -91,7 +186,7 @@ module Google
         ##
         # Whether there is a next page of data.
         #
-        # @return [Boolean]
+        # @return [Boolean] `true` when there is a next page, `false` otherwise.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -110,9 +205,9 @@ module Google
         end
 
         ##
-        # Retrieve the next page of data.
+        # Retrieves the next page of data.
         #
-        # @return [Data]
+        # @return [Data] A new instance providing the next page of data.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -141,7 +236,7 @@ module Google
         # returns `false`. Calls the given block once for each row, which is
         # passed as the parameter.
         #
-        # An Enumerator is returned if no block is given.
+        # An enumerator is returned if no block is given.
         #
         # This method may make several API calls until all rows are retrieved.
         # Be sure to use as narrow a search criteria as possible. Please use
@@ -152,7 +247,8 @@ module Google
         # @yield [row] The block for accessing each row of data.
         # @yieldparam [Hash] row The row object.
         #
-        # @return [Enumerator]
+        # @return [Enumerator] An enumerator providing access to all of the
+        #   data.
         #
         # @example Iterating each rows by passing a block:
         #   require "google/cloud/bigquery"
