@@ -98,6 +98,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock.verify
 
     data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.schema.must_be :frozen?
     data.fields.must_equal data.schema.fields
     data.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
