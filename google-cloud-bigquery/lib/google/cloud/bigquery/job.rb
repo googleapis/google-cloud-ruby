@@ -106,6 +106,7 @@ module Google
         #
         # @return [String] The state code. The possible values are `PENDING`,
         #   `RUNNING`, and `DONE`.
+        #
         def state
           return nil if @gapi.status.nil?
           @gapi.status.state
@@ -113,6 +114,9 @@ module Google
 
         ##
         # Checks if the job's state is `RUNNING`.
+        #
+        # @return [Boolean] `true` when `RUNNING`, `false` otherwise.
+        #
         def running?
           return false if state.nil?
           "running".casecmp(state).zero?

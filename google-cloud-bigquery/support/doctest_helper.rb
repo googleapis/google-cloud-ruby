@@ -290,6 +290,16 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::InsertResponse" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my-dataset-id", "my_table"]
+      mock.expect :insert_all_table_data,
+                  Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
+                  ["my-project-id", "my-dataset-id", "my_table", Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+    end
+  end
+
   # Google::Cloud::Bigquery::Job
   # Google::Cloud::Bigquery::Job#wait_until_done!
   doctest.before "Google::Cloud::Bigquery::Job" do
