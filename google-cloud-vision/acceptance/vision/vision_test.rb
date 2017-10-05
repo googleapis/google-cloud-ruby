@@ -244,15 +244,15 @@ describe "Vision", :vision do
       landmark.mid.must_equal "/m/019dvv"
       landmark.locale.must_be :empty?
       landmark.description.must_equal "Mount Rushmore"
-      landmark.score.must_be_close_to 0.91912264
+      landmark.score.must_be_close_to 0.917461633682251
       landmark.confidence.must_be :zero?
       landmark.topicality.must_be :zero?
       landmark.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       landmark.bounds[0].x.must_equal 9
       landmark.bounds[0].y.must_equal 35
-      landmark.bounds[1].to_a.must_equal [492, 35]
-      landmark.bounds[2].to_a.must_equal [492, 325]
-      landmark.bounds[3].to_a.must_equal [9, 325]
+      landmark.bounds[1].to_a.must_equal [478, 35]
+      landmark.bounds[2].to_a.must_equal [478, 319]
+      landmark.bounds[3].to_a.must_equal [9, 319]
       landmark.locations[0].must_be_kind_of Google::Cloud::Vision::Location
       landmark.locations[0].latitude.must_be_close_to 43.878264
       landmark.locations[0].longitude.must_be_close_to -103.45700740814209
