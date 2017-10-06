@@ -161,7 +161,7 @@ module Google
         end
 
         ##
-        # The name of the columns in the data, obtained from the schema of the
+        # The names of the columns in the data, obtained from the schema of the
         # table from which the data was read.
         #
         # @return [Array<Symbol>] An array of column names.
