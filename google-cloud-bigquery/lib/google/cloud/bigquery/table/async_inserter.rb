@@ -24,11 +24,45 @@ module Google
         ##
         # # AsyncInserter
         #
+        # Used to insert multiple rows in batches to a topic. See
+        # {Google::Cloud::Bigquery::Table#insert_async}.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   inserter = table.insert_async do |response|
+        #     log_insert "inserted #{response.insert_count} rows " \
+        #       "with #{response.error_count} errors"
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
+        # @attr_reader [Integer] max_bytes The maximum size of rows to be
+        #   collected before the batch is inserted. Default is 10,000,000
+        #   (10MB).
+        # @attr_reader [Integer] max_rows The maximum number of rows to be
+        #   collected before the batch is inserted. Default is 500.
+        # @attr_reader [Numeric] interval The number of seconds to collect rows
+        #   before the batch is inserted. Default is 10.
+        # @attr_reader [Integer] threads The number of threads used to insert
+        #   rows. Default is 4.
+        #
         class AsyncInserter
           include MonitorMixin
 
-          attr_reader :table, :batch
           attr_reader :max_bytes, :max_rows, :interval, :threads
+          ##
+          # @private Implementation accessors
+          attr_reader :table, :batch
 
           ##
           # @private
@@ -55,6 +89,14 @@ module Google
             super()
           end
 
+          ##
+          # Adds rows to the async inserter to be inserted. Rows will be
+          # collected in batches and inserted together.
+          # See {Google::Cloud::Bigquery::Table#insert_async}.
+          #
+          # @param [Hash, Array<Hash>] rows A hash object or array of hash
+          #   objects containing the data.
+          #
           def insert rows
             return nil if rows.nil?
             return nil if rows.is_a?(Array) && rows.empty?
@@ -89,6 +131,14 @@ module Google
             true
           end
 
+          ##
+          # Begins the process of stopping the inserter. Rows already in the
+          # queue will be inserted, but no new rows can be added. Use {#wait!}
+          # to block until the inserter is fully stopped and all pending rows
+          # have been inserted.
+          #
+          # @return [AsyncInserter] returns self so calls can be chained.
+          #
           def stop
             synchronize do
               break if @stopped
@@ -101,6 +151,14 @@ module Google
             self
           end
 
+          ##
+          # Blocks until the inserter is fully stopped, all pending rows
+          # have been inserted, and all callbacks have completed. Does not stop
+          # the inserter. To stop the inserter, first call {#stop} and then
+          # call {#wait!} to block until the inserter is stopped.
+          #
+          # @return [AsyncInserter] returns self so calls can be chained.
+          #
           def wait! timeout = nil
             synchronize do
               @thread_pool.shutdown
@@ -110,6 +168,11 @@ module Google
             self
           end
 
+          ##
+          # Forces all rows in the current batch to be inserted immediately.
+          #
+          # @return [AsyncInserter] returns self so calls can be chained.
+          #
           def flush
             synchronize do
               push_batch_request!
@@ -119,10 +182,20 @@ module Google
             self
           end
 
+          ##
+          # Whether the inserter has been started.
+          #
+          # @return [boolean] `true` when started, `false` otherwise.
+          #
           def started?
             !stopped?
           end
 
+          ##
+          # Whether the inserter has been stopped.
+          #
+          # @return [boolean] `true` when stopped, `false` otherwise.
+          #
           def stopped?
             synchronize { @stopped }
           end
@@ -139,10 +212,10 @@ module Google
 
                 time_since_first_publish = ::Time.now - @batch_created_at
                 if time_since_first_publish < @interval
-                  # still waiting for the interval to publish the batch...
+                  # still waiting for the interval to insert the batch...
                   @cond.wait(@interval - time_since_first_publish)
                 else
-                  # interval met, publish the batch...
+                  # interval met, insert the batch...
                   push_batch_request!
                   @cond.wait
                 end
@@ -169,6 +242,8 @@ module Google
             @batch_created_at = nil
           end
 
+          ##
+          # @private
           class Batch
             attr_reader :max_bytes, :max_rows, :rows
 
