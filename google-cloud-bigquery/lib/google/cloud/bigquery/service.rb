@@ -234,7 +234,8 @@ module Google
         ##
         # Cancel the job specified by jobId.
         def cancel_job job_id
-          execute { service.cancel_job @project, job_id }
+          # The BigQuery team has told us cancelling is considered idempotent
+          execute(backoff: true) { service.cancel_job @project, job_id }
         end
 
         ##
