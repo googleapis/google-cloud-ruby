@@ -17,6 +17,7 @@ require "digest/sha1"
 require "google/cloud/debugger/backoff"
 require "google/cloud/debugger/debuggee/app_uniquifier_generator"
 require "google/cloud/debugger/version"
+require "google/cloud/env"
 require "json"
 
 module Google
@@ -68,6 +69,7 @@ module Google
           @service = service
           @service_name = service_name
           @service_version = service_version
+          @env = Google::Cloud.env
           @computed_uniquifier = nil
           @id = nil
           @register_backoff = Google::Cloud::Debugger::Backoff.new
@@ -123,7 +125,7 @@ module Google
         # @private Build the parameters for this debuggee
         def build_request_arg
           debuggee_args = {
-            project: project_id,
+            project: project_id_for_request_arg,
             description: description,
             labels: labels,
             agent_version: agent_version
@@ -175,6 +177,19 @@ module Google
         # @private Get debuggee project id
         def project_id
           service.project
+        end
+
+        ##
+        # @private
+        # Get project to send as a debuggee argument. This is the numeric
+        # project ID if available (and if it matches the project set in the
+        # configuration). Otherwise, use the configured project.
+        def project_id_for_request_arg
+          if project_id == @env.project_id
+            numeric_id = @env.numeric_project_id
+            return numeric_id.to_s if numeric_id
+          end
+          project_id
         end
 
         ##
