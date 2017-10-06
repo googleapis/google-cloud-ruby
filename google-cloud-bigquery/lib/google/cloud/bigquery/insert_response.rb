@@ -115,8 +115,7 @@ module Google
         #   found in the response for the row.
         #
         def insert_error_for row
-          json_row = Convert.to_json_row(row)
-          insert_errors.detect { |e| e.row == json_row }
+          insert_errors.detect { |e| e.row == row }
         end
 
         ##

@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
     inserter = table.insert_async
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       inserter.insert rows.first
 
       inserter.batch.rows.must_equal [rows.first]
@@ -76,7 +76,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
     inserter = table.insert_async
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
       inserter.batch.rows.must_equal rows
@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
     inserter = table.insert_async
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       rows.each do |row|
         inserter.insert row
       end
@@ -145,7 +145,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       callback_called = true
     end
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
       inserter.batch.rows.must_equal rows
@@ -183,7 +183,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       callbacks += 1
     end
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
       inserter.batch.rows.must_equal [rows.last]
@@ -221,7 +221,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       callbacks += 1
     end
 
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
       inserter.batch.rows.must_equal [rows.last]

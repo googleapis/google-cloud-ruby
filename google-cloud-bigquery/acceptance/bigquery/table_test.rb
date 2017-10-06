@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     t = dataset.table table_id
     if t.nil?
       t = dataset.create_table table_id do |schema|
-        schema.integer  "id",     description: "id description",    mode: :required
+        schema.integer   "id",    description: "id description",    mode: :required
         schema.string    "breed", description: "breed description", mode: :required
         schema.string    "name",  description: "name description",  mode: :required
         schema.timestamp "dob",   description: "dob description",   mode: :required
@@ -144,7 +144,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "create dataset returns valid etag equal to get dataset" do
     fresh_table_id = "#{rand 100}_kittens"
     fresh = dataset.create_table fresh_table_id do |schema|
-      schema.integer  "id",     description: "id description",    mode: :required
+      schema.integer   "id",    description: "id description",    mode: :required
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
@@ -303,12 +303,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
     insert_response.insert_errors.first.index.must_equal 1
 
-    # In the context of this test, the original row cannot be compared with InsertResponse row because
-    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
-    # dates/times are formated as timestamp strings with milliseconds.
-    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
-    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
-    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
+    bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
     insert_response.insert_errors.first.row.must_equal bigquery_row
 
     insert_response.error_rows.wont_be :empty?
