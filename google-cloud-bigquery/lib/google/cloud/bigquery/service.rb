@@ -720,10 +720,12 @@ module Google
 
           def retry_error_reason? err_body
             err_hash = JSON.parse err_body
-            Array(err_hash["error"]["errors"]).each do |error|
-              return true if @reasons.include? error["reason"]
+            json_errors = Array err_hash["error"]["errors"]
+            return false if json_errors.empty?
+            json_errors.each do |json_error|
+              return false unless @reasons.include? json_error["reason"]
             end
-            false
+            true
           rescue
             false
           end
