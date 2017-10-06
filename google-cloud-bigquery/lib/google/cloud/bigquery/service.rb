@@ -18,7 +18,7 @@ require "google/cloud/bigquery/convert"
 require "google/cloud/errors"
 require "google/apis/bigquery_v2"
 require "pathname"
-require "digest/md5"
+require "securerandom"
 require "mime/types"
 require "date"
 
@@ -201,8 +201,8 @@ module Google
         def insert_tabledata dataset_id, table_id, rows, options = {}
           insert_rows = Array(rows).map do |row|
             Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-              insert_id: Digest::MD5.base64digest(row.to_json),
-              json: row
+              insert_id: SecureRandom.uuid,
+              json: Convert.to_json_row(row)
             )
           end
           insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(

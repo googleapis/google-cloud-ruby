@@ -62,8 +62,6 @@ module Google
 
             synchronize do
               rows.each do |row|
-                row = Convert.to_json_row row
-
                 if @batch.nil?
                   @batch = Batch.new max_bytes: @max_bytes, max_rows: @max_rows
                   @batch.insert row
@@ -197,7 +195,7 @@ module Google
 
             def current_bytes
               # TODO: add to a counter instead of calling #to_json each time
-              rows.to_json.bytes.size
+              Convert.to_json_rows(rows).to_json.bytes.size
             end
           end
         end

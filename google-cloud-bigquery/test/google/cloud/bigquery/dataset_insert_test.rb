@@ -49,7 +49,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, rows.first
     end
 
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, rows
     end
 
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, rows
     end
 
@@ -146,7 +146,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, rows, skip_invalid: true
     end
 
@@ -166,7 +166,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, rows, ignore_unknown: true
     end
 
@@ -213,7 +213,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = dataset.insert table_id, [inserting_row]
     end
 

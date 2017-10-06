@@ -54,8 +54,7 @@ module Google
         end
 
         def insert_error_for row
-          json_row = Convert.to_json_row(row)
-          insert_errors.detect { |e| e.row == json_row }
+          insert_errors.detect { |e| e.row == row }
         end
 
         def errors_for row
