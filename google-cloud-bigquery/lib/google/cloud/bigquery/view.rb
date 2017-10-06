@@ -51,16 +51,17 @@ module Google
         attr_accessor :gapi
 
         ##
-        # @private Create an empty Table object.
+        # @private Create an empty View object.
         def initialize
           @service = nil
           @gapi = Google::Apis::BigqueryV2::Table.new
         end
 
         ##
-        # A unique ID for this table.
-        # The ID must contain only letters (a-z, A-Z), numbers (0-9),
-        # or underscores (_). The maximum length is 1,024 characters.
+        # A unique ID for this view.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -69,7 +70,10 @@ module Google
         end
 
         ##
-        # The ID of the `Dataset` containing this table.
+        # The ID of the `Dataset` containing this view.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -78,7 +82,9 @@ module Google
         end
 
         ##
-        # The ID of the `Project` containing this table.
+        # The ID of the `Project` containing this view.
+        #
+        # @return [String] The project ID.
         #
         # @!group Attributes
         #
@@ -96,7 +102,7 @@ module Google
         end
 
         ##
-        # The combined Project ID, Dataset ID, and Table ID for this table, in
+        # The combined Project ID, Dataset ID, and Table ID for this view, in
         # the format specified by the [Legacy SQL Query
         # Reference](https://cloud.google.com/bigquery/query-reference#from):
         # `project_name:datasetId.tableId`. To use this value in queries see
@@ -143,7 +149,9 @@ module Google
         end
 
         ##
-        # The name of the table.
+        # The name of the view.
+        #
+        # @return [String] The friendly name.
         #
         # @!group Attributes
         #
@@ -152,7 +160,9 @@ module Google
         end
 
         ##
-        # Updates the name of the table.
+        # Updates the name of the view.
+        #
+        # @param [String] new_name The new friendly name.
         #
         # @!group Attributes
         #
@@ -162,7 +172,9 @@ module Google
         end
 
         ##
-        # A string hash of the dataset.
+        # The ETag hash of the view.
+        #
+        # @return [String] The ETag hash.
         #
         # @!group Attributes
         #
@@ -172,7 +184,9 @@ module Google
         end
 
         ##
-        # A URL that can be used to access the dataset using the REST API.
+        # A URL that can be used to access the view using the REST API.
+        #
+        # @return [String] A REST URL for the resource.
         #
         # @!group Attributes
         #
@@ -182,7 +196,9 @@ module Google
         end
 
         ##
-        # The description of the table.
+        # A user-friendly description of the view.
+        #
+        # @return [String] The description.
         #
         # @!group Attributes
         #
@@ -192,7 +208,9 @@ module Google
         end
 
         ##
-        # Updates the description of the table.
+        # Updates the user-friendly description of the view.
+        #
+        # @param [String] new_description The new user-friendly description.
         #
         # @!group Attributes
         #
@@ -202,7 +220,9 @@ module Google
         end
 
         ##
-        # The time when this table was created.
+        # The time when this view was created.
+        #
+        # @return [Time, nil] The creation time.
         #
         # @!group Attributes
         #
@@ -216,9 +236,11 @@ module Google
         end
 
         ##
-        # The time when this table expires.
-        # If not present, the table will persist indefinitely.
-        # Expired tables will be deleted and their storage reclaimed.
+        # The time when this view expires.
+        # If not present, the view will persist indefinitely.
+        # Expired views will be deleted and their storage reclaimed.
+        #
+        # @return [Time, nil] The expiration time.
         #
         # @!group Attributes
         #
@@ -232,7 +254,9 @@ module Google
         end
 
         ##
-        # The date when this table was last modified.
+        # The date when this view was last modified.
+        #
+        # @return [Time, nil] The last modified time.
         #
         # @!group Attributes
         #
@@ -246,7 +270,9 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "TABLE".
+        # Checks if the view's type is "TABLE".
+        #
+        # @return [Boolean] `true` when the type is `TABLE`, `false` otherwise.
         #
         # @!group Attributes
         #
@@ -255,7 +281,9 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "VIEW".
+        # Checks if the view's type is "VIEW".
+        #
+        # @return [Boolean] `true` when the type is `VIEW`, `false` otherwise.
         #
         # @!group Attributes
         #
@@ -264,7 +292,10 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "EXTERNAL".
+        # Checks if the view's type is "EXTERNAL".
+        #
+        # @return [Boolean] `true` when the type is `EXTERNAL`, `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -273,8 +304,10 @@ module Google
         end
 
         ##
-        # The geographic location where the table should reside. Possible
-        # values include EU and US. The default value is US.
+        # The geographic location where the view should reside. Possible
+        # values include `EU` and `US`. The default value is `US`.
+        #
+        # @return [String] The location code.
         #
         # @!group Attributes
         #
@@ -286,6 +319,21 @@ module Google
         ##
         # The schema of the view.
         #
+        # The returned object is frozen and changes are not allowed.
+        #
+        # @return [Schema] A schema object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   schema = view.schema
+        #   field = schema.field "name"
+        #   field.required? #=> true
+        #
         # @!group Attributes
         #
         def schema
@@ -294,7 +342,20 @@ module Google
         end
 
         ##
-        # The fields of the view.
+        # The fields of the view, obtained from its schema.
+        #
+        # @return [Array<Schema::Field>] An array of field objects.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.fields.each do |field|
+        #     puts field.name
+        #   end
         #
         # @!group Attributes
         #
@@ -303,7 +364,20 @@ module Google
         end
 
         ##
-        # The names of the columns in the view.
+        # The names of the columns in the view, obtained from its schema.
+        #
+        # @return [Array<Symbol>] An array of column names.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.headers.each do |header|
+        #     puts header
+        #   end
         #
         # @!group Attributes
         #
@@ -313,6 +387,8 @@ module Google
 
         ##
         # The query that executes each time the view is loaded.
+        #
+        # @return [String] The query that defines the view.
         #
         # @!group Attributes
         #
@@ -397,6 +473,8 @@ module Google
         ##
         # Checks if the view's query is using legacy sql.
         #
+        # @return [Boolean] `true` when legacy sql is used, `false` otherwise.
+        #
         # @!group Attributes
         #
         def query_legacy_sql?
@@ -407,6 +485,8 @@ module Google
 
         ##
         # Checks if the view's query is using standard sql.
+        #
+        # @return [Boolean] `true` when standard sql is used, `false` otherwise.
         #
         # @!group Attributes
         #
@@ -422,6 +502,9 @@ module Google
         # equivalent to providing a URI for a file containing the same code. See
         # [User-Defined
         # Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @return [Array<String>] An array containing Google Cloud Storage URIs
+        #   and/or inline source code.
         #
         # @!group Attributes
         #
@@ -489,9 +572,9 @@ module Google
         end
 
         ##
-        # Permanently deletes the table.
+        # Permanently deletes the view.
         #
-        # @return [Boolean] Returns `true` if the table was deleted.
+        # @return [Boolean] Returns `true` if the view was deleted.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -511,7 +594,7 @@ module Google
         end
 
         ##
-        # Reloads the table with current data from the BigQuery service.
+        # Reloads the view with current data from the BigQuery service.
         #
         # @!group Lifecycle
         #

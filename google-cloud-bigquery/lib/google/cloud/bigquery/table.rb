@@ -84,8 +84,9 @@ module Google
 
         ##
         # A unique ID for this table.
-        # The ID must contain only letters (a-z, A-Z), numbers (0-9),
-        # or underscores (_). The maximum length is 1,024 characters.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -96,6 +97,9 @@ module Google
         ##
         # The ID of the `Dataset` containing this table.
         #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
+        #
         # @!group Attributes
         #
         def dataset_id
@@ -104,6 +108,8 @@ module Google
 
         ##
         # The ID of the `Project` containing this table.
+        #
+        # @return [String] The project ID.
         #
         # @!group Attributes
         #
@@ -121,7 +127,11 @@ module Google
         end
 
         ###
-        # Is the table partitioned?
+        # Checks if the table is time-partitioned. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Boolean] `true` when the table is time-partitioned, `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -130,7 +140,11 @@ module Google
         end
 
         ###
-        # The period for which the table is partitioned, if any.
+        # The period for which the table is partitioned, if any. See
+        # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [String, nil] The partition type. Currently the only supported
+        #   value is "DAY".
         #
         # @!group Attributes
         #
@@ -140,15 +154,15 @@ module Google
         end
 
         ##
-        # Sets the partitioning for the table. See [Partitioned Tables
-        # ](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        # Sets the partitioning for the table. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # You can only set partitioning when creating a table as in
         # the example below. BigQuery does not allow you to change partitioning
         # on an existing table.
         #
         # @param [String] type The partition type. Currently the only
-        # supported value is "DAY".
+        #   supported value is "DAY".
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -170,7 +184,11 @@ module Google
 
 
         ###
-        # The expiration for the table partitions, if any, in seconds.
+        # The expiration for the table partitions, if any, in seconds. See
+        # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Integer, nil] The expiration time, in seconds, for data in
+        #   partitions.
         #
         # @!group Attributes
         #
@@ -182,14 +200,14 @@ module Google
         end
 
         ##
-        # Sets the partition expiration for the table. See [Partitioned Tables
-        # ](https://cloud.google.com/bigquery/docs/partitioned-tables). The
-        # table must also be partitioned.
+        # Sets the partition expiration for the table. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        # The table must also be partitioned.
         #
         # See {Table#time_partitioning_type=}.
         #
         # @param [Integer] expiration An expiration time, in seconds,
-        # for data in partitions.
+        #   for data in partitions.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -217,6 +235,8 @@ module Google
         # `project_name:datasetId.tableId`. To use this value in queries see
         # {#query_id}.
         #
+        # @return [String] The combined ID.
+        #
         # @!group Attributes
         #
         def id
@@ -237,6 +257,9 @@ module Google
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect. Optional. The default value is false.
+        #
+        # @return [String] The appropriate table ID for use in queries,
+        #   depending on SQL type.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -260,6 +283,8 @@ module Google
         ##
         # The name of the table.
         #
+        # @return [String] The friendly name.
+        #
         # @!group Attributes
         #
         def name
@@ -269,6 +294,8 @@ module Google
         ##
         # Updates the name of the table.
         #
+        # @param [String] new_name The new friendly name.
+        #
         # @!group Attributes
         #
         def name= new_name
@@ -277,7 +304,9 @@ module Google
         end
 
         ##
-        # A string hash of the dataset.
+        # The ETag hash of the table.
+        #
+        # @return [String] The ETag hash.
         #
         # @!group Attributes
         #
@@ -287,7 +316,9 @@ module Google
         end
 
         ##
-        # A URL that can be used to access the dataset using the REST API.
+        # A URL that can be used to access the table using the REST API.
+        #
+        # @return [String] A REST URL for the resource.
         #
         # @!group Attributes
         #
@@ -297,7 +328,9 @@ module Google
         end
 
         ##
-        # The description of the table.
+        # A user-friendly description of the table.
+        #
+        # @return [String] The description.
         #
         # @!group Attributes
         #
@@ -307,7 +340,9 @@ module Google
         end
 
         ##
-        # Updates the description of the table.
+        # Updates the user-friendly description of the table.
+        #
+        # @param [String] new_description The new user-friendly description.
         #
         # @!group Attributes
         #
@@ -318,6 +353,8 @@ module Google
 
         ##
         # The number of bytes in the table.
+        #
+        # @return [Integer] The count of bytes in the table.
         #
         # @!group Data
         #
@@ -333,6 +370,8 @@ module Google
         ##
         # The number of rows in the table.
         #
+        # @return [Integer] The count of rows in the table.
+        #
         # @!group Data
         #
         def rows_count
@@ -346,6 +385,8 @@ module Google
 
         ##
         # The time when this table was created.
+        #
+        # @return [Time, nil] The creation time.
         #
         # @!group Attributes
         #
@@ -363,6 +404,8 @@ module Google
         # If not present, the table will persist indefinitely.
         # Expired tables will be deleted and their storage reclaimed.
         #
+        # @return [Time, nil] The expiration time.
+        #
         # @!group Attributes
         #
         def expires_at
@@ -376,6 +419,8 @@ module Google
 
         ##
         # The date when this table was last modified.
+        #
+        # @return [Time, nil] The last modified time.
         #
         # @!group Attributes
         #
@@ -391,6 +436,8 @@ module Google
         ##
         # Checks if the table's type is "TABLE".
         #
+        # @return [Boolean] `true` when the type is `TABLE`, `false` otherwise.
+        #
         # @!group Attributes
         #
         def table?
@@ -399,6 +446,8 @@ module Google
 
         ##
         # Checks if the table's type is "VIEW".
+        #
+        # @return [Boolean] `true` when the type is `VIEW`, `false` otherwise.
         #
         # @!group Attributes
         #
@@ -409,6 +458,9 @@ module Google
         ##
         # Checks if the table's type is "EXTERNAL".
         #
+        # @return [Boolean] `true` when the type is `EXTERNAL`, `false`
+        #   otherwise.
+        #
         # @!group Attributes
         #
         def external?
@@ -417,7 +469,9 @@ module Google
 
         ##
         # The geographic location where the table should reside. Possible
-        # values include EU and US. The default value is US.
+        # values include `EU` and `US`. The default value is `US`.
+        #
+        # @return [String] The location code.
         #
         # @!group Attributes
         #
@@ -434,6 +488,18 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
+        # @return [Hash<String, String>] A hash containing key/value pairs.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   labels = table.labels
+        #   labels["department"] #=> "shipping"
+        #
         # @!group Attributes
         #
         def labels
@@ -446,6 +512,25 @@ module Google
         # Updates the hash of user-provided labels associated with this table.
         # Labels are used to organize and group tables. See [Using
         # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # @param [Hash<String, String>] labels A hash containing key/value
+        #   pairs.
+        #
+        #   * Label keys and values can be no longer than 63 characters.
+        #   * Label keys and values can contain only lowercase letters, numbers,
+        #     underscores, hyphens, and international characters.
+        #   * Label keys and values cannot exceed 128 bytes in size.
+        #   * Label keys must begin with a letter.
+        #   * Label keys must be unique within a table.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.labels = { "department" => "shipping" }
         #
         # @!group Attributes
         #
@@ -467,7 +552,7 @@ module Google
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
         #
-        # @return [Google::Cloud::Bigquery::Schema]
+        # @return [Google::Cloud::Bigquery::Schema] A frozen schema object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -501,7 +586,20 @@ module Google
         end
 
         ##
-        # The fields of the table.
+        # The fields of the table, obtained from its schema.
+        #
+        # @return [Array<Schema::Field>] An array of field objects.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.fields.each do |field|
+        #     puts field.name
+        #   end
         #
         # @!group Attributes
         #
@@ -510,7 +608,20 @@ module Google
         end
 
         ##
-        # The names of the columns in the table.
+        # The names of the columns in the table, obtained from its schema.
+        #
+        # @return [Array<Symbol>] An array of column names.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.headers.each do |header|
+        #     puts header
+        #   end
         #
         # @!group Attributes
         #
@@ -531,7 +642,7 @@ module Google
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
-        # @return [External::DataSource]
+        # @return [External::DataSource] The external data source.
         #
         #   @!group Attributes
         #
@@ -553,7 +664,7 @@ module Google
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
-        # @return [External::DataSource] External data source.
+        # @param [External::DataSource] external An external data source.
         #
         # @!group Attributes
         #
@@ -568,6 +679,8 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
+        # @return [Integer] The estimated number of bytes in the buffer.
+        #
         # @!group Attributes
         #
         def buffer_bytes
@@ -581,6 +694,8 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
+        # @return [Integer] The estimated number of rows in the buffer.
+        #
         # @!group Attributes
         #
         def buffer_rows
@@ -592,6 +707,8 @@ module Google
         # The time of the oldest entry currently in this table's streaming
         # buffer, if one is present. This field will be absent if the table is
         # not being streamed to or if there is no data in the streaming buffer.
+        #
+        # @return [Time, nil] The oldest entry time.
         #
         # @!group Attributes
         #
