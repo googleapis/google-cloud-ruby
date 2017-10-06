@@ -317,6 +317,65 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this view. Labels
+        # are used to organize and group views and views. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @return [Hash<String, String>] A hash containing key/value pairs.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   labels = view.labels
+        #   labels["department"] #=> "shipping"
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the hash of user-provided labels associated with this view.
+        # Labels are used to organize and group tables and views. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # @param [Hash<String, String>] labels A hash containing key/value
+        #   pairs.
+        #
+        #   * Label keys and values can be no longer than 63 characters.
+        #   * Label keys and values can contain only lowercase letters, numbers,
+        #     underscores, hyphens, and international characters.
+        #   * Label keys and values cannot exceed 128 bytes in size.
+        #   * Label keys must begin with a letter.
+        #   * Label keys must be unique within a view.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.labels = { "department" => "shipping" }
+        #
+        # @!group Attributes
+        #
+        def labels= labels
+          @gapi.labels = labels
+          patch_gapi! :labels
+        end
+
+        ##
         # The schema of the view.
         #
         # The returned object is frozen and changes are not allowed.
