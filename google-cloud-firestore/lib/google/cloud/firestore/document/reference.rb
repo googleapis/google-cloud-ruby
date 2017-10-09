@@ -51,6 +51,27 @@ module Google
             Collection.from_path parent_path, context
           end
 
+          ##
+          # Retrieves a list of collections
+          def cols
+            ensure_service!
+
+            return enum_for(:cols) unless block_given?
+
+            collection_ids = service.list_collections path
+            collection_ids.each { |collection_id| yield col(collection_id) }
+          end
+          alias_method :collections, :cols
+
+          def col collection_path
+            if collection_path.to_s.split("/").count.even?
+              fail ArgumentError, "collection_path must refer to a collection."
+            end
+
+            Collection.from_path "#{path}/#{collection_path}", context
+          end
+          alias_method :collection, :col
+
           protected
 
           def parent_path
