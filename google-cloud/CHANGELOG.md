@@ -1,5 +1,9 @@
 # Release History
 
+### 0.44.0 / 2017-10-09
+
+* BigQuery 0.29.0 release.
+
 ### 0.43.0 / 2017-09-29
 
 * Spanner 1.0 release.
