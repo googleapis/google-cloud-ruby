@@ -24,9 +24,9 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     d
   end
-  let(:labels) { { "foo" => "bar" } }
+  let(:labels) { { "prefix" => prefix } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
-  let(:filter) { "labels.foo:bar" }
+  let(:filter) { "labels.prefix:#{prefix}" }
   let(:dataset_2_id) { "#{prefix}_dataset_2" }
   let(:dataset_2) do
     d = bigquery.dataset dataset_2_id
