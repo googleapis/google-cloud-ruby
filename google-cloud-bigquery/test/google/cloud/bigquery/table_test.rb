@@ -23,6 +23,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:description) { "This is my table" }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
+  let(:labels) { { "foo" => "bar" } }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
@@ -38,6 +39,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.table?.must_equal true
     table.view?.must_equal false
     table.location.must_equal location_code
+    table.labels.must_equal labels
+    table.labels.must_be :frozen?
   end
 
   it "knows its fully-qualified ID" do
@@ -78,6 +81,12 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.must_be :frozen?
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
     table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+  end
+
+  it "knows its streaming buffer attributes" do
+    table.buffer_bytes.must_equal 2000
+    table.buffer_rows.must_equal 200
+    table.buffer_oldest_at.must_be_close_to ::Time.now, 1
   end
 
   it "can delete itself" do

@@ -17,6 +17,7 @@ require "json"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/table"
+require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
 require "google/apis/bigquery_v2"
@@ -59,8 +60,9 @@ module Google
 
         ##
         # A unique ID for this dataset, without the project name.
-        # The ID must contain only letters (a-z, A-Z), numbers (0-9),
-        # or underscores (_). The maximum length is 1,024 characters.
+        #
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
+        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -70,6 +72,8 @@ module Google
 
         ##
         # The ID of the project containing this dataset.
+        #
+        # @return [String] The project ID.
         #
         # @!group Attributes
         #
@@ -90,6 +94,8 @@ module Google
         ##
         # A descriptive name for the dataset.
         #
+        # @return [String] The friendly name.
+        #
         # @!group Attributes
         #
         def name
@@ -99,6 +105,8 @@ module Google
         ##
         # Updates the descriptive name for the dataset.
         #
+        # @param [String] new_name The new friendly name.
+        #
         # @!group Attributes
         #
         def name= new_name
@@ -107,7 +115,9 @@ module Google
         end
 
         ##
-        # A string hash of the dataset.
+        # The ETag hash of the dataset.
+        #
+        # @return [String] The ETag hash.
         #
         # @!group Attributes
         #
@@ -119,6 +129,8 @@ module Google
         ##
         # A URL that can be used to access the dataset using the REST API.
         #
+        # @return [String] A REST URL for the resource.
+        #
         # @!group Attributes
         #
         def api_url
@@ -128,6 +140,8 @@ module Google
 
         ##
         # A user-friendly description of the dataset.
+        #
+        # @return [String] The description.
         #
         # @!group Attributes
         #
@@ -139,6 +153,8 @@ module Google
         ##
         # Updates the user-friendly description of the dataset.
         #
+        # @param [String] new_description The new description for the dataset.
+        #
         # @!group Attributes
         #
         def description= new_description
@@ -148,6 +164,8 @@ module Google
 
         ##
         # The default lifetime of all tables in the dataset, in milliseconds.
+        #
+        # @return [Integer] The default table expiration in milliseconds.
         #
         # @!group Attributes
         #
@@ -164,6 +182,9 @@ module Google
         # Updates the default lifetime of all tables in the dataset, in
         # milliseconds.
         #
+        # @param [Integer] new_default_expiration The new default table
+        #   expiration in milliseconds.
+        #
         # @!group Attributes
         #
         def default_expiration= new_default_expiration
@@ -173,6 +194,8 @@ module Google
 
         ##
         # The time when this dataset was created.
+        #
+        # @return [Time, nil] The creation time.
         #
         # @!group Attributes
         #
@@ -188,6 +211,8 @@ module Google
         ##
         # The date when this dataset or any of its tables was last modified.
         #
+        # @return [Time, nil] The last modified time.
+        #
         # @!group Attributes
         #
         def modified_at
@@ -201,13 +226,72 @@ module Google
 
         ##
         # The geographic location where the dataset should reside. Possible
-        # values include EU and US. The default value is US.
+        # values include `EU` and `US`. The default value is `US`.
+        #
+        # @return [String] The location code.
         #
         # @!group Attributes
         #
         def location
           ensure_full_data!
           @gapi.location
+        end
+
+        ##
+        # A hash of user-provided labels associated with this dataset. Labels
+        # are used to organize and group datasets. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to replace the entire hash.
+        #
+        # @return [Hash<String, String>] A hash containing key/value pairs.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   labels = dataset.labels
+        #   labels["department"] #=> "shipping"
+        #
+        # @!group Attributes
+        #
+        def labels
+          m = @gapi.labels
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the hash of user-provided labels associated with this dataset.
+        # Labels are used to organize and group datasets. See [Using
+        # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # @param [Hash<String, String>] labels A hash containing key/value
+        #   pairs.
+        #
+        #   * Label keys and values can be no longer than 63 characters.
+        #   * Label keys and values can contain only lowercase letters, numbers,
+        #     underscores, hyphens, and international characters.
+        #   * Label keys and values cannot exceed 128 bytes in size.
+        #   * Label keys must begin with a letter.
+        #   * Label keys must be unique within a dataset.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   dataset.labels = { "department" => "shipping" }
+        #
+        # @!group Attributes
+        #
+        def labels= labels
+          @gapi.labels = labels
+          patch_gapi! :labels
         end
 
         ##
@@ -221,7 +305,7 @@ module Google
         # @yield [access] a block for setting rules
         # @yieldparam [Dataset::Access] access the object accepting rules
         #
-        # @return [Google::Cloud::Bigquery::Dataset::Access]
+        # @return [Google::Cloud::Bigquery::Dataset::Access] The access object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -229,14 +313,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   dataset.access # [{"role"=>"OWNER",
-        #                  #   "specialGroup"=>"projectOwners"},
-        #                  #  {"role"=>"WRITER",
-        #                  #   "specialGroup"=>"projectWriters"},
-        #                  #  {"role"=>"READER",
-        #                  #   "specialGroup"=>"projectReaders"},
-        #                  #  {"role"=>"OWNER",
-        #                  #   "userByEmail"=>"123456789-...com"}]
+        #   access = dataset.access
+        #   access.writer_user? "reader@example.com" #=> false
         #
         # @example Manage the access rules by passing a block:
         #   require "google/cloud/bigquery"
@@ -305,7 +383,7 @@ module Google
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
-        # @return [Google::Cloud::Bigquery::Table]
+        # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -394,8 +472,15 @@ module Google
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect. Optional. The default value is false.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::View]
+        # @return [Google::Cloud::Bigquery::View] A new view object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -419,7 +504,7 @@ module Google
         # @!group Table
         #
         def create_view table_id, query, name: nil, description: nil,
-                        standard_sql: nil, legacy_sql: nil
+                        standard_sql: nil, legacy_sql: nil, udfs: nil
           new_view_opts = {
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id, dataset_id: dataset_id, table_id: table_id
@@ -429,7 +514,8 @@ module Google
             view: Google::Apis::BigqueryV2::ViewDefinition.new(
               query: query,
               use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
-                                                         legacy_sql)
+                                                         legacy_sql),
+              user_defined_function_resources: udfs_gapi(udfs)
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
@@ -474,8 +560,8 @@ module Google
         # @param [Integer] max Maximum number of tables to return.
         #
         # @return [Array<Google::Cloud::Bigquery::Table>,
-        #   Array<Google::Cloud::Bigquery::View>] (See
-        #   {Google::Cloud::Bigquery::Table::List})
+        #   Array<Google::Cloud::Bigquery::View>] An array of tables and/or
+        #   views(See {Google::Cloud::Bigquery::Table::List})
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -546,6 +632,10 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
+        # @param [Hash<String|Symbol, External::DataSource>] external A Hash
+        #   that represents the mapping of the external tables to the table
+        #   names used in the SQL query. The hash keys are the table names, and
+        #   the hash values are the external table objects. See {Dataset#query}.
         # @param [String] priority Specifies a priority for the query. Possible
         #   values include `INTERACTIVE` and `BATCH`. The default value is
         #   `INTERACTIVE`.
@@ -605,8 +695,37 @@ module Google
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
+        # @param [String] job_id A user-defined ID for the query job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
         #
-        # @return [Google::Cloud::Bigquery::QueryJob]
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
@@ -618,7 +737,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -634,7 +753,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -650,7 +769,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
@@ -666,24 +785,49 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     job.query_results.each do |row|
+        #     job.data.each do |row|
+        #       puts row[:name]
+        #     end
+        #   end
+        #
+        # @example Query using external data source:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = dataset.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   job = dataset.query_job "SELECT * FROM my_ext_table",
+        #                           external: { my_ext_table: csv_table }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.data.each do |row|
         #       puts row[:name]
         #     end
         #   end
         #
         # @!group Data
         #
-        def query_job query, params: nil, priority: "INTERACTIVE", cache: true,
-                      table: nil, create: nil, write: nil, standard_sql: nil,
+        def query_job query, params: nil, external: nil,
+                      priority: "INTERACTIVE", cache: true, table: nil,
+                      create: nil, write: nil, standard_sql: nil,
                       legacy_sql: nil, large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
+                      job_id: nil, prefix: nil, labels: nil, udfs: nil
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params }
+                      params: params, external: external, labels: labels,
+                      job_id: job_id, prefix: prefix, udfs: udfs }
           options[:dataset] ||= self
           ensure_service!
           gapi = service.query_job query, options
@@ -691,8 +835,10 @@ module Google
         end
 
         ##
-        # Queries data using the [synchronous
-        # method](https://cloud.google.com/bigquery/querying-data).
+        # Queries data using a synchronous method that blocks for a response. In
+        # this method, a {QueryJob} is created and its results are saved
+        # to a temporary table, then read from the table. Timeouts and transient
+        # errors are generally handled as needed to complete the query.
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
@@ -717,6 +863,8 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # @see https://cloud.google.com/bigquery/querying-data Querying Data
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -728,22 +876,16 @@ module Google
         #   passed is a hash `{ myparam: "foo" }`, the query must use named
         #   query parameters. When set, `legacy_sql` will automatically be set
         #   to false and `standard_sql` to true.
+        # @param [Hash<String|Symbol, External::DataSource>] external A Hash
+        #   that represents the mapping of the external tables to the table
+        #   names used in the SQL query. The hash keys are the table names, and
+        #   the hash values are the external table objects. See {Dataset#query}.
         # @param [Integer] max The maximum number of rows of data to return per
         #   page of results. Setting this flag to a small value such as 1000 and
         #   then paging through results might improve reliability when the query
         #   result set is large. In addition to this limit, responses are also
         #   limited to 10 MB. By default, there is no maximum row count, and
         #   only the byte limit applies.
-        # @param [Integer] timeout How long to wait for the query to complete,
-        #   in milliseconds, before the request times out and returns. Note that
-        #   this is only a timeout for the request, not the query. If the query
-        #   takes longer to run than the timeout value, the call returns without
-        #   any results and with QueryData#complete? set to false. The default
-        #   value is 10000 milliseconds (10 seconds).
-        # @param [Boolean] dryrun If set to `true`, BigQuery doesn't run the
-        #   job. Instead, if the query is valid, BigQuery returns statistics
-        #   about the job such as how many bytes would be processed. If the
-        #   query is invalid, an error returns. The default value is `false`.
         # @param [Boolean] cache Whether to look for the result in the query
         #   cache. The query cache is a best-effort cache that will be flushed
         #   whenever tables in the query are modified. The default value is
@@ -769,7 +911,7 @@ module Google
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::QueryData]
+        # @return [Google::Cloud::Bigquery::Data] A new data object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
@@ -822,25 +964,112 @@ module Google
         #     puts row[:name]
         #   end
         #
+        # @example Query using external data source:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = dataset.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   data = dataset.query "SELECT * FROM my_ext_table",
+        #                        external: { my_ext_table: csv_table }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
         # @!group Data
         #
-        def query query, params: nil, max: nil, timeout: 10000, dryrun: nil,
-                  cache: true, standard_sql: nil, legacy_sql: nil
-          options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      params: params }
-          options[:dataset] ||= dataset_id
-          options[:project] ||= project_id
+        def query query, params: nil, external: nil, max: nil, cache: true,
+                  standard_sql: nil, legacy_sql: nil
           ensure_service!
-          gapi = service.query query, options
-          QueryData.from_gapi gapi, service
+          options = { params: params, external: external, cache: cache,
+                      legacy_sql: legacy_sql, standard_sql: standard_sql }
+
+          job = query_job query, options
+          job.wait_until_done!
+
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
+          job.data max: max
         end
 
         ##
-        # Loads data into the provided destination table. For the source of the
-        # data, you can pass a google-cloud storage file path or a
-        # google-cloud-storage `File` instance. Or, you can upload a file
-        # directly. See [Loading Data with a POST
+        # Creates a new External::DataSource (or subclass) object that
+        # represents the external data source that can be queried from directly,
+        # even though the data is not stored in BigQuery. Instead of loading or
+        # streaming the data, this object references the external data source.
+        #
+        # @see https://cloud.google.com/bigquery/external-data-sources Querying
+        #   External Data Sources
+        #
+        # @param [String, Array<String>] url The fully-qualified URL(s) that
+        #   point to your data in Google Cloud. An attempt will be made to
+        #   derive the format from the URLs provided.
+        # @param [String|Symbol] format The data format. This value will be used
+        #   even if the provided URLs are recognized as a different format.
+        #   Optional.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `sheets` - Google Sheets
+        #   * `datastore_backup` - Cloud Datastore backup
+        #   * `bigtable` - Bigtable
+        #
+        # @return [External::DataSource] External data source.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   csv_url = "gs://bucket/path/to/data.csv"
+        #   csv_table = dataset.external csv_url do |csv|
+        #     csv.autodetect = true
+        #     csv.skip_leading_rows = 1
+        #   end
+        #
+        #   data = dataset.query "SELECT * FROM my_ext_table",
+        #                         external: { my_ext_table: csv_table }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
+        def external url, format: nil
+          ext = External.from_urls url, format
+          yield ext if block_given?
+          ext
+        end
+
+        ##
+        # Loads data into the provided destination table using an asynchronous
+        # method. In this method, a {LoadJob} is immediately returned. The
+        # caller may poll the service by repeatedly calling {Job#reload!} and
+        # {Job#done?} to detect when the job is done, or simply block until the
+        # job is done by calling #{Job#wait_until_done!}. See also {#load}.
+        #
+        # For the source of the data, you can pass a google-cloud storage file
+        # path or a google-cloud-storage `File` instance. Or, you can upload a
+        # file directly. See [Loading Data with a POST
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # @param [String] table_id The destination table to load the data into.
@@ -888,6 +1117,9 @@ module Google
         # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
         #   quoted data sections that contain newline characters in a CSV file.
         #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
         # @param [String] encoding The character encoding of the data. The
         #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
         #   `UTF-8`.
@@ -912,6 +1144,245 @@ module Google
         #   records exceeds this value, an invalid error is returned in the job
         #   result. The default value is `0`, which requires that all records
         #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
+        # @param [String] quote The value that is used to quote data sections in
+        #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. The default value is a double-quote
+        #   <code>"</code>. If your data does not contain quoted sections, set
+        #   the property value to an empty string. If your data contains quoted
+        #   newline characters, you must also set the allowQuotedNewlines
+        #   property to true.
+        # @param [Integer] skip_leading The number of rows at the top of a CSV
+        #   file that BigQuery will skip when loading the data. The default
+        #   value is `0`. This property is useful if you have header rows in the
+        #   file that should be skipped.
+        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        #   destination table. Optional. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        #
+        #   See {Project#schema} for the creation of the schema for use with
+        #   this option. Also note that for most use cases, the block yielded by
+        #   this method is a more convenient way to configure the schema.
+        # @param [String] job_id A user-defined ID for the load job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
+        #
+        # @yield [schema] A block for setting the schema for the destination
+        #   table. The schema can be omitted if the destination table already
+        #   exists, or if you're loading data from a Google Cloud Datastore
+        #   backup.
+        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
+        #   instance provided using the `schema` option, or a new, empty schema
+        #   instance
+        #
+        # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   gs_url = "gs://my-bucket/file-name.csv"
+        #   load_job = dataset.load_job "my_new_table", gs_url do |schema|
+        #     schema.string "first_name", mode: :required
+        #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+        #       nested_schema.string "place", mode: :required
+        #       nested_schema.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
+        # @example Pass a google-cloud-storage `File` instance:
+        #   require "google/cloud/bigquery"
+        #   require "google/cloud/storage"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "file-name.csv"
+        #   load_job = dataset.load_job "my_new_table", file do |schema|
+        #     schema.string "first_name", mode: :required
+        #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+        #       nested_schema.string "place", mode: :required
+        #       nested_schema.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
+        # @example Upload a file directly:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   file = File.open "my_data.csv"
+        #   load_job = dataset.load_job "my_new_table", file do |schema|
+        #     schema.string "first_name", mode: :required
+        #     schema.record "cities_lived", mode: :repeated do |nested_schema|
+        #       nested_schema.string "place", mode: :required
+        #       nested_schema.integer "number_of_years", mode: :required
+        #     end
+        #   end
+        #
+        # @example Schema is not required with a Cloud Datastore backup:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   load_job = dataset.load_job "my_new_table",
+        #                           "gs://my-bucket/xxxx.kind_name.backup_info",
+        #                           format: "datastore_backup"
+        #
+        # @!group Data
+        #
+        def load_job table_id, file, format: nil, create: nil, write: nil,
+                     projection_fields: nil, jagged_rows: nil,
+                     quoted_newlines: nil, encoding: nil, delimiter: nil,
+                     ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                     skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
+                     prefix: nil, labels: nil, autodetect: nil, null_marker: nil
+          ensure_service!
+
+          if block_given?
+            schema ||= Schema.from_gapi
+            yield schema
+          end
+          schema_gapi = schema.to_gapi if schema
+
+          options = { format: format, create: create, write: write,
+                      projection_fields: projection_fields,
+                      jagged_rows: jagged_rows,
+                      quoted_newlines: quoted_newlines, encoding: encoding,
+                      delimiter: delimiter, ignore_unknown: ignore_unknown,
+                      max_bad_records: max_bad_records, quote: quote,
+                      skip_leading: skip_leading, dryrun: dryrun,
+                      schema: schema_gapi, job_id: job_id, prefix: prefix,
+                      labels: labels, autodetect: autodetect,
+                      null_marker: null_marker }
+          return load_storage(table_id, file, options) if storage_url? file
+          return load_local(table_id, file, options) if local_file? file
+          fail Google::Cloud::Error, "Don't know how to load #{file}"
+        end
+
+        ##
+        # Loads data into the provided destination table using a synchronous
+        # method that blocks for a response. Timeouts and transient errors are
+        # generally handled as needed to complete the job. See also
+        # {#load_job}.
+        #
+        # For the source of the data, you can pass a google-cloud storage file
+        # path or a google-cloud-storage `File` instance. Or, you can upload a
+        # file directly. See [Loading Data with a POST
+        # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # @param [String] table_id The destination table to load the data into.
+        # @param [File, Google::Cloud::Storage::File, String] file A file or the
+        #   URI of a Google Cloud Storage file containing data to load into the
+        #   table.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `datastore_backup` - Cloud Datastore backup
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the table. The default value is `append`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the table already contains
+        #     data.
+        # @param [Array<String>] projection_fields If the `format` option is set
+        #   to `datastore_backup`, indicates which entity properties to load
+        #   from a Cloud Datastore backup. Property names are case sensitive and
+        #   must be top-level properties. If not set, BigQuery loads all
+        #   properties. If any named property isn't found in the Cloud Datastore
+        #   backup, an invalid error is returned.
+        # @param [Boolean] jagged_rows Accept rows that are missing trailing
+        #   optional columns. The missing values are treated as nulls. If
+        #   `false`, records with missing trailing columns are treated as bad
+        #   records, and if there are too many bad records, an invalid error is
+        #   returned in the job result. The default value is `false`. Only
+        #   applicable to CSV, ignored for other formats.
+        # @param [Boolean] quoted_newlines Indicates if BigQuery should allow
+        #   quoted data sections that contain newline characters in a CSV file.
+        #   The default value is `false`.
+        # @param [Boolean] autodetect Indicates if BigQuery should
+        #   automatically infer the options and schema for CSV and JSON sources.
+        #   The default value is `false`.
+        # @param [String] encoding The character encoding of the data. The
+        #   supported values are `UTF-8` or `ISO-8859-1`. The default value is
+        #   `UTF-8`.
+        # @param [String] delimiter Specifices the separator for fields in a CSV
+        #   file. BigQuery converts the string to `ISO-8859-1` encoding, and
+        #   then uses the first byte of the encoded string to split the data in
+        #   its raw, binary state. Default is <code>,</code>.
+        # @param [Boolean] ignore_unknown Indicates if BigQuery should allow
+        #   extra values that are not represented in the table schema. If true,
+        #   the extra values are ignored. If false, records with extra columns
+        #   are treated as bad records, and if there are too many bad records,
+        #   an invalid error is returned in the job result. The default value is
+        #   `false`.
+        #
+        #   The `format` property determines what BigQuery treats as an extra
+        #   value:
+        #
+        #   * `CSV`: Trailing columns
+        #   * `JSON`: Named values that don't match any column names
+        # @param [Integer] max_bad_records The maximum number of bad records
+        #   that BigQuery can ignore when running the job. If the number of bad
+        #   records exceeds this value, an invalid error is returned in the job
+        #   result. The default value is `0`, which requires that all records
+        #   are valid.
+        # @param [String] null_marker Specifies a string that represents a null
+        #   value in a CSV file. For example, if you specify `\N`, BigQuery
+        #   interprets `\N` as a null value when loading a CSV file. The default
+        #   value is the empty string. If you set this property to a custom
+        #   value, BigQuery throws an error if an empty string is present for
+        #   all data types except for STRING and BYTE. For STRING and BYTE
+        #   columns, BigQuery interprets the empty string as an empty value.
         # @param [String] quote The value that is used to quote data sections in
         #   a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and
         #   then uses the first byte of the encoded string to split the data in
@@ -941,7 +1412,7 @@ module Google
         #   instance provided using the `schema` option, or a new, empty schema
         #   instance
         #
-        # @return [Google::Cloud::Bigquery::LoadJob]
+        # @return [Boolean] Returns `true` if the load job was successful.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -950,7 +1421,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
-        #   load_job = dataset.load "my_new_table", gs_url do |schema|
+        #   dataset.load "my_new_table", gs_url do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -968,7 +1439,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "file-name.csv"
-        #   load_job = dataset.load "my_new_table", file do |schema|
+        #   dataset.load "my_new_table", file do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -983,7 +1454,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   file = File.open "my_data.csv"
-        #   load_job = dataset.load "my_new_table", file do |schema|
+        #   dataset.load "my_new_table", file do |schema|
         #     schema.string "first_name", mode: :required
         #     schema.record "cities_lived", mode: :repeated do |nested_schema|
         #       nested_schema.string "place", mode: :required
@@ -997,9 +1468,9 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   load_job = dataset.load "my_new_table",
-        #                           "gs://my-bucket/xxxx.kind_name.backup_info",
-        #                           format: "datastore_backup"
+        #   dataset.load "my_new_table",
+        #                "gs://my-bucket/xxxx.kind_name.backup_info",
+        #                format: "datastore_backup"
         #
         # @!group Data
         #
@@ -1007,14 +1478,9 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 dryrun: nil, schema: nil
-          ensure_service!
+                 schema: nil, autodetect: nil, null_marker: nil
 
-          if block_given?
-            schema ||= Schema.from_gapi
-            yield schema
-          end
-          schema_gapi = schema.to_gapi if schema
+          yield (schema ||= Schema.from_gapi) if block_given?
 
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -1022,11 +1488,23 @@ module Google
                       quoted_newlines: quoted_newlines, encoding: encoding,
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, dryrun: dryrun,
-                      schema: schema_gapi }
-          return load_storage(table_id, file, options) if storage_url? file
-          return load_local(table_id, file, options) if local_file? file
-          fail Google::Cloud::Error, "Don't know how to load #{file}"
+                      skip_leading: skip_leading, schema: schema,
+                      autodetect: autodetect, null_marker: null_marker }
+          job = load_job table_id, file, options
+
+          job.wait_until_done!
+
+          if job.failed?
+            begin
+              # raise to activate ruby exception cause handling
+              fail job.gapi_error
+            rescue => e
+              # wrap Google::Apis::Error with Google::Cloud::Error
+              raise Google::Cloud::Error.from_error(e)
+            end
+          end
+
+          true
         end
 
         ##
@@ -1038,7 +1516,157 @@ module Google
           end
         end
 
+        ##
+        # Inserts data into the given table for near-immediate querying, without
+        # the need to complete a load operation before the data can appear in
+        # query results.
+        #
+        # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery
+        #   Streaming Data Into BigQuery
+        #
+        # @param [String] table_id The ID of the destination table.
+        # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
+        #   containing the data. Required.
+        # @param [Boolean] skip_invalid Insert all valid rows of a request, even
+        #   if invalid rows exist. The default value is `false`, which causes
+        #   the entire request to fail if any invalid rows exist.
+        # @param [Boolean] ignore_unknown Accept rows that contain values that
+        #   do not match the schema. The unknown values are ignored. Default is
+        #   false, which treats unknown values as errors.
+        # @param [Boolean] autocreate Specifies whether the method should create
+        #   a new table with the given `table_id`, if no table is found for
+        #   `table_id`. The default value is false.
+        #
+        # @return [Google::Cloud::Bigquery::InsertResponse] An insert response
+        #   object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows
+        #
+        # @example Using `autocreate` to create a new table if none exists.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows, autocreate: true do |t|
+        #     t.schema.string "first_name", mode: :required
+        #     t.schema.integer "age", mode: :required
+        #   end
+        #
+        # @!group Data
+        #
+        def insert table_id, rows, skip_invalid: nil, ignore_unknown: nil,
+                   autocreate: nil
+          if autocreate
+            begin
+              insert_data table_id, rows, skip_invalid: skip_invalid,
+                                          ignore_unknown: ignore_unknown
+            rescue Google::Cloud::NotFoundError
+              sleep rand(1..60)
+              begin
+                create_table table_id do |tbl_updater|
+                  yield tbl_updater if block_given?
+                end
+              # rubocop:disable Lint/HandleExceptions
+              rescue Google::Cloud::AlreadyExistsError
+              end
+              # rubocop:enable Lint/HandleExceptions
+
+              sleep 60
+              insert table_id, rows, skip_invalid: skip_invalid,
+                                     ignore_unknown: ignore_unknown,
+                                     autocreate: true
+            end
+          else
+            insert_data table_id, rows, skip_invalid: skip_invalid,
+                                        ignore_unknown: ignore_unknown
+          end
+        end
+
+        ##
+        # Create an asynchonous inserter object used to insert rows in batches.
+        #
+        # @param [String] table_id The ID of the table to insert rows into.
+        # @param [Boolean] skip_invalid Insert all valid rows of a request, even
+        #   if invalid rows exist. The default value is `false`, which causes
+        #   the entire request to fail if any invalid rows exist.
+        # @param [Boolean] ignore_unknown Accept rows that contain values that
+        #   do not match the schema. The unknown values are ignored. Default is
+        #   false, which treats unknown values as errors.
+        # @attr_reader [Integer] max_bytes The maximum size of rows to be
+        #   collected before the batch is published. Default is 10,000,000
+        #   (10MB).
+        # @param [Integer] max_rows The maximum number of rows to be collected
+        #   before the batch is published. Default is 500.
+        # @attr_reader [Numeric] interval The number of seconds to collect
+        #   messages before the batch is published. Default is 10.
+        # @attr_reader [Numeric] threads The number of threads used to insert
+        #   batches of rows. Default is 4.
+        # @yield [response] the callback for when a batch of rows is inserted
+        # @yieldparam [InsertResponse] response the result of the asynchonous
+        #   insert
+        #
+        # @return [Table::AsyncInserter] Returns an inserter object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   inserter = table.insert_async do |response|
+        #     log_insert "inserted #{response.insert_count} rows " \
+        #       "with #{response.error_count} errors"
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
+        def insert_async table_id, skip_invalid: nil, ignore_unknown: nil,
+                         max_bytes: 10000000, max_rows: 500, interval: 10,
+                         threads: 4, &block
+          ensure_service!
+
+          # Get table, don't use Dataset#table which handles NotFoundError
+          gapi = service.get_table dataset_id, table_id
+          table = Table.from_gapi gapi, service
+          # Get the AsyncInserter from the table
+          table.insert_async skip_invalid: skip_invalid,
+                             ignore_unknown: ignore_unknown,
+                             max_bytes: max_bytes, max_rows: max_rows,
+                             interval: interval, threads: threads, &block
+        end
+
         protected
+
+        def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil
+          rows = [rows] if rows.is_a? Hash
+          fail ArgumentError, "No rows provided" if rows.empty?
+          ensure_service!
+          options = { skip_invalid: skip_invalid,
+                      ignore_unknown: ignore_unknown }
+          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          InsertResponse.from_gapi rows, gapi
+        end
 
         ##
         # Raise an error unless an active service is available.
@@ -1053,6 +1681,7 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new patch_args
+          patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi
         end
 
@@ -1099,6 +1728,19 @@ module Google
           ::File.file? file
         rescue
           false
+        end
+
+        def udfs_gapi array_or_str
+          return [] if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
 
         ##

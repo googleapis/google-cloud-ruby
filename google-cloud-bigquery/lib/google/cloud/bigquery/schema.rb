@@ -46,6 +46,22 @@ module Google
       class Schema
         ##
         # The fields of the table schema.
+        #
+        # @return [Array<Field>] An array of field objects.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   schema = table.schema
+        #
+        #   schema.fields.each do |field|
+        #     puts field.name
+        #   end
+        #
         def fields
           if frozen?
             Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
@@ -56,12 +72,41 @@ module Google
 
         ##
         # The names of the fields as symbols.
+        #
+        # @return [Array<Symbol>] An array of column names.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table"
+        #
+        #   schema = table.schema
+        #
+        #   schema.headers.each do |header|
+        #     puts header
+        #   end
+        #
         def headers
           fields.map(&:name).map(&:to_sym)
         end
 
         ##
-        # Retreive a fields by name.
+        # Retrieve a field by name.
+        #
+        # @return [Field] A field object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   field = table.schema.field "name"
+        #   field.required? #=> true
+        #
         def field name
           f = fields.find { |fld| fld.name == name.to_s }
           return nil if f.nil?
@@ -71,6 +116,9 @@ module Google
 
         ##
         # Whether the schema has no fields defined.
+        #
+        # @return [Boolean] `true` when there are no fields, `false` otherwise.
+        #
         def empty?
           fields.empty?
         end
@@ -86,6 +134,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def string name, description: nil, mode: :nullable
           add_field name, :string, description: description, mode: mode
         end
@@ -101,6 +150,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def integer name, description: nil, mode: :nullable
           add_field name, :integer, description: description, mode: mode
         end
@@ -116,6 +166,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def float name, description: nil, mode: :nullable
           add_field name, :float, description: description, mode: mode
         end
@@ -131,6 +182,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def boolean name, description: nil, mode: :nullable
           add_field name, :boolean, description: description, mode: mode
         end
@@ -146,6 +198,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def bytes name, description: nil, mode: :nullable
           add_field name, :bytes, description: description, mode: mode
         end
@@ -176,6 +229,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def time name, description: nil, mode: :nullable
           add_field name, :time, description: description, mode: mode
         end
@@ -191,6 +245,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def datetime name, description: nil, mode: :nullable
           add_field name, :datetime, description: description, mode: mode
         end
@@ -206,6 +261,7 @@ module Google
         # @param [Symbol] mode The field's mode. The possible values are
         #   `:nullable`, `:required`, and `:repeated`. The default value is
         #   `:nullable`.
+        #
         def date name, description: nil, mode: :nullable
           add_field name, :date, description: description, mode: mode
         end

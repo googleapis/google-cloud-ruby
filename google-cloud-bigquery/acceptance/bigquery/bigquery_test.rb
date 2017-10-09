@@ -24,11 +24,16 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     d
   end
+  let(:labels) { { "foo" => "bar" } }
+  let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
+  let(:filter) { "labels.foo:bar" }
   let(:dataset_2_id) { "#{prefix}_dataset_2" }
   let(:dataset_2) do
     d = bigquery.dataset dataset_2_id
     if d.nil?
-      d = bigquery.create_dataset dataset_2_id
+      d = bigquery.create_dataset dataset_2_id do |ds|
+        ds.labels = labels
+      end
     end
     d
   end
@@ -68,6 +73,14 @@ describe Google::Cloud::Bigquery, :bigquery do
     more_datasets.wont_be :nil?
   end
 
+  it "should get a list of datasets by labels filter" do
+    datasets = bigquery.datasets filter: filter
+    datasets.count.must_equal 1
+    ds = datasets.first
+    ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    ds.labels.must_equal labels
+  end
+
   it "create a dataset with access rules" do
     bigquery.create_dataset dataset_with_access_id do |ds|
       ds.access do |acl|
@@ -83,28 +96,43 @@ describe Google::Cloud::Bigquery, :bigquery do
 
   it "should run an query" do
     rows = bigquery.query publicdata_query
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
   it "should run an query without legacy SQL syntax" do
     rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", legacy_sql: false
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
   it "should run an query with standard SQL syntax" do
     rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", standard_sql: true
-    rows.class.must_equal Google::Cloud::Bigquery::QueryData
+    rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
-  it "should run an query job" do
-    job = bigquery.query_job publicdata_query
+  it "should run a query job with job id" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = bigquery.query_job publicdata_query, job_id: job_id
     job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.job_id.must_equal job_id
+    job.user_email.wont_be_nil
+    job.wait_until_done!
+    rows = job.data
+    rows.total.must_equal 100
+  end
 
-    rows = job.query_results
-    rows.count.must_equal 100
+  it "should run a query job with job labels" do
+    job = bigquery.query_job publicdata_query, labels: labels
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.labels.must_equal labels
+  end
+
+  it "should run a query job with user defined function resources" do
+    job = bigquery.query_job publicdata_query, udfs: udfs
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.udfs.must_equal udfs
   end
 
   it "should get a list of jobs" do

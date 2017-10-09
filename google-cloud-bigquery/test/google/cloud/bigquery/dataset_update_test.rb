@@ -20,6 +20,7 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
   let(:dataset_name) { "My Dataset" }
   let(:description) { "This is my dataset" }
   let(:default_expiration) { 999 }
+  let(:labels) { { "foo" => "bar" } }
   let(:dataset_gapi) { random_dataset_gapi dataset_id, dataset_name, description, default_expiration }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
@@ -31,8 +32,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.friendly_name = new_dataset_name
-    patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi]
+    patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -53,8 +54,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.description = new_description
-    patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -75,8 +76,8 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     bigquery.service.mocked_service = mock
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_table_expiration_ms = new_default_expiration
-    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi]
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
@@ -87,6 +88,24 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     dataset.name.must_equal dataset_name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal new_default_expiration
+    mock.verify
+  end
+
+  it "updates its labels" do
+    new_labels = { "bar" => "baz" }
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.labels = new_labels
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new labels: new_labels, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+
+    dataset.labels.must_equal labels
+
+    dataset.labels = new_labels
+
+    dataset.labels.must_equal new_labels
     mock.verify
   end
 end

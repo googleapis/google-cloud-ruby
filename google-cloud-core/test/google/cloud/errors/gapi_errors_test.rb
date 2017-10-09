@@ -70,6 +70,11 @@ describe Google::Cloud::Error, :gapi do
     mapped_error.must_be_kind_of Google::Cloud::Error
   end
 
+  it "identifies FailedPreconditionError" do
+    mapped_error = Google::Cloud::Error.from_error gapi_error("conditionNotMet", 412)
+    mapped_error.must_be_kind_of Google::Cloud::FailedPreconditionError
+  end
+
   it "identifies ResourceExhaustedError" do
     mapped_error = Google::Cloud::Error.from_error gapi_error("exhausted", 429)
     mapped_error.must_be_kind_of Google::Cloud::ResourceExhaustedError

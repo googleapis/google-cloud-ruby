@@ -20,10 +20,10 @@ module Google
         ##
         # # Dataset Access Control
         #
-        # Represents the Access rules for a {Dataset}.
+        # Represents the access control rules for a {Dataset}.
         #
-        # @see https://cloud.google.com/bigquery/access-control BigQuery Access
-        #   Control
+        # @see https://cloud.google.com/bigquery/docs/access-control BigQuery
+        #   Access Control
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -106,258 +106,764 @@ module Google
 
           ##
           # Add reader access to a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_user "entity@example.com"
+          #   end
+          #
           def add_reader_user email
             add_access_role_scope_value :reader, :user, email
           end
 
           ##
           # Add reader access to a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_group "entity@example.com"
+          #   end
+          #
           def add_reader_group email
             add_access_role_scope_value :reader, :group, email
           end
 
           ##
           # Add reader access to a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_domain "example.com"
+          #   end
+          #
           def add_reader_domain domain
             add_access_role_scope_value :reader, :domain, domain
           end
 
           ##
           # Add reader access to a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_special :all
+          #   end
+          #
           def add_reader_special group
             add_access_role_scope_value :reader, :special, group
           end
 
           ##
           # Add reader access to a view.
-          # The view can be a Google::Cloud::Bigquery::View object,
-          # or a string identifier as specified by the
-          # [Query
-          # Reference](https://cloud.google.com/bigquery/query-reference#from):
-          # +project_name:datasetId.tableId+.
+          #
+          # @param [Google::Cloud::Bigquery::View, String] view A view object or
+          #   a string identifier as specified by the [Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
+          #   `project_name:datasetId.tableId`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #
+          #   view = other_dataset.table "my_view"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_view view
+          #   end
+          #
           def add_reader_view view
             add_access_view view
           end
 
           ##
           # Add writer access to a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_user "entity@example.com"
+          #   end
+          #
           def add_writer_user email
             add_access_role_scope_value :writer, :user, email
           end
 
           ##
           # Add writer access to a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_group "entity@example.com"
+          #   end
+          #
           def add_writer_group email
             add_access_role_scope_value :writer, :group, email
           end
 
           ##
           # Add writer access to a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_domain "example.com"
+          #   end
+          #
           def add_writer_domain domain
             add_access_role_scope_value :writer, :domain, domain
           end
 
           ##
           # Add writer access to a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_special :all
+          #   end
+          #
           def add_writer_special group
             add_access_role_scope_value :writer, :special, group
           end
 
           ##
           # Add owner access to a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_user "entity@example.com"
+          #   end
+          #
           def add_owner_user email
             add_access_role_scope_value :owner, :user, email
           end
 
           ##
           # Add owner access to a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_group "entity@example.com"
+          #   end
+          #
           def add_owner_group email
             add_access_role_scope_value :owner, :group, email
           end
 
           ##
           # Add owner access to a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_domain "example.com"
+          #   end
+          #
           def add_owner_domain domain
             add_access_role_scope_value :owner, :domain, domain
           end
 
           ##
           # Add owner access to a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_special :all
+          #   end
+          #
           def add_owner_special group
             add_access_role_scope_value :owner, :special, group
           end
 
           ##
           # Remove reader access from a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_user "entity@example.com"
+          #   end
+          #
           def remove_reader_user email
             remove_access_role_scope_value :reader, :user, email
           end
 
           ##
           # Remove reader access from a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_group "entity@example.com"
+          #   end
+          #
           def remove_reader_group email
             remove_access_role_scope_value :reader, :group, email
           end
 
           ##
           # Remove reader access from a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_domain "example.com"
+          #   end
+          #
           def remove_reader_domain domain
             remove_access_role_scope_value :reader, :domain, domain
           end
 
           ##
           # Remove reader access from a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_special :all
+          #   end
+          #
           def remove_reader_special group
             remove_access_role_scope_value :reader, :special, group
           end
 
           ##
           # Remove reader access from a view.
-          # The view can be a Google::Cloud::Bigquery::View object,
-          # or a string identifier as specified by the
-          # [Query
-          # Reference](https://cloud.google.com/bigquery/query-reference#from):
-          # +project_name:datasetId.tableId+.
+          #
+          # @param [Google::Cloud::Bigquery::View, String] view A view object or
+          #   a string identifier as specified by the [Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
+          #   `project_name:datasetId.tableId`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #
+          #   view = other_dataset.table "my_view"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_view view
+          #   end
+          #
           def remove_reader_view view
             remove_access_view view
           end
 
           ##
           # Remove writer access from a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_writer_user "entity@example.com"
+          #   end
+          #
           def remove_writer_user email
             remove_access_role_scope_value :writer, :user, email
           end
 
           ##
           # Remove writer access from a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_writer_group "entity@example.com"
+          #   end
+          #
           def remove_writer_group email
             remove_access_role_scope_value :writer, :group, email
           end
 
           ##
           # Remove writer access from a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_writer_domain "example.com"
+          #   end
+          #
           def remove_writer_domain domain
             remove_access_role_scope_value :writer, :domain, domain
           end
 
           ##
           # Remove writer access from a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_writer_special :all
+          #   end
+          #
           def remove_writer_special group
             remove_access_role_scope_value :writer, :special, group
           end
 
           ##
           # Remove owner access from a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_owner_user "entity@example.com"
+          #   end
+          #
           def remove_owner_user email
             remove_access_role_scope_value :owner, :user, email
           end
 
           ##
           # Remove owner access from a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_owner_group "entity@example.com"
+          #   end
+          #
           def remove_owner_group email
             remove_access_role_scope_value :owner, :group, email
           end
 
           ##
           # Remove owner access from a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_owner_domain "example.com"
+          #   end
+          #
           def remove_owner_domain domain
             remove_access_role_scope_value :owner, :domain, domain
           end
 
           ##
           # Remove owner access from a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_owner_special :all
+          #   end
+          #
           def remove_owner_special group
             remove_access_role_scope_value :owner, :special, group
           end
 
           ##
           # Checks reader access for a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.reader_user? "entity@example.com" #=> false
+          #
           def reader_user? email
             lookup_access_role_scope_value :reader, :user, email
           end
 
           ##
           # Checks reader access for a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.reader_group? "entity@example.com" #=> false
+          #
           def reader_group? email
             lookup_access_role_scope_value :reader, :group, email
           end
 
           ##
           # Checks reader access for a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.reader_domain? "example.com" #=> false
+          #
           def reader_domain? domain
             lookup_access_role_scope_value :reader, :domain, domain
           end
 
           ##
           # Checks reader access for a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.reader_special? :all #=> false
+          #
           def reader_special? group
             lookup_access_role_scope_value :reader, :special, group
           end
 
           ##
           # Checks reader access for a view.
-          # The view can be a Google::Cloud::Bigquery::View object,
-          # or a string identifier as specified by the
-          # [Query
-          # Reference](https://cloud.google.com/bigquery/query-reference#from):
-          # +project_name:datasetId.tableId+.
+          #
+          # @param [Google::Cloud::Bigquery::View, String] view A view object or
+          #   a string identifier as specified by the [Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
+          #   `project_name:datasetId.tableId`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #
+          #   view = other_dataset.table "my_view"
+          #
+          #   access = dataset.access
+          #   access.reader_view? view #=> false
+          #
           def reader_view? view
             lookup_access_view view
           end
 
           ##
           # Checks writer access for a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.writer_user? "entity@example.com" #=> false
+          #
           def writer_user? email
             lookup_access_role_scope_value :writer, :user, email
           end
 
           ##
           # Checks writer access for a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.writer_group? "entity@example.com" #=> false
+          #
           def writer_group? email
             lookup_access_role_scope_value :writer, :group, email
           end
 
           ##
           # Checks writer access for a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.writer_domain? "example.com" #=> false
+          #
           def writer_domain? domain
             lookup_access_role_scope_value :writer, :domain, domain
           end
 
           ##
           # Checks writer access for a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.writer_special? :all #=> false
+          #
           def writer_special? group
             lookup_access_role_scope_value :writer, :special, group
           end
 
           ##
           # Checks owner access for a user.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.owner_user? "entity@example.com" #=> false
+          #
           def owner_user? email
             lookup_access_role_scope_value :owner, :user, email
           end
 
           ##
           # Checks owner access for a group.
+          #
+          # @param [String] email The email address for the entity.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.owner_group? "entity@example.com" #=> false
+          #
           def owner_group? email
             lookup_access_role_scope_value :owner, :group, email
           end
 
           ##
           # Checks owner access for a domain.
+          #
+          # @param [String] domain A [Cloud Identity
+          #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.owner_domain? "example.com" #=> false
+          #
           def owner_domain? domain
             lookup_access_role_scope_value :owner, :domain, domain
           end
 
           ##
           # Checks owner access for a special group.
-          # Accepted values are `owners`, `writers`, `readers`, and `all`.
+          #
+          # @param [String] group Accepted values are `owners`, `writers`,
+          #   `readers`, and `all`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.owner_special? :all #=> false
+          #
           def owner_special? group
             lookup_access_role_scope_value :owner, :special, group
           end

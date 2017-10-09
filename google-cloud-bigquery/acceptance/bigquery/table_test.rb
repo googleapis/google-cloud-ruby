@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     t = dataset.table table_id
     if t.nil?
       t = dataset.create_table table_id do |schema|
-        schema.integer  "id",     description: "id description",    mode: :required
+        schema.integer   "id",    description: "id description",    mode: :required
         schema.string    "breed", description: "breed description", mode: :required
         schema.string    "name",  description: "name description",  mode: :required
         schema.timestamp "dob",   description: "dob description",   mode: :required
@@ -65,6 +65,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
+  let(:target_table_2_id) { "kittens_copy_2" }
+  let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
     fresh = dataset.table table.table_id
@@ -85,6 +87,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.time_partitioning_type.must_be_nil
     fresh.time_partitioning_expiration.must_be_nil
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
+
+    # streaming buffer is transient, it seems it may or may not be present?
+    fresh.buffer_bytes.must_be_kind_of Integer if fresh.buffer_bytes
+    fresh.buffer_rows.must_be_kind_of Integer if fresh.buffer_rows
+    fresh.buffer_oldest_at.must_be_kind_of Time if fresh.buffer_oldest_at
+
     fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     fresh.schema.wont_be :empty?
     [:id, :breed, :name, :dob].each { |k| fresh.headers.must_include k }
@@ -105,13 +113,47 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"
+    new_labels = { "bar" => "baz" }
+
     table.name = new_name
     table.description = new_desc
+    table.labels = new_labels
 
     table.reload!
     table.table_id.must_equal table_id
     table.name.must_equal new_name
     table.description.must_equal new_desc
+    table.labels.must_equal new_labels
+  end
+
+  it "should fail to set metadata with stale etag" do
+    fresh = dataset.table table.table_id
+    fresh.etag.wont_be :nil?
+
+    stale = dataset.table table_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
+    err.message.must_equal "conditionNotMet: Precondition Failed"
+  end
+
+  it "create dataset returns valid etag equal to get dataset" do
+    fresh_table_id = "#{rand 100}_kittens"
+    fresh = dataset.create_table fresh_table_id do |schema|
+      schema.integer   "id",    description: "id description",    mode: :required
+      schema.string    "breed", description: "breed description", mode: :required
+      schema.string    "name",  description: "name description",  mode: :required
+      schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+    fresh.etag.wont_be :nil?
+
+    stale = dataset.table fresh_table_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
   end
 
   it "gets and sets time partitioning" do
@@ -158,15 +200,17 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "inserts rows directly and gets its data" do
-    data = table.data
+    # data = table.data
     insert_response = table.insert rows
     insert_response.must_be :success?
     insert_response.insert_count.must_equal 3
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
-    query_job = dataset.query_job query
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.job_id.must_equal job_id
     query_job.wait_until_done!
 
     # Job methods
@@ -191,9 +235,37 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
-    query_job.query_results.class.must_equal Google::Cloud::Bigquery::QueryData
-    query_job.query_results.count.wont_be :nil?
-    query_job.query_results.job.job_id.must_equal query_job.job_id
+    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.total.wont_be :nil?
+
+    # Query Job - Statistics Query Plan
+    query_job.query_plan.wont_be_nil
+    query_job.query_plan.must_be_kind_of Array
+    query_job.query_plan.wont_be :empty?
+    stage = query_job.query_plan.first
+    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.compute_ratio_avg.must_be_kind_of Float
+    stage.compute_ratio_max.must_be_kind_of Float
+    stage.id.must_be_kind_of Integer
+    stage.name.must_be_kind_of String
+    stage.read_ratio_avg.must_be_kind_of Float
+    stage.read_ratio_max.must_be_kind_of Float
+    stage.records_read.must_be_kind_of Integer
+    stage.records_written.must_be_kind_of Integer
+    stage.status.must_be_kind_of String
+    stage.wait_ratio_avg.must_be_kind_of Float
+    stage.wait_ratio_max.must_be_kind_of Float
+    stage.write_ratio_avg.must_be_kind_of Float
+    stage.write_ratio_max.must_be_kind_of Float
+    stage.steps.wont_be_nil
+    stage.steps.must_be_kind_of Array
+    stage.steps.wont_be :empty?
+    step = stage.steps.first
+    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.kind.must_be_kind_of String
+    step.substeps.wont_be_nil
+    step.substeps.must_be_kind_of Array
+    step.substeps.wont_be :empty?
 
     data = table.data max: 1
     data.class.must_equal Google::Cloud::Bigquery::Data
@@ -208,18 +280,16 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     more_data = data.next
     more_data.wont_be :nil?
 
-    query_data = dataset.query query
-    query_data.class.must_equal Google::Cloud::Bigquery::QueryData
-    query_data.total_bytes.wont_be(:nil?) if query_data.complete?
-    #query_data.cache_hit?.must_equal false
-    query_data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    query_data.fields.count.must_equal 4
-    [:id, :breed, :name, :dob].each { |k| query_data.headers.must_include k }
-    query_data.count.wont_be :nil?
-    query_data.all.each do |row|
+    data = dataset.query query
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.total.wont_be(:nil?)
+    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.fields.count.must_equal 4
+    [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
+    data.all.each do |row|
       row.must_be_kind_of Hash
     end
-    query_data.next.must_be :nil?
+    data.next.must_be :nil?
   end
 
   it "insert skip invalid rows and return insert errors" do
@@ -233,12 +303,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
     insert_response.insert_errors.first.index.must_equal 1
 
-    # In the context of this test, the original row cannot be compared with InsertResponse row because
-    # rows are converted to "BigQuery JSON rows" early in table.insert: key symbols are turned into strings and
-    # dates/times are formated as timestamp strings with milliseconds.
-    # To be able to test InsertResponse#{insert_error_for, errrors_for, index_for} we need a "BigQuery JSON row"
-    # instead of using insert_response.insert_error.first we make one by converting our orginal "invalid_row"
-    bigquery_row = Google::Cloud::Bigquery::Convert.to_json_row(invalid_rows[insert_response.insert_errors.first.index])
+    bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
     insert_response.insert_errors.first.row.must_equal bigquery_row
 
     insert_response.error_rows.wont_be :empty?
@@ -250,18 +315,126 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
-  it "imports data from a local file" do
-    job = table.load local_file
+  it "inserts rows asynchonously and gets its data" do
+    # data = table.data
+    insert_response = nil
+
+    inserter = table.insert_async do |response|
+      insert_response = response
+    end
+    inserter.insert rows
+
+    inserter.flush
+    inserter.stop.wait!
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
+    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.job_id.must_equal job_id
+    query_job.wait_until_done!
+
+    # Job methods
+    query_job.done?.must_equal true
+    query_job.running?.must_equal false
+    query_job.pending?.must_equal false
+    query_job.created_at.must_be_kind_of Time
+    query_job.started_at.must_be_kind_of Time
+    query_job.ended_at.must_be_kind_of Time
+    query_job.configuration.wont_be :nil?
+    query_job.statistics.wont_be :nil?
+    query_job.status.wont_be :nil?
+    query_job.errors.must_be :empty?
+    query_job.rerun!
+    query_job.wait_until_done!
+
+    query_job.batch?.must_equal false
+    query_job.interactive?.must_equal true
+    query_job.large_results?.must_equal false
+    query_job.cache?.must_equal true
+    query_job.flatten?.must_equal true
+    query_job.cache_hit?.must_equal false
+    query_job.bytes_processed.wont_be :nil?
+    query_job.destination.wont_be :nil?
+    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.total.wont_be :nil?
+
+    # Query Job - Statistics Query Plan
+    query_job.query_plan.wont_be_nil
+    query_job.query_plan.must_be_kind_of Array
+    query_job.query_plan.wont_be :empty?
+    stage = query_job.query_plan.first
+    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.compute_ratio_avg.must_be_kind_of Float
+    stage.compute_ratio_max.must_be_kind_of Float
+    stage.id.must_be_kind_of Integer
+    stage.name.must_be_kind_of String
+    stage.read_ratio_avg.must_be_kind_of Float
+    stage.read_ratio_max.must_be_kind_of Float
+    stage.records_read.must_be_kind_of Integer
+    stage.records_written.must_be_kind_of Integer
+    stage.status.must_be_kind_of String
+    stage.wait_ratio_avg.must_be_kind_of Float
+    stage.wait_ratio_max.must_be_kind_of Float
+    stage.write_ratio_avg.must_be_kind_of Float
+    stage.write_ratio_max.must_be_kind_of Float
+    stage.steps.wont_be_nil
+    stage.steps.must_be_kind_of Array
+    stage.steps.wont_be :empty?
+    step = stage.steps.first
+    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.kind.must_be_kind_of String
+    step.substeps.wont_be_nil
+    step.substeps.must_be_kind_of Array
+    step.substeps.wont_be :empty?
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+
+    data = dataset.query query
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.total.wont_be(:nil?)
+    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.fields.count.must_equal 4
+    [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
+    data.all.each do |row|
+      row.must_be_kind_of Hash
+    end
+    data.next.must_be :nil?
+  end
+
+  it "imports data from a local file with load_job" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = table.load_job local_file, job_id: job_id, labels: labels
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.job_id.must_equal job_id
+    job.labels.must_equal labels
+    job.wont_be :autodetect?
+    job.null_marker.must_equal ""
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a file in your bucket" do
+  it "imports data from a file in your bucket with load_job" do
     begin
       bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
       file = bucket.create_file local_file
 
-      job = table.load file
+      job = table.load_job file
       job.wait_until_done!
       job.wont_be :failed?
     ensure
@@ -273,10 +446,34 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "copies itself to another table" do
-    copy_job = table.copy target_table_id, create: :needed, write: :empty
+  it "imports data from a local file with load" do
+    result = table.load local_file
+    result.must_equal true
+  end
+
+  it "imports data from a file in your bucket with load" do
+    begin
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file = bucket.create_file local_file
+
+      result = table.load file
+      result.must_equal true
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "copies itself to another table with copy_job" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.job_id.must_equal job_id
+    copy_job.labels.must_equal labels
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
@@ -289,8 +486,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     copy_job.write_empty?.must_equal true
   end
 
+  it "copies itself to another table with copy" do
+    result = table.copy target_table_2_id, create: :needed, write: :empty
+    result.must_equal true
+  end
+
   it "creates and cancels jobs" do
-    load_job = table.load local_file
+    load_job = table.load_job local_file
 
     load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     load_job.wont_be :done?
@@ -303,11 +505,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.wont_be :failed?
   end
 
-  it "extracts data to a url in your bucket" do
-    skip "The BigQuery to Storage acceptance tests are failing with internalError"
+  it "extracts data to a url in your bucket with extract_job" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load local_file
+      load_job = table.load_job local_file
 
       load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
       load_job.wait_until_done!
@@ -320,7 +521,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       load_job.iso8859_1?.must_equal false
       load_job.quote.must_equal "\""
       load_job.max_bad_records.must_equal 0
-      load_job.quoted_newlines?.must_equal true
+      load_job.quoted_newlines?.must_equal false
       load_job.json?.must_equal true
       load_job.csv?.must_equal false
       load_job.backup?.must_equal false
@@ -336,9 +537,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract extract_url
+        extract_job = table.extract_job extract_url, labels: labels
 
         extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+        extract_job.labels.must_equal labels
         extract_job.wait_until_done!
 
         extract_job.wont_be :failed?
@@ -364,19 +566,72 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "extracts data to a file in your bucket" do
-    skip "The BigQuery to Storage acceptance tests are failing with internalError"
+  it "extracts data to a file in your bucket with extract_job" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load local_file
+      load_job = table.load_job local_file
       load_job.wait_until_done!
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
-        extract_job = table.extract extract_file
+        job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+
+        extract_job = table.extract_job extract_file, job_id: job_id
+        extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?
+        # Refresh to get the latest file data
+        extract_file = bucket.file "kitten-test-data-backup.json"
+        downloaded_file = extract_file.download tmp.path
+        downloaded_file.size.must_be :>, 0
+      end
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "extracts data to a url in your bucket with extract" do
+    begin
+      # Make sure there is data to extract...
+      result = table.load local_file
+      result.must_equal true
+
+      Tempfile.open "empty_extract_file.json" do |tmp|
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
+        result = table.extract extract_url
+        result.must_equal true
+
+        extract_file = bucket.file "kitten-test-data-backup.json"
+        downloaded_file = extract_file.download tmp.path
+        downloaded_file.size.must_be :>, 0
+      end
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "extracts data to a file in your bucket with extract" do
+    begin
+      # Make sure there is data to extract...
+      result = table.load local_file
+      result.must_equal true
+      Tempfile.open "empty_extract_file.json" do |tmp|
+        tmp.size.must_equal 0
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
+
+        result = table.extract extract_file
+        result.must_equal true
         # Refresh to get the latest file data
         extract_file = bucket.file "kitten-test-data-backup.json"
         downloaded_file = extract_file.download tmp.path

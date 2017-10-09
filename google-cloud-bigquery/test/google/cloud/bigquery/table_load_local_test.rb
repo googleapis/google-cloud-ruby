@@ -25,21 +25,14 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
   it "can upload a csv file" do
     mock = Minitest::Mock.new
-    insert_job = Google::Apis::BigqueryV2::Job.new(
-      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_gapi.table_reference,
-          source_format: "CSV"
-        ),
-        dry_run: nil))
     table.service.mocked_service = mock
 
     temp_csv do |file|
-      mock.expect :insert_job, load_job_gapi(table, "some/file/path.csv"),
-        [project, insert_job, upload_source: file, content_type: "text/comma-separated-values"]
+      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
+        [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result = table.load file, format: :csv
+      result.must_equal true
     end
 
     mock.verify
@@ -47,31 +40,16 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
   it "can upload a csv file with CSV options" do
     mock = Minitest::Mock.new
-    insert_job = Google::Apis::BigqueryV2::Job.new(
-      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_gapi.table_reference,
-          source_format: "CSV",
-          allow_jagged_rows: true,
-          allow_quoted_newlines: true,
-          encoding: "ISO-8859-1",
-          field_delimiter: "\t",
-          ignore_unknown_values: true,
-          max_bad_records: 42,
-          quote: "'",
-          skip_leading_rows: 1
-        ),
-        dry_run: nil))
     table.service.mocked_service = mock
 
     temp_csv do |file|
-      mock.expect :insert_job, load_job_gapi(table, "some/file/path.csv"),
-        [project, insert_job, upload_source: file, content_type: "text/comma-separated-values"]
+      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
+        [project, load_job_csv_options_gapi(table_gapi.table_reference), upload_source: file, content_type: "text/comma-separated-values"]
 
-      job = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true,
-        encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42,
+      result = table.load file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
+        encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result.must_equal true
     end
 
     mock.verify
@@ -83,21 +61,14 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
   it "can upload a json file" do
     mock = Minitest::Mock.new
-    insert_job = Google::Apis::BigqueryV2::Job.new(
-      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_gapi.table_reference,
-          source_format: "NEWLINE_DELIMITED_JSON"
-        ),
-        dry_run: nil))
     table.service.mocked_service = mock
 
     temp_json do |file|
-      mock.expect :insert_job, load_job_gapi(table, "some/file/path.json"),
-        [project, insert_job, upload_source: file, content_type: "application/json"]
+      mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
+        [project, load_job_gapi(table_gapi.table_reference), upload_source: file, content_type: "application/json"]
 
-      job = table.load file, format: "JSON"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      result = table.load file, format: "JSON"
+      result.must_equal true
     end
 
     mock.verify
@@ -105,25 +76,18 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
 
   it "can upload a json file and derive the format" do
     mock = Minitest::Mock.new
-    insert_job = Google::Apis::BigqueryV2::Job.new(
-      configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_gapi.table_reference,
-          source_format: "NEWLINE_DELIMITED_JSON"
-        ),
-        dry_run: nil))
-    mock.expect :insert_job, load_job_gapi(table, "some/file/path.json"),
-      [project, insert_job, upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"]
+    mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
+      [project, load_job_gapi(table_gapi.table_reference), upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"]
     table.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"
-    job = table.load local_json
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    result = table.load local_json
+    result.must_equal true
 
     mock.verify
   end
 
-  def load_job_gapi table, load_url
+  def load_job_resp_gapi table, load_url
     hash = random_job_hash
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
@@ -133,25 +97,8 @@ describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
         "tableId" => table.table_id
       },
     }
-    Google::Apis::BigqueryV2::Job.from_json hash.to_json
-  end
-
-  def temp_csv
-    Tempfile.open ["import", ".csv"] do |tmpfile|
-      tmpfile.puts "id,name"
-      1000.times do |x|
-        tmpfile.puts "#{x},#{SecureRandom.urlsafe_base64(rand(8..16))}"
-      end
-      yield tmpfile
-    end
-  end
-
-  def temp_json
-    Tempfile.open ["import", ".json"] do |tmpfile|
-      h = {}
-      1000.times { |x| h["key-#{x}"] = {name: SecureRandom.urlsafe_base64(rand(8..16)) } }
-      tmpfile.write h.to_json
-      yield tmpfile
-    end
+    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
+    resp.status = status "done"
+    resp
   end
 end

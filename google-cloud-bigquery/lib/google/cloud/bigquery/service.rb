@@ -18,7 +18,7 @@ require "google/cloud/bigquery/convert"
 require "google/cloud/errors"
 require "google/apis/bigquery_v2"
 require "pathname"
-require "digest/md5"
+require "securerandom"
 require "mime/types"
 require "date"
 
@@ -61,7 +61,7 @@ module Google
             service.client_options.open_timeout_sec = timeout
             service.client_options.read_timeout_sec = timeout
             service.client_options.send_timeout_sec = timeout
-            service.request_options.retries = @retries || 3
+            service.request_options.retries = 0 # handle retries in #execute
             service.request_options.header ||= {}
             service.request_options.header["x-goog-api-client"] = \
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
@@ -75,17 +75,19 @@ module Google
         # Lists all datasets in the specified project to which you have
         # been granted the READER dataset role.
         def list_datasets options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_datasets \
-              @project, all: options[:all], max_results: options[:max],
-                        page_token: options[:token]
+              @project, all: options[:all], filter: options[:filter],
+                        max_results: options[:max], page_token: options[:token]
           end
         end
 
         ##
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
-          execute { service.get_dataset @project, dataset_id }
+          # The get operation is considered idempotent
+          execute(backoff: true) { service.get_dataset @project, dataset_id }
         end
 
         ##
@@ -98,8 +100,16 @@ module Google
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
         def patch_dataset dataset_id, patched_dataset_gapi
-          execute do
-            service.patch_dataset @project, dataset_id, patched_dataset_gapi
+          patch_with_backoff = false
+          options = {}
+          if patched_dataset_gapi.etag
+            options[:header] = { "If-Match" => patched_dataset_gapi.etag }
+            # The patch with etag operation is considered idempotent
+            patch_with_backoff = true
+          end
+          execute backoff: patch_with_backoff do
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi,
+                                  options: options
           end
         end
 
@@ -119,7 +129,8 @@ module Google
         # Lists all tables in the specified dataset.
         # Requires the READER dataset role.
         def list_tables dataset_id, options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_tables @project, dataset_id,
                                 max_results: options[:max],
                                 page_token: options[:token]
@@ -127,7 +138,10 @@ module Google
         end
 
         def get_project_table project_id, dataset_id, table_id
-          execute { service.get_table project_id, dataset_id, table_id }
+          # The get operation is considered idempotent
+          execute backoff: true do
+            service.get_table project_id, dataset_id, table_id
+          end
         end
 
         ##
@@ -136,7 +150,10 @@ module Google
         # it only returns the table resource,
         # which describes the structure of this table.
         def get_table dataset_id, table_id
-          execute { get_project_table @project, dataset_id, table_id }
+          # The get operation is considered idempotent
+          execute backoff: true do
+            get_project_table @project, dataset_id, table_id
+          end
         end
 
         ##
@@ -149,9 +166,16 @@ module Google
         # Updates information in an existing table, replacing fields that
         # are provided in the submitted table resource.
         def patch_table dataset_id, table_id, patched_table_gapi
-          execute do
+          patch_with_backoff = false
+          options = {}
+          if patched_table_gapi.etag
+            options[:header] = { "If-Match" => patched_table_gapi.etag }
+            # The patch with etag operation is considered idempotent
+            patch_with_backoff = true
+          end
+          execute backoff: patch_with_backoff do
             service.patch_table @project, dataset_id, table_id,
-                                patched_table_gapi
+                                patched_table_gapi, options: options
           end
         end
 
@@ -165,7 +189,8 @@ module Google
         ##
         # Retrieves data from the table.
         def list_tabledata dataset_id, table_id, options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_table_data @project, dataset_id, table_id,
                                     max_results: options.delete(:max),
                                     page_token: options.delete(:token),
@@ -176,8 +201,8 @@ module Google
         def insert_tabledata dataset_id, table_id, rows, options = {}
           insert_rows = Array(rows).map do |row|
             Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-              insert_id: Digest::MD5.base64digest(row.to_json),
-              json: row
+              insert_id: SecureRandom.uuid,
+              json: Convert.to_json_row(row)
             )
           end
           insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
@@ -186,7 +211,8 @@ module Google
             skip_invalid_rows: options[:skip_invalid]
           )
 
-          execute do
+          # The insertAll with insertId operation is considered idempotent
+          execute backoff: true do
             service.insert_all_table_data(
               @project, dataset_id, table_id, insert_req)
           end
@@ -196,7 +222,8 @@ module Google
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
         def list_jobs options = {}
-          execute do
+          # The list operation is considered idempotent
+          execute backoff: true do
             service.list_jobs \
               @project, all_users: options[:all], max_results: options[:max],
                         page_token: options[:token], projection: "full",
@@ -207,35 +234,37 @@ module Google
         ##
         # Cancel the job specified by jobId.
         def cancel_job job_id
-          execute { service.cancel_job @project, job_id }
+          # The BigQuery team has told us cancelling is considered idempotent
+          execute(backoff: true) { service.cancel_job @project, job_id }
         end
 
         ##
         # Returns the job specified by jobID.
         def get_job job_id
-          execute { service.get_job @project, job_id }
+          # The get operation is considered idempotent
+          execute(backoff: true) { service.get_job @project, job_id }
         end
 
         def insert_job config
           job_object = API::Job.new(
+            job_reference: job_ref_from(nil, nil),
             configuration: config
           )
-          execute { service.insert_job @project, job_object }
+          # Jobs have generated id, so this operation is considered idempotent
+          execute(backoff: true) { service.insert_job @project, job_object }
         end
 
         def query_job query, options = {}
           config = query_table_config(query, options)
-          execute { service.insert_job @project, config }
-        end
-
-        def query query, options = {}
-          execute { service.query_job @project, query_config(query, options) }
+          # Jobs have generated id, so this operation is considered idempotent
+          execute(backoff: true) { service.insert_job @project, config }
         end
 
         ##
         # Returns the query data for the job
         def job_query_results job_id, options = {}
-          execute do
+          # The get operation is considered idempotent
+          execute backoff: true do
             service.get_job_query_results @project,
                                           job_id,
                                           max_results: options.delete(:max),
@@ -246,21 +275,24 @@ module Google
         end
 
         def copy_table source, target, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job @project, copy_table_config(
               source, target, options)
           end
         end
 
         def extract_table table, storage_files, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, extract_table_config(table, storage_files, options)
           end
         end
 
         def load_table_gs_url dataset_id, table_id, url, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, load_table_url_config(dataset_id, table_id,
                                               url, options)
@@ -268,7 +300,8 @@ module Google
         end
 
         def load_table_file dataset_id, table_id, file, options = {}
-          execute do
+          # Jobs have generated id, so this operation is considered idempotent
+          execute backoff: true do
             service.insert_job \
               @project, load_table_file_config(
                 dataset_id, table_id, file, options),
@@ -299,7 +332,7 @@ module Google
         ##
         # Lists all projects to which you have been granted any project role.
         def list_projects options = {}
-          execute do
+          execute backoff: true do
             service.list_projects max_results: options[:max],
                                   page_token: options[:token]
           end
@@ -335,6 +368,23 @@ module Google
           end
         end
 
+        # Generate a random string similar to the BigQuery service job IDs.
+        def generate_id
+          SecureRandom.urlsafe_base64(21)
+        end
+
+        # If no job_id or prefix is given, always generate a client-side job ID
+        # anyway, for idempotent retry in the google-api-client layer.
+        # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
+        def job_ref_from job_id, prefix
+          prefix ||= "job_"
+          job_id ||= "#{prefix}#{generate_id}"
+          API::JobReference.new(
+            project_id: @project,
+            job_id: job_id
+          )
+        end
+
         def load_table_file_opts dataset_id, table_id, file, options = {}
           path = Pathname(file).to_path
           {
@@ -346,21 +396,26 @@ module Google
             projection_fields: projection_fields(options[:projection_fields]),
             allow_jagged_rows: options[:jagged_rows],
             allow_quoted_newlines: options[:quoted_newlines],
+            autodetect: options[:autodetect],
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records], quote: options[:quote],
+            max_bad_records: options[:max_bad_records],
+            null_marker: options[:null_marker], quote: options[:quote],
             schema: options[:schema], skip_leading_rows: options[:skip_leading]
           }.delete_if { |_, v| v.nil? }
         end
 
         def load_table_file_config dataset_id, table_id, file, options = {}
           load_opts = load_table_file_opts dataset_id, table_id, file, options
-          API::Job.new(
+          req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def load_table_url_opts dataset_id, table_id, url, options = {}
@@ -374,21 +429,26 @@ module Google
             projection_fields: projection_fields(options[:projection_fields]),
             allow_jagged_rows: options[:jagged_rows],
             allow_quoted_newlines: options[:quoted_newlines],
+            autodetect: options[:autodetect],
             encoding: options[:encoding], field_delimiter: options[:delimiter],
             ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records], quote: options[:quote],
+            max_bad_records: options[:max_bad_records],
+            null_marker: options[:null_marker], quote: options[:quote],
             schema: options[:schema], skip_leading_rows: options[:skip_leading]
           }.delete_if { |_, v| v.nil? }
         end
 
         def load_table_url_config dataset_id, table_id, url, options = {}
           load_opts = load_table_url_opts dataset_id, table_id, url, options
-          API::Job.new(
+          req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               load: API::JobConfigurationLoad.new(load_opts),
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         # rubocop:disable all
@@ -397,8 +457,9 @@ module Google
         # Job description for query job
         def query_table_config query, options
           dest_table = table_ref_from options[:table]
-          default_dataset = dataset_ref_from options[:dataset]
+          dataset_config = dataset_ref_from options[:dataset], options[:project]
           req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               query: API::JobConfigurationQuery.new(
                 query: query,
@@ -410,14 +471,16 @@ module Google
                 write_disposition: write_disposition(options[:write]),
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
-                default_dataset: default_dataset,
+                default_dataset: dataset_config,
                 use_legacy_sql: Convert.resolve_legacy_sql(
                   options[:standard_sql], options[:legacy_sql]),
                 maximum_billing_tier: options[:maximum_billing_tier],
-                maximum_bytes_billed: options[:maximum_bytes_billed]
+                maximum_bytes_billed: options[:maximum_bytes_billed],
+                user_defined_function_resources: udfs(options[:udfs])
               )
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
 
           if options[:params]
             if Array === options[:params]
@@ -437,6 +500,14 @@ module Google
             else
               fail "Query parameters must be an Array or a Hash."
             end
+          end
+
+          if options[:external]
+            external_table_pairs = options[:external].map do |name, obj|
+              [String(name), obj.to_gapi]
+            end
+            external_table_hash = Hash[external_table_pairs]
+            req.configuration.query.table_definitions = external_table_hash
           end
 
           req
@@ -484,7 +555,8 @@ module Google
         ##
         # Job description for copy job
         def copy_table_config source, target, options = {}
-          API::Job.new(
+          req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               copy: API::JobConfigurationTableCopy.new(
                 source_table: source,
@@ -495,6 +567,8 @@ module Google
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def extract_table_config table, storage_files, options = {}
@@ -502,7 +576,8 @@ module Google
             url.respond_to?(:to_gs_url) ? url.to_gs_url : url
           end
           dest_format = source_format storage_urls.first, options[:format]
-          API::Job.new(
+          req = API::Job.new(
+            job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
               extract: API::JobConfigurationExtract.new(
                 destination_uris: Array(storage_urls),
@@ -515,6 +590,8 @@ module Google
               dry_run: options[:dryrun]
             )
           )
+          req.configuration.labels = options[:labels] if options[:labels]
+          req
         end
 
         def create_disposition str
@@ -550,6 +627,7 @@ module Google
                   "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
                   "avro" => "AVRO",
                   "datastore" => "DATASTORE_BACKUP",
+                  "backup" => "DATASTORE_BACKUP",
                   "datastore_backup" => "DATASTORE_BACKUP"
                 }[format.to_s.downcase]
           return val unless val.nil?
@@ -573,10 +651,85 @@ module Google
           nil
         end
 
-        def execute
-          yield
+        def udfs array_or_str
+          Array(array_or_str).map do |uri_or_code|
+            resource = API::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
+        end
+
+        def execute backoff: nil
+          if backoff
+            Backoff.new(retries: retries).execute { yield }
+          else
+            yield
+          end
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error(e)
+        end
+
+        class Backoff
+          class << self
+            attr_accessor :retries
+            attr_accessor :reasons
+            attr_accessor :backoff
+          end
+          self.retries = 5
+          self.reasons = %w(rateLimitExceeded backendError)
+          self.backoff = lambda do |retries|
+            # Max delay is 32 seconds
+            # See "Back-off Requirements" here:
+            # https://cloud.google.com/bigquery/sla
+            retries = 5 if retries > 5
+            delay = 2 ** retries
+            sleep delay
+          end
+
+          def initialize options = {}
+            @retries = (options[:retries] || Backoff.retries).to_i
+            @reasons = (options[:reasons] || Backoff.reasons).to_a
+            @backoff =  options[:backoff] || Backoff.backoff
+          end
+
+          def execute
+            current_retries = 0
+            loop do
+              begin
+                return yield
+              rescue Google::Apis::Error => e
+                raise e unless retry? e.body, current_retries
+
+                @backoff.call current_retries
+                current_retries += 1
+              end
+            end
+          end
+
+          protected
+
+          def retry? result, current_retries #:nodoc:
+            if current_retries < @retries
+              return true if retry_error_reason? result
+            end
+            false
+          end
+
+          def retry_error_reason? err_body
+            err_hash = JSON.parse err_body
+            json_errors = Array err_hash["error"]["errors"]
+            return false if json_errors.empty?
+            json_errors.each do |json_error|
+              return false unless @reasons.include? json_error["reason"]
+            end
+            true
+          rescue
+            false
+          end
         end
       end
     end

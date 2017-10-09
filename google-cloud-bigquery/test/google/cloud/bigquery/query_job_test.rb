@@ -63,8 +63,49 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.config["query"]["priority"].must_equal "BATCH"
   end
 
+  it "knows its query plan attributes" do
+    job.query_plan.wont_be_nil
+    job.query_plan.must_be_kind_of Array
+    job.query_plan.count.must_equal 1
+    stage = job.query_plan.first
+    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.compute_ratio_avg.must_equal 1.0
+    stage.compute_ratio_max.must_equal 1.0
+    stage.id.must_equal 1
+    stage.name.must_equal "Stage 1"
+    stage.read_ratio_avg.must_equal 0.2710832227382326
+    stage.read_ratio_max.must_equal 0.2710832227382326
+    stage.records_read.must_equal 164656
+    stage.records_written.must_equal 1
+    stage.status.must_equal "COMPLETE"
+    stage.wait_ratio_avg.must_equal 0.007876711656047392
+    stage.wait_ratio_max.must_equal 0.007876711656047392
+    stage.write_ratio_avg.must_equal 0.05389444608201358
+    stage.write_ratio_max.must_equal 0.05389444608201358
+
+    stage.steps.wont_be_nil
+    stage.steps.must_be_kind_of Array
+    stage.steps.count.must_equal 1
+    step = stage.steps.first
+    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.kind.must_equal "READ"
+    step.substeps.wont_be_nil
+    step.substeps.must_be_kind_of Array
+    step.substeps.must_equal [ "word", "FROM publicdata:samples.shakespeare" ]
+  end
+
+  it "knows its user defined function resources" do
+    job.udfs.wont_be_nil
+    job.udfs.must_be_kind_of Array
+    job.udfs.count.must_equal 2
+    job.udfs.first.must_equal "return x+1;"
+    job.udfs.last.must_equal "gs://my-bucket/my-lib.js"
+  end
+
   def query_job_gapi
-    Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
+    gapi.statistics.query = statistics_query_gapi
+    gapi
   end
 
   def query_job_hash
@@ -89,11 +130,11 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "flattenResults" => true,
       "useLegacySql" => false,
       "maximumBillingTier" => 2,
-      "maximumBytesBilled" => 12345678901234 # Long
-    }
-    hash["statistics"]["query"] = {
-      "cacheHit" => false,
-      "totalBytesProcessed" => 123456
+      "maximumBytesBilled" => 12345678901234, # Long
+      "userDefinedFunctionResources" => [
+        { "inlineCode" => "return x+1;" },
+        { "resourceUri" => "gs://my-bucket/my-lib.js" }
+      ]
     }
     hash
   end
@@ -106,5 +147,39 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "tableId"   => "target_table_id"
     }
     hash.to_json
+  end
+
+  def statistics_query_gapi
+    Google::Apis::BigqueryV2::JobStatistics2.new(
+      billing_tier: 1,
+      cache_hit: false,
+      total_bytes_processed: 123456,
+      query_plan: [
+        Google::Apis::BigqueryV2::ExplainQueryStage.new(
+          compute_ratio_avg: 1.0,
+          compute_ratio_max: 1.0,
+          id: 1,
+          name: "Stage 1",
+          read_ratio_avg: 0.2710832227382326,
+          read_ratio_max: 0.2710832227382326,
+          records_read: 164656,
+          records_written: 1,
+          status: "COMPLETE",
+          steps: [
+            Google::Apis::BigqueryV2::ExplainQueryStep.new(
+              kind: "READ",
+              substeps: [
+                "word",
+                "FROM publicdata:samples.shakespeare"
+              ]
+            )
+          ],
+          wait_ratio_avg: 0.007876711656047392,
+          wait_ratio_max: 0.007876711656047392,
+          write_ratio_avg: 0.05389444608201358,
+          write_ratio_max: 0.05389444608201358
+        )
+      ]
+    )
   end
 end

@@ -16,18 +16,20 @@ require "helper"
 require "json"
 
 describe Google::Cloud::Bigquery::Project, :mock_bigquery do
+  let(:dataset_id) { "my_dataset" }
+  let(:filter) { "labels.foo:bar" }
+
   it "creates an empty dataset" do
     mock = Minitest::Mock.new
-    created_dataset = create_dataset_gapi "my_dataset"
+    created_dataset = create_dataset_gapi dataset_id
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset")
+        project_id: project, dataset_id: dataset_id)
     )
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset"
+    dataset = bigquery.create_dataset dataset_id
 
     mock.verify
 
@@ -35,26 +37,24 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "creates a dataset with options" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
     location = "EU"
 
     mock = Minitest::Mock.new
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset id, name: name,
+    dataset = bigquery.create_dataset dataset_id, name: name,
                                       description: description,
                                       expiration: default_expiration,
                                       location: location
@@ -72,17 +72,16 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi "my_dataset"
+    created_dataset = create_dataset_gapi dataset_id
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset" do |ds|
+    dataset = bigquery.create_dataset dataset_id do |ds|
       ds.access do |acl|
         refute acl.writer_user? "writers@example.com"
         acl.add_writer_user "writers@example.com"
@@ -97,33 +96,34 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   end
 
   it "creates a dataset with options and access rules using a block" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
     location = "EU"
+    labels = { "foo" => "bar" }
 
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
+      labels: labels,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+    dataset = bigquery.create_dataset dataset_id, location: location do |ds|
       ds.name = name
       ds.description = description
       ds.default_expiration = default_expiration
+      ds.labels = labels
       ds.access do |acl|
         refute acl.writer_user? "writers@example.com"
         acl.add_writer_user "writers@example.com"
@@ -137,12 +137,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
+    dataset.labels.must_equal labels
     dataset.location.must_equal location
     dataset.access.wont_be :empty?
   end
 
   it "creates a dataset with block options and access rules not using a block" do
-    id = "my_dataset"
     name = "My Dataset"
     description = "This is my dataset"
     default_expiration = 999
@@ -151,21 +151,20 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock = Minitest::Mock.new
     filled_access = [Google::Apis::BigqueryV2::Dataset::Access.new(
       role: "WRITER", user_by_email: "writers@example.com")]
-    created_dataset = create_dataset_gapi id, name, description, default_expiration, location
+    created_dataset = create_dataset_gapi dataset_id, name, description, default_expiration, location
     created_dataset.access = filled_access
     inserted_dataset = Google::Apis::BigqueryV2::Dataset.new(
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project, dataset_id: "my_dataset"),
+        project_id: project, dataset_id: dataset_id),
       friendly_name: name,
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset,
-      [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
     bigquery.service.mocked_service = mock
 
-    dataset = bigquery.create_dataset "my_dataset", location: location do |ds|
+    dataset = bigquery.create_dataset dataset_id, location: location do |ds|
       ds.name = name
       ds.description = description
       ds.default_expiration = default_expiration
@@ -197,7 +196,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "lists datasets" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets
@@ -211,7 +210,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, max_results: nil, page_token: nil]
+      [project, all: true, filter: nil, max_results: nil, page_token: nil]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets all: true
@@ -224,10 +223,26 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     datasets.token.must_equal "next_page_token"
   end
 
+  it "paginates datasets with filter set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+    bigquery.service.mocked_service = mock
+
+    datasets = bigquery.datasets filter: filter
+
+    mock.verify
+
+    datasets.count.must_equal 3
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.token.wont_be :nil?
+    datasets.token.must_equal "next_page_token"
+  end
+
   it "paginates datasets with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: 3, page_token: nil]
+      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets max: 3
@@ -243,9 +258,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
@@ -266,9 +281,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets
@@ -288,9 +303,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with next? and next with all/hidden set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, max_results: nil, page_token: nil]
+      [project, all: true, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: true, max_results: nil, page_token: "next_page_token"]
+      [project, all: true, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets all: true
@@ -307,12 +322,34 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     second_datasets.next?.must_equal false
   end
 
+  it "paginates datasets with next? and next with filter set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, filter: filter, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    first_datasets = bigquery.datasets filter: filter
+    second_datasets = first_datasets.next
+
+    mock.verify
+
+    first_datasets.count.must_equal 3
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.next?.must_equal true
+
+    second_datasets.count.must_equal 2
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.next?.must_equal false
+  end
+
   it "paginates datasets with next? and next with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: 3, page_token: nil]
+      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, max_results: 3, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: 3, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     first_datasets = bigquery.datasets max: 3
@@ -332,9 +369,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.to_a
@@ -348,9 +385,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "paginates datasets with all with all/hidden set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: true, max_results: nil, page_token: nil]
+      [project, all: true, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: true, max_results: nil, page_token: "next_page_token"]
+      [project, all: true, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(all: true).all.to_a
@@ -361,12 +398,28 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
+  it "paginates datasets with all with filter set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
+      [project, all: nil, filter: filter, max_results: nil, page_token: nil]
+    mock.expect :list_datasets, list_datasets_gapi(2),
+      [project, all: nil, filter: filter, max_results: nil, page_token: "next_page_token"]
+    bigquery.service.mocked_service = mock
+
+    datasets = bigquery.datasets(filter: filter).all.to_a
+
+    mock.verify
+
+    datasets.count.must_equal 5
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+  end
+
   it "paginates datasets with all with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: 3, page_token: nil]
+      [project, all: nil, filter: nil, max_results: 3, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(2),
-      [project, all: nil, max_results: 3, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: 3, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets(max: 3).all.to_a
@@ -380,9 +433,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates datasets with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
-      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all.take(5)
@@ -396,9 +449,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   it "iterates datasets with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_datasets, list_datasets_gapi(3, "next_page_token"),
-      [project, all: nil, max_results: nil, page_token: nil]
+      [project, all: nil, filter: nil, max_results: nil, page_token: nil]
     mock.expect :list_datasets, list_datasets_gapi(3, "second_page_token"),
-      [project, all: nil, max_results: nil, page_token: "next_page_token"]
+      [project, all: nil, filter: nil, max_results: nil, page_token: "next_page_token"]
     bigquery.service.mocked_service = mock
 
     datasets = bigquery.datasets.all(request_limit: 1).to_a
@@ -782,10 +835,6 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
     hash["nextPageToken"] = token unless token.nil?
     Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
-  end
-
-  def find_job_gapi job_id
-    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
   end
 
   def list_jobs_gapi count = 2, token = nil

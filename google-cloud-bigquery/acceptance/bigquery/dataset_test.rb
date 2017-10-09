@@ -37,7 +37,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     t = dataset.table table_with_schema_id
     if t.nil?
       t = dataset.create_table table_with_schema_id do |schema|
-        schema.integer  "id",     description: "id description",    mode: :required
+        schema.integer   "id",    description: "id description",    mode: :required
         schema.string    "breed", description: "breed description", mode: :required
         schema.string    "name",  description: "name description",  mode: :required
         schema.timestamp "dob",   description: "dob description",   mode: :required
@@ -46,6 +46,20 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     t
   end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
+  let(:rows) do
+    [
+      { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+      { name: "ryan",    breed: "golden retriever?", id: 5, dob: Time.now.utc },
+      { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
+  let(:invalid_rows) do
+    [
+        { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+        { name: nil,       breed: "golden retriever?", id: 5, dob: Time.now.utc },
+        { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
   let(:view_id) { "dataset_view" }
   let(:view) do
     t = dataset.table view_id
@@ -81,9 +95,12 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     new_name = "New name"
     new_desc = "New description!"
     new_default_expiration = 12345678
+    new_labels = { "bar" => "baz" }
+
     dataset.name = new_name
     dataset.description = new_desc
     dataset.default_expiration = new_default_expiration
+    dataset.labels = new_labels
 
     fresh = bigquery.dataset dataset.dataset_id
     fresh.wont_be :nil?
@@ -92,8 +109,34 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     fresh.name.must_equal new_name
     fresh.description.must_equal new_desc
     fresh.default_expiration.must_equal new_default_expiration
+    fresh.labels.must_equal new_labels
 
     dataset.default_expiration = nil
+  end
+
+  it "should fail to set metadata with stale etag" do
+    fresh = bigquery.dataset dataset.dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
+
+    # Modify on the server, which will change the etag
+    fresh.description = "Description 1"
+    stale.etag.wont_equal fresh.etag
+    err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
+    err.message.must_equal "conditionNotMet: Precondition Failed"
+  end
+
+  it "create dataset returns valid etag equal to get dataset" do
+    fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
+    fresh = bigquery.create_dataset fresh_dataset_id
+    fresh.etag.wont_be :nil?
+
+    stale = bigquery.dataset fresh_dataset_id
+    stale.etag.wont_be :nil?
+    stale.etag.must_equal fresh.etag
   end
 
   it "should get a list of tables and views" do
@@ -115,18 +158,21 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports data from a local file and creates a new table with specified schema in a block" do
-    job = dataset.load "local_file_table", local_file do |schema|
-      schema.integer  "id",     description: "id description",    mode: :required
+  it "imports data from a local file and creates a new table with specified schema in a block with load_job" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = dataset.load_job "local_file_table", local_file, job_id: job_id do |schema|
+      schema.integer   "id",    description: "id description",    mode: :required
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
     end
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a local file and creates a new table with specified schema as an option" do
+  it "imports data from a local file and creates a new table with specified schema as an option with load_job" do
     schema = bigquery.schema do |s|
       s.integer  "id",     description: "id description",    mode: :required
       s.string    "breed", description: "breed description", mode: :required
@@ -134,15 +180,148 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       s.timestamp "dob",   description: "dob description",   mode: :required
     end
 
-    job = dataset.load "local_file_table_2", local_file, schema: schema
+    job = dataset.load_job "local_file_table_2", local_file, schema: schema
 
     job.wait_until_done!
     job.output_rows.must_equal 3
   end
 
-  it "imports data from a local file and creates a new table without a schema" do
-    job = dataset.load table_with_schema.table_id, local_file, create: :never
+  it "imports data from a local file and creates a new table without a schema with load_job" do
+    job = dataset.load_job table_with_schema.table_id, local_file, create: :never
     job.wait_until_done!
     job.output_rows.must_equal 3
+  end
+
+  it "imports data from a local file and creates a new table with specified schema in a block with load" do
+    result = dataset.load "local_file_table", local_file do |schema|
+      schema.integer   "id",    description: "id description",    mode: :required
+      schema.string    "breed", description: "breed description", mode: :required
+      schema.string    "name",  description: "name description",  mode: :required
+      schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+    result.must_equal true
+  end
+
+  it "imports data from a local file and creates a new table with specified schema as an option with load" do
+    schema = bigquery.schema do |s|
+      s.integer  "id",     description: "id description",    mode: :required
+      s.string    "breed", description: "breed description", mode: :required
+      s.string    "name",  description: "name description",  mode: :required
+      s.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    result = dataset.load "local_file_table_2", local_file, schema: schema
+    result.must_equal true
+  end
+
+  it "imports data from a local file and creates a new table without a schema with load" do
+    result = dataset.load table_with_schema.table_id, local_file, create: :never
+    result.must_equal true
+  end
+
+  it "inserts rows directly and gets its data" do
+    insert_response = dataset.insert table_with_schema.table_id, rows
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    data = table_with_schema.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
+  it "insert skip invalid rows and return insert errors" do
+    insert_response = dataset.insert table_with_schema.table_id, invalid_rows, skip_invalid: true
+    insert_response.wont_be :success?
+    insert_response.insert_count.must_equal 2
+
+    insert_response.insert_errors.wont_be :empty?
+    insert_response.insert_errors.count.must_equal 1
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.index.must_equal 1
+
+    bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
+    insert_response.insert_errors.first.row.must_equal bigquery_row
+
+    insert_response.error_rows.wont_be :empty?
+    insert_response.error_rows.count.must_equal 1
+    insert_response.error_rows.first.must_equal bigquery_row
+
+    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
+    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
+    insert_response.index_for(invalid_rows[1]).must_equal 1
+  end
+
+  it "inserts rows with autocreate option" do
+    # schema block is not needed in this test since table exists, but provide anyway
+    insert_response = dataset.insert table_with_schema.table_id, rows, autocreate: true do |t|
+      t.schema.integer   "id",    description: "id description",    mode: :required
+      t.schema.string    "breed", description: "breed description", mode: :required
+      t.schema.string    "name",  description: "name description",  mode: :required
+      t.schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    table = dataset.table table_with_schema_id
+    table.wont_be_nil
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
+  it "creates missing table while inserts rows with autocreate option" do
+    new_table_id = "new_dataset_table_id_#{rand(1000)}"
+
+    insert_response = dataset.insert new_table_id, rows, autocreate: true do |t|
+      t.schema.integer   "id",    description: "id description",    mode: :required
+      t.schema.string    "breed", description: "breed description", mode: :required
+      t.schema.string    "name",  description: "name description",  mode: :required
+      t.schema.timestamp "dob",   description: "dob description",   mode: :required
+    end
+
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    table = dataset.table new_table_id
+    table.wont_be_nil
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
   end
 end

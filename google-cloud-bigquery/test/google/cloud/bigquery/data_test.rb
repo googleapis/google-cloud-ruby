@@ -52,22 +52,22 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data[1][:age].must_equal 42
     data[1][:score].must_equal 8.15
     data[1][:active].must_equal false
-    data[1][:avatar].must_equal nil
-    data[1][:started_at].must_equal nil
+    data[1][:avatar].must_be :nil?
+    data[1][:started_at].must_be :nil?
     data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
-    data[1][:target_end].must_equal nil
-    data[1][:birthday].must_equal nil
+    data[1][:target_end].must_be :nil?
+    data[1][:birthday].must_be :nil?
 
     data[2].must_be_kind_of Hash
     data[2][:name].must_equal "Sally"
-    data[2][:age].must_equal nil
-    data[2][:score].must_equal nil
-    data[2][:active].must_equal nil
-    data[2][:avatar].must_equal nil
-    data[2][:started_at].must_equal nil
-    data[2][:duration].must_equal nil
-    data[2][:target_end].must_equal nil
-    data[2][:birthday].must_equal nil
+    data[2][:age].must_be :nil?
+    data[2][:score].must_be :nil?
+    data[2][:active].must_be :nil?
+    data[2][:avatar].must_be :nil?
+    data[2][:started_at].must_be :nil?
+    data[2][:duration].must_be :nil?
+    data[2][:target_end].must_be :nil?
+    data[2][:birthday].must_be :nil?
   end
 
   it "knows the data metadata" do
@@ -98,6 +98,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock.verify
 
     data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.schema.must_be :frozen?
     data.fields.must_equal data.schema.fields
     data.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
@@ -334,29 +335,5 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock.verify
 
     data.class.must_equal Google::Cloud::Bigquery::Data
-  end
-
-  def table_data_gapi token: "token1234567890"
-    Google::Apis::BigqueryV2::TableDataList.from_json table_data_hash(token: token).to_json
-  end
-
-  def table_data_hash token: "token1234567890"
-    {
-      "kind" => "bigquery#tableDataList",
-      "etag" => "etag1234567890",
-      "rows" => random_data_rows,
-      "pageToken" => token,
-      "totalRows" => "3" # String per google/google-api-ruby-client#439
-    }
-  end
-
-  def nil_table_data_gapi
-    Google::Apis::BigqueryV2::TableDataList.from_json nil_table_data_json
-  end
-
-  def nil_table_data_json
-    h = table_data_hash
-    h.delete "rows"
-    h.to_json
   end
 end

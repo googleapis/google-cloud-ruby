@@ -30,6 +30,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
+  it "raises if rows is an empty array" do
+    expect { table.insert [] }.must_raise ArgumentError
+  end
+
   it "can insert one row" do
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
@@ -39,7 +43,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert rows.first
     end
 
@@ -59,7 +63,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert rows
     end
 
@@ -79,7 +83,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert rows
     end
 
@@ -136,7 +140,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert rows, skip_invalid: true
     end
 
@@ -156,7 +160,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert rows, ignore_unknown: true
     end
 
@@ -203,7 +207,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = nil
-    Digest::MD5.stub :base64digest, insert_id do
+    SecureRandom.stub :uuid, insert_id do
       result = table.insert [inserting_row]
     end
 

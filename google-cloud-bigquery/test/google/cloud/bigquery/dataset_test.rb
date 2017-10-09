@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:default_expiration) { 999 }
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
+  let(:labels) { { "foo" => "bar" } }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
@@ -61,6 +62,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     dataset.etag.must_equal etag
     dataset.api_url.must_equal api_url
     dataset.location.must_equal location_code
+    dataset.labels.must_equal labels
+    dataset.labels.must_be :frozen?
   end
 
   it "knows its creation and modification times" do
@@ -101,8 +104,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
         project_id: project, dataset_id: dataset_id, table_id: table_id))
     return_table = create_table_gapi table_id
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id
@@ -125,8 +127,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     return_table = create_table_gapi table_id, table_name, table_description
     # Make sure the returning table has no schema
     return_table.update! schema: nil
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id,
@@ -154,8 +155,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     return_table = create_table_gapi table_id, table_name, table_description
     # Make sure the returning table has no schema
     return_table.update! schema: nil
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -184,8 +184,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema: table_schema_gapi)
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -231,8 +230,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         ]))
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |schema|
@@ -273,8 +271,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema: table_schema_gapi)
     return_table = create_table_gapi table_id, table_name, table_description
     return_table.schema = table_schema_gapi
-    mock.expect :insert_table, return_table,
-      [project, dataset_id, insert_table]
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |t|
@@ -309,21 +306,24 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       ),
       view: Google::Apis::BigqueryV2::ViewDefinition.new(
         query: query,
-        use_legacy_sql: false
+        use_legacy_sql: false,
+        user_defined_function_resources: []
       )
     )
-    return_view = create_view_gapi view_id, query
-    mock.expect :insert_table, return_view,
-      [project, dataset_id, insert_view]
+    return_view = create_view_gapi view_id, insert_view.view
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
     dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query
 
     mock.verify
 
+    table.must_be_kind_of Google::Cloud::Bigquery::View
     table.table_id.must_equal view_id
     table.query.must_equal query
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_be :empty?
     table.must_be :view?
     table.wont_be :table?
   end
@@ -337,12 +337,12 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       description: view_description,
       view: Google::Apis::BigqueryV2::ViewDefinition.new(
         query: query,
-        use_legacy_sql: false
+        use_legacy_sql: false,
+        user_defined_function_resources: []
       )
     )
-    return_view = create_view_gapi view_id, query, view_name, view_description
-    mock.expect :insert_table, return_view,
-      [project, dataset_id, insert_view]
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
     dataset.service.mocked_service = mock
 
     table = dataset.create_view view_id, query,
@@ -357,6 +357,168 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.query.must_equal query
     table.name.must_equal view_name
     table.description.must_equal view_description
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_be :empty?
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with standard_sql" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query,
+        use_legacy_sql: false,
+        user_defined_function_resources: []
+      )
+    )
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_view view_id, query, standard_sql: true
+
+    mock.verify
+
+
+    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.table_id.must_equal view_id
+    table.query.must_equal query
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_be :empty?
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with legacy_sql" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query,
+        use_legacy_sql: true,
+        user_defined_function_resources: []
+      )
+    )
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_view view_id, query, legacy_sql: true
+
+    mock.verify
+
+
+    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.table_id.must_equal view_id
+    table.query.must_equal query
+    table.wont_be :query_standard_sql?
+    table.must_be :query_legacy_sql?
+    table.query_udfs.must_be :empty?
+    table.name.must_equal view_name
+    table.description.must_equal view_description
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with udfs (array)" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query,
+        use_legacy_sql: false,
+        user_defined_function_resources: [
+          Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(inline_code: "return x+1;"),
+          Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(resource_uri: "gs://my-bucket/my-lib.js")
+        ]
+      )
+    )
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_view view_id, query, udfs: ["return x+1;", "gs://my-bucket/my-lib.js"]
+
+    mock.verify
+
+
+    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.table_id.must_equal view_id
+    table.query.must_equal query
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_equal ["return x+1;", "gs://my-bucket/my-lib.js"]
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with udfs (inline)" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query,
+        use_legacy_sql: false,
+        user_defined_function_resources: [
+          Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(inline_code: "return x+1;")
+        ]
+      )
+    )
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_view view_id, query, udfs: "return x+1;"
+
+    mock.verify
+
+
+    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.table_id.must_equal view_id
+    table.query.must_equal query
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_equal ["return x+1;"]
+    table.must_be :view?
+    table.wont_be :table?
+  end
+
+  it "can create a view with udfs (url)" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id),
+      view: Google::Apis::BigqueryV2::ViewDefinition.new(
+        query: query,
+        use_legacy_sql: false,
+        user_defined_function_resources: [
+          Google::Apis::BigqueryV2::UserDefinedFunctionResource.new(resource_uri: "gs://my-bucket/my-lib.js")
+        ]
+      )
+    )
+    return_view = create_view_gapi view_id, insert_view.view, view_name, view_description
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_view view_id, query, udfs: "gs://my-bucket/my-lib.js"
+
+    mock.verify
+
+
+    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.table_id.must_equal view_id
+    table.query.must_equal query
+    table.must_be :query_standard_sql?
+    table.wont_be :query_legacy_sql?
+    table.query_udfs.must_equal ["gs://my-bucket/my-lib.js"]
     table.must_be :view?
     table.wont_be :table?
   end
@@ -533,8 +695,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     found_table_id = "found_table"
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, find_table_gapi(found_table_id),
-      [project, dataset_id, found_table_id]
+    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id]
     dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id
@@ -549,12 +710,13 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
   end
 
-  def create_view_gapi id, query, name = nil, description = nil
+  def create_view_gapi id, view, name = nil, description = nil
     hash = random_table_hash dataset_id, id, name, description
-    hash["view"] = {"query" => query}
     hash["type"] = "VIEW"
 
-    Google::Apis::BigqueryV2::Table.from_json hash.to_json
+    Google::Apis::BigqueryV2::Table.from_json(hash.to_json).tap do |v|
+      v.view = view
+    end
   end
 
   def find_table_gapi id, name = nil, description = nil

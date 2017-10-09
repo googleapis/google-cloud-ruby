@@ -232,7 +232,7 @@ module Google
     # BigQuery API provides facilities for managing longer-running jobs. With
     # the asynchronous approach to running a query, an instance of
     # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
-    # of {Google::Cloud::Bigquery::QueryData}.
+    # of {Google::Cloud::Bigquery::Data}.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -246,17 +246,17 @@ module Google
     #
     # job.wait_until_done!
     # if !job.failed?
-    #   job.query_results.first
+    #   job.data.first
     #   #=> {:title=>[{:value=>"hamlet", :count=>5318}, ...}
     # end
     # ```
     #
     # Once you have determined that the job is done and has not failed, you can
-    # obtain an instance of {Google::Cloud::Bigquery::QueryData} by calling
-    # `query_results` on the job instance. The query results for both of the
-    # above examples are stored in temporary tables with a lifetime of about 24
-    # hours. See the final example below for a demonstration of how to store
-    # query results in a permanent table.
+    # obtain an instance of {Google::Cloud::Bigquery::Data} by calling `data` on
+    # the job instance. The query results for both of the above examples are
+    # stored in temporary tables with a lifetime of about 24 hours. See the
+    # final example below for a demonstration of how to store query results in a
+    # permanent table.
     #
     # ## Creating Datasets and Tables
     #
@@ -370,7 +370,7 @@ module Google
     # end
     #
     # file = File.open "names/yob2014.txt"
-    # load_job = table.load file, format: "csv"
+    # table.load file, format: "csv"
     # ```
     #
     # Because the names data, although formatted as CSV, is distributed in files
@@ -411,9 +411,7 @@ module Google
     #   bucket = storage.create_bucket bucket_id
     #   extract_url = "gs://#{bucket.id}/baby-names.csv"
     #
-    #   extract_job = result_table.extract extract_url
-    #
-    #   extract_job.wait_until_done!
+    #   result_table.extract extract_url
     #
     #   # Download to local filesystem
     #   bucket.files.first.download "baby-names.csv"
@@ -470,7 +468,7 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/bigquery`
       # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
+      #   error. The default value is `5`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       #
       # @return [Google::Cloud::Bigquery::Project]

@@ -34,6 +34,7 @@ module Google
         #
         #   field = table.schema.field "name"
         #   field.required? #=> true
+        #
         class Field
           # @private
           MODES = %w( NULLABLE REQUIRED REPEATED )
@@ -45,6 +46,11 @@ module Google
           ##
           # The name of the field.
           #
+          # @return [String] The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          #
           def name
             @gapi.name
           end
@@ -52,19 +58,38 @@ module Google
           ##
           # Updates the name of the field.
           #
+          # @param [String] new_name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          #
           def name= new_name
             @gapi.update! name: String(new_name)
           end
 
           ##
-          # The type of the field.
+          # The data type of the field.
+          #
+          # @return [String] The field data type. Possible values include
+          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `BOOLEAN`, `BOOL` (same as
+          #   `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`, `RECORD`
+          #   (where `RECORD` indicates that the field contains a nested schema)
+          #   or `STRUCT` (same as `RECORD`).
           #
           def type
             @gapi.type
           end
 
           ##
-          # Updates the type of the field.
+          # Updates the data type of the field.
+          #
+          # @param [String] new_type The data type. Possible values include
+          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `BOOLEAN`, `BOOL` (same as
+          #   `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`, `RECORD`
+          #   (where `RECORD` indicates that the field contains a nested schema)
+          #   or `STRUCT` (same as `RECORD`).
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -72,24 +97,36 @@ module Google
 
           ##
           # Checks if the type of the field is `NULLABLE`.
+          #
+          # @return [Boolean] `true` when `NULLABLE`, `false` otherwise.
+          #
           def nullable?
             mode == "NULLABLE"
           end
 
           ##
           # Checks if the type of the field is `REQUIRED`.
+          #
+          # @return [Boolean] `true` when `REQUIRED`, `false` otherwise.
+          #
           def required?
             mode == "REQUIRED"
           end
 
           ##
           # Checks if the type of the field is `REPEATED`.
+          #
+          # @return [Boolean] `true` when `REPEATED`, `false` otherwise.
+          #
           def repeated?
             mode == "REPEATED"
           end
 
           ##
           # The description of the field.
+          #
+          # @return [String] The field description. The maximum length is 1,024
+          #   characters.
           #
           def description
             @gapi.description
@@ -98,12 +135,18 @@ module Google
           ##
           # Updates the description of the field.
           #
+          # @param [String] new_description The field description. The maximum
+          #   length is 1,024 characters.
+          #
           def description= new_description
             @gapi.update! description: new_description
           end
 
           ##
           # The mode of the field.
+          #
+          # @return [String] The field mode. Possible values include `NULLABLE`,
+          #   `REQUIRED` and `REPEATED`. The default value is `NULLABLE`.
           #
           def mode
             @gapi.mode
@@ -112,66 +155,100 @@ module Google
           ##
           # Updates the mode of the field.
           #
+          # @param [String] new_mode The field mode. Possible values include
+          #   `NULLABLE`, `REQUIRED` and `REPEATED`. The default value is
+          #   `NULLABLE`.
+          #
           def mode= new_mode
             @gapi.update! mode: verify_mode(new_mode)
           end
 
           ##
           # Checks if the mode of the field is `STRING`.
+          #
+          # @return [Boolean] `true` when `STRING`, `false` otherwise.
+          #
           def string?
             mode == "STRING"
           end
 
           ##
           # Checks if the mode of the field is `INTEGER`.
+          #
+          # @return [Boolean] `true` when `INTEGER`, `false` otherwise.
+          #
           def integer?
             mode == "INTEGER"
           end
 
           ##
           # Checks if the mode of the field is `FLOAT`.
+          #
+          # @return [Boolean] `true` when `FLOAT`, `false` otherwise.
+          #
           def float?
             mode == "FLOAT"
           end
 
           ##
           # Checks if the mode of the field is `BOOLEAN`.
+          #
+          # @return [Boolean] `true` when `BOOLEAN`, `false` otherwise.
+          #
           def boolean?
             mode == "BOOLEAN"
           end
 
           ##
           # Checks if the mode of the field is `BYTES`.
+          #
+          # @return [Boolean] `true` when `BYTES`, `false` otherwise.
+          #
           def bytes?
             mode == "BYTES"
           end
 
           ##
           # Checks if the mode of the field is `TIMESTAMP`.
+          #
+          # @return [Boolean] `true` when `TIMESTAMP`, `false` otherwise.
+          #
           def timestamp?
             mode == "TIMESTAMP"
           end
 
           ##
           # Checks if the mode of the field is `TIME`.
+          #
+          # @return [Boolean] `true` when `TIME`, `false` otherwise.
+          #
           def time?
             mode == "TIME"
           end
 
           ##
           # Checks if the mode of the field is `DATETIME`.
+          #
+          # @return [Boolean] `true` when `DATETIME`, `false` otherwise.
+          #
           def datetime?
             mode == "DATETIME"
           end
 
           ##
           # Checks if the mode of the field is `DATE`.
+          #
+          # @return [Boolean] `true` when `DATE`, `false` otherwise.
+          #
           def date?
             mode == "DATE"
           end
 
           ##
           # Checks if the mode of the field is `RECORD`.
+          #
+          # @return [Boolean] `true` when `RECORD`, `false` otherwise.
+          #
           def record?
             mode == "RECORD"
           end
@@ -179,6 +256,10 @@ module Google
           ##
           # The nested fields if the type property is set to `RECORD`. Will be
           # empty otherwise.
+          #
+          # @return [Array<Field>, nil] The nested schema fields if the type
+          #   is set to `RECORD`.
+          #
           def fields
             if frozen?
               Array(@gapi.fields).map { |f| Field.from_gapi(f).freeze }.freeze
@@ -190,13 +271,20 @@ module Google
           ##
           # The names of the nested fields as symbols if the type property is
           # set to `RECORD`. Will be empty otherwise.
+          #
+          # @return [Array<Symbol>, nil] The names of the nested schema fields
+          #   if the type is set to `RECORD`.
+          #
           def headers
             fields.map(&:name).map(&:to_sym)
           end
 
           ##
-          # Retreive a nested fields by name, if the type property is
+          # Retrieve a nested field by name, if the type property is
           # set to `RECORD`. Will return `nil` otherwise.
+          #
+          # @return [Field, nil] The nested schema field object, or `nil`.
+          #
           def field name
             f = fields.find { |fld| fld.name == name.to_s }
             return nil if f.nil?
@@ -205,7 +293,7 @@ module Google
           end
 
           ##
-          # Adds a string field to the schema.
+          # Adds a string field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -217,6 +305,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def string name, description: nil, mode: :nullable
             record_check!
 
@@ -224,7 +313,7 @@ module Google
           end
 
           ##
-          # Adds an integer field to the schema.
+          # Adds an integer field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -236,6 +325,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def integer name, description: nil, mode: :nullable
             record_check!
 
@@ -243,7 +333,8 @@ module Google
           end
 
           ##
-          # Adds a floating-point number field to the schema.
+          # Adds a floating-point number field to the nested schema of a record
+          # field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -255,6 +346,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def float name, description: nil, mode: :nullable
             record_check!
 
@@ -262,7 +354,7 @@ module Google
           end
 
           ##
-          # Adds a boolean field to the schema.
+          # Adds a boolean field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -274,6 +366,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def boolean name, description: nil, mode: :nullable
             record_check!
 
@@ -281,7 +374,7 @@ module Google
           end
 
           ##
-          # Adds a bytes field to the schema.
+          # Adds a bytes field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -293,6 +386,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def bytes name, description: nil, mode: :nullable
             record_check!
 
@@ -300,7 +394,7 @@ module Google
           end
 
           ##
-          # Adds a timestamp field to the schema.
+          # Adds a timestamp field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -312,6 +406,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def timestamp name, description: nil, mode: :nullable
             record_check!
 
@@ -319,7 +414,7 @@ module Google
           end
 
           ##
-          # Adds a time field to the schema.
+          # Adds a time field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -331,6 +426,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def time name, description: nil, mode: :nullable
             record_check!
 
@@ -338,7 +434,7 @@ module Google
           end
 
           ##
-          # Adds a datetime field to the schema.
+          # Adds a datetime field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -350,6 +446,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def datetime name, description: nil, mode: :nullable
             record_check!
 
@@ -357,7 +454,7 @@ module Google
           end
 
           ##
-          # Adds a date field to the schema.
+          # Adds a date field to the nested schema of a record field.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -369,6 +466,7 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          #
           def date name, description: nil, mode: :nullable
             record_check!
 
@@ -376,10 +474,10 @@ module Google
           end
 
           ##
-          # Adds a record field to the schema. A block must be passed describing
-          # the nested fields of the record. For more information about nested
-          # and repeated records, see [Preparing Data for BigQuery
-          # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+          # Adds a record field to the nested schema of a record field. A block
+          # must be passed describing the nested fields of the record. For more
+          # information about nested and repeated records, see [Preparing Data
+          # for BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -405,7 +503,10 @@ module Google
           #   table.schema do |schema|
           #     schema.string "first_name", mode: :required
           #     schema.record "cities_lived", mode: :repeated do |cities_lived|
-          #       cities_lived.string "place", mode: :required
+          #       cities_lived.record "city", mode: :required do |city|
+          #         city.string "name", mode: :required
+          #         city.string "country", mode: :required
+          #       end
           #       cities_lived.integer "number_of_years", mode: :required
           #     end
           #   end
