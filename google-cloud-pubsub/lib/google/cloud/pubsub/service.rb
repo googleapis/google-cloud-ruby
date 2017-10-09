@@ -47,7 +47,8 @@ module Google
 
         def chan_args
           { "grpc.max_send_message_length"    => -1,
-            "grpc.max_receive_message_length" => -1 }
+            "grpc.max_receive_message_length" => -1,
+            "grpc.keepalive_time_ms"          => 300000 }
         end
 
         def chan_creds
