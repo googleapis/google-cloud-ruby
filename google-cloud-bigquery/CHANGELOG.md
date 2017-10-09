@@ -1,5 +1,64 @@
 # Release History
 
+### 0.29.0 / 2017-10-09
+
+This is a major release with many new features and several breaking changes.
+
+#### Major Changes
+
+* All queries now use a new implementation, using a job and polling for results.
+* The copy, load, extract methods now all have high-level and low-level versions, similar to `query` and `query_job`.
+* Added asynchronous row insertion, allowing data to be collected and inserted in batches.
+* Support external data sources for both queries and table views.
+* Added create-on-insert support for tables.
+* Allow for customizing job IDs to aid in organizing jobs.
+
+#### Change Details
+
+* Update high-level queries as follows:
+  * Update `QueryJob#wait_until_done!` to use `getQueryResults`.
+  * Update `Project#query` and `Dataset#query` with breaking changes:
+    * Remove `timeout` and `dryrun` parameters.
+    * Change return type from `QueryData` to `Data`.
+  * Add `QueryJob#data`
+  * Alias `QueryJob#query_results` to `QueryJob#data` with breaking changes:
+    * Remove the `timeout` parameter.
+    * Change the return type from `QueryData` to `Data`.
+  * Update `View#data` with breaking changes:
+    * Remove the `timeout` and `dryrun` parameters.
+    * Change the return type from `QueryData` to `Data`.
+  * Remove `QueryData`.
+  * Update `Project#query` and `Dataset#query` with improved errors, replacing the previous simple error with one that contains all available information for why the job failed.
+* Rename `Dataset#load` to `Dataset#load_job`; add high-level, synchronous version as `Dataset#load`.
+* Rename `Table#copy` to `Table#copy_job`; add high-level, synchronous version as `Table#copy`.
+* Rename `Table#extract` to `Table#extract_job`; add high-level, synchronous version as `Table#extract`.
+* Rename `Table#load` to `Table#load_job`; add high-level, synchronous version as `Table#load`.
+* Add support for querying external data sources with `External`.
+* Add `Table::AsyncInserter`, `Dataset#insert_async` and `Table#insert_async` to collect and insert rows in batches.
+* Add `Dataset#insert` to support creating a table while inserting rows if the table does not exist.
+* Update retry logic to conform to the [BigQuery SLA](https://cloud.google.com/bigquery/sla).
+  * Use a minimum back-off interval of 1 second; for each consecutive error, increase the back-off interval exponentially up to 32 seconds.
+  * Retry if all error reasons are retriable, not if any of the error reasons are retriable.
+* Add support for labels to `Dataset`, `Table`, `View` and `Job`.
+  * Add `filter` option to `Project#datasets` and `Project#jobs`.
+* Add support for user-defined functions to `Project#query_job`, `Dataset#query_job`, `QueryJob` and `View`.
+* In `Dataset`, `Table`, and `View` updates, add the use of ETags for optimistic concurrency control.
+* Update `Dataset#load` and `Table#load`:
+  * Add `null_marker` option and `LoadJob#null_marker`.
+  * Add `autodetect` option and `LoadJob#autodetect?`.
+* Fix the default value for `LoadJob#quoted_newlines?`.
+* Add `job_id` and `prefix` options for controlling client-side job ID generation to `Project#query_job`, `Dataset#load`, `Dataset#query_job`, `Table#copy`, `Table#extract`, and `Table#load`.
+* Add `Job#user_email`.
+* Set the maximum delay of `Job#wait_until_done!` polling to 60 seconds.
+* Automatically retry `Job#cancel`.
+* Allow users to specify if a `View` query is using Standard vs. Legacy SQL.
+* Add `project` option to `Project#query_job`.
+* Add `QueryJob#query_plan`, `QueryJob::Stage` and `QueryJob::Step` to expose query plan information.
+* Add `Table#buffer_bytes`, `Table#buffer_rows` and `Table#buffer_oldest_at` to expose streaming buffer information.
+* Update `Dataset#insert` and `Table#insert` to raise an error if `rows` is empty.
+* Update `Error` with a mapping from code 412 to `FailedPreconditionError`.
+* Update `Data#schema` to freeze the returned `Schema` object (as in `View` and `LoadJob`.)
+
 ### 0.28.0 / 2017-09-28
 
 * Update Google API Client dependency to 0.14.x.
