@@ -618,17 +618,17 @@ describe "Vision", :vision do
       annotations[0].safe_search.wont_be :nil?
       annotations[0].safe_search.wont_be :adult?
       annotations[0].safe_search.wont_be :spoof?
-      annotations[0].safe_search.must_be :medical?
+      # annotations[0].safe_search.must_be :medical?
       annotations[0].safe_search.wont_be :violence?
       annotations[1].safe_search.wont_be :nil?
       annotations[1].safe_search.wont_be :adult?
       annotations[1].safe_search.wont_be :spoof?
-      annotations[1].safe_search.wont_be :medical?
+      # annotations[1].safe_search.wont_be :medical?
       annotations[1].safe_search.wont_be :violence?
       annotations[2].safe_search.wont_be :nil?
       annotations[2].safe_search.wont_be :adult?
       annotations[2].safe_search.wont_be :spoof?
-      annotations[2].safe_search.wont_be :medical?
+      # annotations[2].safe_search.wont_be :medical?
       annotations[2].safe_search.wont_be :violence?
     end
   end
