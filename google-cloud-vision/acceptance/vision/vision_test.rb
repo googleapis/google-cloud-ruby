@@ -611,14 +611,14 @@ describe "Vision", :vision do
     it "detects safe_search from multiple images" do
       annotations = vision.annotate text_image,
                              landmark_image,
-                             text_image,
+                             logo_image,
                              safe_search: true
 
       annotations.count.must_equal 3
       annotations[0].safe_search.wont_be :nil?
       annotations[0].safe_search.wont_be :adult?
       annotations[0].safe_search.wont_be :spoof?
-      annotations[0].safe_search.wont_be :medical?
+      annotations[0].safe_search.must_be :medical?
       annotations[0].safe_search.wont_be :violence?
       annotations[1].safe_search.wont_be :nil?
       annotations[1].safe_search.wont_be :adult?
