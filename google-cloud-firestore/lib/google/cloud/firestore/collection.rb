@@ -74,6 +74,22 @@ module Google
           end
           alias_method :document, :doc
 
+          def get_all *document_paths, mask: nil, &block
+            full_doc_paths = Array(document_paths).flatten.map do |doc_path|
+              if doc_path.respond_to? :document_path
+                doc_path.document_path
+              else
+                doc(doc_path).document_path
+              end
+            end
+
+            ensure_context!
+            context.get_all(full_doc_paths, mask: mask, &block)
+          end
+          alias_method :get_docs, :get_all
+          alias_method :get_documents, :get_all
+          alias_method :find, :get_all
+
           protected
 
           def parent_path

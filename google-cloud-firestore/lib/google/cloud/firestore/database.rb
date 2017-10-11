@@ -81,6 +81,30 @@ module Google
         end
         alias_method :document, :doc
 
+        def get_all *document_paths, mask: nil
+          ensure_service!
+
+          unless block_given?
+            return enum_for(:get_all, document_paths, mask: mask)
+          end
+
+          full_doc_paths = Array(document_paths).flatten.map do |doc_path|
+            if doc_path.respond_to? :path
+              doc_path.path
+            else
+              doc(doc_path).path
+            end
+          end
+
+          results = service.get_documents full_doc_paths, mask: mask
+          results.each do |result|
+            yield Document.from_batch_result(result, self)
+          end
+        end
+        alias_method :get_docs, :get_all
+        alias_method :get_documents, :get_all
+        alias_method :find, :get_all
+
         protected
 
         ##

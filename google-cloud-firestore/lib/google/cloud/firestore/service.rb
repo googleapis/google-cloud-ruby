@@ -46,6 +46,21 @@ module Google
               lib_version: Google::Cloud::Firestore::VERSION)
         end
 
+        def get_documents document_paths, mask: nil, transaction: nil
+          batch_get_args = { mask: document_mask(mask) }
+          if transaction.is_a? String
+            batch_get_args[:transaction] = transaction
+          elsif transaction
+            batch_get_args[:new_transaction] = transaction
+          end
+          batch_get_args[:options] = call_options parent: database_path
+
+          execute do
+            firestore.batch_get_documents database_path, document_paths,
+                                          batch_get_args
+          end
+        end
+
         def list_collections parent, transaction: nil
           list_args = {}
           if transaction.is_a? String
@@ -84,6 +99,15 @@ module Google
             kwargs: default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
+        end
+
+        def document_mask mask
+          return nil if mask.nil?
+
+          mask = Array(mask).map(&:to_s).reject(&:nil?).reject(&:empty?)
+          return nil if mask.empty?
+
+          Google::Firestore::V1beta1::DocumentMask.new field_paths: mask
         end
 
         def execute
