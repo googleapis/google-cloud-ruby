@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.1 / 2017-10-11
+
+* Add keepalive to gRPC connections.
+* Update Subscriber Streaming Messages error handling
+* Fix link in README
+
 ### 0.27.0 / 2017-08-10
 
 This is a major release that offers new functionality. It adds the ability to asynchronously publish batches of messages when a threshold is met (batch message count, total batch size, batch age). It also adds the ability to receive and acknowledge messages via multiple streams.
