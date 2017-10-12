@@ -129,11 +129,11 @@ describe "Vision", :vision do
 
       face.features.wont_be :nil?
 
-      face.features.confidence.must_be_close_to 0.42813218
+      face.features.confidence.must_be_close_to 0.4, 0.1
       face.features.chin.center.must_be_kind_of Google::Cloud::Vision::Annotation::Face::Features::Landmark
-      face.features.chin.center.x.must_be_close_to 233.21977
-      face.features.chin.center.y.must_be_close_to 189.47475
-      face.features.chin.center.z.must_be_close_to 19.487228
+      face.features.chin.center.x.must_be_close_to 233.2, 0.1
+      face.features.chin.center.y.must_be_close_to 189.4, 0.1
+      face.features.chin.center.z.must_be_close_to 19.4, 0.1
       face.features.chin.left.to_a.must_be_close_to_array   [166.70468, 145.37173, 71.187653]
       face.features.chin.right.to_a.must_be_close_to_array  [299.02509, 135.58951, 61.98719]
 
@@ -244,7 +244,7 @@ describe "Vision", :vision do
       landmark.mid.must_equal "/m/019dvv"
       landmark.locale.must_be :empty?
       landmark.description.must_equal "Mount Rushmore"
-      landmark.score.must_be_close_to 0.917461633682251
+      landmark.score.must_be_close_to 0.9, 0.1
       landmark.confidence.must_be :zero?
       landmark.topicality.must_be :zero?
       landmark.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
@@ -254,8 +254,8 @@ describe "Vision", :vision do
       landmark.bounds[2].to_a.must_equal [478, 319]
       landmark.bounds[3].to_a.must_equal [9, 319]
       landmark.locations[0].must_be_kind_of Google::Cloud::Vision::Location
-      landmark.locations[0].latitude.must_be_close_to 43.878264
-      landmark.locations[0].longitude.must_be_close_to -103.45700740814209
+      landmark.locations[0].latitude.must_be_close_to 43.8, 0.1
+      landmark.locations[0].longitude.must_be_close_to -103.4, 0.1
       landmark.properties.must_be :empty?
     end
 
@@ -299,7 +299,7 @@ describe "Vision", :vision do
       logo.mid.must_equal "/m/0b34hf"
       logo.locale.must_be :empty?
       logo.description.must_equal "Google"
-      logo.score.must_be_close_to 0.7072761058807373
+      logo.score.must_be_close_to 0.7, 0.1
       logo.confidence.must_be :zero?
       logo.topicality.must_be :zero?
       logo.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
@@ -656,16 +656,16 @@ describe "Vision", :vision do
       annotation.properties.colors[0].blue.must_equal 254
       annotation.properties.colors[0].alpha.must_equal 1.0
       annotation.properties.colors[0].rgb.must_equal "91c1fe"
-      annotation.properties.colors[0].score.must_be_close_to 0.65757853
-      annotation.properties.colors[0].pixel_fraction.must_be_close_to 0.16903226
+      annotation.properties.colors[0].score.must_be_close_to 0.6, 0.1
+      annotation.properties.colors[0].pixel_fraction.must_be_close_to 0.1, 0.1
 
       annotation.properties.colors[9].red.must_equal 156
       annotation.properties.colors[9].green.must_equal 214
       annotation.properties.colors[9].blue.must_equal 255
       annotation.properties.colors[9].alpha.must_equal 1.0
       annotation.properties.colors[9].rgb.must_equal "9cd6ff"
-      annotation.properties.colors[9].score.must_be_close_to 0.00096750073
-      annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+      annotation.properties.colors[9].score.must_be_close_to 0.0, 0.1
+      annotation.properties.colors[9].pixel_fraction.must_be_close_to 0.0, 0.1
     end
 
     it "detects properties from multiple images" do
@@ -917,16 +917,16 @@ describe "Vision", :vision do
         properties.colors[0].blue.must_equal 254
         properties.colors[0].alpha.must_equal 1.0
         properties.colors[0].rgb.must_equal "91c1fe"
-        properties.colors[0].score.must_be_close_to 0.65757853
-        properties.colors[0].pixel_fraction.must_be_close_to 0.16903226
+        properties.colors[0].score.must_be_close_to 0.6, 0.1
+        properties.colors[0].pixel_fraction.must_be_close_to 0.1, 0.1
 
         properties.colors[9].red.must_equal 156
         properties.colors[9].green.must_equal 214
         properties.colors[9].blue.must_equal 255
         properties.colors[9].alpha.must_equal 1.0
         properties.colors[9].rgb.must_equal "9cd6ff"
-        properties.colors[9].score.must_be_close_to 0.00096750073
-        properties.colors[9].pixel_fraction.must_be_close_to 0.00064516132
+        properties.colors[9].score.must_be_close_to 0.0, 0.1
+        properties.colors[9].pixel_fraction.must_be_close_to 0.0, 0.1
       end
     end
 
