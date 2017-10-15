@@ -347,6 +347,30 @@ module Google
           end
         end
 
+        ## Copy a file from source bucket/object to a
+        # destination bucket/object.
+        def compose_file bucket_name, source_files, destination_path,
+                         destination_gapi, content_type: nil, acl: nil,
+                         key: nil, user_project: nil
+          key_options = rewrite_key_options key, key
+          content_type ||= destination_gapi.content_type if destination_gapi
+          content_type ||= mime_type_for destination_path
+
+          compose_req = Google::Apis::StorageV1::ComposeRequest.new \
+            content_type: content_type,
+            source_objects: compose_file_source_objects(source_files),
+            destination: destination_gapi
+
+          execute do
+            service.compose_object \
+              bucket_name, destination_path,
+              compose_req,
+              destination_predefined_acl: acl,
+              user_project: user_project(user_project),
+              options: key_options
+          end
+        end
+
         ##
         # Download contents of a file.
         def download_file bucket_name, file_path, target_path, generation: nil,
@@ -502,6 +526,19 @@ module Google
             "true" => "JSON_API_V1",
             "none" => "NONE",
             "false" => "NONE" }[str_or_bool.to_s.downcase]
+        end
+
+        def compose_file_source_objects source_files
+          source_files.map do |file|
+            if file.is_a? Google::Cloud::Storage::File
+              Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+                name: file.name,
+                generation: file.generation
+            else
+              Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+                name: file
+            end
+          end
         end
 
         def execute
