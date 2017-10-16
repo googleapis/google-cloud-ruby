@@ -15,31 +15,31 @@
 require "google/cloud/bigquery"
 require "json"
 
-if ARGV.length < 1 || !ENV.has_key?('BIGQUERY_PROJECT')
+if ARGV.length < 1 || !ENV.key?("BIGQUERY_PROJECT")
   puts "usage: BIGQUERY_PROJECT=<project-id> ruby bench.rb <queries.json>"
   exit 1
 end
 
-bigquery = Google::Cloud::Bigquery.new(project: ENV['BIGQUERY_PROJECT']);
+bigquery = Google::Cloud::Bigquery.new(project: ENV["BIGQUERY_PROJECT"])
 queries = JSON.parse(File.open(ARGV[0]).read)
 
-for query in queries
+queries.each do |query|
   start = Time.now
-  numRows = 0
-  numCols = 0
-  timeToFirstByte = nil
+  num_rows = 0
+  num_cols = 0
+  time_to_first_byte = nil
 
   data = bigquery.query query
-  while 1
+  loop do
     data.each do |row|
-      if numRows == 0
-        numCols = row.length
-        timeToFirstByte = Time.now - start
-      elsif numCols != row.length
-        raise "expected #{numCols} cols, got #{row.length}"
+      if num_rows == 0
+        num_cols = row.length
+        time_to_first_byte = Time.now - start
+      elsif num_cols != row.length
+        fail "expected #{num_cols} cols, got #{row.length}"
       end
 
-      numRows += 1
+      num_rows += 1
     end
 
     if data.next?
@@ -49,5 +49,6 @@ for query in queries
     end
   end
 
-  puts "query #{query}: #{numRows} rows, #{numCols} cols, first byte #{timeToFirstByte} sec, total #{Time.now - start} sec"
+  puts "query #{query}: #{num_rows} rows, #{num_cols} cols, "\
+    "first byte #{time_to_first_byte} sec, total #{Time.now - start} sec"
 end
