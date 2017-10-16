@@ -60,7 +60,8 @@ module Google
         attr_accessor :gapi
 
         ##
-        # @private The project ID string for a requester pays bucket.
+        # @private A boolean value or a project ID string to indicate the
+        # project to be billed for operations.
         attr_accessor :user_project
 
         attr_reader :bucket

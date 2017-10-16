@@ -99,8 +99,8 @@ module Google
         #   {#project} for the ID of the current project.) If this parameter is
         #   set to a project ID other than the current project, and that project
         #   is authorized for the currently authenticated service account,
-        #   transit costs will be billed to the given project. The default is
-        #   `nil`.
+        #   transit costs will be billed to the given project. This parameter is
+        #   required with requester pays-enabled buckets. The default is `nil`.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instances and their files.
@@ -162,7 +162,8 @@ module Google
         #   client. (See {#project} for the ID of the current project.) If this
         #   parameter is set to a project ID other than the current project, and
         #   that project is authorized for the currently authenticated service
-        #   account, transit costs will be billed to the given project. The
+        #   account, transit costs will be billed to the given project. This
+        #   parameter is required with requester pays-enabled buckets. The
         #   default is `nil`.
         #
         #   The value provided will be applied to all operations on the returned
@@ -181,7 +182,7 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   puts bucket.name
         #
-        # @example With `user_project` set to pay for a requester pays bucket:
+        # @example With `user_project` set to bill costs to the default project:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new

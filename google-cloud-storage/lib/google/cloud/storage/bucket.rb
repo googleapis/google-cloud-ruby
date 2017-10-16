@@ -48,20 +48,20 @@ module Google
         attr_accessor :gapi
 
         ##
-        # A boolean value or a project ID string for a requester pays
-        # bucket and its files. If this attribute is set to `true`, transit
-        # costs for operations on the bucket will be billed to the current
-        # project for this client. (See {Project#project} for the ID of the
-        # current project.) If this attribute is set to a project ID, and that
-        # project is authorized for the currently authenticated service account,
-        # transit costs will be billed to the that project. The default is
-        # `nil`.
+        # A boolean value or a project ID string to indicate the project to
+        # be billed for operations on the bucket and its files. If this
+        # attribute is set to `true`, transit costs for operations on the bucket
+        # will be billed to the current project for this client. (See
+        # {Project#project} for the ID of the current project.) If this
+        # attribute is set to a project ID, and that project is authorized for
+        # the currently authenticated service account, transit costs will be
+        # billed to that project. This attribute is required with requester
+        # pays-enabled buckets. The default is `nil`.
         #
         # In general, this attribute should be set when first retrieving the
         # bucket by providing the `user_project` option to {Project#bucket}.
         #
-        # See also {#requester_pays=} and {#requester_pays} to enable requester
-        # pays for a bucket.
+        # See also {#requester_pays=} and {#requester_pays}.
         #
         # @example Setting a non-default project:
         #   require "google/cloud/storage"

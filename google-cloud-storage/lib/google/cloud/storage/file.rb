@@ -60,7 +60,8 @@ module Google
         # {Project#project} for the ID of the current project.) If this
         # attribute is set to a project ID, and that project is authorized for
         # the currently authenticated service account, transit costs will be
-        # billed to the that project. The default is `nil`.
+        # billed to that project. This attribute is required with requester
+        # pays-enabled buckets. The default is `nil`.
         #
         # In general, this attribute should be set when first retrieving the
         # owning bucket by providing the `user_project` option to
