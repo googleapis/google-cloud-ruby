@@ -60,9 +60,6 @@ module Google
         # In general, this attribute should be set when first retrieving the
         # bucket by providing the `user_project` option to {Project#bucket}.
         #
-        # The requester pays feature is currently available only to whitelisted
-        # projects.
-        #
         # See also {#requester_pays=} and {#requester_pays} to enable requester
         # pays for a bucket.
         #
@@ -346,8 +343,6 @@ module Google
         # {Project#buckets} to indicate the project to which the access costs
         # should be billed.
         #
-        # This feature is currently available only to whitelisted projects.
-        #
         # @return [Boolean, nil] Returns `true` if requester pays is enabled for
         #   the bucket.
         #
@@ -362,8 +357,6 @@ module Google
         # to the access. The requester must pass the `user_project` option to
         # {Project#bucket} and {Project#buckets} to indicate the project to
         # which the access costs should be billed.
-        #
-        # This feature is currently available only to whitelisted projects.
         #
         # @param [Boolean] new_requester_pays When set to `true`, requester pays
         #   is enabled for the bucket.

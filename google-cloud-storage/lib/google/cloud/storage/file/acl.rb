@@ -64,9 +64,6 @@ module Google
           # owning bucket by providing the `user_project` option to
           # {Project#bucket}.
           #
-          # The requester pays feature is currently available only to
-          # whitelisted projects.
-          #
           # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
           # enable requester pays for a bucket.
           #
