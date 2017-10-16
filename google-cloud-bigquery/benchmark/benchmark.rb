@@ -15,13 +15,13 @@
 require "google/cloud/bigquery"
 require "json"
 
-if ARGV.length < 2
-  puts "usage: ruby bench.rb <project-id> <queries.json>"
+if ARGV.length < 1 || !ENV.has_key?('BIGQUERY_PROJECT')
+  puts "usage: BIGQUERY_PROJECT=<project-id> ruby bench.rb <queries.json>"
   exit 1
 end
 
-bigquery = Google::Cloud::Bigquery.new(project: ARGV[0]);
-queries = JSON.parse(File.open(ARGV[1]).read)
+bigquery = Google::Cloud::Bigquery.new(project: ENV['BIGQUERY_PROJECT']);
+queries = JSON.parse(File.open(ARGV[0]).read)
 
 for query in queries
   start = Time.now
