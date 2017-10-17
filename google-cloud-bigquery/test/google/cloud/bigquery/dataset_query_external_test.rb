@@ -41,8 +41,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :external, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     external_csv = dataset.external "gs://my-bucket/path/to/file.csv"
     data = dataset.query query, external: { my_csv: external_csv }
