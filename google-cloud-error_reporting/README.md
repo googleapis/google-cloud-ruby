@@ -91,7 +91,7 @@ end
 ## Configuring the library
 
 You can customize the behavior of the Stackdriver Error Reporting library for 
-Ruby. See the [configuration guide](../stackdriver/configuration.md) for a list 
+Ruby. See the [configuration guide](../stackdriver/docs/configuration.md) for a list 
 of possible configuration options.
 
 ## Running on Google Cloud Platform
