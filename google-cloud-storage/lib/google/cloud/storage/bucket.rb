@@ -707,6 +707,116 @@ module Google
         alias_method :new_file, :create_file
 
         ##
+        # Concatenates a list of existing files in the bucket into a new file in
+        # the bucket. There is a limit (currently 32) to the number of files
+        # that can be composed in a single operation.
+        #
+        # To compose files encrypted with a customer-supplied encryption key,
+        # use the `encryption_key` option. All source files must have been
+        # encrypted with the same key, and the resulting destination file will
+        # also be encrypted with the same key.
+        #
+        # @param [Array<String, Google::Cloud::Storage::File>] sources The list
+        #   of source file names or objects that will be concatenated into a
+        #   single file.
+        # @param [String] destination The name of the new file.
+        # @param [String] acl A predefined set of access controls to apply to
+        #   this file.
+        #
+        #   Acceptable values are:
+        #
+        #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+        #     `authenticatedRead` - File owner gets OWNER access, and
+        #     allAuthenticatedUsers get READER access.
+        #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
+        #     access, and project team owners get OWNER access.
+        #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access,
+        #     and project team owners get READER access.
+        #   * `private` - File owner gets OWNER access.
+        #   * `project_private`, `projectPrivate` - File owner gets OWNER
+        #     access, and project team members get access according to their
+        #     roles.
+        #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
+        #     access, and allUsers get READER access.
+        #
+        # @param [String, nil] encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to encrypt the source files, if one was
+        #   used. All source files must have been encrypted with the same key,
+        #   and the resulting destination file will also be encrypted with the
+        #   key.
+        #
+        # @yield [file] A block yielding a delegate file object for setting the
+        #   properties of the destination file.
+        #
+        # @return [Google::Cloud::Storage::File] The new file.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   sources = ["path/to/my-file-1.ext", "path/to/my-file-2.ext"]
+        #
+        #   new_file = bucket.compose sources, "path/to/new-file.ext"
+        #
+        # @example Set the properties of the new file in a block:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   sources = ["path/to/my-file-1.ext", "path/to/my-file-2.ext"]
+        #
+        #   new_file = bucket.compose sources, "path/to/new-file.ext" do |f|
+        #     f.cache_control = "private, max-age=0, no-cache"
+        #     f.content_disposition = "inline; filename=filename.ext"
+        #     f.content_encoding = "deflate"
+        #     f.content_language = "de"
+        #     f.content_type = "application/json"
+        #   end
+        #
+        # @example Specify the generation of source files (but skip retrieval):
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file_1 = bucket.file "path/to/my-file-1.ext",
+        #                        generation: 1490390259479000, skip_lookup: true
+        #   file_2 = bucket.file "path/to/my-file-2.ext",
+        #                        generation: 1490310974144000, skip_lookup: true
+        #
+        #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
+        #
+        def compose sources, destination, acl: nil, encryption_key: nil
+          ensure_service!
+          sources = Array sources
+          if sources.size < 2
+            fail ArgumentError, "must provide at least two source files"
+          end
+
+          options = { acl: File::Acl.predefined_rule_for(acl),
+                      key: encryption_key,
+                      user_project: user_project }
+          destination_gapi = nil
+          if block_given?
+            destination_gapi = Google::Apis::StorageV1::Object.new
+            updater = File::Updater.new destination_gapi
+            yield updater
+            updater.check_for_changed_metadata!
+          end
+          gapi = service.compose_file name, sources, destination,
+                                      destination_gapi, options
+          File.from_gapi gapi, service
+        end
+        alias_method :compose_file, :compose
+        alias_method :combine, :compose
+
+        ##
         # Access without authentication can be granted to a File for a specified
         # period of time. This URL uses a cryptographic signature of your
         # credentials to access the file identified by `path`. A URL can be

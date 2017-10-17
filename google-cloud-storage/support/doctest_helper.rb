@@ -143,6 +143,8 @@ YARD::Doctest.configure do |doctest|
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Storage::Bucket#new_file"
   doctest.skip "Google::Cloud::Storage::Bucket#find_files"
+  doctest.skip "Google::Cloud::Storage::Bucket#combine"
+  doctest.skip "Google::Cloud::Storage::Bucket#compose_file"
   doctest.skip "Google::Cloud::Storage::Bucket#new_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notifications"
@@ -189,6 +191,13 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#compose" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :compose_object, file_gapi, ["my-bucket", "path/to/new-file.ext", Google::Apis::StorageV1::ComposeRequest, Hash]
     end
   end
 
