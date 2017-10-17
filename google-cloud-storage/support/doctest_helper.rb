@@ -825,7 +825,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to pay for a requester pays bucket:" do
+  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to bill costs to the default project:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
       mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]

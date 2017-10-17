@@ -439,8 +439,7 @@ module Google
     #
     # The requester pays feature enables the owner of a bucket to indicate that
     # a client accessing the bucket or a file it contains must assume the
-    # transit costs related to the access. This feature is currently available
-    # only to whitelisted projects.
+    # transit costs related to the access.
     #
     # Assign transit costs for bucket and file operations to requesting clients
     # with the `requester_pays` flag:
