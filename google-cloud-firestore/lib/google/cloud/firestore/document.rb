@@ -34,6 +34,20 @@ module Google
 
         ##
         # @private New Document::Snapshot from a
+        # Google::Firestore::V1beta1::RunQueryResponse object.
+        def self.from_query_result result, context
+          ref = from_path result.document.name, context
+          read_at = Convert.timestamp_to_time result.read_time
+
+          Snapshot.new.tap do |s|
+            s.grpc = result.document
+            s.instance_variable_set :@ref, ref
+            s.instance_variable_set :@read_at, read_at
+          end
+        end
+
+        ##
+        # @private New Document::Snapshot from a
         # Google::Firestore::V1beta1::BatchGetDocumentsResponse object.
         def self.from_batch_result result, context
           ref = nil

@@ -75,6 +75,20 @@ module Google
           end
         end
 
+        def run_query path, query_grpc, transaction: nil
+          run_query_args = { structured_query: query_grpc }
+          if transaction.is_a? String
+            run_query_args[:transaction] = transaction
+          elsif transaction
+            run_query_args[:new_transaction] = transaction
+          end
+          run_query_args[:options] = call_options parent: database_path
+
+          execute do
+            firestore.run_query path, run_query_args
+          end
+        end
+
         def database_path project_id: project, database_id: "(default)"
           V1beta1::FirestoreClient.database_root_path project_id, database_id
         end

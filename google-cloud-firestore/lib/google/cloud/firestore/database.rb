@@ -15,6 +15,7 @@
 
 require "google/cloud/firestore/collection"
 require "google/cloud/firestore/document"
+require "google/cloud/firestore/query"
 
 module Google
   module Cloud
@@ -70,6 +71,13 @@ module Google
         end
         alias_method :collection, :col
 
+        ##
+        # Retrieves an Enumerator of documents
+        def docs collection_path, &block
+          col(collection_path).docs(&block)
+        end
+        alias_method :documents, :docs
+
         def doc document_path
           if document_path.to_s.split("/").count.odd?
             fail ArgumentError, "document_path must refer to a document."
@@ -104,6 +112,64 @@ module Google
         alias_method :get_docs, :get_all
         alias_method :get_documents, :get_all
         alias_method :find, :get_all
+
+        def query
+          Query.start "#{path}/documents", self
+        end
+        alias_method :q, :query
+
+        def select *fields
+          query.select fields
+        end
+
+        def from collection_id
+          query.from collection_id
+        end
+
+        def where name, operator, value
+          query.where name, operator, value
+        end
+
+        def order name, direction = :asc
+          query.order name, direction
+        end
+
+        def offset num
+          query.offset num
+        end
+
+        def limit num
+          query.limit num
+        end
+
+        def start_at *values
+          query.start_at values
+        end
+
+        def start_after *values
+          query.start_after values
+        end
+
+        def end_before *values
+          query.end_before values
+        end
+
+        def end_at *values
+          query.end_at values
+        end
+
+        def run query
+          ensure_service!
+
+          return enum_for(:run, query) unless block_given?
+
+          results = service.run_query query.parent_path, query.grpc
+          results.each do |result|
+            @transaction_id ||= result.transaction
+            next if result.document.nil?
+            yield Document.from_query_result(result, self)
+          end
+        end
 
         protected
 

@@ -14,6 +14,7 @@
 
 
 require "google/cloud/firestore/document"
+require "google/cloud/firestore/query"
 require "google/cloud/firestore/generate"
 
 module Google
@@ -66,6 +67,15 @@ module Google
             context
           end
 
+          ##
+          # Retrieves an Enumerator of documents
+          def docs &block
+            query.run(&block)
+          end
+          alias_method :documents, :docs
+          alias_method :get, :docs
+          alias_method :run, :docs
+
           def doc document_path = nil
             document_path ||= random_document_id
 
@@ -89,6 +99,61 @@ module Google
           alias_method :get_docs, :get_all
           alias_method :get_documents, :get_all
           alias_method :find, :get_all
+
+          def query
+            ensure_context!
+
+            Query.start(parent_path, context).from(collection_id)
+          end
+          alias_method :q, :query
+
+          def select *fields
+            query.select fields
+          end
+
+          def from collection_id
+            query.from collection_id
+          end
+
+          def all_descendants
+            query.all_descendants
+          end
+
+          def direct_descendants
+            query.direct_descendants
+          end
+
+          def where name, operator, value
+            query.where name, operator, value
+          end
+
+          def order name, direction = :asc
+            query.order name, direction
+          end
+
+          def offset num
+            query.offset num
+          end
+
+          def limit num
+            query.limit num
+          end
+
+          def start_at *values
+            query.start_at values
+          end
+
+          def start_after *values
+            query.start_after values
+          end
+
+          def end_before *values
+            query.end_before values
+          end
+
+          def end_at *values
+            query.end_at values
+          end
 
           protected
 
