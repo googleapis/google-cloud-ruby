@@ -350,14 +350,10 @@ module Google
         ## Copy a file from source bucket/object to a
         # destination bucket/object.
         def compose_file bucket_name, source_files, destination_path,
-                         destination_gapi, content_type: nil, acl: nil,
-                         key: nil, user_project: nil
+                         destination_gapi, acl: nil, key: nil, user_project: nil
           key_options = rewrite_key_options key, key
-          content_type ||= destination_gapi.content_type if destination_gapi
-          content_type ||= mime_type_for destination_path
 
           compose_req = Google::Apis::StorageV1::ComposeRequest.new \
-            content_type: content_type,
             source_objects: compose_file_source_objects(source_files),
             destination: destination_gapi
 

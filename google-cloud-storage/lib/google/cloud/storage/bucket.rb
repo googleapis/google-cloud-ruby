@@ -735,9 +735,6 @@ module Google
         #   of source file names or objects that will be concatenated into a
         #   single file.
         # @param [String] destination The name of the new file.
-        # @param [String] content_type The
-        #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
-        #   response header to be returned when the file is downloaded.
         # @param [String] acl A predefined set of access controls to apply to
         #   this file.
         #
@@ -804,7 +801,7 @@ module Google
         #
         #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
         #
-        def compose sources, destination, content_type: nil, acl: nil
+        def compose sources, destination, acl: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -812,11 +809,10 @@ module Google
           end
 
           options = { acl: File::Acl.predefined_rule_for(acl),
-                      content_type: content_type, user_project: user_project }
+                      user_project: user_project }
           destination_gapi = nil
           if block_given?
-            destination_gapi = Google::Apis::StorageV1::Object.new \
-              content_type: content_type
+            destination_gapi = Google::Apis::StorageV1::Object.new
             updater = File::Updater.new destination_gapi
             yield updater
             updater.check_for_changed_metadata!
