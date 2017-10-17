@@ -619,4 +619,26 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_b.delete
     composed.delete
   end
+
+  it "should compose existing files with customer-supplied encryption key into a new file with customer-supplied encryption key" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt", encryption_key: encryption_key
+    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt", encryption_key: encryption_key
+
+    composed = try_with_backoff "copying existing file" do
+      bucket.compose [uploaded_a, uploaded_b], "ab.txt", encryption_key: encryption_key
+    end
+
+    composed.name.must_equal "ab.txt"
+    composed.size.must_equal uploaded_a.size + uploaded_b.size
+
+    Tempfile.open ["ab", ".txt"] do |tmpfile|
+      downloaded = composed.download tmpfile, encryption_key: encryption_key
+
+      File.read(downloaded.path).must_equal "ab"
+    end
+
+    uploaded_a.delete
+    uploaded_b.delete
+    composed.delete
+  end
 end

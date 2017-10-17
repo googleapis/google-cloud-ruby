@@ -41,32 +41,13 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
 
   let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
   let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
-  let(:source_encryption_key) { "T\x80\xC2}\x91R\xD2\x05\fTo\xD4\xB3+\xAE\xBCbd\xD1\x81|\xCD\x06%\xC8|\xA2\x17\xF6\xB4^\xD0" }
-  let(:source_encryption_key_sha256) { "\x03(M#\x1D(BF\x12$T\xD4\xDCP\xE6\x98\a\xEB'\x8A\xB9\x89\xEEM)\x94\xFD\xE3VR*\x86" }
   let(:key_headers) do {
       "x-goog-encryption-algorithm"  => "AES256",
       "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
       "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
     }
   end
-  let(:source_key_headers) do {
-      "x-goog-copy-source-encryption-algorithm"  => "AES256",
-      "x-goog-copy-source-encryption-key"        => Base64.strict_encode64(source_encryption_key),
-      "x-goog-copy-source-encryption-key-sha256" => Base64.strict_encode64(source_encryption_key_sha256)
-    }
-  end
-  let(:both_key_headers) do {
-      "x-goog-copy-source-encryption-algorithm"  => "AES256",
-      "x-goog-copy-source-encryption-key"        => Base64.strict_encode64(encryption_key),
-      "x-goog-copy-source-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256),
-      "x-goog-encryption-algorithm"  => "AES256",
-      "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
-      "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
-    }
-  end
   let(:key_options) { { header: key_headers } }
-  let(:source_key_options) { { header: source_key_headers } }
-  let(:both_key_options) { { header: both_key_headers } }
 
   it "can compose a new file with string sources" do
     mock = Minitest::Mock.new
@@ -150,6 +131,20 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     file.service.mocked_service = mock
 
     new_file = bucket_user_project.compose [file, file_2], file_3_name
+    new_file.must_be_kind_of Google::Cloud::Storage::File
+    new_file.name.must_equal file_3_name
+
+    mock.verify
+  end
+
+  it "can compose a new file with customer-supplied encryption key" do
+    mock = Minitest::Mock.new
+    mock.expect :compose_object, file_3_gapi,
+      [bucket.name, file_3_name, compose_request([file_gapi, file_2_gapi]), destination_predefined_acl: nil, user_project: nil, options: key_options]
+
+    file.service.mocked_service = mock
+
+    new_file = bucket.compose [file, file_2], file_3_name, encryption_key: encryption_key
     new_file.must_be_kind_of Google::Cloud::Storage::File
     new_file.name.must_equal file_3_name
 

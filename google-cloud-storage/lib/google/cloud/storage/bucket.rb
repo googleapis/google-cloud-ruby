@@ -718,18 +718,10 @@ module Google
         # the bucket. There is a limit (currently 32) to the number of files
         # that can be composed in a single operation.
         #
-        # #### Customer-supplied encryption keys
-        #
-        # By default, Google Cloud Storage manages server-side encryption keys
-        # on your behalf. However, a [customer-supplied encryption key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
-        # can be provided with the `encryption_key` option. If given, the same
-        # key must be provided to subsequently download or copy the file. If you
-        # use customer-supplied encryption keys, you must securely manage your
-        # keys and ensure that they are not lost. Also, please note that file
-        # metadata is not encrypted, with the exception of the CRC32C checksum
-        # and MD5 hash. The names of files and buckets are also not encrypted,
-        # and you can read or update the metadata of an encrypted file without
-        # providing the encryption key.
+        # To compose files encrypted with a customer-supplied encryption key,
+        # use the `encryption_key` option. All source files must have been
+        # encrypted with the same key, and the resulting destination file will
+        # also be encrypted with the same key.
         #
         # @param [Array<String, Google::Cloud::Storage::File>] sources The list
         #   of source file names or objects that will be concatenated into a
@@ -753,6 +745,12 @@ module Google
         #     roles.
         #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
         #     access, and allUsers get READER access.
+        #
+        # @param [String, nil] encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to encrypt the source files, if one was
+        #   used. All source files must have been encrypted with the same key,
+        #   and the resulting destination file will also be encrypted with the
+        #   key.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -801,7 +799,7 @@ module Google
         #
         #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
         #
-        def compose sources, destination, acl: nil
+        def compose sources, destination, acl: nil, encryption_key: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -809,6 +807,7 @@ module Google
           end
 
           options = { acl: File::Acl.predefined_rule_for(acl),
+                      key: encryption_key,
                       user_project: user_project }
           destination_gapi = nil
           if block_given?
