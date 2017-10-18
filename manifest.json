@@ -248,8 +248,9 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
-        "v0.27.1",
+        "v0.27.2",
         "master",
+        "v0.27.1",
         "v0.27.0",
         "v0.26.0",
         "v0.25.0",
@@ -320,8 +321,9 @@
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
-        "v1.6.0",
+        "v1.7.0",
         "master",
+        "v1.6.0",
         "v1.5.0",
         "v1.4.0",
         "v1.3.0",
