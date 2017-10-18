@@ -185,45 +185,10 @@ module Google
     # end
     # ```
     #
-    # ## Pulling Messages
+    # ## Receiving messages
     #
-    # Messages are pulled from a Subscription. (See
-    # {Google::Cloud::Pubsub::Subscription#pull})
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.pull
-    # ```
-    #
-    # A maximum number of messages returned can also be specified:
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub", max: 10
-    # msgs = sub.pull
-    # ```
-    #
-    # The request for messages can also block until messages are available.
-    # (See {Google::Cloud::Pubsub::Subscription#wait_for_messages})
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.wait_for_messages
-    # ```
-    #
-    # Messages can also be streamed from a subscription with a subscriber object
-    # that can be created using `listen`. (See
+    # Messages can be streamed from a subscription with a subscriber object
+    # that is created using `listen`. (See
     # {Google::Cloud::Pubsub::Subscription#listen} and
     # {Google::Cloud::Pubsub::Subscriber})
     #
@@ -239,10 +204,34 @@ module Google
     #   msg.ack!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     #
     # # Shut down the subscriber when ready to stop receiving messages.
     # subscriber.stop.wait!
+    # ```
+    #
+    # Messages also can be pulled directly in a one-time operation. (See
+    # {Google::Cloud::Pubsub::Subscription#pull})
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    # msgs = sub.pull
+    # ```
+    #
+    # A maximum number of messages to pull can be specified:
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    # msgs = sub.pull max: 10
     # ```
     #
     # ## Acknowledging a Message
@@ -260,7 +249,17 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # sub.pull.each { |msg| msg.acknowledge! }
+    #
+    # subscriber = sub.listen do |msg|
+    #   # process msg
+    #   msg.acknowledge!
+    # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # Or, multiple messages can be acknowledged in a single API call:
@@ -290,12 +289,18 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # received_message = sub.pull.first
-    # if received_message
+    # subscriber = sub.listen do |received_message|
     #   puts received_message.message.data
+    #
     #   # Delay for 2 minutes
     #   received_message.delay! 120
     # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # The message can also be made available for immediate redelivery:
@@ -306,12 +311,18 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # received_message = sub.pull.first
-    # if received_message
+    # subscriber = sub.listen do |received_message|
     #   puts received_message.message.data
+    #
     #   # Mark for redelivery by setting the deadline to now
     #   received_message.delay! 0
     # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # Multiple messages can be delayed or made available for immediate
@@ -374,6 +385,7 @@ module Google
     #   msg.ack!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     #
     # # Shut down the subscriber when ready to stop receiving messages.
@@ -398,6 +410,7 @@ module Google
     #   msg.ack!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     # ```
     #

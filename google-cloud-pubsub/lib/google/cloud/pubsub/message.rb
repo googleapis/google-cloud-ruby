@@ -39,10 +39,18 @@ module Google
       #   message = topic.publish "task completed"
       #   message.data #=> "task completed"
       #
-      #   # Pull a message
+      #   # Listen for messages
       #   sub = pubsub.subscription "my-topic-sub"
-      #   received_message = sub.pull.first
-      #   received_message.message.data #=> "task completed"
+      #   subscriber = sub.listen do |msg|
+      #     # process msg
+      #     msg.ack!
+      #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class Message
         ##

@@ -35,8 +35,16 @@ module Google
       #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   msgs = sub.pull
-      #   msgs.each { |msg| msg.acknowledge! }
+      #   subscriber = sub.listen do |msg|
+      #     # process msg
+      #     msg.ack!
+      #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class Subscription
         ##
@@ -231,11 +239,17 @@ module Google
         # `UNAVAILABLE` if there are too many concurrent pull requests pending
         # for the given subscription.
         #
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
+        #
         # @param [Boolean] immediate When `true` the system will respond
         #   immediately even if it is not able to return messages. When `false`
         #   the system is allowed to wait until it can return least one message.
         #   No messages are returned when a request times out. The default value
         #   is `true`.
+        #
+        #   See also {#listen} for the preferred way to process messages as they
+        #   become available.
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
@@ -283,6 +297,9 @@ module Google
         # This is the same as:
         #
         #   subscription.pull immediate: false
+        #
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
         #
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
@@ -344,6 +361,7 @@ module Google
         #     msg.ack!
         #   end
         #
+        #   # Start background threads that will call block passed to listen.
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
@@ -362,6 +380,7 @@ module Google
         #     msg.ack!
         #   end
         #
+        #   # Start background threads that will call block passed to listen.
         #   subscriber.start
         #
         def listen deadline: nil, streams: nil, inventory: nil, threads: {},
@@ -381,6 +400,8 @@ module Google
         # although the message may have been sent again.
         # Acknowledging a message more than once will not result in an error.
         # This is only used for messages received via pull.
+        #
+        # See also {ReceivedMessage#acknowledge!}.
         #
         # @param [ReceivedMessage, String] messages One or more
         #   {ReceivedMessage} objects or ack_id values.
@@ -409,6 +430,8 @@ module Google
         # This indicates that more time is needed to process the messages, or to
         # make the messages available for redelivery if the processing was
         # interrupted.
+        #
+        # See also {ReceivedMessage#delay!}.
         #
         # @param [Integer] new_deadline The new ack deadline in seconds from the
         #   time this request is sent to the Pub/Sub system. Must be >= 0. For

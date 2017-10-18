@@ -36,6 +36,7 @@ module Google
       #     msg.ack!
       #   end
       #
+      #   # Start background threads that will call the block passed to listen.
       #   subscriber.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.

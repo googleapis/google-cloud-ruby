@@ -30,11 +30,16 @@ module Google
       #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   received_message = sub.pull.first
-      #   if received_message
+      #   subscriber = sub.listen do |received_message|
       #     puts received_message.message.data
       #     received_message.acknowledge!
       #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class ReceivedMessage
         ##
@@ -102,11 +107,17 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     received_message.acknowledge!
         #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
         #
         def acknowledge!
           ensure_subscription!
@@ -132,12 +143,18 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     # Delay for 2 minutes
         #     received_message.delay! 120
         #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
         #
         def delay! new_deadline
           ensure_subscription!
@@ -157,12 +174,18 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     # Release message back to the API.
         #     received_message.reject!
         #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
         #
         def reject!
           delay! 0
