@@ -43,7 +43,7 @@ module Google
       #   sub = pubsub.subscription "my-topic-sub"
       #   subscriber = sub.listen do |msg|
       #     # process msg
-      #     msg.ack!
+      #     msg.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.

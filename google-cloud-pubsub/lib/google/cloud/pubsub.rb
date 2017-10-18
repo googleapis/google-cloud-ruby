@@ -201,7 +201,7 @@ module Google
     #
     # subscriber = sub.listen do |msg|
     #   # process msg
-    #   msg.ack!
+    #   msg.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -314,8 +314,8 @@ module Google
     # subscriber = sub.listen do |received_message|
     #   puts received_message.message.data
     #
-    #   # Mark for redelivery by setting the deadline to now
-    #   received_message.delay! 0
+    #   # Mark for redelivery
+    #   received_message.reject!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -382,7 +382,7 @@ module Google
     #
     # subscriber = sub.listen do |msg|
     #   # process msg
-    #   msg.ack!
+    #   msg.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -407,7 +407,7 @@ module Google
     # subscriber = sub.listen threads: { callback: 16 } do |msg|
     #   # store the message somewhere before acknowledging
     #   store_in_backend msg.data # takes a few seconds
-    #   msg.ack!
+    #   msg.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.

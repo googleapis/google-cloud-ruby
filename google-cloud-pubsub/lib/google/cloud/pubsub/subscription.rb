@@ -37,7 +37,7 @@ module Google
       #   sub = pubsub.subscription "my-topic-sub"
       #   subscriber = sub.listen do |msg|
       #     # process msg
-      #     msg.ack!
+      #     msg.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
@@ -358,7 +358,7 @@ module Google
         #
         #   subscriber = sub.listen do |msg|
         #     # process msg
-        #     msg.ack!
+        #     msg.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
@@ -377,7 +377,7 @@ module Google
         #   subscriber = sub.listen threads: { callback: 16 } do |msg|
         #     # store the message somewhere before acknowledging
         #     store_in_backend msg.data # takes a few seconds
-        #     msg.ack!
+        #     msg.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
