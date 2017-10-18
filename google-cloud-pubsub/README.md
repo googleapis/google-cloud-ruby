@@ -37,8 +37,17 @@ msg = topic.publish "new-message"
 # Retrieve a subscription
 sub = pubsub.subscription "my-topic-sub"
 
-# Pull available messages
-msgs = sub.pull
+# Create a subscriber to listen for available messages
+subscriber = sub.listen do |received_message|
+  # process message
+  received_message.acknowledge!
+end
+
+# Start background threads that will call the block passed to listen.
+subscriber.start
+
+# Shut down the subscriber when ready to stop receiving messages.
+subscriber.stop.wait!
 ```
 
 ## Supported Ruby Versions
