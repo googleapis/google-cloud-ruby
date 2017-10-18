@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.2 / 2017-10-18
+
+* Update documentation
+
 ### 0.27.1 / 2017-10-11
 
 * Add keepalive to gRPC connections.
