@@ -766,9 +766,9 @@ module Google
         def data token: nil, max: nil, start: nil
           ensure_service!
           options = { token: token, max: max, start: start }
-          data_json = service.list_tabledata_raw_json \
+          data_json = service.list_tabledata \
             dataset_id, table_id, options
-          Data.from_json data_json, gapi, service
+          Data.from_gapi_json data_json, gapi, service
         end
 
         ##

@@ -66,7 +66,7 @@ module Google
         # @return [String] The resource type.
         #
         def kind
-          @gapi_json["kind"]
+          @gapi_json[:kind]
         end
 
         ##
@@ -75,7 +75,7 @@ module Google
         # @return [String] The ETag hash.
         #
         def etag
-          @gapi_json["etag"]
+          @gapi_json[:etag]
         end
 
         ##
@@ -85,7 +85,7 @@ module Google
         # @return [String] The pagination token.
         #
         def token
-          @gapi_json["pageToken"]
+          @gapi_json[:pageToken]
         end
 
         ##
@@ -107,7 +107,7 @@ module Google
         #   end
         #
         def total
-          Integer @gapi_json["totalRows"]
+          Integer @gapi_json[:totalRows]
         rescue
           nil
         end
@@ -224,11 +224,11 @@ module Google
         def next
           return nil unless next?
           ensure_service!
-          data_json = service.list_tabledata_raw_json \
+          data_json = service.list_tabledata \
             @table_gapi.table_reference.dataset_id,
             @table_gapi.table_reference.table_id,
             token: token
-          self.class.from_json data_json, @table_gapi, @service
+          self.class.from_gapi_json data_json, @table_gapi, @service
         end
 
         ##
@@ -302,8 +302,8 @@ module Google
 
         ##
         # @private New Data from a response object.
-        def self.from_json gapi_json, table_gapi, service
-          formatted_rows = Convert.format_rows(gapi_json["rows"],
+        def self.from_gapi_json gapi_json, table_gapi, service
+          formatted_rows = Convert.format_rows(gapi_json[:rows],
                                                table_gapi.schema.fields)
 
           data = new formatted_rows

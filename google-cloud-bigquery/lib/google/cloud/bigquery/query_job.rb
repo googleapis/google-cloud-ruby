@@ -305,11 +305,11 @@ module Google
           ensure_schema!
 
           options = { token: token, max: max, start: start }
-          data_hash = service.list_tabledata_raw_json \
+          data_hash = service.list_tabledata \
             destination_table_dataset_id,
             destination_table_table_id,
             options
-          Data.from_json data_hash, destination_table_gapi, service
+          Data.from_gapi_json data_hash, destination_table_gapi, service
         end
         alias_method :query_results, :data
 

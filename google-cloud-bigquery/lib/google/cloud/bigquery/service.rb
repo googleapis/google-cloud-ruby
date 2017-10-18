@@ -188,7 +188,7 @@ module Google
 
         ##
         # Retrieves data from the table.
-        def list_tabledata_raw_json dataset_id, table_id, options = {}
+        def list_tabledata dataset_id, table_id, options = {}
           # The list operation is considered idempotent
           execute backoff: true do
             json_txt = service.list_table_data \
@@ -197,7 +197,7 @@ module Google
               page_token: options.delete(:token),
               start_index: options.delete(:start),
               options: { skip_deserialization: true }
-            JSON.parse(json_txt)
+            JSON.parse json_txt, symbolize_names: true
           end
         end
 

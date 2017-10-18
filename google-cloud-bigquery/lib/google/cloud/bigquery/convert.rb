@@ -56,7 +56,7 @@ module Google
         ##
         # @private
         def self.format_row row, fields
-          row_pairs = fields.zip(row["f"]).map do |f, v|
+          row_pairs = fields.zip(row[:f]).map do |f, v|
             [f.name.to_sym, format_value(v, f)]
           end
           Hash[row_pairs]
@@ -67,36 +67,36 @@ module Google
             nil
           elsif value.empty?
             nil
-          elsif value["v"].nil?
+          elsif value[:v].nil?
             nil
-          elsif Array === value["v"]
-            value["v"].map { |v| format_value v, field }
-          elsif Hash === value["v"]
-            if value["v"].empty?
+          elsif Array === value[:v]
+            value[:v].map { |v| format_value v, field }
+          elsif Hash === value[:v]
+            if value[:v].empty?
               nil
             else
-              format_row value["v"], field.fields
+              format_row value[:v], field.fields
             end
           elsif field.type == "STRING"
-            String value["v"]
+            String value[:v]
           elsif field.type == "INTEGER"
-            Integer value["v"]
+            Integer value[:v]
           elsif field.type == "FLOAT"
-            Float value["v"]
+            Float value[:v]
           elsif field.type == "BOOLEAN"
-            (value["v"] == "true" ? true : (value["v"] == "false" ? false : nil))
+            (value[:v] == "true" ? true : (value[:v] == "false" ? false : nil))
           elsif field.type == "BYTES"
-            StringIO.new Base64.decode64 value["v"]
+            StringIO.new Base64.decode64 value[:v]
           elsif field.type == "TIMESTAMP"
-            ::Time.at Float(value["v"])
+            ::Time.at Float(value[:v])
           elsif field.type == "TIME"
-            Bigquery::Time.new value["v"]
+            Bigquery::Time.new value[:v]
           elsif field.type == "DATETIME"
-            ::Time.parse("#{value["v"]} UTC").to_datetime
+            ::Time.parse("#{value[:v]} UTC").to_datetime
           elsif field.type == "DATE"
-            Date.parse value["v"]
+            Date.parse value[:v]
           else
-            value["v"]
+            value[:v]
           end
         end
 
