@@ -320,8 +320,9 @@
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
-        "v1.6.0",
+        "v1.7.0",
         "master",
+        "v1.6.0",
         "v1.5.0",
         "v1.4.0",
         "v1.3.0",
