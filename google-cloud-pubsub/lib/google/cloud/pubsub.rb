@@ -199,9 +199,9 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen do |msg|
-    #   # process msg
-    #   msg.acknowledge!
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -220,7 +220,7 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.pull
+    # received_messages = sub.pull
     # ```
     #
     # A maximum number of messages to pull can be specified:
@@ -231,7 +231,7 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.pull max: 10
+    # received_messages = sub.pull max: 10
     # ```
     #
     # ## Acknowledging a Message
@@ -250,9 +250,9 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen do |msg|
-    #   # process msg
-    #   msg.acknowledge!
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -360,8 +360,8 @@ module Google
     #
     # snapshot = sub.create_snapshot
     #
-    # messages = sub.pull
-    # sub.acknowledge messages
+    # received_messages = sub.pull
+    # sub.acknowledge received_messages
     #
     # sub.seek snapshot
     # ```
@@ -380,9 +380,9 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen do |msg|
-    #   # process msg
-    #   msg.acknowledge!
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.
@@ -404,10 +404,10 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen threads: { callback: 16 } do |msg|
+    # subscriber = sub.listen threads: { callback: 16 } do |received_message|
     #   # store the message somewhere before acknowledging
-    #   store_in_backend msg.data # takes a few seconds
-    #   msg.acknowledge!
+    #   store_in_backend received_message.data # takes a few seconds
+    #   received_message.acknowledge!
     # end
     #
     # # Start background threads that will call the block passed to listen.

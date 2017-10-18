@@ -38,9 +38,9 @@ msg = topic.publish "new-message"
 sub = pubsub.subscription "my-topic-sub"
 
 # Create a subscriber to listen for available messages
-subscriber = sub.listen do |msg|
-  # process msg
-  msg.acknowledge!
+subscriber = sub.listen do |received_message|
+  # process message
+  received_message.acknowledge!
 end
 
 # Start background threads that will call the block passed to listen.
