@@ -191,10 +191,13 @@ module Google
         def list_tabledata dataset_id, table_id, options = {}
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_table_data @project, dataset_id, table_id,
-                                    max_results: options.delete(:max),
-                                    page_token: options.delete(:token),
-                                    start_index: options.delete(:start)
+            json_txt = service.list_table_data \
+              @project, dataset_id, table_id,
+              max_results: options.delete(:max),
+              page_token: options.delete(:token),
+              start_index: options.delete(:start),
+              options: { skip_deserialization: true }
+            JSON.parse json_txt, symbolize_names: true
           end
         end
 

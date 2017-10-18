@@ -17,10 +17,10 @@ require "helper"
 describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM `some_project.some_dataset.users`" }
   let(:job_id) { "job_9876543210" }
-  
+
   let(:dataset_id) { "my_dataset" }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
-  
+
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
 
   it "queries the data with a string parameter" do
@@ -44,8 +44,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
 
     data = dataset.query "#{query} WHERE name = ?", params: ["Testy McTesterson"]
@@ -76,8 +76,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE age > ?", params: [35]
     mock.verify
@@ -107,8 +107,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE score > ?", params: [90.0]
     mock.verify
@@ -138,8 +138,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE active = ?", params: [true]
     mock.verify
@@ -169,8 +169,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE active = ?", params: [false]
     mock.verify
@@ -202,8 +202,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE create_date = ?", params: [today]
     mock.verify
@@ -235,8 +235,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE update_datetime < ?", params: [now]
     mock.verify
@@ -268,8 +268,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE update_timestamp < ?", params: [now]
     mock.verify
@@ -301,8 +301,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE create_time = ?", params: [timeofday]
     mock.verify
@@ -334,8 +334,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                   query_data_gapi,
                   [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
       mock.expect :list_table_data,
-                  table_data_gapi,
-                  [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                  table_data_gapi.to_json,
+                  [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
       data = dataset.query "#{query} WHERE avatar = ?", params: [file]
       mock.verify
@@ -367,8 +367,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                   query_data_gapi,
                   [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
       mock.expect :list_table_data,
-                  table_data_gapi,
-                  [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                  table_data_gapi.to_json,
+                  [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
       data = dataset.query "#{query} WHERE avatar = ?", params: [file]
       mock.verify
@@ -446,8 +446,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE name = ?" +
                                   " AND age > ?" +
@@ -492,8 +492,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
     mock.verify
@@ -542,8 +542,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :positional_params, :mock_big
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
     mock.verify
