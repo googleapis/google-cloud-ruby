@@ -101,6 +101,14 @@ namespace :acceptance do
   end
 end
 
+desc "Run benchmark script."
+task :benchmark, :queries do |t, args|
+  queries = args[:queries]
+  queries ||= "benchmark/queries.json"
+
+  sh "bundle exec ruby benchmark/benchmark.rb #{queries}"
+end
+
 desc "Run yard-doctest example tests."
 task doctest: :yard do
   sh "bundle exec yard config -a autoload_plugins yard-doctest"
