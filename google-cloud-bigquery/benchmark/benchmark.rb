@@ -15,8 +15,8 @@
 require "google/cloud/bigquery"
 require "json"
 
-if ARGV.length < 1 || !ENV.key?("BIGQUERY_PROJECT")
-  puts "usage: BIGQUERY_PROJECT=<project-id> ruby bench.rb <queries.json>"
+if ARGV.length < 1
+  puts "usage: BIGQUERY_PROJECT=<project-id> ruby benchmark/benchmark.rb <queries.json>"
   exit 1
 end
 
