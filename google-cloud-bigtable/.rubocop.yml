@@ -1,0 +1,53 @@
+AllCops:
+  Exclude:
+    - "google-cloud-bigtable.gemspec"
+    - "lib/google/bigtable/v2/**/*"
+    - "lib/google/cloud/bigtable/v2/**/*"
+    - "Rakefile"
+    - "test/**/*"
+
+Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/NumericLiterals:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Style/EmptyLines:
+  Enabled: false
+Style/EmptyElse:
+  Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - "lib/google/cloud/bigtable/v2/**/*"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/bigtable/v2/**/*"
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/PerceivedComplexity:
+  Max: 10
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - "lib/google/cloud/bigtable/v2/**/*"
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "lib/google/cloud/bigtable/v2/**/*"
+Metrics/ParameterLists:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false
+Style/TrivialAccessors:
+  Enabled: false
+Style/FileName:
+  Enabled: false
