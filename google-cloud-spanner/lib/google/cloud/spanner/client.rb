@@ -788,8 +788,8 @@ module Google
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
         # @param [Time, DateTime] read_timestamp Same as `timestamp`.
         # @param [Numeric] staleness Executes all reads at a timestamp that is
-        #   +staleness+ old. The timestamp is chosen soon after the read
-        #   is started.
+        #   `staleness` seconds old. For example, the number 10.1 is translated
+        #   to 10 seconds and 100 milliseconds.
         #
         #   Guarantees that all writes that have committed more than the
         #   specified number of seconds ago are visible. Because Cloud Spanner
@@ -798,7 +798,7 @@ module Google
         #   timestamps.
         #
         #   Useful for reading at nearby replicas without the distributed
-        #   timestamp negotiation overhead of single-use +staleness+. (See
+        #   timestamp negotiation overhead of single-use `staleness`. (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
         # @param [Numeric] exact_staleness Same as `staleness`.
         #
