@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCredentialsClass < Google::Cloud::Bigtable::Admin::Credentials
+class AdminMockCredentialsClass < Google::Cloud::Bigtable::Admin::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -92,7 +92,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:create_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_table")
+      mock_credentials = AdminMockCredentialsClass.new("create_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:create_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_table")
+      mock_credentials = AdminMockCredentialsClass.new("create_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -173,7 +173,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_tables, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_tables")
+      mock_credentials = AdminMockCredentialsClass.new("list_tables")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -204,7 +204,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_tables, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_tables")
+      mock_credentials = AdminMockCredentialsClass.new("list_tables")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -243,7 +243,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_table")
+      mock_credentials = AdminMockCredentialsClass.new("get_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -271,7 +271,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_table")
+      mock_credentials = AdminMockCredentialsClass.new("get_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -305,7 +305,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_table")
+      mock_credentials = AdminMockCredentialsClass.new("delete_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -333,7 +333,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_table")
+      mock_credentials = AdminMockCredentialsClass.new("delete_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -377,7 +377,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:modify_column_families, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("modify_column_families")
+      mock_credentials = AdminMockCredentialsClass.new("modify_column_families")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -410,7 +410,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:modify_column_families, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("modify_column_families")
+      mock_credentials = AdminMockCredentialsClass.new("modify_column_families")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -444,7 +444,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:drop_row_range, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("drop_row_range")
+      mock_credentials = AdminMockCredentialsClass.new("drop_row_range")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -472,7 +472,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_stub = MockGrpcClientStub.new(:drop_row_range, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("drop_row_range")
+      mock_credentials = AdminMockCredentialsClass.new("drop_row_range")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do

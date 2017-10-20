@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCredentialsClass < Google::Cloud::Bigtable::Admin::Credentials
+class AdminMockCredentialsClass < Google::Cloud::Bigtable::Admin::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -97,13 +97,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
+        # assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
         operation
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_instance")
+      mock_credentials = AdminMockCredentialsClass.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -146,13 +146,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
+        # assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
         operation
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_instance")
+      mock_credentials = AdminMockCredentialsClass.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -186,13 +186,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
+        # assert_equal(Google::Gax::to_proto(clusters, Google::Bigtable::Admin::V2::CreateInstanceRequest::ClustersEntry), request.clusters)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_instance")
+      mock_credentials = AdminMockCredentialsClass.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -237,7 +237,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_instance")
+      mock_credentials = AdminMockCredentialsClass.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -265,7 +265,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_instance")
+      mock_credentials = AdminMockCredentialsClass.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -304,7 +304,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_instances")
+      mock_credentials = AdminMockCredentialsClass.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -332,7 +332,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_instances")
+      mock_credentials = AdminMockCredentialsClass.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -376,7 +376,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_instance")
+      mock_credentials = AdminMockCredentialsClass.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -412,7 +412,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_instance")
+      mock_credentials = AdminMockCredentialsClass.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -450,7 +450,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_instance")
+      mock_credentials = AdminMockCredentialsClass.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -478,7 +478,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_instance")
+      mock_credentials = AdminMockCredentialsClass.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -534,7 +534,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -580,7 +580,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -617,7 +617,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -666,7 +666,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -694,7 +694,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -733,7 +733,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_clusters")
+      mock_credentials = AdminMockCredentialsClass.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -761,7 +761,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_clusters")
+      mock_credentials = AdminMockCredentialsClass.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -819,7 +819,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -868,7 +868,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -908,7 +908,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -947,7 +947,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
@@ -975,7 +975,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_cluster")
+      mock_credentials = AdminMockCredentialsClass.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
