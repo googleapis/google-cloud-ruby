@@ -89,6 +89,16 @@ module Google
           end
         end
 
+        def commit writes, transaction: nil
+          commit_args = {}
+          commit_args[:transaction] = transaction if transaction
+          commit_args[:options] = call_options parent: database_path
+
+          execute do
+            firestore.commit database_path, writes, commit_args
+          end
+        end
+
         def database_path project_id: project, database_id: "(default)"
           V1beta1::FirestoreClient.database_root_path project_id, database_id
         end

@@ -84,6 +84,10 @@ module Google
           end
           alias_method :document, :doc
 
+          def add
+            doc.tap { |d| d.create({}) }
+          end
+
           def get_all *document_paths, mask: nil, &block
             full_doc_paths = Array(document_paths).flatten.map do |doc_path|
               if doc_path.respond_to? :document_path

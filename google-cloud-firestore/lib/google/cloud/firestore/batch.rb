@@ -13,42 +13,42 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/collection"
 require "google/cloud/firestore/document"
+require "google/cloud/firestore/collection"
 require "google/cloud/firestore/query"
-require "google/cloud/firestore/batch"
+require "google/cloud/firestore/convert"
 
 module Google
   module Cloud
     module Firestore
       ##
-      # # Database
+      # # Batch
       #
-      class Database
+      class Batch
         ##
-        # @private The Service object.
-        attr_accessor :service
-
-        ##
-        # @private Creates a new Firestore Database instance.
-        def initialize service
-          @service = service
+        # New Batch object.
+        def initialize
+          @writes = []
         end
 
         def project
-          @project ||= Project.new service
+          @database.project
+        end
+
+        def database
+          @database
         end
 
         def project_id
-          service.project
+          @database.project_id
         end
 
         def database_id
-          "(default)"
+          @database.database_id
         end
 
         def path
-          service.database_path
+          @database.path
         end
 
         ##
@@ -114,32 +114,6 @@ module Google
         alias_method :get_documents, :get_all
         alias_method :find, :get_all
 
-        def batch
-          batch = Batch.from_database self
-          yield batch
-          batch.commit
-        end
-
-        def create doc, data
-          batch { |b| b.create doc, data }
-        end
-
-        def set doc, data
-          batch { |b| b.set doc, data }
-        end
-
-        def merge doc, data
-          batch { |b| b.merge doc, data }
-        end
-
-        def update doc, data
-          batch { |b| b.update doc, data }
-        end
-
-        def delete doc
-          batch { |b| b.delete doc }
-        end
-
         def query
           Query.start "#{path}/documents", self
         end
@@ -186,6 +160,7 @@ module Google
         end
 
         def get obj
+          ensure_not_closed!
           ensure_service!
 
           obj = coalesce_get_argument obj
@@ -200,12 +175,145 @@ module Google
 
           results = service.run_query obj.parent_path, obj.grpc
           results.each do |result|
-            @transaction_id ||= result.transaction
             next if result.document.nil?
             yield Document.from_query_result(result, self)
           end
         end
         alias_method :run, :get
+
+        def create doc_path, data
+          ensure_not_closed!
+
+          full_doc_path = if doc_path.respond_to? :path
+                            doc_path.path
+                          else
+                            doc(doc_path).path
+                          end
+          fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+          write = Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: full_doc_path,
+              fields: Convert.hash_to_fields(data)),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: false)
+          )
+          @writes << write
+          nil
+        end
+
+        def set doc_path, data
+          ensure_not_closed!
+
+          full_doc_path = if doc_path.respond_to? :path
+                            doc_path.path
+                          else
+                            doc(doc_path).path
+                          end
+          fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+          write = Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: full_doc_path,
+              fields: Convert.hash_to_fields(data))
+          )
+          @writes << write
+          nil
+        end
+
+        def merge doc_path, data
+          ensure_not_closed!
+
+          full_doc_path = if doc_path.respond_to? :path
+                            doc_path.path
+                          else
+                            doc(doc_path).path
+                          end
+          fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+          data_mask = data.keys.map(&:to_s)
+
+          write = Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: full_doc_path,
+              fields: Convert.hash_to_fields(data)),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: data_mask)
+          )
+          @writes << write
+          nil
+        end
+
+        def update doc_path, data
+          ensure_not_closed!
+
+          full_doc_path = if doc_path.respond_to? :path
+                            doc_path.path
+                          else
+                            doc(doc_path).path
+                          end
+          fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+          data_mask = data.keys.map(&:to_s)
+
+          write = Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: full_doc_path,
+              fields: Convert.hash_to_fields(data)),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: data_mask)
+          )
+          @writes << write
+          nil
+        end
+
+        def delete doc_path
+          ensure_not_closed!
+
+          full_doc_path = if doc_path.respond_to? :path
+                            doc_path.path
+                          else
+                            doc(doc_path).path
+                          end
+
+          write = Google::Firestore::V1beta1::Write.new(
+            delete: full_doc_path
+          )
+          @writes << write
+          nil
+        end
+
+        ##
+        # @private commit the batch
+        def commit
+          ensure_not_closed!
+          @closed = true
+          return nil if @writes.empty?
+          resp = service.commit @writes
+          Convert.timestamp_to_time resp.commit_time
+        end
+
+        ##
+        # @private the batch is complete and closed
+        def closed?
+          @closed
+        end
+
+        ##
+        # @private New Batch reference object from a path.
+        def self.from_database database
+          new.tap do |b|
+            b.instance_variable_set :@database, database
+          end
+        end
+
+        ##
+        # @private The database's Service object.
+        def service
+          ensure_database!
+
+          database.service
+        end
 
         protected
 
@@ -225,9 +333,19 @@ module Google
           obj
         end
 
+        def ensure_not_closed!
+          fail "batch is closed" if closed?
+        end
+
         ##
-        # @private Raise an error unless an active connection to the service is
-        # available.
+        # @private Raise an error unless an database available.
+        def ensure_database!
+          fail "Must have active connection to service" unless database
+        end
+
+        ##
+        # @private Raise an error unless an active connection to the service
+        # is available.
         def ensure_service!
           fail "Must have active connection to service" unless service
         end

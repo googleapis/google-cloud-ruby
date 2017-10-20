@@ -72,6 +72,62 @@ module Google
           end
           alias_method :collection, :col
 
+          def get mask: nil
+            ensure_context!
+
+            context.get_all([document_path], mask: mask).first
+          end
+
+          def create data
+            ensure_context!
+
+            if context.respond_to? :create
+              context.create self, data
+            else
+              context.database.create self, data
+            end
+          end
+
+          def set data
+            ensure_context!
+
+            if context.respond_to? :set
+              context.set self, data
+            else
+              context.database.set self, data
+            end
+          end
+
+          def merge data
+            ensure_context!
+
+            if context.respond_to? :merge
+              context.merge self, data
+            else
+              context.database.merge self, data
+            end
+          end
+
+          def update data
+            ensure_context!
+
+            if context.respond_to? :update
+              context.update self, data
+            else
+              context.database.update self, data
+            end
+          end
+
+          def delete
+            ensure_context!
+
+            if context.respond_to? :delete
+              context.delete self
+            else
+              context.database.delete self
+            end
+          end
+
           protected
 
           def parent_path
@@ -97,6 +153,8 @@ module Google
           # @private Raise an error unless context is available.
           def ensure_context!
             fail "Must have active connection to service" unless context
+            return unless context.respond_to? :closed?
+            self.context = context.database if context.closed?
           end
         end
       end
