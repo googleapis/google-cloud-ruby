@@ -607,7 +607,7 @@ module Google
                                      copy_gapi,
                                      options.merge(token: resp.rewrite_token)
           end
-          File.from_gapi resp.resource, service
+          File.from_gapi resp.resource, service, user_project: user_project
         end
 
         ##
@@ -666,7 +666,7 @@ module Google
             options[:token] = gapi.rewrite_token
             gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           end
-          File.from_gapi gapi.resource, service
+          File.from_gapi gapi.resource, service, user_project: user_project
         end
 
         ##
