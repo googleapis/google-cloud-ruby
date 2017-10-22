@@ -701,7 +701,7 @@ module Google
           fail ArgumentError, "must provide path" if path.nil?
 
           gapi = service.insert_file name, file, path, options
-          File.from_gapi gapi, service
+          File.from_gapi gapi, service, user_project: user_project
         end
         alias_method :upload_file, :create_file
         alias_method :new_file, :create_file
@@ -811,7 +811,7 @@ module Google
           end
           gapi = service.compose_file name, sources, destination,
                                       destination_gapi, options
-          File.from_gapi gapi, service
+          File.from_gapi gapi, service, user_project: user_project
         end
         alias_method :compose_file, :compose
         alias_method :combine, :compose
