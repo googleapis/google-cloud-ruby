@@ -282,7 +282,8 @@ $ gem install google-cloud-language
 ```ruby
 require "google/cloud/language"
 
-language = Google::Cloud::Language.new
+language = Google::Cloud::Language.new( project: "my-todo-project",
+                                        keyfile: "/path/to/keyfile.json" )
 
 content = "Star Wars is a great movie. The Death Star is fearsome."
 document = language.document content
