@@ -20,8 +20,8 @@ if ARGV.length < 1
   exit 1
 end
 
-bigquery = Google::Cloud::Bigquery.new(project: ENV["BIGQUERY_PROJECT"])
-queries = JSON.parse(File.open(ARGV[0]).read)
+bigquery = Google::Cloud::Bigquery.new
+queries = JSON.parse(File.read(ARGV[0]))
 
 queries.each do |query|
   start = Time.now
