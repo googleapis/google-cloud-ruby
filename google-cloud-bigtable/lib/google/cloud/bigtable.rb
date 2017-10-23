@@ -60,7 +60,7 @@ module Google
       # @param version [Symbol, String]
       #   The major version of the service to be used. By default :v2
       #   is used.
-      # @overload
+      # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
       #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can
       #     be many types.
