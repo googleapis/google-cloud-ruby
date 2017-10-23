@@ -2,7 +2,9 @@ AllCops:
   Exclude:
     - "google-cloud-bigtable.gemspec"
     - "lib/google/bigtable/v2/**/*"
-    - "lib/google/cloud/bigtable/v2/**/*"
+    # TODO(geigerj): Replace this with more specific expressions upon
+    # GAPIC refresh.
+    - "lib/google/cloud/**/*"
     - "Rakefile"
     - "test/**/*"
 
