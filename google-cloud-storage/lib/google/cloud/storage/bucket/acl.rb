@@ -193,7 +193,8 @@ module Google
           #   bucket.acl.add_owner "group-#{email}"
           #
           def add_owner entity
-            gapi = @service.insert_bucket_acl @bucket, entity, "OWNER"
+            gapi = @service.insert_bucket_acl @bucket, entity, "OWNER",
+                                              user_project: user_project
             entity = gapi.entity
             @owners.push entity unless @owners.nil?
             entity
@@ -278,7 +279,8 @@ module Google
           #   bucket.acl.add_reader "group-#{email}"
           #
           def add_reader entity
-            gapi = @service.insert_bucket_acl @bucket, entity, "READER"
+            gapi = @service.insert_bucket_acl @bucket, entity, "READER",
+                                              user_project: user_project
             entity = gapi.entity
             @readers.push entity unless @readers.nil?
             entity
