@@ -276,7 +276,7 @@ module Google
         #                         log_name: "my_app_log",
         #                         resource: resource,
         #                         labels: labels,
-        #                         partial_success: true
+        #                         partial_success: partial_success
         #
         def write_entries entries, log_name: nil, resource: nil, labels: nil,
                           partial_success: nil
