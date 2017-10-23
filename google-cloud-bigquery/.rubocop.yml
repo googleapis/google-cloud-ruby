@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - "acceptance/**/*"
     - "support/**/*"
+    - "benchmark/**/*"
     - "google-cloud-bigquery.gemspec"
     - "Rakefile"
     - "test/**/*"
