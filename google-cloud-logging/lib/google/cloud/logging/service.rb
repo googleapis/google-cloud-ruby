@@ -113,7 +113,8 @@ module Google
           end
         end
 
-        def write_entries entries, log_name: nil, resource: nil, labels: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil,
+                          partial_success: nil
           # Fix log names so they are the full path
           entries = Array(entries).each do |entry|
             entry.log_name = log_path(entry.log_name)
@@ -125,6 +126,7 @@ module Google
             logging.write_log_entries entries,
                                       log_name: log_path(log_name),
                                       resource: resource, labels: labels,
+                                      partial_success: partial_success,
                                       options: default_options
           end
         end

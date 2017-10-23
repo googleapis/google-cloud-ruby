@@ -71,7 +71,8 @@ module Google
               [
                 "logName",
                 "resource",
-                "labels"
+                "labels",
+                "partialSuccess"
               ])
           }.freeze
 

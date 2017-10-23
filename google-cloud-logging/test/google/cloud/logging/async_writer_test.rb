@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, options: default_options]
+    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: nil, options: default_options]
   end
 
   it "writes a single entry" do
