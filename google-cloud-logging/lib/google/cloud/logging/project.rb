@@ -270,13 +270,12 @@ module Google
         #   resource = logging.resource "gae_app",
         #                               "module_id" => "1",
         #                               "version_id" => "20150925t173233"
-        #   partial_success = true
         #
         #   logging.write_entries [entry1, entry2],
         #                         log_name: "my_app_log",
         #                         resource: resource,
         #                         labels: labels,
-        #                         partial_success: partial_success
+        #                         partial_success: true
         #
         def write_entries entries, log_name: nil, resource: nil, labels: nil,
                           partial_success: nil
@@ -319,13 +318,12 @@ module Google
         #   resource = logging.resource "gae_app",
         #                               "module_id" => "1",
         #                               "version_id" => "20150925t173233"
-        #   partial_success = true
         #
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
         #                       resource: resource,
         #                       labels: labels,
-        #                       partial_success: partial_success
+        #                       partial_success: true
         #
         def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
           AsyncWriter.new self, max_queue_size
@@ -349,13 +347,12 @@ module Google
         #   resource = logging.resource "gae_app",
         #                               "module_id" => "1",
         #                               "version_id" => "20150925t173233"
-        #   partial_success = true
         #
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
         #                       resource: resource,
         #                       labels: labels,
-        #                       partial_success: partial_success
+        #                       partial_success: true
         #
         def shared_async_writer
           @shared_async_writer ||= async_writer
