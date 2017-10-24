@@ -133,6 +133,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     new_file = bucket_user_project.compose [file, file_2], file_3_name
     new_file.must_be_kind_of Google::Cloud::Storage::File
     new_file.name.must_equal file_3_name
+    new_file.user_project.must_equal true
 
     mock.verify
   end
@@ -215,6 +216,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
 
     new_file.must_be_kind_of Google::Cloud::Storage::File
     new_file.name.must_equal file_3_name
+    new_file.user_project.must_equal true
 
     mock.verify
   end

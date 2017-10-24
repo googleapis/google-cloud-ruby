@@ -22,6 +22,14 @@ require "google/cloud/pubsub"
 # Create shared storage object so we don't create new for each test
 $storage = Google::Cloud.new.storage retries: 10
 
+# Create second storage object for tests requiring one, such as requester pays and user project.
+if (proj = ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_PROJECT"]) &&
+  (keyfile = ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE"] ||
+    (ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE_JSON"] &&
+      JSON.parse(ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE_JSON"])))
+  $storage_2 = Google::Cloud.storage proj, keyfile, retries: 10
+end
+
 module Acceptance
   ##
   # Test class for running against a Storage instance.
@@ -37,6 +45,7 @@ module Acceptance
   #   end
   class StorageTest < Minitest::Test
     attr_accessor :storage
+    attr_accessor :storage_2
     attr_accessor :prefix
 
     ##
@@ -44,6 +53,7 @@ module Acceptance
     def setup
       @storage = $storage
       @prefix = $prefix
+      @storage_2 = $storage_2
 
       refute_nil @storage, "You do not have an active storage to run the tests."
       refute_nil @prefix, "You do not have a prefix to name the pubsub topics with."
@@ -92,11 +102,13 @@ require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $bucket_names = 4.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
+# bucket names for second project
+$bucket_names_2 = 4.times.map { "gcloud-ruby-acceptance-2-#{t}-#{SecureRandom.hex(4)}".downcase }
 
-def clean_up_storage_buckets
-  puts "Cleaning up storage buckets after tests."
-  $bucket_names.each do |bucket_name|
-    if b = $storage.bucket(bucket_name)
+def clean_up_storage_buckets proj = $storage, names = $bucket_names, user_project: nil
+  puts "Cleaning up storage buckets after tests for #{proj.project}."
+  names.each do |bucket_name|
+    if b = proj.bucket(bucket_name, user_project: user_project)
       begin
         b.files(versions: true).all do |file|
           file.delete generation: true
@@ -111,8 +123,18 @@ def clean_up_storage_buckets
   end
 rescue => e
   puts "Error while cleaning up storage buckets after tests.\n\n#{e}"
+  raise e
 end
 
 Minitest.after_run do
   clean_up_storage_buckets
+  if $storage_2
+    clean_up_storage_buckets $storage_2, $bucket_names_2, user_project: true
+  else
+    puts "The requester pays tests were not run. These tests require a second " \
+         "project which is not configured. To enable, ensure that the following " \
+         "are present in the environment: \n" \
+         "GCLOUD_TEST_STORAGE_REQUESTER_PAYS_PROJECT and \n" \
+         "GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE or GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE_JSON"
+  end
 end

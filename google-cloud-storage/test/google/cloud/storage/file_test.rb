@@ -514,7 +514,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.copy "new-file.ext"
+    copied = file_user_project.copy "new-file.ext"
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -618,7 +619,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     def file_user_project.sleep *args
     end
 
-    file_user_project.copy "new-file.ext"
+    copied = file_user_project.copy "new-file.ext"
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -669,7 +671,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.copy "new-file.ext" do |f|
+    copied = file_user_project.copy "new-file.ext" do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "inline; filename=filename.ext"
       f.content_encoding = "deflate"
@@ -679,6 +681,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       f.metadata["score"] = "10"
       f.storage_class = :nearline
     end
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -711,6 +714,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
     updated.name.must_equal file_user_project.name
+    updated.user_project.must_equal true
 
     mock.verify
   end
@@ -791,6 +795,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
     updated.name.must_equal file_user_project.name
+    updated.user_project.must_equal true
 
     mock.verify
   end

@@ -308,7 +308,8 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
       bucket_user_project.service.mocked_service = mock
 
-      bucket_user_project.create_file tmpfile, new_file_name
+      created = bucket_user_project.create_file tmpfile, new_file_name
+      created.user_project.must_equal true
 
       mock.verify
     end
