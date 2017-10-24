@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: nil, options: default_options]
+    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: true, options: default_options]
   end
 
   it "writes a single entry" do
@@ -65,7 +65,8 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1
+      labels: labels1,
+      partial_success: true
     )
     async_writer.stop! 1
 
@@ -83,13 +84,15 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1
+      labels: labels1,
+      partial_success: true
     )
     async_writer.write_entries(
       entries("payload2"),
       log_name: log_name,
       resource: resource,
-      labels: labels1
+      labels: labels1,
+      partial_success: true
     )
     async_writer.resume
     async_writer.stop! 1
@@ -109,13 +112,15 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1", labels1),
       log_name: log_name,
       resource: resource,
-      labels: labels1
+      labels: labels1,
+      partial_success: true
     )
     async_writer.write_entries(
       entries("payload2", labels2),
       log_name: log_name,
       resource: resource,
-      labels: labels2
+      labels: labels2,
+      partial_success: true
     )
     async_writer.resume
 
