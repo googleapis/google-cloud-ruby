@@ -96,7 +96,8 @@ module Google
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE, partial_success = false
+        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE,
+                       partial_success = false
           super()
 
           @logging = logging
