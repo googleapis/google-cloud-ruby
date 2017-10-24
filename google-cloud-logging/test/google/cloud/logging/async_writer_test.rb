@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
-  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging }
+  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE, true }
 
   def entries payload, labels = labels1
     Array(payload).map { |str|
@@ -65,8 +65,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.stop! 1
 
@@ -84,15 +83,13 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.write_entries(
       entries("payload2"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.resume
     async_writer.stop! 1
@@ -112,15 +109,13 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1", labels1),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.write_entries(
       entries("payload2", labels2),
       log_name: log_name,
       resource: resource,
-      labels: labels2,
-      partial_success: true
+      labels: labels2
     )
     async_writer.resume
 

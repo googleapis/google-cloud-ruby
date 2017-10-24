@@ -322,8 +322,7 @@ module Google
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
         #                       resource: resource,
-        #                       labels: labels,
-        #                       partial_success: partial_success
+        #                       labels: labels
         #
         def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
           AsyncWriter.new self, max_queue_size
@@ -351,8 +350,7 @@ module Google
         #   async.write_entries [entry1, entry2],
         #                       log_name: "my_app_log",
         #                       resource: resource,
-        #                       labels: labels,
-        #                       partial_success: partial_success
+        #                       labels: labels
         #
         def shared_async_writer
           @shared_async_writer ||= async_writer

@@ -51,8 +51,7 @@ module Google
       #   async.write_entries [entry1, entry2],
       #                       log_name: "my_app_log",
       #                       resource: resource,
-      #                       labels: labels,
-      #                       partial_success: true
+      #                       labels: labels
       #
       class AsyncWriter
         include Stackdriver::Core::AsyncActor
@@ -63,13 +62,11 @@ module Google
 
         ##
         # @private Item in the log entries queue.
-        QueueItem = Struct.new(:entries, :log_name, :resource, :labels,
-                               :partial_success) do
+        QueueItem = Struct.new(:entries, :log_name, :resource, :labels) do
           def try_combine next_item
             if log_name == next_item.log_name &&
                resource == next_item.resource &&
-               labels == next_item.labels &&
-               partial_success == next_item.partial_success
+               labels == next_item.labels
               entries.concat(next_item.entries)
               true
             else
@@ -99,11 +96,12 @@ module Google
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
+        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE, partial_success = false
           super()
 
           @logging = logging
           @max_queue_size = max_queue_size
+          @partial_success = partial_success
           @queue_resource = new_cond
           @queue = []
           @queue_size = 0
@@ -132,10 +130,6 @@ module Google
         #   items that are added to the `labels` field of each log entry in
         #   `entries`, except when a log entry specifies its own `key:value`
         #   item with the same key. See also {Entry#labels=}.
-        # @param [Boolean] partial_success Whether valid entries should be
-        #   written even if some other entries fail due to INVALID_ARGUMENT or
-        #   PERMISSION_DENIED errors when communicating to the Stackdriver
-        #   Logging API.
         #
         # @return [Google::Cloud::Logging::AsyncWriter] Returns self.
         #
@@ -153,14 +147,12 @@ module Google
         #
         #   async.write_entries entry
         #
-        def write_entries entries, log_name: nil, resource: nil, labels: nil,
-                          partial_success: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil
           ensure_thread
           entries = Array(entries)
           synchronize do
             fail "AsyncWriter has been stopped" unless writable?
-            queue_item = QueueItem.new entries, log_name, resource, labels,
-                                       partial_success
+            queue_item = QueueItem.new entries, log_name, resource, labels
             if @queue.empty? || !@queue.last.try_combine(queue_item)
               @queue.push queue_item
             end
@@ -345,7 +337,7 @@ module Google
               log_name: queue_item.log_name,
               resource: queue_item.resource,
               labels: queue_item.labels,
-              partial_success: queue_item.partial_success
+              partial_success: @partial_success
             )
           rescue => e
             # Ignore any exceptions thrown from the background thread, but
