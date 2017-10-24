@@ -1,5 +1,12 @@
 # Release History
 
+### 1.7.1 / 2017-10-24
+
+* Fix bug in Bucket#create_file, Bucket#compose, File#copy and File#rotate in
+  which user_project was not set on returned File object.
+* Fix bug in Bucket::Acl#add_reader and Bucket::Acl#add_owner in which
+  user_project was not passed in the API request.
+
 ### 1.7.0 / 2017-10-18
 
 * Add `Bucket#compose`.
