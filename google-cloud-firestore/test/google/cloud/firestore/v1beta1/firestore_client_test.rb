@@ -92,7 +92,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.get_document(formatted_name)
@@ -120,7 +120,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -163,7 +163,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.list_documents(formatted_parent, collection_id)
@@ -196,7 +196,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -241,7 +241,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.create_document(
@@ -280,7 +280,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -326,7 +326,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.update_document(document, update_mask)
@@ -356,7 +356,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -390,7 +390,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.delete_document(formatted_name)
@@ -418,7 +418,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -460,7 +460,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.batch_get_documents(formatted_database, documents)
@@ -491,7 +491,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -530,7 +530,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.begin_transaction(formatted_database)
@@ -558,7 +558,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -601,7 +601,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.commit(formatted_database, writes)
@@ -634,7 +634,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -670,7 +670,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.rollback(formatted_database, transaction)
@@ -700,7 +700,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -740,7 +740,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.run_query(formatted_parent)
@@ -769,7 +769,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -811,7 +811,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.write([request])
@@ -842,7 +842,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -882,7 +882,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.listen([request])
@@ -913,7 +913,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -954,7 +954,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           response = client.list_collection_ids(formatted_parent)
@@ -985,7 +985,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore.new(version: :v1beta1)
+          client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

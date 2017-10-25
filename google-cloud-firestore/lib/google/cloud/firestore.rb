@@ -12,106 +12,65 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/gax"
-require "pathname"
+
+require "google-cloud-firestore"
+require "google/cloud/firestore/project"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
     ##
-    # # Ruby Client for Google Cloud Firestore API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
-    #
-    # [Google Cloud Firestore API][Product Documentation]:
-    #
-    # - [Product Documentation][]
-    #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
-    #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Firestore API.](https://console.cloud.google.com/apis/api/firestore)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Next Steps
-    # - Read the [Google Cloud Firestore API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/firestore
-    #
+    # # Cloud Firestore
     #
     module Firestore
-      # rubocop:enable LineLength
-
-      FILE_DIR = File.realdirpath(Pathname.new(__FILE__).join("..").join("firestore"))
-
-      AVAILABLE_VERSIONS = Dir["#{FILE_DIR}/*"]
-        .select { |file| File.directory?(file) }
-        .select { |dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir)) }
-        .select { |dir| File.exist?(dir + ".rb") }
-        .map { |dir| File.basename(dir) }
-
       ##
-      # The Cloud Firestore service.
+      # Creates a new object for connecting to the Firestore service.
+      # Each call creates a new connection.
       #
-      # This service exposes several types of comparable timestamps:
+      # For more information on connecting to Google Cloud see the
+      # [Authentication
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # * +create_time+ - The time at which a document was created. Changes only
-      #   when a document is deleted, then re-created. Increases in a strict
-      #   monotonic fashion.
-      # * +update_time+ - The time at which a document was last updated. Changes
-      #   every time a document is modified. Does not change when a write results
-      #   in no modifications. Increases in a strict monotonic fashion.
-      # * +read_time+ - The time at which a particular state was observed. Used
-      #   to denote a consistent snapshot of the database or the time at which a
-      #   Document was observed to not exist.
-      # * +commit_time+ - The time at which the writes in a transaction were
-      #   committed. Any read with an equal or greater +read_time+ is guaranteed
-      #   to see the effects of the transaction.
+      # @param [String] project Project identifier for the Firestore service you
+      #   are connecting to.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
+      #   file path the file must be readable.
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      #   See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #
-      # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v1beta1
-      #   is used.
-      # @overload
-      #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-      #     Provides the means for authenticating requests made by the client. This parameter can
-      #     be many types.
-      #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
-      #     authenticating requests made by this client.
-      #     A `String` will be treated as the path to the keyfile to be used for the construction of
-      #     credentials for this client.
-      #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-      #     credentials for this client.
-      #     A `GRPC::Core::Channel` will be used to make calls through.
-      #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-      #     should already be composed with a `GRPC::Core::CallCredentials` object.
-      #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-      #     metadata for requests, generally, to give OAuth credentials.
-      #   @param scopes [Array<String>]
-      #     The OAuth scopes for this service. This parameter is ignored if
-      #     an updater_proc is supplied.
-      #   @param client_config [Hash]
-      #     A Hash for call options for each method. See
-      #     Google::Gax#construct_settings for the structure of
-      #     this data. Falls back to the default config if not specified
-      #     or the specified config is missing data points.
-      #   @param timeout [Numeric]
-      #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v1beta1, **kwargs)
-        unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-          raise "The version: #{version} is not available. The available versions " \
-            "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/datastore`
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
+      #
+      # @return [Google::Cloud::Firestore::Project]
+      #
+      # @example
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #
+      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
+                   client_config: nil
+        project ||= Google::Cloud::Firestore::Project.default_project
+        project = project.to_s # Always cast to a string
+        fail ArgumentError, "project is missing" if project.empty?
+
+        if keyfile.nil?
+          credentials = Google::Cloud::Firestore::Credentials.default \
+            scope: scope
+        else
+          credentials = Google::Cloud::Firestore::Credentials.new \
+            keyfile, scope: scope
         end
 
-        require "#{FILE_DIR}/#{version.to_s.downcase}"
-        version_module = Google::Cloud::Firestore
-          .constants
-          .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-          .first
-        Google::Cloud::Firestore.const_get(version_module).new(*args, **kwargs)
+        Google::Cloud::Firestore::Project.new \
+          Google::Cloud::Firestore::Service.new \
+            project, credentials,
+            timeout: timeout, client_config: client_config
       end
     end
   end

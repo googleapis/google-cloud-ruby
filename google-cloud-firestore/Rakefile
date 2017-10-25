@@ -40,23 +40,60 @@ namespace :test do
 end
 
 # Acceptance tests
-desc "Run the google-cloud-firestore acceptance tests."
-task :acceptance do
-  puts "The google-cloud-firestore gem does not have acceptance tests."
+desc "Run the firestore acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["FIRESTORE_PROJECT"] = project
+  ENV["FIRESTORE_KEYFILE"] = nil
+  ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
-  task :run do
-    puts "This gem does not have acceptance tests."
-  end
-
   desc "Run acceptance tests with coverage."
-  task :coverage do
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-firestore"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
   end
 
-  desc "Run acceptance cleanup."
-  task :cleanup do
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-firestore"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
 end
 
 require "yard"
@@ -74,11 +111,11 @@ task :jsondoc => :yard do
     documents: [
       {
         type: "toc",
-        title: "Google::Firestore::V1beta1::DataTypes",
+        title: "Google::Cloud::Firestore::V1beta1::DataTypes",
         modules: [
           {
             title: "Google::Firestore::V1beta1",
-            include: ["google/cloud/firestore/v1beta1"]
+            include: ["google/firestore/v1beta1"]
           },
           {
             title: "Google::Protobuf",
@@ -122,7 +159,7 @@ end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :smoke_test do
+  task :acceptance do
     Rake::Task["ci"].invoke
     header "google-cloud-firestore acceptance", "*"
     sh "bundle exec rake acceptance -v"

@@ -1,6 +1,6 @@
 --no-private
 --title=Google Cloud Firestore API
---exclude _pb\.rb$
+--exclude lib/google/firestore/v1beta1
 --markup markdown
 
 ./lib/**/*.rb

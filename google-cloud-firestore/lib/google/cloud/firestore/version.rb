@@ -13,23 +13,10 @@
 # limitations under the License.
 
 
-require "googleauth"
-
 module Google
   module Cloud
     module Firestore
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Firestore.
-      class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/datastore"]
-        PATH_ENV_VARS = %w(FIRESTORE_CREDENTIALS FIRESTORE_KEYFILE
-                           GOOGLE_CLOUD_CREDENTIALS GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(FIRESTORE_CREDENTIALS_JSON FIRESTORE_KEYFILE_JSON
-                           GOOGLE_CLOUD_CREDENTIALS_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
-      end
+      VERSION = "0.20.0"
     end
   end
 end
