@@ -1598,7 +1598,7 @@ module Google
         end
 
         ##
-        # Create an asynchonous inserter object used to insert rows in batches.
+        # Create an asynchronous inserter object used to insert rows in batches.
         #
         # @param [String] table_id The ID of the table to insert rows into.
         # @param [Boolean] skip_invalid Insert all valid rows of a request, even
@@ -1617,8 +1617,8 @@ module Google
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
         # @yield [response] the callback for when a batch of rows is inserted
-        # @yieldparam [InsertResponse] response the result of the asynchonous
-        #   insert
+        # @yieldparam [Table::AsyncInserter::Result] result the result of the
+        #   asynchronous insert
         #
         # @return [Table::AsyncInserter] Returns an inserter object.
         #
@@ -1628,9 +1628,13 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
-        #   inserter = table.insert_async do |response|
-        #     log_insert "inserted #{response.insert_count} rows " \
-        #       "with #{response.error_count} errors"
+        #   inserter = table.insert_async do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
         #   end
         #
         #   rows = [

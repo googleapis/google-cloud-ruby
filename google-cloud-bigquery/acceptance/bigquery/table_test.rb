@@ -317,20 +317,21 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "inserts rows asynchonously and gets its data" do
     # data = table.data
-    insert_response = nil
+    insert_result = nil
 
-    inserter = table.insert_async do |response|
-      insert_response = response
+    inserter = table.insert_async do |result|
+      insert_result = result
     end
     inserter.insert rows
 
     inserter.flush
     inserter.stop.wait!
 
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be :success?
+    insert_result.insert_count.must_equal 3
+    insert_result.insert_errors.must_be :empty?
+    insert_result.error_rows.must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id

@@ -139,9 +139,10 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     table.service.mocked_service = mock
 
     callback_called = false
+    insert_result = nil
 
-    inserter = table.insert_async do |response|
-      assert_kind_of Google::Cloud::Bigquery::InsertResponse, response
+    inserter = table.insert_async do |result|
+      insert_result = result
       callback_called = true
     end
 
@@ -163,6 +164,65 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
       inserter.batch.must_be :nil?
     end
+
+    insert_result.wont_be_nil
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.wont_be :error?
+    insert_result.error.must_be_nil
+    insert_result.must_be :success?
+    insert_result.insert_response.wont_be_nil
+    insert_result.insert_count.must_equal 3
+    insert_result.error_count.must_equal 0
+    insert_result.insert_errors.must_be_kind_of Array
+    insert_result.insert_errors.must_be :empty?
+    insert_result.error_rows.must_be_kind_of Array
+    insert_result.error_rows.must_be :empty?
+
+    mock.verify
+  end
+
+  it "returns error in callback result when inserting rows with a callback" do
+    mock = Minitest::Mock.new
+    def mock.insert_tabledata dataset_id, table_id, rows, options = {}
+      raise Google::Cloud::UnavailableError.new
+    end
+    table.service = mock
+
+    callback_called = false
+    insert_result = nil
+
+    inserter = table.insert_async do |result|
+      insert_result = result
+      callback_called = true
+    end
+
+    inserter.insert rows
+
+    inserter.batch.rows.must_equal rows
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    wait_until { callback_called == true }
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
+
+    inserter.batch.must_be :nil?
+
+    insert_result.wont_be_nil
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be :error?
+    insert_result.error.must_be_kind_of Google::Cloud::UnavailableError
+    insert_result.wont_be :success?
+    insert_result.insert_response.must_be_nil
+    insert_result.insert_count.must_be_nil
+    insert_result.error_count.must_be_nil
+    insert_result.insert_errors.must_be_nil
+    insert_result.error_rows.must_be_nil
 
     mock.verify
   end
