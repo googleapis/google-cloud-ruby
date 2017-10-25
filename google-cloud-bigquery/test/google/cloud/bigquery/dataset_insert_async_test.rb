@@ -146,11 +146,12 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     callback_called = false
+    insert_result = nil
 
-    inserter = dataset.insert_async table_id do |response|
-      assert_kind_of Google::Cloud::Bigquery::InsertResponse, response
-      callback_called = true
-    end
+    inserter = dataset.insert_async table_id do |result|
+        insert_result = result
+        callback_called = true
+      end
 
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
@@ -170,6 +171,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
       inserter.batch.must_be :nil?
     end
+
+    insert_result.wont_be_nil
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.wont_be :error?
+    insert_result.error.must_be_nil
+    insert_result.must_be :success?
+    insert_result.insert_response.wont_be_nil
+    insert_result.insert_count.must_equal 3
+    insert_result.error_count.must_equal 0
+    insert_result.insert_errors.must_be_kind_of Array
+    insert_result.insert_errors.must_be :empty?
+    insert_result.error_rows.must_be_kind_of Array
+    insert_result.error_rows.must_be :empty?
 
     mock.verify
   end
