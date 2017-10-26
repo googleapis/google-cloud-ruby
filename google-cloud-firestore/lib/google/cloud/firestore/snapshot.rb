@@ -13,43 +13,50 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/collection"
 require "google/cloud/firestore/document"
+require "google/cloud/firestore/collection"
 require "google/cloud/firestore/query"
-require "google/cloud/firestore/batch"
-require "google/cloud/firestore/snapshot"
+require "google/cloud/firestore/convert"
 
 module Google
   module Cloud
     module Firestore
       ##
-      # # Database
+      # # Snapshot
       #
-      class Database
+      class Snapshot
         ##
-        # @private The Service object.
-        attr_accessor :service
+        # @private New Snapshot object.
+        def initialize
+          @transaction_id
+        end
 
-        ##
-        # @private Creates a new Firestore Database instance.
-        def initialize service
-          @service = service
+        def transaction_id
+          @transaction_id
+        end
+
+        def read_time
+          @read_time
         end
 
         def project
-          @project ||= Project.new service
+          @database.project
+        end
+
+        def database
+          @database
         end
 
         def project_id
-          service.project
+          @database.project_id
         end
 
         def database_id
-          "(default)"
+          @database.database_id
         end
 
         def path
-          service.database_path
+          @database.path
         end
 
         ##
@@ -76,6 +83,8 @@ module Google
         ##
         # Retrieves an Enumerator of documents
         def docs collection_path, &block
+          ensure_not_closed!
+
           col(collection_path).docs(&block)
         end
         alias_method :documents, :docs
@@ -92,6 +101,8 @@ module Google
         alias_method :document, :doc
 
         def get_all *document_paths, mask: nil
+          ensure_not_closed!
+
           ensure_service!
 
           unless block_given?
@@ -106,7 +117,8 @@ module Google
             end
           end
 
-          results = service.get_documents full_doc_paths, mask: mask
+          results = service.get_documents \
+            full_doc_paths, mask: mask, transaction: transaction_or_create
           results.each do |result|
             yield Document.from_batch_result(result, self)
           end
@@ -114,38 +126,6 @@ module Google
         alias_method :get_docs, :get_all
         alias_method :get_documents, :get_all
         alias_method :find, :get_all
-
-        def batch
-          batch = Batch.from_database self
-          yield batch
-          batch.commit
-        end
-
-        def create doc, data
-          batch { |b| b.create doc, data }
-        end
-
-        def set doc, data
-          batch { |b| b.set doc, data }
-        end
-
-        def merge doc, data
-          batch { |b| b.merge doc, data }
-        end
-
-        def update doc, data
-          batch { |b| b.update doc, data }
-        end
-
-        def delete doc
-          batch { |b| b.delete doc }
-        end
-
-        def snapshot read_time: nil
-          snapshot = Snapshot.from_database self, read_time: read_time
-          yield snapshot
-          snapshot.rollback
-        end
 
         def query
           Query.start "#{path}/documents", self
@@ -193,6 +173,7 @@ module Google
         end
 
         def get obj
+          ensure_not_closed!
           ensure_service!
 
           obj = coalesce_get_argument obj
@@ -205,14 +186,48 @@ module Google
 
           return enum_for(:get, obj) unless block_given?
 
-          results = service.run_query obj.parent_path, obj.grpc
+          results = service.run_query obj.parent_path, obj.grpc,
+                                      transaction: transaction_or_create
           results.each do |result|
+            # if we don't have a transaction_id yet, use what was given
             @transaction_id ||= result.transaction
             next if result.document.nil?
             yield Document.from_query_result(result, self)
           end
         end
         alias_method :run, :get
+
+        ##
+        # @private rollback and close the snapshot
+        def rollback
+          ensure_not_closed!
+          @closed = true
+          return if @transaction_id.nil?
+          service.rollback @transaction_id
+        end
+
+        ##
+        # @private the snapshot is complete and closed
+        def closed?
+          @closed
+        end
+
+        ##
+        # @private New Snapshot reference object from a path.
+        def self.from_database database, read_time: nil
+          new.tap do |s|
+            s.instance_variable_set :@database, database
+            s.instance_variable_set :@read_time, read_time
+          end
+        end
+
+        ##
+        # @private The database's Service object.
+        def service
+          ensure_database!
+
+          database.service
+        end
 
         protected
 
@@ -232,9 +247,44 @@ module Google
           obj
         end
 
+        def transaction_or_create
+          return @transaction_id if @transaction_id
+
+          transaction_opt
+        end
+
+        def transaction_opt
+          Google::Firestore::V1beta1::TransactionOptions.new(
+            read_only: \
+              Google::Firestore::V1beta1::TransactionOptions::ReadOnly.new(
+                read_time: Convert.time_to_timestamp(read_time)
+              )
+          )
+        end
+
+        def ensure_not_closed!
+          fail "snapshot is closed" if closed?
+        end
+
         ##
-        # @private Raise an error unless an active connection to the service is
-        # available.
+        # @private Raise an error unless an database available.
+        def ensure_transaction_id!
+          ensure_service!
+
+          return unless @transaction_id.nil?
+          resp = service.begin_transaction transaction_opt
+          @transaction_id = resp.transaction
+        end
+
+        ##
+        # @private Raise an error unless an database available.
+        def ensure_database!
+          fail "Must have active connection to service" unless database
+        end
+
+        ##
+        # @private Raise an error unless an active connection to the service
+        # is available.
         def ensure_service!
           fail "Must have active connection to service" unless service
         end

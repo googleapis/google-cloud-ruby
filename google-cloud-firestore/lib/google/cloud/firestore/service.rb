@@ -89,6 +89,16 @@ module Google
           end
         end
 
+        def begin_transaction transaction_opt
+          options = call_options parent: database_path
+
+          execute do
+            firestore.begin_transaction database_path,
+                                        options_: transaction_opt,
+                                        options: options
+          end
+        end
+
         def commit writes, transaction: nil
           commit_args = {}
           commit_args[:transaction] = transaction if transaction
@@ -96,6 +106,14 @@ module Google
 
           execute do
             firestore.commit database_path, writes, commit_args
+          end
+        end
+
+        def rollback transaction
+          options = call_options parent: database_path
+
+          execute do
+            firestore.rollback database_path, transaction, options: options
           end
         end
 
