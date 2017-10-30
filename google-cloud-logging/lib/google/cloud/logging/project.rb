@@ -238,6 +238,10 @@ module Google
         #   items that are added to the `labels` field of each log entry in
         #   `entries`, except when a log entry specifies its own `key:value`
         #   item with the same key. See also {Entry#labels=}.
+        # @param [Boolean] partial_success Whether valid entries should be
+        #   written even if some other entries fail due to INVALID_ARGUMENT or
+        #   PERMISSION_DENIED errors when communicating to the Stackdriver
+        #   Logging API.
         #
         # @return [Boolean] Returns `true` if the entries were written.
         #
@@ -270,13 +274,15 @@ module Google
         #   logging.write_entries [entry1, entry2],
         #                         log_name: "my_app_log",
         #                         resource: resource,
-        #                         labels: labels
+        #                         labels: labels,
+        #                         partial_success: true
         #
-        def write_entries entries, log_name: nil, resource: nil, labels: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil,
+                          partial_success: nil
           ensure_service!
           service.write_entries Array(entries).map(&:to_grpc),
                                 log_name: log_name, resource: resource,
-                                labels: labels
+                                labels: labels, partial_success: partial_success
           true
         end
 

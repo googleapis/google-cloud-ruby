@@ -274,7 +274,8 @@ module Google
     # async.write_entries [entry1, entry2],
     #                     log_name: "my_app_log",
     #                     resource: resource,
-    #                     labels: labels
+    #                     labels: labels,
+    #                     partial_success: true
     # ```
     #
     # ### Creating a Ruby Logger implementation

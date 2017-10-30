@@ -23,7 +23,7 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: nil, options: default_options]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: nil, partial_success: nil, options: default_options]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry
@@ -42,7 +42,7 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [[entry1.to_grpc, entry2.to_grpc], log_name: nil, resource: nil, labels: nil, options: default_options]
+    mock.expect :write_log_entries, write_res, [[entry1.to_grpc, entry2.to_grpc], log_name: nil, resource: nil, labels: nil, partial_success: nil, options: default_options]
     logging.service.mocked_logging = mock
 
     logging.write_entries [entry1, entry2]
@@ -58,7 +58,7 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: "projects/test/logs/testlog", resource: nil, labels: nil, options: default_options]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: "projects/test/logs/testlog", resource: nil, labels: nil, partial_success: nil, options: default_options]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, log_name: "testlog"
@@ -77,7 +77,7 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: resource.to_grpc, labels: nil, options: default_options]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: resource.to_grpc, labels: nil, partial_success: nil, options: default_options]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, resource: resource
@@ -93,10 +93,26 @@ describe Google::Cloud::Logging::Project, :write_entries, :mock_logging do
     write_res = Google::Logging::V2::WriteLogEntriesResponse.new
 
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: { "env" => "production" }, options: default_options]
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: { "env" => "production" }, partial_success: nil, options: default_options]
     logging.service.mocked_logging = mock
 
     logging.write_entries entry, labels: {env: :production}
+
+    mock.verify
+  end
+
+  it "writes entries with partial success" do
+    entry = logging.entry.tap do |e|
+      e.timestamp = Time.now
+    end
+
+    write_res = Google::Logging::V2::WriteLogEntriesResponse.new
+
+    mock = Minitest::Mock.new
+    mock.expect :write_log_entries, write_res, [[entry.to_grpc], log_name: nil, resource: nil, labels: nil, partial_success: true, options: default_options]
+    logging.service.mocked_logging = mock
+
+    logging.write_entries entry, partial_success: true
 
     mock.verify
   end

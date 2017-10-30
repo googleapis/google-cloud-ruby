@@ -96,11 +96,13 @@ module Google
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
+        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE,
+                       partial_success = false
           super()
 
           @logging = logging
           @max_queue_size = max_queue_size
+          @partial_success = partial_success
           @queue_resource = new_cond
           @queue = []
           @queue_size = 0
@@ -335,7 +337,8 @@ module Google
               queue_item.entries,
               log_name: queue_item.log_name,
               resource: queue_item.resource,
-              labels: queue_item.labels
+              labels: queue_item.labels,
+              partial_success: @partial_success
             )
           rescue => e
             # Ignore any exceptions thrown from the background thread, but

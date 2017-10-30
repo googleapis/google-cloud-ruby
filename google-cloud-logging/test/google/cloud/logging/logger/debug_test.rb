@@ -35,7 +35,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
                                                  severity: severity,
                                                  timestamp: timestamp_grpc)]
-    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, options: default_options]
+    [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, partial_success: nil, options: default_options]
   end
 
   before do

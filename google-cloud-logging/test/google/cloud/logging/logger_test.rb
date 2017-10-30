@@ -42,6 +42,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       log_name: "projects/test/logs/#{log_name_override || log_name}",
       resource: resource.to_grpc,
       labels: labels.merge(extra_labels),
+      partial_success: nil,
       options: default_options
     ]
   end
