@@ -43,6 +43,30 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
     mock.verify
   end
 
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "queries the data with default dataset option set" do
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+
+      job_gapi = query_job_gapi query, dataset: dataset_id
+
+      mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+      mock.expect :get_job_query_results,
+                  query_data_gapi,
+                  [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+      mock.expect :list_table_data,
+                  table_data_gapi.to_json,
+                  [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+      data = dataset.query query
+      data.class.must_equal Google::Cloud::Bigquery::Data
+      data.count.must_equal 3
+      mock.verify
+    end
+  end
+
   it "raises when the job fails with reason accessDenied" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

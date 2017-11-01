@@ -60,6 +60,30 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     result.error_count.must_equal 0
   end
 
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "can insert one row" do
+      mock = Minitest::Mock.new
+      insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+        rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
+      mock.expect :insert_all_table_data, success_table_insert_gapi,
+                  [project, dataset_id, table_id, insert_req]
+      dataset.service.mocked_service = mock
+
+      result = nil
+      SecureRandom.stub :uuid, insert_id do
+        result = dataset.insert table_id, rows.first
+      end
+
+      mock.verify
+
+      result.must_be :success?
+      result.insert_count.must_equal 1
+      result.error_count.must_equal 0
+    end
+  end
+
   it "can insert multiple rows" do
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
