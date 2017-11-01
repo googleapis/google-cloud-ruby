@@ -580,6 +580,10 @@ module Google
         # Retrieves an existing dataset by ID.
         #
         # @param [String] dataset_id The ID of a dataset.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -592,8 +596,18 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
         #
-        def dataset dataset_id
+        # @example Create just a local reference object with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        def dataset dataset_id, skip_lookup: nil
           ensure_service!
+          if skip_lookup
+            return Dataset.new_reference project, dataset_id, service
+          end
           gapi = service.get_dataset dataset_id
           Dataset.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError

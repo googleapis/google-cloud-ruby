@@ -70,6 +70,42 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     mock.verify
   end
 
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "inserts one row" do
+      mock = Minitest::Mock.new
+      insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+        rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
+      mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+      mock.expect :insert_all_table_data, success_table_insert_gapi,
+        [project, dataset_id, table_id, insert_req]
+      dataset.service.mocked_service = mock
+
+      inserter = dataset.insert_async table_id
+
+      SecureRandom.stub :uuid, insert_id do
+        inserter.insert rows.first
+
+        inserter.batch.rows.must_equal [rows.first]
+
+        inserter.must_be :started?
+        inserter.wont_be :stopped?
+
+        # force the queued rows to be inserted
+        inserter.flush
+        inserter.stop.wait!
+
+        inserter.wont_be :started?
+        inserter.must_be :stopped?
+
+        inserter.batch.must_be :nil?
+      end
+
+      mock.verify
+    end
+  end
+
   it "inserts three rows at the same time" do
     mock = Minitest::Mock.new
     insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(

@@ -105,6 +105,13 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def list_datasets_gapi count = 2, token = nil
+    datasets = count.times.map { random_dataset_small_hash }
+    hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
+    hash["nextPageToken"] = token unless token.nil?
+    Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
+  end
+
   def random_schema_hash
     {
       "fields" => [

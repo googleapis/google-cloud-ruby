@@ -347,6 +347,45 @@ module Google
     # table.insert rows
     # ```
     #
+    # To avoid making RPCs (network requests) to retrieve the dataset
+    # resource when streaming records, pass the `skip_lookup` option. This
+    # creates local objects without verifying that the resources exist on the
+    # BigQuery service.
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    # dataset = bigquery.dataset "my_dataset", skip_lookup: true
+    # table = dataset.table "people"
+    #
+    # rows = [
+    #     {
+    #         "first_name" => "Anna",
+    #         "cities_lived" => [
+    #             {
+    #                 "place" => "Stockholm",
+    #                 "number_of_years" => 2
+    #             }
+    #         ]
+    #     },
+    #     {
+    #         "first_name" => "Bob",
+    #         "cities_lived" => [
+    #             {
+    #                 "place" => "Seattle",
+    #                 "number_of_years" => 5
+    #             },
+    #             {
+    #                 "place" => "Austin",
+    #                 "number_of_years" => 6
+    #             }
+    #         ]
+    #     }
+    # ]
+    # table.insert rows
+    # ```
+    #
     # There are some trade-offs involved with streaming, so be sure to read the
     # discussion of data consistency in [Streaming Data Into
     # BigQuery](https://cloud.google.com/bigquery/streaming-data-into-bigquery).

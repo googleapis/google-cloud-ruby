@@ -204,7 +204,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.size.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each do |ds|
+      ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      ds.wont_be :reference?
+      ds.must_be :resource?
+      ds.must_be :resource_partial?
+      ds.wont_be :resource_full?
+    end
   end
 
   it "paginates datasets with all set" do
@@ -478,6 +484,78 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
     dataset.dataset_id.must_equal dataset_id
     dataset.name.must_equal dataset_name
+  end
+
+  it "finds a dataset with skip_lookup option" do
+    dataset_id = "found_dataset"
+    # No HTTP mock needed, since the lookup is not made
+
+    dataset = bigquery.dataset dataset_id, skip_lookup: true
+
+    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be :reference?
+    dataset.wont_be :resource?
+    dataset.wont_be :resource_partial?
+    dataset.wont_be :resource_full?
+  end
+
+  it "finds a dataset with skip_lookup option and then reloads it" do
+    dataset_id = "found_dataset"
+    dataset_name = "Found Dataset"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
+      [project, dataset_id]
+    bigquery.service.mocked_service = mock
+
+    dataset = bigquery.dataset dataset_id, skip_lookup: true
+
+    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be :reference?
+    dataset.wont_be :resource?
+    dataset.wont_be :resource_partial?
+    dataset.wont_be :resource_full?
+    dataset.dataset_id.must_equal dataset_id # does not call reload! internally
+
+    dataset.reload!
+    dataset.name.must_equal dataset_name
+    dataset.wont_be :reference?
+    dataset.must_be :resource?
+    dataset.wont_be :resource_partial?
+    dataset.must_be :resource_full?
+
+    mock.verify
+  end
+
+  it "finds a dataset with skip_lookup option and then loads it by calling exists?" do
+    dataset_id = "found_dataset"
+    dataset_name = "Found Dataset"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
+      [project, dataset_id]
+    bigquery.service.mocked_service = mock
+
+    dataset = bigquery.dataset dataset_id, skip_lookup: true
+
+    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be :reference?
+    dataset.project_id.must_equal project # does not call reload! internally
+    dataset.dataset_id.must_equal dataset_id # does not call reload! internally
+    dataset.dataset_ref.wont_be_nil
+    dataset.must_be :reference?
+    dataset.wont_be :resource?
+    dataset.wont_be :resource_partial?
+    dataset.wont_be :resource_full?
+
+    dataset.exists? # calls reload! internally
+    dataset.wont_be :reference?
+    dataset.must_be :resource?
+    dataset.wont_be :resource_partial?
+    dataset.must_be :resource_full?
+    dataset.name.must_equal dataset_name
+
+    mock.verify
   end
 
   it "lists jobs" do
@@ -828,13 +906,6 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   def find_dataset_gapi id, name = nil, description = nil, default_expiration = nil
     Google::Apis::BigqueryV2::Dataset.from_json \
       random_dataset_hash(id, name, description, default_expiration).to_json
-  end
-
-  def list_datasets_gapi count = 2, token = nil
-    datasets = count.times.map { random_dataset_small_hash }
-    hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
-    hash["nextPageToken"] = token unless token.nil?
-    Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
   end
 
   def list_jobs_gapi count = 2, token = nil

@@ -51,6 +51,23 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     mock.verify
   end
 
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "can specify a storage file" do
+      mock = Minitest::Mock.new
+      job_gapi = load_job_url_gapi(table_reference, load_url)
+      mock.expect :insert_job, load_job_resp_gapi(load_url),
+        [project, job_gapi]
+      dataset.service.mocked_service = mock
+
+      job = dataset.load_job table_id, load_file
+      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+      mock.verify
+    end
+  end
+
   it "can specify a storage file with format" do
     special_file = storage_file "data.json"
     special_url = special_file.to_gs_url

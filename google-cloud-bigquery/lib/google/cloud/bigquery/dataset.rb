@@ -52,10 +52,15 @@ module Google
         attr_accessor :gapi
 
         ##
+        # @private A Google API Client Dataset Reference object.
+        attr_reader :reference
+
+        ##
         # @private Create an empty Dataset object.
         def initialize
           @service = nil
-          @gapi = {}
+          @gapi = nil
+          @reference = nil
         end
 
         ##
@@ -67,6 +72,7 @@ module Google
         # @!group Attributes
         #
         def dataset_id
+          return reference.dataset_id if reference?
           @gapi.dataset_reference.dataset_id
         end
 
@@ -78,6 +84,7 @@ module Google
         # @!group Attributes
         #
         def project_id
+          return reference.project_id if reference?
           @gapi.dataset_reference.project_id
         end
 
@@ -86,7 +93,7 @@ module Google
         # The gapi fragment containing the Project ID and Dataset ID as a
         # camel-cased hash.
         def dataset_ref
-          dataset_ref = @gapi.dataset_reference
+          dataset_ref = reference? ? reference : @gapi.dataset_reference
           dataset_ref = dataset_ref.to_h if dataset_ref.respond_to? :to_h
           dataset_ref
         end
@@ -99,17 +106,23 @@ module Google
         # @!group Attributes
         #
         def name
+          return nil if reference?
           @gapi.friendly_name
         end
 
         ##
         # Updates the descriptive name for the dataset.
         #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_name The new friendly name.
         #
         # @!group Attributes
         #
         def name= new_name
+          reload! unless resource_full?
           @gapi.update! friendly_name: new_name
           patch_gapi! :friendly_name
         end
@@ -122,6 +135,7 @@ module Google
         # @!group Attributes
         #
         def etag
+          return nil if reference?
           ensure_full_data!
           @gapi.etag
         end
@@ -134,6 +148,7 @@ module Google
         # @!group Attributes
         #
         def api_url
+          return nil if reference?
           ensure_full_data!
           @gapi.self_link
         end
@@ -146,6 +161,7 @@ module Google
         # @!group Attributes
         #
         def description
+          return nil if reference?
           ensure_full_data!
           @gapi.description
         end
@@ -153,11 +169,16 @@ module Google
         ##
         # Updates the user-friendly description of the dataset.
         #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_description The new description for the dataset.
         #
         # @!group Attributes
         #
         def description= new_description
+          reload! unless resource_full?
           @gapi.update! description: new_description
           patch_gapi! :description
         end
@@ -170,6 +191,7 @@ module Google
         # @!group Attributes
         #
         def default_expiration
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.default_table_expiration_ms
@@ -182,12 +204,17 @@ module Google
         # Updates the default lifetime of all tables in the dataset, in
         # milliseconds.
         #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [Integer] new_default_expiration The new default table
         #   expiration in milliseconds.
         #
         # @!group Attributes
         #
         def default_expiration= new_default_expiration
+          reload! unless resource_full?
           @gapi.update! default_table_expiration_ms: new_default_expiration
           patch_gapi! :default_table_expiration_ms
         end
@@ -200,6 +227,7 @@ module Google
         # @!group Attributes
         #
         def created_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
@@ -216,6 +244,7 @@ module Google
         # @!group Attributes
         #
         def modified_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
@@ -233,6 +262,7 @@ module Google
         # @!group Attributes
         #
         def location
+          return nil if reference?
           ensure_full_data!
           @gapi.location
         end
@@ -259,6 +289,7 @@ module Google
         # @!group Attributes
         #
         def labels
+          return nil if reference?
           m = @gapi.labels
           m = m.to_h if m.respond_to? :to_h
           m.dup.freeze
@@ -268,6 +299,10 @@ module Google
         # Updates the hash of user-provided labels associated with this dataset.
         # Labels are used to organize and group datasets. See [Using
         # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] labels A hash containing key/value
         #   pairs.
@@ -290,6 +325,7 @@ module Google
         # @!group Attributes
         #
         def labels= labels
+          reload! unless resource_full?
           @gapi.labels = labels
           patch_gapi! :labels
         end
@@ -298,6 +334,10 @@ module Google
         # Retrieves the access rules for a Dataset. The rules can be updated
         # when passing a block, see {Dataset::Access} for all the methods
         # available.
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @see https://cloud.google.com/bigquery/access-control BigQuery Access
         #   Control
@@ -332,6 +372,7 @@ module Google
         #
         def access
           ensure_full_data!
+          reload! unless resource_full?
           access_builder = Access.from_gapi @gapi
           if block_given?
             yield access_builder
@@ -1508,11 +1549,165 @@ module Google
         end
 
         ##
+        # Reloads the dataset with current data from the BigQuery service.
+        #
+        # @return [Google::Cloud::Bigquery::Dataset] Returns the reloaded
+        #   dataset.
+        #
+        # @example Skip retrieving the dataset from the service, then load it:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   dataset.reload!
+        #
+        def reload!
+          ensure_service!
+          reloaded_gapi = service.get_dataset dataset_id
+          @reference = nil
+          @gapi = reloaded_gapi
+          self
+        end
+        alias_method :refresh!, :reload!
+
+        ##
+        # Determines whether the dataset exists in the BigQuery service. The
+        # result is cached locally.
+        #
+        # @return [Boolean] `true` when the exists in the BigQuery service,
+        #   `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   dataset.exists? # true
+        #
+        def exists?
+          # Always true if we have a gapi object
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Whether the dataset was created without retrieving the resource
+        # representation from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset is just a local reference
+        #   object, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        #   dataset.reference? # true
+        #   dataset.reload!
+        #   dataset.reference? # false
+        #
+        def reference?
+          @gapi.nil?
+        end
+
+        ##
+        # Whether the dataset was created with a resource representation from
+        # the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        #   dataset.resource? # false
+        #   dataset.reload!
+        #   dataset.resource? # true
+        #
+        def resource?
+          !@gapi.nil?
+        end
+
+        ##
+        # Whether the dataset was created with a partial resource representation
+        # from the BigQuery service by retrieval through {Project#datasets}.
+        # See [Datasets: list
+        # response](https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#response)
+        # for the contents of the partial representation. Accessing any
+        # attribute outside of the partial representation will result in loading
+        # the full representation.
+        #
+        # @return [Boolean] `true` when the dataset was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.datasets.first
+        #
+        #   dataset.resource_partial? # true
+        #   dataset.description # Loads the full resource.
+        #   dataset.resource_partial? # false
+        #
+        def resource_partial?
+          @gapi.is_a? Google::Apis::BigqueryV2::DatasetList::Dataset
+        end
+
+        ##
+        # Whether the dataset was created with a full resource representation
+        # from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   dataset.resource_full? # true
+        #
+        def resource_full?
+          @gapi.is_a? Google::Apis::BigqueryV2::Dataset
+        end
+
+        ##
         # @private New Dataset from a Google API Client object.
         def self.from_gapi gapi, conn
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
+          end
+        end
+
+        ##
+        # @private New lazy Dataset object without making an HTTP request.
+        def self.new_reference project_id, dataset_id, service
+          # TODO: raise if dataset_id is nil?
+          new.tap do |b|
+            reference_gapi = Google::Apis::BigqueryV2::DatasetReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id
+            )
+            b.service = service
+            b.instance_variable_set :@reference, reference_gapi
           end
         end
 
@@ -1545,6 +1740,19 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows
+        #
+        # @example Skip the network request for the dataset with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
         #   rows = [
         #     { "first_name" => "Alice", "age" => 21 },
@@ -1678,6 +1886,15 @@ module Google
           fail "Must have active connection" unless service
         end
 
+        ##
+        # Ensures the Google::Apis::BigqueryV2::Dataset object has been loaded
+        # from the service.
+        def ensure_gapi!
+          ensure_service!
+          return unless reference?
+          reload!
+        end
+
         def patch_gapi! *attributes
           return if attributes.empty?
           ensure_service!
@@ -1693,17 +1910,7 @@ module Google
         # Load the complete representation of the dataset if it has been
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
-          reload_gapi! unless data_complete?
-        end
-
-        def reload_gapi!
-          ensure_service!
-          gapi = service.get_dataset dataset_id
-          @gapi = gapi
-        end
-
-        def data_complete?
-          @gapi.is_a? Google::Apis::BigqueryV2::Dataset
+          reload! if resource_partial?
         end
 
         def load_storage table_id, url, options = {}
