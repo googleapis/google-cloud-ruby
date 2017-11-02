@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/logging/v2/logging_config_pb"
+require "google/cloud/logging/credentials"
 
 module Google
   module Cloud
@@ -53,7 +54,11 @@ module Google
             "list_sinks" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "sinks")
+              "sinks"),
+            "list_exclusions" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "exclusions")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -80,6 +85,12 @@ module Google
 
           private_constant :SINK_PATH_TEMPLATE
 
+          EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/exclusions/{exclusion}"
+          )
+
+          private_constant :EXCLUSION_PATH_TEMPLATE
+
           # Returns a fully-qualified project resource name string.
           # @param project [String]
           # @return [String]
@@ -100,36 +111,35 @@ module Google
             )
           end
 
-          # Parses the project from a project resource.
-          # @param project_name [String]
+          # Returns a fully-qualified exclusion resource name string.
+          # @param project [String]
+          # @param exclusion [String]
           # @return [String]
-          def self.match_project_from_project_name project_name
-            PROJECT_PATH_TEMPLATE.match(project_name)["project"]
+          def self.exclusion_path project, exclusion
+            EXCLUSION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"exclusion" => exclusion
+            )
           end
 
-          # Parses the project from a sink resource.
-          # @param sink_name [String]
-          # @return [String]
-          def self.match_project_from_sink_name sink_name
-            SINK_PATH_TEMPLATE.match(sink_name)["project"]
-          end
-
-          # Parses the sink from a sink resource.
-          # @param sink_name [String]
-          # @return [String]
-          def self.match_sink_from_sink_name sink_name
-            SINK_PATH_TEMPLATE.match(sink_name)["sink"]
-          end
-
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param client_config[Hash]
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -141,11 +151,11 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -154,14 +164,38 @@ module Google
             require "google/gax/grpc"
             require "google/logging/v2/logging_config_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Logging::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Logging::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -186,6 +220,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Logging::V2::ConfigServiceV2::Stub.method(:new)
             )
@@ -209,6 +244,26 @@ module Google
             @delete_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:delete_sink),
               defaults["delete_sink"]
+            )
+            @list_exclusions = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:list_exclusions),
+              defaults["list_exclusions"]
+            )
+            @get_exclusion = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:get_exclusion),
+              defaults["get_exclusion"]
+            )
+            @create_exclusion = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:create_exclusion),
+              defaults["create_exclusion"]
+            )
+            @update_exclusion = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:update_exclusion),
+              defaults["update_exclusion"]
+            )
+            @delete_exclusion = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:delete_exclusion),
+              defaults["delete_exclusion"]
             )
           end
 
@@ -239,12 +294,10 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
-          #
-          #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_parent = ConfigServiceV2Client.project_path("[PROJECT]")
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   config_service_v2_client.list_sinks(formatted_parent).each do |element|
@@ -263,10 +316,11 @@ module Google
               parent,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListSinksRequest.new({
+            req = {
               parent: parent,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListSinksRequest)
             @list_sinks.call(req, options)
           end
 
@@ -287,20 +341,19 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
-          #
-          #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   response = config_service_v2_client.get_sink(formatted_sink_name)
 
           def get_sink \
               sink_name,
               options: nil
-            req = Google::Logging::V2::GetSinkRequest.new({
+            req = {
               sink_name: sink_name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::GetSinkRequest)
             @get_sink.call(req, options)
           end
 
@@ -319,9 +372,11 @@ module Google
           #       "folders/[FOLDER_ID]"
           #
           #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
-          # @param sink [Google::Logging::V2::LogSink]
+          # @param sink [Google::Logging::V2::LogSink | Hash]
           #   Required. The new sink, whose +name+ parameter is a sink identifier that
           #   is not already in use.
+          #   A hash of the same form as `Google::Logging::V2::LogSink`
+          #   can also be provided.
           # @param unique_writer_identity [true, false]
           #   Optional. Determines the kind of IAM identity returned as +writer_identity+
           #   in the new sink.  If this value is omitted or set to false, and if the
@@ -333,21 +388,18 @@ module Google
           #   If this field is set to true, or if the sink is owned by a non-project
           #   resource such as an organization, then the value of +writer_identity+ will
           #   be a unique service account used only for exports from the new sink.  For
-          #   more information, see +writer_identity+ in LogSink.
+          #   more information, see +writer_identity+ in {Google::Logging::V2::LogSink LogSink}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
-          #   LogSink = Google::Logging::V2::LogSink
-          #
-          #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_parent = ConfigServiceV2Client.project_path("[PROJECT]")
-          #   sink = LogSink.new
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
+          #   sink = {}
           #   response = config_service_v2_client.create_sink(formatted_parent, sink)
 
           def create_sink \
@@ -355,21 +407,19 @@ module Google
               sink,
               unique_writer_identity: nil,
               options: nil
-            req = Google::Logging::V2::CreateSinkRequest.new({
+            req = {
               parent: parent,
               sink: sink,
               unique_writer_identity: unique_writer_identity
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::CreateSinkRequest)
             @create_sink.call(req, options)
           end
 
-          # Updates a sink. If the named sink doesn't exist, then this method is
-          # identical to
-          # {sinks.create}[https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create].
-          # If the named sink does exist, then this method replaces the following
-          # fields in the existing sink with values from the new sink: +destination+,
-          # +filter+, +output_version_format+, +start_time+, and +end_time+.
-          # The updated filter might also have a new +writer_identity+; see the
+          # Updates a sink.  This method replaces the following fields in the existing
+          # sink with values from the new sink: +destination+, +filter+,
+          # +output_version_format+, +start_time+, and +end_time+.
+          # The updated sink might also have a new +writer_identity+; see the
           # +unique_writer_identity+ field.
           #
           # @param sink_name [String]
@@ -382,36 +432,35 @@ module Google
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
           #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
-          # @param sink [Google::Logging::V2::LogSink]
+          # @param sink [Google::Logging::V2::LogSink | Hash]
           #   Required. The updated sink, whose name is the same identifier that appears
-          #   as part of +sink_name+.  If +sink_name+ does not exist, then
-          #   this method creates a new sink.
+          #   as part of +sink_name+.
+          #   A hash of the same form as `Google::Logging::V2::LogSink`
+          #   can also be provided.
           # @param unique_writer_identity [true, false]
           #   Optional. See
-          #   {sinks.create}[https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create]
+          #   [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
           #   for a description of this field.  When updating a sink, the effect of this
           #   field on the value of +writer_identity+ in the updated sink depends on both
           #   the old and new values of this field:
           #
-          #   +   If the old and new values of this field are both false or both true,
-          #       then there is no change to the sink's +writer_identity+.
-          #   +   If the old value is false and the new value is true, then
-          #       +writer_identity+ is changed to a unique service account.
-          #   +   It is an error if the old value is true and the new value is false.
+          #   * If the old and new values of this field are both false or both true,
+          #     then there is no change to the sink's +writer_identity+.
+          #   * If the old value is false and the new value is true, then
+          #     +writer_identity+ is changed to a unique service account.
+          #   * It is an error if the old value is true and the new value is
+          #     set to false or defaulted to false.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
-          #   LogSink = Google::Logging::V2::LogSink
-          #
-          #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
-          #   sink = LogSink.new
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #   sink = {}
           #   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
 
           def update_sink \
@@ -419,11 +468,12 @@ module Google
               sink,
               unique_writer_identity: nil,
               options: nil
-            req = Google::Logging::V2::UpdateSinkRequest.new({
+            req = {
               sink_name: sink_name,
               sink: sink,
               unique_writer_identity: unique_writer_identity
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateSinkRequest)
             @update_sink.call(req, options)
           end
 
@@ -445,21 +495,238 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/config_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   ConfigServiceV2Client = Google::Cloud::Logging::V2::ConfigServiceV2Client
-          #
-          #   config_service_v2_client = ConfigServiceV2Client.new
-          #   formatted_sink_name = ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   config_service_v2_client.delete_sink(formatted_sink_name)
 
           def delete_sink \
               sink_name,
               options: nil
-            req = Google::Logging::V2::DeleteSinkRequest.new({
+            req = {
               sink_name: sink_name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteSinkRequest)
             @delete_sink.call(req, options)
+            nil
+          end
+
+          # Lists all the exclusions in a parent resource.
+          #
+          # @param parent [String]
+          #   Required. The parent resource whose exclusions are to be listed.
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogExclusion>]
+          #   An enumerable of Google::Logging::V2::LogExclusion instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   config_service_v2_client.list_exclusions(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   config_service_v2_client.list_exclusions(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_exclusions \
+              parent,
+              page_size: nil,
+              options: nil
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListExclusionsRequest)
+            @list_exclusions.call(req, options)
+          end
+
+          # Gets the description of an exclusion.
+          #
+          # @param name [String]
+          #   Required. The resource name of an existing exclusion:
+          #
+          #       "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+          #
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Logging::V2::LogExclusion]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
+          #   response = config_service_v2_client.get_exclusion(formatted_name)
+
+          def get_exclusion \
+              name,
+              options: nil
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::GetExclusionRequest)
+            @get_exclusion.call(req, options)
+          end
+
+          # Creates a new exclusion in a specified parent resource.
+          # Only log entries belonging to that resource can be excluded.
+          # You can have up to 10 exclusions in a resource.
+          #
+          # @param parent [String]
+          #   Required. The parent resource in which to create the exclusion:
+          #
+          #       "projects/[PROJECT_ID]"
+          #       "organizations/[ORGANIZATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]"
+          #       "folders/[FOLDER_ID]"
+          #
+          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+          # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
+          #   Required. The new exclusion, whose +name+ parameter is an exclusion name
+          #   that is not already used in the parent resource.
+          #   A hash of the same form as `Google::Logging::V2::LogExclusion`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Logging::V2::LogExclusion]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
+          #   exclusion = {}
+          #   response = config_service_v2_client.create_exclusion(formatted_parent, exclusion)
+
+          def create_exclusion \
+              parent,
+              exclusion,
+              options: nil
+            req = {
+              parent: parent,
+              exclusion: exclusion
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::CreateExclusionRequest)
+            @create_exclusion.call(req, options)
+          end
+
+          # Changes one or more properties of an existing exclusion.
+          #
+          # @param name [String]
+          #   Required. The resource name of the exclusion to update:
+          #
+          #       "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+          #
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
+          #   Required. New values for the existing exclusion. Only the fields specified
+          #   in +update_mask+ are relevant.
+          #   A hash of the same form as `Google::Logging::V2::LogExclusion`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Required. A nonempty list of fields to change in the existing exclusion.
+          #   New values for the fields are taken from the corresponding fields in the
+          #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
+          #   +update_mask+ are not changed and are ignored in the request.
+          #
+          #   For example, to change the filter and description of an exclusion,
+          #   specify an +update_mask+ of +"filter,description"+.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Logging::V2::LogExclusion]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
+          #   exclusion = {}
+          #   update_mask = {}
+          #   response = config_service_v2_client.update_exclusion(formatted_name, exclusion, update_mask)
+
+          def update_exclusion \
+              name,
+              exclusion,
+              update_mask,
+              options: nil
+            req = {
+              name: name,
+              exclusion: exclusion,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateExclusionRequest)
+            @update_exclusion.call(req, options)
+          end
+
+          # Deletes an exclusion.
+          #
+          # @param name [String]
+          #   Required. The resource name of an existing exclusion to delete:
+          #
+          #       "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+          #
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
+          #   config_service_v2_client.delete_exclusion(formatted_name)
+
+          def delete_exclusion \
+              name,
+              options: nil
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteExclusionRequest)
+            @delete_exclusion.call(req, options)
             nil
           end
         end
