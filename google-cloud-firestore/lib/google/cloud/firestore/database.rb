@@ -18,6 +18,7 @@ require "google/cloud/firestore/document"
 require "google/cloud/firestore/query"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/snapshot"
+require "google/cloud/firestore/transaction"
 
 module Google
   module Cloud
@@ -145,6 +146,12 @@ module Google
           snapshot = Snapshot.from_database self, read_time: read_time
           yield snapshot
           snapshot.rollback
+        end
+
+        def transaction
+          transaction = Transaction.from_database self
+          yield transaction
+          transaction.commit
         end
 
         def query
