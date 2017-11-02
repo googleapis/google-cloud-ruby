@@ -30,6 +30,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/speech/v1/cloud_speech_pb"
+require "google/cloud/speech/credentials"
 
 module Google
   module Cloud
@@ -56,21 +57,24 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param updater_proc [Proc]
-          #   A function that transforms the metadata for requests, e.g., to give
-          #   OAuth credentials.
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
           # @param scopes [Array<String>]
           #   The OAuth scopes for this service. This parameter is ignored if
           #   an updater_proc is supplied.
-          # @param client_config[Hash]
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -83,11 +87,10 @@ module Google
               channel: nil,
               chan_creds: nil,
               updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -96,28 +99,48 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/speech/v1/cloud_speech_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
+
+            credentials ||= Google::Cloud::Speech::Credentials.default
+
             @operations_client = Google::Longrunning::OperationsClient.new(
               service_path: service_path,
-              port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
+              credentials: credentials,
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
-              app_name: app_name,
-              app_version: app_version,
               lib_name: lib_name,
               lib_version: lib_version,
             )
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Speech::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -182,7 +205,7 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   speech_client = Google::Cloud::Speech::V1.new
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
@@ -229,7 +252,7 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   speech_client = Google::Cloud::Speech::V1.new
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
@@ -309,7 +332,7 @@ module Google
           # @example
           #   require "google/cloud/speech/v1"
           #
-          #   speech_client = Google::Cloud::Speech::V1::SpeechClient.new
+          #   speech_client = Google::Cloud::Speech::V1.new
           #   request = {}
           #   requests = [request]
           #   speech_client.streaming_recognize(requests).each do |element|
@@ -317,7 +340,10 @@ module Google
           #   end
 
           def streaming_recognize reqs, options: nil
-            @streaming_recognize.call(reqs, options)
+            request_protos = reqs.lazy.map do |req|
+              Google::Gax::to_proto(req, Google::Cloud::Speech::V1::StreamingRecognizeRequest)
+            end
+            @streaming_recognize.call(request_protos, options)
           end
         end
       end
