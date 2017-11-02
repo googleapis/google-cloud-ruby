@@ -14,6 +14,19 @@
 
 module Google
   module Pubsub
+    ##
+    # # Google Cloud Pub/Sub API Contents
+    #
+    # | Class | Description |
+    # | ----- | ----------- |
+    # | [PublisherClient][] | Provides reliable, many-to-many, asynchronous messaging between applications. |
+    # | [SubscriberClient][] | Provides reliable, many-to-many, asynchronous messaging between applications. |
+    # | [Data Types][] | Data types for Google::Cloud::Pubsub::V1 |
+    #
+    # [PublisherClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/publisherclient
+    # [SubscriberClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/subscriberclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/datatypes
+    #
     module V1
       # A topic resource.
       # @!attribute [rw] name
@@ -24,6 +37,9 @@ module Google
       #     underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
       #     signs (+%+). It must be between 3 and 255 characters in length, and it
       #     must not start with +"goog"+.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     User labels.
       class Topic; end
 
       # A message data and its attributes. The message payload must not be empty;
@@ -53,6 +69,16 @@ module Google
       #     The name of the topic to get.
       #     Format is +projects/{project}/topics/{topic}+.
       class GetTopicRequest; end
+
+      # Request for the UpdateTopic method.
+      # @!attribute [rw] topic
+      #   @return [Google::Pubsub::V1::Topic]
+      #     The topic to update.
+      # @!attribute [rw] update_mask
+      #   @return [Google::Protobuf::FieldMask]
+      #     Indicates which fields in the provided topic to update.
+      #     Must be specified and non-empty.
+      class UpdateTopicRequest; end
 
       # Request for the Publish method.
       # @!attribute [rw] topic
@@ -185,6 +211,9 @@ module Google
       #     of acknowledged messages, and thus configures how far back in time a +Seek+
       #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
       #     minutes.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     User labels.
       class Subscription; end
 
       # Configuration for a push delivery endpoint.
@@ -421,6 +450,16 @@ module Google
       #     Format is +projects/{project}/subscriptions/{sub}+.
       class CreateSnapshotRequest; end
 
+      # Request for the UpdateSnapshot method.
+      # @!attribute [rw] snapshot
+      #   @return [Google::Pubsub::V1::Snapshot]
+      #     The updated snpashot object.
+      # @!attribute [rw] update_mask
+      #   @return [Google::Protobuf::FieldMask]
+      #     Indicates which fields in the provided snapshot to update.
+      #     Must be specified and non-empty.
+      class UpdateSnapshotRequest; end
+
       # A snapshot resource.
       # @!attribute [rw] name
       #   @return [String]
@@ -428,7 +467,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic from which this snapshot is retaining messages.
-      # @!attribute [rw] expiration_time
+      # @!attribute [rw] expire_time
       #   @return [Google::Protobuf::Timestamp]
       #     The snapshot is guaranteed to exist up until this time.
       #     A newly-created snapshot expires no later than 7 days from the time of its
@@ -439,6 +478,9 @@ module Google
       #     old. If a snapshot is created from this subscription, the snapshot -- which
       #     will always capture this 3-day-old backlog as long as the snapshot
       #     exists -- will expire in 4 days.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     User labels.
       class Snapshot; end
 
       # Request for the +ListSnapshots+ method.
