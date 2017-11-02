@@ -14,33 +14,104 @@
 
 module Google
   module Spanner
+    ##
+    # # Cloud Spanner API Contents
+    #
+    # | Class | Description |
+    # | ----- | ----------- |
+    # | [SpannerClient][] | Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. |
+    # | [Data Types][] | Data types for Google::Cloud::Spanner::V1 |
+    #
+    # [SpannerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/spannerclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/datatypes
+    #
     module V1
-      # The request for CreateSession.
+      # The request for {Google::Spanner::V1::Spanner::CreateSession CreateSession}.
       # @!attribute [rw] database
       #   @return [String]
       #     Required. The database in which the new session is created.
+      # @!attribute [rw] session
+      #   @return [Google::Spanner::V1::Session]
+      #     The session to create.
       class CreateSessionRequest; end
 
       # A session in the Cloud Spanner API.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The name of the session.
+      #     The name of the session. This is always system-assigned; values provided
+      #     when creating a session are ignored.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     The labels for the session.
+      #
+      #     * Label keys must be between 1 and 63 characters long and must conform to
+      #       the following regular expression: +[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?+.
+      #     * Label values must be between 0 and 63 characters long and must conform
+      #       to the regular expression +([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?+.
+      #     * No more than 64 labels can be associated with a given session.
+      #
+      #     See https://goo.gl/xmQnxf for more information on and examples of labels.
+      # @!attribute [rw] create_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The timestamp when the session is created.
+      # @!attribute [rw] approximate_last_use_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The approximate timestamp when the session is last used. It is
+      #     typically earlier than the actual last use time.
       class Session; end
 
-      # The request for GetSession.
+      # The request for {Google::Spanner::V1::Spanner::GetSession GetSession}.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The name of the session to retrieve.
       class GetSessionRequest; end
 
-      # The request for DeleteSession.
+      # The request for {Google::Spanner::V1::Spanner::ListSessions ListSessions}.
+      # @!attribute [rw] database
+      #   @return [String]
+      #     Required. The database in which to list sessions.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     Number of sessions to be returned in the response. If 0 or less, defaults
+      #     to the server's maximum allowed page size.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     If non-empty, +page_token+ should contain a
+      #     {Google::Spanner::V1::ListSessionsResponse#next_page_token next_page_token} from a previous
+      #     {Google::Spanner::V1::ListSessionsResponse ListSessionsResponse}.
+      # @!attribute [rw] filter
+      #   @return [String]
+      #     An expression for filtering the results of the request. Filter rules are
+      #     case insensitive. The fields eligible for filtering are:
+      #
+      #     * +labels.key+ where key is the name of a label
+      #
+      #     Some examples of using filters are:
+      #
+      #     * +labels.env:*+ --> The session has the label "env".
+      #       * +labels.env:dev+ --> The session has the label "env" and the value of
+      #         the label contains the string "dev".
+      class ListSessionsRequest; end
+
+      # The response for {Google::Spanner::V1::Spanner::ListSessions ListSessions}.
+      # @!attribute [rw] sessions
+      #   @return [Array<Google::Spanner::V1::Session>]
+      #     The list of requested sessions.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     +next_page_token+ can be sent in a subsequent
+      #     {Google::Spanner::V1::Spanner::ListSessions ListSessions} call to fetch more of the matching
+      #     sessions.
+      class ListSessionsResponse; end
+
+      # The request for {Google::Spanner::V1::Spanner::DeleteSession DeleteSession}.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The name of the session to delete.
       class DeleteSessionRequest; end
 
-      # The request for ExecuteSql and
-      # ExecuteStreamingSql.
+      # The request for {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} and
+      # {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the SQL query should be performed.
@@ -71,24 +142,24 @@ module Google
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
       #     from a JSON value.  For example, values of type +BYTES+ and values
-      #     of type +STRING+ both appear in Params as JSON strings.
+      #     of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
       #
       #     In these cases, +param_types+ can be used to specify the exact
       #     SQL type for some or all of the SQL query parameters. See the
-      #     definition of Type for more information
+      #     definition of {Google::Spanner::V1::Type Type} for more information
       #     about SQL types.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     If this request is resuming a previously interrupted SQL query
       #     execution, +resume_token+ should be copied from the last
-      #     PartialResultSet yielded before the interruption. Doing this
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new SQL query execution to resume where the last one left
       #     off. The rest of the request parameters must exactly match the
       #     request that yielded this token.
       # @!attribute [rw] query_mode
       #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
       #     Used to control the amount of debugging information returned in
-      #     ResultSetStats.
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}.
       class ExecuteSqlRequest
         # Mode in which the query must be processed.
         module QueryMode
@@ -106,8 +177,8 @@ module Google
         end
       end
 
-      # The request for Read and
-      # StreamingRead.
+      # The request for {Google::Spanner::V1::Spanner::Read Read} and
+      # {Google::Spanner::V1::Spanner::StreamingRead StreamingRead}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the read should be performed.
@@ -120,22 +191,22 @@ module Google
       #     Required. The name of the table in the database to be read.
       # @!attribute [rw] index
       #   @return [String]
-      #     If non-empty, the name of an index on Table. This index is
-      #     used instead of the table primary key when interpreting Key_set
-      #     and sorting result rows. See Key_set for further information.
+      #     If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table table}. This index is
+      #     used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set key_set}
+      #     and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
       # @!attribute [rw] columns
       #   @return [Array<String>]
-      #     The columns of Table to be returned for each row matching
+      #     The columns of {Google::Spanner::V1::ReadRequest#table table} to be returned for each row matching
       #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
       #     Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-      #     primary keys of the rows in Table to be yielded, unless Index
-      #     is present. If Index is present, then Key_set instead names
-      #     index keys in Index.
+      #     primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index index}
+      #     is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
+      #     index keys in {Google::Spanner::V1::ReadRequest#index index}.
       #
-      #     Rows are yielded in table primary key order (if Index is empty)
-      #     or index key order (if Index is non-empty).
+      #     Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty)
+      #     or index key order (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).
       #
       #     It is not an error for the +key_set+ to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
@@ -147,13 +218,13 @@ module Google
       #   @return [String]
       #     If this request is resuming a previously interrupted read,
       #     +resume_token+ should be copied from the last
-      #     PartialResultSet yielded before the interruption. Doing this
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new read to resume where the last read left off. The
       #     rest of the request parameters must exactly match the request
       #     that yielded this token.
       class ReadRequest; end
 
-      # The request for BeginTransaction.
+      # The request for {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction runs.
@@ -162,7 +233,7 @@ module Google
       #     Required. Options for the new transaction.
       class BeginTransactionRequest; end
 
-      # The request for Commit.
+      # The request for {Google::Spanner::V1::Spanner::Commit Commit}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction to be committed is running.
@@ -178,8 +249,8 @@ module Google
       #     instance, due to retries in the application, or in the
       #     transport library), it is possible that the mutations are
       #     executed more than once. If this is undesirable, use
-      #     BeginTransaction and
-      #     Commit instead.
+      #     {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction} and
+      #     {Google::Spanner::V1::Spanner::Commit Commit} instead.
       # @!attribute [rw] mutations
       #   @return [Array<Google::Spanner::V1::Mutation>]
       #     The mutations to be executed when this transaction commits. All
@@ -187,13 +258,13 @@ module Google
       #     this list.
       class CommitRequest; end
 
-      # The response for Commit.
+      # The response for {Google::Spanner::V1::Spanner::Commit Commit}.
       # @!attribute [rw] commit_timestamp
       #   @return [Google::Protobuf::Timestamp]
       #     The Cloud Spanner timestamp at which the transaction committed.
       class CommitResponse; end
 
-      # The request for Rollback.
+      # The request for {Google::Spanner::V1::Spanner::Rollback Rollback}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction to roll back is running.
