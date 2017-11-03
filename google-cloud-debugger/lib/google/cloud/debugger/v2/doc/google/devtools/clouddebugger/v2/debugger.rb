@@ -15,6 +15,19 @@
 module Google
   module Devtools
     module Clouddebugger
+      ##
+      # # Stackdriver Debugger API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [Debugger2Client][] | Examines the call stack and variables of a running application without stopping or slowing it down. |
+      # | [Controller2Client][] | Examines the call stack and variables of a running application without stopping or slowing it down. |
+      # | [Data Types][] | Data types for Google::Cloud::Debugger::V2 |
+      #
+      # [Debugger2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/debugger2client
+      # [Controller2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/controller2client
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/datatypes
+      #
       module V2
         # Request to set a breakpoint
         # @!attribute [rw] debuggee_id
@@ -23,11 +36,11 @@ module Google
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
         #     Breakpoint specification to set.
-        #     The field 'location' of the breakpoint must be set.
+        #     The field +location+ of the breakpoint must be set.
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
         class SetBreakpointRequest; end
 
         # Response for setting a breakpoint.
@@ -47,7 +60,7 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
         class GetBreakpointRequest; end
 
         # Response for getting breakpoint information.
@@ -67,7 +80,7 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
         class DeleteBreakpointRequest; end
 
         # Request to list breakpoints.
@@ -99,7 +112,7 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
         class ListBreakpointsRequest
           # Wrapper message for +Breakpoint.Action+. Defines a filter on the action
           # field of breakpoints.
@@ -115,7 +128,7 @@ module Google
         #     List of breakpoints matching the request.
         #     The fields +id+ and +location+ are guaranteed to be set on each breakpoint.
         #     The fields: +stack_frames+, +evaluated_expressions+ and +variable_table+
-        #     are cleared on each breakpoint regardless of it's status.
+        #     are cleared on each breakpoint regardless of its status.
         # @!attribute [rw] next_wait_token
         #   @return [String]
         #     A wait token that can be used in the next call to +list+ (REST) or
@@ -133,17 +146,16 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
         class ListDebuggeesRequest; end
 
         # Response for listing debuggees.
         # @!attribute [rw] debuggees
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Debuggee>]
         #     List of debuggees accessible to the calling user.
-        #     Note that the +description+ field is the only human readable field
-        #     that should be displayed to the user.
-        #     The fields +debuggee.id+ and  +description+ fields are guaranteed to be
-        #     set on each debuggee.
+        #     The fields +debuggee.id+ and +description+ are guaranteed to be set.
+        #     The +description+ field is a human readable field provided by agents and
+        #     can be displayed to users.
         class ListDebuggeesResponse; end
       end
     end
