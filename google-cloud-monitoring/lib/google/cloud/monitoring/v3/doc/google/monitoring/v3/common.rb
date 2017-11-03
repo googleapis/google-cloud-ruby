@@ -52,10 +52,10 @@ module Google
       # the data.  Aggregation consists of an alignment step on individual time
       # series (+per_series_aligner+) followed by an optional reduction of the data
       # across different time series (+cross_series_reducer+).  For more details, see
-      # {Aggregation}[https://cloud.google.com/monitoring/api/learn_more#aggregation].
+      # [Aggregation](https://cloud.google.com/monitoring/api/learn_more#aggregation).
       # @!attribute [rw] alignment_period
       #   @return [Google::Protobuf::Duration]
-      #     The alignment period for per-Time series
+      #     The alignment period for per-{Google::Monitoring::V3::TimeSeries time series}
       #     alignment. If present, +alignmentPeriod+ must be at least 60
       #     seconds.  After per-time series alignment, each time series will
       #     contain data points only on the period boundaries. If
@@ -124,7 +124,7 @@ module Google
           # Align and convert to a rate. This alignment is valid for
           # cumulative metrics and delta metrics with numeric values. The output is a
           # gauge metric with value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_RATE = 2
 
           # Align by interpolating between adjacent points around the
@@ -157,14 +157,14 @@ module Google
           # the alignment period is the average or arithmetic mean of all
           # data points in the period. This alignment is valid for gauge and delta
           # metrics with numeric values. The value type of the output is
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_MEAN = 12
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the count of all data points in the
           # period. This alignment is valid for gauge and delta metrics with numeric
           # or Boolean values. The value type of the output is
-          # INT64.
+          # {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
           ALIGN_COUNT = 13
 
           # Align time series via aggregation. The resulting data point in
@@ -178,49 +178,49 @@ module Google
           # the alignment period is the standard deviation of all data
           # points in the period. This alignment is valid for gauge and delta metrics
           # with numeric values. The value type of the output is
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_STDDEV = 15
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the count of True-valued data points in the
           # period. This alignment is valid for gauge metrics with
           # Boolean values. The value type of the output is
-          # INT64.
+          # {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
           ALIGN_COUNT_TRUE = 16
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the fraction of True-valued data points in the
           # period. This alignment is valid for gauge metrics with Boolean values.
           # The output value is in the range [0, 1] and has value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_FRACTION_TRUE = 17
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the 99th percentile of all data
           # points in the period. This alignment is valid for gauge and delta metrics
           # with distribution values. The output is a gauge metric with value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_PERCENTILE_99 = 18
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the 95th percentile of all data
           # points in the period. This alignment is valid for gauge and delta metrics
           # with distribution values. The output is a gauge metric with value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_PERCENTILE_95 = 19
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the 50th percentile of all data
           # points in the period. This alignment is valid for gauge and delta metrics
           # with distribution values. The output is a gauge metric with value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_PERCENTILE_50 = 20
 
           # Align time series via aggregation. The resulting data point in
           # the alignment period is the 5th percentile of all data
           # points in the period. This alignment is valid for gauge and delta metrics
           # with distribution values. The output is a gauge metric with value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           ALIGN_PERCENTILE_05 = 21
         end
 
@@ -234,7 +234,7 @@ module Google
           # Reduce by computing the mean across time series for each
           # alignment period. This reducer is valid for delta and
           # gauge metrics with numeric or distribution values. The value type of the
-          # output is DOUBLE.
+          # output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           REDUCE_MEAN = 1
 
           # Reduce by computing the minimum across time series for each
@@ -258,51 +258,51 @@ module Google
           # Reduce by computing the standard deviation across time series
           # for each alignment period. This reducer is valid for delta
           # and gauge metrics with numeric or distribution values. The value type of
-          # the output is DOUBLE.
+          # the output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           REDUCE_STDDEV = 5
 
           # Reduce by computing the count of data points across time series
           # for each alignment period. This reducer is valid for delta
           # and gauge metrics of numeric, Boolean, distribution, and string value
           # type. The value type of the output is
-          # INT64.
+          # {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
           REDUCE_COUNT = 6
 
           # Reduce by computing the count of True-valued data points across time
           # series for each alignment period. This reducer is valid for delta
           # and gauge metrics of Boolean value type. The value type of
-          # the output is INT64.
+          # the output is {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
           REDUCE_COUNT_TRUE = 7
 
           # Reduce by computing the fraction of True-valued data points across time
           # series for each alignment period. This reducer is valid for delta
           # and gauge metrics of Boolean value type. The output value is in the
           # range [0, 1] and has value type
-          # DOUBLE.
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
           REDUCE_FRACTION_TRUE = 8
 
           # Reduce by computing 99th percentile of data points across time series
           # for each alignment period. This reducer is valid for gauge and delta
           # metrics of numeric and distribution type. The value of the output is
-          # DOUBLE
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
           REDUCE_PERCENTILE_99 = 9
 
           # Reduce by computing 95th percentile of data points across time series
           # for each alignment period. This reducer is valid for gauge and delta
           # metrics of numeric and distribution type. The value of the output is
-          # DOUBLE
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
           REDUCE_PERCENTILE_95 = 10
 
           # Reduce by computing 50th percentile of data points across time series
           # for each alignment period. This reducer is valid for gauge and delta
           # metrics of numeric and distribution type. The value of the output is
-          # DOUBLE
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
           REDUCE_PERCENTILE_50 = 11
 
           # Reduce by computing 5th percentile of data points across time series
           # for each alignment period. This reducer is valid for gauge and delta
           # metrics of numeric and distribution type. The value of the output is
-          # DOUBLE
+          # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
           REDUCE_PERCENTILE_05 = 12
         end
       end

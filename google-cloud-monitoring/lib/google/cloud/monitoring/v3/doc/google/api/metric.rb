@@ -24,13 +24,13 @@ module Google
     #     that defines the scope of the metric type or of its data; and (2) the
     #     metric's URL-encoded type, which also appears in the +type+ field of this
     #     descriptor. For example, following is the resource name of a custom
-    #     metric within the GCP project 123456789:
+    #     metric within the GCP project +my-project-id+:
     #
-    #         "projects/123456789/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+    #         "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
     # @!attribute [rw] type
     #   @return [String]
     #     The metric type, including its DNS name prefix. The type is not
-    #     URL-encoded.  All user-defined metric types have the DNS name
+    #     URL-encoded.  All user-defined custom metric types have the DNS name
     #     +custom.googleapis.com+.  Metric types should use a natural hierarchical
     #     grouping. For example:
     #
@@ -56,8 +56,8 @@ module Google
     #   @return [String]
     #     The unit in which the metric value is reported. It is only applicable
     #     if the +value_type+ is +INT64+, +DOUBLE+, or +DISTRIBUTION+. The
-    #     supported units are a subset of {The Unified Code for Units of
-    #     Measure}[http://unitsofmeasure.org/ucum.html] standard:
+    #     supported units are a subset of [The Unified Code for Units of
+    #     Measure](http://unitsofmeasure.org/ucum.html) standard:
     #
     #     **Basic units (UNIT)**
     #
@@ -114,10 +114,10 @@ module Google
     #     Notes:
     #
     #     * +Annotation+ is just a comment if it follows a +UNIT+ and is
-    #        equivalent to +1+ if it is used alone. For examples,
-    #        +{requests}/s == 1/s+, +By{transmitted}/s == By/s+.
+    #       equivalent to +1+ if it is used alone. For examples,
+    #       +{requests}/s == 1/s+, +By{transmitted}/s == By/s+.
     #     * +NAME+ is a sequence of non-blank printable ASCII characters not
-    #        containing '{' or '}'.
+    #       containing '{' or '}'.
     # @!attribute [rw] description
     #   @return [String]
     #     A detailed description of the metric, which can be used in documentation.
@@ -164,7 +164,7 @@ module Google
         # This value type can be used only if the metric kind is +GAUGE+.
         STRING = 4
 
-        # The value is a +Distribution+.
+        # The value is a {Google::Api::Distribution +Distribution+}.
         DISTRIBUTION = 5
 
         # The value is money.
@@ -173,10 +173,10 @@ module Google
     end
 
     # A specific metric, identified by specifying values for all of the
-    # labels of a +MetricDescriptor+.
+    # labels of a {Google::Api::MetricDescriptor +MetricDescriptor+}.
     # @!attribute [rw] type
     #   @return [String]
-    #     An existing metric type, see Google::Api::MetricDescriptor.
+    #     An existing metric type, see {Google::Api::MetricDescriptor}.
     #     For example, +custom.googleapis.com/invoice/paid/amount+.
     # @!attribute [rw] labels
     #   @return [Hash{String => String}]

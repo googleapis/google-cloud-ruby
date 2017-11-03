@@ -1,5 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
-#
+# Copyright 2017, Google Inc. All rights reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,7 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require "bundler/setup"
 require "bundler/gem_tasks"
 
@@ -21,17 +19,53 @@ RuboCop::RakeTask.new
 
 desc "Run tests."
 task :test do
-  puts "The google-cloud-monitoring gem does not have tests."
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*test.rb")
+    .reject { |file| file.include? "smoke_test" }
+    .each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Run tests with coverage."
+  desc "Runs tests with coverage."
   task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-monitoring"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["SMOKE_TEST_PROJECT"].nil?
+    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
+      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-monitoring"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
   end
 end
 
 # Acceptance tests
-desc "Run the monitoring acceptance tests."
+desc "Run the google-cloud-monitoring acceptance tests."
 task :acceptance do
   puts "The google-cloud-monitoring gem does not have acceptance tests."
 end
@@ -48,16 +82,6 @@ namespace :acceptance do
   desc "Run acceptance cleanup."
   task :cleanup do
   end
-end
-
-desc "Run yard-doctest example tests."
-task :doctest do
-  puts "The google-cloud-monitoring gem does not have doctest tests."
-end
-
-desc "Run rubocop."
-task :rubocop do
-  puts "The google-cloud-monitoring gem does not use rubocop."
 end
 
 require "yard"
@@ -79,15 +103,15 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Monitoring::V3",
-            include: ["google/monitoring/v3"]
-          },
-          {
-            title: "Google::Api",
-            include: ["google/api"]
+            include: ["google/cloud/monitoring/v3"]
           },
           {
             title: "Google::Protobuf",
             include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
           }
         ]
       }
@@ -102,6 +126,11 @@ task :jsondoc => :yard do
   cp ["docs/toc.json"], "jsondoc", verbose: true
 end
 
+desc "Run yard-doctest example tests."
+task :doctest do
+  puts "The google-cloud-monitoring gem does not have doctest tests."
+end
+
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-monitoring"
@@ -114,9 +143,23 @@ task :ci do
   header "google-cloud-monitoring test", "*"
   sh "bundle exec rake test"
 end
+
+namespace :ci do
+  desc "Run the CI build, with smoke_tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-monitoring smoke_test", "*"
+    sh "bundle exec rake smoke_test -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :acceptance do
+  task :smoke_test do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring acceptance", "*"
     sh "bundle exec rake acceptance -v"

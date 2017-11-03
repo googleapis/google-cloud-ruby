@@ -1,9 +1,7 @@
 AllCops:
   Exclude:
-    - "integration/**/*"
     - "google-cloud-monitoring.gemspec"
-    - "lib/google/monitoring/**/*"
-    - "lib/google/cloud/monitoring/**/*"
+    - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
 
@@ -51,4 +49,4 @@ Style/ClassVars:
 Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
-  Enabled: false # for lib/google-cloud-monitoring.rb file
+  Enabled: false

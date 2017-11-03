@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/metric_service_pb"
+require "google/cloud/monitoring/credentials"
 
 module Google
   module Cloud
@@ -124,50 +125,24 @@ module Google
             )
           end
 
-          # Parses the project from a project resource.
-          # @param project_name [String]
-          # @return [String]
-          def self.match_project_from_project_name project_name
-            PROJECT_PATH_TEMPLATE.match(project_name)["project"]
-          end
-
-          # Parses the project from a metric_descriptor resource.
-          # @param metric_descriptor_name [String]
-          # @return [String]
-          def self.match_project_from_metric_descriptor_name metric_descriptor_name
-            METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metric_descriptor_name)["project"]
-          end
-
-          # Parses the metric_descriptor from a metric_descriptor resource.
-          # @param metric_descriptor_name [String]
-          # @return [String]
-          def self.match_metric_descriptor_from_metric_descriptor_name metric_descriptor_name
-            METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metric_descriptor_name)["metric_descriptor"]
-          end
-
-          # Parses the project from a monitored_resource_descriptor resource.
-          # @param monitored_resource_descriptor_name [String]
-          # @return [String]
-          def self.match_project_from_monitored_resource_descriptor_name monitored_resource_descriptor_name
-            MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.match(monitored_resource_descriptor_name)["project"]
-          end
-
-          # Parses the monitored_resource_descriptor from a monitored_resource_descriptor resource.
-          # @param monitored_resource_descriptor_name [String]
-          # @return [String]
-          def self.match_monitored_resource_descriptor_from_monitored_resource_descriptor_name monitored_resource_descriptor_name
-            MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.match(monitored_resource_descriptor_name)["monitored_resource_descriptor"]
-          end
-
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param client_config[Hash]
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -179,11 +154,11 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -192,14 +167,38 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/metric_service_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Monitoring::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -224,6 +223,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Monitoring::V3::MetricService::Stub.method(:new)
             )
@@ -270,7 +270,7 @@ module Google
           #   The project on which to execute the request. The format is
           #   +"projects/{project_id_or_number}"+.
           # @param filter [String]
-          #   An optional {filter}[https://cloud.google.com/monitoring/api/v3/filters] describing
+          #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
           #   the descriptors to be returned.  The filter can reference
           #   the descriptor's type and labels. For example, the
           #   following filter returns only Google Compute Engine descriptors
@@ -293,12 +293,10 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
@@ -318,11 +316,12 @@ module Google
               filter: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new({
+            req = {
               name: name,
               filter: filter,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest)
             @list_monitored_resource_descriptors.call(req, options)
           end
 
@@ -339,20 +338,19 @@ module Google
           # @return [Google::Api::MonitoredResourceDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
           #   response = metric_service_client.get_monitored_resource_descriptor(formatted_name)
 
           def get_monitored_resource_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new({
+            req = {
               name: name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest)
             @get_monitored_resource_descriptor.call(req, options)
           end
 
@@ -364,10 +362,10 @@ module Google
           # @param filter [String]
           #   If this field is empty, all custom and
           #   system-defined metric descriptors are returned.
-          #   Otherwise, the {filter}[https://cloud.google.com/monitoring/api/v3/filters]
+          #   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
           #   specifies which metric descriptors are to be
           #   returned. For example, the following filter matches all
-          #   {custom metrics}[https://cloud.google.com/monitoring/custom-metrics]:
+          #   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
           #
           #       metric.type = starts_with("custom.googleapis.com/")
           # @param page_size [Integer]
@@ -386,12 +384,10 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   metric_service_client.list_metric_descriptors(formatted_name).each do |element|
@@ -411,11 +407,12 @@ module Google
               filter: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListMetricDescriptorsRequest.new({
+            req = {
               name: name,
               filter: filter,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListMetricDescriptorsRequest)
             @list_metric_descriptors.call(req, options)
           end
 
@@ -432,62 +429,61 @@ module Google
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   response = metric_service_client.get_metric_descriptor(formatted_name)
 
           def get_metric_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::GetMetricDescriptorRequest.new({
+            req = {
               name: name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetMetricDescriptorRequest)
             @get_metric_descriptor.call(req, options)
           end
 
           # Creates a new metric descriptor.
           # User-created metric descriptors define
-          # {custom metrics}[https://cloud.google.com/monitoring/custom-metrics].
+          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
           #   +"projects/{project_id_or_number}"+.
-          # @param metric_descriptor [Google::Api::MetricDescriptor]
-          #   The new {custom metric}[https://cloud.google.com/monitoring/custom-metrics]
+          # @param metric_descriptor [Google::Api::MetricDescriptor | Hash]
+          #   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
           #   descriptor.
+          #   A hash of the same form as `Google::Api::MetricDescriptor`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricDescriptor = Google::Api::MetricDescriptor
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
-          #   metric_descriptor = MetricDescriptor.new
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
+          #   metric_descriptor = {}
           #   response = metric_service_client.create_metric_descriptor(formatted_name, metric_descriptor)
 
           def create_metric_descriptor \
               name,
               metric_descriptor,
               options: nil
-            req = Google::Monitoring::V3::CreateMetricDescriptorRequest.new({
+            req = {
               name: name,
               metric_descriptor: metric_descriptor
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateMetricDescriptorRequest)
             @create_metric_descriptor.call(req, options)
           end
 
           # Deletes a metric descriptor. Only user-created
-          # {custom metrics}[https://cloud.google.com/monitoring/custom-metrics] can be deleted.
+          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be deleted.
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
@@ -499,20 +495,19 @@ module Google
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   metric_service_client.delete_metric_descriptor(formatted_name)
 
           def delete_metric_descriptor \
               name,
               options: nil
-            req = Google::Monitoring::V3::DeleteMetricDescriptorRequest.new({
+            req = {
               name: name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteMetricDescriptorRequest)
             @delete_metric_descriptor.call(req, options)
             nil
           end
@@ -523,23 +518,27 @@ module Google
           #   The project on which to execute the request. The format is
           #   "projects/{project_id_or_number}".
           # @param filter [String]
-          #   A {monitoring filter}[https://cloud.google.com/monitoring/api/v3/filters] that specifies which time
+          #   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
           #   series should be returned.  The filter must specify a single metric type,
           #   and can additionally specify metric labels and other information. For
           #   example:
           #
           #       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
           #           metric.label.instance_name = "my-instance-name"
-          # @param interval [Google::Monitoring::V3::TimeInterval]
+          # @param interval [Google::Monitoring::V3::TimeInterval | Hash]
           #   The time interval for which results should be returned. Only time series
           #   that contain data points in the specified interval are included
           #   in the response.
+          #   A hash of the same form as `Google::Monitoring::V3::TimeInterval`
+          #   can also be provided.
           # @param view [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
           #   Specifies which information is returned about the time series.
-          # @param aggregation [Google::Monitoring::V3::Aggregation]
+          # @param aggregation [Google::Monitoring::V3::Aggregation | Hash]
           #   By default, the raw time series data is returned.
           #   Use this field to combine multiple time series for different
           #   views of the data.
+          #   A hash of the same form as `Google::Monitoring::V3::Aggregation`
+          #   can also be provided.
           # @param order_by [String]
           #   Specifies the order in which the points of the time series should
           #   be returned.  By default, results are not ordered.  Currently,
@@ -560,17 +559,13 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #   TimeInterval = Google::Monitoring::V3::TimeInterval
-          #   TimeSeriesView = Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #   filter = ''
-          #   interval = TimeInterval.new
-          #   view = TimeSeriesView::FULL
+          #   interval = {}
+          #   view = :FULL
           #
           #   # Iterate over all results.
           #   metric_service_client.list_time_series(formatted_name, filter, interval, view).each do |element|
@@ -594,7 +589,7 @@ module Google
               order_by: nil,
               page_size: nil,
               options: nil
-            req = Google::Monitoring::V3::ListTimeSeriesRequest.new({
+            req = {
               name: name,
               filter: filter,
               interval: interval,
@@ -602,7 +597,8 @@ module Google
               aggregation: aggregation,
               order_by: order_by,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListTimeSeriesRequest)
             @list_time_series.call(req, options)
           end
 
@@ -614,23 +610,23 @@ module Google
           # @param name [String]
           #   The project on which to execute the request. The format is
           #   +"projects/{project_id_or_number}"+.
-          # @param time_series [Array<Google::Monitoring::V3::TimeSeries>]
+          # @param time_series [Array<Google::Monitoring::V3::TimeSeries | Hash>]
           #   The new data to be added to a list of time series.
           #   Adds at most one data point to each of several time series.  The new data
           #   point must be more recent than any other point in its time series.  Each
           #   +TimeSeries+ value must fully specify a unique time series by supplying
           #   all label values for the metric and the monitored resource.
+          #   A hash of the same form as `Google::Monitoring::V3::TimeSeries`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3/metric_service_client"
+          #   require "google/cloud/monitoring/v3"
           #
-          #   MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-          #
-          #   metric_service_client = MetricServiceClient.new
-          #   formatted_name = MetricServiceClient.project_path("[PROJECT]")
+          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #   time_series = []
           #   metric_service_client.create_time_series(formatted_name, time_series)
 
@@ -638,10 +634,11 @@ module Google
               name,
               time_series,
               options: nil
-            req = Google::Monitoring::V3::CreateTimeSeriesRequest.new({
+            req = {
               name: name,
               time_series: time_series
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateTimeSeriesRequest)
             @create_time_series.call(req, options)
             nil
           end
