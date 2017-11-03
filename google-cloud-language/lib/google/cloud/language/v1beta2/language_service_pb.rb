@@ -255,6 +255,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :NUMC, 74
     value :COP, 75
     value :DISLOCATED, 76
+    value :ASP, 77
+    value :GMOD, 78
+    value :GOBJ, 79
+    value :INFMOD, 80
+    value :MES, 81
+    value :NCOMP, 82
   end
   add_message "google.cloud.language.v1beta2.EntityMention" do
     optional :text, :message, 1, "google.cloud.language.v1beta2.TextSpan"
