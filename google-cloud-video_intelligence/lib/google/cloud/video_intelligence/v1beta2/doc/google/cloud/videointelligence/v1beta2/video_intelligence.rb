@@ -42,8 +42,9 @@ module Google
         #     in the request as +input_content+. If set, +input_content+ should be unset.
         # @!attribute [rw] input_content
         #   @return [String]
-        #     The video data bytes. Encoding: base64. If unset, the input video(s)
-        #     should be specified via +input_uri+. If set, +input_uri+ should be unset.
+        #     The video data bytes.
+        #     If unset, the input video(s) should be specified via +input_uri+.
+        #     If set, +input_uri+ should be unset.
         # @!attribute [rw] features
         #   @return [Array<Google::Cloud::Videointelligence::V1beta2::Feature>]
         #     Requested video annotation features.
@@ -248,7 +249,7 @@ module Google
         # Face annotation.
         # @!attribute [rw] thumbnail
         #   @return [String]
-        #     Thumbnail of a representative face view (in JPEG format). Encoding: base64.
+        #     Thumbnail of a representative face view (in JPEG format).
         # @!attribute [rw] segments
         #   @return [Array<Google::Cloud::Videointelligence::V1beta2::FaceSegment>]
         #     All video segments where a face was detected.

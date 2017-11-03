@@ -46,7 +46,7 @@ module Google
     #
     #
     module VideoIntelligence
-      module V1beta2
+      module V1beta1
       end
     end
   end

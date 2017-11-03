@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCredentialsClass < Google::Cloud::VideoIntelligence::Credentials
+class MockVideoIntelligenceServiceCredentials < Google::Cloud::VideoIntelligence::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -73,8 +73,9 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video without error' do
       # Create request parameters
-      input_uri = ''
-      features = []
+      input_uri = "gs://demomaker/cat.mp4"
+      features_element = :LABEL_DETECTION
+      features = [features_element]
 
       # Create expected grpc response
       expected_response = {}
@@ -97,7 +98,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
@@ -114,8 +115,9 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video and returns an operation error.' do
       # Create request parameters
-      input_uri = ''
-      features = []
+      input_uri = "gs://demomaker/cat.mp4"
+      features_element = :LABEL_DETECTION
+      features = [features_element]
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -137,7 +139,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
@@ -155,8 +157,9 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video with error' do
       # Create request parameters
-      input_uri = ''
-      features = []
+      input_uri = "gs://demomaker/cat.mp4"
+      features_element = :LABEL_DETECTION
+      features = [features_element]
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -168,7 +171,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
