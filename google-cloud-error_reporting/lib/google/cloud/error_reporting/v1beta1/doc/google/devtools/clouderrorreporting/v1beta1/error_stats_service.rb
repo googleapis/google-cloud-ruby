@@ -15,6 +15,21 @@
 module Google
   module Devtools
     module Clouderrorreporting
+      ##
+      # # Stackdriver Error Reporting API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [ErrorGroupServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [ErrorStatsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [ReportErrorsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
+      #
+      # [ErrorGroupServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorgroupserviceclient
+      # [ErrorStatsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorstatsserviceclient
+      # [ReportErrorsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/reporterrorsserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
+      #
       module V1beta1
         # Specifies a set of +ErrorGroupStats+ to return.
         # @!attribute [rw] project_name
@@ -114,9 +129,9 @@ module Google
         #     Approximate number of occurrences over time.
         #     Timed counts returned by ListGroups are guaranteed to be:
         #
-        #     - Inside the requested time interval
-        #     - Non-overlapping, and
-        #     - Ordered by ascending time.
+        #     * Inside the requested time interval
+        #     * Non-overlapping, and
+        #     * Ordered by ascending time.
         # @!attribute [rw] first_seen_time
         #   @return [Google::Protobuf::Timestamp]
         #     Approximate first occurrence that was ever seen for this group
@@ -164,8 +179,8 @@ module Google
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
         #     as +projects/+ plus the
-        #     {Google Cloud Platform project
-        #     ID}[https://support.google.com/cloud/answer/6158840].
+        #     [Google Cloud Platform project
+        #     ID](https://support.google.com/cloud/answer/6158840).
         #     Example: +projects/my-project-123+.
         # @!attribute [rw] group_id
         #   @return [String]
@@ -242,15 +257,15 @@ module Google
         # @!attribute [rw] service
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     {+ServiceContext.service+}[https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service].
+        #     [+ServiceContext.service+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
         # @!attribute [rw] version
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     {+ServiceContext.version+}[https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version].
+        #     [+ServiceContext.version+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
         # @!attribute [rw] resource_type
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     {+ServiceContext.resource_type+}[https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type].
+        #     [+ServiceContext.resource_type+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
         class ServiceContextFilter; end
 
         # Deletes all events in the project.
@@ -258,8 +273,8 @@ module Google
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
         #     as +projects/+ plus the
-        #     {Google Cloud Platform project
-        #     ID}[https://support.google.com/cloud/answer/6158840].
+        #     [Google Cloud Platform project
+        #     ID](https://support.google.com/cloud/answer/6158840).
         #     Example: +projects/my-project-123+.
         class DeleteEventsRequest; end
 

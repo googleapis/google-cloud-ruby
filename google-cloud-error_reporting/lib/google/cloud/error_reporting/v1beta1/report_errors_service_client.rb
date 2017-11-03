@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_pb"
+require "google/cloud/error_reporting/credentials"
 
 module Google
   module Cloud
@@ -69,22 +70,24 @@ module Google
             )
           end
 
-          # Parses the project from a project resource.
-          # @param project_name [String]
-          # @return [String]
-          def self.match_project_from_project_name project_name
-            PROJECT_PATH_TEMPLATE.match(project_name)["project"]
-          end
-
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param client_config[Hash]
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -96,11 +99,11 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -109,14 +112,38 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::ErrorReporting::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::ErrorReporting::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -140,6 +167,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub.method(:new)
             )
@@ -164,34 +192,34 @@ module Google
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
           #   as +projects/+ plus the
-          #   {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+          #   [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
           #   Example: +projects/my-project-123+.
-          # @param event [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+          # @param event [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent | Hash]
           #   [Required] The error event to be reported.
+          #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1/report_errors_service_client"
+          #   require "google/cloud/error_reporting/v1beta1"
           #
-          #   ReportErrorsServiceClient = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient
-          #   ReportedErrorEvent = Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-          #
-          #   report_errors_service_client = ReportErrorsServiceClient.new
-          #   formatted_project_name = ReportErrorsServiceClient.project_path("[PROJECT]")
-          #   event = ReportedErrorEvent.new
+          #   report_errors_service_client = Google::Cloud::ErrorReporting::V1beta1::ReportErrors.new
+          #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.project_path("[PROJECT]")
+          #   event = {}
           #   response = report_errors_service_client.report_error_event(formatted_project_name, event)
 
           def report_error_event \
               project_name,
               event,
               options: nil
-            req = Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest.new({
+            req = {
               project_name: project_name,
               event: event
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest)
             @report_error_event.call(req, options)
           end
         end

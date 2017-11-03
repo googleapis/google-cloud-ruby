@@ -15,13 +15,28 @@
 module Google
   module Devtools
     module Clouderrorreporting
+      ##
+      # # Stackdriver Error Reporting API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [ErrorGroupServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [ErrorStatsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [ReportErrorsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
+      #
+      # [ErrorGroupServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorgroupserviceclient
+      # [ErrorStatsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorstatsserviceclient
+      # [ReportErrorsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/reporterrorsserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
+      #
       module V1beta1
         # A request for reporting an individual error event.
         # @!attribute [rw] project_name
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
         #     as +projects/+ plus the
-        #     {Google Cloud Platform project ID}[https://support.google.com/cloud/answer/6158840].
+        #     [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
         #     Example: +projects/my-project-123+.
         # @!attribute [rw] event
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
