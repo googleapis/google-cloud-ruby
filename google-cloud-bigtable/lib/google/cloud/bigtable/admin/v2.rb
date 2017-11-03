@@ -54,10 +54,10 @@ module Google
             # Clusters. Provides access to the Instance and Cluster schemas only, not the
             # tables' metadata or data stored in those tables.
             #
-            # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+            # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
             #   Provides the means for authenticating requests made by the client. This parameter can
             #   be many types.
-            #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+            #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
             #   authenticating requests made by this client.
             #   A `String` will be treated as the path to the keyfile to be used for the construction of
             #   credentials for this client.
@@ -115,10 +115,10 @@ module Google
             # Provides access to the table schemas only, not the data stored within
             # the tables.
             #
-            # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+            # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
             #   Provides the means for authenticating requests made by the client. This parameter can
             #   be many types.
-            #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+            #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
             #   authenticating requests made by this client.
             #   A `String` will be treated as the path to the keyfile to be used for the construction of
             #   credentials for this client.

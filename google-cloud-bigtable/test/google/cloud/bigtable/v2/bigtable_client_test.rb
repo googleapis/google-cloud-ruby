@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class BigtableMockCredentialsClass < Google::Cloud::Bigtable::Credentials
+class MockBigtableCredentials < Google::Cloud::Bigtable::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -88,7 +88,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:read_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("read_rows")
+      mock_credentials = MockBigtableCredentials.new("read_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:read_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("read_rows")
+      mock_credentials = MockBigtableCredentials.new("read_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -157,7 +157,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:sample_row_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("sample_row_keys")
+      mock_credentials = MockBigtableCredentials.new("sample_row_keys")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:sample_row_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("sample_row_keys")
+      mock_credentials = MockBigtableCredentials.new("sample_row_keys")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -231,7 +231,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("mutate_row")
+      mock_credentials = MockBigtableCredentials.new("mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -270,7 +270,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("mutate_row")
+      mock_credentials = MockBigtableCredentials.new("mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -317,7 +317,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:mutate_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("mutate_rows")
+      mock_credentials = MockBigtableCredentials.new("mutate_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -351,7 +351,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:mutate_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("mutate_rows")
+      mock_credentials = MockBigtableCredentials.new("mutate_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -392,7 +392,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:check_and_mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("check_and_mutate_row")
+      mock_credentials = MockBigtableCredentials.new("check_and_mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -422,7 +422,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:check_and_mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("check_and_mutate_row")
+      mock_credentials = MockBigtableCredentials.new("check_and_mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -467,7 +467,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:read_modify_write_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("read_modify_write_row")
+      mock_credentials = MockBigtableCredentials.new("read_modify_write_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do
@@ -506,7 +506,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
       mock_stub = MockGrpcClientStub.new(:read_modify_write_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = BigtableMockCredentialsClass.new("read_modify_write_row")
+      mock_credentials = MockBigtableCredentials.new("read_modify_write_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Credentials.stub(:default, mock_credentials) do

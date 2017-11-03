@@ -122,7 +122,7 @@ end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :acceptance do
+  task :smoke_test do
     Rake::Task["ci"].invoke
     header "google-cloud-bigtable acceptance", "*"
     sh "bundle exec rake acceptance -v"
