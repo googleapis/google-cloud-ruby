@@ -21,7 +21,7 @@ module Google
         #     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
         # Each structural component, starting from Page, may further have their own
         # properties. Properties describe detected languages, breaks etc.. Please
-        # refer to the Google::Cloud::Vision::V1::TextAnnotation::TextProperty message
+        # refer to the {Google::Cloud::Vision::V1::TextAnnotation::TextProperty} message
         # definition below for more detail.
         # @!attribute [rw] pages
         #   @return [Array<Google::Cloud::Vision::V1::Page>]
@@ -109,15 +109,15 @@ module Google
         #     is represented as around the top-left corner as defined when the text is
         #     read in the 'natural' orientation.
         #     For example:
-        #       * when the text is horizontal it might look like:
-        #          0----1
-        #          |    |
-        #          3----2
+        #     * when the text is horizontal it might look like:
+        #       0----1
+        #       |    |
+        #       3----2
         #       * when it's rotated 180 degrees around the top-left corner it becomes:
-        #          2----3
-        #          |    |
-        #          1----0
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #         2----3
+        #         |    |
+        #         1----0
+        #         and the vertice order will still be (0, 1, 2, 3).
         # @!attribute [rw] paragraphs
         #   @return [Array<Google::Cloud::Vision::V1::Paragraph>]
         #     List of paragraphs in this block (if this blocks is of type text).
@@ -159,15 +159,15 @@ module Google
         #     is represented as around the top-left corner as defined when the text is
         #     read in the 'natural' orientation.
         #     For example:
-        #       * when the text is horizontal it might look like:
-        #          0----1
-        #          |    |
-        #          3----2
+        #     * when the text is horizontal it might look like:
+        #       0----1
+        #       |    |
+        #       3----2
         #       * when it's rotated 180 degrees around the top-left corner it becomes:
-        #          2----3
-        #          |    |
-        #          1----0
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #         2----3
+        #         |    |
+        #         1----0
+        #         and the vertice order will still be (0, 1, 2, 3).
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::Vision::V1::Word>]
         #     List of words in this paragraph.
@@ -185,15 +185,15 @@ module Google
         #     is represented as around the top-left corner as defined when the text is
         #     read in the 'natural' orientation.
         #     For example:
-        #       * when the text is horizontal it might look like:
-        #          0----1
-        #          |    |
-        #          3----2
+        #     * when the text is horizontal it might look like:
+        #       0----1
+        #       |    |
+        #       3----2
         #       * when it's rotated 180 degrees around the top-left corner it becomes:
-        #          2----3
-        #          |    |
-        #          1----0
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #         2----3
+        #         |    |
+        #         1----0
+        #         and the vertice order will still be (0, 1, 2, 3).
         # @!attribute [rw] symbols
         #   @return [Array<Google::Cloud::Vision::V1::Symbol>]
         #     List of symbols in the word.
@@ -212,15 +212,15 @@ module Google
         #     is represented as around the top-left corner as defined when the text is
         #     read in the 'natural' orientation.
         #     For example:
-        #       * when the text is horizontal it might look like:
-        #          0----1
-        #          |    |
-        #          3----2
+        #     * when the text is horizontal it might look like:
+        #       0----1
+        #       |    |
+        #       3----2
         #       * when it's rotated 180 degrees around the top-left corner it becomes:
-        #          2----3
-        #          |    |
-        #          1----0
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #         2----3
+        #         |    |
+        #         1----0
+        #         and the vertice order will still be (0, 1, 2, 3).
         # @!attribute [rw] text
         #   @return [String]
         #     The actual UTF-8 representation of the symbol.
