@@ -45,7 +45,7 @@ module Google
         #     keyfile: "/path/to/keyfile.json"
         #   )
         #
-        #   firestore.project #=> "my-project-id"
+        #   firestore.project.project_id #=> "my-project-id"
         #
         def project
           service.project

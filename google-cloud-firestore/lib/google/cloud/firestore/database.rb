@@ -37,10 +37,36 @@ module Google
           @service = service
         end
 
+        ##
+        # The project resource the Cloud Firestore database belongs to.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   firestore = Google::Cloud::Firestore.new(
+        #     project: "my-project-id",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   firestore.project.project_id #=> "my-project-id"
+        #
         def project
           @project ||= Project.new service
         end
 
+        ##
+        # The project identifier for the Cloud Firestore database.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   firestore = Google::Cloud::Firestore.new(
+        #     project: "my-project-id",
+        #     keyfile: "/path/to/keyfile.json"
+        #   )
+        #
+        #   firestore.project.project_id #=> "my-project-id"
+        #
         def project_id
           service.project
         end
