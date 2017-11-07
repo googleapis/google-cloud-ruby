@@ -59,6 +59,8 @@ module Google
           # This is mainly useful for determining whether a session is still
           # alive.
           rpc :GetSession, GetSessionRequest, Session
+          # Lists all sessions in a given database.
+          rpc :ListSessions, ListSessionsRequest, ListSessionsResponse
           # Ends a session, releasing server resources associated with it.
           rpc :DeleteSession, DeleteSessionRequest, Google::Protobuf::Empty
           # Executes an SQL query, returning all rows in a single reply. This
