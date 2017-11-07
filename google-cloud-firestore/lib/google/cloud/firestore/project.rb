@@ -37,20 +37,10 @@ module Google
         ##
         # The identifier for the Cloud Firestore project.
         #
-        # @example
-        #   require "google/cloud"
-        #
-        #   firestore = Google::Cloud::Firestore.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
-        #   )
-        #
-        #   firestore.project.project_id #=> "my-project-id"
-        #
-        def project
+        # @return [String] project identifier.
+        def project_id
           service.project
         end
-        alias_method :project_id, :project
 
         ##
         # @private Default project.

@@ -4,6 +4,7 @@ AllCops:
     - "lib/google/firestore/v1beta1/**/*"
     - "lib/google/cloud/firestore/v1beta1/**/*"
     - "lib/google/cloud/firestore/v1beta1.rb"
+    - "support/**/*"
     - "Rakefile"
     - "acceptance/**/*"
     - "test/**/*"

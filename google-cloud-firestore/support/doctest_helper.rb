@@ -55,6 +55,11 @@ module Google
           OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
         end
       end
+      module Generate
+        def self.unique_id *args
+          "RANDOMID123XYZ"
+        end
+      end
     end
   end
 end
@@ -94,4 +99,630 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Firestore::Project" do
     mock_firestore
   end
+
+  doctest.before "Google::Cloud::Firestore::Database" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#cols" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Database#collections"
+
+  doctest.before "Google::Cloud::Firestore::Database#docs" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Database#documents"
+
+  doctest.before "Google::Cloud::Firestore::Database#query" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Database#q"
+
+  doctest.before "Google::Cloud::Firestore::Database#select" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#from" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#where" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#order" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#offset" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#limit" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#start_at" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#start_after" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#end_before" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#end_at" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#get" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Database#get@Get a document with data given a document path:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Database#get@Get a document with data given a document reference:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Database#run"
+
+  # The method #get_all must be listed after #get because of reasons...
+  doctest.before "Google::Cloud::Firestore::Database#get_all" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Database#get_docs"
+  doctest.skip "Google::Cloud::Firestore::Database#get_documents"
+  doctest.skip "Google::Cloud::Firestore::Database#find"
+
+  doctest.before "Google::Cloud::Firestore::Database#transaction" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Database#read_only_transaction" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Database#read_transaction"
+  doctest.skip "Google::Cloud::Firestore::Database#snapshot"
+
+  doctest.before "Google::Cloud::Firestore::Batch" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#cols" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Batch#collections"
+
+  doctest.before "Google::Cloud::Firestore::Batch#docs" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Batch#documents"
+
+  doctest.before "Google::Cloud::Firestore::Batch#query" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Batch#q"
+
+  doctest.before "Google::Cloud::Firestore::Batch#select" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#from" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#where" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#order" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#offset" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#limit" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#start_at" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#start_after" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#end_before" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#end_at" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Batch#get" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Batch#get@Get a document with data given a document path:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Batch#get@Get a document with data given a document reference:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Batch#run"
+
+  # The method #get_all must be listed after #get because of reasons...
+  doctest.before "Google::Cloud::Firestore::Batch#get_all" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Batch#get_docs"
+  doctest.skip "Google::Cloud::Firestore::Batch#get_documents"
+  doctest.skip "Google::Cloud::Firestore::Batch#find"
+
+  doctest.before "Google::Cloud::Firestore::Transaction" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :commit, commit_resp, commit_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#cols" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Transaction#collections"
+
+  doctest.before "Google::Cloud::Firestore::Transaction#docs" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Transaction#documents"
+
+  doctest.before "Google::Cloud::Firestore::Transaction#query" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Transaction#q"
+
+  doctest.before "Google::Cloud::Firestore::Transaction#select" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#from" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#where" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#order" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#offset" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#limit" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#start_at" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#start_after" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#end_before" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#end_at" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Transaction#get" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Transaction#get@Get a document with data given a document path:" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Transaction#get@Get a document with data given a document reference:" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::Transaction#run"
+
+  # The method #get_all must be listed after #get because of reasons...
+  doctest.before "Google::Cloud::Firestore::Transaction#get_all" do
+    mock_firestore do |mock|
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Transaction#get_docs"
+  doctest.skip "Google::Cloud::Firestore::Transaction#get_documents"
+  doctest.skip "Google::Cloud::Firestore::Transaction#find"
+
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :run_query, run_query_resp, run_query_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction#col" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#collection"
+
+  # The method #cols must be listed after #col because of reasons...
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction#cols" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#collections"
+
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction#get@Get a document with data given a document path:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction#get@Get a document with data given a document reference:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#run"
+
+  # The method #get_all must be listed after #get because of reasons...
+  doctest.before "Google::Cloud::Firestore::ReadOnlyTransaction#get_all" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :rollback, nil, [String, String, Hash]
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#get_docs"
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#get_documents"
+  doctest.skip "Google::Cloud::Firestore::ReadOnlyTransaction#find"
+
+  doctest.before "Google::Cloud::Firestore::Collection::Reference" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Collection::Reference#docs" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#documents"
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#get"
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#run"
+
+  # The method #get_all must be listed after #get because of reasons...
+  doctest.before "Google::Cloud::Firestore::Collection::Reference#get_all" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#get_docs"
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#get_documents"
+  doctest.skip "Google::Cloud::Firestore::Collection::Reference#find"
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#cols" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Document::Reference#collections"
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#get" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#create" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#set" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#update" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Reference#delete" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Snapshot" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Document::Snapshot#cols" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Document::Snapshot#collections"
+
+  doctest.before "Google::Cloud::Firestore::Document::Snapshot#missing" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, missing_batch_get_resp, batch_get_args
+    end
+  end
+end
+
+# Fixture helpers
+def commit_args
+  [String, Array, Hash]
+end
+
+def commit_resp
+  Google::Firestore::V1beta1::CommitResponse.new(
+    commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+    write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
+    )
+end
+
+def list_collection_resp
+  ["cities", "messages"].to_enum
+end
+
+def list_collection_args
+  [String, Hash]
+end
+
+def run_query_resp
+  [
+    run_query_resp_obj("cities/NYC", { name: "New York City", population: 1000000 }),
+    run_query_resp_obj("cities/SF",  { name: "San Francisco", population: 1000000 }),
+    run_query_resp_obj("cities/LA",  { name: "Los Angeles", population: 1000000 })
+  ].to_enum
+end
+
+def run_query_resp_obj doc, data
+  Google::Firestore::V1beta1::RunQueryResponse.new(
+    transaction: "tx123",
+    read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+    document: Google::Firestore::V1beta1::Document.new(
+      name: "projects/my-project-id/databases/(default)/documents/#{doc}",
+      fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
+      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now)
+    ))
+end
+
+def run_query_args
+  [String, Hash]
+end
+
+def batch_get_resp
+  [
+    batch_get_resp_obj("cities/NYC", { name: "New York City", population: 1000000 }),
+    batch_get_resp_obj("cities/SF",  { name: "San Francisco", population: 1000000 }),
+    batch_get_resp_obj("cities/LA",  { name: "Los Angeles", population: 1000000 })
+  ].to_enum
+end
+
+def missing_batch_get_resp
+  [
+    Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+      missing: "projects/my-project-id/databases/(default)/documents/cities/Atlantis"
+    )
+  ].to_enum
+end
+
+def batch_get_resp_obj doc, data
+  Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+    read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+    found: Google::Firestore::V1beta1::Document.new(
+      name: "projects/my-project-id/databases/(default)/documents/#{doc}",
+      fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
+      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now)
+    ))
+end
+
+def batch_get_args
+  [String, Array, Hash]
 end

@@ -173,7 +173,8 @@ module Google
           "="            => :EQUAL,
           "=="           => :EQUAL,
           "eq"           => :EQUAL,
-          "eql"          => :EQUAL }
+          "eql"          => :EQUAL,
+          "is"           => :EQUAL }
         UNARY_NIL_VALUES = [nil, :null, :nil]
         UNARY_NAN_VALUES = [:nan, Float::NAN]
         UNARY_VALUES = UNARY_NIL_VALUES + UNARY_NAN_VALUES
