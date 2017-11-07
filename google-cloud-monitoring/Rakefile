@@ -146,20 +146,16 @@ end
 
 namespace :ci do
   desc "Run the CI build, with smoke_tests."
-  task :acceptance do
+  task :smoke_test do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring smoke_test", "*"
     sh "bundle exec rake smoke_test -v"
-  end
-  task :a do
-    # This is a handy shortcut to save typing
-    Rake::Task["ci:acceptance"].invoke
   end
 end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :smoke_test do
+  task :acccpetance do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring acceptance", "*"
     sh "bundle exec rake acceptance -v"
