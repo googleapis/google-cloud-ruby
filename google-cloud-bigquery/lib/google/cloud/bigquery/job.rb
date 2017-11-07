@@ -31,7 +31,7 @@ module Google
       #
       # A job instance is created when you call {Project#query_job},
       # {Dataset#query_job}, {Table#copy_job}, {Table#extract_job},
-      # {Table#load_job}, or {View#data}.
+      # {Table#load_job}.
       #
       # @see https://cloud.google.com/bigquery/docs/managing-jobs Running and
       #   Managing Jobs

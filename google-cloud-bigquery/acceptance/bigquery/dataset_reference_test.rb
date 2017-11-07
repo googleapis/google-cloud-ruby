@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     # Use local reference object in these tests, instead of full resource
     bigquery.dataset dataset_id, skip_lookup: true
   end
-  let(:table_id) { "dataset_table" }
+  let(:table_id) { "dataset_reference_table" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?
