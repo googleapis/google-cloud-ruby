@@ -244,34 +244,6 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job.labels.must_equal labels
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
-  end
-
-  def extract_job_json table, extract_file, job_id
-    {
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => job_id
-      },
-      "configuration" => {
-        "extract" => {
-          "destinationUris" => [extract_file.to_gs_url],
-          "sourceTable" => {
-            "projectId" => table.project_id,
-            "datasetId" => table.dataset_id,
-            "tableId" => table.table_id
-          },
-          "printHeader" => nil,
-          "compression" => nil,
-          "fieldDelimiter" => nil,
-          "destinationFormat" => nil
-        },
-        "dryRun" => nil
-      }
-    }.to_json
-  end
-
   # Borrowed from MockStorage, extract to a common module?
 
   def random_bucket_hash name=random_bucket_name

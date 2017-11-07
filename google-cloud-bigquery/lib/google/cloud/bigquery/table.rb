@@ -76,10 +76,15 @@ module Google
         attr_accessor :gapi
 
         ##
+        # @private A Google API Client Table Reference object.
+        attr_reader :reference
+
+        ##
         # @private Create an empty Table object.
         def initialize
           @service = nil
-          @gapi = Google::Apis::BigqueryV2::Table.new
+          @gapi = nil
+          @reference = nil
         end
 
         ##
@@ -91,6 +96,7 @@ module Google
         # @!group Attributes
         #
         def table_id
+          return reference.table_id if reference?
           @gapi.table_reference.table_id
         end
 
@@ -103,6 +109,7 @@ module Google
         # @!group Attributes
         #
         def dataset_id
+          return reference.dataset_id if reference?
           @gapi.table_reference.dataset_id
         end
 
@@ -114,16 +121,18 @@ module Google
         # @!group Attributes
         #
         def project_id
+          return reference.project_id if reference?
           @gapi.table_reference.project_id
         end
 
         ##
         # @private The gapi fragment containing the Project ID, Dataset ID, and
-        # Table ID as a camel-cased hash.
+        # Table ID.
+        #
+        # @return [Google::Apis::BigqueryV2::TableReference]
+        #
         def table_ref
-          table_ref = @gapi.table_reference
-          table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
-          table_ref
+          reference? ? reference : @gapi.table_reference
         end
 
         ###
@@ -136,6 +145,7 @@ module Google
         # @!group Attributes
         #
         def time_partitioning?
+          return nil if reference?
           !@gapi.time_partitioning.nil?
         end
 
@@ -149,6 +159,7 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_type
+          return nil if reference?
           ensure_full_data!
           @gapi.time_partitioning.type if time_partitioning?
         end
@@ -160,6 +171,10 @@ module Google
         # You can only set partitioning when creating a table as in
         # the example below. BigQuery does not allow you to change partitioning
         # on an existing table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [String] type The partition type. Currently the only
         #   supported value is "DAY".
@@ -176,6 +191,7 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_type= type
+          reload! unless resource_full?
           @gapi.time_partitioning ||=
               Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.type = type
@@ -193,6 +209,7 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_expiration
+          return nil if reference?
           ensure_full_data!
           @gapi.time_partitioning.expiration_ms / 1_000 if
               time_partitioning? &&
@@ -205,6 +222,10 @@ module Google
         # The table must also be partitioned.
         #
         # See {Table#time_partitioning_type=}.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Integer] expiration An expiration time, in seconds,
         #   for data in partitions.
@@ -222,6 +243,7 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_expiration= expiration
+          reload! unless resource_full?
           @gapi.time_partitioning ||=
               Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.expiration_ms = expiration * 1000
@@ -240,6 +262,7 @@ module Google
         # @!group Attributes
         #
         def id
+          return nil if reference?
           @gapi.id
         end
 
@@ -274,7 +297,7 @@ module Google
         #
         def query_id standard_sql: nil, legacy_sql: nil
           if Convert.resolve_legacy_sql standard_sql, legacy_sql
-            "[#{id}]"
+            "[#{project_id}:#{dataset_id}.#{table_id}]"
           else
             "`#{project_id}.#{dataset_id}.#{table_id}`"
           end
@@ -288,17 +311,23 @@ module Google
         # @!group Attributes
         #
         def name
+          return nil if reference?
           @gapi.friendly_name
         end
 
         ##
         # Updates the name of the table.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_name The new friendly name.
         #
         # @!group Attributes
         #
         def name= new_name
+          reload! unless resource_full?
           @gapi.update! friendly_name: new_name
           patch_gapi! :friendly_name
         end
@@ -311,6 +340,7 @@ module Google
         # @!group Attributes
         #
         def etag
+          return nil if reference?
           ensure_full_data!
           @gapi.etag
         end
@@ -323,6 +353,7 @@ module Google
         # @!group Attributes
         #
         def api_url
+          return nil if reference?
           ensure_full_data!
           @gapi.self_link
         end
@@ -335,6 +366,7 @@ module Google
         # @!group Attributes
         #
         def description
+          return nil if reference?
           ensure_full_data!
           @gapi.description
         end
@@ -342,11 +374,16 @@ module Google
         ##
         # Updates the user-friendly description of the table.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_description The new user-friendly description.
         #
         # @!group Attributes
         #
         def description= new_description
+          reload! unless resource_full?
           @gapi.update! description: new_description
           patch_gapi! :description
         end
@@ -359,6 +396,7 @@ module Google
         # @!group Data
         #
         def bytes_count
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.num_bytes
@@ -375,6 +413,7 @@ module Google
         # @!group Data
         #
         def rows_count
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.num_rows
@@ -391,6 +430,7 @@ module Google
         # @!group Attributes
         #
         def created_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
@@ -409,6 +449,7 @@ module Google
         # @!group Attributes
         #
         def expires_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.expiration_time) / 1000.0)
@@ -425,6 +466,7 @@ module Google
         # @!group Attributes
         #
         def modified_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
@@ -436,11 +478,14 @@ module Google
         ##
         # Checks if the table's type is "TABLE".
         #
-        # @return [Boolean] `true` when the type is `TABLE`, `false` otherwise.
+        # @return [Boolean] `true` when the type is `TABLE` or if the table was
+        #   created without retrieving the resource representation from the
+        #   BigQuery service, `false` otherwise.
         #
         # @!group Attributes
         #
         def table?
+          return nil if reference?
           @gapi.type == "TABLE"
         end
 
@@ -452,6 +497,7 @@ module Google
         # @!group Attributes
         #
         def view?
+          return nil if reference?
           @gapi.type == "VIEW"
         end
 
@@ -464,6 +510,7 @@ module Google
         # @!group Attributes
         #
         def external?
+          return nil if reference?
           @gapi.type == "EXTERNAL"
         end
 
@@ -476,6 +523,7 @@ module Google
         # @!group Attributes
         #
         def location
+          return nil if reference?
           ensure_full_data!
           @gapi.location
         end
@@ -503,6 +551,7 @@ module Google
         # @!group Attributes
         #
         def labels
+          return nil if reference?
           m = @gapi.labels
           m = m.to_h if m.respond_to? :to_h
           m.dup.freeze
@@ -512,6 +561,10 @@ module Google
         # Updates the hash of user-provided labels associated with this table.
         # Labels are used to organize and group tables. See [Using
         # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] labels A hash containing key/value
         #   pairs.
@@ -535,6 +588,7 @@ module Google
         # @!group Attributes
         #
         def labels= labels
+          reload! unless resource_full?
           @gapi.labels = labels
           patch_gapi! :labels
         end
@@ -543,6 +597,10 @@ module Google
         # Returns the table's schema. This method can also be used to set,
         # replace, or add to the schema by passing a block. See {Schema} for
         # available methods.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Boolean] replace Whether to replace the existing schema with
         #   the new schema. If `true`, the fields will replace the existing
@@ -572,7 +630,8 @@ module Google
         # @!group Attributes
         #
         def schema replace: false
-          ensure_full_data!
+          return nil if reference? && !block_given?
+          reload! unless resource_full?
           schema_builder = Schema.from_gapi @gapi.schema
           if block_given?
             schema_builder = Schema.from_gapi if replace
@@ -604,6 +663,7 @@ module Google
         # @!group Attributes
         #
         def fields
+          return nil if reference?
           schema.fields
         end
 
@@ -626,6 +686,7 @@ module Google
         # @!group Attributes
         #
         def headers
+          return nil if reference?
           schema.headers
         end
 
@@ -647,6 +708,8 @@ module Google
         #   @!group Attributes
         #
         def external
+          return nil if reference?
+          ensure_full_data!
           return nil if @gapi.external_data_configuration.nil?
           External.from_gapi(@gapi.external_data_configuration).freeze
         end
@@ -661,6 +724,10 @@ module Google
         # Use only if the table represents an External Data Source. See
         # {#external?} and {External::DataSource}.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
@@ -669,6 +736,7 @@ module Google
         # @!group Attributes
         #
         def external= external
+          reload! unless resource_full?
           @gapi.external_data_configuration = external.to_gapi
           patch_gapi! :external_data_configuration
         end
@@ -684,6 +752,7 @@ module Google
         # @!group Attributes
         #
         def buffer_bytes
+          return nil if reference?
           ensure_full_data!
           @gapi.streaming_buffer.estimated_bytes if @gapi.streaming_buffer
         end
@@ -699,6 +768,7 @@ module Google
         # @!group Attributes
         #
         def buffer_rows
+          return nil if reference?
           ensure_full_data!
           @gapi.streaming_buffer.estimated_rows if @gapi.streaming_buffer
         end
@@ -713,6 +783,7 @@ module Google
         # @!group Attributes
         #
         def buffer_oldest_at
+          return nil if reference?
           ensure_full_data!
           return nil unless @gapi.streaming_buffer
           oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
@@ -765,6 +836,7 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           ensure_service!
+          reload! unless resource_full?
           options = { token: token, max: max, start: start }
           data_json = service.list_tabledata \
             dataset_id, table_id, options
@@ -1534,6 +1606,19 @@ module Google
         ##
         # Reloads the table with current data from the BigQuery service.
         #
+        # @return [Google::Cloud::Bigquery::Table] Returns the reloaded
+        #   table.
+        #
+        # @example Skip retrieving the table from the service, then load it:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.reload!
+        #
         # @!group Lifecycle
         #
         def reload!
@@ -1542,6 +1627,128 @@ module Google
           @gapi = gapi
         end
         alias_method :refresh!, :reload!
+
+        ##
+        # Determines whether the table exists in the BigQuery service. The
+        # result is cached locally.
+        #
+        # @return [Boolean] `true` when the table exists in the BigQuery
+        #   service, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #   table.exists? # true
+        #
+        def exists?
+          # Always true if we have a gapi object
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Whether the table was created without retrieving the resource
+        # representation from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table is just a local reference
+        #   object, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.reference? # true
+        #   table.reload!
+        #   table.reference? # false
+        #
+        def reference?
+          @gapi.nil?
+        end
+
+        ##
+        # Whether the table was created with a resource representation from
+        # the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.resource? # false
+        #   table.reload!
+        #   table.resource? # true
+        #
+        def resource?
+          !@gapi.nil?
+        end
+
+        ##
+        # Whether the table was created with a partial resource representation
+        # from the BigQuery service by retrieval through {Dataset#tables}.
+        # See [Tables: list
+        # response](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#response)
+        # for the contents of the partial representation. Accessing any
+        # attribute outside of the partial representation will result in loading
+        # the full representation.
+        #
+        # @return [Boolean] `true` when the table was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.tables.first
+        #
+        #   table.resource_partial? # true
+        #   table.description # Loads the full resource.
+        #   table.resource_partial? # false
+        #
+        def resource_partial?
+          @gapi.is_a? Google::Apis::BigqueryV2::TableList::Table
+        end
+
+        ##
+        # Whether the table was created with a full resource representation
+        # from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.resource_full? # true
+        #
+        def resource_full?
+          @gapi.is_a? Google::Apis::BigqueryV2::Table
+        end
 
         ##
         # @private New Table from a Google API Client object.
@@ -1553,12 +1760,36 @@ module Google
           end
         end
 
+        ##
+        # @private New lazy Table object without making an HTTP request.
+        def self.new_reference project_id, dataset_id, table_id, service
+          # TODO: raise if dataset_id or table_id is nil?
+          new.tap do |b|
+            reference_gapi = Google::Apis::BigqueryV2::TableReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id,
+              table_id: table_id
+            )
+            b.service = service
+            b.instance_variable_set :@reference, reference_gapi
+          end
+        end
+
         protected
 
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
           fail "Must have active connection" unless service
+        end
+
+        ##
+        # Ensures the Google::Apis::BigqueryV2::Table object has been loaded
+        # from the service.
+        def ensure_gapi!
+          ensure_service!
+          return unless reference?
+          reload!
         end
 
         def patch_gapi! *attributes
@@ -1613,13 +1844,7 @@ module Google
         # Load the complete representation of the table if it has been
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
-          reload_gapi! unless data_complete?
-        end
-
-        def reload_gapi!
-          ensure_service!
-          gapi = service.get_table dataset_id, table_id
-          @gapi = gapi
+          reload! unless data_complete?
         end
 
         def data_complete?

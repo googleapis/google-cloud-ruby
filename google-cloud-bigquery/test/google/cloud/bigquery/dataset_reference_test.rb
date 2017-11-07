@@ -19,7 +19,6 @@ require "uri"
 describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
-  let(:dataset_name) { "My Dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:table_description) { "This is my table" }
@@ -27,13 +26,6 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   let(:view_name) { "My View" }
   let(:view_description) { "This is my view" }
   let(:query) { "SELECT * FROM [table]" }
-  let(:default_expiration) { 999 }
-  let(:etag) { "etag123456789" }
-  let(:location_code) { "US" }
-  let(:labels) { { "foo" => "bar" } }
-  let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset_id}" }
-  let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
-  let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
 
   it "knows its attributes" do
@@ -194,13 +186,5 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
   def find_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
-  end
-
-  def list_tables_gapi count = 2, token = nil, total = nil
-    tables = count.times.map { random_table_small_hash(dataset_id) }
-    hash = {"kind" => "bigquery#tableList", "tables" => tables,
-            "totalItems" => (total || count)}
-    hash["nextPageToken"] = token unless token.nil?
-    Google::Apis::BigqueryV2::TableList.from_json hash.to_json
   end
 end

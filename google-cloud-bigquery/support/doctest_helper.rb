@@ -586,6 +586,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Table#exists?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Table#extract" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
@@ -668,6 +675,42 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project-id", "my_dataset", Google::Apis::BigqueryV2::Table]
       mock.expect :patch_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#reference?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#reload!" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#resource?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#resource_full?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#resource_partial?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project-id", "my_dataset"]
+      mock.expect :list_tables, list_tables_gapi, ["my-project-id", "my_dataset", Hash]
       mock.expect :get_table, table_full_gapi, ["my-project-id", "my_dataset", "my_table"]
     end
   end
