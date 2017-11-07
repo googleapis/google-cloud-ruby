@@ -69,7 +69,7 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-            @grpc.name.split("/")[1]
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
