@@ -107,7 +107,7 @@ module Google
         #   snapshot.expiration_time
         #
         def expiration_time
-          self.class.timestamp_from_grpc @grpc.expiration_time
+          self.class.timestamp_from_grpc @grpc.expire_time
         end
 
         ##
