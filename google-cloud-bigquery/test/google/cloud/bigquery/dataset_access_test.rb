@@ -110,7 +110,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
   describe :view do
     let(:view_id) { "new-view" }
     let(:view_gapi) { random_view_gapi dataset_id, view_id }
-    let(:view) { Google::Cloud::Bigquery::View.from_gapi view_gapi,
+    let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi,
                                                   bigquery.service }
 
     it "adds an access entry with specifying a view object" do

@@ -496,7 +496,14 @@ module Google
         end
 
         ##
-        # Creates a new view table from the given query.
+        # Creates a new [view](https://cloud.google.com/bigquery/docs/views)
+        # table, which is a virtual table defined by the given SQL query.
+        #
+        # BigQuery's views are logical views, not materialized views, which
+        # means that the query that defines the view is re-executed every time
+        # the view is queried. Queries are billed according to the total amount
+        # of data in all table fields referenced directly or indirectly by the
+        # top-level query. (See {Table#view?} and {Table#query}.)
         #
         # @param [String] table_id The ID of the view table. The ID must contain
         #   only letters (a-z, A-Z), numbers (0-9), or underscores (_). The
@@ -521,7 +528,7 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::View] A new view object.
+        # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -574,9 +581,8 @@ module Google
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
         #
-        # @return [Google::Cloud::Bigquery::Table,
-        #   Google::Cloud::Bigquery::View, nil] Returns `nil` if the table does
-        #   not exist
+        # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
+        #   table does not exist.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -616,9 +622,8 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of tables to return.
         #
-        # @return [Array<Google::Cloud::Bigquery::Table>,
-        #   Array<Google::Cloud::Bigquery::View>] An array of tables and/or
-        #   views(See {Google::Cloud::Bigquery::Table::List})
+        # @return [Array<Google::Cloud::Bigquery::Table>] An array of tables
+        #   (See {Google::Cloud::Bigquery::Table::List})
         #
         # @example
         #   require "google/cloud/bigquery"

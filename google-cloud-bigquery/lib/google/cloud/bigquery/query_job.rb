@@ -24,7 +24,7 @@ module Google
       #
       # A {Job} subclass representing a query operation that may be performed
       # on a {Table}. A QueryJob instance is created when you call
-      # {Project#query_job}, {Dataset#query_job}, or {View#data}.
+      # {Project#query_job}, {Dataset#query_job}.
       #
       # @see https://cloud.google.com/bigquery/querying-data Querying Data
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API

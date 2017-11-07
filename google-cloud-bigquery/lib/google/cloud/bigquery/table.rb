@@ -15,7 +15,6 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
-require "google/cloud/bigquery/view"
 require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/cloud/bigquery/schema"
@@ -33,6 +32,15 @@ module Google
       # A named resource representing a BigQuery table that holds zero or more
       # records. Every table is defined by a schema that may contain nested and
       # repeated fields.
+      #
+      # The Table class can also represent a
+      # [view](https://cloud.google.com/bigquery/docs/views), which is a virtual
+      # table defined by a SQL query. BigQuery's views are logical views, not
+      # materialized views, which means that the query that defines the view is
+      # re-executed every time the view is queried. Queries are billed according
+      # to the total amount of data in all table fields referenced directly or
+      # indirectly by the top-level query. (See {#view?}, {#query}, {#query=},
+      # and {Dataset#create_view}.)
       #
       # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
       #   Preparing Data for BigQuery
@@ -65,6 +73,15 @@ module Google
       #     ]
       #   }
       #   table.insert row
+      #
+      # @example Creating a BigQuery view:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   view = dataset.create_view "my_view",
+      #            "SELECT name, age FROM `my_project.my_dataset.my_table`"
+      #   view.view? # true
       #
       class Table
         ##
@@ -490,7 +507,8 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "VIEW".
+        # Checks if the table's type is "VIEW", indicating that the table
+        # represents a BigQuery view. See {Dataset#create_view}.
         #
         # @return [Boolean] `true` when the type is `VIEW`, `false` otherwise.
         #
@@ -502,7 +520,9 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "EXTERNAL".
+        # Checks if the table's type is "EXTERNAL", indicating that the table
+        # represents an External Data Source. See {#external?} and
+        # {External::DataSource}.
         #
         # @return [Boolean] `true` when the type is `EXTERNAL`, `false`
         #   otherwise.
@@ -594,9 +614,9 @@ module Google
         end
 
         ##
-        # Returns the table's schema. This method can also be used to set,
-        # replace, or add to the schema by passing a block. See {Schema} for
-        # available methods.
+        # Returns the table's schema. If the table is not a view (See {#view?}),
+        # this method can also be used to set, replace, or add to the schema by
+        # passing a block. See {Schema} for available methods.
         #
         # If the table is not a full resource representation (see
         # {#resource_full?}), the full representation will be retrieved before
@@ -792,6 +812,135 @@ module Google
           rescue
             nil
           end
+        end
+
+        ##
+        # The query that executes each time the view is loaded.
+        #
+        # @return [String] The query that defines the view.
+        #
+        # @!group Attributes
+        #
+        def query
+          @gapi.view.query if @gapi.view
+        end
+
+        ##
+        # Updates the query that executes each time the view is loaded.
+        #
+        # This sets the query using standard SQL. To specify legacy SQL or to
+        # use user-defined function resources use (#set_query) instead.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+        #   Reference
+        #
+        # @param [String] new_query The query that defines the view.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.query = "SELECT first_name FROM " \
+        #                  "`my_project.my_dataset.my_table`"
+        #
+        # @!group Lifecycle
+        #
+        def query= new_query
+          set_query new_query
+        end
+
+        ##
+        # Updates the query that executes each time the view is loaded. Allows
+        # setting of standard vs. legacy SQL and user-defined function
+        # resources.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+        #   Reference
+        #
+        # @param [String] query The query that defines the view.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect. Optional. The default value is true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. Optional. The default value is false.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.set_query "SELECT first_name FROM " \
+        #                    "`my_project.my_dataset.my_table`",
+        #                  standard_sql: true
+        #
+        # @!group Lifecycle
+        #
+        def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
+          @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new \
+            query: query,
+            use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
+                                                       legacy_sql),
+            user_defined_function_resources: udfs_gapi(udfs)
+          patch_gapi! :view
+        end
+
+        ##
+        # Checks if the view's query is using legacy sql.
+        #
+        # @return [Boolean] `true` when legacy sql is used, `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def query_legacy_sql?
+          val = @gapi.view.use_legacy_sql
+          return true if val.nil?
+          val
+        end
+
+        ##
+        # Checks if the view's query is using standard sql.
+        #
+        # @return [Boolean] `true` when standard sql is used, `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def query_standard_sql?
+          !query_legacy_sql?
+        end
+
+        ##
+        # The user-defined function resources used in the view's query. May be
+        # either a code resource to load from a Google Cloud Storage URI
+        # (`gs://bucket/path`), or an inline resource that contains code for a
+        # user-defined function (UDF). Providing an inline code resource is
+        # equivalent to providing a URI for a file containing the same code. See
+        # [User-Defined
+        # Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @return [Array<String>] An array containing Google Cloud Storage URIs
+        #   and/or inline source code.
+        #
+        # @!group Attributes
+        #
+        def query_udfs
+          udfs_gapi = @gapi.view.user_defined_function_resources
+          return [] if udfs_gapi.nil?
+          Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
         end
 
         ##
@@ -1753,8 +1902,7 @@ module Google
         ##
         # @private New Table from a Google API Client object.
         def self.from_gapi gapi, conn
-          klass = class_for gapi
-          klass.new.tap do |f|
+          new.tap do |f|
             f.gapi = gapi
             f.service = conn
           end
@@ -1807,11 +1955,6 @@ module Google
           reload!
         end
 
-        def self.class_for gapi
-          return View if gapi.type == "VIEW"
-          self
-        end
-
         def load_storage url, options = {}
           # Convert to storage URL
           url = url.to_gs_url if url.respond_to? :to_gs_url
@@ -1849,6 +1992,21 @@ module Google
 
         def data_complete?
           @gapi.is_a? Google::Apis::BigqueryV2::Table
+        end
+
+        ##
+        # Supports views.
+        def udfs_gapi array_or_str
+          return [] if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
 
         private

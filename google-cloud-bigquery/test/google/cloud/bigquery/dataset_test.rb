@@ -318,7 +318,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -352,7 +352,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.name.must_equal view_name
@@ -384,7 +384,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -414,7 +414,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.wont_be :query_standard_sql?
@@ -449,7 +449,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -481,7 +481,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -513,7 +513,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?

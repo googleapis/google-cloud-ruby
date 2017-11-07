@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::View, :attributes, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
   # Create a view object with the project's mocked connection object
   let(:table_id) { "my_view" }
   let(:table_name) { "My View" }
