@@ -208,7 +208,7 @@ module Google
 
           def analyze_sentiment \
               document,
-              encoding_type: nil,
+              encoding_type,
               options: nil
             req = {
               document: document,
@@ -242,7 +242,7 @@ module Google
 
           def analyze_entities \
               document,
-              encoding_type: nil,
+              encoding_type,
               options: nil
             req = {
               document: document,
@@ -309,7 +309,7 @@ module Google
 
           def analyze_syntax \
               document,
-              encoding_type: nil,
+              encoding_type,
               options: nil
             req = {
               document: document,
@@ -376,7 +376,7 @@ module Google
           def annotate_text \
               document,
               features,
-              encoding_type: nil,
+              encoding_type,
               options: nil
             req = {
               document: document,
