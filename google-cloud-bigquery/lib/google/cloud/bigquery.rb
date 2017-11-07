@@ -347,8 +347,8 @@ module Google
     # table.insert rows
     # ```
     #
-    # To avoid making RPCs (network requests) to retrieve the dataset
-    # resource when streaming records, pass the `skip_lookup` option. This
+    # To avoid making RPCs (network requests) to retrieve the dataset and table
+    # resources when streaming records, pass the `skip_lookup` option. This
     # creates local objects without verifying that the resources exist on the
     # BigQuery service.
     #
@@ -357,7 +357,7 @@ module Google
     #
     # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset", skip_lookup: true
-    # table = dataset.table "people"
+    # table = dataset.table "people", skip_lookup: true
     #
     # rows = [
     #     {

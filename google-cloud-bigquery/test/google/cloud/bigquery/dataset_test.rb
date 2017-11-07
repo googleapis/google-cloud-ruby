@@ -722,12 +722,4 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   def find_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
   end
-
-  def list_tables_gapi count = 2, token = nil, total = nil
-    tables = count.times.map { random_table_small_hash(dataset_id) }
-    hash = {"kind" => "bigquery#tableList", "tables" => tables,
-            "totalItems" => (total || count)}
-    hash["nextPageToken"] = token unless token.nil?
-    Google::Apis::BigqueryV2::TableList.from_json hash.to_json
-  end
 end

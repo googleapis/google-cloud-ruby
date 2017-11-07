@@ -221,34 +221,4 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     job.labels.must_equal labels
   end
-
-  def copy_job_gapi source, target, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id)
-  end
-
-  def copy_job_json source, target, job_id
-    {
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => job_id
-      },
-      "configuration" => {
-        "copy" => {
-          "sourceTable" => {
-            "projectId" => source.project_id,
-            "datasetId" => source.dataset_id,
-            "tableId" => source.table_id
-          },
-          "destinationTable" => {
-            "projectId" => target.project_id,
-            "datasetId" => target.dataset_id,
-            "tableId" => target.table_id
-          },
-          "createDisposition" => nil,
-          "writeDisposition" => nil
-        },
-        "dryRun" => nil
-      }
-    }.to_json
-  end
 end

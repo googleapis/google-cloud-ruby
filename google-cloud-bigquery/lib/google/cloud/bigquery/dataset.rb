@@ -569,6 +569,10 @@ module Google
         # Retrieves an existing table by ID.
         #
         # @param [String] table_id The ID of a table.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
         #
         # @return [Google::Cloud::Bigquery::Table,
         #   Google::Cloud::Bigquery::View, nil] Returns `nil` if the table does
@@ -583,10 +587,22 @@ module Google
         #   table = dataset.table "my_table"
         #   puts table.name
         #
+        # @example Create just a local reference object with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
         # @!group Table
         #
-        def table table_id
+        def table table_id, skip_lookup: nil
           ensure_service!
+          if skip_lookup
+            return Table.new_reference project_id, dataset_id, table_id, service
+          end
           gapi = service.get_table dataset_id, table_id
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -1575,8 +1591,8 @@ module Google
         # Determines whether the dataset exists in the BigQuery service. The
         # result is cached locally.
         #
-        # @return [Boolean] `true` when the exists in the BigQuery service,
-        #   `false` otherwise.
+        # @return [Boolean] `true` when the dataset exists in the BigQuery
+        #   service, `false` otherwise.
         #
         # @example
         #   require "google/cloud/bigquery"

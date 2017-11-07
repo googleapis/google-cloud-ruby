@@ -30,6 +30,14 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "knows its attributes" do
+    table.table_id.must_equal table_id
+    table.dataset_id.must_equal dataset
+    table.project_id.must_equal project
+    table.table_ref.must_be_kind_of Google::Apis::BigqueryV2::TableReference
+    table.table_ref.table_id.must_equal table_id
+    table.table_ref.dataset_id.must_equal dataset
+    table.table_ref.project_id.must_equal project
+
     table.name.must_equal table_name
     table.description.must_equal description
     table.etag.must_equal etag
@@ -98,22 +106,5 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.delete
 
     mock.verify
-  end
-
-  it "can reload itself" do
-    new_description = "New description of the table."
-
-    mock = Minitest::Mock.new
-    table_hash = random_table_hash dataset, table_id, table_name, new_description
-    mock.expect :get_table, Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json),
-      [project, dataset, table_id]
-    table.service.mocked_service = mock
-
-    table.description.must_equal description
-    table.reload!
-
-    mock.verify
-
-    table.description.must_equal new_description
   end
 end
