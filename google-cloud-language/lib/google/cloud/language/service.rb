@@ -78,21 +78,22 @@ module Google
             extract_syntax: syntax, extract_entities: entities,
             extract_document_sentiment: sentiment)
           execute do
-            service.annotate_text doc_grpc, features, default_encoding,
+            service.annotate_text doc_grpc, features,
+                                  encoding_type: default_encoding,
                                   options: default_options
           end
         end
 
         def syntax doc_grpc
           execute do
-            service.analyze_syntax doc_grpc, default_encoding,
+            service.analyze_syntax doc_grpc, encoding_type: default_encoding,
                                    options: default_options
           end
         end
 
         def entities doc_grpc
           execute do
-            service.analyze_entities doc_grpc, default_encoding,
+            service.analyze_entities doc_grpc, encoding_type: default_encoding,
                                      options: default_options
           end
         end
