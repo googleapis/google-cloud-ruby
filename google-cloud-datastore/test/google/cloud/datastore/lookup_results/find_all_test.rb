@@ -72,8 +72,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   end
 
   it "paginates" do
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, nil, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, nil, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: nil, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     first_entities = dataset.find_all keys
     first_entities.count.must_equal 2
@@ -100,8 +100,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
   it "paginates with consistency" do
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     first_entities = dataset.find_all keys, consistency: :eventual
     first_entities.count.must_equal 2
@@ -137,8 +137,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     dataset.transaction do |tx|
       first_entities = tx.find_all keys
@@ -166,8 +166,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   end
 
   it "paginates with next? and next" do
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, nil, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, nil, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: nil, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     first_entities = dataset.find_all keys
     first_entities.next?.must_equal true
@@ -196,8 +196,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
   it "paginates with next? and next and consistency" do
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     first_entities = dataset.find_all keys, consistency: :eventual
     first_entities.next?.must_equal true
@@ -235,8 +235,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     dataset.transaction do |tx|
       first_entities = tx.find_all keys
@@ -266,8 +266,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   end
 
   it "paginates with all" do
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, nil, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, nil, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: nil, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     entities = dataset.find_all(keys).all.to_a
     entities.count.must_equal 4
@@ -278,8 +278,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
   it "paginates with all and consistency" do
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     entities = dataset.find_all(keys, consistency: :eventual).all.to_a
     entities.count.must_equal 4
@@ -299,8 +299,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, read_options, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, read_options, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     dataset.transaction do |tx|
       entities = tx.find_all(keys).all.to_a
@@ -312,8 +312,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   end
 
   it "iterates with all using Enumerator" do
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, nil, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, nil, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: nil, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     entities = dataset.find_all(keys).all.take(3)
     entities.count.must_equal 3
@@ -323,8 +323,8 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
   end
 
   it "iterates with all and request_limit set" do
-    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, nil, first_keys, options: default_options]
-    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, nil, second_keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: nil, options: default_options]
+    dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     # This test is a bit handwavy, as there aren't more results to lookup.
     # But if you reduce the limit it will not make additional call.

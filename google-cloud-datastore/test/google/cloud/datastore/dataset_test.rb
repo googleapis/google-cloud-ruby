@@ -456,7 +456,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a kind and id" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", 123
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -464,7 +464,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a kind and name" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", "thingie"
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -472,7 +472,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a key" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = dataset.find key
@@ -481,7 +481,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find is aliased to get" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.get "ds-test", 123
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -490,7 +490,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find can specify consistency" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     entity = dataset.find "ds-test", 123, consistency: :eventual
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -506,7 +506,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find_all takes several keys" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -522,7 +522,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find_all is aliased to lookup" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -539,7 +539,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -585,7 +585,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     it "contains deferred entities" do
       keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
               Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-      dataset.service.mocked_service.expect :lookup, lookup_res_deferred, [project, nil, keys, options: default_options]
+      dataset.service.mocked_service.expect :lookup, lookup_res_deferred, [project, keys, read_options: nil, options: default_options]
 
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -604,7 +604,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     it "contains missing entities" do
       keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
               Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-      dataset.service.mocked_service.expect :lookup, lookup_res_missing, [project, nil, keys, options: default_options]
+      dataset.service.mocked_service.expect :lookup, lookup_res_missing, [project, keys, read_options: nil, options: default_options]
 
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -733,7 +733,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2
@@ -791,7 +791,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query
     entities.count.must_equal 2
@@ -821,7 +821,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query, namespace: "foobar"
     entities.count.must_equal 2
@@ -850,7 +850,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql
@@ -882,7 +882,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run will fulfill a gql query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql, namespace: "foobar"
@@ -913,7 +913,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql
@@ -945,7 +945,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a gql query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql, namespace: "foobar"

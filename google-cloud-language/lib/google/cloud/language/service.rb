@@ -86,22 +86,25 @@ module Google
 
         def syntax doc_grpc
           execute do
-            service.analyze_syntax doc_grpc, encoding_type: default_encoding,
+            service.analyze_syntax doc_grpc,
+                                   encoding_type: default_encoding,
                                    options: default_options
           end
         end
 
         def entities doc_grpc
           execute do
-            service.analyze_entities doc_grpc, encoding_type: default_encoding,
+            service.analyze_entities doc_grpc,
+                                     encoding_type: default_encoding,
                                      options: default_options
           end
         end
 
         def sentiment doc_grpc
           execute do
-            service.analyze_sentiment doc_grpc, encoding_type: default_encoding,
-                                                options: default_options
+            service.analyze_sentiment doc_grpc,
+                                      encoding_type: default_encoding,
+                                      options: default_options
           end
         end
 

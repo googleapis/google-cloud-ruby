@@ -337,7 +337,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
   it "find can take a key" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
@@ -348,7 +348,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
              Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -364,7 +364,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options, query: query_grpc, gql_query: nil, options: default_options]
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: read_options, query: query_grpc, gql_query: nil, options: default_options]
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
