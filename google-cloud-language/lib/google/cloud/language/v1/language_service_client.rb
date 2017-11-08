@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ module Google
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -208,7 +208,7 @@ module Google
 
           def analyze_sentiment \
               document,
-              encoding_type,
+              encoding_type: nil,
               options: nil
             req = {
               document: document,
@@ -242,7 +242,7 @@ module Google
 
           def analyze_entities \
               document,
-              encoding_type,
+              encoding_type: nil,
               options: nil
             req = {
               document: document,
@@ -309,7 +309,7 @@ module Google
 
           def analyze_syntax \
               document,
-              encoding_type,
+              encoding_type: nil,
               options: nil
             req = {
               document: document,
@@ -376,7 +376,7 @@ module Google
           def annotate_text \
               document,
               features,
-              encoding_type,
+              encoding_type: nil,
               options: nil
             req = {
               document: document,
