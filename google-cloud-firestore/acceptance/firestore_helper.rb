@@ -47,6 +47,14 @@ module Acceptance
       super
     end
 
+    def root_path
+      $firestore_prefix
+    end
+
+    def root_col
+      @firestore.col root_path
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 
@@ -55,16 +63,16 @@ module Acceptance
       addl.include? :firestore
     end
 
-    def self.run_one_method klass, method_name, reporter
-      result = nil
-      reporter.prerecord klass, method_name
-      (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
-        puts "Retrying #{klass}##{method_name} (#{try})"
-      end
-      reporter.record result
-    end
+    # def self.run_one_method klass, method_name, reporter
+    #   result = nil
+    #   reporter.prerecord klass, method_name
+    #   (1..3).each do |try|
+    #     result = Minitest.run_one_method(klass, method_name)
+    #     break if (result.passed? || result.skipped?)
+    #     puts "Retrying #{klass}##{method_name} (#{try})"
+    #   end
+    #   reporter.record result
+    # end
   end
 end
 
@@ -72,10 +80,16 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$firestore_prefix = "gcloud-firestore-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
+$firestore_prefix = "gcloud-#{t}-#{SecureRandom.hex(4)}".downcase
 
 def clean_up_firestore
-  # Nothing do do yet...
+  puts "Cleaning up documents and collections after firestore tests."
+
+  $firestore.batch do |b|
+    b.col($firestore_prefix).select(:__name__).all_descendants.run do |doc|
+      b.delete doc
+    end
+  end
 rescue => e
   puts "Error while cleaning up after firestore tests.\n\n#{e}"
 end

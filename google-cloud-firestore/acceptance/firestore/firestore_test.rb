@@ -16,13 +16,44 @@ require "firestore_helper"
 
 describe "Firestore", :firestore do
   it "lists root collections" do
-    skip
-    cols = firestore.collections.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::Collection
-      col.must_be :reference?
+    root_col.add # call to ensure that the collection exists
 
-      col # return the document to the resulting array
+    col_paths = firestore.collections.map do |col|
+      col.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
+
+      col.collection_path
     end
-    cols.wont_be :empty?
+
+    col_paths.wont_be :empty?
+    col_paths.must_include root_path
+  end
+
+  it "has collection method" do
+    col_ref = firestore.col "col"
+
+    col_ref.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
+    col_ref.collection_id.must_equal "col"
+    col_ref.collection_path.must_equal "col"
+  end
+
+  it "has doc method" do
+    doc_ref = firestore.doc "col/doc"
+
+    doc_ref.must_be_kind_of Google::Cloud::Firestore::Document::Reference
+    doc_ref.document_id.must_equal "doc"
+    doc_ref.document_path.must_equal "col/doc"
+  end
+
+  it "has get_all method" do
+    get_all_col = firestore.col "#{root_path}/get_all/#{SecureRandom.hex(4)}"
+
+    doc1 = get_all_col.doc "doc1"
+    doc2 = get_all_col.doc "doc2"
+
+    doc1.create foo: :a
+    doc2.create foo: :b
+
+    docs = firestore.get_all doc1, doc2
+    docs.to_a.count.must_equal 2
   end
 end
