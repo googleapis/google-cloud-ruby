@@ -596,7 +596,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
         #
-        # @example Create just a local reference object with `skip_lookup`:
+        # @example Avoid retrieving the dataset resource with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new

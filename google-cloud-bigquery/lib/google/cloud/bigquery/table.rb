@@ -156,8 +156,9 @@ module Google
         # Checks if the table is time-partitioned. See [Partitioned
         # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [Boolean] `true` when the table is time-partitioned, `false`
-        #   otherwise.
+        # @return [Boolean, nil] `true` when the table is time-partitioned, or
+        #   `false` otherwise, if the object is a resource (see {#resource?});
+        #   `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -171,7 +172,8 @@ module Google
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [String, nil] The partition type. Currently the only supported
-        #   value is "DAY".
+        #   value is "DAY", or `nil` if the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -221,7 +223,8 @@ module Google
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [Integer, nil] The expiration time, in seconds, for data in
-        #   partitions.
+        #   partitions, or `nil` if not present or the object is a reference
+        #   (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -274,7 +277,8 @@ module Google
         # `project_name:datasetId.tableId`. To use this value in queries see
         # {#query_id}.
         #
-        # @return [String] The combined ID.
+        # @return [String, nil] The combined ID, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -323,7 +327,8 @@ module Google
         ##
         # The name of the table.
         #
-        # @return [String] The friendly name.
+        # @return [String, nil] The friendly name, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -352,7 +357,8 @@ module Google
         ##
         # The ETag hash of the table.
         #
-        # @return [String] The ETag hash.
+        # @return [String, nil] The ETag hash, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -365,7 +371,8 @@ module Google
         ##
         # A URL that can be used to access the table using the REST API.
         #
-        # @return [String] A REST URL for the resource.
+        # @return [String, nil] A REST URL for the resource, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -378,7 +385,8 @@ module Google
         ##
         # A user-friendly description of the table.
         #
-        # @return [String] The description.
+        # @return [String, nil] The description, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -408,7 +416,8 @@ module Google
         ##
         # The number of bytes in the table.
         #
-        # @return [Integer] The count of bytes in the table.
+        # @return [Integer, nil] The count of bytes in the table, or `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Data
         #
@@ -425,7 +434,8 @@ module Google
         ##
         # The number of rows in the table.
         #
-        # @return [Integer] The count of rows in the table.
+        # @return [Integer, nil] The count of rows in the table, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Data
         #
@@ -442,7 +452,8 @@ module Google
         ##
         # The time when this table was created.
         #
-        # @return [Time, nil] The creation time.
+        # @return [Time, nil] The creation time, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -461,7 +472,8 @@ module Google
         # If not present, the table will persist indefinitely.
         # Expired tables will be deleted and their storage reclaimed.
         #
-        # @return [Time, nil] The expiration time.
+        # @return [Time, nil] The expiration time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -478,7 +490,8 @@ module Google
         ##
         # The date when this table was last modified.
         #
-        # @return [Time, nil] The last modified time.
+        # @return [Time, nil] The last modified time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -495,9 +508,9 @@ module Google
         ##
         # Checks if the table's type is "TABLE".
         #
-        # @return [Boolean] `true` when the type is `TABLE` or if the table was
-        #   created without retrieving the resource representation from the
-        #   BigQuery service, `false` otherwise.
+        # @return [Boolean, nil] `true` when the type is `TABLE`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -510,7 +523,9 @@ module Google
         # Checks if the table's type is "VIEW", indicating that the table
         # represents a BigQuery view. See {Dataset#create_view}.
         #
-        # @return [Boolean] `true` when the type is `VIEW`, `false` otherwise.
+        # @return [Boolean, nil] `true` when the type is `VIEW`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -524,8 +539,9 @@ module Google
         # represents an External Data Source. See {#external?} and
         # {External::DataSource}.
         #
-        # @return [Boolean] `true` when the type is `EXTERNAL`, `false`
-        #   otherwise.
+        # @return [Boolean, nil] `true` when the type is `EXTERNAL`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -538,7 +554,7 @@ module Google
         # The geographic location where the table should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String] The location code.
+        # @return [String, nil] The location code.
         #
         # @!group Attributes
         #
@@ -556,7 +572,7 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
-        # @return [Hash<String, String>] A hash containing key/value pairs.
+        # @return [Hash<String, String>, nil] A hash containing key/value pairs.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -619,8 +635,7 @@ module Google
         # passing a block. See {Schema} for available methods.
         #
         # If the table is not a full resource representation (see
-        # {#resource_full?}), the full representation will be retrieved before
-        # the update to comply with ETag-based optimistic concurrency control.
+        # {#resource_full?}), the full representation will be retrieved.
         #
         # @param [Boolean] replace Whether to replace the existing schema with
         #   the new schema. If `true`, the fields will replace the existing
@@ -630,7 +645,7 @@ module Google
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
         #
-        # @return [Google::Cloud::Bigquery::Schema] A frozen schema object.
+        # @return [Google::Cloud::Bigquery::Schema, nil] A frozen schema object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -667,7 +682,7 @@ module Google
         ##
         # The fields of the table, obtained from its schema.
         #
-        # @return [Array<Schema::Field>] An array of field objects.
+        # @return [Array<Schema::Field>, nil] An array of field objects.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -690,7 +705,7 @@ module Google
         ##
         # The names of the columns in the table, obtained from its schema.
         #
-        # @return [Array<Symbol>] An array of column names.
+        # @return [Array<Symbol>, nil] An array of column names.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -723,7 +738,7 @@ module Google
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
-        # @return [External::DataSource] The external data source.
+        # @return [External::DataSource, nil] The external data source.
         #
         #   @!group Attributes
         #
@@ -767,7 +782,9 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
-        # @return [Integer] The estimated number of bytes in the buffer.
+        # @return [Integer, nil] The estimated number of bytes in the buffer, or
+        #   `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -783,7 +800,9 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
-        # @return [Integer] The estimated number of rows in the buffer.
+        # @return [Integer, nil] The estimated number of rows in the buffer, or
+        #   `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -798,7 +817,8 @@ module Google
         # buffer, if one is present. This field will be absent if the table is
         # not being streamed to or if there is no data in the streaming buffer.
         #
-        # @return [Time, nil] The oldest entry time.
+        # @return [Time, nil] The oldest entry time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -945,6 +965,10 @@ module Google
 
         ##
         # Retrieves data from the table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the data retrieval.
         #
         # @param [String] token Page token, returned by a previous call,
         #   identifying the result set.
@@ -1653,6 +1677,19 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   table.insert rows
+        #
+        # @example Avoid retrieving the dataset and table with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   table = dataset.table "my_table", skip_lookup: true
         #
         #   rows = [
         #     { "first_name" => "Alice", "age" => 21 },

@@ -101,7 +101,8 @@ module Google
         ##
         # A descriptive name for the dataset.
         #
-        # @return [String] The friendly name.
+        # @return [String, nil] The friendly name, or `nil` if the object is
+        #   a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -117,7 +118,8 @@ module Google
         # {#resource_full?}), the full representation will be retrieved before
         # the update to comply with ETag-based optimistic concurrency control.
         #
-        # @param [String] new_name The new friendly name.
+        # @param [String] new_name The new friendly name, or `nil` if the object
+        #   is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -130,7 +132,8 @@ module Google
         ##
         # The ETag hash of the dataset.
         #
-        # @return [String] The ETag hash.
+        # @return [String, nil] The ETag hash, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -143,7 +146,8 @@ module Google
         ##
         # A URL that can be used to access the dataset using the REST API.
         #
-        # @return [String] A REST URL for the resource.
+        # @return [String, nil] A REST URL for the resource, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -156,7 +160,8 @@ module Google
         ##
         # A user-friendly description of the dataset.
         #
-        # @return [String] The description.
+        # @return [String, nil] The description, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -186,7 +191,9 @@ module Google
         ##
         # The default lifetime of all tables in the dataset, in milliseconds.
         #
-        # @return [Integer] The default table expiration in milliseconds.
+        # @return [Integer, nil] The default table expiration in milliseconds,
+        #   or `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -222,7 +229,8 @@ module Google
         ##
         # The time when this dataset was created.
         #
-        # @return [Time, nil] The creation time.
+        # @return [Time, nil] The creation time, or `nil` if not present or the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -239,7 +247,8 @@ module Google
         ##
         # The date when this dataset or any of its tables was last modified.
         #
-        # @return [Time, nil] The last modified time.
+        # @return [Time, nil] The last modified time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -257,7 +266,8 @@ module Google
         # The geographic location where the dataset should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String] The location code.
+        # @return [String, nil] The location code, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -275,7 +285,8 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
-        # @return [Hash<String, String>] A hash containing key/value pairs.
+        # @return [Hash<String, String>, nil] A hash containing key/value pairs,
+        #   or `nil` if the object is a reference (see {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -593,7 +604,7 @@ module Google
         #   table = dataset.table "my_table"
         #   puts table.name
         #
-        # @example Create just a local reference object with `skip_lookup`:
+        # @example Avoid retrieving the table resource with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1768,7 +1779,7 @@ module Google
         #   ]
         #   dataset.insert "my_table", rows
         #
-        # @example Skip the network request for the dataset with `skip_lookup`:
+        # @example Avoid retrieving the dataset with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
