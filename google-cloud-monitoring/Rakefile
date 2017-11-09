@@ -155,7 +155,7 @@ end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :acccpetance do
+  task :accpetance do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring acceptance", "*"
     sh "bundle exec rake acceptance -v"
