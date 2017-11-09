@@ -172,11 +172,11 @@ def annotate_text_args overrides_hash = {}
   features_hash = { extract_syntax: true, extract_entities: true, extract_document_sentiment: true }
   features_hash.merge! overrides_hash
   features = Google::Cloud::Language::V1::AnnotateTextRequest::Features.new features_hash
-  [grpc_doc, features, :UTF8, { options: default_options }]
+  [grpc_doc, features, { encoding_type: :UTF8, options: default_options }]
 end
 
 def analyze_entities_args
-  [grpc_doc, :UTF8,  { options: default_options }]
+  [grpc_doc, { encoding_type: :UTF8, options: default_options }]
 end
 
 def analyze_sentiment_args
