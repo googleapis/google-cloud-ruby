@@ -24,7 +24,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.document text_content
     doc.service.mocked_service = mock
@@ -40,7 +40,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.document text_content, language: :en
     doc.service.mocked_service = mock
@@ -56,7 +56,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.text text_content
     doc.service.mocked_service = mock
@@ -72,7 +72,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.document text_content, format: :text, language: :en
     doc.service.mocked_service = mock
@@ -88,7 +88,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.html html_content
     doc.service.mocked_service = mock
@@ -104,7 +104,7 @@ describe Google::Cloud::Language::Document, :syntax, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeSyntaxResponse.decode_json syntax_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_syntax, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     doc = language.document html_content, format: :html, language: :en
     doc.service.mocked_service = mock
