@@ -59,8 +59,8 @@ module Google
       # and cause less contention. Cloud Spanner attempts to keep read locks
       # active as long as the transaction continues to do reads, and the
       # transaction has not been terminated by
-      # Commit or
-      # Rollback.  Long periods of
+      # {Google::Spanner::V1::Spanner::Commit Commit} or
+      # {Google::Spanner::V1::Spanner::Rollback Rollback}.  Long periods of
       # inactivity at the client may cause Cloud Spanner to release a
       # transaction's locks and abort it.
       #
@@ -69,9 +69,9 @@ module Google
       # have been completed.
       # Conceptually, a read-write transaction consists of zero or more
       # reads or SQL queries followed by
-      # Commit. At any time before
-      # Commit, the client can send a
-      # Rollback request to abort the
+      # {Google::Spanner::V1::Spanner::Commit Commit}. At any time before
+      # {Google::Spanner::V1::Spanner::Commit Commit}, the client can send a
+      # {Google::Spanner::V1::Spanner::Rollback Rollback} request to abort the
       # transaction.
       #
       # === Semantics
@@ -133,8 +133,8 @@ module Google
       # need to worry about this in practice.
       #
       # Snapshot read-only transactions do not need to call
-      # Commit or
-      # Rollback (and in fact are not
+      # {Google::Spanner::V1::Spanner::Commit Commit} or
+      # {Google::Spanner::V1::Spanner::Rollback Rollback} (and in fact are not
       # permitted to do so).
       #
       # To execute a snapshot transaction, the client specifies a timestamp
@@ -142,14 +142,14 @@ module Google
       #
       # The types of timestamp bound are:
       #
-      #   - Strong (the default).
-      #   - Bounded staleness.
-      #   - Exact staleness.
+      # * Strong (the default).
+      #   * Bounded staleness.
+      #   * Exact staleness.
       #
-      # If the Cloud Spanner database to be read is geographically distributed,
-      # stale read-only transactions can execute more quickly than strong
-      # or read-write transaction, because they are able to execute far
-      # from the leader replica.
+      #   If the Cloud Spanner database to be read is geographically distributed,
+      #   stale read-only transactions can execute more quickly than strong
+      #   or read-write transaction, because they are able to execute far
+      #   from the leader replica.
       #
       # Each type of timestamp bound is discussed in detail below.
       #
@@ -167,7 +167,7 @@ module Google
       # reads should be executed within a transaction or at an exact read
       # timestamp.
       #
-      # See TransactionOptions::ReadOnly#strong.
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#strong TransactionOptions::ReadOnly#strong}.
       #
       # === Exact Staleness
       #
@@ -188,8 +188,8 @@ module Google
       # equivalent boundedly stale concurrency modes. On the other hand,
       # boundedly stale reads usually return fresher results.
       #
-      # See TransactionOptions::ReadOnly#read_timestamp and
-      # TransactionOptions::ReadOnly#exact_staleness.
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#read_timestamp TransactionOptions::ReadOnly#read_timestamp} and
+      # {Google::Spanner::V1::TransactionOptions::ReadOnly#exact_staleness TransactionOptions::ReadOnly#exact_staleness}.
       #
       # === Bounded Staleness
       #
@@ -218,8 +218,8 @@ module Google
       # which rows will be read, it can only be used with single-use
       # read-only transactions.
       #
-      # See TransactionOptions::ReadOnly#max_staleness and
-      # TransactionOptions::ReadOnly#min_read_timestamp.
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#max_staleness TransactionOptions::ReadOnly#max_staleness} and
+      # {Google::Spanner::V1::TransactionOptions::ReadOnly#min_read_timestamp TransactionOptions::ReadOnly#min_read_timestamp}.
       #
       # === Old Read Timestamps and Garbage Collection
       #
@@ -305,7 +305,7 @@ module Google
         # @!attribute [rw] return_read_timestamp
         #   @return [true, false]
         #     If true, the Cloud Spanner-selected read timestamp is included in
-        #     the Transaction message that describes the transaction.
+        #     the {Google::Spanner::V1::Transaction Transaction} message that describes the transaction.
         class ReadOnly; end
       end
 
@@ -313,10 +313,10 @@ module Google
       # @!attribute [rw] id
       #   @return [String]
       #     +id+ may be used to identify the transaction in subsequent
-      #     Read,
-      #     ExecuteSql,
-      #     Commit, or
-      #     Rollback calls.
+      #     {Google::Spanner::V1::Spanner::Read Read},
+      #     {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql},
+      #     {Google::Spanner::V1::Spanner::Commit Commit}, or
+      #     {Google::Spanner::V1::Spanner::Rollback Rollback} calls.
       #
       #     Single-use read-only transactions do not have IDs, because
       #     single-use transactions do not support multiple requests.
@@ -324,14 +324,14 @@ module Google
       #   @return [Google::Protobuf::Timestamp]
       #     For snapshot read-only transactions, the read timestamp chosen
       #     for the transaction. Not returned by default: see
-      #     TransactionOptions::ReadOnly#return_read_timestamp.
+      #     {Google::Spanner::V1::TransactionOptions::ReadOnly#return_read_timestamp TransactionOptions::ReadOnly#return_read_timestamp}.
       class Transaction; end
 
       # This message is used to select the transaction in which a
-      # Read or
-      # ExecuteSql call runs.
+      # {Google::Spanner::V1::Spanner::Read Read} or
+      # {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} call runs.
       #
-      # See TransactionOptions for more information about transactions.
+      # See {Google::Spanner::V1::TransactionOptions TransactionOptions} for more information about transactions.
       # @!attribute [rw] single_use
       #   @return [Google::Spanner::V1::TransactionOptions]
       #     Execute the read or SQL query in a temporary transaction.
@@ -344,7 +344,7 @@ module Google
       #   @return [Google::Spanner::V1::TransactionOptions]
       #     Begin a new transaction and execute this read or SQL query in
       #     it. The transaction ID of the new transaction is returned in
-      #     ResultSetMetadata#transaction, which is a Transaction.
+      #     {Google::Spanner::V1::ResultSetMetadata#transaction ResultSetMetadata#transaction}, which is a {Google::Spanner::V1::Transaction Transaction}.
       class TransactionSelector; end
     end
   end

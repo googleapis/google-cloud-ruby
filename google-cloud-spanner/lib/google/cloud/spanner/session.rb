@@ -57,25 +57,25 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          V1::SpannerClient.match_project_from_session_name @grpc.name
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          V1::SpannerClient.match_instance_from_session_name @grpc.name
+          @grpc.name.split("/")[3]
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          V1::SpannerClient.match_database_from_session_name @grpc.name
+          @grpc.name.split("/")[5]
         end
 
         # The unique identifier for the session.
         # @return [String]
         def session_id
-          V1::SpannerClient.match_session_from_session_name @grpc.name
+          @grpc.name.split("/")[7]
         end
 
         # rubocop:disable LineLength

@@ -69,15 +69,13 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          Admin::Instance::V1::InstanceAdminClient
-            .match_project_from_instance_name @grpc.name
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          Admin::Instance::V1::InstanceAdminClient
-            .match_instance_from_instance_name @grpc.name
+          @grpc.name.split("/")[3]
         end
 
         ##
