@@ -121,7 +121,19 @@ module Google
       #     A single identity requesting access for a Cloud Platform resource.
       #     Follows the same format of Binding.members.
       #     Required
-      class BindingDelta; end
+      class BindingDelta
+        # The type of action performed on a Binding in a policy.
+        module Action
+          # Unspecified.
+          ACTION_UNSPECIFIED = 0
+
+          # Addition of a Binding.
+          ADD = 1
+
+          # Removal of a Binding.
+          REMOVE = 2
+        end
+      end
     end
   end
 end
