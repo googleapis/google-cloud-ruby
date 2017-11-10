@@ -176,7 +176,7 @@ Or provide the parameters to the Stackdriver Debugger agent when it starts:
 
 ```ruby
 require "google/cloud/debugger"
-Google::Cloud::Debugger.new(project_id: "your-project-id",
+Google::Cloud::Debugger.new(project: "your-project-id",
                             keyfile: "/path/to/key.json").start
 ```
 
