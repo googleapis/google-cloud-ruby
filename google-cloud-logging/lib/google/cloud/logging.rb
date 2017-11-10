@@ -222,6 +222,23 @@ module Google
     # logging.write_entries entry
     # ```
     #
+    # To write a JSON payload to the log, simply pass a hash argument:
+    #
+    # ```ruby
+    # require "google/cloud/logging"
+    #
+    # logging = Google::Cloud::Logging.new
+    #
+    # entry = logging.entry
+    # entry.payload = { "stats" => { "a" => 8, "b" => 12.5} }
+    # entry.log_name = "my_app_log"
+    # entry.resource.type = "gae_app"
+    # entry.resource.labels[:module_id] = "1"
+    # entry.resource.labels[:version_id] = "20150925t173233"
+    #
+    # logging.write_entries entry
+    # ```
+    #
     # If you write a collection of log entries, you can provide the log name,
     # resource, and/or labels hash to be used for all of the entries, and omit
     # these values from the individual entries.

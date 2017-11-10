@@ -203,6 +203,16 @@ module Google
         #
         #   logging.write_entries entry
         #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #   entry = logging.entry severity: :INFO, payload: payload
+        #
+        #   logging.write_entries entry
+        #
         def entry log_name: nil, resource: nil, timestamp: nil, severity: nil,
                   insert_id: nil, labels: nil, payload: nil
           e = Entry.new
@@ -257,6 +267,22 @@ module Google
         #   entry.resource.labels[:version_id] = "20150925t173233"
         #
         #   logging.write_entries entry
+        #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #
+        #   entry = logging.entry payload: payload,
+        #                         log_name: "my_app_log"
+        #   entry.resource.type = "gae_app"
+        #   entry.resource.labels[:module_id] = "1"
+        #   entry.resource.labels[:version_id] = "20150925t173233"
+        #
+        #   logging.write_entries entry
+        #
         #
         # @example Optionally pass log name, resource, and labels for entries.
         #   require "google/cloud/logging"
@@ -385,6 +411,20 @@ module Google
         #
         #   logger = logging.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
+        #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #
+        #   logger = logging.logger "my_app_log", resource, env: :production
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #   logger.info payload
         #
         def logger log_name, resource, labels = {}
           Logger.new shared_async_writer, log_name, resource, labels

@@ -36,6 +36,20 @@ module Google
       #   logger = logging.logger "my_app_log", resource, env: :production
       #   logger.info "Job started."
       #
+      # @example Provide a hash to write a JSON payload to the log:
+      #   require "google/cloud/logging"
+      #
+      #   logging = Google::Cloud::Logging.new
+      #
+      #   resource = logging.resource "gae_app",
+      #                               module_id: "1",
+      #                               version_id: "20150925t173233"
+      #
+      #   logger = logging.logger "my_app_log", resource, env: :production
+      #
+      #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+      #   logger.info payload
+      #
       class Logger
         ##
         # A RequestInfo represents data about the request being handled by the
